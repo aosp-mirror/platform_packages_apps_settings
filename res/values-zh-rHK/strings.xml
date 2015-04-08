@@ -411,8 +411,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"中至高等安全性設定"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"密碼"</string>
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"高等安全性設定"</string>
-    <!-- no translation found for current_screen_lock (4104091715420072219) -->
-    <skip />
+    <string name="current_screen_lock" msgid="4104091715420072219">"目前的螢幕鎖定"</string>
     <string name="unlock_disable_frp_warning_content" msgid="7070131836291098244">"裝置保護功能將無法使用。"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"已由管理員、加密政策或認證儲存空間停用"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"無"</string>
@@ -420,6 +419,7 @@
     <string name="unlock_set_unlock_mode_pattern" msgid="7837270780919299289">"圖案"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="3541326261341386690">"PIN 碼"</string>
     <string name="unlock_set_unlock_mode_password" msgid="1203938057264146610">"密碼"</string>
+    <string name="unlock_setup_wizard_fingerprint_details" msgid="7579210814842056547">"您設定螢幕鎖定之後，還可以前往 [設定] &gt; [安全性] 設定您的指紋。"</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"關閉螢幕鎖定"</string>
     <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"移除解鎖圖形"</string>
     <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"移除解鎖 PIN"</string>
@@ -521,6 +521,7 @@
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"進階設定"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"藍牙進階設定"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"當啟用藍牙功能後，您的裝置可以與其他附近的藍牙裝置通訊。"</string>
+    <string name="ble_scan_notify_text" msgid="9019985398053764737">"為了提高位置精確度，即使藍牙已關閉，Google 服務仍會掃瞄藍牙裝置。您可以前往 LINK_BEGIN[掃瞄設定]LINK_END 更改設定。"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"連線至..."</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"即將中斷「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」與媒體音頻的連線。"</string>
     <string name="bluetooth_disconnect_headset_profile" msgid="8635908811168780720">"即將中斷「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」與免提聽筒音頻的連線。"</string>
@@ -586,8 +587,7 @@
     <string name="wifi_automatically_connect_summary" msgid="6722194413023965902">"讓 Wi‑Fi 小幫手自動連線至優質的開放網絡"</string>
     <string name="wifi_select_assistant_dialog_title" msgid="4014645210955009439">"選擇小幫手"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"安裝憑證"</string>
-    <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"為了提高位置精確度並用作其他用途，即使 Wi-Fi 已關閉，Google 和其他應用程式亦可能會掃瞄附近的網絡。如不想啟用此功能，可前往 [進階] &gt; [永遠可掃瞄] 更改設定。"</string>
-    <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"即使 Wi-Fi 已關閉，應用程式亦可能會掃瞄附近的網絡。如不想啟用此功能，可前往 [進階] &gt; [永遠可掃瞄] 更改設定。"</string>
+    <string name="wifi_scan_notify_text" msgid="8382526568324164356">"為了提高位置精確度，即使 Wi-Fi 已關閉，Google 服務仍會掃瞄 Wi-Fi 網絡。您可以前往 LINK_BEGIN[掃瞄設定]LINK_END 更改設定。"</string>
     <string name="wifi_scan_notify_remember_choice" msgid="5340097010842405981">"不用再顯示"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"休眠時繼續連接 Wi-Fi 網絡"</string>
     <string name="wifi_setting_on_during_sleep_title" msgid="8308975500029751565">"休眠狀態仍保持 Wi-Fi 連線"</string>
@@ -729,8 +729,7 @@
     <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> 可攜式 Wi-Fi 熱點"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"Android 熱點"</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Wi-Fi 通話"</string>
-    <!-- no translation found for wifi_calling_mode_title (2164073796253284289) -->
-    <skip />
+    <string name="wifi_calling_mode_title" msgid="2164073796253284289">"通話偏好設定"</string>
     <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Wi-Fi 通話模式"</string>
   <string-array name="wifi_calling_mode_choices">
     <item msgid="2124257075906188844">"首選 Wi-Fi"</item>
@@ -742,8 +741,7 @@
     <item msgid="1171822231056612021">"1"</item>
     <item msgid="3194458950573886239">"0"</item>
   </string-array>
-    <!-- no translation found for wifi_calling_off_explanation (4124926334215228094) -->
-    <skip />
+    <string name="wifi_calling_off_explanation" msgid="4124926334215228094">"當開啟 Wi-Fi 通話時，您的手機可根據偏好設定及訊號強弱，使用 Wi-Fi 網絡或流動網絡供應商的網絡進行來電轉接。開啟此功能前，請向您的流動網絡供應商查詢收費及其他詳情。"</string>
     <string name="home_settings" msgid="212375129455718176">"主畫面"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"顯示"</string>
     <string name="sound_settings" msgid="5534671337768745343">"音效"</string>
@@ -1235,8 +1233,7 @@
     <string name="sort_order_size" msgid="7024513286636502362">"按大小排序"</string>
     <string name="show_running_services" msgid="5736278767975544570">"顯示執行中的服務"</string>
     <string name="show_background_processes" msgid="2009840211972293429">"顯示快取處理程序"</string>
-    <!-- no translation found for default_emergency_app (4066437376478173872) -->
-    <skip />
+    <string name="default_emergency_app" msgid="4066437376478173872">"預設緊急應用程式"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"重設應用程式喜好設定"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"重設應用程式喜好設定？"</string>
     <string name="reset_app_preferences_desc" msgid="4822447731869201512">"這會重設以下各項的所有喜好設定：\n\n "<li>"已停用的應用程式"</li>\n" "<li>"已停用的應用程式通知"</li>\n" "<li>"執行操作的預設應用程式"</li>\n" "<li>"應用程式的背景資料限制"</li>\n" "<li>"任何權限限制"</li>\n\n"您不會失去任何應用程式資料。"</string>
@@ -1308,8 +1305,7 @@
     <string name="app_ops_settings" msgid="5108481883575527511">"應用程式操作"</string>
     <string name="app_ops_running" msgid="7706949900637284122">"執行中"</string>
     <string name="app_ops_never_used" msgid="9114608022906887802">"(從未使用)"</string>
-    <!-- no translation found for no_default_apps (2915315663141025400) -->
-    <skip />
+    <string name="no_default_apps" msgid="2915315663141025400">"沒有預設應用程式。"</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"儲存空間使用量"</string>
     <string name="storageuse_settings_summary" msgid="3748286507165697834">"查看應用程式所使用的儲存空間"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"執行中的服務"</string>
@@ -2398,8 +2394,7 @@
     <string name="keywords_users" msgid="4673901601478559100">"限制 限制 受限"</string>
     <string name="keywords_keyboard_and_ime" msgid="5251531893531063855">"文字 更正 修正 聲音 震動 自動 語言 手勢 建議 字詞建議 主題背景 令人反感的文字 輸入 表情圖案 國際"</string>
     <string name="keywords_reset_apps" msgid="6420313678620788457">"重設偏好設定預設值"</string>
-    <!-- no translation found for keywords_emergency_app (6542122071127391103) -->
-    <skip />
+    <string name="keywords_emergency_app" msgid="6542122071127391103">"緊急 冰 應用程式 預設"</string>
     <string name="keywords_all_apps" msgid="5377153522551809915">"應用程式 下載應用程式 系統"</string>
     <string name="keywords_app_permissions" msgid="8677901415217188314">"應用程式權限安全性"</string>
     <string name="keywords_lockscreen" msgid="4806191868723291541">"滑動 密碼 圖案 PIN"</string>
@@ -2416,17 +2411,13 @@
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"鬧鐘音量"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"鈴聲音量"</string>
     <string name="notification_volume_option_title" msgid="6064656124416882130">"通知音量"</string>
-    <!-- no translation found for zen_mode_settings_title (6948120138640252732) -->
-    <skip />
-    <!-- no translation found for zen_mode_priority_settings_title (2623117023031824309) -->
-    <skip />
-    <!-- no translation found for zen_mode_automation_settings_title (4228995740594063774) -->
-    <skip />
+    <string name="zen_mode_settings_title" msgid="6948120138640252732">"封鎖干擾"</string>
+    <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"優先設定只允許："</string>
+    <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"自動規則"</string>
     <string name="zen_mode_option_title" msgid="5061978632306007914">"當收到來電和通知時"</string>
     <string name="zen_mode_option_off" msgid="3167702608910820883">"一律允許干擾"</string>
     <string name="zen_mode_option_important_interruptions" msgid="2320263300561981257">"只允許重要干擾"</string>
-    <!-- no translation found for zen_mode_option_alarms (7380265858042606857) -->
-    <skip />
+    <string name="zen_mode_option_alarms" msgid="7380265858042606857">"只允許鬧鐘"</string>
     <string name="zen_mode_option_no_interruptions" msgid="5664234817617301449">"不允許干擾"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"電話鈴聲"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"預設通知鈴聲"</string>
@@ -2499,12 +2490,9 @@
     <string name="zen_mode_from_anyone" msgid="1180865188673992959">"所有人"</string>
     <string name="zen_mode_from_contacts" msgid="8751503728985572786">"只限聯絡人"</string>
     <string name="zen_mode_from_starred" msgid="2168651127340381533">"只限已加星號的聯絡人"</string>
-    <!-- no translation found for zen_mode_alarms (2165302777886552926) -->
-    <skip />
-    <!-- no translation found for zen_mode_reminders (5458502056440485730) -->
-    <skip />
-    <!-- no translation found for zen_mode_events (7914446030988618264) -->
-    <skip />
+    <string name="zen_mode_alarms" msgid="2165302777886552926">"鬧鐘"</string>
+    <string name="zen_mode_reminders" msgid="5458502056440485730">"提醒"</string>
+    <string name="zen_mode_events" msgid="7914446030988618264">"活動"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"自動開啟"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"永不"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"每天晚上"</string>
@@ -2556,16 +2544,11 @@
     <string name="slot_number" msgid="3762676044904653577">"(插槽 <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
     <string name="launch_by_default" msgid="2184141780491382435">"按預設啟動"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="STORAGE_TYPE">%2$s</xliff:g>已使用 <xliff:g id="SIZE">%1$s</xliff:g>"</string>
-    <!-- no translation found for app_launch_domain_links_title (458956710410857777) -->
-    <skip />
-    <!-- no translation found for app_launch_open_domain_urls_title (5821849783765291139) -->
-    <skip />
-    <!-- no translation found for app_launch_open_domain_urls_summary (7305739311608755281) -->
-    <skip />
-    <!-- no translation found for app_launch_supported_domain_urls_title (8148494155921307572) -->
-    <skip />
-    <!-- no translation found for app_launch_other_defaults_title (2516812499807835178) -->
-    <skip />
+    <string name="app_launch_domain_links_title" msgid="458956710410857777">"網域連結"</string>
+    <string name="app_launch_open_domain_urls_title" msgid="5821849783765291139">"開啟網域網址"</string>
+    <string name="app_launch_open_domain_urls_summary" msgid="7305739311608755281">"允許應用程式直接開啟網域網址"</string>
+    <string name="app_launch_supported_domain_urls_title" msgid="8148494155921307572">"支援的網域網址"</string>
+    <string name="app_launch_other_defaults_title" msgid="2516812499807835178">"其他預設值"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="STORAGE_TYPE">%2$s</xliff:g>已使用 <xliff:g id="SIZE">%1$s</xliff:g>"</string>
     <string name="storage_type_internal" msgid="410824961149037234">"內部記憶體"</string>
     <string name="storage_type_external" msgid="8928374515368986503">"外部記憶體"</string>
@@ -2583,6 +2566,7 @@
       <item quantity="other">已授予 <xliff:g id="COUNT_1">%d</xliff:g> 項權限</item>
       <item quantity="one">已授予 <xliff:g id="COUNT_0">%d</xliff:g> 項權限</item>
     </plurals>
+    <!-- no translation found for runtime_permissions_summary (1564663886246010959) -->
     <string name="launch_defaults_some" msgid="313159469856372621">"已設定部分預設值"</string>
     <string name="launch_defaults_none" msgid="4241129108140034876">"未設定預設值"</string>
     <string name="filter_all_apps" msgid="1988403195820688644">"所有應用程式"</string>
@@ -2592,8 +2576,7 @@
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"已封鎖"</string>
     <string name="filter_notif_priority_apps" msgid="5965001885749195239">"重要"</string>
     <string name="filter_notif_sensitive_apps" msgid="412490487743581673">"敏感"</string>
-    <!-- no translation found for filter_with_domain_urls_apps (4573276638806792792) -->
-    <skip />
+    <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"使用網域網址"</string>
     <string name="reset_app_preferences_description" msgid="7718912868244058770">"重設所有應用程式的偏好設定至預設值"</string>
     <string name="all_apps_summary" msgid="3754827293203127282">"已安裝 <xliff:g id="COUNT">%d</xliff:g> 個應用程式，包括系統和已下載應用程式"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"進階"</string>
@@ -2602,13 +2585,12 @@
     <string name="app_permissions" msgid="4148222031991883874">"應用程式權限"</string>
     <string name="app_permissions_summary" msgid="2098173899436407221">"已允許 <xliff:g id="COUNT_0">%d</xliff:g> 個應用程式額外存取權 (共 <xliff:g id="COUNT_1">%d</xliff:g> 個)"</string>
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"已允許 <xliff:g id="COUNT_0">%d</xliff:g> 個應用程式 (共 <xliff:g id="COUNT_1">%d</xliff:g> 個)"</string>
-    <!-- no translation found for domain_urls_title (8735310976048599572) -->
-    <skip />
-    <!-- no translation found for domain_urls_summary_none (3517494281628717719) -->
-    <skip />
-    <!-- no translation found for domain_urls_summary_one (3804994599497120956) -->
-    <skip />
-    <!-- no translation found for domain_urls_summary_some (4859484048050301933) -->
-    <skip />
-    <!-- no translation found for domain_urls_apps_summary (6604886186235343653) -->
+    <string name="domain_urls_title" msgid="8735310976048599572">"網域網址"</string>
+    <string name="domain_urls_summary_none" msgid="3517494281628717719">"不要開啟任何網域網址"</string>
+    <string name="domain_urls_summary_one" msgid="3804994599497120956">"開啟「<xliff:g id="DOMAIN">%s</xliff:g>」"</string>
+    <string name="domain_urls_summary_some" msgid="4859484048050301933">"開啟「<xliff:g id="DOMAIN">%s</xliff:g>」和相關網址"</string>
+    <plurals name="domain_urls_apps_summary" formatted="false" msgid="6604886186235343653">
+      <item quantity="other">有 <xliff:g id="COUNT">%d</xliff:g> 個應用程式可開啟其網域網址</item>
+      <item quantity="one">有 1 個應用程式可開啟其網域網址</item>
+    </plurals>
 </resources>

@@ -415,8 +415,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"Рівень захисту від середнього до високого"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Пароль"</string>
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"Високий рівень захисту"</string>
-    <!-- no translation found for current_screen_lock (4104091715420072219) -->
-    <skip />
+    <string name="current_screen_lock" msgid="4104091715420072219">"Поточне блокування екрана"</string>
     <string name="unlock_disable_frp_warning_content" msgid="7070131836291098244">"Функції захисту пристрою не працюватимуть."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Вимкнено адміністратором, правилом шифрування або сховищем облікових даних"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Немає"</string>
@@ -424,6 +423,7 @@
     <string name="unlock_set_unlock_mode_pattern" msgid="7837270780919299289">"Ключ"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="3541326261341386690">"PIN-код"</string>
     <string name="unlock_set_unlock_mode_password" msgid="1203938057264146610">"Пароль"</string>
+    <string name="unlock_setup_wizard_fingerprint_details" msgid="7579210814842056547">"Коли ви налаштуєте блокування екрана, можете додати цифровий відбиток у меню \"Налаштування\" &gt; \"Безпека\"."</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"Вимкнути блокув. екрана"</string>
     <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"Видалити ключ розблок."</string>
     <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"Видал. PIN розблок."</string>
@@ -537,6 +537,7 @@
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Розширені"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Розшир. налаштування Bluetooth"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"Коли Bluetooth увімкнено, пристрій може обмінюватися даними з пристроями Bluetooth поблизу."</string>
+    <string name="ble_scan_notify_text" msgid="9019985398053764737">"Щоб покращити точність локації, сервіси Google шукають пристрої Bluetooth, навіть якщо Bluetooth вимкнено. Це можна змінити в LINK_BEGINналаштуваннях скануванняLINK_END."</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"Підключ. до…"</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> буде відключено від аудіоджерела."</string>
     <string name="bluetooth_disconnect_headset_profile" msgid="8635908811168780720">"Пристрій <xliff:g id="DEVICE_NAME">%1$s</xliff:g> буде відключено від аудіо гарнітури."</string>
@@ -602,8 +603,7 @@
     <string name="wifi_automatically_connect_summary" msgid="6722194413023965902">"Дозволити Wi‑Fi Assistant автоматично під’єднуватися до відкритих мереж із потужним сигналом"</string>
     <string name="wifi_select_assistant_dialog_title" msgid="4014645210955009439">"Вибрати помічника"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Установити сертифікати"</string>
-    <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Щоб покращити точність даних про місцезнаходження, а також для інших цілей Google та інші програми можуть шукати мережі поблизу, навіть якщо Wi-Fi вимкнено. Щоб скасувати цей дозвіл, перейдіть у меню Розширені &gt; Сканування завжди доступне."</string>
-    <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Програми можуть шукати мережі поблизу, навіть якщо Wi-Fi вимкнено. Щоб скасувати цей дозвіл, перейдіть у меню Розширені &gt; Сканування завжди доступне."</string>
+    <string name="wifi_scan_notify_text" msgid="8382526568324164356">"Щоб покращити точність локації, сервіси Google шукають мережі Wi-Fi, навіть якщо Wi-Fi вимкнено. Це можна змінити в LINK_BEGINналаштуваннях скануванняLINK_END."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="5340097010842405981">"Більше не показувати"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"Не від’єднуватися від Wi‑Fi у режимі сну"</string>
     <string name="wifi_setting_on_during_sleep_title" msgid="8308975500029751565">"Не вимикати Wi‑Fi у режимі сну"</string>
@@ -745,8 +745,7 @@
     <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"Портативна точка доступу Wi‑Fi до мережі <xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Дзвінки через Wi-Fi"</string>
-    <!-- no translation found for wifi_calling_mode_title (2164073796253284289) -->
-    <skip />
+    <string name="wifi_calling_mode_title" msgid="2164073796253284289">"Режим дзвінків"</string>
     <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Режим дзвінків через Wi-Fi"</string>
   <string-array name="wifi_calling_mode_choices">
     <item msgid="2124257075906188844">"Wi-Fi за умовчанням"</item>
@@ -758,8 +757,7 @@
     <item msgid="1171822231056612021">"1"</item>
     <item msgid="3194458950573886239">"0"</item>
   </string-array>
-    <!-- no translation found for wifi_calling_off_explanation (4124926334215228094) -->
-    <skip />
+    <string name="wifi_calling_off_explanation" msgid="4124926334215228094">"Якщо ввімкнути Wi-Fi, ваш телефон зможе спрямовувати дзвінки через мережі Wi-Fi або мережу вашого оператора, залежно від вибраних налаштувань і потужності сигналу мережі. Перш ніж увімкнути цю функцію, уточніть в оператора, скільки коштує ця послуга, та інші деталі."</string>
     <string name="home_settings" msgid="212375129455718176">"Головний екран"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Відображ."</string>
     <string name="sound_settings" msgid="5534671337768745343">"Звук"</string>
@@ -1253,8 +1251,7 @@
     <string name="sort_order_size" msgid="7024513286636502362">"Сортувати за розміром"</string>
     <string name="show_running_services" msgid="5736278767975544570">"Показати запущені служби"</string>
     <string name="show_background_processes" msgid="2009840211972293429">"Показати кешовані процеси"</string>
-    <!-- no translation found for default_emergency_app (4066437376478173872) -->
-    <skip />
+    <string name="default_emergency_app" msgid="4066437376478173872">"Додаток для екстрених викликів за умовчанням"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"Скинути налаштування"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"Скинути налашт. програм?"</string>
     <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Буде скинуто всі налаштування для:\n\n "<li>"вимкнених програм"</li>\n" "<li>"вимкнених сповіщень програм"</li>\n" "<li>"програм за умовчанням для виконання дій"</li>\n" "<li>"обмежень щодо фонових даних для програм"</li>\n" "<li>"усіх обмежень щодо дозволів"</li>\n\n" Жодні дані програм не буде втрачено."</string>
@@ -1326,8 +1323,7 @@
     <string name="app_ops_settings" msgid="5108481883575527511">"Операції програми"</string>
     <string name="app_ops_running" msgid="7706949900637284122">"Виконується"</string>
     <string name="app_ops_never_used" msgid="9114608022906887802">"(Ніколи не використовується)"</string>
-    <!-- no translation found for no_default_apps (2915315663141025400) -->
-    <skip />
+    <string name="no_default_apps" msgid="2915315663141025400">"Немає додатків за умовч."</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Використання пам\'яті"</string>
     <string name="storageuse_settings_summary" msgid="3748286507165697834">"Переглянути пам’ять, яку використовують програми"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Запущені служби"</string>
@@ -2412,8 +2408,7 @@
     <string name="keywords_users" msgid="4673901601478559100">"обмеження обмежувати обмежено"</string>
     <string name="keywords_keyboard_and_ime" msgid="5251531893531063855">"виправлення тексту виправити звук вібросигнал автоматично мова жест пропонувати пропозиція тема образливе слово ввести смайли emoji міжнародний"</string>
     <string name="keywords_reset_apps" msgid="6420313678620788457">"відновити параметри за умовчанням"</string>
-    <!-- no translation found for keywords_emergency_app (6542122071127391103) -->
-    <skip />
+    <string name="keywords_emergency_app" msgid="6542122071127391103">"додаток для екстрених викликів за умовчанням"</string>
     <string name="keywords_all_apps" msgid="5377153522551809915">"додатки завантажити додаток системний"</string>
     <string name="keywords_app_permissions" msgid="8677901415217188314">"додатки дозволи безпека"</string>
     <string name="keywords_lockscreen" msgid="4806191868723291541">"провести пальцем пароль ключ PIN-код"</string>
@@ -2430,17 +2425,13 @@
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"Гучність сигналу"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"Гучність дзвінка"</string>
     <string name="notification_volume_option_title" msgid="6064656124416882130">"Гучність сповіщень"</string>
-    <!-- no translation found for zen_mode_settings_title (6948120138640252732) -->
-    <skip />
-    <!-- no translation found for zen_mode_priority_settings_title (2623117023031824309) -->
-    <skip />
-    <!-- no translation found for zen_mode_automation_settings_title (4228995740594063774) -->
-    <skip />
+    <string name="zen_mode_settings_title" msgid="6948120138640252732">"Блокувати сповіщення"</string>
+    <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Дозволити лише пріоритетні"</string>
+    <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Правила автоматизації"</string>
     <string name="zen_mode_option_title" msgid="5061978632306007914">"Коли надходять дзвінки та сповіщення"</string>
     <string name="zen_mode_option_off" msgid="3167702608910820883">"Завжди переривати"</string>
     <string name="zen_mode_option_important_interruptions" msgid="2320263300561981257">"Дозволити лише пріоритетні сповіщення"</string>
-    <!-- no translation found for zen_mode_option_alarms (7380265858042606857) -->
-    <skip />
+    <string name="zen_mode_option_alarms" msgid="7380265858042606857">"Дозволити лише сигнали"</string>
     <string name="zen_mode_option_no_interruptions" msgid="5664234817617301449">"Не турбувати"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Мелодія телефону"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Сигнал сповіщень за умовчанням"</string>
@@ -2517,12 +2508,9 @@
     <string name="zen_mode_from_anyone" msgid="1180865188673992959">"Усі"</string>
     <string name="zen_mode_from_contacts" msgid="8751503728985572786">"Лише контакти"</string>
     <string name="zen_mode_from_starred" msgid="2168651127340381533">"Лише позначені контакти"</string>
-    <!-- no translation found for zen_mode_alarms (2165302777886552926) -->
-    <skip />
-    <!-- no translation found for zen_mode_reminders (5458502056440485730) -->
-    <skip />
-    <!-- no translation found for zen_mode_events (7914446030988618264) -->
-    <skip />
+    <string name="zen_mode_alarms" msgid="2165302777886552926">"Сигнали"</string>
+    <string name="zen_mode_reminders" msgid="5458502056440485730">"Нагадування"</string>
+    <string name="zen_mode_events" msgid="7914446030988618264">"Події"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"Вмикати автоматично"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"ніколи"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"щовечора"</string>
@@ -2574,16 +2562,11 @@
     <string name="slot_number" msgid="3762676044904653577">"(Гніздо <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
     <string name="launch_by_default" msgid="2184141780491382435">"Запускати за умовчанням"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"Зайнято <xliff:g id="SIZE">%1$s</xliff:g> <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
-    <!-- no translation found for app_launch_domain_links_title (458956710410857777) -->
-    <skip />
-    <!-- no translation found for app_launch_open_domain_urls_title (5821849783765291139) -->
-    <skip />
-    <!-- no translation found for app_launch_open_domain_urls_summary (7305739311608755281) -->
-    <skip />
-    <!-- no translation found for app_launch_supported_domain_urls_title (8148494155921307572) -->
-    <skip />
-    <!-- no translation found for app_launch_other_defaults_title (2516812499807835178) -->
-    <skip />
+    <string name="app_launch_domain_links_title" msgid="458956710410857777">"Посилання на домени"</string>
+    <string name="app_launch_open_domain_urls_title" msgid="5821849783765291139">"Відкривати URL-адреси домену"</string>
+    <string name="app_launch_open_domain_urls_summary" msgid="7305739311608755281">"Дозволити додатку відкривати URL-адреси домену"</string>
+    <string name="app_launch_supported_domain_urls_title" msgid="8148494155921307572">"Підтримувані URL-адреси доменів"</string>
+    <string name="app_launch_other_defaults_title" msgid="2516812499807835178">"Інші додатки за умовчанням"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"Зайнято <xliff:g id="SIZE">%1$s</xliff:g> <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
     <string name="storage_type_internal" msgid="410824961149037234">"внутрішньої пам’яті"</string>
     <string name="storage_type_external" msgid="8928374515368986503">"зовнішньої пам’яті"</string>
@@ -2603,6 +2586,7 @@
       <item quantity="many">Надано <xliff:g id="COUNT_1">%d</xliff:g> дозволів</item>
       <item quantity="other">Надано <xliff:g id="COUNT_1">%d</xliff:g> дозволу</item>
     </plurals>
+    <!-- no translation found for runtime_permissions_summary (1564663886246010959) -->
     <string name="launch_defaults_some" msgid="313159469856372621">"Налаштовано деякі значення за умовчанням"</string>
     <string name="launch_defaults_none" msgid="4241129108140034876">"Немає значень за умовчанням"</string>
     <string name="filter_all_apps" msgid="1988403195820688644">"Усі додатки"</string>
@@ -2612,8 +2596,7 @@
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"Заблоковані"</string>
     <string name="filter_notif_priority_apps" msgid="5965001885749195239">"Пріоритетні"</string>
     <string name="filter_notif_sensitive_apps" msgid="412490487743581673">"Конфіденційні"</string>
-    <!-- no translation found for filter_with_domain_urls_apps (4573276638806792792) -->
-    <skip />
+    <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"З URL-адресами домену"</string>
     <string name="reset_app_preferences_description" msgid="7718912868244058770">"Відновити параметри всіх додатків за умовчанням"</string>
     <string name="all_apps_summary" msgid="3754827293203127282">"Встановлено додатків (зокрема системних і завантажених): <xliff:g id="COUNT">%d</xliff:g>"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Розширені налаштування"</string>
@@ -2622,13 +2605,14 @@
     <string name="app_permissions" msgid="4148222031991883874">"Дозволи додатків"</string>
     <string name="app_permissions_summary" msgid="2098173899436407221">"Додатковий доступ мають стільки додатків: <xliff:g id="COUNT_0">%d</xliff:g> з <xliff:g id="COUNT_1">%d</xliff:g>"</string>
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"Дозволено додатків: <xliff:g id="COUNT_0">%d</xliff:g> з <xliff:g id="COUNT_1">%d</xliff:g>"</string>
-    <!-- no translation found for domain_urls_title (8735310976048599572) -->
-    <skip />
-    <!-- no translation found for domain_urls_summary_none (3517494281628717719) -->
-    <skip />
-    <!-- no translation found for domain_urls_summary_one (3804994599497120956) -->
-    <skip />
-    <!-- no translation found for domain_urls_summary_some (4859484048050301933) -->
-    <skip />
-    <!-- no translation found for domain_urls_apps_summary (6604886186235343653) -->
+    <string name="domain_urls_title" msgid="8735310976048599572">"URL-адреси домену"</string>
+    <string name="domain_urls_summary_none" msgid="3517494281628717719">"Не відкривати URL-адреси домену"</string>
+    <string name="domain_urls_summary_one" msgid="3804994599497120956">"Відкривати <xliff:g id="DOMAIN">%s</xliff:g>"</string>
+    <string name="domain_urls_summary_some" msgid="4859484048050301933">"Відкривати <xliff:g id="DOMAIN">%s</xliff:g> і пов’язані URL-адреси"</string>
+    <plurals name="domain_urls_apps_summary" formatted="false" msgid="6604886186235343653">
+      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> додаток може відкривати URL-адреси свого домену</item>
+      <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> додатки можуть відкривати URL-адреси свого домену</item>
+      <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> додатків можуть відкривати URL-адреси свого домену</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> додатка можуть відкривати URL-адреси свого домену</item>
+    </plurals>
 </resources>

@@ -415,8 +415,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"Уровень безопасности от среднего до высокого"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Пароль"</string>
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"Высокий уровень защиты"</string>
-    <!-- no translation found for current_screen_lock (4104091715420072219) -->
-    <skip />
+    <string name="current_screen_lock" msgid="4104091715420072219">"Текущий способ блокировки"</string>
     <string name="unlock_disable_frp_warning_content" msgid="7070131836291098244">"Защита устройства будет отключена."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Запрещено администратором, политикой шифрования или хранилищем учетных данных"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Нет"</string>
@@ -424,6 +423,7 @@
     <string name="unlock_set_unlock_mode_pattern" msgid="7837270780919299289">"Графический ключ"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="3541326261341386690">"PIN-код"</string>
     <string name="unlock_set_unlock_mode_password" msgid="1203938057264146610">"Пароль"</string>
+    <string name="unlock_setup_wizard_fingerprint_details" msgid="7579210814842056547">"Включив блокировку экрана, выберите \"Настройки &gt; Безопасность\", чтобы отсканировать и сохранить отпечаток пальца."</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"Отключить блокировку экрана"</string>
     <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"Удалить графический ключ разблокировки"</string>
     <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"Удалить ПИН-код разблокировки"</string>
@@ -509,7 +509,7 @@
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"Для подключения к устройству&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;на нем должен отображаться этот код доступа:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"Запрос от: &lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Подключиться к этому устройству?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"Для подключения к устройству <xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g> введите на нем код <xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>, а затем нажмите клавишу Return или Enter."</string>
-    <string name="bluetooth_pairing_will_share_phonebook" msgid="4982239145676394429">"Подключение обеспечивает доступ к вашим контактам и истории звонков (при наличии связи)."</string>
+    <string name="bluetooth_pairing_will_share_phonebook" msgid="4982239145676394429">"Сопряжение обеспечивает доступ к вашим контактам и истории звонков при подключении."</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_connecting_error_message" msgid="229861986106185022">"Не удалось подключиться к <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"Поиск устройств"</string>
@@ -537,6 +537,7 @@
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Расширенные"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Расш. настройки Bluetooth"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"Включите Bluetooth, чтобы подключаться к другим Bluetooth-устройствам."</string>
+    <string name="ble_scan_notify_text" msgid="9019985398053764737">"Чтобы точнее определять местоположение, приложения Google будут искать находящиеся поблизости Bluetooth-устройства даже при отключенном Bluetooth. Вы можете изменить эту опцию в LINK_BEGINнастройках сканированияLINK_END."</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"Подключить к..."</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"Устройство <xliff:g id="DEVICE_NAME">%1$s</xliff:g> будет отключено от источника звука."</string>
     <string name="bluetooth_disconnect_headset_profile" msgid="8635908811168780720">"Устройство <xliff:g id="DEVICE_NAME">%1$s</xliff:g> будет отключено от гарнитуры."</string>
@@ -602,8 +603,7 @@
     <string name="wifi_automatically_connect_summary" msgid="6722194413023965902">"Разрешить ассистенту Wi-Fi автоматически подключаться к проверенным открытым сетям"</string>
     <string name="wifi_select_assistant_dialog_title" msgid="4014645210955009439">"Выбор ассистента Wi-Fi"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Установка сертификатов"</string>
-    <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Чтобы точнее определять местоположение, а также и в других целях, приложение Google и другие приложения могут искать доступные сети даже при отключенном Wi-Fi. Изменить настройки можно в меню \"Дополнительно &gt; Всегда искать сети\"."</string>
-    <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Приложения могут выполнять поиск сетей поблизости, даже если сеть Wi-Fi отключена. Чтобы изменить эти настройки, перейдите в меню \"Дополнительно &gt; Всегда искать сети\"."</string>
+    <string name="wifi_scan_notify_text" msgid="8382526568324164356">"Чтобы точнее определять местоположение, приложения Google будут искать находящиеся поблизости точки доступа Wi-Fi даже при отключенном Wi-Fi. Вы можете изменить эту опцию в LINK_BEGINнастройках сканированияLINK_END."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="5340097010842405981">"Больше не показывать"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"Wi-Fi в спящем режиме"</string>
     <string name="wifi_setting_on_during_sleep_title" msgid="8308975500029751565">"Wi‑Fi в спящем режиме"</string>
@@ -1326,8 +1326,7 @@
     <string name="app_ops_settings" msgid="5108481883575527511">"Операции в приложениях"</string>
     <string name="app_ops_running" msgid="7706949900637284122">"Выполняется"</string>
     <string name="app_ops_never_used" msgid="9114608022906887802">"(не использовалось)"</string>
-    <!-- no translation found for no_default_apps (2915315663141025400) -->
-    <skip />
+    <string name="no_default_apps" msgid="2915315663141025400">"Нет приложений"</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Использование памяти"</string>
     <string name="storageuse_settings_summary" msgid="3748286507165697834">"Объем памяти, занимаемый приложениями"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Работающие приложения"</string>
@@ -2430,17 +2429,13 @@
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"Будильник"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"Рингтон"</string>
     <string name="notification_volume_option_title" msgid="6064656124416882130">"Громкость уведомлений"</string>
-    <!-- no translation found for zen_mode_settings_title (6948120138640252732) -->
-    <skip />
-    <!-- no translation found for zen_mode_priority_settings_title (2623117023031824309) -->
-    <skip />
-    <!-- no translation found for zen_mode_automation_settings_title (4228995740594063774) -->
-    <skip />
+    <string name="zen_mode_settings_title" msgid="6948120138640252732">"Без прерываний"</string>
+    <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Только важные"</string>
+    <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Авторежим"</string>
     <string name="zen_mode_option_title" msgid="5061978632306007914">"Звонки и уведомления"</string>
     <string name="zen_mode_option_off" msgid="3167702608910820883">"Оповещать всегда"</string>
     <string name="zen_mode_option_important_interruptions" msgid="2320263300561981257">"Только важные оповещения"</string>
-    <!-- no translation found for zen_mode_option_alarms (7380265858042606857) -->
-    <skip />
+    <string name="zen_mode_option_alarms" msgid="7380265858042606857">"Только будильник"</string>
     <string name="zen_mode_option_no_interruptions" msgid="5664234817617301449">"Не беспокоить"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Рингтон"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Мелодия уведомлений по умолчанию"</string>
@@ -2517,12 +2512,9 @@
     <string name="zen_mode_from_anyone" msgid="1180865188673992959">"Все"</string>
     <string name="zen_mode_from_contacts" msgid="8751503728985572786">"Все контакты"</string>
     <string name="zen_mode_from_starred" msgid="2168651127340381533">"Помеченные контакты"</string>
-    <!-- no translation found for zen_mode_alarms (2165302777886552926) -->
-    <skip />
-    <!-- no translation found for zen_mode_reminders (5458502056440485730) -->
-    <skip />
-    <!-- no translation found for zen_mode_events (7914446030988618264) -->
-    <skip />
+    <string name="zen_mode_alarms" msgid="2165302777886552926">"Будильник"</string>
+    <string name="zen_mode_reminders" msgid="5458502056440485730">"Напоминания"</string>
+    <string name="zen_mode_events" msgid="7914446030988618264">"Мероприятия"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"Включать автоматически"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"Никогда"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"Каждый вечер"</string>
@@ -2574,16 +2566,11 @@
     <string name="slot_number" msgid="3762676044904653577">"(разъем <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
     <string name="launch_by_default" msgid="2184141780491382435">"Запуск по умолчанию"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"Занято <xliff:g id="SIZE">%1$s</xliff:g> (<xliff:g id="STORAGE_TYPE">%2$s</xliff:g>)"</string>
-    <!-- no translation found for app_launch_domain_links_title (458956710410857777) -->
-    <skip />
-    <!-- no translation found for app_launch_open_domain_urls_title (5821849783765291139) -->
-    <skip />
-    <!-- no translation found for app_launch_open_domain_urls_summary (7305739311608755281) -->
-    <skip />
-    <!-- no translation found for app_launch_supported_domain_urls_title (8148494155921307572) -->
-    <skip />
-    <!-- no translation found for app_launch_other_defaults_title (2516812499807835178) -->
-    <skip />
+    <string name="app_launch_domain_links_title" msgid="458956710410857777">"Доменные ссылки"</string>
+    <string name="app_launch_open_domain_urls_title" msgid="5821849783765291139">"Открыть URL домена"</string>
+    <string name="app_launch_open_domain_urls_summary" msgid="7305739311608755281">"Разрешить приложению напрямую открывать доменные URL"</string>
+    <string name="app_launch_supported_domain_urls_title" msgid="8148494155921307572">"Поддерживаемые URL"</string>
+    <string name="app_launch_other_defaults_title" msgid="2516812499807835178">"Другие значения по умолчанию"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"Занято <xliff:g id="SIZE">%1$s</xliff:g> (<xliff:g id="STORAGE_TYPE">%2$s</xliff:g>)"</string>
     <string name="storage_type_internal" msgid="410824961149037234">"внутренняя память"</string>
     <string name="storage_type_external" msgid="8928374515368986503">"внешняя память"</string>
@@ -2603,6 +2590,7 @@
       <item quantity="many">Предоставлено <xliff:g id="COUNT_1">%d</xliff:g> разрешений</item>
       <item quantity="other">Предоставлено <xliff:g id="COUNT_1">%d</xliff:g> разрешения</item>
     </plurals>
+    <!-- no translation found for runtime_permissions_summary (1564663886246010959) -->
     <string name="launch_defaults_some" msgid="313159469856372621">"Установлены некоторые настройки по умолчанию"</string>
     <string name="launch_defaults_none" msgid="4241129108140034876">"Настройки по умолчанию не установлены"</string>
     <string name="filter_all_apps" msgid="1988403195820688644">"Все приложения"</string>
@@ -2612,8 +2600,7 @@
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"Заблокированные"</string>
     <string name="filter_notif_priority_apps" msgid="5965001885749195239">"Важные"</string>
     <string name="filter_notif_sensitive_apps" msgid="412490487743581673">"Конфиденциальные"</string>
-    <!-- no translation found for filter_with_domain_urls_apps (4573276638806792792) -->
-    <skip />
+    <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"С URL-адресами домена"</string>
     <string name="reset_app_preferences_description" msgid="7718912868244058770">"Восстановить настройки по умолчанию для всех приложений"</string>
     <string name="all_apps_summary" msgid="3754827293203127282">"Всего приложений: <xliff:g id="COUNT">%d</xliff:g> (включая системные и установленные пользователем)"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Дополнительные настройки"</string>
@@ -2622,13 +2609,14 @@
     <string name="app_permissions" msgid="4148222031991883874">"Разрешения для приложений"</string>
     <string name="app_permissions_summary" msgid="2098173899436407221">"Приложения с расширенным доступом: <xliff:g id="COUNT_0">%d</xliff:g> из <xliff:g id="COUNT_1">%d</xliff:g>"</string>
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"Приложения с разрешением: <xliff:g id="COUNT_0">%d</xliff:g> из <xliff:g id="COUNT_1">%d</xliff:g>"</string>
-    <!-- no translation found for domain_urls_title (8735310976048599572) -->
-    <skip />
-    <!-- no translation found for domain_urls_summary_none (3517494281628717719) -->
-    <skip />
-    <!-- no translation found for domain_urls_summary_one (3804994599497120956) -->
-    <skip />
-    <!-- no translation found for domain_urls_summary_some (4859484048050301933) -->
-    <skip />
-    <!-- no translation found for domain_urls_apps_summary (6604886186235343653) -->
+    <string name="domain_urls_title" msgid="8735310976048599572">"URL-адреса домена"</string>
+    <string name="domain_urls_summary_none" msgid="3517494281628717719">"Не открывать URL домена"</string>
+    <string name="domain_urls_summary_one" msgid="3804994599497120956">"Только <xliff:g id="DOMAIN">%s</xliff:g>"</string>
+    <string name="domain_urls_summary_some" msgid="4859484048050301933">"<xliff:g id="DOMAIN">%s</xliff:g> и URL-адреса домена"</string>
+    <plurals name="domain_urls_apps_summary" formatted="false" msgid="6604886186235343653">
+      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> приложение может открыть URL своего домена</item>
+      <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> приложения могут открыть URL своего домена</item>
+      <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> приложений могут открыть URL своего домена</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> приложения может открыть URL своего домена</item>
+    </plurals>
 </resources>

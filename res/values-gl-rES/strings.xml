@@ -411,8 +411,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"Seguridade de media a alta"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Contrasinal"</string>
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"Alta seguridade"</string>
-    <!-- no translation found for current_screen_lock (4104091715420072219) -->
-    <skip />
+    <string name="current_screen_lock" msgid="4104091715420072219">"Bloqueo de pantalla actual"</string>
     <string name="unlock_disable_frp_warning_content" msgid="7070131836291098244">"As funcións de protección do dispositivo deixarán de funcionar."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Desactivado por admin, política encriptación ou almacenamento credenciais"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Ningunha"</string>
@@ -420,6 +419,7 @@
     <string name="unlock_set_unlock_mode_pattern" msgid="7837270780919299289">"Padrón"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="3541326261341386690">"PIN"</string>
     <string name="unlock_set_unlock_mode_password" msgid="1203938057264146610">"Contrasinal"</string>
+    <string name="unlock_setup_wizard_fingerprint_details" msgid="7579210814842056547">"Unha vez configurado un bloqueo de pantalla, tamén podes configurar a túa impresión dixital en Configuración &gt; Seguranza."</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"Activar bloqueo pant."</string>
     <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"Elimina o padrón de desbloqueo"</string>
     <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"Elimina o PIN de desbloqueo"</string>
@@ -521,6 +521,7 @@
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Avanzada"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Bluetooth avanzado"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"Co Bluetooth activado, o dispositivo pode comunicarse con outros dispositivos Bluetooth próximos."</string>
+    <string name="ble_scan_notify_text" msgid="9019985398053764737">"Para mellorar a precisión da localización, os servizos de Google buscarán servizos de Bluetooth, mesmo se o Bluetooth está desactivado. Podes cambiar este axuste na LINK_BEGINconfiguración de buscaLINK_END."</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"Conectar con..."</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> desconectarase do audio multimedia."</string>
     <string name="bluetooth_disconnect_headset_profile" msgid="8635908811168780720">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> desconectarase do audio do mans libres."</string>
@@ -586,8 +587,7 @@
     <string name="wifi_automatically_connect_summary" msgid="6722194413023965902">"Permitir ao asistente wifi conectarse automaticamente a redes abertas de alta calidade"</string>
     <string name="wifi_select_assistant_dialog_title" msgid="4014645210955009439">"Seleccionar asistente"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Instalar certificados"</string>
-    <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Para mellorar a precisión da localización e para outros fins, é posible que Google e outras aplicacións busquen redes próximas, aínda que a wifi estea desactivada. Se non queres que isto pase, accede a Avanzado &gt; Buscar redes sempre."</string>
-    <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"É posible que as aplicacións busquen redes próximas, aínda que a wifi estea desactivada. Se non queres que isto pase, accede a Avanzado &gt; Buscar redes sempre."</string>
+    <string name="wifi_scan_notify_text" msgid="8382526568324164356">"Para mellorar a precisión da localicación, os servizos de Google buscarán redes wifi, mesmo se a wifi está desactivada. Podes cambiar este axuste na LINK_BEGINconfiguración de buscaLINK_END."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="5340097010842405981">"Non mostrar outra vez"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"Manter a wifi activada durante o modo de suspensión"</string>
     <string name="wifi_setting_on_during_sleep_title" msgid="8308975500029751565">"Wifi activada na suspensión"</string>
@@ -729,8 +729,7 @@
     <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"Zona interactiva wifi portátil <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> <xliff:g id="NETWORK_SSID">%1$s</xliff:g>"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Chamadas por wifi"</string>
-    <!-- no translation found for wifi_calling_mode_title (2164073796253284289) -->
-    <skip />
+    <string name="wifi_calling_mode_title" msgid="2164073796253284289">"Preferencia de chamada"</string>
     <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Modo de chamadas wifi"</string>
   <string-array name="wifi_calling_mode_choices">
     <item msgid="2124257075906188844">"Wifi preferida"</item>
@@ -742,8 +741,7 @@
     <item msgid="1171822231056612021">"1"</item>
     <item msgid="3194458950573886239">"0"</item>
   </string-array>
-    <!-- no translation found for wifi_calling_off_explanation (4124926334215228094) -->
-    <skip />
+    <string name="wifi_calling_off_explanation" msgid="4124926334215228094">"Cando están activadas as chamadas wifi, o teu teléfono pode enviar as túas chamadas a través de redes wifi ou da rede do teu operador, dependendo das túas preferencias e de cal teña o sinal máis forte. Antes de activar esta función, consulta co teu operador as tarifas e outra información."</string>
     <string name="home_settings" msgid="212375129455718176">"Inicio"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Pantalla"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Son"</string>
@@ -1235,8 +1233,7 @@
     <string name="sort_order_size" msgid="7024513286636502362">"Ordenar por tamaño"</string>
     <string name="show_running_services" msgid="5736278767975544570">"Mostrar servizos en curso"</string>
     <string name="show_background_processes" msgid="2009840211972293429">"Mostrar procesos na caché"</string>
-    <!-- no translation found for default_emergency_app (4066437376478173872) -->
-    <skip />
+    <string name="default_emergency_app" msgid="4066437376478173872">"Aplicación de emerxencia predeterminada"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"Restablecer as preferencias das aplicacións"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"Restablecer as preferencias das aplicacións?"</string>
     <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Con esta acción, restableceranse todas as preferencias de:\n\n "<li>"Aplicacións desactivadas"</li>\n" "<li>"Notificacións de aplicacións desactivadas"</li>\n" "<li>"Aplicacións predeterminadas para accións"</li>\n" "<li>"Restricións de datos en segundo plano para aplicacións"</li>\n" "<li>"Calquera restrición de permisos"</li>\n\n" Non perderás datos de ningunha aplicación."</string>
@@ -1308,8 +1305,7 @@
     <string name="app_ops_settings" msgid="5108481883575527511">"Operacións das aplicacións"</string>
     <string name="app_ops_running" msgid="7706949900637284122">"Activa"</string>
     <string name="app_ops_never_used" msgid="9114608022906887802">"(Nunca utilizada)"</string>
-    <!-- no translation found for no_default_apps (2915315663141025400) -->
-    <skip />
+    <string name="no_default_apps" msgid="2915315663141025400">"Sen aplicacións predet."</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Uso do almacenamento"</string>
     <string name="storageuse_settings_summary" msgid="3748286507165697834">"Visualiza o almacenamento utilizado polas aplicacións"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Servizos en execución"</string>
@@ -2394,8 +2390,7 @@
     <string name="keywords_users" msgid="4673901601478559100">"restrición restrinxir restrinxido"</string>
     <string name="keywords_keyboard_and_ime" msgid="5251531893531063855">"texto corrección correcto son vibrar automático idioma xesto suxerir suxestión tema palabra ofensiva escribir emoji internacional"</string>
     <string name="keywords_reset_apps" msgid="6420313678620788457">"restablecer preferencias predeterminadas"</string>
-    <!-- no translation found for keywords_emergency_app (6542122071127391103) -->
-    <skip />
+    <string name="keywords_emergency_app" msgid="6542122071127391103">"emerxencia en caso de emerxencia aplicación predeterminada"</string>
     <string name="keywords_all_apps" msgid="5377153522551809915">"aplicacións descarga aplicacións sistema"</string>
     <string name="keywords_app_permissions" msgid="8677901415217188314">"seguranza dos permisos das aplicacións"</string>
     <string name="keywords_lockscreen" msgid="4806191868723291541">"pasar o dedo contrasinal padrón pin"</string>
@@ -2412,17 +2407,13 @@
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"Volume da alarma"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"Volume do timbre"</string>
     <string name="notification_volume_option_title" msgid="6064656124416882130">"Volume das notificacións"</string>
-    <!-- no translation found for zen_mode_settings_title (6948120138640252732) -->
-    <skip />
-    <!-- no translation found for zen_mode_priority_settings_title (2623117023031824309) -->
-    <skip />
-    <!-- no translation found for zen_mode_automation_settings_title (4228995740594063774) -->
-    <skip />
+    <string name="zen_mode_settings_title" msgid="6948120138640252732">"Bloquear interrupcións"</string>
+    <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Só permite prioridade"</string>
+    <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Normas automáticas"</string>
     <string name="zen_mode_option_title" msgid="5061978632306007914">"Cando se reciben chamadas e notificacións"</string>
     <string name="zen_mode_option_off" msgid="3167702608910820883">"Interromper sempre"</string>
     <string name="zen_mode_option_important_interruptions" msgid="2320263300561981257">"Permitir só interrupcións prioritarias"</string>
-    <!-- no translation found for zen_mode_option_alarms (7380265858042606857) -->
-    <skip />
+    <string name="zen_mode_option_alarms" msgid="7380265858042606857">"Permitir só alarmas"</string>
     <string name="zen_mode_option_no_interruptions" msgid="5664234817617301449">"Non interromper"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Ton de chamada do teléfono"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Ton de chamada de notificación predeterminado"</string>
@@ -2495,12 +2486,9 @@
     <string name="zen_mode_from_anyone" msgid="1180865188673992959">"Calquera"</string>
     <string name="zen_mode_from_contacts" msgid="8751503728985572786">"Só contactos"</string>
     <string name="zen_mode_from_starred" msgid="2168651127340381533">"Só contactos destacados"</string>
-    <!-- no translation found for zen_mode_alarms (2165302777886552926) -->
-    <skip />
-    <!-- no translation found for zen_mode_reminders (5458502056440485730) -->
-    <skip />
-    <!-- no translation found for zen_mode_events (7914446030988618264) -->
-    <skip />
+    <string name="zen_mode_alarms" msgid="2165302777886552926">"Alarmas"</string>
+    <string name="zen_mode_reminders" msgid="5458502056440485730">"Recordatorios"</string>
+    <string name="zen_mode_events" msgid="7914446030988618264">"Eventos"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"Activar automaticam."</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"Nunca"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"Todas as noites"</string>
@@ -2552,16 +2540,11 @@
     <string name="slot_number" msgid="3762676044904653577">"(Rañura<xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
     <string name="launch_by_default" msgid="2184141780491382435">"Iniciar de forma predeterminada"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> en uso en <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
-    <!-- no translation found for app_launch_domain_links_title (458956710410857777) -->
-    <skip />
-    <!-- no translation found for app_launch_open_domain_urls_title (5821849783765291139) -->
-    <skip />
-    <!-- no translation found for app_launch_open_domain_urls_summary (7305739311608755281) -->
-    <skip />
-    <!-- no translation found for app_launch_supported_domain_urls_title (8148494155921307572) -->
-    <skip />
-    <!-- no translation found for app_launch_other_defaults_title (2516812499807835178) -->
-    <skip />
+    <string name="app_launch_domain_links_title" msgid="458956710410857777">"Ligazóns de dominio"</string>
+    <string name="app_launch_open_domain_urls_title" msgid="5821849783765291139">"Abrir URL de dominio"</string>
+    <string name="app_launch_open_domain_urls_summary" msgid="7305739311608755281">"Permitir que a aplicación abra directamente os URL de dominio"</string>
+    <string name="app_launch_supported_domain_urls_title" msgid="8148494155921307572">"URL de dominio compatibles"</string>
+    <string name="app_launch_other_defaults_title" msgid="2516812499807835178">"Abrir predeterminados"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> en uso en <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
     <string name="storage_type_internal" msgid="410824961149037234">"memoria interna"</string>
     <string name="storage_type_external" msgid="8928374515368986503">"memoria externa"</string>
@@ -2579,6 +2562,7 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> permisos outorgados</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> permiso outorgado</item>
     </plurals>
+    <!-- no translation found for runtime_permissions_summary (1564663886246010959) -->
     <string name="launch_defaults_some" msgid="313159469856372621">"Definíronse algúns valores predeterminados"</string>
     <string name="launch_defaults_none" msgid="4241129108140034876">"Non se definiu ningún valor predeterminado"</string>
     <string name="filter_all_apps" msgid="1988403195820688644">"Todas as aplicacións"</string>
@@ -2588,8 +2572,7 @@
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"Bloqueadas"</string>
     <string name="filter_notif_priority_apps" msgid="5965001885749195239">"Con prioridade"</string>
     <string name="filter_notif_sensitive_apps" msgid="412490487743581673">"Confidenciais"</string>
-    <!-- no translation found for filter_with_domain_urls_apps (4573276638806792792) -->
-    <skip />
+    <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"Con URL de dominio"</string>
     <string name="reset_app_preferences_description" msgid="7718912868244058770">"Restablecer valores predeterminados das preferencias en todas as aplicacións"</string>
     <string name="all_apps_summary" msgid="3754827293203127282">"<xliff:g id="COUNT">%d</xliff:g> aplicacións instaladas, incluídas as aplicacións descargadas e as do sistema"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Avanzada"</string>
@@ -2598,13 +2581,12 @@
     <string name="app_permissions" msgid="4148222031991883874">"Permisos de aplicacións"</string>
     <string name="app_permissions_summary" msgid="2098173899436407221">"<xliff:g id="COUNT_0">%d</xliff:g> de <xliff:g id="COUNT_1">%d</xliff:g> aplicacións con permiso de acceso adicional"</string>
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"<xliff:g id="COUNT_0">%d</xliff:g> de <xliff:g id="COUNT_1">%d</xliff:g> aplicacións con permiso"</string>
-    <!-- no translation found for domain_urls_title (8735310976048599572) -->
-    <skip />
-    <!-- no translation found for domain_urls_summary_none (3517494281628717719) -->
-    <skip />
-    <!-- no translation found for domain_urls_summary_one (3804994599497120956) -->
-    <skip />
-    <!-- no translation found for domain_urls_summary_some (4859484048050301933) -->
-    <skip />
-    <!-- no translation found for domain_urls_apps_summary (6604886186235343653) -->
+    <string name="domain_urls_title" msgid="8735310976048599572">"URL de dominio"</string>
+    <string name="domain_urls_summary_none" msgid="3517494281628717719">"Non abrir ningún URL de dominio"</string>
+    <string name="domain_urls_summary_one" msgid="3804994599497120956">"Abrir <xliff:g id="DOMAIN">%s</xliff:g>\""</string>
+    <string name="domain_urls_summary_some" msgid="4859484048050301933">"Abrir \"<xliff:g id="DOMAIN">%s</xliff:g>\" e os URL relacionados"</string>
+    <plurals name="domain_urls_apps_summary" formatted="false" msgid="6604886186235343653">
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aplicacións poden abrir os seus URL de dominio</item>
+      <item quantity="one">Unha aplicación pode abrir os seus URL de dominio</item>
+    </plurals>
 </resources>

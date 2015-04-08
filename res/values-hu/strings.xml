@@ -411,8 +411,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"Közepes/magas védelem"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Jelszó"</string>
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"Magas védelem"</string>
-    <!-- no translation found for current_screen_lock (4104091715420072219) -->
-    <skip />
+    <string name="current_screen_lock" msgid="4104091715420072219">"Jelenlegi képernyőzár"</string>
     <string name="unlock_disable_frp_warning_content" msgid="7070131836291098244">"Az eszközvédelmi funkciók nem fognak működni."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Rendszergazda, szabályzat vagy adattár letiltotta"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Nincs"</string>
@@ -420,6 +419,7 @@
     <string name="unlock_set_unlock_mode_pattern" msgid="7837270780919299289">"Minta"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="3541326261341386690">"PIN kód"</string>
     <string name="unlock_set_unlock_mode_password" msgid="1203938057264146610">"Jelszó"</string>
+    <string name="unlock_setup_wizard_fingerprint_details" msgid="7579210814842056547">"Képernyőzár beállítását követően a Beállítások &gt; Biztonság részben beállíthatja ujjlenyomatát is."</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"Képernyőzár kikapcsolása"</string>
     <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"Feloldási minta törlése"</string>
     <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"Feloldó PIN kód törlése"</string>
@@ -521,6 +521,7 @@
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Speciális"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Speciális Bluetooth"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"Ha a Bluetooth aktív, az eszköz képes kommunikálni a közelben lévő Bluetooth-eszközökkel."</string>
+    <string name="ble_scan_notify_text" msgid="9019985398053764737">"A pontosabb helyadatok érdekében a Google-szolgáltatások Bluetooth-eszközöket keresnek még kikapcsolt Bluetooth mellett is. Ezt a LINK_BEGINkeresési beállításoknálLINK_END módosíthatja."</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"Csatlakozás a következőhöz..."</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> leválasztásra kerül a hordozóeszköz hangkimenetéről."</string>
     <string name="bluetooth_disconnect_headset_profile" msgid="8635908811168780720">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> leválasztásra kerül a kihangosító hangkimenetéről."</string>
@@ -586,8 +587,7 @@
     <string name="wifi_automatically_connect_summary" msgid="6722194413023965902">"A Wi-Fi-segéd automatikusan csatlakozhat a jó minőségűnek ítélt nyílt hálózatokhoz"</string>
     <string name="wifi_select_assistant_dialog_title" msgid="4014645210955009439">"Segéd kiválasztása"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Tanúsítványok telepítése"</string>
-    <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"A hely pontosságának javítása és egyéb célok érdekében a Google és más alkalmazások kereshetnek közeli Wi-Fi hálózatokat még akkor is, ha a Wi-Fi ki van kapcsolva. Ha nem szeretné ezt, állítsa át a Speciális &gt; A keresés mindig elérhető beállítást."</string>
-    <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Az alkalmazások még akkor is megkereshetik a közeli hálózatokat, ha a Wi-Fi ki van kapcsolva. Ha nem szeretné ezt, állítsa át a Speciális &gt; A keresés mindig elérhető beállítást."</string>
+    <string name="wifi_scan_notify_text" msgid="8382526568324164356">"A pontosabb helyadatok érdekében a Google-szolgáltatások Wi-Fi-hálózatokat keresnek még kikapcsolt Wi-Fi mellett is. Ezt a LINK_BEGINkeresési beállításoknálLINK_END módosíthatja."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="5340097010842405981">"Ne jelenjen meg többé"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"Tartsa bekapcsolva a Wi-Fit alvó üzemmódban"</string>
     <string name="wifi_setting_on_during_sleep_title" msgid="8308975500029751565">"Wi‑Fi bekapcsolva alvó módban"</string>
@@ -1308,8 +1308,7 @@
     <string name="app_ops_settings" msgid="5108481883575527511">"Alkalmazásműveletek"</string>
     <string name="app_ops_running" msgid="7706949900637284122">"Fut"</string>
     <string name="app_ops_never_used" msgid="9114608022906887802">"(nem használt)"</string>
-    <!-- no translation found for no_default_apps (2915315663141025400) -->
-    <skip />
+    <string name="no_default_apps" msgid="2915315663141025400">"Nincs alapértelmezett."</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Tárhely-használat"</string>
     <string name="storageuse_settings_summary" msgid="3748286507165697834">"Alkalmazások által használt tárhely megtekintése"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Futó szolgáltatások"</string>
@@ -2412,17 +2411,13 @@
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"Ébresztés hangereje"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"Csengés hangereje"</string>
     <string name="notification_volume_option_title" msgid="6064656124416882130">"Értesítés hangereje"</string>
-    <!-- no translation found for zen_mode_settings_title (6948120138640252732) -->
-    <skip />
-    <!-- no translation found for zen_mode_priority_settings_title (2623117023031824309) -->
-    <skip />
-    <!-- no translation found for zen_mode_automation_settings_title (4228995740594063774) -->
-    <skip />
+    <string name="zen_mode_settings_title" msgid="6948120138640252732">"Megszakítások tiltása"</string>
+    <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Csak a prioritást élvezők"</string>
+    <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Automatikus szabályok"</string>
     <string name="zen_mode_option_title" msgid="5061978632306007914">"Hívások és értesítések érkezésekor"</string>
     <string name="zen_mode_option_off" msgid="3167702608910820883">"Bármikor zavarhat"</string>
     <string name="zen_mode_option_important_interruptions" msgid="2320263300561981257">"Csak a prioritást élvező üzenetek engedélyezettek"</string>
-    <!-- no translation found for zen_mode_option_alarms (7380265858042606857) -->
-    <skip />
+    <string name="zen_mode_option_alarms" msgid="7380265858042606857">"Csak riasztások engedélyezése"</string>
     <string name="zen_mode_option_no_interruptions" msgid="5664234817617301449">"Ne zavarjon"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Telefon csengőhangja"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Értesítések alapértelmezett csengőhangja"</string>
@@ -2495,12 +2490,9 @@
     <string name="zen_mode_from_anyone" msgid="1180865188673992959">"Bárki"</string>
     <string name="zen_mode_from_contacts" msgid="8751503728985572786">"Csak ismerősök"</string>
     <string name="zen_mode_from_starred" msgid="2168651127340381533">"Csak a csillagozott ismerősök"</string>
-    <!-- no translation found for zen_mode_alarms (2165302777886552926) -->
-    <skip />
-    <!-- no translation found for zen_mode_reminders (5458502056440485730) -->
-    <skip />
-    <!-- no translation found for zen_mode_events (7914446030988618264) -->
-    <skip />
+    <string name="zen_mode_alarms" msgid="2165302777886552926">"Riasztások"</string>
+    <string name="zen_mode_reminders" msgid="5458502056440485730">"Emlékeztetők"</string>
+    <string name="zen_mode_events" msgid="7914446030988618264">"Események"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"Auto. bekapcsolás"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"Soha"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"Minden este"</string>
@@ -2552,16 +2544,11 @@
     <string name="slot_number" msgid="3762676044904653577">"(Hely: <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
     <string name="launch_by_default" msgid="2184141780491382435">"Elindítás alapértelmezettként"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> felhasználva itt: <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
-    <!-- no translation found for app_launch_domain_links_title (458956710410857777) -->
-    <skip />
-    <!-- no translation found for app_launch_open_domain_urls_title (5821849783765291139) -->
-    <skip />
-    <!-- no translation found for app_launch_open_domain_urls_summary (7305739311608755281) -->
-    <skip />
-    <!-- no translation found for app_launch_supported_domain_urls_title (8148494155921307572) -->
-    <skip />
-    <!-- no translation found for app_launch_other_defaults_title (2516812499807835178) -->
-    <skip />
+    <string name="app_launch_domain_links_title" msgid="458956710410857777">"Domainlinkek"</string>
+    <string name="app_launch_open_domain_urls_title" msgid="5821849783765291139">"Domain URL-ek megnyitása"</string>
+    <string name="app_launch_open_domain_urls_summary" msgid="7305739311608755281">"Engedély az alkalmazásnak a domain URL-ek közvetlen megnyitására"</string>
+    <string name="app_launch_supported_domain_urls_title" msgid="8148494155921307572">"Támogatott domainek URL-jei"</string>
+    <string name="app_launch_other_defaults_title" msgid="2516812499807835178">"Egyéb alapértelmezett értékek"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> felhasználva itt: <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
     <string name="storage_type_internal" msgid="410824961149037234">"belső memória"</string>
     <string name="storage_type_external" msgid="8928374515368986503">"külső memória"</string>
@@ -2579,6 +2566,7 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> engedély megadva</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> engedély megadva</item>
     </plurals>
+    <!-- no translation found for runtime_permissions_summary (1564663886246010959) -->
     <string name="launch_defaults_some" msgid="313159469856372621">"Van néhány alapértelmezett beállítás"</string>
     <string name="launch_defaults_none" msgid="4241129108140034876">"Nincs alapértelmezett beállítás"</string>
     <string name="filter_all_apps" msgid="1988403195820688644">"Az összes alkalmazás"</string>
@@ -2588,8 +2576,7 @@
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"Letiltva"</string>
     <string name="filter_notif_priority_apps" msgid="5965001885749195239">"Prioritást élvező"</string>
     <string name="filter_notif_sensitive_apps" msgid="412490487743581673">"Bizalmas"</string>
-    <!-- no translation found for filter_with_domain_urls_apps (4573276638806792792) -->
-    <skip />
+    <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"Domain URL-ekkel"</string>
     <string name="reset_app_preferences_description" msgid="7718912868244058770">"Az összes alkalmazás beállításának visszaállítása az alapértelmezett értékre."</string>
     <string name="all_apps_summary" msgid="3754827293203127282">"<xliff:g id="COUNT">%d</xliff:g> alkalmazás telepítve, beleértve a rendszer- és a letöltött alkalmazásokat"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Speciális"</string>
@@ -2598,13 +2585,12 @@
     <string name="app_permissions" msgid="4148222031991883874">"Alkalmazásengedélyek"</string>
     <string name="app_permissions_summary" msgid="2098173899436407221">"<xliff:g id="COUNT_1">%d</xliff:g>/<xliff:g id="COUNT_0">%d</xliff:g> alkalmazásnál van további hozzáférés"</string>
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"<xliff:g id="COUNT_1">%d</xliff:g>/<xliff:g id="COUNT_0">%d</xliff:g> alkalmazás engedélyezve"</string>
-    <!-- no translation found for domain_urls_title (8735310976048599572) -->
-    <skip />
-    <!-- no translation found for domain_urls_summary_none (3517494281628717719) -->
-    <skip />
-    <!-- no translation found for domain_urls_summary_one (3804994599497120956) -->
-    <skip />
-    <!-- no translation found for domain_urls_summary_some (4859484048050301933) -->
-    <skip />
-    <!-- no translation found for domain_urls_apps_summary (6604886186235343653) -->
+    <string name="domain_urls_title" msgid="8735310976048599572">"Domain URL-ek"</string>
+    <string name="domain_urls_summary_none" msgid="3517494281628717719">"Nenyisson meg egyetlen domain URL-t sem"</string>
+    <string name="domain_urls_summary_one" msgid="3804994599497120956">"<xliff:g id="DOMAIN">%s</xliff:g>” megnyitása"</string>
+    <string name="domain_urls_summary_some" msgid="4859484048050301933">"<xliff:g id="DOMAIN">%s</xliff:g>” és a kapcsolódó URL-ek megnyitása"</string>
+    <plurals name="domain_urls_apps_summary" formatted="false" msgid="6604886186235343653">
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> alkalmazás meg tudja nyitni a domainjei URL-jeit</item>
+      <item quantity="one">Egy alkalmazás meg tudja nyitni a domainje URL-jeit</item>
+    </plurals>
 </resources>

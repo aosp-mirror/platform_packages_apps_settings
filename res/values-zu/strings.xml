@@ -419,6 +419,7 @@
     <string name="unlock_set_unlock_mode_pattern" msgid="7837270780919299289">"Iphathini"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="3541326261341386690">"PIN"</string>
     <string name="unlock_set_unlock_mode_password" msgid="1203938057264146610">"Iphasiwedi"</string>
+    <string name="unlock_setup_wizard_fingerprint_details" msgid="7579210814842056547">"Uma ususethe ukukhiya isikrini, ungaphinda usethe izigxivizo zeminwe zakho ku-Izilungiselelo &gt; Ukuvikela."</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"Cima ukuvala isikrini"</string>
     <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"Khipha iphathini yokuvula"</string>
     <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"Khipha ukuvala i-PIN"</string>
@@ -520,6 +521,7 @@
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Okuthuthukisiwe"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"i-Bluetooth ephambili"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"Uma i-Bluetooth ivuliwe, idivayisi yakho ingakwazi ukuxhumana namanye amadivayisi aseduze we-Bluetooth."</string>
+    <string name="ble_scan_notify_text" msgid="9019985398053764737">"Ukuze kuthuthukiswe ukunemba kwendawo, amasevisi we-Google azoskenela amadivayisi we-Bluetooth, noma ngabe i-Bluetooth ivaliwe. Ungaguqula lokhu ku-LINK_BEGINizilungiselelo zokuskenaLINK_END."</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"Xhuma kwi..."</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ingeke ixhumeke kumsindo wemidiya."</string>
     <string name="bluetooth_disconnect_headset_profile" msgid="8635908811168780720">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ngeke ixhumeke kumsindo wehendsfri."</string>
@@ -585,8 +587,7 @@
     <string name="wifi_automatically_connect_summary" msgid="6722194413023965902">"Vumela umsizi we-Wi-Fi axhumeke ngokuzenzakalela kumanethiwekhi avulekile anqunywa ngokuthi ayikhwalithi ephezulu."</string>
     <string name="wifi_select_assistant_dialog_title" msgid="4014645210955009439">"Khetha umsizi"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Faka izitifiketi"</string>
-    <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Ukuthuthukisa ukulunga kwendawo nezinye izinjongo, i-Google nezinye izinhlelo zokusebenza zingaskenela amanethiwekhi aseduze, noma ngabe i-Wi-Fi ivaliwe. Uma ungafuni ukuthi lokhu kwenzeke, hamba ekuskeneni okuthuthukisiwe &gt; okuhlala kutholakala."</string>
-    <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Izinhlelo zokusebenza zingaskenela amanethiwekhi aseduze, noma ngabe i-Wi-Fi ivaliwe. Uma ungafuni ukuthi lokhu kwenzeke, hamba ekuskeneni okuthuthukisiwe &gt; okuhlala kutholakala."</string>
+    <string name="wifi_scan_notify_text" msgid="8382526568324164356">"Ukuze kuthuthukiswe ukunemba kwendawo, amasevisi we-Google azoskenela amanethiwekhi we-Wi-Fi, noma ngabe i-Wi-Fi ivaliwe. Ungaguqula lokhu ku-LINK_BEGINizilungiselelo zokuskenaLINK_END."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="5340097010842405981">"Ungabonisi futhi"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"Gcina i-Wi-Fi isebenza ngesikhathi sokulala"</string>
     <string name="wifi_setting_on_during_sleep_title" msgid="8308975500029751565">"I-Wi‑Fi ivulekile phakathi kokulala"</string>
@@ -728,8 +729,7 @@
     <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> Wi-Fi hotspot ephathekayo"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"Indawo ye-Android"</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Ukushaya kwe-Wi-Fi"</string>
-    <!-- no translation found for wifi_calling_mode_title (2164073796253284289) -->
-    <skip />
+    <string name="wifi_calling_mode_title" msgid="2164073796253284289">"Okuncanyelwayo kokushaya"</string>
     <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Imodi yokushaya ye-Wi-Fi"</string>
   <string-array name="wifi_calling_mode_choices">
     <item msgid="2124257075906188844">"Kuncanyelwa i-Wi-Fi"</item>
@@ -741,8 +741,7 @@
     <item msgid="1171822231056612021">"1"</item>
     <item msgid="3194458950573886239">"0"</item>
   </string-array>
-    <!-- no translation found for wifi_calling_off_explanation (4124926334215228094) -->
-    <skip />
+    <string name="wifi_calling_off_explanation" msgid="4124926334215228094">"Uma ukushaya kwe-Wi-Fi kuvuliwe, ifoni yakho ingarutha amakholi ngamanethiwekhi we-Wi-Fi noma kunethiwekhi yenkampani yakho yenethiwekhi, ngokuya ngokuncamelayo nokuthi iyiphi isiginali enamandla. Ngaphambi kokuvula lesi sici, hlola nenkampani yakho yenethiwekhi ngokuphathelene nezinkokhelo neminye imininingwane."</string>
     <string name="home_settings" msgid="212375129455718176">"Ikhaya"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Ukubukeka"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Umsindo"</string>
@@ -1235,8 +1234,7 @@
     <string name="sort_order_size" msgid="7024513286636502362">"Hlunga ngosayizi"</string>
     <string name="show_running_services" msgid="5736278767975544570">"Bonisa amasevisi asebenzayo"</string>
     <string name="show_background_processes" msgid="2009840211972293429">"Bonisa izinqubo zokulondoloza kwesikhashana"</string>
-    <!-- no translation found for default_emergency_app (4066437376478173872) -->
-    <skip />
+    <string name="default_emergency_app" msgid="4066437376478173872">"Uhlelo lokusebenza lwesimo esiphuthumayo elizenzakalelayo"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"Setha kabusha izintandokazi zezinhlelo zokusebenza"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"Setha kabusha izintandokazi zohlelo lokusebenza?"</string>
     <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Lokhu kuzosetha kabusha konke okuncamelayo kwe-:\n\n "<li>"Izinhlelo zokusebenza ezikhutshaziwe"</li>\n" "<li>"Izaziso zezinhlelo zokusebenza ezikhutshaziwe"</li>\n" "<li>"Izinhlelo zokusebenza ezizenzakalelayo zezenzo"</li>\n" "<li>"Imikhawulo yedatha yangemuva yezinhlelo zokusebenza"</li>\n" "<li>"Noma yimiphi imikhawulo yemvume"</li>\n\n" Ngeke uze ulahlekelwe noma iyiphi idatha yohlelo lokusebenza."</string>
@@ -2399,8 +2397,7 @@
     <string name="keywords_users" msgid="4673901601478559100">"umkhawulo wokukhawulela ukhawulelwe"</string>
     <string name="keywords_keyboard_and_ime" msgid="5251531893531063855">"ukulungiswa kombhalo ukulungisa imsindo ukudlidliza ulimi lokuzenzakalelayo ukuthinta ukuphakamisa isiphakamiso itimu igama elingalungile uhlobo i-emoji okwamazwe"</string>
     <string name="keywords_reset_apps" msgid="6420313678620788457">"setha kabusha izintandokazi"</string>
-    <!-- no translation found for keywords_emergency_app (6542122071127391103) -->
-    <skip />
+    <string name="keywords_emergency_app" msgid="6542122071127391103">"okuzenzakalelayo kohlelo lokusebenza lwe-ice lesimo esiphuthumayo"</string>
     <string name="keywords_all_apps" msgid="5377153522551809915">"izinhlelo zokusebenza zilanda isistimu yezinhleloz kusebenza"</string>
     <string name="keywords_app_permissions" msgid="8677901415217188314">"ukuvikeleka kwezimvume zezinhlelo zokusebenza"</string>
     <string name="keywords_lockscreen" msgid="4806191868723291541">"slayida iphini yephethini yephasiwedi"</string>
@@ -2572,6 +2569,7 @@
       <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> izimvume zinikeziwe</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> izimvume zinikeziwe</item>
     </plurals>
+    <!-- no translation found for runtime_permissions_summary (1564663886246010959) -->
     <string name="launch_defaults_some" msgid="313159469856372621">"Okunye okuzenzakalelayo okusethiwe"</string>
     <string name="launch_defaults_none" msgid="4241129108140034876">"Akukho okuzenzakalelayo okusethiwe"</string>
     <string name="filter_all_apps" msgid="1988403195820688644">"Zonke izinhlelo zokusebenza"</string>

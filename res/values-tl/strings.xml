@@ -411,8 +411,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"Katamtaman hanggang mataas na seguridad"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Password"</string>
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"Mataas na seguridad"</string>
-    <!-- no translation found for current_screen_lock (4104091715420072219) -->
-    <skip />
+    <string name="current_screen_lock" msgid="4104091715420072219">"Kasalukuyang lock ng screen"</string>
     <string name="unlock_disable_frp_warning_content" msgid="7070131836291098244">"Hindi na gagana ang mga feature sa proteksyon ng device."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Hindi pinagana ng administrator, patakaran sa pag-encrypt, o storage ng kredensyal"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Wala"</string>
@@ -420,6 +419,7 @@
     <string name="unlock_set_unlock_mode_pattern" msgid="7837270780919299289">"Pattern"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="3541326261341386690">"PIN"</string>
     <string name="unlock_set_unlock_mode_password" msgid="1203938057264146610">"Password"</string>
+    <string name="unlock_setup_wizard_fingerprint_details" msgid="7579210814842056547">"Kapag nakapag-set up ka na ng lock ng screen, maaari mo ring i-set up ang iyong fingerprint sa Mga Setting &gt; Seguridad."</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"I-off ang lock ng screen"</string>
     <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"Alisin ang naka-unlock na pattern"</string>
     <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"Alisin ang naka-unlock na PIN"</string>
@@ -521,6 +521,7 @@
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Advanced"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Advanced na Bluetooth"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"Kapag naka-on Bluetooth, maaari makipag-ugnayan device mo sa iba kalapit Bluetooth device."</string>
+    <string name="ble_scan_notify_text" msgid="9019985398053764737">"Upang pahusayin ang katumpakan ang lokasyon, mag-ii-scan ang mga serbisyo ng Google para sa mga Bluetooth device, kahit na naka-off ang Bluetooth. Maaari mo itong baguhin sa LINK_BEGINmga setting ng pag-ii-scanLINK_END."</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"Kumonekta sa…"</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"Maaalis sa pagkakakonekta ang <xliff:g id="DEVICE_NAME">%1$s</xliff:g> mula sa audio ng media."</string>
     <string name="bluetooth_disconnect_headset_profile" msgid="8635908811168780720">"Maaalis ang koneksyon ng <xliff:g id="DEVICE_NAME">%1$s</xliff:g> mula sa handsfree na audio."</string>
@@ -586,8 +587,7 @@
     <string name="wifi_automatically_connect_summary" msgid="6722194413023965902">"Hayaan ang Wi‑Fi assistant na awtomatikong kumonekta sa bukas na network na mataas ang kalidad."</string>
     <string name="wifi_select_assistant_dialog_title" msgid="4014645210955009439">"Pumili ng assistant"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Mag-install ng mga certificate"</string>
-    <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Upang mapahusay ang katumpakan ng lokasyon at para sa iba pang mga layunin, maaaring mag-scan ang Google at ang iba pang app kung may mga network sa malapit, kahit na naka-off ang Wi-Fi. Kung hindi mo ito gustong mangyari, pumunta sa Advanced &gt; Palaging available ang pag-scan."</string>
-    <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Maaaring mag-scan ang apps kung may mga network sa malapit, kahit na naka-off ang Wi-Fi. Kung hindi mo ito gustong mangyari, pumunta sa Advanced &gt; Palaging available ang pag-scan."</string>
+    <string name="wifi_scan_notify_text" msgid="8382526568324164356">"Upang pahusayin ang katumpakan ng lokasyon, mag-ii-scan ang mga serbisyo ng Google para sa mga Wi‑Fi network, kahit na naka-off ang Wi‑Fi. Maaari mo itong baguhin sa LINK_BEGINmga setting ng pag-ii-scanLINK_END."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="5340097010842405981">"Huwag ipakitang muli"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"Panatilihing naka-on ang Wi-Fi habang naka-sleep"</string>
     <string name="wifi_setting_on_during_sleep_title" msgid="8308975500029751565">"Naka-on ang Wi-Fi sa sleep"</string>
@@ -729,8 +729,7 @@
     <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> portable na Wi‑Fi hotspot"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Pagtawag gamit ang Wi-Fi"</string>
-    <!-- no translation found for wifi_calling_mode_title (2164073796253284289) -->
-    <skip />
+    <string name="wifi_calling_mode_title" msgid="2164073796253284289">"Kagustuhan sa pagtawag"</string>
     <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Wi-Fi calling mode"</string>
   <string-array name="wifi_calling_mode_choices">
     <item msgid="2124257075906188844">"Mas gusto ang Wi-Fi"</item>
@@ -742,8 +741,7 @@
     <item msgid="1171822231056612021">"1"</item>
     <item msgid="3194458950573886239">"0"</item>
   </string-array>
-    <!-- no translation found for wifi_calling_off_explanation (4124926334215228094) -->
-    <skip />
+    <string name="wifi_calling_off_explanation" msgid="4124926334215228094">"Kapag naka-on ang pagtawag sa Wi-Fi, maaaring magruta ng mga tawag ang iyong telepono sa pamamagitan ng mga Wi-Fi network o network ng iyong carrier, depende sa iyong kagustuhan at kung aling signal ang mas malakas. Bago i-on ang feature na ito, sumangguni sa iyong carrier hinggil sa mga bayarin at iba pang mga detalye."</string>
     <string name="home_settings" msgid="212375129455718176">"Home"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Ipakita"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Tunog"</string>
@@ -1235,8 +1233,7 @@
     <string name="sort_order_size" msgid="7024513286636502362">"Pag-uri-uriin ayon sa laki"</string>
     <string name="show_running_services" msgid="5736278767975544570">"Pakita tumatakbo serbisyo"</string>
     <string name="show_background_processes" msgid="2009840211972293429">"Ipakita na-cache proseso"</string>
-    <!-- no translation found for default_emergency_app (4066437376478173872) -->
-    <skip />
+    <string name="default_emergency_app" msgid="4066437376478173872">"Default na app na pang-emergency"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"I-reset kagustuhan sa app"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"I-reset ang gusto sa app?"</string>
     <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Ire-reset nito ang lahat ng kagustuhan para sa:\n\n "<li>"Naka-disable na apps"</li>\n" "<li>"Mga naka-disable na notification ng app"</li>\n" "<li>"Mga default na application para sa mga pagkilos"</li>\n" "<li>"Mga paghihigpit sa data sa background para sa apps"</li>\n" "<li>"Anumang mga paghihigpit sa pahintulot"</li>\n\n" Hindi ka mawawalan ng anumang data ng app."</string>
@@ -1308,8 +1305,7 @@
     <string name="app_ops_settings" msgid="5108481883575527511">"Pagpapagana ng app"</string>
     <string name="app_ops_running" msgid="7706949900637284122">"Gumagana"</string>
     <string name="app_ops_never_used" msgid="9114608022906887802">"(Hindi pa nagamit)"</string>
-    <!-- no translation found for no_default_apps (2915315663141025400) -->
-    <skip />
+    <string name="no_default_apps" msgid="2915315663141025400">"Walang default na Apps."</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Paggamit ng imbakan"</string>
     <string name="storageuse_settings_summary" msgid="3748286507165697834">"Tingnan ang storage na ginagamit ng apps"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Mga tumatakbong serbisyo"</string>
@@ -2394,8 +2390,7 @@
     <string name="keywords_users" msgid="4673901601478559100">"paghihigpit paghigpitan pinaghigpitan"</string>
     <string name="keywords_keyboard_and_ime" msgid="5251531893531063855">"pagwawasto ng text tama tunog i-vibrate awtomatiko wika galaw magmungkahi suhestyon tema nakakapanakit na salita i-type emoji international"</string>
     <string name="keywords_reset_apps" msgid="6420313678620788457">"i-reset ang mga kagustuhan sa default"</string>
-    <!-- no translation found for keywords_emergency_app (6542122071127391103) -->
-    <skip />
+    <string name="keywords_emergency_app" msgid="6542122071127391103">"default na ice app na pang-emergency"</string>
     <string name="keywords_all_apps" msgid="5377153522551809915">"system ng mga application ng pag-download ng mga app"</string>
     <string name="keywords_app_permissions" msgid="8677901415217188314">"seguridad ng mga pahintulot sa mga app"</string>
     <string name="keywords_lockscreen" msgid="4806191868723291541">"i-slide password pattern pin"</string>
@@ -2412,17 +2407,13 @@
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"Volume ng alarm"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"Volume ng pag-ring"</string>
     <string name="notification_volume_option_title" msgid="6064656124416882130">"Volume ng notification"</string>
-    <!-- no translation found for zen_mode_settings_title (6948120138640252732) -->
-    <skip />
-    <!-- no translation found for zen_mode_priority_settings_title (2623117023031824309) -->
-    <skip />
-    <!-- no translation found for zen_mode_automation_settings_title (4228995740594063774) -->
-    <skip />
+    <string name="zen_mode_settings_title" msgid="6948120138640252732">"I-block ang mga pagkaantala"</string>
+    <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Priyoridad lang pinapayagan"</string>
+    <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Mga awtomatikong panuntunan"</string>
     <string name="zen_mode_option_title" msgid="5061978632306007914">"Kapag dumating ang mga tawag at notification"</string>
     <string name="zen_mode_option_off" msgid="3167702608910820883">"Palaging manggambala"</string>
     <string name="zen_mode_option_important_interruptions" msgid="2320263300561981257">"Payagan lang ang mga may priyoridad na paggambala"</string>
-    <!-- no translation found for zen_mode_option_alarms (7380265858042606857) -->
-    <skip />
+    <string name="zen_mode_option_alarms" msgid="7380265858042606857">"Payagan lang ang mga alarm"</string>
     <string name="zen_mode_option_no_interruptions" msgid="5664234817617301449">"Huwag manggambala"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Ringtone ng telepono"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Default na ringtone sa notification"</string>
@@ -2495,12 +2486,9 @@
     <string name="zen_mode_from_anyone" msgid="1180865188673992959">"Sinuman"</string>
     <string name="zen_mode_from_contacts" msgid="8751503728985572786">"Mga contact lang"</string>
     <string name="zen_mode_from_starred" msgid="2168651127340381533">"Mga naka-star na contact lang"</string>
-    <!-- no translation found for zen_mode_alarms (2165302777886552926) -->
-    <skip />
-    <!-- no translation found for zen_mode_reminders (5458502056440485730) -->
-    <skip />
-    <!-- no translation found for zen_mode_events (7914446030988618264) -->
-    <skip />
+    <string name="zen_mode_alarms" msgid="2165302777886552926">"Mga Alarm"</string>
+    <string name="zen_mode_reminders" msgid="5458502056440485730">"Mga Paalala"</string>
+    <string name="zen_mode_events" msgid="7914446030988618264">"Mga Kaganapan"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"Awtomatikong i-on"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"Hindi Kailanman"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"Bawat gabi"</string>
@@ -2552,16 +2540,11 @@
     <string name="slot_number" msgid="3762676044904653577">"(Slot<xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
     <string name="launch_by_default" msgid="2184141780491382435">"Ilunsad bilang default"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> ang nagamit sa <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
-    <!-- no translation found for app_launch_domain_links_title (458956710410857777) -->
-    <skip />
-    <!-- no translation found for app_launch_open_domain_urls_title (5821849783765291139) -->
-    <skip />
-    <!-- no translation found for app_launch_open_domain_urls_summary (7305739311608755281) -->
-    <skip />
-    <!-- no translation found for app_launch_supported_domain_urls_title (8148494155921307572) -->
-    <skip />
-    <!-- no translation found for app_launch_other_defaults_title (2516812499807835178) -->
-    <skip />
+    <string name="app_launch_domain_links_title" msgid="458956710410857777">"Mga link ng domain"</string>
+    <string name="app_launch_open_domain_urls_title" msgid="5821849783765291139">"Buksan ang Mga URL ng Domain"</string>
+    <string name="app_launch_open_domain_urls_summary" msgid="7305739311608755281">"Payagan ang app na direktang buksan ang Mga URL ng Domain"</string>
+    <string name="app_launch_supported_domain_urls_title" msgid="8148494155921307572">"Mga sinusuportahang URL ng domain"</string>
+    <string name="app_launch_other_defaults_title" msgid="2516812499807835178">"Iba pang mga default"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> ang nagamit sa <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
     <string name="storage_type_internal" msgid="410824961149037234">"internal na memory"</string>
     <string name="storage_type_external" msgid="8928374515368986503">"external na memory"</string>
@@ -2579,6 +2562,7 @@
       <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> pahintulot ang ibinigay</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> na pahintulot ang ibinigay</item>
     </plurals>
+    <!-- no translation found for runtime_permissions_summary (1564663886246010959) -->
     <string name="launch_defaults_some" msgid="313159469856372621">"May nakatakdang ilang default"</string>
     <string name="launch_defaults_none" msgid="4241129108140034876">"Walang nakatakdang mga default"</string>
     <string name="filter_all_apps" msgid="1988403195820688644">"Lahat ng app"</string>
@@ -2588,8 +2572,7 @@
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"Na-block"</string>
     <string name="filter_notif_priority_apps" msgid="5965001885749195239">"Priyoridad"</string>
     <string name="filter_notif_sensitive_apps" msgid="412490487743581673">"Sensitibo"</string>
-    <!-- no translation found for filter_with_domain_urls_apps (4573276638806792792) -->
-    <skip />
+    <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"May mga URL ng domain"</string>
     <string name="reset_app_preferences_description" msgid="7718912868244058770">"I-reset ang mga kagustuhan sa lahat ng app sa mga default"</string>
     <string name="all_apps_summary" msgid="3754827293203127282">"<xliff:g id="COUNT">%d</xliff:g> (na) app ang naka-install, kasama na ang system at mga na-download na app"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Advanced"</string>
@@ -2598,13 +2581,12 @@
     <string name="app_permissions" msgid="4148222031991883874">"Mga pahintulot sa app"</string>
     <string name="app_permissions_summary" msgid="2098173899436407221">"Pinapayagan ang karagdagang access sa <xliff:g id="COUNT_0">%d</xliff:g> sa <xliff:g id="COUNT_1">%d</xliff:g> app"</string>
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"Pinapayagan ang <xliff:g id="COUNT_0">%d</xliff:g> sa <xliff:g id="COUNT_1">%d</xliff:g> (na) app"</string>
-    <!-- no translation found for domain_urls_title (8735310976048599572) -->
-    <skip />
-    <!-- no translation found for domain_urls_summary_none (3517494281628717719) -->
-    <skip />
-    <!-- no translation found for domain_urls_summary_one (3804994599497120956) -->
-    <skip />
-    <!-- no translation found for domain_urls_summary_some (4859484048050301933) -->
-    <skip />
-    <!-- no translation found for domain_urls_apps_summary (6604886186235343653) -->
+    <string name="domain_urls_title" msgid="8735310976048599572">"Mga URL ng Domain"</string>
+    <string name="domain_urls_summary_none" msgid="3517494281628717719">"Hindi nagbubukas ng anumang URL ng domain"</string>
+    <string name="domain_urls_summary_one" msgid="3804994599497120956">"Binubuksan ang \'<xliff:g id="DOMAIN">%s</xliff:g>\'"</string>
+    <string name="domain_urls_summary_some" msgid="4859484048050301933">"Binubuksan ang \'<xliff:g id="DOMAIN">%s</xliff:g>\' at ang mga kaugnay na URL"</string>
+    <plurals name="domain_urls_apps_summary" formatted="false" msgid="6604886186235343653">
+      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> app ang maaaring magbukas ng mga URL ng domain ng mga ito</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> na app ang maaaring magbukas ng mga URL ng domain ng mga ito</item>
+    </plurals>
 </resources>

@@ -423,6 +423,7 @@
     <string name="unlock_set_unlock_mode_pattern" msgid="7837270780919299289">"קו ביטול נעילה"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="3541326261341386690">"PIN"</string>
     <string name="unlock_set_unlock_mode_password" msgid="1203938057264146610">"סיסמה"</string>
+    <string name="unlock_setup_wizard_fingerprint_details" msgid="7579210814842056547">"לאחר הגדרה של נעילת מסך, תוכל גם להגדיר את טביעת האצבע ב\'הגדרות\' &gt; \'אבטחה\'."</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"כיבוי נעילת מסך"</string>
     <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"הסר קו ביטול נעילה"</string>
     <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"‏הסר PIN של ביטול נעילה"</string>
@@ -536,6 +537,7 @@
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"מתקדם"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"‏Bluetooth מתקדם"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"‏כשקישוריות ה-Bluetooth פועלת, המכשיר יכול לתקשר עם מכשירי Bluetooth אחרים."</string>
+    <string name="ble_scan_notify_text" msgid="9019985398053764737">"‏כדי לשפר את דיוק המיקום, שירותי Google יחפשו מכשירי Bluetooth גם כשה-Bluetooth כבוי. תוכל לשנות את ההגדרה הזו בLINK_BEGINהגדרות הסריקהLINK_END."</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"התחבר אל…"</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ינותק מהאודיו של המדיה."</string>
     <string name="bluetooth_disconnect_headset_profile" msgid="8635908811168780720">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ינותק מהאודיו של הדיבורית."</string>
@@ -601,8 +603,7 @@
     <string name="wifi_automatically_connect_summary" msgid="6722194413023965902">"‏אפשר לאסיסטנט ה-Wi-Fi להתחבר אוטומטית לרשתות פתוחות שנקבע כי הן באיכות גבוהה"</string>
     <string name="wifi_select_assistant_dialog_title" msgid="4014645210955009439">"בחירת אסיסטנט"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"התקן אישורים"</string>
-    <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"‏כדי לשפר את מידת הדיוק מבחינת מיקום ולהשגת יתרונות נוספים, אפליקציות של Google ואפליקציות נוספות עשויות לבצע סריקה לאיתור רשתות קרובות, גם כאשר ה-Wi-Fi כבוי. אם אינך מעוניין בכך, עבור אל \'מתקדם\' &gt; \'סריקה זמינה תמיד\'."</string>
-    <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"‏אפליקציות עשויים לבצע סריקה לאיתור רשתות קרובות, גם אם ה-Wi-Fi כבוי. אם אינך מעוניין בכך, עבור אל \'מתקדם\' &gt; \'סריקה זמינה תמיד\'."</string>
+    <string name="wifi_scan_notify_text" msgid="8382526568324164356">"‏כדי לשפר את דיוק המיקום, שירותי Google יחפשו מכשירי Wi‑Fi גם כשה-Wi‑Fi כבוי. תוכל לשנות את ההגדרה הזו בLINK_BEGINהגדרות הסריקהLINK_END."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="5340097010842405981">"אל תציג שוב"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"‏השאר את ה-Wi-Fi פועל בזמן שינה"</string>
     <string name="wifi_setting_on_during_sleep_title" msgid="8308975500029751565">"‏Wi‑Fi פועל בזמן מצב שינה"</string>
@@ -744,8 +745,7 @@
     <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"‏נקודה ניידת לשיתוף אינטרנט ב-Wi-Fi ‏<xliff:g id="NETWORK_SSID">%1$s</xliff:g> ‏<xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"‏שיחות ב-Wi-Fi"</string>
-    <!-- no translation found for wifi_calling_mode_title (2164073796253284289) -->
-    <skip />
+    <string name="wifi_calling_mode_title" msgid="2164073796253284289">"העדפת התקשרות"</string>
     <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"‏מצב שיחות ב-Wi-Fi"</string>
   <string-array name="wifi_calling_mode_choices">
     <item msgid="2124257075906188844">"‏Wi-Fi מועדף"</item>
@@ -757,8 +757,7 @@
     <item msgid="1171822231056612021">"1"</item>
     <item msgid="3194458950573886239">"0"</item>
   </string-array>
-    <!-- no translation found for wifi_calling_off_explanation (4124926334215228094) -->
-    <skip />
+    <string name="wifi_calling_off_explanation" msgid="4124926334215228094">"‏כשהתקשרות Wi-Fi פועלת, הטלפון יכול לנתב שיחות ברשתות Wi-Fi או ברשת של הספק, בהתאם להעדפה שלך ולאות שחזק יותר. לפני הפעלת תכונה זו, בדוק עם הספק פרטים הקשורים לעמלות ופרטים אחרים."</string>
     <string name="home_settings" msgid="212375129455718176">"דף הבית"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"תצוגה"</string>
     <string name="sound_settings" msgid="5534671337768745343">"צלילים"</string>
@@ -1252,8 +1251,7 @@
     <string name="sort_order_size" msgid="7024513286636502362">"מיין לפי גודל"</string>
     <string name="show_running_services" msgid="5736278767975544570">"הצג שירותים פועלים"</string>
     <string name="show_background_processes" msgid="2009840211972293429">"הצג תהליכים המאוחסנים בקובץ שמור"</string>
-    <!-- no translation found for default_emergency_app (4066437376478173872) -->
-    <skip />
+    <string name="default_emergency_app" msgid="4066437376478173872">"ברירת המחדל של אפליקציית חירום"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"אפס העדפות אפליקציה"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"האם לאפס העדפות אפליקציה?"</string>
     <string name="reset_app_preferences_desc" msgid="4822447731869201512">"הפעולה תאפס את כל ההעדפות עבור:\n\n "<li>"אפליקציות מושבתות"</li>\n" "<li>"הודעות של אפליקציות מושבתות"</li>\n" "<li>"אפליקציות בברירת מחדל לביצוע פעולות"</li>\n" "<li>"הגבלות של נתוני רקע עבור אפליקציות"</li>\n<li></li>" \nהגבלות הרשאה כלשהן\n לא תאבד נתוני אפליקציות."</string>
@@ -2410,8 +2408,7 @@
     <string name="keywords_users" msgid="4673901601478559100">"הגבלה הגבל מוגבל"</string>
     <string name="keywords_keyboard_and_ime" msgid="5251531893531063855">"תיקון טקסט תקן צליל רטט אוטומטי שפה תנועה הצע הצעה עיצוב מילה פוגענית הקלד אמוג\'י בינלאומי"</string>
     <string name="keywords_reset_apps" msgid="6420313678620788457">"איפוס לברירת המחדל של העדפות"</string>
-    <!-- no translation found for keywords_emergency_app (6542122071127391103) -->
-    <skip />
+    <string name="keywords_emergency_app" msgid="6542122071127391103">"‏ברירת המחדל של אפליקציית חירום ICE"</string>
     <string name="keywords_all_apps" msgid="5377153522551809915">"מערכת לבקשה של הורדת אפליקציות"</string>
     <string name="keywords_app_permissions" msgid="8677901415217188314">"אבטחה של הרשאות לאפליקציות"</string>
     <string name="keywords_lockscreen" msgid="4806191868723291541">"‏החלקה סיסמה קו ביטול נעילה מספר PIN"</string>
@@ -2589,6 +2586,7 @@
       <item quantity="other">הוענקו <xliff:g id="COUNT_1">%d</xliff:g> הרשאות</item>
       <item quantity="one">הוענקה הרשאה <xliff:g id="COUNT_0">%d</xliff:g></item>
     </plurals>
+    <!-- no translation found for runtime_permissions_summary (1564663886246010959) -->
     <string name="launch_defaults_some" msgid="313159469856372621">"הוגדרו כמה ברירת מחדל"</string>
     <string name="launch_defaults_none" msgid="4241129108140034876">"לא הוגדרו ברירות מחדל"</string>
     <string name="filter_all_apps" msgid="1988403195820688644">"כל האפליקציות"</string>
