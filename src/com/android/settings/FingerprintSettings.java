@@ -24,6 +24,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.CancellationSignal;
 import android.os.Handler;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
@@ -92,8 +93,10 @@ public class FingerprintSettings extends SettingsActivity {
         private FingerprintManager mFingerprintManager;
         private EditText mDialogTextField;
         private PreferenceGroup mManageCategory;
+        private CancellationSignal mFingerprintCancel;
+        private int mMaxFingerprintAttempts;
+
         private AuthenticationCallback mAuthCallback = new AuthenticationCallback() {
-            int mAttempts;
             @Override
             public void onAuthenticationSucceeded(AuthenticationResult result) {
                 mHandler.obtainMessage(MSG_HIGHLIGHT_FINGERPRINT_ITEM,
@@ -101,20 +104,16 @@ public class FingerprintSettings extends SettingsActivity {
                 retryFingerprint(true);
             }
 
+            public void onAuthenticationFailed() {
+                retryFingerprint(true);
+            };
+
             @Override
             public void onAuthenticationError(int errMsgId, CharSequence errString) {
                 Toast.makeText(getActivity(), errString, Toast.LENGTH_SHORT);
-                retryFingerprint(false);
-            }
-
-            private void retryFingerprint(boolean resetAttempts) {
-                if (resetAttempts) {
-                    mAttempts = 0;
+                if (errMsgId != FingerprintManager.FINGERPRINT_ERROR_CANCELED) {
+                    retryFingerprint(false);
                 }
-                if (mAttempts < MAX_RETRY_ATTEMPTS) {
-                    mFingerprintManager.authenticate(null, mAuthCallback, null, 0);
-                }
-                mAttempts++;
             }
 
             @Override
@@ -148,6 +147,24 @@ public class FingerprintSettings extends SettingsActivity {
             };
         };
 
+        private void stopFingerprint() {
+            if (mFingerprintCancel != null) {
+                mFingerprintCancel.cancel();
+                mFingerprintCancel = null;
+            }
+        }
+
+        private void retryFingerprint(boolean resetAttempts) {
+            if (resetAttempts) {
+                mMaxFingerprintAttempts = 0;
+            }
+            if (mMaxFingerprintAttempts < MAX_RETRY_ATTEMPTS) {
+                mFingerprintCancel = new CancellationSignal();
+                mFingerprintManager.authenticate(null, mFingerprintCancel, mAuthCallback, 0);
+            }
+            mMaxFingerprintAttempts++;
+        }
+
         @Override
         protected int getMetricsCategory() {
             return MetricsLogger.FINGERPRINT;
@@ -158,7 +175,6 @@ public class FingerprintSettings extends SettingsActivity {
             super.onCreate(savedInstanceState);
             mFingerprintManager = (FingerprintManager) getActivity().getSystemService(
                     Context.FINGERPRINT_SERVICE);
-            mFingerprintManager.authenticate(null, mAuthCallback, null, 0);
         }
 
         protected void removeFingerprintPreference(int fingerprintId) {
@@ -252,6 +268,13 @@ public class FingerprintSettings extends SettingsActivity {
             // Make sure we reload the preference hierarchy since fingerprints may be added,
             // deleted or renamed.
             createPreferenceHierarchy();
+            retryFingerprint(true);
+        }
+
+        @Override
+        public void onPause() {
+            super.onPause();
+            stopFingerprint();
         }
 
         @Override
@@ -260,6 +283,7 @@ public class FingerprintSettings extends SettingsActivity {
             if (KEY_FINGERPRINT_ADD.equals(key)) {
                 Intent intent = new Intent();
                 intent.setClassName("com.android.settings", FingerprintEnroll.class.getName());
+                stopFingerprint();
                 startActivityForResult(intent, ADD_FINGERPRINT_REQUEST);
             } else if (pref instanceof FingerprintPreference) {
                 FingerprintPreference fpref = (FingerprintPreference) pref;

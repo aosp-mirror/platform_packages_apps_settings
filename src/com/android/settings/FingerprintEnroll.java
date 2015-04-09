@@ -254,7 +254,7 @@ public class FingerprintEnroll extends SettingsActivity {
                 case EnrollingStart:
                     mEnrollmentSteps = -1;
                     long challenge = 0x12345; // TODO: get from keyguard confirmation
-                    mFingerprintManager.enroll(challenge, mEnrollmentCallback, mEnrollmentCancel,0);
+                    mFingerprintManager.enroll(challenge, mEnrollmentCancel, mEnrollmentCallback, 0);
                     mProgressBar.setProgress(0);
                     mEnrolling = true;
                     startFingerprintAnimator(); // XXX hack - this should follow fingerprint detection
