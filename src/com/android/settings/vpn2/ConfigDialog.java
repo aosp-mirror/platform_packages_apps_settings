@@ -16,9 +16,6 @@
 
 package com.android.settings.vpn2;
 
-import com.android.internal.net.VpnProfile;
-import com.android.settings.R;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -35,15 +32,26 @@ import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.android.internal.net.VpnProfile;
+import com.android.settings.R;
+
 import java.net.InetAddress;
 
-class VpnDialog extends AlertDialog implements TextWatcher,
+/**
+ * Dialog showing information about a VPN configuration. The dialog
+ * can be launched to either edit or prompt for credentials to connect
+ * to a user-added VPN.
+ *
+ * {@see AppDialog}
+ */
+class ConfigDialog extends AlertDialog implements TextWatcher,
         View.OnClickListener, AdapterView.OnItemSelectedListener {
     private final KeyStore mKeyStore = KeyStore.getInstance();
     private final DialogInterface.OnClickListener mListener;
     private final VpnProfile mProfile;
 
     private boolean mEditing;
+    private boolean mExists;
 
     private View mView;
 
@@ -64,19 +72,20 @@ class VpnDialog extends AlertDialog implements TextWatcher,
     private Spinner mIpsecServerCert;
     private CheckBox mSaveLogin;
 
-    VpnDialog(Context context, DialogInterface.OnClickListener listener,
-            VpnProfile profile, boolean editing) {
+    ConfigDialog(Context context, DialogInterface.OnClickListener listener,
+            VpnProfile profile, boolean editing, boolean exists) {
         super(context);
+
         mListener = listener;
         mProfile = profile;
         mEditing = editing;
+        mExists = exists;
     }
 
     @Override
     protected void onCreate(Bundle savedState) {
         mView = getLayoutInflater().inflate(R.layout.vpn_dialog, null);
         setView(mView);
-        setInverseBackgroundForced(true);
 
         Context context = getContext();
 
@@ -154,6 +163,12 @@ class VpnDialog extends AlertDialog implements TextWatcher,
                 onClick(showOptions);
             }
 
+            // Create a button to forget the profile if it has already been saved..
+            if (mExists) {
+                setButton(DialogInterface.BUTTON_NEUTRAL,
+                        context.getString(R.string.vpn_forget), mListener);
+            }
+
             // Create a button to save the profile.
             setButton(DialogInterface.BUTTON_POSITIVE,
                     context.getString(R.string.vpn_save), mListener);
@@ -173,7 +188,7 @@ class VpnDialog extends AlertDialog implements TextWatcher,
                 context.getString(R.string.vpn_cancel), mListener);
 
         // Let AlertDialog create everything.
-        super.onCreate(null);
+        super.onCreate(savedState);
 
         // Disable the action button if necessary.
         getButton(DialogInterface.BUTTON_POSITIVE)
