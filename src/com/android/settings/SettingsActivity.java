@@ -934,17 +934,31 @@ public class SettingsActivity extends Activity
      */
     public void startPreferencePanelAsUser(String fragmentClass, Bundle args, int titleRes,
             CharSequence titleText, UserHandle userHandle) {
-        String title = null;
-        if (titleRes < 0) {
-            if (titleText != null) {
-                title = titleText.toString();
-            } else {
-                // There not much we can do in that case
-                title = "";
+        // This is a workaround.
+        //
+        // Calling startWithFragmentAsUser() without specifying FLAG_ACTIVITY_NEW_TASK to the intent
+        // starting the fragment could cause a native stack corruption. See b/17523189. However,
+        // adding that flag and start the preference panel with the same UserHandler will make it
+        // impossible to use back button to return to the previous screen. See b/20042570.
+        //
+        // We work around this issue by adding FLAG_ACTIVITY_NEW_TASK to the intent, while doing
+        // another check here to call startPreferencePanel() instead of startWithFragmentAsUser()
+        // when we're calling it as the same user.
+        if (userHandle.getIdentifier() == UserHandle.myUserId()) {
+            startPreferencePanel(fragmentClass, args, titleRes, titleText, null, 0);
+        } else {
+            String title = null;
+            if (titleRes < 0) {
+                if (titleText != null) {
+                    title = titleText.toString();
+                } else {
+                    // There not much we can do in that case
+                    title = "";
+                }
             }
+            Utils.startWithFragmentAsUser(this, fragmentClass, args,
+                    titleRes, title, mIsShortcut, userHandle);
         }
-        Utils.startWithFragmentAsUser(this, fragmentClass, args,
-                titleRes, title, mIsShortcut, userHandle);
     }
 
     /**
