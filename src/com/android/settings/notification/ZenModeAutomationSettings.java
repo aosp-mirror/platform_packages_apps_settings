@@ -118,7 +118,8 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase implements In
             removePreference(KEY_DOWNTIME);
             return;
         }
-        mDays = root.findPreference(KEY_DAYS);
+        final PreferenceCategory downtime = (PreferenceCategory) findPreference(KEY_DOWNTIME);
+        mDays = downtime.findPreference(KEY_DAYS);
         mDays.setOnPreferenceClickListener(new OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
@@ -168,7 +169,7 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase implements In
                 return setZenModeConfig(newConfig);
             }
         });
-        root.addPreference(mStart);
+        downtime.addPreference(mStart);
         mStart.setDependency(mDays.getKey());
 
         mEnd = new TimePickerPreference(mContext, mgr);
@@ -190,10 +191,10 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase implements In
                 return setZenModeConfig(newConfig);
             }
         });
-        root.addPreference(mEnd);
+        downtime.addPreference(mEnd);
         mEnd.setDependency(mDays.getKey());
 
-        mDowntimeMode = (DropDownPreference) root.findPreference(KEY_DOWNTIME_MODE);
+        mDowntimeMode = (DropDownPreference) downtime.findPreference(KEY_DOWNTIME_MODE);
         mDowntimeMode.addItem(R.string.zen_mode_downtime_mode_priority, false);
         mDowntimeMode.addItem(R.string.zen_mode_downtime_mode_none, true);
         mDowntimeMode.setCallback(new DropDownPreference.Callback() {
@@ -265,7 +266,17 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase implements In
     }
 
     @Override
-    protected void updateControls() {
+    protected void onZenModeConfigChanged() {
+        updateControls();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateControls();
+    }
+
+    private void updateControls() {
         mDisableListeners = true;
         if (mDowntimeSupported) {
             updateDays();

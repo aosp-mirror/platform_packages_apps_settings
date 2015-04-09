@@ -24,6 +24,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.ServiceManager;
+import android.provider.Settings;
 import android.provider.Settings.Global;
 import android.service.notification.ZenModeConfig;
 import android.util.Log;
@@ -41,23 +42,25 @@ abstract public class ZenModeSettingsBase extends SettingsPreferenceFragment {
 
     protected Context mContext;
     protected ZenModeConfig mConfig;
+    protected int mZenMode;
 
     abstract protected void onZenModeChanged();
-    abstract protected void updateControls();
+    abstract protected void onZenModeConfigChanged();
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         mContext = getActivity();
-        mConfig = getZenModeConfig();
+        updateZenMode(false /*fireChanged*/);
+        updateZenModeConfig(false /*fireChanged*/);
         if (DEBUG) Log.d(TAG, "Loaded mConfig=" + mConfig);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mConfig = getZenModeConfig();
-        updateControls();
+        updateZenMode(true /*fireChanged*/);
+        updateZenModeConfig(true /*fireChanged*/);
         mSettingsObserver.register();
     }
 
@@ -65,6 +68,26 @@ abstract public class ZenModeSettingsBase extends SettingsPreferenceFragment {
     public void onPause() {
         super.onPause();
         mSettingsObserver.unregister();
+    }
+
+    private void updateZenMode(boolean fireChanged) {
+        final int zenMode = Settings.Global.getInt(getContentResolver(), Global.ZEN_MODE, mZenMode);
+        if (zenMode == mZenMode) return;
+        mZenMode = zenMode;
+        if (DEBUG) Log.d(TAG, "updateZenMode mZenMode=" + mZenMode);
+        if (fireChanged) {
+            onZenModeChanged();
+        }
+    }
+
+    private void updateZenModeConfig(boolean fireChanged) {
+        final ZenModeConfig config = getZenModeConfig();
+        if (Objects.equals(config, mConfig)) return;
+        mConfig = config;
+        if (DEBUG) Log.d(TAG, "updateZenModeConfig mConfig=" + mConfig);
+        if (fireChanged) {
+            onZenModeConfigChanged();
+        }
     }
 
     protected boolean setZenModeConfig(ZenModeConfig config) {
@@ -75,7 +98,7 @@ abstract public class ZenModeSettingsBase extends SettingsPreferenceFragment {
             if (success) {
                 mConfig = config;
                 if (DEBUG) Log.d(TAG, "Saved mConfig=" + mConfig);
-                updateControls();
+                onZenModeConfigChanged();
             }
             return success;
         } catch (Exception e) {
@@ -84,17 +107,13 @@ abstract public class ZenModeSettingsBase extends SettingsPreferenceFragment {
         }
     }
 
+    protected void setZenMode(int zenMode) {
+        Global.putInt(getContentResolver(), Global.ZEN_MODE, zenMode);
+    }
+
     protected static boolean isDowntimeSupported(Context context) {
         return NotificationManager.from(context)
                 .isSystemConditionProviderEnabled(ZenModeConfig.DOWNTIME_PATH);
-    }
-
-    private void updateZenModeConfig() {
-        final ZenModeConfig config = getZenModeConfig();
-        if (Objects.equals(config, mConfig)) return;
-        mConfig = config;
-        if (DEBUG) Log.d(TAG, "updateZenModeConfig mConfig=" + mConfig);
-        updateControls();
     }
 
     private ZenModeConfig getZenModeConfig() {
@@ -129,10 +148,10 @@ abstract public class ZenModeSettingsBase extends SettingsPreferenceFragment {
         public void onChange(boolean selfChange, Uri uri) {
             super.onChange(selfChange, uri);
             if (ZEN_MODE_URI.equals(uri)) {
-                onZenModeChanged();
+                updateZenMode(true /*fireChanged*/);
             }
             if (ZEN_MODE_CONFIG_ETAG_URI.equals(uri)) {
-                updateZenModeConfig();
+                updateZenModeConfig(true /*fireChanged*/);
             }
         }
     }

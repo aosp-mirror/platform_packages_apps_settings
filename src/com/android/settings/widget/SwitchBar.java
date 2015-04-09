@@ -20,15 +20,18 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.text.SpannableStringBuilder;
+import android.text.TextUtils;
+import android.text.style.TextAppearanceSpan;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
-
 import android.widget.Switch;
 import android.widget.TextView;
+
 import com.android.settings.R;
 
 import java.util.ArrayList;
@@ -46,8 +49,12 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
         void onSwitchChanged(Switch switchView, boolean isChecked);
     }
 
+    private final TextAppearanceSpan mSummarySpan;
+
     private ToggleSwitch mSwitch;
     private TextView mTextView;
+    private String mLabel;
+    private String mSummary;
 
     private ArrayList<OnSwitchChangeListener> mSwitchChangeListeners =
             new ArrayList<OnSwitchChangeListener>();
@@ -78,7 +85,9 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
         a.recycle();
 
         mTextView = (TextView) findViewById(R.id.switch_text);
-        mTextView.setText(R.string.switch_off_text);
+        mLabel = getResources().getString(R.string.switch_off_text);
+        mSummarySpan = new TextAppearanceSpan(mContext, R.style.TextAppearance_Small_SwitchBar);
+        updateText();
         ViewGroup.MarginLayoutParams lp = (MarginLayoutParams) mTextView.getLayoutParams();
         lp.setMarginStart(switchBarMarginStart);
 
@@ -103,7 +112,26 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
     }
 
     public void setTextViewLabel(boolean isChecked) {
-        mTextView.setText(isChecked ? R.string.switch_on_text : R.string.switch_off_text);
+        mLabel = getResources()
+                .getString(isChecked ? R.string.switch_on_text : R.string.switch_off_text);
+        updateText();
+    }
+
+    public void setSummary(String summary) {
+        mSummary = summary;
+        updateText();
+    }
+
+    private void updateText() {
+        if (TextUtils.isEmpty(mSummary)) {
+            mTextView.setText(mLabel);
+            return;
+        }
+        final SpannableStringBuilder ssb = new SpannableStringBuilder(mLabel).append('\n');
+        final int start = ssb.length();
+        ssb.append(mSummary);
+        ssb.setSpan(mSummarySpan, start, ssb.length(), 0);
+        mTextView.setText(ssb);
     }
 
     public void setChecked(boolean checked) {
