@@ -21,10 +21,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.provider.Settings.Global;
 import android.service.notification.Condition;
+import android.service.notification.ZenModeConfig;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.SparseArray;
@@ -51,6 +53,7 @@ public class ZenModeSettings extends ZenModeSettingsBase
     private AlertDialog mDialog;
     private SwitchBar mSwitchBar;
     private boolean mShowing;
+    private boolean mUpdatingControls;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,7 +63,7 @@ public class ZenModeSettings extends ZenModeSettingsBase
         final PreferenceScreen root = getPreferenceScreen();
 
         mPrioritySettings = root.findPreference(KEY_PRIORITY_SETTINGS);
-        if (!isDowntimeSupported(mContext)) {
+        if (!isScheduleSupported(mContext)) {
             removePreference(KEY_AUTOMATION_SETTINGS);
         }
     }
@@ -97,13 +100,14 @@ public class ZenModeSettings extends ZenModeSettingsBase
 
     @Override
     public void onSwitchChanged(Switch switchView, boolean isChecked) {
-        if (DEBUG) Log.d(TAG, "onSwitchChanged " + isChecked + " mShowing=" + mShowing);
-        if (!mShowing) return; // not from the user
+        if (DEBUG) Log.d(TAG, "onSwitchChanged " + isChecked + " mShowing=" + mShowing
+                + " mUpdatingControls=" + mUpdatingControls);
+        if (!mShowing || mUpdatingControls) return; // not from the user
         if (isChecked) {
-            setZenMode(Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS);
+            setZenMode(Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, null);
             showConditionSelection(Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS);
         } else {
-            setZenMode(Global.ZEN_MODE_OFF);
+            setZenMode(Global.ZEN_MODE_OFF, null);
         }
     }
 
@@ -135,29 +139,20 @@ public class ZenModeSettings extends ZenModeSettingsBase
         }
     }
 
-    private String computeExitConditionText() {
-        return mConfig == null || mConfig.exitCondition == null
-                ? getString(com.android.internal.R.string.zen_mode_forever)
-                : computeConditionText(mConfig.exitCondition);
-    }
-
-    public static String computeConditionText(Condition c) {
-        return !TextUtils.isEmpty(c.line1) ? c.line1
-                : !TextUtils.isEmpty(c.summary) ? c.summary
-                : "";
-    }
-
     private String computeZenModeSummaryLine() {
         final String caption = computeZenModeCaption(mZenMode);
-        if (caption == null) return null;
-        final String conditionText = computeExitConditionText().toLowerCase();
+        if (caption == null) return null;  // zen mode off
+        final String conditionText = ZenModeConfig.getConditionLine1(mContext, mConfig,
+                UserHandle.myUserId());
         return getString(R.string.zen_mode_summary_combination, caption, conditionText);
     }
 
     private void updateControls() {
         if (mSwitchBar != null) {
             final String summaryLine = computeZenModeSummaryLine();
+            mUpdatingControls = true;
             mSwitchBar.setChecked(summaryLine != null);
+            mUpdatingControls = false;
             mSwitchBar.setSummary(summaryLine);
         }
         updatePrioritySettingsSummary();
@@ -184,7 +179,7 @@ public class ZenModeSettings extends ZenModeSettingsBase
         if (mDialog != null) return;
 
         final ZenModeConditionSelection zenModeConditionSelection =
-                new ZenModeConditionSelection(mContext);
+                new ZenModeConditionSelection(mContext, zenMode);
         DialogInterface.OnClickListener positiveListener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -198,7 +193,7 @@ public class ZenModeSettings extends ZenModeSettingsBase
                 .setTitle(computeZenModeCaption(zenMode))
                 .setView(scrollView)
                 .setPositiveButton(R.string.okay, positiveListener)
-                .setNegativeButton(R.string.cancel_all_caps, new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         cancelDialog();
@@ -216,8 +211,14 @@ public class ZenModeSettings extends ZenModeSettingsBase
     private void cancelDialog() {
         if (DEBUG) Log.d(TAG, "cancelDialog");
         // If not making a decision, reset zen to off.
-        setZenMode(Global.ZEN_MODE_OFF);
+        setZenMode(Global.ZEN_MODE_OFF, null);
         mDialog = null;
+    }
+
+    public static String computeConditionText(Condition c) {
+        return !TextUtils.isEmpty(c.line1) ? c.line1
+                : !TextUtils.isEmpty(c.summary) ? c.summary
+                : "";
     }
 
     private static SparseArray<String> allKeyTitles(Context context) {
@@ -250,7 +251,7 @@ public class ZenModeSettings extends ZenModeSettingsBase
             @Override
             public List<String> getNonIndexableKeys(Context context) {
                 final ArrayList<String> rt = new ArrayList<String>();
-                if (!isDowntimeSupported(context)) {
+                if (!isScheduleSupported(context)) {
                     rt.add(KEY_AUTOMATION_SETTINGS);
                 }
                 return rt;

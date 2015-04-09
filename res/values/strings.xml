@@ -587,23 +587,11 @@
     <!-- Button label for generic cancel action [CHAR LIMIT=20] -->
     <string name="cancel">Cancel</string>
 
-    <!-- Button label for generic cancel action in all caps [CHAR LIMIT=20] -->
-    <string name="cancel_all_caps">CANCEL</string>
-
-    <!-- Button label for generic continue action in all caps [CHAR LIMIT=20] -->
-    <string name="continue_all_caps">CONTINUE</string>
-
     <!-- Button label for generic OK action [CHAR LIMIT=20] -->
     <string name="okay">OK</string>
 
-    <!-- Button label for generic YES action [CHAR LIMIT=20] -->
-    <string name="yes_all_caps">YES</string>
-
-    <!-- Button label for generic NO action [CHAR LIMIT=20] -->
-    <string name="no_all_caps">NO</string>
-
-    <!-- Button label for generic FORGET action [CHAR LIMIT=20] -->
-    <string name="forget">FORGET</string>
+    <!-- Button label for generic forget action [CHAR LIMIT=20] -->
+    <string name="forget">Forget</string>
 
     <!-- Title of the Settings activity shown within the application itself. -->
     <string name="settings_label">Settings</string>
@@ -5699,7 +5687,7 @@
     <string name="notification_volume_option_title">Notification volume</string>
 
     <!-- Sound & notification > Sound section: Title for the Interruptions option and associated settings page. [CHAR LIMIT=30] -->
-    <string name="zen_mode_settings_title">Block interruptions</string>
+    <string name="zen_mode_settings_title">@*android:string/zen_mode_feature_name</string>
 
     <!-- Sound & notification > Sound section: Title for the Priority interruptions option and associated settings page. [CHAR LIMIT=30] -->
     <string name="zen_mode_priority_settings_title">Priority only allows</string>
@@ -5717,7 +5705,7 @@
     <string name="zen_mode_option_no_interruptions">No interruptions</string>
 
     <!-- Sound & notification > Sound section: Zen mode combined summary + condition line [CHAR LIMIT=60] -->
-    <string name="zen_mode_summary_combination"><xliff:g id="mode" example="Priority only">%1$s</xliff:g> <xliff:g id="exit condition" example="until you turn this off">%2$s</xliff:g></string>
+    <string name="zen_mode_summary_combination"><xliff:g id="mode" example="Priority only">%1$s</xliff:g>: <xliff:g id="exit condition" example="Until you turn this off">%2$s</xliff:g></string>
 
     <!-- Sound & notification > Sound section: Title for the option defining the phone ringtone. [CHAR LIMIT=30] -->
     <string name="ringtone_title">Phone ringtone</string>
@@ -5822,32 +5810,6 @@
         to dismiss these notifications or touch action buttons within them.
     </string>
 
-    <!-- Title of preference to manage condition providers -->
-    <string name="manage_condition_providers">Condition providers</string>
-
-    <!-- Summary of preference to manage condition providers, when none are enabled -->
-    <string name="manage_condition_providers_summary_zero">No apps provide conditions</string>
-
-    <!-- Summary of preference to manage condition providers, when one or more are enabled -->
-    <plurals name="manage_condition_providers_summary_nonzero">
-        <item quantity="one">%d app provides conditions</item>
-        <item quantity="other">%d apps provide conditions</item>
-    </plurals>
-
-    <!-- String to show in the list of condition providers, when none is installed -->
-    <string name="no_condition_providers">No condition providers are installed.</string>
-
-    <!-- Title for a warning message about security implications of enabling a condition
-          provider, displayed as a dialog message. [CHAR LIMIT=NONE] -->
-    <string name="condition_provider_security_warning_title">Enable
-         <xliff:g id="service" example="ConditionProvider">%1$s</xliff:g>?</string>
-    <!-- Summary for a warning message about security implications of enabling a condition
-          provider, displayed as a dialog message. [CHAR LIMIT=NONE] -->
-    <string name="condition_provider_security_warning_summary">
-        <xliff:g id="condition_provider_name">%1$s</xliff:g> will be able to
-        add exit conditions to Do not disturb mode.
-    </string>
-
     <!-- [CHAR LIMIT=NONE] Text when loading app list in notification settings -->
     <string name="loading_notification_apps">Loading apps...</string>
 
@@ -5887,29 +5849,29 @@
     <!-- [CHAR LIMIT=20] Notification settings: App notifications dialog dismiss button caption -->
     <string name="app_notifications_dialog_done">Done</string>
 
-    <!-- [CHAR LIMIT=60] Zen mode settings: Downtime category text -->
-    <string name="zen_mode_downtime_category">Downtime</string>
+    <!-- [CHAR LIMIT=40] Zen mode settings: Rule name option and edit dialog title -->
+    <string name="zen_mode_rule_name">Rule name</string>
 
-    <!-- [CHAR LIMIT=40] Zen mode settings: Downtime days option title -->
-    <string name="zen_mode_downtime_days">Days</string>
+    <!-- [CHAR LIMIT=40] Zen mode settings: Add rule menu option name -->
+    <string name="zen_mode_time_add_rule">Add rule</string>
+
+    <!-- [CHAR LIMIT=40] Zen mode settings: Delete rule menu option name -->
+    <string name="zen_mode_delete_rule">Delete rule</string>
+
+    <!-- [CHAR LIMIT=40] Zen mode settings: Delete rule dialog confirmation message -->
+    <string name="zen_mode_delete_rule_confirmation">Delete \"<xliff:g id="rule" example="Weekends">%1$s</xliff:g>\" rule?</string>
+
+    <!-- [CHAR LIMIT=40] Zen mode settings: Delete rule dialog button caption -->
+    <string name="zen_mode_delete_rule_button">Delete</string>
+
+    <!-- [CHAR LIMIT=40] Zen mode settings: Text to display if rule isn't found  -->
+    <string name="zen_mode_rule_not_found_text">Rule not found.</string>
+
+    <!-- [CHAR LIMIT=40] Zen mode settings: Timebased rule days option title -->
+    <string name="zen_mode_schedule_rule_days">Days</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Downtime days option value, no days set -->
-    <string name="zen_mode_downtime_days_none">None</string>
-
-    <!-- [CHAR LIMIT=60] Zen mode settings: Downtime mode option title -->
-    <string name="zen_mode_downtime_mode_title">Interruptions allowed</string>
-
-    <!-- [CHAR LIMIT=40] Zen mode settings: Downtime mode option value, priority only -->
-    <string name="zen_mode_downtime_mode_priority">Priority only</string>
-
-    <!-- [CHAR LIMIT=40] Zen mode settings: Downtime mode option value, none -->
-    <string name="zen_mode_downtime_mode_none">None</string>
-
-    <!-- [CHAR LIMIT=40] Zen mode settings: Automation category text -->
-    <string name="zen_mode_automation_category">Automation</string>
-
-    <!-- [CHAR LIMIT=40] Zen mode settings: Entry conditions option: title -->
-    <string name="zen_mode_entry_conditions_title">Automatically turn on</string>
+    <string name="zen_mode_schedule_rule_days_none">None</string>
 
     <!-- [CHAR LIMIT=40] General divider text when concatenating multiple items in a text summary -->
     <string name="summary_divider_text">,\u0020</string>
@@ -5962,14 +5924,8 @@
     <!-- [CHAR LIMIT=20] Zen mode settings: End time option -->
     <string name="zen_mode_end_time">End time</string>
 
-    <!-- [CHAR LIMIT=60] Zen mode settings: End time option: Summary text value format when downtime mode = priority and end time = next day -->
-    <string name="zen_mode_end_time_priority_next_day_summary_format"><xliff:g id="formatted_time">%s</xliff:g> next day</string>
-
-    <!-- [CHAR LIMIT=60] Zen mode settings: End time option: Summary text value format when downtime mode = none and end time = same day -->
-    <string name="zen_mode_end_time_none_same_day_summary_format"><xliff:g id="formatted_time">%s</xliff:g> or any alarm before</string>
-
-    <!-- [CHAR LIMIT=60] Zen mode settings: End time option: Summary text value format when downtime mode = none and end time = next day -->
-    <string name="zen_mode_end_time_none_next_day_summary_format"><xliff:g id="formatted_time">%s</xliff:g> next day or any alarm before</string>
+    <!-- [CHAR LIMIT=60] Zen mode settings: End time option: Summary text value format when end time = next day -->
+    <string name="zen_mode_end_time_next_day_summary_format"><xliff:g id="formatted_time">%s</xliff:g> next day</string>
 
     <!-- [CHAR LIMIT=20] Notifications settings: Apps section header -->
     <string name="notification_settings_apps_title">App notifications</string>

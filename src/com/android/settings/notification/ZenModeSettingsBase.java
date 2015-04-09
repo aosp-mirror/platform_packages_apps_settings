@@ -16,14 +16,12 @@
 
 package com.android.settings.notification;
 
-import android.app.INotificationManager;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.ServiceManager;
 import android.provider.Settings;
 import android.provider.Settings.Global;
 import android.service.notification.ZenModeConfig;
@@ -91,40 +89,27 @@ abstract public class ZenModeSettingsBase extends SettingsPreferenceFragment {
     }
 
     protected boolean setZenModeConfig(ZenModeConfig config) {
-        final INotificationManager nm = INotificationManager.Stub.asInterface(
-                ServiceManager.getService(Context.NOTIFICATION_SERVICE));
-        try {
-            final boolean success = nm.setZenModeConfig(config);
-            if (success) {
-                mConfig = config;
-                if (DEBUG) Log.d(TAG, "Saved mConfig=" + mConfig);
-                onZenModeConfigChanged();
-            }
-            return success;
-        } catch (Exception e) {
-           Log.w(TAG, "Error calling NoMan", e);
-           return false;
+        final String reason = getClass().getSimpleName();
+        final boolean success = NotificationManager.from(mContext).setZenModeConfig(config, reason);
+        if (success) {
+            mConfig = config;
+            if (DEBUG) Log.d(TAG, "Saved mConfig=" + mConfig);
+            onZenModeConfigChanged();
         }
+        return success;
     }
 
-    protected void setZenMode(int zenMode) {
-        Global.putInt(getContentResolver(), Global.ZEN_MODE, zenMode);
+    protected void setZenMode(int zenMode, Uri conditionId) {
+        NotificationManager.from(mContext).setZenMode(zenMode, conditionId, TAG);
     }
 
-    protected static boolean isDowntimeSupported(Context context) {
+    protected static boolean isScheduleSupported(Context context) {
         return NotificationManager.from(context)
-                .isSystemConditionProviderEnabled(ZenModeConfig.DOWNTIME_PATH);
+                .isSystemConditionProviderEnabled(ZenModeConfig.SCHEDULE_PATH);
     }
 
     private ZenModeConfig getZenModeConfig() {
-        final INotificationManager nm = INotificationManager.Stub.asInterface(
-                ServiceManager.getService(Context.NOTIFICATION_SERVICE));
-        try {
-            return nm.getZenModeConfig();
-        } catch (Exception e) {
-           Log.w(TAG, "Error calling NoMan", e);
-           return new ZenModeConfig();
-        }
+        return NotificationManager.from(mContext).getZenModeConfig();
     }
 
     private final class SettingsObserver extends ContentObserver {

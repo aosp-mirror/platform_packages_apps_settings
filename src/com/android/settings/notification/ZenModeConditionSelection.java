@@ -45,11 +45,14 @@ public class ZenModeConditionSelection extends RadioGroup {
     private final H mHandler = new H();
     private final Context mContext;
     private final List<Condition> mConditions;
+    private final int mZenMode;
+
     private Condition mCondition;
 
-    public ZenModeConditionSelection(Context context) {
+    public ZenModeConditionSelection(Context context, int zenMode) {
         super(context);
         mContext = context;
+        mZenMode = zenMode;
         mConditions = new ArrayList<Condition>();
         setLayoutTransition(new LayoutTransition());
         final int p = mContext.getResources().getDimensionPixelSize(R.dimen.content_margin_left);
@@ -130,7 +133,7 @@ public class ZenModeConditionSelection extends RadioGroup {
     public void confirmCondition() {
         if (DEBUG) Log.d(TAG, "confirmCondition " + mCondition);
         try {
-            mNoMan.setZenModeCondition(mCondition);
+            mNoMan.setZenMode(mZenMode, mCondition != null ? mCondition.id : null, TAG);
         } catch (RemoteException e) {
             // noop
         }

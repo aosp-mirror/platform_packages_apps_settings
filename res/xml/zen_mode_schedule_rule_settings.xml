@@ -16,8 +16,27 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    android:key="zen_mode_settings"
-    android:title="@string/zen_mode_automation_settings_title" >
+    android:key="zen_mode_schedule_rule_settings" >
 
-    <!-- Rules added at runtime -->
+    <!-- Rule name -->
+    <Preference
+        android:key="rule_name"
+        android:title="@string/zen_mode_rule_name"
+        android:persistent="false" />
+
+    <!-- Days -->
+    <Preference
+        android:key="days"
+        android:title="@string/zen_mode_schedule_rule_days"
+        android:persistent="false" />
+
+    <!-- Start time/End time added and removed here! :-) -->
+
+    <!-- Zen mode -->
+    <com.android.settings.DropDownPreference
+            android:key="zen_mode"
+            android:title="@string/zen_mode_settings_title"
+            android:order="100"
+            android:persistent="false" />
+
 </PreferenceScreen>

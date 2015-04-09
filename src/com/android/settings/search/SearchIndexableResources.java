@@ -24,11 +24,12 @@ import com.android.settings.DevelopmentSettings;
 import com.android.settings.DeviceInfoSettings;
 import com.android.settings.DisplaySettings;
 import com.android.settings.HomeSettings;
-import com.android.settings.ScreenPinningSettings;
 import com.android.settings.PrivacySettings;
 import com.android.settings.R;
+import com.android.settings.ScreenPinningSettings;
 import com.android.settings.SecuritySettings;
 import com.android.settings.WallpaperTypeSettings;
+import com.android.settings.WifiCallingSettings;
 import com.android.settings.WirelessSettings;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.applications.AdvancedAppSettings;
@@ -43,7 +44,6 @@ import com.android.settings.location.ScanningSettings;
 import com.android.settings.net.DataUsageMeteredSettings;
 import com.android.settings.notification.NotificationSettings;
 import com.android.settings.notification.OtherSoundSettings;
-import com.android.settings.notification.ZenModeAutomationSettings;
 import com.android.settings.notification.ZenModePrioritySettings;
 import com.android.settings.notification.ZenModeSettings;
 import com.android.settings.print.PrintSettingsFragment;
@@ -53,7 +53,6 @@ import com.android.settings.voice.VoiceInputSettings;
 import com.android.settings.wifi.AdvancedWifiSettings;
 import com.android.settings.wifi.SavedAccessPointsWifiSettings;
 import com.android.settings.wifi.WifiSettings;
-import com.android.settings.WifiCallingSettings;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -169,13 +168,6 @@ public final class SearchIndexableResources {
                         Ranking.getRankForClassName(ZenModePrioritySettings.class.getName()),
                         R.xml.zen_mode_priority_settings,
                         ZenModePrioritySettings.class.getName(),
-                        R.drawable.ic_settings_notifications));
-
-        sResMap.put(ZenModeAutomationSettings.class.getName(),
-                new SearchIndexableResource(
-                        Ranking.getRankForClassName(ZenModeAutomationSettings.class.getName()),
-                        NO_DATA_RES_ID,
-                        ZenModeAutomationSettings.class.getName(),
                         R.drawable.ic_settings_notifications));
 
         sResMap.put(Memory.class.getName(),

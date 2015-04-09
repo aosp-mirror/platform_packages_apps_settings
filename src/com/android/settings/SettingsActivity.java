@@ -100,6 +100,7 @@ import com.android.settings.notification.NotificationSettings;
 import com.android.settings.notification.NotificationStation;
 import com.android.settings.notification.OtherSoundSettings;
 import com.android.settings.notification.ZenModeSettings;
+import com.android.settings.notification.ZenModeScheduleRuleSettings;
 import com.android.settings.print.PrintJobSettingsFragment;
 import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.search.DynamicIndexableContentMonitor;
@@ -332,7 +333,8 @@ public class SettingsActivity extends Activity
             AppNotificationSettings.class.getName(),
             OtherSoundSettings.class.getName(),
             ApnSettings.class.getName(),
-            WifiCallingSettings.class.getName()
+            WifiCallingSettings.class.getName(),
+            ZenModeScheduleRuleSettings.class.getName(),
     };
 
 

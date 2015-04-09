@@ -96,6 +96,7 @@ public class Settings extends SettingsActivity {
     public static class ZenModeSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ZenModePrioritySettingsActivity extends SettingsActivity { /* empty */ }
     public static class ZenModeAutomationSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class ZenModeScheduleRuleSettingsActivity extends SettingsActivity { /* empty */ }
     public static class NotificationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class NotificationAppListActivity extends SettingsActivity { /* empty */ }
     public static class AppNotificationSettingsActivity extends SettingsActivity { /* empty */ }
