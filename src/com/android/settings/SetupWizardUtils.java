@@ -38,6 +38,8 @@ public class SetupWizardUtils {
     public static final String THEME_HOLO_LIGHT = "holo_light";
     public static final String THEME_MATERIAL = "material";
     public static final String THEME_MATERIAL_LIGHT = "material_light";
+    public static final String THEME_MATERIAL_BLUE = "material_blue";
+    public static final String THEME_MATERIAL_BLUE_LIGHT = "material_blue_light";
 
     public static final String EXTRA_USE_IMMERSIVE_MODE = "useImmersiveMode";
 
@@ -68,17 +70,14 @@ public class SetupWizardUtils {
         activity.startActivityForResult(nextIntent, NEXT_REQUEST);
     }
 
-    public static int getTheme(Intent intent, int defaultResId) {
+    public static int getTheme(Intent intent) {
         final String themeName = intent.getStringExtra(EXTRA_THEME);
-        int resid = defaultResId;
-        if (THEME_HOLO_LIGHT.equalsIgnoreCase(themeName) ||
-                THEME_MATERIAL_LIGHT.equalsIgnoreCase(themeName)) {
-            resid = R.style.SetupWizardTheme_Light;
-        } else if (THEME_HOLO.equalsIgnoreCase(themeName) ||
-                THEME_MATERIAL.equalsIgnoreCase(themeName)) {
-            resid = R.style.SetupWizardTheme;
+        if (THEME_HOLO.equalsIgnoreCase(themeName) || THEME_MATERIAL.equalsIgnoreCase(themeName)
+                || THEME_MATERIAL_BLUE.equalsIgnoreCase(themeName)) {
+            return R.style.SetupWizardTheme;
+        } else {
+            return R.style.SetupWizardTheme_Light;
         }
-        return resid;
     }
 
     /**
