@@ -35,6 +35,7 @@ public class ZenModePrioritySettings extends ZenModeSettingsBase implements Inde
     private static final String KEY_MESSAGES = "messages";
     private static final String KEY_CALLS = "calls";
     private static final String KEY_STARRED = "starred";
+    private static final String KEY_REPEAT_CALLERS = "repeat_callers";
 
     private boolean mDisableListeners;
     private SwitchPreference mReminders;
@@ -42,6 +43,7 @@ public class ZenModePrioritySettings extends ZenModeSettingsBase implements Inde
     private SwitchPreference mMessages;
     private SwitchPreference mCalls;
     private DropDownPreference mStarred;
+    private SwitchPreference mRepeatCallers;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -123,6 +125,23 @@ public class ZenModePrioritySettings extends ZenModeSettingsBase implements Inde
             }
         });
 
+        mRepeatCallers = (SwitchPreference) root.findPreference(KEY_REPEAT_CALLERS);
+        mRepeatCallers.setSummary(mContext.getString(R.string.zen_mode_repeat_callers_summary,
+                mContext.getResources().getInteger(com.android.internal.R.integer
+                        .config_zen_repeat_callers_threshold)));
+        mRepeatCallers.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                if (mDisableListeners) return true;
+                final boolean val = (Boolean) newValue;
+                if (val == mConfig.allowRepeatCallers) return true;
+                if (DEBUG) Log.d(TAG, "onPrefChange allowRepeatCallers=" + val);
+                final ZenModeConfig newConfig = mConfig.copy();
+                newConfig.allowRepeatCallers = val;
+                return setZenModeConfig(newConfig);
+            }
+        });
+
         updateControls();
     }
 
@@ -143,19 +162,18 @@ public class ZenModePrioritySettings extends ZenModeSettingsBase implements Inde
         }
         mMessages.setChecked(mConfig.allowMessages);
         mStarred.setSelectedValue(mConfig.allowFrom);
+        mStarred.setEnabled(mConfig.allowCalls || mConfig.allowMessages);
         mReminders.setChecked(mConfig.allowReminders);
         mEvents.setChecked(mConfig.allowEvents);
-        updateStarredEnabled();
+        mRepeatCallers.setChecked(mConfig.allowRepeatCallers);
+        mRepeatCallers.setEnabled(!mConfig.allowCalls
+                || mConfig.allowFrom != ZenModeConfig.SOURCE_ANYONE);
         mDisableListeners = false;
     }
 
     @Override
     protected int getMetricsCategory() {
         return MetricsLogger.NOTIFICATION_ZEN_MODE_PRIORITY;
-    }
-
-    private void updateStarredEnabled() {
-        mStarred.setEnabled(mConfig.allowCalls || mConfig.allowMessages);
     }
 
 }

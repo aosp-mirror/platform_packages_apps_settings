@@ -159,10 +159,11 @@ public class ZenModeSettings extends ZenModeSettingsBase
     }
 
     private void updatePrioritySettingsSummary() {
+        final boolean callers = mConfig.allowCalls || mConfig.allowRepeatCallers;
         String s = getResources().getString(R.string.zen_mode_alarms);
         s = appendLowercase(s, mConfig.allowReminders, R.string.zen_mode_reminders);
         s = appendLowercase(s, mConfig.allowEvents, R.string.zen_mode_events);
-        s = appendLowercase(s, mConfig.allowCalls, R.string.zen_mode_calls);
+        s = appendLowercase(s, callers, R.string.zen_mode_selected_callers);
         s = appendLowercase(s, mConfig.allowMessages, R.string.zen_mode_messages);
         mPrioritySettings.setSummary(s);
     }
