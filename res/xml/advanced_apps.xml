@@ -20,6 +20,12 @@
     android:key="applications_settings">
 
     <PreferenceScreen
+        android:key="default_apps"
+        android:fragment="com.android.settings.applications.ManageDefaultApps"
+        android:title="@string/default_apps_title"
+        settings:keywords="@string/keywords_default_apps" />
+
+    <PreferenceScreen
         android:key="manage_perms"
         android:fragment="com.android.settings.applications.ManagePermissions"
         android:title="@string/app_permissions"

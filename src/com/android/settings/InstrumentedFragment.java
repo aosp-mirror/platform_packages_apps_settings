@@ -23,8 +23,10 @@ import com.android.internal.logging.MetricsLogger;
  * Instrumented fragment that logs visibility state.
  */
 public abstract class InstrumentedFragment extends PreferenceFragment {
-    // Declare new temproary categories here, starting after this value.
+    // Declare new temporary categories here, starting after this value.
     public static final int VIEW_CATEGORY_UNDECLARED = 100000;
+
+    public static final int VIEW_CATEGORY_DEFAULT_APPS = VIEW_CATEGORY_UNDECLARED + 1;
 
     /**
      * Declare the view of this category.
