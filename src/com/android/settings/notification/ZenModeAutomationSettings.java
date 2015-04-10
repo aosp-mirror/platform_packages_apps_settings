@@ -16,6 +16,8 @@
 
 package com.android.settings.notification;
 
+import static android.service.notification.ZenModeConfig.ALL_DAYS;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.Preference;
@@ -25,6 +27,7 @@ import android.provider.Settings.Global;
 import android.service.notification.ZenModeConfig;
 import android.service.notification.ZenModeConfig.ScheduleInfo;
 import android.service.notification.ZenModeConfig.ZenRule;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -33,7 +36,14 @@ import android.view.MenuItem;
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.TreeSet;
+
 public class ZenModeAutomationSettings extends ZenModeSettingsBase {
+    private static final SimpleDateFormat DAY_FORMAT = new SimpleDateFormat("EEE");
+
+    private final Calendar mCalendar = Calendar.getInstance();
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -115,7 +125,7 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
             if (!ZenModeConfig.isValidScheduleConditionId(rule.conditionId)) continue;
             final Preference p = new Preference(mContext);
             p.setTitle(rule.name);
-            p.setSummary(rule.enabled ? R.string.switch_on_text : R.string.switch_off_text);
+            p.setSummary(computeRuleSummary(rule));
             p.setPersistent(false);
             p.setOnPreferenceClickListener(new OnPreferenceClickListener() {
                 @Override
@@ -131,6 +141,62 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
     @Override
     protected int getMetricsCategory() {
         return MetricsLogger.NOTIFICATION_ZEN_MODE_AUTOMATION;
+    }
+
+    private String computeRuleSummary(ZenRule rule) {
+        if (rule == null || !rule.enabled) return getString(R.string.switch_off_text);
+        final ScheduleInfo schedule = ZenModeConfig.tryParseScheduleConditionId(rule.conditionId);
+        if (schedule == null) return getString(R.string.switch_on_text);
+        final String days = computeContiguousDayRanges(schedule.days);
+        final String start = getTime(schedule.startHour, schedule.startMinute);
+        final String end = getTime(schedule.endHour, schedule.endMinute);
+        final String time = getString(R.string.summary_range_verbal_combination, start, end);
+        final String mode = ZenModeSettings.computeZenModeCaption(getResources(), rule.zenMode);
+        return getString(R.string.zen_mode_rule_summary_template, days, time, mode);
+    }
+
+    private String getTime(int hour, int minute) {
+        mCalendar.set(Calendar.HOUR_OF_DAY, hour);
+        mCalendar.set(Calendar.MINUTE, minute);
+        return DateFormat.getTimeFormat(mContext).format(mCalendar.getTime());
+    }
+
+    private String computeContiguousDayRanges(int[] days) {
+        final TreeSet<Integer> daySet = new TreeSet<>();
+        for (int i = 0; days != null && i < days.length; i++) {
+            daySet.add(days[i]);
+        }
+        if (daySet.isEmpty()) {
+            return getString(R.string.zen_mode_schedule_rule_days_none);
+        }
+        final int N = ALL_DAYS.length;
+        if (daySet.size() == N) {
+            return getString(R.string.zen_mode_schedule_rule_days_all);
+        }
+        String rt = null;
+        for (int i = 0; i < N; i++) {
+            final int startDay = ALL_DAYS[i];
+            final boolean active = daySet.contains(startDay);
+            if (!active) continue;
+            int end = 0;
+            while (daySet.contains(ALL_DAYS[(i + end + 1) % N])) {
+                end++;
+            }
+            if (!(i == 0 && daySet.contains(ALL_DAYS[N - 1]))) {
+                final String v = end == 0 ? dayString(startDay)
+                        : getString(R.string.summary_range_symbol_combination,
+                                dayString(startDay),
+                                dayString(ALL_DAYS[(i + end) % N]));
+                rt = rt == null ? v : getString(R.string.summary_divider_text, rt, v);
+            }
+            i += end;
+        }
+        return rt;
+    }
+
+    private String dayString(int day) {
+        mCalendar.set(Calendar.DAY_OF_WEEK, day);
+        return DAY_FORMAT.format(mCalendar.getTime());
     }
 
 }

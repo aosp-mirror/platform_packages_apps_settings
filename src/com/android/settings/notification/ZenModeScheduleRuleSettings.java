@@ -209,8 +209,8 @@ public class ZenModeScheduleRuleSettings extends ZenModeSettingsBase
                     return true;
                 }
                 if (DEBUG) Log.d(TAG, "onPrefChange end h=" + hour + " m=" + minute);
-                mSchedule.startHour = hour;
-                mSchedule.startMinute = minute;
+                mSchedule.endHour = hour;
+                mSchedule.endMinute = minute;
                 mRule.conditionId = ZenModeConfig.toScheduleConditionId(mSchedule);
                 mRule.condition = null;
                 mRule.snoozing = false;

@@ -126,21 +126,21 @@ public class ZenModeSettings extends ZenModeSettingsBase
         updateControls();
     }
 
-    private String computeZenModeCaption(int zenMode) {
+    public static String computeZenModeCaption(Resources res, int zenMode) {
         switch (zenMode) {
             case Global.ZEN_MODE_ALARMS:
-                return getString(R.string.zen_mode_option_alarms);
+                return res.getString(R.string.zen_mode_option_alarms);
             case Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS:
-                return getString(R.string.zen_mode_option_important_interruptions);
+                return res.getString(R.string.zen_mode_option_important_interruptions);
             case Global.ZEN_MODE_NO_INTERRUPTIONS:
-                return getString(R.string.zen_mode_option_no_interruptions);
+                return res.getString(R.string.zen_mode_option_no_interruptions);
             default:
                 return null;
         }
     }
 
     private String computeZenModeSummaryLine() {
-        final String caption = computeZenModeCaption(mZenMode);
+        final String caption = computeZenModeCaption(getResources(), mZenMode);
         if (caption == null) return null;  // zen mode off
         final String conditionText = ZenModeConfig.getConditionLine1(mContext, mConfig,
                 UserHandle.myUserId());
@@ -190,7 +190,7 @@ public class ZenModeSettings extends ZenModeSettingsBase
         ScrollView scrollView = new ScrollView(mContext);
         scrollView.addView(zenModeConditionSelection);
         mDialog = new AlertDialog.Builder(getActivity())
-                .setTitle(computeZenModeCaption(zenMode))
+                .setTitle(computeZenModeCaption(getResources(), zenMode))
                 .setView(scrollView)
                 .setPositiveButton(R.string.okay, positiveListener)
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
