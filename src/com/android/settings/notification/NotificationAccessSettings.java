@@ -46,10 +46,10 @@ public class NotificationAccessSettings extends ManagedServiceSettings {
     }
 
     public static int getListenersCount(PackageManager pm) {
-        return getServicesCount(CONFIG, pm);
+        return ServiceListing.getServicesCount(CONFIG, pm);
     }
 
     public static int getEnabledListenersCount(Context context) {
-        return getEnabledServicesCount(CONFIG, context);
+        return ServiceListing.getEnabledServicesCount(CONFIG, context);
     }
 }

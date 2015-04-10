@@ -95,11 +95,11 @@ import com.android.settings.location.LocationSettings;
 import com.android.settings.nfc.AndroidBeam;
 import com.android.settings.nfc.PaymentSettings;
 import com.android.settings.notification.AppNotificationSettings;
-import com.android.settings.notification.ConditionProviderSettings;
 import com.android.settings.notification.NotificationAccessSettings;
 import com.android.settings.notification.NotificationSettings;
 import com.android.settings.notification.NotificationStation;
 import com.android.settings.notification.OtherSoundSettings;
+import com.android.settings.notification.ZenModeExternalRuleSettings;
 import com.android.settings.notification.ZenModeSettings;
 import com.android.settings.notification.ZenModeScheduleRuleSettings;
 import com.android.settings.print.PrintJobSettingsFragment;
@@ -320,7 +320,6 @@ public class SettingsActivity extends Activity
             DreamSettings.class.getName(),
             UserSettings.class.getName(),
             NotificationAccessSettings.class.getName(),
-            ConditionProviderSettings.class.getName(),
             PrintSettingsFragment.class.getName(),
             PrintJobSettingsFragment.class.getName(),
             TrustedCredentialsSettings.class.getName(),
@@ -337,6 +336,7 @@ public class SettingsActivity extends Activity
             ApnSettings.class.getName(),
             WifiCallingSettings.class.getName(),
             ZenModeScheduleRuleSettings.class.getName(),
+            ZenModeExternalRuleSettings.class.getName(),
     };
 
 
