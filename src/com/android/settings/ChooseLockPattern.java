@@ -84,6 +84,15 @@ public class ChooseLockPattern extends SettingsActivity {
         return intent;
     }
 
+
+    public static Intent createIntent(Context context,
+            boolean requirePassword, long challenge) {
+        Intent intent = createIntent(context, requirePassword, false);
+        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, true);
+        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, challenge);
+        return intent;
+    }
+
     @Override
     protected boolean isValidFragment(String fragmentName) {
         if (ChooseLockPatternFragment.class.getName().equals(fragmentName)) return true;
@@ -123,6 +132,8 @@ public class ChooseLockPattern extends SettingsActivity {
         private static final int ID_EMPTY_MESSAGE = -1;
 
         private String mCurrentPattern;
+        private boolean mHasChallenge;
+        private long mChallenge;
         protected TextView mHeaderText;
         protected LockPatternView mLockPatternView;
         protected TextView mFooterText;
@@ -384,8 +395,11 @@ public class ChooseLockPattern extends SettingsActivity {
 
             final boolean confirmCredentials = getActivity().getIntent()
                     .getBooleanExtra("confirm_credentials", true);
-            mCurrentPattern = getActivity().getIntent()
-                    .getStringExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
+            Intent intent = getActivity().getIntent();
+            mCurrentPattern = intent.getStringExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
+            mHasChallenge = intent.getBooleanExtra(
+                    ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, false);
+            mChallenge = intent.getLongExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, 0);
 
             if (savedInstanceState == null) {
                 if (confirmCredentials) {
@@ -606,7 +620,16 @@ public class ChooseLockPattern extends SettingsActivity {
             if (!wasSecureBefore) {
                 startActivity(getRedactionInterstitialIntent(getActivity()));
             }
-            getActivity().setResult(RESULT_FINISHED);
+
+            if (mHasChallenge) {
+                Intent intent = new Intent();
+                byte[] token = utils.verifyPattern(mChosenPattern, mChallenge);
+                intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
+                getActivity().setResult(RESULT_FINISHED, intent);
+            } else {
+                getActivity().setResult(RESULT_FINISHED);
+            }
+
             getActivity().finish();
             mDone = true;
         }

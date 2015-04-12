@@ -84,6 +84,15 @@ public class ChooseLockPassword extends SettingsActivity {
         return intent;
     }
 
+    public static Intent createIntent(Context context, int quality,
+            int minLength, final int maxLength, boolean requirePasswordToDecrypt, long challenge) {
+        Intent intent = createIntent(context, quality, minLength, maxLength, requirePasswordToDecrypt,
+                false);
+        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, true);
+        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, challenge);
+        return intent;
+    }
+
     @Override
     protected boolean isValidFragment(String fragmentName) {
         if (ChooseLockPasswordFragment.class.getName().equals(fragmentName)) return true;
@@ -112,6 +121,8 @@ public class ChooseLockPassword extends SettingsActivity {
         private static final String KEY_CURRENT_PASSWORD = "current_password";
 
         private String mCurrentPassword;
+        private boolean mHasChallenge;
+        private long mChallenge;
         private TextView mPasswordEntry;
         private int mPasswordMinLength = LockPatternUtils.MIN_LOCK_PASSWORD_SIZE;
         private int mPasswordMaxLength = 16;
@@ -249,8 +260,12 @@ public class ChooseLockPassword extends SettingsActivity {
                     : (InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD));
 
             Intent intent = getActivity().getIntent();
-            final boolean confirmCredentials = intent.getBooleanExtra("confirm_credentials", true);
+            final boolean confirmCredentials = intent.getBooleanExtra(
+                    ChooseLockGeneric.CONFIRM_CREDENTIALS, true);
             mCurrentPassword = intent.getStringExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
+            mHasChallenge = intent.getBooleanExtra(
+                    ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, false);
+            mChallenge = intent.getLongExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, 0);
             if (savedInstanceState == null) {
                 updateStage(Stage.Introduction);
                 if (confirmCredentials) {
@@ -463,7 +478,15 @@ public class ChooseLockPassword extends SettingsActivity {
                             EncryptionInterstitial.EXTRA_REQUIRE_PASSWORD, true);
                     mLockPatternUtils.setCredentialRequiredToDecrypt(required);
                     mLockPatternUtils.saveLockPassword(pin, mCurrentPassword, mRequestedQuality);
-                    getActivity().setResult(RESULT_FINISHED);
+
+                    if (mHasChallenge) {
+                        Intent intent = new Intent();
+                        byte[] token = mLockPatternUtils.verifyPassword(pin, mChallenge);
+                        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
+                        getActivity().setResult(RESULT_FINISHED, intent);
+                    } else {
+                        getActivity().setResult(RESULT_FINISHED);
+                    }
                     getActivity().finish();
                     mDone = true;
                     if (!wasSecureBefore) {

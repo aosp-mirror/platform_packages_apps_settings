@@ -273,8 +273,35 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             }
 
             public void onPatternDetected(List<LockPatternView.Cell> pattern) {
-                if (mLockPatternUtils.checkPattern(pattern)) {
+                final boolean verifyChallenge = getActivity().getIntent().getBooleanExtra(
+                        ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, false);
+                boolean matched = false;
+                Intent intent = new Intent();
+                if (verifyChallenge) {
+                    if (getActivity() instanceof ConfirmLockPattern.InternalActivity) {
+                        long challenge = getActivity().getIntent().getLongExtra(
+                            ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, 0);
+                        byte[] token = mLockPatternUtils.verifyPattern(pattern, challenge);
+                        if (token != null) {
+                            matched = true;
+                            intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
+                        }
+                    }
+                } else if (mLockPatternUtils.checkPattern(pattern)) {
+                    matched = true;
+                    if (getActivity() instanceof ConfirmLockPattern.InternalActivity) {
+                        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_TYPE,
+                                        StorageManager.CRYPT_TYPE_PATTERN);
+                        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD,
+                                        LockPatternUtils.patternToString(pattern));
+                    }
+
+                }
+
+                if (matched) {
                     authenticationSucceeded(LockPatternUtils.patternToString(pattern));
+                    getActivity().setResult(Activity.RESULT_OK, intent);
+                    getActivity().finish();
                 } else {
                     if (pattern.size() >= LockPatternUtils.MIN_PATTERN_REGISTER_FAIL &&
                             ++mNumWrongConfirmAttempts

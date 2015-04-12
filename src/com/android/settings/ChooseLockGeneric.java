@@ -89,6 +89,8 @@ public class ChooseLockGeneric extends SettingsActivity {
         private ChooseLockSettingsHelper mChooseLockSettingsHelper;
         private DevicePolicyManager mDPM;
         private KeyStore mKeyStore;
+        private boolean mHasChallenge = false;
+        private long mChallenge;
         private boolean mPasswordConfirmed = false;
         private boolean mWaitingForConfirmation = false;
         private int mEncryptionRequestQuality;
@@ -132,6 +134,11 @@ public class ChooseLockGeneric extends SettingsActivity {
             if (getActivity() instanceof ChooseLockGeneric.InternalActivity) {
                 mPasswordConfirmed = !confirmCredentials;
             }
+
+            mHasChallenge = getActivity().getIntent().getBooleanExtra(
+                    ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, false);
+            mChallenge = getActivity().getIntent().getLongExtra(
+                    ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, 0);
 
             if (savedInstanceState != null) {
                 mPasswordConfirmed = savedInstanceState.getBoolean(PASSWORD_CONFIRMED);
@@ -389,8 +396,13 @@ public class ChooseLockGeneric extends SettingsActivity {
                     maxLength, requirePasswordToDecrypt, confirmCredentials);
         }
 
-        // SetupWizard version will not need this as they will never be changing a password
-        // TODO: confirm
+        protected Intent getLockPasswordIntent(Context context, int quality,
+                int minLength, final int maxLength,
+                boolean requirePasswordToDecrypt, long challenge) {
+            return ChooseLockPassword.createIntent(context, quality, minLength,
+                    maxLength, requirePasswordToDecrypt, challenge);
+        }
+
         private Intent getLockPasswordIntent(Context context, int quality, int minLength,
                 final int maxLength, boolean requirePasswordToDecrypt, String password) {
             return ChooseLockPassword.createIntent(context, quality, minLength, maxLength,
@@ -403,8 +415,11 @@ public class ChooseLockGeneric extends SettingsActivity {
                     confirmCredentials);
         }
 
-        // SetupWizard version will not need this as they will never be changing a password
-        // TODO: confirm
+        protected Intent getLockPatternIntent(Context context, final boolean requirePassword,
+               long challenge) {
+            return ChooseLockPattern.createIntent(context, requirePassword, challenge);
+        }
+
         private Intent getLockPatternIntent(Context context, final boolean requirePassword,
                 final String pattern) {
             return ChooseLockPattern.createIntent(context, requirePassword, pattern);
@@ -439,12 +454,24 @@ public class ChooseLockGeneric extends SettingsActivity {
                     minLength = MIN_PASSWORD_LENGTH;
                 }
                 final int maxLength = mDPM.getPasswordMaximumLength(quality);
-                Intent intent = getLockPasswordIntent(context, quality, minLength,
+                Intent intent;
+                if (mHasChallenge) {
+                    intent = getLockPasswordIntent(context, quality, minLength,
+                            maxLength, mRequirePassword, mChallenge);
+                } else {
+                    intent = getLockPasswordIntent(context, quality, minLength,
                         maxLength, mRequirePassword, mUserPassword);
+                }
                 startActivityForResult(intent, CHOOSE_LOCK_REQUEST);
             } else if (quality == DevicePolicyManager.PASSWORD_QUALITY_SOMETHING) {
-                Intent intent = getLockPatternIntent(context, mRequirePassword,
+                Intent intent;
+                if (mHasChallenge) {
+                    intent = getLockPatternIntent(context, mRequirePassword,
+                        mChallenge);
+                } else {
+                    intent = getLockPatternIntent(context, mRequirePassword,
                         mUserPassword);
+                }
                 startActivityForResult(intent, CHOOSE_LOCK_REQUEST);
             } else if (quality == DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED) {
                 mChooseLockSettingsHelper.utils().clearLock();

@@ -183,8 +183,34 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
 
         private void handleNext() {
             final String pin = mPasswordEntry.getText().toString();
-            if (mLockPatternUtils.checkPassword(pin)) {
+            final boolean verifyChallenge = getActivity().getIntent().getBooleanExtra(
+                    ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, false);
+            boolean matched = false;
+            Intent intent = new Intent();
+            if (verifyChallenge)  {
+                if (getActivity() instanceof ConfirmLockPassword.InternalActivity) {
+                    long challenge = getActivity().getIntent().getLongExtra(
+                            ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, 0);
+                    byte[] token = mLockPatternUtils.verifyPassword(pin, challenge);
+                    if (token != null) {
+                        matched = true;
+                        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
+                    }
+                }
+            } else if (mLockPatternUtils.checkPassword(pin)) {
+                matched = true;
+                if (getActivity() instanceof ConfirmLockPassword.InternalActivity) {
+                    intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_TYPE,
+                                    mIsAlpha ? StorageManager.CRYPT_TYPE_PASSWORD
+                                             : StorageManager.CRYPT_TYPE_PIN);
+                    intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD, pin);
+                }
+            }
+
+            if (matched) {
                 authenticationSucceeded(pin);
+                getActivity().setResult(RESULT_OK, intent);
+                getActivity().finish();
             } else {
                 if (++mNumWrongConfirmAttempts >= LockPatternUtils.FAILED_ATTEMPTS_BEFORE_TIMEOUT) {
                     long deadline = mLockPatternUtils.setLockoutAttemptDeadline();

@@ -39,6 +39,17 @@ public class ConfirmDeviceCredentialActivity extends Activity {
         return intent;
     }
 
+    public static Intent createIntent(CharSequence title, CharSequence details, long challenge) {
+        Intent intent = new Intent();
+        intent.setClassName("com.android.settings",
+                ConfirmDeviceCredentialActivity.class.getName());
+        intent.putExtra(KeyguardManager.EXTRA_TITLE, title);
+        intent.putExtra(KeyguardManager.EXTRA_DESCRIPTION, details);
+        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, challenge);
+        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, true);
+        return intent;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

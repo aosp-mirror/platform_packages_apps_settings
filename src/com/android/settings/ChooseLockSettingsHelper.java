@@ -28,6 +28,10 @@ public final class ChooseLockSettingsHelper {
 
     static final String EXTRA_KEY_TYPE = "type";
     static final String EXTRA_KEY_PASSWORD = "password";
+    static final String EXTRA_KEY_HAS_CHALLENGE = "has_challenge";
+    static final String EXTRA_KEY_CHALLENGE = "challenge";
+    static final String EXTRA_KEY_CHALLENGE_TOKEN = "hw_auth_token";
+
 
     private LockPatternUtils mLockPatternUtils;
     private Activity mActivity;
@@ -87,13 +91,38 @@ public final class ChooseLockSettingsHelper {
     boolean launchConfirmationActivity(int request, @Nullable CharSequence title,
             @Nullable CharSequence header, @Nullable CharSequence description,
             boolean returnCredentials, boolean external) {
+        return launchConfirmationActivity(request, title, header, description,
+                returnCredentials, external, false, 0);
+    }
+
+    /**
+     * If a pattern, password or PIN exists, prompt the user before allowing them to change it.
+     * @param message optional message to display about the action about to be done
+     * @param details optional detail message to display
+     * @param challenge a challenge to be verified against the device credential.
+     *                  This method can only be called internally.
+     * @return true if one exists and we launched an activity to confirm it
+     * @see #onActivityResult(int, int, android.content.Intent)
+     */
+    boolean launchConfirmationActivity(int request, @Nullable CharSequence title,
+            @Nullable CharSequence header, @Nullable CharSequence description,
+            long challenge) {
+        return launchConfirmationActivity(request, title, header, description,
+                false, false, true, challenge);
+    }
+
+    private boolean launchConfirmationActivity(int request, @Nullable CharSequence title,
+            @Nullable CharSequence header, @Nullable CharSequence description,
+            boolean returnCredentials, boolean external, boolean hasChallenge,
+            long challenge) {
         boolean launched = false;
         switch (mLockPatternUtils.getKeyguardStoredPasswordQuality()) {
             case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
                 launched = launchConfirmationActivity(request, title, header, description,
-                        returnCredentials
+                        returnCredentials || hasChallenge
                                 ? ConfirmLockPattern.InternalActivity.class
-                                : ConfirmLockPattern.class, external);
+                                : ConfirmLockPattern.class, external,
+                                hasChallenge, challenge);
                 break;
             case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
             case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX:
@@ -101,16 +130,18 @@ public final class ChooseLockSettingsHelper {
             case DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC:
             case DevicePolicyManager.PASSWORD_QUALITY_COMPLEX:
                 launched = launchConfirmationActivity(request, title, header, description,
-                        returnCredentials
+                        returnCredentials || hasChallenge
                                 ? ConfirmLockPassword.InternalActivity.class
-                                : ConfirmLockPassword.class, external);
+                                : ConfirmLockPassword.class, external,
+                                hasChallenge, challenge);
                 break;
         }
         return launched;
     }
 
     private boolean launchConfirmationActivity(int request, CharSequence title, CharSequence header,
-            CharSequence message, Class<?> activityClass, boolean external) {
+            CharSequence message, Class<?> activityClass, boolean external, boolean hasChallenge,
+            long challenge) {
         final Intent intent = new Intent();
         intent.putExtra(ConfirmDeviceCredentialBaseFragment.TITLE_TEXT, title);
         intent.putExtra(ConfirmDeviceCredentialBaseFragment.HEADER_TEXT, header);
@@ -119,6 +150,8 @@ public final class ChooseLockSettingsHelper {
         intent.putExtra(ConfirmDeviceCredentialBaseFragment.DARK_THEME, external);
         intent.putExtra(ConfirmDeviceCredentialBaseFragment.SHOW_CANCEL_BUTTON, external);
         intent.putExtra(ConfirmDeviceCredentialBaseFragment.SHOW_WHEN_LOCKED, external);
+        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, hasChallenge);
+        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, challenge);
         intent.setClassName(ConfirmDeviceCredentialBaseFragment.PACKAGE, activityClass.getName());
         if (mFragment != null) {
             mFragment.startActivityForResult(intent, request);
