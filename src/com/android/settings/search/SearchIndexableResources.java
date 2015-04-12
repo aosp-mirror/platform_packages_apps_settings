@@ -34,7 +34,7 @@ import com.android.settings.WirelessSettings;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.applications.AdvancedAppSettings;
 import com.android.settings.bluetooth.BluetoothSettings;
-import com.android.settings.deviceinfo.Memory;
+import com.android.settings.deviceinfo.StorageSettings;
 import com.android.settings.deviceinfo.UsbSettings;
 import com.android.settings.fuelgauge.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
@@ -170,11 +170,11 @@ public final class SearchIndexableResources {
                         ZenModePrioritySettings.class.getName(),
                         R.drawable.ic_settings_notifications));
 
-        sResMap.put(Memory.class.getName(),
+        sResMap.put(StorageSettings.class.getName(),
                 new SearchIndexableResource(
-                        Ranking.getRankForClassName(Memory.class.getName()),
+                        Ranking.getRankForClassName(StorageSettings.class.getName()),
                         NO_DATA_RES_ID,
-                        Memory.class.getName(),
+                        StorageSettings.class.getName(),
                         R.drawable.ic_settings_storage));
 
         sResMap.put(UsbSettings.class.getName(),

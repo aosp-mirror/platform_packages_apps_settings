@@ -1415,15 +1415,31 @@
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.deviceinfo.Memory" />
+                android:value="com.android.settings.deviceinfo.StorageSettings" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/storage_settings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
 
-        <activity android:name=".deviceinfo.MiscFilesHandler"
-                android:theme="@style/Theme.SubSettingsDialogWhenLarge"/>
+        <activity
+                android:name="Settings$StorageVolumeSettingsActivity"
+                android:label="@string/storage_settings_title"
+                android:taskAffinity="com.android.settings"
+                android:parentActivityName="Settings$StorageSettingsActivity">
+            <intent-filter>
+                <action android:name="android.provider.action.DOCUMENT_ROOT_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data
+                    android:scheme="content"
+                    android:host="com.android.externalstorage.documents"
+                    android:mimeType="vnd.android.document/root" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.deviceinfo.PublicVolumeSettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/storage_settings" />
+        </activity>
 
         <activity android:name="ApnEditor"
                 android:label="@string/apn_edit">

@@ -32,7 +32,7 @@ import com.android.settings.WirelessSettings;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.applications.AdvancedAppSettings;
 import com.android.settings.bluetooth.BluetoothSettings;
-import com.android.settings.deviceinfo.Memory;
+import com.android.settings.deviceinfo.StorageSettings;
 import com.android.settings.deviceinfo.UsbSettings;
 import com.android.settings.fuelgauge.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
@@ -129,7 +129,7 @@ public final class Ranking {
         sRankMap.put(ZenModeAutomationSettings.class.getName(), RANK_NOTIFICATIONS);
 
         // Storage
-        sRankMap.put(Memory.class.getName(), RANK_STORAGE);
+        sRankMap.put(StorageSettings.class.getName(), RANK_STORAGE);
         sRankMap.put(UsbSettings.class.getName(), RANK_STORAGE);
 
         // Battery

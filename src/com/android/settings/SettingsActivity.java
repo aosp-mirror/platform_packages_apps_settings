@@ -82,7 +82,8 @@ import com.android.settings.dashboard.DashboardSummary;
 import com.android.settings.dashboard.DashboardTile;
 import com.android.settings.dashboard.NoHomeDialogFragment;
 import com.android.settings.dashboard.SearchResultsSummary;
-import com.android.settings.deviceinfo.Memory;
+import com.android.settings.deviceinfo.PublicVolumeSettings;
+import com.android.settings.deviceinfo.StorageSettings;
 import com.android.settings.deviceinfo.UsbSettings;
 import com.android.settings.fuelgauge.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
@@ -305,7 +306,8 @@ public class SettingsActivity extends Activity
             CaptionPropertiesFragment.class.getName(),
             com.android.settings.accessibility.ToggleDaltonizerPreferenceFragment.class.getName(),
             TextToSpeechSettings.class.getName(),
-            Memory.class.getName(),
+            StorageSettings.class.getName(),
+            PublicVolumeSettings.class.getName(),
             DevelopmentSettings.class.getName(),
             UsbSettings.class.getName(),
             AndroidBeam.class.getName(),

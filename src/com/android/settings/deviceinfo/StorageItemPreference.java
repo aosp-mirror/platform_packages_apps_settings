@@ -62,4 +62,8 @@ public class StorageItemPreference extends Preference {
         shape.getPaint().setColor(color);
         return shape;
     }
+
+    public void setLoading() {
+        setSummary(R.string.memory_calculating_size);
+    }
 }
