@@ -268,11 +268,12 @@
     <string name="sd_card_settings_label" product="default" msgid="5743100901106177102">"កាត​អេសឌី"</string>
     <string name="proxy_settings_label" msgid="3271174136184391743">"ការ​កំណត់​ប្រូកស៊ី"</string>
     <string name="cancel" msgid="6859253417269739139">"បោះ​បង់​"</string>
+    <string name="cancel_all_caps" msgid="3183966387632229461">"បោះបង់"</string>
+    <string name="continue_all_caps" msgid="5152713914673789893">"បន្ត"</string>
     <string name="okay" msgid="1997666393121016642">"យល់ព្រម"</string>
-    <!-- no translation found for forget (1400428660472591263) -->
-    <skip />
-    <!-- no translation found for save (879993180139353333) -->
-    <skip />
+    <string name="yes_all_caps" msgid="5454685069075197457">"បាទ/ចាស"</string>
+    <string name="no_all_caps" msgid="3242375449351298529">"ទេ"</string>
+    <string name="forget" msgid="7267115980248732932">"បំភ្លេច"</string>
     <string name="settings_label" msgid="1626402585530130914">"ការ​កំណត់"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"ការ​កំណត់"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"កំណត់​ផ្លូវកាត់"</string>
@@ -520,8 +521,7 @@
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"កម្រិត​ខ្ពស់"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"ប៊្លូធូស​កម្រិត​ខ្ពស់"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"នៅពេលបានបើកប៊្លូធូសឧបករណ៍របស់អ្នកអាចទាក់ទងជាមួយឧបករណ៍ប៊្លូធូសនៅក្បែរ​ផ្សេងៗទៀតបាន។"</string>
-    <!-- no translation found for ble_scan_notify_text (3719383048635344071) -->
-    <skip />
+    <string name="ble_scan_notify_text" msgid="9019985398053764737">"ដើម្បីធ្វើឲ្យទីតាំងមានភាពសុក្រិត សេវាកម្ម Google នឹងស្កេនរកឧបករណ៍ប៊្លូធូស បើទោះបីជាប៊្លូធូសនោះបិទក៏ដោយ។ អ្នកអាចប្តូរវានៅក្នុង LINK_BEGINការកំណត់ការស្កេនLINK_END។"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"តភ្ជាប់​ជា​មួយ…"</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> នឹង​ត្រូវ​បាន​ផ្ដាច់​ពី​សំឡេង​មេឌៀ។"</string>
     <string name="bluetooth_disconnect_headset_profile" msgid="8635908811168780720">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> នឹង​ត្រូវ​បាន​ផ្ដាច់​ពី​អូឌីយ៉ូ​កាស។"</string>
@@ -587,8 +587,7 @@
     <string name="wifi_automatically_connect_summary" msgid="6722194413023965902">"អនុញ្ញាតឲ្យជំនួយការ Wi‑Fi ភ្ជាប់ទៅបណ្តាញបើកដែលត្រូវបានកំណត់ថាមានគុណភាពសេវាខ្ពស់ដោយស្វ័យប្រវត្តិ"</string>
     <string name="wifi_select_assistant_dialog_title" msgid="4014645210955009439">"ជ្រើសរើសជំនួយការ"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"ដំឡើង​វិញ្ញាបនបត្រ"</string>
-    <!-- no translation found for wifi_scan_notify_text (3135282824516650989) -->
-    <skip />
+    <string name="wifi_scan_notify_text" msgid="8382526568324164356">"ដើម្បីធ្វើឲ្យទីតាំងមានភាពសុក្រិត សេវាកម្ម Google នឹងស្កេនរកបណ្តាញ Wi-Fi បើទោះបីជា Wi-Fi នោះបិទក៏ដោយ។ អ្នកអាចប្តូរវានៅក្នុង LINK_BEGINការកំណត់ការស្កេនLINK_END។"</string>
     <string name="wifi_scan_notify_remember_choice" msgid="5340097010842405981">"កុំ​បង្ហាញ​ម្ដង​ទៀត"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"បើក​វ៉ាយហ្វាយ​​អំឡុង​ពេល​ដេក"</string>
     <string name="wifi_setting_on_during_sleep_title" msgid="8308975500029751565">"បើក​វ៉ាយហ្វាយ​អំឡុង​ពេល​ដេក"</string>
@@ -735,10 +734,12 @@
   <string-array name="wifi_calling_mode_choices">
     <item msgid="2124257075906188844">"គួរប្រើ Wi-Fi"</item>
     <item msgid="5267397515594230396">"គួរប្រើប្រព័ន្ធទូរស័ព្ទ"</item>
+    <item msgid="3132912693346866895">"Wi-Fi តែប៉ុណ្ណោះ"</item>
   </string-array>
   <string-array name="wifi_calling_mode_values">
     <item msgid="4799585830102342375">"2"</item>
     <item msgid="1171822231056612021">"1"</item>
+    <item msgid="3194458950573886239">"0"</item>
   </string-array>
     <string name="wifi_calling_off_explanation" msgid="4124926334215228094">"នៅពេលការហៅតាម Wi-Fi បានបើក ទូរស័ព្ទរបស់អ្នកអាចធ្វើការហៅចេញតាមរយៈបណ្តាញ Wi-Fi ឬបណ្តាញរបស់ក្រុមហ៊ុនរបស់អ្នក ដោយផ្អែកលើចំណូលចិត្តរបស់អ្នក និងថាតើ signal ណាមួយខ្លាំងជាង។ មុនពេលបើកលក្ខណៈពិសេសនេះ សូមត្រួតពិនិត្យជាមួយក្រុមហ៊ុនរបស់អ្នកពាក់ព័ន្ធនឹងតម្លៃ និងព័ត៌មានលម្អិតផ្សេងទៀត។"</string>
     <string name="home_settings" msgid="212375129455718176">"ដើម"</string>
@@ -912,14 +913,12 @@
     <string name="memory_available_read_only" msgid="6497534390167920206">"ទំនេរ (បាន​តែ​អាន)"</string>
     <string name="memory_size" msgid="6629067715017232195">"ទំហំ​សរុប"</string>
     <string name="memory_calculating_size" msgid="2188358544203768588">"កំពុង​គណនា..."</string>
-    <!-- no translation found for memory_apps_usage (5128673488173839077) -->
-    <skip />
+    <string name="memory_apps_usage" msgid="2348501997988663688">"កម្មវិធី (ទិន្នន័យ​កម្មវិធី &amp; មាតិកា​មេឌៀ)"</string>
     <string name="memory_media_usage" msgid="3738830697707880405">"មេឌៀ"</string>
     <string name="memory_downloads_usage" msgid="3755173051677533027">"ទាញយក"</string>
     <string name="memory_dcim_usage" msgid="558887013613822577">"រូបភាព និង​វីដេអូ"</string>
     <string name="memory_music_usage" msgid="1363785144783011606">"អូឌីយ៉ូ (តន្ត្រី សំឡេង​រោទ៍ ផតខាស់ ។ល។)"</string>
-    <!-- no translation found for memory_media_misc_usage (6094866738586451683) -->
-    <skip />
+    <string name="memory_media_misc_usage" msgid="235452944021647124">"ផ្សេងៗ"</string>
     <string name="memory_media_cache_usage" msgid="6704293333141177910">"បាន​ដាក់​ទិន្នន័យ​ក្នុង​ឃ្លាំង​សម្ងាត់"</string>
     <string name="sd_eject" product="nosdcard" msgid="4988563376492400073">"ផ្ដាច់​​ឧបករណ៍​ផ្ទុក​ចែករំលែក"</string>
     <string name="sd_eject" product="default" msgid="6915293408836853020">"ផ្ដាច់​កាត​អេសឌី"</string>
@@ -952,16 +951,6 @@
     <string name="sd_ejecting_summary" msgid="2028753069184908491">"ការ​ផ្ដាច់​​កំពុង​ដំណើរការ"</string>
     <string name="storage_low_title" msgid="1388569749716225155">"អស់​ទំហំផ្ទុក"</string>
     <string name="storage_low_summary" msgid="7737465774892563129">"មុខងារ​ប្រព័ន្ធ​មួយ​ចំនួន​ដូច​ជា ការ​ធ្វើ​សម​កាល​កម្ម​អាច​ដំណើរការ​មិន​ត្រឹមត្រូវ។ ព្យាយាម​បង្កើត​ទំហំ ដោយ​លុប​ ឬ​​ដោះ​ខ្ទាស់​ធាតុ​មួយ​ចំនួន​ដូច​ជា កម្មវិធី ឬ​មាតិកា​មេឌៀ។"</string>
-    <!-- no translation found for storage_menu_rename (7141058657592615390) -->
-    <skip />
-    <!-- no translation found for storage_menu_mount (1014683672493425425) -->
-    <skip />
-    <!-- no translation found for storage_menu_unmount (681485356885955898) -->
-    <skip />
-    <!-- no translation found for storage_menu_format (8334422679047059459) -->
-    <skip />
-    <!-- no translation found for storage_menu_format_internal (6553368530402755543) -->
-    <skip />
     <string name="storage_menu_usb" msgid="5708207885333243384">"ការ​តភ្ជាប់​កុំព្យូទ័រ​តាម​យូអេសប៊ី"</string>
     <string name="storage_title_usb" msgid="679612779321689418">"ការ​តភ្ជាប់​កុំព្យូទ័រ​តាម​យូអេសប៊ី"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"តភ្ជាប់​ជា"</string>
@@ -972,26 +961,6 @@
     <string name="usb_midi_title" msgid="3069990264258413994">"មីឌី"</string>
     <string name="usb_midi_summary" msgid="539169474810956358">"អនុញ្ញាតឲ្យកម្មវិធីដែលគាំទ្រមីឌីដំណើរកាលើ USB ជាមួយកម្មវិធីមីឌីនៅលើកុំព្យូទ័របស់អ្នក។"</string>
     <string name="storage_other_users" msgid="808708845102611856">"អ្នក​ប្រើ​ផ្សេង"</string>
-    <!-- no translation found for storage_internal_title (690771193137801021) -->
-    <skip />
-    <!-- no translation found for storage_external_title (2723851748972673696) -->
-    <skip />
-    <!-- no translation found for storage_volume_summary (476551204412943800) -->
-    <skip />
-    <!-- no translation found for storage_mount_success (687641090137253647) -->
-    <skip />
-    <!-- no translation found for storage_mount_failure (8928389741212129060) -->
-    <skip />
-    <!-- no translation found for storage_unmount_success (5737203344673441677) -->
-    <skip />
-    <!-- no translation found for storage_unmount_failure (4161722509712992231) -->
-    <skip />
-    <!-- no translation found for storage_format_success (3023144070597190555) -->
-    <skip />
-    <!-- no translation found for storage_format_failure (8343688274191391889) -->
-    <skip />
-    <!-- no translation found for storage_rename_title (8242663969839491485) -->
-    <skip />
     <string name="battery_status_title" msgid="9159414319574976203">"ស្ថានភាព​ថ្ម"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"កម្រិត​ថ្ម"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APNs"</string>
@@ -1141,14 +1110,6 @@
     <string name="location_mode_sensors_only_description" msgid="788127681455735699">"ប្រើ GPS ដើម្បីកំណត់ទីតាំងរបស់អ្នក"</string>
     <string name="location_menu_scanning" msgid="8536245838478802959">"ការស្កេន"</string>
     <string name="location_scanning_screen_title" msgid="4408076862929611554">"ការស្កេន"</string>
-    <!-- no translation found for location_scanning_wifi_always_scanning_title (6216705505621183645) -->
-    <skip />
-    <!-- no translation found for location_scanning_wifi_always_scanning_description (2070686681074461301) -->
-    <skip />
-    <!-- no translation found for location_scanning_bluetooth_always_scanning_title (5444989508204520019) -->
-    <skip />
-    <!-- no translation found for location_scanning_bluetooth_always_scanning_description (7308864666710919365) -->
-    <skip />
     <string name="location_network_based" msgid="6010456018401296590">"ទីតាំងបណ្ដាញចល័ត &amp; វ៉ាយហ្វាយ"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"ឲ្យ​កម្មវិធី​ប្រើ​សេវាកម្ម​ទីតាំង​របស់ Google ដើម្បី​ស្មាន​ទីតាំង​របស់​អ្នក​កាន់តែ​លឿន។ ទិន្នន័យ​ទីតាំង​អនាមិក​នឹង​ត្រូវ​បាន​ប្រមូល​ រួច​ផ្ញើ​ទៅ Google ។"</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"ទីតាំង​បាន​កំណត់​ដោយ​វ៉ាយហ្វាយ"</string>
@@ -2432,8 +2393,6 @@
     <string name="keywords_emergency_app" msgid="6542122071127391103">"កម្មវិធីក្នុងគ្រាមានអាសន្នលំនាំដើម"</string>
     <string name="keywords_all_apps" msgid="5377153522551809915">"កម្មវិធីទាញយកប្រព័ន្ធកម្មវិធី"</string>
     <string name="keywords_app_permissions" msgid="8677901415217188314">"សុវត្ថិភាពសិទ្ធិកម្មវិធី"</string>
-    <!-- no translation found for keywords_default_apps (3581727483175522599) -->
-    <skip />
     <string name="keywords_lockscreen" msgid="4806191868723291541">"រុញ​ពាក្យសម្ងាត់ លំនាំ កូដ pin"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"រៀបចំ​ស្លាក​អិនអេហ្វ​ស៊ី​វ៉ាយហ្វាយ"</string>
     <string name="write_tag" msgid="8571858602896222537">"សរសេរ"</string>
@@ -2448,18 +2407,14 @@
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"កម្រិត​សំឡេង​រោទ៍"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"កម្រិត​សំឡេង​រោទ៍"</string>
     <string name="notification_volume_option_title" msgid="6064656124416882130">"កម្រិត​សំឡេង​ការ​ជូន​ដំណឹង"</string>
-    <!-- no translation found for zen_mode_settings_title (8708952509674244923) -->
-    <skip />
+    <string name="zen_mode_settings_title" msgid="6948120138640252732">"រារាំងការរំខាន"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"អនុញ្ញាតអាទិភាពប៉ុណ្ណោះ"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"ច្បាប់ស្វ័យប្រវត្តិ"</string>
-    <!-- no translation found for zen_mode_option_important_interruptions (3903928008177972500) -->
-    <skip />
-    <!-- no translation found for zen_mode_option_alarms (5785372117288803600) -->
-    <skip />
-    <!-- no translation found for zen_mode_option_no_interruptions (1168212070233080706) -->
-    <skip />
-    <!-- no translation found for zen_mode_summary_combination (8715563402849273459) -->
-    <skip />
+    <string name="zen_mode_option_title" msgid="5061978632306007914">"ពេល​មាន​ការ​ហៅ និង​ការ​ជូន​ដំណឹង"</string>
+    <string name="zen_mode_option_off" msgid="3167702608910820883">"ផ្អាក​ជា​និច្ច"</string>
+    <string name="zen_mode_option_important_interruptions" msgid="2320263300561981257">"អនុញ្ញាត​តែ​ការ​​​ផ្អាក​​អាទិភាព​ប៉ុណ្ណោះ"</string>
+    <string name="zen_mode_option_alarms" msgid="7380265858042606857">"អនុញ្ញាតតែសំឡេងរោទិ៍ប៉ុណ្ណោះ"</string>
+    <string name="zen_mode_option_no_interruptions" msgid="5664234817617301449">"កុំ​ផ្អាក"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"សំឡេង​រោទ៍​ទូរស័ព្ទ"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"សំឡេង​រោទ៍​ការ​ជូនដំណឹង​លំនាំដើម"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"ញ័រ​សម្រាប់​ការ​ហៅ​ដែរ"</string>
@@ -2492,6 +2447,15 @@
     <string name="no_notification_listeners" msgid="2767405417723149879">"គ្មាន​កម្មវិធី​ស្ដាប់ការ​ជូន​ដំណឹង​បាន​ដំឡើង។"</string>
     <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"បើក <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> នឹង​អាច​អាន​ការ​ជូន​ដំណឹង​ទាំងអស់​ដែល​បាន​ប្រកាស​ដោយ​ប្រព័ន្ធ ឬ​កម្មវិធី​បាន​ដំឡើង ដែល​អាច​មាន​ព័ត៌មាន​ផ្ទាល់​ខ្លួន​ដូច​ជា ឈ្មោះ​ទំនាក់ទំនង និង​អត្ថបទ​សារ​បាន​ផ្ញើ​ឲ្យ​អ្នក។ វា​ក៏​អាច​បដិសេធ​ការ​ជូន​ដំណឹង​ទាំង​នេះ​ ឬ​ប៉ះ​ប៊ូតុង​សកម្មភាព​​។"</string>
+    <string name="manage_condition_providers" msgid="3039306415273606730">"កម្មវិធី​ផ្ដល់​លក្ខខណ្ឌ"</string>
+    <string name="manage_condition_providers_summary_zero" msgid="3760902189574984100">"គ្មាន​កម្មវិធី​ផ្ដល់​លក្ខខណ្ឌ"</string>
+    <plurals name="manage_condition_providers_summary_nonzero" formatted="false" msgid="1398308139164964218">
+      <item quantity="other">កម្មវិធី %d ត្រូវបានផ្តល់លក្ខខណ្ឌ</item>
+      <item quantity="one">កម្មវិធី %d ត្រូវបានផ្តល់លក្ខខណ្ឌ</item>
+    </plurals>
+    <string name="no_condition_providers" msgid="6183782892066424125">"មិន​បាន​ដំឡើង​​កម្មវិធី​ផ្ដល់​លក្ខខណ្ឌ។"</string>
+    <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"បើក <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"<xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g> នឹង​អាច​បន្ថែម​លក្ខខណ្ឌ​ចេញ​ទៅកាន់​របៀប​កុំ​រំខាន។"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"កំពុង​ផ្ទុក​កម្មវិធី..."</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"រារាំងទាំងអស់"</string>
     <string name="app_notification_block_summary" msgid="9049487483231233726">"កុំ​បង្ហាញ​ការ​ជូន​ដំណឹង​សម្រាប់​កម្មវិធី​នេះ"</string>
@@ -2505,31 +2469,17 @@
     <string name="app_notification_row_priority" msgid="7723839972982746568">"អាទិភាព"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"ជាក់លាក់"</string>
     <string name="app_notifications_dialog_done" msgid="3484067728568791014">"រួចរាល់"</string>
-    <!-- no translation found for zen_mode_rule_name (5149068059383837549) -->
-    <skip />
-    <!-- no translation found for zen_mode_time_add_rule (8651108307310558795) -->
-    <skip />
-    <!-- no translation found for zen_mode_delete_rule (2985902330199039533) -->
-    <skip />
-    <!-- no translation found for zen_mode_delete_rule_confirmation (5338206274433295824) -->
-    <skip />
-    <!-- no translation found for zen_mode_delete_rule_button (4248741120307752294) -->
-    <skip />
-    <!-- no translation found for zen_mode_rule_not_found_text (8963662446092059836) -->
-    <skip />
-    <!-- no translation found for zen_mode_rule_summary_template (353487530822631490) -->
-    <skip />
-    <!-- no translation found for zen_mode_schedule_rule_days (3195058680641389948) -->
-    <skip />
-    <!-- no translation found for zen_mode_schedule_rule_days_none (4954143628634166317) -->
-    <skip />
-    <!-- no translation found for zen_mode_schedule_rule_days_all (146511166522076034) -->
-    <skip />
+    <string name="zen_mode_default_option" msgid="6940069025071935243">"រហូត​ដល់ពេល​​អ្នក​បិទ​វា"</string>
+    <string name="zen_mode_downtime_category" msgid="2654477732333340290">"រាប់​ថយក្រោយ"</string>
+    <string name="zen_mode_downtime_days" msgid="3361856902633311616">"ថ្ងៃ"</string>
+    <string name="zen_mode_downtime_days_none" msgid="8454857121193391322">"គ្មាន"</string>
+    <string name="zen_mode_downtime_mode_title" msgid="7249388756365079715">"បាន​អនុញ្ញាត​ការ​ផ្អាក"</string>
+    <string name="zen_mode_downtime_mode_priority" msgid="1599184173608032994">"តែ​អាទិភាព​ប៉ុណ្ណោះ"</string>
+    <string name="zen_mode_downtime_mode_none" msgid="8572229891146527069">"គ្មាន"</string>
+    <string name="zen_mode_automation_category" msgid="4653551005950835761">"ស្វ័យ​ប្រវត្តិ"</string>
+    <string name="zen_mode_entry_conditions_title" msgid="8467976490601914289">"បើក​ដោយ​ស្វ័យ​ប្រវត្តិ"</string>
     <string name="summary_divider_text" msgid="7228986578690919294">", "</string>
-    <!-- no translation found for summary_range_symbol_combination (5695218513421897027) -->
-    <skip />
-    <!-- no translation found for summary_range_verbal_combination (8467306662961568656) -->
-    <skip />
+    <string name="zen_mode_entry_conditions_summary_none" msgid="6589476427475076533">"កុំ"</string>
     <string name="zen_mode_calls" msgid="7051492091133751208">"ហៅ"</string>
     <string name="zen_mode_messages" msgid="5886440273537510894">"សារ"</string>
     <string name="zen_mode_from" msgid="1033337300289871697">"ការ​ហៅ​ទូរស័ព្ទ/​ផ្ញើ​សារ​ពី"</string>
@@ -2539,20 +2489,15 @@
     <string name="zen_mode_alarms" msgid="2165302777886552926">"សំឡេងរោទ៍"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"កម្មវិធីរំលឹក"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"ព្រឹត្តិការណ៍"</string>
-    <!-- no translation found for zen_mode_selected_callers (3127598874060615742) -->
-    <skip />
-    <!-- no translation found for zen_mode_repeat_callers (5019521886428322131) -->
-    <skip />
-    <!-- no translation found for zen_mode_repeat_callers_summary (7192713032364140137) -->
-    <skip />
     <string name="zen_mode_when" msgid="2767193283311106373">"បើកដោយស្វ័យ​ប្រវត្តិ"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"កុំ"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"រាល់​យប់"</string>
     <string name="zen_mode_when_weeknights" msgid="8354070633893273783">"យប់​សប្ដាហ៍​ធ្វើការ"</string>
     <string name="zen_mode_start_time" msgid="8102602297273744441">"ម៉ោង​ចាប់ផ្ដើម"</string>
     <string name="zen_mode_end_time" msgid="8774327885892705505">"ម៉ោង​បញ្ចប់"</string>
-    <!-- no translation found for zen_mode_end_time_next_day_summary_format (4201521691238728701) -->
-    <skip />
+    <string name="zen_mode_end_time_priority_next_day_summary_format" msgid="2910982148167785730">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> ថ្ងៃបន្ទាប់"</string>
+    <string name="zen_mode_end_time_none_same_day_summary_format" msgid="2002665300812473888">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> ឬការដាស់តឿនណាមួយមុននោះ"</string>
+    <string name="zen_mode_end_time_none_next_day_summary_format" msgid="732719357166551378">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> ថ្ងៃបន្ទាប់ ឬការដាស់តឿនណាមួយមុននោះ"</string>
     <string name="notification_settings_apps_title" msgid="1125354590652967250">"ការជូន​ដំណឹងកម្មវិធី"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"​កំណត់​ការ​ជូនដំណឹង"</string>
     <string name="device_feedback" msgid="3238056036766293294">"ផ្ដល់​មតិ​ស្ថាបនា​អំពី​ឧបករណ៍​នេះ"</string>
@@ -2617,10 +2562,7 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g>ការអនុញ្ញាតដែលទទួលបាន</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g>ការអនុញ្ញាតដែលទទួលបាន</item>
     </plurals>
-    <plurals name="runtime_permissions_summary" formatted="false" msgid="1564663886246010959">
-      <item quantity="other">បានទទួលការអនុញ្ញាត <xliff:g id="COUNT_2">%d</xliff:g> នៃ <xliff:g id="COUNT_3">%d</xliff:g></item>
-      <item quantity="one">បានទទួលការអនុញ្ញាត <xliff:g id="COUNT_0">%d</xliff:g> នៃ <xliff:g id="COUNT_1">%d</xliff:g></item>
-    </plurals>
+    <!-- no translation found for runtime_permissions_summary (1564663886246010959) -->
     <string name="launch_defaults_some" msgid="313159469856372621">"លំនាំដើមមួយចំនួនត្រូវបានកំណត់"</string>
     <string name="launch_defaults_none" msgid="4241129108140034876">"គ្មានការកំណត់លំនាំដើម"</string>
     <string name="filter_all_apps" msgid="1988403195820688644">"កម្មវិធីទាំងអស់"</string>
@@ -2647,10 +2589,4 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> កម្មវិធីអាចបើកដែន URLs របស់ពួកវា</item>
       <item quantity="one">កម្មវិធីមួយអាចបើកដែន URLs របស់ខ្លួន</item>
     </plurals>
-    <!-- no translation found for default_apps_title (1854974637597514435) -->
-    <skip />
-    <!-- no translation found for default_browser_title (5768394150460991636) -->
-    <skip />
-    <!-- no translation found for default_browser_title_none (2124785489953628553) -->
-    <skip />
 </resources>
