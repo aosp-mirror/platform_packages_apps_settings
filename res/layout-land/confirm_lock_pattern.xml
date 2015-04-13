@@ -13,56 +13,102 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-
 <com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/topLayout"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false">
 
-    <!-- left side: instructions and messages -->
     <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="0dip"
-            android:layout_height="match_parent"
-            android:layout_weight="1.0"
-            >
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:orientation="vertical">
 
-        <!-- header message -->
-        <TextView android:id="@+id/headerText"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:layout_marginTop="16dp"
-                  android:gravity="center"
-                  android:textSize="18sp"/>
+        <TextView
+            style="@android:style/TextAppearance.Material.Headline"
+            android:id="@+id/headerText"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?android:attr/colorAccent"/>
 
-        <!-- fill space between header and button below -->
-        <View
-            android:layout_weight="1.0"
-            android:layout_width="match_parent"
-            android:layout_height="0dip"
-            />
+        <TextView
+            style="@android:style/TextAppearance.Material.Body1"
+            android:id="@+id/detailsText"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginTop="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
-        <!-- footer message -->
-        <TextView android:id="@+id/footerText"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:gravity="center"
-                  android:textSize="14sp"/>
+        <Button
+            style="@android:style/Widget.Material.Button.Borderless"
+            android:id="@+id/cancelButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"/>
     </LinearLayout>
 
-    <View
-         android:background="@*android:drawable/code_lock_left"
-         android:layout_width="2dip"
-         android:layout_height="match_parent" />
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:clipChildren="false"
+        android:clipToPadding="false">
 
-    <!-- right side: lock pattern -->
-    <com.android.internal.widget.LockPatternView android:id="@+id/lockPattern"
-         android:layout_width="match_parent"
-         android:layout_height="match_parent"
-         android:background="@color/lock_pattern_background" />
+        <View
+            android:id="@+id/leftSpacer"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.4"/>
 
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:clipChildren="false"
+            android:clipToPadding="false">
+
+            <com.android.internal.widget.LockPatternView
+                android:id="@+id/lockPattern"
+                android:layout_width="288dp"
+                android:layout_height="288dp"
+                android:layout_marginStart="-42dp"
+                android:layout_marginEnd="-42dp"
+                android:layout_gravity="center_vertical"/>
+
+            <TextView
+                style="@style/TextAppearance.ConfirmDeviceCredentialsErrorText"
+                android:id="@+id/errorText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_marginBottom="24dp"/>
+        </FrameLayout>
+
+        <View
+            android:id="@+id/rightSpacer"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+
+        <ImageView
+            android:id="@+id/fingerprintIcon"
+            android:layout_gravity="center_vertical"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+    </LinearLayout>
 
 </com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient>
 

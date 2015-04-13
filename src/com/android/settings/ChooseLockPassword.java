@@ -243,7 +243,7 @@ public class ChooseLockPassword extends SettingsActivity {
                 updateStage(Stage.Introduction);
                 if (confirmCredentials) {
                     mChooseLockSettingsHelper.launchConfirmationActivity(CONFIRM_EXISTING_REQUEST,
-                            null, null);
+                            getString(R.string.unlock_set_unlock_launch_picker_title));
                 }
             } else {
                 mFirstPin = savedInstanceState.getString(KEY_FIRST_PIN);

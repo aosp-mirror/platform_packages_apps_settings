@@ -72,9 +72,8 @@ public class MediaFormat extends Activity {
      * component as a subactivity
      */
     private boolean runKeyguardConfirmation(int request) {
-        return new ChooseLockSettingsHelper(this)
-                .launchConfirmationActivity(request, null,
-                        getText(R.string.media_format_gesture_explanation));
+        return new ChooseLockSettingsHelper(this).launchConfirmationActivity(request,
+                getText(R.string.media_format_title));
     }
 
     @Override

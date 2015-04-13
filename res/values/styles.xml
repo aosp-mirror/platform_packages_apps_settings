@@ -78,7 +78,6 @@
     <style name="TextAppearance.PasswordEntry" parent="android:TextAppearance.Material">
         <item name="android:gravity">center</item>
         <item name="android:singleLine">true</item>
-        <item name="android:textStyle">bold</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>
     </style>
 
@@ -348,6 +347,11 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/fingerprint_message_color</item>
+    </style>
+
+    <style name="TextAppearance.ConfirmDeviceCredentialsErrorText"
+        parent="android:TextAppearance.Material.Caption">
+        <item name="android:textColor">@color/warning</item>
     </style>
 
     <style name="TextAppearance.Small.SwitchBar">

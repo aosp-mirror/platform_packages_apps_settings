@@ -211,4 +211,24 @@
         <item name="android:colorAccent">@color/switch_accent_color</item>
     </style>
 
+    <style name="Theme.ConfirmDeviceCredentials" parent="Theme.SubSettings">
+        <item name="confirmDeviceCredentialsSideMargin">16dp</item>
+        <item name="confirmDeviceCredentialsTopMargin">16dp</item>
+    </style>
+
+    <style name="Theme.ConfirmDeviceCredentialsDark" parent="@android:style/Theme.Material">
+        <item name="android:colorPrimary">@*android:color/material_blue_grey_900</item>
+        <item name="android:colorPrimaryDark">@*android:color/material_blue_grey_950</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="preferenceBackgroundColor">@color/confirm_device_credential_dark_background</item>
+
+        <item name="confirmDeviceCredentialsSideMargin">32dp</item>
+        <item name="confirmDeviceCredentialsTopMargin">32dp</item>
+
+        <!-- LockPatternView colors -->
+        <item name="@*android:regularColor">@color/lock_pattern_view_regular_color_dark</item>
+        <item name="@*android:successColor">@color/lock_pattern_view_regular_color_dark</item>
+        <item name="@*android:errorColor">@color/lock_pattern_view_error_color</item>
+    </style>
 </resources>

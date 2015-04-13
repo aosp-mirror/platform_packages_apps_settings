@@ -1299,10 +1299,12 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="ConfirmLockPattern"/>
+        <activity android:name="ConfirmLockPattern"
+            android:theme="@style/Theme.ConfirmDeviceCredentials"/>
 
         <activity android:name="ConfirmLockPassword"
-            android:windowSoftInputMode="stateVisible|adjustResize"/>
+            android:windowSoftInputMode="stateVisible|adjustResize"
+            android:theme="@style/Theme.ConfirmDeviceCredentials"/>
 
         <activity android:name="FingerprintSettings" android:exported="false"/>
         <activity android:name="FingerprintEnroll" android:exported="false"/>

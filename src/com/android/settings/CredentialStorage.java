@@ -439,9 +439,8 @@ public final class CredentialStorage extends Activity {
     private boolean confirmKeyGuard() {
         Resources res = getResources();
         boolean launched = new ChooseLockSettingsHelper(this)
-                .launchConfirmationActivity(CONFIRM_KEY_GUARD_REQUEST, null,
-                                            res.getText(R.string.credentials_install_gesture_explanation),
-                                            true);
+                .launchConfirmationActivity(CONFIRM_KEY_GUARD_REQUEST,
+                        res.getText(R.string.credentials_title), true);
         return launched;
     }
 
