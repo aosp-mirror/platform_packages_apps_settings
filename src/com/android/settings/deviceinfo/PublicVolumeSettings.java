@@ -19,9 +19,10 @@ package com.android.settings.deviceinfo;
 import static com.android.settings.deviceinfo.StorageSettings.EXTRA_VOLUME_ID;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.SystemProperties;
+import android.os.storage.DiskInfo;
 import android.os.storage.StorageEventListener;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
@@ -52,7 +53,9 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
 
     private StorageManager mStorageManager;
 
+    private String mVolumeId;
     private VolumeInfo mVolume;
+    private DiskInfo mDisk;
 
     private int mNextOrder = 0;
 
@@ -94,6 +97,11 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
         Preconditions.checkNotNull(mVolume);
         Preconditions.checkState(mVolume.type == VolumeInfo.TYPE_PUBLIC);
 
+        mDisk = mStorageManager.findDiskByVolumeId(mVolume.id);
+        Preconditions.checkNotNull(mDisk);
+
+        mVolumeId = mVolume.id;
+
         addPreferencesFromResource(R.xml.device_info_storage_volume);
 
         mGraph = buildGraph();
@@ -127,7 +135,7 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
             screen.addPreference(mUnmount);
         }
         screen.addPreference(mFormat);
-        if (SystemProperties.getBoolean(PREF_FORMAT_INTERNAL, false)) {
+        if ((mDisk.flags & DiskInfo.FLAG_ADOPTABLE) != 0) {
             screen.addPreference(mFormatInternal);
         }
 
@@ -167,6 +175,14 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
     @Override
     public void onResume() {
         super.onResume();
+
+        // Refresh to verify that we haven't been formatted away
+        mVolume = mStorageManager.findVolumeById(mVolumeId);
+        if (mVolume == null) {
+            getActivity().finish();
+            return;
+        }
+
         mStorageManager.registerListener(mStorageListener);
         refresh();
     }
@@ -187,7 +203,9 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
         } else if (pref == mFormat) {
             new FormatTask(context, mVolume.id).execute();
         } else if (pref == mFormatInternal) {
-            // TODO: implement this
+            final Intent intent = new Intent(context, StorageWizardFormatConfirm.class);
+            intent.putExtra(StorageWizardBase.EXTRA_DISK_ID, mDisk.id);
+            startActivity(intent);
         }
 
         return super.onPreferenceTreeClick(preferenceScreen, pref);

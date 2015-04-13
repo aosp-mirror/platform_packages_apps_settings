@@ -1441,6 +1441,37 @@
                 android:resource="@id/storage_settings" />
         </activity>
 
+        <!-- Exported for SystemUI to launch into -->
+        <activity android:name=".deviceinfo.StorageWizardInit"
+                android:theme="@style/SuwThemeMaterial.Light"
+                android:taskAffinity="com.android.settings.storage_wizard"
+                android:exported="true" />
+        <activity android:name=".deviceinfo.StorageWizardFormatConfirm"
+                android:taskAffinity="com.android.settings.storage_wizard"
+                android:exported="false" />
+        <activity android:name=".deviceinfo.StorageWizardFormatProgress"
+                android:taskAffinity="com.android.settings.storage_wizard"
+                android:exported="false" />
+        <activity android:name=".deviceinfo.StorageWizardMigrate"
+                android:taskAffinity="com.android.settings.storage_wizard"
+                android:exported="false" />
+        <activity android:name=".deviceinfo.StorageWizardMigrateConfirm"
+                android:taskAffinity="com.android.settings.storage_wizard"
+                android:exported="false" />
+        <activity android:name=".deviceinfo.StorageWizardMigrateProgress"
+                android:taskAffinity="com.android.settings.storage_wizard"
+                android:exported="false" />
+        <activity android:name=".deviceinfo.StorageWizardReady"
+                android:taskAffinity="com.android.settings.storage_wizard"
+                android:exported="false" />
+
+        <activity android:name=".deviceinfo.StorageWizardMoveConfirm"
+                android:taskAffinity="com.android.settings.storage_wizard"
+                android:exported="false" />
+        <activity android:name=".deviceinfo.StorageWizardMoveProgress"
+                android:taskAffinity="com.android.settings.storage_wizard"
+                android:exported="false" />
+
         <activity android:name="ApnEditor"
                 android:label="@string/apn_edit">
             <intent-filter>
