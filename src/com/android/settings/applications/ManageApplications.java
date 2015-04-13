@@ -58,14 +58,15 @@ import com.android.internal.logging.MetricsLogger;
 import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.Settings.AllApplicationsActivity;
+import com.android.settings.Settings.DomainsURLsAppListActivity;
 import com.android.settings.Settings.NotificationAppListActivity;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.applications.ApplicationsState.AppEntry;
 import com.android.settings.applications.ApplicationsState.AppFilter;
+import com.android.settings.applications.ApplicationsState.CompoundFilter;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.NotificationBackend.AppRow;
-import com.android.settings.Settings.DomainsURLsAppListActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -141,19 +142,23 @@ public class ManageApplications extends InstrumentedFragment
     // Filter options used for displayed list of applications
     // The order which they appear is the order they will show when spinner is present.
     public static final int FILTER_APPS_DOWNLOADED_AND_LAUNCHER = 0;
-    public static final int FILTER_APPS_ALL                     = 1;
-    public static final int FILTER_APPS_ENABLED                 = 2;
-    public static final int FILTER_APPS_DISABLED                = 3;
-    public static final int FILTER_APPS_BLOCKED                 = 4;
-    public static final int FILTER_APPS_PRIORITY                = 5;
-    public static final int FILTER_APPS_SENSITIVE               = 6;
-    public static final int FILTER_APPS_PERSONAL                = 7;
-    public static final int FILTER_APPS_WORK                    = 8;
-    public static final int FILTER_APPS_WITH_DOMAIN_URLS        = 9;
+    public static final int FILTER_APPS_DL_ENABLED              = 1;
+    public static final int FILTER_APPS_DL_DISABLED             = 2;
+    public static final int FILTER_APPS_ALL                     = 3;
+    public static final int FILTER_APPS_ENABLED                 = 4;
+    public static final int FILTER_APPS_DISABLED                = 5;
+    public static final int FILTER_APPS_BLOCKED                 = 6;
+    public static final int FILTER_APPS_PRIORITY                = 7;
+    public static final int FILTER_APPS_SENSITIVE               = 8;
+    public static final int FILTER_APPS_PERSONAL                = 9;
+    public static final int FILTER_APPS_WORK                    = 10;
+    public static final int FILTER_APPS_WITH_DOMAIN_URLS        = 11;
 
     // This is the string labels for the filter modes above, the order must be kept in sync.
     public static final int[] FILTER_LABELS = new int[] {
-        R.string.filter_all_apps,      // Downloaded and launcher, spinner not shown in this case
+        R.string.filter_all_apps,      // Downloaded and launcher
+        R.string.filter_enabled_apps,  // Downloaded and launcher, Enabled
+        R.string.filter_apps_disabled, // Downloaded and launcher, Disabled
         R.string.filter_all_apps,      // All apps
         R.string.filter_enabled_apps,  // Enabled
         R.string.filter_apps_disabled, // Disabled
@@ -168,6 +173,12 @@ public class ManageApplications extends InstrumentedFragment
     // be kept in sync.
     public static final AppFilter[] FILTERS = new AppFilter[] {
         ApplicationsState.FILTER_DOWNLOADED_AND_LAUNCHER, // Downloaded and launcher
+        new CompoundFilter(                               // Downloaded and launcher, Enabled
+                ApplicationsState.FILTER_DOWNLOADED_AND_LAUNCHER,
+                ApplicationsState.FILTER_ALL_ENABLED),
+        new CompoundFilter(                               // Downloaded and launcher, Disabled
+                ApplicationsState.FILTER_DOWNLOADED_AND_LAUNCHER,
+                ApplicationsState.FILTER_DISABLED),
         ApplicationsState.FILTER_EVERYTHING,  // All apps
         ApplicationsState.FILTER_ALL_ENABLED, // Enabled
         ApplicationsState.FILTER_DISABLED,    // Disabled
@@ -179,14 +190,12 @@ public class ManageApplications extends InstrumentedFragment
         ApplicationsState.FILTER_WITH_DOMAIN_URLS,   // Apps with Domain URLs
     };
 
-    // sort order that can be changed through the menu can be sorted alphabetically
-    // or size(descending)
-    private static final int MENU_OPTIONS_BASE = 0;
-    public static final int SORT_ORDER_ALPHA = MENU_OPTIONS_BASE + 1;
-    public static final int SORT_ORDER_SIZE = MENU_OPTIONS_BASE + 2;
-    public static final int RESET_APP_PREFERENCES = MENU_OPTIONS_BASE + 3;
     // sort order
-    private int mSortOrder = SORT_ORDER_ALPHA;
+    private int mSortOrder = R.id.sort_order_alpha;
+
+    // whether showing system apps.
+    private boolean mShowSystem;
+    private boolean mHasDisabledApps;
 
     private ApplicationsState mApplicationsState;
 
@@ -214,9 +223,8 @@ public class ManageApplications extends InstrumentedFragment
     private Menu mOptionsMenu;
 
     public static final int LIST_TYPE_MAIN = 0;
-    public static final int LIST_TYPE_ALL = 1;
-    public static final int LIST_TYPE_NOTIFICATION = 2;
-    public static final int LIST_TYPE_DOMAINS_URLS = 3;
+    public static final int LIST_TYPE_NOTIFICATION = 1;
+    public static final int LIST_TYPE_DOMAINS_URLS = 2;
 
     private View mRootView;
 
@@ -224,6 +232,7 @@ public class ManageApplications extends InstrumentedFragment
     private Spinner mFilterSpinner;
     private FilterSpinnerAdapter mFilterAdapter;
     private NotificationBackend mNotifBackend;
+    private ResetAppsHelper mResetAppsHelper;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -238,7 +247,7 @@ public class ManageApplications extends InstrumentedFragment
             className = intent.getComponent().getClassName();
         }
         if (className.equals(AllApplicationsActivity.class.getName())) {
-            mListType = LIST_TYPE_ALL;
+            mShowSystem = true;
         } else if (className.equals(NotificationAppListActivity.class.getName())) {
             mListType = LIST_TYPE_NOTIFICATION;
             mNotifBackend = new NotificationBackend();
@@ -254,6 +263,8 @@ public class ManageApplications extends InstrumentedFragment
         }
 
         mInvalidSizeStr = getActivity().getText(R.string.invalid_size_value);
+
+        mResetAppsHelper = new ResetAppsHelper(getActivity());
     }
 
 
@@ -262,8 +273,6 @@ public class ManageApplications extends InstrumentedFragment
             Bundle savedInstanceState) {
         // initialize the inflater
         mInflater = inflater;
-
-        createHeader();
 
         mRootView = inflater.inflate(R.layout.manage_applications_apps, null);
         mLoadingContainer = mRootView.findViewById(R.id.loading_container);
@@ -294,6 +303,10 @@ public class ManageApplications extends InstrumentedFragment
             ((PreferenceFrameLayout.LayoutParams) mRootView.getLayoutParams()).removeBorders = true;
         }
 
+        createHeader();
+
+        mResetAppsHelper.onRestoreInstanceState(savedInstanceState);
+
         return mRootView;
     }
 
@@ -316,23 +329,23 @@ public class ManageApplications extends InstrumentedFragment
                 mFilterAdapter.enableFilter(FILTER_APPS_WORK);
             }
         }
+        updateMainFilters();
         if (mListType == LIST_TYPE_NOTIFICATION) {
             mFilterAdapter.enableFilter(FILTER_APPS_BLOCKED);
             mFilterAdapter.enableFilter(FILTER_APPS_PRIORITY);
             mFilterAdapter.enableFilter(FILTER_APPS_SENSITIVE);
-        } else if (mListType == LIST_TYPE_DOMAINS_URLS) {
-            mFilterAdapter.disableFilter(FILTER_APPS_ALL);
-            mFilterAdapter.enableFilter(FILTER_APPS_WITH_DOMAIN_URLS);
         }
     }
 
     private int getDefaultFilter() {
-        if (mListType == LIST_TYPE_MAIN) {
-            return FILTER_APPS_DOWNLOADED_AND_LAUNCHER;
-        } else if (mListType == LIST_TYPE_DOMAINS_URLS) {
-            return FILTER_APPS_WITH_DOMAIN_URLS;
+        switch (mListType) {
+            case LIST_TYPE_MAIN:
+                return mShowSystem ? FILTER_APPS_ALL : FILTER_APPS_DOWNLOADED_AND_LAUNCHER;
+            case LIST_TYPE_DOMAINS_URLS:
+                return FILTER_APPS_WITH_DOMAIN_URLS;
+            default:
+                return FILTER_APPS_ALL;
         }
-        return FILTER_APPS_ALL;
     }
 
     @Override
@@ -340,8 +353,6 @@ public class ManageApplications extends InstrumentedFragment
         switch (mListType) {
             case LIST_TYPE_MAIN:
                 return MetricsLogger.MANAGE_APPLICATIONS;
-            case LIST_TYPE_ALL:
-                return MetricsLogger.MANAGE_APPLICATIONS_ALL;
             case LIST_TYPE_NOTIFICATION:
                 return MetricsLogger.MANAGE_APPLICATIONS_NOTIFICATIONS;
             case LIST_TYPE_DOMAINS_URLS:
@@ -365,6 +376,7 @@ public class ManageApplications extends InstrumentedFragment
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        mResetAppsHelper.onSaveInstanceState(outState);
         outState.putInt(EXTRA_SORT_ORDER, mSortOrder);
     }
 
@@ -374,6 +386,12 @@ public class ManageApplications extends InstrumentedFragment
         if (mApplications != null) {
             mApplications.pause();
         }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mResetAppsHelper.stop();
     }
 
     @Override
@@ -428,19 +446,11 @@ public class ManageApplications extends InstrumentedFragment
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        if (mListType == LIST_TYPE_DOMAINS_URLS) {
-            // No option menu
+        if (mListType != LIST_TYPE_MAIN) {
             return;
         }
         mOptionsMenu = menu;
-        if (mListType == LIST_TYPE_MAIN) {
-            // Only show advanced options when in the main app list (from dashboard).
-            inflater.inflate(R.menu.manage_apps, menu);
-        }
-        menu.add(0, SORT_ORDER_ALPHA, 1, R.string.sort_order_alpha)
-                .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
-        menu.add(0, SORT_ORDER_SIZE, 2, R.string.sort_order_size)
-                .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+        inflater.inflate(R.menu.manage_apps, menu);
         updateOptionsMenu();
     }
 
@@ -460,11 +470,19 @@ public class ManageApplications extends InstrumentedFragment
         }
         if (mListType != LIST_TYPE_MAIN) {
             // Allow sorting except on main apps list.
-            mOptionsMenu.findItem(SORT_ORDER_ALPHA).setVisible(mSortOrder != SORT_ORDER_ALPHA);
-            mOptionsMenu.findItem(SORT_ORDER_SIZE).setVisible(mSortOrder != SORT_ORDER_SIZE);
+            mOptionsMenu.findItem(R.id.sort_order_alpha).setVisible(
+                    mSortOrder != R.id.sort_order_alpha);
+            mOptionsMenu.findItem(R.id.sort_order_size).setVisible(
+                    mSortOrder != R.id.sort_order_size);
+
+            mOptionsMenu.findItem(R.id.show_system).setVisible(false);
+            mOptionsMenu.findItem(R.id.hide_system).setVisible(false);
         } else {
-            mOptionsMenu.findItem(SORT_ORDER_ALPHA).setVisible(false);
-            mOptionsMenu.findItem(SORT_ORDER_SIZE).setVisible(false);
+            mOptionsMenu.findItem(R.id.sort_order_alpha).setVisible(false);
+            mOptionsMenu.findItem(R.id.sort_order_size).setVisible(false);
+
+            mOptionsMenu.findItem(R.id.show_system).setVisible(!mShowSystem);
+            mOptionsMenu.findItem(R.id.hide_system).setVisible(mShowSystem);
         }
     }
 
@@ -472,13 +490,21 @@ public class ManageApplications extends InstrumentedFragment
     public boolean onOptionsItemSelected(MenuItem item) {
         int menuId = item.getItemId();
         switch(item.getItemId()) {
-            case SORT_ORDER_ALPHA:
-            case SORT_ORDER_SIZE:
+            case R.id.sort_order_alpha:
+            case R.id.sort_order_size:
                 mSortOrder = menuId;
                 if (mApplications != null) {
                     mApplications.rebuild(mSortOrder);
                 }
                 break;
+            case R.id.show_system:
+            case R.id.hide_system:
+                mShowSystem = !mShowSystem;
+                updateMainFilters();
+                break;
+            case R.id.reset_app_preferences:
+                mResetAppsHelper.buildResetDialog();
+                return true;
             case R.id.advanced:
                 ((SettingsActivity) getActivity()).startPreferencePanel(
                         AdvancedAppSettings.class.getName(), null, R.string.advanced_apps,
@@ -490,6 +516,18 @@ public class ManageApplications extends InstrumentedFragment
         }
         updateOptionsMenu();
         return true;
+    }
+
+    private void updateMainFilters() {
+        if (mListType != LIST_TYPE_MAIN) {
+            return;
+        }
+        mFilterAdapter.setFilterEnabled(FILTER_APPS_ALL, mShowSystem);
+        mFilterAdapter.setFilterEnabled(FILTER_APPS_ENABLED, mShowSystem && mHasDisabledApps);
+        mFilterAdapter.setFilterEnabled(FILTER_APPS_DISABLED, mShowSystem && mHasDisabledApps);
+        mFilterAdapter.setFilterEnabled(FILTER_APPS_DOWNLOADED_AND_LAUNCHER, !mShowSystem);
+        mFilterAdapter.setFilterEnabled(FILTER_APPS_DL_ENABLED, !mShowSystem && mHasDisabledApps);
+        mFilterAdapter.setFilterEnabled(FILTER_APPS_DL_DISABLED, !mShowSystem && mHasDisabledApps);
     }
 
     @Override
@@ -506,7 +544,9 @@ public class ManageApplications extends InstrumentedFragment
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        mApplications.setFilter(mFilterAdapter.getFilter(position));
+        mFilter = mFilterAdapter.getFilter(position);
+        mApplications.setFilter(mFilter);
+        if (DEBUG) Log.d(TAG, "Selecting filter " + mFilter);
     }
 
     @Override
@@ -522,17 +562,11 @@ public class ManageApplications extends InstrumentedFragment
     }
 
     public void setHasDisabled(boolean hasDisabledApps) {
-        if (mListType == LIST_TYPE_MAIN) {
-            // No filtering on main app list.
-            return;
-        }
-        if (hasDisabledApps) {
-            mFilterAdapter.enableFilter(FILTER_APPS_ENABLED);
-            mFilterAdapter.enableFilter(FILTER_APPS_DISABLED);
-        } else {
-            mFilterAdapter.disableFilter(FILTER_APPS_ENABLED);
-            mFilterAdapter.disableFilter(FILTER_APPS_DISABLED);
-        }
+        mHasDisabledApps = hasDisabledApps;
+        mFilterAdapter.setFilterEnabled(
+                mShowSystem ? FILTER_APPS_ENABLED : FILTER_APPS_DL_ENABLED, hasDisabledApps);
+        mFilterAdapter.setFilterEnabled(
+                mShowSystem ? FILTER_APPS_DISABLED : FILTER_APPS_DL_DISABLED, hasDisabledApps);
     }
 
     static class FilterSpinnerAdapter extends ArrayAdapter<CharSequence> {
@@ -553,23 +587,45 @@ public class ManageApplications extends InstrumentedFragment
             return mFilterOptions.get(position);
         }
 
+        public void setFilterEnabled(int filter, boolean enabled) {
+            if (enabled) {
+                enableFilter(filter);
+            } else {
+                disableFilter(filter);
+            }
+        }
+
         public void enableFilter(int filter) {
             if (mFilterOptions.contains(filter)) return;
+            if (DEBUG) Log.d(TAG, "Enabling filter " + filter);
             mFilterOptions.add(filter);
             Collections.sort(mFilterOptions);
             mManageApplications.mSpinnerHeader.setVisibility(
                     mFilterOptions.size() > 1 ? View.VISIBLE : View.GONE);
             notifyDataSetChanged();
+            if (mFilterOptions.size() == 1) {
+                if (DEBUG) Log.d(TAG, "Auto selecting filter " + filter);
+                mManageApplications.mFilterSpinner.setSelection(0);
+                mManageApplications.onItemSelected(null, null, 0, 0);
+            }
         }
 
         public void disableFilter(int filter) {
             if (!mFilterOptions.remove((Integer) filter)) {
                 return;
             }
+            if (DEBUG) Log.d(TAG, "Disabling filter " + filter);
             Collections.sort(mFilterOptions);
             mManageApplications.mSpinnerHeader.setVisibility(
                     mFilterOptions.size() > 1 ? View.VISIBLE : View.GONE);
             notifyDataSetChanged();
+            if (mManageApplications.mFilter == filter) {
+                if (mFilterOptions.size() > 0) {
+                    if (DEBUG) Log.d(TAG, "Auto selecting filter " + mFilterOptions.get(0));
+                    mManageApplications.mFilterSpinner.setSelection(0);
+                    mManageApplications.onItemSelected(null, null, 0, 0);
+                }
+            }
         }
 
         @Override
@@ -716,7 +772,7 @@ public class ManageApplications extends InstrumentedFragment
             }
             filterObj = FILTERS[mFilterMode];
             switch (mLastSortMode) {
-                case SORT_ORDER_SIZE:
+                case R.id.sort_order_size:
                     switch (mWhichSize) {
                         case SIZE_INTERNAL:
                             comparatorObj = ApplicationsState.INTERNAL_SIZE_COMPARATOR;
@@ -845,7 +901,7 @@ public class ManageApplications extends InstrumentedFragment
                         }
                     }
                     if (holder.entry.info.packageName.equals(mManageApplications.mCurrentPkgName)
-                            && mLastSortMode == SORT_ORDER_SIZE) {
+                            && mLastSortMode == R.id.sort_order_size) {
                         // We got the size information for the last app the
                         // user viewed, and are sorting by size...  they may
                         // have cleared data, so we immediately want to resort
@@ -866,7 +922,7 @@ public class ManageApplications extends InstrumentedFragment
 
         @Override
         public void onAllSizesComputed() {
-            if (mLastSortMode == SORT_ORDER_SIZE) {
+            if (mLastSortMode == R.id.sort_order_size) {
                 rebuild(false);
             }
         }
