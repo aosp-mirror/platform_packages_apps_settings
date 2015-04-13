@@ -21,8 +21,6 @@ import android.content.pm.PackageManager;
 import android.provider.Settings;
 import android.service.notification.ConditionProviderService;
 
-import com.android.settings.R;
-
 public class ConditionProviderSettings extends ManagedServiceSettings {
     private static final String TAG = ConditionProviderSettings.class.getSimpleName();
     private static final Config CONFIG = getConditionProviderConfig();
@@ -34,9 +32,6 @@ public class ConditionProviderSettings extends ManagedServiceSettings {
         c.intentAction = ConditionProviderService.SERVICE_INTERFACE;
         c.permission = android.Manifest.permission.BIND_CONDITION_PROVIDER_SERVICE;
         c.noun = "condition provider";
-        c.warningDialogTitle = R.string.condition_provider_security_warning_title;
-        c.warningDialogSummary = R.string.condition_provider_security_warning_summary;
-        c.emptyText = R.string.no_condition_providers;
         return c;
     }
 
