@@ -56,8 +56,10 @@ public class FingerprintUiHelper extends FingerprintManager.AuthenticationCallba
     }
 
     public void stopListening() {
-        mCancellationSignal.cancel();
-        mCancellationSignal = null;
+        if (mCancellationSignal != null) {
+            mCancellationSignal.cancel();
+            mCancellationSignal = null;
+        }
     }
 
     private void setFingerprintIconVisibility(boolean visible) {
