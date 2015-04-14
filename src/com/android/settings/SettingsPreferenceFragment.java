@@ -50,14 +50,13 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
 
     private static final String TAG = "SettingsPreferenceFragment";
 
-    private static final int MENU_HELP = Menu.FIRST + 100;
     private static final int DELAY_HIGHLIGHT_DURATION_MILLIS = 600;
 
     private static final String SAVE_HIGHLIGHTED_KEY = "android:preference_highlighted";
 
     private SettingsDialogFragment mDialogFragment;
 
-    private String mHelpUrl;
+    private String mHelpUri;
 
     // Cache the content resolver for async callbacks
     private ContentResolver mContentResolver;
@@ -93,7 +92,7 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
         // Prepare help url and enable menu if necessary
         int helpResource = getHelpResource();
         if (helpResource != 0) {
-            mHelpUrl = getResources().getString(helpResource);
+            mHelpUri = getResources().getString(helpResource);
         }
     }
 
@@ -125,7 +124,7 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if (!TextUtils.isEmpty(mHelpUrl)) {
+        if (!TextUtils.isEmpty(mHelpUri)) {
             setHasOptionsMenu(true);
         }
     }
@@ -273,14 +272,13 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
      * @return the resource id for the help url
      */
     protected int getHelpResource() {
-        return 0;
+        return R.string.help_uri_default;
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        if (mHelpUrl != null && getActivity() != null) {
-            MenuItem helpItem = menu.add(0, MENU_HELP, 0, R.string.help_label);
-            HelpUtils.prepareHelpMenuItem(getActivity(), helpItem, mHelpUrl);
+        if (mHelpUri != null && getActivity() != null) {
+            HelpUtils.prepareHelpMenuItem(getActivity(), menu, mHelpUri);
         }
     }
 

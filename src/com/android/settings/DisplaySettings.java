@@ -422,6 +422,11 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         return false;
     }
 
+    @Override
+    protected int getHelpResource() {
+        return R.string.help_uri_display;
+    }
+
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
                 @Override

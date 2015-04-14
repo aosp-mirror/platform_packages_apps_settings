@@ -40,6 +40,11 @@ public class WallpaperTypeSettings extends SettingsPreferenceFragment implements
     }
 
     @Override
+    protected int getHelpResource() {
+        return R.string.help_uri_wallpaper;
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 

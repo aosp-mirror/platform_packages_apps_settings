@@ -90,6 +90,11 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
     }
 
     @Override
+    protected int getHelpResource() {
+        return R.string.help_uri_about;
+    }
+
+    @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 

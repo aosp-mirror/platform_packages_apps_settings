@@ -172,6 +172,11 @@ public class OtherSoundSettings extends SettingsPreferenceFragment implements In
     }
 
     @Override
+    protected int getHelpResource() {
+        return R.string.help_uri_other_sounds;
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 

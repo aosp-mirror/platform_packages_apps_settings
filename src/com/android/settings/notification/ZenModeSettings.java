@@ -229,6 +229,11 @@ public class ZenModeSettings extends ZenModeSettingsBase
         return rt;
     }
 
+    @Override
+    protected int getHelpResource() {
+        return R.string.help_uri_interruptions;
+    }
+
     // Enable indexing of searchable data
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
         new BaseSearchIndexProvider() {

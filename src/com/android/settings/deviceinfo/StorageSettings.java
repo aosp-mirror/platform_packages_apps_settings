@@ -97,6 +97,11 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
     }
 
     @Override
+    protected int getHelpResource() {
+        return R.string.help_uri_storage;
+    }
+
+    @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
