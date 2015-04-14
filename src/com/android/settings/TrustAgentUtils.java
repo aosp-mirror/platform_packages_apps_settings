@@ -57,6 +57,7 @@ public class TrustAgentUtils {
         ComponentName componentName;
         String title;
         String summary;
+        boolean disabledByAdministrator;
     }
 
     public static ComponentName getComponentName(ResolveInfo resolveInfo) {
