@@ -24,8 +24,10 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 
+import java.net.URISyntaxException;
 import java.util.Locale;
 
 /**
@@ -33,7 +35,9 @@ import java.util.Locale;
  * browser to a particular URL, while taking into account the preferred language and app version.
  */
 public class HelpUtils {
-    private final static String TAG = HelpUtils.class.getName();
+    private final static String TAG = HelpUtils.class.getSimpleName();
+
+    private static final int MENU_HELP = Menu.FIRST + 100;
 
     /**
      * Help URL query parameter key for the preferred language.
@@ -52,6 +56,16 @@ public class HelpUtils {
 
     /** Static helper that is not instantiable*/
     private HelpUtils() { }
+
+    public static boolean prepareHelpMenuItem(Context context, Menu menu, String helpUri) {
+        MenuItem helpItem = menu.add(0, MENU_HELP, 0, R.string.help_label);
+        return prepareHelpMenuItem(context, helpItem, helpUri);
+    }
+
+    public static boolean prepareHelpMenuItem(Context context, Menu menu, int helpUriResource) {
+        MenuItem helpItem = menu.add(0, MENU_HELP, 0, R.string.help_label);
+        return prepareHelpMenuItem(context, helpItem, context.getString(helpUriResource));
+    }
 
     /**
      * Prepares the help menu item by doing the following.
@@ -77,22 +91,15 @@ public class HelpUtils {
      * @return returns whether the help menu item has been made visible.
      */
     public static boolean prepareHelpMenuItem(Context context, MenuItem helpMenuItem,
-            String helpUrlString) {
-        if (TextUtils.isEmpty(helpUrlString)) {
+            String helpUriString) {
+        if (TextUtils.isEmpty(helpUriString)) {
             // The help url string is empty or null, so set the help menu item to be invisible.
             helpMenuItem.setVisible(false);
 
             // return that the help menu item is not visible (i.e. false)
             return false;
         } else {
-            // The help url string exists, so first add in some extra query parameters.
-            final Uri fullUri = uriWithAddedParameters(context, Uri.parse(helpUrlString));
-
-            // Then, create an intent that will be fired when the user
-            // selects this help menu item.
-            Intent intent = new Intent(Intent.ACTION_VIEW, fullUri);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                    | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+            Intent intent = getHelpIntent(context, helpUriString);
 
             // Set the intent to the help menu item, show the help menu item in the overflow
             // menu, and make it visible.
@@ -109,6 +116,24 @@ public class HelpUtils {
             // return that the help menu item is visible (i.e., true)
             return true;
         }
+    }
+
+    private static Intent getHelpIntent(Context context, String helpUriString) {
+        // Try to handle as Intent Uri, otherwise just treat as Uri.
+        try {
+            return Intent.parseUri(helpUriString,
+                    Intent.URI_ANDROID_APP_SCHEME | Intent.URI_INTENT_SCHEME);
+        } catch (URISyntaxException e) {
+        }
+        // The help url string exists, so first add in some extra query parameters.
+        final Uri fullUri = uriWithAddedParameters(context, Uri.parse(helpUriString));
+
+        // Then, create an intent that will be fired when the user
+        // selects this help menu item.
+        Intent intent = new Intent(Intent.ACTION_VIEW, fullUri);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+        return intent;
     }
 
     /**

@@ -55,6 +55,7 @@ import android.widget.Spinner;
 
 import com.android.internal.content.PackageHelper;
 import com.android.internal.logging.MetricsLogger;
+import com.android.settings.HelpUtils;
 import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.Settings.AllApplicationsActivity;
@@ -449,6 +450,8 @@ public class ManageApplications extends InstrumentedFragment
         if (mListType != LIST_TYPE_MAIN) {
             return;
         }
+        HelpUtils.prepareHelpMenuItem(getActivity(), menu, mListType == LIST_TYPE_MAIN
+                ? R.string.help_uri_apps : R.string.help_uri_notifications);
         mOptionsMenu = menu;
         inflater.inflate(R.menu.manage_apps, menu);
         updateOptionsMenu();

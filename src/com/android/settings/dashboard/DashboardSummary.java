@@ -16,7 +16,6 @@
 
 package com.android.settings.dashboard;
 
-import android.app.Fragment;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -29,13 +28,15 @@ import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
 import com.android.internal.logging.MetricsLogger;
+import com.android.settings.HelpUtils;
 import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -72,6 +73,19 @@ public class DashboardSummary extends InstrumentedFragment {
     @Override
     protected int getMetricsCategory() {
         return MetricsLogger.DASHBOARD_SUMMARY;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        HelpUtils.prepareHelpMenuItem(getActivity(), menu, R.string.help_uri_dashboard);
     }
 
     @Override

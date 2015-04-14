@@ -129,6 +129,11 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
     }
 
     @Override
+    protected int getHelpResource() {
+        return R.string.help_uri_printing;
+    }
+
+    @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         addPreferencesFromResource(R.xml.print_settings);
