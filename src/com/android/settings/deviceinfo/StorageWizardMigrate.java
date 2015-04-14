@@ -18,6 +18,7 @@ package com.android.settings.deviceinfo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.storage.DiskInfo;
 import android.text.format.DateUtils;
 import android.text.format.Formatter;
 import android.widget.CompoundButton;
@@ -70,11 +71,11 @@ public class StorageWizardMigrate extends StorageWizardBase {
     public void onNavigateNext() {
         if (mRadioNow.isChecked()) {
             final Intent intent = new Intent(this, StorageWizardMigrateConfirm.class);
-            intent.putExtra(EXTRA_DISK_ID, mDisk.id);
+            intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.id);
             startActivity(intent);
         } else if (mRadioLater.isChecked()) {
             final Intent intent = new Intent(this, StorageWizardReady.class);
-            intent.putExtra(EXTRA_DISK_ID, mDisk.id);
+            intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.id);
             startActivity(intent);
         }
     }

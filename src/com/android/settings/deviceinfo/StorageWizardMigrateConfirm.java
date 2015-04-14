@@ -18,6 +18,7 @@ package com.android.settings.deviceinfo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.storage.DiskInfo;
 import android.text.format.DateUtils;
 import android.text.format.Formatter;
 
@@ -45,7 +46,7 @@ public class StorageWizardMigrateConfirm extends StorageWizardBase {
     @Override
     public void onNavigateNext() {
         final Intent intent = new Intent(this, StorageWizardMigrateProgress.class);
-        intent.putExtra(EXTRA_DISK_ID, mDisk.id);
+        intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.id);
         startActivity(intent);
         finishAffinity();
     }

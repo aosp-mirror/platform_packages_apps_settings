@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.storage.DiskInfo;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -74,7 +75,7 @@ public class StorageWizardFormatProgress extends StorageWizardBase {
             if (e == null) {
                 if (!mFormatPublic) {
                     final Intent intent = new Intent(context, StorageWizardMigrate.class);
-                    intent.putExtra(EXTRA_DISK_ID, mDisk.id);
+                    intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.id);
                     startActivity(intent);
                 }
                 finishAffinity();

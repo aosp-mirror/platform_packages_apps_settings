@@ -18,6 +18,7 @@ package com.android.settings.deviceinfo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.storage.DiskInfo;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.RadioButton;
@@ -72,11 +73,11 @@ public class StorageWizardInit extends StorageWizardBase {
     public void onNavigateNext() {
         if (mRadioExternal.isChecked()) {
             final Intent intent = new Intent(this, StorageWizardReady.class);
-            intent.putExtra(EXTRA_DISK_ID, mDisk.id);
+            intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.id);
             startActivity(intent);
         } else if (mRadioInternal.isChecked()) {
             final Intent intent = new Intent(this, StorageWizardFormatConfirm.class);
-            intent.putExtra(EXTRA_DISK_ID, mDisk.id);
+            intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.id);
             startActivity(intent);
         }
     }

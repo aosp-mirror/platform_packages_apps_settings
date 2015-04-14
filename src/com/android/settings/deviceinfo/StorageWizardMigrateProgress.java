@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.os.storage.DiskInfo;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -61,7 +62,7 @@ public class StorageWizardMigrateProgress extends StorageWizardBase {
             final Context context = StorageWizardMigrateProgress.this;
             if (e == null) {
                 final Intent intent = new Intent(context, StorageWizardReady.class);
-                intent.putExtra(EXTRA_DISK_ID, mDisk.id);
+                intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.id);
                 startActivity(intent);
                 finishAffinity();
 

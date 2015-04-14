@@ -16,7 +16,6 @@
 
 package com.android.settings.deviceinfo;
 
-import static com.android.settings.deviceinfo.StorageSettings.EXTRA_VOLUME_ID;
 import static com.android.settings.deviceinfo.StorageSettings.TAG;
 
 import android.app.AlertDialog;
@@ -118,7 +117,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         mUserManager = context.getSystemService(UserManager.class);
         mStorageManager = context.getSystemService(StorageManager.class);
 
-        mVolumeId = getArguments().getString(EXTRA_VOLUME_ID);
+        mVolumeId = getArguments().getString(VolumeInfo.EXTRA_VOLUME_ID);
         mVolume = mStorageManager.findVolumeById(mVolumeId);
 
         Preconditions.checkNotNull(mVolume);
@@ -159,7 +158,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
     }
 
     public void refresh() {
-        getActivity().setTitle(mStorageManager.getBestVolumeDescription(mVolume.id));
+        getActivity().setTitle(mStorageManager.getBestVolumeDescription(mVolume));
 
         // Valid options may have changed
         getFragmentManager().invalidateOptionsMenu();
@@ -298,15 +297,15 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
                 RenameFragment.show(this);
                 return true;
             case R.id.storage_mount:
-                new MountTask(context, mVolume.id).execute();
+                new MountTask(context, mVolume).execute();
                 return true;
             case R.id.storage_unmount:
-                args.putString(StorageSettings.EXTRA_VOLUME_ID, mVolume.id);
+                args.putString(VolumeInfo.EXTRA_VOLUME_ID, mVolume.id);
                 startFragment(this, PrivateVolumeUnmountConfirm.class.getCanonicalName(),
                         R.string.storage_menu_unmount, 0, args);
                 return true;
             case R.id.storage_format:
-                args.putString(StorageSettings.EXTRA_VOLUME_ID, mVolume.id);
+                args.putString(VolumeInfo.EXTRA_VOLUME_ID, mVolume.id);
                 startFragment(this, PrivateVolumeFormatConfirm.class.getCanonicalName(),
                         R.string.storage_menu_format, 0, args);
                 return true;
@@ -345,7 +344,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
             return true;
 
         } else if (pref == mMisc) {
-            intent = StorageSettings.buildBrowseIntent(mSharedVolume);
+            intent = mSharedVolume.buildBrowseIntent();
         }
 
         if (intent != null) {
@@ -454,7 +453,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
             final Context context = getActivity();
             final StorageManager storageManager = context.getSystemService(StorageManager.class);
 
-            final String volId = getArguments().getString(EXTRA_VOLUME_ID);
+            final String volId = getArguments().getString(VolumeInfo.EXTRA_VOLUME_ID);
             final VolumeInfo vol = storageManager.findVolumeById(volId);
 
             final AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -466,7 +465,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
             if (!TextUtils.isEmpty(vol.nickname)) {
                 nickname.setText(vol.nickname);
             } else {
-                nickname.setText(storageManager.getBestVolumeDescription(volId));
+                nickname.setText(storageManager.getBestVolumeDescription(vol));
             }
 
             builder.setTitle(R.string.storage_rename_title);

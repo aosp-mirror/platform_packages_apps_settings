@@ -1494,7 +1494,8 @@
         <activity android:name=".deviceinfo.StorageWizardInit"
                 android:theme="@style/SuwThemeMaterial.Light"
                 android:taskAffinity="com.android.settings.storage_wizard"
-                android:exported="true" />
+                android:exported="true"
+                android:permission="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
         <activity android:name=".deviceinfo.StorageWizardFormatConfirm"
                 android:taskAffinity="com.android.settings.storage_wizard"
                 android:exported="false" />
@@ -1520,6 +1521,11 @@
         <activity android:name=".deviceinfo.StorageWizardMoveProgress"
                 android:taskAffinity="com.android.settings.storage_wizard"
                 android:exported="false" />
+
+        <!-- Exported for SystemUI to trigger -->
+        <receiver android:name=".deviceinfo.StorageUnmountReceiver"
+                android:exported="true"
+                android:permission="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
 
         <activity android:name="ApnEditor"
                 android:label="@string/apn_edit">

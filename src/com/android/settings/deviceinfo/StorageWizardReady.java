@@ -34,7 +34,7 @@ public class StorageWizardReady extends StorageWizardBase {
 
         // TODO: handle mixed partition cases instead of just guessing based on
         // first volume type we encounter
-        for (String volId : mDisk.volumes) {
+        for (String volId : mDisk.volumeIds) {
             final VolumeInfo vol = mStorage.findVolumeById(volId);
             if (vol == null) continue;
 

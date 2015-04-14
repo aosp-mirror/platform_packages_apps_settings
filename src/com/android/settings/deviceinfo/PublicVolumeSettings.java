@@ -16,8 +16,6 @@
 
 package com.android.settings.deviceinfo;
 
-import static com.android.settings.deviceinfo.StorageSettings.EXTRA_VOLUME_ID;
-
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -48,8 +46,6 @@ import java.util.Objects;
  */
 public class PublicVolumeSettings extends SettingsPreferenceFragment {
     // TODO: disable unmount when providing over MTP/PTP
-
-    private static final String PREF_FORMAT_INTERNAL = "debug.format_internal";
 
     private StorageManager mStorageManager;
 
@@ -90,14 +86,14 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
             final String fsUuid = DocumentsContract.getRootId(rootUri);
             mVolume = mStorageManager.findVolumeByUuid(fsUuid);
         } else {
-            final String volId = getArguments().getString(EXTRA_VOLUME_ID);
+            final String volId = getArguments().getString(VolumeInfo.EXTRA_VOLUME_ID);
             mVolume = mStorageManager.findVolumeById(volId);
         }
 
         Preconditions.checkNotNull(mVolume);
         Preconditions.checkState(mVolume.type == VolumeInfo.TYPE_PUBLIC);
 
-        mDisk = mStorageManager.findDiskByVolumeId(mVolume.id);
+        mDisk = mStorageManager.findDiskById(mVolume.diskId);
         Preconditions.checkNotNull(mDisk);
 
         mVolumeId = mVolume.id;
@@ -115,7 +111,7 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
     }
 
     public void refresh() {
-        getActivity().setTitle(mStorageManager.getBestVolumeDescription(mVolume.id));
+        getActivity().setTitle(mStorageManager.getBestVolumeDescription(mVolume));
 
         final Context context = getActivity();
         final PreferenceScreen screen = getPreferenceScreen();
@@ -197,14 +193,14 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference pref) {
         final Context context = getActivity();
         if (pref == mMount) {
-            new MountTask(context, mVolume.id).execute();
+            new MountTask(context, mVolume).execute();
         } else if (pref == mUnmount) {
-            new UnmountTask(context, mVolume.id).execute();
+            new UnmountTask(context, mVolume).execute();
         } else if (pref == mFormat) {
-            new FormatTask(context, mVolume.id).execute();
+            new FormatTask(context, mVolume).execute();
         } else if (pref == mFormatInternal) {
             final Intent intent = new Intent(context, StorageWizardFormatConfirm.class);
-            intent.putExtra(StorageWizardBase.EXTRA_DISK_ID, mDisk.id);
+            intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.id);
             startActivity(intent);
         }
 

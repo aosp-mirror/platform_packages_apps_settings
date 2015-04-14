@@ -17,8 +17,6 @@
 package com.android.settings.deviceinfo;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.UserManager;
@@ -28,7 +26,6 @@ import android.os.storage.VolumeInfo;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
-import android.provider.DocumentsContract;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -56,34 +53,6 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
 
     // TODO: badging to indicate devices running low on storage
     // TODO: show currently ejected private volumes
-
-    public static final String EXTRA_VOLUME_ID = "volume_id";
-
-    private static final String DOCUMENT_AUTHORITY = "com.android.externalstorage.documents";
-    private static final String DOCUMENT_ROOT_PRIMARY_EMULATED = "primary";
-
-    /**
-     * Build an intent to browse the contents of given {@link VolumeInfo}.
-     */
-    public static Intent buildBrowseIntent(VolumeInfo vol) {
-        final Uri uri;
-        if (vol.type == VolumeInfo.TYPE_PUBLIC) {
-            uri = DocumentsContract.buildRootUri(DOCUMENT_AUTHORITY, vol.fsUuid);
-        } else if (VolumeInfo.ID_EMULATED_INTERNAL.equals(vol.id)) {
-            uri = DocumentsContract.buildRootUri(DOCUMENT_AUTHORITY,
-                    DOCUMENT_ROOT_PRIMARY_EMULATED);
-        } else if (vol.type == VolumeInfo.TYPE_EMULATED) {
-            // TODO: build intent once supported
-            uri = null;
-        } else {
-            throw new IllegalArgumentException();
-        }
-
-        final Intent intent = new Intent(DocumentsContract.ACTION_BROWSE_DOCUMENT_ROOT);
-        intent.addCategory(Intent.CATEGORY_DEFAULT);
-        intent.setData(uri);
-        return intent;
-    }
 
     private UserManager mUserManager;
     private StorageManager mStorageManager;
@@ -219,19 +188,18 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
 
         } else if (vol.type == VolumeInfo.TYPE_PRIVATE) {
             final Bundle args = new Bundle();
-            args.putString(EXTRA_VOLUME_ID, volId);
+            args.putString(VolumeInfo.EXTRA_VOLUME_ID, volId);
             startFragment(this, PrivateVolumeSettings.class.getCanonicalName(),
                     -1, 0, args);
             return true;
 
         } else if (vol.type == VolumeInfo.TYPE_PUBLIC) {
             if (vol.state == VolumeInfo.STATE_MOUNTED) {
-                final Intent intent = buildBrowseIntent(vol);
-                startActivity(intent);
+                startActivity(vol.buildBrowseIntent());
                 return true;
             } else {
                 final Bundle args = new Bundle();
-                args.putString(EXTRA_VOLUME_ID, volId);
+                args.putString(VolumeInfo.EXTRA_VOLUME_ID, volId);
                 startFragment(this, PublicVolumeSettings.class.getCanonicalName(),
                         -1, 0, args);
                 return true;
@@ -247,11 +215,11 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
         private final String mVolumeId;
         private final String mDescription;
 
-        public MountTask(Context context, String volumeId) {
+        public MountTask(Context context, VolumeInfo volume) {
             mContext = context.getApplicationContext();
             mStorageManager = mContext.getSystemService(StorageManager.class);
-            mVolumeId = volumeId;
-            mDescription = mStorageManager.getBestVolumeDescription(mVolumeId);
+            mVolumeId = volume.id;
+            mDescription = mStorageManager.getBestVolumeDescription(volume);
         }
 
         @Override
@@ -283,11 +251,11 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
         private final String mVolumeId;
         private final String mDescription;
 
-        public UnmountTask(Context context, String volumeId) {
+        public UnmountTask(Context context, VolumeInfo volume) {
             mContext = context.getApplicationContext();
             mStorageManager = mContext.getSystemService(StorageManager.class);
-            mVolumeId = volumeId;
-            mDescription = mStorageManager.getBestVolumeDescription(mVolumeId);
+            mVolumeId = volume.id;
+            mDescription = mStorageManager.getBestVolumeDescription(volume);
         }
 
         @Override
@@ -319,11 +287,11 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
         private final String mVolumeId;
         private final String mDescription;
 
-        public FormatTask(Context context, String volumeId) {
+        public FormatTask(Context context, VolumeInfo volume) {
             mContext = context.getApplicationContext();
             mStorageManager = mContext.getSystemService(StorageManager.class);
-            mVolumeId = volumeId;
-            mDescription = mStorageManager.getBestVolumeDescription(mVolumeId);
+            mVolumeId = volume.id;
+            mDescription = mStorageManager.getBestVolumeDescription(volume);
         }
 
         @Override
@@ -374,7 +342,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
                 final List<VolumeInfo> vols = storage.getVolumes();
                 for (VolumeInfo vol : vols) {
                     if (isInteresting(vol)) {
-                        data.title = storage.getBestVolumeDescription(vol.id);
+                        data.title = storage.getBestVolumeDescription(vol);
                         data.screenTitle = context.getString(R.string.storage_settings);
                         result.add(data);
                     }

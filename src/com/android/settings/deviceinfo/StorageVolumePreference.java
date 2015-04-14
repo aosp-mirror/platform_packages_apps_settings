@@ -45,7 +45,7 @@ public class StorageVolumePreference extends Preference {
         mVolume = volume;
 
         setKey(volume.id);
-        setTitle(mStorageManager.getBestVolumeDescription(volume.id));
+        setTitle(mStorageManager.getBestVolumeDescription(volume));
 
         switch (volume.state) {
             case VolumeInfo.STATE_MOUNTED:
@@ -83,7 +83,7 @@ public class StorageVolumePreference extends Preference {
     private final View.OnClickListener mUnmountListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
-            new UnmountTask(getContext(), mVolume.id).execute();
+            new UnmountTask(getContext(), mVolume).execute();
         }
     };
 }

@@ -46,9 +46,9 @@ public class PrivateVolumeUnmountConfirm extends InstrumentedFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         final StorageManager storage = getActivity().getSystemService(StorageManager.class);
-        final String volumeId = getArguments().getString(StorageSettings.EXTRA_VOLUME_ID);
+        final String volumeId = getArguments().getString(VolumeInfo.EXTRA_VOLUME_ID);
         mVolume = storage.findVolumeById(volumeId);
-        mDisk = storage.findDiskByVolumeId(volumeId);
+        mDisk = storage.findDiskById(mVolume.id);
 
         final View view = inflater.inflate(R.layout.storage_internal_unmount, container, false);
         final TextView body = (TextView) view.findViewById(R.id.body);
@@ -64,7 +64,7 @@ public class PrivateVolumeUnmountConfirm extends InstrumentedFragment {
     private final OnClickListener mConfirmListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
-            new UnmountTask(getActivity(), mVolume.id).execute();
+            new UnmountTask(getActivity(), mVolume).execute();
             getActivity().finish();
         }
     };

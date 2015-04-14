@@ -37,9 +37,6 @@ import com.android.setupwizardlib.view.NavigationBar.NavigationBarListener;
 import java.text.NumberFormat;
 
 public abstract class StorageWizardBase extends Activity implements NavigationBarListener {
-    protected static final String EXTRA_DISK_ID = "disk_id";
-    protected static final String EXTRA_VOLUME_ID = "volume_id";
-
     protected StorageManager mStorage;
 
     protected VolumeInfo mVolume;
@@ -51,16 +48,16 @@ public abstract class StorageWizardBase extends Activity implements NavigationBa
 
         mStorage = getSystemService(StorageManager.class);
 
-        final String volumeId = getIntent().getStringExtra(EXTRA_VOLUME_ID);
+        final String volumeId = getIntent().getStringExtra(VolumeInfo.EXTRA_VOLUME_ID);
         if (!TextUtils.isEmpty(volumeId)) {
             mVolume = mStorage.findVolumeById(volumeId);
         }
 
-        final String diskId = getIntent().getStringExtra(EXTRA_DISK_ID);
+        final String diskId = getIntent().getStringExtra(DiskInfo.EXTRA_DISK_ID);
         if (!TextUtils.isEmpty(diskId)) {
             mDisk = mStorage.findDiskById(diskId);
         } else {
-            mDisk = mStorage.findDiskByVolumeId(volumeId);
+            mDisk = mStorage.findDiskById(mVolume.diskId);
         }
 
         setTheme(R.style.SuwThemeMaterial_Light);
