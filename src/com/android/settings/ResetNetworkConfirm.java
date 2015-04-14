@@ -65,33 +65,34 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
                 return;
             }
             // TODO maybe show a progress dialog if this ends up taking a while
+            Context context = getActivity();
 
             ConnectivityManager connectivityManager = (ConnectivityManager)
-                    getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+                    context.getSystemService(Context.CONNECTIVITY_SERVICE);
             if (connectivityManager != null) {
                 connectivityManager.factoryReset();
             }
 
             WifiManager wifiManager = (WifiManager)
-                    getActivity().getSystemService(Context.WIFI_SERVICE);
+                    context.getSystemService(Context.WIFI_SERVICE);
             if (wifiManager != null) {
                 wifiManager.factoryReset();
             }
 
             TelephonyManager telephonyManager = (TelephonyManager)
-                    getActivity().getSystemService(Context.TELEPHONY_SERVICE);
+                    context.getSystemService(Context.TELEPHONY_SERVICE);
             if (telephonyManager != null) {
                 telephonyManager.factoryReset(mSubId);
             }
 
             NetworkPolicyManager policyManager = (NetworkPolicyManager)
-                    getActivity().getSystemService(Context.NETWORK_POLICY_SERVICE);
+                    context.getSystemService(Context.NETWORK_POLICY_SERVICE);
             if (policyManager != null) {
                 String subscriberId = telephonyManager.getSubscriberId(mSubId);
                 policyManager.factoryReset(subscriberId);
             }
 
-            Toast.makeText(getActivity(), R.string.reset_network_complete_toast, Toast.LENGTH_SHORT)
+            Toast.makeText(context, R.string.reset_network_complete_toast, Toast.LENGTH_SHORT)
                     .show();
         }
     };
