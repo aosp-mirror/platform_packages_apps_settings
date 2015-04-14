@@ -5991,6 +5991,93 @@
     <!-- [CHAR LIMIT=60] Zen mode settings: End time option: Summary text value format when end time = next day -->
     <string name="zen_mode_end_time_next_day_summary_format"><xliff:g id="formatted_time">%s</xliff:g> next day</string>
 
+    <!-- [CHAR LIMIT=NONE] Zen mode voice: Prompt read for interruption type -->
+    <string name="zen_mode_interruptions_voice_prompt">When would you like to be interrupted?</string>
+
+    <!-- [CHAR LIMIT=NONE] Zen mode voice: Prompt read for zen mode duration -->
+    <string name="zen_mode_duration_voice_prompt">For how long?</string>
+
+    <!-- [CHAR LIMIT=NONE] Zen mode voice: Comma delimited synonyms for important interriuptions -->
+    <string name="zen_mode_option_important_voice_synonyms">important,priority,priority notifications</string>
+
+    <!-- [CHAR LIMIT=NONE] Zen mode voice: Comma delimited synonyms for alarm interriuptions -->
+    <string name="zen_mode_option_alarms_voice_synonyms">alarms</string>
+
+    <!--  [CHAR LIMIT=60] Zen mode voice: Off [CHAR LIMIT=60] -->
+    <string name="zen_mode_option_off">Off</string>
+
+    <!-- [CHAR LIMIT=NONE] Zen mode voice: Comma delimited synonyms for off interriuptions -->
+    <string name="zen_mode_option_off_voice_synonyms">off,all,everything</string>
+
+    <!-- [CHAR LIMIT=NONE] Zen mode voice: Comma delimited synonyms for no interriuptions -->
+    <string name="zen_mode_option_no_interruptions_voice_synonyms">none,nothing,no interruptions</string>
+
+    <!-- [CHAR LIMIT=40] Zen mode voice: Label for indefinite mode duration -->
+    <string name="zen_mode_duration_indefinte_voice_label">Indefinitely</string>
+
+    <!-- [CHAR LIMIT=40] Zen mode voice: Label for duration in minutes -->
+    <plurals name="zen_mode_duration_minutes_voice_label">
+       <item quantity="one"><xliff:g id="count" example="1">%d</xliff:g> minute</item>
+       <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> minutes</item>
+    </plurals>
+
+    <!-- [CHAR LIMIT=40] Zen mode voice: Label for duration in hours -->
+    <plurals name="zen_mode_duration_hours_voice_label">
+       <item quantity="one"><xliff:g id="count" example="1">%d</xliff:g> hour</item>
+       <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> hours</item>
+    </plurals>
+
+    <!-- [CHAR LIMIT=NONE] Zen mode voice - spoken summary: important only duration indefinite. -->
+    <string name="zen_mode_summary_priority_indefinitely">Change to priority notifications only indefinitely</string>
+
+    <!-- [CHAR LIMIT=NONE] Zen mode voice- spoken summary: important only duration minutes. -->
+    <plurals name="zen_mode_summary_priority_by_minute">
+        <item quantity="one">Change to priority notifications only for one minute until <xliff:g id="formattedTime" example="10:00 PM">%2$s</xliff:g></item>
+        <item quantity="other">Change to priority notifications only for <xliff:g id="duration" example="2">%1$d</xliff:g> minutes until <xliff:g id="formattedTime" example="10:00 PM">%2$s</xliff:g></item>
+    </plurals>
+
+    <!-- [CHAR LIMIT=NONE] Zen mode voice- spoken summary: important only duration hours. -->
+    <plurals name="zen_mode_summary_priority_by_hour">
+        <item quantity="one">Change to priority notifications only for one hour until <xliff:g id="formattedTime" example="10:00 PM">%2$s</xliff:g></item>
+        <item quantity="other">Change to priority notifications only for <xliff:g id="duration" example="2">%1$d</xliff:g> hours (until <xliff:g id="formattedTime" example="10:00 PM">%2$s</xliff:g>)</item>
+    </plurals>
+
+    <!-- [CHAR LIMIT=NONE] Zen mode voice - spoken summary: alarms only duration indefinite. -->
+    <string name="zen_mode_summary_alarams_only_indefinite">Change to alarms only indefinitely</string>
+
+    <!-- [CHAR LIMIT=NONE] Zen mode voice- spoken summary: alarms only duration minutes. -->
+    <plurals name="zen_mode_summary_alarms_only_by_minute">
+        <item quantity="one">Change to alarms only for one minute until <xliff:g id="formattedTime" example="10:00 PM">%2$s</xliff:g></item>
+        <item quantity="other">Change to alarms only for <xliff:g id="duration" example="2">%1$d</xliff:g> minutes (until <xliff:g id="formattedTime" example="10:00 PM">%2$s</xliff:g>)</item>
+    </plurals>
+
+    <!-- [CHAR LIMIT=NONE] Zen mode voice- spoken summary: alarms only duration hours. -->
+    <plurals name="zen_mode_summary_alarms_only_by_hour">
+        <item quantity="one">Change to alarms only for one hour until <xliff:g id="formattedTime" example="10:00 PM">%2$s</xliff:g></item>
+        <item quantity="other">Change to alarms only for <xliff:g id="duration" example="2">%1$d</xliff:g> hours until <xliff:g id="formattedTime" example="10:00 PM">%2$s</xliff:g></item>
+    </plurals>
+
+    <!-- [CHAR LIMIT=NONE] Zen mode voice - spoken summary: no interruptions duration indefinite. -->
+    <string name="zen_mode_summary_no_interruptions_indefinite">Change to don\'t interrupt indefinitely</string>
+
+    <!-- [CHAR LIMIT=NONE] Zen mode voice- spoken summary: alarms only duration minutes. -->
+    <plurals name="zen_mode_summary_no_interruptions_by_minute">
+        <item quantity="one">Change to don\'t interrupt for one minute until <xliff:g id="formattedTime" example="10:00 PM">%2$s</xliff:g></item>
+        <item quantity="other">Change to don\'t interrupt for <xliff:g id="duration" example="2">%1$d</xliff:g> minutes (until <xliff:g id="formattedTime" example="10:00 PM">%2$s</xliff:g>)</item>
+    </plurals>
+
+    <!-- [CHAR LIMIT=NONE] Zen mode voice- spoken summary: alarms only duration hours. -->
+    <plurals name="zen_mode_summary_no_interruptions_by_hour">
+        <item quantity="one">Change to don\'t interrupt for one hour until <xliff:g id="formattedTime" example="10:00 PM">%2$s</xliff:g></item>
+        <item quantity="other">Change to don\'t interrupt for <xliff:g id="duration" example="2">%1$d</xliff:g> hours until <xliff:g id="formattedTime" example="10:00 PM">%2$s</xliff:g></item>
+    </plurals>
+
+    <!-- [CHAR LIMIT=NONE] Zen mode voice - spoken summary: off. -->
+    <string name="zen_mode_summary_always">Change to always interrupt</string>
+
+    <!-- [CHAR LIMIT=NONE] Zen mode voice: Comma delimited synonyms for indefinte duration -->
+    <string name="zen_mode_duration_indefinite_voice_synonyms">forever</string>
+
     <!-- [CHAR LIMIT=20] Notifications settings: Apps section header -->
     <string name="notification_settings_apps_title">App notifications</string>
 

@@ -158,6 +158,17 @@
                 android:value="true" />
         </activity>
 
+        <activity android:name="AirplaneModeVoiceActivity"
+                android:label="@string/wireless_networks_settings_title"
+                android:theme="@android:style/Theme.Material.Light.Voice"
+                android:exported="true">
+            <intent-filter>
+                <action android:name="android.settings.VOICE_CONTROL_AIRPLANE_MODE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.VOICE" />
+            </intent-filter>
+        </activity>
+
         <!-- Top-level settings -->
 
         <activity android:name="Settings$WifiSettingsActivity"
@@ -994,6 +1005,16 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.notification.NotificationStation" />
+        </activity>
+
+        <activity android:name=".notification.ZenModeVoiceActivity"
+                android:theme="@android:style/Theme.Material.Light"
+                android:label="@string/zen_mode_settings_title">
+            <intent-filter>
+                <action android:name="android.settings.VOICE_CONTROL_DO_NOT_DISTURB_MODE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.VOICE" />
+            </intent-filter>
         </activity>
 
         <!--
@@ -1872,6 +1893,17 @@
                 android:resource="@id/battery_settings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
+        </activity>
+
+        <activity android:name=".fuelguage.BatterySaverModeVoiceActivity"
+                android:label="@string/power_usage_summary_title"
+                android:theme="@android:style/Theme.Material.Light.Voice"
+                android:exported="true">
+            <intent-filter>
+                <action android:name="android.settings.VOICE_CONTROL_BATTERY_SAVER_MODE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.VOICE" />
+            </intent-filter>
         </activity>
 
         <activity android:name="Settings$AccountSettingsActivity"

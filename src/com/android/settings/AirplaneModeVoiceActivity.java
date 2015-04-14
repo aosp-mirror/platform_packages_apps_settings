@@ -20,6 +20,8 @@ import android.content.Intent;
 import android.provider.Settings;
 import android.util.Log;
 
+import com.android.settings.utils.VoiceSettingsActivity;
+
 /**
  * Activity for modifying the {@link Settings.Global#AIRPLANE_MODE_ON AIRPLANE_MODE_ON}
  * setting using the Voice Interaction API.
@@ -27,14 +29,14 @@ import android.util.Log;
 public class AirplaneModeVoiceActivity extends VoiceSettingsActivity {
     private static final String TAG = "AirplaneModeVoiceActivity";
 
-    protected void onVoiceSettingInteraction(Intent intent) {
+    protected boolean onVoiceSettingInteraction(Intent intent) {
         if (intent.hasExtra(Settings.EXTRA_AIRPLANE_MODE_ENABLED)) {
-            boolean enabled =
-                    intent.getBooleanExtra(Settings.EXTRA_AIRPLANE_MODE_ENABLED, false);
             Settings.Global.putInt(getContentResolver(),
-                    Settings.Global.AIRPLANE_MODE_ON, enabled ? 1 : 0);
+                    Settings.Global.AIRPLANE_MODE_ON,
+                    intent.getBooleanExtra(Settings.EXTRA_AIRPLANE_MODE_ENABLED, false) ? 1 : 0);
         } else {
             Log.v(TAG, "Missing airplane mode extra");
         }
+        return true;
     }
 }
