@@ -22,15 +22,14 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.UserHandle;
-import android.preference.ListPreference;
-import android.util.ArrayMap;
 import android.util.AttributeSet;
 
-import com.android.settings.R;
+import com.android.settings.AppListPreference;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class DefaultBrowserPreference extends ListPreference {
+public class DefaultBrowserPreference extends AppListPreference {
 
     final private PackageManager mPm;
 
@@ -42,14 +41,13 @@ public class DefaultBrowserPreference extends ListPreference {
     }
 
     private void loadBrowserApps() {
-        ArrayMap<String, CharSequence> browsers = resolveBrowserApps();
+        List<String> browsers = resolveBrowserApps();
 
-        setEntries(browsers.values().toArray(new CharSequence[browsers.size()]));
-        setEntryValues(browsers.keySet().toArray(new String[browsers.size()]));
+        setPackageNames(browsers.toArray(new String[browsers.size()]), null);
     }
 
-    private ArrayMap<String, CharSequence> resolveBrowserApps() {
-        ArrayMap<String, CharSequence> result = new ArrayMap<>();
+    private List<String> resolveBrowserApps() {
+        List<String> result = new ArrayList<>();
 
         // Create an Intent that will match ALL Browser Apps
         Intent intent = new Intent();
@@ -58,22 +56,17 @@ public class DefaultBrowserPreference extends ListPreference {
         intent.setData(Uri.parse("http:"));
 
         // Resolve that intent and check that the handleAllWebDataURI boolean is set
-        PackageManager packageManager = getContext().getPackageManager();
-        List<ResolveInfo> list = packageManager.queryIntentActivitiesAsUser(intent, 0,
-                UserHandle.myUserId());
+        List<ResolveInfo> list = mPm.queryIntentActivitiesAsUser(intent, 0, UserHandle.myUserId());
 
         final int count = list.size();
         for (int i=0; i<count; i++) {
             ResolveInfo info = list.get(i);
-            if (info.activityInfo == null || result.containsKey(info.activityInfo.packageName)
+            if (info.activityInfo == null || result.contains(info.activityInfo.packageName)
                     || !info.handleAllWebDataURI) {
                 continue;
             }
 
-            String packageName = info.activityInfo.packageName;
-            CharSequence label = info.activityInfo.applicationInfo.loadLabel(packageManager);
-
-            result.put(packageName, label);
+            result.add(info.activityInfo.packageName);
         }
 
         return result;

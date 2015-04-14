@@ -22,7 +22,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
 import android.content.ActivityNotFoundException;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -38,7 +37,6 @@ import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.Preference;
-import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
 import android.provider.SearchIndexableResource;
@@ -49,20 +47,17 @@ import android.util.Log;
 
 import com.android.ims.ImsManager;
 import com.android.internal.logging.MetricsLogger;
-import com.android.internal.telephony.SmsApplication;
-import com.android.internal.telephony.SmsApplication.SmsApplicationData;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.internal.telephony.TelephonyProperties;
 import com.android.settings.nfc.NfcEnabler;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
-public class WirelessSettings extends SettingsPreferenceFragment
-        implements OnPreferenceChangeListener, Indexable {
+public class WirelessSettings extends SettingsPreferenceFragment implements Indexable {
     private static final String TAG = "WirelessSettings";
 
     private static final String KEY_TOGGLE_AIRPLANE = "toggle_airplane";
@@ -74,7 +69,6 @@ public class WirelessSettings extends SettingsPreferenceFragment
     private static final String KEY_PROXY_SETTINGS = "proxy_settings";
     private static final String KEY_MOBILE_NETWORK_SETTINGS = "mobile_network_settings";
     private static final String KEY_MANAGE_MOBILE_PLAN = "manage_mobile_plan";
-    private static final String KEY_SMS_APPLICATION = "sms_application";
     private static final String KEY_TOGGLE_NSD = "toggle_nsd"; //network service discovery
     private static final String KEY_CELL_BROADCAST_SETTINGS = "cell_broadcast_settings";
     private static final String KEY_WFC_SETTINGS = "wifi_calling_settings";
@@ -96,7 +90,6 @@ public class WirelessSettings extends SettingsPreferenceFragment
     private static final int MANAGE_MOBILE_PLAN_DIALOG_ID = 1;
     private static final String SAVED_MANAGE_MOBILE_PLAN_MSG = "mManageMobilePlanMessage";
 
-    private AppListPreference mSmsApplicationPreference;
     private PreferenceScreen mButtonWfc;
 
     /**
@@ -187,27 +180,6 @@ public class WirelessSettings extends SettingsPreferenceFragment
         }
     }
 
-    private void initSmsApplicationSetting() {
-        log("initSmsApplicationSetting:");
-        Collection<SmsApplicationData> smsApplications =
-                SmsApplication.getApplicationCollection(getActivity());
-
-        // If the list is empty the dialog will be empty, but we will not crash.
-        int count = smsApplications.size();
-        String[] packageNames = new String[count];
-        int i = 0;
-        for (SmsApplicationData smsApplicationData : smsApplications) {
-            packageNames[i] = smsApplicationData.mPackageName;
-            i++;
-        }
-        String defaultPackageName = null;
-        ComponentName appName = SmsApplication.getDefaultSmsApplication(getActivity(), true);
-        if (appName != null) {
-            defaultPackageName = appName.getPackageName();
-        }
-        mSmsApplicationPreference.setPackageNames(packageNames, defaultPackageName);
-    }
-
     @Override
     public Dialog onCreateDialog(int dialogId) {
         log("onCreateDialog: dialogId=" + dialogId);
@@ -233,11 +205,6 @@ public class WirelessSettings extends SettingsPreferenceFragment
         Log.d(TAG, s);
     }
 
-    private boolean isSmsSupported() {
-        // Some tablet has sim card but could not do telephony operations. Skip those.
-        return mTm.isSmsCapable();
-    }
-
     @Override
     protected int getMetricsCategory() {
         return MetricsLogger.WIRELESS;
@@ -260,7 +227,6 @@ public class WirelessSettings extends SettingsPreferenceFragment
 
         final int myUserId = UserHandle.myUserId();
         final boolean isSecondaryUser = myUserId != UserHandle.USER_OWNER;
-        final boolean isRestrictedUser = mUm.getUserInfo(myUserId).isRestricted();
 
         final Activity activity = getActivity();
         mAirplaneModePreference = (SwitchPreference) findPreference(KEY_TOGGLE_AIRPLANE);
@@ -270,15 +236,6 @@ public class WirelessSettings extends SettingsPreferenceFragment
 
         mAirplaneModeEnabler = new AirplaneModeEnabler(activity, mAirplaneModePreference);
         mNfcEnabler = new NfcEnabler(activity, nfc, androidBeam);
-
-        mSmsApplicationPreference = (AppListPreference) findPreference(KEY_SMS_APPLICATION);
-        // Restricted users cannot currently read/write SMS.
-        if (isRestrictedUser) {
-            removePreference(KEY_SMS_APPLICATION);
-        } else {
-            mSmsApplicationPreference.setOnPreferenceChangeListener(this);
-            initSmsApplicationSetting();
-        }
 
         if (ImsManager.isWfcEnabledByPlatform(activity)) {
             mButtonWfc = (PreferenceScreen) findPreference(KEY_WFC_SETTINGS);
@@ -355,11 +312,6 @@ public class WirelessSettings extends SettingsPreferenceFragment
             }
         }
 
-        // Remove SMS Application if the device does not support SMS
-        if (!isSmsSupported()) {
-            removePreference(KEY_SMS_APPLICATION);
-        }
-
         // Remove Airplane Mode settings if it's a stationary device such as a TV.
         if (mPm.hasSystemFeature(PackageManager.FEATURE_TELEVISION)) {
             removePreference(KEY_TOGGLE_AIRPLANE);
@@ -407,13 +359,6 @@ public class WirelessSettings extends SettingsPreferenceFragment
             Preference ps = findPreference(KEY_CELL_BROADCAST_SETTINGS);
             if (ps != null) root.removePreference(ps);
         }
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        initSmsApplicationSetting();
     }
 
     @Override
@@ -473,15 +418,6 @@ public class WirelessSettings extends SettingsPreferenceFragment
         return R.string.help_url_more_networks;
     }
 
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference == mSmsApplicationPreference && newValue != null) {
-            SmsApplication.setDefaultApplication(newValue.toString(), getActivity());
-            return true;
-        }
-        return false;
-    }
-
     /**
      * For Search.
      */
@@ -504,7 +440,6 @@ public class WirelessSettings extends SettingsPreferenceFragment
                 final UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
                 final int myUserId = UserHandle.myUserId();
                 final boolean isSecondaryUser = myUserId != UserHandle.USER_OWNER;
-                final boolean isRestrictedUser = um.getUserInfo(myUserId).isRestricted();
                 final boolean isWimaxEnabled = !isSecondaryUser
                         && context.getResources().getBoolean(
                         com.android.internal.R.bool.config_wimaxEnabled);
@@ -540,13 +475,6 @@ public class WirelessSettings extends SettingsPreferenceFragment
                         R.bool.config_show_mobile_plan);
                 if (!isMobilePlanEnabled) {
                     result.add(KEY_MANAGE_MOBILE_PLAN);
-                }
-
-                // Remove SMS Application if the device does not support SMS
-                TelephonyManager tm =
-                        (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-                if (!tm.isSmsCapable() || isRestrictedUser) {
-                    result.add(KEY_SMS_APPLICATION);
                 }
 
                 final PackageManager pm = context.getPackageManager();

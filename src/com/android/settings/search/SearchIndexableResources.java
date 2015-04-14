@@ -33,6 +33,7 @@ import com.android.settings.WifiCallingSettings;
 import com.android.settings.WirelessSettings;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.applications.AdvancedAppSettings;
+import com.android.settings.applications.ManageDefaultApps;
 import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.deviceinfo.StorageSettings;
 import com.android.settings.deviceinfo.UsbSettings;
@@ -201,8 +202,15 @@ public final class SearchIndexableResources {
         sResMap.put(AdvancedAppSettings.class.getName(),
                 new SearchIndexableResource(
                         Ranking.getRankForClassName(AdvancedAppSettings.class.getName()),
-                        NO_DATA_RES_ID,
+                        R.xml.advanced_apps,
                         AdvancedAppSettings.class.getName(),
+                        R.drawable.ic_settings_applications));
+
+        sResMap.put(ManageDefaultApps.class.getName(),
+                new SearchIndexableResource(
+                        Ranking.getRankForClassName(ManageDefaultApps.class.getName()),
+                        NO_DATA_RES_ID,
+                        ManageDefaultApps.class.getName(),
                         R.drawable.ic_settings_applications));
 
         sResMap.put(UserSettings.class.getName(),

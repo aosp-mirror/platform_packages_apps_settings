@@ -24,22 +24,22 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.AsyncTask;
-import android.os.Parcel;
-import android.os.Parcelable;
-import android.preference.ListPreference;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
-import android.util.ArrayMap;
+import android.util.ArraySet;
 import android.util.AttributeSet;
+
+import com.android.settings.AppListPreference;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A preference for choosing the default emergency app
  */
-public class DefaultEmergencyPreference extends ListPreference {
+public class DefaultEmergencyPreference extends AppListPreference {
 
     private final ContentResolver mContentResolver;
 
@@ -49,25 +49,6 @@ public class DefaultEmergencyPreference extends ListPreference {
 
         if (isAvailable(context)) {
             load();
-        }
-    }
-
-    @Override
-    protected Parcelable onSaveInstanceState() {
-        Parcelable superState = super.onSaveInstanceState();
-        return new SavedState(getEntries(), getEntryValues(), getSummary(), superState);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Parcelable state) {
-        if (state instanceof SavedState) {
-            SavedState savedState = (SavedState) state;
-            setEntries(savedState.entries);
-            setEntryValues(savedState.entryValues);
-            setSummary(savedState.summary);
-            super.onRestoreInstanceState(savedState.superState);
-        } else {
-            super.onRestoreInstanceState(state);
         }
     }
 
@@ -86,25 +67,23 @@ public class DefaultEmergencyPreference extends ListPreference {
     }
 
     private void load() {
-        new AsyncTask<Void, Void, ArrayMap<String, CharSequence>>() {
+        new AsyncTask<Void, Void, Set<String>>() {
             @Override
-            protected ArrayMap<String, CharSequence> doInBackground(Void[] params) {
+            protected Set<String> doInBackground(Void[] params) {
                 return resolveAssistPackageAndQueryApps();
             }
 
             @Override
-            protected void onPostExecute(ArrayMap<String, CharSequence> entries) {
-                setEntries(entries.values().toArray(new CharSequence[entries.size()]));
-                setEntryValues(entries.keySet().toArray(new String[entries.size()]));
-
-                setValue(Settings.Secure.getString(mContentResolver,
-                        Settings.Secure.EMERGENCY_ASSISTANCE_APPLICATION));
+            protected void onPostExecute(Set<String> entries) {
+                String currentPkg = Settings.Secure.getString(mContentResolver,
+                        Settings.Secure.EMERGENCY_ASSISTANCE_APPLICATION);
+                setPackageNames(entries.toArray(new String[entries.size()]), currentPkg);
             }
         }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
-    private ArrayMap<String, CharSequence> resolveAssistPackageAndQueryApps() {
-        ArrayMap<String, CharSequence> packages = new ArrayMap<>();
+    private Set<String> resolveAssistPackageAndQueryApps() {
+        Set<String> packages = new ArraySet<>();
 
         Intent queryIntent = new Intent(TelephonyManager.ACTION_EMERGENCY_ASSISTANCE);
         PackageManager packageManager = getContext().getPackageManager();
@@ -113,15 +92,13 @@ public class DefaultEmergencyPreference extends ListPreference {
         PackageInfo bestMatch = null;
         for (int i = 0; i < infos.size(); i++) {
             if (infos.get(i) == null || infos.get(i).activityInfo == null
-                    || packages.containsKey(infos.get(i).activityInfo.packageName)) {
+                    || packages.contains(infos.get(i).activityInfo.packageName)) {
                 continue;
             }
 
             String packageName = infos.get(i).activityInfo.packageName;
-            CharSequence label = infos.get(i).activityInfo.applicationInfo
-                    .loadLabel(packageManager);
 
-            packages.put(packageName, label);
+            packages.add(packageName);
 
             PackageInfo packageInfo;
             try {
@@ -142,7 +119,7 @@ public class DefaultEmergencyPreference extends ListPreference {
         String defaultPackage = Settings.Secure.getString(mContentResolver,
                 Settings.Secure.EMERGENCY_ASSISTANCE_APPLICATION);
         boolean defaultMissing = TextUtils.isEmpty(defaultPackage)
-                || !packages.containsKey(defaultPackage);
+                || !packages.contains(defaultPackage);
         if (bestMatch != null && defaultMissing) {
             Settings.Secure.putString(mContentResolver,
                     Settings.Secure.EMERGENCY_ASSISTANCE_APPLICATION,
@@ -160,50 +137,5 @@ public class DefaultEmergencyPreference extends ListPreference {
     private static boolean isSystemApp(PackageInfo info) {
         return info.applicationInfo != null
                 && (info.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0;
-    }
-
-    private static class SavedState implements Parcelable {
-
-        public final CharSequence[] entries;
-        public final CharSequence[] entryValues;
-        public final CharSequence summary;
-        public final Parcelable superState;
-
-        public SavedState(CharSequence[] entries, CharSequence[] entryValues,
-                CharSequence summary, Parcelable superState) {
-            this.entries = entries;
-            this.entryValues = entryValues;
-            this.summary = summary;
-            this.superState = superState;
-        }
-
-        @Override
-        public int describeContents() {
-            return 0;
-        }
-
-        @Override
-        public void writeToParcel(Parcel dest, int flags) {
-            dest.writeCharSequenceArray(entries);
-            dest.writeCharSequenceArray(entryValues);
-            dest.writeCharSequence(summary);
-            dest.writeParcelable(superState, flags);
-        }
-
-        public Creator<SavedState> CREATOR = new Creator<SavedState>() {
-            @Override
-            public SavedState createFromParcel(Parcel source) {
-                CharSequence[] entries = source.readCharSequenceArray();
-                CharSequence[] entryValues = source.readCharSequenceArray();
-                CharSequence summary = source.readCharSequence();
-                Parcelable superState = source.readParcelable(getClass().getClassLoader());
-                return new SavedState(entries, entryValues, summary, superState);
-            }
-
-            @Override
-            public SavedState[] newArray(int size) {
-                return new SavedState[size];
-            }
-        };
     }
 }
