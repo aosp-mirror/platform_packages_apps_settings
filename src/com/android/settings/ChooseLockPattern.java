@@ -77,6 +77,13 @@ public class ChooseLockPattern extends SettingsActivity {
         return intent;
     }
 
+    public static Intent createIntent(Context context,
+            boolean requirePassword, String pattern) {
+        Intent intent = createIntent(context, requirePassword, false);
+        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD, pattern);
+        return intent;
+    }
+
     @Override
     protected boolean isValidFragment(String fragmentName) {
         if (ChooseLockPatternFragment.class.getName().equals(fragmentName)) return true;
@@ -115,6 +122,7 @@ public class ChooseLockPattern extends SettingsActivity {
 
         private static final int ID_EMPTY_MESSAGE = -1;
 
+        private String mCurrentPattern;
         protected TextView mHeaderText;
         protected LockPatternView mLockPatternView;
         protected TextView mFooterText;
@@ -142,7 +150,11 @@ public class ChooseLockPattern extends SettingsActivity {
                     if (resultCode != Activity.RESULT_OK) {
                         getActivity().setResult(RESULT_FINISHED);
                         getActivity().finish();
+                    } else {
+                        mCurrentPattern = data.getStringExtra(
+                                ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
                     }
+
                     updateStage(Stage.Introduction);
                     break;
             }
@@ -329,6 +341,7 @@ public class ChooseLockPattern extends SettingsActivity {
 
         private static final String KEY_UI_STAGE = "uiStage";
         private static final String KEY_PATTERN_CHOICE = "chosenPattern";
+        private static final String KEY_CURRENT_PATTERN = "currentPattern";
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -371,6 +384,8 @@ public class ChooseLockPattern extends SettingsActivity {
 
             final boolean confirmCredentials = getActivity().getIntent()
                     .getBooleanExtra("confirm_credentials", true);
+            mCurrentPattern = getActivity().getIntent()
+                    .getStringExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
 
             if (savedInstanceState == null) {
                 if (confirmCredentials) {
@@ -380,7 +395,7 @@ public class ChooseLockPattern extends SettingsActivity {
                     boolean launchedConfirmationActivity =
                         mChooseLockSettingsHelper.launchConfirmationActivity(
                                 CONFIRM_EXISTING_REQUEST,
-                                getString(R.string.unlock_set_unlock_launch_picker_title));
+                                getString(R.string.unlock_set_unlock_launch_picker_title), true);
                     if (!launchedConfirmationActivity) {
                         updateStage(Stage.Introduction);
                     }
@@ -392,6 +407,10 @@ public class ChooseLockPattern extends SettingsActivity {
                 final String patternString = savedInstanceState.getString(KEY_PATTERN_CHOICE);
                 if (patternString != null) {
                     mChosenPattern = LockPatternUtils.stringToPattern(patternString);
+                }
+
+                if (mCurrentPattern == null) {
+                    mCurrentPattern = savedInstanceState.getString(KEY_CURRENT_PATTERN);
                 }
                 updateStage(Stage.values()[savedInstanceState.getInt(KEY_UI_STAGE)]);
             }
@@ -471,6 +490,11 @@ public class ChooseLockPattern extends SettingsActivity {
             if (mChosenPattern != null) {
                 outState.putString(KEY_PATTERN_CHOICE,
                         LockPatternUtils.patternToString(mChosenPattern));
+            }
+
+            if (mCurrentPattern != null) {
+                outState.putString(KEY_CURRENT_PATTERN,
+                        mCurrentPattern);
             }
         }
 
@@ -571,8 +595,9 @@ public class ChooseLockPattern extends SettingsActivity {
 
             final boolean required = getActivity().getIntent().getBooleanExtra(
                     EncryptionInterstitial.EXTRA_REQUIRE_PASSWORD, true);
+
             utils.setCredentialRequiredToDecrypt(required);
-            utils.saveLockPattern(mChosenPattern);
+            utils.saveLockPattern(mChosenPattern, mCurrentPattern);
 
             if (lockVirgin) {
                 utils.setVisiblePatternEnabled(true);

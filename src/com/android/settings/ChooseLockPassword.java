@@ -76,6 +76,14 @@ public class ChooseLockPassword extends SettingsActivity {
         return intent;
     }
 
+    public static Intent createIntent(Context context, int quality,
+            int minLength, final int maxLength, boolean requirePasswordToDecrypt, String password) {
+        Intent intent = createIntent(context, quality, minLength, maxLength, requirePasswordToDecrypt,
+                false);
+        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD, password);
+        return intent;
+    }
+
     @Override
     protected boolean isValidFragment(String fragmentName) {
         if (ChooseLockPasswordFragment.class.getName().equals(fragmentName)) return true;
@@ -101,6 +109,9 @@ public class ChooseLockPassword extends SettingsActivity {
             implements OnClickListener, OnEditorActionListener,  TextWatcher {
         private static final String KEY_FIRST_PIN = "first_pin";
         private static final String KEY_UI_STAGE = "ui_stage";
+        private static final String KEY_CURRENT_PASSWORD = "current_password";
+
+        private String mCurrentPassword;
         private TextView mPasswordEntry;
         private int mPasswordMinLength = LockPatternUtils.MIN_LOCK_PASSWORD_SIZE;
         private int mPasswordMaxLength = 16;
@@ -239,18 +250,24 @@ public class ChooseLockPassword extends SettingsActivity {
 
             Intent intent = getActivity().getIntent();
             final boolean confirmCredentials = intent.getBooleanExtra("confirm_credentials", true);
+            mCurrentPassword = intent.getStringExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
             if (savedInstanceState == null) {
                 updateStage(Stage.Introduction);
                 if (confirmCredentials) {
                     mChooseLockSettingsHelper.launchConfirmationActivity(CONFIRM_EXISTING_REQUEST,
-                            getString(R.string.unlock_set_unlock_launch_picker_title));
+                            getString(R.string.unlock_set_unlock_launch_picker_title), true);
                 }
             } else {
+                // restore from previous state
                 mFirstPin = savedInstanceState.getString(KEY_FIRST_PIN);
                 final String state = savedInstanceState.getString(KEY_UI_STAGE);
                 if (state != null) {
                     mUiStage = Stage.valueOf(state);
                     updateStage(mUiStage);
+                }
+
+                if (mCurrentPassword == null) {
+                    mCurrentPassword = savedInstanceState.getString(KEY_CURRENT_PASSWORD);
                 }
             }
             mDone = false;
@@ -287,6 +304,7 @@ public class ChooseLockPassword extends SettingsActivity {
             super.onSaveInstanceState(outState);
             outState.putString(KEY_UI_STAGE, mUiStage.name());
             outState.putString(KEY_FIRST_PIN, mFirstPin);
+            outState.putString(KEY_CURRENT_PASSWORD, mCurrentPassword);
         }
 
         @Override
@@ -298,6 +316,9 @@ public class ChooseLockPassword extends SettingsActivity {
                     if (resultCode != Activity.RESULT_OK) {
                         getActivity().setResult(RESULT_FINISHED);
                         getActivity().finish();
+                    } else {
+                        mCurrentPassword = data.getStringExtra(
+                                ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
                     }
                     break;
             }
@@ -441,7 +462,7 @@ public class ChooseLockPassword extends SettingsActivity {
                     final boolean required = getActivity().getIntent().getBooleanExtra(
                             EncryptionInterstitial.EXTRA_REQUIRE_PASSWORD, true);
                     mLockPatternUtils.setCredentialRequiredToDecrypt(required);
-                    mLockPatternUtils.saveLockPassword(pin, mRequestedQuality);
+                    mLockPatternUtils.saveLockPassword(pin, mCurrentPassword, mRequestedQuality);
                     getActivity().setResult(RESULT_FINISHED);
                     getActivity().finish();
                     mDone = true;
