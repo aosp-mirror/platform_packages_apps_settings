@@ -24,13 +24,6 @@
         android:persistent="false"
         android:disableDependentsState="true" />
 
-    <com.android.settings.AppListPreference
-        android:key="sms_application"
-        android:title="@string/sms_application_title"
-        settings:keywords="@string/keywords_more_default_sms_app"
-        android:summary="%s"
-        android:persistent="false" />
-
     <SwitchPreference
         android:key="toggle_nfc"
         android:title="@string/nfc_quick_toggle_title"

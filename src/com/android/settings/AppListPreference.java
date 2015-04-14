@@ -23,15 +23,17 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.drawable.Drawable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.preference.ListPreference;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.CheckedTextView;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
+import android.widget.TextView;
 
 /**
  * Extends ListPreference to allow us to show the icons for a given list of applications. We do this
@@ -56,10 +58,10 @@ public class AppListPreference extends ListPreference {
         public View getView(int position, View convertView, ViewGroup parent) {
             LayoutInflater inflater = ((Activity)getContext()).getLayoutInflater();
             View view = inflater.inflate(R.layout.app_preference_item, parent, false);
-            CheckedTextView checkedTextView = (CheckedTextView)view.findViewById(R.id.app_label);
-            checkedTextView.setText(getItem(position));
+            TextView textView = (TextView) view.findViewById(R.id.app_label);
+            textView.setText(getItem(position));
             if (position == mSelectedIndex) {
-                checkedTextView.setChecked(true);
+                view.findViewById(R.id.default_label).setVisibility(View.VISIBLE);
             }
             ImageView imageView = (ImageView)view.findViewById(R.id.app_image);
             imageView.setImageDrawable(mImageDrawables[position]);
@@ -76,14 +78,14 @@ public class AppListPreference extends ListPreference {
         super(context, attrs);
     }
 
-    public void setPackageNames(String[] packageNames, String defaultPackageName) {
+    public void setPackageNames(CharSequence[] packageNames, CharSequence defaultPackageName) {
         // Look up all package names in PackageManager. Skip ones we can't find.
         int foundPackages = 0;
         PackageManager pm = getContext().getPackageManager();
         ApplicationInfo[] appInfos = new ApplicationInfo[packageNames.length];
         for (int i = 0; i < packageNames.length; i++) {
             try {
-                appInfos[i] = pm.getApplicationInfo(packageNames[i], 0);
+                appInfos[i] = pm.getApplicationInfo(packageNames[i].toString(), 0);
                 foundPackages++;
             } catch (NameNotFoundException e) {
                 // Leave appInfos[i] uninitialized; it will be skipped in the list.
@@ -122,5 +124,62 @@ public class AppListPreference extends ListPreference {
             R.layout.app_preference_item, getEntries(), mEntryDrawables, selectedIndex);
         builder.setAdapter(adapter, this);
         super.onPrepareDialogBuilder(builder);
+    }
+
+    @Override
+    protected Parcelable onSaveInstanceState() {
+        Parcelable superState = super.onSaveInstanceState();
+        return new SavedState(getEntryValues(), getValue(), superState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Parcelable state) {
+        if (state instanceof SavedState) {
+            SavedState savedState = (SavedState) state;
+            setPackageNames(savedState.entryValues, savedState.value);
+            super.onRestoreInstanceState(savedState.superState);
+        } else {
+            super.onRestoreInstanceState(state);
+        }
+    }
+
+    private static class SavedState implements Parcelable {
+
+        public final CharSequence[] entryValues;
+        public final CharSequence value;
+        public final Parcelable superState;
+
+        public SavedState(CharSequence[] entryValues, CharSequence value, Parcelable superState) {
+            this.entryValues = entryValues;
+            this.value = value;
+            this.superState = superState;
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeCharSequenceArray(entryValues);
+            dest.writeCharSequence(value);
+            dest.writeParcelable(superState, flags);
+        }
+
+        public static Creator<SavedState> CREATOR = new Creator<SavedState>() {
+            @Override
+            public SavedState createFromParcel(Parcel source) {
+                CharSequence[] entryValues = source.readCharSequenceArray();
+                CharSequence value = source.readCharSequence();
+                Parcelable superState = source.readParcelable(getClass().getClassLoader());
+                return new SavedState(entryValues, value, superState);
+            }
+
+            @Override
+            public SavedState[] newArray(int size) {
+                return new SavedState[size];
+            }
+        };
     }
 }

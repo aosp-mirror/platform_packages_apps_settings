@@ -17,26 +17,37 @@
 package com.android.settings.applications;
 
 import android.annotation.Nullable;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.preference.Preference;
+import android.provider.SearchIndexableResource;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import com.android.settings.InstrumentedFragment;
-import com.android.settings.SettingsPreferenceFragment;
 
+import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class ManageDefaultApps extends SettingsPreferenceFragment
-        implements Preference.OnPreferenceClickListener {
+        implements Preference.OnPreferenceClickListener, Indexable {
 
     private static final String TAG = ManageDefaultApps.class.getSimpleName();
 
     private static final String KEY_DEFAULT_BROWSER = "default_browser";
+    private static final String KEY_SMS_APPLICATION = "default_sms_app";
+    private static final String KEY_DEFAULT_EMERGENCY_APP = "default_emergency_app";
 
     private DefaultBrowserPreference mDefaultBrowserPreference;
     private PackageManager mPm;
@@ -63,6 +74,18 @@ public class ManageDefaultApps extends SettingsPreferenceFragment
                         return mPm.setDefaultBrowserPackageName(packageName.toString(), myUserId);
                     }
         });
+        final boolean isRestrictedUser = UserManager.get(getActivity())
+                .getUserInfo(myUserId).isRestricted();
+
+        // Restricted users cannot currently read/write SMS.
+        // Remove SMS Application if the device does not support SMS
+        if (isRestrictedUser || !DefaultSmsPreference.isAvailable(getActivity())) {
+            removePreference(KEY_SMS_APPLICATION);
+        }
+
+        if (!DefaultEmergencyPreference.isAvailable(getActivity())) {
+            removePreference(KEY_DEFAULT_EMERGENCY_APP);
+        }
     }
 
     @Override
@@ -96,4 +119,33 @@ public class ManageDefaultApps extends SettingsPreferenceFragment
     public boolean onPreferenceClick(Preference preference) {
         return false;
     }
+
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+        new BaseSearchIndexProvider() {
+            @Override
+            public List<SearchIndexableResource> getXmlResourcesToIndex(
+                    Context context, boolean enabled) {
+                SearchIndexableResource sir = new SearchIndexableResource(context);
+                sir.xmlResId = R.xml.default_apps;
+                return Arrays.asList(sir);
+            }
+
+            @Override
+            public List<String> getNonIndexableKeys(Context context) {
+                final ArrayList<String> result = new ArrayList<String>();
+
+                // Remove SMS Application if the device does not support SMS
+                final boolean isRestrictedUser = UserManager.get(context)
+                        .getUserInfo(UserHandle.myUserId()).isRestricted();
+                if (!DefaultSmsPreference.isAvailable(context) || isRestrictedUser) {
+                    result.add(KEY_SMS_APPLICATION);
+                }
+
+                if (!DefaultEmergencyPreference.isAvailable(context)) {
+                    result.add(KEY_DEFAULT_EMERGENCY_APP);
+                }
+
+                return result;
+            }
+    };
 }

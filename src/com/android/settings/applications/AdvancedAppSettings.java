@@ -16,35 +16,27 @@
 package com.android.settings.applications;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.os.Bundle;
 import android.preference.Preference;
-import android.provider.SearchIndexableResource;
 import android.util.Log;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.ApplicationsState.AppEntry;
-import com.android.settings.applications.ApplicationsState.Callbacks;
 import com.android.settings.applications.ApplicationsState.Session;
-import com.android.settings.applications.PermissionsInfo.Callback;
-import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class AdvancedAppSettings extends SettingsPreferenceFragment implements Callbacks, Callback,
-        Indexable {
+public class AdvancedAppSettings extends SettingsPreferenceFragment implements
+        ApplicationsState.Callbacks, PermissionsInfo.Callback {
 
     static final String TAG = "AdvancedAppSettings";
     static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     private static final String KEY_APP_PERM = "manage_perms";
     private static final String KEY_APP_DOMAIN_URLS = "domain_urls";
-    private static final String KEY_DEFAULT_EMERGENCY_APP = "default_emergency_app";
 
     private ApplicationsState mApplicationsState;
     private Session mSession;
@@ -63,10 +55,6 @@ public class AdvancedAppSettings extends SettingsPreferenceFragment implements C
         mAppPermsPreference = findPreference(KEY_APP_PERM);
         mAppDomainURLsPreference = findPreference(KEY_APP_DOMAIN_URLS);
         updateUI();
-
-        if (!DefaultEmergencyPreference.isAvailable(getActivity())) {
-            removePreference(KEY_DEFAULT_EMERGENCY_APP);
-        }
     }
 
     private void updateUI() {
@@ -142,26 +130,4 @@ public class AdvancedAppSettings extends SettingsPreferenceFragment implements C
                 mPermissionsInfo.getRuntimePermAppsGrantedCount(),
                 mPermissionsInfo.getRuntimePermAppsCount()));
     }
-
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-        @Override
-        public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                boolean enabled) {
-            ArrayList<SearchIndexableResource> result = new ArrayList<>(1);
-            SearchIndexableResource sir = new SearchIndexableResource(context);
-            sir.xmlResId = R.xml.advanced_apps;
-            result.add(sir);
-            return result;
-        }
-
-        @Override
-        public List<String> getNonIndexableKeys(Context context) {
-            ArrayList<String> result = new ArrayList<>(1);
-            if (!DefaultEmergencyPreference.isAvailable(context)) {
-                result.add(KEY_DEFAULT_EMERGENCY_APP);
-            }
-            return result;
-        }
-    };
 }

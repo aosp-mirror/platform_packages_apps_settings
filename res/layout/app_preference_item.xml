@@ -24,18 +24,29 @@
         android:id="@+id/app_image"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:adjustViewBounds="true"
         android:padding="6dip"
     />
-    <CheckedTextView
+    <TextView
         android:id="@+id/app_label"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:minHeight="?android:attr/listPreferredItemHeight"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="?android:attr/textColorAlertDialogListItem"
         android:gravity="center_vertical"
         android:paddingEnd="7dip"
-        android:checkMark="?android:attr/listChoiceIndicatorSingle"
         android:ellipsize="marquee"
+    />
+    <TextView
+        android:id="@+id/default_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="?android:attr/listPreferredItemHeight"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:gravity="center_vertical"
+        android:text="@string/default_app"
+        android:visibility="gone"
+        android:paddingEnd="7dip"
     />
 </LinearLayout>
