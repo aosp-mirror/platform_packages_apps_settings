@@ -58,9 +58,7 @@ import com.android.settings.Settings;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.deviceinfo.StorageMeasurement.MeasurementDetails;
 import com.android.settings.deviceinfo.StorageMeasurement.MeasurementReceiver;
-import com.android.settings.deviceinfo.StorageSettings.FormatTask;
 import com.android.settings.deviceinfo.StorageSettings.MountTask;
-import com.android.settings.deviceinfo.StorageSettings.UnmountTask;
 import com.google.android.collect.Lists;
 
 import java.io.File;
@@ -82,6 +80,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
     private StorageManager mStorageManager;
     private UserManager mUserManager;
 
+    private String mVolumeId;
     private VolumeInfo mVolume;
     private VolumeInfo mSharedVolume;
 
@@ -119,8 +118,10 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         mUserManager = context.getSystemService(UserManager.class);
         mStorageManager = context.getSystemService(StorageManager.class);
 
-        final String volId = getArguments().getString(EXTRA_VOLUME_ID);
-        mVolume = Preconditions.checkNotNull(mStorageManager.findVolumeById(volId));
+        mVolumeId = getArguments().getString(EXTRA_VOLUME_ID);
+        mVolume = mStorageManager.findVolumeById(mVolumeId);
+
+        Preconditions.checkNotNull(mVolume);
         Preconditions.checkState(mVolume.type == VolumeInfo.TYPE_PRIVATE);
 
         addPreferencesFromResource(R.xml.device_info_storage_volume);
@@ -233,6 +234,14 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
     @Override
     public void onResume() {
         super.onResume();
+
+        // Refresh to verify that we haven't been formatted away
+        mVolume = mStorageManager.findVolumeById(mVolumeId);
+        if (mVolume == null) {
+            getActivity().finish();
+            return;
+        }
+
         mStorageManager.registerListener(mStorageListener);
         refresh();
     }
@@ -283,6 +292,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         final Context context = getActivity();
+        final Bundle args = new Bundle();
         switch (item.getItemId()) {
             case R.id.storage_rename:
                 RenameFragment.show(this);
@@ -291,10 +301,14 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
                 new MountTask(context, mVolume.id).execute();
                 return true;
             case R.id.storage_unmount:
-                new UnmountTask(context, mVolume.id).execute();
+                args.putString(StorageSettings.EXTRA_VOLUME_ID, mVolume.id);
+                startFragment(this, PrivateVolumeUnmountConfirm.class.getCanonicalName(),
+                        R.string.storage_menu_unmount, 0, args);
                 return true;
             case R.id.storage_format:
-                new FormatTask(context, mVolume.id).execute();
+                args.putString(StorageSettings.EXTRA_VOLUME_ID, mVolume.id);
+                startFragment(this, PrivateVolumeFormatConfirm.class.getCanonicalName(),
+                        R.string.storage_menu_format, 0, args);
                 return true;
             case R.id.storage_usb:
                 startFragment(this, UsbSettings.class.getCanonicalName(),

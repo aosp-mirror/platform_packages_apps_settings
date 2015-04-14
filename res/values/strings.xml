@@ -16,16 +16,12 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- Strings for Dialog yes button -->
     <string name="yes">"Yes"</string>
-
     <!-- Strings for Dialog no button -->
     <string name="no">"No"</string>
-
     <!-- Strings for Dialog create button -->
     <string name="create">Create</string>
-
     <!-- Strings for Dialog allow button -->
     <string name="allow">Allow</string>
-
     <!-- Strings for Dialog deny button -->
     <string name="deny">Deny</string>
 
@@ -586,15 +582,14 @@
 
     <!-- Button label for generic cancel action [CHAR LIMIT=20] -->
     <string name="cancel">Cancel</string>
-
     <!-- Button label for generic OK action [CHAR LIMIT=20] -->
     <string name="okay">OK</string>
-
     <!-- Button label for generic forget action [CHAR LIMIT=20] -->
     <string name="forget">Forget</string>
-
     <!-- Button label for generic save action [CHAR LIMIT=20] -->
     <string name="save">Save</string>
+    <!-- Button label for generic done action [CHAR LIMIT=20] -->
+    <string name="done">Done</string>
 
     <!-- Title of the Settings activity shown within the application itself. -->
     <string name="settings_label">Settings</string>
@@ -2325,6 +2320,99 @@
 
     <!-- Title of dialog prompting user to rename a storage volume [CHAR LIMIT=32]-->
     <string name="storage_rename_title">Rename storage</string>
+
+    <!-- Body of dialog informing user about consequences of formatting an internal storage device [CHAR LIMIT=NONE]-->
+    <string name="storage_internal_format_details">After formatting, you can use this <xliff:g id="name" example="SD card">^1</xliff:g> in other devices.
+\n\nAll data on this <xliff:g id="name" example="SD card">^1</xliff:g> will be erased. Consider backing up first.
+\n\n<b>Back up photos &amp; other media</b>
+\nMove your media files to alternative storage on this device, or transfer them to a computer using a USB cable.
+\n\n<b>Back up apps</b>
+\nAll apps stored on this <xliff:g id="name" example="SD card">^1</xliff:g> will be uninstalled and their data will be erased. To keep these apps, move them to alternative storage on this device.</string>
+
+    <!-- Body of dialog informing user about consequences of ejecting an internal storage device [CHAR LIMIT=NONE]-->
+    <string name="storage_internal_unmount_details"><b>When you eject this <xliff:g id="name" example="SD card">^1</xliff:g>, apps stored on it will stop working, and media files stored on it will not be available until it is reinserted.</b>
+\n\nThis <xliff:g id="name" example="SD card">^1</xliff:g> is formatted to work on this device only.  It won\'t work on any others.</string>
+
+    <!-- Title of wizard step prompting user to setup a storage device [CHAR LIMIT=32] -->
+    <string name="storage_wizard_init_title">Set up your <xliff:g id="name" example="SD card">^1</xliff:g></string>
+    <!-- Title of wizard choice to use storage device as external storage [CHAR LIMIT=64] -->
+    <string name="storage_wizard_init_external_title">Use as portable storage</string>
+    <!-- Summary of wizard choice to use storage device as external storage [CHAR LIMIT=NONE] -->
+    <string name="storage_wizard_init_external_summary">For moving photos and other media between devices.</string>
+    <!-- Title of wizard choice to use storage device as internal storage [CHAR LIMIT=64] -->
+    <string name="storage_wizard_init_internal_title">Use as internal storage</string>
+    <!-- Summary of wizard choice to use storage device as internal storage [CHAR LIMIT=NONE] -->
+    <string name="storage_wizard_init_internal_summary">For storing anything on this device only, including apps and photos. Requires formatting that prevents it from working with other devices.</string>
+
+    <!-- Title of wizard step prompting user to format a storage device [CHAR LIMIT=32] -->
+    <string name="storage_wizard_format_confirm_title">Format as internal storage</string>
+    <!-- Body of wizard step prompting user to format a storage device [CHAR LIMIT=NONE] -->
+    <string name="storage_wizard_format_confirm_body">This requires the <xliff:g id="name" example="SD card">^1</xliff:g> to be formatted to make it secure.
+\n\nAfter formatting, this <xliff:g id="name" example="SD card">^1</xliff:g> will only work in this device.
+\n\n<b>Formatting erases all data currently stored on the <xliff:g id="name" example="SD card">^1</xliff:g>.</b> To avoid losing the data, consider backing it up.
+    </string>
+    <!-- Next button text of wizard step prompting user to format a storage device [CHAR LIMIT=32] -->
+    <string name="storage_wizard_format_confirm_next">Erase &amp; format</string>
+
+    <!-- Title of wizard step showing formatting progress [CHAR LIMIT=32] -->
+    <string name="storage_wizard_format_progress_title">Formatting <xliff:g id="name" example="SD card">^1</xliff:g>\u2026</string>
+    <!-- Body of wizard step showing formatting progress [CHAR LIMIT=NONE] -->
+    <string name="storage_wizard_format_progress_body">Don\'t remove the <xliff:g id="name" example="SD card">^1</xliff:g> while it\'s formatting.</string>
+
+    <!-- Title of wizard step prompting user to migrate data to new storage [CHAR LIMIT=32] -->
+    <string name="storage_wizard_migrate_title">Move data to new storage</string>
+    <!-- Body of wizard step prompting user to migrate data to new storage [CHAR LIMIT=NONE] -->
+    <string name="storage_wizard_migrate_body">You can move your photos, files, and app data to this new <xliff:g id="name" example="SD card">^1</xliff:g>.
+\n\nThe move takes about <xliff:g id="time" example="1 hour">^2</xliff:g> and will free <xliff:g id="size" example="1.2 GB">^3</xliff:g> on internal storage. Some apps won\'t work while it\'s underway.
+    </string>
+    <!-- Title of wizard choice to migrate data right now [CHAR LIMIT=64] -->
+    <string name="storage_wizard_migrate_now">Move now</string>
+    <!-- Title of wizard choice to migrate data at later time [CHAR LIMIT=NONE] -->
+    <string name="storage_wizard_migrate_later">Move later</string>
+
+    <!-- Title of wizard step prompting user to start data migration [CHAR LIMIT=32] -->
+    <string name="storage_wizard_migrate_confirm_title">Move data now</string>
+    <!-- Body of wizard step providing details about data migration [CHAR LIMIT=NONE] -->
+    <string name="storage_wizard_migrate_confirm_body"><b>The move takes about <xliff:g id="time" example="1 hour">^1</xliff:g>. It will free <xliff:g id="size" example="1.2 GB">^2</xliff:g> of internal storage.</b></string>
+    <!-- Title of wizard button prompting user to start data migration [CHAR LIMIT=32] -->
+    <string name="storage_wizard_migrate_confirm_next">Move</string>
+
+    <!-- Title of wizard step showing migration progress [CHAR LIMIT=32] -->
+    <string name="storage_wizard_migrate_progress_title">Moving data\u2026</string>
+
+    <!-- Body of wizard step providing details about data migration [CHAR LIMIT=NONE] -->
+    <string name="storage_wizard_migrate_details">During the move:
+\n\u2022 Don\'t remove the <xliff:g id="name" example="SD card">^1</xliff:g>.
+\n\u2022 Some apps won\'t work correctly.
+\n\u2022 Keep the device charged.
+    </string>
+
+    <!-- Title of wizard step indicating that storage is ready [CHAR LIMIT=32] -->
+    <string name="storage_wizard_ready_title"><xliff:g id="name" example="SD card">^1</xliff:g> is ready</string>
+    <!-- Body of wizard step indicating that external storage is ready [CHAR LIMIT=NONE] -->
+    <string name="storage_wizard_ready_external_body">
+        Your <xliff:g id="name" example="SD card">^1</xliff:g> is all set to use with photos and other media.
+    </string>
+    <!-- Body of wizard step indicating that internal storage is ready [CHAR LIMIT=NONE] -->
+    <string name="storage_wizard_ready_internal_body">Your new <xliff:g id="name" example="SD card">^1</xliff:g> is working.
+\n\nTo move photos, files, and app data to this device, go to Settings > Storage.
+    </string>
+
+    <!-- Title of wizard step prompting user to move an app [CHAR LIMIT=32] -->
+    <string name="storage_wizard_move_confirm_title">Move <xliff:g id="app" example="Calculator">^1</xliff:g></string>
+    <!-- Body of wizard step prompting user to move an app [CHAR LIMIT=NONE] -->
+    <string name="storage_wizard_move_confirm_body">Moving <xliff:g id="app" example="Calculator">^1</xliff:g> and its data to <xliff:g id="name" example="SD card">^2</xliff:g> will take only a few moments. You won\'t be able to use the app until the move is complete.
+\n\nDon\'t remove the <xliff:g id="name" example="SD card">^2</xliff:g> during the move.
+    </string>
+
+    <!-- Title of wizard step showing app move progress [CHAR LIMIT=32] -->
+    <string name="storage_wizard_move_progress_title">Moving <xliff:g id="app" example="Calculator">^1</xliff:g>\u2026</string>
+    <!-- Body of wizard step showing app move progress [CHAR LIMIT=NONE] -->
+    <string name="storage_wizard_move_progress_body">Don\'t remove the <xliff:g id="name" example="SD card">^1</xliff:g> during the move.
+\n\nThe <xliff:g id="app" example="Calculator">^2</xliff:g> app on this device won\'t be available until the move is complete.
+    </string>
+    <!-- Title of wizard button offering to cancel move [CHAR LIMIT=32] -->
+    <string name="storage_wizard_move_progress_cancel">Cancel move</string>
 
     <!-- Phone info screen, section titles: -->
     <string name="battery_status_title">Battery status</string>
