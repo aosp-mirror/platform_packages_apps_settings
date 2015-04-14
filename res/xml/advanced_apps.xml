@@ -40,22 +40,6 @@
                 android:value="com.android.settings.Settings$DomainsURLsAppListActivity" />
     </PreferenceScreen>
 
-    <PreferenceScreen
-        android:key="all_apps"
-        android:fragment="com.android.settings.applications.ManageApplications"
-        android:title="@string/filter_all_apps"
-        settings:keywords="@string/keywords_all_apps">
-        <extra
-            android:name="classname"
-            android:value="com.android.settings.Settings$AllApplicationsActivity" />
-    </PreferenceScreen>
-
-    <Preference
-        android:key="reset_all"
-        android:title="@string/reset_app_preferences"
-        android:summary="@string/reset_app_preferences_description"
-        settings:keywords="@string/keywords_reset_apps" />
-
     <com.android.settings.applications.DefaultEmergencyPreference
         android:key="default_emergency_app"
         android:title="@string/default_emergency_app"

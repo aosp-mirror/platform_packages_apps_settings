@@ -349,6 +349,27 @@ public class ApplicationsState {
         }
     };
 
+    public static class CompoundFilter implements AppFilter {
+        private final AppFilter mFirstFilter;
+        private final AppFilter mSecondFilter;
+
+        public CompoundFilter(AppFilter first, AppFilter second) {
+            mFirstFilter = first;
+            mSecondFilter = second;
+        }
+
+        @Override
+        public void init() {
+            mFirstFilter.init();
+            mSecondFilter.init();
+        }
+
+        @Override
+        public boolean filterApp(AppEntry info) {
+            return mFirstFilter.filterApp(info) && mSecondFilter.filterApp(info);
+        }
+    }
+
     final Context mContext;
     final PackageManager mPm;
     final IPackageManager mIpm;
