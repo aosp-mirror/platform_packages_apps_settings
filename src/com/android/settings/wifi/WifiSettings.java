@@ -93,7 +93,6 @@ public class WifiSettings extends RestrictedSettingsFragment
     private static final int MENU_ID_FORGET = Menu.FIRST + 7;
     private static final int MENU_ID_MODIFY = Menu.FIRST + 8;
     private static final int MENU_ID_WRITE_NFC = Menu.FIRST + 9;
-    private static final int MENU_ID_APPS = Menu.FIRST + 10;
 
     public static final int WIFI_DIALOG_ID = 1;
     /* package */ static final int WPS_PBC_DIALOG_ID = 2;
@@ -119,9 +118,6 @@ public class WifiSettings extends RestrictedSettingsFragment
     private WriteWifiConfigToNfcDialog mWifiToNfcDialog;
 
     private TextView mEmptyView;
-
-    private boolean showAppIcons = false;
-    private MenuItem showAppMenuItem = null;
 
     // this boolean extra specifies whether to disable the Next button when not connected. Used by
     // account creation outside of setup wizard.
@@ -324,8 +320,6 @@ public class WifiSettings extends RestrictedSettingsFragment
                .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
         menu.add(Menu.NONE, MENU_ID_ADVANCED, 0, R.string.wifi_menu_advanced)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
-        showAppMenuItem = menu.add(Menu.NONE, MENU_ID_APPS, 0, R.string.wifi_menu_apps);
-        showAppMenuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
         ta.recycle();
     }
 
@@ -405,16 +399,6 @@ public class WifiSettings extends RestrictedSettingsFragment
                             R.string.wifi_advanced_titlebar, -1 /* Do not request a results */,
                             null);
                 }
-                return true;
-            case MENU_ID_APPS:
-                showAppIcons = !showAppIcons;
-
-                if (showAppIcons) {
-                    showAppMenuItem.setTitle(R.string.wifi_menu_apps_strength);
-                } else {
-                    showAppMenuItem.setTitle(R.string.wifi_menu_apps);
-                }
-                onAccessPointsChanged();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -584,9 +568,6 @@ public class WifiSettings extends RestrictedSettingsFragment
                     if (accessPoint.getLevel() != -1) {
                         AccessPointPreference preference = new AccessPointPreference(accessPoint,
                                 getActivity());
-                        if (showAppIcons) {
-                            preference.showAppIcon();
-                        }
 
                         getPreferenceScreen().addPreference(preference);
                         accessPoint.setListener(this);
