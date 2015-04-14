@@ -100,6 +100,7 @@ import com.android.settings.notification.NotificationSettings;
 import com.android.settings.notification.NotificationStation;
 import com.android.settings.notification.OtherSoundSettings;
 import com.android.settings.notification.ZenModeExternalRuleSettings;
+import com.android.settings.notification.ZenModePrioritySettings;
 import com.android.settings.notification.ZenModeSettings;
 import com.android.settings.notification.ZenModeScheduleRuleSettings;
 import com.android.settings.print.PrintJobSettingsFragment;
@@ -335,6 +336,7 @@ public class SettingsActivity extends Activity
             OtherSoundSettings.class.getName(),
             ApnSettings.class.getName(),
             WifiCallingSettings.class.getName(),
+            ZenModePrioritySettings.class.getName(),
             ZenModeScheduleRuleSettings.class.getName(),
             ZenModeExternalRuleSettings.class.getName(),
     };
