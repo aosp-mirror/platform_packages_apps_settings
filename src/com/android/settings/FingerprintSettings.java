@@ -19,6 +19,7 @@ package com.android.settings;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -50,6 +51,16 @@ import java.util.List;
  * Settings screen for fingerprints
  */
 public class FingerprintSettings extends SettingsActivity {
+    /**
+     * Used by the FP settings wizard to indicate the wizard is
+     * finished, and each activity in the wizard should finish.
+     * <p>
+     * Previously, each activity in the wizard would finish itself after
+     * starting the next activity. However, this leads to broken 'Back'
+     * behavior. So, now an activity does not finish itself until it gets this
+     * result.
+     */
+    static final int RESULT_FINISHED = RESULT_FIRST_USER;
 
     @Override
     public Intent getIntent() {
@@ -85,6 +96,9 @@ public class FingerprintSettings extends SettingsActivity {
         private static final int MSG_REFRESH_FINGERPRINT_TEMPLATES = 1000;
         private static final int MSG_HIGHLIGHT_FINGERPRINT_ITEM = 1001;
 
+        private static final int CONFIRM_REQUEST = 101;
+        private static final int CHOOSE_LOCK_GENERIC_REQUEST = 102;
+
         private static final int ADD_FINGERPRINT_REQUEST = 10;
 
         private static final boolean ENABLE_USAGE_CATEGORY = false;
@@ -95,6 +109,7 @@ public class FingerprintSettings extends SettingsActivity {
         private PreferenceGroup mManageCategory;
         private CancellationSignal mFingerprintCancel;
         private int mMaxFingerprintAttempts;
+        private byte[] mToken;
 
         private AuthenticationCallback mAuthCallback = new AuthenticationCallback() {
             @Override
@@ -173,8 +188,18 @@ public class FingerprintSettings extends SettingsActivity {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
+            if (savedInstanceState != null) {
+                mToken = savedInstanceState.getByteArray(
+                        ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
+            }
+
             mFingerprintManager = (FingerprintManager) getActivity().getSystemService(
                     Context.FINGERPRINT_SERVICE);
+
+            // Need to authenticate a session token if none
+            if (mToken == null) {
+                launchChooseOrConfirmLock();
+            }
         }
 
         protected void removeFingerprintPreference(int fingerprintId) {
@@ -268,6 +293,7 @@ public class FingerprintSettings extends SettingsActivity {
             // Make sure we reload the preference hierarchy since fingerprints may be added,
             // deleted or renamed.
             createPreferenceHierarchy();
+
             retryFingerprint(true);
         }
 
@@ -275,6 +301,12 @@ public class FingerprintSettings extends SettingsActivity {
         public void onPause() {
             super.onPause();
             stopFingerprint();
+        }
+
+        @Override
+        public void onSaveInstanceState(final Bundle outState) {
+            outState.putByteArray(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN,
+                    mToken);
         }
 
         @Override
@@ -342,6 +374,43 @@ public class FingerprintSettings extends SettingsActivity {
         @Override
         protected int getHelpResource() {
             return R.string.help_url_security;
+        }
+
+        @Override
+        public void onActivityResult(int requestCode, int resultCode, Intent data) {
+            super.onActivityResult(requestCode, resultCode, data);
+            if (requestCode == CHOOSE_LOCK_GENERIC_REQUEST
+                    || requestCode == CONFIRM_REQUEST) {
+                if (resultCode == RESULT_FINISHED || resultCode == RESULT_OK) {
+                    // The lock pin/pattern/password was set. Start enrolling!
+                    if (data != null) {
+                        mToken = data.getByteArrayExtra(
+                                ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
+                    }
+                }
+            }
+
+            if (mToken == null) {
+                // Didn't get an authentication, finishing
+                getActivity().finish();
+            }
+        }
+
+        private void launchChooseOrConfirmLock() {
+            Intent intent = new Intent();
+            long challenge = mFingerprintManager.preEnroll();
+            ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(getActivity(), this);
+            // TODO: update text or remove params from method
+            if (!helper.launchConfirmationActivity(CONFIRM_REQUEST, null,
+                        null, null, challenge)) {
+                intent.setClassName("com.android.settings", ChooseLockGeneric.class.getName());
+                intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.MINIMUM_QUALITY_KEY,
+                        DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);
+                intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.HIDE_DISABLED_PREFS, true);
+                intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, true);
+                intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, challenge);
+                startActivityForResult(intent, CHOOSE_LOCK_GENERIC_REQUEST);
+            }
         }
     }
 

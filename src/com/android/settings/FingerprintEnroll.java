@@ -105,6 +105,7 @@ public class FingerprintEnroll extends SettingsActivity {
         private ProgressBar mProgressBar;
         private ImageView mFingerprintAnimator;
         private ObjectAnimator mProgressAnim;
+        private byte[] mToken;
 
         // Give the user a chance to see progress completed before jumping to the next stage.
         Runnable mDelayedFinishRunnable = new Runnable() {
@@ -253,8 +254,8 @@ public class FingerprintEnroll extends SettingsActivity {
 
                 case EnrollingStart:
                     mEnrollmentSteps = -1;
-                    long challenge = 0x12345; // TODO: get from keyguard confirmation
-                    mFingerprintManager.enroll(challenge, mEnrollmentCancel, mEnrollmentCallback, 0);
+                    // TODO: pass in mToken
+                    mFingerprintManager.enroll(0, mEnrollmentCancel, mEnrollmentCallback, 0);
                     mProgressBar.setProgress(0);
                     mEnrolling = true;
                     startFingerprintAnimator(); // XXX hack - this should follow fingerprint detection
@@ -350,9 +351,12 @@ public class FingerprintEnroll extends SettingsActivity {
         public void onActivityResult(int requestCode, int resultCode, Intent data) {
             super.onActivityResult(requestCode, resultCode, data);
 
-            if (requestCode == CHOOSE_LOCK_GENERIC_REQUEST) {
-                if (resultCode == RESULT_FINISHED) {
+            if (requestCode == CHOOSE_LOCK_GENERIC_REQUEST
+                    || requestCode == CONFIRM_REQUEST) {
+                if (resultCode == RESULT_FINISHED || resultCode == RESULT_OK) {
                     // The lock pin/pattern/password was set. Start enrolling!
+                    mToken = data.getByteArrayExtra(
+                            ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
                     updateStage(Stage.EnrollingFindSensor);
                 }
             }
@@ -381,8 +385,8 @@ public class FingerprintEnroll extends SettingsActivity {
             }
 
             LockPatternUtils utils = new LockPatternUtils(activity);
-            if (!utils.isSecure()) {
-                // Device doesn't have any security. Set that up first.
+            if (mToken == null) {
+                // need to choose or confirm lock
                 updateStage(Stage.EnrollingOnboard);
             } else if (ALWAYS_SHOW_FIND_SCREEN
                     || mFingerprintManager.getEnrolledFingerprints().size() == 0) {
@@ -397,6 +401,8 @@ public class FingerprintEnroll extends SettingsActivity {
         public void onSaveInstanceState(final Bundle outState) {
             super.onSaveInstanceState(outState);
             outState.putString(EXTRA_STAGE, mStage.toString());
+            outState.putByteArray(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN,
+                    mToken);
             if (mStage == Stage.EnrollingRepeat) {
                 outState.putInt(EXTRA_PROGRESS, mProgressBar.getProgress());
             }
@@ -406,6 +412,8 @@ public class FingerprintEnroll extends SettingsActivity {
         public void onActivityCreated(Bundle savedInstanceState) {
             super.onActivityCreated(savedInstanceState);
             if (savedInstanceState != null) {
+                mToken = savedInstanceState.getByteArray(
+                        ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
                 //probably orientation change
                 String stageSaved = savedInstanceState.getString(EXTRA_STAGE, null);
                 if (stageSaved != null) {
@@ -426,7 +434,7 @@ public class FingerprintEnroll extends SettingsActivity {
                     break;
                 case R.id.fingerprint_enroll_button_next:
                     if (mStage == Stage.EnrollingOnboard) {
-                        launchChooseLock();
+                        launchChooseOrConfirmLock();
                     } else if (mStage == Stage.EnrollingFindSensor) {
                         updateStage(Stage.EnrollingStart);
                     } else if (mStage == Stage.EnrollingFinish) {
@@ -438,13 +446,20 @@ public class FingerprintEnroll extends SettingsActivity {
             }
         }
 
-        private void launchChooseLock() {
+        private void launchChooseOrConfirmLock() {
             Intent intent = new Intent();
-            intent.setClassName("com.android.settings", ChooseLockGeneric.class.getName());
-            intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.MINIMUM_QUALITY_KEY,
-                    DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);
-            intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.HIDE_DISABLED_PREFS, true);
-            startActivityForResult(intent, CHOOSE_LOCK_GENERIC_REQUEST);
+            long challenge = mFingerprintManager.preEnroll();
+            ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(getActivity(), this);
+            if (!helper.launchConfirmationActivity(CONFIRM_REQUEST, null,
+                        null, null, challenge)) {
+                intent.setClassName("com.android.settings", ChooseLockGeneric.class.getName());
+                intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.MINIMUM_QUALITY_KEY,
+                        DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);
+                intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.HIDE_DISABLED_PREFS, true);
+                intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, true);
+                intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, challenge);
+                startActivityForResult(intent, CHOOSE_LOCK_GENERIC_REQUEST);
+            }
         }
     }
 }

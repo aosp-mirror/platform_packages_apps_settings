@@ -233,14 +233,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
 
         @Override
         protected void authenticationSucceeded(@Nullable String password) {
-            Intent intent = new Intent();
-            if (getActivity() instanceof ConfirmLockPattern.InternalActivity) {
-                intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_TYPE,
-                        StorageManager.CRYPT_TYPE_PATTERN);
-                intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD, password);
-            }
-            getActivity().setResult(Activity.RESULT_OK, intent);
-            getActivity().finish();
+            // TODO: make this play nice with challenge
         }
 
         @Override
@@ -299,7 +292,6 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                 }
 
                 if (matched) {
-                    authenticationSucceeded(LockPatternUtils.patternToString(pattern));
                     getActivity().setResult(Activity.RESULT_OK, intent);
                     getActivity().finish();
                 } else {

@@ -170,15 +170,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
 
         @Override
         protected void authenticationSucceeded(@Nullable String password) {
-            Intent intent = new Intent();
-            if (getActivity() instanceof ConfirmLockPassword.InternalActivity) {
-                intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_TYPE,
-                        mIsAlpha ? StorageManager.CRYPT_TYPE_PASSWORD
-                                : StorageManager.CRYPT_TYPE_PIN);
-                intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD, password);
-            }
-            getActivity().setResult(RESULT_OK, intent);
-            getActivity().finish();
+            // TODO: make this play nice with challenge
         }
 
         private void handleNext() {
@@ -208,7 +200,6 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             }
 
             if (matched) {
-                authenticationSucceeded(pin);
                 getActivity().setResult(RESULT_OK, intent);
                 getActivity().finish();
             } else {
