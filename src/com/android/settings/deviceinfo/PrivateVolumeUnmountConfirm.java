@@ -48,7 +48,7 @@ public class PrivateVolumeUnmountConfirm extends InstrumentedFragment {
         final StorageManager storage = getActivity().getSystemService(StorageManager.class);
         final String volumeId = getArguments().getString(VolumeInfo.EXTRA_VOLUME_ID);
         mVolume = storage.findVolumeById(volumeId);
-        mDisk = storage.findDiskById(mVolume.getId());
+        mDisk = storage.findDiskById(mVolume.getDiskId());
 
         final View view = inflater.inflate(R.layout.storage_internal_unmount, container, false);
         final TextView body = (TextView) view.findViewById(R.id.body);

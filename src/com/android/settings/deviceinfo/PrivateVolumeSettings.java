@@ -433,6 +433,14 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
                 refresh();
             }
         }
+
+        @Override
+        public void onVolumeMetadataChanged(VolumeInfo vol) {
+            if (Objects.equals(mVolume.getId(), vol.getId())) {
+                mVolume = vol;
+                refresh();
+            }
+        }
     };
 
     /**
