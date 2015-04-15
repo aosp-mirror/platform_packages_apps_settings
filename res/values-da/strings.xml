@@ -335,7 +335,7 @@
     <string name="location_settings_title" msgid="1369675479310751735">"Placering"</string>
     <string name="account_settings_title" msgid="626177544686329806">"Konti"</string>
     <string name="security_settings_title" msgid="7945465324818485460">"Sikkerhed"</string>
-    <string name="security_settings_summary" msgid="967393342537986570">"Angiv Min placering, oplåsning af skærmen, låsning af SIM-kort og lager for loginoplysninger"</string>
+    <string name="security_settings_summary" msgid="967393342537986570">"Angiv Min placering, oplåsning af skærmen, låst SIM-kort og lager for loginoplysninger"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Angiv Min placering, oplåsning af skærmen, lager for loginoplysninger"</string>
     <string name="security_passwords_title" msgid="2930627259125138363">"Adgangskoder"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Fingeraftryk"</string>
@@ -662,6 +662,10 @@
     <string name="wifi_hotspot_title" msgid="7726205804813286950">"Vil du logge ind for at oprette forbindelse?"</string>
     <string name="wifi_hotspot_message" msgid="3673833421453455747">"<xliff:g id="APP_NAME">%1$s</xliff:g> kræver, at du logger ind, inden du opretter forbindelse til netværket."</string>
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"OPRET FORBINDELSE"</string>
+    <!-- no translation found for no_internet_access_text (1509171132175355674) -->
+    <skip />
+    <!-- no translation found for no_internet_access_remember (5963015664551707981) -->
+    <skip />
     <string name="wifi_connect" msgid="1076622875777072845">"Forbind"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Der kunne ikke oprettes forbindelse til netværket"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"Glem"</string>
@@ -828,9 +832,9 @@
     <string name="doze_summary" msgid="7128970177894383698">"Væk skærmen, når du tager enheden op eller modtager meddelelser"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Skriftstørrelse"</string>
     <string name="dialog_title_font_size" msgid="2231507851258955038">"Skriftstørrelse"</string>
-    <string name="sim_lock_settings" msgid="3392331196873564292">"Indstillinger for lås af SIM-kort"</string>
-    <string name="sim_lock_settings_category" msgid="5136244267576697004">"Konfigurer låsning af SIM-kort"</string>
-    <string name="sim_lock_settings_title" msgid="9018585580955414596">"SIM-kortlås"</string>
+    <string name="sim_lock_settings" msgid="3392331196873564292">"Indstillinger for låst SIM-kort"</string>
+    <string name="sim_lock_settings_category" msgid="5136244267576697004">"Konfigurer låst SIM-kort"</string>
+    <string name="sim_lock_settings_title" msgid="9018585580955414596">"Låst SIM-kort"</string>
     <string name="sim_pin_toggle" msgid="1742123478029451888">"Lås SIM-kort"</string>
     <string name="sim_lock_on" product="tablet" msgid="5058355081270397764">"Kræv pinkode for at bruge tabletcomputeren"</string>
     <string name="sim_lock_on" product="default" msgid="2503536505568814324">"Kræv pinkode for at bruge telefonen"</string>
@@ -848,7 +852,7 @@
     <string name="sim_pins_dont_match" msgid="8449681619822460312">"Pinkoderne er ikke ens"</string>
     <string name="sim_change_failed" msgid="304964924772218382">"Pinkoden kan ikke ændres.\nPinkoden er muligvis forkert."</string>
     <string name="sim_change_succeeded" msgid="8556135413096489627">"PIN-koden til SIM-kortet er ændret"</string>
-    <string name="sim_lock_failed" msgid="5651596916127873626">"SIM-kortlåsens tilstand kan ikke ændres.\nDet skyldes muligvis en forkert pinkode."</string>
+    <string name="sim_lock_failed" msgid="5651596916127873626">"SIM-kortets tilstand kan ikke ændres.\nMuligvis pga. en forkert pinkode."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"OK"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Annuller"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"Der blev fundet flere SIM-kort"</string>
@@ -1166,7 +1170,8 @@
     <string name="tethering_help_button_text" msgid="656117495547173630">"Hjælp"</string>
     <string name="network_settings_title" msgid="4871233236744292831">"Mobilnetværk"</string>
     <string name="manage_mobile_plan_title" msgid="7630170375010107744">"Mobilabonnement"</string>
-    <string name="sms_application_title" msgid="6134351177937015839">"Standardapp til sms-beskeder"</string>
+    <!-- no translation found for sms_application_title (4903928270533250448) -->
+    <skip />
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"Vil du skifte sms-app?"</string>
     <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"Vil du bruge <xliff:g id="NEW_APP">%1$s</xliff:g> i stedet for <xliff:g id="CURRENT_APP">%2$s</xliff:g> som din standardapp til sms?"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"Vil du bruge <xliff:g id="NEW_APP">%s</xliff:g> som din sms-app?"</string>
@@ -1334,7 +1339,8 @@
     <string name="sort_order_size" msgid="7024513286636502362">"Sorter efter størrelse"</string>
     <string name="show_running_services" msgid="5736278767975544570">"Vis kørende tjenester"</string>
     <string name="show_background_processes" msgid="2009840211972293429">"Cachelagrede processer"</string>
-    <string name="default_emergency_app" msgid="4066437376478173872">"Standardnødapp"</string>
+    <!-- no translation found for default_emergency_app (1951760659640369980) -->
+    <skip />
     <string name="reset_app_preferences" msgid="1321050641018356925">"Nulstil app-præferencer"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"Nulstil app-præferencer?"</string>
     <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Dette vil nulstille alle præferencer for:\n\n "<li>"deaktiverede apps"</li>\n" "<li>"deaktiverede appunderretninger"</li>\n" "<li>"standardapplikationer til handlinger"</li>\n" "<li>"begrænsning af baggrundsdata for apps"</li>\n" "<li>"eventuelle begrænsede tilladelser"</li>\n\n" Du vil ikke miste nogen appdata."</string>
@@ -1838,6 +1844,8 @@
     <string name="menu_duration_12h" msgid="7890465404584356294">"12 timer"</string>
     <string name="menu_duration_1d" msgid="3393631127622285458">"1 dag"</string>
     <string name="menu_show_system" msgid="8864603400415567635">"Vis systemet"</string>
+    <!-- no translation found for menu_hide_system (4106826741703745733) -->
+    <skip />
     <string name="menu_use_uss" msgid="467765290771543089">"Brug Uss"</string>
     <string name="menu_proc_stats_type" msgid="4700209061072120948">"Statistiktype"</string>
     <string name="menu_proc_stats_type_background" msgid="2236161340134898852">"Baggrund"</string>
@@ -2710,10 +2718,8 @@
     <string name="filter_notif_priority_apps" msgid="5965001885749195239">"Prioritet"</string>
     <string name="filter_notif_sensitive_apps" msgid="412490487743581673">"Følsomt indhold"</string>
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"Med domænets webadresser"</string>
-    <string name="reset_app_preferences_description" msgid="7718912868244058770">"Nulstil præferencer i alle apps til standarderne"</string>
     <!-- no translation found for trust_agent_disabled_device_admin (5982562414642596563) -->
     <skip />
-    <string name="all_apps_summary" msgid="3754827293203127282">"<xliff:g id="COUNT">%d</xliff:g> apps er installeret, herunder systemapps og downloadede apps"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Avanceret"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Ukendt app"</string>
     <string name="choose_profile" msgid="8229363046053568878">"Vælg profil"</string>
@@ -2731,6 +2737,9 @@
     <!-- no translation found for fingerprint_not_recognized (1739529686957438119) -->
     <skip />
     <string name="default_apps_title" msgid="1854974637597514435">"Standardapps"</string>
-    <string name="default_browser_title" msgid="5768394150460991636">"Standardbrowser"</string>
+    <!-- no translation found for default_browser_title (8101772675085814670) -->
+    <skip />
     <string name="default_browser_title_none" msgid="2124785489953628553">"Ingen standardbrowser"</string>
+    <!-- no translation found for default_app (6864503001385843060) -->
+    <skip />
 </resources>

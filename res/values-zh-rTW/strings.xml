@@ -270,8 +270,7 @@
     <string name="cancel" msgid="6859253417269739139">"取消"</string>
     <string name="okay" msgid="1997666393121016642">"確定"</string>
     <string name="forget" msgid="1400428660472591263">"清除"</string>
-    <!-- no translation found for save (879993180139353333) -->
-    <skip />
+    <string name="save" msgid="879993180139353333">"儲存"</string>
     <!-- no translation found for done (6942539184162713160) -->
     <skip />
     <string name="settings_label" msgid="1626402585530130914">"設定"</string>
@@ -662,6 +661,10 @@
     <string name="wifi_hotspot_title" msgid="7726205804813286950">"註冊並連線？"</string>
     <string name="wifi_hotspot_message" msgid="3673833421453455747">"您必須先為 <xliff:g id="APP_NAME">%1$s</xliff:g> 進行線上註冊才能連線上網。"</string>
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"連線"</string>
+    <!-- no translation found for no_internet_access_text (1509171132175355674) -->
+    <skip />
+    <!-- no translation found for no_internet_access_remember (5963015664551707981) -->
+    <skip />
     <string name="wifi_connect" msgid="1076622875777072845">"連線"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"無法連線至網路"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"清除"</string>
@@ -910,14 +913,12 @@
     <string name="memory_available_read_only" msgid="6497534390167920206">"可用空間 (唯讀)"</string>
     <string name="memory_size" msgid="6629067715017232195">"總空間"</string>
     <string name="memory_calculating_size" msgid="2188358544203768588">"計算中…"</string>
-    <!-- no translation found for memory_apps_usage (5128673488173839077) -->
-    <skip />
+    <string name="memory_apps_usage" msgid="5128673488173839077">"應用程式和應用程式資料"</string>
     <string name="memory_media_usage" msgid="3738830697707880405">"媒體"</string>
     <string name="memory_downloads_usage" msgid="3755173051677533027">"下載"</string>
     <string name="memory_dcim_usage" msgid="558887013613822577">"圖片、影片"</string>
     <string name="memory_music_usage" msgid="1363785144783011606">"音訊 (音樂、鈴聲、Podcast 等)"</string>
-    <!-- no translation found for memory_media_misc_usage (6094866738586451683) -->
-    <skip />
+    <string name="memory_media_misc_usage" msgid="6094866738586451683">"其他檔案"</string>
     <string name="memory_media_cache_usage" msgid="6704293333141177910">"快取資料"</string>
     <string name="sd_eject" product="nosdcard" msgid="4988563376492400073">"卸載共用儲存裝置"</string>
     <string name="sd_eject" product="default" msgid="6915293408836853020">"卸載 SD 卡"</string>
@@ -950,16 +951,11 @@
     <string name="sd_ejecting_summary" msgid="2028753069184908491">"正在取出"</string>
     <string name="storage_low_title" msgid="1388569749716225155">"儲存空間即將用盡"</string>
     <string name="storage_low_summary" msgid="7737465774892563129">"部分系統功能 (例如同步處理) 可能無法正常運作。請刪除或取消固定一些項目 (例如應用程式或媒體內容)，嘗試釋出空間。"</string>
-    <!-- no translation found for storage_menu_rename (7141058657592615390) -->
-    <skip />
-    <!-- no translation found for storage_menu_mount (1014683672493425425) -->
-    <skip />
-    <!-- no translation found for storage_menu_unmount (681485356885955898) -->
-    <skip />
-    <!-- no translation found for storage_menu_format (8334422679047059459) -->
-    <skip />
-    <!-- no translation found for storage_menu_format_internal (6553368530402755543) -->
-    <skip />
+    <string name="storage_menu_rename" msgid="7141058657592615390">"重新命名"</string>
+    <string name="storage_menu_mount" msgid="1014683672493425425">"掛載"</string>
+    <string name="storage_menu_unmount" msgid="681485356885955898">"退出"</string>
+    <string name="storage_menu_format" msgid="8334422679047059459">"清除並格式化"</string>
+    <string name="storage_menu_format_internal" msgid="6553368530402755543">"清除並格式化為內部儲存空間"</string>
     <string name="storage_menu_usb" msgid="5708207885333243384">"USB 電腦連線"</string>
     <string name="storage_title_usb" msgid="679612779321689418">"USB 電腦連線"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"連線方式"</string>
@@ -970,26 +966,16 @@
     <string name="usb_midi_title" msgid="3069990264258413994">"MIDI"</string>
     <string name="usb_midi_summary" msgid="539169474810956358">"讓支援 MIDI 的應用程式透過 USB 連接埠與電腦上的 MIDI 軟體搭配運作。"</string>
     <string name="storage_other_users" msgid="808708845102611856">"其他使用者"</string>
-    <!-- no translation found for storage_internal_title (690771193137801021) -->
-    <skip />
-    <!-- no translation found for storage_external_title (2723851748972673696) -->
-    <skip />
-    <!-- no translation found for storage_volume_summary (476551204412943800) -->
-    <skip />
-    <!-- no translation found for storage_mount_success (687641090137253647) -->
-    <skip />
-    <!-- no translation found for storage_mount_failure (8928389741212129060) -->
-    <skip />
-    <!-- no translation found for storage_unmount_success (5737203344673441677) -->
-    <skip />
-    <!-- no translation found for storage_unmount_failure (4161722509712992231) -->
-    <skip />
-    <!-- no translation found for storage_format_success (3023144070597190555) -->
-    <skip />
-    <!-- no translation found for storage_format_failure (8343688274191391889) -->
-    <skip />
-    <!-- no translation found for storage_rename_title (8242663969839491485) -->
-    <skip />
+    <string name="storage_internal_title" msgid="690771193137801021">"裝置儲存空間"</string>
+    <string name="storage_external_title" msgid="2723851748972673696">"外接儲存裝置"</string>
+    <string name="storage_volume_summary" msgid="476551204412943800">"<xliff:g id="FREE">%1$s</xliff:g> 可用空間 (共 <xliff:g id="TOTAL">%2$s</xliff:g>)"</string>
+    <string name="storage_mount_success" msgid="687641090137253647">"已掛載「<xliff:g id="NAME">%1$s</xliff:g>」"</string>
+    <string name="storage_mount_failure" msgid="8928389741212129060">"無法掛載「<xliff:g id="NAME">%1$s</xliff:g>」"</string>
+    <string name="storage_unmount_success" msgid="5737203344673441677">"已安全退出「<xliff:g id="NAME">%1$s</xliff:g>」"</string>
+    <string name="storage_unmount_failure" msgid="4161722509712992231">"無法安全退出「<xliff:g id="NAME">%1$s</xliff:g>」"</string>
+    <string name="storage_format_success" msgid="3023144070597190555">"已將「<xliff:g id="NAME">%1$s</xliff:g>」格式化"</string>
+    <string name="storage_format_failure" msgid="8343688274191391889">"無法將「<xliff:g id="NAME">%1$s</xliff:g>」格式化"</string>
+    <string name="storage_rename_title" msgid="8242663969839491485">"重新命名儲存空間"</string>
     <!-- no translation found for storage_internal_format_details (4018647158382548820) -->
     <skip />
     <!-- no translation found for storage_internal_unmount_details (3677827796634199714) -->
@@ -1092,15 +1078,12 @@
     <string name="menu_restore" msgid="8260067415075573273">"還原為預設狀態"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"重設預設 APN 設定已完成。"</string>
     <string name="reset_network_title" msgid="4557113742173895074">"重設網路設定"</string>
-    <!-- no translation found for reset_network_desc (581668983587311282) -->
-    <skip />
+    <string name="reset_network_desc" msgid="581668983587311282">"這個動作會重設所有網路設定，包括：\n\n"<li>"Wi‑Fi"</li>\n<li>"行動數據"</li>\n<li>"藍牙"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"重設設定"</string>
-    <!-- no translation found for reset_network_final_desc (4874737348054213767) -->
-    <skip />
+    <string name="reset_network_final_desc" msgid="4874737348054213767">"您要重設所有網路設定嗎？這個動作無法復原！"</string>
     <string name="reset_network_final_button_text" msgid="1797434793741744635">"重設設定"</string>
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"您要重設嗎？"</string>
-    <!-- no translation found for reset_network_complete_toast (787829973559541880) -->
-    <skip />
+    <string name="reset_network_complete_toast" msgid="787829973559541880">"已重設網路設定"</string>
     <string name="device_reset_title" msgid="2384019005638768076">"重設裝置"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"恢復原廠設定"</string>
     <string name="master_clear_desc" product="tablet" msgid="8317211882509025841">"這會清除您平板電腦"<b>"內部儲存裝置"</b>"中的所有資料，包括：\n\n"<li>"您的 Google 帳戶"</li>\n<li>"系統和應用程式資料及設定"</li>\n<li>"已下載的應用程式"</li></string>
@@ -1116,8 +1099,7 @@
     <string name="erase_external_storage_description" product="default" msgid="1737638779582964966">"清除 SD 卡中的所有資料，例如音樂或相片。"</string>
     <string name="master_clear_button_text" product="tablet" msgid="3130786116528304116">"重設平板電腦"</string>
     <string name="master_clear_button_text" product="default" msgid="7550632653343157971">"重設手機"</string>
-    <!-- no translation found for master_clear_final_desc (1062841478823409667) -->
-    <skip />
+    <string name="master_clear_final_desc" msgid="1062841478823409667">"您要清除所有個人資訊和已下載的應用程式嗎？這個動作無法復原！"</string>
     <string name="master_clear_final_button_text" msgid="5390908019019242910">"全部清除"</string>
     <string name="master_clear_failed" msgid="7959646179737950703">"無法使用 System Clear 服務，因此未執行任何重設。"</string>
     <string name="master_clear_confirm_title" msgid="7572642091599403668">"您要重設嗎？"</string>
@@ -1166,7 +1148,8 @@
     <string name="tethering_help_button_text" msgid="656117495547173630">"說明"</string>
     <string name="network_settings_title" msgid="4871233236744292831">"行動網路"</string>
     <string name="manage_mobile_plan_title" msgid="7630170375010107744">"行動數據傳輸資費方案"</string>
-    <string name="sms_application_title" msgid="6134351177937015839">"預設簡訊應用程式"</string>
+    <!-- no translation found for sms_application_title (4903928270533250448) -->
+    <skip />
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"變更簡訊應用程式？"</string>
     <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"您要改用 <xliff:g id="NEW_APP">%1$s</xliff:g> 而不再使用 <xliff:g id="CURRENT_APP">%2$s</xliff:g> 做為簡訊應用程式嗎？"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"使用 <xliff:g id="NEW_APP">%s</xliff:g> 做為簡訊應用程式嗎？"</string>
@@ -1246,18 +1229,12 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"已設定密碼"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"已設定 PIN"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"已設定圖形"</string>
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic (7050256155547273836) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic (1072670959803859869) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic (1022239625083264596) -->
-    <skip />
-    <!-- no translation found for lockpassword_invalid_pin (15588049067548470) -->
-    <skip />
-    <!-- no translation found for lockpassword_invalid_password (4038507398784975200) -->
-    <skip />
-    <!-- no translation found for lockpattern_need_to_unlock_wrong (1745247595356012176) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pattern_generic" msgid="7050256155547273836">"請畫出您的裝置解鎖圖形以繼續作業。"</string>
+    <string name="lockpassword_confirm_your_pin_generic" msgid="1072670959803859869">"請輸入您的裝置 PIN 以繼續作業。"</string>
+    <string name="lockpassword_confirm_your_password_generic" msgid="1022239625083264596">"請輸入您的裝置密碼以繼續作業。"</string>
+    <string name="lockpassword_invalid_pin" msgid="15588049067548470">"PIN 錯誤"</string>
+    <string name="lockpassword_invalid_password" msgid="4038507398784975200">"密碼錯誤"</string>
+    <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"圖形錯誤"</string>
     <string name="lock_settings_title" msgid="4213839087748988686">"裝置安全性"</string>
     <string name="lockpattern_change_lock_pattern_label" msgid="5679630792003440352">"變更解鎖圖形"</string>
     <string name="lockpattern_change_lock_pin_label" msgid="266707138486731661">"變更解鎖 PIN"</string>
@@ -1282,8 +1259,7 @@
     <string name="lockpattern_settings_choose_lock_pattern" msgid="1652352830005653447">"設定解鎖圖形"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="1123908306116495545">"變更解鎖圖形"</string>
     <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"如何畫出解鎖圖形"</string>
-    <!-- no translation found for lockpattern_too_many_failed_confirmation_attempts (6909161623701848863) -->
-    <skip />
+    <string name="lockpattern_too_many_failed_confirmation_attempts" msgid="6909161623701848863">"錯誤次數過多，請於 <xliff:g id="NUMBER">%d</xliff:g> 秒後再試。"</string>
     <string name="activity_not_found" msgid="5551664692991605325">"您未在手機上安裝應用程式。"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"管理應用程式"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"管理和移除已安裝的應用程式"</string>
@@ -1334,7 +1310,8 @@
     <string name="sort_order_size" msgid="7024513286636502362">"依大小排序"</string>
     <string name="show_running_services" msgid="5736278767975544570">"顯示執行中的服務"</string>
     <string name="show_background_processes" msgid="2009840211972293429">"顯示快取處理程序"</string>
-    <string name="default_emergency_app" msgid="4066437376478173872">"預設緊急狀況應用程式"</string>
+    <!-- no translation found for default_emergency_app (1951760659640369980) -->
+    <skip />
     <string name="reset_app_preferences" msgid="1321050641018356925">"重設應用程式偏好設定"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"重設應用程式偏好設定？"</string>
     <string name="reset_app_preferences_desc" msgid="4822447731869201512">"這會重設下列項目的所有偏好設定：\n\n "<li>"已停用的應用程式"</li>\n" "<li>"已停用的應用程式通知"</li>\n" "<li>"執行動作的預設應用程式"</li>\n" "<li>"應用程式的背景資料限制"</li>\n" "<li>"任何權限限制"</li>\n\n" 您不會遺失任何應用程式資料。"</string>
@@ -1838,6 +1815,8 @@
     <string name="menu_duration_12h" msgid="7890465404584356294">"12 小時"</string>
     <string name="menu_duration_1d" msgid="3393631127622285458">"1 天"</string>
     <string name="menu_show_system" msgid="8864603400415567635">"顯示系統"</string>
+    <!-- no translation found for menu_hide_system (4106826741703745733) -->
+    <skip />
     <string name="menu_use_uss" msgid="467765290771543089">"使用 Uss"</string>
     <string name="menu_proc_stats_type" msgid="4700209061072120948">"統計資料類型"</string>
     <string name="menu_proc_stats_type_background" msgid="2236161340134898852">"背景"</string>
@@ -2312,8 +2291,7 @@
     <string name="user_add_user_item_title" msgid="8212199632466198969">"使用者"</string>
     <string name="user_add_profile_item_title" msgid="8353515490730363621">"設有限制的個人資料"</string>
     <string name="user_add_user_title" msgid="2108112641783146007">"新增使用者？"</string>
-    <!-- no translation found for user_add_user_message_long (8562152293752222985) -->
-    <skip />
+    <string name="user_add_user_message_long" msgid="8562152293752222985">"您可以建立其他使用者，藉此與他人共用這個裝置。每位使用者都有自己的專屬空間，並可使用應用程式、桌布等項目自訂這個個人空間。此外，使用者也可以調整 Wi‑Fi 這類會影響所有人的裝置設定。\n\n新增的使用者需要自行設定個人空間。\n\n任何使用者皆可為所有其他使用者更新應用程式。"</string>
     <string name="user_add_user_message_short" msgid="1511354412249044381">"新增的使用者需要自行設定個人空間。\n\n任何使用者皆可為其他所有使用者更新應用程式。"</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"立即設定使用者？"</string>
     <string name="user_setup_dialog_message" msgid="1004068621380867148">"請確保對方可以使用裝置並設定自己的空間"</string>
@@ -2567,17 +2545,12 @@
     <string name="zen_mode_delete_rule" msgid="2985902330199039533">"刪除規則"</string>
     <string name="zen_mode_delete_rule_confirmation" msgid="5338206274433295824">"要刪除「<xliff:g id="RULE">%1$s</xliff:g>」規則嗎？"</string>
     <string name="zen_mode_delete_rule_button" msgid="4248741120307752294">"刪除"</string>
-    <!-- no translation found for zen_mode_rule_type (2289413469580142888) -->
-    <skip />
-    <!-- no translation found for zen_mode_rule_type_unknown (3049377282766700600) -->
-    <skip />
-    <!-- no translation found for zen_mode_configure_rule (8865785428056490305) -->
-    <skip />
-    <!-- no translation found for zen_schedule_rule_type_name (3201273040477861538) -->
-    <skip />
+    <string name="zen_mode_rule_type" msgid="2289413469580142888">"規則類型"</string>
+    <string name="zen_mode_rule_type_unknown" msgid="3049377282766700600">"不明"</string>
+    <string name="zen_mode_configure_rule" msgid="8865785428056490305">"設定規則"</string>
+    <string name="zen_schedule_rule_type_name" msgid="3201273040477861538">"時間表規則"</string>
     <string name="zen_mode_rule_not_found_text" msgid="8963662446092059836">"找不到規則。"</string>
-    <!-- no translation found for zen_mode_rule_summary_combination (2526506268333198254) -->
-    <skip />
+    <string name="zen_mode_rule_summary_combination" msgid="2526506268333198254">"<xliff:g id="DESCRIPTION">%1$s</xliff:g>/<xliff:g id="MODE">%2$s</xliff:g>"</string>
     <string name="zen_mode_schedule_rule_days" msgid="3195058680641389948">"星期幾"</string>
     <string name="zen_mode_schedule_rule_days_none" msgid="4954143628634166317">"無"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="146511166522076034">"每天"</string>
@@ -2603,39 +2576,51 @@
     <string name="zen_mode_start_time" msgid="8102602297273744441">"開始時間"</string>
     <string name="zen_mode_end_time" msgid="8774327885892705505">"結束時間"</string>
     <string name="zen_mode_end_time_next_day_summary_format" msgid="4201521691238728701">"隔天 <xliff:g id="FORMATTED_TIME">%s</xliff:g>"</string>
-    <!-- no translation found for zen_mode_interruptions_voice_prompt (3041817362475695079) -->
-    <skip />
-    <!-- no translation found for zen_mode_duration_voice_prompt (7381920739389625133) -->
-    <skip />
-    <!-- no translation found for zen_mode_option_important_voice_synonyms (7060203794677229532) -->
-    <skip />
-    <!-- no translation found for zen_mode_option_alarms_voice_synonyms (2438778704287069905) -->
-    <skip />
+    <string name="zen_mode_interruptions_voice_prompt" msgid="3041817362475695079">"您想接收哪些干擾通知？"</string>
+    <string name="zen_mode_duration_voice_prompt" msgid="7381920739389625133">"要持續多久？"</string>
+    <string name="zen_mode_option_important_voice_synonyms" msgid="7060203794677229532">"重要,優先,優先通知"</string>
+    <string name="zen_mode_option_alarms_voice_synonyms" msgid="2438778704287069905">"鬧鐘"</string>
     <string name="zen_mode_option_off" msgid="7812737562592973403">"關閉"</string>
-    <!-- no translation found for zen_mode_option_off_voice_synonyms (7540236747518283153) -->
-    <skip />
-    <!-- no translation found for zen_mode_option_no_interruptions_voice_synonyms (1377755348548400719) -->
-    <skip />
-    <!-- no translation found for zen_mode_duration_indefinte_voice_label (9026001994945950539) -->
-    <skip />
-    <!-- no translation found for zen_mode_duration_minutes_voice_label (4750982084453980) -->
-    <!-- no translation found for zen_mode_duration_hours_voice_label (175180249071227957) -->
-    <!-- no translation found for zen_mode_summary_priority_indefinitely (5417246022606171241) -->
-    <skip />
-    <!-- no translation found for zen_mode_summary_priority_by_minute (1938955186728929112) -->
-    <!-- no translation found for zen_mode_summary_priority_by_hour (6664710096150897823) -->
-    <!-- no translation found for zen_mode_summary_alarams_only_indefinite (7941708969866496605) -->
-    <skip />
-    <!-- no translation found for zen_mode_summary_alarms_only_by_minute (6122003583875424601) -->
-    <!-- no translation found for zen_mode_summary_alarms_only_by_hour (2407703455581767748) -->
-    <!-- no translation found for zen_mode_summary_no_interruptions_indefinite (5705225870569410806) -->
-    <skip />
-    <!-- no translation found for zen_mode_summary_no_interruptions_by_minute (4719882120685708458) -->
-    <!-- no translation found for zen_mode_summary_no_interruptions_by_hour (1508397683895056389) -->
-    <!-- no translation found for zen_mode_summary_always (6172985102689237703) -->
-    <skip />
-    <!-- no translation found for zen_mode_duration_indefinite_voice_synonyms (4213829562303429456) -->
-    <skip />
+    <string name="zen_mode_option_off_voice_synonyms" msgid="7540236747518283153">"關閉,所有,全部"</string>
+    <string name="zen_mode_option_no_interruptions_voice_synonyms" msgid="1377755348548400719">"無,不接收,無干擾"</string>
+    <string name="zen_mode_duration_indefinte_voice_label" msgid="9026001994945950539">"無限期"</string>
+    <plurals name="zen_mode_duration_minutes_voice_label" formatted="false" msgid="4750982084453980">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 分鐘</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 分鐘</item>
+    </plurals>
+    <plurals name="zen_mode_duration_hours_voice_label" formatted="false" msgid="175180249071227957">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 小時</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 小時</item>
+    </plurals>
+    <string name="zen_mode_summary_priority_indefinitely" msgid="5417246022606171241">"無限期變更為僅顯示優先通知模式"</string>
+    <plurals name="zen_mode_summary_priority_by_minute" formatted="false" msgid="1938955186728929112">
+      <item quantity="other">變更為僅顯示優先通知模式：持續 <xliff:g id="DURATION">%1$d</xliff:g> 分鐘，結束時間為<xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
+      <item quantity="one">變更為僅顯示優先通知模式：持續 1 分鐘，結束時間為<xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g></item>
+    </plurals>
+    <plurals name="zen_mode_summary_priority_by_hour" formatted="false" msgid="6664710096150897823">
+      <item quantity="other">變更為僅顯示優先通知模式：持續 <xliff:g id="DURATION">%1$d</xliff:g> 小時，結束時間為<xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
+      <item quantity="one">變更為僅顯示優先通知模式：持續 1 小時，結束時間為<xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g></item>
+    </plurals>
+    <string name="zen_mode_summary_alarams_only_indefinite" msgid="7941708969866496605">"無限期變更為僅允許鬧鐘模式"</string>
+    <plurals name="zen_mode_summary_alarms_only_by_minute" formatted="false" msgid="6122003583875424601">
+      <item quantity="other">變更為僅允許鬧鐘模式：持續 <xliff:g id="DURATION">%1$d</xliff:g> 分鐘，結束時間為<xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
+      <item quantity="one">變更為僅允許鬧鐘模式：持續 1 分鐘，結束時間為<xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g></item>
+    </plurals>
+    <plurals name="zen_mode_summary_alarms_only_by_hour" formatted="false" msgid="2407703455581767748">
+      <item quantity="other">變更為僅允許鬧鐘模式：持續 <xliff:g id="DURATION">%1$d</xliff:g> 小時，結束時間為<xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
+      <item quantity="one">變更為僅允許鬧鐘模式：持續 1 小時，結束時間為<xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g></item>
+    </plurals>
+    <string name="zen_mode_summary_no_interruptions_indefinite" msgid="5705225870569410806">"無限期變更為無干擾模式"</string>
+    <plurals name="zen_mode_summary_no_interruptions_by_minute" formatted="false" msgid="4719882120685708458">
+      <item quantity="other">變更為無干擾模式：持續 <xliff:g id="DURATION">%1$d</xliff:g> 分鐘，結束時間為<xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
+      <item quantity="one">變更為無干擾模式：持續 1 分鐘，結束時間為<xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g></item>
+    </plurals>
+    <plurals name="zen_mode_summary_no_interruptions_by_hour" formatted="false" msgid="1508397683895056389">
+      <item quantity="other">變更為無干擾模式：持續 <xliff:g id="DURATION">%1$d</xliff:g> 小時，結束時間為<xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
+      <item quantity="one">變更為無干擾模式：持續 1 小時，結束時間為<xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g></item>
+    </plurals>
+    <string name="zen_mode_summary_always" msgid="6172985102689237703">"變更為一律允許干擾模式"</string>
+    <string name="zen_mode_duration_indefinite_voice_synonyms" msgid="4213829562303429456">"不限時間"</string>
     <string name="notification_settings_apps_title" msgid="1125354590652967250">"應用程式通知"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"通知設定"</string>
     <string name="device_feedback" msgid="3238056036766293294">"傳送您對這個裝置的意見回饋"</string>
@@ -2714,10 +2699,7 @@
     <string name="filter_notif_priority_apps" msgid="5965001885749195239">"優先"</string>
     <string name="filter_notif_sensitive_apps" msgid="412490487743581673">"敏感"</string>
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"包含網域網址"</string>
-    <string name="reset_app_preferences_description" msgid="7718912868244058770">"將所有應用程式的偏好設定重設為預設值"</string>
-    <!-- no translation found for trust_agent_disabled_device_admin (5982562414642596563) -->
-    <skip />
-    <string name="all_apps_summary" msgid="3754827293203127282">"已安裝 <xliff:g id="COUNT">%d</xliff:g> 個應用程式，包括系統和下載的應用程式"</string>
+    <string name="trust_agent_disabled_device_admin" msgid="5982562414642596563">"已由管理員停用"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"進階"</string>
     <string name="unknown_app" msgid="5275921288718717656">"不明的應用程式"</string>
     <string name="choose_profile" msgid="8229363046053568878">"選擇設定檔"</string>
@@ -2732,9 +2714,11 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> 個應用程式可以開啟自身的網域網址</item>
       <item quantity="one">1 個應用程式可以開啟自身的網域網址</item>
     </plurals>
-    <!-- no translation found for fingerprint_not_recognized (1739529686957438119) -->
-    <skip />
+    <string name="fingerprint_not_recognized" msgid="1739529686957438119">"無法識別"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"預設應用程式"</string>
-    <string name="default_browser_title" msgid="5768394150460991636">"預設瀏覽器"</string>
+    <!-- no translation found for default_browser_title (8101772675085814670) -->
+    <skip />
     <string name="default_browser_title_none" msgid="2124785489953628553">"沒有預設瀏覽器"</string>
+    <!-- no translation found for default_app (6864503001385843060) -->
+    <skip />
 </resources>
