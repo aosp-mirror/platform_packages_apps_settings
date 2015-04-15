@@ -17,7 +17,6 @@
 package com.android.settings.wifi;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.net.wifi.WifiConfiguration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -41,9 +40,6 @@ import com.android.settings.SetupWizardUtils;
 public class WifiSettingsForSetupWizard extends WifiSettings {
 
     private static final String TAG = "WifiSettingsForSetupWizard";
-
-    // show a text regarding data charges when wifi connection is required during setup wizard
-    protected static final String EXTRA_SHOW_WIFI_REQUIRED_INFO = "wifi_show_wifi_required_info";
 
     private View mAddOtherNetworkItem;
     private TextView mEmptyFooter;
@@ -72,13 +68,6 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
                 }
             }
         });
-
-        final Intent intent = getActivity().getIntent();
-        if (intent.getBooleanExtra(EXTRA_SHOW_WIFI_REQUIRED_INFO, false)) {
-            final View requiredInfo =
-                    inflater.inflate(R.layout.setup_wifi_required_info, list, false);
-            list.addHeaderView(requiredInfo, null, false);
-        }
 
         return view;
     }
