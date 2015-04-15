@@ -43,6 +43,9 @@ public class DefaultEmergencyPreference extends AppListPreference {
 
     private final ContentResolver mContentResolver;
 
+    public static final Intent QUERY_INTENT = new Intent(
+            TelephonyManager.ACTION_EMERGENCY_ASSISTANCE);
+
     public DefaultEmergencyPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         mContentResolver = context.getContentResolver();
@@ -85,18 +88,19 @@ public class DefaultEmergencyPreference extends AppListPreference {
     private Set<String> resolveAssistPackageAndQueryApps() {
         Set<String> packages = new ArraySet<>();
 
-        Intent queryIntent = new Intent(TelephonyManager.ACTION_EMERGENCY_ASSISTANCE);
         PackageManager packageManager = getContext().getPackageManager();
-        List<ResolveInfo> infos = packageManager.queryIntentActivities(queryIntent, 0);
+        List<ResolveInfo> infos = packageManager.queryIntentActivities(QUERY_INTENT, 0);
 
         PackageInfo bestMatch = null;
-        for (int i = 0; i < infos.size(); i++) {
-            if (infos.get(i) == null || infos.get(i).activityInfo == null
-                    || packages.contains(infos.get(i).activityInfo.packageName)) {
+        final int size = infos.size();
+        for (int i = 0; i < size; i++) {
+            ResolveInfo info = infos.get(i);
+            if (info == null || info.activityInfo == null
+                    || packages.contains(info.activityInfo.packageName)) {
                 continue;
             }
 
-            String packageName = infos.get(i).activityInfo.packageName;
+            String packageName = info.activityInfo.packageName;
 
             packages.add(packageName);
 
@@ -130,6 +134,11 @@ public class DefaultEmergencyPreference extends AppListPreference {
     }
 
     public static boolean isAvailable(Context context) {
+        return isCapable(context)
+                && context.getPackageManager().resolveActivity(QUERY_INTENT, 0) != null;
+    }
+
+    public static boolean isCapable(Context context) {
         return context.getResources().getBoolean(
                 com.android.internal.R.bool.config_voice_capable);
     }

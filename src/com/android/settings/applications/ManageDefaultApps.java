@@ -34,6 +34,7 @@ import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Index;
 import com.android.settings.search.Indexable;
 
 import java.util.ArrayList;
@@ -85,6 +86,11 @@ public class ManageDefaultApps extends SettingsPreferenceFragment
 
         if (!DefaultEmergencyPreference.isAvailable(getActivity())) {
             removePreference(KEY_DEFAULT_EMERGENCY_APP);
+        }
+
+        if (DefaultEmergencyPreference.isCapable(getActivity())) {
+            Index.getInstance(getActivity()).updateFromClassNameResource(
+                    ManageDefaultApps.class.getName(), true, true);
         }
     }
 
