@@ -315,6 +315,7 @@ public class FingerprintSettings extends SettingsActivity {
             if (KEY_FINGERPRINT_ADD.equals(key)) {
                 Intent intent = new Intent();
                 intent.setClassName("com.android.settings", FingerprintEnroll.class.getName());
+                intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
                 stopFingerprint();
                 startActivityForResult(intent, ADD_FINGERPRINT_REQUEST);
             } else if (pref instanceof FingerprintPreference) {

@@ -383,7 +383,11 @@ public class FingerprintEnroll extends SettingsActivity {
                 mContentView.findViewById(buttons[i]).setOnClickListener(this);
             }
 
-            LockPatternUtils utils = new LockPatternUtils(activity);
+            if (mToken == null) {
+                mToken = getActivity().getIntent().getByteArrayExtra(
+                        ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
+            }
+
             if (mToken == null) {
                 // need to choose or confirm lock
                 updateStage(Stage.EnrollingOnboard);
