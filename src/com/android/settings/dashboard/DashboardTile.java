@@ -161,7 +161,7 @@ public class DashboardTile implements Parcelable {
         final int N = userHandle.size();
         dest.writeInt(N);
         for (int i = 0; i < N; i++) {
-            dest.writeParcelable(userHandle.get(i), flags);
+            userHandle.get(i).writeToParcel(dest, flags);
         }
         dest.writeBundle(extras);
     }
