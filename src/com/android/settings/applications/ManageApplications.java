@@ -20,15 +20,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.IPackageManager;
 import android.content.pm.IntentFilterVerificationInfo;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.RemoteException;
-import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.PreferenceFrameLayout;
@@ -53,7 +49,6 @@ import android.widget.Filterable;
 import android.widget.ListView;
 import android.widget.Spinner;
 
-import com.android.internal.content.PackageHelper;
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.HelpUtils;
 import com.android.settings.InstrumentedFragment;
@@ -73,47 +68,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
-final class CanBeOnSdCardChecker {
-    final IPackageManager mPm;
-    int mInstallLocation;
-
-    CanBeOnSdCardChecker() {
-        mPm = IPackageManager.Stub.asInterface(
-                ServiceManager.getService("package"));
-    }
-
-    void init() {
-        try {
-            mInstallLocation = mPm.getInstallLocation();
-        } catch (RemoteException e) {
-            Log.e("CanBeOnSdCardChecker", "Is Package Manager running?");
-            return;
-        }
-    }
-
-    boolean check(ApplicationInfo info) {
-        boolean canBe = false;
-        if ((info.flags & ApplicationInfo.FLAG_EXTERNAL_STORAGE) != 0) {
-            canBe = true;
-        } else {
-            if ((info.flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
-                if (info.installLocation == PackageInfo.INSTALL_LOCATION_PREFER_EXTERNAL ||
-                        info.installLocation == PackageInfo.INSTALL_LOCATION_AUTO) {
-                    canBe = true;
-                } else if (info.installLocation
-                        == PackageInfo.INSTALL_LOCATION_UNSPECIFIED) {
-                    if (mInstallLocation == PackageHelper.APP_INSTALL_EXTERNAL) {
-                        // For apps with no preference and the default value set
-                        // to install on sdcard.
-                        canBe = true;
-                    }
-                }
-            }
-        }
-        return canBe;
-    }
-}
 
 /**
  * Activity to pick an application that will be used to display installation information and

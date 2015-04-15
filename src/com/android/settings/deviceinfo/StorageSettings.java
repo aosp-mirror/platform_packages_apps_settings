@@ -41,7 +41,6 @@ import com.android.settings.search.SearchIndexableRaw;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -91,21 +90,6 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
         setHasOptionsMenu(true);
     }
 
-    private static final Comparator<VolumeInfo> sVolumeComparator = new Comparator<VolumeInfo>() {
-        @Override
-        public int compare(VolumeInfo lhs, VolumeInfo rhs) {
-            if (VolumeInfo.ID_PRIVATE_INTERNAL.equals(lhs.getId())) {
-                return -1;
-            } else if (lhs.getDescription() == null) {
-                return 1;
-            } else if (rhs.getDescription() == null) {
-                return -1;
-            } else {
-                return lhs.getDescription().compareTo(rhs.getDescription());
-            }
-        }
-    };
-
     private final StorageEventListener mStorageListener = new StorageEventListener() {
         @Override
         public void onVolumeStateChanged(VolumeInfo vol, int oldState, int newState) {
@@ -133,7 +117,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
         mExternalCategory.removeAll();
 
         final List<VolumeInfo> volumes = mStorageManager.getVolumes();
-        Collections.sort(volumes, sVolumeComparator);
+        Collections.sort(volumes, VolumeInfo.getDescriptionComparator());
 
         for (VolumeInfo vol : volumes) {
             if (vol.getType() == VolumeInfo.TYPE_PRIVATE) {
