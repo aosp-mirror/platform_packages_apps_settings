@@ -14,14 +14,13 @@
  * limitations under the License.
  */
 
-package com.android.settings.fuelguage;
+package com.android.settings.fuelgauge;
 
 import static android.provider.Settings.EXTRA_BATTERY_SAVER_MODE_ENABLED;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.PowerManager;
-import android.provider.Settings;
 import android.util.Log;
 
 import com.android.settings.utils.VoiceSettingsActivity;
@@ -33,6 +32,7 @@ import com.android.settings.utils.VoiceSettingsActivity;
 public class BatterySaverModeVoiceActivity extends VoiceSettingsActivity {
     private static final String TAG = "BatterySaverModeVoiceActivity";
 
+    @Override
     protected boolean onVoiceSettingInteraction(Intent intent) {
         if (intent.hasExtra(EXTRA_BATTERY_SAVER_MODE_ENABLED)) {
             PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
