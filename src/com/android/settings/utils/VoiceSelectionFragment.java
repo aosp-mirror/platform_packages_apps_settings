@@ -111,7 +111,7 @@ public class VoiceSelectionFragment extends ListFragment {
         }
 
         if (mOnItemSelectedListener != null) {
-          mOnItemSelectedListener.onItemSelected(position, getSelectionAt(position));
+            mOnItemSelectedListener.onItemSelected(position, getSelectionAt(position));
         }
     }
 

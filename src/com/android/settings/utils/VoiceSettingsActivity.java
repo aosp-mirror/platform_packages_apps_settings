@@ -16,11 +16,16 @@
 
 package com.android.settings.utils;
 
+import com.android.settings.R;
+
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.VoiceInteractor;
 import android.app.VoiceInteractor.CompleteVoiceRequest;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 import android.util.Log;
 
 /**
@@ -65,10 +70,30 @@ abstract public class VoiceSettingsActivity extends Activity {
         }
     }
 
+    protected void setHeader(String label) {
+        TextView header = (TextView) findViewById(R.id.voice_fragment_header);
+        if (header != null) {
+            if (label != null) {
+                header.setText(label);
+                header.setVisibility(View.VISIBLE);
+            } else {
+                header.setVisibility(View.GONE);
+            }
+        }
+    }
+
     /**
      * Indicates when the setting could not be changed.
      */
     protected void notifyFailure(String reason) {
         getVoiceInteractor().submitRequest(new VoiceInteractor.AbortVoiceRequest(reason, null));
     }
+
+    protected void showFragment(Fragment fragment, String tag) {
+        getFragmentManager()
+                .beginTransaction()
+                .replace(R.id.voice_fragment_root, fragment, tag)
+                .commit();
+    }
+
 }

@@ -23,8 +23,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp">
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp">
 
         <TextView
             android:layout_width="0px"
@@ -33,10 +33,10 @@
             android:id="@+id/voice_item_label" />
 
         <TextView
-            android:layout_width="100px"
-            android:layout_height="100px"
+            android:layout_width="80px"
+            android:layout_height="80px"
             android:gravity="center_horizontal|center_vertical"
-            android:background="@drawable/bg_circle_blue"
+            android:background="@drawable/bg_voice_position"
             android:textAppearance="?android:attr/textAppearanceMediumInverse"
             android:textStyle="bold"
             android:id="@+id/voice_item_position" />
