@@ -172,10 +172,9 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
         boolean wfcEnabled = ImsManager.isWfcEnabledByUser(context)
                 && ImsManager.isNonTtyOrTtyOnVolteEnabled(context);
         mSwitch.setChecked(wfcEnabled);
-
         int wfcMode = ImsManager.getWfcMode(context);
         mButtonWfcMode.setValue(Integer.toString(wfcMode));
-        mButtonWfcMode.setSummary(getWfcModeSummary(context, wfcMode));
+        updateButtonWfcMode(context, wfcEnabled, wfcMode);
 
         context.registerReceiver(mIntentReceiver, mIntentFilter);
 
@@ -211,11 +210,15 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
         ImsManager.setWfcSetting(context, isChecked);
 
         int wfcMode = ImsManager.getWfcMode(context);
+        updateButtonWfcMode(context, isChecked, wfcMode);
+    }
+
+    private void updateButtonWfcMode(Context context, boolean wfcEnabled, int wfcMode) {
         mButtonWfcMode.setSummary(getWfcModeSummary(context, wfcMode));
-        mButtonWfcMode.setEnabled(isChecked);
+        mButtonWfcMode.setEnabled(wfcEnabled);
 
         final PreferenceScreen preferenceScreen = getPreferenceScreen();
-        if (isChecked) {
+        if (wfcEnabled) {
             preferenceScreen.addPreference(mButtonWfcMode);
         } else {
             preferenceScreen.removePreference(mButtonWfcMode);
