@@ -48,7 +48,7 @@ public class PrivateVolumeFormatConfirm extends InstrumentedFragment {
         final StorageManager storage = getActivity().getSystemService(StorageManager.class);
         final String volumeId = getArguments().getString(VolumeInfo.EXTRA_VOLUME_ID);
         mVolume = storage.findVolumeById(volumeId);
-        mDisk = storage.findDiskById(mVolume.diskId);
+        mDisk = storage.findDiskById(mVolume.getDiskId());
 
         final View view = inflater.inflate(R.layout.storage_internal_format, container, false);
         final TextView body = (TextView) view.findViewById(R.id.body);
@@ -65,7 +65,7 @@ public class PrivateVolumeFormatConfirm extends InstrumentedFragment {
         @Override
         public void onClick(View v) {
             final Intent intent = new Intent(getActivity(), StorageWizardFormatProgress.class);
-            intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.id);
+            intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
             intent.putExtra(StorageWizardFormatProgress.EXTRA_FORMAT_PUBLIC, true);
             startActivity(intent);
             getActivity().finish();

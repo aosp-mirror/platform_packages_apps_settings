@@ -91,12 +91,12 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
         }
 
         Preconditions.checkNotNull(mVolume);
-        Preconditions.checkState(mVolume.type == VolumeInfo.TYPE_PUBLIC);
+        Preconditions.checkState(mVolume.getType() == VolumeInfo.TYPE_PUBLIC);
 
-        mDisk = mStorageManager.findDiskById(mVolume.diskId);
+        mDisk = mStorageManager.findDiskById(mVolume.getDiskId());
         Preconditions.checkNotNull(mDisk);
 
-        mVolumeId = mVolume.id;
+        mVolumeId = mVolume.getId();
 
         addPreferencesFromResource(R.xml.device_info_storage_volume);
 
@@ -118,24 +118,24 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
 
         screen.removeAll();
 
-        if (mVolume.state == VolumeInfo.STATE_MOUNTED) {
+        if (mVolume.getState() == VolumeInfo.STATE_MOUNTED) {
             screen.addPreference(mGraph);
             screen.addPreference(mTotal);
             screen.addPreference(mAvailable);
         }
 
-        if (mVolume.state == VolumeInfo.STATE_UNMOUNTED) {
+        if (mVolume.getState() == VolumeInfo.STATE_UNMOUNTED) {
             screen.addPreference(mMount);
         }
-        if (mVolume.state == VolumeInfo.STATE_MOUNTED) {
+        if (mVolume.getState() == VolumeInfo.STATE_MOUNTED) {
             screen.addPreference(mUnmount);
         }
         screen.addPreference(mFormat);
-        if ((mDisk.flags & DiskInfo.FLAG_ADOPTABLE) != 0) {
+        if (mDisk.isAdoptable()) {
             screen.addPreference(mFormatInternal);
         }
 
-        final File file = new File(mVolume.path);
+        final File file = mVolume.getPath();
         mTotalSize = file.getTotalSpace();
         mAvailSize = file.getFreeSpace();
 
@@ -200,7 +200,7 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
             new FormatTask(context, mVolume).execute();
         } else if (pref == mFormatInternal) {
             final Intent intent = new Intent(context, StorageWizardFormatConfirm.class);
-            intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.id);
+            intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
             startActivity(intent);
         }
 
@@ -210,7 +210,7 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
     private final StorageEventListener mStorageListener = new StorageEventListener() {
         @Override
         public void onVolumeStateChanged(VolumeInfo vol, int oldState, int newState) {
-            if (Objects.equals(mVolume.id, vol.id)) {
+            if (Objects.equals(mVolume.getId(), vol.getId())) {
                 mVolume = vol;
                 refresh();
             }

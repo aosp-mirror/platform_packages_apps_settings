@@ -121,13 +121,13 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         mVolume = mStorageManager.findVolumeById(mVolumeId);
 
         Preconditions.checkNotNull(mVolume);
-        Preconditions.checkState(mVolume.type == VolumeInfo.TYPE_PRIVATE);
+        Preconditions.checkState(mVolume.getType() == VolumeInfo.TYPE_PRIVATE);
 
         addPreferencesFromResource(R.xml.device_info_storage_volume);
 
         // Find the emulated shared storage layered above this private volume
         mSharedVolume = mStorageManager.findVolumeById(
-                mVolume.id.replace("private", "emulated"));
+                mVolume.getId().replace("private", "emulated"));
 
         mMeasure = new StorageMeasurement(context, mVolume, mSharedVolume);
         mMeasure.setReceiver(mReceiver);
@@ -168,7 +168,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
 
         screen.removeAll();
 
-        if (mVolume.state != VolumeInfo.STATE_MOUNTED) {
+        if (mVolume.getState() != VolumeInfo.STATE_MOUNTED) {
             return;
         }
 
@@ -202,7 +202,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
             }
         }
 
-        final File file = new File(mVolume.path);
+        final File file = mVolume.getPath();
         mTotalSize = file.getTotalSpace();
         mAvailSize = file.getFreeSpace();
 
@@ -272,15 +272,15 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
 
         // Actions live in menu for non-internal private volumes; they're shown
         // as preference items for public volumes.
-        if (VolumeInfo.ID_PRIVATE_INTERNAL.equals(mVolume.id)) {
+        if (VolumeInfo.ID_PRIVATE_INTERNAL.equals(mVolume.getId())) {
             rename.setVisible(false);
             mount.setVisible(false);
             unmount.setVisible(false);
             format.setVisible(false);
         } else {
-            rename.setVisible(mVolume.type == VolumeInfo.TYPE_PRIVATE);
-            mount.setVisible(mVolume.state == VolumeInfo.STATE_UNMOUNTED);
-            unmount.setVisible(mVolume.state == VolumeInfo.STATE_MOUNTED);
+            rename.setVisible(mVolume.getType() == VolumeInfo.TYPE_PRIVATE);
+            mount.setVisible(mVolume.getState() == VolumeInfo.STATE_UNMOUNTED);
+            unmount.setVisible(mVolume.getState() == VolumeInfo.STATE_MOUNTED);
             format.setVisible(true);
         }
 
@@ -300,12 +300,12 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
                 new MountTask(context, mVolume).execute();
                 return true;
             case R.id.storage_unmount:
-                args.putString(VolumeInfo.EXTRA_VOLUME_ID, mVolume.id);
+                args.putString(VolumeInfo.EXTRA_VOLUME_ID, mVolume.getId());
                 startFragment(this, PrivateVolumeUnmountConfirm.class.getCanonicalName(),
                         R.string.storage_menu_unmount, 0, args);
                 return true;
             case R.id.storage_format:
-                args.putString(VolumeInfo.EXTRA_VOLUME_ID, mVolume.id);
+                args.putString(VolumeInfo.EXTRA_VOLUME_ID, mVolume.getId());
                 startFragment(this, PrivateVolumeFormatConfirm.class.getCanonicalName(),
                         R.string.storage_menu_format, 0, args);
                 return true;
@@ -428,7 +428,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
     private final StorageEventListener mStorageListener = new StorageEventListener() {
         @Override
         public void onVolumeStateChanged(VolumeInfo vol, int oldState, int newState) {
-            if (Objects.equals(mVolume.id, vol.id)) {
+            if (Objects.equals(mVolume.getId(), vol.getId())) {
                 mVolume = vol;
                 refresh();
             }
@@ -462,8 +462,8 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
             final View view = dialogInflater.inflate(R.layout.dialog_edittext, null, false);
             final EditText nickname = (EditText) view.findViewById(R.id.edittext);
 
-            if (!TextUtils.isEmpty(vol.nickname)) {
-                nickname.setText(vol.nickname);
+            if (!TextUtils.isEmpty(vol.getNickname())) {
+                nickname.setText(vol.getNickname());
             } else {
                 nickname.setText(storageManager.getBestVolumeDescription(vol));
             }
@@ -475,7 +475,8 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
                     new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            // TODO: persist the edited nickname!
+                            // TODO: move to background thread
+                            storageManager.setVolumeNickname(volId, nickname.getText().toString());
                         }
                     });
             builder.setNegativeButton(R.string.cancel, null);

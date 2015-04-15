@@ -345,7 +345,7 @@ public class StorageMeasurement {
         final Message finished = mMeasurementHandler.obtainMessage(MeasurementHandler.MSG_COMPLETED,
                 details);
 
-        if (mSharedVolume != null && mSharedVolume.state == VolumeInfo.STATE_MOUNTED) {
+        if (mSharedVolume != null && mSharedVolume.getState() == VolumeInfo.STATE_MOUNTED) {
             final File basePath = mSharedVolume.getPathForUser(currentUser);
 
             // Measure media types for emulated storage, or for primary physical
@@ -359,7 +359,7 @@ public class StorageMeasurement {
             // Measure misc files not counted under media
             details.miscSize = measureMisc(imcs, basePath);
 
-            if (mSharedVolume.type == VolumeInfo.TYPE_EMULATED) {
+            if (mSharedVolume.getType() == VolumeInfo.TYPE_EMULATED) {
                 // Measure total emulated storage of all users; internal apps data
                 // will be spliced in later
                 for (UserInfo user : users) {
@@ -371,14 +371,14 @@ public class StorageMeasurement {
         }
 
         // Measure all apps hosted on this volume for all users
-        if (mVolume.type == VolumeInfo.TYPE_PRIVATE) {
+        if (mVolume.getType() == VolumeInfo.TYPE_PRIVATE) {
             final List<ApplicationInfo> apps = packageManager.getInstalledApplications(
                     PackageManager.GET_UNINSTALLED_PACKAGES
                     | PackageManager.GET_DISABLED_COMPONENTS);
 
             final List<ApplicationInfo> volumeApps = new ArrayList<>();
             for (ApplicationInfo app : apps) {
-                if (Objects.equals(app.volumeUuid, mVolume.fsUuid)) {
+                if (Objects.equals(app.volumeUuid, mVolume.getFsUuid())) {
                     volumeApps.add(app);
                 }
             }

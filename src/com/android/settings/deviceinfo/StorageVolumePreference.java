@@ -44,13 +44,13 @@ public class StorageVolumePreference extends Preference {
         mStorageManager = context.getSystemService(StorageManager.class);
         mVolume = volume;
 
-        setKey(volume.id);
+        setKey(volume.getId());
         setTitle(mStorageManager.getBestVolumeDescription(volume));
 
-        switch (volume.state) {
+        switch (volume.getState()) {
             case VolumeInfo.STATE_MOUNTED:
                 // TODO: move statfs() to background thread
-                final File path = new File(volume.path);
+                final File path = volume.getPath();
                 final String free = Formatter.formatFileSize(context, path.getFreeSpace());
                 final String total = Formatter.formatFileSize(context, path.getTotalSpace());
                 setSummary(context.getString(R.string.storage_volume_summary, free, total));
@@ -58,13 +58,14 @@ public class StorageVolumePreference extends Preference {
         }
 
         // TODO: better icons
-        if (VolumeInfo.ID_PRIVATE_INTERNAL.equals(volume.id)) {
+        if (VolumeInfo.ID_PRIVATE_INTERNAL.equals(volume.getId())) {
             setIcon(context.getDrawable(R.drawable.ic_settings_storage));
         } else {
             setIcon(context.getDrawable(R.drawable.ic_sim_sd));
         }
 
-        if (volume.type == VolumeInfo.TYPE_PUBLIC && volume.state == VolumeInfo.STATE_MOUNTED) {
+        if (volume.getType() == VolumeInfo.TYPE_PUBLIC
+                && volume.getState() == VolumeInfo.STATE_MOUNTED) {
             setWidgetLayoutResource(R.layout.preference_storage_action);
         }
     }

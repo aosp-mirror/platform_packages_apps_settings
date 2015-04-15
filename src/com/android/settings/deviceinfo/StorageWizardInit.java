@@ -72,12 +72,15 @@ public class StorageWizardInit extends StorageWizardBase {
     @Override
     public void onNavigateNext() {
         if (mRadioExternal.isChecked()) {
+            // Remember that user made decision
+            mStorage.setVolumeInited(mVolume.getId(), true);
+
             final Intent intent = new Intent(this, StorageWizardReady.class);
-            intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.id);
+            intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
             startActivity(intent);
         } else if (mRadioInternal.isChecked()) {
             final Intent intent = new Intent(this, StorageWizardFormatConfirm.class);
-            intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.id);
+            intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
             startActivity(intent);
         }
     }

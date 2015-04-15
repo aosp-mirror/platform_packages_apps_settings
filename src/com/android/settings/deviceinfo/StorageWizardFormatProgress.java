@@ -59,9 +59,9 @@ public class StorageWizardFormatProgress extends StorageWizardBase {
         protected Exception doInBackground(Void... params) {
             try {
                 if (mFormatPublic) {
-                    mStorage.partitionPublic(mDisk.id);
+                    mStorage.partitionPublic(mDisk.getId());
                 } else {
-                    mStorage.partitionPrivate(mDisk.id);
+                    mStorage.partitionPrivate(mDisk.getId());
                 }
                 return null;
             } catch (Exception e) {
@@ -74,8 +74,12 @@ public class StorageWizardFormatProgress extends StorageWizardBase {
             final Context context = StorageWizardFormatProgress.this;
             if (e == null) {
                 if (!mFormatPublic) {
-                    final Intent intent = new Intent(context, StorageWizardMigrate.class);
-                    intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.id);
+                    // TODO: bring back migration once implemented
+//                    final Intent intent = new Intent(context, StorageWizardMigrate.class);
+//                    intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
+//                    startActivity(intent);
+                    final Intent intent = new Intent(context, StorageWizardReady.class);
+                    intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
                     startActivity(intent);
                 }
                 finishAffinity();

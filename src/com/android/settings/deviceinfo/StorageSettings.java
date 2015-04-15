@@ -94,10 +94,12 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
     private static final Comparator<VolumeInfo> sVolumeComparator = new Comparator<VolumeInfo>() {
         @Override
         public int compare(VolumeInfo lhs, VolumeInfo rhs) {
-            if (VolumeInfo.ID_PRIVATE_INTERNAL.equals(lhs.id)) {
+            if (VolumeInfo.ID_PRIVATE_INTERNAL.equals(lhs.getId())) {
                 return -1;
             } else if (lhs.getDescription() == null) {
                 return 1;
+            } else if (rhs.getDescription() == null) {
+                return -1;
             } else {
                 return lhs.getDescription().compareTo(rhs.getDescription());
             }
@@ -114,7 +116,13 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
     };
 
     private static boolean isInteresting(VolumeInfo vol) {
-        return vol.type == VolumeInfo.TYPE_PRIVATE || vol.type == VolumeInfo.TYPE_PUBLIC;
+        switch(vol.getType()) {
+            case VolumeInfo.TYPE_PRIVATE:
+            case VolumeInfo.TYPE_PUBLIC:
+                return true;
+            default:
+                return false;
+        }
     }
 
     private void refresh() {
@@ -128,9 +136,9 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
         Collections.sort(volumes, sVolumeComparator);
 
         for (VolumeInfo vol : volumes) {
-            if (vol.type == VolumeInfo.TYPE_PRIVATE) {
+            if (vol.getType() == VolumeInfo.TYPE_PRIVATE) {
                 mInternalCategory.addPreference(new StorageVolumePreference(context, vol));
-            } else if (vol.type == VolumeInfo.TYPE_PUBLIC) {
+            } else if (vol.getType() == VolumeInfo.TYPE_PUBLIC) {
                 mExternalCategory.addPreference(new StorageVolumePreference(context, vol));
             }
         }
@@ -186,15 +194,15 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
         if (vol == null) {
             return false;
 
-        } else if (vol.type == VolumeInfo.TYPE_PRIVATE) {
+        } else if (vol.getType() == VolumeInfo.TYPE_PRIVATE) {
             final Bundle args = new Bundle();
             args.putString(VolumeInfo.EXTRA_VOLUME_ID, volId);
             startFragment(this, PrivateVolumeSettings.class.getCanonicalName(),
                     -1, 0, args);
             return true;
 
-        } else if (vol.type == VolumeInfo.TYPE_PUBLIC) {
-            if (vol.state == VolumeInfo.STATE_MOUNTED) {
+        } else if (vol.getType() == VolumeInfo.TYPE_PUBLIC) {
+            if (vol.getState() == VolumeInfo.STATE_MOUNTED) {
                 startActivity(vol.buildBrowseIntent());
                 return true;
             } else {
@@ -218,7 +226,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
         public MountTask(Context context, VolumeInfo volume) {
             mContext = context.getApplicationContext();
             mStorageManager = mContext.getSystemService(StorageManager.class);
-            mVolumeId = volume.id;
+            mVolumeId = volume.getId();
             mDescription = mStorageManager.getBestVolumeDescription(volume);
         }
 
@@ -254,7 +262,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
         public UnmountTask(Context context, VolumeInfo volume) {
             mContext = context.getApplicationContext();
             mStorageManager = mContext.getSystemService(StorageManager.class);
-            mVolumeId = volume.id;
+            mVolumeId = volume.getId();
             mDescription = mStorageManager.getBestVolumeDescription(volume);
         }
 
@@ -290,7 +298,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
         public FormatTask(Context context, VolumeInfo volume) {
             mContext = context.getApplicationContext();
             mStorageManager = mContext.getSystemService(StorageManager.class);
-            mVolumeId = volume.id;
+            mVolumeId = volume.getId();
             mDescription = mStorageManager.getBestVolumeDescription(volume);
         }
 

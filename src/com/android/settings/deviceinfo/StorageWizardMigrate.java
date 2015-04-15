@@ -71,11 +71,11 @@ public class StorageWizardMigrate extends StorageWizardBase {
     public void onNavigateNext() {
         if (mRadioNow.isChecked()) {
             final Intent intent = new Intent(this, StorageWizardMigrateConfirm.class);
-            intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.id);
+            intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
             startActivity(intent);
         } else if (mRadioLater.isChecked()) {
             final Intent intent = new Intent(this, StorageWizardReady.class);
-            intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.id);
+            intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
             startActivity(intent);
         }
     }

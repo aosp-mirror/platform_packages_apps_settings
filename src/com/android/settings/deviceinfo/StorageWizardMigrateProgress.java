@@ -62,7 +62,7 @@ public class StorageWizardMigrateProgress extends StorageWizardBase {
             final Context context = StorageWizardMigrateProgress.this;
             if (e == null) {
                 final Intent intent = new Intent(context, StorageWizardReady.class);
-                intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.id);
+                intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
                 startActivity(intent);
                 finishAffinity();
 
