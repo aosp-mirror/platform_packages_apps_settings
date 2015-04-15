@@ -122,6 +122,18 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
             screen.addPreference(mGraph);
             screen.addPreference(mTotal);
             screen.addPreference(mAvailable);
+
+            final File file = mVolume.getPath();
+            mTotalSize = file.getTotalSpace();
+            mAvailSize = file.getFreeSpace();
+
+            mTotal.setSummary(Formatter.formatFileSize(context, mTotalSize));
+            mAvailable.setSummary(Formatter.formatFileSize(context, mAvailSize));
+
+            mGraph.clear();
+            mGraph.addEntry(0, (mTotalSize - mAvailSize) / (float) mTotalSize,
+                    android.graphics.Color.GRAY);
+            mGraph.commit();
         }
 
         if (mVolume.getState() == VolumeInfo.STATE_UNMOUNTED) {
@@ -134,18 +146,6 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
         if (mDisk.isAdoptable()) {
             screen.addPreference(mFormatInternal);
         }
-
-        final File file = mVolume.getPath();
-        mTotalSize = file.getTotalSpace();
-        mAvailSize = file.getFreeSpace();
-
-        mTotal.setSummary(Formatter.formatFileSize(context, mTotalSize));
-        mAvailable.setSummary(Formatter.formatFileSize(context, mAvailSize));
-
-        mGraph.clear();
-        mGraph.addEntry(0, (mTotalSize - mAvailSize) / (float) mTotalSize,
-                android.graphics.Color.GRAY);
-        mGraph.commit();
     }
 
     private UsageBarPreference buildGraph() {
@@ -210,6 +210,14 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
     private final StorageEventListener mStorageListener = new StorageEventListener() {
         @Override
         public void onVolumeStateChanged(VolumeInfo vol, int oldState, int newState) {
+            if (Objects.equals(mVolume.getId(), vol.getId())) {
+                mVolume = vol;
+                refresh();
+            }
+        }
+
+        @Override
+        public void onVolumeMetadataChanged(VolumeInfo vol) {
             if (Objects.equals(mVolume.getId(), vol.getId())) {
                 mVolume = vol;
                 refresh();
