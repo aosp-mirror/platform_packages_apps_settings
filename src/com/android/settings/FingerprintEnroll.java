@@ -254,8 +254,7 @@ public class FingerprintEnroll extends SettingsActivity {
 
                 case EnrollingStart:
                     mEnrollmentSteps = -1;
-                    // TODO: pass in mToken
-                    mFingerprintManager.enroll(0, mEnrollmentCancel, mEnrollmentCallback, 0);
+                    mFingerprintManager.enroll(mToken, mEnrollmentCancel, mEnrollmentCallback, 0);
                     mProgressBar.setProgress(0);
                     mEnrolling = true;
                     startFingerprintAnimator(); // XXX hack - this should follow fingerprint detection
