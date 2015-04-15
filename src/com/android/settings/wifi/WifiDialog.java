@@ -37,11 +37,14 @@ class WifiDialog extends AlertDialog implements WifiConfigUiBase {
     private View mView;
     private WifiConfigController mController;
     private boolean mHideSubmitButton;
+    private boolean mHideForgetButton;
 
     public WifiDialog(Context context, DialogInterface.OnClickListener listener,
-            AccessPoint accessPoint, boolean edit, boolean hideSubmitButton) {
+            AccessPoint accessPoint, boolean edit, boolean hideSubmitButton,
+            boolean hideForgetButton) {
         this(context, listener, accessPoint, edit);
         mHideSubmitButton = hideSubmitButton;
+        mHideForgetButton = hideForgetButton;
     }
 
     public WifiDialog(Context context, DialogInterface.OnClickListener listener,
@@ -51,6 +54,7 @@ class WifiDialog extends AlertDialog implements WifiConfigUiBase {
         mListener = listener;
         mAccessPoint = accessPoint;
         mHideSubmitButton = false;
+        mHideForgetButton = false;
     }
 
     @Override
@@ -72,6 +76,10 @@ class WifiDialog extends AlertDialog implements WifiConfigUiBase {
             /* During creation, the submit button can be unavailable to determine
              * visibility. Right after creation, update button visibility */
             mController.enableSubmitIfAppropriate();
+        }
+
+        if (mHideForgetButton) {
+            mController.hideForgetButton();
         }
     }
 
