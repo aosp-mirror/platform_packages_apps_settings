@@ -250,8 +250,15 @@ public class WifiConfigController implements TextWatcher,
                     mConfigUi.setSubmitButton(res.getString(R.string.wifi_connect));
                 } else {
                     if (state != null) {
-                        addRow(group, R.string.wifi_status, AccessPoint.getSummary(
-                                mConfigUi.getContext(), state, !mAccessPoint.isSaved()));
+                        WifiConfiguration config = mAccessPoint.getConfig();
+                        boolean isEphimeral = mAccessPoint.isSaved() == false;
+                        String providerFriendlyName = null;
+                        if (config != null && config.isPasspoint()) {
+                            providerFriendlyName = config.providerFriendlyName;
+                        }
+                        String summary = AccessPoint.getSummary(
+                                mConfigUi.getContext(), state, isEphimeral, providerFriendlyName);
+                        addRow(group, R.string.wifi_status, summary);
                     }
 
                     if (signalLevel != null) {

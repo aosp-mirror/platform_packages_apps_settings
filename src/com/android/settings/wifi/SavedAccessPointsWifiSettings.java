@@ -96,7 +96,7 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
         final Context context = getActivity();
 
         final List<AccessPoint> accessPoints = WifiTracker.getCurrentAccessPoints(context, true,
-                false);
+                false, true);
 
         preferenceScreen.removeAll();
 
@@ -106,7 +106,7 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
         final int accessPointsSize = accessPoints.size();
         for (int i = 0; i < accessPointsSize; ++i){
             AccessPointPreference preference = new AccessPointPreference(accessPoints.get(i),
-                    context);
+                    context, true);
             WifiConfiguration config = accessPoints.get(i).getConfig();
             if (config != null) {
                 int userId = UserHandle.getUserId(config.creatorUid);
@@ -217,7 +217,7 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
 
                 // Add available Wi-Fi access points
                 final List<AccessPoint> accessPoints = WifiTracker.getCurrentAccessPoints(context,
-                        true, false);
+                        true, false, true);
 
                 final int accessPointsSize = accessPoints.size();
                 for (int i = 0; i < accessPointsSize; ++i){
