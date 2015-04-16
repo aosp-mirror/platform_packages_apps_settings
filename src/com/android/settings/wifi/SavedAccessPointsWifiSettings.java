@@ -16,12 +16,19 @@
 
 package com.android.settings.wifi;
 
+import android.app.AppGlobals;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.IPackageManager;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.os.RemoteException;
+import android.os.UserHandle;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.util.Log;
@@ -93,11 +100,32 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
 
         preferenceScreen.removeAll();
 
+        PackageManager pm = context.getPackageManager();
+        String systemName = pm.getNameForUid(android.os.Process.SYSTEM_UID);
+
         final int accessPointsSize = accessPoints.size();
         for (int i = 0; i < accessPointsSize; ++i){
             AccessPointPreference preference = new AccessPointPreference(accessPoints.get(i),
                     context);
-            preference.setShowSummary(false);
+            WifiConfiguration config = accessPoints.get(i).getConfig();
+            if (config != null) {
+                int userId = UserHandle.getUserId(config.creatorUid);
+                ApplicationInfo appInfo = null;
+                if (config.creatorName != null && config.creatorName.equals(systemName)) {
+                    appInfo = context.getApplicationInfo();
+                } else {
+                    try {
+                        IPackageManager ipm = AppGlobals.getPackageManager();
+                        appInfo = ipm.getApplicationInfo(config.creatorName, 0 /* flags */, userId);
+                    } catch (RemoteException rex) {
+                    }
+                }
+                if (appInfo != null) {
+                    preference.setSummary(getResources().getString(appInfo.labelRes));
+                }
+            } else {
+                preference.setShowSummary(false);
+            }
             preferenceScreen.addPreference(preference);
         }
 

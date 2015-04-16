@@ -15,16 +15,9 @@
  */
 package com.android.settings.wifi;
 
-import android.app.AppGlobals;
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.IPackageManager;
-import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
-import android.net.wifi.WifiConfiguration;
-import android.os.RemoteException;
-import android.os.UserHandle;
 import android.preference.Preference;
 import android.view.View;
 import android.widget.TextView;
@@ -65,36 +58,6 @@ public class AccessPointPreference extends Preference {
         mSummaryView.setVisibility(showSummary ? View.VISIBLE : View.GONE);
 
         notifyChanged();
-    }
-
-    public void showAppIcon() {
-        PackageManager pm = getContext().getPackageManager();
-        String systemName = pm.getNameForUid(android.os.Process.SYSTEM_UID);
-        WifiConfiguration mConfig = mAccessPoint.getConfig();
-
-        Drawable drawable = pm.getDefaultActivityIcon();
-        if (mConfig == null) {
-            drawable.setAlpha(0);
-        } else {
-            int userId = UserHandle.getUserId(mConfig.creatorUid);
-            ApplicationInfo appInfo = null;
-            if (mConfig.creatorName.equals(systemName)) {
-                appInfo = getContext().getApplicationInfo();
-            } else {
-                try {
-                    IPackageManager ipm = AppGlobals.getPackageManager();
-                    appInfo = ipm.getApplicationInfo(mConfig.creatorName, 0 /* flags */, userId);
-                } catch (RemoteException rex) {
-                    // use default app icon
-                }
-            }
-            if (appInfo != null) {
-                drawable = appInfo.loadIcon(pm);
-                drawable = pm.getUserBadgedIcon(drawable, new UserHandle(userId));
-            }
-        }
-
-        setIcon(drawable);
     }
 
     protected void updateIcon(int level, Context context) {
