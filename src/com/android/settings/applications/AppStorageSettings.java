@@ -23,13 +23,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageDataObserver;
-import android.content.pm.IPackageMoveObserver;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.os.RemoteException;
+import android.os.storage.StorageManager;
+import android.os.storage.VolumeInfo;
 import android.text.format.Formatter;
 import android.util.Log;
 import android.view.View;
@@ -38,11 +37,16 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.internal.logging.MetricsLogger;
+import com.android.settings.DropDownPreference;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.applications.ApplicationsState.AppEntry;
 import com.android.settings.applications.ApplicationsState.Callbacks;
-import com.android.settings.DropDownPreference;
+import com.android.settings.deviceinfo.StorageWizardMoveConfirm;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 
 public class AppStorageSettings extends AppInfoWithHeader
         implements OnClickListener, Callbacks, DropDownPreference.Callback {
@@ -53,7 +57,6 @@ public class AppStorageSettings extends AppInfoWithHeader
     private static final int OP_FAILED = 2;
     private static final int MSG_CLEAR_USER_DATA = 1;
     private static final int MSG_CLEAR_CACHE = 3;
-    private static final int MSG_PACKAGE_MOVE = 4;
 
     // invalid size value used initially and also when size retrieval through PackageManager
     // fails for whatever reason
@@ -64,13 +67,11 @@ public class AppStorageSettings extends AppInfoWithHeader
 
     private static final int DLG_CLEAR_DATA = DLG_BASE + 1;
     private static final int DLG_CANNOT_CLEAR_DATA = DLG_BASE + 2;
-    private static final int DLG_MOVE_FAILED = DLG_BASE + 3;
 
     private static final String KEY_MOVE_PREFERENCE = "app_location_setting";
     private static final String KEY_STORAGE_SETTINGS = "storage_settings";
     private static final String KEY_CACHE_SETTINGS = "cache_settings";
 
-    private CanBeOnSdCardChecker mCanBeOnSdCardChecker;
     private TextView mTotalSize;
     private TextView mAppSize;
     private TextView mDataSize;
@@ -83,7 +84,6 @@ public class AppStorageSettings extends AppInfoWithHeader
     private Button mClearCacheButton;
 
     private DropDownPreference mMoveDropDown;
-    private boolean mMoveInProgress = false;
 
     private boolean mCanClearData = true;
     private boolean mHaveSizes = false;
@@ -97,7 +97,6 @@ public class AppStorageSettings extends AppInfoWithHeader
 
     private ClearCacheObserver mClearCacheObserver;
     private ClearUserDataObserver mClearDataObserver;
-    private PackageMoveObserver mPackageMoveObserver;
 
     // Resource strings
     private CharSequence mInvalidSizeStr;
@@ -107,7 +106,6 @@ public class AppStorageSettings extends AppInfoWithHeader
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mCanBeOnSdCardChecker = new CanBeOnSdCardChecker();
         addPreferencesFromResource(R.xml.app_storage_settings);
         setupViews();
     }
@@ -166,18 +164,19 @@ public class AppStorageSettings extends AppInfoWithHeader
 
     @Override
     public boolean onItemSelected(int pos, Object value) {
-        boolean selectedExternal = (Boolean) value;
-        boolean isExternal = (mAppEntry.info.flags & ApplicationInfo.FLAG_EXTERNAL_STORAGE) != 0;
-        if (selectedExternal ^ isExternal) {
-            if (mPackageMoveObserver == null) {
-                mPackageMoveObserver = new PackageMoveObserver();
-            }
-            int moveFlags = selectedExternal ? PackageManager.MOVE_EXTERNAL_MEDIA
-                    : PackageManager.MOVE_INTERNAL;
-            mMoveInProgress = true;
-            refreshButtons();
-            mPm.movePackage(mAppEntry.info.packageName, mPackageMoveObserver, moveFlags);
+        final Context context = getActivity();
+
+        // If not current volume, kick off move wizard
+        final VolumeInfo targetVol = (VolumeInfo) value;
+        final VolumeInfo currentVol = context.getPackageManager().getApplicationCurrentVolume(
+                mAppEntry.info);
+        if (!Objects.equals(targetVol, currentVol)) {
+            final Intent intent = new Intent(context, StorageWizardMoveConfirm.class);
+            intent.putExtra(VolumeInfo.EXTRA_VOLUME_ID, targetVol.getId());
+            intent.putExtra(Intent.EXTRA_PACKAGE_NAME, mAppEntry.info.packageName);
+            startActivity(intent);
         }
+
         return true;
     }
 
@@ -260,27 +259,17 @@ public class AppStorageSettings extends AppInfoWithHeader
         retrieveAppEntry();
         refreshButtons();
         refreshSizeInfo();
-        boolean isExternal = (mAppEntry.info.flags & ApplicationInfo.FLAG_EXTERNAL_STORAGE) != 0;
-        mMoveDropDown.setSelectedItem(isExternal ? 1 : 0);
+
+        final VolumeInfo currentVol = getActivity().getPackageManager()
+                .getApplicationCurrentVolume(mAppEntry.info);
+        mMoveDropDown.setSelectedValue(currentVol);
+
         return true;
     }
 
     private void refreshButtons() {
-        if (!mMoveInProgress) {
-            initMoveDropDown();
-            initDataButtons();
-        } else {
-            mMoveDropDown.setSummary(R.string.moving);
-            mMoveDropDown.setSelectable(false);
-        }
-    }
-
-    private void updateMoveEnabled(boolean enabled) {
-        mMoveDropDown.clearItems();
-        mMoveDropDown.addItem(R.string.storage_type_internal, false);
-        if (enabled) {
-            mMoveDropDown.addItem(R.string.storage_type_external, true);
-        }
+        initMoveDropDown();
+        initDataButtons();
     }
 
     private void initDataButtons() {
@@ -310,20 +299,18 @@ public class AppStorageSettings extends AppInfoWithHeader
     }
 
     private void initMoveDropDown() {
-        if (Environment.isExternalStorageEmulated()) {
-            updateMoveEnabled(false);
-            return;
+        final Context context = getActivity();
+        final StorageManager storage = context.getSystemService(StorageManager.class);
+
+        final List<VolumeInfo> candidates = context.getPackageManager()
+                .getApplicationCandidateVolumes(mAppEntry.info);
+        Collections.sort(candidates, VolumeInfo.getDescriptionComparator());
+
+        mMoveDropDown.clearItems();
+        for (VolumeInfo vol : candidates) {
+            final String volDescrip = storage.getBestVolumeDescription(vol);
+            mMoveDropDown.addItem(volDescrip, vol);
         }
-        boolean dataOnly = (mPackageInfo == null) && (mAppEntry != null);
-        boolean moveDisable = true;
-        if ((mAppEntry.info.flags & ApplicationInfo.FLAG_EXTERNAL_STORAGE) != 0) {
-            // Always let apps move to internal storage from sdcard.
-            moveDisable = false;
-        } else {
-            mCanBeOnSdCardChecker.init();
-            moveDisable = !mCanBeOnSdCardChecker.check(mAppEntry.info);
-        }
-        updateMoveEnabled(!moveDisable);
         mMoveDropDown.setSelectable(!mAppControlRestricted);
     }
 
@@ -351,21 +338,6 @@ public class AppStorageSettings extends AppInfoWithHeader
         }
     }
 
-    private void processMoveMsg(Message msg) {
-        int result = msg.arg1;
-        String packageName = mAppEntry.info.packageName;
-        // Refresh the button attributes.
-        mMoveInProgress = false;
-        if (result == PackageManager.MOVE_SUCCEEDED) {
-            Log.i(TAG, "Moved resources for " + packageName);
-            // Refresh size information again.
-            mState.requestSize(mPackageName, mUserId);
-        } else {
-            showDialogInner(DLG_MOVE_FAILED, result);
-        }
-        refreshUi();
-    }
-
     /*
      * Private method to handle clear message notification from observer when
      * the async operation from PackageManager is complete
@@ -380,24 +352,6 @@ public class AppStorageSettings extends AppInfoWithHeader
         } else {
             mClearDataButton.setEnabled(true);
         }
-    }
-
-    private CharSequence getMoveErrMsg(int errCode) {
-        switch (errCode) {
-            case PackageManager.MOVE_FAILED_INSUFFICIENT_STORAGE:
-                return getActivity().getString(R.string.insufficient_storage);
-            case PackageManager.MOVE_FAILED_DOESNT_EXIST:
-                return getActivity().getString(R.string.does_not_exist);
-            case PackageManager.MOVE_FAILED_FORWARD_LOCKED:
-                return getActivity().getString(R.string.app_forward_locked);
-            case PackageManager.MOVE_FAILED_INVALID_LOCATION:
-                return getActivity().getString(R.string.invalid_location);
-            case PackageManager.MOVE_FAILED_SYSTEM_PACKAGE:
-                return getActivity().getString(R.string.system_package);
-            case PackageManager.MOVE_FAILED_INTERNAL_ERROR:
-                return "";
-        }
-        return "";
     }
 
     @Override
@@ -427,14 +381,6 @@ public class AppStorageSettings extends AppInfoWithHeader
                             }
                         })
                         .create();
-            case DLG_MOVE_FAILED:
-                CharSequence msg = getActivity().getString(R.string.move_app_failed_dlg_text,
-                        getMoveErrMsg(errorCode));
-                return new AlertDialog.Builder(getActivity())
-                        .setTitle(getActivity().getText(R.string.move_app_failed_dlg_title))
-                        .setMessage(msg)
-                        .setNeutralButton(R.string.dlg_ok, null)
-                        .create();
         }
         return null;
     }
@@ -458,9 +404,6 @@ public class AppStorageSettings extends AppInfoWithHeader
                 case MSG_CLEAR_CACHE:
                     // Refresh size info
                     mState.requestSize(mPackageName, mUserId);
-                    break;
-                case MSG_PACKAGE_MOVE:
-                    processMoveMsg(msg);
                     break;
             }
         }
@@ -508,13 +451,4 @@ public class AppStorageSettings extends AppInfoWithHeader
            mHandler.sendMessage(msg);
         }
     }
-
-    class PackageMoveObserver extends IPackageMoveObserver.Stub {
-        public void packageMoved(String packageName, int returnCode) throws RemoteException {
-            final Message msg = mHandler.obtainMessage(MSG_PACKAGE_MOVE);
-            msg.arg1 = returnCode;
-            mHandler.sendMessage(msg);
-        }
-    }
-
 }

@@ -295,20 +295,6 @@ public class ApplicationsState {
         }
     };
 
-    public static final AppFilter FILTER_ON_SD_CARD = new AppFilter() {
-        final CanBeOnSdCardChecker mCanBeOnSdCardChecker
-                = new CanBeOnSdCardChecker();
-
-        public void init() {
-            mCanBeOnSdCardChecker.init();
-        }
-
-        @Override
-        public boolean filterApp(AppEntry entry) {
-            return mCanBeOnSdCardChecker.check(entry.info);
-        }
-    };
-
     public static final AppFilter FILTER_DISABLED = new AppFilter() {
         public void init() {
         }
