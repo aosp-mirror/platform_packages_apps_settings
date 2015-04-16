@@ -13,12 +13,11 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/add"
-        android:title="@string/zen_mode_time_add_rule"
-        android:icon="@drawable/ic_menu_add_white"
-        android:visible="true"
-        android:showAsAction="collapseActionView|ifRoom" />
-</menu>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+        android:color="@color/fab_ripple">
+    <item>
+        <shape>
+            <solid android:color="@color/fab_shape" />
+        </shape>
+    </item>
+</ripple>

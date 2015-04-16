@@ -33,14 +33,14 @@ import android.service.notification.ZenModeConfig.ScheduleInfo;
 import android.service.notification.ZenModeConfig.ZenRule;
 import android.text.format.DateFormat;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settings.notification.ManagedServiceSettings.Config;
 import com.android.settings.notification.ZenRuleNameDialog.RuleInfo;
+import com.android.settings.widget.FloatingActionButton;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -59,7 +59,6 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        setHasOptionsMenu(true);
         addPreferencesFromResource(R.xml.zen_mode_automation_settings);
         mServiceListing = new ServiceListing(mContext, CONFIG);
         mServiceListing.addCallback(mServiceListingCallback);
@@ -68,24 +67,25 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
     }
 
     @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        final FloatingActionButton fab = getFloatingActionButton();
+        fab.setVisibility(View.VISIBLE);
+        fab.setImageResource(R.drawable.ic_menu_add_white);
+        fab.setContentDescription(getString(R.string.zen_mode_time_add_rule));
+        fab.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAddRuleDialog();
+            }
+        });
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
         mServiceListing.setListening(false);
         mServiceListing.removeCallback(mServiceListingCallback);
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.zen_mode_automation, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.add) {
-            showAddRuleDialog();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override

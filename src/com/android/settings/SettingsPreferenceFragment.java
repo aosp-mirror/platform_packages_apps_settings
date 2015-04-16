@@ -42,6 +42,8 @@ import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
+import com.android.settings.widget.FloatingActionButton;
+
 /**
  * Base class for Settings fragments, with some helper functions and dialog management.
  */
@@ -80,6 +82,7 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
     };
 
     private ViewGroup mPinnedHeaderFrameLayout;
+    private FloatingActionButton mFloatingActionButton;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -101,7 +104,12 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
             Bundle savedInstanceState) {
         final View root = super.onCreateView(inflater, container, savedInstanceState);
         mPinnedHeaderFrameLayout = (ViewGroup) root.findViewById(R.id.pinned_header);
+        mFloatingActionButton = (FloatingActionButton) root.findViewById(R.id.fab);
         return root;
+    }
+
+    public FloatingActionButton getFloatingActionButton() {
+        return mFloatingActionButton;
     }
 
     public void setPinnedHeaderView(View pinnedHeader) {
