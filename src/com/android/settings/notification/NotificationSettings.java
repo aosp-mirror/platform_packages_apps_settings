@@ -128,7 +128,7 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
 
         final PreferenceCategory sound = (PreferenceCategory) findPreference(KEY_SOUND);
         initVolumePreference(KEY_MEDIA_VOLUME, AudioManager.STREAM_MUSIC,
-                com.android.internal.R.drawable.ic_audio_vol_mute);
+                com.android.internal.R.drawable.ic_audio_media_mute);
         initVolumePreference(KEY_ALARM_VOLUME, AudioManager.STREAM_ALARM,
                 com.android.internal.R.drawable.ic_audio_alarm_mute);
         if (mVoiceCapable) {
