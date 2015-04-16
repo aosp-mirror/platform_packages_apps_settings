@@ -135,9 +135,9 @@
         android:summaryOn="@string/carrier_enabled_summaryOn"
         android:summaryOff="@@string/carrier_enabled_summaryOff"
         />
-    <ListPreference
+    <MultiSelectListPreference
         android:title="@string/bearer"
-        android:key="bearer"
+        android:key="bearer_multi"
         android:entries="@array/bearer_entries"
         android:entryValues="@array/bearer_values"
         />
@@ -154,4 +154,4 @@
         android:singleLine="true"
         android:inputType="text"
         />
-</PreferenceScreen>   
+</PreferenceScreen>
