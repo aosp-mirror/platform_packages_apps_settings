@@ -50,17 +50,20 @@ import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.android.internal.logging.MetricsLogger;
+import com.android.settings.AppHeader;
 import com.android.settings.HelpUtils;
 import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.Settings.AllApplicationsActivity;
 import com.android.settings.Settings.DomainsURLsAppListActivity;
 import com.android.settings.Settings.NotificationAppListActivity;
+import com.android.settings.Settings.StorageUseActivity;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.applications.ApplicationsState.AppEntry;
 import com.android.settings.applications.ApplicationsState.AppFilter;
 import com.android.settings.applications.ApplicationsState.CompoundFilter;
+import com.android.settings.applications.ApplicationsState.VolumeFilter;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.NotificationBackend.AppRow;
 
@@ -80,6 +83,12 @@ public class ManageApplications extends InstrumentedFragment
 
     static final String TAG = "ManageApplications";
     static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
+
+    // Intent extras.
+    public static final String EXTRA_CLASSNAME = "classname";
+    // Used for storage only.
+    public static final String EXTRA_VOLUME_UUID = "volumeUuid";
+    public static final String EXTRA_VOLUME_NAME = "volumeName";
 
     private static final String EXTRA_SORT_ORDER = "sortOrder";
 
@@ -180,6 +189,7 @@ public class ManageApplications extends InstrumentedFragment
     public static final int LIST_TYPE_MAIN = 0;
     public static final int LIST_TYPE_NOTIFICATION = 1;
     public static final int LIST_TYPE_DOMAINS_URLS = 2;
+    public static final int LIST_TYPE_STORAGE = 3;
 
     private View mRootView;
 
@@ -188,6 +198,8 @@ public class ManageApplications extends InstrumentedFragment
     private FilterSpinnerAdapter mFilterAdapter;
     private NotificationBackend mNotifBackend;
     private ResetAppsHelper mResetAppsHelper;
+    private String mVolumeUuid;
+    private String mVolumeName;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -196,8 +208,8 @@ public class ManageApplications extends InstrumentedFragment
         mApplicationsState = ApplicationsState.getInstance(getActivity().getApplication());
 
         Intent intent = getActivity().getIntent();
-        String className = getArguments() != null
-                ? getArguments().getString("classname") : null;
+        Bundle args = getArguments();
+        String className = args != null ? args.getString(EXTRA_CLASSNAME) : null;
         if (className == null) {
             className = intent.getComponent().getClassName();
         }
@@ -208,6 +220,16 @@ public class ManageApplications extends InstrumentedFragment
             mNotifBackend = new NotificationBackend();
         } else if (className.equals(DomainsURLsAppListActivity.class.getName())) {
             mListType = LIST_TYPE_DOMAINS_URLS;
+        } else if (className.equals(StorageUseActivity.class.getName())) {
+            if (args != null && args.containsKey(EXTRA_VOLUME_UUID)) {
+                mVolumeUuid = args.getString(EXTRA_VOLUME_UUID);
+                mVolumeName = args.getString(EXTRA_VOLUME_NAME);
+                mListType = LIST_TYPE_STORAGE;
+            } else {
+                // No volume selected, display a normal list, sorted by size.
+                mListType = LIST_TYPE_MAIN;
+                mSortOrder = R.id.sort_order_size;
+            }
         } else {
             mListType = LIST_TYPE_MAIN;
         }
@@ -278,7 +300,7 @@ public class ManageApplications extends InstrumentedFragment
         contentParent.addView(mSpinnerHeader, 0);
 
         mFilterAdapter.enableFilter(getDefaultFilter());
-        if (mListType != LIST_TYPE_MAIN) {
+        if (mListType != LIST_TYPE_STORAGE) {
             if (UserManager.get(getActivity()).getUserProfiles().size() > 1) {
                 mFilterAdapter.enableFilter(FILTER_APPS_PERSONAL);
                 mFilterAdapter.enableFilter(FILTER_APPS_WORK);
@@ -289,6 +311,15 @@ public class ManageApplications extends InstrumentedFragment
             mFilterAdapter.enableFilter(FILTER_APPS_BLOCKED);
             mFilterAdapter.enableFilter(FILTER_APPS_PRIORITY);
             mFilterAdapter.enableFilter(FILTER_APPS_SENSITIVE);
+        }
+        mApplications.setOverrideFilter(new VolumeFilter(mVolumeUuid));
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        if (mListType == LIST_TYPE_STORAGE) {
+            AppHeader.createAppHeader(getActivity(), null, mVolumeName, null);
         }
     }
 
@@ -312,6 +343,8 @@ public class ManageApplications extends InstrumentedFragment
                 return MetricsLogger.MANAGE_APPLICATIONS_NOTIFICATIONS;
             case LIST_TYPE_DOMAINS_URLS:
                 return MetricsLogger.MANAGE_DOMAIN_URLS;
+            case LIST_TYPE_STORAGE:
+                return InstrumentedFragment.VIEW_CATEGORY_STORAGE_APPS;
             default:
                 return MetricsLogger.VIEW_UNKNOWN;
         }
@@ -634,6 +667,7 @@ public class ManageApplications extends InstrumentedFragment
         private int mWhichSize = SIZE_TOTAL;
         CharSequence mCurFilterPrefix;
         private PackageManager mPm;
+        private AppFilter mOverrideFilter;
 
         private Filter mFilter = new Filter() {
             @Override
@@ -670,6 +704,11 @@ public class ManageApplications extends InstrumentedFragment
             } else {
                 mNotifBridge = null;
             }
+        }
+
+        public void setOverrideFilter(AppFilter overrideFilter) {
+            mOverrideFilter = overrideFilter;
+            rebuild(true);
         }
 
         public void setFilter(int filter) {
@@ -728,6 +767,9 @@ public class ManageApplications extends InstrumentedFragment
                 mWhichSize = SIZE_INTERNAL;
             }
             filterObj = FILTERS[mFilterMode];
+            if (mOverrideFilter != null) {
+                filterObj = mOverrideFilter;
+            }
             switch (mLastSortMode) {
                 case R.id.sort_order_size:
                     switch (mWhichSize) {
