@@ -90,11 +90,11 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
     public void onAuthenticated() {
         // Check whether we are still active.
         if (getActivity() != null && getActivity().isResumed()) {
-            authenticationSucceeded(null /* password */);
+            authenticationSucceeded();
         }
     }
 
-    protected abstract void authenticationSucceeded(@Nullable String password);
+    protected abstract void authenticationSucceeded();
 
     @Override
     public void onFingerprintIconVisibilityChanged(boolean visible) {
