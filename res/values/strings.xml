@@ -6113,26 +6113,41 @@
     <!-- [CHAR LIMIT=60] Zen mode settings: End time option: Summary text value format when end time = next day -->
     <string name="zen_mode_end_time_next_day_summary_format"><xliff:g id="formatted_time" example="7:00 AM">%s</xliff:g> next day</string>
 
+    <!-- [CHAR LIMIT=NONE] Zen mode voice: Activity title for interruption level  -->
+    <string name="zen_mode_interruptions_voice_title">Interruptions</string>
+
+    <!-- [CHAR LIMIT=NONE] Zen mode voice: Header for interruption level  -->
+    <string name="zen_mode_interruptions_voice_header">When calls and notifications arrive</string>
+
     <!-- [CHAR LIMIT=NONE] Zen mode voice: Prompt read for interruption type -->
     <string name="zen_mode_interruptions_voice_prompt">When would you like to be interrupted?</string>
 
     <!-- [CHAR LIMIT=NONE] Zen mode voice: Prompt read for zen mode duration -->
     <string name="zen_mode_duration_voice_prompt">For how long?</string>
 
+    <!-- [CHAR LIMIT=80] Zen mode voice: All interruptions -->
+    <string name="zen_mode_option_voice_all_interruptions">Always interrupt</string>
+
+    <!-- [CHAR LIMIT=NONE] Zen mode voice: Comma delimited synonyms for all interriuptions -->
+    <string name="zen_mode_option_voice_all_interruptions_synonyms">off,all,everything</string>
+
+    <!-- [CHAR LIMIT=80] Zen mode voice: Important interruptions -->
+    <string name="zen_mode_option_voice_important_interruptions">Allow only priority interruptions</string>
+
     <!-- [CHAR LIMIT=NONE] Zen mode voice: Comma delimited synonyms for important interriuptions -->
-    <string name="zen_mode_option_important_voice_synonyms">important,priority,priority notifications</string>
+    <string name="zen_mode_option_voice_important_synonyms">important,priority,priority notifications</string>
+
+    <!-- [CHAR LIMIT=80] Zen mode voice option: Alarms only -->
+    <string name="zen_mode_option_voice_alarms">Allow only alarms</string>
 
     <!-- [CHAR LIMIT=NONE] Zen mode voice: Comma delimited synonyms for alarm interriuptions -->
-    <string name="zen_mode_option_alarms_voice_synonyms">alarms</string>
+    <string name="zen_mode_option_voice_alarms_synonyms">alarms</string>
 
-    <!--  [CHAR LIMIT=60] Zen mode voice: Off [CHAR LIMIT=60] -->
-    <string name="zen_mode_option_off">Off</string>
-
-    <!-- [CHAR LIMIT=NONE] Zen mode voice: Comma delimited synonyms for off interriuptions -->
-    <string name="zen_mode_option_off_voice_synonyms">off,all,everything</string>
+    <!-- [CHAR LIMIT=80] Zen mode voice: No interruptions [CHAR LIMIT=60] -->
+    <string name="zen_mode_option_voice_no_interruptions">Don\'t interrupt</string>
 
     <!-- [CHAR LIMIT=NONE] Zen mode voice: Comma delimited synonyms for no interriuptions -->
-    <string name="zen_mode_option_no_interruptions_voice_synonyms">none,nothing,no interruptions</string>
+    <string name="zen_mode_option_voice_no_interruptions_synonyms">none,nothing,no interruptions</string>
 
     <!-- [CHAR LIMIT=40] Zen mode voice: Label for indefinite mode duration -->
     <string name="zen_mode_duration_indefinte_voice_label">Indefinitely</string>

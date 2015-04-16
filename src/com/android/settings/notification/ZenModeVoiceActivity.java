@@ -65,22 +65,24 @@ public class ZenModeVoiceActivity extends VoiceSettingsActivity {
         boolean enabled = intent.getBooleanExtra(EXTRA_DO_NOT_DISTURB_MODE_ENABLED, false);
         boolean specified = intent.hasExtra(EXTRA_DO_NOT_DISTURB_MODE_ENABLED);
 
+        setHeader(getString(R.string.zen_mode_interruptions_voice_header));
+
         List<VoiceSelection> states = new ArrayList<VoiceSelection>();
         if (!specified || enabled) {
             states.add(new ModeSelection(this, Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS,
-                    R.string.zen_mode_option_important_interruptions,
-                    R.string.zen_mode_option_important_voice_synonyms));
+                    R.string.zen_mode_option_voice_important_interruptions,
+                    R.string.zen_mode_option_voice_important_synonyms));
             states.add(new ModeSelection(this, Global.ZEN_MODE_ALARMS,
-                    R.string.zen_mode_option_alarms,
-                    R.string.zen_mode_option_alarms_voice_synonyms));
+                    R.string.zen_mode_option_voice_alarms,
+                    R.string.zen_mode_option_voice_alarms_synonyms));
             states.add(new ModeSelection(this, Global.ZEN_MODE_NO_INTERRUPTIONS,
-                    R.string.zen_mode_option_no_interruptions,
-                    R.string.zen_mode_option_no_interruptions_voice_synonyms));
+                    R.string.zen_mode_option_voice_no_interruptions,
+                    R.string.zen_mode_option_voice_no_interruptions_synonyms));
         }
         if (!specified || !enabled) {
             states.add(new ModeSelection(this, Global.ZEN_MODE_OFF,
-                    R.string.zen_mode_option_off,
-                    R.string.zen_mode_option_off_voice_synonyms));
+                    R.string.zen_mode_option_voice_all_interruptions,
+                    R.string.zen_mode_option_voice_all_interruptions_synonyms));
         }
         VoiceSelectionFragment fragment = new VoiceSelectionFragment();
         fragment.setArguments(VoiceSelectionFragment.createArguments(
@@ -98,8 +100,10 @@ public class ZenModeVoiceActivity extends VoiceSettingsActivity {
                         pickDuration(selection.getLabel(), mode);
                         return;
                     }
+                    setZenModeConfig(mode, conditionSelection.mCondition);
+                } else {
+                    setZenModeConfig(Global.ZEN_MODE_OFF, null);
                 }
-                setZenModeConfig(mode, conditionSelection.mCondition);
                 notifySuccess(getChangeSummary(mode, conditionSelection));
                 finish();
             }
@@ -112,6 +116,8 @@ public class ZenModeVoiceActivity extends VoiceSettingsActivity {
      */
     private void pickDuration(CharSequence label, final int mode) {
         setTitle(label.toString());
+        setHeader(null);
+
         List<VoiceSelection> states = new ArrayList<VoiceSelection>();
         states.add(new ConditionSelection(null, -1,
               getString(R.string.zen_mode_duration_indefinte_voice_label),
@@ -135,13 +141,6 @@ public class ZenModeVoiceActivity extends VoiceSettingsActivity {
             }
         });
         showFragment(fragment, "pick_duration_fragment");
-    }
-
-    private void showFragment(Fragment fragment, String tag) {
-        getFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragment_root, fragment, tag)
-                .commit();
     }
 
     private void setZenModeConfig(int mode, Condition condition) {
