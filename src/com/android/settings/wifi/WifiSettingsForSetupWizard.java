@@ -16,6 +16,7 @@
 
 package com.android.settings.wifi;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.net.wifi.WifiConfiguration;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.settings.R;
+import com.android.settings.SetupWizardUtils;
 
 /**
  * This customized version of WifiSettings is shown to the user only during Setup Wizard. Menu
@@ -116,6 +118,13 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         // Do not show menu during setup wizard
+    }
+
+    @Override
+    public Dialog onCreateDialog(int dialogId) {
+        final Dialog dialog = super.onCreateDialog(dialogId);
+        SetupWizardUtils.applyImmersiveFlags(dialog);
+        return dialog;
     }
 
     @Override

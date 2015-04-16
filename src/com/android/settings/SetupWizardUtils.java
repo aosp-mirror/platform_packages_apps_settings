@@ -21,16 +21,22 @@ import com.android.setupwizard.navigationbar.SetupWizardNavBar;
 
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 public class SetupWizardUtils {
     private static final String TAG = "SetupWizardUtils";
+
+    public static final int DIALOG_IMMERSIVE_FLAGS = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
 
     // Extra containing the resource name of the theme to be used
     public static final String EXTRA_THEME = "theme";
@@ -93,6 +99,16 @@ public class SetupWizardUtils {
             window.setNavigationBarColor(Color.TRANSPARENT);
             window.setStatusBarColor(Color.TRANSPARENT);
         }
+    }
+
+    public static void applyImmersiveFlags(final Dialog dialog) {
+        applyImmersiveFlags(dialog.getWindow(), DIALOG_IMMERSIVE_FLAGS);
+    }
+
+    private static void applyImmersiveFlags(final Window window, final int vis) {
+        WindowManager.LayoutParams attrs = window.getAttributes();
+        attrs.systemUiVisibility |= vis;
+        window.setAttributes(attrs);
     }
 
     public static TextView getHeader(Activity activity) {
