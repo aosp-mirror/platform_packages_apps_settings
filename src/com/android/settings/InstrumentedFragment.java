@@ -27,6 +27,7 @@ public abstract class InstrumentedFragment extends PreferenceFragment {
     public static final int VIEW_CATEGORY_UNDECLARED = 100000;
 
     public static final int VIEW_CATEGORY_DEFAULT_APPS = VIEW_CATEGORY_UNDECLARED + 1;
+    public static final int VIEW_CATEGORY_STORAGE_APPS = VIEW_CATEGORY_UNDECLARED + 2;
 
     /**
      * Declare the view of this category.

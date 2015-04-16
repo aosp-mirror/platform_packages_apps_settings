@@ -55,6 +55,9 @@ import com.android.internal.util.Preconditions;
 import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.Utils;
+import com.android.settings.Settings.StorageUseActivity;
+import com.android.settings.applications.ManageApplications;
 import com.android.settings.deviceinfo.StorageMeasurement.MeasurementDetails;
 import com.android.settings.deviceinfo.StorageMeasurement.MeasurementReceiver;
 import com.android.settings.deviceinfo.StorageSettings.MountTask;
@@ -323,9 +326,13 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
 
         Intent intent = null;
         if (pref == mApps) {
-            intent = new Intent(Intent.ACTION_MANAGE_PACKAGE_STORAGE);
-            intent.setClass(getActivity(), Settings.ManageApplicationsActivity.class);
-
+            Bundle args = new Bundle();
+            args.putString(ManageApplications.EXTRA_CLASSNAME, StorageUseActivity.class.getName());
+            args.putString(ManageApplications.EXTRA_VOLUME_UUID, mVolume.getFsUuid());
+            args.putString(ManageApplications.EXTRA_VOLUME_NAME, mVolume.getDescription());
+            intent = Utils.onBuildStartFragmentIntent(getActivity(),
+                    ManageApplications.class.getName(), args, null, R.string.apps_storage, null,
+                    false);
         } else if (pref == mDownloads) {
             intent = new Intent(DownloadManager.ACTION_VIEW_DOWNLOADS).putExtra(
                     DownloadManager.INTENT_EXTRAS_SORT_BY_SIZE, true);

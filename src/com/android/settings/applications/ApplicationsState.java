@@ -54,6 +54,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 /**
@@ -334,6 +335,23 @@ public class ApplicationsState {
             return (entry.info.privateFlags & ApplicationInfo.PRIVATE_FLAG_HAS_DOMAIN_URLS) != 0;
         }
     };
+
+    public static class VolumeFilter implements AppFilter {
+        private final String mVolumeUuid;
+
+        public VolumeFilter(String volumeUuid) {
+            mVolumeUuid = volumeUuid;
+        }
+
+        @Override
+        public void init() {
+        }
+
+        @Override
+        public boolean filterApp(AppEntry info) {
+            return Objects.equals(info.info.volumeUuid, mVolumeUuid);
+        }
+    }
 
     public static class CompoundFilter implements AppFilter {
         private final AppFilter mFirstFilter;
