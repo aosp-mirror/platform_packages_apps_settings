@@ -92,6 +92,7 @@ public class FingerprintSettings extends SettingsActivity {
         private static final String KEY_MANAGE_CATEGORY = "fingerprint_manage_category";
         private static final String KEY_FINGERPRINT_ENABLE_KEYGUARD_TOGGLE =
                 "fingerprint_enable_keyguard_toggle";
+        private static final String KEY_LAUNCHED_CONFIRM = "launched_confirm";
 
         private static final int MSG_REFRESH_FINGERPRINT_TEMPLATES = 1000;
         private static final int MSG_HIGHLIGHT_FINGERPRINT_ITEM = 1001;
@@ -110,6 +111,7 @@ public class FingerprintSettings extends SettingsActivity {
         private CancellationSignal mFingerprintCancel;
         private int mMaxFingerprintAttempts;
         private byte[] mToken;
+        private boolean mLaunchedConfirm;
 
         private AuthenticationCallback mAuthCallback = new AuthenticationCallback() {
             @Override
@@ -125,9 +127,12 @@ public class FingerprintSettings extends SettingsActivity {
 
             @Override
             public void onAuthenticationError(int errMsgId, CharSequence errString) {
-                Toast.makeText(getActivity(), errString, Toast.LENGTH_SHORT);
-                if (errMsgId != FingerprintManager.FINGERPRINT_ERROR_CANCELED) {
-                    retryFingerprint(false);
+                // get activity will be null on a screen rotation
+                if (getActivity() != null) {
+                    Toast.makeText(getActivity(), errString, Toast.LENGTH_SHORT);
+                    if (errMsgId != FingerprintManager.FINGERPRINT_ERROR_CANCELED) {
+                        retryFingerprint(false);
+                    }
                 }
             }
 
@@ -191,13 +196,16 @@ public class FingerprintSettings extends SettingsActivity {
             if (savedInstanceState != null) {
                 mToken = savedInstanceState.getByteArray(
                         ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
+                mLaunchedConfirm = savedInstanceState.getBoolean(
+                        KEY_LAUNCHED_CONFIRM, false);
             }
 
             mFingerprintManager = (FingerprintManager) getActivity().getSystemService(
                     Context.FINGERPRINT_SERVICE);
 
             // Need to authenticate a session token if none
-            if (mToken == null) {
+            if (mToken == null && mLaunchedConfirm == false) {
+                mLaunchedConfirm = true;
                 launchChooseOrConfirmLock();
             }
         }
@@ -307,6 +315,7 @@ public class FingerprintSettings extends SettingsActivity {
         public void onSaveInstanceState(final Bundle outState) {
             outState.putByteArray(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN,
                     mToken);
+            outState.putBoolean(KEY_LAUNCHED_CONFIRM, mLaunchedConfirm);
         }
 
         @Override
