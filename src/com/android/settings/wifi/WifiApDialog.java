@@ -29,12 +29,11 @@ import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.RadioGroup;
-import android.widget.RadioButton;
 
 import com.android.settings.R;
 
@@ -58,12 +57,11 @@ public class WifiApDialog extends AlertDialog implements View.OnClickListener,
     private TextView mSsid;
     private int mSecurityTypeIndex = OPEN_INDEX;
     private EditText mPassword;
-    private RadioGroup mChannel;
-    private RadioButton mChannel2G;
-    private RadioButton mChannel5G;
+    private int mBandIndex = OPEN_INDEX;
 
     WifiConfiguration mWifiConfig;
     WifiManager mWifiManager;
+    private Context mContext;
 
     private static final String TAG = "WifiApDialog";
 
@@ -76,6 +74,7 @@ public class WifiApDialog extends AlertDialog implements View.OnClickListener,
             mSecurityTypeIndex = getSecurityTypeIndex(wifiConfig);
         }
         mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        mContext =  context;
     }
 
     public static int getSecurityTypeIndex(WifiConfiguration wifiConfig) {
@@ -97,15 +96,7 @@ public class WifiApDialog extends AlertDialog implements View.OnClickListener,
          */
         config.SSID = mSsid.getText().toString();
 
-        //obtain the band configure
-        if (mChannel2G.isChecked()) {
-            config.apBand = 0;
-        } else if(mChannel5G.isChecked()) {
-            config.apBand = 1;
-        } else {
-            Log.e("TAG", "AP band configure error!");
-            return null;
-        }
+        config.apBand = mBandIndex;
 
         switch (mSecurityTypeIndex) {
             case OPEN_INDEX:
@@ -126,9 +117,10 @@ public class WifiApDialog extends AlertDialog implements View.OnClickListener,
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        boolean mInit = true;
         mView = getLayoutInflater().inflate(R.layout.wifi_ap_dialog, null);
         Spinner mSecurity = ((Spinner) mView.findViewById(R.id.security));
+        final Spinner mChannel = (Spinner) mView.findViewById(R.id.choose_channel);
 
         setView(mView);
         setInverseBackgroundForced(true);
@@ -140,20 +132,20 @@ public class WifiApDialog extends AlertDialog implements View.OnClickListener,
         mSsid = (TextView) mView.findViewById(R.id.ssid);
         mPassword = (EditText) mView.findViewById(R.id.password);
 
-        mChannel = (RadioGroup) mView.findViewById(R.id.choose_channel);
-        mChannel2G = (RadioButton) mView.findViewById(R.id.ap_2G_band);
-        mChannel5G = (RadioButton) mView.findViewById(R.id.ap_5G_band);
-
+        ArrayAdapter <CharSequence> channelAdapter;
         String countryCode = mWifiManager.getCountryCode();
         if (!mWifiManager.is5GHzBandSupported() || countryCode == null) {
             //If no country code, 5GHz AP is forbidden
-            Log.e(TAG," NO country code, forbid 5GHz");
-            mChannel5G.setVisibility(View.INVISIBLE);
+            Log.i(TAG," NO country code, forbid 5GHz");
+            channelAdapter = ArrayAdapter.createFromResource(mContext,
+                    R.array.wifi_ap_band_config_2G_only, android.R.layout.simple_spinner_item);
             mWifiConfig.apBand = 0;
         } else {
-            mChannel5G.setVisibility(View.VISIBLE);
+            channelAdapter = ArrayAdapter.createFromResource(mContext,
+                    R.array.wifi_ap_band_config_full, android.R.layout.simple_spinner_item);
         }
 
+        channelAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         setButton(BUTTON_SUBMIT, context.getString(R.string.wifi_save), mListener);
         setButton(DialogInterface.BUTTON_NEGATIVE,
@@ -162,9 +154,9 @@ public class WifiApDialog extends AlertDialog implements View.OnClickListener,
         if (mWifiConfig != null) {
             mSsid.setText(mWifiConfig.SSID);
             if (mWifiConfig.apBand == 0) {
-                mChannel2G.setChecked(true);
+               mBandIndex = 0;
             } else {
-                mChannel5G.setChecked(true);
+               mBandIndex = 1;
             }
 
             mSecurity.setSelection(mSecurityTypeIndex);
@@ -172,6 +164,32 @@ public class WifiApDialog extends AlertDialog implements View.OnClickListener,
                 mPassword.setText(mWifiConfig.preSharedKey);
             }
         }
+
+        mChannel.setAdapter(channelAdapter);
+        mChannel.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener() {
+                    boolean mInit = true;
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int position,
+                                               long id) {
+                        if (!mInit) {
+                            mBandIndex = position;
+                            mWifiConfig.apBand = mBandIndex;
+                            Log.i(TAG, "config on channelIndex : " + mBandIndex + " Band: " +
+                                    mWifiConfig.apBand);
+                        } else {
+                            mInit = false;
+                            mChannel.setSelection(mBandIndex);
+                        }
+
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+
+                    }
+                }
+        );
 
         mSsid.addTextChangedListener(this);
         mPassword.addTextChangedListener(this);
