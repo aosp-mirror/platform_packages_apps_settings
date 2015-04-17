@@ -32,7 +32,6 @@ import android.os.IBinder;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.preference.PreferenceFragment;
 import android.util.Log;
 
 import com.android.settings.InstrumentedPreferenceFragment;

@@ -117,7 +117,11 @@
 
         <Preference android:key="usage_access"
                     android:title="@string/usage_access_title"
-                    android:fragment="com.android.settings.UsageAccessSettings"/>
+                    android:fragment="com.android.settings.applications.ManageApplications">
+            <extra
+                android:name="classname"
+                android:value="com.android.settings.Settings$UsageAccessSettingsActivity" />
+        </Preference>
 
     </PreferenceCategory>
 

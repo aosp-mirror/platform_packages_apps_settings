@@ -16,156 +16,43 @@
 package com.android.settings.applications;
 
 import android.content.pm.PackageManager;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 
 import com.android.settings.applications.ApplicationsState.AppEntry;
 import com.android.settings.applications.ApplicationsState.AppFilter;
-import com.android.settings.applications.ApplicationsState.Session;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.NotificationBackend.AppRow;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Connects the info provided by ApplicationsState and the NotificationBackend.
  * Also provides app filters that can use the notification data.
  */
-public class AppStateNotificationBridge implements ApplicationsState.Callbacks {
+public class AppStateNotificationBridge extends AppStateBaseBridge {
 
-    private final ApplicationsState mAppState;
     private final NotificationBackend mNotifBackend;
-    private final Session mAppSession;
-    private final Callback mCallback;
-    private final BackgroundHandler mHandler;
-    private final MainHandler mMainHandler;
     private final PackageManager mPm;
 
     public AppStateNotificationBridge(PackageManager pm, ApplicationsState appState,
-            NotificationBackend notifBackend, Callback callback) {
-        mAppState = appState;
+            Callback callback, NotificationBackend notifBackend) {
+        super(appState, callback);
         mPm = pm;
-        mAppSession = mAppState.newSession(this);
         mNotifBackend = notifBackend;
-        mCallback = callback;
-        // Running on the same background thread as the ApplicationsState lets
-        // us run in the background and make sure they aren't doing updates at
-        // the same time as us as well.
-        mHandler = new BackgroundHandler(mAppState.getBackgroundLooper());
-        mMainHandler = new MainHandler();
-        mHandler.sendEmptyMessage(BackgroundHandler.MSG_LOAD_ALL);
-    }
-
-    public void resume() {
-        mHandler.sendEmptyMessage(BackgroundHandler.MSG_LOAD_ALL);
-        mAppSession.resume();
-    }
-
-    public void pause() {
-        mAppSession.pause();
-    }
-
-    public void release() {
-        mAppSession.release();
-    }
-
-    public void forceUpdate(String pkg, int uid) {
-        mHandler.obtainMessage(BackgroundHandler.MSG_FORCE_LOAD_PKG, uid, 0, pkg).sendToTarget();
     }
 
     @Override
-    public void onPackageListChanged() {
-        mHandler.sendEmptyMessage(BackgroundHandler.MSG_LOAD_ALL);
-    }
-
-    @Override
-    public void onLoadEntriesCompleted() {
-        mHandler.sendEmptyMessage(BackgroundHandler.MSG_LOAD_ALL);
-    }
-
-    @Override
-    public void onRunningStateChanged(boolean running) {
-        // No op.
-    }
-
-    @Override
-    public void onRebuildComplete(ArrayList<AppEntry> apps) {
-        // No op.
-    }
-
-    @Override
-    public void onPackageIconChanged() {
-        // No op.
-    }
-
-    @Override
-    public void onPackageSizeChanged(String packageName) {
-        // No op.
-    }
-
-    @Override
-    public void onAllSizesComputed() {
-        // No op.
-    }
-
-    @Override
-    public void onLauncherInfoChanged() {
-        // No op.
-    }
-
-    private class MainHandler extends Handler {
-        private static final int MSG_NOTIF_UPDATED = 1;
-
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case MSG_NOTIF_UPDATED:
-                    mCallback.onNotificationInfoUpdated();
-                    break;
-            }
+    protected void loadAllExtraInfo() {
+        ArrayList<AppEntry> apps = mAppSession.getAllApps();
+        final int N = apps.size();
+        for (int i = 0; i < N; i++) {
+            AppEntry app = apps.get(i);
+            app.extraInfo = mNotifBackend.loadAppRow(mPm, app.info);
         }
     }
 
-    private class BackgroundHandler extends Handler {
-        private static final int MSG_LOAD_ALL = 1;
-        private static final int MSG_FORCE_LOAD_PKG = 2;
-
-        public BackgroundHandler(Looper looper) {
-            super(looper);
-        }
-
-        @Override
-        public void handleMessage(Message msg) {
-            List<AppEntry> apps = mAppSession.getAllApps();
-            final int N = apps.size();
-            switch (msg.what) {
-                case MSG_LOAD_ALL:
-                    for (int i = 0; i < N; i++) {
-                        AppEntry app = apps.get(i);
-                        app.extraInfo = mNotifBackend.loadAppRow(mPm, app.info);
-                    }
-                    mMainHandler.sendEmptyMessage(MainHandler.MSG_NOTIF_UPDATED);
-                    break;
-                case MSG_FORCE_LOAD_PKG:
-                    String pkg = (String) msg.obj;
-                    int uid = msg.arg1;
-                    for (int i = 0; i < N; i++) {
-                        AppEntry app = apps.get(i);
-                        if (app.info.uid == uid && pkg.equals(app.info.packageName)) {
-                            app.extraInfo = mNotifBackend.loadAppRow(mPm, app.info);
-                            break;
-                        }
-                    }
-                    mMainHandler.sendEmptyMessage(MainHandler.MSG_NOTIF_UPDATED);
-                    break;
-            }
-        }
-    }
-
-    public interface Callback {
-        void onNotificationInfoUpdated();
+    @Override
+    protected void updateExtraInfo(AppEntry app, String pkg, int uid) {
+        app.extraInfo = mNotifBackend.loadAppRow(mPm, app.info);
     }
 
     public static final AppFilter FILTER_APP_NOTIFICATION_BLOCKED = new AppFilter() {
