@@ -169,8 +169,10 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
         }
 
         @Override
-        protected void authenticationSucceeded(@Nullable String password) {
-            // TODO: make this play nice with challenge
+        protected void authenticationSucceeded() {
+            Intent intent = new Intent();
+            getActivity().setResult(RESULT_OK, intent);
+            getActivity().finish();
         }
 
         private void handleNext() {
