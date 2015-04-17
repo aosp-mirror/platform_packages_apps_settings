@@ -403,7 +403,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                     maxLength, requirePasswordToDecrypt, challenge);
         }
 
-        private Intent getLockPasswordIntent(Context context, int quality, int minLength,
+        protected Intent getLockPasswordIntent(Context context, int quality, int minLength,
                 final int maxLength, boolean requirePasswordToDecrypt, String password) {
             return ChooseLockPassword.createIntent(context, quality, minLength, maxLength,
                     requirePasswordToDecrypt, password);
@@ -420,7 +420,7 @@ public class ChooseLockGeneric extends SettingsActivity {
             return ChooseLockPattern.createIntent(context, requirePassword, challenge);
         }
 
-        private Intent getLockPatternIntent(Context context, final boolean requirePassword,
+        protected Intent getLockPatternIntent(Context context, final boolean requirePassword,
                 final String pattern) {
             return ChooseLockPattern.createIntent(context, requirePassword, pattern);
         }

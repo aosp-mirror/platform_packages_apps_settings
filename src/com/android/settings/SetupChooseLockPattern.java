@@ -38,10 +38,22 @@ import android.widget.Button;
 public class SetupChooseLockPattern extends ChooseLockPattern
         implements SetupWizardNavBar.NavigationBarListener {
 
-    public static Intent createIntent(Context context,
-            boolean requirePassword, boolean confirmCredentials) {
+    public static Intent createIntent(Context context, boolean requirePassword,
+            boolean confirmCredentials) {
         Intent intent = ChooseLockPattern.createIntent(context, requirePassword,
                 confirmCredentials);
+        intent.setClass(context, SetupChooseLockPattern.class);
+        return intent;
+    }
+
+    public static Intent createIntent(Context context, boolean requirePassword, String pattern) {
+        Intent intent = ChooseLockPattern.createIntent(context, requirePassword, pattern);
+        intent.setClass(context, SetupChooseLockPattern.class);
+        return intent;
+    }
+
+    public static Intent createIntent(Context context, boolean requirePassword, long challenge) {
+        Intent intent = ChooseLockPattern.createIntent(context, requirePassword, challenge);
         intent.setClass(context, SetupChooseLockPattern.class);
         return intent;
     }
