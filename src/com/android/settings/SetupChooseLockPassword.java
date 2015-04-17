@@ -48,6 +48,24 @@ public class SetupChooseLockPassword extends ChooseLockPassword
         return intent;
     }
 
+    public static Intent createIntent(Context context, int quality,
+            int minLength, final int maxLength, boolean requirePasswordToDecrypt, String password) {
+        Intent intent = ChooseLockPassword.createIntent(context, quality, minLength, maxLength,
+                requirePasswordToDecrypt, password);
+        intent.setClass(context, SetupChooseLockPassword.class);
+        intent.putExtra(EXTRA_PREFS_SHOW_BUTTON_BAR, false);
+        return intent;
+    }
+
+    public static Intent createIntent(Context context, int quality,
+            int minLength, final int maxLength, boolean requirePasswordToDecrypt, long challenge) {
+        Intent intent = ChooseLockPassword.createIntent(context, quality, minLength, maxLength,
+                requirePasswordToDecrypt, challenge);
+        intent.setClass(context, SetupChooseLockPassword.class);
+        intent.putExtra(EXTRA_PREFS_SHOW_BUTTON_BAR, false);
+        return intent;
+    }
+
     private SetupWizardNavBar mNavigationBar;
     private SetupChooseLockPasswordFragment mFragment;
 

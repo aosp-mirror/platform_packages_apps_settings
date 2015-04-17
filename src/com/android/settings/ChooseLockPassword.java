@@ -78,16 +78,16 @@ public class ChooseLockPassword extends SettingsActivity {
 
     public static Intent createIntent(Context context, int quality,
             int minLength, final int maxLength, boolean requirePasswordToDecrypt, String password) {
-        Intent intent = createIntent(context, quality, minLength, maxLength, requirePasswordToDecrypt,
-                false);
+        Intent intent = createIntent(context, quality, minLength, maxLength,
+                requirePasswordToDecrypt, false);
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD, password);
         return intent;
     }
 
     public static Intent createIntent(Context context, int quality,
             int minLength, final int maxLength, boolean requirePasswordToDecrypt, long challenge) {
-        Intent intent = createIntent(context, quality, minLength, maxLength, requirePasswordToDecrypt,
-                false);
+        Intent intent = createIntent(context, quality, minLength, maxLength,
+                requirePasswordToDecrypt, false);
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, true);
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, challenge);
         return intent;
