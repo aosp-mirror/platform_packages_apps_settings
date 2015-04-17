@@ -26,6 +26,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.SwitchPreference;
@@ -191,7 +192,8 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
     }
 
     private void updateDependents(boolean banned) {
-        final boolean lockscreenSecure = new LockPatternUtils(getActivity()).isSecure();
+        final boolean lockscreenSecure = new LockPatternUtils(getActivity()).isSecure(
+                UserHandle.myUserId());
         final boolean lockscreenNotificationsEnabled = getLockscreenNotificationsEnabled();
         final boolean allowPrivate = getLockscreenAllowPrivateNotifications();
 

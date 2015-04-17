@@ -27,6 +27,7 @@ import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.os.BatteryManager;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.os.storage.StorageManager;
 import android.preference.Preference;
 import android.text.TextUtils;
@@ -160,7 +161,7 @@ public class CryptKeeperSettings extends InstrumentedFragment {
         Resources res = getActivity().getResources();
         ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(getActivity(), this);
 
-        if (helper.utils().getKeyguardStoredPasswordQuality()
+        if (helper.utils().getKeyguardStoredPasswordQuality(UserHandle.myUserId())
                 == DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED) {
             showFinalConfirmation(StorageManager.CRYPT_TYPE_DEFAULT, "");
             return true;

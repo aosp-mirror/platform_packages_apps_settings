@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import android.annotation.Nullable;
+import android.os.UserHandle;
 import android.text.TextUtils;
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.widget.LockPatternUtils;
@@ -90,7 +91,8 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            final int storedQuality = mLockPatternUtils.getKeyguardStoredPasswordQuality();
+            final int storedQuality = mLockPatternUtils.getKeyguardStoredPasswordQuality(
+                    UserHandle.myUserId());
             View view = inflater.inflate(R.layout.confirm_lock_password, null);
 
             mPasswordEntry = (TextView) view.findViewById(R.id.password_entry);
@@ -156,7 +158,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
         @Override
         public void onResume() {
             super.onResume();
-            long deadline = mLockPatternUtils.getLockoutAttemptDeadline();
+            long deadline = mLockPatternUtils.getLockoutAttemptDeadline(UserHandle.myUserId());
             if (deadline != 0) {
                 handleAttemptLockout(deadline);
             }
@@ -185,13 +187,14 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                 if (getActivity() instanceof ConfirmLockPassword.InternalActivity) {
                     long challenge = getActivity().getIntent().getLongExtra(
                             ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, 0);
-                    byte[] token = mLockPatternUtils.verifyPassword(pin, challenge);
+                    byte[] token = mLockPatternUtils.verifyPassword(pin, challenge,
+                            UserHandle.myUserId());
                     if (token != null) {
                         matched = true;
                         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
                     }
                 }
-            } else if (mLockPatternUtils.checkPassword(pin)) {
+            } else if (mLockPatternUtils.checkPassword(pin, UserHandle.myUserId())) {
                 matched = true;
                 if (getActivity() instanceof ConfirmLockPassword.InternalActivity) {
                     intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_TYPE,
@@ -206,7 +209,8 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                 getActivity().finish();
             } else {
                 if (++mNumWrongConfirmAttempts >= LockPatternUtils.FAILED_ATTEMPTS_BEFORE_TIMEOUT) {
-                    long deadline = mLockPatternUtils.setLockoutAttemptDeadline();
+                    long deadline = mLockPatternUtils.setLockoutAttemptDeadline(
+                            UserHandle.myUserId());
                     handleAttemptLockout(deadline);
                 } else {
                     showError(getErrorMessage());
