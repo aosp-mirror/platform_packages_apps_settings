@@ -26,6 +26,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.ApplicationsState.AppEntry;
 import com.android.settings.applications.ApplicationsState.Session;
+import com.android.settingslib.applications.PermissionsInfo;
 
 import java.util.ArrayList;
 

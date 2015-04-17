@@ -27,7 +27,8 @@ import android.util.Log;
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.applications.PermissionsInfo.PermissionGroup;
+import com.android.settingslib.applications.PermissionsInfo;
+import com.android.settingslib.applications.PermissionsInfo.PermissionGroup;
 
 import java.util.List;
 
