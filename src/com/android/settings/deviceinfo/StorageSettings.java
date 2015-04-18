@@ -186,7 +186,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
             return true;
 
         } else if (vol.getType() == VolumeInfo.TYPE_PUBLIC) {
-            if (vol.getState() == VolumeInfo.STATE_MOUNTED) {
+            if (vol.isMountedReadable()) {
                 startActivity(vol.buildBrowseIntent());
                 return true;
             } else {
