@@ -58,7 +58,7 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric
 
     @Override
     public void onNavigationBarCreated(SetupWizardNavBar bar) {
-        SetupWizardUtils.setImmersiveMode(this, bar);
+        SetupWizardUtils.setImmersiveMode(this);
         bar.getNextButton().setEnabled(false);
     }
 
