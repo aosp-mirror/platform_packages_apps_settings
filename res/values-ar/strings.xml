@@ -274,10 +274,8 @@
     <string name="cancel" msgid="6859253417269739139">"إلغاء"</string>
     <string name="okay" msgid="1997666393121016642">"موافق"</string>
     <string name="forget" msgid="1400428660472591263">"نسيان"</string>
-    <!-- no translation found for save (879993180139353333) -->
-    <skip />
-    <!-- no translation found for done (6942539184162713160) -->
-    <skip />
+    <string name="save" msgid="879993180139353333">"حفظ"</string>
+    <string name="done" msgid="6942539184162713160">"تم"</string>
     <string name="settings_label" msgid="1626402585530130914">"الإعدادات"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"الإعدادات"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"اختصار الإعدادات"</string>
@@ -635,8 +633,6 @@
     <string name="wifi_menu_p2p" msgid="7619851399250896797">"‏اتصال Wi-Fi مباشر"</string>
     <string name="wifi_menu_scan" msgid="1470911530412095868">"فحص"</string>
     <string name="wifi_menu_advanced" msgid="7522252991919573664">"متقدم"</string>
-    <string name="wifi_menu_apps" msgid="6003687912727859577">"عرض التطبيقات"</string>
-    <string name="wifi_menu_apps_strength" msgid="3322614241441509660">"‏عرض قوة إشارة WiFi"</string>
     <string name="wifi_menu_connect" msgid="4996220309848349408">"اتصال بالشبكة"</string>
     <string name="wifi_menu_remember" msgid="8814185749388713796">"تذكر الشبكة"</string>
     <string name="wifi_menu_forget" msgid="8736964302477327114">"حذف الشبكة"</string>
@@ -694,10 +690,8 @@
     <string name="wifi_hotspot_title" msgid="7726205804813286950">"هل تريد تسجيل الدخول للاتصال؟"</string>
     <string name="wifi_hotspot_message" msgid="3673833421453455747">"يتطلب <xliff:g id="APP_NAME">%1$s</xliff:g> منك تسجيل الدخول عبر الإنترنت قبل الاتصال بالشبكة."</string>
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"اتصال"</string>
-    <!-- no translation found for no_internet_access_text (1509171132175355674) -->
-    <skip />
-    <!-- no translation found for no_internet_access_remember (5963015664551707981) -->
-    <skip />
+    <string name="no_internet_access_text" msgid="1509171132175355674">"ليس لهذه الشبكة حق الدخول إلى الإنترنت. هل تريد استخدامها على أية حال؟"</string>
+    <string name="no_internet_access_remember" msgid="5963015664551707981">"عدم السؤال مرة أخرى لهذه الشبكة"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"اتصال"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"أخفق التوصيل بالشبكة"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"حذف"</string>
@@ -950,14 +944,12 @@
     <string name="memory_available_read_only" msgid="6497534390167920206">"متاح (للقراءة فقط)"</string>
     <string name="memory_size" msgid="6629067715017232195">"المساحة الإجمالية"</string>
     <string name="memory_calculating_size" msgid="2188358544203768588">"جارٍ الحساب..."</string>
-    <!-- no translation found for memory_apps_usage (5128673488173839077) -->
-    <skip />
+    <string name="memory_apps_usage" msgid="5128673488173839077">"التطبيقات وبيانات التطبيقات"</string>
     <string name="memory_media_usage" msgid="3738830697707880405">"الوسائط"</string>
     <string name="memory_downloads_usage" msgid="3755173051677533027">"التنزيلات"</string>
     <string name="memory_dcim_usage" msgid="558887013613822577">"صور ومقاطع فيديو"</string>
     <string name="memory_music_usage" msgid="1363785144783011606">"ملفات صوتية (موسيقى ونغمات رنين ووسائط، إلخ.)"</string>
-    <!-- no translation found for memory_media_misc_usage (6094866738586451683) -->
-    <skip />
+    <string name="memory_media_misc_usage" msgid="6094866738586451683">"ملفات أخرى"</string>
     <string name="memory_media_cache_usage" msgid="6704293333141177910">"البيانات المؤقتة"</string>
     <string name="sd_eject" product="nosdcard" msgid="4988563376492400073">"إلغاء تركيب وحدة التخزين المشتركة"</string>
     <string name="sd_eject" product="default" msgid="6915293408836853020">"‏إلغاء تحميل بطاقة SD"</string>
@@ -990,16 +982,11 @@
     <string name="sd_ejecting_summary" msgid="2028753069184908491">"إلغاء التحميل قيد التقدم"</string>
     <string name="storage_low_title" msgid="1388569749716225155">"مساحة التخزين منخفضة"</string>
     <string name="storage_low_summary" msgid="7737465774892563129">"قد لا تعمل بعض ميزات النظام، مثل المزامنة بشكل صحيح. حاول تفريغ مساحة من خلال حذف عناصر أو إلغاء تثبيتها، مثل التطبيقات أو محتوى الوسائط."</string>
-    <!-- no translation found for storage_menu_rename (7141058657592615390) -->
-    <skip />
-    <!-- no translation found for storage_menu_mount (1014683672493425425) -->
-    <skip />
-    <!-- no translation found for storage_menu_unmount (681485356885955898) -->
-    <skip />
-    <!-- no translation found for storage_menu_format (8334422679047059459) -->
-    <skip />
-    <!-- no translation found for storage_menu_format_internal (6553368530402755543) -->
-    <skip />
+    <string name="storage_menu_rename" msgid="7141058657592615390">"إعادة تسمية"</string>
+    <string name="storage_menu_mount" msgid="1014683672493425425">"تحميل"</string>
+    <string name="storage_menu_unmount" msgid="681485356885955898">"إخراج"</string>
+    <string name="storage_menu_format" msgid="8334422679047059459">"محو البيانات والتنسيق"</string>
+    <string name="storage_menu_format_internal" msgid="6553368530402755543">"محو بيانات وتنسيق كوحدة داخلية"</string>
     <string name="storage_menu_usb" msgid="5708207885333243384">"‏اتصال USB بالكمبيوتر"</string>
     <string name="storage_title_usb" msgid="679612779321689418">"‏اتصال USB بالكمبيوتر"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"اتصال كـ"</string>
@@ -1010,84 +997,45 @@
     <string name="usb_midi_title" msgid="3069990264258413994">"MIDI"</string>
     <string name="usb_midi_summary" msgid="539169474810956358">"‏للسماح للتطبيقات التي تمكّن MIDI بالعمل عبر USB باستخدام برامج MIDI على الكمبيوتر."</string>
     <string name="storage_other_users" msgid="808708845102611856">"مستخدمون آخرون"</string>
-    <!-- no translation found for storage_internal_title (690771193137801021) -->
-    <skip />
-    <!-- no translation found for storage_external_title (2723851748972673696) -->
-    <skip />
-    <!-- no translation found for storage_volume_summary (476551204412943800) -->
-    <skip />
-    <!-- no translation found for storage_mount_success (687641090137253647) -->
-    <skip />
-    <!-- no translation found for storage_mount_failure (8928389741212129060) -->
-    <skip />
-    <!-- no translation found for storage_unmount_success (5737203344673441677) -->
-    <skip />
-    <!-- no translation found for storage_unmount_failure (4161722509712992231) -->
-    <skip />
-    <!-- no translation found for storage_format_success (3023144070597190555) -->
-    <skip />
-    <!-- no translation found for storage_format_failure (8343688274191391889) -->
-    <skip />
-    <!-- no translation found for storage_rename_title (8242663969839491485) -->
-    <skip />
-    <!-- no translation found for storage_internal_format_details (4018647158382548820) -->
-    <skip />
-    <!-- no translation found for storage_internal_unmount_details (3677827796634199714) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_title (5085400514028585772) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_external_title (4867326438945303598) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_external_summary (7476105886344565074) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_internal_title (9100613534261408519) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_internal_summary (6240417501036216410) -->
-    <skip />
-    <!-- no translation found for storage_wizard_format_confirm_title (2814021794538252546) -->
-    <skip />
-    <!-- no translation found for storage_wizard_format_confirm_body (4401758710076806509) -->
-    <skip />
-    <!-- no translation found for storage_wizard_format_confirm_next (2774557300531702572) -->
-    <skip />
-    <!-- no translation found for storage_wizard_format_progress_title (6487352396450582292) -->
-    <skip />
-    <!-- no translation found for storage_wizard_format_progress_body (1259216693690378749) -->
-    <skip />
-    <!-- no translation found for storage_wizard_migrate_title (1363078147938160407) -->
-    <skip />
-    <!-- no translation found for storage_wizard_migrate_body (606648689408670617) -->
-    <skip />
-    <!-- no translation found for storage_wizard_migrate_now (4523444323744239143) -->
-    <skip />
-    <!-- no translation found for storage_wizard_migrate_later (3173482328116026253) -->
-    <skip />
-    <!-- no translation found for storage_wizard_migrate_confirm_title (8564833529613286965) -->
-    <skip />
-    <!-- no translation found for storage_wizard_migrate_confirm_body (5035719146373359329) -->
-    <skip />
-    <!-- no translation found for storage_wizard_migrate_confirm_next (5509475628423823202) -->
-    <skip />
-    <!-- no translation found for storage_wizard_migrate_progress_title (1665479429044202868) -->
-    <skip />
-    <!-- no translation found for storage_wizard_migrate_details (8641916179067596592) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_title (5381632402953258267) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_external_body (2879508114260597474) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_internal_body (122532674037860197) -->
-    <skip />
-    <!-- no translation found for storage_wizard_move_confirm_title (292782012677890250) -->
-    <skip />
-    <!-- no translation found for storage_wizard_move_confirm_body (236043946721254139) -->
-    <skip />
-    <!-- no translation found for storage_wizard_move_progress_title (4443920302548035674) -->
-    <skip />
-    <!-- no translation found for storage_wizard_move_progress_body (4288580957960820740) -->
-    <skip />
-    <!-- no translation found for storage_wizard_move_progress_cancel (542047237524588792) -->
-    <skip />
+    <string name="storage_internal_title" msgid="690771193137801021">"السعة التخزينية للجهاز"</string>
+    <string name="storage_external_title" msgid="2723851748972673696">"وحدة التخزين القابلة للنقل"</string>
+    <string name="storage_volume_summary" msgid="476551204412943800">"<xliff:g id="FREE">%1$s</xliff:g> خالية (إجمالي السعة التخزينية <xliff:g id="TOTAL">%2$s</xliff:g>)"</string>
+    <string name="storage_mount_success" msgid="687641090137253647">"تم تحميل <xliff:g id="NAME">%1$s</xliff:g>"</string>
+    <string name="storage_mount_failure" msgid="8928389741212129060">"تعذر تحميل <xliff:g id="NAME">%1$s</xliff:g>"</string>
+    <string name="storage_unmount_success" msgid="5737203344673441677">"تم إخراج <xliff:g id="NAME">%1$s</xliff:g> بشكل آمن"</string>
+    <string name="storage_unmount_failure" msgid="4161722509712992231">"تعذر إخراج <xliff:g id="NAME">%1$s</xliff:g> بشكل آمن"</string>
+    <string name="storage_format_success" msgid="3023144070597190555">"تم تنسيق <xliff:g id="NAME">%1$s</xliff:g>"</string>
+    <string name="storage_format_failure" msgid="8343688274191391889">"تعذر تنسيق <xliff:g id="NAME">%1$s</xliff:g>"</string>
+    <string name="storage_rename_title" msgid="8242663969839491485">"إعادة تسمية وحدة التخزين"</string>
+    <string name="storage_internal_format_details" msgid="4018647158382548820">"‏بعد إجراء التنسيق، يمكنك استخدام <xliff:g id="NAME_0">^1</xliff:g> هذه على أجهزة أخرى. \n\nوسيتم محو جميع البيانات الموجودة على <xliff:g id="NAME_1">^1</xliff:g> هذه. يمكنك إجراء النسخ الاحتياطي أولاً. \n\n"<b>"النسخ الاحتياطي للصور والوسائط الأخرى"</b>" \nيمكنك نقل ملفات الوسائط إلى وحدة تخزين بديلة على هذا الجهاز أو نقلها إلى جهاز كمبيوتر باستخدام كابل USB. \n\n"<b>"النسخ الاحتياطي للتطبيقات"</b>" \nستتم إزالة جميع التطبيقات المخزنة على <xliff:g id="NAME_6">^1</xliff:g> هذه وكذلك سيتم محو بياناتها. وللاحتفاظ بهذه التطبيقات، يمكنك نقلها إلى وحدة تخزين بديلة على هذا الجهاز."</string>
+    <string name="storage_internal_unmount_details" msgid="3677827796634199714"><b>"عند إخراج <xliff:g id="NAME_0">^1</xliff:g>هذه، فإن التطبيقات المخزنة عليها ستتوقف عن العمل ولن تكون ملفات الوسائط المخزنة عليها متاحة حتى يتم إعادة إدخالها."</b>" \n\nلقد تم تنسيق <xliff:g id="NAME_1">^1</xliff:g> للعمل على هذا الجهاز فقط. ولن تعمل على أية أجهزة أخرى."</string>
+    <string name="storage_wizard_init_title" msgid="5085400514028585772">"إعداد <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"الاستخدام كوحدة تخزين محمولة"</string>
+    <string name="storage_wizard_init_external_summary" msgid="7476105886344565074">"لنقل الصور والوسائط الأخرى بين الأجهزة."</string>
+    <string name="storage_wizard_init_internal_title" msgid="9100613534261408519">"الاستخدام كوحدة تخزين داخلية"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="6240417501036216410">"لتخزين أي شيء على هذا الجهاز فقط، بما في ذلك التطبيقات والصور. يتطلب التنسيق الذي يمنعها من العمل مع الأجهزة الأخرى."</string>
+    <string name="storage_wizard_format_confirm_title" msgid="2814021794538252546">"التنسيق كوحدة تخزين داخلية"</string>
+    <string name="storage_wizard_format_confirm_body" msgid="4401758710076806509">"يتطلب هذا أن يتم تنسيق <xliff:g id="NAME_0">^1</xliff:g> لجعلها آمنة. \n\nبعد التنسيق، لن تعمل <xliff:g id="NAME_1">^1</xliff:g> هذه إلا على هذا الجهاز. \n\n"<b>"يؤدي التنسيق إلى محو جميع البيانات المخزنة حاليًا على <xliff:g id="NAME_2">^1</xliff:g>."</b>" ولتجنب فقد البيانات، يمكنك نسخها احتياطيًا."</string>
+    <string name="storage_wizard_format_confirm_next" msgid="2774557300531702572">"محو البيانات والتنسيق"</string>
+    <string name="storage_wizard_format_progress_title" msgid="6487352396450582292">"جارٍ تنسيق <xliff:g id="NAME">^1</xliff:g>…"</string>
+    <string name="storage_wizard_format_progress_body" msgid="1259216693690378749">"لا تزِل <xliff:g id="NAME">^1</xliff:g> أثناء تنسيقها."</string>
+    <string name="storage_wizard_migrate_title" msgid="1363078147938160407">"نقل البيانات إلى وحدة التخزين الجديدة"</string>
+    <string name="storage_wizard_migrate_body" msgid="606648689408670617">"يمكنك نقل الصور والملفات وبيانات التطبيقات إلى <xliff:g id="NAME">^1</xliff:g> الجديدة هذه. \n\nتستغرق عملية النقل حوالي <xliff:g id="TIME">^2</xliff:g> وسيتم تفريغ <xliff:g id="SIZE">^3</xliff:g> على وحدة التخزين الداخلية. وقد لا تعمل بعض التطبيقات أثناء إجراء عملية النقل."</string>
+    <string name="storage_wizard_migrate_now" msgid="4523444323744239143">"النقل الآن"</string>
+    <string name="storage_wizard_migrate_later" msgid="3173482328116026253">"النقل لاحقًا"</string>
+    <string name="storage_wizard_migrate_confirm_title" msgid="8564833529613286965">"نقل البيانات الآن"</string>
+    <string name="storage_wizard_migrate_confirm_body" msgid="5035719146373359329"><b>"تستغرق عملية النقل حوالي <xliff:g id="TIME">^1</xliff:g>. وستؤدي إلى تفريغ <xliff:g id="SIZE">^2</xliff:g> على وحدة التخزين الداخلية."</b></string>
+    <string name="storage_wizard_migrate_confirm_next" msgid="5509475628423823202">"نقل"</string>
+    <string name="storage_wizard_migrate_progress_title" msgid="1665479429044202868">"جارٍ نقل البيانات…"</string>
+    <string name="storage_wizard_migrate_details" msgid="8641916179067596592">"أثناء عملية النقل: \n• لا تزِل <xliff:g id="NAME">^1</xliff:g>. \n• قد لا تعمل بعض التطبيقات بشكل صحيح. \n• احرص على شحن الجهاز."</string>
+    <string name="storage_wizard_ready_title" msgid="5381632402953258267">"<xliff:g id="NAME">^1</xliff:g> جاهزة"</string>
+    <string name="storage_wizard_ready_external_body" msgid="2879508114260597474">"تم الانتهاء من إعداد <xliff:g id="NAME">^1</xliff:g> للاستخدام مع الصور والوسائط الأخرى."</string>
+    <string name="storage_wizard_ready_internal_body" msgid="122532674037860197">"‏تعمل <xliff:g id="NAME">^1</xliff:g> الجديدة. \n\nلنقل الصور والملفات وبيانات التطبيقات إلى هذا الجهاز، انتقل إلى الإعدادات &gt; التخزين."</string>
+    <string name="storage_wizard_move_confirm_title" msgid="292782012677890250">"نقل <xliff:g id="APP">^1</xliff:g>"</string>
+    <string name="storage_wizard_move_confirm_body" msgid="236043946721254139">"لن يستغرق نقل <xliff:g id="APP">^1</xliff:g> والبيانات التابعة له إلى <xliff:g id="NAME_0">^2</xliff:g> سوى بضع دقائق. ولن تتمكن من استخدام التطبيق حتى الانتهاء من عملية النقل. \n\nلا تزِل <xliff:g id="NAME_1">^2</xliff:g> أثناء عملية النقل."</string>
+    <string name="storage_wizard_move_progress_title" msgid="4443920302548035674">"جارٍ نقل <xliff:g id="APP">^1</xliff:g>…"</string>
+    <string name="storage_wizard_move_progress_body" msgid="4288580957960820740">"لا تزِل <xliff:g id="NAME">^1</xliff:g> أثناء عملية النقل. \n\nولن يكون التطبيق <xliff:g id="APP">^2</xliff:g> على هذا الجهاز متاحًا حتى الانتهاء من عملية النقل."</string>
+    <string name="storage_wizard_move_progress_cancel" msgid="542047237524588792">"إلغاء عملية النقل"</string>
     <string name="battery_status_title" msgid="9159414319574976203">"حالة البطارية"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"مستوى البطارية"</string>
     <string name="apn_settings" msgid="3743170484827528406">"‏أسماء نقاط الوصول (APN)"</string>
@@ -1132,15 +1080,12 @@
     <string name="menu_restore" msgid="8260067415075573273">"إعادة تعيين إلى الإعداد الافتراضي"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"‏اكتملت إعادة تعيين إعدادات APN الافتراضية."</string>
     <string name="reset_network_title" msgid="4557113742173895074">"تمت إعادة تعيين إعدادات الشبكة"</string>
-    <!-- no translation found for reset_network_desc (581668983587311282) -->
-    <skip />
+    <string name="reset_network_desc" msgid="581668983587311282">"‏سيؤدي هذا إلى إعادة تعيين كل إعدادات الشبكة، بما في ذلك:\n\n"<li>"Wi‑Fi"</li>\n<li>"بيانات الجوّال"</li>\n<li>"البلوتوث"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"إعادة تعيين الإعدادات"</string>
-    <!-- no translation found for reset_network_final_desc (4874737348054213767) -->
-    <skip />
+    <string name="reset_network_final_desc" msgid="4874737348054213767">"هل تريد إعادة تعيين كل إعدادات الشبكة؟ لا يمكنك التراجع عن هذا الإجراء!"</string>
     <string name="reset_network_final_button_text" msgid="1797434793741744635">"إعادة تعيين الإعدادات"</string>
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"هل تريد إعادة التعيين؟"</string>
-    <!-- no translation found for reset_network_complete_toast (787829973559541880) -->
-    <skip />
+    <string name="reset_network_complete_toast" msgid="787829973559541880">"تمت إعادة تعيين إعدادات الشبكة"</string>
     <string name="device_reset_title" msgid="2384019005638768076">"إعادة تعيين الجهاز"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"إعادة الضبط بحسب بيانات المصنع"</string>
     <string name="master_clear_desc" product="tablet" msgid="8317211882509025841">"‏يؤدي ذلك إلى مسح جميع البيانات من "<b>"وحدة التخزين الداخلية"</b>" لجهازك اللوحي، بما في ذلك:\n\n"<li>"حسابك في Google"</li>\n<li>"النظام وبيانات التطبيقات والإعدادات"</li>\n<li>"التطبيقات التي تم تنزيلها"</li></string>
@@ -1156,8 +1101,7 @@
     <string name="erase_external_storage_description" product="default" msgid="1737638779582964966">"‏محو جميع البيانات على بطاقة SD، مثل الموسيقى أو الصور"</string>
     <string name="master_clear_button_text" product="tablet" msgid="3130786116528304116">"إعادة ضبط الجهاز اللوحي"</string>
     <string name="master_clear_button_text" product="default" msgid="7550632653343157971">"إعادة تعيين الهاتف"</string>
-    <!-- no translation found for master_clear_final_desc (1062841478823409667) -->
-    <skip />
+    <string name="master_clear_final_desc" msgid="1062841478823409667">"هل تريد محو كل معلوماتك الشخصية وتطبيقاتك التي تم تنزيلها؟ لا يمكنك التراجع عن هذا الإجراء!"</string>
     <string name="master_clear_final_button_text" msgid="5390908019019242910">"مسح كل شيء"</string>
     <string name="master_clear_failed" msgid="7959646179737950703">"‏لم يتم تنفيذ إعادة التعيين نظرًا لعدم توفر خدمة System Clear."</string>
     <string name="master_clear_confirm_title" msgid="7572642091599403668">"هل تريد إعادة الضبط؟"</string>
@@ -1206,8 +1150,7 @@
     <string name="tethering_help_button_text" msgid="656117495547173630">"مساعدة"</string>
     <string name="network_settings_title" msgid="4871233236744292831">"شبكات الجوّال"</string>
     <string name="manage_mobile_plan_title" msgid="7630170375010107744">"خطة الجوّال"</string>
-    <!-- no translation found for sms_application_title (4903928270533250448) -->
-    <skip />
+    <string name="sms_application_title" msgid="4903928270533250448">"‏تطبيق SMS"</string>
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"‏هل تريد تغيير تطبيق الرسائل القصيرة SMS؟"</string>
     <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"‏هل تريد استخدام <xliff:g id="NEW_APP">%1$s</xliff:g> بدلاً من <xliff:g id="CURRENT_APP">%2$s</xliff:g> كتطبيق للرسائل القصيرة SMS؟"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"‏هل تريد استخدام <xliff:g id="NEW_APP">%s</xliff:g> كتطبيق للرسائل القصيرة SMS؟"</string>
@@ -1287,18 +1230,12 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"تم تعيين كلمة المرور"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"‏تم تعيين رمز PIN"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"تم تعيين النقش"</string>
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic (7050256155547273836) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic (1072670959803859869) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic (1022239625083264596) -->
-    <skip />
-    <!-- no translation found for lockpassword_invalid_pin (15588049067548470) -->
-    <skip />
-    <!-- no translation found for lockpassword_invalid_password (4038507398784975200) -->
-    <skip />
-    <!-- no translation found for lockpattern_need_to_unlock_wrong (1745247595356012176) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pattern_generic" msgid="7050256155547273836">"استخدم النقش الذي حددته على جهازك للمتابعة."</string>
+    <string name="lockpassword_confirm_your_pin_generic" msgid="1072670959803859869">"أدخل رقم التعريف الشخصي للجهاز للمتابعة."</string>
+    <string name="lockpassword_confirm_your_password_generic" msgid="1022239625083264596">"أدخل كلمة مرور الجهاز للمتابعة."</string>
+    <string name="lockpassword_invalid_pin" msgid="15588049067548470">"رقم تعريف شخصي خاطئ"</string>
+    <string name="lockpassword_invalid_password" msgid="4038507398784975200">"كلمة مرور خاطئة"</string>
+    <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"نقش خاطئ"</string>
     <string name="lock_settings_title" msgid="4213839087748988686">"أمان الجهاز"</string>
     <string name="lockpattern_change_lock_pattern_label" msgid="5679630792003440352">"تغيير نقش إلغاء التأمين"</string>
     <string name="lockpattern_change_lock_pin_label" msgid="266707138486731661">"‏تغيير رمز PIN لإلغاء التأمين"</string>
@@ -1323,8 +1260,7 @@
     <string name="lockpattern_settings_choose_lock_pattern" msgid="1652352830005653447">"تعيين نقش إلغاء التأمين"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="1123908306116495545">"تغيير نقش إلغاء التأمين"</string>
     <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"كيفية رسم نقش إلغاء تأمين"</string>
-    <!-- no translation found for lockpattern_too_many_failed_confirmation_attempts (6909161623701848863) -->
-    <skip />
+    <string name="lockpattern_too_many_failed_confirmation_attempts" msgid="6909161623701848863">"تم إجراء عدد كبير جدًا من المحاولات غير الصحيحة. أعد المحاولة خلال <xliff:g id="NUMBER">%d</xliff:g> من الثواني."</string>
     <string name="activity_not_found" msgid="5551664692991605325">"لم يتم تثبيت التطبيق على هاتفك."</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"إدارة التطبيقات"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"إدارة التطبيقات المثبتة وإزالتها"</string>
@@ -1375,8 +1311,7 @@
     <string name="sort_order_size" msgid="7024513286636502362">"تصنيف بحسب الحجم"</string>
     <string name="show_running_services" msgid="5736278767975544570">"عرض الخدمات المشغلة"</string>
     <string name="show_background_processes" msgid="2009840211972293429">"عرض العمليات المخزنة مؤقتًا"</string>
-    <!-- no translation found for default_emergency_app (1951760659640369980) -->
-    <skip />
+    <string name="default_emergency_app" msgid="1951760659640369980">"تطبيق الطوارئ"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"إعادة تعيين تفضيلات التطبيقات"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"هل تريد إعادة تعيين تفضيلات التطبيقات؟"</string>
     <string name="reset_app_preferences_desc" msgid="4822447731869201512">"سيؤدي هذا إلى إعادة تعيين كل التفضيلات لما يلي:\n\n "<li>"التطبيقات المعطلة"</li>\n" "<li>"إشعارات التطبيقات المعطلة"</li>\n" "<li>"التطبيقات الافتراضية للإجراءات"</li>\n" "<li>"قيود البيانات الخلفية للتطبيقات"</li>\n" "<li>"أي قيود أذونات"</li>\n\n" لن تفقد أي بيانات للتطبيقات."</string>
@@ -1880,8 +1815,7 @@
     <string name="menu_duration_12h" msgid="7890465404584356294">"12 ساعة"</string>
     <string name="menu_duration_1d" msgid="3393631127622285458">"يوم واحد"</string>
     <string name="menu_show_system" msgid="8864603400415567635">"إظهار النظام"</string>
-    <!-- no translation found for menu_hide_system (4106826741703745733) -->
-    <skip />
+    <string name="menu_hide_system" msgid="4106826741703745733">"إخفاء النظام"</string>
     <string name="menu_use_uss" msgid="467765290771543089">"‏استخدام Uss"</string>
     <string name="menu_proc_stats_type" msgid="4700209061072120948">"نوع الإحصائيات"</string>
     <string name="menu_proc_stats_type_background" msgid="2236161340134898852">"خلفية"</string>
@@ -2352,8 +2286,7 @@
     <string name="user_add_user_item_title" msgid="8212199632466198969">"المستخدم"</string>
     <string name="user_add_profile_item_title" msgid="8353515490730363621">"ملف شخصي محظور"</string>
     <string name="user_add_user_title" msgid="2108112641783146007">"هل تريد إضافة مستخدم جديد؟"</string>
-    <!-- no translation found for user_add_user_message_long (8562152293752222985) -->
-    <skip />
+    <string name="user_add_user_message_long" msgid="8562152293752222985">"‏يمكنك مشاركة هذا الجهاز مع الآخرين من خلال إنشاء حسابات لمستخدمين إضافيين. وسيحصل كل مستخدم على مساحته الخاصة التي يمكنه تخصيصها بتطبيقاته وخلفياته التي يريدها وغيرها. كما يمكن للمستخدمين أيضًا ضبط إعدادات الجهاز مثل Wi-Fi والتي تؤثر في جميع المستخدمين.\n\nعند إضافة مستخدم جديد، يجب عليه إعداد مساحته.\n\nيمكن لأي مستخدم تحديث التطبيقات لجميع المستخدمين الآخرين."</string>
     <string name="user_add_user_message_short" msgid="1511354412249044381">"عند إضافة مستخدم جديد، فإنه يلزمه إعداد مساحته.\n\nويمكن لأي مستخدم تحديث التطبيقات لجميع المستخدمين الآخرين."</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"هل تريد إعداد المستخدم الآن؟"</string>
     <string name="user_setup_dialog_message" msgid="1004068621380867148">"تأكد أن الشخص متاح لأخذ جهازه وإعداد مساحته."</string>
@@ -2611,17 +2544,12 @@
     <string name="zen_mode_delete_rule" msgid="2985902330199039533">"حذف قاعدة"</string>
     <string name="zen_mode_delete_rule_confirmation" msgid="5338206274433295824">"هل تريد حذف <xliff:g id="RULE">%1$s</xliff:g>؟"</string>
     <string name="zen_mode_delete_rule_button" msgid="4248741120307752294">"حذف"</string>
-    <!-- no translation found for zen_mode_rule_type (2289413469580142888) -->
-    <skip />
-    <!-- no translation found for zen_mode_rule_type_unknown (3049377282766700600) -->
-    <skip />
-    <!-- no translation found for zen_mode_configure_rule (8865785428056490305) -->
-    <skip />
-    <!-- no translation found for zen_schedule_rule_type_name (3201273040477861538) -->
-    <skip />
+    <string name="zen_mode_rule_type" msgid="2289413469580142888">"نوع القاعدة"</string>
+    <string name="zen_mode_rule_type_unknown" msgid="3049377282766700600">"غير معروف"</string>
+    <string name="zen_mode_configure_rule" msgid="8865785428056490305">"تهيئة القاعدة"</string>
+    <string name="zen_schedule_rule_type_name" msgid="3201273040477861538">"جدولة القاعدة زمنيًا"</string>
     <string name="zen_mode_rule_not_found_text" msgid="8963662446092059836">"لم يتم العثور على القاعدة."</string>
-    <!-- no translation found for zen_mode_rule_summary_combination (2526506268333198254) -->
-    <skip />
+    <string name="zen_mode_rule_summary_combination" msgid="2526506268333198254">"<xliff:g id="DESCRIPTION">%1$s</xliff:g> / <xliff:g id="MODE">%2$s</xliff:g>"</string>
     <string name="zen_mode_schedule_rule_days" msgid="3195058680641389948">"أيام"</string>
     <string name="zen_mode_schedule_rule_days_none" msgid="4954143628634166317">"بدون"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="146511166522076034">"كل يوم"</string>
@@ -2647,39 +2575,98 @@
     <string name="zen_mode_start_time" msgid="8102602297273744441">"وقت البدء"</string>
     <string name="zen_mode_end_time" msgid="8774327885892705505">"وقت الانتهاء"</string>
     <string name="zen_mode_end_time_next_day_summary_format" msgid="4201521691238728701">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> في اليوم التالي"</string>
-    <!-- no translation found for zen_mode_interruptions_voice_prompt (3041817362475695079) -->
+    <!-- no translation found for zen_mode_interruptions_voice_title (855256211259132964) -->
     <skip />
-    <!-- no translation found for zen_mode_duration_voice_prompt (7381920739389625133) -->
+    <!-- no translation found for zen_mode_interruptions_voice_header (2888750427673157270) -->
     <skip />
-    <!-- no translation found for zen_mode_option_important_voice_synonyms (7060203794677229532) -->
+    <string name="zen_mode_interruptions_voice_prompt" msgid="3041817362475695079">"متى تريد أن تتم مقاطعتك؟"</string>
+    <string name="zen_mode_duration_voice_prompt" msgid="7381920739389625133">"إلى متى؟"</string>
+    <!-- no translation found for zen_mode_option_voice_all_interruptions (9222054216334506341) -->
     <skip />
-    <!-- no translation found for zen_mode_option_alarms_voice_synonyms (2438778704287069905) -->
+    <!-- no translation found for zen_mode_option_voice_all_interruptions_synonyms (475880955609403705) -->
     <skip />
-    <string name="zen_mode_option_off" msgid="7812737562592973403">"إيقاف"</string>
-    <!-- no translation found for zen_mode_option_off_voice_synonyms (7540236747518283153) -->
+    <!-- no translation found for zen_mode_option_voice_important_interruptions (3695277268139705627) -->
     <skip />
-    <!-- no translation found for zen_mode_option_no_interruptions_voice_synonyms (1377755348548400719) -->
+    <!-- no translation found for zen_mode_option_voice_important_synonyms (6120004096615029102) -->
     <skip />
-    <!-- no translation found for zen_mode_duration_indefinte_voice_label (9026001994945950539) -->
+    <!-- no translation found for zen_mode_option_voice_alarms (5961982397880688359) -->
     <skip />
-    <!-- no translation found for zen_mode_duration_minutes_voice_label (4750982084453980) -->
-    <!-- no translation found for zen_mode_duration_hours_voice_label (175180249071227957) -->
-    <!-- no translation found for zen_mode_summary_priority_indefinitely (5417246022606171241) -->
+    <!-- no translation found for zen_mode_option_voice_alarms_synonyms (7463720676061371446) -->
     <skip />
-    <!-- no translation found for zen_mode_summary_priority_by_minute (1938955186728929112) -->
-    <!-- no translation found for zen_mode_summary_priority_by_hour (6664710096150897823) -->
-    <!-- no translation found for zen_mode_summary_alarams_only_indefinite (7941708969866496605) -->
+    <!-- no translation found for zen_mode_option_voice_no_interruptions (351955012579170932) -->
     <skip />
-    <!-- no translation found for zen_mode_summary_alarms_only_by_minute (6122003583875424601) -->
-    <!-- no translation found for zen_mode_summary_alarms_only_by_hour (2407703455581767748) -->
-    <!-- no translation found for zen_mode_summary_no_interruptions_indefinite (5705225870569410806) -->
+    <!-- no translation found for zen_mode_option_voice_no_interruptions_synonyms (6196235656198436233) -->
     <skip />
-    <!-- no translation found for zen_mode_summary_no_interruptions_by_minute (4719882120685708458) -->
-    <!-- no translation found for zen_mode_summary_no_interruptions_by_hour (1508397683895056389) -->
-    <!-- no translation found for zen_mode_summary_always (6172985102689237703) -->
-    <skip />
-    <!-- no translation found for zen_mode_duration_indefinite_voice_synonyms (4213829562303429456) -->
-    <skip />
+    <string name="zen_mode_duration_indefinte_voice_label" msgid="9026001994945950539">"إلى أجل غير مسمى"</string>
+    <plurals name="zen_mode_duration_minutes_voice_label" formatted="false" msgid="4750982084453980">
+      <item quantity="zero"><xliff:g id="COUNT_1">%d</xliff:g> من الدقائق</item>
+      <item quantity="two">دقيقتان (<xliff:g id="COUNT_1">%d</xliff:g>)</item>
+      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> دقائق</item>
+      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> دقيقة</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> من الدقائق</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> دقيقة</item>
+    </plurals>
+    <plurals name="zen_mode_duration_hours_voice_label" formatted="false" msgid="175180249071227957">
+      <item quantity="zero"><xliff:g id="COUNT_1">%d</xliff:g> من الساعات</item>
+      <item quantity="two">ساعتان (<xliff:g id="COUNT_1">%d</xliff:g>)</item>
+      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> ساعات</item>
+      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> ساعة</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> من الساعات</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> ساعة</item>
+    </plurals>
+    <string name="zen_mode_summary_priority_indefinitely" msgid="5417246022606171241">"تغيير إلى الإشعارات ذات الأولوية فقط إلى أجل غير مسمى"</string>
+    <plurals name="zen_mode_summary_priority_by_minute" formatted="false" msgid="1938955186728929112">
+      <item quantity="zero">تغيير إلى الإشعارات ذات الأولوية فقط لمدة <xliff:g id="DURATION">%1$d</xliff:g> من الدقائق حتى <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
+      <item quantity="two">تغيير إلى الإشعارات ذات الأولوية فقط لمدة دقيقتين (<xliff:g id="DURATION">%1$d</xliff:g>) حتى <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
+      <item quantity="few">تغيير إلى الإشعارات ذات الأولوية فقط لمدة <xliff:g id="DURATION">%1$d</xliff:g> دقائق حتى <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
+      <item quantity="many">تغيير إلى الإشعارات ذات الأولوية فقط لمدة <xliff:g id="DURATION">%1$d</xliff:g> دقيقة حتى <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
+      <item quantity="other">تغيير إلى الإشعارات ذات الأولوية فقط لمدة <xliff:g id="DURATION">%1$d</xliff:g> من الدقائق حتى <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
+      <item quantity="one">تغيير إلى الإشعارات ذات الأولوية فقط لمدة دقيقة واحدة حتى <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g></item>
+    </plurals>
+    <plurals name="zen_mode_summary_priority_by_hour" formatted="false" msgid="6664710096150897823">
+      <item quantity="zero">تغيير إلى الإشعارات ذات الأولوية فقط لمدة <xliff:g id="DURATION">%1$d</xliff:g> من الساعات (حتى <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
+      <item quantity="two">تغيير إلى الإشعارات ذات الأولوية فقط لمدة ساعتين (<xliff:g id="DURATION">%1$d</xliff:g>) (حتى <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
+      <item quantity="few">تغيير إلى الإشعارات ذات الأولوية فقط لمدة <xliff:g id="DURATION">%1$d</xliff:g> ساعات (حتى <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
+      <item quantity="many">تغيير إلى الإشعارات ذات الأولوية فقط لمدة <xliff:g id="DURATION">%1$d</xliff:g> ساعة (حتى <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
+      <item quantity="other">تغيير إلى الإشعارات ذات الأولوية فقط لمدة <xliff:g id="DURATION">%1$d</xliff:g> من الساعات (حتى <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
+      <item quantity="one">تغيير إلى الإشعارات ذات الأولوية فقط لمدة ساعة واحدة حتى <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g></item>
+    </plurals>
+    <string name="zen_mode_summary_alarams_only_indefinite" msgid="7941708969866496605">"تغيير إلى تنبيهات فقط إلى أجل غير مسمى"</string>
+    <plurals name="zen_mode_summary_alarms_only_by_minute" formatted="false" msgid="6122003583875424601">
+      <item quantity="zero">تغيير إلى تنبيهات فقط لمدة <xliff:g id="DURATION">%1$d</xliff:g> من الدقائق (حتى <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
+      <item quantity="two">تغيير إلى تنبيهات فقط لمدة دقيقتين (<xliff:g id="DURATION">%1$d</xliff:g>) (حتى <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
+      <item quantity="few">تغيير إلى تنبيهات فقط لمدة <xliff:g id="DURATION">%1$d</xliff:g> دقائق (حتى <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
+      <item quantity="many">تغيير إلى تنبيهات فقط لمدة <xliff:g id="DURATION">%1$d</xliff:g> دقيقة (حتى <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
+      <item quantity="other">تغيير إلى تنبيهات فقط لمدة <xliff:g id="DURATION">%1$d</xliff:g> من الدقائق (حتى <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
+      <item quantity="one">تغيير إلى تنبيهات فقط لمدة دقيقة واحدة حتى <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g></item>
+    </plurals>
+    <plurals name="zen_mode_summary_alarms_only_by_hour" formatted="false" msgid="2407703455581767748">
+      <item quantity="zero">تغيير إلى تنبيهات فقط لمدة <xliff:g id="DURATION">%1$d</xliff:g> من الساعات حتى <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
+      <item quantity="two">تغيير إلى تنبيهات فقط لمدة ساعتين (<xliff:g id="DURATION">%1$d</xliff:g>) حتى <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
+      <item quantity="few">تغيير إلى تنبيهات فقط لمدة <xliff:g id="DURATION">%1$d</xliff:g> ساعات حتى <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
+      <item quantity="many">تغيير إلى تنبيهات فقط لمدة <xliff:g id="DURATION">%1$d</xliff:g> ساعة حتى <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
+      <item quantity="other">تغيير إلى تنبيهات فقط لمدة <xliff:g id="DURATION">%1$d</xliff:g> من الساعات حتى <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
+      <item quantity="one">تغيير إلى تنبيهات فقط لمدة ساعة واحدة حتى <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g></item>
+    </plurals>
+    <string name="zen_mode_summary_no_interruptions_indefinite" msgid="5705225870569410806">"تغيير إلى عدم الإزعاج إلى أجل غير مسمى"</string>
+    <plurals name="zen_mode_summary_no_interruptions_by_minute" formatted="false" msgid="4719882120685708458">
+      <item quantity="zero">تغيير إلى وضع عدم الإزعاج لمدة <xliff:g id="DURATION">%1$d</xliff:g> من الدقائق (حتى <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
+      <item quantity="two">تغيير إلى وضع عدم الإزعاج لمدة دقيقتين (<xliff:g id="DURATION">%1$d</xliff:g>) (حتى <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
+      <item quantity="few">تغيير إلى وضع عدم الإزعاج لمدة <xliff:g id="DURATION">%1$d</xliff:g> دقائق (حتى <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
+      <item quantity="many">تغيير إلى وضع عدم الإزعاج لمدة <xliff:g id="DURATION">%1$d</xliff:g> دقيقة (حتى <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
+      <item quantity="other">تغيير إلى وضع عدم الإزعاج لمدة <xliff:g id="DURATION">%1$d</xliff:g> من الدقائق (حتى <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
+      <item quantity="one">تغيير إلى وضع عدم الإزعاج لمدة دقيقة واحدة حتى <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g></item>
+    </plurals>
+    <plurals name="zen_mode_summary_no_interruptions_by_hour" formatted="false" msgid="1508397683895056389">
+      <item quantity="zero">تغيير إلى وضع عدم الإزعاج لمدة <xliff:g id="DURATION">%1$d</xliff:g> من الساعات حتى <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
+      <item quantity="two">تغيير إلى وضع عدم الإزعاج لمدة ساعتين (<xliff:g id="DURATION">%1$d</xliff:g>) حتى <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
+      <item quantity="few">تغيير إلى وضع عدم الإزعاج لمدة <xliff:g id="DURATION">%1$d</xliff:g> ساعات حتى <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
+      <item quantity="many">تغيير إلى وضع عدم الإزعاج لمدة <xliff:g id="DURATION">%1$d</xliff:g> ساعة حتى <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
+      <item quantity="other">تغيير إلى وضع عدم الإزعاج لمدة <xliff:g id="DURATION">%1$d</xliff:g> من الساعات حتى <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
+      <item quantity="one">تغيير إلى وضع عدم الإزعاج لمدة ساعة واحدة حتى <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g></item>
+    </plurals>
+    <string name="zen_mode_summary_always" msgid="6172985102689237703">"تغيير إلى المقاطعة دائمًا"</string>
+    <string name="zen_mode_duration_indefinite_voice_synonyms" msgid="4213829562303429456">"للأبد"</string>
     <string name="notification_settings_apps_title" msgid="1125354590652967250">"إشعارات التطبيقات"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"إعدادات الإشعارات"</string>
     <string name="device_feedback" msgid="3238056036766293294">"إرسال تعليقات حول هذا الجهاز"</string>
@@ -2766,8 +2753,7 @@
     <string name="filter_notif_priority_apps" msgid="5965001885749195239">"الأولوية"</string>
     <string name="filter_notif_sensitive_apps" msgid="412490487743581673">"الحساسية"</string>
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"‏مع عناوين URL للنطاقات"</string>
-    <!-- no translation found for trust_agent_disabled_device_admin (5982562414642596563) -->
-    <skip />
+    <string name="trust_agent_disabled_device_admin" msgid="5982562414642596563">"معطّل بواسطة المشرف"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"متقدمة"</string>
     <string name="unknown_app" msgid="5275921288718717656">"تطبيق غير معروف"</string>
     <string name="choose_profile" msgid="8229363046053568878">"اختيار ملف شخصي"</string>
@@ -2786,12 +2772,11 @@
       <item quantity="other">‏هناك <xliff:g id="COUNT">%d</xliff:g> من التطبيقات يمكنها فتح عناوين URL الخاصة بنطاقاتها</item>
       <item quantity="one">‏هناك تطبيق واحد يمكنه فتح عناوين URL الخاصة بنطاقه</item>
     </plurals>
-    <!-- no translation found for fingerprint_not_recognized (1739529686957438119) -->
-    <skip />
+    <string name="fingerprint_not_recognized" msgid="1739529686957438119">"لم يتم التعرف عليها"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"التطبيقات الافتراضية"</string>
-    <!-- no translation found for default_browser_title (8101772675085814670) -->
-    <skip />
+    <string name="default_browser_title" msgid="8101772675085814670">"تطبيق المتصفح"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"ليس هناك متصفح افتراضي"</string>
-    <!-- no translation found for default_app (6864503001385843060) -->
+    <string name="default_app" msgid="6864503001385843060">"(افتراضي)"</string>
+    <!-- no translation found for apps_storage (4353308027210435513) -->
     <skip />
 </resources>

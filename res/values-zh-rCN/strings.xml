@@ -270,10 +270,8 @@
     <string name="cancel" msgid="6859253417269739139">"取消"</string>
     <string name="okay" msgid="1997666393121016642">"确定"</string>
     <string name="forget" msgid="1400428660472591263">"取消保存"</string>
-    <!-- no translation found for save (879993180139353333) -->
-    <skip />
-    <!-- no translation found for done (6942539184162713160) -->
-    <skip />
+    <string name="save" msgid="879993180139353333">"保存"</string>
+    <string name="done" msgid="6942539184162713160">"完成"</string>
     <string name="settings_label" msgid="1626402585530130914">"设置"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"设置"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"设置快捷方式"</string>
@@ -603,8 +601,6 @@
     <string name="wifi_menu_p2p" msgid="7619851399250896797">"WLAN直连"</string>
     <string name="wifi_menu_scan" msgid="1470911530412095868">"扫描"</string>
     <string name="wifi_menu_advanced" msgid="7522252991919573664">"高级"</string>
-    <string name="wifi_menu_apps" msgid="6003687912727859577">"显示应用"</string>
-    <string name="wifi_menu_apps_strength" msgid="3322614241441509660">"显示WLAN网络信号强度"</string>
     <string name="wifi_menu_connect" msgid="4996220309848349408">"连接到网络"</string>
     <string name="wifi_menu_remember" msgid="8814185749388713796">"记住网络"</string>
     <string name="wifi_menu_forget" msgid="8736964302477327114">"取消保存网络"</string>
@@ -914,14 +910,12 @@
     <string name="memory_available_read_only" msgid="6497534390167920206">"可用空间（只读）"</string>
     <string name="memory_size" msgid="6629067715017232195">"总容量"</string>
     <string name="memory_calculating_size" msgid="2188358544203768588">"正在计算..."</string>
-    <!-- no translation found for memory_apps_usage (5128673488173839077) -->
-    <skip />
+    <string name="memory_apps_usage" msgid="5128673488173839077">"应用和应用数据"</string>
     <string name="memory_media_usage" msgid="3738830697707880405">"媒体"</string>
     <string name="memory_downloads_usage" msgid="3755173051677533027">"下载内容"</string>
     <string name="memory_dcim_usage" msgid="558887013613822577">"图片、视频"</string>
     <string name="memory_music_usage" msgid="1363785144783011606">"音频（音乐、铃声、播客等）"</string>
-    <!-- no translation found for memory_media_misc_usage (6094866738586451683) -->
-    <skip />
+    <string name="memory_media_misc_usage" msgid="6094866738586451683">"其他文件"</string>
     <string name="memory_media_cache_usage" msgid="6704293333141177910">"缓存数据"</string>
     <string name="sd_eject" product="nosdcard" msgid="4988563376492400073">"卸载共享存储设备"</string>
     <string name="sd_eject" product="default" msgid="6915293408836853020">"卸载SD卡"</string>
@@ -954,16 +948,11 @@
     <string name="sd_ejecting_summary" msgid="2028753069184908491">"正在卸载"</string>
     <string name="storage_low_title" msgid="1388569749716225155">"存储空间不足"</string>
     <string name="storage_low_summary" msgid="7737465774892563129">"某些系统功能（如同步）可能无法正常使用。请尝试删除或取消在本地保存某些内容（如应用数据或媒体内容），以便释放存储空间。"</string>
-    <!-- no translation found for storage_menu_rename (7141058657592615390) -->
-    <skip />
-    <!-- no translation found for storage_menu_mount (1014683672493425425) -->
-    <skip />
-    <!-- no translation found for storage_menu_unmount (681485356885955898) -->
-    <skip />
-    <!-- no translation found for storage_menu_format (8334422679047059459) -->
-    <skip />
-    <!-- no translation found for storage_menu_format_internal (6553368530402755543) -->
-    <skip />
+    <string name="storage_menu_rename" msgid="7141058657592615390">"重命名"</string>
+    <string name="storage_menu_mount" msgid="1014683672493425425">"装载"</string>
+    <string name="storage_menu_unmount" msgid="681485356885955898">"弹出"</string>
+    <string name="storage_menu_format" msgid="8334422679047059459">"清空并格式化"</string>
+    <string name="storage_menu_format_internal" msgid="6553368530402755543">"清空并格式化内部存储设备"</string>
     <string name="storage_menu_usb" msgid="5708207885333243384">"USB计算机连接"</string>
     <string name="storage_title_usb" msgid="679612779321689418">"USB计算机连接"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"连接方式"</string>
@@ -974,84 +963,45 @@
     <string name="usb_midi_title" msgid="3069990264258413994">"MIDI"</string>
     <string name="usb_midi_summary" msgid="539169474810956358">"让支持 MIDI 的应用通过 USB 与您计算机上的 MIDI 软件搭配使用。"</string>
     <string name="storage_other_users" msgid="808708845102611856">"其他用户"</string>
-    <!-- no translation found for storage_internal_title (690771193137801021) -->
-    <skip />
-    <!-- no translation found for storage_external_title (2723851748972673696) -->
-    <skip />
-    <!-- no translation found for storage_volume_summary (476551204412943800) -->
-    <skip />
-    <!-- no translation found for storage_mount_success (687641090137253647) -->
-    <skip />
-    <!-- no translation found for storage_mount_failure (8928389741212129060) -->
-    <skip />
-    <!-- no translation found for storage_unmount_success (5737203344673441677) -->
-    <skip />
-    <!-- no translation found for storage_unmount_failure (4161722509712992231) -->
-    <skip />
-    <!-- no translation found for storage_format_success (3023144070597190555) -->
-    <skip />
-    <!-- no translation found for storage_format_failure (8343688274191391889) -->
-    <skip />
-    <!-- no translation found for storage_rename_title (8242663969839491485) -->
-    <skip />
-    <!-- no translation found for storage_internal_format_details (4018647158382548820) -->
-    <skip />
-    <!-- no translation found for storage_internal_unmount_details (3677827796634199714) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_title (5085400514028585772) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_external_title (4867326438945303598) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_external_summary (7476105886344565074) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_internal_title (9100613534261408519) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_internal_summary (6240417501036216410) -->
-    <skip />
-    <!-- no translation found for storage_wizard_format_confirm_title (2814021794538252546) -->
-    <skip />
-    <!-- no translation found for storage_wizard_format_confirm_body (4401758710076806509) -->
-    <skip />
-    <!-- no translation found for storage_wizard_format_confirm_next (2774557300531702572) -->
-    <skip />
-    <!-- no translation found for storage_wizard_format_progress_title (6487352396450582292) -->
-    <skip />
-    <!-- no translation found for storage_wizard_format_progress_body (1259216693690378749) -->
-    <skip />
-    <!-- no translation found for storage_wizard_migrate_title (1363078147938160407) -->
-    <skip />
-    <!-- no translation found for storage_wizard_migrate_body (606648689408670617) -->
-    <skip />
-    <!-- no translation found for storage_wizard_migrate_now (4523444323744239143) -->
-    <skip />
-    <!-- no translation found for storage_wizard_migrate_later (3173482328116026253) -->
-    <skip />
-    <!-- no translation found for storage_wizard_migrate_confirm_title (8564833529613286965) -->
-    <skip />
-    <!-- no translation found for storage_wizard_migrate_confirm_body (5035719146373359329) -->
-    <skip />
-    <!-- no translation found for storage_wizard_migrate_confirm_next (5509475628423823202) -->
-    <skip />
-    <!-- no translation found for storage_wizard_migrate_progress_title (1665479429044202868) -->
-    <skip />
-    <!-- no translation found for storage_wizard_migrate_details (8641916179067596592) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_title (5381632402953258267) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_external_body (2879508114260597474) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_internal_body (122532674037860197) -->
-    <skip />
-    <!-- no translation found for storage_wizard_move_confirm_title (292782012677890250) -->
-    <skip />
-    <!-- no translation found for storage_wizard_move_confirm_body (236043946721254139) -->
-    <skip />
-    <!-- no translation found for storage_wizard_move_progress_title (4443920302548035674) -->
-    <skip />
-    <!-- no translation found for storage_wizard_move_progress_body (4288580957960820740) -->
-    <skip />
-    <!-- no translation found for storage_wizard_move_progress_cancel (542047237524588792) -->
-    <skip />
+    <string name="storage_internal_title" msgid="690771193137801021">"内部存储设备"</string>
+    <string name="storage_external_title" msgid="2723851748972673696">"移动存储设备"</string>
+    <string name="storage_volume_summary" msgid="476551204412943800">"<xliff:g id="FREE">%1$s</xliff:g> 可用空间（共 <xliff:g id="TOTAL">%2$s</xliff:g>）"</string>
+    <string name="storage_mount_success" msgid="687641090137253647">"<xliff:g id="NAME">%1$s</xliff:g>已装载"</string>
+    <string name="storage_mount_failure" msgid="8928389741212129060">"无法装载<xliff:g id="NAME">%1$s</xliff:g>"</string>
+    <string name="storage_unmount_success" msgid="5737203344673441677">"<xliff:g id="NAME">%1$s</xliff:g>已安全弹出"</string>
+    <string name="storage_unmount_failure" msgid="4161722509712992231">"无法安全弹出<xliff:g id="NAME">%1$s</xliff:g>"</string>
+    <string name="storage_format_success" msgid="3023144070597190555">"已将<xliff:g id="NAME">%1$s</xliff:g>格式化"</string>
+    <string name="storage_format_failure" msgid="8343688274191391889">"无法格式化<xliff:g id="NAME">%1$s</xliff:g>"</string>
+    <string name="storage_rename_title" msgid="8242663969839491485">"重命名存储设备"</string>
+    <string name="storage_internal_format_details" msgid="4018647158382548820">"格式化之后，您就可以在其他设备上使用此<xliff:g id="NAME_0">^1</xliff:g>了。\n\n此<xliff:g id="NAME_1">^1</xliff:g>上的所有数据都将被清空，建议您先将数据备份。\n\n"<b>"备份照片和其他媒体文件"</b>\n"将您的媒体文件移动到此设备上的备用存储设备，或使用 USB 线传输到计算机上。\n\n"<b>"备份应用"</b>\n"存储在此<xliff:g id="NAME_6">^1</xliff:g>上的所有应用都将被卸载，且这些应用的数据也将一并被清空。要保留这些应用，请将它们移到此设备上的备用存储设备。"</string>
+    <string name="storage_internal_unmount_details" msgid="3677827796634199714"><b>"当您弹出此<xliff:g id="NAME_0">^1</xliff:g>后，存储在其中的应用将会停止运行，而且存储在其中的媒体文件也将无法使用，除非您重新插入。"</b>\n\n"此<xliff:g id="NAME_1">^1</xliff:g>已格式化为只能在这台设备上使用，因此在任何其他设备上将无法使用。"</string>
+    <string name="storage_wizard_init_title" msgid="5085400514028585772">"设置您的<xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"用作便携式存储设备"</string>
+    <string name="storage_wizard_init_external_summary" msgid="7476105886344565074">"用于在设备之间移动照片和其他媒体文件。"</string>
+    <string name="storage_wizard_init_internal_title" msgid="9100613534261408519">"用作内部存储设备"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="6240417501036216410">"仅用于存储这台设备上的内容，包括应用和照片。为了防止此存储设备在其他设备上使用，您需要先对其进行格式化。"</string>
+    <string name="storage_wizard_format_confirm_title" msgid="2814021794538252546">"格式化为内部存储设备"</string>
+    <string name="storage_wizard_format_confirm_body" msgid="4401758710076806509">"<xliff:g id="NAME_0">^1</xliff:g>必须进行格式化，以确保安全。\n\n格式化之后，此<xliff:g id="NAME_1">^1</xliff:g>将只能在这台设备上使用。\n\n"<b>"格式化操作会清空当前存储在<xliff:g id="NAME_2">^1</xliff:g>上的所有数据。"</b>"为避免丢失数据，建议您先将数据备份。"</string>
+    <string name="storage_wizard_format_confirm_next" msgid="2774557300531702572">"清空并格式化"</string>
+    <string name="storage_wizard_format_progress_title" msgid="6487352396450582292">"正在格式化<xliff:g id="NAME">^1</xliff:g>…"</string>
+    <string name="storage_wizard_format_progress_body" msgid="1259216693690378749">"请勿在格式化过程中移除该<xliff:g id="NAME">^1</xliff:g>。"</string>
+    <string name="storage_wizard_migrate_title" msgid="1363078147938160407">"将数据移动到新的存储设备"</string>
+    <string name="storage_wizard_migrate_body" msgid="606648689408670617">"您可以将自己的照片、文件和应用数据移动到这个新<xliff:g id="NAME">^1</xliff:g>上。\n\n该移动操作需要花费大约 <xliff:g id="TIME">^2</xliff:g>，完成后将腾出 <xliff:g id="SIZE">^3</xliff:g> 的内部存储空间。在移动过程中，某些应用将无法正常运行。"</string>
+    <string name="storage_wizard_migrate_now" msgid="4523444323744239143">"立即移动"</string>
+    <string name="storage_wizard_migrate_later" msgid="3173482328116026253">"稍后移动"</string>
+    <string name="storage_wizard_migrate_confirm_title" msgid="8564833529613286965">"立即移动数据"</string>
+    <string name="storage_wizard_migrate_confirm_body" msgid="5035719146373359329"><b>"该移动操作需要花费大约 <xliff:g id="TIME">^1</xliff:g>，完成后将腾出 <xliff:g id="SIZE">^2</xliff:g> 的内部存储空间。"</b></string>
+    <string name="storage_wizard_migrate_confirm_next" msgid="5509475628423823202">"移动"</string>
+    <string name="storage_wizard_migrate_progress_title" msgid="1665479429044202868">"正在移动数据…"</string>
+    <string name="storage_wizard_migrate_details" msgid="8641916179067596592">"在移动数据的过程中：\n• 请勿移除相应的<xliff:g id="NAME">^1</xliff:g>。\n• 某些应用将无法正常运行。\n• 需确保设备电量充足。"</string>
+    <string name="storage_wizard_ready_title" msgid="5381632402953258267">"<xliff:g id="NAME">^1</xliff:g>可以使用了"</string>
+    <string name="storage_wizard_ready_external_body" msgid="2879508114260597474">"您的<xliff:g id="NAME">^1</xliff:g>已设置完毕，可用于存储照片和其他媒体文件了。"</string>
+    <string name="storage_wizard_ready_internal_body" msgid="122532674037860197">"新的<xliff:g id="NAME">^1</xliff:g>可以使用了。\n\n要将照片、文件和应用数据移动到此设备，请转到“设置”&gt;“存储”。"</string>
+    <string name="storage_wizard_move_confirm_title" msgid="292782012677890250">"移动<xliff:g id="APP">^1</xliff:g>"</string>
+    <string name="storage_wizard_move_confirm_body" msgid="236043946721254139">"将<xliff:g id="APP">^1</xliff:g>及其相关数据移动到<xliff:g id="NAME_0">^2</xliff:g>仅需几分钟时间。在移动操作完成前，您将无法使用该应用。\n\n请勿在移动过程中移除该<xliff:g id="NAME_1">^2</xliff:g>。"</string>
+    <string name="storage_wizard_move_progress_title" msgid="4443920302548035674">"正在移动<xliff:g id="APP">^1</xliff:g>…"</string>
+    <string name="storage_wizard_move_progress_body" msgid="4288580957960820740">"请勿在移动过程中移除该<xliff:g id="NAME">^1</xliff:g>。\n\n在移动操作完成前，您将无法使用此设备上的<xliff:g id="APP">^2</xliff:g>应用。"</string>
+    <string name="storage_wizard_move_progress_cancel" msgid="542047237524588792">"取消移动"</string>
     <string name="battery_status_title" msgid="9159414319574976203">"电池状态"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"电池电量"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APN"</string>
@@ -1096,15 +1046,12 @@
     <string name="menu_restore" msgid="8260067415075573273">"重置为默认设置"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"已重置默认APN设置。"</string>
     <string name="reset_network_title" msgid="4557113742173895074">"重置网络设置"</string>
-    <!-- no translation found for reset_network_desc (581668983587311282) -->
-    <skip />
+    <string name="reset_network_desc" msgid="581668983587311282">"此操作会重置所有网络设置，包括：\n\n"<li>"WLAN"</li>\n<li>"移动数据网络"</li>\n<li>"蓝牙"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"重置设置"</string>
-    <!-- no translation found for reset_network_final_desc (4874737348054213767) -->
-    <skip />
+    <string name="reset_network_final_desc" msgid="4874737348054213767">"要重置所有网络设置吗？此操作无法撤消！"</string>
     <string name="reset_network_final_button_text" msgid="1797434793741744635">"重置设置"</string>
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"要重置网络设置吗？"</string>
-    <!-- no translation found for reset_network_complete_toast (787829973559541880) -->
-    <skip />
+    <string name="reset_network_complete_toast" msgid="787829973559541880">"网络设置已重置"</string>
     <string name="device_reset_title" msgid="2384019005638768076">"恢复设备出厂设置"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"恢复出厂设置"</string>
     <string name="master_clear_desc" product="tablet" msgid="8317211882509025841">"此操作会清除您平板电脑"<b>"内部存储设备"</b>"中的所有数据，包括：\n\n"<li>"您的Google帐户"</li>\n<li>"系统和应用的数据和设置"</li>\n<li>"下载的应用"</li></string>
@@ -1120,8 +1067,7 @@
     <string name="erase_external_storage_description" product="default" msgid="1737638779582964966">"清除SD卡中的全部数据，例如音乐或照片"</string>
     <string name="master_clear_button_text" product="tablet" msgid="3130786116528304116">"恢复平板电脑出厂设置"</string>
     <string name="master_clear_button_text" product="default" msgid="7550632653343157971">"恢复手机出厂设置"</string>
-    <!-- no translation found for master_clear_final_desc (1062841478823409667) -->
-    <skip />
+    <string name="master_clear_final_desc" msgid="1062841478823409667">"要清空您的所有个人信息和下载的应用吗？此操作无法撤消！"</string>
     <string name="master_clear_final_button_text" msgid="5390908019019242910">"清除全部内容"</string>
     <string name="master_clear_failed" msgid="7959646179737950703">"“系统清除”服务不可用，因此未执行恢复出厂设置操作。"</string>
     <string name="master_clear_confirm_title" msgid="7572642091599403668">"要恢复出厂设置吗？"</string>
@@ -1170,8 +1116,7 @@
     <string name="tethering_help_button_text" msgid="656117495547173630">"帮助"</string>
     <string name="network_settings_title" msgid="4871233236744292831">"移动网络"</string>
     <string name="manage_mobile_plan_title" msgid="7630170375010107744">"手机套餐"</string>
-    <!-- no translation found for sms_application_title (4903928270533250448) -->
-    <skip />
+    <string name="sms_application_title" msgid="4903928270533250448">"短信应用"</string>
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"要更改短信应用吗？"</string>
     <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"要使用“<xliff:g id="NEW_APP">%1$s</xliff:g>”取代“<xliff:g id="CURRENT_APP">%2$s</xliff:g>”作为您的短信应用吗？"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"要使用“<xliff:g id="NEW_APP">%s</xliff:g>”作为您的短信应用吗？"</string>
@@ -1251,18 +1196,12 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"密码已设置"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"已设置PIN码"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"图案已设置"</string>
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic (7050256155547273836) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic (1072670959803859869) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic (1022239625083264596) -->
-    <skip />
-    <!-- no translation found for lockpassword_invalid_pin (15588049067548470) -->
-    <skip />
-    <!-- no translation found for lockpassword_invalid_password (4038507398784975200) -->
-    <skip />
-    <!-- no translation found for lockpattern_need_to_unlock_wrong (1745247595356012176) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pattern_generic" msgid="7050256155547273836">"请绘制您的设备解锁图案，然后再继续。"</string>
+    <string name="lockpassword_confirm_your_pin_generic" msgid="1072670959803859869">"请输入您的设备 PIN 码，然后再继续。"</string>
+    <string name="lockpassword_confirm_your_password_generic" msgid="1022239625083264596">"请输入您的设备密码，然后再继续。"</string>
+    <string name="lockpassword_invalid_pin" msgid="15588049067548470">"PIN 码错误"</string>
+    <string name="lockpassword_invalid_password" msgid="4038507398784975200">"密码错误"</string>
+    <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"图案错误"</string>
     <string name="lock_settings_title" msgid="4213839087748988686">"设备安全性"</string>
     <string name="lockpattern_change_lock_pattern_label" msgid="5679630792003440352">"更改解锁图案"</string>
     <string name="lockpattern_change_lock_pin_label" msgid="266707138486731661">"更改解锁PIN码"</string>
@@ -1287,8 +1226,7 @@
     <string name="lockpattern_settings_choose_lock_pattern" msgid="1652352830005653447">"设置解锁图案"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="1123908306116495545">"更改解锁图案"</string>
     <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"如何绘制解锁图案"</string>
-    <!-- no translation found for lockpattern_too_many_failed_confirmation_attempts (6909161623701848863) -->
-    <skip />
+    <string name="lockpattern_too_many_failed_confirmation_attempts" msgid="6909161623701848863">"尝试解锁失败次数过多。请在 <xliff:g id="NUMBER">%d</xliff:g> 秒后重试。"</string>
     <string name="activity_not_found" msgid="5551664692991605325">"您的手机上未安装相应应用。"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"管理应用"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"管理和删除已安装的应用"</string>
@@ -1339,8 +1277,7 @@
     <string name="sort_order_size" msgid="7024513286636502362">"按大小排序"</string>
     <string name="show_running_services" msgid="5736278767975544570">"显示当前运行的服务"</string>
     <string name="show_background_processes" msgid="2009840211972293429">"显示缓存进程"</string>
-    <!-- no translation found for default_emergency_app (1951760659640369980) -->
-    <skip />
+    <string name="default_emergency_app" msgid="1951760659640369980">"紧急警报应用"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"重置应用偏好设置"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"要重置应用偏好设置吗？"</string>
     <string name="reset_app_preferences_desc" msgid="4822447731869201512">"这将重置以下所有偏好设置：\n\n "<li>"停用的应用"</li>\n" "<li>"停用的应用通知"</li>\n" "<li>"执行操作的默认应用"</li>\n" "<li>"应用的后台流量限制"</li>\n" "<li>"权限限制"</li>\n\n" 您将不会丢失任何应用数据。"</string>
@@ -1844,8 +1781,7 @@
     <string name="menu_duration_12h" msgid="7890465404584356294">"12小时"</string>
     <string name="menu_duration_1d" msgid="3393631127622285458">"1天"</string>
     <string name="menu_show_system" msgid="8864603400415567635">"显示系统"</string>
-    <!-- no translation found for menu_hide_system (4106826741703745733) -->
-    <skip />
+    <string name="menu_hide_system" msgid="4106826741703745733">"隐藏系统进程"</string>
     <string name="menu_use_uss" msgid="467765290771543089">"使用 USS"</string>
     <string name="menu_proc_stats_type" msgid="4700209061072120948">"统计信息类型"</string>
     <string name="menu_proc_stats_type_background" msgid="2236161340134898852">"后台"</string>
@@ -2316,8 +2252,7 @@
     <string name="user_add_user_item_title" msgid="8212199632466198969">"用户"</string>
     <string name="user_add_profile_item_title" msgid="8353515490730363621">"受限个人资料"</string>
     <string name="user_add_user_title" msgid="2108112641783146007">"要添加新用户吗？"</string>
-    <!-- no translation found for user_add_user_message_long (8562152293752222985) -->
-    <skip />
+    <string name="user_add_user_message_long" msgid="8562152293752222985">"创建新用户之后，您将可以与其他人共享此设备。每位用户都会有自己的空间，可用来存储用户自己的应用、壁纸等内容。每位用户都可以调整 WLAN 等会影响到其他用户的设备设置。\n\n您添加新用户后，该用户需要设置自己的空间。\n\n任何用户均可为其他所有用户更新应用。"</string>
     <string name="user_add_user_message_short" msgid="1511354412249044381">"您添加新用户后，该用户必须设置自己的空间。\n\n任何用户均可为其他所有用户更新应用。"</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"要现在设置该用户吗？"</string>
     <string name="user_setup_dialog_message" msgid="1004068621380867148">"请让相应用户操作设备并设置他们自己的空间。"</string>
@@ -2571,17 +2506,12 @@
     <string name="zen_mode_delete_rule" msgid="2985902330199039533">"删除规则"</string>
     <string name="zen_mode_delete_rule_confirmation" msgid="5338206274433295824">"要删除“<xliff:g id="RULE">%1$s</xliff:g>”规则吗？"</string>
     <string name="zen_mode_delete_rule_button" msgid="4248741120307752294">"删除"</string>
-    <!-- no translation found for zen_mode_rule_type (2289413469580142888) -->
-    <skip />
-    <!-- no translation found for zen_mode_rule_type_unknown (3049377282766700600) -->
-    <skip />
-    <!-- no translation found for zen_mode_configure_rule (8865785428056490305) -->
-    <skip />
-    <!-- no translation found for zen_schedule_rule_type_name (3201273040477861538) -->
-    <skip />
+    <string name="zen_mode_rule_type" msgid="2289413469580142888">"规则类型"</string>
+    <string name="zen_mode_rule_type_unknown" msgid="3049377282766700600">"未知"</string>
+    <string name="zen_mode_configure_rule" msgid="8865785428056490305">"配置规则"</string>
+    <string name="zen_schedule_rule_type_name" msgid="3201273040477861538">"时间安排规则"</string>
     <string name="zen_mode_rule_not_found_text" msgid="8963662446092059836">"找不到规则。"</string>
-    <!-- no translation found for zen_mode_rule_summary_combination (2526506268333198254) -->
-    <skip />
+    <string name="zen_mode_rule_summary_combination" msgid="2526506268333198254">"<xliff:g id="DESCRIPTION">%1$s</xliff:g> / <xliff:g id="MODE">%2$s</xliff:g>"</string>
     <string name="zen_mode_schedule_rule_days" msgid="3195058680641389948">"星期几"</string>
     <string name="zen_mode_schedule_rule_days_none" msgid="4954143628634166317">"无"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="146511166522076034">"每天"</string>
@@ -2607,39 +2537,66 @@
     <string name="zen_mode_start_time" msgid="8102602297273744441">"开始时间"</string>
     <string name="zen_mode_end_time" msgid="8774327885892705505">"结束时间"</string>
     <string name="zen_mode_end_time_next_day_summary_format" msgid="4201521691238728701">"次日 <xliff:g id="FORMATTED_TIME">%s</xliff:g>"</string>
-    <!-- no translation found for zen_mode_interruptions_voice_prompt (3041817362475695079) -->
+    <!-- no translation found for zen_mode_interruptions_voice_title (855256211259132964) -->
     <skip />
-    <!-- no translation found for zen_mode_duration_voice_prompt (7381920739389625133) -->
+    <!-- no translation found for zen_mode_interruptions_voice_header (2888750427673157270) -->
     <skip />
-    <!-- no translation found for zen_mode_option_important_voice_synonyms (7060203794677229532) -->
+    <string name="zen_mode_interruptions_voice_prompt" msgid="3041817362475695079">"您允许设备在哪些情况下显示通知？"</string>
+    <string name="zen_mode_duration_voice_prompt" msgid="7381920739389625133">"持续多久？"</string>
+    <!-- no translation found for zen_mode_option_voice_all_interruptions (9222054216334506341) -->
     <skip />
-    <!-- no translation found for zen_mode_option_alarms_voice_synonyms (2438778704287069905) -->
+    <!-- no translation found for zen_mode_option_voice_all_interruptions_synonyms (475880955609403705) -->
     <skip />
-    <string name="zen_mode_option_off" msgid="7812737562592973403">"关闭"</string>
-    <!-- no translation found for zen_mode_option_off_voice_synonyms (7540236747518283153) -->
+    <!-- no translation found for zen_mode_option_voice_important_interruptions (3695277268139705627) -->
     <skip />
-    <!-- no translation found for zen_mode_option_no_interruptions_voice_synonyms (1377755348548400719) -->
+    <!-- no translation found for zen_mode_option_voice_important_synonyms (6120004096615029102) -->
     <skip />
-    <!-- no translation found for zen_mode_duration_indefinte_voice_label (9026001994945950539) -->
+    <!-- no translation found for zen_mode_option_voice_alarms (5961982397880688359) -->
     <skip />
-    <!-- no translation found for zen_mode_duration_minutes_voice_label (4750982084453980) -->
-    <!-- no translation found for zen_mode_duration_hours_voice_label (175180249071227957) -->
-    <!-- no translation found for zen_mode_summary_priority_indefinitely (5417246022606171241) -->
+    <!-- no translation found for zen_mode_option_voice_alarms_synonyms (7463720676061371446) -->
     <skip />
-    <!-- no translation found for zen_mode_summary_priority_by_minute (1938955186728929112) -->
-    <!-- no translation found for zen_mode_summary_priority_by_hour (6664710096150897823) -->
-    <!-- no translation found for zen_mode_summary_alarams_only_indefinite (7941708969866496605) -->
+    <!-- no translation found for zen_mode_option_voice_no_interruptions (351955012579170932) -->
     <skip />
-    <!-- no translation found for zen_mode_summary_alarms_only_by_minute (6122003583875424601) -->
-    <!-- no translation found for zen_mode_summary_alarms_only_by_hour (2407703455581767748) -->
-    <!-- no translation found for zen_mode_summary_no_interruptions_indefinite (5705225870569410806) -->
+    <!-- no translation found for zen_mode_option_voice_no_interruptions_synonyms (6196235656198436233) -->
     <skip />
-    <!-- no translation found for zen_mode_summary_no_interruptions_by_minute (4719882120685708458) -->
-    <!-- no translation found for zen_mode_summary_no_interruptions_by_hour (1508397683895056389) -->
-    <!-- no translation found for zen_mode_summary_always (6172985102689237703) -->
-    <skip />
-    <!-- no translation found for zen_mode_duration_indefinite_voice_synonyms (4213829562303429456) -->
-    <skip />
+    <string name="zen_mode_duration_indefinte_voice_label" msgid="9026001994945950539">"无限期"</string>
+    <plurals name="zen_mode_duration_minutes_voice_label" formatted="false" msgid="4750982084453980">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 分钟</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 分钟</item>
+    </plurals>
+    <plurals name="zen_mode_duration_hours_voice_label" formatted="false" msgid="175180249071227957">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 小时</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 小时</item>
+    </plurals>
+    <string name="zen_mode_summary_priority_indefinitely" msgid="5417246022606171241">"更改为无限期仅限优先通知"</string>
+    <plurals name="zen_mode_summary_priority_by_minute" formatted="false" msgid="1938955186728929112">
+      <item quantity="other">更改为仅限优先通知，持续 <xliff:g id="DURATION">%1$d</xliff:g> 分钟（到<xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>）</item>
+      <item quantity="one">更改为仅限优先通知，持续 1 分钟（到<xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g>）</item>
+    </plurals>
+    <plurals name="zen_mode_summary_priority_by_hour" formatted="false" msgid="6664710096150897823">
+      <item quantity="other">更改为仅限优先通知，持续 <xliff:g id="DURATION">%1$d</xliff:g> 小时（到<xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>）</item>
+      <item quantity="one">更改为仅限优先通知，持续 1 小时（到<xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g>）</item>
+    </plurals>
+    <string name="zen_mode_summary_alarams_only_indefinite" msgid="7941708969866496605">"更改为无限期仅限闹钟"</string>
+    <plurals name="zen_mode_summary_alarms_only_by_minute" formatted="false" msgid="6122003583875424601">
+      <item quantity="other">更改为仅限闹钟，持续 <xliff:g id="DURATION">%1$d</xliff:g> 分钟（到<xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>）</item>
+      <item quantity="one">更改为仅限闹钟，持续 1 分钟（到<xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g>）</item>
+    </plurals>
+    <plurals name="zen_mode_summary_alarms_only_by_hour" formatted="false" msgid="2407703455581767748">
+      <item quantity="other">更改为仅限闹钟，持续 <xliff:g id="DURATION">%1$d</xliff:g> 小时（到<xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>）</item>
+      <item quantity="one">更改为仅限闹钟，持续 1 小时（到<xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g>）</item>
+    </plurals>
+    <string name="zen_mode_summary_no_interruptions_indefinite" msgid="5705225870569410806">"更改为无限期禁止打扰"</string>
+    <plurals name="zen_mode_summary_no_interruptions_by_minute" formatted="false" msgid="4719882120685708458">
+      <item quantity="other">更改为禁止打扰，持续 <xliff:g id="DURATION">%1$d</xliff:g> 分钟（到<xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>）</item>
+      <item quantity="one">更改为禁止打扰，持续 1 分钟（到<xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g>）</item>
+    </plurals>
+    <plurals name="zen_mode_summary_no_interruptions_by_hour" formatted="false" msgid="1508397683895056389">
+      <item quantity="other">更改为禁止打扰，持续 <xliff:g id="DURATION">%1$d</xliff:g> 小时（到<xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>）</item>
+      <item quantity="one">更改为禁止打扰，持续 1 小时（到<xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g>）</item>
+    </plurals>
+    <string name="zen_mode_summary_always" msgid="6172985102689237703">"更改为一律允许打扰"</string>
+    <string name="zen_mode_duration_indefinite_voice_synonyms" msgid="4213829562303429456">"不限时间"</string>
     <string name="notification_settings_apps_title" msgid="1125354590652967250">"应用通知"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"通知设置"</string>
     <string name="device_feedback" msgid="3238056036766293294">"发送有关此设备的反馈"</string>
@@ -2718,8 +2675,7 @@
     <string name="filter_notif_priority_apps" msgid="5965001885749195239">"优先"</string>
     <string name="filter_notif_sensitive_apps" msgid="412490487743581673">"含敏感信息"</string>
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"包含网域网址"</string>
-    <!-- no translation found for trust_agent_disabled_device_admin (5982562414642596563) -->
-    <skip />
+    <string name="trust_agent_disabled_device_admin" msgid="5982562414642596563">"已被管理员停用"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"高级"</string>
     <string name="unknown_app" msgid="5275921288718717656">"未知应用"</string>
     <string name="choose_profile" msgid="8229363046053568878">"选择个人资料"</string>
@@ -2734,12 +2690,11 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> 个应用可以打开其网域网址</item>
       <item quantity="one">1 个应用可以打开其网域网址</item>
     </plurals>
-    <!-- no translation found for fingerprint_not_recognized (1739529686957438119) -->
-    <skip />
+    <string name="fingerprint_not_recognized" msgid="1739529686957438119">"无法识别"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"默认应用"</string>
-    <!-- no translation found for default_browser_title (8101772675085814670) -->
-    <skip />
+    <string name="default_browser_title" msgid="8101772675085814670">"浏览器应用"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"没有默认浏览器"</string>
-    <!-- no translation found for default_app (6864503001385843060) -->
+    <string name="default_app" msgid="6864503001385843060">"（默认）"</string>
+    <!-- no translation found for apps_storage (4353308027210435513) -->
     <skip />
 </resources>

@@ -427,10 +427,8 @@
     <skip />
     <string name="okay" msgid="1997666393121016642">"OK"</string>
     <string name="forget" msgid="1400428660472591263">"Унутуу"</string>
-    <!-- no translation found for save (879993180139353333) -->
-    <skip />
-    <!-- no translation found for done (6942539184162713160) -->
-    <skip />
+    <string name="save" msgid="879993180139353333">"Сактоо"</string>
+    <string name="done" msgid="6942539184162713160">"Даяр"</string>
     <!-- no translation found for settings_label (1626402585530130914) -->
     <skip />
     <!-- no translation found for settings_label_launcher (8344735489639482340) -->
@@ -867,8 +865,6 @@
     <skip />
     <!-- no translation found for wifi_menu_advanced (7522252991919573664) -->
     <skip />
-    <string name="wifi_menu_apps" msgid="6003687912727859577">"Колдонмолорду көрсөт"</string>
-    <string name="wifi_menu_apps_strength" msgid="3322614241441509660">"WiFi күчүн көрсөтүү"</string>
     <!-- no translation found for wifi_menu_connect (4996220309848349408) -->
     <skip />
     <string name="wifi_menu_remember" msgid="8814185749388713796">"Тармакты эстеп калуу"</string>
@@ -945,10 +941,8 @@
     <string name="wifi_hotspot_title" msgid="7726205804813286950">"Туташуу үчүн киресизби?"</string>
     <string name="wifi_hotspot_message" msgid="3673833421453455747">"<xliff:g id="APP_NAME">%1$s</xliff:g> тармакка туташуудан мурун Интернетке кирүүңүздү талап кылат."</string>
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"ТУТАШУУ"</string>
-    <!-- no translation found for no_internet_access_text (1509171132175355674) -->
-    <skip />
-    <!-- no translation found for no_internet_access_remember (5963015664551707981) -->
-    <skip />
+    <string name="no_internet_access_text" msgid="1509171132175355674">"Бул тармактын Интернетке мүмкүнчүлүгү жок. Баары бир ушул тармак колдонула берсинби?"</string>
+    <string name="no_internet_access_remember" msgid="5963015664551707981">"Бул тармак үчүн экинчи сураба"</string>
     <!-- no translation found for wifi_connect (1076622875777072845) -->
     <skip />
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Түйүндгө байланышкан жок"</string>
@@ -1305,16 +1299,14 @@
     <skip />
     <!-- no translation found for memory_calculating_size (2188358544203768588) -->
     <skip />
-    <!-- no translation found for memory_apps_usage (5128673488173839077) -->
-    <skip />
+    <string name="memory_apps_usage" msgid="5128673488173839077">"Колдонмолор жана колдонмо дайындары"</string>
     <!-- no translation found for memory_media_usage (3738830697707880405) -->
     <skip />
     <!-- no translation found for memory_downloads_usage (3755173051677533027) -->
     <skip />
     <string name="memory_dcim_usage" msgid="558887013613822577">"Сүрөттөр, видеолор"</string>
     <string name="memory_music_usage" msgid="1363785144783011606">"Аудио (музыка, рингтон, подкасттар, ж.б.)"</string>
-    <!-- no translation found for memory_media_misc_usage (6094866738586451683) -->
-    <skip />
+    <string name="memory_media_misc_usage" msgid="6094866738586451683">"Башка файлдар"</string>
     <string name="memory_media_cache_usage" msgid="6704293333141177910">"Кэштелген берилиштер"</string>
     <!-- no translation found for sd_eject (4988563376492400073) -->
     <skip />
@@ -1363,16 +1355,11 @@
     <skip />
     <string name="storage_low_title" msgid="1388569749716225155">"Сактагычта орун түгөнүп баратат"</string>
     <string name="storage_low_summary" msgid="7737465774892563129">"Кээ бир системдик функциялар, мисалы, синхрондоо, туура эмес иштеши мүмкүн. Колдонмолор же медиа мазмундарды жок кылып орун бошотконго аракет кылыңыз."</string>
-    <!-- no translation found for storage_menu_rename (7141058657592615390) -->
-    <skip />
-    <!-- no translation found for storage_menu_mount (1014683672493425425) -->
-    <skip />
-    <!-- no translation found for storage_menu_unmount (681485356885955898) -->
-    <skip />
-    <!-- no translation found for storage_menu_format (8334422679047059459) -->
-    <skip />
-    <!-- no translation found for storage_menu_format_internal (6553368530402755543) -->
-    <skip />
+    <string name="storage_menu_rename" msgid="7141058657592615390">"Аталышын өзгөртүү"</string>
+    <string name="storage_menu_mount" msgid="1014683672493425425">"Кошуу"</string>
+    <string name="storage_menu_unmount" msgid="681485356885955898">"Чыгаруу"</string>
+    <string name="storage_menu_format" msgid="8334422679047059459">"Тазалоо жана форматтоо"</string>
+    <string name="storage_menu_format_internal" msgid="6553368530402755543">"Ички эсттм ктр тазл ж-а формтт"</string>
     <string name="storage_menu_usb" msgid="5708207885333243384">"USB аркылуу компүтерге туташуу"</string>
     <string name="storage_title_usb" msgid="679612779321689418">"USB аркылуу компүтерге туташуу"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"Катары туташуу"</string>
@@ -1383,84 +1370,45 @@
     <string name="usb_midi_title" msgid="3069990264258413994">"MIDI"</string>
     <string name="usb_midi_summary" msgid="539169474810956358">"MIDI иштетилген колдонмолор USB аркылуу компьютериңиздеги MIDI программа менен иштөөсүнө жол ачат."</string>
     <string name="storage_other_users" msgid="808708845102611856">"Башка колдонуучулар"</string>
-    <!-- no translation found for storage_internal_title (690771193137801021) -->
-    <skip />
-    <!-- no translation found for storage_external_title (2723851748972673696) -->
-    <skip />
-    <!-- no translation found for storage_volume_summary (476551204412943800) -->
-    <skip />
-    <!-- no translation found for storage_mount_success (687641090137253647) -->
-    <skip />
-    <!-- no translation found for storage_mount_failure (8928389741212129060) -->
-    <skip />
-    <!-- no translation found for storage_unmount_success (5737203344673441677) -->
-    <skip />
-    <!-- no translation found for storage_unmount_failure (4161722509712992231) -->
-    <skip />
-    <!-- no translation found for storage_format_success (3023144070597190555) -->
-    <skip />
-    <!-- no translation found for storage_format_failure (8343688274191391889) -->
-    <skip />
-    <!-- no translation found for storage_rename_title (8242663969839491485) -->
-    <skip />
-    <!-- no translation found for storage_internal_format_details (4018647158382548820) -->
-    <skip />
-    <!-- no translation found for storage_internal_unmount_details (3677827796634199714) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_title (5085400514028585772) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_external_title (4867326438945303598) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_external_summary (7476105886344565074) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_internal_title (9100613534261408519) -->
-    <skip />
-    <!-- no translation found for storage_wizard_init_internal_summary (6240417501036216410) -->
-    <skip />
-    <!-- no translation found for storage_wizard_format_confirm_title (2814021794538252546) -->
-    <skip />
-    <!-- no translation found for storage_wizard_format_confirm_body (4401758710076806509) -->
-    <skip />
-    <!-- no translation found for storage_wizard_format_confirm_next (2774557300531702572) -->
-    <skip />
-    <!-- no translation found for storage_wizard_format_progress_title (6487352396450582292) -->
-    <skip />
-    <!-- no translation found for storage_wizard_format_progress_body (1259216693690378749) -->
-    <skip />
-    <!-- no translation found for storage_wizard_migrate_title (1363078147938160407) -->
-    <skip />
-    <!-- no translation found for storage_wizard_migrate_body (606648689408670617) -->
-    <skip />
-    <!-- no translation found for storage_wizard_migrate_now (4523444323744239143) -->
-    <skip />
-    <!-- no translation found for storage_wizard_migrate_later (3173482328116026253) -->
-    <skip />
-    <!-- no translation found for storage_wizard_migrate_confirm_title (8564833529613286965) -->
-    <skip />
-    <!-- no translation found for storage_wizard_migrate_confirm_body (5035719146373359329) -->
-    <skip />
-    <!-- no translation found for storage_wizard_migrate_confirm_next (5509475628423823202) -->
-    <skip />
-    <!-- no translation found for storage_wizard_migrate_progress_title (1665479429044202868) -->
-    <skip />
-    <!-- no translation found for storage_wizard_migrate_details (8641916179067596592) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_title (5381632402953258267) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_external_body (2879508114260597474) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_internal_body (122532674037860197) -->
-    <skip />
-    <!-- no translation found for storage_wizard_move_confirm_title (292782012677890250) -->
-    <skip />
-    <!-- no translation found for storage_wizard_move_confirm_body (236043946721254139) -->
-    <skip />
-    <!-- no translation found for storage_wizard_move_progress_title (4443920302548035674) -->
-    <skip />
-    <!-- no translation found for storage_wizard_move_progress_body (4288580957960820740) -->
-    <skip />
-    <!-- no translation found for storage_wizard_move_progress_cancel (542047237524588792) -->
-    <skip />
+    <string name="storage_internal_title" msgid="690771193137801021">"Түзмөктүн сактагычы"</string>
+    <string name="storage_external_title" msgid="2723851748972673696">"Ташыма сактагыч"</string>
+    <string name="storage_volume_summary" msgid="476551204412943800">"<xliff:g id="FREE">%1$s</xliff:g> акысыз (Жалпысынан <xliff:g id="TOTAL">%2$s</xliff:g>)"</string>
+    <string name="storage_mount_success" msgid="687641090137253647">"<xliff:g id="NAME">%1$s</xliff:g> кошулду"</string>
+    <string name="storage_mount_failure" msgid="8928389741212129060">"<xliff:g id="NAME">%1$s</xliff:g> кошулбай койду"</string>
+    <string name="storage_unmount_success" msgid="5737203344673441677">"<xliff:g id="NAME">%1$s</xliff:g> коопсуз чыгарылды"</string>
+    <string name="storage_unmount_failure" msgid="4161722509712992231">"<xliff:g id="NAME">%1$s</xliff:g> коопсуз чыгарылбай койду"</string>
+    <string name="storage_format_success" msgid="3023144070597190555">"<xliff:g id="NAME">%1$s</xliff:g> форматталды"</string>
+    <string name="storage_format_failure" msgid="8343688274191391889">"<xliff:g id="NAME">%1$s</xliff:g> форматталбай койду"</string>
+    <string name="storage_rename_title" msgid="8242663969839491485">"Сактагыч аталышын өзгөртүү"</string>
+    <string name="storage_internal_format_details" msgid="4018647158382548820">"Форматталгандан кийин, бул <xliff:g id="NAME_0">^1</xliff:g> башка түзмөктөрдө колдонула берет. \n\nБул <xliff:g id="NAME_1">^1</xliff:g> ичиндеги дайындардын бардыгы тазаланат. Адегенде камдык көчүрмөсүн сактоону ойлонуштуруңуз. \n\n"<b>"Сүрөттөрдүн жана башка медиалардын камдык көчүрмөсүн сактаңыз"</b>" \nМедиа файлдарыңызды ушул түзмөктөгү кошумча сактагычка жылдырыңыз же аларды USB кабель менен компьютерге өткөрүңүз. \n\n"<b>"Колдонмолордун камдык көчүрмөсүн сактаңыз"</b>" \nУшул <xliff:g id="NAME_6">^1</xliff:g> ичинде сакталган колдонмолордун баары чыгарылып салынат жана алардын дайындары тазаланат. Бул колдонмолорду калтыруу үчүн, аларды ушул түзмөктөгү кошумча сактагычка жылдырыңыз."</string>
+    <string name="storage_internal_unmount_details" msgid="3677827796634199714"><b>"Бул <xliff:g id="NAME_0">^1</xliff:g> чыгарылганда, анда сакталган колдонмолор иштебей калат жана андагы медиа файлдар ал кайра салынмайынча жеткиликтүү болбой калат."</b>" \n\nБул <xliff:g id="NAME_1">^1</xliff:g> ушул түзмөктө гана иштегидей болуп форматталган. Ал башка эч бир түзмөктө иштебейт."</string>
+    <string name="storage_wizard_init_title" msgid="5085400514028585772">"<xliff:g id="NAME">^1</xliff:g> түзмөгүңүздү орнотуңуз"</string>
+    <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"Ташыма эстутум катары колдонуу"</string>
+    <string name="storage_wizard_init_external_summary" msgid="7476105886344565074">"Сүрөттөрдү жана башка медианы түзмөктөргө жылдыруу үчүн."</string>
+    <string name="storage_wizard_init_internal_title" msgid="9100613534261408519">"Ички эстутум катары колдонуу"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="6240417501036216410">"Ушул түзмөктөгү гана нерселерди, анын ичинде колдонмолор менен сүрөттөрдү сактоо үчүн. Анын башка түзмөктөр менен иштешинен коргогудай кылып форматтоо керектелет."</string>
+    <string name="storage_wizard_format_confirm_title" msgid="2814021794538252546">"Ички эстутум катары форматтоо"</string>
+    <string name="storage_wizard_format_confirm_body" msgid="4401758710076806509">"Бул, <xliff:g id="NAME_0">^1</xliff:g> коопсуз болуусу үчүн, анын форматталышын талап кылат. \n\nФорматтагандан кийин, бул <xliff:g id="NAME_1">^1</xliff:g> ушул түзмөктө гана иштейт. \n\n"<b>"Форматтоо учурда <xliff:g id="NAME_2">^1</xliff:g> ичинде сакталган бардык дайындарды тазалайт."</b>" Дайындарды жоготуунун алдын алуу үчүн, алардын камдык көчүрмөсүн сактоону ойлонуштуруңуз."</string>
+    <string name="storage_wizard_format_confirm_next" msgid="2774557300531702572">"Тазалоо жана форматтоо"</string>
+    <string name="storage_wizard_format_progress_title" msgid="6487352396450582292">"<xliff:g id="NAME">^1</xliff:g> форматталууда…"</string>
+    <string name="storage_wizard_format_progress_body" msgid="1259216693690378749">"<xliff:g id="NAME">^1</xliff:g> форматталып жатканда, аны чыгарбаңыз."</string>
+    <string name="storage_wizard_migrate_title" msgid="1363078147938160407">"Дайындарды жаңы сактагычка жылдр"</string>
+    <string name="storage_wizard_migrate_body" msgid="606648689408670617">"Сүрөттөрүңүз, файлдарыңыз жана колдонмо дайындарын ушул жаңы <xliff:g id="NAME">^1</xliff:g> ичине жылдырсаңыз болот. \n\nЖылдыруу болжол менен <xliff:g id="TIME">^2</xliff:g> созулат жана ички эстутумдан <xliff:g id="SIZE">^3</xliff:g> бошотот. Бул аткарылып жатканда айрым колдонмолор иштебей калат."</string>
+    <string name="storage_wizard_migrate_now" msgid="4523444323744239143">"Азыр жылдыруу"</string>
+    <string name="storage_wizard_migrate_later" msgid="3173482328116026253">"Кийинчерээк жылдыруу"</string>
+    <string name="storage_wizard_migrate_confirm_title" msgid="8564833529613286965">"Дайындарды азыр жылдыруу"</string>
+    <string name="storage_wizard_migrate_confirm_body" msgid="5035719146373359329"><b>"Жылдыруу болжол менен <xliff:g id="TIME">^1</xliff:g> созулат. Ал ички эстутумдан <xliff:g id="SIZE">^2</xliff:g> бошотот."</b></string>
+    <string name="storage_wizard_migrate_confirm_next" msgid="5509475628423823202">"Жылдыруу"</string>
+    <string name="storage_wizard_migrate_progress_title" msgid="1665479429044202868">"Дайындар жылдырылууда…"</string>
+    <string name="storage_wizard_migrate_details" msgid="8641916179067596592">"Жылдыруу учурунда: \n• <xliff:g id="NAME">^1</xliff:g> түзмөгүн чыгарбаңыз. \n• Айрым колдонмолор туура иштебей калат. \n• Түзмөктү кубаттап туруңуз."</string>
+    <string name="storage_wizard_ready_title" msgid="5381632402953258267">"<xliff:g id="NAME">^1</xliff:g> даяр"</string>
+    <string name="storage_wizard_ready_external_body" msgid="2879508114260597474">"Сиздин <xliff:g id="NAME">^1</xliff:g> сүрөттөр жана башка медиа менен колдонууга дапдаяр."</string>
+    <string name="storage_wizard_ready_internal_body" msgid="122532674037860197">"Сиздин жаңы <xliff:g id="NAME">^1</xliff:g> иштеп жатат. \n\nСүрөттөр, файлдар жана колдонмо дайындарын бул түзмөккө жылдыруу үчүн, Жөндөөлөр &gt; Сактагычка өтүңүз."</string>
+    <string name="storage_wizard_move_confirm_title" msgid="292782012677890250">"<xliff:g id="APP">^1</xliff:g> колдонмосун жылдыруу"</string>
+    <string name="storage_wizard_move_confirm_body" msgid="236043946721254139">"<xliff:g id="APP">^1</xliff:g> жана анын дайындарын <xliff:g id="NAME_0">^2</xliff:g> ичине жылдыруу бир нече көз ирмемге гана созулат. Жылдыруу аяктамайынча колдонмону пайдалана албай каласыз. \n\nЖылдыруу учурунда <xliff:g id="NAME_1">^2</xliff:g> түзмөгүн чыгарбаңыз."</string>
+    <string name="storage_wizard_move_progress_title" msgid="4443920302548035674">"<xliff:g id="APP">^1</xliff:g> жылдырылууда…"</string>
+    <string name="storage_wizard_move_progress_body" msgid="4288580957960820740">"Жылдыруу учурунда <xliff:g id="NAME">^1</xliff:g> түзмөгүн чыгарбаңыз. \n\nУшул түзмөктөгү <xliff:g id="APP">^2</xliff:g> колдонмосу жылдыруу аяктагыча жеткиликтүү болбойт."</string>
+    <string name="storage_wizard_move_progress_cancel" msgid="542047237524588792">"Жылдырууну жокко чыгаруу"</string>
     <!-- no translation found for battery_status_title (9159414319574976203) -->
     <skip />
     <!-- no translation found for battery_level_title (2965679202786873272) -->
@@ -1535,15 +1483,12 @@
     <skip />
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"Абалкы APN тууралоолорун кайтаруу аяктады."</string>
     <string name="reset_network_title" msgid="4557113742173895074">"Тармак жөндөөлөрү баштапкы абалга келтирилди"</string>
-    <!-- no translation found for reset_network_desc (581668983587311282) -->
-    <skip />
+    <string name="reset_network_desc" msgid="581668983587311282">"Бул тармак жөндөөлөрүнүн баарын баштапкы абалга келтирет, анын ичинде:\n\n"<li>"Wi‑Fi"</li>\n<li>"Уюлдук дайындар"</li>\n<li>"Bluetooth"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"Жөндөөлөрдү баштапкы абалга келтирүү"</string>
-    <!-- no translation found for reset_network_final_desc (4874737348054213767) -->
-    <skip />
+    <string name="reset_network_final_desc" msgid="4874737348054213767">"Тармак жөндөөлөрүнүн баары баштапкы абалга келтирилсинби? Бул аракетти кайра кайтара албайсыз!"</string>
     <string name="reset_network_final_button_text" msgid="1797434793741744635">"Жөндөөлөрдү баштапкы абалга келтирүү"</string>
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"Баштапкы абалга келтирилсинби?"</string>
-    <!-- no translation found for reset_network_complete_toast (787829973559541880) -->
-    <skip />
+    <string name="reset_network_complete_toast" msgid="787829973559541880">"Тармак жөндөөлөрү баштапкы абалга келтирилди"</string>
     <string name="device_reset_title" msgid="2384019005638768076">"Түзмктү баштпкы абалга келтрүү"</string>
     <!-- no translation found for master_clear_title (5907939616087039756) -->
     <skip />
@@ -1566,8 +1511,7 @@
     <skip />
     <!-- no translation found for master_clear_button_text (7550632653343157971) -->
     <skip />
-    <!-- no translation found for master_clear_final_desc (1062841478823409667) -->
-    <skip />
+    <string name="master_clear_final_desc" msgid="1062841478823409667">"Сиздин бардык жеке маалыматтарыңыз жана жүктөп алынган колдонмолоруңуз өчүрүлсүнбү? Сиз бул аракетти кайра кайтара албайсыз!"</string>
     <!-- no translation found for master_clear_final_button_text (5390908019019242910) -->
     <skip />
     <string name="master_clear_failed" msgid="7959646179737950703">"Тазалоо аткарылган жок, анткени System Clear кызматы жеткиликсиз."</string>
@@ -1648,8 +1592,7 @@
     <skip />
     <string name="network_settings_title" msgid="4871233236744292831">"Уюктук тармактар"</string>
     <string name="manage_mobile_plan_title" msgid="7630170375010107744">"Тарифтик план"</string>
-    <!-- no translation found for sms_application_title (4903928270533250448) -->
-    <skip />
+    <string name="sms_application_title" msgid="4903928270533250448">"SMS колдонмосу"</string>
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"SMS колдонмо алмашсынбы?"</string>
     <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"Сиздин <xliff:g id="CURRENT_APP">%2$s</xliff:g> SMS колдонмоңуз ордуна <xliff:g id="NEW_APP">%1$s</xliff:g> колдонулсунбу?"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"<xliff:g id="NEW_APP">%s</xliff:g> SMS колдонмосу болсунбу?"</string>
@@ -1759,18 +1702,12 @@
     <skip />
     <!-- no translation found for lockpassword_pattern_set_toast (6867259621331406236) -->
     <skip />
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic (7050256155547273836) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic (1072670959803859869) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic (1022239625083264596) -->
-    <skip />
-    <!-- no translation found for lockpassword_invalid_pin (15588049067548470) -->
-    <skip />
-    <!-- no translation found for lockpassword_invalid_password (4038507398784975200) -->
-    <skip />
-    <!-- no translation found for lockpattern_need_to_unlock_wrong (1745247595356012176) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pattern_generic" msgid="7050256155547273836">"Улантуу үчүн түзмөгүңүздүн кулпуну ачуу үлгүсүн колдонуңуз."</string>
+    <string name="lockpassword_confirm_your_pin_generic" msgid="1072670959803859869">"Улантуу үчүн түзмөгүңүздүн PIN кодун киргизиңиз."</string>
+    <string name="lockpassword_confirm_your_password_generic" msgid="1022239625083264596">"Улантуу үчүн түзмөгүңүздүн сырсөзүн киргизиңиз."</string>
+    <string name="lockpassword_invalid_pin" msgid="15588049067548470">"PIN код туура эмес"</string>
+    <string name="lockpassword_invalid_password" msgid="4038507398784975200">"Сырсөз туура эмес"</string>
+    <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"Үлгү туура эмес"</string>
     <string name="lock_settings_title" msgid="4213839087748988686">"Түзмөктүн коопсуздугу"</string>
     <!-- no translation found for lockpattern_change_lock_pattern_label (5679630792003440352) -->
     <skip />
@@ -1809,8 +1746,7 @@
     <skip />
     <!-- no translation found for lockpattern_settings_help_how_to_record (2614673439060830433) -->
     <skip />
-    <!-- no translation found for lockpattern_too_many_failed_confirmation_attempts (6909161623701848863) -->
-    <skip />
+    <string name="lockpattern_too_many_failed_confirmation_attempts" msgid="6909161623701848863">"Туура эмес аракеттер өтө көп болду. <xliff:g id="NUMBER">%d</xliff:g> секунддан кийин кайра аракет кылыңыз."</string>
     <string name="activity_not_found" msgid="5551664692991605325">"Колдонмо сиздин телефонуңузда орнотулган эмес."</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Колдонмолорду башкаруу"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Орнотулган колдонмолорду өчүрүү жана башкаруу"</string>
@@ -1890,8 +1826,7 @@
     <skip />
     <!-- no translation found for show_background_processes (2009840211972293429) -->
     <skip />
-    <!-- no translation found for default_emergency_app (1951760659640369980) -->
-    <skip />
+    <string name="default_emergency_app" msgid="1951760659640369980">"Өзгөчө кырдаал колдонмосу"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"Колдонмолордун тандоолорун жок кылуу"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"Колдонмонун тандоолору жок кылынсынбы?"</string>
     <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Бул кийинкилерди жок кылат:\n\n "<li>"Токтотулган колдонмолор"</li>\n" "<li>"Токтотулган колдонмолордун эскертмелери"</li>\n" "<li>"Иш-аракеттердин абалкы колдонмосу"</li>\n" "<li>"Колдонмолордун фондук берилиштерине чектөө"</li>\n" "<li>"Бардык уруксат чектөөлөрү"</li>\n\n" Колдонмонун берилиштери жоголбойт."</string>
@@ -2545,8 +2480,7 @@
     <string name="menu_duration_12h" msgid="7890465404584356294">"12 саат"</string>
     <string name="menu_duration_1d" msgid="3393631127622285458">"1 күн"</string>
     <string name="menu_show_system" msgid="8864603400415567635">"Системди көргөзүү"</string>
-    <!-- no translation found for menu_hide_system (4106826741703745733) -->
-    <skip />
+    <string name="menu_hide_system" msgid="4106826741703745733">"Тутумду жашыруу"</string>
     <string name="menu_use_uss" msgid="467765290771543089">"Uss колдонуу"</string>
     <string name="menu_proc_stats_type" msgid="4700209061072120948">"Статистика түрлөрү"</string>
     <string name="menu_proc_stats_type_background" msgid="2236161340134898852">"Фондогу"</string>
@@ -3185,8 +3119,7 @@
     <string name="user_add_user_item_title" msgid="8212199632466198969">"Колдонуучу"</string>
     <string name="user_add_profile_item_title" msgid="8353515490730363621">"Чектелген профайл"</string>
     <string name="user_add_user_title" msgid="2108112641783146007">"Жаңы колдонуучу кошосузбу?"</string>
-    <!-- no translation found for user_add_user_message_long (8562152293752222985) -->
-    <skip />
+    <string name="user_add_user_message_long" msgid="8562152293752222985">"Кошумча колдонуучуларды түзүү менен, бул түзмөктү башкалар менен бөлүшө аласыз. Ар бир колдонуучунун өз мейкиндиги болуп, аны алар өз колдонмолору, тушкагазы ж.б.у.с. нерселер менен ыңгайлаштырып алышат. Колдонуучулар Wi‑Fi сыяктуу, ар кимге таасирин тийгизүүчү, түзмөк жөндөөлөрүн да тууралай алышат.\n\nЖаңы колдонуучу кошулганда, ал өз мейкиндигин түзүп алышы керек.\n\nКолдонмолорду бир колдонуучу калган бардык колдонуучулар үчүн да жаңырта алат."</string>
     <string name="user_add_user_message_short" msgid="1511354412249044381">"Жаңы колдонуучу кошулганда, ал өз мейкиндигин түзүп алышы керек.\n\nКолдонмолорду бир колдонуучу жаңыртканда, ал калган бардык колдонуучулар үчүн да жаңырат."</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"Колдонуучуну азыр түзөлүбү?"</string>
     <string name="user_setup_dialog_message" msgid="1004068621380867148">"Түзмөктү алып, өз мейкиндигин негиздей ала турган адамдын бар экенин текшериңиз"</string>
@@ -3442,17 +3375,12 @@
     <string name="zen_mode_delete_rule" msgid="2985902330199039533">"Эрежени жок кылуу"</string>
     <string name="zen_mode_delete_rule_confirmation" msgid="5338206274433295824">"\"<xliff:g id="RULE">%1$s</xliff:g>\" эрежеси жок кылынсынбы?"</string>
     <string name="zen_mode_delete_rule_button" msgid="4248741120307752294">"Жок кылуу"</string>
-    <!-- no translation found for zen_mode_rule_type (2289413469580142888) -->
-    <skip />
-    <!-- no translation found for zen_mode_rule_type_unknown (3049377282766700600) -->
-    <skip />
-    <!-- no translation found for zen_mode_configure_rule (8865785428056490305) -->
-    <skip />
-    <!-- no translation found for zen_schedule_rule_type_name (3201273040477861538) -->
-    <skip />
+    <string name="zen_mode_rule_type" msgid="2289413469580142888">"Эреженин түрү"</string>
+    <string name="zen_mode_rule_type_unknown" msgid="3049377282766700600">"Белгисиз"</string>
+    <string name="zen_mode_configure_rule" msgid="8865785428056490305">"Эрежени конфигурациялоо"</string>
+    <string name="zen_schedule_rule_type_name" msgid="3201273040477861538">"Эреженин иш тартибин түзүү"</string>
     <string name="zen_mode_rule_not_found_text" msgid="8963662446092059836">"Эреже табылган жок."</string>
-    <!-- no translation found for zen_mode_rule_summary_combination (2526506268333198254) -->
-    <skip />
+    <string name="zen_mode_rule_summary_combination" msgid="2526506268333198254">"<xliff:g id="DESCRIPTION">%1$s</xliff:g>/<xliff:g id="MODE">%2$s</xliff:g>"</string>
     <string name="zen_mode_schedule_rule_days" msgid="3195058680641389948">"Күндөр"</string>
     <string name="zen_mode_schedule_rule_days_none" msgid="4954143628634166317">"Эч бири"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="146511166522076034">"Күн сайын"</string>
@@ -3478,40 +3406,66 @@
     <string name="zen_mode_start_time" msgid="8102602297273744441">"Баштоо убакыты"</string>
     <string name="zen_mode_end_time" msgid="8774327885892705505">"Аяктоо убакыты"</string>
     <string name="zen_mode_end_time_next_day_summary_format" msgid="4201521691238728701">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> кийинки күнү"</string>
-    <!-- no translation found for zen_mode_interruptions_voice_prompt (3041817362475695079) -->
+    <!-- no translation found for zen_mode_interruptions_voice_title (855256211259132964) -->
     <skip />
-    <!-- no translation found for zen_mode_duration_voice_prompt (7381920739389625133) -->
+    <!-- no translation found for zen_mode_interruptions_voice_header (2888750427673157270) -->
     <skip />
-    <!-- no translation found for zen_mode_option_important_voice_synonyms (7060203794677229532) -->
+    <string name="zen_mode_interruptions_voice_prompt" msgid="3041817362475695079">"Качан үзгүлтүккө учуратса болот?"</string>
+    <string name="zen_mode_duration_voice_prompt" msgid="7381920739389625133">"Канча убакытка?"</string>
+    <!-- no translation found for zen_mode_option_voice_all_interruptions (9222054216334506341) -->
     <skip />
-    <!-- no translation found for zen_mode_option_alarms_voice_synonyms (2438778704287069905) -->
+    <!-- no translation found for zen_mode_option_voice_all_interruptions_synonyms (475880955609403705) -->
     <skip />
-    <!-- no translation found for zen_mode_option_off (7812737562592973403) -->
+    <!-- no translation found for zen_mode_option_voice_important_interruptions (3695277268139705627) -->
     <skip />
-    <!-- no translation found for zen_mode_option_off_voice_synonyms (7540236747518283153) -->
+    <!-- no translation found for zen_mode_option_voice_important_synonyms (6120004096615029102) -->
     <skip />
-    <!-- no translation found for zen_mode_option_no_interruptions_voice_synonyms (1377755348548400719) -->
+    <!-- no translation found for zen_mode_option_voice_alarms (5961982397880688359) -->
     <skip />
-    <!-- no translation found for zen_mode_duration_indefinte_voice_label (9026001994945950539) -->
+    <!-- no translation found for zen_mode_option_voice_alarms_synonyms (7463720676061371446) -->
     <skip />
-    <!-- no translation found for zen_mode_duration_minutes_voice_label (4750982084453980) -->
-    <!-- no translation found for zen_mode_duration_hours_voice_label (175180249071227957) -->
-    <!-- no translation found for zen_mode_summary_priority_indefinitely (5417246022606171241) -->
+    <!-- no translation found for zen_mode_option_voice_no_interruptions (351955012579170932) -->
     <skip />
-    <!-- no translation found for zen_mode_summary_priority_by_minute (1938955186728929112) -->
-    <!-- no translation found for zen_mode_summary_priority_by_hour (6664710096150897823) -->
-    <!-- no translation found for zen_mode_summary_alarams_only_indefinite (7941708969866496605) -->
+    <!-- no translation found for zen_mode_option_voice_no_interruptions_synonyms (6196235656198436233) -->
     <skip />
-    <!-- no translation found for zen_mode_summary_alarms_only_by_minute (6122003583875424601) -->
-    <!-- no translation found for zen_mode_summary_alarms_only_by_hour (2407703455581767748) -->
-    <!-- no translation found for zen_mode_summary_no_interruptions_indefinite (5705225870569410806) -->
-    <skip />
-    <!-- no translation found for zen_mode_summary_no_interruptions_by_minute (4719882120685708458) -->
-    <!-- no translation found for zen_mode_summary_no_interruptions_by_hour (1508397683895056389) -->
-    <!-- no translation found for zen_mode_summary_always (6172985102689237703) -->
-    <skip />
-    <!-- no translation found for zen_mode_duration_indefinite_voice_synonyms (4213829562303429456) -->
-    <skip />
+    <string name="zen_mode_duration_indefinte_voice_label" msgid="9026001994945950539">"Белгисиз"</string>
+    <plurals name="zen_mode_duration_minutes_voice_label" formatted="false" msgid="4750982084453980">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> мүнөт</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> мүнөт</item>
+    </plurals>
+    <plurals name="zen_mode_duration_hours_voice_label" formatted="false" msgid="175180249071227957">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> саат</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> саат</item>
+    </plurals>
+    <string name="zen_mode_summary_priority_indefinitely" msgid="5417246022606171241">"Артыкчылыктуу эскертмелер гана режимине белгисиз убакытка өзгөртүү"</string>
+    <plurals name="zen_mode_summary_priority_by_minute" formatted="false" msgid="1938955186728929112">
+      <item quantity="other"><xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g> чейин <xliff:g id="DURATION">%1$d</xliff:g> мүнөткө артыкчылыктуу эскертмелер гана режимине өзгөртүү</item>
+      <item quantity="one"><xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g> чейин бир мүнөткө артыкчылыктуу эскертмелер гана режимине өзгөртүү</item>
+    </plurals>
+    <plurals name="zen_mode_summary_priority_by_hour" formatted="false" msgid="6664710096150897823">
+      <item quantity="other"><xliff:g id="DURATION">%1$d</xliff:g> саатка артыкчылыктуу эскертмелер гана режимине өзгөртүү (<xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g> чейин)</item>
+      <item quantity="one"><xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g> чейин бир саатка артыкчылыктуу эскертмелер гана режимине өзгөртүү</item>
+    </plurals>
+    <string name="zen_mode_summary_alarams_only_indefinite" msgid="7941708969866496605">"Ойготкучтар гана режимине белгисиз убакытка өзгөртүү"</string>
+    <plurals name="zen_mode_summary_alarms_only_by_minute" formatted="false" msgid="6122003583875424601">
+      <item quantity="other"><xliff:g id="DURATION">%1$d</xliff:g> мүнөткө ойготкучтар гана режимине өзгөртүү (<xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g> чейин)</item>
+      <item quantity="one"><xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g> чейин бир мүнөткө ойготкучтар гана режимине өзгөртүү</item>
+    </plurals>
+    <plurals name="zen_mode_summary_alarms_only_by_hour" formatted="false" msgid="2407703455581767748">
+      <item quantity="other"><xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g> чейин <xliff:g id="DURATION">%1$d</xliff:g> саатка ойготкучтар гана режимине өзгөртүү</item>
+      <item quantity="one"><xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g> чейин бир саатка ойготкучтар гана режимине өзгөртүү</item>
+    </plurals>
+    <string name="zen_mode_summary_no_interruptions_indefinite" msgid="5705225870569410806">"Үзгүлтүккө учурабасын режимине белгисиз убакытка өзгөртүү"</string>
+    <plurals name="zen_mode_summary_no_interruptions_by_minute" formatted="false" msgid="4719882120685708458">
+      <item quantity="other"><xliff:g id="DURATION">%1$d</xliff:g> мүнөткө үзгүлтүккө учурабасын режимине өзгөртүү (<xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g> чейин)</item>
+      <item quantity="one"><xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g> чейин бир мүнөткө үзгүлтүккө учурабасын режимине өзгөртүү</item>
+    </plurals>
+    <plurals name="zen_mode_summary_no_interruptions_by_hour" formatted="false" msgid="1508397683895056389">
+      <item quantity="other"><xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g> чейин <xliff:g id="DURATION">%1$d</xliff:g> саатка үзгүлтүккө учурабасын режимине өзгөртүү</item>
+      <item quantity="one"><xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g> чейин бир саатка үзгүлтүккө учурабасын режимине өзгөртүү</item>
+    </plurals>
+    <string name="zen_mode_summary_always" msgid="6172985102689237703">"Ар дайым үзгүлтүккө учуратуу режимине өзгөртүү"</string>
+    <string name="zen_mode_duration_indefinite_voice_synonyms" msgid="4213829562303429456">"түбөлүк"</string>
     <string name="notification_settings_apps_title" msgid="1125354590652967250">"Колдонмо эскертмелери"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Эскертме жөндөөлөрү"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Бул түзмөк жөнүндө пикир жөнөтүү"</string>
@@ -3590,8 +3544,7 @@
     <string name="filter_notif_priority_apps" msgid="5965001885749195239">"Артыкчылыктуу"</string>
     <string name="filter_notif_sensitive_apps" msgid="412490487743581673">"Астейдил"</string>
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"Домен URL\'дери менен"</string>
-    <!-- no translation found for trust_agent_disabled_device_admin (5982562414642596563) -->
-    <skip />
+    <string name="trust_agent_disabled_device_admin" msgid="5982562414642596563">"Администратор тарабынан өчүрүлгөн"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Өркүндөтүлгөн"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Белгисиз колдонмо"</string>
     <string name="choose_profile" msgid="8229363046053568878">"Профиль тандоо"</string>
@@ -3606,12 +3559,11 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> колдонмо өз домен URL\'дерин ача алат</item>
       <item quantity="one">Бир колдонмо өз домен URL\'дерин ача алат</item>
     </plurals>
-    <!-- no translation found for fingerprint_not_recognized (1739529686957438119) -->
-    <skip />
+    <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Таанылган жок"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"Демейки колдонмолор"</string>
-    <!-- no translation found for default_browser_title (8101772675085814670) -->
-    <skip />
+    <string name="default_browser_title" msgid="8101772675085814670">"Серепчи колдонмосу"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"Демейки серепчи жок"</string>
-    <!-- no translation found for default_app (6864503001385843060) -->
+    <string name="default_app" msgid="6864503001385843060">"(Демейки)"</string>
+    <!-- no translation found for apps_storage (4353308027210435513) -->
     <skip />
 </resources>
