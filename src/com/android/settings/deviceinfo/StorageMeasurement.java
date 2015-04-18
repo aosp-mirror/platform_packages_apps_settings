@@ -345,7 +345,7 @@ public class StorageMeasurement {
         final Message finished = mMeasurementHandler.obtainMessage(MeasurementHandler.MSG_COMPLETED,
                 details);
 
-        if (mSharedVolume != null && mSharedVolume.getState() == VolumeInfo.STATE_MOUNTED) {
+        if (mSharedVolume != null && mSharedVolume.isMountedReadable()) {
             final File basePath = mSharedVolume.getPathForUser(currentUser);
 
             // Measure media types for emulated storage, or for primary physical

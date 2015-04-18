@@ -53,10 +53,9 @@ import android.widget.EditText;
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.util.Preconditions;
 import com.android.settings.R;
-import com.android.settings.Settings;
+import com.android.settings.Settings.StorageUseActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
-import com.android.settings.Settings.StorageUseActivity;
 import com.android.settings.applications.ManageApplications;
 import com.android.settings.deviceinfo.StorageMeasurement.MeasurementDetails;
 import com.android.settings.deviceinfo.StorageMeasurement.MeasurementReceiver;
@@ -75,6 +74,7 @@ import java.util.Objects;
  */
 public class PrivateVolumeSettings extends SettingsPreferenceFragment {
     // TODO: disable unmount when providing over MTP/PTP
+    // TODO: warn when mounted read-only
 
     private static final String TAG_RENAME = "rename";
     private static final String TAG_CONFIRM_CLEAR_CACHE = "confirmClearCache";
@@ -129,8 +129,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         addPreferencesFromResource(R.xml.device_info_storage_volume);
 
         // Find the emulated shared storage layered above this private volume
-        mSharedVolume = mStorageManager.findVolumeById(
-                mVolume.getId().replace("private", "emulated"));
+        mSharedVolume = mStorageManager.findEmulatedForPrivate(mVolume);
 
         mMeasure = new StorageMeasurement(context, mVolume, mSharedVolume);
         mMeasure.setReceiver(mReceiver);
@@ -171,7 +170,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
 
         screen.removeAll();
 
-        if (mVolume.getState() != VolumeInfo.STATE_MOUNTED) {
+        if (!mVolume.isMountedReadable()) {
             return;
         }
 
@@ -283,7 +282,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         } else {
             rename.setVisible(mVolume.getType() == VolumeInfo.TYPE_PRIVATE);
             mount.setVisible(mVolume.getState() == VolumeInfo.STATE_UNMOUNTED);
-            unmount.setVisible(mVolume.getState() == VolumeInfo.STATE_MOUNTED);
+            unmount.setVisible(mVolume.isMountedReadable());
             format.setVisible(true);
         }
 

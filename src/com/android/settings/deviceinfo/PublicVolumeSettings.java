@@ -118,7 +118,7 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
 
         screen.removeAll();
 
-        if (mVolume.getState() == VolumeInfo.STATE_MOUNTED) {
+        if (mVolume.isMountedReadable()) {
             screen.addPreference(mGraph);
             screen.addPreference(mTotal);
             screen.addPreference(mAvailable);
@@ -139,7 +139,7 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
         if (mVolume.getState() == VolumeInfo.STATE_UNMOUNTED) {
             screen.addPreference(mMount);
         }
-        if (mVolume.getState() == VolumeInfo.STATE_MOUNTED) {
+        if (mVolume.isMountedReadable()) {
             screen.addPreference(mUnmount);
         }
         screen.addPreference(mFormat);

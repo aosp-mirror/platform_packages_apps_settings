@@ -47,14 +47,12 @@ public class StorageVolumePreference extends Preference {
         setKey(volume.getId());
         setTitle(mStorageManager.getBestVolumeDescription(volume));
 
-        switch (volume.getState()) {
-            case VolumeInfo.STATE_MOUNTED:
-                // TODO: move statfs() to background thread
-                final File path = volume.getPath();
-                final String free = Formatter.formatFileSize(context, path.getFreeSpace());
-                final String total = Formatter.formatFileSize(context, path.getTotalSpace());
-                setSummary(context.getString(R.string.storage_volume_summary, free, total));
-                break;
+        if (volume.isMountedReadable()) {
+            // TODO: move statfs() to background thread
+            final File path = volume.getPath();
+            final String free = Formatter.formatFileSize(context, path.getFreeSpace());
+            final String total = Formatter.formatFileSize(context, path.getTotalSpace());
+            setSummary(context.getString(R.string.storage_volume_summary, free, total));
         }
 
         // TODO: better icons
@@ -65,7 +63,7 @@ public class StorageVolumePreference extends Preference {
         }
 
         if (volume.getType() == VolumeInfo.TYPE_PUBLIC
-                && volume.getState() == VolumeInfo.STATE_MOUNTED) {
+                && volume.isMountedReadable()) {
             setWidgetLayoutResource(R.layout.preference_storage_action);
         }
     }
