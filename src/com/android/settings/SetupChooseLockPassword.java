@@ -16,9 +16,11 @@
 
 package com.android.settings;
 
-import com.android.setupwizard.navigationbar.SetupWizardNavBar;
+import com.android.setupwizardlib.SetupWizardLayout;
 import com.android.setupwizardlib.util.SystemBarHelper;
+import com.android.setupwizardlib.view.NavigationBar;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
@@ -35,8 +37,7 @@ import android.view.ViewGroup;
  * Other changes should be done to ChooseLockPassword class instead and let this class inherit
  * those changes.
  */
-public class SetupChooseLockPassword extends ChooseLockPassword
-        implements SetupWizardNavBar.NavigationBarListener {
+public class SetupChooseLockPassword extends ChooseLockPassword {
 
     public static Intent createIntent(Context context, int quality,
             int minLength, final int maxLength, boolean requirePasswordToDecrypt,
@@ -66,9 +67,6 @@ public class SetupChooseLockPassword extends ChooseLockPassword
         return intent;
     }
 
-    private SetupWizardNavBar mNavigationBar;
-    private SetupChooseLockPasswordFragment mFragment;
-
     @Override
     protected boolean isValidFragment(String fragmentName) {
         return SetupChooseLockPasswordFragment.class.getName().equals(fragmentName);
@@ -85,51 +83,22 @@ public class SetupChooseLockPassword extends ChooseLockPassword
         super.onApplyThemeResource(theme, resid, first);
     }
 
-    @Override
-    public void onNavigationBarCreated(SetupWizardNavBar bar) {
-        mNavigationBar = bar;
-        SetupWizardUtils.setImmersiveMode(this);
-    }
+    public static class SetupChooseLockPasswordFragment extends ChooseLockPasswordFragment
+            implements NavigationBar.NavigationBarListener {
 
-    @Override
-    public void onNavigateBack() {
-        onBackPressed();
-    }
-
-    @Override
-    public void onNavigateNext() {
-        if (mFragment != null) {
-            mFragment.handleNext();
-        }
-    }
-
-    @Override
-    public void onAttachFragment(Fragment fragment) {
-        super.onAttachFragment(fragment);
-        if (fragment instanceof SetupChooseLockPasswordFragment) {
-            mFragment = (SetupChooseLockPasswordFragment) fragment;
-        }
-    }
-
-    public static class SetupChooseLockPasswordFragment extends ChooseLockPasswordFragment {
+        private NavigationBar mNavigationBar;
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            final View view = inflater.inflate(R.layout.setup_template, container, false);
-            View scrollView = view.findViewById(R.id.bottom_scroll_view);
-            SystemBarHelper.setImeInsetView(scrollView);
-            ViewGroup setupContent = (ViewGroup) view.findViewById(R.id.setup_content);
-            inflater.inflate(R.layout.setup_choose_lock_password, setupContent, true);
-            return view;
-        }
-
-        @Override
-        public void onViewCreated(View view, Bundle savedInstanceState) {
-            super.onViewCreated(view, savedInstanceState);
-            SetupWizardUtils.setIllustration(getActivity(),
-                    R.drawable.setup_illustration_lock_screen);
-            SetupWizardUtils.setHeaderText(getActivity(), getActivity().getTitle());
+            final SetupWizardLayout layout = (SetupWizardLayout) inflater.inflate(
+                    R.layout.setup_choose_lock_password, container, false);
+            SystemBarHelper.setImeInsetView(layout.findViewById(R.id.suw_bottom_scroll_view));
+            mNavigationBar = layout.getNavigationBar();
+            mNavigationBar.setNavigationBarListener(this);
+            layout.setHeaderText(getActivity().getTitle());
+            SetupWizardUtils.setImmersiveMode(getActivity());
+            return layout;
         }
 
         @Override
@@ -141,14 +110,25 @@ public class SetupChooseLockPassword extends ChooseLockPassword
 
         @Override
         protected void setNextEnabled(boolean enabled) {
-            SetupChooseLockPassword activity = (SetupChooseLockPassword) getActivity();
-            activity.mNavigationBar.getNextButton().setEnabled(enabled);
+            mNavigationBar.getNextButton().setEnabled(enabled);
         }
 
         @Override
         protected void setNextText(int text) {
-            SetupChooseLockPassword activity = (SetupChooseLockPassword) getActivity();
-            activity.mNavigationBar.getNextButton().setText(text);
+            mNavigationBar.getNextButton().setText(text);
+        }
+
+        @Override
+        public void onNavigateBack() {
+            final Activity activity = getActivity();
+            if (activity != null) {
+                activity.onBackPressed();
+            }
+        }
+
+        @Override
+        public void onNavigateNext() {
+            handleNext();
         }
     }
 }

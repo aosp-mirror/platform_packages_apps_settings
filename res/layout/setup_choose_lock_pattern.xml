@@ -15,80 +15,91 @@
     limitations under the License.
 -->
 
-<com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient
+<com.android.setupwizardlib.SetupWizardLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/topLayout"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    settings:suwBackgroundTile="@drawable/setup_illustration_tile"
+    settings:suwHeaderText="@string/wifi_setup_wizard_title"
+    settings:suwIllustrationHorizontalTile="@drawable/setup_illustration_horizontal_tile"
+    settings:suwIllustrationImage="@drawable/setup_illustration_lock_screen">
 
-    <!-- takes up all space above button bar at bottom -->
-    <LinearLayout
+    <com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient
+        android:id="@+id/topLayout"
         android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:layout_weight="1"
-        android:gravity="center"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView android:id="@+id/headerText"
+        <!-- takes up all space above button bar at bottom -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dip"
             android:layout_weight="1"
             android:gravity="center"
-            android:minHeight="50dp"
-            android:textSize="18sp"/>
+            android:orientation="vertical">
 
-        <com.android.internal.widget.LockPatternView android:id="@+id/lockPattern"
+            <TextView android:id="@+id/headerText"
+                android:layout_width="match_parent"
+                android:layout_height="0dip"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:minHeight="50dip"
+                android:textSize="18sp"/>
+
+            <com.android.internal.widget.LockPatternView android:id="@+id/lockPattern"
+                android:layout_width="match_parent"
+                android:layout_height="0dip"
+                android:layout_weight="4"
+                android:background="@color/lock_pattern_background"/>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dip"
-            android:layout_weight="4"
-            android:background="@color/lock_pattern_background"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal">
-
-        <Button android:id="@+id/retryButton"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/lockpattern_retry_button_text"/>
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
 
-        <TextView android:id="@+id/footerText"
-            android:layout_width="wrap_content"
+            <Button android:id="@+id/retryButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lockpattern_retry_button_text"/>
+
+            <TextView android:id="@+id/footerText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="50dip"
+                android:textSize="14sp"/>
+
+        </LinearLayout>
+
+        <!-- Buttons are hidden during setup, and use the buttons in setup navigation bar instead -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="50dp"
-            android:textSize="14sp"/>
+            android:orientation="horizontal"
+            android:visibility="gone"
+            style="@style/SecurityPreferenceButtonContainer">
 
-    </LinearLayout>
+            <!-- left : cancel, or re-try -->
+            <Button android:id="@+id/footerLeftButton"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/lockpattern_tutorial_cancel_label"
+                style="@style/SecurityPreferenceButton"/>
 
-    <!-- Buttons are hidden during setup, and use the buttons in setup navigation bar instead -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:visibility="gone"
-        style="@style/SecurityPreferenceButtonContainer">
+            <!-- right : confirm or ok -->
+            <Button android:id="@+id/footerRightButton"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/lockpattern_tutorial_continue_label"
+                style="@style/SecurityPreferenceButton"/>
 
-        <!-- left : cancel, or re-try -->
-        <Button android:id="@+id/footerLeftButton"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/lockpattern_tutorial_cancel_label"
-            style="@style/SecurityPreferenceButton"/>
+        </LinearLayout>
 
-        <!-- right : confirm or ok -->
-        <Button android:id="@+id/footerRightButton"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/lockpattern_tutorial_continue_label"
-            style="@style/SecurityPreferenceButton"/>
+    </com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient>
 
-    </LinearLayout>
-
-</com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient>
+</com.android.setupwizardlib.SetupWizardLayout>

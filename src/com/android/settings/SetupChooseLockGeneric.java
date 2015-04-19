@@ -16,8 +16,10 @@
 
 package com.android.settings;
 
-import com.android.setupwizard.navigationbar.SetupWizardNavBar;
+import com.android.setupwizardlib.SetupWizardListLayout;
+import com.android.setupwizardlib.view.NavigationBar;
 
+import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
@@ -37,8 +39,7 @@ import android.widget.ListView;
  * Other changes should be done to ChooseLockGeneric class instead and let this class inherit
  * those changes.
  */
-public class SetupChooseLockGeneric extends ChooseLockGeneric
-        implements SetupWizardNavBar.NavigationBarListener {
+public class SetupChooseLockGeneric extends ChooseLockGeneric {
 
     @Override
     protected boolean isValidFragment(String fragmentName) {
@@ -56,33 +57,16 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric
         super.onApplyThemeResource(theme, resid, first);
     }
 
-    @Override
-    public void onNavigationBarCreated(SetupWizardNavBar bar) {
-        SetupWizardUtils.setImmersiveMode(this);
-        bar.getNextButton().setEnabled(false);
-    }
-
-    @Override
-    public void onNavigateBack() {
-        onBackPressed();
-    }
-
-    @Override
-    public void onNavigateNext() {
-    }
-
-    public static class SetupChooseLockGenericFragment extends ChooseLockGenericFragment {
+    public static class SetupChooseLockGenericFragment extends ChooseLockGenericFragment
+            implements NavigationBar.NavigationBarListener {
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            final View view = inflater.inflate(R.layout.setup_preference, container, false);
-            ListView list = (ListView) view.findViewById(android.R.id.list);
-            View title = view.findViewById(R.id.title);
-            if (title == null) {
-                final View header = inflater.inflate(R.layout.setup_wizard_header, list, false);
-                list.addHeaderView(header, null, false);
-            }
+            final SetupWizardListLayout layout = (SetupWizardListLayout) inflater.inflate(
+                    R.layout.setup_choose_lock_generic, container, false);
+            layout.setHeaderText(getActivity().getTitle());
+            ListView list = layout.getListView();
             final FingerprintManager fpm = (FingerprintManager)
                     getActivity().getSystemService(Context.FINGERPRINT_SERVICE);
             if (fpm != null && fpm.isHardwareDetected()) {
@@ -90,15 +74,18 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric
                         R.layout.setup_screen_lock_fingerprint_details, list, false);
                 list.addFooterView(footer, null, false);
             }
-            return view;
+
+            final NavigationBar navigationBar = layout.getNavigationBar();
+            navigationBar.getNextButton().setEnabled(false);
+            navigationBar.setNavigationBarListener(this);
+
+            return layout;
         }
 
         @Override
         public void onViewCreated(View view, Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
-            SetupWizardUtils.setIllustration(getActivity(),
-                    R.drawable.setup_illustration_lock_screen);
-            SetupWizardUtils.setHeaderText(getActivity(), getActivity().getTitle());
+            SetupWizardUtils.setImmersiveMode(getActivity());
         }
 
         @Override
@@ -191,6 +178,18 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric
                     required);
             SetupWizardUtils.copySetupExtras(getActivity().getIntent(), intent);
             return intent;
+        }
+
+        @Override
+        public void onNavigateBack() {
+            Activity activity = getActivity();
+            if (activity != null) {
+                activity.onBackPressed();
+            }
+        }
+
+        @Override
+        public void onNavigateNext() {
         }
     }
 }

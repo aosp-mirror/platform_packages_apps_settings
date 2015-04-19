@@ -16,8 +16,10 @@
 
 package com.android.settings;
 
-import com.android.setupwizard.navigationbar.SetupWizardNavBar;
+import com.android.setupwizardlib.SetupWizardLayout;
+import com.android.setupwizardlib.view.NavigationBar;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
@@ -35,8 +37,7 @@ import android.widget.Button;
  * Other changes should be done to ChooseLockPattern class instead and let this class inherit
  * those changes.
  */
-public class SetupChooseLockPattern extends ChooseLockPattern
-        implements SetupWizardNavBar.NavigationBarListener {
+public class SetupChooseLockPattern extends ChooseLockPattern {
 
     public static Intent createIntent(Context context, boolean requirePassword,
             boolean confirmCredentials) {
@@ -58,9 +59,6 @@ public class SetupChooseLockPattern extends ChooseLockPattern
         return intent;
     }
 
-    private SetupWizardNavBar mNavigationBar;
-    private SetupChooseLockPatternFragment mFragment;
-
     @Override
     protected boolean isValidFragment(String fragmentName) {
         return SetupChooseLockPatternFragment.class.getName().equals(fragmentName);
@@ -77,43 +75,21 @@ public class SetupChooseLockPattern extends ChooseLockPattern
         super.onApplyThemeResource(theme, resid, first);
     }
 
-    @Override
-    public void onNavigationBarCreated(SetupWizardNavBar bar) {
-        mNavigationBar = bar;
-        SetupWizardUtils.setImmersiveMode(this);
-    }
+    public static class SetupChooseLockPatternFragment extends ChooseLockPatternFragment
+            implements NavigationBar.NavigationBarListener {
 
-    @Override
-    public void onNavigateBack() {
-        onBackPressed();
-    }
-
-    @Override
-    public void onNavigateNext() {
-        if (mFragment != null) {
-            mFragment.handleRightButton();
-        }
-    }
-
-    @Override
-    public void onAttachFragment(Fragment fragment) {
-        super.onAttachFragment(fragment);
-        if (fragment instanceof ChooseLockPatternFragment) {
-            mFragment = (SetupChooseLockPatternFragment) fragment;
-        }
-    }
-
-    public static class SetupChooseLockPatternFragment extends ChooseLockPatternFragment {
-
+        private NavigationBar mNavigationBar;
         private Button mRetryButton;
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            final View view = inflater.inflate(R.layout.setup_template, container, false);
-            ViewGroup setupContent = (ViewGroup) view.findViewById(R.id.setup_content);
-            inflater.inflate(R.layout.setup_choose_lock_pattern, setupContent, true);
-            return view;
+            final SetupWizardLayout layout = (SetupWizardLayout) inflater.inflate(
+                    R.layout.setup_choose_lock_pattern, container, false);
+            mNavigationBar = layout.getNavigationBar();
+            mNavigationBar.setNavigationBarListener(this);
+            layout.setHeaderText(getActivity().getTitle());
+            return layout;
         }
 
         @Override
@@ -121,9 +97,7 @@ public class SetupChooseLockPattern extends ChooseLockPattern
             mRetryButton = (Button) view.findViewById(R.id.retryButton);
             mRetryButton.setOnClickListener(this);
             super.onViewCreated(view, savedInstanceState);
-            SetupWizardUtils.setIllustration(getActivity(),
-                    R.drawable.setup_illustration_lock_screen);
-            SetupWizardUtils.setHeaderText(getActivity(), getActivity().getTitle());
+            SetupWizardUtils.setImmersiveMode(getActivity());
         }
 
         @Override
@@ -144,14 +118,12 @@ public class SetupChooseLockPattern extends ChooseLockPattern
 
         @Override
         protected void setRightButtonEnabled(boolean enabled) {
-            SetupChooseLockPattern activity = (SetupChooseLockPattern) getActivity();
-            activity.mNavigationBar.getNextButton().setEnabled(enabled);
+            mNavigationBar.getNextButton().setEnabled(enabled);
         }
 
         @Override
         protected void setRightButtonText(int text) {
-            SetupChooseLockPattern activity = (SetupChooseLockPattern) getActivity();
-            activity.mNavigationBar.getNextButton().setText(text);
+            mNavigationBar.getNextButton().setText(text);
         }
 
         @Override
@@ -159,6 +131,19 @@ public class SetupChooseLockPattern extends ChooseLockPattern
             super.updateStage(stage);
             // Only enable the button for retry
             mRetryButton.setEnabled(stage == Stage.FirstChoiceValid);
+        }
+
+        @Override
+        public void onNavigateBack() {
+            final Activity activity = getActivity();
+            if (activity != null) {
+                activity.onBackPressed();
+            }
+        }
+
+        @Override
+        public void onNavigateNext() {
+            handleRightButton();
         }
     }
 }

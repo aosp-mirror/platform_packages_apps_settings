@@ -17,8 +17,10 @@
 package com.android.settings;
 
 import com.android.settings.notification.RedactionInterstitial;
-import com.android.setupwizard.navigationbar.SetupWizardNavBar;
+import com.android.setupwizardlib.SetupWizardLayout;
+import com.android.setupwizardlib.view.NavigationBar;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -34,8 +36,7 @@ import android.view.ViewGroup;
  * Wizard. Other changes should be done to RedactionInterstitial class instead and let this class
  * inherit those changes.
  */
-public class SetupRedactionInterstitial extends RedactionInterstitial
-        implements SetupWizardNavBar.NavigationBarListener{
+public class SetupRedactionInterstitial extends RedactionInterstitial {
 
     public static Intent createStartIntent(Context ctx) {
         Intent startIntent = RedactionInterstitial.createStartIntent(ctx);
@@ -64,41 +65,43 @@ public class SetupRedactionInterstitial extends RedactionInterstitial
         super.onApplyThemeResource(theme, resid, first);
     }
 
-    @Override
-    public void onNavigationBarCreated(SetupWizardNavBar bar) {
-        SetupWizardUtils.setImmersiveMode(this);
-        bar.getBackButton().setEnabled(false);
-    }
-
-    @Override
-    public void onNavigateBack() {
-        onBackPressed();
-    }
-
-    @Override
-    public void onNavigateNext() {
-        setResult(RESULT_OK, getResultIntentData());
-        finish();
-    }
-
-    public static class SetupEncryptionInterstitialFragment extends RedactionInterstitialFragment {
+    public static class SetupEncryptionInterstitialFragment extends RedactionInterstitialFragment
+            implements NavigationBar.NavigationBarListener {
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            View view = inflater.inflate(R.layout.setup_template, container, false);
-            ViewGroup setupContent = (ViewGroup) view.findViewById(R.id.setup_content);
-            View content = super.onCreateView(inflater, setupContent, savedInstanceState);
-            setupContent.addView(content);
-            return view;
+            final SetupWizardLayout layout = new SetupWizardLayout(inflater.getContext());
+            layout.setIllustration(R.drawable.setup_illustration_lock_screen,
+                    R.drawable.setup_illustration_horizontal_tile);
+            layout.setBackgroundTile(R.drawable.setup_illustration_tile);
+            layout.setHeaderText(R.string.notification_section_header);
+
+            View content = super.onCreateView(inflater, layout, savedInstanceState);
+            layout.addView(content);
+
+            final NavigationBar navigationBar = layout.getNavigationBar();
+            navigationBar.setNavigationBarListener(this);
+            navigationBar.getBackButton().setEnabled(false);
+            SetupWizardUtils.setImmersiveMode(getActivity());
+            return layout;
         }
 
         @Override
-        public void onViewCreated(View view, Bundle savedInstanceState) {
-            super.onViewCreated(view, savedInstanceState);
-            SetupWizardUtils.setIllustration(getActivity(),
-                    R.drawable.setup_illustration_lock_screen);
-            SetupWizardUtils.setHeaderText(getActivity(), R.string.notification_section_header);
+        public void onNavigateBack() {
+            final Activity activity = getActivity();
+            if (activity != null) {
+                activity.onBackPressed();
+            }
+        }
+
+        @Override
+        public void onNavigateNext() {
+            final SetupRedactionInterstitial activity = (SetupRedactionInterstitial) getActivity();
+            if (activity != null) {
+                activity.setResult(RESULT_OK, activity.getResultIntentData());
+                finish();
+            }
         }
     }
 }

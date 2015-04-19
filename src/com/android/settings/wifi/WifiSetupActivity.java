@@ -35,11 +35,10 @@ import android.util.Log;
 import com.android.settings.ButtonBarHandler;
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
-import com.android.setupwizard.navigationbar.SetupWizardNavBar;
-import com.android.setupwizard.navigationbar.SetupWizardNavBar.NavigationBarListener;
+import com.android.setupwizardlib.view.NavigationBar;
 
 public class WifiSetupActivity extends WifiPickerActivity
-        implements ButtonBarHandler, NavigationBarListener {
+        implements ButtonBarHandler, NavigationBar.NavigationBarListener {
     private static final String TAG = "WifiSetupActivity";
 
     // this boolean extra specifies whether to auto finish when connection is established
@@ -72,7 +71,7 @@ public class WifiSetupActivity extends WifiPickerActivity
     // Whether the device is connected to WiFi
     private boolean mWifiConnected;
 
-    private SetupWizardNavBar mNavigationBar;
+    private NavigationBar mNavigationBar;
 
     private IntentFilter mFilter = new IntentFilter();
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
@@ -209,9 +208,9 @@ public class WifiSetupActivity extends WifiPickerActivity
         }
     }
 
-    @Override
-    public void onNavigationBarCreated(final SetupWizardNavBar bar) {
+    public void onNavigationBarCreated(final NavigationBar bar) {
         mNavigationBar = bar;
+        bar.setNavigationBarListener(this);
         SetupWizardUtils.setImmersiveMode(this);
     }
 
