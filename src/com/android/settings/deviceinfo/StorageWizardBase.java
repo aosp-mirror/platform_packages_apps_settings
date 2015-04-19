@@ -57,7 +57,7 @@ public abstract class StorageWizardBase extends Activity implements NavigationBa
         if (!TextUtils.isEmpty(diskId)) {
             mDisk = mStorage.findDiskById(diskId);
         } else {
-            mDisk = mStorage.findDiskById(mVolume.getDiskId());
+            mDisk = mVolume.getDisk();
         }
 
         setTheme(R.style.SuwThemeMaterial_Light);
