@@ -48,7 +48,9 @@
 
     <!-- Network reset -->
     <PreferenceScreen
+        android:key="network_reset"
         android:title="@string/reset_network_title"
+        settings:keywords="@string/keywords_network_reset"
         android:fragment="com.android.settings.ResetNetwork" />
 
     <!-- Factory reset -->
