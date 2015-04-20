@@ -80,7 +80,8 @@ public class SimDialogActivity extends Activity {
     private void displayPreferredDialog(final int slotId) {
         final Resources res = getResources();
         final Context context = getApplicationContext();
-        final SubscriptionInfo sir = Utils.findRecordBySlotId(context, slotId);
+        final SubscriptionInfo sir = SubscriptionManager.from(context)
+                .getActiveSubscriptionInfoForSimSlotIndex(slotId);
 
         if (sir != null) {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
@@ -214,7 +215,8 @@ public class SimDialogActivity extends Activity {
                 list.add((String)phoneAccount.getLabel());
                 int subId = telephonyManager.getSubIdForPhoneAccount(phoneAccount);
                 if (subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-                    final SubscriptionInfo sir = Utils.findRecordBySubId(context, subId);
+                    final SubscriptionInfo sir = SubscriptionManager.from(context)
+                            .getActiveSubscriptionInfo(subId);
                     callsSubInfoList.add(sir);
                 } else {
                     callsSubInfoList.add(null);

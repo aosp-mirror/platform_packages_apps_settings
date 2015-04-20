@@ -132,9 +132,9 @@ public class SimStatus extends InstrumentedPreferenceActivity {
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        mTelephonyManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
 
-        mSelectableSubInfos = new ArrayList<SubscriptionInfo>();
-        mTelephonyManager = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);
+        mSelectableSubInfos = SubscriptionManager.from(this).getActiveSubscriptionInfoList();
 
         addPreferencesFromResource(R.xml.device_info_sim_status);
 
@@ -142,13 +142,6 @@ public class SimStatus extends InstrumentedPreferenceActivity {
         mDefaultText = mRes.getString(R.string.device_info_default);
         // Note - missing in zaku build, be careful later...
         mSignalStrength = findPreference(KEY_SIGNAL_STRENGTH);
-
-        for (int i = 0; i < mTelephonyManager.getSimCount(); i++) {
-            final SubscriptionInfo sir = Utils.findRecordBySlotId(this, i);
-            if (sir != null) {
-                mSelectableSubInfos.add(sir);
-            }
-        }
 
         mSir = mSelectableSubInfos.size() > 0 ? mSelectableSubInfos.get(0) : null;
         if (mSelectableSubInfos.size() > 1) {
@@ -351,10 +344,8 @@ public class SimStatus extends InstrumentedPreferenceActivity {
         }
         // If formattedNumber is null or empty, it'll display as "Unknown".
         setSummaryText(KEY_PHONE_NUMBER, formattedNumber);
-        final String imei = mPhone.getPhoneType() == TelephonyManager.PHONE_TYPE_CDMA
-                ? mPhone.getImei() : mPhone.getDeviceId();
-        setSummaryText(KEY_IMEI, imei);
-        setSummaryText(KEY_IMEI_SV, mTelephonyManager.getDeviceSoftwareVersion(/*slotId*/));
+        setSummaryText(KEY_IMEI, mPhone.getImei());
+        setSummaryText(KEY_IMEI_SV, mPhone.getDeviceSvn());
 
         if (!mShowLatestAreaInfo) {
             removePreferenceFromScreen(KEY_LATEST_AREA_INFO);

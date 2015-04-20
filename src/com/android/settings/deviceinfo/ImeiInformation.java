@@ -89,10 +89,8 @@ public class ImeiInformation extends InstrumentedPreferenceActivity {
                     removePreferenceFromScreen(KEY_ICC_ID);
                 }
             } else {
-                setSummaryText(KEY_IMEI, phone.getDeviceId());
-                setSummaryText(KEY_IMEI_SV,
-                        ((TelephonyManager) getSystemService(TELEPHONY_SERVICE))
-                        .getDeviceSoftwareVersion(phoneId));
+                setSummaryText(KEY_IMEI, phone.getImei());
+                setSummaryText(KEY_IMEI_SV, phone.getDeviceSvn());
                 // device is not CDMA, do not display CDMA features
                 // check Null in case no specified preference in overlay xml
                 removePreferenceFromScreen(KEY_PRL_VERSION);

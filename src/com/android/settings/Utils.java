@@ -1029,49 +1029,6 @@ public final class Utils {
     }
 
     /**
-     * finds a record with subId.
-     * Since the number of SIMs are few, an array is fine.
-     */
-    public static SubscriptionInfo findRecordBySubId(Context context, final int subId) {
-        final List<SubscriptionInfo> subInfoList =
-                SubscriptionManager.from(context).getActiveSubscriptionInfoList();
-        if (subInfoList != null) {
-            final int subInfoLength = subInfoList.size();
-
-            for (int i = 0; i < subInfoLength; ++i) {
-                final SubscriptionInfo sir = subInfoList.get(i);
-                if (sir != null && sir.getSubscriptionId() == subId) {
-                    return sir;
-                }
-            }
-        }
-
-        return null;
-    }
-
-    /**
-     * finds a record with slotId.
-     * Since the number of SIMs are few, an array is fine.
-     */
-    public static SubscriptionInfo findRecordBySlotId(Context context, final int slotId) {
-        final List<SubscriptionInfo> subInfoList =
-                SubscriptionManager.from(context).getActiveSubscriptionInfoList();
-        if (subInfoList != null) {
-            final int subInfoLength = subInfoList.size();
-
-            for (int i = 0; i < subInfoLength; ++i) {
-                final SubscriptionInfo sir = subInfoList.get(i);
-                if (sir.getSimSlotIndex() == slotId) {
-                    //Right now we take the first subscription on a SIM.
-                    return sir;
-                }
-            }
-        }
-
-        return null;
-    }
-
-    /**
      * Queries for the UserInfo of a user. Returns null if the user doesn't exist (was removed).
      * @param userManager Instance of UserManager
      * @param checkUser The user to check the existence of.
