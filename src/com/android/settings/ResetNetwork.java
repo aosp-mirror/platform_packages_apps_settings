@@ -26,6 +26,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.SystemProperties;
+import android.os.Process;
 import android.os.UserManager;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
@@ -191,6 +192,12 @@ public class ResetNetwork extends InstrumentedFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
+        if (!Process.myUserHandle().isOwner()
+                || UserManager.get(getActivity()).hasUserRestriction(
+                UserManager.DISALLOW_NETWORK_RESET)) {
+            return inflater.inflate(R.layout.network_reset_disallowed_screen, null);
+        }
+
         mContentView = inflater.inflate(R.layout.reset_network, null);
 
         establishInitialState();

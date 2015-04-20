@@ -22,6 +22,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkPolicyManager;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.os.UserManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
@@ -108,6 +109,10 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
+        if (UserManager.get(getActivity()).hasUserRestriction(
+                UserManager.DISALLOW_NETWORK_RESET)) {
+            return inflater.inflate(R.layout.network_reset_disallowed_screen, null);
+        }
         mContentView = inflater.inflate(R.layout.reset_network_confirm, null);
         establishFinalConfirmationState();
         return mContentView;
