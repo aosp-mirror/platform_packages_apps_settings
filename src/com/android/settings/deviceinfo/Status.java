@@ -72,7 +72,7 @@ public class Status extends InstrumentedPreferenceActivity {
     // Broadcasts to listen to for connectivity changes.
     private static final String[] CONNECTIVITY_INTENTS = {
             BluetoothAdapter.ACTION_STATE_CHANGED,
-            ConnectivityManager.CONNECTIVITY_ACTION_IMMEDIATE,
+            ConnectivityManager.CONNECTIVITY_ACTION,
             WifiManager.LINK_CONFIGURATION_CHANGED_ACTION,
             WifiManager.NETWORK_STATE_CHANGED_ACTION,
     };
