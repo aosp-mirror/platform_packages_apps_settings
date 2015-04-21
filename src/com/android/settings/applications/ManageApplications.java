@@ -312,7 +312,9 @@ public class ManageApplications extends InstrumentedFragment
             mFilterAdapter.enableFilter(FILTER_APPS_PRIORITY);
             mFilterAdapter.enableFilter(FILTER_APPS_SENSITIVE);
         }
-        mApplications.setOverrideFilter(new VolumeFilter(mVolumeUuid));
+        if (mListType == LIST_TYPE_STORAGE) {
+            mApplications.setOverrideFilter(new VolumeFilter(mVolumeUuid));
+        }
     }
 
     @Override
