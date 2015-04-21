@@ -125,7 +125,7 @@ public class WifiSetupActivity extends WifiPickerActivity
         if (isWifiConnected()) {
             if (mAutoFinishOnConnection && mUserSelectedNetwork) {
                 Log.d(TAG, "Auto-finishing with connection");
-                finishOrNext(Activity.RESULT_OK);
+                finish(Activity.RESULT_OK);
                 // Require a user selection before auto-finishing next time we are here. The user
                 // can either connect to a different network or press "next" to proceed.
                 mUserSelectedNetwork = false;
@@ -195,18 +195,12 @@ public class WifiSetupActivity extends WifiPickerActivity
     }
 
     /**
-     * Complete this activity and return the results to the caller. If using WizardManager, this
-     * will invoke the next scripted action; otherwise, we simply finish.
+     * Complete this activity and return the results to the caller.
      */
-    public void finishOrNext(int resultCode) {
-        Log.d(TAG, "finishOrNext resultCode=" + resultCode
-                + " isUsingWizardManager=" + SetupWizardUtils.isUsingWizardManager(this));
-        if (SetupWizardUtils.isUsingWizardManager(this)) {
-            SetupWizardUtils.sendResultsToSetupWizard(this, resultCode);
-        } else {
-            setResult(resultCode);
-            finish();
-        }
+    public void finish(int resultCode) {
+        Log.d(TAG, "finishing, resultCode=" + resultCode);
+        setResult(resultCode);
+        finish();
     }
 
     @Override
@@ -223,7 +217,7 @@ public class WifiSetupActivity extends WifiPickerActivity
     @Override
     public void onNavigateNext() {
         if (mWifiConnected) {
-            finishOrNext(RESULT_OK);
+            finish(RESULT_OK);
         } else {
             // Warn of possible data charges if there is a network connection, or lack of updates
             // if there is none.
@@ -271,7 +265,7 @@ public class WifiSetupActivity extends WifiPickerActivity
                                 @Override
                                 public void onClick(DialogInterface dialog, int id) {
                                     WifiSetupActivity activity = (WifiSetupActivity) getActivity();
-                                    activity.finishOrNext(RESULT_SKIP);
+                                    activity.finish(RESULT_SKIP);
                                 }
                             })
                     .setNegativeButton(R.string.wifi_dont_skip,

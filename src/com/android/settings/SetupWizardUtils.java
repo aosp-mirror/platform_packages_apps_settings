@@ -33,22 +33,9 @@ public class SetupWizardUtils {
 
     // From WizardManager (must match constants maintained there)
     public static final String EXTRA_SCRIPT_URI = "scriptUri";
-    public static final int NEXT_REQUEST = 10000;
 
     public static boolean isUsingWizardManager(Activity activity) {
         return activity.getIntent().hasExtra(EXTRA_SCRIPT_URI);
-    }
-
-    /**
-     * Send the results of this activity to WizardManager, which will then send out the next
-     * scripted activity. WizardManager does not actually return an activity result, but if we
-     * invoke WizardManager without requesting a result, the framework will choose not to issue a
-     * call to onActivityResult with RESULT_CANCELED when navigating backward.
-     */
-    public static void sendResultsToSetupWizard(Activity activity, int resultCode) {
-        final Intent intent = activity.getIntent();
-        final Intent nextIntent = WizardManagerHelper.getNextIntent(intent, resultCode);
-        activity.startActivityForResult(nextIntent, NEXT_REQUEST);
     }
 
     public static int getTheme(Intent intent) {
