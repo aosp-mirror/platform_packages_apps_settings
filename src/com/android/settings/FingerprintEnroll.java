@@ -31,7 +31,6 @@ import android.os.Bundle;
 import android.os.CancellationSignal;
 import android.os.PowerManager;
 import android.os.SystemClock;
-import android.os.Vibrator;
 import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.fingerprint.FingerprintManager.EnrollmentCallback;
 import android.util.Log;
@@ -101,7 +100,6 @@ public class FingerprintEnroll extends SettingsActivity {
         private Stage mStage;
         private int mEnrollmentSteps;
         private boolean mEnrolling;
-        private Vibrator mVibrator;
         private ProgressBar mProgressBar;
         private ImageView mFingerprintAnimator;
         private ObjectAnimator mProgressAnim;
@@ -289,11 +287,6 @@ public class FingerprintEnroll extends SettingsActivity {
 
         private void updateProgress(int progress) {
             if (DEBUG) Log.v(TAG, "Progress: " + progress);
-            if (mVibrator != null) {
-                mVibrator.vibrate(100, new AudioAttributes.Builder()
-                        .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                        .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION).build());
-            }
             if (mProgressAnim != null) {
                 mProgressAnim.cancel();
             }
@@ -367,7 +360,6 @@ public class FingerprintEnroll extends SettingsActivity {
             final Activity activity = getActivity();
             mFingerprintManager = (FingerprintManager)activity
                     .getSystemService(Context.FINGERPRINT_SERVICE);
-            mVibrator = (Vibrator) activity.getSystemService(Context.VIBRATOR_SERVICE);
             mPowerManager = (PowerManager) activity.getSystemService(Context.POWER_SERVICE);
 
             mContentView = inflater.inflate(R.layout.fingerprint_enroll, null);
