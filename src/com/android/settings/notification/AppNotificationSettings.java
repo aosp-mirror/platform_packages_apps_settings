@@ -154,6 +154,9 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 final boolean banned = (Boolean) newValue;
+                if (banned) {
+                    MetricsLogger.action(getActivity(), MetricsLogger.ACTION_BAN_APP_NOTES, pkg);
+                }
                 final boolean success =  mBackend.setNotificationsBanned(pkg, uid, banned);
                 if (success) {
                     updateDependents(banned);
