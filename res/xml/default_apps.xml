@@ -25,6 +25,12 @@
             android:summary="@string/default_browser_title_none"
             />
 
+    <com.android.settings.applications.DefaultDialerPreference
+            android:key="default_dialer"
+            android:title="@string/default_dialer_title"
+            settings:keywords="@string/keywords_default_dialer_app"
+            />
+
     <com.android.settings.applications.DefaultEmergencyPreference
             android:key="default_emergency_app"
             android:title="@string/default_emergency_app"
