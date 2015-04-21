@@ -27,9 +27,8 @@
             android:summary="@string/unlock_set_unlock_mode_none"
             android:persistent="false"/>
 
-        <PreferenceScreen
+        <com.android.settings.SingleLineSummaryPreference
             android:key="owner_info_settings"
-            android:fragment="com.android.settings.OwnerInfoSettings"
             android:title="@string/owner_info_settings_title"
             android:summary="@string/owner_info_settings_summary"/>
 

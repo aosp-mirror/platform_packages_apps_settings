@@ -700,17 +700,17 @@
     <!-- Text shown next to checkbox for showing owner info on LockScreen [CHAR LIMIT=50]-->
     <string name="show_owner_info_on_lockscreen_label">Show owner info on lock screen</string>
     <!-- Text shown for title of owner info setting [CHAR LIMIT=20]-->
-    <string name="owner_info_settings_title">Owner info</string>
+    <string name="owner_info_settings_title">Lock screen message</string>
     <!-- Text shown for title of settings checkbox to enable widgets [CHAR LIMIT=20]-->
     <string name="security_enable_widgets_title">Enable widgets</string>
     <!-- Summary for settings checkbox to disable widgets when the setting has been disabled by an installed device admin [CHAR LIMIT=50] -->
     <string name="security_enable_widgets_disabled_summary">Disabled by administrator</string>
-    <!-- Text shown for summary of owner info setting [CHAR LIMIT=40]-->
-    <string name="owner_info_settings_summary"></string>
+    <!-- Text shown for summary of owner info setting (if none set) [CHAR LIMIT=40]-->
+    <string name="owner_info_settings_summary">None</string>
+    <!-- Description of how many characters are used in owner info [CHAR LIMIT=40]-->
+    <string name="owner_info_settings_status"><xliff:g id="count" example="90">%1$d</xliff:g> / <xliff:g id="count" example="100">%2$d</xliff:g></string>
     <!-- Hint text shown in owner info edit text [CHAR LIMIT=50] -->
-    <string name="owner_info_settings_edit_text_hint">Type text to display on the lock screen</string>
-    <!-- Text shown next to checkbox for showing user info on LockScreen [CHAR LIMIT=50]-->
-    <string name="show_user_info_on_lockscreen_label">Show user info on lock screen</string>
+    <string name="owner_info_settings_edit_text_hint">E.g., Joe\'s Android.</string>
     <!-- Text shown for title of user info setting [CHAR LIMIT=20]-->
     <string name="user_info_settings_title">User info</string>
     <!-- Text shown next to checkbox for showing profile info on LockScreen [CHAR LIMIT=50]-->
