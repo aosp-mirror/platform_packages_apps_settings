@@ -21,11 +21,13 @@ import com.android.settings.R;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.VoiceInteractor;
+import android.app.VoiceInteractor.AbortVoiceRequest;
 import android.app.VoiceInteractor.CompleteVoiceRequest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.util.Log;
 
 /**
@@ -65,6 +67,10 @@ abstract public class VoiceSettingsActivity extends Activity {
      * not null, then it will be read to the user.
      */
     protected void notifySuccess(CharSequence prompt) {
+        if (prompt != null) {
+            Toast.makeText(this, prompt, Toast.LENGTH_LONG).show();
+        }
+
         if (getVoiceInteractor() != null) {
             getVoiceInteractor().submitRequest(new CompleteVoiceRequest(prompt, null));
         }
@@ -85,8 +91,14 @@ abstract public class VoiceSettingsActivity extends Activity {
     /**
      * Indicates when the setting could not be changed.
      */
-    protected void notifyFailure(String reason) {
-        getVoiceInteractor().submitRequest(new VoiceInteractor.AbortVoiceRequest(reason, null));
+    protected void notifyFailure(CharSequence prompt) {
+        if (prompt != null) {
+            Toast.makeText(this, prompt, Toast.LENGTH_LONG).show();
+        }
+
+        if (getVoiceInteractor() != null) {
+            getVoiceInteractor().submitRequest(new AbortVoiceRequest(prompt, null));
+        }
     }
 
     protected void showFragment(Fragment fragment, String tag) {
