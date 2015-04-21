@@ -102,6 +102,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     // Instance state keys
     private static final String SAVE_DIALOG_EDIT_MODE = "edit_mode";
     private static final String SAVE_DIALOG_ACCESS_POINT_STATE = "wifi_ap_state";
+    private static final String SAVED_WIFI_NFC_DIALOG_STATE = "wifi_nfc_dlg_state";
 
     private static boolean savedNetworksExist;
 
@@ -133,6 +134,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     private boolean mDlgEdit;
     private AccessPoint mDlgAccessPoint;
     private Bundle mAccessPointSavedState;
+    private Bundle mWifiNfcDialogSavedState;
 
     private WifiTracker mWifiTracker;
 
@@ -199,6 +201,11 @@ public class WifiSettings extends RestrictedSettingsFragment
             if (savedInstanceState.containsKey(SAVE_DIALOG_ACCESS_POINT_STATE)) {
                 mAccessPointSavedState =
                     savedInstanceState.getBundle(SAVE_DIALOG_ACCESS_POINT_STATE);
+            }
+
+            if (savedInstanceState.containsKey(SAVED_WIFI_NFC_DIALOG_STATE)) {
+                mWifiNfcDialogSavedState =
+                    savedInstanceState.getBundle(SAVED_WIFI_NFC_DIALOG_STATE);
             }
         }
 
@@ -340,6 +347,12 @@ public class WifiSettings extends RestrictedSettingsFragment
                 mDlgAccessPoint.saveWifiState(mAccessPointSavedState);
                 outState.putBundle(SAVE_DIALOG_ACCESS_POINT_STATE, mAccessPointSavedState);
             }
+        }
+
+        if (mWifiToNfcDialog != null && mWifiToNfcDialog.isShowing()) {
+            Bundle savedState = new Bundle();
+            mWifiToNfcDialog.saveState(savedState);
+            outState.putBundle(SAVED_WIFI_NFC_DIALOG_STATE, savedState);
         }
     }
 
@@ -530,10 +543,15 @@ public class WifiSettings extends RestrictedSettingsFragment
             case WRITE_NFC_DIALOG_ID:
                 if (mSelectedAccessPoint != null) {
                     mWifiToNfcDialog = new WriteWifiConfigToNfcDialog(
-                            getActivity(), mSelectedAccessPoint, mWifiManager);
-                    return mWifiToNfcDialog;
+                            getActivity(), mSelectedAccessPoint.getConfig().networkId,
+                            mSelectedAccessPoint.getSecurity(),
+                            mWifiManager);
+                } else if (mWifiNfcDialogSavedState != null) {
+                    mWifiToNfcDialog = new WriteWifiConfigToNfcDialog(
+                            getActivity(), mWifiNfcDialogSavedState, mWifiManager);
                 }
 
+                return mWifiToNfcDialog;
         }
         return super.onCreateDialog(dialogId);
     }
