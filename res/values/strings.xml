@@ -752,15 +752,20 @@
     <string name="security_settings_fingerprint_enroll_onboard_title">Fingerprint setup</string>
     <!-- Introduction message shown in fingerprint enrollment dialog when the user needs to choose an
          alternate screen unlock (pin, pattern or password) as a backup to fingerprint. -->
-    <string name="security_settings_fingerprint_enroll_onboard_message">
-        To use your fingerprint to unlock your screen or confirm purchases, we\'ll need to:
-        \n\n\u2713 Set up your backup screen lock method
-        \n\n\u2713 Add your fingerprint</string>
+    <string name="security_settings_fingerprint_enroll_onboard_message">To use your fingerprint to unlock your screen or confirm purchases, we\'ll need to:</string>
+    <!-- Introduction message shown in fingerprint enrollment dialog, first item to describe what
+         the user needs to do. -->
+    <string name="security_settings_fingerprint_enroll_onboard_message_1">Setup your backup screen lock method</string>
+    <!-- Introduction message shown in fingerprint enrollment dialog, second item to describe what
+         the user needs to do. -->
+    <string name="security_settings_fingerprint_enroll_onboard_message_2">Add your fingerprint</string>
     <!-- Introduction title shown in fingerprint enrollment dialog to locate the sensor [CHAR LIMIT=22] -->
     <string name="security_settings_fingerprint_enroll_find_sensor_title">Find the sensor</string>
     <!-- Introduction detail message shown in fingerprint enrollment dialog -->
     <string name="security_settings_fingerprint_enroll_find_sensor_message">
         Locate the fingerprint sensor on the back of your phone.</string>
+    <!-- Content description of graphic that shows where the fingerprint of the device is [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_enroll_find_sensor_content_description">Illustration with device and fingerprint sensor location</string>
     <!-- Label text shown in fingerprint dialog for renaming a fingerprint template [CHAR LIMIT=22] -->
     <string name="security_settings_fingerprint_enroll_dialog_name_label">Name</string>
     <!-- Button text shown in fingerprint dialog that allows the user to rename a fingerprint template [CHAR LIMIT=22] -->
@@ -779,8 +784,12 @@
     <string name="security_settings_fingerprint_enroll_finish_title">Fingerprint added!</string>
     <!-- Message shown in fingerprint enrollment dialog once enrollment is completed -->
     <string name="security_settings_fingerprint_enroll_finish_message">Whenever you see this icon, you can use your fingerprint for identification or to authorize a purchase.</string>
+    <!-- Button text to setup screen lock in onboard dialog [CHAR LIMIT=34] -->
+    <string name="security_settings_fingerprint_enroll_setup_screen_lock">Setup screen lock</string>
+    <!-- Button text to exit fingerprint wizard after everything is done [CHAR LIMIT=15] -->
+    <string name="security_settings_fingerprint_enroll_done">Done</string>
     <!-- Button text shown at the end of enrollment that allows the user to add another fingerprint -->
-    <string name="fingerprint_enroll_button_add">Add</string>
+    <string name="fingerprint_enroll_button_add">Add another</string>
     <!-- Button text shown at the end of enrollment that allows the user to move to the next step -->
     <string name="fingerprint_enroll_button_next">Next</string>
 

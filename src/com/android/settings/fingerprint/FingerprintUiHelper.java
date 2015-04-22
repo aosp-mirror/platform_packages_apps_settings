@@ -14,7 +14,7 @@
  * limitations under the License
  */
 
-package com.android.settings;
+package com.android.settings.fingerprint;
 
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.CancellationSignal;
@@ -22,6 +22,8 @@ import android.os.Vibrator;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.android.settings.R;
 
 /**
  * Small helper class to manage text/icon around fingerprint authentication UI.

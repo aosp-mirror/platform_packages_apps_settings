@@ -1365,8 +1365,11 @@
             android:windowSoftInputMode="stateVisible|adjustResize"
             android:theme="@style/Theme.ConfirmDeviceCredentials"/>
 
-        <activity android:name="FingerprintSettings" android:exported="false"/>
-        <activity android:name="FingerprintEnroll" android:exported="false"/>
+        <activity android:name=".fingerprint.FingerprintSettings" android:exported="false"/>
+        <activity android:name=".fingerprint.FingerprintEnrollOnboard" android:exported="false"/>
+        <activity android:name=".fingerprint.FingerprintEnrollFindSensor" android:exported="false"/>
+        <activity android:name=".fingerprint.FingerprintEnrollEnrolling" android:exported="false"/>
+        <activity android:name=".fingerprint.FingerprintEnrollFinish" android:exported="false"/>
 
         <!-- Note this must not be exported since it returns the password in the intent -->
         <activity android:name="ConfirmLockPattern$InternalActivity"

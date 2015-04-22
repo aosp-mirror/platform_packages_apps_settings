@@ -54,6 +54,9 @@ import android.util.Log;
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.TrustAgentUtils.TrustAgentComponentInfo;
+import com.android.settings.fingerprint.FingerprintEnrollFindSensor;
+import com.android.settings.fingerprint.FingerprintEnrollOnboard;
+import com.android.settings.fingerprint.FingerprintSettings;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Index;
 import com.android.settings.search.Indexable;
@@ -345,14 +348,19 @@ public class SecuritySettings extends SettingsPreferenceFragment
         final List<Fingerprint> items = fpm.getEnrolledFingerprints();
         final int fingerprintCount = items != null ? items.size() : 0;
         final String clazz;
+        boolean hasPassword = mChooseLockSettingsHelper.utils().getActivePasswordQuality()
+                != DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
         if (fingerprintCount > 0) {
             fingerprintPreference.setSummary(getResources().getQuantityString(
                     R.plurals.security_settings_fingerprint_preference_summary,
                     fingerprintCount, fingerprintCount));
             clazz = FingerprintSettings.class.getName();
+        } else if (!hasPassword) {
+            // No fingerprints registered, launch into enrollment wizard.
+            clazz = FingerprintEnrollOnboard.class.getName();
         } else {
-            // No fingerprints registered, launch directly into enrollment wizard
-            clazz = FingerprintEnroll.class.getName();
+            // Lock thingy is already set up, launch directly into find sensor step from wizard.
+            clazz = FingerprintEnrollFindSensor.class.getName();
         }
         intent.setClassName("com.android.settings", clazz);
         fingerprintPreference.setIntent(intent);

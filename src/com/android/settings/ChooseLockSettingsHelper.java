@@ -28,9 +28,9 @@ public final class ChooseLockSettingsHelper {
 
     static final String EXTRA_KEY_TYPE = "type";
     static final String EXTRA_KEY_PASSWORD = "password";
-    static final String EXTRA_KEY_HAS_CHALLENGE = "has_challenge";
-    static final String EXTRA_KEY_CHALLENGE = "challenge";
-    static final String EXTRA_KEY_CHALLENGE_TOKEN = "hw_auth_token";
+    public static final String EXTRA_KEY_HAS_CHALLENGE = "has_challenge";
+    public static final String EXTRA_KEY_CHALLENGE = "challenge";
+    public static final String EXTRA_KEY_CHALLENGE_TOKEN = "hw_auth_token";
 
 
     private LockPatternUtils mLockPatternUtils;
@@ -104,7 +104,7 @@ public final class ChooseLockSettingsHelper {
      * @return true if one exists and we launched an activity to confirm it
      * @see #onActivityResult(int, int, android.content.Intent)
      */
-    boolean launchConfirmationActivity(int request, @Nullable CharSequence title,
+    public boolean launchConfirmationActivity(int request, @Nullable CharSequence title,
             @Nullable CharSequence header, @Nullable CharSequence description,
             long challenge) {
         return launchConfirmationActivity(request, title, header, description,

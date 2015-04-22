@@ -17,12 +17,13 @@
 package com.android.settings;
 
 import android.annotation.Nullable;
-import android.app.Fragment;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.android.settings.fingerprint.FingerprintUiHelper;
 
 /**
  * Base fragment to be shared for PIN/Pattern/Password confirmation fragments.

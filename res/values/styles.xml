@@ -296,18 +296,26 @@
     <style name="TextAppearance.RecentsTitle" parent="TextAppearance.CategoryTitle" />
     <style name="TextAppearance.ResultTitle" parent="TextAppearance.CategoryTitle" />
 
-    <style name="TextAppearance.FingerprintTitle"
-        parent="android:TextAppearance.Material.Large.Inverse">
-        <item name="android:textStyle">bold</item>
-        <item name="android:textSize">24sp</item>
-        <item name="android:textColor">@color/fingerprint_title_color</item>
+    <style name="TextAppearance.FingerprintMessage"
+        parent="android:TextAppearance.Material.Subhead">
+        <item name="android:lineSpacingExtra">@dimen/suw_description_line_spacing_extra</item>
     </style>
 
-    <style name="TextAppearance.FingerprintMessage"
-        parent="android:TextAppearance.Material.Medium.Inverse">
-        <item name="android:textStyle">bold</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/fingerprint_message_color</item>
+    <style name="Button.FingerprintButton"
+        parent="android:Widget.Material.Button.Borderless">
+        <item name="android:lineSpacingExtra">@dimen/suw_description_line_spacing_extra</item>
+        <item name="android:textColor">?android:attr/colorAccent</item>
+    </style>
+
+    <style name="TextAppearance.FingerprintErrorText"
+        parent="android:TextAppearance.Material.Caption">
+        <item name="android:textColor">@color/warning</item>
+    </style>
+
+    <style name="SetupWizardFingerprintStyle">
+        <item name="suwBackground">@drawable/fp_enrollment_header</item>
+        <item name="suwIllustrationAspectRatio">@dimen/fingerprint_illustration_aspect_ratio</item>
+        <item name="suwDecorPaddingTop">@dimen/fingerprint_decor_padding_top</item>
     </style>
 
     <style name="TextAppearance.ConfirmDeviceCredentialsErrorText"
