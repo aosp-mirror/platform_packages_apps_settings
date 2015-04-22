@@ -146,45 +146,6 @@
         <item name="android:clickable">false</item>
     </style>
 
-    <!-- We'd like to have this as 16dip hight including paddingTop/paddingBottom to
-         be consistent with ProgressBar -->
-    <style name="TopDivider">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/divider_height</item>
-        <item name="android:background">?attr/setup_divider_color</item>
-        <item name="android:focusable">false</item>
-        <item name="android:clickable">false</item>
-        <item name="android:layout_marginTop">@dimen/divider_margin_top</item>
-        <item name="android:layout_marginBottom">@dimen/divider_margin_bottom</item>
-    </style>
-
-    <style name="SetupTitle">
-        <item name="android:layout_marginBottom">@dimen/setup_title_margin_bottom</item>
-        <item name="android:layout_marginEnd">@dimen/setup_wizard_margin_sides</item>
-        <item name="android:layout_marginStart">@dimen/setup_wizard_margin_sides</item>
-        <item name="android:clickable">false</item>
-        <item name="android:fontFamily">sans-serif</item>
-        <item name="android:lineSpacingExtra">@dimen/setup_title_line_spacing_extra</item>
-        <item name="android:longClickable">false</item>
-        <item name="android:textColor">@android:color/white</item>
-        <item name="android:textSize">@dimen/setup_title_size</item>
-        <item name="android:paddingBottom">@dimen/setup_title_padding_bottom</item>
-        <item name="android:paddingTop">@dimen/setup_title_padding_top</item>
-    </style>
-
-    <!-- Alternate title style used for some tablet layouts -->
-    <style name="SetupCardTitle">
-        <item name="android:paddingBottom">@dimen/setup_wizard_card_title_padding_bottom</item>
-        <item name="android:paddingEnd">@dimen/setup_wizard_card_title_padding_end</item>
-        <item name="android:paddingStart">@dimen/setup_wizard_card_title_padding_start</item>
-        <item name="android:paddingTop">@dimen/setup_wizard_card_title_padding_top</item>
-        <item name="android:textAppearance">@style/TextAppearance.SetupWizardCardTitle</item>
-    </style>
-
-    <style name="TextAppearance.SetupWizardCardTitle" parent="@android:style/TextAppearance.Material.Display1">
-        <item name="android:textColor">@android:color/white</item>
-    </style>
-
     <style name="TextAppearance.SetupWizardDescription" parent="@android:style/TextAppearance.Material.Subhead">
     </style>
 

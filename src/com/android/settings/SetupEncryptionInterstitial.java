@@ -16,8 +16,10 @@
 
 package com.android.settings;
 
-import com.android.setupwizard.navigationbar.SetupWizardNavBar;
+import com.android.setupwizardlib.SetupWizardLayout;
+import com.android.setupwizardlib.view.NavigationBar;
 
+import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
@@ -34,8 +36,7 @@ import android.view.ViewGroup;
  * Setup Wizard. Other changes should be done to EncryptionInterstitial class instead and let this
  * class inherit those changes.
  */
-public class SetupEncryptionInterstitial extends EncryptionInterstitial
-        implements SetupWizardNavBar.NavigationBarListener{
+public class SetupEncryptionInterstitial extends EncryptionInterstitial {
 
     public static Intent createStartIntent(Context ctx, int quality,
             boolean requirePasswordDefault) {
@@ -66,32 +67,29 @@ public class SetupEncryptionInterstitial extends EncryptionInterstitial
         super.onApplyThemeResource(theme, resid, first);
     }
 
-    @Override
-    public void onNavigationBarCreated(SetupWizardNavBar bar) {
-        SetupWizardUtils.setImmersiveMode(this);
-    }
-
-    @Override
-    public void onNavigateBack() {
-        onBackPressed();
-    }
-
-    @Override
-    public void onNavigateNext() {
-        setResult(RESULT_OK, getResultIntentData());
-        finish();
-    }
-
-    public static class SetupEncryptionInterstitialFragment extends EncryptionInterstitialFragment {
+    public static class SetupEncryptionInterstitialFragment extends EncryptionInterstitialFragment
+            implements NavigationBar.NavigationBarListener {
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            View view = inflater.inflate(R.layout.setup_template, container, false);
-            ViewGroup setupContent = (ViewGroup) view.findViewById(R.id.setup_content);
-            View content = super.onCreateView(inflater, setupContent, savedInstanceState);
-            setupContent.addView(content);
-            return view;
+            final SetupWizardLayout layout = new SetupWizardLayout(inflater.getContext());
+            layout.setIllustration(R.drawable.setup_illustration_lock_screen,
+                    R.drawable.setup_illustration_horizontal_tile);
+            layout.setBackgroundTile(R.drawable.setup_illustration_tile);
+            final int headerTextResource = getHeaderTextResource();
+            layout.setHeaderText(headerTextResource);
+
+            View content = super.onCreateView(inflater, layout, savedInstanceState);
+            layout.addView(content);
+            layout.getNavigationBar().setNavigationBarListener(this);
+
+            Activity activity = getActivity();
+            if (activity != null) {
+                activity.setTitle(headerTextResource);
+                SetupWizardUtils.setImmersiveMode(activity);
+            }
+            return layout;
         }
 
         private int getHeaderTextResource() {
@@ -108,13 +106,21 @@ public class SetupEncryptionInterstitial extends EncryptionInterstitial
         }
 
         @Override
-        public void onViewCreated(View view, Bundle savedInstanceState) {
-            super.onViewCreated(view, savedInstanceState);
-            SetupWizardUtils.setIllustration(getActivity(),
-                    R.drawable.setup_illustration_lock_screen);
-            final int title = getHeaderTextResource();
-            getActivity().setTitle(title);
-            SetupWizardUtils.setHeaderText(getActivity(), title);
+        public void onNavigateBack() {
+            final Activity activity = getActivity();
+            if (activity != null) {
+                activity.onBackPressed();
+            }
+        }
+
+        @Override
+        public void onNavigateNext() {
+            final SetupEncryptionInterstitial activity =
+                    (SetupEncryptionInterstitial) getActivity();
+            if (activity != null) {
+                activity.setResult(RESULT_OK, activity.getResultIntentData());
+                finish();
+            }
         }
     }
 }

@@ -16,17 +16,12 @@
 
 package com.android.settings;
 
-import com.android.settings.widget.SetupWizardIllustration;
 import com.android.setupwizardlib.util.SystemBarHelper;
 import com.android.setupwizardlib.util.WizardManagerHelper;
 
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
-import android.widget.TextView;
 
 public class SetupWizardUtils {
     private static final String TAG = "SetupWizardUtils";
@@ -62,42 +57,10 @@ public class SetupWizardUtils {
         SystemBarHelper.hideSystemBars(dialog);
     }
 
-    public static TextView getHeader(Activity activity) {
-        return (TextView) activity.findViewById(R.id.title);
-    }
-
-    public static void setHeaderText(Activity activity, int text) {
-        getHeader(activity).setText(text);
-    }
-
-    public static void setHeaderText(Activity activity, CharSequence text) {
-        getHeader(activity).setText(text);
-    }
-
     public static void copySetupExtras(Intent fromIntent, Intent toIntent) {
         toIntent.putExtra(WizardManagerHelper.EXTRA_THEME,
                 fromIntent.getStringExtra(WizardManagerHelper.EXTRA_THEME));
         toIntent.putExtra(WizardManagerHelper.EXTRA_USE_IMMERSIVE_MODE,
                 fromIntent.getBooleanExtra(WizardManagerHelper.EXTRA_USE_IMMERSIVE_MODE, false));
-    }
-
-    public static void setIllustration(Activity activity, int asset) {
-        SetupWizardIllustration illustration =
-                (SetupWizardIllustration) activity.findViewById(R.id.setup_illustration);
-        if (illustration != null) {
-            Drawable drawable = activity.getDrawable(R.drawable.setup_illustration);
-            Drawable newIllustration = activity.getDrawable(asset);
-            if (drawable instanceof LayerDrawable) {
-                LayerDrawable layers = (LayerDrawable) drawable;
-                Drawable oldIllustration = layers.findDrawableByLayerId(R.id.illustration_image);
-                if (newIllustration instanceof BitmapDrawable
-                        && oldIllustration instanceof BitmapDrawable) {
-                    final int gravity = ((BitmapDrawable) oldIllustration).getGravity();
-                    ((BitmapDrawable) newIllustration).setGravity(gravity);
-                }
-                layers.setDrawableByLayerId(R.id.illustration_image, newIllustration);
-                illustration.setForeground(layers);
-            }
-        }
     }
 }

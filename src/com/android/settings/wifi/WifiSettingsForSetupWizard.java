@@ -30,6 +30,8 @@ import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
+import com.android.setupwizardlib.SetupWizardListLayout;
+import com.android.setupwizardlib.view.NavigationBar;
 
 /**
  * This customized version of WifiSettings is shown to the user only during Setup Wizard. Menu
@@ -48,15 +50,9 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-
-        final View view = inflater.inflate(R.layout.setup_preference, container, false);
-
-        final ListView list = (ListView) view.findViewById(android.R.id.list);
-        final View title = view.findViewById(R.id.title);
-        if (title == null) {
-            final View header = inflater.inflate(R.layout.setup_wizard_header, list, false);
-            list.addHeaderView(header, null, false);
-        }
+        final SetupWizardListLayout layout = (SetupWizardListLayout) inflater.inflate(
+                R.layout.setup_wifi_layout, container, false);
+        final ListView list = layout.getListView();
 
         mAddOtherNetworkItem = inflater.inflate(R.layout.setup_wifi_add_network, list, false);
         list.addFooterView(mAddOtherNetworkItem, null, true);
@@ -69,18 +65,18 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
             }
         });
 
-        return view;
+        final NavigationBar navigationBar = layout.getNavigationBar();
+        if (navigationBar != null) {
+            WifiSetupActivity activity = (WifiSetupActivity) getActivity();
+            activity.onNavigationBarCreated(navigationBar);
+        }
+
+        return layout;
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        getView().setSystemUiVisibility(
-                View.STATUS_BAR_DISABLE_HOME |
-                View.STATUS_BAR_DISABLE_RECENT |
-                View.STATUS_BAR_DISABLE_NOTIFICATION_ALERTS |
-                View.STATUS_BAR_DISABLE_CLOCK);
 
         if (hasNextButton()) {
             getNextButton().setVisibility(View.GONE);
