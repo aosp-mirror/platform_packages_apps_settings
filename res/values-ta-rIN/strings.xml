@@ -552,6 +552,8 @@
     <string name="wifi_display_options_forget" msgid="9119048225398894580">"நீக்கு"</string>
     <string name="wifi_display_options_done" msgid="5703116500357822557">"முடிந்தது"</string>
     <string name="wifi_display_options_name" msgid="4756080222307467898">"பெயர்"</string>
+    <!-- no translation found for wifi_alert_lockdown_by_device_owner (5063705929160653088) -->
+    <skip />
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"டேப்லெட்டானது வேறொரு சாதனத்தைத் தொடும்போது தரவு பரிமாற்றத்தை அனுமதி"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"மொபைலானது வேறொரு சாதனத்தைத் தொடும்போது தரவு பரிமாற்றத்தை அனுமதிக்கவும்"</string>
@@ -612,7 +614,6 @@
     <string name="wifi_other_network" msgid="1484433183857764750">"வேறொரு நெட்வொர்க்கைச் சேர்"</string>
     <string name="wifi_more" msgid="3195296805089107950">"மேலும்"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"தானியங்கு அமைவு (WPS)"</string>
-    <string name="wifi_required_info_text" msgid="7442238187557620087">"அமைப்பை முடிக்க, டேப்லெட்டிற்கு வைஃபை அணுகல் வேண்டும். அமைத்த பிறகு, செல்லுலார் தரவு மற்றும் வைஃபை இடையே மாறலாம்."</string>
     <string name="wifi_show_advanced" msgid="3409422789616520979">"மேம்பட்ட விருப்பங்கள்"</string>
     <string name="wifi_wps_setup_title" msgid="8207552222481570175">"வைஃபை பாதுகாக்கப்பட்ட அமைவு"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"WPS ஐத் தொடங்குகிறது…"</string>
@@ -971,8 +972,8 @@
     <string name="storage_format_success" msgid="3023144070597190555">"<xliff:g id="NAME">%1$s</xliff:g> மீட்டமைக்கப்பட்டது"</string>
     <string name="storage_format_failure" msgid="8343688274191391889">"<xliff:g id="NAME">%1$s</xliff:g>ஐ மீட்டமைக்க முடியவில்லை"</string>
     <string name="storage_rename_title" msgid="8242663969839491485">"சேமிப்பகத்திற்கு மறுபெயரிடவும்"</string>
-    <string name="storage_internal_format_details" msgid="4018647158382548820">"மீட்டமைவுக்குப் பிறகு, <xliff:g id="NAME_0">^1</xliff:g>ஐ மற்ற சாதனங்களில் பயன்படுத்தலாம். \n\n<xliff:g id="NAME_1">^1</xliff:g> இல் உள்ள எல்லா தரவும் அழிக்கப்படும். அதனால் முதலில் காப்புப் பிரதி எடுத்துக்கொள்ளவும். \n\n"<b>"படங்கள் &amp; மற்ற மீடியாவைக் காப்புப் பிரதி எடுத்தல்"</b>" \nமீடியா கோப்புகளை சாதனத்தின் மாற்று சேமிப்பகத்திற்கு நகர்த்தவும் அல்லது USB கேபிளைப் பயன்படுத்தி கணினிக்கு மாற்றவும். \n\n"<b>"காப்புப் பிரதி பயன்பாடுகள்"</b>" \n<xliff:g id="NAME_6">^1</xliff:g> இல் சேமிக்கப்பட்ட எல்லா பயன்பாடுகளும் நிறுவல்நீக்கப்பட்டு அவற்றின் தரவு அழிக்கப்படும். இந்தப் பயன்பாடுகளை வைத்திருக்க, சாதனத்தின் மாற்று சேமிப்பகத்திற்கு அவற்றை நகர்த்தவும்."</string>
-    <string name="storage_internal_unmount_details" msgid="3677827796634199714"><b>"<xliff:g id="NAME_0">^1</xliff:g>ஐ வெளியேற்றும்போது, சேமித்த பயன்பாடுகள் வேலை செய்வதை நிறுத்தும், அதில் சேமித்த மீடியா கோப்புகள் மீண்டும் அதைச் செருகும் வரை கிடைக்காது."</b>" \n\n<xliff:g id="NAME_1">^1</xliff:g> இந்தச் சாதனத்தில் மட்டும் வேலை செய்யுமாறு மீட்டமைக்கப்பட்டது. பிற சாதனங்களில் வேலை செய்யாது."</string>
+    <string name="storage_internal_format_details" msgid="4018647158382548820">"மீட்டமைவுக்குப் பிறகு, <xliff:g id="NAME_0">^1</xliff:g>ஐ மற்ற சாதனங்களில் பயன்படுத்தலாம். \n\n<xliff:g id="NAME_1">^1</xliff:g> இல் உள்ள எல்லா தரவும் அழிக்கப்படும். அதனால் முதலில் காப்புப் பிரதி எடுத்துக்கொள்ளவும். \n\n"<b>"படங்கள் &amp; மற்ற மீடியாவைக் காப்புப் பிரதி எடுத்தல்"</b>" \nமீடியா கோப்புகளை சாதனத்தின் மாற்று சேமிப்பகத்திற்கு நகர்த்தவும் அல்லது USB கேபிளைப் பயன்படுத்தி கணினிக்கு மாற்றவும். \n\n"<b>"பயன்பாடுகளின் காப்புப் பிரதி"</b>" \n<xliff:g id="NAME_6">^1</xliff:g> இல் சேமிக்கப்பட்ட எல்லா பயன்பாடுகளும் நிறுவல்நீக்கப்பட்டு அவற்றின் தரவு அழிக்கப்படும். இந்தப் பயன்பாடுகளை வைத்திருக்க, சாதனத்தின் மாற்று சேமிப்பகத்திற்கு அவற்றை நகர்த்தவும்."</string>
+    <string name="storage_internal_unmount_details" msgid="3677827796634199714"><b>"<xliff:g id="NAME_0">^1</xliff:g>ஐ வெளியேற்றும்போது, அதில் சேமித்த பயன்பாடுகள் வேலை செய்வதை நிறுத்தும், அதில் சேமித்த மீடியா கோப்புகள் மீண்டும் அதைச் செருகும் வரை கிடைக்காது."</b>" \n\n<xliff:g id="NAME_1">^1</xliff:g> இந்தச் சாதனத்தில் மட்டும் வேலை செய்யுமாறு மீட்டமைக்கப்பட்டது. பிற சாதனங்களில் வேலை செய்யாது."</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"<xliff:g id="NAME">^1</xliff:g>ஐ அமைக்கவும்"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"கையடக்க சேமிப்பகமாகப் பயன்படுத்தவும்"</string>
     <string name="storage_wizard_init_external_summary" msgid="7476105886344565074">"சாதனங்களுக்கிடையே படங்களையும் பிற மீடியாவையும் நகர்த்தலாம்."</string>
@@ -2535,27 +2536,20 @@
     <string name="zen_mode_start_time" msgid="8102602297273744441">"தொடக்க நேரம்"</string>
     <string name="zen_mode_end_time" msgid="8774327885892705505">"முடிவு நேரம்"</string>
     <string name="zen_mode_end_time_next_day_summary_format" msgid="4201521691238728701">"அடுத்த நாள் <xliff:g id="FORMATTED_TIME">%s</xliff:g>"</string>
-    <!-- no translation found for zen_mode_interruptions_voice_title (855256211259132964) -->
-    <skip />
-    <!-- no translation found for zen_mode_interruptions_voice_header (2888750427673157270) -->
-    <skip />
+    <string name="zen_mode_interruptions_voice_title" msgid="855256211259132964">"குறுக்கீடுகள்"</string>
+    <string name="zen_mode_interruptions_voice_header" msgid="2888750427673157270">"அழைப்புகளும் அறிவிப்புகளும் வரும்போது"</string>
     <string name="zen_mode_interruptions_voice_prompt" msgid="3041817362475695079">"எப்போது குறுக்கிடலாம்?"</string>
     <string name="zen_mode_duration_voice_prompt" msgid="7381920739389625133">"கால அளவு:"</string>
-    <!-- no translation found for zen_mode_option_voice_all_interruptions (9222054216334506341) -->
+    <string name="zen_mode_option_voice_all_interruptions" msgid="9222054216334506341">"எப்போதும் குறுக்கிடு"</string>
+    <string name="zen_mode_option_voice_all_interruptions_synonyms" msgid="475880955609403705">"முடக்கத்தில்,எல்லாம்,ஒவ்வொன்றும்"</string>
+    <string name="zen_mode_option_voice_important_interruptions" msgid="3695277268139705627">"முதன்மையானவற்றை மட்டும் அனுமதி"</string>
+    <!-- no translation found for zen_mode_option_voice_important_synonyms (2727831854148694795) -->
     <skip />
-    <!-- no translation found for zen_mode_option_voice_all_interruptions_synonyms (475880955609403705) -->
+    <string name="zen_mode_option_voice_alarms" msgid="5961982397880688359">"அலாரங்களை மட்டும் அனுமதி"</string>
+    <!-- no translation found for zen_mode_option_voice_alarms_synonyms (4049356986371569950) -->
     <skip />
-    <!-- no translation found for zen_mode_option_voice_important_interruptions (3695277268139705627) -->
-    <skip />
-    <!-- no translation found for zen_mode_option_voice_important_synonyms (6120004096615029102) -->
-    <skip />
-    <!-- no translation found for zen_mode_option_voice_alarms (5961982397880688359) -->
-    <skip />
-    <!-- no translation found for zen_mode_option_voice_alarms_synonyms (7463720676061371446) -->
-    <skip />
-    <!-- no translation found for zen_mode_option_voice_no_interruptions (351955012579170932) -->
-    <skip />
-    <!-- no translation found for zen_mode_option_voice_no_interruptions_synonyms (6196235656198436233) -->
+    <string name="zen_mode_option_voice_no_interruptions" msgid="351955012579170932">"குறுக்கிடாதே"</string>
+    <!-- no translation found for zen_mode_option_voice_no_interruptions_synonyms (8368549512275129844) -->
     <skip />
     <string name="zen_mode_duration_indefinte_voice_label" msgid="9026001994945950539">"காலவரையின்றி"</string>
     <plurals name="zen_mode_duration_minutes_voice_label" formatted="false" msgid="4750982084453980">
@@ -2693,6 +2687,5 @@
     <string name="default_browser_title" msgid="8101772675085814670">"உலாவி பயன்பாடு"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"இயல்பு உலாவி இல்லை"</string>
     <string name="default_app" msgid="6864503001385843060">"(இயல்பு)"</string>
-    <!-- no translation found for apps_storage (4353308027210435513) -->
-    <skip />
+    <string name="apps_storage" msgid="4353308027210435513">"பயன்பாட்டுச் சேமிப்பகம்"</string>
 </resources>

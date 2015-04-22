@@ -552,6 +552,8 @@
     <string name="wifi_display_options_forget" msgid="9119048225398894580">"ไม่จำ"</string>
     <string name="wifi_display_options_done" msgid="5703116500357822557">"เสร็จสิ้น"</string>
     <string name="wifi_display_options_name" msgid="4756080222307467898">"ชื่อ"</string>
+    <!-- no translation found for wifi_alert_lockdown_by_device_owner (5063705929160653088) -->
+    <skip />
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"อนุญาตให้มีการแลกเปลี่ยนข้อมูล เมื่อแตะแท็บเล็ตกับอุปกรณ์อื่น"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"อนุญาตให้มีการแลกเปลี่ยนข้อมูล เมื่อแตะโทรศัพท์กับอุปกรณ์อื่น"</string>
@@ -612,7 +614,6 @@
     <string name="wifi_other_network" msgid="1484433183857764750">"เพิ่มเครือข่ายอื่น"</string>
     <string name="wifi_more" msgid="3195296805089107950">"เพิ่มเติม"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"การตั้งค่าอัตโนมัติ (WPS)"</string>
-    <string name="wifi_required_info_text" msgid="7442238187557620087">"หากต้องการตั้งค่าให้เสร็จสิ้น แท็บเล็ตของคุณจะต้องมีสิทธิ์เข้าถึง Wi-Fi โดยหลังจากตั้งค่าแล้ว คุณสามารถสลับระหว่างข้อมูลมือถือและ Wi-Fi ได้"</string>
     <string name="wifi_show_advanced" msgid="3409422789616520979">"ตัวเลือกขั้นสูง"</string>
     <string name="wifi_wps_setup_title" msgid="8207552222481570175">"ตั้งค่าการป้องกัน WiFi"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"กำลังเริ่มต้น WPS…"</string>
@@ -2535,27 +2536,20 @@
     <string name="zen_mode_start_time" msgid="8102602297273744441">"เวลาเริ่มต้น"</string>
     <string name="zen_mode_end_time" msgid="8774327885892705505">"เวลาสิ้นสุด"</string>
     <string name="zen_mode_end_time_next_day_summary_format" msgid="4201521691238728701">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> วันถัดไป"</string>
-    <!-- no translation found for zen_mode_interruptions_voice_title (855256211259132964) -->
-    <skip />
-    <!-- no translation found for zen_mode_interruptions_voice_header (2888750427673157270) -->
-    <skip />
+    <string name="zen_mode_interruptions_voice_title" msgid="855256211259132964">"เสียงแทรก"</string>
+    <string name="zen_mode_interruptions_voice_header" msgid="2888750427673157270">"เมื่อมีสายเรียกเข้าหรือการแจ้งเตือน"</string>
     <string name="zen_mode_interruptions_voice_prompt" msgid="3041817362475695079">"คุณต้องการรับการแจ้งเตือนเมื่อใด"</string>
     <string name="zen_mode_duration_voice_prompt" msgid="7381920739389625133">"โปรดระบุระยะเวลา"</string>
-    <!-- no translation found for zen_mode_option_voice_all_interruptions (9222054216334506341) -->
+    <string name="zen_mode_option_voice_all_interruptions" msgid="9222054216334506341">"มีเสียงแทรกได้เสมอ"</string>
+    <string name="zen_mode_option_voice_all_interruptions_synonyms" msgid="475880955609403705">"ปิด,ทั้งหมด,ทุกอย่าง"</string>
+    <string name="zen_mode_option_voice_important_interruptions" msgid="3695277268139705627">"อนุญาตเฉพาะเรื่องสำคัญเท่านั้น"</string>
+    <!-- no translation found for zen_mode_option_voice_important_synonyms (2727831854148694795) -->
     <skip />
-    <!-- no translation found for zen_mode_option_voice_all_interruptions_synonyms (475880955609403705) -->
+    <string name="zen_mode_option_voice_alarms" msgid="5961982397880688359">"อนุญาตเฉพาะการปลุก"</string>
+    <!-- no translation found for zen_mode_option_voice_alarms_synonyms (4049356986371569950) -->
     <skip />
-    <!-- no translation found for zen_mode_option_voice_important_interruptions (3695277268139705627) -->
-    <skip />
-    <!-- no translation found for zen_mode_option_voice_important_synonyms (6120004096615029102) -->
-    <skip />
-    <!-- no translation found for zen_mode_option_voice_alarms (5961982397880688359) -->
-    <skip />
-    <!-- no translation found for zen_mode_option_voice_alarms_synonyms (7463720676061371446) -->
-    <skip />
-    <!-- no translation found for zen_mode_option_voice_no_interruptions (351955012579170932) -->
-    <skip />
-    <!-- no translation found for zen_mode_option_voice_no_interruptions_synonyms (6196235656198436233) -->
+    <string name="zen_mode_option_voice_no_interruptions" msgid="351955012579170932">"ห้ามรบกวน"</string>
+    <!-- no translation found for zen_mode_option_voice_no_interruptions_synonyms (8368549512275129844) -->
     <skip />
     <string name="zen_mode_duration_indefinte_voice_label" msgid="9026001994945950539">"ไม่มีกำหนด"</string>
     <plurals name="zen_mode_duration_minutes_voice_label" formatted="false" msgid="4750982084453980">
@@ -2693,6 +2687,5 @@
     <string name="default_browser_title" msgid="8101772675085814670">"แอปเบราว์เซอร์"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"ไม่มีเบราว์เซอร์เริ่มต้น"</string>
     <string name="default_app" msgid="6864503001385843060">"(ค่าเริ่มต้น)"</string>
-    <!-- no translation found for apps_storage (4353308027210435513) -->
-    <skip />
+    <string name="apps_storage" msgid="4353308027210435513">"พื้นที่เก็บแอป"</string>
 </resources>

@@ -552,6 +552,8 @@
     <string name="wifi_display_options_forget" msgid="9119048225398894580">"삭제"</string>
     <string name="wifi_display_options_done" msgid="5703116500357822557">"완료"</string>
     <string name="wifi_display_options_name" msgid="4756080222307467898">"이름"</string>
+    <!-- no translation found for wifi_alert_lockdown_by_device_owner (5063705929160653088) -->
+    <skip />
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"태블릿이 다른 기기와 접촉하면 데이터 교환 허용"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"휴대전화가 다른 기기와 접촉하면 데이터 교환 허용"</string>
@@ -612,7 +614,6 @@
     <string name="wifi_other_network" msgid="1484433183857764750">"다른 네트워크 추가"</string>
     <string name="wifi_more" msgid="3195296805089107950">"더보기"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"자동 설정(WPS)"</string>
-    <string name="wifi_required_info_text" msgid="7442238187557620087">"설정을 완료하려면 태블릿이 Wi‑Fi에 액세스해야 합니다. 설정 후에는 셀룰러 데이터와 Wi‑Fi 간에 전환할 수 있습니다."</string>
     <string name="wifi_show_advanced" msgid="3409422789616520979">"고급 옵션"</string>
     <string name="wifi_wps_setup_title" msgid="8207552222481570175">"Wi-Fi Protected 설정"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"WPS을 시작하는 중…"</string>
@@ -2535,27 +2536,20 @@
     <string name="zen_mode_start_time" msgid="8102602297273744441">"시작 시간"</string>
     <string name="zen_mode_end_time" msgid="8774327885892705505">"종료 시간"</string>
     <string name="zen_mode_end_time_next_day_summary_format" msgid="4201521691238728701">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> 다음 날"</string>
-    <!-- no translation found for zen_mode_interruptions_voice_title (855256211259132964) -->
-    <skip />
-    <!-- no translation found for zen_mode_interruptions_voice_header (2888750427673157270) -->
-    <skip />
+    <string name="zen_mode_interruptions_voice_title" msgid="855256211259132964">"소리/진동 알림"</string>
+    <string name="zen_mode_interruptions_voice_header" msgid="2888750427673157270">"전화 및 알림 수신 시"</string>
     <string name="zen_mode_interruptions_voice_prompt" msgid="3041817362475695079">"언제 알림을 받으시겠습니까?"</string>
     <string name="zen_mode_duration_voice_prompt" msgid="7381920739389625133">"기간"</string>
-    <!-- no translation found for zen_mode_option_voice_all_interruptions (9222054216334506341) -->
+    <string name="zen_mode_option_voice_all_interruptions" msgid="9222054216334506341">"항상 소리/진동 알림"</string>
+    <string name="zen_mode_option_voice_all_interruptions_synonyms" msgid="475880955609403705">"끄기,모두,전체"</string>
+    <string name="zen_mode_option_voice_important_interruptions" msgid="3695277268139705627">"중요 소리/진동 알림만 허용"</string>
+    <!-- no translation found for zen_mode_option_voice_important_synonyms (2727831854148694795) -->
     <skip />
-    <!-- no translation found for zen_mode_option_voice_all_interruptions_synonyms (475880955609403705) -->
+    <string name="zen_mode_option_voice_alarms" msgid="5961982397880688359">"알람만 허용"</string>
+    <!-- no translation found for zen_mode_option_voice_alarms_synonyms (4049356986371569950) -->
     <skip />
-    <!-- no translation found for zen_mode_option_voice_important_interruptions (3695277268139705627) -->
-    <skip />
-    <!-- no translation found for zen_mode_option_voice_important_synonyms (6120004096615029102) -->
-    <skip />
-    <!-- no translation found for zen_mode_option_voice_alarms (5961982397880688359) -->
-    <skip />
-    <!-- no translation found for zen_mode_option_voice_alarms_synonyms (7463720676061371446) -->
-    <skip />
-    <!-- no translation found for zen_mode_option_voice_no_interruptions (351955012579170932) -->
-    <skip />
-    <!-- no translation found for zen_mode_option_voice_no_interruptions_synonyms (6196235656198436233) -->
+    <string name="zen_mode_option_voice_no_interruptions" msgid="351955012579170932">"소리/진동 알림 차단"</string>
+    <!-- no translation found for zen_mode_option_voice_no_interruptions_synonyms (8368549512275129844) -->
     <skip />
     <string name="zen_mode_duration_indefinte_voice_label" msgid="9026001994945950539">"무제한"</string>
     <plurals name="zen_mode_duration_minutes_voice_label" formatted="false" msgid="4750982084453980">
@@ -2693,6 +2687,5 @@
     <string name="default_browser_title" msgid="8101772675085814670">"브라우저 앱"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"기본 브라우저 없음"</string>
     <string name="default_app" msgid="6864503001385843060">"(기본)"</string>
-    <!-- no translation found for apps_storage (4353308027210435513) -->
-    <skip />
+    <string name="apps_storage" msgid="4353308027210435513">"앱 저장소"</string>
 </resources>

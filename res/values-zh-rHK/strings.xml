@@ -552,6 +552,8 @@
     <string name="wifi_display_options_forget" msgid="9119048225398894580">"刪除"</string>
     <string name="wifi_display_options_done" msgid="5703116500357822557">"完成"</string>
     <string name="wifi_display_options_name" msgid="4756080222307467898">"名稱"</string>
+    <!-- no translation found for wifi_alert_lockdown_by_device_owner (5063705929160653088) -->
+    <skip />
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"允許平板電腦在與其他裝置接觸時交換資料"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"允許手機與其他裝置接觸時交換資料"</string>
@@ -612,7 +614,6 @@
     <string name="wifi_other_network" msgid="1484433183857764750">"新增其他網絡"</string>
     <string name="wifi_more" msgid="3195296805089107950">"更多"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"自動設定 (WPS)"</string>
-    <string name="wifi_required_info_text" msgid="7442238187557620087">"您的平板電腦必須連接 Wi-Fi 網絡才能完成設定。完成後，您可以在流動數據網絡與 Wi-Fi 網絡之間切換。"</string>
     <string name="wifi_show_advanced" msgid="3409422789616520979">"進階選項"</string>
     <string name="wifi_wps_setup_title" msgid="8207552222481570175">"Wi-Fi 保護設定"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"正在啟動 WPS…"</string>
@@ -971,33 +972,33 @@
     <string name="storage_format_success" msgid="3023144070597190555">"已格式化<xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="storage_format_failure" msgid="8343688274191391889">"無法格式化<xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="storage_rename_title" msgid="8242663969839491485">"重新命名儲存裝置"</string>
-    <string name="storage_internal_format_details" msgid="4018647158382548820">"格式化後您可以於其他裝置使用此<xliff:g id="NAME_0">^1</xliff:g>。\n\n <xliff:g id="NAME_1">^1</xliff:g>的所有資料將被刪除，請先備份。\n\n"<b>"備份相片和其他媒體"</b>" \n將您的媒體檔案移動至這部裝罝的其他儲存空間，或使用USB連接線 將它們傳送到電腦。\n\n"<b>"備份應用程式s"</b>" \n儲存於此<xliff:g id="NAME_6">^1</xliff:g>的所有應用程式將解除安裝，資料將被刪除。如要保留這些應用程式，您可以將其移動至這部裝置的其他儲存空間。"</string>
-    <string name="storage_internal_unmount_details" msgid="3677827796634199714"><b>"當你移除此<xliff:g id="NAME_0">^1</xliff:g>時，已儲存的應用程式將停止運作，媒體檔案將不能播放，直到裝置被重新插入。"</b>" \n\n此<xliff:g id="NAME_1">^1</xliff:g>經格式化後只能用於這部裝置。其他裝置將不能存取。"</string>
+    <string name="storage_internal_format_details" msgid="4018647158382548820">"格式化後，您可在其他裝置使用此<xliff:g id="NAME_0">^1</xliff:g>。\n\n<xliff:g id="NAME_1">^1</xliff:g>的所有資料將被刪除，請先備份。\n\n"<b>"備份相片和其他媒體"</b>" \n將您的媒體檔案移至這部裝罝的其他儲存空間，或使用 USB 連接線轉移至電腦。\n\n"<b>"備份應用程式"</b>" \n儲存於此<xliff:g id="NAME_6">^1</xliff:g>的所有應用程式將解除安裝，其中資料也將被刪除。如要保留這些應用程式，您可以將其移至裝置的其他儲存空間。"</string>
+    <string name="storage_internal_unmount_details" msgid="3677827796634199714"><b>"當你移除此<xliff:g id="NAME_0">^1</xliff:g>時，已儲存的應用程式將停止運作，而媒體檔案在再次插入裝置前將不能播放。"</b>" \n\n此<xliff:g id="NAME_1">^1</xliff:g>經格式化後只能用於這部裝置。其他裝置將不能存取。"</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"設定您的<xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"作為可攜式儲存裝置使用"</string>
     <string name="storage_wizard_init_external_summary" msgid="7476105886344565074">"在裝置之間移動相片和其他媒體。"</string>
     <string name="storage_wizard_init_internal_title" msgid="9100613534261408519">"作為內部儲存空間使用"</string>
-    <string name="storage_wizard_init_internal_summary" msgid="6240417501036216410">"只限儲存於這部裝置，包括應用程式和相片。此操作需要格式化，以防止其他裝置存取。"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="6240417501036216410">"只限儲存於這部裝置，包括應用程式和相片。此操作需要格式化，以免其他裝置存取。"</string>
     <string name="storage_wizard_format_confirm_title" msgid="2814021794538252546">"格式化為內部儲存空間"</string>
-    <!-- syntax error in translation for storage_wizard_format_confirm_body (4401758710076806509) org.xmlpull.v1.XmlPullParserException: expected: /string read: b (position:END_TAG </b>@1:86 in     <string name="storage_wizard_format_confirm_body" msgid="4401758710076806509"></b>"<xliff:g id="NAME_0">^1</xliff:g>NAME_0需要格式化，以策安全。\n\n<xliff:g id="NAME_1">^1</xliff:g>經格式化後只能用於這部裝置。\n\n"<b>"格式化將清除目前儲存在<xliff:g id="NAME_2">^1</xliff:g>的所有資料。請將資料 備份，以免遺失。"</string>
+    <!-- syntax error in translation for storage_wizard_format_confirm_body (4401758710076806509) org.xmlpull.v1.XmlPullParserException: expected: /string read: b (position:END_TAG </b>@1:86 in     <string name="storage_wizard_format_confirm_body" msgid="4401758710076806509"></b>"<xliff:g id="NAME_0">^1</xliff:g>NAME_0需要格式化，以策安全。\n\n<xliff:g id="NAME_1">^1</xliff:g>經格式化後只能用於這部裝置。\n\n"<b>"格式化將清除目前儲存在<xliff:g id="NAME_2">^1</xliff:g>的所有資料。為免遺失資料，請先備份。"</string>
 )  -->
     <string name="storage_wizard_format_confirm_next" msgid="2774557300531702572">"清除和格式化"</string>
     <string name="storage_wizard_format_progress_title" msgid="6487352396450582292">"正在格式化<xliff:g id="NAME">^1</xliff:g>…"</string>
     <string name="storage_wizard_format_progress_body" msgid="1259216693690378749">"格式化過程中不要移除<xliff:g id="NAME">^1</xliff:g>。"</string>
-    <string name="storage_wizard_migrate_title" msgid="1363078147938160407">"將資料移動至新的儲存空間"</string>
-    <string name="storage_wizard_migrate_body" msgid="606648689408670617">"您可以將相片、檔案和應用程式資料移動至這個新<xliff:g id="NAME">^1</xliff:g>。\n\n此操作大約需時<xliff:g id="TIME">^2</xliff:g>，並能釋放<xliff:g id="SIZE">^3</xliff:g>的內部儲存空間。過程中部分應用程式將無法正常運作。"</string>
+    <string name="storage_wizard_migrate_title" msgid="1363078147938160407">"將資料移至新的儲存空間"</string>
+    <string name="storage_wizard_migrate_body" msgid="606648689408670617">"您可以將相片、檔案和應用程式資料移至這部全新<xliff:g id="NAME">^1</xliff:g>。\n\n此操作大約需時<xliff:g id="TIME">^2</xliff:g>，並能釋放<xliff:g id="SIZE">^3</xliff:g>的內部儲存空間。過程中部分應用程式將無法正常運作。"</string>
     <string name="storage_wizard_migrate_now" msgid="4523444323744239143">"立即移動"</string>
     <string name="storage_wizard_migrate_later" msgid="3173482328116026253">"稍後移動"</string>
     <string name="storage_wizard_migrate_confirm_title" msgid="8564833529613286965">"立即移動資料"</string>
     <string name="storage_wizard_migrate_confirm_body" msgid="5035719146373359329"><b>"此操作大約需時<xliff:g id="TIME">^1</xliff:g>，並能釋放<xliff:g id="SIZE">^2</xliff:g>的內部儲存空間。"</b></string>
     <string name="storage_wizard_migrate_confirm_next" msgid="5509475628423823202">"移動"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="1665479429044202868">"正在移動資料…"</string>
-    <string name="storage_wizard_migrate_details" msgid="8641916179067596592">"移動過程中：\n• 不要刪除<xliff:g id="NAME">^1</xliff:g>。\n•部分應用程式將無法正常運作。\n• 確定裝置有足夠電量。"</string>
+    <string name="storage_wizard_migrate_details" msgid="8641916179067596592">"移動過程中：\n• 不要刪除<xliff:g id="NAME">^1</xliff:g>。\n•部分應用程式將無法正常運作。\n• 確定裝置電量充足。"</string>
     <string name="storage_wizard_ready_title" msgid="5381632402953258267">"<xliff:g id="NAME">^1</xliff:g>已準備就緒"</string>
-    <string name="storage_wizard_ready_external_body" msgid="2879508114260597474">"您的<xliff:g id="NAME">^1</xliff:g>已全部設定為可用於相片和其他媒體。"</string>
-    <string name="storage_wizard_ready_internal_body" msgid="122532674037860197">"您的新<xliff:g id="NAME">^1</xliff:g>正在運作。\n\n如要移動相片、檔案和應用程式資料至這部裝置，請前往 [設定及儲存空間]。"</string>
+    <string name="storage_wizard_ready_external_body" msgid="2879508114260597474">"您的<xliff:g id="NAME">^1</xliff:g>已準備就緒，可用於相片和其他媒體。"</string>
+    <string name="storage_wizard_ready_internal_body" msgid="122532674037860197">"您的新<xliff:g id="NAME">^1</xliff:g>正在運作。\n\n如要將相片、檔案和應用程式資料移至這部裝置，請前往 [設定及儲存空間]。"</string>
     <string name="storage_wizard_move_confirm_title" msgid="292782012677890250">"移動<xliff:g id="APP">^1</xliff:g>"</string>
-    <string name="storage_wizard_move_confirm_body" msgid="236043946721254139">"移動<xliff:g id="APP">^1</xliff:g>和其資料至 <xliff:g id="NAME_0">^2</xliff:g>只需要幾分鐘。你將無法使用該應用程式，直到移動完成。\n\n過程中請勿移除<xliff:g id="NAME_1">^2</xliff:g>。"</string>
+    <string name="storage_wizard_move_confirm_body" msgid="236043946721254139">"將<xliff:g id="APP">^1</xliff:g>及其資料移至<xliff:g id="NAME_0">^2</xliff:g>只需要幾分鐘。你將無法使用該應用程式，直到移動完成。\n\n過程中請勿移除<xliff:g id="NAME_1">^2</xliff:g>。"</string>
     <string name="storage_wizard_move_progress_title" msgid="4443920302548035674">"正在移動<xliff:g id="APP">^1</xliff:g>…"</string>
     <string name="storage_wizard_move_progress_body" msgid="4288580957960820740">"移動過程中請勿移除<xliff:g id="NAME">^1</xliff:g>。\n\n您將無法使用這部裝置上的<xliff:g id="APP">^2</xliff:g>應用程式，直到移動完成。"</string>
     <string name="storage_wizard_move_progress_cancel" msgid="542047237524588792">"取消移動"</string>
@@ -2540,27 +2541,20 @@
     <string name="zen_mode_start_time" msgid="8102602297273744441">"開始時間"</string>
     <string name="zen_mode_end_time" msgid="8774327885892705505">"完結時間"</string>
     <string name="zen_mode_end_time_next_day_summary_format" msgid="4201521691238728701">"下一天 <xliff:g id="FORMATTED_TIME">%s</xliff:g>"</string>
-    <!-- no translation found for zen_mode_interruptions_voice_title (855256211259132964) -->
-    <skip />
-    <!-- no translation found for zen_mode_interruptions_voice_header (2888750427673157270) -->
-    <skip />
+    <string name="zen_mode_interruptions_voice_title" msgid="855256211259132964">"干擾"</string>
+    <string name="zen_mode_interruptions_voice_header" msgid="2888750427673157270">"收到來電和通知時"</string>
     <string name="zen_mode_interruptions_voice_prompt" msgid="3041817362475695079">"您想何時接受干擾？"</string>
     <string name="zen_mode_duration_voice_prompt" msgid="7381920739389625133">"須運作多久？"</string>
-    <!-- no translation found for zen_mode_option_voice_all_interruptions (9222054216334506341) -->
+    <string name="zen_mode_option_voice_all_interruptions" msgid="9222054216334506341">"一律允許干擾"</string>
+    <string name="zen_mode_option_voice_all_interruptions_synonyms" msgid="475880955609403705">"關閉所有干擾"</string>
+    <string name="zen_mode_option_voice_important_interruptions" msgid="3695277268139705627">"僅允許優先干擾"</string>
+    <!-- no translation found for zen_mode_option_voice_important_synonyms (2727831854148694795) -->
     <skip />
-    <!-- no translation found for zen_mode_option_voice_all_interruptions_synonyms (475880955609403705) -->
+    <string name="zen_mode_option_voice_alarms" msgid="5961982397880688359">"只允許鬧鐘"</string>
+    <!-- no translation found for zen_mode_option_voice_alarms_synonyms (4049356986371569950) -->
     <skip />
-    <!-- no translation found for zen_mode_option_voice_important_interruptions (3695277268139705627) -->
-    <skip />
-    <!-- no translation found for zen_mode_option_voice_important_synonyms (6120004096615029102) -->
-    <skip />
-    <!-- no translation found for zen_mode_option_voice_alarms (5961982397880688359) -->
-    <skip />
-    <!-- no translation found for zen_mode_option_voice_alarms_synonyms (7463720676061371446) -->
-    <skip />
-    <!-- no translation found for zen_mode_option_voice_no_interruptions (351955012579170932) -->
-    <skip />
-    <!-- no translation found for zen_mode_option_voice_no_interruptions_synonyms (6196235656198436233) -->
+    <string name="zen_mode_option_voice_no_interruptions" msgid="351955012579170932">"不允許干擾"</string>
+    <!-- no translation found for zen_mode_option_voice_no_interruptions_synonyms (8368549512275129844) -->
     <skip />
     <string name="zen_mode_duration_indefinte_voice_label" msgid="9026001994945950539">"無限期"</string>
     <plurals name="zen_mode_duration_minutes_voice_label" formatted="false" msgid="4750982084453980">
@@ -2698,6 +2692,5 @@
     <string name="default_browser_title" msgid="8101772675085814670">"瀏覽器應用程式"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"沒有預設瀏覽器"</string>
     <string name="default_app" msgid="6864503001385843060">"(預設)"</string>
-    <!-- no translation found for apps_storage (4353308027210435513) -->
-    <skip />
+    <string name="apps_storage" msgid="4353308027210435513">"應用程式儲存"</string>
 </resources>
