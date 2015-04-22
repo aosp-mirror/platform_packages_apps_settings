@@ -56,6 +56,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
 import android.widget.Toast;
@@ -127,6 +128,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     private WriteWifiConfigToNfcDialog mWifiToNfcDialog;
 
     private TextView mEmptyView;
+    private ProgressBar mProgressHeader;
 
     // this boolean extra specifies whether to disable the Next button when not connected. Used by
     // account creation outside of setup wizard.
@@ -150,6 +152,15 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     public WifiSettings() {
         super(DISALLOW_CONFIG_WIFI);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        final Activity activity = getActivity();
+        if (activity != null) {
+            mProgressHeader = (ProgressBar) setPinnedHeaderView(R.layout.wifi_progress_header);
+        }
     }
 
     @Override
@@ -711,7 +722,9 @@ public class WifiSettings extends RestrictedSettingsFragment
     }
 
     protected void setProgressBarVisible(boolean visible) {
-        // TODO: show a progress bar when scan is in progress.
+        if (mProgressHeader != null) {
+            mProgressHeader.setVisibility(visible ? View.VISIBLE : View.GONE);
+        }
     }
 
     @Override
