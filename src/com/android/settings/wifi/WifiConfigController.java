@@ -315,6 +315,13 @@ public class WifiConfigController implements TextWatcher,
         return (level > -1 && level < mLevels.length) ? mLevels[level] : null;
     }
 
+    void hideForgetButton() {
+        Button forget = mConfigUi.getForgetButton();
+        if (forget == null) return;
+
+        forget.setVisibility(View.GONE);
+    }
+
     void hideSubmitButton() {
         Button submit = mConfigUi.getSubmitButton();
         if (submit == null) return;

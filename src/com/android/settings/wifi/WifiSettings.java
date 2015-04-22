@@ -20,10 +20,17 @@ import static android.net.wifi.WifiConfiguration.INVALID_NETWORK_ID;
 import static android.os.UserManager.DISALLOW_CONFIG_WIFI;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AppGlobals;
 import android.app.Dialog;
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.IPackageManager;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
@@ -35,6 +42,8 @@ import android.net.wifi.WifiManager;
 import android.net.wifi.WpsInfo;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
+import android.os.RemoteException;
+import android.os.UserHandle;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.text.Spannable;
@@ -417,6 +426,12 @@ public class WifiSettings extends RestrictedSettingsFragment
                     menu.add(Menu.NONE, MENU_ID_CONNECT, 0, R.string.wifi_menu_connect);
                 }
 
+                WifiConfiguration config = mSelectedAccessPoint.getConfig();
+                // Device Owner created configs are uneditable
+                if (isCreatorDeviceOwner(getActivity(), config)) {
+                    return;
+                }
+
                 if (mSelectedAccessPoint.isSaved() || mSelectedAccessPoint.isEphemeral()) {
                     // Allow forgetting a network if either the network is saved or ephemerally
                     // connected. (In the latter case, "forget" blacklists the network so it won't
@@ -493,6 +508,31 @@ public class WifiSettings extends RestrictedSettingsFragment
     }
 
     private void showDialog(AccessPoint accessPoint, boolean edit) {
+        WifiConfiguration config = accessPoint.getConfig();
+        if (isCreatorDeviceOwner(getActivity(), config) && accessPoint.isActive()) {
+            final int userId = UserHandle.getUserId(config.creatorUid);
+            final PackageManager pm = getActivity().getPackageManager();
+            final IPackageManager ipm = AppGlobals.getPackageManager();
+            String appName = pm.getNameForUid(config.creatorUid);
+            try {
+                final ApplicationInfo appInfo = ipm.getApplicationInfo(appName, /* flags */ 0,
+                        userId);
+                final CharSequence label = pm.getApplicationLabel(appInfo);
+                if (label != null) {
+                    appName = label.toString();
+                }
+            } catch (RemoteException e) {
+                // leave appName as packageName
+            }
+            final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle(accessPoint.getSsid())
+                    .setMessage(getString(R.string.wifi_alert_lockdown_by_device_owner,
+                            appName))
+                    .setPositiveButton(android.R.string.ok, null)
+                    .show();
+            return;
+        }
+
         if (mDialog != null) {
             removeDialog(WIFI_DIALOG_ID);
             mDialog = null;
@@ -521,7 +561,10 @@ public class WifiSettings extends RestrictedSettingsFragment
                 }
                 // If it's null, fine, it's for Add Network
                 mSelectedAccessPoint = ap;
-                mDialog = new WifiDialog(getActivity(), this, ap, mDlgEdit);
+                mDialog = new WifiDialog(getActivity(), this, ap, mDlgEdit,
+                        /* no hide submit/connect */ false,
+                        /* hide forget if config locked down */ isCreatorDeviceOwner(getActivity(),
+                                ap.getConfig()));
                 return mDialog;
             case WPS_PBC_DIALOG_ID:
                 return new WpsDialog(getActivity(), WpsInfo.PBC);
@@ -826,4 +869,29 @@ public class WifiSettings extends RestrictedSettingsFragment
                 return result;
             }
         };
+
+    /**
+     * Returns the true if the app that created this config is the device owner of the device.
+     * @param config The WiFi config.
+     * @return creator package name or null if creator package is not device owner.
+     */
+    static boolean isCreatorDeviceOwner(Context context, WifiConfiguration config) {
+        if (config == null) {
+            return false;
+        }
+        final DevicePolicyManager dpm = (DevicePolicyManager) context.getSystemService(
+                Context.DEVICE_POLICY_SERVICE);
+        final String deviceOwnerPackageName = dpm.getDeviceOwner();
+        if (deviceOwnerPackageName == null) {
+            return false;
+        }
+        final PackageManager pm = context.getPackageManager();
+        try {
+            final int deviceOwnerUid = pm.getPackageUid(deviceOwnerPackageName,
+                    UserHandle.getUserId(config.creatorUid));
+            return deviceOwnerUid == config.creatorUid;
+        } catch (NameNotFoundException e) {
+            return false;
+        }
+    }
 }
