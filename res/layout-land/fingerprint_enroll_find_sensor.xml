@@ -58,17 +58,13 @@
         <FrameLayout
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical">
+            android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/fingerprint_sensor_location"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:layout_gravity="center"
-                android:contentDescription="@string/security_settings_fingerprint_enroll_find_sensor_content_description"
-                android:src="@drawable/fingerprint_sensor_location"
-                android:scaleType="centerInside"/>
+            <include
+                layout="@layout/fingerprint_enroll_find_sensor_graphic"
+                android:layout_width="@dimen/fingerprint_find_sensor_graphic_size"
+                android:layout_height="@dimen/fingerprint_find_sensor_graphic_size"
+                android:layout_gravity="center"/>
 
         </FrameLayout>
 

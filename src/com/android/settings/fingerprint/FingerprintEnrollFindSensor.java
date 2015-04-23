@@ -31,6 +31,8 @@ public class FingerprintEnrollFindSensor extends FingerprintEnrollBase {
     private static final int CONFIRM_REQUEST = 1;
     private static final int ENROLLING = 2;
 
+    private FingerprintLocationAnimationView mAnimation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +41,20 @@ public class FingerprintEnrollFindSensor extends FingerprintEnrollBase {
         if (mToken == null) {
             launchConfirmLock();
         }
+        mAnimation = (FingerprintLocationAnimationView) findViewById(
+                R.id.fingerprint_sensor_location_animation);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAnimation.startAnimation();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mAnimation.stopAnimation();
     }
 
     @Override
