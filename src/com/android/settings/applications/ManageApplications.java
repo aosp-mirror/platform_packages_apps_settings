@@ -827,7 +827,7 @@ public class ManageApplications extends InstrumentedFragment
             }
             notifyDataSetChanged();
 
-            if (mEntries.size() != 0
+            if (mSession.getAllApps().size() != 0
                     && mManageApplications.mListContainer.getVisibility() != View.VISIBLE) {
                 Utils.handleLoadingContainer(mManageApplications.mLoadingContainer,
                         mManageApplications.mListContainer, true, true);
@@ -842,7 +842,7 @@ public class ManageApplications extends InstrumentedFragment
 
         private void updateLoading() {
             Utils.handleLoadingContainer(mManageApplications.mLoadingContainer,
-                    mManageApplications.mListContainer, mEntries.size() != 0, false);
+                    mManageApplications.mListContainer, mSession.getAllApps().size() != 0, false);
         }
 
         private boolean hasDisabledApps() {
