@@ -550,9 +550,7 @@ public class ManageApplications extends InstrumentedFragment
             ApplicationsState.AppEntry entry = mApplications.getAppEntry(position);
             mCurrentPkgName = entry.info.packageName;
             mCurrentUid = entry.info.uid;
-            if (isAppEntryViewEnabled(entry)) {
-                startApplicationDetailsActivity();
-            }
+            startApplicationDetailsActivity();
         }
     }
 
@@ -656,13 +654,6 @@ public class ManageApplications extends InstrumentedFragment
             return mManageApplications.getString(FILTER_LABELS[filter]);
         }
 
-    }
-
-    private static boolean isAppEntryViewEnabled(AppEntry entry) {
-        if ((entry.info.flags&ApplicationInfo.FLAG_INSTALLED) == 0 || !entry.info.enabled) {
-            return false;
-        }
-        return true;
     }
 
     /*
@@ -991,7 +982,6 @@ public class ManageApplications extends InstrumentedFragment
                     holder.appIcon.setImageDrawable(entry.icon);
                 }
                 updateSummary(holder);
-                convertView.setEnabled(isAppEntryViewEnabled(entry));
                 if ((entry.info.flags&ApplicationInfo.FLAG_INSTALLED) == 0) {
                     holder.disabled.setVisibility(View.VISIBLE);
                     holder.disabled.setText(R.string.not_installed);
