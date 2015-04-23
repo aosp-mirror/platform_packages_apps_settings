@@ -58,8 +58,10 @@ import com.android.settings.Settings.AllApplicationsActivity;
 import com.android.settings.Settings.DomainsURLsAppListActivity;
 import com.android.settings.Settings.NotificationAppListActivity;
 import com.android.settings.Settings.StorageUseActivity;
+import com.android.settings.Settings.UsageAccessSettingsActivity;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
+import com.android.settings.applications.AppStateUsageBridge.UsageState;
 import com.android.settings.applications.ApplicationsState.AppEntry;
 import com.android.settings.applications.ApplicationsState.AppFilter;
 import com.android.settings.applications.ApplicationsState.CompoundFilter;
@@ -117,6 +119,7 @@ public class ManageApplications extends InstrumentedFragment
     public static final int FILTER_APPS_PERSONAL                = 9;
     public static final int FILTER_APPS_WORK                    = 10;
     public static final int FILTER_APPS_WITH_DOMAIN_URLS        = 11;
+    public static final int FILTER_APPS_USAGE_ACCESS            = 12;
 
     // This is the string labels for the filter modes above, the order must be kept in sync.
     public static final int[] FILTER_LABELS = new int[] {
@@ -132,6 +135,7 @@ public class ManageApplications extends InstrumentedFragment
         R.string.filter_personal_apps, // Personal
         R.string.filter_work_apps,     // Work
         R.string.filter_with_domain_urls_apps,     // Domain URLs
+        R.string.filter_all_apps,      // Usage access screen, never displayed
     };
     // This is the actual mapping to filters from FILTER_ constants above, the order must
     // be kept in sync.
@@ -152,6 +156,7 @@ public class ManageApplications extends InstrumentedFragment
         ApplicationsState.FILTER_PERSONAL,    // Personal
         ApplicationsState.FILTER_WORK,        // Work
         ApplicationsState.FILTER_WITH_DOMAIN_URLS,   // Apps with Domain URLs
+        AppStateUsageBridge.FILTER_APP_USAGE, // Apps with Domain URLs
     };
 
     // sort order
@@ -190,6 +195,7 @@ public class ManageApplications extends InstrumentedFragment
     public static final int LIST_TYPE_NOTIFICATION = 1;
     public static final int LIST_TYPE_DOMAINS_URLS = 2;
     public static final int LIST_TYPE_STORAGE = 3;
+    public static final int LIST_TYPE_USAGE_ACCESS = 4;
 
     private View mRootView;
 
@@ -230,6 +236,9 @@ public class ManageApplications extends InstrumentedFragment
                 mListType = LIST_TYPE_MAIN;
                 mSortOrder = R.id.sort_order_size;
             }
+        } else if (className.equals(UsageAccessSettingsActivity.class.getName())) {
+            mListType = LIST_TYPE_USAGE_ACCESS;
+            getActivity().getActionBar().setTitle(R.string.usage_access_title);
         } else {
             mListType = LIST_TYPE_MAIN;
         }
@@ -300,7 +309,7 @@ public class ManageApplications extends InstrumentedFragment
         contentParent.addView(mSpinnerHeader, 0);
 
         mFilterAdapter.enableFilter(getDefaultFilter());
-        if (mListType != LIST_TYPE_STORAGE) {
+        if (mListType == LIST_TYPE_MAIN || mListType == LIST_TYPE_NOTIFICATION) {
             if (UserManager.get(getActivity()).getUserProfiles().size() > 1) {
                 mFilterAdapter.enableFilter(FILTER_APPS_PERSONAL);
                 mFilterAdapter.enableFilter(FILTER_APPS_WORK);
@@ -331,6 +340,8 @@ public class ManageApplications extends InstrumentedFragment
                 return mShowSystem ? FILTER_APPS_ALL : FILTER_APPS_DOWNLOADED_AND_LAUNCHER;
             case LIST_TYPE_DOMAINS_URLS:
                 return FILTER_APPS_WITH_DOMAIN_URLS;
+            case LIST_TYPE_USAGE_ACCESS:
+                return FILTER_APPS_USAGE_ACCESS;
             default:
                 return FILTER_APPS_ALL;
         }
@@ -347,6 +358,8 @@ public class ManageApplications extends InstrumentedFragment
                 return MetricsLogger.MANAGE_DOMAIN_URLS;
             case LIST_TYPE_STORAGE:
                 return InstrumentedFragment.VIEW_CATEGORY_STORAGE_APPS;
+            case LIST_TYPE_USAGE_ACCESS:
+                return MetricsLogger.USAGE_ACCESS;
             default:
                 return MetricsLogger.VIEW_UNKNOWN;
         }
@@ -398,7 +411,7 @@ public class ManageApplications extends InstrumentedFragment
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == INSTALLED_APP_DETAILS && mCurrentPkgName != null) {
             if (mListType == LIST_TYPE_NOTIFICATION) {
-                mApplications.mNotifBridge.forceUpdate(mCurrentPkgName, mCurrentUid);
+                mApplications.mExtraInfoBridge.forceUpdate(mCurrentPkgName, mCurrentUid);
             } else {
                 mApplicationsState.requestSize(mCurrentPkgName, UserHandle.getUserId(mCurrentUid));
             }
@@ -408,30 +421,39 @@ public class ManageApplications extends InstrumentedFragment
     // utility method used to start sub activity
     private void startApplicationDetailsActivity() {
         Activity activity = getActivity();
-        if (mListType == LIST_TYPE_NOTIFICATION) {
-            activity.startActivity(new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
-                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                    .putExtra(Settings.EXTRA_APP_PACKAGE, mCurrentPkgName)
-                    .putExtra(Settings.EXTRA_APP_UID, mCurrentUid));
-        } else if (mListType == LIST_TYPE_DOMAINS_URLS) {
-            final String title = getString(R.string.auto_launch_label);
-            startAppInfoFragment(AppLaunchSettings.class, title);
-        } else {
+        switch (mListType) {
+            case LIST_TYPE_NOTIFICATION:
+                activity.startActivity(new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
+                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                        .putExtra(Settings.EXTRA_APP_PACKAGE, mCurrentPkgName)
+                        .putExtra(Settings.EXTRA_APP_UID, mCurrentUid));
+                break;
+            case LIST_TYPE_DOMAINS_URLS:
+                startAppInfoFragment(AppLaunchSettings.class, R.string.auto_launch_label);
+                break;
+            case LIST_TYPE_USAGE_ACCESS:
+                startAppInfoFragment(UsageAccessDetails.class, R.string.usage_access);
+                break;
+            case LIST_TYPE_STORAGE:
+                startAppInfoFragment(AppStorageSettings.class, R.string.storage_settings);
+                break;
             // TODO: Figure out if there is a way where we can spin up the profile's settings
             // process ahead of time, to avoid a long load of data when user clicks on a managed app.
             // Maybe when they load the list of apps that contains managed profile apps.
-            Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-            intent.setData(Uri.fromParts("package", mCurrentPkgName, null));
-            activity.startActivityAsUser(intent, new UserHandle(UserHandle.getUserId(mCurrentUid)));
+            default:
+                startAppInfoFragment(InstalledAppDetails.class, R.string.application_info_label);
+                break;
         }
     }
 
-    private void startAppInfoFragment(Class<? extends AppInfoBase> fragment, CharSequence title) {
+    private void startAppInfoFragment(Class<? extends AppInfoBase> fragment, int titleRes) {
         Bundle args = new Bundle();
-        args.putString("package", mCurrentPkgName);
+        args.putString(AppInfoBase.ARG_PACKAGE_NAME, mCurrentPkgName);
 
-        SettingsActivity sa = (SettingsActivity) getActivity();
-        sa.startPreferencePanel(fragment.getName(), args, -1, title, this, 0);
+        Intent intent = Utils.onBuildStartFragmentIntent(getActivity(), fragment.getName(), args,
+                null, titleRes, null, false);
+        getActivity().startActivityForResultAsUser(intent, INSTALLED_APP_DETAILS,
+                new UserHandle(UserHandle.getUserId(mCurrentUid)));
     }
 
     @Override
@@ -653,14 +675,14 @@ public class ManageApplications extends InstrumentedFragment
      * The order of applications in the list is mirrored in mAppLocalList
      */
     static class ApplicationsAdapter extends BaseAdapter implements Filterable,
-            ApplicationsState.Callbacks, AppStateNotificationBridge.Callback,
+            ApplicationsState.Callbacks, AppStateBaseBridge.Callback,
             AbsListView.RecyclerListener {
         private final ApplicationsState mState;
         private final ApplicationsState.Session mSession;
         private final ManageApplications mManageApplications;
         private final Context mContext;
         private final ArrayList<View> mActive = new ArrayList<View>();
-        private final AppStateNotificationBridge mNotifBridge;
+        private final AppStateBaseBridge mExtraInfoBridge;
         private int mFilterMode;
         private ArrayList<ApplicationsState.AppEntry> mBaseEntries;
         private ArrayList<ApplicationsState.AppEntry> mEntries;
@@ -700,11 +722,12 @@ public class ManageApplications extends InstrumentedFragment
             mPm = mContext.getPackageManager();
             mFilterMode = filterMode;
             if (mManageApplications.mListType == LIST_TYPE_NOTIFICATION) {
-                mNotifBridge = new AppStateNotificationBridge(
-                        mContext.getPackageManager(), mState,
-                        manageApplications.mNotifBackend, this);
+                mExtraInfoBridge = new AppStateNotificationBridge(mContext.getPackageManager(),
+                        mState, this, manageApplications.mNotifBackend);
+            } else if (mManageApplications.mListType == LIST_TYPE_USAGE_ACCESS) {
+                mExtraInfoBridge = new AppStateUsageBridge(mContext, mState, this);
             } else {
-                mNotifBridge = null;
+                mExtraInfoBridge = null;
             }
         }
 
@@ -724,8 +747,8 @@ public class ManageApplications extends InstrumentedFragment
                 mResumed = true;
                 mSession.resume();
                 mLastSortMode = sort;
-                if (mNotifBridge != null) {
-                    mNotifBridge.resume();
+                if (mExtraInfoBridge != null) {
+                    mExtraInfoBridge.resume();
                 }
                 rebuild(true);
             } else {
@@ -737,16 +760,16 @@ public class ManageApplications extends InstrumentedFragment
             if (mResumed) {
                 mResumed = false;
                 mSession.pause();
-                if (mNotifBridge != null) {
-                    mNotifBridge.pause();
+                if (mExtraInfoBridge != null) {
+                    mExtraInfoBridge.pause();
                 }
             }
         }
 
         public void release() {
             mSession.release();
-            if (mNotifBridge != null) {
-                mNotifBridge.release();
+            if (mExtraInfoBridge != null) {
+                mExtraInfoBridge.release();
             }
         }
 
@@ -809,6 +832,10 @@ public class ManageApplications extends InstrumentedFragment
                 Utils.handleLoadingContainer(mManageApplications.mLoadingContainer,
                         mManageApplications.mListContainer, true, true);
             }
+            if (mManageApplications.mListType == LIST_TYPE_USAGE_ACCESS) {
+                // No enabled or disabled filters for usage access.
+                return;
+            }
 
             mManageApplications.setHasDisabled(hasDisabledApps());
         }
@@ -849,10 +876,8 @@ public class ManageApplications extends InstrumentedFragment
         }
 
         @Override
-        public void onNotificationInfoUpdated() {
-            if (mFilterMode != mManageApplications.getDefaultFilter()) {
-                rebuild(false);
-            }
+        public void onExtraInfoUpdated() {
+            rebuild(false);
         }
 
         @Override
@@ -897,9 +922,7 @@ public class ManageApplications extends InstrumentedFragment
                 AppViewHolder holder = (AppViewHolder)mActive.get(i).getTag();
                 if (holder.entry.info.packageName.equals(packageName)) {
                     synchronized (holder.entry) {
-                        if (mManageApplications.mListType != LIST_TYPE_NOTIFICATION) {
-                            holder.updateSizeText(mManageApplications.mInvalidSizeStr, mWhichSize);
-                        }
+                        updateSummary(holder);
                     }
                     if (holder.entry.info.packageName.equals(mManageApplications.mCurrentPkgName)
                             && mLastSortMode == R.id.sort_order_size) {
@@ -967,24 +990,7 @@ public class ManageApplications extends InstrumentedFragment
                 if (entry.icon != null) {
                     holder.appIcon.setImageDrawable(entry.icon);
                 }
-                switch (mManageApplications.mListType) {
-                    case LIST_TYPE_NOTIFICATION:
-                        if (entry.extraInfo != null) {
-                            holder.summary.setText(InstalledAppDetails.getNotificationSummary(
-                                    (AppRow) entry.extraInfo, mContext));
-                        } else {
-                            holder.summary.setText("");
-                        }
-                        break;
-
-                    case LIST_TYPE_DOMAINS_URLS:
-                        holder.summary.setText(getDomainsSummary(entry.info.packageName));
-                        break;
-
-                    default:
-                        holder.updateSizeText(mManageApplications.mInvalidSizeStr, mWhichSize);
-                        break;
-                }
+                updateSummary(holder);
                 convertView.setEnabled(isAppEntryViewEnabled(entry));
                 if ((entry.info.flags&ApplicationInfo.FLAG_INSTALLED) == 0) {
                     holder.disabled.setVisibility(View.VISIBLE);
@@ -1000,6 +1006,36 @@ public class ManageApplications extends InstrumentedFragment
             mActive.remove(convertView);
             mActive.add(convertView);
             return convertView;
+        }
+
+        private void updateSummary(AppViewHolder holder) {
+            switch (mManageApplications.mListType) {
+                case LIST_TYPE_NOTIFICATION:
+                    if (holder.entry.extraInfo != null) {
+                        holder.summary.setText(InstalledAppDetails.getNotificationSummary(
+                                (AppRow) holder.entry.extraInfo, mContext));
+                    } else {
+                        holder.summary.setText(null);
+                    }
+                    break;
+
+                case LIST_TYPE_DOMAINS_URLS:
+                    holder.summary.setText(getDomainsSummary(holder.entry.info.packageName));
+                    break;
+
+                case LIST_TYPE_USAGE_ACCESS:
+                    if (holder.entry.extraInfo != null) {
+                        holder.summary.setText(((UsageState) holder.entry.extraInfo).hasAccess() ?
+                                R.string.switch_on_text : R.string.switch_off_text);
+                    } else {
+                        holder.summary.setText(null);
+                    }
+                    break;
+
+                default:
+                    holder.updateSizeText(mManageApplications.mInvalidSizeStr, mWhichSize);
+                    break;
+            }
         }
 
         @Override

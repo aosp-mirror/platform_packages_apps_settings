@@ -76,6 +76,7 @@ import com.android.settings.accounts.AccountSyncSettings;
 import com.android.settings.applications.InstalledAppDetails;
 import com.android.settings.applications.ManageApplications;
 import com.android.settings.applications.ProcessStatsUi;
+import com.android.settings.applications.UsageAccessDetails;
 import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.dashboard.DashboardCategory;
 import com.android.settings.dashboard.DashboardSummary;
@@ -300,7 +301,7 @@ public class SettingsActivity extends Activity
             NotificationStation.class.getName(),
             LocationSettings.class.getName(),
             SecuritySettings.class.getName(),
-            UsageAccessSettings.class.getName(),
+            UsageAccessDetails.class.getName(),
             PrivacySettings.class.getName(),
             DeviceAdminSettings.class.getName(),
             AccessibilitySettings.class.getName(),
