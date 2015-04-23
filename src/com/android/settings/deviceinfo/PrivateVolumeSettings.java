@@ -57,9 +57,10 @@ import com.android.settings.Settings.StorageUseActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.applications.ManageApplications;
-import com.android.settings.deviceinfo.StorageMeasurement.MeasurementDetails;
-import com.android.settings.deviceinfo.StorageMeasurement.MeasurementReceiver;
 import com.android.settings.deviceinfo.StorageSettings.MountTask;
+import com.android.settingslib.deviceinfo.StorageMeasurement;
+import com.android.settingslib.deviceinfo.StorageMeasurement.MeasurementDetails;
+import com.android.settingslib.deviceinfo.StorageMeasurement.MeasurementReceiver;
 import com.google.android.collect.Lists;
 
 import java.io.File;
