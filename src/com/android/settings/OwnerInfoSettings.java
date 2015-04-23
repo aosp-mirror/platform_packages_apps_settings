@@ -16,110 +16,105 @@
 
 package com.android.settings;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.Fragment;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.os.UserManager;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.TextView;
 
-import com.android.internal.logging.MetricsLogger;
 import com.android.internal.widget.LockPatternUtils;
 
-public class OwnerInfoSettings extends InstrumentedFragment {
+public class OwnerInfoSettings extends DialogFragment implements OnClickListener {
 
-    public static final String EXTRA_SHOW_NICKNAME = "show_nickname";
+    private static final String TAG_OWNER_INFO = "ownerInfo";
+
+    private static final int MAX_CHARS = 100;
 
     private View mView;
-    private CheckBox mCheckbox;
     private int mUserId;
     private LockPatternUtils mLockPatternUtils;
     private EditText mOwnerInfo;
-    private EditText mNickname;
-    private boolean mShowNickname;
+    private TextView mOwnerInfoStatus;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Bundle args = getArguments();
-        if (args != null && args.containsKey(EXTRA_SHOW_NICKNAME)) {
-            mShowNickname = args.getBoolean(EXTRA_SHOW_NICKNAME);
-        }
+        mUserId = UserHandle.myUserId();
+        mLockPatternUtils = new LockPatternUtils(getActivity());
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.ownerinfo, container, false);
-        mUserId = UserHandle.myUserId();
-        mLockPatternUtils = new LockPatternUtils(getActivity());
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        mView = LayoutInflater.from(getActivity()).inflate(R.layout.ownerinfo, null);
         initView();
-        return mView;
+        return new AlertDialog.Builder(getActivity())
+                .setTitle(R.string.owner_info_settings_title)
+                .setView(mView)
+                .setPositiveButton(R.string.save, this)
+                .setNegativeButton(R.string.cancel, this)
+                .show();
     }
 
     private void initView() {
-        mNickname = (EditText) mView.findViewById(R.id.owner_info_nickname);
-        if (!mShowNickname) {
-            mNickname.setVisibility(View.GONE);
-        } else {
-            mNickname.setText(UserManager.get(getActivity()).getUserName());
-            mNickname.setSelected(true);
-        }
-
-        final boolean enabled = mLockPatternUtils.isOwnerInfoEnabled();
-
-        mCheckbox = (CheckBox) mView.findViewById(R.id.show_owner_info_on_lockscreen_checkbox);
-        mCheckbox.setChecked(enabled);
-        if (UserHandle.myUserId() != UserHandle.USER_OWNER) {
-            if (UserManager.get(getActivity()).isLinkedUser()) {
-                mCheckbox.setText(R.string.show_profile_info_on_lockscreen_label);
-            } else {
-                mCheckbox.setText(R.string.show_user_info_on_lockscreen_label);
-            }
-        }
-        mCheckbox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                mLockPatternUtils.setOwnerInfoEnabled(isChecked);
-                mOwnerInfo.setEnabled(isChecked); // disable text field if not enabled
-            }
-        });
-
         String info = mLockPatternUtils.getOwnerInfo(mUserId);
 
         mOwnerInfo = (EditText) mView.findViewById(R.id.owner_info_edit_text);
-        mOwnerInfo.setEnabled(enabled);
         if (!TextUtils.isEmpty(info)) {
             mOwnerInfo.setText(info);
         }
+        mOwnerInfoStatus = (TextView) mView.findViewById(R.id.owner_info_status);
+        updateOwnerInfoStatus();
+
+        mOwnerInfo.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                updateOwnerInfoStatus();
+            }
+        });
+    }
+
+    private void updateOwnerInfoStatus() {
+        String status = getString(R.string.owner_info_settings_status,
+                mOwnerInfo.getText().toString().length(), MAX_CHARS);
+        mOwnerInfoStatus.setText(status);
     }
 
     @Override
-    protected int getMetricsCategory() {
-        return MetricsLogger.OWNER_INFO;
-    }
+    public void onClick(DialogInterface dialog, int which) {
+        if (which == AlertDialog.BUTTON_POSITIVE) {
+            String info = mOwnerInfo.getText().toString();
+            mLockPatternUtils.setOwnerInfoEnabled(!TextUtils.isEmpty(info));
+            mLockPatternUtils.setOwnerInfo(info, mUserId);
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        saveChanges();
-    }
-
-    void saveChanges() {
-        String info = mOwnerInfo.getText().toString();
-        mLockPatternUtils.setOwnerInfo(info, mUserId);
-        if (mShowNickname) {
-            String oldName = UserManager.get(getActivity()).getUserName();
-            CharSequence newName = mNickname.getText();
-            if (!TextUtils.isEmpty(newName) && !newName.equals(oldName)) {
-                UserManager.get(getActivity()).setUserName(UserHandle.myUserId(),
-                        newName.toString());
+            if (getTargetFragment() instanceof SecuritySettings) {
+                ((SecuritySettings) getTargetFragment()).updateOwnerInfo();
             }
         }
+    }
+
+    public static void show(Fragment parent) {
+        if (!parent.isAdded()) return;
+
+        final OwnerInfoSettings dialog = new OwnerInfoSettings();
+        dialog.setTargetFragment(parent, 0);
+        dialog.show(parent.getFragmentManager(), TAG_OWNER_INFO);
     }
 }

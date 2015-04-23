@@ -461,16 +461,7 @@ public class UserSettings extends SettingsPreferenceFragment
                     null, 0);
         } else if (info.id == UserHandle.myUserId()) {
             // Jump to owner info panel
-            Bundle extras = new Bundle();
-            if (!info.isRestricted()) {
-                extras.putBoolean(OwnerInfoSettings.EXTRA_SHOW_NICKNAME, true);
-            }
-            int titleResId = info.id == UserHandle.USER_OWNER ? R.string.owner_info_settings_title
-                    : (info.isRestricted() ? R.string.profile_info_settings_title
-                            : R.string.user_info_settings_title);
-            ((SettingsActivity) getActivity()).startPreferencePanel(
-                    OwnerInfoSettings.class.getName(),
-                    extras, titleResId, null, null, 0);
+            OwnerInfoSettings.show(this);
         } else if (mIsOwner) {
             Bundle extras = new Bundle();
             extras.putInt(UserDetailsSettings.EXTRA_USER_ID, userId);

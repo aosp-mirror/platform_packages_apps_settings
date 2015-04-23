@@ -17,6 +17,8 @@
 package com.android.settings;
 
 
+import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.admin.DevicePolicyManager;
@@ -26,26 +28,26 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.content.pm.UserInfo;
 import android.content.res.Resources;
+import android.hardware.fingerprint.Fingerprint;
+import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.preference.SwitchPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
+import android.preference.SwitchPreference;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.security.KeyStore;
-import android.hardware.fingerprint.Fingerprint;
-import android.hardware.fingerprint.FingerprintManager;
 import android.service.trust.TrustAgentService;
-import android.telephony.TelephonyManager;
-import android.telephony.SubscriptionManager;
 import android.telephony.SubscriptionInfo;
+import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -59,8 +61,6 @@ import com.android.settings.search.SearchIndexableRaw;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
 
 /**
  * Gesture lock pattern settings.
@@ -129,6 +129,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private boolean mIsPrimary;
 
     private Intent mTrustAgentClickIntent;
+    private Preference mOwnerInfoPref;
 
     @Override
     protected int getMetricsCategory() {
@@ -202,16 +203,15 @@ public class SecuritySettings extends SettingsPreferenceFragment
         // Add options for device encryption
         mIsPrimary = UserHandle.myUserId() == UserHandle.USER_OWNER;
 
-        if (!mIsPrimary) {
-            // Rename owner info settings
-            Preference ownerInfoPref = findPreference(KEY_OWNER_INFO_SETTINGS);
-            if (ownerInfoPref != null) {
-                if (UserManager.get(getActivity()).isLinkedUser()) {
-                    ownerInfoPref.setTitle(R.string.profile_info_settings_title);
-                } else {
-                    ownerInfoPref.setTitle(R.string.user_info_settings_title);
+        mOwnerInfoPref = findPreference(KEY_OWNER_INFO_SETTINGS);
+        if (mOwnerInfoPref != null) {
+            mOwnerInfoPref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    OwnerInfoSettings.show(SecuritySettings.this);
+                    return true;
                 }
-            }
+            });
         }
 
         if (mIsPrimary) {
@@ -602,6 +602,16 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
         if (mResetCredentials != null) {
             mResetCredentials.setEnabled(!mKeyStore.isEmpty());
+        }
+
+        updateOwnerInfo();
+    }
+
+    public void updateOwnerInfo() {
+        if (mOwnerInfoPref != null) {
+            mOwnerInfoPref.setSummary(mLockPatternUtils.isOwnerInfoEnabled()
+                    ? mLockPatternUtils.getOwnerInfo(UserHandle.myUserId())
+                    : getString(R.string.owner_info_settings_summary));
         }
     }
 
