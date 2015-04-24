@@ -50,9 +50,10 @@ public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
     private static final String KEY_START_TIME = "start_time";
     private static final String KEY_END_TIME = "end_time";
 
-    private static final SimpleDateFormat DAY_FORMAT = new SimpleDateFormat("EEE");
-
     public static final String ACTION = Settings.ACTION_ZEN_MODE_SCHEDULE_RULE_SETTINGS;
+
+    // per-instance to ensure we're always using the current locale
+    private final SimpleDateFormat mDayFormat = new SimpleDateFormat("EEE");
 
     private Preference mDays;
     private TimePickerPreference mStart;
@@ -147,7 +148,7 @@ public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
                         if (sb.length() > 0) {
                             sb.append(mContext.getString(R.string.summary_divider_text));
                         }
-                        sb.append(DAY_FORMAT.format(c.getTime()));
+                        sb.append(mDayFormat.format(c.getTime()));
                         break;
                     }
                 }
