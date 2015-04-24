@@ -22,11 +22,13 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -174,8 +176,16 @@ public class DashboardSummary extends InstrumentedFragment {
 
         if (!TextUtils.isEmpty(tile.iconPkg)) {
             try {
-                tileIcon.setImageDrawable(context.getPackageManager()
-                        .getResourcesForApplication(tile.iconPkg).getDrawable(tile.iconRes, null));
+                Drawable drawable = context.getPackageManager()
+                        .getResourcesForApplication(tile.iconPkg).getDrawable(tile.iconRes, null);
+                if (!tile.iconPkg.equals(context.getPackageName()) && drawable != null) {
+                    // If this drawable is coming from outside Settings, tint it to match the color.
+                    TypedValue tintColor = new TypedValue();
+                    context.getTheme().resolveAttribute(com.android.internal.R.attr.colorAccent,
+                            tintColor, true);
+                    drawable.setTint(tintColor.data);
+                }
+                tileIcon.setImageDrawable(drawable);
             } catch (NameNotFoundException | Resources.NotFoundException e) {
                 tileIcon.setImageDrawable(null);
                 tileIcon.setBackground(null);
