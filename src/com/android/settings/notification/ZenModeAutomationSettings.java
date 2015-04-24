@@ -48,10 +48,11 @@ import java.util.List;
 import java.util.TreeSet;
 
 public class ZenModeAutomationSettings extends ZenModeSettingsBase {
-    private static final SimpleDateFormat DAY_FORMAT = new SimpleDateFormat("EEE");
 
     static final Config CONFIG = getConditionProviderConfig();
 
+    // per-instance to ensure we're always using the current locale
+    private final SimpleDateFormat mDayFormat = new SimpleDateFormat("EEE");
     private final Calendar mCalendar = Calendar.getInstance();
 
     private ServiceListing mServiceListing;
@@ -218,7 +219,7 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
 
     private String dayString(int day) {
         mCalendar.set(Calendar.DAY_OF_WEEK, day);
-        return DAY_FORMAT.format(mCalendar.getTime());
+        return mDayFormat.format(mCalendar.getTime());
     }
 
     private static Config getConditionProviderConfig() {

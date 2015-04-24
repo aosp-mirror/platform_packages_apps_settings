@@ -41,8 +41,9 @@ public class ZenModeScheduleDaysSelection extends ScrollView {
         Calendar.FRIDAY,
         Calendar.SATURDAY,
     };
-    private static final SimpleDateFormat DAY_FORMAT = new SimpleDateFormat("EEEE");
 
+    // per-instance to ensure we're always using the current locale
+    private final SimpleDateFormat mDayFormat = new SimpleDateFormat("EEEE");
     private final SparseBooleanArray mDays = new SparseBooleanArray();
     private final LinearLayout mLayout;
 
@@ -66,7 +67,7 @@ public class ZenModeScheduleDaysSelection extends ScrollView {
             final CheckBox checkBox = (CheckBox) inflater.inflate(R.layout.zen_schedule_rule_day,
                     this, false);
             c.set(Calendar.DAY_OF_WEEK, day);
-            checkBox.setText(DAY_FORMAT.format(c.getTime()));
+            checkBox.setText(mDayFormat.format(c.getTime()));
             checkBox.setChecked(mDays.get(day));
             checkBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
                 @Override
