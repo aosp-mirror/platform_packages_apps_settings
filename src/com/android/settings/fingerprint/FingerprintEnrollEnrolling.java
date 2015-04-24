@@ -17,17 +17,15 @@
 package com.android.settings.fingerprint;
 
 import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.hardware.fingerprint.FingerprintManager;
+import android.graphics.drawable.AnimatedVectorDrawable;
 import android.os.Bundle;
-import android.os.CancellationSignal;
-import android.os.PowerManager;
-import android.os.SystemClock;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AnimationUtils;
@@ -51,6 +49,11 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
     private static final int FINISH_DELAY = 250;
 
     /**
+     * How long the user needs to touch the icon until we show the dialog.
+     */
+    private static final long ICON_TOUCH_DURATION_UNTIL_DIALOG_SHOWN = 500;
+
+    /**
      * How many times the user needs to touch the icon until we show the dialog that this is not the
      * fingerprint sensor.
      */
@@ -65,6 +68,8 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
     private Interpolator mFastOutSlowInInterpolator;
     private int mIconTouchCount;
     private FingerprintEnrollSidecar mSidecar;
+    private boolean mAnimationCancelled;
+    private AnimatedVectorDrawable mIconAnimationDrawable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,17 +81,24 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
         mErrorText = (TextView) findViewById(R.id.error_text);
         mProgressBar = (ProgressBar) findViewById(R.id.fingerprint_progress_bar);
         mFingerprintAnimator = (ImageView) findViewById(R.id.fingerprint_animator);
+        mIconAnimationDrawable = (AnimatedVectorDrawable) mFingerprintAnimator.getDrawable();
+        mIconAnimationDrawable.addListener(mIconAnimationListener);
         mFastOutSlowInInterpolator = AnimationUtils.loadInterpolator(
                 this, android.R.interpolator.fast_out_slow_in);
-        findViewById(R.id.fingerprint_animator).setOnTouchListener(new View.OnTouchListener() {
+        mFingerprintAnimator.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
                     mIconTouchCount++;
                     if (mIconTouchCount == ICON_TOUCH_COUNT_SHOW_UNTIL_DIALOG_SHOWN) {
                         showIconTouchDialog();
-                        mIconTouchCount = 0;
+                    } else {
+                        mFingerprintAnimator.postDelayed(mShowDialogRunnable,
+                                ICON_TOUCH_DURATION_UNTIL_DIALOG_SHOWN);
                     }
+                } else if (event.getActionMasked() == MotionEvent.ACTION_CANCEL
+                        || event.getActionMasked() == MotionEvent.ACTION_UP) {
+                    mFingerprintAnimator.removeCallbacks(mShowDialogRunnable);
                 }
                 return true;
             }
@@ -102,18 +114,31 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
             getFragmentManager().beginTransaction().add(mSidecar, TAG_SIDECAR).commit();
         }
         mSidecar.setListener(this);
-        if (mSidecar.isDone()) {
-            launchFinish(mToken);
-        } else {
-            updateProgress(false /* animate */);
-            updateDescription();
-        }
+        updateProgress(false /* animate */);
+        updateDescription();
+    }
+
+    @Override
+    public void onEnterAnimationComplete() {
+        super.onEnterAnimationComplete();
+        mAnimationCancelled = false;
+        startIconAnimation();
+    }
+
+    private void startIconAnimation() {
+        mIconAnimationDrawable.start();
+    }
+
+    private void stopIconAnimation() {
+        mAnimationCancelled = true;
+        mIconAnimationDrawable.stop();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         mSidecar.setListener(null);
+        stopIconAnimation();
     }
 
     private void animateProgress(int progress) {
@@ -187,6 +212,7 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
     }
 
     private void showIconTouchDialog() {
+        mIconTouchCount = 0;
         new IconTouchDialog().show(getFragmentManager(), null /* tag */);
     }
 
@@ -211,10 +237,34 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
     };
 
     // Give the user a chance to see progress completed before jumping to the next stage.
-    Runnable mDelayedFinishRunnable = new Runnable() {
+    private final Runnable mDelayedFinishRunnable = new Runnable() {
         @Override
         public void run() {
             launchFinish(mToken);
+        }
+    };
+
+    private final Animator.AnimatorListener mIconAnimationListener = new AnimatorListenerAdapter() {
+        @Override
+        public void onAnimationEnd(Animator animation) {
+            if (mAnimationCancelled) {
+                return;
+            }
+
+            // Start animation after it has ended.
+            mFingerprintAnimator.post(new Runnable() {
+                @Override
+                public void run() {
+                    startIconAnimation();
+                }
+            });
+        }
+    };
+
+    private final Runnable mShowDialogRunnable = new Runnable() {
+        @Override
+        public void run() {
+            showIconTouchDialog();
         }
     };
 
