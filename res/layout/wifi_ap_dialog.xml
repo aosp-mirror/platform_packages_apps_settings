@@ -67,30 +67,6 @@
                     android:prompt="@string/wifi_security"
                     android:entries="@array/wifi_ap_security" />
 
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/wifi_item_label"
-                    android:layout_marginTop="8dip"
-                    android:text="@string/wifi_ap_band_config" />
-
-               <RadioGroup android:id = "@+id/choose_channel"
-                       android:layout_width="fill_parent"
-                       android:layout_height="wrap_content"
-                       android:orientation="vertical">
-
-                   <RadioButton android:id="@+id/ap_2G_band"
-                           android:layout_width="match_parent"
-                           android:layout_height="wrap_content"
-                           android:text="@string/wifi_ap_choose_2G"
-                           android:layout_marginTop="8dip"/>
-
-                   <RadioButton android:id="@+id/ap_5G_band"
-                           android:layout_width="match_parent"
-                           android:layout_height="wrap_content"
-                           android:text="@string/wifi_ap_choose_5G"
-                           android:layout_marginTop="8dip"/>
-               </RadioGroup>
         </LinearLayout>
 
         <LinearLayout android:id="@+id/fields"
@@ -130,5 +106,26 @@
                     style="@style/wifi_item_content"
                     android:text="@string/wifi_show_password" />
         </LinearLayout>
+
+        <LinearLayout android:id="@+id/fields"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/wifi_item"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/wifi_item_label"
+                    android:layout_marginTop="8dip"
+                    android:text="@string/wifi_ap_band_config" />
+
+                <Spinner android:id="@+id/choose_channel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/wifi_item_content"
+                    android:prompt="@string/wifi_ap_band_config" />
+        </LinearLayout>
+
     </LinearLayout>
 </ScrollView>
