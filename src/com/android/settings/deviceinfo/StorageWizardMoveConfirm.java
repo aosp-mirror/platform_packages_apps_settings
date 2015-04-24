@@ -16,11 +16,15 @@
 
 package com.android.settings.deviceinfo;
 
+import static android.content.Intent.EXTRA_PACKAGE_NAME;
+import static android.content.Intent.EXTRA_TITLE;
+import static android.content.pm.PackageManager.EXTRA_MOVE_ID;
+import static android.os.storage.VolumeInfo.EXTRA_VOLUME_ID;
+
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
-import android.os.storage.VolumeInfo;
 
 import com.android.internal.util.Preconditions;
 import com.android.settings.R;
@@ -35,7 +39,7 @@ public class StorageWizardMoveConfirm extends StorageWizardBase {
         setContentView(R.layout.storage_wizard_generic);
 
         try {
-            mPackageName = getIntent().getStringExtra(Intent.EXTRA_PACKAGE_NAME);
+            mPackageName = getIntent().getStringExtra(EXTRA_PACKAGE_NAME);
             mApp = getPackageManager().getApplicationInfo(mPackageName, 0);
         } catch (NameNotFoundException e) {
             throw new RuntimeException(e);
@@ -46,7 +50,7 @@ public class StorageWizardMoveConfirm extends StorageWizardBase {
 
         // Sanity check that target volume is candidate
         Preconditions.checkState(
-                getPackageManager().getApplicationCandidateVolumes(mApp).contains(mVolume));
+                getPackageManager().getPackageCandidateVolumes(mApp).contains(mVolume));
 
         final String appName = getPackageManager().getApplicationLabel(mApp).toString();
         final String volumeName = mStorage.getBestVolumeDescription(mVolume);
@@ -59,9 +63,14 @@ public class StorageWizardMoveConfirm extends StorageWizardBase {
 
     @Override
     public void onNavigateNext() {
+        // Kick off move before we transition
+        final String appName = getPackageManager().getApplicationLabel(mApp).toString();
+        final int moveId = getPackageManager().movePackage(mPackageName, mVolume);
+
         final Intent intent = new Intent(this, StorageWizardMoveProgress.class);
-        intent.putExtra(VolumeInfo.EXTRA_VOLUME_ID, mVolume.getId());
-        intent.putExtra(Intent.EXTRA_PACKAGE_NAME, mPackageName);
+        intent.putExtra(EXTRA_MOVE_ID, moveId);
+        intent.putExtra(EXTRA_TITLE, appName);
+        intent.putExtra(EXTRA_VOLUME_ID, mVolume.getId());
         startActivity(intent);
         finishAffinity();
     }

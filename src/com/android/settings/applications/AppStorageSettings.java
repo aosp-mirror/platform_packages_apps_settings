@@ -168,7 +168,7 @@ public class AppStorageSettings extends AppInfoWithHeader
 
         // If not current volume, kick off move wizard
         final VolumeInfo targetVol = (VolumeInfo) value;
-        final VolumeInfo currentVol = context.getPackageManager().getApplicationCurrentVolume(
+        final VolumeInfo currentVol = context.getPackageManager().getPackageCurrentVolume(
                 mAppEntry.info);
         if (!Objects.equals(targetVol, currentVol)) {
             final Intent intent = new Intent(context, StorageWizardMoveConfirm.class);
@@ -261,7 +261,7 @@ public class AppStorageSettings extends AppInfoWithHeader
         refreshSizeInfo();
 
         final VolumeInfo currentVol = getActivity().getPackageManager()
-                .getApplicationCurrentVolume(mAppEntry.info);
+                .getPackageCurrentVolume(mAppEntry.info);
         mMoveDropDown.setSelectedValue(currentVol);
 
         return true;
@@ -303,7 +303,7 @@ public class AppStorageSettings extends AppInfoWithHeader
         final StorageManager storage = context.getSystemService(StorageManager.class);
 
         final List<VolumeInfo> candidates = context.getPackageManager()
-                .getApplicationCandidateVolumes(mAppEntry.info);
+                .getPackageCandidateVolumes(mAppEntry.info);
         Collections.sort(candidates, VolumeInfo.getDescriptionComparator());
 
         mMoveDropDown.clearItems();

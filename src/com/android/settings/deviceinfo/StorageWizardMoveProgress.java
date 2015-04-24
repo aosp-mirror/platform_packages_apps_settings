@@ -16,58 +16,71 @@
 
 package com.android.settings.deviceinfo;
 
+import static android.content.Intent.EXTRA_TITLE;
+import static android.content.pm.PackageManager.EXTRA_MOVE_ID;
 import static com.android.settings.deviceinfo.StorageSettings.TAG;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.IPackageMoveObserver;
 import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
-import android.os.AsyncTask;
+import android.content.pm.PackageManager.MoveCallback;
 import android.os.Bundle;
-import android.os.RemoteException;
-import android.os.storage.VolumeInfo;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.android.internal.util.Preconditions;
 import com.android.settings.R;
 
-import java.util.concurrent.CountDownLatch;
-
 public class StorageWizardMoveProgress extends StorageWizardBase {
-    private String mPackageName;
-    private ApplicationInfo mApp;
+    private int mMoveId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.storage_wizard_progress);
 
-        try {
-            mPackageName = getIntent().getStringExtra(Intent.EXTRA_PACKAGE_NAME);
-            mApp = getPackageManager().getApplicationInfo(mPackageName, 0);
-        } catch (NameNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        Preconditions.checkNotNull(mVolume);
-        Preconditions.checkNotNull(mApp);
-
-        final String appName = getPackageManager().getApplicationLabel(mApp).toString();
+        mMoveId = getIntent().getIntExtra(EXTRA_MOVE_ID, -1);
+        final String appName = getIntent().getStringExtra(EXTRA_TITLE);
         final String volumeName = mStorage.getBestVolumeDescription(mVolume);
 
         setHeaderText(R.string.storage_wizard_move_progress_title, appName);
         setBodyText(R.string.storage_wizard_move_progress_body, volumeName, appName);
 
-        setCurrentProgress(20);
-
         getNextButton().setVisibility(View.GONE);
 
-        new MoveTask().execute();
+        // Register for updates and push through current status
+        getPackageManager().registerMoveCallback(mCallback, new Handler());
+        mCallback.onStatusChanged(mMoveId, getPackageManager().getMoveStatus(mMoveId), -1);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        getPackageManager().unregisterMoveCallback(mCallback);
+    }
+
+    private final MoveCallback mCallback = new MoveCallback() {
+        @Override
+        public void onStarted(int moveId, String title) {
+            // Ignored
+        }
+
+        @Override
+        public void onStatusChanged(int moveId, int status, long estMillis) {
+            if (mMoveId != moveId) return;
+
+            if (PackageManager.isMoveStatusFinished(status)) {
+                Log.d(TAG, "Finished with status " + status);
+                if (status != PackageManager.MOVE_SUCCEEDED) {
+                    Toast.makeText(StorageWizardMoveProgress.this, moveStatusToMessage(status),
+                            Toast.LENGTH_LONG).show();
+                }
+                finishAffinity();
+
+            } else {
+                setCurrentProgress(status);
+            }
+        }
+    };
 
     private CharSequence moveStatusToMessage(int returnCode) {
         switch (returnCode) {
@@ -84,55 +97,6 @@ public class StorageWizardMoveProgress extends StorageWizardBase {
             case PackageManager.MOVE_FAILED_INTERNAL_ERROR:
             default:
                 return getString(R.string.insufficient_storage);
-        }
-    }
-
-    private class LocalPackageMoveObserver extends IPackageMoveObserver.Stub {
-        public int returnCode;
-        public CountDownLatch finished = new CountDownLatch(1);
-
-        @Override
-        public void packageMoved(String packageName, int returnCode) throws RemoteException {
-            this.returnCode = returnCode;
-            this.finished.countDown();
-        }
-    }
-
-    public class MoveTask extends AsyncTask<Void, Void, Integer> {
-        @Override
-        protected Integer doInBackground(Void... params) {
-            try {
-                final LocalPackageMoveObserver observer = new LocalPackageMoveObserver();
-
-                if (mApp.isExternalAsec()) {
-                    getPackageManager().movePackage(mPackageName, observer,
-                            PackageManager.MOVE_INTERNAL);
-                } else if (mVolume.getType() == VolumeInfo.TYPE_PUBLIC) {
-                    getPackageManager().movePackage(mPackageName, observer,
-                            PackageManager.MOVE_EXTERNAL_MEDIA);
-                } else {
-                    getPackageManager().movePackageAndData(mPackageName, mVolume.fsUuid, observer);
-                }
-
-                observer.finished.await();
-                return observer.returnCode;
-            } catch (Exception e) {
-                Log.e(TAG, "Failed to move", e);
-                return PackageManager.MOVE_FAILED_INTERNAL_ERROR;
-            }
-        }
-
-        @Override
-        protected void onPostExecute(Integer returnCode) {
-            final Context context = StorageWizardMoveProgress.this;
-            if (returnCode == PackageManager.MOVE_SUCCEEDED) {
-                finishAffinity();
-
-            } else {
-                Log.w(TAG, "Move failed with status " + returnCode);
-                Toast.makeText(context, moveStatusToMessage(returnCode), Toast.LENGTH_LONG).show();
-                finishAffinity();
-            }
         }
     }
 }
