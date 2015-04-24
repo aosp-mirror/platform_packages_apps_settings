@@ -219,4 +219,9 @@
         <item name="@*android:successColor">@color/lock_pattern_view_regular_color_dark</item>
         <item name="@*android:errorColor">@color/lock_pattern_view_error_color</item>
     </style>
+
+    <style name="Theme.FingerprintEnroll" parent="@android:style/Theme.Material.Light.NoActionBar">
+        <item name="android:windowAnimationStyle">@style/Animation.SuwWindowAnimation</item>
+    </style>
+
 </resources>

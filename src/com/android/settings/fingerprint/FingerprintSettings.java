@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.fingerprint;
 
 
 import android.app.Activity;
@@ -43,6 +43,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.internal.logging.MetricsLogger;
+import com.android.settings.ChooseLockGeneric;
+import com.android.settings.ChooseLockSettingsHelper;
+import com.android.settings.R;
+import com.android.settings.SettingsActivity;
+import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.fingerprint.FingerprintEnrollEnrolling;
 import com.android.settings.search.Indexable;
 
 import java.util.List;
@@ -323,7 +329,8 @@ public class FingerprintSettings extends SettingsActivity {
             final String key = pref.getKey();
             if (KEY_FINGERPRINT_ADD.equals(key)) {
                 Intent intent = new Intent();
-                intent.setClassName("com.android.settings", FingerprintEnroll.class.getName());
+                intent.setClassName("com.android.settings",
+                        FingerprintEnrollEnrolling.class.getName());
                 intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
                 stopFingerprint();
                 startActivityForResult(intent, ADD_FINGERPRINT_REQUEST);
@@ -410,9 +417,9 @@ public class FingerprintSettings extends SettingsActivity {
             Intent intent = new Intent();
             long challenge = mFingerprintManager.preEnroll();
             ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(getActivity(), this);
-            // TODO: update text or remove params from method
-            if (!helper.launchConfirmationActivity(CONFIRM_REQUEST, null,
-                        null, null, challenge)) {
+            if (!helper.launchConfirmationActivity(CONFIRM_REQUEST,
+                    getString(R.string.security_settings_fingerprint_preference_title),
+                    null, null, challenge)) {
                 intent.setClassName("com.android.settings", ChooseLockGeneric.class.getName());
                 intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.MINIMUM_QUALITY_KEY,
                         DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);
