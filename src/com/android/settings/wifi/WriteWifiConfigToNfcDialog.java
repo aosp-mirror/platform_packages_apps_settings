@@ -56,10 +56,11 @@ class WriteWifiConfigToNfcDialog extends AlertDialog
     private static final String PASSWORD_FORMAT = "102700%s%s";
     private static final int HEX_RADIX = 16;
     private static final char[] hexArray = "0123456789ABCDEF".toCharArray();
+    private static final String NETWORK_ID = "network_id";
+    private static final String SECURITY = "security";
 
     private final PowerManager.WakeLock mWakeLock;
 
-    private AccessPoint mAccessPoint;
     private View mView;
     private Button mSubmitButton;
     private Button mCancelButton;
@@ -71,16 +72,31 @@ class WriteWifiConfigToNfcDialog extends AlertDialog
     private WifiManager mWifiManager;
     private String mWpsNfcConfigurationToken;
     private Context mContext;
+    private int mNetworkId;
+    private int mSecurity;
 
-    WriteWifiConfigToNfcDialog(Context context, AccessPoint accessPoint,
+    WriteWifiConfigToNfcDialog(Context context, int networkId, int security,
             WifiManager wifiManager) {
         super(context);
 
         mContext = context;
         mWakeLock = ((PowerManager) context.getSystemService(Context.POWER_SERVICE))
                 .newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "WriteWifiConfigToNfcDialog:wakeLock");
-        mAccessPoint = accessPoint;
         mOnTextChangedHandler = new Handler();
+        mNetworkId = networkId;
+        mSecurity = security;
+        mWifiManager = wifiManager;
+    }
+
+    WriteWifiConfigToNfcDialog(Context context, Bundle savedState, WifiManager wifiManager) {
+        super(context);
+
+        mContext = context;
+        mWakeLock = ((PowerManager) context.getSystemService(Context.POWER_SERVICE))
+                .newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "WriteWifiConfigToNfcDialog:wakeLock");
+        mOnTextChangedHandler = new Handler();
+        mNetworkId = savedState.getInt(NETWORK_ID);
+        mSecurity = savedState.getInt(SECURITY);
         mWifiManager = wifiManager;
     }
 
@@ -120,7 +136,7 @@ class WriteWifiConfigToNfcDialog extends AlertDialog
 
         String password = mPasswordView.getText().toString();
         String wpsNfcConfigurationToken
-                = mWifiManager.getWpsNfcConfigurationToken(mAccessPoint.getConfig().networkId);
+                = mWifiManager.getWpsNfcConfigurationToken(mNetworkId);
         String passwordHex = byteArrayToHexString(password.getBytes());
 
         String passwordLength = password.length() >= HEX_RADIX
@@ -161,6 +177,11 @@ class WriteWifiConfigToNfcDialog extends AlertDialog
         } else {
             mLabelView.setText(R.string.status_invalid_password);
         }
+    }
+
+    public void saveState(Bundle state) {
+        state.putInt(NETWORK_ID, mNetworkId);
+        state.putInt(SECURITY, mSecurity);
     }
 
     private void handleWriteNfcEvent(Tag tag) {
@@ -223,9 +244,9 @@ class WriteWifiConfigToNfcDialog extends AlertDialog
     private void enableSubmitIfAppropriate() {
 
         if (mPasswordView != null) {
-            if (mAccessPoint.getSecurity() == AccessPoint.SECURITY_WEP) {
+            if (mSecurity == AccessPoint.SECURITY_WEP) {
                 mSubmitButton.setEnabled(mPasswordView.length() > 0);
-            } else if (mAccessPoint.getSecurity() == AccessPoint.SECURITY_PSK) {
+            } else if (mSecurity == AccessPoint.SECURITY_PSK) {
                 mSubmitButton.setEnabled(mPasswordView.length() >= 8);
             }
         } else {
