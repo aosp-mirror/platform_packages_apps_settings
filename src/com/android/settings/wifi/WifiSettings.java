@@ -508,29 +508,31 @@ public class WifiSettings extends RestrictedSettingsFragment
     }
 
     private void showDialog(AccessPoint accessPoint, boolean edit) {
-        WifiConfiguration config = accessPoint.getConfig();
-        if (isCreatorDeviceOwner(getActivity(), config) && accessPoint.isActive()) {
-            final int userId = UserHandle.getUserId(config.creatorUid);
-            final PackageManager pm = getActivity().getPackageManager();
-            final IPackageManager ipm = AppGlobals.getPackageManager();
-            String appName = pm.getNameForUid(config.creatorUid);
-            try {
-                final ApplicationInfo appInfo = ipm.getApplicationInfo(appName, /* flags */ 0,
-                        userId);
-                final CharSequence label = pm.getApplicationLabel(appInfo);
-                if (label != null) {
-                    appName = label.toString();
+        if (accessPoint != null) {
+            WifiConfiguration config = accessPoint.getConfig();
+            if (isCreatorDeviceOwner(getActivity(), config) && accessPoint.isActive()) {
+                final int userId = UserHandle.getUserId(config.creatorUid);
+                final PackageManager pm = getActivity().getPackageManager();
+                final IPackageManager ipm = AppGlobals.getPackageManager();
+                String appName = pm.getNameForUid(config.creatorUid);
+                try {
+                    final ApplicationInfo appInfo = ipm.getApplicationInfo(appName, /* flags */ 0,
+                            userId);
+                    final CharSequence label = pm.getApplicationLabel(appInfo);
+                    if (label != null) {
+                        appName = label.toString();
+                    }
+                } catch (RemoteException e) {
+                    // leave appName as packageName
                 }
-            } catch (RemoteException e) {
-                // leave appName as packageName
+                final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle(accessPoint.getSsid())
+                        .setMessage(getString(R.string.wifi_alert_lockdown_by_device_owner,
+                                appName))
+                        .setPositiveButton(android.R.string.ok, null)
+                        .show();
+                return;
             }
-            final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setTitle(accessPoint.getSsid())
-                    .setMessage(getString(R.string.wifi_alert_lockdown_by_device_owner,
-                            appName))
-                    .setPositiveButton(android.R.string.ok, null)
-                    .show();
-            return;
         }
 
         if (mDialog != null) {
@@ -561,10 +563,11 @@ public class WifiSettings extends RestrictedSettingsFragment
                 }
                 // If it's null, fine, it's for Add Network
                 mSelectedAccessPoint = ap;
+                final boolean hideForget = (ap == null || isCreatorDeviceOwner(getActivity(),
+                        ap.getConfig()));
                 mDialog = new WifiDialog(getActivity(), this, ap, mDlgEdit,
                         /* no hide submit/connect */ false,
-                        /* hide forget if config locked down */ isCreatorDeviceOwner(getActivity(),
-                                ap.getConfig()));
+                        /* hide forget if config locked down */ hideForget);
                 return mDialog;
             case WPS_PBC_DIALOG_ID:
                 return new WpsDialog(getActivity(), WpsInfo.PBC);
