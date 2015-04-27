@@ -134,6 +134,14 @@
                 android:icon="@drawable/ic_settings_multiuser"
                 />
 
+        <!-- Memory -->
+        <dashboard-tile
+                android:id="@+id/manage_memory"
+                android:title="@string/memory_settings_title"
+                android:fragment="com.android.settings.applications.ProcessStatsUi"
+                android:icon="@drawable/ic_settings_memory"
+                />
+
         <!-- Manage NFC payment apps -->
         <dashboard-tile
                 android:id="@+id/nfc_payment_settings"

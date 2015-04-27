@@ -30,6 +30,9 @@ public class ProcStatsPackageEntry implements Parcelable {
     private static final String TAG = "ProcStatsEntry";
     private static boolean DEBUG = ProcessStatsUi.DEBUG;
 
+    private static final float ALWAYS_THRESHOLD = .95f;
+    private static final float SOMETIMES_THRESHOLD = .25f;
+
     final String mPackage;
     final ArrayList<ProcStatsEntry> mEntries = new ArrayList<ProcStatsEntry>();
 
@@ -44,9 +47,11 @@ public class ProcStatsPackageEntry implements Parcelable {
 
     public ApplicationInfo mUiTargetApp;
     public String mUiLabel;
+    private long mWindowLength;
 
-    public ProcStatsPackageEntry(String pkg) {
+    public ProcStatsPackageEntry(String pkg, long windowLength) {
         mPackage = pkg;
+        mWindowLength = windowLength;
     }
 
     public ProcStatsPackageEntry(Parcel in) {
@@ -62,6 +67,16 @@ public class ProcStatsPackageEntry implements Parcelable {
         mRunWeight = in.readDouble();
     }
 
+    public CharSequence getRunningFrequency(Context context) {
+        float amountRunning = mRunDuration / (float) mWindowLength;
+        return getFrequency(amountRunning, context);
+    }
+
+    public CharSequence getBackgroundFrequency(Context context) {
+        float amountRunning = mBgDuration / (float) mWindowLength;
+        return getFrequency(amountRunning, context);
+    }
+
     public void addEntry(ProcStatsEntry entry) {
         mEntries.add(entry);
     }
@@ -72,23 +87,28 @@ public class ProcStatsPackageEntry implements Parcelable {
         mRunDuration = mAvgRunMem = mMaxRunMem = 0;
         mRunWeight = 0;
         final int N = mEntries.size();
-        for (int i=0; i<N; i++) {
+        for (int i=0; i < N; i++) {
             ProcStatsEntry entry = mEntries.get(i);
             mBgDuration += entry.mBgDuration;
-            mAvgBgMem += entry.mAvgBgMem;
-            if (entry.mMaxBgMem > mMaxBgMem) {
-                mMaxBgMem = entry.mMaxBgMem;
-            }
+            mAvgBgMem += entry.mAvgBgMem * entry.mBgDuration;
             mBgWeight += entry.mBgWeight;
             mRunDuration += entry.mRunDuration;
-            mAvgRunMem += entry.mAvgRunMem;
-            if (entry.mMaxRunMem > mMaxRunMem) {
-                mMaxRunMem = entry.mMaxRunMem;
-            }
+            mAvgRunMem += entry.mAvgRunMem * entry.mRunDuration;
             mRunWeight += entry.mRunWeight;
+
+            // Each entry is generally a process or something similar.  Since it is extremely
+            // unlikely that any apps are going to avoid running processes at the same time
+            // to avoid memory usage, we will sum the maximum memory usage to create a
+            // hypothetical worst case scenario of memory.
+            mMaxBgMem += entry.mMaxBgMem;
+            mMaxRunMem += entry.mMaxRunMem;
         }
-        mAvgBgMem /= N;
-        mAvgRunMem /= N;
+        if (mBgDuration != 0) {
+            mAvgBgMem = mAvgBgMem * N / mBgDuration;
+        }
+        if (mRunDuration != 0) {
+            mAvgRunMem = mAvgRunMem * N / mRunDuration;
+        }
     }
 
     public void retrieveUiData(Context context, PackageManager pm) {
@@ -142,4 +162,15 @@ public class ProcStatsPackageEntry implements Parcelable {
             return new ProcStatsPackageEntry[size];
         }
     };
+
+    // TODO: Find better place for this.
+    public static CharSequence getFrequency(float amount, Context context) {
+        if (amount> ALWAYS_THRESHOLD) {
+            return context.getString(R.string.always_running);
+        } else if (amount> SOMETIMES_THRESHOLD) {
+            return context.getString(R.string.sometimes_running);
+        } else {
+            return context.getString(R.string.rarely_running);
+        }
+    }
 }
