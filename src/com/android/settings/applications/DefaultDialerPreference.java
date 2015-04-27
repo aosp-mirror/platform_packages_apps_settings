@@ -42,7 +42,7 @@ public class DefaultDialerPreference extends AppListPreference {
     @Override
     protected boolean persistString(String value) {
         if (!TextUtils.isEmpty(value) && !Objects.equals(value, getDefaultPackage())) {
-            DefaultDialerManager.setDefaultPhoneApplication(getContext(), value);
+            DefaultDialerManager.setDefaultDialerApplication(getContext(), value);
         }
         setSummary(getEntry());
         return true;
