@@ -164,8 +164,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
 
     private static final String SHOW_ALL_ANRS_KEY = "show_all_anrs";
 
-    private static final String PROCESS_STATS = "proc_stats";
-
     private static final String PACKAGE_MIME_TYPE = "application/vnd.android.package-archive";
 
     private static final String TERMINAL_APP_PACKAGE = "com.android.terminal";
@@ -246,7 +244,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
 
     private SwitchPreference mShowAllANRs;
 
-    private PreferenceScreen mProcessStats;
     private final ArrayList<Preference> mAllPrefs = new ArrayList<Preference>();
 
     private final ArrayList<SwitchPreference> mResetSwitchPrefs
@@ -397,9 +394,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             mAllPrefs.add(hdcpChecking);
             removePreferenceForProduction(hdcpChecking);
         }
-
-        mProcessStats = (PreferenceScreen) findPreference(PROCESS_STATS);
-        mAllPrefs.add(mProcessStats);
     }
 
     private ListPreference addListPreference(String prefKey) {
