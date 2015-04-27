@@ -152,7 +152,7 @@
         <item name="switchBarMarginEnd">@dimen/switchbar_subsettings_margin_end</item>
     </style>
 
-    <style name="Theme.DialogWhenLarge" parent="@android:style/Theme.Material.DayNight.DialogWhenLarge">
+    <style name="Theme.DialogWhenLarge" parent="@*android:style/Theme.Material.Settings.DialogWhenLarge">
         <!-- Redefine the ActionBar style for contentInsetStart -->
         <item name="android:actionBarStyle">@style/Theme.ActionBar</item>
 
@@ -178,7 +178,7 @@
         <item name="preferenceBackgroundColor">@drawable/preference_background</item>
     </style>
 
-    <style name="Theme.AlertDialog" parent="@*android:style/Theme.Material.DayNight.Dialog.Alert">
+    <style name="Theme.AlertDialog" parent="@*android:style/Theme.Material.Settings.Dialog.Alert">
         <item name="android:windowSoftInputMode">adjustResize</item>
 
         <!-- Redefine the ActionBar style for contentInsetStart -->
@@ -220,7 +220,7 @@
         <item name="@*android:errorColor">@color/lock_pattern_view_error_color</item>
     </style>
 
-    <style name="Theme.FingerprintEnroll" parent="@android:style/Theme.Material.Light.NoActionBar">
+    <style name="Theme.FingerprintEnroll" parent="@*android:style/Theme.Material.Settings.NoActionBar">
         <item name="android:windowAnimationStyle">@style/Animation.SuwWindowAnimation</item>
     </style>
 
