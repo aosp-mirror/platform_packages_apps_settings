@@ -43,6 +43,7 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
 
     private static final String TAG = "WifiSettingsForSetupWizard";
 
+    private SetupWizardListLayout mLayout;
     private View mAddOtherNetworkItem;
     private TextView mEmptyFooter;
     private boolean mListLastEmpty = false;
@@ -50,9 +51,9 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        final SetupWizardListLayout layout = (SetupWizardListLayout) inflater.inflate(
-                R.layout.setup_wifi_layout, container, false);
-        final ListView list = layout.getListView();
+        mLayout = (SetupWizardListLayout)
+                inflater.inflate(R.layout.setup_wifi_layout, container, false);
+        final ListView list = mLayout.getListView();
 
         mAddOtherNetworkItem = inflater.inflate(R.layout.setup_wifi_add_network, list, false);
         list.addFooterView(mAddOtherNetworkItem, null, true);
@@ -65,13 +66,13 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
             }
         });
 
-        final NavigationBar navigationBar = layout.getNavigationBar();
+        final NavigationBar navigationBar = mLayout.getNavigationBar();
         if (navigationBar != null) {
             WifiSetupActivity activity = (WifiSetupActivity) getActivity();
             activity.onNavigationBarCreated(navigationBar);
         }
 
-        return layout;
+        return mLayout;
     }
 
     @Override
@@ -144,6 +145,17 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
                 list.addFooterView(mAddOtherNetworkItem, null, true);
             }
             mListLastEmpty = isEmpty;
+        }
+    }
+
+    @Override
+    protected void setProgressBarVisible(boolean visible) {
+        if (mLayout != null) {
+            if (visible) {
+                mLayout.showProgressBar();
+            } else {
+                mLayout.hideProgressBar();
+            }
         }
     }
 }

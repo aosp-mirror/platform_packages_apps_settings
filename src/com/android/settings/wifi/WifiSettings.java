@@ -33,7 +33,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
-import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.NetworkInfo.State;
@@ -623,13 +622,12 @@ public class WifiSettings extends RestrictedSettingsFragment
                 final Collection<AccessPoint> accessPoints =
                         mWifiTracker.getAccessPoints();
                 getPreferenceScreen().removeAll();
-                if (accessPoints.size() == 0) {
-                    addMessagePreference(R.string.wifi_empty_list_wifi_on);
-                }
 
+                boolean hasAvailableAccessPoints = false;
                 for (AccessPoint accessPoint : accessPoints) {
                     // Ignore access points that are out of range.
                     if (accessPoint.getLevel() != -1) {
+                        hasAvailableAccessPoints = true;
                         AccessPointPreference preference = new AccessPointPreference(accessPoint,
                                 getActivity());
 
@@ -637,18 +635,27 @@ public class WifiSettings extends RestrictedSettingsFragment
                         accessPoint.setListener(this);
                     }
                 }
+                if (!hasAvailableAccessPoints) {
+                    setProgressBarVisible(true);
+                    addMessagePreference(R.string.wifi_empty_list_wifi_on);
+                } else {
+                    setProgressBarVisible(false);
+                }
                 break;
 
             case WifiManager.WIFI_STATE_ENABLING:
                 getPreferenceScreen().removeAll();
+                setProgressBarVisible(true);
                 break;
 
             case WifiManager.WIFI_STATE_DISABLING:
                 addMessagePreference(R.string.wifi_stopping);
+                setProgressBarVisible(true);
                 break;
 
             case WifiManager.WIFI_STATE_DISABLED:
                 setOffMessage();
+                setProgressBarVisible(false);
                 break;
         }
         // Update "Saved Networks" menu option.
@@ -703,6 +710,10 @@ public class WifiSettings extends RestrictedSettingsFragment
         getPreferenceScreen().removeAll();
     }
 
+    protected void setProgressBarVisible(boolean visible) {
+        // TODO: show a progress bar when scan is in progress.
+    }
+
     @Override
     public void onWifiStateChanged(int state) {
         Activity activity = getActivity();
@@ -713,10 +724,12 @@ public class WifiSettings extends RestrictedSettingsFragment
         switch (state) {
             case WifiManager.WIFI_STATE_ENABLING:
                 addMessagePreference(R.string.wifi_starting);
+                setProgressBarVisible(true);
                 break;
 
             case WifiManager.WIFI_STATE_DISABLED:
                 setOffMessage();
+                setProgressBarVisible(false);
                 break;
         }
     }
