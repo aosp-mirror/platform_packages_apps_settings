@@ -340,6 +340,7 @@ public class SettingsActivity extends Activity
             ZenModePrioritySettings.class.getName(),
             ZenModeScheduleRuleSettings.class.getName(),
             ZenModeExternalRuleSettings.class.getName(),
+            ProcessStatsUi.class.getName(),
     };
 
 

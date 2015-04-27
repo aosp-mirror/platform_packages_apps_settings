@@ -17,20 +17,25 @@
 package com.android.settings.applications;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.preference.Preference;
-import android.text.format.Formatter;
+import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.TextView;
+
 import com.android.settings.R;
 
 public class ProcessStatsPreference extends Preference {
+
     private ProcStatsPackageEntry mEntry;
-    private int mProgress;
-    private CharSequence mProgressText;
+    private final int mAvgColor;
+    private final int mMaxColor;
+    private final int mRemainingColor;
+    private float mAvgRatio;
+    private float mMaxRatio;
+    private float mRemainingRatio;
 
     public ProcessStatsPreference(Context context) {
         this(context, null);
@@ -47,33 +52,38 @@ public class ProcessStatsPreference extends Preference {
     public ProcessStatsPreference(Context context, AttributeSet attrs, int defStyleAttr,
             int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        setLayoutResource(R.layout.preference_app_percentage);
+        setLayoutResource(R.layout.app_item_linear_color);
+        mAvgColor = context.getColor(R.color.memory_avg_use);
+        mMaxColor = context.getColor(R.color.memory_max_use);
+        mRemainingColor = context.getColor(R.color.memory_remaining);
     }
 
-    public void init(Drawable icon, ProcStatsPackageEntry entry) {
+    public void init(ProcStatsPackageEntry entry, PackageManager pm, float maxMemory) {
         mEntry = entry;
-        setIcon(icon != null ? icon : new ColorDrawable(0));
+        setTitle(TextUtils.isEmpty(entry.mUiLabel) ? entry.mPackage : entry.mUiLabel);
+        if (entry.mUiTargetApp != null) {
+            setIcon(entry.mUiTargetApp.loadIcon(pm));
+        } else {
+            setIcon(new ColorDrawable(0));
+        }
+        boolean statsForeground = entry.mRunWeight > entry.mBgWeight;
+        setSummary(statsForeground ? entry.getRunningFrequency(getContext())
+                : entry.getBackgroundFrequency(getContext()));
+        mAvgRatio = (statsForeground ? entry.mAvgRunMem : entry.mAvgBgMem) / maxMemory;
+        mMaxRatio = (statsForeground ? entry.mMaxRunMem : entry.mMaxBgMem) / maxMemory - mAvgRatio;
+        mRemainingRatio = 1 - mAvgRatio - mMaxRatio;
     }
 
     public ProcStatsPackageEntry getEntry() {
         return mEntry;
     }
 
-    public void setPercent(double percentOfWeight, double percentOfTime, long memory) {
-        mProgress = (int) Math.ceil(percentOfWeight);
-        //mProgressText = Utils.formatPercentage((int) percentOfTime);
-        mProgressText = Formatter.formatShortFileSize(getContext(), memory);
-        notifyChanged();
-    }
-
     @Override
     protected void onBindView(View view) {
         super.onBindView(view);
 
-        final ProgressBar progress = (ProgressBar) view.findViewById(android.R.id.progress);
-        progress.setProgress(mProgress);
-
-        final TextView text1 = (TextView) view.findViewById(android.R.id.text1);
-        text1.setText(mProgressText);
+        LinearColorBar linearColorBar = (LinearColorBar) view.findViewById(R.id.linear_color_bar);
+        linearColorBar.setColors(mAvgColor, mMaxColor, mRemainingColor);
+        linearColorBar.setRatios(mAvgRatio, mMaxRatio, mRemainingRatio);
     }
 }
