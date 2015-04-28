@@ -16,11 +16,9 @@
 
 package com.android.settings.deviceinfo;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.storage.DiskInfo;
 import android.os.storage.StorageManager;
-import android.os.storage.VolumeInfo;
+import android.os.storage.VolumeRecord;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,9 +31,8 @@ import com.android.internal.logging.MetricsLogger;
 import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 
-public class PrivateVolumeFormatConfirm extends InstrumentedFragment {
-    private VolumeInfo mVolume;
-    private DiskInfo mDisk;
+public class PrivateVolumeForget extends InstrumentedFragment {
+    private VolumeRecord mRecord;
 
     @Override
     protected int getMetricsCategory() {
@@ -46,16 +43,15 @@ public class PrivateVolumeFormatConfirm extends InstrumentedFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         final StorageManager storage = getActivity().getSystemService(StorageManager.class);
-        final String volumeId = getArguments().getString(VolumeInfo.EXTRA_VOLUME_ID);
-        mVolume = storage.findVolumeById(volumeId);
-        mDisk = storage.findDiskById(mVolume.getDiskId());
+        final String fsUuid = getArguments().getString(VolumeRecord.EXTRA_FS_UUID);
+        mRecord = storage.findRecordByUuid(fsUuid);
 
-        final View view = inflater.inflate(R.layout.storage_internal_format, container, false);
+        final View view = inflater.inflate(R.layout.storage_internal_forget, container, false);
         final TextView body = (TextView) view.findViewById(R.id.body);
         final Button confirm = (Button) view.findViewById(R.id.confirm);
 
-        body.setText(TextUtils.expandTemplate(getText(R.string.storage_internal_format_details),
-                mDisk.getDescription()));
+        body.setText(TextUtils.expandTemplate(getText(R.string.storage_internal_forget_details),
+                mRecord.getNickname()));
         confirm.setOnClickListener(mConfirmListener);
 
         return view;
@@ -64,10 +60,8 @@ public class PrivateVolumeFormatConfirm extends InstrumentedFragment {
     private final OnClickListener mConfirmListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
-            final Intent intent = new Intent(getActivity(), StorageWizardFormatProgress.class);
-            intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
-            intent.putExtra(StorageWizardFormatProgress.EXTRA_FORMAT_PUBLIC, true);
-            startActivity(intent);
+            final StorageManager storage = getActivity().getSystemService(StorageManager.class);
+            storage.forgetVolume(mRecord.getFsUuid());
             getActivity().finish();
         }
     };

@@ -83,6 +83,7 @@ import com.android.settings.dashboard.DashboardSummary;
 import com.android.settings.dashboard.DashboardTile;
 import com.android.settings.dashboard.NoHomeDialogFragment;
 import com.android.settings.dashboard.SearchResultsSummary;
+import com.android.settings.deviceinfo.PrivateVolumeForget;
 import com.android.settings.deviceinfo.PublicVolumeSettings;
 import com.android.settings.deviceinfo.StorageSettings;
 import com.android.settings.deviceinfo.UsbSettings;
@@ -310,6 +311,7 @@ public class SettingsActivity extends Activity
             TextToSpeechSettings.class.getName(),
             StorageSettings.class.getName(),
             PublicVolumeSettings.class.getName(),
+            PrivateVolumeForget.class.getName(),
             DevelopmentSettings.class.getName(),
             UsbSettings.class.getName(),
             AndroidBeam.class.getName(),

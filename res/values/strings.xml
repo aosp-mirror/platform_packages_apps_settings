@@ -2287,6 +2287,8 @@
     <string name="storage_menu_format_internal">Erase &amp; format as internal storage</string>
     <!-- Storage setting.  Menu option for USB transfer settings [CHAR LIMIT=30]-->
     <string name="storage_menu_usb">USB computer connection</string>
+    <!-- Storage setting.  Menu option for forgetting a storage device [CHAR LIMIT=30]-->
+    <string name="storage_menu_forget">Forget</string>
 
     <!-- Storage setting.  Title for USB transfer settings [CHAR LIMIT=30]-->
     <string name="storage_title_usb">USB computer connection</string>
@@ -2346,6 +2348,12 @@
     <string name="storage_internal_unmount_details"><b>When you eject this <xliff:g id="name" example="SD card">^1</xliff:g>, apps stored on it will stop working, and media files stored on it will not be available until it is reinserted.</b>
 \n\nThis <xliff:g id="name" example="SD card">^1</xliff:g> is formatted to work on this device only.  It won\'t work on any others.</string>
 
+    <!-- Body of dialog informing user about consequences of forgetting an internal storage device [CHAR LIMIT=NONE]-->
+    <string name="storage_internal_forget_details">To use the apps, photos, or data this <xliff:g id="name" example="SD card">^1</xliff:g> contains, reinsert it.
+\n\nAlternatively, you can choose to forget this storage if the device isn\'t available.
+\n\nIf you choose to forget, all the data the device contains will be lost forever.
+\n\nYou can reinstall the apps later, but their data stored on this device will be lost.</string>
+
     <!-- Title of wizard step prompting user to setup a storage device [CHAR LIMIT=32] -->
     <string name="storage_wizard_init_title">Set up your <xliff:g id="name" example="SD card">^1</xliff:g></string>
     <!-- Title of wizard choice to use storage device as external storage [CHAR LIMIT=64] -->
@@ -2364,6 +2372,14 @@
 \n\nAfter formatting, this <xliff:g id="name" example="SD card">^1</xliff:g> will only work in this device.
 \n\n<b>Formatting erases all data currently stored on the <xliff:g id="name" example="SD card">^1</xliff:g>.</b> To avoid losing the data, consider backing it up.
     </string>
+
+    <!-- Title of wizard step prompting user to format a storage device [CHAR LIMIT=32] -->
+    <string name="storage_wizard_format_confirm_public_title">Format as portable storage</string>
+    <!-- Body of wizard step prompting user to format a storage device [CHAR LIMIT=NONE] -->
+    <string name="storage_wizard_format_confirm_public_body">This requires the <xliff:g id="name" example="SD card">^1</xliff:g> to be formatted.
+\n\n<b>Formatting erases all data currently stored on the <xliff:g id="name" example="SD card">^1</xliff:g>.</b> To avoid losing the data, consider backing it up.
+    </string>
+
     <!-- Next button text of wizard step prompting user to format a storage device [CHAR LIMIT=32] -->
     <string name="storage_wizard_format_confirm_next">Erase &amp; format</string>
 
