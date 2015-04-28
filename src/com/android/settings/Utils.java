@@ -22,9 +22,11 @@ import android.annotation.Nullable;
 import android.app.ActivityManager;
 import android.app.ActivityManagerNative;
 import android.app.AlertDialog;
+import android.app.AppGlobals;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.app.IActivityManager;
+import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -32,6 +34,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.IPackageManager;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -1151,6 +1154,29 @@ public final class Utils {
         } else {
             view.clearAnimation();
             view.setVisibility(shown ? View.VISIBLE : View.INVISIBLE);
+        }
+    }
+
+    /**
+     * Returns the application info of the currently installed MDM package.
+     */
+    public static ApplicationInfo getAdminApplicationInfo(Context context, int profileId) {
+        DevicePolicyManager dpm =
+                (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
+        ComponentName mdmPackage = dpm.getProfileOwnerAsUser(profileId);
+        if (mdmPackage == null) {
+            return null;
+        }
+        String mdmPackageName = mdmPackage.getPackageName();
+        try {
+            IPackageManager ipm = AppGlobals.getPackageManager();
+            ApplicationInfo mdmApplicationInfo =
+                    ipm.getApplicationInfo(mdmPackageName, 0, profileId);
+            return mdmApplicationInfo;
+        } catch (RemoteException e) {
+            Log.e(TAG, "Error while retrieving application info for package " + mdmPackageName
+                    + ", userId " + profileId, e);
+            return null;
         }
     }
 }
