@@ -42,7 +42,10 @@ import com.android.settings.R;
 /**
  * Activity which handles the actual enrolling for fingerprint.
  */
-public class FingerprintEnrollEnrolling extends FingerprintEnrollBase {
+public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
+        implements FingerprintEnrollSidecar.Listener {
+
+    private static final String TAG_SIDECAR = "sidecar";
 
     private static final int PROGRESS_BAR_MAX = 10000;
     private static final int FINISH_DELAY = 250;
@@ -53,10 +56,6 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase {
      */
     private static final int ICON_TOUCH_COUNT_SHOW_UNTIL_DIALOG_SHOWN = 3;
 
-    private PowerManager mPowerManager;
-    private CancellationSignal mEnrollmentCancel = new CancellationSignal();
-    private int mEnrollmentSteps;
-    private boolean mEnrolling;
     private ProgressBar mProgressBar;
     private ImageView mFingerprintAnimator;
     private ObjectAnimator mProgressAnim;
@@ -65,13 +64,13 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase {
     private TextView mErrorText;
     private Interpolator mFastOutSlowInInterpolator;
     private int mIconTouchCount;
+    private FingerprintEnrollSidecar mSidecar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fingerprint_enroll_enrolling);
         setHeaderText(R.string.security_settings_fingerprint_enroll_start_title);
-        mPowerManager = getSystemService(PowerManager.class);
         mStartMessage = (TextView) findViewById(R.id.start_message);
         mRepeatMessage = (TextView) findViewById(R.id.repeat_message);
         mErrorText = (TextView) findViewById(R.id.error_text);
@@ -92,31 +91,32 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase {
                 return true;
             }
         });
-        startEnrollment();
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        cancelEnrollment();
-    }
-
-    private void startEnrollment() {
-        mEnrollmentSteps = -1;
-        getSystemService(FingerprintManager.class).enroll(mToken, mEnrollmentCancel,
-                mEnrollmentCallback, 0);
-        mProgressBar.setProgress(0);
-        mEnrolling = true;
-    }
-
-    private void cancelEnrollment() {
-        if (mEnrolling) {
-            mEnrollmentCancel.cancel();
-            mEnrolling = false;
+    protected void onStart() {
+        super.onStart();
+        mSidecar = (FingerprintEnrollSidecar) getFragmentManager().findFragmentByTag(TAG_SIDECAR);
+        if (mSidecar == null) {
+            mSidecar = new FingerprintEnrollSidecar();
+            getFragmentManager().beginTransaction().add(mSidecar, TAG_SIDECAR).commit();
+        }
+        mSidecar.setListener(this);
+        if (mSidecar.isDone()) {
+            launchFinish(mToken);
+        } else {
+            updateProgress(false /* animate */);
+            updateDescription();
         }
     }
 
-    private void updateProgress(int progress) {
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mSidecar.setListener(null);
+    }
+
+    private void animateProgress(int progress) {
         if (mProgressAnim != null) {
             mProgressAnim.cancel();
         }
@@ -139,7 +139,7 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase {
     }
 
     private void updateDescription() {
-        if (mEnrollmentSteps == -1) {
+        if (mSidecar.getEnrollmentSteps() == -1) {
             setHeaderText(R.string.security_settings_fingerprint_enroll_start_title);
             mStartMessage.setVisibility(View.VISIBLE);
             mRepeatMessage.setVisibility(View.INVISIBLE);
@@ -148,6 +148,42 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase {
             mStartMessage.setVisibility(View.INVISIBLE);
             mRepeatMessage.setVisibility(View.VISIBLE);
         }
+    }
+
+
+    @Override
+    public void onEnrollmentHelp(CharSequence helpString) {
+        mErrorText.setText(helpString);
+    }
+
+    @Override
+    public void onEnrollmentError(CharSequence errString) {
+        mErrorText.setText(errString);
+    }
+
+    @Override
+    public void onEnrollmentProgressChange(int steps, int remaining) {
+        updateProgress(true /* animate */);
+        updateDescription();
+        mErrorText.setText("");
+    }
+
+    private void updateProgress(boolean animate) {
+        int progress = getProgress(
+                mSidecar.getEnrollmentSteps(), mSidecar.getEnrollmentRemaining());
+        if (animate) {
+            animateProgress(progress);
+        } else {
+            mProgressBar.setProgress(progress);
+        }
+    }
+
+    private int getProgress(int steps, int remaining) {
+        if (steps == -1) {
+            return 0;
+        }
+        int progress = Math.max(0, steps + 1 - remaining);
+        return PROGRESS_BAR_MAX * progress / (steps + 1);
     }
 
     private void showIconTouchDialog() {
@@ -172,38 +208,6 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase {
 
         @Override
         public void onAnimationCancel(Animator animation) { }
-    };
-
-    private FingerprintManager.EnrollmentCallback mEnrollmentCallback
-            = new FingerprintManager.EnrollmentCallback() {
-
-        @Override
-        public void onEnrollmentProgress(int remaining) {
-            if (mEnrollmentSteps == -1) {
-                mEnrollmentSteps = remaining;
-                updateDescription();
-            }
-            if (remaining >= 0) {
-                int progress = Math.max(0, mEnrollmentSteps + 1 - remaining);
-                updateProgress(PROGRESS_BAR_MAX * progress / (mEnrollmentSteps + 1));
-
-                // Treat fingerprint like a touch event
-                mPowerManager.userActivity(SystemClock.uptimeMillis(),
-                        PowerManager.USER_ACTIVITY_EVENT_OTHER,
-                        PowerManager.USER_ACTIVITY_FLAG_NO_CHANGE_LIGHTS);
-            }
-            mErrorText.setText("");
-        }
-
-        @Override
-        public void onEnrollmentHelp(int helpMsgId, CharSequence helpString) {
-            mErrorText.setText(helpString);
-        }
-
-        @Override
-        public void onEnrollmentError(int errMsgId, CharSequence errString) {
-            mErrorText.setText(errString);
-        }
     };
 
     // Give the user a chance to see progress completed before jumping to the next stage.
