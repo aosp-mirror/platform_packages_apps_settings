@@ -28,6 +28,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 /**
  * Setup Wizard's version of RedactionInterstitial screen. It inherits the logic and basic structure
@@ -82,7 +83,8 @@ public class SetupRedactionInterstitial extends RedactionInterstitial {
 
             final NavigationBar navigationBar = layout.getNavigationBar();
             navigationBar.setNavigationBarListener(this);
-            navigationBar.getBackButton().setEnabled(false);
+            final Button backButton = navigationBar.getBackButton();
+            backButton.setVisibility(View.GONE);
             SetupWizardUtils.setImmersiveMode(getActivity());
             return layout;
         }
