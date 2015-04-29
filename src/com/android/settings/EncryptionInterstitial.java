@@ -33,6 +33,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -149,7 +150,7 @@ public class EncryptionInterstitial extends SettingsActivity {
             switch(dialogId) {
                 case ACCESSIBILITY_WARNING_DIALOG: {
                     final int quality = new LockPatternUtils(getActivity())
-                            .getKeyguardStoredPasswordQuality();
+                            .getKeyguardStoredPasswordQuality(UserHandle.myUserId());
                     final int titleId;
                     final int messageId;
                     switch (quality) {

@@ -36,6 +36,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.os.UserHandle;
 import android.os.Vibrator;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
@@ -116,7 +117,7 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
         mContext = getActivity();
         mPM = mContext.getPackageManager();
         mVoiceCapable = Utils.isVoiceCapable(mContext);
-        mSecure = new LockPatternUtils(getActivity()).isSecure();
+        mSecure = new LockPatternUtils(getActivity()).isSecure(UserHandle.myUserId());
 
         mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
         mVibrator = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);

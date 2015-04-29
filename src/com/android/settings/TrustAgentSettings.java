@@ -26,6 +26,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.preference.Preference;
 import android.preference.PreferenceGroup;
 import android.preference.SwitchPreference;
@@ -120,14 +121,16 @@ public class TrustAgentSettings extends SettingsPreferenceFragment implements
     }
 
     private void loadActiveAgents() {
-        List<ComponentName> activeTrustAgents = mLockPatternUtils.getEnabledTrustAgents();
+        List<ComponentName> activeTrustAgents = mLockPatternUtils.getEnabledTrustAgents(
+                UserHandle.myUserId());
         if (activeTrustAgents != null) {
             mActiveAgents.addAll(activeTrustAgents);
         }
     }
 
     private void saveActiveAgents() {
-        mLockPatternUtils.setEnabledTrustAgents(mActiveAgents);
+        mLockPatternUtils.setEnabledTrustAgents(mActiveAgents,
+                UserHandle.myUserId());
     }
 
     ArrayMap<ComponentName, AgentInfo> findAvailableTrustAgents() {
