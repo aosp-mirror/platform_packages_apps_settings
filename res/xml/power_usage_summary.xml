@@ -17,6 +17,13 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
                   xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
         android:title="@string/power_usage_summary_title"
-        settings:keywords="@string/keywords_battery"
-        android:key="app_list">
+        settings:keywords="@string/keywords_battery">
+
+        <com.android.settings.fuelgauge.BatteryHistoryPreference
+            android:key="battery_history" />
+
+        <PreferenceCategory
+            android:key="app_list"
+            android:title="@string/power_usage_list_summary" />
+
 </PreferenceScreen>

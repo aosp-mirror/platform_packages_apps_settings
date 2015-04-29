@@ -18,6 +18,7 @@ package com.android.settings;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,6 +30,11 @@ public class AppHeader {
 
     public static void createAppHeader(final Activity activity, Drawable icon, CharSequence label,
             final Intent settingsIntent) {
+        createAppHeader(activity, icon, label, settingsIntent, 0);
+    }
+
+    public static void createAppHeader(final Activity activity, Drawable icon, CharSequence label,
+            final Intent settingsIntent, int tintColorRes) {
         final View content = activity.findViewById(R.id.main_content);
         final ViewGroup contentParent = (ViewGroup) content.getParent();
         final View bar = activity.getLayoutInflater().inflate(R.layout.app_header,
@@ -36,6 +42,9 @@ public class AppHeader {
 
         final ImageView appIcon = (ImageView) bar.findViewById(R.id.app_icon);
         appIcon.setImageDrawable(icon);
+        if (tintColorRes != 0) {
+            appIcon.setImageTintList(ColorStateList.valueOf(activity.getColor(tintColorRes)));
+        }
 
         final TextView appName = (TextView) bar.findViewById(R.id.app_name);
         appName.setText(label);

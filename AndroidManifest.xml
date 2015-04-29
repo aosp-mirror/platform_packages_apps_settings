@@ -923,6 +923,15 @@
                 android:value="true" />
         </activity>
 
+        <activity android:name="Settings$HighPowerApplicationsActivity"
+                android:label="@string/high_power_apps"
+                android:taskAffinity="">
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.applications.ManageApplications" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
+        </activity>
+
         <!-- Keep compatibility with old shortcuts. -->
         <activity-alias android:name=".applications.ManageApplications"
                 android:label="@string/applications_settings"
