@@ -25,6 +25,7 @@ import com.android.settings.R;
 
 public class StorageWizardFormatConfirm extends StorageWizardBase {
     public static final String EXTRA_FORMAT_PRIVATE = "format_private";
+    public static final String EXTRA_FORGET_UUID = "forget_uuid";
 
     private boolean mFormatPrivate;
 
@@ -56,6 +57,7 @@ public class StorageWizardFormatConfirm extends StorageWizardBase {
         final Intent intent = new Intent(this, StorageWizardFormatProgress.class);
         intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
         intent.putExtra(EXTRA_FORMAT_PRIVATE, mFormatPrivate);
+        intent.putExtra(EXTRA_FORGET_UUID, getIntent().getStringExtra(EXTRA_FORGET_UUID));
         startActivity(intent);
         finishAffinity();
     }

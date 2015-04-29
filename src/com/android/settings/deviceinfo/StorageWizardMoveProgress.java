@@ -49,7 +49,7 @@ public class StorageWizardMoveProgress extends StorageWizardBase {
 
         // Register for updates and push through current status
         getPackageManager().registerMoveCallback(mCallback, new Handler());
-        mCallback.onStatusChanged(mMoveId, null, getPackageManager().getMoveStatus(mMoveId), -1);
+        mCallback.onStatusChanged(mMoveId, getPackageManager().getMoveStatus(mMoveId), -1);
     }
 
     @Override
@@ -60,7 +60,7 @@ public class StorageWizardMoveProgress extends StorageWizardBase {
 
     private final MoveCallback mCallback = new MoveCallback() {
         @Override
-        public void onStatusChanged(int moveId, String moveTitle, int status, long estMillis) {
+        public void onStatusChanged(int moveId, int status, long estMillis) {
             if (mMoveId != moveId) return;
 
             if (PackageManager.isMoveStatusFinished(status)) {

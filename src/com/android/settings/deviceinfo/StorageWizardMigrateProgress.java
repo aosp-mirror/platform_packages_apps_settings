@@ -16,13 +16,15 @@
 
 package com.android.settings.deviceinfo;
 
+import static android.content.pm.PackageManager.EXTRA_MOVE_ID;
 import static com.android.settings.deviceinfo.StorageSettings.TAG;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.MoveCallback;
 import android.os.Bundle;
-import android.os.SystemClock;
+import android.os.Handler;
 import android.os.storage.DiskInfo;
 import android.util.Log;
 import android.view.View;
@@ -32,45 +34,51 @@ import com.android.internal.util.Preconditions;
 import com.android.settings.R;
 
 public class StorageWizardMigrateProgress extends StorageWizardBase {
+    private int mMoveId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.storage_wizard_progress);
 
-        Preconditions.checkNotNull(mDisk);
+        Preconditions.checkNotNull(mVolume);
 
-        setHeaderText(R.string.storage_wizard_migrate_progress_title, mDisk.getDescription());
-        setBodyText(R.string.storage_wizard_migrate_details, mDisk.getDescription());
+        mMoveId = getIntent().getIntExtra(EXTRA_MOVE_ID, -1);
 
-        setCurrentProgress(20);
+        final String descrip = mStorage.getBestVolumeDescription(mVolume);
+        setHeaderText(R.string.storage_wizard_migrate_progress_title, descrip);
+        setBodyText(R.string.storage_wizard_migrate_details, descrip);
 
         getNextButton().setVisibility(View.GONE);
 
-        new MigrateTask().execute();
+        // Register for updates and push through current status
+        getPackageManager().registerMoveCallback(mCallback, new Handler());
+        mCallback.onStatusChanged(mMoveId, getPackageManager().getMoveStatus(mMoveId), -1);
     }
 
-    public class MigrateTask extends AsyncTask<Void, Void, Exception> {
+    private final MoveCallback mCallback = new MoveCallback() {
         @Override
-        protected Exception doInBackground(Void... params) {
-            // TODO: wire up migration
-            SystemClock.sleep(2000);
-            return null;
-        }
+        public void onStatusChanged(int moveId, int status, long estMillis) {
+            if (mMoveId != moveId) return;
 
-        @Override
-        protected void onPostExecute(Exception e) {
             final Context context = StorageWizardMigrateProgress.this;
-            if (e == null) {
-                final Intent intent = new Intent(context, StorageWizardReady.class);
-                intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
-                startActivity(intent);
+            if (PackageManager.isMoveStatusFinished(status)) {
+                Log.d(TAG, "Finished with status " + status);
+                if (status == PackageManager.MOVE_SUCCEEDED) {
+                    if (mDisk != null) {
+                        final Intent intent = new Intent(context, StorageWizardReady.class);
+                        intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
+                        startActivity(intent);
+                    }
+                } else {
+                    Toast.makeText(context, getString(R.string.insufficient_storage),
+                            Toast.LENGTH_LONG).show();
+                }
                 finishAffinity();
 
             } else {
-                Log.e(TAG, "Failed to migrate", e);
-                Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
-                finishAffinity();
+                setCurrentProgress(status);
             }
         }
-    }
+    };
 }
