@@ -56,7 +56,8 @@ public class DefaultBrowserPreference extends AppListPreference {
         intent.setData(Uri.parse("http:"));
 
         // Resolve that intent and check that the handleAllWebDataURI boolean is set
-        List<ResolveInfo> list = mPm.queryIntentActivitiesAsUser(intent, 0, UserHandle.myUserId());
+        List<ResolveInfo> list = mPm.queryIntentActivitiesAsUser(intent, PackageManager.MATCH_ALL,
+                UserHandle.myUserId());
 
         final int count = list.size();
         for (int i=0; i<count; i++) {
