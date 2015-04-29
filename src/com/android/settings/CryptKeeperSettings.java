@@ -39,6 +39,8 @@ import com.android.internal.logging.MetricsLogger;
 
 public class CryptKeeperSettings extends InstrumentedFragment {
     private static final String TAG = "CryptKeeper";
+    private static final String TYPE = "type";
+    private static final String PASSWORD = "password";
 
     private static final int KEYGUARD_REQUEST = 55;
 
@@ -194,8 +196,20 @@ public class CryptKeeperSettings extends InstrumentedFragment {
         Preference preference = new Preference(getActivity());
         preference.setFragment(CryptKeeperConfirm.class.getName());
         preference.setTitle(R.string.crypt_keeper_confirm_title);
-        preference.getExtras().putInt("type", type);
-        preference.getExtras().putString("password", password);
+        addEncryptionInfoToPreference(preference, type, password);
         ((SettingsActivity) getActivity()).onPreferenceStartFragment(null, preference);
+    }
+
+    private void addEncryptionInfoToPreference(Preference preference, int type, String password) {
+        Activity activity = getActivity();
+        DevicePolicyManager dpm = (DevicePolicyManager)
+                activity.getSystemService(Context.DEVICE_POLICY_SERVICE);
+        if (dpm.getDoNotAskCredentialsOnBoot()) {
+            preference.getExtras().putInt(TYPE, StorageManager.CRYPT_TYPE_DEFAULT);
+            preference.getExtras().putString(PASSWORD, "");
+        } else {
+            preference.getExtras().putInt(TYPE, type);
+            preference.getExtras().putString(PASSWORD, password);
+        }
     }
 }
