@@ -37,10 +37,10 @@ import android.os.UserManager;
 import android.os.storage.StorageEventListener;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
+import android.os.storage.VolumeRecord;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.provider.MediaStore;
-import android.text.TextUtils;
 import android.text.format.Formatter;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -160,7 +160,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         setHasOptionsMenu(true);
     }
 
-    public void refresh() {
+    public void update() {
         getActivity().setTitle(mStorageManager.getBestVolumeDescription(mVolume));
 
         // Valid options may have changed
@@ -245,7 +245,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         }
 
         mStorageManager.registerListener(mStorageListener);
-        refresh();
+        update();
     }
 
     @Override
@@ -297,19 +297,19 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         final Bundle args = new Bundle();
         switch (item.getItemId()) {
             case R.id.storage_rename:
-                RenameFragment.show(this);
+                RenameFragment.show(this, mVolume);
                 return true;
             case R.id.storage_mount:
                 new MountTask(context, mVolume).execute();
                 return true;
             case R.id.storage_unmount:
                 args.putString(VolumeInfo.EXTRA_VOLUME_ID, mVolume.getId());
-                startFragment(this, PrivateVolumeUnmountConfirm.class.getCanonicalName(),
+                startFragment(this, PrivateVolumeUnmount.class.getCanonicalName(),
                         R.string.storage_menu_unmount, 0, args);
                 return true;
             case R.id.storage_format:
                 args.putString(VolumeInfo.EXTRA_VOLUME_ID, mVolume.getId());
-                startFragment(this, PrivateVolumeFormatConfirm.class.getCanonicalName(),
+                startFragment(this, PrivateVolumeFormat.class.getCanonicalName(),
                         R.string.storage_menu_format, 0, args);
                 return true;
             case R.id.storage_usb:
@@ -437,15 +437,15 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         public void onVolumeStateChanged(VolumeInfo vol, int oldState, int newState) {
             if (Objects.equals(mVolume.getId(), vol.getId())) {
                 mVolume = vol;
-                refresh();
+                update();
             }
         }
 
         @Override
-        public void onVolumeMetadataChanged(VolumeInfo vol) {
-            if (Objects.equals(mVolume.getId(), vol.getId())) {
-                mVolume = vol;
-                refresh();
+        public void onVolumeMetadataChanged(String fsUuid) {
+            if (Objects.equals(mVolume.getFsUuid(), fsUuid)) {
+                mVolume = mStorageManager.findVolumeById(mVolumeId);
+                update();
             }
         }
     };
@@ -454,12 +454,14 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
      * Dialog that allows editing of volume nickname.
      */
     public static class RenameFragment extends DialogFragment {
-        public static void show(PrivateVolumeSettings parent) {
+        public static void show(PrivateVolumeSettings parent, VolumeInfo vol) {
             if (!parent.isAdded()) return;
 
             final RenameFragment dialog = new RenameFragment();
             dialog.setTargetFragment(parent, 0);
-            dialog.setArguments(parent.getArguments());
+            final Bundle args = new Bundle();
+            args.putString(VolumeRecord.EXTRA_FS_UUID, vol.getFsUuid());
+            dialog.setArguments(args);
             dialog.show(parent.getFragmentManager(), TAG_RENAME);
         }
 
@@ -468,20 +470,16 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
             final Context context = getActivity();
             final StorageManager storageManager = context.getSystemService(StorageManager.class);
 
-            final String volId = getArguments().getString(VolumeInfo.EXTRA_VOLUME_ID);
-            final VolumeInfo vol = storageManager.findVolumeById(volId);
+            final String fsUuid = getArguments().getString(VolumeRecord.EXTRA_FS_UUID);
+            final VolumeInfo vol = storageManager.findVolumeByUuid(fsUuid);
+            final VolumeRecord rec = storageManager.findRecordByUuid(fsUuid);
 
             final AlertDialog.Builder builder = new AlertDialog.Builder(context);
             final LayoutInflater dialogInflater = LayoutInflater.from(builder.getContext());
 
             final View view = dialogInflater.inflate(R.layout.dialog_edittext, null, false);
             final EditText nickname = (EditText) view.findViewById(R.id.edittext);
-
-            if (!TextUtils.isEmpty(vol.getNickname())) {
-                nickname.setText(vol.getNickname());
-            } else {
-                nickname.setText(storageManager.getBestVolumeDescription(vol));
-            }
+            nickname.setText(rec.getNickname());
 
             builder.setTitle(R.string.storage_rename_title);
             builder.setView(view);
@@ -491,7 +489,8 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             // TODO: move to background thread
-                            storageManager.setVolumeNickname(volId, nickname.getText().toString());
+                            storageManager.setVolumeNickname(fsUuid,
+                                    nickname.getText().toString());
                         }
                     });
             builder.setNegativeButton(R.string.cancel, null);
@@ -552,7 +551,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         public void onRemoveCompleted(final String packageName, final boolean succeeded) {
             synchronized (this) {
                 if (--mRemaining == 0) {
-                    mTarget.refresh();
+                    mTarget.update();
                 }
             }
         }

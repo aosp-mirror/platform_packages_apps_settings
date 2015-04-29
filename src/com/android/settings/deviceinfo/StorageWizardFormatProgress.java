@@ -31,9 +31,7 @@ import com.android.internal.util.Preconditions;
 import com.android.settings.R;
 
 public class StorageWizardFormatProgress extends StorageWizardBase {
-    public static final String EXTRA_FORMAT_PUBLIC = "format_private";
-
-    private boolean mFormatPublic;
+    private boolean mFormatPrivate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +40,8 @@ public class StorageWizardFormatProgress extends StorageWizardBase {
 
         Preconditions.checkNotNull(mDisk);
 
-        mFormatPublic = getIntent().getBooleanExtra(EXTRA_FORMAT_PUBLIC, false);
+        mFormatPrivate = getIntent().getBooleanExtra(
+                StorageWizardFormatConfirm.EXTRA_FORMAT_PRIVATE, false);
 
         setHeaderText(R.string.storage_wizard_format_progress_title, mDisk.getDescription());
         setBodyText(R.string.storage_wizard_format_progress_body, mDisk.getDescription());
@@ -58,10 +57,10 @@ public class StorageWizardFormatProgress extends StorageWizardBase {
         @Override
         protected Exception doInBackground(Void... params) {
             try {
-                if (mFormatPublic) {
-                    mStorage.partitionPublic(mDisk.getId());
-                } else {
+                if (mFormatPrivate) {
                     mStorage.partitionPrivate(mDisk.getId());
+                } else {
+                    mStorage.partitionPublic(mDisk.getId());
                 }
                 return null;
             } catch (Exception e) {
@@ -73,11 +72,15 @@ public class StorageWizardFormatProgress extends StorageWizardBase {
         protected void onPostExecute(Exception e) {
             final Context context = StorageWizardFormatProgress.this;
             if (e == null) {
-                if (!mFormatPublic) {
+                if (mFormatPrivate) {
                     // TODO: bring back migration once implemented
 //                    final Intent intent = new Intent(context, StorageWizardMigrate.class);
 //                    intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
 //                    startActivity(intent);
+                    final Intent intent = new Intent(context, StorageWizardReady.class);
+                    intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
+                    startActivity(intent);
+                } else {
                     final Intent intent = new Intent(context, StorageWizardReady.class);
                     intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
                     startActivity(intent);

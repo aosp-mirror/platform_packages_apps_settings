@@ -19,6 +19,7 @@ package com.android.settings.deviceinfo;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.storage.DiskInfo;
+import android.os.storage.VolumeInfo;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.RadioButton;
@@ -72,15 +73,26 @@ public class StorageWizardInit extends StorageWizardBase {
     @Override
     public void onNavigateNext() {
         if (mRadioExternal.isChecked()) {
-            // Remember that user made decision
-            mStorage.setVolumeInited(mVolume.getId(), true);
+            if (mVolume != null && mVolume.getType() == VolumeInfo.TYPE_PUBLIC) {
+                // Remember that user made decision
+                mStorage.setVolumeInited(mVolume.getFsUuid(), true);
 
-            final Intent intent = new Intent(this, StorageWizardReady.class);
-            intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
-            startActivity(intent);
+                final Intent intent = new Intent(this, StorageWizardReady.class);
+                intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
+                startActivity(intent);
+
+            } else {
+                // Gotta format to get there
+                final Intent intent = new Intent(this, StorageWizardFormatConfirm.class);
+                intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
+                intent.putExtra(StorageWizardFormatConfirm.EXTRA_FORMAT_PRIVATE, false);
+                startActivity(intent);
+            }
+
         } else if (mRadioInternal.isChecked()) {
             final Intent intent = new Intent(this, StorageWizardFormatConfirm.class);
             intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
+            intent.putExtra(StorageWizardFormatConfirm.EXTRA_FORMAT_PRIVATE, true);
             startActivity(intent);
         }
     }
