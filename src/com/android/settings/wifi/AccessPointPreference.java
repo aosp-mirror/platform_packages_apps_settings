@@ -36,11 +36,14 @@ public class AccessPointPreference extends Preference {
 
     private TextView mSummaryView;
     private boolean showSummary = true;
+    private boolean mForSavedNetworks = false;
     private AccessPoint mAccessPoint;
 
-    public AccessPointPreference(AccessPoint accessPoint, Context context) {
+    public AccessPointPreference(AccessPoint accessPoint, Context context,
+                                 boolean forSavedNetworks) {
         super(context);
         mAccessPoint = accessPoint;
+        mForSavedNetworks = forSavedNetworks;
         mAccessPoint.setTag(this);
         refresh();
     }
@@ -104,7 +107,10 @@ public class AccessPointPreference extends Preference {
      * Updates the title and summary; may indirectly call notifyChanged().
      */
     public void refresh() {
-        setTitle(mAccessPoint.getSsid());
+        if (mForSavedNetworks)
+            setTitle(mAccessPoint.getConfigName());
+        else
+            setTitle(mAccessPoint.getSsid());
 
         final Context context = getContext();
         updateIcon(mAccessPoint.getLevel(), context);
@@ -112,7 +118,9 @@ public class AccessPointPreference extends Preference {
         // Force new summary
         setSummary(null);
 
-        String summary = mAccessPoint.getSummary();
+        String summary = mForSavedNetworks ? mAccessPoint.getSavedNetworkSummary()
+                : mAccessPoint.getSettingsSummary();
+
         if (summary.length() > 0) {
             setSummary(summary);
             setShowSummary(true);
