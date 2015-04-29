@@ -24,6 +24,10 @@ import com.android.internal.util.Preconditions;
 import com.android.settings.R;
 
 public class StorageWizardFormatConfirm extends StorageWizardBase {
+    public static final String EXTRA_FORMAT_PRIVATE = "format_private";
+
+    private boolean mFormatPrivate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,9 +35,17 @@ public class StorageWizardFormatConfirm extends StorageWizardBase {
 
         Preconditions.checkNotNull(mDisk);
 
-        setHeaderText(R.string.storage_wizard_format_confirm_title);
-        setBodyText(R.string.storage_wizard_format_confirm_body,
-                mDisk.getDescription());
+        mFormatPrivate = getIntent().getBooleanExtra(EXTRA_FORMAT_PRIVATE, false);
+
+        if (mFormatPrivate) {
+            setHeaderText(R.string.storage_wizard_format_confirm_title);
+            setBodyText(R.string.storage_wizard_format_confirm_body,
+                    mDisk.getDescription());
+        } else {
+            setHeaderText(R.string.storage_wizard_format_confirm_public_title);
+            setBodyText(R.string.storage_wizard_format_confirm_public_body,
+                    mDisk.getDescription());
+        }
 
         // TODO: make this a big red scary button
         getNextButton().setText(R.string.storage_wizard_format_confirm_next);
@@ -43,6 +55,7 @@ public class StorageWizardFormatConfirm extends StorageWizardBase {
     public void onNavigateNext() {
         final Intent intent = new Intent(this, StorageWizardFormatProgress.class);
         intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
+        intent.putExtra(EXTRA_FORMAT_PRIVATE, mFormatPrivate);
         startActivity(intent);
         finishAffinity();
     }

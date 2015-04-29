@@ -1490,7 +1490,7 @@
         </activity>
 
         <activity
-                android:name="Settings$StorageVolumeSettingsActivity"
+                android:name="Settings$PublicVolumeSettingsActivity"
                 android:label="@string/storage_settings_title"
                 android:taskAffinity="com.android.settings"
                 android:parentActivityName="Settings$StorageSettingsActivity">
@@ -1504,6 +1504,19 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.deviceinfo.PublicVolumeSettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/storage_settings" />
+        </activity>
+
+        <activity
+                android:name="Settings$PrivateVolumeForgetActivity"
+                android:label="@string/storage_settings_title"
+                android:taskAffinity="com.android.settings"
+                android:parentActivityName="Settings$StorageSettingsActivity"
+                android:exported="true"
+                android:permission="android.permission.MOUNT_UNMOUNT_FILESYSTEMS">
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.deviceinfo.PrivateVolumeForget" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/storage_settings" />
         </activity>

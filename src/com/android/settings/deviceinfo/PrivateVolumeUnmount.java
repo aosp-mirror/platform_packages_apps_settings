@@ -33,7 +33,7 @@ import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.deviceinfo.StorageSettings.UnmountTask;
 
-public class PrivateVolumeUnmountConfirm extends InstrumentedFragment {
+public class PrivateVolumeUnmount extends InstrumentedFragment {
     private VolumeInfo mVolume;
     private DiskInfo mDisk;
 

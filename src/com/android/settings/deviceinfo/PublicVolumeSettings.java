@@ -33,7 +33,6 @@ import com.android.internal.logging.MetricsLogger;
 import com.android.internal.util.Preconditions;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.deviceinfo.StorageSettings.FormatTask;
 import com.android.settings.deviceinfo.StorageSettings.MountTask;
 import com.android.settings.deviceinfo.StorageSettings.UnmountTask;
 
@@ -110,7 +109,7 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
         mFormatInternal = buildAction(R.string.storage_menu_format_internal);
     }
 
-    public void refresh() {
+    public void update() {
         getActivity().setTitle(mStorageManager.getBestVolumeDescription(mVolume));
 
         final Context context = getActivity();
@@ -180,7 +179,7 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
         }
 
         mStorageManager.registerListener(mStorageListener);
-        refresh();
+        update();
     }
 
     @Override
@@ -197,10 +196,14 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
         } else if (pref == mUnmount) {
             new UnmountTask(context, mVolume).execute();
         } else if (pref == mFormat) {
-            new FormatTask(context, mVolume).execute();
+            final Intent intent = new Intent(context, StorageWizardFormatConfirm.class);
+            intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
+            intent.putExtra(StorageWizardFormatConfirm.EXTRA_FORMAT_PRIVATE, false);
+            startActivity(intent);
         } else if (pref == mFormatInternal) {
             final Intent intent = new Intent(context, StorageWizardFormatConfirm.class);
             intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
+            intent.putExtra(StorageWizardFormatConfirm.EXTRA_FORMAT_PRIVATE, true);
             startActivity(intent);
         }
 
@@ -212,15 +215,15 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
         public void onVolumeStateChanged(VolumeInfo vol, int oldState, int newState) {
             if (Objects.equals(mVolume.getId(), vol.getId())) {
                 mVolume = vol;
-                refresh();
+                update();
             }
         }
 
         @Override
-        public void onVolumeMetadataChanged(VolumeInfo vol) {
-            if (Objects.equals(mVolume.getId(), vol.getId())) {
-                mVolume = vol;
-                refresh();
+        public void onVolumeMetadataChanged(String fsUuid) {
+            if (Objects.equals(mVolume.getFsUuid(), fsUuid)) {
+                mVolume = mStorageManager.findVolumeById(mVolumeId);
+                update();
             }
         }
     };
