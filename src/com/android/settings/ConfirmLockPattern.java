@@ -28,6 +28,7 @@ import android.content.Intent;
 import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.os.storage.StorageManager;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -135,7 +136,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                 // on first launch, if no lock pattern is set, then finish with
                 // success (don't want user to get stuck confirming something that
                 // doesn't exist).
-                if (!mLockPatternUtils.isLockPatternEnabled()) {
+                if (!mLockPatternUtils.isLockPatternEnabled(UserHandle.myUserId())) {
                     getActivity().setResult(Activity.RESULT_OK);
                     getActivity().finish();
                 }
@@ -168,7 +169,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             super.onResume();
 
             // if the user is currently locked out, enforce it.
-            long deadline = mLockPatternUtils.getLockoutAttemptDeadline();
+            long deadline = mLockPatternUtils.getLockoutAttemptDeadline(UserHandle.myUserId());
             if (deadline != 0) {
                 handleAttemptLockout(deadline);
             } else if (!mLockPatternView.isEnabled()) {
@@ -276,13 +277,14 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                     if (getActivity() instanceof ConfirmLockPattern.InternalActivity) {
                         long challenge = getActivity().getIntent().getLongExtra(
                             ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, 0);
-                        byte[] token = mLockPatternUtils.verifyPattern(pattern, challenge);
+                        byte[] token = mLockPatternUtils.verifyPattern(pattern, challenge,
+                                UserHandle.myUserId());
                         if (token != null) {
                             matched = true;
                             intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
                         }
                     }
-                } else if (mLockPatternUtils.checkPattern(pattern)) {
+                } else if (mLockPatternUtils.checkPattern(pattern, UserHandle.myUserId())) {
                     matched = true;
                     if (getActivity() instanceof ConfirmLockPattern.InternalActivity) {
                         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_TYPE,
@@ -300,7 +302,8 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                     if (pattern.size() >= LockPatternUtils.MIN_PATTERN_REGISTER_FAIL &&
                             ++mNumWrongConfirmAttempts
                             >= LockPatternUtils.FAILED_ATTEMPTS_BEFORE_TIMEOUT) {
-                        long deadline = mLockPatternUtils.setLockoutAttemptDeadline();
+                        long deadline = mLockPatternUtils.setLockoutAttemptDeadline(
+                                UserHandle.myUserId());
                         handleAttemptLockout(deadline);
                     } else {
                         updateStage(Stage.NeedToUnlockWrong);

@@ -21,6 +21,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.admin.DevicePolicyManager;
 import android.content.Intent;
+import android.os.UserHandle;
 
 import com.android.internal.widget.LockPatternUtils;
 
@@ -116,7 +117,7 @@ public final class ChooseLockSettingsHelper {
             boolean returnCredentials, boolean external, boolean hasChallenge,
             long challenge) {
         boolean launched = false;
-        switch (mLockPatternUtils.getKeyguardStoredPasswordQuality()) {
+        switch (mLockPatternUtils.getKeyguardStoredPasswordQuality(UserHandle.myUserId())) {
             case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
                 launched = launchConfirmationActivity(request, title, header, description,
                         returnCredentials || hasChallenge

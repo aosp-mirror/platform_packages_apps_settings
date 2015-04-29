@@ -31,6 +31,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -603,18 +604,18 @@ public class ChooseLockPattern extends SettingsActivity {
         private void saveChosenPatternAndFinish() {
             if (mDone) return;
             LockPatternUtils utils = mChooseLockSettingsHelper.utils();
-            final boolean lockVirgin = !utils.isPatternEverChosen();
+            final boolean lockVirgin = !utils.isPatternEverChosen(UserHandle.myUserId());
 
-            boolean wasSecureBefore = utils.isSecure();
+            boolean wasSecureBefore = utils.isSecure(UserHandle.myUserId());
 
             final boolean required = getActivity().getIntent().getBooleanExtra(
                     EncryptionInterstitial.EXTRA_REQUIRE_PASSWORD, true);
 
             utils.setCredentialRequiredToDecrypt(required);
-            utils.saveLockPattern(mChosenPattern, mCurrentPattern);
+            utils.saveLockPattern(mChosenPattern, mCurrentPattern, UserHandle.myUserId());
 
             if (lockVirgin) {
-                utils.setVisiblePatternEnabled(true);
+                utils.setVisiblePatternEnabled(true, UserHandle.myUserId());
             }
 
             if (!wasSecureBefore) {
@@ -623,7 +624,8 @@ public class ChooseLockPattern extends SettingsActivity {
 
             if (mHasChallenge) {
                 Intent intent = new Intent();
-                byte[] token = utils.verifyPattern(mChosenPattern, mChallenge);
+                byte[] token = utils.verifyPattern(mChosenPattern, mChallenge,
+                        UserHandle.myUserId());
                 intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
                 getActivity().setResult(RESULT_FINISHED, intent);
             } else {

@@ -29,6 +29,7 @@ import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -368,7 +369,7 @@ public class ToggleAccessibilityServicePreferenceFragment
 
     private String createConfirmCredentialReasonMessage() {
         int resId = R.string.enable_service_password_reason;
-        switch (mLockPatternUtils.getKeyguardStoredPasswordQuality()) {
+        switch (mLockPatternUtils.getKeyguardStoredPasswordQuality(UserHandle.myUserId())) {
             case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING: {
                 resId = R.string.enable_service_pattern_reason;
             } break;

@@ -101,7 +101,7 @@ public class OwnerInfoSettings extends DialogFragment implements OnClickListener
     public void onClick(DialogInterface dialog, int which) {
         if (which == AlertDialog.BUTTON_POSITIVE) {
             String info = mOwnerInfo.getText().toString();
-            mLockPatternUtils.setOwnerInfoEnabled(!TextUtils.isEmpty(info));
+            mLockPatternUtils.setOwnerInfoEnabled(!TextUtils.isEmpty(info), mUserId);
             mLockPatternUtils.setOwnerInfo(info, mUserId);
 
             if (getTargetFragment() instanceof SecuritySettings) {
