@@ -111,13 +111,13 @@ public final class PaymentDefaultDialog extends AlertActivity implements
         if (defaultPaymentApp == null) {
             String formatString = getString(R.string.nfc_payment_set_default);
             String msg = String.format(formatString,
-                    sanitizePaymentAppCaption(requestedPaymentApp.caption.toString()));
+                    sanitizePaymentAppCaption(requestedPaymentApp.label.toString()));
             p.mMessage = msg;
         } else {
             String formatString = getString(R.string.nfc_payment_set_default_instead_of);
             String msg = String.format(formatString,
-                    sanitizePaymentAppCaption(requestedPaymentApp.caption.toString()),
-                    sanitizePaymentAppCaption(defaultPaymentApp.caption.toString()));
+                    sanitizePaymentAppCaption(requestedPaymentApp.label.toString()),
+                    sanitizePaymentAppCaption(defaultPaymentApp.label.toString()));
             p.mMessage = msg;
         }
         p.mPositiveButtonText = getString(R.string.yes);
