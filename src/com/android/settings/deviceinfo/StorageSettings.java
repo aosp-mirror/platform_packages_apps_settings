@@ -273,43 +273,6 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
         }
     }
 
-    public static class FormatTask extends AsyncTask<Void, Void, Exception> {
-        private final Context mContext;
-        private final StorageManager mStorageManager;
-        private final String mVolumeId;
-        private final String mDescription;
-
-        public FormatTask(Context context, VolumeInfo volume) {
-            mContext = context.getApplicationContext();
-            mStorageManager = mContext.getSystemService(StorageManager.class);
-            mVolumeId = volume.getId();
-            mDescription = mStorageManager.getBestVolumeDescription(volume);
-        }
-
-        @Override
-        protected Exception doInBackground(Void... params) {
-            try {
-                mStorageManager.format(mVolumeId);
-                mStorageManager.mount(mVolumeId);
-                return null;
-            } catch (Exception e) {
-                return e;
-            }
-        }
-
-        @Override
-        protected void onPostExecute(Exception e) {
-            if (e == null) {
-                Toast.makeText(mContext, mContext.getString(R.string.storage_format_success,
-                        mDescription), Toast.LENGTH_SHORT).show();
-            } else {
-                Log.e(TAG, "Failed to format " + mVolumeId, e);
-                Toast.makeText(mContext, mContext.getString(R.string.storage_format_failure,
-                        mDescription), Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
     /**
      * Enable indexing of searchable data
      */
