@@ -111,6 +111,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
     // Only allow one trust agent on the platform.
     private static final boolean ONLY_ONE_TRUST_AGENT = true;
 
+    private static final int MY_USER_ID = UserHandle.myUserId();
+
     private DevicePolicyManager mDPM;
     private SubscriptionManager mSubscriptionManager;
 
@@ -160,14 +162,14 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static int getResIdForLockUnlockScreen(Context context,
             LockPatternUtils lockPatternUtils) {
         int resid = 0;
-        if (!lockPatternUtils.isSecure()) {
-            if (lockPatternUtils.isLockScreenDisabled()) {
+        if (!lockPatternUtils.isSecure(MY_USER_ID)) {
+            if (lockPatternUtils.isLockScreenDisabled(MY_USER_ID)) {
                 resid = R.xml.security_settings_lockscreen;
             } else {
                 resid = R.xml.security_settings_chooser;
             }
         } else {
-            switch (lockPatternUtils.getKeyguardStoredPasswordQuality()) {
+            switch (lockPatternUtils.getKeyguardStoredPasswordQuality(MY_USER_ID)) {
                 case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
                     resid = R.xml.security_settings_pattern;
                     break;
@@ -204,7 +206,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
         addPreferencesFromResource(resid);
 
         // Add options for device encryption
-        mIsPrimary = UserHandle.myUserId() == UserHandle.USER_OWNER;
+        mIsPrimary = MY_USER_ID == UserHandle.USER_OWNER;
 
         mOwnerInfoPref = findPreference(KEY_OWNER_INFO_SETTINGS);
         if (mOwnerInfoPref != null) {
@@ -304,7 +306,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
         mToggleAppInstallation.setChecked(isNonMarketAppsAllowed());
         // Side loading of apps.
         // Disable for restricted profiles. For others, check if policy disallows it.
-        mToggleAppInstallation.setEnabled(!um.getUserInfo(UserHandle.myUserId()).isRestricted());
+        mToggleAppInstallation.setEnabled(!um.getUserInfo(MY_USER_ID).isRestricted());
         if (um.hasUserRestriction(UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES)
                 || um.hasUserRestriction(UserManager.DISALLOW_INSTALL_APPS)) {
             mToggleAppInstallation.setEnabled(false);
@@ -315,7 +317,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 (PreferenceGroup)root.findPreference(KEY_ADVANCED_SECURITY);
         if (advancedCategory != null) {
             Preference manageAgents = advancedCategory.findPreference(KEY_MANAGE_TRUST_AGENTS);
-            if (manageAgents != null && !mLockPatternUtils.isSecure()) {
+            if (manageAgents != null && !mLockPatternUtils.isSecure(MY_USER_ID)) {
                 manageAgents.setEnabled(false);
                 manageAgents.setSummary(R.string.disabled_because_no_backup_security);
             }
@@ -348,7 +350,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
         final List<Fingerprint> items = fpm.getEnrolledFingerprints();
         final int fingerprintCount = items != null ? items.size() : 0;
         final String clazz;
-        boolean hasPassword = mChooseLockSettingsHelper.utils().getActivePasswordQuality()
+        boolean hasPassword = mChooseLockSettingsHelper.utils().getActivePasswordQuality(
+                MY_USER_ID)
                 != DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
         if (fingerprintCount > 0) {
             fingerprintPreference.setSummary(getResources().getQuantityString(
@@ -368,7 +371,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     }
 
     private void addTrustAgentSettings(PreferenceGroup securityCategory) {
-        final boolean hasSecurity = mLockPatternUtils.isSecure();
+        final boolean hasSecurity = mLockPatternUtils.isSecure(MY_USER_ID);
         ArrayList<TrustAgentComponentInfo> agents =
                 getActiveTrustAgents(getPackageManager(), mLockPatternUtils, mDPM);
         for (int i = 0; i < agents.size(); i++) {
@@ -438,7 +441,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
         ArrayList<TrustAgentComponentInfo> result = new ArrayList<TrustAgentComponentInfo>();
         List<ResolveInfo> resolveInfos = pm.queryIntentServices(TRUST_AGENT_INTENT,
                 PackageManager.GET_META_DATA);
-        List<ComponentName> enabledTrustAgents = utils.getEnabledTrustAgents();
+        List<ComponentName> enabledTrustAgents = utils.getEnabledTrustAgents(MY_USER_ID);
 
         boolean disableTrustAgents = (dpm.getKeyguardDisabledFeatures(null)
                 & DevicePolicyManager.KEYGUARD_DISABLE_TRUST_AGENTS) != 0;
@@ -597,10 +600,12 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
         final LockPatternUtils lockPatternUtils = mChooseLockSettingsHelper.utils();
         if (mVisiblePattern != null) {
-            mVisiblePattern.setChecked(lockPatternUtils.isVisiblePatternEnabled());
+            mVisiblePattern.setChecked(lockPatternUtils.isVisiblePatternEnabled(
+                    MY_USER_ID));
         }
         if (mPowerButtonInstantlyLocks != null) {
-            mPowerButtonInstantlyLocks.setChecked(lockPatternUtils.getPowerButtonInstantlyLocks());
+            mPowerButtonInstantlyLocks.setChecked(lockPatternUtils.getPowerButtonInstantlyLocks(
+                    MY_USER_ID));
         }
 
         if (mShowPassword != null) {
@@ -617,8 +622,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
     public void updateOwnerInfo() {
         if (mOwnerInfoPref != null) {
-            mOwnerInfoPref.setSummary(mLockPatternUtils.isOwnerInfoEnabled()
-                    ? mLockPatternUtils.getOwnerInfo(UserHandle.myUserId())
+            mOwnerInfoPref.setSummary(mLockPatternUtils.isOwnerInfoEnabled(MY_USER_ID)
+                    ? mLockPatternUtils.getOwnerInfo(MY_USER_ID)
                     : getString(R.string.owner_info_settings_summary));
         }
     }
@@ -678,9 +683,9 @@ public class SecuritySettings extends SettingsPreferenceFragment
             }
             updateLockAfterPreferenceSummary();
         } else if (KEY_VISIBLE_PATTERN.equals(key)) {
-            lockPatternUtils.setVisiblePatternEnabled((Boolean) value);
+            lockPatternUtils.setVisiblePatternEnabled((Boolean) value, MY_USER_ID);
         } else if (KEY_POWER_INSTANTLY_LOCKS.equals(key)) {
-            mLockPatternUtils.setPowerButtonInstantlyLocks((Boolean) value);
+            mLockPatternUtils.setPowerButtonInstantlyLocks((Boolean) value, MY_USER_ID);
         } else if (KEY_SHOW_PASSWORD.equals(key)) {
             Settings.System.putInt(getContentResolver(), Settings.System.TEXT_SHOW_PASSWORD,
                     ((Boolean) value) ? 1 : 0);
@@ -715,7 +720,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
         public SecuritySearchIndexProvider() {
             super();
 
-            mIsPrimary = UserHandle.myUserId() == UserHandle.USER_OWNER;
+            mIsPrimary = MY_USER_ID == UserHandle.USER_OWNER;
         }
 
         @Override
@@ -800,7 +805,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
             // Advanced
             final LockPatternUtils lockPatternUtils = new LockPatternUtils(context);
-            if (lockPatternUtils.isSecure()) {
+            if (lockPatternUtils.isSecure(MY_USER_ID)) {
                 ArrayList<TrustAgentComponentInfo> agents =
                         getActiveTrustAgents(context.getPackageManager(), lockPatternUtils,
                                 context.getSystemService(DevicePolicyManager.class));
@@ -835,7 +840,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
             }
 
             // TrustAgent settings disappear when the user has no primary security.
-            if (!lockPatternUtils.isSecure()) {
+            if (!lockPatternUtils.isSecure(MY_USER_ID)) {
                 keys.add(KEY_TRUST_AGENT);
                 keys.add(KEY_MANAGE_TRUST_AGENTS);
             }

@@ -29,6 +29,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Process;
+import android.os.UserHandle;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.security.KeyStore;
@@ -168,7 +169,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                 Preference preference) {
             final String key = preference.getKey();
 
-            if (!isUnlockMethodSecure(key) && mLockPatternUtils.isSecure()) {
+            if (!isUnlockMethodSecure(key) && mLockPatternUtils.isSecure(UserHandle.myUserId())) {
                 // Show the disabling FRP warning only when the user is switching from a secure
                 // unlock method to an insecure one
                 showFactoryResetProtectionWarningDialog(key);
@@ -268,10 +269,10 @@ public class ChooseLockGeneric extends SettingsActivity {
         }
 
         private String getKeyForCurrent() {
-            if (mLockPatternUtils.isLockScreenDisabled()) {
+            if (mLockPatternUtils.isLockScreenDisabled(UserHandle.myUserId())) {
                 return KEY_UNLOCK_SET_OFF;
             }
-            switch (mLockPatternUtils.getKeyguardStoredPasswordQuality()) {
+            switch (mLockPatternUtils.getKeyguardStoredPasswordQuality(UserHandle.myUserId())) {
                 case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
                     return KEY_UNLOCK_SET_PATTERN;
                 case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
@@ -474,8 +475,9 @@ public class ChooseLockGeneric extends SettingsActivity {
                 }
                 startActivityForResult(intent, CHOOSE_LOCK_REQUEST);
             } else if (quality == DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED) {
-                mChooseLockSettingsHelper.utils().clearLock();
-                mChooseLockSettingsHelper.utils().setLockScreenDisabled(disabled);
+                mChooseLockSettingsHelper.utils().clearLock(UserHandle.myUserId());
+                mChooseLockSettingsHelper.utils().setLockScreenDisabled(disabled,
+                        UserHandle.myUserId());
                 removeAllFingerprintTemplates();
                 getActivity().setResult(Activity.RESULT_OK);
                 finish();
@@ -502,7 +504,7 @@ public class ChooseLockGeneric extends SettingsActivity {
         }
 
         private int getResIdForFactoryResetProtectionWarningTitle() {
-            switch (mLockPatternUtils.getKeyguardStoredPasswordQuality()) {
+            switch (mLockPatternUtils.getKeyguardStoredPasswordQuality(UserHandle.myUserId())) {
                 case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
                     return R.string.unlock_disable_lock_pattern_summary;
                 case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
