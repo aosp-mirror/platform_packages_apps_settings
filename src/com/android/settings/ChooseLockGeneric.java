@@ -189,7 +189,9 @@ public class ChooseLockGeneric extends SettingsActivity {
         // TODO: why does this take disabled, its always called with a quality higher than
         // what makes sense with disabled == true
         private void maybeEnableEncryption(int quality, boolean disabled) {
-            if (Process.myUserHandle().isOwner() && LockPatternUtils.isDeviceEncryptionEnabled()) {
+            DevicePolicyManager dpm = (DevicePolicyManager) getSystemService(DEVICE_POLICY_SERVICE);
+            if (Process.myUserHandle().isOwner() && LockPatternUtils.isDeviceEncryptionEnabled()
+                    && !dpm.getDoNotAskCredentialsOnBoot()) {
                 mEncryptionRequestQuality = quality;
                 mEncryptionRequestDisabled = disabled;
                 final Context context = getActivity();
