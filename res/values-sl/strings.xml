@@ -977,6 +977,8 @@
     <string name="storage_menu_format" msgid="8334422679047059459">"Izbris in formatiranje"</string>
     <string name="storage_menu_format_internal" msgid="6553368530402755543">"Izbris in form. kot not. shr."</string>
     <string name="storage_menu_usb" msgid="5708207885333243384">"Povezava USB z računalnikom"</string>
+    <!-- no translation found for storage_menu_forget (6305824238997983426) -->
+    <skip />
     <string name="storage_title_usb" msgid="679612779321689418">"Povezava USB z računalnikom"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"Vzpostavi povezavo kot"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"Predstavnostna naprava (MTP)"</string>
@@ -998,6 +1000,8 @@
     <string name="storage_rename_title" msgid="8242663969839491485">"Preimenovanje shrambe"</string>
     <string name="storage_internal_format_details" msgid="4018647158382548820">"Po formatiranju lahko uporabljate to shrambo (<xliff:g id="NAME_0">^1</xliff:g>) v drugih napravah. \n\nVsi podatki v tej shrambi (<xliff:g id="NAME_1">^1</xliff:g>) bodo izbrisani. Priporočamo, da podatke prej varnostno kopirate. \n\n"<b>"Varnostno kopiranje fotografij in druge predstavnosti"</b>" \nPremaknite predstavnostne datoteke v drugo shrambo v tej napravi ali jih s kablom USB prenesite v računalnik. \n\n"<b>"Varnostno kopiranje aplikacij"</b>" \nVse aplikacije, shranjene v tej shrambi (<xliff:g id="NAME_6">^1</xliff:g>), bodo odstranjene in podatki aplikacij izbrisani. Če želite ohraniti te aplikacije, jih premaknite v drugo shrambo v tej napravi."</string>
     <string name="storage_internal_unmount_details" msgid="3677827796634199714"><b>"Ko izvržete to shrambo (<xliff:g id="NAME_0">^1</xliff:g>), bodo aplikacije, shranjene v njej, prenehale delovati, predstavnostne datoteke, shranjene v njej, pa ne bodo na voljo, dokler je ne vstavite znova."</b>" \n\nTa shramba (<xliff:g id="NAME_1">^1</xliff:g>) je formatirana tako, da deluje samo v tej napravi. V drugih ne bo delovala."</string>
+    <!-- no translation found for storage_internal_forget_details (4881307991281138059) -->
+    <skip />
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"Nastavitev imena za: <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"Uporaba kot prenosna shramba"</string>
     <string name="storage_wizard_init_external_summary" msgid="7476105886344565074">"Za premikanje fotografij in druge predstavnosti med napravami."</string>
@@ -1005,6 +1009,10 @@
     <string name="storage_wizard_init_internal_summary" msgid="6240417501036216410">"Za shranjevanje česar koli samo v tej napravi, vključno z aplikacijami in fotografijami. Zahteva formatiranje, ki onemogoča delovanje z drugimi napravami."</string>
     <string name="storage_wizard_format_confirm_title" msgid="2814021794538252546">"Format. kot notranja shramba"</string>
     <string name="storage_wizard_format_confirm_body" msgid="4401758710076806509">"Če želite, da bo shramba <xliff:g id="NAME_0">^1</xliff:g> varna, jo morate formatirati. \n\nPo formatiranju bo ta shramba (<xliff:g id="NAME_1">^1</xliff:g>) delovala samo v tej napravi. \n\n"<b>"S formatiranjem se izbrišejo vsi podatki, ki so trenutno shranjeni v shrambi (<xliff:g id="NAME_2">^1</xliff:g>)."</b>" Če se želite izogniti izgubi podatkov, priporočamo, da jih varnostno kopirate."</string>
+    <!-- no translation found for storage_wizard_format_confirm_public_title (4905690038882041566) -->
+    <skip />
+    <!-- no translation found for storage_wizard_format_confirm_public_body (1516932692920060272) -->
+    <skip />
     <string name="storage_wizard_format_confirm_next" msgid="2774557300531702572">"Izbris in formatiranje"</string>
     <string name="storage_wizard_format_progress_title" msgid="6487352396450582292">"Formatiranje shrambe <xliff:g id="NAME">^1</xliff:g> …"</string>
     <string name="storage_wizard_format_progress_body" msgid="1259216693690378749">"Med formatiranjem ne odstranite shrambe <xliff:g id="NAME">^1</xliff:g>."</string>
@@ -1774,15 +1782,12 @@
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Statistični podatki o procesih"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Statistični podatki o procesih, ki se izvajajo"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Poraba pomnilnika"</string>
-    <!-- no translation found for process_stats_total_duration (7417201400853728029) -->
-    <skip />
-    <!-- no translation found for process_stats_total_duration_percentage (6522457033380025618) -->
-    <skip />
+    <string name="process_stats_total_duration" msgid="7417201400853728029">"Uporabljeno <xliff:g id="USEDRAM">%1$s</xliff:g> od <xliff:g id="TOTALRAM">%2$s</xliff:g> v obdobju <xliff:g id="TIMEDURATION">%3$s</xliff:g>"</string>
+    <string name="process_stats_total_duration_percentage" msgid="6522457033380025618">"Uporabljeno <xliff:g id="PERCENT">%1$s</xliff:g> RAM-a v obdobju <xliff:g id="TIMEDURATION">%2$s</xliff:g>"</string>
     <string name="process_stats_type_background" msgid="3934992858120683459">"V ozadju"</string>
     <string name="process_stats_type_foreground" msgid="7713118254089580536">"V ospredju"</string>
     <string name="process_stats_type_cached" msgid="6314925846944806511">"Predpomnjeni"</string>
-    <!-- no translation found for process_stats_memory_status (8291117301143037644) -->
-    <skip />
+    <string name="process_stats_memory_status" msgid="8291117301143037644">"Pomnilnik je: <xliff:g id="MEMSTATE">%1$s</xliff:g>"</string>
     <string name="process_stats_os_label" msgid="4813434110442733392">"Sistem Android"</string>
     <string name="process_stats_os_native" msgid="5322428494231768472">"Izvorno"</string>
     <string name="process_stats_os_kernel" msgid="1938523592369780924">"Jedro"</string>
@@ -1809,8 +1814,7 @@
     <string name="menu_duration_1d" msgid="3393631127622285458">"1 dan"</string>
     <string name="menu_show_system" msgid="8864603400415567635">"Prikaz sistemskih"</string>
     <string name="menu_hide_system" msgid="4106826741703745733">"Skrivanje sistemskih procesov"</string>
-    <!-- no translation found for menu_show_percentage (4717204046118199806) -->
-    <skip />
+    <string name="menu_show_percentage" msgid="4717204046118199806">"Prikaži odstotke"</string>
     <string name="menu_use_uss" msgid="467765290771543089">"Uporaba USS-ja"</string>
     <string name="menu_proc_stats_type" msgid="4700209061072120948">"Vrsta statističnih podatkov"</string>
     <string name="menu_proc_stats_type_background" msgid="2236161340134898852">"V ozadju"</string>
@@ -2305,7 +2309,8 @@
     <string name="user_confirm_remove_self_message" product="tablet" msgid="8167855311779740207">"V tem tabličnem računalniku boste izgubili prostor in podatke. Tega dejanja ni mogoče razveljaviti."</string>
     <string name="user_confirm_remove_self_message" product="default" msgid="5391888073786090274">"V tem telefonu boste izgubili prostor in podatke. Tega dejanja ni mogoče razveljaviti."</string>
     <string name="user_confirm_remove_message" msgid="1020629390993095037">"Vse aplikacije in vsi podatki bodo izbrisani."</string>
-    <string name="work_profile_confirm_remove_message" msgid="7593793549364168783">"Vse aplikacije in podatki v tem profilu bodo izbrisani."</string>
+    <!-- no translation found for work_profile_confirm_remove_message (323856589749078140) -->
+    <skip />
     <string name="user_profile_confirm_remove_message" msgid="7373754145959298522">"Vse aplikacije in vsi podatki bodo izbrisani."</string>
     <string name="user_adding_new_user" msgid="1521674650874241407">"Dodajanje novega uporabnika ..."</string>
     <string name="user_delete_user_description" msgid="3158592592118767056">"Izbriši uporabnika"</string>
@@ -2332,15 +2337,34 @@
     <string name="global_locale_change_title" msgid="5956281361384221451">"Spremenjen jezik"</string>
     <string name="global_font_change_title" msgid="1887126466191012035">"Spremenjena velikost pisave"</string>
     <string name="nfc_payment_settings_title" msgid="1807298287380821613">"Plačilo z dotikom"</string>
-    <string name="google_wallet" msgid="9122936252378589227">"Google Denarnica"</string>
-    <string name="nfc_payment_no_apps" msgid="2481080809791416010">"Plačajte z enim dotikom"</string>
-    <string name="nfc_payment_favor_foreground" msgid="8881893980929835838">"Daj prednost aplikaciji v ospredju"</string>
-    <string name="nfc_payment_learn_more" msgid="5583407773744324447">"Več o tem"</string>
+    <!-- no translation found for nfc_payment_how_it_works (3028822263837896720) -->
+    <skip />
+    <!-- no translation found for nfc_payment_no_apps (3453656795093776889) -->
+    <skip />
+    <!-- no translation found for nfc_payment_default (8648420259219150395) -->
+    <skip />
+    <!-- no translation found for nfc_payment_default_not_set (7485060884228447765) -->
+    <skip />
+    <!-- no translation found for nfc_payment_app_and_desc (7942415346564794258) -->
+    <skip />
+    <!-- no translation found for nfc_payment_open_app (5550268485421927976) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_open (7513784422533299982) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_open_default_unknown (1179489206233351756) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_default (8238320071435721803) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_default_default_unknown (7029467023485683077) -->
+    <skip />
+    <!-- no translation found for nfc_payment_pay_with (7524904024378144072) -->
+    <skip />
     <string name="nfc_more_title" msgid="815910943655133280">"Več ..."</string>
-    <string name="nfc_payment_menu_item_add_service" msgid="2885947408068969081">"Iskanje aplikacij"</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"Želite nastaviti kot prednostno?"</string>
-    <string name="nfc_payment_set_default" msgid="8961120988148253016">"Ali želite za plačilo z dotikom vedno uporabiti aplikacijo <xliff:g id="APP">%1$s</xliff:g>?"</string>
-    <string name="nfc_payment_set_default_instead_of" msgid="3803693771001226795">"Ali želite za plačilo z dotikom namesto aplikacije <xliff:g id="APP_1">%2$s</xliff:g> vedno uporabiti aplikacijo <xliff:g id="APP_0">%1$s</xliff:g>?"</string>
+    <!-- no translation found for nfc_payment_set_default (8532426406310833489) -->
+    <skip />
+    <!-- no translation found for nfc_payment_set_default_instead_of (6993301165940432743) -->
+    <skip />
     <string name="restriction_settings_title" msgid="4233515503765879736">"Omejitve"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"Odstranitev omejitev"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"Sprememba kode PIN"</string>
@@ -2651,6 +2675,8 @@
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"Pred odpenjanjem vprašaj za geslo"</string>
     <string name="screen_pinning_unlock_none" msgid="3814188275713871856">"Pri odpenjanju zakleni napravo"</string>
     <string name="managed_user_title" msgid="8101244883654409696">"Delovni profil"</string>
+    <!-- no translation found for opening_paragraph_delete_profile_unknown_company (3790519030932488453) -->
+    <skip />
     <string name="experimental_preference" msgid="7083015446690681376">"(Poskusno)"</string>
     <string name="display_auto_rotate_title" msgid="6176450657107806043">"Ko se naprava zasuka"</string>
     <string name="display_auto_rotate_rotate" msgid="4544299861233497728">"Zasukaj vsebino zaslona"</string>
@@ -2749,28 +2775,16 @@
     <string name="permit_usage_access" msgid="4012876269445832300">"Dovoli dostop do podatkov o uporabi"</string>
     <string name="app_usage_preference" msgid="7065701732733134991">"Nastavitve uporabe aplikacije"</string>
     <string name="usage_access_description" msgid="1470042370563522270">"Dostop do podatkov o uporabi aplikaciji omogoča, da spremlja, katere aplikacije še uporabljate in kako pogosto, ter da si ogleda podrobnosti o operaterju, nastavitvah jezika in drugem."</string>
-    <!-- no translation found for memory_settings_title (7490541005204254222) -->
-    <skip />
-    <!-- no translation found for memory_details_title (8542565326053693320) -->
-    <skip />
-    <!-- no translation found for always_running (756962671086985529) -->
-    <skip />
-    <!-- no translation found for sometimes_running (4029856112252925332) -->
-    <skip />
-    <!-- no translation found for rarely_running (5858601167598124445) -->
-    <skip />
-    <!-- no translation found for memory_max_use (6874803757715963097) -->
-    <skip />
-    <!-- no translation found for memory_avg_use (7382015389130622870) -->
-    <skip />
-    <!-- no translation found for memory_max_desc (2861832149718335864) -->
-    <skip />
-    <!-- no translation found for memory_avg_desc (1551240906596518412) -->
-    <skip />
-    <!-- no translation found for memory_use_running_format (4172488041800743760) -->
-    <skip />
-    <!-- no translation found for process (3426397418475689597) -->
-    <skip />
-    <!-- no translation found for process_format (6209946289580262844) -->
-    <skip />
+    <string name="memory_settings_title" msgid="7490541005204254222">"Pomnilnik"</string>
+    <string name="memory_details_title" msgid="8542565326053693320">"Podrobnosti pomnilnika"</string>
+    <string name="always_running" msgid="756962671086985529">"Vedno se izvaja"</string>
+    <string name="sometimes_running" msgid="4029856112252925332">"Včasih se izvaja"</string>
+    <string name="rarely_running" msgid="5858601167598124445">"Redko se izvaja"</string>
+    <string name="memory_max_use" msgid="6874803757715963097">"Največ"</string>
+    <string name="memory_avg_use" msgid="7382015389130622870">"Povprečno"</string>
+    <string name="memory_max_desc" msgid="2861832149718335864">"Največ <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
+    <string name="memory_avg_desc" msgid="1551240906596518412">"Povprečno <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
+    <string name="memory_use_running_format" msgid="4172488041800743760">"<xliff:g id="MEMORY">%1$s</xliff:g>/<xliff:g id="RUNNING">%2$s</xliff:g>"</string>
+    <string name="process" msgid="3426397418475689597">"Postopek"</string>
+    <string name="process_format" msgid="6209946289580262844">"Št. postopkov: <xliff:g id="COUNT">%1$d</xliff:g>"</string>
 </resources>

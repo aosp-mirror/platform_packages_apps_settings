@@ -959,6 +959,8 @@
     <string name="storage_menu_format" msgid="8334422679047059459">"Erase &amp; format"</string>
     <string name="storage_menu_format_internal" msgid="6553368530402755543">"Erase &amp; format as internal storage"</string>
     <string name="storage_menu_usb" msgid="5708207885333243384">"USB computer connection"</string>
+    <!-- no translation found for storage_menu_forget (6305824238997983426) -->
+    <skip />
     <string name="storage_title_usb" msgid="679612779321689418">"USB computer connection"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"Connect as"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"Media device (MTP)"</string>
@@ -980,6 +982,8 @@
     <string name="storage_rename_title" msgid="8242663969839491485">"Rename storage"</string>
     <string name="storage_internal_format_details" msgid="4018647158382548820">"After formatting, you can use this <xliff:g id="NAME_0">^1</xliff:g> in other devices. \n\nAll data on this <xliff:g id="NAME_1">^1</xliff:g> will be erased. Consider backing up first. \n\n"<b>"Back up photos &amp; other media"</b>" \nMove your media files to alternative storage on this device, or transfer them to a computer using a USB cable. \n\n"<b>"Back up apps"</b>" \nAll apps stored on this <xliff:g id="NAME_6">^1</xliff:g> will be uninstalled and their data will be erased. To keep these apps, move them to alternative storage on this device."</string>
     <string name="storage_internal_unmount_details" msgid="3677827796634199714"><b>"When you eject this <xliff:g id="NAME_0">^1</xliff:g>, apps stored on it will stop working, and media files stored on it will not be available until it is reinserted."</b>" \n\nThis <xliff:g id="NAME_1">^1</xliff:g> is formatted to work on this device only. It won\'t work on any others."</string>
+    <!-- no translation found for storage_internal_forget_details (4881307991281138059) -->
+    <skip />
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"Set up your <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"Use as portable storage"</string>
     <string name="storage_wizard_init_external_summary" msgid="7476105886344565074">"For moving photos and other media between devices."</string>
@@ -987,6 +991,10 @@
     <string name="storage_wizard_init_internal_summary" msgid="6240417501036216410">"For storing anything on this device only, including apps and photos. Requires formatting that prevents it from working with other devices."</string>
     <string name="storage_wizard_format_confirm_title" msgid="2814021794538252546">"Format as internal storage"</string>
     <string name="storage_wizard_format_confirm_body" msgid="4401758710076806509">"This requires the <xliff:g id="NAME_0">^1</xliff:g> to be formatted to make it secure. \n\nAfter formatting, this <xliff:g id="NAME_1">^1</xliff:g> will only work in this device. \n\n"<b>"Formatting erases all data currently stored on the <xliff:g id="NAME_2">^1</xliff:g>."</b>" To avoid losing the data, consider backing it up."</string>
+    <!-- no translation found for storage_wizard_format_confirm_public_title (4905690038882041566) -->
+    <skip />
+    <!-- no translation found for storage_wizard_format_confirm_public_body (1516932692920060272) -->
+    <skip />
     <string name="storage_wizard_format_confirm_next" msgid="2774557300531702572">"Erase &amp; format"</string>
     <string name="storage_wizard_format_progress_title" msgid="6487352396450582292">"Formatting <xliff:g id="NAME">^1</xliff:g>…"</string>
     <string name="storage_wizard_format_progress_body" msgid="1259216693690378749">"Don\'t remove the <xliff:g id="NAME">^1</xliff:g> while it\'s formatting."</string>
@@ -1756,15 +1764,12 @@
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Process Stats"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Geeky stats about running processes"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Memory use"</string>
-    <!-- no translation found for process_stats_total_duration (7417201400853728029) -->
-    <skip />
-    <!-- no translation found for process_stats_total_duration_percentage (6522457033380025618) -->
-    <skip />
+    <string name="process_stats_total_duration" msgid="7417201400853728029">"<xliff:g id="USEDRAM">%1$s</xliff:g> of <xliff:g id="TOTALRAM">%2$s</xliff:g> used over last <xliff:g id="TIMEDURATION">%3$s</xliff:g>"</string>
+    <string name="process_stats_total_duration_percentage" msgid="6522457033380025618">"<xliff:g id="PERCENT">%1$s</xliff:g> of RAM used over <xliff:g id="TIMEDURATION">%2$s</xliff:g>"</string>
     <string name="process_stats_type_background" msgid="3934992858120683459">"Background"</string>
     <string name="process_stats_type_foreground" msgid="7713118254089580536">"Foreground"</string>
     <string name="process_stats_type_cached" msgid="6314925846944806511">"Cached"</string>
-    <!-- no translation found for process_stats_memory_status (8291117301143037644) -->
-    <skip />
+    <string name="process_stats_memory_status" msgid="8291117301143037644">"Memory is <xliff:g id="MEMSTATE">%1$s</xliff:g>"</string>
     <string name="process_stats_os_label" msgid="4813434110442733392">"Android OS"</string>
     <string name="process_stats_os_native" msgid="5322428494231768472">"Native"</string>
     <string name="process_stats_os_kernel" msgid="1938523592369780924">"Kernel"</string>
@@ -1791,8 +1796,7 @@
     <string name="menu_duration_1d" msgid="3393631127622285458">"1 day"</string>
     <string name="menu_show_system" msgid="8864603400415567635">"Show system"</string>
     <string name="menu_hide_system" msgid="4106826741703745733">"Hide system"</string>
-    <!-- no translation found for menu_show_percentage (4717204046118199806) -->
-    <skip />
+    <string name="menu_show_percentage" msgid="4717204046118199806">"Show percentages"</string>
     <string name="menu_use_uss" msgid="467765290771543089">"Use Uss"</string>
     <string name="menu_proc_stats_type" msgid="4700209061072120948">"Stats type"</string>
     <string name="menu_proc_stats_type_background" msgid="2236161340134898852">"Background"</string>
@@ -2287,7 +2291,8 @@
     <string name="user_confirm_remove_self_message" product="tablet" msgid="8167855311779740207">"You will lose your space and data on this tablet. You can\'t undo this action."</string>
     <string name="user_confirm_remove_self_message" product="default" msgid="5391888073786090274">"You will lose your space and data on this phone. You can\'t undo this action."</string>
     <string name="user_confirm_remove_message" msgid="1020629390993095037">"All apps and data will be deleted."</string>
-    <string name="work_profile_confirm_remove_message" msgid="7593793549364168783">"All apps and data in this profile will be deleted."</string>
+    <!-- no translation found for work_profile_confirm_remove_message (323856589749078140) -->
+    <skip />
     <string name="user_profile_confirm_remove_message" msgid="7373754145959298522">"All apps and data will be deleted."</string>
     <string name="user_adding_new_user" msgid="1521674650874241407">"Adding new user…"</string>
     <string name="user_delete_user_description" msgid="3158592592118767056">"Delete user"</string>
@@ -2314,15 +2319,34 @@
     <string name="global_locale_change_title" msgid="5956281361384221451">"Change language"</string>
     <string name="global_font_change_title" msgid="1887126466191012035">"Change font size"</string>
     <string name="nfc_payment_settings_title" msgid="1807298287380821613">"Tap &amp; pay"</string>
-    <string name="google_wallet" msgid="9122936252378589227">"Google Wallet"</string>
-    <string name="nfc_payment_no_apps" msgid="2481080809791416010">"Pay with just a tap"</string>
-    <string name="nfc_payment_favor_foreground" msgid="8881893980929835838">"Favour foreground app"</string>
-    <string name="nfc_payment_learn_more" msgid="5583407773744324447">"Learn more"</string>
+    <!-- no translation found for nfc_payment_how_it_works (3028822263837896720) -->
+    <skip />
+    <!-- no translation found for nfc_payment_no_apps (3453656795093776889) -->
+    <skip />
+    <!-- no translation found for nfc_payment_default (8648420259219150395) -->
+    <skip />
+    <!-- no translation found for nfc_payment_default_not_set (7485060884228447765) -->
+    <skip />
+    <!-- no translation found for nfc_payment_app_and_desc (7942415346564794258) -->
+    <skip />
+    <!-- no translation found for nfc_payment_open_app (5550268485421927976) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_open (7513784422533299982) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_open_default_unknown (1179489206233351756) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_default (8238320071435721803) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_default_default_unknown (7029467023485683077) -->
+    <skip />
+    <!-- no translation found for nfc_payment_pay_with (7524904024378144072) -->
+    <skip />
     <string name="nfc_more_title" msgid="815910943655133280">"More..."</string>
-    <string name="nfc_payment_menu_item_add_service" msgid="2885947408068969081">"Find apps"</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"Set as your preference?"</string>
-    <string name="nfc_payment_set_default" msgid="8961120988148253016">"Always use <xliff:g id="APP">%1$s</xliff:g> when you tap &amp; pay?"</string>
-    <string name="nfc_payment_set_default_instead_of" msgid="3803693771001226795">"Always use <xliff:g id="APP_0">%1$s</xliff:g> instead of <xliff:g id="APP_1">%2$s</xliff:g> when you tap &amp; pay?"</string>
+    <!-- no translation found for nfc_payment_set_default (8532426406310833489) -->
+    <skip />
+    <!-- no translation found for nfc_payment_set_default_instead_of (6993301165940432743) -->
+    <skip />
     <string name="restriction_settings_title" msgid="4233515503765879736">"Restrictions"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"Remove restrictions"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"Change PIN"</string>
@@ -2615,6 +2639,8 @@
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"Ask for password before unpinning"</string>
     <string name="screen_pinning_unlock_none" msgid="3814188275713871856">"Lock device when unpinning"</string>
     <string name="managed_user_title" msgid="8101244883654409696">"Work profile"</string>
+    <!-- no translation found for opening_paragraph_delete_profile_unknown_company (3790519030932488453) -->
+    <skip />
     <string name="experimental_preference" msgid="7083015446690681376">"(Experimental)"</string>
     <string name="display_auto_rotate_title" msgid="6176450657107806043">"When device is rotated"</string>
     <string name="display_auto_rotate_rotate" msgid="4544299861233497728">"Rotate the contents of the screen"</string>
@@ -2707,28 +2733,16 @@
     <string name="permit_usage_access" msgid="4012876269445832300">"Permit usage access"</string>
     <string name="app_usage_preference" msgid="7065701732733134991">"App usage preferences"</string>
     <string name="usage_access_description" msgid="1470042370563522270">"Usage access allows an app to track what other apps that you\'re using and how often, as well as your operator, language settings and other details."</string>
-    <!-- no translation found for memory_settings_title (7490541005204254222) -->
-    <skip />
-    <!-- no translation found for memory_details_title (8542565326053693320) -->
-    <skip />
-    <!-- no translation found for always_running (756962671086985529) -->
-    <skip />
-    <!-- no translation found for sometimes_running (4029856112252925332) -->
-    <skip />
-    <!-- no translation found for rarely_running (5858601167598124445) -->
-    <skip />
-    <!-- no translation found for memory_max_use (6874803757715963097) -->
-    <skip />
-    <!-- no translation found for memory_avg_use (7382015389130622870) -->
-    <skip />
-    <!-- no translation found for memory_max_desc (2861832149718335864) -->
-    <skip />
-    <!-- no translation found for memory_avg_desc (1551240906596518412) -->
-    <skip />
-    <!-- no translation found for memory_use_running_format (4172488041800743760) -->
-    <skip />
-    <!-- no translation found for process (3426397418475689597) -->
-    <skip />
-    <!-- no translation found for process_format (6209946289580262844) -->
-    <skip />
+    <string name="memory_settings_title" msgid="7490541005204254222">"Memory"</string>
+    <string name="memory_details_title" msgid="8542565326053693320">"Memory details"</string>
+    <string name="always_running" msgid="756962671086985529">"Always running"</string>
+    <string name="sometimes_running" msgid="4029856112252925332">"Sometimes running"</string>
+    <string name="rarely_running" msgid="5858601167598124445">"Rarely running"</string>
+    <string name="memory_max_use" msgid="6874803757715963097">"Maximum"</string>
+    <string name="memory_avg_use" msgid="7382015389130622870">"Average"</string>
+    <string name="memory_max_desc" msgid="2861832149718335864">"Maximum <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
+    <string name="memory_avg_desc" msgid="1551240906596518412">"Average <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
+    <string name="memory_use_running_format" msgid="4172488041800743760">"<xliff:g id="MEMORY">%1$s</xliff:g> / <xliff:g id="RUNNING">%2$s</xliff:g>"</string>
+    <string name="process" msgid="3426397418475689597">"Process"</string>
+    <string name="process_format" msgid="6209946289580262844">"Process <xliff:g id="COUNT">%1$d</xliff:g>"</string>
 </resources>
