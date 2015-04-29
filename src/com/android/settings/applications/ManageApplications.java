@@ -22,7 +22,6 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.IntentFilterVerificationInfo;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.UserHandle;
@@ -107,25 +106,19 @@ public class ManageApplications extends InstrumentedFragment
 
     // Filter options used for displayed list of applications
     // The order which they appear is the order they will show when spinner is present.
-    public static final int FILTER_APPS_DOWNLOADED_AND_LAUNCHER = 0;
-    public static final int FILTER_APPS_DL_ENABLED              = 1;
-    public static final int FILTER_APPS_DL_DISABLED             = 2;
-    public static final int FILTER_APPS_ALL                     = 3;
-    public static final int FILTER_APPS_ENABLED                 = 4;
-    public static final int FILTER_APPS_DISABLED                = 5;
-    public static final int FILTER_APPS_BLOCKED                 = 6;
-    public static final int FILTER_APPS_PRIORITY                = 7;
-    public static final int FILTER_APPS_SENSITIVE               = 8;
-    public static final int FILTER_APPS_PERSONAL                = 9;
-    public static final int FILTER_APPS_WORK                    = 10;
-    public static final int FILTER_APPS_WITH_DOMAIN_URLS        = 11;
-    public static final int FILTER_APPS_USAGE_ACCESS            = 12;
+    public static final int FILTER_APPS_ALL                     = 0;
+    public static final int FILTER_APPS_ENABLED                 = 1;
+    public static final int FILTER_APPS_DISABLED                = 2;
+    public static final int FILTER_APPS_BLOCKED                 = 3;
+    public static final int FILTER_APPS_PRIORITY                = 4;
+    public static final int FILTER_APPS_SENSITIVE               = 5;
+    public static final int FILTER_APPS_PERSONAL                = 6;
+    public static final int FILTER_APPS_WORK                    = 7;
+    public static final int FILTER_APPS_WITH_DOMAIN_URLS        = 8;
+    public static final int FILTER_APPS_USAGE_ACCESS            = 9;
 
     // This is the string labels for the filter modes above, the order must be kept in sync.
     public static final int[] FILTER_LABELS = new int[] {
-        R.string.filter_all_apps,      // Downloaded and launcher
-        R.string.filter_enabled_apps,  // Downloaded and launcher, Enabled
-        R.string.filter_apps_disabled, // Downloaded and launcher, Disabled
         R.string.filter_all_apps,      // All apps
         R.string.filter_enabled_apps,  // Enabled
         R.string.filter_apps_disabled, // Disabled
@@ -140,13 +133,6 @@ public class ManageApplications extends InstrumentedFragment
     // This is the actual mapping to filters from FILTER_ constants above, the order must
     // be kept in sync.
     public static final AppFilter[] FILTERS = new AppFilter[] {
-        ApplicationsState.FILTER_DOWNLOADED_AND_LAUNCHER, // Downloaded and launcher
-        new CompoundFilter(                               // Downloaded and launcher, Enabled
-                ApplicationsState.FILTER_DOWNLOADED_AND_LAUNCHER,
-                ApplicationsState.FILTER_ALL_ENABLED),
-        new CompoundFilter(                               // Downloaded and launcher, Disabled
-                ApplicationsState.FILTER_DOWNLOADED_AND_LAUNCHER,
-                ApplicationsState.FILTER_DISABLED),
         ApplicationsState.FILTER_EVERYTHING,  // All apps
         ApplicationsState.FILTER_ALL_ENABLED, // Enabled
         ApplicationsState.FILTER_DISABLED,    // Disabled
@@ -315,7 +301,6 @@ public class ManageApplications extends InstrumentedFragment
                 mFilterAdapter.enableFilter(FILTER_APPS_WORK);
             }
         }
-        updateMainFilters();
         if (mListType == LIST_TYPE_NOTIFICATION) {
             mFilterAdapter.enableFilter(FILTER_APPS_BLOCKED);
             mFilterAdapter.enableFilter(FILTER_APPS_PRIORITY);
@@ -337,7 +322,7 @@ public class ManageApplications extends InstrumentedFragment
     private int getDefaultFilter() {
         switch (mListType) {
             case LIST_TYPE_MAIN:
-                return mShowSystem ? FILTER_APPS_ALL : FILTER_APPS_DOWNLOADED_AND_LAUNCHER;
+                return FILTER_APPS_ALL;
             case LIST_TYPE_DOMAINS_URLS:
                 return FILTER_APPS_WITH_DOMAIN_URLS;
             case LIST_TYPE_USAGE_ACCESS:
@@ -458,7 +443,7 @@ public class ManageApplications extends InstrumentedFragment
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        if (mListType != LIST_TYPE_MAIN) {
+        if (mListType == LIST_TYPE_DOMAINS_URLS) {
             return;
         }
         HelpUtils.prepareHelpMenuItem(getActivity(), menu, mListType == LIST_TYPE_MAIN
@@ -482,22 +467,15 @@ public class ManageApplications extends InstrumentedFragment
         if (mOptionsMenu == null) {
             return;
         }
-        if (mListType != LIST_TYPE_MAIN) {
-            // Allow sorting except on main apps list.
-            mOptionsMenu.findItem(R.id.sort_order_alpha).setVisible(
-                    mSortOrder != R.id.sort_order_alpha);
-            mOptionsMenu.findItem(R.id.sort_order_size).setVisible(
-                    mSortOrder != R.id.sort_order_size);
+        mOptionsMenu.findItem(R.id.advanced).setVisible(mListType == LIST_TYPE_MAIN);
 
-            mOptionsMenu.findItem(R.id.show_system).setVisible(false);
-            mOptionsMenu.findItem(R.id.hide_system).setVisible(false);
-        } else {
-            mOptionsMenu.findItem(R.id.sort_order_alpha).setVisible(false);
-            mOptionsMenu.findItem(R.id.sort_order_size).setVisible(false);
+        mOptionsMenu.findItem(R.id.sort_order_alpha).setVisible(mListType == LIST_TYPE_STORAGE
+                && mSortOrder != R.id.sort_order_alpha);
+        mOptionsMenu.findItem(R.id.sort_order_size).setVisible(mListType == LIST_TYPE_STORAGE
+                && mSortOrder != R.id.sort_order_size);
 
-            mOptionsMenu.findItem(R.id.show_system).setVisible(!mShowSystem);
-            mOptionsMenu.findItem(R.id.hide_system).setVisible(mShowSystem);
-        }
+        mOptionsMenu.findItem(R.id.show_system).setVisible(!mShowSystem);
+        mOptionsMenu.findItem(R.id.hide_system).setVisible(mShowSystem);
     }
 
     @Override
@@ -514,7 +492,7 @@ public class ManageApplications extends InstrumentedFragment
             case R.id.show_system:
             case R.id.hide_system:
                 mShowSystem = !mShowSystem;
-                updateMainFilters();
+                mApplications.rebuild(false);
                 break;
             case R.id.reset_app_preferences:
                 mResetAppsHelper.buildResetDialog();
@@ -530,18 +508,6 @@ public class ManageApplications extends InstrumentedFragment
         }
         updateOptionsMenu();
         return true;
-    }
-
-    private void updateMainFilters() {
-        if (mListType != LIST_TYPE_MAIN) {
-            return;
-        }
-        mFilterAdapter.setFilterEnabled(FILTER_APPS_ALL, mShowSystem);
-        mFilterAdapter.setFilterEnabled(FILTER_APPS_ENABLED, mShowSystem && mHasDisabledApps);
-        mFilterAdapter.setFilterEnabled(FILTER_APPS_DISABLED, mShowSystem && mHasDisabledApps);
-        mFilterAdapter.setFilterEnabled(FILTER_APPS_DOWNLOADED_AND_LAUNCHER, !mShowSystem);
-        mFilterAdapter.setFilterEnabled(FILTER_APPS_DL_ENABLED, !mShowSystem && mHasDisabledApps);
-        mFilterAdapter.setFilterEnabled(FILTER_APPS_DL_DISABLED, !mShowSystem && mHasDisabledApps);
     }
 
     @Override
@@ -575,10 +541,8 @@ public class ManageApplications extends InstrumentedFragment
 
     public void setHasDisabled(boolean hasDisabledApps) {
         mHasDisabledApps = hasDisabledApps;
-        mFilterAdapter.setFilterEnabled(
-                mShowSystem ? FILTER_APPS_ENABLED : FILTER_APPS_DL_ENABLED, hasDisabledApps);
-        mFilterAdapter.setFilterEnabled(
-                mShowSystem ? FILTER_APPS_DISABLED : FILTER_APPS_DL_DISABLED, hasDisabledApps);
+        mFilterAdapter.setFilterEnabled(FILTER_APPS_ENABLED, hasDisabledApps);
+        mFilterAdapter.setFilterEnabled(FILTER_APPS_DISABLED, hasDisabledApps);
     }
 
     static class FilterSpinnerAdapter extends ArrayAdapter<CharSequence> {
@@ -786,6 +750,10 @@ public class ManageApplications extends InstrumentedFragment
             if (mOverrideFilter != null) {
                 filterObj = mOverrideFilter;
             }
+            if (!mManageApplications.mShowSystem) {
+                filterObj = new CompoundFilter(filterObj,
+                        ApplicationsState.FILTER_DOWNLOADED_AND_LAUNCHER);
+            }
             switch (mLastSortMode) {
                 case R.id.sort_order_size:
                     switch (mWhichSize) {
@@ -930,7 +898,7 @@ public class ManageApplications extends InstrumentedFragment
 
         @Override
         public void onLauncherInfoChanged() {
-            if (mFilterMode == FILTER_APPS_DOWNLOADED_AND_LAUNCHER) {
+            if (!mManageApplications.mShowSystem) {
                 rebuild(false);
             }
         }
