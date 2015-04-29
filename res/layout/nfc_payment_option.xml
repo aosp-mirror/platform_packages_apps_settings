@@ -13,40 +13,28 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_weight="1"
     android:id="@+id/nfc_payment_pref"
     android:focusable="true"
     android:clickable="false"
-    android:gravity="center_vertical"
-    android:paddingTop="10dp"
-    android:paddingBottom="10dp"
+    android:orientation="horizontal"
+    android:paddingLeft="24dip"
     android:minHeight="?android:attr/listPreferredItemHeight"
     android:background="?android:attr/selectableItemBackground">
-    <FrameLayout
+    <RadioButton xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/button"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:minWidth="@*android:dimen/preference_icon_minWidth"
-        android:orientation="horizontal">
-        <ImageView
-            android:id="@+id/banner"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="96dp"
-            android:scaleType="centerInside"
-            android:clickable="true"
-                />
-    </FrameLayout>
-    <RadioButton
-        android:id="@android:id/button1"
+        android:layout_height="fill_parent"
+        android:checkMark="?android:attr/listChoiceIndicatorSingle"
+        />
+    <ImageView
+        android:id="@+id/banner"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:duplicateParentState="true"
+        android:layout_height="64dp"
+        android:scaleType="centerInside"
         android:clickable="true"
-        android:focusable="false" />
-</RelativeLayout>
+            />
+</LinearLayout>
