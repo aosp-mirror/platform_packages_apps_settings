@@ -30,7 +30,6 @@
     </style>
 
     <style name="SetupWizardTheme" parent="SuwThemeMaterial">
-        <item name="android:alertDialogTheme">@style/Theme.WifiDialog</item>
         <item name="android:listPreferredItemPaddingEnd">@dimen/suw_layout_margin_sides</item>
         <item name="android:listPreferredItemPaddingStart">@dimen/suw_layout_margin_sides</item>
         <item name="android:windowBackground">?android:attr/colorBackground</item>
@@ -51,7 +50,6 @@
     </style>
 
     <style name="SetupWizardTheme.Light" parent="SuwThemeMaterial.Light">
-        <item name="android:alertDialogTheme">@style/Theme.Light.WifiDialog</item>
         <item name="android:listPreferredItemPaddingEnd">@dimen/suw_layout_margin_sides</item>
         <item name="android:listPreferredItemPaddingStart">@dimen/suw_layout_margin_sides</item>
         <item name="android:windowBackground">?android:attr/colorBackground</item>
@@ -69,22 +67,6 @@
         <item name="@*android:regularColor">@color/setup_lock_pattern_view_regular_color_light</item>
         <item name="@*android:successColor">@color/setup_lock_pattern_view_success_color_light</item>
         <item name="@*android:errorColor">@color/setup_lock_pattern_view_error_color_light</item>
-    </style>
-
-    <style name="Theme.WifiDialog" parent="@*android:style/Theme.Material.Dialog.Alert">
-        <item name="android:windowSoftInputMode">adjustResize</item>
-        <item name="ic_menu_add">@drawable/ic_menu_add_dark</item>
-        <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_material</item>
-        <item name="ic_wps">@drawable/ic_wps_dark</item>
-        <item name="wifi_signal">@drawable/wifi_signal_dark</item>
-    </style>
-
-    <style name="Theme.Light.WifiDialog" parent="@*android:style/Theme.Material.Light.Dialog.Alert">
-        <item name="android:windowSoftInputMode">adjustResize</item>
-        <item name="ic_menu_add">@drawable/ic_menu_add_light</item>
-        <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_material</item>
-        <item name="ic_wps">@drawable/ic_wps_light</item>
-        <item name="wifi_signal">@drawable/wifi_signal_light</item>
     </style>
 
     <!-- Theme with no local references, used by AccountPreferenceBase where we have to inflate
