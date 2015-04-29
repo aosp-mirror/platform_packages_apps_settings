@@ -320,16 +320,12 @@
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"休眠<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>后"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"休眠<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>后（<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>让屏幕保持解锁状态时除外）"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"在锁定屏幕上显示机主信息"</string>
-    <!-- no translation found for owner_info_settings_title (5530285568897386122) -->
-    <skip />
+    <string name="owner_info_settings_title" msgid="5530285568897386122">"锁定屏幕消息"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"启用小部件"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="1557090442377855233">"已被管理员停用"</string>
-    <!-- no translation found for owner_info_settings_summary (7472393443779227052) -->
-    <skip />
-    <!-- no translation found for owner_info_settings_status (120407527726476378) -->
-    <skip />
-    <!-- no translation found for owner_info_settings_edit_text_hint (5605345988833943830) -->
-    <skip />
+    <string name="owner_info_settings_summary" msgid="7472393443779227052">"无"</string>
+    <string name="owner_info_settings_status" msgid="120407527726476378">"<xliff:g id="COUNT_0">%1$d</xliff:g> / <xliff:g id="COUNT_1">%2$d</xliff:g>"</string>
+    <string name="owner_info_settings_edit_text_hint" msgid="5605345988833943830">"例如，小明的 Android 设备。"</string>
     <string name="user_info_settings_title" msgid="1195015434996724736">"用户信息"</string>
     <string name="show_profile_info_on_lockscreen_label" msgid="2741208907263877990">"在锁定屏幕上显示个人资料信息"</string>
     <string name="profile_info_settings_title" msgid="3518603215935346604">"个人资料信息"</string>
@@ -972,6 +968,8 @@
     <string name="storage_menu_format" msgid="8334422679047059459">"清空并格式化"</string>
     <string name="storage_menu_format_internal" msgid="6553368530402755543">"清空并格式化内部存储设备"</string>
     <string name="storage_menu_usb" msgid="5708207885333243384">"USB计算机连接"</string>
+    <!-- no translation found for storage_menu_forget (6305824238997983426) -->
+    <skip />
     <string name="storage_title_usb" msgid="679612779321689418">"USB计算机连接"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"连接方式"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"媒体设备(MTP)"</string>
@@ -993,6 +991,8 @@
     <string name="storage_rename_title" msgid="8242663969839491485">"重命名存储设备"</string>
     <string name="storage_internal_format_details" msgid="4018647158382548820">"格式化之后，您就可以在其他设备上使用此<xliff:g id="NAME_0">^1</xliff:g>了。\n\n此<xliff:g id="NAME_1">^1</xliff:g>上的所有数据都将被清空，建议您先将数据备份。\n\n"<b>"备份照片和其他媒体文件"</b>\n"将您的媒体文件移动到此设备上的备用存储设备，或使用 USB 线传输到计算机上。\n\n"<b>"备份应用"</b>\n"存储在此<xliff:g id="NAME_6">^1</xliff:g>上的所有应用都将被卸载，且这些应用的数据也将一并被清空。要保留这些应用，请将它们移到此设备上的备用存储设备。"</string>
     <string name="storage_internal_unmount_details" msgid="3677827796634199714"><b>"当您弹出此<xliff:g id="NAME_0">^1</xliff:g>后，存储在其中的应用将会停止运行，而且存储在其中的媒体文件也将无法使用，除非您重新插入。"</b>\n\n"此<xliff:g id="NAME_1">^1</xliff:g>已格式化为只能在这台设备上使用，因此在任何其他设备上将无法使用。"</string>
+    <!-- no translation found for storage_internal_forget_details (4881307991281138059) -->
+    <skip />
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"设置您的<xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"用作便携式存储设备"</string>
     <string name="storage_wizard_init_external_summary" msgid="7476105886344565074">"用于在设备之间移动照片和其他媒体文件。"</string>
@@ -1000,6 +1000,10 @@
     <string name="storage_wizard_init_internal_summary" msgid="6240417501036216410">"仅用于存储这台设备上的内容，包括应用和照片。为了防止此存储设备在其他设备上使用，您需要先对其进行格式化。"</string>
     <string name="storage_wizard_format_confirm_title" msgid="2814021794538252546">"格式化为内部存储设备"</string>
     <string name="storage_wizard_format_confirm_body" msgid="4401758710076806509">"<xliff:g id="NAME_0">^1</xliff:g>必须进行格式化，以确保安全。\n\n格式化之后，此<xliff:g id="NAME_1">^1</xliff:g>将只能在这台设备上使用。\n\n"<b>"格式化操作会清空当前存储在<xliff:g id="NAME_2">^1</xliff:g>上的所有数据。"</b>"为避免丢失数据，建议您先将数据备份。"</string>
+    <!-- no translation found for storage_wizard_format_confirm_public_title (4905690038882041566) -->
+    <skip />
+    <!-- no translation found for storage_wizard_format_confirm_public_body (1516932692920060272) -->
+    <skip />
     <string name="storage_wizard_format_confirm_next" msgid="2774557300531702572">"清空并格式化"</string>
     <string name="storage_wizard_format_progress_title" msgid="6487352396450582292">"正在格式化<xliff:g id="NAME">^1</xliff:g>…"</string>
     <string name="storage_wizard_format_progress_body" msgid="1259216693690378749">"请勿在格式化过程中移除该<xliff:g id="NAME">^1</xliff:g>。"</string>
@@ -1769,11 +1773,15 @@
     <string name="process_stats_summary_title" msgid="1144688045609771677">"进程统计信息"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"运行中进程的相关技术统计信息"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"内存用量"</string>
-    <string name="process_stats_total_duration" msgid="2243876627952936205">"过去 <xliff:g id="TIMEDURATION">%3$s</xliff:g>内使用了 <xliff:g id="USEDRAM">%1$s</xliff:g>（共 <xliff:g id="TOTALRAM">%2$s</xliff:g>）"</string>
+    <!-- no translation found for process_stats_total_duration (7417201400853728029) -->
+    <skip />
+    <!-- no translation found for process_stats_total_duration_percentage (6522457033380025618) -->
+    <skip />
     <string name="process_stats_type_background" msgid="3934992858120683459">"后台"</string>
     <string name="process_stats_type_foreground" msgid="7713118254089580536">"前台"</string>
     <string name="process_stats_type_cached" msgid="6314925846944806511">"缓存"</string>
-    <string name="process_stats_memory_status" msgid="4251599550196193093">"设备内存当前状态：<xliff:g id="MEMSTATE">%1$s</xliff:g>"</string>
+    <!-- no translation found for process_stats_memory_status (8291117301143037644) -->
+    <skip />
     <string name="process_stats_os_label" msgid="4813434110442733392">"Android 操作系统"</string>
     <string name="process_stats_os_native" msgid="5322428494231768472">"本地"</string>
     <string name="process_stats_os_kernel" msgid="1938523592369780924">"内核"</string>
@@ -1800,6 +1808,8 @@
     <string name="menu_duration_1d" msgid="3393631127622285458">"1天"</string>
     <string name="menu_show_system" msgid="8864603400415567635">"显示系统"</string>
     <string name="menu_hide_system" msgid="4106826741703745733">"隐藏系统进程"</string>
+    <!-- no translation found for menu_show_percentage (4717204046118199806) -->
+    <skip />
     <string name="menu_use_uss" msgid="467765290771543089">"使用 USS"</string>
     <string name="menu_proc_stats_type" msgid="4700209061072120948">"统计信息类型"</string>
     <string name="menu_proc_stats_type_background" msgid="2236161340134898852">"后台"</string>
@@ -2294,7 +2304,8 @@
     <string name="user_confirm_remove_self_message" product="tablet" msgid="8167855311779740207">"您将丢失自己在这台平板电脑上的空间和数据，此操作无法撤消。"</string>
     <string name="user_confirm_remove_self_message" product="default" msgid="5391888073786090274">"您将丢失自己在这部手机上的空间和数据，此操作无法撤消。"</string>
     <string name="user_confirm_remove_message" msgid="1020629390993095037">"系统将会删除所有应用和数据。"</string>
-    <string name="work_profile_confirm_remove_message" msgid="7593793549364168783">"此资料中的所有应用和数据都将被删除。"</string>
+    <!-- no translation found for work_profile_confirm_remove_message (323856589749078140) -->
+    <skip />
     <string name="user_profile_confirm_remove_message" msgid="7373754145959298522">"系统将会删除所有应用和数据。"</string>
     <string name="user_adding_new_user" msgid="1521674650874241407">"正在添加新用户…"</string>
     <string name="user_delete_user_description" msgid="3158592592118767056">"删除用户"</string>
@@ -2321,15 +2332,34 @@
     <string name="global_locale_change_title" msgid="5956281361384221451">"更改语言"</string>
     <string name="global_font_change_title" msgid="1887126466191012035">"更改字体大小"</string>
     <string name="nfc_payment_settings_title" msgid="1807298287380821613">"触碰付款"</string>
-    <string name="google_wallet" msgid="9122936252378589227">"Google电子钱包"</string>
-    <string name="nfc_payment_no_apps" msgid="2481080809791416010">"轻轻一碰，即可付款"</string>
-    <string name="nfc_payment_favor_foreground" msgid="8881893980929835838">"前台应用优先"</string>
-    <string name="nfc_payment_learn_more" msgid="5583407773744324447">"了解详情"</string>
+    <!-- no translation found for nfc_payment_how_it_works (3028822263837896720) -->
+    <skip />
+    <!-- no translation found for nfc_payment_no_apps (3453656795093776889) -->
+    <skip />
+    <!-- no translation found for nfc_payment_default (8648420259219150395) -->
+    <skip />
+    <!-- no translation found for nfc_payment_default_not_set (7485060884228447765) -->
+    <skip />
+    <!-- no translation found for nfc_payment_app_and_desc (7942415346564794258) -->
+    <skip />
+    <!-- no translation found for nfc_payment_open_app (5550268485421927976) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_open (7513784422533299982) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_open_default_unknown (1179489206233351756) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_default (8238320071435721803) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_default_default_unknown (7029467023485683077) -->
+    <skip />
+    <!-- no translation found for nfc_payment_pay_with (7524904024378144072) -->
+    <skip />
     <string name="nfc_more_title" msgid="815910943655133280">"更多…"</string>
-    <string name="nfc_payment_menu_item_add_service" msgid="2885947408068969081">"查找应用"</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"要设为您的偏好设置吗？"</string>
-    <string name="nfc_payment_set_default" msgid="8961120988148253016">"触碰付款时一律使用“<xliff:g id="APP">%1$s</xliff:g>”吗？"</string>
-    <string name="nfc_payment_set_default_instead_of" msgid="3803693771001226795">"触碰付款时一律使用“<xliff:g id="APP_0">%1$s</xliff:g>”（而非“<xliff:g id="APP_1">%2$s</xliff:g>”）吗？"</string>
+    <!-- no translation found for nfc_payment_set_default (8532426406310833489) -->
+    <skip />
+    <!-- no translation found for nfc_payment_set_default_instead_of (6993301165940432743) -->
+    <skip />
     <string name="restriction_settings_title" msgid="4233515503765879736">"限制"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"取消限制"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"更改PIN码"</string>
@@ -2454,8 +2484,7 @@
     <string name="keywords_keyboard_and_ime" msgid="5251531893531063855">"文字 文本 更正 声音 提示音 振动 自动 语言 手势 推荐 建议 主题 主题背景 令人反感的字词 输入 表情符号 国际 打字"</string>
     <string name="keywords_reset_apps" msgid="6420313678620788457">"重置 偏好设置 默认"</string>
     <string name="keywords_emergency_app" msgid="6542122071127391103">"紧急 在紧急情况下使用 应用 默认"</string>
-    <!-- no translation found for keywords_default_dialer_app (828319101140020370) -->
-    <skip />
+    <string name="keywords_default_dialer_app" msgid="828319101140020370">"拨号器默认设置"</string>
     <string name="keywords_all_apps" msgid="5377153522551809915">"应用 下载 应用程序 系统"</string>
     <string name="keywords_app_permissions" msgid="8677901415217188314">"应用 权限 安全"</string>
     <string name="keywords_default_apps" msgid="3581727483175522599">"应用 默认"</string>
@@ -2623,6 +2652,8 @@
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"取消固定屏幕前要求输入密码"</string>
     <string name="screen_pinning_unlock_none" msgid="3814188275713871856">"取消固定屏幕时锁定设备"</string>
     <string name="managed_user_title" msgid="8101244883654409696">"工作资料"</string>
+    <!-- no translation found for opening_paragraph_delete_profile_unknown_company (3790519030932488453) -->
+    <skip />
     <string name="experimental_preference" msgid="7083015446690681376">"（实验性）"</string>
     <string name="display_auto_rotate_title" msgid="6176450657107806043">"设备旋转时"</string>
     <string name="display_auto_rotate_rotate" msgid="4544299861233497728">"旋转屏幕内容方向"</string>
@@ -2665,10 +2696,8 @@
     <string name="app_data_usage" msgid="7942375313697452803">"应用数据流量"</string>
     <string name="data_summary_format" msgid="6213211533341068366">"自 <xliff:g id="DATE">%2$s</xliff:g>以来已使用 <xliff:g id="SIZE">%1$s</xliff:g>"</string>
     <string name="storage_used" msgid="7128074132917008743">"已使用的存储空间"</string>
-    <!-- no translation found for notifications_label (2872668710589600731) -->
-    <skip />
-    <!-- no translation found for notifications_enabled (4386196629684749507) -->
-    <skip />
+    <string name="notifications_label" msgid="2872668710589600731">"通知"</string>
+    <string name="notifications_enabled" msgid="4386196629684749507">"常规"</string>
     <string name="notifications_disabled" msgid="4326096527874762629">"屏蔽"</string>
     <string name="notifications_sensitive" msgid="3139432048186620878">"敏感信息"</string>
     <string name="notifications_priority" msgid="1812498477331421719">"优先级"</string>
@@ -2710,16 +2739,35 @@
     <string name="default_apps_title" msgid="1854974637597514435">"默认应用"</string>
     <string name="default_browser_title" msgid="8101772675085814670">"浏览器应用"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"没有默认浏览器"</string>
-    <!-- no translation found for default_dialer_title (5556538932548299581) -->
-    <skip />
+    <string name="default_dialer_title" msgid="5556538932548299581">"拨号器应用"</string>
     <string name="default_app" msgid="6864503001385843060">"（默认）"</string>
     <string name="apps_storage" msgid="4353308027210435513">"应用存储空间"</string>
-    <!-- no translation found for usage_access (5479504953931038165) -->
+    <string name="usage_access" msgid="5479504953931038165">"使用记录访问权限"</string>
+    <string name="permit_usage_access" msgid="4012876269445832300">"允许访问使用记录"</string>
+    <string name="app_usage_preference" msgid="7065701732733134991">"应用使用偏好设置"</string>
+    <string name="usage_access_description" msgid="1470042370563522270">"使用记录访问权限允许应用跟踪您正在使用的其他应用和使用频率，以及您的运营商、语言设置及其他详细信息。"</string>
+    <!-- no translation found for memory_settings_title (7490541005204254222) -->
     <skip />
-    <!-- no translation found for permit_usage_access (4012876269445832300) -->
+    <!-- no translation found for memory_details_title (8542565326053693320) -->
     <skip />
-    <!-- no translation found for app_usage_preference (7065701732733134991) -->
+    <!-- no translation found for always_running (756962671086985529) -->
     <skip />
-    <!-- no translation found for usage_access_description (1470042370563522270) -->
+    <!-- no translation found for sometimes_running (4029856112252925332) -->
+    <skip />
+    <!-- no translation found for rarely_running (5858601167598124445) -->
+    <skip />
+    <!-- no translation found for memory_max_use (6874803757715963097) -->
+    <skip />
+    <!-- no translation found for memory_avg_use (7382015389130622870) -->
+    <skip />
+    <!-- no translation found for memory_max_desc (2861832149718335864) -->
+    <skip />
+    <!-- no translation found for memory_avg_desc (1551240906596518412) -->
+    <skip />
+    <!-- no translation found for memory_use_running_format (4172488041800743760) -->
+    <skip />
+    <!-- no translation found for process (3426397418475689597) -->
+    <skip />
+    <!-- no translation found for process_format (6209946289580262844) -->
     <skip />
 </resources>

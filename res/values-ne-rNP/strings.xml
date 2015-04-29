@@ -320,16 +320,12 @@
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> सुतेपछि"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> निष्क्रिय पछि, <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> द्वारा जब अनलक गर्ने बाहेक"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"लक स्क्रिनमा मालिकका बारे जानकारी देखाउनुहोस्"</string>
-    <!-- no translation found for owner_info_settings_title (5530285568897386122) -->
-    <skip />
+    <string name="owner_info_settings_title" msgid="5530285568897386122">"स्क्रिन सन्देश लक गर्नुहोस्"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"विजेटहरू सक्षम पार्नुहोस्"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="1557090442377855233">"व्यवस्थापकद्वारा असक्षम पारिएको"</string>
-    <!-- no translation found for owner_info_settings_summary (7472393443779227052) -->
-    <skip />
-    <!-- no translation found for owner_info_settings_status (120407527726476378) -->
-    <skip />
-    <!-- no translation found for owner_info_settings_edit_text_hint (5605345988833943830) -->
-    <skip />
+    <string name="owner_info_settings_summary" msgid="7472393443779227052">"कुनै पनि होइन"</string>
+    <string name="owner_info_settings_status" msgid="120407527726476378">"<xliff:g id="COUNT_0">%1$d</xliff:g> / <xliff:g id="COUNT_1">%2$d</xliff:g>"</string>
+    <string name="owner_info_settings_edit_text_hint" msgid="5605345988833943830">"उदाहरण, जो को Android।"</string>
     <string name="user_info_settings_title" msgid="1195015434996724736">"प्रयोगकर्ता जानकारी"</string>
     <string name="show_profile_info_on_lockscreen_label" msgid="2741208907263877990">"लक स्क्रिनमा प्रोफाइल जानकारी देखाउनुहोस्"</string>
     <string name="profile_info_settings_title" msgid="3518603215935346604">"प्रोफाइल जानकारी"</string>
@@ -972,6 +968,8 @@
     <string name="storage_menu_format" msgid="8334422679047059459">"मेट्ने &amp; फरम्याट"</string>
     <string name="storage_menu_format_internal" msgid="6553368530402755543">"मेटेर &amp; आन्तरिक भण्डारणको रूपमा फरम्याट गर्नुहोस्"</string>
     <string name="storage_menu_usb" msgid="5708207885333243384">"USB कम्प्युटर जडान"</string>
+    <!-- no translation found for storage_menu_forget (6305824238997983426) -->
+    <skip />
     <string name="storage_title_usb" msgid="679612779321689418">"USB कम्प्युटर जडान"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"यस रूपमा जडान गर्नुहोस्"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"मिडिया उपकरण (MTP)"</string>
@@ -991,35 +989,41 @@
     <string name="storage_format_success" msgid="3023144070597190555">"<xliff:g id="NAME">%1$s</xliff:g> फरम्याट गरियो"</string>
     <string name="storage_format_failure" msgid="8343688274191391889">"<xliff:g id="NAME">%1$s</xliff:g> फरम्याट गर्न सकिएन"</string>
     <string name="storage_rename_title" msgid="8242663969839491485">"भण्डारण पुन: नामाकरण गर्नुहोस्"</string>
-    <string name="storage_internal_format_details" msgid="4018647158382548820">"ढाँचामा मिलाएपछि, तपाईँले यसलाई <xliff:g id="NAME_0">^1</xliff:g> अन्य उपकरणहरू मा प्रयोग गर्न सक्नुहुन्छ। \n\nयसका <xliff:g id="NAME_1">^1</xliff:g> सबै डेटा मेटिनेछन्। पहिले जगेडा बनाउने विचार गर्नुहोस्। \n\n"<b>"तस्बिर &amp;amp जगेडा गर्नुहोस्; अन्य मिडिया"</b>" \n यस उपकरणमा वैकल्पिक भण्डारण गर्न आफ्नो मिडिया फाइलहरू सार्नुहोस्, वा USB केबल प्रयोग गरी कम्प्युटरको स्थानान्तरण गर्नुहोस्। \n\n"<b>"अनुप्रयोगहरू जगेडा गर्नुहोस्"</b>" \n यसमा <xliff:g id="NAME_6">^1</xliff:g> भण्डारित सबै अनुप्रयोगहरू हटाइने छन् र तिनका डेटा मेटिनेछन्। यी अनुप्रयोगहरू राख्न, यस उपकरणमा वैकल्पिक भण्डारण गर्न तिनीहरूलाई सार्नुहोस्।"</string>
-    <string name="storage_internal_unmount_details" msgid="3677827796634199714"><b>"जब तपाईँले यसलाई <xliff:g id="NAME_0">^1</xliff:g> निकाल्नुहुन्छ, यसमा भण्डारित अनुप्रयोगहरूले काम गर्न रोकिनेछ, र यो पुनःनराखे सम्म यसमा भण्डारित मिडिया फाइलहरू उपलब्ध हुनेछैन। "</b>" \n\n यो <xliff:g id="NAME_1">^1</xliff:g> यस उपकरणमा मात्र काम गर्ने ढाँचामा छ। यो कुनै पनि अन्यमा काम गर्ने छैन।"</string>
+    <string name="storage_internal_format_details" msgid="4018647158382548820">"ढाँचामा मिलाएपछि, तपाईँले यसलाई <xliff:g id="NAME_0">^1</xliff:g> अन्य यन्त्रहरूमा प्रयोग गर्न सक्नुहुन्छ। \n\nयसका <xliff:g id="NAME_1">^1</xliff:g> सबै डेटा मेटिनेछन्। पहिले ब्याकअप राख्ने बारे विचार गर्नुहोस्। \n\n"<b>"तस्बिर तथा अन्य मिडिया ब्याकअप गर्नुहोस्"</b>" \n यस यन्त्रमा वैकल्पिक भण्डारण गर्न आफ्नो मिडिया फाइलहरू सार्नुहोस्, वा USB केबल प्रयोग गरी कम्प्युटरको स्थानान्तरण गर्नुहोस्। \n\n"<b>"अनुप्रयोगहरू ब्याकअप गर्नुहोस्"</b>" \n यसमा <xliff:g id="NAME_6">^1</xliff:g> भण्डारित सबै अनुप्रयोगहरू हटाइने छन् र तिनका डेटा मेटिनेछन्। यी अनुप्रयोगहरू राख्न, यस यन्त्रमा वैकल्पिक भण्डारण गर्न तिनीहरूलाई सार्नुहोस्।"</string>
+    <string name="storage_internal_unmount_details" msgid="3677827796634199714"><b>"जब तपाईँले यसलाई <xliff:g id="NAME_0">^1</xliff:g> निकाल्नुहुन्छ, यसमा भण्डारित अनुप्रयोगहरूले काम गर्न रोकिनेछ, र यो पुनःनराखे सम्म यसमा भण्डारित मिडिया फाइलहरू उपलब्ध हुनेछैन। "</b>" \n\n यो <xliff:g id="NAME_1">^1</xliff:g> यस यन्त्रमा मात्र काम गर्ने ढाँचामा छ। यो कुनै पनि अन्यमा काम गर्ने छैन।"</string>
+    <!-- no translation found for storage_internal_forget_details (4881307991281138059) -->
+    <skip />
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"तपाईँको <xliff:g id="NAME">^1</xliff:g> सेट गर्नुहोस्"</string>
-    <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"पोर्टेबल भण्डारणको रूपमा प्रयोग"</string>
-    <string name="storage_wizard_init_external_summary" msgid="7476105886344565074">"उपकरणहरू बीच फोटो र अन्य माध्यम सार्नका लागि।"</string>
-    <string name="storage_wizard_init_internal_title" msgid="9100613534261408519">"आन्तरिक भण्डारणको रूपमा प्रयोग"</string>
-    <string name="storage_wizard_init_internal_summary" msgid="6240417501036216410">"अनुप्रयोगहरू र फोटोहरू सहित, केवल यस उपकरणमा कुनै पनि भण्डारणका लागि। अन्य उपकरणहरू संग काम गर्न रोक्न ढाँचितको आवश्यकता छ।"</string>
-    <string name="storage_wizard_format_confirm_title" msgid="2814021794538252546">"आन्तरिक भण्डारणको रुपमा फरम्याट"</string>
-    <string name="storage_wizard_format_confirm_body" msgid="4401758710076806509">"यो सुरक्षित बनाउन यसलाई <xliff:g id="NAME_0">^1</xliff:g> ढाँचा बनाउन आवश्यकता छ। \n\nढाँचामा मिलाएपछी, यो उपकरणमा यसले <xliff:g id="NAME_1">^1</xliff:g> मात्र काम गर्नेछ। \n\n"<b>" ढाँचा मिलाउँदा <xliff:g id="NAME_2">^1</xliff:g> मा हालैका भण्डारीत सबै डेटा मेटिन्छ।"</b>" डेटा गुमाउनुपर्ने बाट जोगिन, यसलाई जगेडा बनाउने विचार गर्नुहोस्।"</string>
-    <string name="storage_wizard_format_confirm_next" msgid="2774557300531702572">"मेटाई फरम्याट गर्नुहोस्"</string>
-    <string name="storage_wizard_format_progress_title" msgid="6487352396450582292">"<xliff:g id="NAME">^1</xliff:g> फरम्याट गरिन्दै ..."</string>
-    <string name="storage_wizard_format_progress_body" msgid="1259216693690378749">"फरम्याट गर्ने क्रममा <xliff:g id="NAME">^1</xliff:g> नहटाउनुहोस्।"</string>
+    <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"पोर्टेबल भण्डारणको रूपमा प्रयोग गर्नुहोस्"</string>
+    <string name="storage_wizard_init_external_summary" msgid="7476105886344565074">"यन्त्रहरू बीच तस्बिर र अन्य मिडिया सार्नका लागि।"</string>
+    <string name="storage_wizard_init_internal_title" msgid="9100613534261408519">"आन्तरिक भण्डारणको रूपमा प्रयोग गर्नुहोस्"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="6240417501036216410">"यस यन्त्रमा मात्र कुनै पनि चीज, अनुप्रयोग र तस्बिरहरू  भण्डारण गर्नका लागि। यसलाई ढाँचा मिलाउन आवश्यक हुन्छ जसले अर्का यन्त्रहरूसँग काम गर्नबाट रोक्छ।"</string>
+    <string name="storage_wizard_format_confirm_title" msgid="2814021794538252546">"आन्तरिक भण्डारणको रुपमा ढाँचा गर्नुहोस्"</string>
+    <string name="storage_wizard_format_confirm_body" msgid="4401758710076806509">"यो सुरक्षित बनाउन यसलाई <xliff:g id="NAME_0">^1</xliff:g> ढाँचा बनाउन आवश्यकता छ। \n\nढाँचामा मिलाएपछि, यो यन्त्रमा यसले <xliff:g id="NAME_1">^1</xliff:g> मात्र काम गर्नेछ। \n\n"<b>" ढाँचा मिलाउँदा <xliff:g id="NAME_2">^1</xliff:g> मा हालैका भण्डारित सबै डेटा मेटिन्छ।"</b>" डेटा गुमाउनुपर्ने बाट जोगिन, यसको ब्याकअप राख्ने बारे विचार गर्नुहोस्।"</string>
+    <!-- no translation found for storage_wizard_format_confirm_public_title (4905690038882041566) -->
+    <skip />
+    <!-- no translation found for storage_wizard_format_confirm_public_body (1516932692920060272) -->
+    <skip />
+    <string name="storage_wizard_format_confirm_next" msgid="2774557300531702572">"ढाँचा मेटाउनुहोस्"</string>
+    <string name="storage_wizard_format_progress_title" msgid="6487352396450582292">"<xliff:g id="NAME">^1</xliff:g> ढाँचा मिलाइदै ..."</string>
+    <string name="storage_wizard_format_progress_body" msgid="1259216693690378749">"ढाँचा मिलाउने क्रममा <xliff:g id="NAME">^1</xliff:g> नहटाउनुहोस्।"</string>
     <string name="storage_wizard_migrate_title" msgid="1363078147938160407">"नयाँ भण्डारणमा डेटा सार्नुहोस्"</string>
-    <string name="storage_wizard_migrate_body" msgid="606648689408670617">"तपाईँले यो नयाँ <xliff:g id="NAME">^1</xliff:g> मा आफ्नो फोटोहरू, फाइलहरू, र अनुप्रयोग डेटा सार्न सक्नुहुनेछ। \n\n यसरी सार्दा आन्तरिक भण्डारणमा करिब <xliff:g id="TIME">^2</xliff:g> लिन्छ र <xliff:g id="SIZE">^3</xliff:g> खालि गर्नेछ। यस क्रममा, जबकि केही अनुप्रयोगहरूले कार्य गर्ने छैन।"</string>
+    <string name="storage_wizard_migrate_body" msgid="606648689408670617">"तपाईँले यो नयाँ <xliff:g id="NAME">^1</xliff:g> मा आफ्ना तस्बिरहरू, फाइलहरू, र अनुप्रयोग डेटा सार्न सक्नुहुनेछ। \n\n यसरी सार्दा करिब <xliff:g id="TIME">^2</xliff:g> लिन्छ र <xliff:g id="SIZE">^3</xliff:g> आन्तरिक भण्डारणमा खाली गर्नेछ। यस क्रममा केही अनुप्रयोगहरूले काम गर्ने छैन।"</string>
     <string name="storage_wizard_migrate_now" msgid="4523444323744239143">"अब सार्नुहोस्"</string>
     <string name="storage_wizard_migrate_later" msgid="3173482328116026253">"पछि सार्नुहोस्"</string>
     <string name="storage_wizard_migrate_confirm_title" msgid="8564833529613286965">"अब डेटा सार्नुहोस्"</string>
-    <string name="storage_wizard_migrate_confirm_body" msgid="5035719146373359329"><b>"यसरी सार्दा करिब <xliff:g id="TIME">^1</xliff:g> लिन्छ। यसले आन्तरिक भण्डारणको <xliff:g id="SIZE">^2</xliff:g> खालि गर्नेछ।"</b></string>
+    <string name="storage_wizard_migrate_confirm_body" msgid="5035719146373359329"><b>"यसरी सार्दा करिब <xliff:g id="TIME">^1</xliff:g> लिन्छ। यसले आन्तरिक भण्डारणको <xliff:g id="SIZE">^2</xliff:g> खाली गर्नेछ।"</b></string>
     <string name="storage_wizard_migrate_confirm_next" msgid="5509475628423823202">"सार्नुहोस्"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="1665479429044202868">"डेटा सार्दै..."</string>
-    <string name="storage_wizard_migrate_details" msgid="8641916179067596592">"सार्दाको समयमा: \n• <xliff:g id="NAME">^1</xliff:g> हटाउने नगर्नुहोस्। \n• केही अनुप्रयोगहरूले सही काम गर्ने छैन। \n• उपकरण चार्जमा राख्नुहोस्।"</string>
+    <string name="storage_wizard_migrate_details" msgid="8641916179067596592">"सार्दाको समयमा: \n• <xliff:g id="NAME">^1</xliff:g> नहटाउनुहोस्। \n• केही अनुप्रयोगहरूले सही काम गर्ने छैन। \n• यन्त्र चार्जमा राख्नुहोस्।"</string>
     <string name="storage_wizard_ready_title" msgid="5381632402953258267">"<xliff:g id="NAME">^1</xliff:g> तयार छ"</string>
-    <string name="storage_wizard_ready_external_body" msgid="2879508114260597474">"तपाईँको <xliff:g id="NAME">^1</xliff:g> फोटो र अन्य साधन साथप्रयोग गर्न सबै सेट छ।"</string>
-    <string name="storage_wizard_ready_internal_body" msgid="122532674037860197">"तपाईँको नयाँ <xliff:g id="NAME">^1</xliff:g> ले काम गर्दैछ। \n\n यो उपकरणमा फोटोहरू, फाइलहरू, र अनुप्रयोग डेटा सार्न, सेटिङ् &amp;gt मा जानुहोस्; भण्डारण गर्नुहोस्।"</string>
+    <string name="storage_wizard_ready_external_body" msgid="2879508114260597474">"तपाईँको <xliff:g id="NAME">^1</xliff:g> तस्बिर र अन्य मिडिया प्रयोग गर्न सबै सेट छ।"</string>
+    <string name="storage_wizard_ready_internal_body" msgid="122532674037860197">"तपाईँको नयाँ <xliff:g id="NAME">^1</xliff:g> ले काम गर्दैछ। \n\n यो यन्त्रमा तस्बिरहरू, फाइलहरू, र अनुप्रयोग डेटा सार्न, सेटिङ &amp;gt मा जानुहोस्; भण्डारण गर्नुहोस्।"</string>
     <string name="storage_wizard_move_confirm_title" msgid="292782012677890250">"सार्नुहोस् <xliff:g id="APP">^1</xliff:g>"</string>
-    <string name="storage_wizard_move_confirm_body" msgid="236043946721254139">"<xliff:g id="NAME_0">^2</xliff:g> मा <xliff:g id="APP">^1</xliff:g> र यसको डेटा सार्न केही बेर मात्र लिनेछ। तपाईँ सार्ने क्रम पूरा नहुन्जेल अनुप्रयोग प्रयोग गर्न सक्नुहुने छैन। \n\n सार्ने क्रममा <xliff:g id="NAME_1">^2</xliff:g> हटाउने नगर्नुहोस्।"</string>
+    <string name="storage_wizard_move_confirm_body" msgid="236043946721254139">"<xliff:g id="NAME_0">^2</xliff:g> मा <xliff:g id="APP">^1</xliff:g> र यसको डेटा सार्न केही बेर मात्र लिनेछ। तपाईँ सार्ने क्रम पूरा नहुन्जेल अनुप्रयोग प्रयोग गर्न सक्नुहुने छैन। \n\n सार्ने क्रममा <xliff:g id="NAME_1">^2</xliff:g> नहटाउनुहोस्।"</string>
     <string name="storage_wizard_move_progress_title" msgid="4443920302548035674">"सार्दै <xliff:g id="APP">^1</xliff:g>..."</string>
-    <string name="storage_wizard_move_progress_body" msgid="4288580957960820740">"सार्ने क्रममा <xliff:g id="NAME">^1</xliff:g> हटाउने नगर्नुहोस्। \n\nसार्ने क्रम पूरा नहुन्जेल सम्म यो उपकरणमा यो <xliff:g id="APP">^2</xliff:g> अनुप्रयोग उपलब्ध हुने छैन।"</string>
-    <string name="storage_wizard_move_progress_cancel" msgid="542047237524588792">"सार्ने रद्द गर्नुहोस्"</string>
+    <string name="storage_wizard_move_progress_body" msgid="4288580957960820740">"सार्ने क्रममा <xliff:g id="NAME">^1</xliff:g> नहटाउनुहोस्। \n\nसार्ने क्रम पूरा नहुन्जेल सम्म यो यन्त्रको<xliff:g id="APP">^2</xliff:g> अनुप्रयोग उपलब्ध हुने छैन।"</string>
+    <string name="storage_wizard_move_progress_cancel" msgid="542047237524588792">"सार्ने कार्य रद्द गर्नुहोस्"</string>
     <string name="battery_status_title" msgid="9159414319574976203">"ब्याट्रि स्थिति"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"ब्याट्रि स्तर"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APNs"</string>
@@ -1769,11 +1773,15 @@
     <string name="process_stats_summary_title" msgid="1144688045609771677">"प्रक्रिया तथ्याङ्क"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"चालु रहने प्रक्रियाहरूको बारेको geeky तथ्याङ्क"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"मेमोरी प्रयोग"</string>
-    <string name="process_stats_total_duration" msgid="2243876627952936205">"<xliff:g id="TIMEDURATION">%3$s</xliff:g> भन्दा धेरै समय प्रयोग गरिएको <xliff:g id="TOTALRAM">%2$s</xliff:g> को <xliff:g id="USEDRAM">%1$s</xliff:g>"</string>
+    <!-- no translation found for process_stats_total_duration (7417201400853728029) -->
+    <skip />
+    <!-- no translation found for process_stats_total_duration_percentage (6522457033380025618) -->
+    <skip />
     <string name="process_stats_type_background" msgid="3934992858120683459">"पृष्ठभूमि"</string>
     <string name="process_stats_type_foreground" msgid="7713118254089580536">"अग्रभूमि"</string>
     <string name="process_stats_type_cached" msgid="6314925846944806511">"भन्डार गरिएको"</string>
-    <string name="process_stats_memory_status" msgid="4251599550196193093">"उपकरण स्मृति वर्तमान <xliff:g id="MEMSTATE">%1$s</xliff:g> मा छ"</string>
+    <!-- no translation found for process_stats_memory_status (8291117301143037644) -->
+    <skip />
     <string name="process_stats_os_label" msgid="4813434110442733392">"Android OS"</string>
     <string name="process_stats_os_native" msgid="5322428494231768472">"निवासी"</string>
     <string name="process_stats_os_kernel" msgid="1938523592369780924">"कर्नेल"</string>
@@ -1800,6 +1808,8 @@
     <string name="menu_duration_1d" msgid="3393631127622285458">"१ दिन"</string>
     <string name="menu_show_system" msgid="8864603400415567635">"प्रणाली देखाउनुहोस्"</string>
     <string name="menu_hide_system" msgid="4106826741703745733">"प्रणाली लुकाउनुहोस्"</string>
+    <!-- no translation found for menu_show_percentage (4717204046118199806) -->
+    <skip />
     <string name="menu_use_uss" msgid="467765290771543089">"Uss प्रयोग गर्नुहोस्"</string>
     <string name="menu_proc_stats_type" msgid="4700209061072120948">"तथ्याङ्क प्रकार"</string>
     <string name="menu_proc_stats_type_background" msgid="2236161340134898852">"पृष्ठभूमि"</string>
@@ -2294,7 +2304,8 @@
     <string name="user_confirm_remove_self_message" product="tablet" msgid="8167855311779740207">"तपाईं यस ट्याब्लेटमा आफ्नो ठाउँ र डेटा हराउनु हुने छ। तपाईं यो कार्यलाई अन्डु गर्न सक्नुहुन्न।"</string>
     <string name="user_confirm_remove_self_message" product="default" msgid="5391888073786090274">"तपाईँ यस फोनमा तपाईँको ठाउँ र डेटा गुमाउनु हुने छ। तपाईँ यो कार्य पूर्ववत बनाउन सक्नु हुन्न।"</string>
     <string name="user_confirm_remove_message" msgid="1020629390993095037">"सबै अनुप्रयोगहरू र डेटा मेटाइनेछन्।"</string>
-    <string name="work_profile_confirm_remove_message" msgid="7593793549364168783">"यस सत्रमा सबै अनुप्रयोगहरू र डेटा मेटाइनेछन्।"</string>
+    <!-- no translation found for work_profile_confirm_remove_message (323856589749078140) -->
+    <skip />
     <string name="user_profile_confirm_remove_message" msgid="7373754145959298522">"सबै अनुप्रयोगहरू र डेटा मेटाइने छन्।"</string>
     <string name="user_adding_new_user" msgid="1521674650874241407">"नयाँ प्रयोगकर्ता थप गरिँदै..."</string>
     <string name="user_delete_user_description" msgid="3158592592118767056">"प्रयोगकर्ता मेटाउनुहोस्"</string>
@@ -2321,15 +2332,34 @@
     <string name="global_locale_change_title" msgid="5956281361384221451">"भाषा परिवर्तन गर्नुहोस्"</string>
     <string name="global_font_change_title" msgid="1887126466191012035">"फन्ट साइज परिवर्तन गर्नुहोस्"</string>
     <string name="nfc_payment_settings_title" msgid="1807298287380821613">"Tap &amp; Pay"</string>
-    <string name="google_wallet" msgid="9122936252378589227">"Google वालेट"</string>
-    <string name="nfc_payment_no_apps" msgid="2481080809791416010">"केवल एक ट्यापको साथ तिर्नुहोस्"</string>
-    <string name="nfc_payment_favor_foreground" msgid="8881893980929835838">"अनुकूल अग्रभूमि अनुप्रयोग"</string>
-    <string name="nfc_payment_learn_more" msgid="5583407773744324447">"बढि जान्नुहोस्"</string>
+    <!-- no translation found for nfc_payment_how_it_works (3028822263837896720) -->
+    <skip />
+    <!-- no translation found for nfc_payment_no_apps (3453656795093776889) -->
+    <skip />
+    <!-- no translation found for nfc_payment_default (8648420259219150395) -->
+    <skip />
+    <!-- no translation found for nfc_payment_default_not_set (7485060884228447765) -->
+    <skip />
+    <!-- no translation found for nfc_payment_app_and_desc (7942415346564794258) -->
+    <skip />
+    <!-- no translation found for nfc_payment_open_app (5550268485421927976) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_open (7513784422533299982) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_open_default_unknown (1179489206233351756) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_default (8238320071435721803) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_default_default_unknown (7029467023485683077) -->
+    <skip />
+    <!-- no translation found for nfc_payment_pay_with (7524904024378144072) -->
+    <skip />
     <string name="nfc_more_title" msgid="815910943655133280">"थप..."</string>
-    <string name="nfc_payment_menu_item_add_service" msgid="2885947408068969081">"अनुप्रयोगहरु खोज्नुहोस्"</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"तपाईँको प्राथमिकताको रूपमा सेट गर्ने हो?"</string>
-    <string name="nfc_payment_set_default" msgid="8961120988148253016">"तपाईंले Tap &amp; Pay गर्दा सँधै <xliff:g id="APP">%1$s</xliff:g> प्रयोग गर्ने हो?"</string>
-    <string name="nfc_payment_set_default_instead_of" msgid="3803693771001226795">"Tap &amp; Pay गर्दा <xliff:g id="APP_1">%2$s</xliff:g> को सट्टामा <xliff:g id="APP_0">%1$s</xliff:g> प्रयोग गर्नुहुन्छ?"</string>
+    <!-- no translation found for nfc_payment_set_default (8532426406310833489) -->
+    <skip />
+    <!-- no translation found for nfc_payment_set_default_instead_of (6993301165940432743) -->
+    <skip />
     <string name="restriction_settings_title" msgid="4233515503765879736">"प्रतिबन्धहरू"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"प्रतिबन्धहरू हटाउनुहोस्"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"PIN फेर्नुहोस्"</string>
@@ -2454,8 +2484,7 @@
     <string name="keywords_keyboard_and_ime" msgid="5251531893531063855">"पाठ सुधार सही ध्वनि कम्पन स्वतः भाषा इशारा सुझाव दिनु सुझाव विषय आपत्तिजनक शब्द प्रकार इमोजी अन्तर्राष्ट्रिय"</string>
     <string name="keywords_reset_apps" msgid="6420313678620788457">"प्राथमिकताहरू पूर्वनिर्धारित रिसेट गर्नुहोस्"</string>
     <string name="keywords_emergency_app" msgid="6542122071127391103">"आकस्मिक आइस अनुप्रयोग पूर्वनिर्धारित"</string>
-    <!-- no translation found for keywords_default_dialer_app (828319101140020370) -->
-    <skip />
+    <string name="keywords_default_dialer_app" msgid="828319101140020370">"डायलर पूर्वनिर्धारित"</string>
     <string name="keywords_all_apps" msgid="5377153522551809915">"अनुप्रयोगहरू डाउनलोड गर्ने अनुप्रयोग प्रणाली"</string>
     <string name="keywords_app_permissions" msgid="8677901415217188314">"अनुप्रयोगहरू अनुमति सुरक्षा"</string>
     <string name="keywords_default_apps" msgid="3581727483175522599">"पूर्वनिर्धारित अनुप्रयोगहरू"</string>
@@ -2623,6 +2652,8 @@
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"पिन निकाल्नुअघि पासवर्ड सोध्नुहोस्"</string>
     <string name="screen_pinning_unlock_none" msgid="3814188275713871856">"अनपिन गर्दा उपकरण लक गर्नुहोस्"</string>
     <string name="managed_user_title" msgid="8101244883654409696">"कार्य प्रोफाइल"</string>
+    <!-- no translation found for opening_paragraph_delete_profile_unknown_company (3790519030932488453) -->
+    <skip />
     <string name="experimental_preference" msgid="7083015446690681376">"(प्रयोगात्मक)"</string>
     <string name="display_auto_rotate_title" msgid="6176450657107806043">"जब उपकरण घुमाइन्छ"</string>
     <string name="display_auto_rotate_rotate" msgid="4544299861233497728">"पर्दाको सामग्रीहरु घुमाउनुहोस्"</string>
@@ -2665,10 +2696,8 @@
     <string name="app_data_usage" msgid="7942375313697452803">"अनुप्रयोग डेटा उपयोग"</string>
     <string name="data_summary_format" msgid="6213211533341068366">"<xliff:g id="DATE">%2$s</xliff:g> देखि प्रयोग गरिएको <xliff:g id="SIZE">%1$s</xliff:g>"</string>
     <string name="storage_used" msgid="7128074132917008743">"प्रयोग भएको भण्डारण"</string>
-    <!-- no translation found for notifications_label (2872668710589600731) -->
-    <skip />
-    <!-- no translation found for notifications_enabled (4386196629684749507) -->
-    <skip />
+    <string name="notifications_label" msgid="2872668710589600731">"सूचनाहरू"</string>
+    <string name="notifications_enabled" msgid="4386196629684749507">"सामान्य"</string>
     <string name="notifications_disabled" msgid="4326096527874762629">"रोक्नुहोस्"</string>
     <string name="notifications_sensitive" msgid="3139432048186620878">"संवेदनशील"</string>
     <string name="notifications_priority" msgid="1812498477331421719">"प्राथमिकता"</string>
@@ -2710,16 +2739,35 @@
     <string name="default_apps_title" msgid="1854974637597514435">"पूर्वनिर्धारित अनुप्रयोगहरू"</string>
     <string name="default_browser_title" msgid="8101772675085814670">"ब्राउजर अनुप्रयोग"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"कुनै पूर्वनिर्धारित ब्राउजर छैन"</string>
-    <!-- no translation found for default_dialer_title (5556538932548299581) -->
-    <skip />
+    <string name="default_dialer_title" msgid="5556538932548299581">"डायलर अनुप्रयोग"</string>
     <string name="default_app" msgid="6864503001385843060">"(पूर्वनिर्धारित)"</string>
     <string name="apps_storage" msgid="4353308027210435513">"अनुप्रयोग भण्डारण"</string>
-    <!-- no translation found for usage_access (5479504953931038165) -->
+    <string name="usage_access" msgid="5479504953931038165">"उपयोग पहुँच"</string>
+    <string name="permit_usage_access" msgid="4012876269445832300">"उपयोग पहुँचलाई अनुमति दिनुहोस्"</string>
+    <string name="app_usage_preference" msgid="7065701732733134991">"अनुप्रयोग उपयोग प्राथमिकताहरू"</string>
+    <string name="usage_access_description" msgid="1470042370563522270">"उपयोग पहुँचले अनुप्रयोगलाई तपाईंले तपाईँको वाहक, भाषा सेटिङहरू, र अन्य विवरणहरू सहित के अन्य अनुप्रयोगहरू प्रयोग गरिरहनु भएको छ र कत्तिको गर्नुभएको छ भनेर ट्र्याक गर्न अनुमति दिन्छ।"</string>
+    <!-- no translation found for memory_settings_title (7490541005204254222) -->
     <skip />
-    <!-- no translation found for permit_usage_access (4012876269445832300) -->
+    <!-- no translation found for memory_details_title (8542565326053693320) -->
     <skip />
-    <!-- no translation found for app_usage_preference (7065701732733134991) -->
+    <!-- no translation found for always_running (756962671086985529) -->
     <skip />
-    <!-- no translation found for usage_access_description (1470042370563522270) -->
+    <!-- no translation found for sometimes_running (4029856112252925332) -->
+    <skip />
+    <!-- no translation found for rarely_running (5858601167598124445) -->
+    <skip />
+    <!-- no translation found for memory_max_use (6874803757715963097) -->
+    <skip />
+    <!-- no translation found for memory_avg_use (7382015389130622870) -->
+    <skip />
+    <!-- no translation found for memory_max_desc (2861832149718335864) -->
+    <skip />
+    <!-- no translation found for memory_avg_desc (1551240906596518412) -->
+    <skip />
+    <!-- no translation found for memory_use_running_format (4172488041800743760) -->
+    <skip />
+    <!-- no translation found for process (3426397418475689597) -->
+    <skip />
+    <!-- no translation found for process_format (6209946289580262844) -->
     <skip />
 </resources>

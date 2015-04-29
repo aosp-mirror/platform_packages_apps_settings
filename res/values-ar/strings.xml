@@ -324,16 +324,12 @@
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> بعد السكون"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> بعد السكون، باستثناء أن يتم الاستمرار في إلغاء القفل بواسطة <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"إظهار معلومات المالك في شاشة التأمين"</string>
-    <!-- no translation found for owner_info_settings_title (5530285568897386122) -->
-    <skip />
+    <string name="owner_info_settings_title" msgid="5530285568897386122">"رسالة شاشة التأمين"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"تمكين الأدوات"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="1557090442377855233">"معطّلة بواسطة المشرف"</string>
-    <!-- no translation found for owner_info_settings_summary (7472393443779227052) -->
-    <skip />
-    <!-- no translation found for owner_info_settings_status (120407527726476378) -->
-    <skip />
-    <!-- no translation found for owner_info_settings_edit_text_hint (5605345988833943830) -->
-    <skip />
+    <string name="owner_info_settings_summary" msgid="7472393443779227052">"لا أحد"</string>
+    <string name="owner_info_settings_status" msgid="120407527726476378">"<xliff:g id="COUNT_0">%1$d</xliff:g> / <xliff:g id="COUNT_1">%2$d</xliff:g>"</string>
+    <string name="owner_info_settings_edit_text_hint" msgid="5605345988833943830">"‏جهاز Android الخاص بهاني مثلاً"</string>
     <string name="user_info_settings_title" msgid="1195015434996724736">"معلومات المستخدم"</string>
     <string name="show_profile_info_on_lockscreen_label" msgid="2741208907263877990">"إظهار معلومات الملف الشخصي في شاشة التأمين"</string>
     <string name="profile_info_settings_title" msgid="3518603215935346604">"معلومات الملف الشخصي"</string>
@@ -999,6 +995,8 @@
     <string name="storage_menu_format" msgid="8334422679047059459">"محو البيانات والتنسيق"</string>
     <string name="storage_menu_format_internal" msgid="6553368530402755543">"محو بيانات وتنسيق كوحدة داخلية"</string>
     <string name="storage_menu_usb" msgid="5708207885333243384">"‏اتصال USB بالكمبيوتر"</string>
+    <!-- no translation found for storage_menu_forget (6305824238997983426) -->
+    <skip />
     <string name="storage_title_usb" msgid="679612779321689418">"‏اتصال USB بالكمبيوتر"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"اتصال كـ"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"‏جهاز الوسائط (MTP)"</string>
@@ -1020,6 +1018,8 @@
     <string name="storage_rename_title" msgid="8242663969839491485">"إعادة تسمية وحدة التخزين"</string>
     <string name="storage_internal_format_details" msgid="4018647158382548820">"‏بعد إجراء التنسيق، يمكنك استخدام <xliff:g id="NAME_0">^1</xliff:g> هذه على أجهزة أخرى. \n\nوسيتم محو جميع البيانات الموجودة على <xliff:g id="NAME_1">^1</xliff:g> هذه. يمكنك إجراء النسخ الاحتياطي أولاً. \n\n"<b>"النسخ الاحتياطي للصور والوسائط الأخرى"</b>" \nيمكنك نقل ملفات الوسائط إلى وحدة تخزين بديلة على هذا الجهاز أو نقلها إلى جهاز كمبيوتر باستخدام كابل USB. \n\n"<b>"النسخ الاحتياطي للتطبيقات"</b>" \nستتم إزالة جميع التطبيقات المخزنة على <xliff:g id="NAME_6">^1</xliff:g> هذه وكذلك سيتم محو بياناتها. وللاحتفاظ بهذه التطبيقات، يمكنك نقلها إلى وحدة تخزين بديلة على هذا الجهاز."</string>
     <string name="storage_internal_unmount_details" msgid="3677827796634199714"><b>"عند إخراج <xliff:g id="NAME_0">^1</xliff:g>هذه، فإن التطبيقات المخزنة عليها ستتوقف عن العمل ولن تكون ملفات الوسائط المخزنة عليها متاحة حتى يتم إعادة إدخالها."</b>" \n\nلقد تم تنسيق <xliff:g id="NAME_1">^1</xliff:g> للعمل على هذا الجهاز فقط. ولن تعمل على أية أجهزة أخرى."</string>
+    <!-- no translation found for storage_internal_forget_details (4881307991281138059) -->
+    <skip />
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"إعداد <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"الاستخدام كوحدة تخزين محمولة"</string>
     <string name="storage_wizard_init_external_summary" msgid="7476105886344565074">"لنقل الصور والوسائط الأخرى بين الأجهزة."</string>
@@ -1027,6 +1027,10 @@
     <string name="storage_wizard_init_internal_summary" msgid="6240417501036216410">"لتخزين أي شيء على هذا الجهاز فقط، بما في ذلك التطبيقات والصور. يتطلب التنسيق الذي يمنعها من العمل مع الأجهزة الأخرى."</string>
     <string name="storage_wizard_format_confirm_title" msgid="2814021794538252546">"التنسيق كوحدة تخزين داخلية"</string>
     <string name="storage_wizard_format_confirm_body" msgid="4401758710076806509">"يتطلب هذا أن يتم تنسيق <xliff:g id="NAME_0">^1</xliff:g> لجعلها آمنة. \n\nبعد التنسيق، لن تعمل <xliff:g id="NAME_1">^1</xliff:g> هذه إلا على هذا الجهاز. \n\n"<b>"يؤدي التنسيق إلى محو جميع البيانات المخزنة حاليًا على <xliff:g id="NAME_2">^1</xliff:g>."</b>" ولتجنب فقد البيانات، يمكنك نسخها احتياطيًا."</string>
+    <!-- no translation found for storage_wizard_format_confirm_public_title (4905690038882041566) -->
+    <skip />
+    <!-- no translation found for storage_wizard_format_confirm_public_body (1516932692920060272) -->
+    <skip />
     <string name="storage_wizard_format_confirm_next" msgid="2774557300531702572">"محو البيانات والتنسيق"</string>
     <string name="storage_wizard_format_progress_title" msgid="6487352396450582292">"جارٍ تنسيق <xliff:g id="NAME">^1</xliff:g>…"</string>
     <string name="storage_wizard_format_progress_body" msgid="1259216693690378749">"لا تزِل <xliff:g id="NAME">^1</xliff:g> أثناء تنسيقها."</string>
@@ -1796,11 +1800,12 @@
     <string name="process_stats_summary_title" msgid="1144688045609771677">"إحصائيات العمليات"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"الإحصائيات التقنية حول العمليات الجارية"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"استخدام الذاكرة"</string>
-    <string name="process_stats_total_duration" msgid="2243876627952936205">"تم استخدام <xliff:g id="USEDRAM">%1$s</xliff:g> من <xliff:g id="TOTALRAM">%2$s</xliff:g> خلال <xliff:g id="TIMEDURATION">%3$s</xliff:g>"</string>
+    <string name="process_stats_total_duration" msgid="7417201400853728029">"تم استخدام <xliff:g id="USEDRAM">%1$s</xliff:g> من إجمالي <xliff:g id="TOTALRAM">%2$s</xliff:g> خلال آخر <xliff:g id="TIMEDURATION">%3$s</xliff:g>"</string>
+    <string name="process_stats_total_duration_percentage" msgid="6522457033380025618">"تم استخدام <xliff:g id="PERCENT">%1$s</xliff:g> من ذاكرة الوصول العشوائي خلال <xliff:g id="TIMEDURATION">%2$s</xliff:g>"</string>
     <string name="process_stats_type_background" msgid="3934992858120683459">"خلفية"</string>
     <string name="process_stats_type_foreground" msgid="7713118254089580536">"المقدمة"</string>
     <string name="process_stats_type_cached" msgid="6314925846944806511">"نسخة مخبأة"</string>
-    <string name="process_stats_memory_status" msgid="4251599550196193093">"ذاكرة الجهاز حاليًا <xliff:g id="MEMSTATE">%1$s</xliff:g>"</string>
+    <string name="process_stats_memory_status" msgid="8291117301143037644">"الذاكرة <xliff:g id="MEMSTATE">%1$s</xliff:g>"</string>
     <string name="process_stats_os_label" msgid="4813434110442733392">"‏نظام التشغيل Android"</string>
     <string name="process_stats_os_native" msgid="5322428494231768472">"أصلية"</string>
     <string name="process_stats_os_kernel" msgid="1938523592369780924">"Kernel"</string>
@@ -1827,6 +1832,7 @@
     <string name="menu_duration_1d" msgid="3393631127622285458">"يوم واحد"</string>
     <string name="menu_show_system" msgid="8864603400415567635">"إظهار النظام"</string>
     <string name="menu_hide_system" msgid="4106826741703745733">"إخفاء النظام"</string>
+    <string name="menu_show_percentage" msgid="4717204046118199806">"إظهار النسب المئوية"</string>
     <string name="menu_use_uss" msgid="467765290771543089">"‏استخدام Uss"</string>
     <string name="menu_proc_stats_type" msgid="4700209061072120948">"نوع الإحصائيات"</string>
     <string name="menu_proc_stats_type_background" msgid="2236161340134898852">"خلفية"</string>
@@ -2321,7 +2327,8 @@
     <string name="user_confirm_remove_self_message" product="tablet" msgid="8167855311779740207">"ستفقد مساحتك وبياناتك من هذا الجهاز اللوحي. لا يمكنك التراجع عن هذا الإجراء."</string>
     <string name="user_confirm_remove_self_message" product="default" msgid="5391888073786090274">"ستفقد مساحتك وبياناتك من هذا الهاتف. لا يمكنك التراجع عن هذا الإجراء."</string>
     <string name="user_confirm_remove_message" msgid="1020629390993095037">"سيتم حذف جميع التطبيقات والبيانات."</string>
-    <string name="work_profile_confirm_remove_message" msgid="7593793549364168783">"سيتم حذف جميع التطبيقات والبيانات في هذا الملف الشخصي."</string>
+    <!-- no translation found for work_profile_confirm_remove_message (323856589749078140) -->
+    <skip />
     <string name="user_profile_confirm_remove_message" msgid="7373754145959298522">"سيتم حذف جميع التطبيقات والبيانات."</string>
     <string name="user_adding_new_user" msgid="1521674650874241407">"جارٍ إضافة مستخدم جديد..."</string>
     <string name="user_delete_user_description" msgid="3158592592118767056">"حذف مستخدم"</string>
@@ -2348,15 +2355,34 @@
     <string name="global_locale_change_title" msgid="5956281361384221451">"تغيير اللغة"</string>
     <string name="global_font_change_title" msgid="1887126466191012035">"تغيير حجم الخط"</string>
     <string name="nfc_payment_settings_title" msgid="1807298287380821613">"انقر وادفع"</string>
-    <string name="google_wallet" msgid="9122936252378589227">"‏محفظة Google"</string>
-    <string name="nfc_payment_no_apps" msgid="2481080809791416010">"الدفع بنقرة واحدة"</string>
-    <string name="nfc_payment_favor_foreground" msgid="8881893980929835838">"تفضيل التطبيق الأمامي"</string>
-    <string name="nfc_payment_learn_more" msgid="5583407773744324447">"مزيد من المعلومات"</string>
+    <!-- no translation found for nfc_payment_how_it_works (3028822263837896720) -->
+    <skip />
+    <!-- no translation found for nfc_payment_no_apps (3453656795093776889) -->
+    <skip />
+    <!-- no translation found for nfc_payment_default (8648420259219150395) -->
+    <skip />
+    <!-- no translation found for nfc_payment_default_not_set (7485060884228447765) -->
+    <skip />
+    <!-- no translation found for nfc_payment_app_and_desc (7942415346564794258) -->
+    <skip />
+    <!-- no translation found for nfc_payment_open_app (5550268485421927976) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_open (7513784422533299982) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_open_default_unknown (1179489206233351756) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_default (8238320071435721803) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_default_default_unknown (7029467023485683077) -->
+    <skip />
+    <!-- no translation found for nfc_payment_pay_with (7524904024378144072) -->
+    <skip />
     <string name="nfc_more_title" msgid="815910943655133280">"المزيد..."</string>
-    <string name="nfc_payment_menu_item_add_service" msgid="2885947408068969081">"البحث عن تطبيقات"</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"هل تريد تعيينه كتفضيل؟"</string>
-    <string name="nfc_payment_set_default" msgid="8961120988148253016">"هل تريد استخدام <xliff:g id="APP">%1$s</xliff:g> دائمًا عند النقر والدفع؟"</string>
-    <string name="nfc_payment_set_default_instead_of" msgid="3803693771001226795">"هل تريد استخدام <xliff:g id="APP_0">%1$s</xliff:g> بدلاً من <xliff:g id="APP_1">%2$s</xliff:g> دائمًا عند النقر والدفع؟"</string>
+    <!-- no translation found for nfc_payment_set_default (8532426406310833489) -->
+    <skip />
+    <!-- no translation found for nfc_payment_set_default_instead_of (6993301165940432743) -->
+    <skip />
     <string name="restriction_settings_title" msgid="4233515503765879736">"القيود"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"إزالة القيود"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"‏تغيير رمز PIN"</string>
@@ -2481,8 +2507,7 @@
     <string name="keywords_keyboard_and_ime" msgid="5251531893531063855">"نص تصحيح صحح صوت اهتزاز تلقائي لغة إيماءة اقتراح يقترح مظهر مسيء كلمة يكتب رمز تعبيري دولي"</string>
     <string name="keywords_reset_apps" msgid="6420313678620788457">"reset preferences default"</string>
     <string name="keywords_emergency_app" msgid="6542122071127391103">"‏طوارئ ice تطبيق افتراضي \"emergency app default\""</string>
-    <!-- no translation found for keywords_default_dialer_app (828319101140020370) -->
-    <skip />
+    <string name="keywords_default_dialer_app" msgid="828319101140020370">"برنامج الاتصال الافتراضي"</string>
     <string name="keywords_all_apps" msgid="5377153522551809915">"apps download applications system"</string>
     <string name="keywords_app_permissions" msgid="8677901415217188314">"أمان أذونات التطبيقات"</string>
     <string name="keywords_default_apps" msgid="3581727483175522599">"التطبيقات الافتراضية"</string>
@@ -2686,6 +2711,8 @@
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"المطالبة بكلمة المرور قبل إزالة التثبيت"</string>
     <string name="screen_pinning_unlock_none" msgid="3814188275713871856">"قفل الجهاز عند إزالة التثبيت"</string>
     <string name="managed_user_title" msgid="8101244883654409696">"الملف الشخصي للعمل"</string>
+    <!-- no translation found for opening_paragraph_delete_profile_unknown_company (3790519030932488453) -->
+    <skip />
     <string name="experimental_preference" msgid="7083015446690681376">"(تجريبي)"</string>
     <string name="display_auto_rotate_title" msgid="6176450657107806043">"أوقات تدوير الجهاز"</string>
     <string name="display_auto_rotate_rotate" msgid="4544299861233497728">"تدوير محتويات الشاشة"</string>
@@ -2728,10 +2755,8 @@
     <string name="app_data_usage" msgid="7942375313697452803">"استخدام بيانات التطبيق"</string>
     <string name="data_summary_format" msgid="6213211533341068366">"تم استخدام <xliff:g id="SIZE">%1$s</xliff:g> منذ <xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="storage_used" msgid="7128074132917008743">"السعة التخزينية المستخدمة"</string>
-    <!-- no translation found for notifications_label (2872668710589600731) -->
-    <skip />
-    <!-- no translation found for notifications_enabled (4386196629684749507) -->
-    <skip />
+    <string name="notifications_label" msgid="2872668710589600731">"الإشعارات"</string>
+    <string name="notifications_enabled" msgid="4386196629684749507">"عادية"</string>
     <string name="notifications_disabled" msgid="4326096527874762629">"حظر"</string>
     <string name="notifications_sensitive" msgid="3139432048186620878">"الحساسية"</string>
     <string name="notifications_priority" msgid="1812498477331421719">"الأولوية"</string>
@@ -2785,16 +2810,23 @@
     <string name="default_apps_title" msgid="1854974637597514435">"التطبيقات الافتراضية"</string>
     <string name="default_browser_title" msgid="8101772675085814670">"تطبيق المتصفح"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"ليس هناك متصفح افتراضي"</string>
-    <!-- no translation found for default_dialer_title (5556538932548299581) -->
-    <skip />
+    <string name="default_dialer_title" msgid="5556538932548299581">"تطبيق برنامج الاتصال"</string>
     <string name="default_app" msgid="6864503001385843060">"(افتراضي)"</string>
     <string name="apps_storage" msgid="4353308027210435513">"سعة تخزين التطبيقات"</string>
-    <!-- no translation found for usage_access (5479504953931038165) -->
-    <skip />
-    <!-- no translation found for permit_usage_access (4012876269445832300) -->
-    <skip />
-    <!-- no translation found for app_usage_preference (7065701732733134991) -->
-    <skip />
-    <!-- no translation found for usage_access_description (1470042370563522270) -->
-    <skip />
+    <string name="usage_access" msgid="5479504953931038165">"الدخول إلى الاستخدام"</string>
+    <string name="permit_usage_access" msgid="4012876269445832300">"السماح بالدخول إلى الاستخدام"</string>
+    <string name="app_usage_preference" msgid="7065701732733134991">"تفضيلات استخدام التطبيقات"</string>
+    <string name="usage_access_description" msgid="1470042370563522270">"يتيح الدخول إلى الاستخدام للتطبيق تتبع التطبيقات الأخرى التي تستخدمها ومدى تكرار استخدامها ومشغل شبكة الجوال وإعدادات اللغة بالإضافة إلى تفاصيل أخرى."</string>
+    <string name="memory_settings_title" msgid="7490541005204254222">"الذاكرة"</string>
+    <string name="memory_details_title" msgid="8542565326053693320">"تفاصيل الذاكرة"</string>
+    <string name="always_running" msgid="756962671086985529">"يعمل دائمًا"</string>
+    <string name="sometimes_running" msgid="4029856112252925332">"يعمل أحيانًا"</string>
+    <string name="rarely_running" msgid="5858601167598124445">"يعمل نادرًا"</string>
+    <string name="memory_max_use" msgid="6874803757715963097">"الحد الأقصى"</string>
+    <string name="memory_avg_use" msgid="7382015389130622870">"المتوسط"</string>
+    <string name="memory_max_desc" msgid="2861832149718335864">"الحد الأقصى: <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
+    <string name="memory_avg_desc" msgid="1551240906596518412">"المتوسط: <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
+    <string name="memory_use_running_format" msgid="4172488041800743760">"<xliff:g id="MEMORY">%1$s</xliff:g> / <xliff:g id="RUNNING">%2$s</xliff:g>"</string>
+    <string name="process" msgid="3426397418475689597">"العملية"</string>
+    <string name="process_format" msgid="6209946289580262844">"العملية <xliff:g id="COUNT">%1$d</xliff:g>"</string>
 </resources>
