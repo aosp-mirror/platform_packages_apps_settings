@@ -968,6 +968,8 @@
     <string name="storage_menu_format" msgid="8334422679047059459">"Ștergeți și formatați"</string>
     <string name="storage_menu_format_internal" msgid="6553368530402755543">"Ștergeți și formatați ca memorie internă"</string>
     <string name="storage_menu_usb" msgid="5708207885333243384">"Conectare la computer prin USB"</string>
+    <!-- no translation found for storage_menu_forget (6305824238997983426) -->
+    <skip />
     <string name="storage_title_usb" msgid="679612779321689418">"Conectare la computer prin USB"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"Conectaţi-vă ca"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"Dispozitiv media (MTP)"</string>
@@ -989,6 +991,8 @@
     <string name="storage_rename_title" msgid="8242663969839491485">"Redenumiți stocarea"</string>
     <string name="storage_internal_format_details" msgid="4018647158382548820">"După formatare, puteți folosi <xliff:g id="NAME_0">^1</xliff:g> în alte dispozitive. \n\nToate datele de pe <xliff:g id="NAME_1">^1</xliff:g> vor fi șterse. Mai întâi, faceți backup. \n\n"<b>"Faceți backup la fotografii și la alte fișiere media"</b>" \nMutați fișierele media în altă stocare de pe acest dispozitiv sau transferați-le pe un computer folosind un cablu USB. \n\n"<b>"Faceți backup la aplicații"</b>" \nToate aplicațiile stocate pe <xliff:g id="NAME_6">^1</xliff:g> vor fi dezinstalate, iar datele acestora vor fi șterse. Pentru a păstra aceste aplicații, mutați-le în altă stocare de pe acest dispozitiv."</string>
     <string name="storage_internal_unmount_details" msgid="3677827796634199714"><b>"Când scoateți <xliff:g id="NAME_0">^1</xliff:g>, aplicațiile stocate pe acesta nu vor mai funcționa, iar fișierele media stocate pe acesta nu vor mai fi disponibile până când nu este introdus din nou."</b>" \n\n Acest <xliff:g id="NAME_1">^1</xliff:g> este formatat pentru a funcționa numai pe acest dispozitiv. Nu va funcționa pe alte dispozitive."</string>
+    <!-- no translation found for storage_internal_forget_details (4881307991281138059) -->
+    <skip />
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"Configurați <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"Folosiți ca stocare portabilă"</string>
     <string name="storage_wizard_init_external_summary" msgid="7476105886344565074">"Pentru a muta fotografiile și alte fișiere media de pe un dispozitiv pe altul."</string>
@@ -996,6 +1000,10 @@
     <string name="storage_wizard_init_internal_summary" msgid="6240417501036216410">"Pentru a stoca orice doar pe acest dispozitiv, inclusiv aplicații și fotografii. Este necesar să îl formatați pentru a-l împiedica să funcționeze cu alte dispozitive."</string>
     <string name="storage_wizard_format_confirm_title" msgid="2814021794538252546">"Formatați ca memorie internă"</string>
     <string name="storage_wizard_format_confirm_body" msgid="4401758710076806509">"Este necesar ca <xliff:g id="NAME_0">^1</xliff:g> să fie formatat pentru a fi securizat. \n\nDupă formatare, acest <xliff:g id="NAME_1">^1</xliff:g> va funcționa doar în acest dispozitiv. \n\n"<b>"Dacă îl formatați, toate datele stocate pe <xliff:g id="NAME_2">^1</xliff:g> vor fi șterse."</b>" Pentru a nu pierde datele, faceți backup."</string>
+    <!-- no translation found for storage_wizard_format_confirm_public_title (4905690038882041566) -->
+    <skip />
+    <!-- no translation found for storage_wizard_format_confirm_public_body (1516932692920060272) -->
+    <skip />
     <string name="storage_wizard_format_confirm_next" msgid="2774557300531702572">"Ștergeți și formatați"</string>
     <string name="storage_wizard_format_progress_title" msgid="6487352396450582292">"Se formatează <xliff:g id="NAME">^1</xliff:g>…"</string>
     <string name="storage_wizard_format_progress_body" msgid="1259216693690378749">"Nu scoateți <xliff:g id="NAME">^1</xliff:g> în timp ce se formatează."</string>
@@ -1766,15 +1774,12 @@
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Statistici de proces"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Statistici inteligente despre procesele care rulează"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Utilizarea memoriei"</string>
-    <!-- no translation found for process_stats_total_duration (7417201400853728029) -->
-    <skip />
-    <!-- no translation found for process_stats_total_duration_percentage (6522457033380025618) -->
-    <skip />
+    <string name="process_stats_total_duration" msgid="7417201400853728029">"<xliff:g id="USEDRAM">%1$s</xliff:g> din <xliff:g id="TOTALRAM">%2$s</xliff:g> folosiți în <xliff:g id="TIMEDURATION">%3$s</xliff:g>"</string>
+    <string name="process_stats_total_duration_percentage" msgid="6522457033380025618">"<xliff:g id="PERCENT">%1$s</xliff:g> din RAM folosit în <xliff:g id="TIMEDURATION">%2$s</xliff:g>"</string>
     <string name="process_stats_type_background" msgid="3934992858120683459">"În fundal"</string>
     <string name="process_stats_type_foreground" msgid="7713118254089580536">"În prim-plan"</string>
     <string name="process_stats_type_cached" msgid="6314925846944806511">"În cache"</string>
-    <!-- no translation found for process_stats_memory_status (8291117301143037644) -->
-    <skip />
+    <string name="process_stats_memory_status" msgid="8291117301143037644">"Memoria este <xliff:g id="MEMSTATE">%1$s</xliff:g>"</string>
     <string name="process_stats_os_label" msgid="4813434110442733392">"Sistem de operare Android"</string>
     <string name="process_stats_os_native" msgid="5322428494231768472">"Native"</string>
     <string name="process_stats_os_kernel" msgid="1938523592369780924">"Nucleu"</string>
@@ -1801,8 +1806,7 @@
     <string name="menu_duration_1d" msgid="3393631127622285458">"O zi"</string>
     <string name="menu_show_system" msgid="8864603400415567635">"Afișați sistemul"</string>
     <string name="menu_hide_system" msgid="4106826741703745733">"Ascunde procesele de sistem"</string>
-    <!-- no translation found for menu_show_percentage (4717204046118199806) -->
-    <skip />
+    <string name="menu_show_percentage" msgid="4717204046118199806">"Afișați procentajele"</string>
     <string name="menu_use_uss" msgid="467765290771543089">"Utilizați Uss"</string>
     <string name="menu_proc_stats_type" msgid="4700209061072120948">"Tipul de statistici"</string>
     <string name="menu_proc_stats_type_background" msgid="2236161340134898852">"În fundal"</string>
@@ -2297,7 +2301,8 @@
     <string name="user_confirm_remove_self_message" product="tablet" msgid="8167855311779740207">"Veţi pierde spaţiul și datele de pe această tabletă. Nu puteţi anula această acţiune."</string>
     <string name="user_confirm_remove_self_message" product="default" msgid="5391888073786090274">"Veţi pierde spaţiul și datele de pe acest telefon. Nu puteţi anula această acţiune."</string>
     <string name="user_confirm_remove_message" msgid="1020629390993095037">"Toate aplicațiile și datele vor fi șterse."</string>
-    <string name="work_profile_confirm_remove_message" msgid="7593793549364168783">"Toate aplicațiile și datele din acest profil vor fi șterse."</string>
+    <!-- no translation found for work_profile_confirm_remove_message (323856589749078140) -->
+    <skip />
     <string name="user_profile_confirm_remove_message" msgid="7373754145959298522">"Toate aplicațiile și datele vor fi șterse."</string>
     <string name="user_adding_new_user" msgid="1521674650874241407">"Se adaugă un utilizator nou…"</string>
     <string name="user_delete_user_description" msgid="3158592592118767056">"Ștergeţi utilizatorul"</string>
@@ -2324,15 +2329,34 @@
     <string name="global_locale_change_title" msgid="5956281361384221451">"Schimbaţi limba"</string>
     <string name="global_font_change_title" msgid="1887126466191012035">"Modificaţi dimensiunea fontului"</string>
     <string name="nfc_payment_settings_title" msgid="1807298287380821613">"Atingeți și plătiți"</string>
-    <string name="google_wallet" msgid="9122936252378589227">"Google Wallet"</string>
-    <string name="nfc_payment_no_apps" msgid="2481080809791416010">"Plătiți cu o atingere"</string>
-    <string name="nfc_payment_favor_foreground" msgid="8881893980929835838">"Favorizați aplicația în prim-plan"</string>
-    <string name="nfc_payment_learn_more" msgid="5583407773744324447">"Aflați mai multe"</string>
+    <!-- no translation found for nfc_payment_how_it_works (3028822263837896720) -->
+    <skip />
+    <!-- no translation found for nfc_payment_no_apps (3453656795093776889) -->
+    <skip />
+    <!-- no translation found for nfc_payment_default (8648420259219150395) -->
+    <skip />
+    <!-- no translation found for nfc_payment_default_not_set (7485060884228447765) -->
+    <skip />
+    <!-- no translation found for nfc_payment_app_and_desc (7942415346564794258) -->
+    <skip />
+    <!-- no translation found for nfc_payment_open_app (5550268485421927976) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_open (7513784422533299982) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_open_default_unknown (1179489206233351756) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_default (8238320071435721803) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_default_default_unknown (7029467023485683077) -->
+    <skip />
+    <!-- no translation found for nfc_payment_pay_with (7524904024378144072) -->
+    <skip />
     <string name="nfc_more_title" msgid="815910943655133280">"Mai multe..."</string>
-    <string name="nfc_payment_menu_item_add_service" msgid="2885947408068969081">"Găsiți aplicații"</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"Setați ca preferință?"</string>
-    <string name="nfc_payment_set_default" msgid="8961120988148253016">"Utilizați întotdeauna <xliff:g id="APP">%1$s</xliff:g> pentru funcția „atingeți și plătiți”?"</string>
-    <string name="nfc_payment_set_default_instead_of" msgid="3803693771001226795">"Utilizați întotdeauna <xliff:g id="APP_0">%1$s</xliff:g> în loc de <xliff:g id="APP_1">%2$s</xliff:g> pentru funcția „atingeți și plătiți”?"</string>
+    <!-- no translation found for nfc_payment_set_default (8532426406310833489) -->
+    <skip />
+    <!-- no translation found for nfc_payment_set_default_instead_of (6993301165940432743) -->
+    <skip />
     <string name="restriction_settings_title" msgid="4233515503765879736">"Restricții"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"Eliminați restricțiile"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"Schimbați codul PIN"</string>
@@ -2634,6 +2658,8 @@
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"Solicitați parola înainte de a anula fixarea"</string>
     <string name="screen_pinning_unlock_none" msgid="3814188275713871856">"Blocați dispozitivul la anularea fixării"</string>
     <string name="managed_user_title" msgid="8101244883654409696">"Profil de serviciu"</string>
+    <!-- no translation found for opening_paragraph_delete_profile_unknown_company (3790519030932488453) -->
+    <skip />
     <string name="experimental_preference" msgid="7083015446690681376">"(Experimental)"</string>
     <string name="display_auto_rotate_title" msgid="6176450657107806043">"Când dispozitivul este rotit"</string>
     <string name="display_auto_rotate_rotate" msgid="4544299861233497728">"Rotiți conținutul ecranului"</string>
@@ -2729,28 +2755,16 @@
     <string name="permit_usage_access" msgid="4012876269445832300">"Permiteți accesul la datele de utilizare"</string>
     <string name="app_usage_preference" msgid="7065701732733134991">"Preferințe date de utilizare aplicație"</string>
     <string name="usage_access_description" msgid="1470042370563522270">"Accesul la datele de utilizare permite unei aplicații să înregistreze ce alte aplicații folosiți și cât de des le folosiți, precum și operatorul, setările de limbă și alte detalii."</string>
-    <!-- no translation found for memory_settings_title (7490541005204254222) -->
-    <skip />
-    <!-- no translation found for memory_details_title (8542565326053693320) -->
-    <skip />
-    <!-- no translation found for always_running (756962671086985529) -->
-    <skip />
-    <!-- no translation found for sometimes_running (4029856112252925332) -->
-    <skip />
-    <!-- no translation found for rarely_running (5858601167598124445) -->
-    <skip />
-    <!-- no translation found for memory_max_use (6874803757715963097) -->
-    <skip />
-    <!-- no translation found for memory_avg_use (7382015389130622870) -->
-    <skip />
-    <!-- no translation found for memory_max_desc (2861832149718335864) -->
-    <skip />
-    <!-- no translation found for memory_avg_desc (1551240906596518412) -->
-    <skip />
-    <!-- no translation found for memory_use_running_format (4172488041800743760) -->
-    <skip />
-    <!-- no translation found for process (3426397418475689597) -->
-    <skip />
-    <!-- no translation found for process_format (6209946289580262844) -->
-    <skip />
+    <string name="memory_settings_title" msgid="7490541005204254222">"Memorie"</string>
+    <string name="memory_details_title" msgid="8542565326053693320">"Detalii despre memorie"</string>
+    <string name="always_running" msgid="756962671086985529">"Rulează întotdeauna"</string>
+    <string name="sometimes_running" msgid="4029856112252925332">"Rulează uneori"</string>
+    <string name="rarely_running" msgid="5858601167598124445">"Rulează rareori"</string>
+    <string name="memory_max_use" msgid="6874803757715963097">"Maximum"</string>
+    <string name="memory_avg_use" msgid="7382015389130622870">"Medie"</string>
+    <string name="memory_max_desc" msgid="2861832149718335864">"Maximum <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
+    <string name="memory_avg_desc" msgid="1551240906596518412">"Medie de <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
+    <string name="memory_use_running_format" msgid="4172488041800743760">"<xliff:g id="MEMORY">%1$s</xliff:g>/<xliff:g id="RUNNING">%2$s</xliff:g>"</string>
+    <string name="process" msgid="3426397418475689597">"Proces"</string>
+    <string name="process_format" msgid="6209946289580262844">"Procesul <xliff:g id="COUNT">%1$d</xliff:g>"</string>
 </resources>

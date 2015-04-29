@@ -959,6 +959,8 @@
     <string name="storage_menu_format" msgid="8334422679047059459">"Radera och formatera"</string>
     <string name="storage_menu_format_internal" msgid="6553368530402755543">"Rensa/format. som internminne"</string>
     <string name="storage_menu_usb" msgid="5708207885333243384">"USB-anslutning till dator"</string>
+    <!-- no translation found for storage_menu_forget (6305824238997983426) -->
+    <skip />
     <string name="storage_title_usb" msgid="679612779321689418">"USB-anslutning till dator"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"Anslut som"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"Mediaenhet (MTP)"</string>
@@ -980,6 +982,8 @@
     <string name="storage_rename_title" msgid="8242663969839491485">"Byt namn på lagringsutrymmet"</string>
     <string name="storage_internal_format_details" msgid="4018647158382548820">"Efter formateringen kan du använda ditt <xliff:g id="NAME_0">^1</xliff:g> på andra enheter. \n\nAll data på detta <xliff:g id="NAME_1">^1</xliff:g> raderas, så tänk på att säkerhetskopiera först. \n\n"<b>"Säkerhetskopiera foton och annan media"</b>" \nFlytta mediefilerna till ett annat lagringsutrymme på enheten, eller överför dem till en dator via USB-kabel. \n\n"<b>"Säkerhetskopiera appar"</b>" \nAlla appar som har lagrats på ditt <xliff:g id="NAME_6">^1</xliff:g> avinstalleras och deras data raderas. Om du vill behålla apparna flyttar du dem till ett annat lagringsutrymme på enheten."</string>
     <string name="storage_internal_unmount_details" msgid="3677827796634199714"><b>"När du matar ut ditt <xliff:g id="NAME_0">^1</xliff:g> slutar appar som har lagrats på det att fungera, och mediefiler som har lagrats blir inte tillgängliga förrän det har kopplats in igen."</b>" \n\nDitt <xliff:g id="NAME_1">^1</xliff:g> är formaterat för att endast fungera på den här enheten. Det fungerar inte på andra enheter."</string>
+    <!-- no translation found for storage_internal_forget_details (4881307991281138059) -->
+    <skip />
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"Konfigurera ditt <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"Använd som bärbar lagringsenhet"</string>
     <string name="storage_wizard_init_external_summary" msgid="7476105886344565074">"Flytta foton och annan media mellan enheter."</string>
@@ -987,6 +991,10 @@
     <string name="storage_wizard_init_internal_summary" msgid="6240417501036216410">"Lagra vad du vill, endast på den här enheten (inklusive appar och foton). Formatering som hindrar att det fungerar på andra enheter krävs."</string>
     <string name="storage_wizard_format_confirm_title" msgid="2814021794538252546">"Formatera som internminne"</string>
     <string name="storage_wizard_format_confirm_body" msgid="4401758710076806509">"Detta kräver att ditt <xliff:g id="NAME_0">^1</xliff:g> formateras så att det blir säkert. \n\nEfter formateringen fungerar ditt <xliff:g id="NAME_1">^1</xliff:g> endast på den här enheten. \n\n"<b>"Formateringen raderar all data som har lagrats på ditt <xliff:g id="NAME_2">^1</xliff:g>."</b>" Säkerhetskopiera data om du vill undvika att förlora den."</string>
+    <!-- no translation found for storage_wizard_format_confirm_public_title (4905690038882041566) -->
+    <skip />
+    <!-- no translation found for storage_wizard_format_confirm_public_body (1516932692920060272) -->
+    <skip />
     <string name="storage_wizard_format_confirm_next" msgid="2774557300531702572">"Radera och formatera"</string>
     <string name="storage_wizard_format_progress_title" msgid="6487352396450582292">"Formaterar <xliff:g id="NAME">^1</xliff:g> …"</string>
     <string name="storage_wizard_format_progress_body" msgid="1259216693690378749">"Ta inte bort ditt <xliff:g id="NAME">^1</xliff:g> medan det formateras."</string>
@@ -1756,15 +1764,12 @@
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Processtatistik"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Nördig statistik om processer som körs"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Minnesanvändning"</string>
-    <!-- no translation found for process_stats_total_duration (7417201400853728029) -->
-    <skip />
-    <!-- no translation found for process_stats_total_duration_percentage (6522457033380025618) -->
-    <skip />
+    <string name="process_stats_total_duration" msgid="7417201400853728029">"<xliff:g id="USEDRAM">%1$s</xliff:g> av <xliff:g id="TOTALRAM">%2$s</xliff:g> har använts under <xliff:g id="TIMEDURATION">%3$s</xliff:g>"</string>
+    <string name="process_stats_total_duration_percentage" msgid="6522457033380025618">"<xliff:g id="PERCENT">%1$s</xliff:g> av arbetsminnet har använts under <xliff:g id="TIMEDURATION">%2$s</xliff:g>"</string>
     <string name="process_stats_type_background" msgid="3934992858120683459">"Bakgrundsprocesser"</string>
     <string name="process_stats_type_foreground" msgid="7713118254089580536">"Förgrundsprocesser"</string>
     <string name="process_stats_type_cached" msgid="6314925846944806511">"Cachade processer"</string>
-    <!-- no translation found for process_stats_memory_status (8291117301143037644) -->
-    <skip />
+    <string name="process_stats_memory_status" msgid="8291117301143037644">"Minnet är <xliff:g id="MEMSTATE">%1$s</xliff:g>"</string>
     <string name="process_stats_os_label" msgid="4813434110442733392">"Operativsystemet Android"</string>
     <string name="process_stats_os_native" msgid="5322428494231768472">"Inbyggt"</string>
     <string name="process_stats_os_kernel" msgid="1938523592369780924">"Kärna"</string>
@@ -1791,8 +1796,7 @@
     <string name="menu_duration_1d" msgid="3393631127622285458">"1 dag"</string>
     <string name="menu_show_system" msgid="8864603400415567635">"Visa system"</string>
     <string name="menu_hide_system" msgid="4106826741703745733">"Dölj systemet"</string>
-    <!-- no translation found for menu_show_percentage (4717204046118199806) -->
-    <skip />
+    <string name="menu_show_percentage" msgid="4717204046118199806">"Visa i procent"</string>
     <string name="menu_use_uss" msgid="467765290771543089">"Använd USS"</string>
     <string name="menu_proc_stats_type" msgid="4700209061072120948">"Statistiktyp"</string>
     <string name="menu_proc_stats_type_background" msgid="2236161340134898852">"Bakgrundsprocesser"</string>
@@ -2287,7 +2291,8 @@
     <string name="user_confirm_remove_self_message" product="tablet" msgid="8167855311779740207">"Ditt utrymme och dina data tas bort från surfplattan. Det går inte att ångra den här åtgärden."</string>
     <string name="user_confirm_remove_self_message" product="default" msgid="5391888073786090274">"Ditt utrymme och dina data tas bort från mobilen. Det går inte att ångra den här åtgärden."</string>
     <string name="user_confirm_remove_message" msgid="1020629390993095037">"Alla appar och all data raderas."</string>
-    <string name="work_profile_confirm_remove_message" msgid="7593793549364168783">"Alla appar och data i den här profilen kommer att raderas."</string>
+    <!-- no translation found for work_profile_confirm_remove_message (323856589749078140) -->
+    <skip />
     <string name="user_profile_confirm_remove_message" msgid="7373754145959298522">"Alla appar och all data raderas."</string>
     <string name="user_adding_new_user" msgid="1521674650874241407">"En ny användare läggs till …"</string>
     <string name="user_delete_user_description" msgid="3158592592118767056">"Ta bort användare"</string>
@@ -2314,15 +2319,34 @@
     <string name="global_locale_change_title" msgid="5956281361384221451">"Ändra språk"</string>
     <string name="global_font_change_title" msgid="1887126466191012035">"Ändra teckenstorlek"</string>
     <string name="nfc_payment_settings_title" msgid="1807298287380821613">"Snudda och betala"</string>
-    <string name="google_wallet" msgid="9122936252378589227">"Google Wallet"</string>
-    <string name="nfc_payment_no_apps" msgid="2481080809791416010">"Betala med ett enda tryck"</string>
-    <string name="nfc_payment_favor_foreground" msgid="8881893980929835838">"Prioritera app i förgrunden"</string>
-    <string name="nfc_payment_learn_more" msgid="5583407773744324447">"Läs mer"</string>
+    <!-- no translation found for nfc_payment_how_it_works (3028822263837896720) -->
+    <skip />
+    <!-- no translation found for nfc_payment_no_apps (3453656795093776889) -->
+    <skip />
+    <!-- no translation found for nfc_payment_default (8648420259219150395) -->
+    <skip />
+    <!-- no translation found for nfc_payment_default_not_set (7485060884228447765) -->
+    <skip />
+    <!-- no translation found for nfc_payment_app_and_desc (7942415346564794258) -->
+    <skip />
+    <!-- no translation found for nfc_payment_open_app (5550268485421927976) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_open (7513784422533299982) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_open_default_unknown (1179489206233351756) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_default (8238320071435721803) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_default_default_unknown (7029467023485683077) -->
+    <skip />
+    <!-- no translation found for nfc_payment_pay_with (7524904024378144072) -->
+    <skip />
     <string name="nfc_more_title" msgid="815910943655133280">"Mer ..."</string>
-    <string name="nfc_payment_menu_item_add_service" msgid="2885947408068969081">"Hitta appar"</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"Vill du ange den här som standard?"</string>
-    <string name="nfc_payment_set_default" msgid="8961120988148253016">"Vill du använda <xliff:g id="APP">%1$s</xliff:g> varje gång du snuddar och betalar?"</string>
-    <string name="nfc_payment_set_default_instead_of" msgid="3803693771001226795">"Vill du använda <xliff:g id="APP_0">%1$s</xliff:g> i stället för <xliff:g id="APP_1">%2$s</xliff:g> varje gång du snuddar och betalar?"</string>
+    <!-- no translation found for nfc_payment_set_default (8532426406310833489) -->
+    <skip />
+    <!-- no translation found for nfc_payment_set_default_instead_of (6993301165940432743) -->
+    <skip />
     <string name="restriction_settings_title" msgid="4233515503765879736">"Begränsningar"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"Ta bort begränsningar"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"Ändra PIN-koden"</string>
@@ -2615,6 +2639,8 @@
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"Be om lösenord innan skärmen lossas"</string>
     <string name="screen_pinning_unlock_none" msgid="3814188275713871856">"Lås enheten när skärmen lossas"</string>
     <string name="managed_user_title" msgid="8101244883654409696">"Arbetsprofil"</string>
+    <!-- no translation found for opening_paragraph_delete_profile_unknown_company (3790519030932488453) -->
+    <skip />
     <string name="experimental_preference" msgid="7083015446690681376">"(experimentellt)"</string>
     <string name="display_auto_rotate_title" msgid="6176450657107806043">"När enheten roterar"</string>
     <string name="display_auto_rotate_rotate" msgid="4544299861233497728">"Rotera skärmens innehåll"</string>
@@ -2707,28 +2733,16 @@
     <string name="permit_usage_access" msgid="4012876269445832300">"Tillåt åtkomst till användningsdata"</string>
     <string name="app_usage_preference" msgid="7065701732733134991">"Inställningar för appanvändning"</string>
     <string name="usage_access_description" msgid="1470042370563522270">"Med åtkomst till användningsdata kan en app spåra vilka andra appar du använder och hur ofta, samt vilken operatör du har, språkinställningar och andra uppgifter."</string>
-    <!-- no translation found for memory_settings_title (7490541005204254222) -->
-    <skip />
-    <!-- no translation found for memory_details_title (8542565326053693320) -->
-    <skip />
-    <!-- no translation found for always_running (756962671086985529) -->
-    <skip />
-    <!-- no translation found for sometimes_running (4029856112252925332) -->
-    <skip />
-    <!-- no translation found for rarely_running (5858601167598124445) -->
-    <skip />
-    <!-- no translation found for memory_max_use (6874803757715963097) -->
-    <skip />
-    <!-- no translation found for memory_avg_use (7382015389130622870) -->
-    <skip />
-    <!-- no translation found for memory_max_desc (2861832149718335864) -->
-    <skip />
-    <!-- no translation found for memory_avg_desc (1551240906596518412) -->
-    <skip />
-    <!-- no translation found for memory_use_running_format (4172488041800743760) -->
-    <skip />
-    <!-- no translation found for process (3426397418475689597) -->
-    <skip />
-    <!-- no translation found for process_format (6209946289580262844) -->
-    <skip />
+    <string name="memory_settings_title" msgid="7490541005204254222">"Minne"</string>
+    <string name="memory_details_title" msgid="8542565326053693320">"Minnesinformation"</string>
+    <string name="always_running" msgid="756962671086985529">"Körs alltid"</string>
+    <string name="sometimes_running" msgid="4029856112252925332">"Körs ibland"</string>
+    <string name="rarely_running" msgid="5858601167598124445">"Körs sällan"</string>
+    <string name="memory_max_use" msgid="6874803757715963097">"Högsta"</string>
+    <string name="memory_avg_use" msgid="7382015389130622870">"Genomsnittlig"</string>
+    <string name="memory_max_desc" msgid="2861832149718335864">"Högsta: <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
+    <string name="memory_avg_desc" msgid="1551240906596518412">"Genomsnittlig: <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
+    <string name="memory_use_running_format" msgid="4172488041800743760">"<xliff:g id="MEMORY">%1$s</xliff:g>/<xliff:g id="RUNNING">%2$s</xliff:g>"</string>
+    <string name="process" msgid="3426397418475689597">"Process"</string>
+    <string name="process_format" msgid="6209946289580262844">"Process <xliff:g id="COUNT">%1$d</xliff:g>"</string>
 </resources>
