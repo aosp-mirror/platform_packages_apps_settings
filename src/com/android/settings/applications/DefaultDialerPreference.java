@@ -16,7 +16,6 @@
 
 package com.android.settings.applications;
 
-import android.content.ComponentName;
 import android.content.Context;
 import android.os.UserManager;
 import android.telecom.DefaultDialerManager;
@@ -49,22 +48,18 @@ public class DefaultDialerPreference extends AppListPreference {
     }
 
     private void loadDialerApps() {
-        List<ComponentName> dialerComponents =
+        List<String> dialerPackages =
                 DefaultDialerManager.getInstalledDialerApplications(getContext());
 
-        final String[] dialers = new String[dialerComponents.size()];
-        for (int i = 0; i < dialerComponents.size(); i++) {
-            dialers[i] = dialerComponents.get(i).getPackageName();
+        final String[] dialers = new String[dialerPackages.size()];
+        for (int i = 0; i < dialerPackages.size(); i++) {
+            dialers[i] = dialerPackages.get(i);
         }
         setPackageNames(dialers, getDefaultPackage());
     }
 
     private String getDefaultPackage() {
-        ComponentName appName = DefaultDialerManager.getDefaultDialerApplication(getContext());
-        if (appName != null) {
-            return appName.getPackageName();
-        }
-        return null;
+        return DefaultDialerManager.getDefaultDialerApplication(getContext());
     }
 
     public static boolean isAvailable(Context context) {
