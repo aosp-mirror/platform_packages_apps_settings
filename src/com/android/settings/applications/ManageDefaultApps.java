@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -66,15 +67,25 @@ public class ManageDefaultApps extends SettingsPreferenceFragment
         myUserId = UserHandle.myUserId();
 
         mDefaultBrowserPreference = (DefaultBrowserPreference) findPreference(KEY_DEFAULT_BROWSER);
-        mDefaultBrowserPreference.setOnPreferenceClickListener(
-                new Preference.OnPreferenceClickListener() {
+        mDefaultBrowserPreference.setOnPreferenceChangeListener(
+                new Preference.OnPreferenceChangeListener() {
                     @Override
-                    public boolean onPreferenceClick(Preference preference) {
-                        final CharSequence packageName = mDefaultBrowserPreference.getValue();
+                    public boolean onPreferenceChange(Preference preference, Object newValue) {
+                        if (newValue == null) {
+                            return false;
+                        }
+                        final CharSequence packageName = (CharSequence) newValue;
                         if (TextUtils.isEmpty(packageName)) {
                             return false;
                         }
-                        return mPm.setDefaultBrowserPackageName(packageName.toString(), myUserId);
+                        boolean result = mPm.setDefaultBrowserPackageName(
+                                packageName.toString(), myUserId);
+                        if (result) {
+                            mDefaultBrowserPreference.setValue(packageName.toString());
+                            final CharSequence appName = mDefaultBrowserPreference.getEntry();
+                            mDefaultBrowserPreference.setSummary(appName);
+                        }
+                        return result;
                     }
         });
         final boolean isRestrictedUser = UserManager.get(getActivity())
@@ -104,18 +115,30 @@ public class ManageDefaultApps extends SettingsPreferenceFragment
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        String packageName = getPackageManager().getDefaultBrowserPackageName(
-                UserHandle.myUserId());
+        final PackageManager pm = getPackageManager();
+
+        String packageName = pm.getDefaultBrowserPackageName(UserHandle.myUserId());
         if (!TextUtils.isEmpty(packageName)) {
-            // Check if the package is still there
+            // Check if the default Browser package is still there
             Intent intent = new Intent();
             intent.setPackage(packageName);
+            intent.setAction(Intent.ACTION_VIEW);
+            intent.addCategory(Intent.CATEGORY_BROWSABLE);
+            intent.setData(Uri.parse("http:"));
+
             ResolveInfo info = mPm.resolveActivityAsUser(intent, 0, myUserId);
             if (info != null) {
                 mDefaultBrowserPreference.setValue(packageName);
+                CharSequence label = info.loadLabel(pm);
+                mDefaultBrowserPreference.setSummary(label);
             } else {
-                // Otherwise select the first one
-                mDefaultBrowserPreference.setValueIndex(0);
+                CharSequence[] values = mDefaultBrowserPreference.getEntryValues();
+                if (values.length > 0) {
+                    // Otherwise select the first one if we can
+                    mDefaultBrowserPreference.setValueIndex(0);
+                } else {
+                    // Do nothing, we cannot select any value
+                }
             }
         } else {
             Log.d(TAG, "Cannot set empty default Browser value!");
