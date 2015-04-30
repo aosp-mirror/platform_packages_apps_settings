@@ -6425,11 +6425,16 @@
    <!-- App notification summary with notifications disabled [CHAR LIMIT=40] -->
    <string name="notifications_disabled">Block</string>
    <!-- App notification summary with notifications sensitive [CHAR LIMIT=40] -->
-   <string name="notifications_sensitive">Sensitive</string>
+   <string name="notifications_sensitive">Sensitive content hidden</string>
    <!-- App notification summary with notifications priority [CHAR LIMIT=40] -->
    <string name="notifications_priority">Priority</string>
-   <!-- App notification summary with notifications priority and sensitive [CHAR LIMIT=40] -->
-   <string name="notifications_priority_sensitive">Priority &amp; Sensitive</string>
+   <!-- App notification summary with notification peeking disabled [CHAR LIMIT=40] -->
+   <string name="notifications_no_peeking">No peeking</string>
+   <!-- App notification summary with 2 items [CHAR LIMIT=15] -->
+   <string name="notifications_two_items"><xliff:g id="notif_state" example="Priority">%1$s</xliff:g> / <xliff:g id="notif_state" example="Priority">%2$s</xliff:g></string>
+   <!-- App notification summary with 3 items [CHAR LIMIT=15] -->
+   <string name="notifications_three_items"><xliff:g id="notif_state" example="Priority">%1$s</xliff:g> / <xliff:g id="notif_state" example="Priority">%2$s</xliff:g> / <xliff:g id="notif_state" example="Priority">%3$s</xliff:g></string>
+
 
    <!-- Permissions preference summary [CHAR LIMIT=40] -->
    <plurals name="permissions_summary">
@@ -6461,7 +6466,9 @@
     <!-- Label for showing apps with priority notifications in list [CHAR LIMIT=30] -->
     <string name="filter_notif_priority_apps">Priority</string>
     <!-- Label for showing apps with sensitive notifications in list [CHAR LIMIT=30] -->
-    <string name="filter_notif_sensitive_apps">Sensitive</string>
+    <string name="filter_notif_sensitive_apps">Sensitive content hidden</string>
+    <!-- Label for showing apps with peeking disabled in list [CHAR LIMIT=30] -->
+    <string name="filter_notif_no_peeking">No peeking</string>
     <!-- Label for showing apps with domain URLs (data URI with http or https) in list [CHAR LIMIT=30] -->
     <string name="filter_with_domain_urls_apps">With domain URLs</string>
 
