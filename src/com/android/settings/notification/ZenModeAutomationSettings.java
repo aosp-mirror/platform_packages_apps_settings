@@ -29,21 +29,22 @@ import android.provider.Settings;
 import android.provider.Settings.Global;
 import android.service.notification.ConditionProviderService;
 import android.service.notification.ZenModeConfig;
+import android.service.notification.ZenModeConfig.EventInfo;
 import android.service.notification.ZenModeConfig.ScheduleInfo;
 import android.service.notification.ZenModeConfig.ZenRule;
 import android.text.format.DateFormat;
 import android.util.Log;
-import android.view.View;
-import android.view.View.OnClickListener;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settings.notification.ManagedServiceSettings.Config;
+import com.android.settings.notification.ZenModeEventRuleSettings.CalendarInfo;
 import com.android.settings.notification.ZenRuleNameDialog.RuleInfo;
-import com.android.settings.widget.FloatingActionButton;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -65,21 +66,6 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
         mServiceListing.addCallback(mServiceListingCallback);
         mServiceListing.reload();
         mServiceListing.setListening(true);
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        final FloatingActionButton fab = getFloatingActionButton();
-        fab.setVisibility(View.VISIBLE);
-        fab.setImageResource(R.drawable.ic_menu_add_white);
-        fab.setContentDescription(getString(R.string.zen_mode_time_add_rule));
-        fab.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showAddRuleDialog();
-            }
-        });
     }
 
     @Override
@@ -133,15 +119,32 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
                 .putExtra(ZenModeRuleSettingsBase.EXTRA_RULE_ID, ruleId));
     }
 
+    private ZenRuleInfo[] sortedRules() {
+        final ZenRuleInfo[] rt = new ZenRuleInfo[mConfig.automaticRules.size()];
+        for (int i = 0; i < rt.length; i++) {
+            final ZenRuleInfo zri = new ZenRuleInfo();
+            zri.id = mConfig.automaticRules.keyAt(i);
+            zri.rule = mConfig.automaticRules.valueAt(i);
+            rt[i] = zri;
+        }
+        Arrays.sort(rt, RULE_COMPARATOR);
+        return rt;
+    }
+
     private void updateControls() {
         final PreferenceScreen root = getPreferenceScreen();
         root.removeAll();
         if (mConfig == null) return;
-        for (int i = 0; i < mConfig.automaticRules.size(); i++) {
-            final String id = mConfig.automaticRules.keyAt(i);
-            final ZenRule rule = mConfig.automaticRules.valueAt(i);
+        final ZenRuleInfo[] sortedRules = sortedRules();
+        for (int i = 0; i < sortedRules.length; i++) {
+            final String id = sortedRules[i].id;
+            final ZenRule rule = sortedRules[i].rule;
             final boolean isSchedule = ZenModeConfig.isValidScheduleConditionId(rule.conditionId);
+            final boolean isEvent = ZenModeConfig.isValidEventConditionId(rule.conditionId);
             final Preference p = new Preference(mContext);
+            p.setIcon(isSchedule ? R.drawable.ic_schedule
+                    : isEvent ? R.drawable.ic_event
+                    : R.drawable.ic_label);
             p.setTitle(rule.name);
             p.setSummary(computeRuleSummary(rule));
             p.setPersistent(false);
@@ -149,6 +152,7 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
                     final String action = isSchedule ? ZenModeScheduleRuleSettings.ACTION
+                            : isEvent ? ZenModeEventRuleSettings.ACTION
                             : ZenModeExternalRuleSettings.ACTION;
                     showRule(action, null, id, rule.name);
                     return true;
@@ -156,6 +160,18 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
             });
             root.addPreference(p);
         }
+        final Preference p = new Preference(mContext);
+        p.setIcon(R.drawable.ic_add);
+        p.setTitle(R.string.zen_mode_add_rule);
+        p.setPersistent(false);
+        p.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                showAddRuleDialog();
+                return true;
+            }
+        });
+        root.addPreference(p);
     }
 
     @Override
@@ -165,17 +181,67 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
 
     private String computeRuleSummary(ZenRule rule) {
         if (rule == null || !rule.enabled) return getString(R.string.switch_off_text);
-        final ScheduleInfo schedule = ZenModeConfig.tryParseScheduleConditionId(rule.conditionId);
         final String mode = ZenModeSettings.computeZenModeCaption(getResources(), rule.zenMode);
         String summary = getString(R.string.switch_on_text);
+        final ScheduleInfo schedule = ZenModeConfig.tryParseScheduleConditionId(rule.conditionId);
+        final EventInfo event = ZenModeConfig.tryParseEventConditionId(rule.conditionId);
         if (schedule != null) {
-            final String days = computeContiguousDayRanges(schedule.days);
-            final String start = getTime(schedule.startHour, schedule.startMinute);
-            final String end = getTime(schedule.endHour, schedule.endMinute);
-            final String time = getString(R.string.summary_range_verbal_combination, start, end);
-            summary = getString(R.string.zen_mode_rule_summary_combination, days, time);
+            summary = computeScheduleRuleSummary(schedule);
+        } else if (event != null) {
+            summary = computeEventRuleSummary(event);
         }
         return getString(R.string.zen_mode_rule_summary_combination, summary, mode);
+    }
+
+    private String computeScheduleRuleSummary(ScheduleInfo schedule) {
+        final String days = computeContiguousDayRanges(schedule.days);
+        final String start = getTime(schedule.startHour, schedule.startMinute);
+        final String end = getTime(schedule.endHour, schedule.endMinute);
+        final String time = getString(R.string.summary_range_verbal_combination, start, end);
+        return getString(R.string.zen_mode_rule_summary_combination, days, time);
+    }
+
+    private String computeEventRuleSummary(EventInfo event) {
+        final String calendar = computeCalendarName(event);
+        final String attendance = getString(computeAttendance(event));
+        final String reply = getString(computeReply(event));
+        return getString(R.string.zen_mode_rule_summary_combination,
+                getString(R.string.zen_mode_rule_summary_combination, calendar, attendance), reply);
+    }
+
+    private String computeCalendarName(EventInfo event) {
+        if (event.calendar != 0) {
+            final CalendarInfo[] calendars = ZenModeEventRuleSettings.getCalendars(mContext);
+            for (int i = 0; i < calendars.length; i++) {
+                final CalendarInfo calendar = calendars[i];
+                if (calendar.id == event.calendar) {
+                    return calendar.name;
+                }
+            }
+        }
+        return getString(R.string.zen_mode_event_rule_summary_any_calendar);
+    }
+
+    private int computeAttendance(EventInfo event) {
+        switch (event.attendance) {
+            case EventInfo.ATTENDANCE_REQUIRED:
+                return R.string.zen_mode_event_rule_attendance_required;
+            case EventInfo.ATTENDANCE_OPTIONAL:
+                return R.string.zen_mode_event_rule_attendance_optional;
+            default:
+                return R.string.zen_mode_event_rule_attendance_required_optional;
+        }
+    }
+
+    private int computeReply(EventInfo event) {
+        switch (event.reply) {
+            case EventInfo.REPLY_ANY_EXCEPT_NO:
+                return R.string.zen_mode_event_rule_summary_any_reply_except_no;
+            case EventInfo.REPLY_YES:
+                return R.string.zen_mode_event_rule_summary_replied_yes;
+            default:
+                return R.string.zen_mode_event_rule_summary_any_reply;
+        }
     }
 
     private String getTime(int hour, int minute) {
@@ -247,5 +313,25 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
             }
         }
     };
+
+    private static final Comparator<ZenRuleInfo> RULE_COMPARATOR = new Comparator<ZenRuleInfo>() {
+        @Override
+        public int compare(ZenRuleInfo lhs, ZenRuleInfo rhs) {
+            return key(lhs).compareTo(key(rhs));
+        }
+
+        private String key(ZenRuleInfo zri) {
+            final ZenRule rule = zri.rule;
+            final int type = ZenModeConfig.isValidScheduleConditionId(rule.conditionId) ? 1
+                    : ZenModeConfig.isValidEventConditionId(rule.conditionId) ? 2
+                    : 3;
+            return type + rule.name;
+        }
+    };
+
+    private static class ZenRuleInfo {
+        String id;
+        ZenRule rule;
+    }
 
 }

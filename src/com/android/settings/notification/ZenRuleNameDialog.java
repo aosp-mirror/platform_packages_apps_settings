@@ -24,6 +24,7 @@ import android.content.DialogInterface.OnDismissListener;
 import android.content.pm.ServiceInfo;
 import android.net.Uri;
 import android.service.notification.ZenModeConfig;
+import android.service.notification.ZenModeConfig.EventInfo;
 import android.service.notification.ZenModeConfig.ScheduleInfo;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -50,25 +51,30 @@ public abstract class ZenRuleNameDialog {
     private final ArraySet<String> mExistingNames;
     private final ServiceListing mServiceListing;
     private final RuleInfo[] mExternalRules = new RuleInfo[3];
+    private final boolean mIsNew;
 
     public ZenRuleNameDialog(Context context, ServiceListing serviceListing, String ruleName,
             ArraySet<String> existingNames) {
         mServiceListing = serviceListing;
+        mIsNew = ruleName == null;
         final View v = LayoutInflater.from(context).inflate(R.layout.zen_rule_name, null, false);
         mEditText = (EditText) v.findViewById(R.id.rule_name);
-        if (ruleName != null) {
+        if (!mIsNew) {
             mEditText.setText(ruleName);
         }
         mEditText.setSelectAllOnFocus(true);
         mTypes = (RadioGroup) v.findViewById(R.id.rule_types);
         if (mServiceListing != null) {
             bindType(R.id.rule_type_schedule, defaultNewSchedule());
+            bindType(R.id.rule_type_event, defaultNewEvent());
             bindExternalRules();
             mServiceListing.addCallback(mServiceListingCallback);
             mServiceListing.reload();
+        } else {
+            mTypes.setVisibility(View.GONE);
         }
         mDialog = new AlertDialog.Builder(context)
-                .setTitle(R.string.zen_mode_rule_name)
+                .setTitle(mIsNew ? R.string.zen_mode_add_rule : R.string.zen_mode_rule_name)
                 .setView(v)
                 .setPositiveButton(R.string.okay, new DialogInterface.OnClickListener() {
                     @Override
@@ -157,12 +163,21 @@ public abstract class ZenRuleNameDialog {
         return rt;
     }
 
+    private static RuleInfo defaultNewEvent() {
+        final EventInfo event = new EventInfo();
+        event.calendar = 0; // any
+        event.attendance = EventInfo.ATTENDANCE_REQUIRED_OR_OPTIONAL;
+        event.reply = EventInfo.REPLY_ANY_EXCEPT_NO;
+        final RuleInfo rt = new RuleInfo();
+        rt.settingsAction = ZenModeEventRuleSettings.ACTION;
+        rt.defaultConditionId = ZenModeConfig.toEventConditionId(event);
+        return rt;
+    }
+
     private void bindExternalRules() {
-        bindType(R.id.rule_type_2, mExternalRules[0]);
-        bindType(R.id.rule_type_3, mExternalRules[1]);
-        bindType(R.id.rule_type_4, mExternalRules[2]);
-        // show radio group if we have at least one external rule type
-        mTypes.setVisibility(mExternalRules[0] != null ? View.VISIBLE : View.GONE);
+        bindType(R.id.rule_type_3, mExternalRules[0]);
+        bindType(R.id.rule_type_4, mExternalRules[1]);
+        bindType(R.id.rule_type_5, mExternalRules[2]);
     }
 
     private final ServiceListing.Callback mServiceListingCallback = new ServiceListing.Callback() {
