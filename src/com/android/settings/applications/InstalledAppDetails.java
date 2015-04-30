@@ -364,7 +364,7 @@ public class InstalledAppDetails extends AppInfoBase
         TextView label = (TextView) appSnippet.findViewById(R.id.app_name);
         label.setText(mAppEntry.label);
         // Version number of application
-        mAppVersion = (TextView) appSnippet.findViewById(R.id.app_size);
+        mAppVersion = (TextView) appSnippet.findViewById(R.id.app_summary);
 
         if (pkgInfo != null && pkgInfo.versionName != null) {
             mAppVersion.setVisibility(View.VISIBLE);
@@ -675,15 +675,29 @@ public class InstalledAppDetails extends AppInfoBase
     public static CharSequence getNotificationSummary(AppRow appRow, Context context) {
         if (appRow.banned) {
             return context.getString(R.string.notifications_disabled);
-        } else if (appRow.priority) {
-            if (appRow.sensitive) {
-                return context.getString(R.string.notifications_priority_sensitive);
-            }
-            return context.getString(R.string.notifications_priority);
-        } else if (appRow.sensitive) {
-            return context.getString(R.string.notifications_sensitive);
         }
-        return context.getString(R.string.notifications_enabled);
+        ArrayList<CharSequence> notifSummary = new ArrayList<>();
+        if (appRow.priority) {
+            notifSummary.add(context.getString(R.string.notifications_priority));
+        }
+        if (appRow.sensitive) {
+            notifSummary.add(context.getString(R.string.notifications_sensitive));
+        }
+        if (!appRow.peekable) {
+            notifSummary.add(context.getString(R.string.notifications_no_peeking));
+        }
+        switch (notifSummary.size()) {
+            case 3:
+                return context.getString(R.string.notifications_three_items,
+                        notifSummary.get(0), notifSummary.get(1), notifSummary.get(2));
+            case 2:
+                return context.getString(R.string.notifications_two_items,
+                        notifSummary.get(0), notifSummary.get(1));
+            case 1:
+                return notifSummary.get(0);
+            default:
+                return context.getString(R.string.notifications_enabled);
+        }
     }
 
     static class DisableChanger extends AsyncTask<Object, Object, Object> {

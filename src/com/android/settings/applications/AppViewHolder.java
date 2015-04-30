@@ -45,7 +45,7 @@ public class AppViewHolder {
             holder.rootView = convertView;
             holder.appName = (TextView) convertView.findViewById(R.id.app_name);
             holder.appIcon = (ImageView) convertView.findViewById(R.id.app_icon);
-            holder.summary = (TextView) convertView.findViewById(R.id.app_size);
+            holder.summary = (TextView) convertView.findViewById(R.id.app_summary);
             holder.disabled = (TextView) convertView.findViewById(R.id.app_disabled);
             holder.checkBox = (CheckBox) convertView.findViewById(R.id.app_on_sdcard);
             convertView.setTag(holder);
