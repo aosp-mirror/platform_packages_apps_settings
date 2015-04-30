@@ -17,36 +17,54 @@
 package com.android.settings.deviceinfo;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.storage.DiskInfo;
-import android.text.format.DateUtils;
-import android.text.format.Formatter;
+import android.os.storage.VolumeInfo;
 
-import com.android.internal.util.Preconditions;
 import com.android.settings.R;
 
 public class StorageWizardMigrateConfirm extends StorageWizardBase {
+    private MigrateEstimateTask mEstimate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.storage_wizard_generic);
 
-        Preconditions.checkNotNull(mDisk);
+        // When called with just disk, find the first private volume
+        if (mVolume == null) {
+            mVolume = findFirstVolume(VolumeInfo.TYPE_PRIVATE);
+        }
 
-        final String time = DateUtils.formatDuration(0).toString();
-        final String size = Formatter.formatFileSize(this, 0);
+        final VolumeInfo sourceVol = getPackageManager().getPrimaryStorageCurrentVolume();
+        final String sourceDescrip = mStorage.getBestVolumeDescription(sourceVol);
+        final String targetDescrip = mStorage.getBestVolumeDescription(mVolume);
 
-        setHeaderText(R.string.storage_wizard_migrate_confirm_title, mDisk.getDescription());
-        setBodyText(R.string.storage_wizard_migrate_confirm_body, time, size);
-        setSecondaryBodyText(R.string.storage_wizard_migrate_details, mDisk.getDescription());
+        setHeaderText(R.string.storage_wizard_migrate_confirm_title, targetDescrip);
+        setBodyText(R.string.memory_calculating_size);
+        setSecondaryBodyText(R.string.storage_wizard_migrate_details, targetDescrip);
+
+        mEstimate = new MigrateEstimateTask(this) {
+            @Override
+            public void onPostExecute(String size, String time) {
+                setBodyText(R.string.storage_wizard_migrate_confirm_body, time, size,
+                        sourceDescrip);
+            }
+        };
+
+        mEstimate.copyFrom(getIntent());
+        mEstimate.execute();
 
         getNextButton().setText(R.string.storage_wizard_migrate_confirm_next);
     }
 
     @Override
     public void onNavigateNext() {
+        final int moveId = getPackageManager().movePrimaryStorage(mVolume);
+
         final Intent intent = new Intent(this, StorageWizardMigrateProgress.class);
-        intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
+        intent.putExtra(VolumeInfo.EXTRA_VOLUME_ID, mVolume.getId());
+        intent.putExtra(PackageManager.EXTRA_MOVE_ID, moveId);
         startActivity(intent);
         finishAffinity();
     }
