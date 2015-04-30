@@ -23,6 +23,7 @@ import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -57,15 +58,13 @@ public class RestrictedProfileSettings extends AppRestrictionsFragment
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-        if (mHeaderView == null) {
-            mHeaderView = setPinnedHeaderView(R.layout.user_info_header);
-            mHeaderView.setOnClickListener(this);
-            mUserIconView = (ImageView) mHeaderView.findViewById(android.R.id.icon);
-            mUserNameView = (TextView) mHeaderView.findViewById(android.R.id.title);
-            mDeleteButton = (ImageView) mHeaderView.findViewById(R.id.delete);
-            mDeleteButton.setOnClickListener(this);
-            getListView().setFastScrollEnabled(true);
-        }
+        mHeaderView = setPinnedHeaderView(R.layout.user_info_header);
+        mHeaderView.setOnClickListener(this);
+        mUserIconView = (ImageView) mHeaderView.findViewById(android.R.id.icon);
+        mUserNameView = (TextView) mHeaderView.findViewById(android.R.id.title);
+        mDeleteButton = (ImageView) mHeaderView.findViewById(R.id.delete);
+        mDeleteButton.setOnClickListener(this);
+        getListView().setFastScrollEnabled(true);
         // This is going to bind the preferences.
         super.onActivityCreated(savedInstanceState);
     }
