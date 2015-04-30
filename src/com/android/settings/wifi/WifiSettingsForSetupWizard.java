@@ -149,6 +149,17 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
     }
 
     @Override
+    public View setPinnedHeaderView(int layoutResId) {
+        // Pinned header is not supported in setup wizard
+        return null;
+    }
+
+    @Override
+    public void setPinnedHeaderView(View pinnedHeader) {
+        // Pinned header is not supported in setup wizard
+    }
+
+    @Override
     protected void setProgressBarVisible(boolean visible) {
         if (mLayout != null) {
             if (visible) {
