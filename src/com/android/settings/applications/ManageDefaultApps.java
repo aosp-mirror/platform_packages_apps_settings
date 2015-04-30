@@ -49,7 +49,7 @@ public class ManageDefaultApps extends SettingsPreferenceFragment
     private static final String TAG = ManageDefaultApps.class.getSimpleName();
 
     private static final String KEY_DEFAULT_BROWSER = "default_browser";
-    private static final String KEY_DEFAULT_DIALER = "default_dialer";
+    private static final String KEY_DEFAULT_PHONE_APP = "default_phone_app";
     private static final String KEY_DEFAULT_EMERGENCY_APP = "default_emergency_app";
     private static final String KEY_SMS_APPLICATION = "default_sms_app";
 
@@ -97,8 +97,8 @@ public class ManageDefaultApps extends SettingsPreferenceFragment
             removePreference(KEY_SMS_APPLICATION);
         }
 
-        if (!DefaultDialerPreference.isAvailable(getActivity())) {
-            removePreference(KEY_DEFAULT_DIALER);
+        if (!DefaultPhonePreference.isAvailable(getActivity())) {
+            removePreference(KEY_DEFAULT_PHONE_APP);
         }
 
         if (!DefaultEmergencyPreference.isAvailable(getActivity())) {
