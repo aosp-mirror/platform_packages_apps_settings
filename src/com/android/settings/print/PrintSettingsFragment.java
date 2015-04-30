@@ -192,11 +192,9 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
         final UserManager um = (UserManager) getSystemService(Context.USER_SERVICE);
         mProfileSpinnerAdapter = Utils.createUserSpinnerAdapter(um, getActivity());
         if (mProfileSpinnerAdapter != null) {
-            mSpinner = (Spinner) getActivity().getLayoutInflater().inflate(
-                    R.layout.spinner_view, null);
+            mSpinner = (Spinner) setPinnedHeaderView(R.layout.spinner_view);
             mSpinner.setAdapter(mProfileSpinnerAdapter);
             mSpinner.setOnItemSelectedListener(this);
-            setPinnedHeaderView(mSpinner);
         }
     }
 
