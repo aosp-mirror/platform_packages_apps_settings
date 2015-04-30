@@ -40,6 +40,8 @@
     <string name="sms_over_ims_off" msgid="8354792045992793959">"Desaktibatu IMS bidezko SMSak"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"Aktibatu IMS erregistratzearen eskaera."</string>
     <string name="ims_reg_required_off" msgid="1720570343422743943">"Desaktibatu IMS erregistratzearen eskaera"</string>
+    <string name="volte_provisioned_flag_on" msgid="6023503159480902956">"Aktibatu VoLTE hornituta egotearen marka"</string>
+    <string name="volte_provisioned_flag_off" msgid="6168612015904744405">"Desaktibatu VoLTE hornituta egotearen marka"</string>
     <string name="lte_ram_dump_on" msgid="8568568019520172177">"Aktibatu LTE RAM iraulketa."</string>
     <string name="lte_ram_dump_off" msgid="2514507918652378283">"Desaktibatu LTE RAM iraulketa"</string>
     <string name="radioInfo_menu_viewADN" msgid="8743377494429930831">"Ikusi SIMaren helbide-agenda"</string>
@@ -751,6 +753,18 @@
     <string name="wifi_hotspot_configure_ap_text_summary" msgid="5618031116920832182">"AndroidAP WPA2 PSK Wi‑Fi publiko eramangarria"</string>
     <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g><xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> Wi-Fi sare publiko eramangarria"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidSarePublikoa"</string>
+    <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Wi-Fi bidezko deiak"</string>
+    <string name="wifi_calling_mode_title" msgid="2164073796253284289">"Deitzeko aukera lehenetsiak"</string>
+    <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Wi-Fi bidez deitzeko modua"</string>
+  <string-array name="wifi_calling_mode_choices">
+    <item msgid="2124257075906188844">"Wi-Fi sarea hobetsia"</item>
+    <item msgid="5267397515594230396">"Sare mugikorra hobetsia"</item>
+  </string-array>
+  <string-array name="wifi_calling_mode_values">
+    <item msgid="4799585830102342375">"2"</item>
+    <item msgid="1171822231056612021">"1"</item>
+  </string-array>
+    <string name="wifi_calling_off_explanation" msgid="4124926334215228094">"Wi-Fi bidezko deiak aktibatuta daudenean, telefonoak Wi-Fi sareen bidez edo operadorearen sarearen bidez bidera ditzake deiak, zure hobespenen eta seinalearen sendotasunaren arabera. Eginbide hau aktibatu aurretik, eskatu tarifak eta bestelako informazioa operadoreari."</string>
     <string name="home_settings" msgid="212375129455718176">"Hasiera"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Bistaratzea"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Soinua"</string>
@@ -1011,8 +1025,8 @@
     <string name="master_clear_title" msgid="5907939616087039756">"Berrezarri jatorrizko datuak"</string>
     <string name="master_clear_summary" product="tablet" msgid="4036344100254678429">"Tabletako datu guztiak ezabatzen ditu."</string>
     <string name="master_clear_summary" product="default" msgid="4986154238001088492">"Telefonoko datu guztiak ezabatzen ditu."</string>
-    <string name="master_clear_desc" product="tablet" msgid="8317211882509025841">"Tabletaren "<b>"barneko memoriako"</b>" datu guztiak ezabatuko dira, besteak beste:\n\n"<li>"Google kontua"</li>\n<li>"Sistema- eta aplikazio-datuak eta ezarpenak"</li>\n<li>"Deskargatutako aplikazioak"</li></string>
-    <string name="master_clear_desc" product="default" msgid="9165016501623540228">"Telefonoaren "<b>"barneko memoriako"</b>" datu guztiak ezabatuko dira, besteak beste:\n\n"<li>"Google kontua"</li>\n<li>"Sistema- eta aplikazio-datuak nahiz ezarpenak"</li>\n<li>"Deskargatutako aplikazioak"</li></string>
+    <string name="master_clear_desc" product="tablet" msgid="8317211882509025841">"Tabletaren "<b>"barneko memoriako"</b>" datu guztiak ezabatuko dira, besteak beste:\n\n"<li>"Google kontua"</li>\n<li>"Sistema- eta aplikazioen datuak eta ezarpenak"</li>\n<li>"Deskargatutako aplikazioak"</li></string>
+    <string name="master_clear_desc" product="default" msgid="9165016501623540228">"Telefonoaren "<b>"barneko memoriako"</b>" datu guztiak ezabatuko dira, besteak beste:\n\n"<li>"Google kontua"</li>\n<li>"Sistema- eta aplikazioen datuak nahiz ezarpenak"</li>\n<li>"Deskargatutako aplikazioak"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Kontu hauetan hasi duzu saioa:\n"</string>
     <string name="master_clear_other_users_present" product="default" msgid="5161423070702470742">\n\n"Badaude erabiltzaile gehiago gailu honetan.\n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"Musika"</li>\n<li>"Argazkiak"</li>\n<li>"Bestelako erabiltzaile-datuak"</li></string>
@@ -1104,7 +1118,7 @@
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Kokapen modua"</string>
     <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"Erabili GPS antena, Wi‑Fi sarea eta sare mugikorrak kokapena zehazteko"</string>
     <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"Erabili Wi‑Fi sarea eta sare mugikorrak kokapena zehazteko"</string>
-    <string name="location_mode_sensors_only_description" msgid="7178415350457794366">"Erabili GPSa kokapena zehazteko"</string>
+    <string name="location_mode_sensors_only_description" msgid="788127681455735699">"Erabili GPS sistema kokapena zehazteko"</string>
     <string name="location_network_based" msgid="6010456018401296590">"Wi‑Fi eta sare mugikor bidezko kokapena"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Utzi aplikazioei zure kokapena bizkorrago zehazteko Google-ren kokapen-zerbitzua erabiltzen. Kokapen-datu anonimoak bildu eta Google-ra bidaliko dira."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Kokapena Wi-Fi bidez zehaztuta"</string>
@@ -1248,17 +1262,17 @@
     <string name="sd_card_storage" product="nosdcard" msgid="2673203150465132465">"USB memoria"</string>
     <string name="sd_card_storage" product="default" msgid="7623513618171928235">"SD txartelaren memoria"</string>
     <string name="recompute_size" msgid="7722567982831691718">"Tamaina berriro kalkulatzen…"</string>
-    <string name="clear_data_dlg_title" msgid="5605258400134511197">"Aplikazio-datuak ezabatu?"</string>
+    <string name="clear_data_dlg_title" msgid="5605258400134511197">"Aplikazioen datuak ezabatu?"</string>
     <string name="clear_data_dlg_text" msgid="8847257251846779938">"Aplikazioaren datu guztiak betiko ezabatuko dira; besteak beste, fitxategi, ezarpen, kontu, datu-base eta abar guztiak."</string>
     <string name="dlg_ok" msgid="2402639055725653590">"Ados"</string>
     <string name="dlg_cancel" msgid="1674753358972975911">"Utzi"</string>
     <string name="app_not_found_dlg_title" msgid="3127123411738434964"></string>
     <string name="app_not_found_dlg_text" msgid="8333723538280257243">"Ez da aplikazioa aurkitu instalatutako aplikazioen zerrendan."</string>
-    <string name="clear_data_failed" msgid="1907582169616856698">"Ezin izan dira aplikazio-datuak garbitu."</string>
+    <string name="clear_data_failed" msgid="1907582169616856698">"Ezin izan dira aplikazioen datuak garbitu."</string>
     <string name="app_factory_reset_dlg_title" msgid="7441012826373143593">"Eguneratzeak desinstalatu?"</string>
     <string name="app_factory_reset_dlg_text" msgid="6371247225487725860">"Android sistemaren aplikazioari egindako eguneratzeak desinstalatu egingo dira."</string>
     <string name="clear_failed_dlg_title" msgid="2387060805294783175">"Garbitu datuak"</string>
-    <string name="clear_failed_dlg_text" msgid="1092177570631523106">"Ezin izan dira aplikazio-datuak garbitu."</string>
+    <string name="clear_failed_dlg_text" msgid="1092177570631523106">"Ezin izan dira aplikazioen datuak garbitu."</string>
     <string name="security_settings_desc" product="tablet" msgid="1292421279262430109">"Aplikazioak tabletaren elementu hauek atzi ditzake:"</string>
     <string name="security_settings_desc" product="default" msgid="61749028818785244">"Aplikazioak telefonoaren elementu hauek atzi ditzake:"</string>
     <string name="security_settings_desc_multi" product="tablet" msgid="7300932212437084403">"Aplikazioak zure tabletaren elementu hauek atzi ditzake. Errendimendua hobetzeko eta memoria-erabilera murrizteko, baimen horietako batzuk <xliff:g id="BASE_APP_NAME">%1$s</xliff:g> aplikaziorako ere erabilgarri daude, <xliff:g id="ADDITIONAL_APPS_LIST">%2$s</xliff:g> aplikazioen prozesu bera exekutatzen duelako:"</string>
@@ -1290,10 +1304,10 @@
     <string name="move_app_failed_dlg_text" msgid="3465267182923054022">"Ezin izan da aplikazioa eraman. <xliff:g id="REASON">%1$s</xliff:g>"</string>
     <string name="app_install_location_title" msgid="2068975150026852168">"Instalazioaren kokapen hobetsia"</string>
     <string name="app_install_location_summary" msgid="5155453752692959098">"Aldatu aplikazio berrien instalazio-kokapen hobetsia"</string>
-    <string name="app_disable_dlg_title" msgid="3916469657537695436">"Barneratutako aplikazioa desgaitu?"</string>
-    <string name="app_disable_dlg_text" msgid="3562567756362627323">"Barneratutako aplikazioa desgaitzen baduzu, beste aplikazioek portaera okerra izan dezakete."</string>
+    <string name="app_disable_dlg_title" msgid="3916469657537695436">"Aplikazio integratua desgaitu?"</string>
+    <string name="app_disable_dlg_text" msgid="3562567756362627323">"Aplikazio integratua desgaitzen baduzu, beste aplikazioek portaera okerra izan dezakete."</string>
     <string name="app_special_disable_dlg_title" msgid="2690148680327142674">"Datuak ezabatu eta aplikazioa desgaitu?"</string>
-    <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"Aplikazio barneratu bat desgaitzen baduzu, beste aplikazio batzuek funtzionamendu okerra izan dezakete. Zure datuak ere ezabatuko dira."</string>
+    <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"Aplikazio integratu bat desgaitzen baduzu, beste aplikazio batzuek funtzionamendu okerra izan dezakete. Zure datuak ere ezabatuko dira."</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"Jakinarazpenak desaktibatu nahi dituzu?"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"Aplikazioaren jakinarazpenak desaktibatzen badituzu, alerta eta eguneratze garrantzitsuak gal ditzakezu."</string>
     <string name="app_ops_settings" msgid="5108481883575527511">"Aplikazioen eragiketak"</string>
@@ -1433,8 +1447,8 @@
     <string name="enable_adb" msgid="7982306934419797485">"USB arazketa"</string>
     <string name="enable_adb_summary" msgid="4881186971746056635">"Gaitu arazketa modua USBa konektatzean"</string>
     <string name="clear_adb_keys" msgid="4038889221503122743">"Baliogabetu USB arazketarako baimenak"</string>
-    <string name="bugreport_in_power" msgid="7923901846375587241">"Programa-akatsen txostenerako lasterbidea"</string>
-    <string name="bugreport_in_power_summary" msgid="1778455732762984579">"Bateriaren menuan, erakutsi programa-akatsen txostena sortzeko botoia"</string>
+    <string name="bugreport_in_power" msgid="7923901846375587241">"Akatsen txostenerako lasterbidea"</string>
+    <string name="bugreport_in_power_summary" msgid="1778455732762984579">"Bateriaren menuan, erakutsi akatsen txostena sortzeko botoia"</string>
     <string name="keep_screen_on" msgid="1146389631208760344">"Mantendu aktibo"</string>
     <string name="keep_screen_on_summary" msgid="2173114350754293009">"Pantaila ez da inoiz inaktibo ezarriko kargatu bitartean"</string>
     <string name="bt_hci_snoop_log" msgid="3340699311158865670">"Gaitu Bluetooth HCI miatze-erregistroa"</string>
@@ -1739,7 +1753,7 @@
     <string name="voice_input_settings" msgid="1099937800539324567">"Ahots bidezko idazketaren ezarpenak"</string>
     <string name="voice_input_settings_title" msgid="2676028028084981891">"Ahots bidezko idazketa"</string>
     <string name="voice_service_preference_section_title" msgid="3778706644257601021">"Ahots bidezko idazketa-zerbitzuak"</string>
-    <string name="voice_interactor_preference_summary" msgid="1801414022026937190">"Erabateko interakzioa eta gako-hitzen erabilera"</string>
+    <string name="voice_interactor_preference_summary" msgid="1801414022026937190">"Ahozko pasahitzak eta erabateko interakzioa"</string>
     <string name="voice_recognizer_preference_summary" msgid="669880813593690527">"Ahoz idazteko eginbide arrunta"</string>
     <string name="voice_interaction_security_warning" msgid="6378608263983737325">"Aginduak ahoz emateko zerbitzu honek uneoro kontrolatuko du ahotsa eta ahozko gaitasuna duten aplikazioak ere kontrolatu ahal izango ditu. <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g> aplikazioarena da. Zerbitzu hau erabiltzeko aukera gaitu nahi duzu?"</string>
     <string name="tts_settings" msgid="8186971894801348327">"Testua ahots bihurtzeko eginbidearen ezarpenak"</string>
@@ -2040,7 +2054,7 @@
     <string name="data_usage_cycle" msgid="5652529796195787949">"Datu-erabileraren zikloa"</string>
     <string name="data_usage_app_items_header_text" msgid="5017850810459372828">"Aplikazioen erabilera"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Ibiltaritzako datuak"</string>
-    <string name="data_usage_menu_restrict_background" msgid="1989394568592253331">"Murriztu atzeko planoko datuak"</string>
+    <string name="data_usage_menu_restrict_background" msgid="1989394568592253331">"Mugatu atzeko planoko datuak"</string>
     <string name="data_usage_menu_allow_background" msgid="2694761978633359223">"Onartu atz. planoko datuak"</string>
     <string name="data_usage_menu_split_4g" msgid="5322857680792601899">"4G erabilera bereizia"</string>
     <string name="data_usage_menu_show_wifi" msgid="2296217964873872571">"Erakutsi Wi‑Fi sareen erabilera"</string>
@@ -2078,10 +2092,10 @@
     <string name="data_usage_forground_label" msgid="7654319010655983591">"Aurreko planoan:"</string>
     <string name="data_usage_background_label" msgid="2722008379947694926">"Atzeko planoa:"</string>
     <string name="data_usage_app_settings" msgid="2279171379771253165">"Aplikazioaren ezarpenak"</string>
-    <string name="data_usage_app_restrict_background" msgid="7510046552380574925">"Murriztu atzeko planoko datuak"</string>
+    <string name="data_usage_app_restrict_background" msgid="7510046552380574925">"Mugatu atzeko planoko datuak"</string>
     <string name="data_usage_app_restrict_background_summary" msgid="3720075732277934106">"Desgaitu atzeko planoko datuen erabilera sare mugikorretan."</string>
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="1446565717342917727">"Aplikazioak atzeko planoan daturik erabil ez dezan, ezarri muga."</string>
-    <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"Atzeko planoko datuak murriztu?"</string>
+    <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"Atzeko planoko datuak mugatu?"</string>
     <string name="data_usage_app_restrict_dialog" msgid="5871168521456832764">"Ezarpen hau erabiltzen bada, atzeko planoko datuetan oinarritzen diren aplikazioek  ez dute funtzionatuko erabilgarri dauden sare bakarrak mugikorrenak direnean.\n\nDatuen erabilera kontrolatzeko aukera egokiagoak aurki ditzakezu aplikazioen ezarpenetan."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="4674085030810350875">"Datu mugikorren muga ezarrita baduzu soilik murritz ditzakezu atzeko planoko datuak."</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"Sink. auto. datuak aktibatu?"</string>
@@ -2097,10 +2111,10 @@
     <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"Datu-erabilera mugatzea"</string>
     <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="5788774061143636263">"Datuen mugara heltzen denean, tabletak datu mugikorrak desaktibatuko ditu.\n\nTabletak datuen erabilera neurtzen du, baina baliteke operadoreak erabilera hori beste era batera neurtzea. Horregatik, muga zuhurra ezartzea gomendatzen dugu."</string>
     <string name="data_usage_limit_dialog_mobile" product="default" msgid="3511301596446820549">"Datuen mugara heltzen denean, telefonoak datu mugikorrak desaktibatuko ditu.\n\nTelefonoak datuen erabilera neurtzen du, baina baliteke operadoreak erabilera hori beste era batera neurtzea. Horregatik, muga zuhurra ezartzea gomendatzen dugu."</string>
-    <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"Atzeko planoko datuak murriztu?"</string>
-    <string name="data_usage_restrict_background" msgid="8210134218644196511">"Atzeko planoan datu mugikorrak erabiltzeko aukera murrizten baduzu, aplikazio eta zerbitzu batzuek ez dute funtzionatuko Wi-Fi sare batera konektatu ezean."</string>
-    <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="3262993384666280985">"Atzeko planoan datu mugikorrak erabiltzeko aukera murrizten baduzu, aplikazio eta zerbitzu batzuek ez dute funtzionatuko Wi-Fi sare batera konektatu ezean.\n\nEzarpen horrek tabletaren erabiltzaile guztiei eragiten die."</string>
-    <string name="data_usage_restrict_background_multiuser" product="default" msgid="4352615206362479722">"Atzeko planoan datu mugikorrak erabiltzeko aukera murrizten baduzu, aplikazio eta zerbitzu batzuek ez dute funtzionatuko Wi-Fi sare batera konektatu ezean.\n\nEzarpen horrek telefonoaren erabiltzaile guztiei eragiten die."</string>
+    <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"Atzeko planoko datuak mugatu?"</string>
+    <string name="data_usage_restrict_background" msgid="8210134218644196511">"Atzeko planoan datu mugikorrak erabiltzeko aukera mugatzen baduzu, aplikazio eta zerbitzu batzuek ez dute funtzionatuko Wi-Fi sare batera konektatu ezean."</string>
+    <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="3262993384666280985">"Atzeko planoan datu mugikorrak erabiltzeko aukera mugatzen baduzu, aplikazio eta zerbitzu batzuek ez dute funtzionatuko Wi-Fi sare batera konektatu ezean.\n\nEzarpen horrek tabletaren erabiltzaile guztiei eragiten die."</string>
+    <string name="data_usage_restrict_background_multiuser" product="default" msgid="4352615206362479722">"Atzeko planoan datu mugikorrak erabiltzeko aukera mugatzen baduzu, aplikazio eta zerbitzu batzuek ez dute funtzionatuko Wi-Fi sare batera konektatu ezean.\n\nEzarpen horrek telefonoaren erabiltzaile guztiei eragiten die."</string>
     <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"abisua"</font></string>
     <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"muga"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="614263770923231598">"Kendutako aplikazioak"</string>
@@ -2191,7 +2205,7 @@
     <string name="user_nickname" msgid="5148818000228994488">"Goitizena"</string>
     <string name="user_add_user_type_title" msgid="2146438670792322349">"Gehitu"</string>
     <string name="user_add_user_item_summary" msgid="4702776187132008661">"Erabiltzaileek euren aplikazioak eta edukia dituzte."</string>
-    <string name="user_add_profile_item_summary" msgid="5931663986889138941">"Aplikazioetarako eta edukirako sarbidea murritz dezakezu zure kontutik."</string>
+    <string name="user_add_profile_item_summary" msgid="5931663986889138941">"Aplikazioetarako eta edukirako sarbidea muga dezakezu zure kontutik."</string>
     <string name="user_add_user_item_title" msgid="8212199632466198969">"Erabiltzailea"</string>
     <string name="user_add_profile_item_title" msgid="8353515490730363621">"Profil murriztua"</string>
     <string name="user_add_user_title" msgid="2108112641783146007">"Beste erabiltzaile bat gehitu nahi duzu?"</string>
@@ -2349,6 +2363,7 @@
     <string name="keywords_wifi" msgid="8947676711698613374">"wifi wi-fi sareko konexioa"</string>
     <string name="keywords_more_default_sms_app" msgid="895656981962034647">"testu-mezua, testu-mezuak, mezuak"</string>
     <string name="keywords_more_mobile_networks" msgid="4939725094449606744">"mugikorra, operadorea, eramailea, hari gabeko datuak, 4g, 3g, 2g, lte"</string>
+    <string name="keywords_wifi_calling" msgid="5497735076883598019">"wifi wi-fi deia deitzea"</string>
     <string name="keywords_home" msgid="3626170808219458848">"abiarazlea"</string>
     <string name="keywords_display" msgid="6709007669501628320">"ukipen pantaila"</string>
     <string name="keywords_display_brightness_level" msgid="8923289340474728990">"ilundu pantaila, ukipen-pantaila, bateria"</string>
@@ -2370,7 +2385,7 @@
     <string name="keywords_location" msgid="782326973714313480">"inguruan kokapen historia hautemate"</string>
     <string name="keywords_location_mode" msgid="8584992704568356084">"zehaztasun"</string>
     <string name="keywords_accounts" msgid="1957925565953357627">"kontu"</string>
-    <string name="keywords_users" msgid="4673901601478559100">"murrizketa murriztu debekatu"</string>
+    <string name="keywords_users" msgid="4673901601478559100">"muga mugatu debekatu"</string>
     <string name="keywords_keyboard_and_ime" msgid="5251531893531063855">"testua, zuzenketa, zuzendu, soinua, dardara, automatikoa, hizkuntza, keinua, iradoki, iradokizuna, gaia, iraingarria, hitza, mota, emotikonoa, nazioartekoa"</string>
     <string name="keywords_lockscreen" msgid="4806191868723291541">"lerratu pasahitz eredu pin"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Konfiguratu Wi-Fi NFC etiketa"</string>

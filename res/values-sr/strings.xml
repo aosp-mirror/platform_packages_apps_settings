@@ -40,6 +40,8 @@
     <string name="sms_over_ims_off" msgid="8354792045992793959">"Искључи SMS преко IMS-а"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"Потребно је укључити IMS регистрацију"</string>
     <string name="ims_reg_required_off" msgid="1720570343422743943">"Потребно је да се искључи IMS регистрација"</string>
+    <string name="volte_provisioned_flag_on" msgid="6023503159480902956">"Укључи ознаку додељено за VoLTE"</string>
+    <string name="volte_provisioned_flag_off" msgid="6168612015904744405">"Искључи ознаку додељено за VoLTE"</string>
     <string name="lte_ram_dump_on" msgid="8568568019520172177">"Укључи слику стања lte ram-а"</string>
     <string name="lte_ram_dump_off" msgid="2514507918652378283">"Искључи слику стања lte ram-а"</string>
     <string name="radioInfo_menu_viewADN" msgid="8743377494429930831">"Прикажи SIM адресар"</string>
@@ -708,7 +710,7 @@
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"Напредна Wi-Fi подешавања"</string>
     <string name="wifi_setting_frequency_band_title" msgid="3655327399028584656">"Wi-Fi опсег фреквенција"</string>
     <string name="wifi_setting_frequency_band_summary" msgid="3250740757118009784">"Наведите опсег фреквенција за операцију"</string>
-    <string name="wifi_setting_frequency_band_error" msgid="837281974489794378">"Проблем приликом подешавања опсега фреквенција."</string>
+    <string name="wifi_setting_frequency_band_error" msgid="837281974489794378">"Проблем при подешавању опсега фреквенција."</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"MAC адреса"</string>
     <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"IP адреса"</string>
     <string name="wifi_saved_access_points_label" msgid="2013409399392285262">"Сачуване мреже"</string>
@@ -751,6 +753,18 @@
     <string name="wifi_hotspot_configure_ap_text_summary" msgid="5618031116920832182">"AndroidAP WPA2 PSK преносни Wi‑Fi хотспот"</string>
     <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> преносни Wi‑Fi хотспот"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
+    <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Позивање преко Wi-Fi-ја"</string>
+    <string name="wifi_calling_mode_title" msgid="2164073796253284289">"Подешавање позивања"</string>
+    <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Режим позивања преко Wi-Fi-ја"</string>
+  <string-array name="wifi_calling_mode_choices">
+    <item msgid="2124257075906188844">"Предност има Wi-Fi"</item>
+    <item msgid="5267397515594230396">"Предност има мобилна мрежа"</item>
+  </string-array>
+  <string-array name="wifi_calling_mode_values">
+    <item msgid="4799585830102342375">"2"</item>
+    <item msgid="1171822231056612021">"1"</item>
+  </string-array>
+    <string name="wifi_calling_off_explanation" msgid="4124926334215228094">"Када је Позивање преко Wi-Fi-ја укључено, телефон може да преусмерава позиве преко Wi-Fi мрежа или мреже мобилног оператера у зависности од тога које сте подешавање изабрали и који сигнал је јачи. Пре него што укључите ову функцију, информишите се код мобилног оператера о накнадама и другим детаљима."</string>
     <string name="home_settings" msgid="212375129455718176">"Почетна"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Приказ"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Звук"</string>
@@ -1104,7 +1118,7 @@
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Режим локације"</string>
     <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"Коришћење GPS-а, Wi‑Fi-ја и мобилних мрежа за одређивање локације"</string>
     <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"Коришћење Wi‑Fi-ја и мобилних мрежа за одређивање локације"</string>
-    <string name="location_mode_sensors_only_description" msgid="7178415350457794366">"Користите GPS за одређивање локације"</string>
+    <string name="location_mode_sensors_only_description" msgid="788127681455735699">"Користите GPS за одређивање локације"</string>
     <string name="location_network_based" msgid="6010456018401296590">"Лок. на осн. Wi-Fi и моб. мреже"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Нека апл. користе Google-ову услугу лоцирања за брже одређивање локације. Анонимни подаци о локацији прикупљаће се и слати Google-у."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Локација се одређује помоћу Wi-Fi-ја"</string>
@@ -1132,7 +1146,7 @@
     <string name="wallpaper_attributions" msgid="3645880512943433928">"Позадине"</string>
     <string name="wallpaper_attributions_values" msgid="2996183537914690469">"Добављачи сателитских слика:\n©2014 CNES/Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"Лиценца отвореног кода"</string>
-    <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Дошло је до проблема приликом учитавања лиценци."</string>
+    <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Дошло је до проблема при учитавању лиценци."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Учитавање…"</string>
     <string name="settings_safetylegal_title" msgid="1289483965535937431">"Безбедносне информације"</string>
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Безбедносне информације"</string>
@@ -2255,7 +2269,7 @@
     <string name="restriction_settings_title" msgid="4233515503765879736">"Ограничења"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"Уклони ограничења"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"Промени PIN"</string>
-    <string name="app_notifications_switch_label" msgid="9124072219553687583">"Прикажи обавештења"</string>
+    <string name="app_notifications_switch_label" msgid="9124072219553687583">"Приказуј обавештења"</string>
     <string name="help_label" msgid="6886837949306318591">"Помоћ и повр. инфор."</string>
     <string name="user_account_title" msgid="1127193807312271167">"Налог за садржај"</string>
     <string name="user_picture_title" msgid="7297782792000291692">"ИД слике"</string>
@@ -2349,6 +2363,7 @@
     <string name="keywords_wifi" msgid="8947676711698613374">"wifi wi-fi мрежа веза"</string>
     <string name="keywords_more_default_sms_app" msgid="895656981962034647">"текст порука слање SMS-а поруке размена порука"</string>
     <string name="keywords_more_mobile_networks" msgid="4939725094449606744">"мобилни мобилни оператер бежично подаци 4g 3g 2g lte"</string>
+    <string name="keywords_wifi_calling" msgid="5497735076883598019">"wifi wi-fi позив позивање"</string>
     <string name="keywords_home" msgid="3626170808219458848">"покретач"</string>
     <string name="keywords_display" msgid="6709007669501628320">"екран додирни екран"</string>
     <string name="keywords_display_brightness_level" msgid="8923289340474728990">"затамнити екран додирни екран батерија"</string>
@@ -2445,7 +2460,7 @@
     <string name="app_notifications_dialog_done" msgid="3484067728568791014">"Готово"</string>
     <string name="zen_mode_default_option" msgid="6940069025071935243">"Док не искључите"</string>
     <string name="zen_mode_important_category" msgid="8123274463331022993">"Приоритетни прекиди"</string>
-    <string name="zen_mode_downtime_category" msgid="2654477732333340290">"Време одмора"</string>
+    <string name="zen_mode_downtime_category" msgid="2654477732333340290">"Одмор"</string>
     <string name="zen_mode_downtime_days" msgid="3361856902633311616">"Дана"</string>
     <string name="zen_mode_downtime_days_none" msgid="8454857121193391322">"Ниједан"</string>
     <string name="zen_mode_downtime_mode_title" msgid="7249388756365079715">"Дозвољени прекиди"</string>

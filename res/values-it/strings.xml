@@ -40,6 +40,8 @@
     <string name="sms_over_ims_off" msgid="8354792045992793959">"Disattiva SMS su IMS"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"Attivazione registrazione IMS obbligatoria"</string>
     <string name="ims_reg_required_off" msgid="1720570343422743943">"Disattivazione registrazione IMS obbligatoria"</string>
+    <string name="volte_provisioned_flag_on" msgid="6023503159480902956">"Attiva flag provisioning VoLTE"</string>
+    <string name="volte_provisioned_flag_off" msgid="6168612015904744405">"Disattiva flag provisioning VoLTE"</string>
     <string name="lte_ram_dump_on" msgid="8568568019520172177">"Accendi dump ram lte"</string>
     <string name="lte_ram_dump_off" msgid="2514507918652378283">"Spegni dump ram lte"</string>
     <string name="radioInfo_menu_viewADN" msgid="8743377494429930831">"Visualizza rubrica SIM"</string>
@@ -751,6 +753,18 @@
     <string name="wifi_hotspot_configure_ap_text_summary" msgid="5618031116920832182">"Hotspot Wi-Fi portatile WPA2 PSK AndroidAP"</string>
     <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"Hotspot Wi‑Fi <xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> portatile"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"HotspotAndroid"</string>
+    <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Chiamate Wi-Fi"</string>
+    <string name="wifi_calling_mode_title" msgid="2164073796253284289">"Preferenza di chiamata"</string>
+    <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Modalità di chiamata Wi-Fi"</string>
+  <string-array name="wifi_calling_mode_choices">
+    <item msgid="2124257075906188844">"Reta preferita: Wi-Fi"</item>
+    <item msgid="5267397515594230396">"Rete preferita: cellulare"</item>
+  </string-array>
+  <string-array name="wifi_calling_mode_values">
+    <item msgid="4799585830102342375">"2"</item>
+    <item msgid="1171822231056612021">"1"</item>
+  </string-array>
+    <string name="wifi_calling_off_explanation" msgid="4124926334215228094">"Se le chiamate Wi-Fi sono attive, il tuo telefono può instradare le chiamate tramite reti Wi-Fi o la rete del tuo operatore, in base alle tue preferenze e alla potenza del segnale. Prima di attivare questa funzione, verifica tariffe e ulteriori dettagli con il tuo operatore."</string>
     <string name="home_settings" msgid="212375129455718176">"Home page"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Display"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Audio"</string>
@@ -1104,7 +1118,7 @@
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Modalità di geolocalizzazione"</string>
     <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"Usa reti GPS, Wi-Fi e cellulari per stabilire la posizione"</string>
     <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"Usa reti Wi-Fi e cellulari per stabilire la posizione"</string>
-    <string name="location_mode_sensors_only_description" msgid="7178415350457794366">"Usa GPS per stabilire la posizione"</string>
+    <string name="location_mode_sensors_only_description" msgid="788127681455735699">"Utilizza il GPS per stabilire la posizione"</string>
     <string name="location_network_based" msgid="6010456018401296590">"Posiz. Wi‑Fi e rete cellulare"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Consenti alle app di usare localizzazione Google per stabilire la tua posizione. Saranno raccolti e inviati a Google dati anonimi."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Posizione determinata da Wi‑Fi"</string>
@@ -2349,6 +2363,7 @@
     <string name="keywords_wifi" msgid="8947676711698613374">"wifi connessione rete Wi-Fi"</string>
     <string name="keywords_more_default_sms_app" msgid="895656981962034647">"SMS invio di messaggi messaggi"</string>
     <string name="keywords_more_mobile_networks" msgid="4939725094449606744">"cellulare cell operatore wireless dati 4g 3g 2g lte"</string>
+    <string name="keywords_wifi_calling" msgid="5497735076883598019">"wifi wi-fi chiamata chiamare"</string>
     <string name="keywords_home" msgid="3626170808219458848">"Avvio applicazioni"</string>
     <string name="keywords_display" msgid="6709007669501628320">"display touchscreen"</string>
     <string name="keywords_display_brightness_level" msgid="8923289340474728990">"attenuazione schermo touchscreen batteria"</string>

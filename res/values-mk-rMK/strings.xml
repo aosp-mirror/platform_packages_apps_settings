@@ -40,6 +40,8 @@
     <string name="sms_over_ims_off" msgid="8354792045992793959">"Исклучи СМС над ИСП"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"Потребно е да се вклучи IMS регистрација"</string>
     <string name="ims_reg_required_off" msgid="1720570343422743943">"Потребно е да се вклучи IMS регистрација"</string>
+    <string name="volte_provisioned_flag_on" msgid="6023503159480902956">"Вклучете го знаменцето за обезбедување на VoLTE"</string>
+    <string name="volte_provisioned_flag_off" msgid="6168612015904744405">"Исклучете го знаменцето за обезбедување на VoLTE"</string>
     <string name="lte_ram_dump_on" msgid="8568568019520172177">"Вклучи LTE режим на чистење РАМ"</string>
     <string name="lte_ram_dump_off" msgid="2514507918652378283">"Исклучи LTE чистење на РАМ"</string>
     <string name="radioInfo_menu_viewADN" msgid="8743377494429930831">"Прикажи именик на СИМ"</string>
@@ -751,6 +753,18 @@
     <string name="wifi_hotspot_configure_ap_text_summary" msgid="5618031116920832182">"Пре. ж.м. за Wi‑Fi на AndroidAP WPA2 PSK"</string>
     <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> точка на пристап на пренослива Wi‑Fi"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
+    <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Повикување преку Wi-Fi"</string>
+    <string name="wifi_calling_mode_title" msgid="2164073796253284289">"Параметар за повикување"</string>
+    <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Режим – повикување преку Wi-Fi"</string>
+  <string-array name="wifi_calling_mode_choices">
+    <item msgid="2124257075906188844">"Се претпочита Wi-Fi"</item>
+    <item msgid="5267397515594230396">"Се претпочита мобилна"</item>
+  </string-array>
+  <string-array name="wifi_calling_mode_values">
+    <item msgid="4799585830102342375">"2"</item>
+    <item msgid="1171822231056612021">"1"</item>
+  </string-array>
+    <string name="wifi_calling_off_explanation" msgid="4124926334215228094">"Кога е вклучено повикувањето преку Wi-Fi, телефонот може да насочува повици преку мрежи на Wi-Fi или мрежата на операторот, зависно од параметрите и кој сигнал е посилен. Пред да ја вклучите функцијата, проверете кај операторот за давачки и други детали."</string>
     <string name="home_settings" msgid="212375129455718176">"Почетна страница"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Екран"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Звук"</string>
@@ -1104,7 +1118,7 @@
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Режим на локација"</string>
     <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"Користи мрежи на GPS, на Wi‑Fi и на мобилен за да утврдиш локација"</string>
     <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"Користи мрежи на Wi‑Fi и на мобилен за да утврдиш локација"</string>
-    <string name="location_mode_sensors_only_description" msgid="7178415350457794366">"Користи ГПС за да се утврди локацијата"</string>
+    <string name="location_mode_sensors_only_description" msgid="788127681455735699">"Користи ГПС за да се утврди локацијата"</string>
     <string name="location_network_based" msgid="6010456018401296590">"Лок. на мр. на Wi‑Fi и на моб."</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"За брза процена, овозможи услуга за локација на Google. Анонимните податоци за локација се собираат и се испраќаат на Google."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Локацијата е утврдена со Wi-Fi"</string>
@@ -2349,6 +2363,7 @@
     <string name="keywords_wifi" msgid="8947676711698613374">"wifi wi-fi мрежно поврзување"</string>
     <string name="keywords_more_default_sms_app" msgid="895656981962034647">"текстуална порака испраќање текстуални пораки пораки испраќање пораки"</string>
     <string name="keywords_more_mobile_networks" msgid="4939725094449606744">"мобилна мрежа мобилен оператор безжичен податоци 4g 3g 2g lte"</string>
+    <string name="keywords_wifi_calling" msgid="5497735076883598019">"wifi wi-fi повикај повикување"</string>
     <string name="keywords_home" msgid="3626170808219458848">"стартер"</string>
     <string name="keywords_display" msgid="6709007669501628320">"екран екран на допир"</string>
     <string name="keywords_display_brightness_level" msgid="8923289340474728990">"затемни екран екран на допир батерија"</string>

@@ -40,6 +40,8 @@
     <string name="sms_over_ims_off" msgid="8354792045992793959">"IMS এর উপর SMS বন্ধ করুন"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"IMS নিবন্ধন প্রয়োজনীয়তা চালু করুন"</string>
     <string name="ims_reg_required_off" msgid="1720570343422743943">"IMS নিবন্ধন প্রয়োজনীয়তা বন্ধ করুন"</string>
+    <string name="volte_provisioned_flag_on" msgid="6023503159480902956">"VoLTE প্রস্তুত ফ্ল্যাগ চালু করুন"</string>
+    <string name="volte_provisioned_flag_off" msgid="6168612015904744405">"VoLTE প্রস্তুত ফ্ল্যাগ বন্ধ করুন"</string>
     <string name="lte_ram_dump_on" msgid="8568568019520172177">"lte র‌্যাম ডাম্প চালু করুন"</string>
     <string name="lte_ram_dump_off" msgid="2514507918652378283">"lte র‌্যাম ডাম্প বন্ধ করুন"</string>
     <string name="radioInfo_menu_viewADN" msgid="8743377494429930831">"সিম ঠিকানা বই দেখুন"</string>
@@ -751,6 +753,18 @@
     <string name="wifi_hotspot_configure_ap_text_summary" msgid="5618031116920832182">"AndroidAP WPA2 PSK পোর্টেবল Wi‑Fi হটস্পট"</string>
     <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> পোর্টেবল  Wi‑Fi হটস্পট"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
+    <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Wi-Fi কলিং"</string>
+    <string name="wifi_calling_mode_title" msgid="2164073796253284289">"কলিং পছন্দ"</string>
+    <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Wi-Fi কলিং মোড"</string>
+  <string-array name="wifi_calling_mode_choices">
+    <item msgid="2124257075906188844">"Wi-Fi ব্যবহার করুন"</item>
+    <item msgid="5267397515594230396">"পছন্দের মোবাইল নেটওয়ার্ক"</item>
+  </string-array>
+  <string-array name="wifi_calling_mode_values">
+    <item msgid="4799585830102342375">"২"</item>
+    <item msgid="1171822231056612021">"১"</item>
+  </string-array>
+    <string name="wifi_calling_off_explanation" msgid="4124926334215228094">"Wi-Fi কলিং চালু থাকার সময়ে, আপনার পছন্দ এবং কোন সিগন্যাল বেশী শক্তিশালী তার উপর নির্ভর করে আপনার ফোন Wi-Fi নেটওয়ার্ক বা আপনার পরিষেবা প্রদানকারীর নেটওয়ার্কের মাধ্যমে আপনার কলের রুট তৈরি করে। এই বৈশিষ্ট্যটি চালু করার আগে, আপনার পরিষেবা প্রদানকারীর কাছে ফি-গুলি এবং অন্যান্য বিশদ বিবরণ সম্বন্ধে পরীক্ষা করুন।"</string>
     <string name="home_settings" msgid="212375129455718176">"হোম"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"প্রদর্শন"</string>
     <string name="sound_settings" msgid="5534671337768745343">"শব্দ"</string>
@@ -1104,7 +1118,7 @@
     <string name="location_mode_screen_title" msgid="4528716772270246542">"অবস্থান মোড"</string>
     <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"অবস্থান নির্ণয় করার জন্য GPS, Wi‑Fi ও সেলুলার নেটওয়ার্ক ব্যবহার করুন"</string>
     <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"অবস্থান নির্ণয় করার জন্য Wi‑Fi ও সেলুলার নেটওয়ার্ক ব্যবহার করুন"</string>
-    <string name="location_mode_sensors_only_description" msgid="7178415350457794366">"আপনার অবস্থান নির্ণয় করতে GPS ব্যবহার করুন"</string>
+    <string name="location_mode_sensors_only_description" msgid="788127681455735699">"অবস্থান নির্ণয় করতে GPS ব্যবহার করুন"</string>
     <string name="location_network_based" msgid="6010456018401296590">"Wi‑Fi ও সেলুলার নেটওয়ার্ক অবস্থান"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"দ্রুত আপনার অবস্থান নির্ধারণ করতে অ্যাপ্লিকেশানগুলিকে Google অবস্থান পরিষেবা ব্যবহার করতে দিন। বেনামী অবস্থান ডেটা সংগ্রহ করা হবে এবং Google এ পাঠানো হবে।"</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Wi‑Fi দ্বারা অবস্থান নির্ণয় করা হয়েছে"</string>
@@ -2349,6 +2363,7 @@
     <string name="keywords_wifi" msgid="8947676711698613374">"wifi wi-fi নেটওয়ার্ক সংযোগ"</string>
     <string name="keywords_more_default_sms_app" msgid="895656981962034647">"পাঠ্য বার্তা পাঠ্য রচনা বার্তাগুলি বার্তালাপ"</string>
     <string name="keywords_more_mobile_networks" msgid="4939725094449606744">"সেলুলার ফোন ক্যারিয়ার ওয়্যারলেস ডেটা 4g 3g 2g lte"</string>
+    <string name="keywords_wifi_calling" msgid="5497735076883598019">"wifi wi-fi এর দ্বারা কল হচ্ছে"</string>
     <string name="keywords_home" msgid="3626170808219458848">"লঞ্চার"</string>
     <string name="keywords_display" msgid="6709007669501628320">"স্ক্রীন টাচস্ক্রীন"</string>
     <string name="keywords_display_brightness_level" msgid="8923289340474728990">"হালকা আলো টাচস্ক্রীন ব্যাটারি"</string>

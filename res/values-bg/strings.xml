@@ -40,6 +40,8 @@
     <string name="sms_over_ims_off" msgid="8354792045992793959">"Изключване на SMS през услугата за незабавни съобщения"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"Изисква се включване на регистрацията за незабавни съобщения"</string>
     <string name="ims_reg_required_off" msgid="1720570343422743943">"Изисква се изключване на регистрацията за незабавни съобщения"</string>
+    <string name="volte_provisioned_flag_on" msgid="6023503159480902956">"Включване на сигнала за обезпечаване на VoLTE"</string>
+    <string name="volte_provisioned_flag_off" msgid="6168612015904744405">"Изключване на сигнала за обезпечаване на VoLTE"</string>
     <string name="lte_ram_dump_on" msgid="8568568019520172177">"Включване на разтоварването на lte ram"</string>
     <string name="lte_ram_dump_off" msgid="2514507918652378283">"Изключване на разтоварването на lte ram"</string>
     <string name="radioInfo_menu_viewADN" msgid="8743377494429930831">"Преглед на указателят на SIM картата"</string>
@@ -751,6 +753,18 @@
     <string name="wifi_hotspot_configure_ap_text_summary" msgid="5618031116920832182">"Пренос. точка за достъп AndroidAP с WPA2 PSK"</string>
     <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"Преносима точка за достъп до Wi‑Fi: <xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
+    <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Обаждания през Wi-Fi"</string>
+    <string name="wifi_calling_mode_title" msgid="2164073796253284289">"Предпочитание за обаждания"</string>
+    <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Режим на обаждания през Wi-Fi"</string>
+  <string-array name="wifi_calling_mode_choices">
+    <item msgid="2124257075906188844">"Предпочита се Wi-Fi"</item>
+    <item msgid="5267397515594230396">"Предпочита се клетъчна мрежа"</item>
+  </string-array>
+  <string-array name="wifi_calling_mode_values">
+    <item msgid="4799585830102342375">"2"</item>
+    <item msgid="1171822231056612021">"1"</item>
+  </string-array>
+    <string name="wifi_calling_off_explanation" msgid="4124926334215228094">"Когато функцията за обаждания през Wi-Fi е включена, телефонът ви може да маршрутизира обажданията през Wi-Fi мрежи или мрежата на оператора ви в зависимост от предпочитанието ви и от това, кой сигнал е по-силен. Преди да включите тази функция, потърсете от оператора си информация относно таксите и други подробности."</string>
     <string name="home_settings" msgid="212375129455718176">"Начало"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Дисплей"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Звук"</string>
@@ -1104,7 +1118,7 @@
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Режим за местоположението"</string>
     <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"Използване на GPS, Wi‑Fi и клетъчни мрежи за определяне на местоположението"</string>
     <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"Използване на Wi‑Fi и клетъчни мрежи за определяне на местоположението"</string>
-    <string name="location_mode_sensors_only_description" msgid="7178415350457794366">"Използване на GPS за установяване на местоположението ви"</string>
+    <string name="location_mode_sensors_only_description" msgid="788127681455735699">"Използване на GPS за определяне на местоположението"</string>
     <string name="location_network_based" msgid="6010456018401296590">"Mестоп. от Wi‑Fi и клет. мрежа"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Прилож. да ползват услугата ни за местоп., за да прогнозират по-бързо вашето. Анонимни данни за местоп. ще се събират и изпращат на Google."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Местоположението се определя чрез Wi‑Fi"</string>
@@ -2349,6 +2363,7 @@
     <string name="keywords_wifi" msgid="8947676711698613374">"Връзка с WiFi/Wi-Fi мрежа"</string>
     <string name="keywords_more_default_sms_app" msgid="895656981962034647">"текстово съобщение изпращане на текстови съобщения съобщения"</string>
     <string name="keywords_more_mobile_networks" msgid="4939725094449606744">"клетъчна мрежа клетка оператор безжична мрежа данни 4g 3g 2g lte"</string>
+    <string name="keywords_wifi_calling" msgid="5497735076883598019">"WiFi, Wi-Fi, обаждане, обаждания"</string>
     <string name="keywords_home" msgid="3626170808219458848">"стартов панел"</string>
     <string name="keywords_display" msgid="6709007669501628320">"екран, сензорен екран"</string>
     <string name="keywords_display_brightness_level" msgid="8923289340474728990">"затъмнен екран сензорен екран батерия"</string>

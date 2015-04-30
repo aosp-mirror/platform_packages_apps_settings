@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+/*
+**
+** Copyright 2007 The Android Open Source Project
+**
+** Licensed under the Apache License, Version 2.0 (the "License");
+** you may not use this file except in compliance with the License.
+** You may obtain a copy of the License at
+**
+**     http://www.apache.org/licenses/LICENSE-2.0
+**
+** Unless required by applicable law or agreed to in writing, software
+** distributed under the License is distributed on an "AS IS" BASIS,
+** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+** See the License for the specific language governing permissions and
+** limitations under the License.
+*/
+ -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string-array name="timezone_filters">
+    <item msgid="5296756001147094692">"America"</item>
+    <item msgid="3005562397632768392">"Europe"</item>
+    <item msgid="5696915123093701218">"Africa"</item>
+    <item msgid="4439789052790868249">"Asia"</item>
+    <item msgid="956915953069815961">"Australia"</item>
+    <item msgid="5345178126174698955">"Pacific"</item>
+    <item msgid="8392017019801393511">"All"</item>
+  </string-array>
+  <string-array name="screen_timeout_entries">
+    <item msgid="3342301044271143016">"15 seconds"</item>
+    <item msgid="8881760709354815449">"30 seconds"</item>
+    <item msgid="7589406073232279088">"1 minute"</item>
+    <item msgid="7001195990902244174">"2 minutes"</item>
+    <item msgid="7489864775127957179">"5 minutes"</item>
+    <item msgid="2314124409517439288">"10 minutes"</item>
+    <item msgid="6864027152847611413">"30 minutes"</item>
+  </string-array>
+  <string-array name="dream_timeout_entries">
+    <item msgid="3149294732238283185">"Never"</item>
+    <item msgid="2194151041885903260">"15 seconds"</item>
+    <item msgid="5892295237131074341">"30 seconds"</item>
+    <item msgid="3538441365970038213">"1 minute"</item>
+    <item msgid="412343871668955639">"2 minutes"</item>
+    <item msgid="5076853889688991690">"5 minutes"</item>
+    <item msgid="1903860996174927898">"10 minutes"</item>
+    <item msgid="6415509612413178727">"30 minutes"</item>
+  </string-array>
+  <string-array name="lock_after_timeout_entries">
+    <item msgid="8929270399652145290">"Immediately"</item>
+    <item msgid="6736512735606834431">"5 seconds"</item>
+    <item msgid="8044619388267891375">"15 seconds"</item>
+    <item msgid="1822002388249545488">"30 seconds"</item>
+    <item msgid="8538071621211916519">"1 minute"</item>
+    <item msgid="5663439580228932882">"2 minutes"</item>
+    <item msgid="49888496216106852">"5 minutes"</item>
+    <item msgid="9002737361305019353">"10 minutes"</item>
+    <item msgid="4322676235684793329">"30 minutes"</item>
+  </string-array>
+  <string-array name="entries_font_size">
+    <item msgid="8166647333858618801">"Small"</item>
+    <item msgid="1932071435506638315">"Normal"</item>
+    <item msgid="38373998008112077">"Large"</item>
+    <item msgid="7786168277516233536">"Huge"</item>
+  </string-array>
+  <string-array name="tts_rate_entries">
+    <item msgid="6041212618892492920">"Very slow"</item>
+    <item msgid="2361722960903353554">"Slow"</item>
+    <item msgid="1145554631248513562">"Normal"</item>
+    <item msgid="7553665153391107454">"Fast"</item>
+    <item msgid="1370673569131070146">"Faster"</item>
+    <item msgid="4648206845228970803">"Very fast"</item>
+    <item msgid="4977949754169483251">"Rapid"</item>
+    <item msgid="6106302964845503577">"Very rapid"</item>
+    <item msgid="6800277205640837264">"Fastest"</item>
+  </string-array>
+  <string-array name="tts_pitch_entries">
+    <item msgid="7526050907652687351">"Very low"</item>
+    <item msgid="2692137425242433765">"Low"</item>
+    <item msgid="3332408460740717754">"Normal"</item>
+    <item msgid="4907380534957572531">"High"</item>
+    <item msgid="4699640516390840297">"Very high"</item>
+  </string-array>
+  <string-array name="wifi_status">
+    <item msgid="1922181315419294640"></item>
+    <item msgid="8934131797783724664">"Scanning…"</item>
+    <item msgid="8513729475867537913">"Connecting…"</item>
+    <item msgid="515055375277271756">"Authenticating…"</item>
+    <item msgid="1943354004029184381">"Obtaining IP address…"</item>
+    <item msgid="4221763391123233270">"Connected"</item>
+    <item msgid="624838831631122137">"Suspended"</item>
+    <item msgid="7979680559596111948">"Disconnecting…"</item>
+    <item msgid="1634960474403853625">"Disconnected"</item>
+    <item msgid="746097431216080650">"Unsuccessful"</item>
+    <item msgid="6367044185730295334">"Blocked"</item>
+    <item msgid="503942654197908005">"Temporarily avoiding poor connection"</item>
+  </string-array>
+  <string-array name="wifi_status_with_ssid">
+    <item msgid="7714855332363650812"></item>
+    <item msgid="8878186979715711006">"Scanning…"</item>
+    <item msgid="355508996603873860">"Connecting to <xliff:g id="NETWORK_NAME">%1$s</xliff:g>…"</item>
+    <item msgid="554971459996405634">"Authenticating with <xliff:g id="NETWORK_NAME">%1$s</xliff:g>…"</item>
+    <item msgid="7928343808033020343">"Obtaining IP address from <xliff:g id="NETWORK_NAME">%1$s</xliff:g>…"</item>
+    <item msgid="8937994881315223448">"Connected to <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</item>
+    <item msgid="1330262655415760617">"Suspended"</item>
+    <item msgid="7698638434317271902">"Disconnecting from <xliff:g id="NETWORK_NAME">%1$s</xliff:g>…"</item>
+    <item msgid="197508606402264311">"Disconnected"</item>
+    <item msgid="8578370891960825148">"Unsuccessful"</item>
+    <item msgid="5660739516542454527">"Blocked"</item>
+    <item msgid="1805837518286731242">"Temporarily avoiding poor connection"</item>
+  </string-array>
+    <!-- no translation found for wifi_security:0 (8491993170197127709) -->
+    <!-- no translation found for wifi_security:1 (6524315248437318854) -->
+    <!-- no translation found for wifi_security:2 (1532568756571457140) -->
+    <!-- no translation found for wifi_security:3 (3620707702811709779) -->
+    <!-- no translation found for wifi_security_no_eap:0 (2084555984818107151) -->
+    <!-- no translation found for wifi_security_no_eap:1 (397579322683471524) -->
+    <!-- no translation found for wifi_security_no_eap:2 (1968820975358150484) -->
+    <!-- no translation found for wifi_ap_security:0 (5251664683198623324) -->
+    <!-- no translation found for wifi_ap_security:1 (7989073072260294673) -->
+  <string-array name="wifi_eap_method">
+    <item msgid="1160193392455075561">"PEAP"</item>
+    <item msgid="7981731051382306293">"TLS"</item>
+    <item msgid="2892994535305020162">"TTLS"</item>
+    <item msgid="435667726254379514">"PWD"</item>
+  </string-array>
+  <string-array name="wifi_p2p_wps_setup">
+    <item msgid="5085064298144493867">"Push button"</item>
+    <item msgid="1624323946324499595">"PIN from peer device"</item>
+    <item msgid="5366790421523328066">"PIN from this device"</item>
+  </string-array>
+  <string-array name="wifi_p2p_status">
+    <item msgid="1701505390737218306">"Connected"</item>
+    <item msgid="3189211552661432651">"Invited"</item>
+    <item msgid="3206450250360237549">"Unsuccessful"</item>
+    <item msgid="7785896708926971207">"Available"</item>
+    <item msgid="2330782789550628803">"Out of range"</item>
+  </string-array>
+  <string-array name="bluetooth_visibility_timeout_entries">
+    <item msgid="8151962652413645395">"2 minutes"</item>
+    <item msgid="8675215713017289017">"5 minutes"</item>
+    <item msgid="477015974247590543">"1 hour"</item>
+    <item msgid="5198271470953124739">"Never time out"</item>
+  </string-array>
+  <string-array name="wifi_signal">
+    <item msgid="2245412278046491293">"Poor"</item>
+    <item msgid="5615082285463430971">"Fair"</item>
+    <item msgid="3565079809875324621">"Good"</item>
+    <item msgid="5702329417707689835">"Excellent"</item>
+  </string-array>
+  <string-array name="wifi_sleep_policy_entries">
+    <item msgid="3269131034472904310">"Always"</item>
+    <item msgid="844721238536786870">"Only when plugged in"</item>
+    <item msgid="1986753720941888596">"Never"</item>
+  </string-array>
+  <string-array name="wifi_sleep_policy_entries_wifi_only">
+    <item msgid="2124319326282651391">"Always"</item>
+    <item msgid="7433294150916905997">"Only when plugged in"</item>
+    <item msgid="1390404486722375028">"Never"</item>
+  </string-array>
+  <string-array name="data_usage_data_range">
+    <item msgid="5013973108901348144">"Last 30 days"</item>
+    <item msgid="6600989128423965319">"Set usage cycle..."</item>
+  </string-array>
+  <string-array name="wifi_frequency_band_entries">
+    <item msgid="1013988753804838790">"Automatic"</item>
+    <item msgid="6670588712989942178">"5 GHz only"</item>
+    <item msgid="2715516524973207876">"2.4 GHz only"</item>
+  </string-array>
+  <string-array name="usage_stats_display_order_types">
+    <item msgid="2100172576767439288">"Usage time"</item>
+    <item msgid="4796160515314745154">"Last time used"</item>
+    <item msgid="2502754479975776899">"App name"</item>
+  </string-array>
+  <string-array name="wifi_eap_entries">
+    <item msgid="8615575908717909498">"PEAP"</item>
+    <item msgid="8667872640594311615">"TLS"</item>
+    <item msgid="7182812872984827322">"TTLS"</item>
+    <item msgid="2318274046749286642">"PWD"</item>
+  </string-array>
+  <string-array name="wifi_peap_phase2_entries">
+    <item msgid="2577747762745812488">"None"</item>
+    <item msgid="937786527870979616">"MSCHAPV2"</item>
+    <item msgid="5302613883318643629">"GTC"</item>
+  </string-array>
+  <string-array name="wifi_phase2_entries">
+    <item msgid="1818786254010764570">"None"</item>
+    <item msgid="6189918678874123056">"PAP"</item>
+    <item msgid="1524112260493662517">"MSCHAP"</item>
+    <item msgid="5923246669412752932">"MSCHAPV2"</item>
+    <item msgid="8651992560135239389">"GTC"</item>
+  </string-array>
+  <string-array name="wifi_ip_settings">
+    <item msgid="3906714200993111074">"DHCP"</item>
+    <item msgid="628395202971532382">"Static"</item>
+  </string-array>
+  <string-array name="wifi_proxy_settings">
+    <item msgid="4473276491748503377">"None"</item>
+    <item msgid="8673874894887358090">"Manual"</item>
+    <item msgid="168893341855953140">"Proxy Auto-Config"</item>
+  </string-array>
+  <string-array name="apn_auth_entries">
+    <item msgid="3856896061242872146">"None"</item>
+    <item msgid="5756844015743664882">"PAP"</item>
+    <item msgid="535934025797984365">"CHAP"</item>
+    <item msgid="8383098660619805783">"PAP or CHAP"</item>
+  </string-array>
+  <string-array name="apn_protocol_entries">
+    <item msgid="4852355456199302715">"IPv4"</item>
+    <item msgid="4394161344888484571">"IPv6"</item>
+    <item msgid="8084938354605535381">"IPv4/IPv6"</item>
+  </string-array>
+  <string-array name="bearer_entries">
+    <item msgid="1770285336669531300">"LTE"</item>
+    <item msgid="3044323519470167625">"eHRPD"</item>
+    <item msgid="6848428671997893147">"Unspecified"</item>
+  </string-array>
+  <string-array name="mvno_type_entries">
+    <item msgid="4367119357633573465">"None"</item>
+    <item msgid="6062567900587138000">"SPN"</item>
+    <item msgid="2454085083342423481">"IMSI"</item>
+    <item msgid="2681427309183221543">"GID"</item>
+  </string-array>
+  <string-array name="app_install_location_entries">
+    <item msgid="8151497958991952759">"Internal device storage"</item>
+    <item msgid="3738430123799803530">"Removable SD card"</item>
+    <item msgid="4498124044785815005">"Let the system decide"</item>
+  </string-array>
+  <string-array name="app_ops_categories">
+    <item msgid="6358963769537892925">"Location"</item>
+    <item msgid="255608127647030286">"Personal"</item>
+    <item msgid="4588829735729884491">"Messaging"</item>
+    <item msgid="886742181977884584">"Media"</item>
+    <item msgid="7924928667052300589">"Device"</item>
+  </string-array>
+  <string-array name="app_ops_summaries">
+    <item msgid="4979188868761515915">"coarse location"</item>
+    <item msgid="5789673140227507995">"fine location"</item>
+    <item msgid="1061584358377390581">"GPS"</item>
+    <item msgid="5387405117297558954">"vibrate"</item>
+    <item msgid="3434165993711230924">"read contacts"</item>
+    <item msgid="616161687718081936">"modify contacts"</item>
+    <item msgid="7638002295329050091">"read call log"</item>
+    <item msgid="6546959730920410907">"modify call log"</item>
+    <item msgid="446877710771379667">"read calendar"</item>
+    <item msgid="7674458294386319722">"modify calendar"</item>
+    <item msgid="8281201165558093009">"Wi-Fi scan"</item>
+    <item msgid="8694611243479480497">"notification"</item>
+    <item msgid="7776439107987345446">"cell scan"</item>
+    <item msgid="514615766544675057">"call phone"</item>
+    <item msgid="8181415497109310680">"read SMS"</item>
+    <item msgid="6816551144382117307">"write SMS"</item>
+    <item msgid="4600463921908905030">"receive SMS"</item>
+    <item msgid="5958926493289432745">"receive emergency SMS"</item>
+    <item msgid="4945269495221089540">"receive MMS"</item>
+    <item msgid="5570472453573929087">"receive WAP push"</item>
+    <item msgid="7125408150230860501">"send SMS"</item>
+    <item msgid="7080337936612188061">"read ICC SMS"</item>
+    <item msgid="587124103118495063">"write ICC SMS"</item>
+    <item msgid="2320577158869025503">"modify settings"</item>
+    <item msgid="1545733463471924009">"draw on top"</item>
+    <item msgid="3609046903962454582">"access notifications"</item>
+    <item msgid="4671646036128214513">"camera"</item>
+    <item msgid="1097324338692486211">"record audio"</item>
+    <item msgid="5031552983987798163">"play audio"</item>
+    <item msgid="8374996688066472414">"read clipboard"</item>
+    <item msgid="3045529469061083747">"modify clipboard"</item>
+    <item msgid="5124443975763747838">"media buttons"</item>
+    <item msgid="4547883971364273343">"audio focus"</item>
+    <item msgid="2603878814882344450">"master volume"</item>
+    <item msgid="7136963238377062018">"voice volume"</item>
+    <item msgid="4270236897655923007">"ring volume"</item>
+    <item msgid="6325739889222559394">"media volume"</item>
+    <item msgid="5762123934816216821">"alarm volume"</item>
+    <item msgid="785049718065337473">"notification volume"</item>
+    <item msgid="6700305533746877052">"Bluetooth volume"</item>
+    <item msgid="2029227495214047094">"keep awake"</item>
+    <item msgid="26109888160231211">"monitor location"</item>
+    <item msgid="5753382310468855812">"monitor high power location"</item>
+    <item msgid="3356591542543137332">"get usage stats"</item>
+    <item msgid="3073734345226842233">"mute/unmute microphone"</item>
+    <item msgid="1148142988678569310">"project media"</item>
+    <item msgid="9130014005474445273">"activate VPN"</item>
+  </string-array>
+  <string-array name="app_ops_labels">
+    <item msgid="6602854600289714121">"Location"</item>
+    <item msgid="8677040780775113033">"Location"</item>
+    <item msgid="1660743989948992916">"Location"</item>
+    <item msgid="8791172739860195290">"Vibrate"</item>
+    <item msgid="383413555642128046">"Read contacts"</item>
+    <item msgid="3654594895269697313">"Modify contacts"</item>
+    <item msgid="7928393476362362538">"Read call log"</item>
+    <item msgid="6248591205254641116">"Modify call log"</item>
+    <item msgid="6093344633066170692">"Read calendar"</item>
+    <item msgid="1334886368750347692">"Modify calendar"</item>
+    <item msgid="1638204101698708656">"Location"</item>
+    <item msgid="2154671955760380322">"Post notification"</item>
+    <item msgid="4282477730595931828">"Location"</item>
+    <item msgid="4891423912898525905">"Call phone"</item>
+    <item msgid="2623604824935968113">"Read SMS/MMS"</item>
+    <item msgid="4420177125221176306">"Write SMS/MMS"</item>
+    <item msgid="3986142739951490025">"Receive SMS/MMS"</item>
+    <item msgid="3984213795861739778">"Receive SMS/MMS"</item>
+    <item msgid="3656243523752472788">"Receive SMS/MMS"</item>
+    <item msgid="8105802370238551510">"Receive SMS/MMS"</item>
+    <item msgid="1407766984645388488">"Send SMS/MMS"</item>
+    <item msgid="3527273606643794973">"Read SMS/MMS"</item>
+    <item msgid="4370895547001583812">"Write SMS/MMS"</item>
+    <item msgid="4218544235221631789">"Modify settings"</item>
+    <item msgid="736541391767350377">"Draw on top"</item>
+    <item msgid="5530815681721654194">"Access notifications"</item>
+    <item msgid="781213371706962767">"Camera"</item>
+    <item msgid="1720492593061838172">"Record audio"</item>
+    <item msgid="3493046322001257041">"Play audio"</item>
+    <item msgid="136815868796597058">"Read clipboard"</item>
+    <item msgid="5238692940326972503">"Modify clipboard"</item>
+    <item msgid="5753789168376302997">"Media buttons"</item>
+    <item msgid="3265262911688671938">"Audio focus"</item>
+    <item msgid="2098976479485046797">"Master volume"</item>
+    <item msgid="5660213838861789350">"Voice volume"</item>
+    <item msgid="7983336752371254444">"Ring volume"</item>
+    <item msgid="7878027809189330917">"Media volume"</item>
+    <item msgid="7260546305036218513">"Alarm volume"</item>
+    <item msgid="9103719301075748925">"Notification volume"</item>
+    <item msgid="7025966722295861512">"Bluetooth volume"</item>
+    <item msgid="4665183401128289653">"Keep awake"</item>
+    <item msgid="8584357129746649222">"Location"</item>
+    <item msgid="7669257279311110599">"Location"</item>
+    <item msgid="3459320345690097795">"Get usage stats"</item>
+    <item msgid="1312534577834048535">"Mute/unmute microphone"</item>
+    <item msgid="5906017727368097853">"Project media"</item>
+    <item msgid="2486614710846178542">"Activate VPN"</item>
+  </string-array>
+  <string-array name="long_press_timeout_selector_titles">
+    <item msgid="3511504869290423954">"Short"</item>
+    <item msgid="2560532955514699713">"Medium"</item>
+    <item msgid="2372711992605524591">"Long"</item>
+  </string-array>
+  <string-array name="captioning_typeface_selector_titles">
+    <item msgid="1319652728542138112">"Default"</item>
+    <item msgid="1016452621833735880">"Sans-serif"</item>
+    <item msgid="2496277987934654454">"Sans-serif condensed"</item>
+    <item msgid="7247838127505318669">"Sans-serif monospace"</item>
+    <item msgid="4478414822462359763">"Serif"</item>
+    <item msgid="7502451783483660829">"Serif monospace"</item>
+    <item msgid="639503332147461010">"Casual"</item>
+    <item msgid="7967169925231332424">"Cursive"</item>
+    <item msgid="561832997193039673">"Small capitals"</item>
+  </string-array>
+  <string-array name="captioning_font_size_selector_titles">
+    <item msgid="4800919809575254054">"Very small"</item>
+    <item msgid="6781094565687692782">"Small"</item>
+    <item msgid="8222123259497646551">"Normal"</item>
+    <item msgid="5813217276778560466">"Large"</item>
+    <item msgid="9044232017390975191">"Very large"</item>
+  </string-array>
+  <string-array name="captioning_edge_type_selector_titles">
+    <item msgid="4733815704128258753">"Default"</item>
+    <item msgid="3217099060748617005">"None"</item>
+    <item msgid="7467615139904599420">"Outline"</item>
+    <item msgid="5623165557468608975">"Drop shadow"</item>
+    <item msgid="8088451174058214588">"Raised"</item>
+    <item msgid="3821418743395480313">"Depressed"</item>
+  </string-array>
+  <string-array name="captioning_opacity_selector_titles">
+    <item msgid="7622491218136667566">"25%"</item>
+    <item msgid="2367156416247936773">"50%"</item>
+    <item msgid="5395560410107149298">"75%"</item>
+    <item msgid="8342334626783983353">"100%"</item>
+  </string-array>
+  <string-array name="captioning_preset_selector_titles">
+    <item msgid="7009918361545506251">"Use app defaults"</item>
+    <item msgid="1770533843436933500">"White on black"</item>
+    <item msgid="758587126802411846">"Black on white"</item>
+    <item msgid="1495307195241623402">"Yellow on black"</item>
+    <item msgid="6039700130994371612">"Yellow on blue"</item>
+    <item msgid="7169235156349580064">"Customise"</item>
+  </string-array>
+  <string-array name="select_logd_size_titles">
+    <item msgid="3100534874529240291">"64 K"</item>
+    <item msgid="505611754508988476">"256 K"</item>
+    <item msgid="6361286924268716397">"1 M"</item>
+    <item msgid="6405203239560695266">"4 M"</item>
+    <item msgid="3025431211013424097">"16 M"</item>
+  </string-array>
+  <string-array name="select_logd_size_lowram_titles">
+    <item msgid="524799395770610154">"64 K"</item>
+    <item msgid="3534782711045262344">"256 K"</item>
+    <item msgid="8085867209202153403">"1 M"</item>
+  </string-array>
+  <string-array name="select_logd_size_summaries">
+    <item msgid="7346595473588765019">"64 K per log buffer"</item>
+    <item msgid="2822309747675758628">"256 K per log buffer"</item>
+    <item msgid="6699306198357496731">"1 M per log buffer"</item>
+    <item msgid="5748528643937500349">"4 M per log buffer"</item>
+    <item msgid="1978629051085111592">"16 M per log buffer"</item>
+  </string-array>
+  <string-array name="hdcp_checking_titles">
+    <item msgid="441827799230089869">"Never check"</item>
+    <item msgid="6042769699089883931">"Check for DRM content only"</item>
+    <item msgid="9174900380056846820">"Always check"</item>
+  </string-array>
+  <string-array name="hdcp_checking_summaries">
+    <item msgid="505558545611516707">"Never use HDCP checking"</item>
+    <item msgid="3878793616631049349">"Use HDCP checking for DRM content only"</item>
+    <item msgid="45075631231212732">"Always use HDCP checking"</item>
+  </string-array>
+  <string-array name="window_animation_scale_entries">
+    <item msgid="8134156599370824081">"Animation off"</item>
+    <item msgid="6624864048416710414">"Animation scale .5x"</item>
+    <item msgid="2219332261255416635">"Animation scale 1x"</item>
+    <item msgid="3544428804137048509">"Animation scale 1.5x"</item>
+    <item msgid="3110710404225974514">"Animation scale 2x"</item>
+    <item msgid="4402738611528318731">"Animation scale 5x"</item>
+    <item msgid="6189539267968330656">"Animation scale 10x"</item>
+  </string-array>
+  <string-array name="transition_animation_scale_entries">
+    <item msgid="8464255836173039442">"Animation off"</item>
+    <item msgid="3375781541913316411">"Animation scale .5x"</item>
+    <item msgid="1991041427801869945">"Animation scale 1x"</item>
+    <item msgid="4012689927622382874">"Animation scale 1.5x"</item>
+    <item msgid="3289156759925947169">"Animation scale 2x"</item>
+    <item msgid="7705857441213621835">"Animation scale 5x"</item>
+    <item msgid="6660750935954853365">"Animation scale 10x"</item>
+  </string-array>
+  <string-array name="animator_duration_scale_entries">
+    <item msgid="6039901060648228241">"Animation off"</item>
+    <item msgid="1138649021950863198">"Animation scale .5x"</item>
+    <item msgid="4394388961370833040">"Animation scale 1x"</item>
+    <item msgid="8125427921655194973">"Animation scale 1.5x"</item>
+    <item msgid="3334024790739189573">"Animation scale 2x"</item>
+    <item msgid="3170120558236848008">"Animation scale 5x"</item>
+    <item msgid="1069584980746680398">"Animation scale 10x"</item>
+  </string-array>
+  <string-array name="overlay_display_devices_entries">
+    <item msgid="1606809880904982133">"None"</item>
+    <item msgid="688482401508173818">"720x480 mdpi"</item>
+    <item msgid="6027541158956821790">"720 x 480 mdpi (secure)"</item>
+    <item msgid="8181151155909301030">"1280 x 720 tvdpi"</item>
+    <item msgid="2920655562462493148">"1280 x 720 tvdpi (secure)"</item>
+    <item msgid="8910371271391940941">"1920 x 1080 xhdpi"</item>
+    <item msgid="4171600481380800455">"1920 x 1080 xhdpi (secure)"</item>
+    <item msgid="1937752114395156918">"1280 x 720 tvdpi and 1920 x 1080 xhdpi"</item>
+  </string-array>
+  <string-array name="enable_opengl_traces_entries">
+    <item msgid="3191973083884253830">"None"</item>
+    <item msgid="9089630089455370183">"Logcat"</item>
+    <item msgid="5397807424362304288">"Systrace (Graphics)"</item>
+    <item msgid="1340692776955662664">"Call stack on glGetError"</item>
+  </string-array>
+  <string-array name="show_non_rect_clip_entries">
+    <item msgid="993742912147090253">"Off"</item>
+    <item msgid="675719912558941285">"Draw non-rectangular clip region in blue"</item>
+    <item msgid="1064373276095698656">"Highlight tested drawing commands in green"</item>
+  </string-array>
+  <string-array name="track_frame_time_entries">
+    <item msgid="2193584639058893150">"Off"</item>
+    <item msgid="2751513398307949636">"On screen as bars"</item>
+    <item msgid="1851438178120770973">"In adb shell dumpsys gfxinfo"</item>
+  </string-array>
+  <string-array name="debug_hw_overdraw_entries">
+    <item msgid="8190572633763871652">"Off"</item>
+    <item msgid="7688197031296835369">"Show overdraw areas"</item>
+    <item msgid="2290859360633824369">"Show areas for Deuteranomaly"</item>
+  </string-array>
+  <string-array name="app_process_limit_entries">
+    <item msgid="3401625457385943795">"Standard limit"</item>
+    <item msgid="4071574792028999443">"No background processes"</item>
+    <item msgid="4810006996171705398">"At most, 1 process"</item>
+    <item msgid="8586370216857360863">"At most, 2 processes"</item>
+    <item msgid="836593137872605381">"At most, 3 processes"</item>
+    <item msgid="7899496259191969307">"At most, 4 processes"</item>
+  </string-array>
+  <string-array name="vpn_types_long">
+    <item msgid="2732002039459078847">"PPTP VPN"</item>
+    <item msgid="3799752201662127867">"L2TP/IPSec VPN with preshared keys"</item>
+    <item msgid="4725504331295252103">"L2TP/IPSec VPN with certificates"</item>
+    <item msgid="7526551163264034377">"IPSec VPN with preshared keys and Xauth authentication"</item>
+    <item msgid="8064740940687465039">"IPSec VPN with certificates and Xauth authentication"</item>
+    <item msgid="4946199982372391490">"IPSec VPN with certificates and hybrid authentication"</item>
+  </string-array>
+  <string-array name="vpn_states">
+    <item msgid="8621078286418985762">"Disconnected"</item>
+    <item msgid="6692305604213080515">"Initialising..."</item>
+    <item msgid="8001704909356800092">"Connecting…"</item>
+    <item msgid="4039737283841672166">"Connected"</item>
+    <item msgid="4042143101664725090">"Timeout"</item>
+    <item msgid="7664124146786465092">"Unsuccessful"</item>
+  </string-array>
+  <string-array name="security_settings_premium_sms_values">
+    <item msgid="7389829271787670252">"Ask"</item>
+    <item msgid="5077768429488260031">"Never allow"</item>
+    <item msgid="1417929597727989746">"Always allow"</item>
+  </string-array>
+  <string-array name="ram_states">
+    <item msgid="7088762389498381203">"normal"</item>
+    <item msgid="4517779899383204000">"moderate"</item>
+    <item msgid="406385694840950802">"low"</item>
+    <item msgid="4212263919458209842">"critical"</item>
+  </string-array>
+  <string-array name="entries_zen_mode">
+    <item msgid="816404936744485190">"Off"</item>
+    <item msgid="5656544177755411222">"Limited interruptions"</item>
+    <item msgid="8735337502532332056">"Zero interruptions"</item>
+  </string-array>
+  <string-array name="proc_stats_memory_states">
+    <item msgid="8845855295876909468">"Normal"</item>
+    <item msgid="866544120205026771">"Moderate"</item>
+    <item msgid="7851902244436886890">"Low"</item>
+    <item msgid="3022922196817563960">"Critical"</item>
+  </string-array>
+  <string-array name="proc_stats_process_states">
+    <item msgid="5069825997142785829">"Persistent"</item>
+    <item msgid="5779398140277006695">"Top activity"</item>
+    <item msgid="1439598363694578255">"Important (foreground)"</item>
+    <item msgid="3396458970745718652">"Important (background)"</item>
+    <item msgid="5214825238247511992">"Backup"</item>
+    <item msgid="311372689168254967">"Heavy weight"</item>
+    <item msgid="7438189122367820362">"Service (running)"</item>
+    <item msgid="918687422516982498">"Service (restarting)"</item>
+    <item msgid="6807727069641853029">"Receiver"</item>
+    <item msgid="6782857406100845127">"Home"</item>
+    <item msgid="2860945127596974299">"Last activity"</item>
+    <item msgid="8610560843693675830">"Cached (activity)"</item>
+    <item msgid="4338089220026248848">"Cached (activity client)"</item>
+    <item msgid="6652164677254579050">"Cached (empty)"</item>
+  </string-array>
+  <string-array name="color_picker">
+    <item msgid="7631642672260600032">"Teal"</item>
+    <item msgid="8332294763632946560">"Blue"</item>
+    <item msgid="2023216417616991392">"Indigo"</item>
+    <item msgid="3170497246594232819">"Purple"</item>
+    <item msgid="4608643045752965568">"Pink"</item>
+    <item msgid="6131821495505931173">"Red"</item>
+  </string-array>
+</resources>

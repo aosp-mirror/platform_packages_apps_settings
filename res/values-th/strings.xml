@@ -40,6 +40,8 @@
     <string name="sms_over_ims_off" msgid="8354792045992793959">"ปิดการรับส่ง SMS ผ่าน IMS"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"จำเป็นต้องเปิดการลงทะเบียน IMS"</string>
     <string name="ims_reg_required_off" msgid="1720570343422743943">"จำเป็นต้องปิดการลงทะเบียน IMS"</string>
+    <string name="volte_provisioned_flag_on" msgid="6023503159480902956">"เปิดการตั้งค่าสถานะที่จัดสรรแล้วของ VoLTE"</string>
+    <string name="volte_provisioned_flag_off" msgid="6168612015904744405">"ปิดการตั้งค่าสถานะที่จัดสรรแล้วของ VoLTE"</string>
     <string name="lte_ram_dump_on" msgid="8568568019520172177">"เปิดการดัมพ์หน่วยความจำระบบของ LTE"</string>
     <string name="lte_ram_dump_off" msgid="2514507918652378283">"ปิดการดัมพ์หน่วยความจำระบบของ LTE"</string>
     <string name="radioInfo_menu_viewADN" msgid="8743377494429930831">"ดูสมุดที่อยู่ของซิม"</string>
@@ -348,34 +350,34 @@
     <string name="security_settings_summary" msgid="967393342537986570">"ตั้งค่าตำแหน่งของฉัน ปลดล็อกหน้าจอ ล็อกซิมการ์ด ล็อกที่จัดเก็บข้อมูลรับรอง"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"ตั้งค่าตำแหน่งของฉัน การปลดล็อกหน้าจอ การล็อกที่จัดเก็บข้อมูลรับรอง"</string>
     <string name="security_passwords_title" msgid="2930627259125138363">"รหัสผ่าน"</string>
-    <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"การเข้ารหัส"</string>
-    <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"เข้ารหัสแท็บเล็ต"</string>
-    <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"เข้ารหัสโทรศัพท์"</string>
-    <string name="crypt_keeper_encrypted_summary" msgid="1868233637888132906">"ที่เข้ารหัส"</string>
-    <string name="crypt_keeper_desc" product="tablet" msgid="2876073029767953111">"คุณสามารถเข้ารหัสบัญชี การตั้งค่า แอปที่ดาวน์โหลดและข้อมูลของแอปนั้น สื่อ และไฟล์อื่นๆ หลังจากที่คุณเข้ารหัสแท็บเล็ตแล้ว ในกรณีที่คุณตั้งค่าล็อกหน้าจอไว้ (ที่เป็นรูปแบบ, PIN ตัวเลข หรือรหัสผ่าน) คุณจะต้องปลดล็อกหน้าจอเพื่อถอดรหัสแท็บเล็ตทุกครั้งที่เปิดเครื่อง วิธีการถอดรหัสอีกวิธีหนึ่งคือการรีเซ็ตข้อมูลเป็นค่าเริ่มต้น ซึ่งจะลบข้อมูลทั้งหมด\n\nการเข้ารหัสจะใช้เวลาอย่างน้อย 1 ชั่วโมง คุณต้องดำเนินการเมื่อแท็บเล็ตมีแบตเตอรี่ที่ชาร์จแล้วและเสียบปลั๊กไว้ตลอดขั้นตอนนี้ หากคุณขัดจังหวะการทำงาน ข้อมูลบางส่วนหรือทั้งหมดจะหายไป"</string>
-    <string name="crypt_keeper_desc" product="default" msgid="5573427498609458721">"คุณสามารถเข้ารหัสบัญชี การตั้งค่า แอปที่ดาวน์โหลดและข้อมูลของแอปนั้น สื่อ และไฟล์อื่นๆ หลังจากที่คุณเข้ารหัสโทรศัพท์แล้ว ในกรณีที่คุณตั้งค่าล็อกหน้าจอไว้ (ที่เป็นรูปแบบ, PIN ตัวเลข หรือรหัสผ่าน) คุณจะต้องปลดล็อกหน้าจอเพื่อถอดรหัสโทรศัพท์ทุกครั้งที่เปิดเครื่อง วิธีการถอดรหัสอีกวิธีหนึ่งคือการรีเซ็ตข้อมูลเป็นค่าเริ่มต้น ซึ่งจะลบข้อมูลทั้งหมด\n\nการเข้ารหัสจะใช้เวลาอย่างน้อย 1 ชั่วโมง คุณต้องดำเนินการเมื่อโทรศัพท์มีแบตเตอรี่ที่ชาร์จแล้วและเสียบปลั๊กไว้ตลอดขั้นตอนนี้ หากคุณขัดจังหวะการทำงาน ข้อมูลบางส่วนหรือทั้งหมดจะหายไป"</string>
-    <string name="crypt_keeper_button_text" product="tablet" msgid="1189623490604750854">"เข้ารหัสแท็บเล็ต"</string>
-    <string name="crypt_keeper_button_text" product="default" msgid="2008346408473255519">"เข้ารหัสโทรศัพท์"</string>
+    <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"การเข้ารหัสความปลอดภัย"</string>
+    <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"เข้ารหัสความปลอดภัยให้แท็บเล็ต"</string>
+    <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"เข้ารหัสความปลอดภัย"</string>
+    <string name="crypt_keeper_encrypted_summary" msgid="1868233637888132906">"เข้ารหัสความปลอดภัยแล้ว"</string>
+    <string name="crypt_keeper_desc" product="tablet" msgid="2876073029767953111">"คุณสามารถเข้ารหัสความปลอดภัยให้บัญชี การตั้งค่า แอปที่ดาวน์โหลดและข้อมูลของแอปนั้น สื่อ และไฟล์อื่นๆ หลังจากที่คุณเข้ารหัสความปลอดภัยให้แท็บเล็ตแล้ว ในกรณีที่คุณตั้งค่าล็อกหน้าจอไว้ (ที่เป็นรูปแบบ, PIN ตัวเลข หรือรหัสผ่าน) คุณจะต้องปลดล็อกหน้าจอเพื่อถอดรหัสแท็บเล็ตทุกครั้งที่เปิดเครื่อง วิธีการถอดรหัสอีกวิธีหนึ่งคือการรีเซ็ตข้อมูลเป็นค่าเริ่มต้น ซึ่งจะลบข้อมูลทั้งหมด\n\nการเข้ารหัสความปลอดภัยจะใช้เวลาอย่างน้อย 1 ชั่วโมง คุณต้องดำเนินการเมื่อแท็บเล็ตมีแบตเตอรี่ที่ชาร์จแล้วและเสียบปลั๊กไว้ตลอดขั้นตอนนี้ หากคุณขัดจังหวะการทำงาน ข้อมูลบางส่วนหรือทั้งหมดจะหายไป"</string>
+    <string name="crypt_keeper_desc" product="default" msgid="5573427498609458721">"คุณสามารถเข้ารหัสความปลอดภัยให้บัญชี การตั้งค่า แอปที่ดาวน์โหลดและข้อมูลของแอปนั้น สื่อ และไฟล์อื่นๆ หลังจากที่คุณเข้ารหัสความปลอดภัยแล้ว ในกรณีที่คุณตั้งค่าล็อกหน้าจอไว้ (ที่เป็นรูปแบบ, PIN ตัวเลข หรือรหัสผ่าน) คุณจะต้องปลดล็อกหน้าจอเพื่อถอดรหัสโทรศัพท์ทุกครั้งที่เปิดเครื่อง วิธีการถอดรหัสอีกวิธีหนึ่งคือการรีเซ็ตข้อมูลเป็นค่าเริ่มต้น ซึ่งจะลบข้อมูลทั้งหมด\n\nการเข้ารหัสความปลอดภัยจะใช้เวลาอย่างน้อย 1 ชั่วโมง คุณต้องดำเนินการเมื่อโทรศัพท์มีแบตเตอรี่ที่ชาร์จแล้วและเสียบปลั๊กไว้ตลอดขั้นตอนนี้ หากคุณขัดจังหวะการทำงาน ข้อมูลบางส่วนหรือทั้งหมดจะหายไป"</string>
+    <string name="crypt_keeper_button_text" product="tablet" msgid="1189623490604750854">"เข้ารหัสความปลอดภัยให้แท็บเล็ต"</string>
+    <string name="crypt_keeper_button_text" product="default" msgid="2008346408473255519">"เข้ารหัสความปลอดภัย"</string>
     <string name="crypt_keeper_low_charge_text" msgid="2029407131227814893">"ชาร์จแบตเตอรี่และลองอีกครั้ง"</string>
     <string name="crypt_keeper_unplugged_text" msgid="4785376766063053901">"เสียบที่ชาร์จของคุณ แล้วลองอีกครั้ง"</string>
     <string name="crypt_keeper_dialog_need_password_title" msgid="4058971800557767">"ไม่มี PIN หรือรหัสผ่านล็อกหน้าจอ"</string>
-    <string name="crypt_keeper_dialog_need_password_message" msgid="4071395977297369642">"คุณต้องตั้งค่า PIN หรือรหัสผ่านสำหรับการล็อกหน้าจอก่อนจึงจะเริ่มการเข้ารหัสได้"</string>
-    <string name="crypt_keeper_confirm_encrypt" msgid="736289627726831055">"คุณจำเป็นต้องวาดรูปแบบการปลดล็อกเพื่อยืนยันการเข้ารหัสอุปกรณ์"</string>
-    <string name="crypt_keeper_confirm_title" msgid="5100339496381875522">"เข้ารหัสหรือไม่"</string>
+    <string name="crypt_keeper_dialog_need_password_message" msgid="4071395977297369642">"คุณต้องตั้งค่า PIN หรือรหัสผ่านสำหรับการล็อกหน้าจอก่อนจึงจะเริ่มการเข้ารหัสความปลอดภัยได้"</string>
+    <string name="crypt_keeper_confirm_encrypt" msgid="736289627726831055">"คุณจำเป็นต้องวาดรูปแบบการปลดล็อกเพื่อยืนยันการเข้ารหัสความปลอดภัยให้อุปกรณ์"</string>
+    <string name="crypt_keeper_confirm_title" msgid="5100339496381875522">"เข้ารหัสความปลอดภัยไหม"</string>
     <string name="crypt_keeper_final_desc" product="tablet" msgid="4453629424172409792">"การเข้ารหัสนี้ไม่สามารถย้อนกลับได้และข้อมูลจะสูญหายหากการดำเนินการหยุดชะงัก การเข้ารหัสจะใช้เวลาอย่างน้อยหนึ่งชั่วโมง โดยในระหว่างนั้น แท็บเล็ตจะรีสตาร์ทหลายครั้ง"</string>
-    <string name="crypt_keeper_final_desc" product="default" msgid="5682944380460921880">"การเข้ารหัสนี้ไม่สามารถย้อนกลับได้และข้อมูลจะสูญหายหากการดำเนินการหยุดชะงัก การเข้ารหัสจะใช้เวลาอย่างน้อยหนึ่งชั่วโมง โดยในระหว่างนั้น โทรศัพท์จะรีสตาร์ทหลายครั้ง"</string>
-    <string name="crypt_keeper_setup_title" msgid="1783951453124244969">"กำลังเข้ารหัส"</string>
-    <string name="crypt_keeper_setup_description" product="tablet" msgid="6689952371032099350">"รอสักครู่ขณะกำลังเข้ารหัสแท็บเล็ตของคุณ เสร็จสมบูรณ์ <xliff:g id="PERCENT">^1</xliff:g>"</string>
-    <string name="crypt_keeper_setup_description" product="default" msgid="951918761585534875">"รอสักครู่ขณะกำลังเข้ารหัสโทรศัพท์ของคุณ เสร็จสมบูรณ์ <xliff:g id="PERCENT">^1</xliff:g>%"</string>
-    <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="1655047311546745695">"โปรดรอสักครู่ขณะเข้ารหัสแท็บเล็ต เหลืออีก <xliff:g id="DURATION">^1</xliff:g>"</string>
-    <string name="crypt_keeper_setup_time_remaining" product="default" msgid="1862964662304683072">"โปรดรอสักครู่ขณะเข้ารหัสโทรศัพท์ เหลืออีก <xliff:g id="DURATION">^1</xliff:g>"</string>
+    <string name="crypt_keeper_final_desc" product="default" msgid="5682944380460921880">"การเข้ารหัสความปลอดภัยนี้ไม่สามารถย้อนกลับได้และข้อมูลจะสูญหายหากการดำเนินการหยุดชะงัก การเข้ารหัสจะใช้เวลาอย่างน้อยหนึ่งชั่วโมง โดยในระหว่างนั้น โทรศัพท์จะรีสตาร์ทหลายครั้ง"</string>
+    <string name="crypt_keeper_setup_title" msgid="1783951453124244969">"กำลังเข้ารหัสความปลอดภัย"</string>
+    <string name="crypt_keeper_setup_description" product="tablet" msgid="6689952371032099350">"รอสักครู่ขณะกำลังเข้ารหัสความปลอดภัยให้แท็บเล็ตของคุณ เสร็จสมบูรณ์ไปแล้ว <xliff:g id="PERCENT">^1</xliff:g>"</string>
+    <string name="crypt_keeper_setup_description" product="default" msgid="951918761585534875">"รอสักครู่ขณะกำลังเข้ารหัสความปลอดภัยให้คุณ เสร็จสมบูรณ์ไปแล้ว <xliff:g id="PERCENT">^1</xliff:g>%"</string>
+    <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="1655047311546745695">"โปรดรอสักครู่ขณะเข้ารหัสความปลอดภัยให้แท็บเล็ต เหลืออีก <xliff:g id="DURATION">^1</xliff:g>"</string>
+    <string name="crypt_keeper_setup_time_remaining" product="default" msgid="1862964662304683072">"โปรดรอสักครู่ขณะเข้ารหัสความปลอดภัย เหลืออีก <xliff:g id="DURATION">^1</xliff:g>"</string>
     <string name="crypt_keeper_force_power_cycle" product="tablet" msgid="556504311511212648">"ปิดแท็บเล็ตแล้วเปิดอีกครั้งเพื่อปลดล็อก"</string>
     <string name="crypt_keeper_force_power_cycle" product="default" msgid="1794353635603020327">"ปิดโทรศัพท์แล้วเปิดอีกครั้งเพื่อปลดล็อก"</string>
     <string name="crypt_keeper_warn_wipe" msgid="2738374897337991667">"คำเตือน: ระบบจะล้างข้อมูลในอุปกรณ์หลังจากปลดล็อกไม่สำเร็จอีก <xliff:g id="COUNT">^1</xliff:g> ครั้ง!"</string>
     <string name="crypt_keeper_enter_password" msgid="2223340178473871064">"พิมพ์รหัสผ่านของคุณ"</string>
-    <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"การเข้ารหัสไม่สำเร็จ"</string>
-    <string name="crypt_keeper_failed_summary" product="tablet" msgid="4478225241476039013">"การเข้ารหัสถูกขัดจังหวะและไม่สามารถดำเนินการให้เสร็จสิ้น คุณจึงไม่สามารถเข้าถึงข้อมูลในแท็บเล็ตได้อีกต่อไป\n\nในการใช้งานแท็บเล็ตต่อ คุณต้องรีเซ็ตข้อมูลเป็นค่าเริ่มต้น เมื่อคุณตั้งค่าแท็บเล็ตหลังจากรีเซ็ตแล้ว คุณจะสามารถกู้คืนข้อมูลทั้งหมดที่มีการสำรองไว้ในบัญชี Google ของคุณได้"</string>
-    <string name="crypt_keeper_failed_summary" product="default" msgid="3083477162766772532">"การเข้ารหัสถูกขัดจังหวะและไม่สามารถดำเนินการให้เสร็จสิ้น คุณจึงไม่สามารถเข้าถึงข้อมูลในโทรศัพท์ได้อีกต่อไป\n\nในการใช้งานโทรศัพท์ต่อ คุณต้องรีเซ็ตข้อมูลเป็นค่าเริ่มต้น เมื่อคุณตั้งค่าโทรศัพท์หลังจากรีเซ็ตแล้ว คุณจะสามารถกู้คืนข้อมูลทั้งหมดที่มีการสำรองไว้ในบัญชี Google ของคุณได้"</string>
+    <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"การเข้ารหัสความปลอดภัยไม่สำเร็จ"</string>
+    <string name="crypt_keeper_failed_summary" product="tablet" msgid="4478225241476039013">"การเข้ารหัสความปลอดภัยถูกขัดจังหวะและไม่สามารถดำเนินการให้เสร็จสิ้น คุณจึงไม่สามารถเข้าถึงข้อมูลในแท็บเล็ตได้อีกต่อไป\n\nในการใช้งานแท็บเล็ตต่อ คุณต้องรีเซ็ตข้อมูลเป็นค่าเริ่มต้น เมื่อคุณตั้งค่าแท็บเล็ตหลังจากรีเซ็ตแล้ว คุณจะสามารถกู้คืนข้อมูลทั้งหมดที่มีการสำรองไว้ในบัญชี Google ของคุณได้"</string>
+    <string name="crypt_keeper_failed_summary" product="default" msgid="3083477162766772532">"การเข้ารหัสความปลอดภัยถูกขัดจังหวะและไม่สามารถดำเนินการให้เสร็จสิ้น คุณจึงไม่สามารถเข้าถึงข้อมูลในโทรศัพท์ได้อีกต่อไป\n\nในการใช้งานโทรศัพท์ต่อ คุณต้องรีเซ็ตข้อมูลเป็นค่าเริ่มต้น เมื่อคุณตั้งค่าโทรศัพท์หลังจากรีเซ็ตแล้ว คุณจะสามารถกู้คืนข้อมูลทั้งหมดที่มีการสำรองไว้ในบัญชี Google ของคุณได้"</string>
     <string name="crypt_keeper_data_corrupt_title" msgid="8759119849089795751">"การถอดรหัสล้มเหลว"</string>
     <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="3775740783651700375">"รหัสผ่านที่คุณป้อนถูกต้อง แต่ปรากฏว่ามีข้อมูลเสียหาย \n\nหากต้องการใช้แท็บเล็ตต่อ คุณต้องรีเซ็ตเครื่องเป็นค่าเริ่มต้นจากโรงงาน เมื่อคุณตั้งค่าแท็บเล็ตหลังรีเซ็ตแล้ว คุณจะสามารถกู้คืนข้อมูลที่ได้สำรองไว้ในบัญชี Google ได้"</string>
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="6898436151871328007">"รหัสผ่านที่คุณป้อนถูกต้อง แต่ปรากฏว่ามีข้อมูลเสียหาย \n\nหากต้องการใช้โทรศัพท์ต่อ คุณต้องรีเซ็ตเครื่องเป็นค่าเริ่มต้นจากโรงงาน เมื่อคุณตั้งค่าโทรศัพท์หลังรีเซ็ตแล้ว คุณจะสามารถกู้คืนข้อมูลที่ได้สำรองไว้ในบัญชี Google ได้"</string>
@@ -751,6 +753,18 @@
     <string name="wifi_hotspot_configure_ap_text_summary" msgid="5618031116920832182">"Wi-Fi ฮอตสปอต AndroidAP WPA2 PSK แบบพกพา"</string>
     <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> WiFi ฮอตสปอตแบบพกพา"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
+    <string name="wifi_calling_settings_title" msgid="4102921303993404577">"การโทรผ่าน Wi-Fi"</string>
+    <string name="wifi_calling_mode_title" msgid="2164073796253284289">"ค่ากำหนดในการโทร"</string>
+    <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"โหมดการโทรผ่าน Wi-Fi"</string>
+  <string-array name="wifi_calling_mode_choices">
+    <item msgid="2124257075906188844">"ต้องการใช้ Wi-Fi"</item>
+    <item msgid="5267397515594230396">"ต้องการใช้เครือข่ายมือถือ"</item>
+  </string-array>
+  <string-array name="wifi_calling_mode_values">
+    <item msgid="4799585830102342375">"2"</item>
+    <item msgid="1171822231056612021">"1"</item>
+  </string-array>
+    <string name="wifi_calling_off_explanation" msgid="4124926334215228094">"เมื่อเปิดการโทรผ่าน Wi-Fi โทรศัพท์จะสามารถวางเส้นทางสายเรียกผ่านเครือข่าย Wi-Fi หรือเครือข่ายของผู้ให้บริการของคุณได้ ทั้งนี้ขึ้นอยู่กับค่ากำหนดของคุณและสัญญาณฝั่งที่แรงกว่า โปรดสอบถามค่าธรรมเนียมและรายละเอียดอื่นๆ กับผู้ให้บริการก่อนที่จะเปิดคุณลักษณะนี้"</string>
     <string name="home_settings" msgid="212375129455718176">"หน้าแรก"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"แสดง"</string>
     <string name="sound_settings" msgid="5534671337768745343">"เสียง"</string>
@@ -1104,7 +1118,7 @@
     <string name="location_mode_screen_title" msgid="4528716772270246542">"โหมดตำแหน่ง"</string>
     <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"ใช้ GPS, Wi-Fi และเครือข่ายมือถือเพื่อระบุตำแหน่ง"</string>
     <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"ใช้ Wi-Fi และเครือข่ายมือถือเพื่อระบุตำแหน่ง"</string>
-    <string name="location_mode_sensors_only_description" msgid="7178415350457794366">"ใช้ GPS เพื่อหาตำแหน่งของคุณ"</string>
+    <string name="location_mode_sensors_only_description" msgid="788127681455735699">"ใช้ GPS เพื่อระบุตำแหน่ง"</string>
     <string name="location_network_based" msgid="6010456018401296590">"ตำแหน่ง Wi-Fi และเครือข่าย"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"ให้แอปต่างๆ ใช้บริการระบุตำแหน่งของ Google เพื่อระบุตำแหน่งโดยประมาณของคุณรวดเร็วยิ่งขึ้น โดยจะมีการรวบรวมและส่งข้อมูลตำแหน่งที่ไม่ระบุชื่อให้ Google"</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"ตำแหน่งที่กำหนดโดย WiFi"</string>
@@ -2349,6 +2363,7 @@
     <string name="keywords_wifi" msgid="8947676711698613374">"การเชื่อมต่อเครือข่าย wifi wi-fi"</string>
     <string name="keywords_more_default_sms_app" msgid="895656981962034647">"ข้อความ การส่งข้อความ ข้อความ การส่งข้อความ"</string>
     <string name="keywords_more_mobile_networks" msgid="4939725094449606744">"มือถือ ผู้ให้บริการมือถือ ไร้สาย ข้อมูล 4g 3g 2g lte"</string>
+    <string name="keywords_wifi_calling" msgid="5497735076883598019">"WiFi Wi-Fi โทร การโทร"</string>
     <string name="keywords_home" msgid="3626170808219458848">"Launcher"</string>
     <string name="keywords_display" msgid="6709007669501628320">"หน้าจอ หน้าจอสัมผัส"</string>
     <string name="keywords_display_brightness_level" msgid="8923289340474728990">"หน้าจอสลัว หน้าจอสัมผัส แบตเตอรี่"</string>
@@ -2492,7 +2507,7 @@
     <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"ใช้มุมมองแนวนอน"</string>
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"ใช้การวางแนวเดิม"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"ข้อมูล IMEI"</string>
-    <string name="encryption_interstitial_header" msgid="5790264941172726485">"การเข้ารหัส"</string>
+    <string name="encryption_interstitial_header" msgid="5790264941172726485">"การเข้ารหัสความปลอดภัย"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"ต่อไป"</string>
     <string name="encryption_interstitial_message_pin" msgid="3705622704667901162">"นอกจากนี้คุณยังสามารถปกป้องอุปกรณ์เครื่องนี้เพิ่มเติมโดยกำหนดให้ต้องป้อน PIN ก่อนที่อุปกรณ์จะเริ่มต้นขึ้น อุปกรณ์จะไม่สามารถรับสาย ข้อความ หรือการแจ้งเตือน รวมถึงเสียงเตือนได้จนกว่าอุปกรณ์จะเริ่มต้นขึ้น \n\nซึ่งจะช่วยปกป้องข้อมูลในอุปกรณ์ที่สูญหายหรือถูกขโมย"</string>
     <string name="encryption_interstitial_message_pattern" msgid="2944051427890104942">"นอกจากนี้คุณยังสามารถปกป้องอุปกรณ์เครื่องนี้เพิ่มเติมโดยกำหนดให้ต้องป้อนรูปแบบก่อนที่อุปกรณ์จะเริ่มต้นขึ้น อุปกรณ์จะไม่สามารถรับสาย ข้อความ หรือการแจ้งเตือน รวมถึงเสียงเตือนได้จนกว่าอุปกรณ์จะเริ่มต้นขึ้น \n\nซึ่งจะช่วยปกป้องข้อมูลในอุปกรณ์ที่สูญหายหรือถูกขโมย"</string>

@@ -40,10 +40,12 @@
     <string name="sms_over_ims_off" msgid="8354792045992793959">"Tắt SMS qua IMS"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"Yêu cầu bật đăng ký IMS"</string>
     <string name="ims_reg_required_off" msgid="1720570343422743943">"Yêu cầu tắt đăng ký IMS"</string>
+    <string name="volte_provisioned_flag_on" msgid="6023503159480902956">"Bật cờ cấp phép VoLTE"</string>
+    <string name="volte_provisioned_flag_off" msgid="6168612015904744405">"Tắt cờ cấp phép VoLTE"</string>
     <string name="lte_ram_dump_on" msgid="8568568019520172177">"Bật lỗi ram lte"</string>
     <string name="lte_ram_dump_off" msgid="2514507918652378283">"Tắt lỗi ram lte"</string>
     <string name="radioInfo_menu_viewADN" msgid="8743377494429930831">"Xem sổ địa chỉ trên SIM"</string>
-    <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"Xem Số Quay định sẵn"</string>
+    <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"Xem Số quay định sẵn"</string>
     <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"Xem Số Quay số Dịch vụ"</string>
     <string name="radioInfo_menu_getPDP" msgid="560610293888406317">"Nhận danh sách PDP"</string>
     <string name="radioInfo_service_in" msgid="1915416319177520020">"Đang sử dụng"</string>
@@ -751,6 +753,18 @@
     <string name="wifi_hotspot_configure_ap_text_summary" msgid="5618031116920832182">"Điểm phát sóng Wi‑Fi DĐ AndroidAP WPA2 PSK"</string>
     <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"Điểm phát sóng Wi‑Fi di động <xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
+    <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Gọi qua Wi-Fi"</string>
+    <string name="wifi_calling_mode_title" msgid="2164073796253284289">"Tùy chọn cuộc gọi"</string>
+    <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Chế độ gọi qua Wi-Fi"</string>
+  <string-array name="wifi_calling_mode_choices">
+    <item msgid="2124257075906188844">"Ưu tiên Wi-Fi"</item>
+    <item msgid="5267397515594230396">"Ưu tiên mạng di động"</item>
+  </string-array>
+  <string-array name="wifi_calling_mode_values">
+    <item msgid="4799585830102342375">"2"</item>
+    <item msgid="1171822231056612021">"1"</item>
+  </string-array>
+    <string name="wifi_calling_off_explanation" msgid="4124926334215228094">"Khi gọi qua Wi-Fi bật, điện thoại của bạn có thể định tuyến cuộc gọi qua mạng Wi-Fi hoặc mạng của nhà cung cấp dịch vụ, tùy thuộc vào tùy chọn của bạn và tín hiệu nào mạnh hơn. Trước khi bật tính năng này, hãy hỏi nhà cung cấp dịch vụ của bạn về phí và các chi tiết khác."</string>
     <string name="home_settings" msgid="212375129455718176">"Trang chủ"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Hiển thị"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Âm thanh"</string>
@@ -1104,7 +1118,7 @@
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Chế độ vị trí"</string>
     <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"Sử dụng mạng GPS, Wi-Fi và di động để xác định vị trí"</string>
     <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"Sử dụng mạng di động và Wi-Fi để xác định vị trí"</string>
-    <string name="location_mode_sensors_only_description" msgid="7178415350457794366">"Sử dụng GPS để xác định vị trí của bạn"</string>
+    <string name="location_mode_sensors_only_description" msgid="788127681455735699">"Sử dụng GPS để xác định vị trí"</string>
     <string name="location_network_based" msgid="6010456018401296590">"Vị trí mạng di động và Wi‑Fi"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Cho phép ứng dụng dùng DV vị trí của Google để ước đoán vị trí nhanh hơn. Dữ liệu vị trí ẩn danh sẽ được thu thập và gửi tới Google."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Vị trí được xác định bằng Wi‑Fi"</string>
@@ -2349,6 +2363,7 @@
     <string name="keywords_wifi" msgid="8947676711698613374">"wifi wi-fi kết nối mạng"</string>
     <string name="keywords_more_default_sms_app" msgid="895656981962034647">"tin nhắn văn bản nhắn tin tin nhắn nhắn tin"</string>
     <string name="keywords_more_mobile_networks" msgid="4939725094449606744">"di động điện thoại nhà cung cấp không dây dữ liệu 4g 3g 2g lte"</string>
+    <string name="keywords_wifi_calling" msgid="5497735076883598019">"gọi điện qua Wi-Fi"</string>
     <string name="keywords_home" msgid="3626170808219458848">"trình chạy"</string>
     <string name="keywords_display" msgid="6709007669501628320">"màn hình màn hình cảm ứng"</string>
     <string name="keywords_display_brightness_level" msgid="8923289340474728990">"làm mờ màn hình màn hình cảm ứng pin"</string>

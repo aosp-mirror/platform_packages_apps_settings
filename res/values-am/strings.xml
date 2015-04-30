@@ -40,6 +40,8 @@
     <string name="sms_over_ims_off" msgid="8354792045992793959">"SMS በ IMS ላይ አጥፋ"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"የሚያስፈልገውን የ IMS ምዝገባ አብራ"</string>
     <string name="ims_reg_required_off" msgid="1720570343422743943">"የሚያስፈልገውን የIMS ምዝገባ አጥፋ"</string>
+    <string name="volte_provisioned_flag_on" msgid="6023503159480902956">"በVoLTE የተያዘ ጠቁምን አብራ"</string>
+    <string name="volte_provisioned_flag_off" msgid="6168612015904744405">"በVoLTE የተያዘ ጠቁምን አጥፋ"</string>
     <string name="lte_ram_dump_on" msgid="8568568019520172177">"የlte ram ማከማከቻ አብራ"</string>
     <string name="lte_ram_dump_off" msgid="2514507918652378283">"የlte ram ማከማከቻ አጥፋ"</string>
     <string name="radioInfo_menu_viewADN" msgid="8743377494429930831">"የSIM ማስታወሻ ደብተር ዕይ"</string>
@@ -751,6 +753,18 @@
     <string name="wifi_hotspot_configure_ap_text_summary" msgid="5618031116920832182">"የAndroidAP WPA2 PSK ተንቀሳቃሽ የWi‑Fi መገናኛ ነጥብ"</string>
     <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> ተንቀሳቃሽ የWi‑Fi መገናኛ ነጥብ"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"Android ድረስ ነጥብ"</string>
+    <string name="wifi_calling_settings_title" msgid="4102921303993404577">"የWi-Fi ጥሪ ማድረጊያ"</string>
+    <string name="wifi_calling_mode_title" msgid="2164073796253284289">"የጥሪ ምርጫ"</string>
+    <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Wi-Fi ጥሪ ሁነታ"</string>
+  <string-array name="wifi_calling_mode_choices">
+    <item msgid="2124257075906188844">"Wi-Fi ተመራጭ"</item>
+    <item msgid="5267397515594230396">"የተንቀሳቃሽ ስልክ ተመራጭ"</item>
+  </string-array>
+  <string-array name="wifi_calling_mode_values">
+    <item msgid="4799585830102342375">"2"</item>
+    <item msgid="1171822231056612021">"1"</item>
+  </string-array>
+    <string name="wifi_calling_off_explanation" msgid="4124926334215228094">"የWi-Fi ጥሪ ሲበራ የእርስዎ ስልክ በምርጫዎ እና በየትኛው ይበልጥ ጠንካራ እንደሆነ የሚወሰን ሆኖ ጥሪዎችን በWi-Fi አውታረ መረቦች ወይም በአገልግሎት አቅራቢዎ አውታረ መረብ በኩል ሊያዞር ይችላል። ይህን ባህሪ ከማብራትዎ በፊት ክፍያዎችን እና ሌሎች ዝርዝሮችን በተመለከተ አገልግሎት አቅራቢዎን ያነጋግሩ።"</string>
     <string name="home_settings" msgid="212375129455718176">"መነሻ"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"አሳይ"</string>
     <string name="sound_settings" msgid="5534671337768745343">"ድምፅ"</string>
@@ -774,7 +788,7 @@
     <string name="lock_sounds_enable_title" msgid="450098505659399520">"ማያ ቆልፍ ድምፆች"</string>
     <string name="haptic_feedback_enable_title" msgid="2438293710530828760">"ሲነካ ንዘር"</string>
     <string name="audio_record_proc_title" msgid="4271091199976457534">"ጫጫታ መቀነሻ"</string>
-    <string name="volume_media_description" msgid="7949355934788807863">"ሙዚቃ፣ ቪዲዮ፣ ጨዋታዎች &amp; ሌላ ማህደረ መረጃ"</string>
+    <string name="volume_media_description" msgid="7949355934788807863">"ሙዚቃ፣ ቪድዮ፣ ጨዋታዎች &amp; ሌላ ማህደረ መረጃ"</string>
     <string name="volume_ring_description" msgid="5936851631698298989">"የጥሪ ድምፅ እና ማሳወቂያዎች"</string>
     <string name="volume_notification_description" msgid="5810902320215328321">"ማሳወቂያዎች"</string>
     <string name="volume_alarm_description" msgid="8322615148532654841">"ማንቂያ ደወሎች"</string>
@@ -998,7 +1012,7 @@
     <string name="menu_delete" msgid="6981294422841124659">"APN ሰርዝ"</string>
     <string name="menu_new" msgid="3014205883303921729">"አዲስ APN"</string>
     <string name="menu_save" msgid="8109345640668285399">"አስቀምጥ"</string>
-    <string name="menu_cancel" msgid="2194502410474697474">"አስወግድ"</string>
+    <string name="menu_cancel" msgid="2194502410474697474">"ጣለው"</string>
     <string name="error_title" msgid="7631322303341024692"></string>
     <string name="error_name_empty" msgid="8418502878620394756">"የስም መስክ ባዶ ሊሆን አይችልም"</string>
     <string name="error_apn_empty" msgid="6056233831214537267">"APN ባዶ መሆን አይችልም።"</string>
@@ -1104,7 +1118,7 @@
     <string name="location_mode_screen_title" msgid="4528716772270246542">"የአካባቢ ሁነታ"</string>
     <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"አካባቢ ለማወቅ ጂፒኤስ፣ Wi‑Fi እና የተንቀሳቃሽ ስልክ አውታረ መረቦችን ተጠቀም"</string>
     <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"አካባቢ ለማወቅ Wi‑Fi እና የተንቀሳቃሽ ስልክ አውታረ መረቦችን ተጠቀም"</string>
-    <string name="location_mode_sensors_only_description" msgid="7178415350457794366">"የእርስዎን አካባቢ ለማወቅ ጂ ፒ ኤስ ይጠቀሙ"</string>
+    <string name="location_mode_sensors_only_description" msgid="788127681455735699">"አካባቢን ለማወቅ ጂ ፒ ኤስ ተጠቀም"</string>
     <string name="location_network_based" msgid="6010456018401296590">"የWi‑Fi እና የተንቀሳቃሽ ስልክ አውታረ መረብ አካባቢ"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"መተግበሪያዎች አካባቢዎትን በበለጠ ፍጥነት እንዲገምቱ የGoogle የአካባቢ አገልግሎትን ይጠቀሙ። ስም አልባ የአካባቢ ውሂብ ተሰብስቦ ወደ Google ይላካል።"</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"አካባቢ በWi-Fi ይታወቃል"</string>
@@ -1655,7 +1669,7 @@
     <string name="usage_type_data_wifi_send" msgid="1847552143597396162">"የWi‑Fi ጥቅሎች ተልከዋል"</string>
     <string name="usage_type_data_wifi_recv" msgid="5678475911549183829">"የWi‑Fi ጥቅሎች መጥተዋል"</string>
     <string name="usage_type_audio" msgid="6957269406840886290">"ኦዲዮ"</string>
-    <string name="usage_type_video" msgid="4295357792078579944">"ቪዲዮ"</string>
+    <string name="usage_type_video" msgid="4295357792078579944">"ቪድዮ"</string>
     <string name="usage_type_on_time" msgid="3351200096173733159">"በሰዓቱ"</string>
     <string name="usage_type_no_coverage" msgid="3797004252954385053">"ጊዜ ያለሲግናል"</string>
     <string name="usage_type_total_battery_capacity" msgid="3798285287848675346">"አጠቃላይ የባትሪ አቅም"</string>
@@ -2349,6 +2363,7 @@
     <string name="keywords_wifi" msgid="8947676711698613374">"የwifi wi-fi አውታረ መረብ ግንኙነት"</string>
     <string name="keywords_more_default_sms_app" msgid="895656981962034647">"ጽሑፍ መልዕክት መላክ መልዕክቶች መልዕክት አላላክ"</string>
     <string name="keywords_more_mobile_networks" msgid="4939725094449606744">"የተንቀሳቃሽ ስልክ ድምጸ ተያያዥ ሞደም ውሂብ 4ጂ 3ጂ 2ጂ lte"</string>
+    <string name="keywords_wifi_calling" msgid="5497735076883598019">"wifi wi-fi ጥሪ መደወል"</string>
     <string name="keywords_home" msgid="3626170808219458848">"አስጀማሪ"</string>
     <string name="keywords_display" msgid="6709007669501628320">"ማያ ገጽ ተነኪ ማያ ገጽ"</string>
     <string name="keywords_display_brightness_level" msgid="8923289340474728990">"አጨልም ማያንካ ባትሪ"</string>

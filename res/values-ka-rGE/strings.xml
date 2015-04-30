@@ -40,6 +40,8 @@
     <string name="sms_over_ims_off" msgid="8354792045992793959">"SMS-ის გამორთვა IMS-ის საშუალებით"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"აუცილებელი IMS რეგისტრაციის ჩართვა"</string>
     <string name="ims_reg_required_off" msgid="1720570343422743943">"აუცილებელი IMS რეგისტრაციის გამორთვა"</string>
+    <string name="volte_provisioned_flag_on" msgid="6023503159480902956">"VoLTE მოწოდების დროშის ჩართვა"</string>
+    <string name="volte_provisioned_flag_off" msgid="6168612015904744405">"VoLTE მოწოდების დროშის გამორთვა"</string>
     <string name="lte_ram_dump_on" msgid="8568568019520172177">"lte ოპერატიული მეხსიერების დამპირების ჩართვა"</string>
     <string name="lte_ram_dump_off" msgid="2514507918652378283">"გამორთე lte ოპერატიული მეხსიერების დამპირება"</string>
     <string name="radioInfo_menu_viewADN" msgid="8743377494429930831">"SIM მისამართების წიგნის დათვალიერება"</string>
@@ -751,6 +753,18 @@
     <string name="wifi_hotspot_configure_ap_text_summary" msgid="5618031116920832182">"AndroidAP WPA2 PSK პორტაბელური Wi‑Fi უსადენო ქსელი"</string>
     <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> პორტატიული Wi‑Fi hotspot"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
+    <string name="wifi_calling_settings_title" msgid="4102921303993404577">"დარეკვა Wi-Fi-ს მეშვეობით"</string>
+    <string name="wifi_calling_mode_title" msgid="2164073796253284289">"ზარის პრეფერენციები"</string>
+    <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Wi-Fi-თი დარეკვის რეჟიმი"</string>
+  <string-array name="wifi_calling_mode_choices">
+    <item msgid="2124257075906188844">"სასურველია Wi-Fi"</item>
+    <item msgid="5267397515594230396">"სასურველია ფიჭური ინტერნეტი"</item>
+  </string-array>
+  <string-array name="wifi_calling_mode_values">
+    <item msgid="4799585830102342375">"2"</item>
+    <item msgid="1171822231056612021">"1"</item>
+  </string-array>
+    <string name="wifi_calling_off_explanation" msgid="4124926334215228094">"როდესაც Wi-Fi ზარი ჩართულია, თქვენს ტელეფონს შეუძლია გადაამისამართოს ზარი Wi-Fi ან თქვენს ოპერატორ ქსელზე, თქვენი პრეფერენციებისა და სიგნალის სიძლიერის მიხედვით. ამ ფუნქციის ჩართვამდე, დააზუსტეთ თქვენს ოპერატორთან შესაძლო თანხები და სხვა დეტალები."</string>
     <string name="home_settings" msgid="212375129455718176">"სახლი"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"ეკრანი"</string>
     <string name="sound_settings" msgid="5534671337768745343">"ხმა"</string>
@@ -1104,7 +1118,7 @@
     <string name="location_mode_screen_title" msgid="4528716772270246542">"მდებარეობის რეჟიმი"</string>
     <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"მდებარეობის დასადგენად GPS, Wi‑Fi და ფიჭური ქსელების გამოყენება"</string>
     <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"მდებარეობის დასადგენად Wi‑Fi-ს და ფიჭური ქსელების გამოყენება"</string>
-    <string name="location_mode_sensors_only_description" msgid="7178415350457794366">"თქვენი მდებარეობის დასადგენად GPS-ის გამოყენება"</string>
+    <string name="location_mode_sensors_only_description" msgid="788127681455735699">"ადგილმდებარეობის განსაზღვრისათვის, გამოიყენეთ GPS"</string>
     <string name="location_network_based" msgid="6010456018401296590">"Wi‑Fi &amp; ფიჭური ქსელის მდებარეობა"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"თქვენი ადგილმდებარეობის უფრო სწრაფად დასადგენად დართეთ აპებს ნება, გამოიყენონ Google-ის მდებარეობის სერვისი. ანონიმური მდებარეობის მომაცემები შეგროვდება და გაეგზავნება Google-ს."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Wi‑Fi-ს მიერ დადგენილი ადგილმდებარეობა"</string>
@@ -2349,6 +2363,7 @@
     <string name="keywords_wifi" msgid="8947676711698613374">"wifi wi-fi ქსელის კავშირი"</string>
     <string name="keywords_more_default_sms_app" msgid="895656981962034647">"ტექსტი შეტყობინება SMS დამესიჯება მესიჯი"</string>
     <string name="keywords_more_mobile_networks" msgid="4939725094449606744">"მობილური ფიჭური ოპერატორი უსადენო ინტერნეტი 4g 3g 2g lte"</string>
+    <string name="keywords_wifi_calling" msgid="5497735076883598019">"wifi wi-fi ზარი დარეკვა"</string>
     <string name="keywords_home" msgid="3626170808219458848">"გამშვები"</string>
     <string name="keywords_display" msgid="6709007669501628320">"ეკრანის სენსორი"</string>
     <string name="keywords_display_brightness_level" msgid="8923289340474728990">"ეკრანის ჩაბნელება სენსორული ეკრანი ბატარეა"</string>

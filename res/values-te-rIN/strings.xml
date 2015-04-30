@@ -40,6 +40,8 @@
     <string name="sms_over_ims_off" msgid="8354792045992793959">"IMS ద్వారా SMSను ఆఫ్ చేయండి"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"IMS నమోదును ప్రారంభించడం అవసరం"</string>
     <string name="ims_reg_required_off" msgid="1720570343422743943">"IMS నమోదును ఆపివేయడం అవసరం"</string>
+    <string name="volte_provisioned_flag_on" msgid="6023503159480902956">"VoLTE సదుపాయం గల ఫ్లాగ్‌ను ఆన్ చేయండి"</string>
+    <string name="volte_provisioned_flag_off" msgid="6168612015904744405">"VoLTE సదుపాయం గల ఫ్లాగ్‌ను ఆఫ్ చేయండి"</string>
     <string name="lte_ram_dump_on" msgid="8568568019520172177">"lte ర్యామ్ డంప్‌ను ప్రారంభించండి"</string>
     <string name="lte_ram_dump_off" msgid="2514507918652378283">"lte ర్యామ్ డంప్‌ను ఆపివేయండి"</string>
     <string name="radioInfo_menu_viewADN" msgid="8743377494429930831">"సిమ్ చిరునామా పుస్తకాన్ని వీక్షించండి"</string>
@@ -751,6 +753,18 @@
     <string name="wifi_hotspot_configure_ap_text_summary" msgid="5618031116920832182">"AndroidAP WPA2 PSK పోర్టబుల్ Wi‑Fi హాట్‌స్పాట్"</string>
     <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> పోర్టబుల్ Wi‑Fi హాట్‌స్పాట్"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"Android హాట్‌స్పాట్"</string>
+    <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Wi-Fi కాలింగ్"</string>
+    <string name="wifi_calling_mode_title" msgid="2164073796253284289">"కాలింగ్ ప్రాధాన్యత"</string>
+    <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Wi-Fi కాలింగ్ మోడ్"</string>
+  <string-array name="wifi_calling_mode_choices">
+    <item msgid="2124257075906188844">"Wi-Fiకి ప్రాధాన్యత"</item>
+    <item msgid="5267397515594230396">"సెల్యులార్‌కి ప్రాధాన్యత"</item>
+  </string-array>
+  <string-array name="wifi_calling_mode_values">
+    <item msgid="4799585830102342375">"2"</item>
+    <item msgid="1171822231056612021">"1"</item>
+  </string-array>
+    <string name="wifi_calling_off_explanation" msgid="4124926334215228094">"Wi-Fi కాలింగ్ ఆన్‌లో ఉన్నప్పుడు, మీ ఫోన్ మీ ప్రాధాన్యత మరియు ఏ సిగ్నల్ సామర్థ్యం ఎక్కువగా ఉంది వంటి అంశాల ఆధారంగా Wi-Fi నెట్‌వర్క్‌లు లేదా మీ క్యారియర్ నెట్‌వర్క్ ద్వారా కాల్‌లు వెళ్లేలా చేస్తుంది. ఈ లక్షణాన్ని ఆన్ చేయడానికి ముందు, రుసుములు మరియు ఇతర వివరాల గురించి తెలుసుకోవడానికి మీ క్యారియర్‌ను సంప్రదించండి."</string>
     <string name="home_settings" msgid="212375129455718176">"హోమ్"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"ప్రదర్శన"</string>
     <string name="sound_settings" msgid="5534671337768745343">"ధ్వని"</string>
@@ -1104,7 +1118,7 @@
     <string name="location_mode_screen_title" msgid="4528716772270246542">"స్థానం మోడ్"</string>
     <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"స్థానాన్ని గుర్తించడానికి GPS, Wi‑Fi, మరియు సెల్యులార్ నెట్‌వర్క్‌లను ఉపయోగించండి"</string>
     <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"స్థానాన్ని గుర్తించడానికి Wi‑Fi మరియు సెల్యులార్ నెట్‌వర్క్‌లను ఉపయోగించండి"</string>
-    <string name="location_mode_sensors_only_description" msgid="7178415350457794366">"మీ స్థానాన్ని గుర్తించడానికి GPSని ఉపయోగించండి"</string>
+    <string name="location_mode_sensors_only_description" msgid="788127681455735699">"స్థానాన్ని గుర్తించడానికి GPSని ఉపయోగించండి"</string>
     <string name="location_network_based" msgid="6010456018401296590">"Wi‑Fi &amp; సెల్యులార్ నెట్‌వర్క్ స్థానం"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"మీ స్థానాన్ని వేగవంతంగా అంచనా వేయడం కోసం Google స్థాన సేవను ఉపయోగించడానికి అనువర్తనాలను అనుమతించండి. అనామక స్థాన డేటా సేకరించబడుతుంది మరియు Googleకు పంపబడుతుంది."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"స్థానం Wi‑Fi ద్వారా గుర్తించబడింది"</string>
@@ -2349,6 +2363,7 @@
     <string name="keywords_wifi" msgid="8947676711698613374">"వైఫై వై-ఫై నెట్‌వర్క్ కనెక్షన్"</string>
     <string name="keywords_more_default_sms_app" msgid="895656981962034647">"వచన సందేశం వచనం పంపడం సందేశాలు సందేశం పంపడం"</string>
     <string name="keywords_more_mobile_networks" msgid="4939725094449606744">"సెల్యులార్ సెల్ క్యారియర్ వైర్‌లెస్ డేటా 4g 3g 2g lte"</string>
+    <string name="keywords_wifi_calling" msgid="5497735076883598019">"wifi wi-fi కాల్ కాలింగ్"</string>
     <string name="keywords_home" msgid="3626170808219458848">"లాంచర్"</string>
     <string name="keywords_display" msgid="6709007669501628320">"స్క్రీన్‌లో టచ్‌స్క్రీన్ భాగం"</string>
     <string name="keywords_display_brightness_level" msgid="8923289340474728990">"కాంతివిహీన స్క్రీన్ టచ్‌స్క్రీన్ బ్యాటరీ"</string>

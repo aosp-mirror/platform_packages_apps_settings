@@ -40,6 +40,8 @@
     <string name="sms_over_ims_off" msgid="8354792045992793959">"Vypnúť správy SMS prostredníctvom IMS"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"Zapnúť požadovanie registrácie IMS"</string>
     <string name="ims_reg_required_off" msgid="1720570343422743943">"Vypnúť požadovanie registrácie IMS"</string>
+    <string name="volte_provisioned_flag_on" msgid="6023503159480902956">"Zapnite poskytovaný príznak VoLTE"</string>
+    <string name="volte_provisioned_flag_off" msgid="6168612015904744405">"Vypnite poskytovaný príznak VoLTE"</string>
     <string name="lte_ram_dump_on" msgid="8568568019520172177">"Zapnúť výpis pamäte lte ram"</string>
     <string name="lte_ram_dump_off" msgid="2514507918652378283">"Vypnúť výpis pamäte lte ram"</string>
     <string name="radioInfo_menu_viewADN" msgid="8743377494429930831">"Zobraziť adresár karty SIM"</string>
@@ -751,6 +753,18 @@
     <string name="wifi_hotspot_configure_ap_text_summary" msgid="5618031116920832182">"Prenos. hotspot Wi‑Fi AndroidAP WPA2 PSK"</string>
     <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"Prenosný hotspot siete Wi-Fi <xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
+    <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Volanie cez Wi-Fi"</string>
+    <string name="wifi_calling_mode_title" msgid="2164073796253284289">"Predvoľba volania"</string>
+    <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Režim volania cez Wi-Fi"</string>
+  <string-array name="wifi_calling_mode_choices">
+    <item msgid="2124257075906188844">"Uprednostniť Wi-Fi"</item>
+    <item msgid="5267397515594230396">"Uprednostniť mobilné pripojenie"</item>
+  </string-array>
+  <string-array name="wifi_calling_mode_values">
+    <item msgid="4799585830102342375">"2"</item>
+    <item msgid="1171822231056612021">"1"</item>
+  </string-array>
+    <string name="wifi_calling_off_explanation" msgid="4124926334215228094">"Ak je zapnuté volanie Wi-Fi, váš telefón môže smerovať volania cez siete Wi-Fi alebo cez sieť vášho operátora. Závisí to od vašich nastavení a od toho, ktorý signál je silnejší. Pred zapnutím tejto funkcie kontaktujte svojho operátora a informujte sa o poplatkoch a ďalších podrobnostiach."</string>
     <string name="home_settings" msgid="212375129455718176">"Domovská stránka"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Zobraziť"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Zvuk"</string>
@@ -1104,7 +1118,7 @@
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Režim určovania polohy"</string>
     <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"Na určenie polohy používať technológiu GPS, sieť Wi-Fi a mobilné siete"</string>
     <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"Na určenie polohy používať sieť Wi-Fi a mobilné siete"</string>
-    <string name="location_mode_sensors_only_description" msgid="7178415350457794366">"Určovať polohu pomocou GPS"</string>
+    <string name="location_mode_sensors_only_description" msgid="788127681455735699">"Určovať polohu pomocou GPS"</string>
     <string name="location_network_based" msgid="6010456018401296590">"Urč. polohy pomocou Wi-Fi a mobil. siete"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Povoliť apl. používať službu urč. polohy Google a rýchl. odhad. vašu polohu. Anonym. údaje o polohe sa budú odosielať spol. Google."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Poloha je určená podľa siete Wi-Fi"</string>
@@ -1358,7 +1372,7 @@
     <string name="hardkeyboard_category" msgid="5957168411305769899">"Nastavenia fyzickej klávesnice"</string>
     <string name="auto_punctuate_summary" msgid="4372126865670574837">"Znak „.“ môžete vložiť dvojitým stlačením klávesu Medzerník."</string>
     <string name="show_password" msgid="3001113966880559611">"Zobrazovať heslá"</string>
-    <string name="ime_security_warning" msgid="4135828934735934248">"Pri metóde vstupu je možné zhromažďovať zadávaný text vrátane osobných údajov, ako sú napríklad heslá alebo čísla kreditných kariet. Tento spôsob je používaný aplikáciou <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Chcete použiť túto metódu vstupu?"</string>
+    <string name="ime_security_warning" msgid="4135828934735934248">"Pri tejto metóde vstupu sa môže zhromažďovať zadávaný text vrátane osobných údajov, ako sú heslá alebo čísla kreditných kariet. Táto metóda je poskytovaná aplikáciou <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Chcete použiť túto metódu vstupu?"</string>
     <string name="spellchecker_security_warning" msgid="9060897418527708922">"Táto kontrola pravopisu môže zhromažďovať zadávaný text vrátane osobných údajov, ako sú napríklad heslá alebo čísla kreditných kariet. Je používaná aplikáciou <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Chcete povoliť túto kontrolu pravopisu?"</string>
     <string name="spellchecker_quick_settings" msgid="246728645150092058">"Nastavenia"</string>
     <string name="spellchecker_language" msgid="6041050114690541437">"Jazyk"</string>
@@ -1418,7 +1432,7 @@
     <string name="input_method_settings" msgid="5801295625486269553">"Nastavenia"</string>
     <string name="input_method_settings_button" msgid="6778344383871619368">"Nastavenia"</string>
     <string name="active_input_method_subtypes" msgid="3596398805424733238">"Aktívne metódy vstupu"</string>
-    <string name="use_system_language_to_select_input_method_subtypes" msgid="3346751753141428573">"Použiť jazyk systému"</string>
+    <string name="use_system_language_to_select_input_method_subtypes" msgid="3346751753141428573">"Používať jazyk systému"</string>
     <string name="input_methods_settings_label_format" msgid="6002887604815693322">"Nastavenia <xliff:g id="IME_NAME">%1$s</xliff:g>"</string>
     <string name="input_methods_and_subtype_enabler_title" msgid="4421813273170250462">"Zvoliť aktívne metódy vstupu"</string>
     <string name="onscreen_keyboard_settings_summary" msgid="5841558383556238653">"Nastavenia klávesnice na obrazovke"</string>
@@ -1754,7 +1768,7 @@
     <string name="tts_default_pitch_title" msgid="6135942113172488671">"Výška"</string>
     <string name="tts_default_pitch_summary" msgid="1328298665182885277">"Určuje zvuk hovoreného textu"</string>
     <string name="tts_default_lang_title" msgid="8018087612299820556">"Jazyk"</string>
-    <string name="tts_lang_use_system" msgid="2679252467416513208">"Použiť jazyk systému"</string>
+    <string name="tts_lang_use_system" msgid="2679252467416513208">"Používať jazyk systému"</string>
     <string name="tts_lang_not_selected" msgid="7395787019276734765">"Nebol vybratý jazyk"</string>
     <string name="tts_default_lang_summary" msgid="5219362163902707785">"Nastavenia jazyka hlasu pre hovorený text"</string>
     <string name="tts_play_example_title" msgid="7094780383253097230">"Vypočuť príklad"</string>
@@ -1827,7 +1841,7 @@
     <string name="credentials_unlock_hint" msgid="2301301378040499348">"Zadajte heslo pre úložisko poverení."</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"Aktuálne heslo:"</string>
     <string name="credentials_reset_hint" msgid="6297256880896133631">"Odstrániť všetok obsah?"</string>
-    <string name="credentials_password_too_short" msgid="7502749986405522663">"Heslo musí mať aspoň 8 znakov."</string>
+    <string name="credentials_password_too_short" msgid="7502749986405522663">"Heslo musí mať aspoň osem znakov."</string>
     <string name="credentials_wrong_password" msgid="2541932597104054807">"Nesprávne heslo."</string>
     <string name="credentials_reset_warning" msgid="5320653011511797600">"Nesprávne heslo. Do vymazania úložiska poverení vám zostáva jeden pokus."</string>
     <string name="credentials_reset_warning_plural" msgid="6514085665301095279">"Nesprávne heslo. Počet zostávajúcich pokusov do vymazania úložiska poverení: <xliff:g id="NUMBER">%1$d</xliff:g>."</string>
@@ -2206,7 +2220,7 @@
     <string name="user_cannot_manage_message" product="default" msgid="1133251987818014757">"Používateľov môže spravovať iba vlastník telefónu."</string>
     <string name="user_cannot_add_accounts_message" msgid="5116692653439737050">"Profily s obmedzeniami nemôžu pridávať účty"</string>
     <string name="user_remove_user_menu" msgid="6897150520686691355">"Odstrániť <xliff:g id="USER_NAME">%1$s</xliff:g> zo zariadenia"</string>
-    <string name="user_add_on_lockscreen_menu" msgid="3025132738715222247">"Pridať použív. počas uzamknutia"</string>
+    <string name="user_add_on_lockscreen_menu" msgid="3025132738715222247">"Pridávať použív. pri uzamknutí"</string>
     <string name="user_new_user_name" msgid="369856859816028856">"Nový používateľ"</string>
     <string name="user_new_profile_name" msgid="2632088404952119900">"Nový profil"</string>
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Chcete odstrániť svoj profil?"</string>
@@ -2349,6 +2363,7 @@
     <string name="keywords_wifi" msgid="8947676711698613374">"wifi wi-fi sieť pripojenie"</string>
     <string name="keywords_more_default_sms_app" msgid="895656981962034647">"textová správa poslať správy SMS a MMS"</string>
     <string name="keywords_more_mobile_networks" msgid="4939725094449606744">"mobilný operátor mobilné dáta bezdrôtový prenos 4g 3g 2g lte"</string>
+    <string name="keywords_wifi_calling" msgid="5497735076883598019">"wifi wi-fi hovor volanie"</string>
     <string name="keywords_home" msgid="3626170808219458848">"launcher"</string>
     <string name="keywords_display" msgid="6709007669501628320">"obrazovka dotyková obrazovka"</string>
     <string name="keywords_display_brightness_level" msgid="8923289340474728990">"stlmiť displej dotyková obrazovka batéria"</string>
@@ -2445,7 +2460,7 @@
     <string name="app_notifications_dialog_done" msgid="3484067728568791014">"Hotovo"</string>
     <string name="zen_mode_default_option" msgid="6940069025071935243">"Dokým túto funkciu nevypnete"</string>
     <string name="zen_mode_important_category" msgid="8123274463331022993">"Prioritné vyrušenia"</string>
-    <string name="zen_mode_downtime_category" msgid="2654477732333340290">"Odstávka"</string>
+    <string name="zen_mode_downtime_category" msgid="2654477732333340290">"Doba pokoja"</string>
     <string name="zen_mode_downtime_days" msgid="3361856902633311616">"Dni"</string>
     <string name="zen_mode_downtime_days_none" msgid="8454857121193391322">"Žiadne"</string>
     <string name="zen_mode_downtime_mode_title" msgid="7249388756365079715">"Prerušenia sú povolené"</string>

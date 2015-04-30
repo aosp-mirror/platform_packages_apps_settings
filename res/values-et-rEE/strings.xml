@@ -40,6 +40,8 @@
     <string name="sms_over_ims_off" msgid="8354792045992793959">"Lülitage SMS üle IMS-i välja"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"Lülitage vajalik IMS-i registreerimine sisse"</string>
     <string name="ims_reg_required_off" msgid="1720570343422743943">"Lülitage vajalik IMS-i registreerimine välja"</string>
+    <string name="volte_provisioned_flag_on" msgid="6023503159480902956">"VoLTE märgendi ettevalmistatud sisselülitamine"</string>
+    <string name="volte_provisioned_flag_off" msgid="6168612015904744405">"VoLTE märgendi ettevalmistatud väljalülitamine"</string>
     <string name="lte_ram_dump_on" msgid="8568568019520172177">"Lülita LTE mälutõmmis sisse"</string>
     <string name="lte_ram_dump_off" msgid="2514507918652378283">"Lülita LTE mälutõmmis välja"</string>
     <string name="radioInfo_menu_viewADN" msgid="8743377494429930831">"Kuva SIM-i aadressiraamat"</string>
@@ -751,6 +753,18 @@
     <string name="wifi_hotspot_configure_ap_text_summary" msgid="5618031116920832182">"AndroidAP WPA2 PSK kaasask. WiFi-leviala"</string>
     <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> kaasaskantav WiFi-tugijaam"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
+    <string name="wifi_calling_settings_title" msgid="4102921303993404577">"WiFi-kõned"</string>
+    <string name="wifi_calling_mode_title" msgid="2164073796253284289">"Kõne-eelistus"</string>
+    <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"WiFi-kõnerežiim"</string>
+  <string-array name="wifi_calling_mode_choices">
+    <item msgid="2124257075906188844">"WiFi eelistusega"</item>
+    <item msgid="5267397515594230396">"Mobiilside eelistusega"</item>
+  </string-array>
+  <string-array name="wifi_calling_mode_values">
+    <item msgid="4799585830102342375">"2"</item>
+    <item msgid="1171822231056612021">"1"</item>
+  </string-array>
+    <string name="wifi_calling_off_explanation" msgid="4124926334215228094">"Kui WiFi-kõned on sisse lülitatud, saab telefon olenevalt eelistustest ja signaalitugevusest kõnesid marsruutida WiFi-võrkude või teie operaatori võrgu kaudu. Enne selle funktsiooni sisselülitamist uurige operaatorilt tasude ja muude üksikasjade kohta."</string>
     <string name="home_settings" msgid="212375129455718176">"Avaekraan"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Kuva"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Heli"</string>
@@ -1104,7 +1118,7 @@
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Asukoharežiim"</string>
     <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"Asukoha määramine GPS-i, WiFi- ja mobiilsidevõrgu abil"</string>
     <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"Asukoha määramine WiFi- ja mobiilsidevõrgu abil"</string>
-    <string name="location_mode_sensors_only_description" msgid="7178415350457794366">"Asukoha määramine GPS-i abil"</string>
+    <string name="location_mode_sensors_only_description" msgid="788127681455735699">"Kasutage asukoha määramiseks GPS-i"</string>
     <string name="location_network_based" msgid="6010456018401296590">"WiFi/mobiilsidevõrgu asukoht"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Lubage rakendustel kasutada Google\'i asukohateenust, et asukohta kiiremini määrata. Kogutud anonüümsed asukohaandmed saadetakse Google\'ile."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"WiFi järgi määratud asukoht"</string>
@@ -2349,6 +2363,7 @@
     <string name="keywords_wifi" msgid="8947676711698613374">"wifi wifi-võrgu ühendus"</string>
     <string name="keywords_more_default_sms_app" msgid="895656981962034647">"tekstisõnum SMS-i saatmine sõnumid sõnumside"</string>
     <string name="keywords_more_mobile_networks" msgid="4939725094449606744">"mobiil mobiilioperaator traadita andmed 4g 3g 2g lte"</string>
+    <string name="keywords_wifi_calling" msgid="5497735076883598019">"wifi wi-fi kõne helistamine"</string>
     <string name="keywords_home" msgid="3626170808219458848">"käivitaja"</string>
     <string name="keywords_display" msgid="6709007669501628320">"ekraan puutetundlik ekraan"</string>
     <string name="keywords_display_brightness_level" msgid="8923289340474728990">"ekraani hämardamine puuteekraan aku"</string>

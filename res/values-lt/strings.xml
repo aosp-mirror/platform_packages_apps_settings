@@ -40,6 +40,8 @@
     <string name="sms_over_ims_off" msgid="8354792045992793959">"Išjungti SMS per IMS"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"Būtina įjungti IMS registraciją"</string>
     <string name="ims_reg_required_off" msgid="1720570343422743943">"Būtina išjungti IMS registraciją"</string>
+    <string name="volte_provisioned_flag_on" msgid="6023503159480902956">"Įjungti „VoLTE“ aprūpinimo žymą"</string>
+    <string name="volte_provisioned_flag_off" msgid="6168612015904744405">"Išjungti „VoLTE“ aprūpinimo žymą"</string>
     <string name="lte_ram_dump_on" msgid="8568568019520172177">"Įjungti ilgalaikės raidos laisvosios prieigos atminties išklotinę"</string>
     <string name="lte_ram_dump_off" msgid="2514507918652378283">"Išjungti ilgalaikės raidos laisvosios prieigos atminties išklotinę"</string>
     <string name="radioInfo_menu_viewADN" msgid="8743377494429930831">"Žiūrėti SIM kortelės adresų knygą"</string>
@@ -751,6 +753,18 @@
     <string name="wifi_hotspot_configure_ap_text_summary" msgid="5618031116920832182">"„AndroidAP“ WPA2 PSK neš. „Wi‑Fi“ vieš. int. pr. t."</string>
     <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> kilnojamasis „Wi-Fi“ viešosios interneto prieigos taškas"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"„AndroidHotspot“"</string>
+    <string name="wifi_calling_settings_title" msgid="4102921303993404577">"„Wi-Fi“ skambinimas"</string>
+    <string name="wifi_calling_mode_title" msgid="2164073796253284289">"Skambinimo nuostata"</string>
+    <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"„Wi-Fi“ skambinimo režimas"</string>
+  <string-array name="wifi_calling_mode_choices">
+    <item msgid="2124257075906188844">"Pageidautinas „Wi-Fi“ ryšys"</item>
+    <item msgid="5267397515594230396">"Pageidautinas mobilusis ryšys"</item>
+  </string-array>
+  <string-array name="wifi_calling_mode_values">
+    <item msgid="4799585830102342375">"2"</item>
+    <item msgid="1171822231056612021">"1"</item>
+  </string-array>
+    <string name="wifi_calling_off_explanation" msgid="4124926334215228094">"Kai įjungtas skambinimas „Wi-Fi“ ryšiu, telefonas gali nukreipti skambučius per „Wi-Fi“ tinklus ar operatoriaus tinklą pagal jūsų nuostatas ir stipresnį signalą. Prieš įjungdami šią funkciją, pasikonsultuokite su operatoriumi dėl mokesčių ir kitos išsamios informacijos."</string>
     <string name="home_settings" msgid="212375129455718176">"Pagrindinis"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Ekranas"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Garsas"</string>
@@ -1104,7 +1118,7 @@
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Vietovės režimas"</string>
     <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"Naudoti GPS, „Wi‑Fi“ ir korinį tinklą vietovei nustatyti"</string>
     <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"Naudoti „Wi‑Fi“ ir korinį tinklą vietovei nustatyti"</string>
-    <string name="location_mode_sensors_only_description" msgid="7178415350457794366">"Vietovę nustatyti naudojant GPS"</string>
+    <string name="location_mode_sensors_only_description" msgid="788127681455735699">"Nustatyti vietovę naudojant GPS"</string>
     <string name="location_network_based" msgid="6010456018401296590">"„Wi‑Fi“ ir kor. tinkl. vietov."</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Leisti programoms naud. „Google“ viet. pasl., kad viet. būtų nustatoma greičiau. Anonim. viet. duom. bus renk. ir siunč. „Google“."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Vietą nustatė „Wi-Fi“"</string>
@@ -2349,6 +2363,7 @@
     <string name="keywords_wifi" msgid="8947676711698613374">"„Wi-Fi“ tinklo ryšys"</string>
     <string name="keywords_more_default_sms_app" msgid="895656981962034647">"teksto pranešimas siųsti žinutę pranešimai susirašinėjimas žinutėmis"</string>
     <string name="keywords_more_mobile_networks" msgid="4939725094449606744">"mobilusis mobiliojo ryšio operatorius belaidis ryšys duomenys 4G 3G 2G LTE"</string>
+    <string name="keywords_wifi_calling" msgid="5497735076883598019">"„Wi-Fi“ skambutis skambinama"</string>
     <string name="keywords_home" msgid="3626170808219458848">"paleidimo priemonė"</string>
     <string name="keywords_display" msgid="6709007669501628320">"ekranas jutiklinis ekranas"</string>
     <string name="keywords_display_brightness_level" msgid="8923289340474728990">"pritemdytas ekranas jutiklinis ekranas akumuliatorius"</string>
@@ -2367,7 +2382,7 @@
     <string name="keywords_sounds_and_notifications" msgid="5965996187974887000">"garsiakalbis pyptelėjimas"</string>
     <string name="keywords_sounds_and_notifications_interruptions" msgid="2912933812460077912">"negalima netrukdyti pertraukti nutraukimas nutrūkęs ryšys"</string>
     <string name="keywords_app" msgid="6334757056536837791">"Laisvosios prieigos atmintis"</string>
-    <string name="keywords_location" msgid="782326973714313480">"netoliese vietovė istorija ataskaitų teikimas"</string>
+    <string name="keywords_location" msgid="782326973714313480">"netolimų vietovių istorijos ataskaitų teikimas"</string>
     <string name="keywords_location_mode" msgid="8584992704568356084">"tikslumas"</string>
     <string name="keywords_accounts" msgid="1957925565953357627">"paskyra"</string>
     <string name="keywords_users" msgid="4673901601478559100">"apribojimas riboti apribota"</string>

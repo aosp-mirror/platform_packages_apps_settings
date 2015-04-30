@@ -40,6 +40,8 @@
     <string name="sms_over_ims_off" msgid="8354792045992793959">"關閉 IMS 簡訊"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"需要開啟 IMS 註冊"</string>
     <string name="ims_reg_required_off" msgid="1720570343422743943">"需要關閉 IMS 註冊"</string>
+    <string name="volte_provisioned_flag_on" msgid="6023503159480902956">"開啟 VoLTE 佈建標記"</string>
+    <string name="volte_provisioned_flag_off" msgid="6168612015904744405">"關閉 VoLTE 佈建標記"</string>
     <string name="lte_ram_dump_on" msgid="8568568019520172177">"開啟 LTE RAM 傾印"</string>
     <string name="lte_ram_dump_off" msgid="2514507918652378283">"關閉 LTE RAM 傾印"</string>
     <string name="radioInfo_menu_viewADN" msgid="8743377494429930831">"檢視 SIM 地址簿"</string>
@@ -751,6 +753,18 @@
     <string name="wifi_hotspot_configure_ap_text_summary" msgid="5618031116920832182">"AndroidAP WPA2 PSK 可攜式 Wi‑Fi 無線基地台"</string>
     <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> 可攜式 Wi-Fi 無線基地台"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"Android 無線基地台"</string>
+    <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Wi-Fi 通話"</string>
+    <string name="wifi_calling_mode_title" msgid="2164073796253284289">"撥號偏好"</string>
+    <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Wi-Fi 通話模式"</string>
+  <string-array name="wifi_calling_mode_choices">
+    <item msgid="2124257075906188844">"Wi-Fi 優先"</item>
+    <item msgid="5267397515594230396">"行動通訊優先"</item>
+  </string-array>
+  <string-array name="wifi_calling_mode_values">
+    <item msgid="4799585830102342375">"2"</item>
+    <item msgid="1171822231056612021">"1"</item>
+  </string-array>
+    <string name="wifi_calling_off_explanation" msgid="4124926334215228094">"開啟 Wi-Fi 通話功能之後，您的手機可依據您的偏好設定，透過 Wi-Fi 網路或您的行動通訊網路通話 (選擇訊號較強者)。開啟這項功能前，請先與您的行動通訊業者詢問費用與其他細節。"</string>
     <string name="home_settings" msgid="212375129455718176">"主螢幕"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"顯示"</string>
     <string name="sound_settings" msgid="5534671337768745343">"音效"</string>
@@ -1104,7 +1118,7 @@
     <string name="location_mode_screen_title" msgid="4528716772270246542">"定位模式"</string>
     <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"使用 GPS、Wi-Fi 和行動網路判斷位置"</string>
     <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"使用 Wi-Fi 和行動網路判斷位置"</string>
-    <string name="location_mode_sensors_only_description" msgid="7178415350457794366">"使用 GPS 判斷您的位置"</string>
+    <string name="location_mode_sensors_only_description" msgid="788127681455735699">"使用 GPS 判斷您的所在位置"</string>
     <string name="location_network_based" msgid="6010456018401296590">"Wi-Fi 和行動網路位置資訊"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"允許應用程式使用 Google 的定位服務加速判斷您的約略位置。系統會收集匿名的位置資料並傳送給 Google。"</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"根據 Wi-Fi 判定位置"</string>
@@ -1646,7 +1660,7 @@
     <string name="usage_type_cpu_foreground" msgid="6500579611933211831">"CPU 前景使用時間"</string>
     <string name="usage_type_wake_lock" msgid="5125438890233677880">"停用休眠"</string>
     <string name="usage_type_gps" msgid="7989688715128160790">"GPS"</string>
-    <string name="usage_type_wifi_running" msgid="3134357198266380400">"Wi-Fi 執行中"</string>
+    <string name="usage_type_wifi_running" msgid="3134357198266380400">"Wi-Fi 使用時間"</string>
     <string name="usage_type_phone" product="tablet" msgid="262638572890253393">"平板電腦"</string>
     <string name="usage_type_phone" product="default" msgid="9108247984998041853">"手機"</string>
     <string name="usage_type_data_send" msgid="8971710128438365919">"已傳送的行動封包"</string>
@@ -2353,6 +2367,7 @@
     <string name="keywords_wifi" msgid="8947676711698613374">"wifi wi-fi 網路連線"</string>
     <string name="keywords_more_default_sms_app" msgid="895656981962034647">"文字訊息 訊息 傳送文字訊息 簡訊 傳送簡訊"</string>
     <string name="keywords_more_mobile_networks" msgid="4939725094449606744">"行動通訊 行動網路 行動通訊業者 無線 數據 4G 3G 2G LTE"</string>
+    <string name="keywords_wifi_calling" msgid="5497735076883598019">"wifi wi-fi 通話 撥號"</string>
     <string name="keywords_home" msgid="3626170808219458848">"啟動器"</string>
     <string name="keywords_display" msgid="6709007669501628320">"螢幕 觸控式螢幕"</string>
     <string name="keywords_display_brightness_level" msgid="8923289340474728990">"變暗 螢幕 觸控螢幕 電池"</string>
