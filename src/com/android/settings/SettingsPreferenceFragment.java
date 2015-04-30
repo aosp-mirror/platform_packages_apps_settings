@@ -125,11 +125,6 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
         mPinnedHeaderFrameLayout.setVisibility(View.VISIBLE);
     }
 
-    public void clearPinnedHeaderView() {
-        mPinnedHeaderFrameLayout.removeAllViews();
-        mPinnedHeaderFrameLayout.setVisibility(View.GONE);
-    }
-
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
