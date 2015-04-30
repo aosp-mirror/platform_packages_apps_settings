@@ -14,25 +14,7 @@
      limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-                  xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
-                  android:title="@string/security_settings_fingerprint_preference_title">
-
-    <PreferenceCategory
-        android:key="fingerprint_manage_category"
-        android:title="@string/fingerprint_manage_category_title">
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:key="fingerprint_usage_category"
-        android:title="@string/fingerprint_usage_category_title">
-
-        <SwitchPreference
-            android:key="fingerprint_enable_keyguard_toggle"
-            android:title="@string/fingerprint_enable_keyguard_toggle_title"
-            android:persistent="false" />
-
-    </PreferenceCategory>
-
-</PreferenceScreen>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/security_settings_fingerprint_preference_title"/>
 

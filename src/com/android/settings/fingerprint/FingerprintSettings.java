@@ -17,13 +17,22 @@
 package com.android.settings.fingerprint;
 
 
+import android.annotation.Nullable;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.admin.DevicePolicyManager;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.hardware.fingerprint.Fingerprint;
+import android.hardware.fingerprint.FingerprintManager;
+import android.hardware.fingerprint.FingerprintManager.AuthenticationCallback;
+import android.hardware.fingerprint.FingerprintManager.AuthenticationResult;
+import android.hardware.fingerprint.FingerprintManager.RemovalCallback;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.CancellationSignal;
 import android.os.Handler;
@@ -31,25 +40,29 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
-import android.hardware.fingerprint.Fingerprint;
-import android.hardware.fingerprint.FingerprintManager;
-import android.hardware.fingerprint.FingerprintManager.AuthenticationCallback;
-import android.hardware.fingerprint.FingerprintManager.RemovalCallback;
-import android.hardware.fingerprint.FingerprintManager.AuthenticationResult;
+import android.provider.Browser;
+import android.text.Annotation;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.TextPaint;
+import android.text.method.LinkMovementMethod;
+import android.text.style.URLSpan;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.ChooseLockGeneric;
 import com.android.settings.ChooseLockSettingsHelper;
+import com.android.settings.HelpUtils;
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.fingerprint.FingerprintEnrollEnrolling;
+import com.android.settings.SubSettings;
 import com.android.settings.search.Indexable;
 
 import java.util.List;
@@ -57,7 +70,7 @@ import java.util.List;
 /**
  * Settings screen for fingerprints
  */
-public class FingerprintSettings extends SettingsActivity {
+public class FingerprintSettings extends SubSettings {
     /**
      * Used by the FP settings wizard to indicate the wizard is
      * finished, and each activity in the wizard should finish.
@@ -96,9 +109,7 @@ public class FingerprintSettings extends SettingsActivity {
 
         private static final String TAG = "FingerprintSettings";
         private static final String KEY_FINGERPRINT_ITEM_PREFIX = "key_fingerprint_item";
-        private static final String KEY_USAGE_CATEGORY = "fingerprint_usage_category";
         private static final String KEY_FINGERPRINT_ADD = "key_fingerprint_add";
-        private static final String KEY_MANAGE_CATEGORY = "fingerprint_manage_category";
         private static final String KEY_FINGERPRINT_ENABLE_KEYGUARD_TOGGLE =
                 "fingerprint_enable_keyguard_toggle";
         private static final String KEY_LAUNCHED_CONFIRM = "launched_confirm";
@@ -112,7 +123,6 @@ public class FingerprintSettings extends SettingsActivity {
 
         private static final int ADD_FINGERPRINT_REQUEST = 10;
 
-        private static final boolean ENABLE_USAGE_CATEGORY = false;
         protected static final boolean DEBUG = true;
 
         private FingerprintManager mFingerprintManager;
@@ -226,6 +236,27 @@ public class FingerprintSettings extends SettingsActivity {
             }
         }
 
+        @Override
+        public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+            super.onViewCreated(view, savedInstanceState);
+            TextView v = (TextView) LayoutInflater.from(view.getContext()).inflate(
+                    R.layout.fingerprint_settings_footer, null);
+            v.setText(LearnMoreSpan.linkify(getText(isFingerprintDisabled()
+                            ? R.string.security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled
+                            : R.string.security_settings_fingerprint_enroll_disclaimer),
+                    getString(getHelpResource())));
+            v.setMovementMethod(new LinkMovementMethod());
+            getListView().addFooterView(v);
+            getListView().setFooterDividersEnabled(false);
+        }
+
+        private boolean isFingerprintDisabled() {
+            final DevicePolicyManager dpm =
+                    (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
+            return dpm != null && (dpm.getKeyguardDisabledFeatures(null)
+                    & DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT) != 0;
+        }
+
         protected void removeFingerprintPreference(int fingerprintId) {
             String name = genKey(fingerprintId);
             Preference prefToRemove = mManageCategory.findPreference(name);
@@ -251,48 +282,29 @@ public class FingerprintSettings extends SettingsActivity {
             }
             addPreferencesFromResource(R.xml.security_settings_fingerprint);
             root = getPreferenceScreen();
-
-            // Fingerprint items
-            mManageCategory = (PreferenceGroup) root.findPreference(KEY_MANAGE_CATEGORY);
-            if (mManageCategory != null) {
-                addFingerprintItemPreferences(mManageCategory);
-            }
-
-            // Fingerprint usage options
-            PreferenceGroup usageCategory = (PreferenceGroup) root.findPreference(
-                    KEY_USAGE_CATEGORY);
-            if (usageCategory != null) {
-                Preference toggle = root.findPreference(KEY_FINGERPRINT_ENABLE_KEYGUARD_TOGGLE);
-                toggle.setOnPreferenceChangeListener(this);
-                if (!ENABLE_USAGE_CATEGORY) {
-                    root.removePreference(usageCategory);
-                } else {
-                    toggle.setOnPreferenceChangeListener(this);
-                }
-            }
-
+            addFingerprintItemPreferences(root);
             return root;
         }
 
-        private void addFingerprintItemPreferences(PreferenceGroup manageFingerprintCategory) {
-            manageFingerprintCategory.removeAll();
+        private void addFingerprintItemPreferences(PreferenceGroup root) {
+            root.removeAll();
             final List<Fingerprint> items = mFingerprintManager.getEnrolledFingerprints();
             final int fingerprintCount = items.size();
             for (int i = 0; i < fingerprintCount; i++) {
                 final Fingerprint item = items.get(i);
-                FingerprintPreference pref = new FingerprintPreference(
-                        manageFingerprintCategory.getContext());
+                FingerprintPreference pref = new FingerprintPreference(root.getContext());
                 pref.setKey(genKey(item.getFingerId()));
                 pref.setTitle(item.getName());
                 pref.setFingerprint(item);
                 pref.setPersistent(false);
-                manageFingerprintCategory.addPreference(pref);
+                root.addPreference(pref);
                 pref.setOnPreferenceChangeListener(this);
             }
-            Preference addPreference = new Preference(manageFingerprintCategory.getContext());
+            Preference addPreference = new Preference(root.getContext());
             addPreference.setKey(KEY_FINGERPRINT_ADD);
             addPreference.setTitle(R.string.fingerprint_add_title);
-            manageFingerprintCategory.addPreference(addPreference);
+            addPreference.setIcon(R.drawable.ic_add_24dp);
+            root.addPreference(addPreference);
             addPreference.setOnPreferenceChangeListener(this);
         }
 
@@ -403,7 +415,7 @@ public class FingerprintSettings extends SettingsActivity {
 
         @Override
         protected int getHelpResource() {
-            return R.string.help_url_security;
+            return R.string.help_url_fingerprint;
         }
 
         @Override
@@ -508,4 +520,46 @@ public class FingerprintSettings extends SettingsActivity {
             mView = view;
         }
     };
+
+    private static class LearnMoreSpan extends URLSpan {
+
+        private static final Typeface TYPEFACE_MEDIUM =
+                Typeface.create("sans-serif-medium", Typeface.NORMAL);
+
+        private LearnMoreSpan(String url) {
+            super(url);
+        }
+
+        @Override
+        public void onClick(View widget) {
+            Context ctx = widget.getContext();
+            Intent intent = HelpUtils.getHelpIntent(ctx, getURL());
+            try {
+                ctx.startActivity(intent);
+            } catch (ActivityNotFoundException e) {
+                Log.w(FingerprintSettingsFragment.TAG,
+                        "Actvity was not found for intent, " + intent.toString());
+            }
+        }
+
+        @Override
+        public void updateDrawState(TextPaint ds) {
+            super.updateDrawState(ds);
+            ds.setUnderlineText(false);
+            ds.setTypeface(TYPEFACE_MEDIUM);
+        }
+
+        public static CharSequence linkify(CharSequence rawText, String uri) {
+            SpannableString msg = new SpannableString(rawText);
+            Annotation[] spans = msg.getSpans(0, msg.length(), Annotation.class);
+            SpannableStringBuilder builder = new SpannableStringBuilder(msg);
+            for (Annotation annotation : spans) {
+                int start = msg.getSpanStart(annotation);
+                int end = msg.getSpanEnd(annotation);
+                LearnMoreSpan link = new LearnMoreSpan(uri);
+                builder.setSpan(link, start, end, msg.getSpanFlags(link));
+            }
+            return builder;
+        }
+    }
 }
