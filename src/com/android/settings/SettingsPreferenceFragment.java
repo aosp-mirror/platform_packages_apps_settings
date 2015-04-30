@@ -112,6 +112,14 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
         return mFloatingActionButton;
     }
 
+    public View setPinnedHeaderView(int layoutResId) {
+        final LayoutInflater inflater = getActivity().getLayoutInflater();
+        final View pinnedHeader =
+                inflater.inflate(layoutResId, mPinnedHeaderFrameLayout, false);
+        setPinnedHeaderView(pinnedHeader);
+        return pinnedHeader;
+    }
+
     public void setPinnedHeaderView(View pinnedHeader) {
         mPinnedHeaderFrameLayout.addView(pinnedHeader);
         mPinnedHeaderFrameLayout.setVisibility(View.VISIBLE);

@@ -22,7 +22,6 @@ import android.content.Intent;
 import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -59,9 +58,7 @@ public class RestrictedProfileSettings extends AppRestrictionsFragment
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         if (mHeaderView == null) {
-            mHeaderView = LayoutInflater.from(getActivity()).inflate(
-                    R.layout.user_info_header, null);
-            setPinnedHeaderView(mHeaderView);
+            mHeaderView = setPinnedHeaderView(R.layout.user_info_header);
             mHeaderView.setOnClickListener(this);
             mUserIconView = (ImageView) mHeaderView.findViewById(android.R.id.icon);
             mUserNameView = (TextView) mHeaderView.findViewById(android.R.id.title);
