@@ -59,11 +59,13 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase
     private Preference mRuleName;
     private SwitchBar mSwitchBar;
     private DropDownPreference mZenMode;
+    private Toast mEnabledToast;
 
     abstract protected void onCreateInternal();
     abstract protected boolean setRule(ZenRule rule);
     abstract protected String getZenModeDependency();
     abstract protected void updateControlsInternal();
+    abstract protected int getEnabledToastText();
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -154,6 +156,17 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase
         mRule.enabled = enabled;
         mRule.snoozing = false;
         setZenModeConfig(mConfig);
+        if (enabled) {
+            final int toastText = getEnabledToastText();
+            if (toastText != 0) {
+                mEnabledToast = Toast.makeText(mContext, toastText, Toast.LENGTH_SHORT);
+                mEnabledToast.show();
+            }
+        } else {
+            if (mEnabledToast != null) {
+                mEnabledToast.cancel();
+            }
+        }
     }
 
     protected void updateRule(Uri newConditionId) {
@@ -247,10 +260,10 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase
         updateRuleName();
         updateControlsInternal();
         mZenMode.setSelectedValue(mRule.zenMode);
-        mDisableListeners = false;
         if (mSwitchBar != null) {
             mSwitchBar.setChecked(mRule.enabled);
         }
+        mDisableListeners = false;
     }
 
 }

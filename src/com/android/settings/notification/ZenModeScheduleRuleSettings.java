@@ -74,6 +74,11 @@ public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
     }
 
     @Override
+    protected int getEnabledToastText() {
+        return R.string.zen_schedule_rule_enabled_toast;
+    }
+
+    @Override
     protected void onCreateInternal() {
         addPreferencesFromResource(R.xml.zen_mode_schedule_rule_settings);
         final PreferenceScreen root = getPreferenceScreen();

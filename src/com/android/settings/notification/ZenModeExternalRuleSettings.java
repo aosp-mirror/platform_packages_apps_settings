@@ -58,6 +58,11 @@ public class ZenModeExternalRuleSettings extends ZenModeRuleSettingsBase {
     }
 
     @Override
+    protected int getEnabledToastText() {
+        return 0;
+    }
+
+    @Override
     protected void onCreateInternal() {
         addPreferencesFromResource(R.xml.zen_mode_external_rule_settings);
         final PreferenceScreen root = getPreferenceScreen();
