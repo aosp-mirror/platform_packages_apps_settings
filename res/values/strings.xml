@@ -6061,8 +6061,11 @@
     <!-- [CHAR LIMIT=40] Zen mode settings: Rule name option and edit dialog title -->
     <string name="zen_mode_rule_name">Rule name</string>
 
+    <!-- [CHAR LIMIT=40] Zen mode settings: Rule name hint text -->
+    <string name="zen_mode_rule_name_hint">Enter rule name</string>
+
     <!-- [CHAR LIMIT=40] Zen mode settings: Add rule menu option name -->
-    <string name="zen_mode_time_add_rule">Add rule</string>
+    <string name="zen_mode_add_rule">Add rule</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Delete rule menu option name -->
     <string name="zen_mode_delete_rule">Delete rule</string>
@@ -6083,7 +6086,58 @@
     <string name="zen_mode_configure_rule">Configure rule</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Schedule rule type name -->
-    <string name="zen_schedule_rule_type_name">Schedule rule</string>
+    <string name="zen_schedule_rule_type_name">Time rule</string>
+
+    <!-- [CHAR LIMIT=NONE] Zen mode settings: Schedule rule toast hint when enabled -->
+    <string name="zen_schedule_rule_enabled_toast">Automatic rule set to turn on Do Not Disturb during specified times</string>
+
+    <!-- [CHAR LIMIT=40] Zen mode settings: Event rule type name -->
+    <string name="zen_event_rule_type_name">Event rule</string>
+
+    <!-- [CHAR LIMIT=NONE] Zen mode settings: Event rule toast hint when enabled -->
+    <string name="zen_event_rule_enabled_toast">Automatic rule set to turn on Do Not Disturb during specified events</string>
+
+    <!-- [CHAR LIMIT=40] Zen mode settings: Event-based rule calendar option title -->
+    <string name="zen_mode_event_rule_calendar">Calendar</string>
+
+    <!-- [CHAR LIMIT=40] Zen mode settings: Event-based rule summary fragment: any calendar -->
+    <string name="zen_mode_event_rule_summary_any_calendar">Any calendar</string>
+
+    <!-- [CHAR LIMIT=40] Zen mode settings: Event-based rule summary fragment: any reply -->
+    <string name="zen_mode_event_rule_summary_any_reply">Any reply</string>
+
+    <!-- [CHAR LIMIT=40] Zen mode settings: Event-based rule summary fragment: any reply except no -->
+    <string name="zen_mode_event_rule_summary_any_reply_except_no">Any reply except no</string>
+
+    <!-- [CHAR LIMIT=40] Zen mode settings: Event-based rule summary fragment: replied yes -->
+    <string name="zen_mode_event_rule_summary_replied_yes">Replied yes</string>
+
+    <!-- [CHAR LIMIT=40] Zen mode settings: Event-based rule calendar option value for any calendar-->
+    <string name="zen_mode_event_rule_calendar_any">Any</string>
+
+    <!-- [CHAR LIMIT=40] Zen mode settings: Event-based rule attendance option title -->
+    <string name="zen_mode_event_rule_attendance">Attendance</string>
+
+    <!-- [CHAR LIMIT=40] Zen mode settings: Event-based rule attendance option value: required or optional -->
+    <string name="zen_mode_event_rule_attendance_required_optional">Required or optional</string>
+
+    <!-- [CHAR LIMIT=40] Zen mode settings: Event-based rule attendance option value: required -->
+    <string name="zen_mode_event_rule_attendance_required">Required</string>
+
+    <!-- [CHAR LIMIT=40] Zen mode settings: Event-based rule attendance option value: optional -->
+    <string name="zen_mode_event_rule_attendance_optional">Optional</string>
+
+    <!-- [CHAR LIMIT=40] Zen mode settings: Event-based rule reply option title -->
+    <string name="zen_mode_event_rule_reply">Reply</string>
+
+    <!-- [CHAR LIMIT=40] Zen mode settings: Event-based rule reply option value: Any -->
+    <string name="zen_mode_event_rule_reply_any">Any</string>
+
+    <!-- [CHAR LIMIT=40] Zen mode settings: Event-based rule reply option value: Any except no-->
+    <string name="zen_mode_event_rule_reply_any_except_no">Any except no</string>
+
+    <!-- [CHAR LIMIT=40] Zen mode settings: Event-based rule reply option value: Yes -->
+    <string name="zen_mode_event_rule_reply_yes">Yes</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Text to display if rule isn't found  -->
     <string name="zen_mode_rule_not_found_text">Rule not found.</string>
@@ -6091,7 +6145,7 @@
     <!-- [CHAR LIMIT=40] Zen mode settings: Rule summary template (when enabled)  -->
     <string name="zen_mode_rule_summary_combination"><xliff:g id="description" example="Sun - Thu">%1$s</xliff:g> / <xliff:g id="mode" example="Alarms only">%2$s</xliff:g></string>
 
-    <!-- [CHAR LIMIT=40] Zen mode settings: Timebased rule days option title -->
+    <!-- [CHAR LIMIT=40] Zen mode settings: Time-based rule days option title -->
     <string name="zen_mode_schedule_rule_days">Days</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Downtime days option value, no days set -->
