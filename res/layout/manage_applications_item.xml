@@ -59,13 +59,15 @@
         android:duplicateParentState="true" />
 
     <TextView
-        android:id="@+id/app_size"
+        android:id="@+id/app_summary"
         android:layout_column="1"
         android:layout_row="1"
         android:layout_gravity="fill_horizontal|top"
         android:textAppearance="@android:style/TextAppearance.Material.Body1"
         android:textColor="?android:attr/textColorSecondary"
         android:textAlignment="viewStart"
+        android:singleLine="true"
+        android:ellipsize="marquee"
         android:duplicateParentState="true" />
 
     <TextView

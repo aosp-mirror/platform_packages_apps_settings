@@ -71,7 +71,7 @@ public class AppOpsDetails extends InstrumentedFragment {
         TextView label = (TextView) appSnippet.findViewById(R.id.app_name);
         label.setText(mPm.getApplicationLabel(pkgInfo.applicationInfo));
         // Version number of application
-        mAppVersion = (TextView) appSnippet.findViewById(R.id.app_size);
+        mAppVersion = (TextView) appSnippet.findViewById(R.id.app_summary);
 
         if (pkgInfo.versionName != null) {
             mAppVersion.setVisibility(View.VISIBLE);
