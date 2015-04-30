@@ -156,7 +156,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mWifiTracker = new WifiTracker(getActivity(), this, true, true);
+        mWifiTracker = new WifiTracker(getActivity(), this, true, true, false);
         mWifiManager = mWifiTracker.getManager();
 
         mConnectListener = new WifiManager.ActionListener() {
@@ -629,7 +629,7 @@ public class WifiSettings extends RestrictedSettingsFragment
                     if (accessPoint.getLevel() != -1) {
                         hasAvailableAccessPoints = true;
                         AccessPointPreference preference = new AccessPointPreference(accessPoint,
-                                getActivity());
+                                getActivity(), false);
 
                         getPreferenceScreen().addPreference(preference);
                         accessPoint.setListener(this);
@@ -891,7 +891,7 @@ public class WifiSettings extends RestrictedSettingsFragment
 
                 // Add saved Wi-Fi access points
                 final Collection<AccessPoint> accessPoints =
-                        WifiTracker.getCurrentAccessPoints(context, true, false);
+                        WifiTracker.getCurrentAccessPoints(context, true, false, false);
                 for (AccessPoint accessPoint : accessPoints) {
                     data = new SearchIndexableRaw(context);
                     data.title = accessPoint.getSsid();
