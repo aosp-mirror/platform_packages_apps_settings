@@ -19,6 +19,7 @@ package com.android.settings.wifi;
 import android.app.Dialog;
 import android.net.wifi.WifiConfiguration;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -46,6 +47,7 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
     private SetupWizardListLayout mLayout;
     private View mAddOtherNetworkItem;
     private TextView mEmptyFooter;
+    private View mMacAddressFooter;
     private boolean mListLastEmpty = false;
 
     @Override
@@ -66,6 +68,9 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
             }
         });
 
+        mMacAddressFooter = inflater.inflate(R.layout.setup_wifi_mac_address, list, false);
+        list.addFooterView(mMacAddressFooter, null, false);
+
         final NavigationBar navigationBar = mLayout.getNavigationBar();
         if (navigationBar != null) {
             WifiSetupActivity activity = (WifiSetupActivity) getActivity();
@@ -82,12 +87,20 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
         if (hasNextButton()) {
             getNextButton().setVisibility(View.GONE);
         }
+
+        updateMacAddress();
     }
 
     @Override
     public void onAccessPointsChanged() {
         super.onAccessPointsChanged();
         updateFooter(getPreferenceScreen().getPreferenceCount() == 0);
+    }
+
+    @Override
+    public void onWifiStateChanged(int state) {
+        super.onWifiStateChanged(state);
+        updateMacAddress();
     }
 
     @Override
@@ -137,12 +150,14 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
     protected void updateFooter(boolean isEmpty) {
         if (isEmpty != mListLastEmpty) {
             final ListView list = getListView();
+            list.removeFooterView(mEmptyFooter);
+            list.removeFooterView(mAddOtherNetworkItem);
+            list.removeFooterView(mMacAddressFooter);
             if (isEmpty) {
-                list.removeFooterView(mAddOtherNetworkItem);
                 list.addFooterView(mEmptyFooter, null, false);
             } else {
-                list.removeFooterView(mEmptyFooter);
                 list.addFooterView(mAddOtherNetworkItem, null, true);
+                list.addFooterView(mMacAddressFooter, null, false);
             }
             mListLastEmpty = isEmpty;
         }
@@ -167,6 +182,22 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
             } else {
                 mLayout.hideProgressBar();
             }
+        }
+    }
+
+    private void updateMacAddress() {
+        if (mMacAddressFooter != null) {
+            String macAddress = null;
+            if (mWifiManager != null) {
+                android.net.wifi.WifiInfo connectionInfo = mWifiManager.getConnectionInfo();
+                if (connectionInfo != null) {
+                    macAddress = connectionInfo.getMacAddress();
+                }
+            }
+            final TextView macAddressTextView =
+                    (TextView) mMacAddressFooter.findViewById(R.id.mac_address);
+            macAddressTextView.setText(!TextUtils.isEmpty(macAddress) ?
+                    macAddress : getString(R.string.status_unavailable));
         }
     }
 }
