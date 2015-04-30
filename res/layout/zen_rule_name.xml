@@ -23,6 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:singleLine="true"
+        android:hint="@string/zen_mode_rule_name_hint"
         android:layout_marginLeft="22dp"
         android:layout_marginRight="22dp" >
 
@@ -32,7 +33,6 @@
 
     <RadioGroup
         android:id="@+id/rule_types"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="22dp"
@@ -46,15 +46,20 @@
             android:layout_height="wrap_content"
             android:text="@string/zen_schedule_rule_type_name" />
 
-        <RadioButton android:id="@+id/rule_type_2"
+        <RadioButton android:id="@+id/rule_type_event"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="@string/zen_event_rule_type_name" />
 
         <RadioButton android:id="@+id/rule_type_3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <RadioButton android:id="@+id/rule_type_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <RadioButton android:id="@+id/rule_type_5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
