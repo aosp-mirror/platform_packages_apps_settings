@@ -1489,8 +1489,17 @@
                 android:value="true" />
         </activity>
 
-        <activity
-                android:name="Settings$PublicVolumeSettingsActivity"
+        <activity android:name="Settings$PrivateVolumeSettingsActivity"
+                android:label="@string/storage_settings_title"
+                android:taskAffinity="com.android.settings"
+                android:parentActivityName="Settings$StorageSettingsActivity">
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.deviceinfo.PrivateVolumeSettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/storage_settings" />
+        </activity>
+
+        <activity android:name="Settings$PublicVolumeSettingsActivity"
                 android:label="@string/storage_settings_title"
                 android:taskAffinity="com.android.settings"
                 android:parentActivityName="Settings$StorageSettingsActivity">
@@ -1508,8 +1517,7 @@
                 android:resource="@id/storage_settings" />
         </activity>
 
-        <activity
-                android:name="Settings$PrivateVolumeForgetActivity"
+        <activity android:name="Settings$PrivateVolumeForgetActivity"
                 android:label="@string/storage_settings_title"
                 android:taskAffinity="com.android.settings"
                 android:parentActivityName="Settings$StorageSettingsActivity"
@@ -1541,17 +1549,20 @@
                 android:exported="false" />
         <activity android:name=".deviceinfo.StorageWizardMigrateProgress"
                 android:taskAffinity="com.android.settings.storage_wizard"
-                android:exported="false" />
+                android:exported="true"
+                android:permission="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
         <activity android:name=".deviceinfo.StorageWizardReady"
                 android:taskAffinity="com.android.settings.storage_wizard"
-                android:exported="false" />
+                android:exported="true"
+                android:permission="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
 
         <activity android:name=".deviceinfo.StorageWizardMoveConfirm"
                 android:taskAffinity="com.android.settings.storage_wizard"
                 android:exported="false" />
         <activity android:name=".deviceinfo.StorageWizardMoveProgress"
                 android:taskAffinity="com.android.settings.storage_wizard"
-                android:exported="false" />
+                android:exported="true"
+                android:permission="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
 
         <!-- Exported for SystemUI to trigger -->
         <receiver android:name=".deviceinfo.StorageUnmountReceiver"

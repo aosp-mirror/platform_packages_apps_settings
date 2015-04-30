@@ -23,6 +23,8 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.storage.DiskInfo;
+import android.os.storage.VolumeInfo;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -72,12 +74,25 @@ public class StorageWizardFormatProgress extends StorageWizardBase {
         protected void onPostExecute(Exception e) {
             final Context context = StorageWizardFormatProgress.this;
             if (e == null) {
+                final String forgetUuid = getIntent().getStringExtra(
+                        StorageWizardFormatConfirm.EXTRA_FORGET_UUID);
+                if (!TextUtils.isEmpty(forgetUuid)) {
+                    mStorage.forgetVolume(forgetUuid);
+                }
+
+                final boolean offerMigrate;
                 if (mFormatPrivate) {
-                    // TODO: bring back migration once implemented
-//                    final Intent intent = new Intent(context, StorageWizardMigrate.class);
-//                    intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
-//                    startActivity(intent);
-                    final Intent intent = new Intent(context, StorageWizardReady.class);
+                    // Offer to migrate only if storage is currently internal
+                    final VolumeInfo privateVol = getPackageManager()
+                            .getPrimaryStorageCurrentVolume();
+                    offerMigrate = (privateVol != null
+                            && VolumeInfo.ID_PRIVATE_INTERNAL.equals(privateVol.getId()));
+                } else {
+                    offerMigrate = false;
+                }
+
+                if (offerMigrate) {
+                    final Intent intent = new Intent(context, StorageWizardMigrate.class);
                     intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
                     startActivity(intent);
                 } else {

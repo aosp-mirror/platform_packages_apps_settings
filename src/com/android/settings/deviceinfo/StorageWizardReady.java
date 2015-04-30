@@ -22,9 +22,6 @@ import android.os.storage.VolumeInfo;
 import com.android.internal.util.Preconditions;
 import com.android.settings.R;
 
-import java.util.List;
-import java.util.Objects;
-
 public class StorageWizardReady extends StorageWizardBase {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,19 +34,14 @@ public class StorageWizardReady extends StorageWizardBase {
 
         // TODO: handle mixed partition cases instead of just guessing based on
         // first volume type we encounter
-        final List<VolumeInfo> vols = mStorage.getVolumes();
-        for (VolumeInfo vol : vols) {
-            if (!Objects.equals(mDisk.getId(), vol.getDiskId())) continue;
-
-            if (vol.getType() == VolumeInfo.TYPE_PUBLIC) {
-                setBodyText(R.string.storage_wizard_ready_external_body,
-                        mDisk.getDescription());
-                break;
-            } else if (vol.getType() == VolumeInfo.TYPE_PRIVATE) {
-                setBodyText(R.string.storage_wizard_ready_internal_body,
-                        mDisk.getDescription());
-                break;
-            }
+        final VolumeInfo publicVol = findFirstVolume(VolumeInfo.TYPE_PUBLIC);
+        final VolumeInfo privateVol = findFirstVolume(VolumeInfo.TYPE_PRIVATE);
+        if (publicVol != null) {
+            setBodyText(R.string.storage_wizard_ready_external_body,
+                    mDisk.getDescription());
+        } else if (privateVol != null) {
+            setBodyText(R.string.storage_wizard_ready_internal_body,
+                    mDisk.getDescription());
         }
 
         getNextButton().setText(R.string.done);

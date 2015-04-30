@@ -19,8 +19,6 @@ package com.android.settings.deviceinfo;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.storage.DiskInfo;
-import android.text.format.DateUtils;
-import android.text.format.Formatter;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.RadioButton;
@@ -29,6 +27,8 @@ import com.android.internal.util.Preconditions;
 import com.android.settings.R;
 
 public class StorageWizardMigrate extends StorageWizardBase {
+    private MigrateEstimateTask mEstimate;
+
     private RadioButton mRadioNow;
     private RadioButton mRadioLater;
 
@@ -39,11 +39,8 @@ public class StorageWizardMigrate extends StorageWizardBase {
 
         Preconditions.checkNotNull(mDisk);
 
-        final String time = DateUtils.formatDuration(0).toString();
-        final String size = Formatter.formatFileSize(this, 0);
-
         setHeaderText(R.string.storage_wizard_migrate_title, mDisk.getDescription());
-        setBodyText(R.string.storage_wizard_migrate_body, mDisk.getDescription(), time, size);
+        setBodyText(R.string.memory_calculating_size);
 
         mRadioNow = (RadioButton) findViewById(R.id.storage_wizard_migrate_now);
         mRadioLater = (RadioButton) findViewById(R.id.storage_wizard_migrate_later);
@@ -52,6 +49,17 @@ public class StorageWizardMigrate extends StorageWizardBase {
         mRadioLater.setOnCheckedChangeListener(mRadioListener);
 
         mRadioNow.setChecked(true);
+
+        mEstimate = new MigrateEstimateTask(this) {
+            @Override
+            public void onPostExecute(String size, String time) {
+                setBodyText(R.string.storage_wizard_migrate_body,
+                        mDisk.getDescription(), time, size);
+            }
+        };
+
+        mEstimate.copyFrom(getIntent());
+        mEstimate.execute();
     }
 
     private final OnCheckedChangeListener mRadioListener = new OnCheckedChangeListener() {
@@ -72,6 +80,7 @@ public class StorageWizardMigrate extends StorageWizardBase {
         if (mRadioNow.isChecked()) {
             final Intent intent = new Intent(this, StorageWizardMigrateConfirm.class);
             intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
+            mEstimate.copyTo(intent);
             startActivity(intent);
         } else if (mRadioLater.isChecked()) {
             final Intent intent = new Intent(this, StorageWizardReady.class);

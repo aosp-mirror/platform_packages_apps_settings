@@ -24,6 +24,7 @@ import android.os.storage.DiskInfo;
 import android.os.storage.StorageEventListener;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
+import android.os.storage.VolumeRecord;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.provider.DocumentsContract;
@@ -220,8 +221,8 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
         }
 
         @Override
-        public void onVolumeMetadataChanged(String fsUuid) {
-            if (Objects.equals(mVolume.getFsUuid(), fsUuid)) {
+        public void onVolumeRecordChanged(VolumeRecord rec) {
+            if (Objects.equals(mVolume.getFsUuid(), rec.getFsUuid())) {
                 mVolume = mStorageManager.findVolumeById(mVolumeId);
                 update();
             }

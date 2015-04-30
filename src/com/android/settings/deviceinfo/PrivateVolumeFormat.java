@@ -67,6 +67,7 @@ public class PrivateVolumeFormat extends InstrumentedFragment {
             final Intent intent = new Intent(getActivity(), StorageWizardFormatProgress.class);
             intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
             intent.putExtra(StorageWizardFormatConfirm.EXTRA_FORMAT_PRIVATE, false);
+            intent.putExtra(StorageWizardFormatConfirm.EXTRA_FORGET_UUID, mVolume.getFsUuid());
             startActivity(intent);
             getActivity().finish();
         }
