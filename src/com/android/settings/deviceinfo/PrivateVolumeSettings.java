@@ -34,6 +34,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.os.storage.DiskInfo;
 import android.os.storage.StorageEventListener;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
@@ -271,6 +272,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         final MenuItem mount = menu.findItem(R.id.storage_mount);
         final MenuItem unmount = menu.findItem(R.id.storage_unmount);
         final MenuItem format = menu.findItem(R.id.storage_format);
+        final MenuItem migrate = menu.findItem(R.id.storage_migrate);
         final MenuItem usb = menu.findItem(R.id.storage_usb);
 
         // Actions live in menu for non-internal private volumes; they're shown
@@ -286,6 +288,11 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
             unmount.setVisible(mVolume.isMountedReadable());
             format.setVisible(true);
         }
+
+        // Only offer to migrate when not current storage
+        final VolumeInfo privateVol = getActivity().getPackageManager()
+                .getPrimaryStorageCurrentVolume();
+        migrate.setVisible(!Objects.equals(mVolume, privateVol));
 
         // TODO: show usb if we jumped past first screen
         usb.setVisible(false);
@@ -311,6 +318,11 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
                 args.putString(VolumeInfo.EXTRA_VOLUME_ID, mVolume.getId());
                 startFragment(this, PrivateVolumeFormat.class.getCanonicalName(),
                         R.string.storage_menu_format, 0, args);
+                return true;
+            case R.id.storage_migrate:
+                final Intent intent = new Intent(context, StorageWizardMigrateConfirm.class);
+                intent.putExtra(VolumeInfo.EXTRA_VOLUME_ID, mVolume.getId());
+                startActivity(intent);
                 return true;
             case R.id.storage_usb:
                 startFragment(this, UsbSettings.class.getCanonicalName(),
@@ -442,8 +454,8 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         }
 
         @Override
-        public void onVolumeMetadataChanged(String fsUuid) {
-            if (Objects.equals(mVolume.getFsUuid(), fsUuid)) {
+        public void onVolumeRecordChanged(VolumeRecord rec) {
+            if (Objects.equals(mVolume.getFsUuid(), rec.getFsUuid())) {
                 mVolume = mStorageManager.findVolumeById(mVolumeId);
                 update();
             }
