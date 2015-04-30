@@ -118,7 +118,7 @@ public class HelpUtils {
         }
     }
 
-    private static Intent getHelpIntent(Context context, String helpUriString) {
+    public static Intent getHelpIntent(Context context, String helpUriString) {
         // Try to handle as Intent Uri, otherwise just treat as Uri.
         try {
             return Intent.parseUri(helpUriString,
