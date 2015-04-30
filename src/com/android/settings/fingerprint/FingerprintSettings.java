@@ -39,6 +39,7 @@ import android.hardware.fingerprint.FingerprintManager.AuthenticationResult;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -90,7 +91,9 @@ public class FingerprintSettings extends SettingsActivity {
 
     public static class FingerprintSettingsFragment extends SettingsPreferenceFragment
         implements OnPreferenceChangeListener, Indexable {
-        private static final int MAX_RETRY_ATTEMPTS = 5;
+        private static final int MAX_RETRY_ATTEMPTS = 20;
+        private static final int RESET_HIGHLIGHT_DELAY_MS = 500;
+
         private static final String TAG = "FingerprintSettings";
         private static final String KEY_FINGERPRINT_ITEM_PREFIX = "key_fingerprint_item";
         private static final String KEY_USAGE_CATEGORY = "fingerprint_usage_category";
@@ -101,7 +104,8 @@ public class FingerprintSettings extends SettingsActivity {
         private static final String KEY_LAUNCHED_CONFIRM = "launched_confirm";
 
         private static final int MSG_REFRESH_FINGERPRINT_TEMPLATES = 1000;
-        private static final int MSG_HIGHLIGHT_FINGERPRINT_ITEM = 1001;
+        private static final int MSG_FINGER_AUTH_SUCCESS = 1001;
+        private static final int MSG_FINGER_AUTH_FAIL = 1002;
 
         private static final int CONFIRM_REQUEST = 101;
         private static final int CHOOSE_LOCK_GENERIC_REQUEST = 102;
@@ -118,27 +122,28 @@ public class FingerprintSettings extends SettingsActivity {
         private int mMaxFingerprintAttempts;
         private byte[] mToken;
         private boolean mLaunchedConfirm;
+        private Drawable mHighlightDrawable;
 
         private AuthenticationCallback mAuthCallback = new AuthenticationCallback() {
             @Override
             public void onAuthenticationSucceeded(AuthenticationResult result) {
-                mHandler.obtainMessage(MSG_HIGHLIGHT_FINGERPRINT_ITEM,
-                        result.getFingerprint().getFingerId(), 0).sendToTarget();
-                retryFingerprint(true);
+                int fingerId = result.getFingerprint().getFingerId();
+                mHandler.obtainMessage(MSG_FINGER_AUTH_SUCCESS, fingerId, 0).sendToTarget();
             }
 
             public void onAuthenticationFailed() {
-                retryFingerprint(true);
+                mHandler.obtainMessage(MSG_FINGER_AUTH_FAIL).sendToTarget();
             };
 
             @Override
             public void onAuthenticationError(int errMsgId, CharSequence errString) {
                 // get activity will be null on a screen rotation
-                if (getActivity() != null) {
-                    Toast.makeText(getActivity(), errString, Toast.LENGTH_SHORT);
-                    if (errMsgId != FingerprintManager.FINGERPRINT_ERROR_CANCELED) {
-                        retryFingerprint(false);
-                    }
+                Activity activity = getActivity();
+                if (activity != null) {
+                    Toast.makeText(activity, errString, Toast.LENGTH_SHORT);
+                }
+                if (errMsgId != FingerprintManager.FINGERPRINT_ERROR_CANCELED) {
+                    retryFingerprint(false);
                 }
             }
 
@@ -166,8 +171,12 @@ public class FingerprintSettings extends SettingsActivity {
                     case MSG_REFRESH_FINGERPRINT_TEMPLATES:
                         removeFingerprintPreference(msg.arg1);
                     break;
-                    case MSG_HIGHLIGHT_FINGERPRINT_ITEM:
+                    case MSG_FINGER_AUTH_SUCCESS:
                         highlightFingerprintItem(msg.arg1);
+                        retryFingerprint(true);
+                    break;
+                    case MSG_FINGER_AUTH_FAIL:
+                        retryFingerprint(false);
                     break;
                 }
             };
@@ -206,7 +215,8 @@ public class FingerprintSettings extends SettingsActivity {
                         KEY_LAUNCHED_CONFIRM, false);
             }
 
-            mFingerprintManager = (FingerprintManager) getActivity().getSystemService(
+            Activity activity = getActivity();
+            mFingerprintManager = (FingerprintManager) activity.getSystemService(
                     Context.FINGERPRINT_SERVICE);
 
             // Need to authenticate a session token if none
@@ -225,17 +235,6 @@ public class FingerprintSettings extends SettingsActivity {
                 }
             } else {
                 Log.w(TAG, "Can't find preference to remove: " + name);
-            }
-        }
-
-        private void highlightFingerprintItem(int fpId) {
-            String prefName = genKey(fpId);
-            Preference pref = mManageCategory.findPreference(prefName);
-            if (pref instanceof FingerprintPreference) {
-                final FingerprintPreference fpref = (FingerprintPreference) pref;
-                fpref.highlight();
-            } else {
-                Log.w(TAG, "Wrong pref " + (pref != null ? pref.getKey() : "null"));
             }
         }
 
@@ -306,8 +305,11 @@ public class FingerprintSettings extends SettingsActivity {
             super.onResume();
             // Make sure we reload the preference hierarchy since fingerprints may be added,
             // deleted or renamed.
-            createPreferenceHierarchy();
+            updatePreferences();
+        }
 
+        private void updatePreferences() {
+            createPreferenceHierarchy();
             retryFingerprint(true);
         }
 
@@ -345,7 +347,7 @@ public class FingerprintSettings extends SettingsActivity {
 
         private void showRenameDeleteDialog(Preference pref, final Fingerprint fp) {
             final Activity activity = getActivity();
-            AlertDialog dialog = new AlertDialog.Builder(activity)
+            final AlertDialog dialog = new AlertDialog.Builder(activity)
                     .setView(R.layout.fingerprint_rename_dialog)
                     .setPositiveButton(R.string.security_settings_fingerprint_enroll_dialog_ok,
                             new DialogInterface.OnClickListener() {
@@ -356,6 +358,7 @@ public class FingerprintSettings extends SettingsActivity {
                                     if (!newName.equals(name)) {
                                         if (DEBUG) Log.v(TAG, "rename " + name + " to " + newName);
                                         mFingerprintManager.rename(fp.getFingerId(), newName);
+                                        updatePreferences();
                                     }
                                     dialog.dismiss();
                                 }
@@ -374,6 +377,16 @@ public class FingerprintSettings extends SettingsActivity {
             mDialogTextField = (EditText) dialog.findViewById(R.id.fingerprint_rename_field);
             mDialogTextField.setText(fp.getName());
             mDialogTextField.selectAll();
+            // show the IME
+            mDialogTextField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if (hasFocus) {
+                        dialog.getWindow().setSoftInputMode(
+                                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+                    }
+                }
+            });
         }
 
         @Override
@@ -413,6 +426,33 @@ public class FingerprintSettings extends SettingsActivity {
             }
         }
 
+        private Drawable getHighlightDrawable() {
+            if (mHighlightDrawable == null) {
+                mHighlightDrawable = getActivity().getDrawable(R.drawable.preference_highlight);
+            }
+            return mHighlightDrawable;
+        }
+
+        private void highlightFingerprintItem(int fpId) {
+            String prefName = genKey(fpId);
+            FingerprintPreference fpref =
+                    (FingerprintPreference) mManageCategory.findPreference(prefName);
+            final Drawable highlight = getHighlightDrawable();
+            final View view = fpref.getView();
+            final int centerX = view.getWidth() / 2;
+            final int centerY = view.getHeight() / 2;
+            highlight.setHotspot(centerX, centerY);
+            view.setBackground(highlight);
+            view.setPressed(true);
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    view.setPressed(false);
+                    view.setBackground(null);
+                }
+            }, RESET_HIGHLIGHT_DELAY_MS);
+        }
+
         private void launchChooseOrConfirmLock() {
             Intent intent = new Intent();
             long challenge = mFingerprintManager.preEnroll();
@@ -423,7 +463,8 @@ public class FingerprintSettings extends SettingsActivity {
                 intent.setClassName("com.android.settings", ChooseLockGeneric.class.getName());
                 intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.MINIMUM_QUALITY_KEY,
                         DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);
-                intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.HIDE_DISABLED_PREFS, true);
+                intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.HIDE_DISABLED_PREFS,
+                        true);
                 intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, true);
                 intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, challenge);
                 startActivityForResult(intent, CHOOSE_LOCK_GENERIC_REQUEST);
@@ -432,16 +473,12 @@ public class FingerprintSettings extends SettingsActivity {
     }
 
     public static class FingerprintPreference extends Preference {
-        private static final int RESET_HIGHLIGHT_DELAY_MS = 500;
         private Fingerprint mFingerprint;
         private View mView;
-        private Drawable mHighlightDrawable;
-        private Context mContext;
 
         public FingerprintPreference(Context context, AttributeSet attrs, int defStyleAttr,
                 int defStyleRes) {
             super(context, attrs, defStyleAttr, defStyleRes);
-            mContext = context;
         }
         public FingerprintPreference(Context context, AttributeSet attrs, int defStyleAttr) {
             this(context, attrs, defStyleAttr, 0);
@@ -455,36 +492,14 @@ public class FingerprintSettings extends SettingsActivity {
             this(context, null);
         }
 
+        public View getView() { return mView; }
+
         public void setFingerprint(Fingerprint item) {
             mFingerprint = item;
         }
 
         public Fingerprint getFingerprint() {
             return mFingerprint;
-        }
-
-        private Drawable getHighlightDrawable() {
-            if (mHighlightDrawable == null) {
-                mHighlightDrawable = mContext.getDrawable(R.drawable.preference_highlight);
-            }
-            return mHighlightDrawable;
-        }
-
-        public void highlight() {
-            Drawable highlight = getHighlightDrawable();
-            final View view = mView;
-            view.setBackground(highlight);
-            final int centerX = view.getWidth() / 2;
-            final int centerY = view.getHeight() / 2;
-            highlight.setHotspot(centerX, centerY);
-            view.setPressed(true);
-            view.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    view.setPressed(false);
-                    view.setBackground(null);
-                }
-            }, RESET_HIGHLIGHT_DELAY_MS);
         }
 
         @Override
