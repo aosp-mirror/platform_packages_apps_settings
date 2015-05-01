@@ -557,7 +557,7 @@ public class SettingsActivity extends Activity
         // This is a "Sub Settings" when:
         // - this is a real SubSettings
         // - or :settings:show_fragment_as_subsetting is passed to the Intent
-        final boolean isSubSettings = className.equals(SubSettings.class.getName()) ||
+        final boolean isSubSettings = this instanceof SubSettings ||
                 intent.getBooleanExtra(EXTRA_SHOW_FRAGMENT_AS_SUBSETTING, false);
 
         // If this is a sub settings, then apply the SubSettings Theme for the ActionBar content insets
