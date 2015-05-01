@@ -29,6 +29,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -269,8 +271,14 @@ public class AccountSettings extends SettingsPreferenceFragment
         profileData.userInfo = userInfo;
         if (addCategory) {
             profileData.preferenceGroup = new PreferenceCategory(context);
-            profileData.preferenceGroup.setTitle(userInfo.isManagedProfile()
-                    ? R.string.category_work : R.string.category_personal);
+            if (userInfo.isManagedProfile()) {
+                profileData.preferenceGroup.setLayoutResource(R.layout.work_profile_category);
+                profileData.preferenceGroup.setTitle(R.string.category_work);
+                profileData.preferenceGroup.setSummary(getWorkGroupSummary(context, userInfo));
+                profileData.removeWorkProfilePreference = newRemoveWorkProfilePreference(context);
+            } else {
+                profileData.preferenceGroup.setTitle(R.string.category_personal);
+            }
             parent.addPreference(profileData.preferenceGroup);
         } else {
             profileData.preferenceGroup = parent;
@@ -281,9 +289,6 @@ public class AccountSettings extends SettingsPreferenceFragment
             if (!mUm.hasUserRestriction(DISALLOW_MODIFY_ACCOUNTS, userInfo.getUserHandle())) {
                 profileData.addAccountPreference = newAddAccountPreference(context);
             }
-        }
-        if (userInfo.isManagedProfile()) {
-            profileData.removeWorkProfilePreference = newRemoveWorkProfilePreference(context);
         }
         mProfiles.put(userInfo.id, profileData);
     }
@@ -304,6 +309,16 @@ public class AccountSettings extends SettingsPreferenceFragment
         preference.setOnPreferenceClickListener(this);
         preference.setOrder(ORDER_LAST);
         return preference;
+    }
+
+    private String getWorkGroupSummary(Context context, UserInfo userInfo) {
+        PackageManager packageManager = context.getPackageManager();
+        ApplicationInfo adminApplicationInfo = Utils.getAdminApplicationInfo(context, userInfo.id);
+        if (adminApplicationInfo == null) {
+            return null;
+        }
+        CharSequence appLabel = packageManager.getApplicationLabel(adminApplicationInfo);
+        return getString(R.string.managing_admin, appLabel);
     }
 
     private void cleanUpPreferences() {
