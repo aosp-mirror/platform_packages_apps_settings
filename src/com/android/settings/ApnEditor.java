@@ -28,18 +28,23 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
+import android.preference.MultiSelectListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.SwitchPreference;
 import android.provider.Telephony;
+import android.telephony.ServiceState;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import com.android.internal.logging.MetricsLogger;
 
+import java.util.HashSet;
+import java.util.Set;
 
 public class ApnEditor extends InstrumentedPreferenceActivity
         implements SharedPreferences.OnSharedPreferenceChangeListener,
@@ -52,7 +57,7 @@ public class ApnEditor extends InstrumentedPreferenceActivity
     private final static String KEY_PROTOCOL = "apn_protocol";
     private final static String KEY_ROAMING_PROTOCOL = "apn_roaming_protocol";
     private final static String KEY_CARRIER_ENABLED = "carrier_enabled";
-    private final static String KEY_BEARER = "bearer";
+    private final static String KEY_BEARER_MULTI = "bearer_multi";
     private final static String KEY_MVNO_TYPE = "mvno_type";
 
     private static final int MENU_DELETE = Menu.FIRST;
@@ -78,7 +83,7 @@ public class ApnEditor extends InstrumentedPreferenceActivity
     private ListPreference mProtocol;
     private ListPreference mRoamingProtocol;
     private SwitchPreference mCarrierEnabled;
-    private ListPreference mBearer;
+    private MultiSelectListPreference mBearerMulti;
     private ListPreference mMvnoType;
     private EditTextPreference mMvnoMatchData;
 
@@ -92,6 +97,7 @@ public class ApnEditor extends InstrumentedPreferenceActivity
     private int mSubId;
     private Resources mRes;
     private TelephonyManager mTelephonyManager;
+    private int mBearerInitialVal = 0;
 
     /**
      * Standard projection for the interesting columns of a normal note.
@@ -116,9 +122,10 @@ public class ApnEditor extends InstrumentedPreferenceActivity
             Telephony.Carriers.PROTOCOL, // 16
             Telephony.Carriers.CARRIER_ENABLED, // 17
             Telephony.Carriers.BEARER, // 18
-            Telephony.Carriers.ROAMING_PROTOCOL, // 19
-            Telephony.Carriers.MVNO_TYPE,   // 20
-            Telephony.Carriers.MVNO_MATCH_DATA  // 21
+            Telephony.Carriers.BEARER_BITMASK, // 19
+            Telephony.Carriers.ROAMING_PROTOCOL, // 20
+            Telephony.Carriers.MVNO_TYPE,   // 21
+            Telephony.Carriers.MVNO_MATCH_DATA  // 22
     };
 
     private static final int ID_INDEX = 0;
@@ -139,9 +146,10 @@ public class ApnEditor extends InstrumentedPreferenceActivity
     private static final int PROTOCOL_INDEX = 16;
     private static final int CARRIER_ENABLED_INDEX = 17;
     private static final int BEARER_INDEX = 18;
-    private static final int ROAMING_PROTOCOL_INDEX = 19;
-    private static final int MVNO_TYPE_INDEX = 20;
-    private static final int MVNO_MATCH_DATA_INDEX = 21;
+    private static final int BEARER_BITMASK_INDEX = 19;
+    private static final int ROAMING_PROTOCOL_INDEX = 20;
+    private static final int MVNO_TYPE_INDEX = 21;
+    private static final int MVNO_MATCH_DATA_INDEX = 22;
 
 
     @Override
@@ -176,8 +184,8 @@ public class ApnEditor extends InstrumentedPreferenceActivity
 
         mCarrierEnabled = (SwitchPreference) findPreference(KEY_CARRIER_ENABLED);
 
-        mBearer = (ListPreference) findPreference(KEY_BEARER);
-        mBearer.setOnPreferenceChangeListener(this);
+        mBearerMulti = (MultiSelectListPreference) findPreference(KEY_BEARER_MULTI);
+        mBearerMulti.setOnPreferenceChangeListener(this);
 
         mMvnoType = (ListPreference) findPreference(KEY_MVNO_TYPE);
         mMvnoType.setOnPreferenceChangeListener(this);
@@ -289,7 +297,31 @@ public class ApnEditor extends InstrumentedPreferenceActivity
             mProtocol.setValue(mCursor.getString(PROTOCOL_INDEX));
             mRoamingProtocol.setValue(mCursor.getString(ROAMING_PROTOCOL_INDEX));
             mCarrierEnabled.setChecked(mCursor.getInt(CARRIER_ENABLED_INDEX)==1);
-            mBearer.setValue(mCursor.getString(BEARER_INDEX));
+            mBearerInitialVal = mCursor.getInt(BEARER_INDEX);
+
+            HashSet<String> bearers = new HashSet<String>();
+            int bearerBitmask = mCursor.getInt(BEARER_BITMASK_INDEX);
+            if (bearerBitmask == 0) {
+                if (mBearerInitialVal == 0) {
+                    bearers.add("" + 0);
+                }
+            } else {
+                int i = 1;
+                while (bearerBitmask != 0) {
+                    if ((bearerBitmask & 1) == 1) {
+                        bearers.add("" + i);
+                    }
+                    bearerBitmask >>= 1;
+                    i++;
+                }
+            }
+
+            if (mBearerInitialVal != 0 && bearers.contains("" + mBearerInitialVal) == false) {
+                // add mBearerInitialVal to bearers
+                bearers.add("" + mBearerInitialVal);
+            }
+            mBearerMulti.setValues(bearers);
+
             mMvnoType.setValue(mCursor.getString(MVNO_TYPE_INDEX));
             mMvnoMatchData.setEnabled(false);
             mMvnoMatchData.setText(mCursor.getString(MVNO_MATCH_DATA_INDEX));
@@ -324,8 +356,8 @@ public class ApnEditor extends InstrumentedPreferenceActivity
                 checkNull(protocolDescription(mProtocol.getValue(), mProtocol)));
         mRoamingProtocol.setSummary(
                 checkNull(protocolDescription(mRoamingProtocol.getValue(), mRoamingProtocol)));
-        mBearer.setSummary(
-                checkNull(bearerDescription(mBearer.getValue())));
+        mBearerMulti.setSummary(
+                checkNull(bearerMultiDescription(mBearerMulti.getValues())));
         mMvnoType.setSummary(
                 checkNull(mvnoDescription(mMvnoType.getValue())));
         mMvnoMatchData.setSummary(checkNull(mMvnoMatchData.getText()));
@@ -358,7 +390,7 @@ public class ApnEditor extends InstrumentedPreferenceActivity
     }
 
     private String bearerDescription(String raw) {
-        int mBearerIndex = mBearer.findIndexOfValue(raw);
+        int mBearerIndex = mBearerMulti.findIndexOfValue(raw);
         if (mBearerIndex == -1) {
             return null;
         } else {
@@ -369,6 +401,30 @@ public class ApnEditor extends InstrumentedPreferenceActivity
                 return null;
             }
         }
+    }
+
+    private String bearerMultiDescription(Set<String> raw) {
+        String[] values = mRes.getStringArray(R.array.bearer_entries);
+        StringBuilder retVal = new StringBuilder();
+        boolean first = true;
+        for (String bearer : raw) {
+            int bearerIndex = mBearerMulti.findIndexOfValue(bearer);
+            try {
+                if (first) {
+                    retVal.append(values[bearerIndex]);
+                    first = false;
+                } else {
+                    retVal.append(", " + values[bearerIndex]);
+                }
+            } catch (ArrayIndexOutOfBoundsException e) {
+                // ignore
+            }
+        }
+        String val = retVal.toString();
+        if (!TextUtils.isEmpty(val)) {
+            return val;
+        }
+        return null;
     }
 
     private String mvnoDescription(String newValue) {
@@ -429,13 +485,13 @@ public class ApnEditor extends InstrumentedPreferenceActivity
             }
             mRoamingProtocol.setSummary(protocol);
             mRoamingProtocol.setValue((String) newValue);
-        } else if (KEY_BEARER.equals(key)) {
-            String bearer = bearerDescription((String) newValue);
+        } else if (KEY_BEARER_MULTI.equals(key)) {
+            String bearer = bearerMultiDescription((Set<String>) newValue);
             if (bearer == null) {
                 return false;
             }
-            mBearer.setValue((String) newValue);
-            mBearer.setSummary(bearer);
+            mBearerMulti.setValues((Set<String>) newValue);
+            mBearerMulti.setSummary(bearer);
         } else if (KEY_MVNO_TYPE.equals(key)) {
             String mvno = mvnoDescription((String) newValue);
             if (mvno == null) {
@@ -536,7 +592,7 @@ public class ApnEditor extends InstrumentedPreferenceActivity
 
         ContentValues values = new ContentValues();
 
-        // Add a dummy name "Untitled", if the user exits the screen without adding a name but 
+        // Add a dummy name "Untitled", if the user exits the screen without adding a name but
         // entered other information worth keeping.
         values.put(Telephony.Carriers.NAME,
                 name.length() < 1 ? getResources().getString(R.string.untitled_apn) : name);
@@ -571,10 +627,30 @@ public class ApnEditor extends InstrumentedPreferenceActivity
             }
         }
 
-        String bearerVal = mBearer.getValue();
-        if (bearerVal != null) {
-            values.put(Telephony.Carriers.BEARER, Integer.parseInt(bearerVal));
+        Set<String> bearerSet = mBearerMulti.getValues();
+        int bearerBitmask = 0;
+        for (String bearer : bearerSet) {
+            if (Integer.parseInt(bearer) == 0) {
+                bearerBitmask = 0;
+                break;
+            } else {
+                bearerBitmask |= ServiceState.getBitmaskForTech(Integer.parseInt(bearer));
+            }
         }
+        values.put(Telephony.Carriers.BEARER_BITMASK, bearerBitmask);
+
+        int bearerVal;
+        if (bearerBitmask == 0 || mBearerInitialVal == 0) {
+            bearerVal = 0;
+        } else if (ServiceState.bitmaskHasTech(bearerBitmask, mBearerInitialVal)) {
+            bearerVal = mBearerInitialVal;
+        } else {
+            // bearer field was being used but bitmask has changed now and does not include the
+            // initial bearer value -- setting bearer to 0 but maybe better behavior is to choose a
+            // random tech from the new bitmask??
+            bearerVal = 0;
+        }
+        values.put(Telephony.Carriers.BEARER, bearerVal);
 
         values.put(Telephony.Carriers.MVNO_TYPE, checkNotSet(mMvnoType.getValue()));
         values.put(Telephony.Carriers.MVNO_MATCH_DATA, checkNotSet(mMvnoMatchData.getText()));
