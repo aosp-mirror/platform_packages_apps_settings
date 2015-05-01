@@ -740,7 +740,7 @@
     <!-- Fingerprint category title - configuration options for managing fingerprint enrollment [CHAR LIMIT=22] -->
 	<string name="fingerprint_usage_category_title">Use fingerprint for</string>
 	<!-- Preference to add another fingerprint -->
-	<string name="fingerprint_add_title">Add</string>
+	<string name="fingerprint_add_title">Add fingerprint</string>
 	<!-- switch for allowing fingerprint to be used for keyguard -->
 	<string name="fingerprint_enable_keyguard_toggle_title">screen lock</string>
     <!-- message shown for menu item that launches fingerprint settings or enrollment -->
@@ -752,7 +752,7 @@
     <string name="security_settings_fingerprint_enroll_onboard_title">Fingerprint setup</string>
     <!-- Introduction message shown in fingerprint enrollment dialog when the user needs to choose an
          alternate screen unlock (pin, pattern or password) as a backup to fingerprint. -->
-    <string name="security_settings_fingerprint_enroll_onboard_message">To use your fingerprint to unlock your screen or confirm purchases, we\'ll need to:</string>
+    <string name="security_settings_fingerprint_enroll_onboard_message">To use your fingerprint to unlock your screen or confirm purchases, you\'ll need to:</string>
     <!-- Introduction message shown in fingerprint enrollment dialog, first item to describe what
          the user needs to do. -->
     <string name="security_settings_fingerprint_enroll_onboard_message_1">Setup your backup screen lock method</string>
@@ -796,6 +796,10 @@
     <string name="fingerprint_enroll_button_add">Add another</string>
     <!-- Button text shown at the end of enrollment that allows the user to move to the next step -->
     <string name="fingerprint_enroll_button_next">Next</string>
+    <!-- Text shown in fingerprint settings explaining what the fingerprint can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_enroll_disclaimer">In addition to unlocking your phone, you can also use your fingerprint to authorize purchases and app access. <annotation id="url">Learn more</annotation></string>
+    <!-- Text shown in fingerprint settings explaining what the fingerprint can be used for in the case unlocking is disabled [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled">Screen lock option disabled. You can still use your fingerprint to authorize purchases and app access. <annotation id="url">Learn more</annotation></string>
 
     <!-- Title of the preferences category for preference items to control encryption -->
     <string name="crypt_keeper_settings_title">Encryption</string>
@@ -5625,6 +5629,8 @@
     <string name="help_url_nfc_payment" translatable="false"></string>
     <!-- Help URL, Remote display [DO NOT TRANSLATE] -->
     <string name="help_url_remote_display" translatable="false"></string>
+    <!-- Help URL, Fingerprint [DO NOT TRANSLATE] -->
+    <string name="help_url_fingerprint" translatable="false"></string>
 
     <!-- User account title [CHAR LIMIT=30] -->
     <string name="user_account_title">Account for content</string>
