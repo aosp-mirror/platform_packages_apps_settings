@@ -268,7 +268,7 @@
     <!-- Bluetooth settings.  Message for disconnecting from all profiles of a bluetooth device. [CHAR LIMIT=NONE] -->
     <string name="bluetooth_disconnect_all_profiles">This will end your connection with:&lt;br>&lt;b><xliff:g id="device_name">%1$s</xliff:g>&lt;/b></string>
     <!-- Bluetooth Settings. text displayed when user has restriction DISALLOW_CONFIG_BLUETOOTH [CHAR LIMIT=NONE]-->
-    <string name="bluetooth_empty_list_user_restricted">You don\'t have permission to change Bluetooth settings.</string>
+    <string name="bluetooth_empty_list_user_restricted">You don\u2019t have permission to change Bluetooth settings.</string>
 
     <!-- Bluetooth Visibility message.  This message informs the user that their device is now visible to other bluetooth devices.  [CHAR LIMIT=NONE] -->
     <string name="bluetooth_is_visible_message"><xliff:g id="device_name">%1$s</xliff:g> is visible to nearby devices while Bluetooth settings is open.</string>
@@ -357,9 +357,9 @@
     <string name="bluetooth_pb_acceptance_dialog_text">%1$s wants to access your contacts and call history. Give access to %2$s?</string>
 
     <!-- Bluetooth phone book permission Alert Activity checkbox text [CHAR LIMIT=none] -->
-    <string name="bluetooth_remember_choice">Don\'t ask again</string>
+    <string name="bluetooth_remember_choice">Don\u2019t ask again</string>
     <!--FIXME SHOULD BE REMOVED AND ALL LANG VERSIONS FIXED TO ABOVE NAME -->
-    <string name="bluetooth_pb_remember_choice">Don\'t ask again</string>
+    <string name="bluetooth_pb_remember_choice">Don\u2019t ask again</string>
 
     <!-- Activity label of BluetoothMessagePermissionActivity, also used as Strings in the permission dialog [CHAR LIMIT=none] -->
     <string name="bluetooth_map_request">"Message access request"</string>
@@ -415,15 +415,15 @@
     <!-- HTTP proxy settings. Button to get rid of error box-->
     <string name="proxy_error_dismiss">OK</string>
     <!-- HTTP proxy settings. The error if the hostname is not valid -->
-    <string name="proxy_error_invalid_host">The hostname you typed isn\'t valid.</string>
+    <string name="proxy_error_invalid_host">The hostname you typed isn\u2019t valid.</string>
     <!-- HTTP proxy settings. The error if the exclusion list is not valid -->
-    <string name="proxy_error_invalid_exclusion_list">The exclusion list you typed isn\'t properly formatted. Type a comma-separated list of excluded domains.</string>
+    <string name="proxy_error_invalid_exclusion_list">The exclusion list you typed isn\u2019t properly formatted. Type a comma-separated list of excluded domains.</string>
     <!-- HTTP proxy settings. Error msg -->
     <string name="proxy_error_empty_port">You need to complete the port field.</string>
     <!-- HTTP proxy settings. Error msg -->
     <string name="proxy_error_empty_host_set_port">The port field must be empty if the host field is empty.</string>
     <!-- HTTP proxy settings. Error msg -->
-    <string name="proxy_error_invalid_port">The port you typed isn\'t valid.</string>
+    <string name="proxy_error_invalid_port">The port you typed isn\u2019t valid.</string>
     <!-- HTTP proxy settings. Warning message about limited application support [CHAR LIMIT=100]-->
     <string name="proxy_warning_limited_support">The HTTP proxy is used by the browser but may not be used by the other apps.</string>
 
@@ -529,9 +529,9 @@
     <!-- Message when the SD card is being used by the computer as mass storage -->
     <string name="sdcard_settings_mass_storage_status" product="default">SD card is being used as a mass storage device.</string>
     <!-- Message when it is safe to remove the SD card [CHAR LIMIT=30] -->
-    <string name="sdcard_settings_unmounted_status" product="nosdcard">It\'s now safe to remove the USB storage.</string>
+    <string name="sdcard_settings_unmounted_status" product="nosdcard">It\u2019s now safe to remove the USB storage.</string>
     <!-- Message when it is safe to remove the SD card -->
-    <string name="sdcard_settings_unmounted_status" product="default">It\'s now safe to remove the SD card.</string>
+    <string name="sdcard_settings_unmounted_status" product="default">It\u2019s now safe to remove the SD card.</string>
     <!-- Error message when the SD card was removed without properly unmounting [CHAR LIMIT=30] -->
     <string name="sdcard_settings_bad_removal_status" product="nosdcard">USB storage was removed while still in use!</string>
     <!-- Error message when the SD card was removed without properly unmounting -->
@@ -710,7 +710,7 @@
     <!-- Description of how many characters are used in owner info [CHAR LIMIT=40]-->
     <string name="owner_info_settings_status"><xliff:g id="count" example="90">%1$d</xliff:g> / <xliff:g id="count" example="100">%2$d</xliff:g></string>
     <!-- Hint text shown in owner info edit text [CHAR LIMIT=50] -->
-    <string name="owner_info_settings_edit_text_hint">E.g., Joe\'s Android.</string>
+    <string name="owner_info_settings_edit_text_hint">E.g., Joe\u2019s Android.</string>
     <!-- Text shown for title of user info setting [CHAR LIMIT=20]-->
     <string name="user_info_settings_title">User info</string>
     <!-- Text shown next to checkbox for showing profile info on LockScreen [CHAR LIMIT=50]-->
@@ -752,7 +752,7 @@
     <string name="security_settings_fingerprint_enroll_onboard_title">Fingerprint setup</string>
     <!-- Introduction message shown in fingerprint enrollment dialog when the user needs to choose an
          alternate screen unlock (pin, pattern or password) as a backup to fingerprint. -->
-    <string name="security_settings_fingerprint_enroll_onboard_message">To use your fingerprint to unlock your screen or confirm purchases, you\'ll need to:</string>
+    <string name="security_settings_fingerprint_enroll_onboard_message">To use your fingerprint to unlock your screen or confirm purchases, you\u2019ll need to:</string>
     <!-- Introduction message shown in fingerprint enrollment dialog, first item to describe what
          the user needs to do. -->
     <string name="security_settings_fingerprint_enroll_onboard_message_1">Setup your backup screen lock method</string>
@@ -773,7 +773,7 @@
     <!-- Button text shown in fingerprint dialog that allows the user to delete the fingerprint template [CHAR LIMIT=22] -->
     <string name="security_settings_fingerprint_enroll_dialog_delete">Delete</string>
     <!-- Title shown in fingerprint enrollment dialog to begin enrollment [CHAR LIMIT=22]-->
-    <string name="security_settings_fingerprint_enroll_start_title">Let\'s start!</string>
+    <string name="security_settings_fingerprint_enroll_start_title">Let\u2019s start!</string>
     <!-- Message shown in fingerprint enrollment dialog to begin enrollment -->
     <string name="security_settings_fingerprint_enroll_start_message">Put your finger on the fingerprint sensor. Lift after you feel a vibration.</string>
     <!-- Title shown in fingerprint enrollment dialog to repeat touching the fingerprint sensor [CHAR LIMIT=22] -->
@@ -789,7 +789,7 @@
     <!-- Button text to exit fingerprint wizard after everything is done [CHAR LIMIT=15] -->
     <string name="security_settings_fingerprint_enroll_done">Done</string>
     <!-- Dialog title for dialog which shows when user touches the icon on the screen, instead of the sensor at the back [CHAR LIMIT=45] -->
-    <string name="security_settings_fingerprint_enroll_touch_dialog_title">Whoops, that\'s not the sensor</string>
+    <string name="security_settings_fingerprint_enroll_touch_dialog_title">Whoops, that\u2019s not the sensor</string>
     <!-- Dialog message for dialog which shows when user touches the icon on the screen, instead of the sensor at the back [CHAR LIMIT=45] -->
     <string name="security_settings_fingerprint_enroll_touch_dialog_message">Use the fingerprint sensor on your device.</string>
     <!-- Button text shown at the end of enrollment that allows the user to add another fingerprint -->
@@ -815,21 +815,21 @@
     <!-- Informational text in the first confirmation screen before starting device encryption -->
     <string name="crypt_keeper_desc" product="tablet">
     You can encrypt your accounts, settings, downloaded apps and their data,
-    media, and other files. After you encrypt your tablet, assuming you\'ve set up a screen lock
-    (that is, a pattern or numeric PIN or password), you\'ll need to unlock the screen to decrypt
+    media, and other files. After you encrypt your tablet, assuming you\u2019ve set up a screen lock
+    (that is, a pattern or numeric PIN or password), you\u2019ll need to unlock the screen to decrypt
     the tablet every time you power it on. The only other way to decrypt is to perform a factory
     data reset, erasing all your data.\n\nEncryption takes an hour or more. You must start with
     a charged battery and keep your tablet plugged in throughout the process. If you interrupt it,
-    you\'ll lose some or all of your data</string>
+    you\u2019ll lose some or all of your data</string>
     <!-- Informational text in the first confirmation screen before starting device encryption -->
     <string name="crypt_keeper_desc" product="default">
     You can encrypt your accounts, settings, downloaded apps and their data,
-    media, and other files. After you encrypt your phone, assuming you\'ve set up a screen lock
-    (that is, a pattern or numeric PIN or password), you\'ll need to unlock the screen to decrypt
+    media, and other files. After you encrypt your phone, assuming you\u2019ve set up a screen lock
+    (that is, a pattern or numeric PIN or password), you\u2019ll need to unlock the screen to decrypt
     the phone every time you power it on. The only other way to decrypt is to perform a factory
     data reset, erasing all your data.\n\nEncryption takes an hour or more. You must start with
     a charged battery and keep your phone plugged in throughout the process. If you interrupt it,
-    you\'ll lose some or all of your data.</string>
+    you\u2019ll lose some or all of your data.</string>
 
     <!-- Button text to start encryption process -->
     <string name="crypt_keeper_button_text" product="tablet">Encrypt tablet</string>
@@ -851,12 +851,12 @@
     <string name="crypt_keeper_confirm_title">Encrypt?</string>
     <!-- Warning text in the final confirmation screen before starting device encryption -->
     <string name="crypt_keeper_final_desc" product="tablet">
-    The encryption operation is irreversible and if you interrupt it, you\'ll lose data.
+    The encryption operation is irreversible and if you interrupt it, you\u2019ll lose data.
     Encryption takes an hour or more, during which the tablet will restart several times.
     </string>
     <!-- Warning text in the final confirmation screen before starting device encryption -->
     <string name="crypt_keeper_final_desc" product="default">
-    The encryption operation is irreversible and if you interrupt it, you\'ll lose data.
+    The encryption operation is irreversible and if you interrupt it, you\u2019ll lose data.
     Encryption takes an hour or more, during which the phone will restart several times.
     </string>
 
@@ -891,20 +891,20 @@
 
     <!-- Informational text when encryption fails -->
     <string name="crypt_keeper_failed_summary" product="tablet">
-      Encryption was interrupted and can\'t complete. As a result, the data on
+      Encryption was interrupted and can\u2019t complete. As a result, the data on
       your tablet is no longer accessible.
       \n\n
       To resume using your tablet, you need to perform a factory reset.
-      When you set up your tablet after the reset, you\'ll have an opportunity
+      When you set up your tablet after the reset, you\u2019ll have an opportunity
       to restore any data that was backed up to your Google Account.
     </string>
 
     <!-- Informational text when encryption fails -->
     <string name="crypt_keeper_failed_summary" product="default">
-      Encryption was interrupted and can\'t complete. As a result, the data on
+      Encryption was interrupted and can\u2019t complete. As a result, the data on
       your phone is no longer accessible.
       \n\nTo resume using your phone, you need to perform a factory reset.
-      When you set up your phone after the reset, you\'ll have an opportunity
+      When you set up your phone after the reset, you\u2019ll have an opportunity
       to restore any data that was backed up to your Google Account.
     </string>
 
@@ -916,7 +916,7 @@
       The password you entered is correct, but unfortunately your data is
       corrupt.
       \n\nTo resume using your tablet, you need to perform a factory reset.
-      When you set up your tablet after the reset, you\'ll have an opportunity
+      When you set up your tablet after the reset, you\u2019ll have an opportunity
       to restore any data that was backed up to your Google Account.
     </string>
 
@@ -925,7 +925,7 @@
       The password you entered is correct, but unfortunately your data is
       corrupt.
       \n\nTo resume using your phone, you need to perform a factory reset.
-      When you set up your phone after the reset, you\'ll have an opportunity
+      When you set up your phone after the reset, you\u2019ll have an opportunity
       to restore any data that was backed up to your Google Account.
     </string>
 
@@ -955,7 +955,7 @@
     <string name="unlock_set_unlock_launch_picker_enable_summary">Choose a method to lock the screen</string>
 
     <!-- Info explaining the backup lock which is used for facelock -->
-    <string name="unlock_backup_info_summary">When Face Unlock can\'t see you, how do you want to unlock?</string>
+    <string name="unlock_backup_info_summary">When Face Unlock can\u2019t see you, how do you want to unlock?</string>
 
     <!-- Title for preference that disables unlock security [CHAR LIMIT=22] -->
     <string name="unlock_set_unlock_off_title">None</string>
@@ -1005,7 +1005,7 @@
     <!-- Footer text in when choosing screen lock type during setup wizard, telling the user that
          they can add fingerprint after they complete setup wizard. The text "Settings > Security"
          should match settings_label and security_settings_title [CHAR LIMIT=NONE] -->
-    <string name="unlock_setup_wizard_fingerprint_details">Once you\'ve set up a screen lock, you can also set up your fingerprint in Settings &gt; Security.</string>
+    <string name="unlock_setup_wizard_fingerprint_details">Once you\u2019ve set up a screen lock, you can also set up your fingerprint in Settings &gt; Security.</string>
 
     <!-- Title for option to turn of password/pin/pattern unlock. [CHAR LIMIT=22] -->
     <string name="unlock_disable_lock_title">Turn off screen lock</string>
@@ -1046,7 +1046,7 @@
     <string name="lockpassword_pin_contains_non_digits">PIN must contain only digits 0-9.</string>
 
     <!-- Error shown when in PIN mode and PIN has been used recently. Please keep this string short! -->
-    <string name="lockpassword_pin_recently_used">Device administrator doesn\'t allow using a recent PIN.</string>
+    <string name="lockpassword_pin_recently_used">Device administrator doesn\u2019t allow using a recent PIN.</string>
 
     <!-- Error shown when in PASSWORD mode and user enters an invalid character -->
     <string name="lockpassword_illegal_character">Password contains an illegal character.</string>
@@ -1097,7 +1097,7 @@
     </plurals>
 
     <!-- Error shown when in PASSWORD mode and password has been used recently. Please keep this string short! -->
-    <string name="lockpassword_password_recently_used">Device administrator doesn\'t allow using a recent password.</string>
+    <string name="lockpassword_password_recently_used">Device administrator doesn\u2019t allow using a recent password.</string>
 
     <!-- [CHAR_LIMIT=NONE] Error shown when the user tries to set an ascending or descending sequence of digits -->
     <string name="lockpassword_pin_no_sequential_digits">An ascending, descending or repeated sequence of digits is forbidden</string>
@@ -1191,7 +1191,7 @@
     <string name="bluetooth_error_title"></string>
 
     <!-- Message for the error dialog when BT connecting operation fails generically. -->
-    <string name="bluetooth_connecting_error_message">Couldn\'t connect to <xliff:g id="device_name">%1$s</xliff:g>.</string>
+    <string name="bluetooth_connecting_error_message">Couldn\u2019t connect to <xliff:g id="device_name">%1$s</xliff:g>.</string>
 
     <!-- Bluetooth settings: The title of the preference (list item) that initiates a scan for devices -->
     <string name="bluetooth_preference_scan_title">Scan for devices</string>
@@ -1265,9 +1265,9 @@
     <!-- Bluetooth settings.  Message for disconnecting from the PAN profile (user role). [CHAR LIMIT=80] -->
     <string name="bluetooth_disconnect_pan_user_profile">Internet access via <xliff:g id="device_name">%1$s</xliff:g> will be disconnected.</string>
     <!-- Bluetooth settings.  Message for disconnecting from the PAN profile (NAP role). [CHAR LIMIT=80] -->
-    <string name="bluetooth_disconnect_pan_nap_profile" product="tablet"><xliff:g id="device_name">%1$s</xliff:g> will be disconnected from sharing this tablet\'s Internet connection.</string>
+    <string name="bluetooth_disconnect_pan_nap_profile" product="tablet"><xliff:g id="device_name">%1$s</xliff:g> will be disconnected from sharing this tablet\u2019s Internet connection.</string>
     <!-- Bluetooth settings.  Message for disconnecting from the PAN profile (NAP role). [CHAR LIMIT=80] -->
-    <string name="bluetooth_disconnect_pan_nap_profile" product="default"><xliff:g id="device_name">%1$s</xliff:g> will be disconnected from sharing this phone\'s Internet connection.</string>
+    <string name="bluetooth_disconnect_pan_nap_profile" product="default"><xliff:g id="device_name">%1$s</xliff:g> will be disconnected from sharing this phone\u2019s Internet connection.</string>
 
     <!-- Bluetooth settings.  Connection options screen.  The title of the screen. [CHAR LIMIT=40] -->
     <string name="bluetooth_device_advanced_title">Paired Bluetooth device</string>
@@ -1412,7 +1412,7 @@
     <!-- Checkbox title for option to toggle poor network detection -->
     <string name="wifi_poor_network_detection">Avoid poor connections</string>
     <!-- Checkbox summary for option to toggle poor network detection -->
-    <string name="wifi_poor_network_detection_summary">Don\'t use a Wi\u2011Fi network unless it has a good Internet connection</string>
+    <string name="wifi_poor_network_detection_summary">Don\u2019t use a Wi\u2011Fi network unless it has a good Internet connection</string>
     <!-- Checkbox summary for option to toggle poor network detection [CHAR LIMIT=60] -->
     <string name="wifi_avoid_poor_network_detection_summary">Only use networks that have a good Internet connection</string>
     <!-- Checkbox title for option to connect to open Wi-Fi automatically [CHAR LIMIT=40] -->
@@ -1432,7 +1432,7 @@
         <xliff:g id="link_begin">LINK_BEGIN</xliff:g>scanning
         settings<xliff:g id="link_end">LINK_END</xliff:g>.</string>
     <!-- Wifi scan always mode checkbox text -->
-    <string name="wifi_scan_notify_remember_choice">Don\'t show again</string>
+    <string name="wifi_scan_notify_remember_choice">Don\u2019t show again</string>
     <!-- Setting title for setting the wifi sleep policy. Do we keep Wi-Fi active when the screen turns off? -->
     <string name="wifi_setting_sleep_policy_title">Keep Wi\u2011Fi on during sleep</string>
     <!-- Setting title for setting the wifi sleep policy. Do we keep Wi-Fi active when the screen turns off? [CHAR LIMIT=30] -->
@@ -1478,7 +1478,7 @@
     <!-- Wi-Fi settings. text displayed when Wi-Fi is on and network list is empty [CHAR LIMIT=50]-->
     <string name="wifi_empty_list_wifi_on">Searching for Wi\u2011Fi networks\u2026</string>
     <!-- Wifi Settings. text displayed when user has restriction DISALLOW_CONFIG_WIFI [CHAR LIMIT=NONE]-->
-    <string name="wifi_empty_list_user_restricted">You don\'t have permission to change the Wi\u2011Fi network.</string>
+    <string name="wifi_empty_list_user_restricted">You don\u2019t have permission to change the Wi\u2011Fi network.</string>
     <!-- Wi-Fi settings. title for setup other network button [CHAR LIMIT=35]-->
     <string name="wifi_other_network">Add another network</string>
     <!-- Wi-Fi settings. content description for more button [CHAR LIMIT=50]-->
@@ -1494,7 +1494,7 @@
     <!-- Message in WPS dialog at start up [CHAR LIMIT=150] -->
     <string name="wifi_wps_setup_msg">Starting WPS\u2026</string>
     <!-- Message in WPS dialog for PBC after start up [CHAR LIMIT=150] -->
-    <string name="wifi_wps_onstart_pbc">Press the Wi\u2011Fi Protected Setup button on your router. It may be called \"WPS\" or marked with this symbol:</string>
+    <string name="wifi_wps_onstart_pbc">Press the Wi\u2011Fi Protected Setup button on your router. It may be called \u201cWPS\u201d or marked with this symbol:</string>
     <!-- Message in WPS dialog for PIN after start up [CHAR LIMIT=150] -->
     <string name="wifi_wps_onstart_pin">Enter pin <xliff:g id="number">%1$s</xliff:g> on your Wi\u2011Fi router. The setup can take up to two minutes to complete.</string>
     <!-- Text displayed when WPS succeeds [CHAR LIMIT=150] -->
@@ -1583,7 +1583,7 @@
 
     <!-- Dialog text to tell the user that the selected network does not have Internet access. -->
     <string name="no_internet_access_text">This network has no Internet access. Use this network anyway?</string>
-    <string name="no_internet_access_remember">Don\'t ask again for this network</string>
+    <string name="no_internet_access_remember">Don\u2019t ask again for this network</string>
 
     <!-- Button label to connect to a Wi-Fi network -->
     <string name="wifi_connect">Connect</string>
@@ -1602,7 +1602,7 @@
     <!-- Button for skipping a step after having been warned of a potential concern [CHAR LIMIT=30] -->
     <string name="wifi_skip_anyway">Skip anyway</string>
     <!-- Button for going to the previous screen or step [CHAR LIMIT=20] -->
-    <string name="wifi_dont_skip">Don\'t skip</string>
+    <string name="wifi_dont_skip">Don\u2019t skip</string>
 
     <!-- Text warning about skipping Wi-Fi with a mobile connect (tablet) [CHAR LIMIT=NONE]-->
     <string name="wifi_skipped_message" product="tablet">WARNING: if you skip Wi\u2011Fi, your tablet will only use cellular data for initial downloads and updates. To avoid possible data charges, connect to Wi\u2011Fi.</string>
@@ -1612,11 +1612,11 @@
     <string name="wifi_skipped_message" product="default">WARNING: if you skip Wi\u2011Fi, your phone will only use cellular data for initial downloads and updates. To avoid possible data charges, connect to Wi\u2011Fi.</string>
 
     <!-- Text warning about skipping Wi-Fi without a mobile connect (tablet) [CHAR LIMIT=NONE] -->
-    <string name="wifi_and_mobile_skipped_message" product="tablet">If you skip Wi\u2011Fi:\n\n<li>Your tablet won\'t have an Internet connection.</li>\n\n<li>You won\'t get software updates until you connect to the Internet.</li>\n\n<li>You can\'t activate device protection features at this time.</li></string>
+    <string name="wifi_and_mobile_skipped_message" product="tablet">If you skip Wi\u2011Fi:\n\n<li>Your tablet won\u2019t have an Internet connection.</li>\n\n<li>You won\u2019t get software updates until you connect to the Internet.</li>\n\n<li>You can\u2019t activate device protection features at this time.</li></string>
     <!-- Text warning about skipping Wi-Fi without a mobile connect (device) [CHAR LIMIT=NONE] -->
-    <string name="wifi_and_mobile_skipped_message" product="device">If you skip Wi\u2011Fi:\n\n<li>Your device won\'t have an Internet connection.</li>\n\n<li>You won\'t get software updates until you connect to the Internet.</li>\n\n<li>You can\'t activate device protection features at this time.</li></string>
+    <string name="wifi_and_mobile_skipped_message" product="device">If you skip Wi\u2011Fi:\n\n<li>Your device won\u2019t have an Internet connection.</li>\n\n<li>You won\u2019t get software updates until you connect to the Internet.</li>\n\n<li>You can\u2019t activate device protection features at this time.</li></string>
     <!-- Text warning about skipping Wi-Fi without a mobile connect (phone) [CHAR LIMIT=NONE] -->
-    <string name="wifi_and_mobile_skipped_message" product="default">If you skip Wi\u2011Fi:\n\n<li>Your phone won\'t have an Internet connection.</li>\n\n<li>You won\'t get software updates until you connect to the Internet.</li>\n\n<li>You can\'t activate device protection features at this time.</li></string>
+    <string name="wifi_and_mobile_skipped_message" product="default">If you skip Wi\u2011Fi:\n\n<li>Your phone won\u2019t have an Internet connection.</li>\n\n<li>You won\u2019t get software updates until you connect to the Internet.</li>\n\n<li>You can\u2019t activate device protection features at this time.</li></string>
     <!-- Text alerting that Wi-Fi couldn't connect (tablet) [CHAR LIMIT=NONE] -->
     <string name="wifi_connect_failed_message" product="tablet">The tablet was unable to connect to this Wi\u2011Fi network.</string>
     <!-- Text alerting that Wi-Fi couldn't connect (device) [CHAR LIMIT=NONE] -->
@@ -1690,7 +1690,7 @@
     <!-- Title for remembered p2p groups -->
     <string name="wifi_p2p_remembered_groups">Remembered groups</string>
     <!-- Toast text for a failed connection initiation -->
-    <string name="wifi_p2p_failed_connect_message">Couldn\'t connect.</string>
+    <string name="wifi_p2p_failed_connect_message">Couldn\u2019t connect.</string>
     <!-- Message text for failure to rename -->
     <string name="wifi_p2p_failed_rename_message">Failed to rename device.</string>
     <!-- Title for disconnect dialog -->
@@ -1830,7 +1830,7 @@
         <item>"1"</item>
     </string-array>
     <!-- Wi-Fi Calling settings. Text displayed when Wi-Fi Calling is off -->
-    <string name="wifi_calling_off_explanation">When Wi-Fi calling is on, your phone can route calls via Wi-Fi networks or your carrier\'s network, depending on your preference and which signal is stronger. Before turning on this feature, check with your carrier regarding fees and other details.</string>
+    <string name="wifi_calling_off_explanation">When Wi-Fi calling is on, your phone can route calls via Wi-Fi networks or your carrier\u2019s network, depending on your preference and which signal is stronger. Before turning on this feature, check with your carrier regarding fees and other details.</string>
 
     <!-- Sound and alerts settings -->
     <skip/>
@@ -1860,7 +1860,7 @@
     <string name="checkbox_notification_same_as_incoming_call">Use incoming call volume for notifications</string>
 
     <!-- Home settings screen, text indicating that a launcer does not support work profiles [CHAR LIMIT=100] -->
-    <string name="home_work_profile_not_supported">Doesn\'t support work profiles</string>
+    <string name="home_work_profile_not_supported">Doesn\u2019t support work profiles</string>
 
     <!-- Sound settings screen, setting option title-->
     <string name="notification_sound_dialog_title">Default notification sound</string>
@@ -1928,9 +1928,9 @@
     <!-- Dock settings screen, setting option summary text when check box is selected -->
     <string name="dock_sounds_enable_summary_on" product="default">Play sound when inserting or removing phone from dock</string>
     <!-- Sound settings screen, setting option summary text when check box is clear -->
-    <string name="dock_sounds_enable_summary_off" product="tablet">Don\'t play sound when inserting or removing tablet from dock</string>
+    <string name="dock_sounds_enable_summary_off" product="tablet">Don\u2019t play sound when inserting or removing tablet from dock</string>
     <!-- Sound settings screen, setting option summary text when check box is clear -->
-    <string name="dock_sounds_enable_summary_off" product="default">Don\'t play sound when inserting or removing phone from dock</string>
+    <string name="dock_sounds_enable_summary_off" product="default">Don\u2019t play sound when inserting or removing phone from dock</string>
 
     <!-- Account settings header. [CHAR LIMIT=30] -->
     <string name="account_settings">Accounts</string>
@@ -2057,13 +2057,13 @@
     <!-- SIM card lock settings screen, SIM PIN dialog message when wrong PIN is entered  [CHAR LIMIT=40] -->
     <string name="sim_bad_pin">Incorrect PIN</string>
     <!-- SIM card lock settings screen, SIM PIN dialog message when PINs don't match  [CHAR LIMIT=40] -->
-    <string name="sim_pins_dont_match">PINs don\'t match</string>
+    <string name="sim_pins_dont_match">PINs don\u2019t match</string>
     <!-- SIM card lock settings screen, toast after not entering correct SIM PIN  [CHAR LIMIT=40] -->
-    <string name="sim_change_failed">Can\'t change PIN.\nPossibly incorrect PIN.</string>
+    <string name="sim_change_failed">Can\u2019t change PIN.\nPossibly incorrect PIN.</string>
     <!-- SIM card lock settings screen, SIM PIN dialog message when the entered PIN is correct [CHAR LIMIT=40] -->
     <string name="sim_change_succeeded">SIM PIN changed successfully</string>
     <!-- SIM card lock settings screen, toast after not entering correct SIM PIN [CHAR LIMIT=40] -->
-    <string name="sim_lock_failed">Can\'t change SIM card lock state.\nPossibly incorrect PIN.</string>
+    <string name="sim_lock_failed">Can\u2019t change SIM card lock state.\nPossibly incorrect PIN.</string>
     <!-- SIM card lock settings screen, SIM PIN dialog button labels: [CHAR LIMIT=40] -->
     <string name="sim_enter_ok">OK</string>
     <!-- SIM card lock settings screen, SIM PIN dialog button labels: [CHAR LIMIT=40] -->
@@ -2262,9 +2262,9 @@
     <!-- SD card eject error dialog title   -->
     <string name="dlg_error_unmount_title" product="default"></string>
     <!-- SD card eject error dialog text   [CHAR LIMIT=NONE] -->
-    <string name="dlg_error_unmount_text" product="nosdcard">Couldn\'t unmount USB storage. Try again later.</string>
+    <string name="dlg_error_unmount_text" product="nosdcard">Couldn\u2019t unmount USB storage. Try again later.</string>
     <!-- SD card eject error dialog text   -->
-    <string name="dlg_error_unmount_text" product="default">Couldn\'t unmount SD card. Try again later.</string>
+    <string name="dlg_error_unmount_text" product="default">Couldn\u2019t unmount SD card. Try again later.</string>
     <!-- SD card unmount informative text   [CHAR LIMIT=NONE] -->
     <string name="unmount_inform_text" product="nosdcard">USB storage will be unmounted.</string>
     <!-- SD card unmount informative text   [CHAR LIMIT=NONE] -->
@@ -2307,7 +2307,7 @@
     <!-- Storage setting.  Title for PTP checkbox [CHAR LIMIT=30]-->
     <string name="usb_ptp_title">Camera (PTP)</string>
     <!-- Storage setting.  Summary for PTP checkbox [CHAR LIMIT=NONE]-->
-    <string name="usb_ptp_summary">Lets you transfer photos using camera software, and transfer any files on computers that don\'t support MTP</string>
+    <string name="usb_ptp_summary">Lets you transfer photos using camera software, and transfer any files on computers that don\u2019t support MTP</string>
     <!-- Storage setting.  Title for MIDI checkbox [CHAR LIMIT=30]-->
     <string name="usb_midi_title">MIDI</string>
     <!-- Storage setting.  Summary for MIDI checkbox [CHAR LIMIT=NONE]-->
@@ -2327,17 +2327,17 @@
     <!-- Toast informing that storage mount operation was successful. [CHAR LIMIT=64]-->
     <string name="storage_mount_success"><xliff:g id="name" example="SD card">%1$s</xliff:g> is mounted</string>
     <!-- Toast informing that storage unmount operation failed. [CHAR LIMIT=64]-->
-    <string name="storage_mount_failure">Couldn\'t mount <xliff:g id="name" example="SD card">%1$s</xliff:g></string>
+    <string name="storage_mount_failure">Couldn\u2019t mount <xliff:g id="name" example="SD card">%1$s</xliff:g></string>
 
     <!-- Toast informing that storage unmount operation was successful. [CHAR LIMIT=64]-->
     <string name="storage_unmount_success"><xliff:g id="name" example="SD card">%1$s</xliff:g> is safely ejected</string>
     <!-- Toast informing that storage unmount operation failed. [CHAR LIMIT=64]-->
-    <string name="storage_unmount_failure">Couldn\'t safely eject <xliff:g id="name" example="SD card">%1$s</xliff:g></string>
+    <string name="storage_unmount_failure">Couldn\u2019t safely eject <xliff:g id="name" example="SD card">%1$s</xliff:g></string>
 
     <!-- Toast informing that storage format operation was successful. [CHAR LIMIT=64]-->
     <string name="storage_format_success"><xliff:g id="name" example="SD card">%1$s</xliff:g> is formatted</string>
     <!-- Toast informing that storage format operation failed. [CHAR LIMIT=64]-->
-    <string name="storage_format_failure">Couldn\'t format <xliff:g id="name" example="SD card">%1$s</xliff:g></string>
+    <string name="storage_format_failure">Couldn\u2019t format <xliff:g id="name" example="SD card">%1$s</xliff:g></string>
 
     <!-- Title of dialog prompting user to rename a storage volume [CHAR LIMIT=32]-->
     <string name="storage_rename_title">Rename storage</string>
@@ -2352,11 +2352,11 @@
 
     <!-- Body of dialog informing user about consequences of ejecting an internal storage device [CHAR LIMIT=NONE]-->
     <string name="storage_internal_unmount_details"><b>When you eject this <xliff:g id="name" example="SD card">^1</xliff:g>, apps stored on it will stop working, and media files stored on it will not be available until it is reinserted.</b>
-\n\nThis <xliff:g id="name" example="SD card">^1</xliff:g> is formatted to work on this device only.  It won\'t work on any others.</string>
+\n\nThis <xliff:g id="name" example="SD card">^1</xliff:g> is formatted to work on this device only.  It won\u2019t work on any others.</string>
 
     <!-- Body of dialog informing user about consequences of forgetting an internal storage device [CHAR LIMIT=NONE]-->
     <string name="storage_internal_forget_details">To use the apps, photos, or data this <xliff:g id="name" example="SD card">^1</xliff:g> contains, reinsert it.
-\n\nAlternatively, you can choose to forget this storage if the device isn\'t available.
+\n\nAlternatively, you can choose to forget this storage if the device isn\u2019t available.
 \n\nIf you choose to forget, all the data the device contains will be lost forever.
 \n\nYou can reinstall the apps later, but their data stored on this device will be lost.</string>
 
@@ -2392,13 +2392,13 @@
     <!-- Title of wizard step showing formatting progress [CHAR LIMIT=32] -->
     <string name="storage_wizard_format_progress_title">Formatting <xliff:g id="name" example="SD card">^1</xliff:g>\u2026</string>
     <!-- Body of wizard step showing formatting progress [CHAR LIMIT=NONE] -->
-    <string name="storage_wizard_format_progress_body">Don\'t remove the <xliff:g id="name" example="SD card">^1</xliff:g> while it\'s formatting.</string>
+    <string name="storage_wizard_format_progress_body">Don\u2019t remove the <xliff:g id="name" example="SD card">^1</xliff:g> while it\u2019s formatting.</string>
 
     <!-- Title of wizard step prompting user to migrate data to new storage [CHAR LIMIT=32] -->
     <string name="storage_wizard_migrate_title">Move data to new storage</string>
     <!-- Body of wizard step prompting user to migrate data to new storage [CHAR LIMIT=NONE] -->
     <string name="storage_wizard_migrate_body">You can move your photos, files, and app data to this new <xliff:g id="name" example="SD card">^1</xliff:g>.
-\n\nThe move takes about <xliff:g id="time" example="1 hour">^2</xliff:g> and will free <xliff:g id="size" example="1.2 GB">^3</xliff:g> on internal storage. Some apps won\'t work while it\'s underway.
+\n\nThe move takes about <xliff:g id="time" example="1 hour">^2</xliff:g> and will free <xliff:g id="size" example="1.2 GB">^3</xliff:g> on internal storage. Some apps won\u2019t work while it\u2019s underway.
     </string>
     <!-- Title of wizard choice to migrate data right now [CHAR LIMIT=64] -->
     <string name="storage_wizard_migrate_now">Move now</string>
@@ -2417,8 +2417,8 @@
 
     <!-- Body of wizard step providing details about data migration [CHAR LIMIT=NONE] -->
     <string name="storage_wizard_migrate_details">During the move:
-\n\u2022 Don\'t remove the <xliff:g id="name" example="SD card">^1</xliff:g>.
-\n\u2022 Some apps won\'t work correctly.
+\n\u2022 Don\u2019t remove the <xliff:g id="name" example="SD card">^1</xliff:g>.
+\n\u2022 Some apps won\u2019t work correctly.
 \n\u2022 Keep the device charged.
     </string>
 
@@ -2436,15 +2436,15 @@
     <!-- Title of wizard step prompting user to move an app [CHAR LIMIT=32] -->
     <string name="storage_wizard_move_confirm_title">Move <xliff:g id="app" example="Calculator">^1</xliff:g></string>
     <!-- Body of wizard step prompting user to move an app [CHAR LIMIT=NONE] -->
-    <string name="storage_wizard_move_confirm_body">Moving <xliff:g id="app" example="Calculator">^1</xliff:g> and its data to <xliff:g id="name" example="SD card">^2</xliff:g> will take only a few moments. You won\'t be able to use the app until the move is complete.
-\n\nDon\'t remove the <xliff:g id="name" example="SD card">^2</xliff:g> during the move.
+    <string name="storage_wizard_move_confirm_body">Moving <xliff:g id="app" example="Calculator">^1</xliff:g> and its data to <xliff:g id="name" example="SD card">^2</xliff:g> will take only a few moments. You won\u2019t be able to use the app until the move is complete.
+\n\nDon\u2019t remove the <xliff:g id="name" example="SD card">^2</xliff:g> during the move.
     </string>
 
     <!-- Title of wizard step showing app move progress [CHAR LIMIT=32] -->
     <string name="storage_wizard_move_progress_title">Moving <xliff:g id="app" example="Calculator">^1</xliff:g>\u2026</string>
     <!-- Body of wizard step showing app move progress [CHAR LIMIT=NONE] -->
-    <string name="storage_wizard_move_progress_body">Don\'t remove the <xliff:g id="name" example="SD card">^1</xliff:g> during the move.
-\n\nThe <xliff:g id="app" example="Calculator">^2</xliff:g> app on this device won\'t be available until the move is complete.
+    <string name="storage_wizard_move_progress_body">Don\u2019t remove the <xliff:g id="name" example="SD card">^1</xliff:g> during the move.
+\n\nThe <xliff:g id="app" example="Calculator">^2</xliff:g> app on this device won\u2019t be available until the move is complete.
     </string>
     <!-- Title of wizard button offering to cancel move [CHAR LIMIT=32] -->
     <string name="storage_wizard_move_progress_cancel">Cancel move</string>
@@ -2522,9 +2522,9 @@
     <!-- APN error dialog title -->
     <string name="error_title"></string>
     <!-- APN error dialog messages: -->
-    <string name="error_name_empty">The Name field can\'t be empty.</string>
+    <string name="error_name_empty">The Name field can\u2019t be empty.</string>
     <!-- APN error dialog messages: -->
-    <string name="error_apn_empty">The APN can\'t be empty.</string>
+    <string name="error_apn_empty">The APN can\u2019t be empty.</string>
     <!-- APN error dialog messages: -->
     <string name="error_mcc_not3">MCC field must be 3 digits.</string>
     <!-- APN error dialog messages: -->
@@ -2544,7 +2544,7 @@
     <!-- SD card & phone storage settings screen, button on screen after user selects Reset network settings -->
     <string name="reset_network_button_text">Reset settings</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Reset settings button -->
-    <string name="reset_network_final_desc">Reset all network settings? You can\'t undo this action!</string>
+    <string name="reset_network_final_desc">Reset all network settings? You can\u2019t undo this action!</string>
     <!-- SD card & phone storage settings screen, button on screen after user selects Reset settings button -->
     <string name="reset_network_final_button_text">Reset settings</string>
     <!-- Reset settings confirmation screen title [CHAR LIMIT=30] -->
@@ -2558,9 +2558,9 @@
     <!-- SD card & phone storage settings screen, setting option name under Internal phone storage heading -->
     <string name="master_clear_title">Factory data reset</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Factory data reset [CHAR LIMIT=NONE] -->
-    <string name="master_clear_desc" product="tablet">"This will erase all data from your tablet\'s <b>internal storage</b>, including:\n\n<li>Your Google account</li>\n<li>System and app data and settings</li>\n<li>Downloaded apps</li>"</string>
+    <string name="master_clear_desc" product="tablet">"This will erase all data from your tablet\u2019s <b>internal storage</b>, including:\n\n<li>Your Google account</li>\n<li>System and app data and settings</li>\n<li>Downloaded apps</li>"</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Factory data reset [CHAR LIMIT=NONE] -->
-    <string name="master_clear_desc" product="default">"This will erase all data from your phone\'s <b>internal storage</b>, including:\n\n<li>Your Google account</li>\n<li>System and app data and settings</li>\n<li>Downloaded apps"</li></string>
+    <string name="master_clear_desc" product="default">"This will erase all data from your phone\u2019s <b>internal storage</b>, including:\n\n<li>Your Google account</li>\n<li>System and app data and settings</li>\n<li>Downloaded apps"</li></string>
     <!-- SD card & phone storage settings screen, instructions and list of current accounts.  The list of accounts follows this text[CHAR LIMIT=NONE] -->
     <string name="master_clear_accounts" product="default">"\n\nYou are currently signed into the following accounts:\n"</string>
     <!-- SD card & phone storage settings screen, notification if other users are present on the device [CHAR LIMIT=NONE] -->
@@ -2584,11 +2584,11 @@
     <!-- SD card & phone storage settings screen, button on screen after user selects Factory data reset -->
     <string name="master_clear_button_text" product="default">Reset phone</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Reset phone button -->
-    <string name="master_clear_final_desc">Erase all your personal information and downloaded apps? You can\'t undo this action!</string>
+    <string name="master_clear_final_desc">Erase all your personal information and downloaded apps? You can\u2019t undo this action!</string>
     <!-- SD card & phone storage settings screen, button on screen after user selects Reset phone button -->
     <string name="master_clear_final_button_text">Erase everything</string>
     <!-- Master clear failed message -->
-    <string name="master_clear_failed">No reset was performed because the System Clear service isn\'t available.</string>
+    <string name="master_clear_failed">No reset was performed because the System Clear service isn\u2019t available.</string>
     <!-- Master clear confirmation screen title [CHAR LIMIT=30] -->
     <string name="master_clear_confirm_title">Reset?</string>
     <!-- Error message for users that aren't allowed to factory reset [CHAR LIMIT=none] -->
@@ -2616,9 +2616,9 @@
     <!-- SD card & phone storage settings screen, button on screen after user selects Factory data reset -->
     <string name="media_format_button_text" product="default">Erase SD card</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Format media button [CHAR LIMIT=NONE] -->
-    <string name="media_format_final_desc" product="nosdcard">Erase the USB storage, deleting all files stored there? You can\'t reverse this action!</string>
+    <string name="media_format_final_desc" product="nosdcard">Erase the USB storage, deleting all files stored there? You can\u2019t reverse this action!</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Format media button [CHAR LIMIT=NONE] -->
-    <string name="media_format_final_desc" product="default">Erase the SD card, deleting all files stored there? You can\'t reverse this action!</string>
+    <string name="media_format_final_desc" product="default">Erase the SD card, deleting all files stored there? You can\u2019t reverse this action!</string>
     <!-- SD card & phone storage settings screen, button on screen after user selects Format media button -->
     <string name="media_format_final_button_text">Erase everything</string>
 
@@ -2647,7 +2647,7 @@
     <!-- USB tethered subtext - shown when USB is connected and being tethered -->
     <string name="usb_tethering_active_subtext">Tethered</string>
     <!-- USB storage subtext - shown when tethering is disabled because USB storage is active -->
-    <string name="usb_tethering_storage_active_subtext">Can\'t tether when USB storage is in use</string>
+    <string name="usb_tethering_storage_active_subtext">Can\u2019t tether when USB storage is in use</string>
     <!-- USB unavailable subtext - shown when USB is not connected -->
     <string name="usb_tethering_unavailable_subtext">USB not connected</string>
     <!-- USB unavailable subtext - shown when USB is not connected -->
@@ -2659,27 +2659,27 @@
     <!-- Label for bluetooth tether checkbox [CHAR LIMIT=25]-->
     <string name="bluetooth_tether_checkbox_text">Bluetooth tethering</string>
     <!-- Bluetooth available subtext - shown when Bluetooth tethering is turned on but it is not currently tethered to any devices [CHAR LIMIT=50]-->
-    <string name="bluetooth_tethering_available_subtext" product="tablet">Sharing this tablet\'s Internet connection</string>
+    <string name="bluetooth_tethering_available_subtext" product="tablet">Sharing this tablet\u2019s Internet connection</string>
     <!-- Bluetooth available subtext - shown when Bluetooth tethering is turned on but it is not currently tethered to any devices [CHAR LIMIT=50]-->
-    <string name="bluetooth_tethering_available_subtext" product="default">Sharing this phone\'s Internet connection</string>
+    <string name="bluetooth_tethering_available_subtext" product="default">Sharing this phone\u2019s Internet connection</string>
     <!-- Bluetooth connected subtext - shown when a device is tethered over Bluetooth [CHAR LIMIT=60]-->
-    <string name="bluetooth_tethering_device_connected_subtext" product="tablet">Sharing this tablet\'s Internet connection to 1 device</string>
+    <string name="bluetooth_tethering_device_connected_subtext" product="tablet">Sharing this tablet\u2019s Internet connection to 1 device</string>
     <!-- Bluetooth connected subtext - shown when a device is tethered over Bluetooth [CHAR LIMIT=60]-->
-    <string name="bluetooth_tethering_device_connected_subtext" product="default">Sharing this phone\'s Internet connection to 1 device</string>
+    <string name="bluetooth_tethering_device_connected_subtext" product="default">Sharing this phone\u2019s Internet connection to 1 device</string>
     <!-- Bluetooth connected subtext - shown when multiple devices are tethered over Bluetooth [CHAR LIMIT=60]-->
-    <string name="bluetooth_tethering_devices_connected_subtext" product="tablet">Sharing this tablet\'s Internet connection to <xliff:g id="connectedDeviceCount">%1$d</xliff:g> devices</string>
+    <string name="bluetooth_tethering_devices_connected_subtext" product="tablet">Sharing this tablet\u2019s Internet connection to <xliff:g id="connectedDeviceCount">%1$d</xliff:g> devices</string>
     <!-- Bluetooth connected subtext - shown when multiple devices are tethered over Bluetooth [CHAR LIMIT=60]-->
-    <string name="bluetooth_tethering_devices_connected_subtext" product="default">Sharing this phone\'s Internet connection to <xliff:g id="connectedDeviceCount">%1$d</xliff:g> devices</string>
+    <string name="bluetooth_tethering_devices_connected_subtext" product="default">Sharing this phone\u2019s Internet connection to <xliff:g id="connectedDeviceCount">%1$d</xliff:g> devices</string>
     <!-- Bluetooth tethering off subtext - shown when Bluetooth Tethering is turned off [CHAR LIMIT=50]-->
-    <string name="bluetooth_tethering_off_subtext_config">Sharing this <xliff:g id="device_name">%1$d</xliff:g>\'s Internet connection</string>
+    <string name="bluetooth_tethering_off_subtext_config">Sharing this <xliff:g id="device_name">%1$d</xliff:g>\u2019s Internet connection</string>
     <!-- Bluetooth tethering off subtext - shown when Bluetooth Tethering is turned off [CHAR LIMIT=50]-->
-    <string name="bluetooth_tethering_off_subtext" product="tablet">Not sharing this tablet\'s Internet connection</string>
+    <string name="bluetooth_tethering_off_subtext" product="tablet">Not sharing this tablet\u2019s Internet connection</string>
     <!-- Bluetooth tethering off subtext - shown when Bluetooth Tethering is turned off [CHAR LIMIT=50]-->
-    <string name="bluetooth_tethering_off_subtext" product="default">Not sharing this phone\'s Internet connection</string>
+    <string name="bluetooth_tethering_off_subtext" product="default">Not sharing this phone\u2019s Internet connection</string>
     <!-- Bluetooth errored subtext - shown when Bluetooth is broken for some reason [CHAR LIMIT=50]-->
     <string name="bluetooth_tethering_errored_subtext">Not tethered</string>
     <!-- Bluetooth Tethering settings. Error message shown when trying to connect an 8th device [CHAR LIMIT=50]-->
-    <string name="bluetooth_tethering_overflow_error">Can\'t tether to more than <xliff:g id="maxConnection">%1$d</xliff:g> devices.</string>
+    <string name="bluetooth_tethering_overflow_error">Can\u2019t tether to more than <xliff:g id="maxConnection">%1$d</xliff:g> devices.</string>
     <!-- Bluetooth Tethering settings.  Message for untethering from a bluetooth device [CHAR LIMIT=50]-->
     <string name="bluetooth_untether_blank"><xliff:g id="device_name">%1$s</xliff:g> will be untethered.</string>
 
@@ -2774,7 +2774,7 @@
     <!-- [CHAR LIMIT=30] Security & location settings screen, setting check box label for Google location service (cell ID, wifi, etc.) -->
     <string name="location_network_based">Wi\u2011Fi &amp; cellular network location</string>
     <!-- [CHAR LIMIT=130] Security & location settings screen, setting summary for Google location service check box-->
-    <string name="location_neighborhood_level">Let apps use Google\'s location service to estimate your location faster. Anonymous location data will be collected and sent to Google.</string>
+    <string name="location_neighborhood_level">Let apps use Google\u2019s location service to estimate your location faster. Anonymous location data will be collected and sent to Google.</string>
     <!-- [CHAR LIMIT=130] Security & location settings screen, setting summary when Use wireless networks check box is selected, for wifi-only devices -->
     <string name="location_neighborhood_level_wifi">Location determined by Wi\u2011Fi</string>
     <!-- [CHAR LIMIT=30] Security & location settings screen, setting check box label for GPS satellites -->
@@ -2843,7 +2843,7 @@
     <!-- About phone settings, Safety Legal information setting option name and title of dialog box holding safety legal info -->
     <string name="settings_safetylegal_activity_title">Safety information</string>
     <!-- About phone settings screen, Safety legal dialog message when data network is not connected -->
-    <string name="settings_safetylegal_activity_unreachable">You don\'t have a data connection. To view this information now, go to %s from any computer connected to the Internet.</string>
+    <string name="settings_safetylegal_activity_unreachable">You don\u2019t have a data connection. To view this information now, go to %s from any computer connected to the Internet.</string>
     <!-- About phone settings screen, Safety Legal dialog title until the link is fully loaded -->
     <string name="settings_safetylegal_activity_loading">Loading\u2026</string>
 
@@ -2861,9 +2861,9 @@
     <!-- Header on password confirm screen [CHAR LIMIT=30] -->
     <string name="lockpassword_confirm_your_pin_header">Confirm your PIN</string>
     <!-- Header on password confirm screen if second password doesn't match the first. [CHAR LIMIT=30] -->
-    <string name="lockpassword_confirm_passwords_dont_match">Passwords don\'t match</string>
+    <string name="lockpassword_confirm_passwords_dont_match">Passwords don\u2019t match</string>
     <!-- Header on pin confirm screen if second pin doesn't match the first. [CHAR LIMIT=30]-->
-    <string name="lockpassword_confirm_pins_dont_match">PINs don\'t match</string>
+    <string name="lockpassword_confirm_pins_dont_match">PINs don\u2019t match</string>
     <!-- Header shown to ask the user to select an unlock method [CHAR LIMIT=30] -->
     <string name="lockpassword_choose_lock_generic_header">Unlock selection</string>
     <!-- Toast shown if setting password was successful -->
@@ -3029,9 +3029,9 @@
     <!-- Manage applications, restore updated system application to factory version -->
     <string name="app_factory_reset">Uninstall updates</string>
     <!-- Manage applications, individual application info screen, screen, message text under Launch by default heading. This is present if the app is set as a default for some actions. -->
-    <string name="auto_launch_enable_text">You\'ve chosen to launch this app by default for some actions.</string>
+    <string name="auto_launch_enable_text">You\u2019ve chosen to launch this app by default for some actions.</string>
     <!-- Manage applications, individual application info screen, screen, message text under Launch by default heading. This is present if the app was given user permission to create widgets. -->
-    <string name="always_allow_bind_appwidgets_text">You\'ve chosen to allow this app to create widgets and access their data.</string>
+    <string name="always_allow_bind_appwidgets_text">You\u2019ve chosen to allow this app to create widgets and access their data.</string>
     <!-- Manage applications, individual application screen, text under Launch by default heading if the app is NOT a default for actions -->
     <string name="auto_launch_disable_text">No defaults set.</string>
     <!-- Manage applications, individual application screen, button label under Launch by default heading.  This is used to clear any default actions that may be assigned to this app.  -->
@@ -3109,7 +3109,7 @@
     <!-- Manage applications, individual application screen, confirmation dialog title. Displays when user selects to "Clear data". -->
     <string name="clear_data_dlg_title">Delete app data?</string>
     <!-- Manage applications, individual application screen, confirmation dialog message. Displays when user selects to "Clear data". It warns the user of the consequences of clearing the data for an app. -->
-    <string name="clear_data_dlg_text">All this app\'s data will be deleted permanently. This includes all files, settings, accounts, databases, etc.</string>
+    <string name="clear_data_dlg_text">All this app\u2019s data will be deleted permanently. This includes all files, settings, accounts, databases, etc.</string>
     <!-- Manage applications, individual application screen, confirmation dialog button. Displays when user selects to "Clear data". Goes through with the clearing of the data. -->
     <string name="dlg_ok">OK</string>
     <!-- Manage applications, individual application screen, confirmation dialog button. Displays when user selects to "Clear data". -->
@@ -3117,9 +3117,9 @@
     <!-- Manage applications, individual application dialog box title. Shown when the user somehow got into a state where it wants to manage some app that isn't found. -->
     <string name="app_not_found_dlg_title"></string>
     <!-- Manage applications, individual application dialog box message. Shown when the user somehow got into a state where it wants to manage some app that isn't found. -->
-    <string name="app_not_found_dlg_text"> The app wasn\'t found in the list of installed apps.</string>
+    <string name="app_not_found_dlg_text"> The app wasn\u2019t found in the list of installed apps.</string>
     <!-- Manage applications, individual application dialog box message. Shown when there was an error trying to clear the data. -->
-    <string name="clear_data_failed">Couldn\'t clear app data.</string>
+    <string name="clear_data_failed">Couldn\u2019t clear app data.</string>
     <!-- Manage applications, factory reset dialog title for system applications. -->
     <string name="app_factory_reset_dlg_title">Uninstall updates?</string>
     <!-- Manage applications, factory reset option dialog text for system applications. -->
@@ -3127,7 +3127,7 @@
     <!-- Manage applications, title for dialog if clear data fails-->
     <string name="clear_failed_dlg_title">Clear data</string>
     <!-- Manage applications, text for dialog if clear data fails-->
-    <string name="clear_failed_dlg_text">Couldn\'t clear data for app.</string>
+    <string name="clear_failed_dlg_text">Couldn\u2019t clear data for app.</string>
     <!-- Manage applications, individual application info screen, text that appears under the "Permissions" heading. This describes the permissions that the application has. -->
     <string name="security_settings_desc" product="tablet">This app can access the following on your tablet:</string>
     <!-- Manage applications, individual application info screen, text that appears under the "Permissions" heading. This describes the permissions that the application has. -->
@@ -3159,9 +3159,9 @@
     <!-- Manage applications, text for permission to send to premium SMS short codes. [CHAR LIMIT=40] -->
     <string name="security_settings_premium_sms_desc">Send premium SMS</string>
     <string name="computing_size">Computing\u2026</string>
-    <string name="invalid_size_value">Couldn\'t compute package size.</string>
+    <string name="invalid_size_value">Couldn\u2019t compute package size.</string>
     <!-- String displayed when list is empty -->
-    <string name="empty_list_msg">You don\'t have any third-party apps installed.</string>
+    <string name="empty_list_msg">You don\u2019t have any third-party apps installed.</string>
     <!-- Manage applications, version string displayed in app snippet -->
     <string name="version_text">version <xliff:g id="version_num">%1$s</xliff:g></string>
     <!-- Manage applications, text for Move button -->
@@ -3180,10 +3180,10 @@
 
     <!-- Manage applications, text for move error messages -->
     <string name="insufficient_storage">Not enough storage space.</string>
-    <string name="does_not_exist">App doesn\'t exist.</string>
+    <string name="does_not_exist">App doesn\u2019t exist.</string>
     <string name="app_forward_locked">App is copy-protected.</string>
-    <string name="invalid_location">Install location isn\'t valid.</string>
-    <string name="system_package">System updates can\'t be installed on external media.</string>
+    <string name="invalid_location">Install location isn\u2019t valid.</string>
+    <string name="system_package">System updates can\u2019t be installed on external media.</string>
 
     <string name="force_stop_dlg_title">Force stop?</string>
     <!-- [CHAR LIMIT=200] Manage applications, text for dialog when killing persistent apps-->
@@ -3191,7 +3191,7 @@
     <!-- Manage applications, text for dialog when moving an app -->
     <string name="move_app_failed_dlg_title"></string>
     <!-- Manage applications, text for dialog moving an app -->
-    <string name="move_app_failed_dlg_text">Couldn\'t move app. <xliff:g id="reason">%1$s</xliff:g></string>
+    <string name="move_app_failed_dlg_text">Couldn\u2019t move app. <xliff:g id="reason">%1$s</xliff:g></string>
     <!-- Manage applications, application installation location title -->
     <string name="app_install_location_title">Preferred install location</string>
     <!-- Manage applications. application installation location summary -->
@@ -3306,11 +3306,11 @@
     <string name="service_stop_description">This service was started by its
         app. Stopping it may cause the app to fail.</string>
     <!-- Running service details, description for running heavy-weight process. -->
-    <string name="heavy_weight_stop_description">This app can\'t safely
+    <string name="heavy_weight_stop_description">This app can\u2019t safely
         be stopped. If you stop it, you may lose some of your current work.</string>
     <!-- Running service details, description for background process. -->
     <string name="background_process_stop_description">This is an old app
-        process that is still running in case it\'s needed again.
+        process that is still running in case it\u2019s needed again.
         There is usually no reason to stop it.</string>
     <!-- Running service details, default description for services that are managed. -->
     <string name="service_manage_description"><xliff:g id="client_name">%1$s</xliff:g>:
@@ -3444,7 +3444,7 @@
     <!-- User dictionary settings. The title of the context menu item to delete the current word -->
     <string name="user_dict_settings_context_menu_delete_title">Delete</string>
     <!-- User dictionary settings. The text to show when there are no user-defined words in the dictionary  [CHAR LIMIT=200] -->
-    <string name="user_dict_settings_empty_text">You don\'t have any words in the user dictionary. Add a word by touching the Add (+) button.</string>
+    <string name="user_dict_settings_empty_text">You don\u2019t have any words in the user dictionary. Add a word by touching the Add (+) button.</string>
     <!-- User dictionary settings. The list item to choose to insert a word into the user dictionary for all languages -->
     <string name="user_dict_settings_all_languages">For all languages</string>
     <!-- User dictionary settings. The text to show for the option that shows the entire list of supported locales to choose one [CHAR LIMIT=30] -->
@@ -3591,7 +3591,7 @@
     <!-- Warning text to user about the implications of enabling USB debugging -->
     <string name="adb_warning_message">USB debugging is intended for development purposes only. Use it to copy data between your computer and your device, install apps on your device without notification, and read log data.</string>
     <!-- Message of dialog confirming that user wants to revoke access to adb from all computers they have authorized -->
-    <string name="adb_keys_warning_message">Revoke access to USB debugging from all computers you\'ve previously authorized?</string>
+    <string name="adb_keys_warning_message">Revoke access to USB debugging from all computers you\u2019ve previously authorized?</string>
     <!-- Title of warning dialog about the implications of enabling developer settings -->
     <string name="dev_settings_warning_title">Allow development settings?</string>
     <!-- Warning text to user about the implications of enabling USB debugging -->
@@ -3696,7 +3696,7 @@
     <!-- Title for the accessibility preference screen to enable screen magnification. [CHAR LIMIT=35] -->
     <string name="accessibility_screen_magnification_title">Magnification gestures</string>
     <!-- Summary for the accessibility preference screen to enable screen magnification. [CHAR LIMIT=none] -->
-    <string name="accessibility_screen_magnification_summary">When this feature is turned on, you can zoom in and out by triple-tapping the screen.\n\nWhile zoomed in, you can:\n<ul><li>Pan: Drag two or more fingers across the screen.</li>\n<li>Adjust zoom level: Pinch two or more fingers together or spread them apart.</li></ul>\n\nYou can also temporarily magnify what\'s under your finger by triple-tapping and holding. In this magnified state, you can drag your finger to explore different parts of the screen. Lift your finger to return to your previous state.\n\nNote: Triple-tap for magnification works everywhere except the keyboard and navigation bar.</string>
+    <string name="accessibility_screen_magnification_summary">When this feature is turned on, you can zoom in and out by triple-tapping the screen.\n\nWhile zoomed in, you can:\n<ul><li>Pan: Drag two or more fingers across the screen.</li>\n<li>Adjust zoom level: Pinch two or more fingers together or spread them apart.</li></ul>\n\nYou can also temporarily magnify what\u2019s under your finger by triple-tapping and holding. In this magnified state, you can drag your finger to explore different parts of the screen. Lift your finger to return to your previous state.\n\nNote: Triple-tap for magnification works everywhere except the keyboard and navigation bar.</string>
     <!-- Title for the preference to enable the global geture that turns on accessibility. [CHAR LIMIT=35] -->
     <string name="accessibility_global_gesture_preference_title">Accessibility shortcut</string>
     <!-- Summary for the preference to enable the global geture that turns on accessibility (on state). [CHAR LIMIT=60] -->
@@ -3844,7 +3844,7 @@
         data encryption.</string>
     <!-- Warning that the device data will not be encrypted with password or PIN if
          choosing a secure lock and there is an enabled accessibility service. [CHAR LIMIT=NONE] -->
-    <string name="secure_lock_encryption_warning">Because you\'ve turned on an accessibility service,
+    <string name="secure_lock_encryption_warning">Because you\u2019ve turned on an accessibility service,
         your device won’t use your screen lock to enhance data encryption.</string>
 
     <!-- Message to the user to enter his pattern before enabling an accessibility service. [CHAR LIMIT=NONE] -->
@@ -3865,7 +3865,7 @@
     <!-- Title for the capability of an accessibility service to receive events and keys. -->
     <string name="capability_title_receiveAccessibilityEvents">Observe your actions</string>
     <!-- Description for the capability of an accessibility service to receive events and keys. -->
-    <string name="capability_desc_receiveAccessibilityEvents">Receive notifications when you\'re
+    <string name="capability_desc_receiveAccessibilityEvents">Receive notifications when you\u2019re
         interacting with an app.</string>
 
     <!-- Title for a warning about disabling an accessibility service. [CHAR LIMIT=NONE] -->
@@ -3973,7 +3973,7 @@
     <!-- Activity title summary for App Fuel Gauge summary -->
     <string name="power_usage_summary">What has been using the battery</string>
     <!-- Message to show when battery usage data is not available [CHAR LIMIT=30] -->
-    <string name="power_usage_not_available">Battery usage data isn\'t available.</string>
+    <string name="power_usage_not_available">Battery usage data isn\u2019t available.</string>
     <!-- Display the battery level and status [CHAR_LIMIT=60] -->
     <string name="power_usage_level_and_status"><xliff:g id="level">%1$s</xliff:g>
             - <xliff:g id="status">%2$s</xliff:g></string>
@@ -4139,12 +4139,12 @@
     <!-- Description for wifi connectivity -->
     <string name="battery_desc_wifi">Battery used by Wi\u2011Fi</string>
     <!-- Suggestion for wifi connectivity power drain -->
-    <string name="battery_sugg_wifi">Turn off Wi\u2011Fi when not using it or when it isn\'t available</string>
+    <string name="battery_sugg_wifi">Turn off Wi\u2011Fi when not using it or when it isn\u2019t available</string>
 
     <!-- Description for bluetooth power consumption detail -->
     <string name="battery_desc_bluetooth">Battery used by Bluetooth</string>
     <!-- Suggestion for bluetooth -->
-    <string name="battery_sugg_bluetooth_basic">Turn off Bluetooth when you aren\'t using it</string>
+    <string name="battery_sugg_bluetooth_basic">Turn off Bluetooth when you aren\u2019t using it</string>
     <!-- Suggestion for bluetooth headset -->
     <string name="battery_sugg_bluetooth_headset">Try connecting to a different Bluetooth device</string>
 
@@ -4376,7 +4376,7 @@
     <!-- Text spoken by the TTS engine when TTS settings (other than language) have been changed -->
     <string name="tts_settings_changed_demo">Your settings have changed. This is an example of how they sound.</string>
     <!-- Error screen when a selected TTS engine can't run because it's missing components -->
-    <string name="tts_engine_error">The engine you chose can\'t run.</string>
+    <string name="tts_engine_error">The engine you chose can\u2019t run.</string>
     <!-- Button text for error screen when a selected TTS engine can't run because it's missing components -->
     <string name="tts_engine_error_config">Configure</string>
     <!-- Button text for error screen when a selected TTS engine can't run because it's missing components -->
@@ -4532,7 +4532,7 @@
     <!-- Toast message [CHAR LIMIT=30] -->
     <string name="credentials_erased">Credential storage is erased.</string>
     <!-- Toast message [CHAR LIMIT=30] when credential storage containing private keys and certificates could not be erased (opposite of string credentials_erased) -->
-    <string name="credentials_not_erased">Credential storage couldn\'t be erased.</string>
+    <string name="credentials_not_erased">Credential storage couldn\u2019t be erased.</string>
     <!-- Toast message [CHAR LIMIT=30] -->
     <string name="credentials_enabled">Credential storage is enabled.</string>
     <!-- Description of dialog to explain that a lock screen password is required to use credential storage [CHAR LIMIT=NONE] -->
@@ -4573,14 +4573,14 @@
     <!-- Local (desktop) backup password menu title [CHAR LIMIT=25] -->
     <string name="local_backup_password_title">Desktop backup password</string>
     <!-- Summary text of the "local backup password" setting when the user has not supplied a password -->
-    <string name="local_backup_password_summary_none">Desktop full backups aren\'t currently protected</string>
+    <string name="local_backup_password_summary_none">Desktop full backups aren\u2019t currently protected</string>
     <!-- Summary text of the "local backup password" setting when the user has already supplied a password -->
     <string name="local_backup_password_summary_change">Touch to change or remove the password for desktop full backups</string>
 
     <!-- Toast message shown when the user successfully sets a new local backup password [CHAR LIMIT=80] -->
     <string name="local_backup_password_toast_success">New backup password set</string>
     <!-- Toast message shown when setting a new local backup password fails due to the user not correctly typing the password again for confirmation [CHAR LIMIT=80] -->
-    <string name="local_backup_password_toast_confirmation_mismatch">New password and confirmation don\'t match</string>
+    <string name="local_backup_password_toast_confirmation_mismatch">New password and confirmation don\u2019t match</string>
     <!-- Toast message shown when setting a new local backup password fails due to the user not supplying the correct existing password. The phrasing here is deliberately quite general. [CHAR LIMIT=80] -->
     <string name="local_backup_password_toast_validation_failure">Failure setting backup password</string>
 
@@ -4628,7 +4628,7 @@
     <!-- Title for screen to set a profile owner [CHAR LIMIT=40] -->
     <string name="profile_owner_add_title">Activate Profile Manager?</string>
     <!-- Warning when trying to add a profile owner admin after setup has completed. [CHAR LIMIT=none] -->
-    <string name="adding_profile_owner_warning">By proceeding, your User will be managed by your Administrator which may also be able to store associated data, in addition to your personal data.\n\nYour Administrator has the ability to monitor and manage settings, access, apps, and data associated with this User, including network activity and your device\'s location information.</string>
+    <string name="adding_profile_owner_warning">By proceeding, your User will be managed by your Administrator which may also be able to store associated data, in addition to your personal data.\n\nYour Administrator has the ability to monitor and manage settings, access, apps, and data associated with this User, including network activity and your device\u2019s location information.</string>
 
     <!-- Name to assign to a Network Access Point that was saved without a name -->
     <string name="untitled_apn">Untitled</string>
@@ -4733,11 +4733,11 @@
     <!-- The message shown above available networks when a user clicked a network secured by
          EAP. We don't allow the user to connect it.
          Used in Wifi Setup For Setup Wizard with XL screen. [CHAR LIMIT=35] -->
-    <string name="wifi_setup_status_eap_not_supported">EAP isn\'t supported.</string>
+    <string name="wifi_setup_status_eap_not_supported">EAP isn\u2019t supported.</string>
     <!-- Message shown when users select EAP in Wi-Fi settings for SetupWizard,
          saying EAP can't be configured in SetupWizard flow.
          [CHAR LIMIT=NONE] -->
-    <string name="wifi_setup_eap_not_supported">You can\'t configure an EAP Wi\u2011Fi connection during setup. After setup, you can do that in Settings &gt; Wireless &amp; networks.</string>
+    <string name="wifi_setup_eap_not_supported">You can\u2019t configure an EAP Wi\u2011Fi connection during setup. After setup, you can do that in Settings &gt; Wireless &amp; networks.</string>
     <!-- Message shown when the device is connecting a network [CHAR LIMIT=NONE] -->
     <string name="wifi_setup_description_connecting">Connecting can take a few minutes\u2026</string>
     <!-- Message shown when the device is connected to a network [CHAR LIMIT=NONE] -->
@@ -4766,7 +4766,7 @@
     <!-- Button label to add an account [CHAR LIMIT=20] -->
     <string name="add_account_label">Add account</string>
     <!-- Label for the state of the work profile [CHAR LIMIT=80] -->
-    <string name="managed_profile_not_available_label">Work profile isn\'t available yet</string>
+    <string name="managed_profile_not_available_label">Work profile isn\u2019t available yet</string>
     <!-- Button label to remove the work profile [CHAR LIMIT=35] -->
     <string name="remove_managed_profile_label">Remove work profile</string>
     <!-- Data synchronization settings screen, title of setting that controls whether background data should be used [CHAR LIMIT=30] -->
@@ -4835,13 +4835,13 @@
     <!-- Remove account message in dialog [CHAR LIMIT=NONE] -->
     <string name="really_remove_account_message" product="default">Removing this account will delete all of its messages, contacts, and other data from the phone!</string>
     <!-- This is shown if the autheticator for a given account fails to remove it. [CHAR LIMIT=NONE] -->
-    <string name="remove_account_failed">This change isn\'t allowed by your administrator</string>
+    <string name="remove_account_failed">This change isn\u2019t allowed by your administrator</string>
     <!-- What to show in messaging that refers to this provider, e.g. AccountSyncSettings -->
     <string name="provider_label">Push subscriptions</string>
     <!-- Formatter in AccountSyncSettings for each application we wish to synchronize, e.g. "Sync Calendar" -->
     <string name="sync_item_title"><xliff:g id="authority" example="Calendar">%s</xliff:g></string>
     <!-- Title of dialog shown when you can't manually sync an item because it's disabled -->
-    <string name="cant_sync_dialog_title">Can\'t manually sync</string>
+    <string name="cant_sync_dialog_title">Can\u2019t manually sync</string>
     <!-- Messaage shown in dialog when you can't manually sync -->
     <string name="cant_sync_dialog_message">Sync for this item is currently disabled. To change this setting, temporarily turn on background data and automatic sync.</string>
 
@@ -5030,7 +5030,7 @@
     <string name="debug_applications_category">Apps</string>
 
     <!-- UI debug setting: immediately destroy activities? [CHAR LIMIT=25] -->
-    <string name="immediately_destroy_activities">Don\'t keep activities</string>
+    <string name="immediately_destroy_activities">Don\u2019t keep activities</string>
     <!-- UI debug setting: immediately destroy activities summary [CHAR LIMIT=50] -->
     <string name="immediately_destroy_activities_summary">Destroy every activity as soon as
             the user leaves it</string>
@@ -5159,7 +5159,7 @@
     <!-- Body of dialog shown when user restricts background data usage of a specific application. [CHAR LIMIT=NONE] -->
     <string name="data_usage_app_restrict_dialog">This feature may cause an app that depends on background data to stop working when only cellular networks are available.\n\nYou can find more appropriate data usage controls in the settings available within the app.</string>
     <!-- Body of dialog shown when user attempts to restrict background data before a network data limit has been set. [CHAR LIMIT=NONE] -->
-    <string name="data_usage_restrict_denied_dialog">Restricting background data is possible only when you\'ve set a cellular data limit.</string>
+    <string name="data_usage_restrict_denied_dialog">Restricting background data is possible only when you\u2019ve set a cellular data limit.</string>
     <!--  Title of dialog shown when user enables global auto sync [CHAR LIMIT=32] -->
     <string name="data_usage_auto_sync_on_dialog_title">Turn auto-sync data on?</string>
     <!--  Body of dialog shown when user enables global auto sync, for tablet [CHAR LIMIT=none] -->
@@ -5169,7 +5169,7 @@
     <!--  Title of dialog shown when user disables global auto sync [CHAR LIMIT=32] -->
     <string name="data_usage_auto_sync_off_dialog_title">Turn auto-sync data off?</string>
     <!--  Body of dialog shown when user disables global auto sync [CHAR LIMIT=none] -->
-    <string name="data_usage_auto_sync_off_dialog">This will conserve data and battery usage, but you\'ll need to sync each account manually to collect recent information. And you won\'t receive notifications when updates occur.</string>
+    <string name="data_usage_auto_sync_off_dialog">This will conserve data and battery usage, but you\u2019ll need to sync each account manually to collect recent information. And you won\u2019t receive notifications when updates occur.</string>
 
     <!-- Title of dialog for editing data usage cycle reset date. [CHAR LIMIT=48] -->
     <string name="data_usage_cycle_editor_title">Usage cycle reset date</string>
@@ -5193,11 +5193,11 @@
     <!-- Title of dialog shown before user restricts background data usage. [CHAR LIMIT=48] -->
     <string name="data_usage_restrict_background_title">Restrict background data?</string>
     <!-- Body of dialog shown before user restricts background data usage. [CHAR LIMIT=NONE] -->
-    <string name="data_usage_restrict_background">If you restrict background cellular data, some apps and services won\'t work unless you\'re connected to Wi\u2011Fi.</string>
+    <string name="data_usage_restrict_background">If you restrict background cellular data, some apps and services won\u2019t work unless you\u2019re connected to Wi\u2011Fi.</string>
     <!-- Body of dialog shown before user restricts background data usage. This is for multiuser tablets. [CHAR LIMIT=NONE] -->
-    <string name="data_usage_restrict_background_multiuser" product="tablet">If you restrict background cellular data, some apps and services won\'t work unless you\'re connected to Wi\u2011Fi.\n\nThis setting affects all users on this tablet.</string>
+    <string name="data_usage_restrict_background_multiuser" product="tablet">If you restrict background cellular data, some apps and services won\u2019t work unless you\u2019re connected to Wi\u2011Fi.\n\nThis setting affects all users on this tablet.</string>
     <!-- Body of dialog shown before user restricts background data usage. This is for multiuser phones. [CHAR LIMIT=NONE] -->
-    <string name="data_usage_restrict_background_multiuser" product="default">If you restrict background cellular data, some apps and services won\'t work unless you\'re connected to Wi\u2011Fi.\n\nThis setting affects all users on this phone.</string>
+    <string name="data_usage_restrict_background_multiuser" product="default">If you restrict background cellular data, some apps and services won\u2019t work unless you\u2019re connected to Wi\u2011Fi.\n\nThis setting affects all users on this phone.</string>
 
     <!-- Label displaying current network data usage warning threshold. [CHAR LIMIT=18] -->
     <string name="data_usage_sweep_warning"><font size="21"><xliff:g id="number" example="128">^1</xliff:g></font> <font size="9"><xliff:g id="unit" example="KB">^2</xliff:g></font>\n<font size="12">warning</font></string>
@@ -5214,9 +5214,9 @@
     <string name="data_usage_total_during_range"><xliff:g id="range" example="Jul 1 - Jul 31">%2$s</xliff:g>: about <xliff:g id="total" example="128KB">%1$s</xliff:g> used.</string>
 
     <!-- Label displaying total network data transferred during a specific time period, including a disclaimer that contrasts device versus carrier reporting. [CHAR LIMIT=80] -->
-    <string name="data_usage_total_during_range_mobile" product="tablet"><xliff:g id="range" example="Jul 1 - Jul 31">%2$s</xliff:g>: about <xliff:g id="total" example="128KB">%1$s</xliff:g> used, as measured by your tablet. Your carrier\'s data usage accounting may differ.</string>
+    <string name="data_usage_total_during_range_mobile" product="tablet"><xliff:g id="range" example="Jul 1 - Jul 31">%2$s</xliff:g>: about <xliff:g id="total" example="128KB">%1$s</xliff:g> used, as measured by your tablet. Your carrier\u2019s data usage accounting may differ.</string>
     <!-- Label displaying total network data transferred during a specific time period, including a disclaimer that contrasts device versus carrier reporting. [CHAR LIMIT=80] -->
-    <string name="data_usage_total_during_range_mobile" product="default"><xliff:g id="range" example="Jul 1 - Jul 31">%2$s</xliff:g>: about <xliff:g id="total" example="128KB">%1$s</xliff:g> used, as measured by your phone. Your carrier\'s data usage accounting may differ.</string>
+    <string name="data_usage_total_during_range_mobile" product="default"><xliff:g id="range" example="Jul 1 - Jul 31">%2$s</xliff:g>: about <xliff:g id="total" example="128KB">%1$s</xliff:g> used, as measured by your phone. Your carrier\u2019s data usage accounting may differ.</string>
 
     <!-- Dialog title for selecting metered networks. [CHAR LIMIT=25] -->
     <string name="data_usage_metered_title">Network restrictions</string>
@@ -5274,7 +5274,7 @@
     <!-- Hint for not using an optional feature in a VPN profile. [CHAR LIMIT=40] -->
     <string name="vpn_not_used">(not used)</string>
     <!-- Option to not use a CA certificate to verify the VPN server. [CHAR LIMIT=40] -->
-    <string name="vpn_no_ca_cert">(don\'t verify server)</string>
+    <string name="vpn_no_ca_cert">(don\u2019t verify server)</string>
     <!-- Option to use the server certificate received from the VPN server. [CHAR LIMIT=40] -->
     <string name="vpn_no_server_cert">(received from server)</string>
 
@@ -5394,7 +5394,7 @@
     <!-- User settings summary for a restricted profile [CHAR LIMIT=50] -->
     <string name="user_summary_restricted_profile">Restricted profile</string>
     <!-- User settings warning that restricted profile needs a screen lock [CHAR LIMIT=NONE] -->
-    <string name="user_need_lock_message">Before you can create a restricted profile, you\'ll need to set up a screen lock to protect your apps and personal data.</string>
+    <string name="user_need_lock_message">Before you can create a restricted profile, you\u2019ll need to set up a screen lock to protect your apps and personal data.</string>
     <!-- User settings dialog button to set screen lock [CHAR LIMIT=25] -->
     <string name="user_set_lock_button">Set lock</string>
     <!-- User summary to indicate that user is currently not set up [CHAR LIMIT=100] -->
@@ -5436,9 +5436,9 @@
     <!-- Button text to setup the new user later [CHAR LIMIT=25] -->
     <string name="user_setup_button_setup_later">Not now</string>
     <!-- Message to secondary users that only owner can manage users [CHAR LIMIT=none] -->
-    <string name="user_cannot_manage_message" product="tablet">Only the tablet\'s owner can manage users.</string>
+    <string name="user_cannot_manage_message" product="tablet">Only the tablet\u2019s owner can manage users.</string>
     <!-- Message to secondary users that only owner can manage users [CHAR LIMIT=none] -->
-    <string name="user_cannot_manage_message" product="default">Only the phone\'s owner can manage users.</string>
+    <string name="user_cannot_manage_message" product="default">Only the phone\u2019s owner can manage users.</string>
     <!-- Message to limited users that they cannot add accounts [CHAR LIMIT=100] -->
     <string name="user_cannot_add_accounts_message">Restricted profiles cannot add accounts</string>
 
@@ -5459,9 +5459,9 @@
     <!-- Work profile removal confirmation title [CHAR LIMIT=25] -->
     <string name="work_profile_confirm_remove_title">Remove work profile?</string>
     <!-- User (self) removal confirmation message [CHAR LIMIT=none] -->
-    <string name="user_confirm_remove_self_message" product="tablet">You will lose your space and data on this tablet. You can\'t undo this action.</string>
+    <string name="user_confirm_remove_self_message" product="tablet">You will lose your space and data on this tablet. You can\u2019t undo this action.</string>
     <!-- User (self) removal confirmation message [CHAR LIMIT=none] -->
-    <string name="user_confirm_remove_self_message" product="default">You will lose your space and data on this phone. You can\'t undo this action.</string>
+    <string name="user_confirm_remove_self_message" product="default">You will lose your space and data on this phone. You can\u2019t undo this action.</string>
     <!-- User removal confirmation message [CHAR LIMIT=none] -->
     <string name="user_confirm_remove_message">All apps and data will be deleted.</string>
     <!-- Work profile removal confirmation message [CHAR LIMIT=none] -->
@@ -5847,7 +5847,7 @@
     <string name="keywords_factory_data_reset">wipe delete restore clear remove</string>
     <string name="keywords_printing">printer</string>
     <string name="keywords_sounds_and_notifications">speaker beep</string>
-    <string name="keywords_sounds_and_notifications_interruptions">dont don\'t disturb interrupt interruption break</string>
+    <string name="keywords_sounds_and_notifications_interruptions">dont don\u2019t disturb interrupt interruption break</string>
     <string name="keywords_app">RAM</string>
     <string name="keywords_location">nearby location history reporting</string>
     <string name="keywords_location_mode">accuracy</string>
@@ -5952,7 +5952,7 @@
 
     <!-- Sound & notification > Notification section: Value for lockscreen notifications: notifications will not appear on a secure lock screen
          [CHAR LIMIT=50] -->
-    <string name="lock_screen_notifications_summary_disable">Don\'t show notifications at all</string>
+    <string name="lock_screen_notifications_summary_disable">Don\u2019t show notifications at all</string>
 
     <!-- Security > Choose PIN/PW/Pattern > Notification redaction interstitial: Message asking the user how they want their notifications to appear when the device is locked [CHAR LIMIT=NONE] -->
     <string name="lock_screen_notifications_interstitial_message">When your device is locked, how do you want notifications to show?</string>
@@ -6038,7 +6038,7 @@
     <string name="app_notification_priority_title">Treat as priority</string>
 
     <!-- [CHAR LIMIT=NONE] App notification settings: Priority option description-->
-    <string name="app_notification_priority_summary">Let this app\'s notifications be heard when Do not disturb is set to Priority only</string>
+    <string name="app_notification_priority_summary">Let this app\u2019s notifications be heard when Do not disturb is set to Priority only</string>
 
     <!-- [CHAR LIMIT=NONE] App notification settings: Peekable option title -->
     <string name="app_notification_peekable_title">Allow peeking</string>
@@ -6050,7 +6050,7 @@
     <string name="app_notification_sensitive_title">Hide sensitive content</string>
 
     <!-- [CHAR LIMIT=NONE] App notification settings: Sensitive option description-->
-    <string name="app_notification_sensitive_summary">When the device is locked, hide content in this app\'s notifications that might reveal private information</string>
+    <string name="app_notification_sensitive_summary">When the device is locked, hide content in this app\u2019s notifications that might reveal private information</string>
 
     <!-- [CHAR LIMIT=20] Notification settings: App notifications row summary when banned -->
     <string name="app_notification_row_banned">Blocked</string>
@@ -6077,7 +6077,7 @@
     <string name="zen_mode_delete_rule">Delete rule</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Delete rule dialog confirmation message -->
-    <string name="zen_mode_delete_rule_confirmation">Delete \"<xliff:g id="rule" example="Weekends">%1$s</xliff:g>\" rule?</string>
+    <string name="zen_mode_delete_rule_confirmation">Delete \u201c<xliff:g id="rule" example="Weekends">%1$s</xliff:g>\u201d rule?</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Delete rule dialog button caption -->
     <string name="zen_mode_delete_rule_button">Delete</string>
@@ -6257,7 +6257,7 @@
     <string name="zen_mode_option_voice_alarms_synonyms">alarms,alarms only,only alarms</string>
 
     <!-- [CHAR LIMIT=80] Zen mode voice: No interruptions -->
-    <string name="zen_mode_option_voice_no_interruptions">Don\'t interrupt</string>
+    <string name="zen_mode_option_voice_no_interruptions">Don\u2019t interrupt</string>
 
     <!-- [CHAR LIMIT=NONE] Zen mode voice: Comma delimited synonyms for no interriuptions -->
     <string name="zen_mode_option_voice_no_interruptions_synonyms">none,never,nothing,no interruptions</string>
@@ -6308,18 +6308,18 @@
     </plurals>
 
     <!-- [CHAR LIMIT=NONE] Zen mode voice - spoken summary: no interruptions duration indefinite. -->
-    <string name="zen_mode_summary_no_interruptions_indefinite">Change to don\'t interrupt indefinitely</string>
+    <string name="zen_mode_summary_no_interruptions_indefinite">Change to don\u2019t interrupt indefinitely</string>
 
     <!-- [CHAR LIMIT=NONE] Zen mode voice- spoken summary: alarms only duration minutes. -->
     <plurals name="zen_mode_summary_no_interruptions_by_minute">
-        <item quantity="one">Change to don\'t interrupt for one minute until <xliff:g id="formattedTime" example="10:00 PM">%2$s</xliff:g></item>
-        <item quantity="other">Change to don\'t interrupt for <xliff:g id="duration" example="2">%1$d</xliff:g> minutes (until <xliff:g id="formattedTime" example="10:00 PM">%2$s</xliff:g>)</item>
+        <item quantity="one">Change to don\u2019t interrupt for one minute until <xliff:g id="formattedTime" example="10:00 PM">%2$s</xliff:g></item>
+        <item quantity="other">Change to don\u2019t interrupt for <xliff:g id="duration" example="2">%1$d</xliff:g> minutes (until <xliff:g id="formattedTime" example="10:00 PM">%2$s</xliff:g>)</item>
     </plurals>
 
     <!-- [CHAR LIMIT=NONE] Zen mode voice- spoken summary: alarms only duration hours. -->
     <plurals name="zen_mode_summary_no_interruptions_by_hour">
-        <item quantity="one">Change to don\'t interrupt for one hour until <xliff:g id="formattedTime" example="10:00 PM">%2$s</xliff:g></item>
-        <item quantity="other">Change to don\'t interrupt for <xliff:g id="duration" example="2">%1$d</xliff:g> hours until <xliff:g id="formattedTime" example="10:00 PM">%2$s</xliff:g></item>
+        <item quantity="one">Change to don\u2019t interrupt for one hour until <xliff:g id="formattedTime" example="10:00 PM">%2$s</xliff:g></item>
+        <item quantity="other">Change to don\u2019t interrupt for <xliff:g id="duration" example="2">%1$d</xliff:g> hours until <xliff:g id="formattedTime" example="10:00 PM">%2$s</xliff:g></item>
     </plurals>
 
     <!-- [CHAR LIMIT=NONE] Zen mode voice - spoken summary: off. -->
@@ -6395,17 +6395,17 @@
 
     <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a PIN to encrypt the device. [CHAR LIMIT=NONE] -->
     <string name="encryption_interstitial_message_pin">
-   You can further protect this device by requiring your PIN before it starts up. Until the device starts up, it can\'t receive calls, messages, or notifications, including alarms.
+   You can further protect this device by requiring your PIN before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.
    \n\nThis helps protect data on lost or stolen devices.
    </string>
     <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a pattern to encrypt the device. [CHAR LIMIT=NONE] -->
     <string name="encryption_interstitial_message_pattern">
-   You can further protect this device by requiring your pattern before it starts up. Until the device starts up, it can\'t receive calls, messages, or notifications, including alarms.
+   You can further protect this device by requiring your pattern before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.
    \n\nThis helps protect data on lost or stolen devices.
    </string>
     <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a password to encrypt the device. [CHAR LIMIT=NONE] -->
     <string name="encryption_interstitial_message_password">
-   You can further protect this device by requiring your password before it starts up. Until the device starts up, it can\'t receive calls, messages, or notifications, including alarms.
+   You can further protect this device by requiring your password before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.
    \n\nThis helps protect data on lost or stolen devices.
    </string>
 
@@ -6433,13 +6433,13 @@
    <string name="encrypt_talkback_dialog_require_password">Require password?</string>
 
    <!-- Message for encryption dialog telling the user that Talkback and other accessibility services will be disabled. -->
-   <string name="encrypt_talkback_dialog_message_pin">When you enter your PIN to start this device, accessibility services like <xliff:g id="service" example="TalkBack">%1$s</xliff:g> won\'t yet be available.</string>
+   <string name="encrypt_talkback_dialog_message_pin">When you enter your PIN to start this device, accessibility services like <xliff:g id="service" example="TalkBack">%1$s</xliff:g> won\u2019t yet be available.</string>
 
    <!-- Message for encryption dialog telling the user that Talkback and other accessibility services will be disabled. -->
-   <string name="encrypt_talkback_dialog_message_pattern">When you enter your pattern to start this device, accessibility services like <xliff:g id="service" example="TalkBack">%1$s</xliff:g> won\'t yet be available.</string>
+   <string name="encrypt_talkback_dialog_message_pattern">When you enter your pattern to start this device, accessibility services like <xliff:g id="service" example="TalkBack">%1$s</xliff:g> won\u2019t yet be available.</string>
 
    <!-- Message for encryption dialog telling the user that Talkback and other accessibility services will be disabled. -->
-   <string name="encrypt_talkback_dialog_message_password">When you enter your password to start this device, accessibility services like <xliff:g id="service" example="TalkBack">%1$s</xliff:g> won\'t yet be available.</string>
+   <string name="encrypt_talkback_dialog_message_password">When you enter your password to start this device, accessibility services like <xliff:g id="service" example="TalkBack">%1$s</xliff:g> won\u2019t yet be available.</string>
 
    <!-- Title and summary for SIM Status -->
    <string name="imei_information_title">IMEI information</string>
@@ -6558,13 +6558,13 @@
     <string name="domain_urls_title">Domain URLs</string>
 
     <!-- Summary for an App that dont open any domain URLs [CHAR LIMIT=45] -->
-    <string name="domain_urls_summary_none">Don\'t open any domain URL</string>
+    <string name="domain_urls_summary_none">Don\u2019t open any domain URL</string>
 
     <!-- Summary of number of App that can open one and only one domain URLs [CHAR LIMIT=45] -->
-    <string name="domain_urls_summary_one">Open \'<xliff:g id="domain" example="mail.google.com">%s</xliff:g>\'</string>
+    <string name="domain_urls_summary_one">Open \u2018<xliff:g id="domain" example="mail.google.com">%s</xliff:g>\u2019</string>
 
     <!-- Summary of number of App that can open several domain URLs [CHAR LIMIT=45] -->
-    <string name="domain_urls_summary_some">Open \'<xliff:g id="domain" example="mail.google.com">%s</xliff:g>\' and related URLs</string>
+    <string name="domain_urls_summary_some">Open \u2018<xliff:g id="domain" example="mail.google.com">%s</xliff:g>\u2019 and related URLs</string>
 
     <!-- Description of settings item that leads to list of all apps with Domain URLs [CHAR LIMIT=NONE] -->
     <plurals name="domain_urls_apps_summary">
@@ -6604,7 +6604,7 @@
     <string name="app_usage_preference">App usage preferences</string>
 
     <!-- Description of the usage access setting [CHAR LIMIT=NONE] -->
-    <string name="usage_access_description">Usage access allows an app to track what other apps you\'re using and how often, as well as your carrier, language settings, and other details.</string>
+    <string name="usage_access_description">Usage access allows an app to track what other apps you\u2019re using and how often, as well as your carrier, language settings, and other details.</string>
 
     <!-- Title for screen showing recent memory usage of device [CHAR LIMIT=30]-->
     <string name="memory_settings_title">Memory</string>
