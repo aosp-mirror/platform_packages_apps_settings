@@ -26,6 +26,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.ApplicationsState.AppEntry;
 import com.android.settings.applications.ApplicationsState.Session;
+import com.android.settings.fuelgauge.PowerWhitelistBackend;
 import com.android.settingslib.applications.PermissionsInfo;
 
 import java.util.ArrayList;
@@ -38,11 +39,13 @@ public class AdvancedAppSettings extends SettingsPreferenceFragment implements
 
     private static final String KEY_APP_PERM = "manage_perms";
     private static final String KEY_APP_DOMAIN_URLS = "domain_urls";
+    private static final String KEY_HIGH_POWER_APPS = "high_power_apps";
 
     private ApplicationsState mApplicationsState;
     private Session mSession;
     private Preference mAppPermsPreference;
     private Preference mAppDomainURLsPreference;
+    private Preference mHighPowerPreference;
     private PermissionsInfo mPermissionsInfo;
 
     @Override
@@ -55,6 +58,7 @@ public class AdvancedAppSettings extends SettingsPreferenceFragment implements
 
         mAppPermsPreference = findPreference(KEY_APP_PERM);
         mAppDomainURLsPreference = findPreference(KEY_APP_DOMAIN_URLS);
+        mHighPowerPreference = findPreference(KEY_HIGH_POWER_APPS);
         updateUI();
     }
 
@@ -70,6 +74,10 @@ public class AdvancedAppSettings extends SettingsPreferenceFragment implements
         String summary = getResources().getQuantityString(
                 R.plurals.domain_urls_apps_summary, countAppWithDomainURLs, countAppWithDomainURLs);
         mAppDomainURLsPreference.setSummary(summary);
+
+        int highPowerCount = PowerWhitelistBackend.getInstance().getWhitelistSize();
+        mHighPowerPreference.setSummary(getResources().getQuantityString(R.plurals.high_power_count,
+                highPowerCount, highPowerCount));
     }
 
     @Override

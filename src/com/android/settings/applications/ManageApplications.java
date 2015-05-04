@@ -55,6 +55,7 @@ import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.Settings.AllApplicationsActivity;
 import com.android.settings.Settings.DomainsURLsAppListActivity;
+import com.android.settings.Settings.HighPowerApplicationsActivity;
 import com.android.settings.Settings.NotificationAppListActivity;
 import com.android.settings.Settings.StorageUseActivity;
 import com.android.settings.Settings.UsageAccessSettingsActivity;
@@ -65,6 +66,7 @@ import com.android.settings.applications.ApplicationsState.AppEntry;
 import com.android.settings.applications.ApplicationsState.AppFilter;
 import com.android.settings.applications.ApplicationsState.CompoundFilter;
 import com.android.settings.applications.ApplicationsState.VolumeFilter;
+import com.android.settings.fuelgauge.HighPowerDetail;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.NotificationBackend.AppRow;
 
@@ -117,6 +119,8 @@ public class ManageApplications extends InstrumentedFragment
     public static final int FILTER_APPS_WORK                    = 8;
     public static final int FILTER_APPS_WITH_DOMAIN_URLS        = 9;
     public static final int FILTER_APPS_USAGE_ACCESS            = 10;
+    public static final int FILTER_APPS_POWER_WHITELIST         = 11;
+    public static final int FILTER_APPS_POWER_NO_WHITELIST      = 12;
 
     // This is the string labels for the filter modes above, the order must be kept in sync.
     public static final int[] FILTER_LABELS = new int[] {
@@ -131,6 +135,8 @@ public class ManageApplications extends InstrumentedFragment
         R.string.filter_work_apps,     // Work
         R.string.filter_with_domain_urls_apps,     // Domain URLs
         R.string.filter_all_apps,      // Usage access screen, never displayed
+        R.string.high_power_on,        // High power whitelist, on
+        R.string.high_power_off,       // High power whitelist, off
     };
     // This is the actual mapping to filters from FILTER_ constants above, the order must
     // be kept in sync.
@@ -146,6 +152,8 @@ public class ManageApplications extends InstrumentedFragment
         ApplicationsState.FILTER_WORK,        // Work
         ApplicationsState.FILTER_WITH_DOMAIN_URLS,   // Apps with Domain URLs
         AppStateUsageBridge.FILTER_APP_USAGE, // Apps with Domain URLs
+        AppStatePowerBridge.FILTER_POWER_WHITELISTED,     // High power whitelist, on
+        AppStatePowerBridge.FILTER_POWER_NOT_WHITELISTED, // High power whitelist, off
     };
 
     // sort order
@@ -180,11 +188,12 @@ public class ManageApplications extends InstrumentedFragment
 
     private Menu mOptionsMenu;
 
-    public static final int LIST_TYPE_MAIN = 0;
+    public static final int LIST_TYPE_MAIN         = 0;
     public static final int LIST_TYPE_NOTIFICATION = 1;
     public static final int LIST_TYPE_DOMAINS_URLS = 2;
-    public static final int LIST_TYPE_STORAGE = 3;
+    public static final int LIST_TYPE_STORAGE      = 3;
     public static final int LIST_TYPE_USAGE_ACCESS = 4;
+    public static final int LIST_TYPE_HIGH_POWER   = 5;
 
     private View mRootView;
 
@@ -228,6 +237,8 @@ public class ManageApplications extends InstrumentedFragment
         } else if (className.equals(UsageAccessSettingsActivity.class.getName())) {
             mListType = LIST_TYPE_USAGE_ACCESS;
             getActivity().getActionBar().setTitle(R.string.usage_access_title);
+        } else if (className.equals(HighPowerApplicationsActivity.class.getName())) {
+            mListType = LIST_TYPE_HIGH_POWER;
         } else {
             mListType = LIST_TYPE_MAIN;
         }
@@ -310,6 +321,9 @@ public class ManageApplications extends InstrumentedFragment
             mFilterAdapter.enableFilter(FILTER_APPS_SENSITIVE);
             mFilterAdapter.enableFilter(FILTER_APPS_NO_PEEKING);
         }
+        if (mListType == LIST_TYPE_HIGH_POWER) {
+            mFilterAdapter.enableFilter(FILTER_APPS_POWER_NO_WHITELIST);
+        }
         if (mListType == LIST_TYPE_STORAGE) {
             mApplications.setOverrideFilter(new VolumeFilter(mVolumeUuid));
         }
@@ -325,12 +339,12 @@ public class ManageApplications extends InstrumentedFragment
 
     private int getDefaultFilter() {
         switch (mListType) {
-            case LIST_TYPE_MAIN:
-                return FILTER_APPS_ALL;
             case LIST_TYPE_DOMAINS_URLS:
                 return FILTER_APPS_WITH_DOMAIN_URLS;
             case LIST_TYPE_USAGE_ACCESS:
                 return FILTER_APPS_USAGE_ACCESS;
+            case LIST_TYPE_HIGH_POWER:
+                return FILTER_APPS_POWER_WHITELIST;
             default:
                 return FILTER_APPS_ALL;
         }
@@ -349,6 +363,8 @@ public class ManageApplications extends InstrumentedFragment
                 return InstrumentedFragment.VIEW_CATEGORY_STORAGE_APPS;
             case LIST_TYPE_USAGE_ACCESS:
                 return MetricsLogger.USAGE_ACCESS;
+            case LIST_TYPE_HIGH_POWER:
+                return InstrumentedFragment.VIEW_CATEGORY_HIGH_POWER_APPS;
             default:
                 return MetricsLogger.VIEW_UNKNOWN;
         }
@@ -426,6 +442,9 @@ public class ManageApplications extends InstrumentedFragment
             case LIST_TYPE_STORAGE:
                 startAppInfoFragment(AppStorageSettings.class, R.string.storage_settings);
                 break;
+            case LIST_TYPE_HIGH_POWER:
+                startAppInfoFragment(HighPowerDetail.class, R.string.high_power);
+                break;
             // TODO: Figure out if there is a way where we can spin up the profile's settings
             // process ahead of time, to avoid a long load of data when user clicks on a managed app.
             // Maybe when they load the list of apps that contains managed profile apps.
@@ -436,13 +455,8 @@ public class ManageApplications extends InstrumentedFragment
     }
 
     private void startAppInfoFragment(Class<? extends AppInfoBase> fragment, int titleRes) {
-        Bundle args = new Bundle();
-        args.putString(AppInfoBase.ARG_PACKAGE_NAME, mCurrentPkgName);
-
-        Intent intent = Utils.onBuildStartFragmentIntent(getActivity(), fragment.getName(), args,
-                null, titleRes, null, false);
-        getActivity().startActivityForResultAsUser(intent, INSTALLED_APP_DETAILS,
-                new UserHandle(UserHandle.getUserId(mCurrentUid)));
+        AppInfoBase.startAppInfoFragment(fragment, titleRes, mCurrentPkgName, mCurrentUid, this,
+                INSTALLED_APP_DETAILS);
     }
 
     @Override
@@ -685,6 +699,8 @@ public class ManageApplications extends InstrumentedFragment
                         mState, this, manageApplications.mNotifBackend);
             } else if (mManageApplications.mListType == LIST_TYPE_USAGE_ACCESS) {
                 mExtraInfoBridge = new AppStateUsageBridge(mContext, mState, this);
+            } else if (mManageApplications.mListType == LIST_TYPE_HIGH_POWER) {
+                mExtraInfoBridge = new AppStatePowerBridge(mState, this);
             } else {
                 mExtraInfoBridge = null;
             }
@@ -992,6 +1008,10 @@ public class ManageApplications extends InstrumentedFragment
                     } else {
                         holder.summary.setText(null);
                     }
+                    break;
+
+                case LIST_TYPE_HIGH_POWER:
+                    holder.summary.setText(HighPowerDetail.getSummary(mContext, holder.entry));
                     break;
 
                 default:

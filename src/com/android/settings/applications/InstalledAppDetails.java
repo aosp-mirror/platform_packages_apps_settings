@@ -38,6 +38,7 @@ import android.net.NetworkTemplate;
 import android.net.TrafficStats;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.BatteryStats;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
@@ -57,12 +58,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.internal.logging.MetricsLogger;
+import com.android.internal.os.BatterySipper;
+import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.DataUsageSummary;
 import com.android.settings.DataUsageSummary.AppItem;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.applications.ApplicationsState.AppEntry;
+import com.android.settings.fuelgauge.BatteryEntry;
+import com.android.settings.fuelgauge.PowerUsageDetail;
 import com.android.settings.net.ChartData;
 import com.android.settings.net.ChartDataLoader;
 import com.android.settings.notification.NotificationBackend;
@@ -108,6 +113,7 @@ public class InstalledAppDetails extends AppInfoBase
     private static final String KEY_PERMISSION = "permission_settings";
     private static final String KEY_DATA = "data_settings";
     private static final String KEY_LAUNCH = "preferred_settings";
+    private static final String KEY_BATTERY = "battery";
 
     private final HashSet<String> mHomePackages = new HashSet<String>();
 
@@ -130,6 +136,11 @@ public class InstalledAppDetails extends AppInfoBase
 
     private ChartData mChartData;
     private INetworkStatsSession mStatsSession;
+
+    private Preference mBatteryPreference;
+
+    private BatteryStatsHelper mBatteryHelper;
+    private BatterySipper mSipper;
 
     private boolean handleDisableable(Button button) {
         boolean disableable = false;
@@ -221,6 +232,7 @@ public class InstalledAppDetails extends AppInfoBase
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         }
+        mBatteryHelper = new BatteryStatsHelper(getActivity(), true);
     }
 
     @Override
@@ -236,6 +248,7 @@ public class InstalledAppDetails extends AppInfoBase
         getLoaderManager().restartLoader(LOADER_CHART_DATA,
                 ChartDataLoader.buildArgs(NetworkTemplate.buildTemplateMobileWildcard(), app),
                 mDataCallbacks);
+        new BatteryUpdater().execute();
     }
 
     @Override
@@ -263,6 +276,9 @@ public class InstalledAppDetails extends AppInfoBase
         mPermissionsPreference.setOnPreferenceClickListener(this);
         mDataPreference = findPreference(KEY_DATA);
         mDataPreference.setOnPreferenceClickListener(this);
+        mBatteryPreference = findPreference(KEY_BATTERY);
+        mBatteryPreference.setEnabled(false);
+        mBatteryPreference.setOnPreferenceClickListener(this);
 
         mLaunchPreference = findPreference(KEY_LAUNCH);
         if ((mAppEntry.info.flags&ApplicationInfo.FLAG_INSTALLED) == 0) {
@@ -434,6 +450,8 @@ public class InstalledAppDetails extends AppInfoBase
                 mBackend));
         mDataPreference.setSummary(getDataSummary());
 
+        updateBattery();
+
         if (!mInitialized) {
             // First time init: are we displaying an uninstalled app?
             mInitialized = true;
@@ -457,6 +475,20 @@ public class InstalledAppDetails extends AppInfoBase
         }
 
         return true;
+    }
+
+    private void updateBattery() {
+        if (mSipper != null) {
+            mBatteryPreference.setEnabled(true);
+            int dischargeAmount = mBatteryHelper.getStats().getDischargeAmount(
+                    BatteryStats.STATS_SINCE_CHARGED);
+            final int percentOfMax = (int) ((mSipper.totalPowerMah)
+                    / mBatteryHelper.getTotalPower() * dischargeAmount + .5f);
+            mBatteryPreference.setSummary(getString(R.string.battery_summary, percentOfMax));
+        } else {
+            mBatteryPreference.setEnabled(false);
+            mBatteryPreference.setSummary(getString(R.string.no_battery_summary));
+        }
     }
 
     private CharSequence getDataSummary() {
@@ -656,6 +688,10 @@ public class InstalledAppDetails extends AppInfoBase
             SettingsActivity sa = (SettingsActivity) getActivity();
             sa.startPreferencePanel(DataUsageSummary.class.getName(), args, -1,
                     getString(R.string.app_data_usage), this, SUB_INFO_FRAGMENT);
+        } else if (preference == mBatteryPreference) {
+            BatteryEntry entry = new BatteryEntry(getActivity(), null, mUserManager, mSipper);
+            PowerUsageDetail.startBatteryDetailPage((SettingsActivity) getActivity(),
+                    mBatteryHelper, BatteryStats.STATS_SINCE_CHARGED, entry, true);
         } else {
             return false;
         }
@@ -700,7 +736,31 @@ public class InstalledAppDetails extends AppInfoBase
         }
     }
 
-    static class DisableChanger extends AsyncTask<Object, Object, Object> {
+    private class BatteryUpdater extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... params) {
+            mBatteryHelper.create((Bundle) null);
+            mBatteryHelper.refreshStats(BatteryStats.STATS_SINCE_CHARGED,
+                    mUserManager.getUserProfiles());
+            List<BatterySipper> usageList = mBatteryHelper.getUsageList();
+            final int N = usageList.size();
+            for (int i = 0; i < N; i++) {
+                BatterySipper sipper = usageList.get(i);
+                if (sipper.getUid() == mPackageInfo.applicationInfo.uid) {
+                    mSipper = sipper;
+                    break;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            refreshUi();
+        }
+    }
+
+    private static class DisableChanger extends AsyncTask<Object, Object, Object> {
         final PackageManager mPm;
         final WeakReference<InstalledAppDetails> mActivity;
         final ApplicationInfo mInfo;
