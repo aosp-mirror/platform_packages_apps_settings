@@ -26,18 +26,27 @@
         settings:keywords="@string/keywords_default_apps" />
 
     <PreferenceScreen
-        android:key="manage_perms"
-        android:fragment="com.android.settings.applications.ManagePermissions"
-        android:title="@string/app_permissions"
-        settings:keywords="@string/keywords_app_permissions" />
-
-    <PreferenceScreen
             android:key="domain_urls"
             android:title="@string/domain_urls_title"
             android:fragment="com.android.settings.applications.ManageApplications">
         <extra
                 android:name="classname"
                 android:value="com.android.settings.Settings$DomainsURLsAppListActivity" />
+    </PreferenceScreen>
+
+    <PreferenceScreen
+        android:key="manage_perms"
+        android:fragment="com.android.settings.applications.ManagePermissions"
+        android:title="@string/app_permissions"
+        settings:keywords="@string/keywords_app_permissions" />
+
+    <PreferenceScreen
+        android:key="high_power_apps"
+        android:title="@string/high_power_apps"
+        android:fragment="com.android.settings.applications.ManageApplications">
+        <extra
+            android:name="classname"
+            android:value="com.android.settings.Settings$HighPowerApplicationsActivity" />
     </PreferenceScreen>
 
 </PreferenceScreen>

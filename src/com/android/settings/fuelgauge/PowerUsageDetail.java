@@ -16,8 +16,6 @@
 
 package com.android.settings.fuelgauge;
 
-import static com.android.settings.Utils.prepareCustomPreferencesList;
-
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ApplicationErrorReport;
@@ -30,33 +28,34 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.BatteryStats;
 import android.os.Bundle;
 import android.os.Process;
 import android.os.UserHandle;
+import android.preference.Preference;
+import android.preference.Preference.OnPreferenceClickListener;
+import android.preference.PreferenceCategory;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
+import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.os.BatterySipper;
+import com.android.internal.os.BatterySipper.DrainType;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.internal.util.FastPrintWriter;
+import com.android.settings.AppHeader;
 import com.android.settings.DisplaySettings;
-import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.WirelessSettings;
+import com.android.settings.applications.AppInfoBase;
 import com.android.settings.applications.InstalledAppDetails;
+import com.android.settings.applications.LayoutPreference;
 import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.location.LocationSettings;
 import com.android.settings.wifi.WifiSettings;
@@ -65,7 +64,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
 
-public class PowerUsageDetail extends InstrumentedFragment implements Button.OnClickListener {
+public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickListener {
 
     // Note: Must match the sequence of the DrainType
     private static int[] sDrainTypeDesciptions = new int[] {
@@ -292,51 +291,57 @@ public class PowerUsageDetail extends InstrumentedFragment implements Button.OnC
     public static final String EXTRA_ICON_ID = "iconId"; // Int
     public static final String EXTRA_SHOW_LOCATION_BUTTON = "showLocationButton";  // Boolean
 
+    private static final String TAG = "PowerUsageDetail";
+
+    private static final String KEY_DETAILS_PARENT = "details_parent";
+    private static final String KEY_CONTROLS_PARENT = "controls_parent";
+    private static final String KEY_MESSAGES_PARENT = "messages_parent";
+    private static final String KEY_PACKAGES_PARENT = "packages_parent";
+    private static final String KEY_BATTERY_HISTORY = "battery_history";
+    private static final String KEY_TWO_BUTTONS = "two_buttons";
+    private static final String KEY_HIGH_POWER = "high_power";
+
     private PackageManager mPm;
     private DevicePolicyManager mDpm;
-    private String mTitle;
     private int mUsageSince;
     private int[] mTypes;
     private int mUid;
     private double[] mValues;
-    private View mRootView;
-    private TextView mTitleView;
-    private ViewGroup mTwoButtonsPanel;
     private Button mForceStopButton;
     private Button mReportButton;
-    private ViewGroup mDetailsParent;
-    private ViewGroup mControlsParent;
-    private ViewGroup mMessagesParent;
     private long mStartTime;
     private BatterySipper.DrainType mDrainType;
-    private Drawable mAppIcon;
     private double mNoCoverage; // Percentage of time that there was no coverage
+
+    private BatteryHistoryPreference mHistPref;
+    private PreferenceCategory mDetailsParent;
+    private PreferenceCategory mControlsParent;
+    private PreferenceCategory mMessagesParent;
+    private PreferenceCategory mPackagesParent;
 
     private boolean mUsesGps;
     private boolean mShowLocationButton;
 
-    private static final String TAG = "PowerUsageDetail";
     private String[] mPackages;
 
     ApplicationInfo mApp;
     ComponentName mInstaller;
+    private Preference mHighPower;
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         mPm = getActivity().getPackageManager();
         mDpm = (DevicePolicyManager)getActivity().getSystemService(Context.DEVICE_POLICY_SERVICE);
-    }
 
-    @Override
-    public View onCreateView(
-            LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.power_usage_details, container, false);
-        prepareCustomPreferencesList(container, view, view, false);
+        addPreferencesFromResource(R.xml.power_usage_details);
+        mHistPref = (BatteryHistoryPreference) findPreference(KEY_BATTERY_HISTORY);
+        mDetailsParent = (PreferenceCategory) findPreference(KEY_DETAILS_PARENT);
+        mControlsParent = (PreferenceCategory) findPreference(KEY_CONTROLS_PARENT);
+        mMessagesParent = (PreferenceCategory) findPreference(KEY_MESSAGES_PARENT);
+        mPackagesParent = (PreferenceCategory) findPreference(KEY_PACKAGES_PARENT);
 
-        mRootView = view;
         createDetails();
-        return view;
     }
 
     @Override
@@ -349,76 +354,31 @@ public class PowerUsageDetail extends InstrumentedFragment implements Button.OnC
         super.onResume();
         mStartTime = android.os.Process.getElapsedCpuTime();
         checkForceStop();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
+        if (mHighPower != null) {
+            mHighPower.setSummary(HighPowerDetail.getSummary(getActivity(), mApp.packageName));
+        }
     }
 
     private void createDetails() {
         final Bundle args = getArguments();
-        mTitle = args.getString(EXTRA_TITLE);
-        final int percentage = args.getInt(EXTRA_PERCENT, 1);
-        final int gaugeValue = args.getInt(EXTRA_GAUGE, 1);
+        Context context = getActivity();
         mUsageSince = args.getInt(EXTRA_USAGE_SINCE, USAGE_SINCE_UNPLUGGED);
         mUid = args.getInt(EXTRA_UID, 0);
+        mPackages = context.getPackageManager().getPackagesForUid(mUid);
         mDrainType = (BatterySipper.DrainType) args.getSerializable(EXTRA_DRAIN_TYPE);
         mNoCoverage = args.getDouble(EXTRA_NO_COVERAGE, 0);
-        String iconPackage = args.getString(EXTRA_ICON_PACKAGE);
-        int iconId = args.getInt(EXTRA_ICON_ID, 0);
         mShowLocationButton = args.getBoolean(EXTRA_SHOW_LOCATION_BUTTON);
-        if (!TextUtils.isEmpty(iconPackage)) {
-            try {
-                final PackageManager pm = getActivity().getPackageManager();
-                ApplicationInfo ai = pm.getPackageInfo(iconPackage, 0).applicationInfo;
-                if (ai != null) {
-                    mAppIcon = ai.loadIcon(pm);
-                }
-            } catch (NameNotFoundException nnfe) {
-                // Use default icon
-            }
-        } else if (iconId != 0) {
-            mAppIcon = getActivity().getDrawable(iconId);
-        }
-        if (mAppIcon == null) {
-            mAppIcon = getActivity().getPackageManager().getDefaultActivityIcon();
-        }
 
-        // Set the description
-        final TextView summary = (TextView) mRootView.findViewById(android.R.id.summary);
-        summary.setText(getDescriptionForDrainType());
-        summary.setVisibility(View.VISIBLE);
+        setupHeader();
 
         mTypes = args.getIntArray(EXTRA_DETAIL_TYPES);
         mValues = args.getDoubleArray(EXTRA_DETAIL_VALUES);
 
-        mTitleView = (TextView) mRootView.findViewById(android.R.id.title);
-        mTitleView.setText(mTitle);
-
-        final TextView text1 = (TextView)mRootView.findViewById(android.R.id.text1);
-        text1.setText(Utils.formatPercentage(percentage));
-
-        mTwoButtonsPanel = (ViewGroup)mRootView.findViewById(R.id.two_buttons_panel);
-        mForceStopButton = (Button)mRootView.findViewById(R.id.left_button);
-        mReportButton = (Button)mRootView.findViewById(R.id.right_button);
+        LayoutPreference twoButtons = (LayoutPreference) findPreference(KEY_TWO_BUTTONS);
+        mForceStopButton = (Button) twoButtons.findViewById(R.id.left_button);
+        mReportButton = (Button) twoButtons.findViewById(R.id.right_button);
         mForceStopButton.setEnabled(false);
 
-        final ProgressBar progress = (ProgressBar) mRootView.findViewById(android.R.id.progress);
-        progress.setProgress(gaugeValue);
-
-        final ImageView icon = (ImageView) mRootView.findViewById(android.R.id.icon);
-        icon.setImageDrawable(mAppIcon);
-
-        mDetailsParent = (ViewGroup)mRootView.findViewById(R.id.details);
-        mControlsParent = (ViewGroup)mRootView.findViewById(R.id.controls);
-        mMessagesParent = (ViewGroup)mRootView.findViewById(R.id.messages);
-
-        fillDetailsSection();
-        fillPackagesSection(mUid);
-        fillControlsSection(mUid);
-        fillMessagesSection(mUid);
-        
         if (mUid >= Process.FIRST_APPLICATION_UID) {
             mForceStopButton.setText(R.string.force_stop);
             mForceStopButton.setTag(ACTION_FORCE_STOP);
@@ -426,27 +386,86 @@ public class PowerUsageDetail extends InstrumentedFragment implements Button.OnC
             mReportButton.setText(com.android.internal.R.string.report);
             mReportButton.setTag(ACTION_REPORT);
             mReportButton.setOnClickListener(this);
-            
+
+            if (mPackages != null && mPackages.length > 0) {
+                try {
+                    mApp = context.getPackageManager().getApplicationInfo(
+                            mPackages[0], 0);
+                } catch (NameNotFoundException e) {
+                }
+            } else {
+                Log.d(TAG, "No packages!!");
+            }
             // check if error reporting is enabled in secure settings
-            int enabled = android.provider.Settings.Global.getInt(getActivity().getContentResolver(),
+            int enabled = android.provider.Settings.Global.getInt(context.getContentResolver(),
                     android.provider.Settings.Global.SEND_ACTION_APP_ERROR, 0);
             if (enabled != 0) {
-                if (mPackages != null && mPackages.length > 0) {
-                    try {
-                        mApp = getActivity().getPackageManager().getApplicationInfo(
-                                mPackages[0], 0);
-                        mInstaller = ApplicationErrorReport.getErrorReportReceiver(
-                                getActivity(), mPackages[0], mApp.flags);
-                    } catch (NameNotFoundException e) {
-                    }
+                if (mApp != null) {
+                    mInstaller = ApplicationErrorReport.getErrorReportReceiver(
+                            context, mPackages[0], mApp.flags);
                 }
                 mReportButton.setEnabled(mInstaller != null);
             } else {
-                mTwoButtonsPanel.setVisibility(View.GONE);
+                removePreference(KEY_TWO_BUTTONS);
+            }
+            if (mApp != null) {
+                mHighPower = findPreference(KEY_HIGH_POWER);
+                mHighPower.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+                    @Override
+                    public boolean onPreferenceClick(Preference preference) {
+                        AppInfoBase.startAppInfoFragment(HighPowerDetail.class, R.string.high_power,
+                                mApp.packageName, mApp.uid, PowerUsageDetail.this, 0);
+                        return true;
+                    }
+                });
+            } else {
+                removePreference(KEY_HIGH_POWER);
             }
         } else {
-            mTwoButtonsPanel.setVisibility(View.GONE);
+            removePreference(KEY_TWO_BUTTONS);
+            removePreference(KEY_HIGH_POWER);
         }
+
+        refreshStats();
+
+        fillDetailsSection();
+        fillPackagesSection(mUid);
+        fillControlsSection(mUid);
+        fillMessagesSection(mUid);
+    }
+    
+    @Override
+    protected void refreshStats() {
+        super.refreshStats();
+        updatePreference(mHistPref);
+    }
+
+    private void setupHeader() {
+        final Bundle args = getArguments();
+        String title = args.getString(EXTRA_TITLE);
+        String iconPackage = args.getString(EXTRA_ICON_PACKAGE);
+        int iconId = args.getInt(EXTRA_ICON_ID, 0);
+        Drawable appIcon = null;
+
+        if (!TextUtils.isEmpty(iconPackage)) {
+            try {
+                final PackageManager pm = getActivity().getPackageManager();
+                ApplicationInfo ai = pm.getPackageInfo(iconPackage, 0).applicationInfo;
+                if (ai != null) {
+                    appIcon = ai.loadIcon(pm);
+                }
+            } catch (NameNotFoundException nnfe) {
+                // Use default icon
+            }
+        } else if (iconId != 0) {
+            appIcon = getActivity().getDrawable(iconId);
+        }
+        if (appIcon == null) {
+            appIcon = getActivity().getPackageManager().getDefaultActivityIcon();
+        }
+
+        AppHeader.createAppHeader(getActivity(), appIcon, title, null,
+                mDrainType != DrainType.APP ? android.R.color.white : 0);
     }
 
     public void onClick(View v) {
@@ -500,7 +519,6 @@ public class PowerUsageDetail extends InstrumentedFragment implements Button.OnC
     }
 
     private void fillDetailsSection() {
-        LayoutInflater inflater = getActivity().getLayoutInflater();
         if (mTypes != null && mValues != null) {
             for (int i = 0; i < mTypes.length; i++) {
                 // Only add an item if the time is greater than zero
@@ -530,15 +548,19 @@ public class PowerUsageDetail extends InstrumentedFragment implements Button.OnC
                     default:
                         value = Utils.formatElapsedTime(getActivity(), mValues[i], true);
                 }
-                ViewGroup item = (ViewGroup) inflater.inflate(R.layout.power_usage_detail_item_text,
-                        null);
-                mDetailsParent.addView(item);
-                TextView labelView = (TextView) item.findViewById(R.id.label);
-                TextView valueView = (TextView) item.findViewById(R.id.value);
-                labelView.setText(label);
-                valueView.setText(value);
+                addHorizontalPreference(mDetailsParent, label, value);
             }
         }
+    }
+
+    private void addHorizontalPreference(PreferenceCategory parent, CharSequence title,
+            CharSequence summary) {
+        Preference pref = new Preference(getActivity());
+        pref.setLayoutResource(R.layout.horizontal_preference);
+        pref.setTitle(title);
+        pref.setSummary(summary);
+        pref.setSelectable(false);
+        parent.addPreference(pref);
     }
 
     private void fillControlsSection(int uid) {
@@ -597,21 +619,22 @@ public class PowerUsageDetail extends InstrumentedFragment implements Button.OnC
                 break;
         }
         if (removeHeader) {
-            mControlsParent.setVisibility(View.GONE);
+            mControlsParent.setTitle(null);
         }
     }
 
-    private void addControl(int title, int summary, int action) {
-        final Resources res = getResources();
-        LayoutInflater inflater = getActivity().getLayoutInflater();
-        ViewGroup item = (ViewGroup) inflater.inflate(R.layout.power_usage_action_item,null);
-        mControlsParent.addView(item);
-        Button actionButton = (Button) item.findViewById(R.id.action_button);
-        TextView summaryView = (TextView) item.findViewById(R.id.summary);
-        actionButton.setText(res.getString(title));
-        summaryView.setText(res.getString(summary));
-        actionButton.setOnClickListener(this);
-        actionButton.setTag(new Integer(action));
+    private void addControl(int pageSummary, int actionTitle, final int action) {
+        Preference pref = new Preference(getActivity());
+        pref.setTitle(actionTitle);
+        pref.setSummary(pageSummary);
+        pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                doAction(action);
+                return true;
+            }
+        });
+        mControlsParent.addPreference(pref);
     }
 
     private void fillMessagesSection(int uid) {
@@ -623,27 +646,16 @@ public class PowerUsageDetail extends InstrumentedFragment implements Button.OnC
                 break;
         }
         if (removeHeader) {
-            mMessagesParent.setVisibility(View.GONE);
+            mMessagesParent.setTitle(null);
         }
     }
 
     private void addMessage(int message) {
-        final Resources res = getResources();
-        LayoutInflater inflater = getActivity().getLayoutInflater();
-        View item = inflater.inflate(R.layout.power_usage_message_item, null);
-        mMessagesParent.addView(item);
-        TextView messageView = (TextView) item.findViewById(R.id.message);
-        messageView.setText(res.getText(message));
+        addHorizontalPreference(mMessagesParent, getString(message), null);
     }
 
     private void removePackagesSection() {
-        View view;
-        if ((view = mRootView.findViewById(R.id.packages_section_title)) != null) {
-            view.setVisibility(View.GONE);
-        }
-        if ((view = mRootView.findViewById(R.id.packages_section)) != null) {
-            view.setVisibility(View.GONE);
-        }
+        getPreferenceScreen().removePreference(mPackagesParent);
     }
 
     private void killProcesses() {
@@ -663,7 +675,7 @@ public class PowerUsageDetail extends InstrumentedFragment implements Button.OnC
             mForceStopButton.setEnabled(getResultCode() != Activity.RESULT_CANCELED);
         }
     };
-    
+
     private void checkForceStop() {
         if (mPackages == null || mUid < Process.FIRST_APPLICATION_UID) {
             mForceStopButton.setEnabled(false);
@@ -693,10 +705,10 @@ public class PowerUsageDetail extends InstrumentedFragment implements Button.OnC
         getActivity().sendOrderedBroadcast(intent, null, mCheckKillProcessesReceiver, null,
                 Activity.RESULT_CANCELED, null, null);
     }
-    
+
     private void reportBatteryUse() {
         if (mPackages == null) return;
-        
+
         ApplicationErrorReport report = new ApplicationErrorReport();
         report.type = ApplicationErrorReport.TYPE_BATTERY;
         report.packageName = mPackages[0];
@@ -719,46 +731,29 @@ public class PowerUsageDetail extends InstrumentedFragment implements Button.OnC
         result.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(result);
     }
-    
+
     private void fillPackagesSection(int uid) {
         if (uid < 1) {
             removePackagesSection();
             return;
         }
-        ViewGroup packagesParent = (ViewGroup)mRootView.findViewById(R.id.packages_section);
-        if (packagesParent == null) return;
-        LayoutInflater inflater = getActivity().getLayoutInflater();
-        
-        PackageManager pm = getActivity().getPackageManager();
-        //final Drawable defaultActivityIcon = pm.getDefaultActivityIcon();
-        mPackages = pm.getPackagesForUid(uid);
         if (mPackages == null || mPackages.length < 2) {
             removePackagesSection();
             return;
         }
 
+        PackageManager pm = getPackageManager();
         // Convert package names to user-facing labels where possible
         for (int i = 0; i < mPackages.length; i++) {
             try {
                 ApplicationInfo ai = pm.getApplicationInfo(mPackages[i], 0);
                 CharSequence label = ai.loadLabel(pm);
-                //Drawable icon = defaultActivityIcon;
                 if (label != null) {
                     mPackages[i] = label.toString();
                 }
-                //if (ai.icon != 0) {
-                //    icon = ai.loadIcon(pm);
-                //}
-                View item = inflater.inflate(R.layout.power_usage_package_item, null);
-                packagesParent.addView(item);
-                TextView labelView = (TextView) item.findViewById(R.id.label);
-                labelView.setText(mPackages[i]);
+                addHorizontalPreference(mPackagesParent, mPackages[i], null);
             } catch (NameNotFoundException e) {
             }
         }
-    }
-    
-    private String getDescriptionForDrainType() {
-        return getResources().getString(sDrainTypeDesciptions[mDrainType.ordinal()]);
     }
 }

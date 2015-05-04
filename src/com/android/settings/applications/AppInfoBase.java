@@ -20,6 +20,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.app.Fragment;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
@@ -36,6 +37,7 @@ import android.util.Log;
 
 import com.android.settings.InstrumentedPreferenceFragment;
 import com.android.settings.SettingsActivity;
+import com.android.settings.Utils;
 import com.android.settings.applications.ApplicationsState.AppEntry;
 
 import java.util.ArrayList;
@@ -192,6 +194,17 @@ public abstract class AppInfoBase extends InstrumentedPreferenceFragment
     @Override
     public void onPackageListChanged() {
         refreshUi();
+    }
+
+    public static void startAppInfoFragment(Class<? extends AppInfoBase> fragment, int titleRes,
+            String pkg, int uid, Fragment source, int request) {
+        Bundle args = new Bundle();
+        args.putString(AppInfoBase.ARG_PACKAGE_NAME, pkg);
+
+        Intent intent = Utils.onBuildStartFragmentIntent(source.getActivity(), fragment.getName(),
+                args, null, titleRes, null, false);
+        source.getActivity().startActivityForResultAsUser(intent, request,
+                new UserHandle(UserHandle.getUserId(uid)));
     }
 
     public class MyAlertDialogFragment extends DialogFragment {

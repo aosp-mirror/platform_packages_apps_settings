@@ -18,7 +18,8 @@
                   android:title="@string/application_info_label">
     <com.android.settings.applications.LayoutPreference
         android:key="header_view"
-        android:layout="@layout/installed_app_details" />
+        android:layout="@layout/installed_app_details"
+        android:selectable="false" />
 
     <Preference
         android:key="storage_settings"
@@ -44,4 +45,10 @@
         android:key="preferred_settings"
         android:title="@string/launch_by_default"
         android:selectable="true" />
+
+    <Preference
+        android:key="battery"
+        android:title="@string/power_usage_summary_title"
+        android:selectable="true" />
+
 </PreferenceScreen>
