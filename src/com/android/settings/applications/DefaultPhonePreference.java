@@ -28,9 +28,9 @@ import com.android.settings.AppListPreference;
 import java.util.List;
 import java.util.Objects;
 
-public class DefaultDialerPreference extends AppListPreference {
+public class DefaultPhonePreference extends AppListPreference {
 
-    public DefaultDialerPreference(Context context, AttributeSet attrs) {
+    public DefaultPhonePreference(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         if (isAvailable(context)) {
