@@ -21,6 +21,7 @@ import static android.service.notification.ZenModeConfig.ALL_DAYS;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.ServiceInfo;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
@@ -181,7 +182,7 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
 
     private String computeRuleSummary(ZenRule rule) {
         if (rule == null || !rule.enabled) return getString(R.string.switch_off_text);
-        final String mode = ZenModeSettings.computeZenModeCaption(getResources(), rule.zenMode);
+        final String mode = computeZenModeCaption(getResources(), rule.zenMode);
         String summary = getString(R.string.switch_on_text);
         final ScheduleInfo schedule = ZenModeConfig.tryParseScheduleConditionId(rule.conditionId);
         final EventInfo event = ZenModeConfig.tryParseEventConditionId(rule.conditionId);
@@ -287,6 +288,19 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
         c.permission = android.Manifest.permission.BIND_CONDITION_PROVIDER_SERVICE;
         c.noun = "condition provider";
         return c;
+    }
+
+    private static String computeZenModeCaption(Resources res, int zenMode) {
+        switch (zenMode) {
+            case Global.ZEN_MODE_ALARMS:
+                return res.getString(R.string.zen_mode_option_alarms);
+            case Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS:
+                return res.getString(R.string.zen_mode_option_important_interruptions);
+            case Global.ZEN_MODE_NO_INTERRUPTIONS:
+                return res.getString(R.string.zen_mode_option_no_interruptions);
+            default:
+                return null;
+        }
     }
 
     private final ServiceListing.Callback mServiceListingCallback = new ServiceListing.Callback() {
