@@ -325,7 +325,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             } else if (KEY_CURRENT_INPUT_METHOD.equals(preference.getKey())) {
                 final InputMethodManager imm = (InputMethodManager)
                         getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.showInputMethodPicker();
+                imm.showInputMethodPicker(false /* showAuxiliarySubtypes */);
             }
         } else if (preference instanceof SwitchPreference) {
             final SwitchPreference pref = (SwitchPreference) preference;
