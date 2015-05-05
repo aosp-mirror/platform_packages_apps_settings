@@ -27,6 +27,7 @@ import android.os.UserHandle;
 import android.service.notification.Condition;
 import android.service.notification.IConditionListener;
 import android.service.notification.ZenModeConfig;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
@@ -119,7 +120,7 @@ public class ZenModeConditionSelection extends RadioGroup {
             }
         }
         if (v != null) {
-            v.setText(ZenModeSettings.computeConditionText(c));
+            v.setText(computeConditionText(c));
             v.setEnabled(c.state == Condition.STATE_TRUE);
         }
         mConditions.add(c);
@@ -137,6 +138,12 @@ public class ZenModeConditionSelection extends RadioGroup {
         } catch (RemoteException e) {
             // noop
         }
+    }
+
+    private static String computeConditionText(Condition c) {
+        return !TextUtils.isEmpty(c.line1) ? c.line1
+                : !TextUtils.isEmpty(c.summary) ? c.summary
+                : "";
     }
 
     private final IConditionListener mListener = new IConditionListener.Stub() {
