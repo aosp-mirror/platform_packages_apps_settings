@@ -40,18 +40,20 @@ public class AppDialogFragment extends DialogFragment implements AppDialog.Liste
     private static final String TAG = "AppDialogFragment";
 
     private static final String ARG_MANAGING = "managing";
+    private static final String ARG_LABEL = "label";
     private static final String ARG_PACKAGE = "package";
     private static final String ARG_CONNECTED = "connected";
 
     private final IConnectivityManager mService = IConnectivityManager.Stub.asInterface(
             ServiceManager.getService(Context.CONNECTIVITY_SERVICE));
 
-    public static void show(VpnSettings parent, PackageInfo pkgInfo, boolean managing,
+    public static void show(VpnSettings parent, PackageInfo pkgInfo, String label, boolean managing,
             boolean connected) {
         if (!parent.isAdded()) return;
 
         Bundle args = new Bundle();
         args.putParcelable(ARG_PACKAGE, pkgInfo);
+        args.putString(ARG_LABEL, label);
         args.putBoolean(ARG_MANAGING, managing);
         args.putBoolean(ARG_CONNECTED, connected);
 
@@ -65,23 +67,16 @@ public class AppDialogFragment extends DialogFragment implements AppDialog.Liste
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Bundle args = getArguments();
         PackageInfo pkgInfo = (PackageInfo) args.getParcelable(ARG_PACKAGE);
+        String label = args.getString(ARG_LABEL);
         boolean managing = args.getBoolean(ARG_MANAGING);
         boolean connected = args.getBoolean(ARG_CONNECTED);
 
         if (managing) {
-            return new AppDialog(getActivity(), this, pkgInfo, connected);
+            return new AppDialog(getActivity(), this, pkgInfo, label, connected);
         } else {
             // Build an AlertDialog with an option to disconnect.
-
-            CharSequence vpnName;
-            try {
-                vpnName = VpnConfig.getVpnLabel(getActivity(), pkgInfo.packageName);
-            } catch (PackageManager.NameNotFoundException ex) {
-                vpnName = pkgInfo.packageName;
-            }
-
             AlertDialog.Builder dlog = new AlertDialog.Builder(getActivity())
-                    .setTitle(vpnName)
+                    .setTitle(label)
                     .setMessage(getActivity().getString(R.string.vpn_disconnect_confirm))
                     .setNegativeButton(getActivity().getString(R.string.vpn_cancel), null);
 

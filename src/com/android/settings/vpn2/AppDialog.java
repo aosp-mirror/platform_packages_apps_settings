@@ -40,15 +40,18 @@ import com.android.settings.R;
  * {@see ConfigDialog}
  */
 class AppDialog extends AlertDialog implements DialogInterface.OnClickListener {
-    private final PackageInfo mPkgInfo;
     private final Listener mListener;
+    private final PackageInfo mPkgInfo;
+    private final String mLabel;
     private final boolean mConnected;
 
-    AppDialog(Context context, Listener listener, PackageInfo pkgInfo, boolean connected) {
+    AppDialog(Context context, Listener listener, PackageInfo pkgInfo, String label,
+            boolean connected) {
         super(context);
 
         mListener = listener;
         mPkgInfo = pkgInfo;
+        mLabel = label;
         mConnected = connected;
     }
 
@@ -58,14 +61,7 @@ class AppDialog extends AlertDialog implements DialogInterface.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedState) {
-        CharSequence vpnName;
-        try {
-            vpnName = VpnConfig.getVpnLabel(getContext(), mPkgInfo.packageName);
-        } catch (PackageManager.NameNotFoundException ex) {
-            vpnName = mPkgInfo.packageName;
-        }
-
-        setTitle(vpnName);
+        setTitle(mLabel);
         setMessage(getContext().getString(R.string.vpn_version, mPkgInfo.versionName));
 
         createButtons();
