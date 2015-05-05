@@ -89,6 +89,7 @@ import com.android.settings.deviceinfo.PublicVolumeSettings;
 import com.android.settings.deviceinfo.StorageSettings;
 import com.android.settings.deviceinfo.UsbSettings;
 import com.android.settings.fuelgauge.BatterySaverSettings;
+import com.android.settings.fuelgauge.PowerUsageDetail;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
 import com.android.settings.inputmethod.KeyboardLayoutPickerFragment;
@@ -347,6 +348,7 @@ public class SettingsActivity extends Activity
             ZenModeEventRuleSettings.class.getName(),
             ZenModeExternalRuleSettings.class.getName(),
             ProcessStatsUi.class.getName(),
+            PowerUsageDetail.class.getName(),
     };
 
 

@@ -45,7 +45,9 @@ public class LayoutPreference extends Preference {
                 .inflate(layoutResource, null, false);
 
         final ViewGroup allDetails = (ViewGroup) view.findViewById(R.id.all_details);
-        Utils.forceCustomPadding(allDetails, true /* additive padding */);
+        if (allDetails != null) {
+            Utils.forceCustomPadding(allDetails, true /* additive padding */);
+        }
         mRootView = view;
         setShouldDisableView(false);
     }
