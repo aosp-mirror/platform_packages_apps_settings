@@ -31,13 +31,11 @@ import com.android.settings.R;
 
 public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
     private static final String KEY_CALENDAR = "calendar";
-    private static final String KEY_ATTENDANCE = "attendance";
     private static final String KEY_REPLY = "reply";
 
     public static final String ACTION = Settings.ACTION_ZEN_MODE_EVENT_RULE_SETTINGS;
 
     private DropDownPreference mCalendar;
-    private DropDownPreference mAttendance;
     private DropDownPreference mReply;
 
     private EventInfo mEvent;
@@ -92,29 +90,11 @@ public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
             }
         });
 
-        mAttendance = (DropDownPreference) root.findPreference(KEY_ATTENDANCE);
-        mAttendance.addItem(R.string.zen_mode_event_rule_attendance_required_optional,
-                EventInfo.ATTENDANCE_REQUIRED_OR_OPTIONAL);
-        mAttendance.addItem(R.string.zen_mode_event_rule_attendance_required,
-                EventInfo.ATTENDANCE_REQUIRED);
-        mAttendance.addItem(R.string.zen_mode_event_rule_attendance_optional,
-                EventInfo.ATTENDANCE_OPTIONAL);
-        mAttendance.setCallback(new DropDownPreference.Callback() {
-            @Override
-            public boolean onItemSelected(int pos, Object value) {
-                final int attendance = (Integer) value;
-                if (attendance == mEvent.attendance) return true;
-                mEvent.attendance = attendance;
-                updateRule(ZenModeConfig.toEventConditionId(mEvent));
-                return true;
-            }
-        });
-
         mReply = (DropDownPreference) root.findPreference(KEY_REPLY);
-        mReply.addItem(R.string.zen_mode_event_rule_reply_any,
-                EventInfo.REPLY_ANY);
         mReply.addItem(R.string.zen_mode_event_rule_reply_any_except_no,
                 EventInfo.REPLY_ANY_EXCEPT_NO);
+        mReply.addItem(R.string.zen_mode_event_rule_reply_yes_or_maybe,
+                EventInfo.REPLY_YES_OR_MAYBE);
         mReply.addItem(R.string.zen_mode_event_rule_reply_yes,
                 EventInfo.REPLY_YES);
         mReply.setCallback(new DropDownPreference.Callback() {
@@ -135,7 +115,6 @@ public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
     @Override
     protected void updateControlsInternal() {
         mCalendar.setSelectedValue(mEvent.calendar);
-        mAttendance.setSelectedValue(mEvent.attendance);
         mReply.setSelectedValue(mEvent.reply);
     }
 
