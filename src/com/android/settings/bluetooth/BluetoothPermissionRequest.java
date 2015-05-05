@@ -44,7 +44,7 @@ public final class BluetoothPermissionRequest extends BroadcastReceiver {
 
     private static final String NOTIFICATION_TAG_PBAP = "Phonebook Access" ;
     private static final String NOTIFICATION_TAG_MAP = "Message Access";
-
+    private static final String NOTIFICATION_TAG_SAP = "SIM Access";
 
     Context mContext;
     int mRequestType;
@@ -139,6 +139,11 @@ public final class BluetoothPermissionRequest extends BroadcastReceiver {
                         message = context.getString(R.string.bluetooth_map_acceptance_dialog_text,
                                 deviceName, deviceName);
                         break;
+                    case BluetoothDevice.REQUEST_TYPE_SIM_ACCESS:
+                        title = context.getString(R.string.bluetooth_sap_request);
+                        message = context.getString(R.string.bluetooth_sap_acceptance_dialog_text,
+                                deviceName, deviceName);
+                        break;
                     default:
                         title = context.getString(R.string.bluetooth_connection_permission_request);
                         message = context.getString(R.string.bluetooth_connection_dialog_text,
@@ -184,6 +189,8 @@ public final class BluetoothPermissionRequest extends BroadcastReceiver {
             return NOTIFICATION_TAG_PBAP;
         } else if(mRequestType == BluetoothDevice.REQUEST_TYPE_MESSAGE_ACCESS) {
             return NOTIFICATION_TAG_MAP;
+        } else if(mRequestType == BluetoothDevice.REQUEST_TYPE_SIM_ACCESS) {
+            return NOTIFICATION_TAG_SAP;
         }
         return null;
     }
@@ -198,7 +205,8 @@ public final class BluetoothPermissionRequest extends BroadcastReceiver {
 
         // ignore if it is something else than phonebook/message settings it wants us to remember
         if (mRequestType != BluetoothDevice.REQUEST_TYPE_PHONEBOOK_ACCESS
-                && mRequestType != BluetoothDevice.REQUEST_TYPE_MESSAGE_ACCESS) {
+                && mRequestType != BluetoothDevice.REQUEST_TYPE_MESSAGE_ACCESS
+                && mRequestType != BluetoothDevice.REQUEST_TYPE_SIM_ACCESS) {
             if (DEBUG) Log.d(TAG, "checkUserChoice(): Unknown RequestType " + mRequestType);
             return processed;
         }
@@ -241,6 +249,20 @@ public final class BluetoothPermissionRequest extends BroadcastReceiver {
                 processed = true;
             } else {
                 Log.e(TAG, "Bad messagePermission: " + messagePermission);
+            }
+        } else if(mRequestType == BluetoothDevice.REQUEST_TYPE_SIM_ACCESS) {
+            int simPermission = cachedDevice.getSimPermissionChoice();
+
+            if (simPermission == CachedBluetoothDevice.ACCESS_UNKNOWN) {
+                // Leave 'processed' as false.
+            } else if (simPermission == CachedBluetoothDevice.ACCESS_ALLOWED) {
+                sendReplyIntentToReceiver(true);
+                processed = true;
+            } else if (simPermission == CachedBluetoothDevice.ACCESS_REJECTED) {
+                sendReplyIntentToReceiver(false);
+                processed = true;
+            } else {
+                Log.e(TAG, "Bad simPermission: " + simPermission);
             }
         }
         if (DEBUG) Log.d(TAG,"checkUserChoice(): returning " + processed);
