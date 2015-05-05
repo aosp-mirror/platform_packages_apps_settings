@@ -18,7 +18,6 @@ package com.android.settings.vpn2;
 
 import android.app.AppGlobals;
 import android.content.Context;
-import android.content.pm.IPackageManager;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
@@ -55,11 +54,15 @@ public class AppPreference extends ManageablePreference {
     public PackageInfo getPackageInfo() {
         UserHandle user = new UserHandle(UserHandle.getUserId(mUid));
         try {
-            IPackageManager ipm = AppGlobals.getPackageManager();
-            return ipm.getPackageInfo(mPackageName, 0 /* flags */, user.getIdentifier());
-        } catch (RemoteException rme) {
+            PackageManager pm = getUserContext().getPackageManager();
+            return pm.getPackageInfo(mPackageName, 0 /* flags */);
+        } catch (PackageManager.NameNotFoundException nnfe) {
             return null;
         }
+    }
+
+    public String getLabel() {
+        return mName;
     }
 
     public String getPackageName() {
@@ -85,29 +88,39 @@ public class AppPreference extends ManageablePreference {
 
         mName = mPackageName;
         Drawable icon = null;
+
         try {
             // Make all calls to the package manager as the appropriate user.
-            int userId = UserHandle.getUserId(mUid);
-            Context userContext = getContext().createPackageContextAsUser(
-                    getContext().getPackageName(), 0 /* flags */, new UserHandle(userId));
+            Context userContext = getUserContext();
             PackageManager pm = userContext.getPackageManager();
-
-            // Fetch icon and VPN label
-            PackageInfo pkgInfo = pm.getPackageInfo(mPackageName, 0 /* flags */);
-            if (pkgInfo != null) {
-                icon = pkgInfo.applicationInfo.loadIcon(pm);
-                mName = VpnConfig.getVpnLabel(userContext, mPackageName).toString();
+            // Fetch icon and VPN label- the nested catch block is for the case that the app doesn't
+            // exist, in which case we can fall back to the default activity icon for an activity in
+            // that user.
+            try {
+                PackageInfo pkgInfo = pm.getPackageInfo(mPackageName, 0 /* flags */);
+                if (pkgInfo != null) {
+                    icon = pkgInfo.applicationInfo.loadIcon(pm);
+                    mName = VpnConfig.getVpnLabel(userContext, mPackageName).toString();
+                }
+            } catch (PackageManager.NameNotFoundException pkgNotFound) {
+                // Use default app label and icon as fallback
             }
-        } catch (PackageManager.NameNotFoundException nnfe) {
-            // Failed - use default app label and icon as fallback
-        }
-        if (icon == null) {
-            icon = getContext().getPackageManager().getDefaultActivityIcon();
+            if (icon == null) {
+                icon = pm.getDefaultActivityIcon();
+            }
+        } catch (PackageManager.NameNotFoundException userNotFound) {
+            // No user, no useful information to obtain. Quietly fail.
         }
         setTitle(mName);
         setIcon(icon);
 
         notifyHierarchyChanged();
+    }
+
+    private Context getUserContext() throws PackageManager.NameNotFoundException {
+        UserHandle user = new UserHandle(UserHandle.getUserId(mUid));
+        return getContext().createPackageContextAsUser(
+                getContext().getPackageName(), 0 /* flags */, user);
     }
 
     public int compareTo(Preference preference) {

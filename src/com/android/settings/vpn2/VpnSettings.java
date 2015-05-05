@@ -251,7 +251,7 @@ public class VpnSettings extends SettingsPreferenceFragment implements
 
             // Already onnected or no launch intent available - show an info dialog
             PackageInfo pkgInfo = pref.getPackageInfo();
-            AppDialogFragment.show(this, pkgInfo, false /* editing */, connected);
+            AppDialogFragment.show(this, pkgInfo, pref.getLabel(), false /* editing */, connected);
             return true;
         }
         return false;
@@ -268,8 +268,9 @@ public class VpnSettings extends SettingsPreferenceFragment implements
                         true /* exists */);
             } else if (tag instanceof AppPreference) {
                 AppPreference pref = (AppPreference) tag;
-                AppDialogFragment.show(VpnSettings.this, pref.getPackageInfo(), true /* editing */,
-                        (pref.getState() == AppPreference.STATE_CONNECTED) /* connected */);
+                boolean connected = (pref.getState() == AppPreference.STATE_CONNECTED);
+                AppDialogFragment.show(VpnSettings.this, pref.getPackageInfo(), pref.getLabel(),
+                        true /* editing */, connected);
             }
         }
     };
