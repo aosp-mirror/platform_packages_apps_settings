@@ -20,6 +20,7 @@ import com.android.internal.logging.MetricsLogger;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockPatternView;
 import com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient;
+import com.android.internal.widget.LockPatternChecker;
 import com.android.internal.widget.LockPatternView.Cell;
 
 import android.annotation.Nullable;
@@ -27,6 +28,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.CountDownTimer;
 import android.os.SystemClock;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.storage.StorageManager;
@@ -77,6 +79,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
 
         private LockPatternView mLockPatternView;
         private LockPatternUtils mLockPatternUtils;
+        private AsyncTask<?, ?, ?> mPendingLockCheck;
         private int mNumWrongConfirmAttempts;
         private CountDownTimer mCountdownTimer;
 
@@ -157,6 +160,10 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             if (mCountdownTimer != null) {
                 mCountdownTimer.cancel();
             }
+            if (mPendingLockCheck != null) {
+                mPendingLockCheck.cancel(false);
+                mPendingLockCheck = null;
+            }
         }
 
         @Override
@@ -173,8 +180,8 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             if (deadline != 0) {
                 handleAttemptLockout(deadline);
             } else if (!mLockPatternView.isEnabled()) {
-                // The deadline has passed, but the timer was cancelled...
-                // Need to clean up.
+                // The deadline has passed, but the timer was cancelled. Or the pending lock
+                // check was cancelled. Need to clean up.
                 mNumWrongConfirmAttempts = 0;
                 updateStage(Stage.NeedToUnlock);
             }
@@ -198,6 +205,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
 
                     mLockPatternView.setEnabled(true);
                     mLockPatternView.enableInput();
+                    mLockPatternView.clearPattern();
                     break;
                 case NeedToUnlockWrong:
                     mErrorTextView.setText(R.string.lockpattern_need_to_unlock_wrong);
@@ -269,32 +277,81 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             }
 
             public void onPatternDetected(List<LockPatternView.Cell> pattern) {
-                final boolean verifyChallenge = getActivity().getIntent().getBooleanExtra(
-                        ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, false);
-                boolean matched = false;
-                Intent intent = new Intent();
-                if (verifyChallenge) {
-                    if (getActivity() instanceof ConfirmLockPattern.InternalActivity) {
-                        long challenge = getActivity().getIntent().getLongExtra(
-                            ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, 0);
-                        byte[] token = mLockPatternUtils.verifyPattern(pattern, challenge,
-                                UserHandle.myUserId());
-                        if (token != null) {
-                            matched = true;
-                            intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
-                        }
-                    }
-                } else if (mLockPatternUtils.checkPattern(pattern, UserHandle.myUserId())) {
-                    matched = true;
-                    if (getActivity() instanceof ConfirmLockPattern.InternalActivity) {
-                        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_TYPE,
-                                        StorageManager.CRYPT_TYPE_PATTERN);
-                        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD,
-                                        LockPatternUtils.patternToString(pattern));
-                    }
-
+                mLockPatternView.setEnabled(false);
+                if (mPendingLockCheck != null) {
+                    mPendingLockCheck.cancel(false);
                 }
 
+                final boolean verifyChallenge = getActivity().getIntent().getBooleanExtra(
+                        ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, false);
+                Intent intent = new Intent();
+                if (verifyChallenge) {
+                    if (isInternalActivity()) {
+                        startVerifyPattern(pattern, intent);
+                        return;
+                    }
+                } else {
+                    startCheckPattern(pattern, intent);
+                    return;
+                }
+
+                onPatternChecked(pattern, false, intent);
+            }
+
+            private boolean isInternalActivity() {
+                return getActivity() instanceof ConfirmLockPattern.InternalActivity;
+            }
+
+            private void startVerifyPattern(final List<LockPatternView.Cell> pattern,
+                    final Intent intent) {
+                long challenge = getActivity().getIntent().getLongExtra(
+                        ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, 0);
+                mPendingLockCheck = LockPatternChecker.verifyPattern(
+                        mLockPatternUtils,
+                        pattern,
+                        challenge,
+                        UserHandle.myUserId(),
+                        new LockPatternChecker.OnVerifyCallback() {
+                            @Override
+                            public void onVerified(byte[] token) {
+                                mPendingLockCheck = null;
+                                boolean matched = false;
+                                if (token != null) {
+                                    matched = true;
+                                    intent.putExtra(
+                                            ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN,
+                                            token);
+                                }
+                                onPatternChecked(pattern, matched, intent);
+                            }
+                        });
+            }
+
+            private void startCheckPattern(final List<LockPatternView.Cell> pattern,
+                    final Intent intent) {
+                mPendingLockCheck = LockPatternChecker.checkPattern(
+                        mLockPatternUtils,
+                        pattern,
+                        UserHandle.myUserId(),
+                        new LockPatternChecker.OnCheckCallback() {
+                            @Override
+                            public void onChecked(boolean matched) {
+                                mPendingLockCheck = null;
+                                if (matched && isInternalActivity()) {
+                                    intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_TYPE,
+                                                    StorageManager.CRYPT_TYPE_PATTERN);
+                                    intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD,
+                                                    LockPatternUtils.patternToString(pattern));
+                                }
+                                onPatternChecked(pattern, matched, intent);
+                            }
+                        });
+            }
+
+            private void onPatternChecked(List<LockPatternView.Cell> pattern,
+                    boolean matched,
+                    Intent intent) {
+                mLockPatternView.setEnabled(true);
                 if (matched) {
                     getActivity().setResult(Activity.RESULT_OK, intent);
                     getActivity().finish();

@@ -19,6 +19,7 @@ package com.android.settings;
 import com.android.internal.logging.MetricsLogger;
 import com.google.android.collect.Lists;
 import com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient;
+import com.android.internal.widget.LockPatternChecker;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockPatternView;
 import com.android.internal.widget.LockPatternView.Cell;
@@ -30,6 +31,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.view.KeyEvent;
@@ -350,6 +352,7 @@ public class ChooseLockPattern extends SettingsActivity {
         };
 
         private ChooseLockSettingsHelper mChooseLockSettingsHelper;
+        private AsyncTask<?, ?, ?> mPendingLockCheck;
 
         private static final String KEY_UI_STAGE = "uiStage";
         private static final String KEY_PATTERN_CHOICE = "chosenPattern";
@@ -430,6 +433,21 @@ public class ChooseLockPattern extends SettingsActivity {
                 updateStage(Stage.values()[savedInstanceState.getInt(KEY_UI_STAGE)]);
             }
             mDone = false;
+        }
+
+        @Override
+        public void onResume() {
+            super.onResume();
+            mLockPatternView.enableInput();
+        }
+
+        @Override
+        public void onPause() {
+            super.onPause();
+            if (mPendingLockCheck != null) {
+                mPendingLockCheck.cancel(false);
+                mPendingLockCheck = null;
+            }
         }
 
         protected Intent getRedactionInterstitialIntent(Context context) {
@@ -623,15 +641,42 @@ public class ChooseLockPattern extends SettingsActivity {
             }
 
             if (mHasChallenge) {
-                Intent intent = new Intent();
-                byte[] token = utils.verifyPattern(mChosenPattern, mChallenge,
-                        UserHandle.myUserId());
-                intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
-                getActivity().setResult(RESULT_FINISHED, intent);
+                startVerifyPattern(utils);
+                return;
             } else {
                 getActivity().setResult(RESULT_FINISHED);
             }
 
+            doFinish();
+        }
+
+        private void startVerifyPattern(LockPatternUtils utils) {
+            mLockPatternView.disableInput();
+            if (mPendingLockCheck != null) {
+                mPendingLockCheck.cancel(false);
+            }
+
+            mPendingLockCheck = LockPatternChecker.verifyPattern(
+                    utils,
+                    mChosenPattern,
+                    mChallenge,
+                    UserHandle.myUserId(),
+                    new LockPatternChecker.OnVerifyCallback() {
+                        @Override
+                        public void onVerified(byte[] token) {
+                            mLockPatternView.enableInput();
+                            mPendingLockCheck = null;
+
+                            Intent intent = new Intent();
+                            intent.putExtra(
+                                    ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
+                            getActivity().setResult(RESULT_FINISHED, intent);
+                            doFinish();
+                        }
+                    });
+        }
+
+        private void doFinish() {
             getActivity().finish();
             mDone = true;
         }
