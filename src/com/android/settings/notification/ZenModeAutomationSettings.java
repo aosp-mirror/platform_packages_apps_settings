@@ -202,11 +202,11 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
     }
 
     private String computeEventRuleSummary(EventInfo event) {
-        final String calendar = computeCalendarName(event);
-        final String attendance = getString(computeAttendance(event));
-        final String reply = getString(computeReply(event));
-        return getString(R.string.zen_mode_rule_summary_combination,
-                getString(R.string.zen_mode_rule_summary_combination, calendar, attendance), reply);
+        final String calendar = getString(R.string.zen_mode_event_rule_summary_calendar_template,
+                computeCalendarName(event));
+        final String reply = getString(R.string.zen_mode_event_rule_summary_reply_template,
+                getString(computeReply(event)));
+        return getString(R.string.zen_mode_rule_summary_combination, calendar, reply);
     }
 
     private String computeCalendarName(EventInfo event) {
@@ -222,25 +222,16 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
         return getString(R.string.zen_mode_event_rule_summary_any_calendar);
     }
 
-    private int computeAttendance(EventInfo event) {
-        switch (event.attendance) {
-            case EventInfo.ATTENDANCE_REQUIRED:
-                return R.string.zen_mode_event_rule_attendance_required;
-            case EventInfo.ATTENDANCE_OPTIONAL:
-                return R.string.zen_mode_event_rule_attendance_optional;
-            default:
-                return R.string.zen_mode_event_rule_attendance_required_optional;
-        }
-    }
-
     private int computeReply(EventInfo event) {
         switch (event.reply) {
             case EventInfo.REPLY_ANY_EXCEPT_NO:
-                return R.string.zen_mode_event_rule_summary_any_reply_except_no;
+                return R.string.zen_mode_event_rule_reply_any_except_no;
             case EventInfo.REPLY_YES:
-                return R.string.zen_mode_event_rule_summary_replied_yes;
+                return R.string.zen_mode_event_rule_reply_yes;
+            case EventInfo.REPLY_YES_OR_MAYBE:
+                return R.string.zen_mode_event_rule_reply_yes_or_maybe;
             default:
-                return R.string.zen_mode_event_rule_summary_any_reply;
+                throw new IllegalArgumentException("Bad reply: " + event.reply);
         }
     }
 
