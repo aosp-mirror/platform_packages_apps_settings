@@ -41,6 +41,8 @@ import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.WifiTracker;
+import java.util.Collections;
+import java.util.Comparator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -97,35 +99,22 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
 
         final List<AccessPoint> accessPoints = WifiTracker.getCurrentAccessPoints(context, true,
                 false, true);
-
+        Collections.sort(accessPoints, new Comparator<AccessPoint>() {
+            public int compare(AccessPoint ap1, AccessPoint ap2) {
+                if (ap1.getConfigName() != null) {
+                    return ap1.getConfigName().compareTo(ap2.getConfigName());
+                } else {
+                    return -1;
+                }
+            }
+        });
         preferenceScreen.removeAll();
-
-        PackageManager pm = context.getPackageManager();
-        String systemName = pm.getNameForUid(android.os.Process.SYSTEM_UID);
 
         final int accessPointsSize = accessPoints.size();
         for (int i = 0; i < accessPointsSize; ++i){
             AccessPointPreference preference = new AccessPointPreference(accessPoints.get(i),
                     context, true);
-            WifiConfiguration config = accessPoints.get(i).getConfig();
-            if (config != null) {
-                int userId = UserHandle.getUserId(config.creatorUid);
-                ApplicationInfo appInfo = null;
-                if (config.creatorName != null && config.creatorName.equals(systemName)) {
-                    appInfo = context.getApplicationInfo();
-                } else {
-                    try {
-                        IPackageManager ipm = AppGlobals.getPackageManager();
-                        appInfo = ipm.getApplicationInfo(config.creatorName, 0 /* flags */, userId);
-                    } catch (RemoteException rex) {
-                    }
-                }
-                if (appInfo != null) {
-                    preference.setSummary(getResources().getString(appInfo.labelRes));
-                }
-            } else {
-                preference.setShowSummary(false);
-            }
+            preference.setIcon(null);
             preferenceScreen.addPreference(preference);
         }
 
