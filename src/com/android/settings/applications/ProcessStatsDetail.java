@@ -112,7 +112,7 @@ public class ProcessStatsDetail extends SettingsPreferenceFragment
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        AppHeader.createAppHeader(getActivity(),
+        AppHeader.createAppHeader(this,
                 mApp.mUiTargetApp != null ? mApp.mUiTargetApp.loadIcon(mPm) : new ColorDrawable(0),
                 mApp.mUiLabel, null);
     }
