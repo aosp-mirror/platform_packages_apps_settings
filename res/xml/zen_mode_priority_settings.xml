@@ -46,26 +46,16 @@
         android:switchTextOn="" />
 
     <!-- Messages -->
-    <SwitchPreference
+    <com.android.settings.DropDownPreference
         android:key="messages"
         android:title="@string/zen_mode_messages"
-        android:persistent="false"
-        android:switchTextOff=""
-        android:switchTextOn="" />
+        android:persistent="false" />
 
     <!-- Calls -->
-    <SwitchPreference
+    <com.android.settings.DropDownPreference
         android:key="calls"
         android:title="@string/zen_mode_calls"
-        android:persistent="false"
-        android:switchTextOff=""
-        android:switchTextOn="" />
-
-    <!-- Messages/calls from -->
-    <com.android.settings.DropDownPreference
-            android:key="starred"
-            android:title="@string/zen_mode_from"
-            android:persistent="false" />
+        android:persistent="false" />
 
     <!-- Repeat callers -->
     <SwitchPreference
