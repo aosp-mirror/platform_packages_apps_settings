@@ -21,7 +21,6 @@ import android.graphics.drawable.StateListDrawable;
 import android.preference.Preference;
 import android.view.View;
 import android.widget.TextView;
-
 import com.android.settings.R;
 import com.android.settingslib.wifi.AccessPoint;
 
@@ -81,7 +80,11 @@ public class AccessPointPreference extends Preference {
                             ? STATE_SECURED
                             : STATE_NONE);
                     drawable = sld.getCurrent();
-                    setIcon(drawable);
+                    if (!mForSavedNetworks) {
+                        setIcon(drawable);
+                    } else {
+                        setIcon(null);
+                    }
                 }
             }
 
