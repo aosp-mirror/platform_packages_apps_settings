@@ -143,24 +143,28 @@ public class SimStatus extends InstrumentedPreferenceActivity {
         // Note - missing in zaku build, be careful later...
         mSignalStrength = findPreference(KEY_SIGNAL_STRENGTH);
 
-        mSir = mSelectableSubInfos.size() > 0 ? mSelectableSubInfos.get(0) : null;
-        if (mSelectableSubInfos.size() > 1) {
-            setContentView(R.layout.sim_information);
+        if (mSelectableSubInfos == null) {
+            mSir = null;
+        } else {
+            mSir = mSelectableSubInfos.size() > 0 ? mSelectableSubInfos.get(0) : null;
 
-            mTabHost = (TabHost) findViewById(android.R.id.tabhost);
-            mTabWidget = (TabWidget) findViewById(android.R.id.tabs);
-            mListView = (ListView) findViewById(android.R.id.list);
+            if (mSelectableSubInfos.size() > 1) {
+                setContentView(R.layout.sim_information);
 
-            mTabHost.setup();
-            mTabHost.setOnTabChangedListener(mTabListener);
-            mTabHost.clearAllTabs();
+                mTabHost = (TabHost) findViewById(android.R.id.tabhost);
+                mTabWidget = (TabWidget) findViewById(android.R.id.tabs);
+                mListView = (ListView) findViewById(android.R.id.list);
 
-            for (int i = 0; i < mSelectableSubInfos.size(); i++) {
-                mTabHost.addTab(buildTabSpec(String.valueOf(i),
-                        String.valueOf(mSelectableSubInfos.get(i).getDisplayName())));
+                mTabHost.setup();
+                mTabHost.setOnTabChangedListener(mTabListener);
+                mTabHost.clearAllTabs();
+
+                for (int i = 0; i < mSelectableSubInfos.size(); i++) {
+                    mTabHost.addTab(buildTabSpec(String.valueOf(i),
+                            String.valueOf(mSelectableSubInfos.get(i).getDisplayName())));
+                }
             }
         }
-
         updatePhoneInfos();
     }
 
