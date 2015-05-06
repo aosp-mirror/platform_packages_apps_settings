@@ -34,15 +34,15 @@ public class ZenModePrioritySettings extends ZenModeSettingsBase implements Inde
     private static final String KEY_EVENTS = "events";
     private static final String KEY_MESSAGES = "messages";
     private static final String KEY_CALLS = "calls";
-    private static final String KEY_STARRED = "starred";
     private static final String KEY_REPEAT_CALLERS = "repeat_callers";
+
+    private static final int SOURCE_NONE = -1;
 
     private boolean mDisableListeners;
     private SwitchPreference mReminders;
     private SwitchPreference mEvents;
-    private SwitchPreference mMessages;
-    private SwitchPreference mCalls;
-    private DropDownPreference mStarred;
+    private DropDownPreference mMessages;
+    private DropDownPreference mCalls;
     private SwitchPreference mRepeatCallers;
 
     @Override
@@ -79,48 +79,46 @@ public class ZenModePrioritySettings extends ZenModeSettingsBase implements Inde
             }
         });
 
-        mMessages = (SwitchPreference) root.findPreference(KEY_MESSAGES);
-        mMessages.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                if (mDisableListeners) return true;
-                final boolean val = (Boolean) newValue;
-                if (val == mConfig.allowMessages) return true;
-                if (DEBUG) Log.d(TAG, "onPrefChange allowMessages=" + val);
-                final ZenModeConfig newConfig = mConfig.copy();
-                newConfig.allowMessages = val;
-                return setZenModeConfig(newConfig);
-            }
-        });
-
-        mCalls = (SwitchPreference) root.findPreference(KEY_CALLS);
-        mCalls.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                if (mDisableListeners) return true;
-                final boolean val = (Boolean) newValue;
-                if (val == mConfig.allowCalls) return true;
-                if (DEBUG) Log.d(TAG, "onPrefChange allowCalls=" + val);
-                final ZenModeConfig newConfig = mConfig.copy();
-                newConfig.allowCalls = val;
-                return setZenModeConfig(newConfig);
-            }
-        });
-
-        mStarred = (DropDownPreference) root.findPreference(KEY_STARRED);
-        mStarred.addItem(R.string.zen_mode_from_anyone, ZenModeConfig.SOURCE_ANYONE);
-        mStarred.addItem(R.string.zen_mode_from_contacts, ZenModeConfig.SOURCE_CONTACT);
-        mStarred.addItem(R.string.zen_mode_from_starred, ZenModeConfig.SOURCE_STAR);
-        mStarred.setCallback(new DropDownPreference.Callback() {
+        mMessages = (DropDownPreference) root.findPreference(KEY_MESSAGES);
+        addSources(mMessages);
+        mMessages.setCallback(new DropDownPreference.Callback() {
             @Override
             public boolean onItemSelected(int pos, Object newValue) {
                 if (mDisableListeners) return true;
                 final int val = (Integer) newValue;
-                if (val == mConfig.allowFrom) return true;
-                if (DEBUG) Log.d(TAG, "onPrefChange allowFrom=" +
-                        ZenModeConfig.sourceToString(val));
+                final boolean allowMessages = val != SOURCE_NONE;
+                final int allowMessagesFrom = val == SOURCE_NONE ? mConfig.allowMessagesFrom : val;
+                if (allowMessages == mConfig.allowMessages
+                        && allowMessagesFrom == mConfig.allowMessagesFrom) {
+                    return true;
+                }
+                if (DEBUG) Log.d(TAG, "onPrefChange allowMessages=" + allowMessages
+                        + " allowMessagesFrom=" + ZenModeConfig.sourceToString(allowMessagesFrom));
                 final ZenModeConfig newConfig = mConfig.copy();
-                newConfig.allowFrom = val;
+                newConfig.allowMessages = allowMessages;
+                newConfig.allowMessagesFrom = allowMessagesFrom;
+                return setZenModeConfig(newConfig);
+            }
+        });
+
+        mCalls = (DropDownPreference) root.findPreference(KEY_CALLS);
+        addSources(mCalls);
+        mCalls.setCallback(new DropDownPreference.Callback() {
+            @Override
+            public boolean onItemSelected(int pos, Object newValue) {
+                if (mDisableListeners) return true;
+                final int val = (Integer) newValue;
+                final boolean allowCalls = val != SOURCE_NONE;
+                final int allowCallsFrom = val == SOURCE_NONE ? mConfig.allowCallsFrom : val;
+                if (allowCalls == mConfig.allowCalls
+                        && allowCallsFrom == mConfig.allowCallsFrom) {
+                    return true;
+                }
+                if (DEBUG) Log.d(TAG, "onPrefChange allowCalls=" + allowCalls
+                        + " allowCallsFrom=" + ZenModeConfig.sourceToString(allowCallsFrom));
+                final ZenModeConfig newConfig = mConfig.copy();
+                newConfig.allowCalls = allowCalls;
+                newConfig.allowCallsFrom = allowCallsFrom;
                 return setZenModeConfig(newConfig);
             }
         });
@@ -158,22 +156,27 @@ public class ZenModePrioritySettings extends ZenModeSettingsBase implements Inde
     private void updateControls() {
         mDisableListeners = true;
         if (mCalls != null) {
-            mCalls.setChecked(mConfig.allowCalls);
+            mCalls.setSelectedValue(mConfig.allowCalls ? mConfig.allowCallsFrom : SOURCE_NONE);
         }
-        mMessages.setChecked(mConfig.allowMessages);
-        mStarred.setSelectedValue(mConfig.allowFrom);
-        mStarred.setEnabled(mConfig.allowCalls || mConfig.allowMessages);
+        mMessages.setSelectedValue(mConfig.allowMessages ? mConfig.allowMessagesFrom : SOURCE_NONE);
         mReminders.setChecked(mConfig.allowReminders);
         mEvents.setChecked(mConfig.allowEvents);
         mRepeatCallers.setChecked(mConfig.allowRepeatCallers);
         mRepeatCallers.setEnabled(!mConfig.allowCalls
-                || mConfig.allowFrom != ZenModeConfig.SOURCE_ANYONE);
+                || mConfig.allowCallsFrom != ZenModeConfig.SOURCE_ANYONE);
         mDisableListeners = false;
     }
 
     @Override
     protected int getMetricsCategory() {
         return MetricsLogger.NOTIFICATION_ZEN_MODE_PRIORITY;
+    }
+
+    private static void addSources(DropDownPreference pref) {
+        pref.addItem(R.string.zen_mode_from_anyone, ZenModeConfig.SOURCE_ANYONE);
+        pref.addItem(R.string.zen_mode_from_contacts, ZenModeConfig.SOURCE_CONTACT);
+        pref.addItem(R.string.zen_mode_from_starred, ZenModeConfig.SOURCE_STAR);
+        pref.addItem(R.string.zen_mode_from_none, SOURCE_NONE);
     }
 
 }
