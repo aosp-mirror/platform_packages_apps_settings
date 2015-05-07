@@ -30,6 +30,11 @@
                 android:orientation="vertical"
                 android:visibility="gone">
 
+            <FrameLayout
+                android:id="@+id/pinned_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
             <FrameLayout android:layout_width="match_parent"
                     android:layout_height="0px"
                     android:layout_weight="1">
