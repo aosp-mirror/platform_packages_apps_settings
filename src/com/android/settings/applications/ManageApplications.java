@@ -161,7 +161,6 @@ public class ManageApplications extends InstrumentedFragment
 
     // whether showing system apps.
     private boolean mShowSystem;
-    private boolean mHasDisabledApps;
 
     private ApplicationsState mApplicationsState;
 
@@ -558,7 +557,6 @@ public class ManageApplications extends InstrumentedFragment
     }
 
     public void setHasDisabled(boolean hasDisabledApps) {
-        mHasDisabledApps = hasDisabledApps;
         mFilterAdapter.setFilterEnabled(FILTER_APPS_ENABLED, hasDisabledApps);
         mFilterAdapter.setFilterEnabled(FILTER_APPS_DISABLED, hasDisabledApps);
     }
@@ -816,7 +814,7 @@ public class ManageApplications extends InstrumentedFragment
                 return;
             }
 
-            mManageApplications.setHasDisabled(hasDisabledApps());
+            mManageApplications.setHasDisabled(mState.haveDisabledApps());
         }
 
         private void updateLoading() {
