@@ -34,7 +34,7 @@ public abstract class AppInfoWithHeader extends AppInfoBase {
         }
         mCreated = true;
         if (mPackageInfo == null) return;
-        AppHeader.createAppHeader(getActivity(), mPackageInfo.applicationInfo.loadIcon(mPm),
-                mPackageInfo.applicationInfo.loadLabel(mPm), null);
+        AppHeader.createAppHeader(this, mPackageInfo.applicationInfo.loadIcon(mPm),
+                mPackageInfo.applicationInfo.loadLabel(mPm), null, 0);
     }
 }

@@ -84,7 +84,7 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
         }
         mCreated = true;
         if (mAppRow == null) return;
-        AppHeader.createAppHeader(getActivity(), mAppRow.icon, mAppRow.label,
+        AppHeader.createAppHeader(this, mAppRow.icon, mAppRow.label,
                 mAppRow.settingsIntent);
     }
 
