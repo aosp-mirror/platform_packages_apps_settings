@@ -464,7 +464,7 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
             appIcon = getActivity().getPackageManager().getDefaultActivityIcon();
         }
 
-        AppHeader.createAppHeader(getActivity(), appIcon, title, null,
+        AppHeader.createAppHeader(this, appIcon, title, null,
                 mDrainType != DrainType.APP ? android.R.color.white : 0);
     }
 

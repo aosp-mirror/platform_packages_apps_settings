@@ -26,6 +26,11 @@
         android:orientation="vertical"
         android:background="@drawable/default_preference_background">
 
+        <FrameLayout
+            android:id="@+id/pinned_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         <include layout="@layout/tab_widget" />
 
         <!-- give an empty content area to make tabhost happy -->
