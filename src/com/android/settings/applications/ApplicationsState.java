@@ -802,10 +802,7 @@ public class ApplicationsState {
         if (mInterestingConfigChanges.applyNewConfig(mContext.getResources())) {
             // If an interesting part of the configuration has changed, we
             // should completely reload the app entries.
-            for (int i = 0; i < mEntriesMap.size(); i++) {
-                mEntriesMap.valueAt(i).clear();
-            }
-            mAppEntries.clear();
+            clearEntries();
         } else {
             for (int i=0; i<mAppEntries.size(); i++) {
                 mAppEntries.get(i).sizeStale = true;
@@ -831,10 +828,21 @@ public class ApplicationsState {
                 entry.info = info;
             }
         }
+        if (mAppEntries.size() > mApplications.size()) {
+            // There are less apps now, some must have been uninstalled.
+            clearEntries();
+        }
         mCurComputingSizePkg = null;
         if (!mBackgroundHandler.hasMessages(BackgroundHandler.MSG_LOAD_ENTRIES)) {
             mBackgroundHandler.sendEmptyMessage(BackgroundHandler.MSG_LOAD_ENTRIES);
         }
+    }
+
+    private void clearEntries() {
+        for (int i = 0; i < mEntriesMap.size(); i++) {
+            mEntriesMap.valueAt(i).clear();
+        }
+        mAppEntries.clear();
     }
 
     public boolean haveDisabledApps() {
@@ -1179,7 +1187,7 @@ public class ApplicationsState {
                     int numDone = 0;
                     synchronized (mEntriesMap) {
                         if (DEBUG_LOCKING) Log.v(TAG, "MSG_LOAD_ENTRIES acquired lock");
-                        for (int i=0; i<mApplications.size() && numDone<6; i++) {
+                        for (int i = 0; i < mApplications.size() && numDone < 6; i++) {
                             if (!mRunning) {
                                 mRunning = true;
                                 Message m = mMainHandler.obtainMessage(
