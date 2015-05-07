@@ -232,8 +232,8 @@ public class ManageApplications extends InstrumentedFragment
             } else {
                 // No volume selected, display a normal list, sorted by size.
                 mListType = LIST_TYPE_MAIN;
-                mSortOrder = R.id.sort_order_size;
             }
+            mSortOrder = R.id.sort_order_size;
         } else if (className.equals(UsageAccessSettingsActivity.class.getName())) {
             mListType = LIST_TYPE_USAGE_ACCESS;
             getActivity().getActionBar().setTitle(R.string.usage_access_title);
