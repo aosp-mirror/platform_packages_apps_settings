@@ -58,7 +58,8 @@ public class ProcessStatsPreference extends Preference {
         mRemainingColor = context.getColor(R.color.memory_remaining);
     }
 
-    public void init(ProcStatsPackageEntry entry, PackageManager pm, float maxMemory) {
+    public void init(ProcStatsPackageEntry entry, PackageManager pm, double maxMemory,
+            double weightToRam, double totalScale) {
         mEntry = entry;
         setTitle(TextUtils.isEmpty(entry.mUiLabel) ? entry.mPackage : entry.mUiLabel);
         if (entry.mUiTargetApp != null) {
@@ -69,8 +70,10 @@ public class ProcessStatsPreference extends Preference {
         boolean statsForeground = entry.mRunWeight > entry.mBgWeight;
         setSummary(entry.mRunDuration > entry.mBgDuration ? entry.getRunningFrequency(getContext())
                 : entry.getBackgroundFrequency(getContext()));
-        mAvgRatio = (statsForeground ? entry.mAvgRunMem : entry.mAvgBgMem) / maxMemory;
-        mMaxRatio = (statsForeground ? entry.mMaxRunMem : entry.mMaxBgMem) / maxMemory - mAvgRatio;
+        mAvgRatio = (float) ((statsForeground ? entry.mRunWeight : entry.mBgWeight)
+                * weightToRam / maxMemory);
+        mMaxRatio = (float) ((statsForeground ? entry.mMaxRunMem : entry.mMaxBgMem)
+                * totalScale * 1024 / maxMemory - mAvgRatio);
         mRemainingRatio = 1 - mAvgRatio - mMaxRatio;
     }
 
