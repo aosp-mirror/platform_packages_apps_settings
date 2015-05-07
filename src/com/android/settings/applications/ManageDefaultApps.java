@@ -23,6 +23,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.Preference;
@@ -32,6 +33,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
+import com.android.internal.content.PackageMonitor;
 import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -56,6 +58,71 @@ public class ManageDefaultApps extends SettingsPreferenceFragment
     private DefaultBrowserPreference mDefaultBrowserPreference;
     private PackageManager mPm;
     private int myUserId;
+
+    private static final long DELAY_UPDATE_BROWSER_MILLIS = 500;
+
+    private final Handler mHandler = new Handler();
+
+    private final Runnable mUpdateRunnable = new Runnable() {
+        @Override
+        public void run() {
+            updateDefaultBrowserPreference();
+        }
+    };
+
+    private final PackageMonitor mPackageMonitor = new PackageMonitor() {
+        @Override
+        public void onPackageAdded(String packageName, int uid) {
+            sendUpdate();
+        }
+
+        @Override
+        public void onPackageAppeared(String packageName, int reason) {
+            sendUpdate();
+        }
+
+        @Override
+        public void onPackageDisappeared(String packageName, int reason) {
+            sendUpdate();
+        }
+
+        @Override
+        public void onPackageRemoved(String packageName, int uid) {
+            sendUpdate();
+        }
+
+        private void sendUpdate() {
+            mHandler.postDelayed(mUpdateRunnable, DELAY_UPDATE_BROWSER_MILLIS);
+        }
+    };
+
+    private void updateDefaultBrowserPreference() {
+        mDefaultBrowserPreference.refreshBrowserApps();
+
+        final PackageManager pm = getPackageManager();
+
+        String packageName = pm.getDefaultBrowserPackageName(UserHandle.myUserId());
+        if (!TextUtils.isEmpty(packageName)) {
+            // Check if the default Browser package is still there
+            Intent intent = new Intent();
+            intent.setPackage(packageName);
+            intent.setAction(Intent.ACTION_VIEW);
+            intent.addCategory(Intent.CATEGORY_BROWSABLE);
+            intent.setData(Uri.parse("http:"));
+
+            ResolveInfo info = mPm.resolveActivityAsUser(intent, 0, myUserId);
+            if (info != null) {
+                mDefaultBrowserPreference.setValue(packageName);
+                CharSequence label = info.loadLabel(pm);
+                mDefaultBrowserPreference.setSummary(label);
+            } else {
+                mDefaultBrowserPreference.setSummary(R.string.default_browser_title_none);
+            }
+        } else {
+            mDefaultBrowserPreference.setSummary(R.string.default_browser_title_none);
+            Log.d(TAG, "Cannot set empty default Browser value!");
+        }
+    }
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -112,37 +179,17 @@ public class ManageDefaultApps extends SettingsPreferenceFragment
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onResume() {
+        super.onResume();
+        updateDefaultBrowserPreference();
+        mPackageMonitor.register(getActivity(), getActivity().getMainLooper(), false);
+    }
 
-        final PackageManager pm = getPackageManager();
+    @Override
+    public void onPause() {
+        super.onPause();
 
-        String packageName = pm.getDefaultBrowserPackageName(UserHandle.myUserId());
-        if (!TextUtils.isEmpty(packageName)) {
-            // Check if the default Browser package is still there
-            Intent intent = new Intent();
-            intent.setPackage(packageName);
-            intent.setAction(Intent.ACTION_VIEW);
-            intent.addCategory(Intent.CATEGORY_BROWSABLE);
-            intent.setData(Uri.parse("http:"));
-
-            ResolveInfo info = mPm.resolveActivityAsUser(intent, 0, myUserId);
-            if (info != null) {
-                mDefaultBrowserPreference.setValue(packageName);
-                CharSequence label = info.loadLabel(pm);
-                mDefaultBrowserPreference.setSummary(label);
-            } else {
-                CharSequence[] values = mDefaultBrowserPreference.getEntryValues();
-                if (values.length > 0) {
-                    // Otherwise select the first one if we can
-                    mDefaultBrowserPreference.setValueIndex(0);
-                } else {
-                    // Do nothing, we cannot select any value
-                }
-            }
-        } else {
-            Log.d(TAG, "Cannot set empty default Browser value!");
-        }
+        mPackageMonitor.unregister();
     }
 
     @Override
