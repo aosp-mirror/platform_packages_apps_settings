@@ -67,7 +67,7 @@ public class ProcessStatsPreference extends Preference {
             setIcon(new ColorDrawable(0));
         }
         boolean statsForeground = entry.mRunWeight > entry.mBgWeight;
-        setSummary(statsForeground ? entry.getRunningFrequency(getContext())
+        setSummary(entry.mRunDuration > entry.mBgDuration ? entry.getRunningFrequency(getContext())
                 : entry.getBackgroundFrequency(getContext()));
         mAvgRatio = (statsForeground ? entry.mAvgRunMem : entry.mAvgBgMem) / maxMemory;
         mMaxRatio = (statsForeground ? entry.mMaxRunMem : entry.mMaxBgMem) / maxMemory - mAvgRatio;

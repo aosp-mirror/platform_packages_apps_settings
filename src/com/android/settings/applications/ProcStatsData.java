@@ -101,7 +101,14 @@ public class ProcStatsData {
     }
 
     public int getMemState() {
-        return mMemState;
+        int factor = mStats.mMemFactor;
+        if (factor == ProcessStats.ADJ_NOTHING) {
+            return ProcessStats.ADJ_MEM_FACTOR_NORMAL;
+        }
+        if (factor >= ProcessStats.ADJ_SCREEN_ON) {
+            factor -= ProcessStats.ADJ_SCREEN_ON;
+        }
+        return factor;
     }
 
     public MemInfo getMemInfo() {
@@ -318,9 +325,11 @@ public class ProcStatsData {
         double weightToRam;
         double totalRam;
         double totalScale;
+        long memTotalTime;
 
         private MemInfo(Context context, ProcessStats.TotalMemoryUseCollection totalMem,
                 long memTotalTime) {
+            this.memTotalTime = memTotalTime;
             calculateWeightInfo(context, totalMem, memTotalTime);
 
             double usedRam = (usedWeight * 1024) / memTotalTime;
