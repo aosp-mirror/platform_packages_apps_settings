@@ -32,6 +32,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Process;
 import android.preference.PreferenceCategory;
+import android.text.TextUtils;
 import android.text.format.Formatter;
 import android.util.ArrayMap;
 import android.util.Log;
@@ -241,11 +242,7 @@ public class ProcessStatsDetail extends SettingsPreferenceFragment
             if (entry.mPackage.equals("os")) {
                 entry.mLabel = entry.mName;
             } else {
-                if (mApp.mEntries.size() > 1) {
-                    entry.mLabel = getString(R.string.process_format, (ie + 1));
-                } else {
-                    entry.mLabel = getString(R.string.process);
-                }
+                entry.mLabel = getProcessName(mApp.mUiLabel, entry);
             }
             entries.add(entry);
         }
@@ -256,16 +253,43 @@ public class ProcessStatsDetail extends SettingsPreferenceFragment
             processPref.setLayoutResource(R.layout.process_preference_category);
             processPref.setTitle(entry.mLabel);
 
-            long memoryUse = Math.max((long)(entry.mRunWeight * mWeightToRam),
-                    (long)(entry.mBgWeight * mWeightToRam));
+            long duration = Math.max(entry.mRunDuration, entry.mBgDuration);
+            long memoryUse = Math.max((long) (entry.mRunWeight * mWeightToRam),
+                    (long) (entry.mBgWeight * mWeightToRam));
             String memoryString = Formatter.formatShortFileSize(getActivity(), memoryUse);
-            CharSequence frequency = ProcStatsPackageEntry.getFrequency(entry.mRunDuration
+            CharSequence frequency = ProcStatsPackageEntry.getFrequency(duration
                     / (float)mTotalTime, getActivity());
             processPref.setSummary(
                     getString(R.string.memory_use_running_format, memoryString, frequency));
             getPreferenceScreen().addPreference(processPref);
             fillServicesSection(entry, processPref);
         }
+    }
+
+    private static String capitalize(String processName) {
+        char c = processName.charAt(0);
+        if (!Character.isLowerCase(c)) {
+            return processName;
+        }
+        return Character.toUpperCase(c) + processName.substring(1);
+    }
+
+    private static String getProcessName(String appLabel, ProcStatsEntry entry) {
+        String processName = entry.mName;
+        if (processName.contains(":")) {
+            return capitalize(processName.substring(processName.lastIndexOf(':') + 1));
+        }
+        if (processName.startsWith(entry.mPackage)) {
+            if (processName.length() == entry.mPackage.length()) {
+                return appLabel;
+            }
+            int start = entry.mPackage.length();
+            if (processName.charAt(start) == '.') {
+                start++;
+            }
+            return capitalize(processName.substring(start));
+        }
+        return processName;
     }
 
     final static Comparator<ProcStatsEntry.Service> sServiceCompare
