@@ -74,16 +74,12 @@ public class ProcessStatsUi extends InstrumentedPreferenceFragment {
             = new Comparator<ProcStatsPackageEntry>() {
         @Override
         public int compare(ProcStatsPackageEntry lhs, ProcStatsPackageEntry rhs) {
-            if (lhs.mRunWeight < rhs.mRunWeight) {
-                return 1;
-            } else if (lhs.mRunWeight > rhs.mRunWeight) {
-                return -1;
-            } else if (lhs.mRunDuration < rhs.mRunDuration) {
-                return 1;
-            } else if (lhs.mRunDuration > rhs.mRunDuration) {
-                return -1;
+            double rhsWeight = Math.max(rhs.mRunWeight, rhs.mBgWeight);
+            double lhsWeight = Math.max(lhs.mRunWeight, lhs.mBgWeight);
+            if (lhsWeight == rhsWeight) {
+                return 0;
             }
-            return 0;
+            return lhsWeight < rhsWeight ? 1 : -1;
         }
     };
 
@@ -128,7 +124,7 @@ public class ProcessStatsUi extends InstrumentedPreferenceFragment {
     };
 
     private ProcStatsData mStatsManager;
-    private float mMaxMemoryUsage;
+    private double mMaxMemoryUsage;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -200,7 +196,7 @@ public class ProcessStatsUi extends InstrumentedPreferenceFragment {
         args.putDouble(ProcessStatsDetail.EXTRA_WEIGHT_TO_RAM,
                 mStatsManager.getMemInfo().weightToRam);
         args.putLong(ProcessStatsDetail.EXTRA_TOTAL_TIME, memTotalTime);
-        args.putFloat(ProcessStatsDetail.EXTRA_MAX_MEMORY_USAGE, mMaxMemoryUsage);
+        args.putDouble(ProcessStatsDetail.EXTRA_MAX_MEMORY_USAGE, mMaxMemoryUsage);
         args.putDouble(ProcessStatsDetail.EXTRA_TOTAL_SCALE, mStatsManager.getMemInfo().totalScale);
         ((SettingsActivity) getActivity()).startPreferencePanel(
                 ProcessStatsDetail.class.getName(), args, R.string.details_title, null, null, 0);
@@ -422,7 +418,7 @@ public class ProcessStatsUi extends InstrumentedPreferenceFragment {
         for (int i=0, N=pkgEntries.size(); i<N; i++) {
             ProcStatsPackageEntry pkg = pkgEntries.get(i);
             pkg.updateMetrics();
-            float maxMem = Math.max(pkg.mMaxBgMem, pkg.mMaxRunMem);
+            double maxMem = Math.max(pkg.mMaxBgMem, pkg.mMaxRunMem) * 1024 * memInfo.totalScale;
             if (maxMem > mMaxMemoryUsage) {
                 mMaxMemoryUsage = maxMem;
             }
@@ -452,7 +448,7 @@ public class ProcessStatsUi extends InstrumentedPreferenceFragment {
             ProcStatsPackageEntry pkg = pkgEntries.get(i);
             ProcessStatsPreference pref = new ProcessStatsPreference(context);
             pkg.retrieveUiData(context, mPm);
-            pref.init(pkg, mPm, mMaxMemoryUsage);
+            pref.init(pkg, mPm, mMaxMemoryUsage, memInfo.weightToRam, memInfo.totalScale);
             pref.setOrder(i);
             mAppListGroup.addPreference(pref);
             if (mAppListGroup.getPreferenceCount() > (MAX_ITEMS_TO_LIST+1)) {
