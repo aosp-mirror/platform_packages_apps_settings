@@ -28,18 +28,27 @@ import android.widget.TextView;
 
 public class AppHeader {
 
-    public static void createAppHeader(final Activity activity, Drawable icon, CharSequence label,
-            final Intent settingsIntent) {
-        createAppHeader(activity, icon, label, settingsIntent, 0);
+    public static void createAppHeader(SettingsPreferenceFragment fragment, Drawable icon,
+            CharSequence label, final Intent settingsIntent) {
+        createAppHeader(fragment, icon, label, settingsIntent, 0);
     }
 
-    public static void createAppHeader(final Activity activity, Drawable icon, CharSequence label,
-            final Intent settingsIntent, int tintColorRes) {
-        final View content = activity.findViewById(R.id.main_content);
-        final ViewGroup contentParent = (ViewGroup) content.getParent();
+    public static void createAppHeader(Activity activity, Drawable icon, CharSequence label,
+            final Intent settingsIntent, ViewGroup pinnedHeader) {
         final View bar = activity.getLayoutInflater().inflate(R.layout.app_header,
-                contentParent, false);
+                pinnedHeader, false);
+        setupHeaderView(activity, icon, label, settingsIntent, 0, bar);
+        pinnedHeader.addView(bar);
+    }
 
+    public static void createAppHeader(SettingsPreferenceFragment fragment, Drawable icon,
+            CharSequence label, Intent settingsIntent, int tintColorRes) {
+        View bar = fragment.setPinnedHeaderView(R.layout.app_header);
+        setupHeaderView(fragment.getActivity(), icon, label, settingsIntent, tintColorRes, bar);
+    }
+
+    private static View setupHeaderView(final Activity activity, Drawable icon, CharSequence label,
+            final Intent settingsIntent, int tintColorRes, View bar) {
         final ImageView appIcon = (ImageView) bar.findViewById(R.id.app_icon);
         appIcon.setImageDrawable(icon);
         if (tintColorRes != 0) {
@@ -61,7 +70,8 @@ public class AppHeader {
                 }
             });
         }
-        contentParent.addView(bar, 0);
+
+        return bar;
     }
 
 }

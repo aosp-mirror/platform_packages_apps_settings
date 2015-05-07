@@ -112,6 +112,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -120,12 +121,12 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TabHost;
-import android.widget.Toast;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabContentFactory;
 import android.widget.TabHost.TabSpec;
 import android.widget.TabWidget;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.telephony.PhoneConstants;
@@ -464,12 +465,12 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         mListView.setOnItemClickListener(mListListener);
         mListView.setAdapter(mAdapter);
 
-        showRequestedAppIfNeeded();
+        showRequestedAppIfNeeded(view);
 
         return view;
     }
 
-    private void showRequestedAppIfNeeded() {
+    private void showRequestedAppIfNeeded(View rootView) {
         if (mShowAppImmediatePkg == null) {
             return;
         }
@@ -482,7 +483,8 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
             final UidDetail detail = mUidDetailProvider.getUidDetail(app.key, true);
             // When we are going straight to an app then we are coming from App Info and want
             // a header at the top.
-            AppHeader.createAppHeader(getActivity(), detail.icon, detail.label, null);
+            FrameLayout pinnedHeader = (FrameLayout) rootView.findViewById(R.id.pinned_header);
+            AppHeader.createAppHeader(getActivity(), detail.icon, detail.label, null, pinnedHeader);
             AppDetailsFragment.show(DataUsageSummary.this, app, detail.label, false);
         } catch (NameNotFoundException e) {
             Log.w(TAG, "Could not find " + mShowAppImmediatePkg, e);

@@ -45,6 +45,7 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 
@@ -298,15 +299,14 @@ public class ManageApplications extends InstrumentedFragment
 
     private void createHeader() {
         Activity activity = getActivity();
-        View content = activity.findViewById(R.id.main_content);
-        ViewGroup contentParent = (ViewGroup) content.getParent();
+        FrameLayout pinnedHeader = (FrameLayout) mRootView.findViewById(R.id.pinned_header);
         mSpinnerHeader = (ViewGroup) activity.getLayoutInflater()
-                .inflate(R.layout.apps_filter_spinner, contentParent, false);
+                .inflate(R.layout.apps_filter_spinner, pinnedHeader, false);
         mFilterSpinner = (Spinner) mSpinnerHeader.findViewById(R.id.filter_spinner);
         mFilterAdapter = new FilterSpinnerAdapter(this);
         mFilterSpinner.setAdapter(mFilterAdapter);
         mFilterSpinner.setOnItemSelectedListener(this);
-        contentParent.addView(mSpinnerHeader, 0);
+        pinnedHeader.addView(mSpinnerHeader, 0);
 
         mFilterAdapter.enableFilter(getDefaultFilter());
         if (mListType == LIST_TYPE_MAIN || mListType == LIST_TYPE_NOTIFICATION) {
@@ -333,7 +333,8 @@ public class ManageApplications extends InstrumentedFragment
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (mListType == LIST_TYPE_STORAGE) {
-            AppHeader.createAppHeader(getActivity(), null, mVolumeName, null);
+            FrameLayout pinnedHeader = (FrameLayout) mRootView.findViewById(R.id.pinned_header);
+            AppHeader.createAppHeader(getActivity(), null, mVolumeName, null, pinnedHeader);
         }
     }
 

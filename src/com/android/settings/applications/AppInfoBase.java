@@ -37,12 +37,13 @@ import android.util.Log;
 
 import com.android.settings.InstrumentedPreferenceFragment;
 import com.android.settings.SettingsActivity;
+import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.applications.ApplicationsState.AppEntry;
 
 import java.util.ArrayList;
 
-public abstract class AppInfoBase extends InstrumentedPreferenceFragment
+public abstract class AppInfoBase extends SettingsPreferenceFragment
         implements ApplicationsState.Callbacks {
 
     public static final String ARG_PACKAGE_NAME = "package";
