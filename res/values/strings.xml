@@ -4223,9 +4223,6 @@
     <string name="process_stats_type_foreground">Foreground</string>
     <!-- [CHAR LIMIT=NONE] Label for process stats, text for stats type -->
     <string name="process_stats_type_cached">Cached</string>
-    <!-- [CHAR LIMIT=NONE] Label for process stats, duration of time the stats are over -->
-    <string name="process_stats_memory_status">Memory is
-        <xliff:g id="memstate">%1$s</xliff:g></string>
     <!-- [CHAR LIMIT=NONE] Label OS "process" app -->
     <string name="process_stats_os_label">Android OS</string>
     <!-- [CHAR LIMIT=NONE] Name of OS "process" for all native processes -->
@@ -6621,11 +6618,8 @@
     <!-- Formatting for memory description [CHAR LIMIT=25] -->
     <string name="memory_use_running_format"><xliff:g id="memory" example="30MB">%1$s</xliff:g> / <xliff:g id="running" example="Always running">%2$s</xliff:g></string>
 
-    <!-- Label for process (singular) [CHAR LIMIT=25] -->
-    <string name="process">Process</string>
-
     <!-- Label for process [CHAR LIMIT=25] -->
-    <string name="process_format">Process <xliff:g id="count" example="3">%1$d</xliff:g></string>
+    <string name="process_format"><xliff:g id="app_name" example="Settings">%1$s</xliff:g> (<xliff:g id="count" example="3">%2$d</xliff:g>)</string>
 
     <!-- Label for whether app is allowed to use a lot ef power [CHAR LIMIT=25]-->
     <string name="high_power" translatable="false">High power</string>
