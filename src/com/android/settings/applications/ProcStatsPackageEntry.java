@@ -90,10 +90,10 @@ public class ProcStatsPackageEntry implements Parcelable {
         for (int i=0; i < N; i++) {
             ProcStatsEntry entry = mEntries.get(i);
             mBgDuration += entry.mBgDuration;
-            mAvgBgMem += entry.mAvgBgMem * entry.mBgDuration;
+            mAvgBgMem += entry.mAvgBgMem;
             mBgWeight += entry.mBgWeight;
             mRunDuration += entry.mRunDuration;
-            mAvgRunMem += entry.mAvgRunMem * entry.mRunDuration;
+            mAvgRunMem += entry.mAvgRunMem;
             mRunWeight += entry.mRunWeight;
 
             // Each entry is generally a process or something similar.  Since it is extremely
@@ -103,12 +103,8 @@ public class ProcStatsPackageEntry implements Parcelable {
             mMaxBgMem += entry.mMaxBgMem;
             mMaxRunMem += entry.mMaxRunMem;
         }
-        if (mBgDuration != 0) {
-            mAvgBgMem = mAvgBgMem * N / mBgDuration;
-        }
-        if (mRunDuration != 0) {
-            mAvgRunMem = mAvgRunMem * N / mRunDuration;
-        }
+        mAvgBgMem /= N;
+        mAvgRunMem /= N;
     }
 
     public void retrieveUiData(Context context, PackageManager pm) {

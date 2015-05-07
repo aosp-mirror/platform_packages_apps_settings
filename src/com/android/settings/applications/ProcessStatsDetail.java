@@ -86,7 +86,7 @@ public class ProcessStatsDetail extends SettingsPreferenceFragment
 
     private LinearColorBar mColorBar;
 
-    private float mMaxMemoryUsage;
+    private double mMaxMemoryUsage;
 
     private double mTotalScale;
 
@@ -101,7 +101,7 @@ public class ProcessStatsDetail extends SettingsPreferenceFragment
         mUseUss = args.getBoolean(EXTRA_USE_USS);
         mWeightToRam = args.getDouble(EXTRA_WEIGHT_TO_RAM);
         mTotalTime = args.getLong(EXTRA_TOTAL_TIME);
-        mMaxMemoryUsage = args.getFloat(EXTRA_MAX_MEMORY_USAGE);
+        mMaxMemoryUsage = args.getDouble(EXTRA_MAX_MEMORY_USAGE);
         mTotalScale = args.getDouble(EXTRA_TOTAL_SCALE);
         mOnePercentTime = mTotalTime/100;
 
@@ -199,16 +199,17 @@ public class ProcessStatsDetail extends SettingsPreferenceFragment
 
         // TODO: Find way to share this code with ProcessStatsPreference.
         boolean statsForeground = mApp.mRunWeight > mApp.mBgWeight;
-        float mAvgRatio = (statsForeground ? mApp.mAvgRunMem : mApp.mAvgBgMem) / mMaxMemoryUsage;
-        float mMaxRatio = (statsForeground ? mApp.mMaxRunMem : mApp.mMaxBgMem) / mMaxMemoryUsage
-                - mAvgRatio;
-        float mRemainingRatio = 1 - mAvgRatio - mMaxRatio;
+        float avgRatio = (float) ((statsForeground ? mApp.mRunWeight : mApp.mBgWeight)
+                * mWeightToRam / mMaxMemoryUsage);
+        float maxRatio = (float) ((statsForeground ? mApp.mMaxRunMem : mApp.mMaxBgMem)
+                * mTotalScale * 1024 / mMaxMemoryUsage - avgRatio);
+        float remainingRatio = 1 - avgRatio - maxRatio;
         mColorBar = (LinearColorBar) headerLayout.findViewById(R.id.color_bar);
         Context context = getActivity();
         mColorBar.setColors(context.getColor(R.color.memory_avg_use),
                 context.getColor(R.color.memory_max_use),
                 context.getColor(R.color.memory_remaining));
-        mColorBar.setRatios(mAvgRatio, mMaxRatio, mRemainingRatio);
+        mColorBar.setRatios(avgRatio, maxRatio, remainingRatio);
     }
 
     public void onClick(View v) {
