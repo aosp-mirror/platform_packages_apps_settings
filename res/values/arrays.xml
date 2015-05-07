@@ -1222,17 +1222,24 @@
         <item>Always allow</item>
     </string-array>
 
-    <!-- [CHAR LIMIT=30] Labels for memory states -->
+    <!-- [CHAR LIMIT=40] Labels for memory states -->
     <string-array name="ram_states">
         <!-- Normal desired memory state. -->
-        <item>normal</item>
+        <item>Good performance</item>
         <!-- Moderate memory state, not as good as normal. -->
-        <item>moderate</item>
+        <item>Ok performance</item>
         <!-- Memory is running low. -->
-        <item>low</item>
+        <item>Poor performance</item>
         <!-- Memory is critical. -->
-        <item>critical</item>
+        <item>Very poor performance</item>
     </string-array>
+
+    <array name="ram_colors">
+        <item>@color/memory_normal</item>
+        <item>@color/memory_moderate</item>
+        <item>@color/memory_low</item>
+        <item>@color/memory_critical</item>
+    </array>
 
     <!-- Display color space adjustment modes for accessibility -->
     <string-array name="daltonizer_type_entries" translatable="false">

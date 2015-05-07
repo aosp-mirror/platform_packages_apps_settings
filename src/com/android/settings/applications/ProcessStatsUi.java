@@ -16,7 +16,9 @@
 
 package com.android.settings.applications;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.Preference;
@@ -28,7 +30,6 @@ import android.util.TimeUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.SubMenu;
 import android.widget.TextView;
 
 import com.android.internal.app.ProcessStats;
@@ -101,8 +102,6 @@ public class ProcessStatsUi extends InstrumentedPreferenceFragment {
 
     private PreferenceGroup mAppListGroup;
     private TextView mMemStatus;
-
-    private long mTotalTime;
 
     private long[] mMemTimes = new long[ProcessStats.ADJ_MEM_FACTOR_COUNT];
     private LinearColorBar mColors;
@@ -200,7 +199,7 @@ public class ProcessStatsUi extends InstrumentedPreferenceFragment {
         args.putBoolean(ProcessStatsDetail.EXTRA_USE_USS, mUseUss);
         args.putDouble(ProcessStatsDetail.EXTRA_WEIGHT_TO_RAM,
                 mStatsManager.getMemInfo().weightToRam);
-        args.putLong(ProcessStatsDetail.EXTRA_TOTAL_TIME, mTotalTime);
+        args.putLong(ProcessStatsDetail.EXTRA_TOTAL_TIME, memTotalTime);
         args.putFloat(ProcessStatsDetail.EXTRA_MAX_MEMORY_USAGE, mMaxMemoryUsage);
         args.putDouble(ProcessStatsDetail.EXTRA_TOTAL_SCALE, mStatsManager.getMemInfo().totalScale);
         ((SettingsActivity) getActivity()).startPreferencePanel(
@@ -216,11 +215,8 @@ public class ProcessStatsUi extends InstrumentedPreferenceFragment {
                 .setAlphabeticShortcut('r');
         refresh.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM |
                 MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-        SubMenu subMenu = menu.addSubMenu(R.string.menu_proc_stats_duration);
-        for (int i=0; i<NUM_DURATIONS; i++) {
-            mDurationMenus[i] = subMenu.add(0, MENU_DURATION+i, 0, sDurationLabels[i])
-                            .setCheckable(true);
-        }
+        menu.add(0, MENU_DURATION, 0, R.string.menu_proc_stats_duration);
+
         // Hide these for now, until their need is determined.
 //        mShowPercentageMenu = menu.add(0, MENU_SHOW_PERCENTAGE, 0, R.string.menu_show_percentage)
 //                .setAlphabeticShortcut('p')
@@ -286,8 +282,7 @@ public class ProcessStatsUi extends InstrumentedPreferenceFragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        final int id = item.getItemId();
-        switch (id) {
+        switch (item.getItemId()) {
             case MENU_STATS_REFRESH:
                 mStatsManager.refreshStats(false);
                 refreshUi();
@@ -318,13 +313,23 @@ public class ProcessStatsUi extends InstrumentedPreferenceFragment {
                 }
                 refreshUi();
                 return true;
-            default:
-                if (id >= MENU_DURATION && id < (MENU_DURATION + NUM_DURATIONS)) {
-                    mStatsManager.setDuration(sDurations[id - MENU_DURATION]);
-                    refreshUi();
+            case MENU_DURATION:
+                CharSequence[] durations = new CharSequence[sDurationLabels.length];
+                for (int i = 0; i < sDurationLabels.length; i++) {
+                    durations[i] = getString(sDurationLabels[i]);
                 }
-                return false;
+                new AlertDialog.Builder(getContext())
+                        .setTitle(item.getTitle())
+                        .setItems(durations, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                mStatsManager.setDuration(sDurations[which]);
+                                refreshUi();
+                            }
+                        }).show();
+                return true;
         }
+        return false;
     }
 
     /**
@@ -360,7 +365,6 @@ public class ProcessStatsUi extends InstrumentedPreferenceFragment {
     private void refreshUi() {
         updateMenus();
 
-
         mAppListGroup.removeAll();
         mAppListGroup.setOrderingAsAdded(false);
         mHeader.setOrder(-1);
@@ -368,12 +372,8 @@ public class ProcessStatsUi extends InstrumentedPreferenceFragment {
 
         final long elapsedTime = mStatsManager.getElapsedTime();
 
-        memTotalTime = mTotalTime;
         final Context context = getActivity();
         // TODO: More Colors.
-        mColors.setColors(context.getColor(R.color.running_processes_apps_ram),
-                context.getColor(R.color.running_processes_apps_ram),
-                context.getColor(R.color.running_processes_free_ram));
 
         // For computing the ratio to show, we want to count the baseline cached RAM we
         // need (at which point we start killing processes) as used RAM, so that if we
@@ -383,30 +383,36 @@ public class ProcessStatsUi extends InstrumentedPreferenceFragment {
         // match the real physical RAM, scale those to the actual physical RAM.  No problem!
         MemInfo memInfo = mStatsManager.getMemInfo();
 
+        memTotalTime = memInfo.memTotalTime;
+        double usedRam = memInfo.realUsedRam;
+        double totalRam = memInfo.realTotalRam;
+        double freeRam = memInfo.realFreeRam;
         String durationString = Utils.formatElapsedTime(context, elapsedTime, false);
-        String usedString = Formatter.formatShortFileSize(context, (long) memInfo.realUsedRam);
-        String totalString = Formatter.formatShortFileSize(context, (long) memInfo.realTotalRam);
+        String usedString = Formatter.formatShortFileSize(context, (long) usedRam);
+        String totalString = Formatter.formatShortFileSize(context, (long) totalRam);
         CharSequence memString;
         CharSequence[] memStatesStr = getResources().getTextArray(R.array.ram_states);
         int memState = mStatsManager.getMemState();
+        int memColor;
         if (memState >= 0 && memState < memStatesStr.length) {
             memString = memStatesStr[memState];
+            memColor = getResources().getIntArray(R.array.ram_colors)[memState];
         } else {
             memString = "?";
+            memColor = context.getColor(R.color.running_processes_apps_ram);
         }
+        mColors.setColors(memColor, memColor, context.getColor(R.color.running_processes_free_ram));
         if (mShowPercentage) {
             mMemUsed.setText(context.getString(
                     R.string.process_stats_total_duration_percentage,
-                    Utils.formatPercentage((long) memInfo.realUsedRam, (long) memInfo.realTotalRam),
+                    Utils.formatPercentage((long) usedRam, (long) totalRam),
                     durationString));
         } else {
             mMemUsed.setText(context.getString(R.string.process_stats_total_duration,
                     usedString, totalString, durationString));
         }
-        mMemStatus.setText(context.getString(R.string.process_stats_memory_status,
-                        memString));
-        float usedRatio = (float)(memInfo.realUsedRam
-                / (memInfo.realFreeRam + memInfo.realUsedRam));
+        mMemStatus.setText(memString);
+        float usedRatio = (float)(usedRam / (freeRam + usedRam));
         mColors.setRatios(usedRatio, 0, 1-usedRatio);
 
         List<ProcStatsPackageEntry> pkgEntries = mStatsManager.getEntries();
