@@ -246,7 +246,7 @@ public class InstalledAppDetails extends AppInfoBase
         AppItem app = new AppItem(mAppEntry.info.uid);
         app.addUid(mAppEntry.info.uid);
         getLoaderManager().restartLoader(LOADER_CHART_DATA,
-                ChartDataLoader.buildArgs(NetworkTemplate.buildTemplateMobileWildcard(), app),
+                ChartDataLoader.buildArgs(getTemplate(getContext()), app),
                 mDataCallbacks);
         new BatteryUpdater().execute();
     }
@@ -696,6 +696,16 @@ public class InstalledAppDetails extends AppInfoBase
             return false;
         }
         return true;
+    }
+
+    private static NetworkTemplate getTemplate(Context context) {
+        if (DataUsageSummary.hasReadyMobileRadio(context)) {
+            return NetworkTemplate.buildTemplateMobileWildcard();
+        }
+        if (DataUsageSummary.hasWifiRadio(context)) {
+            return NetworkTemplate.buildTemplateWifiWildcard();
+        }
+        return NetworkTemplate.buildTemplateEthernet();
     }
 
     public static CharSequence getNotificationSummary(AppEntry appEntry, Context context) {
