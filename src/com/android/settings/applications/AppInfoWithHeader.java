@@ -16,12 +16,18 @@
 
 package com.android.settings.applications;
 
+import android.app.Fragment;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 
 import com.android.settings.AppHeader;
 
 public abstract class AppInfoWithHeader extends AppInfoBase {
+
+    public static final String EXTRA_HIDE_INFO_BUTTON = "hideInfoButton";
 
     private boolean mCreated;
 
@@ -35,6 +41,24 @@ public abstract class AppInfoWithHeader extends AppInfoBase {
         mCreated = true;
         if (mPackageInfo == null) return;
         AppHeader.createAppHeader(this, mPackageInfo.applicationInfo.loadIcon(mPm),
-                mPackageInfo.applicationInfo.loadLabel(mPm), null, 0);
+                mPackageInfo.applicationInfo.loadLabel(mPm), getInfoIntent(this, mPackageName), 0);
+    }
+
+    public static Intent getInfoIntent(Fragment fragment, String packageName) {
+        Bundle args = fragment.getArguments();
+        Intent intent = fragment.getActivity().getIntent();
+        boolean showInfo = true;
+        if (args != null && args.getBoolean(EXTRA_HIDE_INFO_BUTTON, false)) {
+            showInfo = false;
+        }
+        if (intent != null && intent.getBooleanExtra(EXTRA_HIDE_INFO_BUTTON, false)) {
+            showInfo = false;
+        }
+        Intent infoIntent = null;
+        if (showInfo) {
+            infoIntent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+            infoIntent.setData(Uri.fromParts("package", packageName, null));
+        }
+        return infoIntent;
     }
 }

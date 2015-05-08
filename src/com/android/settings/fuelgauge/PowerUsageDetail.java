@@ -54,6 +54,7 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.WirelessSettings;
 import com.android.settings.applications.AppInfoBase;
+import com.android.settings.applications.AppInfoWithHeader;
 import com.android.settings.applications.InstalledAppDetails;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.bluetooth.BluetoothSettings;
@@ -464,7 +465,8 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
             appIcon = getActivity().getPackageManager().getDefaultActivityIcon();
         }
 
-        AppHeader.createAppHeader(this, appIcon, title, null,
+        AppHeader.createAppHeader(this, appIcon, title,
+                AppInfoWithHeader.getInfoIntent(this, iconPackage),
                 mDrainType != DrainType.APP ? android.R.color.white : 0);
     }
 
