@@ -137,8 +137,13 @@
 
        <SwitchPreference
             android:key="legacy_dhcp_client"
-            android:title="@string/legacy_dhcp_client" />
+            android:title="@string/legacy_dhcp_client"
             android:summary="@string/legacy_dhcp_client_summary"/>
+
+       <SwitchPreference
+            android:key="mobile_data_always_on"
+            android:title="@string/mobile_data_always_on"
+            android:summary="@string/mobile_data_always_on_summary"/>
 
         <ListPreference
             android:key="select_usb_configuration"
