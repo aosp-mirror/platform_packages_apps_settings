@@ -26,7 +26,7 @@ public class InputMethodDialogReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         if (Settings.ACTION_SHOW_INPUT_METHOD_PICKER.equals(intent.getAction())) {
             ((InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE))
-                    .showInputMethodPicker();
+                    .showInputMethodPicker(true /* showAuxiliarySubtypes */);
         }
     }
 }
