@@ -248,7 +248,9 @@ public class InstalledAppDetails extends AppInfoBase
         getLoaderManager().restartLoader(LOADER_CHART_DATA,
                 ChartDataLoader.buildArgs(NetworkTemplate.buildTemplateMobileWildcard(), app),
                 mDataCallbacks);
-        new BatteryUpdater().execute();
+        if (mPackageInfo != null) {
+            new BatteryUpdater().execute();
+        }
     }
 
     @Override
