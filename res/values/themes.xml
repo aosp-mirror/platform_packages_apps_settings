@@ -30,6 +30,8 @@
     </style>
 
     <style name="SetupWizardTheme" parent="SuwThemeMaterial">
+        <!-- For all Alert Dialogs -->
+        <item name="android:alertDialogTheme">@style/ThemeOverlay.AlertDialog</item>
         <item name="android:listPreferredItemPaddingEnd">@dimen/suw_layout_margin_sides</item>
         <item name="android:listPreferredItemPaddingStart">@dimen/suw_layout_margin_sides</item>
         <item name="android:windowBackground">?android:attr/colorBackground</item>
@@ -50,6 +52,8 @@
     </style>
 
     <style name="SetupWizardTheme.Light" parent="SuwThemeMaterial.Light">
+        <!-- For all Alert Dialogs -->
+        <item name="android:alertDialogTheme">@style/ThemeOverlay.AlertDialog</item>
         <item name="android:listPreferredItemPaddingEnd">@dimen/suw_layout_margin_sides</item>
         <item name="android:listPreferredItemPaddingStart">@dimen/suw_layout_margin_sides</item>
         <item name="android:windowBackground">?android:attr/colorBackground</item>
@@ -158,6 +162,10 @@
         <item name="android:actionBarTheme">@android:style/ThemeOverlay.Material.Dark.ActionBar</item>
 
         <item name="preferenceBackgroundColor">@drawable/preference_background</item>
+    </style>
+
+    <style name="ThemeOverlay.AlertDialog" parent="@android:style/ThemeOverlay.Material.Dialog.Alert">
+        <item name="android:windowSoftInputMode">adjustResize</item>
     </style>
 
     <style name="Theme.AlertDialog" parent="@*android:style/Theme.Material.Settings.Dialog.Alert">
