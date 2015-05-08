@@ -428,10 +428,11 @@ public class ManageApplications extends InstrumentedFragment
         Activity activity = getActivity();
         switch (mListType) {
             case LIST_TYPE_NOTIFICATION:
-                activity.startActivity(new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
+                activity.startActivityAsUser(new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
                         .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                         .putExtra(Settings.EXTRA_APP_PACKAGE, mCurrentPkgName)
-                        .putExtra(Settings.EXTRA_APP_UID, mCurrentUid));
+                        .putExtra(Settings.EXTRA_APP_UID, mCurrentUid),
+                        new UserHandle(UserHandle.getUserId(mCurrentUid)));
                 break;
             case LIST_TYPE_DOMAINS_URLS:
                 startAppInfoFragment(AppLaunchSettings.class, R.string.auto_launch_label);
