@@ -71,7 +71,7 @@ public class CertInstallerHelper {
      */
     public CertInstallerHelper() {
         mKeyStore.reset();
-        mKeyStore.password(CERT_STORE_PASSWORD);
+        mKeyStore.onUserPasswordChanged(CERT_STORE_PASSWORD);
     }
 
     private void extractCertificate(String certFile, String password) {
