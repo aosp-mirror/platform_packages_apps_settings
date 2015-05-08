@@ -790,6 +790,10 @@ public class ApplicationsState {
         mApplications = new ArrayList<ApplicationInfo>();
         for (UserHandle user : mUm.getUserProfiles()) {
             try {
+                // If this user is new, it needs a map created.
+                if (mEntriesMap.indexOfKey(user.getIdentifier()) < 0) {
+                    mEntriesMap.put(user.getIdentifier(), new HashMap<String, AppEntry>());
+                }
                 ParceledListSlice<ApplicationInfo> list =
                         mIpm.getInstalledApplications(
                                 user.isOwner() ? mOwnerRetrieveFlags : mRetrieveFlags,
