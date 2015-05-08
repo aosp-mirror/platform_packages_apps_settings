@@ -120,12 +120,25 @@
                     android:value="com.android.settings.Settings$NotificationAppListActivity" />
         </PreferenceScreen>
 
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="advanced"
+        android:title="@string/advanced_section_header" >
+
         <!-- Notification access -->
         <Preference
                 android:key="manage_notification_access"
                 android:title="@string/manage_notification_access_title"
                 android:persistent="false"
                 android:fragment="com.android.settings.notification.NotificationAccessSettings" />
+
+        <!-- Do Not Disturb access -->
+        <Preference
+                android:key="manage_zen_access"
+                android:title="@string/manage_zen_access_title"
+                android:persistent="false"
+                android:fragment="com.android.settings.notification.ZenAccessSettings" />
 
     </PreferenceCategory>
 
