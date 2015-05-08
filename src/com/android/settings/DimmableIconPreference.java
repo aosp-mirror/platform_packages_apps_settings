@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.location;
+package com.android.settings;
 
 import android.annotation.Nullable;
 import android.content.Context;
@@ -35,16 +35,9 @@ public class DimmableIconPreference extends Preference {
 
     private final CharSequence mContentDescription;
 
-    public DimmableIconPreference(Context context, AttributeSet attrs, int defStyle,
-            @Nullable CharSequence contentDescription) {
-        super(context, attrs, defStyle);
-        mContentDescription = contentDescription;
-    }
-
-    public DimmableIconPreference(Context context, AttributeSet attrs,
-            @Nullable CharSequence contentDescription) {
+    public DimmableIconPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mContentDescription = contentDescription;
+        mContentDescription = null;
     }
 
     public DimmableIconPreference(Context context, @Nullable CharSequence contentDescription) {
