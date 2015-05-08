@@ -282,11 +282,17 @@ public class SimStatus extends InstrumentedPreferenceActivity {
                 display = mRes.getString(R.string.radioInfo_service_in);
                 break;
             case ServiceState.STATE_OUT_OF_SERVICE:
+                // Set signal strength to 0 when service state is STATE_OUT_OF_SERVICE
+                mSignalStrength.setSummary("0");
             case ServiceState.STATE_EMERGENCY_ONLY:
+                // Set summary string of service state to radioInfo_service_out when
+                // service state is both STATE_OUT_OF_SERVICE & STATE_EMERGENCY_ONLY
                 display = mRes.getString(R.string.radioInfo_service_out);
                 break;
             case ServiceState.STATE_POWER_OFF:
                 display = mRes.getString(R.string.radioInfo_service_off);
+                // Also set signal strength to 0
+                mSignalStrength.setSummary("0");
                 break;
         }
 
@@ -314,6 +320,7 @@ public class SimStatus extends InstrumentedPreferenceActivity {
             if ((ServiceState.STATE_OUT_OF_SERVICE == state) ||
                     (ServiceState.STATE_POWER_OFF == state)) {
                 mSignalStrength.setSummary("0");
+                return;
             }
 
             int signalDbm = signalStrength.getDbm();
