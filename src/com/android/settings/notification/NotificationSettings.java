@@ -79,6 +79,7 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
     private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
     private static final String KEY_LOCK_SCREEN_NOTIFICATIONS = "lock_screen_notifications";
     private static final String KEY_NOTIFICATION_ACCESS = "manage_notification_access";
+    private static final String KEY_ZEN_ACCESS = "manage_zen_access";
 
     private static final int SAMPLE_CUTOFF = 2000;  // manually cap sample playback at 2 seconds
 
@@ -101,6 +102,7 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
     private TwoStatePreference mNotificationPulse;
     private DropDownPreference mLockscreen;
     private Preference mNotificationAccess;
+    private Preference mZenAccess;
     private boolean mSecure;
     private int mLockscreenSelectedValue;
     private ComponentName mSuppressor;
@@ -153,6 +155,8 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
 
         mNotificationAccess = findPreference(KEY_NOTIFICATION_ACCESS);
         refreshNotificationListeners();
+        mZenAccess = findPreference(KEY_ZEN_ACCESS);
+        refreshZenAccess();
         updateRingerMode();
         updateEffectsSuppressor();
     }
@@ -161,6 +165,7 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
     public void onResume() {
         super.onResume();
         refreshNotificationListeners();
+        refreshZenAccess();
         lookupRingtoneNames();
         mSettingsObserver.register(true);
         mReceiver.register(true);
@@ -471,21 +476,22 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
 
     private void refreshNotificationListeners() {
         if (mNotificationAccess != null) {
-            final int total = NotificationAccessSettings.getListenersCount(mPM);
-            if (total == 0) {
-                getPreferenceScreen().removePreference(mNotificationAccess);
+            final int n = NotificationAccessSettings.getEnabledListenersCount(mContext);
+            if (n == 0) {
+                mNotificationAccess.setSummary(getResources().getString(
+                        R.string.manage_notification_access_summary_zero));
             } else {
-                final int n = NotificationAccessSettings.getEnabledListenersCount(mContext);
-                if (n == 0) {
-                    mNotificationAccess.setSummary(getResources().getString(
-                            R.string.manage_notification_access_summary_zero));
-                } else {
-                    mNotificationAccess.setSummary(String.format(getResources().getQuantityString(
-                            R.plurals.manage_notification_access_summary_nonzero,
-                            n, n)));
-                }
+                mNotificationAccess.setSummary(String.format(getResources().getQuantityString(
+                        R.plurals.manage_notification_access_summary_nonzero,
+                        n, n)));
             }
         }
+    }
+
+    // === Zen access ===
+
+    private void refreshZenAccess() {
+        // noop for now
     }
 
     // === Callbacks ===
