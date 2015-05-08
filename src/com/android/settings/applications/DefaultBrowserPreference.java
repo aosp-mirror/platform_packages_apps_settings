@@ -37,10 +37,10 @@ public class DefaultBrowserPreference extends AppListPreference {
         super(context, attrs);
 
         mPm = context.getPackageManager();
-        loadBrowserApps();
+        refreshBrowserApps();
     }
 
-    private void loadBrowserApps() {
+    public void refreshBrowserApps() {
         List<String> browsers = resolveBrowserApps();
 
         setPackageNames(browsers.toArray(new String[browsers.size()]), null);
