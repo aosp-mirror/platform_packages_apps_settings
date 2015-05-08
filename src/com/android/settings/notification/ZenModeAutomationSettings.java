@@ -211,7 +211,7 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
     }
 
     private String computeCalendarName(EventInfo event) {
-        if (event.calendar != 0) {
+        if (event.calendar != EventInfo.ANY_CALENDAR) {
             final CalendarInfo[] calendars = ZenModeEventRuleSettings.getCalendars(mContext);
             for (int i = 0; i < calendars.length; i++) {
                 final CalendarInfo calendar = calendars[i];
