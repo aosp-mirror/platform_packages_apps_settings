@@ -616,6 +616,7 @@ public class InstalledAppDetails extends AppInfoBase
         // start new activity to manage app permissions
         Intent intent = new Intent(Intent.ACTION_MANAGE_APP_PERMISSIONS);
         intent.putExtra(Intent.EXTRA_PACKAGE_NAME, mAppEntry.info.packageName);
+        intent.putExtra(AppInfoWithHeader.EXTRA_HIDE_INFO_BUTTON, true);
         try {
             startActivity(intent);
         } catch (ActivityNotFoundException e) {
@@ -627,6 +628,7 @@ public class InstalledAppDetails extends AppInfoBase
         // start new fragment to display extended information
         Bundle args = new Bundle();
         args.putString(InstalledAppDetails.ARG_PACKAGE_NAME, mAppEntry.info.packageName);
+        args.putBoolean(AppInfoWithHeader.EXTRA_HIDE_INFO_BUTTON, true);
 
         SettingsActivity sa = (SettingsActivity) getActivity();
         sa.startPreferencePanel(fragment.getName(), args, -1, title, this, SUB_INFO_FRAGMENT);
@@ -636,6 +638,7 @@ public class InstalledAppDetails extends AppInfoBase
         // start new fragment to display extended information
         getActivity().startActivity(new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                .putExtra(AppInfoWithHeader.EXTRA_HIDE_INFO_BUTTON, true)
                 .putExtra(Settings.EXTRA_APP_PACKAGE, mAppEntry.info.packageName)
                 .putExtra(Settings.EXTRA_APP_UID, mAppEntry.info.uid));
     }

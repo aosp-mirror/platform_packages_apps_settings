@@ -29,6 +29,7 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.SwitchPreference;
 import android.provider.Settings;
 import android.text.TextUtils;
@@ -42,6 +43,7 @@ import com.android.settings.AppHeader;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.android.settings.applications.AppInfoWithHeader;
 import com.android.settings.notification.NotificationBackend.AppRow;
 
 import java.util.List;
@@ -55,6 +57,7 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
     private static final String KEY_PRIORITY = "priority";
     private static final String KEY_PEEKABLE = "peekable";
     private static final String KEY_SENSITIVE = "sensitive";
+    private static final String KEY_APP_SETTINGS = "app_settings";
 
     static final String EXTRA_HAS_SETTINGS_INTENT = "has_settings_intent";
     static final String EXTRA_SETTINGS_INTENT = "settings_intent";
@@ -85,7 +88,7 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
         mCreated = true;
         if (mAppRow == null) return;
         AppHeader.createAppHeader(this, mAppRow.icon, mAppRow.label,
-                mAppRow.settingsIntent);
+                AppInfoWithHeader.getInfoIntent(this, mAppRow.pkg));
     }
 
     @Override
@@ -189,6 +192,19 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
                 return mBackend.setSensitive(pkg, uid, sensitive);
             }
         });
+
+        if (mAppRow.settingsIntent != null) {
+            findPreference(KEY_APP_SETTINGS).setOnPreferenceClickListener(
+                    new OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    mContext.startActivity(mAppRow.settingsIntent);
+                    return true;
+                }
+            });
+        } else {
+            removePreference(KEY_APP_SETTINGS);
+        }
     }
 
     private void updateDependents(boolean banned) {
