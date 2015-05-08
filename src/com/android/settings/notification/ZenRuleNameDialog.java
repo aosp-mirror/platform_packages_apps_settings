@@ -165,7 +165,7 @@ public abstract class ZenRuleNameDialog {
 
     private static RuleInfo defaultNewEvent() {
         final EventInfo event = new EventInfo();
-        event.calendar = 0; // any
+        event.calendar = EventInfo.ANY_CALENDAR;
         event.reply = EventInfo.REPLY_ANY_EXCEPT_NO;
         final RuleInfo rt = new RuleInfo();
         rt.settingsAction = ZenModeEventRuleSettings.ACTION;
