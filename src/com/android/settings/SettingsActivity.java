@@ -103,6 +103,7 @@ import com.android.settings.notification.NotificationAccessSettings;
 import com.android.settings.notification.NotificationSettings;
 import com.android.settings.notification.NotificationStation;
 import com.android.settings.notification.OtherSoundSettings;
+import com.android.settings.notification.ZenAccessSettings;
 import com.android.settings.notification.ZenModeEventRuleSettings;
 import com.android.settings.notification.ZenModeExternalRuleSettings;
 import com.android.settings.notification.ZenModePrioritySettings;
@@ -328,6 +329,7 @@ public class SettingsActivity extends Activity
             DreamSettings.class.getName(),
             UserSettings.class.getName(),
             NotificationAccessSettings.class.getName(),
+            ZenAccessSettings.class.getName(),
             PrintSettingsFragment.class.getName(),
             PrintJobSettingsFragment.class.getName(),
             TrustedCredentialsSettings.class.getName(),
