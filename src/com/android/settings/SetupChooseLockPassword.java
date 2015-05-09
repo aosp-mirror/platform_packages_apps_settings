@@ -86,19 +86,25 @@ public class SetupChooseLockPassword extends ChooseLockPassword {
     public static class SetupChooseLockPasswordFragment extends ChooseLockPasswordFragment
             implements NavigationBar.NavigationBarListener {
 
+        private SetupWizardLayout mLayout;
         private NavigationBar mNavigationBar;
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            final SetupWizardLayout layout = (SetupWizardLayout) inflater.inflate(
+            mLayout = (SetupWizardLayout) inflater.inflate(
                     R.layout.setup_choose_lock_password, container, false);
-            SystemBarHelper.setImeInsetView(layout.findViewById(R.id.suw_bottom_scroll_view));
-            mNavigationBar = layout.getNavigationBar();
+            mNavigationBar = mLayout.getNavigationBar();
             mNavigationBar.setNavigationBarListener(this);
-            layout.setHeaderText(getActivity().getTitle());
+            return mLayout;
+        }
+
+        @Override
+        public void onViewCreated(View view, Bundle savedInstanceState) {
+            super.onViewCreated(view, savedInstanceState);
+            SystemBarHelper.setImeInsetView(mLayout.findViewById(R.id.suw_bottom_scroll_view));
             SetupWizardUtils.setImmersiveMode(getActivity());
-            return layout;
+            mLayout.setHeaderText(getActivity().getTitle());
         }
 
         @Override
