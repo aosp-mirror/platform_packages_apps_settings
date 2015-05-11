@@ -27,6 +27,7 @@ import android.preference.Preference;
 import android.preference.SwitchPreference;
 import android.provider.Settings;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.internal.telephony.PhoneStateIntentReceiver;
 import com.android.internal.telephony.TelephonyProperties;
 import com.android.settingslib.WirelessUtils;
@@ -120,7 +121,9 @@ public class AirplaneModeEnabler implements Preference.OnPreferenceChangeListene
                     SystemProperties.get(TelephonyProperties.PROPERTY_INECM_MODE))) {
             // In ECM mode, do not update database at this point
         } else {
-            setAirplaneModeOn((Boolean) newValue);
+            Boolean value = (Boolean) newValue;
+            MetricsLogger.action(mContext, MetricsLogger.ACTION_AIRPLANE_TOGGLE, value);
+            setAirplaneModeOn(value);
         }
         return true;
     }
