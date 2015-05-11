@@ -57,6 +57,7 @@ public class ZenModePrioritySettings extends ZenModeSettingsBase implements Inde
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 if (mDisableListeners) return true;
                 final boolean val = (Boolean) newValue;
+                MetricsLogger.action(mContext, MetricsLogger.ACTION_ZEN_ALLOW_REMINDERS, val);
                 if (val == mConfig.allowReminders) return true;
                 if (DEBUG) Log.d(TAG, "onPrefChange allowReminders=" + val);
                 final ZenModeConfig newConfig = mConfig.copy();
@@ -71,6 +72,7 @@ public class ZenModePrioritySettings extends ZenModeSettingsBase implements Inde
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 if (mDisableListeners) return true;
                 final boolean val = (Boolean) newValue;
+                MetricsLogger.action(mContext, MetricsLogger.ACTION_ZEN_ALLOW_EVENTS, val);
                 if (val == mConfig.allowEvents) return true;
                 if (DEBUG) Log.d(TAG, "onPrefChange allowEvents=" + val);
                 final ZenModeConfig newConfig = mConfig.copy();
@@ -86,6 +88,7 @@ public class ZenModePrioritySettings extends ZenModeSettingsBase implements Inde
             public boolean onItemSelected(int pos, Object newValue) {
                 if (mDisableListeners) return true;
                 final int val = (Integer) newValue;
+                MetricsLogger.action(mContext, MetricsLogger.ACTION_ZEN_ALLOW_MESSAGES, val);
                 final boolean allowMessages = val != SOURCE_NONE;
                 final int allowMessagesFrom = val == SOURCE_NONE ? mConfig.allowMessagesFrom : val;
                 if (allowMessages == mConfig.allowMessages
@@ -108,6 +111,7 @@ public class ZenModePrioritySettings extends ZenModeSettingsBase implements Inde
             public boolean onItemSelected(int pos, Object newValue) {
                 if (mDisableListeners) return true;
                 final int val = (Integer) newValue;
+                MetricsLogger.action(mContext, MetricsLogger.ACTION_ZEN_ALLOW_CALLS, val);
                 final boolean allowCalls = val != SOURCE_NONE;
                 final int allowCallsFrom = val == SOURCE_NONE ? mConfig.allowCallsFrom : val;
                 if (allowCalls == mConfig.allowCalls
@@ -132,6 +136,7 @@ public class ZenModePrioritySettings extends ZenModeSettingsBase implements Inde
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 if (mDisableListeners) return true;
                 final boolean val = (Boolean) newValue;
+                MetricsLogger.action(mContext, MetricsLogger.ACTION_ZEN_ALLOW_REPEAT_CALLS, val);
                 if (val == mConfig.allowRepeatCallers) return true;
                 if (DEBUG) Log.d(TAG, "onPrefChange allowRepeatCallers=" + val);
                 final ZenModeConfig newConfig = mConfig.copy();
