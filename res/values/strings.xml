@@ -6636,32 +6636,35 @@
     <!-- Label for process [CHAR LIMIT=25] -->
     <string name="process_format"><xliff:g id="app_name" example="Settings">%1$s</xliff:g> (<xliff:g id="count" example="3">%2$d</xliff:g>)</string>
 
-    <!-- Label for whether app is allowed to use a lot ef power [CHAR LIMIT=25]-->
-    <string name="high_power" translatable="false">High power</string>
+    <!-- Label for list to control apps that ignore battery saving restrictions [CHAR LIMIT=25]-->
+    <string name="high_power_apps">Ignore optimizations</string>
 
-    <!-- List of apps that are allowed to use a lot of power [CHAR LIMIT=25]-->
-    <string name="high_power_apps" translatable="false">High power apps</string>
+    <!-- Filter for apps allowed to use a lot of power [CHAR LIMIT=25] -->
+    <string name="high_power_filter_on">Allowed</string>
 
-    <!-- Summary of app allowed to use a lot of power [CHAR LIMIT=25] -->
-    <string name="high_power_on">On</string>
+    <!-- Filter for apps not allowed to use a lot of power [CHAR LIMIT=25] -->
+    <string name="high_power_filter_off">Not allowed</string>
 
-    <!-- Summary of app not allowed to use a lot of power [CHAR LIMIT=25] -->
-    <string name="high_power_off">Off</string>
+    <!-- Summary of app allowed to use a lot of power [CHAR LIMIT=60] -->
+    <string name="high_power_on">Allowed to ignore optimizations</string>
+
+    <!-- Summary of app not allowed to use a lot of power [CHAR LIMIT=60] -->
+    <string name="high_power_off">Not allowed to ignore optimizations</string>
 
     <!-- Description of high power switch [CHAR LIMIT=NONE] -->
-    <string name="high_power_desc" translatable="false">High powered apps description text goes here.  This is a placeholder.</string>
+    <string name="high_power_desc">Ignore optimizations including Battery saver, allow instant content refresh etc.</string>
 
     <!-- Description of number of apps with high power turned on [CHAR LIMIT=NONE] -->
-    <plurals name="high_power_count" translatable="false">
-        <item quantity="one">1 app is allowed to ignore restrictions like battery saver mode, sync etc.</item>
-        <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> apps is allowed to ignore restrictions like battery saver mode, sync etc.</item>
+    <plurals name="high_power_count">
+        <item quantity="one">1 app is allowed to ignore battery optimizations</item>
+        <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> apps are allowed to battery optimizations</item>
     </plurals>
 
     <!-- Summary of power usage for an app [CHAR LIMIT=NONE] -->
-    <string name="battery_summary" translatable="false"><xliff:g id="percentage" example="2">%1$d</xliff:g>%% use since last full charge</string>
+    <string name="battery_summary"><xliff:g id="percentage" example="2">%1$d</xliff:g>%% use since last full charge</string>
 
     <!-- Summary for app with no battery usage [CHAR LIMIT=NONE] -->
-    <string name="no_battery_summary" translatable="false">No battery use since last full charge</string>
+    <string name="no_battery_summary">No battery use since last full charge</string>
 
     <!-- Link to an apps notification settings [CHAR LIMIT=50] -->
     <string name="app_notification_preferences">App notification preferences</string>
