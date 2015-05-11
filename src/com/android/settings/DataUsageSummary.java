@@ -1217,10 +1217,11 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         public void onClick(View v) {
             if (mBinding) return;
 
-            final boolean dataEnabled = !mDataEnabled.isChecked();
+            final boolean enabled = !mDataEnabled.isChecked();
             final String currentTab = mCurrentTab;
             if (isMobileTab(currentTab)) {
-                if (dataEnabled) {
+                MetricsLogger.action(getContext(), MetricsLogger.ACTION_CELL_DATA_TOGGLE, enabled);
+                if (enabled) {
                     // If we are showing the Sim Card tile then we are a Multi-Sim device.
                     if (Utils.showSimCardTile(getActivity())) {
                         handleMultiSimDataDialog();

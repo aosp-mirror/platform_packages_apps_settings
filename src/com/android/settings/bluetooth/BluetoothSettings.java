@@ -231,16 +231,19 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
         switch (item.getItemId()) {
             case MENU_ID_SCAN:
                 if (mLocalAdapter.getBluetoothState() == BluetoothAdapter.STATE_ON) {
+                    MetricsLogger.action(getActivity(), MetricsLogger.ACTION_BLUETOOTH_SCAN);
                     startScanning();
                 }
                 return true;
 
             case MENU_ID_RENAME_DEVICE:
+                MetricsLogger.action(getActivity(), MetricsLogger.ACTION_BLUETOOTH_RENAME);
                 new BluetoothNameDialogFragment().show(
                         getFragmentManager(), "rename device");
                 return true;
 
             case MENU_ID_SHOW_RECEIVED:
+                MetricsLogger.action(getActivity(), MetricsLogger.ACTION_BLUETOOTH_FILES);
                 Intent intent = new Intent(BTOPP_ACTION_OPEN_RECEIVED_FILES);
                 getActivity().sendBroadcast(intent);
                 return true;
