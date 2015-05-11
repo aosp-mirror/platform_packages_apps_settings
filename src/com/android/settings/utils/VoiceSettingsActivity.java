@@ -16,8 +16,6 @@
 
 package com.android.settings.utils;
 
-import com.android.settings.R;
-
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.VoiceInteractor;
@@ -27,7 +25,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.util.Log;
 
 /**
@@ -67,24 +64,8 @@ abstract public class VoiceSettingsActivity extends Activity {
      * not null, then it will be read to the user.
      */
     protected void notifySuccess(CharSequence prompt) {
-        if (prompt != null) {
-            Toast.makeText(this, prompt, Toast.LENGTH_LONG).show();
-        }
-
         if (getVoiceInteractor() != null) {
             getVoiceInteractor().submitRequest(new CompleteVoiceRequest(prompt, null));
-        }
-    }
-
-    protected void setHeader(String label) {
-        TextView header = (TextView) findViewById(R.id.voice_fragment_header);
-        if (header != null) {
-            if (label != null) {
-                header.setText(label);
-                header.setVisibility(View.VISIBLE);
-            } else {
-                header.setVisibility(View.GONE);
-            }
         }
     }
 
@@ -92,20 +73,8 @@ abstract public class VoiceSettingsActivity extends Activity {
      * Indicates when the setting could not be changed.
      */
     protected void notifyFailure(CharSequence prompt) {
-        if (prompt != null) {
-            Toast.makeText(this, prompt, Toast.LENGTH_LONG).show();
-        }
-
         if (getVoiceInteractor() != null) {
             getVoiceInteractor().submitRequest(new AbortVoiceRequest(prompt, null));
         }
     }
-
-    protected void showFragment(Fragment fragment, String tag) {
-        getFragmentManager()
-                .beginTransaction()
-                .replace(R.id.voice_fragment_root, fragment, tag)
-                .commit();
-    }
-
 }
