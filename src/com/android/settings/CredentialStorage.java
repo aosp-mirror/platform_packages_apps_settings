@@ -451,7 +451,7 @@ public final class CredentialStorage extends Activity {
                 String password = data.getStringExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
                 if (!TextUtils.isEmpty(password)) {
                     // success
-                    mKeyStore.password(password);
+                    mKeyStore.unlock(password);
                     // return to onResume
                     return;
                 }
