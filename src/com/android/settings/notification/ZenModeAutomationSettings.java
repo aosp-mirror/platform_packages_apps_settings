@@ -96,6 +96,7 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
         new ZenRuleNameDialog(mContext, mServiceListing, null, mConfig.getAutomaticRuleNames()) {
             @Override
             public void onOk(String ruleName, RuleInfo ri) {
+                MetricsLogger.action(mContext, MetricsLogger.ACTION_ZEN_ADD_RULE_OK);
                 final ZenRule rule = new ZenRule();
                 rule.name = ruleName;
                 rule.enabled = true;
@@ -168,6 +169,7 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
         p.setOnPreferenceClickListener(new OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
+                MetricsLogger.action(mContext, MetricsLogger.ACTION_ZEN_ADD_RULE);
                 showAddRuleDialog();
                 return true;
             }
