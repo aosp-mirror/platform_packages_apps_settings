@@ -136,7 +136,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mInitialScanStarted = (savedInstanceState != null);    // don't auto start scan after rotation
+        mInitialScanStarted = false;
         mInitiateDiscoverable = true;
 
         mEmptyView = (TextView) getView().findViewById(android.R.id.empty);
