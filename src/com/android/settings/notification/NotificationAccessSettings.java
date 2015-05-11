@@ -21,6 +21,7 @@ import android.content.pm.PackageManager;
 import android.provider.Settings;
 import android.service.notification.NotificationListenerService;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 
 public class NotificationAccessSettings extends ManagedServiceSettings {
@@ -38,6 +39,11 @@ public class NotificationAccessSettings extends ManagedServiceSettings {
         c.warningDialogSummary = R.string.notification_listener_security_warning_summary;
         c.emptyText = R.string.no_notification_listeners;
         return c;
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.NOTIFICATION_ACCESS;
     }
 
     @Override
