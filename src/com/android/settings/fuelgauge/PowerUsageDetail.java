@@ -414,8 +414,9 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
                 mHighPower.setOnPreferenceClickListener(new OnPreferenceClickListener() {
                     @Override
                     public boolean onPreferenceClick(Preference preference) {
-                        AppInfoBase.startAppInfoFragment(HighPowerDetail.class, R.string.high_power,
-                                mApp.packageName, mApp.uid, PowerUsageDetail.this, 0);
+                        AppInfoBase.startAppInfoFragment(HighPowerDetail.class,
+                                R.string.high_power_apps, mApp.packageName, mApp.uid,
+                                PowerUsageDetail.this, 0);
                         return true;
                     }
                 });
