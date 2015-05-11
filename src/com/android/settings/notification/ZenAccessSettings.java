@@ -16,34 +16,41 @@
 
 package com.android.settings.notification;
 
-import android.app.ListFragment;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.Preference;
+import android.preference.PreferenceScreen;
+import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.SwitchPreference;
 import android.util.ArraySet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public class ZenAccessSettings extends ListFragment {
-    private static final boolean SHOW_PACKAGE_NAME = false;
-
+public class ZenAccessSettings extends SettingsPreferenceFragment {
     private Context mContext;
     private PackageManager mPkgMan;
     private NotificationManager mNoMan;
-    private Adapter mAdapter;
+    private TextView mEmpty;
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.NOTIFICATION_ZEN_MODE_ACCESS;
+    }
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -52,15 +59,15 @@ public class ZenAccessSettings extends ListFragment {
         mContext = getActivity();
         mPkgMan = mContext.getPackageManager();
         mNoMan = mContext.getSystemService(NotificationManager.class);
-        mAdapter = new Adapter(mContext);
+        setPreferenceScreen(getPreferenceManager().createPreferenceScreen(mContext));
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         final View v =  inflater.inflate(R.layout.managed_service_settings, container, false);
-        final TextView empty = (TextView) v.findViewById(android.R.id.empty);
-        empty.setText(R.string.zen_access_empty_text);
+        mEmpty = (TextView) v.findViewById(android.R.id.empty);
+        mEmpty.setText(R.string.zen_access_empty_text);
         return v;
     }
 
@@ -71,28 +78,44 @@ public class ZenAccessSettings extends ListFragment {
     }
 
     private void reloadList() {
-        mAdapter.clear();
+        final PreferenceScreen screen = getPreferenceScreen();
+        screen.removeAll();
+        final ArrayList<ApplicationInfo> apps = new ArrayList<>();
         final ArraySet<String> requesting = mNoMan.getPackagesRequestingNotificationPolicyAccess();
         if (requesting != null && !requesting.isEmpty()) {
-            final List<ApplicationInfo> apps = mPkgMan.getInstalledApplications(0);
-            if (apps != null) {
-                for (ApplicationInfo app : apps) {
+            final List<ApplicationInfo> installed = mPkgMan.getInstalledApplications(0);
+            if (installed != null) {
+                for (ApplicationInfo app : installed) {
                     if (requesting.contains(app.packageName)) {
-                        mAdapter.add(app);
+                        apps.add(app);
                     }
                 }
             }
         }
-        mAdapter.sort(new PackageItemInfo.DisplayNameComparator(mPkgMan));
-        getListView().setAdapter(mAdapter);
-    }
-
-    @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        final ApplicationInfo info = mAdapter.getItem(position);
-        final boolean hasAccess = hasAccess(info.packageName);
-        setAccess(info.packageName, !hasAccess);
-        mAdapter.notifyDataSetChanged();
+        Collections.sort(apps, new PackageItemInfo.DisplayNameComparator(mPkgMan));
+        for (ApplicationInfo app : apps) {
+            final String pkg = app.packageName;
+            final SwitchPreference pref = new SwitchPreference(mContext);
+            pref.setPersistent(false);
+            pref.setIcon(app.loadIcon(mPkgMan));
+            pref.setTitle(app.packageName);
+            pref.setChecked(hasAccess(pkg));
+            pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    final boolean access = (Boolean) newValue;
+                    AsyncTask.execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            setAccess(pkg, access);
+                        }
+                    });
+                    return true;
+                }
+            });
+            screen.addPreference(pref);
+        }
+        mEmpty.setVisibility(apps.isEmpty() ? View.VISIBLE : View.GONE);
     }
 
     private boolean hasAccess(String pkg) {
@@ -101,69 +124,6 @@ public class ZenAccessSettings extends ListFragment {
 
     private void setAccess(String pkg, boolean access) {
         mNoMan.setNotificationPolicyAccessGranted(pkg, access);
-    }
-
-    private static class ViewHolder {
-        ImageView icon;
-        TextView name;
-        CheckBox checkbox;
-        TextView description;
-    }
-
-    private final class Adapter extends ArrayAdapter<ApplicationInfo> {
-        final LayoutInflater mInflater;
-
-        Adapter(Context context) {
-            super(context, 0, 0);
-            mInflater = (LayoutInflater)
-                    getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        }
-
-        public boolean hasStableIds() {
-            return true;
-        }
-
-        public long getItemId(int position) {
-            return position;
-        }
-
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View v;
-            if (convertView == null) {
-                v = newView(parent);
-            } else {
-                v = convertView;
-            }
-            bindView(v, position);
-            return v;
-        }
-
-        public View newView(ViewGroup parent) {
-            View v = mInflater.inflate(R.layout.managed_service_item, parent, false);
-            ViewHolder h = new ViewHolder();
-            h.icon = (ImageView) v.findViewById(R.id.icon);
-            h.name = (TextView) v.findViewById(R.id.name);
-            h.checkbox = (CheckBox) v.findViewById(R.id.checkbox);
-            h.description = (TextView) v.findViewById(R.id.description);
-            v.setTag(h);
-            return v;
-        }
-
-        public void bindView(View view, int position) {
-            ViewHolder vh = (ViewHolder) view.getTag();
-            ApplicationInfo info = getItem(position);
-
-            vh.icon.setImageDrawable(info.loadIcon(mPkgMan));
-            vh.name.setText(info.loadLabel(mPkgMan));
-            if (SHOW_PACKAGE_NAME) {
-                vh.description.setText(info.packageName);
-                vh.description.setVisibility(View.VISIBLE);
-            } else {
-                vh.description.setVisibility(View.GONE);
-            }
-            vh.checkbox.setChecked(hasAccess(info.packageName));
-        }
-
     }
 
 }
