@@ -19,7 +19,6 @@ package com.android.settings.notification;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.app.ListFragment;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -27,27 +26,28 @@ import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
 import android.os.Bundle;
+import android.preference.Preference;
+import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.PreferenceScreen;
+import android.preference.SwitchPreference;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
 
+import java.util.Collections;
 import java.util.List;
 
-public abstract class ManagedServiceSettings extends ListFragment {
-    private static final boolean SHOW_PACKAGE_NAME = false;
-
+public abstract class ManagedServiceSettings extends SettingsPreferenceFragment {
     private final Config mConfig;
 
+    private Context mContext;
     private PackageManager mPM;
     private ServiceListing mServiceListing;
-    private ServiceListAdapter mListAdapter;
+    private TextView mEmpty;
 
     abstract protected Config getConfig();
 
@@ -59,23 +59,24 @@ public abstract class ManagedServiceSettings extends ListFragment {
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
-        mPM = getActivity().getPackageManager();
-        mServiceListing = new ServiceListing(getActivity(), mConfig);
+        mContext = getActivity();
+        mPM = mContext.getPackageManager();
+        mServiceListing = new ServiceListing(mContext, mConfig);
         mServiceListing.addCallback(new ServiceListing.Callback() {
             @Override
             public void onServicesReloaded(List<ServiceInfo> services) {
                 updateList(services);
             }
         });
-        mListAdapter = new ServiceListAdapter(getActivity());
+        setPreferenceScreen(getPreferenceManager().createPreferenceScreen(mContext));
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        View v =  inflater.inflate(R.layout.managed_service_settings, container, false);
-        TextView empty = (TextView) v.findViewById(android.R.id.empty);
-        empty.setText(mConfig.emptyText);
+        final View v =  inflater.inflate(R.layout.managed_service_settings, container, false);
+        mEmpty = (TextView) v.findViewById(android.R.id.empty);
+        mEmpty.setText(mConfig.emptyText);
         return v;
     }
 
@@ -93,25 +94,43 @@ public abstract class ManagedServiceSettings extends ListFragment {
     }
 
     private void updateList(List<ServiceInfo> services) {
-        mListAdapter.clear();
-        mListAdapter.addAll(services);
-        mListAdapter.sort(new PackageItemInfo.DisplayNameComparator(mPM));
-
-        getListView().setAdapter(mListAdapter);
+        final PreferenceScreen screen = getPreferenceScreen();
+        screen.removeAll();
+        Collections.sort(services, new PackageItemInfo.DisplayNameComparator(mPM));
+        for (ServiceInfo service : services) {
+            final ComponentName cn = new ComponentName(service.packageName, service.name);
+            final String title = service.loadLabel(mPM).toString();
+            final SwitchPreference pref = new SwitchPreference(mContext);
+            pref.setPersistent(false);
+            pref.setIcon(service.loadIcon(mPM));
+            pref.setTitle(title);
+            pref.setChecked(mServiceListing.isEnabled(cn));
+            pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    final boolean enable = (boolean) newValue;
+                    return setEnabled(cn, title, enable);
+                }
+            });
+            screen.addPreference(pref);
+        }
+        mEmpty.setVisibility(services.isEmpty() ? View.VISIBLE : View.GONE);
     }
 
-    @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        ServiceInfo info = mListAdapter.getItem(position);
-        final ComponentName cn = new ComponentName(info.packageName, info.name);
-        if (mServiceListing.isEnabled(cn)) {
+    private boolean setEnabled(ComponentName service, String title, boolean enable) {
+        if (!enable) {
             // the simple version: disabling
-            mServiceListing.setEnabled(cn, false);
+            mServiceListing.setEnabled(service, false);
+            return true;
         } else {
+            if (mServiceListing.isEnabled(service)) {
+                return true; // already enabled
+            }
             // show a scary dialog
             new ScaryWarningDialogFragment()
-                .setServiceInfo(cn, info.loadLabel(mPM).toString())
-                .show(getFragmentManager(), "dialog");
+                    .setServiceInfo(service, title)
+                    .show(getFragmentManager(), "dialog");
+            return false;
         }
     }
 
@@ -137,7 +156,7 @@ public abstract class ManagedServiceSettings extends ListFragment {
 
             final String title = getResources().getString(mConfig.warningDialogTitle, label);
             final String summary = getResources().getString(mConfig.warningDialogSummary, label);
-            return new AlertDialog.Builder(getActivity())
+            return new AlertDialog.Builder(mContext)
                     .setMessage(summary)
                     .setTitle(title)
                     .setCancelable(true)
@@ -154,69 +173,6 @@ public abstract class ManagedServiceSettings extends ListFragment {
                                 }
                             })
                     .create();
-        }
-    }
-
-    private static class ViewHolder {
-        ImageView icon;
-        TextView name;
-        CheckBox checkbox;
-        TextView description;
-    }
-
-    private class ServiceListAdapter extends ArrayAdapter<ServiceInfo> {
-        final LayoutInflater mInflater;
-
-        ServiceListAdapter(Context context) {
-            super(context, 0, 0);
-            mInflater = (LayoutInflater)
-                    getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        }
-
-        public boolean hasStableIds() {
-            return true;
-        }
-
-        public long getItemId(int position) {
-            return position;
-        }
-
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View v;
-            if (convertView == null) {
-                v = newView(parent);
-            } else {
-                v = convertView;
-            }
-            bindView(v, position);
-            return v;
-        }
-
-        public View newView(ViewGroup parent) {
-            View v = mInflater.inflate(R.layout.managed_service_item, parent, false);
-            ViewHolder h = new ViewHolder();
-            h.icon = (ImageView) v.findViewById(R.id.icon);
-            h.name = (TextView) v.findViewById(R.id.name);
-            h.checkbox = (CheckBox) v.findViewById(R.id.checkbox);
-            h.description = (TextView) v.findViewById(R.id.description);
-            v.setTag(h);
-            return v;
-        }
-
-        public void bindView(View view, int position) {
-            ViewHolder vh = (ViewHolder) view.getTag();
-            ServiceInfo info = getItem(position);
-
-            vh.icon.setImageDrawable(info.loadIcon(mPM));
-            vh.name.setText(info.loadLabel(mPM));
-            if (SHOW_PACKAGE_NAME) {
-                vh.description.setText(info.packageName);
-                vh.description.setVisibility(View.VISIBLE);
-            } else {
-                vh.description.setVisibility(View.GONE);
-            }
-            final ComponentName cn = new ComponentName(info.packageName, info.name);
-            vh.checkbox.setChecked(mServiceListing.isEnabled(cn));
         }
     }
 
