@@ -136,8 +136,8 @@ public class ManageApplications extends InstrumentedFragment
         R.string.filter_work_apps,     // Work
         R.string.filter_with_domain_urls_apps,     // Domain URLs
         R.string.filter_all_apps,      // Usage access screen, never displayed
-        R.string.high_power_on,        // High power whitelist, on
-        R.string.high_power_off,       // High power whitelist, off
+        R.string.high_power_filter_on,        // High power whitelist, on
+        R.string.high_power_filter_off,       // High power whitelist, off
     };
     // This is the actual mapping to filters from FILTER_ constants above, the order must
     // be kept in sync.
@@ -444,7 +444,7 @@ public class ManageApplications extends InstrumentedFragment
                 startAppInfoFragment(AppStorageSettings.class, R.string.storage_settings);
                 break;
             case LIST_TYPE_HIGH_POWER:
-                startAppInfoFragment(HighPowerDetail.class, R.string.high_power);
+                startAppInfoFragment(HighPowerDetail.class, R.string.high_power_apps);
                 break;
             // TODO: Figure out if there is a way where we can spin up the profile's settings
             // process ahead of time, to avoid a long load of data when user clicks on a managed app.

@@ -16,14 +16,11 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
-    android:title="@string/high_power">
+    android:title="@string/high_power_apps">
 
     <SwitchPreference
         android:key="high_power_switch"
-        android:title="@string/high_power" />
-
-    <Preference
         android:summary="@string/high_power_desc"
-        android:selectable="false" />
+        android:title="@string/high_power_apps" />
 
 </PreferenceScreen>
