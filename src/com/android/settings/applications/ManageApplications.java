@@ -109,22 +109,22 @@ public class ManageApplications extends InstrumentedFragment
 
     // Filter options used for displayed list of applications
     // The order which they appear is the order they will show when spinner is present.
-    public static final int FILTER_APPS_ALL                     = 0;
-    public static final int FILTER_APPS_ENABLED                 = 1;
-    public static final int FILTER_APPS_DISABLED                = 2;
-    public static final int FILTER_APPS_BLOCKED                 = 3;
-    public static final int FILTER_APPS_PRIORITY                = 4;
-    public static final int FILTER_APPS_NO_PEEKING              = 5;
-    public static final int FILTER_APPS_SENSITIVE               = 6;
-    public static final int FILTER_APPS_PERSONAL                = 7;
-    public static final int FILTER_APPS_WORK                    = 8;
-    public static final int FILTER_APPS_WITH_DOMAIN_URLS        = 9;
-    public static final int FILTER_APPS_USAGE_ACCESS            = 10;
-    public static final int FILTER_APPS_POWER_WHITELIST         = 11;
-    public static final int FILTER_APPS_POWER_NO_WHITELIST      = 12;
+    public static final int FILTER_APPS_POWER_WHITELIST         = 0;
+    public static final int FILTER_APPS_ALL                     = 1;
+    public static final int FILTER_APPS_ENABLED                 = 2;
+    public static final int FILTER_APPS_DISABLED                = 3;
+    public static final int FILTER_APPS_BLOCKED                 = 4;
+    public static final int FILTER_APPS_PRIORITY                = 5;
+    public static final int FILTER_APPS_NO_PEEKING              = 6;
+    public static final int FILTER_APPS_SENSITIVE               = 7;
+    public static final int FILTER_APPS_PERSONAL                = 8;
+    public static final int FILTER_APPS_WORK                    = 9;
+    public static final int FILTER_APPS_WITH_DOMAIN_URLS        = 10;
+    public static final int FILTER_APPS_USAGE_ACCESS            = 11;
 
     // This is the string labels for the filter modes above, the order must be kept in sync.
     public static final int[] FILTER_LABELS = new int[] {
+        R.string.high_power_filter_on,        // High power whitelist, on
         R.string.filter_all_apps,      // All apps
         R.string.filter_enabled_apps,  // Enabled
         R.string.filter_apps_disabled, // Disabled
@@ -136,12 +136,11 @@ public class ManageApplications extends InstrumentedFragment
         R.string.filter_work_apps,     // Work
         R.string.filter_with_domain_urls_apps,     // Domain URLs
         R.string.filter_all_apps,      // Usage access screen, never displayed
-        R.string.high_power_filter_on,        // High power whitelist, on
-        R.string.high_power_filter_off,       // High power whitelist, off
     };
     // This is the actual mapping to filters from FILTER_ constants above, the order must
     // be kept in sync.
     public static final AppFilter[] FILTERS = new AppFilter[] {
+        AppStatePowerBridge.FILTER_POWER_WHITELISTED,     // High power whitelist, on
         ApplicationsState.FILTER_EVERYTHING,  // All apps
         ApplicationsState.FILTER_ALL_ENABLED, // Enabled
         ApplicationsState.FILTER_DISABLED,    // Disabled
@@ -153,8 +152,6 @@ public class ManageApplications extends InstrumentedFragment
         ApplicationsState.FILTER_WORK,        // Work
         ApplicationsState.FILTER_WITH_DOMAIN_URLS,   // Apps with Domain URLs
         AppStateUsageBridge.FILTER_APP_USAGE, // Apps with Domain URLs
-        AppStatePowerBridge.FILTER_POWER_WHITELISTED,     // High power whitelist, on
-        AppStatePowerBridge.FILTER_POWER_NOT_WHITELISTED, // High power whitelist, off
     };
 
     // sort order
@@ -321,7 +318,7 @@ public class ManageApplications extends InstrumentedFragment
             mFilterAdapter.enableFilter(FILTER_APPS_NO_PEEKING);
         }
         if (mListType == LIST_TYPE_HIGH_POWER) {
-            mFilterAdapter.enableFilter(FILTER_APPS_POWER_NO_WHITELIST);
+            mFilterAdapter.enableFilter(FILTER_APPS_ALL);
         }
         if (mListType == LIST_TYPE_STORAGE) {
             mApplications.setOverrideFilter(new VolumeFilter(mVolumeUuid));

@@ -358,6 +358,8 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
         if (mHighPower != null) {
             mHighPower.setSummary(HighPowerDetail.getSummary(getActivity(), mApp.packageName));
         }
+
+        setupHeader();
     }
 
     private void createDetails() {
@@ -369,8 +371,6 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
         mDrainType = (BatterySipper.DrainType) args.getSerializable(EXTRA_DRAIN_TYPE);
         mNoCoverage = args.getDouble(EXTRA_NO_COVERAGE, 0);
         mShowLocationButton = args.getBoolean(EXTRA_SHOW_LOCATION_BUTTON);
-
-        setupHeader();
 
         mTypes = args.getIntArray(EXTRA_DETAIL_TYPES);
         mValues = args.getDoubleArray(EXTRA_DETAIL_VALUES);
@@ -445,14 +445,14 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
     private void setupHeader() {
         final Bundle args = getArguments();
         String title = args.getString(EXTRA_TITLE);
-        String iconPackage = args.getString(EXTRA_ICON_PACKAGE);
+        String pkg = args.getString(EXTRA_ICON_PACKAGE);
         int iconId = args.getInt(EXTRA_ICON_ID, 0);
         Drawable appIcon = null;
 
-        if (!TextUtils.isEmpty(iconPackage)) {
+        if (!TextUtils.isEmpty(pkg)) {
             try {
                 final PackageManager pm = getActivity().getPackageManager();
-                ApplicationInfo ai = pm.getPackageInfo(iconPackage, 0).applicationInfo;
+                ApplicationInfo ai = pm.getPackageInfo(pkg, 0).applicationInfo;
                 if (ai != null) {
                     appIcon = ai.loadIcon(pm);
                 }
@@ -466,8 +466,11 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
             appIcon = getActivity().getPackageManager().getDefaultActivityIcon();
         }
 
+        if (pkg == null && mPackages != null) {
+            pkg = mPackages[0];
+        }
         AppHeader.createAppHeader(this, appIcon, title,
-                AppInfoWithHeader.getInfoIntent(this, iconPackage),
+                pkg != null ? AppInfoWithHeader.getInfoIntent(this, pkg) : null,
                 mDrainType != DrainType.APP ? android.R.color.white : 0);
     }
 
@@ -629,7 +632,6 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
     private void addControl(int pageSummary, int actionTitle, final int action) {
         Preference pref = new Preference(getActivity());
         pref.setTitle(actionTitle);
-        pref.setSummary(pageSummary);
         pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
