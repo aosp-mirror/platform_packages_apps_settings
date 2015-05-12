@@ -23,12 +23,54 @@
         android:summary="@string/storage_type_internal"
         android:selectable="true" />
 
-    <com.android.settings.applications.LayoutPreference
-        android:key="storage_settings"
-        android:layout="@layout/app_storage_settings" />
+    <PreferenceCategory
+        android:key="storage_category"
+        android:layout="@layout/tall_preference_category"
+        android:title="@string/storage_label">
+
+        <Preference
+            android:key="total_size"
+            android:title="@string/total_size_label"
+            android:selectable="false"
+            android:layout="@layout/horizontal_preference" />
+
+        <Preference
+            android:key="app_size"
+            android:title="@string/application_size_label"
+            android:selectable="false"
+            android:layout="@layout/horizontal_preference" />
+
+        <Preference
+            android:key="external_code_size"
+            android:title="@string/external_code_size_label"
+            android:selectable="false"
+            android:layout="@layout/horizontal_preference" />
+
+        <Preference
+            android:key="data_size"
+            android:title="@string/data_size_label"
+            android:selectable="false"
+            android:layout="@layout/horizontal_preference" />
+
+        <Preference
+            android:key="external_data_size"
+            android:title="@string/external_data_size_label"
+            android:selectable="false"
+            android:layout="@layout/horizontal_preference" />
+
+        <com.android.settings.applications.LayoutPreference
+            android:key="clear_data_button"
+            android:layout="@layout/single_button_panel" />
+    </PreferenceCategory>
+
+    <Preference
+        android:key="cache_size"
+        android:title="@string/cache_size_label"
+        android:layout="@layout/horizontal_preference" />
 
     <com.android.settings.applications.LayoutPreference
-        android:key="cache_settings"
-        android:layout="@layout/app_cache_settings" />
+        android:key="clear_cache_button"
+        android:selectable="false"
+        android:layout="@layout/single_button_panel" />
 
 </PreferenceScreen>
