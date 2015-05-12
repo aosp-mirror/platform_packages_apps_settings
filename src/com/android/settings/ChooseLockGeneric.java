@@ -292,7 +292,6 @@ public class ChooseLockGeneric extends SettingsActivity {
         /** increases the quality if necessary */
         private int upgradeQuality(int quality) {
             quality = upgradeQualityForDPM(quality);
-            quality = upgradeQualityForKeyStore(quality);
             return quality;
         }
 
@@ -301,15 +300,6 @@ public class ChooseLockGeneric extends SettingsActivity {
             int minQuality = mDPM.getPasswordQuality(null);
             if (quality < minQuality) {
                 quality = minQuality;
-            }
-            return quality;
-        }
-
-        private int upgradeQualityForKeyStore(int quality) {
-            if (!mKeyStore.isEmpty()) {
-                if (quality < CredentialStorage.MIN_PASSWORD_QUALITY) {
-                    quality = CredentialStorage.MIN_PASSWORD_QUALITY;
-                }
             }
             return quality;
         }
