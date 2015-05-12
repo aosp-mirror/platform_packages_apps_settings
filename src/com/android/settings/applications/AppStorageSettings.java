@@ -29,6 +29,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
+import android.preference.Preference;
+import android.preference.PreferenceCategory;
 import android.text.format.Formatter;
 import android.util.Log;
 import android.view.View;
@@ -69,17 +71,26 @@ public class AppStorageSettings extends AppInfoWithHeader
     private static final int DLG_CANNOT_CLEAR_DATA = DLG_BASE + 2;
 
     private static final String KEY_MOVE_PREFERENCE = "app_location_setting";
-    private static final String KEY_STORAGE_SETTINGS = "storage_settings";
-    private static final String KEY_CACHE_SETTINGS = "cache_settings";
+    private static final String KEY_STORAGE_CATEGORY = "storage_category";
 
-    private TextView mTotalSize;
-    private TextView mAppSize;
-    private TextView mDataSize;
-    private TextView mExternalCodeSize;
-    private TextView mExternalDataSize;
+    private static final String KEY_TOTAL_SIZE = "total_size";
+    private static final String KEY_APP_SIZE = "app_size";
+    private static final String KEY_EXTERNAL_CODE_SIZE = "external_code_size";
+    private static final String KEY_DATA_SIZE = "data_size";
+    private static final String KEY_EXTERNAL_DATA_SIZE = "external_data_size";
+    private static final String KEY_CACHE_SIZE = "cache_size";
+
+    private static final String KEY_CLEAR_DATA = "clear_data_button";
+    private static final String KEY_CLEAR_CACHE = "clear_cache_button";
+
+    private Preference mTotalSize;
+    private Preference mAppSize;
+    private Preference mDataSize;
+    private Preference mExternalCodeSize;
+    private Preference mExternalDataSize;
 
     // Views related to cache info
-    private TextView mCacheSize;
+    private Preference mCacheSize;
     private Button mClearDataButton;
     private Button mClearCacheButton;
 
@@ -113,29 +124,28 @@ public class AppStorageSettings extends AppInfoWithHeader
     private void setupViews() {
         mComputingStr = getActivity().getText(R.string.computing_size);
         mInvalidSizeStr = getActivity().getText(R.string.invalid_size_value);
-        LayoutPreference view = (LayoutPreference) findPreference(KEY_STORAGE_SETTINGS);
 
         // Set default values on sizes
-        mTotalSize = (TextView) view.findViewById(R.id.total_size_text);
-        mAppSize = (TextView) view.findViewById(R.id.application_size_text);
-        mDataSize = (TextView) view.findViewById(R.id.data_size_text);
-        mExternalCodeSize = (TextView) view.findViewById(R.id.external_code_size_text);
-        mExternalDataSize = (TextView) view.findViewById(R.id.external_data_size_text);
+        mTotalSize = findPreference(KEY_TOTAL_SIZE);
+        mAppSize =  findPreference(KEY_APP_SIZE);
+        mDataSize =  findPreference(KEY_DATA_SIZE);
+        mExternalCodeSize = findPreference(KEY_EXTERNAL_CODE_SIZE);
+        mExternalDataSize = findPreference(KEY_EXTERNAL_DATA_SIZE);
 
         if (Environment.isExternalStorageEmulated()) {
-            ((View) mExternalCodeSize.getParent()).setVisibility(View.GONE);
-            ((View) mExternalDataSize.getParent()).setVisibility(View.GONE);
+            PreferenceCategory category = (PreferenceCategory) findPreference(KEY_STORAGE_CATEGORY);
+            category.removePreference(mExternalCodeSize);
+            category.removePreference(mExternalDataSize);
         }
-        mClearDataButton = (Button) view.findViewById(R.id.clear_data_button)
+        mClearDataButton = (Button) ((LayoutPreference) findPreference(KEY_CLEAR_DATA))
                 .findViewById(R.id.button);
 
         mMoveDropDown = (DropDownPreference) findPreference(KEY_MOVE_PREFERENCE);
         mMoveDropDown.setCallback(this);
 
-        view = (LayoutPreference) findPreference(KEY_CACHE_SETTINGS);
         // Cache section
-        mCacheSize = (TextView) view.findViewById(R.id.cache_size_text);
-        mClearCacheButton = (Button) view.findViewById(R.id.clear_cache_button)
+        mCacheSize = findPreference(KEY_CACHE_SIZE);
+        mClearCacheButton = (Button) ((LayoutPreference) findPreference(KEY_CLEAR_CACHE))
                 .findViewById(R.id.button);
         mClearCacheButton.setText(R.string.clear_cache_btn_text);
     }
@@ -192,10 +202,10 @@ public class AppStorageSettings extends AppInfoWithHeader
                 || mAppEntry.size == ApplicationsState.SIZE_UNKNOWN) {
             mLastCodeSize = mLastDataSize = mLastCacheSize = mLastTotalSize = -1;
             if (!mHaveSizes) {
-                mAppSize.setText(mComputingStr);
-                mDataSize.setText(mComputingStr);
-                mCacheSize.setText(mComputingStr);
-                mTotalSize.setText(mComputingStr);
+                mAppSize.setSummary(mComputingStr);
+                mDataSize.setSummary(mComputingStr);
+                mCacheSize.setSummary(mComputingStr);
+                mTotalSize.setSummary(mComputingStr);
             }
             mClearDataButton.setEnabled(false);
             mClearCacheButton.setEnabled(false);
@@ -210,29 +220,29 @@ public class AppStorageSettings extends AppInfoWithHeader
             } else {
                 if (mLastExternalCodeSize != mAppEntry.externalCodeSize) {
                     mLastExternalCodeSize = mAppEntry.externalCodeSize;
-                    mExternalCodeSize.setText(getSizeStr(mAppEntry.externalCodeSize));
+                    mExternalCodeSize.setSummary(getSizeStr(mAppEntry.externalCodeSize));
                 }
                 if (mLastExternalDataSize !=  mAppEntry.externalDataSize) {
                     mLastExternalDataSize =  mAppEntry.externalDataSize;
-                    mExternalDataSize.setText(getSizeStr( mAppEntry.externalDataSize));
+                    mExternalDataSize.setSummary(getSizeStr( mAppEntry.externalDataSize));
                 }
             }
             if (mLastCodeSize != codeSize) {
                 mLastCodeSize = codeSize;
-                mAppSize.setText(getSizeStr(codeSize));
+                mAppSize.setSummary(getSizeStr(codeSize));
             }
             if (mLastDataSize != dataSize) {
                 mLastDataSize = dataSize;
-                mDataSize.setText(getSizeStr(dataSize));
+                mDataSize.setSummary(getSizeStr(dataSize));
             }
             long cacheSize = mAppEntry.cacheSize + mAppEntry.externalCacheSize;
             if (mLastCacheSize != cacheSize) {
                 mLastCacheSize = cacheSize;
-                mCacheSize.setText(getSizeStr(cacheSize));
+                mCacheSize.setSummary(getSizeStr(cacheSize));
             }
             if (mLastTotalSize != mAppEntry.size) {
                 mLastTotalSize = mAppEntry.size;
-                mTotalSize.setText(getSizeStr(mAppEntry.size));
+                mTotalSize.setSummary(getSizeStr(mAppEntry.size));
             }
 
             if ((mAppEntry.dataSize+ mAppEntry.externalDataSize) <= 0 || !mCanClearData) {
@@ -304,14 +314,18 @@ public class AppStorageSettings extends AppInfoWithHeader
 
         final List<VolumeInfo> candidates = context.getPackageManager()
                 .getPackageCandidateVolumes(mAppEntry.info);
-        Collections.sort(candidates, VolumeInfo.getDescriptionComparator());
+        if (candidates.size() > 1) {
+            Collections.sort(candidates, VolumeInfo.getDescriptionComparator());
 
-        mMoveDropDown.clearItems();
-        for (VolumeInfo vol : candidates) {
-            final String volDescrip = storage.getBestVolumeDescription(vol);
-            mMoveDropDown.addItem(volDescrip, vol);
+            mMoveDropDown.clearItems();
+            for (VolumeInfo vol : candidates) {
+                final String volDescrip = storage.getBestVolumeDescription(vol);
+                mMoveDropDown.addItem(volDescrip, vol);
+            }
+            mMoveDropDown.setSelectable(!mAppControlRestricted);
+        } else {
+            removePreference(KEY_MOVE_PREFERENCE);
         }
-        mMoveDropDown.setSelectable(!mAppControlRestricted);
     }
 
     /*
