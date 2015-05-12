@@ -97,7 +97,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
      */
     public static final String PREF_SHOW = "show";
 
-    private static final ComponentName SYSUI_TWEAK = new ComponentName("com.android.systemui",
+    private static final ComponentName SYSUI_TUNER = new ComponentName("com.android.systemui",
             "com.android.systemui.tuner.TunerActivity");
 
     private static final String ENABLE_ADB = "enable_adb";
@@ -115,7 +115,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private static final String BUGREPORT = "bugreport";
     private static final String BUGREPORT_IN_POWER_KEY = "bugreport_in_power";
     private static final String OPENGL_TRACES_PROPERTY = "debug.egl.trace";
-    private static final String TWEAK_UI_KEY = "tweak_ui";
+    private static final String TUNER_UI_KEY = "tuner_ui";
 
     private static final String DEBUG_APP_KEY = "debug_app";
     private static final String WAIT_FOR_DEBUGGER_KEY = "wait_for_debugger";
@@ -264,7 +264,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private Dialog mAdbKeysDialog;
     private boolean mUnavailable;
 
-    private SwitchPreference mTweakUiPref;
+    private SwitchPreference mTunerUiPref;
 
     @Override
     protected int getMetricsCategory() {
@@ -398,7 +398,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         mAllPrefs.add(mShowAllANRs);
         mResetSwitchPrefs.add(mShowAllANRs);
 
-        mTweakUiPref = findAndInitSwitchPref(TWEAK_UI_KEY);
+        mTunerUiPref = findAndInitSwitchPref(TUNER_UI_KEY);
 
         Preference hdcpChecking = findPreference(HDCP_CHECKING_KEY);
         if (hdcpChecking != null) {
@@ -1079,15 +1079,15 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     }
 
     private void updateTweakUi() {
-        updateSwitchPreference(mTweakUiPref, getActivity().getPackageManager()
-                .getComponentEnabledSetting(SYSUI_TWEAK)
+        updateSwitchPreference(mTunerUiPref, getActivity().getPackageManager()
+                .getComponentEnabledSetting(SYSUI_TUNER)
                 == PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
-        mTweakUiPref.setOnPreferenceChangeListener(this);
+        mTunerUiPref.setOnPreferenceChangeListener(this);
     }
 
     private void writeTweakUi(Object newValue) {
         Boolean enabled = (Boolean) newValue;
-        getActivity().getPackageManager().setComponentEnabledSetting(SYSUI_TWEAK,
+        getActivity().getPackageManager().setComponentEnabledSetting(SYSUI_TUNER,
                 enabled ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED
                         : PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
                         PackageManager.DONT_KILL_APP);
@@ -1693,7 +1693,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         } else if (preference == mSimulateColorSpace) {
             writeSimulateColorSpace(newValue);
             return true;
-        } else if (preference == mTweakUiPref) {
+        } else if (preference == mTunerUiPref) {
             writeTweakUi(newValue);
             return true;
         }
