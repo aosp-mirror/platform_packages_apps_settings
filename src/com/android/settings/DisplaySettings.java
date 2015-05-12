@@ -22,6 +22,7 @@ import com.android.settings.DropDownPreference.Callback;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 
+import static android.provider.Settings.Secure.DOUBLE_TAP_TO_WAKE;
 import static android.provider.Settings.Secure.DOZE_ENABLED;
 import static android.provider.Settings.Secure.WAKE_GESTURE_ENABLED;
 import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE;
@@ -69,6 +70,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_SCREEN_SAVER = "screensaver";
     private static final String KEY_LIFT_TO_WAKE = "lift_to_wake";
     private static final String KEY_DOZE = "doze";
+    private static final String KEY_TAP_TO_WAKE = "tap_to_wake";
     private static final String KEY_AUTO_BRIGHTNESS = "auto_brightness";
     private static final String KEY_AUTO_ROTATE = "auto_rotate";
     private static final String KEY_NIGHT_MODE = "night_mode";
@@ -84,6 +86,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private Preference mScreenSaverPreference;
     private SwitchPreference mLiftToWakePreference;
     private SwitchPreference mDozePreference;
+    private SwitchPreference mTapToWakePreference;
     private SwitchPreference mAutoBrightnessPreference;
 
     @Override
@@ -137,6 +140,13 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             mDozePreference.setOnPreferenceChangeListener(this);
         } else {
             removePreference(KEY_DOZE);
+        }
+
+        if (isTapToWakeAvailable(getResources())) {
+            mTapToWakePreference = (SwitchPreference) findPreference(KEY_TAP_TO_WAKE);
+            mTapToWakePreference.setOnPreferenceChangeListener(this);
+        } else {
+            removePreference(KEY_TAP_TO_WAKE);
         }
 
         if (RotationPolicy.isRotationLockToggleVisible(activity)) {
@@ -199,6 +209,10 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                     com.android.internal.R.string.config_dozeComponent);
         }
         return !TextUtils.isEmpty(name);
+    }
+
+    private static boolean isTapToWakeAvailable(Resources res) {
+        return res.getBoolean(com.android.internal.R.bool.config_supportDoubleTapWake);
     }
 
     private static boolean isAutomaticBrightnessAvailable(Resources res) {
@@ -345,6 +359,12 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             int value = Settings.Secure.getInt(getContentResolver(), DOZE_ENABLED, 1);
             mDozePreference.setChecked(value != 0);
         }
+
+        // Update tap to wake if it is available.
+        if (mTapToWakePreference != null) {
+            int value = Settings.Secure.getInt(getContentResolver(), DOUBLE_TAP_TO_WAKE, 0);
+            mTapToWakePreference.setChecked(value != 0);
+        }
     }
 
     private void updateScreenSaverSummary() {
@@ -395,6 +415,10 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         if (preference == mDozePreference) {
             boolean value = (Boolean) objValue;
             Settings.Secure.putInt(getContentResolver(), DOZE_ENABLED, value ? 1 : 0);
+        }
+        if (preference == mTapToWakePreference) {
+            boolean value = (Boolean) objValue;
+            Settings.Secure.putInt(getContentResolver(), DOUBLE_TAP_TO_WAKE, value ? 1 : 0);
         }
         if (preference == mNightModePreference) {
             try {

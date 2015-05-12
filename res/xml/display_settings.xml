@@ -72,6 +72,12 @@
                 android:summary="@string/doze_summary"
                 android:persistent="false" />
 
+        <SwitchPreference
+                android:key="tap_to_wake"
+                android:title="@string/tap_to_wake"
+                android:summary="@string/tap_to_wake_summary"
+                android:persistent="false" />
+
         <com.android.settings.WarnedListPreference
                 android:key="font_size"
                 android:title="@string/title_font_size"
