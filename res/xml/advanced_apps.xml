@@ -43,7 +43,8 @@
     <PreferenceScreen
         android:key="high_power_apps"
         android:title="@string/high_power_apps"
-        android:fragment="com.android.settings.applications.ManageApplications">
+        android:fragment="com.android.settings.applications.ManageApplications"
+        settings:keywords="@string/keywords_ignore_optimizations">
         <extra
             android:name="classname"
             android:value="com.android.settings.Settings$HighPowerApplicationsActivity" />
