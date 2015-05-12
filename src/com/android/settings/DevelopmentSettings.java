@@ -97,6 +97,9 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
      */
     public static final String PREF_SHOW = "show";
 
+    private static final ComponentName SYSUI_TWEAK = new ComponentName("com.android.systemui",
+            "com.android.systemui.tuner.TunerActivity");
+
     private static final String ENABLE_ADB = "enable_adb";
     private static final String CLEAR_ADB_KEYS = "clear_adb_keys";
     private static final String ENABLE_TERMINAL = "enable_terminal";
@@ -112,6 +115,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private static final String BUGREPORT = "bugreport";
     private static final String BUGREPORT_IN_POWER_KEY = "bugreport_in_power";
     private static final String OPENGL_TRACES_PROPERTY = "debug.egl.trace";
+    private static final String TWEAK_UI_KEY = "tweak_ui";
 
     private static final String DEBUG_APP_KEY = "debug_app";
     private static final String WAIT_FOR_DEBUGGER_KEY = "wait_for_debugger";
@@ -260,6 +264,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private Dialog mAdbKeysDialog;
     private boolean mUnavailable;
 
+    private SwitchPreference mTweakUiPref;
+
     @Override
     protected int getMetricsCategory() {
         return MetricsLogger.DEVELOPMENT;
@@ -391,6 +397,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
                 SHOW_ALL_ANRS_KEY);
         mAllPrefs.add(mShowAllANRs);
         mResetSwitchPrefs.add(mShowAllANRs);
+
+        mTweakUiPref = findAndInitSwitchPref(TWEAK_UI_KEY);
 
         Preference hdcpChecking = findPreference(HDCP_CHECKING_KEY);
         if (hdcpChecking != null) {
@@ -593,6 +601,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         updateSimulateColorSpace();
         updateUseNuplayerOptions();
         updateUSBAudioOptions();
+        updateTweakUi();
     }
 
     private void resetDangerousOptions() {
@@ -1067,6 +1076,21 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             Settings.Secure.putInt(cr, Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED, 1);
             Settings.Secure.putInt(cr, Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER, newMode);
         }
+    }
+
+    private void updateTweakUi() {
+        updateSwitchPreference(mTweakUiPref, getActivity().getPackageManager()
+                .getComponentEnabledSetting(SYSUI_TWEAK)
+                == PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
+        mTweakUiPref.setOnPreferenceChangeListener(this);
+    }
+
+    private void writeTweakUi(Object newValue) {
+        Boolean enabled = (Boolean) newValue;
+        getActivity().getPackageManager().setComponentEnabledSetting(SYSUI_TWEAK,
+                enabled ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+                        : PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                        PackageManager.DONT_KILL_APP);
     }
 
     private void updateUseNuplayerOptions() {
@@ -1668,6 +1692,9 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             return true;
         } else if (preference == mSimulateColorSpace) {
             writeSimulateColorSpace(newValue);
+            return true;
+        } else if (preference == mTweakUiPref) {
+            writeTweakUi(newValue);
             return true;
         }
         return false;
