@@ -171,10 +171,8 @@
     <string name="bluetooth_pb_remember_choice" msgid="3622898084442402071">"下次不再询问"</string>
     <string name="bluetooth_map_request" msgid="4595727689513143902">"消息权限申请"</string>
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"“%1$s”想要查看您的消息。要向“%2$s”授予权限吗？"</string>
-    <!-- no translation found for bluetooth_sap_request (2669762224045354417) -->
-    <skip />
-    <!-- no translation found for bluetooth_sap_acceptance_dialog_text (4414253873553608690) -->
-    <skip />
+    <string name="bluetooth_sap_request" msgid="2669762224045354417">"SIM 访问权限请求"</string>
+    <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>想要访问您的 SIM 卡。如果授权该设备访问 SIM 卡，您设备的数据连接功能在蓝牙连接期间将停用。将访问权限授予<xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
     <string name="date_and_time" msgid="9062980487860757694">"日期和时间"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"选择时区"</string>
     <string name="display_preview_label" msgid="1127597250917274792">"预览:"</string>
@@ -1508,8 +1506,7 @@
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"主动从WLAN网络切换到移动数据网络"</string>
     <string name="wifi_allow_scan_with_traffic" msgid="3601853081178265786">"一律允许WLAN漫游扫描"</string>
     <string name="legacy_dhcp_client" msgid="694426978909127287">"使用旧版 DHCP 客户端"</string>
-    <!-- no translation found for mobile_data_always_on (7745605759775320362) -->
-    <skip />
+    <string name="mobile_data_always_on" msgid="7745605759775320362">"始终开启移动数据网络"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"显示无线显示认证选项"</string>
     <string name="wifi_verbose_logging_summary" msgid="6615071616111731958">"提升WLAN日志记录级别（在WLAN选择器中显示每个SSID的RSSI）"</string>
     <string name="wifi_aggressive_handover_summary" msgid="6328455667642570371">"开启此设置后，系统会在WLAN信号较弱时，主动将网络模式从WLAN网络切换到移动数据网络"</string>
@@ -1522,8 +1519,7 @@
     <string name="allow_mock_location_summary" msgid="317615105156345626">"允许模拟位置"</string>
     <string name="debug_view_attributes" msgid="6485448367803310384">"启用视图属性检查功能"</string>
     <string name="legacy_dhcp_client_summary" msgid="163383566317652040">"使用 Lollipop 的 DHCP 客户端，而不是新的 Android DHCP 客户端。"</string>
-    <!-- no translation found for mobile_data_always_on_summary (8149773901431697910) -->
-    <skip />
+    <string name="mobile_data_always_on_summary" msgid="8149773901431697910">"始终开启移动数据网络，即使 WLAN 网络已开启（便于快速切换网络）。"</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"是否允许USB调试？"</string>
     <string name="adb_warning_message" msgid="7316799925425402244">"USB调试仅适用于开发工作。该功能可用于在您的计算机和设备之间复制数据、在您的设备上安装应用而不发送通知以及读取日志数据。"</string>
     <string name="adb_keys_warning_message" msgid="5659849457135841625">"是否针对您之前授权的所有计算机撤消USB调试的访问权限？"</string>
@@ -2465,6 +2461,8 @@
     <string name="keywords_all_apps" msgid="5377153522551809915">"应用 下载 应用程序 系统"</string>
     <string name="keywords_app_permissions" msgid="8677901415217188314">"应用 权限 安全"</string>
     <string name="keywords_default_apps" msgid="3581727483175522599">"应用 默认"</string>
+    <!-- no translation found for keywords_ignore_optimizations (946516741848647905) -->
+    <skip />
     <string name="keywords_lockscreen" msgid="4806191868723291541">"滑动 密码 图案 PIN码"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"设置WLAN NFC标签"</string>
     <string name="write_tag" msgid="8571858602896222537">"写入"</string>
@@ -2489,8 +2487,7 @@
     <string name="notification_ringtone_title" msgid="3361201340352664272">"默认通知铃声"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"有来电时响铃并振动"</string>
     <string name="notification_section_header" msgid="95661783916799134">"通知"</string>
-    <!-- no translation found for advanced_section_header (8833934850242546903) -->
-    <skip />
+    <string name="advanced_section_header" msgid="8833934850242546903">"高级"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"收到通知时指示灯闪烁"</string>
     <string name="lock_screen_notifications_title" msgid="9118805570775519455">"设备锁定时"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"显示所有通知内容"</string>
@@ -2520,10 +2517,8 @@
     <string name="no_notification_listeners" msgid="2767405417723149879">"未安装任何通知侦听器。"</string>
     <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"要向<xliff:g id="SERVICE">%1$s</xliff:g>授予此权限吗？"</string>
     <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"“<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>”将可读取系统或任何已安装的应用发布的任何通知（可能包括联系人姓名和别人发送给您的消息等个人信息），还可关闭这些通知或触摸其中的操作按钮。"</string>
-    <!-- no translation found for manage_zen_access_title (2611116122628520522) -->
-    <skip />
-    <!-- no translation found for zen_access_empty_text (8772967285742259540) -->
-    <skip />
+    <string name="manage_zen_access_title" msgid="2611116122628520522">"“勿扰”权限"</string>
+    <string name="zen_access_empty_text" msgid="8772967285742259540">"没有任何已安装应用请求“勿扰”权限"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"正在加载应用…"</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"全部阻止"</string>
     <string name="app_notification_block_summary" msgid="9049487483231233726">"一律不显示来自此应用的通知"</string>
@@ -2550,22 +2545,14 @@
     <string name="zen_schedule_rule_enabled_toast" msgid="3379499360390382259">"将自动规则设置为在指定时间段内开启“请勿打扰”"</string>
     <string name="zen_event_rule_type_name" msgid="2645981990973086797">"事件规则"</string>
     <string name="zen_event_rule_enabled_toast" msgid="6910577623330811480">"将自动规则设置为发生指定事件时开启“请勿打扰”"</string>
-    <!-- no translation found for zen_mode_event_rule_calendar (8787906563769067418) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_summary_calendar_template (5135844750232403975) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_summary_any_calendar (4936646399126636358) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_summary_reply_template (6590671260829837157) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_calendar_any (6485568415998569885) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_reply (5166322024212403739) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_reply_any_except_no (8868873496008825961) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_reply_yes_or_maybe (2769656565454495824) -->
-    <skip />
+    <string name="zen_mode_event_rule_calendar" msgid="8787906563769067418">"在以下日历活动期间："</string>
+    <string name="zen_mode_event_rule_summary_calendar_template" msgid="5135844750232403975">"在<xliff:g id="CALENDAR">%1$s</xliff:g>的活动期间"</string>
+    <string name="zen_mode_event_rule_summary_any_calendar" msgid="4936646399126636358">"所有日历"</string>
+    <string name="zen_mode_event_rule_summary_reply_template" msgid="6590671260829837157">"回复内容如下的活动：<xliff:g id="REPLY">%1$s</xliff:g>"</string>
+    <string name="zen_mode_event_rule_calendar_any" msgid="6485568415998569885">"所有日历"</string>
+    <string name="zen_mode_event_rule_reply" msgid="5166322024212403739">"回复内容如下的活动："</string>
+    <string name="zen_mode_event_rule_reply_any_except_no" msgid="8868873496008825961">"“参加”、“可能参加”或“未回复”"</string>
+    <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="2769656565454495824">"“参加”或“可能参加”"</string>
     <string name="zen_mode_event_rule_reply_yes" msgid="1003598835878784659">"是"</string>
     <string name="zen_mode_rule_not_found_text" msgid="8963662446092059836">"找不到规则。"</string>
     <string name="zen_mode_rule_summary_combination" msgid="2526506268333198254">"<xliff:g id="DESCRIPTION">%1$s</xliff:g> / <xliff:g id="MODE">%2$s</xliff:g>"</string>
@@ -2577,14 +2564,10 @@
     <string name="summary_range_verbal_combination" msgid="8467306662961568656">"<xliff:g id="START">%1$s</xliff:g>到<xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="zen_mode_calls" msgid="7051492091133751208">"通话"</string>
     <string name="zen_mode_messages" msgid="5886440273537510894">"消息"</string>
-    <!-- no translation found for zen_mode_from_anyone (2638322015361252161) -->
-    <skip />
-    <!-- no translation found for zen_mode_from_contacts (2232335406106711637) -->
-    <skip />
-    <!-- no translation found for zen_mode_from_starred (2678345811950997027) -->
-    <skip />
-    <!-- no translation found for zen_mode_from_none (8219706639954614136) -->
-    <skip />
+    <string name="zen_mode_from_anyone" msgid="2638322015361252161">"来自任何人"</string>
+    <string name="zen_mode_from_contacts" msgid="2232335406106711637">"仅限来自联系人"</string>
+    <string name="zen_mode_from_starred" msgid="2678345811950997027">"仅限来自收藏的联系人"</string>
+    <string name="zen_mode_from_none" msgid="8219706639954614136">"无"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"闹钟"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"提醒"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"活动"</string>
@@ -2598,36 +2581,6 @@
     <string name="zen_mode_start_time" msgid="8102602297273744441">"开始时间"</string>
     <string name="zen_mode_end_time" msgid="8774327885892705505">"结束时间"</string>
     <string name="zen_mode_end_time_next_day_summary_format" msgid="4201521691238728701">"次日 <xliff:g id="FORMATTED_TIME">%s</xliff:g>"</string>
-    <string name="zen_mode_interruptions_voice_title" msgid="855256211259132964">"打扰"</string>
-    <string name="zen_mode_interruptions_voice_header" msgid="2888750427673157270">"收到来电和通知时"</string>
-    <string name="zen_mode_interruptions_voice_prompt" msgid="3041817362475695079">"您允许设备在哪些情况下显示通知？"</string>
-    <string name="zen_mode_duration_voice_prompt" msgid="7381920739389625133">"持续多久？"</string>
-    <string name="zen_mode_option_voice_all_interruptions" msgid="9222054216334506341">"一律允许打扰"</string>
-    <string name="zen_mode_option_voice_all_interruptions_synonyms" msgid="475880955609403705">"关闭,所有通知,全部通知"</string>
-    <string name="zen_mode_option_voice_important_interruptions" msgid="3695277268139705627">"仅允许优先打扰内容"</string>
-    <string name="zen_mode_option_voice_important_synonyms" msgid="2727831854148694795">"重要,优先,仅限优先打扰,仅允许优先打扰,优先通知"</string>
-    <string name="zen_mode_option_voice_alarms" msgid="5961982397880688359">"仅允许闹钟"</string>
-    <string name="zen_mode_option_voice_alarms_synonyms" msgid="4049356986371569950">"闹钟,仅限闹钟,仅允许闹钟"</string>
-    <string name="zen_mode_option_voice_no_interruptions" msgid="3009964973912018317">"禁止打扰"</string>
-    <string name="zen_mode_option_voice_no_interruptions_synonyms" msgid="8368549512275129844">"无,一律不允许,勿扰,禁止打扰"</string>
-    <string name="zen_mode_duration_indefinte_voice_label" msgid="9026001994945950539">"无限期"</string>
-    <plurals name="zen_mode_duration_minutes_voice_label" formatted="false" msgid="4750982084453980">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 分钟</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 分钟</item>
-    </plurals>
-    <plurals name="zen_mode_duration_hours_voice_label" formatted="false" msgid="175180249071227957">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 小时</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 小时</item>
-    </plurals>
-    <string name="zen_mode_summary_priority_indefinitely" msgid="5417246022606171241">"更改为无限期仅限优先通知"</string>
-    <plurals name="zen_mode_summary_priority_by_minute" formatted="false" msgid="1938955186728929112">
-      <item quantity="other">更改为仅限优先通知，持续 <xliff:g id="DURATION">%1$d</xliff:g> 分钟（到<xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>）</item>
-      <item quantity="one">更改为仅限优先通知，持续 1 分钟（到<xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g>）</item>
-    </plurals>
-    <plurals name="zen_mode_summary_priority_by_hour" formatted="false" msgid="6664710096150897823">
-      <item quantity="other">更改为仅限优先通知，持续 <xliff:g id="DURATION">%1$d</xliff:g> 小时（到<xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>）</item>
-      <item quantity="one">更改为仅限优先通知，持续 1 小时（到<xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g>）</item>
-    </plurals>
     <string name="zen_mode_summary_alarams_only_indefinite" msgid="7941708969866496605">"更改为无限期仅限闹钟"</string>
     <plurals name="zen_mode_summary_alarms_only_by_minute" formatted="false" msgid="6122003583875424601">
       <item quantity="other">更改为仅限闹钟，持续 <xliff:g id="DURATION">%1$d</xliff:g> 分钟（到<xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>）</item>
@@ -2637,17 +2590,7 @@
       <item quantity="other">更改为仅限闹钟，持续 <xliff:g id="DURATION">%1$d</xliff:g> 小时（到<xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>）</item>
       <item quantity="one">更改为仅限闹钟，持续 1 小时（到<xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g>）</item>
     </plurals>
-    <string name="zen_mode_summary_no_interruptions_indefinite" msgid="7668951387253438521">"更改为无限期禁止打扰"</string>
-    <plurals name="zen_mode_summary_no_interruptions_by_minute" formatted="false" msgid="5642379561004767217">
-      <item quantity="other">更改为禁止打扰，持续 <xliff:g id="DURATION">%1$d</xliff:g> 分钟（到<xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>）</item>
-      <item quantity="one">更改为禁止打扰，持续 1 分钟（到<xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g>）</item>
-    </plurals>
-    <plurals name="zen_mode_summary_no_interruptions_by_hour" formatted="false" msgid="9059043643566528697">
-      <item quantity="other">更改为禁止打扰，持续 <xliff:g id="DURATION">%1$d</xliff:g> 小时（到<xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>）</item>
-      <item quantity="one">更改为禁止打扰，持续 1 小时（到<xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g>）</item>
-    </plurals>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"更改为一律允许打扰"</string>
-    <string name="zen_mode_duration_indefinite_voice_synonyms" msgid="4213829562303429456">"不限时间"</string>
     <string name="notification_settings_apps_title" msgid="1125354590652967250">"应用通知"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"通知设置"</string>
     <string name="device_feedback" msgid="3238056036766293294">"发送有关此设备的反馈"</string>
@@ -2739,6 +2682,10 @@
     <string name="app_permissions" msgid="4148222031991883874">"应用权限"</string>
     <string name="app_permissions_summary" msgid="2098173899436407221">"已授予 <xliff:g id="COUNT_0">%d</xliff:g> 个应用（共 <xliff:g id="COUNT_1">%d</xliff:g> 个）其他权限"</string>
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"已授权 <xliff:g id="COUNT_0">%d</xliff:g> 个应用（共 <xliff:g id="COUNT_1">%d</xliff:g> 个）"</string>
+    <!-- no translation found for tap_to_wake (7211944147196888807) -->
+    <skip />
+    <!-- no translation found for tap_to_wake_summary (4341387904987585616) -->
+    <skip />
     <string name="domain_urls_title" msgid="8735310976048599572">"网域网址"</string>
     <string name="domain_urls_summary_none" msgid="4817723415916239693">"不打开任何网域网址"</string>
     <string name="domain_urls_summary_one" msgid="4427559120855938432">"打开“<xliff:g id="DOMAIN">%s</xliff:g>”"</string>
@@ -2768,10 +2715,18 @@
     <string name="memory_max_desc" msgid="2861832149718335864">"最高内存使用量：<xliff:g id="MEMORY">%1$s</xliff:g>"</string>
     <string name="memory_avg_desc" msgid="1551240906596518412">"平均内存使用量：<xliff:g id="MEMORY">%1$s</xliff:g>"</string>
     <string name="memory_use_running_format" msgid="4172488041800743760">"<xliff:g id="MEMORY">%1$s</xliff:g> / <xliff:g id="RUNNING">%2$s</xliff:g>"</string>
-    <!-- no translation found for process_format (77905604092541454) -->
+    <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
+    <string name="high_power_apps" msgid="2116416853043103135">"忽略优化"</string>
+    <string name="high_power_filter_on" msgid="3862942127137594196">"允许"</string>
+    <!-- no translation found for high_power_on (148473814103292724) -->
     <skip />
-    <string name="high_power_on" msgid="4925948784500291865">"开启"</string>
     <string name="high_power_off" msgid="4069404908196636677">"关闭"</string>
-    <!-- no translation found for app_notification_preferences (6413363601485067724) -->
+    <!-- no translation found for high_power_desc (8777632785903235764) -->
+    <skip />
+    <!-- no translation found for high_power_count (4343190376439806186) -->
+    <string name="battery_summary" msgid="101415762036784289">"自上次充满电后已使用 <xliff:g id="PERCENTAGE">%1$d</xliff:g>%% 的电量"</string>
+    <string name="no_battery_summary" msgid="3528036835462846814">"自上次充满电后未消耗任何电量"</string>
+    <string name="app_notification_preferences" msgid="6413363601485067724">"应用通知偏好设置"</string>
+    <!-- no translation found for system_ui_settings (579824306467081123) -->
     <skip />
 </resources>

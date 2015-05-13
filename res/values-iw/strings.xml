@@ -173,10 +173,8 @@
     <string name="bluetooth_pb_remember_choice" msgid="3622898084442402071">"אל תשאל שוב"</string>
     <string name="bluetooth_map_request" msgid="4595727689513143902">"בקשת גישה להודעות"</string>
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"‏%1$s רוצה לגשת להודעות שלך. להעניק גישה ל-%2$s?"</string>
-    <!-- no translation found for bluetooth_sap_request (2669762224045354417) -->
-    <skip />
-    <!-- no translation found for bluetooth_sap_acceptance_dialog_text (4414253873553608690) -->
-    <skip />
+    <string name="bluetooth_sap_request" msgid="2669762224045354417">"‏בקשת גישה אל כרטיס SIM"</string>
+    <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"‏<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> רוצה לגשת אל כרטיס ה-SIM. הענקת גישה אל כרטיס ה-SIM תשבית את קישוריות הנתונים במכשיר לכל משך החיבור. הענק גישה ל-<xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
     <string name="date_and_time" msgid="9062980487860757694">"תאריך ושעה"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"בחר אזור זמן"</string>
     <string name="display_preview_label" msgid="1127597250917274792">"תצוגה מקדימה:"</string>
@@ -2481,6 +2479,8 @@
     <string name="keywords_all_apps" msgid="5377153522551809915">"מערכת לבקשה של הורדת אפליקציות"</string>
     <string name="keywords_app_permissions" msgid="8677901415217188314">"אבטחה של הרשאות לאפליקציות"</string>
     <string name="keywords_default_apps" msgid="3581727483175522599">"ברירת מחדל לאפליקציות"</string>
+    <!-- no translation found for keywords_ignore_optimizations (946516741848647905) -->
+    <skip />
     <string name="keywords_lockscreen" msgid="4806191868723291541">"‏החלקה סיסמה קו ביטול נעילה מספר PIN"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"‏הגדר תג NFC של Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"כתוב"</string>
@@ -2565,22 +2565,14 @@
     <string name="zen_schedule_rule_enabled_toast" msgid="3379499360390382259">"הכלל האוטומטי מוגדר להפעלת \'נא לא להפריע\' במהלך הזמנים שצוינו"</string>
     <string name="zen_event_rule_type_name" msgid="2645981990973086797">"כלל של אירוע"</string>
     <string name="zen_event_rule_enabled_toast" msgid="6910577623330811480">"הכלל האוטומטי מוגדר להפעלת \'נא לא להפריע\' במהלך האירועים שצוינו"</string>
-    <!-- no translation found for zen_mode_event_rule_calendar (8787906563769067418) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_summary_calendar_template (5135844750232403975) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_summary_any_calendar (4936646399126636358) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_summary_reply_template (6590671260829837157) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_calendar_any (6485568415998569885) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_reply (5166322024212403739) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_reply_any_except_no (8868873496008825961) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_reply_yes_or_maybe (2769656565454495824) -->
-    <skip />
+    <string name="zen_mode_event_rule_calendar" msgid="8787906563769067418">"בזמן אירועים בשביל"</string>
+    <string name="zen_mode_event_rule_summary_calendar_template" msgid="5135844750232403975">"בזמן אירועים בשביל <xliff:g id="CALENDAR">%1$s</xliff:g>"</string>
+    <string name="zen_mode_event_rule_summary_any_calendar" msgid="4936646399126636358">"כל יומן"</string>
+    <string name="zen_mode_event_rule_summary_reply_template" msgid="6590671260829837157">"כשהתשובה היא <xliff:g id="REPLY">%1$s</xliff:g>"</string>
+    <string name="zen_mode_event_rule_calendar_any" msgid="6485568415998569885">"כל יומן"</string>
+    <string name="zen_mode_event_rule_reply" msgid="5166322024212403739">"כשהתשובה היא"</string>
+    <string name="zen_mode_event_rule_reply_any_except_no" msgid="8868873496008825961">"התשובה היא כן, אולי או לא"</string>
+    <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="2769656565454495824">"כן או אולי"</string>
     <string name="zen_mode_event_rule_reply_yes" msgid="1003598835878784659">"כן"</string>
     <string name="zen_mode_rule_not_found_text" msgid="8963662446092059836">"הכלל לא נמצא."</string>
     <string name="zen_mode_rule_summary_combination" msgid="2526506268333198254">"<xliff:g id="DESCRIPTION">%1$s</xliff:g> / <xliff:g id="MODE">%2$s</xliff:g>"</string>
@@ -2592,14 +2584,10 @@
     <string name="summary_range_verbal_combination" msgid="8467306662961568656">"<xliff:g id="START">%1$s</xliff:g> עד <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="zen_mode_calls" msgid="7051492091133751208">"שיחות"</string>
     <string name="zen_mode_messages" msgid="5886440273537510894">"הודעות"</string>
-    <!-- no translation found for zen_mode_from_anyone (2638322015361252161) -->
-    <skip />
-    <!-- no translation found for zen_mode_from_contacts (2232335406106711637) -->
-    <skip />
-    <!-- no translation found for zen_mode_from_starred (2678345811950997027) -->
-    <skip />
-    <!-- no translation found for zen_mode_from_none (8219706639954614136) -->
-    <skip />
+    <string name="zen_mode_from_anyone" msgid="2638322015361252161">"מכל אחד"</string>
+    <string name="zen_mode_from_contacts" msgid="2232335406106711637">"רק מאנשי הקשר"</string>
+    <string name="zen_mode_from_starred" msgid="2678345811950997027">"רק מאנשי קשר המסומנים בכוכב"</string>
+    <string name="zen_mode_from_none" msgid="8219706639954614136">"כלום"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"התראות"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"תזכורות"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"אירועים"</string>
@@ -2613,44 +2601,6 @@
     <string name="zen_mode_start_time" msgid="8102602297273744441">"שעת התחלה"</string>
     <string name="zen_mode_end_time" msgid="8774327885892705505">"שעת סיום"</string>
     <string name="zen_mode_end_time_next_day_summary_format" msgid="4201521691238728701">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> ביום הבא"</string>
-    <string name="zen_mode_interruptions_voice_title" msgid="855256211259132964">"הפרעות"</string>
-    <string name="zen_mode_interruptions_voice_header" msgid="2888750427673157270">"כשנכנסות שיחות והודעות"</string>
-    <string name="zen_mode_interruptions_voice_prompt" msgid="3041817362475695079">"מתי תרצה לאפשר הפרעות?"</string>
-    <string name="zen_mode_duration_voice_prompt" msgid="7381920739389625133">"למשך כמה זמן?"</string>
-    <string name="zen_mode_option_voice_all_interruptions" msgid="9222054216334506341">"הפרעות בכל מצב"</string>
-    <string name="zen_mode_option_voice_all_interruptions_synonyms" msgid="475880955609403705">"כבוי,הכול,כל דבר"</string>
-    <string name="zen_mode_option_voice_important_interruptions" msgid="3695277268139705627">"רק הפרעות בעדיפות גבוהה"</string>
-    <string name="zen_mode_option_voice_important_synonyms" msgid="2727831854148694795">"חשובה,עדיפות,עדיפות בלבד,רק עדיפות,הודעות בעדיפות"</string>
-    <string name="zen_mode_option_voice_alarms" msgid="5961982397880688359">"התר התראות בלבד"</string>
-    <string name="zen_mode_option_voice_alarms_synonyms" msgid="4049356986371569950">"התראות,התראות בלבד,רק התראות"</string>
-    <string name="zen_mode_option_voice_no_interruptions" msgid="3009964973912018317">"ללא הפרעות"</string>
-    <string name="zen_mode_option_voice_no_interruptions_synonyms" msgid="8368549512275129844">"ללא,אף פעם,כלום,ללא הפרעות"</string>
-    <string name="zen_mode_duration_indefinte_voice_label" msgid="9026001994945950539">"ללא הגבלה"</string>
-    <plurals name="zen_mode_duration_minutes_voice_label" formatted="false" msgid="4750982084453980">
-      <item quantity="two"><xliff:g id="COUNT_1">%d</xliff:g> דקות</item>
-      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> דקות</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> דקות</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> דקה</item>
-    </plurals>
-    <plurals name="zen_mode_duration_hours_voice_label" formatted="false" msgid="175180249071227957">
-      <item quantity="two"><xliff:g id="COUNT_1">%d</xliff:g> שעות</item>
-      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> שעות</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> שעות</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> שעה</item>
-    </plurals>
-    <string name="zen_mode_summary_priority_indefinitely" msgid="5417246022606171241">"שנה ל\'רק הודעות בעדיפות גבוהה\' ללא הגבלה"</string>
-    <plurals name="zen_mode_summary_priority_by_minute" formatted="false" msgid="1938955186728929112">
-      <item quantity="two">שנה ל‘רק הודעות בעדיפות גבוהה‘ למשך <xliff:g id="DURATION">%1$d</xliff:g> דקות, עד <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-      <item quantity="many">שנה ל‘רק הודעות בעדיפות גבוהה‘ למשך <xliff:g id="DURATION">%1$d</xliff:g> דקות, עד <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-      <item quantity="other">שנה ל‘רק הודעות בעדיפות גבוהה‘ למשך <xliff:g id="DURATION">%1$d</xliff:g> דקות, עד <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-      <item quantity="one">שנה ל‘רק הודעות בעדיפות גבוהה‘ למשך דקה אחת, עד <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g></item>
-    </plurals>
-    <plurals name="zen_mode_summary_priority_by_hour" formatted="false" msgid="6664710096150897823">
-      <item quantity="two">שנה ל‘רק הודעות בעדיפות גבוהה‘ למשך <xliff:g id="DURATION">%1$d</xliff:g> שעות (עד <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
-      <item quantity="many">שנה ל‘רק הודעות בעדיפות גבוהה‘ למשך <xliff:g id="DURATION">%1$d</xliff:g> שעות (עד <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
-      <item quantity="other">שנה ל‘רק הודעות בעדיפות גבוהה‘ למשך <xliff:g id="DURATION">%1$d</xliff:g> שעות (עד <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
-      <item quantity="one">שנה ל‘רק הודעות בעדיפות גבוהה‘ למשך שעה אחת,עד <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g></item>
-    </plurals>
     <string name="zen_mode_summary_alarams_only_indefinite" msgid="7941708969866496605">"שנה ל\'רק התראות\' ללא הגבלה"</string>
     <plurals name="zen_mode_summary_alarms_only_by_minute" formatted="false" msgid="6122003583875424601">
       <item quantity="two">שנה ל‘רק התראות‘ למשך <xliff:g id="DURATION">%1$d</xliff:g> דקות (עד <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
@@ -2664,21 +2614,7 @@
       <item quantity="other">שנה ל‘רק התראות‘ למשך <xliff:g id="DURATION">%1$d</xliff:g> שעות, עד <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
       <item quantity="one">שנה ל‘רק התראות‘ למשך שעה אחת, עד <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g></item>
     </plurals>
-    <string name="zen_mode_summary_no_interruptions_indefinite" msgid="7668951387253438521">"שנה ל\'ללא הפרעות\' ללא הגבלה"</string>
-    <plurals name="zen_mode_summary_no_interruptions_by_minute" formatted="false" msgid="5642379561004767217">
-      <item quantity="two">שנה ל‘אל תתיר הפרעות‘ למשך <xliff:g id="DURATION">%1$d</xliff:g> דקות (עד <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
-      <item quantity="many">שנה ל‘אל תתיר הפרעות‘ למשך <xliff:g id="DURATION">%1$d</xliff:g> דקות (עד <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
-      <item quantity="other">שנה ל‘אל תתיר הפרעות‘ למשך <xliff:g id="DURATION">%1$d</xliff:g> דקות (עד <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
-      <item quantity="one">שנה ל‘אל תתיר הפרעות‘ למשך דקה אחת, עד <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g></item>
-    </plurals>
-    <plurals name="zen_mode_summary_no_interruptions_by_hour" formatted="false" msgid="9059043643566528697">
-      <item quantity="two">שנה ל‘אל תתיר הפרעות‘ למשך <xliff:g id="DURATION">%1$d</xliff:g> שעות, עד <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-      <item quantity="many">שנה ל‘אל תתיר הפרעות‘ למשך <xliff:g id="DURATION">%1$d</xliff:g> שעות, עד <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-      <item quantity="other">שנה ל‘אל תתיר הפרעות‘ למשך <xliff:g id="DURATION">%1$d</xliff:g> שעות, עד <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-      <item quantity="one">שנה ל‘אל תתיר הפרעות‘ למשך שעה אחת, עד <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g></item>
-    </plurals>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"שנה ל\'הפרעות בכל מצב\'"</string>
-    <string name="zen_mode_duration_indefinite_voice_synonyms" msgid="4213829562303429456">"ללא הפסקה"</string>
     <string name="notification_settings_apps_title" msgid="1125354590652967250">"הודעות אפליקציה"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"הגדרות התראה"</string>
     <string name="device_feedback" msgid="3238056036766293294">"שלח משוב על המכשיר הזה"</string>
@@ -2774,6 +2710,10 @@
     <string name="app_permissions" msgid="4148222031991883874">"הרשאות לאפליקציות"</string>
     <string name="app_permissions_summary" msgid="2098173899436407221">"<xliff:g id="COUNT_0">%d</xliff:g> מתוך <xliff:g id="COUNT_1">%d</xliff:g> אפליקציות קיבלו גישה נוספת"</string>
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"<xliff:g id="COUNT_0">%d</xliff:g> מתוך <xliff:g id="COUNT_1">%d</xliff:g> אפליקציות קיבלו הרשאה"</string>
+    <!-- no translation found for tap_to_wake (7211944147196888807) -->
+    <skip />
+    <!-- no translation found for tap_to_wake_summary (4341387904987585616) -->
+    <skip />
     <string name="domain_urls_title" msgid="8735310976048599572">"כתובות אתרים של דומיינים"</string>
     <string name="domain_urls_summary_none" msgid="4817723415916239693">"לא פותחת כתובות אתרים של דומיינים"</string>
     <string name="domain_urls_summary_one" msgid="4427559120855938432">"פותחת את \'<xliff:g id="DOMAIN">%s</xliff:g>\'"</string>
@@ -2806,7 +2746,17 @@
     <string name="memory_avg_desc" msgid="1551240906596518412">"<xliff:g id="MEMORY">%1$s</xliff:g> בממוצע"</string>
     <string name="memory_use_running_format" msgid="4172488041800743760">"<xliff:g id="MEMORY">%1$s</xliff:g> / <xliff:g id="RUNNING">%2$s</xliff:g>"</string>
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
-    <string name="high_power_on" msgid="4925948784500291865">"פועל"</string>
+    <string name="high_power_apps" msgid="2116416853043103135">"מתעלמות מאופטימיזציות"</string>
+    <string name="high_power_filter_on" msgid="3862942127137594196">"מורשות"</string>
+    <!-- no translation found for high_power_on (148473814103292724) -->
+    <skip />
     <string name="high_power_off" msgid="4069404908196636677">"כבוי"</string>
+    <!-- no translation found for high_power_desc (8777632785903235764) -->
+    <skip />
+    <!-- no translation found for high_power_count (4343190376439806186) -->
+    <string name="battery_summary" msgid="101415762036784289">"שימוש ב-<xliff:g id="PERCENTAGE">%1$d</xliff:g>%% מאז הטעינה המלאה האחרונה"</string>
+    <string name="no_battery_summary" msgid="3528036835462846814">"לא נעשה שימוש בסוללה מאז הטעינה המלאה האחרונה"</string>
     <string name="app_notification_preferences" msgid="6413363601485067724">"העדפות להודעות של אפליקציות"</string>
+    <!-- no translation found for system_ui_settings (579824306467081123) -->
+    <skip />
 </resources>

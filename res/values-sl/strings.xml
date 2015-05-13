@@ -173,10 +173,8 @@
     <string name="bluetooth_pb_remember_choice" msgid="3622898084442402071">"Ne vprašaj me več"</string>
     <string name="bluetooth_map_request" msgid="4595727689513143902">"Zahteva za dostop do sporočil"</string>
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s želi dostopati do vaših sporočil. Želite omogočiti dostop za %2$s?"</string>
-    <!-- no translation found for bluetooth_sap_request (2669762224045354417) -->
-    <skip />
-    <!-- no translation found for bluetooth_sap_acceptance_dialog_text (4414253873553608690) -->
-    <skip />
+    <string name="bluetooth_sap_request" msgid="2669762224045354417">"Zahteva za dostop do kartice SIM"</string>
+    <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> želi dostopati do vaše kartice SIM. Z omogočanjem dostopa do kartice SIM bodo v napravi za čas trajanja povezave onemogočene podatkovne povezave. Omogočite dostop za <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Datum in čas"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"Izberite časovni pas"</string>
     <string name="display_preview_label" msgid="1127597250917274792">"Predogled:"</string>
@@ -1526,8 +1524,7 @@
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Odločen prehod iz Wi-Fi-ja v mobil. omr."</string>
     <string name="wifi_allow_scan_with_traffic" msgid="3601853081178265786">"Vedno omogoči iskanje omrežij Wi-Fi za gostovanje"</string>
     <string name="legacy_dhcp_client" msgid="694426978909127287">"Uporaba starejšega odjemalca DHCP"</string>
-    <!-- no translation found for mobile_data_always_on (7745605759775320362) -->
-    <skip />
+    <string name="mobile_data_always_on" msgid="7745605759775320362">"Prenos podatkov v mobilnih omrežjih je vedno aktiven"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"Pokaži možnosti za potrdilo brezžičnega zaslona"</string>
     <string name="wifi_verbose_logging_summary" msgid="6615071616111731958">"Povečaj raven zapis. dnev. za Wi-Fi; v izbir. Wi‑Fi-ja pokaži glede na SSID RSSI"</string>
     <string name="wifi_aggressive_handover_summary" msgid="6328455667642570371">"Če je ta možnost omogočena, Wi-Fi odločneje preda podatkovno povezavo mobilnemu omrežju, ko je signal Wi-Fi šibek"</string>
@@ -1540,8 +1537,7 @@
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Dovoli lažne lokacije"</string>
     <string name="debug_view_attributes" msgid="6485448367803310384">"Omogoči pregled atributa pogleda"</string>
     <string name="legacy_dhcp_client_summary" msgid="163383566317652040">"Uporaba odjemalca DHCP za Lollipop namesto novega odjemalca DHCP za Android."</string>
-    <!-- no translation found for mobile_data_always_on_summary (8149773901431697910) -->
-    <skip />
+    <string name="mobile_data_always_on_summary" msgid="8149773901431697910">"Prenos podatkov v mobilnih omrežjih je vedno aktiven – tudi ko je aktivna povezava Wi-Fi (za hiter preklop med omrežji)."</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"Ali dovolite odpravljanje težav s povezavo USB?"</string>
     <string name="adb_warning_message" msgid="7316799925425402244">"Odpravljanje težav s povezavo USB je namenjeno samo za razvoj. Lahko ga uporabljate za kopiranje podatkov med računalnikom in napravo, nameščanje aplikacij v napravo brez obveščanja in branje podatkov v dnevniku."</string>
     <string name="adb_keys_warning_message" msgid="5659849457135841625">"Ali želite preklicati dostop do odpravljanja težav prek povezave USB iz vseh računalnikov, ki ste jih pooblastili?"</string>
@@ -2483,6 +2479,8 @@
     <string name="keywords_all_apps" msgid="5377153522551809915">"aplikacije prenos sistem"</string>
     <string name="keywords_app_permissions" msgid="8677901415217188314">"varnost dovoljenj za aplikacije"</string>
     <string name="keywords_default_apps" msgid="3581727483175522599">"aplikacije privzeto"</string>
+    <!-- no translation found for keywords_ignore_optimizations (946516741848647905) -->
+    <skip />
     <string name="keywords_lockscreen" msgid="4806191868723291541">"podrsanje geslo vzorec pin"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Nastavitev brezžič. oznake NFC"</string>
     <string name="write_tag" msgid="8571858602896222537">"Zapiši"</string>
@@ -2507,8 +2505,7 @@
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Privzeti ton zvonjenja za obvestila"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Vibriranje tudi za klice"</string>
     <string name="notification_section_header" msgid="95661783916799134">"Obvestilo"</string>
-    <!-- no translation found for advanced_section_header (8833934850242546903) -->
-    <skip />
+    <string name="advanced_section_header" msgid="8833934850242546903">"Dodatno"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"Lučka za obvestila z utripanjem"</string>
     <string name="lock_screen_notifications_title" msgid="9118805570775519455">"Ko je naprava zaklenjena"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Pokaži vso vsebino obvestil"</string>
@@ -2540,10 +2537,8 @@
     <string name="no_notification_listeners" msgid="2767405417723149879">"Ni nameščenih poslušalcev obvestil."</string>
     <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"Želite omogočiti <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"Poslušalec <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> bo lahko bral vsa obvestila, ki jih objavi sistem ali katera koli nameščena aplikacija, kar lahko vključuje osebne podatke, kot so imena stikov in besedilo sporočil, poslanih vam. Lahko bo tudi opustil ta obvestila ali se dotikal interaktivnih gumbov v njih."</string>
-    <!-- no translation found for manage_zen_access_title (2611116122628520522) -->
-    <skip />
-    <!-- no translation found for zen_access_empty_text (8772967285742259540) -->
-    <skip />
+    <string name="manage_zen_access_title" msgid="2611116122628520522">"Dostop do načina »ne moti«"</string>
+    <string name="zen_access_empty_text" msgid="8772967285742259540">"Nobena nameščena aplikacija ni zahtevala dostopa do načina »ne moti«"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Nalaganje aplikacij ..."</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"Blokiraj vse"</string>
     <string name="app_notification_block_summary" msgid="9049487483231233726">"Nikoli ne pokaži obvestil za to aplikacijo"</string>
@@ -2570,22 +2565,14 @@
     <string name="zen_schedule_rule_enabled_toast" msgid="3379499360390382259">"Samodejno pravilo nastavljeno tako, da se v določenem obdobju vklopi stanje »Ne moti«"</string>
     <string name="zen_event_rule_type_name" msgid="2645981990973086797">"Pravilo za dogodek"</string>
     <string name="zen_event_rule_enabled_toast" msgid="6910577623330811480">"Samodejno pravilo nastavljeno tako, da se med določenimi dogodki vklopi stanje »Ne moti«"</string>
-    <!-- no translation found for zen_mode_event_rule_calendar (8787906563769067418) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_summary_calendar_template (5135844750232403975) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_summary_any_calendar (4936646399126636358) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_summary_reply_template (6590671260829837157) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_calendar_any (6485568415998569885) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_reply (5166322024212403739) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_reply_any_except_no (8868873496008825961) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_reply_yes_or_maybe (2769656565454495824) -->
-    <skip />
+    <string name="zen_mode_event_rule_calendar" msgid="8787906563769067418">"Med dogodki za"</string>
+    <string name="zen_mode_event_rule_summary_calendar_template" msgid="5135844750232403975">"Med dogodki za <xliff:g id="CALENDAR">%1$s</xliff:g>"</string>
+    <string name="zen_mode_event_rule_summary_any_calendar" msgid="4936646399126636358">"kateri koli koledar"</string>
+    <string name="zen_mode_event_rule_summary_reply_template" msgid="6590671260829837157">"Kjer je odgovor <xliff:g id="REPLY">%1$s</xliff:g>"</string>
+    <string name="zen_mode_event_rule_calendar_any" msgid="6485568415998569885">"Kateri koli koledar"</string>
+    <string name="zen_mode_event_rule_reply" msgid="5166322024212403739">"Kjer je odgovor"</string>
+    <string name="zen_mode_event_rule_reply_any_except_no" msgid="8868873496008825961">"Da, Mogoče ali Neodgovorjeno"</string>
+    <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="2769656565454495824">"Da ali Mogoče"</string>
     <string name="zen_mode_event_rule_reply_yes" msgid="1003598835878784659">"Da"</string>
     <string name="zen_mode_rule_not_found_text" msgid="8963662446092059836">"Pravila ni mogoče najti."</string>
     <string name="zen_mode_rule_summary_combination" msgid="2526506268333198254">"<xliff:g id="DESCRIPTION">%1$s</xliff:g>/<xliff:g id="MODE">%2$s</xliff:g>"</string>
@@ -2597,14 +2584,10 @@
     <string name="summary_range_verbal_combination" msgid="8467306662961568656">"Od <xliff:g id="START">%1$s</xliff:g> do <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="zen_mode_calls" msgid="7051492091133751208">"Klici"</string>
     <string name="zen_mode_messages" msgid="5886440273537510894">"Sporočila"</string>
-    <!-- no translation found for zen_mode_from_anyone (2638322015361252161) -->
-    <skip />
-    <!-- no translation found for zen_mode_from_contacts (2232335406106711637) -->
-    <skip />
-    <!-- no translation found for zen_mode_from_starred (2678345811950997027) -->
-    <skip />
-    <!-- no translation found for zen_mode_from_none (8219706639954614136) -->
-    <skip />
+    <string name="zen_mode_from_anyone" msgid="2638322015361252161">"Od kogar koli"</string>
+    <string name="zen_mode_from_contacts" msgid="2232335406106711637">"Samo od stikov"</string>
+    <string name="zen_mode_from_starred" msgid="2678345811950997027">"Samo od stikov, označenih z zvezdico"</string>
+    <string name="zen_mode_from_none" msgid="8219706639954614136">"Brez"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Alarmi"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Opomniki"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Dogodki"</string>
@@ -2618,44 +2601,6 @@
     <string name="zen_mode_start_time" msgid="8102602297273744441">"Ura začetka"</string>
     <string name="zen_mode_end_time" msgid="8774327885892705505">"Ura konca"</string>
     <string name="zen_mode_end_time_next_day_summary_format" msgid="4201521691238728701">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> naslednji dan"</string>
-    <string name="zen_mode_interruptions_voice_title" msgid="855256211259132964">"Prekinitve"</string>
-    <string name="zen_mode_interruptions_voice_header" msgid="2888750427673157270">"Ob prejemu klicev in obvestil"</string>
-    <string name="zen_mode_interruptions_voice_prompt" msgid="3041817362475695079">"Kdaj želite, da se vas zmoti?"</string>
-    <string name="zen_mode_duration_voice_prompt" msgid="7381920739389625133">"Za koliko časa?"</string>
-    <string name="zen_mode_option_voice_all_interruptions" msgid="9222054216334506341">"Vedno prekini"</string>
-    <string name="zen_mode_option_voice_all_interruptions_synonyms" msgid="475880955609403705">"izklopljeno,vse"</string>
-    <string name="zen_mode_option_voice_important_interruptions" msgid="3695277268139705627">"Dovoli samo prednostne prekinitve"</string>
-    <string name="zen_mode_option_voice_important_synonyms" msgid="2727831854148694795">"pomembno,prednostno,samo prednostno,prednostna obvestila"</string>
-    <string name="zen_mode_option_voice_alarms" msgid="5961982397880688359">"Dovoli samo alarme"</string>
-    <string name="zen_mode_option_voice_alarms_synonyms" msgid="4049356986371569950">"alarmi,samo alarmi"</string>
-    <string name="zen_mode_option_voice_no_interruptions" msgid="3009964973912018317">"Ne prekinjaj"</string>
-    <string name="zen_mode_option_voice_no_interruptions_synonyms" msgid="8368549512275129844">"brez,nikoli,nič,brez prekinitev"</string>
-    <string name="zen_mode_duration_indefinte_voice_label" msgid="9026001994945950539">"Za nedoločen čas"</string>
-    <plurals name="zen_mode_duration_minutes_voice_label" formatted="false" msgid="4750982084453980">
-      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> minuta</item>
-      <item quantity="two"><xliff:g id="COUNT_1">%d</xliff:g> minuti</item>
-      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> minute</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> minut</item>
-    </plurals>
-    <plurals name="zen_mode_duration_hours_voice_label" formatted="false" msgid="175180249071227957">
-      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> ura</item>
-      <item quantity="two"><xliff:g id="COUNT_1">%d</xliff:g> uri</item>
-      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> ure</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ur</item>
-    </plurals>
-    <string name="zen_mode_summary_priority_indefinitely" msgid="5417246022606171241">"Sprememba na samo prednostna obvestila za nedoločen čas"</string>
-    <plurals name="zen_mode_summary_priority_by_minute" formatted="false" msgid="1938955186728929112">
-      <item quantity="one">Sprememba na samo prednostna obvestila za <xliff:g id="DURATION">%1$d</xliff:g> minuto do <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-      <item quantity="two">Sprememba na samo prednostna obvestila za <xliff:g id="DURATION">%1$d</xliff:g> minuti do <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-      <item quantity="few">Sprememba na samo prednostna obvestila za <xliff:g id="DURATION">%1$d</xliff:g> minute do <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-      <item quantity="other">Sprememba na samo prednostna obvestila za <xliff:g id="DURATION">%1$d</xliff:g> minut do <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-    </plurals>
-    <plurals name="zen_mode_summary_priority_by_hour" formatted="false" msgid="6664710096150897823">
-      <item quantity="one">Sprememba na samo prednostna obvestila za <xliff:g id="DURATION">%1$d</xliff:g> uro (do <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
-      <item quantity="two">Sprememba na samo prednostna obvestila za <xliff:g id="DURATION">%1$d</xliff:g> uri (do <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
-      <item quantity="few">Sprememba na samo prednostna obvestila za <xliff:g id="DURATION">%1$d</xliff:g> ure (do <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
-      <item quantity="other">Sprememba na samo prednostna obvestila za <xliff:g id="DURATION">%1$d</xliff:g> ur (do <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
-    </plurals>
     <string name="zen_mode_summary_alarams_only_indefinite" msgid="7941708969866496605">"Sprememba na samo alarme za nedoločen čas"</string>
     <plurals name="zen_mode_summary_alarms_only_by_minute" formatted="false" msgid="6122003583875424601">
       <item quantity="one">Sprememba na samo alarme za <xliff:g id="DURATION">%1$d</xliff:g> minuto (do <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
@@ -2669,21 +2614,7 @@
       <item quantity="few">Sprememba na samo alarme za <xliff:g id="DURATION">%1$d</xliff:g> ure do <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
       <item quantity="other">Sprememba na samo alarme za <xliff:g id="DURATION">%1$d</xliff:g> ur do <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
     </plurals>
-    <string name="zen_mode_summary_no_interruptions_indefinite" msgid="7668951387253438521">"Sprememba na nastavitev ne prekinjaj za nedoločen čas"</string>
-    <plurals name="zen_mode_summary_no_interruptions_by_minute" formatted="false" msgid="5642379561004767217">
-      <item quantity="one">Sprememba na nastavitev ne prekinjaj za <xliff:g id="DURATION">%1$d</xliff:g> minuto (do <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
-      <item quantity="two">Sprememba na nastavitev ne prekinjaj za <xliff:g id="DURATION">%1$d</xliff:g> minuti (do <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
-      <item quantity="few">Sprememba na nastavitev ne prekinjaj za <xliff:g id="DURATION">%1$d</xliff:g> minute (do <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
-      <item quantity="other">Sprememba na nastavitev ne prekinjaj za <xliff:g id="DURATION">%1$d</xliff:g> minut (do <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
-    </plurals>
-    <plurals name="zen_mode_summary_no_interruptions_by_hour" formatted="false" msgid="9059043643566528697">
-      <item quantity="one">Sprememba na nastavitev ne prekinjaj za <xliff:g id="DURATION">%1$d</xliff:g> uro do <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-      <item quantity="two">Sprememba na nastavitev ne prekinjaj za <xliff:g id="DURATION">%1$d</xliff:g> uri do <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-      <item quantity="few">Sprememba na nastavitev ne prekinjaj za <xliff:g id="DURATION">%1$d</xliff:g> ure do <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-      <item quantity="other">Sprememba na nastavitev ne prekinjaj za <xliff:g id="DURATION">%1$d</xliff:g> ur do <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-    </plurals>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"Sprememba na vedno prekini"</string>
-    <string name="zen_mode_duration_indefinite_voice_synonyms" msgid="4213829562303429456">"za vedno"</string>
     <string name="notification_settings_apps_title" msgid="1125354590652967250">"Obvestila aplikacij"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Nastavitve obvestil"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Pošlji povratne info. o tej napravi"</string>
@@ -2779,6 +2710,10 @@
     <string name="app_permissions" msgid="4148222031991883874">"Dovoljenja za aplikacije"</string>
     <string name="app_permissions_summary" msgid="2098173899436407221">"Dod. dostop dovoljen toliko aplikacijam: <xliff:g id="COUNT_0">%d</xliff:g> od <xliff:g id="COUNT_1">%d</xliff:g>"</string>
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"Dovoljenih je toliko aplikacij: <xliff:g id="COUNT_0">%d</xliff:g> od <xliff:g id="COUNT_1">%d</xliff:g>"</string>
+    <!-- no translation found for tap_to_wake (7211944147196888807) -->
+    <skip />
+    <!-- no translation found for tap_to_wake_summary (4341387904987585616) -->
+    <skip />
     <string name="domain_urls_title" msgid="8735310976048599572">"URL-ji domene"</string>
     <string name="domain_urls_summary_none" msgid="4817723415916239693">"Ne odpre URL-jev domene"</string>
     <string name="domain_urls_summary_one" msgid="4427559120855938432">"Odpre domeno »<xliff:g id="DOMAIN">%s</xliff:g>«"</string>
@@ -2811,8 +2746,17 @@
     <string name="memory_avg_desc" msgid="1551240906596518412">"Povprečno <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
     <string name="memory_use_running_format" msgid="4172488041800743760">"<xliff:g id="MEMORY">%1$s</xliff:g>/<xliff:g id="RUNNING">%2$s</xliff:g>"</string>
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
-    <string name="high_power_on" msgid="4925948784500291865">"Vklopljeno"</string>
+    <string name="high_power_apps" msgid="2116416853043103135">"Prezrtje optimizacij"</string>
+    <string name="high_power_filter_on" msgid="3862942127137594196">"Dovoljeno"</string>
+    <!-- no translation found for high_power_on (148473814103292724) -->
+    <skip />
     <string name="high_power_off" msgid="4069404908196636677">"Izklopljeno"</string>
-    <!-- no translation found for app_notification_preferences (6413363601485067724) -->
+    <!-- no translation found for high_power_desc (8777632785903235764) -->
+    <skip />
+    <!-- no translation found for high_power_count (4343190376439806186) -->
+    <string name="battery_summary" msgid="101415762036784289">"<xliff:g id="PERCENTAGE">%1$d</xliff:g> %% uporabe od zadnje polne napolnjenosti"</string>
+    <string name="no_battery_summary" msgid="3528036835462846814">"Akumulator ni bil uporabljen od zadnje polne napolnjenosti"</string>
+    <string name="app_notification_preferences" msgid="6413363601485067724">"Nastavitve obvestil aplikacij"</string>
+    <!-- no translation found for system_ui_settings (579824306467081123) -->
     <skip />
 </resources>

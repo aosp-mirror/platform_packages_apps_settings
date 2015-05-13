@@ -172,10 +172,8 @@
     <string name="bluetooth_pb_remember_choice" msgid="3622898084442402071">"Nu doresc să fiu întrebat(ă) din nou"</string>
     <string name="bluetooth_map_request" msgid="4595727689513143902">"Solicitarea accesului la mesaje"</string>
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s dorește să acceseze mesajele dvs. Oferiți acces pentru %2$s?"</string>
-    <!-- no translation found for bluetooth_sap_request (2669762224045354417) -->
-    <skip />
-    <!-- no translation found for bluetooth_sap_acceptance_dialog_text (4414253873553608690) -->
-    <skip />
+    <string name="bluetooth_sap_request" msgid="2669762224045354417">"Solicitare de acces la SIM"</string>
+    <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> dorește să acceseze cardul SIM. Dacă acordați accesul la cardul SIM, conexiunea de date de pe dispozitiv va fi dezactivată pe durata conectării. Acordați accesul pentru <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Data și ora"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"Selectaţi fusul orar"</string>
     <string name="display_preview_label" msgid="1127597250917274792">"Previzualizaţi:"</string>
@@ -1518,8 +1516,7 @@
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Înlocuire Wi-Fi cu mobil agresivă"</string>
     <string name="wifi_allow_scan_with_traffic" msgid="3601853081178265786">"Se permite întotdeauna scanarea traficului Wi-Fi"</string>
     <string name="legacy_dhcp_client" msgid="694426978909127287">"Folosiți vechiul client DHCP"</string>
-    <!-- no translation found for mobile_data_always_on (7745605759775320362) -->
-    <skip />
+    <string name="mobile_data_always_on" msgid="7745605759775320362">"Conexiunea de date mobile este întotdeauna activată"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"Afișați opțiunile pentru certificarea Ecran wireless"</string>
     <string name="wifi_verbose_logging_summary" msgid="6615071616111731958">"Măriți niv. de înr. prin Wi‑Fi, afișați în fcț. de SSID RSSI în Selectorul Wi‑Fi"</string>
     <string name="wifi_aggressive_handover_summary" msgid="6328455667642570371">"Când este activată, funcția Wi-Fi va fi mai agresivă la predarea conexiunii de date către mobil când semnalul Wi-Fi este slab"</string>
@@ -1532,8 +1529,7 @@
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Permiteţi locaţiile fictive"</string>
     <string name="debug_view_attributes" msgid="6485448367803310384">"Activați inspectarea atributelor de vizualizare"</string>
     <string name="legacy_dhcp_client_summary" msgid="163383566317652040">"Folosiți clientul DHCP din Lollipop în locul noului client Android DHCP."</string>
-    <!-- no translation found for mobile_data_always_on_summary (8149773901431697910) -->
-    <skip />
+    <string name="mobile_data_always_on_summary" msgid="8149773901431697910">"Păstrați întotdeauna conexiunea de date mobile activată, chiar și atunci când funcția Wi‑Fi este activată (pentru comutarea rapidă între rețele)."</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"Permiteţi depanarea USB?"</string>
     <string name="adb_warning_message" msgid="7316799925425402244">"Depanarea USB are exclusiv scopuri de dezvoltare. Utilizaţi-o pentru a copia date de pe computer pe dispozitiv, pentru a instala aplicații pe dispozitiv fără notificare și pentru a citi datele din jurnale."</string>
     <string name="adb_keys_warning_message" msgid="5659849457135841625">"Revocați accesul la remedierea erorilor prin USB de pe toate computerele pe care le-ați autorizat anterior?"</string>
@@ -2475,6 +2471,8 @@
     <string name="keywords_all_apps" msgid="5377153522551809915">"aplicații descărcați sistem"</string>
     <string name="keywords_app_permissions" msgid="8677901415217188314">"aplicații permisiuni securitate"</string>
     <string name="keywords_default_apps" msgid="3581727483175522599">"aplicații prestabilite"</string>
+    <!-- no translation found for keywords_ignore_optimizations (946516741848647905) -->
+    <skip />
     <string name="keywords_lockscreen" msgid="4806191868723291541">"glisare parolă model PIN"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Configurarea etichetei NFC pentru Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Scrieți"</string>
@@ -2499,8 +2497,7 @@
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Ton de sonerie implicit pentru notificări"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Vibrații și pentru apeluri"</string>
     <string name="notification_section_header" msgid="95661783916799134">"Notificare"</string>
-    <!-- no translation found for advanced_section_header (8833934850242546903) -->
-    <skip />
+    <string name="advanced_section_header" msgid="8833934850242546903">"Avansate"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"Indicator luminos intermitent"</string>
     <string name="lock_screen_notifications_title" msgid="9118805570775519455">"Când dispozitivul este blocat"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Afișați integral conținutul notificărilor"</string>
@@ -2531,10 +2528,8 @@
     <string name="no_notification_listeners" msgid="2767405417723149879">"Nu sunt instalate aplicații de citire a notificărilor."</string>
     <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"Activați <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> va putea să citească toate notificările postate de sistem sau de aplicațiile instalate, care ar putea include informații personale, cum ar fi numele persoanelor de contact și textul mesajelor care vă sunt trimise. De asemenea, va putea să închidă aceste notificări sau să atingă butoanele de acțiuni din cadrul acestora."</string>
-    <!-- no translation found for manage_zen_access_title (2611116122628520522) -->
-    <skip />
-    <!-- no translation found for zen_access_empty_text (8772967285742259540) -->
-    <skip />
+    <string name="manage_zen_access_title" msgid="2611116122628520522">"Accesul Nu deranja"</string>
+    <string name="zen_access_empty_text" msgid="8772967285742259540">"Nicio aplicație instalată nu a solicitat accesul Nu deranja"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Se încarcă aplicațiile..."</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"Blocați-le pe toate"</string>
     <string name="app_notification_block_summary" msgid="9049487483231233726">"Nu afișați notificări de la această aplicație"</string>
@@ -2561,22 +2556,14 @@
     <string name="zen_schedule_rule_enabled_toast" msgid="3379499360390382259">"Regulă automată setată pentru a activa modul „Nu deranja” în anumite perioade"</string>
     <string name="zen_event_rule_type_name" msgid="2645981990973086797">"Regula pentru eveniment"</string>
     <string name="zen_event_rule_enabled_toast" msgid="6910577623330811480">"Regulă automată setată pentru a activa modul „Nu deranja” în timpul evenimentelor specificate"</string>
-    <!-- no translation found for zen_mode_event_rule_calendar (8787906563769067418) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_summary_calendar_template (5135844750232403975) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_summary_any_calendar (4936646399126636358) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_summary_reply_template (6590671260829837157) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_calendar_any (6485568415998569885) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_reply (5166322024212403739) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_reply_any_except_no (8868873496008825961) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_reply_yes_or_maybe (2769656565454495824) -->
-    <skip />
+    <string name="zen_mode_event_rule_calendar" msgid="8787906563769067418">"În timpul evenimentelor pentru"</string>
+    <string name="zen_mode_event_rule_summary_calendar_template" msgid="5135844750232403975">"În timpul evenimentelor pentru <xliff:g id="CALENDAR">%1$s</xliff:g>"</string>
+    <string name="zen_mode_event_rule_summary_any_calendar" msgid="4936646399126636358">"orice calendar"</string>
+    <string name="zen_mode_event_rule_summary_reply_template" msgid="6590671260829837157">"Când răspunsul este <xliff:g id="REPLY">%1$s</xliff:g>"</string>
+    <string name="zen_mode_event_rule_calendar_any" msgid="6485568415998569885">"Orice calendar"</string>
+    <string name="zen_mode_event_rule_reply" msgid="5166322024212403739">"Când răspunsul este"</string>
+    <string name="zen_mode_event_rule_reply_any_except_no" msgid="8868873496008825961">"Da, Poate sau Niciun răspuns"</string>
+    <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="2769656565454495824">"Da sau Poate"</string>
     <string name="zen_mode_event_rule_reply_yes" msgid="1003598835878784659">"Da"</string>
     <string name="zen_mode_rule_not_found_text" msgid="8963662446092059836">"Regula nu a fost găsită."</string>
     <string name="zen_mode_rule_summary_combination" msgid="2526506268333198254">"<xliff:g id="DESCRIPTION">%1$s</xliff:g>/<xliff:g id="MODE">%2$s</xliff:g>"</string>
@@ -2588,14 +2575,10 @@
     <string name="summary_range_verbal_combination" msgid="8467306662961568656">"Între <xliff:g id="START">%1$s</xliff:g> și <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="zen_mode_calls" msgid="7051492091133751208">"Apeluri"</string>
     <string name="zen_mode_messages" msgid="5886440273537510894">"Mesaje"</string>
-    <!-- no translation found for zen_mode_from_anyone (2638322015361252161) -->
-    <skip />
-    <!-- no translation found for zen_mode_from_contacts (2232335406106711637) -->
-    <skip />
-    <!-- no translation found for zen_mode_from_starred (2678345811950997027) -->
-    <skip />
-    <!-- no translation found for zen_mode_from_none (8219706639954614136) -->
-    <skip />
+    <string name="zen_mode_from_anyone" msgid="2638322015361252161">"De la oricine"</string>
+    <string name="zen_mode_from_contacts" msgid="2232335406106711637">"Doar de la persoanele de contact"</string>
+    <string name="zen_mode_from_starred" msgid="2678345811950997027">"Doar de la persoanele de contact cu stea"</string>
+    <string name="zen_mode_from_none" msgid="8219706639954614136">"Niciunul"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Alarme"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Mementouri"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Evenimente"</string>
@@ -2609,40 +2592,6 @@
     <string name="zen_mode_start_time" msgid="8102602297273744441">"Ora de începere"</string>
     <string name="zen_mode_end_time" msgid="8774327885892705505">"Ora de încheiere"</string>
     <string name="zen_mode_end_time_next_day_summary_format" msgid="4201521691238728701">"La <xliff:g id="FORMATTED_TIME">%s</xliff:g> a doua zi"</string>
-    <string name="zen_mode_interruptions_voice_title" msgid="855256211259132964">"Întreruperi"</string>
-    <string name="zen_mode_interruptions_voice_header" msgid="2888750427673157270">"La primirea apelurilor și a notificărilor"</string>
-    <string name="zen_mode_interruptions_voice_prompt" msgid="3041817362475695079">"Când doriți să fiți întrerupt(ă)?"</string>
-    <string name="zen_mode_duration_voice_prompt" msgid="7381920739389625133">"Pentru cât timp?"</string>
-    <string name="zen_mode_option_voice_all_interruptions" msgid="9222054216334506341">"Întrerupe întotdeauna"</string>
-    <string name="zen_mode_option_voice_all_interruptions_synonyms" msgid="475880955609403705">"dezactivate,toate,totul"</string>
-    <string name="zen_mode_option_voice_important_interruptions" msgid="3695277268139705627">"Permiteți numai întreruperi cu prioritate"</string>
-    <string name="zen_mode_option_voice_important_synonyms" msgid="2727831854148694795">"importante,cu prioritate,numai cu prioritate,doar cu prioritate,notificări cu prioritate"</string>
-    <string name="zen_mode_option_voice_alarms" msgid="5961982397880688359">"Permiteți numai alarmele"</string>
-    <string name="zen_mode_option_voice_alarms_synonyms" msgid="4049356986371569950">"alarme,numai alarme,doar alarme"</string>
-    <string name="zen_mode_option_voice_no_interruptions" msgid="3009964973912018317">"Nu întrerupe"</string>
-    <string name="zen_mode_option_voice_no_interruptions_synonyms" msgid="8368549512275129844">"niciuna,niciodată,nimic,nicio întrerupere"</string>
-    <string name="zen_mode_duration_indefinte_voice_label" msgid="9026001994945950539">"Nedefinită"</string>
-    <plurals name="zen_mode_duration_minutes_voice_label" formatted="false" msgid="4750982084453980">
-      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> minute</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> de minute</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> minut</item>
-    </plurals>
-    <plurals name="zen_mode_duration_hours_voice_label" formatted="false" msgid="175180249071227957">
-      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> ore</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> de ore</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> oră</item>
-    </plurals>
-    <string name="zen_mode_summary_priority_indefinitely" msgid="5417246022606171241">"Schimbați la „Numai notificări cu prioritate” pe o perioadă nedefinită"</string>
-    <plurals name="zen_mode_summary_priority_by_minute" formatted="false" msgid="1938955186728929112">
-      <item quantity="few">Schimbați la „Numai notificări cu prioritate” pentru <xliff:g id="DURATION">%1$d</xliff:g> minute, până la <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-      <item quantity="other">Schimbați la „Numai notificări cu prioritate” pentru <xliff:g id="DURATION">%1$d</xliff:g> de minute, până la <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-      <item quantity="one">Schimbați la „Numai notificări cu prioritate” pentru un minut, până la <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g></item>
-    </plurals>
-    <plurals name="zen_mode_summary_priority_by_hour" formatted="false" msgid="6664710096150897823">
-      <item quantity="few">Schimbați la „Numai notificări cu prioritate” pentru <xliff:g id="DURATION">%1$d</xliff:g> ore (până la <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
-      <item quantity="other">Schimbați la „Numai notificări cu prioritate” pentru <xliff:g id="DURATION">%1$d</xliff:g> de ore (până la <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
-      <item quantity="one">Schimbați la „Numai notificări cu prioritate” pentru o oră, până la <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g></item>
-    </plurals>
     <string name="zen_mode_summary_alarams_only_indefinite" msgid="7941708969866496605">"Schimbați la „Numai alarme” pe o perioadă nedefinită"</string>
     <plurals name="zen_mode_summary_alarms_only_by_minute" formatted="false" msgid="6122003583875424601">
       <item quantity="few">Schimbați la „Numai alarme” pentru <xliff:g id="DURATION">%1$d</xliff:g> minute (până la <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
@@ -2654,19 +2603,7 @@
       <item quantity="other">Schimbați la „Numai alarme” pentru <xliff:g id="DURATION">%1$d</xliff:g> de ore, până la <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
       <item quantity="one">Schimbați la „Numai alarme” pentru o oră, până la <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g></item>
     </plurals>
-    <string name="zen_mode_summary_no_interruptions_indefinite" msgid="7668951387253438521">"Schimbați la „Nu întrerupe” pe o perioadă nedefinită"</string>
-    <plurals name="zen_mode_summary_no_interruptions_by_minute" formatted="false" msgid="5642379561004767217">
-      <item quantity="few">Schimbați la „Nu întrerupe” pentru <xliff:g id="DURATION">%1$d</xliff:g> minute (până la <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
-      <item quantity="other">Schimbați la „Nu întrerupe” pentru <xliff:g id="DURATION">%1$d</xliff:g> de minute (până la <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
-      <item quantity="one">Schimbați la „Nu întrerupe” pentru un minut, până la <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g></item>
-    </plurals>
-    <plurals name="zen_mode_summary_no_interruptions_by_hour" formatted="false" msgid="9059043643566528697">
-      <item quantity="few">Schimbați la „Nu întrerupe” pentru <xliff:g id="DURATION">%1$d</xliff:g> ore, până la <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-      <item quantity="other">Schimbați la „Nu întrerupe” pentru <xliff:g id="DURATION">%1$d</xliff:g> de ore, până la <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-      <item quantity="one">Schimbați la „Nu întrerupe” pentru o oră, până la <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g></item>
-    </plurals>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"Schimbați la „Întrerupe întotdeauna”"</string>
-    <string name="zen_mode_duration_indefinite_voice_synonyms" msgid="4213829562303429456">"întotdeauna"</string>
     <string name="notification_settings_apps_title" msgid="1125354590652967250">"Notificări aplicații"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Setări pentru notificări"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Trimiteți feedback despre dispoz."</string>
@@ -2760,6 +2697,10 @@
     <string name="app_permissions" msgid="4148222031991883874">"Permisiuni pentru aplicație"</string>
     <string name="app_permissions_summary" msgid="2098173899436407221">"<xliff:g id="COUNT_0">%d</xliff:g> din <xliff:g id="COUNT_1">%d</xliff:g> (de) aplicații cu acces suplimentar"</string>
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"<xliff:g id="COUNT_0">%d</xliff:g> din <xliff:g id="COUNT_1">%d</xliff:g> (de) aplicații au această permisiune"</string>
+    <!-- no translation found for tap_to_wake (7211944147196888807) -->
+    <skip />
+    <!-- no translation found for tap_to_wake_summary (4341387904987585616) -->
+    <skip />
     <string name="domain_urls_title" msgid="8735310976048599572">"Adrese URL de domeniu"</string>
     <string name="domain_urls_summary_none" msgid="4817723415916239693">"Nu deschide nicio adresă URL de domeniu"</string>
     <string name="domain_urls_summary_one" msgid="4427559120855938432">"Deschid „<xliff:g id="DOMAIN">%s</xliff:g>”"</string>
@@ -2791,8 +2732,17 @@
     <string name="memory_avg_desc" msgid="1551240906596518412">"Medie de <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
     <string name="memory_use_running_format" msgid="4172488041800743760">"<xliff:g id="MEMORY">%1$s</xliff:g>/<xliff:g id="RUNNING">%2$s</xliff:g>"</string>
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
-    <string name="high_power_on" msgid="4925948784500291865">"Activată"</string>
+    <string name="high_power_apps" msgid="2116416853043103135">"Ignoră optimizările"</string>
+    <string name="high_power_filter_on" msgid="3862942127137594196">"Au permisiunea"</string>
+    <!-- no translation found for high_power_on (148473814103292724) -->
+    <skip />
     <string name="high_power_off" msgid="4069404908196636677">"Dezactivată"</string>
-    <!-- no translation found for app_notification_preferences (6413363601485067724) -->
+    <!-- no translation found for high_power_desc (8777632785903235764) -->
+    <skip />
+    <!-- no translation found for high_power_count (4343190376439806186) -->
+    <string name="battery_summary" msgid="101415762036784289">"S-a folosit <xliff:g id="PERCENTAGE">%1$d</xliff:g>%% de la ultima încărcare completă"</string>
+    <string name="no_battery_summary" msgid="3528036835462846814">"Bateria nu a fost folosită de la ultima încărcare completă"</string>
+    <string name="app_notification_preferences" msgid="6413363601485067724">"Preferințele privind notificările aplicațiilor"</string>
+    <!-- no translation found for system_ui_settings (579824306467081123) -->
     <skip />
 </resources>

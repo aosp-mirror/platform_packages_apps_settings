@@ -171,10 +171,8 @@
     <string name="bluetooth_pb_remember_choice" msgid="3622898084442402071">"Niet meer vragen"</string>
     <string name="bluetooth_map_request" msgid="4595727689513143902">"Toegangsverzoek voor berichten"</string>
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s wil toegang tot uw berichten. Toegang geven aan %2$s?"</string>
-    <!-- no translation found for bluetooth_sap_request (2669762224045354417) -->
-    <skip />
-    <!-- no translation found for bluetooth_sap_acceptance_dialog_text (4414253873553608690) -->
-    <skip />
+    <string name="bluetooth_sap_request" msgid="2669762224045354417">"Toegangsverzoek voor simkaart"</string>
+    <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> wil toegang tot uw simkaart. Als u toegang tot de simkaart verleent, wordt de gegevensverbinding op uw apparaat uitgeschakeld voor de duur van de verbinding. Toegang verlenen aan <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Datum en tijd"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"Een tijdzone kiezen"</string>
     <string name="display_preview_label" msgid="1127597250917274792">"Voorbeeld:"</string>
@@ -1508,8 +1506,7 @@
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Agressieve handover van wifi naar mobiel"</string>
     <string name="wifi_allow_scan_with_traffic" msgid="3601853081178265786">"Altijd roamingscans voor wifi toestaan"</string>
     <string name="legacy_dhcp_client" msgid="694426978909127287">"Oude DHCP-client gebruiken"</string>
-    <!-- no translation found for mobile_data_always_on (7745605759775320362) -->
-    <skip />
+    <string name="mobile_data_always_on" msgid="7745605759775320362">"Mobiele gegevens altijd actief"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"Opties weergeven voor certificering van draadloze weergave"</string>
     <string name="wifi_verbose_logging_summary" msgid="6615071616111731958">"Logniveau voor wifi verhogen, weergeven per SSID RSSI in wifi-kiezer"</string>
     <string name="wifi_aggressive_handover_summary" msgid="6328455667642570371">"Indien ingeschakeld, is wifi agressiever bij het overgeven van de gegevensverbinding aan mobiel wanneer het wifi-signaal zwak is"</string>
@@ -1522,8 +1519,7 @@
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Neplocaties toestaan"</string>
     <string name="debug_view_attributes" msgid="6485448367803310384">"Inspectie van weergavekenmerk inschakelen"</string>
     <string name="legacy_dhcp_client_summary" msgid="163383566317652040">"De DHCP-client van Lollipop gebruiken in plaats van de nieuwe Android DHCP-client."</string>
-    <!-- no translation found for mobile_data_always_on_summary (8149773901431697910) -->
-    <skip />
+    <string name="mobile_data_always_on_summary" msgid="8149773901431697910">"Mobiele gegevens altijd actief houden, ook als wifi actief is (voor sneller schakelen tussen netwerken)."</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"USB-foutopsporing toestaan?"</string>
     <string name="adb_warning_message" msgid="7316799925425402244">"USB-foutopsporing is alleen bedoeld voor ontwikkeldoeleinden. Het kan worden gebruikt om gegevens te kopiëren tussen uw computer en uw apparaat, apps zonder melding op uw apparaat te installeren en loggegevens te lezen."</string>
     <string name="adb_keys_warning_message" msgid="5659849457135841625">"Toegang tot USB-foutopsporing intrekken voor alle computers waarvoor u dit eerder heeft toegestaan?"</string>
@@ -2465,6 +2461,8 @@
     <string name="keywords_all_apps" msgid="5377153522551809915">"apps downloaden applicaties systeem"</string>
     <string name="keywords_app_permissions" msgid="8677901415217188314">"apps rechten beveiliging"</string>
     <string name="keywords_default_apps" msgid="3581727483175522599">"standaard voor apps"</string>
+    <!-- no translation found for keywords_ignore_optimizations (946516741848647905) -->
+    <skip />
     <string name="keywords_lockscreen" msgid="4806191868723291541">"vegen wachtwoord patroon pincode"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Wifi NFC-tag instellen"</string>
     <string name="write_tag" msgid="8571858602896222537">"Schrijven"</string>
@@ -2489,8 +2487,7 @@
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Standaardbeltoon voor meldingen"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Ook trillen voor oproepen"</string>
     <string name="notification_section_header" msgid="95661783916799134">"Melding"</string>
-    <!-- no translation found for advanced_section_header (8833934850242546903) -->
-    <skip />
+    <string name="advanced_section_header" msgid="8833934850242546903">"Geavanceerd"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"Knipperen meldingslampje"</string>
     <string name="lock_screen_notifications_title" msgid="9118805570775519455">"Bij vergrendeld apparaat"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Inhoud van alle meldingen weergeven"</string>
@@ -2520,10 +2517,8 @@
     <string name="no_notification_listeners" msgid="2767405417723149879">"Er zijn geen listeners voor meldingen geïnstalleerd."</string>
     <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"<xliff:g id="SERVICE">%1$s</xliff:g> inschakelen?"</string>
     <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> kan alle meldingen lezen die door het systeem of een geïnstalleerde app worden gegenereerd, waaronder mogelijk persoonlijke gegevens zoals de namen van contacten en de tekst van berichten die naar u worden verzonden. De app kan deze meldingen ook sluiten of actieknoppen in de meldingen aanraken."</string>
-    <!-- no translation found for manage_zen_access_title (2611116122628520522) -->
-    <skip />
-    <!-- no translation found for zen_access_empty_text (8772967285742259540) -->
-    <skip />
+    <string name="manage_zen_access_title" msgid="2611116122628520522">"Toegang tot Niet storen"</string>
+    <string name="zen_access_empty_text" msgid="8772967285742259540">"Er zijn geen geïnstalleerde apps die toegang tot Niet storen hebben aangevraagd"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Apps laden..."</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"Alles blokkeren"</string>
     <string name="app_notification_block_summary" msgid="9049487483231233726">"Nooit meldingen van deze app weergeven"</string>
@@ -2550,22 +2545,14 @@
     <string name="zen_schedule_rule_enabled_toast" msgid="3379499360390382259">"Automatische regel om Niet storen in te schakelen tijdens bepaalde perioden"</string>
     <string name="zen_event_rule_type_name" msgid="2645981990973086797">"Regel voor gebeurtenis"</string>
     <string name="zen_event_rule_enabled_toast" msgid="6910577623330811480">"Automatische regel om Niet storen in te schakelen tijdens bepaalde gebeurtenissen"</string>
-    <!-- no translation found for zen_mode_event_rule_calendar (8787906563769067418) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_summary_calendar_template (5135844750232403975) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_summary_any_calendar (4936646399126636358) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_summary_reply_template (6590671260829837157) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_calendar_any (6485568415998569885) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_reply (5166322024212403739) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_reply_any_except_no (8868873496008825961) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_reply_yes_or_maybe (2769656565454495824) -->
-    <skip />
+    <string name="zen_mode_event_rule_calendar" msgid="8787906563769067418">"Tijdens afspraken voor"</string>
+    <string name="zen_mode_event_rule_summary_calendar_template" msgid="5135844750232403975">"Tijdens afspraken voor <xliff:g id="CALENDAR">%1$s</xliff:g>"</string>
+    <string name="zen_mode_event_rule_summary_any_calendar" msgid="4936646399126636358">"elke agenda"</string>
+    <string name="zen_mode_event_rule_summary_reply_template" msgid="6590671260829837157">"Waar het antwoord <xliff:g id="REPLY">%1$s</xliff:g> is"</string>
+    <string name="zen_mode_event_rule_calendar_any" msgid="6485568415998569885">"Elke agenda"</string>
+    <string name="zen_mode_event_rule_reply" msgid="5166322024212403739">"Waar het antwoord is:"</string>
+    <string name="zen_mode_event_rule_reply_any_except_no" msgid="8868873496008825961">"Ja, Misschien of Niet gereageerd"</string>
+    <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="2769656565454495824">"Ja of Misschien"</string>
     <string name="zen_mode_event_rule_reply_yes" msgid="1003598835878784659">"Ja"</string>
     <string name="zen_mode_rule_not_found_text" msgid="8963662446092059836">"Regel niet gevonden."</string>
     <string name="zen_mode_rule_summary_combination" msgid="2526506268333198254">"<xliff:g id="DESCRIPTION">%1$s</xliff:g>/<xliff:g id="MODE">%2$s</xliff:g>"</string>
@@ -2577,14 +2564,10 @@
     <string name="summary_range_verbal_combination" msgid="8467306662961568656">"<xliff:g id="START">%1$s</xliff:g> t/m <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="zen_mode_calls" msgid="7051492091133751208">"Oproepen"</string>
     <string name="zen_mode_messages" msgid="5886440273537510894">"Berichten"</string>
-    <!-- no translation found for zen_mode_from_anyone (2638322015361252161) -->
-    <skip />
-    <!-- no translation found for zen_mode_from_contacts (2232335406106711637) -->
-    <skip />
-    <!-- no translation found for zen_mode_from_starred (2678345811950997027) -->
-    <skip />
-    <!-- no translation found for zen_mode_from_none (8219706639954614136) -->
-    <skip />
+    <string name="zen_mode_from_anyone" msgid="2638322015361252161">"Van iedereen"</string>
+    <string name="zen_mode_from_contacts" msgid="2232335406106711637">"Alleen van contacten"</string>
+    <string name="zen_mode_from_starred" msgid="2678345811950997027">"Alleen van contacten met ster"</string>
+    <string name="zen_mode_from_none" msgid="8219706639954614136">"Geen"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Alarmen"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Herinneringen"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Evenementen"</string>
@@ -2598,36 +2581,6 @@
     <string name="zen_mode_start_time" msgid="8102602297273744441">"Starttijd"</string>
     <string name="zen_mode_end_time" msgid="8774327885892705505">"Eindtijd"</string>
     <string name="zen_mode_end_time_next_day_summary_format" msgid="4201521691238728701">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> de volgende dag"</string>
-    <string name="zen_mode_interruptions_voice_title" msgid="855256211259132964">"Onderbrekingen"</string>
-    <string name="zen_mode_interruptions_voice_header" msgid="2888750427673157270">"Bij inkomende oproepen en meldingen"</string>
-    <string name="zen_mode_interruptions_voice_prompt" msgid="3041817362475695079">"Wanneer wilt u worden onderbroken?"</string>
-    <string name="zen_mode_duration_voice_prompt" msgid="7381920739389625133">"Hoe lang?"</string>
-    <string name="zen_mode_option_voice_all_interruptions" msgid="9222054216334506341">"Altijd onderbreken"</string>
-    <string name="zen_mode_option_voice_all_interruptions_synonyms" msgid="475880955609403705">"uit,alle,alles"</string>
-    <string name="zen_mode_option_voice_important_interruptions" msgid="3695277268139705627">"Alleen prioriteitsonderbrekingen toestaan"</string>
-    <string name="zen_mode_option_voice_important_synonyms" msgid="2727831854148694795">"belangrijk,prioriteit,alleen prioriteit,uitsluitend prioriteit,prioriteitsmeldingen"</string>
-    <string name="zen_mode_option_voice_alarms" msgid="5961982397880688359">"Alleen alarmen toestaan"</string>
-    <string name="zen_mode_option_voice_alarms_synonyms" msgid="4049356986371569950">"alarmen,alleen alarmen,uitsluitend alarmen"</string>
-    <string name="zen_mode_option_voice_no_interruptions" msgid="3009964973912018317">"Niet onderbreken"</string>
-    <string name="zen_mode_option_voice_no_interruptions_synonyms" msgid="8368549512275129844">"geen,nooit,niets,geen onderbrekingen"</string>
-    <string name="zen_mode_duration_indefinte_voice_label" msgid="9026001994945950539">"Voor onbepaalde tijd"</string>
-    <plurals name="zen_mode_duration_minutes_voice_label" formatted="false" msgid="4750982084453980">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> minuten</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> minuut</item>
-    </plurals>
-    <plurals name="zen_mode_duration_hours_voice_label" formatted="false" msgid="175180249071227957">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> uur</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> uur</item>
-    </plurals>
-    <string name="zen_mode_summary_priority_indefinitely" msgid="5417246022606171241">"Wijzigen in \'Alleen prioriteitsmeldingen\' voor onbepaalde tijd"</string>
-    <plurals name="zen_mode_summary_priority_by_minute" formatted="false" msgid="1938955186728929112">
-      <item quantity="other">Wijzigen in \'Alleen prioriteitsmeldingen\' gedurende <xliff:g id="DURATION">%1$d</xliff:g> minuten (tot <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
-      <item quantity="one">Wijzigen in \'Alleen prioriteitsmeldingen\' gedurende één minuut (tot <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g>)</item>
-    </plurals>
-    <plurals name="zen_mode_summary_priority_by_hour" formatted="false" msgid="6664710096150897823">
-      <item quantity="other">Wijzigen in \'Alleen prioriteitsmeldingen\' gedurende <xliff:g id="DURATION">%1$d</xliff:g> uur (tot <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
-      <item quantity="one">Wijzigen in \'Alleen prioriteitsmeldingen\' gedurende één uur (tot <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g>)</item>
-    </plurals>
     <string name="zen_mode_summary_alarams_only_indefinite" msgid="7941708969866496605">"Wijzigen in \'Alleen alarmen\' voor onbepaalde tijd"</string>
     <plurals name="zen_mode_summary_alarms_only_by_minute" formatted="false" msgid="6122003583875424601">
       <item quantity="other">Wijzigen in \'Alleen alarmen\' gedurende <xliff:g id="DURATION">%1$d</xliff:g> minuten (tot <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
@@ -2637,17 +2590,7 @@
       <item quantity="other">Wijzigen in \'Alleen alarmen\' gedurende <xliff:g id="DURATION">%1$d</xliff:g> uur (tot <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
       <item quantity="one">Wijzigen in \'Alleen alarmen\' gedurende één uur (tot <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g>)</item>
     </plurals>
-    <string name="zen_mode_summary_no_interruptions_indefinite" msgid="7668951387253438521">"Wijzigen in \'Niet storen\' voor onbepaalde tijd"</string>
-    <plurals name="zen_mode_summary_no_interruptions_by_minute" formatted="false" msgid="5642379561004767217">
-      <item quantity="other">Wijzigen in \'Niet storen\' gedurende <xliff:g id="DURATION">%1$d</xliff:g> minuten (tot <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
-      <item quantity="one">Wijzigen in \'Niet storen\' gedurende één minuut (tot <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g>)</item>
-    </plurals>
-    <plurals name="zen_mode_summary_no_interruptions_by_hour" formatted="false" msgid="9059043643566528697">
-      <item quantity="other">Wijzigen in \'Niet storen\' gedurende <xliff:g id="DURATION">%1$d</xliff:g> uur (tot <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
-      <item quantity="one">Wijzigen in \'Niet storen\' gedurende één uur (tot <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g>)</item>
-    </plurals>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"Wijzigen in \'Altijd onderbreken\'"</string>
-    <string name="zen_mode_duration_indefinite_voice_synonyms" msgid="4213829562303429456">"Voor altijd"</string>
     <string name="notification_settings_apps_title" msgid="1125354590652967250">"App-meldingen"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Instellingen voor meldingen"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Feedback sturen over dit apparaat"</string>
@@ -2739,6 +2682,10 @@
     <string name="app_permissions" msgid="4148222031991883874">"App-rechten"</string>
     <string name="app_permissions_summary" msgid="2098173899436407221">"Extra toegang verleend aan <xliff:g id="COUNT_0">%d</xliff:g> van <xliff:g id="COUNT_1">%d</xliff:g> apps"</string>
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"Verleend aan <xliff:g id="COUNT_0">%d</xliff:g> van <xliff:g id="COUNT_1">%d</xliff:g> apps"</string>
+    <!-- no translation found for tap_to_wake (7211944147196888807) -->
+    <skip />
+    <!-- no translation found for tap_to_wake_summary (4341387904987585616) -->
+    <skip />
     <string name="domain_urls_title" msgid="8735310976048599572">"Domein-URL\'s"</string>
     <string name="domain_urls_summary_none" msgid="4817723415916239693">"Geen domein-URL\'s openen"</string>
     <string name="domain_urls_summary_one" msgid="4427559120855938432">"\'<xliff:g id="DOMAIN">%s</xliff:g>\' openen"</string>
@@ -2769,8 +2716,17 @@
     <string name="memory_avg_desc" msgid="1551240906596518412">"Gemiddeld <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
     <string name="memory_use_running_format" msgid="4172488041800743760">"<xliff:g id="MEMORY">%1$s</xliff:g>/<xliff:g id="RUNNING">%2$s</xliff:g>"</string>
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
-    <string name="high_power_on" msgid="4925948784500291865">"Aan"</string>
+    <string name="high_power_apps" msgid="2116416853043103135">"Optimalisaties negeren"</string>
+    <string name="high_power_filter_on" msgid="3862942127137594196">"Toegestaan"</string>
+    <!-- no translation found for high_power_on (148473814103292724) -->
+    <skip />
     <string name="high_power_off" msgid="4069404908196636677">"Uit"</string>
-    <!-- no translation found for app_notification_preferences (6413363601485067724) -->
+    <!-- no translation found for high_power_desc (8777632785903235764) -->
+    <skip />
+    <!-- no translation found for high_power_count (4343190376439806186) -->
+    <string name="battery_summary" msgid="101415762036784289">"<xliff:g id="PERCENTAGE">%1$d</xliff:g>%% gebruik sinds laatste volledige lading"</string>
+    <string name="no_battery_summary" msgid="3528036835462846814">"Geen accugebruik sinds laatste volledige lading"</string>
+    <string name="app_notification_preferences" msgid="6413363601485067724">"Voorkeuren voor app-meldingen"</string>
+    <!-- no translation found for system_ui_settings (579824306467081123) -->
     <skip />
 </resources>
