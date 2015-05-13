@@ -1274,7 +1274,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
 
     private void writeUsbConfigurationOption(Object newValue) {
         UsbManager manager = (UsbManager)getActivity().getSystemService(Context.USB_SERVICE);
-        manager.setCurrentFunction(newValue.toString(), false);
+        manager.setCurrentFunction(newValue.toString());
     }
 
     private void updateCpuUsageOptions() {
