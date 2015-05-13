@@ -98,6 +98,8 @@ public class ApnEditor extends InstrumentedPreferenceActivity
     private Resources mRes;
     private TelephonyManager mTelephonyManager;
     private int mBearerInitialVal = 0;
+    private String mMvnoTypeStr;
+    private String mMvnoMatchDataStr;
 
     /**
      * Standard projection for the interesting columns of a normal note.
@@ -195,7 +197,8 @@ public class ApnEditor extends InstrumentedPreferenceActivity
 
         final Intent intent = getIntent();
         final String action = intent.getAction();
-        mSubId = intent.getIntExtra("sub_id", SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+        mSubId = intent.getIntExtra(ApnSettings.SUB_ID,
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID);
 
         mFirstTime = icicle == null;
 
@@ -209,6 +212,8 @@ public class ApnEditor extends InstrumentedPreferenceActivity
                         icicle.getInt(SAVED_POS));
             }
             mNewApn = true;
+            mMvnoTypeStr = intent.getStringExtra(ApnSettings.MVNO_TYPE);
+            mMvnoMatchDataStr = intent.getStringExtra(ApnSettings.MVNO_MATCH_DATA);
             // If we were unable to create a new note, then just finish
             // this activity.  A RESULT_CANCELED will be sent back to the
             // original activity if they requested a result.
@@ -325,6 +330,10 @@ public class ApnEditor extends InstrumentedPreferenceActivity
             mMvnoType.setValue(mCursor.getString(MVNO_TYPE_INDEX));
             mMvnoMatchData.setEnabled(false);
             mMvnoMatchData.setText(mCursor.getString(MVNO_MATCH_DATA_INDEX));
+            if (mNewApn && mMvnoTypeStr != null && mMvnoMatchDataStr != null) {
+                mMvnoType.setValue(mMvnoTypeStr);
+                mMvnoMatchData.setText(mMvnoMatchDataStr);
+            }
         }
 
         mName.setSummary(checkNull(mName.getText()));
