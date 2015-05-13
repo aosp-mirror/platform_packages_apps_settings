@@ -20,10 +20,12 @@ import android.annotation.Nullable;
 import android.os.UserHandle;
 import android.text.TextUtils;
 import com.android.internal.logging.MetricsLogger;
+import com.android.internal.widget.LockPatternChecker;
 import com.android.internal.widget.LockPatternUtils;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -65,6 +67,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
         private static final long ERROR_MESSAGE_TIMEOUT = 3000;
         private TextView mPasswordEntry;
         private LockPatternUtils mLockPatternUtils;
+        private AsyncTask<?, ?, ?> mPendingLockCheck;
         private TextView mHeaderTextView;
         private TextView mDetailsTextView;
         private TextView mErrorTextView;
@@ -148,6 +151,10 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                 mCountdownTimer.cancel();
                 mCountdownTimer = null;
             }
+            if (mPendingLockCheck != null) {
+                mPendingLockCheck.cancel(false);
+                mPendingLockCheck = null;
+            }
         }
 
         @Override
@@ -161,6 +168,8 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             long deadline = mLockPatternUtils.getLockoutAttemptDeadline(UserHandle.myUserId());
             if (deadline != 0) {
                 handleAttemptLockout(deadline);
+            } else {
+                mPasswordEntry.setEnabled(true);
             }
         }
 
@@ -178,32 +187,79 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
         }
 
         private void handleNext() {
+            mPasswordEntry.setEnabled(false);
+            if (mPendingLockCheck != null) {
+                mPendingLockCheck.cancel(false);
+            }
+
             final String pin = mPasswordEntry.getText().toString();
             final boolean verifyChallenge = getActivity().getIntent().getBooleanExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, false);
-            boolean matched = false;
             Intent intent = new Intent();
             if (verifyChallenge)  {
-                if (getActivity() instanceof ConfirmLockPassword.InternalActivity) {
-                    long challenge = getActivity().getIntent().getLongExtra(
-                            ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, 0);
-                    byte[] token = mLockPatternUtils.verifyPassword(pin, challenge,
-                            UserHandle.myUserId());
-                    if (token != null) {
-                        matched = true;
-                        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
-                    }
+                if (isInternalActivity()) {
+                    startVerifyPassword(pin, intent);
+                    return;
                 }
-            } else if (mLockPatternUtils.checkPassword(pin, UserHandle.myUserId())) {
-                matched = true;
-                if (getActivity() instanceof ConfirmLockPassword.InternalActivity) {
-                    intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_TYPE,
-                                    mIsAlpha ? StorageManager.CRYPT_TYPE_PASSWORD
-                                             : StorageManager.CRYPT_TYPE_PIN);
-                    intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD, pin);
-                }
+            } else {
+                startCheckPassword(pin, intent);
+                return;
             }
 
+            onPasswordChecked(false, intent);
+        }
+
+        private boolean isInternalActivity() {
+            return getActivity() instanceof ConfirmLockPassword.InternalActivity;
+        }
+
+        private void startVerifyPassword(final String pin, final Intent intent) {
+            long challenge = getActivity().getIntent().getLongExtra(
+                    ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, 0);
+            mPendingLockCheck = LockPatternChecker.verifyPassword(
+                    mLockPatternUtils,
+                    pin,
+                    challenge,
+                    UserHandle.myUserId(),
+                    new LockPatternChecker.OnVerifyCallback() {
+                        @Override
+                        public void onVerified(byte[] token) {
+                            mPendingLockCheck = null;
+                            boolean matched = false;
+                            if (token != null) {
+                                matched = true;
+                                intent.putExtra(
+                                        ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN,
+                                        token);
+                            }
+                            onPasswordChecked(matched, intent);
+                        }
+                    });
+        }
+
+        private void startCheckPassword(final String pin, final Intent intent) {
+            mPendingLockCheck = LockPatternChecker.checkPassword(
+                    mLockPatternUtils,
+                    pin,
+                    UserHandle.myUserId(),
+                    new LockPatternChecker.OnCheckCallback() {
+                        @Override
+                        public void onChecked(boolean matched) {
+                            mPendingLockCheck = null;
+                            if (matched && isInternalActivity()) {
+                                intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_TYPE,
+                                                mIsAlpha ? StorageManager.CRYPT_TYPE_PASSWORD
+                                                         : StorageManager.CRYPT_TYPE_PIN);
+                                intent.putExtra(
+                                        ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD, pin);
+                            }
+                            onPasswordChecked(matched, intent);
+                        }
+                    });
+        }
+
+        private void onPasswordChecked(boolean matched, Intent intent) {
+            mPasswordEntry.setEnabled(true);
             if (matched) {
                 getActivity().setResult(RESULT_OK, intent);
                 getActivity().finish();
