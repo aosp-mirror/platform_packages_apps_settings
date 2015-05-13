@@ -2293,8 +2293,6 @@
     <string name="storage_menu_migrate">Migrate data</string>
     <!-- Storage setting.  Menu option for forgetting a storage device [CHAR LIMIT=30]-->
     <string name="storage_menu_forget">Forget</string>
-    <!-- Storage setting.  Menu option for USB transfer settings [CHAR LIMIT=30]-->
-    <string name="storage_menu_usb">USB computer connection</string>
 
     <!-- Storage setting.  Title for USB transfer settings [CHAR LIMIT=30]-->
     <string name="storage_title_usb">USB computer connection</string>
@@ -6600,5 +6598,26 @@
 
     <!-- Description of how many more permissions to view on next page [CHAR LIMIT=30] -->
     <string name="additional_permissions_more"><xliff:g id="count" example="2">%1$d</xliff:g> more</string>
+
+    <!-- One of the choices in a dialog (with title defined in usb_use) that lets the user
+         select what the USB connection for this device should be used for. This choice
+         is for charging only. -->
+    <string name="usb_use_charging_only">Charging only</string>
+    <!-- One of the choices in a dialog (with title defined in usb_use) that lets the user
+         select what the USB connection for this device should be used for. This choice
+         is for transferring files via MTP. -->
+    <string name="usb_use_file_transfers">Transfer files (MTP)</string>
+    <!-- One of the choices in a dialog (with title defined in usb_use) that lets the user
+         select what the USB connection for this device should be used for. This choice
+         is for transferring photos via PTP. -->
+    <string name="usb_use_photo_transfers">Transfer photos (PTP)</string>
+    <!-- One of the choices in a dialog (with title defined in usb_use) that lets the user
+         select what the USB connection for this device should be used for. This choice
+         is for entering MIDI mode. -->
+    <string name="usb_use_MIDI">MIDI</string>
+    <!-- The title used in a dialog which lets the user select what the USB connection
+         for this device should be used for. Choices are usb_use_charging_only,
+         usb_use_file_transfer, use_use_photo_transfer, and usb_use_MIDI -->
+    <string name="usb_use">Use USB for</string>
 
 </resources>
