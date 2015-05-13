@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import com.android.internal.logging.MetricsLogger;
+import com.android.internal.widget.LockPatternChecker;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.PasswordEntryKeyboardHelper;
 import com.android.internal.widget.PasswordEntryKeyboardView;
@@ -28,6 +29,7 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
 import android.inputmethodservice.KeyboardView;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -134,6 +136,7 @@ public class ChooseLockPassword extends SettingsActivity {
         private int mPasswordMinNumeric = 0;
         private int mPasswordMinNonLetter = 0;
         private LockPatternUtils mLockPatternUtils;
+        private AsyncTask<?, ?, ?> mPendingLockCheck;
         private int mRequestedQuality = DevicePolicyManager.PASSWORD_QUALITY_NUMERIC;
         private ChooseLockSettingsHelper mChooseLockSettingsHelper;
         private Stage mUiStage = Stage.Introduction;
@@ -312,12 +315,17 @@ public class ChooseLockPassword extends SettingsActivity {
         public void onResume() {
             super.onResume();
             updateStage(mUiStage);
+            mPasswordEntry.setEnabled(true);
             mKeyboardView.requestFocus();
         }
 
         @Override
         public void onPause() {
             mHandler.removeMessages(MSG_SHOW_ERROR);
+            if (mPendingLockCheck != null) {
+                mPendingLockCheck.cancel(false);
+                mPendingLockCheck = null;
+            }
 
             super.onPause();
         }
@@ -489,19 +497,12 @@ public class ChooseLockPassword extends SettingsActivity {
                             UserHandle.myUserId());
 
                     if (mHasChallenge) {
-                        Intent intent = new Intent();
-                        byte[] token = mLockPatternUtils.verifyPassword(pin, mChallenge,
-                                UserHandle.myUserId());
-                        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
-                        getActivity().setResult(RESULT_FINISHED, intent);
+                        startVerifyPassword(pin, wasSecureBefore);
+                        return;
                     } else {
                         getActivity().setResult(RESULT_FINISHED);
                     }
-                    getActivity().finish();
-                    mDone = true;
-                    if (!wasSecureBefore) {
-                        startActivity(getRedactionInterstitialIntent(getActivity()));
-                    }
+                    finishConfirmStage(wasSecureBefore);
                 } else {
                     CharSequence tmp = mPasswordEntry.getText();
                     if (tmp != null) {
@@ -512,6 +513,43 @@ public class ChooseLockPassword extends SettingsActivity {
             }
             if (errorMsg != null) {
                 showError(errorMsg, mUiStage);
+            }
+        }
+
+        private void startVerifyPassword(final String pin, final boolean wasSecureBefore) {
+            mPasswordEntry.setEnabled(false);
+            setNextEnabled(false);
+            if (mPendingLockCheck != null) {
+                mPendingLockCheck.cancel(false);
+            }
+
+            mPendingLockCheck = LockPatternChecker.verifyPassword(
+                    mLockPatternUtils,
+                    pin,
+                    mChallenge,
+                    UserHandle.myUserId(),
+                    new LockPatternChecker.OnVerifyCallback() {
+                        @Override
+                        public void onVerified(byte[] token) {
+                            mPasswordEntry.setEnabled(true);
+                            setNextEnabled(true);
+                            mPendingLockCheck = null;
+
+                            Intent intent = new Intent();
+                            intent.putExtra(
+                                    ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN,
+                                    token);
+                            getActivity().setResult(RESULT_FINISHED, intent);
+                            finishConfirmStage(wasSecureBefore);
+                        }
+                    });
+        }
+
+        private void finishConfirmStage(boolean wasSecureBefore) {
+            getActivity().finish();
+            mDone = true;
+            if (!wasSecureBefore) {
+                startActivity(getRedactionInterstitialIntent(getActivity()));
             }
         }
 
