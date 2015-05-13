@@ -43,6 +43,7 @@ import com.android.settings.AppHeader;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.android.settings.applications.AppInfoBase;
 import com.android.settings.applications.AppInfoWithHeader;
 import com.android.settings.notification.NotificationBackend.AppRow;
 
@@ -58,9 +59,6 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
     private static final String KEY_PEEKABLE = "peekable";
     private static final String KEY_SENSITIVE = "sensitive";
     private static final String KEY_APP_SETTINGS = "app_settings";
-
-    static final String EXTRA_HAS_SETTINGS_INTENT = "has_settings_intent";
-    static final String EXTRA_SETTINGS_INTENT = "settings_intent";
 
     private static final Intent APP_NOTIFICATION_PREFS_CATEGORY_INTENT
             = new Intent(Intent.ACTION_MAIN)
@@ -101,15 +99,20 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
         super.onCreate(savedInstanceState);
         mContext = getActivity();
         Intent intent = getActivity().getIntent();
+        Bundle args = getArguments();
         if (DEBUG) Log.d(TAG, "onCreate getIntent()=" + intent);
-        if (intent == null) {
+        if (intent == null && args == null) {
             Log.w(TAG, "No intent");
             toastAndFinish();
             return;
         }
 
-        final int uid = intent.getIntExtra(Settings.EXTRA_APP_UID, -1);
-        final String pkg = intent.getStringExtra(Settings.EXTRA_APP_PACKAGE);
+        final String pkg = args != null && args.containsKey(AppInfoBase.ARG_PACKAGE_NAME)
+                ? args.getString(AppInfoBase.ARG_PACKAGE_NAME)
+                : intent.getStringExtra(Settings.EXTRA_APP_PACKAGE);
+        final int uid = args != null && args.containsKey(AppInfoBase.ARG_PACKAGE_UID)
+                ? args.getInt(AppInfoBase.ARG_PACKAGE_UID)
+                : intent.getIntExtra(Settings.EXTRA_APP_UID, -1);
         if (uid == -1 || TextUtils.isEmpty(pkg)) {
             Log.w(TAG, "Missing extras: " + Settings.EXTRA_APP_PACKAGE + " was " + pkg + ", "
                     + Settings.EXTRA_APP_UID + " was " + uid);
@@ -136,17 +139,10 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
 
         mAppRow = mBackend.loadAppRow(pm, info.applicationInfo);
 
-        if (intent.hasExtra(EXTRA_HAS_SETTINGS_INTENT)) {
-            // use settings intent from extra
-            if (intent.getBooleanExtra(EXTRA_HAS_SETTINGS_INTENT, false)) {
-                mAppRow.settingsIntent = intent.getParcelableExtra(EXTRA_SETTINGS_INTENT);
-            }
-        } else {
-            // load settings intent
-            ArrayMap<String, AppRow> rows = new ArrayMap<String, AppRow>();
-            rows.put(mAppRow.pkg, mAppRow);
-            collectConfigActivities(getPackageManager(), rows);
-        }
+        // load settings intent
+        ArrayMap<String, AppRow> rows = new ArrayMap<String, AppRow>();
+        rows.put(mAppRow.pkg, mAppRow);
+        collectConfigActivities(getPackageManager(), rows);
 
         mBlock.setChecked(mAppRow.banned);
         updateDependents(mAppRow.banned);
