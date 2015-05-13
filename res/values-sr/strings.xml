@@ -172,10 +172,8 @@
     <string name="bluetooth_pb_remember_choice" msgid="3622898084442402071">"Не питај поново"</string>
     <string name="bluetooth_map_request" msgid="4595727689513143902">"Захтев за приступ порукама"</string>
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s жели да приступи порукама. Желите ли да одобрите приступ за %2$s?"</string>
-    <!-- no translation found for bluetooth_sap_request (2669762224045354417) -->
-    <skip />
-    <!-- no translation found for bluetooth_sap_acceptance_dialog_text (4414253873553608690) -->
-    <skip />
+    <string name="bluetooth_sap_request" msgid="2669762224045354417">"Захтев за приступ SIM картици"</string>
+    <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> жели да приступа SIM картици. Одобравање приступа SIM картици ће онемогућити везу за пренос података на уређају док траје повезивање. Дајте приступ уређају <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Датум и време"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"Избор временске зоне"</string>
     <string name="display_preview_label" msgid="1127597250917274792">"Преглед:"</string>
@@ -1517,8 +1515,7 @@
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Агресиван прелаз са Wi‑Fi мреже на мобилну"</string>
     <string name="wifi_allow_scan_with_traffic" msgid="3601853081178265786">"Увек дозволи скенирање Wi‑Fi-ја у ромингу"</string>
     <string name="legacy_dhcp_client" msgid="694426978909127287">"Користи застарели DHCP клијент"</string>
-    <!-- no translation found for mobile_data_always_on (7745605759775320362) -->
-    <skip />
+    <string name="mobile_data_always_on" msgid="7745605759775320362">"Подаци за мобилне уређаје су увек активни"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"Приказ опција за сертификацију бежичног екрана"</string>
     <string name="wifi_verbose_logging_summary" msgid="6615071616111731958">"Повећава ниво евидентирања за Wi‑Fi. Приказ по SSID RSSI-у у бирачу Wi‑Fi мреже"</string>
     <string name="wifi_aggressive_handover_summary" msgid="6328455667642570371">"Када се омогући, Wi‑Fi ће бити агресивнији при пребацивању мреже за пренос података на Мобилну, када је Wi‑Fi сигнал слаб"</string>
@@ -1531,8 +1528,7 @@
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Дозволи лажне локације"</string>
     <string name="debug_view_attributes" msgid="6485448367803310384">"Омогући проверу атрибута за преглед"</string>
     <string name="legacy_dhcp_client_summary" msgid="163383566317652040">"Користите DHCP клијент из Lollipop-а уместо новог Android DHCP клијента."</string>
-    <!-- no translation found for mobile_data_always_on_summary (8149773901431697910) -->
-    <skip />
+    <string name="mobile_data_always_on_summary" msgid="8149773901431697910">"Нека подаци за мобилне уређаје увек буду активни, чак и када је Wi‑Fi активан (ради брзе промене мреже)."</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"Дозволи отклањање USB грешака?"</string>
     <string name="adb_warning_message" msgid="7316799925425402244">"Отклањање USB грешака намењено је само за сврхе програмирања. Користите га за копирање података са рачунара на уређај и обрнуто, инсталирање апликација на уређају без обавештења и читање података из евиденције."</string>
     <string name="adb_keys_warning_message" msgid="5659849457135841625">"Желите ли да опозовете приступ отклањању USB грешака са свих рачунара које сте претходно одобрили?"</string>
@@ -2474,6 +2470,8 @@
     <string name="keywords_all_apps" msgid="5377153522551809915">"преузимање апликација, апликације, систем"</string>
     <string name="keywords_app_permissions" msgid="8677901415217188314">"апликације дозволе безбедност"</string>
     <string name="keywords_default_apps" msgid="3581727483175522599">"подразумевано подешавање апликација"</string>
+    <!-- no translation found for keywords_ignore_optimizations (946516741848647905) -->
+    <skip />
     <string name="keywords_lockscreen" msgid="4806191868723291541">"превлачење лозинка шаблон pin"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Подесите Wi-Fi NFC ознаку"</string>
     <string name="write_tag" msgid="8571858602896222537">"Напиши"</string>
@@ -2498,8 +2496,7 @@
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Подразумевана мелодија звона обавештења"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Вибрација и за позиве"</string>
     <string name="notification_section_header" msgid="95661783916799134">"Обавештење"</string>
-    <!-- no translation found for advanced_section_header (8833934850242546903) -->
-    <skip />
+    <string name="advanced_section_header" msgid="8833934850242546903">"Напредна"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"Пулсирајуће обавештење"</string>
     <string name="lock_screen_notifications_title" msgid="9118805570775519455">"Када је уређај закључан"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Прикажи сав садржај обавештења"</string>
@@ -2530,10 +2527,8 @@
     <string name="no_notification_listeners" msgid="2767405417723149879">"Нема инсталираних монитора обавештења."</string>
     <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"Желите ли да омогућите <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> ће моћи да чита сва обавештења која поставља систем или било која инсталирана апликација, што може да обухвата личне податке као што су имена контаката и текстови порука које примате. Такође ће моћи да одбацује ова обавештења или додирује дугмад за радње у оквиру њих."</string>
-    <!-- no translation found for manage_zen_access_title (2611116122628520522) -->
-    <skip />
-    <!-- no translation found for zen_access_empty_text (8772967285742259540) -->
-    <skip />
+    <string name="manage_zen_access_title" msgid="2611116122628520522">"Приступ опцији Не узнемиравај"</string>
+    <string name="zen_access_empty_text" msgid="8772967285742259540">"Ниједна инсталирана апликација није захтевала приступ опцији Не узнемиравај"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Учитавање апликација..."</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"Блокирај све"</string>
     <string name="app_notification_block_summary" msgid="9049487483231233726">"Никада не приказуј обавештења из ове апликације"</string>
@@ -2560,22 +2555,14 @@
     <string name="zen_schedule_rule_enabled_toast" msgid="3379499360390382259">"Аутоматско правило је подешено да се подешавање Не узнемиравај укључује током наведених периода"</string>
     <string name="zen_event_rule_type_name" msgid="2645981990973086797">"Правило за догађаје"</string>
     <string name="zen_event_rule_enabled_toast" msgid="6910577623330811480">"Аутоматско правило је подешено да се подешавање Не узнемиравај укључује током наведених догађаја"</string>
-    <!-- no translation found for zen_mode_event_rule_calendar (8787906563769067418) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_summary_calendar_template (5135844750232403975) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_summary_any_calendar (4936646399126636358) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_summary_reply_template (6590671260829837157) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_calendar_any (6485568415998569885) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_reply (5166322024212403739) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_reply_any_except_no (8868873496008825961) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_reply_yes_or_maybe (2769656565454495824) -->
-    <skip />
+    <string name="zen_mode_event_rule_calendar" msgid="8787906563769067418">"Током догађаја за"</string>
+    <string name="zen_mode_event_rule_summary_calendar_template" msgid="5135844750232403975">"Током догађаја за <xliff:g id="CALENDAR">%1$s</xliff:g>"</string>
+    <string name="zen_mode_event_rule_summary_any_calendar" msgid="4936646399126636358">"било који календар"</string>
+    <string name="zen_mode_event_rule_summary_reply_template" msgid="6590671260829837157">"Где је одговор <xliff:g id="REPLY">%1$s</xliff:g>"</string>
+    <string name="zen_mode_event_rule_calendar_any" msgid="6485568415998569885">"Било који календар"</string>
+    <string name="zen_mode_event_rule_reply" msgid="5166322024212403739">"Где је одговор"</string>
+    <string name="zen_mode_event_rule_reply_any_except_no" msgid="8868873496008825961">"Да, Можда или Нема одговора"</string>
+    <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="2769656565454495824">"Да или Можда"</string>
     <string name="zen_mode_event_rule_reply_yes" msgid="1003598835878784659">"Да"</string>
     <string name="zen_mode_rule_not_found_text" msgid="8963662446092059836">"Правило није пронађено."</string>
     <string name="zen_mode_rule_summary_combination" msgid="2526506268333198254">"<xliff:g id="DESCRIPTION">%1$s</xliff:g>/<xliff:g id="MODE">%2$s</xliff:g>"</string>
@@ -2587,14 +2574,10 @@
     <string name="summary_range_verbal_combination" msgid="8467306662961568656">"Од <xliff:g id="START">%1$s</xliff:g> до <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="zen_mode_calls" msgid="7051492091133751208">"Позиви"</string>
     <string name="zen_mode_messages" msgid="5886440273537510894">"Поруке"</string>
-    <!-- no translation found for zen_mode_from_anyone (2638322015361252161) -->
-    <skip />
-    <!-- no translation found for zen_mode_from_contacts (2232335406106711637) -->
-    <skip />
-    <!-- no translation found for zen_mode_from_starred (2678345811950997027) -->
-    <skip />
-    <!-- no translation found for zen_mode_from_none (8219706639954614136) -->
-    <skip />
+    <string name="zen_mode_from_anyone" msgid="2638322015361252161">"Од било кога"</string>
+    <string name="zen_mode_from_contacts" msgid="2232335406106711637">"Само од контаката"</string>
+    <string name="zen_mode_from_starred" msgid="2678345811950997027">"Само од контаката са звездицом"</string>
+    <string name="zen_mode_from_none" msgid="8219706639954614136">"Нико"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Аларми"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Подсетници"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Догађаји"</string>
@@ -2608,40 +2591,6 @@
     <string name="zen_mode_start_time" msgid="8102602297273744441">"Време почетка"</string>
     <string name="zen_mode_end_time" msgid="8774327885892705505">"Време завршетка"</string>
     <string name="zen_mode_end_time_next_day_summary_format" msgid="4201521691238728701">"У <xliff:g id="FORMATTED_TIME">%s</xliff:g> следећег дана"</string>
-    <string name="zen_mode_interruptions_voice_title" msgid="855256211259132964">"Прекиди"</string>
-    <string name="zen_mode_interruptions_voice_header" msgid="2888750427673157270">"За долазне позиве и обавештења"</string>
-    <string name="zen_mode_interruptions_voice_prompt" msgid="3041817362475695079">"Када желите да вас прекинемо?"</string>
-    <string name="zen_mode_duration_voice_prompt" msgid="7381920739389625133">"Колико дуго?"</string>
-    <string name="zen_mode_option_voice_all_interruptions" msgid="9222054216334506341">"Увек прекини"</string>
-    <string name="zen_mode_option_voice_all_interruptions_synonyms" msgid="475880955609403705">"искључено, потпуно, све"</string>
-    <string name="zen_mode_option_voice_important_interruptions" msgid="3695277268139705627">"Дозволи само приоритетне прекиде"</string>
-    <string name="zen_mode_option_voice_important_synonyms" msgid="2727831854148694795">"важно, приоритетна, само приоритетна, искључиво приоритетна, приоритетна обавештења"</string>
-    <string name="zen_mode_option_voice_alarms" msgid="5961982397880688359">"Дозволи само аларме"</string>
-    <string name="zen_mode_option_voice_alarms_synonyms" msgid="4049356986371569950">"аларми, само аларми, искључиво аларми"</string>
-    <string name="zen_mode_option_voice_no_interruptions" msgid="3009964973912018317">"Не прекидај"</string>
-    <string name="zen_mode_option_voice_no_interruptions_synonyms" msgid="8368549512275129844">"ништа, никад, без узнемиравања, без прекида"</string>
-    <string name="zen_mode_duration_indefinte_voice_label" msgid="9026001994945950539">"На неодређено време"</string>
-    <plurals name="zen_mode_duration_minutes_voice_label" formatted="false" msgid="4750982084453980">
-      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> минут</item>
-      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> минута</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> минута</item>
-    </plurals>
-    <plurals name="zen_mode_duration_hours_voice_label" formatted="false" msgid="175180249071227957">
-      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> сат</item>
-      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> сата</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> сати</item>
-    </plurals>
-    <string name="zen_mode_summary_priority_indefinitely" msgid="5417246022606171241">"Пребацује у режим само приоритетних обавештења на неодређено време"</string>
-    <plurals name="zen_mode_summary_priority_by_minute" formatted="false" msgid="1938955186728929112">
-      <item quantity="one">Пребацује у режим само приоритетних обавештења у трајању од <xliff:g id="DURATION">%1$d</xliff:g> минута до <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-      <item quantity="few">Пребацује у режим само приоритетних обавештења у трајању од <xliff:g id="DURATION">%1$d</xliff:g> минута до <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-      <item quantity="other">Пребацује у режим само приоритетних обавештења у трајању од <xliff:g id="DURATION">%1$d</xliff:g> минута до <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-    </plurals>
-    <plurals name="zen_mode_summary_priority_by_hour" formatted="false" msgid="6664710096150897823">
-      <item quantity="one">Пребацује у режим само приоритетних обавештења у трајању од <xliff:g id="DURATION">%1$d</xliff:g> сата (до <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
-      <item quantity="few">Пребацује у режим само приоритетних обавештења у трајању од <xliff:g id="DURATION">%1$d</xliff:g> сата (до <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
-      <item quantity="other">Пребацује у режим само приоритетних обавештења у трајању од <xliff:g id="DURATION">%1$d</xliff:g> сати (до <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
-    </plurals>
     <string name="zen_mode_summary_alarams_only_indefinite" msgid="7941708969866496605">"Пребацује у режим само са алармима на неодређено време"</string>
     <plurals name="zen_mode_summary_alarms_only_by_minute" formatted="false" msgid="6122003583875424601">
       <item quantity="one">Пребацује у режим само са алармима у трајању од <xliff:g id="DURATION">%1$d</xliff:g> минута (до <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
@@ -2653,19 +2602,7 @@
       <item quantity="few">Пребацује у режим само са алармима у трајању од <xliff:g id="DURATION">%1$d</xliff:g> сата до <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
       <item quantity="other">Пребацује у режим само са алармима у трајању од <xliff:g id="DURATION">%1$d</xliff:g> сати до <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
     </plurals>
-    <string name="zen_mode_summary_no_interruptions_indefinite" msgid="7668951387253438521">"Пребацује у режим без узнемиравања на неодређено време"</string>
-    <plurals name="zen_mode_summary_no_interruptions_by_minute" formatted="false" msgid="5642379561004767217">
-      <item quantity="one">Пребацује у режим без узнемиравања у трајању од <xliff:g id="DURATION">%1$d</xliff:g> минута (до <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
-      <item quantity="few">Пребацује у режим без узнемиравања у трајању од <xliff:g id="DURATION">%1$d</xliff:g> минута (до <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
-      <item quantity="other">Пребацује у режим без узнемиравања у трајању од <xliff:g id="DURATION">%1$d</xliff:g> минута (до <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
-    </plurals>
-    <plurals name="zen_mode_summary_no_interruptions_by_hour" formatted="false" msgid="9059043643566528697">
-      <item quantity="one">Пребацује у режим без узнемиравања у трајању од <xliff:g id="DURATION">%1$d</xliff:g> сата до <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-      <item quantity="few">Пребацује у режим без узнемиравања у трајању од <xliff:g id="DURATION">%1$d</xliff:g> сата до <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-      <item quantity="other">Пребацује у режим без узнемиравања у трајању од <xliff:g id="DURATION">%1$d</xliff:g> сати до <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-    </plurals>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"Пребацује у режим увек прекидај"</string>
-    <string name="zen_mode_duration_indefinite_voice_synonyms" msgid="4213829562303429456">"заувек"</string>
     <string name="notification_settings_apps_title" msgid="1125354590652967250">"Обавешт. апликација"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Подешавања обавештења"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Шаљи повратне информације о уређају"</string>
@@ -2759,6 +2696,10 @@
     <string name="app_permissions" msgid="4148222031991883874">"Дозволе за апликације"</string>
     <string name="app_permissions_summary" msgid="2098173899436407221">"Апликације са додатним приступом (<xliff:g id="COUNT_0">%d</xliff:g> од <xliff:g id="COUNT_1">%d</xliff:g>)"</string>
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"Апликације са дозволом (<xliff:g id="COUNT_0">%d</xliff:g> од <xliff:g id="COUNT_1">%d</xliff:g>)"</string>
+    <!-- no translation found for tap_to_wake (7211944147196888807) -->
+    <skip />
+    <!-- no translation found for tap_to_wake_summary (4341387904987585616) -->
+    <skip />
     <string name="domain_urls_title" msgid="8735310976048599572">"URL-ови домена"</string>
     <string name="domain_urls_summary_none" msgid="4817723415916239693">"Не отварај никакве URL-ове домена"</string>
     <string name="domain_urls_summary_one" msgid="4427559120855938432">"Отварај „<xliff:g id="DOMAIN">%s</xliff:g>“"</string>
@@ -2789,10 +2730,18 @@
     <string name="memory_max_desc" msgid="2861832149718335864">"Максимално <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
     <string name="memory_avg_desc" msgid="1551240906596518412">"У просеку <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
     <string name="memory_use_running_format" msgid="4172488041800743760">"<xliff:g id="MEMORY">%1$s</xliff:g>/<xliff:g id="RUNNING">%2$s</xliff:g>"</string>
-    <!-- no translation found for process_format (77905604092541454) -->
+    <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
+    <string name="high_power_apps" msgid="2116416853043103135">"Игнорисање оптимизација"</string>
+    <string name="high_power_filter_on" msgid="3862942127137594196">"Дозвољено"</string>
+    <!-- no translation found for high_power_on (148473814103292724) -->
     <skip />
-    <string name="high_power_on" msgid="4925948784500291865">"Укључено"</string>
     <string name="high_power_off" msgid="4069404908196636677">"Искључено"</string>
-    <!-- no translation found for app_notification_preferences (6413363601485067724) -->
+    <!-- no translation found for high_power_desc (8777632785903235764) -->
+    <skip />
+    <!-- no translation found for high_power_count (4343190376439806186) -->
+    <string name="battery_summary" msgid="101415762036784289">"Потрошено је <xliff:g id="PERCENTAGE">%1$d</xliff:g>%% од последњег пуњења до краја"</string>
+    <string name="no_battery_summary" msgid="3528036835462846814">"Батерија није коришћена од последњег пуњења до краја"</string>
+    <string name="app_notification_preferences" msgid="6413363601485067724">"Подешавања обавештења о апликацијама"</string>
+    <!-- no translation found for system_ui_settings (579824306467081123) -->
     <skip />
 </resources>

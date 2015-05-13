@@ -173,10 +173,8 @@
     <string name="bluetooth_pb_remember_choice" msgid="3622898084442402071">"Не запитувати знову"</string>
     <string name="bluetooth_map_request" msgid="4595727689513143902">"Запит на доступ до повідомлень"</string>
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s хоче отримати доступ до ваших повідомлень. Надати %2$s доступ?"</string>
-    <!-- no translation found for bluetooth_sap_request (2669762224045354417) -->
-    <skip />
-    <!-- no translation found for bluetooth_sap_acceptance_dialog_text (4414253873553608690) -->
-    <skip />
+    <string name="bluetooth_sap_request" msgid="2669762224045354417">"Запит на доступ до SIM-карти"</string>
+    <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"Пристрою <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> потрібен доступ до вашої SIM-карти. Коли він використовуватиме SIM-карту, ви не зможете передавати дані. Надати доступ пристрою <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Дата й час"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"Вибрати часовий пояс"</string>
     <string name="display_preview_label" msgid="1127597250917274792">"Перегляд:"</string>
@@ -1526,8 +1524,7 @@
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Перемикатись із Wi-Fi на моб. мережу"</string>
     <string name="wifi_allow_scan_with_traffic" msgid="3601853081178265786">"Завжди дозволяти Wi-Fi шукати роумінг"</string>
     <string name="legacy_dhcp_client" msgid="694426978909127287">"Використовувати старий клієнт DHCP"</string>
-    <!-- no translation found for mobile_data_always_on (7745605759775320362) -->
-    <skip />
+    <string name="mobile_data_always_on" msgid="7745605759775320362">"Передавання мобільних даних завжди ввімкнено"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"Показати параметри сертифікації бездротового екрана"</string>
     <string name="wifi_verbose_logging_summary" msgid="6615071616111731958">"Показувати в журналі RSSI для кожного SSID під час вибору Wi-Fi"</string>
     <string name="wifi_aggressive_handover_summary" msgid="6328455667642570371">"Примусово перемикатися на мобільну мережу, коли сигнал Wi-Fi слабкий"</string>
@@ -1540,8 +1537,7 @@
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Дозв. фіктивні місцезн."</string>
     <string name="debug_view_attributes" msgid="6485448367803310384">"Увімкнути оцінку атрибуції переглядів"</string>
     <string name="legacy_dhcp_client_summary" msgid="163383566317652040">"Використовувати клієнт DHCP з Lollipop, а не новий клієнт DHCP з Android."</string>
-    <!-- no translation found for mobile_data_always_on_summary (8149773901431697910) -->
-    <skip />
+    <string name="mobile_data_always_on_summary" msgid="8149773901431697910">"Не вимикати мобільний Інтернет, навіть якщо ввімкнено Wi‑Fi (щоб швидше переходити між мережами)."</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"Дозвол. налагодж. USB?"</string>
     <string name="adb_warning_message" msgid="7316799925425402244">"Налагодження USB застосовується лише з метою розробки. Його можна використовувати для копіювання даних між комп’ютером і пристроєм, встановлення програм на вашому пристрої без сповіщення та читання даних журналу."</string>
     <string name="adb_keys_warning_message" msgid="5659849457135841625">"Скасувати доступ до налагодження USB для всіх комп’ютерів, які раніше отримали таке право?"</string>
@@ -2483,6 +2479,8 @@
     <string name="keywords_all_apps" msgid="5377153522551809915">"додатки завантажити додаток системний"</string>
     <string name="keywords_app_permissions" msgid="8677901415217188314">"додатки дозволи безпека"</string>
     <string name="keywords_default_apps" msgid="3581727483175522599">"додатки за умовчанням"</string>
+    <!-- no translation found for keywords_ignore_optimizations (946516741848647905) -->
+    <skip />
     <string name="keywords_lockscreen" msgid="4806191868723291541">"провести пальцем пароль ключ PIN-код"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Налаштувати NFC-тег для Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Записати"</string>
@@ -2507,8 +2505,7 @@
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Сигнал сповіщень за умовчанням"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Також вібросигнал для дзвінків"</string>
     <string name="notification_section_header" msgid="95661783916799134">"Сповіщення"</string>
-    <!-- no translation found for advanced_section_header (8833934850242546903) -->
-    <skip />
+    <string name="advanced_section_header" msgid="8833934850242546903">"Розширені налаштування"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"Світловий сигнал"</string>
     <string name="lock_screen_notifications_title" msgid="9118805570775519455">"Коли пристрій заблоковано"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Показувати весь вміст сповіщень"</string>
@@ -2540,10 +2537,8 @@
     <string name="no_notification_listeners" msgid="2767405417723149879">"Служби читання сповіщень не встановлено."</string>
     <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"Увімкнути <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> зможе читати всі сповіщення, надіслані системою або будь-якою встановленою програмою. У сповіщеннях може бути особиста інформація, зокрема імена контактів і текст отриманих повідомлень. Ця програма також зможе закривати сповіщення або активувати в них кнопки."</string>
-    <!-- no translation found for manage_zen_access_title (2611116122628520522) -->
-    <skip />
-    <!-- no translation found for zen_access_empty_text (8772967285742259540) -->
-    <skip />
+    <string name="manage_zen_access_title" msgid="2611116122628520522">"Доступ у режимі \"Не турбувати\""</string>
+    <string name="zen_access_empty_text" msgid="8772967285742259540">"Установлені додатки не просили доступу в режимі \"Не турбувати\""</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Завантаження додатків…"</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"Блокувати всі"</string>
     <string name="app_notification_block_summary" msgid="9049487483231233726">"Ніколи не показувати сповіщення з цього додатка"</string>
@@ -2570,22 +2565,14 @@
     <string name="zen_schedule_rule_enabled_toast" msgid="3379499360390382259">"Автоматичне правило, за яким у визначений час вмикається режим \"Не турбувати\", налаштовано"</string>
     <string name="zen_event_rule_type_name" msgid="2645981990973086797">"Правило для події"</string>
     <string name="zen_event_rule_enabled_toast" msgid="6910577623330811480">"Автоматичне правило, за яким за визначених подій вмикається режим \"Не турбувати\", налаштовано"</string>
-    <!-- no translation found for zen_mode_event_rule_calendar (8787906563769067418) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_summary_calendar_template (5135844750232403975) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_summary_any_calendar (4936646399126636358) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_summary_reply_template (6590671260829837157) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_calendar_any (6485568415998569885) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_reply (5166322024212403739) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_reply_any_except_no (8868873496008825961) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_reply_yes_or_maybe (2769656565454495824) -->
-    <skip />
+    <string name="zen_mode_event_rule_calendar" msgid="8787906563769067418">"Під час подій"</string>
+    <string name="zen_mode_event_rule_summary_calendar_template" msgid="5135844750232403975">"Під час подій із календаря \"<xliff:g id="CALENDAR">%1$s</xliff:g>\""</string>
+    <string name="zen_mode_event_rule_summary_any_calendar" msgid="4936646399126636358">"з усіх календарів"</string>
+    <string name="zen_mode_event_rule_summary_reply_template" msgid="6590671260829837157">"Коли відповідь – \"<xliff:g id="REPLY">%1$s</xliff:g>\""</string>
+    <string name="zen_mode_event_rule_calendar_any" msgid="6485568415998569885">"З усіх календарів"</string>
+    <string name="zen_mode_event_rule_reply" msgid="5166322024212403739">"Коли відповідь –"</string>
+    <string name="zen_mode_event_rule_reply_any_except_no" msgid="8868873496008825961">"\"Так\", \"Можливо\" або відповіді немає"</string>
+    <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="2769656565454495824">"\"Так\" або \"Можливо\""</string>
     <string name="zen_mode_event_rule_reply_yes" msgid="1003598835878784659">"Так"</string>
     <string name="zen_mode_rule_not_found_text" msgid="8963662446092059836">"Правило не знайдено."</string>
     <string name="zen_mode_rule_summary_combination" msgid="2526506268333198254">"<xliff:g id="DESCRIPTION">%1$s</xliff:g> / <xliff:g id="MODE">%2$s</xliff:g>"</string>
@@ -2597,14 +2584,10 @@
     <string name="summary_range_verbal_combination" msgid="8467306662961568656">"<xliff:g id="START">%1$s</xliff:g> – <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="zen_mode_calls" msgid="7051492091133751208">"Дзвінки"</string>
     <string name="zen_mode_messages" msgid="5886440273537510894">"Повідомлення"</string>
-    <!-- no translation found for zen_mode_from_anyone (2638322015361252161) -->
-    <skip />
-    <!-- no translation found for zen_mode_from_contacts (2232335406106711637) -->
-    <skip />
-    <!-- no translation found for zen_mode_from_starred (2678345811950997027) -->
-    <skip />
-    <!-- no translation found for zen_mode_from_none (8219706639954614136) -->
-    <skip />
+    <string name="zen_mode_from_anyone" msgid="2638322015361252161">"Від усіх"</string>
+    <string name="zen_mode_from_contacts" msgid="2232335406106711637">"Лише від контактів"</string>
+    <string name="zen_mode_from_starred" msgid="2678345811950997027">"Лише від контактів, позначених зірочкою"</string>
+    <string name="zen_mode_from_none" msgid="8219706639954614136">"Ні від кого"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Сигнали"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Нагадування"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Події"</string>
@@ -2618,44 +2601,6 @@
     <string name="zen_mode_start_time" msgid="8102602297273744441">"Час початку"</string>
     <string name="zen_mode_end_time" msgid="8774327885892705505">"Час завершення"</string>
     <string name="zen_mode_end_time_next_day_summary_format" msgid="4201521691238728701">"Наступного дня о <xliff:g id="FORMATTED_TIME">%s</xliff:g>"</string>
-    <string name="zen_mode_interruptions_voice_title" msgid="855256211259132964">"Сповіщення"</string>
-    <string name="zen_mode_interruptions_voice_header" msgid="2888750427673157270">"Коли надходять дзвінки та сповіщення"</string>
-    <string name="zen_mode_interruptions_voice_prompt" msgid="3041817362475695079">"Коли вас можна турбувати?"</string>
-    <string name="zen_mode_duration_voice_prompt" msgid="7381920739389625133">"Як довго?"</string>
-    <string name="zen_mode_option_voice_all_interruptions" msgid="9222054216334506341">"Завжди сповіщати"</string>
-    <string name="zen_mode_option_voice_all_interruptions_synonyms" msgid="475880955609403705">"вимкнути,усі,усе"</string>
-    <string name="zen_mode_option_voice_important_interruptions" msgid="3695277268139705627">"Дозволити лише пріоритетні сповіщення"</string>
-    <string name="zen_mode_option_voice_important_synonyms" msgid="2727831854148694795">"важливі,пріоритетні,лише пріоритетні,тільки пріоритетні,пріоритетні сповіщення"</string>
-    <string name="zen_mode_option_voice_alarms" msgid="5961982397880688359">"Дозволити лише сигнали"</string>
-    <string name="zen_mode_option_voice_alarms_synonyms" msgid="4049356986371569950">"сигнали,лише сигнали,тільки сигнали"</string>
-    <string name="zen_mode_option_voice_no_interruptions" msgid="3009964973912018317">"Не турбувати"</string>
-    <string name="zen_mode_option_voice_no_interruptions_synonyms" msgid="8368549512275129844">"немає,нічого,без сповіщень,не турбувати"</string>
-    <string name="zen_mode_duration_indefinte_voice_label" msgid="9026001994945950539">"Без обмежень"</string>
-    <plurals name="zen_mode_duration_minutes_voice_label" formatted="false" msgid="4750982084453980">
-      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> хвилина</item>
-      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> хвилини</item>
-      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> хвилин</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> хвилини</item>
-    </plurals>
-    <plurals name="zen_mode_duration_hours_voice_label" formatted="false" msgid="175180249071227957">
-      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> година</item>
-      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> години</item>
-      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> годин</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> години</item>
-    </plurals>
-    <string name="zen_mode_summary_priority_indefinitely" msgid="5417246022606171241">"Вибрати лише пріоритетні сповіщення без обмежень"</string>
-    <plurals name="zen_mode_summary_priority_by_minute" formatted="false" msgid="1938955186728929112">
-      <item quantity="one">Вибрати лише пріоритетні сповіщення на <xliff:g id="DURATION">%1$d</xliff:g> хвилину до <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-      <item quantity="few">Вибрати лише пріоритетні сповіщення на <xliff:g id="DURATION">%1$d</xliff:g> хвилини до <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-      <item quantity="many">Вибрати лише пріоритетні сповіщення на <xliff:g id="DURATION">%1$d</xliff:g> хвилин до <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-      <item quantity="other">Вибрати лише пріоритетні сповіщення на <xliff:g id="DURATION">%1$d</xliff:g> хвилини до <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-    </plurals>
-    <plurals name="zen_mode_summary_priority_by_hour" formatted="false" msgid="6664710096150897823">
-      <item quantity="one">Вибрати лише пріоритетні сповіщення на <xliff:g id="DURATION">%1$d</xliff:g> годину до <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-      <item quantity="few">Вибрати лише пріоритетні сповіщення на <xliff:g id="DURATION">%1$d</xliff:g> години до <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-      <item quantity="many">Вибрати лише пріоритетні сповіщення на <xliff:g id="DURATION">%1$d</xliff:g> годин до <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-      <item quantity="other">Вибрати лише пріоритетні сповіщення на <xliff:g id="DURATION">%1$d</xliff:g> години до <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-    </plurals>
     <string name="zen_mode_summary_alarams_only_indefinite" msgid="7941708969866496605">"Вибрати лише сигнали без обмежень"</string>
     <plurals name="zen_mode_summary_alarms_only_by_minute" formatted="false" msgid="6122003583875424601">
       <item quantity="one">Вибрати сигнали лише на <xliff:g id="DURATION">%1$d</xliff:g> хвилину до <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
@@ -2669,21 +2614,7 @@
       <item quantity="many">Вибрати сигнали лише на <xliff:g id="DURATION">%1$d</xliff:g> годин до <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
       <item quantity="other">Вибрати сигнали лише на <xliff:g id="DURATION">%1$d</xliff:g> години до <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
     </plurals>
-    <string name="zen_mode_summary_no_interruptions_indefinite" msgid="7668951387253438521">"Вибрати опцію \"Не турбувати\" без обмежень"</string>
-    <plurals name="zen_mode_summary_no_interruptions_by_minute" formatted="false" msgid="5642379561004767217">
-      <item quantity="one">Вибрати опцію \"Не турбувати\" на <xliff:g id="DURATION">%1$d</xliff:g> хвилину до <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-      <item quantity="few">Вибрати опцію \"Не турбувати\" на <xliff:g id="DURATION">%1$d</xliff:g> хвилини до <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-      <item quantity="many">Вибрати опцію \"Не турбувати\" на <xliff:g id="DURATION">%1$d</xliff:g> хвилин до <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-      <item quantity="other">Вибрати опцію \"Не турбувати\" на <xliff:g id="DURATION">%1$d</xliff:g> хвилини до <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-    </plurals>
-    <plurals name="zen_mode_summary_no_interruptions_by_hour" formatted="false" msgid="9059043643566528697">
-      <item quantity="one">Вибрати опцію \"Не турбувати\" на <xliff:g id="DURATION">%1$d</xliff:g> годину до <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-      <item quantity="few">Вибрати опцію \"Не турбувати\" на <xliff:g id="DURATION">%1$d</xliff:g> години до <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-      <item quantity="many">Вибрати опцію \"Не турбувати\" на <xliff:g id="DURATION">%1$d</xliff:g> годин до <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-      <item quantity="other">Вибрати опцію \"Не турбувати\" на <xliff:g id="DURATION">%1$d</xliff:g> години до <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-    </plurals>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"Вибрати опцію \"Завжди надсилати\""</string>
-    <string name="zen_mode_duration_indefinite_voice_synonyms" msgid="4213829562303429456">"завжди"</string>
     <string name="notification_settings_apps_title" msgid="1125354590652967250">"Сповіщення додатків"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Налаштування сповіщень"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Надіслати відгук про цей пристрій"</string>
@@ -2779,6 +2710,10 @@
     <string name="app_permissions" msgid="4148222031991883874">"Дозволи додатків"</string>
     <string name="app_permissions_summary" msgid="2098173899436407221">"Додатковий доступ мають стільки додатків: <xliff:g id="COUNT_0">%d</xliff:g> з <xliff:g id="COUNT_1">%d</xliff:g>"</string>
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"Дозволено додатків: <xliff:g id="COUNT_0">%d</xliff:g> з <xliff:g id="COUNT_1">%d</xliff:g>"</string>
+    <!-- no translation found for tap_to_wake (7211944147196888807) -->
+    <skip />
+    <!-- no translation found for tap_to_wake_summary (4341387904987585616) -->
+    <skip />
     <string name="domain_urls_title" msgid="8735310976048599572">"URL-адреси домену"</string>
     <string name="domain_urls_summary_none" msgid="4817723415916239693">"Не відкривати URL-адреси домену"</string>
     <string name="domain_urls_summary_one" msgid="4427559120855938432">"Відкривати <xliff:g id="DOMAIN">%s</xliff:g>"</string>
@@ -2811,8 +2746,17 @@
     <string name="memory_avg_desc" msgid="1551240906596518412">"У середньому <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
     <string name="memory_use_running_format" msgid="4172488041800743760">"<xliff:g id="MEMORY">%1$s</xliff:g> / <xliff:g id="RUNNING">%2$s</xliff:g>"</string>
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
-    <string name="high_power_on" msgid="4925948784500291865">"Увімкнено"</string>
+    <string name="high_power_apps" msgid="2116416853043103135">"Ігнорувати оптимізацію"</string>
+    <string name="high_power_filter_on" msgid="3862942127137594196">"Дозволено"</string>
+    <!-- no translation found for high_power_on (148473814103292724) -->
+    <skip />
     <string name="high_power_off" msgid="4069404908196636677">"Вимкнено"</string>
-    <!-- no translation found for app_notification_preferences (6413363601485067724) -->
+    <!-- no translation found for high_power_desc (8777632785903235764) -->
+    <skip />
+    <!-- no translation found for high_power_count (4343190376439806186) -->
+    <string name="battery_summary" msgid="101415762036784289">"З часу останнього повного заряджання використано <xliff:g id="PERCENTAGE">%1$d</xliff:g>%%"</string>
+    <string name="no_battery_summary" msgid="3528036835462846814">"З часу останнього повного заряджання акумулятор не використовувався"</string>
+    <string name="app_notification_preferences" msgid="6413363601485067724">"Налаштування сповіщень додатків"</string>
+    <!-- no translation found for system_ui_settings (579824306467081123) -->
     <skip />
 </resources>

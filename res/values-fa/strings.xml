@@ -171,10 +171,8 @@
     <string name="bluetooth_pb_remember_choice" msgid="3622898084442402071">"دوباره سؤال نشود"</string>
     <string name="bluetooth_map_request" msgid="4595727689513143902">"درخواست دسترسی به پیام"</string>
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"‏%1$s می‌خواهد به پیام‌های شما دسترسی یابد. اجازه دسترسی به %2$s داده شود؟"</string>
-    <!-- no translation found for bluetooth_sap_request (2669762224045354417) -->
-    <skip />
-    <!-- no translation found for bluetooth_sap_acceptance_dialog_text (4414253873553608690) -->
-    <skip />
+    <string name="bluetooth_sap_request" msgid="2669762224045354417">"درخواست دسترسی به سیم‌‌کارت"</string>
+    <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> می‌خواهد به سیم‌کارت شما دسترسی پیدا کند. در صورتی که به دسترسی به سیم‌کارت اجازه دهید، اتصال داده در مدت اتصال در دستگاه شما غیرفعال می‌شود. به <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g> اجازه دسترسی دهید"</string>
     <string name="date_and_time" msgid="9062980487860757694">"تاریخ و زمان"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"انتخاب منطقهٔ زمانی"</string>
     <string name="display_preview_label" msgid="1127597250917274792">"پیش‌نمایش:"</string>
@@ -1508,8 +1506,7 @@
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"‏Wi‑Fi فعال برای واگذاری به شبکه سلولی"</string>
     <string name="wifi_allow_scan_with_traffic" msgid="3601853081178265786">"‏همواره به اسکن‌های رومینگ Wi‑Fi اجازه داده شود"</string>
     <string name="legacy_dhcp_client" msgid="694426978909127287">"‏استفاده از کلاینت DHCP قدیمی"</string>
-    <!-- no translation found for mobile_data_always_on (7745605759775320362) -->
-    <skip />
+    <string name="mobile_data_always_on" msgid="7745605759775320362">"داده سلولی همیشه فعال"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"نمایش گزینه‌ها برای گواهینامه نمایش بدون سیم"</string>
     <string name="wifi_verbose_logging_summary" msgid="6615071616111731958">"‏افزایش سطح گزارش‌گیری Wi‑Fi، نمایش به ازای SSID RSSI در انتخاب‌کننده Wi‑Fi"</string>
     <string name="wifi_aggressive_handover_summary" msgid="6328455667642570371">"‏وقتی فعال است، در شرایط پایین بودن سیگنال، Wi‑Fi برای واگذار کردن اتصال داده به شبکه سلولی فعال‌تر خواهد بود."</string>
@@ -1522,8 +1519,7 @@
     <string name="allow_mock_location_summary" msgid="317615105156345626">"مکان‌های کاذب مجاز هستند"</string>
     <string name="debug_view_attributes" msgid="6485448367803310384">"فعال کردن بازبینی ویژگی بازدید"</string>
     <string name="legacy_dhcp_client_summary" msgid="163383566317652040">"‏به جای کلاینت Android DHCP جدید، از کلاینت Lollipop DHCP استفاده کنید."</string>
-    <!-- no translation found for mobile_data_always_on_summary (8149773901431697910) -->
-    <skip />
+    <string name="mobile_data_always_on_summary" msgid="8149773901431697910">"‏داده سلولی همیشه فعال نگه داشته می‌شود، حتی وقتی Wi-Fi فعال است (برای جابه‌جایی سریع شبکه)."</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"‏رفع عیب USB انجام شود؟"</string>
     <string name="adb_warning_message" msgid="7316799925425402244">"‏رفع عیب USB فقط برای اهداف برنامه‌نویسی در نظر گرفته شده است. از آن برای رونوشت‌برداری داده بین رایانه و دستگاه خود، نصب برنامه‌ها در دستگاه خود بدون اعلان و خواندن داده‌های گزارش استفاده کنید."</string>
     <string name="adb_keys_warning_message" msgid="5659849457135841625">"‏دسترسی به اشکال‌زدایی USB از تمام رایانه‌هایی که قبلاً مجاز دانسته‌اید لغو شود؟"</string>
@@ -2465,6 +2461,8 @@
     <string name="keywords_all_apps" msgid="5377153522551809915">"برنامه‌ها دانلود برنامه‌ها سیستم"</string>
     <string name="keywords_app_permissions" msgid="8677901415217188314">"امنیت مجوزهای برنامه‌ها"</string>
     <string name="keywords_default_apps" msgid="3581727483175522599">"پیش‌فرض برنامه‌ها"</string>
+    <!-- no translation found for keywords_ignore_optimizations (946516741848647905) -->
+    <skip />
     <string name="keywords_lockscreen" msgid="4806191868723291541">"لغزاندن گذرواژه الگو پین"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"‏تنظیم برچسب NFC برای Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"نوشتن"</string>
@@ -2489,8 +2487,7 @@
     <string name="notification_ringtone_title" msgid="3361201340352664272">"آهنگ زنگ پیش‌فرض اعلان"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"برای تماس‌ هم لرزش داشته باشد"</string>
     <string name="notification_section_header" msgid="95661783916799134">"اعلان"</string>
-    <!-- no translation found for advanced_section_header (8833934850242546903) -->
-    <skip />
+    <string name="advanced_section_header" msgid="8833934850242546903">"پیشرفته"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"چراغ اعلان چشمک بزند"</string>
     <string name="lock_screen_notifications_title" msgid="9118805570775519455">"وقتی دستگاه قفل است"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"نمایش همه محتوای اعلان"</string>
@@ -2520,10 +2517,8 @@
     <string name="no_notification_listeners" msgid="2767405417723149879">"هیچ شنونده اعلانی نصب نشده است."</string>
     <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"<xliff:g id="SERVICE">%1$s</xliff:g> فعال‌ شود؟"</string>
     <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> می‌تواند تمام اعلان‌های پست شده از طرف سیستم یا هر یک از برنامه‌های نصب شده را بخواند، که ممکن است حاوی اطلاعات شخصی مانند نام مخاطبین و متن پیام‌های ارسال شده به شما باشد. همچنین می‌تواند این اعلان‌ها را رد کند یا امکان لمس دکمه‌های عملکردی موجود در آنها را فراهم کند."</string>
-    <!-- no translation found for manage_zen_access_title (2611116122628520522) -->
-    <skip />
-    <!-- no translation found for zen_access_empty_text (8772967285742259540) -->
-    <skip />
+    <string name="manage_zen_access_title" msgid="2611116122628520522">"دسترسی به «مزاحم نشوید»"</string>
+    <string name="zen_access_empty_text" msgid="8772967285742259540">"هیچ برنامه نصب شده‌ای دسترسی به «مزاحم نشوید» را درخواست نکرده است"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"در حال بارگیری برنامه..."</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"مسدود کردن همه"</string>
     <string name="app_notification_block_summary" msgid="9049487483231233726">"هرگز از این برنامه اعلان نشان داده نمی‌شود"</string>
@@ -2550,22 +2545,14 @@
     <string name="zen_schedule_rule_enabled_toast" msgid="3379499360390382259">"قانون خودکار به گونه‌ای تنظیم شده است که در زمان‌های خاصی، «مزاحم نشوید» را روشن کند"</string>
     <string name="zen_event_rule_type_name" msgid="2645981990973086797">"قانون رویداد"</string>
     <string name="zen_event_rule_enabled_toast" msgid="6910577623330811480">"قانون خودکار به گونه‌ای تنظیم شده است که در طول رویدادهای خاصی، «مزاحم نشوید» را روشن کند"</string>
-    <!-- no translation found for zen_mode_event_rule_calendar (8787906563769067418) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_summary_calendar_template (5135844750232403975) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_summary_any_calendar (4936646399126636358) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_summary_reply_template (6590671260829837157) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_calendar_any (6485568415998569885) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_reply (5166322024212403739) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_reply_any_except_no (8868873496008825961) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_reply_yes_or_maybe (2769656565454495824) -->
-    <skip />
+    <string name="zen_mode_event_rule_calendar" msgid="8787906563769067418">"در طول رویدادهای برای"</string>
+    <string name="zen_mode_event_rule_summary_calendar_template" msgid="5135844750232403975">"در طول رویدادهای برای <xliff:g id="CALENDAR">%1$s</xliff:g>"</string>
+    <string name="zen_mode_event_rule_summary_any_calendar" msgid="4936646399126636358">"هر تقویمی"</string>
+    <string name="zen_mode_event_rule_summary_reply_template" msgid="6590671260829837157">"وقتی پاسخ چنین است <xliff:g id="REPLY">%1$s</xliff:g>"</string>
+    <string name="zen_mode_event_rule_calendar_any" msgid="6485568415998569885">"هر تقویمی"</string>
+    <string name="zen_mode_event_rule_reply" msgid="5166322024212403739">"وقتی پاسخ چنین است"</string>
+    <string name="zen_mode_event_rule_reply_any_except_no" msgid="8868873496008825961">"بله، شاید یا بدون پاسخ"</string>
+    <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="2769656565454495824">"بله یا شاید"</string>
     <string name="zen_mode_event_rule_reply_yes" msgid="1003598835878784659">"بله"</string>
     <string name="zen_mode_rule_not_found_text" msgid="8963662446092059836">"قانون پیدا نشد."</string>
     <string name="zen_mode_rule_summary_combination" msgid="2526506268333198254">"<xliff:g id="DESCRIPTION">%1$s</xliff:g> / <xliff:g id="MODE">%2$s</xliff:g>"</string>
@@ -2577,14 +2564,10 @@
     <string name="summary_range_verbal_combination" msgid="8467306662961568656">"<xliff:g id="START">%1$s</xliff:g> تا <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="zen_mode_calls" msgid="7051492091133751208">"تماس‌ها"</string>
     <string name="zen_mode_messages" msgid="5886440273537510894">"پیام‌ها"</string>
-    <!-- no translation found for zen_mode_from_anyone (2638322015361252161) -->
-    <skip />
-    <!-- no translation found for zen_mode_from_contacts (2232335406106711637) -->
-    <skip />
-    <!-- no translation found for zen_mode_from_starred (2678345811950997027) -->
-    <skip />
-    <!-- no translation found for zen_mode_from_none (8219706639954614136) -->
-    <skip />
+    <string name="zen_mode_from_anyone" msgid="2638322015361252161">"از هر کسی"</string>
+    <string name="zen_mode_from_contacts" msgid="2232335406106711637">"تنها از مخاطبین"</string>
+    <string name="zen_mode_from_starred" msgid="2678345811950997027">"تنها از مخاطین ستاره‌دار"</string>
+    <string name="zen_mode_from_none" msgid="8219706639954614136">"هیچ‌کدام"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"هشدارها"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"یادآوری‌ها"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"رویدادها"</string>
@@ -2598,36 +2581,6 @@
     <string name="zen_mode_start_time" msgid="8102602297273744441">"زمان شروع"</string>
     <string name="zen_mode_end_time" msgid="8774327885892705505">"زمان پایان"</string>
     <string name="zen_mode_end_time_next_day_summary_format" msgid="4201521691238728701">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> روز بعد"</string>
-    <string name="zen_mode_interruptions_voice_title" msgid="855256211259132964">"وقفه‌ها"</string>
-    <string name="zen_mode_interruptions_voice_header" msgid="2888750427673157270">"هنگام ورود تماس‌ها و اعلان‌ها"</string>
-    <string name="zen_mode_interruptions_voice_prompt" msgid="3041817362475695079">"چه موقع می‌خواهید وقفه ایجاد شود؟"</string>
-    <string name="zen_mode_duration_voice_prompt" msgid="7381920739389625133">"برای چه مدت؟"</string>
-    <string name="zen_mode_option_voice_all_interruptions" msgid="9222054216334506341">"همواره با وقفه"</string>
-    <string name="zen_mode_option_voice_all_interruptions_synonyms" msgid="475880955609403705">"خاموش، همه، همه چیز"</string>
-    <string name="zen_mode_option_voice_important_interruptions" msgid="3695277268139705627">"اجازه فقط به وقفه‌های اولویت‌دار"</string>
-    <string name="zen_mode_option_voice_important_synonyms" msgid="2727831854148694795">"مهم، اولویت، اولویت فقط، فقط اولویت، اعلان‌های الویت‌دار"</string>
-    <string name="zen_mode_option_voice_alarms" msgid="5961982397880688359">"اجازه فقط به هشدارها"</string>
-    <string name="zen_mode_option_voice_alarms_synonyms" msgid="4049356986371569950">"هشدارها، هشدارها فقط، فقط هشدارها"</string>
-    <string name="zen_mode_option_voice_no_interruptions" msgid="3009964973912018317">"بدون وقفه"</string>
-    <string name="zen_mode_option_voice_no_interruptions_synonyms" msgid="8368549512275129844">"هیچ‌کدام، هرگز، هیچ‌چیزی، بدون وقفه"</string>
-    <string name="zen_mode_duration_indefinte_voice_label" msgid="9026001994945950539">"نامحدود"</string>
-    <plurals name="zen_mode_duration_minutes_voice_label" formatted="false" msgid="4750982084453980">
-      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> دقیقه</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> دقیقه</item>
-    </plurals>
-    <plurals name="zen_mode_duration_hours_voice_label" formatted="false" msgid="175180249071227957">
-      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> ساعت</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ساعت</item>
-    </plurals>
-    <string name="zen_mode_summary_priority_indefinitely" msgid="5417246022606171241">"تغییر در اعلان‌های اولویت‌دار تنها به مدت نامحدود"</string>
-    <plurals name="zen_mode_summary_priority_by_minute" formatted="false" msgid="1938955186728929112">
-      <item quantity="one">تغییر در اعلان‌های اولویت‌دار تنها به مدت <xliff:g id="DURATION">%1$d</xliff:g> دقیقه تا <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-      <item quantity="other">تغییر در اعلان‌های اولویت‌دار تنها به مدت <xliff:g id="DURATION">%1$d</xliff:g> دقیقه تا <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-    </plurals>
-    <plurals name="zen_mode_summary_priority_by_hour" formatted="false" msgid="6664710096150897823">
-      <item quantity="one">تغییر در اعلان‌های اولویت‌دار تنها به مدت <xliff:g id="DURATION">%1$d</xliff:g> ساعت (تا <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
-      <item quantity="other">تغییر در اعلان‌های اولویت‌دار تنها به مدت <xliff:g id="DURATION">%1$d</xliff:g> ساعت (تا <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
-    </plurals>
     <string name="zen_mode_summary_alarams_only_indefinite" msgid="7941708969866496605">"تغییر در هشدارها به طور نامحدود"</string>
     <plurals name="zen_mode_summary_alarms_only_by_minute" formatted="false" msgid="6122003583875424601">
       <item quantity="one">تغییر در هشدارها تنها به مدت <xliff:g id="DURATION">%1$d</xliff:g> دقیقه (تا <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
@@ -2637,17 +2590,7 @@
       <item quantity="one">تغییر در هشدارها تنها به مدت <xliff:g id="DURATION">%1$d</xliff:g> ساعت تا <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
       <item quantity="other">تغییر در هشدارها تنها به مدت <xliff:g id="DURATION">%1$d</xliff:g> ساعت تا <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
     </plurals>
-    <string name="zen_mode_summary_no_interruptions_indefinite" msgid="7668951387253438521">"تغییر در «وقفه نداشته باشد» به صورت نامحدود"</string>
-    <plurals name="zen_mode_summary_no_interruptions_by_minute" formatted="false" msgid="5642379561004767217">
-      <item quantity="one">تغییر در «وقفه نداشته باشد» به مدت <xliff:g id="DURATION">%1$d</xliff:g> دقیقه (تا <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
-      <item quantity="other">تغییر در «وقفه نداشته باشد» به مدت <xliff:g id="DURATION">%1$d</xliff:g> دقیقه (تا <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
-    </plurals>
-    <plurals name="zen_mode_summary_no_interruptions_by_hour" formatted="false" msgid="9059043643566528697">
-      <item quantity="one">تغییر در «وقفه نداشته باشد» به مدت <xliff:g id="DURATION">%1$d</xliff:g> ساعت تا <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-      <item quantity="other">تغییر در «وقفه نداشته باشد» به مدت <xliff:g id="DURATION">%1$d</xliff:g> ساعت تا <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-    </plurals>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"تغییر در «همیشه وقفه»"</string>
-    <string name="zen_mode_duration_indefinite_voice_synonyms" msgid="4213829562303429456">"همیشه"</string>
     <string name="notification_settings_apps_title" msgid="1125354590652967250">"اعلان‌های برنامه"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"تنظیمات اعلان"</string>
     <string name="device_feedback" msgid="3238056036766293294">"ارسال بازخورد درباره این دستگاه"</string>
@@ -2739,6 +2682,10 @@
     <string name="app_permissions" msgid="4148222031991883874">"مجوزهای برنامه"</string>
     <string name="app_permissions_summary" msgid="2098173899436407221">"<xliff:g id="COUNT_0">%d</xliff:g> از <xliff:g id="COUNT_1">%d</xliff:g> برنامه اجازه دسترسی اضافی دارد"</string>
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"<xliff:g id="COUNT_0">%d</xliff:g> از <xliff:g id="COUNT_1">%d</xliff:g> برنامه مجاز است"</string>
+    <!-- no translation found for tap_to_wake (7211944147196888807) -->
+    <skip />
+    <!-- no translation found for tap_to_wake_summary (4341387904987585616) -->
+    <skip />
     <string name="domain_urls_title" msgid="8735310976048599572">"نشانی‌های اینترنتی دامنه"</string>
     <string name="domain_urls_summary_none" msgid="4817723415916239693">"هیچ نشانی اینترنتی دامنه‌ای باز نشود"</string>
     <string name="domain_urls_summary_one" msgid="4427559120855938432">"باز کردن «<xliff:g id="DOMAIN">%s</xliff:g>»"</string>
@@ -2769,8 +2716,17 @@
     <string name="memory_avg_desc" msgid="1551240906596518412">"میانگین <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
     <string name="memory_use_running_format" msgid="4172488041800743760">"<xliff:g id="MEMORY">%1$s</xliff:g> /‏ <xliff:g id="RUNNING">%2$s</xliff:g>"</string>
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
-    <string name="high_power_on" msgid="4925948784500291865">"روشن"</string>
+    <string name="high_power_apps" msgid="2116416853043103135">"نادیده گرفتن بهینه‌سازی‌ها"</string>
+    <string name="high_power_filter_on" msgid="3862942127137594196">"مجاز"</string>
+    <!-- no translation found for high_power_on (148473814103292724) -->
+    <skip />
     <string name="high_power_off" msgid="4069404908196636677">"خاموش"</string>
-    <!-- no translation found for app_notification_preferences (6413363601485067724) -->
+    <!-- no translation found for high_power_desc (8777632785903235764) -->
+    <skip />
+    <!-- no translation found for high_power_count (4343190376439806186) -->
+    <string name="battery_summary" msgid="101415762036784289">"<xliff:g id="PERCENTAGE">%1$d</xliff:g>٪ استفاده از آخرین شارژ کامل"</string>
+    <string name="no_battery_summary" msgid="3528036835462846814">"بدون استفاده از باتری، از آخرین شارژ کامل"</string>
+    <string name="app_notification_preferences" msgid="6413363601485067724">"تنظیمات ترجیحی اعلان برنامه"</string>
+    <!-- no translation found for system_ui_settings (579824306467081123) -->
     <skip />
 </resources>

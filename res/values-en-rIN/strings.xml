@@ -2461,6 +2461,8 @@
     <string name="keywords_all_apps" msgid="5377153522551809915">"apps download applications system"</string>
     <string name="keywords_app_permissions" msgid="8677901415217188314">"apps permissions security"</string>
     <string name="keywords_default_apps" msgid="3581727483175522599">"apps default"</string>
+    <!-- no translation found for keywords_ignore_optimizations (946516741848647905) -->
+    <skip />
     <string name="keywords_lockscreen" msgid="4806191868723291541">"slide password pattern pin"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Set up Wi-Fi NFC Tag"</string>
     <string name="write_tag" msgid="8571858602896222537">"Write"</string>
@@ -2579,36 +2581,6 @@
     <string name="zen_mode_start_time" msgid="8102602297273744441">"Start time"</string>
     <string name="zen_mode_end_time" msgid="8774327885892705505">"End time"</string>
     <string name="zen_mode_end_time_next_day_summary_format" msgid="4201521691238728701">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> next day"</string>
-    <string name="zen_mode_interruptions_voice_title" msgid="855256211259132964">"Interruptions"</string>
-    <string name="zen_mode_interruptions_voice_header" msgid="2888750427673157270">"When calls and notifications arrive"</string>
-    <string name="zen_mode_interruptions_voice_prompt" msgid="3041817362475695079">"When would you like to be interrupted?"</string>
-    <string name="zen_mode_duration_voice_prompt" msgid="7381920739389625133">"For how long?"</string>
-    <string name="zen_mode_option_voice_all_interruptions" msgid="9222054216334506341">"Always interrupt"</string>
-    <string name="zen_mode_option_voice_all_interruptions_synonyms" msgid="475880955609403705">"off,all,everything"</string>
-    <string name="zen_mode_option_voice_important_interruptions" msgid="3695277268139705627">"Allow only priority interruptions"</string>
-    <string name="zen_mode_option_voice_important_synonyms" msgid="2727831854148694795">"important,priority,priority only,only priority,priority notifications"</string>
-    <string name="zen_mode_option_voice_alarms" msgid="5961982397880688359">"Allow only alarms"</string>
-    <string name="zen_mode_option_voice_alarms_synonyms" msgid="4049356986371569950">"alarms,alarms only,only alarms"</string>
-    <string name="zen_mode_option_voice_no_interruptions" msgid="3009964973912018317">"Don\'t interrupt"</string>
-    <string name="zen_mode_option_voice_no_interruptions_synonyms" msgid="8368549512275129844">"none,never,nothing,no interruptions"</string>
-    <string name="zen_mode_duration_indefinte_voice_label" msgid="9026001994945950539">"Indefinitely"</string>
-    <plurals name="zen_mode_duration_minutes_voice_label" formatted="false" msgid="4750982084453980">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> minutes</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> minute</item>
-    </plurals>
-    <plurals name="zen_mode_duration_hours_voice_label" formatted="false" msgid="175180249071227957">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> hours</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> hour</item>
-    </plurals>
-    <string name="zen_mode_summary_priority_indefinitely" msgid="5417246022606171241">"Change to priority notifications only indefinitely"</string>
-    <plurals name="zen_mode_summary_priority_by_minute" formatted="false" msgid="1938955186728929112">
-      <item quantity="other">Change to priority notifications only for <xliff:g id="DURATION">%1$d</xliff:g> minutes until <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-      <item quantity="one">Change to priority notifications only for one minute until <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g></item>
-    </plurals>
-    <plurals name="zen_mode_summary_priority_by_hour" formatted="false" msgid="6664710096150897823">
-      <item quantity="other">Change to priority notifications only for <xliff:g id="DURATION">%1$d</xliff:g> hours (until <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
-      <item quantity="one">Change to priority notifications only for one hour until <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g></item>
-    </plurals>
     <string name="zen_mode_summary_alarams_only_indefinite" msgid="7941708969866496605">"Change to alarms only indefinitely"</string>
     <plurals name="zen_mode_summary_alarms_only_by_minute" formatted="false" msgid="6122003583875424601">
       <item quantity="other">Change to alarms only for <xliff:g id="DURATION">%1$d</xliff:g> minutes (until <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
@@ -2618,17 +2590,7 @@
       <item quantity="other">Change to alarms only for <xliff:g id="DURATION">%1$d</xliff:g> hours until <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
       <item quantity="one">Change to alarms only for one hour until <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g></item>
     </plurals>
-    <string name="zen_mode_summary_no_interruptions_indefinite" msgid="7668951387253438521">"Change to don\'t interrupt indefinitely"</string>
-    <plurals name="zen_mode_summary_no_interruptions_by_minute" formatted="false" msgid="5642379561004767217">
-      <item quantity="other">Change to don\'t interrupt for <xliff:g id="DURATION">%1$d</xliff:g> minutes (until <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
-      <item quantity="one">Change to don\'t interrupt for one minute until <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g></item>
-    </plurals>
-    <plurals name="zen_mode_summary_no_interruptions_by_hour" formatted="false" msgid="9059043643566528697">
-      <item quantity="other">Change to don\'t interrupt for <xliff:g id="DURATION">%1$d</xliff:g> hours until <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-      <item quantity="one">Change to don\'t interrupt for one hour until <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g></item>
-    </plurals>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"Change to always interrupt"</string>
-    <string name="zen_mode_duration_indefinite_voice_synonyms" msgid="4213829562303429456">"forever"</string>
     <string name="notification_settings_apps_title" msgid="1125354590652967250">"App notifications"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Notification settings"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Send feedback about this device"</string>
@@ -2720,6 +2682,10 @@
     <string name="app_permissions" msgid="4148222031991883874">"App permissions"</string>
     <string name="app_permissions_summary" msgid="2098173899436407221">"<xliff:g id="COUNT_0">%d</xliff:g> of <xliff:g id="COUNT_1">%d</xliff:g> apps allowed additional access"</string>
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"<xliff:g id="COUNT_0">%d</xliff:g> of <xliff:g id="COUNT_1">%d</xliff:g> apps allowed"</string>
+    <!-- no translation found for tap_to_wake (7211944147196888807) -->
+    <skip />
+    <!-- no translation found for tap_to_wake_summary (4341387904987585616) -->
+    <skip />
     <string name="domain_urls_title" msgid="8735310976048599572">"Domain URLs"</string>
     <string name="domain_urls_summary_none" msgid="4817723415916239693">"Don\'t open any domain URL"</string>
     <string name="domain_urls_summary_one" msgid="4427559120855938432">"Open \'<xliff:g id="DOMAIN">%s</xliff:g>\'"</string>
@@ -2750,7 +2716,17 @@
     <string name="memory_avg_desc" msgid="1551240906596518412">"Average <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
     <string name="memory_use_running_format" msgid="4172488041800743760">"<xliff:g id="MEMORY">%1$s</xliff:g> / <xliff:g id="RUNNING">%2$s</xliff:g>"</string>
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
-    <string name="high_power_on" msgid="4925948784500291865">"On"</string>
+    <string name="high_power_apps" msgid="2116416853043103135">"Ignore optimizations"</string>
+    <string name="high_power_filter_on" msgid="3862942127137594196">"Allowed"</string>
+    <!-- no translation found for high_power_on (148473814103292724) -->
+    <skip />
     <string name="high_power_off" msgid="4069404908196636677">"Off"</string>
+    <!-- no translation found for high_power_desc (8777632785903235764) -->
+    <skip />
+    <!-- no translation found for high_power_count (4343190376439806186) -->
+    <string name="battery_summary" msgid="101415762036784289">"<xliff:g id="PERCENTAGE">%1$d</xliff:g>%% use since last full charge"</string>
+    <string name="no_battery_summary" msgid="3528036835462846814">"No battery use since last full charge"</string>
     <string name="app_notification_preferences" msgid="6413363601485067724">"App notification preferences"</string>
+    <!-- no translation found for system_ui_settings (579824306467081123) -->
+    <skip />
 </resources>
