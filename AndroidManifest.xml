@@ -1786,6 +1786,13 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".deviceinfo.UsbModeChooserActivity"
+                  android:excludeFromRecents="true"
+                  android:exported="true"
+                  android:permission="android.permission.MANAGE_USB"
+                  android:theme="@style/Transparent">
+        </activity>
+
         <activity android:name=".bluetooth.RequestPermissionHelperActivity"
                   android:label="@string/bluetooth_pairing_request"
                   android:excludeFromRecents="true"
