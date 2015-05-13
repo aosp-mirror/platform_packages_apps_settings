@@ -34,7 +34,6 @@ import com.android.settings.applications.AdvancedAppSettings;
 import com.android.settings.applications.ManageDefaultApps;
 import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.deviceinfo.StorageSettings;
-import com.android.settings.deviceinfo.UsbSettings;
 import com.android.settings.fuelgauge.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
@@ -131,7 +130,6 @@ public final class Ranking {
 
         // Storage
         sRankMap.put(StorageSettings.class.getName(), RANK_STORAGE);
-        sRankMap.put(UsbSettings.class.getName(), RANK_STORAGE);
 
         // Battery
         sRankMap.put(PowerUsageSummary.class.getName(), RANK_POWER_USAGE);
