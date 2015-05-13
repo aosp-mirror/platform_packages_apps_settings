@@ -16,7 +16,6 @@
 
 package com.android.settings.applications;
 
-import android.annotation.Nullable;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -28,12 +27,11 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.Preference;
 import android.provider.SearchIndexableResource;
-import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
 
 import com.android.internal.content.PackageMonitor;
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -194,7 +192,7 @@ public class ManageDefaultApps extends SettingsPreferenceFragment
 
     @Override
     protected int getMetricsCategory() {
-        return InstrumentedFragment.VIEW_CATEGORY_DEFAULT_APPS;
+        return MetricsLogger.APPLICATIONS_DEFAULT_APPS;
     }
 
     @Override
