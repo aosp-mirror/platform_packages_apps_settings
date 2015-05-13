@@ -23,6 +23,7 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.SwitchPreference;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoWithHeader;
@@ -69,7 +70,7 @@ public class HighPowerDetail extends AppInfoWithHeader implements OnPreferenceCh
 
     @Override
     protected int getMetricsCategory() {
-        return InstrumentedFragment.VIEW_CATEGORY_HIGH_POWER_DETAILS;
+        return MetricsLogger.FUELGAUGE_HIGH_POWER_DETAILS;
     }
 
     public static CharSequence getSummary(Context context, AppEntry entry) {
