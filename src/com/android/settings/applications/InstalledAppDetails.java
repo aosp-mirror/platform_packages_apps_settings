@@ -446,7 +446,7 @@ public class InstalledAppDetails extends AppInfoBase
         // Update the preference summaries.
         Activity context = getActivity();
         mStoragePreference.setSummary(AppStorageSettings.getSummary(mAppEntry, context));
-        mPermissionsPreference.setSummary(AppPermissionSettings.getSummary(mAppEntry, context));
+//        mPermissionsPreference.setSummary(AppPermissionSettings.getSummary(mAppEntry, context));
         mLaunchPreference.setSummary(Utils.getLaunchByDeafaultSummary(mAppEntry, mUsbManager,
                 mPm, context));
         mNotificationPreference.setSummary(getNotificationSummary(mAppEntry, context,
