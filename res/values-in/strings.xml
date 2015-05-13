@@ -1506,8 +1506,7 @@
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Pengalihan Wi-Fi Agresif ke Seluler"</string>
     <string name="wifi_allow_scan_with_traffic" msgid="3601853081178265786">"Selalu izinkan Pemindaian Roaming Wi-Fi"</string>
     <string name="legacy_dhcp_client" msgid="694426978909127287">"Gunakan klien DHCP lawas"</string>
-    <!-- no translation found for mobile_data_always_on (7745605759775320362) -->
-    <skip />
+    <string name="mobile_data_always_on" msgid="7745605759775320362">"Data seluler selalu aktif"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"Tampilkan opsi untuk sertifikasi layar nirkabel"</string>
     <string name="wifi_verbose_logging_summary" msgid="6615071616111731958">"Tingkatkan level pencatatan log Wi-Fi, tampilkan per SSID RSSI di Pemilih Wi‑Fi"</string>
     <string name="wifi_aggressive_handover_summary" msgid="6328455667642570371">"Jika diaktifkan, Wi-Fi akan menjadi lebih agresif dalam mengalihkan sambungan data ke Seluler saat sinyal Wi-Fi lemah"</string>
@@ -1520,8 +1519,7 @@
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Mengizinkan lokasi palsu"</string>
     <string name="debug_view_attributes" msgid="6485448367803310384">"Aktifkan inspeksi atribut tampilan"</string>
     <string name="legacy_dhcp_client_summary" msgid="163383566317652040">"Gunakan klien DHCP dari Lollipop alih-alih klien DHCP Android baru."</string>
-    <!-- no translation found for mobile_data_always_on_summary (8149773901431697910) -->
-    <skip />
+    <string name="mobile_data_always_on_summary" msgid="8149773901431697910">"Selalu aktifkan data seluler, meski Wi-Fi aktif (agar jaringan beralih dengan cepat)."</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"Izinkan melakukan debug USB?"</string>
     <string name="adb_warning_message" msgid="7316799925425402244">"Debugging USB dimaksudkan untuk tujuan pengembangan saja. Gunakan untuk menyalin data antara komputer dan perangkat Anda, memasang apl pada perangkat tanpa pemberitahuan, dan membaca data log."</string>
     <string name="adb_keys_warning_message" msgid="5659849457135841625">"Cabut akses ke debug USB dari semua komputer yang telah Anda otorisasi sebelumnya?"</string>
@@ -2463,6 +2461,8 @@
     <string name="keywords_all_apps" msgid="5377153522551809915">"apl unduh aplikasi sistem"</string>
     <string name="keywords_app_permissions" msgid="8677901415217188314">"keamanan izin aplikasi"</string>
     <string name="keywords_default_apps" msgid="3581727483175522599">"aplikasi default"</string>
+    <!-- no translation found for keywords_ignore_optimizations (946516741848647905) -->
+    <skip />
     <string name="keywords_lockscreen" msgid="4806191868723291541">"geser pin pola sandi"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Siapkan Tag NFC Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Tulis"</string>
@@ -2487,8 +2487,7 @@
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Nada dering pemberitahuan default"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Juga getar saat ada panggilan"</string>
     <string name="notification_section_header" msgid="95661783916799134">"Notifikasi"</string>
-    <!-- no translation found for advanced_section_header (8833934850242546903) -->
-    <skip />
+    <string name="advanced_section_header" msgid="8833934850242546903">"Lanjutan"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"Kedipkan lampu pemberitahuan"</string>
     <string name="lock_screen_notifications_title" msgid="9118805570775519455">"Saat perangkat terkunci"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Tampilkan semua konten pemberitahuan"</string>
@@ -2518,10 +2517,8 @@
     <string name="no_notification_listeners" msgid="2767405417723149879">"Tidak ada pendengar pemberitahuan yang terpasang."</string>
     <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"Aktifkan <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> akan dapat membaca semua pemberitahuan yang diposkan oleh sistem atau aplikasi apa pun yang terpasang, yang dapat meliputi informasi pribadi seperti nama kontak dan pesan teks yang dikirimkan kepada Anda. Pendengar pemberitahuan tersebut juga akan dapat menyingkirkan pemberitahuan ini atau menyentuh tombol tindakan di dalamnya."</string>
-    <!-- no translation found for manage_zen_access_title (2611116122628520522) -->
-    <skip />
-    <!-- no translation found for zen_access_empty_text (8772967285742259540) -->
-    <skip />
+    <string name="manage_zen_access_title" msgid="2611116122628520522">"Akses Jangan Ganggu"</string>
+    <string name="zen_access_empty_text" msgid="8772967285742259540">"Tidak ada aplikasi terpasang yang meminta akses Jangan Ganggu"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Memuat aplikasi..."</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"Blokir semua"</string>
     <string name="app_notification_block_summary" msgid="9049487483231233726">"Jangan pernah tampilkan pemberitahuan dari aplikasi ini"</string>
@@ -2584,36 +2581,6 @@
     <string name="zen_mode_start_time" msgid="8102602297273744441">"Waktu mulai"</string>
     <string name="zen_mode_end_time" msgid="8774327885892705505">"Waktu berakhir"</string>
     <string name="zen_mode_end_time_next_day_summary_format" msgid="4201521691238728701">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> hari berikutnya"</string>
-    <string name="zen_mode_interruptions_voice_title" msgid="855256211259132964">"Gangguan"</string>
-    <string name="zen_mode_interruptions_voice_header" msgid="2888750427673157270">"Saat ada panggilan telepon dan notifikasi"</string>
-    <string name="zen_mode_interruptions_voice_prompt" msgid="3041817362475695079">"Kapan Anda bisa diganggu?"</string>
-    <string name="zen_mode_duration_voice_prompt" msgid="7381920739389625133">"Untuk berapa lama?"</string>
-    <string name="zen_mode_option_voice_all_interruptions" msgid="9222054216334506341">"Selalu ganggu"</string>
-    <string name="zen_mode_option_voice_all_interruptions_synonyms" msgid="475880955609403705">"nonaktif,semua,segalanya"</string>
-    <string name="zen_mode_option_voice_important_interruptions" msgid="3695277268139705627">"Hanya mengizinkan interupsi prioritas"</string>
-    <string name="zen_mode_option_voice_important_synonyms" msgid="2727831854148694795">"penting,prioritas,khusus prioritas,hanya prioritas,notifikasi prioritas"</string>
-    <string name="zen_mode_option_voice_alarms" msgid="5961982397880688359">"Hanya izinkan alarm"</string>
-    <string name="zen_mode_option_voice_alarms_synonyms" msgid="4049356986371569950">"alarm,hanya alarm,hanya alarm"</string>
-    <string name="zen_mode_option_voice_no_interruptions" msgid="3009964973912018317">"Jangan ganggu"</string>
-    <string name="zen_mode_option_voice_no_interruptions_synonyms" msgid="8368549512275129844">"tiada,tidak pernah,tidak ada,tanpa gangguan"</string>
-    <string name="zen_mode_duration_indefinte_voice_label" msgid="9026001994945950539">"Untuk waktu yang tidak ditentukan"</string>
-    <plurals name="zen_mode_duration_minutes_voice_label" formatted="false" msgid="4750982084453980">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> menit</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> menit</item>
-    </plurals>
-    <plurals name="zen_mode_duration_hours_voice_label" formatted="false" msgid="175180249071227957">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> jam</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> jam</item>
-    </plurals>
-    <string name="zen_mode_summary_priority_indefinitely" msgid="5417246022606171241">"Ubah ke mode notifikasi prioritas untuk waktu yang tidak ditentukan"</string>
-    <plurals name="zen_mode_summary_priority_by_minute" formatted="false" msgid="1938955186728929112">
-      <item quantity="other">Ubah ke mode hanya notifikasi prioritas selama <xliff:g id="DURATION">%1$d</xliff:g> menit hingga <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-      <item quantity="one">Ubah ke mode hanya notifikasi prioritas selama satu menit hingga <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g></item>
-    </plurals>
-    <plurals name="zen_mode_summary_priority_by_hour" formatted="false" msgid="6664710096150897823">
-      <item quantity="other">Ubah ke mode hanya notifikasi prioritas selama <xliff:g id="DURATION">%1$d</xliff:g> jam (hingga <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
-      <item quantity="one">Ubah ke mode hanya notifikasi prioritas selama satu jam hingga <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g></item>
-    </plurals>
     <string name="zen_mode_summary_alarams_only_indefinite" msgid="7941708969866496605">"Ubah ke mode hanya alarm untuk waktu yang tidak ditentukan"</string>
     <plurals name="zen_mode_summary_alarms_only_by_minute" formatted="false" msgid="6122003583875424601">
       <item quantity="other">Ubah ke mode hanya alarm selama <xliff:g id="DURATION">%1$d</xliff:g> menit (hingga <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
@@ -2623,17 +2590,7 @@
       <item quantity="other">Ubah ke mode hanya alarm selama <xliff:g id="DURATION">%1$d</xliff:g> jam hingga <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
       <item quantity="one">Ubah ke mode hanya alarm selama satu jam hingga <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g></item>
     </plurals>
-    <string name="zen_mode_summary_no_interruptions_indefinite" msgid="7668951387253438521">"Ubah ke mode jangan ganggu untuk waktu yang tidak ditentukan"</string>
-    <plurals name="zen_mode_summary_no_interruptions_by_minute" formatted="false" msgid="5642379561004767217">
-      <item quantity="other">Ubah ke mode jangan ganggu selama <xliff:g id="DURATION">%1$d</xliff:g> menit (hingga <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
-      <item quantity="one">Ubah ke mode jangan ganggu selama satu menit hingga <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g></item>
-    </plurals>
-    <plurals name="zen_mode_summary_no_interruptions_by_hour" formatted="false" msgid="9059043643566528697">
-      <item quantity="other">Ubah ke mode jangan ganggu selama <xliff:g id="DURATION">%1$d</xliff:g> jam hingga <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-      <item quantity="one">Ubah ke mode jangan ganggu selama satu jam hingga <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g></item>
-    </plurals>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"Ubah ke mode selalu ganggu"</string>
-    <string name="zen_mode_duration_indefinite_voice_synonyms" msgid="4213829562303429456">"selamanya"</string>
     <string name="notification_settings_apps_title" msgid="1125354590652967250">"Notifikasi apl"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Setelan pemberitahuan"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Kirim masukan tentang perangkat ini"</string>
@@ -2725,6 +2682,10 @@
     <string name="app_permissions" msgid="4148222031991883874">"Izin aplikasi"</string>
     <string name="app_permissions_summary" msgid="2098173899436407221">"<xliff:g id="COUNT_0">%d</xliff:g> dari <xliff:g id="COUNT_1">%d</xliff:g> aplikasi diizinkan akses tambahan"</string>
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"<xliff:g id="COUNT_0">%d</xliff:g> dari <xliff:g id="COUNT_1">%d</xliff:g> aplikasi diizinkan"</string>
+    <!-- no translation found for tap_to_wake (7211944147196888807) -->
+    <skip />
+    <!-- no translation found for tap_to_wake_summary (4341387904987585616) -->
+    <skip />
     <string name="domain_urls_title" msgid="8735310976048599572">"URL domain"</string>
     <string name="domain_urls_summary_none" msgid="4817723415916239693">"Jangan buka URL domain apa pun"</string>
     <string name="domain_urls_summary_one" msgid="4427559120855938432">"Buka \'<xliff:g id="DOMAIN">%s</xliff:g>\'"</string>
@@ -2755,8 +2716,17 @@
     <string name="memory_avg_desc" msgid="1551240906596518412">"Rata-rata <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
     <string name="memory_use_running_format" msgid="4172488041800743760">"<xliff:g id="MEMORY">%1$s</xliff:g> / <xliff:g id="RUNNING">%2$s</xliff:g>"</string>
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
-    <string name="high_power_on" msgid="4925948784500291865">"Aktif"</string>
+    <string name="high_power_apps" msgid="2116416853043103135">"Abaikan pengoptimalan"</string>
+    <string name="high_power_filter_on" msgid="3862942127137594196">"Diizinkan"</string>
+    <!-- no translation found for high_power_on (148473814103292724) -->
+    <skip />
     <string name="high_power_off" msgid="4069404908196636677">"Nonaktif"</string>
-    <!-- no translation found for app_notification_preferences (6413363601485067724) -->
+    <!-- no translation found for high_power_desc (8777632785903235764) -->
+    <skip />
+    <!-- no translation found for high_power_count (4343190376439806186) -->
+    <string name="battery_summary" msgid="101415762036784289">"<xliff:g id="PERCENTAGE">%1$d</xliff:g>%% digunakan sejak isi daya penuh terakhir"</string>
+    <string name="no_battery_summary" msgid="3528036835462846814">"Tidak ada penggunaan baterai sejak isi daya penuh terakhir"</string>
+    <string name="app_notification_preferences" msgid="6413363601485067724">"Preferensi notifikasi aplikasi"</string>
+    <!-- no translation found for system_ui_settings (579824306467081123) -->
     <skip />
 </resources>

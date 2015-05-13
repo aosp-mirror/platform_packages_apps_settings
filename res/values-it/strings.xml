@@ -171,10 +171,8 @@
     <string name="bluetooth_pb_remember_choice" msgid="3622898084442402071">"Non chiedermelo più"</string>
     <string name="bluetooth_map_request" msgid="4595727689513143902">"Richiesta di accesso ai messaggi"</string>
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s desidera accedere ai tuoi messaggi. Dare accesso a %2$s?"</string>
-    <!-- no translation found for bluetooth_sap_request (2669762224045354417) -->
-    <skip />
-    <!-- no translation found for bluetooth_sap_acceptance_dialog_text (4414253873553608690) -->
-    <skip />
+    <string name="bluetooth_sap_request" msgid="2669762224045354417">"Richiesta di accesso alla SIM"</string>
+    <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> desidera accedere alla tua scheda SIM. Se consenti l\'accesso, la connettività dati sul dispositivo sarà disattivata per tutta la durata della connessione. Consentire l\'accesso a <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>?"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Data e ora"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"Scegli il fuso orario"</string>
     <string name="display_preview_label" msgid="1127597250917274792">"Anteprima:"</string>
@@ -683,8 +681,8 @@
     <string name="wifi_skipped_message" product="tablet" msgid="6761689889733331124">"AVVISO. Se non attivi il Wi‑Fi, il tablet utilizzerà solo la rete dati per gli aggiornamenti e i download iniziali. Per evitare possibili costi per i dati, connettiti al Wi‑Fi."</string>
     <string name="wifi_skipped_message" product="device" msgid="1385490367826852775">"AVVISO. Se non attivi il Wi‑Fi, il dispositivo utilizzerà solo la rete dati per gli aggiornamenti e i download iniziali. Per evitare possibili costi per i dati, connettiti al Wi‑Fi."</string>
     <string name="wifi_skipped_message" product="default" msgid="6084295135297772350">"AVVISO. Se non attivi il Wi‑Fi, il telefono utilizzerà solo la rete dati per gli aggiornamenti e i download iniziali. Per evitare possibili costi per i dati, connettiti al Wi‑Fi."</string>
-    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="6324917391996718760">"In caso di attivazione del Wi-Fi non eseguita:\n\n"<li>"iL tablet non avrà una connessione Internet."</li>\n\n<li>"Non riceverai aggiornamenti software finché non viene stabilita una connessione."</li>\n\n<li>"Al momento, non puoi attivare le funzioni di protezione del dispositivo."</li></string>
-    <string name="wifi_and_mobile_skipped_message" product="device" msgid="1110629752293998468">"In caso di attivazione del Wi-Fi non eseguita:\n\n"<li>"Il dispositivo non avrà una connessione Internet."</li>\n\n<li>"Non riceverai aggiornamenti software finché non viene stabilita una connessione."</li>\n\n<li>"Al momento, non puoi attivare le funzioni di protezione del dispositivo."</li></string>
+    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="6324917391996718760">"In caso di attivazione del Wi-Fi non eseguita:\n\n"<li>"Il tablet non avrà una connessione Internet."</li>\n\n<li>"Non riceverai aggiornamenti software finché non viene stabilita una connessione."</li>\n\n<li>"Al momento, non puoi attivare le funzioni di protezione del dispositivo."</li></string>
+    <string name="wifi_and_mobile_skipped_message" product="device" msgid="1110629752293998468">"In caso di attivazione del Wi-Fi non eseguita:\n\n"<li>"il dispositivo non avrà una connessione Internet."</li>\n\n<li>"Non riceverai aggiornamenti software finché non viene stabilita una connessione."</li>\n\n<li>"Al momento, non puoi attivare le funzioni di protezione del dispositivo."</li></string>
     <string name="wifi_and_mobile_skipped_message" product="default" msgid="8271524692702309267">"In caso di attivazione del Wi-Fi non eseguita:\n\n"<li>"il telefono non avrà una connessione Internet."</li>\n\n<li>"Non riceverai aggiornamenti software finché non viene stabilita una connessione."</li>\n\n<li>"Al momento, non puoi attivare le funzioni di protezione del dispositivo."</li></string>
     <string name="wifi_connect_failed_message" product="tablet" msgid="4474691090681670156">"Impossibile collegare il tablet alla rete Wi‑Fi."</string>
     <string name="wifi_connect_failed_message" product="device" msgid="8870885845666880869">"Impossibile stabilire una connessione tra il dispositivo e la rete Wi-Fi."</string>
@@ -1508,8 +1506,7 @@
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Wi‑Fi aggressivo per passaggio a cellulare"</string>
     <string name="wifi_allow_scan_with_traffic" msgid="3601853081178265786">"Consenti sempre scansioni roaming Wi-Fi"</string>
     <string name="legacy_dhcp_client" msgid="694426978909127287">"Utilizza il client della versione precedente di DHCP"</string>
-    <!-- no translation found for mobile_data_always_on (7745605759775320362) -->
-    <skip />
+    <string name="mobile_data_always_on" msgid="7745605759775320362">"Dati cellulare sempre attivi"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"Mostra opzioni per la certificazione display wireless"</string>
     <string name="wifi_verbose_logging_summary" msgid="6615071616111731958">"Aumenta il livello di registrazione Wi-Fi, mostrando il SSID RSSI nel selettore Wi-Fi"</string>
     <string name="wifi_aggressive_handover_summary" msgid="6328455667642570371">"Quando questa impostazione è attivata, il Wi-Fi sarà più aggressivo nel passare la connessione dati al cellulare, quando il segnale Wi-Fi è basso"</string>
@@ -1522,8 +1519,7 @@
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Consenti posizioni fittizie"</string>
     <string name="debug_view_attributes" msgid="6485448367803310384">"Attiva controllo attributi visualizzazione"</string>
     <string name="legacy_dhcp_client_summary" msgid="163383566317652040">"Utilizza il client DHCP di Lollipop anziché il nuovo client DHCP Android."</string>
-    <!-- no translation found for mobile_data_always_on_summary (8149773901431697910) -->
-    <skip />
+    <string name="mobile_data_always_on_summary" msgid="8149773901431697910">"Mantieni sempre i dati cellulare attivi, anche se il Wi‑Fi è attivo (per un passaggio fra reti rapido)."</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"Consentire debug USB?"</string>
     <string name="adb_warning_message" msgid="7316799925425402244">"Il debug USB è solo a scopo di sviluppo. Utilizzalo per copiare dati tra il computer e il dispositivo, per installare applicazioni sul tuo dispositivo senza notifica e per leggere i dati dei log."</string>
     <string name="adb_keys_warning_message" msgid="5659849457135841625">"Revocare l\'accesso al debug USB da tutti i computer precedentemente autorizzati?"</string>
@@ -2465,6 +2461,8 @@
     <string name="keywords_all_apps" msgid="5377153522551809915">"download app applicazioni sistema"</string>
     <string name="keywords_app_permissions" msgid="8677901415217188314">"sicurezza delle autorizzazioni app"</string>
     <string name="keywords_default_apps" msgid="3581727483175522599">"impostazioni predefinite per le app"</string>
+    <!-- no translation found for keywords_ignore_optimizations (946516741848647905) -->
+    <skip />
     <string name="keywords_lockscreen" msgid="4806191868723291541">"scorrimento password sequenza pin"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Configura tag NFC Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Modifica"</string>
@@ -2489,8 +2487,7 @@
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Suoneria predefinita notifiche"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Vibrazione anche per chiamate"</string>
     <string name="notification_section_header" msgid="95661783916799134">"Notifiche"</string>
-    <!-- no translation found for advanced_section_header (8833934850242546903) -->
-    <skip />
+    <string name="advanced_section_header" msgid="8833934850242546903">"Avanzate"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"Luce di notifica pulsante"</string>
     <string name="lock_screen_notifications_title" msgid="9118805570775519455">"Con dispositivo bloccato"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Mostra tutti i contenuti della notifica"</string>
@@ -2520,10 +2517,8 @@
     <string name="no_notification_listeners" msgid="2767405417723149879">"Nessun listener di notifica installato."</string>
     <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"Abilitare <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> sarà in grado di leggere tutte le notifiche pubblicate dal sistema o da qualsiasi app installata, che potrebbero includere informazioni personali come i nomi dei contatti e il testo dei messaggi ricevuti. Sarà inoltre in grado di ignorare tali notifiche o di attivare pulsanti di azione al loro interno."</string>
-    <!-- no translation found for manage_zen_access_title (2611116122628520522) -->
-    <skip />
-    <!-- no translation found for zen_access_empty_text (8772967285742259540) -->
-    <skip />
+    <string name="manage_zen_access_title" msgid="2611116122628520522">"Accesso Non disturbare"</string>
+    <string name="zen_access_empty_text" msgid="8772967285742259540">"Nessuna delle app installate ha richiesto l\'accesso Non disturbare"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Caricamento app..."</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"Blocca tutto"</string>
     <string name="app_notification_block_summary" msgid="9049487483231233726">"Non mostrare mai notifiche di questa app"</string>
@@ -2550,22 +2545,14 @@
     <string name="zen_schedule_rule_enabled_toast" msgid="3379499360390382259">"Regola automatica impostata per attivare lo stato Non disturbare in determinati momenti"</string>
     <string name="zen_event_rule_type_name" msgid="2645981990973086797">"Regola evento"</string>
     <string name="zen_event_rule_enabled_toast" msgid="6910577623330811480">"Regola automatica impostata per attivare lo stato Non disturbare per determinati eventi"</string>
-    <!-- no translation found for zen_mode_event_rule_calendar (8787906563769067418) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_summary_calendar_template (5135844750232403975) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_summary_any_calendar (4936646399126636358) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_summary_reply_template (6590671260829837157) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_calendar_any (6485568415998569885) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_reply (5166322024212403739) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_reply_any_except_no (8868873496008825961) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_reply_yes_or_maybe (2769656565454495824) -->
-    <skip />
+    <string name="zen_mode_event_rule_calendar" msgid="8787906563769067418">"Durante eventi per"</string>
+    <string name="zen_mode_event_rule_summary_calendar_template" msgid="5135844750232403975">"Durante eventi per <xliff:g id="CALENDAR">%1$s</xliff:g>"</string>
+    <string name="zen_mode_event_rule_summary_any_calendar" msgid="4936646399126636358">"qualsiasi calendario"</string>
+    <string name="zen_mode_event_rule_summary_reply_template" msgid="6590671260829837157">"Dove la risposta è <xliff:g id="REPLY">%1$s</xliff:g>"</string>
+    <string name="zen_mode_event_rule_calendar_any" msgid="6485568415998569885">"Qualsiasi calendario"</string>
+    <string name="zen_mode_event_rule_reply" msgid="5166322024212403739">"Dove la risposta è"</string>
+    <string name="zen_mode_event_rule_reply_any_except_no" msgid="8868873496008825961">"Sì, Forse o Nessuna risposta"</string>
+    <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="2769656565454495824">"Sì o Forse"</string>
     <string name="zen_mode_event_rule_reply_yes" msgid="1003598835878784659">"Sì"</string>
     <string name="zen_mode_rule_not_found_text" msgid="8963662446092059836">"Regola non trovata."</string>
     <string name="zen_mode_rule_summary_combination" msgid="2526506268333198254">"<xliff:g id="DESCRIPTION">%1$s</xliff:g>/<xliff:g id="MODE">%2$s</xliff:g>"</string>
@@ -2577,14 +2564,10 @@
     <string name="summary_range_verbal_combination" msgid="8467306662961568656">"Dal <xliff:g id="START">%1$s</xliff:g> al <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="zen_mode_calls" msgid="7051492091133751208">"Chiamate"</string>
     <string name="zen_mode_messages" msgid="5886440273537510894">"Messaggi"</string>
-    <!-- no translation found for zen_mode_from_anyone (2638322015361252161) -->
-    <skip />
-    <!-- no translation found for zen_mode_from_contacts (2232335406106711637) -->
-    <skip />
-    <!-- no translation found for zen_mode_from_starred (2678345811950997027) -->
-    <skip />
-    <!-- no translation found for zen_mode_from_none (8219706639954614136) -->
-    <skip />
+    <string name="zen_mode_from_anyone" msgid="2638322015361252161">"Da chiunque"</string>
+    <string name="zen_mode_from_contacts" msgid="2232335406106711637">"Solo dai contatti"</string>
+    <string name="zen_mode_from_starred" msgid="2678345811950997027">"Solo da contatti Speciali"</string>
+    <string name="zen_mode_from_none" msgid="8219706639954614136">"Nessuno"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Sveglie"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Promemoria"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Eventi"</string>
@@ -2598,36 +2581,6 @@
     <string name="zen_mode_start_time" msgid="8102602297273744441">"Ora di inizio"</string>
     <string name="zen_mode_end_time" msgid="8774327885892705505">"Ora di fine"</string>
     <string name="zen_mode_end_time_next_day_summary_format" msgid="4201521691238728701">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> giorno successivo"</string>
-    <string name="zen_mode_interruptions_voice_title" msgid="855256211259132964">"Interruzioni"</string>
-    <string name="zen_mode_interruptions_voice_header" msgid="2888750427673157270">"Quando ricevo chiamate e notifiche"</string>
-    <string name="zen_mode_interruptions_voice_prompt" msgid="3041817362475695079">"Quando vuoi essere interrotto?"</string>
-    <string name="zen_mode_duration_voice_prompt" msgid="7381920739389625133">"Per quanto tempo?"</string>
-    <string name="zen_mode_option_voice_all_interruptions" msgid="9222054216334506341">"Interrompi sempre"</string>
-    <string name="zen_mode_option_voice_all_interruptions_synonyms" msgid="475880955609403705">"disattivate,tutte,tutto"</string>
-    <string name="zen_mode_option_voice_important_interruptions" msgid="3695277268139705627">"Consenti solo interruzioni con priorità"</string>
-    <string name="zen_mode_option_voice_important_synonyms" msgid="2727831854148694795">"importanti,priorità,solo con priorità,soltanto con priorità,notifiche prioritarie"</string>
-    <string name="zen_mode_option_voice_alarms" msgid="5961982397880688359">"Consenti solo sveglie"</string>
-    <string name="zen_mode_option_voice_alarms_synonyms" msgid="4049356986371569950">"sveglie,solo sveglie,soltanto sveglie"</string>
-    <string name="zen_mode_option_voice_no_interruptions" msgid="3009964973912018317">"Non interrompere"</string>
-    <string name="zen_mode_option_voice_no_interruptions_synonyms" msgid="8368549512275129844">"nessuna,mai,niente,nessuna interruzione"</string>
-    <string name="zen_mode_duration_indefinte_voice_label" msgid="9026001994945950539">"Sempre"</string>
-    <plurals name="zen_mode_duration_minutes_voice_label" formatted="false" msgid="4750982084453980">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> minuti</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> minuto</item>
-    </plurals>
-    <plurals name="zen_mode_duration_hours_voice_label" formatted="false" msgid="175180249071227957">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ore</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> ora</item>
-    </plurals>
-    <string name="zen_mode_summary_priority_indefinitely" msgid="5417246022606171241">"Cambia su Solo notifiche prioritarie sempre"</string>
-    <plurals name="zen_mode_summary_priority_by_minute" formatted="false" msgid="1938955186728929112">
-      <item quantity="other">Cambia su Solo notifiche prioritarie per <xliff:g id="DURATION">%1$d</xliff:g> minuti (fino alle <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
-      <item quantity="one">Cambia su Solo notifiche prioritarie per un minuto (fino alle <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g>)</item>
-    </plurals>
-    <plurals name="zen_mode_summary_priority_by_hour" formatted="false" msgid="6664710096150897823">
-      <item quantity="other">Cambia su Solo notifiche prioritarie per <xliff:g id="DURATION">%1$d</xliff:g> ore (fino alle <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
-      <item quantity="one">Cambia su Solo notifiche prioritarie per un\'ora (fino alle <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g>)</item>
-    </plurals>
     <string name="zen_mode_summary_alarams_only_indefinite" msgid="7941708969866496605">"Cambia su Solo sveglie sempre"</string>
     <plurals name="zen_mode_summary_alarms_only_by_minute" formatted="false" msgid="6122003583875424601">
       <item quantity="other">Cambia su Solo sveglie per <xliff:g id="DURATION">%1$d</xliff:g> minuti (fino alle <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
@@ -2637,17 +2590,7 @@
       <item quantity="other">Cambia su Solo sveglie per <xliff:g id="DURATION">%1$d</xliff:g> ore (fino alle <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
       <item quantity="one">Cambia su Solo sveglie per un\'ora (fino alle <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g>)</item>
     </plurals>
-    <string name="zen_mode_summary_no_interruptions_indefinite" msgid="7668951387253438521">"Cambia su Non interrompere sempre"</string>
-    <plurals name="zen_mode_summary_no_interruptions_by_minute" formatted="false" msgid="5642379561004767217">
-      <item quantity="other">Cambia su Non interrompere per <xliff:g id="DURATION">%1$d</xliff:g> minuti (fino alle <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
-      <item quantity="one">Cambia su Non interrompere per un minuto (fino alle <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g>)</item>
-    </plurals>
-    <plurals name="zen_mode_summary_no_interruptions_by_hour" formatted="false" msgid="9059043643566528697">
-      <item quantity="other">Cambia su Non interrompere per <xliff:g id="DURATION">%1$d</xliff:g> ore (fino alle <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
-      <item quantity="one">Cambia su Non interrompere per un\'ora (fino alle <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g>)</item>
-    </plurals>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"Cambia su Interrompi sempre"</string>
-    <string name="zen_mode_duration_indefinite_voice_synonyms" msgid="4213829562303429456">"per sempre"</string>
     <string name="notification_settings_apps_title" msgid="1125354590652967250">"Notifiche app"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Impostazioni di notifica"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Invia feedback sul dispositivo"</string>
@@ -2739,6 +2682,10 @@
     <string name="app_permissions" msgid="4148222031991883874">"Autorizzazioni app"</string>
     <string name="app_permissions_summary" msgid="2098173899436407221">"A <xliff:g id="COUNT_0">%d</xliff:g> app su <xliff:g id="COUNT_1">%d</xliff:g> è stato autorizzato un ulteriore accesso"</string>
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"Sono consentite <xliff:g id="COUNT_0">%d</xliff:g> app su <xliff:g id="COUNT_1">%d</xliff:g>"</string>
+    <!-- no translation found for tap_to_wake (7211944147196888807) -->
+    <skip />
+    <!-- no translation found for tap_to_wake_summary (4341387904987585616) -->
+    <skip />
     <string name="domain_urls_title" msgid="8735310976048599572">"URL di dominio"</string>
     <string name="domain_urls_summary_none" msgid="4817723415916239693">"Non aprire gli URL di dominio"</string>
     <string name="domain_urls_summary_one" msgid="4427559120855938432">"Apri \"<xliff:g id="DOMAIN">%s</xliff:g>\""</string>
@@ -2769,8 +2716,17 @@
     <string name="memory_avg_desc" msgid="1551240906596518412">"Memoria media usata: <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
     <string name="memory_use_running_format" msgid="4172488041800743760">"<xliff:g id="MEMORY">%1$s</xliff:g>/<xliff:g id="RUNNING">%2$s</xliff:g>"</string>
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
-    <string name="high_power_on" msgid="4925948784500291865">"Attiva"</string>
+    <string name="high_power_apps" msgid="2116416853043103135">"Ignora ottimizzazioni"</string>
+    <string name="high_power_filter_on" msgid="3862942127137594196">"Consentito"</string>
+    <!-- no translation found for high_power_on (148473814103292724) -->
+    <skip />
     <string name="high_power_off" msgid="4069404908196636677">"Non attiva"</string>
-    <!-- no translation found for app_notification_preferences (6413363601485067724) -->
+    <!-- no translation found for high_power_desc (8777632785903235764) -->
+    <skip />
+    <!-- no translation found for high_power_count (4343190376439806186) -->
+    <string name="battery_summary" msgid="101415762036784289">"<xliff:g id="PERCENTAGE">%1$d</xliff:g>%% di utilizzo dall\'ultima ricarica completa"</string>
+    <string name="no_battery_summary" msgid="3528036835462846814">"Nessun utilizzo della batteria dall\'ultima ricarica completa"</string>
+    <string name="app_notification_preferences" msgid="6413363601485067724">"Preferenze notifica app"</string>
+    <!-- no translation found for system_ui_settings (579824306467081123) -->
     <skip />
 </resources>

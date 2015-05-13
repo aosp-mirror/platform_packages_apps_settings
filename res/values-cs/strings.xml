@@ -173,10 +173,8 @@
     <string name="bluetooth_pb_remember_choice" msgid="3622898084442402071">"Příště se neptat"</string>
     <string name="bluetooth_map_request" msgid="4595727689513143902">"Požadavek na přístup ke zprávám"</string>
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"Zařízení %1$s žádá o přístup k vašim zprávám. Povolit přístup zařízení %2$s?"</string>
-    <!-- no translation found for bluetooth_sap_request (2669762224045354417) -->
-    <skip />
-    <!-- no translation found for bluetooth_sap_acceptance_dialog_text (4414253873553608690) -->
-    <skip />
+    <string name="bluetooth_sap_request" msgid="2669762224045354417">"Žádost o přístup k SIM kartě"</string>
+    <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"Zařízení <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> žádá o přístup k SIM kartě. Po dobu přístupu zařízení k SIM kartě bude datové připojení ve vašem zařízení vypnuto. Chcete zařízení <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g> povolit přístup?"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Datum a čas"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"Vybrat časové pásmo"</string>
     <string name="display_preview_label" msgid="1127597250917274792">"Náhled:"</string>
@@ -405,8 +403,8 @@
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="8219375738445017266">"Šifrování bylo přerušeno a nelze je dokončit. V důsledku toho již nebudou údaje v tabletu přístupné. \n\n Chcete-li tablet opět začít používat, je potřeba obnovit tovární nastavení. Po obnově budete moci v průběhu nastavení tabletu obnovit všechna data, která jsou zálohována v účtu Google."</string>
     <string name="crypt_keeper_failed_summary" product="default" msgid="3270131542549577953">"Šifrování bylo přerušeno a nelze je dokončit. V důsledku toho již nebudou údaje v telefonu přístupné. \n\nChcete-li telefon opět začít používat, je potřeba obnovit tovární nastavení. Po obnově budete moci v průběhu nastavení telefonu obnovit všechna data, která jsou zálohována v účtu Google."</string>
     <string name="crypt_keeper_data_corrupt_title" msgid="8759119849089795751">"Dešifrování se nezdařilo"</string>
-    <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="840107296925798402">"Zadané heslo je správné, avšak data jsou poškozena.\n\nChcete-li tablet nadále používat, je nutné v něm obnovit tovární nastavení. Když poté tablet nastavíte, bude možné obnovit veškerá data zálohovaná na váš účet Google."</string>
-    <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"Zadané heslo je správné, avšak data jsou poškozena.\n\nChcete-li telefon nadále používat, je nutné v něm obnovit tovární nastavení. Když poté telefon nastavíte, bude možné obnovit veškerá data zálohovaná na váš účet Google."</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="840107296925798402">"Zadané heslo je správné, avšak data jsou poškozena.\n\nChcete-li tablet nadále používat, je nutné v něm obnovit tovární nastavení. Až budete tablet po obnově znovu nastavovat, bude možné obnovit veškerá data, která byla zálohována na váš účet Google."</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"Zadané heslo je správné, avšak data jsou poškozena.\n\nChcete-li telefon nadále používat, je nutné v něm obnovit tovární nastavení. Až budete telefon po obnově znovu nastavovat, bude možné obnovit veškerá data, která byla zálohována na váš účet Google."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Přepnout metodu zadávání"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Zámek obrazovky"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Zámek obrazovky"</string>
@@ -1004,7 +1002,7 @@
     <string name="storage_rename_title" msgid="8242663969839491485">"Přejmenovat úložiště"</string>
     <string name="storage_internal_format_details" msgid="4018647158382548820">"Po naformátování budete moci toto úložiště <xliff:g id="NAME_0">^1</xliff:g> používat s jinými zařízeními. \n\nVeškerá data v tomto úložišti <xliff:g id="NAME_1">^1</xliff:g> budou vymazána. Doporučujeme je nejprve zálohovat. \n\n"<b>"Zálohování fotek a jiných medií"</b>" \nMediální soubory přesuňte do jiného úložiště v zařízení nebo je pomocí kabelu USB přeneste do počítače. \n\n"<b>"Zálohování aplikací"</b>" \nVšechny aplikace uložené v tomto úložišti <xliff:g id="NAME_6">^1</xliff:g> budou odinstalovány a jejich data budou vymazána. Chcete-li tyto aplikace zachovat, přesuňte je do jiného úložiště v zařízení."</string>
     <string name="storage_internal_unmount_details" msgid="3582802571684490057"><b>"Když toto úložiště <xliff:g id="NAME_0">^1</xliff:g> odpojíte, aplikace, kterou jsou v něm uloženy, přestanou fungovat a mediální soubory nebudou dostupné, dokud jej opět nevložíte."</b>\n\n"Toto úložiště <xliff:g id="NAME_1">^1</xliff:g> je naformátováno tak, aby fungovalo pouze v tomto zařízení. V jiných zařízeních fungovat nebude."</string>
-    <string name="storage_internal_forget_details" msgid="9028875424669047327">"Chcete-li použít aplikace, fotky nebo data, která toto úložiště <xliff:g id="NAME">^1</xliff:g> obsahuje, znovu jej vložte.\n\nPokud toto zařízení není k dispozici, můžete alternativně zvolit, že má být zapomenuto.\n\nPokud se rozhodnete zařízení zapomenout, veškerá data v zařízení budou navždy ztracena.\n\nAplikace můžete znovu nainstalovat později. Jejich data uložená v tomto zařízení však budou ztracena."</string>
+    <string name="storage_internal_forget_details" msgid="9028875424669047327">"Chcete-li použít aplikace, fotky nebo data, která jsou v úložišti <xliff:g id="NAME">^1</xliff:g>, vložte jej znovu.\n\nPokud toto zařízení není k dispozici, můžete alternativně zvolit, že má být zapomenuto.\n\nPokud se rozhodnete zařízení zapomenout, veškerá data v zařízení budou navždy ztracena.\n\nAplikace můžete znovu nainstalovat později. Jejich data uložená v tomto zařízení však budou ztracena."</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"Nastavte úložiště <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"Použít jako přenosné úložiště"</string>
     <string name="storage_wizard_init_external_summary" msgid="7476105886344565074">"K přenášení fotek a dalších médií mezi zařízeními."</string>
@@ -1526,8 +1524,7 @@
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Agresivní předání z Wi-Fi na mobilní síť"</string>
     <string name="wifi_allow_scan_with_traffic" msgid="3601853081178265786">"Vždy povolit vyhledávání roamingu Wi-Fi"</string>
     <string name="legacy_dhcp_client" msgid="694426978909127287">"Použít starý klient DHCP"</string>
-    <!-- no translation found for mobile_data_always_on (7745605759775320362) -->
-    <skip />
+    <string name="mobile_data_always_on" msgid="7745605759775320362">"Mobilní data jsou vždy aktivní"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"Zobrazit možnosti certifikace bezdrátového displeje"</string>
     <string name="wifi_verbose_logging_summary" msgid="6615071616111731958">"Zvýší úroveň protokolování Wi‑Fi zobrazenou v SSID a RSSI při výběru sítě Wi‑Fi."</string>
     <string name="wifi_aggressive_handover_summary" msgid="6328455667642570371">"Pokud je tato možnost zapnuta, bude síť Wi-Fi agresivnější při předávání datového připojení mobilní síti při slabém signálu Wi-Fi."</string>
@@ -1540,8 +1537,7 @@
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Povolit simulované polohy"</string>
     <string name="debug_view_attributes" msgid="6485448367803310384">"Povolit kontrolu atributu zobrazení"</string>
     <string name="legacy_dhcp_client_summary" msgid="163383566317652040">"Namísto nového klientu DHCP Android použít klient DHCP z verze Lollipop."</string>
-    <!-- no translation found for mobile_data_always_on_summary (8149773901431697910) -->
-    <skip />
+    <string name="mobile_data_always_on_summary" msgid="8149773901431697910">"Mobilní data budou vždy ponechána aktivní, i když bude aktivní Wi-Fi (za účelem rychlého přepínání sítí)."</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"Povolit ladění USB?"</string>
     <string name="adb_warning_message" msgid="7316799925425402244">"Ladění prostřednictvím rozhraní USB je určeno pouze pro účely vývoje. Použijte je ke kopírování dat mezi počítačem a zařízením, instalaci aplikací do zařízení bez upozornění a čtení dat protokolů."</string>
     <string name="adb_keys_warning_message" msgid="5659849457135841625">"Zrušit přístup k ladění USB ze všech počítačů, které jste v minulosti autorizovali?"</string>
@@ -2483,6 +2479,8 @@
     <string name="keywords_all_apps" msgid="5377153522551809915">"aplikace stahování systém"</string>
     <string name="keywords_app_permissions" msgid="8677901415217188314">"aplikace oprávnění zabezpečení"</string>
     <string name="keywords_default_apps" msgid="3581727483175522599">"aplikace výchozí"</string>
+    <!-- no translation found for keywords_ignore_optimizations (946516741848647905) -->
+    <skip />
     <string name="keywords_lockscreen" msgid="4806191868723291541">"přejetí prstem heslo gesto pin"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Nastavení štítku NFC pro Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Zapsat"</string>
@@ -2507,8 +2505,7 @@
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Výchozí tón oznámení"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Vibrovat také u volání"</string>
     <string name="notification_section_header" msgid="95661783916799134">"Oznámení"</string>
-    <!-- no translation found for advanced_section_header (8833934850242546903) -->
-    <skip />
+    <string name="advanced_section_header" msgid="8833934850242546903">"Rozšířená nastavení"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"Blikat kontrolkou oznámení"</string>
     <string name="lock_screen_notifications_title" msgid="9118805570775519455">"Když je zařízení zamčeno"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Zobrazit veškerý obsah oznámení"</string>
@@ -2540,10 +2537,8 @@
     <string name="no_notification_listeners" msgid="2767405417723149879">"Nejsou nainstalovány žádné aplikace poslouchající oznámení."</string>
     <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"Chcete zapnout <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> bude moci číst všechna oznámení zveřejněná systémem nebo jakoukoli nainstalovanou aplikací. Oznámení mohou obsahovat osobní údaje jako kontaktní jména nebo texty zpráv, které jsou vám odesílány. Aplikace bude také moci tato oznámení zavřít nebo klepnout na tlačítka akcí v oznámeních."</string>
-    <!-- no translation found for manage_zen_access_title (2611116122628520522) -->
-    <skip />
-    <!-- no translation found for zen_access_empty_text (8772967285742259540) -->
-    <skip />
+    <string name="manage_zen_access_title" msgid="2611116122628520522">"Přístup při nastavení Nerušit"</string>
+    <string name="zen_access_empty_text" msgid="8772967285742259540">"O přístup při nastavení Nerušit nepožádaly žádné nainstalované aplikace"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Načítání aplikací..."</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"Blokovat vše"</string>
     <string name="app_notification_block_summary" msgid="9049487483231233726">"Nikdy nezobrazovat oznámení z této aplikace"</string>
@@ -2570,22 +2565,14 @@
     <string name="zen_schedule_rule_enabled_toast" msgid="3379499360390382259">"Automatické pravidlo bylo nastaveno na Nerušit v určitých časech"</string>
     <string name="zen_event_rule_type_name" msgid="2645981990973086797">"Pravidlo pro události"</string>
     <string name="zen_event_rule_enabled_toast" msgid="6910577623330811480">"Automatické pravidlo bylo nastaveno na Nerušit během určitých událostí"</string>
-    <!-- no translation found for zen_mode_event_rule_calendar (8787906563769067418) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_summary_calendar_template (5135844750232403975) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_summary_any_calendar (4936646399126636358) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_summary_reply_template (6590671260829837157) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_calendar_any (6485568415998569885) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_reply (5166322024212403739) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_reply_any_except_no (8868873496008825961) -->
-    <skip />
-    <!-- no translation found for zen_mode_event_rule_reply_yes_or_maybe (2769656565454495824) -->
-    <skip />
+    <string name="zen_mode_event_rule_calendar" msgid="8787906563769067418">"Během událostí"</string>
+    <string name="zen_mode_event_rule_summary_calendar_template" msgid="5135844750232403975">"Během událostí <xliff:g id="CALENDAR">%1$s</xliff:g>"</string>
+    <string name="zen_mode_event_rule_summary_any_calendar" msgid="4936646399126636358">"v libovolném kalendáři"</string>
+    <string name="zen_mode_event_rule_summary_reply_template" msgid="6590671260829837157">"V případě odpovědi <xliff:g id="REPLY">%1$s</xliff:g>"</string>
+    <string name="zen_mode_event_rule_calendar_any" msgid="6485568415998569885">"V libovolném kalendáři"</string>
+    <string name="zen_mode_event_rule_reply" msgid="5166322024212403739">"V případě odpovědi"</string>
+    <string name="zen_mode_event_rule_reply_any_except_no" msgid="8868873496008825961">"Ano, Možná nebo Žádná odpověď"</string>
+    <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="2769656565454495824">"Ano nebo Možná"</string>
     <string name="zen_mode_event_rule_reply_yes" msgid="1003598835878784659">"Ano"</string>
     <string name="zen_mode_rule_not_found_text" msgid="8963662446092059836">"Pravidlo nebylo nalezeno."</string>
     <string name="zen_mode_rule_summary_combination" msgid="2526506268333198254">"<xliff:g id="DESCRIPTION">%1$s</xliff:g> / <xliff:g id="MODE">%2$s</xliff:g>"</string>
@@ -2597,14 +2584,10 @@
     <string name="summary_range_verbal_combination" msgid="8467306662961568656">"<xliff:g id="START">%1$s</xliff:g> až <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="zen_mode_calls" msgid="7051492091133751208">"Volání"</string>
     <string name="zen_mode_messages" msgid="5886440273537510894">"Zprávy"</string>
-    <!-- no translation found for zen_mode_from_anyone (2638322015361252161) -->
-    <skip />
-    <!-- no translation found for zen_mode_from_contacts (2232335406106711637) -->
-    <skip />
-    <!-- no translation found for zen_mode_from_starred (2678345811950997027) -->
-    <skip />
-    <!-- no translation found for zen_mode_from_none (8219706639954614136) -->
-    <skip />
+    <string name="zen_mode_from_anyone" msgid="2638322015361252161">"Od kohokoli"</string>
+    <string name="zen_mode_from_contacts" msgid="2232335406106711637">"Pouze od kontaktů"</string>
+    <string name="zen_mode_from_starred" msgid="2678345811950997027">"Pouze od kontaktů s hvězdičkou"</string>
+    <string name="zen_mode_from_none" msgid="8219706639954614136">"Žádné"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Budíky"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Připomenutí"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Události"</string>
@@ -2618,44 +2601,6 @@
     <string name="zen_mode_start_time" msgid="8102602297273744441">"Čas zahájení"</string>
     <string name="zen_mode_end_time" msgid="8774327885892705505">"Čas ukončení"</string>
     <string name="zen_mode_end_time_next_day_summary_format" msgid="4201521691238728701">"Zítra v <xliff:g id="FORMATTED_TIME">%s</xliff:g>"</string>
-    <string name="zen_mode_interruptions_voice_title" msgid="855256211259132964">"Vyrušení"</string>
-    <string name="zen_mode_interruptions_voice_header" msgid="2888750427673157270">"Při příchozím hovoru nebo oznámení"</string>
-    <string name="zen_mode_interruptions_voice_prompt" msgid="3041817362475695079">"Kdy vás můžeme rušit?"</string>
-    <string name="zen_mode_duration_voice_prompt" msgid="7381920739389625133">"Na jak dlouho?"</string>
-    <string name="zen_mode_option_voice_all_interruptions" msgid="9222054216334506341">"Vždy vyrušit"</string>
-    <string name="zen_mode_option_voice_all_interruptions_synonyms" msgid="475880955609403705">"vypnout,vše,všechno"</string>
-    <string name="zen_mode_option_voice_important_interruptions" msgid="3695277268139705627">"Povolit pouze prioritní vyrušení"</string>
-    <string name="zen_mode_option_voice_important_synonyms" msgid="2727831854148694795">"důležité,prioritní,pouze prioritní,jen prioritní,prioritní oznámení"</string>
-    <string name="zen_mode_option_voice_alarms" msgid="5961982397880688359">"Povolit pouze budíky"</string>
-    <string name="zen_mode_option_voice_alarms_synonyms" msgid="4049356986371569950">"budíky,pouze budíky,jen budíky"</string>
-    <string name="zen_mode_option_voice_no_interruptions" msgid="3009964973912018317">"Nerušit"</string>
-    <string name="zen_mode_option_voice_no_interruptions_synonyms" msgid="8368549512275129844">"žádná,nikdy,nic,žádná vyrušení"</string>
-    <string name="zen_mode_duration_indefinte_voice_label" msgid="9026001994945950539">"Na dobu neurčitou"</string>
-    <plurals name="zen_mode_duration_minutes_voice_label" formatted="false" msgid="4750982084453980">
-      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> minuty</item>
-      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> minuty</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> minut</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> minuta</item>
-    </plurals>
-    <plurals name="zen_mode_duration_hours_voice_label" formatted="false" msgid="175180249071227957">
-      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> hodiny</item>
-      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> hodiny</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> hodin</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> hodina</item>
-    </plurals>
-    <string name="zen_mode_summary_priority_indefinitely" msgid="5417246022606171241">"Na dobu neurčitou přepnout do režimu Pouze prioritní oznámení"</string>
-    <plurals name="zen_mode_summary_priority_by_minute" formatted="false" msgid="1938955186728929112">
-      <item quantity="few">Na <xliff:g id="DURATION">%1$d</xliff:g> minuty (tedy do <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>) přepnout do režimu Pouze prioritní oznámení</item>
-      <item quantity="many">Na <xliff:g id="DURATION">%1$d</xliff:g> minuty (tedy do <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>) přepnout do režimu Pouze prioritní oznámení</item>
-      <item quantity="other">Na <xliff:g id="DURATION">%1$d</xliff:g> minut (tedy do <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>) přepnout do režimu Pouze prioritní oznámení</item>
-      <item quantity="one">Na minutu (tedy do <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g>) přepnout do režimu Pouze prioritní oznámení</item>
-    </plurals>
-    <plurals name="zen_mode_summary_priority_by_hour" formatted="false" msgid="6664710096150897823">
-      <item quantity="few">Na <xliff:g id="DURATION">%1$d</xliff:g> hodiny (tedy do <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>) přepnout do režimu Pouze prioritní oznámení</item>
-      <item quantity="many">Na <xliff:g id="DURATION">%1$d</xliff:g> hodiny (tedy do <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>) přepnout do režimu Pouze prioritní oznámení</item>
-      <item quantity="other">Na <xliff:g id="DURATION">%1$d</xliff:g> hodin (tedy do <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>) přepnout do režimu Pouze prioritní oznámení</item>
-      <item quantity="one">Na hodinu (tedy do <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g>) přepnout do režimu Pouze prioritní oznámení</item>
-    </plurals>
     <string name="zen_mode_summary_alarams_only_indefinite" msgid="7941708969866496605">"Na dobu neurčitou přepnout do režimu Pouze budíky"</string>
     <plurals name="zen_mode_summary_alarms_only_by_minute" formatted="false" msgid="6122003583875424601">
       <item quantity="few">Na <xliff:g id="DURATION">%1$d</xliff:g> minuty (tedy do <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>) přepnout do režimu Pouze budíky</item>
@@ -2669,21 +2614,7 @@
       <item quantity="other">Na <xliff:g id="DURATION">%1$d</xliff:g> hodin (tedy do <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>) přepnout do režimu Pouze budíky</item>
       <item quantity="one">Na hodinu (tedy do <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g>) přepnout do režimu Pouze budíky</item>
     </plurals>
-    <string name="zen_mode_summary_no_interruptions_indefinite" msgid="7668951387253438521">"Na dobu neurčitou přepnout do režimu Nerušit"</string>
-    <plurals name="zen_mode_summary_no_interruptions_by_minute" formatted="false" msgid="5642379561004767217">
-      <item quantity="few">Na <xliff:g id="DURATION">%1$d</xliff:g> minuty (tedy do <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>) přepnout do režimu Nerušit</item>
-      <item quantity="many">Na <xliff:g id="DURATION">%1$d</xliff:g> minuty (tedy do <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>) přepnout do režimu Nerušit</item>
-      <item quantity="other">Na <xliff:g id="DURATION">%1$d</xliff:g> minut (tedy do <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>) přepnout do režimu Nerušit</item>
-      <item quantity="one">Na minutu (tedy do <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g>) přepnout do režimu Nerušit</item>
-    </plurals>
-    <plurals name="zen_mode_summary_no_interruptions_by_hour" formatted="false" msgid="9059043643566528697">
-      <item quantity="few">Na <xliff:g id="DURATION">%1$d</xliff:g> hodiny (tedy do <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>) přepnout do režimu Nerušit</item>
-      <item quantity="many">Na <xliff:g id="DURATION">%1$d</xliff:g> hodiny (tedy do <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>) přepnout do režimu Nerušit</item>
-      <item quantity="other">Na <xliff:g id="DURATION">%1$d</xliff:g> hodin (tedy do <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>) přepnout do režimu Nerušit</item>
-      <item quantity="one">Na hodinu (tedy do <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g>) přepnout do režimu Nerušit</item>
-    </plurals>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"Přejít do režimu Vždy vyrušit"</string>
-    <string name="zen_mode_duration_indefinite_voice_synonyms" msgid="4213829562303429456">"navždy"</string>
     <string name="notification_settings_apps_title" msgid="1125354590652967250">"Oznámení aplikací"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Nastavení oznámení"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Odeslat zpětnou vazbu o tomto zařízení"</string>
@@ -2779,6 +2710,10 @@
     <string name="app_permissions" msgid="4148222031991883874">"Oprávnění aplikace"</string>
     <string name="app_permissions_summary" msgid="2098173899436407221">"Další přístup povolen u <xliff:g id="COUNT_0">%d</xliff:g> z <xliff:g id="COUNT_1">%d</xliff:g> aplikací"</string>
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"Povoleno u <xliff:g id="COUNT_0">%d</xliff:g> z <xliff:g id="COUNT_1">%d</xliff:g> aplikací"</string>
+    <!-- no translation found for tap_to_wake (7211944147196888807) -->
+    <skip />
+    <!-- no translation found for tap_to_wake_summary (4341387904987585616) -->
+    <skip />
     <string name="domain_urls_title" msgid="8735310976048599572">"Adresy URL domény"</string>
     <string name="domain_urls_summary_none" msgid="4817723415916239693">"Neotevírat adresy URL domény"</string>
     <string name="domain_urls_summary_one" msgid="4427559120855938432">"Otevřít adresu <xliff:g id="DOMAIN">%s</xliff:g>"</string>
@@ -2811,8 +2746,17 @@
     <string name="memory_avg_desc" msgid="1551240906596518412">"Průměrně <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
     <string name="memory_use_running_format" msgid="4172488041800743760">"<xliff:g id="MEMORY">%1$s</xliff:g> / <xliff:g id="RUNNING">%2$s</xliff:g>"</string>
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
-    <string name="high_power_on" msgid="4925948784500291865">"Zapnuto"</string>
+    <string name="high_power_apps" msgid="2116416853043103135">"Ignorace optimalizací"</string>
+    <string name="high_power_filter_on" msgid="3862942127137594196">"Povoleno"</string>
+    <!-- no translation found for high_power_on (148473814103292724) -->
+    <skip />
     <string name="high_power_off" msgid="4069404908196636677">"Vypnuto"</string>
-    <!-- no translation found for app_notification_preferences (6413363601485067724) -->
+    <!-- no translation found for high_power_desc (8777632785903235764) -->
+    <skip />
+    <!-- no translation found for high_power_count (4343190376439806186) -->
+    <string name="battery_summary" msgid="101415762036784289">"Od posledního úplného nabití bylo využito <xliff:g id="PERCENTAGE">%1$d</xliff:g> %% baterie"</string>
+    <string name="no_battery_summary" msgid="3528036835462846814">"Baterie od posledního úplného nabití nebyla využita"</string>
+    <string name="app_notification_preferences" msgid="6413363601485067724">"Předvolby oznámení aplikací"</string>
+    <!-- no translation found for system_ui_settings (579824306467081123) -->
     <skip />
 </resources>

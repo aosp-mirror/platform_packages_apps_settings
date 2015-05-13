@@ -23,9 +23,9 @@
   <string-array name="timezone_filters">
     <item msgid="5296756001147094692">"Amerika"</item>
     <item msgid="3005562397632768392">"Evropa"</item>
-    <item msgid="5696915123093701218">"Afrika"</item>
-    <item msgid="4439789052790868249">"Azia"</item>
-    <item msgid="956915953069815961">"Australia"</item>
+    <item msgid="5696915123093701218">"Afrikë"</item>
+    <item msgid="4439789052790868249">"Azi"</item>
+    <item msgid="956915953069815961">"Australi"</item>
     <item msgid="5345178126174698955">"Oqeani Paqësor"</item>
     <item msgid="8392017019801393511">"Të gjitha"</item>
   </string-array>
@@ -148,7 +148,7 @@
     <item msgid="8151962652413645395">"2 minuta"</item>
     <item msgid="8675215713017289017">"5 minuta"</item>
     <item msgid="477015974247590543">"1 orë"</item>
-    <item msgid="5198271470953124739">"Vonesa e skadimit, asnjëherë"</item>
+    <item msgid="5198271470953124739">"Skadim të kohës së veprimit, asnjëherë!"</item>
   </string-array>
   <string-array name="wifi_signal">
     <item msgid="2245412278046491293">"I dobët"</item>
@@ -205,7 +205,7 @@
   <string-array name="wifi_proxy_settings">
     <item msgid="4473276491748503377">"Asnjë"</item>
     <item msgid="8673874894887358090">"Manuale"</item>
-    <item msgid="168893341855953140">"Auto-konfig i autorizuar"</item>
+    <item msgid="168893341855953140">"Auto-konfig. i përfaqës."</item>
   </string-array>
   <string-array name="apn_auth_entries">
     <item msgid="3856896061242872146">"Asnjë"</item>
@@ -218,22 +218,24 @@
     <item msgid="4394161344888484571">"IPv6"</item>
     <item msgid="8084938354605535381">"IPv4/IPv6"</item>
   </string-array>
-    <!-- no translation found for bearer_entries:0 (1697455674244601285) -->
-    <!-- no translation found for bearer_entries:1 (1317061551798123908) -->
-    <!-- no translation found for bearer_entries:2 (5005435684511894770) -->
-    <!-- no translation found for bearer_entries:3 (7700603056475539235) -->
-    <!-- no translation found for bearer_entries:4 (245973007602397887) -->
-    <!-- no translation found for bearer_entries:5 (6291566767651194016) -->
-    <!-- no translation found for bearer_entries:6 (2005841400859926251) -->
-    <!-- no translation found for bearer_entries:7 (3757385691174882861) -->
-    <!-- no translation found for bearer_entries:8 (2979115073474306864) -->
-    <!-- no translation found for bearer_entries:9 (2271750502778879106) -->
-    <!-- no translation found for bearer_entries:10 (4173379084783381337) -->
-    <!-- no translation found for bearer_entries:11 (2033682802005776093) -->
-    <!-- no translation found for bearer_entries:12 (5753917125831466719) -->
-    <!-- no translation found for bearer_entries:13 (4713807936577071142) -->
-    <!-- no translation found for bearer_entries:14 (1142355797022021906) -->
-    <!-- no translation found for bearer_entries:15 (7471182818083460781) -->
+  <string-array name="bearer_entries">
+    <item msgid="1697455674244601285">"I papërcaktuar"</item>
+    <item msgid="1317061551798123908">"LTE"</item>
+    <item msgid="5005435684511894770">"HSPAP"</item>
+    <item msgid="7700603056475539235">"HSPA"</item>
+    <item msgid="245973007602397887">"HSUPA"</item>
+    <item msgid="6291566767651194016">"HSDPA"</item>
+    <item msgid="2005841400859926251">"UMTS"</item>
+    <item msgid="3757385691174882861">"EDGE"</item>
+    <item msgid="2979115073474306864">"GPRS"</item>
+    <item msgid="2271750502778879106">"eHRPD"</item>
+    <item msgid="4173379084783381337">"EVDO_B"</item>
+    <item msgid="2033682802005776093">"EVDO_A"</item>
+    <item msgid="5753917125831466719">"EVDO_0"</item>
+    <item msgid="4713807936577071142">"1xRTT"</item>
+    <item msgid="1142355797022021906">"IS95B"</item>
+    <item msgid="7471182818083460781">"IS95A"</item>
+  </string-array>
   <string-array name="mvno_type_entries">
     <item msgid="4367119357633573465">"Asnjë"</item>
     <item msgid="6062567900587138000">"SPN"</item>
@@ -263,18 +265,18 @@
     <item msgid="6546959730920410907">"modifiko ditarin e telefonatave"</item>
     <item msgid="446877710771379667">"lexo kalendarin"</item>
     <item msgid="7674458294386319722">"modifiko kalendarin"</item>
-    <item msgid="8281201165558093009">"skanimi i wi-fi"</item>
+    <item msgid="8281201165558093009">"skanimi për Wi-Fi"</item>
     <item msgid="8694611243479480497">"njoftimi"</item>
     <item msgid="7776439107987345446">"skanimi i rrjetit celular"</item>
     <item msgid="514615766544675057">"telefono telefonin"</item>
-    <item msgid="8181415497109310680">"lexo SMS"</item>
+    <item msgid="8181415497109310680">"lexo SMS-të"</item>
     <item msgid="6816551144382117307">"shkruaj SMS"</item>
     <item msgid="4600463921908905030">"prano SMS"</item>
     <item msgid="5958926493289432745">"merr SMS emergjence"</item>
     <item msgid="4945269495221089540">"merr MMS"</item>
-    <item msgid="5570472453573929087">"prano WAP push"</item>
+    <item msgid="5570472453573929087">"prano \"WAP push\""</item>
     <item msgid="7125408150230860501">"dërgo SMS"</item>
-    <item msgid="7080337936612188061">"lexo ICC SMS"</item>
+    <item msgid="7080337936612188061">"lexo ICC SMS-të"</item>
     <item msgid="587124103118495063">"shkruaj ICC SMS"</item>
     <item msgid="2320577158869025503">"modifiko cilësimet"</item>
     <item msgid="1545733463471924009">"vizato sipër"</item>
@@ -336,12 +338,12 @@
     <item msgid="3493046322001257041">"Luaj audio"</item>
     <item msgid="136815868796597058">"Lexo memorien e fragmenteve"</item>
     <item msgid="5238692940326972503">"Modifiko memorien e fragmenteve"</item>
-    <item msgid="5753789168376302997">"Butonat e medias"</item>
+    <item msgid="5753789168376302997">"Butonat e \"medias\""</item>
     <item msgid="3265262911688671938">"Përqendrimi i audios"</item>
     <item msgid="2098976479485046797">"Kontrollo volumin"</item>
     <item msgid="5660213838861789350">"Volumi i zërit"</item>
     <item msgid="7983336752371254444">"Volumi i ziles"</item>
-    <item msgid="7878027809189330917">"Volumi i medias"</item>
+    <item msgid="7878027809189330917">"Volumi i \"medias\""</item>
     <item msgid="7260546305036218513">"Volumi i alarmit"</item>
     <item msgid="9103719301075748925">"Volumi i njoftimit"</item>
     <item msgid="7025966722295861512">"Volumi i \"Bluetooth-it\""</item>
@@ -369,7 +371,7 @@
     <item msgid="4478414822462359763">"Serif"</item>
     <item msgid="7502451783483660829">"Serif me hapësirë fikse"</item>
     <item msgid="639503332147461010">"Rastësor"</item>
-    <item msgid="7967169925231332424">"Kursiv"</item>
+    <item msgid="7967169925231332424">"I pjerrët"</item>
     <item msgid="561832997193039673">"Shkronja të mëdha të minimizuara"</item>
   </string-array>
   <string-array name="captioning_font_size_selector_titles">
@@ -414,10 +416,10 @@
     <item msgid="8085867209202153403">"1M"</item>
   </string-array>
   <string-array name="select_logd_size_summaries">
-    <item msgid="7346595473588765019">"64 mijë për çdo memorie të përkohshme regjistrimi"</item>
+    <item msgid="7346595473588765019">"64 mijë / memorie regjistrimi"</item>
     <item msgid="2822309747675758628">"256K për çdo memorie të përkohshme"</item>
-    <item msgid="6699306198357496731">"1M për memorien e përkohshme të regjistrit"</item>
-    <item msgid="5748528643937500349">"4M për memorien e përkohshme të regjistrit"</item>
+    <item msgid="6699306198357496731">"1M për memorien e regjistrit"</item>
+    <item msgid="5748528643937500349">"4M për memorien e regjistrit"</item>
     <item msgid="1978629051085111592">"16M për memorien e regjistrit"</item>
   </string-array>
   <string-array name="hdcp_checking_titles">
@@ -426,12 +428,12 @@
     <item msgid="9174900380056846820">"Kontrollo gjithmonë"</item>
   </string-array>
   <string-array name="hdcp_checking_summaries">
-    <item msgid="505558545611516707">"Asnjëherë mos përdor kontrollin e HDCP-së"</item>
+    <item msgid="505558545611516707">"Mos përdor asnjëherë kontrollin e HDCP-së"</item>
     <item msgid="3878793616631049349">"Përdor kontrollin e HDCP-së vetëm për përmbajtjen DRM"</item>
     <item msgid="45075631231212732">"Përdor gjithmonë kontrollin e HDCP-së"</item>
   </string-array>
   <string-array name="window_animation_scale_entries">
-    <item msgid="8134156599370824081">"Animacioni i çaktivizuar"</item>
+    <item msgid="8134156599370824081">"Animacioni është i çaktivizuar"</item>
     <item msgid="6624864048416710414">"Shkalla e animacionit 0,5x"</item>
     <item msgid="2219332261255416635">"Shkalla e aminacionit 1x"</item>
     <item msgid="3544428804137048509">"Shkalla e animacionit 1,5x"</item>
@@ -440,7 +442,7 @@
     <item msgid="6189539267968330656">"Shkalla e animacionit 10x"</item>
   </string-array>
   <string-array name="transition_animation_scale_entries">
-    <item msgid="8464255836173039442">"Animacioni joaktiv"</item>
+    <item msgid="8464255836173039442">"Animacioni është joaktiv"</item>
     <item msgid="3375781541913316411">"Shkalla e animacionit .5x"</item>
     <item msgid="1991041427801869945">"Shkalla e aminacionit 1x"</item>
     <item msgid="4012689927622382874">"Shkalla e animacionit 1,5x"</item>
@@ -449,7 +451,7 @@
     <item msgid="6660750935954853365">"Shkalla e animacionit 10x"</item>
   </string-array>
   <string-array name="animator_duration_scale_entries">
-    <item msgid="6039901060648228241">"Animacioni i çaktivizuar"</item>
+    <item msgid="6039901060648228241">"Animacioni është i çaktivizuar"</item>
     <item msgid="1138649021950863198">"Shkalla e animacionit 0,5x"</item>
     <item msgid="4394388961370833040">"Shkalla e aminacionit 1x"</item>
     <item msgid="8125427921655194973">"Shkalla e animacionit 1,5x"</item>
@@ -475,13 +477,13 @@
   </string-array>
   <string-array name="show_non_rect_clip_entries">
     <item msgid="993742912147090253">"Joaktive"</item>
-    <item msgid="675719912558941285">"Vizato në blu rajonin e klipit jo drejtkëndësh"</item>
-    <item msgid="1064373276095698656">"Thekso komandat e testuara të vizatimit në jeshile"</item>
+    <item msgid="675719912558941285">"Vizatoje klipin në të kaltër"</item>
+    <item msgid="1064373276095698656">"Thekso komandat në të gjelbër"</item>
   </string-array>
   <string-array name="track_frame_time_entries">
     <item msgid="2193584639058893150">"Joaktiv"</item>
     <item msgid="2751513398307949636">"Në ekran si shirita"</item>
-    <item msgid="1851438178120770973">"Në gfxinfo të dumpsys për shellin ADB"</item>
+    <item msgid="1851438178120770973">"Në \"gfxinfo\" për ADB-në"</item>
   </string-array>
   <string-array name="debug_hw_overdraw_entries">
     <item msgid="8190572633763871652">"Joaktiv"</item>
@@ -546,7 +548,7 @@
     <item msgid="6652164677254579050">"I ruajtur në memorie specifike (bosh)"</item>
   </string-array>
   <string-array name="color_picker">
-    <item msgid="7631642672260600032">"Jeshile në të kaltër"</item>
+    <item msgid="7631642672260600032">"Gurkali"</item>
     <item msgid="8332294763632946560">"E kaltër"</item>
     <item msgid="2023216417616991392">"Indigo"</item>
     <item msgid="3170497246594232819">"Vjollcë"</item>
@@ -555,7 +557,7 @@
   </string-array>
   <string-array name="usb_configuration_titles">
     <item msgid="5350926807680564950">"MTP (Protokolli i Transferimit të Medias)"</item>
-    <item msgid="8856820259201251036">"PTP (Protokolli i Transferimit të Fotove)"</item>
+    <item msgid="8856820259201251036">"PTP (Protokolli i Transferimit të Fotografive)"</item>
     <item msgid="216135047298423770">"RNDIS (USB Eternet)"</item>
     <item msgid="2686051673589572111">"Burimi i audios"</item>
     <item msgid="7014054229609338176">"MIDI"</item>
