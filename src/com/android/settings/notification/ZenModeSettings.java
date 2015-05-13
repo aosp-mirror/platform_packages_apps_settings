@@ -82,7 +82,7 @@ public class ZenModeSettings extends ZenModeSettingsBase implements Indexable {
         s = appendLowercase(s, mConfig.allowReminders, R.string.zen_mode_reminders);
         s = appendLowercase(s, mConfig.allowEvents, R.string.zen_mode_events);
         s = appendLowercase(s, callers, R.string.zen_mode_selected_callers);
-        s = appendLowercase(s, mConfig.allowMessages, R.string.zen_mode_messages);
+        s = appendLowercase(s, mConfig.allowMessages, R.string.zen_mode_selected_messages);
         mPrioritySettings.setSummary(s);
     }
 
