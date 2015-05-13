@@ -24,13 +24,7 @@ import com.android.internal.logging.MetricsLogger;
  */
 public abstract class InstrumentedFragment extends PreferenceFragment {
     // Declare new temporary categories here, starting after this value.
-    public static final int VIEW_CATEGORY_UNDECLARED = 100000;
-
-    public static final int VIEW_CATEGORY_DEFAULT_APPS = VIEW_CATEGORY_UNDECLARED + 1;
-    public static final int VIEW_CATEGORY_STORAGE_APPS = VIEW_CATEGORY_UNDECLARED + 2;
-    public static final int VIEW_CATEGORY_USAGE_ACCESS_DETAIL = VIEW_CATEGORY_UNDECLARED + 3;
-    public static final int VIEW_CATEGORY_HIGH_POWER_DETAILS = VIEW_CATEGORY_UNDECLARED + 4;
-    public static final int VIEW_CATEGORY_HIGH_POWER_APPS = VIEW_CATEGORY_UNDECLARED + 5;
+    public static final int UNDECLARED = 100000;
 
     /**
      * Declare the view of this category.
