@@ -16,9 +16,12 @@
 
 package com.android.settings;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.ActivityManagerNative;
 import android.app.AlertDialog;
+import android.app.AppOpsManager;
+import android.app.AppOpsManager.PackageOps;
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
 import android.app.backup.IBackupManager;
@@ -74,6 +77,7 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.widget.SwitchBar;
 
+import java.lang.Process;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -106,7 +110,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private static final String KEEP_SCREEN_ON = "keep_screen_on";
     private static final String BT_HCI_SNOOP_LOG = "bt_hci_snoop_log";
     private static final String ENABLE_OEM_UNLOCK = "oem_unlock_enable";
-    private static final String ALLOW_MOCK_LOCATION = "allow_mock_location";
     private static final String HDCP_CHECKING_KEY = "hdcp_checking";
     private static final String HDCP_CHECKING_PROPERTY = "persist.sys.hdcp_checking";
     private static final String LOCAL_BACKUP_PASSWORD = "local_backup_password";
@@ -119,6 +122,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
 
     private static final String DEBUG_APP_KEY = "debug_app";
     private static final String WAIT_FOR_DEBUGGER_KEY = "wait_for_debugger";
+    private static final String MOCK_LOCATION_APP_KEY = "mock_location_app";
     private static final String VERIFY_APPS_OVER_USB_KEY = "verify_apps_over_usb";
     private static final String DEBUG_VIEW_ATTRIBUTES =  "debug_view_attributes";
     private static final String STRICT_MODE_KEY = "strict_mode";
@@ -174,12 +178,15 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private static final String TERMINAL_APP_PACKAGE = "com.android.terminal";
 
     private static final int RESULT_DEBUG_APP = 1000;
+    private static final int RESULT_MOCK_LOCATION_APP = 1001;
 
     private static final String PERSISTENT_DATA_BLOCK_PROP = "ro.frp.pst";
 
     private static final int REQUEST_CODE_ENABLE_OEM_UNLOCK = 0;
 
     private static String DEFAULT_LOG_RING_BUFFER_SIZE_IN_BYTES = "262144"; // 256K
+
+    private static final int[] MOCK_LOCATOIN_APP_OPS = new int[] {AppOpsManager.OP_MOCK_LOCATION};
 
     private static final String MULTI_WINDOW_SYSTEM_PROPERTY = "persist.sys.debug.multi_window";
     private IWindowManager mWindowManager;
@@ -201,12 +208,15 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private SwitchPreference mKeepScreenOn;
     private SwitchPreference mBtHciSnoopLog;
     private SwitchPreference mEnableOemUnlock;
-    private SwitchPreference mAllowMockLocation;
     private SwitchPreference mDebugViewAttributes;
 
     private PreferenceScreen mPassword;
     private String mDebugApp;
     private Preference mDebugAppPref;
+
+    private String mMockLocationApp;
+    private Preference mMockLocationAppPref;
+
     private SwitchPreference mWaitForDebugger;
     private SwitchPreference mVerifyAppsOverUsb;
     private SwitchPreference mWifiDisplayCertification;
@@ -317,7 +327,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             removePreference(mEnableOemUnlock);
             mEnableOemUnlock = null;
         }
-        mAllowMockLocation = findAndInitSwitchPref(ALLOW_MOCK_LOCATION);
+
         mDebugViewAttributes = findAndInitSwitchPref(DEBUG_VIEW_ATTRIBUTES);
         mPassword = (PreferenceScreen) findPreference(LOCAL_BACKUP_PASSWORD);
         mAllPrefs.add(mPassword);
@@ -333,6 +343,10 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         mDebugAppPref = findPreference(DEBUG_APP_KEY);
         mAllPrefs.add(mDebugAppPref);
         mWaitForDebugger = findAndInitSwitchPref(WAIT_FOR_DEBUGGER_KEY);
+
+        mMockLocationAppPref = findPreference(MOCK_LOCATION_APP_KEY);
+        mAllPrefs.add(mMockLocationAppPref);
+
         mVerifyAppsOverUsb = findAndInitSwitchPref(VERIFY_APPS_OVER_USB_KEY);
         if (!showVerifierSetting()) {
             if (debugDebuggingCategory != null) {
@@ -558,13 +572,12 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         if (mEnableOemUnlock != null) {
             updateSwitchPreference(mEnableOemUnlock, Utils.isOemUnlockEnabled(getActivity()));
         }
-        updateSwitchPreference(mAllowMockLocation, Settings.Secure.getInt(cr,
-                Settings.Secure.ALLOW_MOCK_LOCATION, 0) != 0);
         updateSwitchPreference(mDebugViewAttributes, Settings.Global.getInt(cr,
                 Settings.Global.DEBUG_VIEW_ATTRIBUTES, 0) != 0);
         updateHdcpValues();
         updatePasswordSummary();
         updateDebuggerOptions();
+        updateMockLocation();
         updateStrictModeVisualOptions();
         updatePointerLocationOptions();
         updateShowTouchesOptions();
@@ -677,6 +690,41 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         }
     }
 
+    private void writeMockLocation() {
+        AppOpsManager appOpsManager = (AppOpsManager) getSystemService(Context.APP_OPS_SERVICE);
+
+        // Disable the app op of the previous mock location app if such.
+        List<PackageOps> packageOps = appOpsManager.getPackagesForOps(MOCK_LOCATOIN_APP_OPS);
+        if (packageOps != null) {
+            // Should be one but in case we are in a bad state due to use of command line tools.
+            for (PackageOps packageOp : packageOps) {
+                if (packageOp.getOps().get(0).getMode() != AppOpsManager.MODE_ERRORED) {
+                    String oldMockLocationApp = packageOp.getPackageName();
+                    try {
+                        ApplicationInfo ai = getActivity().getPackageManager().getApplicationInfo(
+                                oldMockLocationApp, PackageManager.GET_DISABLED_COMPONENTS);
+                        appOpsManager.setMode(AppOpsManager.OP_MOCK_LOCATION, ai.uid,
+                                oldMockLocationApp, AppOpsManager.MODE_ERRORED);
+                    } catch (NameNotFoundException e) {
+                        /* ignore */
+                    }
+                }
+            }
+        }
+
+        // Enable the app op of the new mock location app if such.
+        if (!TextUtils.isEmpty(mMockLocationApp)) {
+            try {
+                ApplicationInfo ai = getActivity().getPackageManager().getApplicationInfo(
+                        mMockLocationApp, PackageManager.GET_DISABLED_COMPONENTS);
+                appOpsManager.setMode(AppOpsManager.OP_MOCK_LOCATION, ai.uid,
+                        mMockLocationApp, AppOpsManager.MODE_ALLOWED);
+            } catch (NameNotFoundException e) {
+                /* ignore */
+            }
+        }
+    }
+
     private static void resetDebuggerOptions() {
         try {
             ActivityManagerNative.getDefault().setDebugApp(
@@ -706,6 +754,39 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         } else {
             mDebugAppPref.setSummary(getResources().getString(R.string.debug_app_not_set));
             mWaitForDebugger.setEnabled(false);
+        }
+    }
+
+    private void updateMockLocation() {
+        AppOpsManager appOpsManager = (AppOpsManager) getSystemService(Context.APP_OPS_SERVICE);
+
+        List<PackageOps> packageOps = appOpsManager.getPackagesForOps(MOCK_LOCATOIN_APP_OPS);
+        if (packageOps != null) {
+            for (PackageOps packageOp : packageOps) {
+                if (packageOp.getOps().get(0).getMode() == AppOpsManager.MODE_ALLOWED) {
+                    mMockLocationApp = packageOps.get(0).getPackageName();
+                    break;
+                }
+            }
+        }
+
+        if (!TextUtils.isEmpty(mMockLocationApp)) {
+            String label = mMockLocationApp;
+            try {
+                ApplicationInfo ai = getActivity().getPackageManager().getApplicationInfo(
+                        mMockLocationApp, PackageManager.GET_DISABLED_COMPONENTS);
+                CharSequence appLabel = getPackageManager().getApplicationLabel(ai);
+                if (appLabel != null) {
+                    label = appLabel.toString();
+                }
+            } catch (PackageManager.NameNotFoundException e) {
+                /* ignore */
+            }
+
+            mMockLocationAppPref.setSummary(getString(R.string.mock_location_app_set, label));
+            mHaveDebugSettings = true;
+        } else {
+            mMockLocationAppPref.setSummary(getString(R.string.mock_location_app_not_set));
         }
     }
 
@@ -1506,6 +1587,12 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
                 writeDebuggerOptions();
                 updateDebuggerOptions();
             }
+        } else if (requestCode == RESULT_MOCK_LOCATION_APP) {
+            if (resultCode == Activity.RESULT_OK) {
+                mMockLocationApp = data.getAction();
+                writeMockLocation();
+                updateMockLocation();
+            }
         } else if (requestCode == REQUEST_CODE_ENABLE_OEM_UNLOCK) {
             if (resultCode == Activity.RESULT_OK) {
                 if (mEnableOemUnlock.isChecked()) {
@@ -1574,16 +1661,19 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
                     Utils.setOemUnlockEnabled(getActivity(), false);
                 }
             }
-        } else if (preference == mAllowMockLocation) {
-            Settings.Secure.putInt(getActivity().getContentResolver(),
-                    Settings.Secure.ALLOW_MOCK_LOCATION,
-                    mAllowMockLocation.isChecked() ? 1 : 0);
+        } else if (preference == mMockLocationAppPref) {
+            Intent intent = new Intent(getActivity(), AppPicker.class);
+            intent.putExtra(AppPicker.EXTRA_REQUESTIING_PERMISSION,
+                    Manifest.permission.ACCESS_MOCK_LOCATION);
+            startActivityForResult(intent, RESULT_MOCK_LOCATION_APP);
         } else if (preference == mDebugViewAttributes) {
             Settings.Global.putInt(getActivity().getContentResolver(),
                     Settings.Global.DEBUG_VIEW_ATTRIBUTES,
                     mDebugViewAttributes.isChecked() ? 1 : 0);
         } else if (preference == mDebugAppPref) {
-            startActivityForResult(new Intent(getActivity(), AppPicker.class), RESULT_DEBUG_APP);
+            Intent intent = new Intent(getActivity(), AppPicker.class);
+            intent.putExtra(AppPicker.EXTRA_DEBUGGABLE, true);
+            startActivityForResult(intent, RESULT_DEBUG_APP);
         } else if (preference == mWaitForDebugger) {
             writeDebuggerOptions();
         } else if (preference == mVerifyAppsOverUsb) {

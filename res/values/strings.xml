@@ -3540,10 +3540,14 @@
     <string name="select_logd_size_title">Logger buffer sizes</string>
     <!-- UI debug setting: limit size of Android logger buffers [CHAR LIMIT=59] -->
     <string name="select_logd_size_dialog_title">Select Logger sizes per log buffer</string>
-    <!-- Setting Checkbox title whether to allow mock locations -->
-    <string name="allow_mock_location">Allow mock locations</string>
-    <!-- setting Checkbox summary whether to allow mock locations  -->
-    <string name="allow_mock_location_summary">Allow mock locations</string>
+
+    <!-- UI debug setting: select current app to mock location [CHAR LIMIT=50] -->
+    <string name="mock_location_app">Select mock location app</string>
+    <!-- UI debug setting: no mock location app has been set [CHAR LIMIT=50] -->
+    <string name="mock_location_app_not_set">No mock location app set</string>
+    <!-- UI debug setting: mock location app has been set [CHAR LIMIT=50] -->
+    <string name="mock_location_app_set">Mock location app: <xliff:g id="app_name">%1$s</xliff:g></string>
+
     <!-- Setting Checkbox title whether to enable view attribute inspection -->
     <string name="debug_view_attributes">Enable view attribute inspection</string>
     <!-- Title of warning dialog about the implications of enabling USB debugging -->
