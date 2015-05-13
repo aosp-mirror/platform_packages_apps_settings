@@ -360,11 +360,11 @@ public class ManageApplications extends InstrumentedFragment
             case LIST_TYPE_DOMAINS_URLS:
                 return MetricsLogger.MANAGE_DOMAIN_URLS;
             case LIST_TYPE_STORAGE:
-                return InstrumentedFragment.VIEW_CATEGORY_STORAGE_APPS;
+                return MetricsLogger.APPLICATIONS_STORAGE_APPS;
             case LIST_TYPE_USAGE_ACCESS:
                 return MetricsLogger.USAGE_ACCESS;
             case LIST_TYPE_HIGH_POWER:
-                return InstrumentedFragment.VIEW_CATEGORY_HIGH_POWER_APPS;
+                return MetricsLogger.APPLICATIONS_HIGH_POWER_APPS;
             default:
                 return MetricsLogger.VIEW_UNKNOWN;
         }
