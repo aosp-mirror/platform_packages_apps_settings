@@ -17,7 +17,9 @@
 package com.android.settings;
 
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceScreen;
 
 public class TestingSettings extends PreferenceActivity {
 
@@ -26,6 +28,12 @@ public class TestingSettings extends PreferenceActivity {
         super.onCreate(savedInstanceState);
         
         addPreferencesFromResource(R.xml.testing_settings);
+
+        if (UserHandle.myUserId() != UserHandle.USER_OWNER) {
+            PreferenceScreen preferenceScreen = (PreferenceScreen)
+                    findPreference("radio_info_settings");
+            getPreferenceScreen().removePreference(preferenceScreen);
+        }
     }
 
 }

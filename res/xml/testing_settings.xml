@@ -18,7 +18,8 @@
         android:title="@string/testing" >
             
     <PreferenceScreen
-            android:title="@string/testing_phone_info">
+            android:title="@string/testing_phone_info"
+            android:key="radio_info_settings">
         <intent android:action="android.intent.action.MAIN"
                 android:targetPackage="com.android.settings"
                 android:targetClass="com.android.settings.RadioInfo" />
