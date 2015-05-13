@@ -70,6 +70,7 @@ import com.android.settings.fuelgauge.BatteryEntry;
 import com.android.settings.fuelgauge.PowerUsageDetail;
 import com.android.settings.net.ChartData;
 import com.android.settings.net.ChartDataLoader;
+import com.android.settings.notification.AppNotificationSettings;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.NotificationBackend.AppRow;
 
@@ -626,23 +627,15 @@ public class InstalledAppDetails extends AppInfoBase
         }
     }
 
-    private void startAppInfoFragment(Class<? extends AppInfoBase> fragment, CharSequence title) {
+    private void startAppInfoFragment(Class<?> fragment, CharSequence title) {
         // start new fragment to display extended information
         Bundle args = new Bundle();
-        args.putString(InstalledAppDetails.ARG_PACKAGE_NAME, mAppEntry.info.packageName);
+        args.putString(ARG_PACKAGE_NAME, mAppEntry.info.packageName);
+        args.putInt(ARG_PACKAGE_UID, mAppEntry.info.uid);
         args.putBoolean(AppInfoWithHeader.EXTRA_HIDE_INFO_BUTTON, true);
 
         SettingsActivity sa = (SettingsActivity) getActivity();
         sa.startPreferencePanel(fragment.getName(), args, -1, title, this, SUB_INFO_FRAGMENT);
-    }
-
-    private void startNotifications() {
-        // start new fragment to display extended information
-        getActivity().startActivity(new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
-                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                .putExtra(AppInfoWithHeader.EXTRA_HIDE_INFO_BUTTON, true)
-                .putExtra(Settings.EXTRA_APP_PACKAGE, mAppEntry.info.packageName)
-                .putExtra(Settings.EXTRA_APP_UID, mAppEntry.info.uid));
     }
 
     /*
@@ -680,7 +673,8 @@ public class InstalledAppDetails extends AppInfoBase
         if (preference == mStoragePreference) {
             startAppInfoFragment(AppStorageSettings.class, mStoragePreference.getTitle());
         } else if (preference == mNotificationPreference) {
-            startNotifications();
+            startAppInfoFragment(AppNotificationSettings.class,
+                    getString(R.string.app_notifications_title));
         } else if (preference == mPermissionsPreference) {
             startManagePermissionsActivity();
         } else if (preference == mLaunchPreference) {
