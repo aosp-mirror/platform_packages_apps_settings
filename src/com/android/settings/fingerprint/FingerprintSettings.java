@@ -259,9 +259,9 @@ public class FingerprintSettings extends SubSettings {
 
         protected void removeFingerprintPreference(int fingerprintId) {
             String name = genKey(fingerprintId);
-            Preference prefToRemove = mManageCategory.findPreference(name);
+            Preference prefToRemove = findPreference(name);
             if (prefToRemove != null) {
-                if (!mManageCategory.removePreference(prefToRemove)) {
+                if (!getPreferenceScreen().removePreference(prefToRemove)) {
                     Log.w(TAG, "Failed to remove preference with key " + name);
                 }
             } else {
