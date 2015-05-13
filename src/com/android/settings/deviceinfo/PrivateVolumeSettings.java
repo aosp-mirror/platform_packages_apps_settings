@@ -273,7 +273,6 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         final MenuItem unmount = menu.findItem(R.id.storage_unmount);
         final MenuItem format = menu.findItem(R.id.storage_format);
         final MenuItem migrate = menu.findItem(R.id.storage_migrate);
-        final MenuItem usb = menu.findItem(R.id.storage_usb);
 
         // Actions live in menu for non-internal private volumes; they're shown
         // as preference items for public volumes.
@@ -293,9 +292,6 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         final VolumeInfo privateVol = getActivity().getPackageManager()
                 .getPrimaryStorageCurrentVolume();
         migrate.setVisible(!Objects.equals(mVolume, privateVol));
-
-        // TODO: show usb if we jumped past first screen
-        usb.setVisible(false);
     }
 
     @Override
@@ -323,10 +319,6 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
                 final Intent intent = new Intent(context, StorageWizardMigrateConfirm.class);
                 intent.putExtra(VolumeInfo.EXTRA_VOLUME_ID, mVolume.getId());
                 startActivity(intent);
-                return true;
-            case R.id.storage_usb:
-                startFragment(this, UsbSettings.class.getCanonicalName(),
-                        R.string.storage_title_usb, 0, null);
                 return true;
         }
         return super.onOptionsItemSelected(item);

@@ -36,7 +36,6 @@ import com.android.settings.applications.AdvancedAppSettings;
 import com.android.settings.applications.ManageDefaultApps;
 import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.deviceinfo.StorageSettings;
-import com.android.settings.deviceinfo.UsbSettings;
 import com.android.settings.fuelgauge.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
@@ -176,13 +175,6 @@ public final class SearchIndexableResources {
                         Ranking.getRankForClassName(StorageSettings.class.getName()),
                         NO_DATA_RES_ID,
                         StorageSettings.class.getName(),
-                        R.drawable.ic_settings_storage));
-
-        sResMap.put(UsbSettings.class.getName(),
-                new SearchIndexableResource(
-                        Ranking.getRankForClassName(UsbSettings.class.getName()),
-                        R.xml.usb_settings,
-                        UsbSettings.class.getName(),
                         R.drawable.ic_settings_storage));
 
         sResMap.put(PowerUsageSummary.class.getName(),

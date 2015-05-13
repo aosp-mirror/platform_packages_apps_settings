@@ -149,29 +149,6 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.storage, menu);
-    }
-
-    @Override
-    public void onPrepareOptionsMenu(Menu menu) {
-        final MenuItem usb = menu.findItem(R.id.storage_usb);
-
-        usb.setVisible(!mUserManager.hasUserRestriction(UserManager.DISALLOW_USB_FILE_TRANSFER));
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.storage_usb:
-                startFragment(this, UsbSettings.class.getCanonicalName(),
-                        R.string.storage_title_usb, 0, null);
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference pref) {
         final String volId = pref.getKey();
         final VolumeInfo vol = mStorageManager.findVolumeById(volId);
