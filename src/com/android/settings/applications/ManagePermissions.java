@@ -150,8 +150,8 @@ public class ManagePermissions extends SettingsPreferenceFragment
         public void refreshUi() {
             setTitle(mGroup.label);
             setIcon(mGroup.icon);
-            setSummary(getContext().getString(R.string.app_permissions_group_summary,
-                    mGroup.grantedApps.size(), mGroup.possibleApps.size()));
+//            setSummary(getContext().getString(R.string.app_permissions_group_summary,
+//                    mGroup.grantedApps.size(), mGroup.possibleApps.size()));
         }
 
         @Override
