@@ -135,8 +135,8 @@ public class AdvancedAppSettings extends SettingsPreferenceFragment implements
     public void onPermissionLoadComplete() {
         Activity activity = getActivity();
         if (activity == null) return;
-        mAppPermsPreference.setSummary(activity.getString(R.string.app_permissions_summary,
-                mPermissionsInfo.getRuntimePermAppsGrantedCount(),
-                mPermissionsInfo.getRuntimePermAppsCount()));
+//        mAppPermsPreference.setSummary(activity.getString(R.string.app_permissions_summary,
+//                mPermissionsInfo.getRuntimePermAppsGrantedCount(),
+//                mPermissionsInfo.getRuntimePermAppsCount()));
     }
 }
