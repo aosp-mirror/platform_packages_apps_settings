@@ -15,16 +15,22 @@
  */
 package com.android.settings.applications;
 
+import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.content.res.Resources.Theme;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceScreen;
 import android.util.Log;
+import android.view.View;
 
 import com.android.internal.logging.MetricsLogger;
+import com.android.settings.AppHeader;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settingslib.applications.PermissionsInfo;
@@ -33,11 +39,15 @@ import com.android.settingslib.applications.PermissionsInfo.PermissionGroup;
 import java.util.List;
 
 public class ManagePermissions extends SettingsPreferenceFragment
-        implements PermissionsInfo.Callback, OnPreferenceClickListener {
+        implements PermissionsInfo.Callback {
 
     private static final String TAG = "ManagePermissions";
 
+    private static final String OS_PKG = "android";
+
     private PermissionsInfo mPermissionsInfo;
+
+    private PreferenceScreen mExtraScreen;
 
     @Override
     public void onResume() {
@@ -54,25 +64,66 @@ public class ManagePermissions extends SettingsPreferenceFragment
     }
 
     private void refreshUi() {
+        Activity activity = getActivity();
         PreferenceScreen screen = getPreferenceScreen();
         if (screen == null) {
-            screen = getPreferenceManager().createPreferenceScreen(getActivity());
+            screen = getPreferenceManager().createPreferenceScreen(activity);
             setPreferenceScreen(screen);
         } else {
             screen.removeAll();
+            if (mExtraScreen != null) {
+                mExtraScreen.removeAll();
+            }
         }
         final int count = screen.getPreferenceCount();
         if (count == 0) {
+            final Preference extraScreenPreference = new Preference(activity);
+            extraScreenPreference.setIcon(R.drawable.ic_toc);
+            extraScreenPreference.setTitle(R.string.additional_permissions);
             List<PermissionGroup> groups = mPermissionsInfo.getGroups();
             for (PermissionGroup group : groups) {
                 if (group.possibleApps.size() == 0) continue;
-                PermissionPreference pref = new PermissionPreference(getActivity(), group);
+                PermissionPreference pref = new PermissionPreference(activity, group);
                 pref.refreshUi();
-                screen.addPreference(pref);
+                if (group.packageName.equals(OS_PKG)) {
+                    screen.addPreference(pref);
+                } else {
+                    if (mExtraScreen == null) {
+                        mExtraScreen = getPreferenceManager().createPreferenceScreen(activity);
+                    }
+                    mExtraScreen.addPreference(pref);
+                }
+            }
+            if (mExtraScreen != null) {
+                extraScreenPreference.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+                    @Override
+                    public boolean onPreferenceClick(Preference preference) {
+                        AdditionalPermissionsFragment frag = new AdditionalPermissionsFragment();
+                        frag.setTargetFragment(ManagePermissions.this, 0);
+                        FragmentTransaction ft = getFragmentManager().beginTransaction();
+                        ft.replace(R.id.main_content, frag);
+                        ft.addToBackStack("AdditionalPerms");
+                        ft.commit();
+                        return true;
+                    }
+                });
+                extraScreenPreference.setSummary(getString(R.string.additional_permissions_more,
+                        mExtraScreen.getPreferenceCount()));
+                screen.addPreference(extraScreenPreference);
             }
         } else {
-            for (int i = 0; i < count; i++) {
-                ((PermissionPreference) screen.getPreference(i)).refreshUi();
+            updatePrefs(screen);
+            if (mExtraScreen != null) {
+                updatePrefs(mExtraScreen);
+            }
+        }
+    }
+
+    private void updatePrefs(PreferenceScreen screen) {
+        for (int i = 0; i < screen.getPreferenceCount(); i++) {
+            Preference pref = screen.getPreference(i);
+            if (pref instanceof PermissionPreference) {
+                ((PermissionPreference) pref).refreshUi();
             }
         }
     }
@@ -80,11 +131,6 @@ public class ManagePermissions extends SettingsPreferenceFragment
     @Override
     public void onPermissionLoadComplete() {
         refreshUi();
-    }
-
-    @Override
-    public boolean onPreferenceClick(Preference preference) {
-        return true;
     }
 
     @Override
@@ -118,6 +164,28 @@ public class ManagePermissions extends SettingsPreferenceFragment
                 Log.w(TAG, "No app to handle " + i.getAction());
             }
             return true;
+        }
+    }
+
+    public static class AdditionalPermissionsFragment extends SettingsPreferenceFragment {
+        @Override
+        public void onCreate(Bundle icicle) {
+            super.onCreate(icicle);
+            setPreferenceScreen(((ManagePermissions) getTargetFragment()).mExtraScreen);
+        }
+
+        @Override
+        public void onViewCreated(View view, Bundle savedInstanceState) {
+            super.onViewCreated(view, savedInstanceState);
+            Resources resources = getResources();
+            Theme theme = getActivity().getTheme();
+            AppHeader.createAppHeader(this, resources.getDrawable(R.drawable.ic_toc, theme),
+                    getString(R.string.additional_permissions), null, android.R.color.white);
+        }
+
+        @Override
+        protected int getMetricsCategory() {
+            return MetricsLogger.MANAGE_PERMISSIONS;
         }
     }
 
