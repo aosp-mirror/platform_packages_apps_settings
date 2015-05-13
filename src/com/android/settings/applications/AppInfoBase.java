@@ -47,6 +47,7 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
         implements ApplicationsState.Callbacks {
 
     public static final String ARG_PACKAGE_NAME = "package";
+    public static final String ARG_PACKAGE_UID = "uid";
 
     protected static final String TAG = AppInfoBase.class.getSimpleName();
     protected static final boolean localLOGV = false;
@@ -197,10 +198,11 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
         refreshUi();
     }
 
-    public static void startAppInfoFragment(Class<? extends AppInfoBase> fragment, int titleRes,
+    public static void startAppInfoFragment(Class<?> fragment, int titleRes,
             String pkg, int uid, Fragment source, int request) {
         Bundle args = new Bundle();
         args.putString(AppInfoBase.ARG_PACKAGE_NAME, pkg);
+        args.putInt(AppInfoBase.ARG_PACKAGE_UID, uid);
 
         Intent intent = Utils.onBuildStartFragmentIntent(source.getActivity(), fragment.getName(),
                 args, null, titleRes, null, false);
