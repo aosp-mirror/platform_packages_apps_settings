@@ -68,6 +68,7 @@ import com.android.settings.applications.ApplicationsState.AppFilter;
 import com.android.settings.applications.ApplicationsState.CompoundFilter;
 import com.android.settings.applications.ApplicationsState.VolumeFilter;
 import com.android.settings.fuelgauge.HighPowerDetail;
+import com.android.settings.notification.AppNotificationSettings;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.NotificationBackend.AppRow;
 
@@ -422,14 +423,10 @@ public class ManageApplications extends InstrumentedFragment
 
     // utility method used to start sub activity
     private void startApplicationDetailsActivity() {
-        Activity activity = getActivity();
         switch (mListType) {
             case LIST_TYPE_NOTIFICATION:
-                activity.startActivityAsUser(new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
-                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                        .putExtra(Settings.EXTRA_APP_PACKAGE, mCurrentPkgName)
-                        .putExtra(Settings.EXTRA_APP_UID, mCurrentUid),
-                        new UserHandle(UserHandle.getUserId(mCurrentUid)));
+                startAppInfoFragment(AppNotificationSettings.class,
+                        R.string.app_notifications_title);
                 break;
             case LIST_TYPE_DOMAINS_URLS:
                 startAppInfoFragment(AppLaunchSettings.class, R.string.auto_launch_label);
@@ -452,7 +449,7 @@ public class ManageApplications extends InstrumentedFragment
         }
     }
 
-    private void startAppInfoFragment(Class<? extends AppInfoBase> fragment, int titleRes) {
+    private void startAppInfoFragment(Class<?> fragment, int titleRes) {
         AppInfoBase.startAppInfoFragment(fragment, titleRes, mCurrentPkgName, mCurrentUid, this,
                 INSTALLED_APP_DETAILS);
     }
