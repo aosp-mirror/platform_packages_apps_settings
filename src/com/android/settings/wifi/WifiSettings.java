@@ -147,6 +147,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     private Bundle mWifiNfcDialogSavedState;
 
     private WifiTracker mWifiTracker;
+    private String mOpenSsid;
 
     /* End of "used in Wifi Setup context" */
 
@@ -252,20 +253,8 @@ public class WifiSettings extends RestrictedSettingsFragment
         setHasOptionsMenu(true);
 
         if (intent.hasExtra(EXTRA_START_CONNECT_SSID)) {
-            String ssid = intent.getStringExtra(EXTRA_START_CONNECT_SSID);
+            mOpenSsid = intent.getStringExtra(EXTRA_START_CONNECT_SSID);
             onAccessPointsChanged();
-            PreferenceScreen preferenceScreen = getPreferenceScreen();
-            for (int i = 0; i < preferenceScreen.getPreferenceCount(); i++) {
-                Preference preference = preferenceScreen.getPreference(i);
-                if (preference instanceof AccessPointPreference) {
-                    AccessPoint accessPoint = ((AccessPointPreference) preference).getAccessPoint();
-                    if (ssid.equals(accessPoint.getSsid()) && !accessPoint.isSaved()
-                            && accessPoint.getSecurity() != AccessPoint.SECURITY_NONE) {
-                        onPreferenceTreeClick(preferenceScreen, preference);
-                        break;
-                    }
-                }
-            }
         }
     }
 
@@ -642,6 +631,12 @@ public class WifiSettings extends RestrictedSettingsFragment
                         AccessPointPreference preference = new AccessPointPreference(accessPoint,
                                 getActivity(), false);
 
+                        if (mOpenSsid != null && mOpenSsid.equals(accessPoint.getSsid())
+                                && !accessPoint.isSaved()
+                                && accessPoint.getSecurity() != AccessPoint.SECURITY_NONE) {
+                            onPreferenceTreeClick(getPreferenceScreen(), preference);
+                            mOpenSsid = null;
+                        }
                         getPreferenceScreen().addPreference(preference);
                         accessPoint.setListener(this);
                     }
