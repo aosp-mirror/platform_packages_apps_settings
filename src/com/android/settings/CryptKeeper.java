@@ -116,7 +116,6 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     /** If gone bad, should we show encryption failed (false) or corrupt (true)*/
     private boolean mCorrupt;
     /** A flag to indicate when the back event should be ignored */
-    private boolean mIgnoreBack = false;
     /** When set, blocks unlocking. Set every COOL_DOWN_ATTEMPTS attempts, only cleared
         by power cycling phone. */
     private boolean mCooldown = false;
@@ -390,15 +389,11 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     }
 
     /**
-     * Ignore back events after the user has entered the decrypt screen and while the device is
-     * encrypting.
+     * Ignore back events from this activity always - there's nowhere to go back
+     * to
      */
     @Override
     public void onBackPressed() {
-        // In the rare case that something pressed back even though we were disabled.
-        if (mIgnoreBack)
-            return;
-        super.onBackPressed();
     }
 
     @Override
@@ -515,6 +510,8 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
                     ownerInfo.setSelected(true); // Required for marquee'ing to work
 
                     passwordEntryInit();
+
+                    findViewById(android.R.id.content).setSystemUiVisibility(View.STATUS_BAR_DISABLE_BACK);
 
                     if (mLockPatternView != null) {
                         mLockPatternView.setInStealthMode(!pattern_visible);
@@ -694,7 +691,6 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
      * @param isEnabled true if back is enabled, false otherwise.
      */
     private final void setBackFunctionality(boolean isEnabled) {
-        mIgnoreBack = !isEnabled;
         if (isEnabled) {
             mStatusBar.disable(sWidgetsToDisable);
         } else {
