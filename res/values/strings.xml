@@ -3537,7 +3537,6 @@
     <!-- Warning dialog message to confirm user wishes to enable OEM unlock and disable theft protection features -->
     <string name="confirm_enable_oem_unlock_text">WARNING: Device protection features will not work on this device while this setting is turned on.</string>
 
-
     <!-- UI debug setting: limit size of Android logger buffers -->
     <string name="select_logd_size_title">Logger buffer sizes</string>
     <!-- UI debug setting: limit size of Android logger buffers [CHAR LIMIT=59] -->
@@ -6627,5 +6626,12 @@
          for this device should be used for. Choices are usb_use_charging_only,
          usb_use_file_transfer, use_use_photo_transfer, and usb_use_MIDI -->
     <string name="usb_use">Use USB for</string>
+
+    <!-- Settings item title for inactive apps [CHAR LIMIT=35] -->
+    <string name="inactive_apps_title">Inactive apps</string>
+    <!-- Settings item summary for inactive app [CHAR LIMIT=100] -->
+    <string name="inactive_app_inactive_summary">Inactive. Touch to toggle.</string>
+    <!-- Settings item summary for active app [CHAR LIMIT=100] -->
+    <string name="inactive_app_active_summary">Active. Touch to toggle.</string>
 
 </resources>
