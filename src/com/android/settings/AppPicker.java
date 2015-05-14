@@ -22,6 +22,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import com.android.settings.applications.AppViewHolder;
 
 import android.app.ListActivity;
@@ -40,9 +42,19 @@ import android.widget.ListView;
 public class AppPicker extends ListActivity {
     private AppListAdapter mAdapter;
 
+    public static final String EXTRA_REQUESTIING_PERMISSION
+            = "com.android.settings.extra.REQUESTIING_PERMISSION";
+    public static final String EXTRA_DEBUGGABLE = "com.android.settings.extra.DEBUGGABLE";
+
+    private String mPermissionName;
+    private boolean mDebuggableOnly;
+
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+
+        mPermissionName = getIntent().getStringExtra(EXTRA_REQUESTIING_PERMISSION);
+        mDebuggableOnly = getIntent().getBooleanExtra(EXTRA_DEBUGGABLE, false);
 
         mAdapter = new AppListAdapter(this);
         if (mAdapter.getCount() <= 0) {
@@ -89,13 +101,41 @@ public class AppPicker extends ListActivity {
                 if (ai.uid == Process.SYSTEM_UID) {
                     continue;
                 }
-                // On a user build, we only allow debugging of apps that
-                // are marked as debuggable.  Otherwise (for platform development)
-                // we allow all apps.
-                if ((ai.flags&ApplicationInfo.FLAG_DEBUGGABLE) == 0
-                        && "user".equals(Build.TYPE)) {
-                    continue;
+
+                // Filter out apps that are not debuggable if required.
+                if (mDebuggableOnly) {
+                    // On a user build, we only allow debugging of apps that
+                    // are marked as debuggable.  Otherwise (for platform development)
+                    // we allow all apps.
+                    if ((ai.flags&ApplicationInfo.FLAG_DEBUGGABLE) == 0
+                            && "user".equals(Build.TYPE)) {
+                        continue;
+                    }
                 }
+
+                // Filter out apps that do not request the permission if required.
+                if (mPermissionName != null) {
+                    boolean requestsPermission = false;
+                    try {
+                        PackageInfo pi = getPackageManager().getPackageInfo(ai.packageName,
+                                PackageManager.GET_PERMISSIONS);
+                        if (pi.requestedPermissions == null) {
+                            continue;
+                        }
+                        for (String requestedPermission : pi.requestedPermissions) {
+                            if (requestedPermission.equals(mPermissionName)) {
+                                requestsPermission = true;
+                                break;
+                            }
+                        }
+                        if (!requestsPermission) {
+                            continue;
+                        }
+                    } catch (PackageManager.NameNotFoundException e) {
+                        continue;
+                    }
+                }
+
                 MyApplicationInfo info = new MyApplicationInfo();
                 info.info = ai;
                 info.label = info.info.loadLabel(getPackageManager()).toString();
