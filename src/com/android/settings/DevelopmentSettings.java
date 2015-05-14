@@ -73,8 +73,10 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.android.internal.logging.MetricsLogger;
+import com.android.settings.fuelgauge.InactiveApps;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settings.users.UserDetailsSettings;
 import com.android.settings.widget.SwitchBar;
 
 import java.lang.Process;
@@ -164,6 +166,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private static final String SELECT_USB_CONFIGURATION_PROPERTY = "sys.usb.config";
     private static final String WIFI_LEGACY_DHCP_CLIENT_KEY = "legacy_dhcp_client";
     private static final String MOBILE_DATA_ALWAYS_ON = "mobile_data_always_on";
+
+    private static final String INACTIVE_APPS_KEY = "inactive_apps";
 
     private static final String OPENGL_TRACES_KEY = "enable_opengl_traces";
 
@@ -1728,11 +1732,19 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             writeUseAwesomePlayerOptions();
         } else if (preference == mUSBAudio) {
             writeUSBAudioOptions();
+        } else if (INACTIVE_APPS_KEY.equals(preference.getKey())) {
+            startInactiveAppsFragment();
         } else {
             return super.onPreferenceTreeClick(preferenceScreen, preference);
         }
 
         return false;
+    }
+
+    private void startInactiveAppsFragment() {
+        ((SettingsActivity) getActivity()).startPreferencePanel(
+                InactiveApps.class.getName(),
+                null, R.string.inactive_apps_title, null, null, 0);
     }
 
     private boolean showKeyguardConfirmation(Resources resources, int requestCode) {
