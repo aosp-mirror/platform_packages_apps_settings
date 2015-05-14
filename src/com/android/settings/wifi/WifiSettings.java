@@ -43,6 +43,7 @@ import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.text.Spannable;
@@ -450,8 +451,8 @@ public class WifiSettings extends RestrictedSettingsFragment
                 }
 
                 WifiConfiguration config = mSelectedAccessPoint.getConfig();
-                // Device Owner created configs are uneditable
-                if (isCreatorDeviceOwner(getActivity(), config)) {
+                // Some configs are ineditable
+                if (isEditabilityLockedDown(getActivity(), config)) {
                     return;
                 }
 
@@ -533,7 +534,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     private void showDialog(AccessPoint accessPoint, boolean edit) {
         if (accessPoint != null) {
             WifiConfiguration config = accessPoint.getConfig();
-            if (isCreatorDeviceOwner(getActivity(), config) && accessPoint.isActive()) {
+            if (isEditabilityLockedDown(getActivity(), config) && accessPoint.isActive()) {
                 final int userId = UserHandle.getUserId(config.creatorUid);
                 final PackageManager pm = getActivity().getPackageManager();
                 final IPackageManager ipm = AppGlobals.getPackageManager();
@@ -586,7 +587,7 @@ public class WifiSettings extends RestrictedSettingsFragment
                 }
                 // If it's null, fine, it's for Add Network
                 mSelectedAccessPoint = ap;
-                final boolean hideForget = (ap == null || isCreatorDeviceOwner(getActivity(),
+                final boolean hideForget = (ap == null || isEditabilityLockedDown(getActivity(),
                         ap.getConfig()));
                 mDialog = new WifiDialog(getActivity(), this, ap, mDlgEdit,
                         /* no hide submit/connect */ false,
@@ -918,11 +919,11 @@ public class WifiSettings extends RestrictedSettingsFragment
         };
 
     /**
-     * Returns the true if the app that created this config is the device owner of the device.
+     * Returns true if the config is not editable/removable except by its creating Device Owner.
      * @param config The WiFi config.
-     * @return creator package name or null if creator package is not device owner.
+     * @return true if the config is not editable/removable except by its creating Device Owner.
      */
-    static boolean isCreatorDeviceOwner(Context context, WifiConfiguration config) {
+    static boolean isEditabilityLockedDown(Context context, WifiConfiguration config) {
         if (config == null) {
             return false;
         }
@@ -930,6 +931,10 @@ public class WifiSettings extends RestrictedSettingsFragment
                 Context.DEVICE_POLICY_SERVICE);
         final String deviceOwnerPackageName = dpm.getDeviceOwner();
         if (deviceOwnerPackageName == null) {
+            return false;
+        }
+        UserManager um = UserManager.get(context);
+        if (um.hasUserRestriction(UserManager.DISALLOW_CONFIG_WIFI)) {
             return false;
         }
         final PackageManager pm = context.getPackageManager();
