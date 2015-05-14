@@ -186,7 +186,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
 
     private static String DEFAULT_LOG_RING_BUFFER_SIZE_IN_BYTES = "262144"; // 256K
 
-    private static final int[] MOCK_LOCATOIN_APP_OPS = new int[] {AppOpsManager.OP_MOCK_LOCATION};
+    private static final int[] MOCK_LOCATION_APP_OPS = new int[] {AppOpsManager.OP_MOCK_LOCATION};
 
     private static final String MULTI_WINDOW_SYSTEM_PROPERTY = "persist.sys.debug.multi_window";
     private IWindowManager mWindowManager;
@@ -694,7 +694,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         AppOpsManager appOpsManager = (AppOpsManager) getSystemService(Context.APP_OPS_SERVICE);
 
         // Disable the app op of the previous mock location app if such.
-        List<PackageOps> packageOps = appOpsManager.getPackagesForOps(MOCK_LOCATOIN_APP_OPS);
+        List<PackageOps> packageOps = appOpsManager.getPackagesForOps(MOCK_LOCATION_APP_OPS);
         if (packageOps != null) {
             // Should be one but in case we are in a bad state due to use of command line tools.
             for (PackageOps packageOp : packageOps) {
@@ -760,7 +760,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private void updateMockLocation() {
         AppOpsManager appOpsManager = (AppOpsManager) getSystemService(Context.APP_OPS_SERVICE);
 
-        List<PackageOps> packageOps = appOpsManager.getPackagesForOps(MOCK_LOCATOIN_APP_OPS);
+        List<PackageOps> packageOps = appOpsManager.getPackagesForOps(MOCK_LOCATION_APP_OPS);
         if (packageOps != null) {
             for (PackageOps packageOp : packageOps) {
                 if (packageOp.getOps().get(0).getMode() == AppOpsManager.MODE_ALLOWED) {
