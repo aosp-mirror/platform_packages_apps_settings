@@ -284,12 +284,15 @@ public class InstalledAppDetails extends AppInfoBase
         mBatteryPreference.setOnPreferenceClickListener(this);
 
         mLaunchPreference = findPreference(KEY_LAUNCH);
-        if ((mAppEntry.info.flags&ApplicationInfo.FLAG_INSTALLED) == 0) {
-            mLaunchPreference.setEnabled(false);
-        } else if (!mAppEntry.info.enabled) {
-            mLaunchPreference.setEnabled(false);
+        if (mAppEntry.info != null) {
+            if ((mAppEntry.info.flags&ApplicationInfo.FLAG_INSTALLED) == 0 ||
+                    !mAppEntry.info.enabled) {
+                mLaunchPreference.setEnabled(false);
+            } else {
+                mLaunchPreference.setOnPreferenceClickListener(this);
+            }
         } else {
-            mLaunchPreference.setOnPreferenceClickListener(this);
+            mLaunchPreference.setEnabled(false);
         }
     }
 
