@@ -224,6 +224,10 @@ public class WifiConfigController implements TextWatcher,
                 } else {
                     mProxySettingsSpinner.setSelection(PROXY_NONE);
                 }
+                if (config != null && config.isPasspoint()) {
+                    addRow(group, R.string.passpoint_label, String.format(
+                        mContext.getString(R.string.passpoint_content), config.providerFriendlyName));
+                }
             }
 
             if ((!mAccessPoint.isSaved() && !mAccessPoint.isActive())
