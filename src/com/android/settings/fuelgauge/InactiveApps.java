@@ -38,7 +38,7 @@ public class InactiveApps extends SettingsPreferenceFragment implements OnPrefer
 
     @Override
     protected int getMetricsCategory() {
-        return InstrumentedFragment.VIEW_CATEGORY_UNDECLARED;
+        return InstrumentedFragment.UNDECLARED;
     }
 
     @Override
