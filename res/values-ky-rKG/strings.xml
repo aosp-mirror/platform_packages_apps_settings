@@ -254,8 +254,8 @@
     <string name="bluetooth_pb_remember_choice" msgid="3622898084442402071">"Кайра сураба"</string>
     <string name="bluetooth_map_request" msgid="4595727689513143902">"Билдирүүлөрдү көрүү талабы"</string>
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s сиздин баарлашуу билдирүүлөрүңүзгө жеткиси келет. %2$s уруксат берилсинби?"</string>
-    <string name="bluetooth_sap_request" msgid="2669762224045354417">"SIM картаны көргөндү талап кылат"</string>
-    <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> SIM картаңызды көргүсү келет . SIM картага уруксат берилсе, байланыш учурунда түзмөгүңүздүн мобилдик интернети үзүлөт. <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>  түзмөгүнө уруксат берүү"</string>
+    <string name="bluetooth_sap_request" msgid="2669762224045354417">"SIM карта пайдалануу мүмкүнчүлүгүн суроо"</string>
+    <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> SIM картаңызды пайдалануу мүмкүнчүлүгүнө ээ болгусу келет. SIM картаны пайдалануу укугу берилсе, түзмөк SIM картага туташып жатканда дайындарды мобилдик тармак аркылуу өткөрүү кызматтары убактылуу иштебей калат. <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g> түзмөгүнө SIM картаны пайдалануу мүмкүнчүлүгүн берүү"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Күн жана убакыт"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"Саат алкагын тандаңыз"</string>
     <!-- no translation found for display_preview_label (1127597250917274792) -->
@@ -2128,7 +2128,7 @@
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Уюктук хэндоверге өжөр Wi-Fi"</string>
     <string name="wifi_allow_scan_with_traffic" msgid="3601853081178265786">"Wi-Fi Роуминг Скандоо мүмкүнчүлүгүнө ар дайым уруксат берилсин"</string>
     <string name="legacy_dhcp_client" msgid="694426978909127287">"Эскирген DHCP кардарын колдонуу"</string>
-    <string name="mobile_data_always_on" msgid="7745605759775320362">"Уюлдук дайындар дайыма активдүү"</string>
+    <string name="mobile_data_always_on" msgid="7745605759775320362">"Уюлдук дайындар ар дайым активдүү"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"Зымсыз дисплейди сертификатто мүмкүнчүлүктөрүн көргөзүү"</string>
     <string name="wifi_verbose_logging_summary" msgid="6615071616111731958">"Wi-Fi Кармагычта Wi‑Fi протокол деңгээлин жогорулатуу жана ар бир SSID RSSI үчүн көрсөтүү."</string>
     <string name="wifi_aggressive_handover_summary" msgid="6328455667642570371">"Иштетилгенде, Wi-Fi байланышы үзүл-кесил болуп жатканда, Wi-Fi дайындарды уюктук операторго өжөрлүк менен өткөрөт."</string>
@@ -2143,7 +2143,7 @@
     <skip />
     <string name="debug_view_attributes" msgid="6485448367803310384">"Аттрибут текшерүүсүнүн көрүнүшүн иштетүү"</string>
     <string name="legacy_dhcp_client_summary" msgid="163383566317652040">"Жаңы Android DHCP кардарынын ордуна Lollipop\'тон DHCP кардарын колдонуңуз."</string>
-    <string name="mobile_data_always_on_summary" msgid="8149773901431697910">"Wi‑Fi иштеп турганда да мобилдик дайындарды актив сактай аласыз (ылдамыраак тармак которуулары үчүн)."</string>
+    <string name="mobile_data_always_on_summary" msgid="8149773901431697910">"Wi-Fi иштеп турганда да дайындар мобилдик тармак аркылуу өткөрүлө берсин (тармактар ортосунда тезирээк которулуу үчүн)."</string>
     <!-- no translation found for adb_warning_title (6234463310896563253) -->
     <skip />
     <string name="adb_warning_message" msgid="7316799925425402244">"USB-жөндөө - өндүрүү максатында гана  түзүлгөн. Аны компүтериңиз менен түзмөгүңүздүн ортосунда берилиштерди алмашуу, түзмөгүңүзгө колдонмолорду эскертүүсүз орнотуу жана лог берилиштерин окуу үчүн колдонсоңуз болот."</string>
@@ -3372,8 +3372,8 @@
     <string name="no_notification_listeners" msgid="2767405417723149879">"Эскертме алуучу колдонмолор орнотулган эмес."</string>
     <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"<xliff:g id="SERVICE">%1$s</xliff:g> жандырылсынбы?"</string>
     <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> систем же башка орнотулган колдонмолор чыгарган эскертмелердин баарын окуганга мүмкүнчүлүк алат. Алардын ичинде, байланыш аттары жана тексттик билдирүүлөр сымал өздүк маалыматтар дагы болушу мүмкүн. Ошондой эле, ал бул эскертмелерди таратып жиберүү, же алардын ичиндеги иш-аракет бачкычтарын басканга дагы мүмкүнчүлүк алат."</string>
-    <string name="manage_zen_access_title" msgid="2611116122628520522">"Тынчымды алба режиминин мүмкүнчүлүктөрү"</string>
-    <string name="zen_access_empty_text" msgid="8772967285742259540">"Тынчымды алба режиминин жеткиликтүүлүгүн сураган  орнотулган колдонмолор болгон жок"</string>
+    <string name="manage_zen_access_title" msgid="2611116122628520522">"\"Тынчымды алба\" функциясын пайдалануу"</string>
+    <string name="zen_access_empty_text" msgid="8772967285742259540">"Орнотулган колдонмолор үчүн \"Тынчымды алба\" функциясы талап кылынбайт"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Колдонмолор жүктөлүүдө…"</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"Баарын бөгөттөө"</string>
     <string name="app_notification_block_summary" msgid="9049487483231233726">"Бул колдонмодо эскертмелер эч качан көрсөтүлбөсүн"</string>
@@ -3402,12 +3402,12 @@
     <string name="zen_event_rule_enabled_toast" msgid="6910577623330811480">"Белгилүү бир окуялар учурунда \"Тынчымды алба\" режимин иштетүү эрежеси жөндөлгөн."</string>
     <string name="zen_mode_event_rule_calendar" msgid="8787906563769067418">"Иш-чаралар учурунда"</string>
     <string name="zen_mode_event_rule_summary_calendar_template" msgid="5135844750232403975">"<xliff:g id="CALENDAR">%1$s</xliff:g> иш-чараларынын учурунда"</string>
-    <string name="zen_mode_event_rule_summary_any_calendar" msgid="4936646399126636358">"Бардык күнбарактар"</string>
+    <string name="zen_mode_event_rule_summary_any_calendar" msgid="4936646399126636358">"бардык жылнаамалар"</string>
     <string name="zen_mode_event_rule_summary_reply_template" msgid="6590671260829837157">"Жооп <xliff:g id="REPLY">%1$s</xliff:g> болсо"</string>
-    <string name="zen_mode_event_rule_calendar_any" msgid="6485568415998569885">"Бардык күнбарактар"</string>
-    <string name="zen_mode_event_rule_reply" msgid="5166322024212403739">"Мындай жооп болсо:"</string>
-    <string name="zen_mode_event_rule_reply_any_except_no" msgid="8868873496008825961">"Ооба, балким, же жооп берилбеген"</string>
-    <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="2769656565454495824">"Ооба же балким"</string>
+    <string name="zen_mode_event_rule_calendar_any" msgid="6485568415998569885">"Бардык жылнаамалар"</string>
+    <string name="zen_mode_event_rule_reply" msgid="5166322024212403739">"Төмөнкүдөй жооп болсо:"</string>
+    <string name="zen_mode_event_rule_reply_any_except_no" msgid="8868873496008825961">"Ооба, Балким же Жооп берилген жок"</string>
+    <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="2769656565454495824">"Ооба же Балким"</string>
     <string name="zen_mode_event_rule_reply_yes" msgid="1003598835878784659">"Ооба"</string>
     <string name="zen_mode_rule_not_found_text" msgid="8963662446092059836">"Эреже табылган жок."</string>
     <string name="zen_mode_rule_summary_combination" msgid="2526506268333198254">"<xliff:g id="DESCRIPTION">%1$s</xliff:g>/<xliff:g id="MODE">%2$s</xliff:g>"</string>
@@ -3419,6 +3419,8 @@
     <string name="summary_range_verbal_combination" msgid="8467306662961568656">"<xliff:g id="START">%1$s</xliff:g> баштап <xliff:g id="END">%2$s</xliff:g> чейин"</string>
     <string name="zen_mode_calls" msgid="7051492091133751208">"Чалуулар"</string>
     <string name="zen_mode_messages" msgid="5886440273537510894">"Билдирүүлөр"</string>
+    <!-- no translation found for zen_mode_selected_messages (8245990149599142281) -->
+    <skip />
     <string name="zen_mode_from_anyone" msgid="2638322015361252161">"Баарынан"</string>
     <string name="zen_mode_from_contacts" msgid="2232335406106711637">"Байланыштардан гана"</string>
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"Жылдызчаланган байланыштардан гана"</string>
@@ -3583,5 +3585,9 @@
     <string name="no_battery_summary" msgid="3528036835462846814">"Акыркы толук кубаттандырылгандан бери батарея сарптала элек"</string>
     <string name="app_notification_preferences" msgid="6413363601485067724">"Колдонмо эскертмесинин жөндөөлөрү"</string>
     <!-- no translation found for system_ui_settings (579824306467081123) -->
+    <skip />
+    <!-- no translation found for additional_permissions (6463784193877056080) -->
+    <skip />
+    <!-- no translation found for additional_permissions_more (3538612272673191451) -->
     <skip />
 </resources>
