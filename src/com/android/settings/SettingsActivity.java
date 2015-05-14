@@ -1274,8 +1274,7 @@ public class SettingsActivity extends Activity
                             ((UserManager) getSystemService(Context.USER_SERVICE))
                                     .getUserCount() > 1;
                     if (!UserHandle.MU_ENABLED
-                            || (!UserManager.supportsMultipleUsers()
-                                    && !hasMultipleUsers)
+                            || !UserManager.supportsMultipleUsers()
                             || Utils.isMonkeyRunning()) {
                         removeTile = true;
                     }
