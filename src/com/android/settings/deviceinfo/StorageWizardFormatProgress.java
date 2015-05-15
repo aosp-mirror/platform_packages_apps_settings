@@ -55,12 +55,23 @@ public class StorageWizardFormatProgress extends StorageWizardBase {
         new PartitionTask().execute();
     }
 
-    public class PartitionTask extends AsyncTask<Void, Void, Exception> {
+    public class PartitionTask extends AsyncTask<Void, Integer, Exception> {
         @Override
         protected Exception doInBackground(Void... params) {
             try {
                 if (mFormatPrivate) {
                     mStorage.partitionPrivate(mDisk.getId());
+                    publishProgress(40);
+
+                    final long internalBench = mStorage.benchmark(null);
+                    publishProgress(60);
+
+                    final VolumeInfo privateVol = findFirstVolume(VolumeInfo.TYPE_PRIVATE);
+                    final long privateBench = mStorage.benchmark(privateVol.id);
+
+                    // TODO: plumb through to user when below threshold
+                    final float pct = (float) internalBench / (float) privateBench;
+                    Log.d(TAG, "New volume is " + pct + "x the speed of internal");
                 } else {
                     mStorage.partitionPublic(mDisk.getId());
                 }
@@ -68,6 +79,11 @@ public class StorageWizardFormatProgress extends StorageWizardBase {
             } catch (Exception e) {
                 return e;
             }
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... progress) {
+            setCurrentProgress(progress[0]);
         }
 
         @Override
