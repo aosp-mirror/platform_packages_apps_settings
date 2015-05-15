@@ -41,6 +41,7 @@ import android.text.Selection;
 import android.text.Spannable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,6 +61,8 @@ public class ChooseLockPassword extends SettingsActivity {
     public static final String PASSWORD_MIN_NUMERIC_KEY = "lockscreen.password_min_numeric";
     public static final String PASSWORD_MIN_SYMBOLS_KEY = "lockscreen.password_min_symbols";
     public static final String PASSWORD_MIN_NONLETTER_KEY = "lockscreen.password_min_nonletter";
+
+    private static final String TAG = "ChooseLockPassword";
 
     @Override
     public Intent getIntent() {
@@ -533,7 +536,11 @@ public class ChooseLockPassword extends SettingsActivity {
                     UserHandle.myUserId(),
                     new LockPatternChecker.OnVerifyCallback() {
                         @Override
-                        public void onVerified(byte[] token) {
+                        public void onVerified(byte[] token, int timeoutMs) {
+                            if (token == null) {
+                                Log.e(TAG, "critical: no token returned from known good password");
+                            }
+
                             mPasswordEntryInputDisabler.setInputEnabled(true);
                             setNextEnabled(true);
                             mPendingLockCheck = null;
