@@ -244,14 +244,15 @@ public class InstalledAppDetails extends AppInfoBase
     @Override
     public void onResume() {
         super.onResume();
+        if (mFinishing) {
+            return;
+        }
         AppItem app = new AppItem(mAppEntry.info.uid);
         app.addUid(mAppEntry.info.uid);
         getLoaderManager().restartLoader(LOADER_CHART_DATA,
                 ChartDataLoader.buildArgs(getTemplate(getContext()), app),
                 mDataCallbacks);
-        if (mPackageInfo != null) {
-            new BatteryUpdater().execute();
-        }
+        new BatteryUpdater().execute();
     }
 
     @Override
@@ -269,6 +270,9 @@ public class InstalledAppDetails extends AppInfoBase
 
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        if (mFinishing) {
+            return;
+        }
         handleHeader();
 
         mNotificationPreference = findPreference(KEY_NOTIFICATION);
