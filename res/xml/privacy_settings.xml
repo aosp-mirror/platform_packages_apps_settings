@@ -19,11 +19,11 @@
     android:title="@string/privacy_settings_title">
 
     <!-- Backup settings -->
-    <SwitchPreference
+    <PreferenceScreen
         android:key="backup_data"
         android:title="@string/backup_data_title"
-        android:summary="@string/backup_data_summary"
-        android:persistent="false" />
+        android:persistent="false"
+        android:fragment="com.android.settings.backup.ToggleBackupSettingFragment"/>
 
     <PreferenceScreen
         android:key="configure_account"
