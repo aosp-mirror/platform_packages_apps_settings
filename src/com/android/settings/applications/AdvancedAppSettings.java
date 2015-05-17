@@ -15,11 +15,10 @@
  */
 package com.android.settings.applications;
 
-import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.os.Bundle;
 import android.preference.Preference;
-import android.util.Log;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
@@ -27,36 +26,34 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.ApplicationsState.AppEntry;
 import com.android.settings.applications.ApplicationsState.Session;
 import com.android.settings.fuelgauge.PowerWhitelistBackend;
-import com.android.settingslib.applications.PermissionsInfo;
 
 import java.util.ArrayList;
 
 public class AdvancedAppSettings extends SettingsPreferenceFragment implements
-        ApplicationsState.Callbacks, PermissionsInfo.Callback {
+        ApplicationsState.Callbacks {
 
     static final String TAG = "AdvancedAppSettings";
-    static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     private static final String KEY_APP_PERM = "manage_perms";
     private static final String KEY_APP_DOMAIN_URLS = "domain_urls";
     private static final String KEY_HIGH_POWER_APPS = "high_power_apps";
 
-    private ApplicationsState mApplicationsState;
     private Session mSession;
-    private Preference mAppPermsPreference;
     private Preference mAppDomainURLsPreference;
     private Preference mHighPowerPreference;
-    private PermissionsInfo mPermissionsInfo;
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         addPreferencesFromResource(R.xml.advanced_apps);
 
-        mApplicationsState = ApplicationsState.getInstance(getActivity().getApplication());
-        mSession = mApplicationsState.newSession(this);
+        Preference permissions = getPreferenceScreen().findPreference(KEY_APP_PERM);
+        permissions.setIntent(new Intent(Intent.ACTION_MANAGE_PERMISSIONS));
 
-        mAppPermsPreference = findPreference(KEY_APP_PERM);
+        ApplicationsState applicationsState = ApplicationsState.getInstance(
+                getActivity().getApplication());
+        mSession = applicationsState.newSession(this);
+
         mAppDomainURLsPreference = findPreference(KEY_APP_DOMAIN_URLS);
         mHighPowerPreference = findPreference(KEY_HIGH_POWER_APPS);
         updateUI();
@@ -83,12 +80,6 @@ public class AdvancedAppSettings extends SettingsPreferenceFragment implements
     @Override
     protected int getMetricsCategory() {
         return MetricsLogger.APPLICATIONS_ADVANCED;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        mPermissionsInfo = new PermissionsInfo(getActivity(), this);
     }
 
     @Override
@@ -129,14 +120,5 @@ public class AdvancedAppSettings extends SettingsPreferenceFragment implements
     @Override
     public void onLoadEntriesCompleted() {
         // No-op.
-    }
-
-    @Override
-    public void onPermissionLoadComplete() {
-        Activity activity = getActivity();
-        if (activity == null) return;
-//        mAppPermsPreference.setSummary(activity.getString(R.string.app_permissions_summary,
-//                mPermissionsInfo.getRuntimePermAppsGrantedCount(),
-//                mPermissionsInfo.getRuntimePermAppsCount()));
     }
 }
