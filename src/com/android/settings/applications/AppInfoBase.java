@@ -69,9 +69,12 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
     // Dialog identifiers used in showDialog
     protected static final int DLG_BASE = 0;
 
+    protected boolean mFinishing;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mFinishing = false;
 
         mState = ApplicationsState.getInstance(getActivity().getApplication());
         mSession = mState.newSession(this);
@@ -147,6 +150,7 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
         intent.putExtra(ManageApplications.APP_CHG, appChanged);
         SettingsActivity sa = (SettingsActivity)getActivity();
         sa.finishPreferencePanel(this, Activity.RESULT_OK, intent);
+        mFinishing = true;
     }
 
     protected void showDialogInner(int id, int moveErrorCode) {
