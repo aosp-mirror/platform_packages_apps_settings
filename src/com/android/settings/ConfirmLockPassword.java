@@ -22,6 +22,7 @@ import android.text.TextUtils;
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.widget.LockPatternChecker;
 import com.android.internal.widget.LockPatternUtils;
+import com.android.internal.widget.TextViewInputDisabler;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.Intent;
@@ -66,6 +67,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                 = "confirm_lock_password_fragment.key_num_wrong_confirm_attempts";
         private static final long ERROR_MESSAGE_TIMEOUT = 3000;
         private TextView mPasswordEntry;
+        private TextViewInputDisabler mPasswordEntryInputDisabler;
         private LockPatternUtils mLockPatternUtils;
         private AsyncTask<?, ?, ?> mPendingLockCheck;
         private TextView mHeaderTextView;
@@ -100,6 +102,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
 
             mPasswordEntry = (TextView) view.findViewById(R.id.password_entry);
             mPasswordEntry.setOnEditorActionListener(this);
+            mPasswordEntryInputDisabler = new TextViewInputDisabler(mPasswordEntry);
 
             mHeaderTextView = (TextView) view.findViewById(R.id.headerText);
             mDetailsTextView = (TextView) view.findViewById(R.id.detailsText);
@@ -169,7 +172,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             if (deadline != 0) {
                 handleAttemptLockout(deadline);
             } else {
-                mPasswordEntry.setEnabled(true);
+                mPasswordEntryInputDisabler.setInputEnabled(true);
             }
         }
 
@@ -187,7 +190,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
         }
 
         private void handleNext() {
-            mPasswordEntry.setEnabled(false);
+            mPasswordEntryInputDisabler.setInputEnabled(false);
             if (mPendingLockCheck != null) {
                 mPendingLockCheck.cancel(false);
             }
@@ -259,7 +262,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
         }
 
         private void onPasswordChecked(boolean matched, Intent intent) {
-            mPasswordEntry.setEnabled(true);
+            mPasswordEntryInputDisabler.setInputEnabled(true);
             if (matched) {
                 getActivity().setResult(RESULT_OK, intent);
                 getActivity().finish();
@@ -276,7 +279,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
 
         private void handleAttemptLockout(long elapsedRealtimeDeadline) {
             long elapsedRealtime = SystemClock.elapsedRealtime();
-            mPasswordEntry.setEnabled(false);
+            mPasswordEntryInputDisabler.setInputEnabled(false);
             mCountdownTimer = new CountDownTimer(
                     elapsedRealtimeDeadline - elapsedRealtime,
                     LockPatternUtils.FAILED_ATTEMPT_COUNTDOWN_INTERVAL_MS) {
@@ -291,7 +294,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
 
                 @Override
                 public void onFinish() {
-                    mPasswordEntry.setEnabled(true);
+                    mPasswordEntryInputDisabler.setInputEnabled(true);
                     mErrorTextView.setText("");
                     mNumWrongConfirmAttempts = 0;
                 }
