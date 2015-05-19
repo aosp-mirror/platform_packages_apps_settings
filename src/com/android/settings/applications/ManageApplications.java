@@ -237,6 +237,8 @@ public class ManageApplications extends InstrumentedFragment
             getActivity().getActionBar().setTitle(R.string.usage_access_title);
         } else if (className.equals(HighPowerApplicationsActivity.class.getName())) {
             mListType = LIST_TYPE_HIGH_POWER;
+            // Default to showing system.
+            mShowSystem = true;
         } else {
             mListType = LIST_TYPE_MAIN;
         }
