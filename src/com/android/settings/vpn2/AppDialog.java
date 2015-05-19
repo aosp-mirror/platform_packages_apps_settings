@@ -41,28 +41,25 @@ import com.android.settings.R;
  */
 class AppDialog extends AlertDialog implements DialogInterface.OnClickListener {
     private final Listener mListener;
-    private final PackageInfo mPkgInfo;
+    private final PackageInfo mPackageInfo;
     private final String mLabel;
-    private final boolean mConnected;
 
-    AppDialog(Context context, Listener listener, PackageInfo pkgInfo, String label,
-            boolean connected) {
+    AppDialog(Context context, Listener listener, PackageInfo pkgInfo, String label) {
         super(context);
 
         mListener = listener;
-        mPkgInfo = pkgInfo;
+        mPackageInfo = pkgInfo;
         mLabel = label;
-        mConnected = connected;
     }
 
     public final PackageInfo getPackageInfo() {
-        return mPkgInfo;
+        return mPackageInfo;
     }
 
     @Override
     protected void onCreate(Bundle savedState) {
         setTitle(mLabel);
-        setMessage(getContext().getString(R.string.vpn_version, mPkgInfo.versionName));
+        setMessage(getContext().getString(R.string.vpn_version, mPackageInfo.versionName));
 
         createButtons();
         super.onCreate(savedState);
@@ -71,11 +68,9 @@ class AppDialog extends AlertDialog implements DialogInterface.OnClickListener {
     protected void createButtons() {
         Context context = getContext();
 
-        if (mConnected) {
-            // Forget the network
-            setButton(DialogInterface.BUTTON_NEGATIVE,
-                    context.getString(R.string.vpn_forget), this);
-        }
+        // Forget the network
+        setButton(DialogInterface.BUTTON_NEGATIVE,
+                context.getString(R.string.vpn_forget), this);
 
         // Dismiss
         setButton(DialogInterface.BUTTON_POSITIVE,

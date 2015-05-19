@@ -71,6 +71,9 @@ public class VpnSettings extends SettingsPreferenceFragment implements
         Handler.Callback, Preference.OnPreferenceClickListener {
     private static final String LOG_TAG = "VpnSettings";
 
+    private static final int RESCAN_MESSAGE = 0;
+    private static final int RESCAN_INTERVAL_MS = 1000;
+
     private static final String EXTRA_PICK_LOCKDOWN = "android.net.vpn.PICK_LOCKDOWN";
     private static final NetworkRequest VPN_REQUEST = new NetworkRequest.Builder()
             .removeCapability(NetworkCapabilities.NET_CAPABILITY_NOT_VPN)
@@ -90,7 +93,6 @@ public class VpnSettings extends SettingsPreferenceFragment implements
 
     private Handler mUpdater;
     private LegacyVpnInfo mConnectedLegacyVpn;
-    private HashSet<String> mConnectedVpns = new HashSet<>();
 
     private boolean mUnavailable;
 
@@ -111,7 +113,6 @@ public class VpnSettings extends SettingsPreferenceFragment implements
         }
 
         mConnectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        mConnectivityManager.registerNetworkCallback(VPN_REQUEST, mNetworkCallback);
 
         setHasOptionsMenu(true);
         addPreferencesFromResource(R.xml.vpn_settings2);
@@ -179,10 +180,32 @@ public class VpnSettings extends SettingsPreferenceFragment implements
             LockdownConfigFragment.show(this);
         }
 
-        update();
+        // Start monitoring
+        mConnectivityManager.registerNetworkCallback(VPN_REQUEST, mNetworkCallback);
+
+        // Trigger a refresh
+        if (mUpdater == null) {
+            mUpdater = new Handler(this);
+        }
+        mUpdater.sendEmptyMessage(RESCAN_MESSAGE);
     }
 
-    public void update() {
+    @Override
+    public void onPause() {
+        // Pause monitoring
+        mConnectivityManager.unregisterNetworkCallback(mNetworkCallback);
+
+        if (mUpdater != null) {
+            mUpdater.removeCallbacksAndMessages(null);
+        }
+
+        super.onPause();
+    }
+
+    @Override
+    public boolean handleMessage(Message message) {
+        mUpdater.removeMessages(RESCAN_MESSAGE);
+
         // Pref group within which to list VPNs
         PreferenceGroup vpnGroup = getPreferenceScreen();
         vpnGroup.removeAll();
@@ -200,18 +223,43 @@ public class VpnSettings extends SettingsPreferenceFragment implements
 
         // 3rd-party VPN apps can change elsewhere. Reload them every time.
         for (AppOpsManager.PackageOps pkg : getVpnApps()) {
+            String key = getVpnIdentifier(UserHandle.getUserId(pkg.getUid()), pkg.getPackageName());
             final AppPreference pref = new AppPreference(getActivity(), mManageListener,
                     pkg.getPackageName(), pkg.getUid());
             pref.setOnPreferenceClickListener(this);
-            mAppPreferences.put(pkg.getPackageName(), pref);
+            mAppPreferences.put(key, pref);
             vpnGroup.addPreference(pref);
         }
 
-        // Start monitoring.
-        if (mUpdater == null) {
-            mUpdater = new Handler(this);
+        // Mark out connections with a subtitle
+        try {
+            // Legacy VPNs
+            LegacyVpnInfo info = mConnectivityService.getLegacyVpnInfo();
+            if (info != null) {
+                ConfigPreference preference = mConfigPreferences.get(info.key);
+                if (preference != null) {
+                    preference.setState(info.state);
+                    mConnectedLegacyVpn = info;
+                }
+            }
+
+            // Third-party VPNs
+            for (UserHandle profile : mUserManager.getUserProfiles()) {
+                VpnConfig cfg = mConnectivityService.getVpnConfig(profile.getIdentifier());
+                if (cfg != null) {
+                    final String key = getVpnIdentifier(profile.getIdentifier(), cfg.user);
+                    final AppPreference preference = mAppPreferences.get(key);
+                    if (preference != null) {
+                        preference.setState(AppPreference.STATE_CONNECTED);
+                    }
+                }
+            }
+        } catch (RemoteException e) {
+            // ignore
         }
-        mUpdater.sendEmptyMessage(0);
+
+        mUpdater.sendEmptyMessageDelayed(RESCAN_MESSAGE, RESCAN_INTERVAL_MS);
+        return true;
     }
 
     @Override
@@ -275,68 +323,22 @@ public class VpnSettings extends SettingsPreferenceFragment implements
         }
     };
 
-    @Override
-    public boolean handleMessage(Message message) {
-        mUpdater.removeMessages(0);
-
-        if (isResumed()) {
-            try {
-                // Legacy VPNs
-                LegacyVpnInfo info = mConnectivityService.getLegacyVpnInfo();
-                if (mConnectedLegacyVpn != null) {
-                    ConfigPreference preference = mConfigPreferences.get(mConnectedLegacyVpn.key);
-                    if (preference != null) {
-                        preference.setState(-1);
-                    }
-                    mConnectedLegacyVpn = null;
-                }
-                if (info != null) {
-                    ConfigPreference preference = mConfigPreferences.get(info.key);
-                    if (preference != null) {
-                        preference.setState(info.state);
-                        mConnectedLegacyVpn = info;
-                    }
-                }
-
-                // VPN apps
-                for (String key : mConnectedVpns) {
-                    AppPreference preference = mAppPreferences.get(key);
-                    if (preference != null) {
-                        preference.setState(AppPreference.STATE_DISCONNECTED);
-                    }
-                }
-                mConnectedVpns.clear();
-                // TODO: also query VPN services in user profiles STOPSHIP
-                VpnConfig cfg = mConnectivityService.getVpnConfig();
-                if (cfg != null) {
-                    mConnectedVpns.add(cfg.user);
-                }
-                for (String key : mConnectedVpns) {
-                    AppPreference preference = mAppPreferences.get(key);
-                    if (preference != null) {
-                        preference.setState(AppPreference.STATE_CONNECTED);
-                    }
-                }
-            } catch (RemoteException e) {
-                // ignore
-            }
-            mUpdater.sendEmptyMessageDelayed(0, 1000);
-        }
-        return true;
+    private static String getVpnIdentifier(int userId, String packageName) {
+        return Integer.toString(userId)+ "_" + packageName;
     }
 
     private NetworkCallback mNetworkCallback = new NetworkCallback() {
         @Override
         public void onAvailable(Network network) {
             if (mUpdater != null) {
-                mUpdater.sendEmptyMessage(0);
+                mUpdater.sendEmptyMessage(RESCAN_MESSAGE);
             }
         }
 
         @Override
         public void onLost(Network network) {
             if (mUpdater != null) {
-                mUpdater.sendEmptyMessage(0);
+                mUpdater.sendEmptyMessage(RESCAN_MESSAGE);
             }
         }
     };

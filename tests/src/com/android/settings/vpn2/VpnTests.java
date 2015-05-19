@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import android.os.UserHandle;
 import android.security.Credentials;
 import android.security.KeyStore;
 import android.security.NetworkSecurityPolicy;
@@ -214,7 +215,7 @@ public class VpnTests extends InstrumentationTestCase {
      */
     private void disconnect() throws Exception {
         try {
-            mService.prepareVpn(VpnConfig.LEGACY_VPN, VpnConfig.LEGACY_VPN);
+            mService.prepareVpn(VpnConfig.LEGACY_VPN, VpnConfig.LEGACY_VPN, UserHandle.myUserId());
         } catch (RemoteException e) {
             Log.e(TAG, String.format("disconnect VPN exception: %s", e.toString()));
         }
