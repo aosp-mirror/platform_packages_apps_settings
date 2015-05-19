@@ -18,12 +18,14 @@ package com.android.settings.deviceinfo;
 
 import android.annotation.Nullable;
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.hardware.usb.UsbManager;
 import android.os.Bundle;
 import android.util.Log;
+
 import com.android.settings.R;
 
 /**
@@ -46,7 +48,9 @@ public class UsbModeChooserActivity extends Activity {
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        setCurrentFunction(which);
+                        if (!ActivityManager.isUserAMonkey()) {
+                            setCurrentFunction(which);
+                        }
                         dialog.dismiss();
                         UsbModeChooserActivity.this.finish();
                     }
