@@ -18,9 +18,12 @@ package com.android.settings.wifi;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
+import android.net.wifi.WifiConfiguration;
+import android.os.UserHandle;
 import android.preference.Preference;
 import android.view.View;
 import android.widget.TextView;
+
 import com.android.settings.R;
 import com.android.settingslib.wifi.AccessPoint;
 
@@ -33,6 +36,7 @@ public class AccessPointPreference extends Preference {
 
     private static int[] wifi_signal_attributes = { R.attr.wifi_signal };
 
+    private TextView mTitleView;
     private TextView mSummaryView;
     private boolean showSummary = true;
     private boolean mForSavedNetworks = false;
@@ -56,9 +60,12 @@ public class AccessPointPreference extends Preference {
         super.onBindView(view);
         updateIcon(mAccessPoint.getLevel(), getContext());
 
+        mTitleView = (TextView) view.findViewById(com.android.internal.R.id.title);
+
         mSummaryView = (TextView) view.findViewById(com.android.internal.R.id.summary);
         mSummaryView.setVisibility(showSummary ? View.VISIBLE : View.GONE);
 
+        updateBadge(getContext());
         notifyChanged();
     }
 
@@ -94,6 +101,27 @@ public class AccessPointPreference extends Preference {
         }
     }
 
+    protected void updateBadge(Context context) {
+        if (mTitleView != null) {
+            WifiConfiguration config = mAccessPoint.getConfig();
+            if (config == null) {
+                return;
+            }
+            // Fetch badge (may be null)
+            UserHandle creatorUser = new UserHandle(UserHandle.getUserId(config.creatorUid));
+            Drawable badge =
+                    context.getPackageManager().getUserBadgeForDensity(creatorUser, 0 /* dpi */);
+
+            // Distance from the end of the title at which this AP's user badge should sit.
+            final int badgePadding = context.getResources()
+                    .getDimensionPixelSize(R.dimen.wifi_preference_badge_padding);
+
+            // Attach to the end of the title view
+            mTitleView.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, badge, null);
+            mTitleView.setCompoundDrawablePadding(badgePadding);
+        }
+    }
+
     /**
      * Shows or Hides the Summary of an AccessPoint.
      *
@@ -117,6 +145,7 @@ public class AccessPointPreference extends Preference {
 
         final Context context = getContext();
         updateIcon(mAccessPoint.getLevel(), context);
+        updateBadge(context);
 
         // Force new summary
         setSummary(null);
