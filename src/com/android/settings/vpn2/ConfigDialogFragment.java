@@ -24,6 +24,7 @@ import android.net.IConnectivityManager;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import android.os.UserHandle;
 import android.security.Credentials;
 import android.security.KeyStore;
 import android.util.Log;
@@ -128,12 +129,6 @@ public class ConfigDialogFragment extends DialogFragment implements
     }
 
     @Override
-    public void dismiss() {
-        ((VpnSettings) getTargetFragment()).update();
-        super.dismiss();
-    }
-
-    @Override
     public void onCancel(DialogInterface dialog) {
         dismiss();
         super.onCancel(dialog);
@@ -151,7 +146,8 @@ public class ConfigDialogFragment extends DialogFragment implements
         try {
             LegacyVpnInfo connected = mService.getLegacyVpnInfo();
             if (connected != null && profile.key.equals(connected.key)) {
-                mService.prepareVpn(VpnConfig.LEGACY_VPN, VpnConfig.LEGACY_VPN);
+                mService.prepareVpn(VpnConfig.LEGACY_VPN, VpnConfig.LEGACY_VPN,
+                        UserHandle.myUserId());
             }
         } catch (RemoteException e) {
             Log.e(TAG, "Failed to disconnect", e);
