@@ -192,7 +192,7 @@ public class UserSettings extends SettingsPreferenceFragment
         final Context context = getActivity();
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
         boolean hasMultipleUsers = mUserManager.getUserCount() > 1;
-        if ((!UserManager.supportsMultipleUsers() && !hasMultipleUsers)
+        if ((!UserManager.supportsMultipleUsers())
                 || Utils.isMonkeyRunning()) {
             mEnabled = false;
             return;
