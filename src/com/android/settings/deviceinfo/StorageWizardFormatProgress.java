@@ -18,7 +18,11 @@ package com.android.settings.deviceinfo;
 
 import static com.android.settings.deviceinfo.StorageSettings.TAG;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -33,6 +37,8 @@ import com.android.internal.util.Preconditions;
 import com.android.settings.R;
 
 public class StorageWizardFormatProgress extends StorageWizardBase {
+    private static final String TAG_SLOW_WARNING = "slow_warning";
+
     private boolean mFormatPrivate;
 
     @Override
@@ -56,6 +62,9 @@ public class StorageWizardFormatProgress extends StorageWizardBase {
     }
 
     public class PartitionTask extends AsyncTask<Void, Integer, Exception> {
+        private volatile long mInternalBench;
+        private volatile long mPrivateBench;
+
         @Override
         protected Exception doInBackground(Void... params) {
             try {
@@ -63,15 +72,12 @@ public class StorageWizardFormatProgress extends StorageWizardBase {
                     mStorage.partitionPrivate(mDisk.getId());
                     publishProgress(40);
 
-                    final long internalBench = mStorage.benchmark(null);
+                    mInternalBench = mStorage.benchmark(null);
                     publishProgress(60);
 
                     final VolumeInfo privateVol = findFirstVolume(VolumeInfo.TYPE_PRIVATE);
-                    final long privateBench = mStorage.benchmark(privateVol.id);
+                    mPrivateBench = mStorage.benchmark(privateVol.id);
 
-                    // TODO: plumb through to user when below threshold
-                    final float pct = (float) internalBench / (float) privateBench;
-                    Log.d(TAG, "New volume is " + pct + "x the speed of internal");
                 } else {
                     mStorage.partitionPublic(mDisk.getId());
                 }
@@ -89,40 +95,89 @@ public class StorageWizardFormatProgress extends StorageWizardBase {
         @Override
         protected void onPostExecute(Exception e) {
             final Context context = StorageWizardFormatProgress.this;
-            if (e == null) {
-                final String forgetUuid = getIntent().getStringExtra(
-                        StorageWizardFormatConfirm.EXTRA_FORGET_UUID);
-                if (!TextUtils.isEmpty(forgetUuid)) {
-                    mStorage.forgetVolume(forgetUuid);
-                }
-
-                final boolean offerMigrate;
-                if (mFormatPrivate) {
-                    // Offer to migrate only if storage is currently internal
-                    final VolumeInfo privateVol = getPackageManager()
-                            .getPrimaryStorageCurrentVolume();
-                    offerMigrate = (privateVol != null
-                            && VolumeInfo.ID_PRIVATE_INTERNAL.equals(privateVol.getId()));
-                } else {
-                    offerMigrate = false;
-                }
-
-                if (offerMigrate) {
-                    final Intent intent = new Intent(context, StorageWizardMigrate.class);
-                    intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
-                    startActivity(intent);
-                } else {
-                    final Intent intent = new Intent(context, StorageWizardReady.class);
-                    intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
-                    startActivity(intent);
-                }
-                finishAffinity();
-
-            } else {
+            if (e != null) {
                 Log.e(TAG, "Failed to partition", e);
                 Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
                 finishAffinity();
+                return;
+            }
+
+            final float pct = (float) mInternalBench / (float) mPrivateBench;
+            Log.d(TAG, "New volume is " + pct + "x the speed of internal");
+
+            // TODO: refine this warning threshold
+            if (mPrivateBench > 2000000000) {
+                final SlowWarningFragment dialog = new SlowWarningFragment();
+                dialog.show(getFragmentManager(), TAG_SLOW_WARNING);
+            } else {
+                onFormatFinished();
             }
         }
+    }
+
+    public class SlowWarningFragment extends DialogFragment {
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            final Context context = getActivity();
+
+            final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+            final String descrip = mDisk.getDescription();
+            final String genericDescip = getGenericDescription(mDisk);
+            builder.setMessage(TextUtils.expandTemplate(getText(R.string.storage_wizard_slow_body),
+                    descrip, genericDescip));
+
+            builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    final StorageWizardFormatProgress target =
+                            (StorageWizardFormatProgress) getActivity();
+                    target.onFormatFinished();
+                }
+            });
+
+            return builder.create();
+        }
+    }
+
+    private String getGenericDescription(DiskInfo disk) {
+        // TODO: move this directly to DiskInfo
+        if (disk.isSd()) {
+            return getString(com.android.internal.R.string.storage_sd_card);
+        } else if (disk.isUsb()) {
+            return getString(com.android.internal.R.string.storage_usb_drive);
+        } else {
+            return null;
+        }
+    }
+
+    private void onFormatFinished() {
+        final String forgetUuid = getIntent().getStringExtra(
+                StorageWizardFormatConfirm.EXTRA_FORGET_UUID);
+        if (!TextUtils.isEmpty(forgetUuid)) {
+            mStorage.forgetVolume(forgetUuid);
+        }
+
+        final boolean offerMigrate;
+        if (mFormatPrivate) {
+            // Offer to migrate only if storage is currently internal
+            final VolumeInfo privateVol = getPackageManager()
+                    .getPrimaryStorageCurrentVolume();
+            offerMigrate = (privateVol != null
+                    && VolumeInfo.ID_PRIVATE_INTERNAL.equals(privateVol.getId()));
+        } else {
+            offerMigrate = false;
+        }
+
+        if (offerMigrate) {
+            final Intent intent = new Intent(this, StorageWizardMigrate.class);
+            intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
+            startActivity(intent);
+        } else {
+            final Intent intent = new Intent(this, StorageWizardReady.class);
+            intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
+            startActivity(intent);
+        }
+        finishAffinity();
     }
 }
