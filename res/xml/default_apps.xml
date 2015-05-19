@@ -19,6 +19,12 @@
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
         android:key="default_apps">
 
+    <Preference
+        android:key="default_assist"
+        android:fragment="com.android.settings.applications.ManageAssist"
+        android:title="@string/default_assist_title"
+        />
+
     <com.android.settings.applications.DefaultBrowserPreference
             android:key="default_browser"
             android:title="@string/default_browser_title"
