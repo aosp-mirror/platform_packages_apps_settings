@@ -21,6 +21,7 @@ import com.android.internal.widget.LockPatternChecker;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.PasswordEntryKeyboardHelper;
 import com.android.internal.widget.PasswordEntryKeyboardView;
+import com.android.internal.widget.TextViewInputDisabler;
 import com.android.settings.notification.RedactionInterstitial;
 
 import android.app.Activity;
@@ -127,6 +128,7 @@ public class ChooseLockPassword extends SettingsActivity {
         private boolean mHasChallenge;
         private long mChallenge;
         private TextView mPasswordEntry;
+        private TextViewInputDisabler mPasswordEntryInputDisabler;
         private int mPasswordMinLength = LockPatternUtils.MIN_LOCK_PASSWORD_SIZE;
         private int mPasswordMaxLength = 16;
         private int mPasswordMinLetters = 0;
@@ -255,6 +257,7 @@ public class ChooseLockPassword extends SettingsActivity {
             mPasswordEntry = (TextView) view.findViewById(R.id.password_entry);
             mPasswordEntry.setOnEditorActionListener(this);
             mPasswordEntry.addTextChangedListener(this);
+            mPasswordEntryInputDisabler = new TextViewInputDisabler(mPasswordEntry);
 
             final Activity activity = getActivity();
             mKeyboardHelper = new PasswordEntryKeyboardHelper(activity,
@@ -315,7 +318,7 @@ public class ChooseLockPassword extends SettingsActivity {
         public void onResume() {
             super.onResume();
             updateStage(mUiStage);
-            mPasswordEntry.setEnabled(true);
+            mPasswordEntryInputDisabler.setInputEnabled(true);
             mKeyboardView.requestFocus();
         }
 
@@ -517,7 +520,7 @@ public class ChooseLockPassword extends SettingsActivity {
         }
 
         private void startVerifyPassword(final String pin, final boolean wasSecureBefore) {
-            mPasswordEntry.setEnabled(false);
+            mPasswordEntryInputDisabler.setInputEnabled(false);
             setNextEnabled(false);
             if (mPendingLockCheck != null) {
                 mPendingLockCheck.cancel(false);
@@ -531,7 +534,7 @@ public class ChooseLockPassword extends SettingsActivity {
                     new LockPatternChecker.OnVerifyCallback() {
                         @Override
                         public void onVerified(byte[] token) {
-                            mPasswordEntry.setEnabled(true);
+                            mPasswordEntryInputDisabler.setInputEnabled(true);
                             setNextEnabled(true);
                             mPendingLockCheck = null;
 
