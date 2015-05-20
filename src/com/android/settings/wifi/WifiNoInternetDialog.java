@@ -36,6 +36,8 @@ import com.android.internal.app.AlertActivity;
 import com.android.internal.app.AlertController;
 import com.android.settings.R;
 
+import static android.net.NetworkCapabilities.NET_CAPABILITY_VALIDATED;
+
 public final class WifiNoInternetDialog extends AlertActivity implements
         DialogInterface.OnClickListener {
     private static final String TAG = "WifiNoInternetDialog";
@@ -67,14 +69,9 @@ public final class WifiNoInternetDialog extends AlertActivity implements
 
         // TODO: add a registerNetworkCallback(Network network, NetworkCallback networkCallback) and
         // simplify this.
-        final NetworkRequest.Builder builder = new NetworkRequest.Builder();
-        for (int i = 0; i < 256; i++) {
-            try {
-                builder.removeCapability(i);
-            } catch (IllegalArgumentException e) {}
-        }
-        final NetworkRequest request = builder.build();
+        final NetworkRequest request = new NetworkRequest.Builder().clearCapabilities().build();
         mNetworkCallback = new NetworkCallback() {
+            @Override
             public void onLost(Network network) {
                 // Close the dialog if the network disconnects.
                 if (mNetwork.equals(network)) {
@@ -82,8 +79,14 @@ public final class WifiNoInternetDialog extends AlertActivity implements
                     finish();
                 }
             }
-            // TODO: implement onNetworkCapabilitiesChanged so we can close the dialog if the
-            // network is now validated.
+            @Override
+            public void onCapabilitiesChanged(Network network, NetworkCapabilities nc) {
+                // Close the dialog if the network validates.
+                if (mNetwork.equals(network) && nc.hasCapability(NET_CAPABILITY_VALIDATED)) {
+                    Log.d(TAG, "Network " + mNetwork + " validated");
+                    finish();
+                }
+            }
         };
 
         mCM = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
