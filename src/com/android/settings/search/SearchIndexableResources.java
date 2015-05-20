@@ -190,7 +190,7 @@ public final class SearchIndexableResources {
         sResMap.put(UserSettings.class.getName(),
                 new SearchIndexableResource(
                         Ranking.getRankForClassName(UserSettings.class.getName()),
-                        R.xml.user_settings,
+                        NO_DATA_RES_ID,
                         UserSettings.class.getName(),
                         R.drawable.ic_settings_multiuser));
 
