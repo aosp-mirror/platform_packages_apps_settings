@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.content.pm.ServiceInfo;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceScreen;
@@ -214,12 +215,9 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
 
     private String computeCalendarName(EventInfo event) {
         if (event.calendar != EventInfo.ANY_CALENDAR) {
-            final CalendarInfo[] calendars = ZenModeEventRuleSettings.getCalendars(mContext);
-            for (int i = 0; i < calendars.length; i++) {
-                final CalendarInfo calendar = calendars[i];
-                if (calendar.id == event.calendar) {
-                    return calendar.name;
-                }
+            final CalendarInfo calendar = ZenModeEventRuleSettings.findCalendar(mContext, event);
+            if (calendar != null) {
+                return calendar.name;
             }
         }
         return getString(R.string.zen_mode_event_rule_summary_any_calendar);
