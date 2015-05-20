@@ -16,7 +16,6 @@
 
 package com.android.settings;
 
-import android.annotation.Nullable;
 import android.os.UserHandle;
 import android.text.TextUtils;
 import com.android.internal.logging.MetricsLogger;
@@ -24,7 +23,9 @@ import com.android.internal.widget.LockPatternChecker;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.TextViewInputDisabler;
 
+import android.app.Fragment;
 import android.app.admin.DevicePolicyManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -35,11 +36,11 @@ import android.os.storage.StorageManager;
 import android.text.InputType;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
@@ -61,6 +62,15 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
         return false;
     }
 
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        Fragment fragment = getFragmentManager().findFragmentById(R.id.main_content);
+        if (fragment != null && fragment instanceof ConfirmLockPasswordFragment) {
+            ((ConfirmLockPasswordFragment)fragment).onWindowFocusChanged(hasFocus);
+        }
+    }
+
     public static class ConfirmLockPasswordFragment extends ConfirmDeviceCredentialBaseFragment
             implements OnClickListener, OnEditorActionListener {
         private static final String KEY_NUM_WRONG_CONFIRM_ATTEMPTS
@@ -77,6 +87,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
         private int mNumWrongConfirmAttempts;
         private CountDownTimer mCountdownTimer;
         private boolean mIsAlpha;
+        private InputMethodManager mImm;
 
         // required constructor for fragments
         public ConfirmLockPasswordFragment() {
@@ -110,6 +121,9 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             mIsAlpha = DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC == storedQuality
                     || DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC == storedQuality
                     || DevicePolicyManager.PASSWORD_QUALITY_COMPLEX == storedQuality;
+
+            mImm = (InputMethodManager) getActivity().getSystemService(
+                    Context.INPUT_METHOD_SERVICE);
 
             Intent intent = getActivity().getIntent();
             if (intent != null) {
@@ -172,7 +186,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             if (deadline != 0) {
                 handleAttemptLockout(deadline);
             } else {
-                mPasswordEntryInputDisabler.setInputEnabled(true);
+                resetState();
             }
         }
 
@@ -187,6 +201,31 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             Intent intent = new Intent();
             getActivity().setResult(RESULT_OK, intent);
             getActivity().finish();
+        }
+
+        private void resetState() {
+            mPasswordEntry.setEnabled(true);
+            mPasswordEntryInputDisabler.setInputEnabled(true);
+            mImm.showSoftInput(mPasswordEntry, InputMethodManager.SHOW_IMPLICIT);
+        }
+
+        public void onWindowFocusChanged(boolean hasFocus) {
+            if (!hasFocus) {
+                return;
+            }
+            // Post to let window focus logic to finish to allow soft input show/hide properly.
+            mPasswordEntry.post(new Runnable() {
+                @Override
+                public void run() {
+                    if (mPasswordEntry.isEnabled()) {
+                        resetState();
+                        return;
+                    }
+
+                    mImm.hideSoftInputFromWindow(mPasswordEntry.getWindowToken(),
+                            InputMethodManager.HIDE_IMPLICIT_ONLY);
+                }
+            });
         }
 
         private void handleNext() {
@@ -279,7 +318,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
 
         private void handleAttemptLockout(long elapsedRealtimeDeadline) {
             long elapsedRealtime = SystemClock.elapsedRealtime();
-            mPasswordEntryInputDisabler.setInputEnabled(false);
+            mPasswordEntry.setEnabled(false);
             mCountdownTimer = new CountDownTimer(
                     elapsedRealtimeDeadline - elapsedRealtime,
                     LockPatternUtils.FAILED_ATTEMPT_COUNTDOWN_INTERVAL_MS) {
@@ -294,7 +333,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
 
                 @Override
                 public void onFinish() {
-                    mPasswordEntryInputDisabler.setInputEnabled(true);
+                    resetState();
                     mErrorTextView.setText("");
                     mNumWrongConfirmAttempts = 0;
                 }
