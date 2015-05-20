@@ -16,17 +16,11 @@
 
 package com.android.settings.applications;
 
-import android.annotation.Nullable;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.SwitchPreference;
 import android.provider.Settings;
-import android.text.method.LinkMovementMethod;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.TextView;
 
-import com.android.internal.logging.MetricsLogger;
 import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -52,16 +46,8 @@ public class ManageAssist extends SettingsPreferenceFragment
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        TextView v = (TextView) LayoutInflater.from(view.getContext()).inflate(
-                R.layout.manage_assist_footer, null);
-        getListView().addFooterView(v);
-    }
-
-    @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.APPLICATIONS_MANAGE_ASSIST;
+        return InstrumentedFragment.APPLICATIONS_MANAGE_ASSIST;
     }
 
     @Override
