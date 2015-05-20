@@ -598,7 +598,7 @@ public class ChooseLockPassword extends SettingsActivity {
         private void updateUi() {
             String password = mPasswordEntry.getText().toString();
             final int length = password.length();
-            if (mUiStage == Stage.Introduction && length > 0) {
+            if (mUiStage == Stage.Introduction) {
                 if (length < mPasswordMinLength) {
                     String msg = getString(mIsAlphaMode ? R.string.lockpassword_password_too_short
                             : R.string.lockpassword_pin_too_short, mPasswordMinLength);
