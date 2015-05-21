@@ -26,7 +26,7 @@ import com.android.settings.widget.ToggleSwitch;
  * disable it.
  */
 public class ToggleBackupSettingFragment extends SettingsPreferenceFragment
-        implements DialogInterface.OnClickListener {
+        implements DialogInterface.OnClickListener, DialogInterface.OnDismissListener {
     private static final String TAG = "ToggleBackupSettingFragment";
 
     private static final String BACKUP_TOGGLE = "toggle_backup";
@@ -39,6 +39,8 @@ public class ToggleBackupSettingFragment extends SettingsPreferenceFragment
     private Preference mSummaryPreference;
 
     private Dialog mConfirmDialog;
+
+    private boolean mWaitingForConfirmationDialog = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -105,9 +107,9 @@ public class ToggleBackupSettingFragment extends SettingsPreferenceFragment
                             ToggleSwitch toggleSwitch, boolean checked) {
                         if (!checked) {
                             // Don't change Switch status until user makes choice in dialog
-                            // so return false here.
+                            // so return true here.
                             showEraseBackupDialog();
-                            return false;
+                            return true;
                         } else {
                             setBackupEnabled(true);
                             mSwitchBar.setCheckedInternal(true);
@@ -132,10 +134,21 @@ public class ToggleBackupSettingFragment extends SettingsPreferenceFragment
     public void onClick(DialogInterface dialog, int which) {
         // Accept turning off backup
         if (which == DialogInterface.BUTTON_POSITIVE) {
+            mWaitingForConfirmationDialog = false;
             setBackupEnabled(false);
             mSwitchBar.setCheckedInternal(false);
         } else if (which == DialogInterface.BUTTON_NEGATIVE) {
             // Reject turning off backup
+            mWaitingForConfirmationDialog = false;
+            setBackupEnabled(true);
+            mSwitchBar.setCheckedInternal(true);
+        }
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        if (mWaitingForConfirmationDialog) {
+            // dismiss turning off backup
             setBackupEnabled(true);
             mSwitchBar.setCheckedInternal(true);
         }
@@ -143,11 +156,15 @@ public class ToggleBackupSettingFragment extends SettingsPreferenceFragment
 
     private void showEraseBackupDialog() {
         CharSequence msg = getResources().getText(R.string.fullbackup_erase_dialog_message);
+
+        mWaitingForConfirmationDialog = true;
+
         // TODO: DialogFragment?
         mConfirmDialog = new AlertDialog.Builder(getActivity()).setMessage(msg)
                 .setTitle(R.string.backup_erase_dialog_title)
                 .setPositiveButton(android.R.string.ok, this)
                 .setNegativeButton(android.R.string.cancel, this)
+                .setOnDismissListener(this)
                 .show();
     }
 
