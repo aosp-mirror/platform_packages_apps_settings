@@ -27,7 +27,6 @@ import android.os.Environment;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.PreferenceFrameLayout;
-import android.provider.Settings;
 import android.util.ArraySet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -661,6 +660,8 @@ public class ManageApplications extends InstrumentedFragment
         CharSequence mCurFilterPrefix;
         private PackageManager mPm;
         private AppFilter mOverrideFilter;
+        private boolean mHasReceivedLoadEntries;
+        private boolean mHasReceivedBridgeCallback;
 
         private Filter mFilter = new Filter() {
             @Override
@@ -753,6 +754,11 @@ public class ManageApplications extends InstrumentedFragment
         }
 
         public void rebuild(boolean eraseold) {
+            if (!mHasReceivedLoadEntries
+                    && (mExtraInfoBridge == null || mHasReceivedBridgeCallback)) {
+                // Don't rebuild the list until all the app entries are loaded.
+                return;
+            }
             if (DEBUG) Log.i(TAG, "Rebuilding app list...");
             ApplicationsState.AppFilter filterObj;
             Comparator<AppEntry> comparatorObj;
@@ -817,17 +823,8 @@ public class ManageApplications extends InstrumentedFragment
 
         private void updateLoading() {
             Utils.handleLoadingContainer(mManageApplications.mLoadingContainer,
-                    mManageApplications.mListContainer, mSession.getAllApps().size() != 0, false);
-        }
-
-        private boolean hasDisabledApps() {
-            ArrayList<AppEntry> allApps = mSession.getAllApps();
-            for (int i = 0; i < allApps.size(); i++) {
-                if (!allApps.get(i).info.enabled) {
-                    return true;
-                }
-            }
-            return false;
+                    mManageApplications.mListContainer,
+                    mHasReceivedLoadEntries && mSession.getAllApps().size() != 0, false);
         }
 
         ArrayList<ApplicationsState.AppEntry> applyPrefixFilter(CharSequence prefix,
@@ -852,6 +849,7 @@ public class ManageApplications extends InstrumentedFragment
 
         @Override
         public void onExtraInfoUpdated() {
+            mHasReceivedBridgeCallback = true;
             rebuild(false);
         }
 
@@ -888,7 +886,7 @@ public class ManageApplications extends InstrumentedFragment
 
         @Override
         public void onLoadEntriesCompleted() {
-            // No op.
+            mHasReceivedLoadEntries = true;
         }
 
         @Override
