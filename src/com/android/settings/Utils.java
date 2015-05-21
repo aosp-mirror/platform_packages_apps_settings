@@ -55,7 +55,9 @@ import android.net.Uri;
 import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.INetworkManagementService;
 import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.storage.StorageManager;
@@ -1177,6 +1179,16 @@ public final class Utils {
             Log.e(TAG, "Error while retrieving application info for package " + mdmPackageName
                     + ", userId " + profileId, e);
             return null;
+        }
+    }
+
+    public static boolean isBandwidthControlEnabled() {
+        final INetworkManagementService netManager = INetworkManagementService.Stub
+                .asInterface(ServiceManager.getService(Context.NETWORKMANAGEMENT_SERVICE));
+        try {
+            return netManager.isBandwidthControlEnabled();
+        } catch (RemoteException e) {
+            return false;
         }
     }
 }
