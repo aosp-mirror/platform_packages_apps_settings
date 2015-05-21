@@ -226,12 +226,16 @@ public class InstalledAppDetails extends AppInfoBase
         setHasOptionsMenu(true);
         addPreferencesFromResource(R.xml.installed_app_details);
 
-        INetworkStatsService statsService = INetworkStatsService.Stub.asInterface(
-                ServiceManager.getService(Context.NETWORK_STATS_SERVICE));
-        try {
-            mStatsSession = statsService.openSession();
-        } catch (RemoteException e) {
-            throw new RuntimeException(e);
+        if (Utils.isBandwidthControlEnabled()) {
+            INetworkStatsService statsService = INetworkStatsService.Stub.asInterface(
+                    ServiceManager.getService(Context.NETWORK_STATS_SERVICE));
+            try {
+                mStatsSession = statsService.openSession();
+            } catch (RemoteException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            removePreference(KEY_DATA);
         }
         mBatteryHelper = new BatteryStatsHelper(getActivity(), true);
     }
@@ -249,9 +253,11 @@ public class InstalledAppDetails extends AppInfoBase
         }
         AppItem app = new AppItem(mAppEntry.info.uid);
         app.addUid(mAppEntry.info.uid);
-        getLoaderManager().restartLoader(LOADER_CHART_DATA,
-                ChartDataLoader.buildArgs(getTemplate(getContext()), app),
-                mDataCallbacks);
+        if (mStatsSession != null) {
+            getLoaderManager().restartLoader(LOADER_CHART_DATA,
+                    ChartDataLoader.buildArgs(getTemplate(getContext()), app),
+                    mDataCallbacks);
+        }
         new BatteryUpdater().execute();
     }
 
@@ -282,7 +288,9 @@ public class InstalledAppDetails extends AppInfoBase
         mPermissionsPreference = findPreference(KEY_PERMISSION);
         mPermissionsPreference.setOnPreferenceClickListener(this);
         mDataPreference = findPreference(KEY_DATA);
-        mDataPreference.setOnPreferenceClickListener(this);
+        if (mDataPreference != null) {
+            mDataPreference.setOnPreferenceClickListener(this);
+        }
         mBatteryPreference = findPreference(KEY_BATTERY);
         mBatteryPreference.setEnabled(false);
         mBatteryPreference.setOnPreferenceClickListener(this);
@@ -458,7 +466,9 @@ public class InstalledAppDetails extends AppInfoBase
                 mPm, context));
         mNotificationPreference.setSummary(getNotificationSummary(mAppEntry, context,
                 mBackend));
-        mDataPreference.setSummary(getDataSummary());
+        if (mDataPreference != null) {
+            mDataPreference.setSummary(getDataSummary());
+        }
 
         updateBattery();
 
