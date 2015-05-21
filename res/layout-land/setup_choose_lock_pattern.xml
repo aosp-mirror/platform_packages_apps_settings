@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (C) 2015 The Android Open Source Project
+
+    Licensed under the Apache License, Version 2.0 (the "License")
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+
+<com.android.setupwizardlib.SetupWizardLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    settings:suwBackgroundTile="@drawable/setup_illustration_tile"
+    settings:suwHeaderText="@string/wifi_setup_wizard_title"
+    settings:suwIllustrationHorizontalTile="@drawable/setup_illustration_horizontal_tile"
+    settings:suwIllustrationImage="@drawable/setup_illustration_lock_screen">
+
+    <com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient
+        android:id="@+id/topLayout"
+        style="@style/SuwContentFrame"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- left side: instructions and messages -->
+        <LinearLayout
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:orientation="vertical">
+
+            <!-- header message -->
+            <TextView android:id="@+id/headerText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="start|bottom"
+                android:textSize="18sp" />
+
+            <Button android:id="@+id/retryButton"
+                style="@android:style/Widget.Material.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginStart="-12dp"
+                android:minWidth="0dp"
+                android:text="@string/lockpattern_retry_button_text" />
+
+            <!-- footer can show a message, or confirm / restart buttons -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dip"
+                android:layout_weight="1.0"
+                android:visibility="gone">
+
+                <!-- confirm / restart buttons -->
+                <LinearLayout android:id="@+id/buttonContainer"
+                    style="@style/SecurityPreferenceButtonContainer"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentBottom="true"
+                    android:orientation="horizontal">
+
+                    <!-- left / top button: skip, or re-try -->
+                    <Button android:id="@+id/footerLeftButton"
+                        style="@style/SecurityPreferenceButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/lockpattern_restart_button_text" />
+
+                    <!-- right / bottom button: confirm or ok -->
+                    <Button android:id="@+id/footerRightButton"
+                        style="@style/SecurityPreferenceButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/lockpattern_confirm_button_text" />
+
+                </LinearLayout>
+
+                <!-- message above buttons -->
+                <TextView android:id="@+id/footerText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/buttonContainer"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="4dip"
+                    android:textSize="14sp"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <!-- right side: lock pattern -->
+        <com.android.internal.widget.LockPatternView android:id="@+id/lockPattern"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="@color/lock_pattern_background" />
+
+    </com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient>
+
+</com.android.setupwizardlib.SetupWizardLayout>
