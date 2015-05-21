@@ -349,7 +349,7 @@
     </plurals>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Abdruck einrichten"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"Zum Entsperren des Displays oder Bestätigen von Käufen per Fingerabdruck sind folgende Aktionen erforderlich:"</string>
-    <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="3118715258753165968">"Richten Sie Ihre alternative Methode für die Displaysperre ein."</string>
+    <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"Richten Sie Ihre alternative Methode für die Displaysperre ein."</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_2" msgid="4158160658182631304">"Fügen Sie Ihren Fingerabdruck hinzu."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="5877265753699187149">"Sensor suchen"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="1959655161889313661">"Suchen Sie auf der Rückseite Ihres Smartphones nach dem Fingerabdrucksensor."</string>
@@ -363,7 +363,7 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="8846866512704467036">"Legen Sie den gleichen Finger auf den Sensor und heben Sie ihn an, sobald Sie eine Vibration spüren."</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"Abdruck hinzugefügt"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"Wenn Sie dieses Symbol sehen, können Sie Ihren Fingerabdruck zur Identifizierung oder zur Autorisierung eines Kaufs verwenden."</string>
-    <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="8205113627804480642">"Displaysperre einrichten"</string>
+    <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"Displaysperre einrichten"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"Fertig"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"Das ist nicht der Sensor"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="5053971232594165142">"Fingerabdrucksensor auf Gerät verwenden"</string>
@@ -644,10 +644,8 @@
     <string name="wifi_speed" msgid="3526198708812322037">"Geschwindigkeit"</string>
     <string name="wifi_frequency" msgid="7791090119577812214">"Frequenz"</string>
     <string name="wifi_ip_address" msgid="1440054061044402918">"IP-Adresse"</string>
-    <!-- no translation found for passpoint_label (6381371313076009926) -->
-    <skip />
-    <!-- no translation found for passpoint_content (8447207162397870483) -->
-    <skip />
+    <string name="passpoint_label" msgid="6381371313076009926">"Gespeichert über"</string>
+    <string name="passpoint_content" msgid="8447207162397870483">"Anmeldedaten für <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="wifi_eap_method" msgid="8529436133640730382">"EAP-Methode"</string>
     <string name="please_select_phase2" msgid="5231074529772044898">"Phase 2-Authentifizierung"</string>
     <string name="wifi_eap_ca_cert" msgid="3521574865488892851">"CA-Zertifikat"</string>
@@ -656,7 +654,7 @@
     <string name="wifi_eap_anonymous" msgid="2989469344116577955">"Anonyme Identität"</string>
     <string name="wifi_password" msgid="5948219759936151048">"Passwort"</string>
     <string name="wifi_show_password" msgid="6461249871236968884">"Passwort anzeigen"</string>
-    <string name="wifi_ap_band_config" msgid="219415018348922629">"Band für Zugriffspunkt konfigurieren"</string>
+    <string name="wifi_ap_band_config" msgid="1611826705989117930">"Band für Zugriffspunkt auswählen"</string>
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"2,4-GHz-Band"</string>
     <string name="wifi_ap_choose_5G" msgid="8137061170937978040">"5-GHz-Band"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP-Einstellungen"</string>
@@ -1018,6 +1016,7 @@
     <string name="storage_wizard_move_progress_title" msgid="4443920302548035674">"<xliff:g id="APP">^1</xliff:g> wird verschoben…"</string>
     <string name="storage_wizard_move_progress_body" msgid="7802577486578105609">"Entfernen Sie die <xliff:g id="NAME">^1</xliff:g> während des Vorgangs nicht. \n\nDie App <xliff:g id="APP">^2</xliff:g> auf diesem Gerät ist erst wieder verfügbar, nachdem sie vollständig verschoben wurde."</string>
     <string name="storage_wizard_move_progress_cancel" msgid="542047237524588792">"Verschieben abbrechen"</string>
+    <string name="storage_wizard_slow_body" msgid="8010127667184768025">"Die <xliff:g id="NAME_0">^1</xliff:g> ist offenbar langsam. \n\nSie können fortfahren, aber hierher verschobene Apps bleiben eventuell hängen und Datenübertragungen können lange dauern. \n\nFür eine bessere Leistung sollten Sie eine schnellere <xliff:g id="NAME_1">^1</xliff:g> nutzen."</string>
     <string name="battery_status_title" msgid="9159414319574976203">"Akkustatus"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"Akkuladung"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APNs"</string>
@@ -1501,12 +1500,9 @@
     <string name="confirm_enable_oem_unlock_text" msgid="5517144575601647022">"Achtung: Die Geräteschutzfunktionen funktionieren auf diesem Gerät nicht, solange diese Einstellung aktiviert ist."</string>
     <string name="select_logd_size_title" msgid="7433137108348553508">"Logger-Puffergrößen"</string>
     <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"Größe pro Protokollpuffer wählen"</string>
-    <!-- no translation found for mock_location_app (7966220972812881854) -->
-    <skip />
-    <!-- no translation found for mock_location_app_not_set (809543285495344223) -->
-    <skip />
-    <!-- no translation found for mock_location_app_set (8966420655295102685) -->
-    <skip />
+    <string name="mock_location_app" msgid="7966220972812881854">"App für simulierte Standorte auswählen"</string>
+    <string name="mock_location_app_not_set" msgid="809543285495344223">"Keine App für simulierte Standorte eingerichtet"</string>
+    <string name="mock_location_app_set" msgid="8966420655295102685">"App für simulierte Standorte: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="debug_view_attributes" msgid="6485448367803310384">"Inspektion der Anzeigeattribute aktivieren"</string>
     <string name="debug_networking_category" msgid="7044075693643009662">"Netzwerke"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"Kabellose Übertragung"</string>
@@ -1935,6 +1931,8 @@
     <string name="local_backup_password_toast_validation_failure" msgid="5646377234895626531">"Fehler beim Festlegen des Sicherungspassworts"</string>
     <string name="backup_erase_dialog_title" msgid="1027640829482174106"></string>
     <string name="backup_erase_dialog_message" msgid="5221011285568343155">"Sicherung Ihrer WLAN-Passwörter, Lesezeichen, anderer Einstellungen und App-Daten beenden und alle Kopien auf Google-Servern löschen?"</string>
+    <string name="fullbackup_erase_dialog_message" msgid="944399039066318647">"Soll das Sichern von Gerätedaten, wie z. B WLAN-Passwörtern und Anrufliste, sowie App-Daten, wie z. B. Einstellungen und von Apps gespeicherten Dateien, beendet werden und sollen alle Kopien bei Google Drive gelöscht werden?"</string>
+    <string name="fullbackup_data_summary" msgid="960850365007767734">"Automatische Remote-Sicherung von Gerätedaten wie WLAN-Passwörtern und Anrufverlauf und App-Daten, z. B. Einstellungen und von Apps gespeicherte Dateien\n\nWenn Sie die automatische Sicherung aktivieren, werden Geräte- und App-Daten regelmäßig an einem Remote-Speicherort gespeichert. Bei App-Daten kann es sich um alle Daten handeln, die von einer App entsprechend der Entwicklereinstellungen gespeichert wurden, einschließlich potenziell sensiblen Daten wie Kontakten, Nachrichten und Fotos."</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"Einstellungen für die Geräteverwaltung"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"Geräteadministrator"</string>
     <string name="remove_device_admin" msgid="3596845261596451437">"Deaktivieren"</string>
@@ -2469,8 +2467,7 @@
     <string name="keywords_all_apps" msgid="5377153522551809915">"App-System für App-Download"</string>
     <string name="keywords_app_permissions" msgid="8677901415217188314">"App-Berechtigungen – Sicherheit"</string>
     <string name="keywords_default_apps" msgid="3581727483175522599">"Apps-Standardeinstellung"</string>
-    <!-- no translation found for keywords_ignore_optimizations (946516741848647905) -->
-    <skip />
+    <string name="keywords_ignore_optimizations" msgid="946516741848647905">"Ignorieren Optimierungen Stromsparmodus App Standby"</string>
     <string name="keywords_lockscreen" msgid="4806191868723291541">"ziehen passwort muster pin slide password pattern"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"WLAN-NFC-Tag einrichten"</string>
     <string name="write_tag" msgid="8571858602896222537">"Schreiben"</string>
@@ -2572,8 +2569,7 @@
     <string name="summary_range_verbal_combination" msgid="8467306662961568656">"<xliff:g id="START">%1$s</xliff:g> bis <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="zen_mode_calls" msgid="7051492091133751208">"Anrufe"</string>
     <string name="zen_mode_messages" msgid="5886440273537510894">"Nachrichten"</string>
-    <!-- no translation found for zen_mode_selected_messages (8245990149599142281) -->
-    <skip />
+    <string name="zen_mode_selected_messages" msgid="8245990149599142281">"Ausgewählte Nachrichten"</string>
     <string name="zen_mode_from_anyone" msgid="2638322015361252161">"Von beliebiger Person"</string>
     <string name="zen_mode_from_contacts" msgid="2232335406106711637">"Nur von Kontakten"</string>
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"Nur von markierten Kontakten"</string>
@@ -2692,10 +2688,8 @@
     <string name="app_permissions" msgid="4148222031991883874">"App-Berechtigungen"</string>
     <string name="app_permissions_summary" msgid="2098173899436407221">"<xliff:g id="COUNT_0">%d</xliff:g> von <xliff:g id="COUNT_1">%d</xliff:g> Apps haben zusätzliche Zugriffsrechte."</string>
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"<xliff:g id="COUNT_0">%d</xliff:g> von <xliff:g id="COUNT_1">%d</xliff:g> Apps sind berechtigt."</string>
-    <!-- no translation found for tap_to_wake (7211944147196888807) -->
-    <skip />
-    <!-- no translation found for tap_to_wake_summary (4341387904987585616) -->
-    <skip />
+    <string name="tap_to_wake" msgid="7211944147196888807">"Zum Aktivieren tippen"</string>
+    <string name="tap_to_wake_summary" msgid="4341387904987585616">"Doppeltippen Sie auf den Bildschirm, um das Gerät zu aktivieren."</string>
     <string name="domain_urls_title" msgid="8735310976048599572">"Domain-URLs"</string>
     <string name="domain_urls_summary_none" msgid="4817723415916239693">"Keine Domain-URL öffnen"</string>
     <string name="domain_urls_summary_one" msgid="4427559120855938432">"\"<xliff:g id="DOMAIN">%s</xliff:g>\" öffnen"</string>
@@ -2706,6 +2700,8 @@
     </plurals>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Nicht erkannt"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"Standard-Apps"</string>
+    <string name="default_assist_title" msgid="8851464168639315795">"Assistent"</string>
+    <string name="default_assist_none" msgid="4719591002003824614">"Keine Standard-Assistenten-App"</string>
     <string name="default_browser_title" msgid="8101772675085814670">"Browser-App"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"Kein Standardbrowser"</string>
     <string name="default_phone_title" msgid="282005908059637350">"Standard-App für Telefonie"</string>
@@ -2728,31 +2724,30 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="2116416853043103135">"Optimierungen ignorieren"</string>
     <string name="high_power_filter_on" msgid="3862942127137594196">"Zulässig"</string>
-    <!-- no translation found for high_power_on (148473814103292724) -->
-    <skip />
+    <string name="high_power_on" msgid="148473814103292724">"Optimierungen bezüglich der Akkuleistung ignorieren"</string>
     <string name="high_power_off" msgid="4069404908196636677">"Aus"</string>
-    <!-- no translation found for high_power_desc (8777632785903235764) -->
-    <skip />
-    <!-- no translation found for high_power_count (4343190376439806186) -->
+    <string name="high_power_desc" msgid="8777632785903235764">"Keine Optimierungen bezüglich der Akkuleistung anwenden. Ihr Akku entleert sich hierdurch möglicherweise schneller."</string>
+    <plurals name="high_power_count" formatted="false" msgid="4343190376439806186">
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> Apps dürfen Optimierungen bezüglich der Akkuleistung ignorieren.</item>
+      <item quantity="one">1 App darf Optimierungen bezüglich der Akkuleistung ignorieren.</item>
+    </plurals>
     <!-- String.format failed for translation -->
     <!-- no translation found for battery_summary (101415762036784289) -->
     <skip />
     <string name="no_battery_summary" msgid="3528036835462846814">"Kein Verbrauch seit dem letzten vollen Aufladen"</string>
     <string name="app_notification_preferences" msgid="6413363601485067724">"Benachrichtigungseinstellungen für Apps"</string>
-    <!-- no translation found for system_ui_settings (579824306467081123) -->
-    <skip />
-    <!-- no translation found for additional_permissions (6463784193877056080) -->
-    <skip />
-    <!-- no translation found for additional_permissions_more (3538612272673191451) -->
-    <skip />
-    <!-- no translation found for usb_use_charging_only (2625934955897625321) -->
-    <skip />
-    <!-- no translation found for usb_use_file_transfers (479119385461326763) -->
-    <skip />
-    <!-- no translation found for usb_use_photo_transfers (7794775645350330454) -->
-    <skip />
-    <!-- no translation found for usb_use_MIDI (5116404702692483166) -->
-    <skip />
-    <!-- no translation found for usb_use (3372728031108932425) -->
-    <skip />
+    <string name="system_ui_settings" msgid="579824306467081123">"SystemUI-Tuner anzeigen"</string>
+    <string name="additional_permissions" msgid="6463784193877056080">"Zusätzliche Berechtigungen"</string>
+    <string name="additional_permissions_more" msgid="3538612272673191451">"<xliff:g id="COUNT">%1$d</xliff:g> weitere"</string>
+    <string name="usb_use_charging_only" msgid="2625934955897625321">"Nur aufladen"</string>
+    <string name="usb_use_file_transfers" msgid="479119385461326763">"Dateien übertragen (MTP)"</string>
+    <string name="usb_use_photo_transfers" msgid="7794775645350330454">"Fotos übertragen (PTP)"</string>
+    <string name="usb_use_MIDI" msgid="5116404702692483166">"MIDI"</string>
+    <string name="usb_use" msgid="3372728031108932425">"USB verwenden für"</string>
+    <string name="inactive_apps_title" msgid="1317817863508274533">"Inaktive Apps"</string>
+    <string name="inactive_app_inactive_summary" msgid="6768756967594202411">"Inaktiv. Berühren zum Aktivieren."</string>
+    <string name="inactive_app_active_summary" msgid="4512911571954375968">"Aktiv. Berühren zum Deaktivieren."</string>
+    <string name="assist_access_context_title" msgid="2047105711005856521">"Aktuellen Kontext verwenden"</string>
+    <string name="assist_access_context_summary" msgid="8365837347256022203">"Wenn Sie die Assistenten-App öffnen, darf sie auf die Inhalte auf Ihrem Bildschirm zugreifen."</string>
+    <string name="assist_footer" msgid="2283187001990543739">"Mithilfe von Assistenten-Apps können Sie nützliche Informationen ohne Nachfrage erfassen und darauf reagieren. Einige Apps unterstützen für eine einfachere Verwendung Übersichts- und Spracheingabedienste."</string>
 </resources>

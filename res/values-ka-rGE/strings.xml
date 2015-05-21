@@ -171,8 +171,8 @@
     <string name="bluetooth_pb_remember_choice" msgid="3622898084442402071">"აღარ მკითხო"</string>
     <string name="bluetooth_map_request" msgid="4595727689513143902">"შეტყობინებებზე წვდომის მოთხოვნა"</string>
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s-ს უნდა თქვენს შეტყობინებებზე წვდომა. მისცემთ %2$s-ს წვდომას?"</string>
-    <string name="bluetooth_sap_request" msgid="2669762224045354417">"SIM წვდომის მოთხოვნა"</string>
-    <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>-ს სურს, თქვენ SIM ბარათზე წვდომა. SIM ბარათზე წვდომის დაშვება გათიშავს მონაცემთა გადაცემას მოწყობილობაზე კავშირის განმავლობაში. <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>-ისთვის წვდომის მიცემა"</string>
+    <string name="bluetooth_sap_request" msgid="2669762224045354417">"SIM-ზე წვდომის მოთხოვნა"</string>
+    <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>-ს სურს თქვენს SIM ბარათზე წვდომა. SIM ბარათზე წვდომის დაშვება კავშირის განმავლობაში გათიშავს მონაცემთა გადაცემას მოწყობილობაზე. <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>-ისთვის წვდომის მიცემა"</string>
     <string name="date_and_time" msgid="9062980487860757694">"თარიღი და დრო"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"დროის ზონის არჩევა"</string>
     <string name="display_preview_label" msgid="1127597250917274792">"გადახედვა"</string>
@@ -349,7 +349,7 @@
     </plurals>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"თითის ანაბეჭდის დაყენება"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"თქვენი ეკრანის განბლოკვისა და შესყიდვების დადასტურებისთვის თითის ანაბეჭდის გამოსაყენებლად ჩვენ უნდა:"</string>
-    <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="3118715258753165968">"დააყენეთ თქვენი სარეზერვო ეკრანის დაბლოკვის მეთოდი"</string>
+    <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"თქვენი სარეზერვო ეკრანის დაბლოკვის მეთოდის დაყენება"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_2" msgid="4158160658182631304">"თქვენი თითის ანაბეჭდის დამატება"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="5877265753699187149">"სენსორის პოვნა"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="1959655161889313661">"იპოვეთ თქვენი ტელეფონის უკანა ნაწილზე მდებარე თითის ანაბეჭდების სენსორი."</string>
@@ -363,7 +363,7 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="8846866512704467036">"განათავსეთ თქვენი იგივე თითის ანაბეჭდი სენსორზე. ვიბრაციის შემდეგ აიღეთ თითი."</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"ანაბეჭდი დამატებულია!"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"როდესად ამ ხატულას დაინახავთ, იდენტიფიცირების ან თქვენი შესყიდვის ავტორიზებისათვის შეგიძლიათ გამოიყენოთ თქვენი თითის ანაბეჭდი."</string>
-    <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="8205113627804480642">"ეკრანის დაბლოკვის დაყენება"</string>
+    <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"ეკრანის დაბლოკვის დაყენება"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"შესრულდა"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"უფს, ეს არ არის სენსორი"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="5053971232594165142">"თითის ანაბეჭდ. სენსორის მოწყობ.-ზე გამოყენება"</string>
@@ -643,10 +643,8 @@
     <string name="wifi_speed" msgid="3526198708812322037">"დაკავშირების სიჩქარე"</string>
     <string name="wifi_frequency" msgid="7791090119577812214">"სიხშირე"</string>
     <string name="wifi_ip_address" msgid="1440054061044402918">"IP მისამართი"</string>
-    <!-- no translation found for passpoint_label (6381371313076009926) -->
-    <skip />
-    <!-- no translation found for passpoint_content (8447207162397870483) -->
-    <skip />
+    <string name="passpoint_label" msgid="6381371313076009926">"შენახულია შემდეგით:"</string>
+    <string name="passpoint_content" msgid="8447207162397870483">"<xliff:g id="NAME">%1$s</xliff:g> ავტორიზაციის მონაცემები"</string>
     <string name="wifi_eap_method" msgid="8529436133640730382">"EAP მეთოდი"</string>
     <string name="please_select_phase2" msgid="5231074529772044898">"ავტორიზაციის მეორე ფაზა"</string>
     <string name="wifi_eap_ca_cert" msgid="3521574865488892851">"CA სერთიფიკატი"</string>
@@ -655,7 +653,7 @@
     <string name="wifi_eap_anonymous" msgid="2989469344116577955">"უცნობი"</string>
     <string name="wifi_password" msgid="5948219759936151048">"პაროლი"</string>
     <string name="wifi_show_password" msgid="6461249871236968884">"პაროლის გამოჩენა"</string>
-    <string name="wifi_ap_band_config" msgid="219415018348922629">"წვდომის წერტილის დიაპაზონის კონფიგურაცია"</string>
+    <string name="wifi_ap_band_config" msgid="1611826705989117930">"აირჩიეთ AP Band"</string>
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"2,4 GHz დიაპაზონი"</string>
     <string name="wifi_ap_choose_5G" msgid="8137061170937978040">"5 GHz დიაპაზონი"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP პარამეტრები"</string>
@@ -1017,6 +1015,8 @@
     <string name="storage_wizard_move_progress_title" msgid="4443920302548035674">"<xliff:g id="APP">^1</xliff:g>-ის გადაადგილება…"</string>
     <string name="storage_wizard_move_progress_body" msgid="7802577486578105609">"გადაადგილებისას, არ ამოიღოთ <xliff:g id="NAME">^1</xliff:g>. \n\nგადაადგილების დასრულებამდე <xliff:g id="APP">^2</xliff:g> აპი ამ მოწყობილობაში მიუწვდომელი იქნება."</string>
     <string name="storage_wizard_move_progress_cancel" msgid="542047237524588792">"გადაადგილების გაუქმება"</string>
+    <!-- no translation found for storage_wizard_slow_body (8010127667184768025) -->
+    <skip />
     <string name="battery_status_title" msgid="9159414319574976203">"ბატარეის სტატუსი"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"ბატარეის დატენვის დონე"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APNs"</string>
@@ -1500,12 +1500,9 @@
     <string name="confirm_enable_oem_unlock_text" msgid="5517144575601647022">"გაფრთხილება: სანამ ეს პარამეტრი ჩართულია, მოწყობილობის დაცვის ფუნქცია ამ მოწყობილობაზე, ვერ იმუშავებს."</string>
     <string name="select_logd_size_title" msgid="7433137108348553508">"ჟურნალიზაციის ბუფერის ზომები"</string>
     <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"აირჩიეთ ჟურნ. ზომა / ჟურნ. ბუფერზე"</string>
-    <!-- no translation found for mock_location_app (7966220972812881854) -->
-    <skip />
-    <!-- no translation found for mock_location_app_not_set (809543285495344223) -->
-    <skip />
-    <!-- no translation found for mock_location_app_set (8966420655295102685) -->
-    <skip />
+    <string name="mock_location_app" msgid="7966220972812881854">"მდებარეობის იმიტირების აპის არჩევა"</string>
+    <string name="mock_location_app_not_set" msgid="809543285495344223">"მდებარეობის იმიტირების აპი დაყენებული არ არის"</string>
+    <string name="mock_location_app_set" msgid="8966420655295102685">"მდებარეობის იმიტირების აპი: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="debug_view_attributes" msgid="6485448367803310384">"ნახვის ატრიბუტის ინსპექტირების ჩართვა"</string>
     <string name="debug_networking_category" msgid="7044075693643009662">"ქსელი"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"უსადენო ეკრანის სერტიფიცირება"</string>
@@ -1526,7 +1523,7 @@
     <string name="allow_mock_location_summary" msgid="317615105156345626">"ფიქტიური მდებარეობების დაშვება"</string>
     <string name="debug_view_attributes" msgid="6485448367803310384">"ნახვის ატრიბუტის ინსპექტირების ჩართვა"</string>
     <string name="legacy_dhcp_client_summary" msgid="163383566317652040">"ახალი Android DHCP კლიენტის ნაცვლად, Lollipop-ის DHCP კლიენტის გამოყენება."</string>
-    <string name="mobile_data_always_on_summary" msgid="8149773901431697910">"მობილური მოწყობილობის მონაცემები ყოველთვის აქტიური გქონდეთ, მაშინაც კი, როდესაც Wi-Fi აქტიურია (ქსელის სწრაფი გადართვისთვის)."</string>
+    <string name="mobile_data_always_on_summary" msgid="8149773901431697910">"მობილური მოწყობილობის მონაცემები ყოველთვის აქტიური დარჩეს, მაშინაც კი, როდესაც Wi-Fi აქტიურია (ქსელის სწრაფი გადართვისთვის)."</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"ჩავრთო USB გამართვა?"</string>
     <string name="adb_warning_message" msgid="7316799925425402244">"USB გამართვა განკუთვნილია მხოლოდ დეველოპერული მიზნებისთვის. გამოიყენეთ კომპიუტერსა და თქვენ მოწყობილობას შორის მონაცემების გადასატანად, თქვენ მოწყობილობაზე აპების შეტყობინების გარეშე დასაყენებლად და ჟურნალის მონაცემების წასაკითხად."</string>
     <string name="adb_keys_warning_message" msgid="5659849457135841625">"გავაუქმოთ ყველა იმ კომპიუტერიდან USB გამართვაზე წვდომა, რომლებიდანაც აქამდე განახორციელეთ შესვლა?"</string>
@@ -1934,6 +1931,9 @@
     <string name="local_backup_password_toast_validation_failure" msgid="5646377234895626531">"სარეზერვო პაროლის დაყენება ვერ მოხერხდა"</string>
     <string name="backup_erase_dialog_title" msgid="1027640829482174106"></string>
     <string name="backup_erase_dialog_message" msgid="5221011285568343155">"გსურთ, თქვენი Wi-Fi პაროლების, სანიშნეების, სხვა პარამეტრებისა და აპების მონაცემების სარეზერვო ასლების მომზადების შეწყვეტა და Google-ის სერვერებიდან ყველა ასლის წაშლა?"</string>
+    <string name="fullbackup_erase_dialog_message" msgid="944399039066318647">"გსურთ, შეწყდეს მოწყობილობის მონაცემთა (მათ შორის, Wi-Fi პაროლებისა და ზარების ისტორიის) და აპების მონაცემთა (მათ შორის, აპების მიერ შენახული პარამეტრებისა და ფაილების) დამარქაფება და, ამასთანავე, Google Drive-იდან ყველა ასლი წაიშალოს?"</string>
+    <!-- no translation found for fullbackup_data_summary (960850365007767734) -->
+    <skip />
     <string name="device_admin_settings_title" msgid="1335557832906433309">"მოწყობილობის ადმინისტრირების პარამეტრები"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"მოწყობილობის ადმინისტრატორი"</string>
     <string name="remove_device_admin" msgid="3596845261596451437">"დეაქტივირება"</string>
@@ -2468,8 +2468,7 @@
     <string name="keywords_all_apps" msgid="5377153522551809915">"აპები ჩამოტვირთვა აპლიკაციები სისტემა"</string>
     <string name="keywords_app_permissions" msgid="8677901415217188314">"აპლიკაციების ნებართვების უსაფრთხოება"</string>
     <string name="keywords_default_apps" msgid="3581727483175522599">"აპები ნაგულისხმევი"</string>
-    <!-- no translation found for keywords_ignore_optimizations (946516741848647905) -->
-    <skip />
+    <string name="keywords_ignore_optimizations" msgid="946516741848647905">"ოპტიმიზაციის იგნორირების თვლემის აპი მოლოდინის რეჟიმშია"</string>
     <string name="keywords_lockscreen" msgid="4806191868723291541">"გასრიალება პაროლი ნიმუში pin"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Wi-Fi NFC თეგის დაყენება"</string>
     <string name="write_tag" msgid="8571858602896222537">"ჩაწერა"</string>
@@ -2553,7 +2552,7 @@
     <string name="zen_event_rule_type_name" msgid="2645981990973086797">"მოვლენის წესი"</string>
     <string name="zen_event_rule_enabled_toast" msgid="6910577623330811480">"ავტომატური წესი დაყენებულია, რომ ჩაირთოს „არ შემაწუხოთ“ განსაზღვრული მოვლენების დროს"</string>
     <string name="zen_mode_event_rule_calendar" msgid="8787906563769067418">"მოვლენების დროს"</string>
-    <string name="zen_mode_event_rule_summary_calendar_template" msgid="5135844750232403975">"მოვლენების დროს <xliff:g id="CALENDAR">%1$s</xliff:g>-ისთვის"</string>
+    <string name="zen_mode_event_rule_summary_calendar_template" msgid="5135844750232403975">"<xliff:g id="CALENDAR">%1$s</xliff:g>-ის მოვლენების დროს"</string>
     <string name="zen_mode_event_rule_summary_any_calendar" msgid="4936646399126636358">"ნებისმიერი კალენდარი"</string>
     <string name="zen_mode_event_rule_summary_reply_template" msgid="6590671260829837157">"სადაც პასუხი არის <xliff:g id="REPLY">%1$s</xliff:g>"</string>
     <string name="zen_mode_event_rule_calendar_any" msgid="6485568415998569885">"ნებისმიერი კალენდარი"</string>
@@ -2571,12 +2570,11 @@
     <string name="summary_range_verbal_combination" msgid="8467306662961568656">"<xliff:g id="START">%1$s</xliff:g>-დან <xliff:g id="END">%2$s</xliff:g>-მდე"</string>
     <string name="zen_mode_calls" msgid="7051492091133751208">"ზარები"</string>
     <string name="zen_mode_messages" msgid="5886440273537510894">"შეტყობინებები"</string>
-    <!-- no translation found for zen_mode_selected_messages (8245990149599142281) -->
-    <skip />
-    <string name="zen_mode_from_anyone" msgid="2638322015361252161">"ნებისმიერი გამგზავნისგან"</string>
+    <string name="zen_mode_selected_messages" msgid="8245990149599142281">"არჩეული შეტყობინებები"</string>
+    <string name="zen_mode_from_anyone" msgid="2638322015361252161">"ნებისმიერი პირისგან"</string>
     <string name="zen_mode_from_contacts" msgid="2232335406106711637">"მხოლოდ კონტაქტებისგან"</string>
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"მხოლოდ ვარსკვლავიანი კონტაქტებისგან"</string>
-    <string name="zen_mode_from_none" msgid="8219706639954614136">"არცერთი"</string>
+    <string name="zen_mode_from_none" msgid="8219706639954614136">"არავისგან"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"მაღვიძარები"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"შეხსენებები"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"ღონისძიებები"</string>
@@ -2691,10 +2689,8 @@
     <string name="app_permissions" msgid="4148222031991883874">"აპის უფლებები"</string>
     <string name="app_permissions_summary" msgid="2098173899436407221">"<xliff:g id="COUNT_1">%d</xliff:g>-დან <xliff:g id="COUNT_0">%d</xliff:g> აპლიკაციის დამატებითი წვდომის უფლება"</string>
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"<xliff:g id="COUNT_1">%d</xliff:g>-დან <xliff:g id="COUNT_0">%d</xliff:g> დაშვებული აპლიკაცია"</string>
-    <!-- no translation found for tap_to_wake (7211944147196888807) -->
-    <skip />
-    <!-- no translation found for tap_to_wake_summary (4341387904987585616) -->
-    <skip />
+    <string name="tap_to_wake" msgid="7211944147196888807">"შეეხეთ გამოსაღვიძებლად"</string>
+    <string name="tap_to_wake_summary" msgid="4341387904987585616">"ორმაგად შეეხეთ ეკრანის ნებისმიერ ადგილას მოწყობილობის გამოსაღვიძებლად"</string>
     <string name="domain_urls_title" msgid="8735310976048599572">"დომენის URL-ები"</string>
     <string name="domain_urls_summary_none" msgid="4817723415916239693">"არ გახსნას ნებისმიერი დომენის URL"</string>
     <string name="domain_urls_summary_one" msgid="4427559120855938432">"„<xliff:g id="DOMAIN">%s</xliff:g>“-ის გახსნა"</string>
@@ -2705,6 +2701,10 @@
     </plurals>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"არ არის ამოცნობილი"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"ნაგულისხმევი აპები"</string>
+    <!-- no translation found for default_assist_title (8851464168639315795) -->
+    <skip />
+    <!-- no translation found for default_assist_none (4719591002003824614) -->
+    <skip />
     <string name="default_browser_title" msgid="8101772675085814670">"ბრაუზერის აპი"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"ნაგულისხმები ბრაუზერი არ არის"</string>
     <string name="default_phone_title" msgid="282005908059637350">"ტელეფონის აპი"</string>
@@ -2727,29 +2727,31 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="2116416853043103135">"ოპტიმიზაციის იგნორირება"</string>
     <string name="high_power_filter_on" msgid="3862942127137594196">"ნებადართული"</string>
-    <!-- no translation found for high_power_on (148473814103292724) -->
-    <skip />
+    <string name="high_power_on" msgid="148473814103292724">"ბატარეის ოპტიმიზაციის იგნორირება"</string>
     <string name="high_power_off" msgid="4069404908196636677">"გამორთული"</string>
-    <!-- no translation found for high_power_desc (8777632785903235764) -->
-    <skip />
-    <!-- no translation found for high_power_count (4343190376439806186) -->
+    <string name="high_power_desc" msgid="8777632785903235764">"არ გააქტიუროთ ბატარეის ოპტიმიზაცია. ამან შესაძლოა თქვენი ბატარეის უფრო სწრაფი ხარჯვა გამოიწვიოს."</string>
+    <plurals name="high_power_count" formatted="false" msgid="4343190376439806186">
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> აპმა ბატარეის ოპტიმიზაციის იგნორირება დაუშვა</item>
+      <item quantity="one">1 აპმა ბატარეის ოპტიმიზაციის იგნორირება დაუშვა</item>
+    </plurals>
     <string name="battery_summary" msgid="101415762036784289">"<xliff:g id="PERCENTAGE">%1$d</xliff:g>%%-ის გამოყენება ბოლო სრული დამუხტვის შემდეგ"</string>
     <string name="no_battery_summary" msgid="3528036835462846814">"არ მომხდარა ბატარეის გამოყენება ბოლო სრული დამუხტვის შემდეგ"</string>
     <string name="app_notification_preferences" msgid="6413363601485067724">"აპის შეტყობინების პარამეტრები"</string>
-    <!-- no translation found for system_ui_settings (579824306467081123) -->
+    <string name="system_ui_settings" msgid="579824306467081123">"SystemUI ტუნერის ჩვენება"</string>
+    <string name="additional_permissions" msgid="6463784193877056080">"დამატებითი ნებართვები"</string>
+    <string name="additional_permissions_more" msgid="3538612272673191451">"<xliff:g id="COUNT">%1$d</xliff:g> სხვა"</string>
+    <string name="usb_use_charging_only" msgid="2625934955897625321">"მხოლოდ დამუხტვა"</string>
+    <string name="usb_use_file_transfers" msgid="479119385461326763">"ფაილების გადაცემისთვის (MTP)"</string>
+    <string name="usb_use_photo_transfers" msgid="7794775645350330454">"ფოტოების გადაცემისთვის (PTP)"</string>
+    <string name="usb_use_MIDI" msgid="5116404702692483166">"MIDI"</string>
+    <string name="usb_use" msgid="3372728031108932425">"USB-ს გამოყენება"</string>
+    <string name="inactive_apps_title" msgid="1317817863508274533">"უმოქმედო აპები"</string>
+    <string name="inactive_app_inactive_summary" msgid="6768756967594202411">"უმოქმედო. შეეხეთ გადასართავად."</string>
+    <string name="inactive_app_active_summary" msgid="4512911571954375968">"აქტიური. შეეხეთ გადასართავად."</string>
+    <!-- no translation found for assist_access_context_title (2047105711005856521) -->
     <skip />
-    <!-- no translation found for additional_permissions (6463784193877056080) -->
+    <!-- no translation found for assist_access_context_summary (8365837347256022203) -->
     <skip />
-    <!-- no translation found for additional_permissions_more (3538612272673191451) -->
-    <skip />
-    <!-- no translation found for usb_use_charging_only (2625934955897625321) -->
-    <skip />
-    <!-- no translation found for usb_use_file_transfers (479119385461326763) -->
-    <skip />
-    <!-- no translation found for usb_use_photo_transfers (7794775645350330454) -->
-    <skip />
-    <!-- no translation found for usb_use_MIDI (5116404702692483166) -->
-    <skip />
-    <!-- no translation found for usb_use (3372728031108932425) -->
+    <!-- no translation found for assist_footer (2283187001990543739) -->
     <skip />
 </resources>
