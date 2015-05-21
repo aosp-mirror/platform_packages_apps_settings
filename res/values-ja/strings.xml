@@ -351,7 +351,7 @@
     </plurals>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"指紋の設定"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"指紋を使って画面ロックの解除や購入の確認を行うには、次の手順を行う必要があります。"</string>
-    <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="3118715258753165968">"予備の画面ロック方式を設定"</string>
+    <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"予備の画面ロック方式を設定"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_2" msgid="4158160658182631304">"指紋を追加"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="5877265753699187149">"センサーを探す"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="1959655161889313661">"端末の背面にある指紋センサーを探します。"</string>
@@ -365,7 +365,7 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="8846866512704467036">"同じ指を指紋センサーに当て、振動したら指を離してください。"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"指紋を追加しました。"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"このアイコンが表示されているときは、本人確認や購入の承認に指紋を使用できます。"</string>
-    <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="8205113627804480642">"画面ロックを設定"</string>
+    <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"画面ロックを設定"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"完了"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"これはセンサーではありません"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="5053971232594165142">"端末の指紋センサーを使用してください。"</string>
@@ -645,6 +645,8 @@
     <string name="wifi_speed" msgid="3526198708812322037">"リンク速度"</string>
     <string name="wifi_frequency" msgid="7791090119577812214">"周波数"</string>
     <string name="wifi_ip_address" msgid="1440054061044402918">"IPアドレス"</string>
+    <string name="passpoint_label" msgid="6381371313076009926">"保存"</string>
+    <string name="passpoint_content" msgid="8447207162397870483">"<xliff:g id="NAME">%1$s</xliff:g>の認証情報"</string>
     <string name="wifi_eap_method" msgid="8529436133640730382">"EAP方式"</string>
     <string name="please_select_phase2" msgid="5231074529772044898">"フェーズ2認証"</string>
     <string name="wifi_eap_ca_cert" msgid="3521574865488892851">"CA証明書"</string>
@@ -653,7 +655,7 @@
     <string name="wifi_eap_anonymous" msgid="2989469344116577955">"匿名ID"</string>
     <string name="wifi_password" msgid="5948219759936151048">"パスワード"</string>
     <string name="wifi_show_password" msgid="6461249871236968884">"パスワードを表示する"</string>
-    <string name="wifi_ap_band_config" msgid="219415018348922629">"AP帯域幅を設定"</string>
+    <string name="wifi_ap_band_config" msgid="1611826705989117930">"AP帯域幅を選択"</string>
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"2.4GHz"</string>
     <string name="wifi_ap_choose_5G" msgid="8137061170937978040">"5GHz"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP設定"</string>
@@ -964,7 +966,6 @@
     <string name="storage_menu_format_internal" msgid="6553368530402755543">"消去して内部ストレージとしてフォーマット"</string>
     <string name="storage_menu_migrate" msgid="3969621494238154294">"データを移行"</string>
     <string name="storage_menu_forget" msgid="6305824238997983426">"切断"</string>
-    <string name="storage_menu_usb" msgid="5708207885333243384">"USBでパソコンに接続"</string>
     <string name="storage_title_usb" msgid="679612779321689418">"USBでパソコンに接続"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"次で接続:"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"メディアデバイス（MTP）"</string>
@@ -1016,6 +1017,8 @@
     <string name="storage_wizard_move_progress_title" msgid="4443920302548035674">"<xliff:g id="APP">^1</xliff:g>を移動中…"</string>
     <string name="storage_wizard_move_progress_body" msgid="7802577486578105609">"移動中は<xliff:g id="NAME">^1</xliff:g>を取り外さないでください。\n\nこの端末の<xliff:g id="APP">^2</xliff:g>アプリは移動が完了するまで使用できません。"</string>
     <string name="storage_wizard_move_progress_cancel" msgid="542047237524588792">"移動をキャンセル"</string>
+    <!-- no translation found for storage_wizard_slow_body (8010127667184768025) -->
+    <skip />
     <string name="battery_status_title" msgid="9159414319574976203">"電池の状態:"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"電池残量"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APN"</string>
@@ -1499,8 +1502,9 @@
     <string name="confirm_enable_oem_unlock_text" msgid="5517144575601647022">"警告: この設定をONにしている場合、この端末では端末保護機能を利用できません。"</string>
     <string name="select_logd_size_title" msgid="7433137108348553508">"ログバッファのサイズ"</string>
     <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"各ログバッファのログサイズを選択"</string>
-    <string name="allow_mock_location" msgid="2787962564578664888">"擬似ロケーションを許可"</string>
-    <string name="allow_mock_location_summary" msgid="317615105156345626">"擬似ロケーションを許可する"</string>
+    <string name="mock_location_app" msgid="7966220972812881854">"仮の現在地情報アプリを選択"</string>
+    <string name="mock_location_app_not_set" msgid="809543285495344223">"仮の現在地情報アプリが設定されていません"</string>
+    <string name="mock_location_app_set" msgid="8966420655295102685">"仮の現在地情報アプリ: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="debug_view_attributes" msgid="6485448367803310384">"表示属性検査を有効にする"</string>
     <string name="debug_networking_category" msgid="7044075693643009662">"ネットワーク"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"ワイヤレスディスプレイ認証"</string>
@@ -1933,6 +1937,10 @@
     <string name="local_backup_password_toast_validation_failure" msgid="5646377234895626531">"バックアップパスワードの設定に失敗しました"</string>
     <string name="backup_erase_dialog_title" msgid="1027640829482174106"></string>
     <string name="backup_erase_dialog_message" msgid="5221011285568343155">"Wi-Fiパスワード、ブックマーク、その他の設定とアプリのデータのバックアップを停止し、Googleサーバー上のすべてのコピーを消去しますか？"</string>
+    <!-- no translation found for fullbackup_erase_dialog_message (694766389396659626) -->
+    <skip />
+    <!-- no translation found for fullbackup_data_summary (960850365007767734) -->
+    <skip />
     <string name="device_admin_settings_title" msgid="1335557832906433309">"デバイス管理の設定"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"デバイス管理者"</string>
     <string name="remove_device_admin" msgid="3596845261596451437">"無効にする"</string>
@@ -2467,8 +2475,7 @@
     <string name="keywords_all_apps" msgid="5377153522551809915">"アプリ ダウンロード アプリ システム"</string>
     <string name="keywords_app_permissions" msgid="8677901415217188314">"アプリ 権限 セキュリティ"</string>
     <string name="keywords_default_apps" msgid="3581727483175522599">"アプリ 既定"</string>
-    <!-- no translation found for keywords_ignore_optimizations (946516741848647905) -->
-    <skip />
+    <string name="keywords_ignore_optimizations" msgid="946516741848647905">"無視 最適化 スリープ アプリ スタンバイ"</string>
     <string name="keywords_lockscreen" msgid="4806191868723291541">"スライド パスワード パターン pin"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Wi-Fi NFCタグのセットアップ"</string>
     <string name="write_tag" msgid="8571858602896222537">"書き込む"</string>
@@ -2570,6 +2577,7 @@
     <string name="summary_range_verbal_combination" msgid="8467306662961568656">"<xliff:g id="START">%1$s</xliff:g>～<xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="zen_mode_calls" msgid="7051492091133751208">"通話"</string>
     <string name="zen_mode_messages" msgid="5886440273537510894">"メッセージ"</string>
+    <string name="zen_mode_selected_messages" msgid="8245990149599142281">"選択したメッセージ"</string>
     <string name="zen_mode_from_anyone" msgid="2638322015361252161">"全員"</string>
     <string name="zen_mode_from_contacts" msgid="2232335406106711637">"連絡先のみ"</string>
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"スター付きの連絡先のみ"</string>
@@ -2688,10 +2696,8 @@
     <string name="app_permissions" msgid="4148222031991883874">"アプリの権限"</string>
     <string name="app_permissions_summary" msgid="2098173899436407221">"<xliff:g id="COUNT_0">%d</xliff:g>/<xliff:g id="COUNT_1">%d</xliff:g>個のアプリに追加アクセスを許可"</string>
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"<xliff:g id="COUNT_0">%d</xliff:g>/<xliff:g id="COUNT_1">%d</xliff:g>個のアプリを許可"</string>
-    <!-- no translation found for tap_to_wake (7211944147196888807) -->
-    <skip />
-    <!-- no translation found for tap_to_wake_summary (4341387904987585616) -->
-    <skip />
+    <string name="tap_to_wake" msgid="7211944147196888807">"タップして復帰"</string>
+    <string name="tap_to_wake_summary" msgid="4341387904987585616">"画面をダブルタップすると端末が復帰します"</string>
     <string name="domain_urls_title" msgid="8735310976048599572">"ドメインURL"</string>
     <string name="domain_urls_summary_none" msgid="4817723415916239693">"ドメインURLを開かない"</string>
     <string name="domain_urls_summary_one" msgid="4427559120855938432">"「<xliff:g id="DOMAIN">%s</xliff:g>」を開く"</string>
@@ -2702,6 +2708,10 @@
     </plurals>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"認識されませんでした"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"既定のアプリ"</string>
+    <!-- no translation found for default_assist_title (8851464168639315795) -->
+    <skip />
+    <!-- no translation found for default_assist_none (4719591002003824614) -->
+    <skip />
     <string name="default_browser_title" msgid="8101772675085814670">"ブラウザアプリ"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"既定のブラウザなし"</string>
     <string name="default_phone_title" msgid="282005908059637350">"電話アプリ"</string>
@@ -2724,15 +2734,31 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g>（<xliff:g id="COUNT">%2$d</xliff:g>）"</string>
     <string name="high_power_apps" msgid="2116416853043103135">"最適化を無視"</string>
     <string name="high_power_filter_on" msgid="3862942127137594196">"許可"</string>
-    <!-- no translation found for high_power_on (148473814103292724) -->
-    <skip />
+    <string name="high_power_on" msgid="148473814103292724">"電池の最適化を無視する"</string>
     <string name="high_power_off" msgid="4069404908196636677">"OFF"</string>
-    <!-- no translation found for high_power_desc (8777632785903235764) -->
-    <skip />
-    <!-- no translation found for high_power_count (4343190376439806186) -->
+    <string name="high_power_desc" msgid="8777632785903235764">"電池の最適化を適用しないでください。電池の消耗が速くなる可能性があります。"</string>
+    <plurals name="high_power_count" formatted="false" msgid="4343190376439806186">
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g>個のアプリが電池の最適化を無視することを許可されています</item>
+      <item quantity="one">1個のアプリが電池の最適化を無視することを許可されています</item>
+    </plurals>
     <string name="battery_summary" msgid="101415762036784289">"前回のフル充電から<xliff:g id="PERCENTAGE">%1$d</xliff:g>%%使用しています"</string>
     <string name="no_battery_summary" msgid="3528036835462846814">"前回のフル充電から電池を使用していません"</string>
     <string name="app_notification_preferences" msgid="6413363601485067724">"アプリ通知設定"</string>
-    <!-- no translation found for system_ui_settings (579824306467081123) -->
+    <string name="system_ui_settings" msgid="579824306467081123">"SystemUI調整ツールを表示"</string>
+    <string name="additional_permissions" msgid="6463784193877056080">"その他の権限"</string>
+    <string name="additional_permissions_more" msgid="3538612272673191451">"他<xliff:g id="COUNT">%1$d</xliff:g>件"</string>
+    <string name="usb_use_charging_only" msgid="2625934955897625321">"充電のみ"</string>
+    <string name="usb_use_file_transfers" msgid="479119385461326763">"ファイルの転送（MTP）"</string>
+    <string name="usb_use_photo_transfers" msgid="7794775645350330454">"写真の転送（PTP）"</string>
+    <string name="usb_use_MIDI" msgid="5116404702692483166">"MIDI"</string>
+    <string name="usb_use" msgid="3372728031108932425">"USBの使用"</string>
+    <string name="inactive_apps_title" msgid="1317817863508274533">"無効なアプリ"</string>
+    <string name="inactive_app_inactive_summary" msgid="6768756967594202411">"無効。タップすると切り替わります。"</string>
+    <string name="inactive_app_active_summary" msgid="4512911571954375968">"有効。タップすると切り替わります。"</string>
+    <!-- no translation found for assist_access_context_title (2047105711005856521) -->
+    <skip />
+    <!-- no translation found for assist_access_context_summary (8365837347256022203) -->
+    <skip />
+    <!-- no translation found for assist_footer (2283187001990543739) -->
     <skip />
 </resources>
