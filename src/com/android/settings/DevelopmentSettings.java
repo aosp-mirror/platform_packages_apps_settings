@@ -23,6 +23,7 @@ import android.app.AlertDialog;
 import android.app.AppOpsManager;
 import android.app.AppOpsManager.PackageOps;
 import android.app.Dialog;
+import android.app.UiModeManager;
 import android.app.admin.DevicePolicyManager;
 import android.app.backup.IBackupManager;
 import android.bluetooth.BluetoothAdapter;
@@ -76,10 +77,8 @@ import com.android.internal.logging.MetricsLogger;
 import com.android.settings.fuelgauge.InactiveApps;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
-import com.android.settings.users.UserDetailsSettings;
 import com.android.settings.widget.SwitchBar;
 
-import java.lang.Process;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -181,6 +180,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
 
     private static final String TERMINAL_APP_PACKAGE = "com.android.terminal";
 
+    private static final String KEY_NIGHT_MODE = "night_mode";
+
     private static final int RESULT_DEBUG_APP = 1000;
     private static final int RESULT_MOCK_LOCATION_APP = 1001;
 
@@ -263,6 +264,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private ListPreference mAppProcessLimit;
 
     private SwitchPreference mShowAllANRs;
+
+    private ListPreference mNightModePreference;
 
     private final ArrayList<Preference> mAllPrefs = new ArrayList<Preference>();
 
@@ -423,6 +426,13 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             mAllPrefs.add(hdcpChecking);
             removePreferenceForProduction(hdcpChecking);
         }
+
+        mNightModePreference = (ListPreference) findPreference(KEY_NIGHT_MODE);
+        final UiModeManager uiManager = (UiModeManager) getSystemService(
+                Context.UI_MODE_SERVICE);
+        final int currentNightMode = uiManager.getNightMode();
+        mNightModePreference.setValue(String.valueOf(currentNightMode));
+        mNightModePreference.setOnPreferenceChangeListener(this);
     }
 
     private ListPreference addListPreference(String prefKey) {
@@ -1797,6 +1807,16 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             return true;
         } else if (preference == mTunerUiPref) {
             writeTweakUi(newValue);
+            return true;
+        } else if (preference == mNightModePreference) {
+            try {
+                final int value = Integer.parseInt((String) newValue);
+                final UiModeManager uiManager = (UiModeManager) getSystemService(
+                        Context.UI_MODE_SERVICE);
+                uiManager.setNightMode(value);
+            } catch (NumberFormatException e) {
+                Log.e(TAG, "could not persist night mode setting", e);
+            }
             return true;
         }
         return false;

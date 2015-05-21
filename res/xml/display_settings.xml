@@ -33,6 +33,7 @@
                 android:summary="@string/auto_brightness_summary"
                 android:persistent="false" />
 
+        <!-- Hide night mode for now
         <ListPreference
             android:key="night_mode"
             android:title="@string/night_mode_title"
@@ -40,7 +41,7 @@
             android:summary="@string/night_mode_summary"
             android:persistent="false"
             android:entries="@array/night_mode_entries"
-            android:entryValues="@array/night_mode_values" />
+            android:entryValues="@array/night_mode_values" /> -->
 
         <PreferenceScreen
                 android:key="wallpaper"
