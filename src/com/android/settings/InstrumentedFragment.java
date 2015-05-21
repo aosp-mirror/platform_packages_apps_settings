@@ -26,7 +26,8 @@ public abstract class InstrumentedFragment extends PreferenceFragment {
     // Declare new temporary categories here, starting after this value.
     public static final int UNDECLARED = 100000;
 
-    public static final int APPLICATIONS_MANAGE_ASSIST = UNDECLARED+1;
+    public static final int APPLICATIONS_MANAGE_ASSIST = UNDECLARED + 1;
+    public static final int PROCESS_STATS_SUMMARY = UNDECLARED + 2;
 
     /**
      * Declare the view of this category.

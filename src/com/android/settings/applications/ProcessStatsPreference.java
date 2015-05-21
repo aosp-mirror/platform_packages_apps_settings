@@ -21,8 +21,8 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
 import android.preference.Preference;
 import android.text.TextUtils;
+import android.text.format.Formatter;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 import com.android.settings.R;
@@ -30,11 +30,9 @@ import com.android.settings.R;
 public class ProcessStatsPreference extends Preference {
 
     private ProcStatsPackageEntry mEntry;
-    private final int mAvgColor;
-    private final int mMaxColor;
+    private final int mColor;
     private final int mRemainingColor;
-    private float mAvgRatio;
-    private float mMaxRatio;
+    private float mRatio;
     private float mRemainingRatio;
 
     public ProcessStatsPreference(Context context) {
@@ -53,13 +51,12 @@ public class ProcessStatsPreference extends Preference {
             int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         setLayoutResource(R.layout.app_item_linear_color);
-        mAvgColor = context.getColor(R.color.memory_avg_use);
-        mMaxColor = context.getColor(R.color.memory_max_use);
+        mColor = context.getColor(R.color.memory_max_use);
         mRemainingColor = context.getColor(R.color.memory_remaining);
     }
 
     public void init(ProcStatsPackageEntry entry, PackageManager pm, double maxMemory,
-            double weightToRam, double totalScale) {
+            double weightToRam, double totalScale, boolean avg) {
         mEntry = entry;
         setTitle(TextUtils.isEmpty(entry.mUiLabel) ? entry.mPackage : entry.mUiLabel);
         if (entry.mUiTargetApp != null) {
@@ -68,13 +65,11 @@ public class ProcessStatsPreference extends Preference {
             setIcon(new ColorDrawable(0));
         }
         boolean statsForeground = entry.mRunWeight > entry.mBgWeight;
-        setSummary(entry.mRunDuration > entry.mBgDuration ? entry.getRunningFrequency(getContext())
-                : entry.getBackgroundFrequency(getContext()));
-        mAvgRatio = (float) ((statsForeground ? entry.mRunWeight : entry.mBgWeight)
-                * weightToRam / maxMemory);
-        mMaxRatio = (float) ((statsForeground ? entry.mMaxRunMem : entry.mMaxBgMem)
-                * totalScale * 1024 / maxMemory - mAvgRatio);
-        mRemainingRatio = 1 - mAvgRatio - mMaxRatio;
+        double amount = avg ? (statsForeground ? entry.mRunWeight : entry.mBgWeight) * weightToRam
+                : (statsForeground ? entry.mMaxRunMem : entry.mMaxBgMem) * totalScale * 1024;
+        setSummary(Formatter.formatShortFileSize(getContext(), (long) amount));
+        mRatio = (float) (amount / maxMemory);
+        mRemainingRatio = 1 - mRatio;
     }
 
     public ProcStatsPackageEntry getEntry() {
@@ -86,7 +81,7 @@ public class ProcessStatsPreference extends Preference {
         super.onBindView(view);
 
         LinearColorBar linearColorBar = (LinearColorBar) view.findViewById(R.id.linear_color_bar);
-        linearColorBar.setColors(mAvgColor, mMaxColor, mRemainingColor);
-        linearColorBar.setRatios(mAvgRatio, mMaxRatio, mRemainingRatio);
+        linearColorBar.setColors(mColor, mColor, mRemainingColor);
+        linearColorBar.setRatios(mRatio, 0, mRemainingRatio);
     }
 }

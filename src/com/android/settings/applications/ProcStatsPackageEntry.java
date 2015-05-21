@@ -23,6 +23,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 
 import java.util.ArrayList;
 
@@ -89,10 +90,10 @@ public class ProcStatsPackageEntry implements Parcelable {
         final int N = mEntries.size();
         for (int i=0; i < N; i++) {
             ProcStatsEntry entry = mEntries.get(i);
-            mBgDuration += entry.mBgDuration;
+            mBgDuration = Math.max(entry.mBgDuration, mBgDuration);
             mAvgBgMem += entry.mAvgBgMem;
             mBgWeight += entry.mBgWeight;
-            mRunDuration += entry.mRunDuration;
+            mRunDuration = Math.max(entry.mRunDuration, mRunDuration);
             mAvgRunMem += entry.mAvgRunMem;
             mRunWeight += entry.mRunWeight;
 
@@ -161,12 +162,15 @@ public class ProcStatsPackageEntry implements Parcelable {
 
     // TODO: Find better place for this.
     public static CharSequence getFrequency(float amount, Context context) {
-        if (amount> ALWAYS_THRESHOLD) {
-            return context.getString(R.string.always_running);
-        } else if (amount> SOMETIMES_THRESHOLD) {
-            return context.getString(R.string.sometimes_running);
+        if (amount > ALWAYS_THRESHOLD) {
+            return context.getString(R.string.always_running,
+                    Utils.formatPercentage((int) (amount * 100)));
+        } else if (amount > SOMETIMES_THRESHOLD) {
+            return context.getString(R.string.sometimes_running,
+                    Utils.formatPercentage((int) (amount * 100)));
         } else {
-            return context.getString(R.string.rarely_running);
+            return context.getString(R.string.rarely_running,
+                    Utils.formatPercentage((int) (amount * 100)));
         }
     }
 }
