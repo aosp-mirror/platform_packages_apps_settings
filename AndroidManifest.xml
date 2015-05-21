@@ -1407,7 +1407,7 @@
             android:theme="@style/Theme.ConfirmDeviceCredentials"/>
 
         <activity android:name="ConfirmLockPassword"
-            android:windowSoftInputMode="stateVisible|adjustResize"
+            android:windowSoftInputMode="adjustResize"
             android:theme="@style/Theme.ConfirmDeviceCredentials"/>
 
         <activity android:name=".fingerprint.FingerprintSettings" android:exported="false"/>
@@ -1424,7 +1424,7 @@
         <!-- Note this must not be exported since it returns the password in the intent -->
         <activity android:name="ConfirmLockPassword$InternalActivity"
             android:exported="false"
-            android:windowSoftInputMode="stateVisible|adjustResize"
+            android:windowSoftInputMode="adjustResize"
             android:theme="@style/Theme.ConfirmDeviceCredentials"/>
 
         <activity android:name="SetupChooseLockGeneric"
