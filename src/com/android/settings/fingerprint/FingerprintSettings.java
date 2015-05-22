@@ -127,7 +127,6 @@ public class FingerprintSettings extends SubSettings {
 
         private FingerprintManager mFingerprintManager;
         private EditText mDialogTextField;
-        private PreferenceGroup mManageCategory;
         private CancellationSignal mFingerprintCancel;
         private int mMaxFingerprintAttempts;
         private byte[] mToken;
@@ -148,7 +147,7 @@ public class FingerprintSettings extends SubSettings {
             @Override
             public void onAuthenticationError(int errMsgId, CharSequence errString) {
                 // get activity will be null on a screen rotation
-                Activity activity = getActivity();
+                final Activity activity = getActivity();
                 if (activity != null) {
                     Toast.makeText(activity, errString, Toast.LENGTH_SHORT);
                 }
@@ -159,7 +158,10 @@ public class FingerprintSettings extends SubSettings {
 
             @Override
             public void onAuthenticationHelp(int helpMsgId, CharSequence helpString) {
-                Toast.makeText(getActivity(), helpString, Toast.LENGTH_SHORT);
+                final Activity activity = getActivity();
+                if (activity != null) {
+                    Toast.makeText(activity, helpString, Toast.LENGTH_SHORT);
+                }
             }
         };
         private RemovalCallback mRemoveCallback = new RemovalCallback() {
@@ -172,7 +174,10 @@ public class FingerprintSettings extends SubSettings {
 
             @Override
             public void onRemovalError(Fingerprint fp, int errMsgId, CharSequence errString) {
-                Toast.makeText(getActivity(), errString, Toast.LENGTH_SHORT);
+                final Activity activity = getActivity();
+                if (activity != null) {
+                    Toast.makeText(activity, errString, Toast.LENGTH_SHORT);
+                }
             }
         };
         private final Handler mHandler = new Handler() {
@@ -186,7 +191,7 @@ public class FingerprintSettings extends SubSettings {
                         retryFingerprint(true);
                     break;
                     case MSG_FINGER_AUTH_FAIL:
-                        retryFingerprint(false);
+                        retryFingerprint(true);
                     break;
                 }
             };
@@ -440,29 +445,33 @@ public class FingerprintSettings extends SubSettings {
 
         private Drawable getHighlightDrawable() {
             if (mHighlightDrawable == null) {
-                mHighlightDrawable = getActivity().getDrawable(R.drawable.preference_highlight);
+                final Activity activity = getActivity();
+                if (activity != null) {
+                    mHighlightDrawable = activity.getDrawable(R.drawable.preference_highlight);
+                }
             }
             return mHighlightDrawable;
         }
 
         private void highlightFingerprintItem(int fpId) {
             String prefName = genKey(fpId);
-            FingerprintPreference fpref =
-                    (FingerprintPreference) mManageCategory.findPreference(prefName);
+            FingerprintPreference fpref = (FingerprintPreference) findPreference(prefName);
             final Drawable highlight = getHighlightDrawable();
-            final View view = fpref.getView();
-            final int centerX = view.getWidth() / 2;
-            final int centerY = view.getHeight() / 2;
-            highlight.setHotspot(centerX, centerY);
-            view.setBackground(highlight);
-            view.setPressed(true);
-            mHandler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    view.setPressed(false);
-                    view.setBackground(null);
-                }
-            }, RESET_HIGHLIGHT_DELAY_MS);
+            if (highlight != null) {
+                final View view = fpref.getView();
+                final int centerX = view.getWidth() / 2;
+                final int centerY = view.getHeight() / 2;
+                highlight.setHotspot(centerX, centerY);
+                view.setBackground(highlight);
+                view.setPressed(true);
+                mHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        view.setPressed(false);
+                        view.setBackground(null);
+                    }
+                }, RESET_HIGHLIGHT_DELAY_MS);
+            }
         }
 
         private void launchChooseOrConfirmLock() {
