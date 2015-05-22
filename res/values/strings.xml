@@ -2993,7 +2993,7 @@
     <!-- Manage applications, individual application info screen, section heading for stuff relating to an app's storage settings. -->
     <string name="storage_label">Storage</string>
     <!-- Manage applications, individual application info screen,  heading for settings related to controlling whether this app is the default for some actions -->
-    <string name="auto_launch_label">Launch by default</string>
+    <string name="auto_launch_label">Open by default</string>
     <!-- Manage applications, individual application info screen,  heading for settings related to controlling whether this app is the default for some actions *and* whether the app was given permission by the user to create widgets -->
     <string name="auto_launch_label_generic">Defaults</string>
     <!-- Manage applications, individual application info screen,  heading for settings related to controlling application screen compatibility -->
@@ -6379,16 +6379,16 @@
 
    <!-- New strings needed for App Info 2 -->
    <!-- Preference label for app default launch settings [CHAR LIMIT=35]-->
-   <string name="launch_by_default">Launch by default</string>
+   <string name="launch_by_default">Open by default</string>
 
    <!-- Summary for app storage preference [CHAR LIMIT=15] -->
    <string name="storage_summary_format"><xliff:g id="size" example="30.00MB">%1$s</xliff:g> used in <xliff:g id="storage_type" example="internal storage">%2$s</xliff:g></string>
 
    <!-- Category name for App Launch -->
-   <string name="app_launch_domain_links_title">Domain links</string>
-   <string name="app_launch_open_domain_urls_title">Open Domain URLs</string>
-   <string name="app_launch_open_domain_urls_summary">Allow app to directly open Domain URLs</string>
-   <string name="app_launch_supported_domain_urls_title">Supported domains URLs</string>
+   <string name="app_launch_domain_links_title">App links</string>
+   <string name="app_launch_open_domain_urls_title">Open supported links</string>
+   <string name="app_launch_open_domain_urls_summary">Open without asking</string>
+   <string name="app_launch_supported_domain_urls_title">Supported links</string>
    <string name="app_launch_other_defaults_title">Other defaults</string>
 
    <!-- Summary for app storage preference -->
@@ -6492,22 +6492,22 @@
    <string name="tap_to_wake_summary">Double-tap anywhere on the screen to wake device</string>
 
     <!-- Label for the Domain URLs list that shows domain urls per App [CHAR LIMIT=30] -->
-    <string name="domain_urls_title">Domain URLs</string>
+    <string name="domain_urls_title">App links</string>
 
     <!-- Summary for an App that dont open any domain URLs [CHAR LIMIT=45] -->
-    <string name="domain_urls_summary_none">Don\u2019t open any domain URL</string>
+    <string name="domain_urls_summary_none">Don\u2019t open supported links</string>
 
     <!-- Summary of number of App that can open one and only one domain URLs [CHAR LIMIT=45] -->
-    <string name="domain_urls_summary_one">Open \u2018<xliff:g id="domain" example="mail.google.com">%s</xliff:g>\u2019</string>
+    <string name="domain_urls_summary_one">Open <xliff:g id="domain" example="mail.google.com">%s</xliff:g></string>
 
     <!-- Summary of number of App that can open several domain URLs [CHAR LIMIT=45] -->
-    <string name="domain_urls_summary_some">Open \u2018<xliff:g id="domain" example="mail.google.com">%s</xliff:g>\u2019 and related URLs</string>
+    <string name="domain_urls_summary_some">Open <xliff:g id="domain" example="mail.google.com">%s</xliff:g> and related URLs</string>
 
     <!-- Description of settings item that leads to list of all apps with Domain URLs [CHAR LIMIT=NONE] -->
     <plurals name="domain_urls_apps_summary">
-        <item quantity="zero">No app can open any domain URL</item>
-        <item quantity="one">One app can open its domain URLs</item>
-        <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> apps can open their domain URLs</item>
+        <item quantity="zero">No app can open any supported link</item>
+        <item quantity="one">One app can open its supported links</item>
+        <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> apps can open their supported links</item>
     </plurals>
 
     <!-- Fingerprint hint message when finger was not recognized.-->
