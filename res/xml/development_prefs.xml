@@ -65,6 +65,14 @@
         android:persistent="false"
         android:title="@string/system_ui_settings" />
 
+    <ListPreference
+        android:key="night_mode"
+        android:title="@string/night_mode_title"
+        android:summary="@string/night_mode_summary"
+        android:persistent="false"
+        android:entries="@array/night_mode_entries"
+        android:entryValues="@array/night_mode_values" />
+
     <PreferenceCategory android:key="debug_debugging_category"
             android:title="@string/debug_debugging_category">
 
