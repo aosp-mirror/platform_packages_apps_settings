@@ -65,7 +65,12 @@ abstract public class VoiceSettingsActivity extends Activity {
      */
     protected void notifySuccess(CharSequence prompt) {
         if (getVoiceInteractor() != null) {
-            getVoiceInteractor().submitRequest(new CompleteVoiceRequest(prompt, null));
+            getVoiceInteractor().submitRequest(new CompleteVoiceRequest(prompt, null) {
+                @Override
+                public void onCompleteResult(Bundle options) {
+                    finish();
+                }
+            });
         }
     }
 

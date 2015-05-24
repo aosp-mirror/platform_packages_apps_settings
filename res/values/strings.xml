@@ -6241,22 +6241,25 @@
     <!-- [CHAR LIMIT=60] Zen mode settings: End time option: Summary text value format when end time = next day -->
     <string name="zen_mode_end_time_next_day_summary_format"><xliff:g id="formatted_time" example="7:00 AM">%s</xliff:g> next day</string>
 
-    <!-- [CHAR LIMIT=NONE] Zen mode voice - spoken summary: alarms only duration indefinite. -->
-    <string name="zen_mode_summary_alarams_only_indefinite">Change to alarms only indefinitely</string>
+    <!-- [CHAR LIMIT=NONE] Zen mode summary spoken when changing mode by voice: switch to alarms only forever. -->
+    <string name="zen_mode_summary_alarms_only_indefinite">Change to alarms only indefinitely</string>
 
-    <!-- [CHAR LIMIT=NONE] Zen mode voice- spoken summary: alarms only duration minutes. -->
+    <!-- [CHAR LIMIT=NONE] Zen mode summary spoken when changing mode by voice: switch to alarms only for < 60 minutes. -->
     <plurals name="zen_mode_summary_alarms_only_by_minute">
         <item quantity="one">Change to alarms only for one minute until <xliff:g id="formattedTime" example="10:00 PM">%2$s</xliff:g></item>
         <item quantity="other">Change to alarms only for <xliff:g id="duration" example="2">%1$d</xliff:g> minutes (until <xliff:g id="formattedTime" example="10:00 PM">%2$s</xliff:g>)</item>
     </plurals>
 
-    <!-- [CHAR LIMIT=NONE] Zen mode voice- spoken summary: alarms only duration hours. -->
+    <!-- [CHAR LIMIT=NONE] Zen mode summary spoken when changing mode by voice: switch to alarms only for N hours. -->
     <plurals name="zen_mode_summary_alarms_only_by_hour">
         <item quantity="one">Change to alarms only for one hour until <xliff:g id="formattedTime" example="10:00 PM">%2$s</xliff:g></item>
         <item quantity="other">Change to alarms only for <xliff:g id="duration" example="2">%1$d</xliff:g> hours until <xliff:g id="formattedTime" example="10:00 PM">%2$s</xliff:g></item>
     </plurals>
 
-    <!-- [CHAR LIMIT=NONE] Zen mode voice - spoken summary: off. -->
+    <!-- [CHAR LIMIT=NONE] Zen mode summary spoken when changing mode by voice: switch to alarms only until a specific time. -->
+    <string name="zen_mode_summary_alarms_only_by_time">Change to alarms only until <xliff:g id="formattedTime" example="10:00 PM">%1$s</xliff:g></string>
+
+    <!-- [CHAR LIMIT=NONE] Zen mode summary spoken when changing mode by voice: Turn on all notifications. -->
     <string name="zen_mode_summary_always">Change to always interrupt</string>
 
     <!-- [CHAR LIMIT=20] Notifications settings: Apps section header -->
