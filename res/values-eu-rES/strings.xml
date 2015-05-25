@@ -343,9 +343,9 @@
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Hatz-marken erabilera"</string>
     <string name="fingerprint_add_title" msgid="1926752654454033904">"Gehitu hatz-marka"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5078060939636911795">"pantailaren blokeoa"</string>
-    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="4776063289827470602">
-      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> hatz-marka digital erregistratu dira</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> hatz-marka digital erregistratu da</item>
+    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="624961700033979880">
+      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> hatz-markaren konfigurazioa</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> hatz-markaren konfigurazioa</item>
     </plurals>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Konfigurazioa"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"Pantaila desblokeatzeko edo erosketak berresteko hatz-marka erabili nahi baduzu, hau egin behar duzu:"</string>
@@ -1065,6 +1065,8 @@
     <string name="reset_network_final_desc" msgid="6388371121099245116">"Sareko ezarpen guztiak berrezarri nahi dituzu? Ekintza hori ezin da desegin."</string>
     <string name="reset_network_final_button_text" msgid="1797434793741744635">"Berrezarri ezarpenak"</string>
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"Berrezarri?"</string>
+    <!-- no translation found for network_reset_not_available (7188610385577164676) -->
+    <skip />
     <string name="reset_network_complete_toast" msgid="787829973559541880">"Berrezarri dira sareko ezarpenak"</string>
     <string name="device_reset_title" msgid="2384019005638768076">"Berrezarri gailua"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"Berrezarri jatorrizko datuak"</string>
@@ -1228,7 +1230,7 @@
     <string name="lockpattern_pattern_confirmed_header" msgid="8455614172231880211">"Desblokeatzeko eredu berria"</string>
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"Berretsi"</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"Marraztu berriro"</string>
-    <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"Saiatu berriro"</string>
+    <string name="lockpattern_retry_button_text" msgid="3480423193273588166">"Garbitu"</string>
     <string name="lockpattern_continue_button_text" msgid="4723771754714471410">"Jarraitu"</string>
     <string name="lockpattern_settings_title" msgid="3207750489460466680">"Desblokeatzeko eredua"</string>
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"Eskatu eredua"</string>
@@ -1257,7 +1259,8 @@
     <string name="advanced_settings_summary" msgid="4016682978071086747">"Gaitu ezarpenen aukera gehiago"</string>
     <string name="application_info_label" msgid="5736524913065714880">"Aplikazioaren informazioa"</string>
     <string name="storage_label" msgid="8700867073480107253">"Memoria"</string>
-    <string name="auto_launch_label" msgid="3012617472833815382">"Abiarazi modu lehenetsian"</string>
+    <!-- no translation found for auto_launch_label (2669236885531442195) -->
+    <skip />
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"Balio lehenetsiak"</string>
     <string name="screen_compatibility_label" msgid="663250687205465394">"Pantailaren bateragarritasuna"</string>
     <string name="permissions_label" msgid="2605296874922726203">"Baimenak"</string>
@@ -1930,8 +1933,7 @@
     <string name="local_backup_password_toast_validation_failure" msgid="5646377234895626531">"Ezin izan da babeskopiaren pasahitza ezarri"</string>
     <string name="backup_erase_dialog_title" msgid="1027640829482174106"></string>
     <string name="backup_erase_dialog_message" msgid="5221011285568343155">"Wi-Fi pasahitzen, laster-marken, bestelako ezarpenen eta aplikazioetako datuen babeskopiak egiteari utzi eta Google zerbitzarietako kopia guztiak ezabatu nahi dituzu?"</string>
-    <!-- no translation found for fullbackup_erase_dialog_message (694766389396659626) -->
-    <skip />
+    <string name="fullbackup_erase_dialog_message" msgid="694766389396659626">"Gailuko datuen (adibidez, Wi-Fi pasahitzak eta deien historia) eta aplikazioetako datuen (besteak beste, ezarpenak eta aplikazioek gordetako fitxategiak) babeskopiak egiteari utzi nahi diozu eta urruneko zerbitzarietako kopia guztiak ezabatu nahi dituzu?"</string>
     <string name="fullbackup_data_summary" msgid="960850365007767734">"Egin babeskopiak automatikoki urrunetik, bai gailuetako datuenak (esaterako, Wi-Fi sareetako pasahitzak eta deien historia), bai aplikazioetako datuenak (esaterako, ezarpenak eta aplikazioek gordetako fitxategiak).\n\nBabeskopiak automatikoki egiteko aukera aktibatzean, gailuko eta aplikazioetako datuak urrunetik gordetzen dira aldizka. Aplikazioetako datuak aplikazioek gordetako edozein datu izan daitezke (garatzailearen ezarpenen arabera), eta isilpekoa izan litekeen informazioa ere sar daiteke (adibidez, kontaktuak, mezuak eta argazkiak)."</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"Gailuaren administrazio-ezarpenak"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"Gailu-administratzailea"</string>
@@ -2451,6 +2453,8 @@
     <string name="keywords_voice_input" msgid="3519547605812413860">"identifikatzailea idazketa hizketa hitz egin hizkuntza esku librekoa eskuak libre identifikazioa hitz iraingarria audioa historia bluetooth entzungailua"</string>
     <string name="keywords_text_to_speech_output" msgid="392447904221657930">"baloratu, hizkuntza, lehenetsia, hitz egin, hizketa, testua ahots bihurtzea, erabilerraztasuna, irakurlea, ikusmen-arazoak"</string>
     <string name="keywords_date_and_time" msgid="2631808108134830066">"erlojua, militarra"</string>
+    <!-- no translation found for keywords_network_reset (6346978754090557056) -->
+    <skip />
     <string name="keywords_factory_data_reset" msgid="4355133848707691977">"ezabatu, leheneratu, garbitu, kendu"</string>
     <string name="keywords_printing" msgid="1701778563617114846">"inprimagailua"</string>
     <string name="keywords_sounds_and_notifications" msgid="5965996187974887000">"bozgorailuaren soinu bip"</string>
@@ -2639,12 +2643,17 @@
     <string name="imei_information_title" msgid="8499085421609752290">"IMEIari buruzko informazioa"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEIari buruzko informazioa"</string>
     <string name="slot_number" msgid="3762676044904653577">"(<xliff:g id="SLOT_NUM">%1$d</xliff:g>. zirrikitua)"</string>
-    <string name="launch_by_default" msgid="2184141780491382435">"Abiarazi modu lehenetsian"</string>
+    <!-- no translation found for launch_by_default (1840761193189009248) -->
+    <skip />
     <string name="storage_summary_format" msgid="5419902362347539755">"Erabilitako lekua: <xliff:g id="SIZE">%1$s</xliff:g> (<xliff:g id="STORAGE_TYPE">%2$s</xliff:g>)"</string>
-    <string name="app_launch_domain_links_title" msgid="458956710410857777">"Domeinuaren estekak"</string>
-    <string name="app_launch_open_domain_urls_title" msgid="5821849783765291139">"Ireki domeinuaren URLak"</string>
-    <string name="app_launch_open_domain_urls_summary" msgid="7305739311608755281">"Baimendu aplikazioari domeinuaren URLak zuzenean irekitzea"</string>
-    <string name="app_launch_supported_domain_urls_title" msgid="8148494155921307572">"Onartutako domeinuaren URLak"</string>
+    <!-- no translation found for app_launch_domain_links_title (6789955009107320092) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_title (8914721351596745701) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_summary (5367573364240712217) -->
+    <skip />
+    <!-- no translation found for app_launch_supported_domain_urls_title (8250695258211477480) -->
+    <skip />
     <string name="app_launch_other_defaults_title" msgid="2516812499807835178">"Beste aplikazio lehenetsi batzuk"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"Erabilitako lekua: <xliff:g id="SIZE">%1$s</xliff:g> (<xliff:g id="STORAGE_TYPE">%2$s</xliff:g>)"</string>
     <string name="storage_type_internal" msgid="410824961149037234">"barneko memoria"</string>
@@ -2690,14 +2699,15 @@
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"<xliff:g id="COUNT_0">%d</xliff:g>/<xliff:g id="COUNT_1">%d</xliff:g> aplikazio baimenduta"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Sakatu aktibatzeko"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Sakatu birritan pantailako edozein puntu gailua aktibatzeko"</string>
-    <string name="domain_urls_title" msgid="8735310976048599572">"Domeinuaren URLak"</string>
-    <string name="domain_urls_summary_none" msgid="4817723415916239693">"Ez ireki domeinuaren URLrik"</string>
-    <string name="domain_urls_summary_one" msgid="4427559120855938432">"Ireki \"<xliff:g id="DOMAIN">%s</xliff:g>\""</string>
-    <string name="domain_urls_summary_some" msgid="2533219801400609818">"Ireki \"<xliff:g id="DOMAIN">%s</xliff:g>\" eta erlazionatutako URLak"</string>
-    <plurals name="domain_urls_apps_summary" formatted="false" msgid="6604886186235343653">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aplikaziok euren domeinuaren URLak ireki ditzakete</item>
-      <item quantity="one">Aplikazio batek bere domeinuaren URLak ireki ditzake</item>
-    </plurals>
+    <!-- no translation found for domain_urls_title (8762012672312435252) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_none (2639588015479657864) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_one (3704934031930978405) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_some (812936714383016364) -->
+    <skip />
+    <!-- no translation found for domain_urls_apps_summary (4322996467951692661) -->
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Ez da ezagutzen"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"Aplikazio lehenetsiak"</string>
     <string name="default_assist_title" msgid="8851464168639315795">"Laguntza-aplikazioa"</string>

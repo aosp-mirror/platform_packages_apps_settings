@@ -345,11 +345,11 @@
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Použiť odtlačok na"</string>
     <string name="fingerprint_add_title" msgid="1926752654454033904">"Pridať odtlačok"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5078060939636911795">"zámka obrazovky"</string>
-    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="4776063289827470602">
-      <item quantity="few"><xliff:g id="COUNT_1">%1$d</xliff:g> zaregistrované odtlačky</item>
-      <item quantity="many"><xliff:g id="COUNT_1">%1$d</xliff:g> zaregistrovaných odtlačkov</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> zaregistrovaných odtlačkov</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> zaregistrovaný odtlačok</item>
+    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="624961700033979880">
+      <item quantity="few">Nastavenie <xliff:g id="COUNT_1">%1$d</xliff:g> odtlačkov</item>
+      <item quantity="many">Nastavenie <xliff:g id="COUNT_1">%1$d</xliff:g> odtlačku</item>
+      <item quantity="other">Nastavenie <xliff:g id="COUNT_1">%1$d</xliff:g> odtlačkov</item>
+      <item quantity="one">Nastavenie <xliff:g id="COUNT_0">%1$d</xliff:g> odtlačku</item>
     </plurals>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Nastavenie odtlačku"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"Na to, aby ste mohli používať odtlačok prsta na odomknutie obrazovky alebo potvrdenie nákupov, musíte:"</string>
@@ -1083,6 +1083,7 @@
     <string name="reset_network_final_desc" msgid="6388371121099245116">"Chcete obnoviť všetky sieťové nastavenia? Toto akciu nie je možné vrátiť späť."</string>
     <string name="reset_network_final_button_text" msgid="1797434793741744635">"Obnoviť nastavenia"</string>
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"Obnoviť?"</string>
+    <string name="network_reset_not_available" msgid="7188610385577164676">"Tento používateľ nemôže resetovať nastavenia siete"</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"Sieťové nastavenia boli obnovené"</string>
     <string name="device_reset_title" msgid="2384019005638768076">"Obnoviť zariadenie"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"Obnovenie továrenských nastavení"</string>
@@ -1246,7 +1247,7 @@
     <string name="lockpattern_pattern_confirmed_header" msgid="8455614172231880211">"Nový bezpečnostný vzor"</string>
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"Potvrdiť"</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"Nakresliť znova"</string>
-    <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"Skúsiť znova"</string>
+    <string name="lockpattern_retry_button_text" msgid="3480423193273588166">"Vymazať"</string>
     <string name="lockpattern_continue_button_text" msgid="4723771754714471410">"Pokračovať"</string>
     <string name="lockpattern_settings_title" msgid="3207750489460466680">"Bezpečnostný vzor"</string>
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"Vyžadovať vzor"</string>
@@ -1275,7 +1276,7 @@
     <string name="advanced_settings_summary" msgid="4016682978071086747">"Povoliť ďalšie možnosti nastavení"</string>
     <string name="application_info_label" msgid="5736524913065714880">"Informácie o aplikácii"</string>
     <string name="storage_label" msgid="8700867073480107253">"Úložisko"</string>
-    <string name="auto_launch_label" msgid="3012617472833815382">"Spúšťať ako predvolenú"</string>
+    <string name="auto_launch_label" msgid="2669236885531442195">"Nastavenie predvoleného otvárania"</string>
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"Predvolené"</string>
     <string name="screen_compatibility_label" msgid="663250687205465394">"Kompatibilita obrazovky"</string>
     <string name="permissions_label" msgid="2605296874922726203">"Povolenia"</string>
@@ -1948,8 +1949,7 @@
     <string name="local_backup_password_toast_validation_failure" msgid="5646377234895626531">"Nastavenie záložného hesla zlyhalo"</string>
     <string name="backup_erase_dialog_title" msgid="1027640829482174106"></string>
     <string name="backup_erase_dialog_message" msgid="5221011285568343155">"Chcete zastaviť zálohovanie hesiel sietí Wi-Fi, záložiek, ďalších nastavení a údajov aplikácií a vymazať všetky kópie na serveroch Google?"</string>
-    <!-- no translation found for fullbackup_erase_dialog_message (694766389396659626) -->
-    <skip />
+    <string name="fullbackup_erase_dialog_message" msgid="694766389396659626">"Zastaviť zálohovanie údajov zariadenia (ako sú heslá sietí Wi-Fi a história hovorov) a údajov aplikácií (ako sú nastavenia a súbory uložené aplikáciami) a vymazať všetky kópie na vzdialených serveroch?"</string>
     <string name="fullbackup_data_summary" msgid="960850365007767734">"Automaticky vzdialene zálohujte údaje zariadenia (napr. heslá do sietí Wi-Fi a históriu hovorov) a údaje aplikácií (napr. nastavenia a súbory uložené aplikáciami). \n\nKeď zapnete automatické zálohovanie, údaje zariadenia a aplikácií sa budú pravidelne vzdialene ukladať. Údaje aplikácie môžu byť ľubovoľné informácie uložené aplikáciou (na základe nastavení vývojára) aj potenciálne citlivé údaje, ako sú kontakty, správy a fotky."</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"Nastavenia správy zariadení"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"Správca zariadení"</string>
@@ -2469,6 +2469,7 @@
     <string name="keywords_voice_input" msgid="3519547605812413860">"rozpoznávač vstup reč hovoriť jazyk súprava hands-free hand free rozpoznávanie nevhodné slovo história zvuku bluetooth náhlavná súprava"</string>
     <string name="keywords_text_to_speech_output" msgid="392447904221657930">"sadzba jazyk predvolená reč hovoriť tts zjednodušenie ovládania čítačka slepota"</string>
     <string name="keywords_date_and_time" msgid="2631808108134830066">"hodiny čas"</string>
+    <string name="keywords_network_reset" msgid="6346978754090557056">"obnoviť továrenské nastavenia"</string>
     <string name="keywords_factory_data_reset" msgid="4355133848707691977">"vymazať odstrániť obnoviť vymazanie odstránenie"</string>
     <string name="keywords_printing" msgid="1701778563617114846">"tlačiareň"</string>
     <string name="keywords_sounds_and_notifications" msgid="5965996187974887000">"zvukový signál reproduktora"</string>
@@ -2663,12 +2664,12 @@
     <string name="imei_information_title" msgid="8499085421609752290">"Informácie o kóde IMEI"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"Informácie súvisiace s kódom IMEI"</string>
     <string name="slot_number" msgid="3762676044904653577">"(Slot <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
-    <string name="launch_by_default" msgid="2184141780491382435">"Spúšťať ako predvolenú"</string>
+    <string name="launch_by_default" msgid="1840761193189009248">"Nastavenie predvoleného otvárania"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"V type úložiska <xliff:g id="STORAGE_TYPE">%2$s</xliff:g> je využité miesto s kapacitou <xliff:g id="SIZE">%1$s</xliff:g>"</string>
-    <string name="app_launch_domain_links_title" msgid="458956710410857777">"Odkazy na doménu"</string>
-    <string name="app_launch_open_domain_urls_title" msgid="5821849783765291139">"Otvoriť webové adresy domény"</string>
-    <string name="app_launch_open_domain_urls_summary" msgid="7305739311608755281">"Povoliť aplikácii priamo otvárať webové adresy domény"</string>
-    <string name="app_launch_supported_domain_urls_title" msgid="8148494155921307572">"Podporované webové adresy domény"</string>
+    <string name="app_launch_domain_links_title" msgid="6789955009107320092">"Odkazy v aplikácii"</string>
+    <string name="app_launch_open_domain_urls_title" msgid="8914721351596745701">"Otvoriť podporované odkazy"</string>
+    <string name="app_launch_open_domain_urls_summary" msgid="5367573364240712217">"Otvárať bez opýtania"</string>
+    <string name="app_launch_supported_domain_urls_title" msgid="8250695258211477480">"Podporované odkazy"</string>
     <string name="app_launch_other_defaults_title" msgid="2516812499807835178">"Ďalšie predvolené"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"V type úložiska <xliff:g id="STORAGE_TYPE">%2$s</xliff:g> je využité miesto s kapacitou <xliff:g id="SIZE">%1$s</xliff:g>"</string>
     <string name="storage_type_internal" msgid="410824961149037234">"interná pamäť"</string>
@@ -2718,15 +2719,15 @@
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"Povolené aplikácie: <xliff:g id="COUNT_0">%d</xliff:g> z <xliff:g id="COUNT_1">%d</xliff:g>"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Zobudiť klepnutím"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Zariadenie prebudíte dvojitým klepnutím na ľubovoľné miesto na obrazovke."</string>
-    <string name="domain_urls_title" msgid="8735310976048599572">"Webové adresy domény"</string>
-    <string name="domain_urls_summary_none" msgid="4817723415916239693">"Neotvárať žiadnu webovú adresu domény"</string>
-    <string name="domain_urls_summary_one" msgid="4427559120855938432">"Otvoriť doménu <xliff:g id="DOMAIN">%s</xliff:g>"</string>
-    <string name="domain_urls_summary_some" msgid="2533219801400609818">"Otvoriť doménu <xliff:g id="DOMAIN">%s</xliff:g> a súvisiace webové adresy"</string>
-    <plurals name="domain_urls_apps_summary" formatted="false" msgid="6604886186235343653">
-      <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> aplikácie môžu otvoriť webové adresy svojej domény</item>
-      <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> aplikácie môže otvoriť webovú adresu svojej domény</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aplikácií môže otvoriť webové adresy svojej domény</item>
-      <item quantity="one">Jedna aplikácia môže otvoriť webové adresy svojej domény</item>
+    <string name="domain_urls_title" msgid="8762012672312435252">"Odkazy v aplikácii"</string>
+    <string name="domain_urls_summary_none" msgid="2639588015479657864">"Neotvára podporované odkazy"</string>
+    <string name="domain_urls_summary_one" msgid="3704934031930978405">"Otvárajú doménu <xliff:g id="DOMAIN">%s</xliff:g>"</string>
+    <string name="domain_urls_summary_some" msgid="812936714383016364">"Otvárajú doménu <xliff:g id="DOMAIN">%s</xliff:g> a súvisiace webové adresy"</string>
+    <plurals name="domain_urls_apps_summary" formatted="false" msgid="4322996467951692661">
+      <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> aplikácie môžu otvoriť svoje podporované odkazy</item>
+      <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> aplikácie môže otvoriť svoje podporované odkazy</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aplikácií môže otvoriť svoje podporované odkazy</item>
+      <item quantity="one">Jedna aplikácia môže otvoriť svoje podporované odkazy</item>
     </plurals>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Nebol rozpoznaný"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"Predvolené aplikácie"</string>

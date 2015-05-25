@@ -343,9 +343,9 @@
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"இதற்குப் பயன்படுத்து:"</string>
     <string name="fingerprint_add_title" msgid="1926752654454033904">"கைரேகையைச் சேர்"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5078060939636911795">"திரைப் பூட்டு"</string>
-    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="4776063289827470602">
-      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> கைரேகைகள் பதிவுசெய்யப்பட்டன</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> கைரேகை பதிவுசெய்யப்பட்டது</item>
+    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="624961700033979880">
+      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> கைரேகைகளின் அமைவு</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> கைரேகையின் அமைவு</item>
     </plurals>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"கைரேகையை அமைக்கவும்"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"திரையைத் திறக்க அல்லது பர்ச்சேஸ்களை உறுதிப்படுத்த, உங்கள் கைரேகையைப் பயன்படுத்த, நீங்கள் செய்ய வேண்டியது:"</string>
@@ -1065,6 +1065,8 @@
     <string name="reset_network_final_desc" msgid="6388371121099245116">"எல்லா நெட்வொர்க் அமைப்புகளையும் மீட்டமைக்கவா? இதைச் செயல்தவிர்க்க முடியாது!"</string>
     <string name="reset_network_final_button_text" msgid="1797434793741744635">"அமைப்புகளை மீட்டமை"</string>
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"மீட்டமைக்கவா?"</string>
+    <!-- no translation found for network_reset_not_available (7188610385577164676) -->
+    <skip />
     <string name="reset_network_complete_toast" msgid="787829973559541880">"நெட்வொர்க் அமைப்புகள் மீட்டமைக்கப்பட்டன"</string>
     <string name="device_reset_title" msgid="2384019005638768076">"சாதனத்தை மீட்டமை"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"தரவின் ஆரம்பநிலை மீட்டமைப்பு"</string>
@@ -1228,7 +1230,7 @@
     <string name="lockpattern_pattern_confirmed_header" msgid="8455614172231880211">"திறப்பதற்கான புதிய வடிவம்"</string>
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"உறுதிசெய்க"</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"மீண்டும் வரைக"</string>
-    <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"மீண்டும் முயற்சிசெய்க"</string>
+    <string name="lockpattern_retry_button_text" msgid="3480423193273588166">"அழி"</string>
     <string name="lockpattern_continue_button_text" msgid="4723771754714471410">"தொடர்க"</string>
     <string name="lockpattern_settings_title" msgid="3207750489460466680">"திறப்பதற்கான வடிவம்"</string>
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"வடிவம் தேவை"</string>
@@ -1257,7 +1259,8 @@
     <string name="advanced_settings_summary" msgid="4016682978071086747">"மேலும் அமைப்பு விருப்பங்களை இயக்கு"</string>
     <string name="application_info_label" msgid="5736524913065714880">"பயன்பாட்டுத் தகவல்"</string>
     <string name="storage_label" msgid="8700867073480107253">"சேமிப்பிடம்"</string>
-    <string name="auto_launch_label" msgid="3012617472833815382">"இயல்பாகத் துவங்கு"</string>
+    <!-- no translation found for auto_launch_label (2669236885531442195) -->
+    <skip />
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"இயல்புநிலைகள்"</string>
     <string name="screen_compatibility_label" msgid="663250687205465394">"திரை இணக்கம்"</string>
     <string name="permissions_label" msgid="2605296874922726203">"அனுமதிகள்"</string>
@@ -1930,8 +1933,7 @@
     <string name="local_backup_password_toast_validation_failure" msgid="5646377234895626531">"காப்புப் பிரதி கடவுச்சொல்லை அமைப்பதில் தோல்வி"</string>
     <string name="backup_erase_dialog_title" msgid="1027640829482174106"></string>
     <string name="backup_erase_dialog_message" msgid="5221011285568343155">"உங்கள் வைஃபை கடவுச்சொற்கள், புத்தகக்குறிகள், பிற அமைப்பு மற்றும் பயன்பாட்டுத் தரவைக் காப்புப் பிரதியெடுப்பதையும், மேலும் Google சேவையகங்களில் உள்ள எல்லா நகல்களையும் அழிப்பதை நிறுத்தவா?"</string>
-    <!-- no translation found for fullbackup_erase_dialog_message (694766389396659626) -->
-    <skip />
+    <string name="fullbackup_erase_dialog_message" msgid="694766389396659626">"சாதனத் தரவையும் (வைஃபை கடவுச்சொற்கள் மற்றும் அழைப்பு வரலாறு போன்றவை) பயன்பாட்டுத் தரவையும் (பயன்பாடுகளில் சேமிக்கப்பட்டிருக்கும் அமைப்புகள் மற்றும் கோப்புகள் போன்றவை) காப்புப் பிரதி எடுப்பதை நிறுத்தி, தொலைநிலை சேவையகங்களில் உள்ள எல்லா நகல்களையும் அழிக்கவா?"</string>
     <string name="fullbackup_data_summary" msgid="960850365007767734">"சாதனத் தரவையும் (வைஃபை கடவுச்சொற்கள், அழைப்பு வரலாறு போன்றவை) பயன்பாட்டுத் தரவையும் (பயன்பாடுகளில் சேமிக்கப்பட்டிருக்கும் அமைப்புகள், கோப்புகள் போன்றவை) தொலைநிலையில் தானாகக் காப்புப் பிரதி எடுக்கும்.\n\nதானியங்கு காப்புப் பிரதியை இயக்கும் போது, சாதனம் மற்றும் பயன்பாட்டுத் தரவானது குறிப்பிட்ட கால இடைவெளியில் தொலைநிலையில் சேமிக்கப்படும். பயன்பாட்டுத் தரவு என்பது, தொடர்புகள், செய்திகள், படங்கள் போன்ற மிகவும் முக்கிய தரவு உட்பட, பயன்பாடு சேமித்த (டெவெலப்பர் அமைப்புகளைப் பொறுத்து) எந்தத் தரவாகவும் இருக்கலாம்."</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"சாதன நிர்வாகியின் அமைப்பு"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"சாதன நிர்வாகி"</string>
@@ -2451,6 +2453,8 @@
     <string name="keywords_voice_input" msgid="3519547605812413860">"கண்டறிவான் உள்ளீடு பேச்சு பேசு மொழி ஹேண்ட்ஸ்-ஃப்ரீ ஹேண்ட்ஃப்ரீ அறிதல் தீய வார்த்தை ஆடியோ வரலாறு புளுடூத் ஹெட்செட்"</string>
     <string name="keywords_text_to_speech_output" msgid="392447904221657930">"வீதம் மொழி இயல்பு பேசு பேசுதல் tts அணுகல்தன்மை ரீடர் பார்வையற்றவர்"</string>
     <string name="keywords_date_and_time" msgid="2631808108134830066">"கடிகாரம் மிலிட்டரி"</string>
+    <!-- no translation found for keywords_network_reset (6346978754090557056) -->
+    <skip />
     <string name="keywords_factory_data_reset" msgid="4355133848707691977">"அழி நீக்கு மீட்டமை அழி அகற்று"</string>
     <string name="keywords_printing" msgid="1701778563617114846">"பிரிண்டர்"</string>
     <string name="keywords_sounds_and_notifications" msgid="5965996187974887000">"ஸ்பீக்கர் பீப்"</string>
@@ -2639,12 +2643,17 @@
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI தகவல்"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI தொடர்புடைய தகவல்"</string>
     <string name="slot_number" msgid="3762676044904653577">"(ஸ்லாட்<xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
-    <string name="launch_by_default" msgid="2184141780491382435">"இயல்பாகத் துவங்கு"</string>
+    <!-- no translation found for launch_by_default (1840761193189009248) -->
+    <skip />
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="STORAGE_TYPE">%2$s</xliff:g> இல் <xliff:g id="SIZE">%1$s</xliff:g> பயன்படுத்தப்பட்டது"</string>
-    <string name="app_launch_domain_links_title" msgid="458956710410857777">"டொமைன் இணைப்புகள்"</string>
-    <string name="app_launch_open_domain_urls_title" msgid="5821849783765291139">"டொமைன் URLகளைத் திறத்தல்"</string>
-    <string name="app_launch_open_domain_urls_summary" msgid="7305739311608755281">"டொமைன் URLகளை நேரடியாகத் திறக்கப் பயன்பாட்டை அனுமதிக்கும்"</string>
-    <string name="app_launch_supported_domain_urls_title" msgid="8148494155921307572">"ஆதரிக்கப்படும் டொமைன் URLகள்"</string>
+    <!-- no translation found for app_launch_domain_links_title (6789955009107320092) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_title (8914721351596745701) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_summary (5367573364240712217) -->
+    <skip />
+    <!-- no translation found for app_launch_supported_domain_urls_title (8250695258211477480) -->
+    <skip />
     <string name="app_launch_other_defaults_title" msgid="2516812499807835178">"பிற இயல்புகள்"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="STORAGE_TYPE">%2$s</xliff:g> இல் <xliff:g id="SIZE">%1$s</xliff:g> பயன்படுத்தப்பட்டது"</string>
     <string name="storage_type_internal" msgid="410824961149037234">"அக நினைவகம்"</string>
@@ -2690,14 +2699,15 @@
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"அனுமதிக்கப்படும் பயன்பாடுகள்: <xliff:g id="COUNT_0">%d</xliff:g> / <xliff:g id="COUNT_1">%d</xliff:g>"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"இயக்க, தட்டவும்"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"சாதனத்தை இயக்க, திரையின் எந்த இடத்திலும் இருமுறை தட்டவும்"</string>
-    <string name="domain_urls_title" msgid="8735310976048599572">"டொமைன் URLகள்"</string>
-    <string name="domain_urls_summary_none" msgid="4817723415916239693">"எந்த டொமைன் URLஐயும் திறக்காது"</string>
-    <string name="domain_urls_summary_one" msgid="4427559120855938432">"\'<xliff:g id="DOMAIN">%s</xliff:g>\'ஐ மட்டும் திறக்கும்"</string>
-    <string name="domain_urls_summary_some" msgid="2533219801400609818">"\'<xliff:g id="DOMAIN">%s</xliff:g>\' மற்றும் தொடர்புடைய URLகளைத் திறக்கும்"</string>
-    <plurals name="domain_urls_apps_summary" formatted="false" msgid="6604886186235343653">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> பயன்பாடுகள், அவற்றின் டொமைன் URLகளைத் திறக்கலாம்</item>
-      <item quantity="one">ஒரு பயன்பாடு, தனது டொமைன் URLகளைத் திறக்கலாம்</item>
-    </plurals>
+    <!-- no translation found for domain_urls_title (8762012672312435252) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_none (2639588015479657864) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_one (3704934031930978405) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_some (812936714383016364) -->
+    <skip />
+    <!-- no translation found for domain_urls_apps_summary (4322996467951692661) -->
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"அறியப்படவில்லை"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"இயல்பு பயன்பாடுகள்"</string>
     <string name="default_assist_title" msgid="8851464168639315795">"அசிஸ்ட்"</string>

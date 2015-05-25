@@ -343,9 +343,9 @@
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Nota fingrafar fyrir"</string>
     <string name="fingerprint_add_title" msgid="1926752654454033904">"Bæta fingrafari við"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5078060939636911795">"skjálás"</string>
-    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="4776063289827470602">
-      <item quantity="one"><xliff:g id="COUNT_1">%1$d</xliff:g> fingrafar skráð</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> fingraför skráð</item>
+    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="624961700033979880">
+      <item quantity="one"><xliff:g id="COUNT_1">%1$d</xliff:g> fingrafar sett upp</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> fingraför sett upp</item>
     </plurals>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Uppsetning fingrafara"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"Til að þú getir notað fingrafarið þitt til að taka skjáinn úr lás eða staðfesta kaup þurfum við að:"</string>
@@ -1065,6 +1065,8 @@
     <string name="reset_network_final_desc" msgid="6388371121099245116">"Endurstilla allar netstillingar? Ekki er hægt að afturkalla þessa aðgerð."</string>
     <string name="reset_network_final_button_text" msgid="1797434793741744635">"Endurstilla stillingar"</string>
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"Endurstilla?"</string>
+    <!-- no translation found for network_reset_not_available (7188610385577164676) -->
+    <skip />
     <string name="reset_network_complete_toast" msgid="787829973559541880">"Netstillingar voru endurstilltar"</string>
     <string name="device_reset_title" msgid="2384019005638768076">"Endurstilla tæki"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"Núllstilling"</string>
@@ -1228,7 +1230,7 @@
     <string name="lockpattern_pattern_confirmed_header" msgid="8455614172231880211">"Nýja opnunarmynstrið"</string>
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"Staðfesta"</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"Teikna aftur"</string>
-    <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"Reyna aftur"</string>
+    <string name="lockpattern_retry_button_text" msgid="3480423193273588166">"Hreinsa"</string>
     <string name="lockpattern_continue_button_text" msgid="4723771754714471410">"Halda áfram"</string>
     <string name="lockpattern_settings_title" msgid="3207750489460466680">"Opnunarmynstur"</string>
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"Krefjast mynsturs"</string>
@@ -1257,7 +1259,8 @@
     <string name="advanced_settings_summary" msgid="4016682978071086747">"Virkja fleiri valkosti stillinga"</string>
     <string name="application_info_label" msgid="5736524913065714880">"Upplýsingar um forrit"</string>
     <string name="storage_label" msgid="8700867073480107253">"Geymsla"</string>
-    <string name="auto_launch_label" msgid="3012617472833815382">"Keyra sjálfgefið"</string>
+    <!-- no translation found for auto_launch_label (2669236885531442195) -->
+    <skip />
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"Sjálfgildi"</string>
     <string name="screen_compatibility_label" msgid="663250687205465394">"Samhæfi skjás"</string>
     <string name="permissions_label" msgid="2605296874922726203">"Heimildir"</string>
@@ -1930,8 +1933,7 @@
     <string name="local_backup_password_toast_validation_failure" msgid="5646377234895626531">"Villa við að velja aðgangsorð fyrir afritun"</string>
     <string name="backup_erase_dialog_title" msgid="1027640829482174106"></string>
     <string name="backup_erase_dialog_message" msgid="5221011285568343155">"Hætta að taka öryggisafrit af Wi-Fi aðgangsorðum, bókamerkjum, öðrum stillingum og gögnum forrita, og eyða öllum afritum af þjónum Google?"</string>
-    <!-- no translation found for fullbackup_erase_dialog_message (694766389396659626) -->
-    <skip />
+    <string name="fullbackup_erase_dialog_message" msgid="694766389396659626">"Viltu hætta að taka afrit af gögnum tækisins (s.s. Wi-Fi aðgangsorðum og símtalaferli) og forritsgögnum (s.s. stillingum og skrám sem forrit vista) og eyða öllum afritum af fjartengdum þjónum?"</string>
     <string name="fullbackup_data_summary" msgid="960850365007767734">"Taktu sjálfkrafa afrit af gögnum tækisins (s.s. Wi-Fi aðgangsorðum og símtalaferli) og forritsgögnum (s.s. stillingum og skrám sem forrit vista) og vistaðu á Google Drive.\n\nÞegar þú kveikir á sjálfvirkri afritun eru gögn tækisins og forrita reglulega vistuð fjartengt. Forritsgögn geta verið öll gögn sem forrit hefur vistað (fer eftir stillingum þróunaraðilans), þ.m.t. hugsanlega viðkvæm gögn á borð við tengiliði þína, skilaboð og myndir."</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"Stillingar tækisumsjónar"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"Stjórnandi tækis"</string>
@@ -2451,6 +2453,8 @@
     <string name="keywords_voice_input" msgid="3519547605812413860">"talgreinir inntak tal tala tungumál handfrjálst talkennsl raddkennsl dónalegt orð hljóð ferill bluetooth höfuðtól"</string>
     <string name="keywords_text_to_speech_output" msgid="392447904221657930">"hraði tungumál sjálfgefið tala tal talgervill aðgengi lesari blint"</string>
     <string name="keywords_date_and_time" msgid="2631808108134830066">"klukka tími"</string>
+    <!-- no translation found for keywords_network_reset (6346978754090557056) -->
+    <skip />
     <string name="keywords_factory_data_reset" msgid="4355133848707691977">"þurrka eyða endurheimta hreinsa Ffjarlægja"</string>
     <string name="keywords_printing" msgid="1701778563617114846">"prentari"</string>
     <string name="keywords_sounds_and_notifications" msgid="5965996187974887000">"hátalari hljóðmerki"</string>
@@ -2639,12 +2643,17 @@
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI-upplýsingar"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI-tengdar upplýsingar"</string>
     <string name="slot_number" msgid="3762676044904653577">"(Rauf<xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
-    <string name="launch_by_default" msgid="2184141780491382435">"Keyra sjálfgefið"</string>
+    <!-- no translation found for launch_by_default (1840761193189009248) -->
+    <skip />
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> í notkun í <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
-    <string name="app_launch_domain_links_title" msgid="458956710410857777">"Lénstenglar"</string>
-    <string name="app_launch_open_domain_urls_title" msgid="5821849783765291139">"Opna vefslóðir léns"</string>
-    <string name="app_launch_open_domain_urls_summary" msgid="7305739311608755281">"Leyfa forriti að opna vefslóðir léns beint"</string>
-    <string name="app_launch_supported_domain_urls_title" msgid="8148494155921307572">"Studdar vefslóðir léns"</string>
+    <!-- no translation found for app_launch_domain_links_title (6789955009107320092) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_title (8914721351596745701) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_summary (5367573364240712217) -->
+    <skip />
+    <!-- no translation found for app_launch_supported_domain_urls_title (8250695258211477480) -->
+    <skip />
     <string name="app_launch_other_defaults_title" msgid="2516812499807835178">"Aðrar sjálfgefnar stillingar"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> í notkun í <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
     <string name="storage_type_internal" msgid="410824961149037234">"innbyggðu minni"</string>
@@ -2690,14 +2699,15 @@
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"<xliff:g id="COUNT_0">%d</xliff:g> af <xliff:g id="COUNT_1">%d</xliff:g> forritum leyfð"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Ýta til að vekja"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Ýttu tvisvar hvar sem er á skjáinn til að vekja tækið."</string>
-    <string name="domain_urls_title" msgid="8735310976048599572">"Vefslóðir léns"</string>
-    <string name="domain_urls_summary_none" msgid="4817723415916239693">"Ekki opna hvaða vefslóð léns sem er"</string>
-    <string name="domain_urls_summary_one" msgid="4427559120855938432">"Opna „<xliff:g id="DOMAIN">%s</xliff:g>“"</string>
-    <string name="domain_urls_summary_some" msgid="2533219801400609818">"Opna „<xliff:g id="DOMAIN">%s</xliff:g>“ og tengdar vefslóðir"</string>
-    <plurals name="domain_urls_apps_summary" formatted="false" msgid="6604886186235343653">
-      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> forrit getur opnað vefslóðir lénsins síns</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> forrit geta opnað vefslóðir lénsins síns</item>
-    </plurals>
+    <!-- no translation found for domain_urls_title (8762012672312435252) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_none (2639588015479657864) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_one (3704934031930978405) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_some (812936714383016364) -->
+    <skip />
+    <!-- no translation found for domain_urls_apps_summary (4322996467951692661) -->
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Þekktist ekki"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"Sjálfgefin forrit"</string>
     <string name="default_assist_title" msgid="8851464168639315795">"Aðstoð"</string>

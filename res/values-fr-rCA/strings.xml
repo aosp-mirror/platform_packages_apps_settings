@@ -343,9 +343,9 @@
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Util. empr. dig. pour"</string>
     <string name="fingerprint_add_title" msgid="1926752654454033904">"Ajouter une empreinte digitale"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5078060939636911795">"verrouillage de l\'écran"</string>
-    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="4776063289827470602">
-      <item quantity="one"><xliff:g id="COUNT_1">%1$d</xliff:g> empreinte digitale enregistrée</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> empreintes digitales enregistrées</item>
+    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="624961700033979880">
+      <item quantity="one"><xliff:g id="COUNT_1">%1$d</xliff:g> empreinte digitale configurée</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> empreintes digitales configurées</item>
     </plurals>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Configuration d\'empreinte digitale"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"Pour utiliser votre empreinte digitale afin de déverrouiller l\'écran ou de confirmer des achats, nous devons effectuer les opérations suivantes :"</string>
@@ -1015,8 +1015,7 @@
     <string name="storage_wizard_move_progress_title" msgid="4443920302548035674">"Déplacement de <xliff:g id="APP">^1</xliff:g> en cours..."</string>
     <string name="storage_wizard_move_progress_body" msgid="7802577486578105609">"Ne retirez pas la mémoire de stockage « <xliff:g id="NAME">^1</xliff:g> » pendant le déplacement. \n\nL\'application « <xliff:g id="APP">^2</xliff:g> » ne sera pas disponible tant que l\'opération n\'est pas terminée."</string>
     <string name="storage_wizard_move_progress_cancel" msgid="542047237524588792">"Annuler le déplacement"</string>
-    <!-- no translation found for storage_wizard_slow_body (8010127667184768025) -->
-    <skip />
+    <string name="storage_wizard_slow_body" msgid="8010127667184768025">"Ce <xliff:g id="NAME_0">^1</xliff:g> ne semble pas rapide. \n\nVous pouvez continuer, mais les applications déplacées vers cet endroit risquent de se bloquer et les transferts de données pourront prendre du temps.\n\nVeuillez utiliser un <xliff:g id="NAME_1">^1</xliff:g> plus rapide pour obtenir de meilleures performances."</string>
     <string name="battery_status_title" msgid="9159414319574976203">"État de la batterie"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"Niveau de la batterie"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APN"</string>
@@ -1066,6 +1065,8 @@
     <string name="reset_network_final_desc" msgid="6388371121099245116">"Réinitialiser tous les paramètres réseau? Cette action est irréversible."</string>
     <string name="reset_network_final_button_text" msgid="1797434793741744635">"Réinitialiser les paramètres"</string>
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"Réinitialiser?"</string>
+    <!-- no translation found for network_reset_not_available (7188610385577164676) -->
+    <skip />
     <string name="reset_network_complete_toast" msgid="787829973559541880">"Les paramètres réseau ont été réinitialisés"</string>
     <string name="device_reset_title" msgid="2384019005638768076">"Réinitialiser l\'appareil"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"Rétablir configuration d\'usine"</string>
@@ -1229,7 +1230,7 @@
     <string name="lockpattern_pattern_confirmed_header" msgid="8455614172231880211">"Votre nouveau schéma de déverrouillage est le suivant :"</string>
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"Confirmer"</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"Redessiner"</string>
-    <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"Réessayer"</string>
+    <string name="lockpattern_retry_button_text" msgid="3480423193273588166">"Effacer"</string>
     <string name="lockpattern_continue_button_text" msgid="4723771754714471410">"Continuer"</string>
     <string name="lockpattern_settings_title" msgid="3207750489460466680">"Schéma de déverrouillage"</string>
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"Schéma obligatoire"</string>
@@ -1258,7 +1259,8 @@
     <string name="advanced_settings_summary" msgid="4016682978071086747">"Activer d\'autres paramètres"</string>
     <string name="application_info_label" msgid="5736524913065714880">"Informations sur l\'application"</string>
     <string name="storage_label" msgid="8700867073480107253">"Stockage"</string>
-    <string name="auto_launch_label" msgid="3012617472833815382">"Lancer par défaut"</string>
+    <!-- no translation found for auto_launch_label (2669236885531442195) -->
+    <skip />
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"Valeurs par défaut"</string>
     <string name="screen_compatibility_label" msgid="663250687205465394">"Compatibilité de l\'écran"</string>
     <string name="permissions_label" msgid="2605296874922726203">"Permissions"</string>
@@ -1931,10 +1933,8 @@
     <string name="local_backup_password_toast_validation_failure" msgid="5646377234895626531">"Échec de la définition du mot de passe de secours."</string>
     <string name="backup_erase_dialog_title" msgid="1027640829482174106"></string>
     <string name="backup_erase_dialog_message" msgid="5221011285568343155">"Voulez-vous vraiment arrêter de sauvegarder vos mots de passe Wi-Fi, vos favoris, ainsi que d\'autres paramètres et données d\'applications, et en effacer toutes les copies des serveurs Google?"</string>
-    <!-- no translation found for fullbackup_erase_dialog_message (694766389396659626) -->
-    <skip />
-    <!-- no translation found for fullbackup_data_summary (960850365007767734) -->
-    <skip />
+    <string name="fullbackup_erase_dialog_message" msgid="694766389396659626">"Voulez-vous vraiment arrêter de sauvegarder les données de l\'appareil (comme les mots de passe Wi-Fi et l\'historique des appels) et celles des applications (telles que les paramètres et les fichiers enregistrés par ces applications), et en effacer toutes les copies sur les serveurs distants?"</string>
+    <string name="fullbackup_data_summary" msgid="960850365007767734">"Sauvegardez automatiquement les données de l\'appareil (comme les mots de passe Wi-Fi et l\'historique des appels) et celles des applications (telles que les paramètres et les fichiers enregistrés par ces applications) à distance.\n\nLorsque vous activez la sauvegarde automatique, les données de l\'appareil et des applications sont enregistrées régulièrement à distance. Les données d\'applications correspondent à toutes les données enregistrées par une application (en fonction des paramètres que le développeur définit), y compris les données potentiellement confidentielles comme les contacts, les messages et les photos."</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"Paramètres d\'administration du périphérique"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"Administrateur du périphérique"</string>
     <string name="remove_device_admin" msgid="3596845261596451437">"Désactiver"</string>
@@ -2453,6 +2453,8 @@
     <string name="keywords_voice_input" msgid="3519547605812413860">"détecteur entrée voix parler langue mains libres reconnaissance mains libres terme choquant historique audio écouteur bluetooth"</string>
     <string name="keywords_text_to_speech_output" msgid="392447904221657930">"débit langue valeur par défaut parler discuter tts accessibilité lecteur aveugle"</string>
     <string name="keywords_date_and_time" msgid="2631808108134830066">"horloge militaire"</string>
+    <!-- no translation found for keywords_network_reset (6346978754090557056) -->
+    <skip />
     <string name="keywords_factory_data_reset" msgid="4355133848707691977">"réinitialiser supprimer restaurer effacer"</string>
     <string name="keywords_printing" msgid="1701778563617114846">"imprimante"</string>
     <string name="keywords_sounds_and_notifications" msgid="5965996187974887000">"haut-parleur signal sonore"</string>
@@ -2641,12 +2643,17 @@
     <string name="imei_information_title" msgid="8499085421609752290">"Information concernant le code IIEM"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"Information concernant le code IIEM"</string>
     <string name="slot_number" msgid="3762676044904653577">"(Fente <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
-    <string name="launch_by_default" msgid="2184141780491382435">"Lancement par défaut"</string>
+    <!-- no translation found for launch_by_default (1840761193189009248) -->
+    <skip />
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> utilisé dans <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
-    <string name="app_launch_domain_links_title" msgid="458956710410857777">"Liens de domaine"</string>
-    <string name="app_launch_open_domain_urls_title" msgid="5821849783765291139">"URL de domaine ouvert"</string>
-    <string name="app_launch_open_domain_urls_summary" msgid="7305739311608755281">"Autoriser l\'application à ouvrir directement les URL de domaine"</string>
-    <string name="app_launch_supported_domain_urls_title" msgid="8148494155921307572">"URL des domaines pris en charge"</string>
+    <!-- no translation found for app_launch_domain_links_title (6789955009107320092) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_title (8914721351596745701) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_summary (5367573364240712217) -->
+    <skip />
+    <!-- no translation found for app_launch_supported_domain_urls_title (8250695258211477480) -->
+    <skip />
     <string name="app_launch_other_defaults_title" msgid="2516812499807835178">"Autres défauts"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> utilisé dans <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
     <string name="storage_type_internal" msgid="410824961149037234">"mémoire interne"</string>
@@ -2692,20 +2699,19 @@
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"<xliff:g id="COUNT_0">%d</xliff:g> applications autorisées sur <xliff:g id="COUNT_1">%d</xliff:g>"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Toucher pour réveiller"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Double-touchez l\'écran pour réveiller l\'appareil"</string>
-    <string name="domain_urls_title" msgid="8735310976048599572">"URL de domaine"</string>
-    <string name="domain_urls_summary_none" msgid="4817723415916239693">"Ne pas ouvrir d\'URL de domaine"</string>
-    <string name="domain_urls_summary_one" msgid="4427559120855938432">"Ouvrir « <xliff:g id="DOMAIN">%s</xliff:g> »"</string>
-    <string name="domain_urls_summary_some" msgid="2533219801400609818">"Ouvrir « <xliff:g id="DOMAIN">%s</xliff:g>  » et les URL connexes"</string>
-    <plurals name="domain_urls_apps_summary" formatted="false" msgid="6604886186235343653">
-      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> application peut ouvrir ses URL de domaine</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> applications peuvent ouvrir leurs URL de domaine</item>
-    </plurals>
+    <!-- no translation found for domain_urls_title (8762012672312435252) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_none (2639588015479657864) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_one (3704934031930978405) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_some (812936714383016364) -->
+    <skip />
+    <!-- no translation found for domain_urls_apps_summary (4322996467951692661) -->
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Doigt non reconnu"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"Applications par défaut"</string>
-    <!-- no translation found for default_assist_title (8851464168639315795) -->
-    <skip />
-    <!-- no translation found for default_assist_none (4719591002003824614) -->
-    <skip />
+    <string name="default_assist_title" msgid="8851464168639315795">"Assistance"</string>
+    <string name="default_assist_none" msgid="4719591002003824614">"Aucune assistance par défaut"</string>
     <string name="default_browser_title" msgid="8101772675085814670">"Application de navigateur"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"Aucun navigateur par défaut"</string>
     <string name="default_phone_title" msgid="282005908059637350">"Application Téléphone"</string>
@@ -2749,10 +2755,7 @@
     <string name="inactive_apps_title" msgid="1317817863508274533">"Applications inactives"</string>
     <string name="inactive_app_inactive_summary" msgid="6768756967594202411">"Inactif. Touchez pour changer l\'état."</string>
     <string name="inactive_app_active_summary" msgid="4512911571954375968">"Actif. Touchez pour changer l\'état."</string>
-    <!-- no translation found for assist_access_context_title (2047105711005856521) -->
-    <skip />
-    <!-- no translation found for assist_access_context_summary (8365837347256022203) -->
-    <skip />
-    <!-- no translation found for assist_footer (2283187001990543739) -->
-    <skip />
+    <string name="assist_access_context_title" msgid="2047105711005856521">"Utiliser le contexte actuel"</string>
+    <string name="assist_access_context_summary" msgid="8365837347256022203">"Lorsque vous ouvrez l\'application d\'assistance, autorisez-la à voir ce qui est affiché à l\'écran"</string>
+    <string name="assist_footer" msgid="2283187001990543739">"Les applications d\'assistance vous aident à trouver l\'information utile et à agir en conséquence, sans que vous n\'ayez à demander quoi que ce soit. Certaines applications sont compatibles à la fois avec le lanceur d\'applications et les services de saisie vocale, de sorte que vous puissiez bénéficier d\'une assistance intégrée."</string>
 </resources>

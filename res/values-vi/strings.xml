@@ -343,9 +343,9 @@
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Sử dụng vân tay để"</string>
     <string name="fingerprint_add_title" msgid="1926752654454033904">"Thêm vân tay"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5078060939636911795">"khóa màn hình"</string>
-    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="4776063289827470602">
-      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> vân tay được đăng ký</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> vân tay được đăng ký</item>
+    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="624961700033979880">
+      <item quantity="other">Đã thiết lập <xliff:g id="COUNT_1">%1$d</xliff:g> tệp tham chiếu</item>
+      <item quantity="one">Đã thiết lập <xliff:g id="COUNT_0">%1$d</xliff:g> tệp tham chiếu</item>
     </plurals>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Thiết lập vân tay"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"Để sử dụng vân tay để mở khóa màn hình của bạn hoặc xác nhận mua hàng, chúng tôi cần phải:"</string>
@@ -1015,8 +1015,7 @@
     <string name="storage_wizard_move_progress_title" msgid="4443920302548035674">"Đang di chuyển <xliff:g id="APP">^1</xliff:g>…"</string>
     <string name="storage_wizard_move_progress_body" msgid="7802577486578105609">"Không tháo <xliff:g id="NAME">^1</xliff:g> trong khi di chuyển. \n\nỨng dụng <xliff:g id="APP">^2</xliff:g> trên thiết bị này sẽ không khả dụng cho tới khi hoàn tất di chuyển."</string>
     <string name="storage_wizard_move_progress_cancel" msgid="542047237524588792">"Hủy di chuyển"</string>
-    <!-- no translation found for storage_wizard_slow_body (8010127667184768025) -->
-    <skip />
+    <string name="storage_wizard_slow_body" msgid="8010127667184768025">"<xliff:g id="NAME_0">^1</xliff:g> này có vẻ chậm. \n\nBạn có thể tiếp tục nhưng ứng dụng đã di chuyển tới vị trí này có thể bị gián đoạn và quá trình truyền dữ liệu có thể mất nhiều thời gian. \n\nHãy xem xét sử dụng <xliff:g id="NAME_1">^1</xliff:g> nhanh hơn để đạt được hiệu suất tốt hơn."</string>
     <string name="battery_status_title" msgid="9159414319574976203">"Tình trạng pin"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"Mức pin"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APN"</string>
@@ -1066,6 +1065,8 @@
     <string name="reset_network_final_desc" msgid="6388371121099245116">"Đặt lại tất cả cài đặt mạng? Bạn không thể hoàn tác thao tác này!"</string>
     <string name="reset_network_final_button_text" msgid="1797434793741744635">"Đặt lại cài đặt"</string>
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"Đặt lại?"</string>
+    <!-- no translation found for network_reset_not_available (7188610385577164676) -->
+    <skip />
     <string name="reset_network_complete_toast" msgid="787829973559541880">"Cài đặt mạng đã được đặt lại"</string>
     <string name="device_reset_title" msgid="2384019005638768076">"Đặt lại thiết bị"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"Đặt lại về dữ liệu gốc"</string>
@@ -1229,7 +1230,7 @@
     <string name="lockpattern_pattern_confirmed_header" msgid="8455614172231880211">"Hình mở khóa mới của bạn"</string>
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"Xác nhận"</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"Vẽ lại"</string>
-    <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"Thử lại"</string>
+    <string name="lockpattern_retry_button_text" msgid="3480423193273588166">"Xóa"</string>
     <string name="lockpattern_continue_button_text" msgid="4723771754714471410">"Tiếp tục"</string>
     <string name="lockpattern_settings_title" msgid="3207750489460466680">"Hình mở khóa"</string>
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"Yêu cầu hình"</string>
@@ -1258,7 +1259,8 @@
     <string name="advanced_settings_summary" msgid="4016682978071086747">"Bật thêm tùy chọn cài đặt"</string>
     <string name="application_info_label" msgid="5736524913065714880">"Thông tin về ứng dụng"</string>
     <string name="storage_label" msgid="8700867073480107253">"Dung lượng"</string>
-    <string name="auto_launch_label" msgid="3012617472833815382">"Chạy theo mặc định"</string>
+    <!-- no translation found for auto_launch_label (2669236885531442195) -->
+    <skip />
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"Mặc định"</string>
     <string name="screen_compatibility_label" msgid="663250687205465394">"Khả năng tương thích với màn hình"</string>
     <string name="permissions_label" msgid="2605296874922726203">"Quyền"</string>
@@ -1931,10 +1933,8 @@
     <string name="local_backup_password_toast_validation_failure" msgid="5646377234895626531">"Đặt mật khẩu dự phòng không thành công"</string>
     <string name="backup_erase_dialog_title" msgid="1027640829482174106"></string>
     <string name="backup_erase_dialog_message" msgid="5221011285568343155">"Dừng sao lưu mật khẩu Wi-Fi, dấu trang, các cài đặt khác và dữ liệu ứng dụng của bạn đồng thời xóa tất cả bản sao trên các máy chủ Google?"</string>
-    <!-- no translation found for fullbackup_erase_dialog_message (694766389396659626) -->
-    <skip />
-    <!-- no translation found for fullbackup_data_summary (960850365007767734) -->
-    <skip />
+    <string name="fullbackup_erase_dialog_message" msgid="694766389396659626">"Dừng sao lưu dữ liệu thiết bị (chẳng hạn như mật khẩu Wi-Fi và lịch sử cuộc gọi) và dữ liệu ứng dụng (chẳng hạn như cài đặt và tệp được ứng dụng lưu trữ), đồng thời xóa tất cả các bản sao trên máy chủ từ xa?"</string>
+    <string name="fullbackup_data_summary" msgid="960850365007767734">"Tự động sao lưu từ xa dữ liệu của thiết bị (chẳng hạn như mật khẩu Wi-Fi và lịch sử cuộc gọi) cũng như dữ liệu ứng dụng (chẳng hạn như các cài đặt và các tệp được ứng dụng lưu trữ).\n\nKhi bạn bật tính năng sao lưu tự động, dữ liệu ứng dụng và thiết bị được lưu từ xa theo định kỳ. Dữ liệu ứng dụng có thể là bất kỳ dữ liệu nào mà ứng dụng đã lưu (dựa trên cài đặt của nhà phát triển), bao gồm dữ liệu nhạy cảm có thể có như danh bạ, tin nhắn và ảnh."</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"Quản lý thiết bị"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"Quản trị viên thiết bị"</string>
     <string name="remove_device_admin" msgid="3596845261596451437">"Hủy kích hoạt"</string>
@@ -2453,6 +2453,8 @@
     <string name="keywords_voice_input" msgid="3519547605812413860">"trình nhận dạng nhập giọng nói nói ngôn ngữ thiết bị rảnh tay nhận dạng thiết bị rảnh tay từ xúc phạm âm thanh lịch sử tai nghe bluetooth"</string>
     <string name="keywords_text_to_speech_output" msgid="392447904221657930">"xếp hạng ngôn ngữ mặc định nói đang nói tts trợ năng trình đọc khiếm thị"</string>
     <string name="keywords_date_and_time" msgid="2631808108134830066">"đồng hồ quân sự"</string>
+    <!-- no translation found for keywords_network_reset (6346978754090557056) -->
+    <skip />
     <string name="keywords_factory_data_reset" msgid="4355133848707691977">"xóa sạch xóa bỏ khôi phục xóa loại bỏ"</string>
     <string name="keywords_printing" msgid="1701778563617114846">"máy in"</string>
     <string name="keywords_sounds_and_notifications" msgid="5965996187974887000">"loa tiếng bíp"</string>
@@ -2641,12 +2643,17 @@
     <string name="imei_information_title" msgid="8499085421609752290">"Thông tin IMEI"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"Thông tin liên quan đến IMEI"</string>
     <string name="slot_number" msgid="3762676044904653577">"(Khe cắm<xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
-    <string name="launch_by_default" msgid="2184141780491382435">"Khởi chạy theo mặc định"</string>
+    <!-- no translation found for launch_by_default (1840761193189009248) -->
+    <skip />
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> đã được sử dụng trong <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
-    <string name="app_launch_domain_links_title" msgid="458956710410857777">"Liên kết miền"</string>
-    <string name="app_launch_open_domain_urls_title" msgid="5821849783765291139">"Mở URL miền"</string>
-    <string name="app_launch_open_domain_urls_summary" msgid="7305739311608755281">"Cho phép ứng dụng mở trực tiếp URL miền"</string>
-    <string name="app_launch_supported_domain_urls_title" msgid="8148494155921307572">"URL miền được hỗ trợ"</string>
+    <!-- no translation found for app_launch_domain_links_title (6789955009107320092) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_title (8914721351596745701) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_summary (5367573364240712217) -->
+    <skip />
+    <!-- no translation found for app_launch_supported_domain_urls_title (8250695258211477480) -->
+    <skip />
     <string name="app_launch_other_defaults_title" msgid="2516812499807835178">"Cài đặt mặc định khác"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> đã được sử dụng trong <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
     <string name="storage_type_internal" msgid="410824961149037234">"bộ nhớ trong"</string>
@@ -2692,20 +2699,19 @@
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"Đã cho phép <xliff:g id="COUNT_0">%d</xliff:g> trong số <xliff:g id="COUNT_1">%d</xliff:g> ứng dụng"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Nhấn để đánh thức"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Nhấn đúp vào vị trí bất kỳ trên màn hình để đánh thức thiết bị"</string>
-    <string name="domain_urls_title" msgid="8735310976048599572">"URL miền"</string>
-    <string name="domain_urls_summary_none" msgid="4817723415916239693">"Không mở bất kỳ URL miền nào"</string>
-    <string name="domain_urls_summary_one" msgid="4427559120855938432">"Mở \'<xliff:g id="DOMAIN">%s</xliff:g>\'"</string>
-    <string name="domain_urls_summary_some" msgid="2533219801400609818">"Mở \'<xliff:g id="DOMAIN">%s</xliff:g>\' và các URL có liên quan"</string>
-    <plurals name="domain_urls_apps_summary" formatted="false" msgid="6604886186235343653">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> ứng dụng có thể mở URL miền của mình</item>
-      <item quantity="one">Một ứng dụng có thể mở URL miền của mình</item>
-    </plurals>
+    <!-- no translation found for domain_urls_title (8762012672312435252) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_none (2639588015479657864) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_one (3704934031930978405) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_some (812936714383016364) -->
+    <skip />
+    <!-- no translation found for domain_urls_apps_summary (4322996467951692661) -->
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Không nhận dạng được"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"Ứng dụng mặc định"</string>
-    <!-- no translation found for default_assist_title (8851464168639315795) -->
-    <skip />
-    <!-- no translation found for default_assist_none (4719591002003824614) -->
-    <skip />
+    <string name="default_assist_title" msgid="8851464168639315795">"Trợ lý"</string>
+    <string name="default_assist_none" msgid="4719591002003824614">"Không có Trợ lý mặc định"</string>
     <string name="default_browser_title" msgid="8101772675085814670">"Ứng dụng trình duyệt"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"Không có trình duyệt mặc định"</string>
     <string name="default_phone_title" msgid="282005908059637350">"Ứng dụng Điện thoại"</string>
@@ -2749,10 +2755,7 @@
     <string name="inactive_apps_title" msgid="1317817863508274533">"Ứng dụng không hoạt động"</string>
     <string name="inactive_app_inactive_summary" msgid="6768756967594202411">"Không hoạt động. Chạm để chuyển đổi."</string>
     <string name="inactive_app_active_summary" msgid="4512911571954375968">"Đang hoạt động. Chạm để chuyển đổi."</string>
-    <!-- no translation found for assist_access_context_title (2047105711005856521) -->
-    <skip />
-    <!-- no translation found for assist_access_context_summary (8365837347256022203) -->
-    <skip />
-    <!-- no translation found for assist_footer (2283187001990543739) -->
-    <skip />
+    <string name="assist_access_context_title" msgid="2047105711005856521">"Sử dụng ngữ cảnh hiện tại"</string>
+    <string name="assist_access_context_summary" msgid="8365837347256022203">"Khi mở ứng dụng trợ lý, hãy cho ứng dụng biết bạn đang làm gì trên màn hình"</string>
+    <string name="assist_footer" msgid="2283187001990543739">"Ứng dụng trợ lý giúp bạn xác định và hành động dựa trên thông tin hữu ích mà không cần phải hỏi. Một số ứng dụng hỗ trợ cả dịch vụ nhập bằng giọng nói và trình khởi chạy để cung cấp cho bạn khả năng hỗ trợ được tích hợp."</string>
 </resources>

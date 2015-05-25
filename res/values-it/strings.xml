@@ -343,9 +343,9 @@
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Utilizza l\'impronta digitale per"</string>
     <string name="fingerprint_add_title" msgid="1926752654454033904">"Aggiungi impronta digitale"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5078060939636911795">"blocco schermo"</string>
-    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="4776063289827470602">
-      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> impronte digitali registrate</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> impronta digitale registrata</item>
+    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="624961700033979880">
+      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> fingerprint configurati</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> fingerprint configurato</item>
     </plurals>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Config. impr. digitale"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"Per sbloccare lo schermo o confermare acquisti con l\'impronta digitale, devi:"</string>
@@ -1065,6 +1065,8 @@
     <string name="reset_network_final_desc" msgid="6388371121099245116">"Reimpostare tutte le impostazioni di rete? Questa azione è irreversibile."</string>
     <string name="reset_network_final_button_text" msgid="1797434793741744635">"Reimposta impostazioni"</string>
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"Reimpostare?"</string>
+    <!-- no translation found for network_reset_not_available (7188610385577164676) -->
+    <skip />
     <string name="reset_network_complete_toast" msgid="787829973559541880">"Le impostazioni di rete sono state reimpostate"</string>
     <string name="device_reset_title" msgid="2384019005638768076">"Ripristina dispositivo"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"Ripristino dati di fabbrica"</string>
@@ -1228,7 +1230,7 @@
     <string name="lockpattern_pattern_confirmed_header" msgid="8455614172231880211">"Nuova sequenza di sblocco"</string>
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"Conferma"</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"Ricrea"</string>
-    <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"Riprova"</string>
+    <string name="lockpattern_retry_button_text" msgid="3480423193273588166">"Cancella"</string>
     <string name="lockpattern_continue_button_text" msgid="4723771754714471410">"Continua"</string>
     <string name="lockpattern_settings_title" msgid="3207750489460466680">"Sequenza di sblocco"</string>
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"Richiedi sequenza"</string>
@@ -1257,7 +1259,8 @@
     <string name="advanced_settings_summary" msgid="4016682978071086747">"Attiva altre impostazioni"</string>
     <string name="application_info_label" msgid="5736524913065714880">"Informazioni applicazione"</string>
     <string name="storage_label" msgid="8700867073480107253">"Archiviazione"</string>
-    <string name="auto_launch_label" msgid="3012617472833815382">"Avvia per impostazione predefinita"</string>
+    <!-- no translation found for auto_launch_label (2669236885531442195) -->
+    <skip />
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"Impostazioni predefinite"</string>
     <string name="screen_compatibility_label" msgid="663250687205465394">"Compatibilità schermo"</string>
     <string name="permissions_label" msgid="2605296874922726203">"Autorizzazioni"</string>
@@ -1930,8 +1933,7 @@
     <string name="local_backup_password_toast_validation_failure" msgid="5646377234895626531">"Impossibile impostare la password di backup"</string>
     <string name="backup_erase_dialog_title" msgid="1027640829482174106"></string>
     <string name="backup_erase_dialog_message" msgid="5221011285568343155">"Interrompere il backup delle password Wi‑Fi, dei segnalibri, di altre impostazioni e dei dati delle app, oltre a cancellare tutte le copie sui server di Google?"</string>
-    <!-- no translation found for fullbackup_erase_dialog_message (694766389396659626) -->
-    <skip />
+    <string name="fullbackup_erase_dialog_message" msgid="694766389396659626">"Interrompere il backup dei dati del dispositivo (come password Wi‑Fi e cronologia chiamate) e dei dati delle app (quali impostazioni e file memorizzati nelle app), oltre a cancellare tutte le copie sui server remoti?"</string>
     <string name="fullbackup_data_summary" msgid="960850365007767734">"Effettua il backup automatico dei dati del dispositivo (come password Wi-Fi e cronologia chiamate) e delle app (come impostazioni e file archiviati dalle app) da remoto.\n\nQuando attivi il backup automatico, i dati del dispositivo e delle app vengono salvati periodicamente da remoto. I dati delle app possono essere tutti i dati salvati da un\'app (in base alle impostazioni dello sviluppatore), inclusi i dati potenzialmente sensibili come contatti, messaggi e foto."</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"Impostazioni di amministrazione dispositivo"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"Amministratore dispositivo"</string>
@@ -2451,6 +2453,8 @@
     <string name="keywords_voice_input" msgid="3519547605812413860">"funzione di riconoscimento immissione vocale dire lingua vivavoce viva voce riconoscimento parola offensiva cronologia audio auricolare bluetooth"</string>
     <string name="keywords_text_to_speech_output" msgid="392447904221657930">"velocità lingua predefinita parlare voce tts accessibilità reader non vedenti"</string>
     <string name="keywords_date_and_time" msgid="2631808108134830066">"orologio 24 ore"</string>
+    <!-- no translation found for keywords_network_reset (6346978754090557056) -->
+    <skip />
     <string name="keywords_factory_data_reset" msgid="4355133848707691977">"cancellare eliminare ripristinare annullare rimuovere"</string>
     <string name="keywords_printing" msgid="1701778563617114846">"stampante"</string>
     <string name="keywords_sounds_and_notifications" msgid="5965996187974887000">"bip altoparlante"</string>
@@ -2639,12 +2643,17 @@
     <string name="imei_information_title" msgid="8499085421609752290">"Dati IMEI"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"Dati relativi all\'IMEI"</string>
     <string name="slot_number" msgid="3762676044904653577">"(Slot <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
-    <string name="launch_by_default" msgid="2184141780491382435">"Avvia per impostazione predefinita"</string>
+    <!-- no translation found for launch_by_default (1840761193189009248) -->
+    <skip />
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> in uso nella <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
-    <string name="app_launch_domain_links_title" msgid="458956710410857777">"Link di dominio"</string>
-    <string name="app_launch_open_domain_urls_title" msgid="5821849783765291139">"Apri gli URL di dominio"</string>
-    <string name="app_launch_open_domain_urls_summary" msgid="7305739311608755281">"Consenti all\'app di aprire direttamente gli URL di dominio"</string>
-    <string name="app_launch_supported_domain_urls_title" msgid="8148494155921307572">"URL di dominio supportati"</string>
+    <!-- no translation found for app_launch_domain_links_title (6789955009107320092) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_title (8914721351596745701) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_summary (5367573364240712217) -->
+    <skip />
+    <!-- no translation found for app_launch_supported_domain_urls_title (8250695258211477480) -->
+    <skip />
     <string name="app_launch_other_defaults_title" msgid="2516812499807835178">"Altri valori predefiniti"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> in uso nella <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
     <string name="storage_type_internal" msgid="410824961149037234">"memoria interna"</string>
@@ -2690,14 +2699,15 @@
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"Sono consentite <xliff:g id="COUNT_0">%d</xliff:g> app su <xliff:g id="COUNT_1">%d</xliff:g>"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Tocca per riattivare"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Tocca due volte un punto qualsiasi dello schermo per riattivare il dispositivo"</string>
-    <string name="domain_urls_title" msgid="8735310976048599572">"URL di dominio"</string>
-    <string name="domain_urls_summary_none" msgid="4817723415916239693">"Non aprire gli URL di dominio"</string>
-    <string name="domain_urls_summary_one" msgid="4427559120855938432">"Apri \"<xliff:g id="DOMAIN">%s</xliff:g>\""</string>
-    <string name="domain_urls_summary_some" msgid="2533219801400609818">"Apri \"<xliff:g id="DOMAIN">%s</xliff:g>\" e URL correlati"</string>
-    <plurals name="domain_urls_apps_summary" formatted="false" msgid="6604886186235343653">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> app possono aprire i relativi URL di dominio</item>
-      <item quantity="one">Un\'app può aprire i relativi URL di dominio</item>
-    </plurals>
+    <!-- no translation found for domain_urls_title (8762012672312435252) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_none (2639588015479657864) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_one (3704934031930978405) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_some (812936714383016364) -->
+    <skip />
+    <!-- no translation found for domain_urls_apps_summary (4322996467951692661) -->
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Non riconosciuto"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"App predefinite"</string>
     <string name="default_assist_title" msgid="8851464168639315795">"Assistenza"</string>

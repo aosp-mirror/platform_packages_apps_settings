@@ -345,11 +345,11 @@
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"השתמש בטביעות אצבע ל-"</string>
     <string name="fingerprint_add_title" msgid="1926752654454033904">"הוסף טביעת אצבע"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5078060939636911795">"נעילת מסך"</string>
-    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="4776063289827470602">
-      <item quantity="two"><xliff:g id="COUNT_1">%1$d</xliff:g> טביעות אצבעות נרשמו</item>
-      <item quantity="many"><xliff:g id="COUNT_1">%1$d</xliff:g> טביעות אצבעות נרשמו</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> טביעות אצבעות נרשמו</item>
-      <item quantity="one">טביעת אצבע <xliff:g id="COUNT_0">%1$d</xliff:g> נרשמה</item>
+    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="624961700033979880">
+      <item quantity="two"><xliff:g id="COUNT_1">%1$d</xliff:g> טביעות אצבע הוגדרו</item>
+      <item quantity="many"><xliff:g id="COUNT_1">%1$d</xliff:g> טביעות אצבע הוגדרו</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> טביעות אצבע הוגדרו</item>
+      <item quantity="one">טביעת אצבע <xliff:g id="COUNT_0">%1$d</xliff:g> הוגדרה</item>
     </plurals>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"הגדרה של טביעת אצבע"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"כדי להשתמש בטביעת האצבע לביטול נעילת המסך או אישור רכישות, יש לבצע את הפעולות הבאות:"</string>
@@ -1083,6 +1083,8 @@
     <string name="reset_network_final_desc" msgid="6388371121099245116">"לאפס את כל הגדרות הרשת? לא ניתן לבטל את הפעולה!"</string>
     <string name="reset_network_final_button_text" msgid="1797434793741744635">"אפס הגדרות"</string>
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"האם לאפס?"</string>
+    <!-- no translation found for network_reset_not_available (7188610385577164676) -->
+    <skip />
     <string name="reset_network_complete_toast" msgid="787829973559541880">"הגדרות הרשת אופסו"</string>
     <string name="device_reset_title" msgid="2384019005638768076">"אפס את המכשיר"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"איפוס נתוני יצרן"</string>
@@ -1246,7 +1248,7 @@
     <string name="lockpattern_pattern_confirmed_header" msgid="8455614172231880211">"קו ביטול הנעילה החדש שלך"</string>
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"אשר"</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"צייר שוב"</string>
-    <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"נסה שוב"</string>
+    <string name="lockpattern_retry_button_text" msgid="3480423193273588166">"נקה"</string>
     <string name="lockpattern_continue_button_text" msgid="4723771754714471410">"המשך"</string>
     <string name="lockpattern_settings_title" msgid="3207750489460466680">"קו ביטול נעילה"</string>
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"דרוש קו"</string>
@@ -1275,7 +1277,8 @@
     <string name="advanced_settings_summary" msgid="4016682978071086747">"אפשר עוד אפשרויות הגדרה."</string>
     <string name="application_info_label" msgid="5736524913065714880">"פרטי אפליקציה"</string>
     <string name="storage_label" msgid="8700867073480107253">"אחסון"</string>
-    <string name="auto_launch_label" msgid="3012617472833815382">"הפעל כברירת מחדל"</string>
+    <!-- no translation found for auto_launch_label (2669236885531442195) -->
+    <skip />
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"ברירות מחדל"</string>
     <string name="screen_compatibility_label" msgid="663250687205465394">"תאימות מסך"</string>
     <string name="permissions_label" msgid="2605296874922726203">"הרשאות"</string>
@@ -1948,8 +1951,7 @@
     <string name="local_backup_password_toast_validation_failure" msgid="5646377234895626531">"הגדרת סיסמת גיבוי נכשלה"</string>
     <string name="backup_erase_dialog_title" msgid="1027640829482174106"></string>
     <string name="backup_erase_dialog_message" msgid="5221011285568343155">"‏האם להפסיק לגבות את סיסמאות ה-Wi-Fi, הסימניות, הגדרות אחרות ונתוני האפליקציות שלך ולמחוק את כל העותקים משרתי Google?"</string>
-    <!-- no translation found for fullbackup_erase_dialog_message (694766389396659626) -->
-    <skip />
+    <string name="fullbackup_erase_dialog_message" msgid="694766389396659626">"‏האם להפסיק לגבות את נתוני המכשיר (כמו סיסמאות לרשתות Wi-Fi והיסטוריית שיחות) ונתוני אפליקציות (כמו הגדרות וקבצים המאוחסנים על ידי אפליקציות) ולמחוק את כל העותקים בשרתים מרוחקים?"</string>
     <string name="fullbackup_data_summary" msgid="960850365007767734">"‏גבה מרחוק באופן אוטומטי נתונים מהמכשיר (כמו סיסמאות לרשתות Wi-Fi והיסטוריית שיחות) ונתוני אפליקציות (כמו הגדרות וקבצים שאוחסנו על ידי אפליקציות) אל Google Drive.‏\n\nכשתפעיל את הגיבוי האוטומטי, נתוני המכשיר והאפליקציות יישמרו מדי פעם באופן מרוחק. נתוני אפליקציות יכולים להיות מכל סוג שהאפליקציה שומרת (בהתבסס על הגדרות המפתח), כולל נתונים שעשויים להיות רגישים, כמו אנשי קשר, הודעות ותמונות."</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"הגדרות ניהול מכשיר"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"מנהל מכשיר"</string>
@@ -2469,6 +2471,8 @@
     <string name="keywords_voice_input" msgid="3519547605812413860">"‏מזהה קלט דיבור דבר שפה דיבורית ללא מגע זיהוי מילה פוגענית היסטוריית אודיו Bluetooth אוזניות"</string>
     <string name="keywords_text_to_speech_output" msgid="392447904221657930">"‏דירוג שפה ברירת מחדל לדבר מדבר tts נגישות קורא עיוור"</string>
     <string name="keywords_date_and_time" msgid="2631808108134830066">"שעון צבאי"</string>
+    <!-- no translation found for keywords_network_reset (6346978754090557056) -->
+    <skip />
     <string name="keywords_factory_data_reset" msgid="4355133848707691977">"נגב מחק שחזר נקה הסר"</string>
     <string name="keywords_printing" msgid="1701778563617114846">"מדפסת"</string>
     <string name="keywords_sounds_and_notifications" msgid="5965996187974887000">"צפצוף רמקול"</string>
@@ -2663,12 +2667,17 @@
     <string name="imei_information_title" msgid="8499085421609752290">"‏פרטי IMEI"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"‏מידע הקשור ל-IMEI"</string>
     <string name="slot_number" msgid="3762676044904653577">"(חריץ <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
-    <string name="launch_by_default" msgid="2184141780491382435">"הפעל כברירת מחדל"</string>
+    <!-- no translation found for launch_by_default (1840761193189009248) -->
+    <skip />
     <string name="storage_summary_format" msgid="5419902362347539755">"נעשה שימוש ב-<xliff:g id="SIZE">%1$s</xliff:g> ב<xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
-    <string name="app_launch_domain_links_title" msgid="458956710410857777">"קישורים לדומיין"</string>
-    <string name="app_launch_open_domain_urls_title" msgid="5821849783765291139">"פתיחת כתובות אתרים של הדומיין"</string>
-    <string name="app_launch_open_domain_urls_summary" msgid="7305739311608755281">"התר לאפליקציה לפתוח ישירות את כתובות האתרים של הדומיין"</string>
-    <string name="app_launch_supported_domain_urls_title" msgid="8148494155921307572">"כתובות אתרים של דומיינים נתמכים"</string>
+    <!-- no translation found for app_launch_domain_links_title (6789955009107320092) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_title (8914721351596745701) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_summary (5367573364240712217) -->
+    <skip />
+    <!-- no translation found for app_launch_supported_domain_urls_title (8250695258211477480) -->
+    <skip />
     <string name="app_launch_other_defaults_title" msgid="2516812499807835178">"ברירות מחדל אחרות"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"נעשה שימוש ב-<xliff:g id="SIZE">%1$s</xliff:g> ב<xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
     <string name="storage_type_internal" msgid="410824961149037234">"זיכרון הפנימי"</string>
@@ -2718,16 +2727,15 @@
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"<xliff:g id="COUNT_0">%d</xliff:g> מתוך <xliff:g id="COUNT_1">%d</xliff:g> אפליקציות קיבלו הרשאה"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"הקש כדי להעיר"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"הקש פעמיים בנקודה כלשהי במסך כדי להעיר את המכשיר"</string>
-    <string name="domain_urls_title" msgid="8735310976048599572">"כתובות אתרים של דומיינים"</string>
-    <string name="domain_urls_summary_none" msgid="4817723415916239693">"לא פותחת כתובות אתרים של דומיינים"</string>
-    <string name="domain_urls_summary_one" msgid="4427559120855938432">"פותחת את \'<xliff:g id="DOMAIN">%s</xliff:g>\'"</string>
-    <string name="domain_urls_summary_some" msgid="2533219801400609818">"פותחת את \'<xliff:g id="DOMAIN">%s</xliff:g>\' וכתובות אתרים קשורות"</string>
-    <plurals name="domain_urls_apps_summary" formatted="false" msgid="6604886186235343653">
-      <item quantity="two"><xliff:g id="COUNT">%d</xliff:g> אפליקציות יכולות לפתוח את כתובות האתרים של הדומיין שלהן</item>
-      <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> אפליקציות יכולות לפתוח את כתובות האתרים של הדומיין שלהן</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> אפליקציות יכולות לפתוח את כתובות האתרים של הדומיין שלהן</item>
-      <item quantity="one">אפליקציה אחת יכולה לפתוח את כתובות האתרים של הדומיין שלה</item>
-    </plurals>
+    <!-- no translation found for domain_urls_title (8762012672312435252) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_none (2639588015479657864) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_one (3704934031930978405) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_some (812936714383016364) -->
+    <skip />
+    <!-- no translation found for domain_urls_apps_summary (4322996467951692661) -->
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"לא זוהתה"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"אפליקציות בברירת מחדל"</string>
     <string name="default_assist_title" msgid="8851464168639315795">"מסייע"</string>

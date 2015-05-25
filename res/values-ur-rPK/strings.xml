@@ -343,9 +343,9 @@
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"فنگر پرنٹ استعمال کریں برائے"</string>
     <string name="fingerprint_add_title" msgid="1926752654454033904">"فنگر پرنٹ شامل کریں"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5078060939636911795">"اسکرین لاک"</string>
-    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="4776063289827470602">
-      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> فنگر پرنٹس کا اندراج کر لیا گیا</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> فنگر پرنٹ کا اندراج کر لیا گیا</item>
+    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="624961700033979880">
+      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> فنگر پرنٹس ترتیب دیے گئے</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> فنگر پرنٹ ترتیب دیا گیا</item>
     </plurals>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"فنگر پرنٹ سیٹ اپ"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"آپ کی اسکرین کو غیر مقفل کرنے یا خریداریوں کی توثیق کرنے کیلئے آپ کے فنگر پرنٹ کا استعمال کرنے کیلئے، ہمیں یہ کرنے کی ضرورت ہوگی:"</string>
@@ -1015,8 +1015,7 @@
     <string name="storage_wizard_move_progress_title" msgid="4443920302548035674">"<xliff:g id="APP">^1</xliff:g> کو منتقل کیا جا رہا ہے…"</string>
     <string name="storage_wizard_move_progress_body" msgid="7802577486578105609">"‏منتقلی کے دوران <xliff:g id="NAME">^1</xliff:g> کو نہ ہٹائیں۔ ‎\n\n‎اس آلہ پر <xliff:g id="APP">^2</xliff:g> ایپ منتقلی مکمل ہونے تک دستیاب نہیں ہوگی۔"</string>
     <string name="storage_wizard_move_progress_cancel" msgid="542047237524588792">"منتقلی منسوخ کریں"</string>
-    <!-- no translation found for storage_wizard_slow_body (8010127667184768025) -->
-    <skip />
+    <string name="storage_wizard_slow_body" msgid="8010127667184768025">"یہ <xliff:g id="NAME_0">^1</xliff:g> سست لگ رہا ہے۔ \n\nآپ جاری رکھ سکتے ہیں، لیکن اس مقام میں منتقل کردہ ایپس رک سکتی ہیں اور ڈیٹا کی منتقلیوں میں کافی وقت لگ سکتا ہے۔ \n\nبہتر کارکردگی کیلئے تیز تر <xliff:g id="NAME_1">^1</xliff:g> استعمال کرنے پر غور کریں۔"</string>
     <string name="battery_status_title" msgid="9159414319574976203">"بیٹری کا اسٹیٹس"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"بیٹری کی سطح"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APNs"</string>
@@ -1066,6 +1065,8 @@
     <string name="reset_network_final_desc" msgid="6388371121099245116">"نیٹ ورک کی سبھی ترتیبات کو دوبارہ ترتیب دیں؟ آپ اس کارروائی کو کالعدم نہیں کر سکتے ہیں!"</string>
     <string name="reset_network_final_button_text" msgid="1797434793741744635">"ترتیبات دوبارہ ترتیب دیں"</string>
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"دوبارہ ترتیب دیں؟"</string>
+    <!-- no translation found for network_reset_not_available (7188610385577164676) -->
+    <skip />
     <string name="reset_network_complete_toast" msgid="787829973559541880">"نیٹ ورک کی ترتیبات کو دوبارہ ترتیب دیا گیا ہے"</string>
     <string name="device_reset_title" msgid="2384019005638768076">"آلہ کو دوبارہ ترتیب دیں"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"فیکٹری ڈیٹا ری سیٹ"</string>
@@ -1229,7 +1230,7 @@
     <string name="lockpattern_pattern_confirmed_header" msgid="8455614172231880211">"آپ کا غیر مقفل کرنے کا نیا پیٹرن"</string>
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"توثیق کریں"</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"دوبارہ ڈرا کریں"</string>
-    <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"دوبارہ کوشش کریں"</string>
+    <string name="lockpattern_retry_button_text" msgid="3480423193273588166">"صاف کریں"</string>
     <string name="lockpattern_continue_button_text" msgid="4723771754714471410">"جاری رکھیں"</string>
     <string name="lockpattern_settings_title" msgid="3207750489460466680">"غیر مقفل کرنے کا پیٹرن"</string>
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"پیٹرن درکار ہے"</string>
@@ -1258,7 +1259,8 @@
     <string name="advanced_settings_summary" msgid="4016682978071086747">"مزید ترتیبات اختیارات کو فعال کریں"</string>
     <string name="application_info_label" msgid="5736524913065714880">"ایپ کی معلومات"</string>
     <string name="storage_label" msgid="8700867073480107253">"اسٹوریج"</string>
-    <string name="auto_launch_label" msgid="3012617472833815382">"بطور ڈیفالٹ شروع کریں"</string>
+    <!-- no translation found for auto_launch_label (2669236885531442195) -->
+    <skip />
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"ڈیفالٹس"</string>
     <string name="screen_compatibility_label" msgid="663250687205465394">"اسکرین کی موزونیت"</string>
     <string name="permissions_label" msgid="2605296874922726203">"اجازتیں"</string>
@@ -1931,10 +1933,8 @@
     <string name="local_backup_password_toast_validation_failure" msgid="5646377234895626531">"بیک اپ پاس ورڈ ترتیب دینے میں ناکامی"</string>
     <string name="backup_erase_dialog_title" msgid="1027640829482174106"></string>
     <string name="backup_erase_dialog_message" msgid="5221011285568343155">"‏اپنے Wi‑Fi پاس ورڈز، بُک مارکس، دوسری ترتیبات اور ایپ کے ڈیٹا کا بیک اپ لینا بند کریں، ساتھ ہی Google سرورز پر موجود سبھی کاپیاں حذف کریں۔"</string>
-    <!-- no translation found for fullbackup_erase_dialog_message (694766389396659626) -->
-    <skip />
-    <!-- no translation found for fullbackup_data_summary (960850365007767734) -->
-    <skip />
+    <string name="fullbackup_erase_dialog_message" msgid="694766389396659626">"‏آلہ کے ڈیٹا (جیسے کہ Wi-Fi پاس ورڈز اور کال کی سرگزشت) اور ایپ ڈیٹا (جیسے کہ ایپس کی جانب سے اسٹور کردہ ترتیبات اور فائلز) کا بیک اپ لینا بند کریں، نیز ریموٹ سرورز پر موجود سبھی کاپیاں مٹائیں؟"</string>
+    <string name="fullbackup_data_summary" msgid="960850365007767734">"‏خودکار طریقے سے دور سے آلہ کے ڈیٹا (جیسے کہ Wi-Fi پاس ورڈز اور کال کی سرگزشت) اور ایپ ڈیٹا (جیسے کہ ایپس کی جانب سے اسٹور کردہ ترتیبات اور فائلز) کا بیک اپ لیں۔\n\nجب آپ خودکار بیک اپ آن کرتے ہیں تو آلہ اور ایپ کا ڈیٹا وقفہ وقفہ پر دور سے محفوظ کیا جاتا ہے۔ ممکنہ طور پر حساس ڈیٹا مثلاً رابطے، پیغامات اور تصاویر سمیت ایپ ڈیٹا کوئی بھی ایسا ڈیٹا ہو سکتا ہے جسے کسی ایپ نے (ڈیولپر ترتیبات کی بنیاد پر) محفوظ کیا ہو۔"</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"آلہ کے نظم و نسق کی ترتیبات"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"آلہ کا منتظم"</string>
     <string name="remove_device_admin" msgid="3596845261596451437">"غیر فعال کریں"</string>
@@ -2453,6 +2453,8 @@
     <string name="keywords_voice_input" msgid="3519547605812413860">"شناخت کار ان پٹ تقریر بولیں زبان ہینڈز فری ہینڈ فری شناخت ناگوار لفظ آڈیو سرگزشت بلوٹوتھ ہیڈ سیٹ"</string>
     <string name="keywords_text_to_speech_output" msgid="392447904221657930">"‏درجہ دیں زبان ڈیفالٹ بولیں بولنا tts حالت رسائی نابینا"</string>
     <string name="keywords_date_and_time" msgid="2631808108134830066">"گھڑی فوجی"</string>
+    <!-- no translation found for keywords_network_reset (6346978754090557056) -->
+    <skip />
     <string name="keywords_factory_data_reset" msgid="4355133848707691977">"ختم کریں حذف کریں بحال کریں صاف کریں ہٹائیں"</string>
     <string name="keywords_printing" msgid="1701778563617114846">"پرنٹر"</string>
     <string name="keywords_sounds_and_notifications" msgid="5965996187974887000">"اسپیکر بیپ"</string>
@@ -2469,7 +2471,7 @@
     <string name="keywords_all_apps" msgid="5377153522551809915">"ایپس ایپلیکیشنز سسٹم ڈاؤن لوڈ کرتی ہیں"</string>
     <string name="keywords_app_permissions" msgid="8677901415217188314">"ایپس کی اجازتوں کی سیکیورٹی"</string>
     <string name="keywords_default_apps" msgid="3581727483175522599">"ڈیفالٹ ایپس"</string>
-    <string name="keywords_ignore_optimizations" msgid="946516741848647905">"ڈوز ایپ اسٹینڈ بائی کی بہتریاں نظر انداز کریں"</string>
+    <string name="keywords_ignore_optimizations" msgid="946516741848647905">"نظر انداز کریں بہتریاں ڈوز ایپ اسٹینڈ بائی"</string>
     <string name="keywords_lockscreen" msgid="4806191868723291541">"‏سلائیڈ پاس ورڈ پیٹرن pin"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"‏Wi-Fi NFC ٹیگ ترتیب دیں"</string>
     <string name="write_tag" msgid="8571858602896222537">"تحریر کریں"</string>
@@ -2641,12 +2643,17 @@
     <string name="imei_information_title" msgid="8499085421609752290">"‏IMEI کی معلومات"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"‏IMEI سے متعلق معلومات"</string>
     <string name="slot_number" msgid="3762676044904653577">"(سلاٹ<xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
-    <string name="launch_by_default" msgid="2184141780491382435">"بطور ڈیفالٹ شروع کریں"</string>
+    <!-- no translation found for launch_by_default (1840761193189009248) -->
+    <skip />
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="STORAGE_TYPE">%2$s</xliff:g> میں <xliff:g id="SIZE">%1$s</xliff:g> استعمال کیا گیا"</string>
-    <string name="app_launch_domain_links_title" msgid="458956710410857777">"ڈومین لنکس"</string>
-    <string name="app_launch_open_domain_urls_title" msgid="5821849783765291139">"‏ڈومین URLs کھولیں"</string>
-    <string name="app_launch_open_domain_urls_summary" msgid="7305739311608755281">"‏ایپ کو براہ راست ڈومین URLs کھولنے کی اجازت دیں"</string>
-    <string name="app_launch_supported_domain_urls_title" msgid="8148494155921307572">"‏تعاون یافتہ ڈومینز URLs"</string>
+    <!-- no translation found for app_launch_domain_links_title (6789955009107320092) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_title (8914721351596745701) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_summary (5367573364240712217) -->
+    <skip />
+    <!-- no translation found for app_launch_supported_domain_urls_title (8250695258211477480) -->
+    <skip />
     <string name="app_launch_other_defaults_title" msgid="2516812499807835178">"دیگر ڈیفالٹس"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="STORAGE_TYPE">%2$s</xliff:g> میں <xliff:g id="SIZE">%1$s</xliff:g> استعمال کیا گیا"</string>
     <string name="storage_type_internal" msgid="410824961149037234">"اندرونی میموری"</string>
@@ -2692,20 +2699,19 @@
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"<xliff:g id="COUNT_0">%d</xliff:g> از <xliff:g id="COUNT_1">%d</xliff:g> ایپس کو اجازت دی گئی"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"فعال کرنے کیلئے تھپتھپائیں"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"آلہ کو فعال کرنے کیلئے اسکرین پر کہیں بھی دو بار تھپتھپائیں"</string>
-    <string name="domain_urls_title" msgid="8735310976048599572">"‏ڈومین URLs"</string>
-    <string name="domain_urls_summary_none" msgid="4817723415916239693">"‏کوئي بھی ڈومین URL نہ کھولیں"</string>
-    <string name="domain_urls_summary_one" msgid="4427559120855938432">"\'<xliff:g id="DOMAIN">%s</xliff:g>\' کھولیں"</string>
-    <string name="domain_urls_summary_some" msgid="2533219801400609818">"‏\'<xliff:g id="DOMAIN">%s</xliff:g>\' اور متعلقہ URLs کھولیں"</string>
-    <plurals name="domain_urls_apps_summary" formatted="false" msgid="6604886186235343653">
-      <item quantity="other">‏<xliff:g id="COUNT">%d</xliff:g> ایپس اپنے ڈومین URLs کھول سکتی ہیں</item>
-      <item quantity="one">‏ایک ایپ اپنے ڈومین URLs کھول سکتی ہے</item>
-    </plurals>
+    <!-- no translation found for domain_urls_title (8762012672312435252) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_none (2639588015479657864) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_one (3704934031930978405) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_some (812936714383016364) -->
+    <skip />
+    <!-- no translation found for domain_urls_apps_summary (4322996467951692661) -->
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"تسلیم شدہ نہیں ہے"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"ڈیفالٹ ایپس"</string>
-    <!-- no translation found for default_assist_title (8851464168639315795) -->
-    <skip />
-    <!-- no translation found for default_assist_none (4719591002003824614) -->
-    <skip />
+    <string name="default_assist_title" msgid="8851464168639315795">"اسسٹ"</string>
+    <string name="default_assist_none" msgid="4719591002003824614">"کوئی ڈیفالٹ اسسٹ نہیں ہے"</string>
     <string name="default_browser_title" msgid="8101772675085814670">"براؤزر ایپ"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"کوئی ڈیفالٹ براؤزر نہیں ہے"</string>
     <string name="default_phone_title" msgid="282005908059637350">"فون ایپ"</string>
@@ -2749,10 +2755,7 @@
     <string name="inactive_apps_title" msgid="1317817863508274533">"غیر فعال ایپس"</string>
     <string name="inactive_app_inactive_summary" msgid="6768756967594202411">"غیر فعال۔ ٹوگل کرنے کیلئے ٹچ کریں۔"</string>
     <string name="inactive_app_active_summary" msgid="4512911571954375968">"فعال۔ ٹوگل کرنے کیلئے ٹچ کریں۔"</string>
-    <!-- no translation found for assist_access_context_title (2047105711005856521) -->
-    <skip />
-    <!-- no translation found for assist_access_context_summary (8365837347256022203) -->
-    <skip />
-    <!-- no translation found for assist_footer (2283187001990543739) -->
-    <skip />
+    <string name="assist_access_context_title" msgid="2047105711005856521">"موجودہ سیاق و سباق کا استعمال کریں"</string>
+    <string name="assist_access_context_summary" msgid="8365837347256022203">"جب آپ اسسٹ ایپ کھولتے ہیں تو اسے اپنی اسکرین پر کی جانے والی چیزیں دیکھنے دیں"</string>
+    <string name="assist_footer" msgid="2283187001990543739">"اسسٹ ایپس مفید معلومات شناخت کرنے اور ان پر کارروائی کرنے میں آپ کی مدد آپ کے کہے بغیر کرتی ہیں۔ کچھ ایپس آپ کو مربوط مدد فراہم کرنے کیلئے لانچر اور صوتی ان پٹ سروسز دونوں کو سپورٹ کرتی ہیں۔"</string>
 </resources>

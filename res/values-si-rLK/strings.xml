@@ -343,9 +343,9 @@
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"මෙය සඳහා ඇඟිලි සලකුණු භාවිත කරන්න"</string>
     <string name="fingerprint_add_title" msgid="1926752654454033904">"ඇඟිලි සලකුණ එක් කරන්න"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5078060939636911795">"තිර අගුල"</string>
-    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="4776063289827470602">
-      <item quantity="one"><xliff:g id="COUNT_1">%1$d</xliff:g> ඇඟිලි සලකුණු ලියාපදිංචි කරන ලදි</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> ඇඟිලි සලකුණු ලියාපදිංචි කරන ලදි</item>
+    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="624961700033979880">
+      <item quantity="one">ඇඟිලි සලකුණු පිහිටුවීම් <xliff:g id="COUNT_1">%1$d</xliff:g></item>
+      <item quantity="other">ඇඟිලි සලකුණු පිහිටුවීම් <xliff:g id="COUNT_1">%1$d</xliff:g></item>
     </plurals>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"ඇඟිලි සලකුණු පිහිටුවීම"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"ඔබේ තිරය අගුලු හැරීමට හෝ මිලදී ගැනීම් තහවුරු කිරීමට ඔබේ ඇඟිලි සලකුණ භාවිත කිරීමට, අපට පහත දේ අවශ්‍ය වනු ඇත:"</string>
@@ -1065,6 +1065,8 @@
     <string name="reset_network_final_desc" msgid="6388371121099245116">"සියලු ජාල සැකසීම් යළි පිහිටුවන්නද? ඔබට මෙම ක්‍රියාව ආපසු හැරවිය නොහැකිය!"</string>
     <string name="reset_network_final_button_text" msgid="1797434793741744635">"සැකසීම් යළි පිහිටුවන්න"</string>
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"යළි පිහිටුවන්නද?"</string>
+    <!-- no translation found for network_reset_not_available (7188610385577164676) -->
+    <skip />
     <string name="reset_network_complete_toast" msgid="787829973559541880">"ජාල සැකසීම් යළි පිහිටුවන ලදි"</string>
     <string name="device_reset_title" msgid="2384019005638768076">"උපාංගය යළි පිහිටුවන්න"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"කර්මාන්තශාලා දත්ත යළි පිහිටුම"</string>
@@ -1230,7 +1232,7 @@
     <string name="lockpattern_pattern_confirmed_header" msgid="8455614172231880211">"ඔබගේ නව අගුළු හැරීමේ රටාව"</string>
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"තහවුරු කරන්න"</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"යළි අඳින්න"</string>
-    <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"නැවත උත්සාහ කරන්න"</string>
+    <string name="lockpattern_retry_button_text" msgid="3480423193273588166">"හිස් කරන්න"</string>
     <string name="lockpattern_continue_button_text" msgid="4723771754714471410">"දිගටම කරගෙන යන්න"</string>
     <string name="lockpattern_settings_title" msgid="3207750489460466680">"අඟුළු ඇරීමේ රටාව"</string>
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"රටාවක් අවශ්‍යයි"</string>
@@ -1259,7 +1261,8 @@
     <string name="advanced_settings_summary" msgid="4016682978071086747">"තවත් සැකසුම් විකල්ප සබල කරන්න"</string>
     <string name="application_info_label" msgid="5736524913065714880">"යෙදුම් තොරතුරු"</string>
     <string name="storage_label" msgid="8700867073480107253">"ආචයනය"</string>
-    <string name="auto_launch_label" msgid="3012617472833815382">"සුපුරුද්දෙන් දියත් කරන්න"</string>
+    <!-- no translation found for auto_launch_label (2669236885531442195) -->
+    <skip />
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"සුපුරුදු"</string>
     <string name="screen_compatibility_label" msgid="663250687205465394">"තිර ගැළපුම"</string>
     <string name="permissions_label" msgid="2605296874922726203">"අවසර"</string>
@@ -1932,8 +1935,7 @@
     <string name="local_backup_password_toast_validation_failure" msgid="5646377234895626531">"උපස්ථ මුරපදය පිහිටුවීම අසාර්ථකය"</string>
     <string name="backup_erase_dialog_title" msgid="1027640829482174106"></string>
     <string name="backup_erase_dialog_message" msgid="5221011285568343155">"ඔබගේ Wi-Fi මුරපද, පිටුසන්, වෙනත් සැකසීම්, සහ යෙදුම් දත්ත උපස්ථ කිරීම නවත්වා, තවත Google සේවාදායක මත ඇති සියලු පිටපත් මකා දමන්නද?"</string>
-    <!-- no translation found for fullbackup_erase_dialog_message (694766389396659626) -->
-    <skip />
+    <string name="fullbackup_erase_dialog_message" msgid="694766389396659626">"උපාංග දත්ත (Wi-Fi මුරපද සහ ඇමතුම් ඉතිහාසය යනාදී) සහ යෙදුම් දත්ත (යෙදුම් මගින් ගබඩා කළ සැකසීම් සහ ගොනු යනාදී) උපස්ථ කිරීම සහ දුරස්ථ සේවාදායකවල සියලු පිටපත් මැකීම නවත්වන්නද?"</string>
     <string name="fullbackup_data_summary" msgid="960850365007767734">"දුරස්ථව උපාංග දත්ත (Wi-Fi මුරපද හා ඇමතුම් ඉතිහාසය වැනි) සහ යෙදුම් දත්ත (යෙදුම් මඟින් ගබඩා කරන සැකසීම් සහ ගොනු) ස්වයංක්‍රියව උපස්ථ කරයි.\n\nඔබ ස්වයංක්‍රියව උපස්ථ කිරීම සක්‍රිය කළ විට, උපාංග සහ යෙදුම් දත්ත කලින් කලට දුරස්ථව සුරකිනු ලැබේ. සම්බන්ධතා, පණිවුඩ, හා ඡායාරූප වැනි සංවේදී දත්ත ඇතුළුව යෙදුම් දත්ත ඕනෑම එකක් විය හැකි වේ (සංවර්ධක සැකසුම් මත පදනම්ව)."</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"උපාංග පරිපාලන සැකසුම්"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"උපාංග පරිපාලක"</string>
@@ -2453,6 +2455,8 @@
     <string name="keywords_voice_input" msgid="3519547605812413860">"හඳුනාගැනීම ආදානය කථනය කතා භාෂාව හැන්ඩ්ස්-ෆ්‍රී හැන්ඩ්ස් ෆ්‍රී හඳුනා ගැනීම විෂම වචන ශ්‍රව්‍ය ඉතිහාසය බ්ලූටූත් හෙඩ්සෙටය"</string>
     <string name="keywords_text_to_speech_output" msgid="392447904221657930">"භාෂාව අගයන්න සුපුරුදු කථාව කථා කිරීම tts ප්‍රවේශතාව කියවන්නා අන්ධය"</string>
     <string name="keywords_date_and_time" msgid="2631808108134830066">"හමුදා ඔරලෝසුව"</string>
+    <!-- no translation found for keywords_network_reset (6346978754090557056) -->
+    <skip />
     <string name="keywords_factory_data_reset" msgid="4355133848707691977">"පිසදමන්න මකන්න ප්‍රතිස්ථාපනය කරන්න පිරිසිදු කරන්න ඉවත් කරන්න"</string>
     <string name="keywords_printing" msgid="1701778563617114846">"මුද්‍රණ යන්ත්‍ර"</string>
     <string name="keywords_sounds_and_notifications" msgid="5965996187974887000">"ශබ්දවාහිනීයේ නාදය"</string>
@@ -2641,12 +2645,17 @@
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI තොරතුරු"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI සාපේක්ෂ තොරතුරු"</string>
     <string name="slot_number" msgid="3762676044904653577">"(විවර<xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
-    <string name="launch_by_default" msgid="2184141780491382435">"පෙරනිමියෙන් දියත් කරන්න"</string>
+    <!-- no translation found for launch_by_default (1840761193189009248) -->
+    <skip />
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="STORAGE_TYPE">%2$s</xliff:g> හි <xliff:g id="SIZE">%1$s</xliff:g> භාවිතා කර ඇත"</string>
-    <string name="app_launch_domain_links_title" msgid="458956710410857777">"වසම් සබැඳි"</string>
-    <string name="app_launch_open_domain_urls_title" msgid="5821849783765291139">"වසම් URL විවෘත කරන්න"</string>
-    <string name="app_launch_open_domain_urls_summary" msgid="7305739311608755281">"වසම් URL සෘජුවම විවෘත කිරීමට යෙදුමට ඉඩ දෙන්න"</string>
-    <string name="app_launch_supported_domain_urls_title" msgid="8148494155921307572">"සහාය දක්වන ලද වසම් URL"</string>
+    <!-- no translation found for app_launch_domain_links_title (6789955009107320092) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_title (8914721351596745701) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_summary (5367573364240712217) -->
+    <skip />
+    <!-- no translation found for app_launch_supported_domain_urls_title (8250695258211477480) -->
+    <skip />
     <string name="app_launch_other_defaults_title" msgid="2516812499807835178">"වෙනත් පෙරනිමි"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="STORAGE_TYPE">%2$s</xliff:g> හි <xliff:g id="SIZE">%1$s</xliff:g> භාවිතා කර ඇත"</string>
     <string name="storage_type_internal" msgid="410824961149037234">"අභ්‍යන්තර මතකය"</string>
@@ -2692,14 +2701,15 @@
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"යෙදුම් <xliff:g id="COUNT_1">%d</xliff:g> න් <xliff:g id="COUNT_0">%d</xliff:g> කට ඉඩ දෙන ලදී"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"අවදි කිරීමට තට්ටු කරන්න"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"උපාංගය අවදි කිරීමට තිරයේ ඕනෑම තැනක මත දෙපාරක් තට්ටු කරන්න"</string>
-    <string name="domain_urls_title" msgid="8735310976048599572">"වසම් URL"</string>
-    <string name="domain_urls_summary_none" msgid="4817723415916239693">"කිසිදු වසම් URL එකක් විවෘත නොකරන්න"</string>
-    <string name="domain_urls_summary_one" msgid="4427559120855938432">"විවෘත \'<xliff:g id="DOMAIN">%s</xliff:g>\'"</string>
-    <string name="domain_urls_summary_some" msgid="2533219801400609818">"විවෘත \'<xliff:g id="DOMAIN">%s</xliff:g>\' හා සම්බන්ධිත URL"</string>
-    <plurals name="domain_urls_apps_summary" formatted="false" msgid="6604886186235343653">
-      <item quantity="one">යෙදුම් <xliff:g id="COUNT">%d</xliff:g> කට ඒවායේ වසම් URL විවෘත කළ හැකිය</item>
-      <item quantity="other">යෙදුම් <xliff:g id="COUNT">%d</xliff:g> කට ඒවායේ වසම් URL විවෘත කළ හැකිය</item>
-    </plurals>
+    <!-- no translation found for domain_urls_title (8762012672312435252) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_none (2639588015479657864) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_one (3704934031930978405) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_some (812936714383016364) -->
+    <skip />
+    <!-- no translation found for domain_urls_apps_summary (4322996467951692661) -->
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"අඳුනාගත නොහැක"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"පෙරනිමි යෙදුම්"</string>
     <string name="default_assist_title" msgid="8851464168639315795">"සහාය"</string>
