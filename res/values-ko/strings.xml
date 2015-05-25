@@ -343,9 +343,9 @@
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"지문을 사용할 항목"</string>
     <string name="fingerprint_add_title" msgid="1926752654454033904">"지문 파일 추가"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5078060939636911795">"화면 잠금"</string>
-    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="4776063289827470602">
-      <item quantity="other">지문 <xliff:g id="COUNT_1">%1$d</xliff:g>개가 등록됨</item>
-      <item quantity="one">지문 <xliff:g id="COUNT_0">%1$d</xliff:g>개가 등록됨</item>
+    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="624961700033979880">
+      <item quantity="other">지문 <xliff:g id="COUNT_1">%1$d</xliff:g>개 설정됨</item>
+      <item quantity="one">지문 <xliff:g id="COUNT_0">%1$d</xliff:g>개 설정됨</item>
     </plurals>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"지문 설정"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"지문을 사용하여 화면 잠금을 해제하거나 구매를 확인하려면 다음을 수행해야 합니다."</string>
@@ -1015,8 +1015,7 @@
     <string name="storage_wizard_move_progress_title" msgid="4443920302548035674">"<xliff:g id="APP">^1</xliff:g> 이동 중…"</string>
     <string name="storage_wizard_move_progress_body" msgid="7802577486578105609">"이동 중에 <xliff:g id="NAME">^1</xliff:g>을(를) 삭제하지 마세요. \n\n이동을 완료할 때까지 이 기기에 있는 <xliff:g id="APP">^2</xliff:g> 앱을 사용할 수 없습니다."</string>
     <string name="storage_wizard_move_progress_cancel" msgid="542047237524588792">"이동 취소"</string>
-    <!-- no translation found for storage_wizard_slow_body (8010127667184768025) -->
-    <skip />
+    <string name="storage_wizard_slow_body" msgid="8010127667184768025">"<xliff:g id="NAME_0">^1</xliff:g>이(가) 느린 것 같습니다. \n\n계속 진행할 수 있으나 이 위치로 이동된 앱이 자주 멈추면서 데이터 전송이 오래 걸릴 수 있습니다. \n\n성능을 향상시키려면 더 빠른 <xliff:g id="NAME_1">^1</xliff:g> 사용을 고려해 보세요."</string>
     <string name="battery_status_title" msgid="9159414319574976203">"배터리 상태"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"배터리 수준"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APN"</string>
@@ -1229,7 +1228,7 @@
     <string name="lockpattern_pattern_confirmed_header" msgid="8455614172231880211">"새 잠금해제 패턴"</string>
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"확인"</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"다시 그리기"</string>
-    <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"다시 시도"</string>
+    <string name="lockpattern_retry_button_text" msgid="3480423193273588166">"지우기"</string>
     <string name="lockpattern_continue_button_text" msgid="4723771754714471410">"계속"</string>
     <string name="lockpattern_settings_title" msgid="3207750489460466680">"잠금해제 패턴"</string>
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"패턴 설정"</string>
@@ -1258,7 +1257,8 @@
     <string name="advanced_settings_summary" msgid="4016682978071086747">"기타 설정 옵션을 사용하도록 설정합니다."</string>
     <string name="application_info_label" msgid="5736524913065714880">"앱 정보"</string>
     <string name="storage_label" msgid="8700867073480107253">"저장공간"</string>
-    <string name="auto_launch_label" msgid="3012617472833815382">"기본으로 실행"</string>
+    <!-- no translation found for auto_launch_label (2669236885531442195) -->
+    <skip />
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"기본"</string>
     <string name="screen_compatibility_label" msgid="663250687205465394">"화면 호환성"</string>
     <string name="permissions_label" msgid="2605296874922726203">"권한"</string>
@@ -1932,8 +1932,7 @@
     <string name="backup_erase_dialog_title" msgid="1027640829482174106"></string>
     <string name="backup_erase_dialog_message" msgid="5221011285568343155">"Wi-Fi 비밀번호, 북마크, 기타 설정 및 앱 데이터 백업을 중지하고 Google 서버에 있는 모든 사본을 지우시겠습니까?"</string>
     <string name="fullbackup_erase_dialog_message" msgid="944399039066318647">"기기 데이터(예: Wi-Fi 비밀번호, 통화 기록)와 앱 데이터(예: 앱에서 저장한 설정 및 파일) 백업을 중단하고 Google 드라이브에 있는 모든 사본을 삭제하시겠습니까?"</string>
-    <!-- no translation found for fullbackup_data_summary (960850365007767734) -->
-    <skip />
+    <string name="fullbackup_data_summary" msgid="960850365007767734">"기기 데이터(예: Wi-Fi 비밀번호, 통화 기록)와 앱 데이터(예: 앱에서 저장한 설정 및 파일)를 원격으로 자동 백업합니다.\n\n자동 백업을 사용하도록 설정하면 기기 및 앱 데이터가 정기적으로 원격 저장됩니다. 앱 데이터는 연락처, 메시지, 사진과 같은 민감한 데이터를 포함하여 개발자 설정에 따라 앱에서 저장한 모든 데이터가 해당될 수 있습니다."</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"기기 관리 설정"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"기기 관리자"</string>
     <string name="remove_device_admin" msgid="3596845261596451437">"비활성화"</string>
@@ -2640,12 +2639,17 @@
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI 정보"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI 상대 정보"</string>
     <string name="slot_number" msgid="3762676044904653577">"(슬롯 <xliff:g id="SLOT_NUM">%1$d</xliff:g>개)"</string>
-    <string name="launch_by_default" msgid="2184141780491382435">"기본으로 실행"</string>
+    <!-- no translation found for launch_by_default (1840761193189009248) -->
+    <skip />
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="STORAGE_TYPE">%2$s</xliff:g>에 <xliff:g id="SIZE">%1$s</xliff:g>이(가) 사용되었습니다."</string>
-    <string name="app_launch_domain_links_title" msgid="458956710410857777">"도메인 링크"</string>
-    <string name="app_launch_open_domain_urls_title" msgid="5821849783765291139">"도메인 URL 열기"</string>
-    <string name="app_launch_open_domain_urls_summary" msgid="7305739311608755281">"앱에서 도메인 URL을 직접 열도록 허용"</string>
-    <string name="app_launch_supported_domain_urls_title" msgid="8148494155921307572">"지원되는 도메인 URL"</string>
+    <!-- no translation found for app_launch_domain_links_title (6789955009107320092) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_title (8914721351596745701) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_summary (5367573364240712217) -->
+    <skip />
+    <!-- no translation found for app_launch_supported_domain_urls_title (8250695258211477480) -->
+    <skip />
     <string name="app_launch_other_defaults_title" msgid="2516812499807835178">"기타 기본값"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="STORAGE_TYPE">%2$s</xliff:g>에 <xliff:g id="SIZE">%1$s</xliff:g>이(가) 사용되었습니다."</string>
     <string name="storage_type_internal" msgid="410824961149037234">"내부 메모리"</string>
@@ -2691,20 +2695,19 @@
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"<xliff:g id="COUNT_0">%d</xliff:g>/<xliff:g id="COUNT_1">%d</xliff:g>개 앱 허용됨"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"탭하여 대기 모드 해제"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"화면 아무 곳이나 두 번 탭하여 기기 대기 모드 해제"</string>
-    <string name="domain_urls_title" msgid="8735310976048599572">"도메인 URL"</string>
-    <string name="domain_urls_summary_none" msgid="4817723415916239693">"도메인 URL 열지 않음"</string>
-    <string name="domain_urls_summary_one" msgid="4427559120855938432">"\'<xliff:g id="DOMAIN">%s</xliff:g>\' 열기"</string>
-    <string name="domain_urls_summary_some" msgid="2533219801400609818">"\'<xliff:g id="DOMAIN">%s</xliff:g>\' 및 관련 URL 열기"</string>
-    <plurals name="domain_urls_apps_summary" formatted="false" msgid="6604886186235343653">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g>개 앱에서 도메인 URL을 열 수 있습니다.</item>
-      <item quantity="one">1개 앱에서 도메인 URL을 열 수 있습니다.</item>
-    </plurals>
+    <!-- no translation found for domain_urls_title (8762012672312435252) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_none (2639588015479657864) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_one (3704934031930978405) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_some (812936714383016364) -->
+    <skip />
+    <!-- no translation found for domain_urls_apps_summary (4322996467951692661) -->
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"인식할 수 없습니다."</string>
     <string name="default_apps_title" msgid="1854974637597514435">"기본 앱"</string>
-    <!-- no translation found for default_assist_title (8851464168639315795) -->
-    <skip />
-    <!-- no translation found for default_assist_none (4719591002003824614) -->
-    <skip />
+    <string name="default_assist_title" msgid="8851464168639315795">"지원"</string>
+    <string name="default_assist_none" msgid="4719591002003824614">"기본 지원 없음"</string>
     <string name="default_browser_title" msgid="8101772675085814670">"브라우저 앱"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"기본 브라우저 없음"</string>
     <string name="default_phone_title" msgid="282005908059637350">"휴대전화 앱"</string>
@@ -2748,10 +2751,7 @@
     <string name="inactive_apps_title" msgid="1317817863508274533">"비활성 앱"</string>
     <string name="inactive_app_inactive_summary" msgid="6768756967594202411">"비활성 상태입니다. 전환하려면 터치하세요."</string>
     <string name="inactive_app_active_summary" msgid="4512911571954375968">"활성 상태입니다. 전환하려면 터치하세요."</string>
-    <!-- no translation found for assist_access_context_title (2047105711005856521) -->
-    <skip />
-    <!-- no translation found for assist_access_context_summary (8365837347256022203) -->
-    <skip />
-    <!-- no translation found for assist_footer (2283187001990543739) -->
-    <skip />
+    <string name="assist_access_context_title" msgid="2047105711005856521">"현재 화면에 표시된 데이터 사용하기"</string>
+    <string name="assist_access_context_summary" msgid="8365837347256022203">"지원 앱을 열면 앱이 화면상의 작업 내용을 인식합니다."</string>
+    <string name="assist_footer" msgid="2283187001990543739">"지원 앱은 사용자가 따로 묻지 않아도 유용한 정보를 판별하고 이에 따라 행동할 수 있게 도와줍니다. 일부 앱은 통합된 지원을 제공하기 위하여 런처 및 음성 입력 서비스를 지원합니다."</string>
 </resources>

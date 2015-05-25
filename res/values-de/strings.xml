@@ -343,9 +343,9 @@
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Abdruck nutzen für"</string>
     <string name="fingerprint_add_title" msgid="1926752654454033904">"Fingerabdruck hinzufügen"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5078060939636911795">"Displaysperre"</string>
-    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="4776063289827470602">
-      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> Fingerabdrücke erfasst</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> Fingerabdruck erfasst</item>
+    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="624961700033979880">
+      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> Fingerabdrücke einrichten</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> Fingerabdruck einrichten</item>
     </plurals>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Abdruck einrichten"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"Zum Entsperren des Displays oder Bestätigen von Käufen per Fingerabdruck sind folgende Aktionen erforderlich:"</string>
@@ -679,7 +679,7 @@
     <string name="wifi_save" msgid="3331121567988522826">"Speichern"</string>
     <string name="wifi_failed_save_message" msgid="6650004874143815692">"Netzwerk konnte nicht gespeichert werden."</string>
     <string name="wifi_cancel" msgid="6763568902542968964">"Abbrechen"</string>
-    <string name="wifi_skip_anyway" msgid="6965361454438011190">"Trotzdem überspringen"</string>
+    <string name="wifi_skip_anyway" msgid="6965361454438011190">"Überspringen"</string>
     <string name="wifi_dont_skip" msgid="1677493161164629163">"Nicht überspringen"</string>
     <string name="wifi_skipped_message" product="tablet" msgid="6761689889733331124">"Achtung: Wenn Sie die WLAN-Option überspringen, nutzt Ihr Tablet eine Mobilfunkverbindung für erste Downloads und Updates. Um potenzielle Datengebühren zu vermeiden, stellen Sie eine WLAN-Verbindung her."</string>
     <string name="wifi_skipped_message" product="device" msgid="1385490367826852775">"Achtung: Wenn Sie die WLAN-Option überspringen, nutzt Ihr Gerät eine Mobilfunkverbindung für erste Downloads und Updates. Um potenzielle Datengebühren zu vermeiden, stellen Sie eine WLAN-Verbindung her."</string>
@@ -737,7 +737,7 @@
     <string name="wifi_hotspot_configure_ap_text_summary" msgid="5618031116920832182">"Mobiler WLAN-Hotspot AndroidAP WPA2 PSK"</string>
     <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> mobiler WLAN-Hotspot"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
-    <string name="wifi_calling_settings_title" msgid="4102921303993404577">"WLAN-Telefonie"</string>
+    <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Anrufe über WLAN"</string>
     <string name="wifi_calling_mode_title" msgid="2164073796253284289">"Bevorzugte Anrufeinstellung"</string>
     <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"WLAN-Anrufmodus"</string>
   <string-array name="wifi_calling_mode_choices">
@@ -748,7 +748,7 @@
     <item msgid="4799585830102342375">"2"</item>
     <item msgid="1171822231056612021">"1"</item>
   </string-array>
-    <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Wenn WLAN-Anrufe aktiviert sind, kann Ihr Smartphone abhängig von Ihrer Einstellung und von der Signalstärke Anrufe über WLAN-Netzwerke oder über das Netz Ihres Mobilfunkanbieters übertragen. Erkundigen Sie sich bei Ihrem Mobilfunkanbieter über die hierfür erhobenen Gebühren und andere Informationen, bevor Sie diese Funktion aktivieren."</string>
+    <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Wenn die Option \"Anrufe über WLAN\" aktiviert ist, kann Ihr Smartphone abhängig von Ihrer Einstellung und von der Signalstärke Anrufe über WLAN-Netzwerke oder über das Netz Ihres Mobilfunkanbieters übertragen. Erkundigen Sie sich bei Ihrem Mobilfunkanbieter über die hierfür erhobenen Gebühren und andere Informationen, bevor Sie diese Funktion aktivieren."</string>
     <string name="home_settings" msgid="212375129455718176">"Startseite"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Display"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Töne"</string>
@@ -1229,7 +1229,7 @@
     <string name="lockpattern_pattern_confirmed_header" msgid="8455614172231880211">"Ihr neues Entsperrungsmuster"</string>
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"Bestätigen"</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"Neu aufzeichnen"</string>
-    <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"Wiederholen"</string>
+    <string name="lockpattern_retry_button_text" msgid="3480423193273588166">"Löschen"</string>
     <string name="lockpattern_continue_button_text" msgid="4723771754714471410">"Weiter"</string>
     <string name="lockpattern_settings_title" msgid="3207750489460466680">"Entsperrungsmuster"</string>
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"Muster erforderlich"</string>
@@ -1258,7 +1258,8 @@
     <string name="advanced_settings_summary" msgid="4016682978071086747">"Weitere Einstellungsoptionen aktivieren"</string>
     <string name="application_info_label" msgid="5736524913065714880">"App-Info"</string>
     <string name="storage_label" msgid="8700867073480107253">"Speicher"</string>
-    <string name="auto_launch_label" msgid="3012617472833815382">"Standardmäßig starten"</string>
+    <!-- no translation found for auto_launch_label (2669236885531442195) -->
+    <skip />
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"Standardeinstellungen"</string>
     <string name="screen_compatibility_label" msgid="663250687205465394">"Bildschirmkompatibilität"</string>
     <string name="permissions_label" msgid="2605296874922726203">"Berechtigungen"</string>
@@ -2436,7 +2437,7 @@
     <string name="keywords_wifi" msgid="8947676711698613374">"wlan wifi wi-fi netzwerkverbindung"</string>
     <string name="keywords_more_default_sms_app" msgid="895656981962034647">"textnachricht sms nachrichten messaging mms"</string>
     <string name="keywords_more_mobile_networks" msgid="4939725094449606744">"mobilfunk mobilfunkanbieter drahtlos drahtlose daten 4g 3g 2g lte"</string>
-    <string name="keywords_wifi_calling" msgid="5497735076883598019">"WLAN-Anrufe"</string>
+    <string name="keywords_wifi_calling" msgid="5497735076883598019">"anrufe über WLAN wlan Anruf wifi"</string>
     <string name="keywords_home" msgid="3626170808219458848">"übersicht launcher"</string>
     <string name="keywords_display" msgid="6709007669501628320">"bildschirm touchscreen"</string>
     <string name="keywords_display_brightness_level" msgid="8923289340474728990">"display dimmen touchscreen akku"</string>
@@ -2639,12 +2640,17 @@
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI-Informationen"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"Informationen zur relativen IMEI"</string>
     <string name="slot_number" msgid="3762676044904653577">"(Slot <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
-    <string name="launch_by_default" msgid="2184141780491382435">"Standardmäßig starten"</string>
+    <!-- no translation found for launch_by_default (1840761193189009248) -->
+    <skip />
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> <xliff:g id="STORAGE_TYPE">%2$s</xliff:g> belegt"</string>
-    <string name="app_launch_domain_links_title" msgid="458956710410857777">"Domain-Links"</string>
-    <string name="app_launch_open_domain_urls_title" msgid="5821849783765291139">"Domain-URLs öffnen"</string>
-    <string name="app_launch_open_domain_urls_summary" msgid="7305739311608755281">"App darf Domain-URLs direkt öffnen"</string>
-    <string name="app_launch_supported_domain_urls_title" msgid="8148494155921307572">"Unterstützte Domain-URLs"</string>
+    <!-- no translation found for app_launch_domain_links_title (6789955009107320092) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_title (8914721351596745701) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_summary (5367573364240712217) -->
+    <skip />
+    <!-- no translation found for app_launch_supported_domain_urls_title (8250695258211477480) -->
+    <skip />
     <string name="app_launch_other_defaults_title" msgid="2516812499807835178">"Andere Standardeinstellungen"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> <xliff:g id="STORAGE_TYPE">%2$s</xliff:g> belegt"</string>
     <string name="storage_type_internal" msgid="410824961149037234">"interner Speicher"</string>
@@ -2690,14 +2696,15 @@
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"<xliff:g id="COUNT_0">%d</xliff:g> von <xliff:g id="COUNT_1">%d</xliff:g> Apps sind berechtigt."</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Zum Aktivieren tippen"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Doppeltippen Sie auf den Bildschirm, um das Gerät zu aktivieren."</string>
-    <string name="domain_urls_title" msgid="8735310976048599572">"Domain-URLs"</string>
-    <string name="domain_urls_summary_none" msgid="4817723415916239693">"Keine Domain-URL öffnen"</string>
-    <string name="domain_urls_summary_one" msgid="4427559120855938432">"\"<xliff:g id="DOMAIN">%s</xliff:g>\" öffnen"</string>
-    <string name="domain_urls_summary_some" msgid="2533219801400609818">"\"<xliff:g id="DOMAIN">%s</xliff:g>\" und zugehörige URLs öffnen"</string>
-    <plurals name="domain_urls_apps_summary" formatted="false" msgid="6604886186235343653">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> Apps können ihre Domain-URLs öffnen.</item>
-      <item quantity="one">Eine App kann ihre Domain-URLs öffnen.</item>
-    </plurals>
+    <!-- no translation found for domain_urls_title (8762012672312435252) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_none (2639588015479657864) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_one (3704934031930978405) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_some (812936714383016364) -->
+    <skip />
+    <!-- no translation found for domain_urls_apps_summary (4322996467951692661) -->
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Nicht erkannt"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"Standard-Apps"</string>
     <string name="default_assist_title" msgid="8851464168639315795">"Assistent"</string>

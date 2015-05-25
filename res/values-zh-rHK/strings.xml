@@ -343,9 +343,9 @@
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"使用指紋"</string>
     <string name="fingerprint_add_title" msgid="1926752654454033904">"新增指紋"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5078060939636911795">"螢幕鎖定"</string>
-    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="4776063289827470602">
-      <item quantity="other">已登記 <xliff:g id="COUNT_1">%1$d</xliff:g> 個指紋</item>
-      <item quantity="one">已登記 <xliff:g id="COUNT_0">%1$d</xliff:g> 個指紋</item>
+    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="624961700033979880">
+      <item quantity="other">已設定 <xliff:g id="COUNT_1">%1$d</xliff:g> 個指紋</item>
+      <item quantity="one">已設定 <xliff:g id="COUNT_0">%1$d</xliff:g> 個指紋</item>
     </plurals>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"已設定指紋"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"要使用您的指紋解鎖屏幕或確認購買，我們需要："</string>
@@ -1016,8 +1016,7 @@
     <string name="storage_wizard_move_progress_title" msgid="4443920302548035674">"正在移動<xliff:g id="APP">^1</xliff:g>…"</string>
     <string name="storage_wizard_move_progress_body" msgid="7802577486578105609">"移動過程中請勿移除<xliff:g id="NAME">^1</xliff:g>。\n\n您將無法使用這部裝置上的<xliff:g id="APP">^2</xliff:g>應用程式，直到移動完成。"</string>
     <string name="storage_wizard_move_progress_cancel" msgid="542047237524588792">"取消移動"</string>
-    <!-- no translation found for storage_wizard_slow_body (8010127667184768025) -->
-    <skip />
+    <string name="storage_wizard_slow_body" msgid="8010127667184768025">"此<xliff:g id="NAME_0">^1</xliff:g>有些緩慢。\n\n您可以嘗試繼續，但轉移至此位置的應用程式可能會間斷，而資料傳輸亦可能需要較長時間。\n\n請考慮使用較高速的<xliff:g id="NAME_1">^1</xliff:g>以提升效能。"</string>
     <string name="battery_status_title" msgid="9159414319574976203">"電池狀態"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"電量"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APN"</string>
@@ -1230,7 +1229,7 @@
     <string name="lockpattern_pattern_confirmed_header" msgid="8455614172231880211">"您的新解鎖圖案"</string>
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"確認"</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"再畫一次"</string>
-    <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"重試"</string>
+    <string name="lockpattern_retry_button_text" msgid="3480423193273588166">"清除"</string>
     <string name="lockpattern_continue_button_text" msgid="4723771754714471410">"繼續"</string>
     <string name="lockpattern_settings_title" msgid="3207750489460466680">"解鎖圖形"</string>
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"需要解鎖圖形"</string>
@@ -1259,7 +1258,8 @@
     <string name="advanced_settings_summary" msgid="4016682978071086747">"啟用更多設定選項"</string>
     <string name="application_info_label" msgid="5736524913065714880">"應用程式資訊"</string>
     <string name="storage_label" msgid="8700867073480107253">"儲存空間"</string>
-    <string name="auto_launch_label" msgid="3012617472833815382">"預設為啟動"</string>
+    <!-- no translation found for auto_launch_label (2669236885531442195) -->
+    <skip />
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"預設設定"</string>
     <string name="screen_compatibility_label" msgid="663250687205465394">"螢幕兼容性"</string>
     <string name="permissions_label" msgid="2605296874922726203">"權限"</string>
@@ -1936,9 +1936,8 @@
     <string name="local_backup_password_toast_validation_failure" msgid="5646377234895626531">"無法設定備份密碼"</string>
     <string name="backup_erase_dialog_title" msgid="1027640829482174106"></string>
     <string name="backup_erase_dialog_message" msgid="5221011285568343155">"要停止備份您的 Wi-Fi 密碼、書籤、其他設定以及應用程式資料，並清除 Google 伺服器上儲存的所有副本嗎？"</string>
-    <string name="fullbackup_erase_dialog_message" msgid="944399039066318647">"停止備份裝置資料(例如 Wi-Fi 密碼和通話記錄) 及應用程式資料 (例如由應用程式儲存的設定和檔案)，並清除「Google 雲端硬碟」內的所有副本？"</string>
-    <!-- no translation found for fullbackup_data_summary (960850365007767734) -->
-    <skip />
+    <string name="fullbackup_erase_dialog_message" msgid="944399039066318647">"停止備份裝置資料 (例如 Wi-Fi 密碼和通話記錄) 和應用程式資料 (例如由應用程式儲存的設定和檔案)，並清除「Google 雲端硬碟」內的所有副本？"</string>
+    <string name="fullbackup_data_summary" msgid="960850365007767734">"自動遙距備份裝置資料 (例如 Wi-Fi 密碼和通話記錄) 及應用程式資料 (例如由應用程式儲存的設定和檔案)。\n\n啟用自動備份功能後，裝置及應用程式資料會定時以遙距方式儲存。應用程式資料可以是由應用程式儲存的任何資料 (視乎開發設定而定)，包括可能視為敏感的資料，如通訊錄、訊息及相片。"</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"裝置管理設定"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"裝置管理員"</string>
     <string name="remove_device_admin" msgid="3596845261596451437">"撤銷"</string>
@@ -2645,12 +2644,17 @@
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI 資料"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI 相對資料"</string>
     <string name="slot_number" msgid="3762676044904653577">"(插槽 <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
-    <string name="launch_by_default" msgid="2184141780491382435">"按預設啟動"</string>
+    <!-- no translation found for launch_by_default (1840761193189009248) -->
+    <skip />
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="STORAGE_TYPE">%2$s</xliff:g>已使用 <xliff:g id="SIZE">%1$s</xliff:g>"</string>
-    <string name="app_launch_domain_links_title" msgid="458956710410857777">"網域連結"</string>
-    <string name="app_launch_open_domain_urls_title" msgid="5821849783765291139">"開啟網域網址"</string>
-    <string name="app_launch_open_domain_urls_summary" msgid="7305739311608755281">"允許應用程式直接開啟網域網址"</string>
-    <string name="app_launch_supported_domain_urls_title" msgid="8148494155921307572">"支援的網域網址"</string>
+    <!-- no translation found for app_launch_domain_links_title (6789955009107320092) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_title (8914721351596745701) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_summary (5367573364240712217) -->
+    <skip />
+    <!-- no translation found for app_launch_supported_domain_urls_title (8250695258211477480) -->
+    <skip />
     <string name="app_launch_other_defaults_title" msgid="2516812499807835178">"其他預設值"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="STORAGE_TYPE">%2$s</xliff:g>已使用 <xliff:g id="SIZE">%1$s</xliff:g>"</string>
     <string name="storage_type_internal" msgid="410824961149037234">"內部記憶體"</string>
@@ -2696,20 +2700,19 @@
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"已允許 <xliff:g id="COUNT_0">%d</xliff:g> 個應用程式 (共 <xliff:g id="COUNT_1">%d</xliff:g> 個)"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"輕按以喚醒"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"在螢幕上任何地方連按兩下即可喚醒裝置"</string>
-    <string name="domain_urls_title" msgid="8735310976048599572">"網域網址"</string>
-    <string name="domain_urls_summary_none" msgid="4817723415916239693">"不要開啟任何網域網址"</string>
-    <string name="domain_urls_summary_one" msgid="4427559120855938432">"開啟「<xliff:g id="DOMAIN">%s</xliff:g>」"</string>
-    <string name="domain_urls_summary_some" msgid="2533219801400609818">"開啟「<xliff:g id="DOMAIN">%s</xliff:g>」和相關網址"</string>
-    <plurals name="domain_urls_apps_summary" formatted="false" msgid="6604886186235343653">
-      <item quantity="other">有 <xliff:g id="COUNT">%d</xliff:g> 個應用程式可開啟其網域網址</item>
-      <item quantity="one">有 1 個應用程式可開啟其網域網址</item>
-    </plurals>
+    <!-- no translation found for domain_urls_title (8762012672312435252) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_none (2639588015479657864) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_one (3704934031930978405) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_some (812936714383016364) -->
+    <skip />
+    <!-- no translation found for domain_urls_apps_summary (4322996467951692661) -->
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"未能識別"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"預設應用程式"</string>
-    <!-- no translation found for default_assist_title (8851464168639315795) -->
-    <skip />
-    <!-- no translation found for default_assist_none (4719591002003824614) -->
-    <skip />
+    <string name="default_assist_title" msgid="8851464168639315795">"輔助"</string>
+    <string name="default_assist_none" msgid="4719591002003824614">"沒有預設的輔助"</string>
     <string name="default_browser_title" msgid="8101772675085814670">"瀏覽器應用程式"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"沒有預設瀏覽器"</string>
     <string name="default_phone_title" msgid="282005908059637350">"手機應用程式"</string>
@@ -2753,10 +2756,7 @@
     <string name="inactive_apps_title" msgid="1317817863508274533">"已暫停的應用程式"</string>
     <string name="inactive_app_inactive_summary" msgid="6768756967594202411">"已暫停。輕觸即可切換。"</string>
     <string name="inactive_app_active_summary" msgid="4512911571954375968">"運作中。輕觸即可切換。"</string>
-    <!-- no translation found for assist_access_context_title (2047105711005856521) -->
-    <skip />
-    <!-- no translation found for assist_access_context_summary (8365837347256022203) -->
-    <skip />
-    <!-- no translation found for assist_footer (2283187001990543739) -->
-    <skip />
+    <string name="assist_access_context_title" msgid="2047105711005856521">"使用目前的條件"</string>
+    <string name="assist_access_context_summary" msgid="8365837347256022203">"打開輔助應用程式後，允許該應用程式讀取您螢幕上的內容"</string>
+    <string name="assist_footer" msgid="2283187001990543739">"輔助應用程式幫助您識別及取得有用資訊，而無需查問。有些應用程式可支援應用程式啟動器及語音輸入服務，提供更全面的幫助。"</string>
 </resources>

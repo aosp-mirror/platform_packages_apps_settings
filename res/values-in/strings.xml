@@ -343,9 +343,9 @@
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Sidik jari untuk"</string>
     <string name="fingerprint_add_title" msgid="1926752654454033904">"Tambahkan sidik jari"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5078060939636911795">"kunci layar"</string>
-    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="4776063289827470602">
-      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> sidik jari didaftarkan</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> sidik jari didaftarkan</item>
+    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="624961700033979880">
+      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> sidik jari disiapkan</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> sidik jari disiapkan</item>
     </plurals>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Penyiapan sidik jari"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"Untuk menggunakan sidik jari guna membuka kunci layar atau mengonfirmasi pembelian, kami perlu:"</string>
@@ -1015,8 +1015,7 @@
     <string name="storage_wizard_move_progress_title" msgid="4443920302548035674">"Memindahkan <xliff:g id="APP">^1</xliff:g>…"</string>
     <string name="storage_wizard_move_progress_body" msgid="7802577486578105609">"Jangan cabut <xliff:g id="NAME">^1</xliff:g> selama pemindahan. \n\nAplikasi <xliff:g id="APP">^2</xliff:g> di perangkat ini baru dapat tersedia jika pemindahan selesai."</string>
     <string name="storage_wizard_move_progress_cancel" msgid="542047237524588792">"Batalkan pemindahan"</string>
-    <!-- no translation found for storage_wizard_slow_body (8010127667184768025) -->
-    <skip />
+    <string name="storage_wizard_slow_body" msgid="8010127667184768025">"<xliff:g id="NAME_0">^1</xliff:g> ini sepertinya lambat. \n\nAnda dapat melanjutkan, tetapi aplikasi yang dipindahkan ke lokasi ini dapat tersendat dan transfer data mungkin berlangsung lama. \n\nPertimbangkan untuk menggunakan <xliff:g id="NAME_1">^1</xliff:g> yang lebih cepat untuk kinerja yang lebih baik."</string>
     <string name="battery_status_title" msgid="9159414319574976203">"Status baterai"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"Tingkat baterai"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APN"</string>
@@ -1229,7 +1228,7 @@
     <string name="lockpattern_pattern_confirmed_header" msgid="8455614172231880211">"Pola pembuka kunci baru Anda"</string>
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"Konfirmasi"</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"Gambar ulang"</string>
-    <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"Coba Lagi"</string>
+    <string name="lockpattern_retry_button_text" msgid="3480423193273588166">"Hapus"</string>
     <string name="lockpattern_continue_button_text" msgid="4723771754714471410">"Lanjutkan"</string>
     <string name="lockpattern_settings_title" msgid="3207750489460466680">"Pola pembuka kunci"</string>
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"Memerlukan pola"</string>
@@ -1258,7 +1257,7 @@
     <string name="advanced_settings_summary" msgid="4016682978071086747">"Aktifkan opsi setelan yang lain"</string>
     <string name="application_info_label" msgid="5736524913065714880">"Info apl"</string>
     <string name="storage_label" msgid="8700867073480107253">"Penyimpanan"</string>
-    <string name="auto_launch_label" msgid="3012617472833815382">"Luncurkan secara default"</string>
+    <string name="auto_launch_label" msgid="2669236885531442195">"Buka secara default"</string>
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"Default"</string>
     <string name="screen_compatibility_label" msgid="663250687205465394">"Kompatibilitas layar"</string>
     <string name="permissions_label" msgid="2605296874922726203">"Izin"</string>
@@ -1932,8 +1931,7 @@
     <string name="backup_erase_dialog_title" msgid="1027640829482174106"></string>
     <string name="backup_erase_dialog_message" msgid="5221011285568343155">"Berhenti mencadangkan sandi Wi-Fi, bookmark, setelan lainnya, dan data aplikasi, serta menghapus semua salinan di server Google?"</string>
     <string name="fullbackup_erase_dialog_message" msgid="944399039066318647">"Berhenti mencadangkan data perangkat (seperti sandi Wi-Fi dan riwayat panggilan) dan data aplikasi (seperti setelan dan file yang disimpan oleh aplikasi), serta hapus semua salinan di Google Drive?"</string>
-    <!-- no translation found for fullbackup_data_summary (960850365007767734) -->
-    <skip />
+    <string name="fullbackup_data_summary" msgid="960850365007767734">"Secara otomatis mencadangkan data perangkat (seperti sandi Wi-Fi dan riwayat panggilan) dan data aplikasi (seperti setelan dan file yang disimpan oleh aplikasi) dari jarak jauh.\n\nJika Anda mengaktifkan cadangan otomatis, data perangkat dan aplikasi secara berkala disimpan dari jarak jauh. Data aplikasi dapat berupa data apa saja yang telah disimpan oleh aplikasi (menurut setelan pengembang), termasuk data yang berpotensi sensitif seperti kontak, pesan, dan foto."</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"Setelan administrasi perangkat"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"Administrator perangkat"</string>
     <string name="remove_device_admin" msgid="3596845261596451437">"Nonaktifkan"</string>
@@ -2640,12 +2638,12 @@
     <string name="imei_information_title" msgid="8499085421609752290">"Informasi IMEI"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"Informasi relatif IMEI"</string>
     <string name="slot_number" msgid="3762676044904653577">"(Slot<xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
-    <string name="launch_by_default" msgid="2184141780491382435">"Luncurkan secara default"</string>
+    <string name="launch_by_default" msgid="1840761193189009248">"Buka secara default"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> digunakan di <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
-    <string name="app_launch_domain_links_title" msgid="458956710410857777">"Tautan domain"</string>
-    <string name="app_launch_open_domain_urls_title" msgid="5821849783765291139">"Buka URL Domain"</string>
-    <string name="app_launch_open_domain_urls_summary" msgid="7305739311608755281">"Izinkan aplikasi langsung membuka URL Domain"</string>
-    <string name="app_launch_supported_domain_urls_title" msgid="8148494155921307572">"URL domain yang didukung"</string>
+    <string name="app_launch_domain_links_title" msgid="6789955009107320092">"Tautan aplikasi"</string>
+    <string name="app_launch_open_domain_urls_title" msgid="8914721351596745701">"Buka tautan yang didukung"</string>
+    <string name="app_launch_open_domain_urls_summary" msgid="5367573364240712217">"Buka tanpa perlu bertanya"</string>
+    <string name="app_launch_supported_domain_urls_title" msgid="8250695258211477480">"Tautan yang didukung"</string>
     <string name="app_launch_other_defaults_title" msgid="2516812499807835178">"Default lainnya"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> digunakan di <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
     <string name="storage_type_internal" msgid="410824961149037234">"memori internal"</string>
@@ -2691,20 +2689,18 @@
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"<xliff:g id="COUNT_0">%d</xliff:g> dari <xliff:g id="COUNT_1">%d</xliff:g> aplikasi diizinkan"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Ketuk untuk membangunkan"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Ketuk layar dua kali di mana saja untuk membangunkan perangkat"</string>
-    <string name="domain_urls_title" msgid="8735310976048599572">"URL domain"</string>
-    <string name="domain_urls_summary_none" msgid="4817723415916239693">"Jangan buka URL domain apa pun"</string>
-    <string name="domain_urls_summary_one" msgid="4427559120855938432">"Buka \'<xliff:g id="DOMAIN">%s</xliff:g>\'"</string>
-    <string name="domain_urls_summary_some" msgid="2533219801400609818">"Buka \'<xliff:g id="DOMAIN">%s</xliff:g>\' dan URL terkait"</string>
-    <plurals name="domain_urls_apps_summary" formatted="false" msgid="6604886186235343653">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aplikasi dapat membuka URL domainnya</item>
-      <item quantity="one">Satu aplikasi dapat membuka URL domainnya</item>
+    <string name="domain_urls_title" msgid="8762012672312435252">"Tautan aplikasi"</string>
+    <string name="domain_urls_summary_none" msgid="2639588015479657864">"Jangan buka tautan yang didukung"</string>
+    <string name="domain_urls_summary_one" msgid="3704934031930978405">"Buka <xliff:g id="DOMAIN">%s</xliff:g>"</string>
+    <string name="domain_urls_summary_some" msgid="812936714383016364">"Buka <xliff:g id="DOMAIN">%s</xliff:g> dan URL terkait"</string>
+    <plurals name="domain_urls_apps_summary" formatted="false" msgid="4322996467951692661">
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aplikasi dapat membuka tautan yang didukung</item>
+      <item quantity="one">Satu aplikasi dapat membuka tautan yang didukung</item>
     </plurals>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Tidak dikenali"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"Aplikasi Default"</string>
-    <!-- no translation found for default_assist_title (8851464168639315795) -->
-    <skip />
-    <!-- no translation found for default_assist_none (4719591002003824614) -->
-    <skip />
+    <string name="default_assist_title" msgid="8851464168639315795">"Bantuan"</string>
+    <string name="default_assist_none" msgid="4719591002003824614">"Tidak ada Bantuan default"</string>
     <string name="default_browser_title" msgid="8101772675085814670">"Aplikasi browser"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"Tidak ada Browser default"</string>
     <string name="default_phone_title" msgid="282005908059637350">"Aplikasi telepon"</string>
@@ -2748,10 +2744,7 @@
     <string name="inactive_apps_title" msgid="1317817863508274533">"Aplikasi yang tidak aktif"</string>
     <string name="inactive_app_inactive_summary" msgid="6768756967594202411">"Tidak aktif. Sentuh untuk mengalihkan."</string>
     <string name="inactive_app_active_summary" msgid="4512911571954375968">"Aktif. Sentuh untuk mengalihkan."</string>
-    <!-- no translation found for assist_access_context_title (2047105711005856521) -->
-    <skip />
-    <!-- no translation found for assist_access_context_summary (8365837347256022203) -->
-    <skip />
-    <!-- no translation found for assist_footer (2283187001990543739) -->
-    <skip />
+    <string name="assist_access_context_title" msgid="2047105711005856521">"Gunakan konteks saat ini"</string>
+    <string name="assist_access_context_summary" msgid="8365837347256022203">"Jika aplikasi bantuan dibuka, izinkan melihat tindakan yang Anda lakukan di layar"</string>
+    <string name="assist_footer" msgid="2283187001990543739">"Aplikasi bantuan membantu Anda mengidentifikasi dan menindaklanjuti informasi yang berguna tanpa perlu bertanya. Beberapa aplikasi mendukung peluncur dan layanan masukan suara untuk memberikan bantuan terintegrasi."</string>
 </resources>

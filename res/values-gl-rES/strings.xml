@@ -343,9 +343,9 @@
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Usar identificac. para"</string>
     <string name="fingerprint_add_title" msgid="1926752654454033904">"Engadir impresión dixital"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5078060939636911795">"bloqueo da pantalla"</string>
-    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="4776063289827470602">
-      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> impresións dixitais inscritas</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> impresión dixital inscrita</item>
+    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="624961700033979880">
+      <item quantity="other">Configuráronse <xliff:g id="COUNT_1">%1$d</xliff:g> impresións dixitais</item>
+      <item quantity="one">Configurouse <xliff:g id="COUNT_0">%1$d</xliff:g> impresión dixital</item>
     </plurals>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Config. identificación"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"Para usar a túa impresión dixital para desbloquear a túa pantalla ou confirmar compras, teremos que:"</string>
@@ -1228,7 +1228,7 @@
     <string name="lockpattern_pattern_confirmed_header" msgid="8455614172231880211">"O teu novo padrón de desbloqueo"</string>
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"Confirmar"</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"Volver debuxar"</string>
-    <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"Tentar de novo"</string>
+    <string name="lockpattern_retry_button_text" msgid="3480423193273588166">"Borrar"</string>
     <string name="lockpattern_continue_button_text" msgid="4723771754714471410">"Continuar"</string>
     <string name="lockpattern_settings_title" msgid="3207750489460466680">"Padrón de desbloqueo"</string>
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"Padrón obrigatorio"</string>
@@ -1257,7 +1257,8 @@
     <string name="advanced_settings_summary" msgid="4016682978071086747">"Activa máis opcións de configuración"</string>
     <string name="application_info_label" msgid="5736524913065714880">"Información da aplicación"</string>
     <string name="storage_label" msgid="8700867073480107253">"Almacenamento"</string>
-    <string name="auto_launch_label" msgid="3012617472833815382">"Iniciar de forma predeterminada"</string>
+    <!-- no translation found for auto_launch_label (2669236885531442195) -->
+    <skip />
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"Valores predeterminados"</string>
     <string name="screen_compatibility_label" msgid="663250687205465394">"Compatibilidade da pantalla"</string>
     <string name="permissions_label" msgid="2605296874922726203">"Permisos"</string>
@@ -2638,12 +2639,17 @@
     <string name="imei_information_title" msgid="8499085421609752290">"Información de IMEI"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"Información relativa de IMEI"</string>
     <string name="slot_number" msgid="3762676044904653577">"(Rañura<xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
-    <string name="launch_by_default" msgid="2184141780491382435">"Iniciar de forma predeterminada"</string>
+    <!-- no translation found for launch_by_default (1840761193189009248) -->
+    <skip />
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> en uso en <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
-    <string name="app_launch_domain_links_title" msgid="458956710410857777">"Ligazóns de dominio"</string>
-    <string name="app_launch_open_domain_urls_title" msgid="5821849783765291139">"Abrir URL de dominio"</string>
-    <string name="app_launch_open_domain_urls_summary" msgid="7305739311608755281">"Permitir que a aplicación abra directamente os URL de dominio"</string>
-    <string name="app_launch_supported_domain_urls_title" msgid="8148494155921307572">"URL de dominio compatibles"</string>
+    <!-- no translation found for app_launch_domain_links_title (6789955009107320092) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_title (8914721351596745701) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_summary (5367573364240712217) -->
+    <skip />
+    <!-- no translation found for app_launch_supported_domain_urls_title (8250695258211477480) -->
+    <skip />
     <string name="app_launch_other_defaults_title" msgid="2516812499807835178">"Abrir predeterminados"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> en uso en <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
     <string name="storage_type_internal" msgid="410824961149037234">"memoria interna"</string>
@@ -2689,14 +2695,15 @@
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"<xliff:g id="COUNT_0">%d</xliff:g> de <xliff:g id="COUNT_1">%d</xliff:g> aplicacións con permiso"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Tocar para activar"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Toca dúas veces en calquera parte da pantalla para activar o dispositivo"</string>
-    <string name="domain_urls_title" msgid="8735310976048599572">"URL de dominio"</string>
-    <string name="domain_urls_summary_none" msgid="4817723415916239693">"Non abrir ningún URL de dominio"</string>
-    <string name="domain_urls_summary_one" msgid="4427559120855938432">"Abrir <xliff:g id="DOMAIN">%s</xliff:g>\""</string>
-    <string name="domain_urls_summary_some" msgid="2533219801400609818">"Abrir \"<xliff:g id="DOMAIN">%s</xliff:g>\" e os URL relacionados"</string>
-    <plurals name="domain_urls_apps_summary" formatted="false" msgid="6604886186235343653">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aplicacións poden abrir os seus URL de dominio</item>
-      <item quantity="one">Unha aplicación pode abrir os seus URL de dominio</item>
-    </plurals>
+    <!-- no translation found for domain_urls_title (8762012672312435252) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_none (2639588015479657864) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_one (3704934031930978405) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_some (812936714383016364) -->
+    <skip />
+    <!-- no translation found for domain_urls_apps_summary (4322996467951692661) -->
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Non se recoñece"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"Aplicacións predeterminadas"</string>
     <string name="default_assist_title" msgid="8851464168639315795">"Asistente"</string>

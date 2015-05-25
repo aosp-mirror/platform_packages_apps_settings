@@ -344,10 +344,10 @@
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Folosiți amprenta la"</string>
     <string name="fingerprint_add_title" msgid="1926752654454033904">"Adăugați amprenta"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5078060939636911795">"blocarea ecranului"</string>
-    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="4776063289827470602">
-      <item quantity="few"><xliff:g id="COUNT_1">%1$d</xliff:g> amprente înregistrate</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> de amprente înregistrate</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> amprentă înregistrată</item>
+    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="624961700033979880">
+      <item quantity="few"><xliff:g id="COUNT_1">%1$d</xliff:g> amprente configurate</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> de amprente configurate</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> amprentă configurată</item>
     </plurals>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Configurarea amprentei"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"Pentru a debloca ecranul sau a confirma achiziții folosind amprenta, va trebui să:"</string>
@@ -1237,7 +1237,7 @@
     <string name="lockpattern_pattern_confirmed_header" msgid="8455614172231880211">"Noul dvs. model pentru deblocare"</string>
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"Confirmaţi"</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"Redesenare"</string>
-    <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"Încercaţi din nou"</string>
+    <string name="lockpattern_retry_button_text" msgid="3480423193273588166">"Ștergeți"</string>
     <string name="lockpattern_continue_button_text" msgid="4723771754714471410">"Continuaţi"</string>
     <string name="lockpattern_settings_title" msgid="3207750489460466680">"Model pentru deblocare"</string>
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"Solicitaţi model"</string>
@@ -1266,7 +1266,8 @@
     <string name="advanced_settings_summary" msgid="4016682978071086747">"Activaţi mai multe opţiuni pentru setări"</string>
     <string name="application_info_label" msgid="5736524913065714880">"Informaţii despre aplicație"</string>
     <string name="storage_label" msgid="8700867073480107253">"Stocare"</string>
-    <string name="auto_launch_label" msgid="3012617472833815382">"Lansaţi în mod prestabilit"</string>
+    <!-- no translation found for auto_launch_label (2669236885531442195) -->
+    <skip />
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"Prestabilite"</string>
     <string name="screen_compatibility_label" msgid="663250687205465394">"Compatibilitate ecran"</string>
     <string name="permissions_label" msgid="2605296874922726203">"Permisiuni"</string>
@@ -2651,12 +2652,17 @@
     <string name="imei_information_title" msgid="8499085421609752290">"Informații despre IMEI"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"Informații referitoare la IMEI"</string>
     <string name="slot_number" msgid="3762676044904653577">"(Slotul<xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
-    <string name="launch_by_default" msgid="2184141780491382435">"Lansați în mod prestabilit"</string>
+    <!-- no translation found for launch_by_default (1840761193189009248) -->
+    <skip />
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> utilizați din <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
-    <string name="app_launch_domain_links_title" msgid="458956710410857777">"Linkuri de domeniu"</string>
-    <string name="app_launch_open_domain_urls_title" msgid="5821849783765291139">"Deschide adresele URL de domeniu"</string>
-    <string name="app_launch_open_domain_urls_summary" msgid="7305739311608755281">"Permite aplicației să deschidă direct adresele URL de domeniu"</string>
-    <string name="app_launch_supported_domain_urls_title" msgid="8148494155921307572">"Adrese URL de domeniu acceptate"</string>
+    <!-- no translation found for app_launch_domain_links_title (6789955009107320092) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_title (8914721351596745701) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_summary (5367573364240712217) -->
+    <skip />
+    <!-- no translation found for app_launch_supported_domain_urls_title (8250695258211477480) -->
+    <skip />
     <string name="app_launch_other_defaults_title" msgid="2516812499807835178">"Alte valori prestabilite"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> utilizați din <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
     <string name="storage_type_internal" msgid="410824961149037234">"memoria internă"</string>
@@ -2704,15 +2710,15 @@
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"<xliff:g id="COUNT_0">%d</xliff:g> din <xliff:g id="COUNT_1">%d</xliff:g> (de) aplicații au această permisiune"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Atingeți pentru a activa"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Atingeți de două ori oriunde pe ecran pentru a activa dispozitivul"</string>
-    <string name="domain_urls_title" msgid="8735310976048599572">"Adrese URL de domeniu"</string>
-    <string name="domain_urls_summary_none" msgid="4817723415916239693">"Nu deschide nicio adresă URL de domeniu"</string>
-    <string name="domain_urls_summary_one" msgid="4427559120855938432">"Deschid „<xliff:g id="DOMAIN">%s</xliff:g>”"</string>
-    <string name="domain_urls_summary_some" msgid="2533219801400609818">"Deschid „<xliff:g id="DOMAIN">%s</xliff:g>” și adrese URL similare"</string>
-    <plurals name="domain_urls_apps_summary" formatted="false" msgid="6604886186235343653">
-      <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> aplicații își pot deschide adresele URL de domeniu</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> de aplicații își pot deschide adresele URL de domeniu</item>
-      <item quantity="one">O aplicație își poate deschide adresele URL de domeniu</item>
-    </plurals>
+    <!-- no translation found for domain_urls_title (8762012672312435252) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_none (2639588015479657864) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_one (3704934031930978405) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_some (812936714383016364) -->
+    <skip />
+    <!-- no translation found for domain_urls_apps_summary (4322996467951692661) -->
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Nu este recunoscută"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"Aplicații prestabilite"</string>
     <string name="default_assist_title" msgid="8851464168639315795">"Asistent"</string>

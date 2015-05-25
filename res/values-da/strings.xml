@@ -343,9 +343,9 @@
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Brug fingeraftryk til"</string>
     <string name="fingerprint_add_title" msgid="1926752654454033904">"Tilføj fingeraftryk"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5078060939636911795">"skærmlås"</string>
-    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="4776063289827470602">
-      <item quantity="one"><xliff:g id="COUNT_1">%1$d</xliff:g> registreringer af fingeraftryk</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> registreringer af fingeraftryk</item>
+    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="624961700033979880">
+      <item quantity="one"><xliff:g id="COUNT_1">%1$d</xliff:g> fingeraftryk er oprettet</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> fingeraftryk er oprettet</item>
     </plurals>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Registrer fingeraftryk"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"Før du kan bruge dit fingeraftryk til at låse skærmen op eller bekræfte køb, skal vi:"</string>
@@ -1228,7 +1228,7 @@
     <string name="lockpattern_pattern_confirmed_header" msgid="8455614172231880211">"Dit nye oplåsningsmønster"</string>
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"Bekræft"</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"Tegn igen"</string>
-    <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"Prøv igen"</string>
+    <string name="lockpattern_retry_button_text" msgid="3480423193273588166">"Ryd"</string>
     <string name="lockpattern_continue_button_text" msgid="4723771754714471410">"Fortsæt"</string>
     <string name="lockpattern_settings_title" msgid="3207750489460466680">"Oplåsningsmønster"</string>
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"Kræv mønster"</string>
@@ -1257,7 +1257,8 @@
     <string name="advanced_settings_summary" msgid="4016682978071086747">"Aktivér flere indstillinger"</string>
     <string name="application_info_label" msgid="5736524913065714880">"Oplysninger om appen"</string>
     <string name="storage_label" msgid="8700867073480107253">"Lagring"</string>
-    <string name="auto_launch_label" msgid="3012617472833815382">"Åbn som standard"</string>
+    <!-- no translation found for auto_launch_label (2669236885531442195) -->
+    <skip />
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"Standard"</string>
     <string name="screen_compatibility_label" msgid="663250687205465394">"Skærmkompatibilitet"</string>
     <string name="permissions_label" msgid="2605296874922726203">"Tilladelser"</string>
@@ -2638,12 +2639,17 @@
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI-oplysninger"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"Relative IMEI-oplysninger"</string>
     <string name="slot_number" msgid="3762676044904653577">"(Port <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
-    <string name="launch_by_default" msgid="2184141780491382435">"Åbn som standard"</string>
+    <!-- no translation found for launch_by_default (1840761193189009248) -->
+    <skip />
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> brugt i <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
-    <string name="app_launch_domain_links_title" msgid="458956710410857777">"Domænelinks"</string>
-    <string name="app_launch_open_domain_urls_title" msgid="5821849783765291139">"Åbn domænets webadresser"</string>
-    <string name="app_launch_open_domain_urls_summary" msgid="7305739311608755281">"Giv appen tilladelse til at åbne domænets webadresser direkte"</string>
-    <string name="app_launch_supported_domain_urls_title" msgid="8148494155921307572">"Understøttede webadresser for domænet"</string>
+    <!-- no translation found for app_launch_domain_links_title (6789955009107320092) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_title (8914721351596745701) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_summary (5367573364240712217) -->
+    <skip />
+    <!-- no translation found for app_launch_supported_domain_urls_title (8250695258211477480) -->
+    <skip />
     <string name="app_launch_other_defaults_title" msgid="2516812499807835178">"Andre standarder"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> brugt i <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
     <string name="storage_type_internal" msgid="410824961149037234">"intern hukommelse"</string>
@@ -2689,14 +2695,15 @@
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"<xliff:g id="COUNT_0">%d</xliff:g> ud af <xliff:g id="COUNT_1">%d</xliff:g> apps har tilladelse"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Tryk for at vække"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Tryk to gange et vilkårligt sted på skærmen for at vække enheden"</string>
-    <string name="domain_urls_title" msgid="8735310976048599572">"Domænets webadresser"</string>
-    <string name="domain_urls_summary_none" msgid="4817723415916239693">"Undlad at åbne domænets webadresser"</string>
-    <string name="domain_urls_summary_one" msgid="4427559120855938432">"Åbn \"<xliff:g id="DOMAIN">%s</xliff:g>\""</string>
-    <string name="domain_urls_summary_some" msgid="2533219801400609818">"Åbn \"<xliff:g id="DOMAIN">%s</xliff:g>\" og relaterede webadresser"</string>
-    <plurals name="domain_urls_apps_summary" formatted="false" msgid="6604886186235343653">
-      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> apps kan åbne domænets webadresser</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> apps kan åbne domænets webadresser</item>
-    </plurals>
+    <!-- no translation found for domain_urls_title (8762012672312435252) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_none (2639588015479657864) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_one (3704934031930978405) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_some (812936714383016364) -->
+    <skip />
+    <!-- no translation found for domain_urls_apps_summary (4322996467951692661) -->
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Kan ikke genkendes"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"Standardapps"</string>
     <string name="default_assist_title" msgid="8851464168639315795">"Assistance"</string>

@@ -343,9 +343,9 @@
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Util. empr. digit. per"</string>
     <string name="fingerprint_add_title" msgid="1926752654454033904">"Afegeix una empremta digital"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5078060939636911795">"bloqueig de pantalla"</string>
-    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="4776063289827470602">
-      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> empremta digital sol·licitada</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> empremtes digitals sol·licitades</item>
+    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="624961700033979880">
+      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> empremtes digitals configurades</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> empremta digital configurada</item>
     </plurals>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Conf. empremta digital"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"Per fer servir la teva empremta digital per desbloquejar la pantalla o confirmar compres, ens caldrà:"</string>
@@ -955,7 +955,7 @@
     <string name="unmount_inform_text" product="default" msgid="1904212716075458402">"La targeta SD es desinstal·larà."</string>
     <string name="sd_ejecting_title" msgid="8824572198034365468">"S\'està desmuntant"</string>
     <string name="sd_ejecting_summary" msgid="2028753069184908491">"Desactivació en procés"</string>
-    <string name="storage_low_title" msgid="1388569749716225155">"S\'està acabant l\'espai d\'emmag."</string>
+    <string name="storage_low_title" msgid="1388569749716225155">"L\'espai d\'emmagatzematge s\'està esgotant"</string>
     <string name="storage_low_summary" msgid="7737465774892563129">"És possible que algunes funcions del sistema, com ara la sincronització, no funcionin bé. Prova d\'alliberar espai: suprimeix o desfixa elements, com ara aplicacions o contingut multimèdia."</string>
     <string name="storage_menu_rename" msgid="7141058657592615390">"Canvia el nom"</string>
     <string name="storage_menu_mount" msgid="1014683672493425425">"Activa"</string>
@@ -1228,7 +1228,7 @@
     <string name="lockpattern_pattern_confirmed_header" msgid="8455614172231880211">"Patró de desbloqueig nou"</string>
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"Confirma"</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"Torna a dibuixar"</string>
-    <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"Reintenta"</string>
+    <string name="lockpattern_retry_button_text" msgid="3480423193273588166">"Esborra"</string>
     <string name="lockpattern_continue_button_text" msgid="4723771754714471410">"Continua"</string>
     <string name="lockpattern_settings_title" msgid="3207750489460466680">"Patró de desbloqueig"</string>
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"Requereix un patró"</string>
@@ -1257,7 +1257,8 @@
     <string name="advanced_settings_summary" msgid="4016682978071086747">"Activa més opcions de configuració"</string>
     <string name="application_info_label" msgid="5736524913065714880">"Informació de l\'aplicació"</string>
     <string name="storage_label" msgid="8700867073480107253">"Emmagatzematge"</string>
-    <string name="auto_launch_label" msgid="3012617472833815382">"Obre de manera predeterminada"</string>
+    <!-- no translation found for auto_launch_label (2669236885531442195) -->
+    <skip />
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"Valors predeterminats"</string>
     <string name="screen_compatibility_label" msgid="663250687205465394">"Compatibilitat amb la pantalla"</string>
     <string name="permissions_label" msgid="2605296874922726203">"Permisos"</string>
@@ -2638,12 +2639,17 @@
     <string name="imei_information_title" msgid="8499085421609752290">"Informació sobre l\'IMEI"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"Informació relativa a l\'IMEI"</string>
     <string name="slot_number" msgid="3762676044904653577">"(Ranura <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
-    <string name="launch_by_default" msgid="2184141780491382435">"Obre de manera predeterminada"</string>
+    <!-- no translation found for launch_by_default (1840761193189009248) -->
+    <skip />
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> en ús a <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
-    <string name="app_launch_domain_links_title" msgid="458956710410857777">"Enllaços del domini"</string>
-    <string name="app_launch_open_domain_urls_title" msgid="5821849783765291139">"Obre els URL del domini"</string>
-    <string name="app_launch_open_domain_urls_summary" msgid="7305739311608755281">"Permet que l\'aplicació obri directament els URL del domini"</string>
-    <string name="app_launch_supported_domain_urls_title" msgid="8148494155921307572">"URL de dominis admesos"</string>
+    <!-- no translation found for app_launch_domain_links_title (6789955009107320092) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_title (8914721351596745701) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_summary (5367573364240712217) -->
+    <skip />
+    <!-- no translation found for app_launch_supported_domain_urls_title (8250695258211477480) -->
+    <skip />
     <string name="app_launch_other_defaults_title" msgid="2516812499807835178">"Altres valors predeterminats"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> en ús a <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
     <string name="storage_type_internal" msgid="410824961149037234">"memòria interna"</string>
@@ -2689,14 +2695,15 @@
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"Es permeten <xliff:g id="COUNT_0">%d</xliff:g> aplicacions d\'un total de <xliff:g id="COUNT_1">%d</xliff:g>"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Toca per activar"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Toca dos cops un punt de la pantalla per activar el dispositiu"</string>
-    <string name="domain_urls_title" msgid="8735310976048599572">"URL del domini"</string>
-    <string name="domain_urls_summary_none" msgid="4817723415916239693">"No obris l\'URL de cap domini"</string>
-    <string name="domain_urls_summary_one" msgid="4427559120855938432">"Obre <xliff:g id="DOMAIN">%s</xliff:g>"</string>
-    <string name="domain_urls_summary_some" msgid="2533219801400609818">"Obre <xliff:g id="DOMAIN">%s</xliff:g> i els URL relacionats"</string>
-    <plurals name="domain_urls_apps_summary" formatted="false" msgid="6604886186235343653">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aplicacions poden obrir els URL dels seus dominis</item>
-      <item quantity="one">Una aplicació pot obrir els URL del seu domini</item>
-    </plurals>
+    <!-- no translation found for domain_urls_title (8762012672312435252) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_none (2639588015479657864) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_one (3704934031930978405) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_some (812936714383016364) -->
+    <skip />
+    <!-- no translation found for domain_urls_apps_summary (4322996467951692661) -->
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"No s\'ha reconegut"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"Aplicacions predeterminades"</string>
     <string name="default_assist_title" msgid="8851464168639315795">"Assistència"</string>

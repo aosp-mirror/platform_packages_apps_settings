@@ -345,11 +345,11 @@
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Upor. prst. odtisa za"</string>
     <string name="fingerprint_add_title" msgid="1926752654454033904">"Dodaj prstni odtis"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5078060939636911795">"zaklepanje zaslona"</string>
-    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="4776063289827470602">
-      <item quantity="one"><xliff:g id="COUNT_1">%1$d</xliff:g> včlanjen prstni odtis</item>
-      <item quantity="two"><xliff:g id="COUNT_1">%1$d</xliff:g> včlanjena prstna odtisa</item>
-      <item quantity="few"><xliff:g id="COUNT_1">%1$d</xliff:g> včlanjeni prstni odtisi</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> včlanjenih prstnih odtisov</item>
+    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="624961700033979880">
+      <item quantity="one"><xliff:g id="COUNT_1">%1$d</xliff:g> prstni odtis je nastavljen</item>
+      <item quantity="two"><xliff:g id="COUNT_1">%1$d</xliff:g> prstna odtisa sta nastavljena</item>
+      <item quantity="few"><xliff:g id="COUNT_1">%1$d</xliff:g> prstni odtisi so nastavljeni</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> prstnih odtisov je nastavljenih</item>
     </plurals>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Nast. prstnega odtisa"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"Če želite za odklepanje zaslona ali potrjevanje nakupov uporabljati prstni odtis, morate:"</string>
@@ -1246,7 +1246,7 @@
     <string name="lockpattern_pattern_confirmed_header" msgid="8455614172231880211">"Novi vzorec za odklepanje"</string>
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"Potrdi"</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"Ponovno nariši"</string>
-    <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"Poskusi znova"</string>
+    <string name="lockpattern_retry_button_text" msgid="3480423193273588166">"Izbris"</string>
     <string name="lockpattern_continue_button_text" msgid="4723771754714471410">"Naprej"</string>
     <string name="lockpattern_settings_title" msgid="3207750489460466680">"Vzorec za odklepanje"</string>
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"Zahtevaj vzorec"</string>
@@ -1275,7 +1275,8 @@
     <string name="advanced_settings_summary" msgid="4016682978071086747">"Omogoči več možnosti nastavitev."</string>
     <string name="application_info_label" msgid="5736524913065714880">"Podatki o aplikaciji"</string>
     <string name="storage_label" msgid="8700867073480107253">"Prostor za shranjevanje"</string>
-    <string name="auto_launch_label" msgid="3012617472833815382">"Privzeti zagon"</string>
+    <!-- no translation found for auto_launch_label (2669236885531442195) -->
+    <skip />
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"Privzete nastavitve"</string>
     <string name="screen_compatibility_label" msgid="663250687205465394">"Združljivost zaslona"</string>
     <string name="permissions_label" msgid="2605296874922726203">"Dovoljenja"</string>
@@ -2662,12 +2663,17 @@
     <string name="imei_information_title" msgid="8499085421609752290">"Podatki o IMEI"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"Relativni podatki o IMEI"</string>
     <string name="slot_number" msgid="3762676044904653577">"(Reža <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
-    <string name="launch_by_default" msgid="2184141780491382435">"Privzeti zagon"</string>
+    <!-- no translation found for launch_by_default (1840761193189009248) -->
+    <skip />
     <string name="storage_summary_format" msgid="5419902362347539755">"Uporabljeno: <xliff:g id="SIZE">%1$s</xliff:g> – <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
-    <string name="app_launch_domain_links_title" msgid="458956710410857777">"Povezave domene"</string>
-    <string name="app_launch_open_domain_urls_title" msgid="5821849783765291139">"Odpiranje URL-jev domene"</string>
-    <string name="app_launch_open_domain_urls_summary" msgid="7305739311608755281">"Dovoli aplikaciji, da neposredno odpre URL-je domene"</string>
-    <string name="app_launch_supported_domain_urls_title" msgid="8148494155921307572">"Podprti URL-ji domene"</string>
+    <!-- no translation found for app_launch_domain_links_title (6789955009107320092) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_title (8914721351596745701) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_summary (5367573364240712217) -->
+    <skip />
+    <!-- no translation found for app_launch_supported_domain_urls_title (8250695258211477480) -->
+    <skip />
     <string name="app_launch_other_defaults_title" msgid="2516812499807835178">"Druge privzete nastavitve"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"Uporabljeno: <xliff:g id="SIZE">%1$s</xliff:g> – <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
     <string name="storage_type_internal" msgid="410824961149037234">"notranji pomnilnik"</string>
@@ -2717,16 +2723,15 @@
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"Dovoljenih je toliko aplikacij: <xliff:g id="COUNT_0">%d</xliff:g> od <xliff:g id="COUNT_1">%d</xliff:g>"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Dot. za prekl. iz stan. pripr."</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Za preklop naprave iz stanja pripravljenosti se dvakrat dotaknite kjer koli na zaslonu"</string>
-    <string name="domain_urls_title" msgid="8735310976048599572">"URL-ji domene"</string>
-    <string name="domain_urls_summary_none" msgid="4817723415916239693">"Ne odpre URL-jev domene"</string>
-    <string name="domain_urls_summary_one" msgid="4427559120855938432">"Odpre domeno »<xliff:g id="DOMAIN">%s</xliff:g>«"</string>
-    <string name="domain_urls_summary_some" msgid="2533219801400609818">"Odpre domeno »<xliff:g id="DOMAIN">%s</xliff:g>« in povezane URL-je"</string>
-    <plurals name="domain_urls_apps_summary" formatted="false" msgid="6604886186235343653">
-      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> aplikacija lahko odpre URL-je svoje domene</item>
-      <item quantity="two"><xliff:g id="COUNT">%d</xliff:g> aplikaciji lahko odpreta URL-je svoje domene</item>
-      <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> aplikacije lahko odprejo URL-je svoje domene</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aplikacij lahko odpre URL-je svoje domene</item>
-    </plurals>
+    <!-- no translation found for domain_urls_title (8762012672312435252) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_none (2639588015479657864) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_one (3704934031930978405) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_some (812936714383016364) -->
+    <skip />
+    <!-- no translation found for domain_urls_apps_summary (4322996467951692661) -->
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Ni prepoznano"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"Privzete aplikacije"</string>
     <string name="default_assist_title" msgid="8851464168639315795">"Pomoč"</string>

@@ -345,11 +345,11 @@
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"K čemu otisk používat"</string>
     <string name="fingerprint_add_title" msgid="1926752654454033904">"Přidat otisk prstu"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5078060939636911795">"zámek obrazovky"</string>
-    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="4776063289827470602">
-      <item quantity="few">Zaregistrovány <xliff:g id="COUNT_1">%1$d</xliff:g> otisky prstů</item>
-      <item quantity="many">Zaregistrováno <xliff:g id="COUNT_1">%1$d</xliff:g> otisku prstu</item>
-      <item quantity="other">Zaregistrováno <xliff:g id="COUNT_1">%1$d</xliff:g> otisků prstů</item>
-      <item quantity="one">Zaregistrován <xliff:g id="COUNT_0">%1$d</xliff:g> otisk prstu</item>
+    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="624961700033979880">
+      <item quantity="few">Nastavení <xliff:g id="COUNT_1">%1$d</xliff:g> otisků prstu</item>
+      <item quantity="many">Nastavení <xliff:g id="COUNT_1">%1$d</xliff:g> otisku prstu</item>
+      <item quantity="other">Nastavení <xliff:g id="COUNT_1">%1$d</xliff:g> otisků prstu</item>
+      <item quantity="one">Nastavení <xliff:g id="COUNT_0">%1$d</xliff:g> otisku prstu</item>
     </plurals>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Nastavení otisku prstu"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"Aby bylo možné pomocí otisku prstu odemykat obrazovku a potvrzovat nákupy, bude potřeba provést následující:"</string>
@@ -1246,7 +1246,7 @@
     <string name="lockpattern_pattern_confirmed_header" msgid="8455614172231880211">"Nové bezpečnostní gesto"</string>
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"Potvrdit"</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"Nakreslit znovu"</string>
-    <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"Zkusit znovu"</string>
+    <string name="lockpattern_retry_button_text" msgid="3480423193273588166">"Vymazat"</string>
     <string name="lockpattern_continue_button_text" msgid="4723771754714471410">"Pokračovat"</string>
     <string name="lockpattern_settings_title" msgid="3207750489460466680">"Gesto odemknutí"</string>
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"Požadovat gesto"</string>
@@ -1275,7 +1275,8 @@
     <string name="advanced_settings_summary" msgid="4016682978071086747">"Povolit další možnosti nastavení"</string>
     <string name="application_info_label" msgid="5736524913065714880">"Informace o aplikaci"</string>
     <string name="storage_label" msgid="8700867073480107253">"Úložiště"</string>
-    <string name="auto_launch_label" msgid="3012617472833815382">"Spouštět jako výchozí"</string>
+    <!-- no translation found for auto_launch_label (2669236885531442195) -->
+    <skip />
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"Výchozí aplikace"</string>
     <string name="screen_compatibility_label" msgid="663250687205465394">"Kompatibilita s obrazovkou"</string>
     <string name="permissions_label" msgid="2605296874922726203">"Oprávnění"</string>
@@ -2662,12 +2663,17 @@
     <string name="imei_information_title" msgid="8499085421609752290">"Informace o kódu IMEI"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"Informace související s kódem IMEI"</string>
     <string name="slot_number" msgid="3762676044904653577">"(Slot <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
-    <string name="launch_by_default" msgid="2184141780491382435">"Spouštět ve výchozím nastavení"</string>
+    <!-- no translation found for launch_by_default (1840761193189009248) -->
+    <skip />
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="STORAGE_TYPE">%2$s</xliff:g> – využito <xliff:g id="SIZE">%1$s</xliff:g>"</string>
-    <string name="app_launch_domain_links_title" msgid="458956710410857777">"Odkazy na domény"</string>
-    <string name="app_launch_open_domain_urls_title" msgid="5821849783765291139">"Otevřít adresy URL domény"</string>
-    <string name="app_launch_open_domain_urls_summary" msgid="7305739311608755281">"Povolit aplikaci přímo otevřít adresy URL domény"</string>
-    <string name="app_launch_supported_domain_urls_title" msgid="8148494155921307572">"Podporované adresy URL domény"</string>
+    <!-- no translation found for app_launch_domain_links_title (6789955009107320092) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_title (8914721351596745701) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_summary (5367573364240712217) -->
+    <skip />
+    <!-- no translation found for app_launch_supported_domain_urls_title (8250695258211477480) -->
+    <skip />
     <string name="app_launch_other_defaults_title" msgid="2516812499807835178">"Další výchozí hodnoty"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="STORAGE_TYPE">%2$s</xliff:g> – využito <xliff:g id="SIZE">%1$s</xliff:g>"</string>
     <string name="storage_type_internal" msgid="410824961149037234">"Interní paměť"</string>
@@ -2717,16 +2723,15 @@
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"Povoleno u <xliff:g id="COUNT_0">%d</xliff:g> z <xliff:g id="COUNT_1">%d</xliff:g> aplikací"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Probudit klepnutím"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Dvojitým klepnutím kamkoli na obrazovku zařízení probudíte"</string>
-    <string name="domain_urls_title" msgid="8735310976048599572">"Adresy URL domény"</string>
-    <string name="domain_urls_summary_none" msgid="4817723415916239693">"Neotevírat adresy URL domény"</string>
-    <string name="domain_urls_summary_one" msgid="4427559120855938432">"Otevřít adresu <xliff:g id="DOMAIN">%s</xliff:g>"</string>
-    <string name="domain_urls_summary_some" msgid="2533219801400609818">"Otevřít adresu <xliff:g id="DOMAIN">%s</xliff:g> a související adresy URL"</string>
-    <plurals name="domain_urls_apps_summary" formatted="false" msgid="6604886186235343653">
-      <item quantity="few">Adresy URL domény mohou otevřít <xliff:g id="COUNT">%d</xliff:g> aplikace</item>
-      <item quantity="many">Adresy URL domény může otevřít <xliff:g id="COUNT">%d</xliff:g> aplikace</item>
-      <item quantity="other">Adresy URL domény může otevřít <xliff:g id="COUNT">%d</xliff:g> aplikací</item>
-      <item quantity="one">Adresy URL domény může otevřít jedna aplikace</item>
-    </plurals>
+    <!-- no translation found for domain_urls_title (8762012672312435252) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_none (2639588015479657864) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_one (3704934031930978405) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_some (812936714383016364) -->
+    <skip />
+    <!-- no translation found for domain_urls_apps_summary (4322996467951692661) -->
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Nerozpoznáno"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"Výchozí aplikace"</string>
     <string name="default_assist_title" msgid="8851464168639315795">"Asistence"</string>

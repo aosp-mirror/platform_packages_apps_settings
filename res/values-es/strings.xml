@@ -343,9 +343,9 @@
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Usar huella para"</string>
     <string name="fingerprint_add_title" msgid="1926752654454033904">"Añadir huella digital"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5078060939636911795">"bloqueo de pantalla"</string>
-    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="4776063289827470602">
-      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> huellas digitales registradas</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> huella digital registrada</item>
+    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="624961700033979880">
+      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> huellas digitales configuradas</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> huella digital configurada</item>
     </plurals>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Configuración huella"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"Si quieres utilizar tu huella digital para desbloquear la pantalla de bloqueo o confirmar compras, debes:"</string>
@@ -1015,8 +1015,7 @@
     <string name="storage_wizard_move_progress_title" msgid="4443920302548035674">"Moviendo <xliff:g id="APP">^1</xliff:g>…"</string>
     <string name="storage_wizard_move_progress_body" msgid="7802577486578105609">"No extraigas tu <xliff:g id="NAME">^1</xliff:g> durante la migración \n\nLa aplicación <xliff:g id="APP">^2</xliff:g> de este dispositivo no estará disponible hasta que finalice el proceso."</string>
     <string name="storage_wizard_move_progress_cancel" msgid="542047237524588792">"Cancelar migración"</string>
-    <!-- no translation found for storage_wizard_slow_body (8010127667184768025) -->
-    <skip />
+    <string name="storage_wizard_slow_body" msgid="8010127667184768025">"Esta <xliff:g id="NAME_0">^1</xliff:g> no parece ser muy rápida. \n\nPuedes seguir, pero puede que las aplicaciones movidas a esta ubicación no funcionen de forma fluida y las transferencias de datos tarden bastante. \n\nConsidera usar una <xliff:g id="NAME_1">^1</xliff:g> para mejorar el rendimiento."</string>
     <string name="battery_status_title" msgid="9159414319574976203">"Estado de la batería"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"Nivel de batería"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APN"</string>
@@ -1229,7 +1228,7 @@
     <string name="lockpattern_pattern_confirmed_header" msgid="8455614172231880211">"Tu nuevo patrón de desbloqueo"</string>
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"Confirmar"</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"Crear un patrón nuevo"</string>
-    <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"Repetir"</string>
+    <string name="lockpattern_retry_button_text" msgid="3480423193273588166">"Borrar"</string>
     <string name="lockpattern_continue_button_text" msgid="4723771754714471410">"Continuar"</string>
     <string name="lockpattern_settings_title" msgid="3207750489460466680">"Patrón de desbloqueo"</string>
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"Patrón obligatorio"</string>
@@ -1258,7 +1257,8 @@
     <string name="advanced_settings_summary" msgid="4016682978071086747">"Habilitar más opciones de configuración"</string>
     <string name="application_info_label" msgid="5736524913065714880">"Información de la aplicación"</string>
     <string name="storage_label" msgid="8700867073480107253">"Almacenamiento"</string>
-    <string name="auto_launch_label" msgid="3012617472833815382">"Abrir de forma predeterminada"</string>
+    <!-- no translation found for auto_launch_label (2669236885531442195) -->
+    <skip />
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"Valores predeterminados"</string>
     <string name="screen_compatibility_label" msgid="663250687205465394">"Compatibilidad de la pantalla"</string>
     <string name="permissions_label" msgid="2605296874922726203">"Permisos"</string>
@@ -1932,8 +1932,7 @@
     <string name="backup_erase_dialog_title" msgid="1027640829482174106"></string>
     <string name="backup_erase_dialog_message" msgid="5221011285568343155">"¿Quieres dejar de crear copias de seguridad de las contraseñas Wi-Fi, de los marcadores y de otros ajustes y datos de aplicaciones, además de borrar todas las copias de los servidores de Google?"</string>
     <string name="fullbackup_erase_dialog_message" msgid="944399039066318647">"¿Quieres detener la copia de seguridad de los datos del dispositivo (como las contraseñas de redes Wi-Fi y el historial de llamadas) y de las aplicaciones (por ejemplo, la configuración y los archivos guardados) y borrar todas las copias de Google Drive?"</string>
-    <!-- no translation found for fullbackup_data_summary (960850365007767734) -->
-    <skip />
+    <string name="fullbackup_data_summary" msgid="960850365007767734">"Realiza una copia de seguridad automática de los datos del dispositivo (como las contraseñas de redes Wi-Fi y el historial de llamadas) y de los datos de las aplicaciones (como sus ajustes y archivos guardados) de forma remota.\n\nAl activar la copia de seguridad automática, los datos del dispositivo y de las aplicaciones se guardan periódicamente de forma remota. Los datos de las aplicaciones pueden ser cualquier tipo de información que guarden (en función de la configuración de los desarrolladores), incluidos los datos que pueden ser confidenciales (como contactos, mensajes y fotos)."</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"Ajustes de administración de dispositivos"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"Administrador de dispositivos"</string>
     <string name="remove_device_admin" msgid="3596845261596451437">"Desactivar"</string>
@@ -2640,12 +2639,17 @@
     <string name="imei_information_title" msgid="8499085421609752290">"Información del IMEI"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"Información relacionada con el IMEI"</string>
     <string name="slot_number" msgid="3762676044904653577">"(N.º <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
-    <string name="launch_by_default" msgid="2184141780491382435">"Abrir de forma predeterminada"</string>
+    <!-- no translation found for launch_by_default (1840761193189009248) -->
+    <skip />
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> utilizados en <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
-    <string name="app_launch_domain_links_title" msgid="458956710410857777">"Enlaces de dominio"</string>
-    <string name="app_launch_open_domain_urls_title" msgid="5821849783765291139">"Abrir URLs de dominio"</string>
-    <string name="app_launch_open_domain_urls_summary" msgid="7305739311608755281">"Permitir que la aplicación abra directamente URLs de dominio"</string>
-    <string name="app_launch_supported_domain_urls_title" msgid="8148494155921307572">"URL de dominio admitidas"</string>
+    <!-- no translation found for app_launch_domain_links_title (6789955009107320092) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_title (8914721351596745701) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_summary (5367573364240712217) -->
+    <skip />
+    <!-- no translation found for app_launch_supported_domain_urls_title (8250695258211477480) -->
+    <skip />
     <string name="app_launch_other_defaults_title" msgid="2516812499807835178">"Otras aplicaciones predeterminadas"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> utilizados en <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
     <string name="storage_type_internal" msgid="410824961149037234">"memoria interna"</string>
@@ -2691,20 +2695,19 @@
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"<xliff:g id="COUNT_0">%d</xliff:g> de <xliff:g id="COUNT_1">%d</xliff:g> aplicaciones permitidas"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Tocar para activar"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Toca dos veces cualquier punto de la pantalla para activar el dispositivo"</string>
-    <string name="domain_urls_title" msgid="8735310976048599572">"URLs de dominio"</string>
-    <string name="domain_urls_summary_none" msgid="4817723415916239693">"No abrir ninguna URL de dominio"</string>
-    <string name="domain_urls_summary_one" msgid="4427559120855938432">"Abrir <xliff:g id="DOMAIN">%s</xliff:g>"</string>
-    <string name="domain_urls_summary_some" msgid="2533219801400609818">"Abrir <xliff:g id="DOMAIN">%s</xliff:g> y URL relacionadas"</string>
-    <plurals name="domain_urls_apps_summary" formatted="false" msgid="6604886186235343653">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aplicaciones pueden abrir sus URL de dominio</item>
-      <item quantity="one">Una aplicación puede abrir sus URL de dominio</item>
-    </plurals>
+    <!-- no translation found for domain_urls_title (8762012672312435252) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_none (2639588015479657864) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_one (3704934031930978405) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_some (812936714383016364) -->
+    <skip />
+    <!-- no translation found for domain_urls_apps_summary (4322996467951692661) -->
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"No reconocido"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"Aplicaciones predeterminadas"</string>
-    <!-- no translation found for default_assist_title (8851464168639315795) -->
-    <skip />
-    <!-- no translation found for default_assist_none (4719591002003824614) -->
-    <skip />
+    <string name="default_assist_title" msgid="8851464168639315795">"Asistencia"</string>
+    <string name="default_assist_none" msgid="4719591002003824614">"No hay aplicaciones de asistencia predeterminadas"</string>
     <string name="default_browser_title" msgid="8101772675085814670">"Aplicación Navegador"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"Sin navegador predeterminado"</string>
     <string name="default_phone_title" msgid="282005908059637350">"Aplicación Teléfono"</string>
@@ -2748,10 +2751,7 @@
     <string name="inactive_apps_title" msgid="1317817863508274533">"Aplicaciones inactivas"</string>
     <string name="inactive_app_inactive_summary" msgid="6768756967594202411">"Inactiva. Toca para cambiar."</string>
     <string name="inactive_app_active_summary" msgid="4512911571954375968">"Activa. Toca para cambiar."</string>
-    <!-- no translation found for assist_access_context_title (2047105711005856521) -->
-    <skip />
-    <!-- no translation found for assist_access_context_summary (8365837347256022203) -->
-    <skip />
-    <!-- no translation found for assist_footer (2283187001990543739) -->
-    <skip />
+    <string name="assist_access_context_title" msgid="2047105711005856521">"Utilizar contexto actual"</string>
+    <string name="assist_access_context_summary" msgid="8365837347256022203">"Al abrir la aplicación de asistencia, permitirle ver lo que has estado haciendo en tu pantalla"</string>
+    <string name="assist_footer" msgid="2283187001990543739">"Las aplicaciones de asistencia te permiten identificar y utilizar información útil sin tener que pedir permiso. Algunas aplicaciones admiten tanto el launcher como los servicios de entrada de voz para ofrecerte asistencia integrada."</string>
 </resources>

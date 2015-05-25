@@ -343,9 +343,9 @@
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"ໃຊ້​ລາຍ​ນີ້ວ​ມື​ສຳ​ລັບ"</string>
     <string name="fingerprint_add_title" msgid="1926752654454033904">"ເພີ່ມ​ລາຍ​ນີ້ວ​ມື​"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5078060939636911795">"ລັອກໜ້າຈໍ"</string>
-    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="4776063289827470602">
-      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> ລາຍ​ນີ້ວ​ມືໄດ້ລົງ​ທະ​ບຽນ​ແລ້ວ</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> ລາຍ​ນີ້ວ​ມືລົງໄດ້​ທະ​ບຽນ​​ແລ້ວ</item>
+    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="624961700033979880">
+      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> ລາຍ​ນີ້ວ​ມື​ຖືກ​ຕັ້ງ​​ແລ້ວ</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> ລາຍ​ນີ້ວ​ມື​ຖືກ​ຕັ້ງ​ແລ້ວ</item>
     </plurals>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"ການຕັ້ງ​ລາຍ​ນີ້ວ​ມື"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"ເພື່ອ​ໃຊ້​ລາຍ​ນີ້ວ​ມື​ຂອງ​ທ່ານ​ປົດ​ລັອກ​ໜ້າ​ຈ​ໍ​ຂອງ​ທ່ານ ແລະ​ຢືນ​ຢັນ​ການ​ຊື້, ພວກ​ເຮົາ​ຈຳ​ເປັນ​ຕ້ອງ:"</string>
@@ -1015,8 +1015,7 @@
     <string name="storage_wizard_move_progress_title" msgid="4443920302548035674">"ກຳ​ລັງ​ຍ້າຍ <xliff:g id="APP">^1</xliff:g>…"</string>
     <string name="storage_wizard_move_progress_body" msgid="7802577486578105609">"ຢ່າ​ເອົາ <xliff:g id="NAME">^1</xliff:g> ອອກ​ໄປ​ໃນ​ລະ​ຫວ່າງ​ການ​ຍ້າຍ. \n\nແອັບ <xliff:g id="APP">^2</xliff:g> ຢູ່​ໃນ​ອຸ​ປະ​ກອນ​ຈະ​ບໍ່​ມີ​ໃຫ້​ຈົນ​ກ່​ວາ​ສຳ​ເລັດ​ການ​ຍ້າຍ."</string>
     <string name="storage_wizard_move_progress_cancel" msgid="542047237524588792">"ຍົກ​ເລີກ​ການ​ຍ້າຍ"</string>
-    <!-- no translation found for storage_wizard_slow_body (8010127667184768025) -->
-    <skip />
+    <string name="storage_wizard_slow_body" msgid="8010127667184768025">"ປະ​ກົດ​ວ່າ <xliff:g id="NAME_0">^1</xliff:g> ນີ​ຊັກ​ຊ້າ​. \n\nທ່ານ​ສາ​ມາດ​ສືບ​ຕໍ່​ໄດ້, ແຕ່​ແອັບ​ທີ່​ຖືກ​ຍ້າຍ​ໄປ​ຫາ​ທີ່​ຕັ້ງ​ນີ້​ແລ້ວ​ອາດ​ຈະ​ເປັນ​ກະ​ຕຸ​ກະ​ຕັກ ແລະ​ການ​ໂອນ​ຂໍ້​ມູ​ນ​ອາດ​ຈະ​ໃຊ້​ເວ​ລາ​ດົນ. \n\nພິ​ຈາ​ລະ​ນາ​ໃຊ້ <xliff:g id="NAME_1">^1</xliff:g> ທີ່​ໄວ​ກ່​ວາ ເພື່ອ​ໃຫ້​ມີ​ການ​ປະ​ຕິ​ບັດ​ໄດ້​ໄວ​ກ່​ວາ."</string>
     <string name="battery_status_title" msgid="9159414319574976203">"ສະຖານະແບັດເຕີຣີ"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"ລະດັບແບັດເຕີຣີ"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APNs"</string>
@@ -1229,7 +1228,7 @@
     <string name="lockpattern_pattern_confirmed_header" msgid="8455614172231880211">"ຮູບ​ແບບ​ປົດ​ລັອກ​ໃໝ່​ຂອງ​ທ່ານ"</string>
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"ຢືນຢັນ"</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"ແຕ້ມໃໝ່"</string>
-    <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"ລອງໃໝ່"</string>
+    <string name="lockpattern_retry_button_text" msgid="3480423193273588166">"​ລຶບ​ລ້າງ"</string>
     <string name="lockpattern_continue_button_text" msgid="4723771754714471410">"ສືບຕໍ່"</string>
     <string name="lockpattern_settings_title" msgid="3207750489460466680">"ຮູບແບບປົດລັອກ"</string>
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"ຕ້ອງການຮູບແບບ"</string>
@@ -1258,7 +1257,7 @@
     <string name="advanced_settings_summary" msgid="4016682978071086747">"ເປີດໃຊ້ໂຕເລືອກການຕັ້ງຄ່າເພີ່ມເຕີມ."</string>
     <string name="application_info_label" msgid="5736524913065714880">"ຂໍ້ມູນແອັບຯ"</string>
     <string name="storage_label" msgid="8700867073480107253">"ພື້ນທີ່ຈັດເກັບຂໍ້ມູນ"</string>
-    <string name="auto_launch_label" msgid="3012617472833815382">"ເລີ່ມໃຊ້ຕາມຄ່າເລີ່ມຕົ້ນ"</string>
+    <string name="auto_launch_label" msgid="2669236885531442195">"ເປີດ​ຕາມຄ່າເລີ່ມຕົ້ນ"</string>
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"ຄ່າເລີ່ມຕົ້ນ"</string>
     <string name="screen_compatibility_label" msgid="663250687205465394">"ຄວາມເຂົ້າກັນໄດ້ຂອງໜ້າຈໍ"</string>
     <string name="permissions_label" msgid="2605296874922726203">"ການອະນຸຍາດ"</string>
@@ -1932,8 +1931,7 @@
     <string name="backup_erase_dialog_title" msgid="1027640829482174106"></string>
     <string name="backup_erase_dialog_message" msgid="5221011285568343155">"ຢຸດການສຳຮອງຂໍ້ມູນລະຫັດຜ່ານ Wi-Fi, ບຸກມາກ, ການຕັ້ງຄ່າອື່ນໆ ແລະຂໍ້ມູນແອັບຯ ຂອງທ່ານ ຮວມທັງລຶບສຳເນົາທັງໝົດໃນເຊີບເວີຂອງ Google ບໍ່?"</string>
     <string name="fullbackup_erase_dialog_message" msgid="944399039066318647">"ຢຸດ​ການ​ສຳ​ຮອງ​ຂໍ້​ມູນ​ອຸ​ປະ​ກອນ (ເຊັ່ນ ລະ​ຫັດ​ຜ່ານ Wi-Fi ແລະ​ປະ​ຫວັດ​ການ​ໂທ) ແລະ​ຂໍ້​ມູນ​ແອັບ (ເຊັ່ນ ການ​ຕັ້ງ​ຄ່າ ແລະ ໄຟ​ລ໌​ທີ່​ແອັບ​ເກັບ​ໄວ້), ບວກ​ໃສ່​ລຶບ​ທຸກ​ສຳ​ເນົາ​ຢູ່​ໃນ Google Drive ບໍ?"</string>
-    <!-- no translation found for fullbackup_data_summary (960850365007767734) -->
-    <skip />
+    <string name="fullbackup_data_summary" msgid="960850365007767734">"ສຳ​ຮອງ​ຂໍ້​ມູນ​ອຸ​ປະ​ກອນໂດຍ​ອັດ​ຕະ​ໂນ​ມັດ (ເຊັ່ນ ລະ​ຫັດ​ຜ່ານ Wi-Fi ແລະ​ປະ​ຫວັດ​ການ​ໂທ) ແລະ​ຂໍ້​ມູນ​ແອັບ (ເຊັ່ນ ການ​ຕັ້ງ​ຄ່າ ແລະ ໄຟ​ລ໌​ທີ່​ແອັບ​ເກັບ​ໄວ້) ໂດຍ​ທາງ​ໄກ.\n\nເມື່ອ​ທ່ານ​ເປີດ​ການ​ສຳ​ຮອງ​ອັດ​ຕະ​ໂນ​ມັດ, ຂໍ້​ມູນ​ອຸ​ປະ​ກອນ ແລະ​ແອັບຈະ​ຖືກ​ບັນ​ທຶກ​ເປັນ​ໄລ​ຍະ​ໂດຍ​ທາງ​ໄກ. ຂໍ້​ມູນ​ແອັບ​ສາ​ມາດ​ເປັນ​ຂໍ້​ມູນ​ໃດ​ໜຶ່ງ​ທີ່​ແອັບ​ບັນ​ທຶກ​ໄວ້ (ອີງ​ຕາມ​ການ​ຕັ້ງ​ຄ່າ​ຜູ້​ພັດ​ທະ​ນາ), ລວມ​ທັງ​ຂໍ້​ມູນ​ທີ່​ອາດ​ຈະ​ລະ​ອຽດ​ອ່ອນ​ເຊັ່ນ: ລາຍ​ຊື່, ຂໍ້​ຄວາມ, ແລະ​ຮູບ."</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"ການຕັ້ງຄ່າການເບິ່ງແຍງອຸປະກອນ"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"ຜູ່ເບິ່ງແຍງອຸປະກອນ"</string>
     <string name="remove_device_admin" msgid="3596845261596451437">"ປິດການນຳໃຊ້"</string>
@@ -2640,12 +2638,12 @@
     <string name="imei_information_title" msgid="8499085421609752290">"ຂໍ້ມູນ IMEI"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"ຂໍ້ມູນ​ກ່ຽວ​ຂ້ອງ​ກັບ IMEI"</string>
     <string name="slot_number" msgid="3762676044904653577">"(ຊ່ອງ <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
-    <string name="launch_by_default" msgid="2184141780491382435">"ເລີ່ມໃຊ້ຕາມຄ່າເລີ່ມຕົ້ນ"</string>
+    <string name="launch_by_default" msgid="1840761193189009248">"ເປີດ​ຕາມ​ມາດ​ຕະ​ຖານ"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> ໃຊ້​ຢູ່​ໃນ <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
-    <string name="app_launch_domain_links_title" msgid="458956710410857777">"ລິ້ງ​ໂດ​ເມນ"</string>
-    <string name="app_launch_open_domain_urls_title" msgid="5821849783765291139">"ເປີດ URL ໂດ​ເມນ"</string>
-    <string name="app_launch_open_domain_urls_summary" msgid="7305739311608755281">"ອະ​ນຸ​ຍາດ​ໃຫ້​ແອັບ​ເປີດ URL ໂດ​ເມນ​ໂດຍ​ກົງ"</string>
-    <string name="app_launch_supported_domain_urls_title" msgid="8148494155921307572">"URL ໂດ​ເມນ​ຮອງ​ຮັບ​ແລ້ວ"</string>
+    <string name="app_launch_domain_links_title" msgid="6789955009107320092">"ລິ້ງ​ຂອງ​ແອັບ"</string>
+    <string name="app_launch_open_domain_urls_title" msgid="8914721351596745701">"ເປີດ​ລິ້ງ​ທີ່​ຮອງ​ຮັບ​"</string>
+    <string name="app_launch_open_domain_urls_summary" msgid="5367573364240712217">"ເປີດ​ໂດຍ​ບໍ່​ຕ້ອງ​ຖາມ"</string>
+    <string name="app_launch_supported_domain_urls_title" msgid="8250695258211477480">"ລິ້ງ​ທີ່​ຮອງ​ຮັບ​"</string>
     <string name="app_launch_other_defaults_title" msgid="2516812499807835178">"ມາດ​ຕະ​ຖານ​ອື່ນ"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> ໃຊ້​ຢູ່​ໃນ <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
     <string name="storage_type_internal" msgid="410824961149037234">"ຄວາມ​ຈຳ​ທາງ​ໃນ"</string>
@@ -2691,20 +2689,18 @@
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"<xliff:g id="COUNT_0">%d</xliff:g> ໃນ <xliff:g id="COUNT_1">%d</xliff:g> ແອັບ​ໄດ້​ຮັບ​ອະ​ນຸ​ຍາດ​ແລ້ວ"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"ແຕະ​ເພື່ອ​ປຸກ"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"ແຕະ​ໜ້າ​ຈໍ​ຕຳແໜ່ງ​ໃດ​ກໍ​ໄດ້​ສອງ​ເທື່ອ ເພື່ອ​ປຸກ​ອຸ​ປະ​ກອນ"</string>
-    <string name="domain_urls_title" msgid="8735310976048599572">"URL ໂດ​ເມນ"</string>
-    <string name="domain_urls_summary_none" msgid="4817723415916239693">"ຢ່າ​ເປີດ URL ໂດ​ເມນ​ໃດ"</string>
-    <string name="domain_urls_summary_one" msgid="4427559120855938432">"ເປີດ \'<xliff:g id="DOMAIN">%s</xliff:g>\'"</string>
-    <string name="domain_urls_summary_some" msgid="2533219801400609818">"ເປີດ \'<xliff:g id="DOMAIN">%s</xliff:g>\' ແລະ URL ທີ່​ກ່ຽວ​ຂ້ອງ"</string>
-    <plurals name="domain_urls_apps_summary" formatted="false" msgid="6604886186235343653">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> ແອັບ​ສາ​ມາດ​ເປີດ URL ໂດ​ເມນ​ຂອງ​ມັນ​ໄດ້</item>
-      <item quantity="one">ໜຶ່ງ​ແອັບ​ສາ​ມາດ​ເປີດ URL ໂດ​ເມນ​ຂອງ​ມັນ​ໄດ້</item>
+    <string name="domain_urls_title" msgid="8762012672312435252">"ລິ້ງ​ຂອງ​ແອັບ"</string>
+    <string name="domain_urls_summary_none" msgid="2639588015479657864">"ຢ່າ​ເປີດ​ລິ້ງ​ທີ່​ຮອງ​ຮັບ​"</string>
+    <string name="domain_urls_summary_one" msgid="3704934031930978405">"ເປີດ <xliff:g id="DOMAIN">%s</xliff:g>"</string>
+    <string name="domain_urls_summary_some" msgid="812936714383016364">"ເປີດ <xliff:g id="DOMAIN">%s</xliff:g> ແລະບັນ​ດາ URL ທີ່​ກ່ຽວ​ຂ້ອງ"</string>
+    <plurals name="domain_urls_apps_summary" formatted="false" msgid="4322996467951692661">
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> ​ແອັບ​ສາ​ມາດ​ເປີດລິ້ງ​ທີ່​ຮອງ​ຮັບ​​ຂອງ​ມັນ​ໄດ້</item>
+      <item quantity="one">ໜຶ່ງ​ແອັບ​ສາ​ມາດ​ເປີດລິ້ງ​ທີ່​ຮອງ​ຮັບ​ຂອງ​ມັນ​ໄດ້</item>
     </plurals>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"ບໍ່​ຮັບຮູ້"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"​ແອັບ​ມາດ​ຕະ​ຖານ"</string>
-    <!-- no translation found for default_assist_title (8851464168639315795) -->
-    <skip />
-    <!-- no translation found for default_assist_none (4719591002003824614) -->
-    <skip />
+    <string name="default_assist_title" msgid="8851464168639315795">"ຕົວຊ່ວຍ"</string>
+    <string name="default_assist_none" msgid="4719591002003824614">"ບໍ່​ມີ​ຕົວ​ຊ່ວຍ​ມາດ​ຕະ​ຖານ"</string>
     <string name="default_browser_title" msgid="8101772675085814670">"ແອັບ​ບ​ຣາວ​ເຊີ"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"ບໍ່​ມີ​ບ​ຣາວ​ເຊີ​ມາດ​ຕະ​ຖານ"</string>
     <string name="default_phone_title" msgid="282005908059637350">"ແອັບ​ໂທ​ລ​ະ​ສັບ"</string>
@@ -2748,10 +2744,7 @@
     <string name="inactive_apps_title" msgid="1317817863508274533">"ແອັບ​ບໍ່​ໃຊ້​ງານ​ຢູ່"</string>
     <string name="inactive_app_inactive_summary" msgid="6768756967594202411">"ບໍ່​ໃຊ້​ງານ​ຢູ່. ສຳ​ພັດ​ເພື່ອ​ສະ​ຫຼັບ."</string>
     <string name="inactive_app_active_summary" msgid="4512911571954375968">"ໃຊ້​ງານ​ຢູ່. ສຳ​ພັດ​ເພື່ອ​ສະ​ຫຼັບ."</string>
-    <!-- no translation found for assist_access_context_title (2047105711005856521) -->
-    <skip />
-    <!-- no translation found for assist_access_context_summary (8365837347256022203) -->
-    <skip />
-    <!-- no translation found for assist_footer (2283187001990543739) -->
-    <skip />
+    <string name="assist_access_context_title" msgid="2047105711005856521">"ໃຊ້​ສະ​ພາບ​ປະ​ຈຸ​ບັນ"</string>
+    <string name="assist_access_context_summary" msgid="8365837347256022203">"ເມື່ອ​ທ່ານ​ເປີດ​ແອັບ​ຊ່ວຍ, ໃຫ້​ມັນ​ເຫັນ​ສິ່ງ​ທີ່​ທ່ານ​ກຳ​ລັງ​ເຮັດ​ຢູ່​ໃນ​ໜ້າ​ຈໍ​ຂອງ​ທ່ານ"</string>
+    <string name="assist_footer" msgid="2283187001990543739">"ແອັບ​ຊ່ວຍ​ໃຫ້​ການ​ຊ່ວຍ​ເຫຼືອ​ທ່ານ​ລະ​ບຸ ແລະ​ປະ​ຕິ​ບັດ​ຕໍ່​ຂໍ້​ມູນ​ທີ່​ເປັນ​ປະ​ໂຫຍດ ໂດຍ​ບໍ່​ຕ້ອງ​ຖາມ. ບາງ​ແອັບ​ຮອງ​ຮັບ​ທັງ​ການ​ບໍ​ລິ​ການ​ຕົວ​ເປີດ​ນຳ​ໃຊ້ ແລະ​ການ​ປ້ອນ​ສຽງ ເພື່ອ​ໃຫ້​ການ​ຊ່ວຍ​ເຫຼືອ​ແບບ​ປະ​ສົມ​ປະ​ສານ​ແກ່​ທ່ານ."</string>
 </resources>

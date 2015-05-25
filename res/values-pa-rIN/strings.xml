@@ -343,9 +343,9 @@
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"ਇਸ ਲਈ ਫਿੰਗਰਪ੍ਰਿੰਟ ਵਰਤੋ"</string>
     <string name="fingerprint_add_title" msgid="1926752654454033904">"ਫਿੰਗਰਪ੍ਰਿੰਟ ਜੋੜੋ"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5078060939636911795">"ਸਕ੍ਰੀਨ ਲੌਕ"</string>
-    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="4776063289827470602">
-      <item quantity="one"><xliff:g id="COUNT_1">%1$d</xliff:g> ਫਿੰਗਰਪ੍ਰਿੰਟ ਦਰਜ ਕੀਤੇ</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> ਫਿੰਗਰਪ੍ਰਿੰਟ ਦਰਜ ਕੀਤੇ</item>
+    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="624961700033979880">
+      <item quantity="one"><xliff:g id="COUNT_1">%1$d</xliff:g> ਫਿੰਗਰਪ੍ਰਿੰਟਸ ਸੈੱਟ ਅੱਪ</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> ਫਿੰਗਰਪ੍ਰਿੰਟਸ ਸੈੱਟ ਅੱਪ</item>
     </plurals>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"ਫਿੰਗਰਪ੍ਰਿੰਟ ਸੈਟਅਪ"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"ਤੁਹਾਡੀ ਸਕ੍ਰੀਨ ਨੂੰ ਅਨਲੌਕ ਕਰਨ ਲਈ ਜਾਂ ਖ਼ਰੀਦਾਰੀਆਂ ਦੀ ਪੁਸ਼ਟੀ ਕਰਨ ਲਈ ਆਪਣੇ ਫਿੰਗਰਪ੍ਰਿੰਟ ਦਾ ਉਪਯੋਗ ਕਰਨ, ਤੁਹਾਨੂੰ ਇਹ ਕਰਨਾ ਹੋਵੇਗਾ:"</string>
@@ -1228,7 +1228,7 @@
     <string name="lockpattern_pattern_confirmed_header" msgid="8455614172231880211">"ਤੁਹਾਡਾ ਨਵਾਂ ਅਨਲੌਕ ਪੈਟਰਨ"</string>
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"ਪੁਸ਼ਟੀ"</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"ਰੀਡ੍ਰਾ ਕਰੋ"</string>
-    <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ"</string>
+    <string name="lockpattern_retry_button_text" msgid="3480423193273588166">"ਹਟਾਓ"</string>
     <string name="lockpattern_continue_button_text" msgid="4723771754714471410">"ਜਾਰੀ ਰੱਖੋ"</string>
     <string name="lockpattern_settings_title" msgid="3207750489460466680">"ਪੈਟਰਨ ਅਨਲੌਕ ਕਰੋ"</string>
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"ਲੁੜੀਂਦਾ ਪੈਟਰਨ"</string>
@@ -1257,7 +1257,8 @@
     <string name="advanced_settings_summary" msgid="4016682978071086747">"ਹੋਰ ਸੈਟਿੰਗਾਂ ਚੋਣਾਂ ਸਮਰੱਥ ਬਣਾਓ"</string>
     <string name="application_info_label" msgid="5736524913065714880">"ਐਪ ਜਾਣਕਾਰੀ"</string>
     <string name="storage_label" msgid="8700867073480107253">"ਸਟੋਰੇਜ"</string>
-    <string name="auto_launch_label" msgid="3012617472833815382">"ਬਾਇ ਡਿਫੌਲਟ ਲੌਂਚ ਕਰੋ"</string>
+    <!-- no translation found for auto_launch_label (2669236885531442195) -->
+    <skip />
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"ਡਿਫੌਲਟਸ"</string>
     <string name="screen_compatibility_label" msgid="663250687205465394">"ਸਕ੍ਰੀਨ ਅਨੁਕੂਲਤਾ"</string>
     <string name="permissions_label" msgid="2605296874922726203">"ਅਨੁਮਤੀਆਂ"</string>
@@ -2638,12 +2639,17 @@
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI ਜਾਣਕਾਰੀ"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI ਸੰਬੰਧਿਤ ਜਾਣਕਾਰੀ"</string>
     <string name="slot_number" msgid="3762676044904653577">"(ਸਲੌਟ<xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
-    <string name="launch_by_default" msgid="2184141780491382435">"ਬਾਇ ਡਿਫੌਲਟ ਲੌਂਚ ਕਰੋ"</string>
+    <!-- no translation found for launch_by_default (1840761193189009248) -->
+    <skip />
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> <xliff:g id="STORAGE_TYPE">%2$s</xliff:g> ਵਿੱਚ ਵਰਤਿਆ"</string>
-    <string name="app_launch_domain_links_title" msgid="458956710410857777">"ਡੋਮੇਨ ਲਿੰਕ"</string>
-    <string name="app_launch_open_domain_urls_title" msgid="5821849783765291139">"ਡੋਮੇਨ URL ਖੋਲ੍ਹੋ"</string>
-    <string name="app_launch_open_domain_urls_summary" msgid="7305739311608755281">"ਐਪ ਨੂੰ ਡੋਮੇਨ URL ਸਿੱਧੇ ਖੋਲ੍ਹਣ ਦੀ ਆਗਿਆ ਦਿਓ"</string>
-    <string name="app_launch_supported_domain_urls_title" msgid="8148494155921307572">"ਸਮਰਥਿਤ ਡੋਮੇਨ URL"</string>
+    <!-- no translation found for app_launch_domain_links_title (6789955009107320092) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_title (8914721351596745701) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_summary (5367573364240712217) -->
+    <skip />
+    <!-- no translation found for app_launch_supported_domain_urls_title (8250695258211477480) -->
+    <skip />
     <string name="app_launch_other_defaults_title" msgid="2516812499807835178">"ਹੋਰ ਡਿਫੌਲਟਸ"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> <xliff:g id="STORAGE_TYPE">%2$s</xliff:g> ਵਿੱਚ ਵਰਤਿਆ"</string>
     <string name="storage_type_internal" msgid="410824961149037234">"ਅੰਦਰੂਨੀ ਮੈਮਰੀ"</string>
@@ -2689,14 +2695,15 @@
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"<xliff:g id="COUNT_1">%d</xliff:g> ਦੇ <xliff:g id="COUNT_0">%d</xliff:g> ਐਪਸ ਦੀ ਆਗਿਆ ਦਿੱਤੀ"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"ਜਗਾਉਣ ਲਈ ਟੈਪ ਕਰੋ"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"ਡਿਵਾਈਸ ਨੂੰ ਜਗਾਉਣ ਲਈ ਸਕ੍ਰੀਨ \'ਤੇ ਕਿੱਥੇ ਵੀ ਦੋਹਰਾ ਟੈਪ ਕਰੋ"</string>
-    <string name="domain_urls_title" msgid="8735310976048599572">"ਡੋਮੇਨ URL"</string>
-    <string name="domain_urls_summary_none" msgid="4817723415916239693">"ਕੋਈ ਵੀ ਡੋਮੇਨ URL ਨਾ ਖੋਲ੍ਹੋ"</string>
-    <string name="domain_urls_summary_one" msgid="4427559120855938432">"\'<xliff:g id="DOMAIN">%s</xliff:g>\' ਖੋਲ੍ਹੋ"</string>
-    <string name="domain_urls_summary_some" msgid="2533219801400609818">"\'<xliff:g id="DOMAIN">%s</xliff:g>\' ਅਤੇ ਸੰਬੰਧਿਤ URL ਖੋਲ੍ਹੋ"</string>
-    <plurals name="domain_urls_apps_summary" formatted="false" msgid="6604886186235343653">
-      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> ਐਪਸ ਆਪਣੇ ਡੋਮੇਨ URL ਖੋਲ੍ਹ ਸਕਦੇ ਹਨ</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> ਐਪਸ ਆਪਣੇ ਡੋਮੇਨ URL ਖੋਲ੍ਹ ਸਕਦੇ ਹਨ</item>
-    </plurals>
+    <!-- no translation found for domain_urls_title (8762012672312435252) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_none (2639588015479657864) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_one (3704934031930978405) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_some (812936714383016364) -->
+    <skip />
+    <!-- no translation found for domain_urls_apps_summary (4322996467951692661) -->
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"ਪਛਾਣ ਨਹੀਂ ਹੋਈ"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"ਡਿਫੌਲਟ ਐਪਸ"</string>
     <string name="default_assist_title" msgid="8851464168639315795">"ਸਹਾਇਤਾ ਕਰੋ"</string>

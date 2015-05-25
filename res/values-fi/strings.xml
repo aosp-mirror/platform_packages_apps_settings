@@ -343,9 +343,9 @@
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Sormenj. käyttökohde"</string>
     <string name="fingerprint_add_title" msgid="1926752654454033904">"Lisää sormenjälki"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5078060939636911795">"näytön lukitus"</string>
-    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="4776063289827470602">
-      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> sormenjälkeä rekisteröity.</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> sormenjälki rekisteröity.</item>
+    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="624961700033979880">
+      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> tunnistetiedostoa määritetty</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> tunnistetiedosto määritetty</item>
     </plurals>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Sormenjäljen määritys"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"Ennen kuin voit käyttää sormenjälkeä näytön lukituksen avaamiseen ja ostoksien vahvistamiseen, sinun täytyy"</string>
@@ -1015,8 +1015,7 @@
     <string name="storage_wizard_move_progress_title" msgid="4443920302548035674">"Siirretään <xliff:g id="APP">^1</xliff:g>…"</string>
     <string name="storage_wizard_move_progress_body" msgid="7802577486578105609">"Jätä <xliff:g id="NAME">^1</xliff:g> paikalleen siirron ajaksi. \n\nTämän laitteen <xliff:g id="APP">^2</xliff:g>-sovellus ei ole käytettävissä, ennen kuin siirto on valmis."</string>
     <string name="storage_wizard_move_progress_cancel" msgid="542047237524588792">"Peruuta siirto"</string>
-    <!-- no translation found for storage_wizard_slow_body (8010127667184768025) -->
-    <skip />
+    <string name="storage_wizard_slow_body" msgid="8010127667184768025">"<xliff:g id="NAME_0">^1</xliff:g>  vaikuttaa hitaalta.\n\nVoit jatkaa, mutta tähän sijaintiin siirrettävät sovellukset voivat toimia heikosti ja tiedonsiirto voi kestää kauan.\n\nNopeampi <xliff:g id="NAME_1">^1</xliff:g> voi toimia tehokkaammin."</string>
     <string name="battery_status_title" msgid="9159414319574976203">"Akun tila"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"Akun taso"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APN:t"</string>
@@ -1229,7 +1228,7 @@
     <string name="lockpattern_pattern_confirmed_header" msgid="8455614172231880211">"Uusi lukituksenpoistokuvio"</string>
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"Vahvista"</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"Piirrä uudelleen"</string>
-    <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"Yritä uudelleen"</string>
+    <string name="lockpattern_retry_button_text" msgid="3480423193273588166">"Tyhjennä"</string>
     <string name="lockpattern_continue_button_text" msgid="4723771754714471410">"Jatka"</string>
     <string name="lockpattern_settings_title" msgid="3207750489460466680">"Lukituksenpoistokuvio"</string>
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"Pyydä kuviota"</string>
@@ -1258,7 +1257,8 @@
     <string name="advanced_settings_summary" msgid="4016682978071086747">"Ota lisää asetuksia käyttöön."</string>
     <string name="application_info_label" msgid="5736524913065714880">"Sovelluksen tiedot"</string>
     <string name="storage_label" msgid="8700867073480107253">"Tallennustila"</string>
-    <string name="auto_launch_label" msgid="3012617472833815382">"Käynnistä oletuksena"</string>
+    <!-- no translation found for auto_launch_label (2669236885531442195) -->
+    <skip />
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"Oletukset"</string>
     <string name="screen_compatibility_label" msgid="663250687205465394">"Ruudun yhteensopivuus"</string>
     <string name="permissions_label" msgid="2605296874922726203">"Käyttöluvat"</string>
@@ -1932,8 +1932,7 @@
     <string name="backup_erase_dialog_title" msgid="1027640829482174106"></string>
     <string name="backup_erase_dialog_message" msgid="5221011285568343155">"Haluatko lopettaa Wi-Fi-salasanojen, kirjanmerkkien, muiden asetuksien ja sovellustietojen varmuuskopioinnin ja poistaa kaikki kopiot Googlen palvelimilta?"</string>
     <string name="fullbackup_erase_dialog_message" msgid="944399039066318647">"Lopetetaanko laitteen tietojen (kuten Wi-Fi-salasanojen ja soittohistorian) ja sovellusten tietojen (kuten asetusten ja sovellusten tallentamien tiedostojen) automaattinen varmuuskopiointi? Myös vanhat varmuuskopiot poistetaan Google Drivesta."</string>
-    <!-- no translation found for fullbackup_data_summary (960850365007767734) -->
-    <skip />
+    <string name="fullbackup_data_summary" msgid="960850365007767734">"Varmuuskopioi laitteen tiedot (kuten Wi-Fi-salasanat ja soittohistoria) sekä sovellusten tiedot (kuten asetukset ja sovellusten tallentamat tiedostot) automaattisesti etäyhteyden kautta.\n\nKun otat automaattisen varmuuskopioinnin käyttöön, laitteen ja sovellusten tiedot varmuuskopioidaan säännöllisesti etäyhteyden kautta. Sovellusten tietoihin voi sisältyä mitä tahansa tietoja, joita sovellukset ovat tallentaneet (kehittäjien asetuksien perusteella). Ne saattavat sisältää myös arkaluontoisia tietoja, kuten yhteystietoja, viestejä ja valokuvia."</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"Laitteen järjestelmänvalvoja-asetukset"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"Laitteen järjestelmänvalvoja"</string>
     <string name="remove_device_admin" msgid="3596845261596451437">"Poista käytöstä"</string>
@@ -2640,12 +2639,17 @@
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI-koodin tiedot"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI-koodiin liittyvät tiedot"</string>
     <string name="slot_number" msgid="3762676044904653577">"(Paikka <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
-    <string name="launch_by_default" msgid="2184141780491382435">"Käynnistä oletuksena"</string>
+    <!-- no translation found for launch_by_default (1840761193189009248) -->
+    <skip />
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> käytössä kohteessa <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
-    <string name="app_launch_domain_links_title" msgid="458956710410857777">"Verkkotunnuksen linkit"</string>
-    <string name="app_launch_open_domain_urls_title" msgid="5821849783765291139">"Avaa verkkotunnuksen URL-osoitteet."</string>
-    <string name="app_launch_open_domain_urls_summary" msgid="7305739311608755281">"Salli sovelluksen avata verkkotunnuksen URL-osoitteita."</string>
-    <string name="app_launch_supported_domain_urls_title" msgid="8148494155921307572">"Tuetut verkkotunnuksen URL-osoitteet"</string>
+    <!-- no translation found for app_launch_domain_links_title (6789955009107320092) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_title (8914721351596745701) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_summary (5367573364240712217) -->
+    <skip />
+    <!-- no translation found for app_launch_supported_domain_urls_title (8250695258211477480) -->
+    <skip />
     <string name="app_launch_other_defaults_title" msgid="2516812499807835178">"Muut oletusarvot"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> käytössä kohteessa <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
     <string name="storage_type_internal" msgid="410824961149037234">"sisäinen muisti"</string>
@@ -2691,20 +2695,19 @@
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"Sallitut sovellukset: <xliff:g id="COUNT_0">%d</xliff:g>/<xliff:g id="COUNT_1">%d</xliff:g>"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Herätä napauttamalla"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Herätä laite napauttamalla näyttöä kahdesti."</string>
-    <string name="domain_urls_title" msgid="8735310976048599572">"Verkkotunnuksen URL-osoitteet"</string>
-    <string name="domain_urls_summary_none" msgid="4817723415916239693">"Älä avaa verkkotunnuksen URL-osoitteita."</string>
-    <string name="domain_urls_summary_one" msgid="4427559120855938432">"Avaa <xliff:g id="DOMAIN">%s</xliff:g>"</string>
-    <string name="domain_urls_summary_some" msgid="2533219801400609818">"Avaa <xliff:g id="DOMAIN">%s</xliff:g> ja siihen liittyvät URL-osoitteet."</string>
-    <plurals name="domain_urls_apps_summary" formatted="false" msgid="6604886186235343653">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> sovellusta voi avata verkkotunnuksensa URL-osoitteita</item>
-      <item quantity="one">Yksi sovellus voi avata verkkotunnuksensa URL-osoitteita</item>
-    </plurals>
+    <!-- no translation found for domain_urls_title (8762012672312435252) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_none (2639588015479657864) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_one (3704934031930978405) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_some (812936714383016364) -->
+    <skip />
+    <!-- no translation found for domain_urls_apps_summary (4322996467951692661) -->
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Ei tunnistettu"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"Oletussovellukset"</string>
-    <!-- no translation found for default_assist_title (8851464168639315795) -->
-    <skip />
-    <!-- no translation found for default_assist_none (4719591002003824614) -->
-    <skip />
+    <string name="default_assist_title" msgid="8851464168639315795">"Apusovellus"</string>
+    <string name="default_assist_none" msgid="4719591002003824614">"Ei oletusapusovellusta."</string>
     <string name="default_browser_title" msgid="8101772675085814670">"Selainsovellus"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"Ei oletusselain"</string>
     <string name="default_phone_title" msgid="282005908059637350">"Puhelinsovellus"</string>
@@ -2748,10 +2751,7 @@
     <string name="inactive_apps_title" msgid="1317817863508274533">"Epäaktiiviset sovellukset"</string>
     <string name="inactive_app_inactive_summary" msgid="6768756967594202411">"Epäaktiivinen. Ota käyttöön tai poista käytöstä koskettamalla."</string>
     <string name="inactive_app_active_summary" msgid="4512911571954375968">"Aktiivinen. Ota käyttöön tai poista käytöstä koskettamalla."</string>
-    <!-- no translation found for assist_access_context_title (2047105711005856521) -->
-    <skip />
-    <!-- no translation found for assist_access_context_summary (8365837347256022203) -->
-    <skip />
-    <!-- no translation found for assist_footer (2283187001990543739) -->
-    <skip />
+    <string name="assist_access_context_title" msgid="2047105711005856521">"Käytä nykyistä kontekstia"</string>
+    <string name="assist_access_context_summary" msgid="8365837347256022203">"Kun avaat apusovelluksen, anna sen katsoa näytöllä tekemiäsi asioita."</string>
+    <string name="assist_footer" msgid="2283187001990543739">"Apusovellukset auttavat sinua löytämään ja käyttämään hyödyllisiä tietoja ilman, että sinun täytyy erikseen pyytää sitä. Jotkin sovellukset tukevat myös käynnistysohjelma- ja äänisyötepalveluja, joten ne voivat tarjota sinulle integroitua apua."</string>
 </resources>

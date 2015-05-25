@@ -345,11 +345,11 @@
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Używaj odcisku palca do"</string>
     <string name="fingerprint_add_title" msgid="1926752654454033904">"Dodaj odcisk palca"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5078060939636911795">"blokada ekranu"</string>
-    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="4776063289827470602">
-      <item quantity="few"><xliff:g id="COUNT_1">%1$d</xliff:g> zarejestrowane odciski palca</item>
-      <item quantity="many"><xliff:g id="COUNT_1">%1$d</xliff:g> zarejestrowanych odcisków palca</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> zarejestrowanego odcisku palca</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> zarejestrowany odcisk palca</item>
+    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="624961700033979880">
+      <item quantity="few">Konfiguracja odcisku: <xliff:g id="COUNT_1">%1$d</xliff:g> palce</item>
+      <item quantity="many">Konfiguracja odcisku: <xliff:g id="COUNT_1">%1$d</xliff:g> palców</item>
+      <item quantity="other">Konfiguracja odcisku: <xliff:g id="COUNT_1">%1$d</xliff:g> palca</item>
+      <item quantity="one">Konfiguracja odcisku: <xliff:g id="COUNT_0">%1$d</xliff:g> palec</item>
     </plurals>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Konf. odcisku palca"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"Aby odblokowywać ekran lub potwierdzać zakupy przy użyciu odcisku palca, musisz:"</string>
@@ -1033,8 +1033,7 @@
     <string name="storage_wizard_move_progress_title" msgid="4443920302548035674">"Przenoszę aplikację <xliff:g id="APP">^1</xliff:g>…"</string>
     <string name="storage_wizard_move_progress_body" msgid="7802577486578105609">"Nie wyjmuj nośnika (<xliff:g id="NAME">^1</xliff:g>) w trakcie przenoszenia danych. \n\nAplikacja <xliff:g id="APP">^2</xliff:g> na tym urządzeniu będzie niedostępna, dopóki przenoszenie się nie zakończy."</string>
     <string name="storage_wizard_move_progress_cancel" msgid="542047237524588792">"Anuluj przenoszenie"</string>
-    <!-- no translation found for storage_wizard_slow_body (8010127667184768025) -->
-    <skip />
+    <string name="storage_wizard_slow_body" msgid="8010127667184768025">"Wygląda na to, że nośnik <xliff:g id="NAME_0">^1</xliff:g> jest powolny. \n\nNadal możesz z niego korzystać, ale przeniesione aplikacje mogą się zacinać, a przesyłanie danych może długo trwać. \n\nWydajność może poprawić inny nośnik <xliff:g id="NAME_1">^1</xliff:g>."</string>
     <string name="battery_status_title" msgid="9159414319574976203">"Stan baterii"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"Poziom naładowania baterii"</string>
     <string name="apn_settings" msgid="3743170484827528406">"Nazwy APN"</string>
@@ -1247,7 +1246,7 @@
     <string name="lockpattern_pattern_confirmed_header" msgid="8455614172231880211">"Nowy wzór odblokowania"</string>
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"Potwierdź"</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"Narysuj ponownie"</string>
-    <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"Ponów próbę"</string>
+    <string name="lockpattern_retry_button_text" msgid="3480423193273588166">"Wyczyść"</string>
     <string name="lockpattern_continue_button_text" msgid="4723771754714471410">"Dalej"</string>
     <string name="lockpattern_settings_title" msgid="3207750489460466680">"Wzór odblokowania"</string>
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"Wymagaj wzoru"</string>
@@ -1276,7 +1275,8 @@
     <string name="advanced_settings_summary" msgid="4016682978071086747">"Włącz więcej opcji ustawień."</string>
     <string name="application_info_label" msgid="5736524913065714880">"Informacje o aplikacji"</string>
     <string name="storage_label" msgid="8700867073480107253">"Pamięć"</string>
-    <string name="auto_launch_label" msgid="3012617472833815382">"Uruchom domyślnie"</string>
+    <!-- no translation found for auto_launch_label (2669236885531442195) -->
+    <skip />
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"Domyślne"</string>
     <string name="screen_compatibility_label" msgid="663250687205465394">"Zgodność z ekranem"</string>
     <string name="permissions_label" msgid="2605296874922726203">"Uprawnienia"</string>
@@ -1950,8 +1950,7 @@
     <string name="backup_erase_dialog_title" msgid="1027640829482174106"></string>
     <string name="backup_erase_dialog_message" msgid="5221011285568343155">"Zatrzymać tworzenie kopii zapasowych haseł Wi-Fi, zakładek, innych ustawień i danych aplikacji, a także usunąć wszystkie kopie z serwerów Google?"</string>
     <string name="fullbackup_erase_dialog_message" msgid="944399039066318647">"Zatrzymać tworzenie kopii zapasowej danych urządzenia (np. haseł Wi-Fi i historii połączeń) i danych aplikacji (np. ustawień i plików zapisanych przez aplikacje) oraz wykasować wszystkie kopie z Dysku Google?"</string>
-    <!-- no translation found for fullbackup_data_summary (960850365007767734) -->
-    <skip />
+    <string name="fullbackup_data_summary" msgid="960850365007767734">"Automatycznie twórz zdalną kopię zapasową danych urządzenia (np. haseł Wi-Fi i historii połączeń) oraz danych aplikacji (np. ustawień i plików zapisanych przez aplikacje).\n\nKiedy włączysz automatyczną kopię zapasową, dane urządzenia i aplikacji będą regularnie zapisywane zdalnie. Dane aplikacji mogą obejmować dowolne informacje zapisane przez aplikację (w zależności od ustawień określonych przez programistę) – w tym potencjalnie poufne dane takie jak kontakty, wiadomości i zdjęcia."</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"Ustawienia administracji"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"Administrator urządzenia"</string>
     <string name="remove_device_admin" msgid="3596845261596451437">"Dezaktywuj"</string>
@@ -2664,12 +2663,17 @@
     <string name="imei_information_title" msgid="8499085421609752290">"Informacje o IMEI"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"Informacje związane z IMEI"</string>
     <string name="slot_number" msgid="3762676044904653577">"(Gniazdo <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
-    <string name="launch_by_default" msgid="2184141780491382435">"Uruchom domyślnie"</string>
+    <!-- no translation found for launch_by_default (1840761193189009248) -->
+    <skip />
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> wykorzystane w: <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
-    <string name="app_launch_domain_links_title" msgid="458956710410857777">"Linki domeny"</string>
-    <string name="app_launch_open_domain_urls_title" msgid="5821849783765291139">"Otwieraj URL-e domeny"</string>
-    <string name="app_launch_open_domain_urls_summary" msgid="7305739311608755281">"Zezwalaj aplikacji na bezpośrednie otwieranie URL-i domeny"</string>
-    <string name="app_launch_supported_domain_urls_title" msgid="8148494155921307572">"Obsługiwane URL-e domeny"</string>
+    <!-- no translation found for app_launch_domain_links_title (6789955009107320092) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_title (8914721351596745701) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_summary (5367573364240712217) -->
+    <skip />
+    <!-- no translation found for app_launch_supported_domain_urls_title (8250695258211477480) -->
+    <skip />
     <string name="app_launch_other_defaults_title" msgid="2516812499807835178">"Inne ustawienia domyślne"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> wykorzystane w: <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
     <string name="storage_type_internal" msgid="410824961149037234">"pamięć wewnętrzna"</string>
@@ -2719,22 +2723,19 @@
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"Dozwolone: <xliff:g id="COUNT_0">%d</xliff:g> z <xliff:g id="COUNT_1">%d</xliff:g> aplikacji"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Kliknij, by wybudzić"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Kliknij dwukrotnie w dowolnym miejscu na ekranie, by wybudzić urządzenie"</string>
-    <string name="domain_urls_title" msgid="8735310976048599572">"URL-e domeny"</string>
-    <string name="domain_urls_summary_none" msgid="4817723415916239693">"Nie otwieraj URL-i żadnej domeny"</string>
-    <string name="domain_urls_summary_one" msgid="4427559120855938432">"Otwórz „<xliff:g id="DOMAIN">%s</xliff:g>”"</string>
-    <string name="domain_urls_summary_some" msgid="2533219801400609818">"Otwórz „<xliff:g id="DOMAIN">%s</xliff:g>” i powiązane URL-e"</string>
-    <plurals name="domain_urls_apps_summary" formatted="false" msgid="6604886186235343653">
-      <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> aplikacje mogą otwierać URL-e swojej domeny</item>
-      <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> aplikacji może otwierać URL-e swojej domeny</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aplikacji może otwierać URL-e swojej domeny</item>
-      <item quantity="one">Jedna aplikacja może otwierać URL-e swojej domeny</item>
-    </plurals>
+    <!-- no translation found for domain_urls_title (8762012672312435252) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_none (2639588015479657864) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_one (3704934031930978405) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_some (812936714383016364) -->
+    <skip />
+    <!-- no translation found for domain_urls_apps_summary (4322996467951692661) -->
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Nie rozpoznano"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"Domyślne aplikacje"</string>
-    <!-- no translation found for default_assist_title (8851464168639315795) -->
-    <skip />
-    <!-- no translation found for default_assist_none (4719591002003824614) -->
-    <skip />
+    <string name="default_assist_title" msgid="8851464168639315795">"Pomoc"</string>
+    <string name="default_assist_none" msgid="4719591002003824614">"Brak domyślnej pomocy"</string>
     <string name="default_browser_title" msgid="8101772675085814670">"Przeglądarka"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"Brak domyślnej przeglądarki"</string>
     <string name="default_phone_title" msgid="282005908059637350">"Aplikacja Telefon"</string>
@@ -2780,10 +2781,7 @@
     <string name="inactive_apps_title" msgid="1317817863508274533">"Nieaktywne aplikacje"</string>
     <string name="inactive_app_inactive_summary" msgid="6768756967594202411">"Nieaktywna. Kliknij, by włączyć."</string>
     <string name="inactive_app_active_summary" msgid="4512911571954375968">"Aktywna. Kliknij, by wyłączyć."</string>
-    <!-- no translation found for assist_access_context_title (2047105711005856521) -->
-    <skip />
-    <!-- no translation found for assist_access_context_summary (8365837347256022203) -->
-    <skip />
-    <!-- no translation found for assist_footer (2283187001990543739) -->
-    <skip />
+    <string name="assist_access_context_title" msgid="2047105711005856521">"Użyj bieżącego kontekstu"</string>
+    <string name="assist_access_context_summary" msgid="8365837347256022203">"Po otwarciu aplikacji asystującej pozwól jej widzieć, co robisz na ekranie"</string>
+    <string name="assist_footer" msgid="2283187001990543739">"Aplikacja asystująca może samodzielnie identyfikować przydatne informacje i wykonywać związane z nimi działania. Niektóre aplikacje obsługują programy uruchamiające i usługi wprowadzania danych, zapewniając w ten sposób zintegrowaną pomoc."</string>
 </resources>

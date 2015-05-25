@@ -343,9 +343,9 @@
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Barmoq izi sozlamalari"</string>
     <string name="fingerprint_add_title" msgid="1926752654454033904">"Barmoq izini qo‘shish"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5078060939636911795">"ekranni qulflash"</string>
-    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="4776063289827470602">
-      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> ta barmoq izi qayd qilingan</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> ta barmoq izi qayd qilingan</item>
+    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="624961700033979880">
+      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> ta barmoq izi o\'rnatildi</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> ta barmoq izi o\'rnatildi</item>
     </plurals>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Barmoq izini sozlash"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"Ekranni qulfdan chiqarish yoki xaridlarni tasdiqlashda barmoq izidan foydalanish uchun:"</string>
@@ -653,7 +653,7 @@
     <string name="wifi_eap_anonymous" msgid="2989469344116577955">"Anonim nom"</string>
     <string name="wifi_password" msgid="5948219759936151048">"Parol"</string>
     <string name="wifi_show_password" msgid="6461249871236968884">"Parol ko‘rsatilsin"</string>
-    <string name="wifi_ap_band_config" msgid="1611826705989117930">"Ulanish nuqtasi chastotasini tanlang"</string>
+    <string name="wifi_ap_band_config" msgid="1611826705989117930">"Wi-Fi chastotalari diapazoni"</string>
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"2,4 Ggs"</string>
     <string name="wifi_ap_choose_5G" msgid="8137061170937978040">"5 GHz chastota"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP sozlamalari"</string>
@@ -1015,8 +1015,7 @@
     <string name="storage_wizard_move_progress_title" msgid="4443920302548035674">"<xliff:g id="APP">^1</xliff:g> ko‘chirib o‘tkazilmoqda…"</string>
     <string name="storage_wizard_move_progress_body" msgid="7802577486578105609">"Ko‘chirish davomida “<xliff:g id="NAME">^1</xliff:g>” kartasini chiqara ko‘rmang. \n\n Ushbu qurilmadagi <xliff:g id="APP">^2</xliff:g> ilovasi ko‘chirish tugamaguncha ishlamaydi."</string>
     <string name="storage_wizard_move_progress_cancel" msgid="542047237524588792">"Ko‘chirishni bekor qilish"</string>
-    <!-- no translation found for storage_wizard_slow_body (8010127667184768025) -->
-    <skip />
+    <string name="storage_wizard_slow_body" msgid="8010127667184768025">"“<xliff:g id="NAME_0">^1</xliff:g>” qurilmasi sekin ishlayotganga o‘xshaydi. \n\nAgar davom etsangiz, ko‘chirib o‘tkazilgan ilovalar ishlamasligi va ma’lumotlarni o‘tkazish uzoq vaqt olishi mumkin. \n\nYuqori unumdorlikka erishish uchun tezkor qurilmadan (<xliff:g id="NAME_1">^1</xliff:g>) foydalaning."</string>
     <string name="battery_status_title" msgid="9159414319574976203">"Batareya holati"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"Batareya quvvati darajasi"</string>
     <string name="apn_settings" msgid="3743170484827528406">"Ulanish nuqtalari (APN)"</string>
@@ -1229,7 +1228,7 @@
     <string name="lockpattern_pattern_confirmed_header" msgid="8455614172231880211">"Yangi chizmali kalitingiz"</string>
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"Tasdiqlash"</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"Qayta chizish"</string>
-    <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"Qayta urinish"</string>
+    <string name="lockpattern_retry_button_text" msgid="3480423193273588166">"Tozalash"</string>
     <string name="lockpattern_continue_button_text" msgid="4723771754714471410">"Davom etish"</string>
     <string name="lockpattern_settings_title" msgid="3207750489460466680">"Qulfni ochish chizmasi"</string>
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"Chizmani so‘rash"</string>
@@ -1258,7 +1257,8 @@
     <string name="advanced_settings_summary" msgid="4016682978071086747">"Qo‘shimcha sozlamalar tanlamalarini yoqib qo‘yish"</string>
     <string name="application_info_label" msgid="5736524913065714880">"Ilova haqida"</string>
     <string name="storage_label" msgid="8700867073480107253">"Xotira"</string>
-    <string name="auto_launch_label" msgid="3012617472833815382">"birlamchi ishga tushirish"</string>
+    <!-- no translation found for auto_launch_label (2669236885531442195) -->
+    <skip />
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"Birlamchi"</string>
     <string name="screen_compatibility_label" msgid="663250687205465394">"Ekrandagi moslashuv"</string>
     <string name="permissions_label" msgid="2605296874922726203">"Ruxsatnomalar"</string>
@@ -1932,8 +1932,7 @@
     <string name="backup_erase_dialog_title" msgid="1027640829482174106"></string>
     <string name="backup_erase_dialog_message" msgid="5221011285568343155">"Wi-Fi parollari, xatcho‘plar, boshqa sozlamalar va ilova ma’lumotlarining zaxira nusxasini saqlash to‘xtatilib, ularning barcha nusxalari Google serveridan o‘chirib tashlansinmi?"</string>
     <string name="fullbackup_erase_dialog_message" msgid="944399039066318647">"Qurilmadagi ma’lumotlar (m-n, Wi-Fi parollari va qo‘ng‘iroqlar tarixi) va ilova ma’lumotlarining (m-n, sozlamalar va ilovalar tomonidan saqlangan fayllar) zaxira nusxasini saqlash to‘xtatililib, ularning Google Drive xizmatidagi barcha nusxalari o‘chirib tashlansinmi?"</string>
-    <!-- no translation found for fullbackup_data_summary (960850365007767734) -->
-    <skip />
+    <string name="fullbackup_data_summary" msgid="960850365007767734">"Qurilmadagi ma’lumotlar (m-n, Wi-Fi parollari va qo‘ng‘iroqlar tarixi) va ilova ma’lumotlarining (m-n, sozlamalar va ilovalar tomonidan saqlangan fayllar) zaxira nusxasini avtomatik tarzda masofadan turib saqlang.\n\nAgar avtomatik zaxiralash funksiyasi yoqilsa, qurilma va ilova ma’lumotlarining zaxira nusxasi vaqti-vaqti bilan masofadan turib saqlab turiladi. Ilova ma’lumotlariga biror ilova tomonidan saqlangan har qanday ma’lumot (dasturchi sozlamalariga qarab), jumladan, kontakt, xabar va rasmlar kabi shaxsiy ma’lumotlar ham kiradi."</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"Qurilmani boshqarish sozlamalari"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"Qurilma administratori"</string>
     <string name="remove_device_admin" msgid="3596845261596451437">"O‘chirib qo‘yish"</string>
@@ -2640,12 +2639,17 @@
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI-kod ma’lumotlari"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI raqamiga aloqador ma’lumotlar"</string>
     <string name="slot_number" msgid="3762676044904653577">"(<xliff:g id="SLOT_NUM">%1$d</xliff:g>-uya)"</string>
-    <string name="launch_by_default" msgid="2184141780491382435">"Birlamchi ishga tushirish"</string>
+    <!-- no translation found for launch_by_default (1840761193189009248) -->
+    <skip />
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> – <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
-    <string name="app_launch_domain_links_title" msgid="458956710410857777">"Domen havolalari"</string>
-    <string name="app_launch_open_domain_urls_title" msgid="5821849783765291139">"Domen havolalarini ochish"</string>
-    <string name="app_launch_open_domain_urls_summary" msgid="7305739311608755281">"Ilovaga domen havolalarini bevosita ochishga ruxsat berish"</string>
-    <string name="app_launch_supported_domain_urls_title" msgid="8148494155921307572">"Qo\'llab-quvvatlanadigan domenlar"</string>
+    <!-- no translation found for app_launch_domain_links_title (6789955009107320092) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_title (8914721351596745701) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_summary (5367573364240712217) -->
+    <skip />
+    <!-- no translation found for app_launch_supported_domain_urls_title (8250695258211477480) -->
+    <skip />
     <string name="app_launch_other_defaults_title" msgid="2516812499807835178">"Boshqa birlamchi sozlamalar"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> – <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
     <string name="storage_type_internal" msgid="410824961149037234">"ichki xotira"</string>
@@ -2691,20 +2695,19 @@
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"Ruxsat berilgan ilovalar: <xliff:g id="COUNT_0">%d</xliff:g> / <xliff:g id="COUNT_1">%d</xliff:g>"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Teginib yoqish"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Qurilmani yoqish uchun ekranning istalgan joyiga ikki marta bosing"</string>
-    <string name="domain_urls_title" msgid="8735310976048599572">"Domen havolalari"</string>
-    <string name="domain_urls_summary_none" msgid="4817723415916239693">"Domen havolasi ochilmasin"</string>
-    <string name="domain_urls_summary_one" msgid="4427559120855938432">"\"<xliff:g id="DOMAIN">%s</xliff:g>\" havolasini ochish"</string>
-    <string name="domain_urls_summary_some" msgid="2533219801400609818">"\"<xliff:g id="DOMAIN">%s</xliff:g>\" va tegishli havolalarni ochish"</string>
-    <plurals name="domain_urls_apps_summary" formatted="false" msgid="6604886186235343653">
-      <item quantity="other"> <xliff:g id="COUNT">%d</xliff:g> ta ilova o‘z domenidagi havolalarni ochishi mumkin</item>
-      <item quantity="one">1 ta ilova o‘z domenidagi havolalarni ochishi mumkin</item>
-    </plurals>
+    <!-- no translation found for domain_urls_title (8762012672312435252) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_none (2639588015479657864) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_one (3704934031930978405) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_some (812936714383016364) -->
+    <skip />
+    <!-- no translation found for domain_urls_apps_summary (4322996467951692661) -->
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Aniqlanmadi"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"Birlamchi ilovalar"</string>
-    <!-- no translation found for default_assist_title (8851464168639315795) -->
-    <skip />
-    <!-- no translation found for default_assist_none (4719591002003824614) -->
-    <skip />
+    <string name="default_assist_title" msgid="8851464168639315795">"Yordamchi"</string>
+    <string name="default_assist_none" msgid="4719591002003824614">"Birlamchi yordamchi ilova ko‘rsatilmagan"</string>
     <string name="default_browser_title" msgid="8101772675085814670">"Brauzer ilovasi"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"Birlamchi brauzer mavjud emas"</string>
     <string name="default_phone_title" msgid="282005908059637350">"Telefon ilovasi"</string>
@@ -2748,10 +2751,7 @@
     <string name="inactive_apps_title" msgid="1317817863508274533">"Nofaol ilovalar"</string>
     <string name="inactive_app_inactive_summary" msgid="6768756967594202411">"Nofaol. O‘zgartirish uchun bu yerga bosing."</string>
     <string name="inactive_app_active_summary" msgid="4512911571954375968">"Faol. O‘zgartirish uchun bu yerga bosing."</string>
-    <!-- no translation found for assist_access_context_title (2047105711005856521) -->
-    <skip />
-    <!-- no translation found for assist_access_context_summary (8365837347256022203) -->
-    <skip />
-    <!-- no translation found for assist_footer (2283187001990543739) -->
-    <skip />
+    <string name="assist_access_context_title" msgid="2047105711005856521">"Joriy ekran bilan ishlash"</string>
+    <string name="assist_access_context_summary" msgid="8365837347256022203">"Yordamchi ilova ochilganda, unga ekranda bajarayotgan ishlaringizni ko‘rish uchun ruxsat bering"</string>
+    <string name="assist_footer" msgid="2283187001990543739">"Yordamchi ilovalar sizdan so‘ramasdan turib foydali ma’lumotlarni aniqlash va ular ustida ishlashga yordam beradi. Ba’zi ilovalar sizga umumlashgan ko‘mak berish maqsadida ham ishga tushirish paneli, ham ovoz bilan yozish xizmatlarini qo‘llab-quvvatlaydi."</string>
 </resources>

@@ -345,9 +345,9 @@
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"指紋の用途"</string>
     <string name="fingerprint_add_title" msgid="1926752654454033904">"指紋を追加"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5078060939636911795">"画面ロック"</string>
-    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="4776063289827470602">
-      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g>個の指紋が登録されています</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g>個の指紋が登録されています</item>
+    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="624961700033979880">
+      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g>個の指紋がセットアップされています</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g>個の指紋がセットアップされています</item>
     </plurals>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"指紋の設定"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"指紋を使って画面ロックの解除や購入の確認を行うには、次の手順を行う必要があります。"</string>
@@ -1017,8 +1017,7 @@
     <string name="storage_wizard_move_progress_title" msgid="4443920302548035674">"<xliff:g id="APP">^1</xliff:g>を移動中…"</string>
     <string name="storage_wizard_move_progress_body" msgid="7802577486578105609">"移動中は<xliff:g id="NAME">^1</xliff:g>を取り外さないでください。\n\nこの端末の<xliff:g id="APP">^2</xliff:g>アプリは移動が完了するまで使用できません。"</string>
     <string name="storage_wizard_move_progress_cancel" msgid="542047237524588792">"移動をキャンセル"</string>
-    <!-- no translation found for storage_wizard_slow_body (8010127667184768025) -->
-    <skip />
+    <string name="storage_wizard_slow_body" msgid="8010127667184768025">"この<xliff:g id="NAME_0">^1</xliff:g>は速度が遅いようです。\n\n続行することはできますが、この場所に移動したアプリはスムーズに動作しないおそれがあります。また、データの転送に時間がかかる可能性があります。\n\n快適にご利用いただくには、高速の<xliff:g id="NAME_1">^1</xliff:g>を使用することをご検討ください。"</string>
     <string name="battery_status_title" msgid="9159414319574976203">"電池の状態:"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"電池残量"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APN"</string>
@@ -1231,7 +1230,7 @@
     <string name="lockpattern_pattern_confirmed_header" msgid="8455614172231880211">"新しいロック解除パターン"</string>
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"確認"</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"再入力"</string>
-    <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"やり直す"</string>
+    <string name="lockpattern_retry_button_text" msgid="3480423193273588166">"消去"</string>
     <string name="lockpattern_continue_button_text" msgid="4723771754714471410">"次へ"</string>
     <string name="lockpattern_settings_title" msgid="3207750489460466680">"ロック解除パターン"</string>
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"パターン入力が必要"</string>
@@ -1260,7 +1259,8 @@
     <string name="advanced_settings_summary" msgid="4016682978071086747">"詳細設定オプションを有効にする"</string>
     <string name="application_info_label" msgid="5736524913065714880">"アプリ情報"</string>
     <string name="storage_label" msgid="8700867073480107253">"メモリ"</string>
-    <string name="auto_launch_label" msgid="3012617472833815382">"デフォルトでの起動"</string>
+    <!-- no translation found for auto_launch_label (2669236885531442195) -->
+    <skip />
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"デフォルト"</string>
     <string name="screen_compatibility_label" msgid="663250687205465394">"画面の互換性"</string>
     <string name="permissions_label" msgid="2605296874922726203">"許可"</string>
@@ -1938,8 +1938,7 @@
     <string name="backup_erase_dialog_title" msgid="1027640829482174106"></string>
     <string name="backup_erase_dialog_message" msgid="5221011285568343155">"Wi-Fiパスワード、ブックマーク、その他の設定とアプリのデータのバックアップを停止し、Googleサーバー上のすべてのコピーを消去しますか？"</string>
     <string name="fullbackup_erase_dialog_message" msgid="944399039066318647">"端末のデータ（Wi-Fiのパスワードや通話履歴など）とアプリのデータ（アプリで保存された設定やファイルなど）のバックアップを停止し、Googleドライブ上のすべてのコピーを消去しますか？"</string>
-    <!-- no translation found for fullbackup_data_summary (960850365007767734) -->
-    <skip />
+    <string name="fullbackup_data_summary" msgid="960850365007767734">"端末のデータ（Wi-Fiのパスワードや通話履歴など）とアプリのデータ（アプリで保存された設定やファイルなど）を自動的にリモートでバックアップします。\n\n自動バックアップをONにすると、端末のデータとアプリのデータは定期的にリモートで保存されます。アプリのデータとしては、連絡先、メッセージ、写真など、機密と見なされるデータを含め、（デベロッパーの設定に基づいて）アプリで保存されたすべてのデータがバックアップされる可能性があります。"</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"デバイス管理の設定"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"デバイス管理者"</string>
     <string name="remove_device_admin" msgid="3596845261596451437">"無効にする"</string>
@@ -2646,12 +2645,17 @@
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI情報"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI関連情報"</string>
     <string name="slot_number" msgid="3762676044904653577">"（スロット<xliff:g id="SLOT_NUM">%1$d</xliff:g>）"</string>
-    <string name="launch_by_default" msgid="2184141780491382435">"既定で起動"</string>
+    <!-- no translation found for launch_by_default (1840761193189009248) -->
+    <skip />
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g>使用（<xliff:g id="STORAGE_TYPE">%2$s</xliff:g>）"</string>
-    <string name="app_launch_domain_links_title" msgid="458956710410857777">"ドメインのリンク"</string>
-    <string name="app_launch_open_domain_urls_title" msgid="5821849783765291139">"ドメインURLを開く"</string>
-    <string name="app_launch_open_domain_urls_summary" msgid="7305739311608755281">"ドメインURLを直接開くことをアプリに許可する"</string>
-    <string name="app_launch_supported_domain_urls_title" msgid="8148494155921307572">"サポートされているドメインURL"</string>
+    <!-- no translation found for app_launch_domain_links_title (6789955009107320092) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_title (8914721351596745701) -->
+    <skip />
+    <!-- no translation found for app_launch_open_domain_urls_summary (5367573364240712217) -->
+    <skip />
+    <!-- no translation found for app_launch_supported_domain_urls_title (8250695258211477480) -->
+    <skip />
     <string name="app_launch_other_defaults_title" msgid="2516812499807835178">"その他の既定"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g>使用（<xliff:g id="STORAGE_TYPE">%2$s</xliff:g>）"</string>
     <string name="storage_type_internal" msgid="410824961149037234">"内部メモリ"</string>
@@ -2697,20 +2701,19 @@
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"<xliff:g id="COUNT_0">%d</xliff:g>/<xliff:g id="COUNT_1">%d</xliff:g>個のアプリを許可"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"タップして復帰"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"画面をダブルタップすると端末が復帰します"</string>
-    <string name="domain_urls_title" msgid="8735310976048599572">"ドメインURL"</string>
-    <string name="domain_urls_summary_none" msgid="4817723415916239693">"ドメインURLを開かない"</string>
-    <string name="domain_urls_summary_one" msgid="4427559120855938432">"「<xliff:g id="DOMAIN">%s</xliff:g>」を開く"</string>
-    <string name="domain_urls_summary_some" msgid="2533219801400609818">"「<xliff:g id="DOMAIN">%s</xliff:g>」と関連URLを開く"</string>
-    <plurals name="domain_urls_apps_summary" formatted="false" msgid="6604886186235343653">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g>個のアプリがドメインURLを開くことができます</item>
-      <item quantity="one">1つのアプリがドメインURLを開くことができます</item>
-    </plurals>
+    <!-- no translation found for domain_urls_title (8762012672312435252) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_none (2639588015479657864) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_one (3704934031930978405) -->
+    <skip />
+    <!-- no translation found for domain_urls_summary_some (812936714383016364) -->
+    <skip />
+    <!-- no translation found for domain_urls_apps_summary (4322996467951692661) -->
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"認識されませんでした"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"既定のアプリ"</string>
-    <!-- no translation found for default_assist_title (8851464168639315795) -->
-    <skip />
-    <!-- no translation found for default_assist_none (4719591002003824614) -->
-    <skip />
+    <string name="default_assist_title" msgid="8851464168639315795">"アシスト"</string>
+    <string name="default_assist_none" msgid="4719591002003824614">"既定のアシストはありません"</string>
     <string name="default_browser_title" msgid="8101772675085814670">"ブラウザアプリ"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"既定のブラウザなし"</string>
     <string name="default_phone_title" msgid="282005908059637350">"電話アプリ"</string>
@@ -2754,10 +2757,7 @@
     <string name="inactive_apps_title" msgid="1317817863508274533">"無効なアプリ"</string>
     <string name="inactive_app_inactive_summary" msgid="6768756967594202411">"無効。タップすると切り替わります。"</string>
     <string name="inactive_app_active_summary" msgid="4512911571954375968">"有効。タップすると切り替わります。"</string>
-    <!-- no translation found for assist_access_context_title (2047105711005856521) -->
-    <skip />
-    <!-- no translation found for assist_access_context_summary (8365837347256022203) -->
-    <skip />
-    <!-- no translation found for assist_footer (2283187001990543739) -->
-    <skip />
+    <string name="assist_access_context_title" msgid="2047105711005856521">"現在のコンテキストを使用"</string>
+    <string name="assist_access_context_summary" msgid="8365837347256022203">"アシストアプリの起動時に、画面上でのユーザーの操作を認識することをアプリに許可します"</string>
+    <string name="assist_footer" msgid="2283187001990543739">"アシストアプリを使用することにより、質問することなく、有益な情報を識別し、それに基づいて操作できるようになります。一部のアプリはランチャーと音声入力サービスの両方に対応しており、統合されたアシスタントを提供します。"</string>
 </resources>

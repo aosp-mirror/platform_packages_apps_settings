@@ -343,9 +343,9 @@
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Хурууны хээг дараах зорилгоор ашиглах"</string>
     <string name="fingerprint_add_title" msgid="1926752654454033904">"Хурууны хээ нэмэх"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5078060939636911795">"дэлгэцний түгжээ"</string>
-    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="4776063289827470602">
-      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> хурууны хээг бүртгэсэн</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> хурууны хээг бүртгэсэн</item>
+    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="624961700033979880">
+      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> хурууны хээг тохируулах</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> хурууны хээг тохируулах</item>
     </plurals>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Хурууны хээний тохиргоо"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"Таны хурууны хээг ашиглан дэлгэцийн түгжээг тайлах эсвэл худалдан авалт баталгаажуулахын тулд бид дараах зүйлийг хийх шаардлагатай:"</string>
@@ -1005,8 +1005,7 @@
     <string name="storage_wizard_move_progress_title" msgid="4443920302548035674">"<xliff:g id="APP">^1</xliff:g>-ыг зөөж байна..."</string>
     <string name="storage_wizard_move_progress_body" msgid="7802577486578105609">"Зөөвөрлөх явцад <xliff:g id="NAME">^1</xliff:g>-ыг хөдөлгөхгүй байна уу. \n\n Энэ төхөөрөмж дээрх <xliff:g id="APP">^2</xliff:g> апп нь зөөвөрлөж дуусах хүртэл ажиллахгүй."</string>
     <string name="storage_wizard_move_progress_cancel" msgid="542047237524588792">"Зөөвөрлөлтийг цуцлах"</string>
-    <!-- no translation found for storage_wizard_slow_body (8010127667184768025) -->
-    <skip />
+    <string name="storage_wizard_slow_body" msgid="8010127667184768025">"Энэ <xliff:g id="NAME_0">^1</xliff:g> нь удаан байна. \n\nТа үргэлжлүүлж болох боловч энэ байршилд зөөсөн апп нь гацаж болохоос гадна, өгөгдөл шилжүүлэхэд удаж болзошгүй. \n\nЧанартай үйлчилгээ авахын тулд илүү түргэн <xliff:g id="NAME_1">^1</xliff:g>-ийг хэрэглэнэ үү."</string>
     <string name="battery_status_title" msgid="9159414319574976203">"Зайны статус"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"Зайны түвшин"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APNs"</string>
@@ -1219,7 +1218,7 @@
     <string name="lockpattern_pattern_confirmed_header" msgid="8455614172231880211">"Таны шинэ тайлах хээ"</string>
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"Баталгаажуулах"</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"Дахин зурах"</string>
-    <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"Дахин оролдох"</string>
+    <string name="lockpattern_retry_button_text" msgid="3480423193273588166">"Цэвэр"</string>
     <string name="lockpattern_continue_button_text" msgid="4723771754714471410">"Үргэлжлүүлэх"</string>
     <string name="lockpattern_settings_title" msgid="3207750489460466680">"Тайлах хээ"</string>
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"Загвар шаардах"</string>
@@ -1248,7 +1247,7 @@
     <string name="advanced_settings_summary" msgid="4016682978071086747">"Өөр тохиргоо сонголтыг идэвхжүүлнэ үү"</string>
     <string name="application_info_label" msgid="5736524913065714880">"Апп мэдээлэл"</string>
     <string name="storage_label" msgid="8700867073480107253">"Хадгалах сан"</string>
-    <string name="auto_launch_label" msgid="3012617472833815382">"Үндсэн тохиргоогоор ажиллуулах"</string>
+    <string name="auto_launch_label" msgid="2669236885531442195">"Стандарт нээх утга"</string>
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"Үндсэн тохиргоо"</string>
     <string name="screen_compatibility_label" msgid="663250687205465394">"Дэлгэцийн нийцэл"</string>
     <string name="permissions_label" msgid="2605296874922726203">"Зөвшөөрөл"</string>
@@ -1921,9 +1920,8 @@
     <string name="local_backup_password_toast_validation_failure" msgid="5646377234895626531">"Нөөшлөлтийн нууц үгийг тохируулахад алдаа гарлаа"</string>
     <string name="backup_erase_dialog_title" msgid="1027640829482174106"></string>
     <string name="backup_erase_dialog_message" msgid="5221011285568343155">"Өөрийн Wi‑Fi нууц үгс, тэмдэглэгээ, бусад тохиргоонууд болон апп өгөгдлийг Google серверт нөөцлөхийг зогсоож бүх хуулбарыг нь устгах уу?"</string>
-    <string name="fullbackup_erase_dialog_message" msgid="944399039066318647">"Төхөөрөмжийн өгөгдөл (Wi-Fi-ийн нууц үг, дуудлагын түүх гэх мэт) болон апп-ийн өгөгдлийг (тохируулга болон апп-ийн хадгалсан файл гэх мэт) нөөцлөхөө зогсоож, Google Драйвт байгаа хуулбарыг устгах уу?"</string>
-    <!-- no translation found for fullbackup_data_summary (960850365007767734) -->
-    <skip />
+    <string name="fullbackup_erase_dialog_message" msgid="944399039066318647">"Төхөөрөмжийн өгөгдөл (Wi-Fi-ийн нууц үг, дуудлагын түүх гэх мэт) болон апп-ын өгөгдлийг (тохиргоо болон апп-ийн хадгалсан файл гэх мэт) нөөцлөхөө зогсоож, Google Драйвт байгаа хуулбарыг устгах уу?"</string>
+    <string name="fullbackup_data_summary" msgid="960850365007767734">"Алсаас автоматаар төхөөрөмжийн өгөгдөл (Wi-Fi нууц үг, дуудлагын түүх гэх мэт) ба апп-ын өгөгдөл (апп-ын тохиргоо, хадгалсан файл гэх мэт)-ийг нөөцлөх.\n\nАвтомат нөөцлөлт нээсэн тохиолдолд төхөөрөмж, апп-ын өгөгдлийг тогтмол хугацаанд алсаас хадгална. Тус өгөгдөлд апп-ын хадгалсан бүх өгөгдөл орно (хөгжүүлэгчийн тохиргоонд үндэслэн). Үүнд: харилцагчийн хаяг, зурвас, зураг гэх мэт хувийн мэдээлэл."</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"Төхөөрөмжийн администрацын тохиргоо"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"Төхөөрөмжийн администратор"</string>
     <string name="remove_device_admin" msgid="3596845261596451437">"Идэвхгүйжүүлэх"</string>
@@ -2628,12 +2626,12 @@
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI мэдээлэл"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI хамаарах мэдээлэл"</string>
     <string name="slot_number" msgid="3762676044904653577">"(Слот<xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
-    <string name="launch_by_default" msgid="2184141780491382435">"Үндсэн тохиргоогоор ажиллуулах"</string>
+    <string name="launch_by_default" msgid="1840761193189009248">"Стандарт нээх утга"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g>-ыг <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>-д ашигласан"</string>
-    <string name="app_launch_domain_links_title" msgid="458956710410857777">"Домэйн холбоосууд"</string>
-    <string name="app_launch_open_domain_urls_title" msgid="5821849783765291139">"Домэйн хаягуудыг нээх"</string>
-    <string name="app_launch_open_domain_urls_summary" msgid="7305739311608755281">"Апп-д Домэйн хаягуудыг шууд нээхийг зөвшөөрөх"</string>
-    <string name="app_launch_supported_domain_urls_title" msgid="8148494155921307572">"Дэмжигдсэн домэйн хаягууд"</string>
+    <string name="app_launch_domain_links_title" msgid="6789955009107320092">"Апп холбоос"</string>
+    <string name="app_launch_open_domain_urls_title" msgid="8914721351596745701">"Дэмждэг холбоосыг нээх"</string>
+    <string name="app_launch_open_domain_urls_summary" msgid="5367573364240712217">"Асуулгүйгээр нээх"</string>
+    <string name="app_launch_supported_domain_urls_title" msgid="8250695258211477480">"Дэмждэг холбоос"</string>
     <string name="app_launch_other_defaults_title" msgid="2516812499807835178">"Бусад стандарт өгөгдөл"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g>-ыг <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>-д ашигласан"</string>
     <string name="storage_type_internal" msgid="410824961149037234">"дотоод санах ой"</string>
@@ -2679,20 +2677,18 @@
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"<xliff:g id="COUNT_0">%d</xliff:g>-аас <xliff:g id="COUNT_1">%d</xliff:g> апп зөвшөөрөгдсөн"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Идэвхжүүлэхийн тулд товших"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Төхөөрөмжийг идэвхжүүлэхийн тулд дэлгэцийн аль нэг хэсэгт 2 удаа товших"</string>
-    <string name="domain_urls_title" msgid="8735310976048599572">"Домэйн хаягууд"</string>
-    <string name="domain_urls_summary_none" msgid="4817723415916239693">"Ямар ч домэйн хаягийг битгий нээ"</string>
-    <string name="domain_urls_summary_one" msgid="4427559120855938432">"\'<xliff:g id="DOMAIN">%s</xliff:g>\'-ыг нээх"</string>
-    <string name="domain_urls_summary_some" msgid="2533219801400609818">"\'<xliff:g id="DOMAIN">%s</xliff:g>\' болон холбоотой хаягуудыг нээх"</string>
-    <plurals name="domain_urls_apps_summary" formatted="false" msgid="6604886186235343653">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> апп-ууд нь өөрийн домайн URL-уудыг нээж чадна</item>
-      <item quantity="one">Нэг апп нь өөрийн домайн URL-уудыг нээж чадна</item>
+    <string name="domain_urls_title" msgid="8762012672312435252">"Апп холбоос"</string>
+    <string name="domain_urls_summary_none" msgid="2639588015479657864">"Дэмждэг холбоосыг бүү нээ"</string>
+    <string name="domain_urls_summary_one" msgid="3704934031930978405">"<xliff:g id="DOMAIN">%s</xliff:g> нээх"</string>
+    <string name="domain_urls_summary_some" msgid="812936714383016364">"<xliff:g id="DOMAIN">%s</xliff:g> болон холбоотой URL-ийг нээх"</string>
+    <plurals name="domain_urls_apps_summary" formatted="false" msgid="4322996467951692661">
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> апп нь өөрийн дэмждэг холбоосыг нээж болно</item>
+      <item quantity="one">Нэг апп нь өөрийн дэмждэг холбоосыг нээж болно</item>
     </plurals>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Танигдахгүй байна"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"Үндсэн Апликейшн"</string>
-    <!-- no translation found for default_assist_title (8851464168639315795) -->
-    <skip />
-    <!-- no translation found for default_assist_none (4719591002003824614) -->
-    <skip />
+    <string name="default_assist_title" msgid="8851464168639315795">"Туслах"</string>
+    <string name="default_assist_none" msgid="4719591002003824614">"Стандарт туслах алга байна"</string>
     <string name="default_browser_title" msgid="8101772675085814670">"Хөтөч апп"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"Үндсэн веб хөтөч байхгүй"</string>
     <string name="default_phone_title" msgid="282005908059637350">"Гар утасны апп"</string>
@@ -2736,10 +2732,7 @@
     <string name="inactive_apps_title" msgid="1317817863508274533">"Идэвхгүй апп-ууд"</string>
     <string name="inactive_app_inactive_summary" msgid="6768756967594202411">"Идэвхгүй. Сэлгэхийн тулд хүрнэ үү."</string>
     <string name="inactive_app_active_summary" msgid="4512911571954375968">"Идэвхтэй. Сэлгэхийн тулд хүрнэ үү."</string>
-    <!-- no translation found for assist_access_context_title (2047105711005856521) -->
-    <skip />
-    <!-- no translation found for assist_access_context_summary (8365837347256022203) -->
-    <skip />
-    <!-- no translation found for assist_footer (2283187001990543739) -->
-    <skip />
+    <string name="assist_access_context_title" msgid="2047105711005856521">"Энэ утгыг ашиглах"</string>
+    <string name="assist_access_context_summary" msgid="8365837347256022203">"Туслах апп-ыг нээсэн тохиолдолд энэ апп-д таны дэлгэц дээр хийсэн үйлдлийг харахыг зөвшөөрнө"</string>
+    <string name="assist_footer" msgid="2283187001990543739">"Туслах апп нь таныг бусдаас асууж лавлалгүйгээр хэрэгтэй мэдээллээ олж, хариу үйлдэл хийх боломжийг олгодог. Нэгдсэн тусламжийн үйлчилгээг танд үзүүлэх үүднээс зарим апп нь эхлүүлэгч болон дуун оролтыг дэмждэг."</string>
 </resources>

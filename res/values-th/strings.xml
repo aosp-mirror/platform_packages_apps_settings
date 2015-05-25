@@ -343,9 +343,9 @@
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"ใช้ลายนิ้วมือเพื่อ"</string>
     <string name="fingerprint_add_title" msgid="1926752654454033904">"เพิ่มลายนิ้วมือ"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5078060939636911795">"ล็อกหน้าจอ"</string>
-    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="4776063289827470602">
-      <item quantity="other">ลงทะเบียนแล้ว <xliff:g id="COUNT_1">%1$d</xliff:g> ลายนิ้วมือ</item>
-      <item quantity="one">ลงทะเบียนแล้ว <xliff:g id="COUNT_0">%1$d</xliff:g> ลายนิ้วมือ</item>
+    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="624961700033979880">
+      <item quantity="other">ตั้งค่าลายนิ้วมือ <xliff:g id="COUNT_1">%1$d</xliff:g> รายการ</item>
+      <item quantity="one">ตั้งค่าลายนิ้วมือ <xliff:g id="COUNT_0">%1$d</xliff:g> รายการ</item>
     </plurals>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"การตั้งค่าลายนิ้วมือ"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"หากต้องการใช้ลายนิ้วมือเพื่อปลดล็อกหน้าจอหรือยืนยันการซื้อ เราจะต้อง:"</string>
@@ -1015,8 +1015,7 @@
     <string name="storage_wizard_move_progress_title" msgid="4443920302548035674">"กำลังย้าย <xliff:g id="APP">^1</xliff:g>…"</string>
     <string name="storage_wizard_move_progress_body" msgid="7802577486578105609">"ห้ามนำ <xliff:g id="NAME">^1</xliff:g> ออกขณะทำการย้าย \n\nแอป <xliff:g id="APP">^2</xliff:g> บนอุปกรณ์นี้จะไม่สามารถใช้ได้จนกว่าการย้ายจะเสร็จสมบูรณ์"</string>
     <string name="storage_wizard_move_progress_cancel" msgid="542047237524588792">"ยกเลิกการย้าย"</string>
-    <!-- no translation found for storage_wizard_slow_body (8010127667184768025) -->
-    <skip />
+    <string name="storage_wizard_slow_body" msgid="8010127667184768025">"ดูเหมือนว่า <xliff:g id="NAME_0">^1</xliff:g> นี้ทำงานช้า \n\nคุณสามารถดำเนินการต่อ แต่แอปที่ย้ายไปยังตำแหน่งนี้อาจทำงานไม่สม่ำเสมอและการโอนข้อมูลอาจใช้เวลานาน\n\nโปรดพิจารณาการใช้ <xliff:g id="NAME_1">^1</xliff:g> ที่เร็วขึ้นเพื่อเพิ่มประสิทธิภาพ"</string>
     <string name="battery_status_title" msgid="9159414319574976203">"สถานะแบตเตอรี่"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"ระดับแบตเตอรี่"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APN"</string>
@@ -1229,7 +1228,7 @@
     <string name="lockpattern_pattern_confirmed_header" msgid="8455614172231880211">"รูปแบบการปลดล็อกใหม่ของคุณ"</string>
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"ยืนยัน"</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"วาดซ้ำ"</string>
-    <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"ลองอีกครั้ง"</string>
+    <string name="lockpattern_retry_button_text" msgid="3480423193273588166">"ล้าง"</string>
     <string name="lockpattern_continue_button_text" msgid="4723771754714471410">"ดำเนินการต่อ"</string>
     <string name="lockpattern_settings_title" msgid="3207750489460466680">"รูปแบบการปลดล็อก"</string>
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"ต้องใช้รูปแบบ"</string>
@@ -1258,7 +1257,7 @@
     <string name="advanced_settings_summary" msgid="4016682978071086747">"เปิดใช้งานตัวเลือกการตั้งค่าเพิ่มเติม"</string>
     <string name="application_info_label" msgid="5736524913065714880">"ข้อมูลแอปพลิเคชัน"</string>
     <string name="storage_label" msgid="8700867073480107253">"พื้นที่เก็บข้อมูล"</string>
-    <string name="auto_launch_label" msgid="3012617472833815382">"เริ่มใช้งานตามค่าเริ่มต้น"</string>
+    <string name="auto_launch_label" msgid="2669236885531442195">"เปิดโดยค่าเริ่มต้น"</string>
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"ค่าเริ่มต้น"</string>
     <string name="screen_compatibility_label" msgid="663250687205465394">"ความเข้ากันได้ของหน้าจอ"</string>
     <string name="permissions_label" msgid="2605296874922726203">"การอนุญาต"</string>
@@ -1932,8 +1931,7 @@
     <string name="backup_erase_dialog_title" msgid="1027640829482174106"></string>
     <string name="backup_erase_dialog_message" msgid="5221011285568343155">"หยุดการสำรองข้อมูลรหัสผ่าน WiFi, บุ๊กมาร์ก, การตั้งค่าอื่นๆ และข้อมูลแอปพลิเคชัน รวมทั้งลบสำเนาทั้งหมดบนเซิร์ฟเวอร์ของ Google หรือไม่"</string>
     <string name="fullbackup_erase_dialog_message" msgid="944399039066318647">"หยุดการสำรองข้อมูลอุปกรณ์ (เช่น รหัสผ่าน Wi-Fi และประวัติการโทร) และข้อมูลแอป (เช่น การตั้งค่าและไฟล์ที่แอปจัดเก็บไว้) พร้อมทั้งลบสำเนาทั้งหมดบน Google ไดรฟ์ไหม"</string>
-    <!-- no translation found for fullbackup_data_summary (960850365007767734) -->
-    <skip />
+    <string name="fullbackup_data_summary" msgid="960850365007767734">"สำรองข้อมูลในอุปกรณ์ (เช่น รหัสผ่าน Wi-Fi และประวัติการโทร) และข้อมูลแอป (เช่น การตั้งค่าและไฟล์ที่แอปจัดเก็บไว้) ลงใน Google ไดร์ฟจากระยะไกลโดยอัตโนมัติ\n\nเมื่อคุณเปิดเปิดการสำรองข้อมูลอัตโนมัติ ระบบจะบันทึกข้อมูลอุปกรณ์และข้อมูลแอปไปยังโฟลเดอร์ส่วนตัวใน Google ไดรฟ์เป็นระยะๆ ข้อมูลแอปอาจเป็นข้อมูลใดๆ ก็ตามที่แอปบันทึกไว้ (ตามการตั้งค่าของนักพัฒนาซอฟต์แวร์) ซึ่งรวมถึงข้อมูลที่อาจมีความละเอียดอ่อน เช่น รายชื่อติดต่อ ข้อความ และรูปภาพ"</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"การตั้งค่าการควบคุมอุปกรณ์"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"โปรแกรมควบคุมอุปกรณ์"</string>
     <string name="remove_device_admin" msgid="3596845261596451437">"ปิดการใช้งาน"</string>
@@ -2640,12 +2638,12 @@
     <string name="imei_information_title" msgid="8499085421609752290">"ข้อมูล IMEI"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"ข้อมูลที่เกี่ยวข้องกับ IMEI"</string>
     <string name="slot_number" msgid="3762676044904653577">"(ช่อง<xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
-    <string name="launch_by_default" msgid="2184141780491382435">"เริ่มใช้งานตามค่าเริ่มต้น"</string>
+    <string name="launch_by_default" msgid="1840761193189009248">"เปิดโดยค่าเริ่มต้น"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"ใช้ไป <xliff:g id="SIZE">%1$s</xliff:g> ใน <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
-    <string name="app_launch_domain_links_title" msgid="458956710410857777">"ลิงก์โดเมน"</string>
-    <string name="app_launch_open_domain_urls_title" msgid="5821849783765291139">"เปิด URL โดเมน"</string>
-    <string name="app_launch_open_domain_urls_summary" msgid="7305739311608755281">"อนุญาตให้แอปเปิด URL โดเมนได้โดยตรง"</string>
-    <string name="app_launch_supported_domain_urls_title" msgid="8148494155921307572">"URL โดเมนที่สนับสนุน"</string>
+    <string name="app_launch_domain_links_title" msgid="6789955009107320092">"ลิงก์ของแอป"</string>
+    <string name="app_launch_open_domain_urls_title" msgid="8914721351596745701">"เปิดลิงก์ที่สนับสนุน"</string>
+    <string name="app_launch_open_domain_urls_summary" msgid="5367573364240712217">"เปิดโดยไม่ต้องถาม"</string>
+    <string name="app_launch_supported_domain_urls_title" msgid="8250695258211477480">"ลิงก์ที่สนับสนุน"</string>
     <string name="app_launch_other_defaults_title" msgid="2516812499807835178">"ค่าเริ่มต้นอื่นๆ"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"ใช้ไป <xliff:g id="SIZE">%1$s</xliff:g> ใน <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
     <string name="storage_type_internal" msgid="410824961149037234">"หน่วยความจำภายใน"</string>
@@ -2691,20 +2689,18 @@
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"อนุญาต <xliff:g id="COUNT_0">%d</xliff:g> จาก <xliff:g id="COUNT_1">%d</xliff:g> แอปแล้ว"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"แตะเพื่อปลุก"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"แตะที่ใดก็ได้บนหน้าจอ 2 ครั้งเพื่อปลุกอุปกรณ์"</string>
-    <string name="domain_urls_title" msgid="8735310976048599572">"URL โดเมน"</string>
-    <string name="domain_urls_summary_none" msgid="4817723415916239693">"ไม่เปิด URL โดเมนใดๆ"</string>
-    <string name="domain_urls_summary_one" msgid="4427559120855938432">"เปิด \"<xliff:g id="DOMAIN">%s</xliff:g>\""</string>
-    <string name="domain_urls_summary_some" msgid="2533219801400609818">"เปิด \"<xliff:g id="DOMAIN">%s</xliff:g>\" และ URL ที่เกี่ยวข้อง"</string>
-    <plurals name="domain_urls_apps_summary" formatted="false" msgid="6604886186235343653">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> แอปสามารถเปิด URL โดเมนของตัวเอง</item>
-      <item quantity="one">1 แอปสามารถเปิด URL โดเมนของตัวเอง</item>
+    <string name="domain_urls_title" msgid="8762012672312435252">"ลิงก์ของแอป"</string>
+    <string name="domain_urls_summary_none" msgid="2639588015479657864">"อย่าเปิดลิงก์ที่สนับสนุน"</string>
+    <string name="domain_urls_summary_one" msgid="3704934031930978405">"เปิด <xliff:g id="DOMAIN">%s</xliff:g>"</string>
+    <string name="domain_urls_summary_some" msgid="812936714383016364">"เปิด <xliff:g id="DOMAIN">%s</xliff:g> และ URL ที่เกี่ยวข้อง"</string>
+    <plurals name="domain_urls_apps_summary" formatted="false" msgid="4322996467951692661">
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> แอปสามารถเปิดลิงก์ที่สนับสนุนของตัวเอง</item>
+      <item quantity="one">1 แอปสามารถเปิดลิงก์ที่สนับสนุนของตัวเอง</item>
     </plurals>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"ไม่รู้จัก"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"แอปเริ่มต้น"</string>
-    <!-- no translation found for default_assist_title (8851464168639315795) -->
-    <skip />
-    <!-- no translation found for default_assist_none (4719591002003824614) -->
-    <skip />
+    <string name="default_assist_title" msgid="8851464168639315795">"การสนับสนุน"</string>
+    <string name="default_assist_none" msgid="4719591002003824614">"ไม่มีการสนับสนุนเริ่มต้น"</string>
     <string name="default_browser_title" msgid="8101772675085814670">"แอปเบราว์เซอร์"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"ไม่มีเบราว์เซอร์เริ่มต้น"</string>
     <string name="default_phone_title" msgid="282005908059637350">"แอปโทรศัพท์"</string>
@@ -2748,10 +2744,7 @@
     <string name="inactive_apps_title" msgid="1317817863508274533">"แอปที่ไม่ได้ใช้งาน"</string>
     <string name="inactive_app_inactive_summary" msgid="6768756967594202411">"ไม่ได้ใช้งานอยู่ แตะเพื่อสลับ"</string>
     <string name="inactive_app_active_summary" msgid="4512911571954375968">"ใช้งานอยู่ แตะเพื่อสลับ"</string>
-    <!-- no translation found for assist_access_context_title (2047105711005856521) -->
-    <skip />
-    <!-- no translation found for assist_access_context_summary (8365837347256022203) -->
-    <skip />
-    <!-- no translation found for assist_footer (2283187001990543739) -->
-    <skip />
+    <string name="assist_access_context_title" msgid="2047105711005856521">"ใช้บริบทปัจจุบัน"</string>
+    <string name="assist_access_context_summary" msgid="8365837347256022203">"เมื่อคุณเปิดแอปการสนับสนุน ลองให้แอปดูว่าคุณทำอะไรบนหน้าจอบ้าง"</string>
+    <string name="assist_footer" msgid="2283187001990543739">"แอปการสนับสนุนช่วยให้คุณระบุและดำเนินการข้อมูลที่เป็นประโยชน์ได้โดยไม่ต้องสอบถาม แอปบางอย่างจะสนับสนุนทั้ง Laucher และบริการป้อนข้อมูลด้วยเสียงเพื่อให้ความช่วยเหลือแบบบูรณาการแก่คุณ"</string>
 </resources>
