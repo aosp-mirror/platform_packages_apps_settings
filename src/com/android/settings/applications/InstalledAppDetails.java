@@ -45,7 +45,6 @@ import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
-import android.provider.Settings;
 import android.text.format.DateUtils;
 import android.text.format.Formatter;
 import android.util.Log;
@@ -66,6 +65,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.applications.ApplicationsState.AppEntry;
+import com.android.settings.applications.PermissionsSummaryHelper.PermissionsResultCallback;
 import com.android.settings.fuelgauge.BatteryEntry;
 import com.android.settings.fuelgauge.PowerUsageDetail;
 import com.android.settings.net.ChartData;
@@ -461,7 +461,8 @@ public class InstalledAppDetails extends AppInfoBase
         // Update the preference summaries.
         Activity context = getActivity();
         mStoragePreference.setSummary(AppStorageSettings.getSummary(mAppEntry, context));
-//        mPermissionsPreference.setSummary(AppPermissionSettings.getSummary(mAppEntry, context));
+        PermissionsSummaryHelper.getPermissionCounts(getContext(), mPackageName,
+                mPermissionCallback);
         mLaunchPreference.setSummary(Utils.getLaunchByDeafaultSummary(mAppEntry, mUsbManager,
                 mPm, context));
         mNotificationPreference.setSummary(getNotificationSummary(mAppEntry, context,
@@ -830,6 +831,21 @@ public class InstalledAppDetails extends AppInfoBase
         @Override
         public void onReceive(Context context, Intent intent) {
             updateForceStopButton(getResultCode() != Activity.RESULT_CANCELED);
+        }
+    };
+
+    private final PermissionsResultCallback mPermissionCallback = new PermissionsResultCallback() {
+        @Override
+        public void onPermissionCountResult(int[] result) {
+            if (getActivity() == null) {
+                return;
+            }
+            if (result != null) {
+                mPermissionsPreference.setSummary(getResources().getQuantityString(
+                        R.plurals.runtime_permissions_summary, result[1], result[0], result[1]));
+            } else {
+                mPermissionsPreference.setSummary(null);
+            }
         }
     };
 }
