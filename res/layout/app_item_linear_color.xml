@@ -15,7 +15,7 @@
      limitations under the License.
 -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="?android:attr/listPreferredItemHeight"
@@ -34,16 +34,19 @@
         android:duplicateParentState="true" />
 
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="vertical"
+        android:id="@+id/text_area"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@android:id/icon"
+        android:orientation="horizontal"
         android:duplicateParentState="true">
 
         <TextView
             android:id="@android:id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:layout_marginTop="2dip"
             android:singleLine="true"
             android:ellipsize="marquee"
@@ -55,20 +58,22 @@
             android:id="@android:id/summary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:textAppearance="@android:style/TextAppearance.Material.Body1"
             android:textColor="?android:attr/textColorSecondary"
-            android:textAlignment="viewStart"
+            android:gravity="end|bottom"
             android:duplicateParentState="true" />
 
     </LinearLayout>
 
     <com.android.settings.applications.LinearColorBar
         android:id="@+id/linear_color_bar"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_marginTop="7dp"
         android:layout_marginBottom="5dp"
+        android:layout_toEndOf="@android:id/icon"
+        android:layout_below="@id/text_area"
         android:duplicateParentState="true" />
 
-</LinearLayout>
+</RelativeLayout>

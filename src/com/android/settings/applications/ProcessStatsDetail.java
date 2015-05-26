@@ -31,13 +31,15 @@ import android.content.pm.ServiceInfo;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Process;
+import android.preference.Preference;
 import android.preference.PreferenceCategory;
-import android.text.TextUtils;
 import android.text.format.Formatter;
 import android.util.ArrayMap;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.internal.logging.MetricsLogger;
@@ -46,6 +48,7 @@ import com.android.settings.CancellablePreference;
 import com.android.settings.CancellablePreference.OnCancelListener;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.Utils;
 import com.android.settings.applications.ProcStatsEntry.Service;
 
 import java.util.ArrayList;
@@ -54,35 +57,34 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
-public class ProcessStatsDetail extends SettingsPreferenceFragment
-        implements Button.OnClickListener {
+public class ProcessStatsDetail extends SettingsPreferenceFragment {
 
     private static final String TAG = "ProcessStatsDetail";
 
-    public static final int ACTION_FORCE_STOP = 1;
+    public static final int MENU_FORCE_STOP = 1;
 
     public static final String EXTRA_PACKAGE_ENTRY = "package_entry";
-    public static final String EXTRA_USE_USS = "use_uss";
     public static final String EXTRA_WEIGHT_TO_RAM = "weight_to_ram";
     public static final String EXTRA_TOTAL_TIME = "total_time";
     public static final String EXTRA_MAX_MEMORY_USAGE = "max_memory_usage";
     public static final String EXTRA_TOTAL_SCALE = "total_scale";
 
-    private static final String KEY_DETAILS_HEADER = "details_header";
+    private static final String KEY_DETAILS_HEADER = "status_header";
+
+    private static final String KEY_FREQUENCY = "frequency";
+    private static final String KEY_MAX_USAGE = "max_usage";
 
     private final ArrayMap<ComponentName, CancellablePreference> mServiceMap = new ArrayMap<>();
 
     private PackageManager mPm;
     private DevicePolicyManager mDpm;
 
+    private MenuItem mForceStop;
+
     private ProcStatsPackageEntry mApp;
-    private boolean mUseUss;
     private double mWeightToRam;
     private long mTotalTime;
     private long mOnePercentTime;
-
-    private Button mForceStopButton;
-    private Button mReportButton;
 
     private LinearColorBar mColorBar;
 
@@ -98,7 +100,6 @@ public class ProcessStatsDetail extends SettingsPreferenceFragment
         final Bundle args = getArguments();
         mApp = args.getParcelable(EXTRA_PACKAGE_ENTRY);
         mApp.retrieveUiData(getActivity(), mPm);
-        mUseUss = args.getBoolean(EXTRA_USE_USS);
         mWeightToRam = args.getDouble(EXTRA_WEIGHT_TO_RAM);
         mTotalTime = args.getLong(EXTRA_TOTAL_TIME);
         mMaxMemoryUsage = args.getDouble(EXTRA_MAX_MEMORY_USAGE);
@@ -107,6 +108,7 @@ public class ProcessStatsDetail extends SettingsPreferenceFragment
 
         mServiceMap.clear();
         createDetails();
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -115,7 +117,8 @@ public class ProcessStatsDetail extends SettingsPreferenceFragment
 
         AppHeader.createAppHeader(this,
                 mApp.mUiTargetApp != null ? mApp.mUiTargetApp.loadIcon(mPm) : new ColorDrawable(0),
-                mApp.mUiLabel, AppInfoWithHeader.getInfoIntent(this, mApp.mPackage));
+                mApp.mUiLabel, mApp.mPackage.equals(Utils.OS_PKG) ? null
+                        : AppInfoWithHeader.getInfoIntent(this, mApp.mPackage));
     }
 
     @Override
@@ -126,8 +129,8 @@ public class ProcessStatsDetail extends SettingsPreferenceFragment
     @Override
     public void onResume() {
         super.onResume();
-        checkForceStop();
 
+        checkForceStop();
         updateRunningServices();
     }
 
@@ -173,55 +176,42 @@ public class ProcessStatsDetail extends SettingsPreferenceFragment
 
         LayoutPreference headerLayout = (LayoutPreference) findPreference(KEY_DETAILS_HEADER);
 
-        TextView avgUsed = (TextView) headerLayout.findViewById(R.id.memory_avg);
-        TextView maxUsed = (TextView) headerLayout.findViewById(R.id.memory_max);
-        avgUsed.setText(getString(R.string.memory_avg_desc,
-                Formatter.formatShortFileSize(getActivity(),
-                        (long) (Math.max(mApp.mBgWeight, mApp.mRunWeight) * mWeightToRam))));
-        maxUsed.setText(getString(R.string.memory_max_desc,
-                Formatter.formatShortFileSize(getActivity(),
-                        (long) (Math.max(mApp.mMaxBgMem, mApp.mMaxRunMem) * 1024 * mTotalScale))));
-
-        mForceStopButton = (Button) headerLayout.findViewById(R.id.right_button);
-        mReportButton = (Button) headerLayout.findViewById(R.id.left_button);
-
-        if (mApp.mEntries.get(0).mUid >= android.os.Process.FIRST_APPLICATION_UID) {
-            mForceStopButton.setEnabled(false);
-            mReportButton.setVisibility(View.INVISIBLE);
-
-            mForceStopButton.setText(R.string.force_stop);
-            mForceStopButton.setTag(ACTION_FORCE_STOP);
-            mForceStopButton.setOnClickListener(this);
-        } else {
-            mReportButton.setVisibility(View.GONE);
-            mForceStopButton.setVisibility(View.GONE);
-        }
-
         // TODO: Find way to share this code with ProcessStatsPreference.
         boolean statsForeground = mApp.mRunWeight > mApp.mBgWeight;
-        float avgRatio = (float) ((statsForeground ? mApp.mRunWeight : mApp.mBgWeight)
-                * mWeightToRam / mMaxMemoryUsage);
-        float maxRatio = (float) ((statsForeground ? mApp.mMaxRunMem : mApp.mMaxBgMem)
-                * mTotalScale * 1024 / mMaxMemoryUsage - avgRatio);
-        float remainingRatio = 1 - avgRatio - maxRatio;
+        double avgRam = (statsForeground ? mApp.mRunWeight : mApp.mBgWeight) * mWeightToRam;
+        float avgRatio = (float) (avgRam / mMaxMemoryUsage);
+        float remainingRatio = 1 - avgRatio;
         mColorBar = (LinearColorBar) headerLayout.findViewById(R.id.color_bar);
         Context context = getActivity();
-        mColorBar.setColors(context.getColor(R.color.memory_avg_use),
-                context.getColor(R.color.memory_max_use),
+        mColorBar.setColors( context.getColor(R.color.memory_max_use), 0,
                 context.getColor(R.color.memory_remaining));
-        mColorBar.setRatios(avgRatio, maxRatio, remainingRatio);
+        mColorBar.setRatios(avgRatio, 0, remainingRatio);
+        ((TextView) headerLayout.findViewById(R.id.memory_state)).setText(
+                Formatter.formatShortFileSize(getContext(), (long) avgRam));
+
+        long duration = Math.max(mApp.mRunDuration, mApp.mBgDuration);
+        CharSequence frequency = ProcStatsPackageEntry.getFrequency(duration
+                / (float) mTotalTime, getActivity());
+        findPreference(KEY_FREQUENCY).setSummary(frequency);
+        double max = Math.max(mApp.mMaxBgMem, mApp.mMaxRunMem) * mTotalScale * 1024;
+        findPreference(KEY_MAX_USAGE).setSummary(
+                Formatter.formatShortFileSize(getContext(), (long) max));
     }
 
-    public void onClick(View v) {
-        doAction((Integer) v.getTag());
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        mForceStop = menu.add(0, MENU_FORCE_STOP, 0, R.string.force_stop);
+        checkForceStop();
     }
 
-    private void doAction(int action) {
-        switch (action) {
-            case ACTION_FORCE_STOP:
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case MENU_FORCE_STOP:
                 killProcesses();
-                break;
+                return true;
         }
+        return false;
     }
 
     final static Comparator<ProcStatsEntry> sEntryCompare = new Comparator<ProcStatsEntry>() {
@@ -250,8 +240,7 @@ public class ProcessStatsDetail extends SettingsPreferenceFragment
         Collections.sort(entries, sEntryCompare);
         for (int ie = 0; ie < entries.size(); ie++) {
             ProcStatsEntry entry = entries.get(ie);
-            PreferenceCategory processPref = new PreferenceCategory(getActivity());
-            processPref.setLayoutResource(R.layout.process_preference_category);
+            Preference processPref = new Preference(getActivity());
             processPref.setTitle(entry.mLabel);
 
             long duration = Math.max(entry.mRunDuration, entry.mBgDuration);
@@ -259,11 +248,10 @@ public class ProcessStatsDetail extends SettingsPreferenceFragment
                     (long) (entry.mBgWeight * mWeightToRam));
             String memoryString = Formatter.formatShortFileSize(getActivity(), memoryUse);
             CharSequence frequency = ProcStatsPackageEntry.getFrequency(duration
-                    / (float)mTotalTime, getActivity());
+                    / (float) mTotalTime, getActivity());
             processPref.setSummary(
                     getString(R.string.memory_use_running_format, memoryString, frequency));
             getPreferenceScreen().addPreference(processPref);
-            fillServicesSection(entry, processPref);
         }
     }
 
@@ -423,12 +411,14 @@ public class ProcessStatsDetail extends SettingsPreferenceFragment
                 am.forceStopPackage(ent.mPackages.get(j));
             }
         }
-        checkForceStop();
     }
 
     private void checkForceStop() {
+        if (mForceStop == null) {
+            return;
+        }
         if (mApp.mEntries.get(0).mUid < Process.FIRST_APPLICATION_UID) {
-            mForceStopButton.setEnabled(false);
+            mForceStop.setVisible(false);
             return;
         }
         boolean isStarted = false;
@@ -437,7 +427,7 @@ public class ProcessStatsDetail extends SettingsPreferenceFragment
             for (int j=0; j<ent.mPackages.size(); j++) {
                 String pkg = ent.mPackages.get(j);
                 if (mDpm.packageHasActiveAdmins(pkg)) {
-                    mForceStopButton.setEnabled(false);
+                    mForceStop.setEnabled(false);
                     return;
                 }
                 try {
@@ -450,7 +440,7 @@ public class ProcessStatsDetail extends SettingsPreferenceFragment
             }
         }
         if (isStarted) {
-            mForceStopButton.setEnabled(true);
+            mForceStop.setVisible(true);
         }
     }
 }

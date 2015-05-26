@@ -147,6 +147,8 @@ public final class Utils {
     private static final int SECONDS_PER_HOUR = 60 * 60;
     private static final int SECONDS_PER_DAY = 24 * 60 * 60;
 
+    public static final String OS_PKG = "os";
+
     private static SparseArray<Bitmap> sDarkDefaultUserBitmapCache = new SparseArray<Bitmap>();
 
     /**

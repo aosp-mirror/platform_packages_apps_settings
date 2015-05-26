@@ -35,6 +35,7 @@ import com.android.internal.app.ProcessStats.ProcessDataCollection;
 import com.android.internal.app.ProcessStats.TotalMemoryUseCollection;
 import com.android.internal.util.MemInfoReader;
 import com.android.settings.R;
+import com.android.settings.Utils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -56,8 +57,6 @@ public class ProcStatsData {
 
     private IProcessStats mProcessStats;
     private ProcessStats mStats;
-
-    private int mMemState;
 
     private boolean mUseUss;
     private long mDuration;
@@ -187,28 +186,28 @@ public class ProcStatsData {
         ProcStatsPackageEntry osPkg = new ProcStatsPackageEntry("os", memTotalTime);
         ProcStatsEntry osEntry;
         if (totalMem.sysMemNativeWeight > 0) {
-            osEntry = new ProcStatsEntry("os", 0,
+            osEntry = new ProcStatsEntry(Utils.OS_PKG, 0,
                     mContext.getString(R.string.process_stats_os_native), memTotalTime,
                     (long) (totalMem.sysMemNativeWeight / memTotalTime));
             osEntry.evaluateTargetPackage(mPm, mStats, bgTotals, runTotals, sEntryCompare, mUseUss);
             osPkg.addEntry(osEntry);
         }
         if (totalMem.sysMemKernelWeight > 0) {
-            osEntry = new ProcStatsEntry("os", 0,
+            osEntry = new ProcStatsEntry(Utils.OS_PKG, 0,
                     mContext.getString(R.string.process_stats_os_kernel), memTotalTime,
                     (long) (totalMem.sysMemKernelWeight / memTotalTime));
             osEntry.evaluateTargetPackage(mPm, mStats, bgTotals, runTotals, sEntryCompare, mUseUss);
             osPkg.addEntry(osEntry);
         }
         if (totalMem.sysMemZRamWeight > 0) {
-            osEntry = new ProcStatsEntry("os", 0,
+            osEntry = new ProcStatsEntry(Utils.OS_PKG, 0,
                     mContext.getString(R.string.process_stats_os_zram), memTotalTime,
                     (long) (totalMem.sysMemZRamWeight / memTotalTime));
             osEntry.evaluateTargetPackage(mPm, mStats, bgTotals, runTotals, sEntryCompare, mUseUss);
             osPkg.addEntry(osEntry);
         }
         if (baseCacheRam > 0) {
-            osEntry = new ProcStatsEntry("os", 0,
+            osEntry = new ProcStatsEntry(Utils.OS_PKG, 0,
                     mContext.getString(R.string.process_stats_os_cache), memTotalTime,
                     baseCacheRam / 1024);
             osEntry.evaluateTargetPackage(mPm, mStats, bgTotals, runTotals, sEntryCompare, mUseUss);
@@ -296,7 +295,6 @@ public class ProcStatsData {
 
     private void load() {
         try {
-            mMemState = mProcessStats.getCurrentMemoryState();
             ParcelFileDescriptor pfd = mProcessStats.getStatsOverTime(mDuration);
             mStats = new ProcessStats(false);
             InputStream is = new ParcelFileDescriptor.AutoCloseInputStream(pfd);

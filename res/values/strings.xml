@@ -6556,13 +6556,13 @@
     <string name="memory_details_title">Memory details</string>
 
     <!-- Description of app always running [CHAR LIMIT=45] -->
-    <string name="always_running">Always running</string>
+    <string name="always_running">Always running (<xliff:g id="percentage" example="5%">%s</xliff:g>)</string>
 
     <!-- Description of app sometimes running [CHAR LIMIT=45] -->
-    <string name="sometimes_running">Sometimes running</string>
+    <string name="sometimes_running">Sometimes running (<xliff:g id="percentage" example="5%">%s</xliff:g>)</string>
 
     <!-- Description of app rarely running [CHAR LIMIT=45] -->
-    <string name="rarely_running">Rarely running</string>
+    <string name="rarely_running">Rarely running (<xliff:g id="percentage" example="5%">%s</xliff:g>)</string>
 
     <!-- Maximum memory usage key [CHAR LIMIT=25] -->
     <string name="memory_max_use">Maximum</string>
@@ -6657,4 +6657,43 @@
 
     <!-- Footer text in the manage assist screen. [CHAR LIMIT=NONE] -->
     <string name="assist_footer">Assist apps help you identify and act on useful information without having to ask. Some apps support both launcher and voice input services to give you integrated assistance.</string>
+
+    <!-- Label for average memory use section [CHAR LIMIT=30] -->
+    <string name="average_memory_use">Average memory use</string>
+
+    <!-- Label for maximum memory use section [CHAR LIMIT=30] -->
+    <string name="maximum_memory_use">Maximum memory use</string>
+
+    <!-- Menu item for Sorting list by average memory use [CHAR LIMIT=NONE]-->
+    <string name="sort_avg_use">Sort by avg use</string>
+
+    <!-- Menu item for Sorting list by maximum memory use [CHAR LIMIT=NONE] -->
+    <string name="sort_max_use">Sort by max use</string>
+
+    <!-- Label for the current performance of the device [CHAR LIMIT=25] -->
+    <string name="memory_performance">Performance</string>
+
+    <!-- Label for total memory of device [CHAR LIMIT=25] -->
+    <string name="total_memory">Total memory</string>
+
+    <!-- Label for average memory usage of device [CHAR LIMIT=25] -->
+    <string name="average_used">Average used (&#x0025;)</string>
+
+    <!-- Label for free memory of device [CHAR LIMIT=25] -->
+    <string name="free_memory">Free</string>
+
+    <!-- Label for button that leads to list of apps and their memory usage [CHAR LIMIT=40]-->
+    <string name="memory_usage_apps">Memory used by apps</string>
+
+    <!-- Description of number of apps using memory [CHAR LIMIT=NONE] -->
+    <plurals name="memory_usage_apps_summary">
+        <item quantity="one">1 app used memory in the last <xliff:g id="duration" example="3 hours">%2$s</xliff:g></item>
+        <item quantity="other"><xliff:g id="count" example="10">%1$d</xliff:g> apps used memory in the last <xliff:g id="duration" example="3 hours">%2$s</xliff:g></item>
+    </plurals>
+
+    <!-- Label for frequency that the app is runnig (e.g. always, sometimes, etc.) [CHAR LIMIT=25] -->
+    <string name="running_frequency">Frequency</string>
+
+    <!-- Label for maximum amount of memory app has used [CHAR LIMIT=25] -->
+    <string name="memory_maximum_usage">Maximum usage</string>
 </resources>
