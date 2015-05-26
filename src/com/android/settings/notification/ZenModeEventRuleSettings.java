@@ -16,8 +16,13 @@
 
 package com.android.settings.notification;
 
+import static android.service.notification.ZenModeConfig.EventInfo.ANY_CALENDAR;
+
 import android.content.Context;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.database.Cursor;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.preference.PreferenceScreen;
 import android.provider.CalendarContract.Calendars;
 import android.provider.Settings;
@@ -29,6 +34,11 @@ import com.android.internal.logging.MetricsLogger;
 import com.android.settings.DropDownPreference;
 import com.android.settings.R;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
     private static final String KEY_CALENDAR = "calendar";
     private static final String KEY_REPLY = "reply";
@@ -39,7 +49,8 @@ public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
     private DropDownPreference mReply;
 
     private EventInfo mEvent;
-    private CalendarInfo[] mCalendars;
+    private List<CalendarInfo> mCalendars;
+    private boolean mCreate;
 
     @Override
     protected boolean setRule(ZenRule rule) {
@@ -61,20 +72,24 @@ public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
     @Override
     public void onResume() {
         super.onResume();
-        reloadCalendar();
+        if (!mCreate) {
+            reloadCalendar();
+        }
+        mCreate = false;
     }
 
     private void reloadCalendar() {
         mCalendars = getCalendars(mContext);
         mCalendar.clearItems();
-        mCalendar.addItem(R.string.zen_mode_event_rule_calendar_any, 0L);
-        for (int i = 0; i < mCalendars.length; i++) {
-            mCalendar.addItem(mCalendars[i].name, mCalendars[i].id);
+        mCalendar.addItem(R.string.zen_mode_event_rule_calendar_any, key(0, ANY_CALENDAR));
+        for (CalendarInfo calendar : mCalendars) {
+            mCalendar.addItem(calendar.name, key(calendar));
         }
     }
 
     @Override
     protected void onCreateInternal() {
+        mCreate = true;
         addPreferencesFromResource(R.xml.zen_mode_event_rule_settings);
         final PreferenceScreen root = getPreferenceScreen();
 
@@ -82,9 +97,11 @@ public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
         mCalendar.setCallback(new DropDownPreference.Callback() {
             @Override
             public boolean onItemSelected(int pos, Object value) {
-                final long calendar = (Long) value;
-                if (calendar == mEvent.calendar) return true;
-                mEvent.calendar = calendar;
+                final String calendarKey = (String) value;
+                if (calendarKey.equals(key(mEvent))) return true;
+                final int i = calendarKey.indexOf(':');
+                mEvent.userId = Integer.parseInt(calendarKey.substring(0, i));
+                mEvent.calendar = Long.parseLong(calendarKey.substring(i + 1));
                 updateRule(ZenModeConfig.toEventConditionId(mEvent));
                 return true;
             }
@@ -114,7 +131,7 @@ public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
 
     @Override
     protected void updateControlsInternal() {
-        mCalendar.setSelectedValue(mEvent.calendar);
+        mCalendar.setSelectedValue(key(mEvent));
         mReply.setSelectedValue(mEvent.reply);
     }
 
@@ -123,7 +140,38 @@ public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
         return MetricsLogger.NOTIFICATION_ZEN_MODE_EVENT_RULE;
     }
 
-    public static CalendarInfo[] getCalendars(Context context) {
+    public static CalendarInfo findCalendar(Context context, EventInfo event) {
+        if (context == null || event == null) return null;
+        final String eventKey = key(event);
+        for (CalendarInfo calendar : getCalendars(context)) {
+            if (eventKey.equals(key(calendar))) {
+                return calendar;
+            }
+        }
+        return null;
+    }
+
+    private static List<CalendarInfo> getCalendars(Context context) {
+        final List<CalendarInfo> calendars = new ArrayList<>();
+        for (UserHandle user : UserManager.get(context).getUserProfiles()) {
+            final Context userContext = getContextForUser(context, user);
+            if (userContext != null) {
+                addCalendars(userContext, calendars);
+            }
+        }
+        Collections.sort(calendars, CALENDAR_NAME);
+        return calendars;
+    }
+
+    private static Context getContextForUser(Context context, UserHandle user) {
+        try {
+            return context.createPackageContextAsUser(context.getPackageName(), 0, user);
+        } catch (NameNotFoundException e) {
+            return null;
+        }
+    }
+
+    public static void addCalendars(Context context, List<CalendarInfo> outCalendars) {
         final String primary = "\"primary\"";
         final String[] projection = { Calendars._ID, Calendars.CALENDAR_DISPLAY_NAME,
                 "(" + Calendars.ACCOUNT_NAME + "=" + Calendars.OWNER_ACCOUNT + ") AS " + primary };
@@ -133,17 +181,15 @@ public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
             cursor = context.getContentResolver().query(Calendars.CONTENT_URI, projection,
                     selection, null, null);
             if (cursor == null) {
-                return new CalendarInfo[0];
+                return;
             }
-            final CalendarInfo[] rt = new CalendarInfo[cursor.getCount()];
-            int i = 0;
             while (cursor.moveToNext()) {
                 final CalendarInfo ci = new CalendarInfo();
                 ci.id = cursor.getLong(0);
                 ci.name = cursor.getString(1);
-                rt[i++] = ci;
+                ci.userId = context.getUserId();
+                outCalendars.add(ci);
             }
-            return rt;
         } finally {
             if (cursor != null) {
                 cursor.close();
@@ -151,9 +197,29 @@ public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
         }
     }
 
+    private static String key(CalendarInfo calendar) {
+        return key(calendar.userId, calendar.id);
+    }
+
+    private static String key(EventInfo event) {
+        return key(event.userId, event.calendar);
+    }
+
+    private static String key(int userId, long calendarId) {
+        return EventInfo.resolveUserId(userId) + ":" + calendarId;
+    }
+
+    private static final Comparator<CalendarInfo> CALENDAR_NAME = new Comparator<CalendarInfo>() {
+        @Override
+        public int compare(CalendarInfo lhs, CalendarInfo rhs) {
+            return lhs.name.compareTo(rhs.name);
+        }
+    };
+
     public static class CalendarInfo {
         public long id;
         public String name;
+        public int userId;
     }
 
 }
