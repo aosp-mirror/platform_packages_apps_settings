@@ -179,6 +179,11 @@ public class WpsDialog extends AlertDialog {
         mWifiManager = (WifiManager) mContext.getSystemService(Context.WIFI_SERVICE);
 
         setView(mView);
+        if (savedInstanceState == null) {
+            WpsInfo wpsConfig = new WpsInfo();
+            wpsConfig.setup = mWpsSetup;
+            mWifiManager.startWps(wpsConfig, mWpsListener);
+        }
         super.onCreate(savedInstanceState);
     }
 
@@ -203,9 +208,6 @@ public class WpsDialog extends AlertDialog {
 
         mContext.registerReceiver(mReceiver, mFilter);
 
-        WpsInfo wpsConfig = new WpsInfo();
-        wpsConfig.setup = mWpsSetup;
-        mWifiManager.startWps(wpsConfig, mWpsListener);
     }
 
     @Override
