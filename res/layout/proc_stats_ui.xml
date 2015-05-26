@@ -28,28 +28,18 @@
         android:id="@+id/memory_state"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="10dp"
-        android:textAppearance="@android:style/TextAppearance.Material.Subhead"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:textColor="?android:attr/colorAccent"
+        android:textAppearance="@android:style/TextAppearance.Material.Display1"
         />
 
     <com.android.settings.applications.LinearColorBar
         android:id="@+id/color_bar"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="28dp"
+        android:layout_marginBottom="15dp"
         />
-
-    <TextView
-        android:id="@+id/memory_used"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="10dp"
-        android:textAppearance="@android:style/TextAppearance.Material.Small"
-        android:textColor="?android:attr/textColorSecondary"
-        />
-
-    <include layout="@layout/memory_key" />
 
 </LinearLayout>
 

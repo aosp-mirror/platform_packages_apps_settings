@@ -33,6 +33,7 @@ public class LayoutPreference extends Preference {
 
     public LayoutPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
+        setSelectable(false);
         final TypedArray a = context.obtainStyledAttributes(
                 attrs, com.android.internal.R.styleable.Preference, 0, 0);
         int layoutResource = a.getResourceId(com.android.internal.R.styleable.Preference_layout,
