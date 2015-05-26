@@ -63,9 +63,13 @@
             android:layout="@layout/single_button_panel" />
     </PreferenceCategory>
 
+    <com.android.settings.applications.SpacePreference
+        android:layout_height="8dp" />
+
     <Preference
         android:key="cache_size"
         android:title="@string/cache_size_label"
+        android:selectable="false"
         android:layout="@layout/horizontal_preference" />
 
     <com.android.settings.applications.LayoutPreference

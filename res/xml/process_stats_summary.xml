@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2013 The Android Open Source Project
+<!-- Copyright (C) 2015 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -18,7 +18,43 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/app_memory_use"
     android:key="app_list">
+    <PreferenceCategory
+        android:title="@string/average_memory_use" />
+
     <com.android.settings.applications.LayoutPreference
         android:key="status_header"
+        android:selectable="false"
         android:layout="@layout/proc_stats_ui" />
+
+    <Preference
+        android:key="performance"
+        android:selectable="false"
+        android:layout="@layout/horizontal_preference"
+        android:title="@string/memory_performance" />
+
+    <Preference
+        android:key="total_memory"
+        android:selectable="false"
+        android:layout="@layout/horizontal_preference"
+        android:title="@string/total_memory" />
+
+    <Preference
+        android:key="average_used"
+        android:selectable="false"
+        android:layout="@layout/horizontal_preference"
+        android:title="@string/average_used" />
+
+    <Preference
+        android:key="free"
+        android:selectable="false"
+        android:layout="@layout/horizontal_preference"
+        android:title="@string/free_memory" />
+
+    <com.android.settings.applications.SpacePreference
+        android:layout_height="15dp" />
+
+    <Preference
+        android:key="apps_list"
+        android:title="@string/memory_usage_apps" />
+
 </PreferenceScreen>
