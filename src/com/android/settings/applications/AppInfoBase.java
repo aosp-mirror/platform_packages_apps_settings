@@ -54,7 +54,6 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
     protected boolean mAppControlRestricted = false;
 
     protected ApplicationsState mState;
-    private ApplicationsState.Session mSession;
     protected ApplicationsState.AppEntry mAppEntry;
     protected PackageInfo mPackageInfo;
     protected int mUserId;
@@ -76,16 +75,12 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
         mFinishing = false;
 
         mState = ApplicationsState.getInstance(getActivity().getApplication());
-        mSession = mState.newSession(this);
         Context context = getActivity();
         mDpm = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mPm = context.getPackageManager();
         IBinder b = ServiceManager.getService(Context.USB_SERVICE);
         mUsbManager = IUsbManager.Stub.asInterface(b);
-
-        // Need to make sure we have loaded applications at this point.
-        mSession.resume();
 
         retrieveAppEntry();
     }
@@ -94,23 +89,10 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
     public void onResume() {
         super.onResume();
         mAppControlRestricted = mUserManager.hasUserRestriction(UserManager.DISALLOW_APPS_CONTROL);
-        mSession.resume();
 
         if (!refreshUi()) {
             setIntentAndFinish(true, true);
         }
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mSession.pause();
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        mSession.release();
     }
 
     protected String retrieveAppEntry() {

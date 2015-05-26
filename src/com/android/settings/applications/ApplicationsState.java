@@ -878,18 +878,31 @@ public class ApplicationsState {
         synchronized (mEntriesMap) {
             AppEntry entry = mEntriesMap.get(userId).get(packageName);
             if (entry == null) {
-                for (int i=0; i<mApplications.size(); i++) {
-                    ApplicationInfo info = mApplications.get(i);
-                    if (packageName.equals(info.packageName)
-                            && userId == UserHandle.getUserId(info.uid)) {
-                        entry = getEntryLocked(info);
-                        break;
+                ApplicationInfo info = getAppInfoLocked(packageName, userId);
+                if (info == null) {
+                    try {
+                        info = mIpm.getApplicationInfo(packageName, 0, userId);
+                    } catch (RemoteException e) {
+                        Log.w(TAG, "getEntry couldn't reach PackageManager", e);
+                        return null;
                     }
                 }
+                entry = getEntryLocked(info);
             }
             if (DEBUG_LOCKING) Log.v(TAG, "...getEntry releasing lock");
             return entry;
         }
+    }
+
+    private ApplicationInfo getAppInfoLocked(String pkg, int userId) {
+        for (int i = 0; i < mApplications.size(); i++) {
+            ApplicationInfo info = mApplications.get(i);
+            if (pkg.equals(info.packageName)
+                    && userId == UserHandle.getUserId(info.uid)) {
+                return info;
+            }
+        }
+        return null;
     }
 
     void ensureIcon(AppEntry entry) {
@@ -1153,8 +1166,8 @@ public class ApplicationsState {
                             mMainHandler.sendMessage(msg);
                         }
                     }
-                    if (mCurComputingSizePkg == null
-                            || (mCurComputingSizePkg.equals(stats.packageName)
+                    if (mCurComputingSizePkg != null
+                            && (mCurComputingSizePkg.equals(stats.packageName)
                                     && mCurComputingSizeUserId == stats.userHandle)) {
                         mCurComputingSizePkg = null;
                         sendEmptyMessage(MSG_LOAD_SIZES);
