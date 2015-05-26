@@ -88,6 +88,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
         private CountDownTimer mCountdownTimer;
         private boolean mIsAlpha;
         private InputMethodManager mImm;
+        private boolean mUsingFingerprint = false;
 
         // required constructor for fragments
         public ConfirmLockPasswordFragment() {
@@ -203,10 +204,21 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             getActivity().finish();
         }
 
+        @Override
+        public void onFingerprintIconVisibilityChanged(boolean visible) {
+            mUsingFingerprint = visible;
+        }
+
         private void resetState() {
             mPasswordEntry.setEnabled(true);
             mPasswordEntryInputDisabler.setInputEnabled(true);
-            mImm.showSoftInput(mPasswordEntry, InputMethodManager.SHOW_IMPLICIT);
+            if (shouldAutoShowSoftKeyboard()) {
+                mImm.showSoftInput(mPasswordEntry, InputMethodManager.SHOW_IMPLICIT);
+            }
+        }
+
+        private boolean shouldAutoShowSoftKeyboard() {
+            return mPasswordEntry.isEnabled() && !mUsingFingerprint;
         }
 
         public void onWindowFocusChanged(boolean hasFocus) {
@@ -217,7 +229,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             mPasswordEntry.post(new Runnable() {
                 @Override
                 public void run() {
-                    if (mPasswordEntry.isEnabled()) {
+                    if (shouldAutoShowSoftKeyboard()) {
                         resetState();
                         return;
                     }
