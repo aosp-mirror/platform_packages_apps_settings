@@ -35,7 +35,6 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
 
-import com.android.settings.InstrumentedPreferenceFragment;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
@@ -154,7 +153,7 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
     }
 
     protected void showDialogInner(int id, int moveErrorCode) {
-        DialogFragment newFragment = new MyAlertDialogFragment(id, moveErrorCode);
+        DialogFragment newFragment = MyAlertDialogFragment.newInstance(id, moveErrorCode);
         newFragment.setTargetFragment(this, 0);
         newFragment.show(getFragmentManager(), "dialog " + id);
     }
@@ -214,23 +213,26 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
                 new UserHandle(UserHandle.getUserId(uid)));
     }
 
-    public class MyAlertDialogFragment extends DialogFragment {
-        public MyAlertDialogFragment(int id, int errorCode) {
-            Bundle args = new Bundle();
-            args.putInt("id", id);
-            args.putInt("moveError", errorCode);
-            setArguments(args);
-        }
+    public static class MyAlertDialogFragment extends DialogFragment {
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             int id = getArguments().getInt("id");
             int errorCode = getArguments().getInt("moveError");
-            Dialog dialog = createDialog(id, errorCode);
+            Dialog dialog = ((AppInfoBase) getTargetFragment()).createDialog(id, errorCode);
             if (dialog == null) {
                 throw new IllegalArgumentException("unknown id " + id);
             }
             return dialog;
+        }
+
+        public static MyAlertDialogFragment newInstance(int id, int errorCode) {
+            MyAlertDialogFragment dialogFragment = new MyAlertDialogFragment();
+            Bundle args = new Bundle();
+            args.putInt("id", id);
+            args.putInt("moveError", errorCode);
+            dialogFragment.setArguments(args);
+            return dialogFragment;
         }
     }
 }
