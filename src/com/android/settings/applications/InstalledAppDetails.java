@@ -251,6 +251,7 @@ public class InstalledAppDetails extends AppInfoBase
         if (mFinishing) {
             return;
         }
+        mState.requestSize(mPackageName, mUserId);
         AppItem app = new AppItem(mAppEntry.info.uid);
         app.addUid(mAppEntry.info.uid);
         if (mStatsSession != null) {
