@@ -25,6 +25,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.ApplicationsState.AppEntry;
 import com.android.settings.applications.ApplicationsState.Session;
+import com.android.settings.applications.PermissionsSummaryHelper.PermissionsResultCallback;
 import com.android.settings.fuelgauge.PowerWhitelistBackend;
 
 import java.util.ArrayList;
@@ -39,6 +40,7 @@ public class AdvancedAppSettings extends SettingsPreferenceFragment implements
     private static final String KEY_HIGH_POWER_APPS = "high_power_apps";
 
     private Session mSession;
+    private Preference mAppPermsPreference;
     private Preference mAppDomainURLsPreference;
     private Preference mHighPowerPreference;
 
@@ -54,6 +56,7 @@ public class AdvancedAppSettings extends SettingsPreferenceFragment implements
                 getActivity().getApplication());
         mSession = applicationsState.newSession(this);
 
+        mAppPermsPreference = findPreference(KEY_APP_PERM);
         mAppDomainURLsPreference = findPreference(KEY_APP_DOMAIN_URLS);
         mHighPowerPreference = findPreference(KEY_HIGH_POWER_APPS);
         updateUI();
@@ -75,6 +78,7 @@ public class AdvancedAppSettings extends SettingsPreferenceFragment implements
         int highPowerCount = PowerWhitelistBackend.getInstance().getWhitelistSize();
         mHighPowerPreference.setSummary(getResources().getQuantityString(R.plurals.high_power_count,
                 highPowerCount, highPowerCount));
+        PermissionsSummaryHelper.getAppWithPermissionsCounts(getContext(), mPermissionCallback);
     }
 
     @Override
@@ -121,4 +125,19 @@ public class AdvancedAppSettings extends SettingsPreferenceFragment implements
     public void onLoadEntriesCompleted() {
         // No-op.
     }
+
+    private final PermissionsResultCallback mPermissionCallback = new PermissionsResultCallback() {
+        @Override
+        public void onPermissionCountResult(int[] result) {
+            if (getActivity() == null) {
+                return;
+            }
+            if (result != null) {
+                mAppPermsPreference.setSummary(getContext().getString(
+                        R.string.app_permissions_summary, result[0], result[1]));
+            } else {
+                mAppPermsPreference.setSummary(null);
+            }
+        }
+    };
 }
