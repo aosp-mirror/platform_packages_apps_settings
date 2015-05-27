@@ -34,6 +34,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,6 +64,8 @@ public class ChooseLockPattern extends SettingsActivity {
      * result.
      */
     static final int RESULT_FINISHED = RESULT_FIRST_USER;
+
+    private static final String TAG = "ChooseLockPattern";
 
     @Override
     public Intent getIntent() {
@@ -663,7 +666,11 @@ public class ChooseLockPattern extends SettingsActivity {
                     UserHandle.myUserId(),
                     new LockPatternChecker.OnVerifyCallback() {
                         @Override
-                        public void onVerified(byte[] token) {
+                        public void onVerified(byte[] token, int timeoutMs) {
+                            if (token == null) {
+                                Log.e(TAG, "critical: no token returned for known good pattern");
+                            }
+
                             mLockPatternView.enableInput();
                             mPendingLockCheck = null;
 
