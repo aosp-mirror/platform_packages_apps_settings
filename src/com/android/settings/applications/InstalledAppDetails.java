@@ -115,6 +115,7 @@ public class InstalledAppDetails extends AppInfoBase
     private static final String KEY_DATA = "data_settings";
     private static final String KEY_LAUNCH = "preferred_settings";
     private static final String KEY_BATTERY = "battery";
+    private static final String KEY_MEMORY = "memory";
 
     private final HashSet<String> mHomePackages = new HashSet<String>();
 
@@ -130,6 +131,7 @@ public class InstalledAppDetails extends AppInfoBase
     private Preference mPermissionsPreference;
     private Preference mLaunchPreference;
     private Preference mDataPreference;
+    private Preference mMemoryPreference;
 
     private boolean mDisableAfterUninstall;
     // Used for updating notification preference.
@@ -142,6 +144,9 @@ public class InstalledAppDetails extends AppInfoBase
 
     private BatteryStatsHelper mBatteryHelper;
     private BatterySipper mSipper;
+
+    protected ProcStatsData mStatsManager;
+    protected ProcStatsPackageEntry mStats;
 
     private boolean handleDisableable(Button button) {
         boolean disableable = false;
@@ -260,6 +265,7 @@ public class InstalledAppDetails extends AppInfoBase
                     mDataCallbacks);
         }
         new BatteryUpdater().execute();
+        new MemoryUpdater().execute();
     }
 
     @Override
@@ -295,6 +301,8 @@ public class InstalledAppDetails extends AppInfoBase
         mBatteryPreference = findPreference(KEY_BATTERY);
         mBatteryPreference.setEnabled(false);
         mBatteryPreference.setOnPreferenceClickListener(this);
+        mMemoryPreference = findPreference(KEY_MEMORY);
+        mMemoryPreference.setOnPreferenceClickListener(this);
 
         mLaunchPreference = findPreference(KEY_LAUNCH);
         if (mAppEntry.info != null) {
@@ -701,6 +709,9 @@ public class InstalledAppDetails extends AppInfoBase
             startManagePermissionsActivity();
         } else if (preference == mLaunchPreference) {
             startAppInfoFragment(AppLaunchSettings.class, mLaunchPreference.getTitle());
+        } else if (preference == mMemoryPreference) {
+            ProcessStatsBase.launchMemoryDetail((SettingsActivity) getActivity(),
+                    mStatsManager.getMemInfo(), mStats);
         } else if (preference == mDataPreference) {
             Bundle args = new Bundle();
             args.putString(DataUsageSummary.EXTRA_SHOW_APP_IMMEDIATE_PKG,
@@ -767,6 +778,49 @@ public class InstalledAppDetails extends AppInfoBase
         }
     }
 
+    private class MemoryUpdater extends AsyncTask<Void, Void, ProcStatsPackageEntry> {
+
+        @Override
+        protected ProcStatsPackageEntry doInBackground(Void... params) {
+            if (mPackageInfo == null) {
+                return null;
+            }
+            if (mStatsManager == null) {
+                mStatsManager = new ProcStatsData(getActivity(), false);
+                mStatsManager.setDuration(ProcessStatsBase.sDurations[0]);
+            }
+            mStatsManager.refreshStats(true);
+            for (ProcStatsPackageEntry pkgEntry : mStatsManager.getEntries()) {
+                for (ProcStatsEntry entry : pkgEntry.mEntries) {
+                    if (entry.mUid == mPackageInfo.applicationInfo.uid) {
+                        pkgEntry.updateMetrics();
+                        return pkgEntry;
+                    }
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(ProcStatsPackageEntry entry) {
+            if (getActivity() == null) {
+                return;
+            }
+            if (entry != null) {
+                mStats = entry;
+                mMemoryPreference.setEnabled(true);
+                double amount = Math.max(entry.mRunWeight, entry.mBgWeight)
+                        * mStatsManager.getMemInfo().weightToRam;
+                mMemoryPreference.setSummary(getString(R.string.memory_use_summary,
+                        Formatter.formatShortFileSize(getContext(), (long) amount)));
+            } else {
+                mMemoryPreference.setEnabled(false);
+                mMemoryPreference.setSummary(getString(R.string.no_memory_use_summary));
+            }
+        }
+
+    }
+
     private class BatteryUpdater extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... params) {
@@ -787,6 +841,9 @@ public class InstalledAppDetails extends AppInfoBase
 
         @Override
         protected void onPostExecute(Void result) {
+            if (getActivity() == null) {
+                return;
+            }
             refreshUi();
         }
     }
