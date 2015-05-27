@@ -139,7 +139,8 @@ public class DefaultEmergencyPreference extends AppListPreference {
     }
 
     public static boolean isCapable(Context context) {
-        return context.getResources().getBoolean(
+        return TelephonyManager.EMERGENCY_ASSISTANCE_ENABLED
+                && context.getResources().getBoolean(
                 com.android.internal.R.bool.config_voice_capable);
     }
 
