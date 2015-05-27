@@ -329,7 +329,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
 
             private void startCheckPattern(final List<LockPatternView.Cell> pattern,
                     final Intent intent) {
-                if (pattern.size() <= LockPatternUtils.MIN_PATTERN_REGISTER_FAIL) {
+                if (pattern.size() < LockPatternUtils.MIN_PATTERN_REGISTER_FAIL) {
                     onPatternChecked(pattern, false, intent, 0);
                     return;
                 }
