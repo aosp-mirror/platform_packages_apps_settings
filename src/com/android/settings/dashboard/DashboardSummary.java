@@ -87,7 +87,8 @@ public class DashboardSummary extends InstrumentedFragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        HelpUtils.prepareHelpMenuItem(getActivity(), menu, R.string.help_uri_dashboard);
+        HelpUtils.prepareHelpMenuItem(getActivity(), menu, R.string.help_uri_dashboard,
+                getClass().getName());
     }
 
     @Override

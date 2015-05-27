@@ -61,7 +61,8 @@ public class AndroidBeam extends InstrumentedFragment
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        HelpUtils.prepareHelpMenuItem(getActivity(), menu, R.string.help_uri_beam);
+        HelpUtils.prepareHelpMenuItem(getActivity(), menu, R.string.help_uri_beam,
+                getClass().getName());
     }
 
     @Override

@@ -21,9 +21,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.Resources.Theme;
 import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -49,6 +51,12 @@ public class HelpUtils {
      */
     private final static String PARAM_VERSION = "version";
 
+    // Constants for help intents.
+    private static final String EXTRA_CONTEXT = "EXTRA_CONTEXT";
+    private static final String EXTRA_THEME = "EXTRA_THEME";
+    private static final String EXTRA_PRIMARY_COLOR = "EXTRA_PRIMARY_COLOR";
+    private static final String EXTRA_BACKUP_URI = "EXTRA_BACKUP_URI";
+
     /**
      * Cached version code to prevent repeated calls to the package manager.
      */
@@ -57,29 +65,17 @@ public class HelpUtils {
     /** Static helper that is not instantiable*/
     private HelpUtils() { }
 
-    public static boolean prepareHelpMenuItem(Context context, Menu menu, String helpUri) {
+    public static boolean prepareHelpMenuItem(Context context, Menu menu, String helpUri,
+            String backupContext) {
         MenuItem helpItem = menu.add(0, MENU_HELP, 0, R.string.help_label);
-        return prepareHelpMenuItem(context, helpItem, helpUri);
+        return prepareHelpMenuItem(context, helpItem, helpUri, backupContext);
     }
 
-    public static boolean prepareHelpMenuItem(Context context, Menu menu, int helpUriResource) {
+    public static boolean prepareHelpMenuItem(Context context, Menu menu, int helpUriResource,
+            String backupContext) {
         MenuItem helpItem = menu.add(0, MENU_HELP, 0, R.string.help_label);
-        return prepareHelpMenuItem(context, helpItem, context.getString(helpUriResource));
-    }
-
-    /**
-     * Prepares the help menu item by doing the following.
-     * - If the string corresponding to the helpUrlResourceId is empty or null, then the help menu
-     *   item is made invisible.
-     * - Otherwise, this makes the help menu item visible and sets the intent for the help menu
-     *   item to view the URL.
-     *
-     * @return returns whether the help menu item has been made visible.
-     */
-    public static boolean prepareHelpMenuItem(Context context, MenuItem helpMenuItem,
-            int helpUrlResourceId) {
-        String helpUrlString = context.getResources().getString(helpUrlResourceId);
-        return prepareHelpMenuItem(context, helpMenuItem, helpUrlString);
+        return prepareHelpMenuItem(context, helpItem, context.getString(helpUriResource),
+                backupContext);
     }
 
     /**
@@ -91,7 +87,7 @@ public class HelpUtils {
      * @return returns whether the help menu item has been made visible.
      */
     public static boolean prepareHelpMenuItem(Context context, MenuItem helpMenuItem,
-            String helpUriString) {
+            String helpUriString, String backupContext) {
         if (TextUtils.isEmpty(helpUriString)) {
             // The help url string is empty or null, so set the help menu item to be invisible.
             helpMenuItem.setVisible(false);
@@ -99,12 +95,11 @@ public class HelpUtils {
             // return that the help menu item is not visible (i.e. false)
             return false;
         } else {
-            Intent intent = getHelpIntent(context, helpUriString);
+            Intent intent = getHelpIntent(context, helpUriString, backupContext);
 
             // Set the intent to the help menu item, show the help menu item in the overflow
             // menu, and make it visible.
-            ComponentName component = intent.resolveActivity(context.getPackageManager());
-            if (component != null) {
+            if (intent != null) {
                 helpMenuItem.setIntent(intent);
                 helpMenuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
                 helpMenuItem.setVisible(true);
@@ -118,11 +113,23 @@ public class HelpUtils {
         }
     }
 
-    public static Intent getHelpIntent(Context context, String helpUriString) {
+    public static Intent getHelpIntent(Context context, String helpUriString,
+            String backupContext) {
         // Try to handle as Intent Uri, otherwise just treat as Uri.
         try {
-            return Intent.parseUri(helpUriString,
+            Intent intent = Intent.parseUri(helpUriString,
                     Intent.URI_ANDROID_APP_SCHEME | Intent.URI_INTENT_SCHEME);
+            addIntentParameters(context, intent, backupContext);
+            ComponentName component = intent.resolveActivity(context.getPackageManager());
+            if (component != null) {
+                return intent;
+            } else if (intent.hasExtra(EXTRA_BACKUP_URI)) {
+                // This extra contains a backup URI for when the intent isn't available.
+                return getHelpIntent(context, intent.getStringExtra(EXTRA_BACKUP_URI),
+                        backupContext);
+            } else {
+                return null;
+            }
         } catch (URISyntaxException e) {
         }
         // The help url string exists, so first add in some extra query parameters.
@@ -134,6 +141,18 @@ public class HelpUtils {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
                 | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
         return intent;
+    }
+
+    private static void addIntentParameters(Context context, Intent intent, String backupContext) {
+        if (!intent.hasExtra(EXTRA_CONTEXT)) {
+            // Insert some context if none exists.
+            intent.putExtra(EXTRA_CONTEXT, backupContext);
+        }
+        intent.putExtra(EXTRA_THEME, 1 /* Light, dark action bar */);
+        Theme theme = context.getTheme();
+        TypedValue typedValue = new TypedValue();
+        theme.resolveAttribute(android.R.attr.colorPrimary, typedValue, true);
+        intent.putExtra(EXTRA_PRIMARY_COLOR, context.getColor(typedValue.resourceId));
     }
 
     /**

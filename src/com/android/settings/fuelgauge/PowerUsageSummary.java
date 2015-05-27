@@ -135,7 +135,7 @@ public class PowerUsageSummary extends PowerUsageBase {
         String helpUrl;
         if (!TextUtils.isEmpty(helpUrl = getResources().getString(R.string.help_url_battery))) {
             final MenuItem help = menu.add(0, MENU_HELP, 0, R.string.help_label);
-            HelpUtils.prepareHelpMenuItem(getActivity(), help, helpUrl);
+            HelpUtils.prepareHelpMenuItem(getActivity(), help, helpUrl, getClass().getName());
         }
     }
 
