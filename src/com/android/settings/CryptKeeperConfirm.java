@@ -27,6 +27,7 @@ import android.os.IBinder;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.storage.IMountService;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -127,6 +128,11 @@ public class CryptKeeperConfirm extends InstrumentedFragment {
                 utils.setOwnerInfo(utils.getOwnerInfo(UserHandle.USER_OWNER),
                                    UserHandle.USER_OWNER);
             }
+            int value = Settings.System.getInt(getContext().getContentResolver(),
+                                               Settings.System.TEXT_SHOW_PASSWORD,
+                                               1);
+            utils.setVisiblePasswordEnabled(value != 0, UserHandle.USER_OWNER);
+
             Intent intent = new Intent(getActivity(), Blank.class);
             intent.putExtras(getArguments());
             startActivity(intent);

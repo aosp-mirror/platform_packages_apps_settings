@@ -689,6 +689,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
         } else if (KEY_SHOW_PASSWORD.equals(key)) {
             Settings.System.putInt(getContentResolver(), Settings.System.TEXT_SHOW_PASSWORD,
                     ((Boolean) value) ? 1 : 0);
+            lockPatternUtils.setVisiblePasswordEnabled((Boolean) value, MY_USER_ID);
         } else if (KEY_TOGGLE_INSTALL_APPLICATIONS.equals(key)) {
             if ((Boolean) value) {
                 mToggleAppInstallation.setChecked(false);
