@@ -343,7 +343,10 @@
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Gunakan cap jari untuk"</string>
     <string name="fingerprint_add_title" msgid="1926752654454033904">"Tambahkan cap jari"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5078060939636911795">"kunci skrin"</string>
-    <!-- no translation found for security_settings_fingerprint_preference_summary (624961700033979880) -->
+    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="624961700033979880">
+      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> cap jari disediakan</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> cap jari disediakan</item>
+    </plurals>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Persediaan cap jari"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"Untuk menggunakan cap jari anda untuk membuka kunci skrin anda atau mengesahkan pembelian, anda perlu:"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"Sediakan kaedah kunci skrin sandaran anda"</string>
@@ -1225,8 +1228,7 @@
     <string name="lockpattern_pattern_confirmed_header" msgid="8455614172231880211">"Corak buka kunci baharu anda"</string>
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"Sahkan"</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"Lukis semula"</string>
-    <!-- no translation found for lockpattern_retry_button_text (3480423193273588166) -->
-    <skip />
+    <string name="lockpattern_retry_button_text" msgid="3480423193273588166">"Kosongkan"</string>
     <string name="lockpattern_continue_button_text" msgid="4723771754714471410">"Teruskan"</string>
     <string name="lockpattern_settings_title" msgid="3207750489460466680">"Corak buka kunci"</string>
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"Memerlukan corak"</string>
@@ -1255,8 +1257,7 @@
     <string name="advanced_settings_summary" msgid="4016682978071086747">"Dayakan lebih banyak pilihan tetapan"</string>
     <string name="application_info_label" msgid="5736524913065714880">"Maklumat aplikasi"</string>
     <string name="storage_label" msgid="8700867073480107253">"Storan"</string>
-    <!-- no translation found for auto_launch_label (2669236885531442195) -->
-    <skip />
+    <string name="auto_launch_label" msgid="2669236885531442195">"Buka secara lalai"</string>
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"Lalai"</string>
     <string name="screen_compatibility_label" msgid="663250687205465394">"Keserasian skrin"</string>
     <string name="permissions_label" msgid="2605296874922726203">"Kebenaran"</string>
@@ -1930,7 +1931,7 @@
     <string name="backup_erase_dialog_title" msgid="1027640829482174106"></string>
     <string name="backup_erase_dialog_message" msgid="5221011285568343155">"Berhenti membuat sandaran kata laluan Wi-Fi anda, penanda halaman, tetapan lain dan data apl serta padamkan semua salinan pada pelayan Google?"</string>
     <string name="fullbackup_erase_dialog_message" msgid="944399039066318647">"Berhenti menyandarkan data peranti (seperti kata laluan Wi-Fi dan sejarah panggilan) dan data apl (seperti tetapan dan fail yang disimpan oleh apl), serta padamkan semua salinan di Google Drive?"</string>
-    <string name="fullbackup_data_summary" msgid="960850365007767734">"Sandarkan data peranti (seperti kata laluan Wi-Fi dan sejarah panggilan) dan data apl (seperti tetapan dan fail yang disimpan mengikut apl) dari jauh secara automatik.\n\nApabila anda menghidupkan sandaran automatik, data peranti dan apl disimpan secara berkala dari jauh. Data apl boleh merupakan sebarang data yang telah disimpan oleh apl (berdasarkan tetapan pembangun), termasuk data yang berkemungkinan sensitif, seperti kenalan, mesej dan foto."</string>
+    <string name="fullbackup_data_summary" msgid="960850365007767734">"Sandarkan data peranti (seperti kata laluan Wi-Fi dan sejarah panggilan) dan data apl (seperti tetapan dan fail yang disimpan mengikut apl) dari jauh secara automatik.\n\nApabila anda menghidupkan sandaran automatik, data peranti dan apl disimpan secara berkala dari jauh. Data apl boleh terdiri daripada sebarang data yang telah disimpan oleh apl (berdasarkan tetapan pembangun), termasuk data yang berkemungkinan sensitif, seperti kenalan, mesej dan foto."</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"Tetapan pentadbir peranti"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"Pentadbir peranti"</string>
     <string name="remove_device_admin" msgid="3596845261596451437">"Nyahaktifkan"</string>
@@ -2637,17 +2638,12 @@
     <string name="imei_information_title" msgid="8499085421609752290">"Maklumat IMEI"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"Maklumat relatif IMEI"</string>
     <string name="slot_number" msgid="3762676044904653577">"(Slot<xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
-    <!-- no translation found for launch_by_default (1840761193189009248) -->
-    <skip />
+    <string name="launch_by_default" msgid="1840761193189009248">"Buka secara lalai"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> digunakan dalam <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
-    <!-- no translation found for app_launch_domain_links_title (6789955009107320092) -->
-    <skip />
-    <!-- no translation found for app_launch_open_domain_urls_title (8914721351596745701) -->
-    <skip />
-    <!-- no translation found for app_launch_open_domain_urls_summary (5367573364240712217) -->
-    <skip />
-    <!-- no translation found for app_launch_supported_domain_urls_title (8250695258211477480) -->
-    <skip />
+    <string name="app_launch_domain_links_title" msgid="6789955009107320092">"Pautan apl"</string>
+    <string name="app_launch_open_domain_urls_title" msgid="8914721351596745701">"Buka pautan yang disokong"</string>
+    <string name="app_launch_open_domain_urls_summary" msgid="5367573364240712217">"Buka tanpa bertanya"</string>
+    <string name="app_launch_supported_domain_urls_title" msgid="8250695258211477480">"Pautan yang disokong"</string>
     <string name="app_launch_other_defaults_title" msgid="2516812499807835178">"Lalai yang lain"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> digunakan dalam <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
     <string name="storage_type_internal" msgid="410824961149037234">"memori dalaman"</string>
@@ -2693,15 +2689,14 @@
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"<xliff:g id="COUNT_0">%d</xliff:g> daripada <xliff:g id="COUNT_1">%d</xliff:g> apl yang dibenarkan"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Ketik untuk bangkit"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Ketik dua kali di mana-mana bahagian skrin untuk membangkitkan peranti"</string>
-    <!-- no translation found for domain_urls_title (8762012672312435252) -->
-    <skip />
-    <!-- no translation found for domain_urls_summary_none (2639588015479657864) -->
-    <skip />
-    <!-- no translation found for domain_urls_summary_one (3704934031930978405) -->
-    <skip />
-    <!-- no translation found for domain_urls_summary_some (812936714383016364) -->
-    <skip />
-    <!-- no translation found for domain_urls_apps_summary (4322996467951692661) -->
+    <string name="domain_urls_title" msgid="8762012672312435252">"Pautan apl"</string>
+    <string name="domain_urls_summary_none" msgid="2639588015479657864">"Jangan buka pautan yang disokong"</string>
+    <string name="domain_urls_summary_one" msgid="3704934031930978405">"Buka <xliff:g id="DOMAIN">%s</xliff:g>"</string>
+    <string name="domain_urls_summary_some" msgid="812936714383016364">"Buka <xliff:g id="DOMAIN">%s</xliff:g> dan URL yang berkaitan"</string>
+    <plurals name="domain_urls_apps_summary" formatted="false" msgid="4322996467951692661">
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> apl dapat membuka pautan sokongannya</item>
+      <item quantity="one">Satu apl dapat membuka pautan sokongannya</item>
+    </plurals>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Tidak dikenali"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"Apl Lalai"</string>
     <string name="default_assist_title" msgid="8851464168639315795">"Bantu"</string>
@@ -2717,9 +2712,12 @@
     <string name="usage_access_description" msgid="1352111094596416795">"Akses penggunaan membenarkan apl untuk mengesan apl lain yang anda gunakan dan kekerapan penggunaan tersebut serta pembawa anda, tetapan bahasa dan butiran lain."</string>
     <string name="memory_settings_title" msgid="7490541005204254222">"Memori"</string>
     <string name="memory_details_title" msgid="8542565326053693320">"Butiran memori"</string>
-    <string name="always_running" msgid="756962671086985529">"Sentiasa berjalan"</string>
-    <string name="sometimes_running" msgid="4029856112252925332">"Kadangkala berjalan"</string>
-    <string name="rarely_running" msgid="5858601167598124445">"Jarang berjalan"</string>
+    <!-- no translation found for always_running (6042448320077429656) -->
+    <skip />
+    <!-- no translation found for sometimes_running (6611250683037700864) -->
+    <skip />
+    <!-- no translation found for rarely_running (348413460168817458) -->
+    <skip />
     <string name="memory_max_use" msgid="6874803757715963097">"Maksimum"</string>
     <string name="memory_avg_use" msgid="7382015389130622870">"Purata"</string>
     <string name="memory_max_desc" msgid="2861832149718335864">"Maksimum <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
@@ -2752,4 +2750,27 @@
     <string name="assist_access_context_title" msgid="2047105711005856521">"Gunakan konteks semasa"</string>
     <string name="assist_access_context_summary" msgid="8365837347256022203">"Apabila anda membuka apl bantu, biarkan apl melihat aktiviti yang telah anda lakukan pada skrin"</string>
     <string name="assist_footer" msgid="2283187001990543739">"Apl bantu membantu anda mengenal pasti dan bertindak pada maklumat yang berguna tanpa perlu bertanya. Sesetengah apl menyokong pelancar dan perkhidmatan input suara untuk memberi anda bantuan bersepadu."</string>
+    <!-- no translation found for average_memory_use (829566450150198512) -->
+    <skip />
+    <!-- no translation found for maximum_memory_use (7493720799710132496) -->
+    <skip />
+    <!-- no translation found for sort_avg_use (3998036180505143129) -->
+    <skip />
+    <!-- no translation found for sort_max_use (4629247978290075124) -->
+    <skip />
+    <!-- no translation found for memory_performance (5661005192284103281) -->
+    <skip />
+    <!-- no translation found for total_memory (2017287600738630165) -->
+    <skip />
+    <!-- no translation found for average_used (5338339266517245782) -->
+    <skip />
+    <!-- no translation found for free_memory (4003936141603549746) -->
+    <skip />
+    <!-- no translation found for memory_usage_apps (5650192998273294098) -->
+    <skip />
+    <!-- no translation found for memory_usage_apps_summary (6089210945574265774) -->
+    <!-- no translation found for running_frequency (6622624669948277693) -->
+    <skip />
+    <!-- no translation found for memory_maximum_usage (6513785462055278341) -->
+    <skip />
 </resources>

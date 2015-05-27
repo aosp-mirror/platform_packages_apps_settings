@@ -343,7 +343,10 @@
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"将指纹用于以下用途："</string>
     <string name="fingerprint_add_title" msgid="1926752654454033904">"添加指纹"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5078060939636911795">"屏幕锁定"</string>
-    <!-- no translation found for security_settings_fingerprint_preference_summary (624961700033979880) -->
+    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="624961700033979880">
+      <item quantity="other">已设置 <xliff:g id="COUNT_1">%1$d</xliff:g> 个指纹</item>
+      <item quantity="one">已设置 <xliff:g id="COUNT_0">%1$d</xliff:g> 个指纹</item>
+    </plurals>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"指纹设置"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"要使用您的指纹解锁屏幕或确认购买交易，您需要："</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"设置备用屏幕锁定方式"</string>
@@ -1225,8 +1228,7 @@
     <string name="lockpattern_pattern_confirmed_header" msgid="8455614172231880211">"您的新解锁图案"</string>
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"确认"</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"重新绘制"</string>
-    <!-- no translation found for lockpattern_retry_button_text (3480423193273588166) -->
-    <skip />
+    <string name="lockpattern_retry_button_text" msgid="3480423193273588166">"清除"</string>
     <string name="lockpattern_continue_button_text" msgid="4723771754714471410">"继续"</string>
     <string name="lockpattern_settings_title" msgid="3207750489460466680">"解锁图案"</string>
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"需要解锁图案"</string>
@@ -1255,8 +1257,7 @@
     <string name="advanced_settings_summary" msgid="4016682978071086747">"启用更多设置选项"</string>
     <string name="application_info_label" msgid="5736524913065714880">"应用信息"</string>
     <string name="storage_label" msgid="8700867073480107253">"存储"</string>
-    <!-- no translation found for auto_launch_label (2669236885531442195) -->
-    <skip />
+    <string name="auto_launch_label" msgid="2669236885531442195">"默认打开"</string>
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"默认操作"</string>
     <string name="screen_compatibility_label" msgid="663250687205465394">"屏幕兼容性"</string>
     <string name="permissions_label" msgid="2605296874922726203">"权限"</string>
@@ -2637,17 +2638,12 @@
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI信息"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI相关信息"</string>
     <string name="slot_number" msgid="3762676044904653577">"（插槽<xliff:g id="SLOT_NUM">%1$d</xliff:g>）"</string>
-    <!-- no translation found for launch_by_default (1840761193189009248) -->
-    <skip />
+    <string name="launch_by_default" msgid="1840761193189009248">"默认打开"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="STORAGE_TYPE">%2$s</xliff:g>已使用 <xliff:g id="SIZE">%1$s</xliff:g>"</string>
-    <!-- no translation found for app_launch_domain_links_title (6789955009107320092) -->
-    <skip />
-    <!-- no translation found for app_launch_open_domain_urls_title (8914721351596745701) -->
-    <skip />
-    <!-- no translation found for app_launch_open_domain_urls_summary (5367573364240712217) -->
-    <skip />
-    <!-- no translation found for app_launch_supported_domain_urls_title (8250695258211477480) -->
-    <skip />
+    <string name="app_launch_domain_links_title" msgid="6789955009107320092">"应用链接"</string>
+    <string name="app_launch_open_domain_urls_title" msgid="8914721351596745701">"打开支持的链接"</string>
+    <string name="app_launch_open_domain_urls_summary" msgid="5367573364240712217">"无需询问即可打开"</string>
+    <string name="app_launch_supported_domain_urls_title" msgid="8250695258211477480">"支持的链接"</string>
     <string name="app_launch_other_defaults_title" msgid="2516812499807835178">"其他默认设置"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="STORAGE_TYPE">%2$s</xliff:g>已使用 <xliff:g id="SIZE">%1$s</xliff:g>"</string>
     <string name="storage_type_internal" msgid="410824961149037234">"内存"</string>
@@ -2693,15 +2689,14 @@
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"已授权 <xliff:g id="COUNT_0">%d</xliff:g> 个应用（共 <xliff:g id="COUNT_1">%d</xliff:g> 个）"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"点按唤醒"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"在屏幕上的任意位置点按两次即可唤醒设备"</string>
-    <!-- no translation found for domain_urls_title (8762012672312435252) -->
-    <skip />
-    <!-- no translation found for domain_urls_summary_none (2639588015479657864) -->
-    <skip />
-    <!-- no translation found for domain_urls_summary_one (3704934031930978405) -->
-    <skip />
-    <!-- no translation found for domain_urls_summary_some (812936714383016364) -->
-    <skip />
-    <!-- no translation found for domain_urls_apps_summary (4322996467951692661) -->
+    <string name="domain_urls_title" msgid="8762012672312435252">"应用链接"</string>
+    <string name="domain_urls_summary_none" msgid="2639588015479657864">"不打开支持的链接"</string>
+    <string name="domain_urls_summary_one" msgid="3704934031930978405">"打开 <xliff:g id="DOMAIN">%s</xliff:g>"</string>
+    <string name="domain_urls_summary_some" msgid="812936714383016364">"打开 <xliff:g id="DOMAIN">%s</xliff:g> 和相关网址"</string>
+    <plurals name="domain_urls_apps_summary" formatted="false" msgid="4322996467951692661">
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> 个应用可以打开支持的链接</item>
+      <item quantity="one">1 个应用可以打开支持的链接</item>
+    </plurals>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"无法识别"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"默认应用"</string>
     <string name="default_assist_title" msgid="8851464168639315795">"辅助应用"</string>
@@ -2717,9 +2712,12 @@
     <string name="usage_access_description" msgid="1352111094596416795">"使用记录访问权限允许应用跟踪您正在使用的其他应用和使用频率，以及您的运营商、语言设置及其他详细信息。"</string>
     <string name="memory_settings_title" msgid="7490541005204254222">"内存"</string>
     <string name="memory_details_title" msgid="8542565326053693320">"内存详情"</string>
-    <string name="always_running" msgid="756962671086985529">"始终运行"</string>
-    <string name="sometimes_running" msgid="4029856112252925332">"有时运行"</string>
-    <string name="rarely_running" msgid="5858601167598124445">"极少运行"</string>
+    <!-- no translation found for always_running (6042448320077429656) -->
+    <skip />
+    <!-- no translation found for sometimes_running (6611250683037700864) -->
+    <skip />
+    <!-- no translation found for rarely_running (348413460168817458) -->
+    <skip />
     <string name="memory_max_use" msgid="6874803757715963097">"最高内存使用量"</string>
     <string name="memory_avg_use" msgid="7382015389130622870">"平均内存使用量"</string>
     <string name="memory_max_desc" msgid="2861832149718335864">"最高内存使用量：<xliff:g id="MEMORY">%1$s</xliff:g>"</string>
@@ -2752,4 +2750,27 @@
     <string name="assist_access_context_title" msgid="2047105711005856521">"使用当前屏幕上显示的数据"</string>
     <string name="assist_access_context_summary" msgid="8365837347256022203">"当打开此辅助应用时，允许其查看您屏幕上当前显示的数据"</string>
     <string name="assist_footer" msgid="2283187001990543739">"辅助应用无需您询问即可主动帮您发现有用信息并采取相应措施。某些应用同时支持启动器和语音输入服务，可为您提供更全面的协助。"</string>
+    <!-- no translation found for average_memory_use (829566450150198512) -->
+    <skip />
+    <!-- no translation found for maximum_memory_use (7493720799710132496) -->
+    <skip />
+    <!-- no translation found for sort_avg_use (3998036180505143129) -->
+    <skip />
+    <!-- no translation found for sort_max_use (4629247978290075124) -->
+    <skip />
+    <!-- no translation found for memory_performance (5661005192284103281) -->
+    <skip />
+    <!-- no translation found for total_memory (2017287600738630165) -->
+    <skip />
+    <!-- no translation found for average_used (5338339266517245782) -->
+    <skip />
+    <!-- no translation found for free_memory (4003936141603549746) -->
+    <skip />
+    <!-- no translation found for memory_usage_apps (5650192998273294098) -->
+    <skip />
+    <!-- no translation found for memory_usage_apps_summary (6089210945574265774) -->
+    <!-- no translation found for running_frequency (6622624669948277693) -->
+    <skip />
+    <!-- no translation found for memory_maximum_usage (6513785462055278341) -->
+    <skip />
 </resources>

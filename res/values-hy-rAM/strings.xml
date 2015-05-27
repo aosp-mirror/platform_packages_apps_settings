@@ -1257,8 +1257,7 @@
     <string name="advanced_settings_summary" msgid="4016682978071086747">"Միացնել այլ կարգավորման ընտրանքներ"</string>
     <string name="application_info_label" msgid="5736524913065714880">"Ծրագրի տեղեկությունները"</string>
     <string name="storage_label" msgid="8700867073480107253">"Պահոց"</string>
-    <!-- no translation found for auto_launch_label (2669236885531442195) -->
-    <skip />
+    <string name="auto_launch_label" msgid="2669236885531442195">"Բացել ըստ կանխադրվածի"</string>
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"Լռելյայններ"</string>
     <string name="screen_compatibility_label" msgid="663250687205465394">"Էկրանի համատեղելիություն"</string>
     <string name="permissions_label" msgid="2605296874922726203">"Թույլտվություններ"</string>
@@ -2639,17 +2638,12 @@
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI-ի վերաբերյալ տվյալներ"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI-ին վերաբերող տվյալներ"</string>
     <string name="slot_number" msgid="3762676044904653577">"(Սլոտ<xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
-    <!-- no translation found for launch_by_default (1840761193189009248) -->
-    <skip />
+    <string name="launch_by_default" msgid="1840761193189009248">"Բացել ըստ կանխադրվածի"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="STORAGE_TYPE">%2$s</xliff:g> պահոցում օգտագործված է <xliff:g id="SIZE">%1$s</xliff:g>"</string>
-    <!-- no translation found for app_launch_domain_links_title (6789955009107320092) -->
-    <skip />
-    <!-- no translation found for app_launch_open_domain_urls_title (8914721351596745701) -->
-    <skip />
-    <!-- no translation found for app_launch_open_domain_urls_summary (5367573364240712217) -->
-    <skip />
-    <!-- no translation found for app_launch_supported_domain_urls_title (8250695258211477480) -->
-    <skip />
+    <string name="app_launch_domain_links_title" msgid="6789955009107320092">"Հավելվածի հղումներ"</string>
+    <string name="app_launch_open_domain_urls_title" msgid="8914721351596745701">"Բացել աջակցվող հղումները"</string>
+    <string name="app_launch_open_domain_urls_summary" msgid="5367573364240712217">"Բացել առանց հարցնելու"</string>
+    <string name="app_launch_supported_domain_urls_title" msgid="8250695258211477480">"Աջակցվող հղումներ"</string>
     <string name="app_launch_other_defaults_title" msgid="2516812499807835178">"Այլ կանխադրված կարգավորումներ"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="STORAGE_TYPE">%2$s</xliff:g> պահոցում օգտագործված է <xliff:g id="SIZE">%1$s</xliff:g>"</string>
     <string name="storage_type_internal" msgid="410824961149037234">"ներքին հիշողություն"</string>
@@ -2695,15 +2689,14 @@
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"Թույլատրված է <xliff:g id="COUNT_0">%d</xliff:g> հավելվածի՝ <xliff:g id="COUNT_1">%d</xliff:g>-ից"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Հպեք՝ արթնացնելու համար"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Երկակի հպեք էկրանի ցանկացած մասին՝ սարքը արթնացնելու համար"</string>
-    <!-- no translation found for domain_urls_title (8762012672312435252) -->
-    <skip />
-    <!-- no translation found for domain_urls_summary_none (2639588015479657864) -->
-    <skip />
-    <!-- no translation found for domain_urls_summary_one (3704934031930978405) -->
-    <skip />
-    <!-- no translation found for domain_urls_summary_some (812936714383016364) -->
-    <skip />
-    <!-- no translation found for domain_urls_apps_summary (4322996467951692661) -->
+    <string name="domain_urls_title" msgid="8762012672312435252">"Հավելվածի հղումներ"</string>
+    <string name="domain_urls_summary_none" msgid="2639588015479657864">"Չբացել աջակցվող հղումները"</string>
+    <string name="domain_urls_summary_one" msgid="3704934031930978405">"Բացել <xliff:g id="DOMAIN">%s</xliff:g> տիրույթը"</string>
+    <string name="domain_urls_summary_some" msgid="812936714383016364">"Բացել <xliff:g id="DOMAIN">%s</xliff:g> տիրույթը և հարակից URL-ները"</string>
+    <plurals name="domain_urls_apps_summary" formatted="false" msgid="4322996467951692661">
+      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> հավելված կարող է բացել իր աջակցվող հղումները</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> հավելված կարող է բացել իր աջակցվող հղումները</item>
+    </plurals>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Չճանաչվեց"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"Կանխադրված հավելվածները"</string>
     <string name="default_assist_title" msgid="8851464168639315795">"Հուշումներ"</string>
@@ -2719,9 +2712,12 @@
     <string name="usage_access_description" msgid="1352111094596416795">"Օգտագործման թույլտվությունը հնարավորություն է տալիս ինչ-որ հավելվածի հետագծել օգտագործվող այլ հավելվածները և օգտագործման հաճախականությունը: Ինչպես նաև օպերատորի, լեզվի և այլ կարգավորումներ:"</string>
     <string name="memory_settings_title" msgid="7490541005204254222">"Հիշողություն"</string>
     <string name="memory_details_title" msgid="8542565326053693320">"Հիշողության մանրամասներ"</string>
-    <string name="always_running" msgid="756962671086985529">"Միշտ աշխատող"</string>
-    <string name="sometimes_running" msgid="4029856112252925332">"Երբեմն աշխատող"</string>
-    <string name="rarely_running" msgid="5858601167598124445">"Հազվադեպ աշխատող"</string>
+    <!-- no translation found for always_running (6042448320077429656) -->
+    <skip />
+    <!-- no translation found for sometimes_running (6611250683037700864) -->
+    <skip />
+    <!-- no translation found for rarely_running (348413460168817458) -->
+    <skip />
     <string name="memory_max_use" msgid="6874803757715963097">"Առավելագույնը"</string>
     <string name="memory_avg_use" msgid="7382015389130622870">"Միջինը"</string>
     <string name="memory_max_desc" msgid="2861832149718335864">"Առավելագույնը՝ <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
@@ -2754,4 +2750,27 @@
     <string name="assist_access_context_title" msgid="2047105711005856521">"Օգտագործել ընթացիկ համատեքստը"</string>
     <string name="assist_access_context_summary" msgid="8365837347256022203">"Հուշումների հավելվածը բացելիս՝ թույլատրել նրան տեսնել էկրանը"</string>
     <string name="assist_footer" msgid="2283187001990543739">"Հուշումների հավելվածները օգնում են ձեզ գտնել օգտակար տեղեկությունները և հետևել դրանց՝ առանց հարցնելու: Որոշ հավելվածներ ունեն ինչպես մուտքագրման, այնպես էլ ձայնային ներածման ծառայություններ, ինչի շնորհիվ կարողանում են լիարժեք օգնություն ցուցաբերել ձեզ:"</string>
+    <!-- no translation found for average_memory_use (829566450150198512) -->
+    <skip />
+    <!-- no translation found for maximum_memory_use (7493720799710132496) -->
+    <skip />
+    <!-- no translation found for sort_avg_use (3998036180505143129) -->
+    <skip />
+    <!-- no translation found for sort_max_use (4629247978290075124) -->
+    <skip />
+    <!-- no translation found for memory_performance (5661005192284103281) -->
+    <skip />
+    <!-- no translation found for total_memory (2017287600738630165) -->
+    <skip />
+    <!-- no translation found for average_used (5338339266517245782) -->
+    <skip />
+    <!-- no translation found for free_memory (4003936141603549746) -->
+    <skip />
+    <!-- no translation found for memory_usage_apps (5650192998273294098) -->
+    <skip />
+    <!-- no translation found for memory_usage_apps_summary (6089210945574265774) -->
+    <!-- no translation found for running_frequency (6622624669948277693) -->
+    <skip />
+    <!-- no translation found for memory_maximum_usage (6513785462055278341) -->
+    <skip />
 </resources>
