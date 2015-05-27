@@ -295,7 +295,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                     return;
                 }
 
-                onPatternChecked(pattern, false, intent);
+                onPatternChecked(pattern, false, intent, 0);
             }
 
             private boolean isInternalActivity() {
@@ -313,7 +313,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                         UserHandle.myUserId(),
                         new LockPatternChecker.OnVerifyCallback() {
                             @Override
-                            public void onVerified(byte[] token) {
+                            public void onVerified(byte[] token, int timeoutMs) {
                                 mPendingLockCheck = null;
                                 boolean matched = false;
                                 if (token != null) {
@@ -322,20 +322,25 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                                             ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN,
                                             token);
                                 }
-                                onPatternChecked(pattern, matched, intent);
+                                onPatternChecked(pattern, matched, intent, timeoutMs);
                             }
                         });
             }
 
             private void startCheckPattern(final List<LockPatternView.Cell> pattern,
                     final Intent intent) {
+                if (pattern.size() <= LockPatternUtils.MIN_PATTERN_REGISTER_FAIL) {
+                    onPatternChecked(pattern, false, intent, 0);
+                    return;
+                }
+
                 mPendingLockCheck = LockPatternChecker.checkPattern(
                         mLockPatternUtils,
                         pattern,
                         UserHandle.myUserId(),
                         new LockPatternChecker.OnCheckCallback() {
                             @Override
-                            public void onChecked(boolean matched) {
+                            public void onChecked(boolean matched, int timeoutMs) {
                                 mPendingLockCheck = null;
                                 if (matched && isInternalActivity()) {
                                     intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_TYPE,
@@ -343,24 +348,21 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                                     intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD,
                                                     LockPatternUtils.patternToString(pattern));
                                 }
-                                onPatternChecked(pattern, matched, intent);
+                                onPatternChecked(pattern, matched, intent, timeoutMs);
                             }
                         });
             }
 
             private void onPatternChecked(List<LockPatternView.Cell> pattern,
-                    boolean matched,
-                    Intent intent) {
+                    boolean matched, Intent intent, int timeoutMs) {
                 mLockPatternView.setEnabled(true);
                 if (matched) {
                     getActivity().setResult(Activity.RESULT_OK, intent);
                     getActivity().finish();
                 } else {
-                    if (pattern.size() >= LockPatternUtils.MIN_PATTERN_REGISTER_FAIL &&
-                            ++mNumWrongConfirmAttempts
-                            >= LockPatternUtils.FAILED_ATTEMPTS_BEFORE_TIMEOUT) {
+                    if (timeoutMs > 0) {
                         long deadline = mLockPatternUtils.setLockoutAttemptDeadline(
-                                UserHandle.myUserId());
+                                UserHandle.myUserId(), timeoutMs);
                         handleAttemptLockout(deadline);
                     } else {
                         updateStage(Stage.NeedToUnlockWrong);
