@@ -105,6 +105,12 @@ public final class CredentialStorage extends Activity {
     private final KeyStore mKeyStore = KeyStore.getInstance();
 
     /**
+     * The UIDs that are used for system credential storage in keystore.
+     */
+    private static final int[] SYSTEM_CREDENTIAL_UIDS = {Process.WIFI_UID, Process.VPN_UID,
+        Process.ROOT_UID, Process.SYSTEM_UID};
+
+    /**
      * When non-null, the bundle containing credentials to install.
      */
     private Bundle mInstallBundle;
@@ -333,7 +339,14 @@ public final class CredentialStorage extends Activity {
 
         @Override protected Boolean doInBackground(Void... unused) {
 
-            mKeyStore.reset();
+            // Clear all the users credentials could have been installed in for this user.
+            final UserManager um = (UserManager) getSystemService(USER_SERVICE);
+            for (UserInfo pi : um.getProfiles(UserHandle.getUserId(Process.myUid()))) {
+                for (int uid : SYSTEM_CREDENTIAL_UIDS) {
+                    mKeyStore.clearUid(UserHandle.getUid(pi.id, uid));
+                }
+            }
+
 
             try {
                 KeyChainConnection keyChainConnection = KeyChain.bind(CredentialStorage.this);
