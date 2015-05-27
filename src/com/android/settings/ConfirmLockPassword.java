@@ -260,7 +260,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                 return;
             }
 
-            onPasswordChecked(false, intent);
+            onPasswordChecked(false, intent, 0);
         }
 
         private boolean isInternalActivity() {
@@ -277,7 +277,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                     UserHandle.myUserId(),
                     new LockPatternChecker.OnVerifyCallback() {
                         @Override
-                        public void onVerified(byte[] token) {
+                        public void onVerified(byte[] token, int timeoutMs) {
                             mPendingLockCheck = null;
                             boolean matched = false;
                             if (token != null) {
@@ -286,7 +286,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                                         ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN,
                                         token);
                             }
-                            onPasswordChecked(matched, intent);
+                            onPasswordChecked(matched, intent, timeoutMs);
                         }
                     });
         }
@@ -298,7 +298,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                     UserHandle.myUserId(),
                     new LockPatternChecker.OnCheckCallback() {
                         @Override
-                        public void onChecked(boolean matched) {
+                        public void onChecked(boolean matched, int timeoutMs) {
                             mPendingLockCheck = null;
                             if (matched && isInternalActivity()) {
                                 intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_TYPE,
@@ -307,20 +307,20 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                                 intent.putExtra(
                                         ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD, pin);
                             }
-                            onPasswordChecked(matched, intent);
+                            onPasswordChecked(matched, intent, timeoutMs);
                         }
                     });
         }
 
-        private void onPasswordChecked(boolean matched, Intent intent) {
+        private void onPasswordChecked(boolean matched, Intent intent, int timeoutMs) {
             mPasswordEntryInputDisabler.setInputEnabled(true);
             if (matched) {
                 getActivity().setResult(RESULT_OK, intent);
                 getActivity().finish();
             } else {
-                if (++mNumWrongConfirmAttempts >= LockPatternUtils.FAILED_ATTEMPTS_BEFORE_TIMEOUT) {
+                if (timeoutMs > 0) {
                     long deadline = mLockPatternUtils.setLockoutAttemptDeadline(
-                            UserHandle.myUserId());
+                            UserHandle.myUserId(), timeoutMs);
                     handleAttemptLockout(deadline);
                 } else {
                     showError(getErrorMessage());
