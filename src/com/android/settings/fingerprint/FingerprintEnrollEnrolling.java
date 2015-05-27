@@ -139,6 +139,9 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
         super.onStop();
         mSidecar.setListener(null);
         stopIconAnimation();
+        if (!isChangingConfigurations()) {
+            finish();
+        }
     }
 
     private void animateProgress(int progress) {
@@ -184,6 +187,7 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
     @Override
     public void onEnrollmentError(CharSequence errString) {
         mErrorText.setText(errString);
+        stopIconAnimation();
     }
 
     @Override
