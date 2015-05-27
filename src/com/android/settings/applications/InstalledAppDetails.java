@@ -516,6 +516,9 @@ public class InstalledAppDetails extends AppInfoBase
     private CharSequence getDataSummary() {
         if (mChartData != null) {
             long totalBytes = mChartData.detail.getTotalBytes();
+            if (totalBytes == 0) {
+                return getString(R.string.no_data_usage);
+            }
             Context context = getActivity();
             return getString(R.string.data_summary_format,
                     Formatter.formatFileSize(context, totalBytes),
