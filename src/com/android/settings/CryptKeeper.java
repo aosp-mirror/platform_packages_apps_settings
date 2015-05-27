@@ -474,6 +474,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
                 int passwordType = StorageManager.CRYPT_TYPE_PASSWORD;
                 String owner_info;
                 boolean pattern_visible;
+                boolean password_visible;
 
                 @Override
                 public Void doInBackground(Void... v) {
@@ -482,6 +483,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
                         passwordType = service.getPasswordType();
                         owner_info = service.getField(StorageManager.OWNER_INFO_KEY);
                         pattern_visible = !("0".equals(service.getField(StorageManager.PATTERN_VISIBLE_KEY)));
+                        password_visible = !("0".equals(service.getField(StorageManager.PASSWORD_VISIBLE_KEY)));
                     } catch (Exception e) {
                         Log.e(TAG, "Error calling mount service " + e);
                     }
@@ -491,6 +493,9 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
 
                 @Override
                 public void onPostExecute(java.lang.Void v) {
+                    Settings.System.putInt(getContentResolver(), Settings.System.TEXT_SHOW_PASSWORD,
+                                  password_visible ? 1 : 0);
+
                     if (passwordType == StorageManager.CRYPT_TYPE_PIN) {
                         setContentView(R.layout.crypt_keeper_pin_entry);
                         mStatusString = R.string.enter_pin;
