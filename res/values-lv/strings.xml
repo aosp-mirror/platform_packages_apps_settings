@@ -1266,8 +1266,7 @@
     <string name="advanced_settings_summary" msgid="4016682978071086747">"Iespējot papildu iestatījumu opcijas"</string>
     <string name="application_info_label" msgid="5736524913065714880">"Informācija par lietotni"</string>
     <string name="storage_label" msgid="8700867073480107253">"Krātuve"</string>
-    <!-- no translation found for auto_launch_label (2669236885531442195) -->
-    <skip />
+    <string name="auto_launch_label" msgid="2669236885531442195">"Atvēršana pēc noklusējuma"</string>
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"Noklusējuma iestatījumi"</string>
     <string name="screen_compatibility_label" msgid="663250687205465394">"Ekrāna saderība"</string>
     <string name="permissions_label" msgid="2605296874922726203">"Atļaujas"</string>
@@ -2651,17 +2650,12 @@
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI informācija"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"Ar IMEI saistīta informācija"</string>
     <string name="slot_number" msgid="3762676044904653577">"(<xliff:g id="SLOT_NUM">%1$d</xliff:g>. slots)"</string>
-    <!-- no translation found for launch_by_default (1840761193189009248) -->
-    <skip />
+    <string name="launch_by_default" msgid="1840761193189009248">"Atvērt pēc noklusējuma"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"Izmantots: <xliff:g id="SIZE">%1$s</xliff:g> no <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
-    <!-- no translation found for app_launch_domain_links_title (6789955009107320092) -->
-    <skip />
-    <!-- no translation found for app_launch_open_domain_urls_title (8914721351596745701) -->
-    <skip />
-    <!-- no translation found for app_launch_open_domain_urls_summary (5367573364240712217) -->
-    <skip />
-    <!-- no translation found for app_launch_supported_domain_urls_title (8250695258211477480) -->
-    <skip />
+    <string name="app_launch_domain_links_title" msgid="6789955009107320092">"Lietotņu saites"</string>
+    <string name="app_launch_open_domain_urls_title" msgid="8914721351596745701">"Atbalstīto saišu atvēršana"</string>
+    <string name="app_launch_open_domain_urls_summary" msgid="5367573364240712217">"Atvērt bez vaicāšanas"</string>
+    <string name="app_launch_supported_domain_urls_title" msgid="8250695258211477480">"Atbalstītās saites"</string>
     <string name="app_launch_other_defaults_title" msgid="2516812499807835178">"Citi noklusējuma iestatījumi"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"Izmantots: <xliff:g id="SIZE">%1$s</xliff:g> no <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
     <string name="storage_type_internal" msgid="410824961149037234">"iekšējā atmiņa"</string>
@@ -2709,15 +2703,15 @@
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"Atļautas <xliff:g id="COUNT_0">%d</xliff:g> lietotnes no <xliff:g id="COUNT_1">%d</xliff:g>"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Pieskarieties, lai aktivizētu"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Lai aktivizētu ierīci, veiciet dubultskārienu jebkurā ekrāna vietā."</string>
-    <!-- no translation found for domain_urls_title (8762012672312435252) -->
-    <skip />
-    <!-- no translation found for domain_urls_summary_none (2639588015479657864) -->
-    <skip />
-    <!-- no translation found for domain_urls_summary_one (3704934031930978405) -->
-    <skip />
-    <!-- no translation found for domain_urls_summary_some (812936714383016364) -->
-    <skip />
-    <!-- no translation found for domain_urls_apps_summary (4322996467951692661) -->
+    <string name="domain_urls_title" msgid="8762012672312435252">"Lietotņu saites"</string>
+    <string name="domain_urls_summary_none" msgid="2639588015479657864">"Neatvērt atbalstītās saites"</string>
+    <string name="domain_urls_summary_one" msgid="3704934031930978405">"Atvērt: <xliff:g id="DOMAIN">%s</xliff:g>"</string>
+    <string name="domain_urls_summary_some" msgid="812936714383016364">"Atvērt <xliff:g id="DOMAIN">%s</xliff:g> un saistītos URL"</string>
+    <plurals name="domain_urls_apps_summary" formatted="false" msgid="4322996467951692661">
+      <item quantity="zero">Nevienā lietotnē nevar atvērt nevienu atbalstīto saiti</item>
+      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> lietotnē var atvērt atbalstītās saites</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> lietotnēs var atvērt atbalstītās saites</item>
+    </plurals>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Nav atpazīts"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"Noklusējuma lietotnes"</string>
     <string name="default_assist_title" msgid="8851464168639315795">"Palīgs"</string>
@@ -2733,9 +2727,12 @@
     <string name="usage_access_description" msgid="1352111094596416795">"Piekļuve lietojuma datiem ļauj lietotnei izsekot, kādas lietotnes un cik bieži izmantojat, kā arī iegūt informāciju par jūsu mobilo sakaru operatoru, valodas iestatījumiem u.c."</string>
     <string name="memory_settings_title" msgid="7490541005204254222">"Atmiņa"</string>
     <string name="memory_details_title" msgid="8542565326053693320">"Informācija par atmiņu"</string>
-    <string name="always_running" msgid="756962671086985529">"Vienmēr darbojas"</string>
-    <string name="sometimes_running" msgid="4029856112252925332">"Dažreiz darbojas"</string>
-    <string name="rarely_running" msgid="5858601167598124445">"Darbojas reti"</string>
+    <!-- no translation found for always_running (6042448320077429656) -->
+    <skip />
+    <!-- no translation found for sometimes_running (6611250683037700864) -->
+    <skip />
+    <!-- no translation found for rarely_running (348413460168817458) -->
+    <skip />
     <string name="memory_max_use" msgid="6874803757715963097">"Maksimums"</string>
     <string name="memory_avg_use" msgid="7382015389130622870">"Vidēji"</string>
     <string name="memory_max_desc" msgid="2861832149718335864">"Maksimums: <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
@@ -2769,4 +2766,27 @@
     <string name="assist_access_context_title" msgid="2047105711005856521">"Pašreizējā konteksta izmantošana"</string>
     <string name="assist_access_context_summary" msgid="8365837347256022203">"Atverot palīga lietotni, atļaut iesākto darbību nolasīšanu lietotnē"</string>
     <string name="assist_footer" msgid="2283187001990543739">"Izmantojot palīga lietotnes, varat atrast derīgu informāciju un atbilstoši rīkoties bez vajadzības ievadīt vaicājumus. Dažās lietotnēs tiek atbalstītas gan palaišanas programmas, gan balss ievades pakalpojumi, lai nodrošinātu integrētu palīdzību."</string>
+    <!-- no translation found for average_memory_use (829566450150198512) -->
+    <skip />
+    <!-- no translation found for maximum_memory_use (7493720799710132496) -->
+    <skip />
+    <!-- no translation found for sort_avg_use (3998036180505143129) -->
+    <skip />
+    <!-- no translation found for sort_max_use (4629247978290075124) -->
+    <skip />
+    <!-- no translation found for memory_performance (5661005192284103281) -->
+    <skip />
+    <!-- no translation found for total_memory (2017287600738630165) -->
+    <skip />
+    <!-- no translation found for average_used (5338339266517245782) -->
+    <skip />
+    <!-- no translation found for free_memory (4003936141603549746) -->
+    <skip />
+    <!-- no translation found for memory_usage_apps (5650192998273294098) -->
+    <skip />
+    <!-- no translation found for memory_usage_apps_summary (6089210945574265774) -->
+    <!-- no translation found for running_frequency (6622624669948277693) -->
+    <skip />
+    <!-- no translation found for memory_maximum_usage (6513785462055278341) -->
+    <skip />
 </resources>
