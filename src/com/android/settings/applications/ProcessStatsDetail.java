@@ -74,6 +74,8 @@ public class ProcessStatsDetail extends SettingsPreferenceFragment {
     private static final String KEY_FREQUENCY = "frequency";
     private static final String KEY_MAX_USAGE = "max_usage";
 
+    private static final String KEY_PROCS = "processes";
+
     private final ArrayMap<ComponentName, CancellablePreference> mServiceMap = new ArrayMap<>();
 
     private PackageManager mPm;
@@ -91,6 +93,8 @@ public class ProcessStatsDetail extends SettingsPreferenceFragment {
     private double mMaxMemoryUsage;
 
     private double mTotalScale;
+
+    private PreferenceCategory mProcGroup;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -172,6 +176,7 @@ public class ProcessStatsDetail extends SettingsPreferenceFragment {
     private void createDetails() {
         addPreferencesFromResource(R.xml.app_memory_settings);
 
+        mProcGroup = (PreferenceCategory) findPreference(KEY_PROCS);
         fillProcessesSection();
 
         LayoutPreference headerLayout = (LayoutPreference) findPreference(KEY_DETAILS_HEADER);
@@ -227,6 +232,7 @@ public class ProcessStatsDetail extends SettingsPreferenceFragment {
     };
 
     private void fillProcessesSection() {
+        mProcGroup.removeAll();
         final ArrayList<ProcStatsEntry> entries = new ArrayList<>();
         for (int ie = 0; ie < mApp.mEntries.size(); ie++) {
             ProcStatsEntry entry = mApp.mEntries.get(ie);
@@ -242,6 +248,7 @@ public class ProcessStatsDetail extends SettingsPreferenceFragment {
             ProcStatsEntry entry = entries.get(ie);
             Preference processPref = new Preference(getActivity());
             processPref.setTitle(entry.mLabel);
+            processPref.setSelectable(false);
 
             long duration = Math.max(entry.mRunDuration, entry.mBgDuration);
             long memoryUse = Math.max((long) (entry.mRunWeight * mWeightToRam),
@@ -251,7 +258,10 @@ public class ProcessStatsDetail extends SettingsPreferenceFragment {
                     / (float) mTotalTime, getActivity());
             processPref.setSummary(
                     getString(R.string.memory_use_running_format, memoryString, frequency));
-            getPreferenceScreen().addPreference(processPref);
+            mProcGroup.addPreference(processPref);
+        }
+        if (mProcGroup.getPreferenceCount() < 2) {
+            getPreferenceScreen().removePreference(mProcGroup);
         }
     }
 
