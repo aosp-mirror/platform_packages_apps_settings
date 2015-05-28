@@ -106,19 +106,9 @@ public class ProcessStatsUi extends ProcessStatsBase {
         if (!(preference instanceof ProcessStatsPreference)) {
             return false;
         }
-
         ProcessStatsPreference pgp = (ProcessStatsPreference) preference;
-        Bundle args = new Bundle();
-        args.putParcelable(ProcessStatsDetail.EXTRA_PACKAGE_ENTRY, pgp.getEntry());
         MemInfo memInfo = mStatsManager.getMemInfo();
-        args.putDouble(ProcessStatsDetail.EXTRA_WEIGHT_TO_RAM,
-                memInfo.weightToRam);
-        args.putLong(ProcessStatsDetail.EXTRA_TOTAL_TIME, memInfo.memTotalTime);
-        args.putDouble(ProcessStatsDetail.EXTRA_MAX_MEMORY_USAGE,
-                memInfo.usedWeight * memInfo.weightToRam);
-        args.putDouble(ProcessStatsDetail.EXTRA_TOTAL_SCALE, memInfo.totalScale);
-        ((SettingsActivity) getActivity()).startPreferencePanel(
-                ProcessStatsDetail.class.getName(), args, R.string.details_title, null, null, 0);
+        launchMemoryDetail((SettingsActivity) getActivity(), memInfo, pgp.getEntry());
 
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
@@ -153,6 +143,7 @@ public class ProcessStatsUi extends ProcessStatsBase {
         return sb.toString();
     }
 
+    @Override
     public void refreshUi() {
         mAppListGroup.removeAll();
         mAppListGroup.setOrderingAsAdded(false);

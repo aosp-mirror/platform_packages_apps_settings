@@ -18,14 +18,16 @@ package com.android.settings.applications;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.android.internal.app.ProcessStats;
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.applications.ProcStatsData.MemInfo;
 
 public abstract class ProcessStatsBase extends SettingsPreferenceFragment
         implements OnItemSelectedListener {
@@ -124,4 +126,17 @@ public abstract class ProcessStatsBase extends SettingsPreferenceFragment
     }
 
     public abstract void refreshUi();
+
+    public static void launchMemoryDetail(SettingsActivity activity, MemInfo memInfo,
+            ProcStatsPackageEntry entry) {
+        Bundle args = new Bundle();
+        args.putParcelable(ProcessStatsDetail.EXTRA_PACKAGE_ENTRY, entry);
+        args.putDouble(ProcessStatsDetail.EXTRA_WEIGHT_TO_RAM, memInfo.weightToRam);
+        args.putLong(ProcessStatsDetail.EXTRA_TOTAL_TIME, memInfo.memTotalTime);
+        args.putDouble(ProcessStatsDetail.EXTRA_MAX_MEMORY_USAGE,
+                memInfo.usedWeight * memInfo.weightToRam);
+        args.putDouble(ProcessStatsDetail.EXTRA_TOTAL_SCALE, memInfo.totalScale);
+        activity.startPreferencePanel(ProcessStatsDetail.class.getName(), args,
+                R.string.memory_usage, null, null, 0);
+    }
 }
