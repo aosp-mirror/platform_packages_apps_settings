@@ -19,6 +19,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
 import android.net.wifi.WifiConfiguration;
+import android.os.Looper;
 import android.os.UserHandle;
 import android.preference.Preference;
 import android.view.View;
@@ -38,9 +39,12 @@ public class AccessPointPreference extends Preference {
 
     private TextView mTitleView;
     private TextView mSummaryView;
-    private boolean showSummary = true;
+    private boolean mShowSummary = true;
     private boolean mForSavedNetworks = false;
     private AccessPoint mAccessPoint;
+    private Drawable mBadge;
+    private int mBadgePadding;
+    private int mLevel;
 
     public AccessPointPreference(AccessPoint accessPoint, Context context,
                                  boolean forSavedNetworks) {
@@ -48,6 +52,7 @@ public class AccessPointPreference extends Preference {
         mAccessPoint = accessPoint;
         mForSavedNetworks = forSavedNetworks;
         mAccessPoint.setTag(this);
+
         refresh();
     }
 
@@ -58,24 +63,29 @@ public class AccessPointPreference extends Preference {
     @Override
     protected void onBindView(View view) {
         super.onBindView(view);
-        updateIcon(mAccessPoint.getLevel(), getContext());
+        Drawable drawable = getIcon();
+        if (drawable != null) {
+            drawable.setLevel(mLevel);
+        }
 
         mTitleView = (TextView) view.findViewById(com.android.internal.R.id.title);
+        if (mTitleView != null) {
+            // Attach to the end of the title view
+            mTitleView.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, mBadge, null);
+            mTitleView.setCompoundDrawablePadding(mBadgePadding);
+        }
 
         mSummaryView = (TextView) view.findViewById(com.android.internal.R.id.summary);
-        mSummaryView.setVisibility(showSummary ? View.VISIBLE : View.GONE);
+        mSummaryView.setVisibility(mShowSummary ? View.VISIBLE : View.GONE);
 
         updateBadge(getContext());
-        notifyChanged();
     }
 
     protected void updateIcon(int level, Context context) {
         if (level == -1) {
             setIcon(null);
         } else {
-            Drawable drawable = getIcon();
-
-            if (drawable == null) {
+            if (getIcon() == null) {
                 // To avoid a drawing race condition, we first set the state (SECURE/NONE) and then
                 // set the icon (drawable) to that state's drawable.
                 StateListDrawable sld = (StateListDrawable) context.getTheme()
@@ -86,7 +96,7 @@ public class AccessPointPreference extends Preference {
                     sld.setState((mAccessPoint.getSecurity() != AccessPoint.SECURITY_NONE)
                             ? STATE_SECURED
                             : STATE_NONE);
-                    drawable = sld.getCurrent();
+                    Drawable drawable = sld.getCurrent();
                     if (!mForSavedNetworks) {
                         setIcon(drawable);
                     } else {
@@ -94,57 +104,39 @@ public class AccessPointPreference extends Preference {
                     }
                 }
             }
-
-            if (drawable != null) {
-                drawable.setLevel(level);
-            }
         }
     }
 
     protected void updateBadge(Context context) {
-        if (mTitleView != null) {
-            WifiConfiguration config = mAccessPoint.getConfig();
-            if (config == null) {
-                return;
-            }
+        WifiConfiguration config = mAccessPoint.getConfig();
+        if (config != null) {
             // Fetch badge (may be null)
             UserHandle creatorUser = new UserHandle(UserHandle.getUserId(config.creatorUid));
-            Drawable badge =
-                    context.getPackageManager().getUserBadgeForDensity(creatorUser, 0 /* dpi */);
+            mBadge = context.getPackageManager().getUserBadgeForDensity(creatorUser, 0 /* dpi */);
 
             // Distance from the end of the title at which this AP's user badge should sit.
-            final int badgePadding = context.getResources()
+            mBadgePadding = context.getResources()
                     .getDimensionPixelSize(R.dimen.wifi_preference_badge_padding);
-
-            // Attach to the end of the title view
-            mTitleView.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, badge, null);
-            mTitleView.setCompoundDrawablePadding(badgePadding);
         }
-    }
-
-    /**
-     * Shows or Hides the Summary of an AccessPoint.
-     *
-     * @param showSummary true will show the summary, false will hide the summary
-     */
-    public void setShowSummary(boolean showSummary) {
-        this.showSummary = showSummary;
-        if (mSummaryView != null) {
-            mSummaryView.setVisibility(showSummary ? View.VISIBLE : View.GONE);
-        } // otherwise, will be handled in onBindView.
     }
 
     /**
      * Updates the title and summary; may indirectly call notifyChanged().
      */
     public void refresh() {
-        if (mForSavedNetworks)
+        if (mForSavedNetworks) {
             setTitle(mAccessPoint.getConfigName());
-        else
+        } else {
             setTitle(mAccessPoint.getSsid());
+        }
 
         final Context context = getContext();
-        updateIcon(mAccessPoint.getLevel(), context);
+        int level = mAccessPoint.getLevel();
+        if (level != mLevel) {
+            updateIcon(mLevel, context);
+            mLevel = level;
+            notifyChanged();
+        }
         updateBadge(context);
 
         // Force new summary
@@ -153,16 +145,40 @@ public class AccessPointPreference extends Preference {
         String summary = mForSavedNetworks ? mAccessPoint.getSavedNetworkSummary()
                 : mAccessPoint.getSettingsSummary();
 
-        if (summary.length() > 0) {
+        boolean showSummary = summary.length() > 0;
+        if (showSummary) {
             setSummary(summary);
-            setShowSummary(true);
+        }
+        if (showSummary != mShowSummary) {
+            mShowSummary = showSummary;
+            notifyChanged();
+        }
+    }
+
+    @Override
+    protected void notifyChanged() {
+        if (Looper.getMainLooper() != Looper.myLooper()) {
+            // Let our BG thread callbacks call setTitle/setSummary.
+            postNotifyChanged();
         } else {
-            setShowSummary(false);
+            super.notifyChanged();
         }
     }
 
     public void onLevelChanged() {
-        notifyChanged();
+        postNotifyChanged();
     }
 
+    private void postNotifyChanged() {
+        if (mTitleView != null) {
+            mTitleView.post(mNotifyChanged);
+        } // Otherwise we haven't been bound yet, and don't need to update.
+    }
+
+    private final Runnable mNotifyChanged = new Runnable() {
+        @Override
+        public void run() {
+            notifyChanged();
+        }
+    };
 }
