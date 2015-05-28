@@ -41,6 +41,8 @@ import android.net.wifi.WifiManager;
 import android.net.wifi.WpsInfo;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
+import android.os.HandlerThread;
+import android.os.Process;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -150,6 +152,8 @@ public class WifiSettings extends RestrictedSettingsFragment
     private WifiTracker mWifiTracker;
     private String mOpenSsid;
 
+    private HandlerThread mBgThread;
+
     /* End of "used in Wifi Setup context" */
 
     public WifiSettings() {
@@ -166,10 +170,24 @@ public class WifiSettings extends RestrictedSettingsFragment
     }
 
     @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+        mBgThread = new HandlerThread(TAG, Process.THREAD_PRIORITY_BACKGROUND);
+        mBgThread.start();
+    }
+
+    @Override
+    public void onDestroy() {
+        mBgThread.quit();
+        super.onDestroy();
+    }
+
+    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mWifiTracker = new WifiTracker(getActivity(), this, true, true, false);
+        mWifiTracker =
+                new WifiTracker(getActivity(), this, mBgThread.getLooper(), true, true, false);
         mWifiManager = mWifiTracker.getManager();
 
         mConnectListener = new WifiManager.ActionListener() {
