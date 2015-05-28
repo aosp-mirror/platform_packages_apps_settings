@@ -542,7 +542,7 @@ public class FingerprintSettings extends SubSettings {
         @Override
         public void onClick(View widget) {
             Context ctx = widget.getContext();
-            Intent intent = HelpUtils.getHelpIntent(ctx, getURL());
+            Intent intent = HelpUtils.getHelpIntent(ctx, getURL(), ctx.getClass().getName());
             try {
                 ctx.startActivity(intent);
             } catch (ActivityNotFoundException e) {
