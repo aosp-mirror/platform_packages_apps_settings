@@ -112,7 +112,8 @@ public class ProcessStatsSummary extends ProcessStatsBase implements OnPreferenc
             args.putBoolean(ARG_TRANSFER_STATS, true);
             args.putInt(ARG_DURATION_INDEX, mDurationIndex);
             mStatsManager.xferStats();
-            startFragment(this, ProcessStatsUi.class.getName(), R.string.app_memory_use, 0, args);
+            startFragment(this, ProcessStatsUi.class.getName(), R.string.app_list_memory_use, 0,
+                    args);
             return true;
         }
         return false;

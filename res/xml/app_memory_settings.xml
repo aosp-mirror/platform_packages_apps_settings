@@ -15,7 +15,7 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-                  android:title="@string/memory_details_title">
+                  android:title="@string/memory_usage">
 
     <PreferenceCategory
         android:title="@string/average_memory_use" />
@@ -36,7 +36,8 @@
         android:layout="@layout/horizontal_preference"
         android:title="@string/memory_maximum_usage" />
 
-    <com.android.settings.applications.SpacePreference
-        android:layout_height="15dp" />
+    <PreferenceCategory
+        android:key="processes"
+        android:title="@string/memory_details" />
 
 </PreferenceScreen>
