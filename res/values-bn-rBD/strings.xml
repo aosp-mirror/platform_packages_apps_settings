@@ -750,7 +750,7 @@
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Wi-Fi কলিং চালু থাকার সময়ে, আপনার পছন্দ এবং কোন সিগন্যাল বেশী শক্তিশালী তার উপর নির্ভর করে আপনার ফোন Wi-Fi নেটওয়ার্ক বা আপনার পরিষেবা প্রদানকারীর নেটওয়ার্কের মাধ্যমে আপনার কলের রুট তৈরি করে। এই বৈশিষ্ট্যটি চালু করার আগে, আপনার পরিষেবা প্রদানকারীর কাছে ফি-গুলি এবং অন্যান্য বিশদ বিবরণ সম্বন্ধে পরীক্ষা করুন।"</string>
     <string name="home_settings" msgid="212375129455718176">"হোম"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"প্রদর্শন"</string>
-    <string name="sound_settings" msgid="5534671337768745343">"শব্দ"</string>
+    <string name="sound_settings" msgid="5534671337768745343">"আওয়াজ"</string>
     <string name="ringtone_summary" msgid="2630023412632683493"></string>
     <string name="all_volume_title" msgid="4296957391257836961">"ভলিউম"</string>
     <string name="musicfx_title" msgid="3415566786340790345">"সঙ্গীত প্রভাব"</string>
@@ -2714,12 +2714,9 @@
     <string name="usage_access_description" msgid="1352111094596416795">"ব্যবহার অ্যাক্সেস একটি অ্যাপ্লিকেশানকে অন্য কোন অ্যাপ্লিকেশানগুলি আপনি ব্যবহার করছেন এবং কত ঘন ঘন ব্যবহার করছেন, এর পাশাপাশি আপনার পরিষেবা প্রদানকারী, ভাষা সেটিংস, এবং অন্যান্য বিষয়ে বিশদ বিবরণ ট্র্যাক করার অনুমতি দেয়৷"</string>
     <string name="memory_settings_title" msgid="7490541005204254222">"মেমরি"</string>
     <string name="memory_details_title" msgid="8542565326053693320">"মেমরির বিশদ বিবরণ"</string>
-    <!-- no translation found for always_running (6042448320077429656) -->
-    <skip />
-    <!-- no translation found for sometimes_running (6611250683037700864) -->
-    <skip />
-    <!-- no translation found for rarely_running (348413460168817458) -->
-    <skip />
+    <string name="always_running" msgid="6042448320077429656">"সর্বদা চলে (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
+    <string name="sometimes_running" msgid="6611250683037700864">"মাঝে মাঝে চলে (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
+    <string name="rarely_running" msgid="348413460168817458">"খুব কম চলে (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
     <string name="memory_max_use" msgid="6874803757715963097">"সর্বোচ্চ"</string>
     <string name="memory_avg_use" msgid="7382015389130622870">"গড়"</string>
     <string name="memory_max_desc" msgid="2861832149718335864">"সর্বোচ্চ <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
@@ -2752,27 +2749,25 @@
     <string name="assist_access_context_title" msgid="2047105711005856521">"বর্তমান প্রসঙ্গ ব্যবহার করুন"</string>
     <string name="assist_access_context_summary" msgid="8365837347256022203">"আপনি যখন সহায়তা অ্যাপ্লিকেশান খোলেন, তখন আপনি আপনার স্ক্রীনে কি করছেন এটি তা দেখতে দেয়"</string>
     <string name="assist_footer" msgid="2283187001990543739">"সহায়তা অ্যাপ্লিকেশান আপনাকে শনাক্ত করতে এবং আপনাকে জিজ্ঞাসা না করেই দরকারী তথ্যের উপর কাজ করতে সহায়তা করে৷ কিছু অ্যাপ্লিকেশান আপনাকে ইন্টিগ্রেটেড সহায়তা দিতে উভয় লঞ্চার এবং ভয়েস ইনপুট পরিষেবাগুলিকে সমর্থন করে৷"</string>
-    <!-- no translation found for average_memory_use (829566450150198512) -->
-    <skip />
-    <!-- no translation found for maximum_memory_use (7493720799710132496) -->
-    <skip />
-    <!-- no translation found for sort_avg_use (3998036180505143129) -->
-    <skip />
-    <!-- no translation found for sort_max_use (4629247978290075124) -->
-    <skip />
-    <!-- no translation found for memory_performance (5661005192284103281) -->
-    <skip />
-    <!-- no translation found for total_memory (2017287600738630165) -->
-    <skip />
-    <!-- no translation found for average_used (5338339266517245782) -->
-    <skip />
-    <!-- no translation found for free_memory (4003936141603549746) -->
-    <skip />
-    <!-- no translation found for memory_usage_apps (5650192998273294098) -->
-    <skip />
-    <!-- no translation found for memory_usage_apps_summary (6089210945574265774) -->
-    <!-- no translation found for running_frequency (6622624669948277693) -->
-    <skip />
-    <!-- no translation found for memory_maximum_usage (6513785462055278341) -->
-    <skip />
+    <string name="average_memory_use" msgid="829566450150198512">"গড় মেমরির ব্যবহার"</string>
+    <string name="maximum_memory_use" msgid="7493720799710132496">"সর্বাধিক মেমরির ব্যবহার"</string>
+    <string name="memory_usage" msgid="1781358557214390033">"মেমরির ব্যবহার"</string>
+    <string name="app_list_memory_use" msgid="6987417883876419338">"অ্যাপ্লিকেশানের ব্যবহার"</string>
+    <string name="memory_details" msgid="5943436005716991782">"বিশদ বিবরণ"</string>
+    <string name="memory_use_summary" msgid="5608257211903075754">"শেষ ৩ ঘন্টায় গড়ে <xliff:g id="SIZE">%1$s</xliff:g> মেমরি ব্যবহৃত হয়েছে"</string>
+    <string name="no_memory_use_summary" msgid="2016900536806235588">"শেষ ৩ ঘন্টায় কোনো মেমরি ব্যবহৃত হয়নি"</string>
+    <string name="sort_avg_use" msgid="3998036180505143129">"গড় ব্যবহার অনুসারে বাছাই"</string>
+    <string name="sort_max_use" msgid="4629247978290075124">"সর্বোচ্চ ব্যবহার অনুসারে বাছাই"</string>
+    <string name="memory_performance" msgid="5661005192284103281">"কার্য-সম্পাদনা"</string>
+    <string name="total_memory" msgid="2017287600738630165">"মোট মেমরি"</string>
+    <string name="average_used" msgid="5338339266517245782">"ব্যবহৃত গড় (%)"</string>
+    <string name="free_memory" msgid="4003936141603549746">"বিনামূল্যে"</string>
+    <string name="memory_usage_apps" msgid="5650192998273294098">"অ্যাপ্লিকেশানগুলির দ্বারা ব্যবহৃত মেমরি"</string>
+    <plurals name="memory_usage_apps_summary" formatted="false" msgid="6089210945574265774">
+      <item quantity="one"><xliff:g id="COUNT">%1$d</xliff:g>টি অ্যাপ্লিকেশান শেষ <xliff:g id="DURATION_1">%2$s</xliff:g> মেমরি ব্যবহার করেছে</item>
+      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g>টি অ্যাপ্লিকেশান শেষ <xliff:g id="DURATION_1">%2$s</xliff:g> মেমরি ব্যবহার করেছে</item>
+    </plurals>
+    <string name="running_frequency" msgid="6622624669948277693">"পুনরাবৃত্তির হার"</string>
+    <string name="memory_maximum_usage" msgid="6513785462055278341">"সর্বাধিক ব্যবহার"</string>
+    <string name="no_data_usage" msgid="9131454024293628063">"কোনো ডেটা ব্যবহৃত হয়নি"</string>
 </resources>

@@ -1065,7 +1065,7 @@
     <string name="reset_network_final_desc" msgid="6388371121099245116">"Барлық желі параметрлері қалпына келтірілсін бе? Бұл әрекетті кері қайтару мүмкін емес!"</string>
     <string name="reset_network_final_button_text" msgid="1797434793741744635">"Параметрлерді қалпына келтіру"</string>
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"Қалпына келтіру қажет пе?"</string>
-    <string name="network_reset_not_available" msgid="7188610385577164676">"Желіні қалпына келтіру осы пайдаланушы үшін қол жетімді емес"</string>
+    <string name="network_reset_not_available" msgid="7188610385577164676">"Бұл пайдаланушы желіні қалпына келтіре алмайды"</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"Желі параметрлері қалпына келтірілген"</string>
     <string name="device_reset_title" msgid="2384019005638768076">"Құрылғыны ысыру"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"Зауыттық деректерді қалпына келтіру"</string>
@@ -2692,12 +2692,12 @@
     <string name="tap_to_wake" msgid="7211944147196888807">"Ояту үшін түрту"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Құрылғыны ояту үшін экранның кез келген жерін екі рет түртіңіз"</string>
     <string name="domain_urls_title" msgid="8762012672312435252">"Қолданба сілтемелері"</string>
-    <string name="domain_urls_summary_none" msgid="2639588015479657864">"Қолдау көрсетілетін сілтемелер ашпау"</string>
+    <string name="domain_urls_summary_none" msgid="2639588015479657864">"Қолдау көрсетілетін сілтемелерді ашпау"</string>
     <string name="domain_urls_summary_one" msgid="3704934031930978405">"<xliff:g id="DOMAIN">%s</xliff:g> ашу"</string>
     <string name="domain_urls_summary_some" msgid="812936714383016364">"<xliff:g id="DOMAIN">%s</xliff:g> және оған қатысты URL мекенжайларын ашу"</string>
     <plurals name="domain_urls_apps_summary" formatted="false" msgid="4322996467951692661">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> қолданба оның қолдау көрсететін сілтемелерін аша алады</item>
-      <item quantity="one">Бір қолданба оның қолдау көрсететін сілтемелерін аша алады</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> қолданба өздерінің қолдау көрсетілетін сілтемелерін аша алады</item>
+      <item quantity="one">Бір қолданба өзінің қолдау көрсетілетін сілтемелерін аша алады</item>
     </plurals>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Анықталмаған"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"Әдепкі қолданбалар"</string>
@@ -2714,12 +2714,9 @@
     <string name="usage_access_description" msgid="1352111094596416795">"Пайдалану мүмкіндігі қолданбаға сіз пайдаланатын басқа қолданбаларды және қаншалықты жиі пайдаланатыңыз туралы ақпаратты, сондай-ақ операторды, тіл параметрлерін және басқа мәліметтерді бақылауға мүмкіндік береді."</string>
     <string name="memory_settings_title" msgid="7490541005204254222">"Жад"</string>
     <string name="memory_details_title" msgid="8542565326053693320">"Жад туралы мәліметтер"</string>
-    <!-- no translation found for always_running (6042448320077429656) -->
-    <skip />
-    <!-- no translation found for sometimes_running (6611250683037700864) -->
-    <skip />
-    <!-- no translation found for rarely_running (348413460168817458) -->
-    <skip />
+    <string name="always_running" msgid="6042448320077429656">"Әрқашан іске қосылып тұрады (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
+    <string name="sometimes_running" msgid="6611250683037700864">"Кейде іске қосылады (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
+    <string name="rarely_running" msgid="348413460168817458">"Сирек іске қосылады (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
     <string name="memory_max_use" msgid="6874803757715963097">"Ең көп"</string>
     <string name="memory_avg_use" msgid="7382015389130622870">"Орташа"</string>
     <string name="memory_max_desc" msgid="2861832149718335864">"Ең көп <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
@@ -2752,27 +2749,30 @@
     <string name="assist_access_context_title" msgid="2047105711005856521">"Ағымдағы мәнмәтінді пайдалану"</string>
     <string name="assist_access_context_summary" msgid="8365837347256022203">"Ашқанда, көмекші қолданбаға экранда не істегеніңізді көруге рұқсат ету"</string>
     <string name="assist_footer" msgid="2283187001990543739">"Көмекші қолданбалар сұрау қажеттілігінсіз пайдалы ақпаратты анықтауға және оған қатысты әрекет жасауға көмектеседі. Кейбір қолданбалар толық көмекті беру үшін іске қосқыш және дауыспен енгізу қызметтерінің екеуін де қолдайды."</string>
-    <!-- no translation found for average_memory_use (829566450150198512) -->
+    <string name="average_memory_use" msgid="829566450150198512">"Жадты орташа пайдалануы"</string>
+    <string name="maximum_memory_use" msgid="7493720799710132496">"Жадты ең көп пайдалануы"</string>
+    <!-- no translation found for memory_usage (1781358557214390033) -->
     <skip />
-    <!-- no translation found for maximum_memory_use (7493720799710132496) -->
+    <!-- no translation found for app_list_memory_use (6987417883876419338) -->
     <skip />
-    <!-- no translation found for sort_avg_use (3998036180505143129) -->
+    <!-- no translation found for memory_details (5943436005716991782) -->
     <skip />
-    <!-- no translation found for sort_max_use (4629247978290075124) -->
+    <!-- no translation found for memory_use_summary (5608257211903075754) -->
     <skip />
-    <!-- no translation found for memory_performance (5661005192284103281) -->
+    <!-- no translation found for no_memory_use_summary (2016900536806235588) -->
     <skip />
-    <!-- no translation found for total_memory (2017287600738630165) -->
-    <skip />
-    <!-- no translation found for average_used (5338339266517245782) -->
-    <skip />
-    <!-- no translation found for free_memory (4003936141603549746) -->
-    <skip />
-    <!-- no translation found for memory_usage_apps (5650192998273294098) -->
-    <skip />
-    <!-- no translation found for memory_usage_apps_summary (6089210945574265774) -->
-    <!-- no translation found for running_frequency (6622624669948277693) -->
-    <skip />
-    <!-- no translation found for memory_maximum_usage (6513785462055278341) -->
-    <skip />
+    <string name="sort_avg_use" msgid="3998036180505143129">"Орташа пайдалануы бойынша сұрыптау"</string>
+    <string name="sort_max_use" msgid="4629247978290075124">"Ең көп пайдалануы бойынша сұрыптау"</string>
+    <string name="memory_performance" msgid="5661005192284103281">"Өнімділік"</string>
+    <string name="total_memory" msgid="2017287600738630165">"Жалпы жад көлемі"</string>
+    <string name="average_used" msgid="5338339266517245782">"Орташа пайдалануы (%)"</string>
+    <string name="free_memory" msgid="4003936141603549746">"Бос"</string>
+    <string name="memory_usage_apps" msgid="5650192998273294098">"Қолданбалар пайдаланатын жад"</string>
+    <plurals name="memory_usage_apps_summary" formatted="false" msgid="6089210945574265774">
+      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> қолданба жадты соңғы <xliff:g id="DURATION_1">%2$s</xliff:g> бойы пайдаланды</item>
+      <item quantity="one">1 қолданба жадты соңғы <xliff:g id="DURATION_0">%2$s</xliff:g> бойы пайдаланды</item>
+    </plurals>
+    <string name="running_frequency" msgid="6622624669948277693">"Жиілік"</string>
+    <string name="memory_maximum_usage" msgid="6513785462055278341">"Ең көп пайдалануы"</string>
+    <string name="no_data_usage" msgid="9131454024293628063">"Деректер пайдаланылмаған"</string>
 </resources>

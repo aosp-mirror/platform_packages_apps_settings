@@ -2451,7 +2451,7 @@
     <string name="keywords_voice_input" msgid="3519547605812413860">"recoñecedor entrada voz falar idioma mans libres man libre recoñecemento palabra ofensiva audio historial auriculares bluetooth"</string>
     <string name="keywords_text_to_speech_output" msgid="392447904221657930">"puntuar idioma predeterminado falar síntese de voz tts accesibilidade lector cego"</string>
     <string name="keywords_date_and_time" msgid="2631808108134830066">"reloxo 24 horas"</string>
-    <string name="keywords_network_reset" msgid="6346978754090557056">"restablecer restauración de fábrica"</string>
+    <string name="keywords_network_reset" msgid="6346978754090557056">"restablecer restaurar de fábrica"</string>
     <string name="keywords_factory_data_reset" msgid="4355133848707691977">"borrar eliminar restaurar quitar"</string>
     <string name="keywords_printing" msgid="1701778563617114846">"impresora"</string>
     <string name="keywords_sounds_and_notifications" msgid="5965996187974887000">"alarma sonora do altofalante"</string>
@@ -2714,12 +2714,9 @@
     <string name="usage_access_description" msgid="1352111094596416795">"O acceso ao uso permite que unha aplicación realice un seguimento das demais aplicacións que usas e de con que frecuencia as utilizas, así como do teu operador, da configuración do idioma e doutros detalles."</string>
     <string name="memory_settings_title" msgid="7490541005204254222">"Memoria"</string>
     <string name="memory_details_title" msgid="8542565326053693320">"Detalles da memoria"</string>
-    <!-- no translation found for always_running (6042448320077429656) -->
-    <skip />
-    <!-- no translation found for sometimes_running (6611250683037700864) -->
-    <skip />
-    <!-- no translation found for rarely_running (348413460168817458) -->
-    <skip />
+    <string name="always_running" msgid="6042448320077429656">"En execución sempre (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
+    <string name="sometimes_running" msgid="6611250683037700864">"En execución algunha vez (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
+    <string name="rarely_running" msgid="348413460168817458">"En execución poucas veces (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
     <string name="memory_max_use" msgid="6874803757715963097">"Máximo"</string>
     <string name="memory_avg_use" msgid="7382015389130622870">"Media"</string>
     <string name="memory_max_desc" msgid="2861832149718335864">"Máximo <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
@@ -2752,27 +2749,25 @@
     <string name="assist_access_context_title" msgid="2047105711005856521">"Usar contexto actual"</string>
     <string name="assist_access_context_summary" msgid="8365837347256022203">"Ao abrir a aplicación do asistente, permíteslle ver as accións realizadas na túa pantalla"</string>
     <string name="assist_footer" msgid="2283187001990543739">"As aplicacións do asistente axúdanche a identificar información útil e a actuar en consecuencia sen ter que preguntar. Algunhas aplicacións son compatibles tanto cos servizos de entrada de voz como co launcher para proporcionarche unha asistencia integrada."</string>
-    <!-- no translation found for average_memory_use (829566450150198512) -->
-    <skip />
-    <!-- no translation found for maximum_memory_use (7493720799710132496) -->
-    <skip />
-    <!-- no translation found for sort_avg_use (3998036180505143129) -->
-    <skip />
-    <!-- no translation found for sort_max_use (4629247978290075124) -->
-    <skip />
-    <!-- no translation found for memory_performance (5661005192284103281) -->
-    <skip />
-    <!-- no translation found for total_memory (2017287600738630165) -->
-    <skip />
-    <!-- no translation found for average_used (5338339266517245782) -->
-    <skip />
-    <!-- no translation found for free_memory (4003936141603549746) -->
-    <skip />
-    <!-- no translation found for memory_usage_apps (5650192998273294098) -->
-    <skip />
-    <!-- no translation found for memory_usage_apps_summary (6089210945574265774) -->
-    <!-- no translation found for running_frequency (6622624669948277693) -->
-    <skip />
-    <!-- no translation found for memory_maximum_usage (6513785462055278341) -->
-    <skip />
+    <string name="average_memory_use" msgid="829566450150198512">"Uso medio da memoria"</string>
+    <string name="maximum_memory_use" msgid="7493720799710132496">"Uso máximo da memoria"</string>
+    <string name="memory_usage" msgid="1781358557214390033">"Uso da memoria"</string>
+    <string name="app_list_memory_use" msgid="6987417883876419338">"Uso da aplicación"</string>
+    <string name="memory_details" msgid="5943436005716991782">"Detalles"</string>
+    <string name="memory_use_summary" msgid="5608257211903075754">"Memoria media de <xliff:g id="SIZE">%1$s</xliff:g> usada nas últimas tres horas"</string>
+    <string name="no_memory_use_summary" msgid="2016900536806235588">"Non hai ningunha memoria usada nas últimas tres horas"</string>
+    <string name="sort_avg_use" msgid="3998036180505143129">"Ordenar por uso medio"</string>
+    <string name="sort_max_use" msgid="4629247978290075124">"Ordenar por uso máximo"</string>
+    <string name="memory_performance" msgid="5661005192284103281">"Rendemento"</string>
+    <string name="total_memory" msgid="2017287600738630165">"Memoria total"</string>
+    <string name="average_used" msgid="5338339266517245782">"Media utilizada (%)"</string>
+    <string name="free_memory" msgid="4003936141603549746">"Libre"</string>
+    <string name="memory_usage_apps" msgid="5650192998273294098">"Memoria usada polas aplicacións"</string>
+    <plurals name="memory_usage_apps_summary" formatted="false" msgid="6089210945574265774">
+      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> aplicacións usaron a memoria nas últimas <xliff:g id="DURATION_1">%2$s</xliff:g></item>
+      <item quantity="one">Unha aplicación usou a memoria nas últimas <xliff:g id="DURATION_0">%2$s</xliff:g></item>
+    </plurals>
+    <string name="running_frequency" msgid="6622624669948277693">"Frecuencia"</string>
+    <string name="memory_maximum_usage" msgid="6513785462055278341">"Uso máximo"</string>
+    <string name="no_data_usage" msgid="9131454024293628063">"Non hai datos usados"</string>
 </resources>

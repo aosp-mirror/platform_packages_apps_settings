@@ -107,7 +107,7 @@
     <string name="battery_info_power_ac_usb" msgid="6777734146838328688">"CA+USB"</string>
     <string name="battery_info_power_unknown" msgid="7344115502868899881">"Sconosciuto"</string>
     <string name="battery_info_health_unknown" msgid="5664295556921944255">"Sconosciuto"</string>
-    <string name="battery_info_health_good" msgid="8070356565806711806">"Buon livello"</string>
+    <string name="battery_info_health_good" msgid="8070356565806711806">"Buone"</string>
     <string name="battery_info_health_overheat" msgid="8442959549291368806">"Surriscaldamento"</string>
     <string name="battery_info_health_dead" msgid="1725917445762829059">"Scarica"</string>
     <string name="battery_info_health_over_voltage" msgid="2420269351664490121">"Sovratensione"</string>
@@ -344,8 +344,8 @@
     <string name="fingerprint_add_title" msgid="1926752654454033904">"Aggiungi impronta digitale"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5078060939636911795">"blocco schermo"</string>
     <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="624961700033979880">
-      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> fingerprint configurati</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> fingerprint configurato</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> impronte digitali configurate</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> impronta digitale configurata</item>
     </plurals>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Config. impr. digitale"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"Per sbloccare lo schermo o confermare acquisti con l\'impronta digitale, devi:"</string>
@@ -912,7 +912,7 @@
     <string name="status_unavailable" msgid="7862009036663793314">"Non disponibile"</string>
     <string name="status_up_time" msgid="7294859476816760399">"Tempo di attività"</string>
     <string name="status_awake_time" msgid="2393949909051183652">"Tempo di attività"</string>
-    <string name="internal_memory" msgid="9129595691484260784">"Archivio interno"</string>
+    <string name="internal_memory" msgid="9129595691484260784">"Memoria interna"</string>
     <string name="sd_memory" product="nosdcard" msgid="2510246194083052841">"Archivio USB"</string>
     <string name="sd_memory" product="default" msgid="151871913888051515">"Scheda SD"</string>
     <string name="memory_available" msgid="5052397223077021181">"Disponibile"</string>
@@ -1069,8 +1069,8 @@
     <string name="reset_network_complete_toast" msgid="787829973559541880">"Le impostazioni di rete sono state reimpostate"</string>
     <string name="device_reset_title" msgid="2384019005638768076">"Ripristina dispositivo"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"Ripristino dati di fabbrica"</string>
-    <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"Questa operazione cancellerà tutti i dati memorizzati nell\'"<b>"archivio interno"</b>" del tablet, compresi:\n\n"<li>"Il tuo account Google"</li>\n<li>"Dati e impostazioni del sistema e delle applicazioni"</li>\n<li>"Applicazioni scaricate"</li></string>
-    <string name="master_clear_desc" product="default" msgid="4800386183314202571">"Questa operazione cancellerà tutti i dati memorizzati nell\'"<b>"archivio interno"</b>" del telefono, compresi:\n\n"<li>"Il tuo account Google"</li>\n<li>"Dati e impostazioni del sistema e delle applicazioni"</li>\n<li>"Applicazioni scaricate"</li></string>
+    <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"Questa operazione cancellerà tutti i dati dalla "<b>"memoria interna"</b>" del tablet, compresi:\n\n"<li>"Il tuo account Google"</li>\n<li>"Dati e impostazioni del sistema e delle app"</li>\n<li>"App scaricate"</li></string>
+    <string name="master_clear_desc" product="default" msgid="4800386183314202571">"Questa operazione cancellerà tutti i dati dalla "<b>"memoria interna"</b>" del telefono, compresi:\n\n"<li>"Il tuo account Google"</li>\n<li>"Dati e impostazioni del sistema e delle app"</li>\n<li>"App scaricate"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Al momento sei collegato ai seguenti account:\n"</string>
     <string name="master_clear_other_users_present" product="default" msgid="5161423070702470742">\n\n"Sono presenti altri utenti su questo dispositivo.\n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"Musica"</li>\n<li>"Foto"</li>\n<li>"Altri dati utente"</li></string>
@@ -1256,7 +1256,7 @@
     <string name="install_all_warning" product="default" msgid="8113734576826384682">"Il telefono e i dati personali sono più vulnerabili agli attacchi da parte di applicazioni di origini sconosciute. L\'utente accetta di essere il solo responsabile degli eventuali danni al telefono o della perdita di dati che potrebbero derivare dall\'utilizzo di queste applicazioni."</string>
     <string name="advanced_settings" msgid="1777249286757067969">"Impostazioni avanzate"</string>
     <string name="advanced_settings_summary" msgid="4016682978071086747">"Attiva altre impostazioni"</string>
-    <string name="application_info_label" msgid="5736524913065714880">"Informazioni applicazione"</string>
+    <string name="application_info_label" msgid="5736524913065714880">"Informazioni app"</string>
     <string name="storage_label" msgid="8700867073480107253">"Archiviazione"</string>
     <string name="auto_launch_label" msgid="2669236885531442195">"Apri per impostazione predefinita"</string>
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"Impostazioni predefinite"</string>
@@ -1268,8 +1268,8 @@
     <string name="controls_label" msgid="7611113077086853799">"Controlli"</string>
     <string name="force_stop" msgid="7435006169872876756">"Termina"</string>
     <string name="total_size_label" msgid="1048676419552557254">"Totale"</string>
-    <string name="application_size_label" msgid="8494609207373874267">"Applicazione"</string>
-    <string name="external_code_size_label" msgid="3459343140355961335">"Applicazione in archivio USB"</string>
+    <string name="application_size_label" msgid="8494609207373874267">"App"</string>
+    <string name="external_code_size_label" msgid="3459343140355961335">"App in archivio USB"</string>
     <string name="data_size_label" msgid="8679376373625710107">"Dati"</string>
     <string name="external_data_size_label" product="nosdcard" msgid="7533821466482000453">"Dati in archivio USB"</string>
     <string name="external_data_size_label" product="default" msgid="626414192825329708">"Scheda SD"</string>
@@ -1295,7 +1295,7 @@
     <string name="default_emergency_app" msgid="1951760659640369980">"App di emergenza"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"Reimposta preferenze app"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"Reimpostare preferenze app?"</string>
-    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Verranno reimpostate tutte le preferenze relative a:\n\n "<li>"App disattivate"</li>\n" "<li>"notifiche di app disattivate"</li>\n" "<li>"Applicazioni predefinite per azioni"</li>\n" "<li>"Limitazioni di dati in background per app"</li>\n" "<li>"Eventuali limitazioni di autorizzazione"</li>\n\n" Non perderai i dati delle app."</string>
+    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Verranno reimpostate tutte le preferenze relative a:\n\n "<li>"App disattivate"</li>\n" "<li>"Notifiche di app disattivate"</li>\n" "<li>"Applicazioni predefinite per azioni"</li>\n" "<li>"Limitazioni di dati in background per app"</li>\n" "<li>"Eventuali limitazioni di autorizzazioni"</li>\n\n" Non perderai i dati delle app."</string>
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"Reimposta app"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Gestisci spazio"</string>
     <string name="filter" msgid="2018011724373033887">"Filtra"</string>
@@ -1309,12 +1309,12 @@
     <string name="disabled" msgid="9206776641295849915">"Disattivato"</string>
     <string name="not_installed" msgid="2797554494953450291">"Non installata per l\'utente"</string>
     <string name="no_applications" msgid="7336588977497084921">"Nessuna applicazione."</string>
-    <string name="internal_storage" msgid="1584700623164275282">"Archivio interno"</string>
+    <string name="internal_storage" msgid="1584700623164275282">"Memoria interna"</string>
     <string name="sd_card_storage" product="nosdcard" msgid="2673203150465132465">"Archivio USB"</string>
     <string name="sd_card_storage" product="default" msgid="7623513618171928235">"Arch. scheda SD"</string>
     <string name="recompute_size" msgid="7722567982831691718">"Ricalcolo dimensioni..."</string>
-    <string name="clear_data_dlg_title" msgid="5605258400134511197">"Eliminare i dati dell\'applicazione?"</string>
-    <string name="clear_data_dlg_text" msgid="3951297329833822490">"Tutti i dati dell\'applicazione verranno eliminati definitivamente, inclusi tutti i file, le impostazioni, gli account, i database e così via."</string>
+    <string name="clear_data_dlg_title" msgid="5605258400134511197">"Eliminare i dati dell\'app?"</string>
+    <string name="clear_data_dlg_text" msgid="3951297329833822490">"Tutti i dati dell\'app verranno eliminati definitivamente, inclusi tutti i file, le impostazioni, gli account, i database e così via."</string>
     <string name="dlg_ok" msgid="2402639055725653590">"OK"</string>
     <string name="dlg_cancel" msgid="1674753358972975911">"Annulla"</string>
     <string name="app_not_found_dlg_title" msgid="3127123411738434964"></string>
@@ -1350,15 +1350,15 @@
     <string name="invalid_location" msgid="4354595459063675191">"Percorso di installazione non valido."</string>
     <string name="system_package" msgid="1352722848400644991">"Impossibile installare aggiornamenti di sistema su supporti esterni."</string>
     <string name="force_stop_dlg_title" msgid="977530651470711366">"Forzare l\'interruzione?"</string>
-    <string name="force_stop_dlg_text" msgid="7208364204467835578">"Se forzi l\'interruzione di un\'applicazione, tale applicazione potrebbe funzionare in modo anomalo."</string>
+    <string name="force_stop_dlg_text" msgid="7208364204467835578">"Se forzi l\'interruzione di un\'app, tale app potrebbe funzionare in modo anomalo."</string>
     <string name="move_app_failed_dlg_title" msgid="1282561064082384192"></string>
     <string name="move_app_failed_dlg_text" msgid="187885379493011720">"Impossibile spostare l\'applicazione. <xliff:g id="REASON">%1$s</xliff:g>"</string>
     <string name="app_install_location_title" msgid="2068975150026852168">"Percorso di installazione"</string>
     <string name="app_install_location_summary" msgid="5155453752692959098">"Cambia il percorso preferito per l\'installazione di nuove applicazioni"</string>
     <string name="app_disable_dlg_title" msgid="3916469657537695436">"Disattivare app integrata?"</string>
-    <string name="app_disable_dlg_text" msgid="3562567756362627323">"Se disattivi un\'applicazione integrata, le altre applicazioni potrebbero funzionare in modo anomalo."</string>
+    <string name="app_disable_dlg_text" msgid="3562567756362627323">"Se disattivi un\'app integrata, altre app potrebbero funzionare in modo anomalo."</string>
     <string name="app_special_disable_dlg_title" msgid="2690148680327142674">"Eliminare i dati e disattivare l\'applicazione?"</string>
-    <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"Se disattivi un\'applicazione incorporata, altre applicazioni potrebbero funzionare in modo anomalo. Verranno inoltre eliminati i tuoi dati."</string>
+    <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"Se disattivi un\'app incorporata, altre app potrebbero funzionare in modo anomalo. Inoltre i tuoi dati verranno eliminati."</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"Disattivare le notifiche?"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"Se disattivi le notifiche per questa applicazione potresti perdere avvisi e aggiornamenti importanti."</string>
     <string name="app_ops_settings" msgid="5108481883575527511">"Op. app"</string>
@@ -1556,7 +1556,7 @@
     <string name="usage_stats_label" msgid="5890846333487083609">"Statistiche di utilizzo"</string>
     <string name="testing_usage_stats" msgid="7823048598893937339">"Statistiche di utilizzo"</string>
     <string name="display_order_text" msgid="8592776965827565271">"Ordina per:"</string>
-    <string name="app_name_label" msgid="5440362857006046193">"Applicazione"</string>
+    <string name="app_name_label" msgid="5440362857006046193">"App"</string>
     <string name="last_time_used_label" msgid="8459441968795479307">"Data ultimo utilizzo:"</string>
     <string name="usage_time_label" msgid="295954901452833058">"Tempo di utilizzo"</string>
     <string name="accessibility_settings" msgid="3975902491934816215">"Accessibilità"</string>
@@ -1668,7 +1668,7 @@
     <string name="print_search_box_hidden_utterance" msgid="7980832833405818400">"Casella di ricerca nascosta"</string>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"Batteria"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Consumo batteria"</string>
-    <string name="power_usage_not_available" msgid="3109326074656512387">"Dati uso batteria non disp."</string>
+    <string name="power_usage_not_available" msgid="3109326074656512387">"Dati uso batteria non disponibili."</string>
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> rimanenti"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> alla ricarica"</string>
@@ -1729,7 +1729,7 @@
     <string name="usage_type_computed_power" msgid="5862792259009981479">"Consumo energetico totale previsto"</string>
     <string name="usage_type_actual_power" msgid="7047814738685578335">"Consumo energetico effettivo"</string>
     <string name="battery_action_stop" msgid="649958863744041872">"Termina"</string>
-    <string name="battery_action_app_details" msgid="7861051816778419018">"Informazioni applicazione"</string>
+    <string name="battery_action_app_details" msgid="7861051816778419018">"Informazioni app"</string>
     <string name="battery_action_app_settings" msgid="4570481408106287454">"Impostazioni applicazioni"</string>
     <string name="battery_action_display" msgid="7338551244519110831">"Impostazioni schermo"</string>
     <string name="battery_action_wifi" msgid="8181553479021841207">"Impostazioni Wi‑Fi"</string>
@@ -1921,7 +1921,7 @@
     <string name="backup_configure_account_title" msgid="3790872965773196615">"Account di backup"</string>
     <string name="include_app_data_title" msgid="2829970132260278394">"Includi dati app"</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"Ripristino automatico"</string>
-    <string name="auto_restore_summary" msgid="4235615056371993807">"In caso di reinstallazione di un\'applicazione, ripristina impostazioni e dati di backup"</string>
+    <string name="auto_restore_summary" msgid="4235615056371993807">"In caso di reinstallazione di un\'app, ripristina impostazioni e dati di backup"</string>
     <string name="backup_inactive_title" msgid="5355557151569037197">"Il servizio di backup non è attivo."</string>
     <string name="local_backup_password_title" msgid="3860471654439418822">"Password di backup desktop"</string>
     <string name="local_backup_password_summary_none" msgid="6951095485537767956">"I backup desktop completi non sono attualmente protetti."</string>
@@ -2107,10 +2107,10 @@
     <string name="show_all_anrs" msgid="28462979638729082">"Mostra tutti errori ANR"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"Mostra finestra ANR per applicazioni in background"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Utilizzo dati"</string>
-    <string name="data_usage_app_summary_title" msgid="4147258989837459172">"Dati sull\'utilizzo dell\'app"</string>
-    <string name="data_usage_accounting" msgid="7170028915873577387">"I dati contabili dell\'operatore potrebbero differire da quelli del dispositivo."</string>
+    <string name="data_usage_app_summary_title" msgid="4147258989837459172">"Utilizzo dati dell\'app"</string>
+    <string name="data_usage_accounting" msgid="7170028915873577387">"I dati dell\'operatore potrebbero differire da quelli del dispositivo."</string>
     <string name="data_usage_app" msgid="4970478397515423303">"Utilizzo di app"</string>
-    <string name="data_usage_app_info_label" msgid="3409931235687866706">"INFO SU APP"</string>
+    <string name="data_usage_app_info_label" msgid="3409931235687866706">"INFORMAZIONI APP"</string>
     <string name="data_usage_cellular_data" msgid="4859424346276043677">"Rete dati"</string>
     <string name="data_usage_data_limit" msgid="1193930999713192703">"Imposta limite dati"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"Ciclo utilizzo dati"</string>
@@ -2127,14 +2127,14 @@
     <string name="data_usage_menu_auto_sync" msgid="8203999775948778560">"Sincronizzazione automatica dei dati"</string>
     <string name="data_usage_menu_sim_cards" msgid="6410498422797244073">"Schede SIM"</string>
     <string name="data_usage_menu_cellular_networks" msgid="5243515735055652279">"Reti cellulari"</string>
-    <string name="account_settings_menu_auto_sync" msgid="6243013719753700377">"Sincronizza automaticam. dati"</string>
+    <string name="account_settings_menu_auto_sync" msgid="6243013719753700377">"Sincronizza dati automaticam."</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="785541379617346438">"Sincr. automat. dati personali"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="329565580969147026">"Sincronizza autom. dati lavoro"</string>
     <string name="data_usage_change_cycle" msgid="7776556448920114866">"Cambia ciclo..."</string>
     <string name="data_usage_pick_cycle_day" msgid="4470796861757050966">"Giorno del mese in cui reimpostare ciclo di utilizzo dei dati:"</string>
-    <string name="data_usage_empty" msgid="8621855507876539282">"Dati non usati da applicazioni in questo periodo."</string>
+    <string name="data_usage_empty" msgid="8621855507876539282">"Nessuna app ha utilizzato dati in questo periodo."</string>
     <string name="data_usage_label_foreground" msgid="4938034231928628164">"Primo piano"</string>
-    <string name="data_usage_label_background" msgid="3225844085975764519">"Sfondo"</string>
+    <string name="data_usage_label_background" msgid="3225844085975764519">"Background"</string>
     <string name="data_usage_app_restricted" msgid="3568465218866589705">"limitato"</string>
     <string name="data_usage_disable_mobile" msgid="2613595056882494652">"Disattivare la rete dati?"</string>
     <string name="data_usage_disable_mobile_limit" msgid="3934211003105066167">"Imposta limite rete dati"</string>
@@ -2163,7 +2163,7 @@
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"Attivare sincr. autom. dati?"</string>
     <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"Tutte le modifiche che apporti ai tuoi account sul Web verranno automaticamente copiate sul tablet.\n\nAlcuni account potrebbero inoltre copiare automaticamente sul Web tutte le modifiche che apporti sul tablet. Gli account Google funzionano in questo modo."</string>
     <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"Tutte le modifiche che apporti ai tuoi account sul Web verranno automaticamente copiate sul telefono.\n\nAlcuni account potrebbero inoltre copiare automaticamente sul Web tutte le modifiche che apporti sul telefono. Gli account Google funzionano in questo modo."</string>
-    <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"Disattivare sincr. autom. dati?"</string>
+    <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"Disattivare sincron. automatica?"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="4025938250775413864">"In questo modo limiterai l\'utilizzo di dati e della batteria, ma dovrai sincronizzare ciascun account manualmente per raccogliere le informazioni recenti. Inoltre non riceverai notifiche quando si verificano gli aggiornamenti."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Data reimpostazione ciclo utilizzo"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Data di ogni mese:"</string>
@@ -2190,7 +2190,7 @@
     <string name="data_usage_metered_mobile" msgid="2326986339431119372">"Reti cellulari"</string>
     <string name="data_usage_metered_wifi" msgid="1761738002328299714">"Reti Wi‑Fi a consumo"</string>
     <string name="data_usage_metered_wifi_disabled" msgid="727808462375941567">"Per selezionare le reti a consumo, attiva il Wi‑Fi."</string>
-    <string name="data_usage_disclaimer" msgid="6887858149980673444">"I dati contabili dell\'operatore potrebbero differire da quelli del dispositivo."</string>
+    <string name="data_usage_disclaimer" msgid="6887858149980673444">"I dati dell\'operatore potrebbero differire da quelli del dispositivo."</string>
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"Chiamata di emergenza"</string>
     <string name="cryptkeeper_return_to_call" msgid="5613717339452772491">"Torna a chiamata"</string>
     <string name="vpn_name" msgid="4689699885361002297">"Nome"</string>
@@ -2531,7 +2531,7 @@
     <string name="app_notification_priority_title" msgid="5949923919607295595">"Considera prioritarie"</string>
     <string name="app_notification_priority_summary" msgid="2538018111338754446">"Attiva l\'audio delle notifiche dell\'app quando l\'opzione \"Non disturbare\" è impostata su \"Solo con priorità\""</string>
     <string name="app_notification_peekable_title" msgid="8647856880382324822">"Consenti breve visualizzazione"</string>
-    <string name="app_notification_peekable_summary" msgid="678845517890921158">"Consenti a questa app di mettere in evidenza determinate notifiche mostrandole brevemente nella schermata corrente tramite scorrimento"</string>
+    <string name="app_notification_peekable_summary" msgid="678845517890921158">"Consenti a questa app di mettere in evidenza determinate notifiche mostrandole brevemente nella schermata corrente"</string>
     <string name="app_notification_sensitive_title" msgid="8465860579482264139">"Nascondi contenuti riservati"</string>
     <string name="app_notification_sensitive_summary" msgid="3263836642625157920">"Quando il dispositivo è bloccato, nascondi i contenuti delle notifiche dell\'app che potrebbero rivelare informazioni private"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Bloccate"</string>
@@ -2603,7 +2603,7 @@
     <string name="device_feedback" msgid="3238056036766293294">"Invia feedback sul dispositivo"</string>
     <string name="restr_pin_enter_admin_pin" msgid="2451187374960131018">"Inserisci PIN amministratore"</string>
     <string name="switch_on_text" msgid="1124106706920572386">"Attivo"</string>
-    <string name="switch_off_text" msgid="1139356348100829659">"Non attivo"</string>
+    <string name="switch_off_text" msgid="1139356348100829659">"Non attiva"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"Blocco su schermo"</string>
     <string name="screen_pinning_description" msgid="1137904524037468263">"Quando l\'impostazione è attiva, puoi utilizzare il blocco su schermo per lasciare visibile la schermata corrente finché la sblocchi.\n\nPer utilizzare la funzione:\n\n1. Assicurati che il blocco su schermo sia attivo.\n\n2. Apri la schermata da bloccare.\n\n3. Tocca Panoramica.\n\n4. Scorri in alto e tocca l\'icona di blocco."</string>
     <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"Richiedi sequenza di sblocco prima di sbloccare"</string>
@@ -2652,7 +2652,7 @@
     <string name="storage_type_external" msgid="8928374515368986503">"memoria esterna"</string>
     <string name="storage_type_internal" msgid="6042049833565674948">"Memoria interna"</string>
     <string name="storage_type_external" msgid="7738894330670001898">"Memoria esterna"</string>
-    <string name="app_data_usage" msgid="7942375313697452803">"Dati sull\'utilizzo dell\'app"</string>
+    <string name="app_data_usage" msgid="7942375313697452803">"Utilizzo dati dell\'app"</string>
     <string name="data_summary_format" msgid="6213211533341068366">"<xliff:g id="SIZE">%1$s</xliff:g> utilizzati dal giorno <xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="storage_used" msgid="7128074132917008743">"Spazio di archiviazione utilizzato"</string>
     <string name="notifications_label" msgid="2872668710589600731">"Notifiche"</string>
@@ -2671,9 +2671,9 @@
       <item quantity="other"><xliff:g id="COUNT_2">%d</xliff:g> autorizzazioni su <xliff:g id="COUNT_3">%d</xliff:g> concesse</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> autorizzazione su <xliff:g id="COUNT_1">%d</xliff:g> concessa</item>
     </plurals>
-    <string name="launch_defaults_some" msgid="313159469856372621">"Alcune applicazioni predefinite impostate"</string>
+    <string name="launch_defaults_some" msgid="313159469856372621">"Alcune opzioni predefinite impostate"</string>
     <string name="launch_defaults_none" msgid="4241129108140034876">"Nessuna applicazione predefinita impostata"</string>
-    <string name="filter_all_apps" msgid="1988403195820688644">"Tutte le applicazioni"</string>
+    <string name="filter_all_apps" msgid="1988403195820688644">"Tutte le app"</string>
     <string name="filter_enabled_apps" msgid="3318021007093070639">"Attive"</string>
     <string name="filter_personal_apps" msgid="3277727374174355971">"Personali"</string>
     <string name="filter_work_apps" msgid="24519936790795574">"Lavoro"</string>
@@ -2714,21 +2714,18 @@
     <string name="usage_access_description" msgid="1352111094596416795">"L\'accesso a dati di utilizzo consente a un\'app di controllare quali altre app utilizzi e con quale frequenza, oltre a informazioni come operatore, lingua impostata e altri dettagli."</string>
     <string name="memory_settings_title" msgid="7490541005204254222">"Memoria"</string>
     <string name="memory_details_title" msgid="8542565326053693320">"Dettagli memoria"</string>
-    <!-- no translation found for always_running (6042448320077429656) -->
-    <skip />
-    <!-- no translation found for sometimes_running (6611250683037700864) -->
-    <skip />
-    <!-- no translation found for rarely_running (348413460168817458) -->
-    <skip />
-    <string name="memory_max_use" msgid="6874803757715963097">"Memoria massima usata"</string>
-    <string name="memory_avg_use" msgid="7382015389130622870">"Memoria media usata"</string>
-    <string name="memory_max_desc" msgid="2861832149718335864">"Memoria massima usata: <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
-    <string name="memory_avg_desc" msgid="1551240906596518412">"Memoria media usata: <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
+    <string name="always_running" msgid="6042448320077429656">"Sempre attiva (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
+    <string name="sometimes_running" msgid="6611250683037700864">"Attiva saltuariamente (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
+    <string name="rarely_running" msgid="348413460168817458">"Attiva raramente (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
+    <string name="memory_max_use" msgid="6874803757715963097">"Uso massimo"</string>
+    <string name="memory_avg_use" msgid="7382015389130622870">"Uso medio"</string>
+    <string name="memory_max_desc" msgid="2861832149718335864">"Uso massimo: <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
+    <string name="memory_avg_desc" msgid="1551240906596518412">"Uso medio: <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
     <string name="memory_use_running_format" msgid="4172488041800743760">"<xliff:g id="MEMORY">%1$s</xliff:g>/<xliff:g id="RUNNING">%2$s</xliff:g>"</string>
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="2116416853043103135">"Ignora ottimizzazioni"</string>
     <string name="high_power_filter_on" msgid="3862942127137594196">"Consentito"</string>
-    <string name="high_power_on" msgid="148473814103292724">"Ignorano le ottimizzazioni della batteria"</string>
+    <string name="high_power_on" msgid="148473814103292724">"Ignora le ottimizzazioni della batteria"</string>
     <string name="high_power_off" msgid="4069404908196636677">"Non attiva"</string>
     <string name="high_power_desc" msgid="8777632785903235764">"Non applicare le ottimizzazioni della batteria. La batteria potrebbe consumarsi più rapidamente."</string>
     <plurals name="high_power_count" formatted="false" msgid="4343190376439806186">
@@ -2752,27 +2749,25 @@
     <string name="assist_access_context_title" msgid="2047105711005856521">"Utilizza contesto corrente"</string>
     <string name="assist_access_context_summary" msgid="8365837347256022203">"Quando apri l\'app di assistenza, consenti di vedere le tua attività sullo schermo"</string>
     <string name="assist_footer" msgid="2283187001990543739">"Le app di assistenza ti aiutano a identificare informazioni utili e ad agire in base a esse senza dover chiedere. Alcune app supportano sia Avvio applicazioni che servizi di input vocale per offrirti assistenza integrata."</string>
-    <!-- no translation found for average_memory_use (829566450150198512) -->
-    <skip />
-    <!-- no translation found for maximum_memory_use (7493720799710132496) -->
-    <skip />
-    <!-- no translation found for sort_avg_use (3998036180505143129) -->
-    <skip />
-    <!-- no translation found for sort_max_use (4629247978290075124) -->
-    <skip />
-    <!-- no translation found for memory_performance (5661005192284103281) -->
-    <skip />
-    <!-- no translation found for total_memory (2017287600738630165) -->
-    <skip />
-    <!-- no translation found for average_used (5338339266517245782) -->
-    <skip />
-    <!-- no translation found for free_memory (4003936141603549746) -->
-    <skip />
-    <!-- no translation found for memory_usage_apps (5650192998273294098) -->
-    <skip />
-    <!-- no translation found for memory_usage_apps_summary (6089210945574265774) -->
-    <!-- no translation found for running_frequency (6622624669948277693) -->
-    <skip />
-    <!-- no translation found for memory_maximum_usage (6513785462055278341) -->
-    <skip />
+    <string name="average_memory_use" msgid="829566450150198512">"Utilizzo medio di memoria"</string>
+    <string name="maximum_memory_use" msgid="7493720799710132496">"Utilizzo massimo di memoria"</string>
+    <string name="memory_usage" msgid="1781358557214390033">"Utilizzo di memoria"</string>
+    <string name="app_list_memory_use" msgid="6987417883876419338">"Utilizzo di app"</string>
+    <string name="memory_details" msgid="5943436005716991782">"Dettagli"</string>
+    <string name="memory_use_summary" msgid="5608257211903075754">"<xliff:g id="SIZE">%1$s</xliff:g> di utilizzo medio di memoria nelle ultime tre ore"</string>
+    <string name="no_memory_use_summary" msgid="2016900536806235588">"Non è stata utilizzata memoria nelle ultime tre ore"</string>
+    <string name="sort_avg_use" msgid="3998036180505143129">"Ordina per utilizzo medio"</string>
+    <string name="sort_max_use" msgid="4629247978290075124">"Ordina per utilizzo massimo"</string>
+    <string name="memory_performance" msgid="5661005192284103281">"Prestazioni"</string>
+    <string name="total_memory" msgid="2017287600738630165">"Memoria totale"</string>
+    <string name="average_used" msgid="5338339266517245782">"Utilizzo medio (%)"</string>
+    <string name="free_memory" msgid="4003936141603549746">"Libera"</string>
+    <string name="memory_usage_apps" msgid="5650192998273294098">"Memoria utilizzata dalle app"</string>
+    <plurals name="memory_usage_apps_summary" formatted="false" msgid="6089210945574265774">
+      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> app hanno utilizzato la memoria nelle ultime <xliff:g id="DURATION_1">%2$s</xliff:g></item>
+      <item quantity="one">1 app ha utilizzato la memoria nelle ultime <xliff:g id="DURATION_0">%2$s</xliff:g></item>
+    </plurals>
+    <string name="running_frequency" msgid="6622624669948277693">"Frequenza"</string>
+    <string name="memory_maximum_usage" msgid="6513785462055278341">"Utilizzo massimo"</string>
+    <string name="no_data_usage" msgid="9131454024293628063">"Nessun utilizzo dati"</string>
 </resources>
