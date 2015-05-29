@@ -214,13 +214,8 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
     }
 
     private String computeCalendarName(EventInfo event) {
-        if (event.calendar != EventInfo.ANY_CALENDAR) {
-            final CalendarInfo calendar = ZenModeEventRuleSettings.findCalendar(mContext, event);
-            if (calendar != null) {
-                return calendar.name;
-            }
-        }
-        return getString(R.string.zen_mode_event_rule_summary_any_calendar);
+        return event.calendar != null ? event.calendar
+                : getString(R.string.zen_mode_event_rule_summary_any_calendar);
     }
 
     private int computeReply(EventInfo event) {
