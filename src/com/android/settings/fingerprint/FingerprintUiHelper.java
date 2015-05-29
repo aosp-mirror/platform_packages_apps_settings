@@ -64,6 +64,10 @@ public class FingerprintUiHelper extends FingerprintManager.AuthenticationCallba
         }
     }
 
+    private boolean isListening() {
+        return mCancellationSignal != null && !mCancellationSignal.isCanceled();
+    }
+
     private void setFingerprintIconVisibility(boolean visible) {
         mIcon.setVisibility(visible ? View.VISIBLE : View.GONE);
         mCallback.onFingerprintIconVisibilityChanged(visible);
@@ -93,6 +97,10 @@ public class FingerprintUiHelper extends FingerprintManager.AuthenticationCallba
     }
 
     private void showError(CharSequence error) {
+        if (!isListening()) {
+            return;
+        }
+
         vibrateFingerprintError();
         mIcon.setImageResource(R.drawable.ic_fingerprint_error);
         mErrorTextView.setText(error);
