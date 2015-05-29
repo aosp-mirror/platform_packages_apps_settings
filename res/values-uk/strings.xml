@@ -2742,12 +2742,9 @@
     <string name="usage_access_description" msgid="1352111094596416795">"Завдяки доступу до історії використання додаток може відстежувати, які додатки ви використовуєте та як часто, а також визначати назву вашого оператора, налаштування мови й інші відомості."</string>
     <string name="memory_settings_title" msgid="7490541005204254222">"Пам’ять"</string>
     <string name="memory_details_title" msgid="8542565326053693320">"Докладно про пам’ять"</string>
-    <!-- no translation found for always_running (6042448320077429656) -->
-    <skip />
-    <!-- no translation found for sometimes_running (6611250683037700864) -->
-    <skip />
-    <!-- no translation found for rarely_running (348413460168817458) -->
-    <skip />
+    <string name="always_running" msgid="6042448320077429656">"Завжди працює (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
+    <string name="sometimes_running" msgid="6611250683037700864">"Іноді працює (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
+    <string name="rarely_running" msgid="348413460168817458">"Рідко працює (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
     <string name="memory_max_use" msgid="6874803757715963097">"Максимум"</string>
     <string name="memory_avg_use" msgid="7382015389130622870">"У середньому"</string>
     <string name="memory_max_desc" msgid="2861832149718335864">"Максимум <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
@@ -2782,27 +2779,32 @@
     <string name="assist_access_context_title" msgid="2047105711005856521">"Надати доступ до поточного контексту"</string>
     <string name="assist_access_context_summary" msgid="8365837347256022203">"Відкривши додаток-помічник, надайте йому доступ до екрана"</string>
     <string name="assist_footer" msgid="2283187001990543739">"Додатки-помічники автоматично знаходять і показують корисну інформацію. Деякі додатки підтримують панель запуску й голосовий ввід, щоб надавати вам усебічну допомогу."</string>
-    <!-- no translation found for average_memory_use (829566450150198512) -->
+    <string name="average_memory_use" msgid="829566450150198512">"Середнє використання пам’яті"</string>
+    <string name="maximum_memory_use" msgid="7493720799710132496">"Найбільше використання пам’яті"</string>
+    <!-- no translation found for memory_usage (1781358557214390033) -->
     <skip />
-    <!-- no translation found for maximum_memory_use (7493720799710132496) -->
+    <!-- no translation found for app_list_memory_use (6987417883876419338) -->
     <skip />
-    <!-- no translation found for sort_avg_use (3998036180505143129) -->
+    <!-- no translation found for memory_details (5943436005716991782) -->
     <skip />
-    <!-- no translation found for sort_max_use (4629247978290075124) -->
+    <!-- no translation found for memory_use_summary (5608257211903075754) -->
     <skip />
-    <!-- no translation found for memory_performance (5661005192284103281) -->
+    <!-- no translation found for no_memory_use_summary (2016900536806235588) -->
     <skip />
-    <!-- no translation found for total_memory (2017287600738630165) -->
-    <skip />
-    <!-- no translation found for average_used (5338339266517245782) -->
-    <skip />
-    <!-- no translation found for free_memory (4003936141603549746) -->
-    <skip />
-    <!-- no translation found for memory_usage_apps (5650192998273294098) -->
-    <skip />
-    <!-- no translation found for memory_usage_apps_summary (6089210945574265774) -->
-    <!-- no translation found for running_frequency (6622624669948277693) -->
-    <skip />
-    <!-- no translation found for memory_maximum_usage (6513785462055278341) -->
-    <skip />
+    <string name="sort_avg_use" msgid="3998036180505143129">"Сортувати за середнім використанням"</string>
+    <string name="sort_max_use" msgid="4629247978290075124">"Сортувати за найбільшим використанням"</string>
+    <string name="memory_performance" msgid="5661005192284103281">"Продуктивність"</string>
+    <string name="total_memory" msgid="2017287600738630165">"Усього пам’яті"</string>
+    <string name="average_used" msgid="5338339266517245782">"Середнє використання (%)"</string>
+    <string name="free_memory" msgid="4003936141603549746">"Вільна пам’ять"</string>
+    <string name="memory_usage_apps" msgid="5650192998273294098">"Пам’ять, яку використовують додатки"</string>
+    <plurals name="memory_usage_apps_summary" formatted="false" msgid="6089210945574265774">
+      <item quantity="one">За ост. <xliff:g id="DURATION_1">%2$s</xliff:g> пам’ять використовував <xliff:g id="COUNT">%1$d</xliff:g> додаток</item>
+      <item quantity="few">За ост. <xliff:g id="DURATION_1">%2$s</xliff:g> пам’ять використовували <xliff:g id="COUNT">%1$d</xliff:g> додатки</item>
+      <item quantity="many">За ост. <xliff:g id="DURATION_1">%2$s</xliff:g> пам’ять використовувало <xliff:g id="COUNT">%1$d</xliff:g> додатків</item>
+      <item quantity="other">За ост. <xliff:g id="DURATION_1">%2$s</xliff:g> пам’ять використовувало <xliff:g id="COUNT">%1$d</xliff:g> додатка</item>
+    </plurals>
+    <string name="running_frequency" msgid="6622624669948277693">"Як часто працює додаток"</string>
+    <string name="memory_maximum_usage" msgid="6513785462055278341">"Найбільше використання"</string>
+    <string name="no_data_usage" msgid="9131454024293628063">"Дані не використовуються"</string>
 </resources>

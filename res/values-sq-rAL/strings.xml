@@ -2017,7 +2017,7 @@
     <string name="preference_change_password_title" msgid="8955581790270130056">"Ndërro fjalëkalimin"</string>
     <string name="header_account_settings" msgid="5382475087121880626">"Cilësimet e llogarisë"</string>
     <string name="remove_account_label" msgid="5921986026504804119">"Hiq llogarinë"</string>
-    <string name="header_add_an_account" msgid="756108499532023798">"Shto llogari"</string>
+    <string name="header_add_an_account" msgid="756108499532023798">"Shto një llogari"</string>
     <string name="finish_button_label" msgid="481587707657751116">"Përfundo"</string>
     <string name="really_remove_account_title" msgid="8800653398717172460">"Të hiqet llogaria?"</string>
     <string name="really_remove_account_message" product="tablet" msgid="1936147502815641161">"Heqja e kësaj llogarie do të fshijë të gjitha mesazhet, kontaktet dhe të dhëna të tjera të saj nga tableti!"</string>
@@ -2163,7 +2163,7 @@
     <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"Çdo ndryshim që bën në llogaritë e tua në ueb do të kopjohet automatikisht te tableti.\n\nDisa llogari mund të kopjojnë po ashtu automatikisht çdo ndryshim që bën në tablet në ueb. Kështu funksionon llogaria e Google."</string>
     <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"Çdo ndryshim që bën në llogaritë e tua në ueb do të kopjohet automatikisht te telefoni.\n\nDisa llogari mund të kopjojnë po ashtu automatikisht çdo ndryshim që bën në telefon në ueb. Kjo është mënyra se si funksionon llogaria e Google."</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"Të çaktivizohen të dhënat e sinkronizimit automatik?"</string>
-    <string name="data_usage_auto_sync_off_dialog" msgid="4025938250775413864">"Kjo do të kursejë përdorimin e të dhënave dhe të baterisë, por do të duhet ta sinkronizosh çdo llogari në mënyrë manuale për të mbledhur informacionet më të fundit. Dhe nuk do të marrësh njoftime kur të ndodhin përditësimet."</string>
+    <string name="data_usage_auto_sync_off_dialog" msgid="4025938250775413864">"Kjo do të kursejë përdorimin e të dhënave dhe të baterisë, por për të mbledhur informacionet më të fundit do të të duhet të sinkronizosh në mënyrë manuale çdo llogari. Nuk do të marrësh njoftime kur të ndodhin përditësimet."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Data e rivendosjes së ciklit të përdorimit"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Data e secilit muaj:"</string>
     <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"Cakto"</string>
@@ -2712,12 +2712,9 @@
     <string name="usage_access_description" msgid="1352111094596416795">"Qasja në përdorim lejon që një aplikacion të gjurmojë se çfarë përdorin aplikacionet e tjera dhe sa shpesh e përdorin, si edhe operatorin celular, cilësimet e gjuhës dhe detaje të tjera."</string>
     <string name="memory_settings_title" msgid="7490541005204254222">"Memoria"</string>
     <string name="memory_details_title" msgid="8542565326053693320">"Detajet e memories"</string>
-    <!-- no translation found for always_running (6042448320077429656) -->
-    <skip />
-    <!-- no translation found for sometimes_running (6611250683037700864) -->
-    <skip />
-    <!-- no translation found for rarely_running (348413460168817458) -->
-    <skip />
+    <string name="always_running" msgid="6042448320077429656">"Gjithmonë në funksionim (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
+    <string name="sometimes_running" msgid="6611250683037700864">"Përdoret ndonjëherë (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
+    <string name="rarely_running" msgid="348413460168817458">"Përdoret rrallë (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
     <string name="memory_max_use" msgid="6874803757715963097">"Maksimale"</string>
     <string name="memory_avg_use" msgid="7382015389130622870">"Mesatare"</string>
     <string name="memory_max_desc" msgid="2861832149718335864">"Maksimale <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
@@ -2750,27 +2747,30 @@
     <string name="assist_access_context_title" msgid="2047105711005856521">"Përdor kontekstin aktual"</string>
     <string name="assist_access_context_summary" msgid="8365837347256022203">"Kur hap aplikacionin e asistentit, lejo që ai të shikojë se çfarë po bën në ekranin tënd"</string>
     <string name="assist_footer" msgid="2283187001990543739">"Asistenti të ndihmon të identifikosh dhe të veprosh në lidhje me informacionet e dobishme pa pasur nevojë të pyesësh. Disa aplikacione mbështesin shërbimet e nisësit dhe të hyrjes me zë për të të siguruar një ndihmë të integruar."</string>
-    <!-- no translation found for average_memory_use (829566450150198512) -->
+    <string name="average_memory_use" msgid="829566450150198512">"Memoria mesatare në përdorim"</string>
+    <string name="maximum_memory_use" msgid="7493720799710132496">"Përdorimi maksimal i memories"</string>
+    <!-- no translation found for memory_usage (1781358557214390033) -->
     <skip />
-    <!-- no translation found for maximum_memory_use (7493720799710132496) -->
+    <!-- no translation found for app_list_memory_use (6987417883876419338) -->
     <skip />
-    <!-- no translation found for sort_avg_use (3998036180505143129) -->
+    <!-- no translation found for memory_details (5943436005716991782) -->
     <skip />
-    <!-- no translation found for sort_max_use (4629247978290075124) -->
+    <!-- no translation found for memory_use_summary (5608257211903075754) -->
     <skip />
-    <!-- no translation found for memory_performance (5661005192284103281) -->
+    <!-- no translation found for no_memory_use_summary (2016900536806235588) -->
     <skip />
-    <!-- no translation found for total_memory (2017287600738630165) -->
-    <skip />
-    <!-- no translation found for average_used (5338339266517245782) -->
-    <skip />
-    <!-- no translation found for free_memory (4003936141603549746) -->
-    <skip />
-    <!-- no translation found for memory_usage_apps (5650192998273294098) -->
-    <skip />
-    <!-- no translation found for memory_usage_apps_summary (6089210945574265774) -->
-    <!-- no translation found for running_frequency (6622624669948277693) -->
-    <skip />
-    <!-- no translation found for memory_maximum_usage (6513785462055278341) -->
-    <skip />
+    <string name="sort_avg_use" msgid="3998036180505143129">"Rendit sipas përdorimit mesatar"</string>
+    <string name="sort_max_use" msgid="4629247978290075124">"Rendit sipas përdorimit maksimal"</string>
+    <string name="memory_performance" msgid="5661005192284103281">"Performanca"</string>
+    <string name="total_memory" msgid="2017287600738630165">"Memoria totale"</string>
+    <string name="average_used" msgid="5338339266517245782">"Mesatarja e përdorur (%)"</string>
+    <string name="free_memory" msgid="4003936141603549746">"E lirë"</string>
+    <string name="memory_usage_apps" msgid="5650192998273294098">"Memoria e përdorur nga aplikacionet"</string>
+    <plurals name="memory_usage_apps_summary" formatted="false" msgid="6089210945574265774">
+      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> aplikacione përdorën memorien në <xliff:g id="DURATION_1">%2$s</xliff:g> e fundit</item>
+      <item quantity="one">1 aplikacion përdori memorien në <xliff:g id="DURATION_0">%2$s</xliff:g> e fundit</item>
+    </plurals>
+    <string name="running_frequency" msgid="6622624669948277693">"Frekuenca"</string>
+    <string name="memory_maximum_usage" msgid="6513785462055278341">"Përdorimi maksimal"</string>
+    <string name="no_data_usage" msgid="9131454024293628063">"Nuk janë përdorur të dhëna"</string>
 </resources>
