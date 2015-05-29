@@ -16,12 +16,12 @@
 
 package com.android.settings;
 
-import android.app.admin.DevicePolicyManager;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -34,20 +34,15 @@ import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
-import android.text.BidiFormatter;
-import android.text.TextDirectionHeuristics;
-import android.text.TextUtils;
 import android.text.format.DateFormat;
-import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
-import com.android.internal.logging.MetricsLogger;
 
-import java.text.SimpleDateFormat;
+import com.android.internal.logging.MetricsLogger;
+import com.android.settingslib.datetime.ZoneGetter;
+
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
 
 public class DateTimeSettings extends SettingsPreferenceFragment
         implements OnSharedPreferenceChangeListener,
@@ -170,7 +165,7 @@ public class DateTimeSettings extends SettingsPreferenceFragment
         Date dummyDate = mDummyDate.getTime();
         mDatePref.setSummary(DateFormat.getLongDateFormat(context).format(now.getTime()));
         mTimePref.setSummary(DateFormat.getTimeFormat(getActivity()).format(now.getTime()));
-        mTimeZone.setSummary(getTimeZoneText(now.getTimeZone(), true));
+        mTimeZone.setSummary(ZoneGetter.getTimeZoneText(now.getTimeZone(), true));
         mTime24Pref.setSummary(DateFormat.getTimeFormat(getActivity()).format(dummyDate));
     }
 
@@ -348,34 +343,6 @@ public class DateTimeSettings extends SettingsPreferenceFragment
         if (when / 1000 < Integer.MAX_VALUE) {
             ((AlarmManager) context.getSystemService(Context.ALARM_SERVICE)).setTime(when);
         }
-    }
-
-    public static String getTimeZoneText(TimeZone tz, boolean includeName) {
-        Date now = new Date();
-
-        // Use SimpleDateFormat to format the GMT+00:00 string.
-        SimpleDateFormat gmtFormatter = new SimpleDateFormat("ZZZZ");
-        gmtFormatter.setTimeZone(tz);
-        String gmtString = gmtFormatter.format(now);
-
-        // Ensure that the "GMT+" stays with the "00:00" even if the digits are RTL.
-        BidiFormatter bidiFormatter = BidiFormatter.getInstance();
-        Locale l = Locale.getDefault();
-        boolean isRtl = TextUtils.getLayoutDirectionFromLocale(l) == View.LAYOUT_DIRECTION_RTL;
-        gmtString = bidiFormatter.unicodeWrap(gmtString,
-                isRtl ? TextDirectionHeuristics.RTL : TextDirectionHeuristics.LTR);
-
-        if (!includeName) {
-            return gmtString;
-        }
-
-        // Optionally append the time zone name.
-        SimpleDateFormat zoneNameFormatter = new SimpleDateFormat("zzzz");
-        zoneNameFormatter.setTimeZone(tz);
-        String zoneNameString = zoneNameFormatter.format(now);
-
-        // We don't use punctuation here to avoid having to worry about localizing that too!
-        return gmtString + " " + zoneNameString;
     }
 
     private BroadcastReceiver mIntentReceiver = new BroadcastReceiver() {
