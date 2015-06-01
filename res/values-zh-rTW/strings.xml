@@ -1269,7 +1269,7 @@
     <string name="total_size_label" msgid="1048676419552557254">"總共"</string>
     <string name="application_size_label" msgid="8494609207373874267">"應用程式"</string>
     <string name="external_code_size_label" msgid="3459343140355961335">"USB 儲存裝置應用程式"</string>
-    <string name="data_size_label" msgid="8679376373625710107">"資料"</string>
+    <string name="data_size_label" msgid="8679376373625710107">"數據用量"</string>
     <string name="external_data_size_label" product="nosdcard" msgid="7533821466482000453">"USB 儲存裝置資料"</string>
     <string name="external_data_size_label" product="default" msgid="626414192825329708">"SD 卡"</string>
     <string name="uninstall_text" msgid="3644892466144802466">"解除安裝"</string>
@@ -1313,7 +1313,7 @@
     <string name="sd_card_storage" product="default" msgid="7623513618171928235">"SD 卡儲存裝置"</string>
     <string name="recompute_size" msgid="7722567982831691718">"重新計算大小…"</string>
     <string name="clear_data_dlg_title" msgid="5605258400134511197">"您要刪除應用程式資料嗎？"</string>
-    <string name="clear_data_dlg_text" msgid="3951297329833822490">"這個應用程式的所有資料都將永遠遭到刪除，包含所有檔案、設定、帳戶、資料庫等。"</string>
+    <string name="clear_data_dlg_text" msgid="3951297329833822490">"系統會永久刪除這個應用程式的所有資料，包含所有檔案、設定、帳戶、資料庫等。"</string>
     <string name="dlg_ok" msgid="2402639055725653590">"確定"</string>
     <string name="dlg_cancel" msgid="1674753358972975911">"取消"</string>
     <string name="app_not_found_dlg_title" msgid="3127123411738434964"></string>
@@ -1933,7 +1933,7 @@
     <string name="local_backup_password_toast_confirmation_mismatch" msgid="7805892532752708288">"新密碼與確認密碼不符。"</string>
     <string name="local_backup_password_toast_validation_failure" msgid="5646377234895626531">"無法設定備份密碼"</string>
     <string name="backup_erase_dialog_title" msgid="1027640829482174106"></string>
-    <string name="backup_erase_dialog_message" msgid="5221011285568343155">"停止備份您的 Wi-Fi 密碼、書籤、其他設定，以及應用程式資料，並清除 Google 伺服器上儲存的所有複本嗎？"</string>
+    <string name="backup_erase_dialog_message" msgid="5221011285568343155">"要停止備份您的 Wi-Fi 密碼、書籤、其他設定以及應用程式資料，並清除 Google 伺服器上儲存的所有複本嗎？"</string>
     <string name="fullbackup_erase_dialog_message" msgid="944399039066318647">"要停止備份裝置資料 (例如 Wi-Fi 密碼和通話紀錄) 以及應用程式資料 (例如應用程式所儲存的設定和檔案)，並清除 Google 雲端硬碟中的所有備份內容嗎？"</string>
     <string name="fullbackup_data_summary" msgid="960850365007767734">"在遠端自動備份裝置資料 (例如 Wi-Fi 密碼和通話紀錄) 以及應用程式資料 (例如應用程式所儲存的設定和檔案)。\n\n啟用自動備份功能後，系統會定期將裝置和應用程式資料儲存到遠端。應用程式資料泛指應用程式依據開發人員設定所儲存的任何資料，包括聯絡人、訊息和相片等可能具敏感性的資料。"</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"裝置管理設定"</string>
@@ -2008,7 +2008,7 @@
     <string name="sync_in_progress" msgid="5151314196536070569">"目前正在同步處理…"</string>
     <string name="settings_backup" msgid="2274732978260797031">"備份設定"</string>
     <string name="settings_backup_summary" msgid="7916877705938054035">"備份我的設定"</string>
-    <string name="sync_menu_sync_now" msgid="6154608350395805683">"現在進行同步處理"</string>
+    <string name="sync_menu_sync_now" msgid="6154608350395805683">"立即進行同步處理"</string>
     <string name="sync_menu_sync_cancel" msgid="8292379009626966949">"取消同步處理"</string>
     <string name="sync_one_time_sync" msgid="6766593624598183090">"輕觸此處可開始同步化 <xliff:g id="LAST_SYNC_TIME">
 %1$s</xliff:g>"</string>
@@ -2489,7 +2489,7 @@
     <string name="notification_volume_option_title" msgid="6064656124416882130">"通知音量"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"優先通知僅允許"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"自動規則"</string>
-    <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"僅顯示優先通知"</string>
+    <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"僅限優先通知"</string>
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"僅允許鬧鐘"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"完全靜音"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>：<xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
@@ -2533,9 +2533,9 @@
     <string name="app_notification_block_title" msgid="4069351066849087649">"全部封鎖"</string>
     <string name="app_notification_block_summary" msgid="9049487483231233726">"永不顯示這個應用程式的通知"</string>
     <string name="app_notification_priority_title" msgid="5949923919607295595">"視為優先通知"</string>
-    <string name="app_notification_priority_summary" msgid="2538018111338754446">"當「零打擾」設定為 [僅顯示優先通知] 時，讓這個應用程式的通知發出聲響"</string>
+    <string name="app_notification_priority_summary" msgid="2538018111338754446">"當干擾模式設定為 [僅限優先通知] 時，讓這個應用程式的通知發出聲響"</string>
     <string name="app_notification_peekable_title" msgid="8647856880382324822">"允許迅速瀏覽"</string>
-    <string name="app_notification_peekable_summary" msgid="678845517890921158">"讓這個應用程式將通知短暫滑入目前的畫面，藉此突顯特定通知"</string>
+    <string name="app_notification_peekable_summary" msgid="678845517890921158">"允許這個應用程式將特定通知暫時滑入目前的畫面，藉此突顯這些通知"</string>
     <string name="app_notification_sensitive_title" msgid="8465860579482264139">"隱藏機密內容"</string>
     <string name="app_notification_sensitive_summary" msgid="3263836642625157920">"當裝置鎖定時，隱藏這個應用程式通知中可能涉及私人資訊的內容"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"已封鎖"</string>
@@ -2721,10 +2721,10 @@
     <string name="always_running" msgid="6042448320077429656">"一律執行 (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
     <string name="sometimes_running" msgid="6611250683037700864">"有時執行 (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
     <string name="rarely_running" msgid="348413460168817458">"很少執行 (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
-    <string name="memory_max_use" msgid="6874803757715963097">"最多"</string>
-    <string name="memory_avg_use" msgid="7382015389130622870">"平均"</string>
-    <string name="memory_max_desc" msgid="2861832149718335864">"最多 <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
-    <string name="memory_avg_desc" msgid="1551240906596518412">"平均 <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
+    <string name="memory_max_use" msgid="6874803757715963097">"最高用量"</string>
+    <string name="memory_avg_use" msgid="7382015389130622870">"平均用量"</string>
+    <string name="memory_max_desc" msgid="2861832149718335864">"最高用量：<xliff:g id="MEMORY">%1$s</xliff:g>"</string>
+    <string name="memory_avg_desc" msgid="1551240906596518412">"平均用量：<xliff:g id="MEMORY">%1$s</xliff:g>"</string>
     <string name="memory_use_running_format" msgid="4172488041800743760">"<xliff:g id="MEMORY">%1$s</xliff:g>/<xliff:g id="RUNNING">%2$s</xliff:g>"</string>
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="2116416853043103135">"忽略最佳化設定"</string>
