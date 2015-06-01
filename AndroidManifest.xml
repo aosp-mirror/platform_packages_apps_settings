@@ -2428,9 +2428,9 @@
             </intent-filter>
         </receiver>
 
-        <receiver android:name=".sim.SimBootReceiver">
+        <receiver android:name=".sim.SimSelectNotification">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
+                <action android:name="android.intent.action.SIM_STATE_CHANGED"></action>
             </intent-filter>
         </receiver>
 
