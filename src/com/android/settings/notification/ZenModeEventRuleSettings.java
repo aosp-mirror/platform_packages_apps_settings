@@ -16,8 +16,6 @@
 
 package com.android.settings.notification;
 
-import static android.service.notification.ZenModeConfig.EventInfo.ANY_CALENDAR;
-
 import android.content.Context;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.database.Cursor;
@@ -81,9 +79,17 @@ public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
     private void reloadCalendar() {
         mCalendars = getCalendars(mContext);
         mCalendar.clearItems();
-        mCalendar.addItem(R.string.zen_mode_event_rule_calendar_any, key(0, ANY_CALENDAR));
+        mCalendar.addItem(R.string.zen_mode_event_rule_calendar_any, key(0, null));
+        final String eventCalendar = mEvent != null ? mEvent.calendar : null;
+        boolean found = false;
         for (CalendarInfo calendar : mCalendars) {
             mCalendar.addItem(calendar.name, key(calendar));
+            if (eventCalendar != null && eventCalendar.equals(calendar.name)) {
+                found = true;
+            }
+        }
+        if (eventCalendar != null && !found) {
+            mCalendar.addItem(eventCalendar, key(mEvent.userId, eventCalendar));
         }
     }
 
@@ -101,7 +107,10 @@ public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
                 if (calendarKey.equals(key(mEvent))) return true;
                 final int i = calendarKey.indexOf(':');
                 mEvent.userId = Integer.parseInt(calendarKey.substring(0, i));
-                mEvent.calendar = Long.parseLong(calendarKey.substring(i + 1));
+                mEvent.calendar = calendarKey.substring(i + 1);
+                if (mEvent.calendar.isEmpty()) {
+                    mEvent.calendar = null;
+                }
                 updateRule(ZenModeConfig.toEventConditionId(mEvent));
                 return true;
             }
@@ -185,7 +194,6 @@ public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
             }
             while (cursor.moveToNext()) {
                 final CalendarInfo ci = new CalendarInfo();
-                ci.id = cursor.getLong(0);
                 ci.name = cursor.getString(1);
                 ci.userId = context.getUserId();
                 outCalendars.add(ci);
@@ -198,15 +206,15 @@ public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
     }
 
     private static String key(CalendarInfo calendar) {
-        return key(calendar.userId, calendar.id);
+        return key(calendar.userId, calendar.name);
     }
 
     private static String key(EventInfo event) {
         return key(event.userId, event.calendar);
     }
 
-    private static String key(int userId, long calendarId) {
-        return EventInfo.resolveUserId(userId) + ":" + calendarId;
+    private static String key(int userId, String calendar) {
+        return EventInfo.resolveUserId(userId) + ":" + (calendar == null ? "" : calendar);
     }
 
     private static final Comparator<CalendarInfo> CALENDAR_NAME = new Comparator<CalendarInfo>() {
@@ -217,7 +225,6 @@ public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
     };
 
     public static class CalendarInfo {
-        public long id;
         public String name;
         public int userId;
     }
