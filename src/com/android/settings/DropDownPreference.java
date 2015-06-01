@@ -17,14 +17,15 @@
 package com.android.settings;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.preference.Preference;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.AdapterView.OnItemSelectedListener;
 
 import java.util.ArrayList;
 
@@ -69,6 +70,16 @@ public class DropDownPreference extends Preference {
                 return true;
             }
         });
+
+        // Support XML specification like ListPreferences do.
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.DropDownPreference);
+        CharSequence[] entries = a.getTextArray(R.styleable.DropDownPreference_android_entries);
+        CharSequence[] values = a.getTextArray(R.styleable.DropDownPreference_android_entryValues);
+        if (entries != null && values != null) {
+            for (int i= 0; i < entries.length; i++) {
+                addItem(entries[i].toString(), values[i]);
+            }
+        }
     }
 
     public void setDropDownWidth(int dimenResId) {
