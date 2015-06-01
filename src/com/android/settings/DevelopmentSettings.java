@@ -265,7 +265,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
 
     private SwitchPreference mShowAllANRs;
 
-    private ListPreference mNightModePreference;
+    private DropDownPreference mNightModePreference;
 
     private final ArrayList<Preference> mAllPrefs = new ArrayList<Preference>();
 
@@ -427,12 +427,26 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             removePreferenceForProduction(hdcpChecking);
         }
 
-        mNightModePreference = (ListPreference) findPreference(KEY_NIGHT_MODE);
+        mNightModePreference = (DropDownPreference) findPreference(KEY_NIGHT_MODE);
         final UiModeManager uiManager = (UiModeManager) getSystemService(
                 Context.UI_MODE_SERVICE);
         final int currentNightMode = uiManager.getNightMode();
-        mNightModePreference.setValue(String.valueOf(currentNightMode));
-        mNightModePreference.setOnPreferenceChangeListener(this);
+        mNightModePreference.setSelectedValue(String.valueOf(currentNightMode));
+        mNightModePreference.setCallback(new DropDownPreference.Callback() {
+            @Override
+            public boolean onItemSelected(int pos, Object newValue) {
+                try {
+                    final int value = Integer.parseInt((String) newValue);
+                    final UiModeManager uiManager = (UiModeManager) getSystemService(
+                            Context.UI_MODE_SERVICE);
+                    uiManager.setNightMode(value);
+                    return true;
+                } catch (NumberFormatException e) {
+                    Log.e(TAG, "could not persist night mode setting", e);
+                    return false;
+                }
+            }
+        });
     }
 
     private ListPreference addListPreference(String prefKey) {
@@ -1807,16 +1821,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             return true;
         } else if (preference == mTunerUiPref) {
             writeTweakUi(newValue);
-            return true;
-        } else if (preference == mNightModePreference) {
-            try {
-                final int value = Integer.parseInt((String) newValue);
-                final UiModeManager uiManager = (UiModeManager) getSystemService(
-                        Context.UI_MODE_SERVICE);
-                uiManager.setNightMode(value);
-            } catch (NumberFormatException e) {
-                Log.e(TAG, "could not persist night mode setting", e);
-            }
             return true;
         }
         return false;
