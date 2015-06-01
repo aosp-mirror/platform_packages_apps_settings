@@ -773,7 +773,7 @@ public class UserSettings extends SettingsPreferenceFragment
             userPreferences.add(pref);
         }
 
-        if (shouldShowGuestUserPreference(users)) {
+        if (mUserCaps.mCanAddGuest || findGuest() != null) {
             // Add a virtual Guest user for guest defaults
             UserPreference pref = new UserPreference(getActivity(), null,
                     UserPreference.USERID_GUEST_DEFAULTS,
@@ -842,23 +842,6 @@ public class UserSettings extends SettingsPreferenceFragment
         }
         return maxUsersAndGuest - managedProfiles;
     }
-
-    private boolean shouldShowGuestUserPreference(List<UserInfo> users) {
-        boolean showGuestPreference = !mUserCaps.mIsGuest;
-        // If user has DISALLOW_ADD_USER don't allow creating a guest either.
-        if (showGuestPreference && mUserManager.hasUserRestriction(UserManager.DISALLOW_ADD_USER)) {
-            showGuestPreference = false;
-            // If guest already exists, no user creation needed.
-            for (UserInfo user : users) {
-                if (user.isGuest()) {
-                    showGuestPreference = true;
-                    break;
-                }
-            }
-        }
-        return showGuestPreference;
-    }
-
 
     private void loadIconsAsync(List<Integer> missingIcons) {
         new AsyncTask<List<Integer>, Void, Void>() {
@@ -952,19 +935,9 @@ public class UserSettings extends SettingsPreferenceFragment
     }
 
     private void createAndSwitchToGuestUser() {
-        List<UserInfo> users = mUserManager.getUsers();
-        for (UserInfo user : users) {
-            if (user.isGuest()) {
-                switchUserNow(user.id);
-                return;
-            }
-        }
-        // No guest user. Create one, if there's no restriction.
-        // If it is not the primary user, then adding users from lockscreen must be enabled
-        if (mUserManager.hasUserRestriction(UserManager.DISALLOW_ADD_USER)
-                || (!mUserCaps.mIsOwner && Settings.Global.getInt(getContentResolver(),
-                        Settings.Global.ADD_USERS_WHEN_LOCKED, 0) != 1)) {
-            Log.i(TAG, "Blocking guest creation because it is restricted");
+        final UserInfo guest = findGuest();
+        if (guest != null) {
+            switchUserNow(guest.id);
             return;
         }
         UserInfo guestUser = mUserManager.createGuest(getActivity(),
@@ -972,6 +945,16 @@ public class UserSettings extends SettingsPreferenceFragment
         if (guestUser != null) {
             switchUserNow(guestUser.id);
         }
+    }
+
+    private UserInfo findGuest() {
+        List<UserInfo> users = mUserManager.getUsers();
+        for (UserInfo user : users) {
+            if (user.isGuest()) {
+                return user;
+            }
+        }
+        return null;
     }
 
     private boolean isInitialized(UserInfo user) {
@@ -1041,6 +1024,7 @@ public class UserSettings extends SettingsPreferenceFragment
         boolean mCanAddRestrictedProfile = true;
         boolean mIsOwner = UserHandle.myUserId() == UserHandle.USER_OWNER;
         boolean mIsGuest;
+        boolean mCanAddGuest;
 
         public static UserCapabilities create(Context context) {
             UserManager userManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
@@ -1050,9 +1034,11 @@ public class UserSettings extends SettingsPreferenceFragment
                 return caps;
             }
 
+            final boolean disallowAddUser = userManager.hasUserRestriction(
+                    UserManager.DISALLOW_ADD_USER);
             if (!caps.mIsOwner || UserManager.getMaxSupportedUsers() < 2
                     || !UserManager.supportsMultipleUsers()
-                    || userManager.hasUserRestriction(UserManager.DISALLOW_ADD_USER)) {
+                    || disallowAddUser) {
                 caps.mCanAddUser = false;
             }
             DevicePolicyManager dpm = (DevicePolicyManager) context.getSystemService(
@@ -1063,6 +1049,10 @@ public class UserSettings extends SettingsPreferenceFragment
             }
             final int myUserId = UserHandle.myUserId();
             caps.mIsGuest = userManager.getUserInfo(myUserId).isGuest();
+
+            final boolean canAddUsersWhenLocked = caps.mIsOwner || Settings.Global.getInt(
+                    context.getContentResolver(), Settings.Global.ADD_USERS_WHEN_LOCKED, 0) == 1;
+            caps.mCanAddGuest = !caps.mIsGuest && !disallowAddUser && canAddUsersWhenLocked;
             return caps;
         }
 
