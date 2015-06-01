@@ -818,10 +818,29 @@ public class UserSettings extends SettingsPreferenceFragment
         // Append Add user to the end of the list
         if (mUserCaps.mCanAddUser) {
             boolean moreUsers = mUserManager.canAddMoreUsers();
-            mAddUser.setEnabled(moreUsers);
             mAddUser.setOrder(Preference.DEFAULT_ORDER);
             preferenceScreen.addPreference(mAddUser);
+            mAddUser.setEnabled(moreUsers);
+            if (!moreUsers) {
+                mAddUser.setSummary(getString(R.string.user_add_max_count, getMaxRealUsers()));
+            } else {
+                mAddUser.setSummary(null);
+            }
         }
+    }
+
+    private int getMaxRealUsers() {
+        // guest is not counted against getMaxSupportedUsers() number
+        final int maxUsersAndGuest = UserManager.getMaxSupportedUsers() + 1;
+        final List<UserInfo> users = mUserManager.getUsers();
+        // managed profiles are counted against getMaxSupportedUsers()
+        int managedProfiles = 0;
+        for (UserInfo user : users) {
+            if (user.isManagedProfile()) {
+                managedProfiles++;
+            }
+        }
+        return maxUsersAndGuest - managedProfiles;
     }
 
     private boolean shouldShowGuestUserPreference(List<UserInfo> users) {
