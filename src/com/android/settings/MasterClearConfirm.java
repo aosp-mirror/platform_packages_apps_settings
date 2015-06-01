@@ -65,14 +65,10 @@ public class MasterClearConfirm extends InstrumentedFragment {
 
             if (pdbManager != null && !pdbManager.getOemUnlockEnabled()) {
                 // if OEM unlock is enabled, this will be wiped during FR process.
-                final ProgressDialog progressDialog = getProgressDialog();
-                progressDialog.show();
-
-                // need to prevent orientation changes as we're about to go into
-                // a long IO request, so we won't be able to access inflate resources on flash
-                final int oldOrientation = getActivity().getRequestedOrientation();
-                getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
                 new AsyncTask<Void, Void, Void>() {
+                    int mOldOrientation;
+                    ProgressDialog mProgressDialog;
+
                     @Override
                     protected Void doInBackground(Void... params) {
                         pdbManager.wipe();
@@ -81,9 +77,20 @@ public class MasterClearConfirm extends InstrumentedFragment {
 
                     @Override
                     protected void onPostExecute(Void aVoid) {
-                        progressDialog.hide();
-                        getActivity().setRequestedOrientation(oldOrientation);
+                        mProgressDialog.hide();
+                        getActivity().setRequestedOrientation(mOldOrientation);
                         doMasterClear();
+                    }
+
+                    @Override
+                    protected void onPreExecute() {
+                        mProgressDialog = getProgressDialog();
+                        mProgressDialog.show();
+
+                        // need to prevent orientation changes as we're about to go into
+                        // a long IO request, so we won't be able to access inflate resources on flash
+                        mOldOrientation = getActivity().getRequestedOrientation();
+                        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
                     }
                 }.execute();
             } else {
@@ -143,7 +150,8 @@ public class MasterClearConfirm extends InstrumentedFragment {
         super.onCreate(savedInstanceState);
 
         Bundle args = getArguments();
-        mEraseSdCard = args != null && args.getBoolean(MasterClear.ERASE_EXTERNAL_EXTRA);
+        mEraseSdCard = args != null
+                && args.getBoolean(MasterClear.ERASE_EXTERNAL_EXTRA);
     }
 
     @Override
