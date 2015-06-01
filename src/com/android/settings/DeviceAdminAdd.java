@@ -49,6 +49,7 @@ import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.widget.AppSecurityPermissions;
 import android.widget.Button;
@@ -245,11 +246,32 @@ public class DeviceAdminAdd extends Activity {
 
         mAddMsg = (TextView)findViewById(R.id.add_msg);
         mAddMsgExpander = (ImageView) findViewById(R.id.add_msg_expander);
-        mAddMsg.setOnClickListener(new View.OnClickListener() {
+        final View.OnClickListener onClickListener = new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
-                toggleMessageEllipsis(v);
+                toggleMessageEllipsis(mAddMsg);
             }
-        });
+        };
+        mAddMsgExpander.setOnClickListener(onClickListener);
+        mAddMsg.setOnClickListener(onClickListener);
+
+        // Determine whether the message can be collapsed - getLineCount() gives the correct
+        // number of lines only after a layout pass.
+        mAddMsg.getViewTreeObserver().addOnGlobalLayoutListener(
+                new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        final int maxLines = getEllipsizedLines();
+                        // hide the icon if number of visible lines does not exceed maxLines
+                        boolean hideMsgExpander = mAddMsg.getLineCount() <= maxLines;
+                        mAddMsgExpander.setVisibility(hideMsgExpander ? View.GONE : View.VISIBLE);
+                        if (hideMsgExpander) {
+                            mAddMsg.setOnClickListener(null);
+                            ((View)mAddMsgExpander.getParent()).invalidate();
+                        }
+                        mAddMsg.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    }
+                });
 
         // toggleMessageEllipsis also handles initial layout:
         toggleMessageEllipsis(mAddMsg);
