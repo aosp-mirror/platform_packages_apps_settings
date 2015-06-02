@@ -280,9 +280,9 @@ public final class DeviceProfilesSettings extends SettingsPreferenceFragment
                 profile.setPreferred(device.getDevice(), false);
                 if (profile instanceof MapProfile) {
                     device.setMessagePermissionChoice(BluetoothDevice.ACCESS_REJECTED);
-                    refreshProfilePreference(
-                            (CheckBoxPreference)findPreference(profile.toString()), profile);
                 }
+                refreshProfilePreference(
+                        (CheckBoxPreference)findPreference(profile.toString()), profile);
             }
         };
 
