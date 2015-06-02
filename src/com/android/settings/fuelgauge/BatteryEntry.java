@@ -146,7 +146,7 @@ public class BatteryEntry {
                 break;
             case WIFI:
                 name = context.getResources().getString(R.string.power_wifi);
-                iconId = R.drawable.ic_settings_wifi;
+                iconId = R.drawable.ic_settings_wireless;
                 break;
             case BLUETOOTH:
                 name = context.getResources().getString(R.string.power_bluetooth);
