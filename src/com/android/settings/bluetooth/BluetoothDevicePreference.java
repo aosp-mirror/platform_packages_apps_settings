@@ -222,7 +222,7 @@ public final class BluetoothDevicePreference extends Preference implements
             data.className = BluetoothSettings.class.getName();
             data.title = mCachedDevice.getName();
             data.screenTitle = context.getResources().getString(R.string.bluetooth_settings);
-            data.iconResId = R.drawable.ic_settings_bluetooth2;
+            data.iconResId = R.drawable.ic_settings_bluetooth;
             data.enabled = true;
 
             Index.getInstance(context).updateFromSearchIndexableData(data);
@@ -268,6 +268,6 @@ public final class BluetoothDevicePreference extends Preference implements
                 return R.drawable.ic_bt_headset_hfp;
             }
         }
-        return R.drawable.ic_settings_bluetooth2;
+        return R.drawable.ic_settings_bluetooth;
     }
 }
