@@ -559,10 +559,10 @@
                 android:value="true" />
         </activity>
 
-        <activity android:name="Settings$VoiceInputSettingsActivity"
-                android:label="@string/voice_input_settings_title"
+        <activity android:name="Settings$ManageAssistActivity"
+                android:label="@string/assist_and_voice_input_title"
                 android:taskAffinity="com.android.settings"
-                android:parentActivityName="Settings$InputMethodAndLanguageSettingsActivity">
+                android:parentActivityName="Settings$ManageApplicationsActivity">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.VOICE_INPUT_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -572,9 +572,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.voice.VoiceInputSettings" />
+                android:value="com.android.settings.applications.ManageAssist" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
-                android:resource="@id/language_settings" />
+                android:resource="@id/application_settings" />
         </activity>
 
         <activity android:name="Settings$KeyboardLayoutPickerActivity"

@@ -41,7 +41,6 @@ public class Settings extends SettingsActivity {
     public static class InputMethodAndLanguageSettingsActivity extends SettingsActivity { /* empty */ }
     public static class KeyboardLayoutPickerActivity extends SettingsActivity { /* empty */ }
     public static class InputMethodAndSubtypeEnablerActivity extends SettingsActivity { /* empty */ }
-    public static class VoiceInputSettingsActivity extends SettingsActivity { /* empty */ }
     public static class SpellCheckersSettingsActivity extends SettingsActivity { /* empty */ }
     public static class LocalePickerActivity extends SettingsActivity { /* empty */ }
     public static class UserDictionarySettingsActivity extends SettingsActivity { /* empty */ }
@@ -50,6 +49,7 @@ public class Settings extends SettingsActivity {
     public static class DeviceInfoSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ApplicationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ManageApplicationsActivity extends SettingsActivity { /* empty */ }
+    public static class ManageAssistActivity extends SettingsActivity { /* empty */ }
     public static class AllApplicationsActivity extends SettingsActivity { /* empty */ }
     public static class HighPowerApplicationsActivity extends SettingsActivity { /* empty */ }
     public static class AppOpsSummaryActivity extends SettingsActivity {
