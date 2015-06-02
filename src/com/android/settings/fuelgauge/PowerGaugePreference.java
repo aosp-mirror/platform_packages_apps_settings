@@ -25,13 +25,14 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.settings.R;
+import com.android.settings.TintablePreference;
 import com.android.settings.Utils;
 
 /**
  * Custom preference for displaying power consumption as a bar and an icon on
  * the left for the subsystem/app type.
  */
-public class PowerGaugePreference extends Preference {
+public class PowerGaugePreference extends TintablePreference {
     private BatteryEntry mInfo;
     private int mProgress;
     private CharSequence mProgressText;
@@ -39,7 +40,7 @@ public class PowerGaugePreference extends Preference {
 
     public PowerGaugePreference(Context context, Drawable icon, CharSequence contentDescription,
             BatteryEntry info) {
-        super(context);
+        super(context, null);
         setLayoutResource(R.layout.preference_app_percentage);
         setIcon(icon != null ? icon : new ColorDrawable(0));
         mInfo = info;
