@@ -39,6 +39,7 @@ import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 import com.android.settingslib.bluetooth.MapProfile;
+import com.android.settingslib.bluetooth.PanProfile;
 import com.android.settingslib.bluetooth.PbapServerProfile;
 
 import java.util.HashMap;
@@ -244,8 +245,12 @@ public final class DeviceProfilesSettings extends SettingsPreferenceFragment
             }
             if (profile.isPreferred(device)) {
                 // profile is preferred but not connected: disable auto-connect
-                profile.setPreferred(device, false);
-                refreshProfilePreference(profilePref, profile);
+                if (profile instanceof PanProfile) {
+                    mCachedDevice.connectProfile(profile);
+                } else {
+                    profile.setPreferred(device, false);
+                    refreshProfilePreference(profilePref, profile);
+                }
             } else {
                 profile.setPreferred(device, true);
                 mCachedDevice.connectProfile(profile);
@@ -330,10 +335,15 @@ public final class DeviceProfilesSettings extends SettingsPreferenceFragment
         if (profile instanceof MapProfile) {
             profilePref.setChecked(mCachedDevice.getMessagePermissionChoice()
                     == CachedBluetoothDevice.ACCESS_ALLOWED);
+
         } else if (profile instanceof PbapServerProfile) {
-            // Handle PBAP specially.
             profilePref.setChecked(mCachedDevice.getPhonebookPermissionChoice()
                     == CachedBluetoothDevice.ACCESS_ALLOWED);
+
+        } else if (profile instanceof PanProfile) {
+            profilePref.setChecked(profile.getConnectionStatus(device) ==
+                    BluetoothProfile.STATE_CONNECTED);
+
         } else {
             profilePref.setChecked(profile.isPreferred(device));
         }
