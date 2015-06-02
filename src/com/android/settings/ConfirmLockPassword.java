@@ -377,7 +377,6 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
 
         private void showError(CharSequence msg, long timeout) {
             mErrorTextView.setText(msg);
-            mErrorTextView.announceForAccessibility(mErrorTextView.getText());
             mPasswordEntry.setText(null);
             mHandler.removeCallbacks(mResetErrorRunnable);
             if (timeout != 0) {

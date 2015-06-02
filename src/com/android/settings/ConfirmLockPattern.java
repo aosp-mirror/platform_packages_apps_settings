@@ -208,7 +208,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                     mLockPatternView.clearPattern();
                     break;
                 case NeedToUnlockWrong:
-                    showError(R.string.lockpattern_need_to_unlock_wrong);
+                    mErrorTextView.setText(R.string.lockpattern_need_to_unlock_wrong);
 
                     mLockPatternView.setDisplayMode(LockPatternView.DisplayMode.Wrong);
                     mLockPatternView.setEnabled(true);
@@ -382,7 +382,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                 @Override
                 public void onTick(long millisUntilFinished) {
                     final int secondsCountdown = (int) (millisUntilFinished / 1000);
-                    showError(getString(
+                    mErrorTextView.setText(getString(
                             R.string.lockpattern_too_many_failed_confirmation_attempts,
                             secondsCountdown));
                 }
@@ -393,15 +393,6 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                     updateStage(Stage.NeedToUnlock);
                 }
             }.start();
-        }
-
-        private void showError(CharSequence msg) {
-            mErrorTextView.setText(msg);
-            mErrorTextView.announceForAccessibility(mErrorTextView.getText());
-        }
-
-        private void showError(int msgid) {
-            showError(getText(msgid));
         }
     }
 }
