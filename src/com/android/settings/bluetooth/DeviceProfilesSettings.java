@@ -263,7 +263,6 @@ public final class DeviceProfilesSettings extends DialogFragment implements
         } else {
             if (profile instanceof MapProfile) {
                 mCachedDevice.setMessagePermissionChoice(BluetoothDevice.ACCESS_ALLOWED);
-                refreshProfilePreference(profilePref, profile);
             }
             if (profile.isPreferred(device)) {
                 // profile is preferred but not connected: disable auto-connect
@@ -271,12 +270,12 @@ public final class DeviceProfilesSettings extends DialogFragment implements
                     mCachedDevice.connectProfile(profile);
                 } else {
                     profile.setPreferred(device, false);
-                    refreshProfilePreference(profilePref, profile);
                 }
             } else {
                 profile.setPreferred(device, true);
                 mCachedDevice.connectProfile(profile);
             }
+            refreshProfilePreference(profilePref, profile);
         }
     }
 
