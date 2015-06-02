@@ -208,7 +208,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                     mLockPatternView.clearPattern();
                     break;
                 case NeedToUnlockWrong:
-                    mErrorTextView.setText(R.string.lockpattern_need_to_unlock_wrong);
+                    showError(R.string.lockpattern_need_to_unlock_wrong);
 
                     mLockPatternView.setDisplayMode(LockPatternView.DisplayMode.Wrong);
                     mLockPatternView.setEnabled(true);
@@ -372,7 +372,6 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             }
         };
 
-
         private void handleAttemptLockout(long elapsedRealtimeDeadline) {
             updateStage(Stage.LockedOut);
             long elapsedRealtime = SystemClock.elapsedRealtime();
@@ -383,7 +382,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                 @Override
                 public void onTick(long millisUntilFinished) {
                     final int secondsCountdown = (int) (millisUntilFinished / 1000);
-                    mErrorTextView.setText(getString(
+                    showError(getString(
                             R.string.lockpattern_too_many_failed_confirmation_attempts,
                             secondsCountdown));
                 }
@@ -394,6 +393,15 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                     updateStage(Stage.NeedToUnlock);
                 }
             }.start();
+        }
+
+        private void showError(CharSequence msg) {
+            mErrorTextView.setText(msg);
+            mErrorTextView.announceForAccessibility(mErrorTextView.getText());
+        }
+
+        private void showError(int msgid) {
+            showError(getText(msgid));
         }
     }
 }
