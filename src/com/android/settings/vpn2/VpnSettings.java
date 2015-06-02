@@ -234,6 +234,7 @@ public class VpnSettings extends SettingsPreferenceFragment implements
         // Mark out connections with a subtitle
         try {
             // Legacy VPNs
+            mConnectedLegacyVpn = null;
             LegacyVpnInfo info = mConnectivityService.getLegacyVpnInfo();
             if (info != null) {
                 ConfigPreference preference = mConfigPreferences.get(info.key);
