@@ -488,7 +488,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
                     com.android.settings.bluetooth.Utils.updateSearchIndex(activity,
                             BluetoothSettings.class.getName(), device.getName(),
                             context.getResources().getString(R.string.bluetooth_settings),
-                            R.drawable.ic_settings_bluetooth2, false);
+                            R.drawable.ic_settings_bluetooth, false);
                 }
             });
 

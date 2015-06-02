@@ -28,6 +28,7 @@ import android.preference.Preference;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.text.TextUtils;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -35,12 +36,14 @@ import android.view.MenuItem;
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.PowerProfile;
+import com.android.internal.os.BatterySipper.DrainType;
 import com.android.settings.HelpUtils;
 import com.android.settings.R;
 import com.android.settings.Settings.HighPowerApplicationsActivity;
 import com.android.settings.SettingsActivity;
 import com.android.settings.applications.ManageApplications;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -50,6 +53,8 @@ import java.util.List;
 public class PowerUsageSummary extends PowerUsageBase {
 
     private static final boolean DEBUG = false;
+
+    private static final boolean USE_FAKE_DATA = false;
 
     static final String TAG = "PowerUsageSummary";
 
@@ -184,18 +189,25 @@ public class PowerUsageSummary extends PowerUsageBase {
         final BatteryStats stats = mStatsHelper.getStats();
         final double averagePower = powerProfile.getAveragePower(PowerProfile.POWER_SCREEN_FULL);
 
-        if (averagePower >= MIN_AVERAGE_POWER_THRESHOLD_MILLI_AMP) {
-            final List<BatterySipper> usageList = mStatsHelper.getUsageList();
+        TypedValue value = new TypedValue();
+        getContext().getTheme().resolveAttribute(android.R.attr.colorControlNormal, value, true);
+        int colorControl = getContext().getColor(value.resourceId);
 
-            final int dischargeAmount = stats != null ? stats.getDischargeAmount(mStatsType) : 0;
+        if (averagePower >= MIN_AVERAGE_POWER_THRESHOLD_MILLI_AMP || USE_FAKE_DATA) {
+            final List<BatterySipper> usageList = USE_FAKE_DATA ? getFakeStats()
+                    : mStatsHelper.getUsageList();
+
+            final int dischargeAmount = USE_FAKE_DATA ? 5000
+                    : stats != null ? stats.getDischargeAmount(mStatsType) : 0;
             final int numSippers = usageList.size();
             for (int i = 0; i < numSippers; i++) {
                 final BatterySipper sipper = usageList.get(i);
                 if ((sipper.totalPowerMah * SECONDS_IN_HOUR) < MIN_POWER_THRESHOLD_MILLI_AMP) {
                     continue;
                 }
+                double totalPower = USE_FAKE_DATA ? 4000 : mStatsHelper.getTotalPower();
                 final double percentOfTotal =
-                        ((sipper.totalPowerMah / mStatsHelper.getTotalPower()) * dischargeAmount);
+                        ((sipper.totalPowerMah / totalPower) * dischargeAmount);
                 if (((int) (percentOfTotal + .5)) < 1) {
                     continue;
                 }
@@ -243,6 +255,9 @@ public class PowerUsageSummary extends PowerUsageBase {
                 if (sipper.uidObj != null) {
                     pref.setKey(Integer.toString(sipper.uidObj.getUid()));
                 }
+                if (sipper.drainType != DrainType.APP && sipper.drainType != DrainType.USER) {
+                    pref.setTint(colorControl);
+                }
                 addedSome = true;
                 mAppListGroup.addPreference(pref);
                 if (mAppListGroup.getPreferenceCount() > (MAX_ITEMS_TO_LIST + 1)) {
@@ -255,6 +270,19 @@ public class PowerUsageSummary extends PowerUsageBase {
         }
 
         BatteryEntry.startRequestQueue();
+    }
+
+    private static List<BatterySipper> getFakeStats() {
+        ArrayList<BatterySipper> stats = new ArrayList<>();
+        float use = 5;
+        for (DrainType type : DrainType.values()) {
+            if (type == DrainType.APP) {
+                continue;
+            }
+            stats.add(new BatterySipper(type, null, use));
+            use += 5;
+        }
+        return stats;
     }
 
     Handler mHandler = new Handler() {
