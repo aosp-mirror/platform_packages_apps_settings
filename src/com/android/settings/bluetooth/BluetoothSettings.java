@@ -18,13 +18,10 @@ package com.android.settings.bluetooth;
 
 import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
@@ -37,14 +34,10 @@ import android.text.Spannable;
 import android.text.style.TextAppearanceSpan;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.internal.logging.MetricsLogger;
@@ -423,6 +416,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
         }
     }
 
+    @Override
     public void onDeviceBondStateChanged(CachedBluetoothDevice cachedDevice, int bondState) {
         setDeviceListGroup(getPreferenceScreen());
         removeAllDevices();
@@ -430,6 +424,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
     }
 
     private final View.OnClickListener mDeviceProfilesListener = new View.OnClickListener() {
+        @Override
         public void onClick(View v) {
             // User clicked on advanced options icon for a device in the list
             if (!(v.getTag() instanceof CachedBluetoothDevice)) {
@@ -438,77 +433,13 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
             }
 
             final CachedBluetoothDevice device = (CachedBluetoothDevice) v.getTag();
-            final Activity activity = getActivity();
-            DeviceProfilesSettings profileFragment = (DeviceProfilesSettings)activity.
-                getFragmentManager().findFragmentById(R.id.bluetooth_fragment_settings);
-
-            if (mSettingsDialogView != null){
-                ViewGroup parent = (ViewGroup) mSettingsDialogView.getParent();
-                if (parent != null) {
-                    parent.removeView(mSettingsDialogView);
-                }
-            }
-
-            if (profileFragment == null) {
-                LayoutInflater inflater = getActivity().getLayoutInflater();
-                mSettingsDialogView = inflater.inflate(R.layout.bluetooth_device_settings, null);
-                profileFragment = (DeviceProfilesSettings)activity.getFragmentManager()
-                    .findFragmentById(R.id.bluetooth_fragment_settings);
-
-                // To enable scrolling we store the name field in a seperate header and add to
-                // the ListView of the profileFragment.
-                View header = inflater.inflate(R.layout.bluetooth_device_settings_header, null);
-                profileFragment.getListView().addHeaderView(header);
-            }
-
-            final View dialogLayout = mSettingsDialogView;
-            AlertDialog.Builder settingsDialog = new AlertDialog.Builder(activity);
-            profileFragment.setDevice(device);
-            final EditText deviceName = (EditText)dialogLayout.findViewById(R.id.name);
-            deviceName.setText(device.getName(), TextView.BufferType.EDITABLE);
-
-            final DeviceProfilesSettings dpsFragment = profileFragment;
-            final Context context = v.getContext();
-            settingsDialog.setView(dialogLayout);
-            settingsDialog.setTitle(R.string.bluetooth_preference_paired_devices);
-            settingsDialog.setPositiveButton(R.string.okay,
-                    new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    EditText deviceName = (EditText)dialogLayout.findViewById(R.id.name);
-                    device.setName(deviceName.getText().toString());
-                }
-            });
-
-            settingsDialog.setNegativeButton(R.string.forget,
-                    new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    device.unpair();
-                    com.android.settings.bluetooth.Utils.updateSearchIndex(activity,
-                            BluetoothSettings.class.getName(), device.getName(),
-                            context.getResources().getString(R.string.bluetooth_settings),
-                            R.drawable.ic_settings_bluetooth, false);
-                }
-            });
-
-            // We must ensure that the fragment gets destroyed to avoid duplicate fragments.
-            settingsDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                public void onDismiss(final DialogInterface dialog) {
-                    if (!activity.isDestroyed()) {
-                        activity.getFragmentManager().beginTransaction().remove(dpsFragment)
-                            .commitAllowingStateLoss();
-                    }
-                }
-            });
-
-            AlertDialog dialog = settingsDialog.create();
-            dialog.create();
-            dialog.show();
-
-            // We must ensure that clicking on the EditText will bring up the keyboard.
-            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
-                    | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+            Bundle args = new Bundle();
+            args.putString(DeviceProfilesSettings.ARG_DEVICE_ADDRESS,
+                    device.getDevice().getAddress());
+            DeviceProfilesSettings profileSettings = new DeviceProfilesSettings();
+            profileSettings.setArguments(args);
+            profileSettings.show(getFragmentManager(),
+                    DeviceProfilesSettings.class.getSimpleName());
         }
     };
 
