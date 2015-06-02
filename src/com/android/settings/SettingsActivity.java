@@ -607,17 +607,14 @@ public class SettingsActivity extends Activity
                     1 /* one home activity by default */);
         } else {
             if (!mIsShowingDashboard) {
-                // Search is shown we are launched thru a Settings "shortcut". UP will be shown
-                // only if it is a sub settings
+                mDisplaySearch = false;
+                // UP will be shown only if it is a sub settings
                 if (mIsShortcut) {
                     mDisplayHomeAsUpEnabled = isSubSettings;
-                    mDisplaySearch = false;
                 } else if (isSubSettings) {
                     mDisplayHomeAsUpEnabled = true;
-                    mDisplaySearch = true;
                 } else {
                     mDisplayHomeAsUpEnabled = false;
-                    mDisplaySearch = false;
                 }
                 setTitleFromIntent(intent);
 
