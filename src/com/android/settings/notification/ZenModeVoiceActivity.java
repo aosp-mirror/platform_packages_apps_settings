@@ -58,7 +58,6 @@ public class ZenModeVoiceActivity extends VoiceSettingsActivity {
                 mode = Global.ZEN_MODE_ALARMS;
             }
             setZenModeConfig(mode, condition);
-            notifySuccess(getChangeSummary(mode, minutes));
 
             AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
             if (audioManager != null) {
@@ -67,10 +66,12 @@ public class ZenModeVoiceActivity extends VoiceSettingsActivity {
                          AudioManager.ADJUST_SAME,
                          AudioManager.FLAG_SHOW_UI);
             }
+            notifySuccess(getChangeSummary(mode, minutes));
         } else {
             Log.v(TAG, "Missing extra android.provider.Settings.EXTRA_DO_NOT_DISTURB_MODE_ENABLED");
+            finish();
         }
-        return true;
+        return false;
     }
 
     private void setZenModeConfig(int mode, Condition condition) {
@@ -88,12 +89,14 @@ public class ZenModeVoiceActivity extends VoiceSettingsActivity {
         int indefinite = -1;
         int byMinute = -1;
         int byHour = -1;
+        int byTime = -1;
 
         switch (mode) {
             case Global.ZEN_MODE_ALARMS:
-                indefinite = R.string.zen_mode_summary_alarams_only_indefinite;
+                indefinite = R.string.zen_mode_summary_alarms_only_indefinite;
                 byMinute = R.plurals.zen_mode_summary_alarms_only_by_minute;
                 byHour = R.plurals.zen_mode_summary_alarms_only_by_hour;
+                byTime = R.string.zen_mode_summary_alarms_only_by_time;
                 break;
             case Global.ZEN_MODE_OFF:
                 indefinite = R.string.zen_mode_summary_always;
@@ -112,6 +115,8 @@ public class ZenModeVoiceActivity extends VoiceSettingsActivity {
 
         if (minutes < 60) {
             return res.getQuantityString(byMinute, minutes, minutes, formattedTime);
+        } else if (minutes % 60 != 0) {
+            return res.getString(byTime, formattedTime);
         } else {
             int hours = minutes / 60;
             return res.getQuantityString(byHour, hours, hours, formattedTime);
