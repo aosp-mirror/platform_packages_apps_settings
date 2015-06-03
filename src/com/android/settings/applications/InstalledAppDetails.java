@@ -16,6 +16,7 @@
 
 package com.android.settings.applications;
 
+import android.app.admin.DevicePolicyManager;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
@@ -32,6 +33,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
+import android.content.pm.UserInfo;
 import android.net.INetworkStatsService;
 import android.net.INetworkStatsSession;
 import android.net.NetworkTemplate;
@@ -188,6 +190,10 @@ public class InstalledAppDetails extends AppInfoBase
             enabled = false;
         }
 
+        if (isProfileOrDeviceOwner(mPackageInfo.packageName)) {
+            enabled = false;
+        }
+
         // Home apps need special handling.  Bundled ones we don't risk downgrading
         // because that can interfere with home-key resolution.  Furthermore, we
         // can't allow uninstallation of the only home app, and we don't want to
@@ -221,6 +227,23 @@ public class InstalledAppDetails extends AppInfoBase
             // Register listener
             mUninstallButton.setOnClickListener(this);
         }
+    }
+
+    /** Returns if the supplied package is device owner or profile owner of at least one user */
+    private boolean isProfileOrDeviceOwner(String packageName) {
+        List<UserInfo> userInfos = mUserManager.getUsers();
+        DevicePolicyManager dpm = (DevicePolicyManager)
+                getContext().getSystemService(Context.DEVICE_POLICY_SERVICE);
+        if (packageName.equals(dpm.getDeviceOwner())) {
+            return true;
+        }
+        for (UserInfo userInfo : userInfos) {
+            ComponentName cn = dpm.getProfileOwnerAsUser(userInfo.id);
+            if (cn != null && cn.getPackageName().equals(packageName)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /** Called when the activity is first created. */
