@@ -1065,6 +1065,7 @@
     <string name="reset_network_final_desc" msgid="6388371121099245116">"Reset all network settings? You can\'t undo this action!"</string>
     <string name="reset_network_final_button_text" msgid="1797434793741744635">"Reset settings"</string>
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"Reset?"</string>
+    <string name="network_reset_not_available" msgid="7188610385577164676">"Network reset is not available for this user"</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"Network settings have been reset"</string>
     <string name="device_reset_title" msgid="2384019005638768076">"Reset device"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"Factory data reset"</string>
@@ -1509,7 +1510,7 @@
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Aggressive Wi‑Fi to Mobile handover"</string>
     <string name="wifi_allow_scan_with_traffic" msgid="3601853081178265786">"Always allow Wi‑Fi Roam Scans"</string>
     <string name="legacy_dhcp_client" msgid="694426978909127287">"Use legacy DHCP client"</string>
-    <string name="mobile_data_always_on" msgid="7745605759775320362">"Cellular data always active"</string>
+    <string name="mobile_data_always_on" msgid="7745605759775320362">"Mobile data always active"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"Show options for wireless display certification"</string>
     <string name="wifi_verbose_logging_summary" msgid="6615071616111731958">"Increase Wi‑Fi logging level, show per SSID RSSI in Wi‑Fi Picker"</string>
     <string name="wifi_aggressive_handover_summary" msgid="6328455667642570371">"When enabled, Wi‑Fi will be more aggressive in handing over the data connection to Mobile, when Wi‑Fi signal is low"</string>
@@ -2185,7 +2186,7 @@
     <string name="data_usage_total_during_range_mobile" product="tablet" msgid="1925687342154538972">"<xliff:g id="RANGE">%2$s</xliff:g>: about <xliff:g id="TOTAL">%1$s</xliff:g> used, as measured by your tablet. Your carrier\'s data usage accounting may differ."</string>
     <string name="data_usage_total_during_range_mobile" product="default" msgid="5063981061103812900">"<xliff:g id="RANGE">%2$s</xliff:g>: about <xliff:g id="TOTAL">%1$s</xliff:g> used, as measured by your phone. Your carrier\'s data usage accounting may differ."</string>
     <string name="data_usage_metered_title" msgid="7383175371006596441">"Network restrictions"</string>
-    <string name="data_usage_metered_body" msgid="3262343834446126044">"Metered networks are treated like cellular when background data is restricted. Apps may warn before using these networks for large downloads."</string>
+    <string name="data_usage_metered_body" msgid="3262343834446126044">"Metered networks are treated like mobile when background data is restricted. Apps may warn before using these networks for large downloads."</string>
     <string name="data_usage_metered_mobile" msgid="2326986339431119372">"Mobile networks"</string>
     <string name="data_usage_metered_wifi" msgid="1761738002328299714">"Metered Wi‑Fi networks"</string>
     <string name="data_usage_metered_wifi_disabled" msgid="727808462375941567">"To select metered networks, turn Wi‑Fi on."</string>
@@ -2270,8 +2271,7 @@
     <string name="user_you" msgid="1639158809315025986">"You (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_nickname" msgid="5148818000228994488">"Nickname"</string>
     <string name="user_add_user_type_title" msgid="2146438670792322349">"Add"</string>
-    <!-- no translation found for user_add_max_count (5405885348463433157) -->
-    <skip />
+    <string name="user_add_max_count" msgid="5405885348463433157">"You can add up to <xliff:g id="USER_COUNT">%1$d</xliff:g> users"</string>
     <string name="user_add_user_item_summary" msgid="4702776187132008661">"Users have their own apps and content"</string>
     <string name="user_add_profile_item_summary" msgid="5931663986889138941">"You can restrict access to apps and content from your account"</string>
     <string name="user_add_user_item_title" msgid="8212199632466198969">"User"</string>
@@ -2430,7 +2430,7 @@
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"Selection required"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"Settings"</string>
     <string name="search_results_title" msgid="1796252422574886932">"Settings"</string>
-    <string name="search_menu" msgid="7053532283559077164">"Search"</string>
+    <string name="search_menu" msgid="6283419262313758339">"Search Settings"</string>
     <string name="query_hint_text" msgid="3350700807437473939">"Search settings"</string>
     <string name="search_recents_queries_label" msgid="2128811638532309069">"Recent searches"</string>
     <string name="search_results_label" msgid="4163304782363526148">"Results"</string>
@@ -2452,6 +2452,7 @@
     <string name="keywords_voice_input" msgid="3519547605812413860">"recogniser input speech speak language hands-free hand free recognition offensive word audio history bluetooth headset"</string>
     <string name="keywords_text_to_speech_output" msgid="392447904221657930">"rate language default speak speaking tts accessibility reader blind"</string>
     <string name="keywords_date_and_time" msgid="2631808108134830066">"clock military"</string>
+    <string name="keywords_network_reset" msgid="6346978754090557056">"reset restore factory"</string>
     <string name="keywords_factory_data_reset" msgid="4355133848707691977">"wipe delete restore clear remove"</string>
     <string name="keywords_printing" msgid="1701778563617114846">"printer"</string>
     <string name="keywords_sounds_and_notifications" msgid="5965996187974887000">"speaker beep"</string>

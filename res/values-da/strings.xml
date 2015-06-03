@@ -1065,6 +1065,7 @@
     <string name="reset_network_final_desc" msgid="6388371121099245116">"Vil du nulstille alle netværksindstillingerne? Du kan ikke fortryde denne handling."</string>
     <string name="reset_network_final_button_text" msgid="1797434793741744635">"Nulstil indstillinger"</string>
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"Vil du nulstille?"</string>
+    <string name="network_reset_not_available" msgid="7188610385577164676">"Gendannelse af netværk er ikke tilgængeligt for denne bruger"</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"Netværksindstillingerne er blevet nulstillet"</string>
     <string name="device_reset_title" msgid="2384019005638768076">"Nulstil enhed"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"Gendannelse af fabriksdata"</string>
@@ -1235,7 +1236,7 @@
     <string name="lockpattern_settings_enable_summary" msgid="1165707416664252167">"Du skal tegne et mønster for at låse skærmen op"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="2615606088906120711">"Gør mønster synligt"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="8898518337442601027">"Vibrer ved berøring"</string>
-    <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"Afbryderknappen låser straks"</string>
+    <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"Afbryderknap låser straks"</string>
     <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"Undtagen når den holdes oplåst af <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="1652352830005653447">"Angiv oplåsningsmønster"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="1123908306116495545">"Skift oplåsningsmønster"</string>
@@ -1565,17 +1566,17 @@
     <string name="accessibility_display_title" msgid="7610175687949675162">"Skærm"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"Undertekster"</string>
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"Forstørrelsesbevægelser"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="1178289000423776584">"Når denne funktion er slået til, kan du zoome ind og ud ved at trykke tre gange på skærmen.\n\nMens der er zoomet ind, kan du:\n"<ul><li>"panorere: Træk to eller flere fingre hen over skærmen."</li>\n<li>"justere zoomniveauet: Knib to eller flere fingre sammen, eller spred dem fra hinanden."</li></ul>\n\n"Du kan også midlertidigt forstørre det, du trykker på, ved at trykke tre gange og holde fingeren nede. I denne forstørrede tilstand kan du trække fingeren for at udforske forskellige dele af skærmen. Løft fingeren for at vende tilbage til din forrige tilstand.\n\nBemærk! Du kan forstørre ved at trykke tre gange overalt, undtagen på tastaturet og i navigationslinjen."</string>
+    <string name="accessibility_screen_magnification_summary" msgid="1178289000423776584">"Når denne funktion er slået til, kan du zoome ind og ud ved at trykke tre gange på skærmen.\n\nMens der er zoomet ind, kan du:\n"<ul><li>"panorere: Træk to eller flere fingre hen over skærmen."</li>\n<li>"justere zoomniveauet: Knib to eller flere fingre sammen, eller spred dem fra hinanden."</li></ul>\n\n"Du kan også midlertidigt forstørre det, du trykker på, ved at trykke tre gange og holde fingeren nede. I denne forstørrede tilstand kan du trække fingeren for at udforske forskellige dele af skærmen. Løft fingeren for at vende tilbage til din forrige tilstand.\n\nBemærk! Du kan forstørre ved at trykke tre gange overalt, undtagen på tastaturet og på navigationsbjælken."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Genvej til hjælpefunktioner"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"Til"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"Fra"</string>
-    <string name="accessibility_global_gesture_preference_description" msgid="750438015254396963">"Når denne funktion er slået til, kan du hurtigt aktivere hjælpefunktioner i to trin:\n\nTrin 1: Tryk på afbryderknappen, og hold den nede, indtil du hører en lyd eller mærker en vibration.\n\nTrin 2: Tryk med to fingre, og hold dem nede, indtil du hører bekræftelseslyden.\n\nHvis enheden har flere brugere, aktiverer brug af denne genvej midlertidigt adgang, indtil enheden låses op."</string>
+    <string name="accessibility_global_gesture_preference_description" msgid="750438015254396963">"Når denne funktion er slået til, kan du hurtigt aktivere hjælpefunktioner i to trin:\n\nTrin 1: Tryk på afbryderknappen, og hold den nede, indtil du hører en lyd eller mærker en vibration.\n\nTrin 2: Tryk med to fingre, og hold dem nede, indtil du hører bekræftelseslyden.\n\nHvis enheden har flere brugere, giver brugen af denne genvej på låseskærmen midlertidig adgang, indtil enheden låses op."</string>
     <string name="accessibility_toggle_large_text_preference_title" msgid="6307247527580207161">"Stor tekst"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="2567402942683463779">"Tekst med stor kontrast"</string>
     <string name="accessibility_toggle_screen_magnification_preference_title" msgid="2472285215737820469">"Skærmforstørrelse"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="7218498768415430963">"Opdater skærmforstørrelse automatisk"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"Opdater skærmforstørrelsen på appovergange"</string>
-    <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Afbryderknappen afslutter opkald"</string>
+    <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Afbryderknap afslutter opkald"</string>
     <string name="accessibility_toggle_speak_password_preference_title" msgid="5986628515113204844">"Oplæs adgangskoder"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Forsinkelse på tryk og hold nede"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Ombytning af farver"</string>
@@ -1587,9 +1588,9 @@
     <string name="daltonizer_type_overridden" msgid="3116947244410245916">"Tilsidesat af <xliff:g id="TITLE">%1$s</xliff:g>"</string>
     <string name="daltonizer_mode_disabled" msgid="7482661936053801862">"Deaktiveret"</string>
     <string name="daltonizer_mode_monochromacy" msgid="8485709880666106721">"Monokromasi"</string>
-    <string name="daltonizer_mode_deuteranomaly" msgid="5475532989673586329">"Rød-grønblindhed"</string>
-    <string name="daltonizer_mode_protanomaly" msgid="8424148009038666065">"Rød-grønblindhed"</string>
-    <string name="daltonizer_mode_tritanomaly" msgid="481725854987912389">"Blå-gulblindhed"</string>
+    <string name="daltonizer_mode_deuteranomaly" msgid="5475532989673586329">"Deuteranopi (rød-grøn)"</string>
+    <string name="daltonizer_mode_protanomaly" msgid="8424148009038666065">"Protanopi (rød-grøn)"</string>
+    <string name="daltonizer_mode_tritanomaly" msgid="481725854987912389">"Tritanopi (blå-gul)"</string>
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Indstillinger"</string>
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"Til"</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"Fra"</string>
@@ -1667,7 +1668,7 @@
     <string name="print_search_box_hidden_utterance" msgid="7980832833405818400">"Søgefeltet er skjult"</string>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"Batteri"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Hvad der har brugt batteriet"</string>
-    <string name="power_usage_not_available" msgid="3109326074656512387">"Batteribrugsdata utilgængeligt."</string>
+    <string name="power_usage_not_available" msgid="3109326074656512387">"Ingen data om batteriforbrug."</string>
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> tilbage"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> til batteriet er opladt"</string>
@@ -2204,8 +2205,8 @@
     <string name="vpn_ipsec_server_cert" msgid="6599276718456935010">"IPSec-servercertifikat"</string>
     <string name="vpn_show_options" msgid="7182688955890457003">"Vis avancerede indstillinger"</string>
     <string name="vpn_search_domains" msgid="5391995501541199624">"DNS-søgedomæner"</string>
-    <string name="vpn_dns_servers" msgid="5570715561245741829">"DNS-servere (f.eks 8.8.8.8)"</string>
-    <string name="vpn_routes" msgid="3818655448226312232">"Videresendelsesruter (f.eks 10.0.0.0/8)"</string>
+    <string name="vpn_dns_servers" msgid="5570715561245741829">"DNS-servere (f.eks. 8.8.8.8)"</string>
+    <string name="vpn_routes" msgid="3818655448226312232">"Videresendelsesruter (f.eks. 10.0.0.0/8)"</string>
     <string name="vpn_username" msgid="1863901629860867849">"Brugernavn"</string>
     <string name="vpn_password" msgid="6756043647233596772">"Adgangskode"</string>
     <string name="vpn_save_login" msgid="6350322456427484881">"Gem kontooplysninger"</string>
@@ -2270,8 +2271,7 @@
     <string name="user_you" msgid="1639158809315025986">"Dig (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_nickname" msgid="5148818000228994488">"Kaldenavn"</string>
     <string name="user_add_user_type_title" msgid="2146438670792322349">"Tilføj"</string>
-    <!-- no translation found for user_add_max_count (5405885348463433157) -->
-    <skip />
+    <string name="user_add_max_count" msgid="5405885348463433157">"Du kan tilføje op til <xliff:g id="USER_COUNT">%1$d</xliff:g> brugere"</string>
     <string name="user_add_user_item_summary" msgid="4702776187132008661">"Brugere har egne apps og eget indhold"</string>
     <string name="user_add_profile_item_summary" msgid="5931663986889138941">"Du kan begrænse adgangen til apps og indhold fra din konto"</string>
     <string name="user_add_user_item_title" msgid="8212199632466198969">"Bruger"</string>
@@ -2430,7 +2430,7 @@
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"Du har ikke valgt endnu"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"Indstillinger"</string>
     <string name="search_results_title" msgid="1796252422574886932">"Indstillinger"</string>
-    <string name="search_menu" msgid="7053532283559077164">"Søgning"</string>
+    <string name="search_menu" msgid="6283419262313758339">"Søgeindstillinger"</string>
     <string name="query_hint_text" msgid="3350700807437473939">"Indstillinger for søgning"</string>
     <string name="search_recents_queries_label" msgid="2128811638532309069">"Seneste søgninger"</string>
     <string name="search_results_label" msgid="4163304782363526148">"Resultater"</string>
@@ -2452,6 +2452,7 @@
     <string name="keywords_voice_input" msgid="3519547605812413860">"genkendelse input tale tal sprog håndfri hånd fri genkendelse stødende ord lyd historik bluetooth headset"</string>
     <string name="keywords_text_to_speech_output" msgid="392447904221657930">"pris sprog standard tale taler tts tilgængelighed læser blind"</string>
     <string name="keywords_date_and_time" msgid="2631808108134830066">"tid militærtid"</string>
+    <string name="keywords_network_reset" msgid="6346978754090557056">"gendan fabriksindstillingerne"</string>
     <string name="keywords_factory_data_reset" msgid="4355133848707691977">"eliminer slet gendan ryd fjern"</string>
     <string name="keywords_printing" msgid="1701778563617114846">"printer"</string>
     <string name="keywords_sounds_and_notifications" msgid="5965996187974887000">"højttaler bip"</string>
@@ -2749,15 +2750,15 @@
     <string name="assist_access_context_title" msgid="2047105711005856521">"Brug aktuel kontekst"</string>
     <string name="assist_access_context_summary" msgid="8365837347256022203">"Når du åbner assistanceappen, skal du give den tilladelse til at se, hvad du foretager dig på skærmen"</string>
     <string name="assist_footer" msgid="2283187001990543739">"Assistanceapps hjælper dig med at identificere og reagere på nyttige oplysninger uden at skulle spørge om hjælp. Nogle apps understøtter både startertjenester og tjenester til taleinput for at give dig integreret assistance."</string>
-    <string name="average_memory_use" msgid="829566450150198512">"Gennemsnitlig hukommelsesbrug"</string>
-    <string name="maximum_memory_use" msgid="7493720799710132496">"Maksimal hukommelsesbrug"</string>
-    <string name="memory_usage" msgid="1781358557214390033">"Hukommelsesbrug"</string>
-    <string name="app_list_memory_use" msgid="6987417883876419338">"Appbrug"</string>
+    <string name="average_memory_use" msgid="829566450150198512">"Gennemsnit. hukommelsesforbrug"</string>
+    <string name="maximum_memory_use" msgid="7493720799710132496">"Maksimal hukommelsesforbrug"</string>
+    <string name="memory_usage" msgid="1781358557214390033">"Hukommelsesforbrug"</string>
+    <string name="app_list_memory_use" msgid="6987417883876419338">"Appforbrug"</string>
     <string name="memory_details" msgid="5943436005716991782">"Oplysninger"</string>
     <string name="memory_use_summary" msgid="5608257211903075754">"Der er i gennemsnit brugt <xliff:g id="SIZE">%1$s</xliff:g> hukommelse inden for de sidste tre timer"</string>
     <string name="no_memory_use_summary" msgid="2016900536806235588">"Der er ikke brugt hukommelse inden for de sidste tre timer"</string>
-    <string name="sort_avg_use" msgid="3998036180505143129">"Sortér efter gennemsnitlig brug"</string>
-    <string name="sort_max_use" msgid="4629247978290075124">"Sortér efter maksimal brug"</string>
+    <string name="sort_avg_use" msgid="3998036180505143129">"Sortér efter gennemsnitligt forbrug"</string>
+    <string name="sort_max_use" msgid="4629247978290075124">"Sortér efter maksimal forbrug"</string>
     <string name="memory_performance" msgid="5661005192284103281">"Præstation"</string>
     <string name="total_memory" msgid="2017287600738630165">"Hukommelse i alt"</string>
     <string name="average_used" msgid="5338339266517245782">"Brugt i gennemsnit (%)"</string>
@@ -2768,6 +2769,6 @@
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> apps har brugt hukommelse inden for de sidste <xliff:g id="DURATION_1">%2$s</xliff:g></item>
     </plurals>
     <string name="running_frequency" msgid="6622624669948277693">"Hyppighed"</string>
-    <string name="memory_maximum_usage" msgid="6513785462055278341">"Maksimal brug"</string>
+    <string name="memory_maximum_usage" msgid="6513785462055278341">"Maksimal forbrug"</string>
     <string name="no_data_usage" msgid="9131454024293628063">"Der blev ikke brugt nogen data"</string>
 </resources>

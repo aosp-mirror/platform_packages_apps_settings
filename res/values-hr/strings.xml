@@ -1074,6 +1074,7 @@
     <string name="reset_network_final_desc" msgid="6388371121099245116">"Želite li vratiti sve postavke mreže na zadano? Tu radnju nije moguće poništiti!"</string>
     <string name="reset_network_final_button_text" msgid="1797434793741744635">"Poništi postavke"</string>
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"Poništiti?"</string>
+    <string name="network_reset_not_available" msgid="7188610385577164676">"Vraćanje mreže na zadano nije dostupno za ovog korisnika"</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"Postavke mreže vraćene su na zadano."</string>
     <string name="device_reset_title" msgid="2384019005638768076">"Vrati uređaj na zadano"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"Vraćanje na tvorničko stanje"</string>
@@ -1303,7 +1304,7 @@
     <string name="default_emergency_app" msgid="1951760659640369980">"Aplikacija za hitne slučajeve"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"Poništi postavke"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"Poništiti postavke?"</string>
-    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Sve postavke za sljedeće vratit će se na zadano:\n\n "<li>"onemogućene aplikacije"</li>\n" "<li>"onemogućene obavijesti aplikacija"</li>\n" "<li>"zadane aplikacije za radnje"</li>\n" "<li>"ograničenja pozadinskih podataka za aplikacije"</li>\n" "<li>"sva ograničenja dozvola."</li>\n\n" Nećete izgubiti podatke nijedne aplikacije."</string>
+    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Sve sljedeće preferencije vratit će se na zadane postavke:\n\n "<li>"onemogućene aplikacije"</li>\n" "<li>"onemogućene obavijesti aplikacija"</li>\n" "<li>"zadane aplikacije za radnje"</li>\n" "<li>"ograničenja pozadinskih podataka za aplikacije"</li>\n" "<li>"sva ograničenja dozvola."</li>\n\n" Nećete izgubiti podatke nijedne aplikacije."</string>
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"Poništi aplikacije"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Upravljaj prostorom"</string>
     <string name="filter" msgid="2018011724373033887">"Filtar"</string>
@@ -2279,8 +2280,7 @@
     <string name="user_you" msgid="1639158809315025986">"Vi (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_nickname" msgid="5148818000228994488">"Nadimak"</string>
     <string name="user_add_user_type_title" msgid="2146438670792322349">"Dodavanje"</string>
-    <!-- no translation found for user_add_max_count (5405885348463433157) -->
-    <skip />
+    <string name="user_add_max_count" msgid="5405885348463433157">"Ne možete dodati više od <xliff:g id="USER_COUNT">%1$d</xliff:g> korisnika"</string>
     <string name="user_add_user_item_summary" msgid="4702776187132008661">"Korisnici imaju vlastite aplikacije i sadržaj"</string>
     <string name="user_add_profile_item_summary" msgid="5931663986889138941">"Možete ograničiti pristup aplikacijama i sadržaju sa svojeg računa"</string>
     <string name="user_add_user_item_title" msgid="8212199632466198969">"Korisnik"</string>
@@ -2439,7 +2439,7 @@
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"Potreban je odabir"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"Postavke"</string>
     <string name="search_results_title" msgid="1796252422574886932">"Postavke"</string>
-    <string name="search_menu" msgid="7053532283559077164">"Pretražite"</string>
+    <string name="search_menu" msgid="6283419262313758339">"Postavke pretraživanja"</string>
     <string name="query_hint_text" msgid="3350700807437473939">"Postavke pretraživanja"</string>
     <string name="search_recents_queries_label" msgid="2128811638532309069">"Nedavna pretraživanja"</string>
     <string name="search_results_label" msgid="4163304782363526148">"Rezultati"</string>
@@ -2461,6 +2461,7 @@
     <string name="keywords_voice_input" msgid="3519547605812413860">"prepoznavanje unos govor govoriti jezik bez ruku uvredljiva riječ audio povijest bluetooth slušalice"</string>
     <string name="keywords_text_to_speech_output" msgid="392447904221657930">"brzina jezik zadano govoriti govorenje tts pristupačnost čitač slijepi"</string>
     <string name="keywords_date_and_time" msgid="2631808108134830066">"sat vojni prikaz"</string>
+    <string name="keywords_network_reset" msgid="6346978754090557056">"vraćanje na zadano vraćanje na tvorničke postavke poništavanje"</string>
     <string name="keywords_factory_data_reset" msgid="4355133848707691977">"obrisati izbrisati vratiti isprazniti ukloniti"</string>
     <string name="keywords_printing" msgid="1701778563617114846">"pisač"</string>
     <string name="keywords_sounds_and_notifications" msgid="5965996187974887000">"zvučnik kratak zvučni signal"</string>
@@ -2700,7 +2701,7 @@
     <string name="advanced_apps" msgid="4812975097124803873">"Napredno"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Nepoznata aplikacija"</string>
     <string name="choose_profile" msgid="8229363046053568878">"Odabir profila"</string>
-    <string name="app_permissions" msgid="4148222031991883874">"Dopuštenja aplikacije"</string>
+    <string name="app_permissions" msgid="4148222031991883874">"Dozvole aplikacijama"</string>
     <string name="app_permissions_summary" msgid="2098173899436407221">"Broj aplikacija s dodatnim pristupom: <xliff:g id="COUNT_0">%d</xliff:g> od <xliff:g id="COUNT_1">%d</xliff:g>"</string>
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"Broj aplikacija s dopuštenjem: <xliff:g id="COUNT_0">%d</xliff:g> od <xliff:g id="COUNT_1">%d</xliff:g>"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Dodirnite za aktivaciju"</string>
@@ -2767,16 +2768,11 @@
     <string name="assist_footer" msgid="2283187001990543739">"Pomoćne aplikacije olakšavaju vam prepoznavanje korisnih informacija i reakciju na temelju tih informacija bez posebnog traženja. Neke aplikacije podržavaju pokretač i usluge glasovnog unosa kako bi vam pružile integriranu pomoć."</string>
     <string name="average_memory_use" msgid="829566450150198512">"Prosječna upotreba memorije"</string>
     <string name="maximum_memory_use" msgid="7493720799710132496">"Maksimalna upotreba memorije"</string>
-    <!-- no translation found for memory_usage (1781358557214390033) -->
-    <skip />
-    <!-- no translation found for app_list_memory_use (6987417883876419338) -->
-    <skip />
-    <!-- no translation found for memory_details (5943436005716991782) -->
-    <skip />
-    <!-- no translation found for memory_use_summary (5608257211903075754) -->
-    <skip />
-    <!-- no translation found for no_memory_use_summary (2016900536806235588) -->
-    <skip />
+    <string name="memory_usage" msgid="1781358557214390033">"Upotreba memorije"</string>
+    <string name="app_list_memory_use" msgid="6987417883876419338">"Upotreba za aplikacije"</string>
+    <string name="memory_details" msgid="5943436005716991782">"Pojedinosti"</string>
+    <string name="memory_use_summary" msgid="5608257211903075754">"Prosječna upotreba memorije u posljednja 3 sata: <xliff:g id="SIZE">%1$s</xliff:g>"</string>
+    <string name="no_memory_use_summary" msgid="2016900536806235588">"U posljednja 3 sata nije bilo upotrebe memorije"</string>
     <string name="sort_avg_use" msgid="3998036180505143129">"Razvrstaj po prosječnoj upotrebi"</string>
     <string name="sort_max_use" msgid="4629247978290075124">"Razvrstaj po maksimalnoj upotrebi"</string>
     <string name="memory_performance" msgid="5661005192284103281">"Izvođenje"</string>

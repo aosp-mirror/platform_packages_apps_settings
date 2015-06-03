@@ -144,7 +144,7 @@
     <string name="bluetooth_unknown" msgid="644716244548801421"></string>
     <string name="bluetooth_device" msgid="5291950341750186887">"جهاز بلوتوث بدون اسم"</string>
     <string name="progress_scanning" msgid="192587958424295789">"البحث"</string>
-    <string name="bluetooth_no_devices_found" msgid="1085232930277181436">"لم يتم العثور على أجهزة بلوتوث بالجوار."</string>
+    <string name="bluetooth_no_devices_found" msgid="1085232930277181436">"لم يتم العثور على أجهزة بلوتوث."</string>
     <string name="bluetooth_notif_ticker" msgid="4726721390078512173">"طلب اقتران البلوتوث"</string>
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"طلب اقتران"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"المس للإقران مع <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
@@ -583,7 +583,7 @@
     <string name="wifi_assistant_title" msgid="2553267316621598101">"‏مساعد Wi‑Fi"</string>
     <string name="wifi_display_settings_title" msgid="8740852850033480136">"إرسال"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"تمكين عرض شاشة لاسلكي"</string>
-    <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"لم يتم العثور على أجهزة بالجوار."</string>
+    <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"لم يتم العثور على أجهزة."</string>
     <string name="wifi_display_status_connecting" msgid="5688608834000748607">"جارٍ الاتصال"</string>
     <string name="wifi_display_status_connected" msgid="8364125226376985558">"متصل"</string>
     <string name="wifi_display_status_in_use" msgid="8556830875615434792">"قيد الاستخدام"</string>
@@ -1101,6 +1101,7 @@
     <string name="reset_network_final_desc" msgid="6388371121099245116">"هل تريد إعادة تعيين كل إعدادات الشبكة؟ لا يمكنك التراجع عن هذا الإجراء!"</string>
     <string name="reset_network_final_button_text" msgid="1797434793741744635">"إعادة تعيين الإعدادات"</string>
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"هل تريد إعادة التعيين؟"</string>
+    <string name="network_reset_not_available" msgid="7188610385577164676">"إعادة ضبط الشبكة ليست متاحة لهذا المستخدم"</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"تمت إعادة تعيين إعدادات الشبكة"</string>
     <string name="device_reset_title" msgid="2384019005638768076">"إعادة تعيين الجهاز"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"إعادة الضبط بحسب بيانات المصنع"</string>
@@ -2306,8 +2307,7 @@
     <string name="user_you" msgid="1639158809315025986">"أنت (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_nickname" msgid="5148818000228994488">"اللقب"</string>
     <string name="user_add_user_type_title" msgid="2146438670792322349">"إضافة"</string>
-    <!-- no translation found for user_add_max_count (5405885348463433157) -->
-    <skip />
+    <string name="user_add_max_count" msgid="5405885348463433157">"يمكنك إضافة ما يصل إلى <xliff:g id="USER_COUNT">%1$d</xliff:g> من المستخدمين"</string>
     <string name="user_add_user_item_summary" msgid="4702776187132008661">"المستخدمون لديهم تطبيقات ومحتوى خاص بهم"</string>
     <string name="user_add_profile_item_summary" msgid="5931663986889138941">"يمكنك تقييد الدخول إلى التطبيقات والمحتوى من حسابك"</string>
     <string name="user_add_user_item_title" msgid="8212199632466198969">"المستخدم"</string>
@@ -2466,7 +2466,7 @@
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"يلزم التحديد"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"الإعدادات"</string>
     <string name="search_results_title" msgid="1796252422574886932">"الإعدادات"</string>
-    <string name="search_menu" msgid="7053532283559077164">"بحث"</string>
+    <string name="search_menu" msgid="6283419262313758339">"إعدادات البحث"</string>
     <string name="query_hint_text" msgid="3350700807437473939">"إعدادات البحث"</string>
     <string name="search_recents_queries_label" msgid="2128811638532309069">"عمليات البحث التي تمت مؤخرًا"</string>
     <string name="search_results_label" msgid="4163304782363526148">"النتائج"</string>
@@ -2488,6 +2488,7 @@
     <string name="keywords_voice_input" msgid="3519547605812413860">"أداة تعرف إدخال صوت تحدث لغة بدون استخدام اليدين بدون يدين تعرف كلمة مسيئة صوت سجل بلوتوث سماعة رأس"</string>
     <string name="keywords_text_to_speech_output" msgid="392447904221657930">"تقييم لغة افتراضي يتحدث تحدث تحويل نص إلى كلام إمكانية الوصول قارئ مكفوف"</string>
     <string name="keywords_date_and_time" msgid="2631808108134830066">"ساعة عسكرية"</string>
+    <string name="keywords_network_reset" msgid="6346978754090557056">"إعادة الضبط بحسب إعدادات المصنع"</string>
     <string name="keywords_factory_data_reset" msgid="4355133848707691977">"محو حذف استرداد مسح إزالة"</string>
     <string name="keywords_printing" msgid="1701778563617114846">"طابعة"</string>
     <string name="keywords_sounds_and_notifications" msgid="5965996187974887000">"صفارة مكبر الصوت"</string>
@@ -2564,7 +2565,7 @@
     <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"هل ترغب في تمكين <xliff:g id="SERVICE">%1$s</xliff:g>؟"</string>
     <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"سيتمكن <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> من قراءة جميع الإشعارات التي تمّ نشرها من قِبل النظام أو أي من التطبيقات المثبتة، والتي قد تنطوي على معلومات شخصية مثل أسماء جهات الاتصال ونص الرسائل المرسلة إليك. وسيتمكن أيضًا من تجاهل هذه الإشعارات أو لمس أزرار الإجراءات بداخلها."</string>
     <string name="manage_zen_access_title" msgid="2611116122628520522">"الوصول إلى إعداد \"الرجاء عدم الإزعاج\""</string>
-    <string name="zen_access_empty_text" msgid="8772967285742259540">"لم تطلب أي تطبيقات مثبّتة حق الوصول إلى إعداد \"الرجاء عدم الإزعاج\""</string>
+    <string name="zen_access_empty_text" msgid="8772967285742259540">"لم تطلّب أي تطبيقات مثبّتة حق الوصول إلى إعداد \"الرجاء عدم الإزعاج\""</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"جارٍ تحميل التطبيقات..."</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"حظر الكل"</string>
     <string name="app_notification_block_summary" msgid="9049487483231233726">"عدم عرض إشعارات من هذا التطبيق"</string>
