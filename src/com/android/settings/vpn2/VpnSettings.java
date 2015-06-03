@@ -106,7 +106,8 @@ public class VpnSettings extends SettingsPreferenceFragment implements
         super.onCreate(savedState);
 
         mUserManager = (UserManager) getSystemService(Context.USER_SERVICE);
-        if (mUserManager.hasUserRestriction(UserManager.DISALLOW_CONFIG_VPN)) {
+        if (mUserManager.hasUserRestriction(UserManager.DISALLOW_CONFIG_VPN)
+                || UserHandle.myUserId() != UserHandle.USER_OWNER) {
             mUnavailable = true;
             setPreferenceScreen(new PreferenceScreen(getActivity(), null));
             return;
