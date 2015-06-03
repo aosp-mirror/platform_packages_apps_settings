@@ -114,16 +114,14 @@ public class AccountPreference extends Preference {
         int res;
         switch (status) {
             case SYNC_ENABLED:
-                res = R.drawable.ic_sync_green_holo;
+            case SYNC_IN_PROGRESS:
+                res = R.drawable.ic_settings_sync;
                 break;
             case SYNC_DISABLED:
                 res = R.drawable.ic_sync_grey_holo;
                 break;
             case SYNC_ERROR:
                 res = R.drawable.ic_sync_red_holo;
-                break;
-            case SYNC_IN_PROGRESS:
-                res = R.drawable.ic_sync_green_holo;
                 break;
             default:
                 res = R.drawable.ic_sync_red_holo;
