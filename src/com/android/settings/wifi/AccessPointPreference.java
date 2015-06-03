@@ -52,7 +52,7 @@ public class AccessPointPreference extends Preference {
         mAccessPoint = accessPoint;
         mForSavedNetworks = forSavedNetworks;
         mAccessPoint.setTag(this);
-
+        mLevel = -1;
         refresh();
     }
 
@@ -133,8 +133,8 @@ public class AccessPointPreference extends Preference {
         final Context context = getContext();
         int level = mAccessPoint.getLevel();
         if (level != mLevel) {
-            updateIcon(mLevel, context);
             mLevel = level;
+            updateIcon(mLevel, context);
             notifyChanged();
         }
         updateBadge(context);
