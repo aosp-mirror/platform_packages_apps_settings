@@ -38,6 +38,7 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
@@ -123,7 +124,8 @@ public class TetherSettings extends SettingsPreferenceFragment
 
         mUm = (UserManager) getSystemService(Context.USER_SERVICE);
 
-        if (mUm.hasUserRestriction(UserManager.DISALLOW_CONFIG_TETHERING)) {
+        if (mUm.hasUserRestriction(UserManager.DISALLOW_CONFIG_TETHERING)
+                || UserHandle.myUserId() != UserHandle.USER_OWNER) {
             mUnavailable = true;
             setPreferenceScreen(new PreferenceScreen(getActivity(), null));
             return;
