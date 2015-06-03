@@ -816,7 +816,8 @@ public class WifiSettings extends RestrictedSettingsFragment
     /* package */ void forget() {
         MetricsLogger.action(getActivity(), MetricsLogger.ACTION_WIFI_FORGET);
         if (!mSelectedAccessPoint.isSaved()) {
-            if (mSelectedAccessPoint.getNetworkInfo().getState() != State.DISCONNECTED) {
+            if (mSelectedAccessPoint.getNetworkInfo() != null &&
+                    mSelectedAccessPoint.getNetworkInfo().getState() != State.DISCONNECTED) {
                 // Network is active but has no network ID - must be ephemeral.
                 mWifiManager.disableEphemeralNetwork(
                         AccessPoint.convertToQuotedString(mSelectedAccessPoint.getSsid()));
