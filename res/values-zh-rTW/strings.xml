@@ -80,8 +80,8 @@
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"SD 卡"</string>
     <string name="battery_info_status_label" msgid="8109155295509700309">"電池狀態："</string>
     <string name="battery_info_power_label" msgid="7465140230991349382">"電源插頭："</string>
-    <string name="battery_info_scale_label" msgid="3649763192389778437">"電池存量："</string>
-    <string name="battery_info_level_label" msgid="8706526709307788737">"電池存量："</string>
+    <string name="battery_info_scale_label" msgid="3649763192389778437">"電池電量："</string>
+    <string name="battery_info_level_label" msgid="8706526709307788737">"電池電量："</string>
     <string name="battery_info_health_label" msgid="6416051542741886958">"電池壽命："</string>
     <string name="battery_info_technology_label" msgid="788304533220748681">"電池技術："</string>
     <string name="battery_info_voltage_label" msgid="8971764146757637863">"電池電壓："</string>
@@ -1017,7 +1017,7 @@
     <string name="storage_wizard_move_progress_cancel" msgid="542047237524588792">"取消移動"</string>
     <string name="storage_wizard_slow_body" msgid="8010127667184768025">"這個 <xliff:g id="NAME_0">^1</xliff:g>的速度緩慢。\n\n您可以繼續使用，但應用程式移動到這個位置後可能無法流暢執行，資料移轉作業也會耗費大量時間。\n\n建議您改用速度更快的 <xliff:g id="NAME_1">^1</xliff:g>來提升效能。"</string>
     <string name="battery_status_title" msgid="9159414319574976203">"電池狀態"</string>
-    <string name="battery_level_title" msgid="2965679202786873272">"電池存量"</string>
+    <string name="battery_level_title" msgid="2965679202786873272">"電池電量"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APN"</string>
     <string name="apn_edit" msgid="1354715499708424718">"編輯存取點"</string>
     <string name="apn_not_set" msgid="4974192007399968164">"未設定"</string>
@@ -1214,7 +1214,7 @@
     <string name="lockpassword_confirm_your_pattern_generic" msgid="7050256155547273836">"請畫出您的裝置解鎖圖形以繼續作業。"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="1072670959803859869">"請輸入您的裝置 PIN 以繼續作業。"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="1022239625083264596">"請輸入您的裝置密碼以繼續作業。"</string>
-    <string name="lockpassword_invalid_pin" msgid="15588049067548470">"PIN 錯誤"</string>
+    <string name="lockpassword_invalid_pin" msgid="15588049067548470">"PIN 碼錯誤"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"密碼錯誤"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"圖形錯誤"</string>
     <string name="lock_settings_title" msgid="4213839087748988686">"裝置安全性"</string>
@@ -2040,7 +2040,7 @@
     <string name="enter_pattern" msgid="4187435713036808566">"如要啟動 Android，請畫出解鎖圖形"</string>
     <string name="cryptkeeper_wrong_pattern" msgid="8423835922362956999">"圖形錯誤"</string>
     <string name="cryptkeeper_wrong_password" msgid="5200857195368904047">"密碼錯誤"</string>
-    <string name="cryptkeeper_wrong_pin" msgid="755720788765259382">"PIN 錯誤"</string>
+    <string name="cryptkeeper_wrong_pin" msgid="755720788765259382">"PIN 碼錯誤"</string>
     <string name="checking_decryption" msgid="8287458611802609493">"檢查中…"</string>
     <string name="starting_android" msgid="8581493237458496835">"正在啟動 Android"</string>
     <string name="delete" msgid="4219243412325163003">"刪除"</string>
@@ -2232,7 +2232,7 @@
     <string name="vpn_menu_edit" msgid="408275284159243490">"編輯設定檔"</string>
     <string name="vpn_menu_delete" msgid="8098021690546891414">"刪除設定檔"</string>
     <string name="vpn_menu_lockdown" msgid="7863024538064268139">"永久連線的 VPN"</string>
-    <string name="vpn_lockdown_summary" msgid="2200032066376720339">"選取要永久連線的 VPN 設定檔。只在連線到這個 VPN 時才允許網路流量。"</string>
+    <string name="vpn_lockdown_summary" msgid="2200032066376720339">"選取要永久連線的 VPN 設定檔。只有在連線到這個 VPN 後才能使用網路。"</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"無"</string>
     <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"永久連線的 VPN 需要同時具備伺服器和 DNS 的 IP 位址。"</string>
     <string name="vpn_no_network" msgid="3050233675132726155">"沒有網路連線，請稍後再試。"</string>
@@ -2275,6 +2275,7 @@
     <string name="user_you" msgid="1639158809315025986">"您 (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_nickname" msgid="5148818000228994488">"暱稱"</string>
     <string name="user_add_user_type_title" msgid="2146438670792322349">"新增"</string>
+    <string name="user_add_max_count" msgid="5405885348463433157">"您最多可新增 <xliff:g id="USER_COUNT">%1$d</xliff:g> 位使用者"</string>
     <string name="user_add_user_item_summary" msgid="4702776187132008661">"使用者擁有個人專屬的應用程式和內容"</string>
     <string name="user_add_profile_item_summary" msgid="5931663986889138941">"您可以限制他人透過您的帳戶存取應用程式和內容"</string>
     <string name="user_add_user_item_title" msgid="8212199632466198969">"使用者"</string>
@@ -2433,7 +2434,7 @@
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"請選取偏好設定"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"設定"</string>
     <string name="search_results_title" msgid="1796252422574886932">"設定"</string>
-    <string name="search_menu" msgid="7053532283559077164">"搜尋"</string>
+    <string name="search_menu" msgid="6283419262313758339">"搜尋設定"</string>
     <string name="query_hint_text" msgid="3350700807437473939">"搜尋設定"</string>
     <string name="search_recents_queries_label" msgid="2128811638532309069">"最近的搜尋查詢"</string>
     <string name="search_results_label" msgid="4163304782363526148">"搜尋結果"</string>
@@ -2754,29 +2755,24 @@
     <string name="assist_access_context_summary" msgid="8365837347256022203">"當您開啟小幫手應用程式時，允許它存取畫面上顯示的資料"</string>
     <string name="assist_footer" msgid="2283187001990543739">"小幫手應用程式會主動為您找出實用資訊並採取適當行動。部分應用程式同時支援啟動器和語音輸入服務，能夠為您提供更完善的協助。"</string>
     <string name="average_memory_use" msgid="829566450150198512">"記憶體平均用量"</string>
-    <string name="maximum_memory_use" msgid="7493720799710132496">"記憶體最大用量"</string>
-    <!-- no translation found for memory_usage (1781358557214390033) -->
-    <skip />
-    <!-- no translation found for app_list_memory_use (6987417883876419338) -->
-    <skip />
-    <!-- no translation found for memory_details (5943436005716991782) -->
-    <skip />
-    <!-- no translation found for memory_use_summary (5608257211903075754) -->
-    <skip />
-    <!-- no translation found for no_memory_use_summary (2016900536806235588) -->
-    <skip />
+    <string name="maximum_memory_use" msgid="7493720799710132496">"記憶體最高用量"</string>
+    <string name="memory_usage" msgid="1781358557214390033">"記憶體用量"</string>
+    <string name="app_list_memory_use" msgid="6987417883876419338">"應用程式記憶體用量"</string>
+    <string name="memory_details" msgid="5943436005716991782">"詳細資料"</string>
+    <string name="memory_use_summary" msgid="5608257211903075754">"過去 3 小時平均記憶體用量為 <xliff:g id="SIZE">%1$s</xliff:g>"</string>
+    <string name="no_memory_use_summary" msgid="2016900536806235588">"過去 3 小時未使用任何記憶體"</string>
     <string name="sort_avg_use" msgid="3998036180505143129">"依平均用量排序"</string>
-    <string name="sort_max_use" msgid="4629247978290075124">"依最大用量排序"</string>
+    <string name="sort_max_use" msgid="4629247978290075124">"依最高用量排序"</string>
     <string name="memory_performance" msgid="5661005192284103281">"效能"</string>
     <string name="total_memory" msgid="2017287600738630165">"記憶體總量"</string>
     <string name="average_used" msgid="5338339266517245782">"平均用量 (%)"</string>
     <string name="free_memory" msgid="4003936141603549746">"可用"</string>
     <string name="memory_usage_apps" msgid="5650192998273294098">"應用程式的記憶體用量"</string>
     <plurals name="memory_usage_apps_summary" formatted="false" msgid="6089210945574265774">
-      <item quantity="other">過去 <xliff:g id="DURATION_1">%2$s</xliff:g>有 <xliff:g id="COUNT">%1$d</xliff:g> 個應用程式使用了記憶體</item>
-      <item quantity="one">過去 <xliff:g id="DURATION_0">%2$s</xliff:g>有 1 個應用程式使用了記憶體</item>
+      <item quantity="other">過去 <xliff:g id="DURATION_1">%2$s</xliff:g>內有 <xliff:g id="COUNT">%1$d</xliff:g> 個應用程式使用了記憶體</item>
+      <item quantity="one">過去 <xliff:g id="DURATION_0">%2$s</xliff:g>內有 1 個應用程式使用了記憶體</item>
     </plurals>
     <string name="running_frequency" msgid="6622624669948277693">"頻率"</string>
-    <string name="memory_maximum_usage" msgid="6513785462055278341">"最大用量"</string>
+    <string name="memory_maximum_usage" msgid="6513785462055278341">"最高用量"</string>
     <string name="no_data_usage" msgid="9131454024293628063">"未使用任何數據"</string>
 </resources>

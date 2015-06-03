@@ -480,9 +480,9 @@
     <string name="device_admin_title" msgid="3562216873644263804">"Quản lý thiết bị"</string>
     <string name="manage_device_admin" msgid="5059296715271077278">"Quản trị viên thiết bị"</string>
     <string name="manage_device_admin_summary" msgid="7672709110988761075">"Xem hoặc hủy kích hoạt quản trị viên điện thoại"</string>
-    <string name="manage_trust_agents" msgid="4629279457536987768">"Đại lý đáng tin cậy"</string>
+    <string name="manage_trust_agents" msgid="4629279457536987768">"Tác nhân đáng tin cậy"</string>
     <string name="disabled_because_no_backup_security" msgid="6877660253409580377">"Để sử dụng, trước tiên hãy đặt khóa màn hình"</string>
-    <string name="manage_trust_agents_summary" msgid="6804319935640148441">"Xem hoặc hủy kích hoạt đại lý đáng tin cậy"</string>
+    <string name="manage_trust_agents_summary" msgid="6804319935640148441">"Xem hoặc hủy kích hoạt tác nhân đáng tin cậy"</string>
     <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"Bluetooth"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"Bật Bluetooth"</string>
     <string name="bluetooth_settings" msgid="1810521656168174329">"Bluetooth"</string>
@@ -1941,7 +1941,7 @@
     <string name="managed_profile_device_admin_info" msgid="5048846624960067582">"Để ngăn <xliff:g id="APP_NAME">%1$s</xliff:g> truy cập hồ sơ công việc của bạn, hãy xóa hồ sơ trong Cài đặt &gt; Tài khoản"</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"Cá nhân"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"Cơ quan"</string>
-    <string name="no_trust_agents" msgid="7450273545568977523">"Không có đại lý đáng tin cậy nào"</string>
+    <string name="no_trust_agents" msgid="7450273545568977523">"Không có tác nhân đáng tin cậy nào"</string>
     <string name="add_device_admin_msg" msgid="6246742476064507965">"Kích hoạt quản trị viên thiết bị?"</string>
     <string name="add_device_admin" msgid="7133327675884827091">"Kích hoạt"</string>
     <string name="device_admin_add_title" msgid="7705551449705676363">"Quản trị viên thiết bị"</string>
@@ -2271,6 +2271,7 @@
     <string name="user_you" msgid="1639158809315025986">"Bạn (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_nickname" msgid="5148818000228994488">"Biệt hiệu"</string>
     <string name="user_add_user_type_title" msgid="2146438670792322349">"Thêm"</string>
+    <string name="user_add_max_count" msgid="5405885348463433157">"Bạn có thể thêm tối đa <xliff:g id="USER_COUNT">%1$d</xliff:g> người dùng"</string>
     <string name="user_add_user_item_summary" msgid="4702776187132008661">"Người dùng có ứng dụng và nội dung riêng của mình"</string>
     <string name="user_add_profile_item_summary" msgid="5931663986889138941">"Bạn có thể hạn chế quyền truy cập vào ứng dụng và nội dung từ tài khoản của bạn"</string>
     <string name="user_add_user_item_title" msgid="8212199632466198969">"Người dùng"</string>
@@ -2429,7 +2430,7 @@
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"Lựa chọn là bắt buộc"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"Cài đặt"</string>
     <string name="search_results_title" msgid="1796252422574886932">"Cài đặt"</string>
-    <string name="search_menu" msgid="7053532283559077164">"Tìm kiếm"</string>
+    <string name="search_menu" msgid="6283419262313758339">"Cài đặt tìm kiếm"</string>
     <string name="query_hint_text" msgid="3350700807437473939">"Cài đặt tìm kiếm"</string>
     <string name="search_recents_queries_label" msgid="2128811638532309069">"Tìm kiếm gần đây"</string>
     <string name="search_results_label" msgid="4163304782363526148">"Kết quả"</string>
@@ -2751,16 +2752,11 @@
     <string name="assist_footer" msgid="2283187001990543739">"Ứng dụng trợ lý giúp bạn xác định và hành động dựa trên thông tin hữu ích mà không cần phải hỏi. Một số ứng dụng hỗ trợ cả dịch vụ nhập bằng giọng nói và trình khởi chạy để cung cấp cho bạn khả năng hỗ trợ được tích hợp."</string>
     <string name="average_memory_use" msgid="829566450150198512">"Sử dụng bộ nhớ trung bình"</string>
     <string name="maximum_memory_use" msgid="7493720799710132496">"Sử dụng bộ nhớ tối đa"</string>
-    <!-- no translation found for memory_usage (1781358557214390033) -->
-    <skip />
-    <!-- no translation found for app_list_memory_use (6987417883876419338) -->
-    <skip />
-    <!-- no translation found for memory_details (5943436005716991782) -->
-    <skip />
-    <!-- no translation found for memory_use_summary (5608257211903075754) -->
-    <skip />
-    <!-- no translation found for no_memory_use_summary (2016900536806235588) -->
-    <skip />
+    <string name="memory_usage" msgid="1781358557214390033">"Sử dụng bộ nhớ"</string>
+    <string name="app_list_memory_use" msgid="6987417883876419338">"Sử dụng ứng dụng"</string>
+    <string name="memory_details" msgid="5943436005716991782">"Chi tiết"</string>
+    <string name="memory_use_summary" msgid="5608257211903075754">"<xliff:g id="SIZE">%1$s</xliff:g> bộ nhớ trung bình được sử dụng trong 3 giờ qua"</string>
+    <string name="no_memory_use_summary" msgid="2016900536806235588">"Không có bộ nhớ nào được sử dụng trong 3 giờ qua"</string>
     <string name="sort_avg_use" msgid="3998036180505143129">"Sắp xếp theo sử dụng trung bình"</string>
     <string name="sort_max_use" msgid="4629247978290075124">"Sắp xếp theo sử dụng tối đa"</string>
     <string name="memory_performance" msgid="5661005192284103281">"Hiệu suất"</string>

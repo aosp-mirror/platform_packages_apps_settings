@@ -1304,7 +1304,7 @@
     <string name="default_emergency_app" msgid="1951760659640369980">"Апликација за хитне случајеве"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"Ресетуј подешавања аплик."</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"Жел. да ресет. под. апл.?"</string>
-    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Овим ћете вратити на почетне вредности сва подешавања за:\n\n "<li>"Онемогућене апликације"</li>\n" "<li>"Обавештења о онемогућеним апликацијама"</li>\n" "<li>"Подразумеване апликације за радње"</li>\n" "<li>"Ограничења за позадинске податке за апликације"</li>\n" "<li>"Било каква ограничења за дозволе"</li>\n\n" Нећете изгубити никакве податке апликација."</string>
+    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Овим ћете вратити на почетне вредности сва подешавања за:\n\n "<li>"Онемогућене апликације"</li>\n" "<li>"Обавештења о онемогућеним апликацијама"</li>\n" "<li>"Подразумеване апликације за радње"</li>\n" "<li>"Ограничења за позадинске податке за апликације"</li>\n" "<li>"Било каква ограничења за дозволе"</li>\n\n" Нећете изгубити податке апликација."</string>
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"Ресетуј апликације"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Управљај простором"</string>
     <string name="filter" msgid="2018011724373033887">"Филтрирај"</string>
@@ -2172,7 +2172,7 @@
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"Укључити аутом. синх. података?"</string>
     <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"Све промене које унесете у налоге на вебу ће аутоматски бити копиране на таблет.\n\nНеки налози могу и аутоматски да копирају на веб све промене које унесете на таблету. Тако функционише Google налог."</string>
     <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"Све промене које унесете у налоге на вебу ће аутоматски бити копиране на телефон.\n\nНеки налози могу и аутоматски да копирају на веб све промене које унесете на телефону. Тако функционише Google налог."</string>
-    <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"Искључити аутом. синх. података?"</string>
+    <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"Желите да искључите аутом. синхронизовање података?"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="4025938250775413864">"На овај начин ће се смањити потрошња података и батерије, али биће потребно да ручно синхронизујете сваки налог да бисте прикупили недавне информације. Нећете примати ни обавештења када дође до ажурирања."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Датум враћања циклуса потрошње на почетне вредности"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Датум сваког месеца:"</string>
@@ -2280,6 +2280,7 @@
     <string name="user_you" msgid="1639158809315025986">"Ви (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_nickname" msgid="5148818000228994488">"Надимак"</string>
     <string name="user_add_user_type_title" msgid="2146438670792322349">"Додавање"</string>
+    <string name="user_add_max_count" msgid="5405885348463433157">"Можете да додате највише <xliff:g id="USER_COUNT">%1$d</xliff:g> корисника"</string>
     <string name="user_add_user_item_summary" msgid="4702776187132008661">"Корисници имају сопствене апликације и садржај"</string>
     <string name="user_add_profile_item_summary" msgid="5931663986889138941">"Можете да ограничите приступ на апликације и садржај са налога"</string>
     <string name="user_add_user_item_title" msgid="8212199632466198969">"Корисник"</string>
@@ -2438,7 +2439,7 @@
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"Потребно је да изаберете нешто"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"Подешавања"</string>
     <string name="search_results_title" msgid="1796252422574886932">"Подешавања"</string>
-    <string name="search_menu" msgid="7053532283559077164">"Претражите"</string>
+    <string name="search_menu" msgid="6283419262313758339">"Претражите подешавања"</string>
     <string name="query_hint_text" msgid="3350700807437473939">"Подешавања претраге"</string>
     <string name="search_recents_queries_label" msgid="2128811638532309069">"Недавне претраге"</string>
     <string name="search_results_label" msgid="4163304782363526148">"Резултати"</string>
@@ -2767,16 +2768,11 @@
     <string name="assist_footer" msgid="2283187001990543739">"Апликације за помоћ идентификују корисне информације и делују у складу са њима без питања. Неке апликације подржавају услуге покретача и гласовног уноса да би вам пружиле интегрисану помоћ."</string>
     <string name="average_memory_use" msgid="829566450150198512">"Просечно коришћење меморије"</string>
     <string name="maximum_memory_use" msgid="7493720799710132496">"Максимално коришћење меморије"</string>
-    <!-- no translation found for memory_usage (1781358557214390033) -->
-    <skip />
-    <!-- no translation found for app_list_memory_use (6987417883876419338) -->
-    <skip />
-    <!-- no translation found for memory_details (5943436005716991782) -->
-    <skip />
-    <!-- no translation found for memory_use_summary (5608257211903075754) -->
-    <skip />
-    <!-- no translation found for no_memory_use_summary (2016900536806235588) -->
-    <skip />
+    <string name="memory_usage" msgid="1781358557214390033">"Коришћење меморије"</string>
+    <string name="app_list_memory_use" msgid="6987417883876419338">"Коришћење апликације"</string>
+    <string name="memory_details" msgid="5943436005716991782">"Детаљи"</string>
+    <string name="memory_use_summary" msgid="5608257211903075754">"У просеку је користила <xliff:g id="SIZE">%1$s</xliff:g> у последња 3 сата"</string>
+    <string name="no_memory_use_summary" msgid="2016900536806235588">"Није користила меморију у последња 3 сата"</string>
     <string name="sort_avg_use" msgid="3998036180505143129">"Сортирај према просечном коришћењу"</string>
     <string name="sort_max_use" msgid="4629247978290075124">"Сортирај према максималном коришћењу"</string>
     <string name="memory_performance" msgid="5661005192284103281">"Учинак"</string>
