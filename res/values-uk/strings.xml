@@ -1078,16 +1078,17 @@
     <string name="menu_restore" msgid="8260067415075573273">"Відн.налашт.за умовч."</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"Відновлення налаштувань APN за умовчанням здійснено."</string>
     <string name="reset_network_title" msgid="4557113742173895074">"Скидання налаштувань мереж"</string>
-    <string name="reset_network_desc" msgid="581668983587311282">"Відновляться всі налаштування мереж, зокрема: \n\n"<li>"Wi-Fi"</li>\n<li>"мобільні дані"</li>\n<li>"Bluetooth"</li></string>
+    <string name="reset_network_desc" msgid="581668983587311282">"Буде скинуто всі налаштування мереж, зокрема: \n\n"<li>"Wi-Fi"</li>\n<li>"мобільні дані"</li>\n<li>"Bluetooth"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"Скинути налаштування"</string>
     <string name="reset_network_final_desc" msgid="6388371121099245116">"Скинути всі налаштування мереж? Цю дію не можна скасувати."</string>
     <string name="reset_network_final_button_text" msgid="1797434793741744635">"Скинути налаштування"</string>
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"Скинути?"</string>
+    <string name="network_reset_not_available" msgid="7188610385577164676">"Цей користувач не може скидати налаштування мережі"</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"Налаштування мереж скинуто"</string>
     <string name="device_reset_title" msgid="2384019005638768076">"Скинути параметри пристрою"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"Скидання налаштувань"</string>
-    <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"Це зітре всі дані з "<b>"внутрішньої пам’яті"</b>" вашого планшетного ПК, зокрема:\n\n"<li>"ваш обліковий запис Google"</li>\n<li>"дані й налаштування системи та програм"</li>\n<li>"завантажені програми"</li>"."</string>
-    <string name="master_clear_desc" product="default" msgid="4800386183314202571">"Буде видалено всі дані з "<b>"внутрішньої пам’яті"</b>" вашого телефона, зокрема:\n\n"<li>"Ваш обліковий запис Google"</li>\n<li>"Дані й налаштування системи та програм"</li>\n<li>"Завантажені програми"</li></string>
+    <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"Буде видалено всі дані з "<b>"внутрішньої пам’яті"</b>" вашого планшета, зокрема:\n\n"<li>"ваш обліковий запис Google"</li>\n<li>"дані й налаштування системи та додатків"</li>\n<li>"завантажені додатки"</li>"."</string>
+    <string name="master_clear_desc" product="default" msgid="4800386183314202571">"Буде видалено всі дані з "<b>"внутрішньої пам’яті"</b>" вашого телефона, зокрема:\n\n"<li>"ваш обліковий запис Google"</li>\n<li>"дані й налаштування системи та додатків"</li>\n<li>"завантажені додатки"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Наразі ви ввійшли в такі облікові записи:\n"</string>
     <string name="master_clear_other_users_present" product="default" msgid="5161423070702470742">\n\n"На цьому пристрої є інші користувачі.\n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"Музика"</li>\n<li>"Фото"</li>\n<li>"Інші дані користувача"</li></string>
@@ -1283,10 +1284,10 @@
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"Очистити кеш"</string>
     <string name="cache_size_label" msgid="7505481393108282913">"Кеш"</string>
     <string name="controls_label" msgid="7611113077086853799">"Ел. керув."</string>
-    <string name="force_stop" msgid="7435006169872876756">"Примус.припин."</string>
+    <string name="force_stop" msgid="7435006169872876756">"Зупинити"</string>
     <string name="total_size_label" msgid="1048676419552557254">"Усього"</string>
-    <string name="application_size_label" msgid="8494609207373874267">"Програма"</string>
-    <string name="external_code_size_label" msgid="3459343140355961335">"Програма на носії USB"</string>
+    <string name="application_size_label" msgid="8494609207373874267">"Додаток"</string>
+    <string name="external_code_size_label" msgid="3459343140355961335">"Додаток на носії USB"</string>
     <string name="data_size_label" msgid="8679376373625710107">"Дані"</string>
     <string name="external_data_size_label" product="nosdcard" msgid="7533821466482000453">"Дані на носії USB"</string>
     <string name="external_data_size_label" product="default" msgid="626414192825329708">"Карта SD"</string>
@@ -1299,8 +1300,8 @@
     <string name="app_factory_reset" msgid="6635744722502563022">"Видалити оновлення"</string>
     <string name="auto_launch_enable_text" msgid="4275746249511874845">"Ви вибрали запуск цієї програми за умовчанням для деяких дій."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="566822577792032925">"Ви вирішили дозволити цій програмі створювати віджети й отримувати доступ до їх даних."</string>
-    <string name="auto_launch_disable_text" msgid="7800385822185540166">"Знач.за умовч не вст."</string>
-    <string name="clear_activities" msgid="7408923511535174430">"Очист.парам.за умовч."</string>
+    <string name="auto_launch_disable_text" msgid="7800385822185540166">"Значення не встановлені."</string>
+    <string name="clear_activities" msgid="7408923511535174430">"Видалити значення за умовчанням"</string>
     <string name="screen_compatibility_text" msgid="1616155457673106022">"Можливо, ця програма не призначена для вашого екрана. Тут можна контролювати, як вона налаштовується для вашого екрана."</string>
     <string name="ask_compatibility" msgid="7225195569089607846">"Запитувати під час запуску"</string>
     <string name="enable_compatibility" msgid="5806819252068617811">"Масштабувати програму"</string>
@@ -1311,9 +1312,9 @@
     <string name="show_background_processes" msgid="2009840211972293429">"Показати кешовані процеси"</string>
     <string name="default_emergency_app" msgid="1951760659640369980">"Додаток для екстрених викликів"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"Скинути налаштування"</string>
-    <string name="reset_app_preferences_title" msgid="6093179367325336662">"Скинути налашт. програм?"</string>
-    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Буде скинуто всі налаштування для:\n\n "<li>"вимкнених програм"</li>\n" "<li>"вимкнених сповіщень програм"</li>\n" "<li>"програм за умовчанням для виконання дій"</li>\n" "<li>"обмежень щодо фонових даних для програм"</li>\n" "<li>"усіх обмежень щодо дозволів"</li>\n\n" Жодні дані програм не буде втрачено."</string>
-    <string name="reset_app_preferences_button" msgid="2559089511841281242">"Скинути програми"</string>
+    <string name="reset_app_preferences_title" msgid="6093179367325336662">"Скинути налаштування додатків?"</string>
+    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Буде скинуто всі налаштування для:\n\n "<li>"вимкнених додатків"</li>\n" "<li>"вимкнених сповіщень із додатків"</li>\n" "<li>"додатків за умовчанням"</li>\n" "<li>"обмежень щодо передавання даних у фоновому режимі"</li>\n" "<li>"усіх обмежень щодо дозволів"</li>\n\n" Дані додатків видалено не буде."</string>
+    <string name="reset_app_preferences_button" msgid="2559089511841281242">"Скинути"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Кер. простором"</string>
     <string name="filter" msgid="2018011724373033887">"Фільтрув."</string>
     <string name="filter_dlg_title" msgid="8693024463731076091">"Вибрати параметри фільтра"</string>
@@ -1330,8 +1331,8 @@
     <string name="sd_card_storage" product="nosdcard" msgid="2673203150465132465">"Носій USB"</string>
     <string name="sd_card_storage" product="default" msgid="7623513618171928235">"Пам\'ять карти SD"</string>
     <string name="recompute_size" msgid="7722567982831691718">"Повт. обчисл. розм…"</string>
-    <string name="clear_data_dlg_title" msgid="5605258400134511197">"Видалити дані програми?"</string>
-    <string name="clear_data_dlg_text" msgid="3951297329833822490">"Усі дані цієї програми буде видалено назавжди. Зокрема всі файли, налаштування, облікові записи, бази даних тощо."</string>
+    <string name="clear_data_dlg_title" msgid="5605258400134511197">"Видалити дані додатка?"</string>
+    <string name="clear_data_dlg_text" msgid="3951297329833822490">"Усі дані цього додатка буде видалено назавжди: файли, налаштування, облікові записи, бази даних тощо."</string>
     <string name="dlg_ok" msgid="2402639055725653590">"OK"</string>
     <string name="dlg_cancel" msgid="1674753358972975911">"Скасувати"</string>
     <string name="app_not_found_dlg_title" msgid="3127123411738434964"></string>
@@ -1367,15 +1368,15 @@
     <string name="invalid_location" msgid="4354595459063675191">"Місце встановлення не дійсне."</string>
     <string name="system_package" msgid="1352722848400644991">"Оновлення системи неможливо встановити на зовнішньому носії."</string>
     <string name="force_stop_dlg_title" msgid="977530651470711366">"Примусово припинити?"</string>
-    <string name="force_stop_dlg_text" msgid="7208364204467835578">"Примусове припинення роботи програми може призвести до її неправильного функціонування."</string>
+    <string name="force_stop_dlg_text" msgid="7208364204467835578">"Примусове вимкнення додатка може призвести до збою в його роботі."</string>
     <string name="move_app_failed_dlg_title" msgid="1282561064082384192"></string>
     <string name="move_app_failed_dlg_text" msgid="187885379493011720">"Не вдалося перемістити програму. <xliff:g id="REASON">%1$s</xliff:g>"</string>
     <string name="app_install_location_title" msgid="2068975150026852168">"Бажане місце встановлення"</string>
     <string name="app_install_location_summary" msgid="5155453752692959098">"Змінити потрібне місце для встановлення нових програм"</string>
     <string name="app_disable_dlg_title" msgid="3916469657537695436">"Вимкнути вбудовану програму?"</string>
     <string name="app_disable_dlg_text" msgid="3562567756362627323">"Відключення вбудованої програми може призвести до неправильного функціонування інших програм."</string>
-    <string name="app_special_disable_dlg_title" msgid="2690148680327142674">"Видалити дані та вимкнути програму?"</string>
-    <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"Якщо вимкнути вбудовану програму, інші програми можуть працювати неналежним чином. Ваші дані також буде видалено."</string>
+    <string name="app_special_disable_dlg_title" msgid="2690148680327142674">"Видалити дані й вимкнути додаток?"</string>
+    <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"Якщо вимкнути вбудований додаток, інші додатки можуть працювати неправильно. Також буде видалено ваші дані."</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"Вимкнути сповіщення?"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"Якщо вимкнути сповіщення для цієї програми, можна пропустити важливі повідомлення й оновлення."</string>
     <string name="app_ops_settings" msgid="5108481883575527511">"Операції програми"</string>
@@ -1573,7 +1574,7 @@
     <string name="usage_stats_label" msgid="5890846333487083609">"Статист. використ."</string>
     <string name="testing_usage_stats" msgid="7823048598893937339">"Статистика викор."</string>
     <string name="display_order_text" msgid="8592776965827565271">"Сорт. за:"</string>
-    <string name="app_name_label" msgid="5440362857006046193">"Програма"</string>
+    <string name="app_name_label" msgid="5440362857006046193">"Додаток"</string>
     <string name="last_time_used_label" msgid="8459441968795479307">"Останнє використання"</string>
     <string name="usage_time_label" msgid="295954901452833058">"Час використ."</string>
     <string name="accessibility_settings" msgid="3975902491934816215">"Доступність"</string>
@@ -1712,7 +1713,7 @@
     <string name="wifi_on_time" msgid="3208518458663637035">"Час роботи Wi-Fi"</string>
     <string name="bluetooth_on_time" msgid="3056108148042308690">"Час роботи Wi-Fi"</string>
     <string name="history_details_title" msgid="3608240585315506067">"Деталі історії"</string>
-    <string name="details_title" msgid="3792801565213935385">"Деталі використання"</string>
+    <string name="details_title" msgid="3792801565213935385">"Вжиток акумулятора"</string>
     <string name="details_subtitle" msgid="32593908269911734">"Вжиток"</string>
     <string name="controls_subtitle" msgid="390468421138288702">"Режим енергоспоживання"</string>
     <string name="packages_subtitle" msgid="4736416171658062768">"Уключені пакети"</string>
@@ -1745,7 +1746,7 @@
     <string name="usage_type_total_battery_capacity" msgid="3798285287848675346">"Загальна ємність акумулятора"</string>
     <string name="usage_type_computed_power" msgid="5862792259009981479">"Обчислене споживання заряду акумулятора"</string>
     <string name="usage_type_actual_power" msgid="7047814738685578335">"Фактичне споживання заряду акумулятора"</string>
-    <string name="battery_action_stop" msgid="649958863744041872">"Примус.припин."</string>
+    <string name="battery_action_stop" msgid="649958863744041872">"Зупинити"</string>
     <string name="battery_action_app_details" msgid="7861051816778419018">"Про додаток"</string>
     <string name="battery_action_app_settings" msgid="4570481408106287454">"Налаштування програми"</string>
     <string name="battery_action_display" msgid="7338551244519110831">"Налаштування екрана"</string>
@@ -1815,12 +1816,12 @@
     <string name="menu_duration_6h" msgid="1940846763432184132">"6 годин"</string>
     <string name="menu_duration_12h" msgid="7890465404584356294">"12 годин"</string>
     <string name="menu_duration_1d" msgid="3393631127622285458">"1 день"</string>
-    <string name="menu_show_system" msgid="8864603400415567635">"Показувати систему"</string>
+    <string name="menu_show_system" msgid="8864603400415567635">"Показати системні процеси"</string>
     <string name="menu_hide_system" msgid="4106826741703745733">"Сховати системні процеси"</string>
     <string name="menu_show_percentage" msgid="4717204046118199806">"Показати відсотки"</string>
     <string name="menu_use_uss" msgid="467765290771543089">"Використовувати USS (Unique Set Size)"</string>
     <string name="menu_proc_stats_type" msgid="4700209061072120948">"Тип статистики"</string>
-    <string name="menu_proc_stats_type_background" msgid="2236161340134898852">"Фонові"</string>
+    <string name="menu_proc_stats_type_background" msgid="2236161340134898852">"Фонові процеси"</string>
     <string name="menu_proc_stats_type_foreground" msgid="2286182659954958586">"Активні"</string>
     <string name="menu_proc_stats_type_cached" msgid="5084272779786820693">"Кешовані"</string>
     <string name="voice_input_output_settings" msgid="1336135218350444783">"Голосовий ввід і вивід"</string>
@@ -1929,8 +1930,8 @@
     <string name="usage_access_title" msgid="332333405495457839">"Додатки з доступом до даних"</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Аварійний сингал"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Устан. поведінку при розміщ. аварійного виклику"</string>
-    <string name="privacy_settings" msgid="5446972770562918934">"Резервне копіювання та скидання"</string>
-    <string name="privacy_settings_title" msgid="4856282165773594890">"Резервне копіювання та скидання"</string>
+    <string name="privacy_settings" msgid="5446972770562918934">"Відновлення та скидання"</string>
+    <string name="privacy_settings_title" msgid="4856282165773594890">"Відновлення та скидання"</string>
     <string name="backup_section_title" msgid="7952232291452882740">"Резервне копіювання та відновлення"</string>
     <string name="personal_data_section_title" msgid="7815209034443782061">"Особисті дані"</string>
     <string name="backup_data_title" msgid="1239105919852668016">"Резервна копія даних"</string>
@@ -1938,7 +1939,7 @@
     <string name="backup_configure_account_title" msgid="3790872965773196615">"Резервний обліковий запис"</string>
     <string name="include_app_data_title" msgid="2829970132260278394">"Включити дані додатка"</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"Автомат. відновлення"</string>
-    <string name="auto_restore_summary" msgid="4235615056371993807">"У разі повторного встановлення програми відновлювати налаштування та дані з резервних копій"</string>
+    <string name="auto_restore_summary" msgid="4235615056371993807">"У разі повторного встановлення додатка відновлювати налаштування та дані з резервних копій"</string>
     <string name="backup_inactive_title" msgid="5355557151569037197">"Служба резервного копіювання неактивна."</string>
     <string name="local_backup_password_title" msgid="3860471654439418822">"Пароль резерв.копії на ПК"</string>
     <string name="local_backup_password_summary_none" msgid="6951095485537767956">"Повні резервні копії на комп’ютері наразі не захищені"</string>
@@ -1947,7 +1948,7 @@
     <string name="local_backup_password_toast_confirmation_mismatch" msgid="7805892532752708288">"Новий пароль і підтвердження не збігаються"</string>
     <string name="local_backup_password_toast_validation_failure" msgid="5646377234895626531">"Помилка встановлення пароля резервної копії"</string>
     <string name="backup_erase_dialog_title" msgid="1027640829482174106"></string>
-    <string name="backup_erase_dialog_message" msgid="5221011285568343155">"Припинити створення резервних копій паролів Wi-Fi, закладок, інших налаштувань і даних програм, а також стерти всі копії на серверах Google?"</string>
+    <string name="backup_erase_dialog_message" msgid="5221011285568343155">"Припинити створення резервних копій паролів Wi-Fi, закладок, інших налаштувань і даних додатків, а також стерти всі копії на серверах Google?"</string>
     <string name="fullbackup_erase_dialog_message" msgid="944399039066318647">"Припинити автозавантаження даних пристроїв (як-от паролів Wi-Fi та історії дзвінків) і додатків (як-от налаштувань і збережених файлів) та стерти всі копії на Google Диску?"</string>
     <string name="fullbackup_data_summary" msgid="960850365007767734">"Автоматично завантажуйте дані з пристроїв (як-от паролі Wi-Fi та історію дзвінків) і додатків (як-от налаштування та збережені файли). Це можна робити віддалено.\n\nКоли ви вмикаєте автозавантаження, дані з пристроїв і додатків віддалено зберігаються через певні проміжки часу. Дані додатків – це будь-яка інформація, яку вони зберігають (залежно від налаштувань розробника), зокрема такі конфіденційні дані, як контакти, повідомлення та фотографії."</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"Налашт-ня адміністрації пристрою"</string>
@@ -2015,8 +2016,8 @@
     <string name="background_data_dialog_title" msgid="6059217698124786537">"Вимкн. фонові дані?"</string>
     <string name="background_data_dialog_message" msgid="6981661606680941633">"Вимкнення фонових даних заощаджує споживання акумулятора та зменшує використання даних. Деякі програми все одно можуть використовувати передавання фонових даних."</string>
     <string name="sync_automatically" msgid="1682730255435062059">"Автомат. синхронізув. дані програми"</string>
-    <string name="sync_enabled" msgid="4551148952179416813">"Синхроніз. ВВІМКНЕНО"</string>
-    <string name="sync_disabled" msgid="8511659877596511991">"Синхроніз. ВИМКНЕНО"</string>
+    <string name="sync_enabled" msgid="4551148952179416813">"Синхронізацію ВВІМКНЕНО"</string>
+    <string name="sync_disabled" msgid="8511659877596511991">"Синхронізацію ВИМКНЕНО"</string>
     <string name="sync_error" msgid="5060969083117872149">"Помилка синхр-ції"</string>
     <string name="last_synced" msgid="4242919465367022234">"Востаннє синхронізовано: <xliff:g id="LAST_SYNC_TIME">%1$s</xliff:g>"</string>
     <string name="sync_in_progress" msgid="5151314196536070569">"Синхронізація…"</string>
@@ -2150,8 +2151,8 @@
     <string name="data_usage_change_cycle" msgid="7776556448920114866">"Змінити цикл..."</string>
     <string name="data_usage_pick_cycle_day" msgid="4470796861757050966">"День місяця для скидання циклу використання даних:"</string>
     <string name="data_usage_empty" msgid="8621855507876539282">"Програми не використовували дані в цей час."</string>
-    <string name="data_usage_label_foreground" msgid="4938034231928628164">"Передній план"</string>
-    <string name="data_usage_label_background" msgid="3225844085975764519">"Фон"</string>
+    <string name="data_usage_label_foreground" msgid="4938034231928628164">"Активний режим"</string>
+    <string name="data_usage_label_background" msgid="3225844085975764519">"Фоновий режим"</string>
     <string name="data_usage_app_restricted" msgid="3568465218866589705">"з обмеженнями"</string>
     <string name="data_usage_disable_mobile" msgid="2613595056882494652">"Вимкнути мобільні дані?"</string>
     <string name="data_usage_disable_mobile_limit" msgid="3934211003105066167">"Ліміт мобільного трафіку"</string>
@@ -2169,7 +2170,7 @@
     <string name="data_usage_enable_3g" msgid="6304006671869578254">"Дані 2G–3G"</string>
     <string name="data_usage_enable_4g" msgid="3635854097335036738">"Дані 4G"</string>
     <string name="data_usage_forground_label" msgid="7654319010655983591">"Активні:"</string>
-    <string name="data_usage_background_label" msgid="2722008379947694926">"Фонові:"</string>
+    <string name="data_usage_background_label" msgid="2722008379947694926">"Фоновий режим:"</string>
     <string name="data_usage_app_settings" msgid="2279171379771253165">"Налаштування додатка"</string>
     <string name="data_usage_app_restrict_background" msgid="7510046552380574925">"Обмежити фонові дані додатка"</string>
     <string name="data_usage_app_restrict_background_summary" msgid="3720075732277934106">"Вимикати фонові дані в мобільних мережах."</string>
@@ -2180,8 +2181,8 @@
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"Увімк. автосинхронізацію даних?"</string>
     <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"Усі зміни до облікових записів, внесені в Інтернеті, автоматично копіюватимуться на ваш планшет.\n\nДеякі облікові записи також можуть автоматично копіювати в Інтернет зміни, внесені на планшеті. Так працює обліковий запис Google."</string>
     <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"Усі зміни до облікових записів, внесені в Інтернеті, автоматично копіюватимуться на ваш телефон.\n\nДеякі облікові записи також можуть автоматично копіювати в Інтернет зміни, внесені на телефоні. Так працює обліковий запис Google."</string>
-    <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"Вимк. автосинхронізацію даних?"</string>
-    <string name="data_usage_auto_sync_off_dialog" msgid="4025938250775413864">"Це заощаджуватиме використання даних і заряду акумулятора. Проте вам доведеться вручну синхронізувати кожен обліковий запис, щоб зібрати останні відомості. Ви також не отримуватимете сповіщення про оновлення."</string>
+    <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"Вимкнути автосинхронізацію?"</string>
+    <string name="data_usage_auto_sync_off_dialog" msgid="4025938250775413864">"Це заощадить трафік і заряд акумулятора. Проте вам доведеться вручну синхронізувати кожен обліковий запис, щоб отримати останні дані. Також ви не отримуватимете сповіщення про оновлення."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Дата скидання циклу використання даних"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Дата кожного місяця:"</string>
     <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"Установити"</string>
@@ -2288,8 +2289,7 @@
     <string name="user_you" msgid="1639158809315025986">"Ви (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_nickname" msgid="5148818000228994488">"Псевдонім"</string>
     <string name="user_add_user_type_title" msgid="2146438670792322349">"Додавання"</string>
-    <!-- no translation found for user_add_max_count (5405885348463433157) -->
-    <skip />
+    <string name="user_add_max_count" msgid="5405885348463433157">"Можна додати максимум стільки користувачів: <xliff:g id="USER_COUNT">%1$d</xliff:g>"</string>
     <string name="user_add_user_item_summary" msgid="4702776187132008661">"Користувачі мають власні програми та вміст"</string>
     <string name="user_add_profile_item_summary" msgid="5931663986889138941">"Ви можете обмежити доступ до програм і вмісту з вашого облікового запису"</string>
     <string name="user_add_user_item_title" msgid="8212199632466198969">"Користувач"</string>
@@ -2448,7 +2448,7 @@
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"Потрібно вибрати"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"Налаштування"</string>
     <string name="search_results_title" msgid="1796252422574886932">"Налаштування"</string>
-    <string name="search_menu" msgid="7053532283559077164">"Пошук"</string>
+    <string name="search_menu" msgid="6283419262313758339">"Налаштування пошуку"</string>
     <string name="query_hint_text" msgid="3350700807437473939">"Налаштуваня пошуку"</string>
     <string name="search_recents_queries_label" msgid="2128811638532309069">"Останні пошукові запити"</string>
     <string name="search_results_label" msgid="4163304782363526148">"Результати"</string>
@@ -2470,6 +2470,7 @@
     <string name="keywords_voice_input" msgid="3519547605812413860">"розпізнавач ввід мовлення диктувати мова гарнітура розпізнавання образливе слово аудіо історія bluetooth динамік"</string>
     <string name="keywords_text_to_speech_output" msgid="392447904221657930">"швидкість мова за умовчанням диктувати диктування синтез мовлення доступність читач із вадами зору"</string>
     <string name="keywords_date_and_time" msgid="2631808108134830066">"годинник 24-годинний формат часу"</string>
+    <string name="keywords_network_reset" msgid="6346978754090557056">"скинути відновити заводські"</string>
     <string name="keywords_factory_data_reset" msgid="4355133848707691977">"стерти видалити відновити очистити вилучити"</string>
     <string name="keywords_printing" msgid="1701778563617114846">"принтер"</string>
     <string name="keywords_sounds_and_notifications" msgid="5965996187974887000">"сигнал динаміка"</string>
@@ -2665,13 +2666,13 @@
     <string name="imei_information_summary" msgid="2074095606556565233">"Інформація про IMEI"</string>
     <string name="slot_number" msgid="3762676044904653577">"(Гніздо <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
     <string name="launch_by_default" msgid="1840761193189009248">"Відкривати за умовчанням"</string>
-    <string name="storage_summary_format" msgid="5419902362347539755">"Зайнято <xliff:g id="SIZE">%1$s</xliff:g> <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
+    <string name="storage_summary_format" msgid="5419902362347539755">"Зайнято <xliff:g id="SIZE">%1$s</xliff:g> (<xliff:g id="STORAGE_TYPE">%2$s</xliff:g>)"</string>
     <string name="app_launch_domain_links_title" msgid="6789955009107320092">"Посилання додатка"</string>
     <string name="app_launch_open_domain_urls_title" msgid="8914721351596745701">"Відкривати підтримувані посилання"</string>
     <string name="app_launch_open_domain_urls_summary" msgid="5367573364240712217">"Відкривати, не запитуючи"</string>
     <string name="app_launch_supported_domain_urls_title" msgid="8250695258211477480">"Підтримувані посилання"</string>
-    <string name="app_launch_other_defaults_title" msgid="2516812499807835178">"Інші додатки за умовчанням"</string>
-    <string name="storage_summary_format" msgid="5419902362347539755">"Зайнято <xliff:g id="SIZE">%1$s</xliff:g> <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
+    <string name="app_launch_other_defaults_title" msgid="2516812499807835178">"Інші значення за умовчанням"</string>
+    <string name="storage_summary_format" msgid="5419902362347539755">"Зайнято <xliff:g id="SIZE">%1$s</xliff:g> (<xliff:g id="STORAGE_TYPE">%2$s</xliff:g>)"</string>
     <string name="storage_type_internal" msgid="410824961149037234">"внутрішньої пам’яті"</string>
     <string name="storage_type_external" msgid="8928374515368986503">"зовнішньої пам’яті"</string>
     <string name="storage_type_internal" msgid="6042049833565674948">"Внутрішня пам’ять"</string>
@@ -2759,10 +2760,10 @@
     <string name="high_power_off" msgid="4069404908196636677">"Вимкнено"</string>
     <string name="high_power_desc" msgid="8777632785903235764">"Не застосовувати оптимізацію використання акумулятора. Акумулятор може розрядитися швидше."</string>
     <plurals name="high_power_count" formatted="false" msgid="4343190376439806186">
-      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> додатку дозволено ігнорувати оптимізацію використання акумулятора</item>
-      <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> додаткам дозволено ігнорувати оптимізацію використання акумулятора</item>
-      <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> додаткам дозволено ігнорувати оптимізацію використання акумулятора</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> додатка дозволено ігнорувати оптимізацію використання акумулятора</item>
+      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> додатку дозволено ігнорувати обмеження щодо використання акумулятора</item>
+      <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> додаткам дозволено ігнорувати обмеження щодо використання акумулятора</item>
+      <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> додаткам дозволено ігнорувати обмеження щодо використання акумулятора</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> додатка дозволено ігнорувати обмеження щодо використання акумулятора</item>
     </plurals>
     <string name="battery_summary" msgid="101415762036784289">"З часу останнього повного заряджання використано <xliff:g id="PERCENTAGE">%1$d</xliff:g>%%"</string>
     <string name="no_battery_summary" msgid="3528036835462846814">"З часу останнього повного заряджання акумулятор не використовувався"</string>

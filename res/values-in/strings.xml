@@ -515,7 +515,7 @@
     <string name="bluetooth_pairing_dialog_sharing_phonebook_title" msgid="7664141669886358618">"Bagikan buku telepon?"</string>
     <string name="bluetooth_pairing_dialog_contants_request" msgid="5531109163573611348">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ingin mengakses kontak dan riwayat panggilan Anda."</string>
     <string name="bluetooth_pairing_dialog_paring_request" msgid="8451248193517851958">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ingin menyandingkan dengan Bluetooth. Saat tersambung, perangkat dapat mengakses kontak &amp; riwayat panggilan Anda."</string>
-    <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"Perangkat dipasangkan"</string>
+    <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"Perangkat disandingkan"</string>
     <string name="bluetooth_preference_found_devices" msgid="1647983835063249680">"Perangkat yang tersedia"</string>
     <string name="bluetooth_preference_no_found_devices" msgid="7594339669961811591">"Perangkat tak tersedia"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"Sambungkan"</string>
@@ -1061,10 +1061,11 @@
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"Penyetelan ulang setelan APN default selesai."</string>
     <string name="reset_network_title" msgid="4557113742173895074">"Setelan jaringan diatur ulang"</string>
     <string name="reset_network_desc" msgid="581668983587311282">"Tindakan ini akan menyetel ulang semua setelan jaringan, termasuk:\n\n"<li>"Wi‑Fi"</li>\n<li>"Data seluler"</li>\n<li>"Bluetooth"</li></string>
-    <string name="reset_network_button_text" msgid="2035676527471089853">"Atur ulang setelan"</string>
+    <string name="reset_network_button_text" msgid="2035676527471089853">"Setel ulang setelan"</string>
     <string name="reset_network_final_desc" msgid="6388371121099245116">"Setel ulang semua setelan jaringan? Tindakan ini tidak dapat diurungkan!"</string>
-    <string name="reset_network_final_button_text" msgid="1797434793741744635">"Atur ulang setelan"</string>
+    <string name="reset_network_final_button_text" msgid="1797434793741744635">"Setel ulang setelan"</string>
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"Setel ulang?"</string>
+    <string name="network_reset_not_available" msgid="7188610385577164676">"Setel ulang jaringan tidak tersedia untuk pengguna ini"</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"Setelan jaringan telah disetel ulang"</string>
     <string name="device_reset_title" msgid="2384019005638768076">"Setel ulang perangkat"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"Kembalikan ke setelan pabrik"</string>
@@ -1255,7 +1256,7 @@
     <string name="install_all_warning" product="default" msgid="8113734576826384682">"Ponsel dan data pribadi Anda lebih rentan terhadap serangan apl dari sumber yang tidak dikenal. Anda setuju untuk bertanggung jawab penuh atas segala kerusakan pada ponsel atau kehilangan data yang mungkin diakibatkan oleh penggunaan apl ini."</string>
     <string name="advanced_settings" msgid="1777249286757067969">"Setelan lanjutan"</string>
     <string name="advanced_settings_summary" msgid="4016682978071086747">"Aktifkan opsi setelan yang lain"</string>
-    <string name="application_info_label" msgid="5736524913065714880">"Info apl"</string>
+    <string name="application_info_label" msgid="5736524913065714880">"Info aplikasi"</string>
     <string name="storage_label" msgid="8700867073480107253">"Penyimpanan"</string>
     <string name="auto_launch_label" msgid="2669236885531442195">"Buka secara default"</string>
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"Default"</string>
@@ -1294,7 +1295,7 @@
     <string name="default_emergency_app" msgid="1951760659640369980">"Aplikasi darurat"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"Setel ulang pref aplikasi"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"Setel ulang pref aplikasi?"</string>
-    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Hal ini akan menyetel ulang semua preferensi untuk:\n\n "<li>"Aplikasi yang dinonaktifkan"</li>\n" "<li>"Notifikasi aplikasi yang dinonaktifkan"</li>\n" "<li>"Aplikasi default untuk tindakan"</li>\n" "<li>"Batasan data latar belakang untuk aplikasi"</li>\n" "<li>"Batasan izin apa pun"</li>\n\n" Data aplikasi Anda tidak akan hilang."</string>
+    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Tindakan ini akan menyetel ulang semua preferensi untuk:\n\n "<li>"Aplikasi yang dinonaktifkan"</li>\n" "<li>"Notifikasi aplikasi yang dinonaktifkan"</li>\n" "<li>"Aplikasi default untuk tindakan"</li>\n" "<li>"Batasan data latar belakang untuk aplikasi"</li>\n" "<li>"Batasan izin apa pun"</li>\n\n" Data aplikasi Anda tidak akan hilang."</string>
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"Setel ulang aplikasi"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Kelola ruang"</string>
     <string name="filter" msgid="2018011724373033887">"Filter"</string>
@@ -1312,8 +1313,8 @@
     <string name="sd_card_storage" product="nosdcard" msgid="2673203150465132465">"Penyimpanan USB"</string>
     <string name="sd_card_storage" product="default" msgid="7623513618171928235">"Penyimpanan kartu SD"</string>
     <string name="recompute_size" msgid="7722567982831691718">"Menghitung ulang ukuran..."</string>
-    <string name="clear_data_dlg_title" msgid="5605258400134511197">"Hapus data apl?"</string>
-    <string name="clear_data_dlg_text" msgid="3951297329833822490">"Semua data apl ini akan dihapus secara permanen, termasuk semua file, setelan, akun, basis data, dll."</string>
+    <string name="clear_data_dlg_title" msgid="5605258400134511197">"Hapus data aplikasi?"</string>
+    <string name="clear_data_dlg_text" msgid="3951297329833822490">"Semua data aplikasi ini akan dihapus secara permanen, termasuk semua file, setelan, akun, basis data, dll."</string>
     <string name="dlg_ok" msgid="2402639055725653590">"Oke"</string>
     <string name="dlg_cancel" msgid="1674753358972975911">"Batal"</string>
     <string name="app_not_found_dlg_title" msgid="3127123411738434964"></string>
@@ -1349,15 +1350,15 @@
     <string name="invalid_location" msgid="4354595459063675191">"Lokasi pemasangan tidak valid."</string>
     <string name="system_package" msgid="1352722848400644991">"Pembaruan sistem tidak dapat dipasang pada media eksternal."</string>
     <string name="force_stop_dlg_title" msgid="977530651470711366">"Paksa berhenti?"</string>
-    <string name="force_stop_dlg_text" msgid="7208364204467835578">"Jika Anda menghentikan apl secara paksa, mungkin fungsinya akan terganggu."</string>
+    <string name="force_stop_dlg_text" msgid="7208364204467835578">"Jika Anda menghentikan aplikasi secara paksa, mungkin fungsinya akan terganggu."</string>
     <string name="move_app_failed_dlg_title" msgid="1282561064082384192"></string>
     <string name="move_app_failed_dlg_text" msgid="187885379493011720">"Tidak dapat memindahkan apl. <xliff:g id="REASON">%1$s</xliff:g>"</string>
     <string name="app_install_location_title" msgid="2068975150026852168">"Lokasi pemasangan yang disukai"</string>
     <string name="app_install_location_summary" msgid="5155453752692959098">"Ubah lokasi pemasangan yang diinginkan untuk apl baru."</string>
-    <string name="app_disable_dlg_title" msgid="3916469657537695436">"Menonaktifkan apl yang tertanam?"</string>
-    <string name="app_disable_dlg_text" msgid="3562567756362627323">"Jika Anda menonaktifkan apl yang tertanam, apl lain mungkin akan mengalami kesalahan fungsi."</string>
+    <string name="app_disable_dlg_title" msgid="3916469657537695436">"Nonaktifkan aplikasi bawaan?"</string>
+    <string name="app_disable_dlg_text" msgid="3562567756362627323">"Jika Anda menonaktifkan aplikasi bawaan, aplikasi lain dapat mengalami kesalahan fungsi."</string>
     <string name="app_special_disable_dlg_title" msgid="2690148680327142674">"Hapus data dan nonaktifkan aplikasi?"</string>
-    <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"Jika Anda menonaktifkan aplikasi yang ada di dalamnya, aplikasi lain mungkin ikut terpengaruh. Data Anda juga akan dihapus."</string>
+    <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"Jika Anda menonaktifkan aplikasi bawaan, aplikasi lain dapat mengalami kesalahan fungsi. Data Anda juga akan dihapus."</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"Nonaktifkan pemberitahuan?"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"Jika Anda mematikan pemberitahuan untuk aplikasi ini, Anda dapat melewatkan pembaruan dan lansiran penting."</string>
     <string name="app_ops_settings" msgid="5108481883575527511">"Pengoperasian aplikasi"</string>
@@ -1682,7 +1683,7 @@
     <string name="battery_since_reset" msgid="7464546661121187045">"Penggunaan baterai sejak penyetelan ulang"</string>
     <string name="battery_stats_on_battery" msgid="4970762168505236033">"Memakai baterai: <xliff:g id="TIME">%1$s</xliff:g>"</string>
     <string name="battery_stats_duration" msgid="7464501326709469282">"<xliff:g id="TIME">%1$s</xliff:g> sejak dicabut"</string>
-    <string name="battery_stats_charging_label" msgid="4223311142875178785">"Membebankan"</string>
+    <string name="battery_stats_charging_label" msgid="4223311142875178785">"Mengisi daya"</string>
     <string name="battery_stats_screen_on_label" msgid="7150221809877509708">"Layar hidup"</string>
     <string name="battery_stats_gps_on_label" msgid="1193657533641951256">"GPS menyala"</string>
     <string name="battery_stats_wifi_running_label" msgid="1845839195549226252">"Wi-Fi"</string>
@@ -1694,8 +1695,8 @@
     <string name="wifi_on_time" msgid="3208518458663637035">"Wi-Fi berdasarkan waktu"</string>
     <string name="bluetooth_on_time" msgid="3056108148042308690">"Wi-Fi berdasarkan waktu"</string>
     <string name="history_details_title" msgid="3608240585315506067">"Detail riwayat"</string>
-    <string name="details_title" msgid="3792801565213935385">"Gunakan detail"</string>
-    <string name="details_subtitle" msgid="32593908269911734">"Gunakan detail"</string>
+    <string name="details_title" msgid="3792801565213935385">"Detail penggunaan"</string>
+    <string name="details_subtitle" msgid="32593908269911734">"Detail penggunaan"</string>
     <string name="controls_subtitle" msgid="390468421138288702">"Sesuaikan penggunaan daya"</string>
     <string name="packages_subtitle" msgid="4736416171658062768">"Termasuk paket"</string>
     <string name="power_screen" msgid="3023346080675904613">"Layar"</string>
@@ -1728,7 +1729,7 @@
     <string name="usage_type_computed_power" msgid="5862792259009981479">"Penggunaan daya yang dihitung"</string>
     <string name="usage_type_actual_power" msgid="7047814738685578335">"Penggunaan daya yang diamati"</string>
     <string name="battery_action_stop" msgid="649958863744041872">"Paksa berhenti"</string>
-    <string name="battery_action_app_details" msgid="7861051816778419018">"Info apl"</string>
+    <string name="battery_action_app_details" msgid="7861051816778419018">"Info aplikasi"</string>
     <string name="battery_action_app_settings" msgid="4570481408106287454">"Setelan apl"</string>
     <string name="battery_action_display" msgid="7338551244519110831">"Setelan layar"</string>
     <string name="battery_action_wifi" msgid="8181553479021841207">"Setelan Wi-Fi"</string>
@@ -1764,7 +1765,7 @@
     <string name="battery_saver" msgid="1426682272004907982">"Penghemat baterai"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Aktifkan secara otomatis"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Tidak pernah"</string>
-    <string name="battery_saver_turn_on_automatically_pct" msgid="7536784431655058267">"dengan %1$s baterai"</string>
+    <string name="battery_saver_turn_on_automatically_pct" msgid="7536784431655058267">"saat baterai %1$s"</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Statistik Proses"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Statistik teknis tentang proses yang berjalan"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Penggunaan memori"</string>
@@ -1927,11 +1928,11 @@
     <string name="local_backup_password_summary_change" msgid="2731163425081172638">"Sentuh guna mengubah atau menghapus sandi untuk cadangan lengkap desktop"</string>
     <string name="local_backup_password_toast_success" msgid="582016086228434290">"Sandi cadangan baru telah disetel"</string>
     <string name="local_backup_password_toast_confirmation_mismatch" msgid="7805892532752708288">"Sandi baru dan konfirmasinya tidak cocok."</string>
-    <string name="local_backup_password_toast_validation_failure" msgid="5646377234895626531">"Gagal saat menyetel sandi cadangan"</string>
+    <string name="local_backup_password_toast_validation_failure" msgid="5646377234895626531">"Gagal menyetel sandi cadangan"</string>
     <string name="backup_erase_dialog_title" msgid="1027640829482174106"></string>
     <string name="backup_erase_dialog_message" msgid="5221011285568343155">"Berhenti mencadangkan sandi Wi-Fi, bookmark, setelan lainnya, dan data aplikasi, serta menghapus semua salinan di server Google?"</string>
     <string name="fullbackup_erase_dialog_message" msgid="944399039066318647">"Berhenti mencadangkan data perangkat (seperti sandi Wi-Fi dan riwayat panggilan) dan data aplikasi (seperti setelan dan file yang disimpan oleh aplikasi), serta hapus semua salinan di Google Drive?"</string>
-    <string name="fullbackup_data_summary" msgid="960850365007767734">"Secara otomatis mencadangkan data perangkat (seperti sandi Wi-Fi dan riwayat panggilan) dan data aplikasi (seperti setelan dan file yang disimpan oleh aplikasi) dari jarak jauh.\n\nJika Anda mengaktifkan cadangan otomatis, data perangkat dan aplikasi secara berkala disimpan dari jarak jauh. Data aplikasi dapat berupa data apa saja yang telah disimpan oleh aplikasi (menurut setelan pengembang), termasuk data yang berpotensi sensitif seperti kontak, pesan, dan foto."</string>
+    <string name="fullbackup_data_summary" msgid="960850365007767734">"Otomatis cadangkan data perangkat (seperti sandi Wi-Fi dan riwayat panggilan) dan data aplikasi (seperti setelan dan file yang disimpan oleh aplikasi) dari jarak jauh.\n\nJika Anda mengaktifkan cadangan otomatis, data perangkat dan aplikasi secara berkala disimpan dari jarak jauh. Data aplikasi dapat berupa data apa saja yang telah disimpan oleh aplikasi (menurut setelan pengembang), termasuk data yang berpotensi sensitif seperti kontak, pesan, dan foto."</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"Setelan administrasi perangkat"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"Administrator perangkat"</string>
     <string name="remove_device_admin" msgid="3596845261596451437">"Nonaktifkan"</string>
@@ -2123,10 +2124,10 @@
     <string name="data_usage_menu_show_ethernet" msgid="5181361208532314097">"Tampilkan penggunaan Ethernet"</string>
     <string name="data_usage_menu_hide_ethernet" msgid="3326702187179943681">"Sembunyikan Ethernet"</string>
     <string name="data_usage_menu_metered" msgid="6235119991372755026">"Batasan jaringan"</string>
-    <string name="data_usage_menu_auto_sync" msgid="8203999775948778560">"Sinkronisasi data otomatis"</string>
+    <string name="data_usage_menu_auto_sync" msgid="8203999775948778560">"Otomatis sinkronkan data"</string>
     <string name="data_usage_menu_sim_cards" msgid="6410498422797244073">"Kartu SIM"</string>
     <string name="data_usage_menu_cellular_networks" msgid="5243515735055652279">"Jaringan seluler"</string>
-    <string name="account_settings_menu_auto_sync" msgid="6243013719753700377">"Sinkronisasi data otomatis"</string>
+    <string name="account_settings_menu_auto_sync" msgid="6243013719753700377">"Otomatis sinkronkan data"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="785541379617346438">"Sinkronisasi otomatis data pribadi"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="329565580969147026">"Sinkronisasi otomatis data kerja"</string>
     <string name="data_usage_change_cycle" msgid="7776556448920114866">"Ubah daur..."</string>
@@ -2216,7 +2217,7 @@
     <string name="vpn_done" msgid="8678655203910995914">"Tutup"</string>
     <string name="vpn_save" msgid="4233484051644764510">"Simpan"</string>
     <string name="vpn_connect" msgid="8469608541746132301">"Sambungkan"</string>
-    <string name="vpn_edit" msgid="8647191407179996943">"Mengedit profil VPN"</string>
+    <string name="vpn_edit" msgid="8647191407179996943">"Edit profil VPN"</string>
     <string name="vpn_forget" msgid="3684651372749415446">"Lupakan"</string>
     <string name="vpn_connect_to" msgid="5965299358485793260">"Menyambung ke <xliff:g id="PROFILE">%s</xliff:g>"</string>
     <string name="vpn_disconnect_confirm" msgid="2555877026824771115">"Putuskan sambungan VPN ini."</string>
@@ -2270,8 +2271,7 @@
     <string name="user_you" msgid="1639158809315025986">"Anda (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_nickname" msgid="5148818000228994488">"Nama julukan"</string>
     <string name="user_add_user_type_title" msgid="2146438670792322349">"Tambahkan"</string>
-    <!-- no translation found for user_add_max_count (5405885348463433157) -->
-    <skip />
+    <string name="user_add_max_count" msgid="5405885348463433157">"Anda dapat menambahkan maksimal <xliff:g id="USER_COUNT">%1$d</xliff:g> pengguna"</string>
     <string name="user_add_user_item_summary" msgid="4702776187132008661">"Pengguna memiliki aplikasi dan konten mereka sendiri"</string>
     <string name="user_add_profile_item_summary" msgid="5931663986889138941">"Anda dapat membatasi akses ke aplikasi dan konten dari akun Anda"</string>
     <string name="user_add_user_item_title" msgid="8212199632466198969">"Pengguna"</string>
@@ -2430,7 +2430,7 @@
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"Perlu dipilih"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"Setelan"</string>
     <string name="search_results_title" msgid="1796252422574886932">"Setelan"</string>
-    <string name="search_menu" msgid="7053532283559077164">"Telusuri"</string>
+    <string name="search_menu" msgid="6283419262313758339">"Setelan penelusuran"</string>
     <string name="query_hint_text" msgid="3350700807437473939">"Setelan penelusuran"</string>
     <string name="search_recents_queries_label" msgid="2128811638532309069">"Penelusuran terkini"</string>
     <string name="search_results_label" msgid="4163304782363526148">"Hasil"</string>
@@ -2452,6 +2452,7 @@
     <string name="keywords_voice_input" msgid="3519547605812413860">"recognizer input speech speak language hands-free hand free recognition offensive word audio history bluetooth headset pengenal masukan ucapan ucapkan bahasa handsfree pengenalan kata menyinggung audio riwayat bluetooth headset"</string>
     <string name="keywords_text_to_speech_output" msgid="392447904221657930">"rating bahasa default berbicara berbicara text to speech aksesibilitas pembaca tunanetra"</string>
     <string name="keywords_date_and_time" msgid="2631808108134830066">"jam militer"</string>
+    <string name="keywords_network_reset" msgid="6346978754090557056">"setel ulang memulihkan pabrik"</string>
     <string name="keywords_factory_data_reset" msgid="4355133848707691977">"sapu hapus pulihkan kosongkan buang"</string>
     <string name="keywords_printing" msgid="1701778563617114846">"printer"</string>
     <string name="keywords_sounds_and_notifications" msgid="5965996187974887000">"bip pengeras suara"</string>
@@ -2751,16 +2752,11 @@
     <string name="assist_footer" msgid="2283187001990543739">"Aplikasi bantuan membantu Anda mengidentifikasi dan menindaklanjuti informasi yang berguna tanpa perlu bertanya. Beberapa aplikasi mendukung peluncur dan layanan masukan suara untuk memberikan bantuan terintegrasi."</string>
     <string name="average_memory_use" msgid="829566450150198512">"Rata-rata penggunaan memori"</string>
     <string name="maximum_memory_use" msgid="7493720799710132496">"Penggunaan memori maksimum"</string>
-    <!-- no translation found for memory_usage (1781358557214390033) -->
-    <skip />
-    <!-- no translation found for app_list_memory_use (6987417883876419338) -->
-    <skip />
-    <!-- no translation found for memory_details (5943436005716991782) -->
-    <skip />
-    <!-- no translation found for memory_use_summary (5608257211903075754) -->
-    <skip />
-    <!-- no translation found for no_memory_use_summary (2016900536806235588) -->
-    <skip />
+    <string name="memory_usage" msgid="1781358557214390033">"Penggunaan memori"</string>
+    <string name="app_list_memory_use" msgid="6987417883876419338">"Penggunaan aplikasi"</string>
+    <string name="memory_details" msgid="5943436005716991782">"Detail"</string>
+    <string name="memory_use_summary" msgid="5608257211903075754">"<xliff:g id="SIZE">%1$s</xliff:g> rata-rata memori yang digunakan dalam 3 jam terakhir"</string>
+    <string name="no_memory_use_summary" msgid="2016900536806235588">"Tidak ada memori yang digunakan dalam 3 jam terakhir"</string>
     <string name="sort_avg_use" msgid="3998036180505143129">"Urutkan menurut rata-rata penggunaan"</string>
     <string name="sort_max_use" msgid="4629247978290075124">"Urutkan menurut penggunaan maksimum"</string>
     <string name="memory_performance" msgid="5661005192284103281">"Kinerja"</string>

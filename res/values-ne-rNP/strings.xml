@@ -1065,6 +1065,7 @@
     <string name="reset_network_final_desc" msgid="6388371121099245116">"सबै नेटवर्क सेटिङहरू रिसेट गर्ने हो? तपाईँ यी कार्य अनडू गर्न सक्नुहुन्न!"</string>
     <string name="reset_network_final_button_text" msgid="1797434793741744635">"सेटिङहरू रिसेट गर्नुहोस्"</string>
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"रिसेट गर्ने हो?"</string>
+    <string name="network_reset_not_available" msgid="7188610385577164676">"नेटवर्क रिसेट यो प्रयोगकर्ताको लागि उपलब्ध छैन"</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"सञ्जाल सेटिङ्हरू रिसेट गरियो"</string>
     <string name="device_reset_title" msgid="2384019005638768076">"उपकरण पुनः सेट गर्नुहोस्"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"कारखाना डेटा रिसेट"</string>
@@ -2270,8 +2271,7 @@
     <string name="user_you" msgid="1639158809315025986">"तपाईँ (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_nickname" msgid="5148818000228994488">"उपनाम"</string>
     <string name="user_add_user_type_title" msgid="2146438670792322349">"थप्नुहोस्"</string>
-    <!-- no translation found for user_add_max_count (5405885348463433157) -->
-    <skip />
+    <string name="user_add_max_count" msgid="5405885348463433157">"तपाईँले <xliff:g id="USER_COUNT">%1$d</xliff:g> जना प्रयोगकर्ता सम्म थप्न सक्नुहुनेछ"</string>
     <string name="user_add_user_item_summary" msgid="4702776187132008661">"प्रयोगकर्ताहरूसँग आफ्नै अनुप्रयोगहरू र सामग्री हुन्छ"</string>
     <string name="user_add_profile_item_summary" msgid="5931663986889138941">"तपाईँ आफ्नो खाताबाट अनुप्रयोगहरू र सामग्रीहरूको पहुँचलाई प्रतिबन्ध गर्न सक्नुहुन्छ"</string>
     <string name="user_add_user_item_title" msgid="8212199632466198969">"प्रयोगकर्ता"</string>
@@ -2430,7 +2430,7 @@
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"छनौट आवश्यक छ"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"सेटिङहरू"</string>
     <string name="search_results_title" msgid="1796252422574886932">"सेटिङहरू"</string>
-    <string name="search_menu" msgid="7053532283559077164">"खोजी गर्नुहोस्"</string>
+    <string name="search_menu" msgid="6283419262313758339">"खोज सेटिङहरू"</string>
     <string name="query_hint_text" msgid="3350700807437473939">"खोज सेटिङहरू"</string>
     <string name="search_recents_queries_label" msgid="2128811638532309069">"हालैका खोजहरू"</string>
     <string name="search_results_label" msgid="4163304782363526148">"परिणामहरू"</string>
@@ -2452,6 +2452,7 @@
     <string name="keywords_voice_input" msgid="3519547605812413860">"पहिचानकर्ता निवेश बोली बोल्ने भाषा बिना हात बिना हात मान्यता आपत्तिजनक शब्द अडियो इतिहास ब्लूटूथ हेडसेट"</string>
     <string name="keywords_text_to_speech_output" msgid="392447904221657930">"दर भाषा पूर्वनिर्धारित बोल्नुहोस् बोल्दै tts पहुँच पाठक अन्धो"</string>
     <string name="keywords_date_and_time" msgid="2631808108134830066">"सैन्य घडी"</string>
+    <string name="keywords_network_reset" msgid="6346978754090557056">"फ्याक्ट्री पुनर्स्थापना रिसेट गर्नुहोस्"</string>
     <string name="keywords_factory_data_reset" msgid="4355133848707691977">"पुछ्नुहोस् मेट्नुहोस् पुनर्स्थापना गर्नुहोस् सफा गर्नुहोस् हटाउनुहोस्"</string>
     <string name="keywords_printing" msgid="1701778563617114846">"प्रिन्टर"</string>
     <string name="keywords_sounds_and_notifications" msgid="5965996187974887000">"स्पिकर बिप"</string>
@@ -2754,7 +2755,7 @@
     <string name="memory_usage" msgid="1781358557214390033">"मेमोरी प्रयोग"</string>
     <string name="app_list_memory_use" msgid="6987417883876419338">"अनुप्रयोग उपयोग"</string>
     <string name="memory_details" msgid="5943436005716991782">"विवरणहरू"</string>
-    <string name="memory_use_summary" msgid="5608257211903075754">"<xliff:g id="SIZE">%1$s</xliff:g> औसत मेमोरी पछिल्लो ३ घण्टामा प्रयोग गरियो"</string>
+    <string name="memory_use_summary" msgid="5608257211903075754">"पछिल्लो ३ घण्टामा <xliff:g id="SIZE">%1$s</xliff:g> औसत मेमोरी प्रयोग गरियो"</string>
     <string name="no_memory_use_summary" msgid="2016900536806235588">"पछिल्लो ३ घण्टामा कुनै मेमोरी प्रयोग गरिएन"</string>
     <string name="sort_avg_use" msgid="3998036180505143129">"औसत प्रयोगद्वारा क्रमबद्ध गर्नुहोस्"</string>
     <string name="sort_max_use" msgid="4629247978290075124">"अधिकतम प्रयोगद्वारा क्रमबद्ध गर्नुहोस्"</string>
