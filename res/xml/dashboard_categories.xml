@@ -102,6 +102,14 @@
                 android:icon="@drawable/ic_settings_notifications"
                 />
 
+        <!-- Application Settings -->
+        <dashboard-tile
+                android:id="@+id/application_settings"
+                android:title="@string/applications_settings"
+                android:fragment="com.android.settings.applications.ManageApplications"
+                android:icon="@drawable/ic_settings_applications"
+                />
+
         <!-- Storage -->
         <dashboard-tile
                 android:id="@+id/storage_settings"
@@ -118,12 +126,12 @@
                 android:icon="@drawable/ic_settings_battery"
                 />
 
-        <!-- Application Settings -->
+        <!-- Memory -->
         <dashboard-tile
-                android:id="@+id/application_settings"
-                android:title="@string/applications_settings"
-                android:fragment="com.android.settings.applications.ManageApplications"
-                android:icon="@drawable/ic_settings_applications"
+                android:id="@+id/manage_memory"
+                android:title="@string/memory_settings_title"
+                android:fragment="com.android.settings.applications.ProcessStatsSummary"
+                android:icon="@drawable/ic_settings_memory"
                 />
 
         <!-- Manage users -->
@@ -132,14 +140,6 @@
                 android:title="@string/user_settings_title"
                 android:fragment="com.android.settings.users.UserSettings"
                 android:icon="@drawable/ic_settings_multiuser"
-                />
-
-        <!-- Memory -->
-        <dashboard-tile
-                android:id="@+id/manage_memory"
-                android:title="@string/memory_settings_title"
-                android:fragment="com.android.settings.applications.ProcessStatsSummary"
-                android:icon="@drawable/ic_settings_memory"
                 />
 
         <!-- Manage NFC payment apps -->
