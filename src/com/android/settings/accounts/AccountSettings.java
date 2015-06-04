@@ -296,7 +296,7 @@ public class AccountSettings extends SettingsPreferenceFragment
     private Preference newAddAccountPreference(Context context) {
         Preference preference = new Preference(context);
         preference.setTitle(R.string.add_account_label);
-        preference.setIcon(R.drawable.ic_menu_add);
+        preference.setIcon(R.drawable.ic_menu_add_dark);
         preference.setOnPreferenceClickListener(this);
         preference.setOrder(ORDER_NEXT_TO_LAST);
         return preference;
