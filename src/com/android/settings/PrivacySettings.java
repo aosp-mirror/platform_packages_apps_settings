@@ -170,7 +170,7 @@ public class PrivacySettings extends SettingsPreferenceFragment implements Index
         if (summary != null) {
             mConfigure.setSummary(summary);
         } else {
-            //mConfigure.setSummary(R.string.backup_configure_account_default_summary);
+            mConfigure.setSummary(R.string.backup_configure_account_default_summary);
         }
     }
 
