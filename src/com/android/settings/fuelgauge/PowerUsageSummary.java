@@ -35,8 +35,8 @@ import android.view.MenuItem;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.os.BatterySipper;
-import com.android.internal.os.PowerProfile;
 import com.android.internal.os.BatterySipper.DrainType;
+import com.android.internal.os.PowerProfile;
 import com.android.settings.HelpUtils;
 import com.android.settings.R;
 import com.android.settings.Settings.HighPowerApplicationsActivity;
@@ -282,6 +282,8 @@ public class PowerUsageSummary extends PowerUsageBase {
             stats.add(new BatterySipper(type, null, use));
             use += 5;
         }
+        BatterySipper sipper = new BatterySipper(DrainType.APP, new FakeUid(), use);
+        stats.add(sipper);
         return stats;
     }
 
