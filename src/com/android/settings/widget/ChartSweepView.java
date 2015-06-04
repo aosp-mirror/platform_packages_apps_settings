@@ -123,15 +123,14 @@ public class ChartSweepView extends View {
         final TypedArray a = context.obtainStyledAttributes(
                 attrs, R.styleable.ChartSweepView, defStyle, 0);
 
-        final int color = a.getColor(R.styleable.ChartSweepView_labelColor, Color.BLUE);
-        setSweepDrawable(a.getDrawable(R.styleable.ChartSweepView_sweepDrawable), color);
+        setSweepDrawable(a.getDrawable(R.styleable.ChartSweepView_sweepDrawable));
         setFollowAxis(a.getInt(R.styleable.ChartSweepView_followAxis, -1));
         setNeighborMargin(a.getDimensionPixelSize(R.styleable.ChartSweepView_neighborMargin, 0));
         setSafeRegion(a.getDimensionPixelSize(R.styleable.ChartSweepView_safeRegion, 0));
 
         setLabelMinSize(a.getDimensionPixelSize(R.styleable.ChartSweepView_labelSize, 0));
         setLabelTemplate(a.getResourceId(R.styleable.ChartSweepView_labelTemplate, 0));
-        setLabelColor(color);
+        setLabelColor(a.getColor(R.styleable.ChartSweepView_labelColor, Color.BLUE));
 
         // TODO: moved focused state directly into assets
         setBackgroundResource(R.drawable.data_usage_sweep_background);
@@ -214,7 +213,7 @@ public class ChartSweepView extends View {
         requestLayout();
     }
 
-    public void setSweepDrawable(Drawable sweep, int color) {
+    public void setSweepDrawable(Drawable sweep) {
         if (mSweep != null) {
             mSweep.setCallback(null);
             unscheduleDrawable(mSweep);
@@ -227,8 +226,6 @@ public class ChartSweepView extends View {
             }
             sweep.setVisible(getVisibility() == VISIBLE, false);
             mSweep = sweep;
-            // Match the text.
-            mSweep.setTint(color);
             sweep.getPadding(mSweepPadding);
         } else {
             mSweep = null;

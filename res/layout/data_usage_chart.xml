@@ -43,7 +43,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start|bottom"
         settings:strokeColor="#00000000"
-        settings:fillColor="?android:attr/colorAccent"
+        settings:fillColor="#ff009688"
         settings:fillColorSecondary="#ff80cbc4"
         settings:safeRegion="3dp" />
 
@@ -53,8 +53,8 @@
         android:layout_height="match_parent"
         android:layout_gravity="start|bottom"
         settings:strokeColor="#00000000"
-        settings:fillColor="?android:attr/colorAccent"
-        settings:fillColorSecondary="?android:attr/colorAccent"
+        settings:fillColor="#ff009688"
+        settings:fillColorSecondary="#ff009688"
         settings:safeRegion="3dp" />
 
     <com.android.settings.widget.ChartSweepView
@@ -67,7 +67,7 @@
         settings:neighborMargin="5dip"
         settings:labelSize="60dip"
         settings:labelTemplate="@string/data_usage_sweep_warning"
-        settings:labelColor="?android:attr/textColorSecondary"
+        settings:labelColor="#ff37474f"
         settings:safeRegion="4dp" />
 
     <com.android.settings.widget.ChartSweepView
