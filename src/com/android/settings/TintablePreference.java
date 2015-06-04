@@ -40,7 +40,7 @@ public class TintablePreference extends Preference {
         super.onBindView(view);
 
         if (mTintColor != 0) {
-            ((ImageView) view.findViewById(R.id.icon)).setImageTintList(
+            ((ImageView) view.findViewById(android.R.id.icon)).setImageTintList(
                     ColorStateList.valueOf(mTintColor));
         }
     }
