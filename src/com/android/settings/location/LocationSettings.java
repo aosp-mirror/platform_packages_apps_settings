@@ -33,7 +33,6 @@ import android.preference.SwitchPreference;
 import android.provider.Settings;
 import android.util.Log;
 import android.widget.Switch;
-
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
@@ -44,7 +43,29 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * Location access settings.
+ * System location settings (Settings &gt; Location). The screen has three parts:
+ * <ul>
+ *     <li>Platform location controls</li>
+ *     <ul>
+ *         <li>In switch bar: location master switch. Used to toggle
+ *         {@link android.provider.Settings.Secure#LOCATION_MODE} between
+ *         {@link android.provider.Settings.Secure#LOCATION_MODE_OFF} and another location mode.
+ *         </li>
+ *         <li>Mode preference: only available if the master switch is on, selects between
+ *         {@link android.provider.Settings.Secure#LOCATION_MODE} of
+ *         {@link android.provider.Settings.Secure#LOCATION_MODE_HIGH_ACCURACY},
+ *         {@link android.provider.Settings.Secure#LOCATION_MODE_BATTERY_SAVING}, or
+ *         {@link android.provider.Settings.Secure#LOCATION_MODE_SENSORS_ONLY}.</li>
+ *     </ul>
+ *     <li>Recent location requests: automatically populated by {@link RecentLocationApps}</li>
+ *     <li>Location services: multi-app settings provided from outside the Android framework. Each
+ *     is injected by a system-partition app via the {@link SettingInjectorService} API.</li>
+ * </ul>
+ * <p>
+ * Note that as of KitKat, the {@link SettingInjectorService} is the preferred method for OEMs to
+ * add their own settings to this page, rather than directly modifying the framework code. Among
+ * other things, this simplifies integration with future changes to the default (AOSP)
+ * implementation.
  */
 public class LocationSettings extends LocationSettingsBase
         implements SwitchBar.OnSwitchChangeListener {
