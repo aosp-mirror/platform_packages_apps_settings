@@ -182,6 +182,10 @@ public class BatteryEntry {
                 name = context.getResources().getString(R.string.power_overcounted);
                 iconId = R.drawable.ic_power_system;
                 break;
+            case CAMERA:
+                name = context.getResources().getString(R.string.power_camera);
+                iconId = R.drawable.ic_settings_camera;
+                break;
         }
         if (iconId > 0) {
             icon = context.getDrawable(iconId);
