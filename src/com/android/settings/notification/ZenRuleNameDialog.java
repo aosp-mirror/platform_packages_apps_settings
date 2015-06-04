@@ -48,6 +48,7 @@ public abstract class ZenRuleNameDialog {
     private final AlertDialog mDialog;
     private final EditText mEditText;
     private final RadioGroup mTypes;
+    private final String mOriginalRuleName;
     private final ArraySet<String> mExistingNames;
     private final ServiceListing mServiceListing;
     private final RuleInfo[] mExternalRules = new RuleInfo[3];
@@ -57,6 +58,7 @@ public abstract class ZenRuleNameDialog {
             ArraySet<String> existingNames) {
         mServiceListing = serviceListing;
         mIsNew = ruleName == null;
+        mOriginalRuleName = ruleName;
         final View v = LayoutInflater.from(context).inflate(R.layout.zen_rule_name, null, false);
         mEditText = (EditText) v.findViewById(R.id.rule_name);
         if (!mIsNew) {
@@ -79,7 +81,12 @@ public abstract class ZenRuleNameDialog {
                 .setPositiveButton(R.string.okay, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        onOk(trimmedText(), selectedRuleInfo());
+                        final String newName = trimmedText();
+                        if (!mIsNew && mOriginalRuleName != null
+                                && mOriginalRuleName.equalsIgnoreCase(newName)) {
+                            return;  // no change to an existing rule, just dismiss
+                        }
+                        onOk(newName, selectedRuleInfo());
                     }
                 })
                 .setOnDismissListener(new OnDismissListener() {
@@ -148,7 +155,8 @@ public abstract class ZenRuleNameDialog {
     private void updatePositiveButton() {
         final String name = trimmedText();
         final boolean validName = !TextUtils.isEmpty(name)
-                && !mExistingNames.contains(name.toLowerCase());
+                && (name.equalsIgnoreCase(mOriginalRuleName)
+                        || !mExistingNames.contains(name.toLowerCase()));
         mDialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(validName);
     }
 
