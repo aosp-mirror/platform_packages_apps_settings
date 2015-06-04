@@ -50,6 +50,8 @@
     <color name="setup_wizard_wifi_color_dark">#89ffffff</color>
     <color name="setup_wizard_wifi_color_light">#89000000</color>
 
+    <color name="system_warning_color">#fff4511e</color><!-- deep orange 600 -->
+
     <color name="lock_pattern_background">#00000000</color>
     <color name="lock_pattern_view_regular_color">#ff37474f</color>
     <color name="lock_pattern_view_error_color">@color/warning</color>
@@ -57,7 +59,7 @@
     <color name="lock_pattern_view_regular_color_dark">#ffffff</color>
 
     <color name="unlock_pattern_view_regular_color">@android:color/white</color>
-    <color name="unlock_pattern_view_error_color">#fff4511e</color>
+    <color name="unlock_pattern_view_error_color">@color/system_warning_color</color>
 
     <color name="fingerprint_title_area_bg">#ff009688</color>
     <color name="fingerprint_title_color">#ffffffff</color>
@@ -95,5 +97,7 @@
     <color name="memory_avg_use">#ff384248</color>
     <color name="memory_max_use">#ff009587</color>
     <color name="memory_remaining">#ffced7db</color>
+
+    <color name="zen_rule_name_warning">@color/system_warning_color</color>
 
 </resources>
