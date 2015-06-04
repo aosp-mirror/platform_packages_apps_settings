@@ -406,7 +406,7 @@ public class RunningProcessesView extends FrameLayout
 
     // utility method used to start sub activity
     private void startServiceDetailsActivity(RunningState.MergedItem mi) {
-        if (mOwner != null) {
+        if (mOwner != null && mi != null) {
             // start new fragment to display extended information
             Bundle args = new Bundle();
             if (mi.mProcess != null) {
