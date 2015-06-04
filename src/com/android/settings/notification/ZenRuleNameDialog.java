@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.pm.ServiceInfo;
+import android.content.res.ColorStateList;
 import android.net.Uri;
 import android.service.notification.ZenModeConfig;
 import android.service.notification.ZenModeConfig.EventInfo;
@@ -31,6 +32,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.ArraySet;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -47,7 +49,10 @@ public abstract class ZenRuleNameDialog {
 
     private final AlertDialog mDialog;
     private final EditText mEditText;
+    private final View mWarning;
     private final RadioGroup mTypes;
+    private final ColorStateList mWarningTint;
+    private final ColorStateList mOriginalTint;
     private final String mOriginalRuleName;
     private final ArraySet<String> mExistingNames;
     private final ServiceListing mServiceListing;
@@ -59,11 +64,16 @@ public abstract class ZenRuleNameDialog {
         mServiceListing = serviceListing;
         mIsNew = ruleName == null;
         mOriginalRuleName = ruleName;
+        mWarningTint = ColorStateList.valueOf(context.getColor(R.color.zen_rule_name_warning));
         final View v = LayoutInflater.from(context).inflate(R.layout.zen_rule_name, null, false);
         mEditText = (EditText) v.findViewById(R.id.rule_name);
+        mWarning = v.findViewById(R.id.rule_name_warning);
         if (!mIsNew) {
             mEditText.setText(ruleName);
         }
+        TypedValue outValue = new TypedValue();
+        context.getTheme().resolveAttribute(android.R.attr.colorAccent, outValue, true);
+        mOriginalTint = ColorStateList.valueOf(outValue.data);
         mEditText.setSelectAllOnFocus(true);
         mTypes = (RadioGroup) v.findViewById(R.id.rule_types);
         if (mServiceListing != null) {
@@ -112,7 +122,7 @@ public abstract class ZenRuleNameDialog {
 
             @Override
             public void afterTextChanged(Editable s) {
-                updatePositiveButton();
+                updatePositiveButtonAndWarning();
             }
         });
         mExistingNames = new ArraySet<String>(existingNames.size());
@@ -125,7 +135,7 @@ public abstract class ZenRuleNameDialog {
 
     public void show() {
         mDialog.show();
-        updatePositiveButton();
+        updatePositiveButtonAndWarning();
     }
 
     private void bindType(int id, RuleInfo ri) {
@@ -152,12 +162,15 @@ public abstract class ZenRuleNameDialog {
         return mEditText.getText() == null ? null : mEditText.getText().toString().trim();
     }
 
-    private void updatePositiveButton() {
+    private void updatePositiveButtonAndWarning() {
         final String name = trimmedText();
         final boolean validName = !TextUtils.isEmpty(name)
                 && (name.equalsIgnoreCase(mOriginalRuleName)
                         || !mExistingNames.contains(name.toLowerCase()));
         mDialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(validName);
+        final boolean showWarning = !TextUtils.isEmpty(name) && !validName;
+        mWarning.setVisibility(showWarning ? View.VISIBLE : View.INVISIBLE);
+        mEditText.setBackgroundTintList(showWarning ? mWarningTint : mOriginalTint);
     }
 
     private static RuleInfo defaultNewSchedule() {
