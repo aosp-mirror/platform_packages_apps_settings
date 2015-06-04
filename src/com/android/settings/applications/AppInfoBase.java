@@ -54,6 +54,7 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
     protected boolean mAppControlRestricted = false;
 
     protected ApplicationsState mState;
+    protected ApplicationsState.Session mSession;
     protected ApplicationsState.AppEntry mAppEntry;
     protected PackageInfo mPackageInfo;
     protected int mUserId;
@@ -75,6 +76,7 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
         mFinishing = false;
 
         mState = ApplicationsState.getInstance(getActivity().getApplication());
+        mSession = mState.newSession(this);
         Context context = getActivity();
         mDpm = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
@@ -88,11 +90,18 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
     @Override
     public void onResume() {
         super.onResume();
+        mSession.resume();
         mAppControlRestricted = mUserManager.hasUserRestriction(UserManager.DISALLOW_APPS_CONTROL);
 
         if (!refreshUi()) {
             setIntentAndFinish(true, true);
         }
+    }
+
+    @Override
+    public void onPause() {
+        mSession.pause();
+        super.onPause();
     }
 
     protected String retrieveAppEntry() {
