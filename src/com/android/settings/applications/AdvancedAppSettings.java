@@ -128,13 +128,13 @@ public class AdvancedAppSettings extends SettingsPreferenceFragment implements
 
     private final PermissionsResultCallback mPermissionCallback = new PermissionsResultCallback() {
         @Override
-        public void onPermissionCountResult(int[] result) {
+        public void onPermissionSummaryResult(int[] counts, CharSequence[] groupLabels) {
             if (getActivity() == null) {
                 return;
             }
-            if (result != null) {
+            if (counts != null) {
                 mAppPermsPreference.setSummary(getContext().getString(
-                        R.string.app_permissions_summary, result[0], result[1]));
+                        R.string.app_permissions_summary, counts[0], counts[1]));
             } else {
                 mAppPermsPreference.setSummary(null);
             }
