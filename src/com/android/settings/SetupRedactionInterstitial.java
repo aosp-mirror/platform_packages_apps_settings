@@ -16,10 +16,6 @@
 
 package com.android.settings;
 
-import com.android.settings.notification.RedactionInterstitial;
-import com.android.setupwizardlib.SetupWizardLayout;
-import com.android.setupwizardlib.view.NavigationBar;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -28,7 +24,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+
+import com.android.settings.notification.RedactionInterstitial;
+import com.android.setupwizardlib.SetupWizardLayout;
+import com.android.setupwizardlib.view.NavigationBar;
 
 /**
  * Setup Wizard's version of RedactionInterstitial screen. It inherits the logic and basic structure
@@ -72,21 +71,19 @@ public class SetupRedactionInterstitial extends RedactionInterstitial {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            final SetupWizardLayout layout = new SetupWizardLayout(inflater.getContext());
-            layout.setIllustration(R.drawable.setup_illustration_lock_screen,
-                    R.drawable.setup_illustration_horizontal_tile);
-            layout.setBackgroundTile(R.drawable.setup_illustration_tile);
-            layout.setHeaderText(R.string.notification_section_header);
+            return inflater.inflate(R.layout.setup_redaction_interstitial, container, false);
+        }
 
-            View content = super.onCreateView(inflater, layout, savedInstanceState);
-            layout.addView(content);
+        @Override
+        public void onViewCreated(View view, Bundle savedInstanceState) {
+            super.onViewCreated(view, savedInstanceState);
+            final SetupWizardLayout layout =
+                    (SetupWizardLayout) view.findViewById(R.id.setup_wizard_layout);
 
             final NavigationBar navigationBar = layout.getNavigationBar();
             navigationBar.setNavigationBarListener(this);
-            final Button backButton = navigationBar.getBackButton();
-            backButton.setVisibility(View.GONE);
+            navigationBar.getBackButton().setVisibility(View.GONE);
             SetupWizardUtils.setImmersiveMode(getActivity());
-            return layout;
         }
 
         @Override
