@@ -463,8 +463,6 @@ public class ChooseLockPattern extends SettingsActivity {
                 mLockPatternView.clearPattern();
                 updateStage(Stage.Introduction);
             } else if (mUiStage.leftMode == LeftButtonMode.Cancel) {
-                // They are canceling the entire wizard
-                getActivity().setResult(RESULT_FINISHED);
                 getActivity().finish();
             } else {
                 throw new IllegalStateException("left footer button pressed, but stage of " +
@@ -639,21 +637,18 @@ public class ChooseLockPattern extends SettingsActivity {
                 utils.setVisiblePatternEnabled(true, UserHandle.myUserId());
             }
 
-            if (!wasSecureBefore) {
-                startActivity(getRedactionInterstitialIntent(getActivity()));
-            }
-
             if (mHasChallenge) {
-                startVerifyPattern(utils);
-                return;
+                startVerifyPattern(utils, wasSecureBefore);
             } else {
+                if (!wasSecureBefore) {
+                    startActivity(getRedactionInterstitialIntent(getActivity()));
+                }
                 getActivity().setResult(RESULT_FINISHED);
+                doFinish();
             }
-
-            doFinish();
         }
 
-        private void startVerifyPattern(LockPatternUtils utils) {
+        private void startVerifyPattern(LockPatternUtils utils, final boolean wasSecureBefore) {
             mLockPatternView.disableInput();
             if (mPendingLockCheck != null) {
                 mPendingLockCheck.cancel(false);
@@ -673,6 +668,10 @@ public class ChooseLockPattern extends SettingsActivity {
 
                             mLockPatternView.enableInput();
                             mPendingLockCheck = null;
+
+                            if (!wasSecureBefore) {
+                                startActivity(getRedactionInterstitialIntent(getActivity()));
+                            }
 
                             Intent intent = new Intent();
                             intent.putExtra(
