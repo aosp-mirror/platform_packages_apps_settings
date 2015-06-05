@@ -67,7 +67,12 @@ public class RedactionInterstitial extends SettingsActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            View view = inflater.inflate(R.layout.redaction_interstitial, container, false);
+            return inflater.inflate(R.layout.redaction_interstitial, container, false);
+        }
+
+        @Override
+        public void onViewCreated(View view, Bundle savedInstanceState) {
+            super.onViewCreated(view, savedInstanceState);
             mShowAllButton = (RadioButton) view.findViewById(R.id.show_all);
             mRedactSensitiveButton = (RadioButton) view.findViewById(R.id.redact_sensitive);
             mHideAllButton = (RadioButton) view.findViewById(R.id.hide_all);
@@ -75,7 +80,6 @@ public class RedactionInterstitial extends SettingsActivity {
             mShowAllButton.setOnClickListener(this);
             mRedactSensitiveButton.setOnClickListener(this);
             mHideAllButton.setOnClickListener(this);
-            return view;
         }
 
         @Override
