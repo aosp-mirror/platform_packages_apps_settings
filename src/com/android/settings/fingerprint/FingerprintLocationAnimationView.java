@@ -24,6 +24,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
@@ -59,7 +60,9 @@ public class FingerprintLocationAnimationView extends View {
                 R.fraction.fingerprint_sensor_location_fraction_x, 1, 1);
         mFractionCenterY = getResources().getFraction(
                 R.fraction.fingerprint_sensor_location_fraction_y, 1, 1);
-        int color = getResources().getColor(R.color.fingerprint_dot_color, null);
+        TypedValue typedValue = new TypedValue();
+        context.getTheme().resolveAttribute(android.R.attr.colorAccent, typedValue, true);
+        int color = getResources().getColor(typedValue.resourceId, null);
         mDotPaint.setAntiAlias(true);
         mPulsePaint.setAntiAlias(true);
         mDotPaint.setColor(color);
