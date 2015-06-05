@@ -17,14 +17,15 @@
 package com.android.settings.fingerprint;
 
 import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Animatable2;
 import android.graphics.drawable.AnimatedVectorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -82,7 +83,7 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
         mProgressBar = (ProgressBar) findViewById(R.id.fingerprint_progress_bar);
         mFingerprintAnimator = (ImageView) findViewById(R.id.fingerprint_animator);
         mIconAnimationDrawable = (AnimatedVectorDrawable) mFingerprintAnimator.getDrawable();
-        mIconAnimationDrawable.addListener(mIconAnimationListener);
+        mIconAnimationDrawable.registerAnimationCallback(mIconAnimationCallback);
         mFastOutSlowInInterpolator = AnimationUtils.loadInterpolator(
                 this, android.R.interpolator.fast_out_slow_in);
         mFingerprintAnimator.setOnTouchListener(new View.OnTouchListener() {
@@ -248,9 +249,10 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
         }
     };
 
-    private final Animator.AnimatorListener mIconAnimationListener = new AnimatorListenerAdapter() {
+    private final Animatable2.AnimationCallback mIconAnimationCallback =
+            new Animatable2.AnimationCallback() {
         @Override
-        public void onAnimationEnd(Animator animation) {
+        public void onAnimationEnd(Drawable d) {
             if (mAnimationCancelled) {
                 return;
             }
