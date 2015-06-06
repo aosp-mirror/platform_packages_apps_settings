@@ -80,6 +80,7 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
         R.string.battery_desc_users,
         R.string.battery_desc_unaccounted,
         R.string.battery_desc_overcounted,
+        R.string.battery_desc_camera,
     };
 
     public static void startBatteryDetailPage(
@@ -126,6 +127,8 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
                     R.string.usage_type_data_wifi_send,
                     R.string.usage_type_audio,
                     R.string.usage_type_video,
+                    R.string.usage_type_camera,
+                    R.string.usage_type_flashlight,
                 };
                 values = new double[] {
                     entry.sipper.cpuTimeMs,
@@ -139,7 +142,9 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
                     entry.sipper.wifiRxPackets,
                     entry.sipper.wifiTxPackets,
                     0,
-                    0
+                    0,
+                    entry.sipper.cameraTimeMs,
+                    entry.sipper.flashlightTimeMs,
                 };
 
                 if (entry.sipper.drainType == BatterySipper.DrainType.APP) {
