@@ -16,17 +16,27 @@
 
 package com.android.settings.notification;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageManager;
+import android.database.ContentObserver;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.preference.Preference;
-import android.preference.PreferenceScreen;
 import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
+import android.provider.Settings.Secure;
+import android.text.TextUtils;
 import android.util.ArraySet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +52,9 @@ import java.util.Collections;
 import java.util.List;
 
 public class ZenAccessSettings extends SettingsPreferenceFragment {
+
+    private final SettingObserver mObserver = new SettingObserver();
+
     private Context mContext;
     private PackageManager mPkgMan;
     private NotificationManager mNoMan;
@@ -75,6 +88,15 @@ public class ZenAccessSettings extends SettingsPreferenceFragment {
     public void onResume() {
         super.onResume();
         reloadList();
+        getContentResolver().registerContentObserver(
+                Secure.getUriFor(Secure.ENABLED_NOTIFICATION_POLICY_ACCESS_PACKAGES), false,
+                mObserver);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        getContentResolver().unregisterContentObserver(mObserver);
     }
 
     private void reloadList() {
@@ -95,22 +117,26 @@ public class ZenAccessSettings extends SettingsPreferenceFragment {
         Collections.sort(apps, new PackageItemInfo.DisplayNameComparator(mPkgMan));
         for (ApplicationInfo app : apps) {
             final String pkg = app.packageName;
+            final CharSequence label = app.loadLabel(mPkgMan);
             final SwitchPreference pref = new SwitchPreference(mContext);
             pref.setPersistent(false);
             pref.setIcon(app.loadIcon(mPkgMan));
-            pref.setTitle(app.packageName);
+            pref.setTitle(label);
             pref.setChecked(hasAccess(pkg));
             pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
                     final boolean access = (Boolean) newValue;
-                    AsyncTask.execute(new Runnable() {
-                        @Override
-                        public void run() {
-                            setAccess(pkg, access);
-                        }
-                    });
-                    return true;
+                    if (!access) {
+                        // disabling access
+                        setAccess(mContext, pkg, access);
+                        return true;
+                    }
+                    // enabling access: show a scary dialog first
+                    new ScaryWarningDialogFragment()
+                            .setPkgInfo(pkg, label)
+                            .show(getFragmentManager(), "dialog");
+                    return false;
                 }
             });
             screen.addPreference(pref);
@@ -122,8 +148,67 @@ public class ZenAccessSettings extends SettingsPreferenceFragment {
         return mNoMan.isNotificationPolicyAccessGrantedForPackage(pkg);
     }
 
-    private void setAccess(String pkg, boolean access) {
-        mNoMan.setNotificationPolicyAccessGranted(pkg, access);
+    private static void setAccess(final Context context, final String pkg, final boolean access) {
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                final NotificationManager mgr = context.getSystemService(NotificationManager.class);
+                mgr.setNotificationPolicyAccessGranted(pkg, access);
+            }
+        });
     }
 
+    private final class SettingObserver extends ContentObserver {
+        public SettingObserver() {
+            super(new Handler(Looper.getMainLooper()));
+        }
+
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            reloadList();
+        }
+    }
+
+    public static class ScaryWarningDialogFragment extends DialogFragment {
+        static final String KEY_PKG = "p";
+        static final String KEY_LABEL = "l";
+
+        public ScaryWarningDialogFragment setPkgInfo(String pkg, CharSequence label) {
+            Bundle args = new Bundle();
+            args.putString(KEY_PKG, pkg);
+            args.putString(KEY_LABEL, TextUtils.isEmpty(label) ? pkg : label.toString());
+            setArguments(args);
+            return this;
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            final Bundle args = getArguments();
+            final String pkg = args.getString(KEY_PKG);
+            final String label = args.getString(KEY_LABEL);
+
+            final String title = getResources().getString(R.string.zen_access_warning_dialog_title,
+                    label);
+            final String summary = getResources()
+                    .getString(R.string.zen_access_warning_dialog_summary);
+            return new AlertDialog.Builder(getContext())
+                    .setMessage(summary)
+                    .setTitle(title)
+                    .setCancelable(true)
+                    .setPositiveButton(R.string.allow,
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    setAccess(getContext(), pkg, true);
+                                }
+                            })
+                    .setNegativeButton(R.string.deny,
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    // pass
+                                }
+                            })
+                    .create();
+        }
+    }
 }
