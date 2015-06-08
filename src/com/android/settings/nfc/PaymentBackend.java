@@ -17,7 +17,8 @@
 package com.android.settings.nfc;
 
 import android.app.Activity;
-import android.content.*;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -71,14 +72,10 @@ public class PaymentBackend {
 
     public void onPause() {
         mSettingsPackageMonitor.unregister();
-        mContext.unregisterReceiver(mReceiver);
     }
 
     public void onResume() {
         mSettingsPackageMonitor.register(mContext, mContext.getMainLooper(), false);
-        // Register broadcast receiver for dynamic resource updates
-        IntentFilter filter = new IntentFilter(CardEmulation.ACTION_REQUEST_SERVICE_RESOURCES);
-        mContext.registerReceiver(mReceiver, filter);
     }
 
     public void refresh() {
@@ -112,14 +109,8 @@ public class PaymentBackend {
             } else {
                 appInfo.settingsComponent = null;
             }
-            if (service.hasDynamicResources()) {
-                appInfo.description = "";
-                appInfo.banner = null;
-                sendBroadcastForResources(appInfo);
-            } else {
-                appInfo.description = service.getDescription();
-                appInfo.banner = service.loadBanner(pm);
-            }
+            appInfo.description = service.getDescription();
+            appInfo.banner = service.loadBanner(pm);
             appInfos.add(appInfo);
         }
         mAppInfos = appInfos;
@@ -162,14 +153,6 @@ public class PaymentBackend {
         }
     }
 
-    void sendBroadcastForResources(PaymentAppInfo appInfo) {
-        Intent broadcastIntent = new Intent(CardEmulation.ACTION_REQUEST_SERVICE_RESOURCES);
-        broadcastIntent.setPackage(appInfo.componentName.getPackageName());
-        broadcastIntent.putExtra(CardEmulation.EXTRA_SERVICE_COMPONENT, appInfo.componentName);
-        mContext.sendOrderedBroadcastAsUser(broadcastIntent, UserHandle.CURRENT,
-                null, mReceiver, null, Activity.RESULT_OK, null, null);
-    }
-
     boolean isForegroundMode() {
         try {
             return Settings.Secure.getInt(mContext.getContentResolver(),
@@ -201,37 +184,6 @@ public class PaymentBackend {
         refresh();
     }
 
-    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            Bundle results = getResultExtras(false);
-            if (results != null) {
-                String desc = results.getString(CardEmulation.EXTRA_DESCRIPTION);
-                int resId = results.getInt(CardEmulation.EXTRA_BANNER_RES_ID, -1);
-                // Find corresponding component
-                PaymentAppInfo matchingAppInfo = null;
-                for (PaymentAppInfo appInfo : mAppInfos) {
-                    if (appInfo.componentName.equals(
-                            intent.getParcelableExtra(CardEmulation.EXTRA_SERVICE_COMPONENT))) {
-                        matchingAppInfo = appInfo;
-                    }
-                }
-                if (matchingAppInfo != null && (desc != null || resId != -1)) {
-                    if (desc != null) {
-                        matchingAppInfo.description = desc;
-                    }
-                    if (resId != -1) {
-                        matchingAppInfo.banner = loadDrawableForPackage(
-                                matchingAppInfo.componentName.getPackageName(), resId);
-                    }
-                    makeCallbacks();
-                }
-            } else {
-                Log.e(TAG, "Didn't find results extra.");
-            }
-
-        }
-    };
     private final Handler mHandler = new Handler() {
         @Override
         public void dispatchMessage(Message msg) {
