@@ -174,11 +174,13 @@ public class NfcPaymentPreference extends DialogPreference implements
             }
             holder.imageView.setImageDrawable(appInfo.banner);
             holder.imageView.setTag(appInfo);
+            holder.imageView.setContentDescription(appInfo.label);
             holder.imageView.setOnClickListener(this);
 
             // Prevent checked callback getting called on recycled views
             holder.radioButton.setOnCheckedChangeListener(null);
             holder.radioButton.setChecked(appInfo.isDefault);
+            holder.radioButton.setContentDescription(appInfo.label);
             holder.radioButton.setOnCheckedChangeListener(this);
             holder.radioButton.setTag(appInfo);
             return convertView;
