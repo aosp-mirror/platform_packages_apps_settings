@@ -318,7 +318,7 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
     private void loadCertificates(Spinner spinner, String prefix, int firstId, String selected) {
         Context context = getContext();
         String first = (firstId == 0) ? "" : context.getString(firstId);
-        String[] certificates = mKeyStore.saw(prefix);
+        String[] certificates = mKeyStore.list(prefix);
 
         if (certificates == null || certificates.length == 0) {
             certificates = new String[] {first};
