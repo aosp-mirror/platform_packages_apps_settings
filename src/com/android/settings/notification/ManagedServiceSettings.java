@@ -160,13 +160,13 @@ public abstract class ManagedServiceSettings extends SettingsPreferenceFragment 
                     .setMessage(summary)
                     .setTitle(title)
                     .setCancelable(true)
-                    .setPositiveButton(android.R.string.ok,
+                    .setPositiveButton(R.string.allow,
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
                                     mServiceListing.setEnabled(cn, true);
                                 }
                             })
-                    .setNegativeButton(android.R.string.cancel,
+                    .setNegativeButton(R.string.deny,
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
                                     // pass
