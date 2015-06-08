@@ -2228,6 +2228,12 @@
                 android:value="true" />
         </activity>
 
+        <activity android:name=".nfc.HowItWorks"
+                  android:label="@string/nfc_payment_settings_title"
+                  android:parentActivityName="Settings$PaymentSettingsActivity">
+                  android:excludeFromRecents="true">
+        </activity>
+
         <activity android:name=".SmsDefaultDialog"
                   android:label="@string/sms_application_title"
                   android:excludeFromRecents="true"
