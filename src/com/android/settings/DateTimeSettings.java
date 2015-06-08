@@ -29,7 +29,6 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
-import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
@@ -164,7 +163,7 @@ public class DateTimeSettings extends SettingsPreferenceFragment
         Date dummyDate = mDummyDate.getTime();
         mDatePref.setSummary(DateFormat.getLongDateFormat(context).format(now.getTime()));
         mTimePref.setSummary(DateFormat.getTimeFormat(getActivity()).format(now.getTime()));
-        mTimeZone.setSummary(getTimeZoneText(now.getTimeZone(), true));
+        mTimeZone.setSummary(getTimeZoneText(now.getTimeZone(), now.getTime()));
         mTime24Pref.setSummary(DateFormat.getTimeFormat(getActivity()).format(dummyDate));
     }
 
@@ -344,32 +343,37 @@ public class DateTimeSettings extends SettingsPreferenceFragment
         }
     }
 
-    public static String getTimeZoneText(TimeZone tz, boolean includeName) {
-        Date now = new Date();
+    private static String getTimeZoneText(TimeZone tz, Date now) {
+        Locale locale = Locale.getDefault();
+        String gmtString = getGmtOffsetString(locale, tz);
+        String zoneNameString = getZoneLongName(locale, tz, now);
+        if (zoneNameString == null) {
+            return gmtString;
+        }
 
+        // We don't use punctuation here to avoid having to worry about localizing that too!
+        return gmtString + " " + zoneNameString;
+    }
+
+    public static String getZoneLongName(Locale locale, TimeZone tz, Date now) {
+        boolean daylight = tz.inDaylightTime(now);
+        // This returns a name if it can, or will fall back to GMT+0X:00 format.
+        return tz.getDisplayName(daylight, TimeZone.LONG, locale);
+    }
+
+    public static String getGmtOffsetString(Locale locale, TimeZone tz) {
         // Use SimpleDateFormat to format the GMT+00:00 string.
         SimpleDateFormat gmtFormatter = new SimpleDateFormat("ZZZZ");
         gmtFormatter.setTimeZone(tz);
+        Date now = new Date();
         String gmtString = gmtFormatter.format(now);
 
         // Ensure that the "GMT+" stays with the "00:00" even if the digits are RTL.
         BidiFormatter bidiFormatter = BidiFormatter.getInstance();
-        Locale l = Locale.getDefault();
-        boolean isRtl = TextUtils.getLayoutDirectionFromLocale(l) == View.LAYOUT_DIRECTION_RTL;
+        boolean isRtl = TextUtils.getLayoutDirectionFromLocale(locale) == View.LAYOUT_DIRECTION_RTL;
         gmtString = bidiFormatter.unicodeWrap(gmtString,
                 isRtl ? TextDirectionHeuristics.RTL : TextDirectionHeuristics.LTR);
-
-        if (!includeName) {
-            return gmtString;
-        }
-
-        // Optionally append the time zone name.
-        SimpleDateFormat zoneNameFormatter = new SimpleDateFormat("zzzz");
-        zoneNameFormatter.setTimeZone(tz);
-        String zoneNameString = zoneNameFormatter.format(now);
-
-        // We don't use punctuation here to avoid having to worry about localizing that too!
-        return gmtString + " " + zoneNameString;
+        return gmtString;
     }
 
     private BroadcastReceiver mIntentReceiver = new BroadcastReceiver() {
