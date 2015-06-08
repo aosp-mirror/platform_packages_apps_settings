@@ -395,7 +395,7 @@ public class VpnSettings extends SettingsPreferenceFragment implements
         }
 
         // We are the only user of profiles in KeyStore so no locks are needed.
-        for (String key : keyStore.saw(Credentials.VPN)) {
+        for (String key : keyStore.list(Credentials.VPN)) {
             final VpnProfile profile = VpnProfile.decode(key, keyStore.get(Credentials.VPN + key));
             if (profile != null && !ArrayUtils.contains(excludeTypes, profile.type)) {
                 result.add(profile);
