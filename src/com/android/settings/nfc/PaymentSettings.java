@@ -16,6 +16,7 @@
 
 package com.android.settings.nfc;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
@@ -88,7 +89,8 @@ public class PaymentSettings extends SettingsPreferenceFragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         MenuItem menuItem = menu.add(R.string.nfc_payment_how_it_works);
-        menuItem.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS);
-        // TODO link to tutorial screen
+        Intent howItWorksIntent = new Intent(getActivity(), HowItWorks.class);
+        menuItem.setIntent(howItWorksIntent);
+        menuItem.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_NEVER);
     }
 }
