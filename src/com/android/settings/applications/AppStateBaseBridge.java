@@ -19,8 +19,9 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 
-import com.android.settings.applications.ApplicationsState.AppEntry;
-import com.android.settings.applications.ApplicationsState.Session;
+import com.android.settingslib.applications.ApplicationsState;
+import com.android.settingslib.applications.ApplicationsState.AppEntry;
+import com.android.settingslib.applications.ApplicationsState.Session;
 
 import java.util.ArrayList;
 

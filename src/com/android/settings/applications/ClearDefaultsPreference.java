@@ -37,6 +37,7 @@ import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settingslib.applications.ApplicationsState;
 
 public class ClearDefaultsPreference extends Preference {
 

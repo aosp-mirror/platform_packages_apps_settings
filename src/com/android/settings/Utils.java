@@ -16,8 +16,6 @@
 
 package com.android.settings;
 
-import static android.content.Intent.EXTRA_USER;
-
 import android.annotation.Nullable;
 import android.app.ActivityManager;
 import android.app.ActivityManagerNative;
@@ -70,8 +68,6 @@ import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.Profile;
 import android.provider.ContactsContract.RawContacts;
 import android.service.persistentdata.PersistentDataBlockManager;
-import android.telephony.SubscriptionInfo;
-import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -87,19 +83,20 @@ import android.widget.TabWidget;
 
 import com.android.internal.util.UserIcons;
 import com.android.settings.UserAdapter.UserDetails;
-import com.android.settings.applications.ApplicationsState;
 import com.android.settings.dashboard.DashboardTile;
 import com.android.settings.drawable.CircleFramedDrawable;
+import com.android.settingslib.applications.ApplicationsState;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetAddress;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+
+import static android.content.Intent.EXTRA_USER;
 
 public final class Utils {
     private static final String TAG = "Settings";
