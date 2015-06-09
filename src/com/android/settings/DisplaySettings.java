@@ -176,7 +176,10 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             rotatePreference.setCallback(new Callback() {
                 @Override
                 public boolean onItemSelected(int pos, Object value) {
-                    RotationPolicy.setRotationLock(activity, (Boolean) value);
+                    final boolean locked = (Boolean) value;
+                    MetricsLogger.action(getActivity(), InstrumentedFragment.ACTION_ROTATION_LOCK,
+                            locked);
+                    RotationPolicy.setRotationLock(activity, locked);
                     return true;
                 }
             });
