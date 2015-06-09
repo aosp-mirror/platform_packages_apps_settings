@@ -773,7 +773,7 @@ public class UserSettings extends SettingsPreferenceFragment
             userPreferences.add(pref);
         }
 
-        if (mUserCaps.mCanAddGuest || findGuest() != null) {
+        if (!mUserCaps.mIsGuest && (mUserCaps.mCanAddGuest || findGuest() != null)) {
             // Add a virtual Guest user for guest defaults
             UserPreference pref = new UserPreference(getActivity(), null,
                     UserPreference.USERID_GUEST_DEFAULTS,
