@@ -16,11 +16,11 @@
 
 package com.android.settings.applications;
 
-import android.app.admin.DevicePolicyManager;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.app.admin.DevicePolicyManager;
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -66,7 +66,6 @@ import com.android.settings.DataUsageSummary.AppItem;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
-import com.android.settings.applications.ApplicationsState.AppEntry;
 import com.android.settings.applications.PermissionsSummaryHelper.PermissionsResultCallback;
 import com.android.settings.fuelgauge.BatteryEntry;
 import com.android.settings.fuelgauge.PowerUsageDetail;
@@ -75,6 +74,8 @@ import com.android.settings.net.ChartDataLoader;
 import com.android.settings.notification.AppNotificationSettings;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.NotificationBackend.AppRow;
+import com.android.settingslib.applications.ApplicationsState;
+import com.android.settingslib.applications.ApplicationsState.AppEntry;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;

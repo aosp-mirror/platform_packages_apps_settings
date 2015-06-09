@@ -17,10 +17,11 @@ package com.android.settings.applications;
 
 import android.content.pm.PackageManager;
 
-import com.android.settings.applications.ApplicationsState.AppEntry;
-import com.android.settings.applications.ApplicationsState.AppFilter;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.NotificationBackend.AppRow;
+import com.android.settingslib.applications.ApplicationsState;
+import com.android.settingslib.applications.ApplicationsState.AppEntry;
+import com.android.settingslib.applications.ApplicationsState.AppFilter;
 
 import java.util.ArrayList;
 
