@@ -23,10 +23,11 @@ import android.preference.Preference;
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.applications.ApplicationsState.AppEntry;
-import com.android.settings.applications.ApplicationsState.Session;
 import com.android.settings.applications.PermissionsSummaryHelper.PermissionsResultCallback;
 import com.android.settings.fuelgauge.PowerWhitelistBackend;
+import com.android.settingslib.applications.ApplicationsState;
+import com.android.settingslib.applications.ApplicationsState.AppEntry;
+import com.android.settingslib.applications.ApplicationsState.Session;
 
 import java.util.ArrayList;
 

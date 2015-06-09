@@ -46,6 +46,7 @@ import android.util.SparseArray;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settingslib.applications.InterestingConfigChanges;
 
 import java.util.ArrayList;
 import java.util.Collections;
