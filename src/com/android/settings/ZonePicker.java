@@ -87,8 +87,7 @@ public class ZonePicker extends ListFragment {
 
         final String sortKey = (sortedByName ? ZoneGetter.KEY_DISPLAYNAME : ZoneGetter.KEY_OFFSET);
         final MyComparator comparator = new MyComparator(sortKey);
-        final ZoneGetter zoneGetter = new ZoneGetter();
-        final List<HashMap<String, Object>> sortedList = zoneGetter.getZones(context);
+        final List<Map<String, Object>> sortedList = ZoneGetter.getZonesList(context);
         Collections.sort(sortedList, comparator);
         final SimpleAdapter adapter = new SimpleAdapter(context,
                 sortedList,
@@ -226,7 +225,7 @@ public class ZonePicker extends ListFragment {
         }
     }
 
-    private static class MyComparator implements Comparator<HashMap<?, ?>> {
+    private static class MyComparator implements Comparator<Map<?, ?>> {
         private String mSortingKey;
 
         public MyComparator(String sortingKey) {
@@ -237,7 +236,7 @@ public class ZonePicker extends ListFragment {
             mSortingKey = sortingKey;
         }
 
-        public int compare(HashMap<?, ?> map1, HashMap<?, ?> map2) {
+        public int compare(Map<?, ?> map1, Map<?, ?> map2) {
             Object value1 = map1.get(mSortingKey);
             Object value2 = map2.get(mSortingKey);
 

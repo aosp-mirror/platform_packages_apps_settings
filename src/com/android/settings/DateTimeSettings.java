@@ -165,7 +165,7 @@ public class DateTimeSettings extends SettingsPreferenceFragment
         Date dummyDate = mDummyDate.getTime();
         mDatePref.setSummary(DateFormat.getLongDateFormat(context).format(now.getTime()));
         mTimePref.setSummary(DateFormat.getTimeFormat(getActivity()).format(now.getTime()));
-        mTimeZone.setSummary(ZoneGetter.getTimeZoneText(now.getTimeZone(), true));
+        mTimeZone.setSummary(ZoneGetter.getTimeZoneOffsetAndName(now.getTimeZone(), now.getTime()));
         mTime24Pref.setSummary(DateFormat.getTimeFormat(getActivity()).format(dummyDate));
     }
 
