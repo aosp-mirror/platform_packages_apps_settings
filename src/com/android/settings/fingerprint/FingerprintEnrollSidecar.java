@@ -78,7 +78,7 @@ public class FingerprintEnrollSidecar extends Fragment {
         mEnrollmentSteps = -1;
         mEnrollmentCancel = new CancellationSignal();
         getActivity().getSystemService(FingerprintManager.class).enroll(mToken, mEnrollmentCancel,
-                mEnrollmentCallback, 0);
+                0 /* flags */, mEnrollmentCallback);
         mEnrolling = true;
     }
 
