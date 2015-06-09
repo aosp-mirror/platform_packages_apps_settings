@@ -6625,7 +6625,7 @@
     <string name="high_power_on">Ignoring battery optimizations</string>
 
     <!-- Summary of app not allowed to use a lot of power [CHAR LIMIT=60] -->
-    <string name="high_power_off">Off</string>
+    <string name="high_power_off">Not allowed</string>
 
     <!-- Description of high power switch [CHAR LIMIT=NONE] -->
     <string name="high_power_desc">Don\'t apply battery optimizations. May drain your battery more quickly.</string>
@@ -6753,4 +6753,19 @@
 
     <!-- Zen mode access settings - summary for warning dialog when enabling access [CHAR LIMIT=NONE] -->
     <string name="zen_access_warning_dialog_summary">The app will be able to turn on/off Do Not Disturb and make changes to related settings.</string>
+
+    <!-- Ignore battery optimizations on label [CHAR LIMIT=30] -->
+    <string name="ignore_optimizations_on">Allow</string>
+
+    <!-- Ignore battery optimizations off label [CHAR LIMIT=30] -->
+    <string name="ignore_optimizations_off">Don\u2019t allow</string>
+
+    <!-- Ignore battery optimizations on description [CHAR LIMIT=NONE] -->
+    <string name="ignore_optimizations_on_desc">May drain your battery more quickly.</string>
+
+    <!-- Ignore battery optimizations off description [CHAR LIMIT=NONE] -->
+    <string name="ignore_optimizations_off_desc">Recommended for better battery life.</string>
+
+    <!-- Ignore battery optimizations dialog title [CHAR LIMIT=NONE] -->
+    <string name="ignore_optimizations_title">Allow <xliff:g id="app" example="Tasker">%s</xliff:g> to ignore battery optimizations?</string>
 </resources>
