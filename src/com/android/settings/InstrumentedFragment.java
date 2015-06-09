@@ -28,6 +28,7 @@ public abstract class InstrumentedFragment extends PreferenceFragment {
 
     public static final int APPLICATIONS_MANAGE_ASSIST = UNDECLARED + 1;
     public static final int PROCESS_STATS_SUMMARY = UNDECLARED + 2;
+    public static final int ACTION_ROTATION_LOCK = UNDECLARED + 3;
 
     /**
      * Declare the view of this category.
