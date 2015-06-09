@@ -4,6 +4,9 @@
         coreApp="true"
         android:sharedUserId="android.uid.system">
 
+    <uses-sdk
+        android:minSdkVersion="21" />
+
     <original-package android:name="com.android.settings" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />

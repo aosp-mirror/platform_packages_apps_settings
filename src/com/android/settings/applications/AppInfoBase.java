@@ -38,7 +38,8 @@ import android.util.Log;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
-import com.android.settings.applications.ApplicationsState.AppEntry;
+import com.android.settingslib.applications.ApplicationsState;
+import com.android.settingslib.applications.ApplicationsState.AppEntry;
 
 import java.util.ArrayList;
 

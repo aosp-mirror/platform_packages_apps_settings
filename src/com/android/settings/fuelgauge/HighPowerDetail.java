@@ -24,10 +24,9 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.SwitchPreference;
 
 import com.android.internal.logging.MetricsLogger;
-import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoWithHeader;
-import com.android.settings.applications.ApplicationsState.AppEntry;
+import com.android.settingslib.applications.ApplicationsState.AppEntry;
 
 public class HighPowerDetail extends AppInfoWithHeader implements OnPreferenceChangeListener {
 

@@ -36,15 +36,15 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.DropDownPreference;
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.applications.ApplicationsState.AppEntry;
-import com.android.settings.applications.ApplicationsState.Callbacks;
 import com.android.settings.deviceinfo.StorageWizardMoveConfirm;
+import com.android.settingslib.applications.ApplicationsState;
+import com.android.settingslib.applications.ApplicationsState.AppEntry;
+import com.android.settingslib.applications.ApplicationsState.Callbacks;
 
 import java.util.Collections;
 import java.util.List;

@@ -16,14 +16,15 @@
 
 package com.android.settings.applications;
 
-import com.android.settings.R;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.android.settings.R;
+import com.android.settingslib.applications.ApplicationsState;
 
 // View Holder used when displaying views
 public class AppViewHolder {

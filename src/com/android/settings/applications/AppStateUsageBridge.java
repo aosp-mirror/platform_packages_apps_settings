@@ -30,8 +30,9 @@ import android.util.ArrayMap;
 import android.util.Log;
 import android.util.SparseArray;
 
-import com.android.settings.applications.ApplicationsState.AppEntry;
-import com.android.settings.applications.ApplicationsState.AppFilter;
+import com.android.settingslib.applications.ApplicationsState;
+import com.android.settingslib.applications.ApplicationsState.AppEntry;
+import com.android.settingslib.applications.ApplicationsState.AppFilter;
 
 import java.util.List;
 
