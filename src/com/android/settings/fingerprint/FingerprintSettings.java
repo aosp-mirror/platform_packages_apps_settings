@@ -117,6 +117,8 @@ public class FingerprintSettings extends SubSettings {
         private static final int MSG_REFRESH_FINGERPRINT_TEMPLATES = 1000;
         private static final int MSG_FINGER_AUTH_SUCCESS = 1001;
         private static final int MSG_FINGER_AUTH_FAIL = 1002;
+        private static final int MSG_FINGER_AUTH_ERROR = 1003;
+        private static final int MSG_FINGER_AUTH_HELP = 1004;
 
         private static final int CONFIRM_REQUEST = 101;
         private static final int CHOOSE_LOCK_GENERIC_REQUEST = 102;
@@ -146,22 +148,14 @@ public class FingerprintSettings extends SubSettings {
 
             @Override
             public void onAuthenticationError(int errMsgId, CharSequence errString) {
-                // get activity will be null on a screen rotation
-                final Activity activity = getActivity();
-                if (activity != null) {
-                    Toast.makeText(activity, errString, Toast.LENGTH_SHORT);
-                }
-                if (errMsgId != FingerprintManager.FINGERPRINT_ERROR_CANCELED) {
-                    retryFingerprint(false);
-                }
+                mHandler.obtainMessage(MSG_FINGER_AUTH_ERROR, errMsgId, 0, errString)
+                        .sendToTarget();
             }
 
             @Override
             public void onAuthenticationHelp(int helpMsgId, CharSequence helpString) {
-                final Activity activity = getActivity();
-                if (activity != null) {
-                    Toast.makeText(activity, helpString, Toast.LENGTH_SHORT);
-                }
+                mHandler.obtainMessage(MSG_FINGER_AUTH_HELP, helpMsgId, 0, helpString)
+                        .sendToTarget();
             }
         };
         private RemovalCallback mRemoveCallback = new RemovalCallback() {
@@ -187,11 +181,35 @@ public class FingerprintSettings extends SubSettings {
                         removeFingerprintPreference(msg.arg1);
                     break;
                     case MSG_FINGER_AUTH_SUCCESS:
+                        mFingerprintCancel = null;
                         highlightFingerprintItem(msg.arg1);
                         retryFingerprint(true);
                     break;
                     case MSG_FINGER_AUTH_FAIL:
+                        mFingerprintCancel = null;
                         retryFingerprint(true);
+                    break;
+                    case MSG_FINGER_AUTH_ERROR: {
+                        mFingerprintCancel = null;
+                        // get activity will be null on a screen rotation
+                        final Activity activity = getActivity();
+                        if (activity != null) {
+                            CharSequence errString = (CharSequence) msg.obj;
+                            Toast.makeText(activity, errString , Toast.LENGTH_SHORT);
+                        }
+                        final int errMsgId = msg.arg1;
+                        if (errMsgId != FingerprintManager.FINGERPRINT_ERROR_CANCELED) {
+                            retryFingerprint(false);
+                        }
+                    }
+                    break;
+                    case MSG_FINGER_AUTH_HELP: {
+                        final Activity activity = getActivity();
+                        if (activity != null) {
+                            CharSequence helpString = (CharSequence) msg.obj;
+                            Toast.makeText(activity, helpString , Toast.LENGTH_SHORT);
+                        }
+                    }
                     break;
                 }
             };
@@ -208,9 +226,10 @@ public class FingerprintSettings extends SubSettings {
             if (resetAttempts) {
                 mMaxFingerprintAttempts = 0;
             }
-            if (mMaxFingerprintAttempts < MAX_RETRY_ATTEMPTS) {
+            if (mMaxFingerprintAttempts < MAX_RETRY_ATTEMPTS && mFingerprintCancel == null) {
                 mFingerprintCancel = new CancellationSignal();
-                mFingerprintManager.authenticate(null, mFingerprintCancel, mAuthCallback, 0);
+                mFingerprintManager.authenticate(null, mFingerprintCancel, 0 /* flags */,
+                        mAuthCallback, null);
             }
             mMaxFingerprintAttempts++;
         }
@@ -351,7 +370,6 @@ public class FingerprintSettings extends SubSettings {
                 intent.setClassName("com.android.settings",
                         FingerprintEnrollEnrolling.class.getName());
                 intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
-                stopFingerprint();
                 startActivityForResult(intent, ADD_FINGERPRINT_REQUEST);
             } else if (pref instanceof FingerprintPreference) {
                 FingerprintPreference fpref = (FingerprintPreference) pref;
