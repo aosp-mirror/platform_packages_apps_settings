@@ -2110,7 +2110,8 @@
                   android:theme="@style/Theme.CryptKeeper"
                   android:configChanges="mnc|mcc|keyboard|keyboardHidden|uiMode"
                   android:windowSoftInputMode="adjustResize"
-                  android:screenOrientation="nosensor">
+                  android:screenOrientation="nosensor"
+                  android:process=":CryptKeeper">
             <intent-filter android:priority="10">
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.HOME" />
