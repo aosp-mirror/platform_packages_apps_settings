@@ -51,7 +51,7 @@ public class FingerprintUiHelper extends FingerprintManager.AuthenticationCallba
     public void startListening() {
         if (mFingerprintManager.getEnrolledFingerprints().size() > 0) {
             mCancellationSignal = new CancellationSignal();
-            mFingerprintManager.authenticate(null, mCancellationSignal, this, 0 /* flags */);
+            mFingerprintManager.authenticate(null, mCancellationSignal, 0 /* flags */, this, null);
             setFingerprintIconVisibility(true);
             mIcon.setImageResource(R.drawable.ic_fingerprint);
         }
