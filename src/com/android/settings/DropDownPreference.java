@@ -36,6 +36,7 @@ public class DropDownPreference extends Preference {
     private final ArrayList<Object> mValues = new ArrayList<Object>();
 
     private Callback mCallback;
+    private int mSelectedPosition = -1;
 
     public DropDownPreference(Context context) {
         this(context, null);
@@ -54,7 +55,7 @@ public class DropDownPreference extends Preference {
         mSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
-                setSelectedItem(position);
+                setSelectedItem(position, true);
             }
 
             @Override
@@ -91,11 +92,19 @@ public class DropDownPreference extends Preference {
     }
 
     public void setSelectedItem(int position) {
+        setSelectedItem(position, false);
+    }
+
+    public void setSelectedItem(int position, boolean fromSpinner) {
+        if (fromSpinner && position == mSelectedPosition) {
+            return;
+        }
         final Object value = mValues.get(position);
         if (mCallback != null && !mCallback.onItemSelected(position, value)) {
             return;
         }
         mSpinner.setSelection(position);
+        mSelectedPosition = mSpinner.getSelectedItemPosition();
         setSummary(mAdapter.getItem(position));
         final boolean disableDependents = value == null;
         notifyDependencyChange(disableDependents);
