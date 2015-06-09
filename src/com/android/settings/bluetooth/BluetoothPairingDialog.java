@@ -116,6 +116,7 @@ public final class BluetoothPairingDialog extends AlertActivity implements
 
         switch (mType) {
             case BluetoothDevice.PAIRING_VARIANT_PIN:
+            case BluetoothDevice.PAIRING_VARIANT_PIN_16_DIGITS:
             case BluetoothDevice.PAIRING_VARIANT_PASSKEY:
                 createUserEntryDialog();
                 break;
@@ -181,6 +182,7 @@ public final class BluetoothPairingDialog extends AlertActivity implements
     private View createPinEntryView() {
         View view = getLayoutInflater().inflate(R.layout.bluetooth_pin_entry, null);
         TextView messageViewCaption = (TextView) view.findViewById(R.id.message_caption);
+        TextView messageViewCaptionHint = (TextView) view.findViewById(R.id.pin_values_hint);
         TextView messageViewContent = (TextView) view.findViewById(R.id.message_subhead);
         TextView messageView2 = (TextView) view.findViewById(R.id.message_below_pin);
         CheckBox alphanumericPin = (CheckBox) view.findViewById(R.id.alphanumeric_pin);
@@ -190,8 +192,12 @@ public final class BluetoothPairingDialog extends AlertActivity implements
 
         int messageId1;
         int messageId2;
+        int messageIdHint = R.string.bluetooth_pin_values_hint;
         int maxLength;
         switch (mType) {
+            case BluetoothDevice.PAIRING_VARIANT_PIN_16_DIGITS:
+                messageIdHint = R.string.bluetooth_pin_values_hint_16_digits;
+                // FALLTHROUGH
             case BluetoothDevice.PAIRING_VARIANT_PIN:
                 messageId1 = R.string.bluetooth_enter_pin_msg;
                 messageId2 = R.string.bluetooth_enter_pin_other_device;
@@ -213,6 +219,7 @@ public final class BluetoothPairingDialog extends AlertActivity implements
         }
 
         messageViewCaption.setText(messageId1);
+        messageViewCaptionHint.setText(messageIdHint);
         messageViewContent.setText(mCachedDeviceManager.getName(mDevice));
         messageView2.setText(messageId2);
         mPairingView.setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -316,13 +323,18 @@ public final class BluetoothPairingDialog extends AlertActivity implements
 
     public void afterTextChanged(Editable s) {
         if (mOkButton != null) {
-            mOkButton.setEnabled(s.length() > 0);
+            if (mType == BluetoothDevice.PAIRING_VARIANT_PIN_16_DIGITS) {
+                mOkButton.setEnabled(s.length() >= 16);
+            } else {
+                mOkButton.setEnabled(s.length() > 0);
+            }
         }
     }
 
     private void onPair(String value) {
         switch (mType) {
             case BluetoothDevice.PAIRING_VARIANT_PIN:
+            case BluetoothDevice.PAIRING_VARIANT_PIN_16_DIGITS:
                 byte[] pinBytes = BluetoothDevice.convertPinToBytes(value);
                 if (pinBytes == null) {
                     return;
