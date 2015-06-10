@@ -34,6 +34,8 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
+import android.content.res.Resources;
+import android.icu.text.ListFormatter;
 import android.net.INetworkStatsService;
 import android.net.INetworkStatsSession;
 import android.net.NetworkTemplate;
@@ -79,6 +81,7 @@ import com.android.settingslib.applications.ApplicationsState.AppEntry;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
@@ -494,7 +497,7 @@ public class InstalledAppDetails extends AppInfoBase
         // Update the preference summaries.
         Activity context = getActivity();
         mStoragePreference.setSummary(AppStorageSettings.getSummary(mAppEntry, context));
-        PermissionsSummaryHelper.getPermissionCounts(getContext(), mPackageName,
+        PermissionsSummaryHelper.getPermissionSummary(getContext(), mPackageName,
                 mPermissionCallback);
         mLaunchPreference.setSummary(Utils.getLaunchByDeafaultSummary(mAppEntry, mUsbManager,
                 mPm, context));
@@ -919,20 +922,40 @@ public class InstalledAppDetails extends AppInfoBase
         }
     };
 
-    private final PermissionsResultCallback mPermissionCallback = new PermissionsResultCallback() {
+    private final PermissionsResultCallback mPermissionCallback
+            = new PermissionsResultCallback() {
         @Override
-        public void onPermissionCountResult(int[] result) {
-            if (getActivity() == null) {
-                return;
+        public void onPermissionSummaryResult(int[] counts, CharSequence[] groupLabels) {
+            final Resources res = getResources();
+            CharSequence summary = null;
+            boolean enabled = false;
+            if (counts != null) {
+                int totalCount = counts[1];
+                int additionalCounts = counts[2];
+
+                if (totalCount == 0) {
+                    summary = res.getString(
+                            R.string.runtime_permissions_summary_no_permissions_requested);
+                } else {
+                    enabled = true;
+
+                    final ArrayList<CharSequence> list = new ArrayList(Arrays.asList(groupLabels));
+                    if (additionalCounts > 0) {
+                        // N additional permissions.
+                        list.add(res.getQuantityString(
+                                R.plurals.runtime_permissions_additional_count,
+                                additionalCounts, additionalCounts));
+                    }
+                    if (list.size() == 0) {
+                        summary = res.getString(
+                                R.string.runtime_permissions_summary_no_permissions_granted);
+                    } else {
+                        summary = ListFormatter.getInstance().format(list);
+                    }
+                }
             }
-            if (result != null) {
-                mPermissionsPreference.setSummary(getResources().getQuantityString(
-                        R.plurals.runtime_permissions_summary, result[1], result[0], result[1]));
-            } else {
-                mPermissionsPreference.setSummary(null);
-            }
+            mPermissionsPreference.setSummary(summary);
+            mPermissionsPreference.setEnabled(enabled);
         }
     };
 }
-
-
