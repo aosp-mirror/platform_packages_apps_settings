@@ -177,7 +177,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                 @Override
                 public boolean onItemSelected(int pos, Object value) {
                     final boolean locked = (Boolean) value;
-                    MetricsLogger.action(getActivity(), InstrumentedFragment.ACTION_ROTATION_LOCK,
+                    MetricsLogger.action(getActivity(), MetricsLogger.ACTION_ROTATION_LOCK,
                             locked);
                     RotationPolicy.setRotationLock(activity, locked);
                     return true;
