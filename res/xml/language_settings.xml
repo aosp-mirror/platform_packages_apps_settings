@@ -64,12 +64,6 @@
             android:title="@string/voice_category" >
 
         <PreferenceScreen
-                android:key="voice_input_settings"
-                android:title="@string/voice_input_settings_title"
-                android:fragment="com.android.settings.voice.VoiceInputSettings"
-                />
-
-        <PreferenceScreen
                 android:key="tts_settings"
                 android:title="@string/tts_settings_title"
                 android:fragment="com.android.settings.tts.TextToSpeechSettings"
