@@ -76,7 +76,9 @@ public class UsbModeChooserActivity extends Activity {
      * so that everything matches.
      */
     private int getCurrentFunction() {
-        if (mUsbManager.isFunctionEnabled(UsbManager.USB_FUNCTION_MTP)) {
+        if (!mUsbManager.isUsbDataUnlocked()) {
+            return 0;
+        } else if (mUsbManager.isFunctionEnabled(UsbManager.USB_FUNCTION_MTP)) {
             return 1;
         } else if (mUsbManager.isFunctionEnabled(UsbManager.USB_FUNCTION_PTP)) {
             return 2;
@@ -93,16 +95,20 @@ public class UsbModeChooserActivity extends Activity {
     private void setCurrentFunction(int which) {
         switch (which) {
             case 0:
-                mUsbManager.setCurrentFunction("none");
+                mUsbManager.setCurrentFunction(UsbManager.USB_FUNCTION_MTP);
+                mUsbManager.setUsbDataUnlocked(false);
                 break;
             case 1:
                 mUsbManager.setCurrentFunction(UsbManager.USB_FUNCTION_MTP);
+                mUsbManager.setUsbDataUnlocked(true);
                 break;
             case 2:
                 mUsbManager.setCurrentFunction(UsbManager.USB_FUNCTION_PTP);
+                mUsbManager.setUsbDataUnlocked(true);
                 break;
             case 3:
                 mUsbManager.setCurrentFunction(UsbManager.USB_FUNCTION_MIDI);
+                mUsbManager.setUsbDataUnlocked(true);
                 break;
         }
     }
