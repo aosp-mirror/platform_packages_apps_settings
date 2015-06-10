@@ -71,7 +71,7 @@
     <string name="sdcard_unmount" product="nosdcard" msgid="6325292633327972272">"Desmontar almacenamiento USB"</string>
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Desmontar la tarjeta SD"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Eliminar almacenamiento USB"</string>
-    <string name="sdcard_format" product="default" msgid="6713185532039187532">"Eliminar la tarjeta SD"</string>
+    <string name="sdcard_format" product="default" msgid="6713185532039187532">"Borrar tarjeta SD"</string>
     <string name="small_font" msgid="2295331917424072635">"Pequeño"</string>
     <string name="medium_font" msgid="2068475425515133701">"Mediano"</string>
     <string name="large_font" msgid="599055175160971446">"Grande"</string>
@@ -331,9 +331,11 @@
     <string name="user_info_settings_title" msgid="1195015434996724736">"Datos de usuario"</string>
     <string name="show_profile_info_on_lockscreen_label" msgid="2741208907263877990">"Mostrar datos del perfil en pantalla bloqueada"</string>
     <string name="profile_info_settings_title" msgid="3518603215935346604">"Datos del perfil"</string>
-    <string name="Accounts_settings_title" msgid="1643879107901699406">"Cuentas"</string>
+    <!-- no translation found for Accounts_settings_title (1592309650872767387) -->
+    <skip />
     <string name="location_settings_title" msgid="1369675479310751735">"Ubicación"</string>
-    <string name="account_settings_title" msgid="626177544686329806">"Cuentas"</string>
+    <!-- no translation found for account_settings_title (574608087657397787) -->
+    <skip />
     <string name="security_settings_title" msgid="7945465324818485460">"Seguridad"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Establecer Mi ubicación, desbloqueo de pantalla, bloqueo de la tarjeta SIM, bloqueo de almacenamiento de credenciales"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Establecer Mi ubicación, desbloqueo de pantalla, bloqueo de almacenamiento de credencial"</string>
@@ -494,6 +496,8 @@
     <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"Ingresa el código de sincronización y luego presiona Intro."</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"El PIN contiene letras o símbolos."</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"Por lo general, 0000 o 1234"</string>
+    <!-- no translation found for bluetooth_pin_values_hint_16_digits (7849359451584101077) -->
+    <skip />
     <string name="bluetooth_enter_pin_other_device" msgid="4637977124526813470">"Puede que también tengas que escribir este PIN en el otro dispositivo."</string>
     <string name="bluetooth_enter_passkey_other_device" msgid="2798719004030279602">"Puede que también tengas que escribir esta clave de acceso en otro dispositivo."</string>
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"Para sincronizar con&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;asegúrate de que se muestre esta clave de acceso:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;."</string>
@@ -561,13 +565,11 @@
     <string name="wifi_display_options_forget" msgid="9119048225398894580">"Borrar"</string>
     <string name="wifi_display_options_done" msgid="5703116500357822557">"Listo"</string>
     <string name="wifi_display_options_name" msgid="4756080222307467898">"Nombre"</string>
-    <!-- no translation found for wifi_band_24ghz (852929254171856911) -->
+    <string name="wifi_band_24ghz" msgid="852929254171856911">"2.4 GHz"</string>
+    <string name="wifi_band_5ghz" msgid="6433822023268515117">"5 GHz"</string>
+    <string name="link_speed" msgid="8896664974117585555">"%1$d Mbps"</string>
+    <!-- no translation found for wifi_alert_lockdown_by_device_owner (2537146774322347104) -->
     <skip />
-    <!-- no translation found for wifi_band_5ghz (6433822023268515117) -->
-    <skip />
-    <!-- no translation found for link_speed (8896664974117585555) -->
-    <skip />
-    <string name="wifi_alert_lockdown_by_device_owner" msgid="5063705929160653088">"<xliff:g id="APP_NAME">%1$s</xliff:g> administra tu dispositivo e inhabilitó la modificación y la eliminación de esta red Wi-Fi. Para obtener más información, comunícate con el administrador."</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Permitir el intercambio de datos cuando la tablet entre en contacto con otro dispositivo"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Permitir el intercambio de datos cuando el dispositivo toque otro dispositivo"</string>
@@ -895,6 +897,8 @@
     <string name="device_status_summary" product="tablet" msgid="3292717754497039686">"Estado de la batería, la red y otra información"</string>
     <string name="device_status_summary" product="default" msgid="2599162787451519618">"Número de teléfono, señal, etc."</string>
     <string name="storage_settings" msgid="4211799979832404953">"Espacio de almacenamiento"</string>
+    <!-- no translation found for storage_usb_settings (642612065405691122) -->
+    <skip />
     <string name="storage_settings_title" msgid="8746016738388094064">"Configuración de almacenamiento"</string>
     <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"Desmontar almacenamiento USB, ver almacenamiento disponible"</string>
     <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"Desmontar tarjeta SD, ver espacio de almacenamiento disponible"</string>
@@ -943,7 +947,7 @@
     <string name="sd_mount_summary" product="nosdcard" msgid="4673411327373419641"></string>
     <string name="sd_mount_summary" product="default" msgid="4673411327373419641"></string>
     <string name="sd_format" product="nosdcard" msgid="2148179271623099054">"Eliminar almacenamiento USB"</string>
-    <string name="sd_format" product="default" msgid="2576054280507119870">"Eliminar la tarjeta SD"</string>
+    <string name="sd_format" product="default" msgid="2576054280507119870">"Borrar tarjeta SD"</string>
     <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"Borra todos los datos del almacenamiento USB interno, como la música y las fotos"</string>
     <string name="sd_format_summary" product="default" msgid="212703692181793109">"Borra todos los datos de la tarjeta SD, como la música y las fotos"</string>
     <string name="memory_clear_cache_title" msgid="5423840272171286191">"¿Deseas borrar los datos almacenados en caché?"</string>
@@ -1065,7 +1069,7 @@
     <string name="restore_default_apn" msgid="8178010218751639581">"Restaurando la configuración APN predeterminada"</string>
     <string name="menu_restore" msgid="8260067415075573273">"Restablecer valores predeterminados"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"Se ha restablecido la configuración predeterminada de APN."</string>
-    <string name="reset_network_title" msgid="4557113742173895074">"Restablecimiento de configuración de red"</string>
+    <string name="reset_network_title" msgid="4557113742173895074">"Restablecer configuración de red"</string>
     <string name="reset_network_desc" msgid="581668983587311282">"Esta acción restablecerá las opciones de configuración de red, como las siguientes:\n\n"<li>"Wi‑Fi"</li>\n<li>"datos móviles"</li>\n<li>"Bluetooth"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"Restablecer configuración"</string>
     <string name="reset_network_final_desc" msgid="6388371121099245116">"¿Quieres restablecer la configuración de red? Esta acción no se puede deshacer."</string>
@@ -1081,9 +1085,9 @@
     <string name="master_clear_other_users_present" product="default" msgid="5161423070702470742">\n\n"Hay otros usuarios presentes en este dispositivo.\n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"Música"</li>\n<li>"Fotos"</li>\n<li>"Otros datos de usuario"</li></string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="7744115866662613411">\n\n"Para borrar la música, las imágenes y otros datos de usuario, debes borrar el "<b>"almacenamiento USB"</b>"."</string>
-    <string name="master_clear_desc_erase_external_storage" product="default" msgid="4801026652617377093">\n\n"Para borrar música, imágenes y otros datos del usuario, deber borrar la "<b>"tarjeta SD"</b>"."</string>
+    <string name="master_clear_desc_erase_external_storage" product="default" msgid="4801026652617377093">\n\n"Para borrar música, imágenes y otros datos del usuario, debes borrar la "<b>"tarjeta SD"</b>"."</string>
     <string name="erase_external_storage" product="nosdcard" msgid="969364037450286809">"Eliminar almacenamiento USB"</string>
-    <string name="erase_external_storage" product="default" msgid="1397239046334307625">"Eliminar la tarjeta SD"</string>
+    <string name="erase_external_storage" product="default" msgid="1397239046334307625">"Borrar tarjeta SD"</string>
     <string name="erase_external_storage_description" product="nosdcard" msgid="4728558173931599429">"Borra todos los datos del almacenamiento USB, como la música o las fotos."</string>
     <string name="erase_external_storage_description" product="default" msgid="1737638779582964966">"Borra todos los datos de la tarjeta SD, como música o fotos."</string>
     <string name="master_clear_button_text" product="tablet" msgid="3130786116528304116">"Restablecer la tablet"</string>
@@ -1096,13 +1100,13 @@
     <string name="master_clear_progress_title" msgid="5194793778701994634">"Borrando"</string>
     <string name="master_clear_progress_text" msgid="6559096229480527510">"Espera un momento…"</string>
     <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"Eliminar almacenamiento USB"</string>
-    <string name="media_format_title" product="default" msgid="4427528440306787972">"Eliminar tarjeta SD"</string>
+    <string name="media_format_title" product="default" msgid="4427528440306787972">"Borrar tarjeta SD"</string>
     <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"Borra todos los datos del almacenamiento USB"</string>
     <string name="media_format_summary" product="default" msgid="3805714639375830120">"Borra todos los datos en la tarjeta SD"</string>
     <string name="media_format_desc" product="nosdcard" msgid="4557243156946319034">"¿Deseas borrar todo el almacenamiento de USB? Perderás "<b>"todos"</b>" los datos almacenados."</string>
     <string name="media_format_desc" product="default" msgid="8764037252319942415">"¿Deseas borrar la tarjeta SD? Perderás "<b>"todos"</b>" los datos de la tarjeta."</string>
     <string name="media_format_button_text" product="nosdcard" msgid="6293669371185352810">"Eliminar almacenamiento USB"</string>
-    <string name="media_format_button_text" product="default" msgid="6721544380069373626">"Eliminar la tarjeta SD"</string>
+    <string name="media_format_button_text" product="default" msgid="6721544380069373626">"Borrar tarjeta SD"</string>
     <string name="media_format_final_desc" product="nosdcard" msgid="941597815448108794">"¿Deseas borrar el almacenamiento USB y eliminar todos sus archivos? Esta acción no se puede deshacer."</string>
     <string name="media_format_final_desc" product="default" msgid="7220996042092437566">"¿Deseas borrar la tarjeta SD y todos los archivos almacenados allí? Esta acción no se puede deshacer."</string>
     <string name="media_format_final_button_text" msgid="4881713344315923175">"Eliminar todo"</string>
@@ -1300,7 +1304,7 @@
     <string name="show_background_processes" msgid="2009840211972293429">"Mostrar procesos almacenados en la memoria caché"</string>
     <string name="default_emergency_app" msgid="1951760659640369980">"Aplicación de emergencia"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"Restablecer preferencias"</string>
-    <string name="reset_app_preferences_title" msgid="6093179367325336662">"¿Restablec. preferencias?"</string>
+    <string name="reset_app_preferences_title" msgid="6093179367325336662">"¿Restablecer?"</string>
     <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Se restablecerán todas las preferencias de:\n\n "<li>"aplicaciones inhabilitadas;"</li>\n" "<li>"notificaciones de aplicaciones inhabilitadas;"</li>\n" "<li>"aplicaciones predeterminadas para realizar acciones;"</li>\n" "<li>"restricciones de datos en segundo plano para aplicaciones;"</li>\n" "<li>"restricciones de permisos."</li>\n\n" Los datos de las aplicaciones no se perderán."</string>
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"Restablecer aplicaciones"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Administrar el espacio"</string>
@@ -1319,7 +1323,7 @@
     <string name="sd_card_storage" product="nosdcard" msgid="2673203150465132465">"Almacenamiento USB"</string>
     <string name="sd_card_storage" product="default" msgid="7623513618171928235">"Almacenamiento en tarjeta SD"</string>
     <string name="recompute_size" msgid="7722567982831691718">"Recalculando el tamaño…"</string>
-    <string name="clear_data_dlg_title" msgid="5605258400134511197">"¿Deseas eliminar datos de aplicaciones?"</string>
+    <string name="clear_data_dlg_title" msgid="5605258400134511197">"¿Eliminar los datos de la app?"</string>
     <string name="clear_data_dlg_text" msgid="3951297329833822490">"Todos los datos de esta aplicación serán eliminados de forma permanente. Esto incluye todos los archivos, ajustes, cuentas, bases de datos, etc."</string>
     <string name="dlg_ok" msgid="2402639055725653590">"Aceptar"</string>
     <string name="dlg_cancel" msgid="1674753358972975911">"Cancelar"</string>
@@ -1692,10 +1696,8 @@
     <string name="battery_stats_charging_label" msgid="4223311142875178785">"Cargando"</string>
     <string name="battery_stats_screen_on_label" msgid="7150221809877509708">"Pantalla encendida"</string>
     <string name="battery_stats_gps_on_label" msgid="1193657533641951256">"GPS activado"</string>
-    <!-- no translation found for battery_stats_camera_on_label (4935637383628414968) -->
-    <skip />
-    <!-- no translation found for battery_stats_flashlight_on_label (4319637669889411307) -->
-    <skip />
+    <string name="battery_stats_camera_on_label" msgid="4935637383628414968">"Cámara activada"</string>
+    <string name="battery_stats_flashlight_on_label" msgid="4319637669889411307">"Linterna activada"</string>
     <string name="battery_stats_wifi_running_label" msgid="1845839195549226252">"Wi-Fi"</string>
     <string name="battery_stats_wake_lock_label" msgid="1908942681902324095">"Activa"</string>
     <string name="battery_stats_phone_signal_label" msgid="3537569115723850618">"Señal de la red móvil"</string>
@@ -1705,14 +1707,13 @@
     <string name="wifi_on_time" msgid="3208518458663637035">"Wi-Fi a tiempo"</string>
     <string name="bluetooth_on_time" msgid="3056108148042308690">"Wi-Fi a tiempo"</string>
     <string name="history_details_title" msgid="3608240585315506067">"Detalles del historial"</string>
-    <string name="details_title" msgid="3792801565213935385">"Utilizar detalles"</string>
+    <string name="details_title" msgid="3792801565213935385">"Detalles de uso"</string>
     <string name="details_subtitle" msgid="32593908269911734">"Detalles de uso"</string>
     <string name="controls_subtitle" msgid="390468421138288702">"Ajustar el uso de energía"</string>
     <string name="packages_subtitle" msgid="4736416171658062768">"Paquetes incluidos"</string>
     <string name="power_screen" msgid="3023346080675904613">"Pantalla"</string>
     <string name="power_flashlight" msgid="7794409781003567614">"Linterna"</string>
-    <!-- no translation found for power_camera (4976286950934622605) -->
-    <skip />
+    <string name="power_camera" msgid="4976286950934622605">"Cámara"</string>
     <string name="power_wifi" msgid="1135085252964054957">"Wi-Fi"</string>
     <string name="power_bluetooth" msgid="4373329044379008289">"Bluetooth"</string>
     <string name="power_cell" msgid="6596471490976003056">"Dispositivo inactivo"</string>
@@ -1735,10 +1736,8 @@
     <string name="usage_type_data_wifi_recv" msgid="5678475911549183829">"Paquetes Wi‑Fi recibidos"</string>
     <string name="usage_type_audio" msgid="6957269406840886290">"Audio"</string>
     <string name="usage_type_video" msgid="4295357792078579944">"Video"</string>
-    <!-- no translation found for usage_type_camera (8299433109956769757) -->
-    <skip />
-    <!-- no translation found for usage_type_flashlight (1516392356962208230) -->
-    <skip />
+    <string name="usage_type_camera" msgid="8299433109956769757">"Cámara"</string>
+    <string name="usage_type_flashlight" msgid="1516392356962208230">"Linterna"</string>
     <string name="usage_type_on_time" msgid="3351200096173733159">"Tiempo de activación"</string>
     <string name="usage_type_no_coverage" msgid="3797004252954385053">"Tiempo sin una señal"</string>
     <string name="usage_type_total_battery_capacity" msgid="3798285287848675346">"Capacidad total de la batería"</string>
@@ -1756,8 +1755,7 @@
     <string name="battery_desc_radio" msgid="5479196477223185367">"La batería está siendo utilizada por la radio celular"</string>
     <string name="battery_sugg_radio" msgid="8211336978326295047">"Cambiar a modo avión para ahorrar batería en áreas sin cobertura celular"</string>
     <string name="battery_desc_flashlight" msgid="2908579430841025494">"Batería utilizada por la linterna"</string>
-    <!-- no translation found for battery_desc_camera (7375389919760613499) -->
-    <skip />
+    <string name="battery_desc_camera" msgid="7375389919760613499">"Batería que utiliza la cámara"</string>
     <string name="battery_desc_display" msgid="5432795282958076557">"La batería está siendo utilizada por la pantalla y la luz de fondo"</string>
     <string name="battery_sugg_display" msgid="3370202402045141760">"Reducir el brillo y el tiempo muerto de la pantalla"</string>
     <string name="battery_desc_wifi" msgid="2375567464707394131">"Batería utilizada por Wi-Fi"</string>
@@ -1949,7 +1947,7 @@
     <string name="local_backup_password_toast_confirmation_mismatch" msgid="7805892532752708288">"La nueva contraseña y la de confirmación no coinciden."</string>
     <string name="local_backup_password_toast_validation_failure" msgid="5646377234895626531">"Error al definir contraseña de copia de seguridad"</string>
     <string name="backup_erase_dialog_title" msgid="1027640829482174106"></string>
-    <string name="backup_erase_dialog_message" msgid="5221011285568343155">"¿Quieres dejar de crear copias de seguridad de tus contraseñas Wi-Fi, de tus marcadores, de otros parámetros de configuración y de datos de distintas aplicaciones, y además eliminar todas las copias de los servidores de Google?"</string>
+    <string name="backup_erase_dialog_message" msgid="5221011285568343155">"¿Quieres dejar de crear copias de seguridad de las contraseñas Wi-Fi, los marcadores, otros parámetros de configuración y los datos de distintas aplicaciones, además de eliminar todas las copias de los servidores de Google?"</string>
     <string name="fullbackup_erase_dialog_message" msgid="694766389396659626">"¿Deseas dejar de crear copias de seguridad de los datos del dispositivo (como las contraseñas de Wi-Fi y el historial de llamadas) y de los datos de las aplicaciones (como las opciones de configuración y los archivos que guardaron las aplicaciones), y borrar todas las copias en servidores remotos?"</string>
     <string name="fullbackup_data_summary" msgid="960850365007767734">"Crear una copia de seguridad automática y remota de los datos del dispositivo (por ejemplo, contraseñas de Wi-Fi e historial de llamadas) y de los datos de las aplicaciones (por ejemplo, archivos y opciones de configuración que guardan las aplicaciones)\n\nCuando activas la copia de seguridad automática, los datos del dispositivo y las aplicaciones se guardan periódicamente de forma remota. Los datos de las aplicaciones pueden ser cualquier dato que guardó una aplicación (según la configuración del programador), incluso datos potencialmente confidenciales, como los contactos, los mensajes y las fotos."</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"Configuración de la administración del dispositivo"</string>
@@ -2135,7 +2133,7 @@
     <string name="data_usage_cycle" msgid="5652529796195787949">"Ciclo de uso de datos"</string>
     <string name="data_usage_app_items_header_text" msgid="5017850810459372828">"Uso de la aplicación"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Roaming de datos"</string>
-    <string name="data_usage_menu_restrict_background" msgid="1989394568592253331">"Restr. datos 2.° plano"</string>
+    <string name="data_usage_menu_restrict_background" msgid="1989394568592253331">"Restringir datos en 2.º plano"</string>
     <string name="data_usage_menu_allow_background" msgid="2694761978633359223">"Permitir datos seg. plano"</string>
     <string name="data_usage_menu_split_4g" msgid="5322857680792601899">"Uso aparte de datos móviles 4G"</string>
     <string name="data_usage_menu_show_wifi" msgid="2296217964873872571">"Mostrar Wi-Fi"</string>
@@ -2173,7 +2171,7 @@
     <string name="data_usage_forground_label" msgid="7654319010655983591">"En primer plano:"</string>
     <string name="data_usage_background_label" msgid="2722008379947694926">"En segundo plano:"</string>
     <string name="data_usage_app_settings" msgid="2279171379771253165">"Configuración de la aplicación"</string>
-    <string name="data_usage_app_restrict_background" msgid="7510046552380574925">"Restr. datos 2.º plano aplicac."</string>
+    <string name="data_usage_app_restrict_background" msgid="7510046552380574925">"Restringir datos en 2.º plano"</string>
     <string name="data_usage_app_restrict_background_summary" msgid="3720075732277934106">"Inhabilitar datos en segundo plano en redes móviles"</string>
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="1446565717342917727">"Para restringir datos en 2.º plano aquí, limita datos móviles."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"¿Restringir el uso de datos en segundo plano?"</string>
@@ -2355,6 +2353,9 @@
     <string name="nfc_payment_favor_default" msgid="8238320071435721803">"Seguir usando <xliff:g id="APP">%1$s</xliff:g>"</string>
     <string name="nfc_payment_favor_default_default_unknown" msgid="7029467023485683077">"Seguir usando la aplicación predeterminada"</string>
     <string name="nfc_payment_pay_with" msgid="7524904024378144072">"En una terminal Tocar y pagar, pagar con:"</string>
+    <string name="nfc_how_it_works_title" msgid="1984068457698797207">"Cómo pagar en la terminal"</string>
+    <string name="nfc_how_it_works_content" msgid="8056141705658483393">"Una vez que esté configurada una aplicación Presionar y pagar y el teléfono esté encendido, presiona cualquier terminal del teléfono que tenga el logotipo de Presionar y pagar para realizar una compra."</string>
+    <string name="nfc_how_it_works_got_it" msgid="259653300203217402">"Entendido"</string>
     <string name="nfc_more_title" msgid="815910943655133280">"Más…"</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"¿Establecer como preferencia?"</string>
     <string name="nfc_payment_set_default" msgid="8532426406310833489">"¿Quieres usar <xliff:g id="APP">%1$s</xliff:g> siempre con Tocar y pagar?"</string>
@@ -2538,9 +2539,9 @@
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Las aplicaciones no pueden leer las notificaciones."</string>
     <!-- String.format failed for translation -->
     <!-- no translation found for manage_notification_access_summary_nonzero (7930130030691218387) -->
-    <string name="no_notification_listeners" msgid="2767405417723149879">"No hay detectores de notificaciones instalados."</string>
-    <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"¿Habilitar <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> podrá leer todas las notificaciones publicadas por el sistema o por cualquier aplicación instalada. Las notificaciones pueden contener información personal, como nombres de contacto y el texto de los mensajes que recibes. También podrá rechazar estas notificaciones o tocar los botones de acción dentro de ellas."</string>
+    <string name="no_notification_listeners" msgid="3487091564454192821">"Ninguna aplicación instalada solicitó acceso a las notificaciones."</string>
+    <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"¿Deseas permitir que <xliff:g id="SERVICE">%1$s</xliff:g> tenga acceso a las notificaciones?"</string>
+    <string name="notification_listener_security_warning_summary" msgid="548925084229440829">"La aplicación <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> podrá leer todas las notificaciones y la información personal, por ejemplo, los nombres de contacto y los mensajes que recibas. También podrá ignorar notificaciones o utilizar los botones de acción que aparezcan en ellas."</string>
     <string name="manage_zen_access_title" msgid="2611116122628520522">"Acceso a No molestar"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"Ninguna aplicación instalada solicitó acceso a No molestar."</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Cargando aplicaciones…"</string>
@@ -2631,7 +2632,8 @@
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"Solicitar contraseña para quitar fijación"</string>
     <string name="screen_pinning_unlock_none" msgid="3814188275713871856">"Bloquear dispositivo al quitar fijación"</string>
     <string name="managed_user_title" msgid="8101244883654409696">"Perfil de trabajo"</string>
-    <string name="opening_paragraph_delete_profile_unknown_company" msgid="3790519030932488453">"La siguiente aplicación administra este perfil de trabajo:"</string>
+    <!-- no translation found for opening_paragraph_delete_profile_unknown_company (2232461523882170874) -->
+    <skip />
     <string name="managing_admin" msgid="8843802210377459055">"Administrado por <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(Experimental)"</string>
     <string name="display_auto_rotate_title" msgid="6176450657107806043">"Al girar el dispositivo"</string>
@@ -2746,7 +2748,8 @@
     <string name="high_power_apps" msgid="2116416853043103135">"Ignorar optimizaciones"</string>
     <string name="high_power_filter_on" msgid="3862942127137594196">"Permitido"</string>
     <string name="high_power_on" msgid="148473814103292724">"La aplicación ignora las optimizaciones de la batería."</string>
-    <string name="high_power_off" msgid="4069404908196636677">"Desactivada"</string>
+    <!-- no translation found for high_power_off (221092098425904010) -->
+    <skip />
     <string name="high_power_desc" msgid="8777632785903235764">"No apliques optimizaciones de la batería, ya que pueden agotar la batería más rápido."</string>
     <plurals name="high_power_count" formatted="false" msgid="4343190376439806186">
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aplicaciones tienen permitido ignorar las optimizaciones de la batería.</item>
@@ -2790,4 +2793,16 @@
     <string name="running_frequency" msgid="6622624669948277693">"Frecuencia"</string>
     <string name="memory_maximum_usage" msgid="6513785462055278341">"Uso máximo"</string>
     <string name="no_data_usage" msgid="9131454024293628063">"No se utilizaron datos."</string>
+    <string name="zen_access_warning_dialog_title" msgid="1198189958031157142">"¿Deseas permitir que la aplicación <xliff:g id="APP">%1$s</xliff:g> tenga acceso a la función No molestar?"</string>
+    <string name="zen_access_warning_dialog_summary" msgid="4015885767653010873">"La aplicación podrá activar y desactivar la función No molestar y realizar cambios de configuración relacionados."</string>
+    <!-- no translation found for ignore_optimizations_on (2417358456267927315) -->
+    <skip />
+    <!-- no translation found for ignore_optimizations_off (9069942099715006633) -->
+    <skip />
+    <!-- no translation found for ignore_optimizations_on_desc (5898868129614502128) -->
+    <skip />
+    <!-- no translation found for ignore_optimizations_off_desc (1558089902374827659) -->
+    <skip />
+    <!-- no translation found for ignore_optimizations_title (2829637961185027768) -->
+    <skip />
 </resources>
