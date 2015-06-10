@@ -21,6 +21,7 @@ import android.preference.Preference;
 import android.preference.SwitchPreference;
 import android.provider.Settings;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -47,7 +48,7 @@ public class ManageAssist extends SettingsPreferenceFragment
 
     @Override
     protected int getMetricsCategory() {
-        return InstrumentedFragment.APPLICATIONS_MANAGE_ASSIST;
+        return MetricsLogger.APPLICATIONS_MANAGE_ASSIST;
     }
 
     @Override

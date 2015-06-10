@@ -22,6 +22,7 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.text.format.Formatter;
 import android.widget.TextView;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -102,7 +103,7 @@ public class ProcessStatsSummary extends ProcessStatsBase implements OnPreferenc
 
     @Override
     protected int getMetricsCategory() {
-        return InstrumentedFragment.PROCESS_STATS_SUMMARY;
+        return MetricsLogger.PROCESS_STATS_SUMMARY;
     }
 
     @Override
