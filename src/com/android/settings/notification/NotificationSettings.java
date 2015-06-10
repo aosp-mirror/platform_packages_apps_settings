@@ -198,9 +198,14 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
     private void updateRingOrNotificationPreference() {
         mRingOrNotificationPreference.showIcon(mSuppressor != null
                 ? com.android.internal.R.drawable.ic_audio_ring_notif_mute
-                : mRingerMode == AudioManager.RINGER_MODE_VIBRATE
+                : mRingerMode == AudioManager.RINGER_MODE_VIBRATE || wasRingerModeVibrate()
                 ? com.android.internal.R.drawable.ic_audio_ring_notif_vibrate
                 : com.android.internal.R.drawable.ic_audio_ring_notif);
+    }
+
+    private boolean wasRingerModeVibrate() {
+        return mVibrator != null && mRingerMode == AudioManager.RINGER_MODE_SILENT
+                && mAudioManager.getLastAudibleStreamVolume(AudioManager.STREAM_RING) == 0;
     }
 
     private void updateRingerMode() {
