@@ -16,17 +16,23 @@
 
 package com.android.settings;
 
+import android.app.Fragment;
 import android.app.KeyguardManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.WindowManager;
 
-public class ConfirmDeviceCredentialBaseActivity extends SettingsActivity {
+public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivity {
+
+    private boolean mRestoring;
+    private boolean mDark;
+    private boolean mEnterAnimationPending;
 
     @Override
     protected void onCreate(Bundle savedState) {
         if (getIntent().getBooleanExtra(ConfirmDeviceCredentialBaseFragment.DARK_THEME, false)) {
             setTheme(R.style.Theme_ConfirmDeviceCredentialsDark);
+            mDark = true;
         }
         super.onCreate(savedState);
         boolean deviceLocked = getSystemService(KeyguardManager.class).isKeyguardLocked();
@@ -41,6 +47,7 @@ public class ConfirmDeviceCredentialBaseActivity extends SettingsActivity {
             getActionBar().setDisplayHomeAsUpEnabled(true);
             getActionBar().setHomeButtonEnabled(true);
         }
+        mRestoring = savedState != null;
     }
 
     @Override
@@ -50,5 +57,38 @@ public class ConfirmDeviceCredentialBaseActivity extends SettingsActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (!isChangingConfigurations() && !mRestoring && mDark) {
+            prepareEnterAnimation();
+            mEnterAnimationPending = true;
+        }
+    }
+
+    private ConfirmDeviceCredentialBaseFragment getFragment() {
+        Fragment fragment = getFragmentManager().findFragmentById(R.id.main_content);
+        if (fragment != null && fragment instanceof ConfirmDeviceCredentialBaseFragment) {
+            return (ConfirmDeviceCredentialBaseFragment) fragment;
+        }
+        return null;
+    }
+
+    @Override
+    public void onEnterAnimationComplete() {
+        super.onEnterAnimationComplete();
+        if (mEnterAnimationPending) {
+            startEnterAnimation();
+        }
+    }
+
+    public void prepareEnterAnimation() {
+        getFragment().prepareEnterAnimation();
+    }
+
+    public void startEnterAnimation() {
+        getFragment().startEnterAnimation();
     }
 }
