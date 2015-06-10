@@ -23,6 +23,7 @@ import com.android.settings.DevelopmentSettings;
 import com.android.settings.DeviceInfoSettings;
 import com.android.settings.DisplaySettings;
 import com.android.settings.HomeSettings;
+import com.android.settings.LegalSettings;
 import com.android.settings.PrivacySettings;
 import com.android.settings.ScreenPinningSettings;
 import com.android.settings.SecuritySettings;
@@ -172,6 +173,7 @@ public final class Ranking {
 
         // Device infos
         sRankMap.put(DeviceInfoSettings.class.getName(), RANK_DEVICE_INFO);
+        sRankMap.put(LegalSettings.class.getName(), RANK_DEVICE_INFO);
 
         sBaseRankMap.put("com.android.settings", 0);
     }

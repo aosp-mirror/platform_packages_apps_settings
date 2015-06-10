@@ -57,12 +57,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
     private static final String FILENAME_PROC_VERSION = "/proc/version";
     private static final String FILENAME_MSV = "/sys/board_properties/soc/msv";
 
-    private static final String KEY_CONTAINER = "container";
     private static final String KEY_REGULATORY_INFO = "regulatory_info";
-    private static final String KEY_TERMS = "terms";
-    private static final String KEY_LICENSE = "license";
-    private static final String KEY_COPYRIGHT = "copyright";
-    private static final String KEY_WEBVIEW_LICENSE = "webview_license";
     private static final String KEY_SYSTEM_UPDATE_SETTINGS = "system_update_settings";
     private static final String PROPERTY_URL_SAFETYLEGAL = "ro.url.safetylegal";
     private static final String PROPERTY_SELINUX_STATUS = "ro.build.selinux";
@@ -145,19 +140,9 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
          * info.
          */
         final Activity act = getActivity();
-        // These are contained in the "container" preference group
-        PreferenceGroup parentPreference = (PreferenceGroup) findPreference(KEY_CONTAINER);
-        Utils.updatePreferenceToSpecificActivityOrRemove(act, parentPreference, KEY_TERMS,
-                Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
-        Utils.updatePreferenceToSpecificActivityOrRemove(act, parentPreference, KEY_LICENSE,
-                Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
-        Utils.updatePreferenceToSpecificActivityOrRemove(act, parentPreference, KEY_COPYRIGHT,
-                Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
-        Utils.updatePreferenceToSpecificActivityOrRemove(act, parentPreference, KEY_WEBVIEW_LICENSE,
-                Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
 
         // These are contained by the root preference screen
-        parentPreference = getPreferenceScreen();
+        PreferenceGroup parentPreference = getPreferenceScreen();
         if (UserHandle.myUserId() == UserHandle.USER_OWNER) {
             Utils.updatePreferenceToSpecificActivityOrRemove(act, parentPreference,
                     KEY_SYSTEM_UPDATE_SETTINGS,
@@ -450,18 +435,6 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
                 if (TextUtils.isEmpty(getFeedbackReporterPackage(context))) {
                     keys.add(KEY_DEVICE_FEEDBACK);
                 }
-                if (!checkIntentAction(context, "android.settings.TERMS")) {
-                    keys.add(KEY_TERMS);
-                }
-                if (!checkIntentAction(context, "android.settings.LICENSE")) {
-                    keys.add(KEY_LICENSE);
-                }
-                if (!checkIntentAction(context, "android.settings.COPYRIGHT")) {
-                    keys.add(KEY_COPYRIGHT);
-                }
-                if (!checkIntentAction(context, "android.settings.WEBVIEW_LICENSE")) {
-                    keys.add(KEY_WEBVIEW_LICENSE);
-                }
                 if (UserHandle.myUserId() != UserHandle.USER_OWNER) {
                     keys.add(KEY_SYSTEM_UPDATE_SETTINGS);
                 }
@@ -474,25 +447,6 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
 
             private boolean isPropertyMissing(String property) {
                 return SystemProperties.get(property).equals("");
-            }
-
-            private boolean checkIntentAction(Context context, String action) {
-                final Intent intent = new Intent(action);
-
-                // Find the activity that is in the system image
-                final PackageManager pm = context.getPackageManager();
-                final List<ResolveInfo> list = pm.queryIntentActivities(intent, 0);
-                final int listSize = list.size();
-
-                for (int i = 0; i < listSize; i++) {
-                    ResolveInfo resolveInfo = list.get(i);
-                    if ((resolveInfo.activityInfo.applicationInfo.flags &
-                            ApplicationInfo.FLAG_SYSTEM) != 0) {
-                        return true;
-                    }
-                }
-
-                return false;
             }
         };
 
