@@ -27,6 +27,7 @@ import android.os.Environment;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.PreferenceFrameLayout;
+import android.provider.Settings;
 import android.util.ArraySet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -239,6 +240,15 @@ public class ManageApplications extends InstrumentedFragment
             mListType = LIST_TYPE_HIGH_POWER;
             // Default to showing system.
             mShowSystem = true;
+            if (intent != null && Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS
+                    .equals(intent.getAction())) {
+                mCurrentPkgName = intent.getData().getSchemeSpecificPart();
+                if (mCurrentPkgName != null) {
+                    mCurrentUid = mApplicationsState.getEntry(mCurrentPkgName,
+                            UserHandle.myUserId()).info.uid;
+                    startApplicationDetailsActivity();
+                }
+            }
         } else {
             mListType = LIST_TYPE_MAIN;
         }
@@ -440,7 +450,7 @@ public class ManageApplications extends InstrumentedFragment
                 startAppInfoFragment(AppStorageSettings.class, R.string.storage_settings);
                 break;
             case LIST_TYPE_HIGH_POWER:
-                startAppInfoFragment(HighPowerDetail.class, R.string.high_power_apps);
+                HighPowerDetail.show(getActivity(), mCurrentPkgName);
                 break;
             // TODO: Figure out if there is a way where we can spin up the profile's settings
             // process ahead of time, to avoid a long load of data when user clicks on a managed app.
