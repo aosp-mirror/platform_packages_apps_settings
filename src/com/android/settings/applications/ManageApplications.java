@@ -514,7 +514,7 @@ public class ManageApplications extends InstrumentedFragment
                 return true;
             case R.id.advanced:
                 ((SettingsActivity) getActivity()).startPreferencePanel(
-                        AdvancedAppSettings.class.getName(), null, R.string.advanced_apps,
+                        AdvancedAppSettings.class.getName(), null, R.string.configure_apps,
                         null, this, ADVANCED_SETTINGS);
                 return true;
             default:
