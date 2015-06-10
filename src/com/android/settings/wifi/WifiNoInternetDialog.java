@@ -112,8 +112,8 @@ public final class WifiNoInternetDialog extends AlertActivity implements
         final AlertController.AlertParams ap = mAlertParams;
         ap.mTitle = mNetworkName;
         ap.mMessage = getString(R.string.no_internet_access_text);
-        ap.mPositiveButtonText = getString(android.R.string.ok);
-        ap.mNegativeButtonText = getString(android.R.string.cancel);
+        ap.mPositiveButtonText = getString(R.string.yes);
+        ap.mNegativeButtonText = getString(R.string.no);
         ap.mPositiveButtonListener = this;
         ap.mNegativeButtonListener = this;
 
