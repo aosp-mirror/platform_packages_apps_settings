@@ -6479,6 +6479,18 @@
        <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> of <xliff:g id="count" example="10">%d</xliff:g> permissions granted</item>
    </plurals>
 
+    <!-- Runtime permissions preference summary.  Number of additional permissions granted. [CHAR LIMIT=40] -->
+    <plurals name="runtime_permissions_additional_count">
+        <item quantity="one"><xliff:g id="count" example="1">%d</xliff:g> additional permission</item>
+        <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> additional permissions</item>
+    </plurals>
+
+    <!-- Runtime permissions preference summary, shown when the app has no permissions granted. [CHAR LIMIT=40] -->
+    <string name="runtime_permissions_summary_no_permissions_granted">No permissions granted</string>
+
+    <!-- Runtime permissions preference summary, shown when the app requests no permissions. [CHAR LIMIT=40] -->
+    <string name="runtime_permissions_summary_no_permissions_requested">No permissions requested</string>
+
     <!-- Launch defaults preference summary with some set [CHAR LIMIT=40] -->
     <string name="launch_defaults_some">Some defaults set</string>
     <!-- Launch defaults preference summary with none set [CHAR LIMIT=40] -->
