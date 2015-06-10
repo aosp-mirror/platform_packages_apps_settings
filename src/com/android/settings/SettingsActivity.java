@@ -72,6 +72,7 @@ import com.android.settings.accounts.AccountSettings;
 import com.android.settings.accounts.AccountSyncSettings;
 import com.android.settings.applications.InstalledAppDetails;
 import com.android.settings.applications.ManageApplications;
+import com.android.settings.applications.ManageAssist;
 import com.android.settings.applications.ProcessStatsUi;
 import com.android.settings.applications.UsageAccessDetails;
 import com.android.settings.bluetooth.BluetoothSettings;
@@ -112,7 +113,6 @@ import com.android.settings.search.Index;
 import com.android.settings.sim.SimSettings;
 import com.android.settings.tts.TextToSpeechSettings;
 import com.android.settings.users.UserSettings;
-import com.android.settings.voice.VoiceInputSettings;
 import com.android.settings.vpn2.VpnSettings;
 import com.android.settings.wfd.WifiDisplaySettings;
 import com.android.settings.widget.SwitchBar;
@@ -290,7 +290,6 @@ public class SettingsActivity extends Activity
             DateTimeSettings.class.getName(),
             LocalePicker.class.getName(),
             InputMethodAndLanguageSettings.class.getName(),
-            VoiceInputSettings.class.getName(),
             SpellCheckersSettings.class.getName(),
             UserDictionaryList.class.getName(),
             UserDictionarySettings.class.getName(),
@@ -298,6 +297,7 @@ public class SettingsActivity extends Activity
             DisplaySettings.class.getName(),
             DeviceInfoSettings.class.getName(),
             ManageApplications.class.getName(),
+            ManageAssist.class.getName(),
             ProcessStatsUi.class.getName(),
             NotificationStation.class.getName(),
             LocationSettings.class.getName(),

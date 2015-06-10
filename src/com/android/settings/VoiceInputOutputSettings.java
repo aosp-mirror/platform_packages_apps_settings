@@ -31,7 +31,6 @@ public class VoiceInputOutputSettings {
     private static final String TAG = "VoiceInputOutputSettings";
 
     private static final String KEY_VOICE_CATEGORY = "voice_category";
-    private static final String KEY_VOICE_INPUT_SETTINGS = "voice_input_settings";
     private static final String KEY_TTS_SETTINGS = "tts_settings";
 
     private PreferenceGroup mParent;
@@ -47,34 +46,21 @@ public class VoiceInputOutputSettings {
     }
 
     public void onCreate() {
-
         mParent = mFragment.getPreferenceScreen();
         mVoiceCategory = (PreferenceCategory) mParent.findPreference(KEY_VOICE_CATEGORY);
-        mVoiceInputSettingsPref = mVoiceCategory.findPreference(KEY_VOICE_INPUT_SETTINGS);
         mTtsSettingsPref = mVoiceCategory.findPreference(KEY_TTS_SETTINGS);
 
         populateOrRemovePreferences();
     }
 
     private void populateOrRemovePreferences() {
-        boolean hasVoiceInputPrefs = populateOrRemoveVoiceInputPrefs();
         boolean hasTtsPrefs = populateOrRemoveTtsPrefs();
-        if (!hasVoiceInputPrefs && !hasTtsPrefs) {
+        if (!hasTtsPrefs) {
             // There were no TTS settings and no recognizer settings,
             // so it should be safe to hide the preference category
             // entirely.
             mFragment.getPreferenceScreen().removePreference(mVoiceCategory);
         }
-    }
-
-    private boolean populateOrRemoveVoiceInputPrefs() {
-        VoiceInputHelper helper = new VoiceInputHelper(mFragment.getActivity());
-        if (!helper.hasItems()) {
-            mVoiceCategory.removePreference(mVoiceInputSettingsPref);
-            return false;
-        }
-
-        return true;
     }
 
     private boolean populateOrRemoveTtsPrefs() {
