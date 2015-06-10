@@ -791,14 +791,6 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
                 indexables.add(indexable);
             }
 
-            // Voice input
-            indexable = new SearchIndexableRaw(context);
-            indexable.key = "voice_input_settings";
-            indexable.title = context.getString(R.string.voice_input_settings);
-            indexable.screenTitle = screenTitle;
-            indexable.keywords = context.getString(R.string.keywords_voice_input);
-            indexables.add(indexable);
-
             // Text-to-speech.
             TtsEngines ttsEngines = new TtsEngines(context);
             if (!ttsEngines.getEngines().isEmpty()) {

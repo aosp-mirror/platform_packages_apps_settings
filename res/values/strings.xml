@@ -6569,11 +6569,37 @@
     <!-- Title for Default Apps settings [CHAR LIMIT=30] -->
     <string name="default_apps_title">Default Apps</string>
 
+    <!-- Title for Assist and voice input settings [CHAR LIMIT=30] -->
+    <string name="assist_and_voice_input_title">Assist &amp; voice input</string>
+
     <!-- Title for Default Assist settings [CHAR LIMIT=30] -->
-    <string name="default_assist_title">Assist</string>
+    <string name="default_assist_title">Assist app</string>
 
     <!-- Summary for No Default Assist settings [CHAR LIMIT=45] -->
-    <string name="default_assist_none">No default Assist</string>
+    <string name="default_assist_none">None</string>
+
+    <!-- Title for Choose Assist dialog [CHAR LIMIT=30] -->
+    <string name="choose_assist_title">Choose Assist</string>
+
+    <!-- [CHAR_LIMIT=45] Title of the security warning dialog for setting an assitant -->
+    <string name="assistant_security_warning_title">
+        Make <xliff:g id="assistant_app_name">%s</xliff:g> your assistant?
+    </string>
+
+    <!-- [CHAR_LIMIT=NONE] Warning message about security implications of setting an assistant,
+         displayed as a dialog message when the user selects an assistant. -->
+    <string name="assistant_security_warning"><xliff:g id="assistant_app_name">%s</xliff:g> will
+        be able to read information about apps in use on your system, including information
+        visible on your screen or accessible within the apps.</string>
+
+    <!-- Label for the button to acknowledge assistant security implications. [CHAR LIMIT=30] -->
+    <string name="assistant_security_warning_agree">Agree</string>
+
+    <!-- Label for the button to bail out assistant security implications. [CHAR LIMIT=30] -->
+    <string name="assistant_security_warning_disagree">Disagree</string>
+
+    <!-- Title for Choose voice input dialog [CHAR LIMIT=30] -->
+    <string name="choose_voice_input_title">Choose voice input</string>
 
     <!-- Title for Default Browser settings [CHAR LIMIT=30] -->
     <string name="default_browser_title">Browser app</string>
@@ -6791,4 +6817,7 @@
 
     <!-- Instructions for state when SD card is unmounted [CHAR LIMIT=NONE] -->
     <string name="sdcard_unmounted_description">The SD card is safely ejected, but still available in the SD card slot for this device.\n\nTo use this card, you have to mount it first.</string>
+
+    <!-- Label for None item in AppListPreference [CHAR LIMIT=40] -->
+    <string name="app_list_preference_none">None</string>
 </resources>
