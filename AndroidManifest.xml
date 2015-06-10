@@ -944,6 +944,11 @@
         <activity android:name="Settings$HighPowerApplicationsActivity"
                 android:label="@string/high_power_apps"
                 android:taskAffinity="">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.IGNORE_BATTERY_OPTIMIZATION_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="package" />
+            </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.applications.ManageApplications" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
