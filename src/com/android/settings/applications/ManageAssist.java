@@ -16,6 +16,9 @@
 
 package com.android.settings.applications;
 
+import android.app.AlertDialog;
+import android.content.ComponentName;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.SwitchPreference;
@@ -25,6 +28,7 @@ import com.android.internal.logging.MetricsLogger;
 import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.voice.VoiceInputListPreference;
 
 /**
  * Settings screen to manage everything about assist.
@@ -32,18 +36,29 @@ import com.android.settings.SettingsPreferenceFragment;
 public class ManageAssist extends SettingsPreferenceFragment
         implements Preference.OnPreferenceChangeListener {
 
+    private static final String KEY_DEFAULT_ASSIST = "default_assist";
     private static final String KEY_CONTEXT = "context";
+    private static final String KEY_VOICE_INPUT = "voice_input_settings";
 
+    private DefaultAssistPreference mDefaultAssitPref;
     private SwitchPreference mContextPref;
+    private VoiceInputListPreference mVoiceInputPref;
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         addPreferencesFromResource(R.xml.manage_assist);
+
+        mDefaultAssitPref = (DefaultAssistPreference) findPreference(KEY_DEFAULT_ASSIST);
+        mDefaultAssitPref.setOnPreferenceChangeListener(this);
+
         mContextPref = (SwitchPreference) findPreference(KEY_CONTEXT);
         mContextPref.setChecked(Settings.Secure.getInt(getContentResolver(),
                 Settings.Secure.ASSIST_STRUCTURE_ENABLED, 1) != 0);
         mContextPref.setOnPreferenceChangeListener(this);
+
+        mVoiceInputPref = (VoiceInputListPreference) findPreference(KEY_VOICE_INPUT);
+        updateUi();
     }
 
     @Override
@@ -58,6 +73,64 @@ public class ManageAssist extends SettingsPreferenceFragment
                     (boolean) newValue ? 1 : 0);
             return true;
         }
+        if (preference == mDefaultAssitPref) {
+            String newAssitPackage = (String)newValue;
+            if (newAssitPackage == null ||
+                    newAssitPackage.contentEquals(DefaultAssistPreference.ITEM_NONE_VALUE)) {
+                setDefaultAssist(DefaultAssistPreference.ITEM_NONE_VALUE);
+                return false;
+            }
+
+            final String currentPackage = mDefaultAssitPref.getValue();
+            if (currentPackage == null || !newAssitPackage.contentEquals(currentPackage)) {
+                confirmNewAssist(newAssitPackage);
+            }
+            return false;
+        }
         return false;
+    }
+
+    private void updateUi() {
+        mDefaultAssitPref.refreshAssistApps();
+
+        final ComponentName currentAssist = mDefaultAssitPref.getCurrentAssist();
+        final boolean hasAssistant = currentAssist != null;
+        if (hasAssistant) {
+            getPreferenceScreen().addPreference(mContextPref);
+        } else {
+            getPreferenceScreen().removePreference(mContextPref);
+        }
+
+        mVoiceInputPref.setAssistRestrict(currentAssist);
+        mVoiceInputPref.refreshVoiceInputs();
+    }
+
+    private void confirmNewAssist(final String newAssitPackage) {
+        final int selected = mDefaultAssitPref.findIndexOfValue(newAssitPackage);
+        final CharSequence appLabel = mDefaultAssitPref.getEntries()[selected];
+
+        final String title = getString(R.string.assistant_security_warning_title, appLabel);
+        final String message = getString(R.string.assistant_security_warning, appLabel);
+
+        final DialogInterface.OnClickListener onAgree = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                setDefaultAssist(newAssitPackage);
+            }
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle(title)
+                .setMessage(message)
+                .setCancelable(true)
+                .setPositiveButton(R.string.assistant_security_warning_agree, onAgree)
+                .setNegativeButton(R.string.assistant_security_warning_disagree, null);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void setDefaultAssist(String assistPackage) {
+        mDefaultAssitPref.setValue(assistPackage);
+        updateUi();
     }
 }

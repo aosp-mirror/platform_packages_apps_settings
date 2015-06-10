@@ -19,11 +19,22 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:key="manage_assist">
 
+    <com.android.settings.applications.DefaultAssistPreference
+            android:key="default_assist"
+            android:title="@string/default_assist_title"
+            android:summary="@string/default_assist_none"
+            />
+
     <SwitchPreference
         android:key="context"
         android:title="@string/assist_access_context_title"
         android:summary="@string/assist_access_context_summary"
         android:persistent="false"/>
+
+    <com.android.settings.voice.VoiceInputListPreference
+            android:key="voice_input_settings"
+            android:title="@string/voice_input_settings_title"
+            />
 
     <Preference
         android:summary="@string/assist_footer"
