@@ -20,10 +20,9 @@
     android:key="applications_settings">
 
     <PreferenceScreen
-        android:key="default_apps"
-        android:fragment="com.android.settings.applications.ManageDefaultApps"
-        android:title="@string/default_apps_title"
-        settings:keywords="@string/keywords_default_apps" />
+        android:key="manage_perms"
+        android:title="@string/app_permissions"
+        settings:keywords="@string/keywords_app_permissions" />
 
     <PreferenceScreen
             android:key="domain_urls"
@@ -34,10 +33,14 @@
                 android:value="com.android.settings.Settings$DomainsURLsAppListActivity" />
     </PreferenceScreen>
 
+    <PreferenceCategory
+        android:title="@string/advanced_apps" />
+
     <PreferenceScreen
-        android:key="manage_perms"
-        android:title="@string/app_permissions"
-        settings:keywords="@string/keywords_app_permissions" />
+        android:key="default_apps"
+        android:fragment="com.android.settings.applications.ManageDefaultApps"
+        android:title="@string/default_apps_title"
+        settings:keywords="@string/keywords_default_apps" />
 
     <PreferenceScreen
         android:key="high_power_apps"
