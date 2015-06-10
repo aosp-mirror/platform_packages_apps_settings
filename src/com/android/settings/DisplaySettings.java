@@ -490,6 +490,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                     if (!RotationPolicy.isRotationLockToggleVisible(context)) {
                         result.add(KEY_AUTO_ROTATE);
                     }
+                    if (!isTapToWakeAvailable(context.getResources())) {
+                        result.add(KEY_TAP_TO_WAKE);
+                    }
                     return result;
                 }
             };
