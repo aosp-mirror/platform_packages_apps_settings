@@ -24,6 +24,7 @@ import com.android.settings.DevelopmentSettings;
 import com.android.settings.DeviceInfoSettings;
 import com.android.settings.DisplaySettings;
 import com.android.settings.HomeSettings;
+import com.android.settings.LegalSettings;
 import com.android.settings.PrivacySettings;
 import com.android.settings.R;
 import com.android.settings.ScreenPinningSettings;
@@ -294,6 +295,13 @@ public final class SearchIndexableResources {
                         Ranking.getRankForClassName(DeviceInfoSettings.class.getName()),
                         NO_DATA_RES_ID,
                         DeviceInfoSettings.class.getName(),
+                        R.drawable.ic_settings_about));
+
+        sResMap.put(LegalSettings.class.getName(),
+                new SearchIndexableResource(
+                        Ranking.getRankForClassName(LegalSettings.class.getName()),
+                        NO_DATA_RES_ID,
+                        LegalSettings.class.getName(),
                         R.drawable.ic_settings_about));
 
         sResMap.put(WifiCallingSettings.class.getName(),
