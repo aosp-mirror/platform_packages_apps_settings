@@ -132,9 +132,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private static final String SHOW_SCREEN_UPDATES_KEY = "show_screen_updates";
     private static final String DISABLE_OVERLAYS_KEY = "disable_overlays";
     private static final String SIMULATE_COLOR_SPACE = "simulate_color_space";
-    private static final String USE_AWESOMEPLAYER_KEY = "use_awesomeplayer";
     private static final String USB_AUDIO_KEY = "usb_audio";
-    private static final String USE_AWESOMEPLAYER_PROPERTY = "persist.sys.media.use-awesome";
     private static final String SHOW_CPU_USAGE_KEY = "show_cpu_usage";
     private static final String FORCE_HARDWARE_UI_KEY = "force_hw_ui";
     private static final String FORCE_MSAA_KEY = "force_msaa";
@@ -257,7 +255,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
 
     private ListPreference mSimulateColorSpace;
 
-    private SwitchPreference mUseAwesomePlayer;
     private SwitchPreference mUSBAudio;
     private SwitchPreference mImmediatelyDestroyActivities;
 
@@ -404,7 +401,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         }
         mOpenGLTraces = addListPreference(OPENGL_TRACES_KEY);
         mSimulateColorSpace = addListPreference(SIMULATE_COLOR_SPACE);
-        mUseAwesomePlayer = findAndInitSwitchPref(USE_AWESOMEPLAYER_KEY);
         mUSBAudio = findAndInitSwitchPref(USB_AUDIO_KEY);
 
         mImmediatelyDestroyActivities = (SwitchPreference) findPreference(
@@ -640,7 +636,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         updateLegacyDhcpClientOptions();
         updateMobileDataAlwaysOnOptions();
         updateSimulateColorSpace();
-        updateUseNuplayerOptions();
         updateUSBAudioOptions();
         updateTweakUi();
     }
@@ -1202,17 +1197,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
                         PackageManager.DONT_KILL_APP);
     }
 
-    private void updateUseNuplayerOptions() {
-        updateSwitchPreference(
-                mUseAwesomePlayer, SystemProperties.getBoolean(USE_AWESOMEPLAYER_PROPERTY, false));
-    }
-
-    private void writeUseAwesomePlayerOptions() {
-        SystemProperties.set(
-                USE_AWESOMEPLAYER_PROPERTY, mUseAwesomePlayer.isChecked() ? "true" : "false");
-        pokeSystemProperties();
-    }
-
     private void updateUSBAudioOptions() {
         updateSwitchPreference(mUSBAudio, Settings.Secure.getInt(getContentResolver(),
                 Settings.Secure.USB_AUDIO_AUTOMATIC_ROUTING_DISABLED, 0) != 0);
@@ -1752,8 +1736,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             writeLegacyDhcpClientOptions();
         } else if (preference == mMobileDataAlwaysOn) {
             writeMobileDataAlwaysOnOptions();
-        } else if (preference == mUseAwesomePlayer) {
-            writeUseAwesomePlayerOptions();
         } else if (preference == mUSBAudio) {
             writeUSBAudioOptions();
         } else if (INACTIVE_APPS_KEY.equals(preference.getKey())) {
