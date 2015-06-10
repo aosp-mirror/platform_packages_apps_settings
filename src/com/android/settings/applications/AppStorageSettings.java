@@ -121,6 +121,12 @@ public class AppStorageSettings extends AppInfoWithHeader
         setupViews();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        mState.requestSize(mPackageName, mUserId);
+    }
+
     private void setupViews() {
         mComputingStr = getActivity().getText(R.string.computing_size);
         mInvalidSizeStr = getActivity().getText(R.string.invalid_size_value);
