@@ -54,15 +54,21 @@ public final class WifiNoInternetDialog extends AlertActivity implements
 
         final Intent intent = getIntent();
         if (intent == null ||
-                !intent.getAction().equals(ConnectivityManager.ACTION_PROMPT_UNVALIDATED)) {
+                !intent.getAction().equals(ConnectivityManager.ACTION_PROMPT_UNVALIDATED) ||
+                !"netId".equals(intent.getScheme())) {
             Log.e(TAG, "Unexpected intent " + intent + ", exiting");
             finish();
             return;
         }
 
-        mNetwork = intent.getParcelableExtra(ConnectivityManager.EXTRA_NETWORK);
+        try {
+            mNetwork = new Network(Integer.parseInt(intent.getData().getSchemeSpecificPart()));
+        } catch (NullPointerException|NumberFormatException e) {
+            mNetwork = null;
+        }
+
         if (mNetwork == null) {
-            Log.e(TAG, "ACTION_PROMPT_UNVALIDATED for null network, exiting");
+            Log.e(TAG, "Can't determine network from '" + intent.getData() + "' , exiting");
             finish();
             return;
         }
@@ -112,8 +118,8 @@ public final class WifiNoInternetDialog extends AlertActivity implements
         final AlertController.AlertParams ap = mAlertParams;
         ap.mTitle = mNetworkName;
         ap.mMessage = getString(R.string.no_internet_access_text);
-        ap.mPositiveButtonText = getString(android.R.string.ok);
-        ap.mNegativeButtonText = getString(android.R.string.cancel);
+        ap.mPositiveButtonText = getString(R.string.yes);
+        ap.mNegativeButtonText = getString(R.string.no);
         ap.mPositiveButtonListener = this;
         ap.mNegativeButtonListener = this;
 
