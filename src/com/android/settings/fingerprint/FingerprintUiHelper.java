@@ -18,7 +18,6 @@ package com.android.settings.fingerprint;
 
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.CancellationSignal;
-import android.os.Vibrator;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,8 +30,6 @@ import com.android.settings.R;
 public class FingerprintUiHelper extends FingerprintManager.AuthenticationCallback {
 
     private static final long ERROR_TIMEOUT = 1300;
-    private static final long[] FP_ERROR_VIBRATE_PATTERN = new long[] {0, 30, 100, 30};
-    private static final long[] FP_SUCCESS_VIBRATE_PATTERN = new long[] {0, 30};
 
     private ImageView mIcon;
     private TextView mErrorTextView;
@@ -92,7 +89,7 @@ public class FingerprintUiHelper extends FingerprintManager.AuthenticationCallba
 
     @Override
     public void onAuthenticationSucceeded(FingerprintManager.AuthenticationResult result) {
-        vibrateFingerprintSuccess();
+        mIcon.setImageResource(R.drawable.ic_fingerprint_success);
         mCallback.onAuthenticated();
     }
 
@@ -101,19 +98,10 @@ public class FingerprintUiHelper extends FingerprintManager.AuthenticationCallba
             return;
         }
 
-        vibrateFingerprintError();
         mIcon.setImageResource(R.drawable.ic_fingerprint_error);
         mErrorTextView.setText(error);
         mErrorTextView.removeCallbacks(mResetErrorTextRunnable);
         mErrorTextView.postDelayed(mResetErrorTextRunnable, ERROR_TIMEOUT);
-    }
-
-    private void vibrateFingerprintError() {
-        mIcon.getContext().getSystemService(Vibrator.class).vibrate(FP_ERROR_VIBRATE_PATTERN, -1);
-    }
-
-    private void vibrateFingerprintSuccess() {
-        mIcon.getContext().getSystemService(Vibrator.class).vibrate(FP_SUCCESS_VIBRATE_PATTERN, -1);
     }
 
     private Runnable mResetErrorTextRunnable = new Runnable() {

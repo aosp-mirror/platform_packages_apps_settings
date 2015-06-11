@@ -225,6 +225,11 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
+    <style name="ConfirmDeviceCredentialsAnimationStyle" parent="@*android:style/Animation.Material.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/confirm_credential_open_enter</item>
+        <item name="android:activityOpenExitAnimation">@anim/confirm_credential_open_exit</item>
+    </style>
+
     <style name="Transparent">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowNoTitle">true</item>

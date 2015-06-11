@@ -1415,7 +1415,7 @@
             android:theme="@style/Theme.ConfirmDeviceCredentials"/>
 
         <activity android:name="ConfirmLockPassword"
-            android:windowSoftInputMode="adjustResize"
+            android:windowSoftInputMode="stateHidden|adjustResize"
             android:theme="@style/Theme.ConfirmDeviceCredentials"/>
 
         <activity android:name=".fingerprint.FingerprintSettings" android:exported="false"/>
