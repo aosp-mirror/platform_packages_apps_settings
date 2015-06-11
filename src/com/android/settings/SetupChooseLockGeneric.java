@@ -16,6 +16,7 @@
 
 package com.android.settings;
 
+import com.android.internal.widget.LockPatternUtils;
 import com.android.setupwizardlib.SetupWizardListLayout;
 import com.android.setupwizardlib.view.NavigationBar;
 
@@ -25,6 +26,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.preference.PreferenceFragment;
 import android.hardware.fingerprint.FingerprintManager;
 import android.view.LayoutInflater;
@@ -60,6 +62,8 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
     public static class SetupChooseLockGenericFragment extends ChooseLockGenericFragment
             implements NavigationBar.NavigationBarListener {
 
+        private static final String EXTRA_PASSWORD_QUALITY = ":settings:password_quality";
+
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
@@ -91,6 +95,15 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
         @Override
         public void onActivityResult(int requestCode, int resultCode, Intent data) {
             if (resultCode != RESULT_CANCELED) {
+                if (data == null) {
+                    data = new Intent();
+                }
+                // Add the password quality extra to the intent data that will be sent back for
+                // Setup Wizard.
+                LockPatternUtils lockPatternUtils = new LockPatternUtils(getActivity());
+                data.putExtra(EXTRA_PASSWORD_QUALITY,
+                        lockPatternUtils.getKeyguardStoredPasswordQuality(UserHandle.myUserId()));
+
                 super.onActivityResult(requestCode, resultCode, data);
             }
             // If the started activity was cancelled (e.g. the user presses back), then this
