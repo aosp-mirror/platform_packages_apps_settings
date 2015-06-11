@@ -1039,7 +1039,7 @@ public class SettingsActivity extends Activity
      */
     private void buildDashboardCategories(List<DashboardCategory> categories) {
         categories.clear();
-        loadCategoriesFromResource(R.xml.dashboard_categories, categories);
+        loadCategoriesFromResource(R.xml.dashboard_categories, categories, this);
         updateTilesList(categories);
     }
 
@@ -1050,10 +1050,11 @@ public class SettingsActivity extends Activity
      * @param resid The XML resource to load and parse.
      * @param target The list in which the parsed categories and tiles should be placed.
      */
-    private void loadCategoriesFromResource(int resid, List<DashboardCategory> target) {
+    public static void loadCategoriesFromResource(int resid, List<DashboardCategory> target,
+            Context context) {
         XmlResourceParser parser = null;
         try {
-            parser = getResources().getXml(resid);
+            parser = context.getResources().getXml(resid);
             AttributeSet attrs = Xml.asAttributeSet(parser);
 
             int type;
@@ -1082,7 +1083,7 @@ public class SettingsActivity extends Activity
                 if ("dashboard-category".equals(nodeName)) {
                     DashboardCategory category = new DashboardCategory();
 
-                    TypedArray sa = obtainStyledAttributes(
+                    TypedArray sa = context.obtainStyledAttributes(
                             attrs, com.android.internal.R.styleable.PreferenceHeader);
                     category.id = sa.getResourceId(
                             com.android.internal.R.styleable.PreferenceHeader_id,
@@ -1098,12 +1099,13 @@ public class SettingsActivity extends Activity
                         }
                     }
                     sa.recycle();
-                    sa = obtainStyledAttributes(attrs, com.android.internal.R.styleable.Preference);
+                    sa = context.obtainStyledAttributes(attrs,
+                            com.android.internal.R.styleable.Preference);
                     tv = sa.peekValue(
                             com.android.internal.R.styleable.Preference_key);
                     if (tv != null && tv.type == TypedValue.TYPE_STRING) {
                         if (tv.resourceId != 0) {
-                            category.key = getString(tv.resourceId);
+                            category.key = context.getString(tv.resourceId);
                         } else {
                             category.key = tv.string.toString();
                         }
@@ -1121,7 +1123,7 @@ public class SettingsActivity extends Activity
                         if (innerNodeName.equals("dashboard-tile")) {
                             DashboardTile tile = new DashboardTile();
 
-                            sa = obtainStyledAttributes(
+                            sa = context.obtainStyledAttributes(
                                     attrs, com.android.internal.R.styleable.PreferenceHeader);
                             tile.id = sa.getResourceId(
                                     com.android.internal.R.styleable.PreferenceHeader_id,
@@ -1163,11 +1165,13 @@ public class SettingsActivity extends Activity
 
                                 String innerNodeName2 = parser.getName();
                                 if (innerNodeName2.equals("extra")) {
-                                    getResources().parseBundleExtra("extra", attrs, curBundle);
+                                    context.getResources().parseBundleExtra("extra", attrs,
+                                            curBundle);
                                     XmlUtils.skipCurrentTag(parser);
 
                                 } else if (innerNodeName2.equals("intent")) {
-                                    tile.intent = Intent.parseIntent(getResources(), parser, attrs);
+                                    tile.intent = Intent.parseIntent(context.getResources(), parser,
+                                            attrs);
 
                                 } else {
                                     XmlUtils.skipCurrentTag(parser);
@@ -1180,7 +1184,7 @@ public class SettingsActivity extends Activity
                             }
 
                             // Show the SIM Cards setting if there are more than 2 SIMs installed.
-                            if(tile.id != R.id.sim_settings || Utils.showSimCardTile(this)){
+                            if(tile.id != R.id.sim_settings || Utils.showSimCardTile(context)){
                                 category.addTile(tile);
                             }
 
