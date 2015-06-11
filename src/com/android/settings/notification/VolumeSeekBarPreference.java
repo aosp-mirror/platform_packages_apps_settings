@@ -48,6 +48,7 @@ public class VolumeSeekBarPreference extends SeekBarPreference
     private TextView mSuppressionTextView;
     private String mSuppressionText;
     private boolean mMuted;
+    private boolean mZenMuted;
     private int mIconResId;
     private int mMuteIconResId;
     private boolean mStopped;
@@ -122,9 +123,10 @@ public class VolumeSeekBarPreference extends SeekBarPreference
                 }
             }
             @Override
-            public void onMuted(boolean muted) {
-                if (mMuted == muted) return;
+            public void onMuted(boolean muted, boolean zenMuted) {
+                if (mMuted == muted && mZenMuted == zenMuted) return;
                 mMuted = muted;
+                mZenMuted = zenMuted;
                 updateIconView();
             }
         };
@@ -150,7 +152,7 @@ public class VolumeSeekBarPreference extends SeekBarPreference
         if (mIconView == null) return;
         if (mIconResId != 0) {
             mIconView.setImageResource(mIconResId);
-        } else if (mMuteIconResId != 0 && mMuted) {
+        } else if (mMuteIconResId != 0 && mMuted && !mZenMuted) {
             mIconView.setImageResource(mMuteIconResId);
         } else {
             mIconView.setImageDrawable(getIcon());
