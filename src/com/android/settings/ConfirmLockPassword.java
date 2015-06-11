@@ -19,9 +19,12 @@ package com.android.settings;
 import android.os.UserHandle;
 import android.text.TextUtils;
 import com.android.internal.logging.MetricsLogger;
+import com.android.internal.util.ArrayUtils;
 import com.android.internal.widget.LockPatternChecker;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.TextViewInputDisabler;
+import com.android.settingslib.animation.AppearAnimationUtils;
+import com.android.settingslib.animation.DisappearAnimationUtils;
 
 import android.app.Fragment;
 import android.app.admin.DevicePolicyManager;
@@ -39,10 +42,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
+
+import java.util.ArrayList;
 
 public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
 
@@ -89,6 +95,9 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
         private boolean mIsAlpha;
         private InputMethodManager mImm;
         private boolean mUsingFingerprint = false;
+        private AppearAnimationUtils mAppearAnimationUtils;
+        private DisappearAnimationUtils mDisappearAnimationUtils;
+        private boolean mBlockImm;
 
         // required constructor for fragments
         public ConfirmLockPasswordFragment() {
@@ -144,6 +153,14 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             int currentType = mPasswordEntry.getInputType();
             mPasswordEntry.setInputType(mIsAlpha ? currentType
                     : (InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD));
+            mAppearAnimationUtils = new AppearAnimationUtils(getContext(),
+                    220, 2f /* translationScale */, 1f /* delayScale*/,
+                    AnimationUtils.loadInterpolator(getContext(),
+                            android.R.interpolator.linear_out_slow_in));
+            mDisappearAnimationUtils = new DisappearAnimationUtils(getContext(),
+                    110, 1f /* translationScale */,
+                    0.5f /* delayScale */, AnimationUtils.loadInterpolator(
+                            getContext(), android.R.interpolator.fast_out_linear_in));
             return view;
         }
 
@@ -160,6 +177,43 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
         private int getErrorMessage() {
             return mIsAlpha ? R.string.lockpassword_invalid_password
                     : R.string.lockpassword_invalid_pin;
+        }
+
+        @Override
+        public void prepareEnterAnimation() {
+            super.prepareEnterAnimation();
+            mHeaderTextView.setAlpha(0f);
+            mDetailsTextView.setAlpha(0f);
+            mCancelButton.setAlpha(0f);
+            mPasswordEntry.setAlpha(0f);
+            mFingerprintIcon.setAlpha(0f);
+            mBlockImm = true;
+        }
+
+        private View[] getActiveViews() {
+            ArrayList<View> result = new ArrayList<>();
+            result.add(mHeaderTextView);
+            result.add(mDetailsTextView);
+            if (mCancelButton.getVisibility() == View.VISIBLE) {
+                result.add(mCancelButton);
+            }
+            result.add(mPasswordEntry);
+            if (mFingerprintIcon.getVisibility() == View.VISIBLE) {
+                result.add(mFingerprintIcon);
+            }
+            return result.toArray(new View[] {});
+        }
+
+        @Override
+        public void startEnterAnimation() {
+            super.startEnterAnimation();
+            mAppearAnimationUtils.startAnimation(getActiveViews(), new Runnable() {
+                @Override
+                public void run() {
+                    mBlockImm = false;
+                    resetState();
+                }
+            });
         }
 
         @Override
@@ -199,9 +253,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
 
         @Override
         protected void authenticationSucceeded() {
-            Intent intent = new Intent();
-            getActivity().setResult(RESULT_OK, intent);
-            getActivity().finish();
+            startDisappearAnimation(new Intent());
         }
 
         @Override
@@ -210,6 +262,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
         }
 
         private void resetState() {
+            if (mBlockImm) return;
             mPasswordEntry.setEnabled(true);
             mPasswordEntryInputDisabler.setInputEnabled(true);
             if (shouldAutoShowSoftKeyboard()) {
@@ -222,7 +275,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
         }
 
         public void onWindowFocusChanged(boolean hasFocus) {
-            if (!hasFocus) {
+            if (!hasFocus || mBlockImm) {
                 return;
             }
             // Post to let window focus logic to finish to allow soft input show/hide properly.
@@ -312,11 +365,28 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                     });
         }
 
+        private void startDisappearAnimation(final Intent intent) {
+            if (getActivity().getThemeResId() == R.style.Theme_ConfirmDeviceCredentialsDark) {
+                mDisappearAnimationUtils.startAnimation(getActiveViews(), new Runnable() {
+                    @Override
+                    public void run() {
+                        getActivity().setResult(RESULT_OK, intent);
+                        getActivity().finish();
+                        getActivity().overridePendingTransition(
+                                R.anim.confirm_credential_close_enter,
+                                R.anim.confirm_credential_close_exit);
+                    }
+                });
+            } else {
+                getActivity().setResult(RESULT_OK, intent);
+                getActivity().finish();
+            }
+        }
+
         private void onPasswordChecked(boolean matched, Intent intent, int timeoutMs) {
             mPasswordEntryInputDisabler.setInputEnabled(true);
             if (matched) {
-                getActivity().setResult(RESULT_OK, intent);
-                getActivity().finish();
+                startDisappearAnimation(intent);
             } else {
                 if (timeoutMs > 0) {
                     long deadline = mLockPatternUtils.setLockoutAttemptDeadline(

@@ -45,6 +45,8 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
 
     private FingerprintUiHelper mFingerprintHelper;
     private boolean mAllowFpAuthentication;
+    protected Button mCancelButton;
+    protected ImageView mFingerprintIcon;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,14 +58,15 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mCancelButton = (Button) view.findViewById(R.id.cancelButton);
+        mFingerprintIcon = (ImageView) view.findViewById(R.id.fingerprintIcon);
         mFingerprintHelper = new FingerprintUiHelper(
-                (ImageView) view.findViewById(R.id.fingerprintIcon),
+                mFingerprintIcon,
                 (TextView) view.findViewById(R.id.errorText), this);
         boolean showCancelButton = getActivity().getIntent().getBooleanExtra(
                 SHOW_CANCEL_BUTTON, false);
-        Button cancelButton = (Button) view.findViewById(R.id.cancelButton);
-        cancelButton.setVisibility(showCancelButton ? View.VISIBLE : View.GONE);
-        cancelButton.setOnClickListener(new View.OnClickListener() {
+        mCancelButton.setVisibility(showCancelButton ? View.VISIBLE : View.GONE);
+        mCancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getActivity().finish();
@@ -99,5 +102,11 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
 
     @Override
     public void onFingerprintIconVisibilityChanged(boolean visible) {
+    }
+
+    public void prepareEnterAnimation() {
+    }
+
+    public void startEnterAnimation() {
     }
 }

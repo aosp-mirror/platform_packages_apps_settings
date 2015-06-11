@@ -22,10 +22,21 @@ import com.android.internal.widget.LockPatternView;
 import com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient;
 import com.android.internal.widget.LockPatternChecker;
 import com.android.internal.widget.LockPatternView.Cell;
+import com.android.settingslib.animation.AppearAnimationCreator;
+import com.android.settingslib.animation.AppearAnimationUtils;
+import com.android.settingslib.animation.DisappearAnimationUtils;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ValueAnimator;
 import android.annotation.Nullable;
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.os.AsyncTask;
@@ -33,11 +44,16 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.storage.StorageManager;
 import android.view.MenuItem;
+import android.view.animation.AnimationUtils;
+import android.view.animation.Interpolator;
 import android.widget.TextView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -70,7 +86,8 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
         return false;
     }
 
-    public static class ConfirmLockPatternFragment extends ConfirmDeviceCredentialBaseFragment {
+    public static class ConfirmLockPatternFragment extends ConfirmDeviceCredentialBaseFragment
+            implements AppearAnimationCreator<Object> {
 
         // how long we wait to clear a wrong pattern
         private static final int WRONG_PATTERN_CLEAR_TIMEOUT_MS = 2000;
@@ -92,6 +109,9 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
         // caller-supplied text for various prompts
         private CharSequence mHeaderText;
         private CharSequence mDetailsText;
+
+        private AppearAnimationUtils mAppearAnimationUtils;
+        private DisappearAnimationUtils mDisappearAnimationUtils;
 
         // required constructor for fragments
         public ConfirmLockPatternFragment() {
@@ -144,6 +164,20 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                     getActivity().finish();
                 }
             }
+            mAppearAnimationUtils = new AppearAnimationUtils(getContext(),
+                    AppearAnimationUtils.DEFAULT_APPEAR_DURATION, 2f /* translationScale */,
+                    1.3f /* delayScale */, AnimationUtils.loadInterpolator(
+                    getContext(), android.R.interpolator.linear_out_slow_in));
+            mDisappearAnimationUtils = new DisappearAnimationUtils(getContext(),
+                    125, 4f /* translationScale */,
+                    0.3f /* delayScale */, AnimationUtils.loadInterpolator(
+                    getContext(), android.R.interpolator.fast_out_linear_in),
+                    new AppearAnimationUtils.RowTranslationScaler() {
+                        @Override
+                        public float getRowTranslationScale(int row, int numRows) {
+                            return (float)(numRows - row) / numRows;
+                        }
+                    });
             return view;
         }
 
@@ -185,6 +219,51 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                 mNumWrongConfirmAttempts = 0;
                 updateStage(Stage.NeedToUnlock);
             }
+        }
+
+        @Override
+        public void prepareEnterAnimation() {
+            super.prepareEnterAnimation();
+            mHeaderTextView.setAlpha(0f);
+            mCancelButton.setAlpha(0f);
+            mLockPatternView.setAlpha(0f);
+            mDetailsTextView.setAlpha(0f);
+            mFingerprintIcon.setAlpha(0f);
+        }
+
+        private Object[][] getActiveViews() {
+            ArrayList<ArrayList<Object>> result = new ArrayList<>();
+            result.add(new ArrayList<Object>(Collections.singletonList(mHeaderTextView)));
+            result.add(new ArrayList<Object>(Collections.singletonList(mDetailsTextView)));
+            if (mCancelButton.getVisibility() == View.VISIBLE) {
+                result.add(new ArrayList<Object>(Collections.singletonList(mCancelButton)));
+            }
+            LockPatternView.CellState[][] cellStates = mLockPatternView.getCellStates();
+            for (int i = 0; i < cellStates.length; i++) {
+                ArrayList<Object> row = new ArrayList<>();
+                for (int j = 0; j < cellStates[i].length; j++) {
+                    row.add(cellStates[i][j]);
+                }
+                result.add(row);
+            }
+            if (mFingerprintIcon.getVisibility() == View.VISIBLE) {
+                result.add(new ArrayList<Object>(Collections.singletonList(mFingerprintIcon)));
+            }
+            Object[][] resultArr = new Object[result.size()][cellStates[0].length];
+            for (int i = 0; i < result.size(); i++) {
+                ArrayList<Object> row = result.get(i);
+                for (int j = 0; j < row.size(); j++) {
+                    resultArr[i][j] = row.get(j);
+                }
+            }
+            return resultArr;
+        }
+
+        @Override
+        public void startEnterAnimation() {
+            super.startEnterAnimation();
+            mLockPatternView.setAlpha(1f);
+            mAppearAnimationUtils.startAnimation2d(getActiveViews(), null, this);
         }
 
         private void updateStage(Stage stage) {
@@ -242,9 +321,27 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
 
         @Override
         protected void authenticationSucceeded() {
-            Intent intent = new Intent();
-            getActivity().setResult(Activity.RESULT_OK, intent);
-            getActivity().finish();
+            startDisappearAnimation(new Intent());
+        }
+
+        private void startDisappearAnimation(final Intent intent) {
+            if (getActivity().getThemeResId() == R.style.Theme_ConfirmDeviceCredentialsDark) {
+                mLockPatternView.clearPattern();
+                mDisappearAnimationUtils.startAnimation2d(getActiveViews(),
+                        new Runnable() {
+                            @Override
+                            public void run() {
+                                getActivity().setResult(RESULT_OK, intent);
+                                getActivity().finish();
+                                getActivity().overridePendingTransition(
+                                        R.anim.confirm_credential_close_enter,
+                                        R.anim.confirm_credential_close_exit);
+                            }
+                        }, this);
+            } else {
+                getActivity().setResult(RESULT_OK, intent);
+                getActivity().finish();
+            }
         }
 
         @Override
@@ -357,8 +454,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                     boolean matched, Intent intent, int timeoutMs) {
                 mLockPatternView.setEnabled(true);
                 if (matched) {
-                    getActivity().setResult(Activity.RESULT_OK, intent);
-                    getActivity().finish();
+                    startDisappearAnimation(intent);
                 } else {
                     if (timeoutMs > 0) {
                         long deadline = mLockPatternUtils.setLockoutAttemptDeadline(
@@ -393,6 +489,53 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                     updateStage(Stage.NeedToUnlock);
                 }
             }.start();
+        }
+
+        @Override
+        public void createAnimation(Object obj, long delay,
+                long duration, float translationY, final boolean appearing,
+                Interpolator interpolator,
+                final Runnable finishListener) {
+            if (obj instanceof LockPatternView.CellState) {
+                final LockPatternView.CellState animatedCell = (LockPatternView.CellState) obj;
+                if (appearing) {
+                    animatedCell.scale = 0.0f;
+                    animatedCell.alpha = 1.0f;
+                }
+                animatedCell.translateY = appearing ? translationY : 0;
+                ValueAnimator animator = ValueAnimator.ofFloat(animatedCell.translateY,
+                        appearing ? 0 : translationY);
+                animator.setInterpolator(interpolator);
+                animator.setDuration(duration);
+                animator.setStartDelay(delay);
+                animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator animation) {
+                        float animatedFraction = animation.getAnimatedFraction();
+                        if (appearing) {
+                            animatedCell.scale = animatedFraction;
+                        } else {
+                            animatedCell.alpha = 1 - animatedFraction;
+                        }
+                        animatedCell.translateY = (float) animation.getAnimatedValue();
+                        mLockPatternView.invalidate();
+                    }
+                });
+                if (finishListener != null) {
+                    animator.addListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            finishListener.run();
+                        }
+                    });
+                }
+
+                animator.start();
+                mLockPatternView.invalidate();
+            } else {
+                mAppearAnimationUtils.createAnimation((View) obj, delay, duration, translationY,
+                        appearing, interpolator, finishListener);
+            }
         }
     }
 }
