@@ -104,6 +104,7 @@ public abstract class MigrateEstimateTask extends AsyncTask<Void, Void, Long> im
     protected void onPostExecute(Long result) {
         mSizeBytes = result;
         mTimeMillis = (mSizeBytes * DateUtils.SECOND_IN_MILLIS) / SPEED_ESTIMATE_BPS;
+        mTimeMillis = Math.max(mTimeMillis, DateUtils.SECOND_IN_MILLIS);
 
         final String size = Formatter.formatFileSize(mContext, mSizeBytes);
         final String time = DateUtils.formatDuration(mTimeMillis).toString();
