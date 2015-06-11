@@ -107,7 +107,7 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
         mMount = buildAction(R.string.storage_menu_mount);
         mUnmount = buildAction(R.string.storage_menu_unmount);
         mFormat = buildAction(R.string.storage_menu_format);
-        mFormatInternal = buildAction(R.string.storage_menu_format_internal);
+        mFormatInternal = buildAction(R.string.storage_menu_format_private);
     }
 
     public void update() {
