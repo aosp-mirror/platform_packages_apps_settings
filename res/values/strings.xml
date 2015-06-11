@@ -25,6 +25,11 @@
     <!-- Strings for Dialog deny button -->
     <string name="deny">Deny</string>
 
+    <!-- Strings for Dialog close button [CHAR LIMIT=20] -->
+    <string name="dlg_close">Close</string>
+    <!-- Strings for Dialog switch button [CHAR LIMIT=20] -->
+    <string name="dlg_switch">Switch</string>
+
     <!-- Device Info --> <skip />
     <!-- Device Info screen. Used for a status item's value when the proper value is not known -->
     <string name="device_info_default">Unknown</string>
@@ -1356,7 +1361,7 @@
     <string name="link_speed">%1$d Mbps</string>
 
     <!-- Wifi Alert message when tapping on a preference for a config locked down by device owner. [CHAR LIMIT=200] -->
-    <string name="wifi_alert_lockdown_by_device_owner"><xliff:g id="app_name">%1$s</xliff:g> manages your device and doesn\'t allow modifying or deleting this Wi-Fi network. For more information, contact your administrator.</string>
+    <string name="wifi_alert_lockdown_by_device_owner"><xliff:g id="app_name">%1$s</xliff:g> manages your device and doesn\u2019t allow modifying or deleting this Wi-Fi network. For more information, contact your administrator.</string>
 
     <!-- NFC settings -->
     <!-- Used in the 1st-level settings screen to turn on NFC -->
@@ -2297,13 +2302,19 @@
     <!-- Storage setting.  Menu option for unmounting a storage device [CHAR LIMIT=30]-->
     <string name="storage_menu_unmount">Eject</string>
     <!-- Storage setting.  Menu option for erasing and formatting a storage device [CHAR LIMIT=30]-->
-    <string name="storage_menu_format">Erase &amp; format</string>
+    <string name="storage_menu_format">Format</string>
     <!-- Storage setting.  Menu option for erasing and formatting a storage device [CHAR LIMIT=30]-->
-    <string name="storage_menu_format_internal">Erase &amp; format as internal storage</string>
+    <string name="storage_menu_format_public">Format as portable</string>
+    <!-- Storage setting.  Menu option for erasing and formatting a storage device [CHAR LIMIT=30]-->
+    <string name="storage_menu_format_private">Format as internal</string>
     <!-- Storage setting.  Menu option for migrating data to a storage device [CHAR LIMIT=30]-->
     <string name="storage_menu_migrate">Migrate data</string>
     <!-- Storage setting.  Menu option for forgetting a storage device [CHAR LIMIT=30]-->
     <string name="storage_menu_forget">Forget</string>
+    <!-- Storage setting.  Menu option for setting up a storage device [CHAR LIMIT=30]-->
+    <string name="storage_menu_set_up">Set up</string>
+    <!-- Storage setting.  Menu option for exploring a storage device [CHAR LIMIT=30]-->
+    <string name="storage_menu_explore">Explore</string>
 
     <!-- Storage setting.  Title for USB transfer settings [CHAR LIMIT=30]-->
     <string name="storage_title_usb">USB computer connection</string>
@@ -2328,10 +2339,16 @@
     <!-- Section header above list of internal storage devices [CHAR LIMIT=30]-->
     <string name="storage_internal_title">Device storage</string>
     <!-- Section header above list of external storage devices [CHAR LIMIT=30]-->
-    <string name="storage_external_title">Removable storage</string>
+    <string name="storage_external_title">Portable storage</string>
 
     <!-- Summary of a single storage volume, constrasting available and total storage space. [CHAR LIMIT=48]-->
-    <string name="storage_volume_summary"><xliff:g id="free" example="1.2GB">%1$s</xliff:g> free (Total <xliff:g id="total" example="32GB">%2$s</xliff:g>)</string>
+    <string name="storage_volume_summary"><xliff:g id="used" example="1.2GB">%1$s</xliff:g> used of <xliff:g id="total" example="32GB">%2$s</xliff:g></string>
+    <!-- Summary of a single storage volume used space. [CHAR LIMIT=24] -->
+    <string name="storage_size_large"><xliff:g id="number" example="128">^1</xliff:g> <small><small><xliff:g id="unit" example="KB">^2</xliff:g></small></small></string>
+    <!-- Summary of a single storage volume total space. [CHAR LIMIT=48]-->
+    <string name="storage_volume_used">Used of <xliff:g id="total" example="32GB">%1$s</xliff:g></string>
+    <!-- Summary of a single storage volume total space. [CHAR LIMIT=48]-->
+    <string name="storage_volume_used_total">Total used of <xliff:g id="total" example="32GB">%1$s</xliff:g></string>
 
     <!-- Toast informing that storage mount operation was successful. [CHAR LIMIT=64]-->
     <string name="storage_mount_success"><xliff:g id="name" example="SD card">%1$s</xliff:g> is mounted</string>
@@ -2351,6 +2368,18 @@
     <!-- Title of dialog prompting user to rename a storage volume [CHAR LIMIT=32]-->
     <string name="storage_rename_title">Rename storage</string>
 
+    <!-- Dialog body informing user about an unmounted storage device. [CHAR LIMIT=NONE]-->
+    <string name="storage_dialog_unmounted">This <xliff:g id="name" example="SD card">^1</xliff:g> is safely ejected, but still available.
+\n\nTo use this <xliff:g id="name" example="SD card">^1</xliff:g>, you have to mount it first.</string>
+
+    <!-- Dialog body informing user about an unmountable storage device. [CHAR LIMIT=NONE]-->
+    <string name="storage_dialog_unmountable">This <xliff:g id="name" example="SD card">^1</xliff:g> is corrupted.
+\n\nTo use this <xliff:g id="name" example="SD card">^1</xliff:g>, you have to set it up first.</string>
+
+    <!-- Dialog body informing user about an unsupported storage device. [CHAR LIMIT=NONE]-->
+    <string name="storage_dialog_unsupported">This device doesn\u2019t support this <xliff:g id="name" example="SD card">^1</xliff:g>.
+\n\nTo use this <xliff:g id="name" example="SD card">^1</xliff:g> with this device, you have to set it up first.</string>
+
     <!-- Body of dialog informing user about consequences of formatting an internal storage device [CHAR LIMIT=NONE]-->
     <string name="storage_internal_format_details">After formatting, you can use this <xliff:g id="name" example="SD card">^1</xliff:g> in other devices.
 \n\nAll data on this <xliff:g id="name" example="SD card">^1</xliff:g> will be erased. Consider backing up first.
@@ -2368,6 +2397,34 @@
 \n\nAlternatively, you can choose to forget this storage if the device isn\u2019t available.
 \n\nIf you choose to forget, all the data the device contains will be lost forever.
 \n\nYou can reinstall the apps later, but their data stored on this device will be lost.</string>
+
+    <!-- Title of dialog confirming that user wants to forget an internal storage device [CHAR LIMIT=32]-->
+    <string name="storage_internal_forget_confirm_title">Forget <xliff:g id="name" example="SD card">^1</xliff:g>?</string>
+    <!-- Body of dialog confirming that user wants to forget an internal storage device [CHAR LIMIT=NONE]-->
+    <string name="storage_internal_forget_confirm">All the apps, photos, and data stored on this <xliff:g id="name" example="SD card">^1</xliff:g> will be lost forever.</string>
+
+    <!-- Item title describing storage used by apps [CHAR LIMIT=48]-->
+    <string name="storage_detail_apps">Apps</string>
+    <!-- Item title describing storage used by images [CHAR LIMIT=48]-->
+    <string name="storage_detail_images">Images</string>
+    <!-- Item title describing storage used by videos [CHAR LIMIT=48]-->
+    <string name="storage_detail_videos">Videos</string>
+    <!-- Item title describing storage used by audio [CHAR LIMIT=48]-->
+    <string name="storage_detail_audio">Audio</string>
+    <!-- Item title describing storage used by cached data [CHAR LIMIT=48]-->
+    <string name="storage_detail_cached">Cached data</string>
+    <!-- Item title describing storage used by other data [CHAR LIMIT=48]-->
+    <string name="storage_detail_other">Other</string>
+    <!-- Item title that will launch a file explorer [CHAR LIMIT=48]-->
+    <string name="storage_detail_explore">Explore <xliff:g id="name" example="SD card">^1</xliff:g></string>
+
+    <!-- Body of dialog informing user about other files on a storage device [CHAR LIMIT=NONE]-->
+    <string name="storage_detail_dialog_other">Other includes shared files saved by apps, files downloaded from the Internet or Bluetooth, Android files, and so on.
+\n\nTo see the entire contents of this <xliff:g id="name" example="SD card">^1</xliff:g>, touch Explore.</string>
+
+    <!-- Body of dialog informing user about other users on a storage device [CHAR LIMIT=NONE]-->
+    <string name="storage_detail_dialog_user"><xliff:g id="user" example="Guest user">^1</xliff:g> may have saved photos, music, movies, apps, or other data that is taking up <xliff:g id="size" example="1.2 GB">^2</xliff:g> of storage.
+\n\nTo view details, switch to <xliff:g id="user" example="Guest user">^1</xliff:g>.</string>
 
     <!-- Title of wizard step prompting user to setup a storage device [CHAR LIMIT=32] -->
     <string name="storage_wizard_init_title">Set up your <xliff:g id="name" example="SD card">^1</xliff:g></string>
@@ -2406,9 +2463,10 @@
     <!-- Title of wizard step prompting user to migrate data to new storage [CHAR LIMIT=32] -->
     <string name="storage_wizard_migrate_title">Move data to new storage</string>
     <!-- Body of wizard step prompting user to migrate data to new storage [CHAR LIMIT=NONE] -->
-    <string name="storage_wizard_migrate_body">You can move your photos, files, and app data to this new <xliff:g id="name" example="SD card">^1</xliff:g>.
+    <string name="storage_wizard_migrate_body">You can move your photos, files, and some apps to this new <xliff:g id="name" example="SD card">^1</xliff:g>.
 \n\nThe move takes about <xliff:g id="time" example="1 hour">^2</xliff:g> and will free <xliff:g id="size" example="1.2 GB">^3</xliff:g> on internal storage. Some apps won\u2019t work while it\u2019s underway.
     </string>
+
     <!-- Title of wizard choice to migrate data right now [CHAR LIMIT=64] -->
     <string name="storage_wizard_migrate_now">Move now</string>
     <!-- Title of wizard choice to migrate data at later time [CHAR LIMIT=NONE] -->
@@ -3117,6 +3175,8 @@
     <string name="no_applications">No apps.</string>
     <!-- [CHAR LIMIT=15] Manage applications, label for chart showing internal storage use. -->
     <string name="internal_storage">Internal storage</string>
+    <!-- [CHAR LIMIT=30] Title for internal device storage that is capitalized for placement as a phrase into another sentence -->
+    <string name="internal_storage_sentence">internal storage</string>
     <!-- [CHAR LIMIT=15] Manage applications, label for chart showing SD card storage use. -->
     <string name="sd_card_storage" product="nosdcard">USB storage</string>
     <!-- [CHAR LIMIT=15] Manage applications, label for chart showing SD card storage use. -->
@@ -5583,7 +5643,7 @@
     <!-- Header for text explaning how to pay at a payment terminal in a store -->
     <string name="nfc_how_it_works_title">Paying at the terminal</string>
     <!-- Content for text explaning how to pay at a payment terminal in a store -->
-    <string name="nfc_how_it_works_content">Once you\'ve set up a Tap &amp; pay app and your phone is powered on, tap your phone on any terminal with the Tap &amp; pay logo on it to make a purchase.</string>
+    <string name="nfc_how_it_works_content">Once you\u2019ve set up a Tap &amp; pay app and your phone is powered on, tap your phone on any terminal with the Tap &amp; pay logo on it to make a purchase.</string>
     <!-- Button the user can click to indicate he understood and dismiss the screen -->
     <string name="nfc_how_it_works_got_it">Got it</string>
     <!-- NFC More... title.  [CHAR LIMIT=40] -->
@@ -6669,7 +6729,7 @@
     <string name="high_power_off">Not allowed</string>
 
     <!-- Description of high power switch [CHAR LIMIT=NONE] -->
-    <string name="high_power_desc">Don\'t apply battery optimizations. May drain your battery more quickly.</string>
+    <string name="high_power_desc">Don\u2019t apply battery optimizations. May drain your battery more quickly.</string>
 
     <!-- Description of number of apps with high power turned on [CHAR LIMIT=NONE] -->
     <plurals name="high_power_count">
@@ -6684,7 +6744,7 @@
     <string name="no_battery_summary">No battery use since last full charge</string>
 
     <!-- Link to an apps notification settings [CHAR LIMIT=50] -->
-    <string name="app_notification_preferences">App notification preferences</string>
+    <string name="app_notification_preferences">App settings</string>
 
     <!-- Turn on settings for system ui tuner [CHAR LIMIT=40] -->
     <string name="system_ui_settings">Show SystemUI Tuner</string>
@@ -6727,7 +6787,7 @@
     <string name="assist_access_context_title">Use current context</string>
 
     <!-- Summary for the "context" preference to determine whether assist can access the data currently displayed on-screen [CHAR LIMIT=NONE] -->
-    <string name="assist_access_context_summary">When you open the assist app, let it see what you\'ve been doing on your screen</string>
+    <string name="assist_access_context_summary">When you open the assist app, let it see what you\u2019ve been doing on your screen</string>
 
     <!-- Footer text in the manage assist screen. [CHAR LIMIT=NONE] -->
     <string name="assist_footer">Assist apps help you identify and act on useful information without having to ask. Some apps support both launcher and voice input services to give you integrated assistance.</string>
@@ -6809,9 +6869,6 @@
 
     <!-- Ignore battery optimizations dialog title [CHAR LIMIT=NONE] -->
     <string name="ignore_optimizations_title">Allow <xliff:g id="app" example="Tasker">%s</xliff:g> to ignore battery optimizations?</string>
-
-    <!-- Instructions for state when SD card is unmounted [CHAR LIMIT=NONE] -->
-    <string name="sdcard_unmounted_description">The SD card is safely ejected, but still available in the SD card slot for this device.\n\nTo use this card, you have to mount it first.</string>
 
     <!-- Label for None item in AppListPreference [CHAR LIMIT=40] -->
     <string name="app_list_preference_none">None</string>
