@@ -16,15 +16,10 @@
 
 package com.android.settings.sim;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.OvalShape;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
@@ -33,20 +28,10 @@ import android.telephony.PhoneStateListener;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
-import android.telephony.PhoneNumberUtils;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.RestrictedSettingsFragment;
 import com.android.settings.Utils;
@@ -68,6 +53,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
     private static final String KEY_CELLULAR_DATA = "sim_cellular_data";
     private static final String KEY_CALLS = "sim_calls";
     private static final String KEY_SMS = "sim_sms";
+    public static final String EXTRA_SLOT_ID = "slot_id";
 
     /**
      * By UX design we use only one Subscription Information(SubInfo) record per SIM slot.
@@ -250,7 +236,9 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         if (preference instanceof SimPreference) {
-            ((SimPreference)preference).createEditDialog((SimPreference)preference);
+            Intent newIntent = new Intent(context, SimPreferenceDialog.class);
+            newIntent.putExtra(EXTRA_SLOT_ID, ((SimPreference)preference).getSlotId());
+            startActivity(newIntent);
         } else if (findPreference(KEY_CELLULAR_DATA) == preference) {
             intent.putExtra(SimDialogActivity.DIALOG_TYPE_KEY, SimDialogActivity.DATA_PICK);
             context.startActivity(intent);
@@ -265,13 +253,10 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
         return true;
     }
 
-    private class SimPreference extends Preference{
+    private class SimPreference extends Preference {
         private SubscriptionInfo mSubInfoRecord;
         private int mSlotId;
-        private int[] mTintArr;
         Context mContext;
-        private String[] mColorStrings;
-        private int mTintSelectorPos;
 
         public SimPreference(Context context, SubscriptionInfo subInfoRecord, int slotId) {
             super(context);
@@ -281,9 +266,6 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
             mSlotId = slotId;
             setKey("sim" + mSlotId);
             update();
-            mTintArr = context.getResources().getIntArray(com.android.internal.R.array.sim_colors);
-            mColorStrings = context.getResources().getStringArray(R.array.color_picker);
-            mTintSelectorPos = 0;
         }
 
         public void update() {
@@ -307,172 +289,9 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
             }
         }
 
-        public SubscriptionInfo getSubInfoRecord() {
-            return mSubInfoRecord;
+        private int getSlotId() {
+            return mSlotId;
         }
-
-        public void createEditDialog(SimPreference simPref) {
-            final Resources res = mContext.getResources();
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-
-            LayoutInflater inflater = (LayoutInflater)mContext
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            final View dialogLayout = inflater.inflate(
-                    R.layout.multi_sim_dialog, null);
-            builder.setView(dialogLayout);
-
-            EditText nameText = (EditText)dialogLayout.findViewById(R.id.sim_name);
-            nameText.setText(mSubInfoRecord.getDisplayName());
-
-            final Spinner tintSpinner = (Spinner) dialogLayout.findViewById(R.id.spinner);
-            SelectColorAdapter adapter = new SelectColorAdapter(getContext(),
-                     R.layout.settings_color_picker_item, mColorStrings);
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            tintSpinner.setAdapter(adapter);
-
-            for (int i = 0; i < mTintArr.length; i++) {
-                if (mTintArr[i] == mSubInfoRecord.getIconTint()) {
-                    tintSpinner.setSelection(i);
-                    mTintSelectorPos = i;
-                    break;
-                }
-            }
-
-            tintSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view,
-                    int pos, long id){
-                    tintSpinner.setSelection(pos);
-                    mTintSelectorPos = pos;
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-                }
-            });
-
-            TextView numberView = (TextView)dialogLayout.findViewById(R.id.number);
-            final String rawNumber = getPhoneNumber(mSubInfoRecord);
-            if (TextUtils.isEmpty(rawNumber)) {
-                numberView.setText(res.getString(com.android.internal.R.string.unknownName));
-            } else {
-                numberView.setText(PhoneNumberUtils.formatNumber(rawNumber));
-            }
-
-            final TelephonyManager tm =
-                        (TelephonyManager) mContext.getSystemService(
-                        Context.TELEPHONY_SERVICE);
-            String simCarrierName = tm.getSimOperatorNameForSubscription(mSubInfoRecord
-                        .getSubscriptionId());
-            TextView carrierView = (TextView)dialogLayout.findViewById(R.id.carrier);
-            carrierView.setText(!TextUtils.isEmpty(simCarrierName) ? simCarrierName :
-                    getContext().getString(com.android.internal.R.string.unknownName));
-
-            builder.setTitle(String.format(res.getString(R.string.sim_editor_title),
-                    (mSubInfoRecord.getSimSlotIndex() + 1)));
-
-            builder.setPositiveButton(R.string.okay, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int whichButton) {
-                    final EditText nameText = (EditText)dialogLayout.findViewById(R.id.sim_name);
-
-                    String displayName = nameText.getText().toString();
-                    int subId = mSubInfoRecord.getSubscriptionId();
-                    mSubInfoRecord.setDisplayName(displayName);
-                    mSubscriptionManager.setDisplayName(displayName, subId,
-                            SubscriptionManager.NAME_SOURCE_USER_INPUT);
-
-                    final int tintSelected = tintSpinner.getSelectedItemPosition();
-                    int subscriptionId = mSubInfoRecord.getSubscriptionId();
-                    int tint = mTintArr[tintSelected];
-                    mSubInfoRecord.setIconTint(tint);
-                    mSubscriptionManager.setIconTint(tint, subscriptionId);
-
-                    updateAllOptions();
-                    update();
-                }
-            });
-
-            builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int whichButton) {
-                    dialog.dismiss();
-                }
-            });
-
-            builder.create().show();
-        }
-
-        private class SelectColorAdapter extends ArrayAdapter<CharSequence> {
-            private Context mContext;
-            private int mResId;
-
-            public SelectColorAdapter(
-                Context context, int resource, String[] arr) {
-                super(context, resource, arr);
-                mContext = context;
-                mResId = resource;
-            }
-
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                LayoutInflater inflater = (LayoutInflater)
-                    mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-                View rowView;
-                final ViewHolder holder;
-                Resources res = mContext.getResources();
-                int iconSize = res.getDimensionPixelSize(R.dimen.color_swatch_size);
-                int strokeWidth = res.getDimensionPixelSize(R.dimen.color_swatch_stroke_width);
-
-                if (convertView == null) {
-                    // Cache views for faster scrolling
-                    rowView = inflater.inflate(mResId, null);
-                    holder = new ViewHolder();
-                    ShapeDrawable drawable = new ShapeDrawable(new OvalShape());
-                    drawable.setIntrinsicHeight(iconSize);
-                    drawable.setIntrinsicWidth(iconSize);
-                    drawable.getPaint().setStrokeWidth(strokeWidth);
-                    holder.label = (TextView) rowView.findViewById(R.id.color_text);
-                    holder.icon = (ImageView) rowView.findViewById(R.id.color_icon);
-                    holder.swatch = drawable;
-                    rowView.setTag(holder);
-                } else {
-                    rowView = convertView;
-                    holder = (ViewHolder) rowView.getTag();
-                }
-
-                holder.label.setText(getItem(position));
-                holder.swatch.getPaint().setColor(mTintArr[position]);
-                holder.swatch.getPaint().setStyle(Paint.Style.FILL_AND_STROKE);
-                holder.icon.setVisibility(View.VISIBLE);
-                holder.icon.setImageDrawable(holder.swatch);
-                return rowView;
-            }
-
-            @Override
-            public View getDropDownView(int position, View convertView, ViewGroup parent) {
-                View rowView = getView(position, convertView, parent);
-                final ViewHolder holder = (ViewHolder) rowView.getTag();
-
-                if (mTintSelectorPos == position) {
-                    holder.swatch.getPaint().setStyle(Paint.Style.FILL_AND_STROKE);
-                } else {
-                    holder.swatch.getPaint().setStyle(Paint.Style.STROKE);
-                }
-                holder.icon.setVisibility(View.VISIBLE);
-                return rowView;
-            }
-
-            private class ViewHolder {
-                TextView label;
-                ImageView icon;
-                ShapeDrawable swatch;
-            }
-        }
-
-
     }
 
     // Returns the line1Number. Line1number should always be read from TelephonyManager since it can

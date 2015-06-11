@@ -2477,6 +2477,11 @@
                 android:resource="@id/sim_settings" />
         </activity>
 
+        <activity android:name=".sim.SimPreferenceDialog"
+            android:theme="@android:style/Theme.Material.Light.Dialog.NoActionBar"
+            android:excludeFromRecents="true">
+        </activity>
+
         <activity android:name=".sim.SimDialogActivity"
                 android:theme="@android:style/Theme.Material.Light.Dialog.NoActionBar"
                 android:label="@string/sim_settings_title"
