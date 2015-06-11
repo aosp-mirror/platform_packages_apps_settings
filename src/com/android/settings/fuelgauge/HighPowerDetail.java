@@ -16,60 +16,85 @@
 
 package com.android.settings.fuelgauge;
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.Preference.OnPreferenceChangeListener;
-import android.preference.SwitchPreference;
+import android.util.Pair;
+import android.util.SparseBooleanArray;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
-import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
-import com.android.settings.applications.AppInfoWithHeader;
+import com.android.settings.applications.AppInfoBase;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 
-public class HighPowerDetail extends AppInfoWithHeader implements OnPreferenceChangeListener {
-
-    private static final String KEY_HIGH_POWER_SWITCH = "high_power_switch";
+public class HighPowerDetail extends DialogFragment implements OnClickListener {
 
     private final PowerWhitelistBackend mBackend = PowerWhitelistBackend.getInstance();
 
-    private SwitchPreference mUsageSwitch;
+    private String mPackageName;
+    private CharSequence mLabel;
+    private Adapter mAdapter;
+    private int mSelectedIndex;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addPreferencesFromResource(R.xml.high_power_details);
-        mUsageSwitch = (SwitchPreference) findPreference(KEY_HIGH_POWER_SWITCH);
-        mUsageSwitch.setOnPreferenceChangeListener(this);
-    }
-
-    @Override
-    protected boolean refreshUi() {
-        mUsageSwitch.setEnabled(!mBackend.isSysWhitelisted(mPackageName));
-        mUsageSwitch.setChecked(mBackend.isWhitelisted(mPackageName));
-        return true;
-    }
-
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (newValue == Boolean.TRUE) {
-            mBackend.addApp(mPackageName);
-        } else {
-            mBackend.removeApp(mPackageName);
+        mPackageName = getArguments().getString(AppInfoBase.ARG_PACKAGE_NAME);
+        PackageManager pm = getContext().getPackageManager();
+        try {
+            mLabel = pm.getApplicationInfo(mPackageName, 0).loadLabel(pm);
+        } catch (NameNotFoundException e) {
+            mLabel = mPackageName;
         }
-        return true;
+        mAdapter = new Adapter(getContext(), R.layout.radio_with_summary);
+        mAdapter.add(new Pair<String, String>(getString(R.string.ignore_optimizations_on),
+                getString(R.string.ignore_optimizations_on_desc)));
+        mAdapter.add(new Pair<String, String>(getString(R.string.ignore_optimizations_off),
+                getString(R.string.ignore_optimizations_off_desc)));
+        mSelectedIndex = mBackend.isWhitelisted(mPackageName) ? 0 : 1;
+        if (mBackend.isSysWhitelisted(mPackageName)) {
+            mAdapter.setEnabled(1, false);
+        }
     }
 
     @Override
-    protected AlertDialog createDialog(int id, int errorCode) {
-        return null;
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        AlertDialog.Builder b = new AlertDialog.Builder(getContext())
+                .setTitle(getString(R.string.ignore_optimizations_title, mLabel))
+                .setNegativeButton(R.string.cancel, null)
+                .setSingleChoiceItems(mAdapter, mSelectedIndex, this);
+        if (!mBackend.isSysWhitelisted(mPackageName)) {
+            b.setPositiveButton(R.string.done, this);
+        }
+        return b.create();
     }
 
     @Override
-    protected int getMetricsCategory() {
-        return MetricsLogger.FUELGAUGE_HIGH_POWER_DETAILS;
+    public void onClick(DialogInterface dialog, int which) {
+        if (which == DialogInterface.BUTTON_POSITIVE) {
+            boolean newValue = mSelectedIndex == 0;
+            boolean oldValue = mBackend.isWhitelisted(mPackageName);
+            if (newValue != oldValue) {
+                if (newValue) {
+                    mBackend.addApp(mPackageName);
+                } else {
+                    mBackend.removeApp(mPackageName);
+                }
+            }
+        } else {
+            mSelectedIndex = which;
+        }
     }
 
     public static CharSequence getSummary(Context context, AppEntry entry) {
@@ -81,4 +106,36 @@ public class HighPowerDetail extends AppInfoWithHeader implements OnPreferenceCh
                 ? R.string.high_power_on : R.string.high_power_off);
     }
 
+    public static void show(Activity activity, String packageName) {
+        HighPowerDetail fragment = new HighPowerDetail();
+        Bundle args = new Bundle();
+        args.putString(AppInfoBase.ARG_PACKAGE_NAME, packageName);
+        fragment.setArguments(args);
+        fragment.show(activity.getFragmentManager(), HighPowerDetail.class.getSimpleName());
+    }
+
+    private class Adapter extends ArrayAdapter<Pair<String, String>> {
+        private final SparseBooleanArray mEnabled = new SparseBooleanArray();
+
+        public Adapter(Context context, int resource) {
+            super(context, resource, android.R.id.title);
+        }
+
+        public void setEnabled(int index, boolean enabled) {
+            mEnabled.put(index, enabled);
+        }
+
+        public boolean isEnabled(int position) {
+            return mEnabled.get(position, true);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View view = super.getView(position, convertView, parent);
+            ((TextView) view.findViewById(android.R.id.title)).setText(getItem(position).first);
+            ((TextView) view.findViewById(android.R.id.summary)).setText(getItem(position).second);
+            view.setEnabled(isEnabled(position));
+            return view;
+        }
+    }
 }
