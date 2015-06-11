@@ -23,17 +23,13 @@
     android:layout_gravity="center_horizontal">
 
     <ImageView
-        android:layout_width="88dp"
-        android:layout_height="88dp"
-        android:layout_centerInParent="true"
-        android:src="@drawable/fingerprint_indicator" />
-
-    <ImageView
         android:id="@+id/fingerprint_animator"
         android:layout_width="88dp"
         android:layout_height="88dp"
         android:layout_centerInParent="true"
-        android:src="@drawable/enrollment_fingerprint_isolated_animation" />
+        android:background="@drawable/fp_illustration_enrollment"
+        android:backgroundTint="@color/fingerprint_indicator_background_resting"
+        android:src="@drawable/enrollment_fingerprint_isolated_animation"/>
 
     <ProgressBar
         android:id="@+id/fingerprint_progress_bar"

@@ -17,12 +17,15 @@
 package com.android.settings.fingerprint;
 
 import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.drawable.Animatable2;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.Drawable;
@@ -50,6 +53,12 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
     private static final int FINISH_DELAY = 250;
 
     /**
+     * If we don't see progress during this time, we show an error message to remind the user that
+     * he needs to lift the finger and touch again.
+     */
+    private static final int HINT_TIMEOUT_DURATION = 2500;
+
+    /**
      * How long the user needs to touch the icon until we show the dialog.
      */
     private static final long ICON_TOUCH_DURATION_UNTIL_DIALOG_SHOWN = 500;
@@ -67,10 +76,15 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
     private TextView mRepeatMessage;
     private TextView mErrorText;
     private Interpolator mFastOutSlowInInterpolator;
+    private Interpolator mLinearOutSlowInInterpolator;
+    private Interpolator mFastOutLinearInInterpolator;
     private int mIconTouchCount;
     private FingerprintEnrollSidecar mSidecar;
     private boolean mAnimationCancelled;
     private AnimatedVectorDrawable mIconAnimationDrawable;
+    private int mIndicatorBackgroundRestingColor;
+    private int mIndicatorBackgroundActivatedColor;
+    private boolean mRestoring;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +100,10 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
         mIconAnimationDrawable.registerAnimationCallback(mIconAnimationCallback);
         mFastOutSlowInInterpolator = AnimationUtils.loadInterpolator(
                 this, android.R.interpolator.fast_out_slow_in);
+        mLinearOutSlowInInterpolator = AnimationUtils.loadInterpolator(
+                this, android.R.interpolator.linear_out_slow_in);
+        mFastOutLinearInInterpolator = AnimationUtils.loadInterpolator(
+                this, android.R.interpolator.fast_out_linear_in);
         mFingerprintAnimator.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -104,6 +122,11 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
                 return true;
             }
         });
+        mIndicatorBackgroundRestingColor
+                = getColor(R.color.fingerprint_indicator_background_resting);
+        mIndicatorBackgroundActivatedColor
+                = getColor(R.color.fingerprint_indicator_background_activated);
+        mRestoring = savedInstanceState != null;
     }
 
     @Override
@@ -117,6 +140,9 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
         mSidecar.setListener(this);
         updateProgress(false /* animate */);
         updateDescription();
+        if (mRestoring) {
+            startIconAnimation();
+        }
     }
 
     @Override
@@ -158,6 +184,34 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
         mProgressAnim = anim;
     }
 
+    private void animateFlash() {
+        ValueAnimator anim = ValueAnimator.ofArgb(mIndicatorBackgroundRestingColor,
+                mIndicatorBackgroundActivatedColor);
+        final ValueAnimator.AnimatorUpdateListener listener =
+                new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                mFingerprintAnimator.setBackgroundTintList(ColorStateList.valueOf(
+                        (Integer) animation.getAnimatedValue()));
+            }
+        };
+        anim.addUpdateListener(listener);
+        anim.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                ValueAnimator anim = ValueAnimator.ofArgb(mIndicatorBackgroundActivatedColor,
+                        mIndicatorBackgroundRestingColor);
+                anim.addUpdateListener(listener);
+                anim.setDuration(300);
+                anim.setInterpolator(mLinearOutSlowInInterpolator);
+                anim.start();
+            }
+        });
+        anim.setInterpolator(mFastOutSlowInInterpolator);
+        anim.setDuration(300);
+        anim.start();
+    }
+
     private void launchFinish(byte[] token) {
         Intent intent = new Intent();
         intent.setClassName("com.android.settings", FingerprintEnrollFinish.class.getName());
@@ -187,7 +241,7 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
 
     @Override
     public void onEnrollmentError(CharSequence errString) {
-        mErrorText.setText(errString);
+        showError(errString);
         stopIconAnimation();
     }
 
@@ -195,7 +249,10 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
     public void onEnrollmentProgressChange(int steps, int remaining) {
         updateProgress(true /* animate */);
         updateDescription();
-        mErrorText.setText("");
+        clearError();
+        animateFlash();
+        mErrorText.removeCallbacks(mTouchAgainRunnable);
+        mErrorText.postDelayed(mTouchAgainRunnable, HINT_TIMEOUT_DURATION);
     }
 
     private void updateProgress(boolean animate) {
@@ -219,6 +276,44 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
     private void showIconTouchDialog() {
         mIconTouchCount = 0;
         new IconTouchDialog().show(getFragmentManager(), null /* tag */);
+    }
+
+    private void showError(CharSequence error) {
+        mErrorText.setText(error);
+        if (mErrorText.getVisibility() == View.INVISIBLE) {
+            mErrorText.setVisibility(View.VISIBLE);
+            mErrorText.setTranslationY(getResources().getDimensionPixelSize(
+                    R.dimen.fingerprint_error_text_appear_distance));
+            mErrorText.setAlpha(0f);
+            mErrorText.animate()
+                    .alpha(1f)
+                    .translationY(0f)
+                    .setDuration(200)
+                    .setInterpolator(mLinearOutSlowInInterpolator)
+                    .start();
+        } else {
+            mErrorText.animate().cancel();
+            mErrorText.setAlpha(1f);
+            mErrorText.setTranslationY(0f);
+        }
+    }
+
+    private void clearError() {
+        if (mErrorText.getVisibility() == View.VISIBLE) {
+            mErrorText.animate()
+                    .alpha(0f)
+                    .translationY(getResources().getDimensionPixelSize(
+                            R.dimen.fingerprint_error_text_disappear_distance))
+                    .setDuration(100)
+                    .setInterpolator(mFastOutLinearInInterpolator)
+                    .withEndAction(new Runnable() {
+                        @Override
+                        public void run() {
+                            mErrorText.setVisibility(View.INVISIBLE);
+                        }
+                    })
+                    .start();
+        }
     }
 
     private final Animator.AnimatorListener mProgressAnimationListener
@@ -271,6 +366,13 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
         @Override
         public void run() {
             showIconTouchDialog();
+        }
+    };
+
+    private final Runnable mTouchAgainRunnable = new Runnable() {
+        @Override
+        public void run() {
+            showError(getString(R.string.security_settings_fingerprint_enroll_lift_touch_again));
         }
     };
 
