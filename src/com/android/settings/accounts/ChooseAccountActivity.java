@@ -214,7 +214,8 @@ public class ChooseAccountActivity extends InstrumentedPreferenceActivity {
     /**
      * Gets an icon associated with a particular account type. If none found, return null.
      * @param accountType the type of account
-     * @return a drawable for the icon or null if one cannot be found.
+     * @return a drawable for the icon or a default icon returned by
+     * {@link PackageManager#getDefaultActivityIcon} if one cannot be found.
      */
     protected Drawable getDrawableForType(final String accountType) {
         Drawable icon = null;
@@ -225,14 +226,16 @@ public class ChooseAccountActivity extends InstrumentedPreferenceActivity {
                 icon = getPackageManager().getUserBadgedIcon(
                         authContext.getDrawable(desc.iconId), mUserHandle);
             } catch (PackageManager.NameNotFoundException e) {
-                // TODO: place holder icon for missing account icons?
                 Log.w(TAG, "No icon name for account type " + accountType);
             } catch (Resources.NotFoundException e) {
-                // TODO: place holder icon for missing account icons?
                 Log.w(TAG, "No icon resource for account type " + accountType);
             }
         }
-        return icon;
+        if (icon != null) {
+            return icon;
+        } else {
+            return getPackageManager().getDefaultActivityIcon();
+        }
     }
 
     /**
