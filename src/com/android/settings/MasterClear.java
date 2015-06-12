@@ -234,15 +234,18 @@ public class MasterClear extends InstrumentedFragment {
                                 authContext.getDrawable(desc.iconId), userHandle);
                     }
                 } catch (PackageManager.NameNotFoundException e) {
-                    Log.w(TAG, "No icon for account type " + desc.type);
+                    Log.w(TAG, "Bad package name for account type " + desc.type);
+                } catch (Resources.NotFoundException e) {
+                    Log.w(TAG, "Invalid icon id for account type " + desc.type, e);
+                }
+                if (icon == null) {
+                    icon = context.getPackageManager().getDefaultActivityIcon();
                 }
 
                 TextView child = (TextView)inflater.inflate(R.layout.master_clear_account,
                         contents, false);
                 child.setText(account.name);
-                if (icon != null) {
-                    child.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
-                }
+                child.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
                 contents.addView(child);
             }
         }
