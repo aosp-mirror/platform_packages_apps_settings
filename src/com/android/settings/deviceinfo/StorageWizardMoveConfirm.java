@@ -36,6 +36,10 @@ public class StorageWizardMoveConfirm extends StorageWizardBase {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (mVolume == null) {
+            finish();
+            return;
+        }
         setContentView(R.layout.storage_wizard_generic);
 
         try {
@@ -44,9 +48,6 @@ public class StorageWizardMoveConfirm extends StorageWizardBase {
         } catch (NameNotFoundException e) {
             throw new RuntimeException(e);
         }
-
-        Preconditions.checkNotNull(mVolume);
-        Preconditions.checkNotNull(mApp);
 
         // Sanity check that target volume is candidate
         Preconditions.checkState(
