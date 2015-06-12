@@ -17,6 +17,7 @@
 package com.android.settings.print;
 
 import android.app.LoaderManager.LoaderCallbacks;
+import android.content.ActivityNotFoundException;
 import android.content.AsyncTaskLoader;
 import android.content.ComponentName;
 import android.content.ContentResolver;
@@ -26,6 +27,7 @@ import android.content.Loader;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.database.ContentObserver;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -46,13 +48,12 @@ import android.provider.Settings;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -75,8 +76,8 @@ import java.util.List;
  * Fragment with the top level print settings.
  */
 public class PrintSettingsFragment extends SettingsPreferenceFragment
-        implements DialogCreatable, Indexable, OnItemSelectedListener {
-
+        implements DialogCreatable, Indexable, OnItemSelectedListener, OnClickListener {
+    public static final String TAG = "PrintSettingsFragment";
     private static final int LOADER_ID_PRINT_JOBS_LOADER = 1;
 
     private static final String PRINT_JOBS_CATEGORY = "print_jobs_category";
@@ -98,6 +99,8 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
 
     private static final String EXTRA_PRINT_SERVICE_COMPONENT_NAME =
             "EXTRA_PRINT_SERVICE_COMPONENT_NAME";
+
+    private static final int ORDER_LAST = 1000;
 
     private final PackageMonitor mSettingsPackageMonitor = new SettingsPackageMonitor();
 
@@ -122,6 +125,7 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
     private PrintJobsController mPrintJobsController;
     private UserAdapter mProfileSpinnerAdapter;
     private Spinner mSpinner;
+    private Button mAddNewServiceButton;
 
     @Override
     protected int getMetricsCategory() {
@@ -167,18 +171,6 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        String searchUri = Settings.Secure.getString(getContentResolver(),
-                Settings.Secure.PRINT_SERVICE_SEARCH_URI);
-        if (!TextUtils.isEmpty(searchUri)) {
-            MenuItem menuItem = menu.add(R.string.print_menu_item_add_service);
-            menuItem.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_NEVER);
-            menuItem.setIntent(new Intent(Intent.ACTION_VIEW, Uri.parse(searchUri)));
-        }
-    }
-
-    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ViewGroup contentRoot = (ViewGroup) getListView().getParent();
@@ -186,6 +178,15 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
                 R.layout.empty_print_state, contentRoot, false);
         TextView textView = (TextView) emptyView.findViewById(R.id.message);
         textView.setText(R.string.print_no_services_installed);
+
+        final Intent addNewServiceIntent = createAddNewServiceIntentOrNull();
+        if (addNewServiceIntent != null) {
+            mAddNewServiceButton = (Button) emptyView.findViewById(R.id.add_new_service);
+            mAddNewServiceButton.setOnClickListener(this);
+            // The empty is used elsewhere too so it's hidden by default.
+            mAddNewServiceButton.setVisibility(View.VISIBLE);
+        }
+
         contentRoot.addView(emptyView);
         getListView().setEmptyView(emptyView);
 
@@ -210,7 +211,9 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
         List<ComponentName> enabledServices = PrintSettingsUtils
                 .readEnabledPrintServices(getActivity());
 
-        List<ResolveInfo> installedServices = getActivity().getPackageManager()
+        final PackageManager pm = getActivity().getPackageManager();
+
+        List<ResolveInfo> installedServices = pm
                 .queryIntentServices(
                         new Intent(android.printservice.PrintService.SERVICE_INTERFACE),
                         PackageManager.GET_SERVICES | PackageManager.GET_META_DATA);
@@ -239,6 +242,11 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
                 preference.setSummary(getString(R.string.print_feature_state_on));
             } else {
                 preference.setSummary(getString(R.string.print_feature_state_off));
+            }
+
+            final Drawable drawable = installedService.loadIcon(pm);
+            if (drawable != null) {
+                preference.setIcon(drawable);
             }
 
             Bundle extras = preference.getExtras();
@@ -281,7 +289,35 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
 
         if (mPrintServicesCategory.getPreferenceCount() == 0) {
             getPreferenceScreen().removePreference(mPrintServicesCategory);
+        } else {
+            final Preference addNewServicePreference = newAddServicePreferenceOrNull();
+            if (addNewServicePreference != null) {
+                mPrintServicesCategory.addPreference(addNewServicePreference);
+            }
         }
+    }
+
+    private Preference newAddServicePreferenceOrNull() {
+        final Intent addNewServiceIntent = createAddNewServiceIntentOrNull();
+        if (addNewServiceIntent == null) {
+            return null;
+        }
+        Preference preference = new Preference(getContext());
+        preference.setTitle(R.string.print_menu_item_add_service);
+        preference.setIcon(R.drawable.ic_menu_add);
+        preference.setOrder(ORDER_LAST);
+        preference.setIntent(addNewServiceIntent);
+        preference.setPersistent(false);
+        return preference;
+    }
+
+    private Intent createAddNewServiceIntentOrNull() {
+        final String searchUri = Settings.Secure.getString(getContentResolver(),
+                Settings.Secure.PRINT_SERVICE_SEARCH_URI);
+        if (TextUtils.isEmpty(searchUri)) {
+            return null;
+        }
+        return new Intent(Intent.ACTION_VIEW, Uri.parse(searchUri));
     }
 
     private void startSubSettingsIfNeeded() {
@@ -314,6 +350,20 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
         // Nothing to do
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (mAddNewServiceButton == v) {
+            final Intent addNewServiceIntent = createAddNewServiceIntentOrNull();
+            if (addNewServiceIntent != null) { // check again just in case.
+                try {
+                    startActivity(addNewServiceIntent);
+                } catch (ActivityNotFoundException e) {
+                    Log.w(TAG, "Unable to start activity", e);
+                }
+            }
+        }
     }
 
     private class SettingsPackageMonitor extends PackageMonitor {
