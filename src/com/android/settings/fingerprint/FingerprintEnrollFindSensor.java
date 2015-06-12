@@ -73,6 +73,7 @@ public class FingerprintEnrollFindSensor extends FingerprintEnrollBase {
             }
         } else if (requestCode == ENROLLING) {
             if (resultCode == RESULT_FINISHED) {
+                setResult(RESULT_FINISHED);
                 finish();
             }
         } else {
