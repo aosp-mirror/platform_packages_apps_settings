@@ -633,14 +633,11 @@
                 android:value="true" />
         </activity>
 
-        <!-- TODO: This should also be forwarded, but we can't use cross-profile intent filters -->
         <receiver android:name=".inputmethod.InputMethodDialogReceiver"
                 android:enabled="true">
             <intent-filter>
                 <action android:name="android.settings.SHOW_INPUT_METHOD_PICKER" />
             </intent-filter>
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                android:value="true" />
         </receiver>
 
         <activity android:name="Settings$UserDictionarySettingsActivity"
