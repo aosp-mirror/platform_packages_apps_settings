@@ -73,6 +73,7 @@ import com.android.settings.accounts.AccountSyncSettings;
 import com.android.settings.applications.InstalledAppDetails;
 import com.android.settings.applications.ManageApplications;
 import com.android.settings.applications.ManageAssist;
+import com.android.settings.applications.ProcessStatsSummary;
 import com.android.settings.applications.ProcessStatsUi;
 import com.android.settings.applications.UsageAccessDetails;
 import com.android.settings.bluetooth.BluetoothSettings;
@@ -346,6 +347,7 @@ public class SettingsActivity extends Activity
             ZenModeExternalRuleSettings.class.getName(),
             ProcessStatsUi.class.getName(),
             PowerUsageDetail.class.getName(),
+            ProcessStatsSummary.class.getName(),
     };
 
 

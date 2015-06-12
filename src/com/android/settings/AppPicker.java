@@ -164,7 +164,6 @@ public class AppPicker extends ListActivity {
                 holder.summary.setText("");
             }
             holder.disabled.setVisibility(View.GONE);
-            holder.checkBox.setVisibility(View.GONE);
             return convertView;
         }
     }

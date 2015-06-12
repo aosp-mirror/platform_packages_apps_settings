@@ -19,38 +19,31 @@ package com.android.settings.fuelgauge;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.preference.Preference;
 import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.android.settings.R;
-import com.android.settings.TintablePreference;
+import com.android.settings.AppProgressPreference;
 import com.android.settings.Utils;
 
 /**
  * Custom preference for displaying power consumption as a bar and an icon on
  * the left for the subsystem/app type.
  */
-public class PowerGaugePreference extends TintablePreference {
+public class PowerGaugePreference extends AppProgressPreference {
     private BatteryEntry mInfo;
-    private int mProgress;
-    private CharSequence mProgressText;
     private final CharSequence mContentDescription;
 
     public PowerGaugePreference(Context context, Drawable icon, CharSequence contentDescription,
             BatteryEntry info) {
         super(context, null);
-        setLayoutResource(R.layout.preference_app_percentage);
         setIcon(icon != null ? icon : new ColorDrawable(0));
         mInfo = info;
         mContentDescription = contentDescription;
     }
 
     public void setPercent(double percentOfMax, double percentOfTotal) {
-        mProgress = (int) Math.ceil(percentOfMax);
-        mProgressText = Utils.formatPercentage((int) (percentOfTotal + 0.5));
-        notifyChanged();
+        setProgress((int) Math.ceil(percentOfMax));
+        setSummary(Utils.formatPercentage((int) (percentOfTotal + 0.5)));
     }
 
     BatteryEntry getInfo() {
@@ -60,12 +53,6 @@ public class PowerGaugePreference extends TintablePreference {
     @Override
     protected void onBindView(View view) {
         super.onBindView(view);
-
-        final ProgressBar progress = (ProgressBar) view.findViewById(android.R.id.progress);
-        progress.setProgress(mProgress);
-
-        final TextView text1 = (TextView) view.findViewById(android.R.id.text1);
-        text1.setText(mProgressText);
 
         if (mContentDescription != null) {
             final TextView titleView = (TextView) view.findViewById(android.R.id.title);
