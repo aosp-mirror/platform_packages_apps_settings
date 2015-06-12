@@ -49,6 +49,7 @@ public class FingerprintEnrollOnboard extends FingerprintEnrollBase {
         if (requestCode == CHOOSE_LOCK_GENERIC_REQUEST && resultCode == RESULT_FINISHED) {
             byte[] token = data.getByteArrayExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
+            setResult(RESULT_FINISHED);
             launchFindSensor(token);
         } else {
             super.onActivityResult(requestCode, resultCode, data);
