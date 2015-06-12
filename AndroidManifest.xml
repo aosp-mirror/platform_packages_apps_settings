@@ -1430,6 +1430,7 @@
         <activity android:name=".fingerprint.FingerprintEnrollFindSensor" android:exported="false"/>
         <activity android:name=".fingerprint.FingerprintEnrollEnrolling" android:exported="false"/>
         <activity android:name=".fingerprint.FingerprintEnrollFinish" android:exported="false"/>
+        <activity android:name=".fingerprint.FingerprintEnrollIntroduction" android:exported="false"/>
 
         <!-- Note this must not be exported since it returns the password in the intent -->
         <activity android:name="ConfirmLockPattern$InternalActivity"
