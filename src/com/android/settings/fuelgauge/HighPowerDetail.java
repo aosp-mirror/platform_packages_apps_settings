@@ -20,6 +20,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -39,10 +40,13 @@ import com.android.settingslib.applications.ApplicationsState.AppEntry;
 
 public class HighPowerDetail extends DialogFragment implements OnClickListener {
 
+    private static final String ARG_DEFAULT_ON = "default_on";
+
     private final PowerWhitelistBackend mBackend = PowerWhitelistBackend.getInstance();
 
     private String mPackageName;
     private CharSequence mLabel;
+    private boolean mDefaultOn;
     private Adapter mAdapter;
     private int mSelectedIndex;
 
@@ -57,12 +61,13 @@ public class HighPowerDetail extends DialogFragment implements OnClickListener {
         } catch (NameNotFoundException e) {
             mLabel = mPackageName;
         }
+        mDefaultOn = getArguments().getBoolean(ARG_DEFAULT_ON);
         mAdapter = new Adapter(getContext(), R.layout.radio_with_summary);
         mAdapter.add(new Pair<String, String>(getString(R.string.ignore_optimizations_on),
                 getString(R.string.ignore_optimizations_on_desc)));
         mAdapter.add(new Pair<String, String>(getString(R.string.ignore_optimizations_off),
                 getString(R.string.ignore_optimizations_off_desc)));
-        mSelectedIndex = mBackend.isWhitelisted(mPackageName) ? 0 : 1;
+        mSelectedIndex = mDefaultOn || mBackend.isWhitelisted(mPackageName) ? 0 : 1;
         if (mBackend.isSysWhitelisted(mPackageName)) {
             mAdapter.setEnabled(1, false);
         }
@@ -97,6 +102,15 @@ public class HighPowerDetail extends DialogFragment implements OnClickListener {
         }
     }
 
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        super.onDismiss(dialog);
+        Fragment target = getTargetFragment();
+        if (target != null) {
+            target.onActivityResult(getTargetRequestCode(), 0, null);
+        }
+    }
+
     public static CharSequence getSummary(Context context, AppEntry entry) {
         return getSummary(context, entry.info.packageName);
     }
@@ -106,12 +120,15 @@ public class HighPowerDetail extends DialogFragment implements OnClickListener {
                 ? R.string.high_power_on : R.string.high_power_off);
     }
 
-    public static void show(Activity activity, String packageName) {
+    public static void show(Fragment caller, String packageName, int requestCode,
+            boolean defaultToOn) {
         HighPowerDetail fragment = new HighPowerDetail();
         Bundle args = new Bundle();
         args.putString(AppInfoBase.ARG_PACKAGE_NAME, packageName);
+        args.putBoolean(ARG_DEFAULT_ON, defaultToOn);
         fragment.setArguments(args);
-        fragment.show(activity.getFragmentManager(), HighPowerDetail.class.getSimpleName());
+        fragment.setTargetFragment(caller, requestCode);
+        fragment.show(caller.getFragmentManager(), HighPowerDetail.class.getSimpleName());
     }
 
     private class Adapter extends ArrayAdapter<Pair<String, String>> {
