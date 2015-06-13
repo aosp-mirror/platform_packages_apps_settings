@@ -36,6 +36,11 @@ public class StorageWizardMigrateConfirm extends StorageWizardBase {
             mVolume = findFirstVolume(VolumeInfo.TYPE_PRIVATE);
         }
 
+        if (mVolume == null) {
+            finish();
+            return;
+        }
+
         final VolumeInfo sourceVol = getPackageManager().getPrimaryStorageCurrentVolume();
         final String sourceDescrip = mStorage.getBestVolumeDescription(sourceVol);
         final String targetDescrip = mStorage.getBestVolumeDescription(mVolume);

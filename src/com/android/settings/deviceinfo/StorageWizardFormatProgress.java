@@ -44,9 +44,11 @@ public class StorageWizardFormatProgress extends StorageWizardBase {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (mDisk == null) {
+            finish();
+            return;
+        }
         setContentView(R.layout.storage_wizard_progress);
-
-        Preconditions.checkNotNull(mDisk);
 
         mFormatPrivate = getIntent().getBooleanExtra(
                 StorageWizardFormatConfirm.EXTRA_FORMAT_PRIVATE, false);

@@ -32,9 +32,11 @@ public class StorageWizardFormatConfirm extends StorageWizardBase {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (mDisk == null) {
+            finish();
+            return;
+        }
         setContentView(R.layout.storage_wizard_generic);
-
-        Preconditions.checkNotNull(mDisk);
 
         mFormatPrivate = getIntent().getBooleanExtra(EXTRA_FORMAT_PRIVATE, false);
 

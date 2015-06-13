@@ -34,9 +34,11 @@ public class StorageWizardInit extends StorageWizardBase {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (mDisk == null) {
+            finish();
+            return;
+        }
         setContentView(R.layout.storage_wizard_init);
-
-        Preconditions.checkNotNull(mDisk);
 
         setHeaderText(R.string.storage_wizard_init_title, mDisk.getDescription());
 
