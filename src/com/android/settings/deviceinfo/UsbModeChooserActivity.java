@@ -95,7 +95,7 @@ public class UsbModeChooserActivity extends Activity {
     private void setCurrentFunction(int which) {
         switch (which) {
             case 0:
-                mUsbManager.setCurrentFunction(UsbManager.USB_FUNCTION_MTP);
+                mUsbManager.setCurrentFunction(null);
                 mUsbManager.setUsbDataUnlocked(false);
                 break;
             case 1:
