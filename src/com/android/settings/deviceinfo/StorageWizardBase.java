@@ -20,8 +20,10 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.storage.DiskInfo;
+import android.os.storage.StorageEventListener;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
+import android.os.storage.VolumeRecord;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
@@ -63,6 +65,10 @@ public abstract class StorageWizardBase extends Activity implements NavigationBa
         }
 
         setTheme(R.style.SuwThemeMaterial_Light);
+
+        if (mDisk != null) {
+            mStorage.registerListener(mStorageListener);
+        }
     }
 
     @Override
@@ -80,6 +86,12 @@ public abstract class StorageWizardBase extends Activity implements NavigationBa
 
         getNavigationBar().setNavigationBarListener(this);
         getBackButton().setVisibility(View.GONE);
+    }
+
+    @Override
+    protected void onDestroy() {
+        mStorage.unregisterListener(mStorageListener);
+        super.onDestroy();
     }
 
     protected NavigationBar getNavigationBar() {
@@ -142,4 +154,14 @@ public abstract class StorageWizardBase extends Activity implements NavigationBa
         }
         return null;
     }
+
+    private final StorageEventListener mStorageListener = new StorageEventListener() {
+        @Override
+        public void onDiskDestroyed(DiskInfo disk) {
+            // We know mDisk != null.
+            if (mDisk.id.equals(disk.id)) {
+                finish();
+            }
+        }
+    };
 }
