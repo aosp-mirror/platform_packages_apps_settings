@@ -149,18 +149,15 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private static final String OVERLAY_DISPLAY_DEVICES_KEY = "overlay_display_devices";
     private static final String ENABLE_MULTI_WINDOW_KEY = "enable_multi_window";
     private static final String DEBUG_DEBUGGING_CATEGORY_KEY = "debug_debugging_category";
-    private static final String DEBUG_APPLICATIONS_CATEGORY_KEY = "debug_applications_category";
     private static final String SELECT_LOGD_SIZE_KEY = "select_logd_size";
     private static final String SELECT_LOGD_SIZE_PROPERTY = "persist.logd.size";
     private static final String SELECT_LOGD_DEFAULT_SIZE_PROPERTY = "ro.logd.size";
 
-    private static final String DEBUG_NETWORKING_CATEGORY_KEY = "debug_networking_category";
     private static final String WIFI_DISPLAY_CERTIFICATION_KEY = "wifi_display_certification";
     private static final String WIFI_VERBOSE_LOGGING_KEY = "wifi_verbose_logging";
     private static final String WIFI_AGGRESSIVE_HANDOVER_KEY = "wifi_aggressive_handover";
     private static final String WIFI_ALLOW_SCAN_WITH_TRAFFIC_KEY = "wifi_allow_scan_with_traffic";
     private static final String USB_CONFIGURATION_KEY = "select_usb_configuration";
-    private static final String SELECT_USB_CONFIGURATION_PROPERTY = "sys.usb.config";
     private static final String WIFI_LEGACY_DHCP_CLIENT_KEY = "legacy_dhcp_client";
     private static final String MOBILE_DATA_ALWAYS_ON = "mobile_data_always_on";
 
@@ -1336,31 +1333,19 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
 
     private void updateUsbConfigurationValues() {
         if (mUsbConfiguration != null) {
-            String currentValue = SystemProperties.get(SELECT_USB_CONFIGURATION_PROPERTY);
-
-            // Ignore adb interface. The USB Manager adds or removes adb automatically
-            // depending on if USB debugging is enabled.
-            int adbIndex = currentValue.indexOf(",adb");
-            if (adbIndex > 0) {
-                currentValue = currentValue.substring(0, adbIndex);
-            }
+            UsbManager manager = (UsbManager) getSystemService(Context.USB_SERVICE);
 
             String[] values = getResources().getStringArray(R.array.usb_configuration_values);
             String[] titles = getResources().getStringArray(R.array.usb_configuration_titles);
-            int index = 1; // punt to second entry if not found
+            int index = 0;
             for (int i = 0; i < titles.length; i++) {
-                if (currentValue.equals(values[i])) {
+                if (manager.isFunctionEnabled(values[i])) {
                     index = i;
                     break;
                 }
             }
-            if (index >= 0) {
-                mUsbConfiguration.setValue(values[index]);
-                mUsbConfiguration.setSummary(titles[index]);
-            } else {
-                mUsbConfiguration.setValue("");
-                mUsbConfiguration.setSummary("");
-            }
+            mUsbConfiguration.setValue(values[index]);
+            mUsbConfiguration.setSummary(titles[index]);
             mUsbConfiguration.setOnPreferenceChangeListener(this);
         }
     }
