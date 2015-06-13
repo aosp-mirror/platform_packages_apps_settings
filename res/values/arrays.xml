@@ -1329,6 +1329,7 @@
     <!-- USB configuration names for Developer Settings.
          This can be overridden by devices with additional USB configurations. -->
     <string-array name="usb_configuration_titles">
+        <item>@string/usb_use_charging_only</item>
         <item>MTP (Media Transfer Protocol)</item>
         <item>PTP (Picture Transfer Protocol)</item>
         <item>RNDIS (USB Ethernet)</item>
@@ -1341,6 +1342,8 @@
          This can be overridden by devices with additional USB configurations.
          Do not translate. -->
     <string-array name="usb_configuration_values" translatable="false">
+        <!-- Do not translate. -->
+        <item>none</item>
         <!-- Do not translate. -->
         <item>mtp</item>
         <!-- Do not translate. -->
