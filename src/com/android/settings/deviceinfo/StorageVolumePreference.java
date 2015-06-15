@@ -50,9 +50,12 @@ public class StorageVolumePreference extends Preference {
         if (volume.isMountedReadable()) {
             // TODO: move statfs() to background thread
             final File path = volume.getPath();
-            final String free = Formatter.formatFileSize(context, path.getFreeSpace());
+            final long usedBytes = path.getTotalSpace() - path.getFreeSpace();
+            final String used = Formatter.formatFileSize(context, usedBytes);
             final String total = Formatter.formatFileSize(context, path.getTotalSpace());
-            setSummary(context.getString(R.string.storage_volume_summary, free, total));
+            setSummary(context.getString(R.string.storage_volume_summary, used, total));
+        } else {
+            setSummary(volume.getStateDescription());
         }
 
         // TODO: better icons

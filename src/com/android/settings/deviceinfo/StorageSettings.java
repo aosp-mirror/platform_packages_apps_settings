@@ -16,20 +16,26 @@
 
 package com.android.settings.deviceinfo;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.app.Fragment;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.UserManager;
+import android.os.storage.DiskInfo;
 import android.os.storage.StorageEventListener;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
+import android.os.storage.VolumeRecord;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
+import android.text.TextUtils;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.android.internal.logging.MetricsLogger;
@@ -50,8 +56,10 @@ import java.util.List;
 public class StorageSettings extends SettingsPreferenceFragment implements Indexable {
     static final String TAG = "StorageSettings";
 
+    private static final String TAG_VOLUME_UNMOUNTED = "volume_unmounted";
+    private static final String TAG_DISK_INIT = "disk_init";
+
     // TODO: badging to indicate devices running low on storage
-    // TODO: show currently ejected private volumes
 
     private UserManager mUserManager;
     private StorageManager mStorageManager;
@@ -127,6 +135,33 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
             }
         }
 
+        // Show missing private volumes
+        final List<VolumeRecord> recs = mStorageManager.getVolumeRecords();
+        for (VolumeRecord rec : recs) {
+            if (rec.getType() == VolumeInfo.TYPE_PRIVATE
+                    && mStorageManager.findVolumeByUuid(rec.getFsUuid()) == null) {
+                final Preference pref = new Preference(context);
+                pref.setKey(rec.getFsUuid());
+                pref.setTitle(rec.getNickname());
+                pref.setSummary(com.android.internal.R.string.ext_media_status_missing);
+                pref.setIcon(R.drawable.ic_settings_storage);
+                mInternalCategory.addPreference(pref);
+            }
+        }
+
+        // Show unsupported disks to give a chance to init
+        final List<DiskInfo> disks = mStorageManager.getDisks();
+        for (DiskInfo disk : disks) {
+            if (disk.volumeCount == 0 && disk.size > 0) {
+                final Preference pref = new Preference(context);
+                pref.setKey(disk.getId());
+                pref.setTitle(disk.getDescription());
+                pref.setSummary(com.android.internal.R.string.ext_media_status_unsupported);
+                pref.setIcon(R.drawable.ic_sim_sd);
+                mExternalCategory.addPreference(pref);
+            }
+        }
+
         if (mInternalCategory.getPreferenceCount() > 0) {
             getPreferenceScreen().addPreference(mInternalCategory);
         }
@@ -150,29 +185,51 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference pref) {
-        final String volId = pref.getKey();
-        final VolumeInfo vol = mStorageManager.findVolumeById(volId);
-        if (vol == null) {
-            return false;
+        final String key = pref.getKey();
+        if (pref instanceof StorageVolumePreference) {
+            // Picked a normal volume
+            final VolumeInfo vol = mStorageManager.findVolumeById(key);
 
-        } else if (vol.getType() == VolumeInfo.TYPE_PRIVATE) {
-            final Bundle args = new Bundle();
-            args.putString(VolumeInfo.EXTRA_VOLUME_ID, volId);
-            startFragment(this, PrivateVolumeSettings.class.getCanonicalName(),
-                    -1, 0, args);
-            return true;
-
-        } else if (vol.getType() == VolumeInfo.TYPE_PUBLIC) {
-            if (vol.isMountedReadable()) {
-                startActivity(vol.buildBrowseIntent());
+            if (vol.getState() == VolumeInfo.STATE_UNMOUNTED) {
+                VolumeUnmountedFragment.show(this, vol.getId());
                 return true;
-            } else {
-                final Bundle args = new Bundle();
-                args.putString(VolumeInfo.EXTRA_VOLUME_ID, volId);
-                startFragment(this, PublicVolumeSettings.class.getCanonicalName(),
-                        -1, 0, args);
+            } else if (vol.getState() == VolumeInfo.STATE_UNMOUNTABLE) {
+                DiskInitFragment.show(this, R.string.storage_dialog_unmountable, vol.getDiskId());
                 return true;
             }
+
+            if (vol.getType() == VolumeInfo.TYPE_PRIVATE) {
+                final Bundle args = new Bundle();
+                args.putString(VolumeInfo.EXTRA_VOLUME_ID, vol.getId());
+                startFragment(this, PrivateVolumeSettings.class.getCanonicalName(),
+                        -1, 0, args);
+                return true;
+
+            } else if (vol.getType() == VolumeInfo.TYPE_PUBLIC) {
+                if (vol.isMountedReadable()) {
+                    startActivity(vol.buildBrowseIntent());
+                    return true;
+                } else {
+                    final Bundle args = new Bundle();
+                    args.putString(VolumeInfo.EXTRA_VOLUME_ID, vol.getId());
+                    startFragment(this, PublicVolumeSettings.class.getCanonicalName(),
+                            -1, 0, args);
+                    return true;
+                }
+            }
+
+        } else if (key.startsWith("disk:")) {
+            // Picked an unsupported disk
+            DiskInitFragment.show(this, R.string.storage_dialog_unsupported, key);
+            return true;
+
+        } else {
+            // Picked a missing private volume
+            final Bundle args = new Bundle();
+            args.putString(VolumeRecord.EXTRA_FS_UUID, key);
+            startFragment(this, PrivateVolumeForget.class.getCanonicalName(),
+                    R.string.storage_menu_forget, 0, args);
+            return true;
         }
 
         return false;
@@ -247,6 +304,81 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
                 Toast.makeText(mContext, mContext.getString(R.string.storage_unmount_failure,
                         mDescription), Toast.LENGTH_SHORT).show();
             }
+        }
+    }
+
+    private static class VolumeUnmountedFragment extends DialogFragment {
+        public static void show(Fragment parent, String volumeId) {
+            final Bundle args = new Bundle();
+            args.putString(VolumeInfo.EXTRA_VOLUME_ID, volumeId);
+
+            final VolumeUnmountedFragment dialog = new VolumeUnmountedFragment();
+            dialog.setArguments(args);
+            dialog.setTargetFragment(parent, 0);
+            dialog.show(parent.getFragmentManager(), TAG_VOLUME_UNMOUNTED);
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            final Context context = getActivity();
+            final StorageManager sm = context.getSystemService(StorageManager.class);
+
+            final String volumeId = getArguments().getString(VolumeInfo.EXTRA_VOLUME_ID);
+            final VolumeInfo vol = sm.findVolumeById(volumeId);
+
+            final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setMessage(TextUtils.expandTemplate(
+                    getText(R.string.storage_dialog_unmounted), vol.getDisk().getDescription()));
+
+            builder.setPositiveButton(R.string.storage_menu_mount,
+                    new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    new MountTask(context, vol).execute();
+                }
+            });
+            builder.setNegativeButton(R.string.cancel, null);
+
+            return builder.create();
+        }
+    }
+
+    private static class DiskInitFragment extends DialogFragment {
+        public static void show(Fragment parent, int resId, String diskId) {
+            final Bundle args = new Bundle();
+            args.putInt(Intent.EXTRA_TEXT, resId);
+            args.putString(DiskInfo.EXTRA_DISK_ID, diskId);
+
+            final DiskInitFragment dialog = new DiskInitFragment();
+            dialog.setArguments(args);
+            dialog.setTargetFragment(parent, 0);
+            dialog.show(parent.getFragmentManager(), TAG_DISK_INIT);
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            final Context context = getActivity();
+            final StorageManager sm = context.getSystemService(StorageManager.class);
+
+            final int resId = getArguments().getInt(Intent.EXTRA_TEXT);
+            final String diskId = getArguments().getString(DiskInfo.EXTRA_DISK_ID);
+            final DiskInfo disk = sm.findDiskById(diskId);
+
+            final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setMessage(TextUtils.expandTemplate(getText(resId), disk.getDescription()));
+
+            builder.setPositiveButton(R.string.storage_menu_set_up,
+                    new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    final Intent intent = new Intent(context, StorageWizardInit.class);
+                    intent.putExtra(DiskInfo.EXTRA_DISK_ID, diskId);
+                    startActivity(intent);
+                }
+            });
+            builder.setNegativeButton(R.string.cancel, null);
+
+            return builder.create();
         }
     }
 
