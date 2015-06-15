@@ -382,7 +382,7 @@ public class WifiConfigController implements TextWatcher,
             config.hiddenSSID = true;
         } else if (!mAccessPoint.isSaved()) {
             config.SSID = AccessPoint.convertToQuotedString(
-                    mAccessPoint.getSsid());
+                    mAccessPoint.getSsidStr());
         } else {
             config.networkId = mAccessPoint.getConfig().networkId;
         }
