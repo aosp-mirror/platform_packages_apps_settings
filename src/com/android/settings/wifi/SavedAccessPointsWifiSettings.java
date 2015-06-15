@@ -216,7 +216,7 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
                 final int accessPointsSize = accessPoints.size();
                 for (int i = 0; i < accessPointsSize; ++i){
                     data = new SearchIndexableRaw(context);
-                    data.title = accessPoints.get(i).getSsid();
+                    data.title = accessPoints.get(i).getSsidStr();
                     data.screenTitle = title;
                     data.enabled = enabled;
                     result.add(data);
