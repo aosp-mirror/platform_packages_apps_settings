@@ -1900,16 +1900,6 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name="BatteryInfo" android:label="@string/battery_info_label"
-                  android:taskAffinity="com.android.settings"
-                  android:parentActivityName="Settings">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEVELOPMENT_PREFERENCE" />
-                <category android:name="android.intent.category.VOICE_LAUNCH" />
-            </intent-filter>
-        </activity>
-
         <activity android:name="Display" android:label="@string/display_label"
                 android:configChanges="fontScale"
                 android:taskAffinity="com.android.settings"
