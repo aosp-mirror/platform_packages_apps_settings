@@ -16,6 +16,8 @@
 
 package com.android.settings.deviceinfo;
 
+import static com.android.settings.deviceinfo.StorageSettings.TAG;
+
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -29,6 +31,7 @@ import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.provider.DocumentsContract;
 import android.text.format.Formatter;
+import android.util.Log;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.util.Preconditions;
@@ -61,8 +64,8 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
 
     private Preference mMount;
     private Preference mUnmount;
-    private Preference mFormat;
-    private Preference mFormatInternal;
+    private Preference mFormatPublic;
+    private Preference mFormatPrivate;
 
     private long mTotalSize;
     private long mAvailSize;
@@ -106,8 +109,8 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
 
         mMount = buildAction(R.string.storage_menu_mount);
         mUnmount = buildAction(R.string.storage_menu_unmount);
-        mFormat = buildAction(R.string.storage_menu_format);
-        mFormatInternal = buildAction(R.string.storage_menu_format_private);
+        mFormatPublic = buildAction(R.string.storage_menu_format);
+        mFormatPrivate = buildAction(R.string.storage_menu_format_private);
     }
 
     public void update() {
@@ -117,6 +120,12 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
         final PreferenceScreen screen = getPreferenceScreen();
 
         screen.removeAll();
+
+        if (!mVolume.isMountedReadable()) {
+            Log.d(TAG, "Leaving details fragment due to state " + mVolume.getState());
+            finish();
+            return;
+        }
 
         if (mVolume.isMountedReadable()) {
             screen.addPreference(mGraph);
@@ -142,9 +151,9 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
         if (mVolume.isMountedReadable()) {
             screen.addPreference(mUnmount);
         }
-        screen.addPreference(mFormat);
+        screen.addPreference(mFormatPublic);
         if (mDisk.isAdoptable()) {
-            screen.addPreference(mFormatInternal);
+            screen.addPreference(mFormatPrivate);
         }
     }
 
@@ -196,12 +205,12 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
             new MountTask(context, mVolume).execute();
         } else if (pref == mUnmount) {
             new UnmountTask(context, mVolume).execute();
-        } else if (pref == mFormat) {
+        } else if (pref == mFormatPublic) {
             final Intent intent = new Intent(context, StorageWizardFormatConfirm.class);
             intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
             intent.putExtra(StorageWizardFormatConfirm.EXTRA_FORMAT_PRIVATE, false);
             startActivity(intent);
-        } else if (pref == mFormatInternal) {
+        } else if (pref == mFormatPrivate) {
             final Intent intent = new Intent(context, StorageWizardFormatConfirm.class);
             intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
             intent.putExtra(StorageWizardFormatConfirm.EXTRA_FORMAT_PRIVATE, true);

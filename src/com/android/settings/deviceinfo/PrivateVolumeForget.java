@@ -16,6 +16,12 @@
 
 package com.android.settings.deviceinfo;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.app.Fragment;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeRecord;
@@ -32,6 +38,8 @@ import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 
 public class PrivateVolumeForget extends InstrumentedFragment {
+    private static final String TAG_FORGET_CONFIRM = "forget_confirm";
+
     private VolumeRecord mRecord;
 
     @Override
@@ -60,9 +68,46 @@ public class PrivateVolumeForget extends InstrumentedFragment {
     private final OnClickListener mConfirmListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
-            final StorageManager storage = getActivity().getSystemService(StorageManager.class);
-            storage.forgetVolume(mRecord.getFsUuid());
-            getActivity().finish();
+            ForgetConfirmFragment.show(PrivateVolumeForget.this, mRecord.getFsUuid());
         }
     };
+
+    private static class ForgetConfirmFragment extends DialogFragment {
+        public static void show(Fragment parent, String fsUuid) {
+            final Bundle args = new Bundle();
+            args.putString(VolumeRecord.EXTRA_FS_UUID, fsUuid);
+
+            final ForgetConfirmFragment dialog = new ForgetConfirmFragment();
+            dialog.setArguments(args);
+            dialog.setTargetFragment(parent, 0);
+            dialog.show(parent.getFragmentManager(), TAG_FORGET_CONFIRM);
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            final Context context = getActivity();
+            final StorageManager storage = context.getSystemService(StorageManager.class);
+
+            final String fsUuid = getArguments().getString(VolumeRecord.EXTRA_FS_UUID);
+            final VolumeRecord record = storage.findRecordByUuid(fsUuid);
+
+            final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle(TextUtils.expandTemplate(
+                    getText(R.string.storage_internal_forget_confirm_title), record.getNickname()));
+            builder.setMessage(TextUtils.expandTemplate(
+                    getText(R.string.storage_internal_forget_confirm), record.getNickname()));
+
+            builder.setPositiveButton(R.string.storage_menu_forget,
+                    new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    storage.forgetVolume(fsUuid);
+                    getActivity().finish();
+                }
+            });
+            builder.setNegativeButton(R.string.cancel, null);
+
+            return builder.create();
+        }
+    }
 }
