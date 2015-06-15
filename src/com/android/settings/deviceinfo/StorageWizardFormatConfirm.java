@@ -20,7 +20,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.storage.DiskInfo;
 
-import com.android.internal.util.Preconditions;
 import com.android.settings.R;
 
 public class StorageWizardFormatConfirm extends StorageWizardBase {

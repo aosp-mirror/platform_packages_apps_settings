@@ -33,7 +33,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.android.internal.util.Preconditions;
 import com.android.settings.R;
 
 public class StorageWizardFormatProgress extends StorageWizardBase {

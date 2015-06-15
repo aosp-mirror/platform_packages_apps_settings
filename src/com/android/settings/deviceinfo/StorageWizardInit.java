@@ -24,7 +24,6 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.RadioButton;
 
-import com.android.internal.util.Preconditions;
 import com.android.settings.R;
 
 public class StorageWizardInit extends StorageWizardBase {
@@ -56,6 +55,13 @@ public class StorageWizardInit extends StorageWizardBase {
                 mRadioExternal.getCompoundPaddingRight(), 0);
 
         getNextButton().setEnabled(false);
+
+        if (!mDisk.isAdoptable()) {
+            // If not adoptable, we only have one choice
+            mRadioExternal.setChecked(true);
+            onNavigateNext();
+            finish();
+        }
     }
 
     private final OnCheckedChangeListener mRadioListener = new OnCheckedChangeListener() {
