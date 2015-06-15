@@ -21,6 +21,8 @@
     <string name="create" msgid="3578857613172647409">"Vytvoriť"</string>
     <string name="allow" msgid="3349662621170855910">"Povoliť"</string>
     <string name="deny" msgid="6947806159746484865">"Odmietnuť"</string>
+    <string name="dlg_close" msgid="7471087791340790015">"Zavrieť"</string>
+    <string name="dlg_switch" msgid="6243971420240639064">"Prepnúť"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Neznáme"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
       <item quantity="few">Ešte <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> krok a bude z vás vývojár.</item>
@@ -333,11 +335,9 @@
     <string name="user_info_settings_title" msgid="1195015434996724736">"Inf. o používateľovi"</string>
     <string name="show_profile_info_on_lockscreen_label" msgid="2741208907263877990">"Zobraziť inform. o profile na uzamknutej obrazovke"</string>
     <string name="profile_info_settings_title" msgid="3518603215935346604">"Informácie o profile"</string>
-    <!-- no translation found for Accounts_settings_title (1592309650872767387) -->
-    <skip />
+    <string name="Accounts_settings_title" msgid="1592309650872767387">"Synchronizácia účtu"</string>
     <string name="location_settings_title" msgid="1369675479310751735">"Poloha"</string>
-    <!-- no translation found for account_settings_title (574608087657397787) -->
-    <skip />
+    <string name="account_settings_title" msgid="574608087657397787">"Synchronizácia účtu"</string>
     <string name="security_settings_title" msgid="7945465324818485460">"Zabezpečenie"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Moja poloha, odomknutie obrazovky, zámok SIM, zámok ukladacieho priestoru poverení"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Nastavenie funkcie Moje poloha, odomknutie obrazovky a zamknutie úložiska poverení"</string>
@@ -357,6 +357,12 @@
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"Na to, aby ste mohli používať odtlačok prsta na odomknutie obrazovky alebo potvrdenie nákupov, musíte:"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"Nastavte záložnú zámku obrazovky"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_2" msgid="4158160658182631304">"pridať odtlačok prsta."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Odomknúť odtlačkom"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="5061093614328964700">"Ak chcete odomknúť telefón, autorizovať nákupy alebo sa prihlásiť do aplikácií, stačí sa dotknúť senzora odtlačkov prstov. Tieto operácie budú môcť vykonávať všetky odtlačky pridané do telefónu, takže dávajte pozor, koho odtlačky pridáte."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="7173290350577831813">"Poznámka: Odtlačok môže byť menej bezpečný ako silný bezpečnostný vzor alebo kód PIN."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_risk_link_text" msgid="9129531466157620977">"Ďalšie informácie"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Zrušiť"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Pokračovať"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="5877265753699187149">"Nájdenie snímača"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="1959655161889313661">"Nájdite snímač odtlačkov prstov na zadnej strane telefónu."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="2058830032070449160">"Ilustrácia zariadenia a umiestnenia senzoru odtlačku prsta"</string>
@@ -377,6 +383,7 @@
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"Ďalej"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Okrem odomknutia svojho telefónu môžete pomocou odtlačku autorizovať nákupy a prístup aplikácií. "<annotation id="url">"Ďalšie informácie"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4504501581228672208">"Zámka obrazovky bola deaktivovaná. Stále však môžete pomocou svojho odtlačku autorizovať nákupy a prístup aplikácií. "<annotation id="url">"Ďalšie informácie"</annotation></string>
+    <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Nadvihnite prst, potom sa opäť dotknite senzora"</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Šifrovanie"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"Šifrovať tablet"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"Šifrovať telefón"</string>
@@ -512,14 +519,14 @@
     <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"Zadajte párovací kód a potom stlačte tlačidlo Return alebo Enter"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"Kód PIN obsahuje písmená alebo symboly"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"Obvykle 0000 alebo 1234"</string>
-    <!-- no translation found for bluetooth_pin_values_hint_16_digits (7849359451584101077) -->
-    <skip />
+    <string name="bluetooth_pin_values_hint_16_digits" msgid="7849359451584101077">"Musí obsahovať 16 číslic"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="4637977124526813470">"Tento kód PIN bude možno treba zadať aj na druhom zariadení."</string>
     <string name="bluetooth_enter_passkey_other_device" msgid="2798719004030279602">"Tento prístupový kľúč možno bude potrebné zadať aj v druhom zariadení."</string>
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"Párovanie so zariadením:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Uistite sa, že zobrazuje tento prístupový kľúč:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"Zo zariadenia:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Párovať s týmto zariadením?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"Ak chcete svoje zariadenie spárovať so zariadením <xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>, zadajte na ňom kód <xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g> a stlačte kláves Enter."</string>
     <string name="bluetooth_pairing_will_share_phonebook" msgid="4982239145676394429">"Párovaním udelíte zariadeniam po pripojení prístup k svojim kontaktom a histórii hovorov."</string>
+    <string name="bluetooth_pairing_shares_phonebook" msgid="1655930908614072491">"Udeľovať zariadeniam po pripojení prístup ku kontaktom a histórii hovorov"</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_connecting_error_message" msgid="1397388344342081090">"Nepodarilo sa pripojiť k zariadeniu <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"Vyhľadať zariadenia"</string>
@@ -584,8 +591,7 @@
     <string name="wifi_band_24ghz" msgid="852929254171856911">"2,4 GHz"</string>
     <string name="wifi_band_5ghz" msgid="6433822023268515117">"5 GHz"</string>
     <string name="link_speed" msgid="8896664974117585555">"%1$d Mbps"</string>
-    <!-- no translation found for wifi_alert_lockdown_by_device_owner (2537146774322347104) -->
-    <skip />
+    <string name="wifi_alert_lockdown_by_device_owner" msgid="8459738223049002970">"Aplikácia <xliff:g id="APP_NAME">%1$s</xliff:g> spravuje vaše zariadenie a nepovoľuje upravovanie alebo odstránenie tejto siete Wi-Fi. Ďalšie informácie získate od svojho správcu."</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Povoliť výmenu údajov, ak sa tablet dotýka iného zariadenia"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Povoliť výmenu údajov, ak sa telefón dotýka iného zariadenia"</string>
@@ -627,6 +633,7 @@
     <string name="wifi_suspend_optimizations" msgid="1220174276403689487">"Optimalizácia Wi-Fi"</string>
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"Minimalizovať spotrebu batérie pri zapnutej sieti Wi-Fi"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"Obmedz. využitie batérie sieťou Wi-Fi"</string>
+    <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"Prepínať na mobilné pripojenie, keď sieť Wi‑Fi nebude mať pripojenie k internetu"</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"Pridať sieť"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"Siete Wi-Fi"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"Tlačidlo WPS"</string>
@@ -693,7 +700,7 @@
     <string name="wifi_hotspot_title" msgid="7726205804813286950">"Chcete sa prihlásiť, aby ste sa mohli pripojiť?"</string>
     <string name="wifi_hotspot_message" msgid="3673833421453455747">"<xliff:g id="APP_NAME">%1$s</xliff:g> vyžaduje, aby ste sa pred pripoj. k sieti prihlásili online"</string>
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"PRIPOJIŤ"</string>
-    <string name="no_internet_access_text" msgid="1509171132175355674">"Táto sieť nemá prístup k internetu. Chcete ju napriek tomu použiť?"</string>
+    <string name="no_internet_access_text" msgid="7133561752896706392">"Táto sieť nemá prístup k internetu. Chcete k nej zostať pripojený/-á?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"Nabudúce sa na túto sieť nepýtať"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"Pripojiť"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Nepodarilo sa pripojiť k sieti"</string>
@@ -915,8 +922,7 @@
     <string name="device_status_summary" product="tablet" msgid="3292717754497039686">"Stav batérie, siete a ďalšie informácie"</string>
     <string name="device_status_summary" product="default" msgid="2599162787451519618">"Telefónne číslo, signál atď."</string>
     <string name="storage_settings" msgid="4211799979832404953">"Úložisko"</string>
-    <!-- no translation found for storage_usb_settings (642612065405691122) -->
-    <skip />
+    <string name="storage_usb_settings" msgid="642612065405691122">"Úložisko a USB"</string>
     <string name="storage_settings_title" msgid="8746016738388094064">"Nastavenia úložiska"</string>
     <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"Odpojiť ukladací priestor USB a zobraziť dostupný ukladací priestor"</string>
     <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"Umožňuje odpojiť SD kartu a zobraziť dostupný ukladací priestor"</string>
@@ -988,10 +994,13 @@
     <string name="storage_menu_rename" msgid="7141058657592615390">"Premenovať"</string>
     <string name="storage_menu_mount" msgid="1014683672493425425">"Pripojiť"</string>
     <string name="storage_menu_unmount" msgid="681485356885955898">"Odpojiť"</string>
-    <string name="storage_menu_format" msgid="8334422679047059459">"Vymazať a formátovať"</string>
-    <string name="storage_menu_format_internal" msgid="6553368530402755543">"Vymazať a formátovať ako interné úložisko"</string>
+    <string name="storage_menu_format" msgid="7690626079653152152">"Formátovať"</string>
+    <string name="storage_menu_format_public" msgid="7464714208010125682">"Naformátovať ako prenosné"</string>
+    <string name="storage_menu_format_private" msgid="546017531835902096">"Naformátovať ako interné"</string>
     <string name="storage_menu_migrate" msgid="3969621494238154294">"Migrovať dáta"</string>
     <string name="storage_menu_forget" msgid="6305824238997983426">"Odstrániť záznam"</string>
+    <string name="storage_menu_set_up" msgid="4263294929451685366">"Nastaviť"</string>
+    <string name="storage_menu_explore" msgid="4637496051816521560">"Preskúmať"</string>
     <string name="storage_title_usb" msgid="679612779321689418">"Pripojenie USB k počítaču"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"Pripojiť ako"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"Zariadenie pre médiá (MTP)"</string>
@@ -1002,8 +1011,11 @@
     <string name="usb_midi_summary" msgid="539169474810956358">"Umožňuje aplikáciám s podporou rozhrania MIDI spolupracovať so softvérom MIDI na vašom počítači prostredníctvom kábla USB."</string>
     <string name="storage_other_users" msgid="808708845102611856">"Ďalší používatelia"</string>
     <string name="storage_internal_title" msgid="690771193137801021">"Úložisko zariadenia"</string>
-    <string name="storage_external_title" msgid="2723851748972673696">"Vymeniteľné úložisko"</string>
-    <string name="storage_volume_summary" msgid="476551204412943800">"Zdarma <xliff:g id="FREE">%1$s</xliff:g> (celkove <xliff:g id="TOTAL">%2$s</xliff:g>)"</string>
+    <string name="storage_external_title" msgid="3433462910096848696">"Prenosné úložisko"</string>
+    <string name="storage_volume_summary" msgid="7023441974367853372">"Využité miesto: <xliff:g id="USED">%1$s</xliff:g> z <xliff:g id="TOTAL">%2$s</xliff:g>"</string>
+    <string name="storage_size_large" msgid="4936185879734498579">"<xliff:g id="NUMBER">^1</xliff:g> "<small><small>"<xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
+    <string name="storage_volume_used" msgid="1303803057698959872">"Využité miesto z <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
+    <string name="storage_volume_used_total" msgid="6113121714019000244">"Celkové využité miesto z <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_mount_success" msgid="687641090137253647">"Úložisko (<xliff:g id="NAME">%1$s</xliff:g>) je pripojené"</string>
     <string name="storage_mount_failure" msgid="1042621107954547316">"Úložisko (<xliff:g id="NAME">%1$s</xliff:g>) sa nepodarilo pripojiť"</string>
     <string name="storage_unmount_success" msgid="5737203344673441677">"Úložisko (<xliff:g id="NAME">%1$s</xliff:g>) bolo bezpečne odpojené"</string>
@@ -1011,9 +1023,23 @@
     <string name="storage_format_success" msgid="3023144070597190555">"Úložisko <xliff:g id="NAME">%1$s</xliff:g> je naformátované"</string>
     <string name="storage_format_failure" msgid="6032640952779735766">"Úložisko <xliff:g id="NAME">%1$s</xliff:g> sa nepodarilo naformátovať"</string>
     <string name="storage_rename_title" msgid="8242663969839491485">"Premenujte úložisko"</string>
+    <string name="storage_dialog_unmounted" msgid="6403320870103261477">"Toto úložisko (<xliff:g id="NAME_0">^1</xliff:g>) bolo bezpečné odpojené, je však stále k dispozícii. \n\nAk chcete používať toto úložisko (<xliff:g id="NAME_1">^1</xliff:g>), musíte ho najprv pripojiť."</string>
+    <string name="storage_dialog_unmountable" msgid="3732209361668282254">"Toto úložisko <xliff:g id="NAME_0">^1</xliff:g> je poškodené. \n\nAk chcete používať toto úložisko (<xliff:g id="NAME_1">^1</xliff:g>), musíte ho najprv nastaviť."</string>
+    <string name="storage_dialog_unsupported" msgid="4503128224360482228">"Toto zariadenie nepodporuje dané úložisko (<xliff:g id="NAME_0">^1</xliff:g>). \n\nAk chcete používať toto úložisko (<xliff:g id="NAME_1">^1</xliff:g>), musíte ho najprv nastaviť."</string>
     <string name="storage_internal_format_details" msgid="4018647158382548820">"Po naformátovaní budete môcť úložisko <xliff:g id="NAME_0">^1</xliff:g> používať s inými zariadeniami. \n\nVšetky údaje v úložisku <xliff:g id="NAME_1">^1</xliff:g> budú vymazané. Odporúčame ich najskôr zálohovať. \n\n"<b>"Zálohovanie fotiek a iných médií"</b>" \nMediálne súbory presuňte do iného úložiska v zariadení alebo ich pomocou kábla USB preneste do počítača. \n\n"<b>"Zálohovanie aplikácií"</b>" \nVšetky aplikácie v úložisku <xliff:g id="NAME_6">^1</xliff:g> sa odinštalujú a ich údaje sa vymažú. Ak si chcete tieto aplikácie ponechať, presuňte ich do iného úložiska v zariadení."</string>
     <string name="storage_internal_unmount_details" msgid="3582802571684490057"><b>"Keď toto úložisko <xliff:g id="NAME_0">^1</xliff:g> odpojíte, prestanú fungovať aplikácie, ktoré sú v ňom uložené. Mediálne súbory nebudú dostupné, kým ho opäť nepripojíte."</b>" \n\nToto úložisko <xliff:g id="NAME_1">^1</xliff:g> je naformátované tak, aby fungovalo iba v tomto zariadení."</string>
     <string name="storage_internal_forget_details" msgid="9028875424669047327">"Ak chcete použiť aplikácie, fotky a údaje, ktoré obsahuje úložisko <xliff:g id="NAME">^1</xliff:g>, opätovne ho vložte. \n\nAk zariadenie nemáte k dispozícii, môžete vybrať možnosť odstránenia záznamu tohto úložiska. \n\nAk vyberiete možnosť odstránenia záznamu, všetky údaje na danom zariadení sa navždy stratia. \n\nAplikácie môžete neskôr opätovne nainštalovať, no ich údaje uložené na tomto zariadení budú stratené."</string>
+    <string name="storage_internal_forget_confirm_title" msgid="1370847944388479245">"Odstrániť úložisko <xliff:g id="NAME">^1</xliff:g>?"</string>
+    <string name="storage_internal_forget_confirm" msgid="1148446041396902905">"Všetky aplikácie, fotky a údaje uložené v tomto úložisku (<xliff:g id="NAME">^1</xliff:g>) budú navždy odstránené."</string>
+    <string name="storage_detail_apps" msgid="6141154016753507490">"Aplikácie"</string>
+    <string name="storage_detail_images" msgid="6950678857740634769">"Obrázky"</string>
+    <string name="storage_detail_videos" msgid="2919743464827110953">"Videá"</string>
+    <string name="storage_detail_audio" msgid="1197685141676483213">"Zvuk"</string>
+    <string name="storage_detail_cached" msgid="8547136365247818567">"Údaje uložené vo vyrovnávacej pamäti"</string>
+    <string name="storage_detail_other" msgid="8404938385075638238">"Iné"</string>
+    <string name="storage_detail_explore" msgid="7911344011431568294">"Preskúmať položku <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_detail_dialog_other" msgid="4894289482062047165">"Priečinok Iné obsahuje zdieľané súbory uložené aplikáciami, súbory stiahnuté z internetu alebo prostredníctvom rozhrania Bluetooth, súbory Android atď. \n\nAk si chcete zobraziť celý obsah tohto úložiska <xliff:g id="NAME">^1</xliff:g>, klepnite na tlačidlo Preskúmať."</string>
+    <string name="storage_detail_dialog_user" msgid="1675756743326079688">"Používateľ <xliff:g id="USER_0">^1</xliff:g> má pravdepodobne uložené fotky, hudbu, filmy, aplikácie alebo iné údaje, ktoré v úložisku zaberajú <xliff:g id="SIZE">^2</xliff:g>. \n\nAk si chcete zobraziť podrobné informácie, prepnite na používateľa <xliff:g id="USER_1">^1</xliff:g>."</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"Nastavte úložisko <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"Použiť ako prenosné úložisko"</string>
     <string name="storage_wizard_init_external_summary" msgid="7476105886344565074">"Na prenášanie fotiek a ďalších médií medzi zariadeniami."</string>
@@ -1027,7 +1053,7 @@
     <string name="storage_wizard_format_progress_title" msgid="6487352396450582292">"Formátuje sa úložisko <xliff:g id="NAME">^1</xliff:g>…"</string>
     <string name="storage_wizard_format_progress_body" msgid="4445041233802828430">"Počas formátovania úložisko <xliff:g id="NAME">^1</xliff:g> neodoberajte."</string>
     <string name="storage_wizard_migrate_title" msgid="1363078147938160407">"Presuňte údaje do nov. úložiska"</string>
-    <string name="storage_wizard_migrate_body" msgid="2980740530060653893">"Do tohto nového úložiska <xliff:g id="NAME">^1</xliff:g> môžete presunúť fotky, súbory a údaje aplikácií. \n\nPresun bude trvať zhruba <xliff:g id="TIME">^2</xliff:g> a v internom úložisku sa uvoľní <xliff:g id="SIZE">^3</xliff:g>. Počas presunu nebudú niektoré aplikácie fungovať."</string>
+    <string name="storage_wizard_migrate_body" msgid="890751699549542345">"Do tohto nového úložiska – <xliff:g id="NAME">^1</xliff:g> – môžete presunúť fotky, súbory a niektoré aplikácie. \n\nPresun trvá približne <xliff:g id="TIME">^2</xliff:g> a v internom úložisku sa uvoľní <xliff:g id="SIZE">^3</xliff:g>. Počas presunu nebudú niektoré aplikácie fungovať."</string>
     <string name="storage_wizard_migrate_now" msgid="4523444323744239143">"Presunúť"</string>
     <string name="storage_wizard_migrate_later" msgid="3173482328116026253">"Presunúť neskôr"</string>
     <string name="storage_wizard_migrate_confirm_title" msgid="8564833529613286965">"Presun dát"</string>
@@ -1338,6 +1364,7 @@
     <string name="not_installed" msgid="2797554494953450291">"Pre tohto používateľa nenainš."</string>
     <string name="no_applications" msgid="7336588977497084921">"Žiadne aplikácie."</string>
     <string name="internal_storage" msgid="1584700623164275282">"Interný ukl. priestor"</string>
+    <string name="internal_storage_sentence" msgid="889098931914857143">"interné úložisko"</string>
     <string name="sd_card_storage" product="nosdcard" msgid="2673203150465132465">"Ukladací priestor USB"</string>
     <string name="sd_card_storage" product="default" msgid="7623513618171928235">"Ukl. priestor SD karty"</string>
     <string name="recompute_size" msgid="7722567982831691718">"Prebieha prepočítanie veľkosti..."</string>
@@ -2111,8 +2138,6 @@
     <string name="disable_overlays_summary" msgid="3578941133710758592">"Vždy používať GPU na skladanie obrazovky"</string>
     <string name="simulate_color_space" msgid="6745847141353345872">"Simulácia far. priestoru"</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Trasovanie OpenGL"</string>
-    <string name="use_awesomeplayer" msgid="1583337008516364226">"Použiť AwesomePlayer (zastarané)"</string>
-    <string name="use_awesomeplayer_summary" msgid="6757734070733387140">"Použiť na prehrávanie médií AwesomePlayer (nie NuPlayer)"</string>
     <string name="usb_audio_disable_routing" msgid="8114498436003102671">"Vyp. smer. zvuku do USB"</string>
     <string name="usb_audio_disable_routing_summary" msgid="980282760277312264">"Vypnúť automatické smerovanie do audio periférií USB"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Zobraziť ohraničenia"</string>
@@ -2162,6 +2187,7 @@
     <string name="data_usage_menu_auto_sync" msgid="8203999775948778560">"Automaticky synchronizovať dáta"</string>
     <string name="data_usage_menu_sim_cards" msgid="6410498422797244073">"SIM karty"</string>
     <string name="data_usage_menu_cellular_networks" msgid="5243515735055652279">"Mobilné siete"</string>
+    <string name="data_usage_cellular_data_summary" msgid="8413357481361268285">"Pozastavené na limite"</string>
     <string name="account_settings_menu_auto_sync" msgid="6243013719753700377">"Autom. synchronizovať dáta"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="785541379617346438">"Autom. synchr. osobných údajov"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="329565580969147026">"Autom. synchr. pracov. údajov"</string>
@@ -2372,7 +2398,7 @@
     <string name="nfc_payment_favor_default_default_unknown" msgid="7029467023485683077">"Naďalej používať predvolenú aplikáciu"</string>
     <string name="nfc_payment_pay_with" msgid="7524904024378144072">"Na platobnom termináli podporujúcom platby priložením platiť pomocou aplikácie:"</string>
     <string name="nfc_how_it_works_title" msgid="1984068457698797207">"Platenie pri termináli"</string>
-    <string name="nfc_how_it_works_content" msgid="8056141705658483393">"Ak máte nastavenú aplikáciu umožňujúcu platby priložením a zapnutý telefón, môžete nakupovať priložením telefónu k akémukoľvek terminálu s logom platieb priložením."</string>
+    <string name="nfc_how_it_works_content" msgid="5820288675316257177">"Ak máte nastavenú aplikáciu umožňujúcu platby priložením a zapnutý telefón, môžete nakupovať priložením telefónu k akémukoľvek terminálu s logom platieb priložením."</string>
     <string name="nfc_how_it_works_got_it" msgid="259653300203217402">"Dobre"</string>
     <string name="nfc_more_title" msgid="815910943655133280">"Viac..."</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"Nastaviť ako predvoľbu?"</string>
@@ -2564,7 +2590,7 @@
     <string name="no_notification_listeners" msgid="3487091564454192821">"Prístup k upozorneniam si nevyžiadali žiadne nainštalované aplikácie"</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Povoliť prístup k upozorneniam pre službu <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="548925084229440829">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> bude môcť čítať všetky upozornenia vrátane osobných informácií, ako sú mená kontaktov a texty vašich prijatých správ. Aplikácia bude tiež môcť tieto upozornenia zatvoriť alebo spustiť v nich tlačidlá akcií."</string>
-    <string name="manage_zen_access_title" msgid="2611116122628520522">"Prístup k funkcii Nerušiť"</string>
+    <string name="manage_zen_access_title" msgid="2611116122628520522">"Prístup k nastavení Nerušiť"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"Prístup k funkcii Nerušiť si nevyžiadali žiadne nainštalované aplikácie"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Načítavajú sa aplikácie..."</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"Blokovať všetko"</string>
@@ -2658,8 +2684,7 @@
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"Pred uvoľnením požiadať o heslo"</string>
     <string name="screen_pinning_unlock_none" msgid="3814188275713871856">"Uzamknúť zariadenie počas uvoľňovania"</string>
     <string name="managed_user_title" msgid="8101244883654409696">"Pracovný profil"</string>
-    <!-- no translation found for opening_paragraph_delete_profile_unknown_company (2232461523882170874) -->
-    <skip />
+    <string name="opening_paragraph_delete_profile_unknown_company" msgid="2232461523882170874">"Tento pracovný profil spravuje aplikácia:"</string>
     <string name="managing_admin" msgid="8843802210377459055">"Spravované aplikáciou <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(Experimentálne)"</string>
     <string name="display_auto_rotate_title" msgid="6176450657107806043">"Pri otočení zariadenia"</string>
@@ -2723,6 +2748,14 @@
       <item quantity="other"><xliff:g id="COUNT_2">%d</xliff:g> udelených povolení z <xliff:g id="COUNT_3">%d</xliff:g></item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> udelené povolenie z <xliff:g id="COUNT_1">%d</xliff:g></item>
     </plurals>
+    <plurals name="runtime_permissions_additional_count" formatted="false" msgid="931276038884210752">
+      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> ďalšie povolenia</item>
+      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> ďalšieho povolenia</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ďalších povolení</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> ďalšie povolenie</item>
+    </plurals>
+    <string name="runtime_permissions_summary_no_permissions_granted" msgid="1679758182657005375">"Neboli udelené žiadne povolenia"</string>
+    <string name="runtime_permissions_summary_no_permissions_requested" msgid="7655100570513818534">"Neboli požadované žiadne povolenia"</string>
     <string name="launch_defaults_some" msgid="313159469856372621">"Predvolená pre niektoré akcie"</string>
     <string name="launch_defaults_none" msgid="4241129108140034876">"Nie je predvolená pre žiadne akcie"</string>
     <string name="filter_all_apps" msgid="1988403195820688644">"Všetky aplikácie"</string>
@@ -2736,6 +2769,7 @@
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"S webovými adresami domény"</string>
     <string name="trust_agent_disabled_device_admin" msgid="5982562414642596563">"Zakázané správcom"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Rozšírené"</string>
+    <string name="configure_apps" msgid="6685680790825882528">"Konfigurácia aplikácií"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Neznáma aplikácia"</string>
     <string name="choose_profile" msgid="8229363046053568878">"Výber profilu"</string>
     <string name="app_permissions" msgid="4148222031991883874">"Povolenia aplikácií"</string>
@@ -2755,8 +2789,15 @@
     </plurals>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Nebol rozpoznaný"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"Predvolené aplikácie"</string>
-    <string name="default_assist_title" msgid="8851464168639315795">"Pomocná aplikácia"</string>
-    <string name="default_assist_none" msgid="4719591002003824614">"Žiadna predvolená pomocná aplikácia"</string>
+    <string name="assist_and_voice_input_title" msgid="1733165754793221197">"Pomocná aplikácia a hlasový vstup"</string>
+    <string name="default_assist_title" msgid="8868488975409247921">"Pomocná aplikácia"</string>
+    <string name="default_assist_none" msgid="3709083569608735487">"Žiadna"</string>
+    <string name="choose_assist_title" msgid="554234448228740980">"Výber pomocnej aplikácie"</string>
+    <string name="assistant_security_warning_title" msgid="8673079231955467177">"Chcete urobiť z aplikácie <xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> pomocnú aplikáciu?"</string>
+    <string name="assistant_security_warning" msgid="4881965750615394002">"Aplikácia <xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> bude môcť čítať informácie o aplikáciách používaných vo vašom systéme, ako aj údaje viditeľné na obrazovke alebo prístupné v rámci aplikácií."</string>
+    <string name="assistant_security_warning_agree" msgid="7710290206928033908">"Súhlasím"</string>
+    <string name="assistant_security_warning_disagree" msgid="877419950830205913">"Nesúhlasim"</string>
+    <string name="choose_voice_input_title" msgid="975471367067718019">"Výber hlasového vstupu"</string>
     <string name="default_browser_title" msgid="8101772675085814670">"Prehliadač"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"Žiadny predvolený prehliadač"</string>
     <string name="default_phone_title" msgid="282005908059637350">"Aplikácia na telefonovanie"</string>
@@ -2780,9 +2821,8 @@
     <string name="high_power_apps" msgid="2116416853043103135">"Ignorovať optimalizácie"</string>
     <string name="high_power_filter_on" msgid="3862942127137594196">"Povolené"</string>
     <string name="high_power_on" msgid="148473814103292724">"Ignorovanie optimalizácií batérie"</string>
-    <!-- no translation found for high_power_off (221092098425904010) -->
-    <skip />
-    <string name="high_power_desc" msgid="8777632785903235764">"Nepoužívajte optimalizácie batérie. Môžu rýchlejšie vybiť batériu."</string>
+    <string name="high_power_off" msgid="221092098425904010">"Nepovolené"</string>
+    <string name="high_power_desc" msgid="8412735192889327770">"Nepoužívajte optimalizácie batérie. Môžu rýchlejšie vybiť batériu."</string>
     <plurals name="high_power_count" formatted="false" msgid="4343190376439806186">
       <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> aplikácie majú povolené ignorovať optimalizácie batérie</item>
       <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> aplikácie má povolené ignorovať optimalizácie batérie</item>
@@ -2791,7 +2831,7 @@
     </plurals>
     <string name="battery_summary" msgid="101415762036784289">"<xliff:g id="PERCENTAGE">%1$d</xliff:g> %% využitie od posledného úplného dobitia"</string>
     <string name="no_battery_summary" msgid="3528036835462846814">"Žiadne využitie batérie od posledného úplného dobitia"</string>
-    <string name="app_notification_preferences" msgid="6413363601485067724">"Predvoľby upozornení aplikácie"</string>
+    <string name="app_notification_preferences" msgid="1599319335092722613">"Nastavenia aplikácie"</string>
     <string name="system_ui_settings" msgid="579824306467081123">"Zobraziť tuner použív. rozhrania systému"</string>
     <string name="additional_permissions" msgid="6463784193877056080">"Ďalšie povolenia"</string>
     <string name="additional_permissions_more" msgid="3538612272673191451">"Počet ďalších povolení: <xliff:g id="COUNT">%1$d</xliff:g>"</string>
@@ -2804,7 +2844,7 @@
     <string name="inactive_app_inactive_summary" msgid="6768756967594202411">"Neaktívna. Zapnete ju klepnutím."</string>
     <string name="inactive_app_active_summary" msgid="4512911571954375968">"Aktívna. Zapnete ju klepnutím."</string>
     <string name="assist_access_context_title" msgid="2047105711005856521">"Použiť aktuálny kontext"</string>
-    <string name="assist_access_context_summary" msgid="8365837347256022203">"Keď otvoríte pomocnú aplikáciu, povoľte jej prístup k údajom na obrazovke"</string>
+    <string name="assist_access_context_summary" msgid="6937520858532073208">"Keď otvoríte pomocnú aplikáciu, povoľte jej prístup k údajom na obrazovke"</string>
     <string name="assist_footer" msgid="2283187001990543739">"Pomocné aplikácie vám umožnia identifikovať užitočné informácie bez toho, aby ste ich museli vyžiadať, a tiež vykonať na základe nich ďalšie kroky. Niektoré aplikácie podporujú spúšťač aj služby hlasového výstupu, aby vám poskytli integrovanú pomoc."</string>
     <string name="average_memory_use" msgid="829566450150198512">"Priemerné využitie pamäte"</string>
     <string name="maximum_memory_use" msgid="7493720799710132496">"Maximálne využitie pamäte"</string>
@@ -2831,14 +2871,11 @@
     <string name="no_data_usage" msgid="9131454024293628063">"Neboli využité žiadne údaje"</string>
     <string name="zen_access_warning_dialog_title" msgid="1198189958031157142">"Povoliť prístup k nastaveniu Nerušiť pre aplikáciu <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_access_warning_dialog_summary" msgid="4015885767653010873">"Aplikácia bude môcť vypnúť alebo zapnúť nastavenie Nerušiť a meniť súvisiace nastavenia."</string>
-    <!-- no translation found for ignore_optimizations_on (2417358456267927315) -->
-    <skip />
-    <!-- no translation found for ignore_optimizations_off (9069942099715006633) -->
-    <skip />
-    <!-- no translation found for ignore_optimizations_on_desc (5898868129614502128) -->
-    <skip />
-    <!-- no translation found for ignore_optimizations_off_desc (1558089902374827659) -->
-    <skip />
-    <!-- no translation found for ignore_optimizations_title (2829637961185027768) -->
-    <skip />
+    <string name="ignore_optimizations_on" msgid="2417358456267927315">"Povoliť"</string>
+    <string name="ignore_optimizations_off" msgid="9069942099715006633">"Nepovoliť"</string>
+    <string name="ignore_optimizations_on_desc" msgid="2321398930330555815">"Môžu rýchlejšie vybiť batériu"</string>
+    <string name="ignore_optimizations_off_desc" msgid="5255731062045426544">"Odporúčajú sa na predĺženie výdrže batérie"</string>
+    <string name="ignore_optimizations_title" msgid="2829637961185027768">"Povoliť aplikácii <xliff:g id="APP">%s</xliff:g> ignorovať optimalizácie batérie?"</string>
+    <string name="app_list_preference_none" msgid="108006867520327904">"Žiadna"</string>
+    <string name="work_profile_usage_access_warning" msgid="8870622842216566692">"Deaktivovaním prístupu k spotrebe dát pre túto aplikáciu nezabránite správcovi v sledovaní údajov o spotrebe dát pre aplikácie vo vašom pracovnom profile."</string>
 </resources>
