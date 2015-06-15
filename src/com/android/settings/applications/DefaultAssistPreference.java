@@ -21,15 +21,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.service.voice.VoiceInteractionService;
 import android.service.voice.VoiceInteractionServiceInfo;
 import android.speech.RecognitionService;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.View;
-import android.view.ViewGroup;
 
+import com.android.internal.app.AssistUtils;
 import com.android.settings.AppListPreferenceWithSettings;
 import com.android.settings.R;
 
@@ -42,10 +42,13 @@ public class DefaultAssistPreference extends AppListPreferenceWithSettings {
 
     private final List<Info> mAvailableAssistants = new ArrayList<>();
 
+    private final AssistUtils mAssistUtils;
+
     public DefaultAssistPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         setShowItemNone(true);
         setDialogTitle(R.string.choose_assist_title);
+        mAssistUtils = new AssistUtils(context);
     }
 
     @Override
@@ -169,9 +172,7 @@ public class DefaultAssistPreference extends AppListPreferenceWithSettings {
     }
 
     public ComponentName getCurrentAssist() {
-        String currentSetting = Settings.Secure.getString(getContext().getContentResolver(),
-                Settings.Secure.ASSISTANT);
-        return currentSetting == null ? null : ComponentName.unflattenFromString(currentSetting);
+        return mAssistUtils.getAssistComponentForUser(UserHandle.myUserId());
     }
 
     public void refreshAssistApps() {
