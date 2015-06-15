@@ -820,7 +820,7 @@ public class WifiSettings extends RestrictedSettingsFragment
                     mSelectedAccessPoint.getNetworkInfo().getState() != State.DISCONNECTED) {
                 // Network is active but has no network ID - must be ephemeral.
                 mWifiManager.disableEphemeralNetwork(
-                        AccessPoint.convertToQuotedString(mSelectedAccessPoint.getSsid()));
+                        AccessPoint.convertToQuotedString(mSelectedAccessPoint.getSsidStr()));
             } else {
                 // Should not happen, but a monkey seems to trigger it
                 Log.e(TAG, "Failed to forget invalid network " + mSelectedAccessPoint.getConfig());
@@ -922,7 +922,7 @@ public class WifiSettings extends RestrictedSettingsFragment
                         WifiTracker.getCurrentAccessPoints(context, true, false, false);
                 for (AccessPoint accessPoint : accessPoints) {
                     data = new SearchIndexableRaw(context);
-                    data.title = accessPoint.getSsid();
+                    data.title = accessPoint.getSsidStr();
                     data.screenTitle = res.getString(R.string.wifi_settings);
                     data.enabled = enabled;
                     result.add(data);
