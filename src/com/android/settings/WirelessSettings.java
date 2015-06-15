@@ -120,7 +120,7 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
         mManageMobilePlanMessage = null;
         Resources resources = getActivity().getResources();
 
-        NetworkInfo ni = mCm.getProvisioningOrActiveNetworkInfo();
+        NetworkInfo ni = mCm.getActiveNetworkInfo();
         if (mTm.hasIccCard() && (ni != null)) {
             // Check for carrier apps that can handle provisioning first
             Intent provisioningIntent = new Intent(TelephonyIntents.ACTION_CARRIER_SETUP);
