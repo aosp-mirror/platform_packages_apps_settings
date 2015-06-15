@@ -21,6 +21,8 @@
     <string name="create" msgid="3578857613172647409">"Δημιουργία"</string>
     <string name="allow" msgid="3349662621170855910">"Αποδοχή"</string>
     <string name="deny" msgid="6947806159746484865">"Απόρριψη"</string>
+    <string name="dlg_close" msgid="7471087791340790015">"Κλείσιμο"</string>
+    <string name="dlg_switch" msgid="6243971420240639064">"Εναλλαγή"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Άγνωστο"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
       <item quantity="other">Απομένουν <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> βήματα για να γίνετε προγραμματιστής.</item>
@@ -331,11 +333,9 @@
     <string name="user_info_settings_title" msgid="1195015434996724736">"Πληροφορίες χρήστη"</string>
     <string name="show_profile_info_on_lockscreen_label" msgid="2741208907263877990">"Εμφάνιση πληροφοριών προφίλ στην οθόνη κλειδώματος"</string>
     <string name="profile_info_settings_title" msgid="3518603215935346604">"Πληροφορίες προφίλ"</string>
-    <!-- no translation found for Accounts_settings_title (1592309650872767387) -->
-    <skip />
+    <string name="Accounts_settings_title" msgid="1592309650872767387">"Συγχρον. λογαριασμού"</string>
     <string name="location_settings_title" msgid="1369675479310751735">"Τοποθεσία"</string>
-    <!-- no translation found for account_settings_title (574608087657397787) -->
-    <skip />
+    <string name="account_settings_title" msgid="574608087657397787">"Συγχρον. λογαριασμού"</string>
     <string name="security_settings_title" msgid="7945465324818485460">"Ασφάλεια"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Ορισμός του \"Η τοποθεσία μου\", ξεκλειδώματος οθόνης, κλειδώματος κάρτας SIM, κλειδώματος αποθηκευτικού χώρου διαπιστευτηρίων"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Ορισμός του \"Η τοποθεσία μου\", του ξεκλειδώματος οθόνης και του κλειδώματος αποθηκευτικού χώρου διαπιστευτηρίων"</string>
@@ -353,6 +353,12 @@
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"Για να χρησιμοποιείτε το μοναδικό χαρακτηριστικό σας για να ξεκλειδώσετε την οθόνη σας ή να επιβεβαιώσετε αγορές, θα πρέπει να:"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"Ρύθμιση εφεδρικής μεθόδου κλειδώματος οθόνης"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_2" msgid="4158160658182631304">"Προσθέσετε το μοναδικό χαρακτηριστικό σας"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Ξεκλ. με δακ.αποτύπωμα"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="5061093614328964700">"Αγγίξτε απλώς τον αισθητήρα δακτυλικών αποτυπωμάτων για να ξεκλειδώσετε το τηλέφωνό σας, να επιτρέψετε αγορές ή να συνδεθείτε σε εφαρμογές. Αυτές οι ενέργειες θα μπορούν να γίνουν με οποιαδήποτε δακτυλικά αποτυπώματα προσθέτετε στο τηλέφωνό σας, οπότε να είστε προσεκτικοί με αυτά που προσθέτετε."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="7173290350577831813">"Σημείωση: Το ξεκλείδωμα με δακτυλικά αποτυπώματα ενδέχεται να είναι λιγότερο ασφαλές από ό, τι ένα ισχυρό μοτίβο ή κωδικός PIN."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_risk_link_text" msgid="9129531466157620977">"Μάθετε περισσότερα"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Ακύρωση"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Συνέχεια"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="5877265753699187149">"Βρείτε τον αισθητήρα"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="1959655161889313661">"Εντοπίστε τον αισθητήρα μοναδικού χαρακτηριστικού στο πίσω μέρος του τηλεφώνου σας."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="2058830032070449160">"Εικόνα συσκευής και της τοποθεσίας του αισθητήρα μοναδικού χαρακτηριστικού"</string>
@@ -373,6 +379,7 @@
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"Επόμενο"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Εκτός από τη δυνατότητα ξεκλειδώματος του τηλεφώνου σας, μπορείτε επίσης να χρησιμοποιήσετε το μοναδικό χαρακτηριστικό σας, για να εξουσιοδοτήσετε αγορές και πρόσβαση σε εφαρμογές. "<annotation id="url">"Μάθετε περισσότερα"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4504501581228672208">"Η επιλογή κλειδώματος οθόνης απενεργοποιήθηκε. Εξακολουθείτε να έχετε τη δυνατότητα χρήσης του μοναδικού χαρακτηριστικού σας, για να εξουσιοδοτείτε αγορές και πρόσβαση σε εφαρμογές. "<annotation id="url">"Μάθετε περισσότερα"</annotation></string>
+    <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Σηκώστε το δάχτυλο και, στη συνέχεια, αγγίξτε ξανά τον αισθητήρα"</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Κρυπτογράφηση"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"Κρυπτογράφηση tablet"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"Κρυπτογράφηση τηλεφώνου"</string>
@@ -496,14 +503,14 @@
     <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"Πληκτρολογήστε τον κωδικό σύζευξης και, στη συνέχεια, πατήστε Επιστροφή ή Enter"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"Το PIN περιέχει γράμματα ή σύμβολα"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"Συνήθως, 0000 ή 1234"</string>
-    <!-- no translation found for bluetooth_pin_values_hint_16_digits (7849359451584101077) -->
-    <skip />
+    <string name="bluetooth_pin_values_hint_16_digits" msgid="7849359451584101077">"Πρέπει να περιέχει 16 ψηφία"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="4637977124526813470">"Επίσης, ενδέχεται να χρειαστεί να πληκτρολογήσετε αυτό το PIN στην άλλη συσκευή."</string>
     <string name="bluetooth_enter_passkey_other_device" msgid="2798719004030279602">"Επίσης, ενδέχεται να χρειαστεί να πληκτρολογήσετε το κλειδί πρόσβασης στην άλλη συσκευή."</string>
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"Για σύζευξη με τη συσκευή:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Βεβαιωθείτε ότι εμφανίζεται το κλειδί πρόσβασης:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"Από:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Να γίνει σύζευξη με αυτήν τη συσκευή;"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"Για σύζευξη με:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Πληκτρολογήστε:<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g> και πιέστε το πλήκτρο επιστροφής (Return) ή το πλήκτρο Enter."</string>
     <string name="bluetooth_pairing_will_share_phonebook" msgid="4982239145676394429">"Η σύζευξη παρέχει πρόσβαση στις επαφές σας και το ιστορικό κλήσεων όταν συνδεθείτε."</string>
+    <string name="bluetooth_pairing_shares_phonebook" msgid="1655930908614072491">"Παραχωρήστε πρόσβαση στις επαφές σας και το ιστορικό κλήσεων όταν συνδεθείτε."</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_connecting_error_message" msgid="1397388344342081090">"Δεν ήταν δυνατή η σύνδεση με τη συσκευή <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"Ανίχνευση για συσκευές"</string>
@@ -568,8 +575,7 @@
     <string name="wifi_band_24ghz" msgid="852929254171856911">"2,4 GHz"</string>
     <string name="wifi_band_5ghz" msgid="6433822023268515117">"5 GHz"</string>
     <string name="link_speed" msgid="8896664974117585555">"%1$d Mbps"</string>
-    <!-- no translation found for wifi_alert_lockdown_by_device_owner (2537146774322347104) -->
-    <skip />
+    <string name="wifi_alert_lockdown_by_device_owner" msgid="8459738223049002970">"Η εφαρμογή <xliff:g id="APP_NAME">%1$s</xliff:g> διαχειρίζεται τη συσκευή σας και δεν επιτρέπει την τροποποίηση ή τη διαγραφή αυτού του δικτύου Wi-Fi. Για περισσότερες πληροφορίες, επικοινωνήστε με το διαχειριστή."</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Να επιτρέπεται η ανταλλαγή δεδομένων όταν το tablet έρχεται σε επαφή με μια άλλη συσκευή"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Να επιτρέπεται η ανταλλαγή δεδομένων όταν το τηλέφωνο αγγίζει μια άλλη συσκευή"</string>
@@ -611,6 +617,7 @@
     <string name="wifi_suspend_optimizations" msgid="1220174276403689487">"Βελτιστοποίηση Wi-Fi"</string>
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"Ελαχιστοποίηση χρήσης μπαταρίας όταν το Wi-Fi είναι ενεργό"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"Περιορ. μπαταρίας από Wi‑Fi"</string>
+    <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"Εναλλαγή σε δεδομένα κινητής τηλεφωνίας, εάν το Wi-Fi χάσει την πρόσβαση στο διαδίκτυο."</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"Προσθήκη δικτύου"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"Δίκτυα Wi-Fi"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"Κουμπί WPS"</string>
@@ -677,7 +684,7 @@
     <string name="wifi_hotspot_title" msgid="7726205804813286950">"Να γίνει σύνδεση στο σημείο πρόσβασης Wi-Fi;"</string>
     <string name="wifi_hotspot_message" msgid="3673833421453455747">"Η εφαρμογή <xliff:g id="APP_NAME">%1$s</xliff:g> απαιτεί σύνδεση διαδικτύου, πριν από τη σύνδεση στο δίκτυο."</string>
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"ΣΥΝΔΕΣΗ"</string>
-    <string name="no_internet_access_text" msgid="1509171132175355674">"Αυτό το δίκτυο δεν έχει πρόσβαση στο διαδίκτυο. Χρήση αυτού του δικτύου ούτως ή άλλως;"</string>
+    <string name="no_internet_access_text" msgid="7133561752896706392">"Αυτό το δίκτυο δεν έχει πρόσβαση στο διαδίκτυο. Θέλετε να παραμείνετε συνδεδεμένοι;"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"Να μην ερωτηθώ ξανά γι\' αυτό το δίκτυο"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"Σύνδεση"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Αποτυχία σύνδεσης στο δίκτυο"</string>
@@ -897,8 +904,7 @@
     <string name="device_status_summary" product="tablet" msgid="3292717754497039686">"Η κατάσταση της μπαταρίας και του δικτύου, καθώς και άλλες πληροφορίες"</string>
     <string name="device_status_summary" product="default" msgid="2599162787451519618">"Τηλεφωνικός αριθμός, σήμα κ.λπ."</string>
     <string name="storage_settings" msgid="4211799979832404953">"Αποθηκευτικός χώρος"</string>
-    <!-- no translation found for storage_usb_settings (642612065405691122) -->
-    <skip />
+    <string name="storage_usb_settings" msgid="642612065405691122">"Αποθηκ. χώρος και USB"</string>
     <string name="storage_settings_title" msgid="8746016738388094064">"Ρυθμίσεις αποθηκευτικού χώρου"</string>
     <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"Αποπροσάρτηση αποθηκευτικού χώρου USB, προβολή διαθέσιμου αποθηκευτικού χώρου"</string>
     <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"Αφαίρεση κάρτας SD, προβολή διαθέσιμου αποθηκευτικού χώρου"</string>
@@ -970,10 +976,13 @@
     <string name="storage_menu_rename" msgid="7141058657592615390">"Μετονομασία"</string>
     <string name="storage_menu_mount" msgid="1014683672493425425">"Προσάρτηση"</string>
     <string name="storage_menu_unmount" msgid="681485356885955898">"Εξαγωγή"</string>
-    <string name="storage_menu_format" msgid="8334422679047059459">"Διαγραφή δεδομένων και μορφ."</string>
-    <string name="storage_menu_format_internal" msgid="6553368530402755543">"Διαγ.δεδ. και μορφ.εσ.απ.χώρου"</string>
+    <string name="storage_menu_format" msgid="7690626079653152152">"Διαμόρφωση"</string>
+    <string name="storage_menu_format_public" msgid="7464714208010125682">"Διαμόρφωση ως φορητής"</string>
+    <string name="storage_menu_format_private" msgid="546017531835902096">"Διαμόρφωση ως εσωτερικής"</string>
     <string name="storage_menu_migrate" msgid="3969621494238154294">"Μετεγκατάσταση δεδομένων"</string>
     <string name="storage_menu_forget" msgid="6305824238997983426">"Διαγραφή"</string>
+    <string name="storage_menu_set_up" msgid="4263294929451685366">"Ρύθμιση"</string>
+    <string name="storage_menu_explore" msgid="4637496051816521560">"Εξερεύνηση"</string>
     <string name="storage_title_usb" msgid="679612779321689418">"Σύνδεση υπολογιστή μέσω USB"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"Σύνδεση ως"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"Συσκευή πολυμέσων (MTP)"</string>
@@ -984,8 +993,11 @@
     <string name="usb_midi_summary" msgid="539169474810956358">"Επιτρέπει στις εφαρμογές με ενεργοποιημένο MIDI να λειτουργούν μέσω USB με λογισμικό MIDI στον υπολογιστή σας."</string>
     <string name="storage_other_users" msgid="808708845102611856">"Άλλοι χρήστες"</string>
     <string name="storage_internal_title" msgid="690771193137801021">"Αποθηκευτικός χώρος συσκευής"</string>
-    <string name="storage_external_title" msgid="2723851748972673696">"Αφαιρούμενος αποθηκ. χώρος"</string>
-    <string name="storage_volume_summary" msgid="476551204412943800">"<xliff:g id="FREE">%1$s</xliff:g> ελεύθερα (Σύνολο <xliff:g id="TOTAL">%2$s</xliff:g>)"</string>
+    <string name="storage_external_title" msgid="3433462910096848696">"Φορητός χώρος αποθήκευσης"</string>
+    <string name="storage_volume_summary" msgid="7023441974367853372">"Σε χρήση <xliff:g id="USED">%1$s</xliff:g> από τα <xliff:g id="TOTAL">%2$s</xliff:g>"</string>
+    <string name="storage_size_large" msgid="4936185879734498579">"<xliff:g id="NUMBER">^1</xliff:g> "<small><small>"<xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
+    <string name="storage_volume_used" msgid="1303803057698959872">"Σε χρήση από τα <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
+    <string name="storage_volume_used_total" msgid="6113121714019000244">"Σύνολο σε χρήση από τα <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_mount_success" msgid="687641090137253647">"Προσαρτήθηκε <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="storage_mount_failure" msgid="1042621107954547316">"Δεν ήταν δυνατή η προσάρτηση <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="storage_unmount_success" msgid="5737203344673441677">"Έγινε εξαγωγή του <xliff:g id="NAME">%1$s</xliff:g> με ασφάλεια"</string>
@@ -993,9 +1005,23 @@
     <string name="storage_format_success" msgid="3023144070597190555">"Το <xliff:g id="NAME">%1$s</xliff:g> μορφοποιήθηκε"</string>
     <string name="storage_format_failure" msgid="6032640952779735766">"Δεν ήταν δυνατή η μορφοποίηση <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="storage_rename_title" msgid="8242663969839491485">"Μετονομασία αποθηκευτικού χώρου"</string>
+    <string name="storage_dialog_unmounted" msgid="6403320870103261477">"Η κατάργηση της κάρτας <xliff:g id="NAME_0">^1</xliff:g> έγινε με ασφάλεια, αλλά εξακολουθεί να είναι διαθέσιμη. \n\nΓια να χρησιμοποιήσετε την κάρτα <xliff:g id="NAME_1">^1</xliff:g>, θα πρέπει πρώτα να την προσαρτήσετε."</string>
+    <string name="storage_dialog_unmountable" msgid="3732209361668282254">"Η κάρτα <xliff:g id="NAME_0">^1</xliff:g> είναι κατεστραμμένη. \n\nΓια να χρησιμοποιήσετε την κάρτα <xliff:g id="NAME_1">^1</xliff:g>, θα πρέπει πρώτα να τη διαμορφώσετε."</string>
+    <string name="storage_dialog_unsupported" msgid="4503128224360482228">"Η συσκευή δεν υποστηρίζει την κάρτα <xliff:g id="NAME_0">^1</xliff:g>. \n\nΓια να χρησιμοποιήσετε την κάρτα <xliff:g id="NAME_1">^1</xliff:g> με αυτήν τη συσκευή, θα πρέπει πρώτα να τη ρυθμίσετε."</string>
     <string name="storage_internal_format_details" msgid="4018647158382548820">"Μετά τη μορφοποίηση, μπορείτε να χρησιμοποιήσετε αυτό το μέσο αποθήκευσης <xliff:g id="NAME_0">^1</xliff:g> σε άλλες συσκευές. \n\nΌλα τα δεδομένα σε αυτό το μέσο <xliff:g id="NAME_1">^1</xliff:g> θα διαγραφούν. Εξετάστε το ενδεχόμενο να δημιουργήσετε πρώτα αντίγραφα ασφαλείας. \n\n"<b>"Δημιουργήσετε αντίγραφα ασφαλείας για τις φωτογραφίες και άλλα μέσα"</b>" \nΜετακίνηστε τα αρχεία πολυμέσων σας σε έναν εναλλακτικό αποθηκευτικό χώρο στη συσκευή ή μεταφέρετέ τα σε έναν υπολογιστή χρησιμοποιώντας ένα καλώδιο USB. \n\n"<b>"Δημιουργήστε αντίγραφα ασφαλείας για τις συσκευές"</b>" \nΌλες οι εφαρμογές που είναι αποθηκευμένες σε αυτό το μέσο αποθήκευσης <xliff:g id="NAME_6">^1</xliff:g> θα απεγκατασταθούν και τα δεδομένα τους θα διαγραφούν. Για να διατηρήσετε αυτές τις εφαρμογές, μετακινήστε τις σε έναν εναλλακτικό αποθηκευτικό χώρο σε αυτήν τη συσκευή."</string>
     <string name="storage_internal_unmount_details" msgid="3582802571684490057"><b>"Όταν αφαιρέσετε αυτό το μέσο αποθήκευσης <xliff:g id="NAME_0">^1</xliff:g>, οι εφαρμογές που είναι αποθηκευμένες σε αυτό θα σταματήσουν να λειτουργούν και τα αρχεία μέσων που είναι αποθηκευμένα σε αυτό δεν θα είναι διαθέσιμα πριν από την εκ νέου εισαγωγή τους."</b>\n\n"Αυτό το μέσο αποθήκευσης <xliff:g id="NAME_1">^1</xliff:g> έχει μορφοποιηθεί έτσι ώστε να λειτουργεί μόνο σε αυτήν τη συσκευή. Δεν θα λειτουργεί σε άλλες συσκευές."</string>
     <string name="storage_internal_forget_details" msgid="9028875424669047327">"Για να χρησιμοποιήσετε τις εφαρμογές, τις φωτογραφίες ή τα δεδομένα, που περιέχει το αποθηκευτικό μέσο <xliff:g id="NAME">^1</xliff:g>, επανατοποθετήστε το. \n\nΕναλλακτικά, μπορείτε να επιλέξετε να γίνει κατάργηση απομνημόνευσης αυτού του αποθηκευτικού μέσου, εάν η συσκευή δεν είναι διαθέσιμη. \n\nΕάν επιλέξετε να γίνει κατάργηση απομνημόνευσης, όλα τα δεδομένα που περιέχει η συσκευή θα χαθούν οριστικά. \n\nΜπορείτε να επανεγκαταστήσετε τις εφαρμογές αργότερα, αλλά τα δεδομένα τους που είναι αποθηκευμένα σε αυτήν τη συσκευή θα χαθούν."</string>
+    <string name="storage_internal_forget_confirm_title" msgid="1370847944388479245">"Διαγραφή από μνήμη της κάρτας <xliff:g id="NAME">^1</xliff:g>;"</string>
+    <string name="storage_internal_forget_confirm" msgid="1148446041396902905">"Όλες οι εφαρμογές, οι φωτογραφίες και τα δεδομένα που είναι αποθηκευμένα στην κάρτα <xliff:g id="NAME">^1</xliff:g> θα χαθούν για πάντα."</string>
+    <string name="storage_detail_apps" msgid="6141154016753507490">"Εφαρμογές"</string>
+    <string name="storage_detail_images" msgid="6950678857740634769">"Εικόνες"</string>
+    <string name="storage_detail_videos" msgid="2919743464827110953">"Βίντεο"</string>
+    <string name="storage_detail_audio" msgid="1197685141676483213">"Ήχος"</string>
+    <string name="storage_detail_cached" msgid="8547136365247818567">"Δεδομένα κρυφής μνήμης"</string>
+    <string name="storage_detail_other" msgid="8404938385075638238">"Άλλα"</string>
+    <string name="storage_detail_explore" msgid="7911344011431568294">"Εξερεύνηση <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_detail_dialog_other" msgid="4894289482062047165">"Η ενότητα \"Άλλα\" περιέχει κοινόχρηστα αρχεία που έχουν αποθηκεύσει οι εφαρμογές, αρχεία που έχετε κατεβάσει από το διαδίκτυο ή αρχεία Bluetooth, Android κ.ο.κ. \n\nΓια να δείτε όλα τα περιεχόμενα της συσκευής <xliff:g id="NAME">^1</xliff:g>, αγγίξτε \"Εξερεύνηση\"."</string>
+    <string name="storage_detail_dialog_user" msgid="1675756743326079688">"Ο χρήστης <xliff:g id="USER_0">^1</xliff:g> μπορεί να έχει αποθηκευμένες φωτογραφίες, μουσική, ταινίες, εφαρμογές ή άλλα δεδομένα που καταλαμβάνουν <xliff:g id="SIZE">^2</xliff:g> στο χώρο αποθήκευσης. \n\nΓια να δείτε λεπτομέρειες, κάντε εναλλαγή στο χρήστη <xliff:g id="USER_1">^1</xliff:g>."</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"Ρυθμίστε τη μέσο αποθήκευσης <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"Χρήση ως φορητού αποθηκευτικού χώρου"</string>
     <string name="storage_wizard_init_external_summary" msgid="7476105886344565074">"Για τη μετακίνηση των φωτογραφιών και άλλων πολυμέσων μεταξύ συσκευών."</string>
@@ -1009,7 +1035,7 @@
     <string name="storage_wizard_format_progress_title" msgid="6487352396450582292">"Μορφοποίηση μέσου αποθήκευσης <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_format_progress_body" msgid="4445041233802828430">"Μην αφαιρέσετε το μέσο αποθήκευσης <xliff:g id="NAME">^1</xliff:g> κατά τη μορφοποίηση."</string>
     <string name="storage_wizard_migrate_title" msgid="1363078147938160407">"Μετακίνηση δεδ.σε νέο χώρο αποθ."</string>
-    <string name="storage_wizard_migrate_body" msgid="2980740530060653893">"Μπορείτε να μετακινήσετε τις φωτογραφίες, τα αρχεία και τα δεδομένα της εφαρμογής σας σε αυτό το νέο μέσο αποθήκευσης <xliff:g id="NAME">^1</xliff:g>. \n\nΗ μετακίνηση διαρκεί περίπου <xliff:g id="TIME">^2</xliff:g> και θα απελευθερώσει <xliff:g id="SIZE">^3</xliff:g> στον εσωτερικό αποθηκευτικό χώρο. Ορισμένες εφαρμογές δεν θα λειτουργούν κατά τη διάρκεια της μετακίνησης."</string>
+    <string name="storage_wizard_migrate_body" msgid="890751699549542345">"Μπορείτε να μεταφέρετε τις φωτογραφίες, τα αρχεία και ορισμένες εφαρμογές στη νέα κάρτα <xliff:g id="NAME">^1</xliff:g>. \n\nΗ μεταφορά θα διαρκέσει <xliff:g id="TIME">^2</xliff:g> περίπου και θα απελευθερώσει <xliff:g id="SIZE">^3</xliff:g> από τον εσωτερικό χώρο αποθήκευσης. Ορισμένες εφαρμογές δεν θα λειτουργούν κατά τη διάρκεια της διαδικασίας."</string>
     <string name="storage_wizard_migrate_now" msgid="4523444323744239143">"Μετακίνηση τώρα"</string>
     <string name="storage_wizard_migrate_later" msgid="3173482328116026253">"Μετακίνηση αργότερα"</string>
     <string name="storage_wizard_migrate_confirm_title" msgid="8564833529613286965">"Μετακίνηση δεδομένων τώρα"</string>
@@ -1320,6 +1346,7 @@
     <string name="not_installed" msgid="2797554494953450291">"Δεν εγκαταστ. για το χρήστη"</string>
     <string name="no_applications" msgid="7336588977497084921">"Δεν υπάρχουν εφαρμογές."</string>
     <string name="internal_storage" msgid="1584700623164275282">"Εσ. αποθ. χώρος"</string>
+    <string name="internal_storage_sentence" msgid="889098931914857143">"εσωτερικός χώρος αποθήκευσης"</string>
     <string name="sd_card_storage" product="nosdcard" msgid="2673203150465132465">"Αποθ. χώρος USB"</string>
     <string name="sd_card_storage" product="default" msgid="7623513618171928235">"Κάρ. χώρ. απ. SD"</string>
     <string name="recompute_size" msgid="7722567982831691718">"Εκ νέου υπολογισμός μεγέθους..."</string>
@@ -2055,7 +2082,7 @@
     <string name="cryptkeeper_wrong_password" msgid="5200857195368904047">"Εσφαλμένος κωδικός πρόσβασης"</string>
     <string name="cryptkeeper_wrong_pin" msgid="755720788765259382">"Εσφαλμένος κωδικός PIN"</string>
     <string name="checking_decryption" msgid="8287458611802609493">"Έλεγχος…"</string>
-    <string name="starting_android" msgid="8581493237458496835">"Έναρξη Android"</string>
+    <string name="starting_android" msgid="4001324195902252681">"Έναρξη Android..."</string>
     <string name="delete" msgid="4219243412325163003">"Διαγραφή"</string>
     <string name="misc_files" msgid="6720680815969643497">"Διάφορα αρχεία"</string>
     <string name="misc_files_selected_count" msgid="4647048020823912088">"Επιλέχθηκαν <xliff:g id="NUMBER">%1$d</xliff:g> από <xliff:g id="TOTAL">%2$d</xliff:g>"</string>
@@ -2093,8 +2120,6 @@
     <string name="disable_overlays_summary" msgid="3578941133710758592">"Να γίνεται πάντα χρήση του GPU για σύνθεση οθόνης"</string>
     <string name="simulate_color_space" msgid="6745847141353345872">"Προσομοίωση χρωματικού χώρου"</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Ενεργοποίηση ιχνών OpenGL"</string>
-    <string name="use_awesomeplayer" msgid="1583337008516364226">"Χρήση AwesomePlayer (καταργήθηκε)"</string>
-    <string name="use_awesomeplayer_summary" msgid="6757734070733387140">"Χρήση AwesomePlayer αντί για NuPlayer για αναπαραγωγή μέσων"</string>
     <string name="usb_audio_disable_routing" msgid="8114498436003102671">"Απεν. δρομολ. ήχου USB"</string>
     <string name="usb_audio_disable_routing_summary" msgid="980282760277312264">"Απενερ.αυτόμ. δρομολ. σε περιφερειακά ήχου USB"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Εμφάνιση ορίων διάταξης"</string>
@@ -2144,6 +2169,7 @@
     <string name="data_usage_menu_auto_sync" msgid="8203999775948778560">"Αυτόματος συγχρονισμός δεδομένων"</string>
     <string name="data_usage_menu_sim_cards" msgid="6410498422797244073">"Κάρτες SIM"</string>
     <string name="data_usage_menu_cellular_networks" msgid="5243515735055652279">"Δίκτυα κινητής τηλεφωνίας"</string>
+    <string name="data_usage_cellular_data_summary" msgid="8413357481361268285">"Παύση στο όριο"</string>
     <string name="account_settings_menu_auto_sync" msgid="6243013719753700377">"Αυτόματος συγχρον. δεδομένων"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="785541379617346438">"Αυτόματος συγχ. προσ.δεδομένων"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="329565580969147026">"Αυτόματος συγχρ. δεδ.εργασίας"</string>
@@ -2354,7 +2380,7 @@
     <string name="nfc_payment_favor_default_default_unknown" msgid="7029467023485683077">"Εξακολουθεί να χρησιμοποιείται η προεπιλογή"</string>
     <string name="nfc_payment_pay_with" msgid="7524904024378144072">"Σε τερματικά που υποστηρίζουν τη λειτουργία \"Πατήστε και πληρώστε\", πληρωμή με:"</string>
     <string name="nfc_how_it_works_title" msgid="1984068457698797207">"Πληρωμή στο τερματικό"</string>
-    <string name="nfc_how_it_works_content" msgid="8056141705658483393">"Αφού έχετε ρυθμίσει μια εφαρμογή για τη λειτουργία \"Πατήστε και πληρώστε\" και το τηλέφωνό σας είναι ενεργοποιημένο, πατήστε το τηλέφωνό σας σε οποιοδήποτε τερματικό με το λογότυπο \"Πατήστε και πληρώστε\" για να πραγματοποιήσετε μια αγορά."</string>
+    <string name="nfc_how_it_works_content" msgid="5820288675316257177">"Αφού έχετε ρυθμίσει μια εφαρμογή για τη λειτουργία \"Πατήστε και πληρώστε\" και το τηλέφωνό σας είναι ενεργοποιημένο, πατήστε το τηλέφωνό σας σε οποιοδήποτε τερματικό με το λογότυπο \"Πατήστε και πληρώστε\" για να πραγματοποιήσετε μια αγορά."</string>
     <string name="nfc_how_it_works_got_it" msgid="259653300203217402">"Το κατάλαβα"</string>
     <string name="nfc_more_title" msgid="815910943655133280">"Περισσότερα…"</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"Ορισμός ως προτίμησης;"</string>
@@ -2636,8 +2662,7 @@
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"Να ζητείται κωδικός πρόσβασης πριν από το ξεκαρφίτσωμα"</string>
     <string name="screen_pinning_unlock_none" msgid="3814188275713871856">"Κλείδωμα της συσκευής κατά το ξεκαρφίτσωμα"</string>
     <string name="managed_user_title" msgid="8101244883654409696">"Προφίλ εργασίας"</string>
-    <!-- no translation found for opening_paragraph_delete_profile_unknown_company (2232461523882170874) -->
-    <skip />
+    <string name="opening_paragraph_delete_profile_unknown_company" msgid="2232461523882170874">"Η διαχείριση αυτού του προφίλ γίνεται από:"</string>
     <string name="managing_admin" msgid="8843802210377459055">"Διαχείριση από <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(Πειραματικό)"</string>
     <string name="display_auto_rotate_title" msgid="6176450657107806043">"Κατά την περιστροφή της συσκευής"</string>
@@ -2697,6 +2722,12 @@
       <item quantity="other">Χορηγήθηκαν <xliff:g id="COUNT_2">%d</xliff:g> από <xliff:g id="COUNT_3">%d</xliff:g> άδειες</item>
       <item quantity="one">Χορηγήθηκε <xliff:g id="COUNT_0">%d</xliff:g> από <xliff:g id="COUNT_1">%d</xliff:g> άδεια</item>
     </plurals>
+    <plurals name="runtime_permissions_additional_count" formatted="false" msgid="931276038884210752">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> επιπλέον δικαιώματα</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> επιπλέον δικαίωμα</item>
+    </plurals>
+    <string name="runtime_permissions_summary_no_permissions_granted" msgid="1679758182657005375">"Δεν έχουν εκχωρηθεί δικαιώματα"</string>
+    <string name="runtime_permissions_summary_no_permissions_requested" msgid="7655100570513818534">"Δεν ζητήθηκαν δικαιώματα"</string>
     <string name="launch_defaults_some" msgid="313159469856372621">"Έχουν οριστεί κάποιες προεπιλογές"</string>
     <string name="launch_defaults_none" msgid="4241129108140034876">"Δεν έχουν οριστεί προεπιλογές"</string>
     <string name="filter_all_apps" msgid="1988403195820688644">"Όλες οι εφαρμογές"</string>
@@ -2710,6 +2741,7 @@
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"Με διευθύνσεις URL τομέα"</string>
     <string name="trust_agent_disabled_device_admin" msgid="5982562414642596563">"Απενεργοποιήθηκε από το διαχειριστή"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Σύνθετες ρυθμίσεις"</string>
+    <string name="configure_apps" msgid="6685680790825882528">"Διαμόρφωση εφαρμογών"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Άγνωστη εφαρμογή"</string>
     <string name="choose_profile" msgid="8229363046053568878">"Επιλογή προφίλ"</string>
     <string name="app_permissions" msgid="4148222031991883874">"Δικαιώματα εφαρμογών"</string>
@@ -2727,8 +2759,15 @@
     </plurals>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Δεν αναγνωρίστηκε"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"Προεπιλεγμένες εφαρμογές"</string>
-    <string name="default_assist_title" msgid="8851464168639315795">"Υποβοήθηση"</string>
-    <string name="default_assist_none" msgid="4719591002003824614">"Δεν υπάρχει προεπιλεγμένη Υποβοήθηση"</string>
+    <string name="assist_and_voice_input_title" msgid="1733165754793221197">"Βοήθεια και φωνητικές εντολές"</string>
+    <string name="default_assist_title" msgid="8868488975409247921">"Βοηθητική εφαρμογή"</string>
+    <string name="default_assist_none" msgid="3709083569608735487">"Κανένα"</string>
+    <string name="choose_assist_title" msgid="554234448228740980">"Επιλογή βοήθειας"</string>
+    <string name="assistant_security_warning_title" msgid="8673079231955467177">"Θέλετε να ορίσετε την εφαρμογή <xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> ως βοηθό σας;"</string>
+    <string name="assistant_security_warning" msgid="4881965750615394002">"Η εφαρμογή <xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> θα μπορεί να διαβάζει πληροφορίες σχετικά με τις εφαρμογές που χρησιμοποιούνται στο σύστημά σας, όπως είναι οι πληροφορίες που εμφανίζονται στην οθόνη σας ή αυτές στις οποίες έχουν πρόσβαση οι εφαρμογές."</string>
+    <string name="assistant_security_warning_agree" msgid="7710290206928033908">"Συμφωνώ"</string>
+    <string name="assistant_security_warning_disagree" msgid="877419950830205913">"Δεν συμφωνώ"</string>
+    <string name="choose_voice_input_title" msgid="975471367067718019">"Επιλογή φωνητικής εντολής"</string>
     <string name="default_browser_title" msgid="8101772675085814670">"Εφαρμογή προγρ.περιήγησης"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"Κανένα προεπιλεγμένο πρόγραμμα περιήγησης"</string>
     <string name="default_phone_title" msgid="282005908059637350">"Εφαρμογή \"Τηλέφωνο\""</string>
@@ -2752,16 +2791,15 @@
     <string name="high_power_apps" msgid="2116416853043103135">"Παράβλεψη βελτιστοποιήσεων"</string>
     <string name="high_power_filter_on" msgid="3862942127137594196">"Επιτρέπεται"</string>
     <string name="high_power_on" msgid="148473814103292724">"Παράβλεψη βελτιστοποιήσεων μπαταρίας"</string>
-    <!-- no translation found for high_power_off (221092098425904010) -->
-    <skip />
-    <string name="high_power_desc" msgid="8777632785903235764">"Να μην εφαρμόζονται βελτιστοποιήσεις μπαταρίας. Η μπαταρία σας ενδέχεται να εξαντλείται πιο γρήγορα."</string>
+    <string name="high_power_off" msgid="221092098425904010">"Δεν επιτρέπεται"</string>
+    <string name="high_power_desc" msgid="8412735192889327770">"Να μην εφαρμόζονται βελτιστοποιήσεις μπαταρίας. Η μπαταρία σας ενδέχεται να εξαντλείται πιο γρήγορα."</string>
     <plurals name="high_power_count" formatted="false" msgid="4343190376439806186">
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> εφαρμογές επιτρέπονται να αγνοήσουν τις βελτιστοποιήσεις μπαταρίας</item>
       <item quantity="one">1 εφαρμογή επιτρέπεται να αγνοήσει τις βελτιστοποιήσεις μπαταρίας</item>
     </plurals>
     <string name="battery_summary" msgid="101415762036784289">"Χρήση <xliff:g id="PERCENTAGE">%1$d</xliff:g>%% από την τελευταία πλήρη φόρτιση"</string>
     <string name="no_battery_summary" msgid="3528036835462846814">"Δεν έγινε χρήση της μπαταρίας από την τελευταία πλήρη φόρτιση"</string>
-    <string name="app_notification_preferences" msgid="6413363601485067724">"Προτιμήσεις ειδοποίησης εφαρμογής"</string>
+    <string name="app_notification_preferences" msgid="1599319335092722613">"Ρυθμίσεις εφαρμογής"</string>
     <string name="system_ui_settings" msgid="579824306467081123">"Εμφάνιση δέκτη SystemUI"</string>
     <string name="additional_permissions" msgid="6463784193877056080">"Πρόσθετα δικαιώματα"</string>
     <string name="additional_permissions_more" msgid="3538612272673191451">"<xliff:g id="COUNT">%1$d</xliff:g> ακόμη"</string>
@@ -2774,7 +2812,7 @@
     <string name="inactive_app_inactive_summary" msgid="6768756967594202411">"Ανενεργή. Αγγίξτε για εναλλαγή."</string>
     <string name="inactive_app_active_summary" msgid="4512911571954375968">"Ενεργή. Αγγίξτε για εναλλαγή."</string>
     <string name="assist_access_context_title" msgid="2047105711005856521">"Χρησιμοποιήστε το τρέχον περιβάλλον"</string>
-    <string name="assist_access_context_summary" msgid="8365837347256022203">"Αφού ανοίξετε τη βοηθητική εφαρμογή, αφήστε την να δει τι εργασίες εκτελούνται στην οθόνη σας"</string>
+    <string name="assist_access_context_summary" msgid="6937520858532073208">"Όταν ανοίξετε τη βοηθητική εφαρμογή, αφήστε την να δει τι εργασίες εκτελούνται στην οθόνη σας"</string>
     <string name="assist_footer" msgid="2283187001990543739">"Οι βοηθητικές εφαρμογές σάς βοηθούν να εντοπίζετε χρήσιμες πληροφορίες και να εκτελείτε τις αντίστοιχες ενέργειες χωρίς να χρειαστεί να ζητήσετε βοήθεια. Ορισμένες εφαρμογές υποστηρίζουν τόσο την εφαρμογή εκκίνησης όσο και τις υπηρεσίες εισόδου φωνής για να λαμβάνετε ολοκληρωμένη βοήθεια στο περιβάλλον εργασίας σας."</string>
     <string name="average_memory_use" msgid="829566450150198512">"Μέση χρήση μνήμης"</string>
     <string name="maximum_memory_use" msgid="7493720799710132496">"Μέγιστη χρήση μνήμης"</string>
@@ -2799,14 +2837,11 @@
     <string name="no_data_usage" msgid="9131454024293628063">"Δεν χρησιμοποιούνται δεδομένα"</string>
     <string name="zen_access_warning_dialog_title" msgid="1198189958031157142">"Να επιτρέπεται η πρόσβαση στη λειτουργία \"Μην ενοχλείτε\" για την εφαρμογή <xliff:g id="APP">%1$s</xliff:g>;"</string>
     <string name="zen_access_warning_dialog_summary" msgid="4015885767653010873">"Η εφαρμογή θα είναι σε θέση να ενεργοποιεί/απενεργοποιεί τη λειτουργία \"Μην ενοχλείτε\" και να τροποποιεί τις σχετικές ρυθμίσεις."</string>
-    <!-- no translation found for ignore_optimizations_on (2417358456267927315) -->
-    <skip />
-    <!-- no translation found for ignore_optimizations_off (9069942099715006633) -->
-    <skip />
-    <!-- no translation found for ignore_optimizations_on_desc (5898868129614502128) -->
-    <skip />
-    <!-- no translation found for ignore_optimizations_off_desc (1558089902374827659) -->
-    <skip />
-    <!-- no translation found for ignore_optimizations_title (2829637961185027768) -->
-    <skip />
+    <string name="ignore_optimizations_on" msgid="2417358456267927315">"Αποδοχή"</string>
+    <string name="ignore_optimizations_off" msgid="9069942099715006633">"Να μην επιτρέπεται"</string>
+    <string name="ignore_optimizations_on_desc" msgid="2321398930330555815">"Η μπαταρία σας ενδέχεται να εξαντλείται πιο γρήγορα."</string>
+    <string name="ignore_optimizations_off_desc" msgid="5255731062045426544">"Συνιστάται για μεγαλύτερη διάρκεια μπαταρίας"</string>
+    <string name="ignore_optimizations_title" msgid="2829637961185027768">"Να επιτρέπεται στην εφαρμογή <xliff:g id="APP">%s</xliff:g> να αγνοεί τις βελτιστοποιήσεις μπαταρίας;"</string>
+    <string name="app_list_preference_none" msgid="108006867520327904">"Κανένα"</string>
+    <string name="work_profile_usage_access_warning" msgid="8870622842216566692">"Η απενεργοποίηση της πρόσβασης χρήσης γι\' αυτήν την εφαρμογή δεν αποτρέπει το διαχειριστή σας από το να παρακολουθεί τη χρήση δεδομένων για εφαρμογές του προφίλ σας εργασίας."</string>
 </resources>
