@@ -173,6 +173,8 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         screen.removeAll();
 
         if (!mVolume.isMountedReadable()) {
+            Log.d(TAG, "Leaving details fragment due to state " + mVolume.getState());
+            finish();
             return;
         }
 
@@ -287,6 +289,8 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
             unmount.setVisible(mVolume.isMountedReadable());
             format.setVisible(true);
         }
+
+        format.setTitle(R.string.storage_menu_format_public);
 
         // Only offer to migrate when not current storage
         final VolumeInfo privateVol = getActivity().getPackageManager()
