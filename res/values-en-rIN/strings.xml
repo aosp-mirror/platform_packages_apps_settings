@@ -21,6 +21,8 @@
     <string name="create" msgid="3578857613172647409">"Create"</string>
     <string name="allow" msgid="3349662621170855910">"Allow"</string>
     <string name="deny" msgid="6947806159746484865">"Deny"</string>
+    <string name="dlg_close" msgid="7471087791340790015">"Close"</string>
+    <string name="dlg_switch" msgid="6243971420240639064">"Switch"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Unknown"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
       <item quantity="other">You are now <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> steps away from being a developer.</item>
@@ -331,11 +333,9 @@
     <string name="user_info_settings_title" msgid="1195015434996724736">"User info"</string>
     <string name="show_profile_info_on_lockscreen_label" msgid="2741208907263877990">"Show profile info on lock screen"</string>
     <string name="profile_info_settings_title" msgid="3518603215935346604">"Profile info"</string>
-    <!-- no translation found for Accounts_settings_title (1592309650872767387) -->
-    <skip />
+    <string name="Accounts_settings_title" msgid="1592309650872767387">"Account sync"</string>
     <string name="location_settings_title" msgid="1369675479310751735">"Location"</string>
-    <!-- no translation found for account_settings_title (574608087657397787) -->
-    <skip />
+    <string name="account_settings_title" msgid="574608087657397787">"Account sync"</string>
     <string name="security_settings_title" msgid="7945465324818485460">"Security"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Set My Location, screen unlock, SIM card lock, credential storage lock"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Set My Location, screen unlock, credential storage lock"</string>
@@ -353,6 +353,12 @@
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"To use your fingerprint to unlock your screen or confirm purchases, we\'ll need to:"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"Set up your backup screen lock method"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_2" msgid="4158160658182631304">"Add your fingerprint"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Unlock with fingerprint"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="5061093614328964700">"Just touch the fingerprint sensor to unlock your phone, authorise purchases or sign in to apps. Any fingerprints that are added to your phone will be able to do these things, so be careful who you add."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="7173290350577831813">"Note: Your fingerprint may be less secure than a strong pattern or PIN."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_risk_link_text" msgid="9129531466157620977">"Find out more"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Cancel"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Continue"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="5877265753699187149">"Find the sensor"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="1959655161889313661">"Locate the fingerprint sensor on the back of your phone."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="2058830032070449160">"Illustration with device and fingerprint sensor location"</string>
@@ -373,6 +379,7 @@
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"Next"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"In addition to unlocking your phone, you can also use your fingerprint to authorise purchases and app access. "<annotation id="url">"Learn more"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4504501581228672208">"Screen lock option disabled. You can still use your fingerprint to authorise purchases and app access. "<annotation id="url">"Learn more"</annotation></string>
+    <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Lift finger, then touch sensor again"</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Encryption"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"Encrypt tablet"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"Encrypt phone"</string>
@@ -496,14 +503,14 @@
     <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"Type the pairing code then press Return or Enter"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"PIN contains letters or symbols"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"Usually 0000 or 1234"</string>
-    <!-- no translation found for bluetooth_pin_values_hint_16_digits (7849359451584101077) -->
-    <skip />
+    <string name="bluetooth_pin_values_hint_16_digits" msgid="7849359451584101077">"Must be 16 digits"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="4637977124526813470">"You may also need to type this PIN on the other device."</string>
     <string name="bluetooth_enter_passkey_other_device" msgid="2798719004030279602">"You may also need to type this passkey on the other device."</string>
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"To pair with:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Make sure that it is showing this passkey:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"From:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Pair with this device?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"To pair with:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Type on it:<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>, then press Return or Enter."</string>
     <string name="bluetooth_pairing_will_share_phonebook" msgid="4982239145676394429">"Pairing grants access to your contacts and call history when connected."</string>
+    <string name="bluetooth_pairing_shares_phonebook" msgid="1655930908614072491">"Grant access to your contacts and call history when connected."</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_connecting_error_message" msgid="1397388344342081090">"Couldn\'t connect to <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"Scan for devices"</string>
@@ -568,8 +575,7 @@
     <string name="wifi_band_24ghz" msgid="852929254171856911">"2.4 GHz"</string>
     <string name="wifi_band_5ghz" msgid="6433822023268515117">"5 GHz"</string>
     <string name="link_speed" msgid="8896664974117585555">"%1$d Mbps"</string>
-    <!-- no translation found for wifi_alert_lockdown_by_device_owner (2537146774322347104) -->
-    <skip />
+    <string name="wifi_alert_lockdown_by_device_owner" msgid="8459738223049002970">"<xliff:g id="APP_NAME">%1$s</xliff:g> manages your device and doesn’t allow modifying or deleting this Wi-Fi network. For more information, contact your administrator."</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Allow data exchange when the tablet touches another device"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Allow data exchange when the phone touches another device"</string>
@@ -611,6 +617,7 @@
     <string name="wifi_suspend_optimizations" msgid="1220174276403689487">"Wi‑Fi optimisation"</string>
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"Minimise battery usage when Wi‑Fi is on"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"Limit battery used by Wi‑Fi"</string>
+    <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"Switch to mobile data if Wi‑Fi loses Internet access."</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"Add network"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"Wi‑Fi networks"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"WPS Push Button"</string>
@@ -677,7 +684,7 @@
     <string name="wifi_hotspot_title" msgid="7726205804813286950">"Sign in to connect?"</string>
     <string name="wifi_hotspot_message" msgid="3673833421453455747">"<xliff:g id="APP_NAME">%1$s</xliff:g> requires you to sign in online before you connect to the network."</string>
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"CONNECT"</string>
-    <string name="no_internet_access_text" msgid="1509171132175355674">"This network has no Internet access. Use this network anyway?"</string>
+    <string name="no_internet_access_text" msgid="7133561752896706392">"This network has no Internet access. Stay connected?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"Don\'t ask again for this network"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"Connect"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Failed to connect to network"</string>
@@ -897,8 +904,7 @@
     <string name="device_status_summary" product="tablet" msgid="3292717754497039686">"Status of the battery, network and other information"</string>
     <string name="device_status_summary" product="default" msgid="2599162787451519618">"Phone number, signal, etc."</string>
     <string name="storage_settings" msgid="4211799979832404953">"Storage"</string>
-    <!-- no translation found for storage_usb_settings (642612065405691122) -->
-    <skip />
+    <string name="storage_usb_settings" msgid="642612065405691122">"Storage &amp; USB"</string>
     <string name="storage_settings_title" msgid="8746016738388094064">"Storage settings"</string>
     <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"Unmount USB storage, view available storage"</string>
     <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"Unmount SD card, view available storage"</string>
@@ -970,10 +976,13 @@
     <string name="storage_menu_rename" msgid="7141058657592615390">"Rename"</string>
     <string name="storage_menu_mount" msgid="1014683672493425425">"Mount"</string>
     <string name="storage_menu_unmount" msgid="681485356885955898">"Eject"</string>
-    <string name="storage_menu_format" msgid="8334422679047059459">"Erase &amp; format"</string>
-    <string name="storage_menu_format_internal" msgid="6553368530402755543">"Erase &amp; format as internal storage"</string>
+    <string name="storage_menu_format" msgid="7690626079653152152">"Format"</string>
+    <string name="storage_menu_format_public" msgid="7464714208010125682">"Format as portable"</string>
+    <string name="storage_menu_format_private" msgid="546017531835902096">"Format as internal"</string>
     <string name="storage_menu_migrate" msgid="3969621494238154294">"Migrate data"</string>
     <string name="storage_menu_forget" msgid="6305824238997983426">"Forget"</string>
+    <string name="storage_menu_set_up" msgid="4263294929451685366">"Set-up"</string>
+    <string name="storage_menu_explore" msgid="4637496051816521560">"Explore"</string>
     <string name="storage_title_usb" msgid="679612779321689418">"USB computer connection"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"Connect as"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"Media device (MTP)"</string>
@@ -984,8 +993,11 @@
     <string name="usb_midi_summary" msgid="539169474810956358">"Lets MIDI-enabled applications work over USB with MIDI software on your computer."</string>
     <string name="storage_other_users" msgid="808708845102611856">"Other users"</string>
     <string name="storage_internal_title" msgid="690771193137801021">"Device storage"</string>
-    <string name="storage_external_title" msgid="2723851748972673696">"Removable storage"</string>
-    <string name="storage_volume_summary" msgid="476551204412943800">"<xliff:g id="FREE">%1$s</xliff:g> free (Total <xliff:g id="TOTAL">%2$s</xliff:g>)"</string>
+    <string name="storage_external_title" msgid="3433462910096848696">"Portable storage"</string>
+    <string name="storage_volume_summary" msgid="7023441974367853372">"<xliff:g id="USED">%1$s</xliff:g> used of <xliff:g id="TOTAL">%2$s</xliff:g>"</string>
+    <string name="storage_size_large" msgid="4936185879734498579">"<xliff:g id="NUMBER">^1</xliff:g> "<small><small>"<xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
+    <string name="storage_volume_used" msgid="1303803057698959872">"Used of <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
+    <string name="storage_volume_used_total" msgid="6113121714019000244">"Total used of <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_mount_success" msgid="687641090137253647">"<xliff:g id="NAME">%1$s</xliff:g> is mounted"</string>
     <string name="storage_mount_failure" msgid="1042621107954547316">"Couldn\'t mount <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="storage_unmount_success" msgid="5737203344673441677">"<xliff:g id="NAME">%1$s</xliff:g> is safely ejected"</string>
@@ -993,9 +1005,23 @@
     <string name="storage_format_success" msgid="3023144070597190555">"<xliff:g id="NAME">%1$s</xliff:g> is formatted"</string>
     <string name="storage_format_failure" msgid="6032640952779735766">"Couldn\'t format <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="storage_rename_title" msgid="8242663969839491485">"Rename storage"</string>
+    <string name="storage_dialog_unmounted" msgid="6403320870103261477">"This <xliff:g id="NAME_0">^1</xliff:g> is safely ejected, but still available. \n\nTo use this <xliff:g id="NAME_1">^1</xliff:g>, you have to mount it first."</string>
+    <string name="storage_dialog_unmountable" msgid="3732209361668282254">"This <xliff:g id="NAME_0">^1</xliff:g> is corrupted. \n\nTo use this <xliff:g id="NAME_1">^1</xliff:g>, you have to set it up first."</string>
+    <string name="storage_dialog_unsupported" msgid="4503128224360482228">"This device doesn’t support this <xliff:g id="NAME_0">^1</xliff:g>. \n\nTo use this <xliff:g id="NAME_1">^1</xliff:g> with this device, you have to set it up first."</string>
     <string name="storage_internal_format_details" msgid="4018647158382548820">"After formatting, you can use this <xliff:g id="NAME_0">^1</xliff:g> in other devices. \n\nAll data on this <xliff:g id="NAME_1">^1</xliff:g> will be erased. Consider backing up first. \n\n"<b>"Back up photos &amp; other media"</b>" \nMove your media files to alternative storage on this device, or transfer them to a computer using a USB cable. \n\n"<b>"Back up apps"</b>" \nAll apps stored on this <xliff:g id="NAME_6">^1</xliff:g> will be uninstalled and their data will be erased. To keep these apps, move them to alternative storage on this device."</string>
     <string name="storage_internal_unmount_details" msgid="3582802571684490057"><b>"When you eject this <xliff:g id="NAME_0">^1</xliff:g>, apps stored on it will stop working, and media files stored on it will not be available until it is reinserted."</b>" \n\nThis <xliff:g id="NAME_1">^1</xliff:g> is formatted to work on this device only. It won’t work on any others."</string>
     <string name="storage_internal_forget_details" msgid="9028875424669047327">"To use the apps, photos or data this <xliff:g id="NAME">^1</xliff:g> contains, reinsert it. \n\nAlternatively, you can choose to forget this storage if the device isn’t available. \n\nIf you choose to forget, all the data the device contains will be lost forever. \n\nYou can reinstall the apps later, but their data stored on this device will be lost."</string>
+    <string name="storage_internal_forget_confirm_title" msgid="1370847944388479245">"Forget <xliff:g id="NAME">^1</xliff:g>?"</string>
+    <string name="storage_internal_forget_confirm" msgid="1148446041396902905">"All the apps, photos and data stored on this <xliff:g id="NAME">^1</xliff:g> will be lost forever."</string>
+    <string name="storage_detail_apps" msgid="6141154016753507490">"Apps"</string>
+    <string name="storage_detail_images" msgid="6950678857740634769">"images"</string>
+    <string name="storage_detail_videos" msgid="2919743464827110953">"Videos"</string>
+    <string name="storage_detail_audio" msgid="1197685141676483213">"Audio"</string>
+    <string name="storage_detail_cached" msgid="8547136365247818567">"Cached data"</string>
+    <string name="storage_detail_other" msgid="8404938385075638238">"Other"</string>
+    <string name="storage_detail_explore" msgid="7911344011431568294">"Explore <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_detail_dialog_other" msgid="4894289482062047165">"Other includes shared files saved by apps, files downloaded from the Internet or Bluetooth, Android files and so on. \n\nTo see the entire contents of this <xliff:g id="NAME">^1</xliff:g>, touch Explore."</string>
+    <string name="storage_detail_dialog_user" msgid="1675756743326079688">"<xliff:g id="USER_0">^1</xliff:g> may have saved photos, music, movies, apps or other data that is taking up <xliff:g id="SIZE">^2</xliff:g> of storage. \n\nTo view details, switch to <xliff:g id="USER_1">^1</xliff:g>."</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"Set up your <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"Use as portable storage"</string>
     <string name="storage_wizard_init_external_summary" msgid="7476105886344565074">"For moving photos and other media between devices."</string>
@@ -1009,7 +1035,7 @@
     <string name="storage_wizard_format_progress_title" msgid="6487352396450582292">"Formatting <xliff:g id="NAME">^1</xliff:g>…"</string>
     <string name="storage_wizard_format_progress_body" msgid="4445041233802828430">"Don\'t remove the <xliff:g id="NAME">^1</xliff:g> while it\'s formatting."</string>
     <string name="storage_wizard_migrate_title" msgid="1363078147938160407">"Move data to new storage"</string>
-    <string name="storage_wizard_migrate_body" msgid="2980740530060653893">"You can move your photos, files and app data to this new <xliff:g id="NAME">^1</xliff:g>. \n\nThe move takes about <xliff:g id="TIME">^2</xliff:g> and will free <xliff:g id="SIZE">^3</xliff:g> on internal storage. Some apps won\'t work while it\'s underway."</string>
+    <string name="storage_wizard_migrate_body" msgid="890751699549542345">"You can move your photos, files and some apps to this new <xliff:g id="NAME">^1</xliff:g>. \n\nThe move takes about <xliff:g id="TIME">^2</xliff:g> and will free <xliff:g id="SIZE">^3</xliff:g> on internal storage. Some apps won’t work while it’s underway."</string>
     <string name="storage_wizard_migrate_now" msgid="4523444323744239143">"Move now"</string>
     <string name="storage_wizard_migrate_later" msgid="3173482328116026253">"Move later"</string>
     <string name="storage_wizard_migrate_confirm_title" msgid="8564833529613286965">"Move data now"</string>
@@ -1320,6 +1346,7 @@
     <string name="not_installed" msgid="2797554494953450291">"Not installed for this user"</string>
     <string name="no_applications" msgid="7336588977497084921">"No apps."</string>
     <string name="internal_storage" msgid="1584700623164275282">"Internal storage"</string>
+    <string name="internal_storage_sentence" msgid="889098931914857143">"internal storage"</string>
     <string name="sd_card_storage" product="nosdcard" msgid="2673203150465132465">"USB storage"</string>
     <string name="sd_card_storage" product="default" msgid="7623513618171928235">"SD card storage"</string>
     <string name="recompute_size" msgid="7722567982831691718">"Recomputing size…"</string>
@@ -2055,7 +2082,7 @@
     <string name="cryptkeeper_wrong_password" msgid="5200857195368904047">"Wrong Password"</string>
     <string name="cryptkeeper_wrong_pin" msgid="755720788765259382">"Wrong PIN"</string>
     <string name="checking_decryption" msgid="8287458611802609493">"Checking…"</string>
-    <string name="starting_android" msgid="8581493237458496835">"Starting Android"</string>
+    <string name="starting_android" msgid="4001324195902252681">"Starting Android…"</string>
     <string name="delete" msgid="4219243412325163003">"Delete"</string>
     <string name="misc_files" msgid="6720680815969643497">"Misc. files"</string>
     <string name="misc_files_selected_count" msgid="4647048020823912088">"selected <xliff:g id="NUMBER">%1$d</xliff:g> out of <xliff:g id="TOTAL">%2$d</xliff:g>"</string>
@@ -2093,8 +2120,6 @@
     <string name="disable_overlays_summary" msgid="3578941133710758592">"Always use GPU for screen compositing"</string>
     <string name="simulate_color_space" msgid="6745847141353345872">"Simulate colour space"</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Enable OpenGL traces"</string>
-    <string name="use_awesomeplayer" msgid="1583337008516364226">"Use AwesomePlayer (deprecated)"</string>
-    <string name="use_awesomeplayer_summary" msgid="6757734070733387140">"Use AwesomePlayer instead of NuPlayer for most media playback"</string>
     <string name="usb_audio_disable_routing" msgid="8114498436003102671">"Disable USB audio routing"</string>
     <string name="usb_audio_disable_routing_summary" msgid="980282760277312264">"Disable automatic routing to USB audio peripherals"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Show layout bounds"</string>
@@ -2144,6 +2169,7 @@
     <string name="data_usage_menu_auto_sync" msgid="8203999775948778560">"Auto-sync data"</string>
     <string name="data_usage_menu_sim_cards" msgid="6410498422797244073">"SIM cards"</string>
     <string name="data_usage_menu_cellular_networks" msgid="5243515735055652279">"Mobile networks"</string>
+    <string name="data_usage_cellular_data_summary" msgid="8413357481361268285">"Paused at limit"</string>
     <string name="account_settings_menu_auto_sync" msgid="6243013719753700377">"Auto-sync data"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="785541379617346438">"Auto-sync personal data"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="329565580969147026">"Auto-sync work data"</string>
@@ -2354,7 +2380,7 @@
     <string name="nfc_payment_favor_default_default_unknown" msgid="7029467023485683077">"Still use default"</string>
     <string name="nfc_payment_pay_with" msgid="7524904024378144072">"At a Tap &amp; pay terminal, pay with:"</string>
     <string name="nfc_how_it_works_title" msgid="1984068457698797207">"Paying at the terminal"</string>
-    <string name="nfc_how_it_works_content" msgid="8056141705658483393">"Once you\'ve set up a Tap &amp; pay app and your phone is turned on, tap your phone on any terminal with the Tap &amp; pay logo on it to make a purchase."</string>
+    <string name="nfc_how_it_works_content" msgid="5820288675316257177">"Once you\'ve set up a Tap &amp; pay app and your phone is turned on, tap your phone on any terminal with the Tap &amp; pay logo on it to make a purchase."</string>
     <string name="nfc_how_it_works_got_it" msgid="259653300203217402">"Understood"</string>
     <string name="nfc_more_title" msgid="815910943655133280">"More..."</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"Set as your preference?"</string>
@@ -2634,8 +2660,7 @@
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"Ask for password before unpinning"</string>
     <string name="screen_pinning_unlock_none" msgid="3814188275713871856">"Lock device when unpinning"</string>
     <string name="managed_user_title" msgid="8101244883654409696">"Work profile"</string>
-    <!-- no translation found for opening_paragraph_delete_profile_unknown_company (2232461523882170874) -->
-    <skip />
+    <string name="opening_paragraph_delete_profile_unknown_company" msgid="2232461523882170874">"This work profile is managed by:"</string>
     <string name="managing_admin" msgid="8843802210377459055">"Managed by <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(Experimental)"</string>
     <string name="display_auto_rotate_title" msgid="6176450657107806043">"When device is rotated"</string>
@@ -2695,6 +2720,12 @@
       <item quantity="other"><xliff:g id="COUNT_2">%d</xliff:g> of <xliff:g id="COUNT_3">%d</xliff:g> permissions granted</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> of <xliff:g id="COUNT_1">%d</xliff:g> permission granted</item>
     </plurals>
+    <plurals name="runtime_permissions_additional_count" formatted="false" msgid="931276038884210752">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> additional permissions</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> additional permission</item>
+    </plurals>
+    <string name="runtime_permissions_summary_no_permissions_granted" msgid="1679758182657005375">"No permissions granted"</string>
+    <string name="runtime_permissions_summary_no_permissions_requested" msgid="7655100570513818534">"No permissions requested"</string>
     <string name="launch_defaults_some" msgid="313159469856372621">"Some defaults set"</string>
     <string name="launch_defaults_none" msgid="4241129108140034876">"No defaults set"</string>
     <string name="filter_all_apps" msgid="1988403195820688644">"All apps"</string>
@@ -2708,6 +2739,7 @@
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"With domain URLs"</string>
     <string name="trust_agent_disabled_device_admin" msgid="5982562414642596563">"Disabled by administrator"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Advanced"</string>
+    <string name="configure_apps" msgid="6685680790825882528">"Configure apps"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Unknown app"</string>
     <string name="choose_profile" msgid="8229363046053568878">"Choose Profile"</string>
     <string name="app_permissions" msgid="4148222031991883874">"App permissions"</string>
@@ -2725,8 +2757,15 @@
     </plurals>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Not recognised"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"Default Apps"</string>
-    <string name="default_assist_title" msgid="8851464168639315795">"Assist"</string>
-    <string name="default_assist_none" msgid="4719591002003824614">"No default Assist"</string>
+    <string name="assist_and_voice_input_title" msgid="1733165754793221197">"Assist &amp; voice input"</string>
+    <string name="default_assist_title" msgid="8868488975409247921">"Assist app"</string>
+    <string name="default_assist_none" msgid="3709083569608735487">"None"</string>
+    <string name="choose_assist_title" msgid="554234448228740980">"Choose Assist"</string>
+    <string name="assistant_security_warning_title" msgid="8673079231955467177">"Make <xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> your assistant?"</string>
+    <string name="assistant_security_warning" msgid="4881965750615394002">"<xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> will be able to read information about apps in use on your system, including information visible on your screen or accessible within the apps."</string>
+    <string name="assistant_security_warning_agree" msgid="7710290206928033908">"Agree"</string>
+    <string name="assistant_security_warning_disagree" msgid="877419950830205913">"Disagree"</string>
+    <string name="choose_voice_input_title" msgid="975471367067718019">"Choose voice input"</string>
     <string name="default_browser_title" msgid="8101772675085814670">"Browser app"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"No default Browser"</string>
     <string name="default_phone_title" msgid="282005908059637350">"Phone app"</string>
@@ -2750,16 +2789,15 @@
     <string name="high_power_apps" msgid="2116416853043103135">"Ignore optimisations"</string>
     <string name="high_power_filter_on" msgid="3862942127137594196">"Allowed"</string>
     <string name="high_power_on" msgid="148473814103292724">"Ignoring battery optimisations"</string>
-    <!-- no translation found for high_power_off (221092098425904010) -->
-    <skip />
-    <string name="high_power_desc" msgid="8777632785903235764">"Don\'t apply battery optimisations. May drain your battery more quickly."</string>
+    <string name="high_power_off" msgid="221092098425904010">"Not allowed"</string>
+    <string name="high_power_desc" msgid="8412735192889327770">"Don’t apply battery optimisations. May drain your battery more quickly."</string>
     <plurals name="high_power_count" formatted="false" msgid="4343190376439806186">
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> apps allowed to ignore battery optimisations</item>
       <item quantity="one">1 app allowed to ignore battery optimisations</item>
     </plurals>
     <string name="battery_summary" msgid="101415762036784289">"<xliff:g id="PERCENTAGE">%1$d</xliff:g>%% use since last full charge"</string>
     <string name="no_battery_summary" msgid="3528036835462846814">"No battery use since last full charge"</string>
-    <string name="app_notification_preferences" msgid="6413363601485067724">"App notification preferences"</string>
+    <string name="app_notification_preferences" msgid="1599319335092722613">"App settings"</string>
     <string name="system_ui_settings" msgid="579824306467081123">"Show SystemUI Tuner"</string>
     <string name="additional_permissions" msgid="6463784193877056080">"Additional permissions"</string>
     <string name="additional_permissions_more" msgid="3538612272673191451">"<xliff:g id="COUNT">%1$d</xliff:g> more"</string>
@@ -2772,7 +2810,7 @@
     <string name="inactive_app_inactive_summary" msgid="6768756967594202411">"Inactive. Touch to toggle."</string>
     <string name="inactive_app_active_summary" msgid="4512911571954375968">"Active. Touch to toggle."</string>
     <string name="assist_access_context_title" msgid="2047105711005856521">"Use current context"</string>
-    <string name="assist_access_context_summary" msgid="8365837347256022203">"When you open the assist app, let it see what you\'ve been doing on your screen"</string>
+    <string name="assist_access_context_summary" msgid="6937520858532073208">"When you open the assist app, let it see what you’ve been doing on your screen"</string>
     <string name="assist_footer" msgid="2283187001990543739">"Assist apps help you identify and act on useful information without having to ask. Some apps support both launcher and voice input services to give you integrated assistance."</string>
     <string name="average_memory_use" msgid="829566450150198512">"Average memory use"</string>
     <string name="maximum_memory_use" msgid="7493720799710132496">"Maximum memory use"</string>
@@ -2797,14 +2835,11 @@
     <string name="no_data_usage" msgid="9131454024293628063">"No data used"</string>
     <string name="zen_access_warning_dialog_title" msgid="1198189958031157142">"Allow access to Do Not Disturb for <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_access_warning_dialog_summary" msgid="4015885767653010873">"The app will be able to turn on/off Do Not Disturb and make changes to related settings."</string>
-    <!-- no translation found for ignore_optimizations_on (2417358456267927315) -->
-    <skip />
-    <!-- no translation found for ignore_optimizations_off (9069942099715006633) -->
-    <skip />
-    <!-- no translation found for ignore_optimizations_on_desc (5898868129614502128) -->
-    <skip />
-    <!-- no translation found for ignore_optimizations_off_desc (1558089902374827659) -->
-    <skip />
-    <!-- no translation found for ignore_optimizations_title (2829637961185027768) -->
-    <skip />
+    <string name="ignore_optimizations_on" msgid="2417358456267927315">"Allow"</string>
+    <string name="ignore_optimizations_off" msgid="9069942099715006633">"Don\'t allow"</string>
+    <string name="ignore_optimizations_on_desc" msgid="2321398930330555815">"May drain your battery more quickly"</string>
+    <string name="ignore_optimizations_off_desc" msgid="5255731062045426544">"Recommended for better battery life"</string>
+    <string name="ignore_optimizations_title" msgid="2829637961185027768">"Allow <xliff:g id="APP">%s</xliff:g> to ignore battery optimisations?"</string>
+    <string name="app_list_preference_none" msgid="108006867520327904">"None"</string>
+    <string name="work_profile_usage_access_warning" msgid="8870622842216566692">"Turning off usage access for this app doesn’t prevent your administrator tracking data usage for apps in your work profile."</string>
 </resources>
