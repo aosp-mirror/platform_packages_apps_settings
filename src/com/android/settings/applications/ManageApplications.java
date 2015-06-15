@@ -184,6 +184,7 @@ public class ManageApplications extends InstrumentedFragment
 
     private String mCurrentPkgName;
     private int mCurrentUid;
+    private boolean mFinishAfterDialog;
 
     private Menu mOptionsMenu;
 
@@ -240,12 +241,13 @@ public class ManageApplications extends InstrumentedFragment
             mListType = LIST_TYPE_HIGH_POWER;
             // Default to showing system.
             mShowSystem = true;
-            if (intent != null && Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS
-                    .equals(intent.getAction())) {
+            if (Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS.equals(intent.getAction())
+                    && intent.getData() != null) {
                 mCurrentPkgName = intent.getData().getSchemeSpecificPart();
                 if (mCurrentPkgName != null) {
                     mCurrentUid = mApplicationsState.getEntry(mCurrentPkgName,
                             UserHandle.myUserId()).info.uid;
+                    mFinishAfterDialog = true;
                     startApplicationDetailsActivity();
                 }
             }
@@ -427,6 +429,12 @@ public class ManageApplications extends InstrumentedFragment
         if (requestCode == INSTALLED_APP_DETAILS && mCurrentPkgName != null) {
             if (mListType == LIST_TYPE_NOTIFICATION) {
                 mApplications.mExtraInfoBridge.forceUpdate(mCurrentPkgName, mCurrentUid);
+            } else if (mListType == LIST_TYPE_HIGH_POWER) {
+                if (mFinishAfterDialog) {
+                    getActivity().onBackPressed();
+                } else {
+                    mApplications.mExtraInfoBridge.forceUpdate(mCurrentPkgName, mCurrentUid);
+                }
             } else {
                 mApplicationsState.requestSize(mCurrentPkgName, UserHandle.getUserId(mCurrentUid));
             }
@@ -450,7 +458,8 @@ public class ManageApplications extends InstrumentedFragment
                 startAppInfoFragment(AppStorageSettings.class, R.string.storage_settings);
                 break;
             case LIST_TYPE_HIGH_POWER:
-                HighPowerDetail.show(getActivity(), mCurrentPkgName);
+                HighPowerDetail.show(this, mCurrentPkgName, INSTALLED_APP_DETAILS,
+                        mFinishAfterDialog);
                 break;
             // TODO: Figure out if there is a way where we can spin up the profile's settings
             // process ahead of time, to avoid a long load of data when user clicks on a managed app.
