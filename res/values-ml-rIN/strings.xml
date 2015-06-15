@@ -21,6 +21,8 @@
     <string name="create" msgid="3578857613172647409">"സൃഷ്ടിക്കുക"</string>
     <string name="allow" msgid="3349662621170855910">"അനുവദിക്കുക"</string>
     <string name="deny" msgid="6947806159746484865">"നിരസിക്കുക"</string>
+    <string name="dlg_close" msgid="7471087791340790015">"അടയ്‌ക്കുക"</string>
+    <string name="dlg_switch" msgid="6243971420240639064">"സ്വിച്ച്"</string>
     <string name="device_info_default" msgid="7847265875578739287">"അജ്ഞാതം"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
       <item quantity="other">ഒരു ഡവലപ്പറാകുന്നതിൽ നിന്നും നിങ്ങൾ <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> ചുവട് മാത്രം അകലെയാണ്.</item>
@@ -331,11 +333,9 @@
     <string name="user_info_settings_title" msgid="1195015434996724736">"ഉപയോക്തൃവിവരം"</string>
     <string name="show_profile_info_on_lockscreen_label" msgid="2741208907263877990">"ലോക്ക് സ്‌ക്രീനിൽ പ്രൊഫൈൽ വിവരം ദൃശ്യമാക്കുക"</string>
     <string name="profile_info_settings_title" msgid="3518603215935346604">"പ്രൊഫൈൽ വിവരം"</string>
-    <!-- no translation found for Accounts_settings_title (1592309650872767387) -->
-    <skip />
+    <string name="Accounts_settings_title" msgid="1592309650872767387">"അക്കൗണ്ട് സമന്വയം"</string>
     <string name="location_settings_title" msgid="1369675479310751735">"ലൊക്കേഷൻ"</string>
-    <!-- no translation found for account_settings_title (574608087657397787) -->
-    <skip />
+    <string name="account_settings_title" msgid="574608087657397787">"അക്കൗണ്ട് സമന്വയം"</string>
     <string name="security_settings_title" msgid="7945465324818485460">"സുരക്ഷ"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"എന്റെ ലൊക്കേഷൻ, സ്‌ക്രീൻ അൺലോക്ക്, സിം കാർഡ് ലോക്ക്, ക്രഡൻഷ്യൽ സംഭരണ ലോക്ക് എന്നിവ സജ്ജീകരിക്കുക"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"എന്റെ ലൊക്കേഷൻ, സ്‌ക്രീൻ അൺലോക്ക്, ക്രെഡൻഷ്യൽ സംഭരണ ലോക്ക് എന്നിവ സജ്ജീകരിക്കുക"</string>
@@ -353,6 +353,12 @@
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"നിങ്ങളുടെ സ്‌ക്രീൻ അൺലോക്കുചെയ്യാനോ വാങ്ങലുകൾ സ്ഥിരീകരിക്കാനോ വിരലടയാളം ഉപയോഗിക്കുന്നതിന്, ഞങ്ങൾക്ക് ഇവ ചെയ്യേണ്ടതുണ്ട്:"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"നിങ്ങളുടെ ബാക്കപ്പ് സ്‌ക്രീൻ ലോക്ക് രീതി സജ്ജമാക്കുക"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_2" msgid="4158160658182631304">"നിങ്ങളുടെ വിരലടയാളം ചേർക്കുക"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"വിരലടയാളം ഉപയോഗിച്ച് അൺലോക്കുചെയ്യുക"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="5061093614328964700">"നിങ്ങളുടെ ഫോൺ അൺലോക്കുചെയ്യുന്നതിനോ വാങ്ങലുകൾ അംഗീകരിക്കുന്നതിനോ ആപ്സിലേക്ക് സൈൻ ഇൻ ചെയ്യുന്നതിനോ വിരലടയാള സെൻസർ തൊട്ടാൽ മതിയാകും. നിങ്ങളുടെ ഫോണിലേക്ക് ചേർത്തിട്ടുള്ള ഏത് വിരലടയാളത്തിനും ഇതൊക്കെ ചെയ്യാനാകും, അതിനാൽ നിങ്ങൾ ആരെയൊക്കെ ചേർക്കുന്നു എന്ന കാര്യത്തിൽ ജാഗ്രത പുലർത്തുക."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="7173290350577831813">"ശ്രദ്ധിക്കുക: നിങ്ങളുടെ വിരലടയാളത്തിന്റെ സുരക്ഷ, ശക്തമായ പാറ്റേണിനേക്കാളോ PIN-നേക്കാളോ കുറവായിരിക്കാം."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_risk_link_text" msgid="9129531466157620977">"കൂടുതലറിയുക"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"റദ്ദാക്കുക"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"തുടരൂ"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="5877265753699187149">"സെൻസർ കണ്ടെത്തുക"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="1959655161889313661">"നിങ്ങളുടെ ഫോണിന്റെ പിൻഭാഗത്ത് ഫിംഗർപ്രിന്റ് സെൻസർ കണ്ടെത്തുക."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="2058830032070449160">"ഉപകരണത്തിലെ ചിത്രീകരണവും ഫിംഗർപ്രിന്റ് സെൻസർ ലൊക്കേഷനും"</string>
@@ -373,6 +379,7 @@
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"അടുത്തത്"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"നിങ്ങളുടെ ഫോൺ അൺലോക്കുചെയ്യുന്നതുകൂടാതെ, വാങ്ങലുകളും അപ്ലിക്കേഷൻ ആക്‌സസ്സും അംഗീകരിക്കാൻ നിങ്ങൾക്ക് വിരലടയാളം ഉപയോഗിക്കാനുമാകും. "<annotation id="url">"കൂടുതലറിയുക"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4504501581228672208">"സ്‌ക്രീൻ ലോക്ക് ഓപ്‌ഷൻ പ്രവർത്തനരഹിതമാക്കി. നിങ്ങൾക്ക് തുടർന്നും വാങ്ങലുകളും അപ്ലിക്കേഷൻ ആക്‌സസ്സും അംഗീകരിക്കാൻ വിരലടയാളം ഉപയോഗിക്കാനുമാകും. "<annotation id="url">"കൂടുതലറിയുക"</annotation></string>
+    <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"വിരൽ ഉയർത്തുക, തുടർന്ന് സെൻസർ വീണ്ടും തൊടുക"</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"എൻ‌ക്രിപ്ഷൻ"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"ടാ‌ബ്‌ലെറ്റ് എൻ‌ക്രിപ്റ്റുചെയ്യുക"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"ഫോൺ എൻ‌ക്രിപ്റ്റുചെയ്യൂ"</string>
@@ -496,14 +503,14 @@
     <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"ജോഡിയാക്കൽ കോഡ് ടൈപ്പുചെയ്‌തിട്ട് മടങ്ങുക അല്ലെങ്കിൽ Enter അമർത്തുക"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"പിൻ നമ്പറിൽ അക്ഷരങ്ങളോ ചിഹ്നങ്ങളോ അടങ്ങിയിരിക്കുന്നു"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"സാധാരണയായി 0000 അല്ലെങ്കിൽ 1234"</string>
-    <!-- no translation found for bluetooth_pin_values_hint_16_digits (7849359451584101077) -->
-    <skip />
+    <string name="bluetooth_pin_values_hint_16_digits" msgid="7849359451584101077">"16 അക്കങ്ങൾ ഉണ്ടായിരിക്കണം"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="4637977124526813470">"മറ്റൊരു ഉപകരണത്തിൽ നിങ്ങൾക്ക് ഈ പിൻ ടൈപ്പുചെയ്യേണ്ടതായും വരാം."</string>
     <string name="bluetooth_enter_passkey_other_device" msgid="2798719004030279602">"മറ്റൊരു ഉപകരണത്തിൽ നിങ്ങൾ ഈ പാസ്‌കീ നൽകേണ്ടതായും വരാം."</string>
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"ഇതുമായി ജോടിയാക്കുന്നതിന്:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;അത് ഈ പാസ്കീ തന്നെയാണ് ദൃശ്യമാക്കുന്നതെന്ന് ഉറപ്പാക്കുക:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"ഇതിൽ നിന്ന്:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;ഈ ഉപകരണവുമായി ജോടിയാക്കണോ?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"ഇതുമായി ജോടിയാക്കുക:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>ഇതിൽ ടൈപ്പുചെയ്യുക:<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>, തുടർന്ന് മടങ്ങുക അല്ലെങ്കിൽ നൽകുക അമർത്തുക."</string>
     <string name="bluetooth_pairing_will_share_phonebook" msgid="4982239145676394429">"കണക്‌റ്റു‌ചെയ്‌തിരിക്കുമ്പോൾ, ജോടിയാക്കുന്നത് നിങ്ങളുടെ കോൺടാക്‌റ്റുകളിലേക്കും കോൾ ചരിത്രത്തിലേക്കും  ആക്‌സസ്സ് അനുവദിക്കുന്നു."</string>
+    <string name="bluetooth_pairing_shares_phonebook" msgid="1655930908614072491">"കണക്‌റ്റു‌ചെയ്‌തിരിക്കുമ്പോൾ, നിങ്ങളുടെ കോൺടാക്‌റ്റുകളിലേക്കും കോൾ ചരിത്രത്തിലേക്കും ആക്‌സസ് അനുവദിക്കുക."</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_connecting_error_message" msgid="1397388344342081090">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> എന്നതിലേക്ക് കണക്റ്റുചെയ്യാനായില്ല."</string>
     <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"ഉപകരണങ്ങൾക്കായി സ്‌കാൻ ചെയ്യുക"</string>
@@ -565,14 +572,10 @@
     <string name="wifi_display_options_forget" msgid="9119048225398894580">"മറക്കുക"</string>
     <string name="wifi_display_options_done" msgid="5703116500357822557">"പൂർത്തിയാക്കി"</string>
     <string name="wifi_display_options_name" msgid="4756080222307467898">"പേര്"</string>
-    <!-- no translation found for wifi_band_24ghz (852929254171856911) -->
-    <skip />
-    <!-- no translation found for wifi_band_5ghz (6433822023268515117) -->
-    <skip />
-    <!-- no translation found for link_speed (8896664974117585555) -->
-    <skip />
-    <!-- no translation found for wifi_alert_lockdown_by_device_owner (2537146774322347104) -->
-    <skip />
+    <string name="wifi_band_24ghz" msgid="852929254171856911">"2.4 GHz"</string>
+    <string name="wifi_band_5ghz" msgid="6433822023268515117">"5 GHz"</string>
+    <string name="link_speed" msgid="8896664974117585555">"%1$d Mbps"</string>
+    <string name="wifi_alert_lockdown_by_device_owner" msgid="8459738223049002970">"നിങ്ങളുടെ ഉപകരണത്തെ <xliff:g id="APP_NAME">%1$s</xliff:g> നിയന്ത്രിക്കുന്നു, Wi-Fi നെറ്റ്‌വർക്ക് പരിഷ്‌ക്കരിക്കാനും ഇല്ലാതാക്കാനും ഇത് അനുവദിക്കുന്നില്ല. കൂടുതൽ വിവരങ്ങൾക്ക്, നിങ്ങളുടെ അഡ്‌മിനിസ്‌ട്രേറ്ററെ ബന്ധപ്പെടുക."</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"ടാബ്‌ലെറ്റ് മറ്റൊരു ഉപകരണത്തിൽ സ്‌പർശിക്കുമ്പോൾ ഡാറ്റ കൈമാറ്റം അനുവദിക്കുക"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"ഫോൺ മറ്റൊരു ഉപകരണത്തെ സ്‌പർശിക്കുമ്പോൾ ഡാറ്റ കൈമാറ്റം അനുവദിക്കുക"</string>
@@ -614,6 +617,7 @@
     <string name="wifi_suspend_optimizations" msgid="1220174276403689487">"Wi‑Fi ഒപ്റ്റിമൈസുചെയ്യൽ"</string>
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"Wi‑Fi ഓണായിരിക്കുമ്പോൾ ബാറ്ററി ഉപഭോഗം കുറയ്‌ക്കുക"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"Wi‑Fi യുടെ ബാറ്ററി ഉപഭോഗം പരിമിതമാണ്"</string>
+    <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"Wi‑Fi-ക്ക് ഇന്റർനെറ്റ് ആക്സസ് നഷ്ടപ്പെട്ടാൽ, സെല്ലുലാർ ഡാറ്റയിലേക്ക് മാറുക."</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"നെറ്റ്‌വർക്ക് ചേർക്കുക"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"Wi‑Fi നെറ്റ്‌വർക്കുകൾ"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"WPS പുഷ് ബട്ടൺ"</string>
@@ -680,7 +684,7 @@
     <string name="wifi_hotspot_title" msgid="7726205804813286950">"കണക്‌റ്റുചെയ്യാൻ സൈൻ ഇൻ ചെയ്യണോ?"</string>
     <string name="wifi_hotspot_message" msgid="3673833421453455747">"നെറ്റ്‌വർക്കിൽ കണക്‌റ്റുചെയ്യുന്നതിന് മുമ്പ് നിങ്ങളോട് ഓൺലൈനിൽ സൈൻ ഇൻ ചെയ്യാൻ <xliff:g id="APP_NAME">%1$s</xliff:g> ആവശ്യപ്പെടുന്നു."</string>
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"കണക്റ്റുചെയ്യുക"</string>
-    <string name="no_internet_access_text" msgid="1509171132175355674">"ഈ നെറ്റ്‌വർക്കിൽ ഇന്റർനെറ്റ് ആക്‌സസ്സ് ഇല്ല. ഏതുവിധേനയും ഈ നെറ്റ്‌വർക്ക് ഉപയോഗിക്കണോ?"</string>
+    <string name="no_internet_access_text" msgid="7133561752896706392">"ഈ നെറ്റ്‌വർക്കിൽ ഇന്റർനെറ്റ് ആക്‌സസ് ഇല്ല. കണക്റ്റുചെയ്ത നിലയിൽ തുടരണോ?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"ഈ നെറ്റ്‌വർക്കിനായി വീണ്ടും ആവശ്യപ്പെടരുത്"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"കണക്റ്റുചെയ്യുക"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"നെറ്റ്‌വർക്കിൽ കണക്റ്റുചെയ്യുന്നതിൽ പരാജയപ്പെട്ടു"</string>
@@ -900,8 +904,7 @@
     <string name="device_status_summary" product="tablet" msgid="3292717754497039686">"ബാറ്ററി, നെറ്റ്‌വർക്ക് നിലകളും മറ്റു വിവരങ്ങളും"</string>
     <string name="device_status_summary" product="default" msgid="2599162787451519618">"ഫോൺ നമ്പർ, സിഗ്‌നൽ മുതലായവ"</string>
     <string name="storage_settings" msgid="4211799979832404953">"സംഭരണം"</string>
-    <!-- no translation found for storage_usb_settings (642612065405691122) -->
-    <skip />
+    <string name="storage_usb_settings" msgid="642612065405691122">"സംഭരണവും USB-യും"</string>
     <string name="storage_settings_title" msgid="8746016738388094064">"സംഭരണ ക്രമീകരണങ്ങൾ"</string>
     <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"USB സംഭരണം അൺമൗണ്ടുചെയ്യുക, ലഭ്യമായ സംഭരണം കാണുക"</string>
     <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"SD കാർഡ് അൺമൗണ്ടുചെയ്യുക, ലഭ്യമായ സംഭരണം കാണുക"</string>
@@ -973,10 +976,13 @@
     <string name="storage_menu_rename" msgid="7141058657592615390">"പേരുമാറ്റുക"</string>
     <string name="storage_menu_mount" msgid="1014683672493425425">"മൗണ്ടുചെയ്യുക"</string>
     <string name="storage_menu_unmount" msgid="681485356885955898">"നിരസിക്കുക"</string>
-    <string name="storage_menu_format" msgid="8334422679047059459">"മായ്‌ക്കുക, ഫോർമാറ്റുചെയ്യുക"</string>
-    <string name="storage_menu_format_internal" msgid="6553368530402755543">"ആന്തരിക സംഭരണമായി മായ്‌ക്കുക, ഫോർമാറ്റുചെയ്യുക"</string>
+    <string name="storage_menu_format" msgid="7690626079653152152">"ഫോർമാറ്റുചെയ്യുക"</string>
+    <string name="storage_menu_format_public" msgid="7464714208010125682">"പോർട്ടബിളായി ഫോർമാറ്റുചെയ്യുക"</string>
+    <string name="storage_menu_format_private" msgid="546017531835902096">"ആന്തരികമായി ഫോർമാറ്റുചെയ്യുക"</string>
     <string name="storage_menu_migrate" msgid="3969621494238154294">"വിവരം മൈഗ്രേറ്റുചെയ്യുക"</string>
     <string name="storage_menu_forget" msgid="6305824238997983426">"മറക്കുക"</string>
+    <string name="storage_menu_set_up" msgid="4263294929451685366">"സജ്ജമാക്കുക"</string>
+    <string name="storage_menu_explore" msgid="4637496051816521560">"അടുത്തറിയുക"</string>
     <string name="storage_title_usb" msgid="679612779321689418">"USB കമ്പ്യൂട്ടർ കണക്ഷൻ"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"ഇതായി കണ‌ക്റ്റുചെയ്യുക"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"മീഡിയ ഉപകരണം (MTP)"</string>
@@ -987,8 +993,11 @@
     <string name="usb_midi_summary" msgid="539169474810956358">"നിങ്ങളുടെ കമ്പ്യൂട്ടറിലെ MIDI സോഫ്‌റ്റ്‌വെയർ ഉപയോഗിച്ച് USB-യിൽ പ്രവർത്തിക്കാൻ MIDI പ്രവർത്തനക്ഷമമാക്കിയ അപ്ലിക്കേഷനുകളെ അനുവദിക്കുന്നു."</string>
     <string name="storage_other_users" msgid="808708845102611856">"മറ്റ് ഉപയോക്താക്കൾ"</string>
     <string name="storage_internal_title" msgid="690771193137801021">"ഉപകരണ സംഭരണം"</string>
-    <string name="storage_external_title" msgid="2723851748972673696">"നീക്കംചെയ്യാനാവുന്ന സംഭരണം"</string>
-    <string name="storage_volume_summary" msgid="476551204412943800">"<xliff:g id="FREE">%1$s</xliff:g> സൗജന്യം (മൊത്തം <xliff:g id="TOTAL">%2$s</xliff:g>)"</string>
+    <string name="storage_external_title" msgid="3433462910096848696">"പോർട്ടബിൾ സംഭരണം"</string>
+    <string name="storage_volume_summary" msgid="7023441974367853372">"<xliff:g id="TOTAL">%2$s</xliff:g>-യുടെ <xliff:g id="USED">%1$s</xliff:g> ഉപയോഗിച്ചു"</string>
+    <string name="storage_size_large" msgid="4936185879734498579">"<xliff:g id="NUMBER">^1</xliff:g> "<small><small>"<xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
+    <string name="storage_volume_used" msgid="1303803057698959872">"<xliff:g id="TOTAL">%1$s</xliff:g> ഉപയോഗിച്ചു"</string>
+    <string name="storage_volume_used_total" msgid="6113121714019000244">"<xliff:g id="TOTAL">%1$s</xliff:g>-യുടെ മൊത്തം ഉപയോഗിച്ചു"</string>
     <string name="storage_mount_success" msgid="687641090137253647">"<xliff:g id="NAME">%1$s</xliff:g> മൗണ്ടുചെയ്‌തു"</string>
     <string name="storage_mount_failure" msgid="1042621107954547316">"<xliff:g id="NAME">%1$s</xliff:g> മൗണ്ടുചെയ്യാനായില്ല"</string>
     <string name="storage_unmount_success" msgid="5737203344673441677">"<xliff:g id="NAME">%1$s</xliff:g> എന്നതിനെ സുരക്ഷിതമായി നിരസിച്ചു"</string>
@@ -996,9 +1005,23 @@
     <string name="storage_format_success" msgid="3023144070597190555">"<xliff:g id="NAME">%1$s</xliff:g> എന്നതിനെ ഫോർമാറ്റുചെയ്‌തു"</string>
     <string name="storage_format_failure" msgid="6032640952779735766">"<xliff:g id="NAME">%1$s</xliff:g> ഫോർമാറ്റുചെയ്യാനായില്ല"</string>
     <string name="storage_rename_title" msgid="8242663969839491485">"സംഭരണത്തിന്റെ പേരുമാറ്റുക"</string>
+    <string name="storage_dialog_unmounted" msgid="6403320870103261477">"ഈ <xliff:g id="NAME_0">^1</xliff:g> സുരക്ഷിതമായി ഇജക്റ്റുചെയ്തിരിക്കുന്നു. \n\nഈ <xliff:g id="NAME_1">^1</xliff:g> ഉപയോഗിക്കുന്നതിന്, ആദ്യം നിങ്ങളിത് മൗണ്ടുചെയ്യേണ്ടതുണ്ട്."</string>
+    <string name="storage_dialog_unmountable" msgid="3732209361668282254">"<xliff:g id="NAME_0">^1</xliff:g> കേടായിരിക്കുന്നു. \n\nഈ <xliff:g id="NAME_1">^1</xliff:g> ഉപയോഗിക്കുന്നതിന്, ആദ്യം നിങ്ങളിത് മൗണ്ടുചെയ്യേണ്ടതുണ്ട്."</string>
+    <string name="storage_dialog_unsupported" msgid="4503128224360482228">"ഈ ഉപകരണം ഈ <xliff:g id="NAME_0">^1</xliff:g> പിന്തുണയ്ക്കുന്നില്ല. \n\nഉപകരണത്തിനൊപ്പം <xliff:g id="NAME_1">^1</xliff:g> ഉപയോഗിക്കുന്നതിന്, ആദ്യം നിങ്ങളിത് സജ്ജമാക്കേണ്ടതുണ്ട്."</string>
     <string name="storage_internal_format_details" msgid="4018647158382548820">"ഫോർമാറ്റുചെയ്‌തശേഷം, നിങ്ങൾക്ക് ഈ <xliff:g id="NAME_0">^1</xliff:g> മറ്റ് ഉപകരണങ്ങളിൽ ഉപയോഗിക്കാനാകും. \n\nഈ <xliff:g id="NAME_1">^1</xliff:g> എന്നതിലെ എല്ലാ വിവരവും മായ്‌ക്കും. ആദ്യം ബാക്കപ്പുചെയ്യുന്നത് പരിഗണിക്കുക. \n\n"<b>"ഫോട്ടോകളും മറ്റ് മീഡിയയും ബാക്കപ്പുചെയ്യുക"</b>" \nനിങ്ങളുടെ മീഡിയ ഫയലുകളെ ഈ ഉപകരണത്തിലെ ഇതര സംഭരണയിടത്തിലേക്ക് നീക്കുകയോ USB കേബിൾ ഉപയോഗിച്ച് അവയെ ഒരു കമ്പ്യൂട്ടറിലേക്ക് മാറ്റുകയോ ചെയ്യുക. \n\n"<b>"അപ്ലിക്കേഷനുകൾ ബാക്കപ്പുചെയ്യുക"</b>" \nഈ <xliff:g id="NAME_6">^1</xliff:g> എന്നതിൽ സംഭരിച്ചിരിക്കുന്ന എല്ലാ അപ്ലിക്കേഷനുകളും അൺഇൻസ്റ്റാൾ ചെയ്യുകയും അവയുടെ വിവരം മായ്‌ക്കുകയും ചെയ്യും. ഈ അപ്ലിക്കേഷനുകൾ സൂക്ഷിക്കാൻ, അവയെ ഈ ഉപകരണത്തിലെ ഇതര സംഭരണയിടത്തിലേക്ക് നീക്കുക."</string>
     <string name="storage_internal_unmount_details" msgid="3582802571684490057"><b>"നിങ്ങൾ ഈ <xliff:g id="NAME_0">^1</xliff:g> ഒഴിവാക്കുമ്പോൾ, അതിൽ സംഭരിച്ചിരിക്കുന്ന അപ്ലിക്കേഷനുകളുടെ പ്രവർത്തനം നിലയ്‌ക്കുകയും അതിൽ സംഭരിച്ചിരിക്കുന്ന മീഡിയ ഫയലുകൾ അത് തിരികെ ചേർക്കുന്നതുവരെ ലഭ്യമാകുകയുമില്ല ."</b>" \n\nഈ <xliff:g id="NAME_1">^1</xliff:g> എന്നത് ഈ ഉപകരണത്തിൽ മാത്രം പ്രവർത്തിക്കാനാണ് ഫോർമാറ്റുചെയ്‌തിരിക്കുന്നത്. ഇത് മറ്റുള്ളവയിലൊന്നും പ്രവർത്തിക്കില്ല."</string>
     <string name="storage_internal_forget_details" msgid="9028875424669047327">"ഈ <xliff:g id="NAME">^1</xliff:g> അടങ്ങിയിരിക്കുന്ന ആപ്പ്‌സ്, ഫോട്ടോകൾ അല്ലെങ്കിൽ വിവരം ഉപയോഗിക്കാൻ, അത് വീണ്ടും ചേർക്കുക. \n\nപകരം, ഉപകരണം ലഭ്യമല്ലെങ്കിൽ, നിങ്ങൾക്ക് ഈ ഉപകരണം മറക്കാൻ തിരഞ്ഞെടുക്കാനാകും. \n\nനിങ്ങൾ മറക്കാൻ തിരഞ്ഞെടുക്കുകയാണെങ്കിൽ, ഉപകരണത്തിൽ അടങ്ങിയിരിക്കുന്ന എല്ലാ വിവരവും ശാശ്വതമായി നഷ്‌ടമാകും. \n\nനിങ്ങൾക്ക് ഈ ആപ്പ്‌സ് പിന്നീട് വീണ്ടും ഇൻസ്റ്റാൾ ചെയ്യാനാകും, എന്നാൽ ഈ ഉപകരണത്തിൽ സംഭരിച്ചിരിക്കുന്ന അവയുടെ വിവരം നഷ്‌ടമാകും."</string>
+    <string name="storage_internal_forget_confirm_title" msgid="1370847944388479245">"<xliff:g id="NAME">^1</xliff:g> മറക്കണോ?"</string>
+    <string name="storage_internal_forget_confirm" msgid="1148446041396902905">"<xliff:g id="NAME">^1</xliff:g> എന്നതിൽ സംഭരിച്ചിരിക്കുന്ന എല്ലാ ആപ്സും ഫോട്ടോകളും ഡാറ്റയും ശാശ്വതമായി നഷ്ടപ്പെടും."</string>
+    <string name="storage_detail_apps" msgid="6141154016753507490">"ആപ്സ്"</string>
+    <string name="storage_detail_images" msgid="6950678857740634769">"ചിത്രങ്ങള്‍"</string>
+    <string name="storage_detail_videos" msgid="2919743464827110953">"വീഡിയോകൾ"</string>
+    <string name="storage_detail_audio" msgid="1197685141676483213">"ഓഡിയോ"</string>
+    <string name="storage_detail_cached" msgid="8547136365247818567">"കാഷെ ചെയ്‌ത ഡാറ്റ"</string>
+    <string name="storage_detail_other" msgid="8404938385075638238">"മറ്റുള്ളവ"</string>
+    <string name="storage_detail_explore" msgid="7911344011431568294">"<xliff:g id="NAME">^1</xliff:g> അടുത്തറിയുക"</string>
+    <string name="storage_detail_dialog_other" msgid="4894289482062047165">"ആപ്സ് സംരക്ഷിച്ചിട്ടുള്ള പങ്കിട്ട ഫയലുകൾ, ഇന്റർനെറ്റിൽ നിന്നോ Bluetooth-ൽ നിന്നോ ഡൗൺലോഡ് ചെയ്ത ഫയലുകൾ, Android ഫയലുകൾ എന്നിവയാണ് മറ്റുള്ളവയിൽ ഉൾപ്പെടുന്നത്. \n\nഈ മുഴുവൻ ഉള്ളടക്കവും കാണുന്നതിന് <xliff:g id="NAME">^1</xliff:g>, \'അടുത്തറിയുക\' സ്പർശിക്കുക."</string>
+    <string name="storage_detail_dialog_user" msgid="1675756743326079688">"സംഭരണത്തിന്റെ <xliff:g id="SIZE">^2</xliff:g> വരെ ഇടം എടുക്കുന്ന ഫോട്ടോകൾ, സംഗീതം, സിനിമകൾ, ആപ്സ്, മറ്റ് ഡാറ്റ തുടങ്ങിയവ <xliff:g id="USER_0">^1</xliff:g> സംരക്ഷിച്ചിട്ടുണ്ടാകാം. \n\nവിശദാംശങ്ങൾ കാണുന്നതിന്, <xliff:g id="USER_1">^1</xliff:g> എന്നതിലേക്ക് മാറുക."</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"നിങ്ങളുടെ <xliff:g id="NAME">^1</xliff:g> സജ്ജമാക്കുക"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"പോർട്ടബിൾ സംഭരണമായി ഉപയോഗിക്കുക"</string>
     <string name="storage_wizard_init_external_summary" msgid="7476105886344565074">"ഉപകരണങ്ങൾ തമ്മിൽ ഫോട്ടോകളും മറ്റ് മീഡിയയും നീക്കുന്നതിനായി."</string>
@@ -1012,7 +1035,7 @@
     <string name="storage_wizard_format_progress_title" msgid="6487352396450582292">"<xliff:g id="NAME">^1</xliff:g> ഫോർമാറ്റുചെയ്യുന്നു…"</string>
     <string name="storage_wizard_format_progress_body" msgid="4445041233802828430">"അത് ഫോർമാറ്റുചെയ്യുമ്പോൾ <xliff:g id="NAME">^1</xliff:g> നീക്കംചെയ്യരുത്."</string>
     <string name="storage_wizard_migrate_title" msgid="1363078147938160407">"പുതിയ സംഭരണത്തിലേക്ക് വിവരം നീക്കുക"</string>
-    <string name="storage_wizard_migrate_body" msgid="2980740530060653893">"നിങ്ങൾക്ക് ഈ പുതിയ <xliff:g id="NAME">^1</xliff:g> എന്നതിലേക്ക് ഫോട്ടോകളും ഫയലുകളും അപ്ലിക്കേഷൻ വിവരവും നീക്കാനാകും. \n\nനീക്കാൻ ഏകദേശം <xliff:g id="TIME">^2</xliff:g> സമയമെടുക്കുകയും ആന്തരിക സംഭരണത്തിൽ നിന്ന് <xliff:g id="SIZE">^3</xliff:g> സൃഷ്‌ടിക്കുകയും ചെയ്യും. പ്രവർത്തനം നടന്നുകൊണ്ടിരിക്കുമ്പോൾ ചില അപ്ലിക്കേഷനുകൾ പ്രവർത്തിക്കില്ല."</string>
+    <string name="storage_wizard_migrate_body" msgid="890751699549542345">"നിങ്ങൾക്ക് ഈ പുതിയ <xliff:g id="NAME">^1</xliff:g> എന്നതിലേക്ക് ഫോട്ടോകളും ഫയലുകളും ചില ആപ്സും നീക്കാനാകും. \n\nനീക്കുന്നതിന് ഏതാണ്ട് <xliff:g id="TIME">^2</xliff:g> എടുക്കും, ആന്തരിക സംഭരണത്തിൽ <xliff:g id="SIZE">^3</xliff:g> സ്വതന്ത്രമാകും. നീക്കിക്കൊണ്ടിരിക്കുന്ന സമയത്ത് ചില ആപ്സ് പ്രവർത്തിക്കില്ല."</string>
     <string name="storage_wizard_migrate_now" msgid="4523444323744239143">"ഇപ്പോൾ നീക്കുക"</string>
     <string name="storage_wizard_migrate_later" msgid="3173482328116026253">"പിന്നീട് നീക്കുക"</string>
     <string name="storage_wizard_migrate_confirm_title" msgid="8564833529613286965">"വിവരം ഇപ്പോൾ നീക്കുക"</string>
@@ -1323,6 +1346,7 @@
     <string name="not_installed" msgid="2797554494953450291">"ഈ ഉപയോക്താവിനായി ഇൻസ്‌റ്റാളുചെയ്‌തിട്ടില്ല"</string>
     <string name="no_applications" msgid="7336588977497084921">"അപ്ലിക്കേഷനുകളൊന്നുമില്ല."</string>
     <string name="internal_storage" msgid="1584700623164275282">"ആന്തരിക സംഭരണം"</string>
+    <string name="internal_storage_sentence" msgid="889098931914857143">"ആന്തരിക സംഭരണം"</string>
     <string name="sd_card_storage" product="nosdcard" msgid="2673203150465132465">"USB സംഭരണം"</string>
     <string name="sd_card_storage" product="default" msgid="7623513618171928235">"SD കാർഡ് സംഭരണം"</string>
     <string name="recompute_size" msgid="7722567982831691718">"വലുപ്പം വീണ്ടും കണക്കാക്കുന്നു..."</string>
@@ -2096,8 +2120,6 @@
     <string name="disable_overlays_summary" msgid="3578941133710758592">"സ്‌ക്രീൻ കമ്പോസിറ്റുചെയ്യലിനായി എല്ലായ്‌പ്പോഴും GPU ഉപയോഗിക്കുക"</string>
     <string name="simulate_color_space" msgid="6745847141353345872">"വർണ്ണ സ്‌പെയ്‌സ് പ്രവർത്തിപ്പിക്കുക"</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"OpenGL ട്രെയ്‌സുകൾ പ്രവർത്തനക്ഷമമാക്കുക"</string>
-    <string name="use_awesomeplayer" msgid="1583337008516364226">"AwesomePlayer ഉപയോഗിക്കൂ (ഒഴിവാക്കിയത്)"</string>
-    <string name="use_awesomeplayer_summary" msgid="6757734070733387140">"ഏറ്റവും മികച്ച മീഡിയ പ്ലേബാക്കിനായി NuPlayer-നുപകരം AwesomePlayer ഉപയോഗിക്കുക"</string>
     <string name="usb_audio_disable_routing" msgid="8114498436003102671">"USB ഓഡിയോ റൂട്ടിംഗ് പ്രവർത്തനരഹിതമാക്കുക"</string>
     <string name="usb_audio_disable_routing_summary" msgid="980282760277312264">"USB ഓഡിയോ പെരിഫറലുകളിലേക്കുള്ള യാന്ത്രിക റൂട്ടിംഗ് പ്രവർത്തനരഹിതമാക്കുക"</string>
     <string name="debug_layout" msgid="5981361776594526155">"ലേഔട്ട് ബൗണ്ടുകൾ ദൃശ്യമാക്കുക"</string>
@@ -2147,6 +2169,7 @@
     <string name="data_usage_menu_auto_sync" msgid="8203999775948778560">"ഡാറ്റ സ്വയമേ സമന്വയിപ്പിക്കൂ"</string>
     <string name="data_usage_menu_sim_cards" msgid="6410498422797244073">"സിം കാർഡുകൾ"</string>
     <string name="data_usage_menu_cellular_networks" msgid="5243515735055652279">"സെല്ലുലാർ നെറ്റ്‌വർക്കുകൾ"</string>
+    <string name="data_usage_cellular_data_summary" msgid="8413357481361268285">"പരിധിയിൽ തൽക്കാലം നിർത്തി"</string>
     <string name="account_settings_menu_auto_sync" msgid="6243013719753700377">"ഡാറ്റ സ്വയമേ സമന്വയിപ്പിക്കൂ"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="785541379617346438">"വ്യക്തിഗത ഡാറ്റ യാന്ത്രികമായി സമന്വയിപ്പിക്കുക"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="329565580969147026">"ഔദ്യോഗിക ഡാറ്റ യാന്ത്രികമായി സമന്വയിപ്പിക്കുക"</string>
@@ -2356,12 +2379,9 @@
     <string name="nfc_payment_favor_default" msgid="8238320071435721803">"തുടർന്നും <xliff:g id="APP">%1$s</xliff:g> ഉപയോഗിക്കുക"</string>
     <string name="nfc_payment_favor_default_default_unknown" msgid="7029467023485683077">"തുടർന്നും സ്ഥിര അപ്ലിക്കേഷൻ ഉപയോഗിക്കുക"</string>
     <string name="nfc_payment_pay_with" msgid="7524904024378144072">"ടാപ്പുചെയ്‌ത് പണമടയ്‌ക്കുക ടെർമിനലിൽ, ഇതുപയോഗിച്ച് പണമടയ്‌ക്കുക:"</string>
-    <!-- no translation found for nfc_how_it_works_title (1984068457698797207) -->
-    <skip />
-    <!-- no translation found for nfc_how_it_works_content (8056141705658483393) -->
-    <skip />
-    <!-- no translation found for nfc_how_it_works_got_it (259653300203217402) -->
-    <skip />
+    <string name="nfc_how_it_works_title" msgid="1984068457698797207">"ടെർമിനലിൽ പണമടയ്ക്കൽ"</string>
+    <string name="nfc_how_it_works_content" msgid="5820288675316257177">"\'ടാപ്പുചെയ്‌ത് പണമടയ്‌ക്കുക\' ആപ്പ് സജ്ജീകരിക്കുകയും ഫോൺ ഓണാക്കുകയും ചെയ്താൽ, പർച്ചേസ് നടത്തുന്നതിന്, \'ടാപ്പുചെയ്‌ത് പണമടയ്‌ക്കുക\' ലോഗോയുള്ള ഏതെങ്കിലും ടെർമിനലിൽ നിങ്ങളുടെ ഫോൺ ടാപ്പുചെയ്യുക."</string>
+    <string name="nfc_how_it_works_got_it" msgid="259653300203217402">"മനസ്സിലായി"</string>
     <string name="nfc_more_title" msgid="815910943655133280">"കൂടുതല്‍..."</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"നിങ്ങളുടെ മുൻഗണയായി സജ്ജമാക്കണോ?"</string>
     <string name="nfc_payment_set_default" msgid="8532426406310833489">"നിങ്ങൾ ടാപ്പുചെയ്‌ത് പണമടയ്‌ക്കുമ്പോൾ എല്ലായ്‌പ്പോഴും <xliff:g id="APP">%1$s</xliff:g> ഉപയോഗിക്കണോ?"</string>
@@ -2547,12 +2567,9 @@
       <item quantity="other">%d അപ്ലിക്കേഷനുകൾക്ക് അറിയിപ്പുകൾ വായിക്കാനാകും</item>
       <item quantity="one">%d അപ്ലിക്കേഷന് അറിയിപ്പുകൾ വായിക്കാനാകും</item>
     </plurals>
-    <!-- no translation found for no_notification_listeners (3487091564454192821) -->
-    <skip />
-    <!-- no translation found for notification_listener_security_warning_title (5522924135145843279) -->
-    <skip />
-    <!-- no translation found for notification_listener_security_warning_summary (548925084229440829) -->
-    <skip />
+    <string name="no_notification_listeners" msgid="3487091564454192821">"ഇൻസ്റ്റാളുചെയ്തിട്ടുള്ള ആപ്സൊന്നും അറിയിപ്പ് ആക്‌സസ് അഭ്യർത്ഥിച്ചിട്ടില്ല."</string>
+    <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"<xliff:g id="SERVICE">%1$s</xliff:g>-ന് അറിയിപ്പ് ആക്സസ് അനുവദിക്കണോ?"</string>
+    <string name="notification_listener_security_warning_summary" msgid="548925084229440829">"കോൺടാക്റ്റ് പേരുകളും നിങ്ങൾ സ്വീകരിക്കുന്ന സന്ദേശ ടെക്സ്റ്റുകളും പോലുള്ള വ്യക്തിഗത വിവരങ്ങൾ ഉൾപ്പെടെ, എല്ലാ അറിയിപ്പുകളും <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>-ന് വായിക്കാനാകും. അറിയിപ്പുകൾ നിരാകരിക്കാനോ അവയിലടങ്ങിയിരിക്കുന്ന സജീവ ബട്ടണുകൾ പ്രവർത്തനക്ഷമമാക്കാനോ ഇതിന് കഴിയും."</string>
     <string name="manage_zen_access_title" msgid="2611116122628520522">"\'ശല്യപ്പെടുത്തരുത്\' ആക്‌സസ്സ്"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"ഇൻസ്റ്റാളുചെയ്‌ത ആപ്പ്‌സൊന്നും \'ശല്യപ്പെടുത്തരുത്\' ആക്‌സസ്സ് അഭ്യർത്ഥിച്ചിട്ടില്ല"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"അപ്ലിക്കേഷനുകൾ ലോഡുചെയ്യുന്നു..."</string>
@@ -2643,8 +2660,7 @@
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"അൺപിൻ ചെയ്യുന്നതിനുമുമ്പ് പാസ്‌വേഡ് ആവശ്യപ്പെടുക"</string>
     <string name="screen_pinning_unlock_none" msgid="3814188275713871856">"അൺപിൻ ചെയ്യുമ്പോൾ ഉപകരണം ലോക്കുചെയ്യുക"</string>
     <string name="managed_user_title" msgid="8101244883654409696">"ഔദ്യോഗിക പ്രൊഫൈൽ"</string>
-    <!-- no translation found for opening_paragraph_delete_profile_unknown_company (2232461523882170874) -->
-    <skip />
+    <string name="opening_paragraph_delete_profile_unknown_company" msgid="2232461523882170874">"ഈ വർക്ക് പ്രൊഫൈൽ നിയന്ത്രിക്കുന്നത്:"</string>
     <string name="managing_admin" msgid="8843802210377459055">"<xliff:g id="ADMIN_APP_LABEL">%s</xliff:g> നിയന്ത്രിക്കുന്നു"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(പരീക്ഷണാത്മകം)"</string>
     <string name="display_auto_rotate_title" msgid="6176450657107806043">"ഉപകരണം തിരിക്കുമ്പോൾ"</string>
@@ -2704,6 +2720,12 @@
       <item quantity="other"><xliff:g id="COUNT_2">%d</xliff:g> / <xliff:g id="COUNT_3">%d</xliff:g> അനുമതികൾ നൽകി</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> / <xliff:g id="COUNT_1">%d</xliff:g> അനുമതി നൽകി</item>
     </plurals>
+    <plurals name="runtime_permissions_additional_count" formatted="false" msgid="931276038884210752">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> അധിക അനുമതികൾ</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> അധിക അനുമതി</item>
+    </plurals>
+    <string name="runtime_permissions_summary_no_permissions_granted" msgid="1679758182657005375">"അനുമതികളൊന്നും അനുവദിച്ചില്ല"</string>
+    <string name="runtime_permissions_summary_no_permissions_requested" msgid="7655100570513818534">"അനുമതികളൊന്നും അഭ്യർത്ഥിച്ചില്ല"</string>
     <string name="launch_defaults_some" msgid="313159469856372621">"സ്ഥിരമായ ചിലവ സജ്ജീകരിച്ചു"</string>
     <string name="launch_defaults_none" msgid="4241129108140034876">"സ്ഥിരമായൊന്നും സജ്ജീകരിച്ചിട്ടില്ല"</string>
     <string name="filter_all_apps" msgid="1988403195820688644">"എല്ലാ അപ്ലിക്കേഷനുകളും"</string>
@@ -2717,6 +2739,7 @@
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"ഡൊമെയ്‌ൻ URL-കൾ ഉള്ളത്"</string>
     <string name="trust_agent_disabled_device_admin" msgid="5982562414642596563">"അഡ്‌മിനിസ്ട്രേറ്റർ പ്രവർത്തനരഹിതമാക്കി"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"വിപുലമായത്"</string>
+    <string name="configure_apps" msgid="6685680790825882528">"ആപ്സ് കോണ്‍ഫിഗര്‍ ചെയ്യുക"</string>
     <string name="unknown_app" msgid="5275921288718717656">"അജ്ഞാത അപ്ലിക്കേഷൻ"</string>
     <string name="choose_profile" msgid="8229363046053568878">"പ്രൊഫൈൽ തിരഞ്ഞെടുക്കുക"</string>
     <string name="app_permissions" msgid="4148222031991883874">"ആപ്പ് അനുമതികൾ"</string>
@@ -2734,8 +2757,15 @@
     </plurals>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"തിരിച്ചറിഞ്ഞില്ല"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"സ്ഥിര അപ്ലിക്കേഷനുകൾ"</string>
-    <string name="default_assist_title" msgid="8851464168639315795">"അസിസ്റ്റ്"</string>
-    <string name="default_assist_none" msgid="4719591002003824614">"സ്ഥിര അസിസ്റ്റൊന്നുമില്ല"</string>
+    <string name="assist_and_voice_input_title" msgid="1733165754793221197">"അസിസ്റ്റ് - വോയ്സ് ഇൻപുട്ട്"</string>
+    <string name="default_assist_title" msgid="8868488975409247921">"അസിസ്റ്റ് ആപ്പ്"</string>
+    <string name="default_assist_none" msgid="3709083569608735487">"ഒന്നുമില്ല"</string>
+    <string name="choose_assist_title" msgid="554234448228740980">"അസിസ്റ്റ് ഉപയോഗിക്കുക"</string>
+    <string name="assistant_security_warning_title" msgid="8673079231955467177">"<xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g>-നെ നിങ്ങളുടെ സഹായി ആക്കണോ?"</string>
+    <string name="assistant_security_warning" msgid="4881965750615394002">"സ്ക്രീൻ ദൃശ്യമാകുന്നതോ ആപ്സിനുള്ളിൽ ആക്സസ് ചെയ്യാവുന്നതോ ആയ വിവരങ്ങൾ ഉൾപ്പെടെ, നിങ്ങളുടെ സിസ്റ്റത്തിൽ ഉപയോഗത്തിലുള്ള ആപ്സിനെ കുറിച്ചുള്ള വിവരങ്ങൾ വായിക്കാൻ <xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g>-ന് കഴിയും."</string>
+    <string name="assistant_security_warning_agree" msgid="7710290206928033908">"അംഗീകരിക്കുക"</string>
+    <string name="assistant_security_warning_disagree" msgid="877419950830205913">"അംഗീകരിക്കുന്നില്ല"</string>
+    <string name="choose_voice_input_title" msgid="975471367067718019">"വോയ്‌സ് ഇൻപുട്ട് ഉപയോഗിക്കുക"</string>
     <string name="default_browser_title" msgid="8101772675085814670">"ബ്രൗസർ അപ്ലിക്കേഷൻ"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"സ്ഥിര ബ്രൗസറൊന്നുമില്ല"</string>
     <string name="default_phone_title" msgid="282005908059637350">"ഫോൺ അപ്ലിക്കേഷൻ"</string>
@@ -2759,16 +2789,15 @@
     <string name="high_power_apps" msgid="2116416853043103135">"ഒപ്റ്റിമൈസേഷനുകൾ അവഗണിക്കുക"</string>
     <string name="high_power_filter_on" msgid="3862942127137594196">"അനുവദനീയം"</string>
     <string name="high_power_on" msgid="148473814103292724">"ബാറ്ററി ഒപ്റ്റിമൈസേഷനുകൾ അവഗണിക്കുന്നു"</string>
-    <!-- no translation found for high_power_off (221092098425904010) -->
-    <skip />
-    <string name="high_power_desc" msgid="8777632785903235764">"ബാറ്ററി ഒപ്റ്റിമൈസേഷനുകൾ പ്രയോഗിക്കരുത്. ഇത് ബാറ്ററിയെ വേഗത്തിൽ ശൂന്യമാക്കാം."</string>
+    <string name="high_power_off" msgid="221092098425904010">"അനുവദിച്ചിട്ടില്ല"</string>
+    <string name="high_power_desc" msgid="8412735192889327770">"ബാറ്ററി ഒപ്റ്റിമൈസേഷനുകൾ പ്രയോഗിക്കരുത്. ഇത് ബാറ്ററിയെ വേഗത്തിൽ തീർത്തേക്കാം."</string>
     <plurals name="high_power_count" formatted="false" msgid="4343190376439806186">
       <item quantity="other">ബാറ്ററി ഒപ്റ്റിമൈസേഷനുകൾ അവഗണിക്കാൻ <xliff:g id="COUNT">%d</xliff:g> ആപ്പുകളെ അനുവദിച്ചിരിക്കുന്നു</item>
       <item quantity="one">ബാറ്ററി ഒപ്റ്റിമൈസേഷനുകൾ അവഗണിക്കാൻ ഒരു ആപ്പിനെ അനുവദിച്ചിരിക്കുന്നു</item>
     </plurals>
     <string name="battery_summary" msgid="101415762036784289">"അവസാനമായി പൂർണ്ണ ചാർജ് ആയതിനുശേഷം <xliff:g id="PERCENTAGE">%1$d</xliff:g>%% ഉപയോഗം"</string>
     <string name="no_battery_summary" msgid="3528036835462846814">"അവസാനമായി പൂർണ്ണ ചാർജ് ആയതിനുശേഷം ബാറ്ററി ഉപയോഗമില്ല"</string>
-    <string name="app_notification_preferences" msgid="6413363601485067724">"ആപ്പ് അറിയിപ്പ് മുൻഗണനകൾ"</string>
+    <string name="app_notification_preferences" msgid="1599319335092722613">"ആപ്പ് ക്രമീകരണം"</string>
     <string name="system_ui_settings" msgid="579824306467081123">"SystemUI ട്യൂണർ കാണിക്കുക"</string>
     <string name="additional_permissions" msgid="6463784193877056080">"അധിക അനുമതികൾ"</string>
     <string name="additional_permissions_more" msgid="3538612272673191451">"<xliff:g id="COUNT">%1$d</xliff:g> എണ്ണം കൂടി"</string>
@@ -2781,7 +2810,7 @@
     <string name="inactive_app_inactive_summary" msgid="6768756967594202411">"നിഷ്‌ക്രിയം. ടോഗിൾ ചെയ്യാൻ സ്‌പർശിക്കുക."</string>
     <string name="inactive_app_active_summary" msgid="4512911571954375968">"സജീവം. ടോഗിൾ ചെയ്യാൻ സ്‌പർശിക്കുക."</string>
     <string name="assist_access_context_title" msgid="2047105711005856521">"നിലവിലെ സന്ദർഭം ഉപയോഗിക്കുക"</string>
-    <string name="assist_access_context_summary" msgid="8365837347256022203">"നിങ്ങൾ അസിസ്റ്റ് ആപ്പ് തുറക്കുമ്പോൾ, അത് സ്‌ക്രീനിൽ ഉള്ള വിവരം ആക്‌സസ്സ് ചെയ്യുന്നുണ്ടോ എന്ന് നോക്കാം"</string>
+    <string name="assist_access_context_summary" msgid="6937520858532073208">"അസിസ്റ്റ് ആപ്പ് തുറക്കുമ്പോൾ, നിങ്ങൾ സ്ക്രീനിൽ എന്തുചെയ്യുകയായിരുന്നു എന്ന് കാണാൻ അതിനെ അനുവദിക്കുക."</string>
     <string name="assist_footer" msgid="2283187001990543739">"അസിസ്റ്റ് ആപ്പ്‌സ് ആവശ്യപ്പെടാതെ തന്നെ ഉപയോഗപ്രദമായ കാര്യങ്ങൾ മനസ്സിലാക്കി പ്രവർത്തിക്കാൻ നിങ്ങളെ സഹായിക്കുന്നു. ചില ആപ്പ്‌സ് നിങ്ങൾക്ക് പൂർണ്ണമായ സഹായം നൽകാൻ ലോഞ്ചറിനെയും വോയ്‌സ് ഇൻപുട്ടിനെയും പിന്തുണയ്‌ക്കുന്നു."</string>
     <string name="average_memory_use" msgid="829566450150198512">"ശരാശരി മെമ്മറി ഉപയോഗം"</string>
     <string name="maximum_memory_use" msgid="7493720799710132496">"പരമാവധി മെമ്മറി ഉപയോഗം"</string>
@@ -2804,18 +2833,13 @@
     <string name="running_frequency" msgid="6622624669948277693">"ആവൃത്തി"</string>
     <string name="memory_maximum_usage" msgid="6513785462055278341">"പരമാവധി ഉപയോഗം"</string>
     <string name="no_data_usage" msgid="9131454024293628063">"ഡാറ്റയൊന്നും ഉപയോഗിച്ചില്ല"</string>
-    <!-- no translation found for zen_access_warning_dialog_title (1198189958031157142) -->
-    <skip />
-    <!-- no translation found for zen_access_warning_dialog_summary (4015885767653010873) -->
-    <skip />
-    <!-- no translation found for ignore_optimizations_on (2417358456267927315) -->
-    <skip />
-    <!-- no translation found for ignore_optimizations_off (9069942099715006633) -->
-    <skip />
-    <!-- no translation found for ignore_optimizations_on_desc (5898868129614502128) -->
-    <skip />
-    <!-- no translation found for ignore_optimizations_off_desc (1558089902374827659) -->
-    <skip />
-    <!-- no translation found for ignore_optimizations_title (2829637961185027768) -->
-    <skip />
+    <string name="zen_access_warning_dialog_title" msgid="1198189958031157142">"\'ശല്യപ്പെടുത്തരുത്\' എന്നതിലേക്ക് <xliff:g id="APP">%1$s</xliff:g>-ന് ആക്സസ് അനുവദിക്കണോ?"</string>
+    <string name="zen_access_warning_dialog_summary" msgid="4015885767653010873">"\'ശല്യപ്പെടുത്തരുത്\' ഓണാക്കാനും/ഓഫാക്കാനും ബന്ധപ്പെട്ട ക്രമീകരണത്തിലേക്ക് മാറ്റങ്ങൾ വരുത്താനും ആപ്പിന് കഴിയും."</string>
+    <string name="ignore_optimizations_on" msgid="2417358456267927315">"അനുവദിക്കുക"</string>
+    <string name="ignore_optimizations_off" msgid="9069942099715006633">"അനുവദിക്കരുത്"</string>
+    <string name="ignore_optimizations_on_desc" msgid="2321398930330555815">"ബാറ്ററിയെ വേഗത്തിൽ തീർത്തേക്കാം"</string>
+    <string name="ignore_optimizations_off_desc" msgid="5255731062045426544">"ബാറ്ററിക്ക് കൂടുതൽ ഈടുകിട്ടുന്നതിന് ശുപാർശ ചെയ്യുന്നു"</string>
+    <string name="ignore_optimizations_title" msgid="2829637961185027768">"ബാറ്ററി ഒപ്റ്റിമൈസേഷനുകൾ അവഗണിക്കാൻ <xliff:g id="APP">%s</xliff:g> എന്നതിനെ അനുവദിക്കണോ?"</string>
+    <string name="app_list_preference_none" msgid="108006867520327904">"ഒന്നുമില്ല"</string>
+    <string name="work_profile_usage_access_warning" msgid="8870622842216566692">"ഈ ആപ്പിനായുള്ള ഉപയോഗ ആക്സസ് ഓഫാക്കുന്നത്, നിങ്ങളുടെ ഔദ്യോഗിക പ്രൊഫൈലിലുള്ള ആപ്സിനായുള്ള ഡാറ്റാ ഉപയോഗം ട്രാക്കുചെയ്യുന്നതിൽ നിന്ന് അഡ്‌മിനിസ്ട്രേറ്ററെ തടയുകയില്ല."</string>
 </resources>

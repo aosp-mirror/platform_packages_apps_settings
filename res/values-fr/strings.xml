@@ -21,6 +21,10 @@
     <string name="create" msgid="3578857613172647409">"Créer"</string>
     <string name="allow" msgid="3349662621170855910">"Autoriser"</string>
     <string name="deny" msgid="6947806159746484865">"Refuser"</string>
+    <!-- no translation found for dlg_close (7471087791340790015) -->
+    <skip />
+    <!-- no translation found for dlg_switch (6243971420240639064) -->
+    <skip />
     <string name="device_info_default" msgid="7847265875578739287">"Inconnu"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
       <item quantity="one">Plus que <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> étape pour devenir développeur</item>
@@ -99,7 +103,7 @@
     <string name="battery_info_status_charging_wireless" msgid="3574032603735446573">"En charge sans fil"</string>
     <string name="battery_info_status_discharging" msgid="310932812698268588">"N\'est pas en charge"</string>
     <string name="battery_info_status_not_charging" msgid="2820070506621483576">"Débranchée"</string>
-    <string name="battery_info_status_full" msgid="2824614753861462808">"Chargée"</string>
+    <string name="battery_info_status_full" msgid="2824614753861462808">"pleine"</string>
     <string name="battery_info_power_unplugged" msgid="5987246575519551081">"Débranché"</string>
     <string name="battery_info_power_ac" msgid="6808516193001604634">"Secteur"</string>
     <string name="battery_info_power_usb" msgid="8012931702516331797">"USB"</string>
@@ -107,7 +111,7 @@
     <string name="battery_info_power_ac_usb" msgid="6777734146838328688">"Secteur et USB"</string>
     <string name="battery_info_power_unknown" msgid="7344115502868899881">"Inconnu"</string>
     <string name="battery_info_health_unknown" msgid="5664295556921944255">"Inconnu"</string>
-    <string name="battery_info_health_good" msgid="8070356565806711806">"Bon"</string>
+    <string name="battery_info_health_good" msgid="8070356565806711806">"bon"</string>
     <string name="battery_info_health_overheat" msgid="8442959549291368806">"Surchauffe"</string>
     <string name="battery_info_health_dead" msgid="1725917445762829059">"Vide"</string>
     <string name="battery_info_health_over_voltage" msgid="2420269351664490121">"Voltage dépassé"</string>
@@ -145,7 +149,7 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Demande d\'association"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"Appuyez pour associer l\'appareil à <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Afficher les fichiers reçus"</string>
-    <string name="device_picker" msgid="4978696506172252813">"Sélectionner un appareil Bluetooth"</string>
+    <string name="device_picker" msgid="4978696506172252813">"Sélectionner un appareil"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Demande d\'autorisation Bluetooth"</string>
     <string name="bluetooth_ask_enablement" msgid="1712443355224737143">"Une application requiert l\'activation du Bluetooth sur cet appareil."</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"Une application nécessite que d\'autres appareils Bluetooth puissent détecter votre tablette pendant <xliff:g id="TIMEOUT">%1$d</xliff:g> secondes."</string>
@@ -262,7 +266,7 @@
     <string name="language_picker_title" msgid="5349877711342869319">"Langue"</string>
     <string name="activity_picker_label" msgid="6295660302548177109">"Sélectionner une activité"</string>
     <string name="device_info_label" msgid="6551553813651711205">"Informations sur l\'appareil"</string>
-    <string name="battery_info_label" msgid="4132685016148679403">"Informations sur la batterie"</string>
+    <string name="battery_info_label" msgid="4132685016148679403">"Informations batterie"</string>
     <string name="display_label" msgid="8074070940506840792">"Écran"</string>
     <string name="phone_info_label" product="tablet" msgid="7820855350955963628">"Informations sur la tablette"</string>
     <string name="phone_info_label" product="default" msgid="2127552523124277664">"Informations sur le téléphone"</string>
@@ -331,11 +335,9 @@
     <string name="user_info_settings_title" msgid="1195015434996724736">"Infos utilisateur"</string>
     <string name="show_profile_info_on_lockscreen_label" msgid="2741208907263877990">"Afficher infos de profil sur écran de verrouillage"</string>
     <string name="profile_info_settings_title" msgid="3518603215935346604">"Infos de profil"</string>
-    <!-- no translation found for Accounts_settings_title (1592309650872767387) -->
-    <skip />
+    <string name="Accounts_settings_title" msgid="1592309650872767387">"Synchronisation compte"</string>
     <string name="location_settings_title" msgid="1369675479310751735">"Localisation"</string>
-    <!-- no translation found for account_settings_title (574608087657397787) -->
-    <skip />
+    <string name="account_settings_title" msgid="574608087657397787">"Synchronisation compte"</string>
     <string name="security_settings_title" msgid="7945465324818485460">"Sécurité"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Définir les paramètres de l\'option Ma position et de verrouillage"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Définir les paramètres de la fonction Ma position, de déverrouillage de l\'écran et de verrouillage du stockage des identifiants"</string>
@@ -353,6 +355,12 @@
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"Pour utiliser votre empreinte digitale afin de déverrouiller l\'écran ou de confirmer des achats, nous devons effectuer les opérations suivantes :"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"Configurer le mode de verrouillage de secours de l\'écran"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_2" msgid="4158160658182631304">"Ajouter votre empreinte digitale"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Déver. avec empr. dig."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="5061093614328964700">"Il vous suffit d\'appuyer sur le capteur d\'empreinte digitale pour déverrouiller votre téléphone, autoriser des achats ou vous connecter à des applications. Toutes les personnes dont les empreintes digitales sont ajoutées sur votre téléphone peuvent effectuer ces opérations. Sélectionnez donc ces personnes avec soin."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="7173290350577831813">"Remarque : Vos empreintes digitales peuvent être moins sécurisées qu\'un motif ou un code d\'accès fiables."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_risk_link_text" msgid="9129531466157620977">"En savoir plus"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Annuler"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Continuer"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="5877265753699187149">"Localiser le capteur"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="1959655161889313661">"Localisez le capteur d\'empreinte numérique à l\'arrière du téléphone."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="2058830032070449160">"Illustration présentant l\'appareil et la position du capteur d\'empreinte digitale"</string>
@@ -373,6 +381,7 @@
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"Suivant"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Votre empreinte digitale vous permet non seulement de déverrouiller votre téléphone, mais également d\'autoriser des achats et l\'accès à l\'application. "<annotation id="url">"En savoir plus"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4504501581228672208">"Option de verrouillage de l\'écran désactivée. Vous pouvez toujours utiliser votre empreinte digitale pour autoriser des achats et l\'accès à l\'application. "<annotation id="url">"En savoir plus"</annotation></string>
+    <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Relevez le doigt, puis appuyez à nouveau sur le capteur."</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Chiffrement"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"Chiffrer la tablette"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"Chiffrer le téléphone"</string>
@@ -496,14 +505,14 @@
     <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"Saisissez le code d\'association, puis appuyez sur Retour ou Entrée."</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"Le code PIN contient des lettres ou des symboles."</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"Habituellement 0000 ou 1234"</string>
-    <!-- no translation found for bluetooth_pin_values_hint_16_digits (7849359451584101077) -->
-    <skip />
+    <string name="bluetooth_pin_values_hint_16_digits" msgid="7849359451584101077">"Doit comporter 16 chiffres."</string>
     <string name="bluetooth_enter_pin_other_device" msgid="4637977124526813470">"Vous devrez peut-être également saisir ce code PIN sur l\'autre appareil."</string>
     <string name="bluetooth_enter_passkey_other_device" msgid="2798719004030279602">"Vous devrez peut-être également saisir ce mot de passe sur l\'autre appareil."</string>
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"Pour associer votre appareil à :&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Assurez-vous que le mot de passe &lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt; s\'affiche."</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"De :&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Associer à cet appareil ?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"Pour l\'association à :<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Saisissez <xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>, puis appuyez sur \"Retour\" ou sur \"Entrée\"."</string>
     <string name="bluetooth_pairing_will_share_phonebook" msgid="4982239145676394429">"L\'association vous permet d\'accéder à vos contacts et à l\'historique des appels lorsque vous êtes connecté."</string>
+    <string name="bluetooth_pairing_shares_phonebook" msgid="1655930908614072491">"Accorder l\'accès à vos contacts et à l\'historique des appels lorsque vous êtes connecté"</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_connecting_error_message" msgid="1397388344342081090">"Impossible de se connecter à <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"Rechercher des appareils"</string>
@@ -568,7 +577,7 @@
     <string name="wifi_band_24ghz" msgid="852929254171856911">"2,4 GHz"</string>
     <string name="wifi_band_5ghz" msgid="6433822023268515117">"5 GHz"</string>
     <string name="link_speed" msgid="8896664974117585555">"%1$d Mbit/s"</string>
-    <!-- no translation found for wifi_alert_lockdown_by_device_owner (2537146774322347104) -->
+    <!-- no translation found for wifi_alert_lockdown_by_device_owner (8459738223049002970) -->
     <skip />
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Autoriser l\'échange de données lorsque la tablette est en contact avec un autre appareil"</string>
@@ -611,6 +620,7 @@
     <string name="wifi_suspend_optimizations" msgid="1220174276403689487">"Optimisation du Wi-Fi"</string>
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"Minimiser la consommation de la batterie lorsque le Wi-Fi est activé"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"Limiter batterie util. par Wi‑Fi"</string>
+    <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"Utiliser les données mobiles si vous n\'avez plus accès à Internet via le réseau Wi‑Fi"</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"Ajouter un réseau"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"Réseaux Wi-Fi"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"Bouton commande WPS"</string>
@@ -677,7 +687,8 @@
     <string name="wifi_hotspot_title" msgid="7726205804813286950">"Se connecter au point d\'accès pour la connexion ?"</string>
     <string name="wifi_hotspot_message" msgid="3673833421453455747">"\"<xliff:g id="APP_NAME">%1$s</xliff:g>\" requiert une connexion en ligne pour autoriser la connexion au réseau."</string>
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"SE CONNECTER"</string>
-    <string name="no_internet_access_text" msgid="1509171132175355674">"Ce réseau ne dispose d\'aucun accès à Internet. Voulez-vous quand même l\'utiliser ?"</string>
+    <!-- no translation found for no_internet_access_text (7133561752896706392) -->
+    <skip />
     <string name="no_internet_access_remember" msgid="4697314331614625075">"Ne plus demander pour ce réseau"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"Se connecter"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Échec de la connexion au réseau."</string>
@@ -897,8 +908,7 @@
     <string name="device_status_summary" product="tablet" msgid="3292717754497039686">"État de la batterie, état du réseau et autres informations"</string>
     <string name="device_status_summary" product="default" msgid="2599162787451519618">"Numéro de téléphone, signal, etc."</string>
     <string name="storage_settings" msgid="4211799979832404953">"Stockage"</string>
-    <!-- no translation found for storage_usb_settings (642612065405691122) -->
-    <skip />
+    <string name="storage_usb_settings" msgid="642612065405691122">"Stockage et USB"</string>
     <string name="storage_settings_title" msgid="8746016738388094064">"Paramètres de stockage"</string>
     <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"Désinstaller la mémoire de stockage USB, afficher l\'espace disponible"</string>
     <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"Désinstaller la carte SD, afficher la mémoire disponible"</string>
@@ -970,10 +980,18 @@
     <string name="storage_menu_rename" msgid="7141058657592615390">"Renommer"</string>
     <string name="storage_menu_mount" msgid="1014683672493425425">"Installer"</string>
     <string name="storage_menu_unmount" msgid="681485356885955898">"Éjecter"</string>
-    <string name="storage_menu_format" msgid="8334422679047059459">"Effacer et formater"</string>
-    <string name="storage_menu_format_internal" msgid="6553368530402755543">"Effacer et formater mém. stock. interne"</string>
+    <!-- no translation found for storage_menu_format (7690626079653152152) -->
+    <skip />
+    <!-- no translation found for storage_menu_format_public (7464714208010125682) -->
+    <skip />
+    <!-- no translation found for storage_menu_format_private (546017531835902096) -->
+    <skip />
     <string name="storage_menu_migrate" msgid="3969621494238154294">"Transférer les données"</string>
     <string name="storage_menu_forget" msgid="6305824238997983426">"Supprimer"</string>
+    <!-- no translation found for storage_menu_set_up (4263294929451685366) -->
+    <skip />
+    <!-- no translation found for storage_menu_explore (4637496051816521560) -->
+    <skip />
     <string name="storage_title_usb" msgid="679612779321689418">"Connexion USB à l\'ordinateur"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"Connecter en tant que"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"Périphérique multimédia (MTP)"</string>
@@ -984,8 +1002,16 @@
     <string name="usb_midi_summary" msgid="539169474810956358">"Permettre aux applications compatibles avec le protocole MIDI de fonctionner via USB avec des logiciels MIDI sur votre ordinateur"</string>
     <string name="storage_other_users" msgid="808708845102611856">"Autres utilisateurs"</string>
     <string name="storage_internal_title" msgid="690771193137801021">"Mémoire de l\'appareil"</string>
-    <string name="storage_external_title" msgid="2723851748972673696">"Périphérique stockage amovible"</string>
-    <string name="storage_volume_summary" msgid="476551204412943800">"Espace libre : <xliff:g id="FREE">%1$s</xliff:g> (espace total : <xliff:g id="TOTAL">%2$s</xliff:g>)"</string>
+    <!-- no translation found for storage_external_title (3433462910096848696) -->
+    <skip />
+    <!-- no translation found for storage_volume_summary (7023441974367853372) -->
+    <skip />
+    <!-- no translation found for storage_size_large (4936185879734498579) -->
+    <skip />
+    <!-- no translation found for storage_volume_used (1303803057698959872) -->
+    <skip />
+    <!-- no translation found for storage_volume_used_total (6113121714019000244) -->
+    <skip />
     <string name="storage_mount_success" msgid="687641090137253647">"La mémoire de stockage \"<xliff:g id="NAME">%1$s</xliff:g>\" a bien été installée."</string>
     <string name="storage_mount_failure" msgid="1042621107954547316">"Impossible d\'installer la mémoire de stockage \"<xliff:g id="NAME">%1$s</xliff:g>\"."</string>
     <string name="storage_unmount_success" msgid="5737203344673441677">"La mémoire de stockage \"<xliff:g id="NAME">%1$s</xliff:g>\" a bien été éjectée de manière sécurisée."</string>
@@ -993,9 +1019,37 @@
     <string name="storage_format_success" msgid="3023144070597190555">"La mémoire de stockage \"<xliff:g id="NAME">%1$s</xliff:g>\" a bien été formatée."</string>
     <string name="storage_format_failure" msgid="6032640952779735766">"Impossible de formater la mémoire de stockage \"<xliff:g id="NAME">%1$s</xliff:g>\"."</string>
     <string name="storage_rename_title" msgid="8242663969839491485">"Renommer la mémoire de stockage"</string>
+    <!-- no translation found for storage_dialog_unmounted (6403320870103261477) -->
+    <skip />
+    <!-- no translation found for storage_dialog_unmountable (3732209361668282254) -->
+    <skip />
+    <!-- no translation found for storage_dialog_unsupported (4503128224360482228) -->
+    <skip />
     <string name="storage_internal_format_details" msgid="4018647158382548820">"Après le formatage, vous pouvez utiliser la mémoire de stockage \"<xliff:g id="NAME_0">^1</xliff:g>\" avec d\'autres appareils. \n\nToutes les données enregistrées sur \"<xliff:g id="NAME_1">^1</xliff:g>\" vont être effacées. Nous vous conseillons de sauvegarder vos contenus avant de continuer. \n\n"<b>"Sauvegardez vos photos et vos autres fichiers"</b>" \nDéplacez vos fichiers multimédias vers une autre mémoire de stockage sur cet appareil, ou transférez-les sur un ordinateur à l\'aide d\'un câble USB. \n\n"<b>"Sauvegardez vos applications"</b>" \nToutes les applications enregistrées sur \"<xliff:g id="NAME_6">^1</xliff:g>\" vont être désinstallées, et les données correspondantes vont être effacées. Pour conserver ces applications, déplacez-les vers une autre mémoire de stockage sur cet appareil."</string>
     <string name="storage_internal_unmount_details" msgid="3582802571684490057"><b>"Lorsque vous éjectez la mémoire de stockage \"<xliff:g id="NAME_0">^1</xliff:g>\", les applications qui y sont enregistrées cessent de fonctionner, et les fichiers multimédias qu\'elle contient ne sont plus disponibles jusqu\'à ce que vous la réinsériez."</b>" \n\nLa mémoire de stockage \"<xliff:g id="NAME_1">^1</xliff:g>\" a été configurée pour ne fonctionner que sur cet appareil. Vous ne pouvez pas l\'utiliser sur d\'autres appareils."</string>
     <string name="storage_internal_forget_details" msgid="9028875424669047327">"Pour utiliser les applications, les photos ou les données que la mémoire de stockage \"<xliff:g id="NAME">^1</xliff:g>\" contient, insérez de nouveau celle-ci. \n\nVous pouvez également la supprimer de la liste des mémoires de stockage si elle n\'est pas disponible. \n\nSi vous la supprimez, toutes les données qu\'elle contient seront définitivement effacées. \n\nVous pouvez réinstaller les applications plus tard, mais les données correspondantes enregistrées sur cette mémoire seront perdues."</string>
+    <!-- no translation found for storage_internal_forget_confirm_title (1370847944388479245) -->
+    <skip />
+    <!-- no translation found for storage_internal_forget_confirm (1148446041396902905) -->
+    <skip />
+    <!-- no translation found for storage_detail_apps (6141154016753507490) -->
+    <skip />
+    <!-- no translation found for storage_detail_images (6950678857740634769) -->
+    <skip />
+    <!-- no translation found for storage_detail_videos (2919743464827110953) -->
+    <skip />
+    <!-- no translation found for storage_detail_audio (1197685141676483213) -->
+    <skip />
+    <!-- no translation found for storage_detail_cached (8547136365247818567) -->
+    <skip />
+    <!-- no translation found for storage_detail_other (8404938385075638238) -->
+    <skip />
+    <!-- no translation found for storage_detail_explore (7911344011431568294) -->
+    <skip />
+    <!-- no translation found for storage_detail_dialog_other (4894289482062047165) -->
+    <skip />
+    <!-- no translation found for storage_detail_dialog_user (1675756743326079688) -->
+    <skip />
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"Configurer la mémoire \"<xliff:g id="NAME">^1</xliff:g>\""</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"Utiliser en tant que mémoire de stockage externe"</string>
     <string name="storage_wizard_init_external_summary" msgid="7476105886344565074">"Pour déplacer des photos et d\'autres fichiers entre différents appareils"</string>
@@ -1009,7 +1063,8 @@
     <string name="storage_wizard_format_progress_title" msgid="6487352396450582292">"Formatage de mémoire \"<xliff:g id="NAME">^1</xliff:g>\" en cours"</string>
     <string name="storage_wizard_format_progress_body" msgid="4445041233802828430">"Ne retirez pas \"<xliff:g id="NAME">^1</xliff:g>\" pendant le formatage."</string>
     <string name="storage_wizard_migrate_title" msgid="1363078147938160407">"Déplacer vers une autre mémoire"</string>
-    <string name="storage_wizard_migrate_body" msgid="2980740530060653893">"Vous pouvez déplacer vos photos, vos fichiers et les données de vos applications vers la nouvelle mémoire de stockage \"<xliff:g id="NAME">^1</xliff:g>\". \n\nCette opération prend environ <xliff:g id="TIME">^2</xliff:g> et permet de libérer <xliff:g id="SIZE">^3</xliff:g> sur la mémoire de stockage interne. Certaines applications ne fonctionneront pas pendant l\'opération."</string>
+    <!-- no translation found for storage_wizard_migrate_body (890751699549542345) -->
+    <skip />
     <string name="storage_wizard_migrate_now" msgid="4523444323744239143">"Déplacer les données maintenant"</string>
     <string name="storage_wizard_migrate_later" msgid="3173482328116026253">"Déplacer les données plus tard"</string>
     <string name="storage_wizard_migrate_confirm_title" msgid="8564833529613286965">"Déplacer les données maintenant"</string>
@@ -1320,6 +1375,8 @@
     <string name="not_installed" msgid="2797554494953450291">"Non installé pour cet utilisateur"</string>
     <string name="no_applications" msgid="7336588977497084921">"Aucune application"</string>
     <string name="internal_storage" msgid="1584700623164275282">"Stockage interne"</string>
+    <!-- no translation found for internal_storage_sentence (889098931914857143) -->
+    <skip />
     <string name="sd_card_storage" product="nosdcard" msgid="2673203150465132465">"Mémoire USB"</string>
     <string name="sd_card_storage" product="default" msgid="7623513618171928235">"Carte SD"</string>
     <string name="recompute_size" msgid="7722567982831691718">"Calcul de la taille..."</string>
@@ -1397,7 +1454,7 @@
     <string name="running_processes_item_description_p_s" msgid="744424668287252915">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> processus et <xliff:g id="NUMSERVICES">%2$d</xliff:g> service"</string>
     <string name="running_processes_item_description_p_p" msgid="1607384595790852782">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> processus et <xliff:g id="NUMSERVICES">%2$d</xliff:g> services"</string>
     <string name="running_processes_header_title" msgid="6588371727640789560">"Mémoire de l\'appareil"</string>
-    <string name="running_processes_header_footer" msgid="723908176275428442">"Utilisation de la mémoire RAM par les applications"</string>
+    <string name="running_processes_header_footer" msgid="723908176275428442">"Utilisation de la mémoire RAM par les applis"</string>
     <string name="running_processes_header_system_prefix" msgid="6104153299581682047">"Système"</string>
     <string name="running_processes_header_apps_prefix" msgid="5787594452716832727">"Applications"</string>
     <string name="running_processes_header_free_prefix" msgid="4620613031737078415">"Disponible"</string>
@@ -1498,7 +1555,7 @@
     <string name="enable_adb" msgid="7982306934419797485">"Débogage USB"</string>
     <string name="enable_adb_summary" msgid="4881186971746056635">"Mode débogage lorsqu\'un câble USB est connecté"</string>
     <string name="clear_adb_keys" msgid="4038889221503122743">"Annuler autorisations pour débog. USB"</string>
-    <string name="bugreport_in_power" msgid="7923901846375587241">"Raccourci vers le rapport d\'erreur"</string>
+    <string name="bugreport_in_power" msgid="7923901846375587241">"Raccourci vers rapport d\'erreur"</string>
     <string name="bugreport_in_power_summary" msgid="1778455732762984579">"Afficher un bouton dans le menu de démarrage permettant de créer un rapport d\'erreur"</string>
     <string name="keep_screen_on" msgid="1146389631208760344">"Rester activé"</string>
     <string name="keep_screen_on_summary" msgid="2173114350754293009">"L\'écran ne se met jamais en veille lors du chargement."</string>
@@ -1513,9 +1570,9 @@
     <string name="mock_location_app" msgid="7966220972812881854">"Sélectionner l\'application de position fictive"</string>
     <string name="mock_location_app_not_set" msgid="809543285495344223">"Aucune application de position fictive définie"</string>
     <string name="mock_location_app_set" msgid="8966420655295102685">"Application de position fictive : \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
-    <string name="debug_view_attributes" msgid="6485448367803310384">"Activer l\'inspection d\'attribut d\'affichage"</string>
+    <string name="debug_view_attributes" msgid="6485448367803310384">"Activer inspect. attribut affich."</string>
     <string name="debug_networking_category" msgid="7044075693643009662">"Mise en réseau"</string>
-    <string name="wifi_display_certification" msgid="8611569543791307533">"Certification de l\'affichage sans fil"</string>
+    <string name="wifi_display_certification" msgid="8611569543791307533">"Certifation affichage sans fil"</string>
     <string name="wifi_verbose_logging" msgid="4203729756047242344">"Autoriser enreg. infos Wi-Fi détaillées"</string>
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Passage forcé du Wi-Fi aux données mobiles"</string>
     <string name="wifi_allow_scan_with_traffic" msgid="3601853081178265786">"Toujours autoriser la détection de réseaux Wi-Fi en itinérance"</string>
@@ -1531,7 +1588,7 @@
     <string name="select_usb_configuration_dialog_title" msgid="6385564442851599963">"Sélectionner une configuration USB"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"Positions fictives"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Autoriser les positions fictives"</string>
-    <string name="debug_view_attributes" msgid="6485448367803310384">"Activer l\'inspection d\'attribut d\'affichage"</string>
+    <string name="debug_view_attributes" msgid="6485448367803310384">"Activer inspect. attribut affich."</string>
     <string name="legacy_dhcp_client_summary" msgid="163383566317652040">"Utiliser le client DHCP de Lollipop au lieu du nouveau client DHCP Android"</string>
     <string name="mobile_data_always_on_summary" msgid="8149773901431697910">"Maintenir l\'état actif des données mobiles, même lorsque le Wi‑Fi est actif (pour changer rapidement de réseau)"</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"Autoriser le débogage USB ?"</string>
@@ -1706,7 +1763,7 @@
     <string name="awake" msgid="387122265874485088">"Durée de fonctionnement de l\'appareil"</string>
     <string name="wifi_on_time" msgid="3208518458663637035">"Wi-Fi/temps"</string>
     <string name="bluetooth_on_time" msgid="3056108148042308690">"Wi-Fi/temps"</string>
-    <string name="history_details_title" msgid="3608240585315506067">"Informations sur l\'historique"</string>
+    <string name="history_details_title" msgid="3608240585315506067">"Infos historique"</string>
     <string name="details_title" msgid="3792801565213935385">"Infos utilisation"</string>
     <string name="details_subtitle" msgid="32593908269911734">"Détails d\'utilisation"</string>
     <string name="controls_subtitle" msgid="390468421138288702">"Ajuster la consommation"</string>
@@ -1781,7 +1838,7 @@
     <string name="battery_saver" msgid="1426682272004907982">"Économiseur de batterie"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Activer automatiquement"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Jamais"</string>
-    <string name="battery_saver_turn_on_automatically_pct" msgid="7536784431655058267">"lorsque la batterie atteint %1$s"</string>
+    <string name="battery_saver_turn_on_automatically_pct" msgid="7536784431655058267">"Lorsque la batterie atteint %1$s"</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Statistiques relatives aux processus"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Statistiques détaillées relatives aux processus en cours d\'exécution"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Utilisation de la mémoire"</string>
@@ -2067,7 +2124,7 @@
     <string name="debug_app" msgid="8349591734751384446">"Sélectionner une application à déboguer"</string>
     <string name="debug_app_not_set" msgid="718752499586403499">"Aucune application à déboguer définie"</string>
     <string name="debug_app_set" msgid="2063077997870280017">"Application à déboguer : <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <string name="select_application" msgid="5156029161289091703">"Sélectionner une application"</string>
+    <string name="select_application" msgid="5156029161289091703">"Sélectionner une appli"</string>
     <string name="no_application" msgid="2813387563129153880">"Aucune"</string>
     <string name="wait_for_debugger" msgid="1202370874528893091">"Attendre l\'intervention du débogueur"</string>
     <string name="wait_for_debugger_summary" msgid="1766918303462746804">"Avant de s\'exécuter, l\'application déboguée doit attendre que le débogueur soit attaché."</string>
@@ -2093,8 +2150,6 @@
     <string name="disable_overlays_summary" msgid="3578941133710758592">"Toujours utiliser le GPU pour la composition écran"</string>
     <string name="simulate_color_space" msgid="6745847141353345872">"Simuler espace colori."</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Activer les traces OpenGL"</string>
-    <string name="use_awesomeplayer" msgid="1583337008516364226">"Utiliser AwesomePlayer (obsolète)"</string>
-    <string name="use_awesomeplayer_summary" msgid="6757734070733387140">"Utiliser AwesomePlayer au lieu de NuPlayer pour la lecture de la plupart des contenus médias"</string>
     <string name="usb_audio_disable_routing" msgid="8114498436003102671">"Désact. routage audio USB"</string>
     <string name="usb_audio_disable_routing_summary" msgid="980282760277312264">"Désactiver routage auto vers périph. audio USB"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Afficher les contours"</string>
@@ -2144,6 +2199,7 @@
     <string name="data_usage_menu_auto_sync" msgid="8203999775948778560">"Synchronisation automatique des données"</string>
     <string name="data_usage_menu_sim_cards" msgid="6410498422797244073">"Cartes SIM"</string>
     <string name="data_usage_menu_cellular_networks" msgid="5243515735055652279">"Réseaux mobiles"</string>
+    <string name="data_usage_cellular_data_summary" msgid="8413357481361268285">"Interrompues à la limite"</string>
     <string name="account_settings_menu_auto_sync" msgid="6243013719753700377">"Synchro auto des données"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="785541379617346438">"Synchro auto des données perso"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="329565580969147026">"Synchro auto des données pro"</string>
@@ -2187,7 +2243,7 @@
     <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"Définir"</string>
     <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"Définir avertissement utilisation des données"</string>
     <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"Définir un quota d\'utilisation des données"</string>
-    <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"Limitation de la consommation de données mobiles"</string>
+    <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"Limitation conso de données mobiles"</string>
     <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="5788774061143636263">"Les données mobiles sont désactivées par votre tablette lorsque la limite que vous avez définie est atteinte.\n\nLa consommation des données mesurée par la tablette peut différer de celle mesurée par votre opérateur. Nous vous recommandons donc de définir un seuil plus bas."</string>
     <string name="data_usage_limit_dialog_mobile" product="default" msgid="3511301596446820549">"Les données mobiles sont désactivées par votre téléphone lorsque la limite que vous avez définie est atteinte.\n\nLa consommation des données mesurée par le téléphone peut différer de celle mesurée par votre opérateur. Nous vous recommandons donc de définir un seuil plus bas."</string>
     <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"Limiter les données en arrière-plan ?"</string>
@@ -2354,7 +2410,8 @@
     <string name="nfc_payment_favor_default_default_unknown" msgid="7029467023485683077">"Toujours utiliser l\'application par défaut"</string>
     <string name="nfc_payment_pay_with" msgid="7524904024378144072">"Application à utiliser aux terminaux de paiement sans contact :"</string>
     <string name="nfc_how_it_works_title" msgid="1984068457698797207">"Paiement à un terminal"</string>
-    <string name="nfc_how_it_works_content" msgid="8056141705658483393">"Une fois que vous avez configuré une application Tap-and-pay et que votre téléphone est allumé, passez celui-ci sur un terminal disposant du logo Tap-and-pay pour effectuer un achat."</string>
+    <!-- no translation found for nfc_how_it_works_content (5820288675316257177) -->
+    <skip />
     <string name="nfc_how_it_works_got_it" msgid="259653300203217402">"OK"</string>
     <string name="nfc_more_title" msgid="815910943655133280">"Plus..."</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"Définir comme mode de paiement prioritaire ?"</string>
@@ -2634,8 +2691,7 @@
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"Demander le mot de passe avant d\'annuler l\'épinglage"</string>
     <string name="screen_pinning_unlock_none" msgid="3814188275713871856">"Verrouiller l\'appareil lors de l\'annulation de l\'épinglage"</string>
     <string name="managed_user_title" msgid="8101244883654409696">"Profil professionnel"</string>
-    <!-- no translation found for opening_paragraph_delete_profile_unknown_company (2232461523882170874) -->
-    <skip />
+    <string name="opening_paragraph_delete_profile_unknown_company" msgid="2232461523882170874">"Ce profil professionnel est géré par"</string>
     <string name="managing_admin" msgid="8843802210377459055">"Géré par <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(Expérimental)"</string>
     <string name="display_auto_rotate_title" msgid="6176450657107806043">"Lorsque l\'utilisateur fait pivoter l\'appareil"</string>
@@ -2695,6 +2751,11 @@
       <item quantity="one"><xliff:g id="COUNT_2">%d</xliff:g> autorisation accordée sur <xliff:g id="COUNT_3">%d</xliff:g></item>
       <item quantity="other"><xliff:g id="COUNT_2">%d</xliff:g> autorisations accordées sur <xliff:g id="COUNT_3">%d</xliff:g></item>
     </plurals>
+    <!-- no translation found for runtime_permissions_additional_count (931276038884210752) -->
+    <!-- no translation found for runtime_permissions_summary_no_permissions_granted (1679758182657005375) -->
+    <skip />
+    <!-- no translation found for runtime_permissions_summary_no_permissions_requested (7655100570513818534) -->
+    <skip />
     <string name="launch_defaults_some" msgid="313159469856372621">"Certains paramètres par défaut définis"</string>
     <string name="launch_defaults_none" msgid="4241129108140034876">"Aucun paramètre par défaut défini"</string>
     <string name="filter_all_apps" msgid="1988403195820688644">"Toutes les applications"</string>
@@ -2708,6 +2769,8 @@
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"Avec des URL de domaine"</string>
     <string name="trust_agent_disabled_device_admin" msgid="5982562414642596563">"Désactivé par l\'administrateur"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Paramètres avancés"</string>
+    <!-- no translation found for configure_apps (6685680790825882528) -->
+    <skip />
     <string name="unknown_app" msgid="5275921288718717656">"Application inconnue"</string>
     <string name="choose_profile" msgid="8229363046053568878">"Sélectionner un profil"</string>
     <string name="app_permissions" msgid="4148222031991883874">"Autoris. des applis"</string>
@@ -2725,8 +2788,24 @@
     </plurals>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Non reconnu"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"Applications par défaut"</string>
-    <string name="default_assist_title" msgid="8851464168639315795">"Assistance"</string>
-    <string name="default_assist_none" msgid="4719591002003824614">"Aucune assistance par défaut"</string>
+    <!-- no translation found for assist_and_voice_input_title (1733165754793221197) -->
+    <skip />
+    <!-- no translation found for default_assist_title (8868488975409247921) -->
+    <skip />
+    <!-- no translation found for default_assist_none (3709083569608735487) -->
+    <skip />
+    <!-- no translation found for choose_assist_title (554234448228740980) -->
+    <skip />
+    <!-- no translation found for assistant_security_warning_title (8673079231955467177) -->
+    <skip />
+    <!-- no translation found for assistant_security_warning (4881965750615394002) -->
+    <skip />
+    <!-- no translation found for assistant_security_warning_agree (7710290206928033908) -->
+    <skip />
+    <!-- no translation found for assistant_security_warning_disagree (877419950830205913) -->
+    <skip />
+    <!-- no translation found for choose_voice_input_title (975471367067718019) -->
+    <skip />
     <string name="default_browser_title" msgid="8101772675085814670">"Application de navigateur"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"Aucun navigateur par défaut"</string>
     <string name="default_phone_title" msgid="282005908059637350">"Application Téléphone"</string>
@@ -2750,16 +2829,17 @@
     <string name="high_power_apps" msgid="2116416853043103135">"Ignorer les optimisations"</string>
     <string name="high_power_filter_on" msgid="3862942127137594196">"Autorisées"</string>
     <string name="high_power_on" msgid="148473814103292724">"Ignorer les optimisations de batterie"</string>
-    <!-- no translation found for high_power_off (221092098425904010) -->
+    <string name="high_power_off" msgid="221092098425904010">"Non autorisée"</string>
+    <!-- no translation found for high_power_desc (8412735192889327770) -->
     <skip />
-    <string name="high_power_desc" msgid="8777632785903235764">"N\'applique aucune optimisation de batterie et risque de décharger la batterie plus rapidement."</string>
     <plurals name="high_power_count" formatted="false" msgid="4343190376439806186">
       <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> application autorisée à ignorer les optimisations de batterie</item>
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> applications autorisées à ignorer les optimisations de batterie</item>
     </plurals>
     <string name="battery_summary" msgid="101415762036784289">"Utilisation depuis la dernière charge complète : <xliff:g id="PERCENTAGE">%1$d</xliff:g> %%"</string>
     <string name="no_battery_summary" msgid="3528036835462846814">"Aucune utilisation de la batterie depuis la dernière charge complète"</string>
-    <string name="app_notification_preferences" msgid="6413363601485067724">"Préférences de notification de l\'application"</string>
+    <!-- no translation found for app_notification_preferences (1599319335092722613) -->
+    <skip />
     <string name="system_ui_settings" msgid="579824306467081123">"Afficher l\'adaptateur de l\'IU système"</string>
     <string name="additional_permissions" msgid="6463784193877056080">"Autorisations supplémentaires"</string>
     <string name="additional_permissions_more" msgid="3538612272673191451">"<xliff:g id="COUNT">%1$d</xliff:g> autres"</string>
@@ -2772,7 +2852,8 @@
     <string name="inactive_app_inactive_summary" msgid="6768756967594202411">"Application inactive. Appuyez ici pour l\'activer."</string>
     <string name="inactive_app_active_summary" msgid="4512911571954375968">"Application active. Appuyez ici pour la désactiver."</string>
     <string name="assist_access_context_title" msgid="2047105711005856521">"Utiliser le contexte actuel"</string>
-    <string name="assist_access_context_summary" msgid="8365837347256022203">"Lorsque vous ouvrez l\'application d\'assistance, l\'autoriser à voir ce qui est affiché à l\'écran"</string>
+    <!-- no translation found for assist_access_context_summary (6937520858532073208) -->
+    <skip />
     <string name="assist_footer" msgid="2283187001990543739">"Les applications d\'assistance vous aident à identifier les informations utiles et à agir en conséquence, sans que vous n\'ayez à demander quoi que ce soit. Certaines applications sont compatibles à la fois avec le lanceur d\'applications et les services de saisie vocale, de sorte que vous puissiez bénéficier d\'une assistance intégrée."</string>
     <string name="average_memory_use" msgid="829566450150198512">"Utilisation mémoire (moyenne)"</string>
     <string name="maximum_memory_use" msgid="7493720799710132496">"Utilisation mémoire (maximale)"</string>
@@ -2797,14 +2878,15 @@
     <string name="no_data_usage" msgid="9131454024293628063">"Aucune donnée utilisée"</string>
     <string name="zen_access_warning_dialog_title" msgid="1198189958031157142">"Autoriser l\'accès au mode Ne pas déranger pour <xliff:g id="APP">%1$s</xliff:g> ?"</string>
     <string name="zen_access_warning_dialog_summary" msgid="4015885767653010873">"L\'application disposera d\'une autorisation d\'activation ou de désactivation du mode Ne pas déranger et de modification des paramètres associés."</string>
-    <!-- no translation found for ignore_optimizations_on (2417358456267927315) -->
+    <string name="ignore_optimizations_on" msgid="2417358456267927315">"Autoriser"</string>
+    <string name="ignore_optimizations_off" msgid="9069942099715006633">"Ne pas autoriser"</string>
+    <!-- no translation found for ignore_optimizations_on_desc (2321398930330555815) -->
     <skip />
-    <!-- no translation found for ignore_optimizations_off (9069942099715006633) -->
+    <!-- no translation found for ignore_optimizations_off_desc (5255731062045426544) -->
     <skip />
-    <!-- no translation found for ignore_optimizations_on_desc (5898868129614502128) -->
+    <string name="ignore_optimizations_title" msgid="2829637961185027768">"Autoriser <xliff:g id="APP">%s</xliff:g> à ignorer les optimisations de batterie ?"</string>
+    <!-- no translation found for app_list_preference_none (108006867520327904) -->
     <skip />
-    <!-- no translation found for ignore_optimizations_off_desc (1558089902374827659) -->
-    <skip />
-    <!-- no translation found for ignore_optimizations_title (2829637961185027768) -->
+    <!-- no translation found for work_profile_usage_access_warning (8870622842216566692) -->
     <skip />
 </resources>
