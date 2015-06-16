@@ -16,6 +16,7 @@
 
 package com.android.settings.deviceinfo;
 
+import android.annotation.LayoutRes;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -23,9 +24,10 @@ import android.os.storage.DiskInfo;
 import android.os.storage.StorageEventListener;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
-import android.os.storage.VolumeRecord;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -33,18 +35,19 @@ import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.setupwizardlib.SetupWizardLayout;
-import com.android.setupwizardlib.view.NavigationBar;
-import com.android.setupwizardlib.view.NavigationBar.NavigationBarListener;
 
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class StorageWizardBase extends Activity implements NavigationBarListener {
+public abstract class StorageWizardBase extends Activity {
     protected StorageManager mStorage;
 
     protected VolumeInfo mVolume;
     protected DiskInfo mDisk;
+
+    private View mCustomNav;
+    private Button mCustomNext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +67,7 @@ public abstract class StorageWizardBase extends Activity implements NavigationBa
             mDisk = mVolume.getDisk();
         }
 
-        setTheme(R.style.SuwThemeMaterial_Light);
+        setTheme(R.style.SetupWizardStorageStyle);
 
         if (mDisk != null) {
             mStorage.registerListener(mStorageListener);
@@ -72,20 +75,54 @@ public abstract class StorageWizardBase extends Activity implements NavigationBa
     }
 
     @Override
+    public void setContentView(@LayoutRes int layoutResID) {
+        super.setContentView(layoutResID);
+
+        // Our wizard is a unique flower, so it has custom buttons
+        final ViewGroup navParent = (ViewGroup) findViewById(R.id.suw_layout_navigation_bar)
+                .getParent();
+        mCustomNav = getLayoutInflater().inflate(R.layout.storage_wizard_navigation,
+                navParent, false);
+
+        mCustomNext = (Button) mCustomNav.findViewById(R.id.suw_navbar_next);
+        mCustomNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onNavigateNext();
+            }
+        });
+
+        // Swap our custom navigation bar into place
+        for (int i = 0; i < navParent.getChildCount(); i++) {
+            if (navParent.getChildAt(i).getId() == R.id.suw_layout_navigation_bar) {
+                navParent.removeViewAt(i);
+                navParent.addView(mCustomNav, i);
+                break;
+            }
+        }
+    }
+
+    @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
 
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS |
+        final Window window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS |
                 WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN |
                 WindowManager.LayoutParams.FLAG_LAYOUT_INSET_DECOR);
+        window.setStatusBarColor(Color.TRANSPARENT);
 
-        getNavigationBar().setSystemUiVisibility(
+        mCustomNav.setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
 
-        getWindow().setStatusBarColor(Color.TRANSPARENT);
+        final View scrollView = findViewById(R.id.suw_bottom_scroll_view);
+        scrollView.setVerticalFadingEdgeEnabled(true);
+        scrollView.setFadingEdgeLength(scrollView.getVerticalFadingEdgeLength() * 2);
 
-        getNavigationBar().setNavigationBarListener(this);
-        getBackButton().setVisibility(View.GONE);
+        // Our header assets already have padding baked in
+        final View title = findViewById(R.id.suw_layout_title);
+        title.setPadding(title.getPaddingLeft(), 0, title.getPaddingRight(),
+                title.getPaddingBottom());
     }
 
     @Override
@@ -94,16 +131,8 @@ public abstract class StorageWizardBase extends Activity implements NavigationBa
         super.onDestroy();
     }
 
-    protected NavigationBar getNavigationBar() {
-        return (NavigationBar) findViewById(R.id.suw_layout_navigation_bar);
-    }
-
-    protected Button getBackButton() {
-        return getNavigationBar().getBackButton();
-    }
-
     protected Button getNextButton() {
-        return getNavigationBar().getNextButton();
+        return mCustomNext;
     }
 
     protected SetupWizardLayout getSetupWizardLayout() {
@@ -135,12 +164,16 @@ public abstract class StorageWizardBase extends Activity implements NavigationBa
         secondBody.setVisibility(View.VISIBLE);
     }
 
-    @Override
-    public void onNavigateBack() {
-        throw new UnsupportedOperationException();
+    protected void setIllustrationInternal(boolean internal) {
+        if (internal) {
+            getSetupWizardLayout().setIllustration(R.drawable.bg_internal_storage_header,
+                    android.R.color.transparent);
+        } else {
+            getSetupWizardLayout().setIllustration(R.drawable.bg_portable_storage_header,
+                    android.R.color.transparent);
+        }
     }
 
-    @Override
     public void onNavigateNext() {
         throw new UnsupportedOperationException();
     }
