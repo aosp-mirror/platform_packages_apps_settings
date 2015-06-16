@@ -30,10 +30,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.android.internal.util.Preconditions;
 import com.android.settings.R;
 
 public class StorageWizardMigrateProgress extends StorageWizardBase {
+    private static final String ACTION_FINISH_WIZARD = "com.android.systemui.action.FINISH_WIZARD";
+
     private int mMoveId;
 
     @Override
@@ -48,6 +49,7 @@ public class StorageWizardMigrateProgress extends StorageWizardBase {
         mMoveId = getIntent().getIntExtra(EXTRA_MOVE_ID, -1);
 
         final String descrip = mStorage.getBestVolumeDescription(mVolume);
+        setIllustrationInternal(true);
         setHeaderText(R.string.storage_wizard_migrate_progress_title, descrip);
         setBodyText(R.string.storage_wizard_migrate_details, descrip);
 
@@ -68,6 +70,12 @@ public class StorageWizardMigrateProgress extends StorageWizardBase {
                 Log.d(TAG, "Finished with status " + status);
                 if (status == PackageManager.MOVE_SUCCEEDED) {
                     if (mDisk != null) {
+                        // Kinda lame, but tear down that shiny finished
+                        // notification, since user is still in wizard flow
+                        final Intent finishIntent = new Intent(ACTION_FINISH_WIZARD);
+                        finishIntent.addFlags(Intent.FLAG_RECEIVER_REGISTERED_ONLY);
+                        sendBroadcast(finishIntent);
+
                         final Intent intent = new Intent(context, StorageWizardReady.class);
                         intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
                         startActivity(intent);
