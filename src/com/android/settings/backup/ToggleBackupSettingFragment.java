@@ -10,6 +10,7 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -30,6 +31,11 @@ public class ToggleBackupSettingFragment extends SettingsPreferenceFragment
     private static final String TAG = "ToggleBackupSettingFragment";
 
     private static final String BACKUP_TOGGLE = "toggle_backup";
+
+    // System setting that governs whether the user is eligible for full app-data backup,
+    // based on whether they have been presented with the details of what that backup entails
+    // (usually surfaced somewhere like device setup)
+    private static final String USER_FULL_DATA_BACKUP_AWARE = "user_full_data_backup_aware";
 
     private IBackupManager mBackupManager;
 
@@ -74,7 +80,14 @@ public class ToggleBackupSettingFragment extends SettingsPreferenceFragment
         mToggleSwitch = mSwitchBar.getSwitch();
 
         // Set up UI.
-        mSummaryPreference.setSummary(R.string.fullbackup_data_summary);
+        // If the user has not seen legal text for full data backup (if they OTA from L to M) then
+        // full data backup will be off and here we want to show the old summary here that does
+        // not mention full data backup
+        if (Settings.Secure.getInt(getContentResolver(), USER_FULL_DATA_BACKUP_AWARE, 0) != 0) {
+            mSummaryPreference.setSummary(R.string.fullbackup_data_summary);
+        } else {
+            mSummaryPreference.setSummary(R.string.backup_data_summary);
+        }
         try {
             boolean backupEnabled = mBackupManager == null ?
                     false : mBackupManager.isBackupEnabled();
@@ -155,7 +168,16 @@ public class ToggleBackupSettingFragment extends SettingsPreferenceFragment
     }
 
     private void showEraseBackupDialog() {
-        CharSequence msg = getResources().getText(R.string.fullbackup_erase_dialog_message);
+        CharSequence msg;
+
+        // If the user has not seen legal text for full data backup (if they OTA from L to M) then
+        // full data backup will be off and here we want to show the old erase_dialog_message here
+        // that does not mention full data backup
+        if (Settings.Secure.getInt(getContentResolver(), USER_FULL_DATA_BACKUP_AWARE, 0) != 0) {
+            msg = getResources().getText(R.string.fullbackup_erase_dialog_message);
+        } else {
+            msg = getResources().getText(R.string.backup_erase_dialog_message);
+        }
 
         mWaitingForConfirmationDialog = true;
 
