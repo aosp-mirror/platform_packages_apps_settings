@@ -87,16 +87,15 @@
             android:textAppearance="@android:style/TextAppearance.Material.Subhead"
             android:textColor="@*android:color/secondary_text_material_light"/>
 
-        <TextView
-            android:id="@+id/phonebook_sharing_message"
+        <CheckBox
+            android:id="@+id/phonebook_sharing_message_entry_pin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/bluetooth_dialog_padding"
             android:layout_marginEnd="@dimen/bluetooth_dialog_padding"
-            android:layout_marginBottom="@dimen/bluetooth_dialog_padding"
             android:gravity="center_vertical"
-            android:text="@string/bluetooth_pairing_will_share_phonebook"
-            android:textSize="12sp" />
+            android:text="@string/bluetooth_pairing_shares_phonebook"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
     </LinearLayout>
 
