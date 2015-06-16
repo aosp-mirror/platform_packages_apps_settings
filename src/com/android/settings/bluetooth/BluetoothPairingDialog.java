@@ -16,6 +16,7 @@
 
 package com.android.settings.bluetooth;
 
+import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -186,6 +187,24 @@ public final class BluetoothPairingDialog extends AlertActivity implements
         TextView messageViewContent = (TextView) view.findViewById(R.id.message_subhead);
         TextView messageView2 = (TextView) view.findViewById(R.id.message_below_pin);
         CheckBox alphanumericPin = (CheckBox) view.findViewById(R.id.alphanumeric_pin);
+        CheckBox contactSharing = (CheckBox) view.findViewById(
+                R.id.phonebook_sharing_message_entry_pin);
+        contactSharing.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+                    mDevice.setPhonebookAccessPermission(BluetoothDevice.ACCESS_ALLOWED);
+                } else {
+                    mDevice.setPhonebookAccessPermission(BluetoothDevice.ACCESS_REJECTED);
+                }
+            }
+        });
+        if (mDevice.getBluetoothClass().getDeviceClass()
+                == BluetoothClass.Device.AUDIO_VIDEO_HANDSFREE) {
+            contactSharing.setVisibility(View.VISIBLE);
+        } else {
+            contactSharing.setVisibility(View.GONE);
+        }
         mPairingView = (EditText) view.findViewById(R.id.text);
         mPairingView.addTextChangedListener(this);
         alphanumericPin.setOnCheckedChangeListener(this);
@@ -238,6 +257,24 @@ public final class BluetoothPairingDialog extends AlertActivity implements
         TextView pairingViewCaption = (TextView) view.findViewById(R.id.pairing_caption);
         TextView pairingViewContent = (TextView) view.findViewById(R.id.pairing_subhead);
         TextView messagePairing = (TextView) view.findViewById(R.id.pairing_code_message);
+        CheckBox contactSharing = (CheckBox) view.findViewById(
+                R.id.phonebook_sharing_message_confirm_pin);
+        contactSharing.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+                    mDevice.setPhonebookAccessPermission(BluetoothDevice.ACCESS_ALLOWED);
+                } else {
+                    mDevice.setPhonebookAccessPermission(BluetoothDevice.ACCESS_REJECTED);
+                }
+            }
+        });
+        if (mDevice.getBluetoothClass().getDeviceClass()
+                == BluetoothClass.Device.AUDIO_VIDEO_HANDSFREE) {
+            contactSharing.setVisibility(View.VISIBLE);
+        } else {
+            contactSharing.setVisibility(View.GONE);
+        }
 
         String messageCaption = null;
         String pairingContent = null;
