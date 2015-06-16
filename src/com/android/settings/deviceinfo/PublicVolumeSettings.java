@@ -90,7 +90,12 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
             mVolume = mStorageManager.findVolumeById(volId);
         }
 
-        Preconditions.checkNotNull(mVolume);
+        if (mVolume == null) {
+            Log.d(TAG, "Leaving details fragment due to missing volume");
+            finish();
+            return;
+        }
+
         Preconditions.checkState(mVolume.getType() == VolumeInfo.TYPE_PUBLIC);
 
         mDisk = mStorageManager.findDiskById(mVolume.getDiskId());
