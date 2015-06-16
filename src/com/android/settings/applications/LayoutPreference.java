@@ -58,6 +58,11 @@ public class LayoutPreference extends Preference {
         return mRootView;
     }
 
+    @Override
+    protected void onBindView(View view) {
+        // Do nothing.
+    }
+
     public View findViewById(int id) {
         return mRootView.findViewById(id);
     }

@@ -19,40 +19,17 @@ package com.android.settings.applications;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
-import android.preference.Preference;
 import android.text.TextUtils;
 import android.text.format.Formatter;
-import android.util.AttributeSet;
-import android.view.View;
 
-import com.android.settings.R;
+import com.android.settings.AppProgressPreference;
 
-public class ProcessStatsPreference extends Preference {
+public class ProcessStatsPreference extends AppProgressPreference {
 
     private ProcStatsPackageEntry mEntry;
-    private final int mColor;
-    private final int mRemainingColor;
-    private float mRatio;
-    private float mRemainingRatio;
 
     public ProcessStatsPreference(Context context) {
-        this(context, null);
-    }
-
-    public ProcessStatsPreference(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
-    }
-
-    public ProcessStatsPreference(Context context, AttributeSet attrs, int defStyleAttr) {
-        this(context, attrs, defStyleAttr, 0);
-    }
-
-    public ProcessStatsPreference(Context context, AttributeSet attrs, int defStyleAttr,
-            int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        setLayoutResource(R.layout.app_item_linear_color);
-        mColor = context.getColor(R.color.memory_max_use);
-        mRemainingColor = context.getColor(R.color.memory_remaining);
+        super(context, null);
     }
 
     public void init(ProcStatsPackageEntry entry, PackageManager pm, double maxMemory,
@@ -68,20 +45,10 @@ public class ProcessStatsPreference extends Preference {
         double amount = avg ? (statsForeground ? entry.mRunWeight : entry.mBgWeight) * weightToRam
                 : (statsForeground ? entry.mMaxRunMem : entry.mMaxBgMem) * totalScale * 1024;
         setSummary(Formatter.formatShortFileSize(getContext(), (long) amount));
-        mRatio = (float) (amount / maxMemory);
-        mRemainingRatio = 1 - mRatio;
+        setProgress((int) (100 * amount / maxMemory));
     }
 
     public ProcStatsPackageEntry getEntry() {
         return mEntry;
-    }
-
-    @Override
-    protected void onBindView(View view) {
-        super.onBindView(view);
-
-        LinearColorBar linearColorBar = (LinearColorBar) view.findViewById(R.id.linear_color_bar);
-        linearColorBar.setColors(mColor, mColor, mRemainingColor);
-        linearColorBar.setRatios(mRatio, 0, mRemainingRatio);
     }
 }
