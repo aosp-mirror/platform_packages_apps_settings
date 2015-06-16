@@ -542,8 +542,13 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
         Preference preference = getPreferenceScreen().findPreference(KEY_TRUST_AGENT);
         if (preference != null && preference.getTitle().length() > 0) {
-            mLockAfter.setSummary(getString(R.string.lock_after_timeout_summary_with_exception,
-                    entries[best], preference.getTitle()));
+            if (Long.valueOf(values[best].toString()) == 0) {
+                mLockAfter.setSummary(getString(R.string.lock_immediately_summary_with_exception,
+                        preference.getTitle()));
+            } else {
+                mLockAfter.setSummary(getString(R.string.lock_after_timeout_summary_with_exception,
+                        entries[best], preference.getTitle()));
+            }
         } else {
             mLockAfter.setSummary(getString(R.string.lock_after_timeout_summary, entries[best]));
         }
