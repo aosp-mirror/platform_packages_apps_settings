@@ -695,11 +695,11 @@
     <!-- Fingerprint managment category title - configuration options for managing enrolled fingerprints [CHAR LIMIT=22] -->
     <string name="fingerprint_manage_category_title">Manage fingerprints</string>
     <!-- Fingerprint category title - configuration options for managing fingerprint enrollment [CHAR LIMIT=22] -->
-	<string name="fingerprint_usage_category_title">Use fingerprint for</string>
-	<!-- Preference to add another fingerprint -->
-	<string name="fingerprint_add_title">Add fingerprint</string>
-	<!-- switch for allowing fingerprint to be used for keyguard -->
-	<string name="fingerprint_enable_keyguard_toggle_title">screen lock</string>
+    <string name="fingerprint_usage_category_title">Use fingerprint for</string>
+    <!-- Preference to add another fingerprint -->
+    <string name="fingerprint_add_title">Add fingerprint</string>
+    <!-- switch for allowing fingerprint to be used for keyguard -->
+    <string name="fingerprint_enable_keyguard_toggle_title">screen lock</string>
     <!-- message shown for menu item that launches fingerprint settings or enrollment -->
     <plurals name="security_settings_fingerprint_preference_summary">
         <item quantity="one"><xliff:g id="count">%1$d</xliff:g> fingerprint set up</item>
@@ -771,6 +771,9 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled">Screen lock option disabled. You can still use your fingerprint to authorize purchases and app access. <annotation id="url">Learn more</annotation></string>
     <!-- Text shown in fingerprint enroll when we didn't observe progress for a few seconds. [CHAR LIMIT=100] -->
     <string name="security_settings_fingerprint_enroll_lift_touch_again">Lift finger, then touch sensor again</string>
+
+    <!-- Text shown when "Add fingerprint" button is disabled -->
+    <string name="fingerprint_add_max">You can add up to <xliff:g id="count" example="5">%d</xliff:g> fingerprints</string>
 
     <!-- Title of the preferences category for preference items to control encryption -->
     <string name="crypt_keeper_settings_title">Encryption</string>
