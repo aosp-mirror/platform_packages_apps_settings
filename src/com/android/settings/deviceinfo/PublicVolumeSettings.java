@@ -30,7 +30,9 @@ import android.os.storage.VolumeRecord;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.provider.DocumentsContract;
+import android.text.TextUtils;
 import android.text.format.Formatter;
+import android.text.format.Formatter.BytesResult;
 import android.util.Log;
 
 import com.android.internal.logging.MetricsLogger;
@@ -58,17 +60,12 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
 
     private int mNextOrder = 0;
 
-    private UsageBarPreference mGraph;
-    private StorageItemPreference mTotal;
-    private StorageItemPreference mAvailable;
+    private StorageSummaryPreference mSummary;
 
     private Preference mMount;
     private Preference mUnmount;
     private Preference mFormatPublic;
     private Preference mFormatPrivate;
-
-    private long mTotalSize;
-    private long mAvailSize;
 
     @Override
     protected int getMetricsCategory() {
@@ -103,9 +100,7 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
 
         addPreferencesFromResource(R.xml.device_info_storage_volume);
 
-        mGraph = buildGraph();
-        mTotal = buildItem(R.string.memory_size, 0);
-        mAvailable = buildItem(R.string.memory_available, R.color.memory_avail);
+        mSummary = new StorageSummaryPreference(context);
 
         mMount = buildAction(R.string.storage_menu_mount);
         mUnmount = buildAction(R.string.storage_menu_unmount);
@@ -128,21 +123,19 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
         }
 
         if (mVolume.isMountedReadable()) {
-            screen.addPreference(mGraph);
-            screen.addPreference(mTotal);
-            screen.addPreference(mAvailable);
+            screen.addPreference(mSummary);
 
             final File file = mVolume.getPath();
-            mTotalSize = file.getTotalSpace();
-            mAvailSize = file.getFreeSpace();
+            final long totalBytes = file.getTotalSpace();
+            final long freeBytes = file.getFreeSpace();
+            final long usedBytes = totalBytes - freeBytes;
 
-            mTotal.setSummary(Formatter.formatFileSize(context, mTotalSize));
-            mAvailable.setSummary(Formatter.formatFileSize(context, mAvailSize));
-
-            mGraph.clear();
-            mGraph.addEntry(0, (mTotalSize - mAvailSize) / (float) mTotalSize,
-                    android.graphics.Color.GRAY);
-            mGraph.commit();
+            final BytesResult result = Formatter.formatBytes(getResources(), usedBytes, 0);
+            mSummary.setTitle(TextUtils.expandTemplate(getText(R.string.storage_size_large),
+                    result.value, result.units));
+            mSummary.setSummary(getString(R.string.storage_volume_used,
+                    Formatter.formatFileSize(context, totalBytes)));
+            mSummary.setPercent((int) ((usedBytes * 100) / totalBytes));
         }
 
         if (mVolume.getState() == VolumeInfo.STATE_UNMOUNTED) {
@@ -155,19 +148,6 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
         if (mDisk.isAdoptable()) {
             screen.addPreference(mFormatPrivate);
         }
-    }
-
-    private UsageBarPreference buildGraph() {
-        final UsageBarPreference pref = new UsageBarPreference(getActivity());
-        pref.setOrder(mNextOrder++);
-        return pref;
-    }
-
-    private StorageItemPreference buildItem(int titleRes, int colorRes) {
-        final StorageItemPreference pref = new StorageItemPreference(getActivity(), titleRes,
-                colorRes);
-        pref.setOrder(mNextOrder++);
-        return pref;
     }
 
     private Preference buildAction(int titleRes) {
