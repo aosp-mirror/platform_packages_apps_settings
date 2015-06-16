@@ -179,6 +179,7 @@ public class FingerprintSettings extends SubSettings {
                 switch (msg.what) {
                     case MSG_REFRESH_FINGERPRINT_TEMPLATES:
                         removeFingerprintPreference(msg.arg1);
+                        updateAddPreference();
                     break;
                     case MSG_FINGER_AUTH_SUCCESS:
                         mFingerprintCancel = null;
@@ -330,6 +331,19 @@ public class FingerprintSettings extends SubSettings {
             addPreference.setIcon(R.drawable.ic_add_24dp);
             root.addPreference(addPreference);
             addPreference.setOnPreferenceChangeListener(this);
+            updateAddPreference();
+        }
+
+        private void updateAddPreference() {
+            /* Disable preference if too many fingerprints added */
+            final int max = getContext().getResources().getInteger(
+                    com.android.internal.R.integer.config_fingerprintMaxTemplatesPerUser);
+            boolean tooMany = mFingerprintManager.getEnrolledFingerprints().size() >= max;
+            CharSequence maxSummary = tooMany ?
+                    getContext().getString(R.string.fingerprint_add_max, max) : "";
+            Preference addPreference = findPreference(KEY_FINGERPRINT_ADD);
+            addPreference.setSummary(maxSummary);
+            addPreference.setEnabled(!tooMany);
         }
 
         private static String genKey(int id) {

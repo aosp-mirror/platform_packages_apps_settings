@@ -16,10 +16,18 @@
 
 package com.android.settings.fingerprint;
 
+import android.content.Context;
+import android.hardware.fingerprint.Fingerprint;
+import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.view.View;
+import android.widget.Button;
 
 import com.android.settings.R;
+import com.android.settings.fingerprint.FingerprintSettings.FingerprintPreference;
+
+import java.util.List;
 
 /**
  * Activity which concludes fingerprint enrollment.
@@ -31,7 +39,18 @@ public class FingerprintEnrollFinish extends FingerprintEnrollBase {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fingerprint_enroll_finish);
         setHeaderText(R.string.security_settings_fingerprint_enroll_finish_title);
-        findViewById(R.id.add_another_button).setOnClickListener(this);
+        Button addButton = (Button) findViewById(R.id.add_another_button);
+
+        FingerprintManager fpm = (FingerprintManager) getSystemService(Context.FINGERPRINT_SERVICE);
+        int enrolled = fpm.getEnrolledFingerprints().size();
+        int max = getResources().getInteger(
+                com.android.internal.R.integer.config_fingerprintMaxTemplatesPerUser);
+        if (enrolled >= max) {
+            /* Don't show "Add" button if too many fingerprints already added */
+            addButton.setVisibility(View.INVISIBLE);
+        } else {
+            addButton.setOnClickListener(this);
+        }
     }
 
     @Override
