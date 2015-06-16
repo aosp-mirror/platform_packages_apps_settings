@@ -19,7 +19,6 @@ package com.android.settings.deviceinfo;
 import android.os.Bundle;
 import android.os.storage.VolumeInfo;
 
-import com.android.internal.util.Preconditions;
 import com.android.settings.R;
 
 public class StorageWizardReady extends StorageWizardBase {
@@ -39,9 +38,11 @@ public class StorageWizardReady extends StorageWizardBase {
         final VolumeInfo publicVol = findFirstVolume(VolumeInfo.TYPE_PUBLIC);
         final VolumeInfo privateVol = findFirstVolume(VolumeInfo.TYPE_PRIVATE);
         if (publicVol != null) {
+            setIllustrationInternal(false);
             setBodyText(R.string.storage_wizard_ready_external_body,
                     mDisk.getDescription());
         } else if (privateVol != null) {
+            setIllustrationInternal(true);
             setBodyText(R.string.storage_wizard_ready_internal_body,
                     mDisk.getDescription());
         }

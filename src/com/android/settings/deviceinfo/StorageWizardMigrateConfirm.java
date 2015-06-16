@@ -45,6 +45,7 @@ public class StorageWizardMigrateConfirm extends StorageWizardBase {
         final String sourceDescrip = mStorage.getBestVolumeDescription(sourceVol);
         final String targetDescrip = mStorage.getBestVolumeDescription(mVolume);
 
+        setIllustrationInternal(true);
         setHeaderText(R.string.storage_wizard_migrate_confirm_title, targetDescrip);
         setBodyText(R.string.memory_calculating_size);
         setSecondaryBodyText(R.string.storage_wizard_migrate_details, targetDescrip);
