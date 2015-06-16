@@ -38,6 +38,7 @@ public class StorageWizardFormatConfirm extends StorageWizardBase {
         setContentView(R.layout.storage_wizard_generic);
 
         mFormatPrivate = getIntent().getBooleanExtra(EXTRA_FORMAT_PRIVATE, false);
+        setIllustrationInternal(mFormatPrivate);
 
         if (mFormatPrivate) {
             setHeaderText(R.string.storage_wizard_format_confirm_title);
@@ -49,8 +50,8 @@ public class StorageWizardFormatConfirm extends StorageWizardBase {
                     mDisk.getDescription());
         }
 
-        // TODO: make this a big red scary button
         getNextButton().setText(R.string.storage_wizard_format_confirm_next);
+        getNextButton().setBackgroundTintList(getColorStateList(R.color.storage_wizard_button_red));
     }
 
     @Override
