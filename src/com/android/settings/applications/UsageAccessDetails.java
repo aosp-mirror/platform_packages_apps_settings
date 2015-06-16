@@ -17,6 +17,7 @@ package com.android.settings.applications;
 
 import android.app.AlertDialog;
 import android.app.AppOpsManager;
+import android.app.admin.DevicePolicyManager;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Context;
@@ -51,6 +52,7 @@ public class UsageAccessDetails extends AppInfoWithHeader implements OnPreferenc
     private Preference mUsagePrefs;
     private Intent mSettingsIntent;
     private UsageState mUsageState;
+    private DevicePolicyManager mDpm;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,6 +61,7 @@ public class UsageAccessDetails extends AppInfoWithHeader implements OnPreferenc
         Context context = getActivity();
         mUsageBridge = new AppStateUsageBridge(context, mState, null);
         mAppOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
+        mDpm = context.getSystemService(DevicePolicyManager.class);
 
         addPreferencesFromResource(R.xml.usage_access_details);
         mSwitchPref = (SwitchPreference) findPreference(KEY_USAGE_SWITCH);
@@ -91,6 +94,14 @@ public class UsageAccessDetails extends AppInfoWithHeader implements OnPreferenc
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (preference == mSwitchPref) {
             if (mUsageState != null && (Boolean) newValue != mUsageState.hasAccess()) {
+                if (mUsageState.hasAccess() && mDpm.isProfileOwnerApp(mPackageName)) {
+                    new AlertDialog.Builder(getContext())
+                            .setIcon(com.android.internal.R.drawable.ic_dialog_alert_material)
+                            .setTitle(android.R.string.dialog_alert_title)
+                            .setMessage(R.string.work_profile_usage_access_warning)
+                            .setPositiveButton(R.string.okay, null)
+                            .show();
+                }
                 setHasAccess(!mUsageState.hasAccess());
                 refreshUi();
             }
