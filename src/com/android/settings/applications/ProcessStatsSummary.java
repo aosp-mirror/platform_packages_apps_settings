@@ -19,11 +19,12 @@ import android.content.Context;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
+import android.text.TextUtils;
 import android.text.format.Formatter;
+import android.text.format.Formatter.BytesResult;
 import android.widget.TextView;
 
 import com.android.internal.logging.MetricsLogger;
-import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.applications.ProcStatsData.MemInfo;
@@ -76,7 +77,8 @@ public class ProcessStatsSummary extends ProcessStatsBase implements OnPreferenc
         double usedRam = memInfo.realUsedRam;
         double totalRam = memInfo.realTotalRam;
         double freeRam = memInfo.realFreeRam;
-        String usedString = Formatter.formatShortFileSize(context, (long) usedRam);
+        BytesResult usedResult = Formatter.formatBytes(context.getResources(), (long) usedRam,
+                Formatter.FLAG_SHORTER);
         String totalString = Formatter.formatShortFileSize(context, (long) totalRam);
         String freeString = Formatter.formatShortFileSize(context, (long) freeRam);
         CharSequence memString;
@@ -87,7 +89,8 @@ public class ProcessStatsSummary extends ProcessStatsBase implements OnPreferenc
         } else {
             memString = memStatesStr[memStatesStr.length - 1];
         }
-        mMemStatus.setText(usedString);
+        mMemStatus.setText(TextUtils.expandTemplate(getText(R.string.storage_size_large),
+                usedResult.value, usedResult.units));
         float usedRatio = (float)(usedRam / (freeRam + usedRam));
         mColors.setRatios(usedRatio, 0, 1 - usedRatio);
 

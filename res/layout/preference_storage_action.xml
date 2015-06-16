@@ -20,7 +20,7 @@
     android:layout_height="match_parent"
     android:orientation="horizontal">
 
-    <TextView
+    <ImageView
         android:id="@+id/unmount"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
@@ -29,19 +29,7 @@
         android:contentDescription="@string/storage_menu_unmount"
         android:layout_gravity="center"
         android:gravity="center"
-        android:textSize="30sp"
+        android:src="@drawable/ic_eject_24dp"
         android:background="?android:attr/selectableItemBackground" />
 
-    <!--
-    <ImageView
-        android:id="@+id/eject"
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:paddingStart="16dip"
-        android:paddingEnd="16dip"
-        android:src="@drawable/ic_sync_green_holo"
-        android:contentDescription="@string/storage_menu_eject"
-        android:layout_gravity="center"
-        android:background="?android:attr/selectableItemBackground" />
-    -->
 </LinearLayout>
