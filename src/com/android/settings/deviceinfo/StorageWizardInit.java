@@ -39,6 +39,7 @@ public class StorageWizardInit extends StorageWizardBase {
         }
         setContentView(R.layout.storage_wizard_init);
 
+        setIllustrationInternal(true);
         setHeaderText(R.string.storage_wizard_init_title, mDisk.getDescription());
 
         mRadioExternal = (RadioButton) findViewById(R.id.storage_wizard_init_external_title);
@@ -70,8 +71,10 @@ public class StorageWizardInit extends StorageWizardBase {
             if (isChecked) {
                 if (buttonView == mRadioExternal) {
                     mRadioInternal.setChecked(false);
+                    setIllustrationInternal(false);
                 } else if (buttonView == mRadioInternal) {
                     mRadioExternal.setChecked(false);
+                    setIllustrationInternal(true);
                 }
                 getNextButton().setEnabled(true);
             }

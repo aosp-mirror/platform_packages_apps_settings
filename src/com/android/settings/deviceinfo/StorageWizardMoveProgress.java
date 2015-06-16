@@ -46,6 +46,7 @@ public class StorageWizardMoveProgress extends StorageWizardBase {
         final String appName = getIntent().getStringExtra(EXTRA_TITLE);
         final String volumeName = mStorage.getBestVolumeDescription(mVolume);
 
+        setIllustrationInternal(true);
         setHeaderText(R.string.storage_wizard_move_progress_title, appName);
         setBodyText(R.string.storage_wizard_move_progress_body, volumeName, appName);
 

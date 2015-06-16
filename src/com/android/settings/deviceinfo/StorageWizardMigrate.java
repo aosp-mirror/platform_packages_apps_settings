@@ -23,7 +23,6 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.RadioButton;
 
-import com.android.internal.util.Preconditions;
 import com.android.settings.R;
 
 public class StorageWizardMigrate extends StorageWizardBase {
@@ -41,6 +40,7 @@ public class StorageWizardMigrate extends StorageWizardBase {
         }
         setContentView(R.layout.storage_wizard_migrate);
 
+        setIllustrationInternal(true);
         setHeaderText(R.string.storage_wizard_migrate_title, mDisk.getDescription());
         setBodyText(R.string.memory_calculating_size);
 
@@ -50,7 +50,7 @@ public class StorageWizardMigrate extends StorageWizardBase {
         mRadioNow.setOnCheckedChangeListener(mRadioListener);
         mRadioLater.setOnCheckedChangeListener(mRadioListener);
 
-        mRadioNow.setChecked(true);
+        getNextButton().setEnabled(false);
 
         mEstimate = new MigrateEstimateTask(this) {
             @Override
@@ -73,6 +73,7 @@ public class StorageWizardMigrate extends StorageWizardBase {
                 } else if (buttonView == mRadioLater) {
                     mRadioNow.setChecked(false);
                 }
+                getNextButton().setEnabled(true);
             }
         }
     };
