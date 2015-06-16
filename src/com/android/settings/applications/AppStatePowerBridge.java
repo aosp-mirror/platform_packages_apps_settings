@@ -19,6 +19,7 @@ import com.android.settings.fuelgauge.PowerWhitelistBackend;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.ApplicationsState.AppFilter;
+import com.android.settingslib.applications.ApplicationsState.CompoundFilter;
 
 import java.util.ArrayList;
 
@@ -54,7 +55,8 @@ public class AppStatePowerBridge extends AppStateBaseBridge {
         public boolean isSystemHighPower;
     }
 
-    public static final AppFilter FILTER_POWER_WHITELISTED = new AppFilter() {
+    public static final AppFilter FILTER_POWER_WHITELISTED = new CompoundFilter(
+            ApplicationsState.FILTER_PERSONAL, new AppFilter() {
         @Override
         public void init() {
         }
@@ -63,17 +65,5 @@ public class AppStatePowerBridge extends AppStateBaseBridge {
         public boolean filterApp(AppEntry info) {
             return info.extraInfo == Boolean.TRUE;
         }
-    };
-
-    public static final AppFilter FILTER_POWER_NOT_WHITELISTED = new AppFilter() {
-        @Override
-        public void init() {
-        }
-
-        @Override
-        public boolean filterApp(AppEntry info) {
-            return info.extraInfo == Boolean.FALSE;
-        }
-    };
-
+    });
 }
