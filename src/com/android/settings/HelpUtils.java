@@ -16,6 +16,7 @@
 
 package com.android.settings;
 
+import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -28,6 +29,7 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MenuItem.OnMenuItemClickListener;
 
 import java.net.URISyntaxException;
 import java.util.Locale;
@@ -65,16 +67,16 @@ public class HelpUtils {
     /** Static helper that is not instantiable*/
     private HelpUtils() { }
 
-    public static boolean prepareHelpMenuItem(Context context, Menu menu, String helpUri,
+    public static boolean prepareHelpMenuItem(Activity activity, Menu menu, String helpUri,
             String backupContext) {
         MenuItem helpItem = menu.add(0, MENU_HELP, 0, R.string.help_label);
-        return prepareHelpMenuItem(context, helpItem, helpUri, backupContext);
+        return prepareHelpMenuItem(activity, helpItem, helpUri, backupContext);
     }
 
-    public static boolean prepareHelpMenuItem(Context context, Menu menu, int helpUriResource,
+    public static boolean prepareHelpMenuItem(Activity activity, Menu menu, int helpUriResource,
             String backupContext) {
         MenuItem helpItem = menu.add(0, MENU_HELP, 0, R.string.help_label);
-        return prepareHelpMenuItem(context, helpItem, context.getString(helpUriResource),
+        return prepareHelpMenuItem(activity, helpItem, activity.getString(helpUriResource),
                 backupContext);
     }
 
@@ -86,7 +88,7 @@ public class HelpUtils {
      *
      * @return returns whether the help menu item has been made visible.
      */
-    public static boolean prepareHelpMenuItem(Context context, MenuItem helpMenuItem,
+    public static boolean prepareHelpMenuItem(final Activity activity, MenuItem helpMenuItem,
             String helpUriString, String backupContext) {
         if (TextUtils.isEmpty(helpUriString)) {
             // The help url string is empty or null, so set the help menu item to be invisible.
@@ -95,12 +97,18 @@ public class HelpUtils {
             // return that the help menu item is not visible (i.e. false)
             return false;
         } else {
-            Intent intent = getHelpIntent(context, helpUriString, backupContext);
+            final Intent intent = getHelpIntent(activity, helpUriString, backupContext);
 
             // Set the intent to the help menu item, show the help menu item in the overflow
             // menu, and make it visible.
             if (intent != null) {
-                helpMenuItem.setIntent(intent);
+                helpMenuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        activity.startActivityForResult(intent, 0);
+                        return true;
+                    }
+                });
                 helpMenuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
                 helpMenuItem.setVisible(true);
             } else {

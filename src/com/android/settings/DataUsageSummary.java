@@ -588,7 +588,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         final MenuItem help = menu.findItem(R.id.data_usage_menu_help);
         String helpUrl;
         if (!TextUtils.isEmpty(helpUrl = getResources().getString(R.string.help_url_data_usage))) {
-            HelpUtils.prepareHelpMenuItem(context, help, helpUrl, getClass().getName());
+            HelpUtils.prepareHelpMenuItem(getActivity(), help, helpUrl, getClass().getName());
         } else {
             help.setVisible(false);
         }

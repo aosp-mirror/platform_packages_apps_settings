@@ -576,7 +576,7 @@ public class FingerprintSettings extends SubSettings {
             Context ctx = widget.getContext();
             Intent intent = HelpUtils.getHelpIntent(ctx, getURL(), ctx.getClass().getName());
             try {
-                ctx.startActivity(intent);
+                ((Activity) ctx).startActivityForResult(intent, 0);
             } catch (ActivityNotFoundException e) {
                 Log.w(FingerprintSettingsFragment.TAG,
                         "Actvity was not found for intent, " + intent.toString());
