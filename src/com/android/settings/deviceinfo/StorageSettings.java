@@ -23,9 +23,9 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.UserManager;
 import android.os.storage.DiskInfo;
 import android.os.storage.StorageEventListener;
 import android.os.storage.StorageManager;
@@ -35,6 +35,8 @@ import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.text.TextUtils;
+import android.text.format.Formatter;
+import android.text.format.Formatter.BytesResult;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -45,6 +47,7 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -59,13 +62,23 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
     private static final String TAG_VOLUME_UNMOUNTED = "volume_unmounted";
     private static final String TAG_DISK_INIT = "disk_init";
 
-    // TODO: badging to indicate devices running low on storage
+    static final int COLOR_PUBLIC = Color.parseColor("#ff9e9e9e");
+    static final int COLOR_WARNING = Color.parseColor("#fff4511e");
 
-    private UserManager mUserManager;
+    static final int[] COLOR_PRIVATE = new int[] {
+            Color.parseColor("#ff26a69a"),
+            Color.parseColor("#ffab47bc"),
+            Color.parseColor("#fff2a600"),
+            Color.parseColor("#ffec407a"),
+            Color.parseColor("#ffc0ca33"),
+    };
+
     private StorageManager mStorageManager;
 
     private PreferenceCategory mInternalCategory;
     private PreferenceCategory mExternalCategory;
+
+    private StorageSummaryPreference mInternalSummary;
 
     @Override
     protected int getMetricsCategory() {
@@ -83,8 +96,6 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
 
         final Context context = getActivity();
 
-        mUserManager = context.getSystemService(UserManager.class);
-
         mStorageManager = context.getSystemService(StorageManager.class);
         mStorageManager.registerListener(mStorageListener);
 
@@ -93,7 +104,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
         mInternalCategory = (PreferenceCategory) findPreference("storage_internal");
         mExternalCategory = (PreferenceCategory) findPreference("storage_external");
 
-        // TODO: if only one volume visible, shortcut into it
+        mInternalSummary = new StorageSummaryPreference(context);
 
         setHasOptionsMenu(true);
     }
@@ -124,14 +135,28 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
         mInternalCategory.removeAll();
         mExternalCategory.removeAll();
 
+        mInternalCategory.addPreference(mInternalSummary);
+
+        int privateCount = 0;
+        long privateUsedBytes = 0;
+        long privateTotalBytes = 0;
+
         final List<VolumeInfo> volumes = mStorageManager.getVolumes();
         Collections.sort(volumes, VolumeInfo.getDescriptionComparator());
 
         for (VolumeInfo vol : volumes) {
             if (vol.getType() == VolumeInfo.TYPE_PRIVATE) {
-                mInternalCategory.addPreference(new StorageVolumePreference(context, vol));
+                final int color = COLOR_PRIVATE[privateCount++ % COLOR_PRIVATE.length];
+                mInternalCategory.addPreference(
+                        new StorageVolumePreference(context, vol, color));
+                if (vol.isMountedReadable()) {
+                    final File path = vol.getPath();
+                    privateUsedBytes += path.getTotalSpace() - path.getFreeSpace();
+                    privateTotalBytes += path.getTotalSpace();
+                }
             } else if (vol.getType() == VolumeInfo.TYPE_PUBLIC) {
-                mExternalCategory.addPreference(new StorageVolumePreference(context, vol));
+                mExternalCategory.addPreference(
+                        new StorageVolumePreference(context, vol, COLOR_PUBLIC));
             }
         }
 
@@ -162,11 +187,27 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
             }
         }
 
+        final BytesResult result = Formatter.formatBytes(getResources(), privateUsedBytes, 0);
+        mInternalSummary.setTitle(TextUtils.expandTemplate(getText(R.string.storage_size_large),
+                result.value, result.units));
+        mInternalSummary.setSummary(getString(R.string.storage_volume_used_total,
+                Formatter.formatFileSize(context, privateTotalBytes)));
+
         if (mInternalCategory.getPreferenceCount() > 0) {
             getPreferenceScreen().addPreference(mInternalCategory);
         }
         if (mExternalCategory.getPreferenceCount() > 0) {
             getPreferenceScreen().addPreference(mExternalCategory);
+        }
+
+        if (mInternalCategory.getPreferenceCount() == 2
+                && mExternalCategory.getPreferenceCount() == 0) {
+            // Only showing primary internal storage, so just shortcut
+            final Bundle args = new Bundle();
+            args.putString(VolumeInfo.EXTRA_VOLUME_ID, VolumeInfo.ID_PRIVATE_INTERNAL);
+            startFragment(this, PrivateVolumeSettings.class.getCanonicalName(),
+                    -1, 0, args);
+            finish();
         }
     }
 
