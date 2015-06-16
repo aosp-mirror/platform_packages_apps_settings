@@ -36,6 +36,7 @@ import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.icu.text.ListFormatter;
+import android.graphics.drawable.Drawable;
 import android.net.INetworkStatsService;
 import android.net.INetworkStatsSession;
 import android.net.NetworkTemplate;
@@ -49,13 +50,16 @@ import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
+import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.text.format.Formatter;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -130,7 +134,6 @@ public class InstalledAppDetails extends AppInfoBase
     private LayoutPreference mHeader;
     private Button mUninstallButton;
     private boolean mUpdatedSysApp = false;
-    private TextView mAppVersion;
     private Button mForceStopButton;
     private Preference mNotificationPreference;
     private Preference mStoragePreference;
@@ -424,25 +427,9 @@ public class InstalledAppDetails extends AppInfoBase
     // Utility method to set application label and icon.
     private void setAppLabelAndIcon(PackageInfo pkgInfo) {
         final View appSnippet = mHeader.findViewById(R.id.app_snippet);
-        appSnippet.setPaddingRelative(0, appSnippet.getPaddingTop(), 0,
-                appSnippet.getPaddingBottom());
-
-        ImageView icon = (ImageView) appSnippet.findViewById(R.id.app_icon);
         mState.ensureIcon(mAppEntry);
-        icon.setImageDrawable(mAppEntry.icon);
-        // Set application name.
-        TextView label = (TextView) appSnippet.findViewById(R.id.app_name);
-        label.setText(mAppEntry.label);
-        // Version number of application
-        mAppVersion = (TextView) appSnippet.findViewById(R.id.app_summary);
-
-        if (pkgInfo != null && pkgInfo.versionName != null) {
-            mAppVersion.setVisibility(View.VISIBLE);
-            mAppVersion.setText(getActivity().getString(R.string.version_text,
-                    String.valueOf(pkgInfo.versionName)));
-        } else {
-            mAppVersion.setVisibility(View.INVISIBLE);
-        }
+        setupAppSnippet(appSnippet, mAppEntry.label, mAppEntry.icon,
+                pkgInfo != null ? pkgInfo.versionName : null);
     }
 
     private boolean signaturesMatch(String pkg1, String pkg2) {
@@ -755,6 +742,28 @@ public class InstalledAppDetails extends AppInfoBase
             return false;
         }
         return true;
+    }
+
+    public static void setupAppSnippet(View appSnippet, CharSequence label, Drawable icon,
+            CharSequence versionName) {
+        LayoutInflater.from(appSnippet.getContext()).inflate(R.layout.widget_text_views,
+                (ViewGroup) appSnippet.findViewById(android.R.id.widget_frame));
+
+        ImageView iconView = (ImageView) appSnippet.findViewById(android.R.id.icon);
+        iconView.setImageDrawable(icon);
+        // Set application name.
+        TextView labelView = (TextView) appSnippet.findViewById(android.R.id.title);
+        labelView.setText(label);
+        // Version number of application
+        TextView appVersion = (TextView) appSnippet.findViewById(R.id.widget_text1);
+
+        if (!TextUtils.isEmpty(versionName)) {
+            appVersion.setVisibility(View.VISIBLE);
+            appVersion.setText(appSnippet.getContext().getString(R.string.version_text,
+                    String.valueOf(versionName)));
+        } else {
+            appVersion.setVisibility(View.INVISIBLE);
+        }
     }
 
     private static NetworkTemplate getTemplate(Context context) {
