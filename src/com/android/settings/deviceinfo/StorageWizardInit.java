@@ -81,7 +81,8 @@ public class StorageWizardInit extends StorageWizardBase {
     @Override
     public void onNavigateNext() {
         if (mRadioExternal.isChecked()) {
-            if (mVolume != null && mVolume.getType() == VolumeInfo.TYPE_PUBLIC) {
+            if (mVolume != null && mVolume.getType() == VolumeInfo.TYPE_PUBLIC
+                    && mVolume.getState() != VolumeInfo.STATE_UNMOUNTABLE) {
                 // Remember that user made decision
                 mStorage.setVolumeInited(mVolume.getFsUuid(), true);
 
