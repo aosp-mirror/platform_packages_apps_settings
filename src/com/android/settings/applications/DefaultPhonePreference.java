@@ -19,6 +19,7 @@ package com.android.settings.applications;
 import android.content.Context;
 import android.os.UserManager;
 import android.telecom.DefaultDialerManager;
+import android.telecom.TelecomManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -29,10 +30,12 @@ import java.util.List;
 import java.util.Objects;
 
 public class DefaultPhonePreference extends AppListPreference {
+    private final Context mContext;
 
     public DefaultPhonePreference(Context context, AttributeSet attrs) {
         super(context, attrs);
 
+        mContext = context.getApplicationContext();
         if (isAvailable(context)) {
             loadDialerApps();
         }
@@ -41,7 +44,7 @@ public class DefaultPhonePreference extends AppListPreference {
     @Override
     protected boolean persistString(String value) {
         if (!TextUtils.isEmpty(value) && !Objects.equals(value, getDefaultPackage())) {
-            DefaultDialerManager.setDefaultDialerApplication(getContext(), value);
+            TelecomManager.from(mContext).setDefaultDialer(value);
         }
         setSummary(getEntry());
         return true;
