@@ -112,21 +112,23 @@ public class ManageApplications extends InstrumentedFragment
     // Filter options used for displayed list of applications
     // The order which they appear is the order they will show when spinner is present.
     public static final int FILTER_APPS_POWER_WHITELIST         = 0;
-    public static final int FILTER_APPS_ALL                     = 1;
-    public static final int FILTER_APPS_ENABLED                 = 2;
-    public static final int FILTER_APPS_DISABLED                = 3;
-    public static final int FILTER_APPS_BLOCKED                 = 4;
-    public static final int FILTER_APPS_PRIORITY                = 5;
-    public static final int FILTER_APPS_NO_PEEKING              = 6;
-    public static final int FILTER_APPS_SENSITIVE               = 7;
-    public static final int FILTER_APPS_PERSONAL                = 8;
-    public static final int FILTER_APPS_WORK                    = 9;
-    public static final int FILTER_APPS_WITH_DOMAIN_URLS        = 10;
-    public static final int FILTER_APPS_USAGE_ACCESS            = 11;
+    public static final int FILTER_APPS_POWER_WHITELIST_ALL     = 1;
+    public static final int FILTER_APPS_ALL                     = 2;
+    public static final int FILTER_APPS_ENABLED                 = 3;
+    public static final int FILTER_APPS_DISABLED                = 4;
+    public static final int FILTER_APPS_BLOCKED                 = 5;
+    public static final int FILTER_APPS_PRIORITY                = 6;
+    public static final int FILTER_APPS_NO_PEEKING              = 7;
+    public static final int FILTER_APPS_SENSITIVE               = 8;
+    public static final int FILTER_APPS_PERSONAL                = 9;
+    public static final int FILTER_APPS_WORK                    = 10;
+    public static final int FILTER_APPS_WITH_DOMAIN_URLS        = 11;
+    public static final int FILTER_APPS_USAGE_ACCESS            = 12;
 
     // This is the string labels for the filter modes above, the order must be kept in sync.
     public static final int[] FILTER_LABELS = new int[] {
-        R.string.high_power_filter_on,        // High power whitelist, on
+        R.string.high_power_filter_on, // High power whitelist, on
+        R.string.filter_all_apps,      // All apps label, but personal filter (for high power);
         R.string.filter_all_apps,      // All apps
         R.string.filter_enabled_apps,  // Enabled
         R.string.filter_apps_disabled, // Disabled
@@ -143,6 +145,7 @@ public class ManageApplications extends InstrumentedFragment
     // be kept in sync.
     public static final AppFilter[] FILTERS = new AppFilter[] {
         AppStatePowerBridge.FILTER_POWER_WHITELISTED,     // High power whitelist, on
+        ApplicationsState.FILTER_PERSONAL,    // All apps label, but personal filter
         ApplicationsState.FILTER_EVERYTHING,  // All apps
         ApplicationsState.FILTER_ALL_ENABLED, // Enabled
         ApplicationsState.FILTER_DISABLED,    // Disabled
@@ -333,7 +336,7 @@ public class ManageApplications extends InstrumentedFragment
             mFilterAdapter.enableFilter(FILTER_APPS_NO_PEEKING);
         }
         if (mListType == LIST_TYPE_HIGH_POWER) {
-            mFilterAdapter.enableFilter(FILTER_APPS_ALL);
+            mFilterAdapter.enableFilter(FILTER_APPS_POWER_WHITELIST_ALL);
         }
         if (mListType == LIST_TYPE_STORAGE) {
             mApplications.setOverrideFilter(new VolumeFilter(mVolumeUuid));
