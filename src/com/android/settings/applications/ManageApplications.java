@@ -993,7 +993,6 @@ public class ManageApplications extends InstrumentedFragment
                 } else {
                     holder.disabled.setVisibility(View.GONE);
                 }
-                holder.checkBox.setVisibility(View.GONE);
             }
             mActive.remove(convertView);
             mActive.add(convertView);

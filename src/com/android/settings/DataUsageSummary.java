@@ -1882,10 +1882,10 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             final AppItem item = mItems.get(position);
+            LayoutInflater inflater = LayoutInflater.from(parent.getContext());
             if (getItemViewType(position) == 1) {
                 if (convertView == null) {
-                    convertView = Utils.inflateCategoryHeader(LayoutInflater.from(
-                            parent.getContext()), parent);
+                    convertView = Utils.inflateCategoryHeader(inflater, parent);
                 }
 
                 final TextView title = (TextView) convertView.findViewById(android.R.id.title);
@@ -1893,8 +1893,9 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
 
             } else {
                 if (convertView == null) {
-                    convertView = LayoutInflater.from(parent.getContext()).inflate(
-                            R.layout.data_usage_item, parent, false);
+                    convertView = inflater.inflate(R.layout.data_usage_item, parent, false);
+                    inflater.inflate(R.layout.widget_progress_bar,
+                            (ViewGroup) convertView.findViewById(android.R.id.widget_frame));
 
                     if (mInsetSide > 0) {
                         convertView.setPaddingRelative(mInsetSide, 0, mInsetSide, 0);
@@ -1903,7 +1904,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
 
                 final Context context = parent.getContext();
 
-                final TextView text1 = (TextView) convertView.findViewById(android.R.id.text1);
+                final TextView summary = (TextView) convertView.findViewById(android.R.id.summary);
                 final ProgressBar progress = (ProgressBar) convertView.findViewById(
                         android.R.id.progress);
 
@@ -1911,10 +1912,10 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
                 UidDetailTask.bindView(mProvider, item, convertView);
 
                 if (item.restricted && item.total <= 0) {
-                    text1.setText(R.string.data_usage_app_restricted);
+                    summary.setText(R.string.data_usage_app_restricted);
                     progress.setVisibility(View.GONE);
                 } else {
-                    text1.setText(Formatter.formatFileSize(context, item.total));
+                    summary.setText(Formatter.formatFileSize(context, item.total));
                     progress.setVisibility(View.VISIBLE);
                 }
 

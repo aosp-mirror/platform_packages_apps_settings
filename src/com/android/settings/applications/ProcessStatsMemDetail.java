@@ -105,8 +105,9 @@ public class ProcessStatsMemDetail extends InstrumentedFragment {
     private void addDetailsItem(ViewGroup parent, CharSequence title,
             float level, CharSequence value) {
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        ViewGroup item = (ViewGroup) inflater.inflate(R.layout.app_percentage_item,
-                null);
+        ViewGroup item = (ViewGroup) inflater.inflate(R.layout.app_item, null);
+        inflater.inflate(R.layout.widget_progress_bar,
+                (ViewGroup) item.findViewById(android.R.id.widget_frame));
         parent.addView(item);
         item.findViewById(android.R.id.icon).setVisibility(View.GONE);
         TextView titleView = (TextView) item.findViewById(android.R.id.title);
