@@ -73,7 +73,7 @@ public class CreateShortcut extends LauncherActivity {
     }
 
     private Bitmap createIcon(int resource) {
-        Context context = new ContextThemeWrapper(this, android.R.style.Theme_Material_Light);
+        Context context = new ContextThemeWrapper(this, android.R.style.Theme_Material);
         View view = LayoutInflater.from(context).inflate(R.layout.shortcut_badge, null);
         ((ImageView) view.findViewById(android.R.id.icon)).setImageResource(resource);
 
