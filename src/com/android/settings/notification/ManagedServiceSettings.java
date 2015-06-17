@@ -33,6 +33,7 @@ import android.preference.SwitchPreference;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.settings.R;
@@ -77,6 +78,7 @@ public abstract class ManagedServiceSettings extends SettingsPreferenceFragment 
         final View v =  inflater.inflate(R.layout.managed_service_settings, container, false);
         mEmpty = (TextView) v.findViewById(android.R.id.empty);
         mEmpty.setText(mConfig.emptyText);
+        ((ListView) v.findViewById(android.R.id.list)).setEmptyView(mEmpty);
         return v;
     }
 
@@ -114,7 +116,6 @@ public abstract class ManagedServiceSettings extends SettingsPreferenceFragment 
             });
             screen.addPreference(pref);
         }
-        mEmpty.setVisibility(services.isEmpty() ? View.VISIBLE : View.GONE);
     }
 
     private boolean setEnabled(ComponentName service, String title, boolean enable) {
