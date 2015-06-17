@@ -166,7 +166,7 @@ public class InstalledAppDetails extends AppInfoBase
                 || Utils.isSystemPackage(mPm, mPackageInfo)) {
             // Disable button for core system applications.
             button.setText(R.string.disable_text);
-        } else if (mAppEntry.info.enabled) {
+        } else if (mAppEntry.info.enabled && !isDisabledUntilUsed()) {
             button.setText(R.string.disable_text);
             disableable = true;
         } else {
@@ -175,6 +175,11 @@ public class InstalledAppDetails extends AppInfoBase
         }
 
         return disableable;
+    }
+
+    private boolean isDisabledUntilUsed() {
+        return mAppEntry.info.enabledSetting
+                == PackageManager.COMPONENT_ENABLED_STATE_DISABLED_UNTIL_USED;
     }
 
     private void initUninstallButtons() {
@@ -690,7 +695,7 @@ public class InstalledAppDetails extends AppInfoBase
         String packageName = mAppEntry.info.packageName;
         if(v == mUninstallButton) {
             if ((mAppEntry.info.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
-                if (mAppEntry.info.enabled) {
+                if (mAppEntry.info.enabled && !isDisabledUntilUsed()) {
                     if (mUpdatedSysApp) {
                         showDialogInner(DLG_SPECIAL_DISABLE, 0);
                     } else {
