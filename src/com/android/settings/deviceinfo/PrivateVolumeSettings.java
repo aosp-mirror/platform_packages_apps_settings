@@ -127,7 +127,12 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         mVolumeId = getArguments().getString(VolumeInfo.EXTRA_VOLUME_ID);
         mVolume = mStorageManager.findVolumeById(mVolumeId);
 
-        Preconditions.checkNotNull(mVolume);
+        if (mVolume == null) {
+            Log.d(TAG, "Leaving details fragment due to missing volume");
+            finish();
+            return;
+        }
+
         Preconditions.checkState(mVolume.getType() == VolumeInfo.TYPE_PRIVATE);
 
         addPreferencesFromResource(R.xml.device_info_storage_volume);
