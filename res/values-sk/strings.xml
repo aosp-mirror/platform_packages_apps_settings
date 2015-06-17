@@ -82,20 +82,6 @@
     <string name="font_size_save" msgid="3450855718056759095">"OK"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"Ukladací priestor USB"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"SD karta"</string>
-    <string name="battery_info_status_label" msgid="8109155295509700309">"Stav batérie:"</string>
-    <string name="battery_info_power_label" msgid="7465140230991349382">"Napájací konektor:"</string>
-    <string name="battery_info_scale_label" msgid="3649763192389778437">"Stupnica batérie:"</string>
-    <string name="battery_info_level_label" msgid="8706526709307788737">"Nabitie batérie:"</string>
-    <string name="battery_info_health_label" msgid="6416051542741886958">"Opotrebenie batérie:"</string>
-    <string name="battery_info_technology_label" msgid="788304533220748681">"Technológia batérie:"</string>
-    <string name="battery_info_voltage_label" msgid="8971764146757637863">"Napätie batérie:"</string>
-    <string name="battery_info_voltage_units" msgid="8658490792208288107">"mV"</string>
-    <string name="battery_info_temperature_label" msgid="1968383098818648037">"Teplota batérie:"</string>
-    <string name="battery_info_temperature_units" msgid="9098950587249987550">"° C"</string>
-    <string name="battery_info_uptime" msgid="5548545143573527992">"Čas od spustenia:"</string>
-    <string name="battery_info_awake_battery" msgid="2557725975486185849">"Doba napájania z batérie:"</string>
-    <string name="battery_info_awake_plugged" msgid="176716874713478188">"Doba používania počas nabíjania:"</string>
-    <string name="battery_info_screen_on" msgid="376277447175613889">"Doba zapnutia obrazovky:"</string>
     <string name="battery_info_status_unknown" msgid="196130600938058547">"Neznáme"</string>
     <string name="battery_info_status_charging" msgid="1705179948350365604">"Nabíjanie"</string>
     <string name="battery_info_status_charging_ac" msgid="2909861890674399949">"Nabíjanie zo zásuvky"</string>
@@ -104,19 +90,6 @@
     <string name="battery_info_status_discharging" msgid="310932812698268588">"Nenabíja sa"</string>
     <string name="battery_info_status_not_charging" msgid="2820070506621483576">"Nenabíja sa"</string>
     <string name="battery_info_status_full" msgid="2824614753861462808">"Nabitá"</string>
-    <string name="battery_info_power_unplugged" msgid="5987246575519551081">"Odpojené"</string>
-    <string name="battery_info_power_ac" msgid="6808516193001604634">"AC"</string>
-    <string name="battery_info_power_usb" msgid="8012931702516331797">"USB"</string>
-    <string name="battery_info_power_wireless" msgid="6819163295739305097">"bezdrôtové"</string>
-    <string name="battery_info_power_ac_usb" msgid="6777734146838328688">"AC+USB"</string>
-    <string name="battery_info_power_unknown" msgid="7344115502868899881">"Neznáme"</string>
-    <string name="battery_info_health_unknown" msgid="5664295556921944255">"Neznáme"</string>
-    <string name="battery_info_health_good" msgid="8070356565806711806">"Dobrá"</string>
-    <string name="battery_info_health_overheat" msgid="8442959549291368806">"Prehriata"</string>
-    <string name="battery_info_health_dead" msgid="1725917445762829059">"Vybitá"</string>
-    <string name="battery_info_health_over_voltage" msgid="2420269351664490121">"Prepätie"</string>
-    <string name="battery_info_health_unspecified_failure" msgid="6347021103185471590">"Neznáma chyba"</string>
-    <string name="battery_info_health_cold" msgid="3835692786176707318">"Studená"</string>
     <string name="bluetooth" msgid="5549625000628014477">"Bluetooth"</string>
     <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"Viditeľné pre všetky okolité zariadenia Bluetooth (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
     <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"Viditeľné pre všetky okolité zariadenia Bluetooth"</string>
@@ -266,7 +239,6 @@
     <string name="language_picker_title" msgid="5349877711342869319">"Jazyk"</string>
     <string name="activity_picker_label" msgid="6295660302548177109">"Zvoliť aktivitu"</string>
     <string name="device_info_label" msgid="6551553813651711205">"Informácie o zariadení"</string>
-    <string name="battery_info_label" msgid="4132685016148679403">"Informácie o batérii"</string>
     <string name="display_label" msgid="8074070940506840792">"Obrazovka"</string>
     <string name="phone_info_label" product="tablet" msgid="7820855350955963628">"Informácie o tablete"</string>
     <string name="phone_info_label" product="default" msgid="2127552523124277664">"Informácie o telefóne"</string>
@@ -324,6 +296,8 @@
     <string name="time_picker_title" msgid="483460752287255019">"Čas"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Automaticky zamknúť"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> po prechode do spánku"</string>
+    <!-- no translation found for lock_immediately_summary_with_exception (9119632173886172690) -->
+    <skip />
     <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> po režime spánku, ak odomknutie nie je udržované funkciou <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Zobrazovať vlastníka na uzamknutej obrazovke"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Správa na uzamknutej obrazovke"</string>
@@ -384,6 +358,8 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Okrem odomknutia svojho telefónu môžete pomocou odtlačku autorizovať nákupy a prístup aplikácií. "<annotation id="url">"Ďalšie informácie"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4504501581228672208">"Zámka obrazovky bola deaktivovaná. Stále však môžete pomocou svojho odtlačku autorizovať nákupy a prístup aplikácií. "<annotation id="url">"Ďalšie informácie"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Nadvihnite prst, potom sa opäť dotknite senzora"</string>
+    <!-- no translation found for fingerprint_add_max (1020927549936895822) -->
+    <skip />
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Šifrovanie"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"Šifrovať tablet"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"Šifrovať telefón"</string>
@@ -525,7 +501,6 @@
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"Párovanie so zariadením:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Uistite sa, že zobrazuje tento prístupový kľúč:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"Zo zariadenia:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Párovať s týmto zariadením?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"Ak chcete svoje zariadenie spárovať so zariadením <xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>, zadajte na ňom kód <xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g> a stlačte kláves Enter."</string>
-    <string name="bluetooth_pairing_will_share_phonebook" msgid="4982239145676394429">"Párovaním udelíte zariadeniam po pripojení prístup k svojim kontaktom a histórii hovorov."</string>
     <string name="bluetooth_pairing_shares_phonebook" msgid="1655930908614072491">"Udeľovať zariadeniam po pripojení prístup ku kontaktom a histórii hovorov"</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_connecting_error_message" msgid="1397388344342081090">"Nepodarilo sa pripojiť k zariadeniu <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
@@ -1013,7 +988,8 @@
     <string name="storage_internal_title" msgid="690771193137801021">"Úložisko zariadenia"</string>
     <string name="storage_external_title" msgid="3433462910096848696">"Prenosné úložisko"</string>
     <string name="storage_volume_summary" msgid="7023441974367853372">"Využité miesto: <xliff:g id="USED">%1$s</xliff:g> z <xliff:g id="TOTAL">%2$s</xliff:g>"</string>
-    <string name="storage_size_large" msgid="4936185879734498579">"<xliff:g id="NUMBER">^1</xliff:g> "<small><small>"<xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
+    <!-- no translation found for storage_size_large (5691585991420946254) -->
+    <skip />
     <string name="storage_volume_used" msgid="1303803057698959872">"Využité miesto z <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_volume_used_total" msgid="6113121714019000244">"Celkové využité miesto z <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_mount_success" msgid="687641090137253647">"Úložisko (<xliff:g id="NAME">%1$s</xliff:g>) je pripojené"</string>
@@ -1516,7 +1492,6 @@
     <string name="testing" msgid="6584352735303604146">"Testovanie"</string>
     <string name="testing_phone_info" product="tablet" msgid="193561832258534798">"Informácie o tablete"</string>
     <string name="testing_phone_info" product="default" msgid="8656693364332840056">"Informácie o telefóne"</string>
-    <string name="testing_battery_info" msgid="3497865525976497848">"Informácie o batérii"</string>
     <string name="input_methods_settings_title" msgid="6800066636850553887">"Zadávanie textu"</string>
     <string name="input_method" msgid="5434026103176856164">"Metóda vstupu"</string>
     <string name="current_input_method" msgid="2636466029213488159">"Aktuálna klávesnica"</string>
@@ -1823,6 +1798,8 @@
     <string name="menu_stats_refresh" msgid="1676215433344981075">"Obnoviť"</string>
     <string name="process_kernel_label" msgid="3916858646836739323">"OS Android"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"Mediaserver"</string>
+    <!-- no translation found for process_dex2oat_label (2592408651060518226) -->
+    <skip />
     <string name="battery_saver" msgid="1426682272004907982">"Šetrič batérie"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Zapínať automaticky"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Nikdy"</string>
@@ -2522,7 +2499,7 @@
     <string name="keywords_sounds_and_notifications" msgid="5965996187974887000">"zvukový signál reproduktora"</string>
     <string name="keywords_sounds_and_notifications_interruptions" msgid="543023766902917716">"nie nerušiť vyrušiť vyrušenie prestávka"</string>
     <string name="keywords_app" msgid="6334757056536837791">"RAM"</string>
-    <string name="keywords_location" msgid="782326973714313480">"v blízkosti poloha história nahlasovanie"</string>
+    <string name="keywords_location" msgid="782326973714313480">"nablízku poloha história nahlasovanie"</string>
     <string name="keywords_location_mode" msgid="8584992704568356084">"presnosť"</string>
     <string name="keywords_accounts" msgid="1957925565953357627">"účet"</string>
     <string name="keywords_users" msgid="4673901601478559100">"obmedzenie obmedziť obmedzené"</string>
