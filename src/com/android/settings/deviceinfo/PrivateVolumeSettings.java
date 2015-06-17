@@ -53,7 +53,6 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.android.internal.logging.MetricsLogger;
-import com.android.internal.util.Preconditions;
 import com.android.settings.R;
 import com.android.settings.Settings.StorageUseActivity;
 import com.android.settings.SettingsPreferenceFragment;
@@ -110,6 +109,11 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
 
     private Preference mExplore;
 
+    private boolean isVolumeValid() {
+        return (mVolume != null) && (mVolume.getType() == VolumeInfo.TYPE_PRIVATE)
+                && mVolume.isMountedReadable();
+    }
+
     @Override
     protected int getMetricsCategory() {
         return MetricsLogger.DEVICEINFO_STORAGE;
@@ -127,21 +131,18 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         mVolumeId = getArguments().getString(VolumeInfo.EXTRA_VOLUME_ID);
         mVolume = mStorageManager.findVolumeById(mVolumeId);
 
-        if (mVolume == null) {
-            Log.d(TAG, "Leaving details fragment due to missing volume");
-            finish();
+        mMeasure = new StorageMeasurement(context, mVolume, mSharedVolume);
+        mMeasure.setReceiver(mReceiver);
+
+        if (!isVolumeValid()) {
+            getActivity().finish();
             return;
         }
-
-        Preconditions.checkState(mVolume.getType() == VolumeInfo.TYPE_PRIVATE);
 
         addPreferencesFromResource(R.xml.device_info_storage_volume);
 
         // Find the emulated shared storage layered above this private volume
         mSharedVolume = mStorageManager.findEmulatedForPrivate(mVolume);
-
-        mMeasure = new StorageMeasurement(context, mVolume, mSharedVolume);
-        mMeasure.setReceiver(mReceiver);
 
         mSummary = new StorageSummaryPreference(context);
 
@@ -167,6 +168,11 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
     }
 
     public void update() {
+        if (!isVolumeValid()) {
+            getActivity().finish();
+            return;
+        }
+
         getActivity().setTitle(mStorageManager.getBestVolumeDescription(mVolume));
 
         // Valid options may have changed
@@ -176,12 +182,6 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         final PreferenceScreen screen = getPreferenceScreen();
 
         screen.removeAll();
-
-        if (!mVolume.isMountedReadable()) {
-            Log.d(TAG, "Leaving details fragment due to state " + mVolume.getState());
-            finish();
-            return;
-        }
 
         screen.addPreference(mSummary);
 
@@ -250,7 +250,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
 
         // Refresh to verify that we haven't been formatted away
         mVolume = mStorageManager.findVolumeById(mVolumeId);
-        if (mVolume == null) {
+        if (!isVolumeValid()) {
             getActivity().finish();
             return;
         }
@@ -268,7 +268,9 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mMeasure.onDestroy();
+        if (mMeasure != null) {
+            mMeasure.onDestroy();
+        }
     }
 
     @Override
@@ -278,6 +280,8 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
 
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
+        if (!isVolumeValid()) return;
+
         final MenuItem rename = menu.findItem(R.id.storage_rename);
         final MenuItem mount = menu.findItem(R.id.storage_mount);
         final MenuItem unmount = menu.findItem(R.id.storage_unmount);
