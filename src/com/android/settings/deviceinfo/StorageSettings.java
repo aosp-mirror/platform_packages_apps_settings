@@ -24,6 +24,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.storage.DiskInfo;
@@ -165,11 +166,16 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
         for (VolumeRecord rec : recs) {
             if (rec.getType() == VolumeInfo.TYPE_PRIVATE
                     && mStorageManager.findVolumeByUuid(rec.getFsUuid()) == null) {
+                // TODO: add actual storage type to record
+                final Drawable icon = context.getDrawable(R.drawable.ic_sim_sd);
+                icon.mutate();
+                icon.setTint(COLOR_PUBLIC);
+
                 final Preference pref = new Preference(context);
                 pref.setKey(rec.getFsUuid());
                 pref.setTitle(rec.getNickname());
                 pref.setSummary(com.android.internal.R.string.ext_media_status_missing);
-                pref.setIcon(R.drawable.ic_settings_storage);
+                pref.setIcon(icon);
                 mInternalCategory.addPreference(pref);
             }
         }

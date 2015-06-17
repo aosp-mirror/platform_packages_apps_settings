@@ -16,8 +16,6 @@
 
 package com.android.settings.deviceinfo;
 
-import static com.android.settings.deviceinfo.StorageSettings.TAG;
-
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -33,7 +31,6 @@ import android.provider.DocumentsContract;
 import android.text.TextUtils;
 import android.text.format.Formatter;
 import android.text.format.Formatter.BytesResult;
-import android.util.Log;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.util.Preconditions;
@@ -67,6 +64,11 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
     private Preference mFormatPublic;
     private Preference mFormatPrivate;
 
+    private boolean isVolumeValid() {
+        return (mVolume != null) && (mVolume.getType() == VolumeInfo.TYPE_PUBLIC)
+                && mVolume.isMountedReadable();
+    }
+
     @Override
     protected int getMetricsCategory() {
         return MetricsLogger.DEVICEINFO_STORAGE;
@@ -90,13 +92,10 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
             mVolume = mStorageManager.findVolumeById(volId);
         }
 
-        if (mVolume == null) {
-            Log.d(TAG, "Leaving details fragment due to missing volume");
-            finish();
+        if (!isVolumeValid()) {
+            getActivity().finish();
             return;
         }
-
-        Preconditions.checkState(mVolume.getType() == VolumeInfo.TYPE_PUBLIC);
 
         mDisk = mStorageManager.findDiskById(mVolume.getDiskId());
         Preconditions.checkNotNull(mDisk);
@@ -114,18 +113,17 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
     }
 
     public void update() {
+        if (!isVolumeValid()) {
+            getActivity().finish();
+            return;
+        }
+
         getActivity().setTitle(mStorageManager.getBestVolumeDescription(mVolume));
 
         final Context context = getActivity();
         final PreferenceScreen screen = getPreferenceScreen();
 
         screen.removeAll();
-
-        if (!mVolume.isMountedReadable()) {
-            Log.d(TAG, "Leaving details fragment due to state " + mVolume.getState());
-            finish();
-            return;
-        }
 
         if (mVolume.isMountedReadable()) {
             screen.addPreference(mSummary);
@@ -168,7 +166,7 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
 
         // Refresh to verify that we haven't been formatted away
         mVolume = mStorageManager.findVolumeById(mVolumeId);
-        if (mVolume == null) {
+        if (!isVolumeValid()) {
             getActivity().finish();
             return;
         }
