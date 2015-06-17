@@ -80,20 +80,6 @@
     <string name="font_size_save" msgid="3450855718056759095">"OK"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"USB хранилище"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"SD карта"</string>
-    <string name="battery_info_status_label" msgid="8109155295509700309">"Състояние на батерията:"</string>
-    <string name="battery_info_power_label" msgid="7465140230991349382">"Захранване:"</string>
-    <string name="battery_info_scale_label" msgid="3649763192389778437">"Скала на батерията:"</string>
-    <string name="battery_info_level_label" msgid="8706526709307788737">"Ниво на батерията:"</string>
-    <string name="battery_info_health_label" msgid="6416051542741886958">"Състояние на батерията"</string>
-    <string name="battery_info_technology_label" msgid="788304533220748681">"Технология на батерията:"</string>
-    <string name="battery_info_voltage_label" msgid="8971764146757637863">"Волтаж на батерията:"</string>
-    <string name="battery_info_voltage_units" msgid="8658490792208288107">"mV"</string>
-    <string name="battery_info_temperature_label" msgid="1968383098818648037">"Температура на батерията:"</string>
-    <string name="battery_info_temperature_units" msgid="9098950587249987550">"° С"</string>
-    <string name="battery_info_uptime" msgid="5548545143573527992">"Време от зареждането:"</string>
-    <string name="battery_info_awake_battery" msgid="2557725975486185849">"Време на активност с батерия:"</string>
-    <string name="battery_info_awake_plugged" msgid="176716874713478188">"Време на активност при зареждане:"</string>
-    <string name="battery_info_screen_on" msgid="376277447175613889">"Време с включен екран:"</string>
     <string name="battery_info_status_unknown" msgid="196130600938058547">"Неизвестно"</string>
     <string name="battery_info_status_charging" msgid="1705179948350365604">"Зарежда се"</string>
     <string name="battery_info_status_charging_ac" msgid="2909861890674399949">"Зареждане при AC"</string>
@@ -102,19 +88,6 @@
     <string name="battery_info_status_discharging" msgid="310932812698268588">"Не се зарежда"</string>
     <string name="battery_info_status_not_charging" msgid="2820070506621483576">"Не се зарежда"</string>
     <string name="battery_info_status_full" msgid="2824614753861462808">"Пълна"</string>
-    <string name="battery_info_power_unplugged" msgid="5987246575519551081">"Изкл."</string>
-    <string name="battery_info_power_ac" msgid="6808516193001604634">"AC"</string>
-    <string name="battery_info_power_usb" msgid="8012931702516331797">"USB"</string>
-    <string name="battery_info_power_wireless" msgid="6819163295739305097">"безжично"</string>
-    <string name="battery_info_power_ac_usb" msgid="6777734146838328688">"AC+USB"</string>
-    <string name="battery_info_power_unknown" msgid="7344115502868899881">"Неизвестни"</string>
-    <string name="battery_info_health_unknown" msgid="5664295556921944255">"Неизвестен"</string>
-    <string name="battery_info_health_good" msgid="8070356565806711806">"Добро"</string>
-    <string name="battery_info_health_overheat" msgid="8442959549291368806">"Прегряване"</string>
-    <string name="battery_info_health_dead" msgid="1725917445762829059">"Празна"</string>
-    <string name="battery_info_health_over_voltage" msgid="2420269351664490121">"Над волтажа"</string>
-    <string name="battery_info_health_unspecified_failure" msgid="6347021103185471590">"Неизвестна грешка"</string>
-    <string name="battery_info_health_cold" msgid="3835692786176707318">"Студено"</string>
     <string name="bluetooth" msgid="5549625000628014477">"Bluetooth"</string>
     <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"Видимо за всички у-ва с Bluetooth в района (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
     <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"Видимо за всички устройства с Bluetooth в района"</string>
@@ -264,7 +237,6 @@
     <string name="language_picker_title" msgid="5349877711342869319">"Език"</string>
     <string name="activity_picker_label" msgid="6295660302548177109">"Избор на активност"</string>
     <string name="device_info_label" msgid="6551553813651711205">"Информация за устройство"</string>
-    <string name="battery_info_label" msgid="4132685016148679403">"За батерията"</string>
     <string name="display_label" msgid="8074070940506840792">"Екран"</string>
     <string name="phone_info_label" product="tablet" msgid="7820855350955963628">"Информация за таблета"</string>
     <string name="phone_info_label" product="default" msgid="2127552523124277664">"Информация за телефон"</string>
@@ -322,6 +294,8 @@
     <string name="time_picker_title" msgid="483460752287255019">"Час"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Автоматично заключване"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> след спящ режим"</string>
+    <!-- no translation found for lock_immediately_summary_with_exception (9119632173886172690) -->
+    <skip />
     <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> след спящ режим, освен когато екранът се поддържа отключен от <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"С информацията за собственика на заключения екран"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Закл. екран: Съобщ."</string>
@@ -353,18 +327,12 @@
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"За да използвате отпечатъка си за отключване на екрана или за потвърждаване на покупки, ще трябва:"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"Настройте резервен начин за заключване на екрана"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_2" msgid="4158160658182631304">"Да добавим отпечатъка ви."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_title (3201556857492526098) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_message (5061093614328964700) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_message_warning (7173290350577831813) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_risk_link_text (9129531466157620977) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_cancel (3199351118385606526) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_continue (7472492858148162530) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Отключване с отпечатък"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="5061093614328964700">"Трябва само да докоснете сензора за отпечатъци, за да отключите телефона си, да оторизирате покупка или да влезете в приложение. Тези неща ще могат да се извършват с добавените към телефона ви отпечатъци, така че внимавайте кого добавяте."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="7173290350577831813">"Забележка: Отпечатъкът ви може да е по-малко сигурен в сравнение с надеждна фигура или ПИН код."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_risk_link_text" msgid="9129531466157620977">"Научете повече"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Отказ"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Напред"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="5877265753699187149">"Намиране на сензора"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="1959655161889313661">"Намерете сензора за отпечатък на гърба на телефона си."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="2058830032070449160">"Илюстрация с устройството и местоположението на сензора за отпечатък"</string>
@@ -385,7 +353,8 @@
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"Напред"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Освен за отключване на телефона си можете да използвате отпечатъка си и за упълномощаване на покупки и достъп до приложения. "<annotation id="url">"Научете повече"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4504501581228672208">"Опцията за заключване на екрана е деактивирана. Пак можете да използвате отпечатъка си за упълномощаване на покупки и достъп до приложения. "<annotation id="url">"Научете повече"</annotation></string>
-    <!-- no translation found for security_settings_fingerprint_enroll_lift_touch_again (1888772560642539718) -->
+    <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Вдигнете пръста, след което докоснете сензора отново"</string>
+    <!-- no translation found for fingerprint_add_max (1020927549936895822) -->
     <skip />
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Шифроване"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"Шифроване на таблета"</string>
@@ -516,9 +485,7 @@
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"За сдвояване със::&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Уверете се, че показва този код за достъп:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"От:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Да се сдвои ли с това устройство?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"За сдвояване със: <xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g> Въведете: <xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>, след това натиснете „Return“ или „Enter“."</string>
-    <string name="bluetooth_pairing_will_share_phonebook" msgid="4982239145676394429">"При свързване сдвояването предоставя достъп до вашите контакти и история на обажданията."</string>
-    <!-- no translation found for bluetooth_pairing_shares_phonebook (1655930908614072491) -->
-    <skip />
+    <string name="bluetooth_pairing_shares_phonebook" msgid="1655930908614072491">"При свързване се предоставя достъп до вашите контакти и история на обажданията."</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_connecting_error_message" msgid="1397388344342081090">"Не можа да се установи връзка със: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"Сканиране за устройства"</string>
@@ -625,8 +592,7 @@
     <string name="wifi_suspend_optimizations" msgid="1220174276403689487">"Wi-Fi да се оптимизира"</string>
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"Намаляване на използването на батерията, когато Wi‑Fi е включен"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"Разход на бат. от Wi‑Fi: Лимит"</string>
-    <!-- no translation found for wifi_switch_away_when_unvalidated (1410499115509796174) -->
-    <skip />
+    <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"Превключете към клетъчни данни, ако Wi‑Fi мрежата изгуби достъп до интернет."</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"Добавяне на мрежа"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"Wi‑Fi мрежи"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"Бутон за WPS"</string>
@@ -1004,7 +970,8 @@
     <string name="storage_internal_title" msgid="690771193137801021">"Хранилище на устройството"</string>
     <string name="storage_external_title" msgid="3433462910096848696">"Преносимо хранилище"</string>
     <string name="storage_volume_summary" msgid="7023441974367853372">"Използвали сте <xliff:g id="USED">%1$s</xliff:g> от <xliff:g id="TOTAL">%2$s</xliff:g>"</string>
-    <string name="storage_size_large" msgid="4936185879734498579">"<xliff:g id="NUMBER">^1</xliff:g> "<small><small>"<xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
+    <!-- no translation found for storage_size_large (5691585991420946254) -->
+    <skip />
     <string name="storage_volume_used" msgid="1303803057698959872">"Използвано от <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_volume_used_total" msgid="6113121714019000244">"Общо използвано от <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_mount_success" msgid="687641090137253647">"<xliff:g id="NAME">%1$s</xliff:g>: Свързването бе успешно"</string>
@@ -1507,7 +1474,6 @@
     <string name="testing" msgid="6584352735303604146">"Тестване"</string>
     <string name="testing_phone_info" product="tablet" msgid="193561832258534798">"Информация за таблета"</string>
     <string name="testing_phone_info" product="default" msgid="8656693364332840056">"Информация за телефон"</string>
-    <string name="testing_battery_info" msgid="3497865525976497848">"Информация за батерията"</string>
     <string name="input_methods_settings_title" msgid="6800066636850553887">"Въвеждане на текст"</string>
     <string name="input_method" msgid="5434026103176856164">"Метод на въвеждане"</string>
     <string name="current_input_method" msgid="2636466029213488159">"Текуща клавиатура"</string>
@@ -1814,6 +1780,8 @@
     <string name="menu_stats_refresh" msgid="1676215433344981075">"Опресняване"</string>
     <string name="process_kernel_label" msgid="3916858646836739323">"Android (ОС)"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"Медиен сървър"</string>
+    <!-- no translation found for process_dex2oat_label (2592408651060518226) -->
+    <skip />
     <string name="battery_saver" msgid="1426682272004907982">"Режим за запазване на батерията"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Автоматично включване"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Никога"</string>
@@ -2178,8 +2146,7 @@
     <string name="data_usage_menu_auto_sync" msgid="8203999775948778560">"Автоматично синхронизиране на данни"</string>
     <string name="data_usage_menu_sim_cards" msgid="6410498422797244073">"SIM карти"</string>
     <string name="data_usage_menu_cellular_networks" msgid="5243515735055652279">"Клетъчни мрежи"</string>
-    <!-- no translation found for data_usage_cellular_data_summary (8413357481361268285) -->
-    <skip />
+    <string name="data_usage_cellular_data_summary" msgid="8413357481361268285">"На пауза след лимита"</string>
     <string name="account_settings_menu_auto_sync" msgid="6243013719753700377">"Авт. синхронизиране на данните"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="785541379617346438">"Лични данни: Авт. синхрон."</string>
     <string name="account_settings_menu_auto_sync_work" msgid="329565580969147026">"Служебни данни: Авт. синхрон."</string>
