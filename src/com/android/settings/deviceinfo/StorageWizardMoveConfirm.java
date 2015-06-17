@@ -46,7 +46,8 @@ public class StorageWizardMoveConfirm extends StorageWizardBase {
             mPackageName = getIntent().getStringExtra(EXTRA_PACKAGE_NAME);
             mApp = getPackageManager().getApplicationInfo(mPackageName, 0);
         } catch (NameNotFoundException e) {
-            throw new RuntimeException(e);
+            finish();
+            return;
         }
 
         // Sanity check that target volume is candidate
