@@ -148,7 +148,7 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
     }
 
     protected void updateFooter(boolean isEmpty) {
-        if (isEmpty != mListLastEmpty) {
+        if (isEmpty != mListLastEmpty && hasListView()) {
             final ListView list = getListView();
             list.removeFooterView(mEmptyFooter);
             list.removeFooterView(mAddOtherNetworkItem);
