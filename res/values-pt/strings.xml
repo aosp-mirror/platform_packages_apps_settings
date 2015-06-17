@@ -80,20 +80,6 @@
     <string name="font_size_save" msgid="3450855718056759095">"OK"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"Armaz. USB"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"Cartão SD"</string>
-    <string name="battery_info_status_label" msgid="8109155295509700309">"Status da bateria:"</string>
-    <string name="battery_info_power_label" msgid="7465140230991349382">"Tomada de alimentação:"</string>
-    <string name="battery_info_scale_label" msgid="3649763192389778437">"Escala da bateria:"</string>
-    <string name="battery_info_level_label" msgid="8706526709307788737">"Nível da bateria:"</string>
-    <string name="battery_info_health_label" msgid="6416051542741886958">"Integridade da bateria:"</string>
-    <string name="battery_info_technology_label" msgid="788304533220748681">"Tecnologia da bateria:"</string>
-    <string name="battery_info_voltage_label" msgid="8971764146757637863">"Voltagem da bateria:"</string>
-    <string name="battery_info_voltage_units" msgid="8658490792208288107">"mV"</string>
-    <string name="battery_info_temperature_label" msgid="1968383098818648037">"Temperatura da bateria:"</string>
-    <string name="battery_info_temperature_units" msgid="9098950587249987550">"°C"</string>
-    <string name="battery_info_uptime" msgid="5548545143573527992">"Tempo desde a inicialização:"</string>
-    <string name="battery_info_awake_battery" msgid="2557725975486185849">"Tempo ativo da bateria:"</string>
-    <string name="battery_info_awake_plugged" msgid="176716874713478188">"Tempo ativo ao carregar:"</string>
-    <string name="battery_info_screen_on" msgid="376277447175613889">"Tempo ativo da tela:"</string>
     <string name="battery_info_status_unknown" msgid="196130600938058547">"Desconhecido"</string>
     <string name="battery_info_status_charging" msgid="1705179948350365604">"Carregando"</string>
     <string name="battery_info_status_charging_ac" msgid="2909861890674399949">"Carregamento CA"</string>
@@ -102,19 +88,6 @@
     <string name="battery_info_status_discharging" msgid="310932812698268588">"Não está carregando"</string>
     <string name="battery_info_status_not_charging" msgid="2820070506621483576">"Não está carregando"</string>
     <string name="battery_info_status_full" msgid="2824614753861462808">"Cheio"</string>
-    <string name="battery_info_power_unplugged" msgid="5987246575519551081">"Desconectado"</string>
-    <string name="battery_info_power_ac" msgid="6808516193001604634">"CA"</string>
-    <string name="battery_info_power_usb" msgid="8012931702516331797">"USB"</string>
-    <string name="battery_info_power_wireless" msgid="6819163295739305097">"sem fio"</string>
-    <string name="battery_info_power_ac_usb" msgid="6777734146838328688">"CA+USB"</string>
-    <string name="battery_info_power_unknown" msgid="7344115502868899881">"Desconhecido"</string>
-    <string name="battery_info_health_unknown" msgid="5664295556921944255">"Desconhecido"</string>
-    <string name="battery_info_health_good" msgid="8070356565806711806">"Bom"</string>
-    <string name="battery_info_health_overheat" msgid="8442959549291368806">"Superaquecimento"</string>
-    <string name="battery_info_health_dead" msgid="1725917445762829059">"Descarregada"</string>
-    <string name="battery_info_health_over_voltage" msgid="2420269351664490121">"Sobretensão"</string>
-    <string name="battery_info_health_unspecified_failure" msgid="6347021103185471590">"Erro desconhecido"</string>
-    <string name="battery_info_health_cold" msgid="3835692786176707318">"Menos vistos"</string>
     <string name="bluetooth" msgid="5549625000628014477">"Bluetooth"</string>
     <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"Visível para todos os disp. Bluetooth próx. (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
     <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"Visível para todos os dispos. Bluetooth próximos"</string>
@@ -264,7 +237,6 @@
     <string name="language_picker_title" msgid="5349877711342869319">"Idioma"</string>
     <string name="activity_picker_label" msgid="6295660302548177109">"Selecione a atividade"</string>
     <string name="device_info_label" msgid="6551553813651711205">"Informações do dispositivo"</string>
-    <string name="battery_info_label" msgid="4132685016148679403">"Informações da bateria"</string>
     <string name="display_label" msgid="8074070940506840792">"Tela"</string>
     <string name="phone_info_label" product="tablet" msgid="7820855350955963628">"Informações do tablet"</string>
     <string name="phone_info_label" product="default" msgid="2127552523124277664">"Informações do telefone"</string>
@@ -322,6 +294,8 @@
     <string name="time_picker_title" msgid="483460752287255019">"Hora"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Bloquear automaticamente"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> após modo de espera"</string>
+    <!-- no translation found for lock_immediately_summary_with_exception (9119632173886172690) -->
+    <skip />
     <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> após suspensão, exceto quando mantido desbloqueado por <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Mostrar informações do proprietário na tela de bloqueio"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Mens. tela bloqueio"</string>
@@ -380,6 +354,8 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Além de desbloquear seu smartphone, também é possível usar sua impressão digital para autorizar compras e acesso a apps. "<annotation id="url">"Saiba mais"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4504501581228672208">"Opção de bloqueio de tela desativada. Ainda será possível usar sua impressão digital para autorizar compras e acesso a apps. "<annotation id="url">"Saiba mais"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Levante o dedo e depois toque no sensor novamente"</string>
+    <!-- no translation found for fingerprint_add_max (1020927549936895822) -->
+    <skip />
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Criptografia"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"Criptografar tablet"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"Criptografar telefone"</string>
@@ -509,7 +485,6 @@
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"Para parear com:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Verifique se ele está mostrando a seguinte senha:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"De:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Parear com este dispositivo?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"Para parear com:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Digite no dispositivo:<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>. Em seguida, pressione Voltar ou Entrar."</string>
-    <string name="bluetooth_pairing_will_share_phonebook" msgid="4982239145676394429">"O pareamento dá acesso a seus contatos e ao histórico de chamadas quando estiver conectado."</string>
     <string name="bluetooth_pairing_shares_phonebook" msgid="1655930908614072491">"Conceder acesso a seus contatos e ao histórico de chamadas quando estiver conectado."</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_connecting_error_message" msgid="1397388344342081090">"Não foi possível conectar ao <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
@@ -995,7 +970,8 @@
     <string name="storage_internal_title" msgid="690771193137801021">"Armazenamento do dispositivo"</string>
     <string name="storage_external_title" msgid="3433462910096848696">"Armazenamento portátil"</string>
     <string name="storage_volume_summary" msgid="7023441974367853372">"<xliff:g id="USED">%1$s</xliff:g> usado(s) de <xliff:g id="TOTAL">%2$s</xliff:g>"</string>
-    <string name="storage_size_large" msgid="4936185879734498579">"<xliff:g id="NUMBER">^1</xliff:g> "<small><small>"<xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
+    <!-- no translation found for storage_size_large (5691585991420946254) -->
+    <skip />
     <string name="storage_volume_used" msgid="1303803057698959872">"Usado(s) de <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_volume_used_total" msgid="6113121714019000244">"Total usado de <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_mount_success" msgid="687641090137253647">"Ativação de <xliff:g id="NAME">%1$s</xliff:g> concluída"</string>
@@ -1498,7 +1474,6 @@
     <string name="testing" msgid="6584352735303604146">"Testando"</string>
     <string name="testing_phone_info" product="tablet" msgid="193561832258534798">"Informações do tablet"</string>
     <string name="testing_phone_info" product="default" msgid="8656693364332840056">"Informações do telefone"</string>
-    <string name="testing_battery_info" msgid="3497865525976497848">"Informações da bateria"</string>
     <string name="input_methods_settings_title" msgid="6800066636850553887">"Entrada de texto"</string>
     <string name="input_method" msgid="5434026103176856164">"Método de entrada"</string>
     <string name="current_input_method" msgid="2636466029213488159">"Teclado atual"</string>
@@ -1805,6 +1780,8 @@
     <string name="menu_stats_refresh" msgid="1676215433344981075">"Atualizar"</string>
     <string name="process_kernel_label" msgid="3916858646836739323">"Sistema operacional Android"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"Servidor de mídia"</string>
+    <!-- no translation found for process_dex2oat_label (2592408651060518226) -->
+    <skip />
     <string name="battery_saver" msgid="1426682272004907982">"Economia de bateria"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Ativar automaticamente"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Nunca"</string>

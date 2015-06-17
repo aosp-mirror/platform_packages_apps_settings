@@ -80,20 +80,6 @@
     <string name="font_size_save" msgid="3450855718056759095">"確定"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"USB 儲存裝置"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"SD 卡"</string>
-    <string name="battery_info_status_label" msgid="8109155295509700309">"電池狀態："</string>
-    <string name="battery_info_power_label" msgid="7465140230991349382">"電源插頭："</string>
-    <string name="battery_info_scale_label" msgid="3649763192389778437">"電量："</string>
-    <string name="battery_info_level_label" msgid="8706526709307788737">"電量："</string>
-    <string name="battery_info_health_label" msgid="6416051542741886958">"電池狀態："</string>
-    <string name="battery_info_technology_label" msgid="788304533220748681">"電池技術："</string>
-    <string name="battery_info_voltage_label" msgid="8971764146757637863">"電池電壓："</string>
-    <string name="battery_info_voltage_units" msgid="8658490792208288107">"mV"</string>
-    <string name="battery_info_temperature_label" msgid="1968383098818648037">"電池溫度："</string>
-    <string name="battery_info_temperature_units" msgid="9098950587249987550">"°C"</string>
-    <string name="battery_info_uptime" msgid="5548545143573527992">"已開機時間："</string>
-    <string name="battery_info_awake_battery" msgid="2557725975486185849">"電池的啟用時間："</string>
-    <string name="battery_info_awake_plugged" msgid="176716874713478188">"充電時的啟用時間："</string>
-    <string name="battery_info_screen_on" msgid="376277447175613889">"螢幕開啟時間："</string>
     <string name="battery_info_status_unknown" msgid="196130600938058547">"未知"</string>
     <string name="battery_info_status_charging" msgid="1705179948350365604">"充電中"</string>
     <string name="battery_info_status_charging_ac" msgid="2909861890674399949">"正在透過 AC 充電"</string>
@@ -102,19 +88,6 @@
     <string name="battery_info_status_discharging" msgid="310932812698268588">"非充電中"</string>
     <string name="battery_info_status_not_charging" msgid="2820070506621483576">"未開始充電"</string>
     <string name="battery_info_status_full" msgid="2824614753861462808">"電量已滿"</string>
-    <string name="battery_info_power_unplugged" msgid="5987246575519551081">"未插電"</string>
-    <string name="battery_info_power_ac" msgid="6808516193001604634">"AC"</string>
-    <string name="battery_info_power_usb" msgid="8012931702516331797">"USB"</string>
-    <string name="battery_info_power_wireless" msgid="6819163295739305097">"無線"</string>
-    <string name="battery_info_power_ac_usb" msgid="6777734146838328688">"AC+USB"</string>
-    <string name="battery_info_power_unknown" msgid="7344115502868899881">"未知"</string>
-    <string name="battery_info_health_unknown" msgid="5664295556921944255">"未知"</string>
-    <string name="battery_info_health_good" msgid="8070356565806711806">"很好"</string>
-    <string name="battery_info_health_overheat" msgid="8442959549291368806">"過熱"</string>
-    <string name="battery_info_health_dead" msgid="1725917445762829059">"失效"</string>
-    <string name="battery_info_health_over_voltage" msgid="2420269351664490121">"電壓過高"</string>
-    <string name="battery_info_health_unspecified_failure" msgid="6347021103185471590">"未知錯誤"</string>
-    <string name="battery_info_health_cold" msgid="3835692786176707318">"冷"</string>
     <string name="bluetooth" msgid="5549625000628014477">"藍牙"</string>
     <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"向附近所有藍牙裝置顯示 (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
     <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"向附近所有藍牙裝置顯示"</string>
@@ -264,7 +237,6 @@
     <string name="language_picker_title" msgid="5349877711342869319">"語言"</string>
     <string name="activity_picker_label" msgid="6295660302548177109">"選擇活動"</string>
     <string name="device_info_label" msgid="6551553813651711205">"裝置資訊"</string>
-    <string name="battery_info_label" msgid="4132685016148679403">"電池資訊"</string>
     <string name="display_label" msgid="8074070940506840792">"螢幕"</string>
     <string name="phone_info_label" product="tablet" msgid="7820855350955963628">"平板電腦資訊"</string>
     <string name="phone_info_label" product="default" msgid="2127552523124277664">"手機資訊"</string>
@@ -322,6 +294,8 @@
     <string name="time_picker_title" msgid="483460752287255019">"時間"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"自動鎖定"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"休眠 <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> 後"</string>
+    <!-- no translation found for lock_immediately_summary_with_exception (9119632173886172690) -->
+    <skip />
     <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"休眠 <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>後 (由「<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>」維持解鎖狀態時除外)"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"在鎖定畫面上顯示擁有者資訊"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"螢幕鎖定訊息"</string>
@@ -354,7 +328,7 @@
     <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"設定備份螢幕鎖定的方法"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_2" msgid="4158160658182631304">"新增指紋"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"指紋解鎖"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="5061093614328964700">"只需輕觸指紋感應器，即可將手機解鎖、授權購物或登入應用程式。 所有加入到手機的指紋均可執行這些操作，因此，在加入指紋時須加倍小心。"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="5061093614328964700">"只需輕觸指紋感應器，即可將手機解鎖、授權購物或登入應用程式。 所有已加入手機的指紋均可執行這些操作，因此，在加入指紋時須加倍小心。"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="7173290350577831813">"注意：相比圖案或 PIN，指紋的安全性較低。"</string>
     <string name="security_settings_fingerprint_enroll_introduction_risk_link_text" msgid="9129531466157620977">"瞭解詳情"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"取消"</string>
@@ -380,6 +354,8 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"除了解鎖您的手機，您也可以使用您的指紋授權購買和存取應用程式。"<annotation id="url">"瞭解詳情"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4504501581228672208">"螢幕鎖定已停用。您仍然可以使用您的指紋授權購買和存取應用程式。"<annotation id="url">"瞭解詳情"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"提起手指，然後再次輕觸感應器"</string>
+    <!-- no translation found for fingerprint_add_max (1020927549936895822) -->
+    <skip />
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"加密"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"對平板電腦進行加密"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"對手機進行加密"</string>
@@ -509,7 +485,6 @@
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"如要與下列裝置配對：&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;請確認該裝置是否顯示下列密碼金鑰：&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"來自：&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;要與這部裝置配對嗎？"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"如要與 <xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g> 配對，請在該裝置上輸入：<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>，然後按 Return 或 Enter 鍵。"</string>
-    <string name="bluetooth_pairing_will_share_phonebook" msgid="4982239145676394429">"一旦配對成功，即可存取您的通訊錄和通話記錄。"</string>
     <string name="bluetooth_pairing_shares_phonebook" msgid="1655930908614072491">"連接後，即可存取您的通訊錄和通話記錄。"</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_connecting_error_message" msgid="1397388344342081090">"無法連接「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」。"</string>
@@ -995,9 +970,10 @@
     <string name="storage_internal_title" msgid="690771193137801021">"儲存裝置"</string>
     <string name="storage_external_title" msgid="3433462910096848696">"外置儲存空間"</string>
     <string name="storage_volume_summary" msgid="7023441974367853372">"使用了 <xliff:g id="TOTAL">%2$s</xliff:g> 中的 <xliff:g id="USED">%1$s</xliff:g>"</string>
-    <string name="storage_size_large" msgid="4936185879734498579">"<xliff:g id="NUMBER">^1</xliff:g> "<small><small>"<xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
-    <string name="storage_volume_used" msgid="1303803057698959872">"<xliff:g id="TOTAL">%1$s</xliff:g> 中已使用"</string>
-    <string name="storage_volume_used_total" msgid="6113121714019000244">"<xliff:g id="TOTAL">%1$s</xliff:g> 中總共已使用"</string>
+    <!-- no translation found for storage_size_large (5691585991420946254) -->
+    <skip />
+    <string name="storage_volume_used" msgid="1303803057698959872">"<xliff:g id="TOTAL">%1$s</xliff:g> 已使用"</string>
+    <string name="storage_volume_used_total" msgid="6113121714019000244">"<xliff:g id="TOTAL">%1$s</xliff:g> 總共已使用"</string>
     <string name="storage_mount_success" msgid="687641090137253647">"已連接 <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="storage_mount_failure" msgid="1042621107954547316">"無法連接 <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="storage_unmount_success" msgid="5737203344673441677">"已安全移除 <xliff:g id="NAME">%1$s</xliff:g>"</string>
@@ -1005,7 +981,7 @@
     <string name="storage_format_success" msgid="3023144070597190555">"已格式化<xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="storage_format_failure" msgid="6032640952779735766">"無法格式化<xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="storage_rename_title" msgid="8242663969839491485">"重新命名儲存裝置"</string>
-    <string name="storage_dialog_unmounted" msgid="6403320870103261477">"已安全移除此 <xliff:g id="NAME_0">^1</xliff:g>，但仍可使用。\n\n如要使用此 <xliff:g id="NAME_1">^1</xliff:g>，您必須先將它連接。"</string>
+    <string name="storage_dialog_unmounted" msgid="6403320870103261477">"已安全卸載此 <xliff:g id="NAME_0">^1</xliff:g>，但仍可使用。\n\n如要使用此 <xliff:g id="NAME_1">^1</xliff:g>，您必須先將它連接。"</string>
     <string name="storage_dialog_unmountable" msgid="3732209361668282254">"此 <xliff:g id="NAME_0">^1</xliff:g> 已受損。\n\n如要使用此 <xliff:g id="NAME_1">^1</xliff:g>，您必須先完成設定。"</string>
     <string name="storage_dialog_unsupported" msgid="4503128224360482228">"這部裝置不支援此 <xliff:g id="NAME_0">^1</xliff:g>。 \n\n如要在這部裝置使用此 <xliff:g id="NAME_1">^1</xliff:g> ，您必須先完成設定。"</string>
     <string name="storage_internal_format_details" msgid="4018647158382548820">"格式化後，您可在其他裝置使用此<xliff:g id="NAME_0">^1</xliff:g>。\n\n<xliff:g id="NAME_1">^1</xliff:g>的所有資料將被刪除，請先備份。\n\n"<b>"備份相片和其他媒體"</b>" \n將您的媒體檔案移至這部裝罝的其他儲存空間，或使用 USB 連接線轉移至電腦。\n\n"<b>"備份應用程式"</b>" \n儲存於此<xliff:g id="NAME_6">^1</xliff:g>的所有應用程式將解除安裝，其中資料也將被刪除。如要保留這些應用程式，您可以將其移至裝置的其他儲存空間。"</string>
@@ -1021,7 +997,7 @@
     <string name="storage_detail_other" msgid="8404938385075638238">"其他"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"探索 <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_detail_dialog_other" msgid="4894289482062047165">"其他檔案包括由應用程式儲存的檔案、從互聯網或藍牙下載的檔案和 Android 檔案等等。\n\n輕觸「探索」以查看 <xliff:g id="NAME">^1</xliff:g> 的全部內容。"</string>
-    <string name="storage_detail_dialog_user" msgid="1675756743326079688">"<xliff:g id="USER_0">^1</xliff:g> 可能已儲存佔據 <xliff:g id="SIZE">^2</xliff:g> 儲存空間的相片、音樂、影片、應用程式或其他資料。\n\n如要查看詳細資料，請切換至 <xliff:g id="USER_1">^1</xliff:g>。"</string>
+    <string name="storage_detail_dialog_user" msgid="1675756743326079688">"<xliff:g id="USER_0">^1</xliff:g> 可能已儲存佔用 <xliff:g id="SIZE">^2</xliff:g> 儲存空間的相片、音樂、影片、應用程式或其他資料。\n\n如要查看詳細資料，請切換至 <xliff:g id="USER_1">^1</xliff:g>。"</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"設定您的<xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"作為可攜式儲存裝置使用"</string>
     <string name="storage_wizard_init_external_summary" msgid="7476105886344565074">"在裝置之間移動相片和其他媒體。"</string>
@@ -1036,7 +1012,7 @@
     <string name="storage_wizard_format_progress_title" msgid="6487352396450582292">"正在格式化<xliff:g id="NAME">^1</xliff:g>…"</string>
     <string name="storage_wizard_format_progress_body" msgid="4445041233802828430">"格式化過程中不要移除<xliff:g id="NAME">^1</xliff:g>。"</string>
     <string name="storage_wizard_migrate_title" msgid="1363078147938160407">"將資料移至新的儲存空間"</string>
-    <string name="storage_wizard_migrate_body" msgid="890751699549542345">"您可以將相片、檔案和部分應用程式移至此全新 <xliff:g id="NAME">^1</xliff:g>。\n\n此操作大約需時 <xliff:g id="TIME">^2</xliff:g>，並能釋放 <xliff:g id="SIZE">^3</xliff:g> 的內部儲存空間。過程中部分應用程式將無法正常運作。"</string>
+    <string name="storage_wizard_migrate_body" msgid="890751699549542345">"您可以將相片、檔案和部分應用程式移至此全新 <xliff:g id="NAME">^1</xliff:g>。\n\n此操作大約需時 <xliff:g id="TIME">^2</xliff:g>，並能釋放 <xliff:g id="SIZE">^3</xliff:g> 的內部儲存空間。部分應用程式將在過程中無法正常運作。"</string>
     <string name="storage_wizard_migrate_now" msgid="4523444323744239143">"立即移動"</string>
     <string name="storage_wizard_migrate_later" msgid="3173482328116026253">"稍後移動"</string>
     <string name="storage_wizard_migrate_confirm_title" msgid="8564833529613286965">"立即移動資料"</string>
@@ -1499,7 +1475,6 @@
     <string name="testing" msgid="6584352735303604146">"測試"</string>
     <string name="testing_phone_info" product="tablet" msgid="193561832258534798">"平板電腦資訊"</string>
     <string name="testing_phone_info" product="default" msgid="8656693364332840056">"手機資訊"</string>
-    <string name="testing_battery_info" msgid="3497865525976497848">"電池資訊"</string>
     <string name="input_methods_settings_title" msgid="6800066636850553887">"文字輸入"</string>
     <string name="input_method" msgid="5434026103176856164">"輸入法"</string>
     <string name="current_input_method" msgid="2636466029213488159">"目前的鍵盤輸入法"</string>
@@ -1806,6 +1781,8 @@
     <string name="menu_stats_refresh" msgid="1676215433344981075">"重新整理"</string>
     <string name="process_kernel_label" msgid="3916858646836739323">"Android 作業系統"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"媒體伺服器"</string>
+    <!-- no translation found for process_dex2oat_label (2592408651060518226) -->
+    <skip />
     <string name="battery_saver" msgid="1426682272004907982">"省電模式"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"自動開啟"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"永不"</string>
@@ -2385,7 +2362,7 @@
     <string name="nfc_payment_favor_default_default_unknown" msgid="7029467023485683077">"繼續使用預設"</string>
     <string name="nfc_payment_pay_with" msgid="7524904024378144072">"於 Tap &amp; Pay 終端機使用的付款方式："</string>
     <string name="nfc_how_it_works_title" msgid="1984068457698797207">"在收款機付款"</string>
-    <string name="nfc_how_it_works_content" msgid="5820288675316257177">"設定 Tap &amp; pay 應用程式，並啟動手機後，以您的手機輕按在有 Tap &amp; pay 標誌的終端機之上，以進行購買。"</string>
+    <string name="nfc_how_it_works_content" msgid="5820288675316257177">"在設定 Tap &amp; pay 應用程式和啟動手機後，以您的手機輕按在顯示 Tap &amp; pay 標誌的終端機之上，以進行購買。"</string>
     <string name="nfc_how_it_works_got_it" msgid="259653300203217402">"知道了"</string>
     <string name="nfc_more_title" msgid="815910943655133280">"更多…"</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"設為您的喜好設定？"</string>
@@ -2730,7 +2707,7 @@
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 個其他權限</item>
     </plurals>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="1679758182657005375">"沒有授予權限"</string>
-    <string name="runtime_permissions_summary_no_permissions_requested" msgid="7655100570513818534">"沒有權限要求"</string>
+    <string name="runtime_permissions_summary_no_permissions_requested" msgid="7655100570513818534">"沒有要求權限"</string>
     <string name="launch_defaults_some" msgid="313159469856372621">"已設定部分預設值"</string>
     <string name="launch_defaults_none" msgid="4241129108140034876">"未設定預設值"</string>
     <string name="filter_all_apps" msgid="1988403195820688644">"所有應用程式"</string>
@@ -2843,8 +2820,8 @@
     <string name="ignore_optimizations_on" msgid="2417358456267927315">"允許"</string>
     <string name="ignore_optimizations_off" msgid="9069942099715006633">"不允許"</string>
     <string name="ignore_optimizations_on_desc" msgid="2321398930330555815">"可能會加速耗電"</string>
-    <string name="ignore_optimizations_off_desc" msgid="5255731062045426544">"延長電池使用時間建議使用功能"</string>
+    <string name="ignore_optimizations_off_desc" msgid="5255731062045426544">"建議用於延長電池使用時間"</string>
     <string name="ignore_optimizations_title" msgid="2829637961185027768">"允許<xliff:g id="APP">%s</xliff:g>忽略電池優化？"</string>
     <string name="app_list_preference_none" msgid="108006867520327904">"無"</string>
-    <string name="work_profile_usage_access_warning" msgid="8870622842216566692">"關閉這個應用程式的使用記錄存取不會阻止管理員追蹤您的工作設定檔中的應用程式的數據用量。"</string>
+    <string name="work_profile_usage_access_warning" msgid="8870622842216566692">"關閉這個應用程式的使用記錄存取權，並不會阻止管理員追蹤您的工作設定檔中的應用程式數據用量。"</string>
 </resources>
