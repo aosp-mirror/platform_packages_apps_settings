@@ -80,20 +80,6 @@
     <string name="font_size_save" msgid="3450855718056759095">"OK"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"Imbakan na USB"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"SD card"</string>
-    <string name="battery_info_status_label" msgid="8109155295509700309">"Status ng baterya:"</string>
-    <string name="battery_info_power_label" msgid="7465140230991349382">"Plug ng power:"</string>
-    <string name="battery_info_scale_label" msgid="3649763192389778437">"Sukatan ng baterya:"</string>
-    <string name="battery_info_level_label" msgid="8706526709307788737">"Antas ng baterya:"</string>
-    <string name="battery_info_health_label" msgid="6416051542741886958">"Lakas ng baterya:"</string>
-    <string name="battery_info_technology_label" msgid="788304533220748681">"Teknolohiya ng baterya:"</string>
-    <string name="battery_info_voltage_label" msgid="8971764146757637863">"Boltahe ng baterya:"</string>
-    <string name="battery_info_voltage_units" msgid="8658490792208288107">"mV"</string>
-    <string name="battery_info_temperature_label" msgid="1968383098818648037">"Temperatura ng baterya:"</string>
-    <string name="battery_info_temperature_units" msgid="9098950587249987550">"° C"</string>
-    <string name="battery_info_uptime" msgid="5548545143573527992">"Oras mula nang naka-boot:"</string>
-    <string name="battery_info_awake_battery" msgid="2557725975486185849">"Itakda ang oras sa baterya:"</string>
-    <string name="battery_info_awake_plugged" msgid="176716874713478188">"Paganahin ang oras kapag nagcha-charge:"</string>
-    <string name="battery_info_screen_on" msgid="376277447175613889">"Oras na NAKA-ON ang screen :"</string>
     <string name="battery_info_status_unknown" msgid="196130600938058547">"Hindi Kilala"</string>
     <string name="battery_info_status_charging" msgid="1705179948350365604">"Nagcha-charge"</string>
     <string name="battery_info_status_charging_ac" msgid="2909861890674399949">"Nagcha-charge sa AC"</string>
@@ -102,19 +88,6 @@
     <string name="battery_info_status_discharging" msgid="310932812698268588">"Hindi nagcha-charge"</string>
     <string name="battery_info_status_not_charging" msgid="2820070506621483576">"Hindi nagkakarga"</string>
     <string name="battery_info_status_full" msgid="2824614753861462808">"Puno"</string>
-    <string name="battery_info_power_unplugged" msgid="5987246575519551081">"Naka-unplug"</string>
-    <string name="battery_info_power_ac" msgid="6808516193001604634">"AC"</string>
-    <string name="battery_info_power_usb" msgid="8012931702516331797">"USB"</string>
-    <string name="battery_info_power_wireless" msgid="6819163295739305097">"wireless"</string>
-    <string name="battery_info_power_ac_usb" msgid="6777734146838328688">"AC+USB"</string>
-    <string name="battery_info_power_unknown" msgid="7344115502868899881">"Hindi Kilala"</string>
-    <string name="battery_info_health_unknown" msgid="5664295556921944255">"Hindi Kilala"</string>
-    <string name="battery_info_health_good" msgid="8070356565806711806">"Mahusay"</string>
-    <string name="battery_info_health_overheat" msgid="8442959549291368806">"Overheat"</string>
-    <string name="battery_info_health_dead" msgid="1725917445762829059">"Walang karga"</string>
-    <string name="battery_info_health_over_voltage" msgid="2420269351664490121">"Labis na boltahe"</string>
-    <string name="battery_info_health_unspecified_failure" msgid="6347021103185471590">"Hindi kilalang error"</string>
-    <string name="battery_info_health_cold" msgid="3835692786176707318">"Malamig"</string>
     <string name="bluetooth" msgid="5549625000628014477">"Bluetooth"</string>
     <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"Makikita ng lahat ng mga kalapit na device ng Bluetooth (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
     <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"Makikita ng lahat ng kalapit na mga Bluetooth na device"</string>
@@ -264,7 +237,6 @@
     <string name="language_picker_title" msgid="5349877711342869319">"Wika"</string>
     <string name="activity_picker_label" msgid="6295660302548177109">"Pumili ng aktibidad"</string>
     <string name="device_info_label" msgid="6551553813651711205">"Impormasyon ng device"</string>
-    <string name="battery_info_label" msgid="4132685016148679403">"Impormasyon ng baterya"</string>
     <string name="display_label" msgid="8074070940506840792">"Screen"</string>
     <string name="phone_info_label" product="tablet" msgid="7820855350955963628">"Impormasyon ng tablet"</string>
     <string name="phone_info_label" product="default" msgid="2127552523124277664">"Impormasyon ng telepono"</string>
@@ -322,6 +294,8 @@
     <string name="time_picker_title" msgid="483460752287255019">"Oras"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Awtomatikong nagla-lock"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> pagkatapos ng sleep"</string>
+    <!-- no translation found for lock_immediately_summary_with_exception (9119632173886172690) -->
+    <skip />
     <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> pagkatapos ng pag-sleep, maliban na lang kung pinanatiling naka-unlock ng <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Ipakita ang info ng may-ari sa lock screen"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Mensahe sa lock screen"</string>
@@ -380,6 +354,8 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Bukod pa sa pag-a-unlock ng iyong telepono, maaari mo ring gamitin ang iyong fingerprint upang pahintulutan ang mga pagbili at pag-access sa app. "<annotation id="url">"Matuto nang higit pa"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4504501581228672208">"Naka-disable ang opsyon sa screen lock. Maaari mo pa ring gamitin ang iyong fingerprint upang pahintulutan ang mga pagbili at pag-access sa app. "<annotation id="url">"Matuto nang higit pa"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Iangat ang daliri, pagkatapos ay muling pindutin ang sensor"</string>
+    <!-- no translation found for fingerprint_add_max (1020927549936895822) -->
+    <skip />
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Pag-encrypt"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"I-encrypt ang tablet"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"I-encrypt ang telepono"</string>
@@ -509,7 +485,6 @@
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"Upang makipagpares sa:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Tiyaking ipinapakita nito ang passkey na ito:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"Mula sa:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Makipagpares sa device na ito?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"Upang ipares sa:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Mag-type dito:<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>, pagkatapos ay pindutin ang Return o Enter."</string>
-    <string name="bluetooth_pairing_will_share_phonebook" msgid="4982239145676394429">"Nagbibigay ang pagpapares ng access sa iyong mga contact at history ng tawag kapag nakakonekta."</string>
     <string name="bluetooth_pairing_shares_phonebook" msgid="1655930908614072491">"Magbigay ng access sa iyong mga contact at history ng tawag kapag nakakonekta."</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_connecting_error_message" msgid="1397388344342081090">"Hindi makakonekta sa <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
@@ -995,7 +970,8 @@
     <string name="storage_internal_title" msgid="690771193137801021">"Storage ng device"</string>
     <string name="storage_external_title" msgid="3433462910096848696">"Portable na storage"</string>
     <string name="storage_volume_summary" msgid="7023441974367853372">"<xliff:g id="USED">%1$s</xliff:g> ang nagamit sa <xliff:g id="TOTAL">%2$s</xliff:g>"</string>
-    <string name="storage_size_large" msgid="4936185879734498579">"<xliff:g id="NUMBER">^1</xliff:g> "<small><small>"<xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
+    <!-- no translation found for storage_size_large (5691585991420946254) -->
+    <skip />
     <string name="storage_volume_used" msgid="1303803057698959872">"Nagamit sa <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_volume_used_total" msgid="6113121714019000244">"Kabuuang nagamit sa <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_mount_success" msgid="687641090137253647">"Na-mount na ang <xliff:g id="NAME">%1$s</xliff:g>"</string>
@@ -1498,7 +1474,6 @@
     <string name="testing" msgid="6584352735303604146">"Pagsubok"</string>
     <string name="testing_phone_info" product="tablet" msgid="193561832258534798">"Impormasyon ng tablet"</string>
     <string name="testing_phone_info" product="default" msgid="8656693364332840056">"Impormasyon ng telepono"</string>
-    <string name="testing_battery_info" msgid="3497865525976497848">"Impormasyon ng baterya"</string>
     <string name="input_methods_settings_title" msgid="6800066636850553887">"Pag-input ng teksto"</string>
     <string name="input_method" msgid="5434026103176856164">"Paraan ng input"</string>
     <string name="current_input_method" msgid="2636466029213488159">"Kasalukuyang Keyboard"</string>
@@ -1805,6 +1780,8 @@
     <string name="menu_stats_refresh" msgid="1676215433344981075">"I-refresh"</string>
     <string name="process_kernel_label" msgid="3916858646836739323">"Android OS"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"Mediaserver"</string>
+    <!-- no translation found for process_dex2oat_label (2592408651060518226) -->
+    <skip />
     <string name="battery_saver" msgid="1426682272004907982">"Pangtipid ng baterya"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Awtomatikong i-on"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Hindi Kailanman"</string>
