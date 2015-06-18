@@ -303,7 +303,6 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
     private static final String KEY_CONTROLS_PARENT = "controls_parent";
     private static final String KEY_MESSAGES_PARENT = "messages_parent";
     private static final String KEY_PACKAGES_PARENT = "packages_parent";
-    private static final String KEY_BATTERY_HISTORY = "battery_history";
     private static final String KEY_TWO_BUTTONS = "two_buttons";
     private static final String KEY_HIGH_POWER = "high_power";
 
@@ -319,7 +318,6 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
     private BatterySipper.DrainType mDrainType;
     private double mNoCoverage; // Percentage of time that there was no coverage
 
-    private BatteryHistoryPreference mHistPref;
     private PreferenceCategory mDetailsParent;
     private PreferenceCategory mControlsParent;
     private PreferenceCategory mMessagesParent;
@@ -341,7 +339,6 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
         mDpm = (DevicePolicyManager)getActivity().getSystemService(Context.DEVICE_POLICY_SERVICE);
 
         addPreferencesFromResource(R.xml.power_usage_details);
-        mHistPref = (BatteryHistoryPreference) findPreference(KEY_BATTERY_HISTORY);
         mDetailsParent = (PreferenceCategory) findPreference(KEY_DETAILS_PARENT);
         mControlsParent = (PreferenceCategory) findPreference(KEY_CONTROLS_PARENT);
         mMessagesParent = (PreferenceCategory) findPreference(KEY_MESSAGES_PARENT);
@@ -439,12 +436,6 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
         fillPackagesSection(mUid);
         fillControlsSection(mUid);
         fillMessagesSection(mUid);
-    }
-    
-    @Override
-    protected void refreshStats() {
-        super.refreshStats();
-        updatePreference(mHistPref);
     }
 
     private void setupHeader() {
