@@ -17,6 +17,7 @@
 package com.android.settings.notification;
 
 import android.app.NotificationManager;
+import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.ContentResolver;
@@ -427,32 +428,56 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
             return;
         }
 
-        mLockscreen.addItem(R.string.lock_screen_notifications_summary_show,
-                R.string.lock_screen_notifications_summary_show);
-        if (mSecure) {
+        boolean isSecureNotificationsDisabled = isSecureNotificationsDisabled();
+        boolean isUnredactedNotificationsDisabled = isUnredactedNotificationsDisabled();
+        if (!isSecureNotificationsDisabled && !isUnredactedNotificationsDisabled) {
+            mLockscreen.addItem(R.string.lock_screen_notifications_summary_show,
+                    R.string.lock_screen_notifications_summary_show);
+        }
+        if (mSecure && !isSecureNotificationsDisabled) {
             mLockscreen.addItem(R.string.lock_screen_notifications_summary_hide,
                     R.string.lock_screen_notifications_summary_hide);
         }
         mLockscreen.addItem(R.string.lock_screen_notifications_summary_disable,
                 R.string.lock_screen_notifications_summary_disable);
         updateLockscreenNotifications();
-        mLockscreen.setCallback(new DropDownPreference.Callback() {
-            @Override
-            public boolean onItemSelected(int pos, Object value) {
-                final int val = (Integer) value;
-                if (val == mLockscreenSelectedValue) {
+        if (mLockscreen.getItemCount() > 1) {
+            mLockscreen.setCallback(new DropDownPreference.Callback() {
+                @Override
+                public boolean onItemSelected(int pos, Object value) {
+                    final int val = (Integer) value;
+                    if (val == mLockscreenSelectedValue) {
+                        return true;
+                    }
+                    final boolean enabled =
+                            val != R.string.lock_screen_notifications_summary_disable;
+                    final boolean show = val == R.string.lock_screen_notifications_summary_show;
+                    Settings.Secure.putInt(getContentResolver(),
+                            Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, show ? 1 : 0);
+                    Settings.Secure.putInt(getContentResolver(),
+                            Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS, enabled ? 1 : 0);
+                    mLockscreenSelectedValue = val;
                     return true;
                 }
-                final boolean enabled = val != R.string.lock_screen_notifications_summary_disable;
-                final boolean show = val == R.string.lock_screen_notifications_summary_show;
-                Settings.Secure.putInt(getContentResolver(),
-                        Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, show ? 1 : 0);
-                Settings.Secure.putInt(getContentResolver(),
-                        Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS, enabled ? 1 : 0);
-                mLockscreenSelectedValue = val;
-                return true;
-            }
-        });
+            });
+        } else {
+            // There is one or less option for the user, disable the drop down.
+            mLockscreen.setEnabled(false);
+        }
+    }
+
+    private boolean isSecureNotificationsDisabled() {
+        final DevicePolicyManager dpm =
+                (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
+        return dpm != null && (dpm.getKeyguardDisabledFeatures(null)
+                & DevicePolicyManager.KEYGUARD_DISABLE_SECURE_NOTIFICATIONS) != 0;
+    }
+
+    private boolean isUnredactedNotificationsDisabled() {
+        final DevicePolicyManager dpm =
+                (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
+        return dpm != null && (dpm.getKeyguardDisabledFeatures(null)
+                & DevicePolicyManager.KEYGUARD_DISABLE_UNREDACTED_NOTIFICATIONS) != 0;
     }
 
     private void updateLockscreenNotifications() {
