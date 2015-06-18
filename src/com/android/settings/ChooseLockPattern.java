@@ -641,7 +641,10 @@ public class ChooseLockPattern extends SettingsActivity {
                 startVerifyPattern(utils, wasSecureBefore);
             } else {
                 if (!wasSecureBefore) {
-                    startActivity(getRedactionInterstitialIntent(getActivity()));
+                    Intent intent = getRedactionInterstitialIntent(getActivity());
+                    if (intent != null) {
+                        startActivity(intent);
+                    }
                 }
                 getActivity().setResult(RESULT_FINISHED);
                 doFinish();
@@ -670,7 +673,10 @@ public class ChooseLockPattern extends SettingsActivity {
                             mPendingLockCheck = null;
 
                             if (!wasSecureBefore) {
-                                startActivity(getRedactionInterstitialIntent(getActivity()));
+                                Intent intent = getRedactionInterstitialIntent(getActivity());
+                                if (intent != null) {
+                                    startActivity(intent);
+                                }
                             }
 
                             Intent intent = new Intent();

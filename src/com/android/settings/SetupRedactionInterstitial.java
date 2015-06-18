@@ -40,9 +40,11 @@ public class SetupRedactionInterstitial extends RedactionInterstitial {
 
     public static Intent createStartIntent(Context ctx) {
         Intent startIntent = RedactionInterstitial.createStartIntent(ctx);
-        startIntent.setClass(ctx, SetupRedactionInterstitial.class);
-        startIntent.putExtra(EXTRA_PREFS_SHOW_BUTTON_BAR, false)
-                .putExtra(EXTRA_SHOW_FRAGMENT_TITLE_RESID, -1);
+        if (startIntent != null) {
+            startIntent.setClass(ctx, SetupRedactionInterstitial.class);
+            startIntent.putExtra(EXTRA_PREFS_SHOW_BUTTON_BAR, false)
+                    .putExtra(EXTRA_SHOW_FRAGMENT_TITLE_RESID, -1);
+        }
         return startIntent;
     }
 
