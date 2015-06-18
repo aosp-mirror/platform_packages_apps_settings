@@ -559,7 +559,10 @@ public class ChooseLockPassword extends SettingsActivity {
             getActivity().finish();
             mDone = true;
             if (!wasSecureBefore) {
-                startActivity(getRedactionInterstitialIntent(getActivity()));
+                Intent intent = getRedactionInterstitialIntent(getActivity());
+                if (intent != null) {
+                    startActivity(intent);
+                }
             }
         }
 
