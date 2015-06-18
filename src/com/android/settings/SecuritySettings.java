@@ -30,6 +30,7 @@ import android.content.res.Resources;
 import android.hardware.fingerprint.Fingerprint;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.ListPreference;
@@ -43,6 +44,7 @@ import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.security.KeyStore;
 import android.service.trust.TrustAgentService;
+import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -263,7 +265,11 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
         // Do not display SIM lock for devices without an Icc card
         TelephonyManager tm = TelephonyManager.getDefault();
-        if (!mIsPrimary || !isSimIccReady()) {
+        CarrierConfigManager cfgMgr = (CarrierConfigManager)
+                getActivity().getSystemService(Context.CARRIER_CONFIG_SERVICE);
+        PersistableBundle b = cfgMgr.getConfig();
+        if (!mIsPrimary || !isSimIccReady() ||
+                b.getBoolean(CarrierConfigManager.KEY_HIDE_SIM_LOCK_SETTINGS_BOOL)) {
             root.removePreference(root.findPreference(KEY_SIM_LOCK));
         } else {
             // Disable SIM lock if there is no ready SIM card.
