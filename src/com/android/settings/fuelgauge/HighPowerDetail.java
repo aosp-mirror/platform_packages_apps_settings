@@ -16,7 +16,6 @@
 
 package com.android.settings.fuelgauge;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -27,18 +26,20 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
-import android.util.Pair;
-import android.util.SparseBooleanArray;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.Checkable;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 
-public class HighPowerDetail extends DialogFragment implements OnClickListener {
+public class HighPowerDetail extends DialogFragment implements OnClickListener,
+        View.OnClickListener {
 
     private static final String ARG_DEFAULT_ON = "default_on";
 
@@ -47,8 +48,9 @@ public class HighPowerDetail extends DialogFragment implements OnClickListener {
     private String mPackageName;
     private CharSequence mLabel;
     private boolean mDefaultOn;
-    private Adapter mAdapter;
-    private int mSelectedIndex;
+    private boolean mIsEnabled;
+    private Checkable mOptionOn;
+    private Checkable mOptionOff;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,15 +64,20 @@ public class HighPowerDetail extends DialogFragment implements OnClickListener {
             mLabel = mPackageName;
         }
         mDefaultOn = getArguments().getBoolean(ARG_DEFAULT_ON);
-        mAdapter = new Adapter(getContext(), R.layout.radio_with_summary);
-        mAdapter.add(new Pair<String, String>(getString(R.string.ignore_optimizations_on),
-                getString(R.string.ignore_optimizations_on_desc)));
-        mAdapter.add(new Pair<String, String>(getString(R.string.ignore_optimizations_off),
-                getString(R.string.ignore_optimizations_off_desc)));
-        mSelectedIndex = mDefaultOn || mBackend.isWhitelisted(mPackageName) ? 0 : 1;
-        if (mBackend.isSysWhitelisted(mPackageName)) {
-            mAdapter.setEnabled(1, false);
+        mIsEnabled = mDefaultOn || mBackend.isWhitelisted(mPackageName);
+    }
+
+    public Checkable setup(View view, boolean on) {
+        ((TextView) view.findViewById(android.R.id.title)).setText(on
+                ? R.string.ignore_optimizations_on : R.string.ignore_optimizations_off);
+        ((TextView) view.findViewById(android.R.id.summary)).setText(on
+                ? R.string.ignore_optimizations_on_desc : R.string.ignore_optimizations_off_desc);
+        view.setClickable(true);
+        view.setOnClickListener(this);
+        if (!on && mBackend.isSysWhitelisted(mPackageName)) {
+            view.setEnabled(false);
         }
+        return (Checkable) view;
     }
 
     @Override
@@ -78,7 +85,7 @@ public class HighPowerDetail extends DialogFragment implements OnClickListener {
         AlertDialog.Builder b = new AlertDialog.Builder(getContext())
                 .setTitle(getString(R.string.ignore_optimizations_title, mLabel))
                 .setNegativeButton(R.string.cancel, null)
-                .setSingleChoiceItems(mAdapter, mSelectedIndex, this);
+                .setView(R.layout.ignore_optimizations_content);
         if (!mBackend.isSysWhitelisted(mPackageName)) {
             b.setPositiveButton(R.string.done, this);
         }
@@ -86,9 +93,33 @@ public class HighPowerDetail extends DialogFragment implements OnClickListener {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        mOptionOn = setup(getDialog().findViewById(R.id.ignore_on), true);
+        mOptionOff = setup(getDialog().findViewById(R.id.ignore_off), false);
+        updateViews();
+    }
+
+    private void updateViews() {
+        mOptionOn.setChecked(mIsEnabled);
+        mOptionOff.setChecked(!mIsEnabled);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == mOptionOn) {
+            mIsEnabled = true;
+            updateViews();
+        } else if (v == mOptionOff) {
+            mIsEnabled = false;
+            updateViews();
+        }
+    }
+
+    @Override
     public void onClick(DialogInterface dialog, int which) {
         if (which == DialogInterface.BUTTON_POSITIVE) {
-            boolean newValue = mSelectedIndex == 0;
+            boolean newValue = mIsEnabled;
             boolean oldValue = mBackend.isWhitelisted(mPackageName);
             if (newValue != oldValue) {
                 if (newValue) {
@@ -97,8 +128,6 @@ public class HighPowerDetail extends DialogFragment implements OnClickListener {
                     mBackend.removeApp(mPackageName);
                 }
             }
-        } else {
-            mSelectedIndex = which;
         }
     }
 
@@ -129,30 +158,5 @@ public class HighPowerDetail extends DialogFragment implements OnClickListener {
         fragment.setArguments(args);
         fragment.setTargetFragment(caller, requestCode);
         fragment.show(caller.getFragmentManager(), HighPowerDetail.class.getSimpleName());
-    }
-
-    private class Adapter extends ArrayAdapter<Pair<String, String>> {
-        private final SparseBooleanArray mEnabled = new SparseBooleanArray();
-
-        public Adapter(Context context, int resource) {
-            super(context, resource, android.R.id.title);
-        }
-
-        public void setEnabled(int index, boolean enabled) {
-            mEnabled.put(index, enabled);
-        }
-
-        public boolean isEnabled(int position) {
-            return mEnabled.get(position, true);
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View view = super.getView(position, convertView, parent);
-            ((TextView) view.findViewById(android.R.id.title)).setText(getItem(position).first);
-            ((TextView) view.findViewById(android.R.id.summary)).setText(getItem(position).second);
-            view.setEnabled(isEnabled(position));
-            return view;
-        }
     }
 }
