@@ -120,12 +120,6 @@ public class VpnSettings extends SettingsPreferenceFragment implements
     }
 
     @Override
-    public void onDestroy() {
-        mConnectivityManager.unregisterNetworkCallback(mNetworkCallback);
-        super.onDestroy();
-    }
-
-    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.vpn, menu);
@@ -193,7 +187,7 @@ public class VpnSettings extends SettingsPreferenceFragment implements
 
     @Override
     public void onPause() {
-        // Pause monitoring
+        // Stop monitoring
         mConnectivityManager.unregisterNetworkCallback(mNetworkCallback);
 
         if (mUpdater != null) {
