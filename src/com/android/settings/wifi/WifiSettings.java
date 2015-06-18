@@ -650,7 +650,7 @@ public class WifiSettings extends RestrictedSettingsFragment
                         AccessPointPreference preference = new AccessPointPreference(accessPoint,
                                 getActivity(), false);
 
-                        if (mOpenSsid != null && mOpenSsid.equals(accessPoint.getSsid())
+                        if (mOpenSsid != null && mOpenSsid.equals(accessPoint.getSsidStr())
                                 && !accessPoint.isSaved()
                                 && accessPoint.getSecurity() != AccessPoint.SECURITY_NONE) {
                             onPreferenceTreeClick(getPreferenceScreen(), preference);
