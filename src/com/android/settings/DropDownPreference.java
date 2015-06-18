@@ -126,6 +126,10 @@ public class DropDownPreference extends Preference {
         mValues.add(value);
     }
 
+    public int getItemCount() {
+        return mAdapter.getCount();
+    }
+
     public void clearItems(){
         mAdapter.clear();
         mValues.clear();

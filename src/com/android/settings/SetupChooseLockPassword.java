@@ -110,7 +110,9 @@ public class SetupChooseLockPassword extends ChooseLockPassword {
         @Override
         protected Intent getRedactionInterstitialIntent(Context context) {
             Intent intent = SetupRedactionInterstitial.createStartIntent(context);
-            SetupWizardUtils.copySetupExtras(getActivity().getIntent(), intent);
+            if (intent != null) {
+                SetupWizardUtils.copySetupExtras(getActivity().getIntent(), intent);
+            }
             return intent;
         }
 
