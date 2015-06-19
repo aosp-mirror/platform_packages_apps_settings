@@ -92,9 +92,13 @@ public class OwnerInfoSettings extends DialogFragment implements OnClickListener
     }
 
     private void updateOwnerInfoStatus() {
+        int chars = mOwnerInfo.getText().toString().length();
         String status = getString(R.string.owner_info_settings_status,
-                mOwnerInfo.getText().toString().length(), MAX_CHARS);
+                chars, MAX_CHARS);
+        String accessibilityStatus = getString(R.string.accessibility_lock_screen_progress,
+                chars, MAX_CHARS);
         mOwnerInfoStatus.setText(status);
+        mOwnerInfoStatus.setContentDescription(accessibilityStatus);
     }
 
     @Override
