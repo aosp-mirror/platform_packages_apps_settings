@@ -416,6 +416,10 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
     @Override
     public void onBluetoothStateChanged(int bluetoothState) {
         super.onBluetoothStateChanged(bluetoothState);
+        // If BT is turned off/on staying in the same BT Settings screen
+        // discoverability to be set again
+        if (BluetoothAdapter.STATE_ON == bluetoothState)
+            mInitiateDiscoverable = true;
         updateContent(bluetoothState);
     }
 
