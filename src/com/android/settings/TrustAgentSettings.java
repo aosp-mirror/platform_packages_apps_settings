@@ -79,6 +79,7 @@ public class TrustAgentSettings extends SettingsPreferenceFragment implements
 
     public void onResume() {
         super.onResume();
+        removePreference("dummy_preference");
         updateAgents();
     };
 
