@@ -20,6 +20,8 @@ package com.android.settings.fingerprint;
 import android.annotation.Nullable;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.admin.DevicePolicyManager;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -32,7 +34,6 @@ import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.fingerprint.FingerprintManager.AuthenticationCallback;
 import android.hardware.fingerprint.FingerprintManager.AuthenticationResult;
 import android.hardware.fingerprint.FingerprintManager.RemovalCallback;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.CancellationSignal;
 import android.os.Handler;
@@ -40,7 +41,6 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
-import android.provider.Browser;
 import android.text.Annotation;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
@@ -128,7 +128,6 @@ public class FingerprintSettings extends SubSettings {
         protected static final boolean DEBUG = true;
 
         private FingerprintManager mFingerprintManager;
-        private EditText mDialogTextField;
         private CancellationSignal mFingerprintCancel;
         private int mMaxFingerprintAttempts;
         private byte[] mToken;
@@ -388,54 +387,19 @@ public class FingerprintSettings extends SubSettings {
             } else if (pref instanceof FingerprintPreference) {
                 FingerprintPreference fpref = (FingerprintPreference) pref;
                 final Fingerprint fp =fpref.getFingerprint();
-                showRenameDeleteDialog(pref, fp);
+                showRenameDeleteDialog(fp);
                 return super.onPreferenceTreeClick(preferenceScreen, pref);
             }
             return true;
         }
 
-        private void showRenameDeleteDialog(Preference pref, final Fingerprint fp) {
-            final Activity activity = getActivity();
-            final AlertDialog dialog = new AlertDialog.Builder(activity)
-                    .setView(R.layout.fingerprint_rename_dialog)
-                    .setPositiveButton(R.string.security_settings_fingerprint_enroll_dialog_ok,
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    final String newName = mDialogTextField.getText().toString();
-                                    final CharSequence name = fp.getName();
-                                    if (!newName.equals(name)) {
-                                        if (DEBUG) Log.v(TAG, "rename " + name + " to " + newName);
-                                        mFingerprintManager.rename(fp.getFingerId(), newName);
-                                        updatePreferences();
-                                    }
-                                    dialog.dismiss();
-                                }
-                            })
-                    .setNegativeButton(R.string.security_settings_fingerprint_enroll_dialog_delete,
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    if (DEBUG) Log.v(TAG, "Removing fpId=" + fp.getFingerId());
-                                    mFingerprintManager.remove(fp, mRemoveCallback);
-                                    dialog.dismiss();
-                                }
-                            })
-                    .create();
-            dialog.show();
-            mDialogTextField = (EditText) dialog.findViewById(R.id.fingerprint_rename_field);
-            mDialogTextField.setText(fp.getName());
-            mDialogTextField.selectAll();
-            // show the IME
-            mDialogTextField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                @Override
-                public void onFocusChange(View v, boolean hasFocus) {
-                    if (hasFocus) {
-                        dialog.getWindow().setSoftInputMode(
-                                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-                    }
-                }
-            });
+        private void showRenameDeleteDialog(final Fingerprint fp) {
+            RenameDeleteDialog renameDeleteDialog = new RenameDeleteDialog();
+            Bundle args = new Bundle();
+            args.putParcelable("fingerprint", fp);
+            renameDeleteDialog.setArguments(args);
+            renameDeleteDialog.setTargetFragment(this, 0);
+            renameDeleteDialog.show(getFragmentManager(), RenameDeleteDialog.class.getName());
         }
 
         @Override
@@ -521,6 +485,102 @@ public class FingerprintSettings extends SubSettings {
                 intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, true);
                 intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, challenge);
                 startActivityForResult(intent, CHOOSE_LOCK_GENERIC_REQUEST);
+            }
+        }
+
+        private void deleteFingerPrint(Fingerprint fingerPrint) {
+            mFingerprintManager.remove(fingerPrint, mRemoveCallback);
+        }
+
+        private void renameFingerPrint(int fingerId, String newName) {
+            mFingerprintManager.rename(fingerId, newName);
+            updatePreferences();
+        }
+
+        public static class RenameDeleteDialog extends DialogFragment {
+
+            private Fingerprint mFp;
+            private EditText mDialogTextField;
+            private String mFingerName;
+            private Boolean mTextHadFocus;
+            private int mTextSelectionStart;
+            private int mTextSelectionEnd;
+
+            @Override
+            public Dialog onCreateDialog(Bundle savedInstanceState) {
+                mFp = getArguments().getParcelable("fingerprint");
+                if (savedInstanceState != null) {
+                    mFingerName = savedInstanceState.getString("fingerName");
+                    mTextHadFocus = savedInstanceState.getBoolean("textHadFocus");
+                    mTextSelectionStart = savedInstanceState.getInt("startSelection");
+                    mTextSelectionEnd = savedInstanceState.getInt("endSelection");
+                }
+                final AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
+                        .setView(R.layout.fingerprint_rename_dialog)
+                        .setPositiveButton(R.string.security_settings_fingerprint_enroll_dialog_ok,
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        final String newName =
+                                                mDialogTextField.getText().toString();
+                                        final CharSequence name = mFp.getName();
+                                        if (!newName.equals(name)) {
+                                            if (DEBUG) {
+                                                Log.v(TAG, "rename " + name + " to " + newName);
+                                            }
+                                            FingerprintSettingsFragment parent
+                                                    = (FingerprintSettingsFragment)
+                                                    getTargetFragment();
+                                            parent.renameFingerPrint(mFp.getFingerId(),
+                                                    newName);
+                                        }
+                                        dialog.dismiss();
+                                    }
+                                })
+                        .setNegativeButton(
+                                R.string.security_settings_fingerprint_enroll_dialog_delete,
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        if (DEBUG) Log.v(TAG, "Removing fpId=" + mFp.getFingerId());
+                                        FingerprintSettingsFragment parent
+                                                = (FingerprintSettingsFragment) getTargetFragment();
+                                        parent.deleteFingerPrint(mFp);
+                                        dialog.dismiss();
+                                    }
+                                })
+                        .create();
+                alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                    @Override
+                    public void onShow(DialogInterface dialog) {
+                        mDialogTextField = (EditText) alertDialog.findViewById(
+                                R.id.fingerprint_rename_field);
+                        CharSequence name = mFingerName == null ? mFp.getName() : mFingerName;
+                        mDialogTextField.setText(name);
+                        if (mTextHadFocus == null) {
+                            mDialogTextField.selectAll();
+                        } else {
+                            mDialogTextField.setSelection(mTextSelectionStart, mTextSelectionEnd);
+                        }
+                    }
+                });
+                if (mTextHadFocus == null || mTextHadFocus) {
+                    // Request the IME
+                    alertDialog.getWindow().setSoftInputMode(
+                            WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+                }
+                return alertDialog;
+            }
+
+            @Override
+            public void onSaveInstanceState(Bundle outState) {
+                super.onSaveInstanceState(outState);
+                if (mDialogTextField != null) {
+                    outState.putString("fingerName", mDialogTextField.getText().toString());
+                    outState.putBoolean("textHadFocus", mDialogTextField.hasFocus());
+                    outState.putInt("startSelection", mDialogTextField.getSelectionStart());
+                    outState.putInt("endSelection", mDialogTextField.getSelectionEnd());
+                }
             }
         }
     }
