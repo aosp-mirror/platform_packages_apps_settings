@@ -294,8 +294,7 @@
     <string name="time_picker_title" msgid="483460752287255019">"Час"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Автоматично заключване"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> след спящ режим"</string>
-    <!-- no translation found for lock_immediately_summary_with_exception (9119632173886172690) -->
-    <skip />
+    <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"Веднага след спящ режим, освен когато екранът се поддържа отключен от <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> след спящ режим, освен когато екранът се поддържа отключен от <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"С информацията за собственика на заключения екран"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Закл. екран: Съобщ."</string>
@@ -307,9 +306,9 @@
     <string name="user_info_settings_title" msgid="1195015434996724736">"Данни за потребителя"</string>
     <string name="show_profile_info_on_lockscreen_label" msgid="2741208907263877990">"Показв. на инф. за потр. профил върху закл. екран"</string>
     <string name="profile_info_settings_title" msgid="3518603215935346604">"Инф. за потр. профил"</string>
-    <string name="Accounts_settings_title" msgid="1592309650872767387">"Синхрониз. на профила"</string>
+    <string name="Accounts_settings_title" msgid="1643879107901699406">"Профили"</string>
     <string name="location_settings_title" msgid="1369675479310751735">"Местоположение"</string>
-    <string name="account_settings_title" msgid="574608087657397787">"Синхрониз. на профила"</string>
+    <string name="account_settings_title" msgid="626177544686329806">"Профили"</string>
     <string name="security_settings_title" msgid="7945465324818485460">"Сигурност"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Задаване на Моето местоположение, отключване на екран, заключване на SIM картата и на хранилището за идентификационни данни"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Задаване на Моето местоположение, отключване на екран и заключване на хранилището за идентификационни данни"</string>
@@ -354,8 +353,7 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Освен за отключване на телефона си можете да използвате отпечатъка си и за упълномощаване на покупки и достъп до приложения. "<annotation id="url">"Научете повече"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4504501581228672208">"Опцията за заключване на екрана е деактивирана. Пак можете да използвате отпечатъка си за упълномощаване на покупки и достъп до приложения. "<annotation id="url">"Научете повече"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Вдигнете пръста, след което докоснете сензора отново"</string>
-    <!-- no translation found for fingerprint_add_max (1020927549936895822) -->
-    <skip />
+    <string name="fingerprint_add_max" msgid="1020927549936895822">"Можете да добавите до <xliff:g id="COUNT">%d</xliff:g> отпечатъка"</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Шифроване"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"Шифроване на таблета"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"Шифроване на телефона"</string>
@@ -970,8 +968,7 @@
     <string name="storage_internal_title" msgid="690771193137801021">"Хранилище на устройството"</string>
     <string name="storage_external_title" msgid="3433462910096848696">"Преносимо хранилище"</string>
     <string name="storage_volume_summary" msgid="7023441974367853372">"Използвали сте <xliff:g id="USED">%1$s</xliff:g> от <xliff:g id="TOTAL">%2$s</xliff:g>"</string>
-    <!-- no translation found for storage_size_large (5691585991420946254) -->
-    <skip />
+    <string name="storage_size_large" msgid="5691585991420946254">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
     <string name="storage_volume_used" msgid="1303803057698959872">"Използвано от <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_volume_used_total" msgid="6113121714019000244">"Общо използвано от <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_mount_success" msgid="687641090137253647">"<xliff:g id="NAME">%1$s</xliff:g>: Свързването бе успешно"</string>
@@ -1080,7 +1077,7 @@
     <string name="network_reset_not_available" msgid="7188610385577164676">"Този потребител не може да нулира мрежовите настройки"</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"Мрежовите настройки са нулирани"</string>
     <string name="device_reset_title" msgid="2384019005638768076">"Нулиране на устройството"</string>
-    <string name="master_clear_title" msgid="5907939616087039756">"Възстановяване на фабричните настройки"</string>
+    <string name="master_clear_title" msgid="5907939616087039756">"Възст. на фабричните настройки"</string>
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"Това ще изтрие всички данни от "<b>"вътрешното хранилище"</b>" на таблета ви, включително:\n\n"<li>"профила ви в Google;"</li>\n<li>"данни и настройки от системата и приложенията;"</li>\n<li>"изтеглени приложения."</li></string>
     <string name="master_clear_desc" product="default" msgid="4800386183314202571">"Това ще изтрие всички данни от "<b>"вътрешното хранилище"</b>" на телефона ви, включително:\n\n"<li>"профила ви в Google;"</li>\n<li>"данни и настройки от системата и приложенията;"</li>\n<li>"изтеглени приложения."</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Понастоящем сте влезли в следните профили:\n"</string>
@@ -1780,8 +1777,7 @@
     <string name="menu_stats_refresh" msgid="1676215433344981075">"Опресняване"</string>
     <string name="process_kernel_label" msgid="3916858646836739323">"Android (ОС)"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"Медиен сървър"</string>
-    <!-- no translation found for process_dex2oat_label (2592408651060518226) -->
-    <skip />
+    <string name="process_dex2oat_label" msgid="2592408651060518226">"Оптимизиране на приложенията"</string>
     <string name="battery_saver" msgid="1426682272004907982">"Режим за запазване на батерията"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Автоматично включване"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Никога"</string>
@@ -2819,4 +2815,6 @@
     <string name="ignore_optimizations_title" msgid="2829637961185027768">"Да се разреши ли на <xliff:g id="APP">%s</xliff:g> да пренебрегва оптимизациите на батерията?"</string>
     <string name="app_list_preference_none" msgid="108006867520327904">"Няма"</string>
     <string name="work_profile_usage_access_warning" msgid="8870622842216566692">"Изключването на достъпа до информацията за преноса за това приложение не пречи на администратора да проследява преноса на данни за приложенията в служебния ви потребителски профил."</string>
+    <!-- no translation found for accessibility_lock_screen_progress (2408292742980383166) -->
+    <skip />
 </resources>

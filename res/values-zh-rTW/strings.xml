@@ -294,8 +294,7 @@
     <string name="time_picker_title" msgid="483460752287255019">"時間"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"自動鎖定"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"休眠<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>後"</string>
-    <!-- no translation found for lock_immediately_summary_with_exception (9119632173886172690) -->
-    <skip />
+    <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"休眠後立即鎖定，但「<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>」設定保持解鎖狀態時除外"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"休眠<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>後 (由「<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>」維持解鎖狀態時除外)"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"在鎖定畫面上顯示擁有者資訊"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"鎖定畫面訊息"</string>
@@ -307,9 +306,9 @@
     <string name="user_info_settings_title" msgid="1195015434996724736">"使用者資訊"</string>
     <string name="show_profile_info_on_lockscreen_label" msgid="2741208907263877990">"在鎖定畫面上顯示個人資料資訊"</string>
     <string name="profile_info_settings_title" msgid="3518603215935346604">"個人資料資訊"</string>
-    <string name="Accounts_settings_title" msgid="1592309650872767387">"帳戶同步處理"</string>
+    <string name="Accounts_settings_title" msgid="1643879107901699406">"帳戶"</string>
     <string name="location_settings_title" msgid="1369675479310751735">"定位"</string>
-    <string name="account_settings_title" msgid="574608087657397787">"帳戶同步處理"</string>
+    <string name="account_settings_title" msgid="626177544686329806">"帳戶"</string>
     <string name="security_settings_title" msgid="7945465324818485460">"安全性"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"設定我的位置、畫面解鎖、SIM 卡鎖定、認證儲存空間鎖定"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"設定我的位置、解除鎖定畫面及鎖定認證儲存空間"</string>
@@ -329,7 +328,7 @@
     <string name="security_settings_fingerprint_enroll_onboard_message_2" msgid="4158160658182631304">"新增指紋"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"使用指紋解鎖"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="5061093614328964700">"只要輕觸指紋感應器即可將手機解鎖、授權購物交易，或登入應用程式。任何新增到手機的指紋都可以完成上述動作，因此請慎選要加入的對象。"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="7173290350577831813">"注意：使用複雜的圖形或 PIN 碼會比您的指紋安全。"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="7173290350577831813">"注意：使用複雜的圖形或 PIN 碼會比感應指紋來得安全。"</string>
     <string name="security_settings_fingerprint_enroll_introduction_risk_link_text" msgid="9129531466157620977">"瞭解詳情"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"取消"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"繼續"</string>
@@ -354,8 +353,7 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"除了將手機解鎖，您也可以使用指紋授權購物交易及存取應用程式。"<annotation id="url">"瞭解詳情"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4504501581228672208">"已停用螢幕鎖定選項。您仍然可以使用指紋授權購物交易及存取應用程式。"<annotation id="url">"瞭解詳情"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"移開手指，然後再次輕觸感應器"</string>
-    <!-- no translation found for fingerprint_add_max (1020927549936895822) -->
-    <skip />
+    <string name="fingerprint_add_max" msgid="1020927549936895822">"您最多可以新增 <xliff:g id="COUNT">%d</xliff:g> 個指紋"</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"加密"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"加密保護平板電腦"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"對手機進行加密"</string>
@@ -485,7 +483,7 @@
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"如要與下列裝置配對：&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;請確認該裝置是否顯示下列密碼金鑰：&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"來自：&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;要與這個裝置配對嗎？"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"如要與 <xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g> 配對，請輸入：<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>，然後按下 [返回] 或 [輸入]。"</string>
-    <string name="bluetooth_pairing_shares_phonebook" msgid="1655930908614072491">"授予連線時即可存取聯絡人和通話紀錄的權限。"</string>
+    <string name="bluetooth_pairing_shares_phonebook" msgid="1655930908614072491">"連線時可存取您的聯絡人和通話紀錄。"</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_connecting_error_message" msgid="1397388344342081090">"無法連線至「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」。"</string>
     <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"掃描裝置"</string>
@@ -592,7 +590,7 @@
     <string name="wifi_suspend_optimizations" msgid="1220174276403689487">"Wi-Fi 最佳化"</string>
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"開啟 Wi-Fi 時儘可能節約電池用量"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"限制 Wi-Fi 用電量"</string>
-    <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"Wi-Fi 網路連線中斷時，切換到行動數據。"</string>
+    <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"Wi-Fi 網路無法連線時，切換到行動數據。"</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"新增網路"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"Wi-Fi 網路"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"WPS 按鈕"</string>
@@ -970,8 +968,7 @@
     <string name="storage_internal_title" msgid="690771193137801021">"裝置儲存空間"</string>
     <string name="storage_external_title" msgid="3433462910096848696">"可攜式儲存空間"</string>
     <string name="storage_volume_summary" msgid="7023441974367853372">"已使用 <xliff:g id="USED">%1$s</xliff:g> (共 <xliff:g id="TOTAL">%2$s</xliff:g>)"</string>
-    <!-- no translation found for storage_size_large (5691585991420946254) -->
-    <skip />
+    <string name="storage_size_large" msgid="5691585991420946254">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
     <string name="storage_volume_used" msgid="1303803057698959872">"<xliff:g id="TOTAL">%1$s</xliff:g> 總儲存空間使用量"</string>
     <string name="storage_volume_used_total" msgid="6113121714019000244">"<xliff:g id="TOTAL">%1$s</xliff:g> 總儲存空間使用量總計"</string>
     <string name="storage_mount_success" msgid="687641090137253647">"已掛載「<xliff:g id="NAME">%1$s</xliff:g>」"</string>
@@ -1780,8 +1777,7 @@
     <string name="menu_stats_refresh" msgid="1676215433344981075">"重新整理"</string>
     <string name="process_kernel_label" msgid="3916858646836739323">"Android 作業系統"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"媒體伺服器"</string>
-    <!-- no translation found for process_dex2oat_label (2592408651060518226) -->
-    <skip />
+    <string name="process_dex2oat_label" msgid="2592408651060518226">"應用程式最佳化"</string>
     <string name="battery_saver" msgid="1426682272004907982">"節約耗電量"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"自動開啟"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"永遠不要"</string>
@@ -2150,7 +2146,7 @@
     <string name="data_usage_menu_auto_sync" msgid="8203999775948778560">"自動同步處理資料"</string>
     <string name="data_usage_menu_sim_cards" msgid="6410498422797244073">"SIM 卡"</string>
     <string name="data_usage_menu_cellular_networks" msgid="5243515735055652279">"行動網路"</string>
-    <string name="data_usage_cellular_data_summary" msgid="8413357481361268285">"超出上限，已暫停"</string>
+    <string name="data_usage_cellular_data_summary" msgid="8413357481361268285">"超出上限，暫停連線"</string>
     <string name="account_settings_menu_auto_sync" msgid="6243013719753700377">"自動同步處理資料"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="785541379617346438">"自動同步處理個人資料"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="329565580969147026">"自動同步處理工作資料"</string>
@@ -2823,4 +2819,6 @@
     <string name="ignore_optimizations_title" msgid="2829637961185027768">"允許 <xliff:g id="APP">%s</xliff:g> 忽略電池效能最佳化設定？"</string>
     <string name="app_list_preference_none" msgid="108006867520327904">"無"</string>
     <string name="work_profile_usage_access_warning" msgid="8870622842216566692">"即使關閉此應用程式的使用紀錄存取功能，您的管理員仍可存取 Work 設定檔中應用程式的數據用量。"</string>
+    <!-- no translation found for accessibility_lock_screen_progress (2408292742980383166) -->
+    <skip />
 </resources>
