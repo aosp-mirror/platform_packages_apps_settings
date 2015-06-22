@@ -59,6 +59,7 @@
             android:persistent="false"
             android:title="@string/captioning_foreground_color" />
         <com.android.settings.accessibility.ColorPreference
+            android:dependency="captioning_foreground_color"
             android:key="captioning_foreground_opacity"
             android:persistent="false"
             android:title="@string/captioning_foreground_opacity" />
