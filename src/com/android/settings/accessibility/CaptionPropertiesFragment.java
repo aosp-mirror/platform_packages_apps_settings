@@ -344,9 +344,17 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
         mEdgeType.setValue(attrs.edgeType);
         mEdgeColor.setValue(attrs.edgeColor);
 
-        parseColorOpacity(mForegroundColor, mForegroundOpacity, attrs.foregroundColor);
-        parseColorOpacity(mBackgroundColor, mBackgroundOpacity, attrs.backgroundColor);
-        parseColorOpacity(mWindowColor, mWindowOpacity, attrs.windowColor);
+        final int foregroundColor = attrs.hasForegroundColor() ?
+                attrs.foregroundColor : CaptionStyle.COLOR_UNSPECIFIED;
+        parseColorOpacity(mForegroundColor, mForegroundOpacity, foregroundColor);
+
+        final int backgroundColor = attrs.hasBackgroundColor() ?
+                attrs.backgroundColor : CaptionStyle.COLOR_UNSPECIFIED;
+        parseColorOpacity(mBackgroundColor, mBackgroundOpacity, backgroundColor);
+
+        final int windowColor = attrs.hasWindowColor() ?
+                attrs.windowColor : CaptionStyle.COLOR_UNSPECIFIED;
+        parseColorOpacity(mWindowColor, mWindowOpacity, windowColor);
 
         final String rawTypeface = attrs.mRawTypeface;
         mTypeface.setValue(rawTypeface == null ? "" : rawTypeface);
@@ -355,27 +363,48 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
         mLocale.setValue(rawLocale == null ? "" : rawLocale);
     }
 
+    /**
+     * Unpack the specified color value and update the preferences.
+     *
+     * @param color color preference
+     * @param opacity opacity preference
+     * @param value packed value
+     */
     private void parseColorOpacity(ColorPreference color, ColorPreference opacity, int value) {
         final int colorValue;
         final int opacityValue;
-        if (Color.alpha(value) == 0) {
+        if (!CaptionStyle.hasColor(value)) {
+            // "Default" color with variable alpha.
+            colorValue = CaptionStyle.COLOR_UNSPECIFIED;
+            opacityValue = (value & 0xFF) << 24;
+        } else if ((value >>> 24) == 0) {
+            // "None" color with variable alpha.
             colorValue = Color.TRANSPARENT;
             opacityValue = (value & 0xFF) << 24;
         } else {
+            // Normal color.
             colorValue = value | 0xFF000000;
             opacityValue = value & 0xFF000000;
         }
-        color.setValue(colorValue);
+
+        // Opacity value is always white.
         opacity.setValue(opacityValue | 0xFFFFFF);
+        color.setValue(colorValue);
     }
 
     private int mergeColorOpacity(ColorPreference color, ColorPreference opacity) {
         final int colorValue = color.getValue();
         final int opacityValue = opacity.getValue();
         final int value;
-        if (Color.alpha(colorValue) == 0) {
-            value = colorValue & 0x00FFFF00 | Color.alpha(opacityValue);
+        // "Default" is 0x00FFFFFF or, for legacy support, 0x00000100.
+        if (!CaptionStyle.hasColor(colorValue)) {
+            // Encode "default" as 0x00FFFFaa.
+            value = 0x00FFFF00 | Color.alpha(opacityValue);
+        } else if (colorValue == Color.TRANSPARENT) {
+            // Encode "none" as 0x000000aa.
+            value = Color.alpha(opacityValue);
         } else {
+            // Encode custom color normally.
             value = colorValue & 0x00FFFFFF | opacityValue & 0xFF000000;
         }
         return value;
