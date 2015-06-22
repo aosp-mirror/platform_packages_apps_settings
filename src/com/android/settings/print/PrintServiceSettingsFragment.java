@@ -146,6 +146,16 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
     }
 
     @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+
+        String title = getArguments().getString(PrintSettingsFragment.EXTRA_TITLE);
+        if (!TextUtils.isEmpty(title)) {
+            getActivity().setTitle(title);
+        }
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         mSettingsContentObserver.register(getContentResolver());
