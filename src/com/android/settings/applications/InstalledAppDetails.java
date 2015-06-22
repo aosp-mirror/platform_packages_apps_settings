@@ -560,9 +560,9 @@ public class InstalledAppDetails extends AppInfoBase
         switch (id) {
             case DLG_DISABLE:
                 return new AlertDialog.Builder(getActivity())
-                        .setTitle(getActivity().getText(R.string.app_disable_dlg_title))
                         .setMessage(getActivity().getText(R.string.app_disable_dlg_text))
-                        .setPositiveButton(R.string.dlg_ok, new DialogInterface.OnClickListener() {
+                        .setPositiveButton(R.string.app_disable_dlg_positive,
+                                new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 // Disable the app
                                 new DisableChanger(InstalledAppDetails.this, mAppEntry.info,
@@ -574,9 +574,9 @@ public class InstalledAppDetails extends AppInfoBase
                         .create();
             case DLG_SPECIAL_DISABLE:
                 return new AlertDialog.Builder(getActivity())
-                        .setTitle(getActivity().getText(R.string.app_special_disable_dlg_title))
                         .setMessage(getActivity().getText(R.string.app_special_disable_dlg_text))
-                        .setPositiveButton(R.string.dlg_ok, new DialogInterface.OnClickListener() {
+                        .setPositiveButton(R.string.app_disable_dlg_positive,
+                                new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 // Clear user data here
                                 uninstallPkg(mAppEntry.info.packageName,
