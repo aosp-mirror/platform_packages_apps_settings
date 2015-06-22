@@ -31,7 +31,8 @@
         android:numColumns="auto_fit"
         android:columnWidth="96dp"
         android:scrollbarStyle="insideOverlay"
-        android:stretchMode="columnWidth" />
+        android:stretchMode="columnWidth"
+        android:scrollIndicators="top|bottom" />
 
     <!-- HACK: Setting minHeight has no effect within a dialog layout,
          so this view keeps the minimum height above 300dp. -->
