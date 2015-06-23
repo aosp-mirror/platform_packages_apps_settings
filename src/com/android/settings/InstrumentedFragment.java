@@ -27,6 +27,7 @@ public abstract class InstrumentedFragment extends PreferenceFragment {
     public static final int UNDECLARED = 100000;
 
     public static final int ABOUT_LEGAL_SETTINGS = UNDECLARED + 1;
+    public static final int ACTION_SEARCH_RESULTS = UNDECLARED + 2;
 
     /**
      * Declare the view of this category.
