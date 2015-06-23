@@ -23,7 +23,10 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AppGlobals;
 import android.app.Dialog;
+import android.app.admin.DeviceAdminInfo;
 import android.app.admin.DevicePolicyManager;
+import android.app.admin.DevicePolicyManagerInternal;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -48,6 +51,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
+import android.provider.Settings;
 import android.text.Spannable;
 import android.text.style.TextAppearanceSpan;
 import android.util.Log;
@@ -65,6 +69,7 @@ import android.widget.TextView.BufferType;
 import android.widget.Toast;
 
 import com.android.internal.logging.MetricsLogger;
+import com.android.server.LocalServices;
 import com.android.settings.LinkifyUtils;
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
@@ -933,31 +938,58 @@ public class WifiSettings extends RestrictedSettingsFragment
         };
 
     /**
-     * Returns true if the config is not editable/removable except by its creating Device Owner.
+     * Returns true if the config is not editable through Settings.
+     * @param context Context of caller
      * @param config The WiFi config.
-     * @return true if the config is not editable/removable except by its creating Device Owner.
+     * @return true if the config is not editable through Settings.
      */
     static boolean isEditabilityLockedDown(Context context, WifiConfiguration config) {
+        return !canModifyNetwork(context, config);
+    }
+
+    /**
+     * This method is a stripped version of WifiConfigStore.canModifyNetwork.
+     * TODO: refactor to have only one method.
+     * @param context Context of caller
+     * @param config The WiFi config.
+     * @return true if Settings can modify the config.
+     */
+    static boolean canModifyNetwork(Context context, WifiConfiguration config) {
         if (config == null) {
-            return false;
+            return true;
         }
+
         final DevicePolicyManager dpm = (DevicePolicyManager) context.getSystemService(
                 Context.DEVICE_POLICY_SERVICE);
-        final String deviceOwnerPackageName = dpm.getDeviceOwner();
-        if (deviceOwnerPackageName == null) {
-            return false;
-        }
-        UserManager um = UserManager.get(context);
-        if (um.hasUserRestriction(UserManager.DISALLOW_CONFIG_WIFI)) {
-            return false;
-        }
+
+        // Check if device has DPM capability. If it has and dpm is still null, then we
+        // treat this case with suspicion and bail out.
         final PackageManager pm = context.getPackageManager();
-        try {
-            final int deviceOwnerUid = pm.getPackageUid(deviceOwnerPackageName,
-                    UserHandle.getUserId(config.creatorUid));
-            return deviceOwnerUid == config.creatorUid;
-        } catch (NameNotFoundException e) {
+        if (pm.hasSystemFeature(PackageManager.FEATURE_DEVICE_ADMIN) && dpm == null) {
             return false;
         }
+
+        boolean isConfigEligibleForLockdown = false;
+        if (dpm != null) {
+            final String deviceOwnerPackageName = dpm.getDeviceOwner();
+            if (deviceOwnerPackageName != null) {
+                try {
+                    final int deviceOwnerUid = pm.getPackageUid(deviceOwnerPackageName,
+                            UserHandle.USER_OWNER);
+                    isConfigEligibleForLockdown = deviceOwnerUid == config.creatorUid;
+                } catch (NameNotFoundException e) {
+                    // don't care
+                }
+            }
+        }
+        if (!isConfigEligibleForLockdown) {
+            return true;
+        }
+
+        final ContentResolver resolver = context.getContentResolver();
+        final boolean isLockdownFeatureEnabled = Settings.Global.getInt(resolver,
+                Settings.Global.WIFI_DEVICE_OWNER_CONFIGS_LOCKDOWN, 0) != 0;
+        return !isLockdownFeatureEnabled;
     }
+
 }
