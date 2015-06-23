@@ -93,6 +93,10 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
     private void setLockToAppEnabled(boolean isEnabled) {
         Settings.System.putInt(getContentResolver(), Settings.System.LOCK_TO_APP_ENABLED,
                 isEnabled ? 1 : 0);
+        if (isEnabled) {
+            // Set the value to match what we have defaulted to in the UI.
+            setScreenLockUsedSetting(isScreenLockUsed());
+        }
     }
 
     private boolean isScreenLockUsed() {
@@ -115,9 +119,13 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
                 return false;
             }
         }
+        setScreenLockUsedSetting(isEnabled);
+        return true;
+    }
+
+    private void setScreenLockUsedSetting(boolean isEnabled) {
         Settings.Secure.putInt(getContentResolver(), Settings.Secure.LOCK_TO_APP_EXIT_LOCKED,
                 isEnabled ? 1 : 0);
-        return true;
     }
 
     @Override
