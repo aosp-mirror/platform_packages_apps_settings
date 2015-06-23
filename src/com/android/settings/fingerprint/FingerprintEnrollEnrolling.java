@@ -227,7 +227,8 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
             mStartMessage.setVisibility(View.VISIBLE);
             mRepeatMessage.setVisibility(View.INVISIBLE);
         } else {
-            setHeaderText(R.string.security_settings_fingerprint_enroll_repeat_title);
+            setHeaderText(R.string.security_settings_fingerprint_enroll_repeat_title,
+                    true /* force */);
             mStartMessage.setVisibility(View.INVISIBLE);
             mRepeatMessage.setVisibility(View.VISIBLE);
         }
