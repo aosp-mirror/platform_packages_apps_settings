@@ -22,9 +22,11 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.android.settings.ChooseLockSettingsHelper;
 import com.android.settings.R;
@@ -93,8 +95,22 @@ public class FingerprintEnrollBase extends Activity implements View.OnClickListe
         return (SetupWizardLayout) findViewById(R.id.setup_wizard_layout);
     }
 
+    protected void setHeaderText(int resId, boolean force) {
+        TextView layoutTitle = (TextView) getSetupWizardLayout().findViewById(
+                R.id.suw_layout_title);
+        CharSequence previousTitle = layoutTitle.getText();
+        CharSequence title = getText(resId);
+        if (previousTitle != title || force) {
+            if (!TextUtils.isEmpty(previousTitle)) {
+                layoutTitle.setAccessibilityLiveRegion(View.ACCESSIBILITY_LIVE_REGION_POLITE);
+            }
+            getSetupWizardLayout().setHeaderText(title);
+            setTitle(title);
+        }
+    }
+
     protected void setHeaderText(int resId) {
-        getSetupWizardLayout().setHeaderText(getText(resId));
+        setHeaderText(resId, false /* force */);
     }
 
     protected Button getNextButton() {
