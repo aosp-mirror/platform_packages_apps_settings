@@ -154,6 +154,7 @@ public final class DeviceProfilesSettings extends DialogFragment implements
                 dismiss();
                 return;
             }
+            addPreferencesForProfiles();
             refresh();
         }
     }
@@ -167,16 +168,6 @@ public final class DeviceProfilesSettings extends DialogFragment implements
         }
 
         mManager.setForegroundActivity(null);
-    }
-
-    public void setDevice(CachedBluetoothDevice cachedDevice) {
-        mCachedDevice = cachedDevice;
-
-        if (isResumed()) {
-            mCachedDevice.registerCallback(this);
-            addPreferencesForProfiles();
-            refresh();
-        }
     }
 
     private void addPreferencesForProfiles() {
