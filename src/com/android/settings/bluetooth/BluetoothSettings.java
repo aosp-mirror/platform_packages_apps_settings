@@ -21,6 +21,7 @@ import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -30,6 +31,7 @@ import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
+import android.provider.Settings;
 import android.text.Spannable;
 import android.text.style.TextAppearanceSpan;
 import android.util.Log;
@@ -381,20 +383,30 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
             return;
         }
         final CharSequence briefText = getText(R.string.bluetooth_empty_list_bluetooth_off);
-        final StringBuilder contentBuilder = new StringBuilder();
-        contentBuilder.append(briefText);
-        contentBuilder.append("\n\n");
-        contentBuilder.append(getText(R.string.ble_scan_notify_text));
+
+        final ContentResolver resolver = getActivity().getContentResolver();
+        final boolean bleScanningMode = Settings.Global.getInt(
+                resolver, Settings.Global.BLE_SCAN_ALWAYS_AVAILABLE, 0) == 1;
+
+        if (!bleScanningMode) {
+            // Show only the brief text if the scanning mode has been turned off.
+            mEmptyView.setText(briefText, TextView.BufferType.SPANNABLE);
+        } else {
+            final StringBuilder contentBuilder = new StringBuilder();
+            contentBuilder.append(briefText);
+            contentBuilder.append("\n\n");
+            contentBuilder.append(getText(R.string.ble_scan_notify_text));
+            LinkifyUtils.linkify(mEmptyView, contentBuilder, new LinkifyUtils.OnClickListener() {
+                @Override
+                public void onClick() {
+                    final SettingsActivity activity =
+                            (SettingsActivity) BluetoothSettings.this.getActivity();
+                    activity.startPreferencePanel(ScanningSettings.class.getName(), null,
+                            R.string.location_scanning_screen_title, null, null, 0);
+                }
+            });
+        }
         getPreferenceScreen().removeAll();
-        LinkifyUtils.linkify(mEmptyView, contentBuilder, new LinkifyUtils.OnClickListener() {
-            @Override
-            public void onClick() {
-                final SettingsActivity activity =
-                        (SettingsActivity) BluetoothSettings.this.getActivity();
-                activity.startPreferencePanel(ScanningSettings.class.getName(), null,
-                        R.string.location_scanning_screen_title, null, null, 0);
-            }
-        });
         Spannable boldSpan = (Spannable) mEmptyView.getText();
         boldSpan.setSpan(
                 new TextAppearanceSpan(getActivity(), android.R.style.TextAppearance_Medium), 0,
