@@ -354,6 +354,8 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4504501581228672208">"ตัวเลือกการล็อกหน้าจอปิดอยู่ คุณยังคงสามารถใช้ลายนิ้วมือเพื่อให้สิทธิ์การซื้อและการเข้าถึงแอปได้ "<annotation id="url">"เรียนรู้เพิ่มเติม"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"ยกนิ้วขึ้น แล้วแตะเซ็นเซอร์อีกครั้ง"</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"คุณสามารถเพิ่มลายนิ้วมือได้ถึง <xliff:g id="COUNT">%d</xliff:g> ลาย"</string>
+    <!-- no translation found for confirm_fingerprint_icon_content_description (5255544532157079096) -->
+    <skip />
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"การเข้ารหัสความปลอดภัย"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"เข้ารหัสความปลอดภัยให้แท็บเล็ต"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"เข้ารหัสความปลอดภัย"</string>
@@ -869,7 +871,7 @@
     <string name="fcc_equipment_id" msgid="149114368246356737">"รหัสอุปกรณ์"</string>
     <string name="baseband_version" msgid="1848990160763524801">"เวอร์ชันเบสแบนด์"</string>
     <string name="kernel_version" msgid="9192574954196167602">"เวอร์ชันเคอร์เนล"</string>
-    <string name="build_number" msgid="3075795840572241758">"หมายเลขบิวด์"</string>
+    <string name="build_number" msgid="3075795840572241758">"หมายเลขบิลด์"</string>
     <string name="selinux_status" msgid="6212165375172061672">"สถานะ SELinux"</string>
     <string name="device_info_not_available" msgid="8062521887156825182">"ใช้งานไม่ได้"</string>
     <string name="device_status_activity_title" msgid="1411201799384697904">"สถานะ"</string>
@@ -1366,9 +1368,10 @@
     <string name="app_install_location_title" msgid="2068975150026852168">"ตำแหน่งติดตั้งที่ต้องการ"</string>
     <string name="app_install_location_summary" msgid="5155453752692959098">"เปลี่ยนตำแหน่งติดตั้งที่ต้องการสำหรับแอปพลิเคชันใหม่"</string>
     <string name="app_disable_dlg_title" msgid="3916469657537695436">"ปิดแอปพลิเคชันในตัวหรือไม่"</string>
-    <string name="app_disable_dlg_text" msgid="3562567756362627323">"หากคุณปิดใช้งานแอปพลิเคชันในตัว แอปพลิเคชันอื่นๆ อาจทำงานผิดปกติได้"</string>
+    <string name="app_disable_dlg_positive" msgid="7375627244201714263">"ปิดใช้แอป"</string>
+    <string name="app_disable_dlg_text" msgid="7824930380425568584">"หากคุณปิดใช้แอปนี้ แอปอื่นๆ อาจไม่ทำงานตามที่ควรจะเป็นอีกต่อไป"</string>
     <string name="app_special_disable_dlg_title" msgid="2690148680327142674">"ลบข้อมูลและปิดใช้งานแอปพลิเคชันหรือไม่"</string>
-    <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"หากคุณปิดใช้งานแอปพลิเคชันในตัว แอปพลิเคชันอื่นๆ อาจทำงานผิดพลาด และข้อมูลของคุณจะถูกลบด้วย"</string>
+    <string name="app_special_disable_dlg_text" msgid="1007112763234313018">"หากคุณปิดใช้แอปนี้ แอปอื่นๆ อาจไม่ทำงานตามที่ควรจะเป็นอีกต่อไป และระบบจะลบข้อมูลของคุณด้วย"</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"ปิดการแจ้งเตือนหรือไม่"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"หากคุณปิดการแจ้งเตือนสำหรับแอปพลิเคชันนี้ คุณอาจพลาดการแจ้งเตือนและการอัปเดตที่สำคัญ"</string>
     <string name="app_ops_settings" msgid="5108481883575527511">"การทำงานของแอป"</string>
@@ -2815,6 +2818,5 @@
     <string name="ignore_optimizations_title" msgid="2829637961185027768">"ให้ <xliff:g id="APP">%s</xliff:g> ละเว้นการเพิ่มประสิทธิภาพแบตเตอรี่"</string>
     <string name="app_list_preference_none" msgid="108006867520327904">"ไม่มี"</string>
     <string name="work_profile_usage_access_warning" msgid="8870622842216566692">"การปิดการเข้าถึงการใช้งานของแอปนี้ไม่ได้ป้องกันผู้ดูแลระบบจากการติดตามปริมาณการใช้อินเทอร์เน็ตของแอปต่างๆ ในโปรไฟล์งานของคุณ"</string>
-    <!-- no translation found for accessibility_lock_screen_progress (2408292742980383166) -->
-    <skip />
+    <string name="accessibility_lock_screen_progress" msgid="2408292742980383166">"ใช้ไป <xliff:g id="COUNT_0">%1$d</xliff:g> จาก <xliff:g id="COUNT_1">%2$d</xliff:g> อักขระ"</string>
 </resources>
