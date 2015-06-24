@@ -763,6 +763,7 @@ public class InstalledAppDetails extends AppInfoBase
         TextView appVersion = (TextView) appSnippet.findViewById(R.id.widget_text1);
 
         if (!TextUtils.isEmpty(versionName)) {
+            appVersion.setSelected(true);
             appVersion.setVisibility(View.VISIBLE);
             appVersion.setText(appSnippet.getContext().getString(R.string.version_text,
                     String.valueOf(versionName)));
