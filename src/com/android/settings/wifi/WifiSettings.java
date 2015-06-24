@@ -708,8 +708,17 @@ public class WifiSettings extends RestrictedSettingsFragment
         }
 
         final CharSequence briefText = getText(R.string.wifi_empty_list_wifi_off);
-        if (isUiRestricted()) {
-            // Show only the brief text if the user is not allowed to configure scanning settings.
+
+        // Don't use WifiManager.isScanAlwaysAvailable() to check the Wi-Fi scanning mode. Instead,
+        // read the system settings directly. Because when the device is in Airplane mode, even if
+        // Wi-Fi scanning mode is on, WifiManager.isScanAlwaysAvailable() still returns "off".
+        final ContentResolver resolver = getActivity().getContentResolver();
+        final boolean wifiScanningMode = Settings.Global.getInt(
+                resolver, Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 0) == 1;
+
+        if (isUiRestricted() || !wifiScanningMode) {
+            // Show only the brief text if the user is not allowed to configure scanning settings,
+            // or the scanning mode has been turned off.
             mEmptyView.setText(briefText, BufferType.SPANNABLE);
         } else {
             // Append the description of scanning settings with link.
