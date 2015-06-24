@@ -867,6 +867,30 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
             throw new IllegalStateException("unknown tab: " + currentTab);
         }
 
+        mPolicyEditor.read();
+        final NetworkPolicy policy = mPolicyEditor.getPolicy(mTemplate);
+        if (policy != null) {
+            final long currentTime = System.currentTimeMillis();
+            final long start = computeLastCycleBoundary(currentTime, policy);
+            final long end = currentTime;
+            long totalBytes = 0;
+
+            try {
+                totalBytes = mStatsService.getNetworkTotalBytes(policy.template, start, end);
+            } catch (RuntimeException e) {
+            } catch (RemoteException e) {
+            }
+
+            if (policy.isOverLimit(totalBytes) && policy.lastLimitSnooze < start) {
+                setPreferenceSummary(mDataEnabledView,
+                        getString(R.string.data_usage_cellular_data_summary));
+            } else {
+                final TextView summary = (TextView) mDataEnabledView
+                        .findViewById(android.R.id.summary);
+                summary.setVisibility(View.GONE);
+            }
+        }
+
         // kick off loader for network history
         // TODO: consider chaining two loaders together instead of reloading
         // network history when showing app detail.
@@ -1515,6 +1539,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         @Override
         public void onLimitChanged() {
             setPolicyLimitBytes(mChart.getLimitBytes());
+            updateBody();
         }
 
         @Override
