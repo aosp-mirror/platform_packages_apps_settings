@@ -188,7 +188,7 @@ public class VpnSettings extends SettingsPreferenceFragment implements
 
     @Override
     public void onPause() {
-        if (mUnavailable()) {
+        if (mUnavailable) {
             super.onPause();
             return;
         }
