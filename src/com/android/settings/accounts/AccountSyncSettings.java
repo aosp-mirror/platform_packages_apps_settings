@@ -149,6 +149,8 @@ public class AccountSyncSettings extends AccountPreferenceBase {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        setPreferenceScreen(null);
+        addPreferencesFromResource(R.xml.account_sync_settings);
 
         setHasOptionsMenu(true);
     }
@@ -167,8 +169,6 @@ public class AccountSyncSettings extends AccountPreferenceBase {
     }
 
     protected void initializeUi(final View rootView) {
-        addPreferencesFromResource(R.xml.account_sync_settings);
-
         mErrorInfoView = (TextView) rootView.findViewById(R.id.sync_settings_error_info);
         mErrorInfoView.setVisibility(View.GONE);
 
@@ -202,6 +202,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
 
     @Override
     public void onResume() {
+        removePreference("dummy");
         mAuthenticatorHelper.listenToAccountUpdates();
         updateAuthDescriptions();
         onAccountsUpdate(UserHandle.getCallingUserHandle());
@@ -540,7 +541,6 @@ public class AccountSyncSettings extends AccountPreferenceBase {
             mProviderIcon.setImageDrawable(getDrawableForType(mAccount.type));
             mProviderId.setText(getLabelForType(mAccount.type));
         }
-        addPreferencesFromResource(R.xml.account_sync_settings);
     }
 
     @Override
