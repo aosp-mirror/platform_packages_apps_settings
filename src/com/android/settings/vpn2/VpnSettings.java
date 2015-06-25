@@ -106,10 +106,10 @@ public class VpnSettings extends SettingsPreferenceFragment implements
         super.onCreate(savedState);
 
         mUserManager = (UserManager) getSystemService(Context.USER_SERVICE);
-        if (mUserManager.hasUserRestriction(UserManager.DISALLOW_CONFIG_VPN)
-                || UserHandle.myUserId() != UserHandle.USER_OWNER) {
+        if (mUserManager.hasUserRestriction(UserManager.DISALLOW_CONFIG_VPN)) {
             mUnavailable = true;
             setPreferenceScreen(new PreferenceScreen(getActivity(), null));
+            setHasOptionsMenu(false);
             return;
         }
 
@@ -161,6 +161,7 @@ public class VpnSettings extends SettingsPreferenceFragment implements
         super.onResume();
 
         if (mUnavailable) {
+            // Show a message to explain that VPN settings have been disabled
             TextView emptyView = (TextView) getView().findViewById(android.R.id.empty);
             getListView().setEmptyView(emptyView);
             if (emptyView != null) {
@@ -187,6 +188,11 @@ public class VpnSettings extends SettingsPreferenceFragment implements
 
     @Override
     public void onPause() {
+        if (mUnavailable()) {
+            super.onPause();
+            return;
+        }
+
         // Stop monitoring
         mConnectivityManager.unregisterNetworkCallback(mNetworkCallback);
 
