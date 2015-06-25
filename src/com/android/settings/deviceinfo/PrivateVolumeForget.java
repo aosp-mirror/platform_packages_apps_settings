@@ -72,7 +72,7 @@ public class PrivateVolumeForget extends InstrumentedFragment {
         }
     };
 
-    private static class ForgetConfirmFragment extends DialogFragment {
+    public static class ForgetConfirmFragment extends DialogFragment {
         public static void show(Fragment parent, String fsUuid) {
             final Bundle args = new Bundle();
             args.putString(VolumeRecord.EXTRA_FS_UUID, fsUuid);
