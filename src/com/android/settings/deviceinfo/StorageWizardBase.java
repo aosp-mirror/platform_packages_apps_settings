@@ -167,10 +167,10 @@ public abstract class StorageWizardBase extends Activity {
     protected void setIllustrationInternal(boolean internal) {
         if (internal) {
             getSetupWizardLayout().setIllustration(R.drawable.bg_internal_storage_header,
-                    android.R.color.transparent);
+                    R.drawable.bg_header_horizontal_tile);
         } else {
             getSetupWizardLayout().setIllustration(R.drawable.bg_portable_storage_header,
-                    android.R.color.transparent);
+                    R.drawable.bg_header_horizontal_tile);
         }
     }
 
