@@ -580,6 +580,7 @@ public class ChooseLockPattern extends SettingsActivity {
             // the rest of the stuff varies enough that it is easier just to handle
             // on a case by case basis.
             mLockPatternView.setDisplayMode(DisplayMode.Correct);
+            boolean announceAlways = false;
 
             switch (mUiStage) {
                 case Introduction:
@@ -591,6 +592,7 @@ public class ChooseLockPattern extends SettingsActivity {
                 case ChoiceTooShort:
                     mLockPatternView.setDisplayMode(DisplayMode.Wrong);
                     postClearPatternRunnable();
+                    announceAlways = true;
                     break;
                 case FirstChoiceValid:
                     break;
@@ -600,6 +602,7 @@ public class ChooseLockPattern extends SettingsActivity {
                 case ConfirmWrong:
                     mLockPatternView.setDisplayMode(DisplayMode.Wrong);
                     postClearPatternRunnable();
+                    announceAlways = true;
                     break;
                 case ChoiceConfirmed:
                     break;
@@ -607,7 +610,7 @@ public class ChooseLockPattern extends SettingsActivity {
 
             // If the stage changed, announce the header for accessibility. This
             // is a no-op when accessibility is disabled.
-            if (previousStage != stage) {
+            if (previousStage != stage || announceAlways) {
                 mHeaderText.announceForAccessibility(mHeaderText.getText());
             }
         }
