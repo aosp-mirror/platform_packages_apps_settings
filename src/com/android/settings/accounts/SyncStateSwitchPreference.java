@@ -23,6 +23,7 @@ import android.preference.SwitchPreference;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.settings.R;
@@ -43,17 +44,15 @@ public class SyncStateSwitchPreference extends SwitchPreference {
     private boolean mOneTimeSyncMode = false;
 
     public SyncStateSwitchPreference(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        setWidgetLayoutResource(R.layout.preference_widget_sync_toggle);
+        super(context, attrs, 0, R.style.SyncSwitchPreference);
         mAccount = null;
         mAuthority = null;
     }
 
     public SyncStateSwitchPreference(Context context, Account account, String authority) {
-        super(context, null);
+        super(context, null, 0, R.style.SyncSwitchPreference);
         mAccount = account;
         mAuthority = authority;
-        setWidgetLayoutResource(R.layout.preference_widget_sync_toggle);
     }
 
     @Override
