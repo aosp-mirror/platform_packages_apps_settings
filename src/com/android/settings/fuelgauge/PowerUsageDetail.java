@@ -129,6 +129,7 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
                     R.string.usage_type_video,
                     R.string.usage_type_camera,
                     R.string.usage_type_flashlight,
+                    R.string.usage_type_computed_power,
                 };
                 values = new double[] {
                     entry.sipper.cpuTimeMs,
@@ -145,6 +146,7 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
                     0,
                     entry.sipper.cameraTimeMs,
                     entry.sipper.flashlightTimeMs,
+                    entry.sipper.totalPowerMah,
                 };
 
                 if (entry.sipper.drainType == BatterySipper.DrainType.APP) {
@@ -172,11 +174,13 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
                     R.string.usage_type_on_time,
                     R.string.usage_type_no_coverage,
                     R.string.usage_type_radio_active,
+                    R.string.usage_type_computed_power,
                 };
                 values = new double[] {
                     entry.sipper.usageTimeMs,
                     entry.sipper.noCoveragePercent,
-                    entry.sipper.mobileActive
+                    entry.sipper.mobileActive,
+                    entry.sipper.totalPowerMah,
                 };
             }
             break;
@@ -191,6 +195,7 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
                     R.string.usage_type_data_send,
                     R.string.usage_type_data_wifi_recv,
                     R.string.usage_type_data_wifi_send,
+                    R.string.usage_type_computed_power,
                 };
                 values = new double[] {
                     entry.sipper.usageTimeMs,
@@ -201,6 +206,7 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
                     entry.sipper.mobileTxPackets,
                     entry.sipper.wifiRxPackets,
                     entry.sipper.wifiTxPackets,
+                    entry.sipper.totalPowerMah,
                 };
             } break;
             case BLUETOOTH:
@@ -214,6 +220,7 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
                     R.string.usage_type_data_send,
                     R.string.usage_type_data_wifi_recv,
                     R.string.usage_type_data_wifi_send,
+                    R.string.usage_type_computed_power,
                 };
                 values = new double[] {
                     entry.sipper.usageTimeMs,
@@ -224,6 +231,7 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
                     entry.sipper.mobileTxPackets,
                     entry.sipper.wifiRxPackets,
                     entry.sipper.wifiTxPackets,
+                    entry.sipper.totalPowerMah,
                 };
             } break;
             case UNACCOUNTED:
@@ -255,10 +263,12 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
             default:
             {
                 types = new int[] {
-                    R.string.usage_type_on_time
+                    R.string.usage_type_on_time,
+                    R.string.usage_type_computed_power,
                 };
                 values = new double[] {
-                    entry.sipper.usageTimeMs
+                    entry.sipper.usageTimeMs,
+                    entry.sipper.totalPowerMah,
                 };
             }
         }
