@@ -22,9 +22,7 @@ import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.service.persistentdata.PersistentDataBlockManager;
 import com.android.internal.logging.MetricsLogger;
-import com.android.internal.os.storage.ExternalStorageFormatter;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserManager;
@@ -111,18 +109,12 @@ public class MasterClearConfirm extends InstrumentedFragment {
     };
 
     private void doMasterClear() {
-        if (mEraseSdCard) {
-            Intent intent = new Intent(ExternalStorageFormatter.FORMAT_AND_FACTORY_RESET);
-            intent.putExtra(Intent.EXTRA_REASON, "MasterClearConfirm");
-            intent.setComponent(ExternalStorageFormatter.COMPONENT_NAME);
-            getActivity().startService(intent);
-        } else {
-            Intent intent = new Intent(Intent.ACTION_MASTER_CLEAR);
-            intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
-            intent.putExtra(Intent.EXTRA_REASON, "MasterClearConfirm");
-            getActivity().sendBroadcast(intent);
-            // Intent handling is asynchronous -- assume it will happen soon.
-        }
+        Intent intent = new Intent(Intent.ACTION_MASTER_CLEAR);
+        intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
+        intent.putExtra(Intent.EXTRA_REASON, "MasterClearConfirm");
+        intent.putExtra(Intent.EXTRA_WIPE_EXTERNAL_STORAGE, mEraseSdCard);
+        getActivity().sendBroadcast(intent);
+        // Intent handling is asynchronous -- assume it will happen soon.
     }
 
     /**
