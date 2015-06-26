@@ -23,8 +23,6 @@ import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.os.CancellationSignal;
 import android.os.Handler;
-import android.os.PowerManager;
-import android.os.SystemClock;
 
 import com.android.settings.ChooseLockSettingsHelper;
 
@@ -36,7 +34,6 @@ public class FingerprintEnrollSidecar extends Fragment {
     private int mEnrollmentSteps = -1;
     private int mEnrollmentRemaining = 0;
     private Listener mListener;
-    private PowerManager mPowerManager;
     private boolean mEnrolling;
     private CancellationSignal mEnrollmentCancel;
     private Handler mHandler = new Handler();
@@ -52,7 +49,6 @@ public class FingerprintEnrollSidecar extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        mPowerManager = activity.getSystemService(PowerManager.class);
         mToken = activity.getIntent().getByteArrayExtra(
                 ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
     }
@@ -120,11 +116,6 @@ public class FingerprintEnrollSidecar extends Fragment {
             if (mListener != null) {
                 mListener.onEnrollmentProgressChange(mEnrollmentSteps, remaining);
             }
-
-            // Treat fingerprint like a touch event
-            mPowerManager.userActivity(SystemClock.uptimeMillis(),
-                    PowerManager.USER_ACTIVITY_EVENT_OTHER,
-                    PowerManager.USER_ACTIVITY_FLAG_NO_CHANGE_LIGHTS);
         }
 
         @Override
