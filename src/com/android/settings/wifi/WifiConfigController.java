@@ -254,14 +254,14 @@ public class WifiConfigController implements TextWatcher,
                     mConfigUi.setSubmitButton(res.getString(R.string.wifi_connect));
                 } else {
                     if (state != null) {
+                        boolean isEphemeral = mAccessPoint.isEphemeral();
                         WifiConfiguration config = mAccessPoint.getConfig();
-                        boolean isEphimeral = mAccessPoint.isSaved() == false;
                         String providerFriendlyName = null;
                         if (config != null && config.isPasspoint()) {
                             providerFriendlyName = config.providerFriendlyName;
                         }
                         String summary = AccessPoint.getSummary(
-                                mConfigUi.getContext(), state, isEphimeral, providerFriendlyName);
+                                mConfigUi.getContext(), state, isEphemeral, providerFriendlyName);
                         addRow(group, R.string.wifi_status, summary);
                     }
 
