@@ -198,7 +198,7 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
                     R.string.usage_type_computed_power,
                 };
                 values = new double[] {
-                    entry.sipper.usageTimeMs,
+                    entry.sipper.wifiRunningTimeMs,
                     entry.sipper.cpuTimeMs,
                     entry.sipper.cpuFgTimeMs,
                     entry.sipper.wakeLockTimeMs,
