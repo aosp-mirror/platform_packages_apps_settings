@@ -324,6 +324,18 @@
         <item>AKA\'</item>
     </string-array>
 
+    <!-- Type of EAP method when EAP SIM, AKA, AKA' are not supported -->
+    <string-array name="eap_method_without_sim_auth">
+        <!-- Do not translate. -->
+        <item>PEAP</item>
+        <!-- Do not translate. -->
+        <item>TLS</item>
+        <!-- Do not translate. -->
+        <item>TTLS</item>
+        <!-- Do not translate. -->
+        <item>PWD</item>
+    </string-array>
+
    <!-- Wi-Fi AP band settings.  Either 2.4GHz or 5GHz. -->
    <!-- Note that adding/removing/moving the items will need wifi settings code change. -->
     <string-array name="wifi_ap_band_config_full">
