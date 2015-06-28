@@ -57,6 +57,7 @@ import android.widget.TextView;
 import com.android.settings.ProxySelector;
 import com.android.settings.R;
 import com.android.settingslib.wifi.AccessPoint;
+import com.android.settings.Utils;
 
 import java.net.InetAddress;
 import java.net.Inet4Address;
@@ -637,6 +638,16 @@ public class WifiConfigController implements TextWatcher,
         if (mEapMethodSpinner == null) {
             mEapMethodSpinner = (Spinner) mView.findViewById(R.id.method);
             mEapMethodSpinner.setOnItemSelectedListener(this);
+            if (Utils.isWifiOnly(mContext) || !mContext.getResources().getBoolean(
+                    com.android.internal.R.bool.config_eap_sim_based_auth_supported)) {
+                String[] eapMethods = mContext.getResources().getStringArray(
+                        R.array.eap_method_without_sim_auth);
+                ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(mContext,
+                        android.R.layout.simple_spinner_item, eapMethods);
+                spinnerAdapter.setDropDownViewResource(
+                        android.R.layout.simple_spinner_dropdown_item);
+                mEapMethodSpinner.setAdapter(spinnerAdapter);
+            }
             mPhase2Spinner = (Spinner) mView.findViewById(R.id.phase2);
             mEapCaCertSpinner = (Spinner) mView.findViewById(R.id.ca_cert);
             mEapUserCertSpinner = (Spinner) mView.findViewById(R.id.user_cert);
