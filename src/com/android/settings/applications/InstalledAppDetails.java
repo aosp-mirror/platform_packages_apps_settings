@@ -157,6 +157,8 @@ public class InstalledAppDetails extends AppInfoBase
     protected ProcStatsData mStatsManager;
     protected ProcStatsPackageEntry mStats;
 
+    private BroadcastReceiver mPermissionReceiver;
+
     private boolean handleDisableable(Button button) {
         boolean disableable = false;
         // Try to prevent the user from bricking their phone
@@ -312,6 +314,10 @@ public class InstalledAppDetails extends AppInfoBase
     @Override
     public void onDestroy() {
         TrafficStats.closeQuietly(mStatsSession);
+        if (mPermissionReceiver != null) {
+            getContext().unregisterReceiver(mPermissionReceiver);
+            mPermissionReceiver = null;
+        }
 
         super.onDestroy();
     }
@@ -489,8 +495,11 @@ public class InstalledAppDetails extends AppInfoBase
         // Update the preference summaries.
         Activity context = getActivity();
         mStoragePreference.setSummary(AppStorageSettings.getSummary(mAppEntry, context));
-        PermissionsSummaryHelper.getPermissionSummary(getContext(), mPackageName,
-                mPermissionCallback);
+        if (mPermissionReceiver != null) {
+            getContext().unregisterReceiver(mPermissionReceiver);
+        }
+        mPermissionReceiver = PermissionsSummaryHelper.getPermissionSummary(getContext(),
+                mPackageName, mPermissionCallback);
         mLaunchPreference.setSummary(Utils.getLaunchByDeafaultSummary(mAppEntry, mUsbManager,
                 mPm, context));
         mNotificationPreference.setSummary(getNotificationSummary(mAppEntry, context,
@@ -941,6 +950,10 @@ public class InstalledAppDetails extends AppInfoBase
             = new PermissionsResultCallback() {
         @Override
         public void onPermissionSummaryResult(int[] counts, CharSequence[] groupLabels) {
+            if (getActivity() == null) {
+                return;
+            }
+            mPermissionReceiver = null;
             final Resources res = getResources();
             CharSequence summary = null;
             boolean enabled = false;
