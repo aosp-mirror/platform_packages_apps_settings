@@ -27,21 +27,21 @@ public class PermissionsSummaryHelper {
     private static final String ACTION_APP_COUNT_RESPONSE
             = "com.android.settings.APP_COUNT_RESPONSE";
 
-    public static void getPermissionSummary(Context context, String pkg,
+    public static BroadcastReceiver getPermissionSummary(Context context, String pkg,
             PermissionsResultCallback callback) {
         Intent request = new Intent(Intent.ACTION_GET_PERMISSIONS_COUNT);
         request.putExtra(Intent.EXTRA_PACKAGE_NAME, pkg);
-        sendPermissionRequest(context, ACTION_PERM_COUNT_RESPONSE, request, callback);
+        return sendPermissionRequest(context, ACTION_PERM_COUNT_RESPONSE, request, callback);
     }
 
-    public static void getAppWithPermissionsCounts(Context context,
+    public static BroadcastReceiver getAppWithPermissionsCounts(Context context,
             PermissionsResultCallback callback) {
         Intent request = new Intent(Intent.ACTION_GET_PERMISSIONS_COUNT);
-        sendPermissionRequest(context, ACTION_APP_COUNT_RESPONSE, request, callback);
+        return sendPermissionRequest(context, ACTION_APP_COUNT_RESPONSE, request, callback);
     }
 
-    private static void sendPermissionRequest(Context context, String action, Intent request,
-            final PermissionsResultCallback callback) {
+    private static BroadcastReceiver sendPermissionRequest(Context context, String action,
+            Intent request, final PermissionsResultCallback callback) {
         BroadcastReceiver receiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -59,6 +59,7 @@ public class PermissionsSummaryHelper {
         request.putExtra(Intent.EXTRA_GET_PERMISSIONS_RESPONSE_INTENT, action);
         request.setFlags(Intent.FLAG_RECEIVER_FOREGROUND);
         context.sendBroadcast(request);
+        return receiver;
     }
 
     public interface PermissionsResultCallback {
