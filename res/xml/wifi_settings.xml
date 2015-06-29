@@ -19,4 +19,9 @@
         android:title="@string/wifi_settings"
         settings:keywords="@string/keywords_wifi">
 
+    <!-- Needed so PreferenceGroupAdapter allows AccessPointPreference to be
+         recycled. Removed in onResume -->
+    <com.android.settings.wifi.AccessPointPreference
+        android:key="dummy" />
+
 </PreferenceScreen>
