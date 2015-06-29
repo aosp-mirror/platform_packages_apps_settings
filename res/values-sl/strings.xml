@@ -358,8 +358,7 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4504501581228672208">"Možnost zaklepanja zaslona onemogočena. Prstni odtis lahko še vedno uporabljate za potrjevanje nakupov in dostop do aplikacij. "<annotation id="url">"Več o tem"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Dvignite prst in se znova dotaknite tipala"</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"Dodate lahko do toliko prstnih odtisov: <xliff:g id="COUNT">%d</xliff:g>"</string>
-    <!-- no translation found for confirm_fingerprint_icon_content_description (5255544532157079096) -->
-    <skip />
+    <string name="confirm_fingerprint_icon_content_description" msgid="5255544532157079096">"Uporabite prstni odtis, če želite nadaljevati."</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Šifriranje"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"Šifriraj tablični računalnik"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"Šifriraj telefon"</string>
@@ -529,7 +528,7 @@
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Dodatno"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Dodatne nast. za Bluetooth"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"Ko je Bluetooth vklopljen, lahko vaša naprava komunicira z drugimi napravami Bluetooth v bližini."</string>
-    <string name="ble_scan_notify_text" msgid="3719383048635344071">"Zaradi večje natančnosti ugotavljanja lokacije bodo aplikacije in storitve iskale naprave Bluetooth, tudi če je Bluetooth izklopljen. To lahko spremenite v <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>nastavitvah iskanja<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
+    <string name="ble_scan_notify_text" msgid="1295915006005700650">"Zaradi večje natančnosti ugotavljanja lokacije lahko sistemske aplikacije in storitve še vedno zaznajo naprave Bluetooth. To lahko spremenite v <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>nastavitvah iskanja<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"Vzpostavi povezavo z ..."</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"Povezava med napravo <xliff:g id="DEVICE_NAME">%1$s</xliff:g> in zvokom nosilca podatkov bo prekinjena."</string>
     <string name="bluetooth_disconnect_headset_profile" msgid="8635908811168780720">"Povezava med napravo <xliff:g id="DEVICE_NAME">%1$s</xliff:g> in prostoročnim zvokom bo prekinjena."</string>
@@ -599,7 +598,7 @@
     <string name="wifi_automatically_connect_summary" msgid="6722194413023965902">"Naj pomočnik za Wi-Fi samodejno vzpostavi povezavo z odprtimi omrežji visoke kakovosti"</string>
     <string name="wifi_select_assistant_dialog_title" msgid="4014645210955009439">"Izbira pomočnika"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Namestitev potrdil"</string>
-    <string name="wifi_scan_notify_text" msgid="3135282824516650989">"Zaradi večje natančnosti ugotavljanja lokacije bodo aplikacije in storitve iskale omrežja Wi‑Fi, tudi če je Wi‑Fi izklopljen. To lahko spremenite v <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>nastavitvah iskanja<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
+    <string name="wifi_scan_notify_text" msgid="5593805423071186757">"Zaradi večje natančnosti ugotavljanja lokacije lahko sistemske aplikacije in storitve še vedno iščejo omrežja Wi-Fi. To lahko spremenite v <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>nastavitvah iskanja<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="7104867814641144485">"Tega ne kaži več"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"Ohrani povezavo Wi-Fi med spanjem"</string>
     <string name="wifi_setting_on_during_sleep_title" msgid="8308975500029751565">"Wi-Fi vklop. v stanju priprav."</string>
@@ -1186,15 +1185,15 @@
     <string name="location_high_battery_use" msgid="517199943258508020">"Visoka poraba akumulatorja"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"Nizka poraba akumulatorja"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Način ugotavljanja lokacije"</string>
-    <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"Uporaba GPS-ja, Wi-Fi-ja in mobilnih omrežij za določanje lokacije"</string>
-    <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"Uporaba Wi-Fi-ja in mobilnih omrežij za določanje lokacije"</string>
+    <string name="location_mode_high_accuracy_description" msgid="5703350404315028607">"Uporaba GPS-ja, Bluetootha, Wi-Fi-ja in mobilnih omrežij za določanje lokacije"</string>
+    <string name="location_mode_battery_saving_description" msgid="8361848607963121770">"Uporaba Wi-Fi-ja, Bluetootha in mobilnih omrežij za določanje lokacije"</string>
     <string name="location_mode_sensors_only_description" msgid="788127681455735699">"Uporaba GPS-ja za določanje lokacije"</string>
     <string name="location_menu_scanning" msgid="8536245838478802959">"Iskanje"</string>
     <string name="location_scanning_screen_title" msgid="4408076862929611554">"Iskanje"</string>
     <string name="location_scanning_wifi_always_scanning_title" msgid="6216705505621183645">"Iskanje omrežij Wi‑Fi"</string>
-    <string name="location_scanning_wifi_always_scanning_description" msgid="2070686681074461301">"Izboljšajte natančnost lokacijskih podatkov, tako da aplikacijam in storitvam omogočite iskanje omrežij Wi-Fi, tudi ko je povezava Wi-Fi izklopljena."</string>
+    <string name="location_scanning_wifi_always_scanning_description" msgid="8036382029606868081">"Izboljšajte natančnost lokacijskih podatkov, tako da sistemskim aplikacijam in storitvam omogočite, da kadar koli zaznajo omrežja Wi-Fi."</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="5444989508204520019">"Iskanje naprav Bluetooth"</string>
-    <string name="location_scanning_bluetooth_always_scanning_description" msgid="7308864666710919365">"Izboljšajte natančnost lokacijskih podatkov, tako da sistemskim storitvam omogočite iskanje naprav Bluetooth, tudi ko je Bluetooth izklopljen."</string>
+    <string name="location_scanning_bluetooth_always_scanning_description" msgid="8602726521250591852">"Izboljšajte natančnost lokacijskih podatkov, tako da sistemskim aplikacijam in storitvam omogočite, da kadar koli zaznajo naprave Bluetooth."</string>
     <string name="location_network_based" msgid="6010456018401296590">"Lokac. z Wi-Fi-jem in mob. om."</string>
     <string name="location_neighborhood_level" msgid="5141318121229984788">"Aplikacijam omogočite hitrejše določanje lokacije z Googlovo storitvijo za določanje lokacije. Anonimni podatki o lokaciji bodo zbrani in poslani Googlu."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Določanje lokacije z Wi‑Fi-jem"</string>
