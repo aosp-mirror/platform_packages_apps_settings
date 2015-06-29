@@ -356,8 +356,7 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4504501581228672208">"Opțiunea blocării ecranului este dezactivată. Încă vă puteți folosi amprenta pentru a autoriza achizițiile și accesul aplicațiilor. "<annotation id="url">"Aflați mai multe"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Ridicați degetul, apoi atingeți senzorul din nou"</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"Puteți să adăugați până la <xliff:g id="COUNT">%d</xliff:g> (de) amprente"</string>
-    <!-- no translation found for confirm_fingerprint_icon_content_description (5255544532157079096) -->
-    <skip />
+    <string name="confirm_fingerprint_icon_content_description" msgid="5255544532157079096">"Folosiți amprenta pentru a continua."</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Criptare"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"Criptaţi tableta"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"Criptaţi telefonul"</string>
@@ -521,7 +520,7 @@
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Avansate"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Setări Bluetooth avansate"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"Activarea Bluetooth permite comunicarea cu alte dispozitive Bluetooth din apropiere."</string>
-    <string name="ble_scan_notify_text" msgid="3719383048635344071">"Pentru a îmbunătăți precizia locației, aplicațiile și serviciile vor căuta dispozitive Bluetooth, chiar și atunci când conexiunea Bluetooth este dezactivată. Puteți să schimbați acest aspect din <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>setările de scanare<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
+    <string name="ble_scan_notify_text" msgid="1295915006005700650">"Pentru a îmbunătăți precizia localizării, aplicațiile și serviciile de sistem pot totuși să detecteze dispozitivele Bluetooth. Puteți să schimbați acest aspect din <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>setările de scanare<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"Conectaţi-vă la..."</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> va fi deconectat de la media audio."</string>
     <string name="bluetooth_disconnect_headset_profile" msgid="8635908811168780720">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> va fi deconectat de la componenta audio mâini libere."</string>
@@ -591,7 +590,7 @@
     <string name="wifi_automatically_connect_summary" msgid="6722194413023965902">"Permiteți ca un asistent Wi‑Fi să conecteze automat dispozitivul la rețele de calitate deschise"</string>
     <string name="wifi_select_assistant_dialog_title" msgid="4014645210955009439">"Alegeți asistentul"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Instalați certificate"</string>
-    <string name="wifi_scan_notify_text" msgid="3135282824516650989">"Pentru a îmbunătăți precizia locației, aplicațiile și serviciile vor căuta rețele Wi‑Fi, chiar și atunci când conexiunea Wi-Fi este dezactivată. Puteți să schimbați acest aspect din <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>setările de scanare<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
+    <string name="wifi_scan_notify_text" msgid="5593805423071186757">"Pentru a îmbunătăți precizia localizării, aplicațiile și serviciile de sistem pot totuși să caute rețelele Wi‑Fi. Puteți să schimbați acest aspect din <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>setările de scanare<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="7104867814641144485">"Nu mai afișa"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"Mențineți Wi-Fi activat în modul inactiv"</string>
     <string name="wifi_setting_on_during_sleep_title" msgid="8308975500029751565">"Wi-Fi pornit în modul inactiv"</string>
@@ -1177,15 +1176,15 @@
     <string name="location_high_battery_use" msgid="517199943258508020">"Utilizare intensă a bateriei"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"Utilizare redusă a bateriei"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Mod de localizare"</string>
-    <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"Utilizează GPS, Wi-Fi și rețelele mobile pentru determinarea locației"</string>
-    <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"Utilizează rețelele Wi-Fi și mobile pentru determinarea locației"</string>
+    <string name="location_mode_high_accuracy_description" msgid="5703350404315028607">"Utilizează GPS, Wi-Fi, Bluetooth sau rețelele mobile pentru determinarea locației"</string>
+    <string name="location_mode_battery_saving_description" msgid="8361848607963121770">"Utilizează Wi-Fi, Bluetooth sau rețelele mobile pentru determinarea locației"</string>
     <string name="location_mode_sensors_only_description" msgid="788127681455735699">"Folosiți GPS-ul pentru a stabili locația"</string>
     <string name="location_menu_scanning" msgid="8536245838478802959">"Scanare"</string>
     <string name="location_scanning_screen_title" msgid="4408076862929611554">"Scanare"</string>
     <string name="location_scanning_wifi_always_scanning_title" msgid="6216705505621183645">"Căutare rețele Wi-Fi"</string>
-    <string name="location_scanning_wifi_always_scanning_description" msgid="2070686681074461301">"Îmbunătățiți localizarea permițând aplicațiilor și serviciilor să caute rețele Wi-Fi, chiar și atunci când conexiunea Wi‑Fi este dezactivată"</string>
+    <string name="location_scanning_wifi_always_scanning_description" msgid="8036382029606868081">"Îmbunătățiți localizarea permițând aplicațiilor și serviciilor de sistem să detecteze rețelele Wi-Fi oricând."</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="5444989508204520019">"Căutare dispozitive Bluetooth"</string>
-    <string name="location_scanning_bluetooth_always_scanning_description" msgid="7308864666710919365">"Îmbunătățiți localizarea permițând serviciilor de sistem să caute dispozitive Bluetooth, chiar și atunci când conexiunea Bluetooth este dezactivată"</string>
+    <string name="location_scanning_bluetooth_always_scanning_description" msgid="8602726521250591852">"Îmbunătățiți localizarea permițând aplicațiilor și serviciilor de sistem să detecteze dispozitivele Bluetooth oricând."</string>
     <string name="location_network_based" msgid="6010456018401296590">"Localizare prin Wi-Fi și mobil"</string>
     <string name="location_neighborhood_level" msgid="5141318121229984788">"Aplicaţiile estimează mai rapid locaţia cu serviciul de localizare Google. Se colectează/trimit la Google date anonime de localizare."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Locație stabilită prin Wi-Fi"</string>
@@ -1377,13 +1376,10 @@
     <string name="app_install_location_title" msgid="2068975150026852168">"Locaţie preferată de instalare"</string>
     <string name="app_install_location_summary" msgid="5155453752692959098">"Schimbaţi locaţia preferată de instalare pentru noile aplicații"</string>
     <string name="app_disable_dlg_title" msgid="3916469657537695436">"Dezactiv. aplic. încorporată?"</string>
-    <!-- no translation found for app_disable_dlg_positive (7375627244201714263) -->
-    <skip />
-    <!-- no translation found for app_disable_dlg_text (7824930380425568584) -->
-    <skip />
+    <string name="app_disable_dlg_positive" msgid="7375627244201714263">"Dezactivați aplicația"</string>
+    <string name="app_disable_dlg_text" msgid="7824930380425568584">"Dacă dezactivați această aplicație, este posibil ca alte aplicații să nu mai funcționeze corespunzător."</string>
     <string name="app_special_disable_dlg_title" msgid="2690148680327142674">"Ștergeţi datele și dezactivaţi aplicația?"</string>
-    <!-- no translation found for app_special_disable_dlg_text (1007112763234313018) -->
-    <skip />
+    <string name="app_special_disable_dlg_text" msgid="1007112763234313018">"Dacă dezactivați această aplicație, este posibil ca alte aplicații să nu mai funcționeze corespunzător. În plus, datele dvs. vor fi șterse."</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"Dezactivaţi notificările?"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"Dacă dezactivaţi notificările pentru această aplicație, puteţi pierde alerte și actualizări importante."</string>
     <string name="app_ops_settings" msgid="5108481883575527511">"Operații ale aplicației"</string>

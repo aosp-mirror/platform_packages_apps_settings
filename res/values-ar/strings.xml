@@ -362,8 +362,7 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4504501581228672208">"خيار قفل الشاشة معطّل. ولا يزال بإمكانك استخدام بصمة إصبعك للسماح بعمليات الشراء والوصول إلى التطبيق. "<annotation id="url">"مزيد من المعلومات"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"ارفع الإصبع، ثم المس جهاز الاستشعار مرة أخرى"</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"يمكنك إضافة ما يصل إلى <xliff:g id="COUNT">%d</xliff:g> بصمات الإصبع"</string>
-    <!-- no translation found for confirm_fingerprint_icon_content_description (5255544532157079096) -->
-    <skip />
+    <string name="confirm_fingerprint_icon_content_description" msgid="5255544532157079096">"يمكنك استخدام بصمة الإصبع للمتابعة."</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"التشفير"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"تشفير الجهاز اللوحي"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"تشفير الهاتف"</string>
@@ -545,7 +544,7 @@
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"إعدادات متقدمة"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"إعدادات بلوتوث المتقدمة"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"عند تشغيل البلوتوث، يمكن للجهاز التواصل مع أجهزة البلوتوث الأخرى القريبة."</string>
-    <string name="ble_scan_notify_text" msgid="3719383048635344071">"لتحسين دقة الموقع، ستبحث التطبيقات والخدمات عن أجهزة بلوتوث، حتى في حالة إيقاف البلوتوث، ويمكنك تغيير هذا في <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>إعدادات البحث.<xliff:g id="LINK_END_1">LINK_END</xliff:g>"</string>
+    <string name="ble_scan_notify_text" msgid="1295915006005700650">"لتحسين دقة الموقع، سيظل بإمكان تطبيقات وخدمات النظام اكتشاف أجهزة بلوتوث. ويمكنك تغيير ذلك من خلال <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>إعدادات البحث<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"الاتصال بـ…"</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"سيتم إلغاء توصيل <xliff:g id="DEVICE_NAME">%1$s</xliff:g> من صوت الوسائط."</string>
     <string name="bluetooth_disconnect_headset_profile" msgid="8635908811168780720">"سيتم إلغاء توصيل <xliff:g id="DEVICE_NAME">%1$s</xliff:g> من صوت السماعة بدون استخدام اليدين."</string>
@@ -615,7 +614,7 @@
     <string name="wifi_automatically_connect_summary" msgid="6722194413023965902">"‏السماح لمساعد Wi‑Fi بالاتصال بالشبكات المفتوحة التي تم تحديد جودتها العالية"</string>
     <string name="wifi_select_assistant_dialog_title" msgid="4014645210955009439">"اختيار المساعد"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"تثبيت شهادات"</string>
-    <string name="wifi_scan_notify_text" msgid="3135282824516650989">"‏لتحسين دقة الموقع، ستبحث التطبيقات والخدمات عن شبكات Wi‑Fi، حتى في حالة إيقاف Wi‑Fi، ويمكنك تغيير هذا في <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>إعدادات البحث<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
+    <string name="wifi_scan_notify_text" msgid="5593805423071186757">"‏لتحسين دقة الموقع، سيظل بإمكان تطبيقات وخدمات النظام البحث عن شبكات Wi-Fi. ويمكنك تغيير ذلك من خلال <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>إعدادات البحث<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="7104867814641144485">"عدم الإظهار مرة أخرى"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"‏احتفاظ بـ Wi-Fi في وضع السكون"</string>
     <string name="wifi_setting_on_during_sleep_title" msgid="8308975500029751565">"‏تشغيل Wi‑Fi أثناء وضع السكون"</string>
@@ -1204,15 +1203,15 @@
     <string name="location_high_battery_use" msgid="517199943258508020">"استخدام عالٍ للبطارية"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"استخدام منخفض للبطارية"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"وضع الموقع"</string>
-    <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"‏استخدام نظام تحديد المواقع العالمي (GPS) وشبكات Wi‑Fi وشبكات الجوّال لتحديد الموقع"</string>
-    <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"‏استخدام شبكات Wi‑Fi وشبكات الجوّال لتحديد الموقع"</string>
+    <string name="location_mode_high_accuracy_description" msgid="5703350404315028607">"‏استخدام نظام تحديد المواقع العالمي (GPS) وشبكات Wi‑Fi وبلوتوث وشبكات الجوّال لتحديد الموقع"</string>
+    <string name="location_mode_battery_saving_description" msgid="8361848607963121770">"‏استخدام شبكات Wi‑Fi وبلوتوث وشبكات الجوّال لتحديد الموقع"</string>
     <string name="location_mode_sensors_only_description" msgid="788127681455735699">"‏استخدام نظام تحديد المواقع العالمي (GPS) في تحديد الموقع"</string>
     <string name="location_menu_scanning" msgid="8536245838478802959">"البحث عن الموقع"</string>
     <string name="location_scanning_screen_title" msgid="4408076862929611554">"البحث عن شبكة لاسلكية"</string>
     <string name="location_scanning_wifi_always_scanning_title" msgid="6216705505621183645">"‏البحث عن Wi‑Fi"</string>
-    <string name="location_scanning_wifi_always_scanning_description" msgid="2070686681074461301">"‏يمكنك تحسين الموقع من خلال السماح للتطبيقات والخدمات بالبحث عن شبكات Wi‑Fi حتى في حالة إيقاف Wi‑Fi."</string>
+    <string name="location_scanning_wifi_always_scanning_description" msgid="8036382029606868081">"‏يمكنك تحسين دقة الموقع من خلال السماح لتطبيقات وخدمات النظام باكتشاف شبكات Wi-Fi في أي وقت."</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="5444989508204520019">"البحث عن بلوتوث"</string>
-    <string name="location_scanning_bluetooth_always_scanning_description" msgid="7308864666710919365">"يمكنك تحسين دقة الموقع بالسماح لخدمات النظام بالبحث عن أجهزة بلوتوث، حتى في حالة إيقاف البلوتوث."</string>
+    <string name="location_scanning_bluetooth_always_scanning_description" msgid="8602726521250591852">"يمكنك تحسين دقة الموقع من خلال السماح لتطبيقات وخدمات النظام باكتشاف أجهزة بلوتوث في أي وقت."</string>
     <string name="location_network_based" msgid="6010456018401296590">"‏موقع شبكة Wi‑Fi وشبكة الجوّال"</string>
     <string name="location_neighborhood_level" msgid="5141318121229984788">"‏دع التطبيقات تستخدم خدمة الموقع من Google لتقييم موقعك بشكل أسرع. سيتم جمع بيانات الموقع غير محددة الهوية وإرسالها إلى Google."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"‏الموقع الذي تم تحديده بواسطة Wi-Fi"</string>

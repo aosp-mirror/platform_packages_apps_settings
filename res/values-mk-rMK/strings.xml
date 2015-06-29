@@ -354,8 +354,7 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4504501581228672208">"Опцијата за заклучување на екранот е оневозможена. Сѐ уште може да го користите отпечатокот за да авторизирате купувања и да пристапувате до апликации. "<annotation id="url">"Дознајте повеќе"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Подигнете го прстот, потоа допрете го сензорот повторно"</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"Може да додавате до <xliff:g id="COUNT">%d</xliff:g> отпечатоци"</string>
-    <!-- no translation found for confirm_fingerprint_icon_content_description (5255544532157079096) -->
-    <skip />
+    <string name="confirm_fingerprint_icon_content_description" msgid="5255544532157079096">"Користете го отпечатокот на прст за да продолжите."</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Шифрирање"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"Шифрирај таблет"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"Шифрирај телефон"</string>
@@ -513,7 +512,7 @@
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Напредни"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Напреден Bluetooth"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"Кога е вклучен Bluetooth, уредот може да комуницира со други уреди со Bluetooth во близина."</string>
-    <string name="ble_scan_notify_text" msgid="3719383048635344071">"За да се подобри точноста на локацијата, апликациите и услугите ќе скенираат уреди со Bluetooth, дури и кога Bluetooth е исклучен. Може да го измените ова во <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>поставки за скенирање<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
+    <string name="ble_scan_notify_text" msgid="1295915006005700650">"За да се подобри точноста на локацијата, системските апликации и услуги сѐ уште може да откриваат уреди со Bluetooth. Ова може да го измените во <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>поставките за скенирање<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"Поврзи се со..."</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ќе се исклучи од аудио на медиум."</string>
     <string name="bluetooth_disconnect_headset_profile" msgid="8635908811168780720">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ќе се исклучи од аудио на интерфон."</string>
@@ -583,7 +582,7 @@
     <string name="wifi_automatically_connect_summary" msgid="6722194413023965902">"Дозволете помошникот за Wi‑Fi автоматски да се поврзува со отворени мрежи со висок квалитет"</string>
     <string name="wifi_select_assistant_dialog_title" msgid="4014645210955009439">"Изберете помошник"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Инсталирај сертификати"</string>
-    <string name="wifi_scan_notify_text" msgid="3135282824516650989">"За да се подобри точноста на локацијата, апликациите и услугите ќе скенираат Wi‑Fi мрежи, дури и кога Wi‑Fi е исклучен. Може да го измените ова во <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>поставки за скенирање<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
+    <string name="wifi_scan_notify_text" msgid="5593805423071186757">"За да се подобри точноста на локацијата, системските апликации и услуги сѐ уште може да скенираат Wi‑Fi мрежи. Ова може да го измените во <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>поставките за скенирање<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="7104867814641144485">"Не прикажувај повторно"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"Задржи Wi-Fi во текот на режим на мирување"</string>
     <string name="wifi_setting_on_during_sleep_title" msgid="8308975500029751565">"Вклучена Wi‑Fi при мирување"</string>
@@ -1168,15 +1167,15 @@
     <string name="location_high_battery_use" msgid="517199943258508020">"Голема употреба на батеријата"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"Мала употреба на батеријата"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Режим на локација"</string>
-    <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"Користи мрежи на GPS, на Wi‑Fi и на мобилен за да утврдиш локација"</string>
-    <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"Користи мрежи на Wi‑Fi и на мобилен за да утврдиш локација"</string>
+    <string name="location_mode_high_accuracy_description" msgid="5703350404315028607">"Користи GPS, Wi‑Fi, Bluetooth или мобилни мрежи за да ја утврдиш локацијата"</string>
+    <string name="location_mode_battery_saving_description" msgid="8361848607963121770">"Користи Wi‑Fi, Bluetooth или мобилни мрежи за да ја утврдиш локацијата"</string>
     <string name="location_mode_sensors_only_description" msgid="788127681455735699">"Користи ГПС за да се утврди локацијата"</string>
     <string name="location_menu_scanning" msgid="8536245838478802959">"Се скенира"</string>
     <string name="location_scanning_screen_title" msgid="4408076862929611554">"Се скенира"</string>
     <string name="location_scanning_wifi_always_scanning_title" msgid="6216705505621183645">"Скенирање на Wi‑Fi"</string>
-    <string name="location_scanning_wifi_always_scanning_description" msgid="2070686681074461301">"Подобрете ја локацијата овозможувајќи им на системските услуги да скенираат Wi‑Fi мрежи, дури и кога Wi‑Fi е исклучен"</string>
+    <string name="location_scanning_wifi_always_scanning_description" msgid="8036382029606868081">"За да ја подобрите локацијата, дозволете системските апликации и услуги да откриваат Wi‑Fi мрежи во секое време."</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="5444989508204520019">"Скенирање на Bluetooth"</string>
-    <string name="location_scanning_bluetooth_always_scanning_description" msgid="7308864666710919365">"Подобрете ја локацијата овозможувајќи им на системските услуги да скенираат уреди со Bluetooth, дури и кога Bluetooth е исклучен"</string>
+    <string name="location_scanning_bluetooth_always_scanning_description" msgid="8602726521250591852">"За да ја подобрите локацијата, дозволете системските апликации и услуги да откриваат уреди со Bluetooth во секое време."</string>
     <string name="location_network_based" msgid="6010456018401296590">"Лок. на мр. на Wi‑Fi и на моб."</string>
     <string name="location_neighborhood_level" msgid="5141318121229984788">"За брза процена, овозможи услуга за локација на Google. Анонимните податоци за локација се собираат и се испраќаат на Google."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Локацијата е утврдена со Wi-Fi"</string>

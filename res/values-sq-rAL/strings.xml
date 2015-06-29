@@ -354,8 +354,7 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4504501581228672208">"Opsioni i kyçjes së ekranit është çaktivizuar. Mund të vazhdosh të përdorësh gjurmën e gishtit për të autorizuar blerjet dhe qasjen në aplikacione. "<annotation id="url">"Mëso më shumë"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Ngrije gishtin dhe më pas preke përsëri sensorin"</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"Mund të shtosh deri në <xliff:g id="COUNT">%d</xliff:g> gjurma të gishtave"</string>
-    <!-- no translation found for confirm_fingerprint_icon_content_description (5255544532157079096) -->
-    <skip />
+    <string name="confirm_fingerprint_icon_content_description" msgid="5255544532157079096">"Përdor gjurmën e gishtit për të vazhduar."</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Enkriptimi"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"Enkripto tabletin"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"Enkripto telefonin"</string>
@@ -513,7 +512,7 @@
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Të përparuara"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Cilësimet e përparuara të Bluetooth-it"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"Kur Bluetooth-i është i aktivizuar, pajisja jote mund të komunikojë me pajisjet e tjera me Bluetooth në afërsi."</string>
-    <string name="ble_scan_notify_text" msgid="3719383048635344071">"Për të përmirësuar saktësinë e vendndodhjes, aplikacionet dhe shërbimet do të skanojnë për pajisje me Bluetooth, edhe kur Bluetooth-i është joaktiv. Këtë mund ta ndryshosh te <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>cilësimet e skanimit<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
+    <string name="ble_scan_notify_text" msgid="1295915006005700650">"Për të përmirësuar saktësinë e vendndodhjes, aplikacionet dhe shërbimet e sistemit mund t\'i zbulojnë akoma pajisjet me Bluetooth. Këtë mund ta ndryshosh te <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>cilësimet e skanimit<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"Lidhu me…"</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> do të shkëputet nga audioja e medias."</string>
     <string name="bluetooth_disconnect_headset_profile" msgid="8635908811168780720">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> do të shkëputet nga audioja \"pa duar\"."</string>
@@ -583,7 +582,7 @@
     <string name="wifi_automatically_connect_summary" msgid="6722194413023965902">"Lejo një ndihmës Wi‑Fi të lidhet automatikisht për të hapur rrjetet me cilësi të lartë"</string>
     <string name="wifi_select_assistant_dialog_title" msgid="4014645210955009439">"Zgjidh ndihmësin"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Instalo certifikatat"</string>
-    <string name="wifi_scan_notify_text" msgid="3135282824516650989">"Për të përmirësuar saktësinë e vendndodhjes, aplikacionet dhe shërbimet do të skanojnë për rrjete Wi‑Fi, edhe kur Wi‑Fi është joaktiv. Këtë mund ta ndryshosh te <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>cilësimet e skanimit<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
+    <string name="wifi_scan_notify_text" msgid="5593805423071186757">"Për të përmirësuar saktësinë e vendndodhjes, aplikacionet dhe shërbimet e sistemit mund të skanojnë akoma për rrjetet Wi-Fi. Këtë mund ta ndryshosh te <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>cilësimet e skanimit<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="7104867814641144485">"Mos e shfaq përsëri"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"Mbaj Wi-Fi të aktivizuar gjatë gjendjes së gjumit"</string>
     <string name="wifi_setting_on_during_sleep_title" msgid="8308975500029751565">"Wi-Fi gjatë qendrimit në gjendje gjumi"</string>
@@ -1168,15 +1167,15 @@
     <string name="location_high_battery_use" msgid="517199943258508020">"Përdorimi i lartë i baterisë"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"Përdorimi i ulët i baterisë"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Vendndodhja"</string>
-    <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"Përdor GPS-në, Wi‑Fi dhe rrjetet celulare për të përcaktuar vendndodhjen"</string>
-    <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"Përdor Wi‑Fi dhe rrjetet celulare për të përcaktuar vendndodhjen"</string>
+    <string name="location_mode_high_accuracy_description" msgid="5703350404315028607">"Përdor funksionin GPS, Wi‑Fi, Bluetooth dhe rrjetet celulare për të përcaktuar vendndodhjen"</string>
+    <string name="location_mode_battery_saving_description" msgid="8361848607963121770">"Përdor funksionin Wi‑Fi, Bluetooth dhe rrjetet celulare për të përcaktuar vendndodhjen"</string>
     <string name="location_mode_sensors_only_description" msgid="788127681455735699">"Përdor GPS-në për të përcaktuar vendndodhjen"</string>
     <string name="location_menu_scanning" msgid="8536245838478802959">"Skanimi"</string>
     <string name="location_scanning_screen_title" msgid="4408076862929611554">"Po skanon"</string>
     <string name="location_scanning_wifi_always_scanning_title" msgid="6216705505621183645">"Skanimi i Wi-Fi"</string>
-    <string name="location_scanning_wifi_always_scanning_description" msgid="2070686681074461301">"Përmirëso vendndodhjen duke i lejuar aplikacionet dhe shërbimet të skanojnë për rrjete Wi‑Fi, edhe kur Wi‑Fi është joaktiv."</string>
+    <string name="location_scanning_wifi_always_scanning_description" msgid="8036382029606868081">"Përmirëso vendndodhjen duke lejuar aplikacionet dhe shërbimet e sistemit të zbulojnë rrjetet Wi-Fi në çdo kohë."</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="5444989508204520019">"Skanimi i Bluetooth-it"</string>
-    <string name="location_scanning_bluetooth_always_scanning_description" msgid="7308864666710919365">"Përmirëso vendndodhjen duke lejuar shërbimet e sistemit të skanojnë për pajisje \"Bluetooth\", edhe kur \"Bluetooth-i\" është i çaktivizuar"</string>
+    <string name="location_scanning_bluetooth_always_scanning_description" msgid="8602726521250591852">"Përmirëso vendndodhjen duke lejuar aplikacionet dhe shërbimet e sistemit të zbulojnë pajisjet me Bluetooth në çdo kohë."</string>
     <string name="location_network_based" msgid="6010456018401296590">"Vend. rrjetit Wi‑Fi e celular"</string>
     <string name="location_neighborhood_level" msgid="5141318121229984788">"Lejo aplikacionet të përdorin shërbimin e vendndodhjes së Google për të llogaritur më shpejt vendndodhjen tënde. Të dhënat e vendndodhjes do të jenë anonime dhe do të mblidhen e do t\'i dërgohen Google."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Vendndodhja u përcaktua nga Wi‑Fi"</string>

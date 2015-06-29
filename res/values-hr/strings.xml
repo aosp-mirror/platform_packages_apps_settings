@@ -356,8 +356,7 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4504501581228672208">"Opcija zaključavanja telefona nije omogućena. Kupnje i pristup aplikacija možete i dalje autorizirati otiskom prsta. "<annotation id="url">"Saznajte više"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Podignite prst, a zatim ponovo dodirnite senzor"</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"Maksimalni broj otisaka prstiju koji se može dodati iznosi <xliff:g id="COUNT">%d</xliff:g>"</string>
-    <!-- no translation found for confirm_fingerprint_icon_content_description (5255544532157079096) -->
-    <skip />
+    <string name="confirm_fingerprint_icon_content_description" msgid="5255544532157079096">"Nastavite pomoću otiska prsta."</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Enkripcija"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"Kriptiraj tablet računalo"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"Šifriraj telefon"</string>
@@ -521,7 +520,7 @@
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Napredno"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Napredni Bluetooth"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"Kada je Bluetooth uključen, uređaj može komunicirati s ostalim Bluetooth uređajima u blizini."</string>
-    <string name="ble_scan_notify_text" msgid="3719383048635344071">"Radi poboljšanja preciznosti lokacije, aplikacije i usluge tražit će Bluetooth uređaje, čak i kada je Bluetooth isključen. To možete promijeniti u <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>postavkama traženja<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
+    <string name="ble_scan_notify_text" msgid="1295915006005700650">"Radi poboljšanja preciznosti lokacije aplikacije i usluge sustava i dalje mogu otkriti Bluetooth uređaje. To možete promijeniti u <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>postavkama traženja<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"Poveži se na..."</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"Uređaj <xliff:g id="DEVICE_NAME">%1$s</xliff:g> bit će isključen sa zvuka medija."</string>
     <string name="bluetooth_disconnect_headset_profile" msgid="8635908811168780720">"Handsfree zvuk za uređaj <xliff:g id="DEVICE_NAME">%1$s</xliff:g> bit će isključen."</string>
@@ -591,7 +590,7 @@
     <string name="wifi_automatically_connect_summary" msgid="6722194413023965902">"Dopusti pomoćniku za Wi‑Fi automatsko povezivanje s otvorenim mrežama s utvrđenom visokom kvalitetom"</string>
     <string name="wifi_select_assistant_dialog_title" msgid="4014645210955009439">"Odaberite pomoćnik"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Instaliranje certifikata"</string>
-    <string name="wifi_scan_notify_text" msgid="3135282824516650989">"Radi poboljšanja preciznosti lokacije, aplikacije i usluge tražit će Wi‑Fi mreže, čak i kada je Wi‑Fi isključen. To možete promijeniti u <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>postavkama traženja<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
+    <string name="wifi_scan_notify_text" msgid="5593805423071186757">"Radi poboljšanja preciznosti lokacije aplikacije i usluge sustava i dalje mogu tražiti Wi‑Fi mreže. To možete promijeniti u <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>postavkama traženja<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="7104867814641144485">"Ne prikazuj ponovno"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"Zadrži Wi-Fi tijekom mirovanja"</string>
     <string name="wifi_setting_on_during_sleep_title" msgid="8308975500029751565">"Wi‑Fi ostaje aktivan u mirovanju"</string>
@@ -1177,15 +1176,15 @@
     <string name="location_high_battery_use" msgid="517199943258508020">"Visoka potrošnja baterije"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"Niska potrošnja baterije"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Način lokacije"</string>
-    <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"Upotreba GPS-a, Wi‑Fi i mobilnih mreža za utvrđivanje lokacije"</string>
-    <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"Upotreba Wi‑Fi i mobilnih mreža za utvrđivanje lokacije"</string>
+    <string name="location_mode_high_accuracy_description" msgid="5703350404315028607">"Upotreba GPS, Wi‑Fi, Bluetooth i mobilnih mreža za utvrđivanje lokacije"</string>
+    <string name="location_mode_battery_saving_description" msgid="8361848607963121770">"Upotreba Wi‑Fi, Bluetooth i mobilnih mreža za utvrđivanje lokacije"</string>
     <string name="location_mode_sensors_only_description" msgid="788127681455735699">"Upotreba GPS-a za utvrđivanje lokacije"</string>
     <string name="location_menu_scanning" msgid="8536245838478802959">"Skeniranje"</string>
     <string name="location_scanning_screen_title" msgid="4408076862929611554">"Skeniranje"</string>
     <string name="location_scanning_wifi_always_scanning_title" msgid="6216705505621183645">"Traženje Wi‑Fi-ja"</string>
-    <string name="location_scanning_wifi_always_scanning_description" msgid="2070686681074461301">"Poboljšajte lokaciju tako što ćete dopustiti aplikacijama i uslugama traženje Wi‑Fi mreža, čak i kada je Wi‑Fi isključen"</string>
+    <string name="location_scanning_wifi_always_scanning_description" msgid="8036382029606868081">"Poboljšajte lokaciju tako što ćete dopustiti aplikacijama i uslugama sustava otkrivanje Wi-Fi mreža u bilo kojem trenutku."</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="5444989508204520019">"Traženje Bluetootha"</string>
-    <string name="location_scanning_bluetooth_always_scanning_description" msgid="7308864666710919365">"Poboljšajte lokaciju tako što ćete dopustiti uslugama sustava traženje Bluetooth uređaja, čak i kada je Bluetooth isključen"</string>
+    <string name="location_scanning_bluetooth_always_scanning_description" msgid="8602726521250591852">"Poboljšajte lokaciju tako što ćete dopustiti aplikacijama i uslugama sustava otkrivanje Bluetooth uređaja u bilo kojem trenutku."</string>
     <string name="location_network_based" msgid="6010456018401296590">"Lokacija Wi‑Fi i mobilne mreže"</string>
     <string name="location_neighborhood_level" msgid="5141318121229984788">"Omogućite aplik. da upotrebljavaju Googleovu uslugu lokacije za brže lociranje. Anonimni podaci prikupljat će se i slati Googleu."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Lokacija utvrđena pomoću Wi-Fi-ja"</string>
@@ -1377,13 +1376,10 @@
     <string name="app_install_location_title" msgid="2068975150026852168">"Željena lokacije instalacije"</string>
     <string name="app_install_location_summary" msgid="5155453752692959098">"Promijenite željenu lokaciju instalacije za nove aplikacije."</string>
     <string name="app_disable_dlg_title" msgid="3916469657537695436">"Onemogući ugrađenu aplikaciju?"</string>
-    <!-- no translation found for app_disable_dlg_positive (7375627244201714263) -->
-    <skip />
-    <!-- no translation found for app_disable_dlg_text (7824930380425568584) -->
-    <skip />
+    <string name="app_disable_dlg_positive" msgid="7375627244201714263">"Onemogući aplikaciju"</string>
+    <string name="app_disable_dlg_text" msgid="7824930380425568584">"Ako onemogućite ovu aplikaciju, druge aplikacije možda više neće funkcionirati pravilno."</string>
     <string name="app_special_disable_dlg_title" msgid="2690148680327142674">"Izbrisati podatke i onemogućiti aplikaciju?"</string>
-    <!-- no translation found for app_special_disable_dlg_text (1007112763234313018) -->
-    <skip />
+    <string name="app_special_disable_dlg_text" msgid="1007112763234313018">"Ako onemogućite ovu aplikaciju, druge aplikacije možda više neće funkcionirati pravilno. Također će se izbrisati vaši podaci."</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"Isključiti obavijesti?"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"Ako isključite obavijesti za ovu aplikaciju, možda ćete propustiti važna upozorenja i ažuriranja."</string>
     <string name="app_ops_settings" msgid="5108481883575527511">"Radnje aplikacija"</string>

@@ -354,8 +354,7 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4504501581228672208">"已停用螢幕鎖定選項。您仍然可以使用指紋授權購物交易及存取應用程式。"<annotation id="url">"瞭解詳情"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"移開手指，然後再次輕觸感應器"</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"您最多可以新增 <xliff:g id="COUNT">%d</xliff:g> 個指紋"</string>
-    <!-- no translation found for confirm_fingerprint_icon_content_description (5255544532157079096) -->
-    <skip />
+    <string name="confirm_fingerprint_icon_content_description" msgid="5255544532157079096">"使用指紋繼續作業。"</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"加密"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"加密保護平板電腦"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"對手機進行加密"</string>
@@ -513,7 +512,7 @@
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"進階選項"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"藍牙進階設定"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"開啟藍牙功能後，您的裝置即可與其他鄰近的藍牙裝置相互傳輸資料。"</string>
-    <string name="ble_scan_notify_text" msgid="3719383048635344071">"為了提升定位精確度，應用程式和服務會進行掃描，看看附近是否有藍牙裝置 (即使藍牙連線功能處於關閉狀態)。您可以前往<xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>掃描設定<xliff:g id="LINK_END_1">LINK_END</xliff:g>變更這項設定。"</string>
+    <string name="ble_scan_notify_text" msgid="1295915006005700650">"為了提升定位精確度，系統應用程式和服務仍可偵測藍牙裝置。您可以前往<xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>掃描設定<xliff:g id="LINK_END_1">LINK_END</xliff:g>變更這項設定。"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"連線到…"</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"即將中斷 <xliff:g id="DEVICE_NAME">%1$s</xliff:g> 與媒體音訊的連線。"</string>
     <string name="bluetooth_disconnect_headset_profile" msgid="8635908811168780720">"即將中斷 <xliff:g id="DEVICE_NAME">%1$s</xliff:g> 與免持聽筒音訊的連線。"</string>
@@ -583,7 +582,7 @@
     <string name="wifi_automatically_connect_summary" msgid="6722194413023965902">"允許 Wi‑Fi 小幫手自動連線到系統測定為高品質的開放網路"</string>
     <string name="wifi_select_assistant_dialog_title" msgid="4014645210955009439">"選擇小幫手"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"安裝憑證"</string>
-    <string name="wifi_scan_notify_text" msgid="3135282824516650989">"為了提升定位精確度，應用程式和服務會進行掃描，看看附近是否有 Wi-Fi 網路 (即使 Wi-Fi 連線功能處於關閉狀態)。您可以前往<xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>掃描設定<xliff:g id="LINK_END_1">LINK_END</xliff:g>變更這項設定。"</string>
+    <string name="wifi_scan_notify_text" msgid="5593805423071186757">"為了提升定位精確度，系統應用程式和服務仍可掃描 Wi-Fi 網路。您可以前往<xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>掃描設定<xliff:g id="LINK_END_1">LINK_END</xliff:g>變更這項設定。"</string>
     <string name="wifi_scan_notify_remember_choice" msgid="7104867814641144485">"不要再顯示"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"休眠狀態仍保持 Wi-Fi 連線"</string>
     <string name="wifi_setting_on_during_sleep_title" msgid="8308975500029751565">"休眠時仍保持 Wi-Fi 連線"</string>
@@ -1168,15 +1167,15 @@
     <string name="location_high_battery_use" msgid="517199943258508020">"耗電量高"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"耗電量低"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"定位模式"</string>
-    <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"使用 GPS、Wi-Fi 和行動網路判斷位置"</string>
-    <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"使用 Wi-Fi 和行動網路判斷位置"</string>
+    <string name="location_mode_high_accuracy_description" msgid="5703350404315028607">"使用 GPS、Wi-Fi、藍牙或行動網路判斷位置"</string>
+    <string name="location_mode_battery_saving_description" msgid="8361848607963121770">"使用 Wi-Fi、藍牙或行動網路判斷位置"</string>
     <string name="location_mode_sensors_only_description" msgid="788127681455735699">"使用 GPS 判斷您的所在位置"</string>
     <string name="location_menu_scanning" msgid="8536245838478802959">"掃描"</string>
     <string name="location_scanning_screen_title" msgid="4408076862929611554">"掃描"</string>
     <string name="location_scanning_wifi_always_scanning_title" msgid="6216705505621183645">"Wi-Fi 掃描"</string>
-    <string name="location_scanning_wifi_always_scanning_description" msgid="2070686681074461301">"允許應用程式和服務執行 Wi‑Fi 網路掃描作業 (即使 Wi-Fi 連線功能處於關閉狀態)，以提升定位精確度"</string>
+    <string name="location_scanning_wifi_always_scanning_description" msgid="8036382029606868081">"允許系統應用程式和服務隨時偵測 Wi‑Fi 網路，以提升定位精確度。"</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="5444989508204520019">"藍牙掃描"</string>
-    <string name="location_scanning_bluetooth_always_scanning_description" msgid="7308864666710919365">"允許系統服務執行藍牙裝置掃描作業 (即使藍牙連線功能處於關閉狀態)，以提升定位精確度"</string>
+    <string name="location_scanning_bluetooth_always_scanning_description" msgid="8602726521250591852">"允許系統應用程式和服務隨時偵測藍牙裝置，以提升定位精確度。"</string>
     <string name="location_network_based" msgid="6010456018401296590">"Wi-Fi 和行動網路位置資訊"</string>
     <string name="location_neighborhood_level" msgid="5141318121229984788">"允許應用程式使用 Google 的定位服務加速判斷您的約略位置。系統會收集匿名的位置資料並傳送給 Google。"</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"根據 Wi-Fi 判定位置"</string>
@@ -1368,13 +1367,10 @@
     <string name="app_install_location_title" msgid="2068975150026852168">"偏好的安裝位置"</string>
     <string name="app_install_location_summary" msgid="5155453752692959098">"變更偏好的新應用程式安裝位置"</string>
     <string name="app_disable_dlg_title" msgid="3916469657537695436">"您要停用內建應用程式嗎？"</string>
-    <!-- no translation found for app_disable_dlg_positive (7375627244201714263) -->
-    <skip />
-    <!-- no translation found for app_disable_dlg_text (7824930380425568584) -->
-    <skip />
+    <string name="app_disable_dlg_positive" msgid="7375627244201714263">"停用應用程式"</string>
+    <string name="app_disable_dlg_text" msgid="7824930380425568584">"如果您停用這個應用程式，其他應用程式可能無法正常運作。"</string>
     <string name="app_special_disable_dlg_title" msgid="2690148680327142674">"刪除資料並停用應用程式？"</string>
-    <!-- no translation found for app_special_disable_dlg_text (1007112763234313018) -->
-    <skip />
+    <string name="app_special_disable_dlg_text" msgid="1007112763234313018">"如果您停用這個應用程式，其他應用程式可能無法正常運作，您的資料也會遭到刪除。"</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"關閉通知？"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"如果您關閉這個應用程式的通知，可能會錯失重要的警示與更新。"</string>
     <string name="app_ops_settings" msgid="5108481883575527511">"應用程式作業"</string>

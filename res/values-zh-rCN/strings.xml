@@ -354,8 +354,7 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4504501581228672208">"屏幕锁定选项已停用。您仍然可以使用自己的指纹对购买交易和应用使用进行授权。"<annotation id="url">"了解详情"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"移开手指，然后再次触摸传感器"</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"您最多可以添加 <xliff:g id="COUNT">%d</xliff:g> 个指纹"</string>
-    <!-- no translation found for confirm_fingerprint_icon_content_description (5255544532157079096) -->
-    <skip />
+    <string name="confirm_fingerprint_icon_content_description" msgid="5255544532157079096">"请使用您的指纹以继续。"</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"加密"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"加密平板电脑"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"加密手机"</string>
@@ -513,7 +512,7 @@
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"高级"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"高级蓝牙设置"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"开启蓝牙后，您的设备可以与附近的其他蓝牙设备通信。"</string>
-    <string name="ble_scan_notify_text" msgid="3719383048635344071">"为了提高位置信息的精确度，应用和服务会扫描蓝牙设备（即使蓝牙功能已关闭）。您可以在<xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>扫描设置<xliff:g id="LINK_END_1">LINK_END</xliff:g>中更改此设置。"</string>
+    <string name="ble_scan_notify_text" msgid="1295915006005700650">"为了提高位置信息的精确度，系统应用和服务仍然会检测蓝牙设备。您可以在<xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>扫描设置<xliff:g id="LINK_END_1">LINK_END</xliff:g>中更改此设置。"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"连接到..."</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>将与媒体音频断开连接。"</string>
     <string name="bluetooth_disconnect_headset_profile" msgid="8635908811168780720">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>将与免提音频断开连接。"</string>
@@ -583,7 +582,7 @@
     <string name="wifi_automatically_connect_summary" msgid="6722194413023965902">"允许 WLAN 助手自动连接到评定为优质的开放网络上"</string>
     <string name="wifi_select_assistant_dialog_title" msgid="4014645210955009439">"选择助手"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"安装证书"</string>
-    <string name="wifi_scan_notify_text" msgid="3135282824516650989">"为了提高位置信息的精确度，应用和服务会扫描 WLAN 网络（即使 WLAN 已关闭）。您可以在<xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>扫描设置<xliff:g id="LINK_END_1">LINK_END</xliff:g>中更改此设置。"</string>
+    <string name="wifi_scan_notify_text" msgid="5593805423071186757">"为了提高位置信息的精确度，系统应用和服务仍然会扫描 WLAN 网络。您可以在<xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>扫描设置<xliff:g id="LINK_END_1">LINK_END</xliff:g>中更改此设置。"</string>
     <string name="wifi_scan_notify_remember_choice" msgid="7104867814641144485">"不再显示"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"在休眠状态下保持WLAN网络连接"</string>
     <string name="wifi_setting_on_during_sleep_title" msgid="8308975500029751565">"在休眠状态下保持WLAN连接"</string>
@@ -1168,15 +1167,15 @@
     <string name="location_high_battery_use" msgid="517199943258508020">"高电耗"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"低电耗"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"位置信息模式"</string>
-    <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"使用GPS、WLAN和移动网络确定位置"</string>
-    <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"使用WLAN和移动网络确定位置"</string>
+    <string name="location_mode_high_accuracy_description" msgid="5703350404315028607">"使用 GPS、WLAN、蓝牙或移动网络确定位置"</string>
+    <string name="location_mode_battery_saving_description" msgid="8361848607963121770">"使用 WLAN、蓝牙或移动网络确定位置"</string>
     <string name="location_mode_sensors_only_description" msgid="788127681455735699">"使用 GPS 确定位置"</string>
     <string name="location_menu_scanning" msgid="8536245838478802959">"扫描"</string>
     <string name="location_scanning_screen_title" msgid="4408076862929611554">"扫描"</string>
     <string name="location_scanning_wifi_always_scanning_title" msgid="6216705505621183645">"WLAN 扫描"</string>
-    <string name="location_scanning_wifi_always_scanning_description" msgid="2070686681074461301">"允许应用和服务扫描 WLAN 网络（即使 WLAN 已关闭），以便提高位置信息的精确度"</string>
+    <string name="location_scanning_wifi_always_scanning_description" msgid="8036382029606868081">"允许系统应用和服务随时检测 WLAN 网络，以便提高位置信息的精确度。"</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="5444989508204520019">"蓝牙扫描"</string>
-    <string name="location_scanning_bluetooth_always_scanning_description" msgid="7308864666710919365">"允许系统服务扫描蓝牙设备（即使蓝牙功能已关闭），以便提高位置信息的精确度"</string>
+    <string name="location_scanning_bluetooth_always_scanning_description" msgid="8602726521250591852">"允许系统应用和服务随时检测蓝牙设备，以便提高位置信息的精确度。"</string>
     <string name="location_network_based" msgid="6010456018401296590">"WLAN和移动网络位置信息"</string>
     <string name="location_neighborhood_level" msgid="5141318121229984788">"允许应用使用Google位置信息服务更快地大致了解您所在的位置。系统将收集匿名位置数据并将其发送给Google。"</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"通过WLAN确定位置"</string>
@@ -1368,13 +1367,10 @@
     <string name="app_install_location_title" msgid="2068975150026852168">"首选安装位置"</string>
     <string name="app_install_location_summary" msgid="5155453752692959098">"更改安装新应用时使用的首选安装位置"</string>
     <string name="app_disable_dlg_title" msgid="3916469657537695436">"要停用内置应用吗？"</string>
-    <!-- no translation found for app_disable_dlg_positive (7375627244201714263) -->
-    <skip />
-    <!-- no translation found for app_disable_dlg_text (7824930380425568584) -->
-    <skip />
+    <string name="app_disable_dlg_positive" msgid="7375627244201714263">"停用应用"</string>
+    <string name="app_disable_dlg_text" msgid="7824930380425568584">"如果您停用此应用，其他应用可能会无法正常运行。"</string>
     <string name="app_special_disable_dlg_title" msgid="2690148680327142674">"确定要删除数据并停用应用吗？"</string>
-    <!-- no translation found for app_special_disable_dlg_text (1007112763234313018) -->
-    <skip />
+    <string name="app_special_disable_dlg_text" msgid="1007112763234313018">"如果您停用此应用，其他应用可能会无法正常运行。您的数据也将会删除。"</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"要关闭通知吗？"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"如果关闭此应用的通知，您可能会错过重要提醒和最新动态信息。"</string>
     <string name="app_ops_settings" msgid="5108481883575527511">"应用操作"</string>
