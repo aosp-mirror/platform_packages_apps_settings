@@ -15,6 +15,7 @@
  */
 package com.android.settings.applications;
 
+import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.os.Bundle;
@@ -45,6 +46,8 @@ public class AdvancedAppSettings extends SettingsPreferenceFragment implements
     private Preference mAppDomainURLsPreference;
     private Preference mHighPowerPreference;
 
+    private BroadcastReceiver mPermissionReceiver;
+
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -63,6 +66,15 @@ public class AdvancedAppSettings extends SettingsPreferenceFragment implements
         updateUI();
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mPermissionReceiver != null) {
+            getContext().unregisterReceiver(mPermissionReceiver);
+            mPermissionReceiver = null;
+        }
+    }
+
     private void updateUI() {
         ArrayList<AppEntry> allApps = mSession.getAllApps();
 
@@ -79,7 +91,12 @@ public class AdvancedAppSettings extends SettingsPreferenceFragment implements
         int highPowerCount = PowerWhitelistBackend.getInstance().getWhitelistSize();
         mHighPowerPreference.setSummary(getResources().getQuantityString(R.plurals.high_power_count,
                 highPowerCount, highPowerCount));
-        PermissionsSummaryHelper.getAppWithPermissionsCounts(getContext(), mPermissionCallback);
+
+        if (mPermissionReceiver != null) {
+            getContext().unregisterReceiver(mPermissionReceiver);
+        }
+        mPermissionReceiver = PermissionsSummaryHelper.getAppWithPermissionsCounts(getContext(),
+                mPermissionCallback);
     }
 
     @Override
@@ -133,6 +150,7 @@ public class AdvancedAppSettings extends SettingsPreferenceFragment implements
             if (getActivity() == null) {
                 return;
             }
+            mPermissionReceiver = null;
             if (counts != null) {
                 mAppPermsPreference.setSummary(getContext().getString(
                         R.string.app_permissions_summary, counts[0], counts[1]));
