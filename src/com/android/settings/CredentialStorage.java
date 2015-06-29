@@ -206,8 +206,9 @@ public final class CredentialStorage extends Activity {
      * Returns true if the currently set key guard matches our minimum quality requirements.
      */
     private boolean checkKeyGuardQuality() {
+        UserInfo parent = UserManager.get(this).getProfileParent(UserHandle.myUserId());
         int quality = new LockPatternUtils(this).getActivePasswordQuality(
-                UserHandle.myUserId());
+                parent != null ? parent.id : UserHandle.myUserId());
         return (quality >= MIN_PASSWORD_QUALITY);
     }
 
