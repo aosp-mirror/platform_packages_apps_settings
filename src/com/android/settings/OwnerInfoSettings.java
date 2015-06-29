@@ -24,13 +24,10 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.android.internal.widget.LockPatternUtils;
 
@@ -38,13 +35,10 @@ public class OwnerInfoSettings extends DialogFragment implements OnClickListener
 
     private static final String TAG_OWNER_INFO = "ownerInfo";
 
-    private static final int MAX_CHARS = 100;
-
     private View mView;
     private int mUserId;
     private LockPatternUtils mLockPatternUtils;
     private EditText mOwnerInfo;
-    private TextView mOwnerInfoStatus;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -72,33 +66,6 @@ public class OwnerInfoSettings extends DialogFragment implements OnClickListener
         if (!TextUtils.isEmpty(info)) {
             mOwnerInfo.setText(info);
         }
-        mOwnerInfoStatus = (TextView) mView.findViewById(R.id.owner_info_status);
-        updateOwnerInfoStatus();
-
-        mOwnerInfo.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                updateOwnerInfoStatus();
-            }
-        });
-    }
-
-    private void updateOwnerInfoStatus() {
-        int chars = mOwnerInfo.getText().toString().length();
-        String status = getString(R.string.owner_info_settings_status,
-                chars, MAX_CHARS);
-        String accessibilityStatus = getString(R.string.accessibility_lock_screen_progress,
-                chars, MAX_CHARS);
-        mOwnerInfoStatus.setText(status);
-        mOwnerInfoStatus.setContentDescription(accessibilityStatus);
     }
 
     @Override
