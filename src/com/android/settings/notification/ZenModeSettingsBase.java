@@ -22,16 +22,17 @@ import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.UserManager;
 import android.provider.Settings;
 import android.provider.Settings.Global;
 import android.service.notification.ZenModeConfig;
 import android.util.Log;
 
-import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.RestrictedSettingsFragment;
 
 import java.util.Objects;
 
-abstract public class ZenModeSettingsBase extends SettingsPreferenceFragment {
+abstract public class ZenModeSettingsBase extends RestrictedSettingsFragment {
     protected static final String TAG = "ZenModeSettings";
     protected static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
@@ -44,6 +45,10 @@ abstract public class ZenModeSettingsBase extends SettingsPreferenceFragment {
 
     abstract protected void onZenModeChanged();
     abstract protected void onZenModeConfigChanged();
+
+    public ZenModeSettingsBase() {
+        super(UserManager.DISALLOW_ADJUST_VOLUME);
+    }
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -60,6 +65,9 @@ abstract public class ZenModeSettingsBase extends SettingsPreferenceFragment {
         updateZenMode(true /*fireChanged*/);
         updateZenModeConfig(true /*fireChanged*/);
         mSettingsObserver.register();
+        if (isUiRestricted()) {
+            finish();
+        }
     }
 
     @Override
