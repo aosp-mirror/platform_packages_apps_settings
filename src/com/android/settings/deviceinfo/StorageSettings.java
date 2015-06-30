@@ -354,7 +354,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
         }
     }
 
-    private static class VolumeUnmountedFragment extends DialogFragment {
+    public static class VolumeUnmountedFragment extends DialogFragment {
         public static void show(Fragment parent, String volumeId) {
             final Bundle args = new Bundle();
             args.putString(VolumeInfo.EXTRA_VOLUME_ID, volumeId);
@@ -390,7 +390,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
         }
     }
 
-    private static class DiskInitFragment extends DialogFragment {
+    public static class DiskInitFragment extends DialogFragment {
         public static void show(Fragment parent, int resId, String diskId) {
             final Bundle args = new Bundle();
             args.putInt(Intent.EXTRA_TEXT, resId);
