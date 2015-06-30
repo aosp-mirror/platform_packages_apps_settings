@@ -53,7 +53,6 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.WirelessSettings;
-import com.android.settings.applications.AppInfoBase;
 import com.android.settings.applications.AppInfoWithHeader;
 import com.android.settings.applications.InstalledAppDetails;
 import com.android.settings.applications.LayoutPreference;
@@ -374,6 +373,14 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
         setupHeader();
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (mHighPower != null) {
+            mHighPower.setSummary(HighPowerDetail.getSummary(getActivity(), mApp.packageName));
+        }
+    }
+
     private void createDetails() {
         final Bundle args = getArguments();
         Context context = getActivity();
@@ -426,9 +433,7 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
                 mHighPower.setOnPreferenceClickListener(new OnPreferenceClickListener() {
                     @Override
                     public boolean onPreferenceClick(Preference preference) {
-                        AppInfoBase.startAppInfoFragment(HighPowerDetail.class,
-                                R.string.high_power_apps, mApp.packageName, mApp.uid,
-                                PowerUsageDetail.this, 0);
+                        HighPowerDetail.show(PowerUsageDetail.this, mApp.packageName, 0, false);
                         return true;
                     }
                 });
