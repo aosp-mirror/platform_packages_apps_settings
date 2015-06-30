@@ -18,6 +18,7 @@ package com.android.settings.deviceinfo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.UserManager;
 import android.os.storage.DiskInfo;
 import android.os.storage.VolumeInfo;
 import android.widget.CompoundButton;
@@ -30,6 +31,8 @@ public class StorageWizardInit extends StorageWizardBase {
     private RadioButton mRadioExternal;
     private RadioButton mRadioInternal;
 
+    private boolean mIsPermittedToAdopt;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +41,8 @@ public class StorageWizardInit extends StorageWizardBase {
             return;
         }
         setContentView(R.layout.storage_wizard_init);
+
+        mIsPermittedToAdopt = UserManager.get(this).isAdminUser();
 
         setIllustrationInternal(true);
         setHeaderText(R.string.storage_wizard_init_title, mDisk.getDescription());
@@ -62,6 +67,12 @@ public class StorageWizardInit extends StorageWizardBase {
             mRadioExternal.setChecked(true);
             onNavigateNext();
             finish();
+        }
+
+        // TODO: Show a message about why this is disabled for guest and that only an admin user
+        // can adopt an sd card.
+        if (!mIsPermittedToAdopt) {
+            mRadioInternal.setEnabled(false);
         }
     }
 
