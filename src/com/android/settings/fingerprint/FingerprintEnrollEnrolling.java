@@ -377,7 +377,7 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
         }
     };
 
-    private static class IconTouchDialog extends DialogFragment {
+    public static class IconTouchDialog extends DialogFragment {
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
