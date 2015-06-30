@@ -139,6 +139,10 @@ public class VolumeSeekBarPreference extends SeekBarPreference
         updateIconView();
         mCallback.onStreamValueChanged(mStream, mSeekBar.getProgress());
         updateSuppressionText();
+        if (!isEnabled()) {
+            mSeekBar.setEnabled(false);
+            mVolumizer.stop();
+        }
     }
 
     // during initialization, this preference is the SeekBar listener
