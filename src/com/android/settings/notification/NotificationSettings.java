@@ -38,6 +38,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.os.Vibrator;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
@@ -81,6 +82,15 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
     private static final String KEY_LOCK_SCREEN_NOTIFICATIONS = "lock_screen_notifications";
     private static final String KEY_NOTIFICATION_ACCESS = "manage_notification_access";
     private static final String KEY_ZEN_ACCESS = "manage_zen_access";
+    private static final String KEY_ZEN_MODE = "zen_mode";
+
+    private static final String[] RESTRICTED_KEYS = {
+        KEY_MEDIA_VOLUME,
+        KEY_ALARM_VOLUME,
+        KEY_RING_VOLUME,
+        KEY_ZEN_ACCESS,
+        KEY_ZEN_MODE,
+    };
 
     private static final int SAMPLE_CUTOFF = 2000;  // manually cap sample playback at 2 seconds
 
@@ -109,6 +119,8 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
     private ComponentName mSuppressor;
     private int mRingerMode = -1;
 
+    private UserManager mUserManager;
+
     @Override
     protected int getMetricsCategory() {
         return MetricsLogger.NOTIFICATION;
@@ -119,6 +131,7 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
         super.onCreate(savedInstanceState);
         mContext = getActivity();
         mPM = mContext.getPackageManager();
+        mUserManager = UserManager.get(getContext());
         mVoiceCapable = Utils.isVoiceCapable(mContext);
         mSecure = new LockPatternUtils(getActivity()).isSecure(UserHandle.myUserId());
 
@@ -174,6 +187,13 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
         updateEffectsSuppressor();
         for (VolumeSeekBarPreference volumePref : mVolumePrefs) {
             volumePref.onActivityResume();
+        }
+        boolean isRestricted = mUserManager.hasUserRestriction(UserManager.DISALLOW_ADJUST_VOLUME);
+        for (String key : RESTRICTED_KEYS) {
+            Preference pref = findPreference(key);
+            if (pref != null) {
+                pref.setEnabled(!isRestricted);
+            }
         }
     }
 
