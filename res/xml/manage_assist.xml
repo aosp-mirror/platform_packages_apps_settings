@@ -31,6 +31,12 @@
         android:summary="@string/assist_access_context_summary"
         android:persistent="false"/>
 
+    <SwitchPreference
+        android:key="screenshot"
+        android:title="@string/assist_access_screenshot_title"
+        android:summary="@string/assist_access_screenshot_summary"
+        android:persistent="false"/>
+
     <com.android.settings.voice.VoiceInputListPreference
             android:key="voice_input_settings"
             android:title="@string/voice_input_settings_title"
