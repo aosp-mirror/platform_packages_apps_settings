@@ -78,6 +78,7 @@ import com.android.settings.location.ScanningSettings;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
+import com.android.settings.wifi.AccessPointPreference.UserBadgeCache;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.AccessPoint.AccessPointListener;
 import com.android.settingslib.wifi.WifiTracker;
@@ -159,6 +160,8 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     private HandlerThread mBgThread;
 
+    private UserBadgeCache mUserBadgeCache;
+
     /* End of "used in Wifi Setup context" */
 
     public WifiSettings() {
@@ -177,6 +180,9 @@ public class WifiSettings extends RestrictedSettingsFragment
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        addPreferencesFromResource(R.xml.wifi_settings);
+        mUserBadgeCache = new UserBadgeCache(getPackageManager());
+
         mBgThread = new HandlerThread(TAG, Process.THREAD_PRIORITY_BACKGROUND);
         mBgThread.start();
     }
@@ -270,8 +276,6 @@ public class WifiSettings extends RestrictedSettingsFragment
             }
         }
 
-        addPreferencesFromResource(R.xml.wifi_settings);
-
         mEmptyView = initEmptyView();
         registerForContextMenu(getListView());
         setHasOptionsMenu(true);
@@ -311,6 +315,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     public void onResume() {
         final Activity activity = getActivity();
         super.onResume();
+        removePreference("dummy");
         if (mWifiEnabler != null) {
             mWifiEnabler.resume(activity);
         }
@@ -652,8 +657,12 @@ public class WifiSettings extends RestrictedSettingsFragment
                     // Ignore access points that are out of range.
                     if (accessPoint.getLevel() != -1) {
                         hasAvailableAccessPoints = true;
+                        if (accessPoint.getTag() != null) {
+                            getPreferenceScreen().addPreference((Preference) accessPoint.getTag());
+                            continue;
+                        }
                         AccessPointPreference preference = new AccessPointPreference(accessPoint,
-                                getActivity(), false);
+                                getActivity(), mUserBadgeCache, false);
 
                         if (mOpenSsid != null && mOpenSsid.equals(accessPoint.getSsidStr())
                                 && !accessPoint.isSaved()
