@@ -27,9 +27,15 @@ import android.util.SparseArray;
  */
 public class FakeUid extends Uid {
 
+    private final int mUid;
+
+    public FakeUid(int uid) {
+        mUid = uid;
+    }
+
     @Override
     public int getUid() {
-        return Process.FIRST_APPLICATION_UID;
+        return mUid;
     }
 
     @Override
