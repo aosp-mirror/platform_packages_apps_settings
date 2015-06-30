@@ -16,19 +16,12 @@
 
 package com.android.settings.wifi;
 
-import android.app.AppGlobals;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.IPackageManager;
-import android.content.pm.PackageManager;
 import android.content.res.Resources;
-import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.os.RemoteException;
-import android.os.UserHandle;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.util.Log;
@@ -39,12 +32,13 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
+import com.android.settings.wifi.AccessPointPreference.UserBadgeCache;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.WifiTracker;
-import java.util.Collections;
-import java.util.Comparator;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -60,6 +54,8 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
     private Bundle mAccessPointSavedState;
     private AccessPoint mSelectedAccessPoint;
 
+    private UserBadgeCache mUserBadgeCache;
+
     // Instance state key
     private static final String SAVE_DIALOG_ACCESS_POINT_STATE = "wifi_ap_state";
 
@@ -72,6 +68,7 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.wifi_display_saved_access_points);
+        mUserBadgeCache = new UserBadgeCache(getPackageManager());
     }
 
     @Override
@@ -113,7 +110,7 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
         final int accessPointsSize = accessPoints.size();
         for (int i = 0; i < accessPointsSize; ++i){
             AccessPointPreference preference = new AccessPointPreference(accessPoints.get(i),
-                    context, true);
+                    context, mUserBadgeCache, true);
             preference.setIcon(null);
             preferenceScreen.addPreference(preference);
         }

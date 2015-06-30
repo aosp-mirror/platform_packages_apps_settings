@@ -16,12 +16,15 @@
 package com.android.settings.wifi;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
 import android.net.wifi.WifiConfiguration;
 import android.os.Looper;
 import android.os.UserHandle;
 import android.preference.Preference;
+import android.util.AttributeSet;
+import android.util.SparseArray;
 import android.view.View;
 import android.widget.TextView;
 
@@ -37,22 +40,39 @@ public class AccessPointPreference extends Preference {
 
     private static int[] wifi_signal_attributes = { R.attr.wifi_signal };
 
+    private final StateListDrawable mWifiSld;
+    private final int mBadgePadding;
+    private final UserBadgeCache mBadgeCache;
+
     private TextView mTitleView;
-    private TextView mSummaryView;
-    private boolean mShowSummary = true;
     private boolean mForSavedNetworks = false;
     private AccessPoint mAccessPoint;
     private Drawable mBadge;
-    private int mBadgePadding;
     private int mLevel;
 
-    public AccessPointPreference(AccessPoint accessPoint, Context context,
+    // Used for dummy pref.
+    public AccessPointPreference(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        mWifiSld = null;
+        mBadgePadding = 0;
+        mBadgeCache = null;
+    }
+
+    public AccessPointPreference(AccessPoint accessPoint, Context context, UserBadgeCache cache,
                                  boolean forSavedNetworks) {
         super(context);
+        mBadgeCache = cache;
         mAccessPoint = accessPoint;
         mForSavedNetworks = forSavedNetworks;
         mAccessPoint.setTag(this);
         mLevel = -1;
+
+        mWifiSld = (StateListDrawable) context.getTheme()
+                .obtainStyledAttributes(wifi_signal_attributes).getDrawable(0);
+
+        // Distance from the end of the title at which this AP's user badge should sit.
+        mBadgePadding = context.getResources()
+                .getDimensionPixelSize(R.dimen.wifi_preference_badge_padding);
         refresh();
     }
 
@@ -63,6 +83,10 @@ public class AccessPointPreference extends Preference {
     @Override
     protected void onBindView(View view) {
         super.onBindView(view);
+        if (mAccessPoint == null) {
+            // Used for dummy pref.
+            return;
+        }
         Drawable drawable = getIcon();
         if (drawable != null) {
             drawable.setLevel(mLevel);
@@ -74,11 +98,6 @@ public class AccessPointPreference extends Preference {
             mTitleView.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, mBadge, null);
             mTitleView.setCompoundDrawablePadding(mBadgePadding);
         }
-
-        mSummaryView = (TextView) view.findViewById(com.android.internal.R.id.summary);
-        mSummaryView.setVisibility(mShowSummary ? View.VISIBLE : View.GONE);
-
-        updateBadge(getContext());
     }
 
     protected void updateIcon(int level, Context context) {
@@ -88,15 +107,13 @@ public class AccessPointPreference extends Preference {
             if (getIcon() == null) {
                 // To avoid a drawing race condition, we first set the state (SECURE/NONE) and then
                 // set the icon (drawable) to that state's drawable.
-                StateListDrawable sld = (StateListDrawable) context.getTheme()
-                        .obtainStyledAttributes(wifi_signal_attributes).getDrawable(0);
                 // If sld is null then we are indexing and therefore do not have access to
                 // (nor need to display) the drawable.
-                if (sld != null) {
-                    sld.setState((mAccessPoint.getSecurity() != AccessPoint.SECURITY_NONE)
+                if (mWifiSld != null) {
+                    mWifiSld.setState((mAccessPoint.getSecurity() != AccessPoint.SECURITY_NONE)
                             ? STATE_SECURED
                             : STATE_NONE);
-                    Drawable drawable = sld.getCurrent();
+                    Drawable drawable = mWifiSld.getCurrent();
                     if (!mForSavedNetworks) {
                         setIcon(drawable);
                     } else {
@@ -111,12 +128,9 @@ public class AccessPointPreference extends Preference {
         WifiConfiguration config = mAccessPoint.getConfig();
         if (config != null) {
             // Fetch badge (may be null)
-            UserHandle creatorUser = new UserHandle(UserHandle.getUserId(config.creatorUid));
-            mBadge = context.getPackageManager().getUserBadgeForDensity(creatorUser, 0 /* dpi */);
-
-            // Distance from the end of the title at which this AP's user badge should sit.
-            mBadgePadding = context.getResources()
-                    .getDimensionPixelSize(R.dimen.wifi_preference_badge_padding);
+            // Get the badge using a cache since the PM will ask the UserManager for the list
+            // of profiles every time otherwise.
+            mBadge = mBadgeCache.getUserBadge(config.creatorUid);
         }
     }
 
@@ -139,20 +153,8 @@ public class AccessPointPreference extends Preference {
         }
         updateBadge(context);
 
-        // Force new summary
-        setSummary(null);
-
-        String summary = mForSavedNetworks ? mAccessPoint.getSavedNetworkSummary()
-                : mAccessPoint.getSettingsSummary();
-
-        boolean showSummary = summary.length() > 0;
-        if (showSummary) {
-            setSummary(summary);
-        }
-        if (showSummary != mShowSummary) {
-            mShowSummary = showSummary;
-            notifyChanged();
-        }
+        setSummary(mForSavedNetworks ? mAccessPoint.getSavedNetworkSummary()
+                : mAccessPoint.getSettingsSummary());
     }
 
     @Override
@@ -181,4 +183,23 @@ public class AccessPointPreference extends Preference {
             notifyChanged();
         }
     };
+
+    public static class UserBadgeCache {
+        private final SparseArray<Drawable> mBadges = new SparseArray<>();
+        private final PackageManager mPm;
+
+        UserBadgeCache(PackageManager pm) {
+            mPm = pm;
+        }
+
+        private Drawable getUserBadge(int userId) {
+            int index = mBadges.indexOfKey(userId);
+            if (index < 0) {
+                Drawable badge = mPm.getUserBadgeForDensity(new UserHandle(userId), 0 /* dpi */);
+                mBadges.put(userId, badge);
+                return badge;
+            }
+            return mBadges.valueAt(index);
+        }
+    }
 }
