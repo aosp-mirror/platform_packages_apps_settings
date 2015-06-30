@@ -23,11 +23,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Process;
 import android.os.UserHandle;
 import android.preference.Preference;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.text.TextUtils;
+import android.util.SparseArray;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -44,6 +46,8 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.applications.ManageApplications;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -178,6 +182,64 @@ public class PowerUsageSummary extends PowerUsageBase {
         mAppListGroup.addPreference(notAvailable);
     }
 
+    /**
+     * We want to coalesce some UIDs. For example, dex2oat runs under a shared gid that
+     * exists for all users of the same app. We detect this case and merge the power use
+     * for dex2oat to the device OWNER's use of the app.
+     * @return A sorted list of app's using power.
+     */
+    private static List<BatterySipper> getCoalescedUsageList(final List<BatterySipper> sippers) {
+        final SparseArray<BatterySipper> uidList = new SparseArray<>();
+
+        final ArrayList<BatterySipper> results = new ArrayList<>();
+        final int numSippers = sippers.size();
+        for (int i = 0; i < numSippers; i++) {
+            final BatterySipper sipper = sippers.get(i);
+            if (sipper.getUid() > 0) {
+                int realUid = sipper.getUid();
+                if (sipper.getUid() >= Process.FIRST_SHARED_APPLICATION_GID &&
+                        sipper.getUid() <= Process.LAST_SHARED_APPLICATION_GID) {
+                    // This is a shared gid being used to do work on behalf of an app across all
+                    // users. But we'll blame the power on the device OWNER.
+                    realUid = UserHandle.getUid(UserHandle.USER_OWNER,
+                            UserHandle.getAppIdFromSharedAppGid(sipper.getUid()));
+                }
+
+                int index = uidList.indexOfKey(realUid);
+                if (index < 0) {
+                    uidList.put(realUid, sipper);
+                } else {
+                    BatterySipper existingSipper = uidList.valueAt(index);
+                    if (existingSipper.getUid() >= Process.FIRST_SHARED_APPLICATION_GID &&
+                            existingSipper.getUid() <= Process.FIRST_SHARED_APPLICATION_GID) {
+                        // If the app already under this uid is a dex2oat run, then combine and
+                        // substitute it with the actual app.
+                        sipper.add(existingSipper);
+                        uidList.setValueAt(index, sipper);
+                    } else {
+                        existingSipper.add(sipper);
+                    }
+                }
+            } else {
+                results.add(sipper);
+            }
+        }
+
+        final int numUidSippers = uidList.size();
+        for (int i = 0; i < numUidSippers; i++) {
+            results.add(uidList.valueAt(i));
+        }
+
+        // The sort order must have changed, so re-sort based on total power use.
+        Collections.sort(results, new Comparator<BatterySipper>() {
+            @Override
+            public int compare(BatterySipper a, BatterySipper b) {
+                return Double.compare(b.totalPowerMah, a.totalPowerMah);
+            }
+        });
+        return results;
+    }
+
     protected void refreshStats() {
         super.refreshStats();
         updatePreference(mHistPref);
@@ -194,8 +256,8 @@ public class PowerUsageSummary extends PowerUsageBase {
         int colorControl = getContext().getColor(value.resourceId);
 
         if (averagePower >= MIN_AVERAGE_POWER_THRESHOLD_MILLI_AMP || USE_FAKE_DATA) {
-            final List<BatterySipper> usageList = USE_FAKE_DATA ? getFakeStats()
-                    : mStatsHelper.getUsageList();
+            final List<BatterySipper> usageList = getCoalescedUsageList(
+                    USE_FAKE_DATA ? getFakeStats() : mStatsHelper.getUsageList());
 
             final int dischargeAmount = USE_FAKE_DATA ? 5000
                     : stats != null ? stats.getDischargeAmount(mStatsType) : 0;
@@ -282,8 +344,15 @@ public class PowerUsageSummary extends PowerUsageBase {
             stats.add(new BatterySipper(type, null, use));
             use += 5;
         }
-        BatterySipper sipper = new BatterySipper(DrainType.APP, new FakeUid(), use);
+        stats.add(new BatterySipper(DrainType.APP,
+                new FakeUid(Process.FIRST_APPLICATION_UID), use));
+
+        // Simulate dex2oat process.
+        BatterySipper sipper = new BatterySipper(DrainType.APP,
+                new FakeUid(UserHandle.getSharedAppGid(Process.FIRST_APPLICATION_UID)), 10.0f);
+        sipper.packageWithHighestDrain = "dex2oat";
         stats.add(sipper);
+
         return stats;
     }
 
