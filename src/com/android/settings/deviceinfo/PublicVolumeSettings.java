@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.UserManager;
 import android.os.storage.DiskInfo;
 import android.os.storage.StorageEventListener;
 import android.os.storage.StorageManager;
@@ -64,6 +65,8 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
     private Preference mFormatPublic;
     private Preference mFormatPrivate;
 
+    private boolean mIsPermittedToAdopt;
+
     private boolean isVolumeValid() {
         return (mVolume != null) && (mVolume.getType() == VolumeInfo.TYPE_PUBLIC)
                 && mVolume.isMountedReadable();
@@ -79,6 +82,8 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
         super.onCreate(icicle);
 
         final Context context = getActivity();
+
+        mIsPermittedToAdopt = UserManager.get(context).isAdminUser();
 
         mStorageManager = context.getSystemService(StorageManager.class);
 
@@ -109,7 +114,9 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
         mMount = buildAction(R.string.storage_menu_mount);
         mUnmount = buildAction(R.string.storage_menu_unmount);
         mFormatPublic = buildAction(R.string.storage_menu_format);
-        mFormatPrivate = buildAction(R.string.storage_menu_format_private);
+        if (mIsPermittedToAdopt) {
+            mFormatPrivate = buildAction(R.string.storage_menu_format_private);
+        }
     }
 
     public void update() {
@@ -148,7 +155,7 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
             screen.addPreference(mUnmount);
         }
         screen.addPreference(mFormatPublic);
-        if (mDisk.isAdoptable()) {
+        if (mDisk.isAdoptable() && mIsPermittedToAdopt) {
             screen.addPreference(mFormatPrivate);
         }
     }
