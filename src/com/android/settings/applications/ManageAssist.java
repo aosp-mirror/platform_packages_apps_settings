@@ -38,10 +38,12 @@ public class ManageAssist extends SettingsPreferenceFragment
 
     private static final String KEY_DEFAULT_ASSIST = "default_assist";
     private static final String KEY_CONTEXT = "context";
+    private static final String KEY_SCREENSHOT = "screenshot";
     private static final String KEY_VOICE_INPUT = "voice_input_settings";
 
     private DefaultAssistPreference mDefaultAssitPref;
     private SwitchPreference mContextPref;
+    private SwitchPreference mScreenshotPref;
     private VoiceInputListPreference mVoiceInputPref;
 
     @Override
@@ -57,6 +59,11 @@ public class ManageAssist extends SettingsPreferenceFragment
                 Settings.Secure.ASSIST_STRUCTURE_ENABLED, 1) != 0);
         mContextPref.setOnPreferenceChangeListener(this);
 
+        mScreenshotPref = (SwitchPreference) findPreference(KEY_SCREENSHOT);
+        mScreenshotPref.setChecked(Settings.Secure.getInt(getContentResolver(),
+                Settings.Secure.ASSIST_SCREENSHOT_ENABLED, 1) != 0);
+        mScreenshotPref.setOnPreferenceChangeListener(this);
+
         mVoiceInputPref = (VoiceInputListPreference) findPreference(KEY_VOICE_INPUT);
         updateUi();
     }
@@ -70,6 +77,11 @@ public class ManageAssist extends SettingsPreferenceFragment
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (preference == mContextPref) {
             Settings.Secure.putInt(getContentResolver(), Settings.Secure.ASSIST_STRUCTURE_ENABLED,
+                    (boolean) newValue ? 1 : 0);
+            return true;
+        }
+        if (preference == mScreenshotPref) {
+            Settings.Secure.putInt(getContentResolver(), Settings.Secure.ASSIST_SCREENSHOT_ENABLED,
                     (boolean) newValue ? 1 : 0);
             return true;
         }
