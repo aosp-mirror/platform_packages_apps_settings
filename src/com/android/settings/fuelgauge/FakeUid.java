@@ -249,4 +249,9 @@ public class FakeUid extends Uid {
     public long getTimeAtCpuSpeed(int step, int which) {
         return 0;
     }
+
+    @Override
+    public long getCpuPowerMaUs(int which) {
+        return 0;
+    }
 }
