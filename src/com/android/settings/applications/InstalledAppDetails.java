@@ -346,7 +346,7 @@ public class InstalledAppDetails extends AppInfoBase
         mMemoryPreference.setOnPreferenceClickListener(this);
 
         mLaunchPreference = findPreference(KEY_LAUNCH);
-        if (mAppEntry.info != null) {
+        if (mAppEntry != null && mAppEntry.info != null) {
             if ((mAppEntry.info.flags&ApplicationInfo.FLAG_INSTALLED) == 0 ||
                     !mAppEntry.info.enabled) {
                 mLaunchPreference.setEnabled(false);
