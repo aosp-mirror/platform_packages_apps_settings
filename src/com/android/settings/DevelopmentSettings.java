@@ -1326,7 +1326,13 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
 
     private void writeUsbConfigurationOption(Object newValue) {
         UsbManager manager = (UsbManager)getActivity().getSystemService(Context.USB_SERVICE);
-        manager.setCurrentFunction(newValue.toString());
+        String function = newValue.toString();
+        manager.setCurrentFunction(function);
+        if (function.equals("none")) {
+            manager.setUsbDataUnlocked(false);
+        } else {
+            manager.setUsbDataUnlocked(true);
+        }
     }
 
     private void updateCpuUsageOptions() {
