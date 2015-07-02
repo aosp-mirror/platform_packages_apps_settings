@@ -57,7 +57,7 @@ public class StorageWizardMoveConfirm extends StorageWizardBase {
         final String appName = getPackageManager().getApplicationLabel(mApp).toString();
         final String volumeName = mStorage.getBestVolumeDescription(mVolume);
 
-        setIllustrationInternal(true);
+        setIllustrationType(ILLUSTRATION_INTERNAL);
         setHeaderText(R.string.storage_wizard_move_confirm_title, appName);
         setBodyText(R.string.storage_wizard_move_confirm_body, appName, volumeName);
 

@@ -38,7 +38,8 @@ public class StorageWizardFormatConfirm extends StorageWizardBase {
         setContentView(R.layout.storage_wizard_generic);
 
         mFormatPrivate = getIntent().getBooleanExtra(EXTRA_FORMAT_PRIVATE, false);
-        setIllustrationInternal(mFormatPrivate);
+        setIllustrationType(
+                mFormatPrivate ? ILLUSTRATION_INTERNAL : ILLUSTRATION_PORTABLE);
 
         if (mFormatPrivate) {
             setHeaderText(R.string.storage_wizard_format_confirm_title);

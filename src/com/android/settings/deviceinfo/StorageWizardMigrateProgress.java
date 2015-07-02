@@ -49,7 +49,7 @@ public class StorageWizardMigrateProgress extends StorageWizardBase {
         mMoveId = getIntent().getIntExtra(EXTRA_MOVE_ID, -1);
 
         final String descrip = mStorage.getBestVolumeDescription(mVolume);
-        setIllustrationInternal(true);
+        setIllustrationType(ILLUSTRATION_INTERNAL);
         setHeaderText(R.string.storage_wizard_migrate_progress_title, descrip);
         setBodyText(R.string.storage_wizard_migrate_details, descrip);
 
