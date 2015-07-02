@@ -19,14 +19,22 @@ package com.android.settings.deviceinfo;
 import android.content.Context;
 import android.os.UserHandle;
 import android.preference.Preference;
+import android.text.format.Formatter;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.android.settings.R;
 
 public class StorageItemPreference extends Preference {
     public final int userHandle;
 
+    private ProgressBar progressBar;
+    private static final int PROGRESS_MAX = 100;
+    private int progress = -1;
+
     public StorageItemPreference(Context context, int titleRes) {
         this(context, context.getText(titleRes), UserHandle.USER_NULL);
+        setLayoutResource(R.layout.storage_item);
     }
 
     public StorageItemPreference(Context context, CharSequence title, int userHandle) {
@@ -40,5 +48,32 @@ public class StorageItemPreference extends Preference {
 
     public void setLoading() {
         setSummary(R.string.memory_calculating_size);
+    }
+
+    public void setStorageSize(long size, long total) {
+        setSummary(Formatter.formatFileSize(getContext(), size));
+        progress = (int)(size * PROGRESS_MAX / total);
+        updateProgressBar();
+    }
+
+    protected void updateProgressBar() {
+        if (progressBar == null)
+            return;
+
+        if (progress == -1) {
+            progressBar.setVisibility(View.GONE);
+            return;
+        }
+
+        progressBar.setVisibility(View.VISIBLE);
+        progressBar.setMax(PROGRESS_MAX);
+        progressBar.setProgress(progress);
+    }
+
+    @Override
+    protected void onBindView(View view) {
+        progressBar = (ProgressBar) view.findViewById(android.R.id.progress);
+        updateProgressBar();
+        super.onBindView(view);
     }
 }

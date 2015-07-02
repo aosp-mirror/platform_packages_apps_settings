@@ -430,7 +430,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
     }
 
     private void updatePreference(StorageItemPreference pref, long size) {
-        pref.setSummary(Formatter.formatFileSize(getActivity(), size));
+        pref.setStorageSize(size, mVolume.getPath().getTotalSpace());
     }
 
     /**
