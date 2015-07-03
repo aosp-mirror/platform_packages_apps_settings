@@ -114,5 +114,6 @@ public class Settings extends SettingsActivity {
     public static class ApnSettingsActivity extends SettingsActivity { /* empty */ }
     public static class WifiCallingSettingsActivity extends SettingsActivity { /* empty */ }
     public static class MemorySettingsActivity extends SettingsActivity { /* empty */ }
+    public static class OverlaySettingsActivity extends SettingsActivity { /* empty */ }
+    public static class WriteSettingsActivity extends SettingsActivity { /* empty */ }
 }
-

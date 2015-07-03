@@ -6855,4 +6855,63 @@
 
     <!-- Number of characters used for lock screen text [CHAR LIMIT=NONE] -->
     <string name="accessibility_lock_screen_progress"><xliff:g id="count" example="1">%1$d</xliff:g> of <xliff:g id="count" example="1">%2$d</xliff:g> characters used</string>
+
+    <!-- System Alert Window settings -->
+    <!-- Title of Draw Overlay preference item [CHAR LIMIT=30] -->
+    <string name="draw_overlay_title">Apps that can draw overlay</string>
+    <!-- Title of draw overlay screen [CHAR LIMIT=30] -->
+    <string name="draw_overlay">Draw over other apps</string>
+    <!-- Settings title in main settings screen for SYSTEM_ALERT_WINDOW [CHAR LIMIT=45] -->
+    <string name="system_alert_window_settings">Draw over other apps</string>
+    <!-- Title for the apps with SYSTEM_ALERT_WINDOW permission/privilege [CHAR LIMIT=20] -->
+    <string name="system_alert_window_apps_title">Apps</string>
+    <!-- Title for the apps that are allowed to draw on top of other apps [CHAR LIMIT=60] -->
+    <string name="system_alert_window_access_title">Can draw overlays</string>
+    <!-- Label for setting which controls whether app can draw overlays [CHAR LIMIT=45] -->
+    <string name="permit_draw_overlay">Permit drawing overlays</string>
+    <!-- Link to the apps page for SYSTEM_ALERT_WINDOW settings [CHAR LIMIT=45] -->
+    <string name="app_overlay_permission_preference">App draw on top permission</string>
+    <!-- Description of allowing overlay setting [CHAR LIMIT=NONE] -->
+    <string name="allow_overlay_description">This permission allows an app to display on top of other apps you\u2019re using and may interfere with your use of the interface in other applications, or change what you think you are seeing in other applications.</string>
+
+    <!-- Keyword for SYSTEM_ALERT_WINDOW -->
+    <string name="keywords_system_alert_window">system alert window dialog draw on top other apps</string>
+    <!-- Main settings screen item's title to go into the overlay settings screen [CHAR LIMIT=25] -->
+    <string name="overlay_settings">Overlay settings</string>
+
+    <!-- Summary of number of apps currently can draw overlays [CHAR LIMIT=60] -->
+    <string name="system_alert_window_summary"><xliff:g id="count" example="10">%d</xliff:g> of <xliff:g id="count" example="10">%d</xliff:g> apps allowed to draw on top of other apps</string>
+
+    <!-- Label for showing apps that can draw overlays [CHAR LIMIT=45] -->
+    <string name="filter_overlay_apps">Apps with permission</string>
+    <!-- Summary of app allowed to draw overlay [CHAR LIMIT=60] -->
+    <string name="system_alert_window_on">Yes</string>
+    <!-- Summary of app not allowed to draw overlay [CHAR LIMIT=60] -->
+    <string name="system_alert_window_off">No</string>
+
+
+    <!-- Write Settings settings -->
+    <!-- Settings title in main settings screen for WRITE_SETTINGS [CHAR LIMIT=30] -->
+    <string name="write_settings">Write system settings</string>
+    <!-- Keyword for WRITE_SETTINGS -->
+    <string name="keywords_write_settings">write modify system settings</string>
+    <!-- Summary of number of apps currently can draw overlays [CHAR LIMIT=60] -->
+    <string name="write_settings_summary"><xliff:g id="count" example="10">%d</xliff:g> of <xliff:g id="count" example="10">%d</xliff:g> apps allowed to read or write system settings</string>
+
+    <!-- Label for showing apps that can write system settings [CHAR LIMIT=45] -->
+    <string name="filter_write_settings_apps">Can write system settings</string>
+    <!-- Title for the apps that are allowed to write system settings [CHAR LIMIT=60] -->
+    <string name="write_settings_title">Can write system settings</string>
+    <!-- Main settings screen item's title to go into the write system settings screen [CHAR LIMIT=25] -->
+    <string name="write_system_settings">Write system settings</string>
+    <!-- Link to the apps page for WRITE_SETTINGS settings [CHAR LIMIT=45] -->
+    <string name="write_settings_preference">App write system settings permission</string>
+    <!-- Label for setting which controls whether app can write system settings [CHAR LIMIT=45] -->
+    <string name="permit_write_settings">Allow write system settings</string>
+    <!-- Description of the write system settings [CHAR LIMIT=NONE] -->
+    <string name="write_settings_description">This permission allows an app to read or write system settings.</string>
+    <!-- Summary of app allowed to write system settings [CHAR LIMIT=45] -->
+    <string name="write_settings_on">Yes</string>
+    <!-- Summary of app not allowed to write system settings [CHAR LIMIT=45] -->
+    <string name="write_settings_off">No</string>
 </resources>
