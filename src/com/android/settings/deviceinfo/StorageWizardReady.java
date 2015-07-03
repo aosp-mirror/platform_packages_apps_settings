@@ -38,11 +38,11 @@ public class StorageWizardReady extends StorageWizardBase {
         final VolumeInfo publicVol = findFirstVolume(VolumeInfo.TYPE_PUBLIC);
         final VolumeInfo privateVol = findFirstVolume(VolumeInfo.TYPE_PRIVATE);
         if (publicVol != null) {
-            setIllustrationInternal(false);
+            setIllustrationType(ILLUSTRATION_PORTABLE);
             setBodyText(R.string.storage_wizard_ready_external_body,
                     mDisk.getDescription());
         } else if (privateVol != null) {
-            setIllustrationInternal(true);
+            setIllustrationType(ILLUSTRATION_INTERNAL);
             setBodyText(R.string.storage_wizard_ready_internal_body,
                     mDisk.getDescription());
         }

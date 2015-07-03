@@ -51,7 +51,8 @@ public class StorageWizardFormatProgress extends StorageWizardBase {
 
         mFormatPrivate = getIntent().getBooleanExtra(
                 StorageWizardFormatConfirm.EXTRA_FORMAT_PRIVATE, false);
-        setIllustrationInternal(mFormatPrivate);
+        setIllustrationType(
+                mFormatPrivate ? ILLUSTRATION_INTERNAL : ILLUSTRATION_PORTABLE);
 
         setHeaderText(R.string.storage_wizard_format_progress_title, mDisk.getDescription());
         setBodyText(R.string.storage_wizard_format_progress_body, mDisk.getDescription());

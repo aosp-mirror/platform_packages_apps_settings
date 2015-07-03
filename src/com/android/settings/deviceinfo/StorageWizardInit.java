@@ -44,7 +44,7 @@ public class StorageWizardInit extends StorageWizardBase {
 
         mIsPermittedToAdopt = UserManager.get(this).isAdminUser();
 
-        setIllustrationInternal(true);
+        setIllustrationType(ILLUSTRATION_SETUP);
         setHeaderText(R.string.storage_wizard_init_title, mDisk.getDescription());
 
         mRadioExternal = (RadioButton) findViewById(R.id.storage_wizard_init_external_title);
@@ -82,10 +82,10 @@ public class StorageWizardInit extends StorageWizardBase {
             if (isChecked) {
                 if (buttonView == mRadioExternal) {
                     mRadioInternal.setChecked(false);
-                    setIllustrationInternal(false);
+                    setIllustrationType(ILLUSTRATION_PORTABLE);
                 } else if (buttonView == mRadioInternal) {
                     mRadioExternal.setChecked(false);
-                    setIllustrationInternal(true);
+                    setIllustrationType(ILLUSTRATION_INTERNAL);
                 }
                 getNextButton().setEnabled(true);
             }

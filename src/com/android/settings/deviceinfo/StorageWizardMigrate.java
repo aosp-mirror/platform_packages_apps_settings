@@ -40,7 +40,7 @@ public class StorageWizardMigrate extends StorageWizardBase {
         }
         setContentView(R.layout.storage_wizard_migrate);
 
-        setIllustrationInternal(true);
+        setIllustrationType(ILLUSTRATION_INTERNAL);
         setHeaderText(R.string.storage_wizard_migrate_title, mDisk.getDescription());
         setBodyText(R.string.memory_calculating_size);
 
