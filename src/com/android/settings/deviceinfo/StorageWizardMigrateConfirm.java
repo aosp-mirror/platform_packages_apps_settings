@@ -16,10 +16,13 @@
 
 package com.android.settings.deviceinfo;
 
+import static com.android.settings.deviceinfo.StorageSettings.TAG;
+
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.storage.VolumeInfo;
+import android.util.Log;
 
 import com.android.settings.R;
 
@@ -36,12 +39,13 @@ public class StorageWizardMigrateConfirm extends StorageWizardBase {
             mVolume = findFirstVolume(VolumeInfo.TYPE_PRIVATE);
         }
 
-        if (mVolume == null) {
+        final VolumeInfo sourceVol = getPackageManager().getPrimaryStorageCurrentVolume();
+        if (sourceVol == null || mVolume == null) {
+            Log.d(TAG, "Missing either source or target volume");
             finish();
             return;
         }
 
-        final VolumeInfo sourceVol = getPackageManager().getPrimaryStorageCurrentVolume();
         final String sourceDescrip = mStorage.getBestVolumeDescription(sourceVol);
         final String targetDescrip = mStorage.getBestVolumeDescription(mVolume);
 
