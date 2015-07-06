@@ -129,6 +129,9 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         mVolumeId = getArguments().getString(VolumeInfo.EXTRA_VOLUME_ID);
         mVolume = mStorageManager.findVolumeById(mVolumeId);
 
+        // Find the emulated shared storage layered above this private volume
+        mSharedVolume = mStorageManager.findEmulatedForPrivate(mVolume);
+
         mMeasure = new StorageMeasurement(context, mVolume, mSharedVolume);
         mMeasure.setReceiver(mReceiver);
 
@@ -139,9 +142,6 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
 
         addPreferencesFromResource(R.xml.device_info_storage_volume);
         getPreferenceScreen().setOrderingAsAdded(true);
-
-        // Find the emulated shared storage layered above this private volume
-        mSharedVolume = mStorageManager.findEmulatedForPrivate(mVolume);
 
         mSummary = new StorageSummaryPreference(context);
 
