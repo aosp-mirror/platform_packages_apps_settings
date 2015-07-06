@@ -27,6 +27,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.storage.DiskInfo;
+import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
 import android.text.TextUtils;
 import android.util.Log;
@@ -39,6 +40,8 @@ public class StorageWizardFormatProgress extends StorageWizardBase {
     private static final String TAG_SLOW_WARNING = "slow_warning";
 
     private boolean mFormatPrivate;
+
+    private PartitionTask mTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,32 +59,48 @@ public class StorageWizardFormatProgress extends StorageWizardBase {
         setHeaderText(R.string.storage_wizard_format_progress_title, mDisk.getDescription());
         setBodyText(R.string.storage_wizard_format_progress_body, mDisk.getDescription());
 
-        setCurrentProgress(20);
-
         getNextButton().setVisibility(View.GONE);
 
-        new PartitionTask().execute();
+        mTask = (PartitionTask) getLastNonConfigurationInstance();
+        if (mTask == null) {
+            mTask = new PartitionTask();
+            mTask.setActivity(this);
+            mTask.execute();
+        } else {
+            mTask.setActivity(this);
+        }
     }
 
-    public class PartitionTask extends AsyncTask<Void, Integer, Exception> {
+    @Override
+    public Object onRetainNonConfigurationInstance() {
+        return mTask;
+    }
+
+    public static class PartitionTask extends AsyncTask<Void, Integer, Exception> {
+        public StorageWizardFormatProgress mActivity;
+
+        private volatile int mProgress = 20;
+
         private volatile long mInternalBench;
         private volatile long mPrivateBench;
 
         @Override
         protected Exception doInBackground(Void... params) {
+            final StorageWizardFormatProgress activity = mActivity;
+            final StorageManager storage = mActivity.mStorage;
             try {
-                if (mFormatPrivate) {
-                    mStorage.partitionPrivate(mDisk.getId());
+                if (activity.mFormatPrivate) {
+                    storage.partitionPrivate(activity.mDisk.getId());
                     publishProgress(40);
 
-                    mInternalBench = mStorage.benchmark(null);
+                    mInternalBench = storage.benchmark(null);
                     publishProgress(60);
 
-                    final VolumeInfo privateVol = findFirstVolume(VolumeInfo.TYPE_PRIVATE);
-                    mPrivateBench = mStorage.benchmark(privateVol.id);
+                    final VolumeInfo privateVol = activity.findFirstVolume(VolumeInfo.TYPE_PRIVATE);
+                    mPrivateBench = storage.benchmark(privateVol.id);
 
                 } else {
-                    mStorage.partitionPublic(mDisk.getId());
+                    storage.partitionPublic(activity.mDisk.getId());
                 }
                 return null;
             } catch (Exception e) {
@@ -91,16 +110,22 @@ public class StorageWizardFormatProgress extends StorageWizardBase {
 
         @Override
         protected void onProgressUpdate(Integer... progress) {
-            setCurrentProgress(progress[0]);
+            mProgress = progress[0];
+            mActivity.setCurrentProgress(mProgress);
+        }
+
+        public void setActivity(StorageWizardFormatProgress activity) {
+            mActivity = activity;
+            mActivity.setCurrentProgress(mProgress);
         }
 
         @Override
         protected void onPostExecute(Exception e) {
-            final Context context = StorageWizardFormatProgress.this;
+            final StorageWizardFormatProgress activity = mActivity;
             if (e != null) {
                 Log.e(TAG, "Failed to partition", e);
-                Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
-                finishAffinity();
+                Toast.makeText(activity, e.getMessage(), Toast.LENGTH_LONG).show();
+                activity.finishAffinity();
                 return;
             }
 
@@ -110,22 +135,24 @@ public class StorageWizardFormatProgress extends StorageWizardBase {
             // TODO: refine this warning threshold
             if (mPrivateBench > 2000000000) {
                 final SlowWarningFragment dialog = new SlowWarningFragment();
-                dialog.show(getFragmentManager(), TAG_SLOW_WARNING);
+                dialog.show(activity.getFragmentManager(), TAG_SLOW_WARNING);
             } else {
-                onFormatFinished();
+                activity.onFormatFinished();
             }
         }
     }
 
-    public class SlowWarningFragment extends DialogFragment {
+    public static class SlowWarningFragment extends DialogFragment {
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             final Context context = getActivity();
 
             final AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
-            final String descrip = mDisk.getDescription();
-            final String genericDescip = getGenericDescription(mDisk);
+            final StorageWizardFormatProgress target =
+                    (StorageWizardFormatProgress) getActivity();
+            final String descrip = target.getDiskDescription();
+            final String genericDescip = target.getGenericDiskDescription();
             builder.setMessage(TextUtils.expandTemplate(getText(R.string.storage_wizard_slow_body),
                     descrip, genericDescip));
 
@@ -142,11 +169,15 @@ public class StorageWizardFormatProgress extends StorageWizardBase {
         }
     }
 
-    private String getGenericDescription(DiskInfo disk) {
+    private String getDiskDescription() {
+        return mDisk.getDescription();
+    }
+
+    private String getGenericDiskDescription() {
         // TODO: move this directly to DiskInfo
-        if (disk.isSd()) {
+        if (mDisk.isSd()) {
             return getString(com.android.internal.R.string.storage_sd_card);
-        } else if (disk.isUsb()) {
+        } else if (mDisk.isUsb()) {
             return getString(com.android.internal.R.string.storage_usb_drive);
         } else {
             return null;
