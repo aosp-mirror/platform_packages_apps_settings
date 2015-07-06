@@ -17,9 +17,11 @@
 package com.android.settings.deviceinfo;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.preference.Preference;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.android.settings.R;
 
@@ -46,6 +48,9 @@ public class StorageSummaryPreference extends Preference {
         } else {
             progress.setVisibility(View.GONE);
         }
+
+        final TextView summary = (TextView) view.findViewById(android.R.id.summary);
+        summary.setTextColor(Color.parseColor("#8a000000"));
 
         super.onBindView(view);
     }

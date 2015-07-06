@@ -81,6 +81,11 @@ public abstract class MigrateEstimateTask extends AsyncTask<Void, Void, Long> im
         final VolumeInfo privateVol = mContext.getPackageManager().getPrimaryStorageCurrentVolume();
         final VolumeInfo emulatedVol = mStorage.findEmulatedForPrivate(privateVol);
 
+        if (emulatedVol == null) {
+            Log.w(TAG, "Failed to find current primary storage");
+            return -1L;
+        }
+
         final String path = emulatedVol.getPath().getAbsolutePath();
         Log.d(TAG, "Estimating for current path " + path);
 
