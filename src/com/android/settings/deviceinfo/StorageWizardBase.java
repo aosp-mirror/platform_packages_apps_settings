@@ -150,7 +150,9 @@ public abstract class StorageWizardBase extends Activity {
     }
 
     protected void setHeaderText(int resId, String... args) {
-        getSetupWizardLayout().setHeaderText(TextUtils.expandTemplate(getText(resId), args));
+        final CharSequence headerText = TextUtils.expandTemplate(getText(resId), args);
+        getSetupWizardLayout().setHeaderText(headerText);
+        setTitle(headerText);
     }
 
     protected void setBodyText(int resId, String... args) {
