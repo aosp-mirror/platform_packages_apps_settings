@@ -291,7 +291,7 @@
     <string name="date_time_set_date_title" msgid="6928286765325608604">"Дата"</string>
     <string name="date_time_set_date" msgid="7021491668550232105">"Дата"</string>
     <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"Сортувати за алфавітом"</string>
-    <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Сорт. за час. поясом"</string>
+    <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Сортувати за часовим поясом"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Дата"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Час"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Автоматичне блокування"</string>
@@ -516,7 +516,7 @@
     <string name="bluetooth_pairing_dialog_sharing_phonebook_title" msgid="7664141669886358618">"Надати доступ до телефонної книги?"</string>
     <string name="bluetooth_pairing_dialog_contants_request" msgid="5531109163573611348">"Пристрій <xliff:g id="DEVICE_NAME">%1$s</xliff:g> хоче отримати доступ до ваших контактів та історії викликів."</string>
     <string name="bluetooth_pairing_dialog_paring_request" msgid="8451248193517851958">"Пристрій <xliff:g id="DEVICE_NAME">%1$s</xliff:g> хоче підключитися до Bluetooth. Він отримає доступ до ваших контактів та історії дзвінків."</string>
-    <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"Спарені пристрої"</string>
+    <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"Підключені пристрої"</string>
     <string name="bluetooth_preference_found_devices" msgid="1647983835063249680">"Доступні пристрої"</string>
     <string name="bluetooth_preference_no_found_devices" msgid="7594339669961811591">"Немає пристроїв"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"Підключ."</string>
@@ -1599,7 +1599,7 @@
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Ярлик доступності"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"Увімкнути"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"Вимк."</string>
-    <string name="accessibility_global_gesture_preference_description" msgid="750438015254396963">"Якщо цю функцію ввімкнено, функції доступності можна швидко ввімкнути двома способами.\n\nКрок 1. Натисніть і утримуйте кнопку живлення, поки не спрацює звуковий сигнал або вібросигнал.\n\nКрок 2. Натисніть і утримуйте двома пальцями, поки не пролунає звукове підтвердження.\n\nЯкщо пристроєм користується декілька осіб, цей ярлик на екрані блокування дозволяє тимчасово ввімкнути доступність, поки пристрій не буде розблоковано."</string>
+    <string name="accessibility_global_gesture_preference_description" msgid="750438015254396963">"Якщо цю функцію ввімкнено, можна швидко вмикати спеціальні можливості:\n\n1. Натисніть і утримуйте кнопку живлення, поки не спрацює звуковий сигнал або вібросигнал.\n\n2. Натисніть і утримуйте екран двома пальцями, поки не пролунає звукове підтвердження.\n\nЯкщо пристроєм користується декілька осіб, цей ярлик на екрані блокування дозволяє тимчасово ввімкнути спеціальні можливості, поки пристрій не буде розблоковано."</string>
     <string name="accessibility_toggle_large_text_preference_title" msgid="6307247527580207161">"Великий текст"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="2567402942683463779">"Висококонтрастний текст"</string>
     <string name="accessibility_toggle_screen_magnification_preference_title" msgid="2472285215737820469">"Збільшення екрана"</string>
@@ -2795,7 +2795,7 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="2116416853043103135">"Ігнорувати оптимізацію"</string>
     <string name="high_power_filter_on" msgid="3862942127137594196">"Дозволено"</string>
-    <string name="high_power_on" msgid="148473814103292724">"Ігнорує оптимізацію використання акумулятора"</string>
+    <string name="high_power_on" msgid="148473814103292724">"Без обмеження використ. акумулятора"</string>
     <string name="high_power_off" msgid="221092098425904010">"Не дозволено"</string>
     <string name="high_power_desc" msgid="8412735192889327770">"Не застосовувати оптимізацію використання заряду акумулятора. Акумулятор може розряджатися швидше."</string>
     <plurals name="high_power_count" formatted="false" msgid="4343190376439806186">
@@ -2818,13 +2818,10 @@
     <string name="inactive_apps_title" msgid="1317817863508274533">"Неактивні додатки"</string>
     <string name="inactive_app_inactive_summary" msgid="6768756967594202411">"Неактивний додаток. Торкніться, щоб активувати."</string>
     <string name="inactive_app_active_summary" msgid="4512911571954375968">"Активний додаток. Торкніться, щоб дезактивувати."</string>
-    <string name="assist_access_context_title" msgid="2047105711005856521">"Надати доступ до поточного контексту"</string>
-    <!-- no translation found for assist_access_context_summary (7573538643562533886) -->
-    <skip />
-    <!-- no translation found for assist_access_screenshot_title (7994303398517230267) -->
-    <skip />
-    <!-- no translation found for assist_access_screenshot_summary (8774637450198111406) -->
-    <skip />
+    <string name="assist_access_context_title" msgid="2047105711005856521">"Працювати з поточним екраном"</string>
+    <string name="assist_access_context_summary" msgid="7573538643562533886">"Надати додатку-помічнику доступ до вмісту та метаданих із додатка, яким ви користуєтесь"</string>
+    <string name="assist_access_screenshot_title" msgid="7994303398517230267">"Надати доступ до знімків екрана"</string>
+    <string name="assist_access_screenshot_summary" msgid="8774637450198111406">"Дозволити додатку-помічнику аналізувати зображення з додатка, яким ви користуєтесь"</string>
     <string name="assist_footer" msgid="2283187001990543739">"Додатки-помічники автоматично знаходять і показують корисну інформацію. Деякі додатки підтримують панель запуску й голосовий ввід, щоб надавати вам усебічну допомогу."</string>
     <string name="average_memory_use" msgid="829566450150198512">"Середнє використання пам’яті"</string>
     <string name="maximum_memory_use" msgid="7493720799710132496">"Найбільше використання пам’яті"</string>

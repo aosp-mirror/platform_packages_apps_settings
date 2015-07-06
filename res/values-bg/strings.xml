@@ -1070,7 +1070,7 @@
     <string name="menu_restore" msgid="8260067415075573273">"Възстановяване на стандартни"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"Възстановяването на стандартните настройките за името на точката за достъп (APN) завърши."</string>
     <string name="reset_network_title" msgid="4557113742173895074">"Нулиране на настройките на мрежата"</string>
-    <string name="reset_network_desc" msgid="581668983587311282">"Така ще се нулират всички мрежови настройки, включително тези за:\n\n"<li>"Wi‑Fi;"</li>\n<li>"клетъчни данни;"</li>\n<li>"Bluetooth."</li></string>
+    <string name="reset_network_desc" msgid="581668983587311282">"Така ще се нулират всички мрежови настройки, включително тези за:\n\n"<li>"Wi‑Fi"</li>\n<li>"клетъчни данни"</li>\n<li>"Bluetooth"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"Нулиране на настройките"</string>
     <string name="reset_network_final_desc" msgid="6388371121099245116">"Да се нулират ли всички мрежови настройки? Не можете да отмените това действие!"</string>
     <string name="reset_network_final_button_text" msgid="1797434793741744635">"Нулиране на настройките"</string>
@@ -1095,7 +1095,7 @@
     <string name="master_clear_final_desc" msgid="7318683914280403086">"Да се изтрият ли цялата ви лична информация и всички изтеглени приложения? Не можете да отмените това действие!"</string>
     <string name="master_clear_final_button_text" msgid="5390908019019242910">"Изтриване на всичко"</string>
     <string name="master_clear_failed" msgid="2503230016394586353">"Не се състоя рестартиране, защото услугата за изчистване на системата не се предлага."</string>
-    <string name="master_clear_confirm_title" msgid="7572642091599403668">"Да се зададе ли повторно?"</string>
+    <string name="master_clear_confirm_title" msgid="7572642091599403668">"Нулиране?"</string>
     <string name="master_clear_not_available" msgid="1000370707967468909">"За този потребител не е налице възстановяване на фабричните настройки"</string>
     <string name="master_clear_progress_title" msgid="5194793778701994634">"Изтрива се"</string>
     <string name="master_clear_progress_text" msgid="6559096229480527510">"Моля, изчакайте..."</string>
@@ -2722,7 +2722,7 @@
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"<xliff:g id="COUNT_0">%d</xliff:g> от <xliff:g id="COUNT_1">%d</xliff:g> приложения имат разрешение"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Докоснете за „събуждане“"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Докоснете два пъти произволно място на екрана, за да „събудите“ устройството"</string>
-    <string name="domain_urls_title" msgid="8762012672312435252">"Връзки за приложението"</string>
+    <string name="domain_urls_title" msgid="8762012672312435252">"Връзки за приложения"</string>
     <string name="domain_urls_summary_none" msgid="2639588015479657864">"Без отваряне на поддържани връзки"</string>
     <string name="domain_urls_summary_one" msgid="3704934031930978405">"Отваряне на <xliff:g id="DOMAIN">%s</xliff:g>"</string>
     <string name="domain_urls_summary_some" msgid="812936714383016364">"Отваряне на <xliff:g id="DOMAIN">%s</xliff:g> и сродни URL адреси"</string>
@@ -2763,7 +2763,7 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="2116416853043103135">"Игнориране на оптимизациите"</string>
     <string name="high_power_filter_on" msgid="3862942127137594196">"Разрешено"</string>
-    <string name="high_power_on" msgid="148473814103292724">"Пренебрегване на оптимизациите на батерията"</string>
+    <string name="high_power_on" msgid="148473814103292724">"Пренебр. на оптимизац. на батерията"</string>
     <string name="high_power_off" msgid="221092098425904010">"Не е разрешено"</string>
     <string name="high_power_desc" msgid="8412735192889327770">"Батерията не се оптимизира и може да се изразходва по-бързо."</string>
     <plurals name="high_power_count" formatted="false" msgid="4343190376439806186">
@@ -2784,13 +2784,10 @@
     <string name="inactive_apps_title" msgid="1317817863508274533">"Неактивни приложения"</string>
     <string name="inactive_app_inactive_summary" msgid="6768756967594202411">"Неактивно. Докоснете за превключване."</string>
     <string name="inactive_app_active_summary" msgid="4512911571954375968">"Активно. Докоснете за превключване."</string>
-    <string name="assist_access_context_title" msgid="2047105711005856521">"Използване на текущия контекст"</string>
-    <!-- no translation found for assist_access_context_summary (7573538643562533886) -->
-    <skip />
-    <!-- no translation found for assist_access_screenshot_title (7994303398517230267) -->
-    <skip />
-    <!-- no translation found for assist_access_screenshot_summary (8774637450198111406) -->
-    <skip />
+    <string name="assist_access_context_title" msgid="2047105711005856521">"Използване на контекста"</string>
+    <string name="assist_access_context_summary" msgid="7573538643562533886">"Разрешаване на помощното приложение да осъществява достъп до съдържанието и метаданните на използваното от вас приложение"</string>
+    <string name="assist_access_screenshot_title" msgid="7994303398517230267">"Използване на екранни снимки"</string>
+    <string name="assist_access_screenshot_summary" msgid="8774637450198111406">"Разрешаване на помощното приложение да анализира изображенията на използваното от вас приложение"</string>
     <string name="assist_footer" msgid="2283187001990543739">"Няма нужда да търсите съдействие – помощните приложения ви помагат да идентифицирате полезната информация и да изпълнявате свързаните с нея действия. Някои приложения предлагат поддръжка за стартовия панел и услугите за гласово въвеждане, за да ви предоставят интегрирана помощ."</string>
     <string name="average_memory_use" msgid="829566450150198512">"Средно използвана памет"</string>
     <string name="maximum_memory_use" msgid="7493720799710132496">"Максимално използвана памет"</string>

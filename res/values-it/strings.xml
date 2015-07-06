@@ -1520,7 +1520,7 @@
     <string name="wifi_verbose_logging" msgid="4203729756047242344">"Attiva registrazione dettagliata Wi-Fi"</string>
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Wi‑Fi aggressivo per passaggio a cellulare"</string>
     <string name="wifi_allow_scan_with_traffic" msgid="3601853081178265786">"Consenti sempre scansioni roaming Wi-Fi"</string>
-    <string name="legacy_dhcp_client" msgid="694426978909127287">"Utilizza il client della versione precedente di DHCP"</string>
+    <string name="legacy_dhcp_client" msgid="694426978909127287">"Usa client DHCP precedente"</string>
     <string name="mobile_data_always_on" msgid="7745605759775320362">"Dati cellulare sempre attivi"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"Mostra opzioni per la certificazione display wireless"</string>
     <string name="wifi_verbose_logging_summary" msgid="6615071616111731958">"Aumenta il livello di registrazione Wi-Fi, mostrando il SSID RSSI nel selettore Wi-Fi"</string>
@@ -2114,7 +2114,7 @@
     <string name="animator_duration_scale_title" msgid="3406722410819934083">"Scala durata animatore"</string>
     <string name="overlay_display_devices_title" msgid="5364176287998398539">"Simula display secondari"</string>
     <string name="enable_multi_window" msgid="1091779249819137016">"Modalità multi-finestra"</string>
-    <string name="enable_multi_window_summary" msgid="5837641304114783514">"Diverse attività contemporaneamente sullo schermo."</string>
+    <string name="enable_multi_window_summary" msgid="5837641304114783514">"Diverse attività sullo schermo contemporaneamente."</string>
     <string name="confirm_enable_multi_window_title" msgid="950964546995895971">"Attivare la modalità multi-finestra?"</string>
     <string name="confirm_enable_multi_window_text" msgid="565834092374755117">"AVVISO. Si tratta di una funzione altamente sperimentale che consente di svolgere diverse attività contemporaneamente sullo schermo tramite l\'interfaccia utente Applicazioni recenti. Alcune app potrebbero arrestarsi in modo anomalo o non funzionare correttamente se utilizzate con questa funzione."</string>
     <string name="debug_applications_category" msgid="4206913653849771549">"App"</string>
@@ -2513,7 +2513,7 @@
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Suoneria telefono"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Suoneria predefinita notifiche"</string>
-    <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Vibrazione anche per chiamate"</string>
+    <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Vibrazione per le chiamate"</string>
     <string name="notification_section_header" msgid="95661783916799134">"Notifiche"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"Avanzate"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"Luce di notifica pulsante"</string>
@@ -2666,7 +2666,7 @@
     <string name="slot_number" msgid="3762676044904653577">"(Slot <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
     <string name="launch_by_default" msgid="1840761193189009248">"Apri per impostazione predefinita"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> in uso nella <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
-    <string name="app_launch_domain_links_title" msgid="6789955009107320092">"Link dell\'app"</string>
+    <string name="app_launch_domain_links_title" msgid="6789955009107320092">"Link alle app"</string>
     <string name="app_launch_open_domain_urls_title" msgid="8914721351596745701">"Apri link supportati"</string>
     <string name="app_launch_open_domain_urls_summary" msgid="5367573364240712217">"Apri senza chiedere conferma"</string>
     <string name="app_launch_supported_domain_urls_title" msgid="8250695258211477480">"Link supportati"</string>
@@ -2722,10 +2722,10 @@
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"Sono consentite <xliff:g id="COUNT_0">%d</xliff:g> app su <xliff:g id="COUNT_1">%d</xliff:g>"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Tocca per riattivare"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Tocca due volte un punto qualsiasi dello schermo per riattivare il dispositivo"</string>
-    <string name="domain_urls_title" msgid="8762012672312435252">"Link dell\'app"</string>
+    <string name="domain_urls_title" msgid="8762012672312435252">"Link alle app"</string>
     <string name="domain_urls_summary_none" msgid="2639588015479657864">"I link supportati non vengono aperti"</string>
-    <string name="domain_urls_summary_one" msgid="3704934031930978405">"Viene aperto <xliff:g id="DOMAIN">%s</xliff:g>"</string>
-    <string name="domain_urls_summary_some" msgid="812936714383016364">"Vengono aperti <xliff:g id="DOMAIN">%s</xliff:g> e gli URL correlati"</string>
+    <string name="domain_urls_summary_one" msgid="3704934031930978405">"Apre <xliff:g id="DOMAIN">%s</xliff:g>"</string>
+    <string name="domain_urls_summary_some" msgid="812936714383016364">"Apre <xliff:g id="DOMAIN">%s</xliff:g> e URL correlati"</string>
     <plurals name="domain_urls_apps_summary" formatted="false" msgid="4322996467951692661">
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> app possono aprire i relativi link supportati</item>
       <item quantity="one">Un\'app può aprire i relativi link supportati</item>
@@ -2762,7 +2762,7 @@
     <string name="memory_use_running_format" msgid="4172488041800743760">"<xliff:g id="MEMORY">%1$s</xliff:g>/<xliff:g id="RUNNING">%2$s</xliff:g>"</string>
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="2116416853043103135">"Ignora ottimizzazioni"</string>
-    <string name="high_power_filter_on" msgid="3862942127137594196">"Consentito"</string>
+    <string name="high_power_filter_on" msgid="3862942127137594196">"Consentite"</string>
     <string name="high_power_on" msgid="148473814103292724">"Ignora le ottimizzazioni della batteria"</string>
     <string name="high_power_off" msgid="221092098425904010">"Non consentito"</string>
     <string name="high_power_desc" msgid="8412735192889327770">"Non applicare le ottimizzazioni della batteria. La batteria potrebbe scaricarsi più rapidamente."</string>
@@ -2773,7 +2773,7 @@
     <string name="battery_summary" msgid="101415762036784289">"<xliff:g id="PERCENTAGE">%1$d</xliff:g>%% di utilizzo dall\'ultima ricarica completa"</string>
     <string name="no_battery_summary" msgid="3528036835462846814">"Nessun utilizzo della batteria dall\'ultima ricarica completa"</string>
     <string name="app_notification_preferences" msgid="1599319335092722613">"Impostazioni app"</string>
-    <string name="system_ui_settings" msgid="579824306467081123">"Mostra sintetizzatore interfaccia di sistema"</string>
+    <string name="system_ui_settings" msgid="579824306467081123">"Mostra SystemUI Tuner"</string>
     <string name="additional_permissions" msgid="6463784193877056080">"Altre autorizzazioni"</string>
     <string name="additional_permissions_more" msgid="3538612272673191451">"Altre <xliff:g id="COUNT">%1$d</xliff:g>"</string>
     <string name="usb_use_charging_only" msgid="2625934955897625321">"Solo per la ricarica"</string>
@@ -2785,12 +2785,9 @@
     <string name="inactive_app_inactive_summary" msgid="6768756967594202411">"Non attiva. Tocca per attivare."</string>
     <string name="inactive_app_active_summary" msgid="4512911571954375968">"Attiva. Tocca per disattivare."</string>
     <string name="assist_access_context_title" msgid="2047105711005856521">"Utilizza contesto corrente"</string>
-    <!-- no translation found for assist_access_context_summary (7573538643562533886) -->
-    <skip />
-    <!-- no translation found for assist_access_screenshot_title (7994303398517230267) -->
-    <skip />
-    <!-- no translation found for assist_access_screenshot_summary (8774637450198111406) -->
-    <skip />
+    <string name="assist_access_context_summary" msgid="7573538643562533886">"Consenti all\'app di assistenza di accedere a contenuti e metadati dell\'app in uso"</string>
+    <string name="assist_access_screenshot_title" msgid="7994303398517230267">"Utilizza screenshot"</string>
+    <string name="assist_access_screenshot_summary" msgid="8774637450198111406">"Consenti all\'app di assistenza di analizzare le immagini dell\'app in uso"</string>
     <string name="assist_footer" msgid="2283187001990543739">"Le app di assistenza ti aiutano a identificare informazioni utili e ad agire in base a esse senza dover chiedere. Alcune app supportano sia Avvio applicazioni che servizi di input vocale per offrirti assistenza integrata."</string>
     <string name="average_memory_use" msgid="829566450150198512">"Utilizzo medio di memoria"</string>
     <string name="maximum_memory_use" msgid="7493720799710132496">"Utilizzo massimo di memoria"</string>
