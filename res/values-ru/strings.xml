@@ -621,7 +621,7 @@
     <string name="wifi_menu_forget" msgid="8736964302477327114">"Удалить эту сеть"</string>
     <string name="wifi_menu_modify" msgid="2068554918652440105">"Изменить сеть"</string>
     <string name="wifi_menu_write_to_nfc" msgid="7692881642188240324">"Записать на NFC-метку"</string>
-    <string name="wifi_empty_list_wifi_off" msgid="8056223875951079463">"Чтобы посмотреть доступные сети, включите Wi-Fi."</string>
+    <string name="wifi_empty_list_wifi_off" msgid="8056223875951079463">"Чтобы увидеть доступные сети, включите Wi-Fi"</string>
     <string name="wifi_empty_list_wifi_on" msgid="8746108031587976356">"Поиск сетей Wi-Fi…"</string>
     <string name="wifi_empty_list_user_restricted" msgid="7322372065475939129">"У вас недостаточно прав для изменения настроек сети Wi‑Fi"</string>
     <string name="wifi_other_network" msgid="1484433183857764750">"Добавить сеть"</string>
@@ -2747,15 +2747,15 @@
     <string name="configure_apps" msgid="6685680790825882528">"Настроить приложения"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Неизвестное приложение"</string>
     <string name="choose_profile" msgid="8229363046053568878">"Выберите профиль"</string>
-    <string name="app_permissions" msgid="4148222031991883874">"Разрешения для приложений"</string>
-    <string name="app_permissions_summary" msgid="2098173899436407221">"Приложения с расширенным доступом: <xliff:g id="COUNT_0">%d</xliff:g> из <xliff:g id="COUNT_1">%d</xliff:g>"</string>
-    <string name="app_permissions_group_summary" msgid="2721303391744909000">"Приложения с разрешением: <xliff:g id="COUNT_0">%d</xliff:g> из <xliff:g id="COUNT_1">%d</xliff:g>"</string>
+    <string name="app_permissions" msgid="4148222031991883874">"Разрешения приложений"</string>
+    <string name="app_permissions_summary" msgid="2098173899436407221">"Расширенный доступ: <xliff:g id="COUNT_0">%d</xliff:g> из <xliff:g id="COUNT_1">%d</xliff:g>"</string>
+    <string name="app_permissions_group_summary" msgid="2721303391744909000">"Разрешено: <xliff:g id="COUNT_0">%d</xliff:g> из <xliff:g id="COUNT_1">%d</xliff:g>"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Включение нажатием"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Дважды нажмите в любом месте экрана, чтобы включить устройство"</string>
     <string name="domain_urls_title" msgid="8762012672312435252">"Ссылки в приложениях"</string>
     <string name="domain_urls_summary_none" msgid="2639588015479657864">"Не открывать поддерживаемые ссылки"</string>
-    <string name="domain_urls_summary_one" msgid="3704934031930978405">"Открывать только ссылки из <xliff:g id="DOMAIN">%s</xliff:g>"</string>
-    <string name="domain_urls_summary_some" msgid="812936714383016364">"Открывать ссылки из <xliff:g id="DOMAIN">%s</xliff:g> и другие URL домена"</string>
+    <string name="domain_urls_summary_one" msgid="3704934031930978405">"<xliff:g id="DOMAIN">%s</xliff:g>"</string>
+    <string name="domain_urls_summary_some" msgid="812936714383016364">"<xliff:g id="DOMAIN">%s</xliff:g> и др."</string>
     <plurals name="domain_urls_apps_summary" formatted="false" msgid="4322996467951692661">
       <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> приложение может открывать поддерживаемые ссылки</item>
       <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> приложения могут открывать поддерживаемые ссылки</item>
@@ -2764,7 +2764,7 @@
     </plurals>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Отпечаток не опознан"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"Приложения по умолчанию"</string>
-    <string name="assist_and_voice_input_title" msgid="1733165754793221197">"Интерактивные помощники"</string>
+    <string name="assist_and_voice_input_title" msgid="1733165754793221197">"Помощник и голосовой ввод"</string>
     <string name="default_assist_title" msgid="8868488975409247921">"Помощник"</string>
     <string name="default_assist_none" msgid="3709083569608735487">"Нет"</string>
     <string name="choose_assist_title" msgid="554234448228740980">"Выберите приложение"</string>
@@ -2819,12 +2819,9 @@
     <string name="inactive_app_inactive_summary" msgid="6768756967594202411">"Неактивно. Нажмите для переключения."</string>
     <string name="inactive_app_active_summary" msgid="4512911571954375968">"Активно. Нажмите для переключения."</string>
     <string name="assist_access_context_title" msgid="2047105711005856521">"Работать с текущим экраном"</string>
-    <!-- no translation found for assist_access_context_summary (7573538643562533886) -->
-    <skip />
-    <!-- no translation found for assist_access_screenshot_title (7994303398517230267) -->
-    <skip />
-    <!-- no translation found for assist_access_screenshot_summary (8774637450198111406) -->
-    <skip />
+    <string name="assist_access_context_summary" msgid="7573538643562533886">"Разрешите приложению-помощнику доступ к контенту и метаданным приложения, с которым вы работаете"</string>
+    <string name="assist_access_screenshot_title" msgid="7994303398517230267">"Использовать скриншоты"</string>
+    <string name="assist_access_screenshot_summary" msgid="8774637450198111406">"Разрешите приложению-помощнику анализировать изображения приложения, с которым вы работаете"</string>
     <string name="assist_footer" msgid="2283187001990543739">"Приложения-помощники позволяют находить полезную информацию и работать с ней. Для большего удобства некоторые из них поддерживают и панель запуска, и голосовой ввод."</string>
     <string name="average_memory_use" msgid="829566450150198512">"Средний объем исп. памяти"</string>
     <string name="maximum_memory_use" msgid="7493720799710132496">"Макс. объем исп. памяти"</string>

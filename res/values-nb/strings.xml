@@ -73,7 +73,7 @@
     <string name="sdcard_unmount" product="nosdcard" msgid="6325292633327972272">"Koble fra USB-lagring"</string>
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Avmonter minnekort"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Slett USB-lagring"</string>
-    <string name="sdcard_format" product="default" msgid="6713185532039187532">"Slett SD-kort"</string>
+    <string name="sdcard_format" product="default" msgid="6713185532039187532">"Tøm SD-kort"</string>
     <string name="small_font" msgid="2295331917424072635">"Liten"</string>
     <string name="medium_font" msgid="2068475425515133701">"Middels"</string>
     <string name="large_font" msgid="599055175160971446">"Stor"</string>
@@ -927,7 +927,7 @@
     <string name="sd_mount_summary" product="nosdcard" msgid="4673411327373419641"></string>
     <string name="sd_mount_summary" product="default" msgid="4673411327373419641"></string>
     <string name="sd_format" product="nosdcard" msgid="2148179271623099054">"Slett USB-lagring"</string>
-    <string name="sd_format" product="default" msgid="2576054280507119870">"Slett SD-kort"</string>
+    <string name="sd_format" product="default" msgid="2576054280507119870">"Tøm SD-kort"</string>
     <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"Sletter intern USB-lagring, som musikk og bilder"</string>
     <string name="sd_format_summary" product="default" msgid="212703692181793109">"Sletter alle data på SD-kortet, for eksempel musikk og bilder"</string>
     <string name="memory_clear_cache_title" msgid="5423840272171286191">"Vil du slette bufrede data?"</string>
@@ -1070,7 +1070,7 @@
     <string name="menu_restore" msgid="8260067415075573273">"Tilbakestill til standardvalg"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"Tilbakestilling av standard APN-innstillinger er fullført."</string>
     <string name="reset_network_title" msgid="4557113742173895074">"Tilbakestill nettverksinnstillingene"</string>
-    <string name="reset_network_desc" msgid="581668983587311282">"Dette tilbakestiller alle nettverksinnstillingene, inkludert\n\n"<li>"Wi‑Fi"</li>\n<li>"mobildata"</li>\n<li>"Bluetooth"</li></string>
+    <string name="reset_network_desc" msgid="581668983587311282">"Dette tilbakestiller alle nettverksinnstillinger, inkludert\n\n"<li>"Wi‑Fi"</li>\n<li>"mobildata"</li>\n<li>"Bluetooth"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"Tilbakestill innstillinger"</string>
     <string name="reset_network_final_desc" msgid="6388371121099245116">"Vil du tilbakestille alle nettverksinnstillingene? Du kan ikke angre denne handlingen."</string>
     <string name="reset_network_final_button_text" msgid="1797434793741744635">"Tilbakestill innstillinger"</string>
@@ -1078,35 +1078,35 @@
     <string name="network_reset_not_available" msgid="7188610385577164676">"Tilbakestilling av nettverket er ikke tilgjengelig for denne brukeren"</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"Nettverksinnstillingene er tilbakestilt"</string>
     <string name="device_reset_title" msgid="2384019005638768076">"Tilbakestill enheten"</string>
-    <string name="master_clear_title" msgid="5907939616087039756">"Fabrikkinnstillinger"</string>
+    <string name="master_clear_title" msgid="5907939616087039756">"Tilbakestill til fabrikkstandard"</string>
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"Dette kommer til å slette alle data fra nettbrettets "<b>"interne lagringsplass"</b>", herunder:\n\n"<li>"Google-kontoen din"</li>\n<li>"Data og innstillinger for system og apper"</li>\n<li>"Nedlastede apper"</li></string>
-    <string name="master_clear_desc" product="default" msgid="4800386183314202571">"Dette sletter alle data fra telefonens "<b>"interne lagringsplass"</b>", herunder\n\n"<li>"Google-kontoen din"</li>\n<li>"data og innstillinger for system og apper"</li>\n<li>"nedlastede apper"</li></string>
+    <string name="master_clear_desc" product="default" msgid="4800386183314202571">"Dette sletter alle data fra telefonens "<b>"interne lagringsplass"</b>", inkludert\n\n"<li>"Google-kontoen din"</li>\n<li>"data og innstillinger for system og apper"</li>\n<li>"nedlastede apper"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Du er for øyeblikket pålogget følgende kontoer:\n"</string>
     <string name="master_clear_other_users_present" product="default" msgid="5161423070702470742">\n\n"Det er andre brukere tilstede på denne enheten.\n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"Musikk"</li>\n<li>"Bilder"</li>\n<li>"Andre brukerdata"</li></string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="7744115866662613411">\n\n"For å slette musikk, bilder og andre brukerdata må "<b>"USB-lageret"</b>" tømmes."</string>
     <string name="master_clear_desc_erase_external_storage" product="default" msgid="4801026652617377093">\n\n"For å slette musikk, bilder og andre brukerdata, må "<b>"SD-kortet"</b>" tømmes."</string>
     <string name="erase_external_storage" product="nosdcard" msgid="969364037450286809">"Slett USB-lagring"</string>
-    <string name="erase_external_storage" product="default" msgid="1397239046334307625">"Slett SD-kort"</string>
+    <string name="erase_external_storage" product="default" msgid="1397239046334307625">"Tøm SD-kort"</string>
     <string name="erase_external_storage_description" product="nosdcard" msgid="4728558173931599429">"Slett alle data på intern USB-lagring, som for eksempel musikk eller bilder"</string>
-    <string name="erase_external_storage_description" product="default" msgid="1737638779582964966">"Slett alle data på SD-kortet, som for eksempel musikk eller bilder"</string>
+    <string name="erase_external_storage_description" product="default" msgid="1737638779582964966">"Slett alle data fra SD-kortet, som musikk og bilder"</string>
     <string name="master_clear_button_text" product="tablet" msgid="3130786116528304116">"Tilbakestill nettbrettet"</string>
     <string name="master_clear_button_text" product="default" msgid="7550632653343157971">"Tilbakestill telefonen"</string>
     <string name="master_clear_final_desc" msgid="7318683914280403086">"Vil du slette den personlige informasjonen din og nedlastede apper? Du kan ikke angre denne handlingen."</string>
-    <string name="master_clear_final_button_text" msgid="5390908019019242910">"Fjern alt"</string>
+    <string name="master_clear_final_button_text" msgid="5390908019019242910">"Slett alt"</string>
     <string name="master_clear_failed" msgid="2503230016394586353">"Tilbakestilling ble ikke utført fordi tilbakestillingstjenesten ikke er tilgjengelig."</string>
     <string name="master_clear_confirm_title" msgid="7572642091599403668">"Vil du tilbakestille?"</string>
     <string name="master_clear_not_available" msgid="1000370707967468909">"Tilbakestilling til fabrikkstandard er ikke tilgjengelig for denne brukeren"</string>
     <string name="master_clear_progress_title" msgid="5194793778701994634">"Sletter"</string>
     <string name="master_clear_progress_text" msgid="6559096229480527510">"Vent litt …"</string>
     <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"Slett USB-lagring"</string>
-    <string name="media_format_title" product="default" msgid="4427528440306787972">"Slett SD-kort"</string>
+    <string name="media_format_title" product="default" msgid="4427528440306787972">"Tøm SD-kort"</string>
     <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"Sletter alle data i USB-lagr."</string>
     <string name="media_format_summary" product="default" msgid="3805714639375830120">"Sletter alle data fra minnekortet"</string>
     <string name="media_format_desc" product="nosdcard" msgid="4557243156946319034">"Vil du slette all USB-lagring? Du kommer til å miste "<b>"alle"</b>" lagrede data!"</string>
     <string name="media_format_desc" product="default" msgid="8764037252319942415">"Vil du slette SD-kortet? Du vil miste "<b>"alle"</b>" data på kortet!"</string>
     <string name="media_format_button_text" product="nosdcard" msgid="6293669371185352810">"Slett USB-lagring"</string>
-    <string name="media_format_button_text" product="default" msgid="6721544380069373626">"Slett SD-kort"</string>
+    <string name="media_format_button_text" product="default" msgid="6721544380069373626">"Tøm SD-kort"</string>
     <string name="media_format_final_desc" product="nosdcard" msgid="941597815448108794">"Vil du tømme USB-lageret og slette alle filene som er lagret der? Du kan ikke reversere denne handlingen!"</string>
     <string name="media_format_final_desc" product="default" msgid="7220996042092437566">"Vil du slette SD-kortet og alle filene som er lagret der? Du kan ikke reversere denne handlingen!"</string>
     <string name="media_format_final_button_text" msgid="4881713344315923175">"Slett alt"</string>
@@ -1305,7 +1305,7 @@
     <string name="default_emergency_app" msgid="1951760659640369980">"Nødapp"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"Tilbakestill app-innstillingene"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"Vil du tilbakestille app-innstillingene?"</string>
-    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Dette tilbakestiller alle innstillinger for\n\n"<li>"avslåtte apper"</li>\n<li>"avslåtte appvarsler"</li>\n<li>"standardapper for handlinger"</li>\n<li>"begrensninger på bakgrunnsdata for apper"</li>\n<li>"eventuelle begrensninger på tillatelser"</li>\n\n" Du mister ingen appdata."</string>
+    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Dette tilbakestiller alle innstillinger for\n\n"<li>"avslåtte apper"</li>\n<li>"avslåtte appvarsler"</li>\n<li>"standardapper for handlinger"</li>\n<li>"begrensninger på bakgrunnsdata for apper"</li>\n<li>"begrensninger på tillatelser"</li>\n\n" Du mister ingen appdata."</string>
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"Tilbakestill apper"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Styr plass"</string>
     <string name="filter" msgid="2018011724373033887">"Filter"</string>
@@ -1816,7 +1816,7 @@
     <string name="menu_duration_6h" msgid="1940846763432184132">"6 timer"</string>
     <string name="menu_duration_12h" msgid="7890465404584356294">"12 timer"</string>
     <string name="menu_duration_1d" msgid="3393631127622285458">"1 dag"</string>
-    <string name="menu_show_system" msgid="8864603400415567635">"Vis system"</string>
+    <string name="menu_show_system" msgid="8864603400415567635">"Vis systemet"</string>
     <string name="menu_hide_system" msgid="4106826741703745733">"Skjul systemet"</string>
     <string name="menu_show_percentage" msgid="4717204046118199806">"Vis prosentandeler"</string>
     <string name="menu_use_uss" msgid="467765290771543089">"Bruk Uss"</string>
@@ -2718,7 +2718,7 @@
     <string name="unknown_app" msgid="5275921288718717656">"Ukjent app"</string>
     <string name="choose_profile" msgid="8229363046053568878">"Velg profil"</string>
     <string name="app_permissions" msgid="4148222031991883874">"Apptillatelser"</string>
-    <string name="app_permissions_summary" msgid="2098173899436407221">"<xliff:g id="COUNT_0">%d</xliff:g> av <xliff:g id="COUNT_1">%d</xliff:g> apper har ytterligere tilgang"</string>
+    <string name="app_permissions_summary" msgid="2098173899436407221">"<xliff:g id="COUNT_0">%d</xliff:g> av <xliff:g id="COUNT_1">%d</xliff:g> apper har ekstra tilgang"</string>
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"<xliff:g id="COUNT_0">%d</xliff:g> av <xliff:g id="COUNT_1">%d</xliff:g> apper er tillatt"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Trykk for å vekke"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Dobbelttrykk hvor som helst på skjermen for å vekke enheten"</string>
@@ -2785,13 +2785,10 @@
     <string name="inactive_app_inactive_summary" msgid="6768756967594202411">"Inaktiv. Trykk for slå av/på."</string>
     <string name="inactive_app_active_summary" msgid="4512911571954375968">"Aktiv. Trykk for å slå av/på."</string>
     <string name="assist_access_context_title" msgid="2047105711005856521">"Bruk gjeldende kontekst"</string>
-    <!-- no translation found for assist_access_context_summary (7573538643562533886) -->
-    <skip />
-    <!-- no translation found for assist_access_screenshot_title (7994303398517230267) -->
-    <skip />
-    <!-- no translation found for assist_access_screenshot_summary (8774637450198111406) -->
-    <skip />
-    <string name="assist_footer" msgid="2283187001990543739">"Med assistentappen kan du identifisere og ta avgjørelser om nyttig informasjon – uten å måtte spørre. Noen apper støtter både Appoversikt og taleinndata for å gi deg integrert hjelp."</string>
+    <string name="assist_access_context_summary" msgid="7573538643562533886">"Gi assistentappen tilgang til innhold og metadata fra appen du bruker"</string>
+    <string name="assist_access_screenshot_title" msgid="7994303398517230267">"Bruk skjermdumper"</string>
+    <string name="assist_access_screenshot_summary" msgid="8774637450198111406">"La assistentappen analysere bilder av appen du bruker"</string>
+    <string name="assist_footer" msgid="2283187001990543739">"Med assistentappen kan du identifisere og ta avgjørelser om nyttig informasjon uten å måtte spørre. Noen apper støtter både Appoversikt og taleinndata for å gi deg integrert hjelp."</string>
     <string name="average_memory_use" msgid="829566450150198512">"Gjennomsnittlig minnebruk"</string>
     <string name="maximum_memory_use" msgid="7493720799710132496">"Maks. minnebruk"</string>
     <string name="memory_usage" msgid="1781358557214390033">"Minnebruk"</string>
