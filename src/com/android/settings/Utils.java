@@ -923,11 +923,13 @@ public final class Utils {
      * Returns a label for the user, in the form of "User: user name" or "Work profile".
      */
     public static String getUserLabel(Context context, UserInfo info) {
+        String name = info != null ? info.name : null;
         if (info.isManagedProfile()) {
             // We use predefined values for managed profiles
             return context.getString(R.string.managed_user_title);
+        } else if (info.isGuest()) {
+            name = context.getString(R.string.user_guest);
         }
-        String name = info != null ? info.name : null;
         if (name == null && info != null) {
             name = Integer.toString(info.id);
         } else if (info == null) {
