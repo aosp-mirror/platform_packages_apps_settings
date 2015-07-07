@@ -134,7 +134,6 @@ import com.android.settings.drawable.InsetBoundsDrawable;
 import com.android.settings.net.ChartData;
 import com.android.settings.net.ChartDataLoader;
 import com.android.settings.net.DataUsageMeteredSettings;
-import com.android.settings.net.NetworkPolicyEditor;
 import com.android.settings.net.SummaryForAllUidLoader;
 import com.android.settings.net.UidDetail;
 import com.android.settings.net.UidDetailProvider;
@@ -144,6 +143,7 @@ import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.widget.ChartDataUsageView;
 import com.android.settings.widget.ChartDataUsageView.DataUsageChartListener;
 import com.android.settings.widget.ChartNetworkSeriesView;
+import com.android.settingslib.NetworkPolicyEditor;
 import com.google.android.collect.Lists;
 
 import libcore.util.Objects;
