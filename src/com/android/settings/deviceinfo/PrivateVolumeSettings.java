@@ -96,8 +96,6 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
 
     private UserInfo mCurrentUser;
 
-    private int mNextOrder = 0;
-
     private StorageSummaryPreference mSummary;
     private StorageItemPreference mApps;
     private StorageItemPreference mImages;
@@ -140,6 +138,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         }
 
         addPreferencesFromResource(R.xml.device_info_storage_volume);
+        getPreferenceScreen().setOrderingAsAdded(true);
 
         // Find the emulated shared storage layered above this private volume
         mSharedVolume = mStorageManager.findEmulatedForPrivate(mVolume);
@@ -183,29 +182,29 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
 
         screen.removeAll();
 
-        screen.addPreference(mSummary);
+        addPreference(mSummary);
 
         final boolean showUsers = !mUsers.isEmpty();
         final boolean showShared = (mSharedVolume != null) && mSharedVolume.isMountedReadable();
 
         if (showUsers) {
-            screen.addPreference(new PreferenceHeader(context, mCurrentUser.name));
+            addPreference(new PreferenceHeader(context, mCurrentUser.name));
         }
-        screen.addPreference(mApps);
+        addPreference(mApps);
         if (showShared) {
-            screen.addPreference(mImages);
-            screen.addPreference(mVideos);
-            screen.addPreference(mAudio);
-            screen.addPreference(mOther);
+            addPreference(mImages);
+            addPreference(mVideos);
+            addPreference(mAudio);
+            addPreference(mOther);
         }
-        screen.addPreference(mCache);
+        addPreference(mCache);
         if (showShared) {
-            screen.addPreference(mExplore);
+            addPreference(mExplore);
         }
         if (showUsers) {
-            screen.addPreference(new PreferenceHeader(context, R.string.storage_other_users));
+            addPreference(new PreferenceHeader(context, R.string.storage_other_users));
             for (Preference pref : mUsers) {
-                screen.addPreference(pref);
+                addPreference(pref);
             }
         }
 
@@ -231,16 +230,18 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         mMeasure.forceMeasure();
     }
 
+    private void addPreference(Preference pref) {
+        pref.setOrder(Preference.DEFAULT_ORDER);
+        getPreferenceScreen().addPreference(pref);
+    }
+
     private StorageItemPreference buildItem(int titleRes) {
-        final StorageItemPreference pref = new StorageItemPreference(getActivity(), titleRes);
-        pref.setOrder(mNextOrder++);
-        return pref;
+        return new StorageItemPreference(getActivity(), titleRes);
     }
 
     private Preference buildAction(int titleRes) {
         final Preference pref = new Preference(getActivity());
         pref.setTitle(titleRes);
-        pref.setOrder(mNextOrder++);
         return pref;
     }
 
