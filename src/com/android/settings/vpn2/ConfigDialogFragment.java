@@ -144,7 +144,7 @@ public class ConfigDialogFragment extends DialogFragment implements
 
     private void disconnect(VpnProfile profile) {
         try {
-            LegacyVpnInfo connected = mService.getLegacyVpnInfo();
+            LegacyVpnInfo connected = mService.getLegacyVpnInfo(UserHandle.myUserId());
             if (connected != null && profile.key.equals(connected.key)) {
                 mService.prepareVpn(VpnConfig.LEGACY_VPN, VpnConfig.LEGACY_VPN,
                         UserHandle.myUserId());
