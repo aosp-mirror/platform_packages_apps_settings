@@ -74,6 +74,7 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
     private AppRow mAppRow;
     private boolean mCreated;
     private boolean mIsSystemPackage;
+    private int mUid;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -110,22 +111,22 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
         final String pkg = args != null && args.containsKey(AppInfoBase.ARG_PACKAGE_NAME)
                 ? args.getString(AppInfoBase.ARG_PACKAGE_NAME)
                 : intent.getStringExtra(Settings.EXTRA_APP_PACKAGE);
-        final int uid = args != null && args.containsKey(AppInfoBase.ARG_PACKAGE_UID)
+        mUid = args != null && args.containsKey(AppInfoBase.ARG_PACKAGE_UID)
                 ? args.getInt(AppInfoBase.ARG_PACKAGE_UID)
                 : intent.getIntExtra(Settings.EXTRA_APP_UID, -1);
-        if (uid == -1 || TextUtils.isEmpty(pkg)) {
+        if (mUid == -1 || TextUtils.isEmpty(pkg)) {
             Log.w(TAG, "Missing extras: " + Settings.EXTRA_APP_PACKAGE + " was " + pkg + ", "
-                    + Settings.EXTRA_APP_UID + " was " + uid);
+                    + Settings.EXTRA_APP_UID + " was " + mUid);
             toastAndFinish();
             return;
         }
 
-        if (DEBUG) Log.d(TAG, "Load details for pkg=" + pkg + " uid=" + uid);
+        if (DEBUG) Log.d(TAG, "Load details for pkg=" + pkg + " uid=" + mUid);
         final PackageManager pm = getPackageManager();
-        final PackageInfo info = findPackageInfo(pm, pkg, uid);
+        final PackageInfo info = findPackageInfo(pm, pkg, mUid);
         if (info == null) {
             Log.w(TAG, "Failed to find package info: " + Settings.EXTRA_APP_PACKAGE + " was " + pkg
-                    + ", " + Settings.EXTRA_APP_UID + " was " + uid);
+                    + ", " + Settings.EXTRA_APP_UID + " was " + mUid);
             toastAndFinish();
             return;
         }
@@ -157,7 +158,7 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
                 if (banned) {
                     MetricsLogger.action(getActivity(), MetricsLogger.ACTION_BAN_APP_NOTES, pkg);
                 }
-                final boolean success =  mBackend.setNotificationsBanned(pkg, uid, banned);
+                final boolean success =  mBackend.setNotificationsBanned(pkg, mUid, banned);
                 if (success) {
                     updateDependents(banned);
                 }
@@ -169,7 +170,7 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 final boolean priority = (Boolean) newValue;
-                return mBackend.setHighPriority(pkg, uid, priority);
+                return mBackend.setHighPriority(pkg, mUid, priority);
             }
         });
 
@@ -177,7 +178,7 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 final boolean peekable = (Boolean) newValue;
-                return mBackend.setPeekable(pkg, uid, peekable);
+                return mBackend.setPeekable(pkg, mUid, peekable);
             }
         });
 
@@ -185,7 +186,7 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 final boolean sensitive = (Boolean) newValue;
-                return mBackend.setSensitive(pkg, uid, sensitive);
+                return mBackend.setSensitive(pkg, mUid, sensitive);
             }
         });
 
@@ -200,6 +201,15 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
             });
         } else {
             removePreference(KEY_APP_SETTINGS);
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mUid != -1 && getPackageManager().getPackagesForUid(mUid) == null) {
+            // App isn't around anymore, must have been removed.
+            finish();
         }
     }
 
