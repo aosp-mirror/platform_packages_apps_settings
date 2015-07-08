@@ -26,28 +26,15 @@ import android.widget.ProgressBar;
 import com.android.settings.R;
 
 public class StorageItemPreference extends Preference {
-    public final int userHandle;
+    public int userHandle;
 
     private ProgressBar progressBar;
     private static final int PROGRESS_MAX = 100;
     private int progress = -1;
 
-    public StorageItemPreference(Context context, int titleRes) {
-        this(context, context.getText(titleRes), UserHandle.USER_NULL);
-        setLayoutResource(R.layout.storage_item);
-    }
-
-    public StorageItemPreference(Context context, CharSequence title, int userHandle) {
+    public StorageItemPreference(Context context) {
         super(context);
-
-        setTitle(title);
-        setSummary(R.string.memory_calculating_size);
-
-        this.userHandle = userHandle;
-    }
-
-    public void setLoading() {
-        setSummary(R.string.memory_calculating_size);
+        setLayoutResource(R.layout.storage_item);
     }
 
     public void setStorageSize(long size, long total) {

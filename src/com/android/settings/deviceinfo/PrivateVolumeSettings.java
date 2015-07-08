@@ -39,6 +39,8 @@ import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
 import android.os.storage.VolumeRecord;
 import android.preference.Preference;
+import android.preference.PreferenceCategory;
+import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.provider.DocumentsContract;
 import android.text.TextUtils;
@@ -66,7 +68,6 @@ import com.google.android.collect.Lists;
 
 import java.io.File;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
@@ -85,6 +86,18 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
 
     private static final String AUTHORITY_MEDIA = "com.android.providers.media.documents";
 
+    private static final int[] ITEMS_NO_SHOW_SHARED = new int[] {
+            R.string.storage_detail_apps,
+    };
+
+    private static final int[] ITEMS_SHOW_SHARED = new int[] {
+            R.string.storage_detail_apps,
+            R.string.storage_detail_images,
+            R.string.storage_detail_videos,
+            R.string.storage_detail_audio,
+            R.string.storage_detail_other
+    };
+
     private StorageManager mStorageManager;
     private UserManager mUserManager;
 
@@ -97,13 +110,10 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
     private UserInfo mCurrentUser;
 
     private StorageSummaryPreference mSummary;
-    private StorageItemPreference mApps;
-    private StorageItemPreference mImages;
-    private StorageItemPreference mVideos;
-    private StorageItemPreference mAudio;
-    private StorageItemPreference mOther;
-    private StorageItemPreference mCache;
-    private List<StorageItemPreference> mUsers = Lists.newArrayList();
+    private List<StorageItemPreference> mItemPreferencePool = Lists.newArrayList();
+    private List<PreferenceCategory> mHeaderPreferencePool = Lists.newArrayList();
+    private int mHeaderPoolIndex;
+    private int mItemPoolIndex;
 
     private Preference mExplore;
 
@@ -144,22 +154,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         getPreferenceScreen().setOrderingAsAdded(true);
 
         mSummary = new StorageSummaryPreference(context);
-
-        mApps = buildItem(R.string.storage_detail_apps);
-        mImages = buildItem(R.string.storage_detail_images);
-        mVideos = buildItem(R.string.storage_detail_videos);
-        mAudio = buildItem(R.string.storage_detail_audio);
-        mOther = buildItem(R.string.storage_detail_other);
-        mCache = buildItem(R.string.storage_detail_cached);
-
         mCurrentUser = mUserManager.getUserInfo(UserHandle.myUserId());
-        final List<UserInfo> otherUsers = getUsersExcluding(mCurrentUser);
-        for (int i = 0; i < otherUsers.size(); i++) {
-            final UserInfo user = otherUsers.get(i);
-            final StorageItemPreference userPref = new StorageItemPreference(
-                    context, user.name, user.id);
-            mUsers.add(userPref);
-        }
 
         mExplore = buildAction(R.string.storage_menu_explore);
 
@@ -182,37 +177,44 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
 
         screen.removeAll();
 
-        addPreference(mSummary);
+        addPreference(screen, mSummary);
 
-        final boolean showUsers = !mUsers.isEmpty();
+        List<UserInfo> allUsers = mUserManager.getUsers();
+        final int userCount = allUsers.size();
+        final boolean showHeaders = userCount > 1;
         final boolean showShared = (mSharedVolume != null) && mSharedVolume.isMountedReadable();
 
-        if (showUsers) {
-            addPreference(new PreferenceHeader(context, mCurrentUser.name));
-        }
-        addPreference(mApps);
-        if (showShared) {
-            addPreference(mImages);
-            addPreference(mVideos);
-            addPreference(mAudio);
-            addPreference(mOther);
-        }
-        addPreference(mCache);
-        if (showShared) {
-            addPreference(mExplore);
-        }
-        if (showUsers) {
-            addPreference(new PreferenceHeader(context, R.string.storage_other_users));
-            for (Preference pref : mUsers) {
-                addPreference(pref);
+        mItemPoolIndex = 0;
+        mHeaderPoolIndex = 0;
+
+        int addedUserCount = 0;
+        // Add current user and its profiles first
+        for (int userIndex = 0; userIndex < userCount; ++userIndex) {
+            final UserInfo userInfo = allUsers.get(userIndex);
+            if (isProfileOf(mCurrentUser, userInfo)) {
+                PreferenceCategory details = addCategory(screen,
+                        showHeaders ? userInfo.name : null);
+                addDetailItems(details, showShared, userInfo.id);
+                ++addedUserCount;
             }
         }
 
-        for (int i = 0; i < screen.getPreferenceCount(); i++) {
-            final Preference pref = screen.getPreference(i);
-            if (pref instanceof StorageItemPreference) {
-                ((StorageItemPreference) pref).setLoading();
+        // Add rest of users
+        if (userCount - addedUserCount > 0) {
+            PreferenceCategory otherUsers = addCategory(screen,
+                    getText(R.string.storage_other_users));
+            for (int userIndex = 0; userIndex < userCount; ++userIndex) {
+                final UserInfo userInfo = allUsers.get(userIndex);
+                if (!isProfileOf(mCurrentUser, userInfo)) {
+                    addItem(otherUsers, /* titleRes */ 0, userInfo.name, userInfo.id);
+                }
             }
+        }
+
+        addItem(screen, R.string.storage_detail_cached, null, UserHandle.USER_NULL);
+
+        if (showShared) {
+            addPreference(screen, mExplore);
         }
 
         final File file = mVolume.getPath();
@@ -230,13 +232,56 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         mMeasure.forceMeasure();
     }
 
-    private void addPreference(Preference pref) {
+    private void addPreference(PreferenceGroup group, Preference pref) {
         pref.setOrder(Preference.DEFAULT_ORDER);
-        getPreferenceScreen().addPreference(pref);
+        group.addPreference(pref);
     }
 
-    private StorageItemPreference buildItem(int titleRes) {
-        return new StorageItemPreference(getActivity(), titleRes);
+    private PreferenceCategory addCategory(PreferenceGroup group, CharSequence title) {
+        PreferenceCategory category;
+        if (mHeaderPoolIndex < mHeaderPreferencePool.size()) {
+            category = mHeaderPreferencePool.get(mHeaderPoolIndex);
+        } else {
+            category = new PreferenceCategory(getActivity(), null,
+                    com.android.internal.R.attr.preferenceCategoryStyle);
+            mHeaderPreferencePool.add(category);
+        }
+        category.setTitle(title);
+        category.removeAll();
+        addPreference(group, category);
+        ++mHeaderPoolIndex;
+        return category;
+    }
+
+    private void addDetailItems(PreferenceCategory category, boolean showShared, int userId) {
+        final int[] itemsToAdd = (showShared ? ITEMS_SHOW_SHARED : ITEMS_NO_SHOW_SHARED);
+        for (int i = 0; i < itemsToAdd.length; ++i) {
+            addItem(category, itemsToAdd[i], null, userId);
+        }
+    }
+
+    private void addItem(PreferenceGroup group, int titleRes, CharSequence title, int userId) {
+        StorageItemPreference item;
+        if (mItemPoolIndex < mItemPreferencePool.size()) {
+            item = mItemPreferencePool.get(mItemPoolIndex);
+        } else {
+            item = buildItem();
+            mItemPreferencePool.add(item);
+        }
+        if (title != null) {
+            item.setTitle(title);
+        } else {
+            item.setTitle(titleRes);
+        }
+        item.setSummary(R.string.memory_calculating_size);
+        item.userHandle = userId;
+        addPreference(group, item);
+        ++mItemPoolIndex;
+    }
+
+    private StorageItemPreference buildItem() {
+        final StorageItemPreference item = new StorageItemPreference(getActivity());
+        return item;
     }
 
     private Preference buildAction(int titleRes) {
@@ -345,52 +390,67 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference pref) {
         // TODO: launch better intents for specific volume
 
+        final int userId = (pref instanceof StorageItemPreference ?
+                ((StorageItemPreference)pref).userHandle : -1);
+        final int itemTitleId = pref.getTitleRes();
         Intent intent = null;
-        if (pref == mApps) {
-            Bundle args = new Bundle();
-            args.putString(ManageApplications.EXTRA_CLASSNAME, StorageUseActivity.class.getName());
-            args.putString(ManageApplications.EXTRA_VOLUME_UUID, mVolume.getFsUuid());
-            args.putString(ManageApplications.EXTRA_VOLUME_NAME, mVolume.getDescription());
-            intent = Utils.onBuildStartFragmentIntent(getActivity(),
-                    ManageApplications.class.getName(), args, null, R.string.apps_storage, null,
-                    false);
+        switch (itemTitleId) {
+            case R.string.storage_detail_apps: {
+                Bundle args = new Bundle();
+                args.putString(ManageApplications.EXTRA_CLASSNAME,
+                        StorageUseActivity.class.getName());
+                args.putString(ManageApplications.EXTRA_VOLUME_UUID, mVolume.getFsUuid());
+                args.putString(ManageApplications.EXTRA_VOLUME_NAME, mVolume.getDescription());
+                intent = Utils.onBuildStartFragmentIntent(getActivity(),
+                        ManageApplications.class.getName(), args, null, R.string.apps_storage, null,
+                        false);
 
-        } else if (pref == mImages) {
-            intent = new Intent(DocumentsContract.ACTION_BROWSE_DOCUMENT_ROOT);
-            intent.setData(DocumentsContract.buildRootUri(AUTHORITY_MEDIA, "images_root"));
-            intent.addCategory(Intent.CATEGORY_DEFAULT);
+            } break;
+            case R.string.storage_detail_images: {
+                intent = new Intent(DocumentsContract.ACTION_BROWSE_DOCUMENT_ROOT);
+                intent.setData(DocumentsContract.buildRootUri(AUTHORITY_MEDIA, "images_root"));
+                intent.addCategory(Intent.CATEGORY_DEFAULT);
 
-        } else if (pref == mVideos) {
-            intent = new Intent(DocumentsContract.ACTION_BROWSE_DOCUMENT_ROOT);
-            intent.setData(DocumentsContract.buildRootUri(AUTHORITY_MEDIA, "videos_root"));
-            intent.addCategory(Intent.CATEGORY_DEFAULT);
+            } break;
+            case R.string.storage_detail_videos: {
+                intent = new Intent(DocumentsContract.ACTION_BROWSE_DOCUMENT_ROOT);
+                intent.setData(DocumentsContract.buildRootUri(AUTHORITY_MEDIA, "videos_root"));
+                intent.addCategory(Intent.CATEGORY_DEFAULT);
 
-        } else if (pref == mAudio) {
-            intent = new Intent(DocumentsContract.ACTION_BROWSE_DOCUMENT_ROOT);
-            intent.setData(DocumentsContract.buildRootUri(AUTHORITY_MEDIA, "audio_root"));
-            intent.addCategory(Intent.CATEGORY_DEFAULT);
+            } break;
+            case R.string.storage_detail_audio: {
+                intent = new Intent(DocumentsContract.ACTION_BROWSE_DOCUMENT_ROOT);
+                intent.setData(DocumentsContract.buildRootUri(AUTHORITY_MEDIA, "audio_root"));
+                intent.addCategory(Intent.CATEGORY_DEFAULT);
 
-        } else if (pref == mOther) {
-            OtherInfoFragment.show(this, mStorageManager.getBestVolumeDescription(mVolume),
-                    mSharedVolume);
-            return true;
+            } break;
+            case R.string.storage_detail_other: {
+                OtherInfoFragment.show(this, mStorageManager.getBestVolumeDescription(mVolume),
+                        mSharedVolume);
+                return true;
 
-        } else if (pref == mCache) {
-            ConfirmClearCacheFragment.show(this);
-            return true;
+            }
+            case R.string.storage_detail_cached: {
+                ConfirmClearCacheFragment.show(this);
+                return true;
 
-        } else if (pref == mExplore) {
-            intent = mSharedVolume.buildBrowseIntent();
-        }
-
-        if (mUsers.contains(pref)) {
-            UserInfoFragment.show(this, pref.getTitle(), pref.getSummary());
-            return true;
+            }
+            case R.string.storage_menu_explore: {
+                intent = mSharedVolume.buildBrowseIntent();
+            } break;
+            case 0: {
+                UserInfoFragment.show(this, pref.getTitle(), pref.getSummary());
+                return true;
+            }
         }
 
         if (intent != null) {
             try {
-                startActivity(intent);
+                if (userId == -1) {
+                    startActivity(intent);
+                } else {
+                    getActivity().startActivityAsUser(intent, new UserHandle(userId));
+                }
             } catch (ActivityNotFoundException e) {
                 Log.w(TAG, "No activity found for " + intent);
             }
@@ -407,26 +467,49 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
     };
 
     private void updateDetails(MeasurementDetails details) {
-        updatePreference(mApps, details.appsSize);
-
-        final long imagesSize = totalValues(details.mediaSize, Environment.DIRECTORY_DCIM,
-                Environment.DIRECTORY_MOVIES, Environment.DIRECTORY_PICTURES);
-        updatePreference(mImages, imagesSize);
-
-        final long videosSize = totalValues(details.mediaSize, Environment.DIRECTORY_MOVIES);
-        updatePreference(mVideos, videosSize);
-
-        final long audioSize = totalValues(details.mediaSize, Environment.DIRECTORY_MUSIC,
-                Environment.DIRECTORY_ALARMS, Environment.DIRECTORY_NOTIFICATIONS,
-                Environment.DIRECTORY_RINGTONES, Environment.DIRECTORY_PODCASTS);
-        updatePreference(mAudio, audioSize);
-
-        updatePreference(mCache, details.cacheSize);
-        updatePreference(mOther, details.miscSize);
-
-        for (StorageItemPreference userPref : mUsers) {
-            final long userSize = details.usersSize.get(userPref.userHandle);
-            updatePreference(userPref, userSize);
+        PreferenceScreen screen = getPreferenceScreen();
+        final int preferenceCount = screen.getPreferenceCount();
+        for (int i = 0; i < preferenceCount; ++i) {
+            final Preference pref = screen.getPreference(i);
+            if (!(pref instanceof StorageItemPreference)) {
+                continue;
+            }
+            StorageItemPreference item = (StorageItemPreference)pref;
+            final int userId = item.userHandle;
+            final int itemTitleId = item.getTitleRes();
+            switch (itemTitleId) {
+                case R.string.storage_detail_apps: {
+                    updatePreference(item, details.appsSize.get(userId));
+                } break;
+                case R.string.storage_detail_images: {
+                    final long imagesSize = totalValues(details, userId,
+                            Environment.DIRECTORY_DCIM, Environment.DIRECTORY_MOVIES,
+                            Environment.DIRECTORY_PICTURES);
+                    updatePreference(item, imagesSize);
+                } break;
+                case R.string.storage_detail_videos: {
+                    final long videosSize = totalValues(details, userId,
+                            Environment.DIRECTORY_MOVIES);
+                    updatePreference(item, videosSize);
+                } break;
+                case R.string.storage_detail_audio: {
+                    final long audioSize = totalValues(details, userId,
+                            Environment.DIRECTORY_MUSIC,
+                            Environment.DIRECTORY_ALARMS, Environment.DIRECTORY_NOTIFICATIONS,
+                            Environment.DIRECTORY_RINGTONES, Environment.DIRECTORY_PODCASTS);
+                    updatePreference(item, audioSize);
+                } break;
+                case R.string.storage_detail_other: {
+                    updatePreference(item, details.miscSize.get(userId));
+                } break;
+                case R.string.storage_detail_cached: {
+                    updatePreference(item, details.cacheSize);
+                } break;
+                case 0: {
+                    final long userSize = details.usersSize.get(userId);
+                    updatePreference(item, userSize);
+                } break;
+            }
         }
     }
 
@@ -434,26 +517,24 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         pref.setStorageSize(size, mVolume.getPath().getTotalSpace());
     }
 
-    /**
-     * Return list of other users, excluding the current user.
-     */
-    private List<UserInfo> getUsersExcluding(UserInfo excluding) {
-        final List<UserInfo> users = mUserManager.getUsers();
-        final Iterator<UserInfo> i = users.iterator();
-        while (i.hasNext()) {
-            if (i.next().id == excluding.id) {
-                i.remove();
-            }
-        }
-        return users;
+    private boolean isProfileOf(UserInfo user, UserInfo profile) {
+        return user.id == profile.id ||
+                (user.profileGroupId != UserInfo.NO_PROFILE_GROUP_ID
+                && user.profileGroupId == profile.profileGroupId);
     }
 
-    private static long totalValues(HashMap<String, Long> map, String... keys) {
+    private static long totalValues(MeasurementDetails details, int userId, String... keys) {
         long total = 0;
-        for (String key : keys) {
-            if (map.containsKey(key)) {
-                total += map.get(key);
+        HashMap<String, Long> map = details.mediaSize.get(userId);
+        if (map != null) {
+            for (String key : keys) {
+                if (map.containsKey(key)) {
+                    total += map.get(key);
+                }
             }
+        } else {
+            throw new IllegalStateException(
+                    "MeasurementDetails mediaSize array does not have key for user " + userId);
         }
         return total;
     }
@@ -647,23 +728,6 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
                     mTarget.update();
                 }
             }
-        }
-    }
-
-    public static class PreferenceHeader extends Preference {
-        public PreferenceHeader(Context context, int titleRes) {
-            super(context, null, com.android.internal.R.attr.preferenceCategoryStyle);
-            setTitle(titleRes);
-        }
-
-        public PreferenceHeader(Context context, CharSequence title) {
-            super(context, null, com.android.internal.R.attr.preferenceCategoryStyle);
-            setTitle(title);
-        }
-
-        @Override
-        public boolean isEnabled() {
-            return false;
         }
     }
 }
