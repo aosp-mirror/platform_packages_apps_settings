@@ -18,6 +18,7 @@ package com.android.settings.deviceinfo;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.UserManager;
@@ -32,6 +33,9 @@ import android.provider.DocumentsContract;
 import android.text.TextUtils;
 import android.text.format.Formatter;
 import android.text.format.Formatter.BytesResult;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.util.Preconditions;
@@ -59,9 +63,9 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
     private StorageSummaryPreference mSummary;
 
     private Preference mMount;
-    private Preference mUnmount;
     private Preference mFormatPublic;
     private Preference mFormatPrivate;
+    private Button mUnmount;
 
     private boolean mIsPermittedToAdopt;
 
@@ -111,11 +115,27 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
         mSummary = new StorageSummaryPreference(context);
 
         mMount = buildAction(R.string.storage_menu_mount);
-        mUnmount = buildAction(R.string.storage_menu_unmount);
+        mUnmount = new Button(getActivity());
+        mUnmount.setText(R.string.storage_menu_unmount);
+        mUnmount.setOnClickListener(mUnmountListener);
         mFormatPublic = buildAction(R.string.storage_menu_format);
         if (mIsPermittedToAdopt) {
             mFormatPrivate = buildAction(R.string.storage_menu_format_private);
         }
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        final Resources resources = getResources();
+        final int padding = resources.getDimensionPixelSize(
+                R.dimen.unmount_button_padding);
+        final ViewGroup buttonBar = getButtonBar();
+        buttonBar.removeAllViews();
+        buttonBar.setPadding(padding, padding, padding, padding);
+        buttonBar.addView(mUnmount, new ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT));
     }
 
     public void update() {
@@ -151,7 +171,7 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
             addPreference(mMount);
         }
         if (mVolume.isMountedReadable()) {
-            addPreference(mUnmount);
+            getButtonBar().setVisibility(View.VISIBLE);
         }
         addPreference(mFormatPublic);
         if (mDisk.isAdoptable() && mIsPermittedToAdopt) {
@@ -196,8 +216,6 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
         final Context context = getActivity();
         if (pref == mMount) {
             new MountTask(context, mVolume).execute();
-        } else if (pref == mUnmount) {
-            new UnmountTask(context, mVolume).execute();
         } else if (pref == mFormatPublic) {
             final Intent intent = new Intent(context, StorageWizardFormatConfirm.class);
             intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
@@ -212,6 +230,13 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
 
         return super.onPreferenceTreeClick(preferenceScreen, pref);
     }
+
+    private final View.OnClickListener mUnmountListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            new UnmountTask(getActivity(), mVolume).execute();
+        }
+    };
 
     private final StorageEventListener mStorageListener = new StorageEventListener() {
         @Override
