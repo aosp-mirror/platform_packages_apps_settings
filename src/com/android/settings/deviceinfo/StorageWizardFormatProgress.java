@@ -24,8 +24,10 @@ import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.IPackageMoveObserver;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.RemoteException;
 import android.os.storage.DiskInfo;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
@@ -35,6 +37,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.android.settings.R;
+
+import java.util.Objects;
 
 public class StorageWizardFormatProgress extends StorageWizardBase {
     private static final String TAG_SLOW_WARNING = "slow_warning";
@@ -97,7 +101,18 @@ public class StorageWizardFormatProgress extends StorageWizardBase {
                     publishProgress(60);
 
                     final VolumeInfo privateVol = activity.findFirstVolume(VolumeInfo.TYPE_PRIVATE);
-                    mPrivateBench = storage.benchmark(privateVol.id);
+                    mPrivateBench = storage.benchmark(privateVol.getId());
+
+                    // If we just adopted the device that had been providing
+                    // physical storage, then automatically move storage to the
+                    // new emulated volume.
+                    if (activity.mDisk.isDefaultPrimary()
+                            && Objects.equals(storage.getPrimaryStorageUuid(),
+                                    StorageManager.UUID_PRIMARY_PHYSICAL)) {
+                        Log.d(TAG, "Just formatted primary physical; silently moving "
+                                + "storage to new emulated volume");
+                        storage.setPrimaryStorageUuid(privateVol.getFsUuid(), new SilentObserver());
+                    }
 
                 } else {
                     storage.partitionPublic(activity.mDisk.getId());
@@ -212,5 +227,17 @@ public class StorageWizardFormatProgress extends StorageWizardBase {
             startActivity(intent);
         }
         finishAffinity();
+    }
+
+    private static class SilentObserver extends IPackageMoveObserver.Stub {
+        @Override
+        public void onCreated(int moveId, Bundle extras) {
+            // Ignored
+        }
+
+        @Override
+        public void onStatusChanged(int moveId, int status, long estMillis) {
+            // Ignored
+        }
     }
 }
