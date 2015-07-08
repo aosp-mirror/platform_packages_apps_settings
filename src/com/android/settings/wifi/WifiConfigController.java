@@ -768,6 +768,7 @@ public class WifiConfigController implements TextWatcher,
             case WIFI_EAP_METHOD_AKA_PRIME:
                 setPhase2Invisible();
                 setAnonymousIdentInvisible();
+                setCaCertInvisible();
                 setUserCertInvisible();
                 setPasswordInvisible();
                 setIdentityInvisible();
