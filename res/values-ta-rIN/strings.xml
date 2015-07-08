@@ -1303,8 +1303,8 @@
     <string name="show_running_services" msgid="5736278767975544570">"இயங்கும் சேவைகளைக் காட்டு"</string>
     <string name="show_background_processes" msgid="2009840211972293429">"தற்காலிகச் சேமிப்பின் செயல்முறைகளைக் காட்டு"</string>
     <string name="default_emergency_app" msgid="1951760659640369980">"அவசரப் பயன்பாடு"</string>
-    <string name="reset_app_preferences" msgid="1321050641018356925">"விருப்பத்தேர்வுகளை மீட்டமை"</string>
-    <string name="reset_app_preferences_title" msgid="6093179367325336662">"பயன்பாட்டு விருப்பத்தேர்வுகளை மீட்டமைக்கவா?"</string>
+    <string name="reset_app_preferences" msgid="1321050641018356925">"பயன்பாட்டு அமைப்பை மீட்டமை"</string>
+    <string name="reset_app_preferences_title" msgid="6093179367325336662">"அமைப்பை மீட்டமைக்கவா?"</string>
     <string name="reset_app_preferences_desc" msgid="4822447731869201512">"இது, பின்வருபவற்றின் எல்லா விருப்பத்தேர்வுகளையும் மீட்டமைக்கும்:\n\n "<li>"முடக்கப்பட்ட பயன்பாடுகள்"</li>\n" "<li>"முடக்கப்பட்ட பயன்பாட்டின் அறிவிப்புகள்"</li>\n" "<li>"செயல்பாடுகளுக்கான இயல்புநிலைப் பயன்பாடுகள்"</li>\n" "<li>"பயன்பாடுகளுக்கான பின்புலத் தரவின் வரையறைகள்"</li>\n" "<li>"ஏதேனும் அனுமதி வரையறைகள்"</li>\n\n" எந்தப் பயன்பாட்டுத் தரவையும் இழக்கமாட்டீர்கள்."</string>
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"பயன்பாடுகளை மீட்டமை"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"காலி இடத்தை நிர்வகி"</string>
@@ -1816,7 +1816,7 @@
     <string name="menu_duration_6h" msgid="1940846763432184132">"6 மணிநேரம்"</string>
     <string name="menu_duration_12h" msgid="7890465404584356294">"12 மணிநேரம்"</string>
     <string name="menu_duration_1d" msgid="3393631127622285458">"1 நாள்"</string>
-    <string name="menu_show_system" msgid="8864603400415567635">"சிஸ்டத்திற்கு உரியவற்றைக் காட்டு"</string>
+    <string name="menu_show_system" msgid="8864603400415567635">"அமைப்பைக் காட்டு"</string>
     <string name="menu_hide_system" msgid="4106826741703745733">"சிஸ்டத்திற்கு உரியவற்றை மறை"</string>
     <string name="menu_show_percentage" msgid="4717204046118199806">"சதவீதத்தில் காட்டு"</string>
     <string name="menu_use_uss" msgid="467765290771543089">"Uss ஐப் பயன்படுத்து"</string>
@@ -2727,8 +2727,8 @@
     <string name="domain_urls_summary_one" msgid="3704934031930978405">"<xliff:g id="DOMAIN">%s</xliff:g>ஐ மட்டும் திறக்கும்"</string>
     <string name="domain_urls_summary_some" msgid="812936714383016364">"<xliff:g id="DOMAIN">%s</xliff:g> மற்றும் தொடர்புடைய URLகளைத் திறக்கும்"</string>
     <plurals name="domain_urls_apps_summary" formatted="false" msgid="4322996467951692661">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> பயன்பாடுகள், அவற்றின் ஆதரிக்கப்படும் இணைப்புகளைத் திறக்கலாம்</item>
-      <item quantity="one">ஒரு பயன்பாடு, தனது ஆதரிக்கப்படும் இணைப்புகளைத் திறக்கலாம்</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> பயன்பாடுகள் அவை ஆதரிக்கும் இணைப்புகளைத் திறக்கலாம்</item>
+      <item quantity="one">ஒரு பயன்பாடு அது ஆதரிக்கும் இணைப்புகளைத் திறக்கலாம்</item>
     </plurals>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"அறியப்படவில்லை"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"இயல்பு பயன்பாடுகள்"</string>
@@ -2767,8 +2767,8 @@
     <string name="high_power_off" msgid="221092098425904010">"அனுமதிக்கப்படவில்லை"</string>
     <string name="high_power_desc" msgid="8412735192889327770">"பேட்டரி மேம்படுத்தல்களைப் பயன்படுத்தவில்லை எனில், உங்கள் பேட்டரி மிக விரைவில் தீர்ந்துவிடக்கூடும்."</string>
     <plurals name="high_power_count" formatted="false" msgid="4343190376439806186">
-      <item quantity="other">பேட்டரி மேம்படுத்தல்களைத் தவிர்க்க, <xliff:g id="COUNT">%d</xliff:g> பயன்பாடுகள் அனுமதிக்கப்பட்டன</item>
-      <item quantity="one">பேட்டரி மேம்படுத்தல்களைத் தவிர்க்க, 1 பயன்பாடு அனுமதிக்கப்பட்டது</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> பயன்பாடுகள் பேட்டரி மேம்படுத்தலை தவிர்க்கலாம்</item>
+      <item quantity="one">1 பயன்பாடு பேட்டரி மேம்படுத்தலை தவிர்க்கலாம்</item>
     </plurals>
     <string name="battery_summary" msgid="101415762036784289">"முழு சார்ஜிலிருந்து <xliff:g id="PERCENTAGE">%1$d</xliff:g>%% பயன்படுத்தப்பட்டது"</string>
     <string name="no_battery_summary" msgid="3528036835462846814">"கடைசியாக முழு சார்ஜ் செய்த நேரத்திலிருந்து, பேட்டரி பயன்படுத்தப்படவில்லை"</string>
@@ -2784,11 +2784,11 @@
     <string name="inactive_apps_title" msgid="1317817863508274533">"செயலில் இல்லாத பயன்பாடுகள்"</string>
     <string name="inactive_app_inactive_summary" msgid="6768756967594202411">"செயலில் இல்லை. மாற்ற, தொடவும்."</string>
     <string name="inactive_app_active_summary" msgid="4512911571954375968">"செயலில் உள்ளது. மாற்ற, தொடவும்."</string>
-    <string name="assist_access_context_title" msgid="2047105711005856521">"நடப்பு சூழலைப் பயன்படுத்து"</string>
-    <string name="assist_access_context_summary" msgid="7573538643562533886">"நீங்கள் பயன்படுத்தும் பயன்பாட்டிலிருந்து உள்ளடக்கத்தையும் தரவுத்தகவலையும் அணுக, அசிஸ்ட் பயன்பாட்டை அனுமதிக்கும்"</string>
-    <string name="assist_access_screenshot_title" msgid="7994303398517230267">"ஸ்கிரீன் ஷாட்களைப் பயன்படுத்து"</string>
-    <string name="assist_access_screenshot_summary" msgid="8774637450198111406">"நீங்கள் பயன்படுத்தும் பயன்பாட்டின் படங்களைப் பகுப்பாய்வு செய்ய, அசிஸ்ட் பயன்பாட்டை அனுமதிக்கும்"</string>
-    <string name="assist_footer" msgid="2283187001990543739">"கேட்காமலே பயனுள்ள தகவலைக் கண்டறிந்து செயல்பட அசிஸ்ட் பயன்பாடுகள் உங்களுக்கு உதவும். ஒருங்கிணைந்த உதவியை வழங்குவதற்காக, துவக்கி மற்றும் குரல் உள்ளீட்டுச் சேவைகள் ஆகிய இரண்டையும் சில பயன்பாடுகள் ஆதரிக்கின்றன."</string>
+    <string name="assist_access_context_title" msgid="2269032346698890257">"திரையில் காட்டப்படும் உரையை பயன்படுத்து"</string>
+    <string name="assist_access_context_summary" msgid="1991421283142279560">"திரையில் காட்டப்படும் உரை உள்ளடக்கத்தை அணுக, அசிஸ்ட் பயன்பாட்டை அனுமதிக்கும்"</string>
+    <string name="assist_access_screenshot_title" msgid="4034721336291215819">"ஸ்கிரீன் ஷாட்டைப் பயன்படுத்து"</string>
+    <string name="assist_access_screenshot_summary" msgid="6761636689013259901">"திரையின் படத்தை அணுக, அசிஸ்ட் பயன்பாட்டை அனுமதிக்கும்"</string>
+    <string name="assist_footer" msgid="1982791172085896864">"நீங்கள் பார்க்கும் திரையில் உள்ள தகவலின் அடிப்படையில் அசிஸ்ட் பயன்பாடு உங்களுக்கு உதவலாம். ஒருங்கிணைந்த உதவியை வழங்குவதற்காக சில பயன்பாடுகள், துவக்கி மற்றும் குரல் உள்ளீட்டுச் சேவைகள் ஆகிய இரண்டையும் ஆதரிக்கின்றன."</string>
     <string name="average_memory_use" msgid="829566450150198512">"சராசரி நினைவக உபயோகம்"</string>
     <string name="maximum_memory_use" msgid="7493720799710132496">"அதிகபட்ச நினைவக உபயோகம்"</string>
     <string name="memory_usage" msgid="1781358557214390033">"நினைவக உபயோகம்"</string>
