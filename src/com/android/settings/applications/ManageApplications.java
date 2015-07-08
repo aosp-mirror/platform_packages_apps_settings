@@ -20,7 +20,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.IntentFilterVerificationInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
@@ -76,7 +75,6 @@ import com.android.settingslib.applications.ApplicationsState.VolumeFilter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 
 /**
  * Activity to pick an application that will be used to display installation information and
@@ -1047,14 +1045,7 @@ public class ManageApplications extends InstrumentedFragment
         }
 
         private CharSequence getDomainsSummary(String packageName) {
-            ArraySet<String> result = new ArraySet<>();
-            List<IntentFilterVerificationInfo> list =
-                    mPm.getIntentFilterVerifications(packageName);
-            for (IntentFilterVerificationInfo ivi : list) {
-                for (String host : ivi.getDomains()) {
-                    result.add(host);
-                }
-            }
+            ArraySet<String> result = Utils.getHandledDomains(mPm, packageName);
             if (result.size() == 0) {
                 return mContext.getString(R.string.domain_urls_summary_none);
             } else if (result.size() == 1) {
