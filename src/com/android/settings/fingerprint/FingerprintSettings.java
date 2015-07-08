@@ -431,6 +431,8 @@ public class FingerprintSettings extends SubSettings {
                                 ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
                     }
                 }
+            } else if (requestCode == ADD_FINGERPRINT_REQUEST) {
+                int result = mFingerprintManager.postEnroll();
             }
 
             if (mToken == null) {
