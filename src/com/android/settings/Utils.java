@@ -33,6 +33,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageManager;
+import android.content.pm.IntentFilterVerificationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -70,6 +71,7 @@ import android.provider.ContactsContract.RawContacts;
 import android.service.persistentdata.PersistentDataBlockManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.util.ArraySet;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -1109,6 +1111,29 @@ public final class Utils {
         pm.getPreferredActivities(intentList, prefActList, packageName);
         Log.d(TAG, "Have " + prefActList.size() + " number of activities in preferred list");
         return prefActList.size() > 0;
+    }
+
+    public static ArraySet<String> getHandledDomains(PackageManager pm, String packageName) {
+        List<IntentFilterVerificationInfo> iviList = pm.getIntentFilterVerifications(packageName);
+        List<IntentFilter> filters = pm.getAllIntentFilters(packageName);
+
+        ArraySet<String> result = new ArraySet<>();
+        if (iviList.size() > 0) {
+            for (IntentFilterVerificationInfo ivi : iviList) {
+                for (String host : ivi.getDomains()) {
+                    result.add(host);
+                }
+            }
+        }
+        if (filters != null && filters.size() > 0) {
+            for (IntentFilter filter : filters) {
+                if (filter.hasDataScheme(IntentFilter.SCHEME_HTTP) ||
+                        filter.hasDataScheme(IntentFilter.SCHEME_HTTPS)) {
+                    result.addAll(filter.getHostsList());
+                }
+            }
+        }
+        return result;
     }
 
     public static CharSequence getLaunchByDeafaultSummary(ApplicationsState.AppEntry appEntry,
