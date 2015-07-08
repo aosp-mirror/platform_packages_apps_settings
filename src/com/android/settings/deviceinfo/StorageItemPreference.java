@@ -17,28 +17,12 @@
 package com.android.settings.deviceinfo;
 
 import android.content.Context;
-import android.os.UserHandle;
 import android.preference.Preference;
 
-import com.android.settings.R;
-
 public class StorageItemPreference extends Preference {
-    public final int userHandle;
+    public int userHandle;
 
-    public StorageItemPreference(Context context, int titleRes) {
-        this(context, context.getText(titleRes), UserHandle.USER_NULL);
-    }
-
-    public StorageItemPreference(Context context, CharSequence title, int userHandle) {
+    public StorageItemPreference(Context context) {
         super(context);
-
-        setTitle(title);
-        setSummary(R.string.memory_calculating_size);
-
-        this.userHandle = userHandle;
-    }
-
-    public void setLoading() {
-        setSummary(R.string.memory_calculating_size);
     }
 }
