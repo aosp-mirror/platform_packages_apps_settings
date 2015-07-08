@@ -109,8 +109,10 @@ public class ManageAssist extends SettingsPreferenceFragment
         final boolean hasAssistant = currentAssist != null;
         if (hasAssistant) {
             getPreferenceScreen().addPreference(mContextPref);
+            getPreferenceScreen().addPreference(mScreenshotPref);
         } else {
             getPreferenceScreen().removePreference(mContextPref);
+            getPreferenceScreen().removePreference(mScreenshotPref);
         }
 
         mVoiceInputPref.setAssistRestrict(currentAssist);
