@@ -24,14 +24,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.hardware.usb.UsbManager;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.UserManager;
 
 import com.android.settings.R;
 
 /**
  * UI for the USB chooser dialog.
  *
- * TODO: Don't show some UI elements if UserManager.DISALLOW_USB_FILE_TRANSFER is disabled.
  */
 public class UsbModeChooserActivity extends Activity {
 
@@ -41,10 +40,19 @@ public class UsbModeChooserActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mUsbManager = (UsbManager) getSystemService(Context.USB_SERVICE);
+        CharSequence[] items;
+        UserManager userManager =
+                (UserManager) getSystemService(Context.USER_SERVICE);
+        if (userManager.hasUserRestriction(UserManager.DISALLOW_USB_FILE_TRANSFER)) {
+            items = new CharSequence[] { getText(R.string.usb_use_charging_only) };
+        } else {
+            items = getResources().getTextArray(R.array.usb_available_functions);
+        }
+
         final AlertDialog levelDialog;
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.usb_use);
-        builder.setSingleChoiceItems(R.array.usb_available_functions, getCurrentFunction(),
+        builder.setSingleChoiceItems(items, getCurrentFunction(),
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
