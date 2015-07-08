@@ -162,7 +162,7 @@
     <string name="proxy_settings_title" msgid="9049437837600320881">"프록시"</string>
     <string name="proxy_clear_text" msgid="5555400754952012657">"지우기"</string>
     <string name="proxy_port_label" msgid="5655276502233453400">"프록시 포트"</string>
-    <string name="proxy_exclusionlist_label" msgid="7700491504623418701">"프록시 우회 대상:"</string>
+    <string name="proxy_exclusionlist_label" msgid="7700491504623418701">"프록시 우회 대상"</string>
     <string name="proxy_exclusionlist_hint" msgid="6084099226687226948">"example.com,mycomp.test.com,localhost"</string>
     <string name="proxy_defaultView_text" msgid="6387985519141433291">"기본값 복원"</string>
     <string name="proxy_action_text" msgid="2957063145357903951">"완료"</string>
@@ -615,7 +615,7 @@
     <string name="wifi_wps_setup_title" msgid="8207552222481570175">"Wi-Fi Protected 설정"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"WPS을 시작하는 중…"</string>
     <string name="wifi_wps_onstart_pbc" msgid="817003360936932340">"라우터에서 Wi‑Fi 보호 설정 버튼을 누르세요. \'WPS\'라고 쓰여있거나 이 기호가 표시되어 있을 수도 있습니다."</string>
-    <string name="wifi_wps_onstart_pin" msgid="223344506445335358">"Wi-Fi 공유기에 PIN(개인 식별 번호) <xliff:g id="NUMBER">%1$s</xliff:g>을(를) 입력하세요. 설정을 완료하는 데 최대 2분이 소요됩니다."</string>
+    <string name="wifi_wps_onstart_pin" msgid="223344506445335358">"Wi-Fi 공유기에 PIN(<xliff:g id="NUMBER">%1$s</xliff:g>)을 입력하세요. 설정을 완료하는 데 최대 2분이 소요됩니다."</string>
     <string name="wifi_wps_complete" msgid="2388138550456729134">"WPS 성공. 네트워크에 연결 중…"</string>
     <string name="wifi_wps_connected" msgid="7153432445748931183">"Wi-Fi 네트워크 <xliff:g id="NETWORK_NAME">%s</xliff:g>에 연결됨"</string>
     <string name="wifi_wps_in_progress" msgid="3372311348221357944">"WPS 설정이 이미 진행 중이며 완료하는 데 최대 2분이 소요됩니다."</string>
@@ -674,7 +674,7 @@
     <string name="wifi_skipped_message" product="default" msgid="6084295135297772350">"경고: Wi‑Fi 설정을 건너뛰면 휴대전화에서 초기 다운로드와 업데이트에 셀룰러 데이터만 사용합니다. 데이터 요금 부담을 줄이려면 Wi-Fi를 사용하세요."</string>
     <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="6324917391996718760">"Wi‑Fi를 건너뛸 경우:\n\n"<li>"태블릿이 인터넷에 연결되지 않습니다."</li>\n\n<li>"인터넷에 연결될 때까지 소프트웨어 업데이트를 받지 못합니다."</li>\n\n<li>"현재로서는 기기 보호 기능을 활성화할 수 없습니다."</li></string>
     <string name="wifi_and_mobile_skipped_message" product="device" msgid="1110629752293998468">"Wi‑Fi를 건너뛸 경우:\n\n"<li>"기기가 인터넷에 연결되지 않습니다."</li>\n\n<li>"인터넷에 연결될 때까지 소프트웨어 업데이트를 받지 못합니다."</li>\n\n<li>"현재로서는 기기 보호 기능을 활성화할 수 없습니다."</li></string>
-    <string name="wifi_and_mobile_skipped_message" product="default" msgid="8271524692702309267">"Wi‑Fi를 건너뛸 경우:\n\n"<li>"휴대전화가 인터넷에 연결되지 않습니다."</li>\n\n"인터넷에 연결될 때까지 소프트웨어 업데이트를 받지 못합니다."<li></li>\n\n<li>"현재로서는 기기 보호 기능을 활성화할 수 없습니다."</li></string>
+    <string name="wifi_and_mobile_skipped_message" product="default" msgid="8271524692702309267">"Wi‑Fi를 건너뛸 경우:\n\n"<li>"휴대전화가 인터넷에 연결되지 않습니다."</li>\n\n<li>"인터넷에 연결될 때까지 소프트웨어 업데이트를 받지 못합니다."</li>\n\n<li>"현재로서는 기기 보호 기능을 활성화할 수 없습니다."</li></string>
     <string name="wifi_connect_failed_message" product="tablet" msgid="4474691090681670156">"해당 태블릿으로 이 Wi-Fi 네트워크에 연결할 수 없습니다."</string>
     <string name="wifi_connect_failed_message" product="device" msgid="8870885845666880869">"해당 기기에서 이 Wi-Fi 네트워크에 연결할 수 없습니다."</string>
     <string name="wifi_connect_failed_message" product="default" msgid="2185803140161396572">"해당 휴대전화로 이 Wi-Fi 네트워크에 연결할 수 없습니다."</string>
@@ -1518,7 +1518,7 @@
     <string name="debug_networking_category" msgid="7044075693643009662">"네트워크"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"무선 디스플레이 인증서"</string>
     <string name="wifi_verbose_logging" msgid="4203729756047242344">"Wi-Fi 상세 로깅 사용"</string>
-    <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Wi-Fi에서 데이터 네트워크로 적극 핸드오버"</string>
+    <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Wi-Fi-셀룰러 적극 핸드오버"</string>
     <string name="wifi_allow_scan_with_traffic" msgid="3601853081178265786">"Wi‑Fi 로밍 스캔 항상 허용"</string>
     <string name="legacy_dhcp_client" msgid="694426978909127287">"이전 DHCP 클라이언트 사용"</string>
     <string name="mobile_data_always_on" msgid="7745605759775320362">"모바일 데이터 항상 활성화"</string>
@@ -1577,7 +1577,7 @@
     <string name="accessibility_display_title" msgid="7610175687949675162">"디스플레이"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"캡션"</string>
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"확대 동작"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="1178289000423776584">"이 기능을 사용하면 화면을 3번 탭하여 확대 및 축소할 수 있습니다.\n\n화면을 확대한 상태에서 다음 작업을 수행할 수 있습니다.\n"<ul><li>"이동: 화면에서 두 개 이상의 손가락을 드래그"</li>\n<li>"확대/축소 수준 조정: 두 개 이상의 손가락을 오므리거나 벌림"</li></ul>\n\n"또한 3번 탭한 상태를 유지하여 손가락 아래에 있는 항목을 일시적으로 확대할 수 있습니다. 확대한 상태에서 손가락을 드래그하여 화면의 다른 부분을 탐색할 수 있습니다. 손가락을 떼면 이전 상태로 돌아갑니다.\n\n참고: 세 번 탭하여 확대 기능은 키보드와 탐색 바에서는 작동하지 않습니다."</string>
+    <string name="accessibility_screen_magnification_summary" msgid="1178289000423776584">"이 기능을 사용하면 화면을 세 번 탭하여 확대 및 축소할 수 있습니다.\n\n화면을 확대한 상태에서 다음 작업을 수행할 수 있습니다.\n"<ul><li>"이동: 화면에서 두 개 이상의 손가락을 드래그"</li>\n<li>"확대/축소 수준 조정: 두 개 이상의 손가락을 오므리거나 벌림"</li></ul>\n\n"또한 세 번 탭한 상태를 유지하여 손가락 아래에 있는 항목을 일시적으로 확대할 수 있습니다. 확대한 상태에서 손가락을 드래그하여 화면의 다른 부분을 탐색할 수 있습니다. 손가락을 떼면 이전 상태로 돌아갑니다.\n\n참고: 세 번 탭하여 확대 기능은 키보드와 탐색 바에서는 작동하지 않습니다."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"접근성 단축키"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"켜기"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"사용 안함"</string>
@@ -1659,8 +1659,8 @@
     <string name="print_no_printers_found" msgid="989018646884973683">"프린터 없음"</string>
     <string name="print_menu_item_settings" msgid="6591330373682227082">"설정"</string>
     <string name="print_menu_item_add_printers" msgid="2890738028215834012">"프린터 추가"</string>
-    <string name="print_feature_state_on" msgid="8098901852502441048">"ON"</string>
-    <string name="print_feature_state_off" msgid="7294876968403966040">"OFF"</string>
+    <string name="print_feature_state_on" msgid="8098901852502441048">"사용"</string>
+    <string name="print_feature_state_off" msgid="7294876968403966040">"사용 안함"</string>
     <string name="print_menu_item_add_service" msgid="3811645167869797802">"서비스 추가"</string>
     <string name="print_menu_item_add_printer" msgid="8251218970577291032">"프린터 추가"</string>
     <string name="print_menu_item_search" msgid="7025589328240514553">"검색"</string>
@@ -1887,7 +1887,7 @@
     <string name="gadget_toggle_wifi" msgid="319262861956544493">"Wi-Fi 설정 업데이트"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"블루투스 설정 업데이트"</string>
     <string name="gadget_state_template" msgid="5156935629902649932">"<xliff:g id="ID_1">%1$s</xliff:g> <xliff:g id="ID_2">%2$s</xliff:g>"</string>
-    <string name="gadget_state_on" msgid="6909119593004937688">"켜짐"</string>
+    <string name="gadget_state_on" msgid="6909119593004937688">"사용"</string>
     <string name="gadget_state_off" msgid="5220212352953066317">"꺼짐"</string>
     <string name="gadget_state_turning_on" msgid="3395992057029439039">"켜는 중"</string>
     <string name="gadget_state_turning_off" msgid="2395546048102176157">"끄는 중"</string>
@@ -1961,11 +1961,11 @@
     <string name="personal_device_admin_title" msgid="2849617316347669861">"개인"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"직장"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"사용 가능한 Trust Agent 없음"</string>
-    <string name="add_device_admin_msg" msgid="6246742476064507965">"기기 관리자를 활성화하시겠습니까?"</string>
+    <string name="add_device_admin_msg" msgid="6246742476064507965">"기기 관리자 활성화"</string>
     <string name="add_device_admin" msgid="7133327675884827091">"활성화"</string>
     <string name="device_admin_add_title" msgid="7705551449705676363">"기기 관리자"</string>
     <string name="device_admin_warning" msgid="2026747446313628233">"관리자를 활성화하면 <xliff:g id="APP_NAME">%1$s</xliff:g> 앱에서 다음 작업을 수행할 수 있습니다."</string>
-    <string name="device_admin_status" msgid="4252975713178851910">"관리자가 활성 상태이며 <xliff:g id="APP_NAME">%1$s</xliff:g> 앱에서 다음 작업을 수행할 수 있도록 허용합니다:"</string>
+    <string name="device_admin_status" msgid="4252975713178851910">"관리자가 활성 상태이며 <xliff:g id="APP_NAME">%1$s</xliff:g> 앱에서 다음 작업을 수행할 수 있도록 허용합니다."</string>
     <string name="profile_owner_add_title" msgid="6249331160676175009">"프로필 관리자를 활성화하시겠습니까?"</string>
     <string name="adding_profile_owner_warning" msgid="8081841501073689534">"계속하면 내 사용자를 내 관리자가 관리하게 되며 관리자가 관련 데이터와 내 개인 데이터를 저장할 수 있게 됩니다.\n\n관리자는 설정, 액세스, 앱, 사용자와 연결된 데이터(예: 네트워크 활동, 기기의 위치 정보)를 모니터링하고 관리할 수 있습니다."</string>
     <string name="untitled_apn" msgid="1230060359198685513">"제목 없음"</string>
@@ -2508,7 +2508,7 @@
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"중요 알림만 허용"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"자동 규칙"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"중요 알림만"</string>
-    <string name="zen_mode_option_alarms" msgid="5785372117288803600">"알람만 수신"</string>
+    <string name="zen_mode_option_alarms" msgid="5785372117288803600">"알람만"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"모두 차단"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"전화 벨소리"</string>
@@ -2595,7 +2595,7 @@
     <string name="zen_mode_messages" msgid="5886440273537510894">"메시지"</string>
     <string name="zen_mode_selected_messages" msgid="8245990149599142281">"선택한 메시지"</string>
     <string name="zen_mode_from_anyone" msgid="2638322015361252161">"누구나"</string>
-    <string name="zen_mode_from_contacts" msgid="2232335406106711637">"연락처만"</string>
+    <string name="zen_mode_from_contacts" msgid="2232335406106711637">"주소록의 연락처만"</string>
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"별표 표시한 연락처만"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"없음"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"알람"</string>
@@ -2610,7 +2610,7 @@
     <string name="zen_mode_when_weeknights" msgid="8354070633893273783">"평일 밤"</string>
     <string name="zen_mode_start_time" msgid="8102602297273744441">"시작 시간"</string>
     <string name="zen_mode_end_time" msgid="8774327885892705505">"종료 시간"</string>
-    <string name="zen_mode_end_time_next_day_summary_format" msgid="4201521691238728701">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> 다음 날"</string>
+    <string name="zen_mode_end_time_next_day_summary_format" msgid="4201521691238728701">"다음 날 <xliff:g id="FORMATTED_TIME">%s</xliff:g>"</string>
     <string name="zen_mode_summary_alarms_only_indefinite" msgid="2061973221027570123">"무제한으로 알람만 수신 모드로 변경"</string>
     <plurals name="zen_mode_summary_alarms_only_by_minute" formatted="false" msgid="6122003583875424601">
       <item quantity="other"><xliff:g id="DURATION">%1$d</xliff:g>분 동안 알람만 수신 모드로 변경(<xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>까지)</item>
@@ -2683,7 +2683,7 @@
     <string name="notifications_enabled" msgid="4386196629684749507">"보통"</string>
     <string name="notifications_disabled" msgid="4326096527874762629">"차단"</string>
     <string name="notifications_sensitive" msgid="7636231039287237132">"민감한 콘텐츠 숨김"</string>
-    <string name="notifications_priority" msgid="1812498477331421719">"최우선"</string>
+    <string name="notifications_priority" msgid="1812498477331421719">"중요 알림"</string>
     <string name="notifications_no_peeking" msgid="999951669023262823">"엿보기 없음"</string>
     <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g>/<xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
     <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g>/<xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>/<xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
@@ -2708,7 +2708,7 @@
     <string name="filter_personal_apps" msgid="3277727374174355971">"개인"</string>
     <string name="filter_work_apps" msgid="24519936790795574">"직장"</string>
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"차단됨"</string>
-    <string name="filter_notif_priority_apps" msgid="5965001885749195239">"최우선"</string>
+    <string name="filter_notif_priority_apps" msgid="5965001885749195239">"중요 알림"</string>
     <string name="filter_notif_sensitive_apps" msgid="4909289478844197927">"민감한 콘텐츠 숨김"</string>
     <string name="filter_notif_no_peeking" msgid="5197968265625096563">"엿보기 없음"</string>
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"도메인 URL이 있는 앱"</string>
@@ -2732,7 +2732,7 @@
     </plurals>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"인식할 수 없습니다."</string>
     <string name="default_apps_title" msgid="1854974637597514435">"기본 앱"</string>
-    <string name="assist_and_voice_input_title" msgid="1733165754793221197">"어시스트 및 음성 입력"</string>
+    <string name="assist_and_voice_input_title" msgid="1733165754793221197">"지원 및 음성 입력"</string>
     <string name="default_assist_title" msgid="8868488975409247921">"지원 앱"</string>
     <string name="default_assist_none" msgid="3709083569608735487">"없음"</string>
     <string name="choose_assist_title" msgid="554234448228740980">"어시스트 선택"</string>
@@ -2784,11 +2784,11 @@
     <string name="inactive_apps_title" msgid="1317817863508274533">"비활성 앱"</string>
     <string name="inactive_app_inactive_summary" msgid="6768756967594202411">"비활성 상태입니다. 전환하려면 터치하세요."</string>
     <string name="inactive_app_active_summary" msgid="4512911571954375968">"활성 상태입니다. 전환하려면 터치하세요."</string>
-    <string name="assist_access_context_title" msgid="2047105711005856521">"현재 화면에 표시된 데이터 사용하기"</string>
-    <string name="assist_access_context_summary" msgid="7573538643562533886">"사용 중인 앱의 콘텐츠 및 메타데이터에 지원 앱이 액세스하도록 허용"</string>
-    <string name="assist_access_screenshot_title" msgid="7994303398517230267">"스크린샷 사용"</string>
-    <string name="assist_access_screenshot_summary" msgid="8774637450198111406">"사용 중인 앱의 이미지를 지원 앱이 분석하도록 허용"</string>
-    <string name="assist_footer" msgid="2283187001990543739">"지원 앱은 사용자가 따로 묻지 않아도 유용한 정보를 판별하고 이에 따라 행동할 수 있게 도와줍니다. 일부 앱은 통합된 지원을 제공하기 위하여 런처 및 음성 입력 서비스를 지원합니다."</string>
+    <string name="assist_access_context_title" msgid="2269032346698890257">"화면의 텍스트 사용"</string>
+    <string name="assist_access_context_summary" msgid="1991421283142279560">"지원 앱이 화면의 텍스트 콘텐츠에 액세스하도록 허용합니다."</string>
+    <string name="assist_access_screenshot_title" msgid="4034721336291215819">"스크린샷 사용"</string>
+    <string name="assist_access_screenshot_summary" msgid="6761636689013259901">"지원 앱이 화면의 이미지에 액세스하도록 허용합니다."</string>
+    <string name="assist_footer" msgid="1982791172085896864">"지원 앱은 화면에 표시된 정보에 맞게 도움을 줄 수 있습니다. 일부 앱은 통합된 지원을 제공하기 위해 런처와 음성 입력 서비스를 모두 지원합니다."</string>
     <string name="average_memory_use" msgid="829566450150198512">"평균 메모리 사용"</string>
     <string name="maximum_memory_use" msgid="7493720799710132496">"최대 메모리 사용"</string>
     <string name="memory_usage" msgid="1781358557214390033">"메모리 사용량"</string>
