@@ -71,6 +71,7 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
     private Spinner mIpsecCaCert;
     private Spinner mIpsecServerCert;
     private CheckBox mSaveLogin;
+    private CheckBox mShowOptions;
 
     ConfigDialog(Context context, DialogInterface.OnClickListener listener,
             VpnProfile profile, boolean editing, boolean exists) {
@@ -106,6 +107,7 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
         mIpsecCaCert = (Spinner) mView.findViewById(R.id.ipsec_ca_cert);
         mIpsecServerCert = (Spinner) mView.findViewById(R.id.ipsec_server_cert);
         mSaveLogin = (CheckBox) mView.findViewById(R.id.save_login);
+        mShowOptions = (CheckBox) mView.findViewById(R.id.show_options);
 
         // Second, copy values from the profile.
         mName.setText(mProfile.name);
@@ -140,8 +142,9 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
         mRoutes.addTextChangedListener(this);
         mIpsecSecret.addTextChangedListener(this);
         mIpsecUserCert.setOnItemSelectedListener(this);
+        mShowOptions.setOnClickListener(this);
 
-        // Forth, determine to do editing or connecting.
+        // Fourth, determine whether to do editing or connecting.
         boolean valid = validate(true);
         mEditing = mEditing || !valid;
 
@@ -154,13 +157,10 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
             // Show type-specific fields.
             changeType(mProfile.type);
 
-            // Show advanced options directly if any of them is set.
-            View showOptions = mView.findViewById(R.id.show_options);
-            if (mProfile.searchDomains.isEmpty() && mProfile.dnsServers.isEmpty() &&
-                    mProfile.routes.isEmpty()) {
-                showOptions.setOnClickListener(this);
-            } else {
-                onClick(showOptions);
+            // Switch to advanced view immediately if any advanced options are on
+            if (!mProfile.searchDomains.isEmpty() || !mProfile.dnsServers.isEmpty() ||
+                    !mProfile.routes.isEmpty()) {
+                showAdvancedOptions();
             }
 
             // Create a button to forget the profile if it has already been saved..
@@ -200,6 +200,17 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
     }
 
     @Override
+    public void onRestoreInstanceState(Bundle savedState) {
+        super.onRestoreInstanceState(savedState);
+
+        // Visibility isn't restored by super.onRestoreInstanceState, so re-show the advanced
+        // options here if they were already revealed or set.
+        if (mShowOptions.isChecked()) {
+            showAdvancedOptions();
+        }
+    }
+
+    @Override
     public void afterTextChanged(Editable field) {
         getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(validate(mEditing));
     }
@@ -213,9 +224,10 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
     }
 
     @Override
-    public void onClick(View showOptions) {
-        showOptions.setVisibility(View.GONE);
-        mView.findViewById(R.id.options).setVisibility(View.VISIBLE);
+    public void onClick(View view) {
+        if (view == mShowOptions) {
+            showAdvancedOptions();
+        }
     }
 
     @Override
@@ -228,6 +240,11 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
+    }
+
+    private void showAdvancedOptions() {
+        mView.findViewById(R.id.options).setVisibility(View.VISIBLE);
+        mShowOptions.setVisibility(View.GONE);
     }
 
     private void changeType(int type) {
