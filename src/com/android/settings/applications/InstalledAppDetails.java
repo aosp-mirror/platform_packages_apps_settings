@@ -379,6 +379,9 @@ public class InstalledAppDetails extends AppInfoBase
 
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
+        if (mFinishing) {
+            return;
+        }
         boolean showIt = true;
         if (mUpdatedSysApp) {
             showIt = false;
