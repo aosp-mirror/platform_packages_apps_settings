@@ -304,7 +304,7 @@
     <string name="security_enable_widgets_disabled_summary" msgid="1557090442377855233">"管理者によって無効にされています"</string>
     <string name="owner_info_settings_summary" msgid="7472393443779227052">"なし"</string>
     <string name="owner_info_settings_status" msgid="120407527726476378">"<xliff:g id="COUNT_0">%1$d</xliff:g>/<xliff:g id="COUNT_1">%2$d</xliff:g>"</string>
-    <string name="owner_info_settings_edit_text_hint" msgid="7591869574491036360">"例: 太郎さんのAndroid。"</string>
+    <string name="owner_info_settings_edit_text_hint" msgid="7591869574491036360">"例: 佐藤のAndroid"</string>
     <string name="user_info_settings_title" msgid="1195015434996724736">"ユーザー情報"</string>
     <string name="show_profile_info_on_lockscreen_label" msgid="2741208907263877990">"ロック画面にプロフィール情報を表示"</string>
     <string name="profile_info_settings_title" msgid="3518603215935346604">"プロフィール情報"</string>
@@ -389,7 +389,7 @@
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"入力したパスワードは正しいのですが、データが破損しています。\n\nスマートフォンの使用を再開するには出荷時設定にリセットする必要があります。リセット後、スマートフォンのセットアップの段階で、Googleアカウントにバックアップしたデータの復元を選択できます。"</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"入力方法の切り替え"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"画面ロックを選択"</string>
-    <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"画面のロック"</string>
+    <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"画面ロック"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"ロック解除方法を変更する"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"パターン、PIN、パスワードセキュリティを変更または無効にする"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"画面をロックする方法を選択する"</string>
@@ -1011,11 +1011,11 @@
     <string name="storage_wizard_format_progress_title" msgid="6487352396450582292">"<xliff:g id="NAME">^1</xliff:g>をフォーマット中…"</string>
     <string name="storage_wizard_format_progress_body" msgid="4445041233802828430">"フォーマット中は<xliff:g id="NAME">^1</xliff:g>を取り外さないでください。"</string>
     <string name="storage_wizard_migrate_title" msgid="1363078147938160407">"データを新しいストレージに移動"</string>
-    <string name="storage_wizard_migrate_body" msgid="890751699549542345">"写真、ファイル、一部のアプリをこの新しい<xliff:g id="NAME">^1</xliff:g>に移動できます。\n\n移動にはおよそ<xliff:g id="TIME">^2</xliff:g>かかります。これにより内部ストレージが<xliff:g id="SIZE">^3</xliff:g>解放されます。移動中は一部のアプリが使用できなくなります。"</string>
+    <string name="storage_wizard_migrate_body" msgid="890751699549542345">"写真、ファイル、一部のアプリをこの新しい<xliff:g id="NAME">^1</xliff:g>に移動できます。\n\n移動には約<xliff:g id="TIME">^2</xliff:g>かかります。これにより内部ストレージの空き容量が<xliff:g id="SIZE">^3</xliff:g>増えます。移動中は一部のアプリが使用できなくなります。"</string>
     <string name="storage_wizard_migrate_now" msgid="4523444323744239143">"今すぐ移動"</string>
     <string name="storage_wizard_migrate_later" msgid="3173482328116026253">"後で移動"</string>
     <string name="storage_wizard_migrate_confirm_title" msgid="8564833529613286965">"データの移動"</string>
-    <string name="storage_wizard_migrate_confirm_body" msgid="4212060581792135962"><b>"移動にはおよそ<xliff:g id="TIME">^1</xliff:g>かかります。これにより<xliff:g id="NAME">^3</xliff:g>が<xliff:g id="SIZE">^2</xliff:g>解放されます。"</b></string>
+    <string name="storage_wizard_migrate_confirm_body" msgid="4212060581792135962"><b>"移動には約<xliff:g id="TIME">^1</xliff:g>かかります。これにより<xliff:g id="NAME">^3</xliff:g>の空き容量が<xliff:g id="SIZE">^2</xliff:g>増えます。"</b></string>
     <string name="storage_wizard_migrate_confirm_next" msgid="5509475628423823202">"移動"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="1665479429044202868">"データを移動中…"</string>
     <string name="storage_wizard_migrate_details" msgid="3709728824651136227">"移動中の注意事項:\n•<xliff:g id="NAME">^1</xliff:g>を取り外さないでください。\n•一部のアプリは正常に機能しません。\n•端末を電源につないだままにしてください。"</string>
@@ -1066,8 +1066,8 @@
     <string name="error_title" msgid="7631322303341024692"></string>
     <string name="error_name_empty" msgid="5508155943840201232">"[名前]フィールドは必須です。"</string>
     <string name="error_apn_empty" msgid="4932211013600863642">"APNは必ず指定してください。"</string>
-    <string name="error_mcc_not3" msgid="4560171714156251661">"MCCのフィールドには3桁で指定してください。"</string>
-    <string name="error_mnc_not23" msgid="8418177072458379439">"MNCのフィールドには2桁か3桁で指定してください。"</string>
+    <string name="error_mcc_not3" msgid="4560171714156251661">"MCC欄は3桁で指定してください。"</string>
+    <string name="error_mnc_not23" msgid="8418177072458379439">"MNC欄は2桁か3桁で指定してください。"</string>
     <string name="restore_default_apn" msgid="8178010218751639581">"デフォルトのAPN設定を復元しています。"</string>
     <string name="menu_restore" msgid="8260067415075573273">"初期設定にリセット"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"APN設定をリセットしました。"</string>
@@ -1929,7 +1929,7 @@
     <string name="credentials_wrong_password" msgid="2541932597104054807">"パスワードが正しくありません。"</string>
     <string name="credentials_reset_warning" msgid="5320653011511797600">"パスワードが正しくありません。あと1回失敗すると、認証情報ストレージが消去されます。"</string>
     <string name="credentials_reset_warning_plural" msgid="6514085665301095279">"パスワードが正しくありません。あと<xliff:g id="NUMBER">%1$d</xliff:g>回失敗すると、認証情報ストレージが消去されます。"</string>
-    <string name="credentials_erased" msgid="2907836028586342969">"認証情報ストレージを消去"</string>
+    <string name="credentials_erased" msgid="2907836028586342969">"認証情報ストレージを消去しました。"</string>
     <string name="credentials_not_erased" msgid="7685932772284216097">"認証情報ストレージを消去不可"</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"認証情報ストレージが有効になりました。"</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"認証情報ストレージを使用するには、画面ロックのPINまたはパスワードを設定する必要があります。"</string>
@@ -1967,7 +1967,7 @@
     <string name="personal_device_admin_title" msgid="2849617316347669861">"個人用"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"職場"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"使用可能な信頼できるエージェントがありません"</string>
-    <string name="add_device_admin_msg" msgid="6246742476064507965">"端末管理アプリを有効にしますか？"</string>
+    <string name="add_device_admin_msg" msgid="6246742476064507965">"管理アプリを有効にしますか？"</string>
     <string name="add_device_admin" msgid="7133327675884827091">"有効にする"</string>
     <string name="device_admin_add_title" msgid="7705551449705676363">"端末管理アプリ"</string>
     <string name="device_admin_warning" msgid="2026747446313628233">"この管理アプリを有効にすると、次の操作を<xliff:g id="APP_NAME">%1$s</xliff:g>アプリに許可することになります。"</string>
@@ -2526,7 +2526,7 @@
     <string name="lock_screen_notifications_title" msgid="9118805570775519455">"端末がロックされているとき"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"すべての通知内容を表示する"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"プライベートな通知内容を非表示にする"</string>
-    <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"すべての通知を表示しない"</string>
+    <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"通知をすべて表示しない"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"端末がロックされている場合、通知をどのように表示しますか？"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"アプリの通知"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"その他の音"</string>
@@ -2635,7 +2635,7 @@
     <string name="switch_on_text" msgid="1124106706920572386">"ON"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"OFF"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"画面の固定"</string>
-    <string name="screen_pinning_description" msgid="1137904524037468263">"この設定をONにして画面固定を使用すると、固定を解除するまで現在の画面が常に表示されるようになります。\n\n画面の固定を使用するには:\n\n1. 画面の固定がONになっていることを確認します。\n\n2. 固定する画面を開きます。\n\n3. [最近]をタップします。\n\n4. 上にスワイプして固定アイコンをタップします。"</string>
+    <string name="screen_pinning_description" msgid="1137904524037468263">"この設定をONにして画面の固定を使用すると、固定を解除するまで現在の画面が常に表示されるようになります。\n\n画面の固定を使用するには:\n\n1. 画面の固定がONになっていることを確認します。\n\n2. 固定する画面を開きます。\n\n3. [最近]をタップします。\n\n4. 上にスワイプして固定アイコンをタップします。"</string>
     <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"画面固定の解除前にロック解除パターンを要求"</string>
     <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"画面固定の解除前にPINを要求"</string>
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"画面固定の解除前にパスワードを要求"</string>
@@ -2790,11 +2790,11 @@
     <string name="inactive_apps_title" msgid="1317817863508274533">"無効なアプリ"</string>
     <string name="inactive_app_inactive_summary" msgid="6768756967594202411">"無効。タップすると切り替わります。"</string>
     <string name="inactive_app_active_summary" msgid="4512911571954375968">"有効。タップすると切り替わります。"</string>
-    <string name="assist_access_context_title" msgid="2047105711005856521">"現在のコンテキストを使用"</string>
-    <string name="assist_access_context_summary" msgid="7573538643562533886">"使用しているアプリのコンテンツとメタデータにアシストアプリがアクセスすることを許可します"</string>
-    <string name="assist_access_screenshot_title" msgid="7994303398517230267">"スクリーンショットの使用"</string>
-    <string name="assist_access_screenshot_summary" msgid="8774637450198111406">"使用しているアプリの画像をアシストアプリが解析することを許可します"</string>
-    <string name="assist_footer" msgid="2283187001990543739">"アシストアプリを使用することにより、質問することなく、有益な情報を識別し、それに基づいて操作できるようになります。一部のアプリはランチャーと音声入力サービスの両方に対応しており、統合されたアシスタントを提供します。"</string>
+    <string name="assist_access_context_title" msgid="2269032346698890257">"画面のテキストを使用"</string>
+    <string name="assist_access_context_summary" msgid="1991421283142279560">"画面コンテンツのテキストにアクセスすることをアシストアプリに許可します"</string>
+    <string name="assist_access_screenshot_title" msgid="4034721336291215819">"スクリーンショットを使用"</string>
+    <string name="assist_access_screenshot_summary" msgid="6761636689013259901">"画面の画像にアクセスすることをアシストアプリに許可します"</string>
+    <string name="assist_footer" msgid="1982791172085896864">"アシストアプリは、表示している画面の情報に基づいてアシスタントを提供します。一部のアプリはランチャーと音声入力サービスの両方に対応しており、統合されたアシスタントを提供します。"</string>
     <string name="average_memory_use" msgid="829566450150198512">"平均メモリ使用"</string>
     <string name="maximum_memory_use" msgid="7493720799710132496">"最大メモリ使用"</string>
     <string name="memory_usage" msgid="1781358557214390033">"メモリ使用量"</string>
