@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.service.persistentdata.PersistentDataBlockManager;
+
 import com.android.internal.logging.MetricsLogger;
 
 import android.content.Intent;
@@ -30,6 +31,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 /**
  * Confirm and execute a reset of the device to a clean "just out of the box"
@@ -134,7 +136,19 @@ public class MasterClearConfirm extends InstrumentedFragment {
         }
         mContentView = inflater.inflate(R.layout.master_clear_confirm, null);
         establishFinalConfirmationState();
+        setAccessibilityTitle();
         return mContentView;
+    }
+
+    private void setAccessibilityTitle() {
+        CharSequence currentTitle = getActivity().getTitle();
+        TextView confirmationMessage =
+                (TextView) mContentView.findViewById(R.id.master_clear_confirm);
+        if (confirmationMessage != null) {
+            String accessibileText = new StringBuilder(currentTitle).append(",").append(
+                    confirmationMessage.getText()).toString();
+            getActivity().setTitle(Utils.createAccessibleSequence(currentTitle, accessibileText));
+        }
     }
 
     @Override
