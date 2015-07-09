@@ -937,8 +937,7 @@ public class InstalledAppDetails extends AppInfoBase
 
         @Override
         public void onLoaderReset(Loader<ChartData> loader) {
-            mChartData = null;
-            mDataPreference.setSummary(getDataSummary());
+            // Leave last result.
         }
     };
 
