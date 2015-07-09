@@ -161,6 +161,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                     110, 1f /* translationScale */,
                     0.5f /* delayScale */, AnimationUtils.loadInterpolator(
                             getContext(), android.R.interpolator.fast_out_linear_in));
+            setAccessibilityTitle(mHeaderTextView.getText());
             return view;
         }
 
