@@ -467,14 +467,8 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
     };
 
     private void updateDetails(MeasurementDetails details) {
-        PreferenceScreen screen = getPreferenceScreen();
-        final int preferenceCount = screen.getPreferenceCount();
-        for (int i = 0; i < preferenceCount; ++i) {
-            final Preference pref = screen.getPreference(i);
-            if (!(pref instanceof StorageItemPreference)) {
-                continue;
-            }
-            StorageItemPreference item = (StorageItemPreference)pref;
+        for (int i = 0; i < mItemPoolIndex; ++i) {
+            StorageItemPreference item = mItemPreferencePool.get(i);
             final int userId = item.userHandle;
             final int itemTitleId = item.getTitleRes();
             switch (itemTitleId) {
