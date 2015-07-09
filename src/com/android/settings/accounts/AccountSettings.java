@@ -49,6 +49,7 @@ import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 
 import com.android.internal.logging.MetricsLogger;
+import com.android.settings.AccessiblePreferenceCategory;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
@@ -270,14 +271,19 @@ public class AccountSettings extends SettingsPreferenceFragment
         final ProfileData profileData = new ProfileData();
         profileData.userInfo = userInfo;
         if (addCategory) {
-            profileData.preferenceGroup = new PreferenceCategory(context);
+            profileData.preferenceGroup = new AccessiblePreferenceCategory(context);
             if (userInfo.isManagedProfile()) {
                 profileData.preferenceGroup.setLayoutResource(R.layout.work_profile_category);
                 profileData.preferenceGroup.setTitle(R.string.category_work);
-                profileData.preferenceGroup.setSummary(getWorkGroupSummary(context, userInfo));
+                String workGroupSummary = getWorkGroupSummary(context, userInfo);
+                profileData.preferenceGroup.setSummary(workGroupSummary);
+                ((AccessiblePreferenceCategory) profileData.preferenceGroup).setContentDescription(
+                        getString(R.string.accessibility_category_work, workGroupSummary));
                 profileData.removeWorkProfilePreference = newRemoveWorkProfilePreference(context);
             } else {
                 profileData.preferenceGroup.setTitle(R.string.category_personal);
+                ((AccessiblePreferenceCategory) profileData.preferenceGroup).setContentDescription(
+                        getString(R.string.accessibility_category_personal));
             }
             parent.addPreference(profileData.preferenceGroup);
         } else {

@@ -168,6 +168,24 @@ public class MasterClear extends InstrumentedFragment {
 
         final UserManager um = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
         loadAccountList(um);
+        StringBuffer contentDescription = new StringBuffer();
+        View masterClearContainer = mContentView.findViewById(R.id.master_clear_container);
+        getContentDescription(masterClearContainer, contentDescription);
+        masterClearContainer.setContentDescription(contentDescription);
+    }
+
+    private void getContentDescription(View v, StringBuffer description) {
+       if (v instanceof ViewGroup) {
+           ViewGroup vGroup = (ViewGroup) v;
+           for (int i = 0; i < vGroup.getChildCount(); i++) {
+               View nextChild = vGroup.getChildAt(i);
+               getContentDescription(nextChild, description);
+           }
+       } else if (v instanceof TextView) {
+           TextView vText = (TextView) v;
+           description.append(vText.getText());
+           description.append(","); // Allow Talkback to pause between sections.
+       }
     }
 
     private boolean isExtStorageEncrypted() {

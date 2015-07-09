@@ -35,6 +35,7 @@ import android.content.SyncAdapterType;
 import android.content.SyncInfo;
 import android.content.SyncStatusInfo;
 import android.content.pm.ProviderInfo;
+import android.content.pm.UserInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -151,6 +152,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
         super.onCreate(icicle);
         setPreferenceScreen(null);
         addPreferencesFromResource(R.xml.account_sync_settings);
+        setAccessibilityTitle();
 
         setHasOptionsMenu(true);
     }
@@ -198,6 +200,18 @@ public class AccountSyncSettings extends AccountPreferenceBase {
         }
         mUserId.setText(mAccount.name);
         mProviderId.setText(mAccount.type);
+    }
+
+    private void setAccessibilityTitle() {
+        final UserManager um = (UserManager) getSystemService(Context.USER_SERVICE);
+        UserInfo user = um.getUserInfo(mUserHandle.getIdentifier());
+        boolean isWorkProfile = user != null ? user.isManagedProfile() : false;
+        CharSequence currentTitle = getActivity().getTitle();
+        String accessibilityTitle =
+                getString(isWorkProfile
+                        ? R.string.accessibility_work_account_title
+                        : R.string.accessibility_personal_account_title, currentTitle);
+        getActivity().setTitle(Utils.createAccessibleSequence(currentTitle, accessibilityTitle));
     }
 
     @Override

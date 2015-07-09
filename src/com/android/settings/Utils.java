@@ -70,7 +70,10 @@ import android.provider.ContactsContract.Profile;
 import android.provider.ContactsContract.RawContacts;
 import android.service.persistentdata.PersistentDataBlockManager;
 import android.telephony.TelephonyManager;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.TextUtils;
+import android.text.style.TtsSpan;
 import android.util.ArraySet;
 import android.util.Log;
 import android.util.SparseArray;
@@ -1216,5 +1219,19 @@ public final class Utils {
         } catch (RemoteException e) {
             return false;
         }
+    }
+
+    /**
+     * Returns an accessible SpannableString.
+     * @param displayText the text to display
+     * @param accessibileText the text text-to-speech engines should read
+     */
+    public static SpannableString createAccessibleSequence(CharSequence displayText,
+            String accessibileText) {
+        SpannableString str = new SpannableString(displayText);
+        str.setSpan(new TtsSpan.TextBuilder(accessibileText).build(), 0,
+                displayText.length(),
+                Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        return str;
     }
 }
