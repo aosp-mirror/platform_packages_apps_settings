@@ -178,6 +178,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                             return (float)(numRows - row) / numRows;
                         }
                     });
+            setAccessibilityTitle(mHeaderTextView.getText());
             return view;
         }
 
