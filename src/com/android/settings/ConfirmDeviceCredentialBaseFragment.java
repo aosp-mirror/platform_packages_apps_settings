@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import android.annotation.Nullable;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -79,6 +80,17 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
         super.onResume();
         if (mAllowFpAuthentication) {
             mFingerprintHelper.startListening();
+        }
+    }
+
+    protected void setAccessibilityTitle(CharSequence suplementalText) {
+        Intent intent = getActivity().getIntent();
+        if (intent != null) {
+            CharSequence titleText = intent.getCharSequenceExtra(
+                    ConfirmDeviceCredentialBaseFragment.TITLE_TEXT);
+            String accessibilityTitle =
+                    new StringBuilder(titleText).append(",").append(suplementalText).toString();
+            getActivity().setTitle(Utils.createAccessibleSequence(titleText, accessibilityTitle));
         }
     }
 
