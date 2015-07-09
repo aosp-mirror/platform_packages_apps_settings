@@ -22,6 +22,7 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.os.AsyncTask;
@@ -417,8 +418,10 @@ public final class CredentialStorage extends Activity {
      */
     private boolean checkCallerIsCertInstallerOrSelfInProfile() {
         if (TextUtils.equals("com.android.certinstaller", getCallingPackage())) {
-            // CertInstaller is allowed to install credentials
-            return true;
+            // CertInstaller is allowed to install credentials if it has the same signature as
+            // Settings package.
+            return getPackageManager().checkSignatures(
+                    getCallingPackage(), getPackageName()) == PackageManager.SIGNATURE_MATCH;
         }
 
         final int launchedFromUserId;
