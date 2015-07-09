@@ -95,6 +95,8 @@ public class ManageApplications extends InstrumentedFragment
     public static final String EXTRA_VOLUME_NAME = "volumeName";
 
     private static final String EXTRA_SORT_ORDER = "sortOrder";
+    private static final String EXTRA_SHOW_SYSTEM = "showSystem";
+    private static final String EXTRA_HAS_ENTRIES = "hasEntries";
 
     // attributes used as keys when passing values to InstalledAppDetails activity
     public static final String APP_CHG = "chg";
@@ -259,6 +261,7 @@ public class ManageApplications extends InstrumentedFragment
 
         if (savedInstanceState != null) {
             mSortOrder = savedInstanceState.getInt(EXTRA_SORT_ORDER, mSortOrder);
+            mShowSystem = savedInstanceState.getBoolean(EXTRA_SHOW_SYSTEM, mShowSystem);
         }
 
         mInvalidSizeStr = getActivity().getText(R.string.invalid_size_value);
@@ -290,6 +293,10 @@ public class ManageApplications extends InstrumentedFragment
             lv.setTextFilterEnabled(true);
             mListView = lv;
             mApplications = new ApplicationsAdapter(mApplicationsState, this, mFilter);
+            if (savedInstanceState != null) {
+                mApplications.mHasReceivedLoadEntries =
+                        savedInstanceState.getBoolean(EXTRA_HAS_ENTRIES, false);
+            }
             mListView.setAdapter(mApplications);
             mListView.setRecyclerListener(mApplications);
 
@@ -399,6 +406,8 @@ public class ManageApplications extends InstrumentedFragment
         super.onSaveInstanceState(outState);
         mResetAppsHelper.onSaveInstanceState(outState);
         outState.putInt(EXTRA_SORT_ORDER, mSortOrder);
+        outState.putBoolean(EXTRA_SHOW_SYSTEM, mShowSystem);
+        outState.putBoolean(EXTRA_HAS_ENTRIES, mApplications.mHasReceivedLoadEntries);
     }
 
     @Override
