@@ -653,16 +653,20 @@ public class WifiSettings extends RestrictedSettingsFragment
                 getPreferenceScreen().removeAll();
 
                 boolean hasAvailableAccessPoints = false;
+                int index = 0;
                 for (AccessPoint accessPoint : accessPoints) {
                     // Ignore access points that are out of range.
                     if (accessPoint.getLevel() != -1) {
                         hasAvailableAccessPoints = true;
                         if (accessPoint.getTag() != null) {
-                            getPreferenceScreen().addPreference((Preference) accessPoint.getTag());
+                            final Preference pref = (Preference) accessPoint.getTag();
+                            pref.setOrder(index++);
+                            getPreferenceScreen().addPreference(pref);
                             continue;
                         }
                         AccessPointPreference preference = new AccessPointPreference(accessPoint,
                                 getActivity(), mUserBadgeCache, false);
+                        preference.setOrder(index++);
 
                         if (mOpenSsid != null && mOpenSsid.equals(accessPoint.getSsidStr())
                                 && !accessPoint.isSaved()
