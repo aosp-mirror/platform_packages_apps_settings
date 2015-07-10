@@ -129,18 +129,20 @@ public class VpnTests extends InstrumentationTestCase {
             }
         }
         // disconnect existing vpn if there is any
-        LegacyVpnInfo oldVpn = mService.getLegacyVpnInfo();
+        LegacyVpnInfo oldVpn = mService.getLegacyVpnInfo(UserHandle.myUserId());
         if (oldVpn != null) {
             Log.v(TAG, "disconnect legacy VPN");
             disconnect();
             // wait till the legacy VPN is disconnected.
             int tries = 0;
-            while (tries < MAX_DISCONNECTION_TRIES && mService.getLegacyVpnInfo() != null) {
+            while (tries < MAX_DISCONNECTION_TRIES &&
+                    mService.getLegacyVpnInfo(UserHandle.myUserId()) != null) {
                 tries++;
                 Thread.sleep(10 * 1000);
                 Log.v(TAG, "Wait for legacy VPN to be disconnected.");
             }
-            Assert.assertNull("Failed to disconect VPN", mService.getLegacyVpnInfo());
+            Assert.assertNull("Failed to disconect VPN",
+                    mService.getLegacyVpnInfo(UserHandle.myUserId()));
             // wait for 30 seconds after the previous VPN is disconnected.
             sleep(30 * 1000);
         }
@@ -276,7 +278,7 @@ public class VpnTests extends InstrumentationTestCase {
      * Verify the vpn connection by checking the VPN state, external IP or ping test
      */
     private void validateVpnConnection(VpnProfile profile, boolean pingTestFlag) throws Exception {
-        LegacyVpnInfo legacyVpnInfo = mService.getLegacyVpnInfo();
+        LegacyVpnInfo legacyVpnInfo = mService.getLegacyVpnInfo(UserHandle.myUserId());
         Assert.assertTrue(legacyVpnInfo != null);
 
         long start = System.currentTimeMillis();
@@ -284,7 +286,7 @@ public class VpnTests extends InstrumentationTestCase {
                 (legacyVpnInfo.state != LegacyVpnInfo.STATE_CONNECTED)) {
             Log.v(TAG, "vpn state: " + legacyVpnInfo.state);
             sleep(10 * 1000);
-            legacyVpnInfo = mService.getLegacyVpnInfo();
+            legacyVpnInfo = mService.getLegacyVpnInfo(UserHandle.myUserId());
         }
 
         // the vpn state should be CONNECTED
