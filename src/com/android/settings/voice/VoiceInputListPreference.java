@@ -121,6 +121,16 @@ public class VoiceInputListPreference extends AppListPreferenceWithSettings {
         }
     }
 
+    public ComponentName getCurrentService() {
+        if (mHelper.mCurrentVoiceInteraction != null) {
+            return mHelper.mCurrentVoiceInteraction;
+        } else if (mHelper.mCurrentRecognizer != null) {
+            return mHelper.mCurrentRecognizer;
+        } else {
+            return null;
+        }
+    }
+
     private class CustomAdapter extends ArrayAdapter<CharSequence> {
 
         public CustomAdapter(Context context, CharSequence[] objects) {
