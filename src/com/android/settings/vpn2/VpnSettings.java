@@ -236,7 +236,7 @@ public class VpnSettings extends SettingsPreferenceFragment implements
         try {
             // Legacy VPNs
             mConnectedLegacyVpn = null;
-            LegacyVpnInfo info = mConnectivityService.getLegacyVpnInfo();
+            LegacyVpnInfo info = mConnectivityService.getLegacyVpnInfo(UserHandle.myUserId());
             if (info != null) {
                 ConfigPreference preference = mConfigPreferences.get(info.key);
                 if (preference != null) {
