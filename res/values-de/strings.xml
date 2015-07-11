@@ -232,7 +232,7 @@
     <string name="sdcard_settings_scanning_status" product="default" msgid="2763464949274455656">"SD-Karte wird auf Medien gescannt..."</string>
     <string name="sdcard_settings_read_only_status" product="nosdcard" msgid="3624143937437417788">"USB-Speicher schreibgeschützt"</string>
     <string name="sdcard_settings_read_only_status" product="default" msgid="4518291824764698112">"Die bereitgestellte SD-Karte ist schreibgeschützt."</string>
-    <string name="skip_label" msgid="47510779345218297">"Ohne"</string>
+    <string name="skip_label" msgid="47510779345218297">"Überspringen"</string>
     <string name="next_label" msgid="4693520878012668114">"Weiter"</string>
     <string name="language_picker_title" msgid="5349877711342869319">"Sprache"</string>
     <string name="activity_picker_label" msgid="6295660302548177109">"Aktivität auswählen"</string>
@@ -788,6 +788,14 @@
     <string name="account_settings" msgid="6403589284618783461">"Konten"</string>
     <string name="category_personal" msgid="1299663247844969448">"Nutzer"</string>
     <string name="category_work" msgid="8699184680584175622">"Geschäftlich"</string>
+    <!-- no translation found for accessibility_category_work (4339262969083355720) -->
+    <skip />
+    <!-- no translation found for accessibility_category_personal (1263518850905945594) -->
+    <skip />
+    <!-- no translation found for accessibility_work_account_title (1231830766637939527) -->
+    <skip />
+    <!-- no translation found for accessibility_personal_account_title (2169071663029067826) -->
+    <skip />
     <string name="search_settings" msgid="1910951467596035063">"Suche"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Sucheinstellungen und Suchverlauf verwalten"</string>
     <string name="display_settings" msgid="7965901687241669598">"Display"</string>
@@ -1100,17 +1108,6 @@
     <string name="master_clear_not_available" msgid="1000370707967468909">"Das Zurücksetzen auf Werkseinstellungen ist für diesen Nutzer nicht verfügbar."</string>
     <string name="master_clear_progress_title" msgid="5194793778701994634">"Löschen"</string>
     <string name="master_clear_progress_text" msgid="6559096229480527510">"Bitte warten..."</string>
-    <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"USB-Speicher löschen"</string>
-    <string name="media_format_title" product="default" msgid="4427528440306787972">"SD-Karte löschen"</string>
-    <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"Löscht alles im USB-Speicher."</string>
-    <string name="media_format_summary" product="default" msgid="3805714639375830120">"Löscht alle Daten auf der SD-Karte"</string>
-    <string name="media_format_desc" product="nosdcard" msgid="4557243156946319034">"USB-Speicher ganz löschen? "<b>"Alle"</b>" darin gespeicherten Daten gehen damit verloren!"</string>
-    <string name="media_format_desc" product="default" msgid="8764037252319942415">"SD-Karte löschen? Sie verlieren damit "<b>"alle"</b>" Daten auf der Karte!"</string>
-    <string name="media_format_button_text" product="nosdcard" msgid="6293669371185352810">"USB-Speicher löschen"</string>
-    <string name="media_format_button_text" product="default" msgid="6721544380069373626">"SD-Karte löschen"</string>
-    <string name="media_format_final_desc" product="nosdcard" msgid="941597815448108794">"USB-Speicher und alle darauf gespeicherten Dateien löschen? Diese Aktion kann nicht rückgängig gemacht werden!"</string>
-    <string name="media_format_final_desc" product="default" msgid="7220996042092437566">"SD-Karte und alle darauf gespeicherten Dateien löschen? Die Aktion kann nicht rückgängig gemacht werden!"</string>
-    <string name="media_format_final_button_text" msgid="4881713344315923175">"Alles löschen"</string>
     <string name="call_settings_title" msgid="5188713413939232801">"Anrufeinstellungen"</string>
     <string name="call_settings_summary" msgid="7291195704801002886">"Mailbox, Rufweiterleitung, Anklopfen, Anruferkennung einrichten"</string>
     <string name="tether_settings_title_usb" msgid="6688416425801386511">"USB-Tethering"</string>
@@ -1237,7 +1234,7 @@
     <string name="lockpattern_recording_incorrect_too_short" msgid="1348234155120957561">"Verbinden Sie mindestens <xliff:g id="NUMBER">%d</xliff:g> Punkte. Bitte versuchen Sie es erneut."</string>
     <string name="lockpattern_pattern_entered_header" msgid="4316818983675591604">"Muster wurde aufgezeichnet."</string>
     <string name="lockpattern_need_to_confirm" msgid="8054853451639221265">"Zeichnen Sie das Muster zur Bestätigung erneut."</string>
-    <string name="lockpattern_pattern_confirmed_header" msgid="8455614172231880211">"Ihr neues Entsperrungsmuster"</string>
+    <string name="lockpattern_pattern_confirmed_header" msgid="8455614172231880211">"Ihr neues Entsperrungsmuster:"</string>
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"Bestätigen"</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"Neu aufzeichnen"</string>
     <string name="lockpattern_retry_button_text" msgid="3480423193273588166">"Löschen"</string>
@@ -1499,7 +1496,7 @@
     <string name="apn_settings_not_available" msgid="7873729032165324000">"Die Einstellungen für den Zugangspunkt sind für diesen Nutzer nicht verfügbar."</string>
     <string name="enable_adb" msgid="7982306934419797485">"USB-Debugging"</string>
     <string name="enable_adb_summary" msgid="4881186971746056635">"Debugmodus bei Anschluss über USB"</string>
-    <string name="clear_adb_keys" msgid="4038889221503122743">"Autorisierungen für USB-Debugging aufheben"</string>
+    <string name="clear_adb_keys" msgid="4038889221503122743">"USB-Debugging-Autorisierungen aufheben"</string>
     <string name="bugreport_in_power" msgid="7923901846375587241">"Verknüpfung zu Fehlerbericht"</string>
     <string name="bugreport_in_power_summary" msgid="1778455732762984579">"Schaltfläche zum Abrufen von Fehlerberichten im Menü \"Ein/Aus\" anzeigen"</string>
     <string name="keep_screen_on" msgid="1146389631208760344">"Aktiv lassen"</string>
@@ -2629,7 +2626,7 @@
     <string name="restr_pin_enter_admin_pin" msgid="2451187374960131018">"Administrator-PIN eingeben"</string>
     <string name="switch_on_text" msgid="1124106706920572386">"An"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"Aus"</string>
-    <string name="screen_pinning_title" msgid="2292573232264116542">"Bildschirm anheften"</string>
+    <string name="screen_pinning_title" msgid="2292573232264116542">"Bildschirmfixierung"</string>
     <string name="screen_pinning_description" msgid="1137904524037468263">"Wenn diese Einstellung aktiviert ist, können Sie die Ansicht des aktuellen Bildschirms fixieren.\n\nSo nutzen Sie die Bildschirmfixierung:\n\n1. Prüfen Sie, ob die Bildschirmfixierung aktiviert ist.\n\n2. Öffnen Sie den zu fixierenden Bildschirm.\n\n3. Tippen Sie auf \"Übersicht\".\n\n4. Wischen Sie nach oben und tippen Sie auf das Stecknadelsymbol."</string>
     <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"Vor dem Beenden nach Entsperrungsmuster fragen"</string>
     <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"Vor Beenden nach PIN fragen"</string>
@@ -2734,7 +2731,7 @@
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Nicht erkannt"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"Standard-Apps"</string>
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"Assistent &amp; Spracheingabe"</string>
-    <string name="default_assist_title" msgid="8868488975409247921">"Assistenten-App"</string>
+    <string name="default_assist_title" msgid="8868488975409247921">"Assistent-App"</string>
     <string name="default_assist_none" msgid="3709083569608735487">"Keine"</string>
     <string name="choose_assist_title" msgid="554234448228740980">"Assistenten wählen"</string>
     <string name="assistant_security_warning_title" msgid="8673079231955467177">"<xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> als Assistenten festlegen?"</string>
@@ -2787,14 +2784,11 @@
     <string name="inactive_apps_title" msgid="1317817863508274533">"Inaktive Apps"</string>
     <string name="inactive_app_inactive_summary" msgid="6768756967594202411">"Inaktiv. Berühren zum Aktivieren."</string>
     <string name="inactive_app_active_summary" msgid="4512911571954375968">"Aktiv. Berühren zum Deaktivieren."</string>
-    <string name="assist_access_context_title" msgid="2047105711005856521">"Aktuellen Kontext verwenden"</string>
-    <!-- no translation found for assist_access_context_summary (7573538643562533886) -->
-    <skip />
-    <!-- no translation found for assist_access_screenshot_title (7994303398517230267) -->
-    <skip />
-    <!-- no translation found for assist_access_screenshot_summary (8774637450198111406) -->
-    <skip />
-    <string name="assist_footer" msgid="2283187001990543739">"Mithilfe von Assistenten-Apps können Sie nützliche Informationen ohne Nachfrage erfassen und darauf reagieren. Einige Apps unterstützen für eine einfachere Verwendung Übersichts- und Spracheingabedienste."</string>
+    <string name="assist_access_context_title" msgid="2269032346698890257">"Text auf Bildschirm verwenden"</string>
+    <string name="assist_access_context_summary" msgid="1991421283142279560">"Der Assistent-App den Zugriff auf Bildschirminhalte in Form von Text gestatten"</string>
+    <string name="assist_access_screenshot_title" msgid="4034721336291215819">"Screenshot verwenden"</string>
+    <string name="assist_access_screenshot_summary" msgid="6761636689013259901">"Der Assistent-App den Zugriff auf ein Bild auf dem Bildschirm gestatten"</string>
+    <string name="assist_footer" msgid="1982791172085896864">"Assistent-Apps helfen Ihnen basierend auf den aktuell auf Ihrem Bildschirm angezeigten Informationen. Einige Apps unterstützen für eine einfachere Verwendung Übersichts- und Spracheingabedienste."</string>
     <string name="average_memory_use" msgid="829566450150198512">"Durchschnittl. Speicherverbrauch"</string>
     <string name="maximum_memory_use" msgid="7493720799710132496">"Maximaler Speicherverbrauch"</string>
     <string name="memory_usage" msgid="1781358557214390033">"Speicherverbrauch"</string>

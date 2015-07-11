@@ -819,6 +819,14 @@
     <string name="account_settings" msgid="6403589284618783461">"الحسابات"</string>
     <string name="category_personal" msgid="1299663247844969448">"شخصي"</string>
     <string name="category_work" msgid="8699184680584175622">"العمل"</string>
+    <!-- no translation found for accessibility_category_work (4339262969083355720) -->
+    <skip />
+    <!-- no translation found for accessibility_category_personal (1263518850905945594) -->
+    <skip />
+    <!-- no translation found for accessibility_work_account_title (1231830766637939527) -->
+    <skip />
+    <!-- no translation found for accessibility_personal_account_title (2169071663029067826) -->
+    <skip />
     <string name="search_settings" msgid="1910951467596035063">"بحث"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"إدارة إعدادات البحث والسجل"</string>
     <string name="display_settings" msgid="7965901687241669598">"الشاشة"</string>
@@ -1135,17 +1143,6 @@
     <string name="master_clear_not_available" msgid="1000370707967468909">"لا تتوفر إمكانية إعادة تعيين إعدادات المصنع لهذا المستخدم"</string>
     <string name="master_clear_progress_title" msgid="5194793778701994634">"جارٍ محو البيانات"</string>
     <string name="master_clear_progress_text" msgid="6559096229480527510">"يرجى الانتظار..."</string>
-    <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"‏محو وحدة تخزين USB"</string>
-    <string name="media_format_title" product="default" msgid="4427528440306787972">"‏محو بطاقة SD"</string>
-    <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"‏محو كل البيانات في وحدة تخزين USB."</string>
-    <string name="media_format_summary" product="default" msgid="3805714639375830120">"‏مسح جميع البيانات في بطاقة SD"</string>
-    <string name="media_format_desc" product="nosdcard" msgid="4557243156946319034">"‏هل تريد محو جميع ما على وحدة تخزين USB؟ ستفقد "<b>"جميع"</b>" البيانات المخزنة!"</string>
-    <string name="media_format_desc" product="default" msgid="8764037252319942415">"‏هل تريد مسح بطاقة SD؟ ستفقد "<b>"جميع"</b>" البيانات الموجودة على البطاقة!"</string>
-    <string name="media_format_button_text" product="nosdcard" msgid="6293669371185352810">"‏محو وحدة تخزين USB"</string>
-    <string name="media_format_button_text" product="default" msgid="6721544380069373626">"‏محو بطاقة SD"</string>
-    <string name="media_format_final_desc" product="nosdcard" msgid="941597815448108794">"‏هل تريد محو وحدة تخزين USB، وحذف جميع الملفات المخزنة عليها؟ لا يمكنك عكس هذا الإجراء!"</string>
-    <string name="media_format_final_desc" product="default" msgid="7220996042092437566">"‏هل تريد محو بطاقة SD، وحذف جميع الملفات المخزنة عليها؟ لا يمكن عكس هذا الإجراء!"</string>
-    <string name="media_format_final_button_text" msgid="4881713344315923175">"مسح كل شيء"</string>
     <string name="call_settings_title" msgid="5188713413939232801">"اعدادات المكالمات"</string>
     <string name="call_settings_summary" msgid="7291195704801002886">"إعداد البريد الصوتي، اعادة توجيه المكالمة، انتظار المكالمة، معرف المتصل"</string>
     <string name="tether_settings_title_usb" msgid="6688416425801386511">"‏ربط USB"</string>
@@ -2679,7 +2676,7 @@
     <string name="screen_pinning_title" msgid="2292573232264116542">"تثبيت الشاشة"</string>
     <string name="screen_pinning_description" msgid="1137904524037468263">"عندما يتم تمكين هذا الإعداد، يمكنك استخدام تثبيت الشاشة لتظل الشاشة الحالية قيد العرض حتى يتم إلغاء التثبيت.\n\nلاستخدام تثبيت الشاشة:\n\n1. تأكد من تمكين تثبيت الشاشة.\n\n2. افتح الشاشة التي تريد تثبيتها.\n\n3. المس عرض عام.\n\n4. مرر لأعلى والمس رمز مسمار التثبيت."</string>
     <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"المطالبة بنقش إلغاء القفل قبل إزالة التثبيت"</string>
-    <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"المطالبة برقم التعريف الشخصي قبل إزالة التثبيت"</string>
+    <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"مطالبة برقم تعريف قبل إزالة التثبيت"</string>
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"المطالبة بكلمة المرور قبل إزالة التثبيت"</string>
     <string name="screen_pinning_unlock_none" msgid="3814188275713871856">"قفل الجهاز عند إزالة التثبيت"</string>
     <string name="managed_user_title" msgid="8101244883654409696">"الملف الشخصي للعمل"</string>
@@ -2852,14 +2849,11 @@
     <string name="inactive_apps_title" msgid="1317817863508274533">"التطبيقات غير النشطة"</string>
     <string name="inactive_app_inactive_summary" msgid="6768756967594202411">"غير نشط. المس للتبديل."</string>
     <string name="inactive_app_active_summary" msgid="4512911571954375968">"نشط. المس للتبديل."</string>
-    <string name="assist_access_context_title" msgid="2047105711005856521">"استخدام السياق الحالي"</string>
-    <!-- no translation found for assist_access_context_summary (7573538643562533886) -->
-    <skip />
-    <!-- no translation found for assist_access_screenshot_title (7994303398517230267) -->
-    <skip />
-    <!-- no translation found for assist_access_screenshot_summary (8774637450198111406) -->
-    <skip />
-    <string name="assist_footer" msgid="2283187001990543739">"تعينك التطبيقات المساعدة على تحديد معلومات مفيدة والعمل عليها دون أن تطلب منها ذلك حيث تعمل بعض التطبيقات مع خدمات المشغل والإدخال الصوتي لتوفير مساعدة متكاملة."</string>
+    <string name="assist_access_context_title" msgid="2269032346698890257">"استخدام النص من الشاشة"</string>
+    <string name="assist_access_context_summary" msgid="1991421283142279560">"السماح للتطبيق المساعد بالوصول إلى محتويات الشاشة كالنص"</string>
+    <string name="assist_access_screenshot_title" msgid="4034721336291215819">"استخدام لقطة الشاشة"</string>
+    <string name="assist_access_screenshot_summary" msgid="6761636689013259901">"السماح للتطبيق المساعد بالوصول إلى صورة للشاشة"</string>
+    <string name="assist_footer" msgid="1982791172085896864">"بإمكان التطبيقات المساعدة تقديم المساعدة لك استنادًا إلى المعلومات على الشاشة التي تعرضها. وتتوافق بعض التطبيقات مع خدمتي المشغل والإدخال الصوتي لتوفير مساعدة متكاملة لك."</string>
     <string name="average_memory_use" msgid="829566450150198512">"متوسط ​​استخدام الذاكرة"</string>
     <string name="maximum_memory_use" msgid="7493720799710132496">"الاستخدام الأقصى للذاكرة"</string>
     <string name="memory_usage" msgid="1781358557214390033">"استخدام الذاكرة"</string>

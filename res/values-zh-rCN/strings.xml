@@ -787,6 +787,14 @@
     <string name="account_settings" msgid="6403589284618783461">"帐户"</string>
     <string name="category_personal" msgid="1299663247844969448">"个人"</string>
     <string name="category_work" msgid="8699184680584175622">"工作"</string>
+    <!-- no translation found for accessibility_category_work (4339262969083355720) -->
+    <skip />
+    <!-- no translation found for accessibility_category_personal (1263518850905945594) -->
+    <skip />
+    <!-- no translation found for accessibility_work_account_title (1231830766637939527) -->
+    <skip />
+    <!-- no translation found for accessibility_personal_account_title (2169071663029067826) -->
+    <skip />
     <string name="search_settings" msgid="1910951467596035063">"搜索"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"管理搜索设置和历史记录"</string>
     <string name="display_settings" msgid="7965901687241669598">"显示"</string>
@@ -1099,17 +1107,6 @@
     <string name="master_clear_not_available" msgid="1000370707967468909">"此用户无权恢复出厂设置"</string>
     <string name="master_clear_progress_title" msgid="5194793778701994634">"正在清除"</string>
     <string name="master_clear_progress_text" msgid="6559096229480527510">"请稍候…"</string>
-    <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"格式化USB存储设备"</string>
-    <string name="media_format_title" product="default" msgid="4427528440306787972">"格式化SD卡"</string>
-    <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"清除USB存储设备中的全部数据"</string>
-    <string name="media_format_summary" product="default" msgid="3805714639375830120">"清除SD卡上的所有数据"</string>
-    <string name="media_format_desc" product="nosdcard" msgid="4557243156946319034">"要清空所有USB存储设备吗？如果这样做，您会丢失其中存储的"<b>"全部"</b>"数据！"</string>
-    <string name="media_format_desc" product="default" msgid="8764037252319942415">"要清空该SD卡吗？如果这样做，您会丢失其中存储的"<b>"全部"</b>"数据！"</string>
-    <string name="media_format_button_text" product="nosdcard" msgid="6293669371185352810">"格式化USB存储设备"</string>
-    <string name="media_format_button_text" product="default" msgid="6721544380069373626">"格式化SD卡"</string>
-    <string name="media_format_final_desc" product="nosdcard" msgid="941597815448108794">"要清空USB存储设备（此操作会删除其中存储的全部文件）吗？请注意，此操作无法撤消！"</string>
-    <string name="media_format_final_desc" product="default" msgid="7220996042092437566">"要清空该SD卡（此操作会删除其中存储的全部文件）吗？请注意，此操作无法撤消！"</string>
-    <string name="media_format_final_button_text" msgid="4881713344315923175">"清除全部内容"</string>
     <string name="call_settings_title" msgid="5188713413939232801">"通话设置"</string>
     <string name="call_settings_summary" msgid="7291195704801002886">"设置语音信箱、来电转接、来电等待和本机号码显示"</string>
     <string name="tether_settings_title_usb" msgid="6688416425801386511">"USB网络共享"</string>
@@ -1305,7 +1302,7 @@
     <string name="default_emergency_app" msgid="1951760659640369980">"紧急警报应用"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"重置应用偏好设置"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"要重置应用偏好设置吗？"</string>
-    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"这将重置以下所有偏好设置：\n\n "<li>"停用的应用"</li>\n" "<li>"停用的应用通知"</li>\n" "<li>"执行操作的默认应用"</li>\n" "<li>"应用的后台流量限制"</li>\n" "<li>"权限限制"</li>\n\n" 您将不会丢失任何应用数据。"</string>
+    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"这将重置以下所有偏好设置：\n\n "<li>"已停用的应用"</li>\n" "<li>"已停用的应用通知"</li>\n" "<li>"用于执行操作的默认应用"</li>\n" "<li>"应用的后台流量限制"</li>\n" "<li>"所有权限限制"</li>\n\n" 您将不会丢失任何应用数据。"</string>
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"重置应用"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"管理空间"</string>
     <string name="filter" msgid="2018011724373033887">"过滤"</string>
@@ -2509,7 +2506,7 @@
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"自动规则"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"仅限优先打扰"</string>
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"仅限闹钟"</string>
-    <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"完全静音"</string>
+    <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"完全阻止"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>：<xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"手机铃声"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"默认通知铃声"</string>
@@ -2784,14 +2781,11 @@
     <string name="inactive_apps_title" msgid="1317817863508274533">"未启用的应用"</string>
     <string name="inactive_app_inactive_summary" msgid="6768756967594202411">"未启用。触摸即可切换。"</string>
     <string name="inactive_app_active_summary" msgid="4512911571954375968">"已启用。触摸即可切换。"</string>
-    <string name="assist_access_context_title" msgid="2047105711005856521">"使用当前屏幕上显示的数据"</string>
-    <!-- no translation found for assist_access_context_summary (7573538643562533886) -->
-    <skip />
-    <!-- no translation found for assist_access_screenshot_title (7994303398517230267) -->
-    <skip />
-    <!-- no translation found for assist_access_screenshot_summary (8774637450198111406) -->
-    <skip />
-    <string name="assist_footer" msgid="2283187001990543739">"辅助应用无需您询问即可主动帮您发现有用信息并采取相应措施。某些应用同时支持启动器和语音输入服务，可为您提供更全面的协助。"</string>
+    <string name="assist_access_context_title" msgid="2269032346698890257">"使用屏幕上的文字内容"</string>
+    <string name="assist_access_context_summary" msgid="1991421283142279560">"允许辅助应用使用屏幕上的文字内容"</string>
+    <string name="assist_access_screenshot_title" msgid="4034721336291215819">"使用屏幕截图"</string>
+    <string name="assist_access_screenshot_summary" msgid="6761636689013259901">"允许辅助应用使用屏幕截图"</string>
+    <string name="assist_footer" msgid="1982791172085896864">"辅助应用可根据您当前所查看屏幕上的内容来为您提供帮助。某些应用同时支持启动器和语音输入服务，可为您提供更全面的协助。"</string>
     <string name="average_memory_use" msgid="829566450150198512">"平均内存使用量"</string>
     <string name="maximum_memory_use" msgid="7493720799710132496">"最高内存使用量"</string>
     <string name="memory_usage" msgid="1781358557214390033">"内存使用量"</string>

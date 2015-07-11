@@ -39,7 +39,7 @@
     <item msgid="6864027152847611413">"30 മിനിറ്റ്"</item>
   </string-array>
   <string-array name="dream_timeout_entries">
-    <item msgid="3149294732238283185">"ഒരിക്കലുമില്ല"</item>
+    <item msgid="3149294732238283185">"ഒരിക്കലും"</item>
     <item msgid="2194151041885903260">"15 സെക്കൻഡ്"</item>
     <item msgid="5892295237131074341">"30 സെക്കൻഡ്"</item>
     <item msgid="3538441365970038213">"ഒരു മിനിറ്റ്"</item>
@@ -129,10 +129,12 @@
     <item msgid="1023893786681286517">"AKA"</item>
     <item msgid="3030483188676375009">"AKA\'"</item>
   </string-array>
-    <!-- no translation found for eap_method_without_sim_auth:0 (4047867891913819797) -->
-    <!-- no translation found for eap_method_without_sim_auth:1 (641030570679578504) -->
-    <!-- no translation found for eap_method_without_sim_auth:2 (3079489731769553856) -->
-    <!-- no translation found for eap_method_without_sim_auth:3 (35269224158638258) -->
+  <string-array name="eap_method_without_sim_auth">
+    <item msgid="4047867891913819797">"PEAP"</item>
+    <item msgid="641030570679578504">"TLS"</item>
+    <item msgid="3079489731769553856">"TTLS"</item>
+    <item msgid="35269224158638258">"PWD"</item>
+  </string-array>
     <!-- no translation found for wifi_ap_band_config_full:0 (1085243288162893079) -->
     <!-- no translation found for wifi_ap_band_config_full:1 (5531376834915607202) -->
     <!-- no translation found for wifi_ap_band_config_2G_only:0 (7006771583217001015) -->
@@ -162,13 +164,13 @@
   </string-array>
   <string-array name="wifi_sleep_policy_entries">
     <item msgid="3269131034472904310">"എല്ലായ്പ്പോഴും"</item>
-    <item msgid="844721238536786870">"പ്ലഗ്ഗുചെയ്‌തിരിക്കുമ്പോൾ"</item>
-    <item msgid="1986753720941888596">"ഒരിക്കലുമില്ല"</item>
+    <item msgid="844721238536786870">"പ്ലഗ്ഗുചെയ്‌തിരിക്കവേ"</item>
+    <item msgid="1986753720941888596">"ഒരിക്കലും"</item>
   </string-array>
   <string-array name="wifi_sleep_policy_entries_wifi_only">
     <item msgid="2124319326282651391">"എല്ലായ്പ്പോഴും"</item>
-    <item msgid="7433294150916905997">"പ്ലഗ്ഗുചെയ്‌തിരിക്കുമ്പോൾ"</item>
-    <item msgid="1390404486722375028">"ഒരിക്കലുമില്ല"</item>
+    <item msgid="7433294150916905997">"പ്ലഗ്ഗുചെയ്‌തിരിക്കവേ"</item>
+    <item msgid="1390404486722375028">"ഒരിക്കലും"</item>
   </string-array>
   <string-array name="data_usage_data_range">
     <item msgid="5013973108901348144">"കഴിഞ്ഞ 30 ദിവസം"</item>
@@ -209,7 +211,7 @@
   <string-array name="wifi_proxy_settings">
     <item msgid="4473276491748503377">"ഒന്നുമില്ല"</item>
     <item msgid="8673874894887358090">"സ്വമേധയാലുള്ളത്"</item>
-    <item msgid="168893341855953140">"പ്രോക്‌സി യാന്ത്രിക കോൺഫിഗറേഷൻ"</item>
+    <item msgid="168893341855953140">"പ്രോക്‌സി ഓട്ടോകോൺഫിഗറേഷൻ"</item>
   </string-array>
   <string-array name="apn_auth_entries">
     <item msgid="3856896061242872146">"ഒന്നുമില്ല"</item>
@@ -247,7 +249,7 @@
     <item msgid="2681427309183221543">"GID"</item>
   </string-array>
   <string-array name="app_install_location_entries">
-    <item msgid="8151497958991952759">"ആന്തരിക ഉപകരണ സംഭരണം"</item>
+    <item msgid="8151497958991952759">"ആന്തരിക ഉപകരണ സ്റ്റോറേജ്"</item>
     <item msgid="3738430123799803530">"നീക്കംചെയ്യാനാകുന്ന SD കാർഡ്"</item>
     <item msgid="4498124044785815005">"സി‌സ്റ്റത്തിനെ തീരുമാനമെടുക്കാൻ അനുവദിക്കുക"</item>
   </string-array>
@@ -363,7 +365,7 @@
     <item msgid="7872852746938272552">"അസിസ്റ്റ് സ്‌ക്രീൻഷോട്ട്"</item>
   </string-array>
   <string-array name="long_press_timeout_selector_titles">
-    <item msgid="3511504869290423954">"ഹ്രസ്വമായത്"</item>
+    <item msgid="3511504869290423954">"ഹ്രസ്വം"</item>
     <item msgid="2560532955514699713">"ഇടത്തരം"</item>
     <item msgid="2372711992605524591">"ദൈർഘ്യമുള്ളത്"</item>
   </string-array>
@@ -524,7 +526,7 @@
   </string-array>
   <string-array name="security_settings_premium_sms_values">
     <item msgid="7389829271787670252">"ചോദിക്കുക"</item>
-    <item msgid="5077768429488260031">"ഒരിക്കലും അനുവദിക്കരുത്"</item>
+    <item msgid="5077768429488260031">"ഒരിക്കലുമനുവദിക്കരുത്"</item>
     <item msgid="1417929597727989746">"എല്ലായ്‌പ്പോഴും അനുവദിക്കുക"</item>
   </string-array>
   <string-array name="ram_states">

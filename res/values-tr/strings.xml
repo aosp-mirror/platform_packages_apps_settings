@@ -787,6 +787,14 @@
     <string name="account_settings" msgid="6403589284618783461">"Hesaplar"</string>
     <string name="category_personal" msgid="1299663247844969448">"Kişisel"</string>
     <string name="category_work" msgid="8699184680584175622">"İş"</string>
+    <!-- no translation found for accessibility_category_work (4339262969083355720) -->
+    <skip />
+    <!-- no translation found for accessibility_category_personal (1263518850905945594) -->
+    <skip />
+    <!-- no translation found for accessibility_work_account_title (1231830766637939527) -->
+    <skip />
+    <!-- no translation found for accessibility_personal_account_title (2169071663029067826) -->
+    <skip />
     <string name="search_settings" msgid="1910951467596035063">"Ara"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Arama ayarlarını ve geçmişi yönet"</string>
     <string name="display_settings" msgid="7965901687241669598">"Ekran"</string>
@@ -968,10 +976,10 @@
     <string name="storage_other_users" msgid="808708845102611856">"Diğer kullanıcılar"</string>
     <string name="storage_internal_title" msgid="690771193137801021">"Cihazdaki depolama birimleri"</string>
     <string name="storage_external_title" msgid="3433462910096848696">"Taşınabilir depolama birimi"</string>
-    <string name="storage_volume_summary" msgid="7023441974367853372">"<xliff:g id="TOTAL">%2$s</xliff:g>\'lık alanın <xliff:g id="USED">%1$s</xliff:g>\'ı kullanıldı"</string>
+    <string name="storage_volume_summary" msgid="7023441974367853372">"<xliff:g id="TOTAL">%2$s</xliff:g>\'lık alanın <xliff:g id="USED">%1$s</xliff:g>\'ı kullanılıyor"</string>
     <string name="storage_size_large" msgid="5691585991420946254">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
-    <string name="storage_volume_used" msgid="1303803057698959872">"Kullanıldı (Toplam: <xliff:g id="TOTAL">%1$s</xliff:g>)"</string>
-    <string name="storage_volume_used_total" msgid="6113121714019000244">"Toplam kullanıldı (Toplam: <xliff:g id="TOTAL">%1$s</xliff:g>)"</string>
+    <string name="storage_volume_used" msgid="1303803057698959872">"kullanılıyor (Toplam: <xliff:g id="TOTAL">%1$s</xliff:g>)"</string>
+    <string name="storage_volume_used_total" msgid="6113121714019000244">"kullanılıyor (Toplam: <xliff:g id="TOTAL">%1$s</xliff:g>)"</string>
     <string name="storage_mount_success" msgid="687641090137253647">"<xliff:g id="NAME">%1$s</xliff:g> eklendi"</string>
     <string name="storage_mount_failure" msgid="1042621107954547316">"<xliff:g id="NAME">%1$s</xliff:g> eklenemedi"</string>
     <string name="storage_unmount_success" msgid="5737203344673441677">"<xliff:g id="NAME">%1$s</xliff:g> güvenli bir şekilde çıkarıldı"</string>
@@ -1064,11 +1072,11 @@
     <string name="error_title" msgid="7631322303341024692"></string>
     <string name="error_name_empty" msgid="5508155943840201232">"Ad alanı boş olamaz."</string>
     <string name="error_apn_empty" msgid="4932211013600863642">"APN boş olamaz."</string>
-    <string name="error_mcc_not3" msgid="4560171714156251661">"MCC alanında 3 rakam olmalıdır."</string>
-    <string name="error_mnc_not23" msgid="8418177072458379439">"MNC alanı 2 veya 3 rakam olmalıdır."</string>
+    <string name="error_mcc_not3" msgid="4560171714156251661">"MCC alanındaki değer 3 rakamdan oluşmalıdır."</string>
+    <string name="error_mnc_not23" msgid="8418177072458379439">"MNC alanındaki değer 2 veya 3 rakamdan oluşmalıdır."</string>
     <string name="restore_default_apn" msgid="8178010218751639581">"Varsayılan APN ayarları geri yükleniyor."</string>
     <string name="menu_restore" msgid="8260067415075573273">"Varsayılana sıfırla"</string>
-    <string name="restore_default_apn_completed" msgid="2824775307377604897">"Varsayılan APN ayarlarına sıfırlama tamamlandı"</string>
+    <string name="restore_default_apn_completed" msgid="2824775307377604897">"Varsayılan APN ayarlarına sıfırlama tamamlandı."</string>
     <string name="reset_network_title" msgid="4557113742173895074">"Ağ ayarlarını sıfırla"</string>
     <string name="reset_network_desc" msgid="581668983587311282">"Bu işlemle, şunlar da dahil olmak üzere tüm ağ ayarlarınız sıfırlanacak:\n\n"<li>"Kablosuz ağ"</li>\n<li>"Hücresel veri"</li>\n<li>"Bluetooth"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"Ayarları sıfırla"</string>
@@ -1099,17 +1107,6 @@
     <string name="master_clear_not_available" msgid="1000370707967468909">"Bu kullanıcı için fabrika ayarlarına sıfırlama işlevi kullanılamıyor"</string>
     <string name="master_clear_progress_title" msgid="5194793778701994634">"Siliniyor"</string>
     <string name="master_clear_progress_text" msgid="6559096229480527510">"Lütfen bekleyin..."</string>
-    <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"USB belleği sil"</string>
-    <string name="media_format_title" product="default" msgid="4427528440306787972">"SD kartı sil"</string>
-    <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"USB bellekteki tüm verlr siler"</string>
-    <string name="media_format_summary" product="default" msgid="3805714639375830120">"SD karttaki tüm verileri siler"</string>
-    <string name="media_format_desc" product="nosdcard" msgid="4557243156946319034">"Tüm USB bellek silinsin mi? Burada saklanan "<b>"tüm"</b>" verileri kaybedeceksiniz."</string>
-    <string name="media_format_desc" product="default" msgid="8764037252319942415">"SD kart silinsin mi? Karttaki "<b>"tüm"</b>" verileri kaybedeceksiniz!"</string>
-    <string name="media_format_button_text" product="nosdcard" msgid="6293669371185352810">"USB belleği sil"</string>
-    <string name="media_format_button_text" product="default" msgid="6721544380069373626">"SD kartı sil"</string>
-    <string name="media_format_final_desc" product="nosdcard" msgid="941597815448108794">"USB bellek silinsin mi? Depolama biriminde saklanan tüm dosyalar silinir. Bu işlemi geri alamazsınız!"</string>
-    <string name="media_format_final_desc" product="default" msgid="7220996042092437566">"SD kart silinsin mi? Burada saklanan tüm dosyalar silinir. Geri alınamaz!"</string>
-    <string name="media_format_final_button_text" msgid="4881713344315923175">"Her şeyi sil"</string>
     <string name="call_settings_title" msgid="5188713413939232801">"Çağrı ayarları"</string>
     <string name="call_settings_summary" msgid="7291195704801002886">"Sesli mesaj, çağrı yönlendirme ve bekletme, arayan kimliğini ayarla"</string>
     <string name="tether_settings_title_usb" msgid="6688416425801386511">"USB tethering"</string>
@@ -1380,7 +1377,7 @@
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Depolama kullanımı"</string>
     <string name="storageuse_settings_summary" msgid="3748286507165697834">"Uygulamalar tarafından kullanılan depolama alanını görüntüle"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Çalışan hizmetler"</string>
-    <string name="runningservices_settings_summary" msgid="854608995821032748">"Şu anda çalışan hizmetleri görüntüleyin ve denetleyin"</string>
+    <string name="runningservices_settings_summary" msgid="854608995821032748">"Şu anda çalışan hizmetleri görüntüle ve denetle"</string>
     <string name="service_restarting" msgid="2242747937372354306">"Yeniden başlatılıyor"</string>
     <string name="cached" msgid="1059590879740175019">"Önblğe alınan arka plan işlemi"</string>
     <string name="no_running_services" msgid="2059536495597645347">"Hiçbir şey çalışmıyor."</string>
@@ -1511,7 +1508,7 @@
     <string name="confirm_enable_oem_unlock_text" msgid="5517144575601647022">"UYARI: Bu ayar açıkken cihaz koruma özellikleri bu cihazda çalışmayacaktır."</string>
     <string name="select_logd_size_title" msgid="7433137108348553508">"Günlük Kaydedici arabellek boyutları"</string>
     <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"Gün. arabel. başına Gün. Kayd. boyutunu seç"</string>
-    <string name="mock_location_app" msgid="7966220972812881854">"Sahte konum uygulamasını seçin"</string>
+    <string name="mock_location_app" msgid="7966220972812881854">"Sahte konum uygulamasını seç"</string>
     <string name="mock_location_app_not_set" msgid="809543285495344223">"Sahte konum uygulaması ayarlanmadı"</string>
     <string name="mock_location_app_set" msgid="8966420655295102685">"Sahte konum uygulaması: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="debug_view_attributes" msgid="6485448367803310384">"Görünüm özelliği incelemeyi etkinleştir"</string>
@@ -1522,7 +1519,7 @@
     <string name="wifi_allow_scan_with_traffic" msgid="3601853081178265786">"Kablosuz Dolaşım Taramalarına daima izin ver"</string>
     <string name="legacy_dhcp_client" msgid="694426978909127287">"Eski DHCP istemcisini kullan"</string>
     <string name="mobile_data_always_on" msgid="7745605759775320362">"Hücresel veri her zaman etkin"</string>
-    <string name="wifi_display_certification_summary" msgid="1155182309166746973">"Kablosuz görüntüleme sertifikası seçeneklerini göster"</string>
+    <string name="wifi_display_certification_summary" msgid="1155182309166746973">"Kablosuz ekran sertifikası seçeneklerini göster"</string>
     <string name="wifi_verbose_logging_summary" msgid="6615071616111731958">"Kablosuz günlük kaydı seviyesini artır. Kablosuz Seçici\'de her bir SSID RSSI için göster."</string>
     <string name="wifi_aggressive_handover_summary" msgid="6328455667642570371">"Etkinleştirildiğinde, Kablosuz ağ sinyali zayıfken veri bağlantısının Hücresel ağa geçirilmesinde daha agresif olunur"</string>
     <string name="wifi_allow_scan_with_traffic_summary" msgid="2575101424972686310">"Arayüzde mevcut veri trafiği miktarına bağlı olarak Kablosuz Dolaşım Taramalarına İzin Verin/Vermeyin"</string>
@@ -1533,7 +1530,7 @@
     <string name="allow_mock_location" msgid="2787962564578664888">"Sahte konumlara izin ver"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Sahte konumlara izin ver"</string>
     <string name="debug_view_attributes" msgid="6485448367803310384">"Görünüm özelliği incelemeyi etkinleştir"</string>
-    <string name="legacy_dhcp_client_summary" msgid="163383566317652040">"Yeni Android DHCP istemcisi yerine Lollipop DHCP istemcisini kullanın."</string>
+    <string name="legacy_dhcp_client_summary" msgid="163383566317652040">"Yeni Android DHCP istemcisi yerine Lollipop DHCP istemcisini kullan."</string>
     <string name="mobile_data_always_on_summary" msgid="8149773901431697910">"Kablosuz bağlantı etkin bile olsa mobil veri kullanımını her zaman etkin tut (ağlar arasında hızlı geçiş yapmak için)."</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"USB hata ayıklamasına izin verilsin mi?"</string>
     <string name="adb_warning_message" msgid="7316799925425402244">"USB hata ayıklaması yalnızca geliştirme amaçlıdır. Verileri bilgisayarınızla cihazınız arasında kopyalamak, bildirim göndermeksizin uygulamaları cihazınıza yüklemek ve günlük verilerini okumak için kullanın."</string>
@@ -1908,7 +1905,7 @@
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"Sertifikaları SD karttan yükle"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"Kimlik bilgilerini temizle"</string>
     <string name="credentials_reset_summary" msgid="3369361230171260282">"Tüm sertifikaları kaldır"</string>
-    <string name="trusted_credentials" msgid="4266945289534242402">"Güvenilen kimlik bilgisi"</string>
+    <string name="trusted_credentials" msgid="4266945289534242402">"Güvenilen kimlik bilgileri"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"Güvenilen CA sertifikalarını görüntüle"</string>
     <string name="advanced_security_title" msgid="2434776238010578865">"Gelişmiş"</string>
     <string name="credential_storage_type" msgid="8629968543494001364">"Depolama türü"</string>
@@ -1939,7 +1936,7 @@
     <string name="backup_configure_account_title" msgid="3790872965773196615">"Yedek hesap"</string>
     <string name="include_app_data_title" msgid="2829970132260278394">"Uygulama verilerini dahil et"</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"Otomatik geri yükle"</string>
-    <string name="auto_restore_summary" msgid="4235615056371993807">"Bir uygulama yeniden yüklendiğinde, yedeklenen ayarları ve diğer verileri geri yükle"</string>
+    <string name="auto_restore_summary" msgid="4235615056371993807">"Bir uygulama yeniden yüklendiğinde, yedeklenen ayarlarını ve verilerini geri yükle"</string>
     <string name="backup_inactive_title" msgid="5355557151569037197">"Yedekleme hizmeti etkin değil."</string>
     <string name="backup_configure_account_default_summary" msgid="2436933224764745553">"Şu anda, yedeklenmiş verileri depolayan hiçbir hesap yok"</string>
     <string name="local_backup_password_title" msgid="3860471654439418822">"Masaüstü yedekleme şifresi"</string>
@@ -2091,7 +2088,7 @@
     <string name="show_hw_layers_updates" msgid="5645728765605699821">"Donanım katmanı güncellemelerini göster"</string>
     <string name="show_hw_layers_updates_summary" msgid="5296917233236661465">"Flash donanım katmanları güncellendiğinde yeşildir"</string>
     <string name="debug_hw_overdraw" msgid="2968692419951565417">"GPU fazla çizim hatasını ayıkla"</string>
-    <string name="disable_overlays" msgid="2074488440505934665">"HW katmanlarını devre dışı bırak"</string>
+    <string name="disable_overlays" msgid="2074488440505934665">"Donanım katmanlarını devre dışı bırak"</string>
     <string name="disable_overlays_summary" msgid="3578941133710758592">"Ekran oluştururken her zaman GPU\'yu kullan"</string>
     <string name="simulate_color_space" msgid="6745847141353345872">"Renk uzayını simüle et"</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"OpenGL izlerini etkinleştir"</string>
@@ -2263,7 +2260,7 @@
     <string name="current_backup_pw_prompt" msgid="7735254412051914576">"Buraya, mevcut tam yedekleme şifrenizi yazın"</string>
     <string name="new_backup_pw_prompt" msgid="8755501377391998428">"Buraya, tam yedeklemeler için yeni bir şifre yazın"</string>
     <string name="confirm_new_backup_pw_prompt" msgid="3238728882512787864">"Buraya yeni tam yedekleme şifrenizi yeniden yazın"</string>
-    <string name="backup_pw_set_button_text" msgid="2387480910044648795">"Yedekleme şifresi belirle"</string>
+    <string name="backup_pw_set_button_text" msgid="2387480910044648795">"Yedekleme şifresi ayarla"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"İptal"</string>
     <string name="additional_system_update_settings_list_item_title" msgid="214987609894661992">"Ek sistem güncellemeleri"</string>
     <string name="selinux_status_disabled" msgid="924551035552323327">"Disabled (Devre dışı)"</string>
@@ -2727,13 +2724,13 @@
     <string name="domain_urls_summary_one" msgid="3704934031930978405">"<xliff:g id="DOMAIN">%s</xliff:g> alanını açan"</string>
     <string name="domain_urls_summary_some" msgid="812936714383016364">"<xliff:g id="DOMAIN">%s</xliff:g> alanını ve ilgili URL\'leri açan"</string>
     <plurals name="domain_urls_apps_summary" formatted="false" msgid="4322996467951692661">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> uygulama, desteklenen bağlantılarını açabilir</item>
-      <item quantity="one">Bir uygulama, desteklenen bağlantılarını açabilir</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> uygulama, destekledikleri bağlantıları açabilir</item>
+      <item quantity="one">Bir uygulama, desteklediği bağlantıları açabilir</item>
     </plurals>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Tanınmadı"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"Varsayılan Uygulamalar"</string>
-    <string name="assist_and_voice_input_title" msgid="1733165754793221197">"Assist ve ses girişi"</string>
-    <string name="default_assist_title" msgid="8868488975409247921">"Assist uygulaması"</string>
+    <string name="assist_and_voice_input_title" msgid="1733165754793221197">"Yardım ve ses girişi"</string>
+    <string name="default_assist_title" msgid="8868488975409247921">"Yardım uygulaması"</string>
     <string name="default_assist_none" msgid="3709083569608735487">"Yok"</string>
     <string name="choose_assist_title" msgid="554234448228740980">"Asist uygulaması seçin"</string>
     <string name="assistant_security_warning_title" msgid="8673079231955467177">"<xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> uygulaması yardımcınız olsun mu?"</string>
@@ -2784,14 +2781,11 @@
     <string name="inactive_apps_title" msgid="1317817863508274533">"Devre dışı uygulamalar"</string>
     <string name="inactive_app_inactive_summary" msgid="6768756967594202411">"Devre dışı. Değiştirmek için dokunun."</string>
     <string name="inactive_app_active_summary" msgid="4512911571954375968">"Etkin. Değiştirmek için dokunun."</string>
-    <string name="assist_access_context_title" msgid="2047105711005856521">"Geçerli bağlamı kullan"</string>
-    <!-- no translation found for assist_access_context_summary (7573538643562533886) -->
-    <skip />
-    <!-- no translation found for assist_access_screenshot_title (7994303398517230267) -->
-    <skip />
-    <!-- no translation found for assist_access_screenshot_summary (8774637450198111406) -->
-    <skip />
-    <string name="assist_footer" msgid="2283187001990543739">"Asist uygulamaları, sormanıza gerek kalmadan faydalı bilgileri tanımlamanıza ve bunlar doğrultusunda harekete geçmenize yardımcı olur. Bazı uygulamalar, size entegre yardım sağlamak için hem başlatıcıyı hem de ses girişi hizmetlerini destekler."</string>
+    <string name="assist_access_context_title" msgid="2269032346698890257">"Ekrandaki metni kullan"</string>
+    <string name="assist_access_context_summary" msgid="1991421283142279560">"Yardımcı uygulamanın metin biçimindeki ekran içeriklerine erişmesine izin verin"</string>
+    <string name="assist_access_screenshot_title" msgid="4034721336291215819">"Ekran görüntüsü kullan"</string>
+    <string name="assist_access_screenshot_summary" msgid="6761636689013259901">"Yardımcı uygulamanın ekrandaki bir resme erişmesine izin verin"</string>
+    <string name="assist_footer" msgid="1982791172085896864">"Yardımcı uygulamalar, görüntülemekte olduğunuz ekrandaki bilgilere dayalı olarak size yardım edebilir. Bazı uygulamalar, entegre yardım sağlamak için hem başlatıcıyı hem de ses girişi hizmetlerini destekler."</string>
     <string name="average_memory_use" msgid="829566450150198512">"Ortalama bellek kullanımı"</string>
     <string name="maximum_memory_use" msgid="7493720799710132496">"Maksimum bellek kullanımı"</string>
     <string name="memory_usage" msgid="1781358557214390033">"Bellek kullanımı"</string>

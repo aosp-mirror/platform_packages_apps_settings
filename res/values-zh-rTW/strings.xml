@@ -289,12 +289,12 @@
     <string name="date_time_set_date_title" msgid="6928286765325608604">"日期"</string>
     <string name="date_time_set_date" msgid="7021491668550232105">"設定日期"</string>
     <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"依照字母排序"</string>
-    <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"依時區排序"</string>
+    <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"依照時區排序"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"日期"</string>
     <string name="time_picker_title" msgid="483460752287255019">"時間"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"自動鎖定"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"休眠<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>後"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"休眠後立即鎖定，但「<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>」設定保持解鎖狀態時除外"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"休眠後立即鎖定 (<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> 讓螢幕保持解鎖狀態時除外)"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"休眠<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>後 (由「<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>」維持解鎖狀態時除外)"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"在鎖定畫面上顯示擁有者資訊"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"鎖定畫面訊息"</string>
@@ -787,6 +787,14 @@
     <string name="account_settings" msgid="6403589284618783461">"帳戶"</string>
     <string name="category_personal" msgid="1299663247844969448">"個人"</string>
     <string name="category_work" msgid="8699184680584175622">"公司"</string>
+    <!-- no translation found for accessibility_category_work (4339262969083355720) -->
+    <skip />
+    <!-- no translation found for accessibility_category_personal (1263518850905945594) -->
+    <skip />
+    <!-- no translation found for accessibility_work_account_title (1231830766637939527) -->
+    <skip />
+    <!-- no translation found for accessibility_personal_account_title (2169071663029067826) -->
+    <skip />
     <string name="search_settings" msgid="1910951467596035063">"搜尋"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"管理搜尋設定和記錄"</string>
     <string name="display_settings" msgid="7965901687241669598">"顯示"</string>
@@ -834,7 +842,7 @@
     <string name="sim_lock_on" product="default" msgid="2503536505568814324">"需要輸入 PIN 才可使用電話"</string>
     <string name="sim_lock_off" product="tablet" msgid="2813800553917012356">"需要 PIN 才能使用平板電腦"</string>
     <string name="sim_lock_off" product="default" msgid="258981978215428916">"需要輸入 PIN 才可使用電話"</string>
-    <string name="sim_pin_change" msgid="6311414184279932368">"變更 SIM PIN"</string>
+    <string name="sim_pin_change" msgid="6311414184279932368">"變更 SIM 卡 PIN 碼"</string>
     <string name="sim_enter_pin" msgid="6608715137008508432">"SIM 卡 PIN 碼"</string>
     <string name="sim_enable_sim_lock" msgid="4517742794997166918">"鎖定 SIM 卡"</string>
     <string name="sim_disable_sim_lock" msgid="7664729528754784824">"解除鎖定 SIM 卡"</string>
@@ -971,7 +979,7 @@
     <string name="storage_volume_summary" msgid="7023441974367853372">"已使用 <xliff:g id="USED">%1$s</xliff:g> (共 <xliff:g id="TOTAL">%2$s</xliff:g>)"</string>
     <string name="storage_size_large" msgid="5691585991420946254">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
     <string name="storage_volume_used" msgid="1303803057698959872">"<xliff:g id="TOTAL">%1$s</xliff:g> 總儲存空間使用量"</string>
-    <string name="storage_volume_used_total" msgid="6113121714019000244">"<xliff:g id="TOTAL">%1$s</xliff:g> 總儲存空間使用量總計"</string>
+    <string name="storage_volume_used_total" msgid="6113121714019000244">"儲存空間共計：<xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_mount_success" msgid="687641090137253647">"已掛載「<xliff:g id="NAME">%1$s</xliff:g>」"</string>
     <string name="storage_mount_failure" msgid="1042621107954547316">"無法掛載「<xliff:g id="NAME">%1$s</xliff:g>」"</string>
     <string name="storage_unmount_success" msgid="5737203344673441677">"已安全退出「<xliff:g id="NAME">%1$s</xliff:g>」"</string>
@@ -1099,17 +1107,6 @@
     <string name="master_clear_not_available" msgid="1000370707967468909">"這位使用者無法將裝置恢復原廠設定"</string>
     <string name="master_clear_progress_title" msgid="5194793778701994634">"清除中"</string>
     <string name="master_clear_progress_text" msgid="6559096229480527510">"請稍候…"</string>
-    <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"清除 USB 儲存裝置"</string>
-    <string name="media_format_title" product="default" msgid="4427528440306787972">"清除 SD 卡"</string>
-    <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"清除 USB 儲存裝置中的所有資料"</string>
-    <string name="media_format_summary" product="default" msgid="3805714639375830120">"清除 SD 卡上的所有資料"</string>
-    <string name="media_format_desc" product="nosdcard" msgid="4557243156946319034">"您要清除所有 USB 儲存裝置？您將失去"<b>"所有"</b>"儲存的資料！"</string>
-    <string name="media_format_desc" product="default" msgid="8764037252319942415">"您要清除 SD 卡嗎？您將失去 SD 卡上的"<b>"所有"</b>"資料！"</string>
-    <string name="media_format_button_text" product="nosdcard" msgid="6293669371185352810">"清除 USB 儲存裝置"</string>
-    <string name="media_format_button_text" product="default" msgid="6721544380069373626">"清除 SD 卡"</string>
-    <string name="media_format_final_desc" product="nosdcard" msgid="941597815448108794">"清除 USB 儲存裝置時，是否一併刪除所有儲存的檔案？您無法復原這個動作！"</string>
-    <string name="media_format_final_desc" product="default" msgid="7220996042092437566">"清除 SD 卡時，是否刪除其中儲存的所有檔案？這項動作無法復原！"</string>
-    <string name="media_format_final_button_text" msgid="4881713344315923175">"全部清除"</string>
     <string name="call_settings_title" msgid="5188713413939232801">"通話設定"</string>
     <string name="call_settings_summary" msgid="7291195704801002886">"設定語音信箱、來電轉接、來電待接及來電顯示"</string>
     <string name="tether_settings_title_usb" msgid="6688416425801386511">"USB 網路共用"</string>
@@ -1460,7 +1457,7 @@
     <string name="user_dict_settings_add_dialog_less_options" msgid="2441785268726036101">"較少選項"</string>
     <string name="user_dict_settings_add_dialog_confirm" msgid="6225823625332416144">"確定"</string>
     <string name="user_dict_settings_add_word_option_name" msgid="7868879174905963135">"字詞："</string>
-    <string name="user_dict_settings_add_shortcut_option_name" msgid="660089258866063925">"捷徑："</string>
+    <string name="user_dict_settings_add_shortcut_option_name" msgid="660089258866063925">"快速鍵："</string>
     <string name="user_dict_settings_add_locale_option_name" msgid="5696358317061318532">"語言："</string>
     <string name="user_dict_settings_add_word_hint" msgid="5725254076556821247">"輸入字詞"</string>
     <string name="user_dict_settings_add_shortcut_hint" msgid="7333763456561873445">"可選用的快速鍵"</string>
@@ -2549,7 +2546,7 @@
     <string name="no_notification_listeners" msgid="3487091564454192821">"最近沒有已安裝的應用程式要求「通知」存取權。"</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"要允許 <xliff:g id="SERVICE">%1$s</xliff:g> 的通知存取權嗎？"</string>
     <string name="notification_listener_security_warning_summary" msgid="548925084229440829">"「<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>」將可讀取所有通知 (包括聯絡人姓名和您收到的訊息文字等個人資訊)，並可關閉通知或觸發其中的動作按鈕。"</string>
-    <string name="manage_zen_access_title" msgid="2611116122628520522">"「零打擾」存取權"</string>
+    <string name="manage_zen_access_title" msgid="2611116122628520522">"零打擾存取權"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"最近沒有已安裝的應用程式要求「零打擾」存取權"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"正在載入應用程式..."</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"全部封鎖"</string>
@@ -2788,14 +2785,11 @@
     <string name="inactive_apps_title" msgid="1317817863508274533">"未啟用的應用程式"</string>
     <string name="inactive_app_inactive_summary" msgid="6768756967594202411">"未啟用。輕觸即可切換。"</string>
     <string name="inactive_app_active_summary" msgid="4512911571954375968">"使用中。輕觸即可切換。"</string>
-    <string name="assist_access_context_title" msgid="2047105711005856521">"使用目前內容"</string>
-    <!-- no translation found for assist_access_context_summary (7573538643562533886) -->
-    <skip />
-    <!-- no translation found for assist_access_screenshot_title (7994303398517230267) -->
-    <skip />
-    <!-- no translation found for assist_access_screenshot_summary (8774637450198111406) -->
-    <skip />
-    <string name="assist_footer" msgid="2283187001990543739">"小幫手應用程式會主動為您找出實用資訊並採取適當行動。部分應用程式同時支援啟動器和語音輸入服務，能夠為您提供更完善的協助。"</string>
+    <string name="assist_access_context_title" msgid="2269032346698890257">"使用畫面中的文字"</string>
+    <string name="assist_access_context_summary" msgid="1991421283142279560">"允許小幫手應用程式存取畫面中的文字內容"</string>
+    <string name="assist_access_screenshot_title" msgid="4034721336291215819">"使用螢幕擷取畫面"</string>
+    <string name="assist_access_screenshot_summary" msgid="6761636689013259901">"允許小幫手應用程式存取畫面擷圖"</string>
+    <string name="assist_footer" msgid="1982791172085896864">"小幫手應用程式可根據您目前瀏覽的畫面資訊，為您提供協助。部分應用程式同時支援啟動器和語音輸入服務，為您提供更完善的服務。"</string>
     <string name="average_memory_use" msgid="829566450150198512">"記憶體平均用量"</string>
     <string name="maximum_memory_use" msgid="7493720799710132496">"記憶體最高用量"</string>
     <string name="memory_usage" msgid="1781358557214390033">"記憶體用量"</string>

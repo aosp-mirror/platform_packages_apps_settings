@@ -367,7 +367,7 @@
     <string name="crypt_keeper_unplugged_text" msgid="4785376766063053901">"Enchufa tu cargador e inténtalo nuevamente."</string>
     <string name="crypt_keeper_dialog_need_password_title" msgid="4058971800557767">"Sin contraseña o PIN de pantalla de bloqueo"</string>
     <string name="crypt_keeper_dialog_need_password_message" msgid="4071395977297369642">"Debes configurar una contraseña o PIN de pantalla de bloqueo antes de comenzar con la encriptación."</string>
-    <string name="crypt_keeper_confirm_title" msgid="5100339496381875522">"¿Encriptar el dispositivo?"</string>
+    <string name="crypt_keeper_confirm_title" msgid="5100339496381875522">"¿Encriptar?"</string>
     <string name="crypt_keeper_final_desc" product="tablet" msgid="517662068757620756">"La encriptación es irreversible y no puede interrumpirse; de lo contrario, perderás información. La encriptación demora al menos una hora. Durante este tiempo, la tablet se reiniciará varias veces."</string>
     <string name="crypt_keeper_final_desc" product="default" msgid="287503113671320916">"La encriptación es irreversible y no puede interrumpirse; de lo contrario, perderás información. La encriptación demora al menos una hora. Durante este tiempo, el dispositivo se reiniciará varias veces."</string>
     <string name="crypt_keeper_setup_title" msgid="1783951453124244969">"Encriptando"</string>
@@ -603,7 +603,7 @@
     <string name="wifi_menu_connect" msgid="4996220309848349408">"Conectar a la red"</string>
     <string name="wifi_menu_remember" msgid="8814185749388713796">"Recordar red"</string>
     <string name="wifi_menu_forget" msgid="8736964302477327114">"Olvidar red"</string>
-    <string name="wifi_menu_modify" msgid="2068554918652440105">"Modificar la red"</string>
+    <string name="wifi_menu_modify" msgid="2068554918652440105">"Modificar red"</string>
     <string name="wifi_menu_write_to_nfc" msgid="7692881642188240324">"Escribir en etiqueta NFC"</string>
     <string name="wifi_empty_list_wifi_off" msgid="8056223875951079463">"Para ver las redes disponibles, activa Wi-Fi."</string>
     <string name="wifi_empty_list_wifi_on" msgid="8746108031587976356">"Buscando redes Wi-Fi…"</string>
@@ -787,6 +787,14 @@
     <string name="account_settings" msgid="6403589284618783461">"Cuentas"</string>
     <string name="category_personal" msgid="1299663247844969448">"Personal"</string>
     <string name="category_work" msgid="8699184680584175622">"Trabajo"</string>
+    <!-- no translation found for accessibility_category_work (4339262969083355720) -->
+    <skip />
+    <!-- no translation found for accessibility_category_personal (1263518850905945594) -->
+    <skip />
+    <!-- no translation found for accessibility_work_account_title (1231830766637939527) -->
+    <skip />
+    <!-- no translation found for accessibility_personal_account_title (2169071663029067826) -->
+    <skip />
     <string name="search_settings" msgid="1910951467596035063">"Buscar"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Administrar la configuración y el historial de búsqueda"</string>
     <string name="display_settings" msgid="7965901687241669598">"Pantalla"</string>
@@ -1012,7 +1020,7 @@
     <string name="storage_wizard_migrate_body" msgid="890751699549542345">"Puedes transferir las fotos, los archivos y algunas aplicaciones a la nueva unidad <xliff:g id="NAME">^1</xliff:g>. \n\nEl proceso demora aproximadamente <xliff:g id="TIME">^2</xliff:g> y liberará <xliff:g id="SIZE">^3</xliff:g> de almacenamiento interno. Algunas aplicaciones no funcionarán mientras se realiza la transferencia."</string>
     <string name="storage_wizard_migrate_now" msgid="4523444323744239143">"Transferir los datos ahora"</string>
     <string name="storage_wizard_migrate_later" msgid="3173482328116026253">"Transferir los datos más tarde"</string>
-    <string name="storage_wizard_migrate_confirm_title" msgid="8564833529613286965">"Transferir los datos ahora"</string>
+    <string name="storage_wizard_migrate_confirm_title" msgid="8564833529613286965">"Transferencia de datos"</string>
     <string name="storage_wizard_migrate_confirm_body" msgid="4212060581792135962"><b>"Transferir el contenido demora alrededor de <xliff:g id="TIME">^1</xliff:g>. Con esta acción, liberarás <xliff:g id="SIZE">^2</xliff:g> de <xliff:g id="NAME">^3</xliff:g>."</b></string>
     <string name="storage_wizard_migrate_confirm_next" msgid="5509475628423823202">"Transferir"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="1665479429044202868">"Transfiriendo los datos…"</string>
@@ -1068,7 +1076,7 @@
     <string name="error_mnc_not23" msgid="8418177072458379439">"El campo MNC debe contener 2 ó 3 dígitos."</string>
     <string name="restore_default_apn" msgid="8178010218751639581">"Restaurando la configuración APN predeterminada"</string>
     <string name="menu_restore" msgid="8260067415075573273">"Restablecer valores predeterminados"</string>
-    <string name="restore_default_apn_completed" msgid="2824775307377604897">"Se ha restablecido la configuración predeterminada de APN."</string>
+    <string name="restore_default_apn_completed" msgid="2824775307377604897">"Se restableció la configuración predeterminada de APN."</string>
     <string name="reset_network_title" msgid="4557113742173895074">"Restablecer configuración de red"</string>
     <string name="reset_network_desc" msgid="581668983587311282">"Esta acción restablecerá las opciones de configuración de red, como las siguientes:\n\n"<li>"Wi‑Fi"</li>\n<li>"datos móviles"</li>\n<li>"Bluetooth"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"Restablecer configuración"</string>
@@ -1099,17 +1107,6 @@
     <string name="master_clear_not_available" msgid="1000370707967468909">"El restablecimiento de la configuración de fábrica no está disponible para este usuario."</string>
     <string name="master_clear_progress_title" msgid="5194793778701994634">"Borrando"</string>
     <string name="master_clear_progress_text" msgid="6559096229480527510">"Espera un momento…"</string>
-    <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"Eliminar almacenamiento USB"</string>
-    <string name="media_format_title" product="default" msgid="4427528440306787972">"Borrar tarjeta SD"</string>
-    <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"Borra todos los datos del almacenamiento USB"</string>
-    <string name="media_format_summary" product="default" msgid="3805714639375830120">"Borra todos los datos en la tarjeta SD"</string>
-    <string name="media_format_desc" product="nosdcard" msgid="4557243156946319034">"¿Deseas borrar todo el almacenamiento de USB? Perderás "<b>"todos"</b>" los datos almacenados."</string>
-    <string name="media_format_desc" product="default" msgid="8764037252319942415">"¿Deseas borrar la tarjeta SD? Perderás "<b>"todos"</b>" los datos de la tarjeta."</string>
-    <string name="media_format_button_text" product="nosdcard" msgid="6293669371185352810">"Eliminar almacenamiento USB"</string>
-    <string name="media_format_button_text" product="default" msgid="6721544380069373626">"Borrar tarjeta SD"</string>
-    <string name="media_format_final_desc" product="nosdcard" msgid="941597815448108794">"¿Deseas borrar el almacenamiento USB y eliminar todos sus archivos? Esta acción no se puede deshacer."</string>
-    <string name="media_format_final_desc" product="default" msgid="7220996042092437566">"¿Deseas borrar la tarjeta SD y todos los archivos almacenados allí? Esta acción no se puede deshacer."</string>
-    <string name="media_format_final_button_text" msgid="4881713344315923175">"Eliminar todo"</string>
     <string name="call_settings_title" msgid="5188713413939232801">"Configuración"</string>
     <string name="call_settings_summary" msgid="7291195704801002886">"Establecer correo de voz, desvío de llamadas, llamada en espera, identificador de llamadas"</string>
     <string name="tether_settings_title_usb" msgid="6688416425801386511">"Anclaje a red USB"</string>
@@ -1209,11 +1206,11 @@
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Información de seguridad"</string>
     <string name="settings_safetylegal_activity_unreachable" msgid="250674109915859456">"No tienes una conexión de datos. Para ver esta información ahora, visita %s desde cualquier computadora conectada a Internet."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Cargando…"</string>
-    <string name="lockpassword_choose_your_password_header" msgid="8624900666929394990">"Elegir la contraseña"</string>
-    <string name="lockpassword_choose_your_pattern_header" msgid="6949761069941694050">"Elige tu diseño"</string>
+    <string name="lockpassword_choose_your_password_header" msgid="8624900666929394990">"Elige la contraseña"</string>
+    <string name="lockpassword_choose_your_pattern_header" msgid="6949761069941694050">"Elige un patrón"</string>
     <string name="lockpassword_choose_your_pin_header" msgid="7598849519816138302">"Elige tu PIN"</string>
     <string name="lockpassword_confirm_your_password_header" msgid="6308478184889846633">"Confirmar la contraseña"</string>
-    <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"Confirma tu diseño"</string>
+    <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"Confirma el patrón"</string>
     <string name="lockpassword_confirm_your_pin_header" msgid="49038294648213197">"Confirmar tu PIN"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="5140892109439191415">"Las contraseñas no coinciden."</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="7226244811505606217">"Los PIN no coinciden."</string>
@@ -1931,7 +1928,7 @@
     <string name="emergency_tone_title" msgid="1055954530111587114">"Tono de emergencia"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Establecer el comportamiento cuando se establece una llamada de emergencia"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"Copia de seguridad y restablecer"</string>
-    <string name="privacy_settings_title" msgid="4856282165773594890">"Copia de seguridad y restablecer"</string>
+    <string name="privacy_settings_title" msgid="4856282165773594890">"Copia de seguridad"</string>
     <string name="backup_section_title" msgid="7952232291452882740">"Crear copia de seguridad y Restablecer"</string>
     <string name="personal_data_section_title" msgid="7815209034443782061">"Datos personales"</string>
     <string name="backup_data_title" msgid="1239105919852668016">"Hacer una copia de seguridad de mis datos"</string>
@@ -2664,7 +2661,7 @@
     <string name="slot_number" msgid="3762676044904653577">"(Ranura <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
     <string name="launch_by_default" msgid="1840761193189009248">"Abrir de forma predeterminada"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> usado en <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
-    <string name="app_launch_domain_links_title" msgid="6789955009107320092">"Vínculos de la aplicación"</string>
+    <string name="app_launch_domain_links_title" msgid="6789955009107320092">"Vínculos de aplicaciones"</string>
     <string name="app_launch_open_domain_urls_title" msgid="8914721351596745701">"Abrir vínculos admitidos"</string>
     <string name="app_launch_open_domain_urls_summary" msgid="5367573364240712217">"Abrir sin preguntar"</string>
     <string name="app_launch_supported_domain_urls_title" msgid="8250695258211477480">"Vínculos admitidos"</string>
@@ -2712,7 +2709,7 @@
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"Con URL de dominio"</string>
     <string name="trust_agent_disabled_device_admin" msgid="5982562414642596563">"Inhabilitado por el administrador"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Avanzada"</string>
-    <string name="configure_apps" msgid="6685680790825882528">"Configurar las aplicaciones"</string>
+    <string name="configure_apps" msgid="6685680790825882528">"Configurar apps"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Aplicación desconocida"</string>
     <string name="choose_profile" msgid="8229363046053568878">"Elegir perfil"</string>
     <string name="app_permissions" msgid="4148222031991883874">"Permisos de aplicaciones"</string>
@@ -2720,7 +2717,7 @@
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"<xliff:g id="COUNT_0">%d</xliff:g> de <xliff:g id="COUNT_1">%d</xliff:g> aplicaciones permitidas"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Presionar para activar"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Presiona dos veces en cualquier lugar de la pantalla para activar el dispositivo."</string>
-    <string name="domain_urls_title" msgid="8762012672312435252">"Vínculos de la aplicación"</string>
+    <string name="domain_urls_title" msgid="8762012672312435252">"Vínculos de aplicaciones"</string>
     <string name="domain_urls_summary_none" msgid="2639588015479657864">"No abrir los vínculos admitidos"</string>
     <string name="domain_urls_summary_one" msgid="3704934031930978405">"Abrir el dominio <xliff:g id="DOMAIN">%s</xliff:g>"</string>
     <string name="domain_urls_summary_some" msgid="812936714383016364">"Abrir el dominio <xliff:g id="DOMAIN">%s</xliff:g> y las URL relacionadas"</string>
@@ -2761,7 +2758,7 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="2116416853043103135">"Ignorar optimizaciones"</string>
     <string name="high_power_filter_on" msgid="3862942127137594196">"Permitido"</string>
-    <string name="high_power_on" msgid="148473814103292724">"La aplicación ignora las optimizaciones de la batería."</string>
+    <string name="high_power_on" msgid="148473814103292724">"Ignorar optimizaciones de batería"</string>
     <string name="high_power_off" msgid="221092098425904010">"No permitido"</string>
     <string name="high_power_desc" msgid="8412735192889327770">"No apliques optimizaciones de la batería, ya que pueden agotar la carga más rápido."</string>
     <plurals name="high_power_count" formatted="false" msgid="4343190376439806186">
@@ -2782,14 +2779,11 @@
     <string name="inactive_apps_title" msgid="1317817863508274533">"Aplicaciones inactivas"</string>
     <string name="inactive_app_inactive_summary" msgid="6768756967594202411">"Inactiva (toca para alternar)"</string>
     <string name="inactive_app_active_summary" msgid="4512911571954375968">"Activa (toca para alternar)"</string>
-    <string name="assist_access_context_title" msgid="2047105711005856521">"Utilizar el contexto actual"</string>
-    <!-- no translation found for assist_access_context_summary (7573538643562533886) -->
-    <skip />
-    <!-- no translation found for assist_access_screenshot_title (7994303398517230267) -->
-    <skip />
-    <!-- no translation found for assist_access_screenshot_summary (8774637450198111406) -->
-    <skip />
-    <string name="assist_footer" msgid="2283187001990543739">"Las aplicaciones de asistencia contribuyen a identificar información útil y actuar según lo que sugiera la información sin tener que preguntar. Para ofrecerte asistencia integrada, algunas aplicaciones son compatibles con los servicios de selector y entrada de voz."</string>
+    <string name="assist_access_context_title" msgid="2269032346698890257">"Utilizar el texto de la pantalla"</string>
+    <string name="assist_access_context_summary" msgid="1991421283142279560">"Permitir que la aplicación de asistencia acceda a los contenidos de la pantalla como texto"</string>
+    <string name="assist_access_screenshot_title" msgid="4034721336291215819">"Utilizar la captura de pantalla"</string>
+    <string name="assist_access_screenshot_summary" msgid="6761636689013259901">"Permitir que la aplicación de asistencia acceda a una imagen de la pantalla"</string>
+    <string name="assist_footer" msgid="1982791172085896864">"Las aplicaciones de asistencia pueden brindarte ayuda en función de la pantalla que estás viendo. Para ofrecerte asistencia integrada, algunas aplicaciones son compatibles con los servicios de selector y entrada de voz."</string>
     <string name="average_memory_use" msgid="829566450150198512">"Uso promedio de la memoria"</string>
     <string name="maximum_memory_use" msgid="7493720799710132496">"Uso máximo de la memoria"</string>
     <string name="memory_usage" msgid="1781358557214390033">"Uso de la memoria"</string>
