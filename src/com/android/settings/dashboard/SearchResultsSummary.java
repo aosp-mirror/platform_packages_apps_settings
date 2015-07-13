@@ -83,7 +83,7 @@ public class SearchResultsSummary extends InstrumentedFragment {
         @Override
         protected void onPostExecute(Cursor cursor) {
             if (!isCancelled()) {
-                MetricsLogger.action(getContext(), InstrumentedFragment.ACTION_SEARCH_RESULTS,
+                MetricsLogger.action(getContext(), MetricsLogger.ACTION_SEARCH_RESULTS,
                         cursor.getCount());
                 setResultsCursor(cursor);
                 setResultsVisibility(cursor.getCount() > 0);
