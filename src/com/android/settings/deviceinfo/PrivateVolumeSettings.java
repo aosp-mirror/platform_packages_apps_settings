@@ -533,8 +533,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
                 }
             }
         } else {
-            throw new IllegalStateException(
-                    "MeasurementDetails mediaSize array does not have key for user " + userId);
+            Log.w(TAG, "MeasurementDetails mediaSize array does not have key for user " + userId);
         }
         return total;
     }
