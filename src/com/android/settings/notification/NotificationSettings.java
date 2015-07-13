@@ -88,6 +88,7 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
         KEY_MEDIA_VOLUME,
         KEY_ALARM_VOLUME,
         KEY_RING_VOLUME,
+        KEY_NOTIFICATION_VOLUME,
         KEY_ZEN_ACCESS,
         KEY_ZEN_MODE,
     };
