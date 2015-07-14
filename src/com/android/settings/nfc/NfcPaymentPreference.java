@@ -82,8 +82,7 @@ public class NfcPaymentPreference extends DialogPreference implements
         }
         setTitle(R.string.nfc_payment_default);
         if (defaultApp != null) {
-            setSummary(mContext.getString(R.string.nfc_payment_app_and_desc,
-                    defaultApp.label, defaultApp.description));
+            setSummary(defaultApp.label);
         } else {
             setSummary(mContext.getString(R.string.nfc_payment_default_not_set));
         }
