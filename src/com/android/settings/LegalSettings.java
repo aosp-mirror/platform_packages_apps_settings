@@ -26,6 +26,7 @@ import android.os.Bundle;
 import android.preference.PreferenceGroup;
 import android.provider.SearchIndexableResource;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 
@@ -59,7 +60,7 @@ public class LegalSettings extends SettingsPreferenceFragment implements Indexab
 
     @Override
     protected int getMetricsCategory() {
-        return InstrumentedFragment.ABOUT_LEGAL_SETTINGS;
+        return MetricsLogger.ABOUT_LEGAL_SETTINGS;
     }
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
