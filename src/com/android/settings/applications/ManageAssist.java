@@ -104,6 +104,7 @@ public class ManageAssist extends SettingsPreferenceFragment
 
     private void updateUi() {
         mDefaultAssitPref.refreshAssistApps();
+        mVoiceInputPref.refreshVoiceInputs();
 
         final ComponentName currentAssist = mDefaultAssitPref.getCurrentAssist();
         final boolean hasAssistant = currentAssist != null;
@@ -115,8 +116,19 @@ public class ManageAssist extends SettingsPreferenceFragment
             getPreferenceScreen().removePreference(mScreenshotPref);
         }
 
-        mVoiceInputPref.setAssistRestrict(currentAssist);
-        mVoiceInputPref.refreshVoiceInputs();
+        if (isCurrentAssistVoiceService()) {
+            getPreferenceScreen().removePreference(mVoiceInputPref);
+        } else {
+            getPreferenceScreen().addPreference(mVoiceInputPref);
+            mVoiceInputPref.setAssistRestrict(currentAssist);
+        }
+    }
+
+    private boolean isCurrentAssistVoiceService() {
+        ComponentName currentAssist = mDefaultAssitPref.getCurrentAssist();
+        ComponentName activeService = mVoiceInputPref.getCurrentService();
+        return currentAssist == null && activeService == null ||
+                currentAssist != null && currentAssist.equals(activeService);
     }
 
     private void confirmNewAssist(final String newAssitPackage) {
