@@ -141,6 +141,7 @@ public class FingerprintSettings extends SubSettings {
                 mHandler.obtainMessage(MSG_FINGER_AUTH_SUCCESS, fingerId, 0).sendToTarget();
             }
 
+            @Override
             public void onAuthenticationFailed() {
                 mHandler.obtainMessage(MSG_FINGER_AUTH_FAIL).sendToTarget();
             };
@@ -174,6 +175,7 @@ public class FingerprintSettings extends SubSettings {
             }
         };
         private final Handler mHandler = new Handler() {
+            @Override
             public void handleMessage(android.os.Message msg) {
                 switch (msg.what) {
                     case MSG_REFRESH_FINGERPRINT_TEMPLATES:
@@ -431,13 +433,20 @@ public class FingerprintSettings extends SubSettings {
                                 ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
                     }
                 }
-            } else if (requestCode == ADD_FINGERPRINT_REQUEST) {
-                int result = mFingerprintManager.postEnroll();
             }
 
             if (mToken == null) {
                 // Didn't get an authentication, finishing
                 getActivity().finish();
+            }
+        }
+
+        @Override
+        public void onDestroy() {
+            super.onDestroy();
+            int result = mFingerprintManager.postEnroll();
+            if (result < 0) {
+                Log.w(TAG, "postEnroll failed: result = " + result);
             }
         }
 
