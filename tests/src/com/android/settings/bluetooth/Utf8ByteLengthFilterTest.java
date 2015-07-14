@@ -22,27 +22,8 @@ import android.text.SpannableStringBuilder;
 
 import com.android.settings.bluetooth.Utf8ByteLengthFilter;
 
-import dalvik.annotation.TestLevel;
-import dalvik.annotation.TestTargetClass;
-import dalvik.annotation.TestTargetNew;
-import dalvik.annotation.TestTargets;
-
-@TestTargetClass(Utf8ByteLengthFilter.class)
 public class Utf8ByteLengthFilterTest extends AndroidTestCase {
 
-    @TestTargets({
-        @TestTargetNew(
-            level = TestLevel.COMPLETE,
-            method = "filter",
-            args = {java.lang.CharSequence.class, int.class, int.class, android.text.Spanned.class,
-                    int.class, int.class}
-        ),
-        @TestTargetNew(
-            level = TestLevel.COMPLETE,
-            method = "Utf8ByteLengthFilter",
-            args = {int.class}
-        )
-    })
     public void testFilter() {
         // Define the variables
         CharSequence source;
