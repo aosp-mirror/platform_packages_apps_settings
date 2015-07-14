@@ -23,6 +23,7 @@ import android.net.wifi.WifiConfiguration;
 import android.os.Looper;
 import android.os.UserHandle;
 import android.preference.Preference;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.SparseArray;
 import android.view.View;
@@ -49,6 +50,14 @@ public class AccessPointPreference extends Preference {
     private AccessPoint mAccessPoint;
     private Drawable mBadge;
     private int mLevel;
+    private CharSequence mContentDescription;
+
+    static final int[] WIFI_CONNECTION_STRENGTH = {
+        R.string.accessibility_wifi_one_bar,
+        R.string.accessibility_wifi_two_bars,
+        R.string.accessibility_wifi_three_bars,
+        R.string.accessibility_wifi_signal_full
+    };
 
     // Used for dummy pref.
     public AccessPointPreference(Context context, AttributeSet attrs) {
@@ -98,6 +107,7 @@ public class AccessPointPreference extends Preference {
             mTitleView.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, mBadge, null);
             mTitleView.setCompoundDrawablePadding(mBadgePadding);
         }
+        view.setContentDescription(mContentDescription);
     }
 
     protected void updateIcon(int level, Context context) {
@@ -155,6 +165,15 @@ public class AccessPointPreference extends Preference {
 
         setSummary(mForSavedNetworks ? mAccessPoint.getSavedNetworkSummary()
                 : mAccessPoint.getSettingsSummary());
+
+        mContentDescription = getTitle();
+        if (getSummary() != null) {
+            mContentDescription = TextUtils.concat(mContentDescription, ",", getSummary());
+        }
+        if (level >= 0 && level < WIFI_CONNECTION_STRENGTH.length) {
+            mContentDescription = TextUtils.concat(mContentDescription, ",",
+                    getContext().getString(WIFI_CONNECTION_STRENGTH[level]));
+        }
     }
 
     @Override
