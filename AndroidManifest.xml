@@ -2516,5 +2516,23 @@
             </intent-filter>
         </provider>
 
+        <activity android:name="Settings$OverlaySettingsActivity"
+                android:label="@string/draw_overlay_title"
+                android:taskAffinity="">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.action.MANAGE_OVERLAY_PERMISSION" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="Settings$WriteSettingsActivity"
+                android:label="@string/write_settings_title"
+                android:taskAffinity="">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.action.MANAGE_WRITE_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
     </application>
 </manifest>
