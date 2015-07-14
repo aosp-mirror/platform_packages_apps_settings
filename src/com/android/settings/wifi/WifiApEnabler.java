@@ -47,8 +47,15 @@ public class WifiApEnabler {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if (WifiManager.WIFI_AP_STATE_CHANGED_ACTION.equals(action)) {
-                handleWifiApStateChanged(intent.getIntExtra(
-                        WifiManager.EXTRA_WIFI_AP_STATE, WifiManager.WIFI_AP_STATE_FAILED));
+                int state = intent.getIntExtra(
+                        WifiManager.EXTRA_WIFI_AP_STATE, WifiManager.WIFI_AP_STATE_FAILED);
+                if (state == WifiManager.WIFI_AP_STATE_FAILED) {
+                    int reason = intent.getIntExtra(WifiManager.EXTRA_WIFI_AP_FAILURE_REASON,
+                            WifiManager.SAP_START_FAILURE_GENERAL);
+                    handleWifiApStateChanged(state, reason);
+                } else {
+                    handleWifiApStateChanged(state, WifiManager.SAP_START_FAILURE_GENERAL);
+                }
             } else if (ConnectivityManager.ACTION_TETHER_STATE_CHANGED.equals(action)) {
                 ArrayList<String> available = intent.getStringArrayListExtra(
                         ConnectivityManager.EXTRA_AVAILABLE_TETHER);
@@ -142,7 +149,7 @@ public class WifiApEnabler {
         }
     }
 
-    private void handleWifiApStateChanged(int state) {
+    private void handleWifiApStateChanged(int state, int reason) {
         switch (state) {
             case WifiManager.WIFI_AP_STATE_ENABLING:
                 mSwitch.setSummary(R.string.wifi_tether_starting);
@@ -169,7 +176,11 @@ public class WifiApEnabler {
                 break;
             default:
                 mSwitch.setChecked(false);
-                mSwitch.setSummary(R.string.wifi_error);
+                if (reason == WifiManager.SAP_START_FAILURE_NO_CHANNEL) {
+                    mSwitch.setSummary(R.string.wifi_sap_no_channel_error);
+                } else {
+                    mSwitch.setSummary(R.string.wifi_error);
+                }
                 enableWifiSwitch();
         }
     }
