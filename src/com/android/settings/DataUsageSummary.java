@@ -81,8 +81,6 @@ import android.net.TrafficStats;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.INetworkManagementService;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
@@ -98,7 +96,6 @@ import android.text.format.Formatter;
 import android.text.format.Time;
 import android.util.Log;
 import android.util.SparseArray;
-import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -131,8 +128,6 @@ import android.widget.Toast;
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.telephony.PhoneConstants;
 import com.android.settings.drawable.InsetBoundsDrawable;
-import com.android.settings.net.ChartData;
-import com.android.settings.net.ChartDataLoader;
 import com.android.settings.net.DataUsageMeteredSettings;
 import com.android.settings.net.SummaryForAllUidLoader;
 import com.android.settings.net.UidDetail;
@@ -143,7 +138,10 @@ import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.widget.ChartDataUsageView;
 import com.android.settings.widget.ChartDataUsageView.DataUsageChartListener;
 import com.android.settings.widget.ChartNetworkSeriesView;
+import com.android.settingslib.AppItem;
 import com.android.settingslib.NetworkPolicyEditor;
+import com.android.settingslib.net.ChartData;
+import com.android.settingslib.net.ChartDataLoader;
 import com.google.android.collect.Lists;
 
 import libcore.util.Objects;
@@ -1662,70 +1660,6 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
             }
             return 0;
         }
-    }
-
-    public static class AppItem implements Comparable<AppItem>, Parcelable {
-        public static final int CATEGORY_USER = 0;
-        public static final int CATEGORY_APP_TITLE = 1;
-        public static final int CATEGORY_APP = 2;
-
-        public final int key;
-        public boolean restricted;
-        public int category;
-
-        public SparseBooleanArray uids = new SparseBooleanArray();
-        public long total;
-
-        public AppItem() {
-            this.key = 0;
-        }
-
-        public AppItem(int key) {
-            this.key = key;
-        }
-
-        public AppItem(Parcel parcel) {
-            key = parcel.readInt();
-            uids = parcel.readSparseBooleanArray();
-            total = parcel.readLong();
-        }
-
-        public void addUid(int uid) {
-            uids.put(uid, true);
-        }
-
-        @Override
-        public void writeToParcel(Parcel dest, int flags) {
-            dest.writeInt(key);
-            dest.writeSparseBooleanArray(uids);
-            dest.writeLong(total);
-        }
-
-        @Override
-        public int describeContents() {
-            return 0;
-        }
-
-        @Override
-        public int compareTo(AppItem another) {
-            int comparison = Integer.compare(category, another.category);
-            if (comparison == 0) {
-                comparison = Long.compare(another.total, total);
-            }
-            return comparison;
-        }
-
-        public static final Creator<AppItem> CREATOR = new Creator<AppItem>() {
-            @Override
-            public AppItem createFromParcel(Parcel in) {
-                return new AppItem(in);
-            }
-
-            @Override
-            public AppItem[] newArray(int size) {
-                return new AppItem[size];
-            }
-        };
     }
 
     /**
