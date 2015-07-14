@@ -59,8 +59,11 @@ import com.android.settings.Settings.HighPowerApplicationsActivity;
 import com.android.settings.Settings.NotificationAppListActivity;
 import com.android.settings.Settings.StorageUseActivity;
 import com.android.settings.Settings.UsageAccessSettingsActivity;
+import com.android.settings.Settings.OverlaySettingsActivity;
+import com.android.settings.Settings.WriteSettingsActivity;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
+import com.android.settings.applications.AppStateAppOpsBridge.PermissionState;
 import com.android.settings.applications.AppStateUsageBridge.UsageState;
 import com.android.settings.fuelgauge.HighPowerDetail;
 import com.android.settings.notification.AppNotificationSettings;
@@ -124,6 +127,8 @@ public class ManageApplications extends InstrumentedFragment
     public static final int FILTER_APPS_WORK                    = 10;
     public static final int FILTER_APPS_WITH_DOMAIN_URLS        = 11;
     public static final int FILTER_APPS_USAGE_ACCESS            = 12;
+    public static final int FILTER_APPS_WITH_OVERLAY            = 13;
+    public static final int FILTER_APPS_WRITE_SETTINGS          = 14;
 
     // This is the string labels for the filter modes above, the order must be kept in sync.
     public static final int[] FILTER_LABELS = new int[] {
@@ -140,6 +145,8 @@ public class ManageApplications extends InstrumentedFragment
         R.string.filter_work_apps,     // Work
         R.string.filter_with_domain_urls_apps,     // Domain URLs
         R.string.filter_all_apps,      // Usage access screen, never displayed
+        R.string.filter_overlay_apps,   // Apps with overlay permission
+        R.string.filter_write_settings_apps,   // Apps that can write system settings
     };
     // This is the actual mapping to filters from FILTER_ constants above, the order must
     // be kept in sync.
@@ -157,6 +164,8 @@ public class ManageApplications extends InstrumentedFragment
         ApplicationsState.FILTER_WORK,        // Work
         ApplicationsState.FILTER_WITH_DOMAIN_URLS,   // Apps with Domain URLs
         AppStateUsageBridge.FILTER_APP_USAGE, // Apps with Domain URLs
+        AppStateOverlayBridge.FILTER_SYSTEM_ALERT_WINDOW,   // Apps that can draw overlays
+        AppStateWriteSettingsBridge.FILTER_WRITE_SETTINGS,  // Apps that can write system settings
     };
 
     // sort order
@@ -197,6 +206,8 @@ public class ManageApplications extends InstrumentedFragment
     public static final int LIST_TYPE_STORAGE      = 3;
     public static final int LIST_TYPE_USAGE_ACCESS = 4;
     public static final int LIST_TYPE_HIGH_POWER   = 5;
+    public static final int LIST_TYPE_OVERLAY      = 6;
+    public static final int LIST_TYPE_WRITE_SETTINGS = 7;
 
     private View mRootView;
 
@@ -254,6 +265,12 @@ public class ManageApplications extends InstrumentedFragment
                     startApplicationDetailsActivity();
                 }
             }
+        } else if (className.equals(OverlaySettingsActivity.class.getName())) {
+            mListType = LIST_TYPE_OVERLAY;
+            getActivity().getActionBar().setTitle(R.string.system_alert_window_access_title);
+        } else if (className.equals(WriteSettingsActivity.class.getName())) {
+            mListType = LIST_TYPE_WRITE_SETTINGS;
+            getActivity().getActionBar().setTitle(R.string.write_settings_title);
         } else {
             mListType = LIST_TYPE_MAIN;
         }
@@ -365,6 +382,10 @@ public class ManageApplications extends InstrumentedFragment
                 return FILTER_APPS_USAGE_ACCESS;
             case LIST_TYPE_HIGH_POWER:
                 return FILTER_APPS_POWER_WHITELIST;
+            case LIST_TYPE_OVERLAY:
+                return FILTER_APPS_WITH_OVERLAY;
+            case LIST_TYPE_WRITE_SETTINGS:
+                return FILTER_APPS_WRITE_SETTINGS;
             default:
                 return FILTER_APPS_ALL;
         }
@@ -385,6 +406,10 @@ public class ManageApplications extends InstrumentedFragment
                 return MetricsLogger.USAGE_ACCESS;
             case LIST_TYPE_HIGH_POWER:
                 return MetricsLogger.APPLICATIONS_HIGH_POWER_APPS;
+            case LIST_TYPE_OVERLAY:
+                return MetricsLogger.SYSTEM_ALERT_WINDOW_APPS;
+            case LIST_TYPE_WRITE_SETTINGS:
+                return MetricsLogger.SYSTEM_ALERT_WINDOW_APPS;
             default:
                 return MetricsLogger.VIEW_UNKNOWN;
         }
@@ -439,7 +464,8 @@ public class ManageApplications extends InstrumentedFragment
         if (requestCode == INSTALLED_APP_DETAILS && mCurrentPkgName != null) {
             if (mListType == LIST_TYPE_NOTIFICATION) {
                 mApplications.mExtraInfoBridge.forceUpdate(mCurrentPkgName, mCurrentUid);
-            } else if (mListType == LIST_TYPE_HIGH_POWER) {
+            } else if (mListType == LIST_TYPE_HIGH_POWER || mListType == LIST_TYPE_OVERLAY
+                    || mListType == LIST_TYPE_WRITE_SETTINGS) {
                 if (mFinishAfterDialog) {
                     getActivity().onBackPressed();
                 } else {
@@ -470,6 +496,12 @@ public class ManageApplications extends InstrumentedFragment
             case LIST_TYPE_HIGH_POWER:
                 HighPowerDetail.show(this, mCurrentPkgName, INSTALLED_APP_DETAILS,
                         mFinishAfterDialog);
+                break;
+            case LIST_TYPE_OVERLAY:
+                startAppInfoFragment(DrawOverlayDetails.class, R.string.overlay_settings);
+                break;
+            case LIST_TYPE_WRITE_SETTINGS:
+                startAppInfoFragment(WriteSettingsDetails.class, R.string.write_system_settings);
                 break;
             // TODO: Figure out if there is a way where we can spin up the profile's settings
             // process ahead of time, to avoid a long load of data when user clicks on a managed app.
@@ -728,6 +760,10 @@ public class ManageApplications extends InstrumentedFragment
                 mExtraInfoBridge = new AppStateUsageBridge(mContext, mState, this);
             } else if (mManageApplications.mListType == LIST_TYPE_HIGH_POWER) {
                 mExtraInfoBridge = new AppStatePowerBridge(mState, this);
+            } else if (mManageApplications.mListType == LIST_TYPE_OVERLAY) {
+                mExtraInfoBridge = new AppStateOverlayBridge(mContext, mState, this);
+            } else if (mManageApplications.mListType == LIST_TYPE_WRITE_SETTINGS) {
+                mExtraInfoBridge = new AppStateWriteSettingsBridge(mContext, mState, this);
             } else {
                 mExtraInfoBridge = null;
             }
@@ -1026,8 +1062,9 @@ public class ManageApplications extends InstrumentedFragment
 
                 case LIST_TYPE_USAGE_ACCESS:
                     if (holder.entry.extraInfo != null) {
-                        holder.summary.setText(((UsageState) holder.entry.extraInfo).hasAccess() ?
-                                R.string.switch_on_text : R.string.switch_off_text);
+                        holder.summary.setText((new UsageState((PermissionState)holder.entry
+                                .extraInfo)).isPermissible() ? R.string.switch_on_text :
+                                R.string.switch_off_text);
                     } else {
                         holder.summary.setText(null);
                     }
@@ -1035,6 +1072,16 @@ public class ManageApplications extends InstrumentedFragment
 
                 case LIST_TYPE_HIGH_POWER:
                     holder.summary.setText(HighPowerDetail.getSummary(mContext, holder.entry));
+                    break;
+
+                case LIST_TYPE_OVERLAY:
+                    holder.summary.setText(DrawOverlayDetails.getSummary(mContext,
+                            holder.entry));
+                    break;
+
+                case LIST_TYPE_WRITE_SETTINGS:
+                    holder.summary.setText(WriteSettingsDetails.getSummary(mContext,
+                            holder.entry));
                     break;
 
                 default:

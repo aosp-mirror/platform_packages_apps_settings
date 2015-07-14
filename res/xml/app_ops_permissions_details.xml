@@ -15,19 +15,16 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
-    android:title="@string/usage_access">
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
     <SwitchPreference
-        android:key="usage_switch"
-        android:title="@string/permit_usage_access" />
+        android:key="app_ops_settings_switch" />
 
     <Preference
-        android:key="app_usage_preference"
-        android:title="@string/app_usage_preference" />
+        android:key="app_ops_settings_preference" />
 
     <Preference
-        android:summary="@string/usage_access_description"
+        android:key="app_ops_settings_description"
         android:selectable="false" />
 
 </PreferenceScreen>
