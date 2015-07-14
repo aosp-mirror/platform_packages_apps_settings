@@ -15,11 +15,14 @@
  */
 package com.android.settings.applications;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.os.Bundle;
+import android.os.AsyncTask;
 import android.preference.Preference;
+import android.provider.Settings;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
@@ -40,11 +43,15 @@ public class AdvancedAppSettings extends SettingsPreferenceFragment implements
     private static final String KEY_APP_PERM = "manage_perms";
     private static final String KEY_APP_DOMAIN_URLS = "domain_urls";
     private static final String KEY_HIGH_POWER_APPS = "high_power_apps";
+    private static final String KEY_SYSTEM_ALERT_WINDOW = "system_alert_window";
+    private static final String KEY_WRITE_SETTINGS_APPS = "write_settings_apps";
 
     private Session mSession;
     private Preference mAppPermsPreference;
     private Preference mAppDomainURLsPreference;
     private Preference mHighPowerPreference;
+    private Preference mSystemAlertWindowPreference;
+    private Preference mWriteSettingsPreference;
 
     private BroadcastReceiver mPermissionReceiver;
 
@@ -63,6 +70,8 @@ public class AdvancedAppSettings extends SettingsPreferenceFragment implements
         mAppPermsPreference = findPreference(KEY_APP_PERM);
         mAppDomainURLsPreference = findPreference(KEY_APP_DOMAIN_URLS);
         mHighPowerPreference = findPreference(KEY_HIGH_POWER_APPS);
+        mSystemAlertWindowPreference = findPreference(KEY_SYSTEM_ALERT_WINDOW);
+        mWriteSettingsPreference = findPreference(KEY_WRITE_SETTINGS_APPS);
         updateUI();
     }
 
@@ -97,6 +106,16 @@ public class AdvancedAppSettings extends SettingsPreferenceFragment implements
         }
         mPermissionReceiver = PermissionsSummaryHelper.getAppWithPermissionsCounts(getContext(),
                 mPermissionCallback);
+
+        Activity activity = getActivity();
+        ApplicationsState appState = ApplicationsState.getInstance(activity
+                .getApplication());
+        AppStateOverlayBridge overlayBridge = new AppStateOverlayBridge(activity,
+                appState, null);
+        AppStateWriteSettingsBridge writeSettingsBridge = new AppStateWriteSettingsBridge(
+                activity, appState, null);
+        new CountAppsWithOverlayPermission().execute(overlayBridge);
+        new CountAppsWithWriteSettingsPermission().execute(writeSettingsBridge);
     }
 
     @Override
@@ -159,4 +178,50 @@ public class AdvancedAppSettings extends SettingsPreferenceFragment implements
             }
         }
     };
+
+    private class CountAppsWithOverlayPermission extends
+            AsyncTask<AppStateOverlayBridge, Void, Integer> {
+        int numOfPackagesRequestedPermission = 0;
+
+        @Override
+        protected Integer doInBackground(AppStateOverlayBridge... params) {
+            AppStateOverlayBridge overlayBridge = params[0];
+            numOfPackagesRequestedPermission = overlayBridge
+                    .getNumberOfPackagesWithPermission();
+            return overlayBridge.getNumberOfPackagesCanDrawOverlay();
+        }
+
+        @Override
+        protected void onPostExecute(Integer result) {
+            // checks if fragment is still there before updating the preference object
+            if (isAdded()) {
+                mSystemAlertWindowPreference.setSummary(getContext().getString(
+                        R.string.system_alert_window_summary, result,
+                        numOfPackagesRequestedPermission));
+            }
+        }
+    }
+
+    private class CountAppsWithWriteSettingsPermission extends
+        AsyncTask<AppStateWriteSettingsBridge, Void, Integer> {
+        int numOfPackagesRequestedPermission = 0;
+
+        @Override
+        protected Integer doInBackground(AppStateWriteSettingsBridge... params) {
+            AppStateWriteSettingsBridge writeSettingsBridge = params[0];
+            numOfPackagesRequestedPermission = writeSettingsBridge
+                .getNumberOfPackagesWithPermission();
+            return writeSettingsBridge.getNumberOfPackagesCanWriteSettings();
+        }
+
+        @Override
+        protected void onPostExecute(Integer result) {
+            // checks if fragment is still there before updating the preference object
+            if (isAdded()) {
+                mWriteSettingsPreference.setSummary(getContext().getString(
+                        R.string.write_settings_summary, result,
+                        numOfPackagesRequestedPermission));
+            }
+        }
+    }
 }

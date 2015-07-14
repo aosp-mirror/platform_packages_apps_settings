@@ -40,8 +40,10 @@ import com.android.settings.applications.AppStateUsageBridge.UsageState;
 public class UsageAccessDetails extends AppInfoWithHeader implements OnPreferenceChangeListener,
         OnPreferenceClickListener {
 
-    private static final String KEY_USAGE_SWITCH = "usage_switch";
-    private static final String KEY_USAGE_PREFS = "app_usage_preference";
+    private static final String KEY_APP_OPS_PREFERENCE_SCREEN = "app_ops_preference_screen";
+    private static final String KEY_APP_OPS_SETTINGS_SWITCH = "app_ops_settings_switch";
+    private static final String KEY_APP_OPS_SETTINGS_PREFS = "app_ops_settings_preference";
+    private static final String KEY_APP_OPS_SETTINGS_DESC = "app_ops_settings_description";
 
     // Use a bridge to get the usage stats but don't initialize it to connect with all state.
     // TODO: Break out this functionality into its own class.
@@ -49,6 +51,7 @@ public class UsageAccessDetails extends AppInfoWithHeader implements OnPreferenc
     private AppOpsManager mAppOpsManager;
     private SwitchPreference mSwitchPref;
     private Preference mUsagePrefs;
+    private Preference mUsageDesc;
     private Intent mSettingsIntent;
     private UsageState mUsageState;
     private DevicePolicyManager mDpm;
@@ -62,9 +65,15 @@ public class UsageAccessDetails extends AppInfoWithHeader implements OnPreferenc
         mAppOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
         mDpm = context.getSystemService(DevicePolicyManager.class);
 
-        addPreferencesFromResource(R.xml.usage_access_details);
-        mSwitchPref = (SwitchPreference) findPreference(KEY_USAGE_SWITCH);
-        mUsagePrefs = findPreference(KEY_USAGE_PREFS);
+        addPreferencesFromResource(R.xml.app_ops_permissions_details);
+        mSwitchPref = (SwitchPreference) findPreference(KEY_APP_OPS_SETTINGS_SWITCH);
+        mUsagePrefs = findPreference(KEY_APP_OPS_SETTINGS_PREFS);
+        mUsageDesc = findPreference(KEY_APP_OPS_SETTINGS_DESC);
+
+        getPreferenceScreen().setTitle(R.string.usage_access);
+        mSwitchPref.setTitle(R.string.permit_usage_access);
+        mUsagePrefs.setTitle(R.string.app_usage_preference);
+        mUsageDesc.setSummary(R.string.usage_access_description);
 
         mSwitchPref.setOnPreferenceChangeListener(this);
         mUsagePrefs.setOnPreferenceClickListener(this);
@@ -92,8 +101,8 @@ public class UsageAccessDetails extends AppInfoWithHeader implements OnPreferenc
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (preference == mSwitchPref) {
-            if (mUsageState != null && (Boolean) newValue != mUsageState.hasAccess()) {
-                if (mUsageState.hasAccess() && mDpm.isProfileOwnerApp(mPackageName)) {
+            if (mUsageState != null && (Boolean) newValue != mUsageState.isPermissible()) {
+                if (mUsageState.isPermissible() && mDpm.isProfileOwnerApp(mPackageName)) {
                     new AlertDialog.Builder(getContext())
                             .setIcon(com.android.internal.R.drawable.ic_dialog_alert_material)
                             .setTitle(android.R.string.dialog_alert_title)
@@ -101,7 +110,7 @@ public class UsageAccessDetails extends AppInfoWithHeader implements OnPreferenc
                             .setPositiveButton(R.string.okay, null)
                             .show();
                 }
-                setHasAccess(!mUsageState.hasAccess());
+                setHasAccess(!mUsageState.isPermissible());
                 refreshUi();
             }
             return true;
@@ -119,14 +128,14 @@ public class UsageAccessDetails extends AppInfoWithHeader implements OnPreferenc
         mUsageState = mUsageBridge.getUsageInfo(mPackageName,
                 mPackageInfo.applicationInfo.uid);
 
-        boolean hasAccess = mUsageState.hasAccess();
+        boolean hasAccess = mUsageState.isPermissible();
         mSwitchPref.setChecked(hasAccess);
         mUsagePrefs.setEnabled(hasAccess);
 
         ResolveInfo resolveInfo = mPm.resolveActivityAsUser(mSettingsIntent,
                 PackageManager.GET_META_DATA, mUserId);
         if (resolveInfo != null) {
-            if (findPreference(KEY_USAGE_PREFS) == null) {
+            if (findPreference(KEY_APP_OPS_SETTINGS_PREFS) == null) {
                 getPreferenceScreen().addPreference(mUsagePrefs);
             }
             Bundle metaData = resolveInfo.activityInfo.metaData;
@@ -138,7 +147,7 @@ public class UsageAccessDetails extends AppInfoWithHeader implements OnPreferenc
                         metaData.getString(Settings.METADATA_USAGE_ACCESS_REASON));
             }
         } else {
-            if (findPreference(KEY_USAGE_PREFS) != null) {
+            if (findPreference(KEY_APP_OPS_SETTINGS_PREFS) != null) {
                 getPreferenceScreen().removePreference(mUsagePrefs);
             }
         }
