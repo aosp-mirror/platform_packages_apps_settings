@@ -20,6 +20,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -246,6 +247,19 @@ public class SimStatus extends InstrumentedPreferenceActivity {
             networktype = mTelephonyManager.getNetworkTypeName(actualVoiceNetworkType);
         }
 
+        boolean show4GForLTE = false;
+        try {
+            Context con = createPackageContext("com.android.systemui", 0);
+            int id = con.getResources().getIdentifier("config_show4GForLTE",
+                    "bool", "com.android.systemui");
+            show4GForLTE = con.getResources().getBoolean(id);
+        } catch (NameNotFoundException e) {
+            Log.e(TAG, "NameNotFoundException for show4GFotLTE");
+        }
+
+        if (networktype != null && networktype.equals("LTE") && show4GForLTE) {
+            networktype = "4G";
+        }
         setSummaryText(KEY_NETWORK_TYPE, networktype);
     }
 
