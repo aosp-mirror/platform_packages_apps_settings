@@ -40,7 +40,7 @@ public class FingerprintEnrollIntroduction extends FingerprintEnrollBase {
         setHeaderText(R.string.security_settings_fingerprint_enroll_introduction_title);
         findViewById(R.id.cancel_button).setOnClickListener(this);
         findViewById(R.id.learn_more_button).setOnClickListener(this);
-        final double passwordQuality = new ChooseLockSettingsHelper(this).utils()
+        final int passwordQuality = new ChooseLockSettingsHelper(this).utils()
                 .getActivePasswordQuality(UserHandle.myUserId());
         mHasPassword = passwordQuality != DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
     }
