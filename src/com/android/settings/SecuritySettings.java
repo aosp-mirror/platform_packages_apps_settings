@@ -355,9 +355,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
         final List<Fingerprint> items = fpm.getEnrolledFingerprints();
         final int fingerprintCount = items != null ? items.size() : 0;
         final String clazz;
-        boolean hasPassword = mChooseLockSettingsHelper.utils().getActivePasswordQuality(
-                MY_USER_ID)
-                != DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
         if (fingerprintCount > 0) {
             fingerprintPreference.setSummary(getResources().getQuantityString(
                     R.plurals.security_settings_fingerprint_preference_summary,
@@ -365,7 +362,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
             clazz = FingerprintSettings.class.getName();
         } else {
             clazz = FingerprintEnrollIntroduction.class.getName();
-            intent.putExtra(FingerprintEnrollIntroduction.EXTRA_HAS_PASSWORD, hasPassword);
         }
         intent.setClassName("com.android.settings", clazz);
         fingerprintPreference.setIntent(intent);
