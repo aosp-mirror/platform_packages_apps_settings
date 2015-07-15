@@ -588,6 +588,8 @@
     <string name="wifi_starting" msgid="6732377932749942954">"Включение Wi-Fi…"</string>
     <string name="wifi_stopping" msgid="8952524572499500804">"Отключение Wi-Fi…"</string>
     <string name="wifi_error" msgid="3207971103917128179">"Ошибка"</string>
+    <!-- no translation found for wifi_sap_no_channel_error (3108445199311817111) -->
+    <skip />
     <string name="wifi_in_airplane_mode" msgid="8652520421778203796">"Режим полета"</string>
     <string name="wifi_notify_open_networks" msgid="3755768188029653293">"Уведомления о сетях"</string>
     <string name="wifi_notify_open_networks_summary" msgid="3716818008370391253">"Сообщать о наличии общедоступных сетей"</string>
@@ -803,14 +805,10 @@
     <string name="account_settings" msgid="6403589284618783461">"Аккаунты"</string>
     <string name="category_personal" msgid="1299663247844969448">"Личные данные"</string>
     <string name="category_work" msgid="8699184680584175622">"Работа"</string>
-    <!-- no translation found for accessibility_category_work (4339262969083355720) -->
-    <skip />
-    <!-- no translation found for accessibility_category_personal (1263518850905945594) -->
-    <skip />
-    <!-- no translation found for accessibility_work_account_title (1231830766637939527) -->
-    <skip />
-    <!-- no translation found for accessibility_personal_account_title (2169071663029067826) -->
-    <skip />
+    <string name="accessibility_category_work" msgid="4339262969083355720">"Аккаунты в рабочем профиле – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
+    <string name="accessibility_category_personal" msgid="1263518850905945594">"Аккаунты в личном профиле"</string>
+    <string name="accessibility_work_account_title" msgid="1231830766637939527">"Рабочий аккаунт – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
+    <string name="accessibility_personal_account_title" msgid="2169071663029067826">"Личный аккаунт – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="search_settings" msgid="1910951467596035063">"Поиск"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Настроить параметры и управлять историей поиска"</string>
     <string name="display_settings" msgid="7965901687241669598">"Экран"</string>
@@ -2588,9 +2586,9 @@
     <string name="zen_mode_rule_type_unknown" msgid="3049377282766700600">"Неизвестен"</string>
     <string name="zen_mode_configure_rule" msgid="8865785428056490305">"Настроить правило"</string>
     <string name="zen_schedule_rule_type_name" msgid="142936744435271449">"Время"</string>
-    <string name="zen_schedule_rule_enabled_toast" msgid="3379499360390382259">"Настроено правило включения режима \"Не беспокоить\" в определенное время"</string>
+    <string name="zen_schedule_rule_enabled_toast" msgid="3379499360390382259">"Настроено правило включения режима \"Не беспокоить\" в указанное время"</string>
     <string name="zen_event_rule_type_name" msgid="2645981990973086797">"Мероприятие"</string>
-    <string name="zen_event_rule_enabled_toast" msgid="6910577623330811480">"Настроено правило включения режима \"Не беспокоить\" во время определенных мероприятий"</string>
+    <string name="zen_event_rule_enabled_toast" msgid="6910577623330811480">"Настроено правило включения режима \"Не беспокоить\" во время указанных мероприятий"</string>
     <string name="zen_mode_event_rule_calendar" msgid="8787906563769067418">"Во время мероприятий"</string>
     <string name="zen_mode_event_rule_summary_calendar_template" msgid="5135844750232403975">"Во время мероприятий <xliff:g id="CALENDAR">%1$s</xliff:g>"</string>
     <string name="zen_mode_event_rule_summary_any_calendar" msgid="4936646399126636358">"любого календаря"</string>
@@ -2779,7 +2777,7 @@
     <string name="permit_usage_access" msgid="4012876269445832300">"Разрешить доступ к истории использования"</string>
     <string name="app_usage_preference" msgid="7065701732733134991">"Настройки использования приложения"</string>
     <string name="usage_access_description" msgid="1352111094596416795">"Доступ к истории использования позволяет отслеживать, какие приложения вы используете и как часто, а также определять оператора сети, язык и другие параметры."</string>
-    <string name="memory_settings_title" msgid="7490541005204254222">"ОЗУ"</string>
+    <string name="memory_settings_title" msgid="7490541005204254222">"Память"</string>
     <string name="memory_details_title" msgid="8542565326053693320">"Подробности"</string>
     <string name="always_running" msgid="6042448320077429656">"Постоянно (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
     <string name="sometimes_running" msgid="6611250683037700864">"Иногда (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
@@ -2829,11 +2827,11 @@
     <string name="no_memory_use_summary" msgid="2016900536806235588">"За последние 3 часа приложение не обращалось к памяти"</string>
     <string name="sort_avg_use" msgid="3998036180505143129">"Упорядочить по средн. объему исп. памяти"</string>
     <string name="sort_max_use" msgid="4629247978290075124">"Упорядочить по макс. объему исп. памяти"</string>
-    <string name="memory_performance" msgid="5661005192284103281">"Производительность"</string>
+    <string name="memory_performance" msgid="5661005192284103281">"Оценка доступной памяти"</string>
     <string name="total_memory" msgid="2017287600738630165">"Всего"</string>
-    <string name="average_used" msgid="5338339266517245782">"В среднем использ. (%)"</string>
+    <string name="average_used" msgid="5338339266517245782">"Среднее использование"</string>
     <string name="free_memory" msgid="4003936141603549746">"Свободно"</string>
-    <string name="memory_usage_apps" msgid="5650192998273294098">"Используемая приложениями память"</string>
+    <string name="memory_usage_apps" msgid="5650192998273294098">"Использование памяти приложениями"</string>
     <plurals name="memory_usage_apps_summary" formatted="false" msgid="6089210945574265774">
       <item quantity="one">За <xliff:g id="DURATION_1">%2$s</xliff:g> память использовало <xliff:g id="COUNT">%1$d</xliff:g> приложение</item>
       <item quantity="few">За <xliff:g id="DURATION_1">%2$s</xliff:g> память использовали <xliff:g id="COUNT">%1$d</xliff:g> приложения</item>
@@ -2853,4 +2851,54 @@
     <string name="app_list_preference_none" msgid="108006867520327904">"Нет"</string>
     <string name="work_profile_usage_access_warning" msgid="8870622842216566692">"Если вы отключите для приложения доступ к истории использования, администратор все равно сможет просматривать эти данные в вашем рабочем профиле."</string>
     <string name="accessibility_lock_screen_progress" msgid="2408292742980383166">"Использовано <xliff:g id="COUNT_0">%1$d</xliff:g> из <xliff:g id="COUNT_1">%2$d</xliff:g> символов"</string>
+    <!-- no translation found for draw_overlay_title (6471979783906996313) -->
+    <skip />
+    <!-- no translation found for draw_overlay (9078696044299199938) -->
+    <skip />
+    <!-- no translation found for system_alert_window_settings (1757821151143694951) -->
+    <skip />
+    <!-- no translation found for system_alert_window_apps_title (7005760279028569491) -->
+    <skip />
+    <!-- no translation found for system_alert_window_access_title (8540785753333972302) -->
+    <skip />
+    <!-- no translation found for permit_draw_overlay (4407872595405953839) -->
+    <skip />
+    <!-- no translation found for app_overlay_permission_preference (8355410276571387439) -->
+    <skip />
+    <!-- no translation found for allow_overlay_description (7895191337585827691) -->
+    <skip />
+    <!-- no translation found for keywords_system_alert_window (8579673659566564926) -->
+    <skip />
+    <!-- no translation found for overlay_settings (6210407163312167008) -->
+    <skip />
+    <!-- no translation found for system_alert_window_summary (4268867238063922290) -->
+    <skip />
+    <!-- no translation found for filter_overlay_apps (6965969283342557573) -->
+    <skip />
+    <!-- no translation found for system_alert_window_on (2939489395109048888) -->
+    <skip />
+    <!-- no translation found for system_alert_window_off (6189115687233061992) -->
+    <skip />
+    <!-- no translation found for write_settings (5056260857636128887) -->
+    <skip />
+    <!-- no translation found for keywords_write_settings (6415597272561105138) -->
+    <skip />
+    <!-- no translation found for write_settings_summary (6501614872574643980) -->
+    <skip />
+    <!-- no translation found for filter_write_settings_apps (5389151171779460004) -->
+    <skip />
+    <!-- no translation found for write_settings_title (6706688627484679737) -->
+    <skip />
+    <!-- no translation found for write_system_settings (3741717172510029969) -->
+    <skip />
+    <!-- no translation found for write_settings_preference (2198494932312730862) -->
+    <skip />
+    <!-- no translation found for permit_write_settings (5754070436853714432) -->
+    <skip />
+    <!-- no translation found for write_settings_description (5124206705845320852) -->
+    <skip />
+    <!-- no translation found for write_settings_on (8230580416068832239) -->
+    <skip />
+    <!-- no translation found for write_settings_off (5156104383386336233) -->
+    <skip />
 </resources>

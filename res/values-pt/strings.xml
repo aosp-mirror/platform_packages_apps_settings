@@ -511,7 +511,7 @@
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"Opções…"</string>
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Avançado"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Bluetooth avançado"</string>
-    <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"Dispositivo pode se comunicar c/ Bluetooth ativado"</string>
+    <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"Com o Bluetooth ativado, o dispositivo pode se comunicar"</string>
     <string name="ble_scan_notify_text" msgid="1295915006005700650">"Para aumentar a precisão da localização, apps e serviços do sistema ainda detectam dispositivos Bluetooth. É possível alterar isso nas <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>configurações de verificação<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"Conectar-se a..."</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> será desconectado do áudio da mídia."</string>
@@ -572,6 +572,8 @@
     <string name="wifi_starting" msgid="6732377932749942954">"Ativando Wi-Fi..."</string>
     <string name="wifi_stopping" msgid="8952524572499500804">"Desativando Wi-Fi..."</string>
     <string name="wifi_error" msgid="3207971103917128179">"Erro"</string>
+    <!-- no translation found for wifi_sap_no_channel_error (3108445199311817111) -->
+    <skip />
     <string name="wifi_in_airplane_mode" msgid="8652520421778203796">"No modo avião"</string>
     <string name="wifi_notify_open_networks" msgid="3755768188029653293">"Notificação de rede"</string>
     <string name="wifi_notify_open_networks_summary" msgid="3716818008370391253">"Notificar sempre que houver uma rede pública disponível"</string>
@@ -787,14 +789,10 @@
     <string name="account_settings" msgid="6403589284618783461">"Contas"</string>
     <string name="category_personal" msgid="1299663247844969448">"Pessoal"</string>
     <string name="category_work" msgid="8699184680584175622">"Trabalho"</string>
-    <!-- no translation found for accessibility_category_work (4339262969083355720) -->
-    <skip />
-    <!-- no translation found for accessibility_category_personal (1263518850905945594) -->
-    <skip />
-    <!-- no translation found for accessibility_work_account_title (1231830766637939527) -->
-    <skip />
-    <!-- no translation found for accessibility_personal_account_title (2169071663029067826) -->
-    <skip />
+    <string name="accessibility_category_work" msgid="4339262969083355720">"Contas do perfil de trabalho - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
+    <string name="accessibility_category_personal" msgid="1263518850905945594">"Contas do perfil pessoal"</string>
+    <string name="accessibility_work_account_title" msgid="1231830766637939527">"Conta de trabalho - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
+    <string name="accessibility_personal_account_title" msgid="2169071663029067826">"Conta pessoal - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="search_settings" msgid="1910951467596035063">"Pesquisar"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Gerenciar configurações e histórico de pesquisa"</string>
     <string name="display_settings" msgid="7965901687241669598">"Tela"</string>
@@ -1530,7 +1528,7 @@
     <string name="allow_mock_location" msgid="2787962564578664888">"Permitir locais fictícios"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Permitir locais fictícios"</string>
     <string name="debug_view_attributes" msgid="6485448367803310384">"Ativar visualiz. insp. atributo"</string>
-    <string name="legacy_dhcp_client_summary" msgid="163383566317652040">"Use o cliente DHCP do Lollipop, em vez do novo cliente DHCP do Android."</string>
+    <string name="legacy_dhcp_client_summary" msgid="163383566317652040">"Usar cliente DHCP do Lollipop, em vez do novo cliente DHCP do Android."</string>
     <string name="mobile_data_always_on_summary" msgid="8149773901431697910">"Sempre manter dados móveis ativos, mesmo quando o Wi-Fi estiver ativado (para troca rápida de rede)."</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"Permitir a depuração USB?"</string>
     <string name="adb_warning_message" msgid="7316799925425402244">"A depuração USB serve apenas para fins de desenvolvimento. Use-a para copiar dados entre o computador e o dispositivo, instalar apps no seu aparelho sem notificação e ler dados de registro."</string>
@@ -2084,7 +2082,7 @@
     <string name="show_screen_updates" msgid="5470814345876056420">"Mostrar atualiz. de sup."</string>
     <string name="show_screen_updates_summary" msgid="2569622766672785529">"Piscar superfícies de toda a janela ao atualizar"</string>
     <string name="show_hw_screen_updates" msgid="5036904558145941590">"Mostrar atualiz. da GPU"</string>
-    <string name="show_hw_screen_updates_summary" msgid="1115593565980196197">"Piscar visualizações em janelas ao desenhar c/GPU"</string>
+    <string name="show_hw_screen_updates_summary" msgid="1115593565980196197">"Piscar visualizações em janelas ao desenhar c/ GPU"</string>
     <string name="show_hw_layers_updates" msgid="5645728765605699821">"Atual. camad. de hardware"</string>
     <string name="show_hw_layers_updates_summary" msgid="5296917233236661465">"Piscar camadas de hardware em verde ao atualizar"</string>
     <string name="debug_hw_overdraw" msgid="2968692419951565417">"Depurar overdraw da GPU"</string>
@@ -2152,7 +2150,7 @@
     <string name="data_usage_label_background" msgid="3225844085975764519">"Plano de fundo"</string>
     <string name="data_usage_app_restricted" msgid="3568465218866589705">"restrito"</string>
     <string name="data_usage_disable_mobile" msgid="2613595056882494652">"Desativar dados da rede celular?"</string>
-    <string name="data_usage_disable_mobile_limit" msgid="3934211003105066167">"Def. lim. dados rede cel."</string>
+    <string name="data_usage_disable_mobile_limit" msgid="3934211003105066167">"Defin. lim. dados rede cel."</string>
     <string name="data_usage_disable_4g_limit" msgid="6233554774946681175">"Definir limite de dados 4G"</string>
     <string name="data_usage_disable_3g_limit" msgid="2558557840444266906">"Definir limite de dados 2G/3G"</string>
     <string name="data_usage_disable_wifi_limit" msgid="1394901415264660888">"Limitar dados de Wi-Fi"</string>
@@ -2352,7 +2350,7 @@
     <string name="nfc_payment_favor_default_default_unknown" msgid="7029467023485683077">"Continuar usando padrão"</string>
     <string name="nfc_payment_pay_with" msgid="7524904024378144072">"Em um terminal \"Tocar e pagar\", pagar com:"</string>
     <string name="nfc_how_it_works_title" msgid="1984068457698797207">"Como pagar no terminal"</string>
-    <string name="nfc_how_it_works_content" msgid="5820288675316257177">"Depois que você configurar um app para Tocar e pagar e seu smartphone estiver ligado, toque no smartphone em qualquer terminal com o logotipo de Tocar e pagar para fazer uma compra."</string>
+    <string name="nfc_how_it_works_content" msgid="5820288675316257177">"Depois que configurar um app para Tocar e pagar e seu smartphone estiver ligado, toque no smartphone em qualquer terminal com o logotipo Tocar e pagar para fazer uma compra."</string>
     <string name="nfc_how_it_works_got_it" msgid="259653300203217402">"Entendi"</string>
     <string name="nfc_more_title" msgid="815910943655133280">"Mais..."</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"Definir como preferência?"</string>
@@ -2817,4 +2815,54 @@
     <string name="app_list_preference_none" msgid="108006867520327904">"Nenhum"</string>
     <string name="work_profile_usage_access_warning" msgid="8870622842216566692">"A desativação do acesso de uso desse app não impede que seu administrador rastreie o uso de dados dos apps no seu perfil de trabalho."</string>
     <string name="accessibility_lock_screen_progress" msgid="2408292742980383166">"<xliff:g id="COUNT_0">%1$d</xliff:g> de <xliff:g id="COUNT_1">%2$d</xliff:g> caracteres usados"</string>
+    <!-- no translation found for draw_overlay_title (6471979783906996313) -->
+    <skip />
+    <!-- no translation found for draw_overlay (9078696044299199938) -->
+    <skip />
+    <!-- no translation found for system_alert_window_settings (1757821151143694951) -->
+    <skip />
+    <!-- no translation found for system_alert_window_apps_title (7005760279028569491) -->
+    <skip />
+    <!-- no translation found for system_alert_window_access_title (8540785753333972302) -->
+    <skip />
+    <!-- no translation found for permit_draw_overlay (4407872595405953839) -->
+    <skip />
+    <!-- no translation found for app_overlay_permission_preference (8355410276571387439) -->
+    <skip />
+    <!-- no translation found for allow_overlay_description (7895191337585827691) -->
+    <skip />
+    <!-- no translation found for keywords_system_alert_window (8579673659566564926) -->
+    <skip />
+    <!-- no translation found for overlay_settings (6210407163312167008) -->
+    <skip />
+    <!-- no translation found for system_alert_window_summary (4268867238063922290) -->
+    <skip />
+    <!-- no translation found for filter_overlay_apps (6965969283342557573) -->
+    <skip />
+    <!-- no translation found for system_alert_window_on (2939489395109048888) -->
+    <skip />
+    <!-- no translation found for system_alert_window_off (6189115687233061992) -->
+    <skip />
+    <!-- no translation found for write_settings (5056260857636128887) -->
+    <skip />
+    <!-- no translation found for keywords_write_settings (6415597272561105138) -->
+    <skip />
+    <!-- no translation found for write_settings_summary (6501614872574643980) -->
+    <skip />
+    <!-- no translation found for filter_write_settings_apps (5389151171779460004) -->
+    <skip />
+    <!-- no translation found for write_settings_title (6706688627484679737) -->
+    <skip />
+    <!-- no translation found for write_system_settings (3741717172510029969) -->
+    <skip />
+    <!-- no translation found for write_settings_preference (2198494932312730862) -->
+    <skip />
+    <!-- no translation found for permit_write_settings (5754070436853714432) -->
+    <skip />
+    <!-- no translation found for write_settings_description (5124206705845320852) -->
+    <skip />
+    <!-- no translation found for write_settings_on (8230580416068832239) -->
+    <skip />
+    <!-- no translation found for write_settings_off (5156104383386336233) -->
+    <skip />
 </resources>
