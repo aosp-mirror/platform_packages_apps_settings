@@ -20,7 +20,7 @@
     android:id="@+id/setup_wizard_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    style="@style/SetupWizardFingerprintStyle">
+    style="?attr/fingerprint_layout_theme">
 
     <LinearLayout
         style="@style/SuwContentFrame"
@@ -58,6 +58,7 @@
             android:layout_weight="1"/>
 
         <LinearLayout
+            android:id="@+id/button_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="-12dp"

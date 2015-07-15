@@ -57,9 +57,8 @@ public class FingerprintEnrollOnboard extends FingerprintEnrollBase {
     }
 
     private void launchChooseLock() {
-        Intent intent = new Intent();
+        Intent intent = getChooseLockIntent();
         long challenge = getSystemService(FingerprintManager.class).preEnroll();
-        intent.setClassName("com.android.settings", ChooseLockGeneric.class.getName());
         intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.MINIMUM_QUALITY_KEY,
                 DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);
         intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.HIDE_DISABLED_PREFS, true);
@@ -68,11 +67,18 @@ public class FingerprintEnrollOnboard extends FingerprintEnrollBase {
         startActivityForResult(intent, CHOOSE_LOCK_GENERIC_REQUEST);
     }
 
+    protected Intent getChooseLockIntent() {
+        return new Intent(this, ChooseLockGeneric.class);
+    }
+
     private void launchFindSensor(byte[] token) {
-        Intent intent = new Intent();
-        intent.setClassName("com.android.settings", FingerprintEnrollFindSensor.class.getName());
+        Intent intent = getFindSensorIntent();
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
         startActivity(intent);
         finish();
+    }
+
+    protected Intent getFindSensorIntent() {
+        return new Intent(this, FingerprintEnrollFindSensor.class);
     }
 }
