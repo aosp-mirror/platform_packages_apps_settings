@@ -321,6 +321,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.storage_volume, menu);
     }
 
