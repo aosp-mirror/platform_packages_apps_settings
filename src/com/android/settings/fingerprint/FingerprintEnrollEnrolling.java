@@ -213,12 +213,15 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
     }
 
     private void launchFinish(byte[] token) {
-        Intent intent = new Intent();
-        intent.setClassName("com.android.settings", FingerprintEnrollFinish.class.getName());
+        Intent intent = getFinishIntent();
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
         startActivity(intent);
         setResult(RESULT_FINISHED);
         finish();
+    }
+
+    protected Intent getFinishIntent() {
+        return new Intent(this, FingerprintEnrollFinish.class);
     }
 
     private void updateDescription() {
