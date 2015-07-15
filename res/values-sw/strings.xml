@@ -576,6 +576,8 @@
     <string name="wifi_starting" msgid="6732377932749942954">"Inawasha Wi-Fi..."</string>
     <string name="wifi_stopping" msgid="8952524572499500804">"Inazima Wi-Fi..."</string>
     <string name="wifi_error" msgid="3207971103917128179">"Hitilafu"</string>
+    <!-- no translation found for wifi_sap_no_channel_error (3108445199311817111) -->
+    <skip />
     <string name="wifi_in_airplane_mode" msgid="8652520421778203796">"Hali ya ndege imewashwa"</string>
     <string name="wifi_notify_open_networks" msgid="3755768188029653293">"Arifa ya mtandao"</string>
     <string name="wifi_notify_open_networks_summary" msgid="3716818008370391253">"Tuma arifa wakati wowote mtandao wa umma unapopatikana"</string>
@@ -791,14 +793,10 @@
     <string name="account_settings" msgid="6403589284618783461">"Akaunti"</string>
     <string name="category_personal" msgid="1299663247844969448">"Ya Kibinafsi"</string>
     <string name="category_work" msgid="8699184680584175622">"Kazini"</string>
-    <!-- no translation found for accessibility_category_work (4339262969083355720) -->
-    <skip />
-    <!-- no translation found for accessibility_category_personal (1263518850905945594) -->
-    <skip />
-    <!-- no translation found for accessibility_work_account_title (1231830766637939527) -->
-    <skip />
-    <!-- no translation found for accessibility_personal_account_title (2169071663029067826) -->
-    <skip />
+    <string name="accessibility_category_work" msgid="4339262969083355720">"Akaunti za wasifu wa kazini - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
+    <string name="accessibility_category_personal" msgid="1263518850905945594">"Akaunti za wasifu wa binafsi"</string>
+    <string name="accessibility_work_account_title" msgid="1231830766637939527">"Akaunti ya kazini - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
+    <string name="accessibility_personal_account_title" msgid="2169071663029067826">"Akaunti ya binafsi- <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="search_settings" msgid="1910951467596035063">"Tafuta"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Simamia mipangilio ya utafutaji na historia"</string>
     <string name="display_settings" msgid="7965901687241669598">"Onyesho"</string>
@@ -1543,7 +1541,7 @@
     <string name="adb_keys_warning_message" msgid="5659849457135841625">"Unataka kubatilisha ufikiaji wa urekebishaji wa USB kutoka kwenye kompyuta zote ulizotangulia kuidhinisha?"</string>
     <string name="dev_settings_warning_title" msgid="7244607768088540165">"Ruhusu mipangilio ya usanidi?"</string>
     <string name="dev_settings_warning_message" msgid="2298337781139097964">"Mipangilio hii imekusudiwa kwa matumizi ya usanidi tu. Inaweza kusababisha kifaa chako na programu zilizoko kuvunjika au kutofanya kazi vizuri."</string>
-    <string name="verify_apps_over_usb_title" msgid="4177086489869041953">"Thibitisha programu iliyo juu ya USB"</string>
+    <string name="verify_apps_over_usb_title" msgid="4177086489869041953">"Thibitisha programu kupitia USB"</string>
     <string name="verify_apps_over_usb_summary" msgid="9164096969924529200">"Kagua programu zilizosakinishwa kupitia ADB/ADT kwa tabia ya kudhuru."</string>
     <string name="enforce_read_external_title" product="nosdcard" msgid="7733257271454664956">"Linda hifadhi ya USB"</string>
     <string name="enforce_read_external_summary" product="nosdcard" msgid="1798088409346660567">"Sharti programu iombe ruhusa ili kusoma hifadhi ya USB"</string>
@@ -2823,4 +2821,54 @@
     <string name="app_list_preference_none" msgid="108006867520327904">"Hamna"</string>
     <string name="work_profile_usage_access_warning" msgid="8870622842216566692">"Kuzima idhini ya kufikia matumizi ya programu hii hakutamzuia msimamizi wako kufuatilia matumizi ya data ya programu zilizo katika wasifu wako wa kazini."</string>
     <string name="accessibility_lock_screen_progress" msgid="2408292742980383166">"Herufi <xliff:g id="COUNT_0">%1$d</xliff:g> kati ya <xliff:g id="COUNT_1">%2$d</xliff:g> zimetumika"</string>
+    <!-- no translation found for draw_overlay_title (6471979783906996313) -->
+    <skip />
+    <!-- no translation found for draw_overlay (9078696044299199938) -->
+    <skip />
+    <!-- no translation found for system_alert_window_settings (1757821151143694951) -->
+    <skip />
+    <!-- no translation found for system_alert_window_apps_title (7005760279028569491) -->
+    <skip />
+    <!-- no translation found for system_alert_window_access_title (8540785753333972302) -->
+    <skip />
+    <!-- no translation found for permit_draw_overlay (4407872595405953839) -->
+    <skip />
+    <!-- no translation found for app_overlay_permission_preference (8355410276571387439) -->
+    <skip />
+    <!-- no translation found for allow_overlay_description (7895191337585827691) -->
+    <skip />
+    <!-- no translation found for keywords_system_alert_window (8579673659566564926) -->
+    <skip />
+    <!-- no translation found for overlay_settings (6210407163312167008) -->
+    <skip />
+    <!-- no translation found for system_alert_window_summary (4268867238063922290) -->
+    <skip />
+    <!-- no translation found for filter_overlay_apps (6965969283342557573) -->
+    <skip />
+    <!-- no translation found for system_alert_window_on (2939489395109048888) -->
+    <skip />
+    <!-- no translation found for system_alert_window_off (6189115687233061992) -->
+    <skip />
+    <!-- no translation found for write_settings (5056260857636128887) -->
+    <skip />
+    <!-- no translation found for keywords_write_settings (6415597272561105138) -->
+    <skip />
+    <!-- no translation found for write_settings_summary (6501614872574643980) -->
+    <skip />
+    <!-- no translation found for filter_write_settings_apps (5389151171779460004) -->
+    <skip />
+    <!-- no translation found for write_settings_title (6706688627484679737) -->
+    <skip />
+    <!-- no translation found for write_system_settings (3741717172510029969) -->
+    <skip />
+    <!-- no translation found for write_settings_preference (2198494932312730862) -->
+    <skip />
+    <!-- no translation found for permit_write_settings (5754070436853714432) -->
+    <skip />
+    <!-- no translation found for write_settings_description (5124206705845320852) -->
+    <skip />
+    <!-- no translation found for write_settings_on (8230580416068832239) -->
+    <skip />
+    <!-- no translation found for write_settings_off (5156104383386336233) -->
+    <skip />
 </resources>
