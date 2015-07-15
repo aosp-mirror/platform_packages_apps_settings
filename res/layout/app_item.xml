@@ -21,7 +21,8 @@
     android:paddingTop="16dp"
     android:paddingBottom="16dp"
     android:gravity="top"
-    android:columnCount="3">
+    android:columnCount="3"
+    android:duplicateParentState="true">
 
     <ImageView
         android:id="@android:id/icon"
@@ -30,7 +31,8 @@
         android:layout_gravity="center"
         android:scaleType="fitXY"
         android:layout_marginEnd="16dip"
-        android:contentDescription="@null" />
+        android:contentDescription="@null"
+        android:duplicateParentState="true" />
 
     <TextView
         android:id="@android:id/title"
@@ -41,7 +43,8 @@
         android:ellipsize="marquee"
         android:textAppearance="@android:style/TextAppearance.Material.Subhead"
         android:textColor="?android:attr/textColorPrimary"
-        android:textAlignment="viewStart" />
+        android:textAlignment="viewStart"
+        android:duplicateParentState="true" />
 
     <TextView
         android:id="@android:id/summary"
@@ -54,7 +57,8 @@
         android:singleLine="true"
         android:ellipsize="marquee"
         android:textAppearance="@android:style/TextAppearance.Material.Subhead"
-        android:textColor="?android:attr/textColorSecondary" />
+        android:textColor="?android:attr/textColorSecondary"
+        android:duplicateParentState="true" />
 
     <FrameLayout
         android:id="@android:id/widget_frame"
@@ -63,6 +67,7 @@
         android:layout_toEndOf="@android:id/icon"
         android:layout_below="@android:id/title"
         android:layout_alignParentEnd="true"
-        android:layout_gravity="fill_horizontal|top" />
+        android:layout_gravity="fill_horizontal|top"
+        android:duplicateParentState="true" />
 
 </RelativeLayout>
