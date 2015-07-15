@@ -20,7 +20,6 @@ import android.annotation.Nullable;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
-import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -72,6 +71,10 @@ public class FingerprintEnrollBase extends Activity implements View.OnClickListe
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
+        initViews();
+    }
+
+    protected void initViews() {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS |
                 WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN |
                 WindowManager.LayoutParams.FLAG_LAYOUT_INSET_DECOR);

@@ -15,6 +15,7 @@
 -->
 
 <resources>
+    <attr name="fingerprint_layout_theme" format="reference" />
     <attr name="ic_menu_add" format="reference" />
     <attr name="ic_menu_moreoverflow" format="reference" />
     <attr name="ic_wps" format="reference" />
@@ -36,6 +37,7 @@
         <item name="android:listPreferredItemPaddingStart">@dimen/suw_layout_margin_sides</item>
         <item name="android:windowBackground">?android:attr/colorBackground</item>
         <item name="@*android:preferencePanelStyle">@*android:style/PreferencePanel.Dialog</item>
+        <item name="fingerprint_layout_theme">@style/SetupWizardFingerprintLayoutTheme</item>
         <item name="ic_menu_add">@drawable/ic_menu_add_dark</item>
         <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_material</item>
         <item name="ic_wps">@drawable/ic_wps_dark</item>
@@ -58,6 +60,7 @@
         <item name="android:listPreferredItemPaddingStart">@dimen/suw_layout_margin_sides</item>
         <item name="android:windowBackground">?android:attr/colorBackground</item>
         <item name="@*android:preferencePanelStyle">@*android:style/PreferencePanel.Dialog</item>
+        <item name="fingerprint_layout_theme">@style/SetupWizardFingerprintLayoutTheme</item>
         <item name="ic_menu_add">@drawable/ic_menu_add_light</item>
         <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_material</item>
         <item name="ic_wps">@drawable/ic_wps_light</item>
@@ -90,6 +93,7 @@
 
         <item name="apnPreferenceStyle">@style/ApnPreference</item>
 
+        <item name="fingerprint_layout_theme">@style/FingerprintLayoutTheme</item>
         <item name="ic_menu_add">@drawable/ic_menu_add_dark</item>
         <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_holo_dark</item>
         <item name="ic_wps">@drawable/ic_wps_light</item>

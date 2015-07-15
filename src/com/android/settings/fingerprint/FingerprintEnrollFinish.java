@@ -61,8 +61,8 @@ public class FingerprintEnrollFinish extends FingerprintEnrollBase {
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.add_another_button) {
-            finish();
             startActivity(getEnrollingIntent());
+            finish();
         }
         super.onClick(v);
     }
