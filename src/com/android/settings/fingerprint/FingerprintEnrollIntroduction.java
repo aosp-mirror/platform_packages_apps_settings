@@ -47,22 +47,29 @@ public class FingerprintEnrollIntroduction extends FingerprintEnrollBase {
 
     @Override
     protected void onNextButtonClick() {
-        Intent intent = new Intent();
-        final String clazz;
+        Intent intent;
         if (!mHasPassword) {
             // No fingerprints registered, launch into enrollment wizard.
-            clazz = FingerprintEnrollOnboard.class.getName();
+            intent = getOnboardIntent();
         } else {
             // Lock thingy is already set up, launch directly into find sensor step from wizard.
-            clazz = FingerprintEnrollFindSensor.class.getName();
+            intent = getFindSensorIntent();
         }
-        intent.setClassName("com.android.settings", clazz);
         startActivityForResult(intent, 0);
+    }
+
+    protected Intent getOnboardIntent() {
+        return new Intent(this, FingerprintEnrollOnboard.class);
+    }
+
+    protected Intent getFindSensorIntent() {
+        return new Intent(this, FingerprintEnrollFindSensor.class);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_FINISHED) {
+            setResult(RESULT_OK);
             finish();
         } else {
             super.onActivityResult(requestCode, resultCode, data);

@@ -1434,9 +1434,16 @@
         <activity android:name=".fingerprint.FingerprintEnrollFindSensor" android:exported="false"/>
         <activity android:name=".fingerprint.FingerprintEnrollEnrolling" android:exported="false"/>
         <activity android:name=".fingerprint.FingerprintEnrollFinish" android:exported="false"/>
-        <activity android:name=".fingerprint.FingerprintEnrollIntroduction"
+        <activity android:name=".fingerprint.FingerprintEnrollIntroduction" android:exported="false" />
+
+        <activity android:name=".fingerprint.SetupFingerprintEnrollOnboard" android:exported="false"/>
+        <activity android:name=".fingerprint.SetupFingerprintEnrollFindSensor" android:exported="false"/>
+        <activity android:name=".fingerprint.SetupFingerprintEnrollEnrolling" android:exported="false"/>
+        <activity android:name=".fingerprint.SetupFingerprintEnrollFinish" android:exported="false"/>
+        <activity android:name=".fingerprint.SetupFingerprintEnrollIntroduction"
             android:exported="true"
-            android:permission="android.permission.MANAGE_FINGERPRINT">
+            android:permission="android.permission.MANAGE_FINGERPRINT"
+            android:theme="@style/SetupWizardDisableAppStartingTheme">
             <intent-filter>
                 <action android:name="android.settings.FINGERPRINT_SETUP" />
                 <category android:name="android.intent.category.DEFAULT" />

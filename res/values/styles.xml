@@ -327,10 +327,16 @@
         <item name="android:textColor">@color/warning</item>
     </style>
 
-    <style name="SetupWizardFingerprintStyle">
+    <style name="FingerprintLayoutTheme">
         <item name="suwBackground">@drawable/fp_enrollment_header</item>
         <item name="suwIllustrationAspectRatio">@dimen/fingerprint_illustration_aspect_ratio</item>
         <item name="suwDecorPaddingTop">@dimen/fingerprint_decor_padding_top</item>
+    </style>
+
+    <style name="SetupWizardFingerprintLayoutTheme">
+        <item name="suwBackgroundTile">@drawable/setup_illustration_tile</item>
+        <item name="suwIllustration">@drawable/setup_illustration_lock_screen</item>
+        <item name="suwIllustrationHorizontalTile">@drawable/setup_illustration_horizontal_tile</item>
     </style>
 
     <style name="TextAppearance.ConfirmDeviceCredentialsErrorText"
