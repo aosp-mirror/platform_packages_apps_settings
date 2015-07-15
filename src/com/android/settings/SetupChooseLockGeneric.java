@@ -28,11 +28,9 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.preference.PreferenceFragment;
-import android.hardware.fingerprint.FingerprintManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 /**
  * Setup Wizard's version of ChooseLockGeneric screen. It inherits the logic and basic structure
@@ -70,14 +68,6 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
             final SetupWizardListLayout layout = (SetupWizardListLayout) inflater.inflate(
                     R.layout.setup_choose_lock_generic, container, false);
             layout.setHeaderText(getActivity().getTitle());
-            ListView list = layout.getListView();
-            final FingerprintManager fpm = (FingerprintManager)
-                    getActivity().getSystemService(Context.FINGERPRINT_SERVICE);
-            if (fpm != null && fpm.isHardwareDetected()) {
-                final View footer = inflater.inflate(
-                        R.layout.setup_screen_lock_fingerprint_details, list, false);
-                list.addFooterView(footer, null, false);
-            }
 
             final NavigationBar navigationBar = layout.getNavigationBar();
             navigationBar.getNextButton().setEnabled(false);
