@@ -574,6 +574,8 @@
     <string name="wifi_starting" msgid="6732377932749942954">"Wi-FiをONにしています…"</string>
     <string name="wifi_stopping" msgid="8952524572499500804">"Wi-FiをOFFにしています…"</string>
     <string name="wifi_error" msgid="3207971103917128179">"エラー"</string>
+    <!-- no translation found for wifi_sap_no_channel_error (3108445199311817111) -->
+    <skip />
     <string name="wifi_in_airplane_mode" msgid="8652520421778203796">"機内モード"</string>
     <string name="wifi_notify_open_networks" msgid="3755768188029653293">"ネットワークの通知"</string>
     <string name="wifi_notify_open_networks_summary" msgid="3716818008370391253">"公衆通信回線が利用可能なときは通知する"</string>
@@ -751,7 +753,7 @@
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"着信音"</string>
     <string name="notification_volume_title" msgid="2012640760341080408">"通知"</string>
     <string name="checkbox_notification_same_as_incoming_call" msgid="1073644356290338921">"通知音にも着信音量を適用"</string>
-    <string name="home_work_profile_not_supported" msgid="7457951997970419085">"ワークプロフィールをサポートしていません"</string>
+    <string name="home_work_profile_not_supported" msgid="7457951997970419085">"仕事用プロファイルをサポートしていません"</string>
     <string name="notification_sound_dialog_title" msgid="3805140135741385667">"デフォルトの通知音"</string>
     <string name="media_volume_title" msgid="3576565767317118106">"メディア"</string>
     <string name="media_volume_summary" msgid="5363248930648849974">"音楽や動画の再生音量"</string>
@@ -787,16 +789,12 @@
     <string name="dock_sounds_enable_summary_off" product="tablet" msgid="4308252722466813560">"タブレットのホルダー脱着時に音を鳴らさない"</string>
     <string name="dock_sounds_enable_summary_off" product="default" msgid="2034927992716667672">"携帯のホルダー脱着時に音を鳴らさない"</string>
     <string name="account_settings" msgid="6403589284618783461">"アカウント"</string>
-    <string name="category_personal" msgid="1299663247844969448">"プライベート"</string>
-    <string name="category_work" msgid="8699184680584175622">"仕事"</string>
-    <!-- no translation found for accessibility_category_work (4339262969083355720) -->
-    <skip />
-    <!-- no translation found for accessibility_category_personal (1263518850905945594) -->
-    <skip />
-    <!-- no translation found for accessibility_work_account_title (1231830766637939527) -->
-    <skip />
-    <!-- no translation found for accessibility_personal_account_title (2169071663029067826) -->
-    <skip />
+    <string name="category_personal" msgid="1299663247844969448">"個人用"</string>
+    <string name="category_work" msgid="8699184680584175622">"仕事用"</string>
+    <string name="accessibility_category_work" msgid="4339262969083355720">"仕事用プロファイルアカウント - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
+    <string name="accessibility_category_personal" msgid="1263518850905945594">"個人用プロファイルアカウント"</string>
+    <string name="accessibility_work_account_title" msgid="1231830766637939527">"仕事用アカウント - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
+    <string name="accessibility_personal_account_title" msgid="2169071663029067826">"個人用アカウント - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="search_settings" msgid="1910951467596035063">"検索"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"検索設定と履歴の管理"</string>
     <string name="display_settings" msgid="7965901687241669598">"ディスプレイ"</string>
@@ -2719,7 +2717,7 @@
     <string name="advanced_apps" msgid="4812975097124803873">"詳細設定"</string>
     <string name="configure_apps" msgid="6685680790825882528">"アプリの設定"</string>
     <string name="unknown_app" msgid="5275921288718717656">"不明なアプリ"</string>
-    <string name="choose_profile" msgid="8229363046053568878">"プロフィールの選択"</string>
+    <string name="choose_profile" msgid="8229363046053568878">"プロファイルの選択"</string>
     <string name="app_permissions" msgid="4148222031991883874">"アプリの権限"</string>
     <string name="app_permissions_summary" msgid="2098173899436407221">"<xliff:g id="COUNT_0">%d</xliff:g>/<xliff:g id="COUNT_1">%d</xliff:g>個のアプリに追加アクセスを許可"</string>
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"<xliff:g id="COUNT_0">%d</xliff:g>/<xliff:g id="COUNT_1">%d</xliff:g>個のアプリを許可"</string>
@@ -2823,4 +2821,54 @@
     <string name="app_list_preference_none" msgid="108006867520327904">"なし"</string>
     <string name="work_profile_usage_access_warning" msgid="8870622842216566692">"このアプリによる使用量へのアクセス許可をOFFにしても、管理者は引き続き仕事用プロファイル内のアプリのデータ使用量をトラッキングできます。"</string>
     <string name="accessibility_lock_screen_progress" msgid="2408292742980383166">"<xliff:g id="COUNT_0">%1$d</xliff:g>/<xliff:g id="COUNT_1">%2$d</xliff:g>文字使用"</string>
+    <!-- no translation found for draw_overlay_title (6471979783906996313) -->
+    <skip />
+    <!-- no translation found for draw_overlay (9078696044299199938) -->
+    <skip />
+    <!-- no translation found for system_alert_window_settings (1757821151143694951) -->
+    <skip />
+    <!-- no translation found for system_alert_window_apps_title (7005760279028569491) -->
+    <skip />
+    <!-- no translation found for system_alert_window_access_title (8540785753333972302) -->
+    <skip />
+    <!-- no translation found for permit_draw_overlay (4407872595405953839) -->
+    <skip />
+    <!-- no translation found for app_overlay_permission_preference (8355410276571387439) -->
+    <skip />
+    <!-- no translation found for allow_overlay_description (7895191337585827691) -->
+    <skip />
+    <!-- no translation found for keywords_system_alert_window (8579673659566564926) -->
+    <skip />
+    <!-- no translation found for overlay_settings (6210407163312167008) -->
+    <skip />
+    <!-- no translation found for system_alert_window_summary (4268867238063922290) -->
+    <skip />
+    <!-- no translation found for filter_overlay_apps (6965969283342557573) -->
+    <skip />
+    <!-- no translation found for system_alert_window_on (2939489395109048888) -->
+    <skip />
+    <!-- no translation found for system_alert_window_off (6189115687233061992) -->
+    <skip />
+    <!-- no translation found for write_settings (5056260857636128887) -->
+    <skip />
+    <!-- no translation found for keywords_write_settings (6415597272561105138) -->
+    <skip />
+    <!-- no translation found for write_settings_summary (6501614872574643980) -->
+    <skip />
+    <!-- no translation found for filter_write_settings_apps (5389151171779460004) -->
+    <skip />
+    <!-- no translation found for write_settings_title (6706688627484679737) -->
+    <skip />
+    <!-- no translation found for write_system_settings (3741717172510029969) -->
+    <skip />
+    <!-- no translation found for write_settings_preference (2198494932312730862) -->
+    <skip />
+    <!-- no translation found for permit_write_settings (5754070436853714432) -->
+    <skip />
+    <!-- no translation found for write_settings_description (5124206705845320852) -->
+    <skip />
+    <!-- no translation found for write_settings_on (8230580416068832239) -->
+    <skip />
+    <!-- no translation found for write_settings_off (5156104383386336233) -->
+    <skip />
 </resources>
