@@ -17,11 +17,19 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
                   android:title="@string/application_info_label">
 
-    <com.android.settings.DropDownPreference
-        android:key="app_location_setting"
+    <com.android.settings.applications.SpacePreference
+        android:layout_height="8dp" />
+
+    <Preference
+        android:key="storage_used"
         android:title="@string/storage_used"
         android:summary="@string/storage_type_internal"
-        android:selectable="true" />
+        android:selectable="false"
+        android:layout="@layout/horizontal_preference" />
+
+    <com.android.settings.applications.LayoutPreference
+        android:key="change_storage_button"
+        android:layout="@layout/single_button_panel" />
 
     <PreferenceCategory
         android:key="storage_category"
