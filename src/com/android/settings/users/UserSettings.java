@@ -706,8 +706,9 @@ public class UserSettings extends SettingsPreferenceFragment
         userPreferences.add(mMePreference);
 
         for (UserInfo user : users) {
-            if (user.isManagedProfile()) {
-                // Managed profiles appear under Accounts Settings instead
+            if (!user.supportsSwitchToByUser()) {
+                // Only users that can be switched to should show up here.
+                // e.g. Managed profiles appear under Accounts Settings instead
                 continue;
             }
             UserPreference pref;
