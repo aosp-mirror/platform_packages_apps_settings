@@ -113,6 +113,7 @@ public class TrustAgentSettings extends SettingsPreferenceFragment implements
 
             if (disabledByDevicePolicy
                     && mDpm.getTrustAgentConfiguration(null, agent.component) == null) {
+                preference.setChecked(false);
                 preference.setEnabled(false);
                 preference.setSummary(R.string.trust_agent_disabled_device_admin);
             }
