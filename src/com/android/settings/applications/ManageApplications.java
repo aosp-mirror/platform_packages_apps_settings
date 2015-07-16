@@ -66,6 +66,7 @@ import com.android.settings.Utils;
 import com.android.settings.applications.AppStateAppOpsBridge.PermissionState;
 import com.android.settings.applications.AppStateUsageBridge.UsageState;
 import com.android.settings.fuelgauge.HighPowerDetail;
+import com.android.settings.fuelgauge.PowerWhitelistBackend;
 import com.android.settings.notification.AppNotificationSettings;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.NotificationBackend.AppRow;
@@ -1011,6 +1012,15 @@ public class ManageApplications extends InstrumentedFragment
             return false;
         }
 
+        @Override
+        public boolean isEnabled(int position) {
+            if (mManageApplications.mListType != LIST_TYPE_HIGH_POWER) {
+                return true;
+            }
+            ApplicationsState.AppEntry entry = mEntries.get(position);
+            return !PowerWhitelistBackend.getInstance().isSysWhitelisted(entry.info.packageName);
+        }
+
         public View getView(int position, View convertView, ViewGroup parent) {
             // A ViewHolder keeps references to children views to avoid unnecessary calls
             // to findViewById() on each row.
@@ -1042,6 +1052,7 @@ public class ManageApplications extends InstrumentedFragment
             }
             mActive.remove(convertView);
             mActive.add(convertView);
+            convertView.setEnabled(isEnabled(position));
             return convertView;
         }
 
