@@ -22,8 +22,8 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.preference.Preference;
@@ -36,6 +36,7 @@ import android.util.Log;
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
+import com.android.settings.applications.AppStateAppOpsBridge.PermissionState;
 import com.android.settings.applications.AppStateOverlayBridge.OverlayState;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
@@ -99,7 +100,7 @@ public class DrawOverlayDetails extends AppInfoWithHeader implements OnPreferenc
                 try {
                     getActivity().startActivityAsUser(mSettingsIntent, new UserHandle(mUserId));
                 } catch (ActivityNotFoundException e) {
-                    Log.w(TAG, "Unable to launch app draw overlay settings " + mSettingsIntent, e);
+                    Log.w(LOG_TAG, "Unable to launch app draw overlay settings " + mSettingsIntent, e);
                 }
             }
             return true;
@@ -110,8 +111,8 @@ public class DrawOverlayDetails extends AppInfoWithHeader implements OnPreferenc
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (preference == mSwitchPref) {
-            if (mOverlayState != null && (Boolean) newValue != mOverlayState.isAllowed()) {
-                setCanDrawOverlay(!mOverlayState.isAllowed());
+            if (mOverlayState != null && (Boolean) newValue != mOverlayState.isPermissible()) {
+                setCanDrawOverlay(!mOverlayState.isPermissible());
                 refreshUi();
             }
             return true;
@@ -123,7 +124,6 @@ public class DrawOverlayDetails extends AppInfoWithHeader implements OnPreferenc
         mAppOpsManager.setMode(AppOpsManager.OP_SYSTEM_ALERT_WINDOW,
                 mPackageInfo.applicationInfo.uid, mPackageName, newState
                 ? AppOpsManager.MODE_ALLOWED : AppOpsManager.MODE_ERRORED);
-        canDrawOverlay(mPackageName);
     }
 
     private boolean canDrawOverlay(String pkgName) {
@@ -141,17 +141,10 @@ public class DrawOverlayDetails extends AppInfoWithHeader implements OnPreferenc
         mOverlayState = mOverlayBridge.getOverlayInfo(mPackageName,
                 mPackageInfo.applicationInfo.uid);
 
-        boolean isAllowed = mOverlayState.isAllowed();
+        boolean isAllowed = mOverlayState.isPermissible();
         mSwitchPref.setChecked(isAllowed);
         mOverlayPrefs.setEnabled(isAllowed);
-
-        ResolveInfo resolveInfo = mPm.resolveActivityAsUser(mSettingsIntent,
-                PackageManager.GET_META_DATA, mUserId);
-        if (resolveInfo == null) {
-            if (findPreference(KEY_APP_OPS_SETTINGS_PREFS) != null) {
-                getPreferenceScreen().removePreference(mOverlayPrefs);
-            }
-        }
+        getPreferenceScreen().removePreference(mOverlayPrefs);
 
         return true;
     }
@@ -167,40 +160,38 @@ public class DrawOverlayDetails extends AppInfoWithHeader implements OnPreferenc
     }
 
     public static CharSequence getSummary(Context context, AppEntry entry) {
+        if (entry.extraInfo != null) {
+            return getSummary(context, new OverlayState((PermissionState)entry.extraInfo));
+        }
+
+        // fallback if for whatever reason entry.extrainfo is null - the result
+        // may be less accurate
         return getSummary(context, entry.info.packageName);
+    }
+
+    public static CharSequence getSummary(Context context, OverlayState overlayState) {
+        return context.getString(overlayState.isPermissible() ?
+            R.string.system_alert_window_on : R.string.system_alert_window_off);
     }
 
     public static CharSequence getSummary(Context context, String pkg) {
         // first check if pkg is a system pkg
-        boolean isSystem = false;
         PackageManager packageManager = context.getPackageManager();
+        int uid = -1;
         try {
             ApplicationInfo appInfo = packageManager.getApplicationInfo(pkg, 0);
+            uid = appInfo.uid;
             if ((appInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
-                isSystem = true;
+                return context.getString(R.string.system_alert_window_on);
             }
         } catch (PackageManager.NameNotFoundException e) {
             // pkg doesn't even exist?
-            Log.w(TAG, "Package " + pkg + " not found", e);
+            Log.w(LOG_TAG, "Package " + pkg + " not found", e);
             return context.getString(R.string.system_alert_window_off);
         }
 
         AppOpsManager appOpsManager = (AppOpsManager) context.getSystemService(Context
                 .APP_OPS_SERVICE);
-        List<AppOpsManager.PackageOps> packageOps = appOpsManager.getPackagesForOps(
-                APP_OPS_OP_CODE);
-        if (packageOps == null) {
-            return context.getString(R.string.system_alert_window_off);
-        }
-
-        int uid = isSystem ? 0 : -1;
-        for (AppOpsManager.PackageOps packageOp : packageOps) {
-            if (pkg.equals(packageOp.getPackageName())) {
-                uid = packageOp.getUid();
-                break;
-            }
-        }
-
         if (uid == -1) {
             return context.getString(R.string.system_alert_window_off);
         }
