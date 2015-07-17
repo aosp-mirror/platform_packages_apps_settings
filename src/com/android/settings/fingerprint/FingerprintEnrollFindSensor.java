@@ -16,6 +16,7 @@
 
 package com.android.settings.fingerprint;
 
+import android.content.Context;
 import android.content.Intent;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
@@ -75,6 +76,14 @@ public class FingerprintEnrollFindSensor extends FingerprintEnrollBase {
             if (resultCode == RESULT_FINISHED) {
                 setResult(RESULT_FINISHED);
                 finish();
+            } else {
+                FingerprintManager fpm = getSystemService(FingerprintManager.class);
+                int enrolled = fpm.getEnrolledFingerprints().size();
+                int max = getResources().getInteger(
+                        com.android.internal.R.integer.config_fingerprintMaxTemplatesPerUser);
+                if (enrolled >= max) {
+                    finish();
+                }
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
