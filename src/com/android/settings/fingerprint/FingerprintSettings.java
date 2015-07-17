@@ -81,6 +81,7 @@ public class FingerprintSettings extends SubSettings {
      * result.
      */
     static final int RESULT_FINISHED = RESULT_FIRST_USER;
+    private static final long LOCKOUT_DURATION = 30000; // time we have to wait for fp to reset, ms
 
     @Override
     public Intent getIntent() {
@@ -129,7 +130,7 @@ public class FingerprintSettings extends SubSettings {
 
         private FingerprintManager mFingerprintManager;
         private CancellationSignal mFingerprintCancel;
-        private int mMaxFingerprintAttempts;
+        private boolean mInFingerprintLockout;
         private byte[] mToken;
         private boolean mLaunchedConfirm;
         private Drawable mHighlightDrawable;
@@ -185,32 +186,16 @@ public class FingerprintSettings extends SubSettings {
                     case MSG_FINGER_AUTH_SUCCESS:
                         mFingerprintCancel = null;
                         highlightFingerprintItem(msg.arg1);
-                        retryFingerprint(true);
+                        retryFingerprint();
                     break;
                     case MSG_FINGER_AUTH_FAIL:
-                        mFingerprintCancel = null;
-                        retryFingerprint(true);
+                        // No action required... fingerprint will allow up to 5 of these
                     break;
-                    case MSG_FINGER_AUTH_ERROR: {
-                        mFingerprintCancel = null;
-                        // get activity will be null on a screen rotation
-                        final Activity activity = getActivity();
-                        if (activity != null) {
-                            CharSequence errString = (CharSequence) msg.obj;
-                            Toast.makeText(activity, errString , Toast.LENGTH_SHORT);
-                        }
-                        final int errMsgId = msg.arg1;
-                        if (errMsgId != FingerprintManager.FINGERPRINT_ERROR_CANCELED) {
-                            retryFingerprint(false);
-                        }
-                    }
+                    case MSG_FINGER_AUTH_ERROR:
+                        handleError(msg.arg1 /* errMsgId */, (CharSequence) msg.obj /* errStr */ );
                     break;
                     case MSG_FINGER_AUTH_HELP: {
-                        final Activity activity = getActivity();
-                        if (activity != null) {
-                            CharSequence helpString = (CharSequence) msg.obj;
-                            Toast.makeText(activity, helpString , Toast.LENGTH_SHORT);
-                        }
+                        // Not used
                     }
                     break;
                 }
@@ -218,22 +203,45 @@ public class FingerprintSettings extends SubSettings {
         };
 
         private void stopFingerprint() {
-            if (mFingerprintCancel != null) {
+            if (mFingerprintCancel != null && !mFingerprintCancel.isCanceled()) {
                 mFingerprintCancel.cancel();
-                mFingerprintCancel = null;
             }
+            mFingerprintCancel = null;
         }
 
-        private void retryFingerprint(boolean resetAttempts) {
-            if (resetAttempts) {
-                mMaxFingerprintAttempts = 0;
+        /**
+         * @param errMsgId
+         */
+        protected void handleError(int errMsgId, CharSequence msg) {
+            mFingerprintCancel = null;
+            switch (errMsgId) {
+                case FingerprintManager.FINGERPRINT_ERROR_CANCELED:
+                    return; // Only happens if we get preempted by another activity. Ignored.
+                case FingerprintManager.FINGERPRINT_ERROR_LOCKOUT:
+                    mInFingerprintLockout = true;
+                    // We've been locked out.  Reset after 30s.
+                    if (!mHandler.hasCallbacks(mFingerprintLockoutReset)) {
+                        mHandler.postDelayed(mFingerprintLockoutReset,
+                                LOCKOUT_DURATION);
+                    }
+                    // Fall through to show message
+                default:
+                    // Activity can be null on a screen rotation.
+                    final Activity activity = getActivity();
+                    if (activity != null) {
+                        Toast.makeText(activity, msg , Toast.LENGTH_SHORT);
+                    }
+                break;
             }
-            if (mMaxFingerprintAttempts < MAX_RETRY_ATTEMPTS && mFingerprintCancel == null) {
+            retryFingerprint(); // start again
+        }
+
+        private void retryFingerprint() {
+            if (!mInFingerprintLockout) {
                 mFingerprintCancel = new CancellationSignal();
                 mFingerprintManager.authenticate(null, mFingerprintCancel, 0 /* flags */,
                         mAuthCallback, null);
             }
-            mMaxFingerprintAttempts++;
         }
 
         @Override
@@ -361,7 +369,7 @@ public class FingerprintSettings extends SubSettings {
 
         private void updatePreferences() {
             createPreferenceHierarchy();
-            retryFingerprint(true);
+            retryFingerprint();
         }
 
         @Override
@@ -507,6 +515,14 @@ public class FingerprintSettings extends SubSettings {
             mFingerprintManager.rename(fingerId, newName);
             updatePreferences();
         }
+
+        private final Runnable mFingerprintLockoutReset = new Runnable() {
+            @Override
+            public void run() {
+                mInFingerprintLockout = false;
+                retryFingerprint();
+            }
+        };
 
         public static class RenameDeleteDialog extends DialogFragment {
 
