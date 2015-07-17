@@ -25,25 +25,19 @@
         android:title="@string/zen_mode_alarms"
         android:enabled="false"
         android:defaultValue="true"
-        android:persistent="false"
-        android:switchTextOff=""
-        android:switchTextOn="" />
+        android:persistent="false"/>
 
     <!-- Reminders -->
     <SwitchPreference
         android:key="reminders"
         android:title="@string/zen_mode_reminders"
-        android:persistent="false"
-        android:switchTextOff=""
-        android:switchTextOn="" />
+        android:persistent="false"/>
 
     <!-- Events -->
     <SwitchPreference
         android:key="events"
         android:title="@string/zen_mode_events"
-        android:persistent="false"
-        android:switchTextOff=""
-        android:switchTextOn="" />
+        android:persistent="false"/>
 
     <!-- Messages -->
     <com.android.settings.DropDownPreference
@@ -61,8 +55,6 @@
     <SwitchPreference
         android:key="repeat_callers"
         android:title="@string/zen_mode_repeat_callers"
-        android:persistent="false"
-        android:switchTextOff=""
-        android:switchTextOn="" />
+        android:persistent="false"/>
 
 </PreferenceScreen>
