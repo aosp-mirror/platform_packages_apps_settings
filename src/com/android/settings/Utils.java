@@ -1130,8 +1130,9 @@ public final class Utils {
         }
         if (filters != null && filters.size() > 0) {
             for (IntentFilter filter : filters) {
-                if (filter.hasDataScheme(IntentFilter.SCHEME_HTTP) ||
-                        filter.hasDataScheme(IntentFilter.SCHEME_HTTPS)) {
+                if (filter.hasCategory(Intent.CATEGORY_BROWSABLE)
+                        && (filter.hasDataScheme(IntentFilter.SCHEME_HTTP) ||
+                                filter.hasDataScheme(IntentFilter.SCHEME_HTTPS))) {
                     result.addAll(filter.getHostsList());
                 }
             }
