@@ -1086,8 +1086,7 @@ public class ManageApplications extends InstrumentedFragment
                     break;
 
                 case LIST_TYPE_OVERLAY:
-                    holder.summary.setText(DrawOverlayDetails.getSummary(mContext,
-                            holder.entry));
+                    holder.summary.setText(DrawOverlayDetails.getSummary(mContext, holder.entry));
                     break;
 
                 case LIST_TYPE_WRITE_SETTINGS:

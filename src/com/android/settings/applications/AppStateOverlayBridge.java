@@ -59,15 +59,13 @@ public class AppStateOverlayBridge extends AppStateAppOpsBridge {
         return super.getNumPackagesAllowedByAppOps();
     }
 
-    public static class OverlayState {
-        PermissionState mPermissionState;
+    public static class OverlayState extends AppStateAppOpsBridge.PermissionState {
 
         public OverlayState(PermissionState permissionState) {
-            mPermissionState = permissionState;
-        }
-
-        public boolean isAllowed() {
-            return mPermissionState.isPermissible();
+            super(permissionState.packageName, permissionState.userHandle);
+            this.packageInfo = permissionState.packageInfo;
+            this.appOpMode = permissionState.appOpMode;
+            this.permissionDeclared = permissionState.permissionDeclared;
         }
     }
 
