@@ -87,8 +87,12 @@ public class EncryptionInterstitial extends SettingsActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            final int layoutId = R.layout.encryption_interstitial;
-            View view = inflater.inflate(layoutId, container, false);
+            return inflater.inflate(R.layout.encryption_interstitial, container, false);
+        }
+
+        @Override
+        public void onViewCreated(View view, Bundle savedInstanceState) {
+            super.onViewCreated(view, savedInstanceState);
             mRequirePasswordToDecryptButton =
                     (RadioButton) view.findViewById(R.id.encrypt_require_password);
             mDontRequirePasswordToDecryptButton =
@@ -135,7 +139,6 @@ public class EncryptionInterstitial extends SettingsActivity {
 
             setRequirePasswordState(getActivity().getIntent().getBooleanExtra(
                     EXTRA_REQUIRE_PASSWORD, true));
-            return view;
         }
 
         @Override
