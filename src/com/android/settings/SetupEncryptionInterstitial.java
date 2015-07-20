@@ -20,7 +20,6 @@ import com.android.setupwizardlib.SetupWizardLayout;
 import com.android.setupwizardlib.view.NavigationBar;
 
 import android.app.Activity;
-import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -77,8 +76,7 @@ public class SetupEncryptionInterstitial extends EncryptionInterstitial {
             layout.setIllustration(R.drawable.setup_illustration_lock_screen,
                     R.drawable.setup_illustration_horizontal_tile);
             layout.setBackgroundTile(R.drawable.setup_illustration_tile);
-            final int headerTextResource = getHeaderTextResource();
-            layout.setHeaderText(headerTextResource);
+            layout.setHeaderText(R.string.encryption_interstitial_header);
 
             View content = super.onCreateView(inflater, layout, savedInstanceState);
             layout.addView(content);
@@ -86,23 +84,10 @@ public class SetupEncryptionInterstitial extends EncryptionInterstitial {
 
             Activity activity = getActivity();
             if (activity != null) {
-                activity.setTitle(headerTextResource);
+                activity.setTitle(R.string.encryption_interstitial_header);
                 SetupWizardUtils.setImmersiveMode(activity);
             }
             return layout;
-        }
-
-        private int getHeaderTextResource() {
-            final int quality = getActivity().getIntent().getIntExtra(EXTRA_PASSWORD_QUALITY, 0);
-            switch (quality) {
-                case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
-                    return R.string.unlock_set_unlock_pattern_title;
-                case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
-                case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX:
-                    return R.string.unlock_set_unlock_pin_title;
-                default:
-                    return R.string.unlock_set_unlock_password_title;
-            }
         }
 
         @Override
