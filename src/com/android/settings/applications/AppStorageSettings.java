@@ -71,6 +71,7 @@ public class AppStorageSettings extends AppInfoWithHeader
 
     private static final String KEY_STORAGE_USED = "storage_used";
     private static final String KEY_CHANGE_STORAGE = "change_storage_button";
+    private static final String KEY_STORAGE_SPACE = "storage_space";
     private static final String KEY_STORAGE_CATEGORY = "storage_category";
 
     private static final String KEY_TOTAL_SIZE = "total_size";
@@ -182,7 +183,7 @@ public class AppStorageSettings extends AppInfoWithHeader
             } else {
                 showDialogInner(DLG_CLEAR_DATA, 0);
             }
-        } else if (v == mChangeStorageButton) {
+        } else if (v == mChangeStorageButton && mDialogBuilder != null) {
             mDialogBuilder.show();
         }
     }
@@ -350,6 +351,7 @@ public class AppStorageSettings extends AppInfoWithHeader
         } else {
             removePreference(KEY_STORAGE_USED);
             removePreference(KEY_CHANGE_STORAGE);
+            removePreference(KEY_STORAGE_SPACE);
         }
     }
 
