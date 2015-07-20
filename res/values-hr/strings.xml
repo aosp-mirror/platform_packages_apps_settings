@@ -580,8 +580,7 @@
     <string name="wifi_starting" msgid="6732377932749942954">"Uključivanje Wi-Fi-ja…"</string>
     <string name="wifi_stopping" msgid="8952524572499500804">"Isključivanje Wi-Fi-ja…"</string>
     <string name="wifi_error" msgid="3207971103917128179">"Pogreška"</string>
-    <!-- no translation found for wifi_sap_no_channel_error (3108445199311817111) -->
-    <skip />
+    <string name="wifi_sap_no_channel_error" msgid="3108445199311817111">"U ovoj zemlji nije dostupna frekvencija od 5 GHz"</string>
     <string name="wifi_in_airplane_mode" msgid="8652520421778203796">"U načinu rada u zrakoplovu"</string>
     <string name="wifi_notify_open_networks" msgid="3755768188029653293">"Mrežna obavijest"</string>
     <string name="wifi_notify_open_networks_summary" msgid="3716818008370391253">"Obavijesti uvijek kada je dostupna javna mreža"</string>
@@ -2289,7 +2288,7 @@
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"Nije postavljen"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1628116001964325544">"Nije postavljen – ograničeni profil"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="1659125858619760573">"Nije postavljen – radni profil"</string>
-    <string name="user_owner" msgid="3879126011135546571">"Vlasnik"</string>
+    <string name="user_admin" msgid="993402590002400782">"Administrator"</string>
     <string name="user_you" msgid="1639158809315025986">"Vi (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_nickname" msgid="5148818000228994488">"Nadimak"</string>
     <string name="user_add_user_type_title" msgid="2146438670792322349">"Dodavanje"</string>
@@ -2686,6 +2685,8 @@
     <string name="app_data_usage" msgid="7942375313697452803">"Upotreba podataka za apl."</string>
     <string name="data_summary_format" msgid="6213211533341068366">"<xliff:g id="SIZE">%1$s</xliff:g> potrošeno od <xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="storage_used" msgid="7128074132917008743">"Upotrijebljena pohrana"</string>
+    <string name="change" msgid="6657848623929839991">"Promijeni"</string>
+    <string name="change_storage" msgid="600475265207060436">"Promijeni pohranu"</string>
     <string name="notifications_label" msgid="2872668710589600731">"Obavijesti"</string>
     <string name="notifications_enabled" msgid="4386196629684749507">"Uobičajeno"</string>
     <string name="notifications_disabled" msgid="4326096527874762629">"Blokiranje"</string>
@@ -2833,54 +2834,33 @@
     <string name="app_list_preference_none" msgid="108006867520327904">"Ništa"</string>
     <string name="work_profile_usage_access_warning" msgid="8870622842216566692">"Isključivanje pristupa upotrebi za tu aplikaciju ne sprječava administratora da prati upotrebu podataka za aplikacije na vašem poslovnom profilu."</string>
     <string name="accessibility_lock_screen_progress" msgid="2408292742980383166">"Upotrijebljeno znakova: <xliff:g id="COUNT_0">%1$d</xliff:g> od <xliff:g id="COUNT_1">%2$d</xliff:g>"</string>
-    <!-- no translation found for draw_overlay_title (6471979783906996313) -->
+    <!-- no translation found for draw_overlay_title (4003905926278954971) -->
     <skip />
-    <!-- no translation found for draw_overlay (9078696044299199938) -->
+    <string name="draw_overlay" msgid="9078696044299199938">"Povlačenje preko drugih aplik."</string>
+    <string name="system_alert_window_settings" msgid="1757821151143694951">"Povlačenje preko drugih aplikacija"</string>
+    <string name="system_alert_window_apps_title" msgid="7005760279028569491">"Aplikacije"</string>
+    <!-- no translation found for system_alert_window_access_title (8811695381437304132) -->
     <skip />
-    <!-- no translation found for system_alert_window_settings (1757821151143694951) -->
+    <!-- no translation found for permit_draw_overlay (6606018549732046201) -->
     <skip />
-    <!-- no translation found for system_alert_window_apps_title (7005760279028569491) -->
+    <string name="app_overlay_permission_preference" msgid="8355410276571387439">"Dopuštenje za povlačenje aplikacije na vrh"</string>
+    <string name="allow_overlay_description" msgid="7895191337585827691">"To dopuštenje omogućuje aplikaciji da se prikazuje iznad drugih aplikacija koje upotrebljavate i može ometati upotrebu sučelja drugih aplikacija ili naizgled promijeniti sadržaj drugih aplikacija."</string>
+    <string name="keywords_system_alert_window" msgid="8579673659566564926">"povlačenje prozora upozorenja sustava iznad drugih aplikacija"</string>
+    <!-- no translation found for overlay_settings (222062091489691363) -->
     <skip />
-    <!-- no translation found for system_alert_window_access_title (8540785753333972302) -->
-    <skip />
-    <!-- no translation found for permit_draw_overlay (4407872595405953839) -->
-    <skip />
-    <!-- no translation found for app_overlay_permission_preference (8355410276571387439) -->
-    <skip />
-    <!-- no translation found for allow_overlay_description (7895191337585827691) -->
-    <skip />
-    <!-- no translation found for keywords_system_alert_window (8579673659566564926) -->
-    <skip />
-    <!-- no translation found for overlay_settings (6210407163312167008) -->
-    <skip />
-    <!-- no translation found for system_alert_window_summary (4268867238063922290) -->
-    <skip />
-    <!-- no translation found for filter_overlay_apps (6965969283342557573) -->
-    <skip />
-    <!-- no translation found for system_alert_window_on (2939489395109048888) -->
-    <skip />
-    <!-- no translation found for system_alert_window_off (6189115687233061992) -->
-    <skip />
-    <!-- no translation found for write_settings (5056260857636128887) -->
-    <skip />
-    <!-- no translation found for keywords_write_settings (6415597272561105138) -->
-    <skip />
-    <!-- no translation found for write_settings_summary (6501614872574643980) -->
-    <skip />
-    <!-- no translation found for filter_write_settings_apps (5389151171779460004) -->
-    <skip />
-    <!-- no translation found for write_settings_title (6706688627484679737) -->
-    <skip />
-    <!-- no translation found for write_system_settings (3741717172510029969) -->
-    <skip />
-    <!-- no translation found for write_settings_preference (2198494932312730862) -->
-    <skip />
-    <!-- no translation found for permit_write_settings (5754070436853714432) -->
-    <skip />
-    <!-- no translation found for write_settings_description (5124206705845320852) -->
-    <skip />
-    <!-- no translation found for write_settings_on (8230580416068832239) -->
-    <skip />
-    <!-- no translation found for write_settings_off (5156104383386336233) -->
-    <skip />
+    <string name="system_alert_window_summary" msgid="4268867238063922290">"Aplikacije koje se mogu povlačiti iznad drugih aplikacija: <xliff:g id="COUNT_0">%d</xliff:g>/<xliff:g id="COUNT_1">%d</xliff:g>"</string>
+    <string name="filter_overlay_apps" msgid="6965969283342557573">"Aplikacije s dopuštenjem"</string>
+    <string name="system_alert_window_on" msgid="2939489395109048888">"Da"</string>
+    <string name="system_alert_window_off" msgid="6189115687233061992">"Ne"</string>
+    <string name="write_settings" msgid="5056260857636128887">"Pisanje postavki sustava"</string>
+    <string name="keywords_write_settings" msgid="6415597272561105138">"pisanje izmjena postavki sustava"</string>
+    <string name="write_settings_summary" msgid="6501614872574643980">"Aplikacije koje mogu čitati ili pisati postavke sustava: <xliff:g id="COUNT_0">%d</xliff:g>/<xliff:g id="COUNT_1">%d</xliff:g>"</string>
+    <string name="filter_write_settings_apps" msgid="5389151171779460004">"Može pisati postavke sustava"</string>
+    <string name="write_settings_title" msgid="6706688627484679737">"Može pisati postavke sustava"</string>
+    <string name="write_system_settings" msgid="3741717172510029969">"Pisanje postavki sustava"</string>
+    <string name="write_settings_preference" msgid="2198494932312730862">"Dopuštenje aplik. za pisanje postavki sustava"</string>
+    <string name="permit_write_settings" msgid="5754070436853714432">"Dopusti pisanje postavki sustava"</string>
+    <string name="write_settings_description" msgid="5124206705845320852">"To dopuštenje omogućuje aplikaciji čitanje ili pisanje postavki sustava."</string>
+    <string name="write_settings_on" msgid="8230580416068832239">"Da"</string>
+    <string name="write_settings_off" msgid="5156104383386336233">"Ne"</string>
 </resources>

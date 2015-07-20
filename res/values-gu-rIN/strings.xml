@@ -572,8 +572,7 @@
     <string name="wifi_starting" msgid="6732377932749942954">"Wi-Fi ચાલુ કરી રહ્યું છે…"</string>
     <string name="wifi_stopping" msgid="8952524572499500804">"Wi‑Fi બંધ થઈ રહ્યું છે…"</string>
     <string name="wifi_error" msgid="3207971103917128179">"ભૂલ"</string>
-    <!-- no translation found for wifi_sap_no_channel_error (3108445199311817111) -->
-    <skip />
+    <string name="wifi_sap_no_channel_error" msgid="3108445199311817111">"આ દેશમાં 5 GHz બેન્ડ ઉપલબ્ધ નથી"</string>
     <string name="wifi_in_airplane_mode" msgid="8652520421778203796">"એરપ્લેન મોડમાં"</string>
     <string name="wifi_notify_open_networks" msgid="3755768188029653293">"નેટવર્ક સૂચના"</string>
     <string name="wifi_notify_open_networks_summary" msgid="3716818008370391253">"જ્યારે પણ જાહેર નેટવર્ક ઉપલબ્ધ હોય ત્યારે સૂચિત કરો"</string>
@@ -2282,7 +2281,7 @@
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"સેટ કરેલ નથી"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1628116001964325544">"સેટ કરેલ નથી - પ્રતિબંધિત પ્રોફાઇલ"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="1659125858619760573">"સેટ કરેલ નથી - કાર્ય પ્રોફાઇલ"</string>
-    <string name="user_owner" msgid="3879126011135546571">"માલિક"</string>
+    <string name="user_admin" msgid="993402590002400782">"એડમિન"</string>
     <string name="user_you" msgid="1639158809315025986">"તમે (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_nickname" msgid="5148818000228994488">"ઉપનામ"</string>
     <string name="user_add_user_type_title" msgid="2146438670792322349">"ઉમેરો"</string>
@@ -2676,6 +2675,8 @@
     <string name="app_data_usage" msgid="7942375313697452803">"એપ્લિકેશન ડેટા વપરાશ"</string>
     <string name="data_summary_format" msgid="6213211533341068366">"<xliff:g id="DATE">%2$s</xliff:g> થી <xliff:g id="SIZE">%1$s</xliff:g> ઉપયોગ કર્યો"</string>
     <string name="storage_used" msgid="7128074132917008743">"સંગ્રહ ઉપયોગમાં લેવાયો"</string>
+    <string name="change" msgid="6657848623929839991">"બદલો"</string>
+    <string name="change_storage" msgid="600475265207060436">"સ્ટોરેજ બદલો"</string>
     <string name="notifications_label" msgid="2872668710589600731">"સૂચનાઓ"</string>
     <string name="notifications_enabled" msgid="4386196629684749507">"સામાન્ય"</string>
     <string name="notifications_disabled" msgid="4326096527874762629">"અવરોધિત કરો"</string>
@@ -2817,54 +2818,33 @@
     <string name="app_list_preference_none" msgid="108006867520327904">"કોઈ નહીં"</string>
     <string name="work_profile_usage_access_warning" msgid="8870622842216566692">"આ એપ્લિકેશન માટે વપરાશ ઍક્સેસ બંધ કરી દેવું તમારા વ્યવસ્થાપકને તમારી કાર્ય પ્રોફાઇલમાં એપ્લિકેશનો માટે ડેટા વપરાશને ટ્રેક કરવાથી અટકકાવતું નથી."</string>
     <string name="accessibility_lock_screen_progress" msgid="2408292742980383166">"<xliff:g id="COUNT_1">%2$d</xliff:g> માંથી <xliff:g id="COUNT_0">%1$d</xliff:g> અક્ષરોનો ઉપયોગ કર્યો"</string>
-    <!-- no translation found for draw_overlay_title (6471979783906996313) -->
+    <!-- no translation found for draw_overlay_title (4003905926278954971) -->
     <skip />
-    <!-- no translation found for draw_overlay (9078696044299199938) -->
+    <string name="draw_overlay" msgid="9078696044299199938">"અન્ય એપ્લિકેશન્સ પર લઈ જાઓ"</string>
+    <string name="system_alert_window_settings" msgid="1757821151143694951">"અન્ય એપ્લિકેશન્સ પર લઈ જાઓ"</string>
+    <string name="system_alert_window_apps_title" msgid="7005760279028569491">"એપ્લિકેશન્સ"</string>
+    <!-- no translation found for system_alert_window_access_title (8811695381437304132) -->
     <skip />
-    <!-- no translation found for system_alert_window_settings (1757821151143694951) -->
+    <!-- no translation found for permit_draw_overlay (6606018549732046201) -->
     <skip />
-    <!-- no translation found for system_alert_window_apps_title (7005760279028569491) -->
+    <string name="app_overlay_permission_preference" msgid="8355410276571387439">"એપ્લિકેશન શીર્ષ પર લઈ જવાની પરવાનગી"</string>
+    <string name="allow_overlay_description" msgid="7895191337585827691">"આ પરવાનગી એપ્લિકેશનને તમે ઉપયોગ કરી રહ્યાં હોવ તેવી અન્ય એપ્લિકેશન્સની શીર્ષ પર પ્રદર્શિત થવાની મંજૂરી આપે છે અને અન્ય એપ્લિકેશન્સમાં ઇન્ટરફેસના તમારા ઉપયોગમાં દખલ કરી શકે છે અથવા અન્ય એપ્લિકેશન્સમાં તમે જે જોઇ રહ્યાં હોવાનું તમે માનો છો તે બદલી શકે છે."</string>
+    <string name="keywords_system_alert_window" msgid="8579673659566564926">"સિસ્ટમ ચેતવણી વિંડો સંવાદને અન્ય એપ્લિકેશન્સના શીર્ષ પર લઈ જાઓ"</string>
+    <!-- no translation found for overlay_settings (222062091489691363) -->
     <skip />
-    <!-- no translation found for system_alert_window_access_title (8540785753333972302) -->
-    <skip />
-    <!-- no translation found for permit_draw_overlay (4407872595405953839) -->
-    <skip />
-    <!-- no translation found for app_overlay_permission_preference (8355410276571387439) -->
-    <skip />
-    <!-- no translation found for allow_overlay_description (7895191337585827691) -->
-    <skip />
-    <!-- no translation found for keywords_system_alert_window (8579673659566564926) -->
-    <skip />
-    <!-- no translation found for overlay_settings (6210407163312167008) -->
-    <skip />
-    <!-- no translation found for system_alert_window_summary (4268867238063922290) -->
-    <skip />
-    <!-- no translation found for filter_overlay_apps (6965969283342557573) -->
-    <skip />
-    <!-- no translation found for system_alert_window_on (2939489395109048888) -->
-    <skip />
-    <!-- no translation found for system_alert_window_off (6189115687233061992) -->
-    <skip />
-    <!-- no translation found for write_settings (5056260857636128887) -->
-    <skip />
-    <!-- no translation found for keywords_write_settings (6415597272561105138) -->
-    <skip />
-    <!-- no translation found for write_settings_summary (6501614872574643980) -->
-    <skip />
-    <!-- no translation found for filter_write_settings_apps (5389151171779460004) -->
-    <skip />
-    <!-- no translation found for write_settings_title (6706688627484679737) -->
-    <skip />
-    <!-- no translation found for write_system_settings (3741717172510029969) -->
-    <skip />
-    <!-- no translation found for write_settings_preference (2198494932312730862) -->
-    <skip />
-    <!-- no translation found for permit_write_settings (5754070436853714432) -->
-    <skip />
-    <!-- no translation found for write_settings_description (5124206705845320852) -->
-    <skip />
-    <!-- no translation found for write_settings_on (8230580416068832239) -->
-    <skip />
-    <!-- no translation found for write_settings_off (5156104383386336233) -->
-    <skip />
+    <string name="system_alert_window_summary" msgid="4268867238063922290">"<xliff:g id="COUNT_1">%d</xliff:g> માંથી <xliff:g id="COUNT_0">%d</xliff:g> એપ્લિકેશન્સને અન્ય એપ્લિકેશન્સનાં શીર્ષ પર લઈ જવાની મંજૂરી આપી"</string>
+    <string name="filter_overlay_apps" msgid="6965969283342557573">"પરવાનગી સાથેની એપ્લિકેશન્સ"</string>
+    <string name="system_alert_window_on" msgid="2939489395109048888">"હા"</string>
+    <string name="system_alert_window_off" msgid="6189115687233061992">"નહીં"</string>
+    <string name="write_settings" msgid="5056260857636128887">"સિસ્ટમ સેટિંગ્સ લખો"</string>
+    <string name="keywords_write_settings" msgid="6415597272561105138">"સિસ્ટમ સેટિંગ્સ સંશોધિત કરો લખો"</string>
+    <string name="write_settings_summary" msgid="6501614872574643980">"<xliff:g id="COUNT_1">%d</xliff:g> માંથી <xliff:g id="COUNT_0">%d</xliff:g> એપ્લિકેશન્સને વાંચવાની અને લખવાની મંજૂરી આપી"</string>
+    <string name="filter_write_settings_apps" msgid="5389151171779460004">"સિસ્ટમ સેટિંગ્સ લખી શકે છે"</string>
+    <string name="write_settings_title" msgid="6706688627484679737">"સિસ્ટમ સેટિંગ્સ લખી શકે છે"</string>
+    <string name="write_system_settings" msgid="3741717172510029969">"સિસ્ટમ સેટિંગ્સ લખો"</string>
+    <string name="write_settings_preference" msgid="2198494932312730862">"એપ્લિકેશન સિસ્ટમ સેટિંગ્સ લખવાની પરવાનગી"</string>
+    <string name="permit_write_settings" msgid="5754070436853714432">"સિસ્ટમ સેટિંગ્સ લખવાની મંજૂરી આપો"</string>
+    <string name="write_settings_description" msgid="5124206705845320852">"આ પરવાનગી એપ્લિકેશનને સિસ્ટમ સેટિંગ્સ વાંચવાની અને લખવાની પરવાનગી આપે છે."</string>
+    <string name="write_settings_on" msgid="8230580416068832239">"હા"</string>
+    <string name="write_settings_off" msgid="5156104383386336233">"નહીં"</string>
 </resources>
