@@ -31,9 +31,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 import com.android.internal.logging.MetricsLogger;
+import com.android.settings.DropDownPreference;
+import com.android.settings.DropDownPreference.Callback;
 import com.android.settings.R;
 import com.android.settings.Utils;
 
+import static android.content.pm.PackageManager.INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_UNDEFINED;
+import static android.content.pm.PackageManager.INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_ASK;
 import static android.content.pm.PackageManager.INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_ALWAYS;
 import static android.content.pm.PackageManager.INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_NEVER;
 
@@ -43,14 +47,14 @@ public class AppLaunchSettings extends AppInfoWithHeader implements OnClickListe
         Preference.OnPreferenceChangeListener {
     private static final String TAG = "AppLaunchSettings";
 
-    private static final String KEY_OPEN_DOMAIN_URLS = "app_launch_open_domain_urls";
+    private static final String KEY_APP_LINK_STATE = "app_link_state";
     private static final String KEY_SUPPORTED_DOMAIN_URLS = "app_launch_supported_domain_urls";
     private static final String KEY_CLEAR_DEFAULTS = "app_launch_clear_defaults";
 
     private PackageManager mPm;
 
     private boolean mHasDomainUrls;
-    private SwitchPreference mOpenDomainUrls;
+    private DropDownPreference mAppLinkState;
     private AppDomainsPreference mAppDomainUrls;
     private ClearDefaultsPreference mClearDefaultsPreference;
 
@@ -61,9 +65,6 @@ public class AppLaunchSettings extends AppInfoWithHeader implements OnClickListe
         addPreferencesFromResource(R.xml.installed_app_launch_settings);
 
         mPm = getActivity().getPackageManager();
-
-        mOpenDomainUrls = (SwitchPreference) findPreference(KEY_OPEN_DOMAIN_URLS);
-        mOpenDomainUrls.setOnPreferenceChangeListener(this);
 
         mHasDomainUrls =
                 (mAppEntry.info.privateFlags & ApplicationInfo.PRIVATE_FLAG_HAS_DOMAIN_URLS) != 0;
@@ -78,20 +79,62 @@ public class AppLaunchSettings extends AppInfoWithHeader implements OnClickListe
 
         mClearDefaultsPreference = (ClearDefaultsPreference) findPreference(KEY_CLEAR_DEFAULTS);
 
-        updateDomainUrlPrefState();
+        buildStateDropDown();
     }
 
-    private void updateDomainUrlPrefState() {
-        mOpenDomainUrls.setEnabled(mHasDomainUrls);
+    private void buildStateDropDown() {
+        mAppLinkState = (DropDownPreference) findPreference(KEY_APP_LINK_STATE);
 
-        boolean checked = false;
+        // Designed order of states in the dropdown:
+        //
+        // * always
+        // * ask
+        // * never
+        mAppLinkState.addItem(R.string.app_link_open_always,
+                INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_ALWAYS);
+        mAppLinkState.addItem(R.string.app_link_open_ask,
+                INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_ASK);
+        mAppLinkState.addItem(R.string.app_link_open_never,
+                INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_NEVER);
+
+        mAppLinkState.setEnabled(mHasDomainUrls);
         if (mHasDomainUrls) {
-            final int status = mPm.getIntentVerificationStatus(mPackageName, UserHandle.myUserId());
-            if (status == INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_ALWAYS) {
-                checked = true;
-            }
+            // Present 'undefined' as 'ask' because the OS treats them identically for
+            // purposes of the UI (and does the right thing around pending domain
+            // verifications that might arrive after the user chooses 'ask' in this UI).
+            final int state = mPm.getIntentVerificationStatus(mPackageName, UserHandle.myUserId());
+            mAppLinkState.setSelectedValue(
+                    (state == INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_UNDEFINED)
+                        ? INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_ASK
+                        : state);
+
+            // Set the callback only after setting the initial selected item
+            mAppLinkState.setCallback(new Callback() {
+                @Override
+                public boolean onItemSelected(int pos, Object value) {
+                    return updateAppLinkState((Integer) value);
+                }
+            });
         }
-        mOpenDomainUrls.setChecked(checked);
+    }
+
+    private boolean updateAppLinkState(final int newState) {
+        final int userId = UserHandle.myUserId();
+        final int priorState = mPm.getIntentVerificationStatus(mPackageName, userId);
+
+        if (priorState == newState) {
+            return false;
+        }
+
+        boolean success = mPm.updateIntentVerificationStatus(mPackageName, newState, userId);
+        if (success) {
+            // Read back the state to see if the change worked
+            final int updatedState = mPm.getIntentVerificationStatus(mPackageName, userId);
+            success = (newState == updatedState);
+        } else {
+            Log.e(TAG, "Couldn't update intent verification status!");
+        }
+        return success;
     }
 
     private CharSequence[] getEntries(String packageName, List<IntentFilterVerificationInfo> iviList,
@@ -104,7 +147,6 @@ public class AppLaunchSettings extends AppInfoWithHeader implements OnClickListe
     protected boolean refreshUi() {
         mClearDefaultsPreference.setPackageName(mPackageName);
         mClearDefaultsPreference.setAppEntry(mAppEntry);
-        updateDomainUrlPrefState();
         return true;
     }
 
@@ -121,26 +163,8 @@ public class AppLaunchSettings extends AppInfoWithHeader implements OnClickListe
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        boolean ret = false;
-        final String key = preference.getKey();
-        if (KEY_OPEN_DOMAIN_URLS.equals(key)) {
-            final SwitchPreference pref = (SwitchPreference) preference;
-            final Boolean switchedOn = (Boolean) newValue;
-            int newState = switchedOn ?
-                    INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_ALWAYS :
-                    INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_NEVER;
-            final int userId = UserHandle.myUserId();
-            boolean success = mPm.updateIntentVerificationStatus(mPackageName, newState, userId);
-            if (success) {
-                // read back the state to ensure canonicality
-                newState = mPm.getIntentVerificationStatus(mPackageName, userId);
-                ret = (newState == INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_ALWAYS);
-                pref.setChecked(ret);
-            } else {
-                Log.e(TAG, "Couldn't update intent verification status!");
-            }
-        }
-        return ret;
+        // actual updates are handled by the app link dropdown callback
+        return true;
     }
 
     @Override

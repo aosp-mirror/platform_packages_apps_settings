@@ -20,18 +20,16 @@
     <PreferenceCategory android:key="app_launch_domain_links"
                         android:title="@string/app_launch_domain_links_title">
 
-        <SwitchPreference
-                android:key="app_launch_open_domain_urls"
-                android:title="@string/app_launch_open_domain_urls_title"
-                android:summary="@string/app_launch_open_domain_urls_summary"
-                />
-
+        <com.android.settings.DropDownPreference
+                android:key="app_link_state"
+                android:persistent="false"
+                android:title="@string/app_launch_open_domain_urls_title" />
 
         <com.android.settings.applications.AppDomainsPreference
                 android:key="app_launch_supported_domain_urls"
                 android:title="@string/app_launch_supported_domain_urls_title"
                 android:persistent="false"
-                android:dependency="app_launch_open_domain_urls"
+                android:dependency="app_link_state"
                 />
 
     </PreferenceCategory>
