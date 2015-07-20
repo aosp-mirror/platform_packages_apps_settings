@@ -572,8 +572,7 @@
     <string name="wifi_starting" msgid="6732377932749942954">"Ενεργοποίηση του Wi-Fi…"</string>
     <string name="wifi_stopping" msgid="8952524572499500804">"Απενεργοποίηση του Wi-Fi…"</string>
     <string name="wifi_error" msgid="3207971103917128179">"Σφάλμα"</string>
-    <!-- no translation found for wifi_sap_no_channel_error (3108445199311817111) -->
-    <skip />
+    <string name="wifi_sap_no_channel_error" msgid="3108445199311817111">"Η ζώνη 5 GHz δεν είναι διαθέσιμη σε αυτήν τη χώρα"</string>
     <string name="wifi_in_airplane_mode" msgid="8652520421778203796">"Σε λειτουργία πτήσης"</string>
     <string name="wifi_notify_open_networks" msgid="3755768188029653293">"Ειδοποίηση δικτύου"</string>
     <string name="wifi_notify_open_networks_summary" msgid="3716818008370391253">"Ειδοποίηση όποτε υπάρχει διαθέσιμο δημόσιο δίκτυο"</string>
@@ -2674,6 +2673,8 @@
     <string name="app_data_usage" msgid="7942375313697452803">"Χρήση δεδομένων εφαρμογής"</string>
     <string name="data_summary_format" msgid="6213211533341068366">"Χρήση <xliff:g id="SIZE">%1$s</xliff:g> από τις <xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="storage_used" msgid="7128074132917008743">"Αποθηκευτικός χώρος που χρησιμοποιείται"</string>
+    <string name="change" msgid="6657848623929839991">"Αλλαγή"</string>
+    <string name="change_storage" msgid="600475265207060436">"Αλλαγή χώρου αποθήκευσης"</string>
     <string name="notifications_label" msgid="2872668710589600731">"Ειδοποιήσεις"</string>
     <string name="notifications_enabled" msgid="4386196629684749507">"Κανονικό"</string>
     <string name="notifications_disabled" msgid="4326096527874762629">"Αποκλεισμός"</string>
@@ -2725,6 +2726,12 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> εφαρμογές μπορούν να ανοίξουν τους υποστηριζόμενους συνδέσμους τους</item>
       <item quantity="one">Μία εφαρμογή μπορεί να ανοίξει τους υποστηριζόμενους συνδέσμους της</item>
     </plurals>
+    <!-- no translation found for app_link_open_always (2474058700623948148) -->
+    <skip />
+    <!-- no translation found for app_link_open_ask (7800878430190575991) -->
+    <skip />
+    <!-- no translation found for app_link_open_never (3407647600352398543) -->
+    <skip />
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Δεν αναγνωρίστηκε"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"Προεπιλεγμένες εφαρμογές"</string>
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"Βοήθεια/φων/κές εντ."</string>
@@ -2815,54 +2822,29 @@
     <string name="app_list_preference_none" msgid="108006867520327904">"Κανένα"</string>
     <string name="work_profile_usage_access_warning" msgid="8870622842216566692">"Η απενεργοποίηση της πρόσβασης χρήσης γι\' αυτήν την εφαρμογή δεν αποτρέπει το διαχειριστή σας από το να παρακολουθεί τη χρήση δεδομένων για εφαρμογές του προφίλ σας εργασίας."</string>
     <string name="accessibility_lock_screen_progress" msgid="2408292742980383166">"Χρησιμοποιούνται <xliff:g id="COUNT_0">%1$d</xliff:g> από <xliff:g id="COUNT_1">%2$d</xliff:g> χαρακτήρες"</string>
-    <!-- no translation found for draw_overlay_title (6471979783906996313) -->
-    <skip />
-    <!-- no translation found for draw_overlay (9078696044299199938) -->
-    <skip />
-    <!-- no translation found for system_alert_window_settings (1757821151143694951) -->
-    <skip />
-    <!-- no translation found for system_alert_window_apps_title (7005760279028569491) -->
-    <skip />
-    <!-- no translation found for system_alert_window_access_title (8540785753333972302) -->
-    <skip />
-    <!-- no translation found for permit_draw_overlay (4407872595405953839) -->
-    <skip />
-    <!-- no translation found for app_overlay_permission_preference (8355410276571387439) -->
-    <skip />
-    <!-- no translation found for allow_overlay_description (7895191337585827691) -->
-    <skip />
-    <!-- no translation found for keywords_system_alert_window (8579673659566564926) -->
-    <skip />
-    <!-- no translation found for overlay_settings (6210407163312167008) -->
-    <skip />
-    <!-- no translation found for system_alert_window_summary (4268867238063922290) -->
-    <skip />
-    <!-- no translation found for filter_overlay_apps (6965969283342557573) -->
-    <skip />
-    <!-- no translation found for system_alert_window_on (2939489395109048888) -->
-    <skip />
-    <!-- no translation found for system_alert_window_off (6189115687233061992) -->
-    <skip />
-    <!-- no translation found for write_settings (5056260857636128887) -->
-    <skip />
-    <!-- no translation found for keywords_write_settings (6415597272561105138) -->
-    <skip />
-    <!-- no translation found for write_settings_summary (6501614872574643980) -->
-    <skip />
-    <!-- no translation found for filter_write_settings_apps (5389151171779460004) -->
-    <skip />
-    <!-- no translation found for write_settings_title (6706688627484679737) -->
-    <skip />
-    <!-- no translation found for write_system_settings (3741717172510029969) -->
-    <skip />
-    <!-- no translation found for write_settings_preference (2198494932312730862) -->
-    <skip />
-    <!-- no translation found for permit_write_settings (5754070436853714432) -->
-    <skip />
-    <!-- no translation found for write_settings_description (5124206705845320852) -->
-    <skip />
-    <!-- no translation found for write_settings_on (8230580416068832239) -->
-    <skip />
-    <!-- no translation found for write_settings_off (5156104383386336233) -->
-    <skip />
+    <string name="draw_overlay_title" msgid="4003905926278954971">"Εφαρμογές που σχεδιάζουν πάνω σε άλλες"</string>
+    <string name="draw_overlay" msgid="9078696044299199938">"Σχεδίαση πάνω από άλλες εφαρμογές"</string>
+    <string name="system_alert_window_settings" msgid="1757821151143694951">"Σχεδίαση πάνω από άλλες εφαρμογές"</string>
+    <string name="system_alert_window_apps_title" msgid="7005760279028569491">"Εφαρμογές"</string>
+    <string name="system_alert_window_access_title" msgid="8811695381437304132">"Σχεδίαση πάνω από άλλες εφαρμογές"</string>
+    <string name="permit_draw_overlay" msgid="6606018549732046201">"Να επιτρέπεται η σχεδίαση πάνω από εφαρμογές"</string>
+    <string name="app_overlay_permission_preference" msgid="8355410276571387439">"Άδεια σχεδίασης εφαρμογής από πάνω"</string>
+    <string name="allow_overlay_description" msgid="7895191337585827691">"Αυτή η άδεια επιτρέπει σε μια εφαρμογή να εμφανίζεται πάνω από άλλες εφαρμογές που χρησιμοποιείτε και μπορεί να επηρεάσει τη χρήση της διεπαφής σε άλλες εφαρμογές ή να αλλάξει αυτό που νομίζετε ότι βλέπετε σε άλλες εφαρμογές."</string>
+    <string name="keywords_system_alert_window" msgid="8579673659566564926">"σχεδίαση πλαισίου διαλόγου παράθυρου ειδοποίησης συστήματος πάνω από άλλες εφαρμογές"</string>
+    <string name="overlay_settings" msgid="222062091489691363">"Σχεδίαση πάνω από εφαρμογές"</string>
+    <string name="system_alert_window_summary" msgid="4268867238063922290">"<xliff:g id="COUNT_0">%d</xliff:g> από <xliff:g id="COUNT_1">%d</xliff:g> εφαρμογές επιτρέπεται να σχεδιάζουν πάνω από άλλες εφαρμογές"</string>
+    <string name="filter_overlay_apps" msgid="6965969283342557573">"Εφαρμογές με άδεια"</string>
+    <string name="system_alert_window_on" msgid="2939489395109048888">"Ναι"</string>
+    <string name="system_alert_window_off" msgid="6189115687233061992">"Όχι"</string>
+    <string name="write_settings" msgid="5056260857636128887">"Εγγραφή ρυθμίσεων συστήματος"</string>
+    <string name="keywords_write_settings" msgid="6415597272561105138">"εγγραφή ρυθμίσεων τροποποίησης συστήματος"</string>
+    <string name="write_settings_summary" msgid="6501614872574643980">"<xliff:g id="COUNT_0">%d</xliff:g>/<xliff:g id="COUNT_1">%d</xliff:g> εφαρμογές μπορούν να διαβάζουν/γράφουν ρυθμ. συστήματος"</string>
+    <string name="filter_write_settings_apps" msgid="5389151171779460004">"Μπορεί να γράψει ρυθμίσεις συστήματος"</string>
+    <string name="write_settings_title" msgid="6706688627484679737">"Μπορεί να γράψει ρυθμίσεις συστήματος"</string>
+    <string name="write_system_settings" msgid="3741717172510029969">"Εγγραφή ρυθμίσεων συστήματος"</string>
+    <string name="write_settings_preference" msgid="2198494932312730862">"Άδεια εφαρμογής εγγραφής ρυθμίσεων συστήματος"</string>
+    <string name="permit_write_settings" msgid="5754070436853714432">"Να επιτρέπονται οι ρυθμ. εγγραφής συστήματος"</string>
+    <string name="write_settings_description" msgid="5124206705845320852">"Αυτή η άδεια επιτρέπει σε μια εφαρμογή την ανάγνωση και την εγγραφή ρυθμίσεων συστήματος."</string>
+    <string name="write_settings_on" msgid="8230580416068832239">"Ναι"</string>
+    <string name="write_settings_off" msgid="5156104383386336233">"Όχι"</string>
 </resources>
