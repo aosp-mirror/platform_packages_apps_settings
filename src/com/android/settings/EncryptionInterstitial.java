@@ -95,24 +95,32 @@ public class EncryptionInterstitial extends SettingsActivity {
                     (RadioButton) view.findViewById(R.id.encrypt_dont_require_password);
             mEncryptionMessage =
                     (TextView) view.findViewById(R.id.encryption_message);
+            boolean forFingerprint = getActivity().getIntent().getBooleanExtra(
+                    ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, false);
             int quality = getActivity().getIntent().getIntExtra(EXTRA_PASSWORD_QUALITY, 0);
             final int msgId;
             final int enableId;
             final int disableId;
             switch (quality) {
                 case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
-                    msgId = R.string.encryption_interstitial_message_pattern;
+                    msgId = forFingerprint ?
+                            R.string.encryption_interstitial_message_pattern_for_fingerprint :
+                            R.string.encryption_interstitial_message_pattern;
                     enableId = R.string.encrypt_require_pattern;
                     disableId = R.string.encrypt_dont_require_pattern;
                     break;
                 case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
                 case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX:
-                    msgId = R.string.encryption_interstitial_message_pin;
+                    msgId = forFingerprint ?
+                            R.string.encryption_interstitial_message_pin_for_fingerprint :
+                            R.string.encryption_interstitial_message_pin;
                     enableId = R.string.encrypt_require_pin;
                     disableId = R.string.encrypt_dont_require_pin;
                     break;
                 default:
-                    msgId = R.string.encryption_interstitial_message_password;
+                    msgId = forFingerprint ?
+                            R.string.encryption_interstitial_message_password_for_fingerprint :
+                            R.string.encryption_interstitial_message_password;
                     enableId = R.string.encrypt_require_password;
                     disableId = R.string.encrypt_dont_require_password;
                     break;
