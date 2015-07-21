@@ -32,6 +32,7 @@ public final class ChooseLockSettingsHelper {
     public static final String EXTRA_KEY_HAS_CHALLENGE = "has_challenge";
     public static final String EXTRA_KEY_CHALLENGE = "challenge";
     public static final String EXTRA_KEY_CHALLENGE_TOKEN = "hw_auth_token";
+    public static final String EXTRA_KEY_FOR_FINGERPRINT = "for_fingerprint";
 
 
     private LockPatternUtils mLockPatternUtils;
