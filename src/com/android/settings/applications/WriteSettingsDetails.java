@@ -23,7 +23,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.preference.Preference;
@@ -36,6 +35,7 @@ import android.util.Log;
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
+import com.android.settings.applications.AppStateAppOpsBridge.PermissionState;
 import com.android.settings.applications.AppStateWriteSettingsBridge.WriteSettingsState;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
@@ -98,7 +98,7 @@ public class WriteSettingsDetails extends AppInfoWithHeader implements OnPrefere
                 try {
                     getActivity().startActivityAsUser(mSettingsIntent, new UserHandle(mUserId));
                 } catch (ActivityNotFoundException e) {
-                    Log.w(TAG, "Unable to launch write system settings " + mSettingsIntent, e);
+                    Log.w(LOG_TAG, "Unable to launch write system settings " + mSettingsIntent, e);
                 }
             }
             return true;
@@ -109,8 +109,9 @@ public class WriteSettingsDetails extends AppInfoWithHeader implements OnPrefere
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (preference == mSwitchPref) {
-            if (mWriteSettingsState != null && (Boolean) newValue != mWriteSettingsState.canWrite()) {
-                setCanWriteSettings(!mWriteSettingsState.canWrite());
+            if (mWriteSettingsState != null && (Boolean) newValue != mWriteSettingsState
+                    .isPermissible()) {
+                setCanWriteSettings(!mWriteSettingsState.isPermissible());
                 refreshUi();
             }
             return true;
@@ -122,7 +123,6 @@ public class WriteSettingsDetails extends AppInfoWithHeader implements OnPrefere
         mAppOpsManager.setMode(AppOpsManager.OP_WRITE_SETTINGS,
                 mPackageInfo.applicationInfo.uid, mPackageName, newState
                 ? AppOpsManager.MODE_ALLOWED : AppOpsManager.MODE_ERRORED);
-        canWriteSettings(mPackageName);
     }
 
     private boolean canWriteSettings(String pkgName) {
@@ -140,17 +140,10 @@ public class WriteSettingsDetails extends AppInfoWithHeader implements OnPrefere
         mWriteSettingsState = mAppBridge.getWriteSettingsInfo(mPackageName,
                 mPackageInfo.applicationInfo.uid);
 
-        boolean canWrite = mWriteSettingsState.canWrite();
+        boolean canWrite = mWriteSettingsState.isPermissible();
         mSwitchPref.setChecked(canWrite);
         mWriteSettingsPrefs.setEnabled(canWrite);
-
-        ResolveInfo resolveInfo = mPm.resolveActivityAsUser(mSettingsIntent,
-                PackageManager.GET_META_DATA, mUserId);
-        if (resolveInfo == null) {
-            if (findPreference(KEY_APP_OPS_SETTINGS_PREFS) != null) {
-                getPreferenceScreen().removePreference(mWriteSettingsPrefs);
-            }
-        }
+        getPreferenceScreen().removePreference(mWriteSettingsPrefs);
 
         return true;
     }
@@ -166,7 +159,18 @@ public class WriteSettingsDetails extends AppInfoWithHeader implements OnPrefere
     }
 
     public static CharSequence getSummary(Context context, AppEntry entry) {
+        if (entry.extraInfo != null) {
+            return getSummary(context, new WriteSettingsState((PermissionState)entry
+                    .extraInfo));
+        }
+
+        // fallback if entry.extrainfo is null - although this should not happen
         return getSummary(context, entry.info.packageName);
+    }
+
+    public static CharSequence getSummary(Context context, WriteSettingsState writeSettingsState) {
+        return context.getString(writeSettingsState.isPermissible() ? R.string.write_settings_on :
+                R.string.write_settings_off);
     }
 
     public static CharSequence getSummary(Context context, String pkg) {
@@ -180,8 +184,8 @@ public class WriteSettingsDetails extends AppInfoWithHeader implements OnPrefere
             }
         } catch (PackageManager.NameNotFoundException e) {
             // pkg doesn't even exist?
-            Log.w(TAG, "Package " + pkg + " not found", e);
-            return context.getString(R.string.system_alert_window_off);
+            Log.w(LOG_TAG, "Package " + pkg + " not found", e);
+            return context.getString(R.string.write_settings_off);
         }
 
         AppOpsManager appOpsManager = (AppOpsManager) context.getSystemService(Context
@@ -189,7 +193,7 @@ public class WriteSettingsDetails extends AppInfoWithHeader implements OnPrefere
         List<AppOpsManager.PackageOps> packageOps = appOpsManager.getPackagesForOps(
                 APP_OPS_OP_CODE);
         if (packageOps == null) {
-            return context.getString(R.string.system_alert_window_off);
+            return context.getString(R.string.write_settings_off);
         }
 
         int uid = isSystem ? 0 : -1;
@@ -201,7 +205,7 @@ public class WriteSettingsDetails extends AppInfoWithHeader implements OnPrefere
         }
 
         if (uid == -1) {
-            return context.getString(R.string.system_alert_window_off);
+            return context.getString(R.string.write_settings_off);
         }
 
         int mode = appOpsManager.noteOpNoThrow(AppOpsManager.OP_WRITE_SETTINGS, uid, pkg);
