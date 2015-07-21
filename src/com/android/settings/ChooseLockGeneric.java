@@ -97,6 +97,7 @@ public class ChooseLockGeneric extends SettingsActivity {
         private int mEncryptionRequestQuality;
         private boolean mEncryptionRequestDisabled;
         private boolean mRequirePassword;
+        private boolean mForFingerprint = false;
         private String mUserPassword;
         private LockPatternUtils mLockPatternUtils;
         private FingerprintManager mFingerprintManager;
@@ -140,6 +141,8 @@ public class ChooseLockGeneric extends SettingsActivity {
                     ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, false);
             mChallenge = getActivity().getIntent().getLongExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, 0);
+            mForFingerprint = getActivity().getIntent().getBooleanExtra(
+                    ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, false);
 
             if (savedInstanceState != null) {
                 mPasswordConfirmed = savedInstanceState.getBoolean(PASSWORD_CONFIRMED);
@@ -201,6 +204,8 @@ public class ChooseLockGeneric extends SettingsActivity {
                 final boolean accEn = AccessibilityManager.getInstance(context).isEnabled();
                 final boolean required = mLockPatternUtils.isCredentialRequiredToDecrypt(!accEn);
                 Intent intent = getEncryptionInterstitialIntent(context, quality, required);
+                intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT,
+                        mForFingerprint);
                 startActivityForResult(intent, ENABLE_ENCRYPTION_REQUEST);
             } else {
                 mRequirePassword = false; // device encryption not enabled or not device owner.
