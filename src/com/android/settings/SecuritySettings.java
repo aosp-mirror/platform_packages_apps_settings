@@ -791,6 +791,16 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 result.add(data);
             }
 
+            // Fingerprint
+            FingerprintManager fpm =
+                    (FingerprintManager) context.getSystemService(Context.FINGERPRINT_SERVICE);
+            if (fpm.isHardwareDetected()) {
+                data = new SearchIndexableRaw(context);
+                data.title = res.getString(R.string.security_settings_fingerprint_preference_title);
+                data.screenTitle = screenTitle;
+                result.add(data);
+            }
+
             // Credential storage
             final UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
 
