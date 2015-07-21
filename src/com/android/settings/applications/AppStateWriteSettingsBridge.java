@@ -60,15 +60,12 @@ public class AppStateWriteSettingsBridge extends AppStateAppOpsBridge {
         return super.getNumPackagesAllowedByAppOps();
     }
 
-    public static class WriteSettingsState {
-        PermissionState mPermissionState;
-
+    public static class WriteSettingsState extends AppStateAppOpsBridge.PermissionState {
         public WriteSettingsState(PermissionState permissionState) {
-            mPermissionState = permissionState;
-        }
-
-        public boolean canWrite() {
-            return mPermissionState.isPermissible();
+            super(permissionState.packageName, permissionState.userHandle);
+            this.packageInfo = permissionState.packageInfo;
+            this.appOpMode = permissionState.appOpMode;
+            this.permissionDeclared = permissionState.permissionDeclared;
         }
     }
 
