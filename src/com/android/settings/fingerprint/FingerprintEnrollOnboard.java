@@ -64,6 +64,7 @@ public class FingerprintEnrollOnboard extends FingerprintEnrollBase {
         intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.HIDE_DISABLED_PREFS, true);
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, true);
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, challenge);
+        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, true);
         startActivityForResult(intent, CHOOSE_LOCK_GENERIC_REQUEST);
     }
 
