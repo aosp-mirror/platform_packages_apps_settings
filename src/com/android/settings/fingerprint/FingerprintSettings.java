@@ -104,7 +104,7 @@ public class FingerprintSettings extends SubSettings {
     }
 
     public static class FingerprintSettingsFragment extends SettingsPreferenceFragment
-        implements OnPreferenceChangeListener, Indexable {
+        implements OnPreferenceChangeListener {
         private static final int MAX_RETRY_ATTEMPTS = 20;
         private static final int RESET_HIGHLIGHT_DELAY_MS = 500;
 
