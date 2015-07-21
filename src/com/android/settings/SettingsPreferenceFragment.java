@@ -83,6 +83,7 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
 
     private ViewGroup mPinnedHeaderFrameLayout;
     private FloatingActionButton mFloatingActionButton;
+    private ViewGroup mButtonBar;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -105,11 +106,16 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
         final View root = super.onCreateView(inflater, container, savedInstanceState);
         mPinnedHeaderFrameLayout = (ViewGroup) root.findViewById(R.id.pinned_header);
         mFloatingActionButton = (FloatingActionButton) root.findViewById(R.id.fab);
+        mButtonBar = (ViewGroup) root.findViewById(R.id.button_bar);
         return root;
     }
 
     public FloatingActionButton getFloatingActionButton() {
         return mFloatingActionButton;
+    }
+
+    public ViewGroup getButtonBar() {
+        return mButtonBar;
     }
 
     public View setPinnedHeaderView(int layoutResId) {
