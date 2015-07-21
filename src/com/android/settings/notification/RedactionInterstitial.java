@@ -60,7 +60,9 @@ public class RedactionInterstitial extends SettingsActivity {
                     .putExtra(EXTRA_PREFS_SHOW_BUTTON_BAR, true)
                     .putExtra(EXTRA_PREFS_SET_BACK_TEXT, (String) null)
                     .putExtra(EXTRA_PREFS_SET_NEXT_TEXT, ctx.getString(
-                            R.string.app_notifications_dialog_done));
+                            R.string.app_notifications_dialog_done))
+                    .putExtra(EXTRA_SHOW_FRAGMENT_TITLE_RESID,
+                            R.string.lock_screen_notifications_interstitial_title);
         }
     }
 
