@@ -552,7 +552,9 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             Bundle savedInstanceState) {
         IntentFilter filter = new IntentFilter();
         filter.addAction(UsbManager.ACTION_USB_STATE);
-        getActivity().registerReceiver(mUsbReceiver, filter);
+        if (getActivity().registerReceiver(mUsbReceiver, filter) == null) {
+            updateUsbConfigurationValues();
+        }
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
