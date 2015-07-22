@@ -71,8 +71,9 @@ public class PrivacySettings extends SettingsPreferenceFragment implements Index
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Don't allow any access if this is a secondary user
-        mEnabled = Process.myUserHandle().isOwner();
+        // Don't allow any access if this is not an admin user.
+        // TODO: backup/restore currently only works with owner user b/22760572
+        mEnabled = UserManager.get(getActivity()).isAdminUser();
         if (!mEnabled) {
             return;
         }

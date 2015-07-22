@@ -116,6 +116,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
     private DevicePolicyManager mDPM;
     private SubscriptionManager mSubscriptionManager;
+    private UserManager mUm;
 
     private ChooseLockSettingsHelper mChooseLockSettingsHelper;
     private LockPatternUtils mLockPatternUtils;
@@ -132,7 +133,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private DialogInterface mWarnInstallApps;
     private SwitchPreference mPowerButtonInstantlyLocks;
 
-    private boolean mIsPrimary;
+    private boolean mIsAdmin;
 
     private Intent mTrustAgentClickIntent;
     private Preference mOwnerInfoPref;
@@ -151,6 +152,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
         mLockPatternUtils = new LockPatternUtils(getActivity());
 
         mDPM = (DevicePolicyManager)getSystemService(Context.DEVICE_POLICY_SERVICE);
+
+        mUm = UserManager.get(getActivity());
 
         mChooseLockSettingsHelper = new ChooseLockSettingsHelper(getActivity());
 
@@ -207,7 +210,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
         addPreferencesFromResource(resid);
 
         // Add options for device encryption
-        mIsPrimary = MY_USER_ID == UserHandle.USER_OWNER;
+        mIsAdmin = mUm.isAdminUser();
 
         mOwnerInfoPref = findPreference(KEY_OWNER_INFO_SETTINGS);
         if (mOwnerInfoPref != null) {
@@ -220,7 +223,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
             });
         }
 
-        if (mIsPrimary) {
+        if (mIsAdmin) {
             if (LockPatternUtils.isDeviceEncryptionEnabled()) {
                 // The device is currently encrypted.
                 addPreferencesFromResource(R.xml.security_settings_encrypted);
@@ -268,7 +271,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
         CarrierConfigManager cfgMgr = (CarrierConfigManager)
                 getActivity().getSystemService(Context.CARRIER_CONFIG_SERVICE);
         PersistableBundle b = cfgMgr.getConfig();
-        if (!mIsPrimary || !isSimIccReady() ||
+        if (!mIsAdmin || !isSimIccReady() ||
                 b.getBoolean(CarrierConfigManager.KEY_HIDE_SIM_LOCK_SETTINGS_BOOL)) {
             root.removePreference(root.findPreference(KEY_SIM_LOCK));
         } else {
@@ -719,14 +722,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
     private static class SecuritySearchIndexProvider extends BaseSearchIndexProvider {
 
-        boolean mIsPrimary;
-
-        public SecuritySearchIndexProvider() {
-            super();
-
-            mIsPrimary = MY_USER_ID == UserHandle.USER_OWNER;
-        }
-
         @Override
         public List<SearchIndexableResource> getXmlResourcesToIndex(
                 Context context, boolean enabled) {
@@ -741,7 +736,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
             sir.xmlResId = resId;
             result.add(sir);
 
-            if (mIsPrimary) {
+            final UserManager um = UserManager.get(context);
+            if (um.isAdminUser()) {
                 DevicePolicyManager dpm = (DevicePolicyManager)
                         context.getSystemService(Context.DEVICE_POLICY_SERVICE);
 
@@ -781,8 +777,9 @@ public class SecuritySettings extends SettingsPreferenceFragment
             data.screenTitle = screenTitle;
             result.add(data);
 
-            if (!mIsPrimary) {
-                int resId = (UserManager.get(context).isLinkedUser()) ?
+            final UserManager um = UserManager.get(context);
+            if (!um.isAdminUser()) {
+                int resId = um.isLinkedUser() ?
                         R.string.profile_info_settings_title : R.string.user_info_settings_title;
 
                 data = new SearchIndexableRaw(context);
@@ -802,8 +799,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
             }
 
             // Credential storage
-            final UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
-
             if (!um.hasUserRestriction(UserManager.DISALLOW_CONFIG_CREDENTIALS)) {
                 KeyStore keyStore = KeyStore.getInstance();
 
@@ -839,16 +834,14 @@ public class SecuritySettings extends SettingsPreferenceFragment
             final List<String> keys = new ArrayList<String>();
 
             LockPatternUtils lockPatternUtils = new LockPatternUtils(context);
-            // Add options for lock/unlock screen
-            int resId = getResIdForLockUnlockScreen(context, lockPatternUtils);
 
             // Do not display SIM lock for devices without an Icc card
-            TelephonyManager tm = TelephonyManager.getDefault();
-            if (!mIsPrimary || !tm.hasIccCard()) {
+            final UserManager um = UserManager.get(context);
+            final TelephonyManager tm = TelephonyManager.from(context);
+            if (!um.isAdminUser() || !tm.hasIccCard()) {
                 keys.add(KEY_SIM_LOCK);
             }
 
-            final UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
             if (um.hasUserRestriction(UserManager.DISALLOW_CONFIG_CREDENTIALS)) {
                 keys.add(KEY_CREDENTIALS_MANAGER);
             }

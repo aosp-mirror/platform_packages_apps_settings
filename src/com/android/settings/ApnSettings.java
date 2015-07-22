@@ -175,7 +175,7 @@ public class ApnSettings extends SettingsPreferenceFragment implements
         }
 
         if (mUm.hasUserRestriction(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS)
-                || UserHandle.myUserId()!= UserHandle.USER_OWNER) {
+                || !mUm.isAdminUser()) {
             mUnavailable = true;
             setPreferenceScreen(new PreferenceScreen(getActivity(), null));
             return;

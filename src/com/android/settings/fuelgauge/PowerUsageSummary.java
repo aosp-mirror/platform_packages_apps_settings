@@ -201,7 +201,7 @@ public class PowerUsageSummary extends PowerUsageBase {
                         sipper.getUid() <= Process.LAST_SHARED_APPLICATION_GID) {
                     // This is a shared gid being used to do work on behalf of an app across all
                     // users. But we'll blame the power on the device OWNER.
-                    realUid = UserHandle.getUid(UserHandle.USER_OWNER,
+                    realUid = UserHandle.getUid(UserHandle.USER_SYSTEM,
                             UserHandle.getAppIdFromSharedAppGid(sipper.getUid()));
                 }
 

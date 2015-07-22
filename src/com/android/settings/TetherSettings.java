@@ -125,7 +125,7 @@ public class TetherSettings extends SettingsPreferenceFragment
         mUm = (UserManager) getSystemService(Context.USER_SERVICE);
 
         if (mUm.hasUserRestriction(UserManager.DISALLOW_CONFIG_TETHERING)
-                || UserHandle.myUserId() != UserHandle.USER_OWNER) {
+                || !mUm.isAdminUser()) {
             mUnavailable = true;
             setPreferenceScreen(new PreferenceScreen(getActivity(), null));
             return;
