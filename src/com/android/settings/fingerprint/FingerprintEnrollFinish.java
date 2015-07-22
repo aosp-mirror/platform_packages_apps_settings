@@ -55,6 +55,7 @@ public class FingerprintEnrollFinish extends FingerprintEnrollBase {
 
     @Override
     protected void onNextButtonClick() {
+        setResult(RESULT_FINISHED);
         finish();
     }
 
