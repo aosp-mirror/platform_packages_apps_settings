@@ -16,6 +16,7 @@
 
 package com.android.settings.deviceinfo;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -81,7 +82,8 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
 
         final Context context = getActivity();
 
-        mIsPermittedToAdopt = UserManager.get(context).isAdminUser();
+        mIsPermittedToAdopt = UserManager.get(context).isAdminUser()
+                && !ActivityManager.isUserAMonkey();
 
         mStorageManager = context.getSystemService(StorageManager.class);
 
