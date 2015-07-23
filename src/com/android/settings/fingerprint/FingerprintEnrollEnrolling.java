@@ -214,9 +214,9 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
 
     private void launchFinish(byte[] token) {
         Intent intent = getFinishIntent();
+        intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
         startActivity(intent);
-        setResult(RESULT_FINISHED);
         finish();
     }
 
