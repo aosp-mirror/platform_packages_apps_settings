@@ -163,7 +163,9 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
                     printWriter.flush();
                     args.putString(PowerUsageDetail.EXTRA_REPORT_CHECKIN_DETAILS,
                             result.toString());
-                    userId = UserHandle.getUserId(uid.getUid());
+                    if (uid.getUid() != 0) {
+                        userId = UserHandle.getUserId(uid.getUid());
+                    }
                 }
             }
             break;
@@ -438,11 +440,11 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
                     }
                 });
             } else {
-                removePreference(KEY_HIGH_POWER);
+                mControlsParent.removePreference(findPreference(KEY_HIGH_POWER));
             }
         } else {
             removePreference(KEY_TWO_BUTTONS);
-            removePreference(KEY_HIGH_POWER);
+            mControlsParent.removePreference(findPreference(KEY_HIGH_POWER));
         }
 
         refreshStats();
