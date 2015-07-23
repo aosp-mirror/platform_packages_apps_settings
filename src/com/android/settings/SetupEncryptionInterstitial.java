@@ -72,22 +72,24 @@ public class SetupEncryptionInterstitial extends EncryptionInterstitial {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            final SetupWizardLayout layout = new SetupWizardLayout(inflater.getContext());
-            layout.setIllustration(R.drawable.setup_illustration_lock_screen,
-                    R.drawable.setup_illustration_horizontal_tile);
-            layout.setBackgroundTile(R.drawable.setup_illustration_tile);
-            layout.setHeaderText(R.string.encryption_interstitial_header);
+            return inflater.inflate(R.layout.setup_encryption_interstitial, container, false);
+        }
 
-            View content = super.onCreateView(inflater, layout, savedInstanceState);
-            layout.addView(content);
-            layout.getNavigationBar().setNavigationBarListener(this);
+        @Override
+        public void onViewCreated(View view, Bundle savedInstanceState) {
+            super.onViewCreated(view, savedInstanceState);
+
+            final SetupWizardLayout layout =
+                    (SetupWizardLayout) view.findViewById(R.id.setup_wizard_layout);
+
+            final NavigationBar navigationBar = layout.getNavigationBar();
+            navigationBar.setNavigationBarListener(this);
 
             Activity activity = getActivity();
             if (activity != null) {
                 activity.setTitle(R.string.encryption_interstitial_header);
                 SetupWizardUtils.setImmersiveMode(activity);
             }
-            return layout;
         }
 
         @Override
