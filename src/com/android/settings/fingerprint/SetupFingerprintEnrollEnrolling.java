@@ -52,8 +52,7 @@ public class SetupFingerprintEnrollEnrolling extends FingerprintEnrollEnrolling
 
         final NavigationBar navigationBar = getNavigationBar();
         navigationBar.setNavigationBarListener(this);
-        // Enrolling screen auto-advances once the fingerprint is added
-        navigationBar.getNextButton().setEnabled(false);
+        navigationBar.getNextButton().setText(R.string.skip_label);
     }
 
     @Override
@@ -68,6 +67,7 @@ public class SetupFingerprintEnrollEnrolling extends FingerprintEnrollEnrolling
 
     @Override
     public void onNavigateNext() {
-        onNextButtonClick();
+        setResult(RESULT_SKIP);
+        finish();
     }
 }
