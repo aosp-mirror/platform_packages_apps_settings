@@ -237,11 +237,7 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
         mAirplaneModeEnabler = new AirplaneModeEnabler(activity, mAirplaneModePreference);
         mNfcEnabler = new NfcEnabler(activity, nfc, androidBeam);
 
-        if (ImsManager.isWfcEnabledByPlatform(activity)) {
-            mButtonWfc = (PreferenceScreen) findPreference(KEY_WFC_SETTINGS);
-        } else {
-            removePreference(KEY_WFC_SETTINGS);
-        }
+        mButtonWfc = (PreferenceScreen) findPreference(KEY_WFC_SETTINGS);
 
         // Remove NSD checkbox by default
         getPreferenceScreen().removePreference(nsd);
@@ -373,10 +369,15 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
             mNsdEnabler.resume();
         }
 
+        // update WFC setting
         final Context context = getActivity();
         if (ImsManager.isWfcEnabledByPlatform(context)) {
+            getPreferenceScreen().addPreference(mButtonWfc);
+
             mButtonWfc.setSummary(WifiCallingSettings.getWfcModeSummary(
                     context, ImsManager.getWfcMode(context)));
+        } else {
+            removePreference(KEY_WFC_SETTINGS);
         }
     }
 
