@@ -346,6 +346,8 @@ public class PowerUsageSummary extends PowerUsageBase {
         }
         stats.add(new BatterySipper(DrainType.APP,
                 new FakeUid(Process.FIRST_APPLICATION_UID), use));
+        stats.add(new BatterySipper(DrainType.APP,
+                new FakeUid(0), use));
 
         // Simulate dex2oat process.
         BatterySipper sipper = new BatterySipper(DrainType.APP,
