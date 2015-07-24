@@ -48,6 +48,12 @@ public class FingerprintEnrollBase extends Activity implements View.OnClickListe
      */
     protected static final int RESULT_FINISHED = RESULT_FIRST_USER;
 
+    /**
+     * Used by the enrolling screen during setup wizard to skip over setting up fingerprint, which
+     * will be useful if the user accidentally entered this flow.
+     */
+    protected static final int RESULT_SKIP = RESULT_FIRST_USER + 1;
+
     protected byte[] mToken;
 
     @Override

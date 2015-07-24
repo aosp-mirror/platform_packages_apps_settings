@@ -17,6 +17,7 @@
 package com.android.settings.fingerprint;
 
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.fingerprint.Fingerprint;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
@@ -62,7 +63,9 @@ public class FingerprintEnrollFinish extends FingerprintEnrollBase {
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.add_another_button) {
-            startActivity(getEnrollingIntent());
+            final Intent intent = getEnrollingIntent();
+            intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+            startActivity(intent);
             finish();
         }
         super.onClick(v);
