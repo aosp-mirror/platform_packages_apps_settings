@@ -357,6 +357,8 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Naudodami kontrolinį kodą galite atrakinti telefoną, be to, galite įgalioti pirkimo veiksmus ir programų prieigą. "<annotation id="url">"Sužinokite daugiau"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4504501581228672208">"Ekrano užrakto parinktis išjungta. Naudodami kontrolinį kodą vis tiek galite įgalioti pirkimo veiksmus ir programų prieigą. "<annotation id="url">"Sužinokite daugiau"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Patraukite pirštą, tada vėl palieskite jutiklį"</string>
+    <string name="setup_fingerprint_enroll_finish_message" msgid="4132164775128798343">"Kai rodoma ši piktograma, galite naudoti piršto atspaudą."</string>
+    <string name="setup_fingerprint_enroll_finish_secondary_message" msgid="3734962461534384882">"Jei norite keisti nustatymus, eikite į „Nustatymai“ &gt; „Sauga“ &gt; „Piršto atspaudas“."</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"Galite pridėti iki <xliff:g id="COUNT">%d</xliff:g> kontrol. kod."</string>
     <string name="confirm_fingerprint_icon_content_description" msgid="5255544532157079096">"Naudokite kontrolinį kodą, kad galėtumėte tęsti."</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Šifruotė"</string>
@@ -2534,8 +2536,7 @@
     <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"Slėpti delikatų pranešimo turinį"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Visiškai nerodyti pranešimų"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"Kaip norite matyti pranešimus, kai įrenginys bus užrakintas?"</string>
-    <!-- no translation found for lock_screen_notifications_interstitial_title (1416589393106326972) -->
-    <skip />
+    <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"Pranešimai"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"Programų pranešimai"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Kiti garsai"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Skambinimo skydelio tonai"</string>
@@ -2664,18 +2665,14 @@
     <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"Išlaikyti gulsčiąjį rodinį"</string>
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"Išlaikyti esamą orientaciją"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI informacija"</string>
-    <!-- no translation found for encryption_interstitial_header (468015813904595613) -->
-    <skip />
+    <string name="encryption_interstitial_header" msgid="468015813904595613">"Saugus paleidimas"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"Tęsti"</string>
     <string name="encryption_interstitial_message_pin" msgid="7164072567822375682">"Galite papildomai apsaugoti įrenginį reikalaudami PIN kodo prieš jį paleidžiant. Kol įrenginys nepaleistas, negalima gauti skambučių ar pranešimų, įskaitant įspėjimus. \n\nTai padeda apsaugoti prarastų arba pavogtų įrenginių duomenis."</string>
     <string name="encryption_interstitial_message_pattern" msgid="6747091924626566031">"Galite papildomai apsaugoti įrenginį reikalaudami atrakinimo piešinio prieš jį paleidžiant. Kol įrenginys nepaleistas, negalima gauti skambučių ar pranešimų, įskaitant įspėjimus. \n\nTai padeda apsaugoti prarastų arba pavogtų įrenginių duomenis."</string>
     <string name="encryption_interstitial_message_password" msgid="3462225324186045679">"Galite papildomai apsaugoti įrenginį reikalaudami slaptažodžio prieš jį paleidžiant. Kol įrenginys nepaleistas, negalima gauti skambučių ar pranešimų, įskaitant įspėjimus. \n\nTai padeda apsaugoti prarastų arba pavogtų įrenginių duomenis."</string>
-    <!-- no translation found for encryption_interstitial_message_pin_for_fingerprint (3775537118799831558) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_pattern_for_fingerprint (1105290967535237237) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_password_for_fingerprint (3512482682507378424) -->
-    <skip />
+    <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="3775537118799831558">"Galite ne tik atrakinti įrenginį piršto atspaudu, bet ir dar labiau jį apsaugoti reikalaudami įvesti PIN kodą prieš paleidžiant įrenginį. Kol įrenginys nepaleistas, juo negalima gauti skambučių ar pranešimų, įskaitant signalus.\n\nTaip apsaugomi prarastų ar pavogtų įrenginių duomenys."</string>
+    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="1105290967535237237">"Galite ne tik atrakinti įrenginį piršto atspaudu, bet ir dar labiau jį apsaugoti reikalaudami nupiešti atrakinimo piešinį prieš paleidžiant įrenginį. Kol įrenginys nepaleistas, juo negalima gauti skambučių ar pranešimų, įskaitant signalus.\n\nTaip apsaugomi prarastų ar pavogtų įrenginių duomenys."</string>
+    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="3512482682507378424">"Galite ne tik atrakinti įrenginį piršto atspaudu, bet ir dar labiau jį apsaugoti reikalaudami įvesti slaptažodį prieš paleidžiant įrenginį. Kol įrenginys nepaleistas, juo negalima gauti skambučių ar pranešimų, įskaitant signalus.\n\nTaip apsaugomi prarastų ar pavogtų įrenginių duomenys."</string>
     <string name="encrypt_require_pin" msgid="2063945047845243752">"Paleidžiant įrenginį reikalauti PIN kodo"</string>
     <string name="encrypt_require_pattern" msgid="6898479411004015810">"Paleidžiant įrenginį reikalauti atrakinimo piešinio"</string>
     <string name="encrypt_require_password" msgid="8770628366276570518">"Paleidžiant įrenginį reikalauti slaptažodžio"</string>
@@ -2767,12 +2764,9 @@
       <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> programos gali atidaryti palaikomas nuorodas</item>
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> programų gali atidaryti palaikomas nuorodas</item>
     </plurals>
-    <!-- no translation found for app_link_open_always (2474058700623948148) -->
-    <skip />
-    <!-- no translation found for app_link_open_ask (7800878430190575991) -->
-    <skip />
-    <!-- no translation found for app_link_open_never (3407647600352398543) -->
-    <skip />
+    <string name="app_link_open_always" msgid="2474058700623948148">"Atidaryti šią programą"</string>
+    <string name="app_link_open_ask" msgid="7800878430190575991">"Klausti kaskart"</string>
+    <string name="app_link_open_never" msgid="3407647600352398543">"Neatidaryti šios programos"</string>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Neatpažintas"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"Numatytosios programos"</string>
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"Pagalb. progr. ir įvest. balsu"</string>

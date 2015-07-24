@@ -353,6 +353,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"除了解锁手机之外，您还可以使用自己的指纹对购买交易和应用使用进行授权。"<annotation id="url">"了解详情"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4504501581228672208">"屏幕锁定选项已停用。您仍然可以使用自己的指纹对购买交易和应用使用进行授权。"<annotation id="url">"了解详情"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"移开手指，然后再次触摸传感器"</string>
+    <!-- no translation found for setup_fingerprint_enroll_finish_message (4132164775128798343) -->
+    <skip />
+    <!-- no translation found for setup_fingerprint_enroll_finish_secondary_message (3734962461534384882) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="1020927549936895822">"您最多可以添加 <xliff:g id="COUNT">%d</xliff:g> 个指纹"</string>
     <string name="confirm_fingerprint_icon_content_description" msgid="5255544532157079096">"请使用您的指纹以继续。"</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"加密"</string>
@@ -2516,8 +2520,7 @@
     <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"隐藏敏感通知内容"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"完全不显示通知"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"在设备锁定时，您希望通知如何显示？"</string>
-    <!-- no translation found for lock_screen_notifications_interstitial_title (1416589393106326972) -->
-    <skip />
+    <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"通知"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"应用通知"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"其他提示音"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"拨号键盘提示音"</string>
@@ -2640,18 +2643,14 @@
     <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"保持横向"</string>
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"保持当前方向"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI信息"</string>
-    <!-- no translation found for encryption_interstitial_header (468015813904595613) -->
-    <skip />
+    <string name="encryption_interstitial_header" msgid="468015813904595613">"安全启动"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"继续"</string>
     <string name="encryption_interstitial_message_pin" msgid="7164072567822375682">"您可以要求在设备启动前输入 PIN 码，为此设备提供进一步的保护。在启动前，该设备将无法接听电话、接收短信或通知（包括闹钟提醒）。\n\n这有助于保护丢失或被盗设备上的数据。"</string>
     <string name="encryption_interstitial_message_pattern" msgid="6747091924626566031">"您可以要求在设备启动前绘制解锁图案，为此设备提供进一步的保护。在启动前，该设备将无法接听电话、接收短信或通知（包括闹钟提醒）。\n\n这有助于保护丢失或被盗设备上的数据。"</string>
     <string name="encryption_interstitial_message_password" msgid="3462225324186045679">"您可以要求在设备启动前输入密码，为此设备提供进一步的保护。在启动前，该设备将无法接听电话、接收短信或通知（包括闹钟提醒）。\n\n这有助于保护丢失或被盗设备上的数据。"</string>
-    <!-- no translation found for encryption_interstitial_message_pin_for_fingerprint (3775537118799831558) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_pattern_for_fingerprint (1105290967535237237) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_password_for_fingerprint (3512482682507378424) -->
-    <skip />
+    <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="3775537118799831558">"除了使用指纹解锁设备外，您还可以设置设备在启动前要求用户输入 PIN 码，以进一步保护此设备。设备启动后，才可接听电话、接收消息或通知（包括闹钟）。\n\n这样便可在设备丢失或被盗后保护设备上的数据。"</string>
+    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="1105290967535237237">"除了使用指纹解锁设备外，您还可以设置设备在启动前要求用户绘制解锁图案，以进一步保护此设备。设备启动后，才可接听电话、接收消息或通知（包括闹钟）。\n\n这样便可在设备丢失或被盗后保护设备上的数据。"</string>
+    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="3512482682507378424">"除了使用指纹解锁设备外，您还可以设置设备在启动前要求用户输入密码，以进一步保护此设备。设备启动后，才可接听电话、接收消息或通知（包括闹钟）。\n\n这样便可在设备丢失或被盗后保护设备上的数据。"</string>
     <string name="encrypt_require_pin" msgid="2063945047845243752">"要求输入 PIN 码才能启动设备"</string>
     <string name="encrypt_require_pattern" msgid="6898479411004015810">"要求绘制图案才能启动设备"</string>
     <string name="encrypt_require_password" msgid="8770628366276570518">"要求输入密码才能启动设备"</string>
@@ -2735,12 +2734,9 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> 个应用可以打开支持的链接</item>
       <item quantity="one">1 个应用可以打开支持的链接</item>
     </plurals>
-    <!-- no translation found for app_link_open_always (2474058700623948148) -->
-    <skip />
-    <!-- no translation found for app_link_open_ask (7800878430190575991) -->
-    <skip />
-    <!-- no translation found for app_link_open_never (3407647600352398543) -->
-    <skip />
+    <string name="app_link_open_always" msgid="2474058700623948148">"在此应用中打开"</string>
+    <string name="app_link_open_ask" msgid="7800878430190575991">"每次都询问"</string>
+    <string name="app_link_open_never" msgid="3407647600352398543">"不要在此应用中打开"</string>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"无法识别"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"默认应用"</string>
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"辅助应用和语音输入"</string>

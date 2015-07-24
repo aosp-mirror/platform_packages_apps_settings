@@ -353,6 +353,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Освен за отключване на телефона си можете да използвате отпечатъка си и за упълномощаване на покупки и достъп до приложения. "<annotation id="url">"Научете повече"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4504501581228672208">"Опцията за заключване на екрана е деактивирана. Пак можете да използвате отпечатъка си за упълномощаване на покупки и достъп до приложения. "<annotation id="url">"Научете повече"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Вдигнете пръста, след което докоснете сензора отново"</string>
+    <!-- no translation found for setup_fingerprint_enroll_finish_message (4132164775128798343) -->
+    <skip />
+    <!-- no translation found for setup_fingerprint_enroll_finish_secondary_message (3734962461534384882) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="1020927549936895822">"Можете да добавите до <xliff:g id="COUNT">%d</xliff:g> отпечатъка"</string>
     <string name="confirm_fingerprint_icon_content_description" msgid="5255544532157079096">"Използвайте отпечатъка си, за да продължите."</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Шифроване"</string>
@@ -2516,8 +2520,7 @@
     <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"Скриване на деликатното съдържание в известията"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Известията въобще да не се показват"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"Как искате да се показват известията, когато устройството ви е заключено?"</string>
-    <!-- no translation found for lock_screen_notifications_interstitial_title (1416589393106326972) -->
-    <skip />
+    <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"Известия"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"Известия за прилож."</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Други звуци"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Тонове при набиране"</string>
@@ -2640,18 +2643,14 @@
     <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"Оставане в хоризонтален изглед"</string>
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"Оставане в текущата ориентация"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"Информация за IMEI"</string>
-    <!-- no translation found for encryption_interstitial_header (468015813904595613) -->
-    <skip />
+    <string name="encryption_interstitial_header" msgid="468015813904595613">"Надеждно стартиране"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"Напред"</string>
     <string name="encryption_interstitial_message_pin" msgid="7164072567822375682">"Можете да осигурите допълнителен защитен слой за това устройство, като зададете ПИН кодът ви да се изисква при стартиране. Преди въвеждането му няма да могат да се получават обаждания, съобщения или известия. Будилниците също няма да работят. \n\nФункцията помага за защита на данните на загубени или откраднати устройства."</string>
     <string name="encryption_interstitial_message_pattern" msgid="6747091924626566031">"Можете да осигурите допълнителен защитен слой за това устройство, като зададете фигурата ви да се изисква при стартиране. Преди въвеждането й няма да могат да се получават обаждания, съобщения или известия. Будилниците също няма да работят. \n\nФункцията помага за защита на данните на загубени или откраднати устройства."</string>
     <string name="encryption_interstitial_message_password" msgid="3462225324186045679">"Можете да осигурите допълнителен защитен слой за това устройство, като зададете паролата ви да се изисква при стартиране. Преди въвеждането й няма да могат да се получават обаждания, съобщения или известия. Будилниците също няма да работят. \n\nФункцията помага за защита на данните на загубени или откраднати устройства."</string>
-    <!-- no translation found for encryption_interstitial_message_pin_for_fingerprint (3775537118799831558) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_pattern_for_fingerprint (1105290967535237237) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_password_for_fingerprint (3512482682507378424) -->
-    <skip />
+    <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="3775537118799831558">"В допълнение към отключването посредством отпечатък можете да осигурите на устройството си втора защита, като изисквате ПИН код при стартиране. Преди въвеждането му няма да могат да се получават обаждания, съобщения или известия. Будилниците също няма да работят.\n\nТова помага за защита на данните на изгубени или откраднати устройства."</string>
+    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="1105290967535237237">"В допълнение към отключването посредством отпечатък можете да осигурите на устройството си втора защита, като изисквате фигура при стартиране. Преди въвеждането й няма да могат да се получават обаждания, съобщения или известия. Будилниците също няма да работят.\n\nТова помага за защита на данните на изгубени или откраднати устройства."</string>
+    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="3512482682507378424">"В допълнение към отключването посредством отпечатък можете да осигурите на устройството си втора защита, като изисквате парола при стартиране. Преди въвеждането й няма да могат да се получават обаждания, съобщения или известия. Будилниците също няма да работят.\n\nТова помага за защита на данните на изгубени или откраднати устройства."</string>
     <string name="encrypt_require_pin" msgid="2063945047845243752">"Да се изисква ПИН код за стартиране на устройството"</string>
     <string name="encrypt_require_pattern" msgid="6898479411004015810">"Да се изисква фигура за стартиране на устройството"</string>
     <string name="encrypt_require_password" msgid="8770628366276570518">"Да се изисква парола за стартиране на устройството"</string>
@@ -2735,12 +2734,9 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> приложения могат да отварят поддържани връзки</item>
       <item quantity="one">Едно приложение може да отваря поддържани връзки</item>
     </plurals>
-    <!-- no translation found for app_link_open_always (2474058700623948148) -->
-    <skip />
-    <!-- no translation found for app_link_open_ask (7800878430190575991) -->
-    <skip />
-    <!-- no translation found for app_link_open_never (3407647600352398543) -->
-    <skip />
+    <string name="app_link_open_always" msgid="2474058700623948148">"Отваряне в това приложение"</string>
+    <string name="app_link_open_ask" msgid="7800878430190575991">"Извеждане на запитване всеки път"</string>
+    <string name="app_link_open_never" msgid="3407647600352398543">"Без отваряне в това приложение"</string>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Не е разпознато"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"Приложения по подразбиране"</string>
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"Помощник и гласово въвеждане"</string>

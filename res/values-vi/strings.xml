@@ -353,6 +353,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Ngoài việc mở khóa điện thoại, bạn còn có thể sử dụng vân tay của mình để ủy quyền mua và truy cập ứng dụng. "<annotation id="url">"Tìm hiểu thêm"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4504501581228672208">"Tùy chọn khóa màn hình đã bị tắt. Bạn vẫn có thể sử dụng vân tay của mình để ủy quyền mua và truy cập ứng dụng. "<annotation id="url">"Tìm hiểu thêm"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Nhấc ngón tay, sau đó chạm lại vào cảm biến"</string>
+    <!-- no translation found for setup_fingerprint_enroll_finish_message (4132164775128798343) -->
+    <skip />
+    <!-- no translation found for setup_fingerprint_enroll_finish_secondary_message (3734962461534384882) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="1020927549936895822">"Bạn có thể thêm tối đa <xliff:g id="COUNT">%d</xliff:g> tệp tham chiếu"</string>
     <string name="confirm_fingerprint_icon_content_description" msgid="5255544532157079096">"Sử dụng dấu vân tay của bạn để tiếp tục."</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Mã hóa"</string>
@@ -2516,8 +2520,7 @@
     <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"Ẩn nội dung thông báo nhạy cảm"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Không hiển thị thông báo nào"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"Khi thiết bị của bạn bị khóa, bạn muốn thông báo hiển thị như thế nào?"</string>
-    <!-- no translation found for lock_screen_notifications_interstitial_title (1416589393106326972) -->
-    <skip />
+    <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"Thông báo"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"Thông báo ứng dụng"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Âm thanh khác"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Âm bàn phím số"</string>
@@ -2640,18 +2643,14 @@
     <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"Giữ nguyên chế độ xem ngang"</string>
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"Giữ nguyên hướng hiện tại"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"Thông tin IMEI"</string>
-    <!-- no translation found for encryption_interstitial_header (468015813904595613) -->
-    <skip />
+    <string name="encryption_interstitial_header" msgid="468015813904595613">"Khởi động an toàn"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"Tiếp tục"</string>
     <string name="encryption_interstitial_message_pin" msgid="7164072567822375682">"Bạn có thể bảo vệ thiết bị này hơn nữa bằng cách yêu cầu mã PIN của mình trước khi khởi động thiết bị. Thiết bị không thể nhận cuộc gọi, tin nhắn hoặc thông báo, bao gồm cả báo thức cho đến khi khởi động thiết bị. \n\nĐiều này giúp bảo vệ dữ liệu trên các thiết bị bị mất hoặc lấy cắp."</string>
     <string name="encryption_interstitial_message_pattern" msgid="6747091924626566031">"Bạn có thể bảo vệ thiết bị này hơn nữa bằng cách yêu cầu hình của mình trước khi khởi động thiết bị. Thiết bị không thể nhận cuộc gọi, tin nhắn hoặc thông báo, bao gồm cả báo thức cho đến khi khởi động thiết bị. \n\nĐiều này giúp bảo vệ dữ liệu trên các thiết bị bị mất hoặc lấy cắp."</string>
     <string name="encryption_interstitial_message_password" msgid="3462225324186045679">"Bạn có thể bảo vệ thiết bị này hơn nữa bằng cách yêu cầu mật khẩu của mình trước khi khởi động thiết bị. Thiết bị không thể nhận cuộc gọi, tin nhắn hoặc thông báo, bao gồm cả báo thức cho đến khi khởi động thiết bị. \n\nĐiều này giúp bảo vệ dữ liệu trên các thiết bị bị mất hoặc lấy cắp."</string>
-    <!-- no translation found for encryption_interstitial_message_pin_for_fingerprint (3775537118799831558) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_pattern_for_fingerprint (1105290967535237237) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_password_for_fingerprint (3512482682507378424) -->
-    <skip />
+    <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="3775537118799831558">"Ngoài việc sử dụng dấu vân tay của mình để mở khóa thiết bị, bạn có thể bảo vệ thiết bị này hơn nữa bằng cách yêu cầu mã PIN trước khi thiết bị khởi động. Thiết bị không thể nhận cuộc gọi, tin nhắn hoặc thông báo, bao gồm cả báo thức cho đến khi thiết bị khởi động.\n\nĐiều này giúp bảo vệ dữ liệu trên các thiết bị bị mất hoặc bị đánh cắp."</string>
+    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="1105290967535237237">"Ngoài việc sử dụng dấu vân tay của mình để mở khóa thiết bị, bạn có thể bảo vệ thiết bị này hơn nữa bằng cách yêu cầu hình mở khóa trước khi thiết bị khởi động. Thiết bị không thể nhận cuộc gọi, tin nhắn hoặc thông báo, bao gồm cả báo thức cho đến khi thiết bị khởi động.\n\nĐiều này giúp bảo vệ dữ liệu trên các thiết bị bị mất hoặc bị đánh cắp."</string>
+    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="3512482682507378424">"Ngoài việc sử dụng dấu vân tay của mình để mở khóa thiết bị, bạn có thể bảo vệ thiết bị này hơn nữa bằng cách yêu cầu mật khẩu trước khi thiết bị khởi động. Thiết bị sẽ không thể nhận cuộc gọi, tin nhắn hoặc thông báo, bao gồm cả báo thức cho đến khi thiết bị khởi động.\n\nĐiều này giúp bảo vệ dữ liệu trên các thiết bị bị mất hoặc bị đánh cắp."</string>
     <string name="encrypt_require_pin" msgid="2063945047845243752">"Yêu cầu mã PIN để khởi động thiết bị"</string>
     <string name="encrypt_require_pattern" msgid="6898479411004015810">"Yêu cầu hình để khởi động thiết bị"</string>
     <string name="encrypt_require_password" msgid="8770628366276570518">"Yêu cầu mật khẩu để khởi động thiết bị"</string>
@@ -2735,12 +2734,9 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> ứng dụng có thể mở các liên kết được hỗ trợ của mình</item>
       <item quantity="one">Một ứng dụng có thể mở các liên kết được hỗ trợ của mình</item>
     </plurals>
-    <!-- no translation found for app_link_open_always (2474058700623948148) -->
-    <skip />
-    <!-- no translation found for app_link_open_ask (7800878430190575991) -->
-    <skip />
-    <!-- no translation found for app_link_open_never (3407647600352398543) -->
-    <skip />
+    <string name="app_link_open_always" msgid="2474058700623948148">"Mở trong ứng dụng này"</string>
+    <string name="app_link_open_ask" msgid="7800878430190575991">"Luôn hỏi"</string>
+    <string name="app_link_open_never" msgid="3407647600352398543">"Không mở trong ứng dụng này"</string>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Không nhận dạng được"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"Ứng dụng mặc định"</string>
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"Trợ lý và nhập liệu"</string>

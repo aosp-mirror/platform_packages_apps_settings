@@ -361,6 +361,8 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"بالإضافة إلى إلغاء قفل هاتفك، يمكنك أيضًا استخدام بصمة إصبعك للسماح بعمليات الشراء والوصول إلى التطبيق. "<annotation id="url">"مزيد من المعلومات"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4504501581228672208">"خيار قفل الشاشة معطّل. ولا يزال بإمكانك استخدام بصمة إصبعك للسماح بعمليات الشراء والوصول إلى التطبيق. "<annotation id="url">"مزيد من المعلومات"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"ارفع الإصبع، ثم المس جهاز الاستشعار مرة أخرى"</string>
+    <string name="setup_fingerprint_enroll_finish_message" msgid="4132164775128798343">"عندما ترى هذا الرمز، يمكنك استخدام بصمة إصبعك."</string>
+    <string name="setup_fingerprint_enroll_finish_secondary_message" msgid="3734962461534384882">"‏لتغيير إعداداتك، انتقل إلى الإعدادات &gt; الأمان &gt; بصمة الإصبع."</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"يمكنك إضافة ما يصل إلى <xliff:g id="COUNT">%d</xliff:g> بصمات الإصبع"</string>
     <string name="confirm_fingerprint_icon_content_description" msgid="5255544532157079096">"يمكنك استخدام بصمة الإصبع للمتابعة."</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"التشفير"</string>
@@ -2552,8 +2554,7 @@
     <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"إخفاء المحتوى المهم للإشعارات"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"عدم عرض إشعارات على الإطلاق"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"ما الطريقة التي تريد عرض الإشعارات بها عندما يكون الجهاز مقفولاً؟"</string>
-    <!-- no translation found for lock_screen_notifications_interstitial_title (1416589393106326972) -->
-    <skip />
+    <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"الإشعارات"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"إشعارات التطبيقات"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"أصوات أخرى"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"نغمات لوحة الاتصال"</string>
@@ -2688,18 +2689,14 @@
     <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"الاحتفاظ بالعرض الأفقي"</string>
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"الاحتفاظ بالاتجاه الحالي"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"‏معلومات IMEI"</string>
-    <!-- no translation found for encryption_interstitial_header (468015813904595613) -->
-    <skip />
+    <string name="encryption_interstitial_header" msgid="468015813904595613">"تأمين بدء التشغيل"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"متابعة"</string>
     <string name="encryption_interstitial_message_pin" msgid="7164072567822375682">"يمكنك إضافة المزيد من الحماية إلى هذا الجهاز عن طريق اشتراط إدخال رقم التعريف الشخصي قبل بدء تشغيله. وإلى أن يتم بدء تشغيل الجهاز، لا يمكن للجهاز استقبال مكالمات أو رسائل أو إشعارات، بما في ذلك التنبيهات. \n\nويساعد هذا في حماية البيانات على الأجهزة  المفقودة أو المسروقة."</string>
     <string name="encryption_interstitial_message_pattern" msgid="6747091924626566031">"يمكنك إضافة المزيد من الحماية إلى هذا الجهاز عن طريق اشتراط إدخال النقش قبل بدء تشغيله. وإلى أن يتم بدء تشغيل الجهاز، لا يمكن للجهاز استقبال مكالمات أو رسائل أو إشعارات، بما في ذلك التنبيهات. \n\nويساعد هذا في حماية البيانات على الأجهزة  المفقودة أو المسروقة."</string>
     <string name="encryption_interstitial_message_password" msgid="3462225324186045679">"يمكنك إضافة المزيد من الحماية إلى هذا الجهاز عن طريق اشتراط إدخال كلمة المرور قبل بدء تشغيله. وإلى أن يتم بدء تشغيل الجهاز، لا يمكن للجهاز استقبال مكالمات أو رسائل أو إشعارات، بما في ذلك التنبيهات. \n\nويساعد هذا في حماية البيانات على الأجهزة  المفقودة أو المسروقة."</string>
-    <!-- no translation found for encryption_interstitial_message_pin_for_fingerprint (3775537118799831558) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_pattern_for_fingerprint (1105290967535237237) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_password_for_fingerprint (3512482682507378424) -->
-    <skip />
+    <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="3775537118799831558">"بالإضافة إلى استخدام بصمة إصبعك لإلغاء قفل الجهاز، يمكنك رفع مستوى حماية هذا الجهاز من خلال طلب إدخال رقم التعريف الشخصي قبل تشغيله. ويتعذر على الجهاز - إلى أن يتم تشغيله - استقبال المكالمات أو الرسائل أو الإشعارات بما في ذلك التنبيهات.\n\nيساعد هذا على حماية البيانات على الأجهزة المفقودة أو المسروقة."</string>
+    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="1105290967535237237">"بالإضافة إلى استخدام بصمة إصبعك لإلغاء قفل الجهاز، يمكنك رفع مستوى حماية هذا الجهاز من خلال طلب إدخال النمط قبل بدء تشغيله. ويتعذر على الجهاز - إلى أن يتم تشغيله - استقبال المكالمات أو الرسائل أو الإشعارات بما في ذلك التنبيهات.\n\nيساعد هذا على حماية البيانات على الأجهزة المفقودة أو المسروقة."</string>
+    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="3512482682507378424">"بالإضافة إلى استخدام بصمة إصبعك لإلغاء قفل الجهاز، يمكنك رفع مستوى حماية هذا الجهاز من خلال طلب إدخال كلمة المرور قبل بدء تشغيله. ويتعذر على الجهاز - إلى أن يتم تشغيله - استقبال المكالمات أو الرسائل أو الإشعارات بما في ذلك التنبيهات.\n\nيساعد هذا على حماية البيانات على الأجهزة المفقودة أو المسروقة."</string>
     <string name="encrypt_require_pin" msgid="2063945047845243752">"يلزم رقم التعريف الشخصي حتى يبدأ تشغيل الجهاز"</string>
     <string name="encrypt_require_pattern" msgid="6898479411004015810">"يلزم نمط حتى يبدأ تشغيل الجهاز"</string>
     <string name="encrypt_require_password" msgid="8770628366276570518">"يلزم كلمة المرور حتى يبدأ تشغيل الجهاز"</string>
@@ -2799,12 +2796,9 @@
       <item quantity="other">يمكن لعدد <xliff:g id="COUNT">%d</xliff:g> من التطبيقات فتح روابطها المتوافقة</item>
       <item quantity="one">يمكن لتطبيق واحد فتح روابطه المتوافقة</item>
     </plurals>
-    <!-- no translation found for app_link_open_always (2474058700623948148) -->
-    <skip />
-    <!-- no translation found for app_link_open_ask (7800878430190575991) -->
-    <skip />
-    <!-- no translation found for app_link_open_never (3407647600352398543) -->
-    <skip />
+    <string name="app_link_open_always" msgid="2474058700623948148">"فتح في هذا التطبيق"</string>
+    <string name="app_link_open_ask" msgid="7800878430190575991">"طرح السؤال كل مرة"</string>
+    <string name="app_link_open_never" msgid="3407647600352398543">"عدم الفتح في هذا التطبيق"</string>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"لم يتم التعرف عليها"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"التطبيقات الافتراضية"</string>
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"المساعد والإدخال الصوتي"</string>

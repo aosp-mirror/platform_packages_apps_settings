@@ -353,6 +353,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"지문 파일은 휴대전화의 잠금 해제뿐 아니라 구매 및 앱 액세스를 승인하는 데 사용할 수 있습니다. "<annotation id="url">"자세히 알아보기"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4504501581228672208">"화면 잠금 옵션을 사용하지 않도록 설정되었습니다. 그러나 지문 파일을 사용하여 구매 및 앱 액세스를 승인할 수 있습니다. "<annotation id="url">"자세히 알아보기"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"손가락을 들어 올린 후 센서를 다시 터치하세요."</string>
+    <!-- no translation found for setup_fingerprint_enroll_finish_message (4132164775128798343) -->
+    <skip />
+    <!-- no translation found for setup_fingerprint_enroll_finish_secondary_message (3734962461534384882) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="1020927549936895822">"지문을 <xliff:g id="COUNT">%d</xliff:g>개까지 추가할 수 있습니다."</string>
     <string name="confirm_fingerprint_icon_content_description" msgid="5255544532157079096">"계속하려면 지문을 사용하세요."</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"암호화"</string>
@@ -2516,8 +2520,7 @@
     <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"민감한 알림 내용 숨기기"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"알림 표시 안함"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"기기가 잠겨 있을 때 알림 표시 방법을 선택하세요."</string>
-    <!-- no translation found for lock_screen_notifications_interstitial_title (1416589393106326972) -->
-    <skip />
+    <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"알림"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"앱 알림"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"기타 소리"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"다이얼패드 신호음"</string>
@@ -2640,18 +2643,14 @@
     <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"가로 보기 유지"</string>
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"현재 방향 유지"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI 정보"</string>
-    <!-- no translation found for encryption_interstitial_header (468015813904595613) -->
-    <skip />
+    <string name="encryption_interstitial_header" msgid="468015813904595613">"안전한 시작"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"계속"</string>
     <string name="encryption_interstitial_message_pin" msgid="7164072567822375682">"기기를 시작할 때 PIN을 입력하도록 설정하면 기기를 보호할 수 있습니다. 기기가 시작되기 전까지 전화, 메시지 및 알람을 포함한 알림을 받을 수 없게 됩니다. \n\n이를 통해 분실 또는 도난된 기기에서 데이터를 보호할 수 있습니다."</string>
     <string name="encryption_interstitial_message_pattern" msgid="6747091924626566031">"기기를 시작할 때 패턴을 입력하도록 설정하면 기기를 보호할 수 있습니다. 기기가 시작되기 전까지 전화, 메시지 및 알람을 포함한 알림을 받을 수 없게 됩니다. \n\n이를 통해 분실 또는 도난된 기기에서 데이터를 보호할 수 있습니다."</string>
     <string name="encryption_interstitial_message_password" msgid="3462225324186045679">"기기를 시작할 때 비밀번호를 입력하도록 설정하면 기기를 보호할 수 있습니다. 기기가 시작되기 전까지 전화, 메시지 및 알람을 포함한 알림을 받을 수 없게 됩니다. \n\n이를 통해 분실 또는 도난된 기기에서 데이터를 보호할 수 있습니다."</string>
-    <!-- no translation found for encryption_interstitial_message_pin_for_fingerprint (3775537118799831558) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_pattern_for_fingerprint (1105290967535237237) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_password_for_fingerprint (3512482682507378424) -->
-    <skip />
+    <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="3775537118799831558">"기기의 잠금을 해제하는 데 지문을 사용하는 것뿐만 아니라 기기 시작 전에 PIN을 입력하도록 하여 보안 단계를 추가할 수 있습니다. 기기가 시작되기 전에는 전화, 메시지, 알림(예: 알람)을 받을 수 없습니다.\n\n분실 또는 도난당한 기기의 데이터를 보호하는 데 도움이 됩니다."</string>
+    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="1105290967535237237">"기기의 잠금을 해제하는 데 지문을 사용하는 것뿐만 아니라 기기 시작 전에 패턴을 입력하도록 하여 보안 단계를 추가할 수 있습니다. 기기가 시작되기 전에는 전화, 메시지, 알림(예: 알람)을 받을 수 없습니다.\n\n분실 또는 도난당한 기기의 데이터를 보호하는 데 도움이 됩니다."</string>
+    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="3512482682507378424">"기기의 잠금을 해제하는 데 지문을 사용하는 것뿐만 아니라 기기 시작 전에 비밀번호를 입력하도록 하여 보안 단계를 추가할 수 있습니다. 기기가 시작되기 전에는 전화, 메시지, 알림(예: 알람)을 받을 수 없습니다.\n\n분실 또는 도난당한 기기의 데이터를 보호하는 데 도움이 됩니다."</string>
     <string name="encrypt_require_pin" msgid="2063945047845243752">"기기 시작 시 PIN 요청"</string>
     <string name="encrypt_require_pattern" msgid="6898479411004015810">"기기 시작 시 패턴 요청"</string>
     <string name="encrypt_require_password" msgid="8770628366276570518">"기기 시작 시 비밀번호 요청"</string>
@@ -2735,12 +2734,9 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g>개 앱에서 지원되는 링크를 열 수 있습니다.</item>
       <item quantity="one">1개 앱에서 지원되는 링크를 열 수 있습니다.</item>
     </plurals>
-    <!-- no translation found for app_link_open_always (2474058700623948148) -->
-    <skip />
-    <!-- no translation found for app_link_open_ask (7800878430190575991) -->
-    <skip />
-    <!-- no translation found for app_link_open_never (3407647600352398543) -->
-    <skip />
+    <string name="app_link_open_always" msgid="2474058700623948148">"이 앱에서 열기"</string>
+    <string name="app_link_open_ask" msgid="7800878430190575991">"항상 확인"</string>
+    <string name="app_link_open_never" msgid="3407647600352398543">"이 앱에서 열지 않음"</string>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"인식할 수 없습니다."</string>
     <string name="default_apps_title" msgid="1854974637597514435">"기본 앱"</string>
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"지원 및 음성 입력"</string>

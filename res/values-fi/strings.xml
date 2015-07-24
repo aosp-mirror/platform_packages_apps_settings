@@ -353,6 +353,8 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Puhelimen lukituksen avaamisen lisäksi voit käyttää sormenjälkeä ostoksien ja sovelluksien käyttöoikeuksien vahvistamiseen. "<annotation id="url">"Lisätietoja"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4504501581228672208">"Näytön lukituksen avaaminen on poistettu käytöstä. Voit yhä käyttää sormenjälkeä ostoksien ja sovelluksien käyttöoikeuksien vahvistamiseen. "<annotation id="url">"Lisätietoja"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Nosta sormesi ja kosketa tunnistinta uudelleen."</string>
+    <string name="setup_fingerprint_enroll_finish_message" msgid="4132164775128798343">"Kun tämä kuvake on näkyvissä, voit käyttää sormenjälkeäsi."</string>
+    <string name="setup_fingerprint_enroll_finish_secondary_message" msgid="3734962461534384882">"Voit muuttaa asetuksia kohdassa Asetukset &gt; Turvallisuus &gt; Sormenjälki."</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"Voit lisätä korkeintaan <xliff:g id="COUNT">%d</xliff:g> sormenjälkeä"</string>
     <string name="confirm_fingerprint_icon_content_description" msgid="5255544532157079096">"Jatka sormenjäljen avulla."</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Salaus"</string>
@@ -2516,8 +2518,7 @@
     <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"Piilota henkilökohtainen ilmoitussisältö"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Älä näytä ilmoituksia lainkaan"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"Miten haluat ilmoitusten näkyvän, kun laite on lukittu?"</string>
-    <!-- no translation found for lock_screen_notifications_interstitial_title (1416589393106326972) -->
-    <skip />
+    <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"Ilmoitukset"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"Sovellusilmoitukset"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Muut äänet"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Näppäimistön näppäinäänet"</string>
@@ -2640,18 +2641,14 @@
     <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"Säilytä vaakanäkymä"</string>
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"Säilytä nykyinen suunta"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI-koodin tiedot"</string>
-    <!-- no translation found for encryption_interstitial_header (468015813904595613) -->
-    <skip />
+    <string name="encryption_interstitial_header" msgid="468015813904595613">"Turvallinen käynnistys"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"Jatka"</string>
     <string name="encryption_interstitial_message_pin" msgid="7164072567822375682">"Voit parantaa tämän laitteen suojausta vaatimalla PIN-koodin ennen käynnistystä. Ennen käynnistystä laite ei vastaanota puheluita, viestejä eikä ilmoituksia, mukaan lukien hälytykset. \n\nTämä auttaa suojaamaan kadonneen tai varastetun laitteen sisältämät tiedot."</string>
     <string name="encryption_interstitial_message_pattern" msgid="6747091924626566031">"Voit parantaa tämän laitteen suojausta vaatimalla kuvion ennen käynnistystä. Ennen käynnistystä laite ei vastaanota puheluita, viestejä eikä ilmoituksia, mukaan lukien hälytykset. \n\nTämä auttaa suojaamaan kadonneen tai varastetun laitteen sisältämät tiedot."</string>
     <string name="encryption_interstitial_message_password" msgid="3462225324186045679">"Voit parantaa tämän laitteen suojausta vaatimalla salasanan ennen käynnistystä. Ennen käynnistystä laite ei vastaanota puheluita, viestejä eikä ilmoituksia, mukaan lukien hälytykset. \n\nTämä auttaa suojaamaan kadonneen tai varastetun laitteen sisältämät tiedot."</string>
-    <!-- no translation found for encryption_interstitial_message_pin_for_fingerprint (3775537118799831558) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_pattern_for_fingerprint (1105290967535237237) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_password_for_fingerprint (3512482682507378424) -->
-    <skip />
+    <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="3775537118799831558">"Laitteen lukitus voidaan avata vain sormenjäljen avulla. Tämän lisäksi voit vielä parantaa laitteen suojausta edellyttämällä PIN-koodin ennen laitteen käynnistymistä. Ennen kuin laite käynnistyy, se ei voi vastaanottaa puheluita, viestejä tai ilmoituksia (myöskään herätykset eivät toimi). \n\nTämä auttaa suojaamaan kadotettujen tai varastettujen laitteiden tietoja."</string>
+    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="1105290967535237237">"Laitteen lukitus voidaan avata vain sormenjäljen avulla. Tämän lisäksi voit vielä parantaa laitteen suojausta edellyttämällä käyttäjää antamaan kuvion ennen laitteen käynnistymistä. Ennen kuin laite käynnistyy, se ei voi vastaanottaa puheluita, viestejä tai ilmoituksia (myöskään herätykset eivät toimi). \n\nTämä auttaa suojaamaan kadotettujen tai varastettujen laitteiden tietoja."</string>
+    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="3512482682507378424">"Laitteen lukitus voidaan avata vain sormenjäljen avulla. Tämän lisäksi voit vielä parantaa laitteen suojausta edellyttämällä salasanan ennen laitteen käynnistymistä. Ennen kuin laite käynnistyy, se ei voi vastaanottaa puheluita, viestejä tai ilmoituksia (myöskään herätykset eivät toimi). \n\nTämä auttaa suojaamaan kadotettujen tai varastettujen laitteiden tietoja."</string>
     <string name="encrypt_require_pin" msgid="2063945047845243752">"Vaadi PIN-koodi laitteen käynnistämiseksi"</string>
     <string name="encrypt_require_pattern" msgid="6898479411004015810">"Vaadi kuvio laitteen käynnistämiseksi"</string>
     <string name="encrypt_require_password" msgid="8770628366276570518">"Vaadi salasana laitteen käynnistämiseksi"</string>
@@ -2735,12 +2732,9 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> sovellusta voi avata tuetut linkkinsä.</item>
       <item quantity="one">Yksi sovellus voi avata tuetut linkkinsä.</item>
     </plurals>
-    <!-- no translation found for app_link_open_always (2474058700623948148) -->
-    <skip />
-    <!-- no translation found for app_link_open_ask (7800878430190575991) -->
-    <skip />
-    <!-- no translation found for app_link_open_never (3407647600352398543) -->
-    <skip />
+    <string name="app_link_open_always" msgid="2474058700623948148">"Avaa tässä sovelluksessa."</string>
+    <string name="app_link_open_ask" msgid="7800878430190575991">"Kysy aina."</string>
+    <string name="app_link_open_never" msgid="3407647600352398543">"Älä avaa tässä sovelluksessa."</string>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Ei tunnistettu"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"Oletussovellukset"</string>
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"Avustus ja äänisyöte"</string>

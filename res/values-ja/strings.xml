@@ -355,6 +355,8 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"スマートフォンのロック解除に加えて、指紋を使用して購入やアプリのアクセスを許可することもできます。"<annotation id="url">"詳細"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4504501581228672208">"画面ロックは無効になっていますが、指紋で購入やアプリのアクセスを許可できます。"<annotation id="url">"詳細"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"指を離してから、もう一度センサーに触れてください"</string>
+    <string name="setup_fingerprint_enroll_finish_message" msgid="4132164775128798343">"このアイコンが表示されているときは指紋を使用できます。"</string>
+    <string name="setup_fingerprint_enroll_finish_secondary_message" msgid="3734962461534384882">"設定を変更するには、[設定]&gt;[セキュリティ]&gt;[指紋]に移動します。"</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"最大で<xliff:g id="COUNT">%d</xliff:g>個の指紋を追加できます"</string>
     <string name="confirm_fingerprint_icon_content_description" msgid="5255544532157079096">"続行するには指紋を使用してください。"</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"暗号化"</string>
@@ -2522,8 +2524,7 @@
     <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"プライベートな通知内容を非表示にする"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"通知をすべて表示しない"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"端末がロックされている場合、通知をどのように表示しますか？"</string>
-    <!-- no translation found for lock_screen_notifications_interstitial_title (1416589393106326972) -->
-    <skip />
+    <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"通知"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"アプリの通知"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"その他の音"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"ダイヤルパッドの操作音"</string>
@@ -2646,18 +2647,14 @@
     <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"横向きのままにする"</string>
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"現在の向きを維持する"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI情報"</string>
-    <!-- no translation found for encryption_interstitial_header (468015813904595613) -->
-    <skip />
+    <string name="encryption_interstitial_header" msgid="468015813904595613">"起動の保護"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"次へ"</string>
     <string name="encryption_interstitial_message_pin" msgid="7164072567822375682">"この端末の起動前にPINを入力することでこの端末の保護を強化できます。端末が起動するまで、通話、メッセージ、アラームなどの通知を受信することはできません。\n\nこれにより、端末を紛失したり盗まれたりしても端末上のデータを保護することができます。"</string>
     <string name="encryption_interstitial_message_pattern" msgid="6747091924626566031">"この端末の起動前にパターンを入力することでこの端末の保護を強化できます。端末が起動するまで、通話、メッセージ、アラームなどの通知を受信することはできません。\n\nこれにより、端末を紛失したり盗まれたりしても端末上のデータを保護することができます。"</string>
     <string name="encryption_interstitial_message_password" msgid="3462225324186045679">"この端末の起動前にパスワードを入力することでこの端末の保護を強化できます。端末が起動するまで、通話、メッセージ、アラームなどの通知を受信することはできません。\n\nこれにより、端末を紛失したり盗まれたりしても端末上のデータを保護することができます。"</string>
-    <!-- no translation found for encryption_interstitial_message_pin_for_fingerprint (3775537118799831558) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_pattern_for_fingerprint (1105290967535237237) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_password_for_fingerprint (3512482682507378424) -->
-    <skip />
+    <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="3775537118799831558">"端末のロック解除に指紋を使うだけでなく、起動時にPINを入力することでこの端末の保護を強化できます。端末が起動するまで、通話、メッセージ、アラームなどの通知を受信することはできません。\n\nこれにより、端末を紛失したり盗まれたりしても端末上のデータを保護することができます。"</string>
+    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="1105290967535237237">"端末のロック解除に指紋を使うだけでなく、起動時にパターンを入力することでこの端末の保護を強化できます。端末が起動するまで、通話、メッセージ、アラームなどの通知を受信することはできません。\n\nこれにより、端末を紛失したり盗まれたりしても端末上のデータを保護することができます。"</string>
+    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="3512482682507378424">"端末のロック解除に指紋を使うだけでなく、起動時にパスワードを入力することでこの端末の保護を強化できます。端末が起動するまで、通話、メッセージ、アラームなどの通知を受信することはできません。\n\nこれにより、端末を紛失したり盗まれたりしても端末上のデータを保護することができます。"</string>
     <string name="encrypt_require_pin" msgid="2063945047845243752">"端末を起動するにはPINが必須とする"</string>
     <string name="encrypt_require_pattern" msgid="6898479411004015810">"端末を起動するにはパターンが必須とする"</string>
     <string name="encrypt_require_password" msgid="8770628366276570518">"端末を起動するにはパスワードが必須とする"</string>
@@ -2741,12 +2738,9 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g>個のアプリが対応リンクを開くことが可能</item>
       <item quantity="one">1個のアプリが対応リンクを開くことが可能</item>
     </plurals>
-    <!-- no translation found for app_link_open_always (2474058700623948148) -->
-    <skip />
-    <!-- no translation found for app_link_open_ask (7800878430190575991) -->
-    <skip />
-    <!-- no translation found for app_link_open_never (3407647600352398543) -->
-    <skip />
+    <string name="app_link_open_always" msgid="2474058700623948148">"このアプリで開く"</string>
+    <string name="app_link_open_ask" msgid="7800878430190575991">"その都度確認"</string>
+    <string name="app_link_open_never" msgid="3407647600352398543">"このアプリで開かない"</string>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"認識されませんでした"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"既定のアプリ"</string>
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"アシストと音声入力"</string>

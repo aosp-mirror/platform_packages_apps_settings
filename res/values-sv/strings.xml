@@ -353,6 +353,8 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Förutom att låsa upp mobilen kan du använda fingeravtrycket för att godkänna köp och åtkomst för appar. "<annotation id="url">"Läs mer"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4504501581228672208">"Skärmlåsalternativet är inte tillgängligt. Du kan fortfarande använda fingeravtrycket för att godkänna köp och åtkomst för appar. "<annotation id="url">"Läs mer"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Lyft fingret och tryck sedan på sensorn igen"</string>
+    <string name="setup_fingerprint_enroll_finish_message" msgid="4132164775128798343">"När du ser den här ikonen kan du använda ditt fingeravtryck."</string>
+    <string name="setup_fingerprint_enroll_finish_secondary_message" msgid="3734962461534384882">"Om du vill ändra inställningarna väljer du Inställningar &gt; Säkerhet &gt; Fingeravtryck."</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"Du kan lägga till upp till <xliff:g id="COUNT">%d</xliff:g> fingeravtryck"</string>
     <string name="confirm_fingerprint_icon_content_description" msgid="5255544532157079096">"Fortsätt med hjälp av ditt fingeravtryck."</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Kryptering"</string>
@@ -2516,8 +2518,7 @@
     <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"Dölj känsligt aviseringsinnehåll"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Visa inga aviseringar alls"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"Hur vill du att aviseringar visas när enheten är låst?"</string>
-    <!-- no translation found for lock_screen_notifications_interstitial_title (1416589393106326972) -->
-    <skip />
+    <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"Aviseringar"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"Appaviseringar"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Andra ljud"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Knappsatsljud"</string>
@@ -2640,18 +2641,14 @@
     <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"Fortsätt använda liggande riktning"</string>
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"Fortsätt använda aktuell riktning"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"Information om IMEI-kod"</string>
-    <!-- no translation found for encryption_interstitial_header (468015813904595613) -->
-    <skip />
+    <string name="encryption_interstitial_header" msgid="468015813904595613">"Säker start"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"Fortsätt"</string>
     <string name="encryption_interstitial_message_pin" msgid="7164072567822375682">"Du kan skydda enheten ytterligare genom att kräva att pinkoden ska anges innan den startar. Det går inte att ta emot samtal, meddelanden eller aviseringar, inklusive alarm, innan enheten har startats. \n\nDetta skyddar data i enheter som har kommit bort eller stulits."</string>
     <string name="encryption_interstitial_message_pattern" msgid="6747091924626566031">"Du kan skydda enheten ytterligare genom att kräva att det grafiska lösenordet ska anges innan den startar. Det går inte att ta emot samtal, meddelanden eller aviseringar, inklusive alarm, innan enheten har startats. \n\nDetta skyddar data i enheter som har kommit bort eller stulits."</string>
     <string name="encryption_interstitial_message_password" msgid="3462225324186045679">"Du kan skydda enheten ytterligare genom att kräva att lösenordet ska anges innan den startar. Det går inte att ta emot samtal, meddelanden eller aviseringar, inklusive alarm, innan enheten har startats. \n\nDetta skyddar data i enheter som har kommit bort eller stulits."</string>
-    <!-- no translation found for encryption_interstitial_message_pin_for_fingerprint (3775537118799831558) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_pattern_for_fingerprint (1105290967535237237) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_password_for_fingerprint (3512482682507378424) -->
-    <skip />
+    <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="3775537118799831558">"Förutom att låsa upp enheten med fingeravtryck kan du skydda den med en pinkod som måste anges vid start. Enheten kan inte ta emot samtal, meddelanden eller aviseringar (inklusive alarm) innan den har startat.\n\nDetta innebär ett extra skydd för data på en borttappad eller stulen enhet."</string>
+    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="1105290967535237237">"Förutom att låsa upp enheten med fingeravtryck kan du skydda den med ett grafiskt lösenord som måste anges vid start. Enheten kan inte ta emot samtal, meddelanden eller aviseringar (inklusive alarm) innan den har startat.\n\nDetta innebär ett extra skydd för data på en borttappad eller stulen enhet."</string>
+    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="3512482682507378424">"Förutom att låsa upp enheten med fingeravtryck kan du skydda den med ett lösenord som måste anges vid start. Enheten kan inte ta emot samtal, meddelanden eller aviseringar (inklusive alarm) innan den har startat.\n\nDetta innebär ett extra skydd för data på en borttappad eller stulen enhet."</string>
     <string name="encrypt_require_pin" msgid="2063945047845243752">"Kräv pinkod för att starta enheten"</string>
     <string name="encrypt_require_pattern" msgid="6898479411004015810">"Kräv grafiskt lösenord för att starta enheten"</string>
     <string name="encrypt_require_password" msgid="8770628366276570518">"Kräv lösenord för att starta enheten"</string>
@@ -2735,12 +2732,9 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> appar kan öppna länkar som stöds i apparna</item>
       <item quantity="one">En app kan öppna länkar som stöds i appen</item>
     </plurals>
-    <!-- no translation found for app_link_open_always (2474058700623948148) -->
-    <skip />
-    <!-- no translation found for app_link_open_ask (7800878430190575991) -->
-    <skip />
-    <!-- no translation found for app_link_open_never (3407647600352398543) -->
-    <skip />
+    <string name="app_link_open_always" msgid="2474058700623948148">"Öppna i den här appen"</string>
+    <string name="app_link_open_ask" msgid="7800878430190575991">"Fråga varje gång"</string>
+    <string name="app_link_open_never" msgid="3407647600352398543">"Öppna inte i den här appen"</string>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Identifierades inte"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"Standardappar"</string>
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"Assistent och röstinmatning"</string>

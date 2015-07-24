@@ -353,6 +353,8 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Ud over at bruge fingeraftryk til at låse telefonen op kan du også bruge fingeraftryk til at godkende køb og få adgang til apps. "<annotation id="url">"Få flere oplysninger"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4504501581228672208">"Skærmlåsfunktionen er deaktiveret. Du kan stadig bruge dit fingeraftryk til at godkende køb og få adgang til apps. "<annotation id="url">"Få flere oplysninger"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Løft fingeren, og tryk på sensoren igen"</string>
+    <string name="setup_fingerprint_enroll_finish_message" msgid="4132164775128798343">"Når du ser dette ikon, kan du bruge dit fingeraftryk."</string>
+    <string name="setup_fingerprint_enroll_finish_secondary_message" msgid="3734962461534384882">"Du kan ændre dine indstillinger ved at gå til Indstillinger &gt; Sikkerhed &gt; Fingeraftryk."</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"Du kan tilføje op til <xliff:g id="COUNT">%d</xliff:g> fingeraftryk"</string>
     <string name="confirm_fingerprint_icon_content_description" msgid="5255544532157079096">"Brug dit fingeraftryk for at få adgang."</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Kryptering"</string>
@@ -2516,8 +2518,7 @@
     <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"Skjul følsomt indhold i underretninger"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Vis slet ingen underretninger"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"Hvordan skal underretninger vises, når din enhed er låst?"</string>
-    <!-- no translation found for lock_screen_notifications_interstitial_title (1416589393106326972) -->
-    <skip />
+    <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"Underretninger"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"Appunderretninger"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Andre lyde"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Toner for numerisk tastatur"</string>
@@ -2640,18 +2641,14 @@
     <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"Behold landskabsvisning"</string>
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"Behold den aktuelle orientering"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI-oplysninger"</string>
-    <!-- no translation found for encryption_interstitial_header (468015813904595613) -->
-    <skip />
+    <string name="encryption_interstitial_header" msgid="468015813904595613">"Sikker opstart"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"Fortsæt"</string>
     <string name="encryption_interstitial_message_pin" msgid="7164072567822375682">"Du kan beskytte denne enhed yderligere ved at kræve din pinkode, før den starter. Enheden kan hverken modtage opkald, beskeder eller underretninger, herunder alarmer, før den er startet op. \n\nDette medvirker til at beskytte data på mistede eller stjålne enheder."</string>
     <string name="encryption_interstitial_message_pattern" msgid="6747091924626566031">"Du kan beskytte denne enhed yderligere ved at kræve dit mønster, før den starter. Enheden kan hverken modtage opkald, beskeder eller underretninger, herunder alarmer, før den er startet op. \n\nDette medvirker til at beskytte data på mistede eller stjålne enheder."</string>
     <string name="encryption_interstitial_message_password" msgid="3462225324186045679">"Du kan beskytte denne enhed yderligere ved at kræve adgangskode, før den starter. Enheden kan hverken modtage opkald, beskeder eller underretninger, herunder alarmer, før den er startet op. \n\nDette medvirker til at beskytte data på mistede eller stjålne enheder."</string>
-    <!-- no translation found for encryption_interstitial_message_pin_for_fingerprint (3775537118799831558) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_pattern_for_fingerprint (1105290967535237237) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_password_for_fingerprint (3512482682507378424) -->
-    <skip />
+    <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="3775537118799831558">"Ud over at beskytte din enhed ved at kræve fingeraftryk til oplåsning kan du beskytte den yderligere ved at kræve, at din pinkode indtastes før opstart. Enheden kan ikke modtage opkald, beskeder eller underretninger, herunder alarmer, før den er startet.\n\nDette hjælper med at beskytte data på enheder, du har mistet, eller som er blevet stjålet."</string>
+    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="1105290967535237237">"Ud over at beskytte din enhed ved at kræve fingeraftryk til oplåsning kan du beskytte den yderligere ved at kræve, at dit mønster angives før opstart. Enheden kan ikke modtage opkald, beskeder eller underretninger, herunder alarmer, før den er startet.\n\nDette hjælper med at beskytte data på enheder, du har mistet, eller som er blevet stjålet."</string>
+    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="3512482682507378424">"Ud over at beskytte din enhed ved at kræve fingeraftryk til oplåsning kan du beskytte den yderligere ved at kræve, at din adgangskode indtastes før opstart. Enheden kan ikke modtage opkald, beskeder eller underretninger, herunder alarmer, før den er startet.\n\nDette hjælper med at beskytte data på enheder, du har mistet, eller som er blevet stjålet."</string>
     <string name="encrypt_require_pin" msgid="2063945047845243752">"Kræv pinkode for at starte enheden"</string>
     <string name="encrypt_require_pattern" msgid="6898479411004015810">"Kræv mønster for at starte enheden"</string>
     <string name="encrypt_require_password" msgid="8770628366276570518">"Kræv adgangskode for at starte enheden"</string>
@@ -2735,12 +2732,9 @@
       <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> apps kan åbne deres understøttede links</item>
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> apps kan åbne deres understøttede links</item>
     </plurals>
-    <!-- no translation found for app_link_open_always (2474058700623948148) -->
-    <skip />
-    <!-- no translation found for app_link_open_ask (7800878430190575991) -->
-    <skip />
-    <!-- no translation found for app_link_open_never (3407647600352398543) -->
-    <skip />
+    <string name="app_link_open_always" msgid="2474058700623948148">"Åbn i denne app"</string>
+    <string name="app_link_open_ask" msgid="7800878430190575991">"Spørg hver gang"</string>
+    <string name="app_link_open_never" msgid="3407647600352398543">"Undlad at åbne i denne app"</string>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Kan ikke genkendes"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"Standardapps"</string>
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"Assistance og indtaling"</string>

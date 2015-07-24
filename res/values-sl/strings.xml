@@ -357,6 +357,8 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Prstni odtis lahko uporabljate za odklepanje zaslona ter potrjevanje nakupov in dostop do aplikacij. "<annotation id="url">"Več o tem"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4504501581228672208">"Možnost zaklepanja zaslona onemogočena. Prstni odtis lahko še vedno uporabljate za potrjevanje nakupov in dostop do aplikacij. "<annotation id="url">"Več o tem"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Dvignite prst in se znova dotaknite tipala"</string>
+    <string name="setup_fingerprint_enroll_finish_message" msgid="4132164775128798343">"Ko vidite to ikono, lahko uporabite prstni odtis."</string>
+    <string name="setup_fingerprint_enroll_finish_secondary_message" msgid="3734962461534384882">"Če želite spremeniti nastavitve, odprite »Nastavitve &gt; Varnost &gt; Prstni odtis«."</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"Dodate lahko do toliko prstnih odtisov: <xliff:g id="COUNT">%d</xliff:g>"</string>
     <string name="confirm_fingerprint_icon_content_description" msgid="5255544532157079096">"Uporabite prstni odtis, če želite nadaljevati."</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Šifriranje"</string>
@@ -2534,8 +2536,7 @@
     <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"Skrij občutljivo vsebino obvestil"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Ne prikazuj obvestil"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"Kako naj se obvestila prikazujejo, ko je naprava zaklenjena?"</string>
-    <!-- no translation found for lock_screen_notifications_interstitial_title (1416589393106326972) -->
-    <skip />
+    <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"Obvestila"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"Obvestila aplikacij"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Drugi zvoki"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Toni tipkovnice"</string>
@@ -2664,18 +2665,14 @@
     <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"Ohrani ležeči pogled"</string>
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"Ohrani trenutno postavitev"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"Podatki o IMEI"</string>
-    <!-- no translation found for encryption_interstitial_header (468015813904595613) -->
-    <skip />
+    <string name="encryption_interstitial_header" msgid="468015813904595613">"Varni zagon"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"Naprej"</string>
     <string name="encryption_interstitial_message_pin" msgid="7164072567822375682">"Napravo lahko še dodatno zaščitite, tako da je treba pred zagonom naprave vnesti kodo PIN. Dokler se naprava ne zažene, ne more prejemati klicev, sporočil ali obvestil, vključno z alarmi. \n\nTo pomaga pri zaščiti podatkov, če naprave izgubite ali jih ukradejo."</string>
     <string name="encryption_interstitial_message_pattern" msgid="6747091924626566031">"Napravo lahko še dodatno zaščitite, tako da je treba pred zagonom naprave vnesti vzorec. Dokler se naprava ne zažene, ne more prejemati klicev, sporočil ali obvestil, vključno z alarmi. \n\nTo pomaga pri zaščiti podatkov, če naprave izgubite ali jih ukradejo."</string>
     <string name="encryption_interstitial_message_password" msgid="3462225324186045679">"Napravo lahko še dodatno zaščitite, tako da je treba pred zagonom naprave vnesti geslo. Dokler se naprava ne zažene, ne more prejemati klicev, sporočil ali obvestil, vključno z alarmi. \n\nTo pomaga pri zaščiti podatkov, če naprave izgubite ali jih ukradejo."</string>
-    <!-- no translation found for encryption_interstitial_message_pin_for_fingerprint (3775537118799831558) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_pattern_for_fingerprint (1105290967535237237) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_password_for_fingerprint (3512482682507378424) -->
-    <skip />
+    <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="3775537118799831558">"Poleg tega, da napravo odklepate s prstnim odtisom, jo lahko dodatno zaščitite tako, da ob zagonu zahteva vašo kodo PIN. Dokler se naprava ne zažene, ne more prejemati klicev, sporočil ali obvestil, vključno z alarmi.\n\nTo je v pomoč pri zaščiti podatkov v izgubljenih ali ukradenih napravah."</string>
+    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="1105290967535237237">"Poleg tega, da napravo odklepate s prstnim odtisom, jo lahko dodatno zaščitite tako, da ob zagonu zahteva vaš vzorec. Dokler se naprava ne zažene, ne more prejemati klicev, sporočil ali obvestil, vključno z alarmi.\n\nTo je v pomoč pri zaščiti podatkov v izgubljenih ali ukradenih napravah."</string>
+    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="3512482682507378424">"Poleg tega, da napravo odklepate s prstnim odtisom, jo lahko dodatno zaščitite tako, da ob zagonu zahteva vaše geslo. Dokler se naprava ne zažene, ne more prejemati klicev, sporočil ali obvestil, vključno z alarmi.\n\nTo je v pomoč pri zaščiti podatkov v izgubljenih ali ukradenih napravah."</string>
     <string name="encrypt_require_pin" msgid="2063945047845243752">"Zahtevanje kode PIN za zagon naprave"</string>
     <string name="encrypt_require_pattern" msgid="6898479411004015810">"Zahtevanje vzorca za zagon naprave"</string>
     <string name="encrypt_require_password" msgid="8770628366276570518">"Zahtevanje gesla za zagon naprave"</string>
@@ -2767,12 +2764,9 @@
       <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> aplikacije lahko odprejo svoje podprte povezave</item>
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aplikacij lahko odpre svoje podprte povezave</item>
     </plurals>
-    <!-- no translation found for app_link_open_always (2474058700623948148) -->
-    <skip />
-    <!-- no translation found for app_link_open_ask (7800878430190575991) -->
-    <skip />
-    <!-- no translation found for app_link_open_never (3407647600352398543) -->
-    <skip />
+    <string name="app_link_open_always" msgid="2474058700623948148">"Odpri v tej aplikaciji"</string>
+    <string name="app_link_open_ask" msgid="7800878430190575991">"Vedno vprašaj"</string>
+    <string name="app_link_open_never" msgid="3407647600352398543">"Ne odpri v tej aplikaciji"</string>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Ni prepoznano"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"Privzete aplikacije"</string>
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"Pomoč in glasovni vnos"</string>
