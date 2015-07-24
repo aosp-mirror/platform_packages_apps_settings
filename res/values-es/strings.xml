@@ -2516,6 +2516,7 @@
     <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"Ocultar notificaciones sensibles"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"No mostrar notificaciones"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"¿Cómo quieres que se muestren las notificaciones cuando esté bloqueado el dispositivo?"</string>
+    <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"Notificaciones"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"Notificaciones de aplicaciones"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Otros sonidos"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Tonos del teclado"</string>
@@ -2638,11 +2639,14 @@
     <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"Mantener vista horizontal"</string>
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"Mantener orientación actual"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"Información del IMEI"</string>
-    <string name="encryption_interstitial_header" msgid="5790264941172726485">"Cifrado"</string>
+    <string name="encryption_interstitial_header" msgid="468015813904595613">"Inicio seguro"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"Continuar"</string>
     <string name="encryption_interstitial_message_pin" msgid="7164072567822375682">"Puedes solicitar el PIN del dispositivo antes de iniciarlo para aumentar la protección. Hasta que el dispositivo no se inicie, no podrá recibir llamadas, mensajes ni notificaciones, como alarmas. \n\nEsta opción ayuda a proteger los datos en dispositivos perdidos o robados."</string>
     <string name="encryption_interstitial_message_pattern" msgid="6747091924626566031">"Puedes solicitar el patrón del dispositivo antes de iniciarlo para aumentar la protección. Hasta que el dispositivo no se inicie, no podrá recibir llamadas, mensajes ni notificaciones, como alarmas. \n\nEsta opción ayuda a proteger los datos en dispositivos perdidos o robados."</string>
     <string name="encryption_interstitial_message_password" msgid="3462225324186045679">"Puedes solicitar la contraseña del dispositivo antes de iniciarlo para aumentar la protección. Hasta que el dispositivo no se inicie, no podrá recibir llamadas, mensajes ni notificaciones, como alarmas. \n\nEsta opción ayuda a proteger los datos en dispositivos perdidos o robados."</string>
+    <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="3775537118799831558">"Además de desbloquear este dispositivo con tu huella dactilar, puedes protegerlo aún más haciendo que sea necesario introducir un PIN cuando se inicia. Hasta que el dispositivo se inicie, no podrá recibir llamadas, mensajes ni notificaciones, y tampoco sonarán las alarmas.\n\nEsto te permitirá proteger los datos del dispositivo en caso de pérdida o robo."</string>
+    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="1105290967535237237">"Además de desbloquear este dispositivo con tu huella dactilar, puedes protegerlo aún más haciendo que sea necesario introducir un patrón cuando se inicia. Hasta que el dispositivo se inicie, no podrá recibir llamadas, mensajes ni notificaciones, y tampoco sonarán las alarmas.\n\nEsto te permitirá proteger los datos del dispositivo en caso de pérdida o robo."</string>
+    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="3512482682507378424">"Además de desbloquear este dispositivo con tu huella digital, puedes protegerlo aún más haciendo que sea necesario introducir una contraseña cuando se inicia. Hasta que el dispositivo se inicie, no podrá recibir llamadas, mensajes ni notificaciones, y tampoco sonarán las alarmas.\n\nEsto te permitirá proteger los datos del dispositivo en caso de pérdida o robo."</string>
     <string name="encrypt_require_pin" msgid="2063945047845243752">"Requerir PIN para iniciar dispositivo"</string>
     <string name="encrypt_require_pattern" msgid="6898479411004015810">"Requerir patrón para iniciar dispositivo"</string>
     <string name="encrypt_require_password" msgid="8770628366276570518">"Requerir contraseña para iniciar dispositivo"</string>
@@ -2726,12 +2730,9 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aplicaciones pueden abrir sus enlaces compatibles</item>
       <item quantity="one">Una aplicación puede abrir sus enlaces compatibles</item>
     </plurals>
-    <!-- no translation found for app_link_open_always (2474058700623948148) -->
-    <skip />
-    <!-- no translation found for app_link_open_ask (7800878430190575991) -->
-    <skip />
-    <!-- no translation found for app_link_open_never (3407647600352398543) -->
-    <skip />
+    <string name="app_link_open_always" msgid="2474058700623948148">"Abrir en esta aplicación"</string>
+    <string name="app_link_open_ask" msgid="7800878430190575991">"Preguntar siempre"</string>
+    <string name="app_link_open_never" msgid="3407647600352398543">"No abrir en esta aplicación"</string>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"No reconocido"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"Aplicaciones predeterminadas"</string>
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"Asistencia y entrada voz"</string>

@@ -2516,6 +2516,7 @@
     <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"Maxfiy ma’lumotlar ko‘rsatilmasin"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Bildirishnomalar ko‘rsatilmasin"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"Qurilmangiz qulflanganda, bildirishnomalar qanday ko‘rsatilsin?"</string>
+    <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"Bildirishnomalar"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"Ilova bildirishnomalari"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Boshqa ovozlar"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Raqam terilgandagi ovoz"</string>
@@ -2638,11 +2639,14 @@
     <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"Yotiq holatda qolsin"</string>
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"Joriy holatda qolsin"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI-kod ma’lumotlari"</string>
-    <string name="encryption_interstitial_header" msgid="5790264941172726485">"Shifrlash"</string>
+    <string name="encryption_interstitial_header" msgid="468015813904595613">"Xavfsiz ishga tushirish"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"Davom etish"</string>
     <string name="encryption_interstitial_message_pin" msgid="7164072567822375682">"Qurilmani ishga tushirishda PIN-kod talab qilish orqali uni yanada kuchliroq himoyalashingiz mumkin. Qurilma ishga tushmaguncha, u qo‘ng‘iroqlar, xabarlar yoki bildirishnomalar, jumladan, uyg‘otkich signallarini qabul qila olmaydi. \n\nBu yo‘qolgan yoki o‘g‘irlangan qurilmadagi ma’lumotlarni himoyalashga yordam beradi."</string>
     <string name="encryption_interstitial_message_pattern" msgid="6747091924626566031">"Qurilmani ishga tushirishda chizmali parol talab qilish orqali uni yanada kuchliroq himoyalashingiz mumkin. Qurilma ishga tushmaguncha, u qo‘ng‘iroqlar, xabarlar yoki bildirishnomalar, jumladan, uyg‘otkich signallarini qabul qila olmaydi. \n\nBu yo‘qolgan yoki o‘g‘irlangan qurilmadagi ma’lumotlarni himoyalashga yordam beradi."</string>
     <string name="encryption_interstitial_message_password" msgid="3462225324186045679">"Qurilmani ishga tushirishda parol talab qilish orqali uni yanada kuchliroq himoyalashingiz mumkin. Qurilma ishga tushmaguncha, u qo‘ng‘iroqlar, xabarlar yoki bildirishnomalar, jumladan, uyg‘otkich signallarini qabul qila olmaydi. \n\nBu yo‘qolgan yoki o‘g‘irlangan qurilmadagi ma’lumotlarni himoyalashga yordam beradi."</string>
+    <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="3775537118799831558">"Qurilmani qulfdan chiqarishda barmoq izidan foydalanishga qo‘shimcha ravishda kirishda PIN-kod talab qilish orqali uni yanada kuchliroq himoyalashingiz mumkin. Qurilma ishga tushmaguncha, u qo‘ng‘iroqlar, xabarlar yoki bildirishnomalar, jumladan, uyg‘otkich signallarini qabul qila olmaydi.\n\nBu yo‘qolgan yoki o‘g‘irlangan qurilmadagi ma’lumotlarni himoyalashga yordam beradi."</string>
+    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="1105290967535237237">"Qurilmani qulfdan chiqarishda barmoq izidan foydalanishga qo‘shimcha ravishda kirishda chizmali kalitni talab qilish orqali uni yanada kuchliroq himoyalashingiz mumkin. Qurilma ishga tushmaguncha, u qo‘ng‘iroqlar, xabarlar yoki bildirishnomalar, jumladan, uyg‘otkich signallarini qabul qila olmaydi.\n\nBu yo‘qolgan yoki o‘g‘irlangan qurilmadagi ma’lumotlarni himoyalashga yordam beradi."</string>
+    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="3512482682507378424">"Qurilmani qulfdan chiqarishda barmoq izidan foydalanishga qo‘shimcha ravishda kirishda parol talab qilish orqali uni yanada kuchliroq himoyalashingiz mumkin. Qurilma ishga tushmaguncha, u qo‘ng‘iroqlar, xabarlar yoki bildirishnomalar, jumladan, uyg‘otkich signallarini qabul qila olmaydi.\n\nBu yo‘qolgan yoki o‘g‘irlangan qurilmadagi ma’lumotlarni himoyalashga yordam beradi."</string>
     <string name="encrypt_require_pin" msgid="2063945047845243752">"Qurilmani ishga tushirish uchun PIN-kod talab qilinsin"</string>
     <string name="encrypt_require_pattern" msgid="6898479411004015810">"Qurilmani ishga tushirish uchun chizmali parol talab qilinsin"</string>
     <string name="encrypt_require_password" msgid="8770628366276570518">"Qurilmani ishga tushirish uchun parol talab qilinsin"</string>
@@ -2726,12 +2730,9 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> ta ilova mos havolalarni ochishi mumkin</item>
       <item quantity="one">Bitta ilova mos havolalarni ochishi mumkin</item>
     </plurals>
-    <!-- no translation found for app_link_open_always (2474058700623948148) -->
-    <skip />
-    <!-- no translation found for app_link_open_ask (7800878430190575991) -->
-    <skip />
-    <!-- no translation found for app_link_open_never (3407647600352398543) -->
-    <skip />
+    <string name="app_link_open_always" msgid="2474058700623948148">"Ushbu ilovada ochilsin"</string>
+    <string name="app_link_open_ask" msgid="7800878430190575991">"Har safar so‘ralsin"</string>
+    <string name="app_link_open_never" msgid="3407647600352398543">"Bu ilovada ochilmasin"</string>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Aniqlanmadi"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"Birlamchi ilovalar"</string>
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"Interaktiv yordamchilar"</string>

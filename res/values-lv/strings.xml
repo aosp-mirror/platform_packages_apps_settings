@@ -2525,6 +2525,7 @@
     <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"Paslēpt sensitīvu saturu paziņojumos"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Nerādīt paziņojumus vispār"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"Kā rādīt ierīcē paziņojumus, kad tā ir bloķēta?"</string>
+    <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"Paziņojumi"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"Lietotņu paziņojumi"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Citas skaņas"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Numura sastādīšanas tastatūras skaņas"</string>
@@ -2650,11 +2651,14 @@
     <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"Saglabāt ainavas skatu"</string>
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"Saglabāt pašreizējo virzienu"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI informācija"</string>
-    <string name="encryption_interstitial_header" msgid="5790264941172726485">"Šifrējums"</string>
+    <string name="encryption_interstitial_header" msgid="468015813904595613">"Drošā palaišana"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"Turpināt"</string>
     <string name="encryption_interstitial_message_pin" msgid="7164072567822375682">"Varat uzlabot šīs ierīces drošības līmeni, iestatot, lai pirms ierīces palaišanas tiktu pieprasīts PIN. Kamēr ierīce nav palaista, nevar saņemt zvanus, ziņojumus vai paziņojumus, tostarp modinātāja signālus.\n\nTādējādi tiek uzlabota datu aizsardzība pazaudētās vai nozagtās ierīcēs."</string>
     <string name="encryption_interstitial_message_pattern" msgid="6747091924626566031">"Varat uzlabot šīs ierīces drošības līmeni, iestatot, lai pirms ierīces palaišanas tiktu pieprasīta grafiskā atslēga. Kamēr ierīce nav palaista, nevar saņemt zvanus, ziņojumus vai paziņojumus, tostarp modinātāja signālus.\n\nTādējādi tiek uzlabota datu aizsardzība pazaudētās vai nozagtās ierīcēs."</string>
     <string name="encryption_interstitial_message_password" msgid="3462225324186045679">"Varat uzlabot šīs ierīces drošības līmeni, iestatot, lai pirms ierīces palaišanas tiktu pieprasīta parole. Kamēr ierīce nav palaista, nevar saņemt zvanus, ziņojumus vai paziņojumus, tostarp modinātāja signālus.\n\nTādējādi tiek uzlabota datu aizsardzība pazaudētās vai nozagtās ierīcēs."</string>
+    <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="3775537118799831558">"Papildus atbloķēšanai ar pirkstu nospiedumu varat iestatīt, lai pirms ierīces palaišanas tiktu pieprasīts PIN kods. Šādi jūs uzlabosiet ierīces aizsardzību. Ja ierīce nav palaista, netiek saņemti zvani, īsziņas, paziņojumi, tostarp signāli.\n\nTādējādi tiek aizsargāti ierīces dati, ja tā tiek pazaudēta vai nozagta."</string>
+    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="1105290967535237237">"Papildus atbloķēšanai ar pirkstu nospiedumu varat iestatīt, lai pirms ierīces palaišanas tiktu pieprasīta kombinācija. Šādi jūs uzlabosiet ierīces aizsardzību. Ja ierīce nav palaista, netiek saņemti zvani, īsziņas, paziņojumi, tostarp signāli.\n\nTādējādi tiek aizsargāti ierīces dati, ja tā tiek pazaudēta vai nozagta."</string>
+    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="3512482682507378424">"Papildus atbloķēšanai ar pirkstu nospiedumu varat iestatīt, lai pirms ierīces palaišanas tiktu pieprasīta parole. Šādi jūs uzlabosiet ierīces aizsardzību. Ja ierīce nav palaista, netiek saņemti zvani, īsziņas, paziņojumi, tostarp signāli.\n\nTādējādi tiek aizsargāti ierīces dati, ja tā tiek pazaudēta vai nozagta."</string>
     <string name="encrypt_require_pin" msgid="2063945047845243752">"Sāknējot ierīci, pieprasīt PIN kodu"</string>
     <string name="encrypt_require_pattern" msgid="6898479411004015810">"Sāknējot ierīci, pieprasīt kombināciju"</string>
     <string name="encrypt_require_password" msgid="8770628366276570518">"Sāknējot ierīci, pieprasīt paroli"</string>
@@ -2742,12 +2746,9 @@
       <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> lietotnē var atvērt atbalstītās saites</item>
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> lietotnēs var atvērt atbalstītās saites</item>
     </plurals>
-    <!-- no translation found for app_link_open_always (2474058700623948148) -->
-    <skip />
-    <!-- no translation found for app_link_open_ask (7800878430190575991) -->
-    <skip />
-    <!-- no translation found for app_link_open_never (3407647600352398543) -->
-    <skip />
+    <string name="app_link_open_always" msgid="2474058700623948148">"Atvērt šajā lietotnē"</string>
+    <string name="app_link_open_ask" msgid="7800878430190575991">"Vaicāt katru reizi"</string>
+    <string name="app_link_open_never" msgid="3407647600352398543">"Neatvērt šajā lietotnē"</string>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Nav atpazīts"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"Noklusējuma lietotnes"</string>
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"Palīgs un balss ievade"</string>

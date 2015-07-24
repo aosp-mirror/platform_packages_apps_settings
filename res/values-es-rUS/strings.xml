@@ -2516,6 +2516,7 @@
     <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"Ocultar contenido confidencial de notificaciones"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"No mostrar notificaciones"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"¿Cómo deseas ver las notificaciones cuando el dispositivo esté bloqueado?"</string>
+    <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"Notificaciones"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"Notificaciones de aplicaciones"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Otros sonidos"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Tonos del teclado"</string>
@@ -2636,11 +2637,14 @@
     <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"Mantener vista horizontal"</string>
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"Mantener orientación actual"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"Información de IMEI"</string>
-    <string name="encryption_interstitial_header" msgid="5790264941172726485">"Encriptación"</string>
+    <string name="encryption_interstitial_header" msgid="468015813904595613">"Inicio seguro"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"Continuar"</string>
     <string name="encryption_interstitial_message_pin" msgid="7164072567822375682">"Puedes solicitar el PIN del dispositivo antes de iniciarlo para aumentar la protección. Hasta que el dispositivo no se inicie, no podrá recibir llamadas, mensajes ni notificaciones, incluidas las alarmas. \n\nEsta configuración ayuda a proteger los datos en dispositivos perdidos o robados."</string>
     <string name="encryption_interstitial_message_pattern" msgid="6747091924626566031">"Puedes solicitar el patrón del dispositivo antes de iniciarlo para aumentar la protección. Hasta que el dispositivo no se inicie, no podrá recibir llamadas, mensajes ni notificaciones, incluidas las alarmas. \n\nEsta configuración ayuda a proteger los datos en dispositivos perdidos o robados."</string>
     <string name="encryption_interstitial_message_password" msgid="3462225324186045679">"Puedes solicitar la contraseña del dispositivo antes de iniciarlo para aumentar la protección. Hasta que el dispositivo no se inicie, no podrá recibir llamadas, mensajes ni notificaciones, incluidas las alarmas. \n\nEsta configuración ayuda a proteger los datos en dispositivos perdidos o robados."</string>
+    <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="3775537118799831558">"Además de desbloquear este dispositivo con tu huella digital, puedes incrementar la protección del dispositivo si configuras que solicite un PIN antes de iniciarse. Hasta que el dispositivo se inicie, no podrá recibir llamadas, mensajes ni notificaciones, y tampoco sonarán las alarmas.\n\nEsta opción te permitirá proteger los datos del dispositivo en caso de pérdida o robo."</string>
+    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="1105290967535237237">"Además de desbloquear este dispositivo con tu huella digital, puedes incrementar la protección del dispositivo si configuras que solicite un patrón antes de iniciarse. Hasta que el dispositivo se inicie, no podrá recibir llamadas, mensajes ni notificaciones, y tampoco sonarán las alarmas.\n\nEsta opción te permitirá proteger los datos del dispositivo en caso de pérdida o robo."</string>
+    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="3512482682507378424">"Además de desbloquear este dispositivo con tu huella digital, puedes incrementar la protección del dispositivo si configuras que solicite una contraseña antes de iniciarse. Hasta que el dispositivo se inicie, no podrá recibir llamadas, mensajes ni notificaciones, y tampoco sonarán las alarmas.\n\nEsta opción te permitirá proteger los datos del dispositivo en caso de pérdida o robo."</string>
     <string name="encrypt_require_pin" msgid="2063945047845243752">"Solicitar PIN para iniciar dispositivo"</string>
     <string name="encrypt_require_pattern" msgid="6898479411004015810">"Solicitar patrón para iniciar dispositivo"</string>
     <string name="encrypt_require_password" msgid="8770628366276570518">"Solicitar contraseña para iniciar dispositivo"</string>
@@ -2724,12 +2728,9 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aplicaciones pueden abrir sus vínculos admitidos.</item>
       <item quantity="one">Una aplicación puede abrir sus vínculos admitidos.</item>
     </plurals>
-    <!-- no translation found for app_link_open_always (2474058700623948148) -->
-    <skip />
-    <!-- no translation found for app_link_open_ask (7800878430190575991) -->
-    <skip />
-    <!-- no translation found for app_link_open_never (3407647600352398543) -->
-    <skip />
+    <string name="app_link_open_always" msgid="2474058700623948148">"Abrir en esta aplicación"</string>
+    <string name="app_link_open_ask" msgid="7800878430190575991">"Preguntar siempre"</string>
+    <string name="app_link_open_never" msgid="3407647600352398543">"No abrir en esta aplicación"</string>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"No reconocido"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"Aplicaciones predeterminadas"</string>
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"Asistencia y entrada de voz"</string>
@@ -2820,20 +2821,16 @@
     <string name="app_list_preference_none" msgid="108006867520327904">"Ninguno"</string>
     <string name="work_profile_usage_access_warning" msgid="8870622842216566692">"Si desactivas el acceso al uso de datos para esta aplicación, no evitarás que el administrador realice un seguimiento del uso de datos de las aplicaciones del perfil de trabajo."</string>
     <string name="accessibility_lock_screen_progress" msgid="2408292742980383166">"Caracteres utilizados: <xliff:g id="COUNT_0">%1$d</xliff:g> de <xliff:g id="COUNT_1">%2$d</xliff:g>"</string>
-    <!-- no translation found for draw_overlay_title (4003905926278954971) -->
-    <skip />
+    <string name="draw_overlay_title" msgid="4003905926278954971">"Aplicaciones que pueden superponerse a otras"</string>
     <string name="draw_overlay" msgid="9078696044299199938">"Superposición de aplicaciones"</string>
     <string name="system_alert_window_settings" msgid="1757821151143694951">"Superponerse a otras aplicaciones"</string>
     <string name="system_alert_window_apps_title" msgid="7005760279028569491">"Aplicaciones"</string>
-    <!-- no translation found for system_alert_window_access_title (8811695381437304132) -->
-    <skip />
-    <!-- no translation found for permit_draw_overlay (6606018549732046201) -->
-    <skip />
+    <string name="system_alert_window_access_title" msgid="8811695381437304132">"Superposición de aplicaciones"</string>
+    <string name="permit_draw_overlay" msgid="6606018549732046201">"Permitir la superposición de aplicaciones"</string>
     <string name="app_overlay_permission_preference" msgid="8355410276571387439">"Permiso de superposición de aplicaciones"</string>
     <string name="allow_overlay_description" msgid="7895191337585827691">"Este permiso admite que una aplicación se superponga a otras aplicaciones que estás utilizando, y puede interferir con el uso de la interfaz en otras aplicaciones o cambiar lo que crees ver en ellas."</string>
     <string name="keywords_system_alert_window" msgid="8579673659566564926">"sistema, alerta, ventana, cuadro de diálogo, superposición, otras aplicaciones"</string>
-    <!-- no translation found for overlay_settings (222062091489691363) -->
-    <skip />
+    <string name="overlay_settings" msgid="222062091489691363">"Superposición de aplicaciones"</string>
     <string name="system_alert_window_summary" msgid="4268867238063922290">"<xliff:g id="COUNT_0">%d</xliff:g> de <xliff:g id="COUNT_1">%d</xliff:g> aplicaciones tienen permiso para superponerse a otras"</string>
     <string name="filter_overlay_apps" msgid="6965969283342557573">"Aplicaciones con permiso"</string>
     <string name="system_alert_window_on" msgid="2939489395109048888">"Sí"</string>

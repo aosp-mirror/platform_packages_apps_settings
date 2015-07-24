@@ -2521,6 +2521,7 @@
     <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"隱藏敏感通知內容"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"完全不顯示通知"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"當裝置鎖定時，您要如何顯示通知？"</string>
+    <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"通知"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"應用程式通知"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"其他音效"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"撥號鍵盤音效"</string>
@@ -2643,11 +2644,14 @@
     <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"保持橫向畫面"</string>
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"保持目前方向"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI 資料"</string>
-    <string name="encryption_interstitial_header" msgid="5790264941172726485">"加密"</string>
+    <string name="encryption_interstitial_header" msgid="468015813904595613">"安全啟動"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"繼續"</string>
     <string name="encryption_interstitial_message_pin" msgid="7164072567822375682">"您可以在裝置啟動前要求輸入 PIN，以進一步保障這部裝置的安全。裝置在啟動前，將無法接收來電、短訊或通知，包括鬧鐘。\n\n在裝置遺失或被盜時，這個設定有助保障資料安全。"</string>
     <string name="encryption_interstitial_message_pattern" msgid="6747091924626566031">"您可以在裝置啟動前要求輸入解鎖圖案，以進一步保障這部裝置的安全。裝置在啟動前，將無法接收來電、短訊或通知，包括鬧鐘。\n\n在裝置遺失或被盜時，這個設定有助保障資料安全。"</string>
     <string name="encryption_interstitial_message_password" msgid="3462225324186045679">"您可以在裝置啟動前要求輸入密碼，以進一步保障這部裝置的安全。裝置在啟動前，將無法接收來電、短訊或通知，包括鬧鐘。\n\n在裝置遺失或被盜時，這個設定有助保障資料安全。"</string>
+    <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="3775537118799831558">"除了使用指紋解鎖裝置外，您亦可設定在啟動前輸入 PIN，進一步保障此裝置安全。在裝置啟動前，裝置無法接收來電、訊息或通知，包括鬧鐘。\n\n這有助保障遺失或被盜裝置的資料安全。"</string>
+    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="1105290967535237237">"除了使用指紋解鎖裝置外，您亦可設定在啟動前繪畫圖案，進一步保障此裝置安全。在裝置啟動前，裝置無法接收來電、訊息或通知，包括鬧鐘。\n\n這有助保障遺失或被盜裝置的資料安全。"</string>
+    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="3512482682507378424">"除了使用指紋解鎖裝置外，您亦可設定在啟動前輸入密碼，進一步保障此裝置安全。在裝置啟動前，裝置無法接收來電、訊息或通知，包括鬧鐘。\n\n這有助保障遺失或被盜裝置的資料安全。"</string>
     <string name="encrypt_require_pin" msgid="2063945047845243752">"需要輸入 PIN 才能啟動裝置"</string>
     <string name="encrypt_require_pattern" msgid="6898479411004015810">"需要輸入解鎖圖案才能啟動裝置"</string>
     <string name="encrypt_require_password" msgid="8770628366276570518">"需要輸入密碼才能啟動裝置"</string>
@@ -2679,7 +2683,7 @@
     <string name="data_summary_format" msgid="6213211533341068366">"自 <xliff:g id="DATE">%2$s</xliff:g>至今使用了 <xliff:g id="SIZE">%1$s</xliff:g>"</string>
     <string name="storage_used" msgid="7128074132917008743">"已使用的儲存空間"</string>
     <string name="change" msgid="6657848623929839991">"變更"</string>
-    <string name="change_storage" msgid="600475265207060436">"更改儲存裝置"</string>
+    <string name="change_storage" msgid="600475265207060436">"改變儲存空間"</string>
     <string name="notifications_label" msgid="2872668710589600731">"通知"</string>
     <string name="notifications_enabled" msgid="4386196629684749507">"正常"</string>
     <string name="notifications_disabled" msgid="4326096527874762629">"封鎖"</string>
@@ -2731,12 +2735,9 @@
       <item quantity="other">有 <xliff:g id="COUNT">%d</xliff:g> 個應用程式可以開啟支援連結</item>
       <item quantity="one">有一個應用程式可以開啟支援連結</item>
     </plurals>
-    <!-- no translation found for app_link_open_always (2474058700623948148) -->
-    <skip />
-    <!-- no translation found for app_link_open_ask (7800878430190575991) -->
-    <skip />
-    <!-- no translation found for app_link_open_never (3407647600352398543) -->
-    <skip />
+    <string name="app_link_open_always" msgid="2474058700623948148">"在此應用程式開啟"</string>
+    <string name="app_link_open_ask" msgid="7800878430190575991">"每次都詢問"</string>
+    <string name="app_link_open_never" msgid="3407647600352398543">"不要在此應用程式開啟"</string>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"未能識別"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"預設應用程式"</string>
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"輔助及語音輸入"</string>

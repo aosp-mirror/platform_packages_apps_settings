@@ -2516,6 +2516,7 @@
     <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"Sembunyikan kandungan pemberitahuan sensitif"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Jangan tunjukkan pemberitahuan sama sekali"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"Apabila peranti anda dikunci, bagaimanakah pemberitahuan harus dipaparkan?"</string>
+    <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"Pemberitahuan"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"Pemberitahuan apl"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Bunyi lain"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Nada pad dail"</string>
@@ -2638,11 +2639,14 @@
     <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"Kekal dalam paparan landskap"</string>
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"Kekal dalam orientasi semasa"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"Maklumat IMEI"</string>
-    <string name="encryption_interstitial_header" msgid="5790264941172726485">"Penyulitan"</string>
+    <string name="encryption_interstitial_header" msgid="468015813904595613">"Permulaan selamat"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"Teruskan"</string>
     <string name="encryption_interstitial_message_pin" msgid="7164072567822375682">"Anda boleh melindungi peranti ini selanjutnya dengan meminta PIN anda sebelum peranti dimulakan. Sehingga peranti dimulakan, peranti tidak boleh menerima panggilan, mesej atau pemberitahuan, termasuk penggera. \n\nIni membantu melindungi data pada peranti yang hilang atau dicuri."</string>
     <string name="encryption_interstitial_message_pattern" msgid="6747091924626566031">"Anda boleh melindungi peranti ini selanjutnya dengan meminta corak anda sebelum peranti dimulakan. Sehingga peranti dimulakan, peranti tidak boleh menerima panggilan, mesej atau pemberitahuan, termasuk penggera. \n\nIni membantu melindungi data pada peranti yang hilang atau dicuri."</string>
     <string name="encryption_interstitial_message_password" msgid="3462225324186045679">"Anda boleh melindungi peranti ini selanjutnya dengan meminta kata laluan anda sebelum peranti dimulakan. Sehingga peranti dimulakan, peranti tidak boleh menerima panggilan, mesej atau pemberitahuan, termasuk penggera. \n\nIni membantu melindungi data pada peranti yang hilang atau dicuri."</string>
+    <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="3775537118799831558">"Selain menggunakan cap jari untuk membuka kunci peranti anda, anda boleh melindungi peranti ini selanjutnya dengan menghendaki PIN anda sebelum peranti itu dimulakan. Peranti tidak boleh menerima panggilan, mesej atau pemberitahuan, termasuk penggera, sehingga dimulakan.\n\nCara ini membantu melindungi data pada peranti yang hilang atau dicuri."</string>
+    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="1105290967535237237">"Selain menggunakan cap jari untuk membuka kunci peranti anda, anda boleh melindungi peranti ini selanjutnya dengan menghendaki corak anda sebelum peranti itu dimulakan. Peranti tidak boleh menerima panggilan, mesej atau pemberitahuan, termasuk penggera, sehingga dimulakan.\n\nCara ini membantu melindungi data pada peranti yang hilang atau dicuri."</string>
+    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="3512482682507378424">"Selain menggunakan cap jari untuk membuka kunci peranti anda, anda boleh melindungi peranti ini selanjutnya dengan menghendaki kata laluan anda sebelum peranti itu dimulakan. Peranti tidak boleh menerima panggilan, mesej atau pemberitahuan, termasuk penggera, sehingga dimulakan.\n\nCara ini membantu melindungi data pada peranti yang hilang atau dicuri."</string>
     <string name="encrypt_require_pin" msgid="2063945047845243752">"PIN diperlukan untuk memulakan peranti"</string>
     <string name="encrypt_require_pattern" msgid="6898479411004015810">"Corak diperlukan untuk memulakan peranti"</string>
     <string name="encrypt_require_password" msgid="8770628366276570518">"Kata laluan diperlukan untuk memulakan peranti"</string>
@@ -2726,12 +2730,9 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> apl dapat membuka pautan sokongannya</item>
       <item quantity="one">Satu apl dapat membuka pautan sokongannya</item>
     </plurals>
-    <!-- no translation found for app_link_open_always (2474058700623948148) -->
-    <skip />
-    <!-- no translation found for app_link_open_ask (7800878430190575991) -->
-    <skip />
-    <!-- no translation found for app_link_open_never (3407647600352398543) -->
-    <skip />
+    <string name="app_link_open_always" msgid="2474058700623948148">"Buka dalam apl ini"</string>
+    <string name="app_link_open_ask" msgid="7800878430190575991">"Tanya setiap kali"</string>
+    <string name="app_link_open_never" msgid="3407647600352398543">"Jangan buka dalam apl ini"</string>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Tidak dikenali"</string>
     <string name="default_apps_title" msgid="1854974637597514435">"Apl Lalai"</string>
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"Input Bantu &amp; suara"</string>
@@ -2822,20 +2823,16 @@
     <string name="app_list_preference_none" msgid="108006867520327904">"Tiada"</string>
     <string name="work_profile_usage_access_warning" msgid="8870622842216566692">"Meskipun anda mematikan akses penggunaan bagi apl ini, pentadbir anda masih dapat menjejak penggunaan data apl dalam profil kerja anda."</string>
     <string name="accessibility_lock_screen_progress" msgid="2408292742980383166">"<xliff:g id="COUNT_0">%1$d</xliff:g> daripada <xliff:g id="COUNT_1">%2$d</xliff:g> aksara digunakan"</string>
-    <!-- no translation found for draw_overlay_title (4003905926278954971) -->
-    <skip />
+    <string name="draw_overlay_title" msgid="4003905926278954971">"Apl yang boleh melukis di atas apl lain"</string>
     <string name="draw_overlay" msgid="9078696044299199938">"Lukis di atas apl lain"</string>
     <string name="system_alert_window_settings" msgid="1757821151143694951">"Lukis di atas apl lain"</string>
     <string name="system_alert_window_apps_title" msgid="7005760279028569491">"Apl"</string>
-    <!-- no translation found for system_alert_window_access_title (8811695381437304132) -->
-    <skip />
-    <!-- no translation found for permit_draw_overlay (6606018549732046201) -->
-    <skip />
+    <string name="system_alert_window_access_title" msgid="8811695381437304132">"Lukis di atas apl lain"</string>
+    <string name="permit_draw_overlay" msgid="6606018549732046201">"Bolehkan melukis di atas apl lain"</string>
     <string name="app_overlay_permission_preference" msgid="8355410276571387439">"Kebenaran melukis di atas apl"</string>
     <string name="allow_overlay_description" msgid="7895191337585827691">"Kebenaran ini membenarkan apl dipaparkan di sebelah atas apl lain yang sedang digunakan dan boleh mengganggu penggunaan antara muka dalam apl lain atau menukar perkara yang anda fikir anda lihat dalam aplikasi lain."</string>
     <string name="keywords_system_alert_window" msgid="8579673659566564926">"dialog tetingkap makluman sistem lukis di atas apl lain"</string>
-    <!-- no translation found for overlay_settings (222062091489691363) -->
-    <skip />
+    <string name="overlay_settings" msgid="222062091489691363">"Lukis di atas apl lain"</string>
     <string name="system_alert_window_summary" msgid="4268867238063922290">"<xliff:g id="COUNT_0">%d</xliff:g> daripada <xliff:g id="COUNT_1">%d</xliff:g> apl dibenarkan melukis di atas apl lain"</string>
     <string name="filter_overlay_apps" msgid="6965969283342557573">"Apl dengan kebenaran"</string>
     <string name="system_alert_window_on" msgid="2939489395109048888">"Ya"</string>
