@@ -142,12 +142,14 @@ public class WifiConfigController implements TextWatcher,
 
     private String[] mLevels;
     private boolean mEdit;
+    private boolean mModify;
     private TextView mSsidView;
 
     private Context mContext;
 
     public WifiConfigController(
-            WifiConfigUiBase parent, View view, AccessPoint accessPoint, boolean edit) {
+            WifiConfigUiBase parent, View view, AccessPoint accessPoint, boolean edit,
+            boolean modify) {
         mConfigUi = parent;
 
         mView = view;
@@ -155,6 +157,7 @@ public class WifiConfigController implements TextWatcher,
         mAccessPointSecurity = (accessPoint == null) ? AccessPoint.SECURITY_NONE :
                 accessPoint.getSecurity();
         mEdit = edit;
+        mModify = modify;
 
         mTextViewChangedHandler = new Handler();
         mContext = mConfigUi.getContext();
@@ -245,7 +248,7 @@ public class WifiConfigController implements TextWatcher,
                 }
             }
 
-            if (mEdit) {
+            if (mModify) {
                 mConfigUi.setSubmitButton(res.getString(R.string.wifi_save));
             } else {
                 final DetailedState state = mAccessPoint.getDetailedState();
@@ -303,12 +306,7 @@ public class WifiConfigController implements TextWatcher,
             }
         }
 
-        if ((mEdit) || (mAccessPoint != null
-                && mAccessPoint.getDetailedState() == null && mAccessPoint.getLevel() != -1)){
-            mConfigUi.setCancelButton(res.getString(R.string.wifi_cancel));
-        }else{
-            mConfigUi.setCancelButton(res.getString(R.string.wifi_display_options_done));
-        }
+        mConfigUi.setCancelButton(res.getString(R.string.wifi_cancel));
         if (mConfigUi.getSubmitButton() != null) {
             enableSubmitIfAppropriate();
         }
@@ -370,7 +368,7 @@ public class WifiConfigController implements TextWatcher,
     }
 
     /* package */ WifiConfiguration getConfig() {
-        if (mAccessPoint != null && mAccessPoint.isSaved() && !mEdit) {
+        if (!mEdit) {
             return null;
         }
 
@@ -951,6 +949,10 @@ public class WifiConfigController implements TextWatcher,
 
     public boolean isEdit() {
         return mEdit;
+    }
+
+    public boolean isModify() {
+        return mModify;
     }
 
     @Override
