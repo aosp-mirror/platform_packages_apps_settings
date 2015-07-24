@@ -402,7 +402,6 @@
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Şifre"</string>
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"Yüksek düzey güvenlik"</string>
     <string name="current_screen_lock" msgid="4104091715420072219">"Geçerli ekran kilidi"</string>
-    <string name="unlock_disable_frp_warning_content" msgid="7070131836291098244">"Cihaz koruma özellikleri artık çalışmayacak."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Devre dışı bırakıldı"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Yok"</string>
     <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"Hızlıca kaydırma"</string>
@@ -411,10 +410,26 @@
     <string name="unlock_set_unlock_mode_password" msgid="1203938057264146610">"Şifre"</string>
     <string name="unlock_setup_wizard_fingerprint_details" msgid="7893457665921363009">"Ekran kilidi ayarladığınızda, Ayarlar ve Güvenlik bölümünden ayrıca parmak izinizi de ayarlayabilirsiniz."</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"Ekran kilidini kapat"</string>
-    <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"Kilit açma desenini kaldır"</string>
-    <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"Kilit açma PIN\'ini kaldır"</string>
-    <string name="unlock_disable_lock_password_summary" msgid="192161194564577025">"Kilit açma şifresini kaldır"</string>
-    <string name="unlock_disable_lock_unknown_summary" msgid="8688498722601653961">"Ekran kilidini kaldır"</string>
+    <!-- no translation found for unlock_disable_frp_warning_title (264008934468492550) -->
+    <skip />
+    <!-- no translation found for unlock_disable_frp_warning_content_pattern (8869767290771023461) -->
+    <skip />
+    <!-- no translation found for unlock_disable_frp_warning_content_pattern_fingerprint (8212242533942400457) -->
+    <skip />
+    <!-- no translation found for unlock_disable_frp_warning_content_pin (586996206210265131) -->
+    <skip />
+    <!-- no translation found for unlock_disable_frp_warning_content_pin_fingerprint (875669051899437197) -->
+    <skip />
+    <!-- no translation found for unlock_disable_frp_warning_content_password (5420612686852555537) -->
+    <skip />
+    <!-- no translation found for unlock_disable_frp_warning_content_password_fingerprint (2228159168587170445) -->
+    <skip />
+    <!-- no translation found for unlock_disable_frp_warning_content_unknown (1550718040483548220) -->
+    <skip />
+    <!-- no translation found for unlock_disable_frp_warning_content_unknown_fingerprint (6363091330281670692) -->
+    <skip />
+    <!-- no translation found for unlock_disable_frp_warning_ok (7075138677177748705) -->
+    <skip />
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"Kilit açma desenini değiştir"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"Kilit açma PIN\'ini değiştir"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"Kilit açma şifresini değiştir"</string>
@@ -2823,11 +2838,11 @@
     <string name="app_list_preference_none" msgid="108006867520327904">"Yok"</string>
     <string name="work_profile_usage_access_warning" msgid="8870622842216566692">"Bu uygulama için kullanım erişimini kapatmanız, yöneticinizin, iş profilinizdeki uygulamalara ilişkin veri kullanımını izlemesi engellenmez."</string>
     <string name="accessibility_lock_screen_progress" msgid="2408292742980383166">"<xliff:g id="COUNT_0">%1$d</xliff:g>/<xliff:g id="COUNT_1">%2$d</xliff:g> karakter kullanıldı"</string>
-    <string name="draw_overlay_title" msgid="4003905926278954971">"Başka uygl. üzerinde görüntülenen uygulamalar"</string>
+    <string name="draw_overlay_title" msgid="4003905926278954971">"Başka uygulamalar üzerinde görüntülenen uygulamalar"</string>
     <string name="draw_overlay" msgid="9078696044299199938">"Diğer uygl. üzerinde görüntüle"</string>
     <string name="system_alert_window_settings" msgid="1757821151143694951">"Diğer uygulamalar üzerinde görüntüleme"</string>
     <string name="system_alert_window_apps_title" msgid="7005760279028569491">"Uygulamalar"</string>
-    <string name="system_alert_window_access_title" msgid="8811695381437304132">"Diğer uygulamalar üzerinde görüntülenen"</string>
+    <string name="system_alert_window_access_title" msgid="8811695381437304132">"Diğer uygulamalar üzerinde görüntülenenler"</string>
     <string name="permit_draw_overlay" msgid="6606018549732046201">"Diğer uygl. üzerinde görüntülenmeye izin ver"</string>
     <string name="app_overlay_permission_preference" msgid="8355410276571387439">"Uygulamayı en üstte görüntüleme izni"</string>
     <string name="allow_overlay_description" msgid="7895191337585827691">"Bu izin, bir uygulamanın kullandığınız diğer uygulamaların üstünde görüntülenmesine olanak verir ve diğer uygulamalardaki arayüz kullanımınızı etkileyebilir veya diğer uygulamalarda gördüğünüzü düşündüğünüz arayüz öğelerini değiştirebilir."</string>
