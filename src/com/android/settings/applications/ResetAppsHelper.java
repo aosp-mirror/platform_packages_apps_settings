@@ -126,7 +126,7 @@ public class ResetAppsHelper implements DialogInterface.OnClickListener,
                     }
                 }
                 try {
-                    mIPm.resetPreferredActivities(UserHandle.myUserId());
+                    mIPm.resetApplicationPreferences(UserHandle.myUserId());
                 } catch (RemoteException e) {
                 }
                 mAom.resetAllModes();
