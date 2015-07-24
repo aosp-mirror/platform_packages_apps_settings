@@ -16,6 +16,7 @@
 
 package com.android.settings.deviceinfo;
 
+import android.app.ActivityManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserManager;
@@ -42,7 +43,8 @@ public class StorageWizardInit extends StorageWizardBase {
         }
         setContentView(R.layout.storage_wizard_init);
 
-        mIsPermittedToAdopt = UserManager.get(this).isAdminUser();
+        mIsPermittedToAdopt = UserManager.get(this).isAdminUser()
+                && !ActivityManager.isUserAMonkey();
 
         setIllustrationInternal(true);
         setHeaderText(R.string.storage_wizard_init_title, mDisk.getDescription());
