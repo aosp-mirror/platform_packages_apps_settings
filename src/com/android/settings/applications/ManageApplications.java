@@ -152,8 +152,10 @@ public class ManageApplications extends InstrumentedFragment
     // This is the actual mapping to filters from FILTER_ constants above, the order must
     // be kept in sync.
     public static final AppFilter[] FILTERS = new AppFilter[] {
-        AppStatePowerBridge.FILTER_POWER_WHITELISTED,     // High power whitelist, on
-        ApplicationsState.FILTER_PERSONAL,    // All apps label, but personal filter
+        new CompoundFilter(AppStatePowerBridge.FILTER_POWER_WHITELISTED,
+                ApplicationsState.FILTER_ALL_ENABLED),     // High power whitelist, on
+        new CompoundFilter(ApplicationsState.FILTER_PERSONAL,
+                ApplicationsState.FILTER_ALL_ENABLED),     // All apps label, but personal filter
         ApplicationsState.FILTER_EVERYTHING,  // All apps
         ApplicationsState.FILTER_ALL_ENABLED, // Enabled
         ApplicationsState.FILTER_DISABLED,    // Disabled
@@ -617,6 +619,9 @@ public class ManageApplications extends InstrumentedFragment
     }
 
     public void setHasDisabled(boolean hasDisabledApps) {
+        if (mListType == LIST_TYPE_HIGH_POWER) {
+            return;
+        }
         mFilterAdapter.setFilterEnabled(FILTER_APPS_ENABLED, hasDisabledApps);
         mFilterAdapter.setFilterEnabled(FILTER_APPS_DISABLED, hasDisabledApps);
     }
