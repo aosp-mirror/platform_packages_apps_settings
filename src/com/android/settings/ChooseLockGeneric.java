@@ -500,19 +500,28 @@ public class ChooseLockGeneric extends SettingsActivity {
             return R.string.help_url_choose_lockscreen;
         }
 
-        private int getResIdForFactoryResetProtectionWarningTitle() {
+        private int getResIdForFactoryResetProtectionWarningMessage() {
+            boolean hasFingerprints = mFingerprintManager.hasEnrolledFingerprints();
             switch (mLockPatternUtils.getKeyguardStoredPasswordQuality(UserHandle.myUserId())) {
                 case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
-                    return R.string.unlock_disable_lock_pattern_summary;
+                    return hasFingerprints
+                            ? R.string.unlock_disable_frp_warning_content_pattern_fingerprint
+                            : R.string.unlock_disable_frp_warning_content_pattern;
                 case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
                 case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX:
-                    return R.string.unlock_disable_lock_pin_summary;
+                    return hasFingerprints
+                            ? R.string.unlock_disable_frp_warning_content_pin_fingerprint
+                            : R.string.unlock_disable_frp_warning_content_pin;
                 case DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC:
                 case DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC:
                 case DevicePolicyManager.PASSWORD_QUALITY_COMPLEX:
-                    return R.string.unlock_disable_lock_password_summary;
+                    return hasFingerprints
+                            ? R.string.unlock_disable_frp_warning_content_password_fingerprint
+                            : R.string.unlock_disable_frp_warning_content_password;
                 default:
-                    return R.string.unlock_disable_lock_unknown_summary;
+                    return hasFingerprints
+                            ? R.string.unlock_disable_frp_warning_content_unknown_fingerprint
+                            : R.string.unlock_disable_frp_warning_content_unknown;
             }
         }
 
@@ -547,23 +556,23 @@ public class ChooseLockGeneric extends SettingsActivity {
         }
 
         private void showFactoryResetProtectionWarningDialog(String unlockMethodToSet) {
-            int title = getResIdForFactoryResetProtectionWarningTitle();
+            int message = getResIdForFactoryResetProtectionWarningMessage();
             FactoryResetProtectionWarningDialog dialog =
-                    FactoryResetProtectionWarningDialog.newInstance(title, unlockMethodToSet);
+                    FactoryResetProtectionWarningDialog.newInstance(message, unlockMethodToSet);
             dialog.show(getChildFragmentManager(), TAG_FRP_WARNING_DIALOG);
         }
 
         public static class FactoryResetProtectionWarningDialog extends DialogFragment {
 
-            private static final String ARG_TITLE_RES = "titleRes";
+            private static final String ARG_MESSAGE_RES = "messageRes";
             private static final String ARG_UNLOCK_METHOD_TO_SET = "unlockMethodToSet";
 
-            public static FactoryResetProtectionWarningDialog newInstance(int title,
+            public static FactoryResetProtectionWarningDialog newInstance(int messageRes,
                     String unlockMethodToSet) {
                 FactoryResetProtectionWarningDialog frag =
                         new FactoryResetProtectionWarningDialog();
                 Bundle args = new Bundle();
-                args.putInt(ARG_TITLE_RES, title);
+                args.putInt(ARG_MESSAGE_RES, messageRes);
                 args.putString(ARG_UNLOCK_METHOD_TO_SET, unlockMethodToSet);
                 frag.setArguments(args);
                 return frag;
@@ -582,9 +591,9 @@ public class ChooseLockGeneric extends SettingsActivity {
                 final Bundle args = getArguments();
 
                 return new AlertDialog.Builder(getActivity())
-                        .setTitle(args.getInt(ARG_TITLE_RES))
-                        .setMessage(R.string.unlock_disable_frp_warning_content)
-                        .setPositiveButton(R.string.okay,
+                        .setTitle(R.string.unlock_disable_frp_warning_title)
+                        .setMessage(args.getInt(ARG_MESSAGE_RES))
+                        .setPositiveButton(R.string.unlock_disable_frp_warning_ok,
                                 new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int whichButton) {
