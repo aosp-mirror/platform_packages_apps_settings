@@ -499,40 +499,12 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                 final Runnable finishListener) {
             if (obj instanceof LockPatternView.CellState) {
                 final LockPatternView.CellState animatedCell = (LockPatternView.CellState) obj;
-                if (appearing) {
-                    animatedCell.scale = 0.0f;
-                    animatedCell.alpha = 1.0f;
-                }
-                animatedCell.translateY = appearing ? translationY : 0;
-                ValueAnimator animator = ValueAnimator.ofFloat(animatedCell.translateY,
-                        appearing ? 0 : translationY);
-                animator.setInterpolator(interpolator);
-                animator.setDuration(duration);
-                animator.setStartDelay(delay);
-                animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                    @Override
-                    public void onAnimationUpdate(ValueAnimator animation) {
-                        float animatedFraction = animation.getAnimatedFraction();
-                        if (appearing) {
-                            animatedCell.scale = animatedFraction;
-                        } else {
-                            animatedCell.alpha = 1 - animatedFraction;
-                        }
-                        animatedCell.translateY = (float) animation.getAnimatedValue();
-                        mLockPatternView.invalidate();
-                    }
-                });
-                if (finishListener != null) {
-                    animator.addListener(new AnimatorListenerAdapter() {
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                            finishListener.run();
-                        }
-                    });
-                }
-
-                animator.start();
-                mLockPatternView.invalidate();
+                mLockPatternView.startCellStateAnimation(animatedCell,
+                        1f, appearing ? 1f : 0f, /* alpha */
+                        appearing ? translationY : 0f, /* startTranslation */
+                        appearing ? 0f : translationY, /* endTranslation */
+                        appearing ? 0f : 1f, 1f /* scale */,
+                        delay, duration, interpolator, finishListener);
             } else {
                 mAppearAnimationUtils.createAnimation((View) obj, delay, duration, translationY,
                         appearing, interpolator, finishListener);
