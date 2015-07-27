@@ -282,6 +282,9 @@ public class AppStorageSettings extends AppInfoWithHeader
     @Override
     protected boolean refreshUi() {
         retrieveAppEntry();
+        if (mAppEntry == null) {
+            return false;
+        }
         refreshSizeInfo();
 
         final VolumeInfo currentVol = getActivity().getPackageManager()
