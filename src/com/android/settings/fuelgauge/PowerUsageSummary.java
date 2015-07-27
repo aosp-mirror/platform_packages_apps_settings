@@ -317,7 +317,8 @@ public class PowerUsageSummary extends PowerUsageBase {
                 if (sipper.uidObj != null) {
                     pref.setKey(Integer.toString(sipper.uidObj.getUid()));
                 }
-                if (sipper.drainType != DrainType.APP && sipper.drainType != DrainType.USER) {
+                if ((sipper.drainType != DrainType.APP || sipper.uidObj.getUid() == 0)
+                         && sipper.drainType != DrainType.USER) {
                     pref.setTint(colorControl);
                 }
                 addedSome = true;
