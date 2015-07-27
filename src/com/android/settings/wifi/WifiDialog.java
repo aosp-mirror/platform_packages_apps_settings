@@ -31,6 +31,7 @@ class WifiDialog extends AlertDialog implements WifiConfigUiBase {
     static final int BUTTON_FORGET = DialogInterface.BUTTON_NEUTRAL;
 
     private final boolean mEdit;
+    private final boolean mModify;
     private final DialogInterface.OnClickListener mListener;
     private final AccessPoint mAccessPoint;
 
@@ -40,17 +41,18 @@ class WifiDialog extends AlertDialog implements WifiConfigUiBase {
     private boolean mHideForgetButton;
 
     public WifiDialog(Context context, DialogInterface.OnClickListener listener,
-            AccessPoint accessPoint, boolean edit, boolean hideSubmitButton,
-            boolean hideForgetButton) {
-        this(context, listener, accessPoint, edit);
+            AccessPoint accessPoint, boolean edit, boolean modify,
+            boolean hideSubmitButton, boolean hideForgetButton) {
+        this(context, listener, accessPoint, edit, modify);
         mHideSubmitButton = hideSubmitButton;
         mHideForgetButton = hideForgetButton;
     }
 
     public WifiDialog(Context context, DialogInterface.OnClickListener listener,
-            AccessPoint accessPoint, boolean edit) {
+            AccessPoint accessPoint, boolean edit, boolean modify) {
         super(context);
         mEdit = edit;
+        mModify = modify;
         mListener = listener;
         mAccessPoint = accessPoint;
         mHideSubmitButton = false;
@@ -67,7 +69,7 @@ class WifiDialog extends AlertDialog implements WifiConfigUiBase {
         mView = getLayoutInflater().inflate(R.layout.wifi_dialog, null);
         setView(mView);
         setInverseBackgroundForced(true);
-        mController = new WifiConfigController(this, mView, mAccessPoint, mEdit);
+        mController = new WifiConfigController(this, mView, mAccessPoint, mEdit, mModify);
         super.onCreate(savedInstanceState);
 
         if (mHideSubmitButton) {
