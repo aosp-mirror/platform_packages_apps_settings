@@ -130,6 +130,7 @@ public class UsageAccessDetails extends AppInfoWithHeader implements OnPreferenc
 
         boolean hasAccess = mUsageState.isPermissible();
         mSwitchPref.setChecked(hasAccess);
+        mSwitchPref.setEnabled(mUsageState.permissionDeclared);
         mUsagePrefs.setEnabled(hasAccess);
 
         ResolveInfo resolveInfo = mPm.resolveActivityAsUser(mSettingsIntent,
