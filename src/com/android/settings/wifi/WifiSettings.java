@@ -119,6 +119,7 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     // Instance state keys
     private static final String SAVE_DIALOG_EDIT_MODE = "edit_mode";
+    private static final String SAVE_DIALOG_MODIFY_MODE = "modify_mode";
     private static final String SAVE_DIALOG_ACCESS_POINT_STATE = "wifi_ap_state";
     private static final String SAVED_WIFI_NFC_DIALOG_STATE = "wifi_nfc_dlg_state";
 
@@ -150,6 +151,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     private boolean mEnableNextOnConnection;
 
     // Save the dialog details
+    private boolean mDlgModify;
     private boolean mDlgEdit;
     private AccessPoint mDlgAccessPoint;
     private Bundle mAccessPointSavedState;
@@ -248,6 +250,7 @@ public class WifiSettings extends RestrictedSettingsFragment
 
         if (savedInstanceState != null) {
             mDlgEdit = savedInstanceState.getBoolean(SAVE_DIALOG_EDIT_MODE);
+            mDlgModify = savedInstanceState.getBoolean(SAVE_DIALOG_MODIFY_MODE);
             if (savedInstanceState.containsKey(SAVE_DIALOG_ACCESS_POINT_STATE)) {
                 mAccessPointSavedState =
                     savedInstanceState.getBundle(SAVE_DIALOG_ACCESS_POINT_STATE);
@@ -379,6 +382,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         // If the dialog is showing, save its state.
         if (mDialog != null && mDialog.isShowing()) {
             outState.putBoolean(SAVE_DIALOG_EDIT_MODE, mDlgEdit);
+            outState.putBoolean(SAVE_DIALOG_MODIFY_MODE, mDlgModify);
             if (mDlgAccessPoint != null) {
                 mAccessPointSavedState = new Bundle();
                 mDlgAccessPoint.saveWifiState(mAccessPointSavedState);
@@ -506,6 +510,7 @@ public class WifiSettings extends RestrictedSettingsFragment
                     mSelectedAccessPoint.generateOpenNetworkConfig();
                     connect(mSelectedAccessPoint.getConfig());
                 } else {
+                    mDlgModify = false;
                     showDialog(mSelectedAccessPoint, true);
                 }
                 return true;
@@ -515,6 +520,7 @@ public class WifiSettings extends RestrictedSettingsFragment
                 return true;
             }
             case MENU_ID_MODIFY: {
+                mDlgModify = true;
                 showDialog(mSelectedAccessPoint, true);
                 return true;
             }
@@ -539,8 +545,12 @@ public class WifiSettings extends RestrictedSettingsFragment
                     getActivity().invalidateOptionsMenu();
                 }
                 connect(mSelectedAccessPoint.getConfig());
-            } else {
+            } else if (mSelectedAccessPoint.isSaved()){
+                mDlgModify = false;
                 showDialog(mSelectedAccessPoint, false);
+            } else {
+                mDlgModify = false;
+                showDialog(mSelectedAccessPoint, true);
             }
         } else {
             return super.onPreferenceTreeClick(screen, preference);
@@ -607,7 +617,7 @@ public class WifiSettings extends RestrictedSettingsFragment
                 final boolean hideForget = (ap == null || isEditabilityLockedDown(getActivity(),
                         ap.getConfig()));
                 mDialog = new WifiDialog(getActivity(), this, ap, mDlgEdit,
-                        /* no hide submit/connect */ false,
+                        mDlgModify, /* no hide submit/connect */ false,
                         /* hide forget if config locked down */ hideForget);
                 return mDialog;
             case WPS_PBC_DIALOG_ID:
@@ -825,16 +835,11 @@ public class WifiSettings extends RestrictedSettingsFragment
                     && mSelectedAccessPoint.isSaved()) {
                 connect(mSelectedAccessPoint.getConfig());
             }
-        } else if (config.networkId != INVALID_NETWORK_ID) {
-            if (mSelectedAccessPoint != null) {
-                mWifiManager.save(config, mSaveListener);
-            }
+        } else if (configController.isModify()) {
+            mWifiManager.save(config, mSaveListener);
         } else {
-            if (configController.isEdit()) {
-                mWifiManager.save(config, mSaveListener);
-            } else {
-                connect(config);
-            }
+            mWifiManager.save(config, mSaveListener);
+            connect(config);
         }
 
         mWifiTracker.resumeScanning();
