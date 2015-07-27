@@ -79,7 +79,7 @@ public class HighPowerDetail extends DialogFragment implements OnClickListener,
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder b = new AlertDialog.Builder(getContext())
-                .setTitle(getString(R.string.ignore_optimizations_title, mLabel))
+                .setTitle(mLabel)
                 .setNegativeButton(R.string.cancel, null)
                 .setView(R.layout.ignore_optimizations_content);
         if (!mBackend.isSysWhitelisted(mPackageName)) {
@@ -141,8 +141,10 @@ public class HighPowerDetail extends DialogFragment implements OnClickListener,
     }
 
     public static CharSequence getSummary(Context context, String pkg) {
-        return context.getString(PowerWhitelistBackend.getInstance().isWhitelisted(pkg)
-                ? R.string.high_power_on : R.string.high_power_off);
+        PowerWhitelistBackend powerWhitelist = PowerWhitelistBackend.getInstance();
+        return context.getString(powerWhitelist.isSysWhitelisted(pkg) ? R.string.high_power_system
+                : powerWhitelist.isWhitelisted(pkg) ? R.string.high_power_on
+                : R.string.high_power_off);
     }
 
     public static void show(Fragment caller, String packageName, int requestCode,
