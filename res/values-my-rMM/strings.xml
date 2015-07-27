@@ -404,7 +404,6 @@
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"လျို့ဝှက် နံပါတ်"</string>
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"လုံခြုံရေး မြင့်မည်"</string>
     <string name="current_screen_lock" msgid="4104091715420072219">"လက်ရှိမျက်နှာပြင် သော့ချခြင်း"</string>
-    <string name="unlock_disable_frp_warning_content" msgid="7070131836291098244">"စက်ကိရိယာကာကွယ်ရေးအင်္ဂါရပ်များ အလုပ်လုပ်မည် မဟုတ်ပါ။"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"အက်မင်၊ ပေါ်လစီ သို့ ယုံကြည်သောအကောင့်မှ ပိတ်ထားသည်"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"တစ်ခုမှမဟုတ်ပါ"</string>
     <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"ပွတ်ဆွဲရန်"</string>
@@ -413,10 +412,24 @@
     <string name="unlock_set_unlock_mode_password" msgid="1203938057264146610">"လျို့ဝှက် နံပါတ်"</string>
     <string name="unlock_setup_wizard_fingerprint_details" msgid="7893457665921363009">"ဖုန်းမျက်နှာပြင်လော့ချမှုစလုပ်သည့်အခါ ပြင်ဆင်ရွေးချယ်ရေးနှင့်လုံခြံရေးတွင် သင့်လက်ဗွေဖြင့်လည်းလော့ချနိုင်သည်။"</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"မျက်နှာပြင်သော့ပိတ်မည်"</string>
-    <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"ဖွင့်ရန်ပုံဖော်မှုအား ဖယ်ရှားမည်"</string>
-    <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"သော့ဖွင့်ရန်ပင်နံပါတ်အား ဖယ်ရှားမည်"</string>
-    <string name="unlock_disable_lock_password_summary" msgid="192161194564577025">"သော့ဖွင့်ရန်စကားဝှက်အား ဖယ်ရှားမည်"</string>
-    <string name="unlock_disable_lock_unknown_summary" msgid="8688498722601653961">"မှန်မျက်နှာပြင်သော့ခတ်ခြင်းအား ဖယ်ရန်"</string>
+    <string name="unlock_disable_frp_warning_title" msgid="264008934468492550">"ကိရိယာအား ကာကွယ်မှုကို ဖယ်ရှားရမလား?"</string>
+    <string name="unlock_disable_frp_warning_content_pattern" msgid="8869767290771023461">"ကိရိယာအား ကာကွယ်ရေး အင်္ဂါရပ်များမှာ သင်၏ ပုံစံမရှိဘဲ အလုပ်မလုပ်နိုင်ပါ။"</string>
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="8212242533942400457">"ကိရိယာအား ကာကွယ်ရေး အင်္ဂါရပ်များမှာ သင်၏ ပုံစံမရှိဘဲ အလုပ်မလုပ်နိုင်ပါ။ <xliff:g id="EMPTY_LINE">
+
+</xliff:g> သင်၏ သိမ်းဆည်းထားသည့် လက်ဗွေများကိုပါ ကိရိယာထဲမှ ဖယ်ရှားလိုက်လျက် သင်သည် ၎င်းတို့ဖြင့် သင်၏ ဖုန်းကို သော့ဖွင့်ခြင်း၊ ဈေးဝယ်မှုကို အတည်ပြုခြင်း၊ သို့မဟုတ် အက်ပ်များထဲသို့ လက်မှတ်ထိုးဝင်ခြင်းကို မလုပ်နိုင်တော့ပါ။\""</string>
+    <string name="unlock_disable_frp_warning_content_pin" msgid="586996206210265131">"ကိရိယာအား ကာကွယ်ရေး အင်္ဂါရပ်များမှာ သင်၏ PIN မရှိဘဲ အလုပ်မလုပ်နိုင်ပါ။"</string>
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="875669051899437197">"ကိရိယာအား ကာကွယ်ရေး အင်္ဂါရပ်များမှာ သင်၏ PIN မရှိဘဲ အလုပ်မလုပ်နိုင်ပါ။ <xliff:g id="EMPTY_LINE">
+
+</xliff:g> သင်၏ သိမ်းဆည်းထားသည့် လက်ဗွေများကိုပါ ကိရိယာထဲမှ ဖယ်ရှားလိုက်လျက် သင်သည် ၎င်းတို့ဖြင့် သင်၏ ဖုန်းကို သော့ဖွင့်ခြင်း၊ ဈေးဝယ်မှုကို အတည်ပြုခြင်း၊ သို့မဟုတ် အက်ပ်များထဲသို့ လက်မှတ်ထိုးဝင်ခြင်းကို မလုပ်နိုင်တော့ပါ။\""</string>
+    <string name="unlock_disable_frp_warning_content_password" msgid="5420612686852555537">"ကိရိယာအား ကာကွယ်ရေး အင်္ဂါရပ်များမှာ သင်၏ စကားဝှက်မပါဘဲ အလုပ်မလုပ်နိုင်ပါ။"</string>
+    <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="2228159168587170445">"ကိရိယာအား ကာကွယ်ရေး အင်္ဂါရပ်များမှာ သင်၏ စကားဝှက်မပါဘဲ အလုပ်မလုပ်နိုင်ပါ။ <xliff:g id="EMPTY_LINE">
+
+</xliff:g> သင်၏ သိမ်းဆည်းထားသည့် လက်ဗွေများကိုပါ ကိရိယာထဲမှ ဖယ်ရှားလိုက်လျက် သင်သည် ၎င်းတို့ဖြင့် သင်၏ ဖုန်းကို သော့ဖွင့်ခြင်း၊ ဈေးဝယ်မှုကို အတည်ပြုခြင်း၊ သို့မဟုတ် အက်ပ်များထဲသို့ လက်မှတ်ထိုးဝင်ခြင်းကို မလုပ်နိုင်တော့ပါ။\""</string>
+    <string name="unlock_disable_frp_warning_content_unknown" msgid="1550718040483548220">"ကိရိယာအား ကာကွယ်ရေး အင်္ဂါရပ်များမှာ သင်၏ မျက်မှာပြင် သော့ခတ်မှု မရှိဘဲ အလုပ်မလုပ်နိုင်ပါ။"</string>
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="6363091330281670692">"ကိရိယာအား ကာကွယ်ရေး အင်္ဂါရပ်များမှာ သင်၏ မျက်မှာပြင် သော့ခတ်မှု မရှိဘဲ အလုပ်မလုပ်နိုင်ပါ။ <xliff:g id="EMPTY_LINE">
+
+</xliff:g> သင်၏ သိမ်းဆည်းထားသည့် လက်ဗွေများကိုပါ ကိရိယာထဲမှ ဖယ်ရှားလိုက်လျက် သင်သည် ၎င်းတို့ဖြင့် သင်၏ ဖုန်းကို သော့ဖွင့်ခြင်း၊ ဈေးဝယ်မှုကို အတည်ပြုခြင်း၊ သို့မဟုတ် အက်ပ်များထဲသို့ လက်မှတ်ထိုးဝင်ခြင်းကို မလုပ်နိုင်တော့ပါ။\""</string>
+    <string name="unlock_disable_frp_warning_ok" msgid="7075138677177748705">"ဟုတ်ကဲ့၊ ဖယ်ရှားပါ"</string>
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"သော့ဖွင့်ရန်ပုံဖော်မှုအား ပြောင်းမည်"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"ပင်နံပါတ်ပြောင်းမည်"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"ဖွင့်ရန်စကားဝှက်အား ပြောင်းမည်"</string>
