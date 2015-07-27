@@ -402,7 +402,6 @@
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"密碼"</string>
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"高等安全性設定"</string>
     <string name="current_screen_lock" msgid="4104091715420072219">"目前的螢幕鎖定"</string>
-    <string name="unlock_disable_frp_warning_content" msgid="7070131836291098244">"裝置保護功能將停止運作。"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"已由管理員、加密政策或認證儲存空間停用"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"無"</string>
     <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"滑動"</string>
@@ -411,10 +410,26 @@
     <string name="unlock_set_unlock_mode_password" msgid="1203938057264146610">"密碼"</string>
     <string name="unlock_setup_wizard_fingerprint_details" msgid="7893457665921363009">"設定螢幕鎖定之後，您還可以前往 [設定] &gt; [安全性] 設定指紋。"</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"關閉螢幕鎖定"</string>
-    <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"移除解鎖圖形"</string>
-    <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"移除解鎖 PIN"</string>
-    <string name="unlock_disable_lock_password_summary" msgid="192161194564577025">"移除解鎖密碼"</string>
-    <string name="unlock_disable_lock_unknown_summary" msgid="8688498722601653961">"移除螢幕鎖定"</string>
+    <!-- no translation found for unlock_disable_frp_warning_title (264008934468492550) -->
+    <skip />
+    <!-- no translation found for unlock_disable_frp_warning_content_pattern (8869767290771023461) -->
+    <skip />
+    <!-- no translation found for unlock_disable_frp_warning_content_pattern_fingerprint (8212242533942400457) -->
+    <skip />
+    <!-- no translation found for unlock_disable_frp_warning_content_pin (586996206210265131) -->
+    <skip />
+    <!-- no translation found for unlock_disable_frp_warning_content_pin_fingerprint (875669051899437197) -->
+    <skip />
+    <!-- no translation found for unlock_disable_frp_warning_content_password (5420612686852555537) -->
+    <skip />
+    <!-- no translation found for unlock_disable_frp_warning_content_password_fingerprint (2228159168587170445) -->
+    <skip />
+    <!-- no translation found for unlock_disable_frp_warning_content_unknown (1550718040483548220) -->
+    <skip />
+    <!-- no translation found for unlock_disable_frp_warning_content_unknown_fingerprint (6363091330281670692) -->
+    <skip />
+    <!-- no translation found for unlock_disable_frp_warning_ok (7075138677177748705) -->
+    <skip />
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"變更解鎖圖形"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"變更解鎖 PIN"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"變更解鎖密碼"</string>
@@ -2648,9 +2663,9 @@
     <string name="encryption_interstitial_message_pin" msgid="7164072567822375682">"如果要進一步保護裝置，您可以將裝置設為需要輸入 PIN 才能啟動，等裝置啟動後方可接收來電、訊息或通知 (包括警告)。\n\n這樣一來，即使裝置遺失或遭竊，其中的資料仍安全無虞。"</string>
     <string name="encryption_interstitial_message_pattern" msgid="6747091924626566031">"如果要進一步保護裝置，您可以將裝置設為需要畫出解鎖圖形才能啟動，等裝置啟動後方可接收來電、訊息或通知 (包括警告)。\n\n這樣一來，即使裝置遺失或遭竊，其中的資料仍安全無虞。"</string>
     <string name="encryption_interstitial_message_password" msgid="3462225324186045679">"如果要進一步保護裝置，您可以將裝置設為需要輸入密碼才能啟動，等裝置啟動後方可接收來電、訊息或通知 (包括警告)。\n\n這樣一來，即使裝置遺失或遭竊，其中的資料仍安全無虞。"</string>
-    <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="3775537118799831558">"除了啟用裝置的指紋解鎖功能，您還可以設定裝置在啟動前要求使用者輸入 PIN 碼，為裝置增添多一道防護。裝置必須成功啟動才能接聽電話及接收訊息或通知 (包括鬧鐘)。\n\n這樣一來，萬一裝置遺失或遭竊，裝置上的資料也會受到保護。"</string>
-    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="1105290967535237237">"除了啟用裝置的指紋解鎖功能，您還可以設定裝置在啟動前要求使用者輸入解鎖圖形，為裝置增添多一道防護。裝置必須成功啟動才能接聽電話及接收訊息或通知 (包括鬧鐘)。\n\n這樣一來，萬一裝置遺失或遭竊，裝置上的資料也會受到保護。"</string>
-    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="3512482682507378424">"除了啟用裝置的指紋解鎖功能，您還可以設定裝置在啟動前要求使用者輸入密碼，為裝置增添多一道防護。裝置必須成功啟動才能接聽電話及接收訊息或通知 (包括鬧鐘)。\n\n這樣一來，萬一裝置遺失或遭竊，裝置上的資料也會受到保護。"</string>
+    <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="3775537118799831558">"除了啟用裝置的指紋解鎖功能，您還可以設定裝置在啟動前要求使用者輸入 PIN 碼，為裝置增添多一道防護。裝置必須成功啟動才能接聽電話及接收訊息或通知 (包括鬧鐘)。\n\n這樣一來，萬一裝置遺失或遭竊，裝置上的資料仍會受到保護。"</string>
+    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="1105290967535237237">"除了啟用裝置的指紋解鎖功能，您還可以設定裝置在啟動前要求使用者輸入解鎖圖形，為裝置增添多一道防護。裝置必須成功啟動才能接聽電話及接收訊息或通知 (包括鬧鐘)。\n\n這樣一來，萬一裝置遺失或遭竊，裝置上的資料仍會受到保護。"</string>
+    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="3512482682507378424">"除了啟用裝置的指紋解鎖功能，您還可以設定裝置在啟動前要求使用者輸入密碼，為裝置增添多一道防護。裝置必須成功啟動才能接聽電話及接收訊息或通知 (包括鬧鐘)。\n\n這樣一來，萬一裝置遺失或遭竊，裝置上的資料仍會受到保護。"</string>
     <string name="encrypt_require_pin" msgid="2063945047845243752">"需要輸入 PIN 才能啟動裝置"</string>
     <string name="encrypt_require_pattern" msgid="6898479411004015810">"需要畫出解鎖圖形才能啟動裝置"</string>
     <string name="encrypt_require_password" msgid="8770628366276570518">"需要輸入密碼才能啟動裝置"</string>

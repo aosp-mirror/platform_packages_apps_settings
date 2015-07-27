@@ -402,7 +402,6 @@
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Iphasiwedi"</string>
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"Ukuphepha okuphezulu"</string>
     <string name="current_screen_lock" msgid="4104091715420072219">"Ukukhiya isikrini kwamanje"</string>
-    <string name="unlock_disable_frp_warning_content" msgid="7070131836291098244">"Izici zokuvikela idivayisi ngeke zisasebenza."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Khubaza umqondisi, ukubethela inqubomgomo, noma isitoreji sobuqinisekisa"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Lutho"</string>
     <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"Swayipha"</string>
@@ -411,10 +410,24 @@
     <string name="unlock_set_unlock_mode_password" msgid="1203938057264146610">"Iphasiwedi"</string>
     <string name="unlock_setup_wizard_fingerprint_details" msgid="7893457665921363009">"Uma ususethe ukukhiya isikrini, ungaphinda usethe izigxivizo zeminwe zakho ku-Izilungiselelo &gt; Ukuvikela."</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"Cima ukuvala isikrini"</string>
-    <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"Khipha iphathini yokuvula"</string>
-    <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"Khipha ukuvala i-PIN"</string>
-    <string name="unlock_disable_lock_password_summary" msgid="192161194564577025">"Khipha iphasiwedi yokuvula"</string>
-    <string name="unlock_disable_lock_unknown_summary" msgid="8688498722601653961">"Susa isikrini sokukhiya"</string>
+    <string name="unlock_disable_frp_warning_title" msgid="264008934468492550">"Susa ukuvikela idivayisi?"</string>
+    <string name="unlock_disable_frp_warning_content_pattern" msgid="8869767290771023461">"Izici zokuvikela idivayisi ngeke zisebenze ngaphandle kwephethini yakho."</string>
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="8212242533942400457">"Izici zokuvikela idivayisi ngeke zisebenze ngaphandle kwephethini yakho.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Izigxivizo zakho zeminwe ezilondoloziwe futhi zizosuswa kusuka kule divayisi futhi ngeke ukwazi ukuvula ifoni yakho, ukuthenga okugunyaziwe, noma ukungena ngemvume kuzinhlelo zokusebenza ngazo.\""</string>
+    <string name="unlock_disable_frp_warning_content_pin" msgid="586996206210265131">"Izici zokuvikela idivayisi ngeke zisebenze ngaphandle kwephinikhodi yakho."</string>
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="875669051899437197">"Izici zokuvikela idivayisi ngeke zisebenze ngaphandle kwephinikhodi yakho.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Izigxivizo zakho zeminwe ezilondoloziwe futhi zizosuswa kusuka kule divayisi futhi ngeke ukwazi ukuvula ifoni yakho, ukuthenga okugunyaziwe, noma ukungena ngemvume kuzinhlelo zokusebenza ngazo.\""</string>
+    <string name="unlock_disable_frp_warning_content_password" msgid="5420612686852555537">"Izici zokuvikela idivayisi ngeke zisebenze ngaphandle kwephasiwedi yakho."</string>
+    <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="2228159168587170445">"Izici zokuvikela idivayisi ngeke zisebenze ngaphandle kwephasiwedi yakho.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Izigxivizo zakho zeminwe ezilondoloziwe futhi zizosuswa kusuka kule divayisi futhi ngeke ukwazi ukuvula ifoni yakho, ukuthenga okugunyaziwe, noma ukungena ngemvume kuzinhlelo zokusebenza ngazo.\""</string>
+    <string name="unlock_disable_frp_warning_content_unknown" msgid="1550718040483548220">"Izici zokuvikela idivayisi ngeke zisebenze ngaphandle kokukhiya isikrini sakho."</string>
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="6363091330281670692">"Izici zokuvikela idivayisi ngeke zisebenze ngaphandle kokukhiya isikrini sakho.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Izigxivizo zakho zeminwe ezilondoloziwe futhi zizosuswa kusuka kule divayisi futhi ngeke ukwazi ukuvula ifoni yakho, ukuthenga okugunyaziwe, noma ukungena ngemvume kuzinhlelo zokusebenza ngazo.\""</string>
+    <string name="unlock_disable_frp_warning_ok" msgid="7075138677177748705">"Yebo, susa"</string>
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"Shintsha iphathini yokuvula"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"Shintsha i-PIN yokuvula"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"Shintsha iphasiwedi yokuvula"</string>
@@ -2651,7 +2664,7 @@
     <string name="encryption_interstitial_message_pin" msgid="7164072567822375682">"Ungavikela ngokuthuthukile le divayisi ngokudinga iphasiwedi yakho ngaphambi kokuthi iqale. Ize iqale idivayisi, ayikwazi ukuthola amakholi, imilayezo, noma izaziso kufaka phakathi ama-alamu. \n\nLokhu kusiza ukuvikela idatha kumadivayisi alahlekile noma atshontshiwe."</string>
     <string name="encryption_interstitial_message_pattern" msgid="6747091924626566031">"Ungavikela ngokuthuthukile le divayisi ngokudinga iphasiwedi yakho ngaphambi kokuthi iqale. Ize iqale idivayisi, ayikwazi ukuthola amakholi, imilayezo, noma izaziso kufaka phakathi ama-alamu. \n\nLokhu kusiza ukuvikela idatha kumadivayisi alahlekile noma atshontshiwe."</string>
     <string name="encryption_interstitial_message_password" msgid="3462225324186045679">"Ungavikela ngokuthuthukile le divayisi ngokudinga iphasiwedi yakho ngaphambi kokuthi iqale. Ize iqale idivayisi, ayikwazi ukuthola amakholi, imilayezo, noma izaziso kufaka phakathi ama-alamu. \n\nLokhu kusiza ukuvikela idatha kumadivayisi alahlekile noma atshontshiwe."</string>
-    <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="3775537118799831558">"Ngokungeziwe ekusebenziseni izigxivizo zakho zeminwe ukuze uvule idivayisi yakho, ungaqhubeka uvikele le divayisi ngokucela iphinikhidi yakho ngaphambi kokuthi iqale. Kuze kube idivayisi iyaqala, ayikwazi ukuthola amakholi, imilayezo, noma izaziso ezifaka ama-alamu.\n\nLokhu kusiza ukuvikela idatha kumadivayisi alahlekile noma antshontshiwe."</string>
+    <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="3775537118799831558">"Ngokungeziwe ekusebenziseni izigxivizo zakho zeminwe ukuze uvule idivayisi yakho, ungaqhubeka uvikele le divayisi ngokucela iphinikhodi yakho ngaphambi kokuthi iqale. Kuze kube idivayisi iyaqala, ayikwazi ukuthola amakholi, imilayezo, noma izaziso ezifaka ama-alamu.\n\nLokhu kusiza ukuvikela idatha kumadivayisi alahlekile noma antshontshiwe."</string>
     <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="1105290967535237237">"Ngokungeziwe ekusebenziseni izigxivizo zakho zeminwe ukuze uvule idivayisi yakho, ungaqhubeka uvikele le divayisi ngokudinga iphethini yakho ngaphambi kokuthi iqale. Kuze kube idivayisi iyaqala, ayikwazi ukwamukela amakholi, imilayezo, noma izaziso, ezifaka ama-alamu.\n\nLokhu kusiza ukuvikela idatha kumadivayisi alahlekile noma antshontshiwe."</string>
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="3512482682507378424">"Ngokungeziwe ekusebenziseni izigxivizo zakho zeminwe ukuze uvule idivayisi yakho, ungaqhubeka uvikele le divayisi ngokudinga iphasiwedi yakho ngaphambi kokuthi iqale. Kuze kube idivayisi yakho iyaqala, ayikwazi ukuthola amakholi, imilayezo, noma izaziso, ezifaka ama-alamu.\n\nLokhu kusiza ukuvikela idatha kumadivayisi alahlekile noma antshontshiwe."</string>
     <string name="encrypt_require_pin" msgid="2063945047845243752">"Idinga iphinikhodi ukuze iqale idivayisi"</string>

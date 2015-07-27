@@ -402,7 +402,6 @@
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"पासवर्ड:"</string>
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"उच्च सुरक्षा"</string>
     <string name="current_screen_lock" msgid="4104091715420072219">"वर्तमान स्क्रिन लक"</string>
-    <string name="unlock_disable_frp_warning_content" msgid="7070131836291098244">"उपकरण सुरक्षा सुविधाहरूले अब उपरान्त काम गर्नेछैन।"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"प्रशासक, इन्क्रिप्सन नीति वा प्रामाणिक डेटा भण्डारणले असक्षम पारेको"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"कुनै पनि होइन"</string>
     <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"स्वाइप गर्नुहोस्"</string>
@@ -411,10 +410,24 @@
     <string name="unlock_set_unlock_mode_password" msgid="1203938057264146610">"पासवर्ड:"</string>
     <string name="unlock_setup_wizard_fingerprint_details" msgid="7893457665921363009">"तपाईँले एकपटक स्क्रिन लक सेटअप गरिसकेपछि तपाईँले तपाईँको औँठाछाप सेटिङहरू &gt; सुरक्षामा सेटअप गर्न पनि सक्नुहुन्छ।"</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"स्क्रिन लक बन्द गर्नुहोस्"</string>
-    <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"अनलक ढाँचा हटाउनुहोस्"</string>
-    <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"अनलक PIN हटाउनुहोस्"</string>
-    <string name="unlock_disable_lock_password_summary" msgid="192161194564577025">"अनलक पासवर्ड हटाउनुहोस्"</string>
-    <string name="unlock_disable_lock_unknown_summary" msgid="8688498722601653961">"स्क्रीन लक हटाउनुहोस्"</string>
+    <string name="unlock_disable_frp_warning_title" msgid="264008934468492550">"यन्त्र सुरक्षा हटाउने हो?"</string>
+    <string name="unlock_disable_frp_warning_content_pattern" msgid="8869767290771023461">"यन्त्र सुरक्षा सुविधाहरूले तपाईँको ढाँचा बिना काम गर्ने छैनन्।"</string>
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="8212242533942400457">"यन्त्र सुरक्षा विशेषताहरूले तपाईँको ढाँचा बिना काम गर्ने छैनन्। <xliff:g id="EMPTY_LINE">
+
+</xliff:g> तपाईँको सुरक्षित फिंगरप्रिन्टहरू पनि यस यन्त्रबाट हटाइने छ र तपाईँ आफ्नो फोन अनलक गर्न, खरिद आधिकार दिन वा तिनीहरूमार्फत अनुप्रयोगहरूमा साइन इन गर्न सक्षम हुनु हुने छैन। \""</string>
+    <string name="unlock_disable_frp_warning_content_pin" msgid="586996206210265131">"यन्त्र सुरक्षा सुविधाहरूले तपाईँको PIN बिना काम गर्ने छैनन्।"</string>
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="875669051899437197">"यन्त्र सुरक्षा विशेषताहरूले तपाईँको PIN बिना काम गर्ने छैनन्। <xliff:g id="EMPTY_LINE">
+
+</xliff:g> तपाईँको सुरक्षित फिंगरप्रिन्टहरू पनि यस यन्त्रबाट हटाइने छ र तपाईँ आफ्नो फोन अनलक गर्न, खरिद आधिकार दिन वा तिनीहरूमार्फत अनुप्रयोगहरूमा साइन इन गर्न सक्षम हुनु हुने छैन। \""</string>
+    <string name="unlock_disable_frp_warning_content_password" msgid="5420612686852555537">"यन्त्र सुरक्षा सुविधाहरूले तपाईँको पासवर्ड बिना काम गर्ने छैनन्।"</string>
+    <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="2228159168587170445">"यन्त्र सुरक्षा विशेषताहरूले तपाईँको पासवर्ड बिना काम गर्ने छैनन्। <xliff:g id="EMPTY_LINE">
+
+</xliff:g> तपाईँको सुरक्षित फिंगरप्रिन्टहरू पनि यस यन्त्रबाट हटाइने छ र तपाईँ आफ्नो फोन अनलक गर्न, खरिद आधिकार दिन वा तिनीहरूमार्फत अनुप्रयोगहरूमा साइन इन गर्न सक्षम हुनु हुने छैन। \""</string>
+    <string name="unlock_disable_frp_warning_content_unknown" msgid="1550718040483548220">"यन्त्र सुरक्षा सुविधाहरूले तपाईँको स्क्रिन लक बिना काम गर्ने छैनन्।"</string>
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="6363091330281670692">"यन्त्र सुरक्षा विशेषताहरूले तपाईँको स्क्रिन लक बिना काम गर्ने छैनन्। <xliff:g id="EMPTY_LINE">
+
+</xliff:g> तपाईँको सुरक्षित फिंगरप्रिन्टहरू पनि यस यन्त्रबाट हटाइने छ र तपाईँ आफ्नो फोन अनलक गर्न, खरिद आधिकार दिन वा तिनीहरूमार्फत अनुप्रयोगहरूमा साइन इन गर्न सक्षम हुनु हुने छैन। \""</string>
+    <string name="unlock_disable_frp_warning_ok" msgid="7075138677177748705">"हो, हटाउनुहोस्"</string>
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"अनलक ढाँचा बदल्नुहोस्"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"अनलक PIN परिवर्तन गर्नुहोस्"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"अनलक पासवर्ड परिवर्तन गर्नुहोस्"</string>
