@@ -27,6 +27,7 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
     private boolean mRestoring;
     private boolean mDark;
     private boolean mEnterAnimationPending;
+    private boolean mFirstTimeVisible = true;
 
     @Override
     protected void onCreate(Bundle savedState) {
@@ -62,7 +63,8 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
     @Override
     public void onResume() {
         super.onResume();
-        if (!isChangingConfigurations() && !mRestoring && mDark) {
+        if (!isChangingConfigurations() && !mRestoring && mDark && mFirstTimeVisible) {
+            mFirstTimeVisible = false;
             prepareEnterAnimation();
             mEnterAnimationPending = true;
         }
@@ -81,6 +83,7 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
         super.onEnterAnimationComplete();
         if (mEnterAnimationPending) {
             startEnterAnimation();
+            mEnterAnimationPending = false;
         }
     }
 
