@@ -485,7 +485,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
             // a header at the top.
             FrameLayout pinnedHeader = (FrameLayout) rootView.findViewById(R.id.pinned_header);
             AppHeader.createAppHeader(getActivity(), detail.icon, detail.label, null, pinnedHeader);
-            AppDetailsFragment.show(DataUsageSummary.this, app, detail.label, false);
+            AppDetailsFragment.show(DataUsageSummary.this, app, detail.label, true);
         } catch (NameNotFoundException e) {
             Log.w(TAG, "Could not find " + mShowAppImmediatePkg, e);
             Toast.makeText(getActivity(), getString(R.string.unknown_app), Toast.LENGTH_LONG)
@@ -936,9 +936,11 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         if (isAppDetailMode()) {
             mAppDetail.setVisibility(View.VISIBLE);
             mCycleAdapter.setChangeVisible(false);
+            mChart.setVisibility(View.GONE);
         } else {
             mAppDetail.setVisibility(View.GONE);
             mCycleAdapter.setChangeVisible(true);
+            mChart.setVisibility(View.VISIBLE);
 
             // hide detail stats when not in detail mode
             mChart.bindDetailNetworkStats(null);
@@ -1997,6 +1999,16 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
             final DataUsageSummary target = (DataUsageSummary) getTargetFragment();
             target.mCurrentApp = null;
             target.updateBody();
+        }
+
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item) {
+            switch (item.getItemId()) {
+            case android.R.id.home:
+                getFragmentManager().popBackStack();
+                return true;
+            }
+            return super.onOptionsItemSelected(item);
         }
     }
 
