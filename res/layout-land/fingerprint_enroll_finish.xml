@@ -79,8 +79,8 @@
 
             <ImageView
                 android:id="@+id/fingerprint_in_app_indicator"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="@dimen/fingerprint_in_app_indicator_size"
+                android:layout_height="@dimen/fingerprint_in_app_indicator_size"
                 android:layout_gravity="center_horizontal"
                 android:contentDescription="@android:string/fingerprint_icon_content_description"
                 android:src="@drawable/fp_app_indicator" />
