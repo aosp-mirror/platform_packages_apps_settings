@@ -19,13 +19,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginTop="36dp"
     android:layout_gravity="center_horizontal">
 
     <ImageView
         android:id="@+id/fingerprint_animator"
-        android:layout_width="88dp"
-        android:layout_height="88dp"
+        android:layout_width="@dimen/fingerprint_animation_size"
+        android:layout_height="@dimen/fingerprint_animation_size"
         android:layout_centerInParent="true"
         android:background="@drawable/fp_illustration_enrollment"
         android:backgroundTint="@color/fingerprint_indicator_background_resting"
@@ -33,8 +32,8 @@
 
     <ProgressBar
         android:id="@+id/fingerprint_progress_bar"
-        android:layout_width="192dp"
-        android:layout_height="192dp"
+        android:layout_width="@dimen/fingerprint_progress_bar_size"
+        android:layout_height="@dimen/fingerprint_progress_bar_size"
         android:layout_centerInParent="true"
         style="?android:attr/progressBarStyleHorizontal"
         android:max="10000"

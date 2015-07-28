@@ -37,9 +37,13 @@
             android:layout_marginTop="@dimen/suw_description_margin_top"
             android:text="@string/security_settings_fingerprint_enroll_find_sensor_message"/>
 
+        <View
+            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_weight="1"/>
+
         <include
             layout="@layout/fingerprint_enroll_find_sensor_graphic"
-            android:layout_marginTop="32dp"
             android:layout_width="@dimen/fingerprint_find_sensor_graphic_size"
             android:layout_height="@dimen/fingerprint_find_sensor_graphic_size"
             android:layout_gravity="center_horizontal"/>
