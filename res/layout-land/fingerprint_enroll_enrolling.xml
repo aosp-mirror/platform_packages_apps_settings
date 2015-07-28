@@ -61,7 +61,10 @@
             android:layout_weight="1"
             android:layout_height="match_parent">
 
-            <include layout="@layout/fingerprint_enroll_enrolling_content"/>
+            <include layout="@layout/fingerprint_enroll_enrolling_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"/>
 
             <TextView
                 style="@style/TextAppearance.FingerprintErrorText"
