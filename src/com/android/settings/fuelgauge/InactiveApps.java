@@ -26,7 +26,7 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceGroup;
 
-import com.android.settings.InstrumentedFragment;
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
@@ -38,7 +38,7 @@ public class InactiveApps extends SettingsPreferenceFragment implements OnPrefer
 
     @Override
     protected int getMetricsCategory() {
-        return InstrumentedFragment.UNDECLARED;
+        return MetricsLogger.FUELGAUGE_INACTIVE_APPS;
     }
 
     @Override
