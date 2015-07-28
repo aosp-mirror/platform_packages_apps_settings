@@ -836,6 +836,9 @@ public class InstalledAppDetails extends AppInfoBase
 
         @Override
         protected ProcStatsPackageEntry doInBackground(Void... params) {
+            if (getActivity() == null) {
+                return null;
+            }
             if (mPackageInfo == null) {
                 return null;
             }
