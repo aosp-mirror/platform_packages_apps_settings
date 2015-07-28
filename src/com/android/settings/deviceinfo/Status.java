@@ -32,9 +32,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
 import android.os.SystemProperties;
-import android.os.UserHandle;
+import android.os.UserManager;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
@@ -206,7 +205,8 @@ public class Status extends InstrumentedPreferenceActivity {
         }
 
         //Remove SimStatus and Imei for Secondary user as it access Phone b/19165700
-        if (UserHandle.myUserId() != UserHandle.USER_OWNER) {
+        //TODO: the bug above will surface in split system user mode.
+        if (!UserManager.get(this).isAdminUser()) {
             removePreferenceFromScreen(KEY_SIM_STATUS);
             removePreferenceFromScreen(KEY_IMEI_INFO);
         }

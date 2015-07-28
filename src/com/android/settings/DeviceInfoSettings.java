@@ -81,6 +81,8 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
     int mDevHitCountdown;
     Toast mDevHitToast;
 
+    private UserManager mUm;
+
     @Override
     protected int getMetricsCategory() {
         return MetricsLogger.DEVICEINFO;
@@ -94,6 +96,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        mUm = UserManager.get(getActivity());
 
         addPreferencesFromResource(R.xml.device_info_settings);
 
@@ -145,7 +148,8 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
 
         // These are contained by the root preference screen
         PreferenceGroup parentPreference = getPreferenceScreen();
-        if (UserHandle.myUserId() == UserHandle.USER_OWNER) {
+
+        if (mUm.isAdminUser()) {
             Utils.updatePreferenceToSpecificActivityOrRemove(act, parentPreference,
                     KEY_SYSTEM_UPDATE_SETTINGS,
                     Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
@@ -183,8 +187,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
             System.arraycopy(mHits, 1, mHits, 0, mHits.length-1);
             mHits[mHits.length-1] = SystemClock.uptimeMillis();
             if (mHits[0] >= (SystemClock.uptimeMillis()-500)) {
-                UserManager um = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
-                if (um.hasUserRestriction(UserManager.DISALLOW_FUN)) {
+                if (mUm.hasUserRestriction(UserManager.DISALLOW_FUN)) {
                     Log.d(LOG_TAG, "Sorry, no fun for you!");
                     return false;
                 }
@@ -200,10 +203,9 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
             }
         } else if (preference.getKey().equals(KEY_BUILD_NUMBER)) {
             // Don't enable developer options for secondary users.
-            if (UserHandle.myUserId() != UserHandle.USER_OWNER) return true;
+            if (!mUm.isAdminUser()) return true;
 
-            final UserManager um = (UserManager) getSystemService(Context.USER_SERVICE);
-            if (um.hasUserRestriction(UserManager.DISALLOW_DEBUGGING_FEATURES)) return true;
+            if (mUm.hasUserRestriction(UserManager.DISALLOW_DEBUGGING_FEATURES)) return true;
 
             if (mDevHitCountdown > 0) {
                 mDevHitCountdown--;
@@ -472,7 +474,9 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
                 if (TextUtils.isEmpty(getFeedbackReporterPackage(context))) {
                     keys.add(KEY_DEVICE_FEEDBACK);
                 }
-                if (UserHandle.myUserId() != UserHandle.USER_OWNER) {
+                final UserManager um = UserManager.get(context);
+                // TODO: system update needs to be fixed for non-owner user b/22760654
+                if (!um.isAdminUser()) {
                     keys.add(KEY_SYSTEM_UPDATE_SETTINGS);
                 }
                 if (!context.getResources().getBoolean(

@@ -289,7 +289,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
 
         mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
 
-        if (android.os.Process.myUserHandle().getIdentifier() != UserHandle.USER_OWNER
+        if (!mUm.isAdminUser()
                 || mUm.hasUserRestriction(UserManager.DISALLOW_DEBUGGING_FEATURES)) {
             mUnavailable = true;
             setPreferenceScreen(new PreferenceScreen(getActivity(), null));
@@ -328,8 +328,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         mPassword = (PreferenceScreen) findPreference(LOCAL_BACKUP_PASSWORD);
         mAllPrefs.add(mPassword);
 
-
-        if (!android.os.Process.myUserHandle().equals(UserHandle.OWNER)) {
+        if (!mUm.isAdminUser()) {
             disableForUser(mEnableAdb);
             disableForUser(mClearAdbKeys);
             disableForUser(mEnableTerminal);

@@ -200,6 +200,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
     private NetworkPolicyManager mPolicyManager;
     private TelephonyManager mTelephonyManager;
     private SubscriptionManager mSubscriptionManager;
+    private UserManager mUserManager;
 
     private INetworkStatsSession mStatsSession;
 
@@ -307,6 +308,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         mPolicyManager = NetworkPolicyManager.from(context);
         mTelephonyManager = TelephonyManager.from(context);
         mSubscriptionManager = SubscriptionManager.from(context);
+        mUserManager = UserManager.get(context);
 
         mPrefs = getActivity().getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE);
 
@@ -548,7 +550,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
     public void onPrepareOptionsMenu(Menu menu) {
         final Context context = getActivity();
         final boolean appDetailMode = isAppDetailMode();
-        final boolean isOwner = ActivityManager.getCurrentUser() == UserHandle.USER_OWNER;
+        final boolean isAdmin = mUserManager.isAdminUser();
 
         mMenuShowWifi = menu.findItem(R.id.data_usage_menu_show_wifi);
         if (hasWifiRadio(context) && hasReadyMobileRadio(context)) {
@@ -566,7 +568,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
 
         mMenuRestrictBackground = menu.findItem(R.id.data_usage_menu_restrict_background);
         mMenuRestrictBackground.setVisible(
-                hasReadyMobileRadio(context) && isOwner && !appDetailMode);
+                hasReadyMobileRadio(context) && isAdmin && !appDetailMode);
 
         final MenuItem metered = menu.findItem(R.id.data_usage_menu_metered);
         if (hasReadyMobileRadio(context) || hasWifiRadio(context)) {
@@ -581,7 +583,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
 
         mMenuCellularNetworks = menu.findItem(R.id.data_usage_menu_cellular_networks);
         mMenuCellularNetworks.setVisible(hasReadyMobileRadio(context)
-                && !appDetailMode && isOwner);
+                && !appDetailMode && isAdmin);
 
         final MenuItem help = menu.findItem(R.id.data_usage_menu_help);
         String helpUrl;
@@ -796,9 +798,8 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         if (!isAdded()) return;
 
         final Context context = getActivity();
-        final Resources resources = context.getResources();
         final String currentTab = mTabHost.getCurrentTabTag();
-        final boolean isOwner = ActivityManager.getCurrentUser() == UserHandle.USER_OWNER;
+        final boolean isAdmin = mUserManager.isAdminUser();
 
         if (currentTab == null) {
             Log.w(TAG, "no tab selected; hiding body");
@@ -812,7 +813,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
 
         if (LOGD) Log.d(TAG, "updateBody() with currentTab=" + currentTab);
 
-        mDataEnabledSupported = isOwner;
+        mDataEnabledSupported = isAdmin;
         mDisableAtLimitSupported = true;
 
         // TODO: remove mobile tabs when SIM isn't ready probably by
@@ -1077,7 +1078,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
 
     private boolean isNetworkPolicyModifiable(NetworkPolicy policy) {
         return policy != null && isBandwidthControlEnabled() && mDataEnabled.isChecked()
-                && ActivityManager.getCurrentUser() == UserHandle.USER_OWNER;
+                && mUserManager.isAdminUser();
     }
 
     private boolean isBandwidthControlEnabled() {

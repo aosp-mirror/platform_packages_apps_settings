@@ -192,9 +192,9 @@ public class ResetNetwork extends InstrumentedFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        if (!Process.myUserHandle().isOwner()
-                || UserManager.get(getActivity()).hasUserRestriction(
-                UserManager.DISALLOW_NETWORK_RESET)) {
+        final UserManager um = UserManager.get(getActivity());
+        if (!um.isAdminUser()
+                || um.hasUserRestriction(UserManager.DISALLOW_NETWORK_RESET)) {
             return inflater.inflate(R.layout.network_reset_disallowed_screen, null);
         }
 

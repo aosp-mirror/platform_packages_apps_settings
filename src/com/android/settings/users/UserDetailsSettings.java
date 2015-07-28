@@ -111,8 +111,8 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     @Override
     public boolean onPreferenceClick(Preference preference) {
         if (preference == mRemoveUserPref) {
-            if (UserHandle.myUserId() != UserHandle.USER_OWNER) {
-                throw new RuntimeException("Only the owner can remove a user");
+            if (mUserManager.isAdminUser()) {
+                throw new RuntimeException("Only admins can remove a user");
             }
             showDialog(DIALOG_CONFIRM_REMOVE);
             return true;

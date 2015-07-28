@@ -439,8 +439,7 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
                 result.add(KEY_TOGGLE_NSD);
 
                 final UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
-                final int myUserId = UserHandle.myUserId();
-                final boolean isSecondaryUser = myUserId != UserHandle.USER_OWNER;
+                final boolean isSecondaryUser = !um.isAdminUser();
                 final boolean isWimaxEnabled = !isSecondaryUser
                         && context.getResources().getBoolean(
                         com.android.internal.R.bool.config_wimaxEnabled);

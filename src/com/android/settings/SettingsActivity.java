@@ -439,13 +439,6 @@ public class SettingsActivity extends Activity
         int titleRes = pref.getTitleRes();
         if (pref.getFragment().equals(WallpaperTypeSettings.class.getName())) {
             titleRes = R.string.wallpaper_settings_fragment_title;
-        } else if (pref.getFragment().equals(OwnerInfoSettings.class.getName())
-                && UserHandle.myUserId() != UserHandle.USER_OWNER) {
-            if (UserManager.get(this).isLinkedUser()) {
-                titleRes = R.string.profile_info_settings_title;
-            } else {
-                titleRes = R.string.user_info_settings_title;
-            }
         }
         startPreferencePanel(pref.getFragment(), pref.getExtras(), titleRes, pref.getTitle(),
                 null, 0);
@@ -1219,7 +1212,8 @@ public class SettingsActivity extends Activity
                 DevelopmentSettings.PREF_SHOW,
                 android.os.Build.TYPE.equals("eng"));
 
-        final UserManager um = (UserManager) getSystemService(Context.USER_SERVICE);
+        final UserManager um = UserManager.get(this);
+        final boolean isAdmin = um.isAdminUser();
 
         final int size = target.size();
         for (int i = 0; i < size; i++) {
@@ -1264,9 +1258,6 @@ public class SettingsActivity extends Activity
                         removeTile = true;
                     }
                 } else if (id == R.id.user_settings) {
-                    boolean hasMultipleUsers =
-                            ((UserManager) getSystemService(Context.USER_SERVICE))
-                                    .getUserCount() > 1;
                     if (!UserHandle.MU_ENABLED
                             || !UserManager.supportsMultipleUsers()
                             || Utils.isMonkeyRunning()) {
@@ -1297,7 +1288,7 @@ public class SettingsActivity extends Activity
                     }
                 }
 
-                if (UserHandle.MU_ENABLED && UserHandle.myUserId() != 0
+                if (UserHandle.MU_ENABLED && !isAdmin
                         && !ArrayUtils.contains(SETTINGS_FOR_RESTRICTED, id)) {
                     removeTile = true;
                 }
