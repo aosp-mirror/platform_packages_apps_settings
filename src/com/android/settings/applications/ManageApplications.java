@@ -154,7 +154,7 @@ public class ManageApplications extends InstrumentedFragment
     public static final AppFilter[] FILTERS = new AppFilter[] {
         new CompoundFilter(AppStatePowerBridge.FILTER_POWER_WHITELISTED,
                 ApplicationsState.FILTER_ALL_ENABLED),     // High power whitelist, on
-        new CompoundFilter(ApplicationsState.FILTER_PERSONAL,
+        new CompoundFilter(ApplicationsState.FILTER_PERSONAL_WITHOUT_DISABLED_UNTIL_USED,
                 ApplicationsState.FILTER_ALL_ENABLED),     // All apps label, but personal filter
         ApplicationsState.FILTER_EVERYTHING,  // All apps
         ApplicationsState.FILTER_ALL_ENABLED, // Enabled

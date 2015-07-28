@@ -56,7 +56,7 @@ public class AppStatePowerBridge extends AppStateBaseBridge {
     }
 
     public static final AppFilter FILTER_POWER_WHITELISTED = new CompoundFilter(
-            ApplicationsState.FILTER_PERSONAL, new AppFilter() {
+            ApplicationsState.FILTER_PERSONAL_WITHOUT_DISABLED_UNTIL_USED, new AppFilter() {
         @Override
         public void init() {
         }
