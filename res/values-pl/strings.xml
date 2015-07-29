@@ -331,7 +331,7 @@
     <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"Skonfiguruj zapasową metodę blokowania ekranu"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_2" msgid="4158160658182631304">"Dodać swój odcisk palca"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Odblokuj odciskiem palca"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="5061093614328964700">"Wystarczy dotknąć czujnika linii papilarnych, aby odblokować telefon, autoryzować zakupy lub zalogować się w aplikacjach. Będą to umożliwiać wszystkie odciski palców dodane do telefonu, dlatego dobrze się zastanów, kogo chcesz dodać."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="9193978734907066950">"Wystarczy dotknąć czujnika linii papilarnych, by odblokować telefon, autoryzować zakupy lub zalogować się w aplikacjach. Dobrze się jednak zastanów, czyje odciski palców dodasz, bo każda dodana osoba będzie mogła robić wszystkie wymienione tutaj rzeczy."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="7173290350577831813">"Uwaga: odcisk palca może być mniej bezpieczny niż trudny wzór lub kod PIN."</string>
     <string name="security_settings_fingerprint_enroll_introduction_risk_link_text" msgid="9129531466157620977">"Więcej informacji"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Anuluj"</string>
@@ -414,26 +414,24 @@
     <string name="unlock_set_unlock_mode_password" msgid="1203938057264146610">"Hasło"</string>
     <string name="unlock_setup_wizard_fingerprint_details" msgid="7893457665921363009">"Po ustawieniu blokady ekranu możesz też skonfigurować rozpoznawanie odcisku palca. Kliknij Ustawienia &gt; Zabezpieczenia."</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"Wyłącz blokadę ekranu"</string>
-    <!-- no translation found for unlock_disable_frp_warning_title (264008934468492550) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern (8869767290771023461) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern_fingerprint (8212242533942400457) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin (586996206210265131) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin_fingerprint (875669051899437197) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password (5420612686852555537) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password_fingerprint (2228159168587170445) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_unknown (1550718040483548220) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_unknown_fingerprint (6363091330281670692) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_ok (7075138677177748705) -->
-    <skip />
+    <string name="unlock_disable_frp_warning_title" msgid="264008934468492550">"Usunąć ochronę urządzenia?"</string>
+    <string name="unlock_disable_frp_warning_content_pattern" msgid="8869767290771023461">"Bez wzoru nie będą działać funkcje chroniące urządzenie."</string>
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="8212242533942400457">"Bez wzoru nie będą działać funkcje chroniące urządzenie.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Twoje zapisane odciski palców także zostaną usunięte z tego urządzenia, dlatego stracisz możliwość używania ich do odblokowywania telefonu, autoryzowania zakupów czy logowania się w aplikacjach."</string>
+    <string name="unlock_disable_frp_warning_content_pin" msgid="586996206210265131">"Bez kodu PIN nie będą działać funkcje chroniące urządzenie."</string>
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="875669051899437197">"Bez kodu PIN nie będą działać funkcje chroniące urządzenie.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Twoje zapisane odciski palców także zostaną usunięte z tego urządzenia, dlatego stracisz możliwość używania ich do odblokowywania telefonu, autoryzowania zakupów czy logowania się w aplikacjach."</string>
+    <string name="unlock_disable_frp_warning_content_password" msgid="5420612686852555537">"Bez hasła nie będą działać funkcje chroniące urządzenie."</string>
+    <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="2228159168587170445">"Bez hasła nie będą działać funkcje chroniące urządzenie.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Twoje zapisane odciski palców także zostaną usunięte z tego urządzenia, dlatego stracisz możliwość używania ich do odblokowywania telefonu, autoryzowania zakupów czy logowania się w aplikacjach."</string>
+    <string name="unlock_disable_frp_warning_content_unknown" msgid="1550718040483548220">"Bez blokady ekranu nie będą działać funkcje chroniące urządzenie."</string>
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="6363091330281670692">"Bez blokady ekranu nie będą działać funkcje chroniące urządzenie.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Twoje zapisane odciski palców także zostaną usunięte z tego urządzenia, dlatego stracisz możliwość używania ich do odblokowywania telefonu, autoryzowania zakupów czy logowania się w aplikacjach."</string>
+    <string name="unlock_disable_frp_warning_ok" msgid="7075138677177748705">"Tak, usuń"</string>
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"Zmień wzór odblokowania"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"Zmień kod PIN odblokowania"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"Zmień hasło odblokowania"</string>
@@ -2371,18 +2369,21 @@
     <string name="global_font_change_title" msgid="1887126466191012035">"Zmień rozmiar czcionki"</string>
     <string name="nfc_payment_settings_title" msgid="1807298287380821613">"Dotknij i zapłać"</string>
     <string name="nfc_payment_how_it_works" msgid="3028822263837896720">"Jak to działa"</string>
-    <string name="nfc_payment_no_apps" msgid="3453656795093776889">"Użyj systemu „dotknij i zapłać” do zakupów w sklepie"</string>
+    <!-- no translation found for nfc_payment_no_apps (5477904979148086424) -->
+    <skip />
     <string name="nfc_payment_default" msgid="8648420259219150395">"Płatność domyślna"</string>
     <string name="nfc_payment_default_not_set" msgid="7485060884228447765">"Nie ustawiono"</string>
     <string name="nfc_payment_app_and_desc" msgid="7942415346564794258">"<xliff:g id="APP">%1$s</xliff:g> – <xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
-    <string name="nfc_payment_open_app" msgid="5550268485421927976">"Jeśli otwarta aplikacja obsługuje system „dotknij i zapłać”"</string>
-    <string name="nfc_payment_favor_open" msgid="7513784422533299982">"Użyj tej aplikacji zamiast: <xliff:g id="APP">%1$s</xliff:g>"</string>
-    <string name="nfc_payment_favor_open_default_unknown" msgid="1179489206233351756">"Użyj tej aplikacji"</string>
-    <string name="nfc_payment_favor_default" msgid="8238320071435721803">"Nadal używaj: <xliff:g id="APP">%1$s</xliff:g>"</string>
-    <string name="nfc_payment_favor_default_default_unknown" msgid="7029467023485683077">"Nadaj używaj domyślnej"</string>
+    <!-- no translation found for nfc_payment_use_default (3234730182120288495) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_default (5743781166099608372) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_open (1923314062109977944) -->
+    <skip />
     <string name="nfc_payment_pay_with" msgid="7524904024378144072">"Na terminalu „dotknij i zapłać” zapłać przy użyciu:"</string>
     <string name="nfc_how_it_works_title" msgid="1984068457698797207">"Płacenie przy terminalu"</string>
-    <string name="nfc_how_it_works_content" msgid="5820288675316257177">"Gdy skonfigurujesz aplikację Dotknij i zapłać i będziesz mieć włączony telefon, wystarczy zbliżyć urządzenie do dowolnego terminalu z logo Dotknij i zapłać, by dokonać zakupu."</string>
+    <!-- no translation found for nfc_how_it_works_content (4749007806393224934) -->
+    <skip />
     <string name="nfc_how_it_works_got_it" msgid="259653300203217402">"OK"</string>
     <string name="nfc_more_title" msgid="815910943655133280">"Więcej..."</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"Ustawić jako Twoją preferencję?"</string>
@@ -2785,7 +2786,7 @@
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"Asystent i rozpoznawanie mowy"</string>
     <string name="default_assist_title" msgid="8868488975409247921">"Aplikacja asystująca"</string>
     <string name="default_assist_none" msgid="3709083569608735487">"Brak"</string>
-    <string name="choose_assist_title" msgid="554234448228740980">"Wybierz asystenta"</string>
+    <string name="choose_assist_title" msgid="2373353478479305516">"Wybierz aplikację asystującą"</string>
     <string name="assistant_security_warning_title" msgid="8673079231955467177">"Ustawić aplikację <xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> jako asystenta?"</string>
     <string name="assistant_security_warning" msgid="4881965750615394002">"Aplikacja <xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> będzie mogła odczytać informacje o aplikacjach używanych w Twoim systemie, w tym informacje widoczne na ekranie lub dostępne w aplikacjach."</string>
     <string name="assistant_security_warning_agree" msgid="7710290206928033908">"Zgadzam się"</string>
@@ -2811,16 +2812,17 @@
     <string name="memory_avg_desc" msgid="1551240906596518412">"Średnia <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
     <string name="memory_use_running_format" msgid="4172488041800743760">"<xliff:g id="MEMORY">%1$s</xliff:g> / <xliff:g id="RUNNING">%2$s</xliff:g>"</string>
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
-    <string name="high_power_apps" msgid="2116416853043103135">"Ignoruj optymalizacje"</string>
-    <string name="high_power_filter_on" msgid="3862942127137594196">"Uprawnione"</string>
-    <string name="high_power_on" msgid="148473814103292724">"Bez optymalizacji zużycia baterii"</string>
-    <string name="high_power_off" msgid="221092098425904010">"Nieuprawniona"</string>
-    <string name="high_power_desc" msgid="8412735192889327770">"Nie stosuj optymalizacji baterii. Może to spowodować szybsze zużywanie energii."</string>
-    <plurals name="high_power_count" formatted="false" msgid="4343190376439806186">
-      <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> aplikacje są uprawnione do ignorowania optymalizacji baterii</item>
-      <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> aplikacji jest uprawnionych do ignorowania optymalizacji baterii</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aplikacji jest uprawnionej do ignorowania optymalizacji baterii</item>
-      <item quantity="one">Jedna aplikacja jest uprawniona do ignorowania optymalizacji baterii</item>
+    <string name="high_power_apps" msgid="3459065925679828230">"Optymalizacja baterii"</string>
+    <string name="high_power_filter_on" msgid="3222265297576680099">"Bez optymalizacji"</string>
+    <string name="high_power_on" msgid="3382367497549906927">"Ignoruje optymalizację baterii"</string>
+    <string name="high_power_off" msgid="3393904131961263278">"Ma włączoną optymalizację baterii"</string>
+    <string name="high_power_system" msgid="7362862974428225301">"Optymalizacja baterii niedostępna"</string>
+    <string name="high_power_desc" msgid="6283926163708585760">"Nie stosuj optymalizacji baterii. Może powodować szybsze zużywanie energii."</string>
+    <plurals name="high_power_count" formatted="false" msgid="2464701722383894640">
+      <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> aplikacje mogą ignorować optymalizację baterii</item>
+      <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> aplikacji może ignorować optymalizację baterii</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aplikacji może ignorować optymalizację baterii</item>
+      <item quantity="one">1 aplikacja może ignorować optymalizację baterii</item>
     </plurals>
     <string name="battery_summary" msgid="101415762036784289">"Użycie od ostatniego pełnego naładowania: <xliff:g id="PERCENTAGE">%1$d</xliff:g>%%"</string>
     <string name="no_battery_summary" msgid="3528036835462846814">"Brak użycia baterii od ostatniego pełnego naładowania"</string>
@@ -2866,8 +2868,8 @@
     <string name="no_data_usage" msgid="9131454024293628063">"Brak użycia danych"</string>
     <string name="zen_access_warning_dialog_title" msgid="1198189958031157142">"Zezwolić aplikacji <xliff:g id="APP">%1$s</xliff:g> na dostęp do trybu Nie przeszkadzać?"</string>
     <string name="zen_access_warning_dialog_summary" msgid="4015885767653010873">"Aplikacja będzie mogła włączać lub wyłączać tryb Nie przeszkadzać i zmieniać powiązane z nim ustawienia."</string>
-    <string name="ignore_optimizations_on" msgid="2417358456267927315">"Zezwól"</string>
-    <string name="ignore_optimizations_off" msgid="9069942099715006633">"Nie zezwalaj"</string>
+    <string name="ignore_optimizations_on" msgid="6915689518016285116">"Nie optymalizuj"</string>
+    <string name="ignore_optimizations_off" msgid="6153196256410296835">"Optymalizuj"</string>
     <string name="ignore_optimizations_on_desc" msgid="2321398930330555815">"Może powodować szybsze wyczerpywanie się baterii"</string>
     <string name="ignore_optimizations_off_desc" msgid="5255731062045426544">"Zalecane, by wydłużyć czas pracy baterii"</string>
     <string name="ignore_optimizations_title" msgid="2829637961185027768">"Zezwolić aplikacji <xliff:g id="APP">%s</xliff:g> na ignorowanie optymalizacji baterii?"</string>

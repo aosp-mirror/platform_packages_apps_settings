@@ -38,9 +38,9 @@
     <string name="header_category_access" msgid="7580499097416970962">"Acces"</string>
     <string name="header_category_system" msgid="2816866961183068977">"Sistem"</string>
     <string name="turn_on_radio" msgid="8706561489788373676">"Porniţi radioul"</string>
-    <string name="turn_off_radio" msgid="1820294552893884115">"Opriţi radioul"</string>
+    <string name="turn_off_radio" msgid="1820294552893884115">"Opriți radioul"</string>
     <string name="sms_over_ims_on" msgid="5085290395865632925">"Porniţi SMS prin IMS"</string>
-    <string name="sms_over_ims_off" msgid="8354792045992793959">"Opriţi SMS prin IMS"</string>
+    <string name="sms_over_ims_off" msgid="8354792045992793959">"Opriți SMS prin IMS"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"Este necesară activarea înregistrării IMS"</string>
     <string name="ims_reg_required_off" msgid="1720570343422743943">"Este necesară dezactivarea înregistrării IMS"</string>
     <string name="volte_provisioned_flag_on" msgid="6023503159480902956">"Activați semnalizatorul oferit de VoLTE"</string>
@@ -329,7 +329,8 @@
     <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"Configurați metoda de rezervă de blocare a ecranului"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_2" msgid="4158160658182631304">"Adăugați amprenta"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Deblocați cu amprenta"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="5061093614328964700">"Puteți să deblocați telefonul, să autorizați achiziții sau să vă conectați la aplicații atingând senzorul pentru amprente. Aveți grijă ce amprentă adăugați, deoarece aceste acțiuni sunt posibile folosind orice amprentă adăugată în telefon."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_introduction_message (9193978734907066950) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="7173290350577831813">"Notă: este posibil ca amprenta să fie mai puțin sigură decât un model sau un cod PIN puternic."</string>
     <string name="security_settings_fingerprint_enroll_introduction_risk_link_text" msgid="9129531466157620977">"Aflați mai multe"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Anulați"</string>
@@ -412,26 +413,24 @@
     <string name="unlock_set_unlock_mode_password" msgid="1203938057264146610">"Parolă"</string>
     <string name="unlock_setup_wizard_fingerprint_details" msgid="7893457665921363009">"După ce ați configurat o blocare a ecranului, puteți să configurați amprenta din Setări &gt; Securitate."</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"Activaţi blocarea ecranului"</string>
-    <!-- no translation found for unlock_disable_frp_warning_title (264008934468492550) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern (8869767290771023461) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern_fingerprint (8212242533942400457) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin (586996206210265131) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin_fingerprint (875669051899437197) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password (5420612686852555537) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password_fingerprint (2228159168587170445) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_unknown (1550718040483548220) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_unknown_fingerprint (6363091330281670692) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_ok (7075138677177748705) -->
-    <skip />
+    <string name="unlock_disable_frp_warning_title" msgid="264008934468492550">"Eliminați protecția dispozitivului?"</string>
+    <string name="unlock_disable_frp_warning_content_pattern" msgid="8869767290771023461">"Funcțiile de protecție a dispozitivului nu vor funcționa fără șablon."</string>
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="8212242533942400457">"Funcțiile de protecție a dispozitivului nu vor funcționa fără șablon.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>De asemenea, amprentele salvate vor fi eliminate de pe acest dispozitiv și nu le veți putea folosi ca să vă deblocați telefonul, să autorizați achiziții sau să vă conectați la aplicații."</string>
+    <string name="unlock_disable_frp_warning_content_pin" msgid="586996206210265131">"Funcțiile de protecție a dispozitivului nu vor funcționa fără codul PIN."</string>
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="875669051899437197">"Funcțiile de protecție a dispozitivului nu vor funcționa fără codul PIN.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>De asemenea, amprentele salvate vor fi eliminate de pe acest dispozitiv și nu le veți putea folosi ca să vă deblocați telefonul, să autorizați achiziții sau să vă conectați la aplicații."</string>
+    <string name="unlock_disable_frp_warning_content_password" msgid="5420612686852555537">"Funcțiile de protecție a dispozitivului nu vor funcționa fără parolă."</string>
+    <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="2228159168587170445">"Funcțiile de protecție a dispozitivului nu vor funcționa fără parolă.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>De asemenea, amprentele salvate vor fi eliminate de pe acest dispozitiv și nu le veți putea folosi ca să vă deblocați telefonul, să autorizați achiziții sau să vă conectați la aplicații."</string>
+    <string name="unlock_disable_frp_warning_content_unknown" msgid="1550718040483548220">"Funcțiile de protecție a dispozitivului nu vor funcționa fără blocarea ecranului."</string>
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="6363091330281670692">"Funcțiile de protecție a dispozitivului nu vor funcționa fără blocarea ecranului.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>De asemenea, amprentele salvate vor fi eliminate de pe acest dispozitiv și nu le veți putea folosi ca să vă deblocați telefonul, să autorizați achiziții sau să vă conectați la aplicații."</string>
+    <string name="unlock_disable_frp_warning_ok" msgid="7075138677177748705">"Da, eliminați"</string>
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"Schimbaţi modelul pentru deblocare"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"Schimbaţi codul PIN de deblocare"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"Schimbaţi parola pentru deblocare"</string>
@@ -1294,7 +1293,7 @@
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"Goliţi memoria cache"</string>
     <string name="cache_size_label" msgid="7505481393108282913">"Memorie cache"</string>
     <string name="controls_label" msgid="7611113077086853799">"Comenzi"</string>
-    <string name="force_stop" msgid="7435006169872876756">"Opriţi forţat"</string>
+    <string name="force_stop" msgid="7435006169872876756">"Opriți forţat"</string>
     <string name="total_size_label" msgid="1048676419552557254">"Total"</string>
     <string name="application_size_label" msgid="8494609207373874267">"Aplicaţie"</string>
     <string name="external_code_size_label" msgid="3459343140355961335">"Stocare aplicație pe USB"</string>
@@ -1378,7 +1377,7 @@
     <string name="app_forward_locked" msgid="6331564656683790866">"Aplicaţia este protejată la copiere."</string>
     <string name="invalid_location" msgid="4354595459063675191">"Locaţia de instalare nu este validă."</string>
     <string name="system_package" msgid="1352722848400644991">"Actualizările de sistem nu pot fi instalate pe suportul extern."</string>
-    <string name="force_stop_dlg_title" msgid="977530651470711366">"Opriţi forţat?"</string>
+    <string name="force_stop_dlg_title" msgid="977530651470711366">"Opriți forţat?"</string>
     <string name="force_stop_dlg_text" msgid="7208364204467835578">"Dacă forţaţi oprirea unei aplicații, aceasta se poate comporta necorespunzător."</string>
     <string name="move_app_failed_dlg_title" msgid="1282561064082384192"></string>
     <string name="move_app_failed_dlg_text" msgid="187885379493011720">"Aplicaţia nu a putut fi mutată. <xliff:g id="REASON">%1$s</xliff:g>"</string>
@@ -1428,7 +1427,7 @@
     <string name="no_services" msgid="7133900764462288263">"Nu există servicii active"</string>
     <string name="runningservicedetails_services_title" msgid="391168243725357375">"Servicii"</string>
     <string name="runningservicedetails_processes_title" msgid="928115582044655268">"Procese"</string>
-    <string name="service_stop" msgid="6369807553277527248">"Opriţi"</string>
+    <string name="service_stop" msgid="6369807553277527248">"Opriți"</string>
     <string name="service_manage" msgid="1876642087421959194">"Setări"</string>
     <string name="service_stop_description" msgid="9146619928198961643">"Acest serviciu a fost pornit de propria aplicație. Oprirea serviciului poate duce la eşuarea aplicației."</string>
     <string name="heavy_weight_stop_description" msgid="6050413065144035971">"Această aplicație nu poate fi oprită în siguranţă. Oprirea aplicației ar putea duce la pierderea datelor curente."</string>
@@ -1437,7 +1436,7 @@
     <string name="main_running_process_description" msgid="1130702347066340890">"Procesul principal în uz."</string>
     <string name="process_service_in_use_description" msgid="8993335064403217080">"Serviciul <xliff:g id="COMP_NAME">%1$s</xliff:g> se află în utilizare."</string>
     <string name="process_provider_in_use_description" msgid="5586603325677678940">"Furnizorul <xliff:g id="COMP_NAME">%1$s</xliff:g> se află în utilizare."</string>
-    <string name="runningservicedetails_stop_dlg_title" msgid="4253292537154337233">"Opriţi serviciul de sistem?"</string>
+    <string name="runningservicedetails_stop_dlg_title" msgid="4253292537154337233">"Opriți serviciul de sistem?"</string>
     <string name="runningservicedetails_stop_dlg_text" product="tablet" msgid="3371302398335665793">"Dacă opriţi acest serviciu, este posibil ca unele funcţii ale tabletei să nu mai funcţioneze corect decât după ce o veţi închide și redeschide."</string>
     <string name="runningservicedetails_stop_dlg_text" product="default" msgid="3920243762189484756">"Dacă opriţi acest serviciu, este posibil ca unele funcţii ale telefonului să nu mai funcţioneze corect decât după ce îl veţi închide și redeschide."</string>
     <string name="language_settings" msgid="5292716747264442359">"Limbă și introducere de text"</string>
@@ -1763,7 +1762,7 @@
     <string name="usage_type_total_battery_capacity" msgid="3798285287848675346">"Capacitatea totală a bateriei"</string>
     <string name="usage_type_computed_power" msgid="5862792259009981479">"Consum de energie calculat"</string>
     <string name="usage_type_actual_power" msgid="7047814738685578335">"Consum de energie observat"</string>
-    <string name="battery_action_stop" msgid="649958863744041872">"Opriţi forţat"</string>
+    <string name="battery_action_stop" msgid="649958863744041872">"Opriți forţat"</string>
     <string name="battery_action_app_details" msgid="7861051816778419018">"Informaţii despre aplicație"</string>
     <string name="battery_action_app_settings" msgid="4570481408106287454">"Setări aplicații"</string>
     <string name="battery_action_display" msgid="7338551244519110831">"Setări ecran"</string>
@@ -1784,7 +1783,7 @@
     <string name="battery_sugg_bluetooth_basic" msgid="4565141162650835009">"Dezactivaţi funcţia Bluetooth atunci când nu o utilizaţi"</string>
     <string name="battery_sugg_bluetooth_headset" msgid="4071352514714259230">"Încercaţi să vă conectaţi la un alt dispozitiv Bluetooth"</string>
     <string name="battery_desc_apps" msgid="8530418792605735226">"Baterie utilizată de aplicații"</string>
-    <string name="battery_sugg_apps_info" msgid="6907588126789841231">"Opriţi sau dezinstalaţi aplicația"</string>
+    <string name="battery_sugg_apps_info" msgid="6907588126789841231">"Opriți sau dezinstalaţi aplicația"</string>
     <string name="battery_sugg_apps_gps" msgid="5959067516281866135">"Selectați modul de economisire a bateriei"</string>
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"Aplicaţia poate oferi setări pentru reducerea utilizării bateriei"</string>
     <string name="battery_desc_users" msgid="7682989161885027823">"Baterie utilizată de utilizator"</string>
@@ -2118,9 +2117,9 @@
     <string name="usb_audio_disable_routing_summary" msgid="980282760277312264">"Dezact. rutarea automată către perif. audio USB"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Afişaţi limite aspect"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Afişaţi limitele clipului, marginile etc."</string>
-    <string name="force_rtl_layout_all_locales" msgid="2259906643093138978">"Direcție aspect dr. - st."</string>
+    <string name="force_rtl_layout_all_locales" msgid="2259906643093138978">"Direcție aspect dreapta - stânga"</string>
     <string name="force_rtl_layout_all_locales_summary" msgid="9192797796616132534">"Direcție obligatorie aspect ecran dreapta - stânga"</string>
-    <string name="show_cpu_usage" msgid="2389212910758076024">"Afişaţi utiliz. procesor"</string>
+    <string name="show_cpu_usage" msgid="2389212910758076024">"Afișați utiliz. procesor"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Suprapunere care indică utilizare curentă procesor"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Forţaţi redarea cu GPU"</string>
     <string name="force_hw_ui_summary" msgid="5535991166074861515">"Forţaţi utilizarea GPU pentru desen în 2D"</string>
@@ -2140,7 +2139,7 @@
     <string name="immediately_destroy_activities" msgid="1579659389568133959">"Nu păstraţi activităţile"</string>
     <string name="immediately_destroy_activities_summary" msgid="3592221124808773368">"Elimină activitățile imediat ce utilizatorul le închide"</string>
     <string name="app_process_limit_title" msgid="4280600650253107163">"Limită procese fundal"</string>
-    <string name="show_all_anrs" msgid="28462979638729082">"Afişaţi toate elem. ANR"</string>
+    <string name="show_all_anrs" msgid="28462979638729082">"Afișați toate elem. ANR"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"Aplicații din fundal: afișați Aplicația nu răspunde"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Utilizarea datelor"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"Utilizarea datelor aplic."</string>
@@ -2363,18 +2362,21 @@
     <string name="global_font_change_title" msgid="1887126466191012035">"Modificaţi dimensiunea fontului"</string>
     <string name="nfc_payment_settings_title" msgid="1807298287380821613">"Atingeți și plătiți"</string>
     <string name="nfc_payment_how_it_works" msgid="3028822263837896720">"Cum funcționează"</string>
-    <string name="nfc_payment_no_apps" msgid="3453656795093776889">"Folosiți Atingeți și plătiți pentru a face achiziții în magazin"</string>
+    <!-- no translation found for nfc_payment_no_apps (5477904979148086424) -->
+    <skip />
     <string name="nfc_payment_default" msgid="8648420259219150395">"Aplicația de plată prestabilită"</string>
     <string name="nfc_payment_default_not_set" msgid="7485060884228447765">"Nesetată"</string>
     <string name="nfc_payment_app_and_desc" msgid="7942415346564794258">"<xliff:g id="APP">%1$s</xliff:g> – <xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
-    <string name="nfc_payment_open_app" msgid="5550268485421927976">"Dacă aplicația deschisă acceptă Atingeți și plătiți"</string>
-    <string name="nfc_payment_favor_open" msgid="7513784422533299982">"Folosiți acea aplicație în loc de <xliff:g id="APP">%1$s</xliff:g>"</string>
-    <string name="nfc_payment_favor_open_default_unknown" msgid="1179489206233351756">"Folosiți acea aplicație"</string>
-    <string name="nfc_payment_favor_default" msgid="8238320071435721803">"Folosiți în continuare <xliff:g id="APP">%1$s</xliff:g>"</string>
-    <string name="nfc_payment_favor_default_default_unknown" msgid="7029467023485683077">"Folosiți în continuare aplicația prestabilită"</string>
+    <!-- no translation found for nfc_payment_use_default (3234730182120288495) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_default (5743781166099608372) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_open (1923314062109977944) -->
+    <skip />
     <string name="nfc_payment_pay_with" msgid="7524904024378144072">"La un terminal Atingeți și plătiți, plătiți cu:"</string>
     <string name="nfc_how_it_works_title" msgid="1984068457698797207">"Plata la terminal"</string>
-    <string name="nfc_how_it_works_content" msgid="5820288675316257177">"După ce ați configurat o aplicație Atingeți și plătiți, când aveți telefonul pornit, atingeți-l de orice terminal cu sigla Atingeți și plătiți pentru a efectua o achiziție."</string>
+    <!-- no translation found for nfc_how_it_works_content (4749007806393224934) -->
+    <skip />
     <string name="nfc_how_it_works_got_it" msgid="259653300203217402">"Am înțeles"</string>
     <string name="nfc_more_title" msgid="815910943655133280">"Mai multe..."</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"Setați ca preferință?"</string>
@@ -2770,7 +2772,8 @@
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"Asistent și intrare vocală"</string>
     <string name="default_assist_title" msgid="8868488975409247921">"Aplicația Asistent"</string>
     <string name="default_assist_none" msgid="3709083569608735487">"Niciuna"</string>
-    <string name="choose_assist_title" msgid="554234448228740980">"Alegeți Asistentul"</string>
+    <!-- no translation found for choose_assist_title (2373353478479305516) -->
+    <skip />
     <string name="assistant_security_warning_title" msgid="8673079231955467177">"Setați <xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> ca asistent?"</string>
     <string name="assistant_security_warning" msgid="4881965750615394002">"<xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> va putea citi informații despre aplicațiile care rulează în sistemul dvs., inclusiv informații vizibile pe ecran sau accesibile din cadrul aplicațiilor."</string>
     <string name="assistant_security_warning_agree" msgid="7710290206928033908">"Sunt de acord"</string>
@@ -2796,16 +2799,19 @@
     <string name="memory_avg_desc" msgid="1551240906596518412">"Medie de <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
     <string name="memory_use_running_format" msgid="4172488041800743760">"<xliff:g id="MEMORY">%1$s</xliff:g>/<xliff:g id="RUNNING">%2$s</xliff:g>"</string>
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
-    <string name="high_power_apps" msgid="2116416853043103135">"Ignoră optimizările"</string>
-    <string name="high_power_filter_on" msgid="3862942127137594196">"Permise"</string>
-    <string name="high_power_on" msgid="148473814103292724">"Ignoră opțiunile de optimizare a bateriei"</string>
-    <string name="high_power_off" msgid="221092098425904010">"Nu are permisiunea"</string>
-    <string name="high_power_desc" msgid="8412735192889327770">"Nu aplicați opțiunile de optimizare a bateriei. Este posibil ca bateria să se descarce mai repede."</string>
-    <plurals name="high_power_count" formatted="false" msgid="4343190376439806186">
-      <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> aplicații pot ignora opțiunile de optimizare a bateriei</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> de aplicații pot ignora opțiunile de optimizare a bateriei</item>
-      <item quantity="one">O aplicație poate ignora opțiunile de optimizare a bateriei</item>
-    </plurals>
+    <!-- no translation found for high_power_apps (3459065925679828230) -->
+    <skip />
+    <!-- no translation found for high_power_filter_on (3222265297576680099) -->
+    <skip />
+    <!-- no translation found for high_power_on (3382367497549906927) -->
+    <skip />
+    <!-- no translation found for high_power_off (3393904131961263278) -->
+    <skip />
+    <!-- no translation found for high_power_system (7362862974428225301) -->
+    <skip />
+    <!-- no translation found for high_power_desc (6283926163708585760) -->
+    <skip />
+    <!-- no translation found for high_power_count (2464701722383894640) -->
     <string name="battery_summary" msgid="101415762036784289">"S-a folosit <xliff:g id="PERCENTAGE">%1$d</xliff:g>%% de la ultima încărcare completă"</string>
     <string name="no_battery_summary" msgid="3528036835462846814">"Bateria nu a fost folosită de la ultima încărcare completă"</string>
     <string name="app_notification_preferences" msgid="1599319335092722613">"Setări pentru aplicații"</string>
@@ -2849,8 +2855,10 @@
     <string name="no_data_usage" msgid="9131454024293628063">"Nu s-au folosit date"</string>
     <string name="zen_access_warning_dialog_title" msgid="1198189958031157142">"Permiteți accesul la Nu deranja pentru <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_access_warning_dialog_summary" msgid="4015885767653010873">"Aplicația va putea să activeze/dezactiveze setarea Nu deranja și să modifice setări similare."</string>
-    <string name="ignore_optimizations_on" msgid="2417358456267927315">"Permiteți"</string>
-    <string name="ignore_optimizations_off" msgid="9069942099715006633">"Nu permiteți"</string>
+    <!-- no translation found for ignore_optimizations_on (6915689518016285116) -->
+    <skip />
+    <!-- no translation found for ignore_optimizations_off (6153196256410296835) -->
+    <skip />
     <string name="ignore_optimizations_on_desc" msgid="2321398930330555815">"Bateria se poate descărca mai repede"</string>
     <string name="ignore_optimizations_off_desc" msgid="5255731062045426544">"Recomandată pentru o autonomie mai bună a bateriei"</string>
     <string name="ignore_optimizations_title" msgid="2829637961185027768">"Permiteți ca <xliff:g id="APP">%s</xliff:g> să ignore optimizările pentru baterie?"</string>

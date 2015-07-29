@@ -327,7 +327,7 @@
     <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"የእርስዎን ማያ ገጽ መቆለፊያ ስልት ምትኬ ያቀናብሩ"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_2" msgid="4158160658182631304">"የእርስዎን የጣት አሻራ ያክሉ"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"በጣት አሻራ ይክፈቱ"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="5061093614328964700">"ስልክዎን ለመክፈት፣ ግዥዎችን ለመፍቀድ ወይም ወደ መተግበሪያዎች ለመግባት በቀላሉ የጣት አሻራ ዳሳሹን ይንኩ። ማናቸውም ወደ ስልክዎ የታከሉ የጣት አሻራዎች ይህንን ማድረግ ይችላሉ፣ ስለዚህ ማንን እንደሚያክሉ ይጠንቀቁ።"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="9193978734907066950">"ስልክዎን ለመክፈት፣ ግዢዎችን ለመፍቀድ ወይም ወደ መተግበሪያዎች በመለያ ለመግባት በቀላሉ የጣት አሻራ ዳሳሹን ይንኩ። የማን ጣት አሻራዎችን እንደሚያክሉ ላይ ይጠንቀቁ - ማንኛቸውም የታከሉ የጣት አሻራዎች እነዚህን ነገሮች ማድረግ ይችላሉ።"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="7173290350577831813">"ማስታወሻ፦ የጣት አሻራዎ ከጠንካራ ስርዓተ ጥለት ወይም ፒን ባነሰ መልኩ የተጠበቀ ሊሆን ይችላል።"</string>
     <string name="security_settings_fingerprint_enroll_introduction_risk_link_text" msgid="9129531466157620977">"ተጨማሪ ይወቁ"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"ይቅር"</string>
@@ -410,26 +410,24 @@
     <string name="unlock_set_unlock_mode_password" msgid="1203938057264146610">"የይለፍ ቃል"</string>
     <string name="unlock_setup_wizard_fingerprint_details" msgid="7893457665921363009">"አንድ ጊዜ የማያ ገጽ መቆለፊያን ካቀናበሩ በኋላ፣ በቅንብሮች እና ደህንነት ውስጥ የጣት አሻራን ማቀናበር ይችላሉ።"</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"የማያ መዝጊያ አጥፋ"</string>
-    <!-- no translation found for unlock_disable_frp_warning_title (264008934468492550) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern (8869767290771023461) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern_fingerprint (8212242533942400457) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin (586996206210265131) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin_fingerprint (875669051899437197) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password (5420612686852555537) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password_fingerprint (2228159168587170445) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_unknown (1550718040483548220) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_unknown_fingerprint (6363091330281670692) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_ok (7075138677177748705) -->
-    <skip />
+    <string name="unlock_disable_frp_warning_title" msgid="264008934468492550">"የመሳሪያ ጥበቃ ይወገድ?"</string>
+    <string name="unlock_disable_frp_warning_content_pattern" msgid="8869767290771023461">"የመሣሪያ ጥበቃ ባህሪዎች ያለ የእርስዎ ስርዓተ ጥለት አይሰሩም።"</string>
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="8212242533942400457">"የመሣሪያ ጥበቃ ባህሪዎች ያለ የእርስዎ ስርዓተ ጥለት አይሰሩም።<xliff:g id="EMPTY_LINE">
+
+</xliff:g>የተቀመጡ የእርስዎ የጣት አሻራዎችም እንዲሁም ከዚህ መሳሪያ ይወገዳሉ፣ እና በእነሱ ስልክዎን መክፈት፣ ግዢዎችን መፍቀድ፣ ወይም ወደ መተግበሪያ መግባት አይችሉም።»"</string>
+    <string name="unlock_disable_frp_warning_content_pin" msgid="586996206210265131">"የመሣሪያ ጥበቃ ባህሪዎች ያለ የእርስዎ ፒን አይሰሩም።"</string>
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="875669051899437197">"የመሣሪያ ጥበቃ ባህሪዎች ያለ የእርስዎ ፒን አይሰሩም።<xliff:g id="EMPTY_LINE">
+
+</xliff:g>የተቀመጡ የእርስዎ የጣት አሻራዎችም እንዲሁም ከዚህ መሳሪያ ይወገዳሉ፣ እና በእነሱ ስልክዎን መክፈት፣ ግዢዎችን መፍቀድ፣ ወይም ወደ መተግበሪያ መግባት አይችሉም።»"</string>
+    <string name="unlock_disable_frp_warning_content_password" msgid="5420612686852555537">"የመሣሪያ ጥበቃ ባህሪዎች ያለ የእርስዎ የይለፍ ቃል አይሰሩም።"</string>
+    <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="2228159168587170445">"የመሣሪያ ጥበቃ ባህሪዎች ያለ የእርስዎ የይለፍ ቃል አይሰሩም።<xliff:g id="EMPTY_LINE">
+
+</xliff:g>የተቀመጡ የእርስዎ የጣት አሻራዎችም እንዲሁም ከዚህ መሳሪያ ይወገዳሉ፣ እና በእነሱ ስልክዎን መክፈት፣ ግዢዎችን መፍቀድ፣ ወይም ወደ መተግበሪያ መግባት አይችሉም።»"</string>
+    <string name="unlock_disable_frp_warning_content_unknown" msgid="1550718040483548220">"የመሣሪያ ጥበቃ ባህሪዎች ያለ የእርስዎ ቁልፍ ገጽ አይሰሩም።"</string>
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="6363091330281670692">"የመሣሪያ ጥበቃ ባህሪዎች ያለ የእርስዎ ቁልፍ ገጽ አይሰሩም።<xliff:g id="EMPTY_LINE">
+
+</xliff:g>የተቀመጡ የእርስዎ የጣት አሻራዎችም እንዲሁም ከዚህ መሳሪያ ይወገዳሉ፣ እና በእነሱ ስልክዎን መክፈት፣ ግዢዎችን መፍቀድ፣ ወይም ወደ መተግበሪያ መግባት አይችሉም።»"</string>
+    <string name="unlock_disable_frp_warning_ok" msgid="7075138677177748705">"አዎ፣ አስወግድ"</string>
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"መክፈቻ ስርዓት ጥለት ለውጥ"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"መክፈቻ ፒን  ለውጥ"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"መክፈቻ ይለፍ ቃል ለውጥ"</string>
@@ -2353,18 +2351,21 @@
     <string name="global_font_change_title" msgid="1887126466191012035">"የቅርጸ-ቁምፊ መጠን ይቀይሩ"</string>
     <string name="nfc_payment_settings_title" msgid="1807298287380821613">"መታ አድርገው ይክፈሉ"</string>
     <string name="nfc_payment_how_it_works" msgid="3028822263837896720">"እንዴት እንደሚሰራ"</string>
-    <string name="nfc_payment_no_apps" msgid="3453656795093776889">"የውስጠ-መደብር ግዢዎችን ለማከናወን መታ አድርጎ መክፈልን ይጠቀሙ"</string>
+    <!-- no translation found for nfc_payment_no_apps (5477904979148086424) -->
+    <skip />
     <string name="nfc_payment_default" msgid="8648420259219150395">"የክፍያ ነባሪ"</string>
     <string name="nfc_payment_default_not_set" msgid="7485060884228447765">"አልተዘጋጀም"</string>
     <string name="nfc_payment_app_and_desc" msgid="7942415346564794258">"<xliff:g id="APP">%1$s</xliff:g> - <xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
-    <string name="nfc_payment_open_app" msgid="5550268485421927976">"መተግሪያ መታ አድርጎ መክፈልን የሚደግፍ ከሆነ ክፈት"</string>
-    <string name="nfc_payment_favor_open" msgid="7513784422533299982">"ከ<xliff:g id="APP">%1$s</xliff:g> ይልቅ ያንን መተግበሪያ ተጠቀም"</string>
-    <string name="nfc_payment_favor_open_default_unknown" msgid="1179489206233351756">"ይልቁንስ ያንን መተግበሪያ ተጠቀም"</string>
-    <string name="nfc_payment_favor_default" msgid="8238320071435721803">"አሁንም <xliff:g id="APP">%1$s</xliff:g>ን ተጠቀም"</string>
-    <string name="nfc_payment_favor_default_default_unknown" msgid="7029467023485683077">"አሁንም ነባሪ ተጠቀም"</string>
+    <!-- no translation found for nfc_payment_use_default (3234730182120288495) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_default (5743781166099608372) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_open (1923314062109977944) -->
+    <skip />
     <string name="nfc_payment_pay_with" msgid="7524904024378144072">"በመታ አድርጎ መክፈያ ላይ በሚከተለው ይክፈሉ፦"</string>
     <string name="nfc_how_it_works_title" msgid="1984068457698797207">"ተርሚናል ላይ መክፈል"</string>
-    <string name="nfc_how_it_works_content" msgid="5820288675316257177">"አንዴ የመታ አድርገው ይክፈሉ መተግበሪያውን ካዘጋጁና ስልክዎ ከበራ በኋላ ግዢ ለመፈጸም በማንኛውም ተርሚናል ላይ ስልክዎን በመታ አድርገው ይክፈሉ አርማው መታ ያድርጉ።"</string>
+    <!-- no translation found for nfc_how_it_works_content (4749007806393224934) -->
+    <skip />
     <string name="nfc_how_it_works_got_it" msgid="259653300203217402">"ገባኝ"</string>
     <string name="nfc_more_title" msgid="815910943655133280">"ተጨማሪ..."</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"እንደ ምርጫዎ ሆኖ ይዘጋጅ?"</string>
@@ -2753,7 +2754,7 @@
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"እገዛ እና ድምጽ ግቤት"</string>
     <string name="default_assist_title" msgid="8868488975409247921">"የእገዛ መተግበሪያ"</string>
     <string name="default_assist_none" msgid="3709083569608735487">"ምንም"</string>
-    <string name="choose_assist_title" msgid="554234448228740980">"ረዳት ይምረጡ"</string>
+    <string name="choose_assist_title" msgid="2373353478479305516">"የረዳት መተግበሪያን ይምረጡ"</string>
     <string name="assistant_security_warning_title" msgid="8673079231955467177">"<xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> የእርስዎ ረዳት ይደረግ?"</string>
     <string name="assistant_security_warning" msgid="4881965750615394002">"<xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> በስርዓትዎ ላይ ጥቅም ላይ ስለዋሉት መተግበሪያዎች መረጃ ለማንበብ ይችላል፣ በማያ ገጽዎ ላይ ያለ ወይም በመተግበሪያዎች የደረሰበት መረጃን ጨምሮ።"</string>
     <string name="assistant_security_warning_agree" msgid="7710290206928033908">"እስማማለሁ"</string>
@@ -2779,14 +2780,15 @@
     <string name="memory_avg_desc" msgid="1551240906596518412">"አማካኝ <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
     <string name="memory_use_running_format" msgid="4172488041800743760">"<xliff:g id="MEMORY">%1$s</xliff:g> / <xliff:g id="RUNNING">%2$s</xliff:g>"</string>
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
-    <string name="high_power_apps" msgid="2116416853043103135">"ማትባቶችን ችላ በል"</string>
-    <string name="high_power_filter_on" msgid="3862942127137594196">"ተፈቅዷል"</string>
-    <string name="high_power_on" msgid="148473814103292724">"የባትሪ ማትባቶችን ችላ በማለት ላይ"</string>
-    <string name="high_power_off" msgid="221092098425904010">"አይፈቀድም"</string>
-    <string name="high_power_desc" msgid="8412735192889327770">"የባትሪ ማትባትን አትተግብር። ባትሪዎን ይበልጥ በፍጥነት ሊጨርሰው ይችላል።"</string>
-    <plurals name="high_power_count" formatted="false" msgid="4343190376439806186">
-      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> መተግበሪያዎች ለባትሪ ማትባቶች ተፈቅዶላቸዋል</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> መተግበሪያዎች ለባትሪ ማትባቶች ተፈቅዶላቸዋል</item>
+    <string name="high_power_apps" msgid="3459065925679828230">"ባትሪን ማትባት"</string>
+    <string name="high_power_filter_on" msgid="3222265297576680099">"አልተባም"</string>
+    <string name="high_power_on" msgid="3382367497549906927">"ባትሪ ማትባትን ችላ ማለት"</string>
+    <string name="high_power_off" msgid="3393904131961263278">"የባትሪ አጠቃቀምን አትባ"</string>
+    <string name="high_power_system" msgid="7362862974428225301">"የባትሪ ማትባት አይገኝም"</string>
+    <string name="high_power_desc" msgid="6283926163708585760">"የባትሪ ማትባትን አትተግብር። ባትሪዎን በበለጠ ፍጥነት ሊጨርሰው ይችላል።"</string>
+    <plurals name="high_power_count" formatted="false" msgid="2464701722383894640">
+      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> መተግበሪያዎች ባትሪን ማትባት ችላ እንዲባል ፈቅደዋል</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> መተግበሪያዎች ባትሪን ማትባት ችላ እንዲባል ፈቅደዋል</item>
     </plurals>
     <string name="battery_summary" msgid="101415762036784289">"<xliff:g id="PERCENTAGE">%1$d</xliff:g>%% ከመጨረሻው ሙሉ ኃይል መሙላት በኋላ አጠቃቀም"</string>
     <string name="no_battery_summary" msgid="3528036835462846814">"ከመጨረሻው ሙሉ ኃይል  መሙላት በኋላ ምንም የባትሪ አጠቃቀም የለም"</string>
@@ -2830,8 +2832,8 @@
     <string name="no_data_usage" msgid="9131454024293628063">"ምንም ውሂብ ጥቅም ላይ አልዋለም"</string>
     <string name="zen_access_warning_dialog_title" msgid="1198189958031157142">"አትረብሽ የ<xliff:g id="APP">%1$s</xliff:g> መዳረሻ ይፈቀድለት?"</string>
     <string name="zen_access_warning_dialog_summary" msgid="4015885767653010873">"መተግበሪያው አትረብሽን ማብራት/ማጥፋት እና በተዛማጅ ቅንብሮች ላይ ለውጦችን ማድረግ ይችላል።"</string>
-    <string name="ignore_optimizations_on" msgid="2417358456267927315">"ፍቀድ"</string>
-    <string name="ignore_optimizations_off" msgid="9069942099715006633">"አትፍቀድ"</string>
+    <string name="ignore_optimizations_on" msgid="6915689518016285116">"አታትባ"</string>
+    <string name="ignore_optimizations_off" msgid="6153196256410296835">"አትባ"</string>
     <string name="ignore_optimizations_on_desc" msgid="2321398930330555815">"ባትሪዎን በፍጥነት ይጨርሰው ይሆናል"</string>
     <string name="ignore_optimizations_off_desc" msgid="5255731062045426544">"ለባትሪ እድሜ የሚመከር"</string>
     <string name="ignore_optimizations_title" msgid="2829637961185027768">"<xliff:g id="APP">%s</xliff:g> የባትሪ ማመቻቸቶችን ችላ እንዲል ይፈቀድለት?"</string>
