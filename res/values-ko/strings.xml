@@ -327,7 +327,7 @@
     <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"백업 화면 잠금 방식을 설정하세요."</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_2" msgid="4158160658182631304">"지문 추가"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"지문으로 잠금 해제"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="5061093614328964700">"휴대전화를 잠금 해제하거나, 구매를 승인하거나, 앱에 로그인하려면 지문 센서를 터치하기만 하면 됩니다. 휴대전화에 지문이 추가된 사용자 누구나 이러한 작업을 수행할 수 있으므로 누구의 지문을 추가할지 신중하게 선택하세요."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="9193978734907066950">"휴대전화를 잠금 해제하거나, 구매를 승인하거나, 앱에 로그인할 때 지문 센서를 터치하기만 하면 됩니다. 휴대전화에 지문이 추가된 사용자 누구나 이러한 작업을 수행할 수 있으므로 누구의 지문을 추가할지 신중하게 선택하세요."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="7173290350577831813">"참고: 지문은 강력한 패턴 또는 PIN보다 보안이 취약합니다."</string>
     <string name="security_settings_fingerprint_enroll_introduction_risk_link_text" msgid="9129531466157620977">"자세히 알아보기"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"취소"</string>
@@ -410,26 +410,24 @@
     <string name="unlock_set_unlock_mode_password" msgid="1203938057264146610">"비밀번호"</string>
     <string name="unlock_setup_wizard_fingerprint_details" msgid="7893457665921363009">"화면 잠금 설정을 완료하면 설정 &gt; 보안에서 지문도 추가할 수 있습니다."</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"화면 잠금 사용 안함"</string>
-    <!-- no translation found for unlock_disable_frp_warning_title (264008934468492550) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern (8869767290771023461) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern_fingerprint (8212242533942400457) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin (586996206210265131) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin_fingerprint (875669051899437197) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password (5420612686852555537) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password_fingerprint (2228159168587170445) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_unknown (1550718040483548220) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_unknown_fingerprint (6363091330281670692) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_ok (7075138677177748705) -->
-    <skip />
+    <string name="unlock_disable_frp_warning_title" msgid="264008934468492550">"기기 보호 기능을 삭제하시겠습니까?"</string>
+    <string name="unlock_disable_frp_warning_content_pattern" msgid="8869767290771023461">"기기 보호 기능은 패턴 없이 작동하지 않습니다."</string>
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="8212242533942400457">"기기 보호 기능은 패턴 없이 작동하지 않습니다. <xliff:g id="EMPTY_LINE">
+
+</xliff:g>저장된 지문 파일이 이 기기에서 삭제되며 지문을 이용해 휴대전화의 잠금을 해제하거나, 구매를 승인하거나, 앱에 로그인할 수 없게 됩니다."</string>
+    <string name="unlock_disable_frp_warning_content_pin" msgid="586996206210265131">"기기 보호 기능은 PIN 없이 작동하지 않습니다."</string>
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="875669051899437197">"기기 보호 기능은 PIN 없이 작동하지 않습니다.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>저장된 지문 파일이 이 기기에서 삭제되며 지문을 이용해 휴대전화의 잠금을 해제하거나, 구매를 승인하거나, 앱에 로그인할 수 없게 됩니다."</string>
+    <string name="unlock_disable_frp_warning_content_password" msgid="5420612686852555537">"기기 보호 기능은 비밀번호 없이 작동하지 않습니다."</string>
+    <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="2228159168587170445">"기기 보호 기능은 비밀번호 없이 작동하지 않습니다. <xliff:g id="EMPTY_LINE">
+
+</xliff:g>저장된 지문 파일이 이 기기에서 삭제되며 지문을 이용해 휴대전화의 잠금을 해제하거나, 구매를 승인하거나, 앱에 로그인할 수 없게 됩니다."</string>
+    <string name="unlock_disable_frp_warning_content_unknown" msgid="1550718040483548220">"기기 보호 기능은 화면 잠금 없이 작동하지 않습니다."</string>
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="6363091330281670692">"기기 보호 기능은 화면 잠금 없이 작동하지 않습니다. <xliff:g id="EMPTY_LINE">
+
+</xliff:g>저장된 지문 파일이 이 기기에서 삭제되며 지문을 이용해 휴대전화의 잠금을 해제하거나, 구매를 승인하거나, 앱에 로그인할 수 없게 됩니다."</string>
+    <string name="unlock_disable_frp_warning_ok" msgid="7075138677177748705">"네, 삭제합니다."</string>
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"잠금해제 패턴 변경"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"잠금해제 PIN 변경"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"잠금해제 비밀번호 변경"</string>
@@ -2353,18 +2351,21 @@
     <string name="global_font_change_title" msgid="1887126466191012035">"글꼴 크기 변경"</string>
     <string name="nfc_payment_settings_title" msgid="1807298287380821613">"탭앤페이"</string>
     <string name="nfc_payment_how_it_works" msgid="3028822263837896720">"작동 방식"</string>
-    <string name="nfc_payment_no_apps" msgid="3453656795093776889">"탭앤페이를 사용하여 오프라인 구매"</string>
+    <!-- no translation found for nfc_payment_no_apps (5477904979148086424) -->
+    <skip />
     <string name="nfc_payment_default" msgid="8648420259219150395">"기본 결제 앱"</string>
     <string name="nfc_payment_default_not_set" msgid="7485060884228447765">"설정되지 않음"</string>
     <string name="nfc_payment_app_and_desc" msgid="7942415346564794258">"<xliff:g id="APP">%1$s</xliff:g> - <xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
-    <string name="nfc_payment_open_app" msgid="5550268485421927976">"열려 있는 앱에서 탭앤페이를 지원하는 경우"</string>
-    <string name="nfc_payment_favor_open" msgid="7513784422533299982">"<xliff:g id="APP">%1$s</xliff:g> 대신 이 앱 사용"</string>
-    <string name="nfc_payment_favor_open_default_unknown" msgid="1179489206233351756">"대신 이 앱 사용"</string>
-    <string name="nfc_payment_favor_default" msgid="8238320071435721803">"계속 <xliff:g id="APP">%1$s</xliff:g> 사용"</string>
-    <string name="nfc_payment_favor_default_default_unknown" msgid="7029467023485683077">"계속 기본 앱 사용"</string>
+    <!-- no translation found for nfc_payment_use_default (3234730182120288495) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_default (5743781166099608372) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_open (1923314062109977944) -->
+    <skip />
     <string name="nfc_payment_pay_with" msgid="7524904024378144072">"탭앤페이 터미널에서 결제에 사용할 앱:"</string>
     <string name="nfc_how_it_works_title" msgid="1984068457698797207">"단말기에서 결제"</string>
-    <string name="nfc_how_it_works_content" msgid="5820288675316257177">"탭앤페이 앱을 설정하고 휴대전화가 켜진 상태라면 탭앤페이 로고가 표시된 단말기에 휴대전화를 탭하여 구매할 수 있습니다."</string>
+    <!-- no translation found for nfc_how_it_works_content (4749007806393224934) -->
+    <skip />
     <string name="nfc_how_it_works_got_it" msgid="259653300203217402">"확인"</string>
     <string name="nfc_more_title" msgid="815910943655133280">"더보기..."</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"기본으로 설정하시겠습니까?"</string>
@@ -2753,9 +2754,10 @@
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"지원 및 음성 입력"</string>
     <string name="default_assist_title" msgid="8868488975409247921">"지원 앱"</string>
     <string name="default_assist_none" msgid="3709083569608735487">"없음"</string>
-    <string name="choose_assist_title" msgid="554234448228740980">"어시스트 선택"</string>
+    <string name="choose_assist_title" msgid="2373353478479305516">"지원 앱 선택"</string>
     <string name="assistant_security_warning_title" msgid="8673079231955467177">"<xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g>을(를) 어시스턴트로 설정하시겠습니까?"</string>
-    <string name="assistant_security_warning" msgid="4881965750615394002">"<xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g>에서 사용자의 화면에 표시되는 정보나 앱 내에서 액세스할 수 있는 정보 등 Google 시스템에서 사용하는 앱 관련 정보를 읽을 수 있게 됩니다."</string>
+    <!-- no translation found for assistant_security_warning (8498726261327239136) -->
+    <skip />
     <string name="assistant_security_warning_agree" msgid="7710290206928033908">"동의"</string>
     <string name="assistant_security_warning_disagree" msgid="877419950830205913">"동의 안함"</string>
     <string name="choose_voice_input_title" msgid="975471367067718019">"음성 입력 선택"</string>
@@ -2779,14 +2781,15 @@
     <string name="memory_avg_desc" msgid="1551240906596518412">"평균 <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
     <string name="memory_use_running_format" msgid="4172488041800743760">"<xliff:g id="MEMORY">%1$s</xliff:g>/<xliff:g id="RUNNING">%2$s</xliff:g>"</string>
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g>(<xliff:g id="COUNT">%2$d</xliff:g>개)"</string>
-    <string name="high_power_apps" msgid="2116416853043103135">"최적화 무시"</string>
-    <string name="high_power_filter_on" msgid="3862942127137594196">"허용"</string>
-    <string name="high_power_on" msgid="148473814103292724">"배터리 최적화 무시"</string>
-    <string name="high_power_off" msgid="221092098425904010">"허용 안함"</string>
-    <string name="high_power_desc" msgid="8412735192889327770">"배터리 최적화를 적용하지 마세요. 배터리가 더 빨리 방전될 수 있습니다."</string>
-    <plurals name="high_power_count" formatted="false" msgid="4343190376439806186">
-      <item quantity="other">앱 <xliff:g id="COUNT">%d</xliff:g>개에서 배터리 최적화를 무시할 수 있도록 허용함</item>
-      <item quantity="one">앱 1개에서 배터리 최적화를 무시할 수 있도록 허용함</item>
+    <string name="high_power_apps" msgid="3459065925679828230">"배터리 최적화"</string>
+    <string name="high_power_filter_on" msgid="3222265297576680099">"최적화되지 않음"</string>
+    <string name="high_power_on" msgid="3382367497549906927">"배터리 최적화 무시"</string>
+    <string name="high_power_off" msgid="3393904131961263278">"배터리 최적화 사용"</string>
+    <string name="high_power_system" msgid="7362862974428225301">"배터리 최적화를 사용할 수 없음"</string>
+    <string name="high_power_desc" msgid="6283926163708585760">"배터리 최적화를 적용하지 마세요. 배터리가 더 빨리 방전될 수 있습니다."</string>
+    <plurals name="high_power_count" formatted="false" msgid="2464701722383894640">
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g>개 앱이 배터리 최적화를 무시하도록 허용되었습니다.</item>
+      <item quantity="one">1개 앱이 배터리 최적화를 무시하도록 허용되었습니다.</item>
     </plurals>
     <string name="battery_summary" msgid="101415762036784289">"마지막으로 완전히 충전한 이후 <xliff:g id="PERCENTAGE">%1$d</xliff:g>%% 사용"</string>
     <string name="no_battery_summary" msgid="3528036835462846814">"마지막으로 완전히 충전한 이후 배터리를 사용하지 않음"</string>
@@ -2830,8 +2833,8 @@
     <string name="no_data_usage" msgid="9131454024293628063">"사용한 데이터 없음"</string>
     <string name="zen_access_warning_dialog_title" msgid="1198189958031157142">"<xliff:g id="APP">%1$s</xliff:g>의 알림 일시중지 기능에 액세스하도록 허용하시겠습니까?"</string>
     <string name="zen_access_warning_dialog_summary" msgid="4015885767653010873">"앱에서 알림 일시중지 기능을 사용 또는 사용 중지하고 관련 설정을 변경할 수 있습니다."</string>
-    <string name="ignore_optimizations_on" msgid="2417358456267927315">"허용"</string>
-    <string name="ignore_optimizations_off" msgid="9069942099715006633">"허용 안함"</string>
+    <string name="ignore_optimizations_on" msgid="6915689518016285116">"최적화하지 않음"</string>
+    <string name="ignore_optimizations_off" msgid="6153196256410296835">"최적화"</string>
     <string name="ignore_optimizations_on_desc" msgid="2321398930330555815">"배터리가 더 빨리 방전될 수 있습니다."</string>
     <string name="ignore_optimizations_off_desc" msgid="5255731062045426544">"배터리 수명을 늘리기 위한 추천사항"</string>
     <string name="ignore_optimizations_title" msgid="2829637961185027768">"<xliff:g id="APP">%s</xliff:g>에서 배터리 최적화를 무시하도록 허용할까요?"</string>

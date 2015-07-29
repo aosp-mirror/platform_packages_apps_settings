@@ -327,7 +327,7 @@
     <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"သင့်ဖုန်း ဖန်သားပြင်သော့စနစ်အား သတ်မှတ်ပါ"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_2" msgid="4158160658182631304">"သင့်ရဲ့ လက်ဗွေကိုထည့်သွင်းပါ"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"လက်ဗွေရာသုံး၍ ဖွင့်ပါ"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="5061093614328964700">"သင့်ဖုန်းအားဖွင့်ရန်၊ ဝယ်ယူမှုများအား ခွင့်ပြုရန် သို့မဟုတ် app များအား လက်မှတ်ထိုးဝင်ရန် စသည်တို့အတွက် လက်ဗွေရာ အာရုံခံနေရာအား ထိရုံထိပါ။ သင့်ဖုန်းအား ထပ်ထည့်သော မည်သည့်လက်ဗွေရာမဆို ဤအရာများအား ပြုလုပ်နိုင်မည်ဖြစ်သောကြောင့်၊ သင် ထပ်ထည့်မည့်သူအား သတိထားပါ။"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="9193978734907066950">"သင့်ဖုန်းကို သော့ဖွင့်ရန်၊ ဈေးဝယ်မှုများကို အတည်ပြုရန်၊ သို့မဟုတ် အက်ပ်များထဲသို့ လက်မှတ်ထိုး ဝင်ရန် လက်ဗွေ အာရုံခံကိရိယာကို ထိပေးရုံပါပဲ။ မည်သူ၏ လက်ဗွေများကို ထည့်ပေးမည်ကို သတိထား လုပ်ကိုင်ပါ - ထည့်ပေးလိုက်သည့် မည်သည့် လက်ဗွေမဆို ယင်းအရာများကို လုပ်ကိုင်နိုင်စွမ်း ရှိလာမည်။"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="7173290350577831813">"မှတ်ချက်- သင့်လက်ဗွေရာသည် ခိုင်မာသော ပုံစံ သို့မဟုတ် PIN ထက် လုံခြုံရေးနည်းနိုင်သည်။"</string>
     <string name="security_settings_fingerprint_enroll_introduction_risk_link_text" msgid="9129531466157620977">"ပိုပြီး လေ့လာရန်"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"ဖျက်သိမ်းရန်"</string>
@@ -410,26 +410,24 @@
     <string name="unlock_set_unlock_mode_password" msgid="1203938057264146610">"လျို့ဝှက် နံပါတ်"</string>
     <string name="unlock_setup_wizard_fingerprint_details" msgid="7893457665921363009">"ဖုန်းမျက်နှာပြင်လော့ချမှုစလုပ်သည့်အခါ ပြင်ဆင်ရွေးချယ်ရေးနှင့်လုံခြံရေးတွင် သင့်လက်ဗွေဖြင့်လည်းလော့ချနိုင်သည်။"</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"မျက်နှာပြင်သော့ပိတ်မည်"</string>
-    <!-- no translation found for unlock_disable_frp_warning_title (264008934468492550) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern (8869767290771023461) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern_fingerprint (8212242533942400457) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin (586996206210265131) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin_fingerprint (875669051899437197) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password (5420612686852555537) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password_fingerprint (2228159168587170445) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_unknown (1550718040483548220) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_unknown_fingerprint (6363091330281670692) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_ok (7075138677177748705) -->
-    <skip />
+    <string name="unlock_disable_frp_warning_title" msgid="264008934468492550">"ကိရိယာအား ကာကွယ်မှုကို ဖယ်ရှားရမလား?"</string>
+    <string name="unlock_disable_frp_warning_content_pattern" msgid="8869767290771023461">"ကိရိယာအား ကာကွယ်ရေး အင်္ဂါရပ်များမှာ သင်၏ ပုံစံမရှိဘဲ အလုပ်မလုပ်နိုင်ပါ။"</string>
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="8212242533942400457">"ကိရိယာအား ကာကွယ်ရေး အင်္ဂါရပ်များမှာ သင်၏ ပုံစံမရှိဘဲ အလုပ်မလုပ်နိုင်ပါ။ <xliff:g id="EMPTY_LINE">
+
+</xliff:g> သင်၏ သိမ်းဆည်းထားသည့် လက်ဗွေများကိုပါ ကိရိယာထဲမှ ဖယ်ရှားလိုက်လျက် သင်သည် ၎င်းတို့ဖြင့် သင်၏ ဖုန်းကို သော့ဖွင့်ခြင်း၊ ဈေးဝယ်မှုကို အတည်ပြုခြင်း၊ သို့မဟုတ် အက်ပ်များထဲသို့ လက်မှတ်ထိုးဝင်ခြင်းကို မလုပ်နိုင်တော့ပါ။\""</string>
+    <string name="unlock_disable_frp_warning_content_pin" msgid="586996206210265131">"ကိရိယာအား ကာကွယ်ရေး အင်္ဂါရပ်များမှာ သင်၏ PIN မရှိဘဲ အလုပ်မလုပ်နိုင်ပါ။"</string>
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="875669051899437197">"ကိရိယာအား ကာကွယ်ရေး အင်္ဂါရပ်များမှာ သင်၏ PIN မရှိဘဲ အလုပ်မလုပ်နိုင်ပါ။ <xliff:g id="EMPTY_LINE">
+
+</xliff:g> သင်၏ သိမ်းဆည်းထားသည့် လက်ဗွေများကိုပါ ကိရိယာထဲမှ ဖယ်ရှားလိုက်လျက် သင်သည် ၎င်းတို့ဖြင့် သင်၏ ဖုန်းကို သော့ဖွင့်ခြင်း၊ ဈေးဝယ်မှုကို အတည်ပြုခြင်း၊ သို့မဟုတ် အက်ပ်များထဲသို့ လက်မှတ်ထိုးဝင်ခြင်းကို မလုပ်နိုင်တော့ပါ။\""</string>
+    <string name="unlock_disable_frp_warning_content_password" msgid="5420612686852555537">"ကိရိယာအား ကာကွယ်ရေး အင်္ဂါရပ်များမှာ သင်၏ စကားဝှက်မပါဘဲ အလုပ်မလုပ်နိုင်ပါ။"</string>
+    <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="2228159168587170445">"ကိရိယာအား ကာကွယ်ရေး အင်္ဂါရပ်များမှာ သင်၏ စကားဝှက်မပါဘဲ အလုပ်မလုပ်နိုင်ပါ။ <xliff:g id="EMPTY_LINE">
+
+</xliff:g> သင်၏ သိမ်းဆည်းထားသည့် လက်ဗွေများကိုပါ ကိရိယာထဲမှ ဖယ်ရှားလိုက်လျက် သင်သည် ၎င်းတို့ဖြင့် သင်၏ ဖုန်းကို သော့ဖွင့်ခြင်း၊ ဈေးဝယ်မှုကို အတည်ပြုခြင်း၊ သို့မဟုတ် အက်ပ်များထဲသို့ လက်မှတ်ထိုးဝင်ခြင်းကို မလုပ်နိုင်တော့ပါ။\""</string>
+    <string name="unlock_disable_frp_warning_content_unknown" msgid="1550718040483548220">"ကိရိယာအား ကာကွယ်ရေး အင်္ဂါရပ်များမှာ သင်၏ မျက်မှာပြင် သော့ခတ်မှု မရှိဘဲ အလုပ်မလုပ်နိုင်ပါ။"</string>
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="6363091330281670692">"ကိရိယာအား ကာကွယ်ရေး အင်္ဂါရပ်များမှာ သင်၏ မျက်မှာပြင် သော့ခတ်မှု မရှိဘဲ အလုပ်မလုပ်နိုင်ပါ။ <xliff:g id="EMPTY_LINE">
+
+</xliff:g> သင်၏ သိမ်းဆည်းထားသည့် လက်ဗွေများကိုပါ ကိရိယာထဲမှ ဖယ်ရှားလိုက်လျက် သင်သည် ၎င်းတို့ဖြင့် သင်၏ ဖုန်းကို သော့ဖွင့်ခြင်း၊ ဈေးဝယ်မှုကို အတည်ပြုခြင်း၊ သို့မဟုတ် အက်ပ်များထဲသို့ လက်မှတ်ထိုးဝင်ခြင်းကို မလုပ်နိုင်တော့ပါ။\""</string>
+    <string name="unlock_disable_frp_warning_ok" msgid="7075138677177748705">"ဟုတ်ကဲ့၊ ဖယ်ရှားပါ"</string>
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"သော့ဖွင့်ရန်ပုံဖော်မှုအား ပြောင်းမည်"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"ပင်နံပါတ်ပြောင်းမည်"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"ဖွင့်ရန်စကားဝှက်အား ပြောင်းမည်"</string>
@@ -2353,18 +2351,21 @@
     <string name="global_font_change_title" msgid="1887126466191012035">"စာလုံးအရွယ်အစားပြောင်းရန်"</string>
     <string name="nfc_payment_settings_title" msgid="1807298287380821613">"တို့ထ‌ိပေးစနစ်"</string>
     <string name="nfc_payment_how_it_works" msgid="3028822263837896720">"အဲဒါ အလုပ် လုပ်ပုံ"</string>
-    <string name="nfc_payment_no_apps" msgid="3453656795093776889">"စတိုးအတွင်း ဝယ်ယူမှုများအတွက် ထိတွေ့ &amp; ပေးချေအား သုံးရန်"</string>
+    <!-- no translation found for nfc_payment_no_apps (5477904979148086424) -->
+    <skip />
     <string name="nfc_payment_default" msgid="8648420259219150395">"အလိုအလျောက် ငွေချေမှု"</string>
     <string name="nfc_payment_default_not_set" msgid="7485060884228447765">"မသတ်မှတ်ထားပါ"</string>
     <string name="nfc_payment_app_and_desc" msgid="7942415346564794258">"<xliff:g id="APP">%1$s</xliff:g> - <xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
-    <string name="nfc_payment_open_app" msgid="5550268485421927976">"Open app သည် ထိတွေ့ &amp; ပေးချေ အား ပံ့ပိုးပါက"</string>
-    <string name="nfc_payment_favor_open" msgid="7513784422533299982">"<xliff:g id="APP">%1$s</xliff:g> အစား ထို app သုံးပါ"</string>
-    <string name="nfc_payment_favor_open_default_unknown" msgid="1179489206233351756">"ထို app အား အစားထိုးသုံးပါ"</string>
-    <string name="nfc_payment_favor_default" msgid="8238320071435721803">"<xliff:g id="APP">%1$s</xliff:g> သုံးဆဲဖြစ်၏"</string>
-    <string name="nfc_payment_favor_default_default_unknown" msgid="7029467023485683077">"ပုံမှန်နည်းအား သုံးဆဲဖြစ်၏"</string>
+    <!-- no translation found for nfc_payment_use_default (3234730182120288495) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_default (5743781166099608372) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_open (1923314062109977944) -->
+    <skip />
     <string name="nfc_payment_pay_with" msgid="7524904024378144072">"ထိတွေ့ &amp; ပေးချေရန်နေရာတွင်၊ ဖော်ပြထားသောအရာဖြင့် ပေးပါ-"</string>
     <string name="nfc_how_it_works_title" msgid="1984068457698797207">"မှတ်တိုင်တွင် ငွေချေခြင်း"</string>
-    <string name="nfc_how_it_works_content" msgid="5820288675316257177">"သင့်ဖုန်းကို ဖွင့်ထားပြီး၊ Tap &amp; pay app အား သင်တပ်ဆင်ပြီးသည်နှင့်တစ်ပြိုင်နက် ဝယ်ယူမှုတစ်ခု ပြုလုပ်ရန် Tap &amp; pay လိုဂိုပါသည့် မည်သည့် အရောင်းကောင်တာတွင်မဆို သင့်ဖုန်းအား နှိပ်ပါ။"</string>
+    <!-- no translation found for nfc_how_it_works_content (4749007806393224934) -->
+    <skip />
     <string name="nfc_how_it_works_got_it" msgid="259653300203217402">"ရပါပြီ"</string>
     <string name="nfc_more_title" msgid="815910943655133280">"နောက်ထပ်..."</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"သင်၏ ဦးစားပေးချက်များ သတ်မှတ်မည်လား?"</string>
@@ -2753,9 +2754,10 @@
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"အကူအညီ &amp; အသံဖြင့်စာရိုက်ခြင်း"</string>
     <string name="default_assist_title" msgid="8868488975409247921">"အကူအညီပေးရေး app"</string>
     <string name="default_assist_none" msgid="3709083569608735487">"မရှိ"</string>
-    <string name="choose_assist_title" msgid="554234448228740980">"Assist အား ရွေးပါ"</string>
+    <string name="choose_assist_title" msgid="2373353478479305516">"ကူညီရေး အက်ပ်ကို ရွေးပါ"</string>
     <string name="assistant_security_warning_title" msgid="8673079231955467177">"<xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> အား သင့်လက်ထောက်အဖြစ် ပြုမည်လား?"</string>
-    <string name="assistant_security_warning" msgid="4881965750615394002">"သင့်ဖန်မျက်နှာပြင်တွင်မြင်ရသော သို့မဟုတ် app များမှရယူနိုင်သုံးသော အချက်အလက်များ အပါအဝင်၊ သင့်စနစ်တွင် သုံးနေသော အချက်အလက်အကြောင်းအား <xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> မှ ဖတ်နိုင်မည်ဖြစ်၏။"</string>
+    <!-- no translation found for assistant_security_warning (8498726261327239136) -->
+    <skip />
     <string name="assistant_security_warning_agree" msgid="7710290206928033908">"ကောင်းပြီ"</string>
     <string name="assistant_security_warning_disagree" msgid="877419950830205913">"သဘောမတူပါ"</string>
     <string name="choose_voice_input_title" msgid="975471367067718019">"အသံဖြင့်စာရိုက်ထည့်ခြင်းအား ရွေးပါ"</string>
@@ -2779,14 +2781,15 @@
     <string name="memory_avg_desc" msgid="1551240906596518412">"ပျမ်းမျှ <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
     <string name="memory_use_running_format" msgid="4172488041800743760">"<xliff:g id="MEMORY">%1$s</xliff:g> / <xliff:g id="RUNNING">%2$s</xliff:g>"</string>
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> ( <xliff:g id="COUNT">%2$d</xliff:g> )"</string>
-    <string name="high_power_apps" msgid="2116416853043103135">"လျစ်လျူရှုထားသည်များ"</string>
-    <string name="high_power_filter_on" msgid="3862942127137594196">"ခွင့်ပြုထားသည်"</string>
-    <string name="high_power_on" msgid="148473814103292724">"ဘက္ထရီအကောင်းဆုံးဖြစ်အောင်ပြုခြင်းအား လျစ်လျူရှုထား၏"</string>
-    <string name="high_power_off" msgid="221092098425904010">"ခွင့်မပြုပါ"</string>
-    <string name="high_power_desc" msgid="8412735192889327770">"ဘက္ထရီအကောင်းဆုံးဖြစ်အောင်ပြုခြင်းအား မသုံးပါနှင့်။ ဘက္ထရီ ပိုမြန်မြန် ကုန်နိုင်၏။"</string>
-    <plurals name="high_power_count" formatted="false" msgid="4343190376439806186">
-      <item quantity="other"> ဘက္ထရီပိုမိုကောင်းမွန်ရေးအတွက် app <xliff:g id="COUNT">%d</xliff:g> ခုအား ခွင့်ပြုသည်</item>
-      <item quantity="one">ဘက္ထရီပိုမိုကောင်းမွန်ရေးအား လျစ်လျူရှုရန် app တစ်ခုအား ခွင့်ပြုသည်</item>
+    <string name="high_power_apps" msgid="3459065925679828230">"ဘက်ထရီအား သင့်မြတ်အောင် လုပ်ကိုင်မှု"</string>
+    <string name="high_power_filter_on" msgid="3222265297576680099">"သင့်မြတ်အောင် မလုပ်ရသေး"</string>
+    <string name="high_power_on" msgid="3382367497549906927">"ဘက်ထရီ အသုံးပြုမှု သင့်မြတ်အောင် လုပ်ကိုင်မှုကို လျစ်လျူရှုနေ"</string>
+    <string name="high_power_off" msgid="3393904131961263278">"ဘက်ထရီ အသုံးပြုမှု သင့်မြတ်အောင် လုပ်နေ"</string>
+    <string name="high_power_system" msgid="7362862974428225301">"ဘက်ထရီအား သင့်မြတ်အောင် လုပ်ကိုင် မရ"</string>
+    <string name="high_power_desc" msgid="6283926163708585760">"ဘက်ထရီအား သင့်မြတ်အောင် လုပ်ကိုင်ရေးကို မလျှောက်ပါနှင့်။ ဘက်ထရီ အားကို ပိုလျင်မြန်စွာ ကုန်သွားစေနိုင်သည်။"</string>
+    <plurals name="high_power_count" formatted="false" msgid="2464701722383894640">
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> အက်ပ်အား ဘက်ထရီအား သင့်မြတ်အောင် လုပ်ကိုင်မှုကို လျစ်လျူရှုခွင့် ပြုထား</item>
+      <item quantity="one"> 1 အက်ပ်အား ဘက်ထရီအား သင့်မြတ်အောင် လုပ်ကိုင်မှုကို လျစ်လျူရှုခွင့် ပြုထား</item>
     </plurals>
     <string name="battery_summary" msgid="101415762036784289">"နောက်ဆုံးအကြိမ် အားအပြည့်သွင်းပြီးသည်မှ <xliff:g id="PERCENTAGE">%1$d</xliff:g>%% သုံးပြီး၏"</string>
     <string name="no_battery_summary" msgid="3528036835462846814">"နောက်ဆုံးအကြိမ် အားအပြည့်သွင်းပြီးသည့်နောက် ဘက္ထရီမသုံးပါ"</string>
@@ -2830,8 +2833,8 @@
     <string name="no_data_usage" msgid="9131454024293628063">"မည်သည့်ဒေတာမျှ အသုံးမပြုပါ"</string>
     <string name="zen_access_warning_dialog_title" msgid="1198189958031157142">"<xliff:g id="APP">%1$s</xliff:g>အတွက် မနှောင့်ယှက်ရန်ကို အသုံးပြုခွင့်ပေးမလား?"</string>
     <string name="zen_access_warning_dialog_summary" msgid="4015885767653010873">"အပ်ဖ်သည် မနှောင့်ယှက်ရန်ကို အဖွင့်/အပိတ်ပြုလုပ်နိုင်ကာ သက်ဆိုင်ရာ ချိန်ညှိချက်များကို ပြောင်းလဲနိုင်ပါသည်။"</string>
-    <string name="ignore_optimizations_on" msgid="2417358456267927315">"ခွင့်ပြုသည်"</string>
-    <string name="ignore_optimizations_off" msgid="9069942099715006633">"ခွင့်မပြုပါ"</string>
+    <string name="ignore_optimizations_on" msgid="6915689518016285116">"သင့်မြတ်အောင် မလုပ်ပါနှင့်"</string>
+    <string name="ignore_optimizations_off" msgid="6153196256410296835">"သင့်မြတ်အောင် လုပ်ကိုင်ရန်"</string>
     <string name="ignore_optimizations_on_desc" msgid="2321398930330555815">"သင့်ဘတ်ထရီအား ပိုမိုလျှင်မြန်စွာ ကုန်စေပါသည်။"</string>
     <string name="ignore_optimizations_off_desc" msgid="5255731062045426544">"ပိုမိုကောင်းမွန်သည့် ဘတ်ထရီသက်တမ်းအတွက် အကြံပြုထား၏။"</string>
     <string name="ignore_optimizations_title" msgid="2829637961185027768">"ဘတ်ထရီ ပိုမိုကောင်းမွန်ရေးကို လျစ်လျူရှုရန် <xliff:g id="APP">%s</xliff:g>ကိုခွင့်ပြုမလား?"</string>

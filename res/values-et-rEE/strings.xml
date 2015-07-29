@@ -327,7 +327,7 @@
     <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"Varuekraaniluku meetodi seadistamine"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_2" msgid="4158160658182631304">"Lisama teie sõrmejälje"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Sõrmejäljega avamine"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="5061093614328964700">"Telefoni avamiseks, ostude autoriseerimiseks või rakendustesse sisse logimiseks peate vaid puudutama sõrmejäljelugejat. Neid toiminguid saab teha telefoni lisatud kõigi sõrmejälgedega, seega olge nende lisamisel ettevaatlik."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="9193978734907066950">"Telefoni avamiseks, ostude volitamiseks või rakendustesse sisselogimiseks peate vaid puudutama sõrmejäljelugejat. Olge sõrmejälgede lisamisel ettevaatlik – neid toiminguid saab teha kõigi lisatud sõrmejälgedega."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="7173290350577831813">"Märkus. Sõrmejälg võib olla vähem turvaline kui keerukas muster või PIN-kood."</string>
     <string name="security_settings_fingerprint_enroll_introduction_risk_link_text" msgid="9129531466157620977">"Lisateave"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Tühista"</string>
@@ -410,26 +410,24 @@
     <string name="unlock_set_unlock_mode_password" msgid="1203938057264146610">"Parool"</string>
     <string name="unlock_setup_wizard_fingerprint_details" msgid="7893457665921363009">"Kui olete ekraaniluku seadistanud, saate menüüs Seaded &gt; Turvalisus seadistada ka oma sõrmejälje."</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"Lülita ekraanilukk välja"</string>
-    <!-- no translation found for unlock_disable_frp_warning_title (264008934468492550) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern (8869767290771023461) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern_fingerprint (8212242533942400457) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin (586996206210265131) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin_fingerprint (875669051899437197) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password (5420612686852555537) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password_fingerprint (2228159168587170445) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_unknown (1550718040483548220) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_unknown_fingerprint (6363091330281670692) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_ok (7075138677177748705) -->
-    <skip />
+    <string name="unlock_disable_frp_warning_title" msgid="264008934468492550">"Kas eemaldada seadme kaitse?"</string>
+    <string name="unlock_disable_frp_warning_content_pattern" msgid="8869767290771023461">"Seadme kaitsefunktsioonid ei tööta ilma teie mustrita."</string>
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="8212242533942400457">"Seadme kaitsefunktsioonid ei tööta ilma teie mustrita.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Seadmest eemaldatakse ka teie salvestatud sõrmejäljed ja te ei saa oma telefoni avada, oste volitada ega nendega rakendustesse sisse logida.”"</string>
+    <string name="unlock_disable_frp_warning_content_pin" msgid="586996206210265131">"Seadme kaitsefunktsioonid ei tööta ilma teie PIN-koodita."</string>
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="875669051899437197">"Seadme kaitsefunktsioonid ei tööta ilma teie PIN-koodita.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Seadmest eemaldatakse ka teie salvestatud sõrmejäljed ja te ei saa oma telefoni avada, oste volitada ega nendega rakendustesse sisse logida.”"</string>
+    <string name="unlock_disable_frp_warning_content_password" msgid="5420612686852555537">"Seadme kaitsefunktsioonid ei tööta ilma teie paroolita."</string>
+    <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="2228159168587170445">"Seadme kaitsefunktsioonid ei tööta ilma teie paroolita.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Seadmest eemaldatakse ka teie salvestatud sõrmejäljed ja te ei saa oma telefoni avada, oste volitada ega nendega rakendustesse sisse logida.”"</string>
+    <string name="unlock_disable_frp_warning_content_unknown" msgid="1550718040483548220">"Seadme kaitsefunktsioonid ei tööta ilma teie ekraanilukuta."</string>
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="6363091330281670692">"Seadme kaitsefunktsioonid ei tööta ilma teie ekraanilukuta.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Seadmest eemaldatakse ka teie salvestatud sõrmejäljed ja te ei saa oma telefoni avada, oste volitada ega nendega rakendustesse sisse logida.”"</string>
+    <string name="unlock_disable_frp_warning_ok" msgid="7075138677177748705">"Jah, eemalda"</string>
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"Avamismustri muutmine"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"Muuda avamise PIN-koodi"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"Avamisparooli muutmine"</string>
@@ -2353,18 +2351,21 @@
     <string name="global_font_change_title" msgid="1887126466191012035">"Fondi suuruse muutmine"</string>
     <string name="nfc_payment_settings_title" msgid="1807298287380821613">"Puuduta ja maksa"</string>
     <string name="nfc_payment_how_it_works" msgid="3028822263837896720">"Kuidas see toimib?"</string>
-    <string name="nfc_payment_no_apps" msgid="3453656795093776889">"Poesiseste ostude tegemiseks kasuta funktsiooni Puuduta ja maksa"</string>
+    <!-- no translation found for nfc_payment_no_apps (5477904979148086424) -->
+    <skip />
     <string name="nfc_payment_default" msgid="8648420259219150395">"Vaikemakseviis"</string>
     <string name="nfc_payment_default_not_set" msgid="7485060884228447765">"Määramata"</string>
     <string name="nfc_payment_app_and_desc" msgid="7942415346564794258">"<xliff:g id="APP">%1$s</xliff:g> – <xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
-    <string name="nfc_payment_open_app" msgid="5550268485421927976">"Kui avatud rakendus toetab funktsiooni Puuduta ja maksa"</string>
-    <string name="nfc_payment_favor_open" msgid="7513784422533299982">"Kasuta rakenduse <xliff:g id="APP">%1$s</xliff:g> asemel rakendust"</string>
-    <string name="nfc_payment_favor_open_default_unknown" msgid="1179489206233351756">"Kasuta hoopis seda rakendust"</string>
-    <string name="nfc_payment_favor_default" msgid="8238320071435721803">"Kasuta ikka rakendust <xliff:g id="APP">%1$s</xliff:g>"</string>
-    <string name="nfc_payment_favor_default_default_unknown" msgid="7029467023485683077">"Kasuta ikka vaikerakendust"</string>
+    <!-- no translation found for nfc_payment_use_default (3234730182120288495) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_default (5743781166099608372) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_open (1923314062109977944) -->
+    <skip />
     <string name="nfc_payment_pay_with" msgid="7524904024378144072">"Maksa funktsiooni Puuduta ja maksa terminalis rakendusega"</string>
     <string name="nfc_how_it_works_title" msgid="1984068457698797207">"Terminali kaudu maksmine"</string>
-    <string name="nfc_how_it_works_content" msgid="5820288675316257177">"Kui olete seadistanud rakenduse Puuduta ja maksa ning teie telefon on sisse lülitatud, saate ostu tegemiseks oma telefonis puudutada mis tahes terminali, millel on rakenduse Puuduta ja maksa logo."</string>
+    <!-- no translation found for nfc_how_it_works_content (4749007806393224934) -->
+    <skip />
     <string name="nfc_how_it_works_got_it" msgid="259653300203217402">"Selge"</string>
     <string name="nfc_more_title" msgid="815910943655133280">"Rohkem ..."</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"Kas määrata eelistuseks?"</string>
@@ -2753,9 +2754,10 @@
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"Abirakendus ja häälsisend"</string>
     <string name="default_assist_title" msgid="8868488975409247921">"Abirakendus"</string>
     <string name="default_assist_none" msgid="3709083569608735487">"Puudub"</string>
-    <string name="choose_assist_title" msgid="554234448228740980">"Abirakenduse valimine"</string>
+    <string name="choose_assist_title" msgid="2373353478479305516">"Abirakenduse valimine"</string>
     <string name="assistant_security_warning_title" msgid="8673079231955467177">"Kas soovite rakenduse <xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> muuta abirakenduseks?"</string>
-    <string name="assistant_security_warning" msgid="4881965750615394002">"Abirakendus <xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> saab lugeda teavet süsteemis kasutatavate rakenduste kohta, sh teie ekraanil nähtavat või rakenduste kaudu juurdepääsetavat teavet."</string>
+    <!-- no translation found for assistant_security_warning (8498726261327239136) -->
+    <skip />
     <string name="assistant_security_warning_agree" msgid="7710290206928033908">"Nõustu"</string>
     <string name="assistant_security_warning_disagree" msgid="877419950830205913">"Ei nõustu"</string>
     <string name="choose_voice_input_title" msgid="975471367067718019">"Häälsisendi valimine"</string>
@@ -2779,14 +2781,15 @@
     <string name="memory_avg_desc" msgid="1551240906596518412">"Keskmiselt <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
     <string name="memory_use_running_format" msgid="4172488041800743760">"<xliff:g id="MEMORY">%1$s</xliff:g> / <xliff:g id="RUNNING">%2$s</xliff:g>"</string>
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
-    <string name="high_power_apps" msgid="2116416853043103135">"Optimeerimise ignoreerim."</string>
-    <string name="high_power_filter_on" msgid="3862942127137594196">"Lubatud"</string>
-    <string name="high_power_on" msgid="148473814103292724">"Aku optimeerimiste ignoreerimine"</string>
-    <string name="high_power_off" msgid="221092098425904010">"Ei ole lubatud"</string>
-    <string name="high_power_desc" msgid="8412735192889327770">"Aku optimeerimisi ei rakendata. Aku võib kiiremini tühjeneda."</string>
-    <plurals name="high_power_count" formatted="false" msgid="4343190376439806186">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> rakendust tohivad ignoreerida aku optimeerimisi</item>
-      <item quantity="one">1 rakendus tohib ignoreerida aku optimeerimisi</item>
+    <string name="high_power_apps" msgid="3459065925679828230">"Aku optimeerimine"</string>
+    <string name="high_power_filter_on" msgid="3222265297576680099">"Pole optimeeritud"</string>
+    <string name="high_power_on" msgid="3382367497549906927">"Aku optimeerimise eiramine"</string>
+    <string name="high_power_off" msgid="3393904131961263278">"Akukasutuse optimeerimine"</string>
+    <string name="high_power_system" msgid="7362862974428225301">"Aku optimeerimine pole saadaval"</string>
+    <string name="high_power_desc" msgid="6283926163708585760">"Aku optimeerimist ei rakendata. Aku võib kiiremini tühjeneda."</string>
+    <plurals name="high_power_count" formatted="false" msgid="2464701722383894640">
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> rakendusel lubati aku optimeerimist eirata</item>
+      <item quantity="one">1 rakendusel lubati aku optimeerimist eirata</item>
     </plurals>
     <string name="battery_summary" msgid="101415762036784289">"Kasutus alates viimasest täislaadimisest on <xliff:g id="PERCENTAGE">%1$d</xliff:g>%%"</string>
     <string name="no_battery_summary" msgid="3528036835462846814">"Akut pole pärast viimast täislaadimist kasutatud"</string>
@@ -2830,8 +2833,8 @@
     <string name="no_data_usage" msgid="9131454024293628063">"Andmeid pole kasutatud"</string>
     <string name="zen_access_warning_dialog_title" msgid="1198189958031157142">"Kas lubada rakenduse <xliff:g id="APP">%1$s</xliff:g> juurdepääs funktsioonile Mitte segada?"</string>
     <string name="zen_access_warning_dialog_summary" msgid="4015885767653010873">"Rakendus saab funktsiooni Mitte segada sisse/välja lülitada ja muuta sellega seotud seadeid."</string>
-    <string name="ignore_optimizations_on" msgid="2417358456267927315">"Luba"</string>
-    <string name="ignore_optimizations_off" msgid="9069942099715006633">"Ära luba"</string>
+    <string name="ignore_optimizations_on" msgid="6915689518016285116">"Ära optimeeri"</string>
+    <string name="ignore_optimizations_off" msgid="6153196256410296835">"Optimeeri"</string>
     <string name="ignore_optimizations_on_desc" msgid="2321398930330555815">"Aku võib kiiremini tühjeneda"</string>
     <string name="ignore_optimizations_off_desc" msgid="5255731062045426544">"Soovitatav aku kasutusaja pikendamiseks"</string>
     <string name="ignore_optimizations_title" msgid="2829637961185027768">"Kas lubada rakendusel <xliff:g id="APP">%s</xliff:g> eirata aku optimeerimisi?"</string>

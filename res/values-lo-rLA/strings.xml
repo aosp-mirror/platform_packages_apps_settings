@@ -327,7 +327,7 @@
     <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"ຕັ້ງ​ວິ​ທີ​ລັອກ​ໜ້າ​ຈໍ​ສຳ​ຮອງ​ຂໍ້​ມູນ​ຂອງ​ທ່ານ"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_2" msgid="4158160658182631304">"ເພີ່ມ​ລາຍ​ນີ້ວ​ມື​ຂອງ​ທ່ານ"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"ປົດລັອກດ້ວຍລາຍນີ້ວມື"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="5061093614328964700">"ພຽງແຕ່ສຳພັດເຊັນເຊີລາຍນິ້ວມື ເພື່ອປົດລັອກໂທລະສັບຂອງທ່ານ, ອະນຸຍາດການຊື້ ຫຼືລົງຊື່ໃຊ້ແອັບ. ລາຍນີ້ວມືທີ່ເພີ່ມໃສ່ໂທລະສັບຂອງທ່ານຈະສາມາດເຮັດສິ່ງເຫຼົ່ານີ້ໄດ້, ສະນັ້ນ ຈົ່ງລະມັດລະວັງວ່າທ່ານເພີ່ມໃຜໃສ່ແດ່."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="9193978734907066950">"ພຽງແຕ່ສຳພັດເຊັນເຊີລາຍນິ້ວມື ເພື່ອປົດລັອກໂທລະສັບຂອງທ່ານ, ອະນຸຍາດການຊື້, ຫຼືລົງຊື່ເຂົ້າໃຊ້ແອັບ. ຈົ່ງລະມັດລະວັງວ່າລາຍນິ້ວມືໃຜທີ່ທ່ານເພີ່ມເຂົ້າ - ທຸກລາຍນິ້ວມືທີ່ເພີ່ມເຂົ້າຈະສາມາດເຮັດສິ່ງເຫຼົ່ານີ້ໄດ້."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="7173290350577831813">"ໝາຍເຫດ: ການໃຊ້ລາຍນິ້ວມືຂອງທ່ານອາດຈະປອດໄພນ້ອຍກວ່າການໃຊ້ແບບຮູ້ ຫຼື PIN."</string>
     <string name="security_settings_fingerprint_enroll_introduction_risk_link_text" msgid="9129531466157620977">"ຮຽນຮູ້ເພີ່ມ​ເຕີມ"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"​ຍົກ​ເລີກ"</string>
@@ -410,26 +410,24 @@
     <string name="unlock_set_unlock_mode_password" msgid="1203938057264146610">"ລະຫັດຜ່ານ"</string>
     <string name="unlock_setup_wizard_fingerprint_details" msgid="7893457665921363009">"ເມື່ອ​ທ່ານ​ຕັ້ງ​ລັອກ​ໜ້າ​ຈໍ​ແລ້ວ, ທ່ານ​ຍັງ​ສາ​ມາດ​ຕັ້ງ​ລາຍ​ນີ້ວ​ມື​ຂອງ​ທ່ານ​ໄດ້​ຢູ່​ໃນ​ການ​ຕັ້ງ​ຄ່າ ແລະ​ຄວາມ​ປອດ​ໄພໄດ້."</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"ບໍ່ໃຊ້ການລັອກໜ້າຈໍ"</string>
-    <!-- no translation found for unlock_disable_frp_warning_title (264008934468492550) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern (8869767290771023461) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern_fingerprint (8212242533942400457) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin (586996206210265131) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin_fingerprint (875669051899437197) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password (5420612686852555537) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password_fingerprint (2228159168587170445) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_unknown (1550718040483548220) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_unknown_fingerprint (6363091330281670692) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_ok (7075138677177748705) -->
-    <skip />
+    <string name="unlock_disable_frp_warning_title" msgid="264008934468492550">"ເອົາການປົກປ້ອງອຸປະກອນອອກບໍ?"</string>
+    <string name="unlock_disable_frp_warning_content_pattern" msgid="8869767290771023461">"ຄຸນສົມບັດການປົກປ້ອງອຸປະກອນຈະໃຊ້ງານບໍ່ໄດ້ໂດຍບໍ່ມີແບບຮູບຂອງທ່ານ."</string>
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="8212242533942400457">"ຄຸນສົມບັດການປົກປ້ອງອຸປະກອນຈະໃຊ້ງານບໍ່ໄດ້ ໂດຍບໍ່ມີແບບຮູບຂອງທ່ານ.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>ລາຍນິ້ວມືທີ່ບັນທຶກໄວ້ຂອງທ່ານຈະຖືກເອົາອອກຈາກອຸປະກອນນີ້ ແລະທ່ານຈະບໍ່ສາມາດປົດລັອກໂທລະສັບ, ອະນຸຍາດການຊື້ ຫຼືລົງຊື່ເຂົ້າໃຊ້ແອັບດ້ວຍພວກມັນໄດ້.\""</string>
+    <string name="unlock_disable_frp_warning_content_pin" msgid="586996206210265131">"ຄຸນສົມບັດການປົກປ້ອງອຸປະກອນຈະໃຊ້ງານບໍ່ໄດ້ໂດຍບໍ່ມີ PIN ຂອງທ່ານ."</string>
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="875669051899437197">"ຄຸນສົມບັດການປົກປ້ອງອຸປະກອນຈະໃຊ້ງານບໍ່ໄດ້ ໂດຍບໍ່ມີ PIN ຂອງທ່ານ.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>ລາຍນິ້ວມືທີ່ບັນທຶກໄວ້ຂອງທ່ານຈະຖືກເອົາອອກຈາກອຸປະກອນນີ້ ແລະທ່ານຈະບໍ່ສາມາດປົດລັອກໂທລະສັບ, ອະນຸຍາດການຊື້ ຫຼືລົງຊື່ເຂົ້າໃຊ້ແອັບດ້ວຍພວກມັນໄດ້.\""</string>
+    <string name="unlock_disable_frp_warning_content_password" msgid="5420612686852555537">"ຄຸນສົມບັດການປົກປ້ອງອຸປະກອນຈະໃຊ້ງານບໍ່ໄດ້ ໂດຍບໍ່ມີລະຫັດຜ່ານຂອງທ່ານ."</string>
+    <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="2228159168587170445">"ຄຸນສົມບັດການປົກປ້ອງອຸປະກອນຈະໃຊ້ງານບໍ່ໄດ້ ໂດຍບໍ່ມີລະຫັດຜ່ານຂອງທ່ານ.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>ລາຍນິ້ວມືທີ່ບັນທຶກໄວ້ຂອງທ່ານຈະຖືກເອົາອອກຈາກອຸປະກອນນີ້ ແລະທ່ານຈະບໍ່ສາມາດປົດລັອກໂທລະສັບ, ອະນຸຍາດການຊື້ ຫຼືລົງຊື່ເຂົ້າໃຊ້ແອັບດ້ວຍພວກມັນໄດ້.\""</string>
+    <string name="unlock_disable_frp_warning_content_unknown" msgid="1550718040483548220">"ຄຸນສົມບັດການປົກປ້ອງອຸປະກອນຈະໃຊ້ງານບໍ່ໄດ້ໂດຍບໍ່ມີການລັອກໜ້າຈໍຂອງທ່ານ."</string>
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="6363091330281670692">"ຄຸນສົມບັດການປົກປ້ອງອຸປະກອນຈະໃຊ້ງານບໍ່ໄດ້ ໂດຍບໍ່ມີການລັອກໜ້າຈໍຂອງທ່ານ.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>ລາຍນິ້ວມືທີ່ບັນທຶກໄວ້ຂອງທ່ານຈະຖືກເອົາອອກຈາກອຸປະກອນນີ້ ແລະທ່ານຈະບໍ່ສາມາດປົດລັອກໂທລະສັບ, ອະນຸຍາດການຊື້ ຫຼືລົງຊື່ເຂົ້າໃຊ້ແອັບດ້ວຍພວກມັນໄດ້.\""</string>
+    <string name="unlock_disable_frp_warning_ok" msgid="7075138677177748705">"ແມ່ນ​, ເອົາອອກ"</string>
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"ປ່ຽນຮູບແບບການປົດລັອກ"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"ປ່ຽນລະຫັດປົດລັອກ PIN"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"ປ່ຽນລະຫັດປົດລັອກ"</string>
@@ -2353,18 +2351,21 @@
     <string name="global_font_change_title" msgid="1887126466191012035">"ປ່ຽນຂະໜາດໂຕອັກສອນ"</string>
     <string name="nfc_payment_settings_title" msgid="1807298287380821613">"ແຕະ​ &amp; ຈ່າຍ"</string>
     <string name="nfc_payment_how_it_works" msgid="3028822263837896720">"ມັນ​ເຮັດວຽກ​ແນວໃດ"</string>
-    <string name="nfc_payment_no_apps" msgid="3453656795093776889">"ໃຊ້​ແຕະ ແລະ​ຈ່າຍ ເພື່ອ​ຊື້​ຢູ່​ໃນ​ຮ້ານ"</string>
+    <!-- no translation found for nfc_payment_no_apps (5477904979148086424) -->
+    <skip />
     <string name="nfc_payment_default" msgid="8648420259219150395">"​ການ​ຊຳ​ລະເງິນເລີ່ມຕົ້ນ"</string>
     <string name="nfc_payment_default_not_set" msgid="7485060884228447765">"ຍັງບໍ່ໄດ້ຕັ້ງ"</string>
     <string name="nfc_payment_app_and_desc" msgid="7942415346564794258">"<xliff:g id="APP">%1$s</xliff:g> - <xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
-    <string name="nfc_payment_open_app" msgid="5550268485421927976">"ຖ້າ​ແອັບ​ເປີດ​ຮອງ​ຮັບ​ແຕະ ແລະ​ຈ່າຍ"</string>
-    <string name="nfc_payment_favor_open" msgid="7513784422533299982">"ໃຊ້​ແອັບ​ນັ້ນ​ແທນ <xliff:g id="APP">%1$s</xliff:g>"</string>
-    <string name="nfc_payment_favor_open_default_unknown" msgid="1179489206233351756">"ໃຊ້​ແອັບ​ນັ້ນ​ແທນ"</string>
-    <string name="nfc_payment_favor_default" msgid="8238320071435721803">"ຍັງ​ໃຊ້ <xliff:g id="APP">%1$s</xliff:g> ຢູ່"</string>
-    <string name="nfc_payment_favor_default_default_unknown" msgid="7029467023485683077">"ຍັງ​ໃຊ້​ຄ່າເລີ່ມຕົ້ນ​ຢູ່"</string>
+    <!-- no translation found for nfc_payment_use_default (3234730182120288495) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_default (5743781166099608372) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_open (1923314062109977944) -->
+    <skip />
     <string name="nfc_payment_pay_with" msgid="7524904024378144072">"ຢູ່​ທີ່​ຊ່ອງ​ແຕະ ແລະ​ຈ່າຍ, ຈ່າຍ​ດ້ວຍ:"</string>
     <string name="nfc_how_it_works_title" msgid="1984068457698797207">"ການ​ຈ່າຍ​ຢູ່​ປາຍທາງ"</string>
-    <string name="nfc_how_it_works_content" msgid="5820288675316257177">"ເມື່ອທ່ານໄດ້ຕັ້ງແອັບ ແຕະ &amp; ຈ່າຍ ແລະໂທລະສັບຂອງທ່ານເປີດຢູ່, ໃຫ້ແຕະໂທລະສັບຂອງທ່ານໃສ່ໜ້າຈໍໃດໆກໍ່ຕາມທີ່ມີໂລໂກ້ ແຕະ &amp; ຈ່າຍ ເພື່ອເຮັດການຊື້."</string>
+    <!-- no translation found for nfc_how_it_works_content (4749007806393224934) -->
+    <skip />
     <string name="nfc_how_it_works_got_it" msgid="259653300203217402">"ໄດ້​ແລ້ວ"</string>
     <string name="nfc_more_title" msgid="815910943655133280">"ເພີ່ມເຕີມ..."</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"ກຳນົດເປັນຄ່າທີ່ທ່ານຕ້ອງການ?"</string>
@@ -2753,9 +2754,10 @@
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"ການຊ່ວຍເຫຼືອ &amp; ການປ້ອນຂໍ້ມູນດ້ວຍສຽງ"</string>
     <string name="default_assist_title" msgid="8868488975409247921">"ແອັບຜູ້ຊ່ວຍ"</string>
     <string name="default_assist_none" msgid="3709083569608735487">"ບໍ່ມີ"</string>
-    <string name="choose_assist_title" msgid="554234448228740980">"ເລືອກ​ຜູ້ຊ່ວຍ"</string>
+    <string name="choose_assist_title" msgid="2373353478479305516">"ເລືອກແອັບຜູ້ຊ່ວຍ"</string>
     <string name="assistant_security_warning_title" msgid="8673079231955467177">"ເຮັດ​ໃຫ້ <xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> ເປັນຜູ້ຊ່ວຍຂອງທ່ານບໍ​?"</string>
-    <string name="assistant_security_warning" msgid="4881965750615394002">"<xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> ຈະສາມາດອ່ານຂໍ້ມູນກ່ຽວກັບແອັບທີ່ໃຊ້ຢູ່ໃນລະບົບຂອງທ່ານ ເຊິ່ງລວມມີຂໍ້ມູນທີ່ເຫັນໄດ້ຢູ່ເທິງໜ້າຈໍຂອງທ່ານ ຫຼືສາມາດເຂົ້າເຖິງໄດ້ພາຍໃນແອັບ."</string>
+    <!-- no translation found for assistant_security_warning (8498726261327239136) -->
+    <skip />
     <string name="assistant_security_warning_agree" msgid="7710290206928033908">"ເຫັນດີ"</string>
     <string name="assistant_security_warning_disagree" msgid="877419950830205913">"ບໍ່ເຫັນດີ"</string>
     <string name="choose_voice_input_title" msgid="975471367067718019">"ເລືອກ​ການປ້ອນດ້ວຍສຽງ"</string>
@@ -2779,14 +2781,15 @@
     <string name="memory_avg_desc" msgid="1551240906596518412">"ສະ​ເລ່ຍ <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
     <string name="memory_use_running_format" msgid="4172488041800743760">"<xliff:g id="MEMORY">%1$s</xliff:g> / <xliff:g id="RUNNING">%2$s</xliff:g>"</string>
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
-    <string name="high_power_apps" msgid="2116416853043103135">"ປະ​ຕິ​ເສດ​ການ​ປັບໃຫ້​ມີ​ປະ​ສິດ​ທິ​ຜົນ​ສູງສຸດ"</string>
-    <string name="high_power_filter_on" msgid="3862942127137594196">"ອະນຸຍາດແລ້ວ"</string>
-    <string name="high_power_on" msgid="148473814103292724">"ກຳ​ລັງລະເລີຍ​ການ​ປັບ​ແບັດ​ເຕີ​ຣີ​ໃຫ້​ມີ​ປະ​ສິດ​ທິ​ຜົນ​ສູງສຸດ"</string>
-    <string name="high_power_off" msgid="221092098425904010">"ບໍ່ອະນຸຍາດ"</string>
-    <string name="high_power_desc" msgid="8412735192889327770">"ຢ່ານໍາໃຊ້ການປັບການໃຊ້ແບັດເຕີຣີໃຫ້ເໝາະສົມ. ອາດຈະເຮັດໃຫ້ແບັດເຕີຣີໝົດໄຟໄດ້ໄວຂຶ້ນ."</string>
-    <plurals name="high_power_count" formatted="false" msgid="4343190376439806186">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> ແອັບ​ທີ່ໄດ້​ຮັບ​ອະ​ນຸ​ຍາດ​ໃຫ້​ລະເລີຍ​ການ​ປັບ​ແບັດ​ເຕີ​ຣີ​ໃຫ້​ມີ​ປະ​ສິດ​ທິ​ຜົນ​ສູງສຸດ</item>
-      <item quantity="one">1 ແອັບທີ່​ໄດ້​ຮັບ​ອະ​ນຸ​ຍາດ​ໃຫ້ລະເລີຍ​ການ​ປັບ​ແບັດ​ເຕີ​ຣີ​ໃຫ້​ມີ​ປະ​ສິດ​ທິ​ຜົນ​ສູງສຸດ</item>
+    <string name="high_power_apps" msgid="3459065925679828230">"ການປັບແບັດເຕີຣີໃຫ້ເໝາະສົມ"</string>
+    <string name="high_power_filter_on" msgid="3222265297576680099">"ບໍ່ໄດ້ປັບໃຫ້ເໝາະສົມ"</string>
+    <string name="high_power_on" msgid="3382367497549906927">"ກຳລັງລະເລີຍການປັບແບັດເຕີຣີໃຫ້ເໝາະສົມ"</string>
+    <string name="high_power_off" msgid="3393904131961263278">"ກຳລັງປັບການໃຊ້ແບັດເຕີຣີໃຫ້ເໝາະສົມ"</string>
+    <string name="high_power_system" msgid="7362862974428225301">"ການປັບແບັດເຕີຣີໃຫ້ເໝາະສົມບໍ່ມີໃຫ້ໃຊ້ງານ"</string>
+    <string name="high_power_desc" msgid="6283926163708585760">"ບໍ່ນໍາໃຊ້ການປັບແບັດເຕີຣີໃຫ້ເໝາະສົມ. ອາດຈະເຮັດໃຫ້ແບັດເຕີຣີຂອງທ່ານໝົດໄວ."</string>
+    <plurals name="high_power_count" formatted="false" msgid="2464701722383894640">
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> ແອັບໄດ້ຮັບອະນຸຍາດໃຫ້ລະເລີຍການປັບແບັດເຕີຣີໃຫ້ເໝາະສົມ</item>
+      <item quantity="one">1 ແອັບໄດ້ຮັບອະນຸຍາດໃຫ້ລະເລີຍການປັບແບັດເຕີຣີໃຫ້ເໝາະສົມ</item>
     </plurals>
     <string name="battery_summary" msgid="101415762036784289">"<xliff:g id="PERCENTAGE">%1$d</xliff:g>%% ​ໃຊ້​ຕັ້ງ​ແຕ່​ການ​ສາກ​ໄຟ​ເຕັມ​ເທື່ອ​ສຸດ​ທ້າຍ"</string>
     <string name="no_battery_summary" msgid="3528036835462846814">"ບໍ່​ມີ​ການ​ໃຊ້​ແບັດ​ເຕີ​ຣີ​ຕັ້ງ​ແຕ່​ການ​ສາກ​ໄຟ​ເຕັມ​ເທື່ອ​ສຸດ​ທ້າຍ"</string>
@@ -2830,8 +2833,8 @@
     <string name="no_data_usage" msgid="9131454024293628063">"ບໍ່​ມີ​ຂໍ້​ມູນ​ທີ່​ໃຊ້​ແລ້ວ"</string>
     <string name="zen_access_warning_dialog_title" msgid="1198189958031157142">"ອະນຸຍາດ​ການ​ເຂົ້າ​ເຖິງ ບໍ່​ລົບ​ກວນ​ ສຳລັບ <xliff:g id="APP">%1$s</xliff:g> ບໍ?"</string>
     <string name="zen_access_warning_dialog_summary" msgid="4015885767653010873">"​ແອັບ​ຈະ​ສາມາດ​ເປີດ/ປິດ ບໍ່​ລົບ​ກວນ ​ແລະ​ເຮ​ັດການ​ປ່ຽນ​ແປງ​ຕໍ່​ກັບ​ການ​ຕັ້ງ​ຄ່າ​ທີ່​ກ່ຽວຂ້ອງ."</string>
-    <string name="ignore_optimizations_on" msgid="2417358456267927315">"ອະນຸຍາດ"</string>
-    <string name="ignore_optimizations_off" msgid="9069942099715006633">"ຢ່າອະນຸຍາດ"</string>
+    <string name="ignore_optimizations_on" msgid="6915689518016285116">"ບໍ່ປັບໃຫ້ເໝາະສົມ"</string>
+    <string name="ignore_optimizations_off" msgid="6153196256410296835">"ປັບໃຫ້ເໝາະສົມ"</string>
     <string name="ignore_optimizations_on_desc" msgid="2321398930330555815">"ອາດຈະເຮັດໃຫ້ແບັດເຕີຣີຂອງທ່ານໝົດໄຟໄວຂຶ້ນ"</string>
     <string name="ignore_optimizations_off_desc" msgid="5255731062045426544">"ແນະ​ນໍາ​ສຳລັບອາຍຸໃຊ້ງານແບັດເຕີຣີທີ່ດີກວ່າ"</string>
     <string name="ignore_optimizations_title" msgid="2829637961185027768">"ອະນຸຍາດໃຫ້ <xliff:g id="APP">%s</xliff:g> ລະເລີຍການປັບປະສິດທິພາບໃຊ້ງານແບັດເຕີຣີບໍ?"</string>

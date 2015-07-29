@@ -327,7 +327,7 @@
     <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"Configurar o seu método de bloqueio de ecrã em segundo plano"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_2" msgid="4158160658182631304">"Adicionar a sua impressão digital"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Desbl. com impr. dig."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="5061093614328964700">"Basta tocar no sensor de impressões digitais para desbloquear o telemóvel, autorizar compras ou iniciar sessão em aplicações. Quaisquer impressões digitais adicionadas ao telemóvel podem executar estas ações, pelo que deve ter cuidado com quem adiciona."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="9193978734907066950">"Basta tocar no sensor de impressões digitais para desbloquear o telemóvel, autorizar compras ou iniciar sessão em aplicações. Quaisquer impressões digitais adicionadas podem executar estas ações, pelo que deve ter cuidado com as impressões digitais que adiciona."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="7173290350577831813">"Nota: a impressão digital pode ser menos segura do uma sequência ou um PIN fortes."</string>
     <string name="security_settings_fingerprint_enroll_introduction_risk_link_text" msgid="9129531466157620977">"Saiba mais"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Cancelar"</string>
@@ -410,26 +410,24 @@
     <string name="unlock_set_unlock_mode_password" msgid="1203938057264146610">"Palavra-passe"</string>
     <string name="unlock_setup_wizard_fingerprint_details" msgid="7893457665921363009">"Assim que configurar um bloqueio de ecrã, também pode configurar a sua impressão digital em Definições &gt; Segurança."</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"Desativar bloqueio do ecrã"</string>
-    <!-- no translation found for unlock_disable_frp_warning_title (264008934468492550) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern (8869767290771023461) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern_fingerprint (8212242533942400457) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin (586996206210265131) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin_fingerprint (875669051899437197) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password (5420612686852555537) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password_fingerprint (2228159168587170445) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_unknown (1550718040483548220) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_unknown_fingerprint (6363091330281670692) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_ok (7075138677177748705) -->
-    <skip />
+    <string name="unlock_disable_frp_warning_title" msgid="264008934468492550">"Pretende remover a proteção do dispositivo?"</string>
+    <string name="unlock_disable_frp_warning_content_pattern" msgid="8869767290771023461">"As funcionalidades de proteção do dispositivo não funcionam sem a sequência."</string>
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="8212242533942400457">"As funcionalidades de proteção do dispositivo não funcionam sem a sequência.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>As suas impressões digitais guardadas também são removidas deste dispositivo e não pode desbloquear o telemóvel, autorizar compras ou iniciar sessão em aplicações com elas.\""</string>
+    <string name="unlock_disable_frp_warning_content_pin" msgid="586996206210265131">"As funcionalidades de proteção do dispositivo não funcionam sem o PIN."</string>
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="875669051899437197">"As funcionalidades de proteção do dispositivo não funcionam sem o PIN.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>As suas impressões digitais guardadas também são removidas do dispositivo e não pode desbloquear o telemóvel, autorizar compras ou iniciar sessão em aplicações com elas.\""</string>
+    <string name="unlock_disable_frp_warning_content_password" msgid="5420612686852555537">"As funcionalidades de proteção do dispositivo não funcionam sem a palavra-passe."</string>
+    <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="2228159168587170445">"As funcionalidades de proteção do dispositivo não funcionam sem a palavra-passe.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>As suas impressões digitais guardadas também são removidas deste dispositivo e não pode desbloquear o telemóvel, autorizar compras ou iniciar sessão em aplicações com elas.\""</string>
+    <string name="unlock_disable_frp_warning_content_unknown" msgid="1550718040483548220">"As funcionalidades de proteção do dispositivo não funcionam sem o bloqueio de ecrã."</string>
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="6363091330281670692">"As funcionalidades de proteção do dispositivo não funcionam sem o bloqueio de ecrã.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>As suas impressões digitais guardadas também são removidas deste dispositivo e não pode desbloquear o telemóvel, autorizar compras ou iniciar sessão em aplicações com elas.\""</string>
+    <string name="unlock_disable_frp_warning_ok" msgid="7075138677177748705">"Sim, remover"</string>
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"Mudar padrão de desbloqueio"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"Alterar PIN de desbloqueio"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"Alterar palavra-passe de desbloqueio"</string>
@@ -2353,18 +2351,21 @@
     <string name="global_font_change_title" msgid="1887126466191012035">"Alterar tamanho da letra"</string>
     <string name="nfc_payment_settings_title" msgid="1807298287380821613">"Tocar e pagar"</string>
     <string name="nfc_payment_how_it_works" msgid="3028822263837896720">"Como funciona"</string>
-    <string name="nfc_payment_no_apps" msgid="3453656795093776889">"Utilizar a funcionalidade Tocar e pagar para efetuar compras na loja"</string>
+    <!-- no translation found for nfc_payment_no_apps (5477904979148086424) -->
+    <skip />
     <string name="nfc_payment_default" msgid="8648420259219150395">"Pagamento predefinido"</string>
     <string name="nfc_payment_default_not_set" msgid="7485060884228447765">"Não definida"</string>
     <string name="nfc_payment_app_and_desc" msgid="7942415346564794258">"<xliff:g id="APP">%1$s</xliff:g> – <xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
-    <string name="nfc_payment_open_app" msgid="5550268485421927976">"Se a aplicação aberta suportar a funcionalidade Tocar e pagar"</string>
-    <string name="nfc_payment_favor_open" msgid="7513784422533299982">"Utilizar essa aplicação em vez de <xliff:g id="APP">%1$s</xliff:g>"</string>
-    <string name="nfc_payment_favor_open_default_unknown" msgid="1179489206233351756">"Em vez disso, utilizar essa aplicação"</string>
-    <string name="nfc_payment_favor_default" msgid="8238320071435721803">"Continuar a utilizar <xliff:g id="APP">%1$s</xliff:g>"</string>
-    <string name="nfc_payment_favor_default_default_unknown" msgid="7029467023485683077">"Continuar a utilizar a predefinição"</string>
+    <!-- no translation found for nfc_payment_use_default (3234730182120288495) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_default (5743781166099608372) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_open (1923314062109977944) -->
+    <skip />
     <string name="nfc_payment_pay_with" msgid="7524904024378144072">"Num terminal compatível com a funcionalidade Tocar e pagar, pagar com:"</string>
     <string name="nfc_how_it_works_title" msgid="1984068457698797207">"Pagar num terminal"</string>
-    <string name="nfc_how_it_works_content" msgid="5820288675316257177">"Quando tiver configurado uma aplicação Tocar e pagar e o telemóvel estiver ligado, toque com o telemóvel em qualquer terminal com o logótipo Tocar e pagar para efetuar uma compra."</string>
+    <!-- no translation found for nfc_how_it_works_content (4749007806393224934) -->
+    <skip />
     <string name="nfc_how_it_works_got_it" msgid="259653300203217402">"Compreendi"</string>
     <string name="nfc_more_title" msgid="815910943655133280">"Mais..."</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"Definir como preferência?"</string>
@@ -2753,9 +2754,10 @@
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"Entr. texto por voz e assist."</string>
     <string name="default_assist_title" msgid="8868488975409247921">"Aplicação de assistência"</string>
     <string name="default_assist_none" msgid="3709083569608735487">"Nenhuma"</string>
-    <string name="choose_assist_title" msgid="554234448228740980">"Escolher assistente"</string>
+    <string name="choose_assist_title" msgid="2373353478479305516">"Escolher aplicação de assistência"</string>
     <string name="assistant_security_warning_title" msgid="8673079231955467177">"Pretende tornar <xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> o seu assistente?"</string>
-    <string name="assistant_security_warning" msgid="4881965750615394002">"A aplicação <xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> consegue ler informações acerca das aplicações em utilização no sistema, incluindo informações visíveis no seu ecrã ou acessíveis nas aplicações."</string>
+    <!-- no translation found for assistant_security_warning (8498726261327239136) -->
+    <skip />
     <string name="assistant_security_warning_agree" msgid="7710290206928033908">"Aceitar"</string>
     <string name="assistant_security_warning_disagree" msgid="877419950830205913">"Não aceitar"</string>
     <string name="choose_voice_input_title" msgid="975471367067718019">"Esc. entrada de texto por voz"</string>
@@ -2779,14 +2781,15 @@
     <string name="memory_avg_desc" msgid="1551240906596518412">"<xliff:g id="MEMORY">%1$s</xliff:g> em média"</string>
     <string name="memory_use_running_format" msgid="4172488041800743760">"<xliff:g id="MEMORY">%1$s</xliff:g>/<xliff:g id="RUNNING">%2$s</xliff:g>"</string>
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
-    <string name="high_power_apps" msgid="2116416853043103135">"Ignorar otimizações"</string>
-    <string name="high_power_filter_on" msgid="3862942127137594196">"Autorizadas"</string>
-    <string name="high_power_on" msgid="148473814103292724">"A ignorar otimizações da bateria"</string>
-    <string name="high_power_off" msgid="221092098425904010">"Não autorizada"</string>
-    <string name="high_power_desc" msgid="8412735192889327770">"Não aplicar otimizações da bateria. A bateria pode descarregar mais rapidamente."</string>
-    <plurals name="high_power_count" formatted="false" msgid="4343190376439806186">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aplicações com autorização para ignorar as otimizações da bateria</item>
-      <item quantity="one">1 aplicação com autorização para ignorar as otimizações da bateria</item>
+    <string name="high_power_apps" msgid="3459065925679828230">"Otimização da bateria"</string>
+    <string name="high_power_filter_on" msgid="3222265297576680099">"Não otimizada"</string>
+    <string name="high_power_on" msgid="3382367497549906927">"Otimização da bateria ignorada"</string>
+    <string name="high_power_off" msgid="3393904131961263278">"Utilização otimizada da bateria"</string>
+    <string name="high_power_system" msgid="7362862974428225301">"Otimização da bateria não disponível"</string>
+    <string name="high_power_desc" msgid="6283926163708585760">"Não aplique a otimização da bateria. A bateria pode descarregar mais rapidamente."</string>
+    <plurals name="high_power_count" formatted="false" msgid="2464701722383894640">
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aplicações com permissão para ignorar a otimização da bateria</item>
+      <item quantity="one">1 aplicação com permissão para ignorar a otimização da bateria</item>
     </plurals>
     <string name="battery_summary" msgid="101415762036784289">"Utilizou <xliff:g id="PERCENTAGE">%1$d</xliff:g>%% desde o último carregamento completo"</string>
     <string name="no_battery_summary" msgid="3528036835462846814">"Não utilizou bateria desde o último carregamento completo"</string>
@@ -2830,8 +2833,8 @@
     <string name="no_data_usage" msgid="9131454024293628063">"Sem dados utilizados"</string>
     <string name="zen_access_warning_dialog_title" msgid="1198189958031157142">"Pretende permitir o acesso a Não incomodar para <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_access_warning_dialog_summary" msgid="4015885767653010873">"A aplicação conseguirá ligar e desligar o modo Não incomodar e efetuar alterações nas definições relacionadas."</string>
-    <string name="ignore_optimizations_on" msgid="2417358456267927315">"Permitir"</string>
-    <string name="ignore_optimizations_off" msgid="9069942099715006633">"Não permitir"</string>
+    <string name="ignore_optimizations_on" msgid="6915689518016285116">"Não otimizar"</string>
+    <string name="ignore_optimizations_off" msgid="6153196256410296835">"Otimizar"</string>
     <string name="ignore_optimizations_on_desc" msgid="2321398930330555815">"A bateria pode descarregar mais rapidamente"</string>
     <string name="ignore_optimizations_off_desc" msgid="5255731062045426544">"Recomendado para aumentar a duração da bateria"</string>
     <string name="ignore_optimizations_title" msgid="2829637961185027768">"Permitir que <xliff:g id="APP">%s</xliff:g> ignore as otimizações da bateria?"</string>
