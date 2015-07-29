@@ -945,6 +945,8 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
                     .getUriFor(Settings.System.SCREEN_BRIGHTNESS), false, this);
             resolver.registerContentObserver(Settings.System
                     .getUriFor(Settings.System.SCREEN_BRIGHTNESS_MODE), false, this);
+            resolver.registerContentObserver(Settings.System
+                    .getUriFor(Settings.System.SCREEN_AUTO_BRIGHTNESS_ADJ), false, this);
         }
 
         void stopObserving() {
