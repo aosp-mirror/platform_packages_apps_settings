@@ -40,19 +40,12 @@ public class NfcForegroundPreference extends DropDownPreference implements
         PaymentBackend.PaymentAppInfo defaultApp = mPaymentBackend.getDefaultApp();
         boolean foregroundMode = mPaymentBackend.isForegroundMode();
         setPersistent(false);
-        setTitle(getContext().getString(R.string.nfc_payment_open_app));
+        setTitle(getContext().getString(R.string.nfc_payment_use_default));
         CharSequence favorOpen;
         CharSequence favorDefault;
         clearItems();
-        if (defaultApp == null) {
-            favorOpen = getContext().getString(R.string.nfc_payment_favor_open_default_unknown);
-            favorDefault = getContext().getString(R.string.nfc_payment_favor_default_default_unknown);
-        } else {
-            favorOpen = getContext().getString(R.string.nfc_payment_favor_open, defaultApp.label);
-            favorDefault = getContext().getString(R.string.nfc_payment_favor_default, defaultApp.label);
-        }
-        addItem(favorOpen.toString(), true);
-        addItem(favorDefault.toString(), false);
+        addItem(getContext().getString(R.string.nfc_payment_favor_open), true);
+        addItem(getContext().getString(R.string.nfc_payment_favor_default), false);
         if (foregroundMode) {
             setSelectedValue(true);
         } else {
