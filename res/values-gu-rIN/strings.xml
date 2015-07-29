@@ -327,7 +327,7 @@
     <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"તમારી બેકઅપ સ્ક્રીન લૉક પદ્ધતિને સેટ કરો"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_2" msgid="4158160658182631304">"તમારી ફિંગરપ્રિન્ટ ઉમેરો"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"ફિંગરપ્રિન્ટથી અનલૉક"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="5061093614328964700">"તમારા ફોનને અનલૉક કરવા, ખરીદીઓ અધિકૃત કરવા અથવા એપ્લિકેશન્સમાં સાઇન ઇન કરવા માટે માત્ર ફિંગરપ્રિન્ટ સેન્સરને ટચ કરો. તમારા ફોન પર ઉમેરવામાં આવેલ કોઇપણ ફિંગરપ્રિન્ટ્સ આ કરવા માટે સમર્થ હશે, જેથી તમે કોને ઉમેરો છો તેની કાળજી રાખો."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="9193978734907066950">"તમારા ફોનને અનલૉક કરવા, ખરીદીઓ અધિકૃત કરવા અથવા એપ્લિકેશન્સમાં સાઇન ઇન કરવા માટે માત્ર ફિંગરપ્રિન્ટ સેન્સરને ટચ કરો. તમે કોની ફિંગરપ્રિન્ટ્સ ઉમેરી છે તે બાબતે સાવચેત રહો - ઉમેરવામાં આવેલ કોઈપણ ફિંગરપ્રિન્ટ્સ આ વસ્તુઓ કરવામાં સમર્થ હશે."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="7173290350577831813">"નોંધ: તમારી ફિંગરપ્રિન્ટ એક સશક્ત પેટર્ન અથવા PIN થી ઓછી સુરક્ષિત હોઇ શકે છે."</string>
     <string name="security_settings_fingerprint_enroll_introduction_risk_link_text" msgid="9129531466157620977">"વધુ જાણો"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"રદ કરો"</string>
@@ -410,26 +410,24 @@
     <string name="unlock_set_unlock_mode_password" msgid="1203938057264146610">"પાસવર્ડ"</string>
     <string name="unlock_setup_wizard_fingerprint_details" msgid="7893457665921363009">"એકવાર તમે સ્ક્રીન લૉક સેટ કરી લો, પછી તમે સેટિંગ્સ &gt; સુરક્ષામાં ફિંગરપ્રિન્ટ પણ સેટ કરી શકો છો."</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"સ્ક્રીન લૉક બંધ કરો"</string>
-    <!-- no translation found for unlock_disable_frp_warning_title (264008934468492550) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern (8869767290771023461) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern_fingerprint (8212242533942400457) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin (586996206210265131) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin_fingerprint (875669051899437197) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password (5420612686852555537) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password_fingerprint (2228159168587170445) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_unknown (1550718040483548220) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_unknown_fingerprint (6363091330281670692) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_ok (7075138677177748705) -->
-    <skip />
+    <string name="unlock_disable_frp_warning_title" msgid="264008934468492550">"ઉપકરણ સુરક્ષા દૂર કરીએ?"</string>
+    <string name="unlock_disable_frp_warning_content_pattern" msgid="8869767290771023461">"તમારી પેટર્ન વગર ઉપકરણ સુરક્ષા સુવિધાઓ કામ કરશે નહીં."</string>
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="8212242533942400457">"તમારી પેટર્ન વગર ઉપકરણ સુરક્ષા સુવિધાઓ કામ કરશે નહીં.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>આ ઉપકરણમાંથી તમારી સાચવેલ ફિંગરપ્રિન્ટ્સ પણ દૂર કરવામાં આવશે અને તમે તમારા ફોનને અનલૉક કરવા, ખરીદીઓ અધિકૃત કરવા અથવા તેમની સાથે એપ્લિકેશન્સ પર સાઇન ઇન કરવામાં સમર્થ થઇ શકશો નહીં.”"</string>
+    <string name="unlock_disable_frp_warning_content_pin" msgid="586996206210265131">"તમારા PIN વગર ઉપકરણ સુરક્ષા સુવિધાઓ કામ કરશે નહીં."</string>
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="875669051899437197">"તમારા PIN વગર ઉપકરણ સુરક્ષા સુવિધાઓ કામ કરશે નહીં.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>આ ઉપકરણમાંથી તમારી સાચવેલ ફિંગરપ્રિન્ટ્સ પણ દૂર કરવામાં આવશે અને તમે તમારા ફોનને અનલૉક કરવા, ખરીદીઓ અધિકૃત કરવા અથવા તેમની સાથે એપ્લિકેશન્સ પર સાઇન ઇન કરવામાં સમર્થ થઇ શકશો નહીં.”"</string>
+    <string name="unlock_disable_frp_warning_content_password" msgid="5420612686852555537">"તમારા પાસવર્ડ વગર ઉપકરણ સુરક્ષા સુવિધાઓ કામ કરશે નહીં."</string>
+    <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="2228159168587170445">"તમારા પાસવર્ડ વગર ઉપકરણ સુરક્ષા સુવિધાઓ કામ કરશે નહીં.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>આ ઉપકરણમાંથી તમારી સાચવેલ ફિંગરપ્રિન્ટ્સ પણ દૂર કરવામાં આવશે અને તમે તમારા ફોનને અનલૉક કરવા, ખરીદીઓ અધિકૃત કરવા અથવા તેમની સાથે એપ્લિકેશન્સ પર સાઇન ઇન કરવામાં સમર્થ થઇ શકશો નહીં.”"</string>
+    <string name="unlock_disable_frp_warning_content_unknown" msgid="1550718040483548220">"તમારા સ્ક્રીન લૉક વગર ઉપકરણ સુરક્ષા સુવિધાઓ કામ કરશે નહીં."</string>
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="6363091330281670692">"તમારા સ્ક્રીન લૉક વગર ઉપકરણ સુરક્ષા સુવિધાઓ કામ કરશે નહીં.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>આ ઉપકરણમાંથી તમારી સાચવેલ ફિંગરપ્રિન્ટ્સ પણ દૂર કરવામાં આવશે અને તમે તમારા ફોનને અનલૉક કરવા, ખરીદીઓ અધિકૃત કરવા અથવા તેમની સાથે એપ્લિકેશન્સ પર સાઇન ઇન કરવામાં સમર્થ થઇ શકશો નહીં.”"</string>
+    <string name="unlock_disable_frp_warning_ok" msgid="7075138677177748705">"હા, દૂર કરો"</string>
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"અનલૉક પેટર્ન બદલો"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"અનલૉક PIN બદલો"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"અનલૉક પાસવર્ડ બદલો"</string>
@@ -2355,18 +2353,21 @@
     <string name="global_font_change_title" msgid="1887126466191012035">"ફોન્ટનું કદ બદલો"</string>
     <string name="nfc_payment_settings_title" msgid="1807298287380821613">"ટેપ કરો અને ચુકવો"</string>
     <string name="nfc_payment_how_it_works" msgid="3028822263837896720">"તે કેવી રીતે કાર્ય કરે છે"</string>
-    <string name="nfc_payment_no_apps" msgid="3453656795093776889">"દુકાનમાં ખરીદીઓ કરવા માટે ટેપ કરો અને ચૂકવણી કરોનો ઉપયોગ કરો"</string>
+    <!-- no translation found for nfc_payment_no_apps (5477904979148086424) -->
+    <skip />
     <string name="nfc_payment_default" msgid="8648420259219150395">"ચુકવણી ડિફોલ્ટ"</string>
     <string name="nfc_payment_default_not_set" msgid="7485060884228447765">"સેટ નથી"</string>
     <string name="nfc_payment_app_and_desc" msgid="7942415346564794258">"<xliff:g id="APP">%1$s</xliff:g> - <xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
-    <string name="nfc_payment_open_app" msgid="5550268485421927976">"જો ખુલ્લી એપ્લિકેશન ટેપ કરો અને ચૂકવણી કરોનું સમર્થન કરે"</string>
-    <string name="nfc_payment_favor_open" msgid="7513784422533299982">"<xliff:g id="APP">%1$s</xliff:g> ને બદલે તે એપ્લિકેશનનો ઉપયોગ કરો"</string>
-    <string name="nfc_payment_favor_open_default_unknown" msgid="1179489206233351756">"તેના બદલે તે એપ્લિકેશનનો ઉપયોગ કરો"</string>
-    <string name="nfc_payment_favor_default" msgid="8238320071435721803">"હજી પણ <xliff:g id="APP">%1$s</xliff:g> નો ઉપયોગ કરો"</string>
-    <string name="nfc_payment_favor_default_default_unknown" msgid="7029467023485683077">"હજી પણ ડિફોલ્ટનો ઉપયોગ કરો"</string>
+    <!-- no translation found for nfc_payment_use_default (3234730182120288495) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_default (5743781166099608372) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_open (1923314062109977944) -->
+    <skip />
     <string name="nfc_payment_pay_with" msgid="7524904024378144072">"ટેપ કરો અને ચૂકવણી કરો ટર્મિનલ પર, આનાથી ચૂકવણી કરો:"</string>
     <string name="nfc_how_it_works_title" msgid="1984068457698797207">"ટર્મિનલ પર ચુકવવું"</string>
-    <string name="nfc_how_it_works_content" msgid="5820288675316257177">"એકવાર તમે ટેપ કરો અને ચુકવો એપ્લિકેશનને સેટ કરી લો અને તમારો ફોન ચાલુ કરેલ હોય, ત્યારે ખરીદી કરવા માટે તેના પર ટેપ કરો અને ચુકવો લોગો સાથેના કોઈપણ ટર્મિનલ પર તમારા ફોનને ટેપ કરો."</string>
+    <!-- no translation found for nfc_how_it_works_content (4749007806393224934) -->
+    <skip />
     <string name="nfc_how_it_works_got_it" msgid="259653300203217402">"સમજાઈ ગયું"</string>
     <string name="nfc_more_title" msgid="815910943655133280">"વધુ..."</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"તમારી પસંદગી તરીકે સેટ કરીએ?"</string>
@@ -2755,7 +2756,7 @@
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"મદદ અને વૉઇસ ઇનપુટ"</string>
     <string name="default_assist_title" msgid="8868488975409247921">"મદદ એપ્લિકેશન"</string>
     <string name="default_assist_none" msgid="3709083569608735487">"કોઈ નહીં"</string>
-    <string name="choose_assist_title" msgid="554234448228740980">"મદદ પસંદ કરો"</string>
+    <string name="choose_assist_title" msgid="2373353478479305516">"મદદ એપ્લિકેશન પસંદ કરો"</string>
     <string name="assistant_security_warning_title" msgid="8673079231955467177">"<xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> ને તમારા સહાયક બનાવીએ?"</string>
     <string name="assistant_security_warning" msgid="4881965750615394002">"તમારી સ્ક્રીન પર દૃશ્યક્ષમ અથવા એપ્લિકેશનો અંતર્ગત ઍક્સેસ કરી શકાય તેવી માહિતી સહિત તમારા સિસ્ટમ પર ઉપયોગમાં હોય તેવી એપ્લિકેશનો વિશેની માહિતી વાંચવા માટે <xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> સમર્થ હશે."</string>
     <string name="assistant_security_warning_agree" msgid="7710290206928033908">"સંમત છું"</string>
@@ -2781,14 +2782,15 @@
     <string name="memory_avg_desc" msgid="1551240906596518412">"સરેરાશ <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
     <string name="memory_use_running_format" msgid="4172488041800743760">"<xliff:g id="MEMORY">%1$s</xliff:g> / <xliff:g id="RUNNING">%2$s</xliff:g>"</string>
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
-    <string name="high_power_apps" msgid="2116416853043103135">"ઓપ્ટિમાઇઝેશન અવગણો"</string>
-    <string name="high_power_filter_on" msgid="3862942127137594196">"મંજૂર"</string>
-    <string name="high_power_on" msgid="148473814103292724">"બૅટરી ઓપ્ટિમાઇઝેશન્સને અવગણે છે"</string>
-    <string name="high_power_off" msgid="221092098425904010">"મંજૂરી નથી"</string>
-    <string name="high_power_desc" msgid="8412735192889327770">"બૅટરી ઓપ્ટિમાઇઝેશન્સ લાગુ ન કરો. તેનાથી તમારી બૅટરી વધુ ઝડપથી ખાલી થઇ શકે છે."</string>
-    <plurals name="high_power_count" formatted="false" msgid="4343190376439806186">
-      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> એપ્લિકેશન્સને બૅટરી ઓપ્ટિમાઇઝેશન્સને અવગણવાની મંજૂરી છે</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> એપ્લિકેશન્સને બૅટરી ઓપ્ટિમાઇઝેશન્સને અવગણવાની મંજૂરી છે</item>
+    <string name="high_power_apps" msgid="3459065925679828230">"બૅટરી ઓપ્ટિમાઇઝેશન"</string>
+    <string name="high_power_filter_on" msgid="3222265297576680099">"ઓપ્ટિમાઇઝ કરેલ નથી"</string>
+    <string name="high_power_on" msgid="3382367497549906927">"બૅટરી ઓપ્ટિમાઇઝેશનને અવગણી રહ્યું છે"</string>
+    <string name="high_power_off" msgid="3393904131961263278">"બૅટરી વપરાશને ઓપ્ટિમાઇઝ કરી રહ્યું છે"</string>
+    <string name="high_power_system" msgid="7362862974428225301">"બૅટરી ઓપ્ટિમાઇઝેશન ઉપલબ્ધ નથી"</string>
+    <string name="high_power_desc" msgid="6283926163708585760">"બૅટરી ઓપ્ટિમાઇઝેશન લાગુ કરશો નહીં. તેનાથી તમારી બૅટરી વધુ ઝડપથી ખાલી થઈ શકે છે."</string>
+    <plurals name="high_power_count" formatted="false" msgid="2464701722383894640">
+      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> એપ્લિકેશન્સને બૅટરી ઓપ્ટિમાઇઝેશનને અવગણવાની મંજૂરી છે</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> એપ્લિકેશન્સને બૅટરી ઓપ્ટિમાઇઝેશનને અવગણવાની મંજૂરી છે</item>
     </plurals>
     <string name="battery_summary" msgid="101415762036784289">"છેલ્લા પૂર્ણ ચાર્જ પછી <xliff:g id="PERCENTAGE">%1$d</xliff:g>%% ઉપયોગ"</string>
     <string name="no_battery_summary" msgid="3528036835462846814">"છેલ્લા પૂર્ણ ચાર્જ પછી કોઈ બૅટરી ઉપયોગ નહીં"</string>
@@ -2832,8 +2834,8 @@
     <string name="no_data_usage" msgid="9131454024293628063">"કોઈ ડેટાનો ઉપયોગ કર્યો નથી"</string>
     <string name="zen_access_warning_dialog_title" msgid="1198189958031157142">"<xliff:g id="APP">%1$s</xliff:g> માટે ખલેલ પાડશો નહીં ઍક્સેસની મંજૂરી આપીએ?"</string>
     <string name="zen_access_warning_dialog_summary" msgid="4015885767653010873">"એપ્લિકેશન ખલેલ પાડશો નહીં ચાલુ/બંધ કરી શકશે અને સંબંધિત સેટિંગ્સમાં ફેરફારો કરી શકશે."</string>
-    <string name="ignore_optimizations_on" msgid="2417358456267927315">"મંજૂરી આપો"</string>
-    <string name="ignore_optimizations_off" msgid="9069942099715006633">"મંજૂરી આપશો નહીં"</string>
+    <string name="ignore_optimizations_on" msgid="6915689518016285116">"ઓપ્ટિમાઇઝ કરશો નહીં"</string>
+    <string name="ignore_optimizations_off" msgid="6153196256410296835">"ઓપ્ટિમાઇઝ કરો"</string>
     <string name="ignore_optimizations_on_desc" msgid="2321398930330555815">"તમારી બૅટરીને વધુ ઝડપથી ખાલી કરી શકે છે"</string>
     <string name="ignore_optimizations_off_desc" msgid="5255731062045426544">"બહેતર બૅટરી આવરદા માટે ભલામણ કરેલ"</string>
     <string name="ignore_optimizations_title" msgid="2829637961185027768">"બૅટરી ઓપ્ટિમાઇઝેશન્સને અવગણવા માટે <xliff:g id="APP">%s</xliff:g> ને મંજૂરી આપીએ?"</string>
