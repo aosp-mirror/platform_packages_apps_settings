@@ -327,7 +327,7 @@
     <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"Ρύθμιση εφεδρικής μεθόδου κλειδώματος οθόνης"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_2" msgid="4158160658182631304">"Προσθέσετε το μοναδικό χαρακτηριστικό σας"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Ξεκλ. με δακ.αποτύπωμα"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="5061093614328964700">"Αγγίξτε απλώς τον αισθητήρα δακτυλικών αποτυπωμάτων για να ξεκλειδώσετε το τηλέφωνό σας, να επιτρέψετε αγορές ή να συνδεθείτε σε εφαρμογές. Αυτές οι ενέργειες θα μπορούν να γίνουν με οποιαδήποτε δακτυλικά αποτυπώματα προσθέτετε στο τηλέφωνό σας, οπότε να είστε προσεκτικοί με αυτά που προσθέτετε."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="9193978734907066950">"Αγγίξτε απλώς τον αισθητήρα δακτυλικών αποτυπωμάτων για να ξεκλειδώσετε το τηλέφωνό σας, να επιτρέψετε αγορές ή να συνδεθείτε σε εφαρμογές. Να είστε προσεκτικοί με τα δακτυλικά αποτυπώματα που προσθέτετε, καθώς αυτές οι ενέργειες θα μπορούν να γίνουν με οποιαδήποτε δακτυλικά αποτυπώματα προσθέτετε στο τηλέφωνό σας."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="7173290350577831813">"Σημείωση: Το ξεκλείδωμα με δακτυλικά αποτυπώματα ενδέχεται να είναι λιγότερο ασφαλές από ό, τι ένα ισχυρό μοτίβο ή κωδικός PIN."</string>
     <string name="security_settings_fingerprint_enroll_introduction_risk_link_text" msgid="9129531466157620977">"Μάθετε περισσότερα"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Ακύρωση"</string>
@@ -412,26 +412,24 @@
     <string name="unlock_set_unlock_mode_password" msgid="1203938057264146610">"Κωδικός πρόσβασης"</string>
     <string name="unlock_setup_wizard_fingerprint_details" msgid="7893457665921363009">"Αφού ρυθμίσετε το κλείδωμα οθόνης, θα μπορείτε να ρυθμίσετε και τα δαχτυλικά αποτυπώματα από τις Ρυθμίσεις &gt; Ασφάλεια."</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"Απενεργοποίηση κλειδώματος οθόνης"</string>
-    <!-- no translation found for unlock_disable_frp_warning_title (264008934468492550) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern (8869767290771023461) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern_fingerprint (8212242533942400457) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin (586996206210265131) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin_fingerprint (875669051899437197) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password (5420612686852555537) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password_fingerprint (2228159168587170445) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_unknown (1550718040483548220) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_unknown_fingerprint (6363091330281670692) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_ok (7075138677177748705) -->
-    <skip />
+    <string name="unlock_disable_frp_warning_title" msgid="264008934468492550">"Κατάργηση προστασίας συσκευής;"</string>
+    <string name="unlock_disable_frp_warning_content_pattern" msgid="8869767290771023461">"Οι λειτουργίες προστασίας της συσκευής δεν θα λειτουργούν χωρίς το μοτίβο σας."</string>
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="8212242533942400457">"Οι λειτουργίες προστασίας της συσκευής δεν θα λειτουργούν χωρίς το μοτίβο σας.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Τα αποθηκευμένα μοναδικά χαρακτηριστικά σας θα καταργηθούν επίσης από αυτήν τη συσκευή και δεν θα έχετε τη δυνατότητα να ξεκλειδώσετε το τηλέφωνό σας, να εξουσιοδοτήσετε αγορές ή να συνδεθείτε σε εφαρμογές με αυτά\"."</string>
+    <string name="unlock_disable_frp_warning_content_pin" msgid="586996206210265131">"Οι λειτουργίες προστασίας της συσκευής δεν θα λειτουργούν χωρίς το PIN σας."</string>
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="875669051899437197">"Οι λειτουργίες προστασίας της συσκευής δεν θα λειτουργούν χωρίς το PIN σας.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Τα αποθηκευμένα μοναδικά χαρακτηριστικά σας θα καταργηθούν επίσης από αυτήν τη συσκευή και δεν θα έχετε τη δυνατότητα να ξεκλειδώσετε το τηλέφωνό σας, να εξουσιοδοτήσετε αγορές ή να συνδεθείτε σε εφαρμογές με αυτά\"."</string>
+    <string name="unlock_disable_frp_warning_content_password" msgid="5420612686852555537">"Οι λειτουργίες προστασίας της συσκευής δεν θα λειτουργούν  χωρίς τον κωδικό πρόσβασής σας."</string>
+    <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="2228159168587170445">"Οι λειτουργίες προστασίας της συσκευής δεν θα λειτουργούν χωρίς τον κωδικό πρόσβασής σας.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Τα αποθηκευμένα μοναδικά χαρακτηριστικά σας θα καταργηθούν επίσης από αυτήν τη συσκευή και δεν θα έχετε τη δυνατότητα να ξεκλειδώσετε το τηλέφωνό σας, να εξουσιοδοτήσετε αγορές ή να συνδεθείτε σε εφαρμογές με αυτά\"."</string>
+    <string name="unlock_disable_frp_warning_content_unknown" msgid="1550718040483548220">"Οι λειτουργίες προστασίας της συσκευής δεν θα λειτουργούν χωρίς το κλείδωμα οθόνης σας."</string>
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="6363091330281670692">"Οι λειτουργίες προστασίας της συσκευής δεν θα λειτουργούν χωρίς το κλείδωμα οθόνης σας.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Τα αποθηκευμένα μοναδικά χαρακτηριστικά σας θα καταργηθούν επίσης από αυτήν τη συσκευή και δεν θα έχετε τη δυνατότητα να ξεκλειδώσετε το τηλέφωνό σας, να εξουσιοδοτήσετε αγορές ή να συνδεθείτε σε εφαρμογές με αυτά\"."</string>
+    <string name="unlock_disable_frp_warning_ok" msgid="7075138677177748705">"Ναι, κατάργηση"</string>
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"Αλλαγή μοτίβου ξεκλειδώματος"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"Αλλαγή αριθμού PIN ξεκλειδώματος"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"Αλλαγή κωδικού πρόσβασης ξεκλειδώματος"</string>
@@ -2355,18 +2353,21 @@
     <string name="global_font_change_title" msgid="1887126466191012035">"Αλλαγή μεγέθους γραμματοσειράς"</string>
     <string name="nfc_payment_settings_title" msgid="1807298287380821613">"Πατήστε και πληρώστε"</string>
     <string name="nfc_payment_how_it_works" msgid="3028822263837896720">"Τρόπος λειτουργίας"</string>
-    <string name="nfc_payment_no_apps" msgid="3453656795093776889">"Χρησιμοποιήστε τη λειτουργία \"Πατήστε και πληρώστε\" για να κάνετε αγορές σε καταστήματα"</string>
+    <!-- no translation found for nfc_payment_no_apps (5477904979148086424) -->
+    <skip />
     <string name="nfc_payment_default" msgid="8648420259219150395">"Προεπιλογή πληρωμής"</string>
     <string name="nfc_payment_default_not_set" msgid="7485060884228447765">"Δεν ρυθμίστηκε"</string>
     <string name="nfc_payment_app_and_desc" msgid="7942415346564794258">"<xliff:g id="APP">%1$s</xliff:g> - <xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
-    <string name="nfc_payment_open_app" msgid="5550268485421927976">"Εάν η ανοικτή εφαρμογή υποστηρίζει τη λειτουργία \"Πατήστε και πληρώστε\""</string>
-    <string name="nfc_payment_favor_open" msgid="7513784422533299982">"Χρήση αυτής της εφαρμογή αντί για την εφαρμογή <xliff:g id="APP">%1$s</xliff:g>"</string>
-    <string name="nfc_payment_favor_open_default_unknown" msgid="1179489206233351756">"Χρήση αυτής της εφαρμογής εναλλακτικά"</string>
-    <string name="nfc_payment_favor_default" msgid="8238320071435721803">"Εξακολουθεί να χρησιμοποιείται <xliff:g id="APP">%1$s</xliff:g>"</string>
-    <string name="nfc_payment_favor_default_default_unknown" msgid="7029467023485683077">"Εξακολουθεί να χρησιμοποιείται η προεπιλογή"</string>
+    <!-- no translation found for nfc_payment_use_default (3234730182120288495) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_default (5743781166099608372) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_open (1923314062109977944) -->
+    <skip />
     <string name="nfc_payment_pay_with" msgid="7524904024378144072">"Σε τερματικά που υποστηρίζουν τη λειτουργία \"Πατήστε και πληρώστε\", πληρωμή με:"</string>
     <string name="nfc_how_it_works_title" msgid="1984068457698797207">"Πληρωμή στο τερματικό"</string>
-    <string name="nfc_how_it_works_content" msgid="5820288675316257177">"Αφού έχετε ρυθμίσει μια εφαρμογή για τη λειτουργία \"Πατήστε και πληρώστε\" και το τηλέφωνό σας είναι ενεργοποιημένο, πατήστε το τηλέφωνό σας σε οποιοδήποτε τερματικό με το λογότυπο \"Πατήστε και πληρώστε\" για να πραγματοποιήσετε μια αγορά."</string>
+    <!-- no translation found for nfc_how_it_works_content (4749007806393224934) -->
+    <skip />
     <string name="nfc_how_it_works_got_it" msgid="259653300203217402">"Το κατάλαβα"</string>
     <string name="nfc_more_title" msgid="815910943655133280">"Περισσότερα…"</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"Ορισμός ως προτίμησης;"</string>
@@ -2755,7 +2756,7 @@
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"Βοήθεια/φων/κές εντ."</string>
     <string name="default_assist_title" msgid="8868488975409247921">"Βοηθητική εφαρμογή"</string>
     <string name="default_assist_none" msgid="3709083569608735487">"Κανένα"</string>
-    <string name="choose_assist_title" msgid="554234448228740980">"Επιλογή βοήθειας"</string>
+    <string name="choose_assist_title" msgid="2373353478479305516">"Επιλογή εφαρμογής υποβοήθειας"</string>
     <string name="assistant_security_warning_title" msgid="8673079231955467177">"Θέλετε να ορίσετε την εφαρμογή <xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> ως βοηθό σας;"</string>
     <string name="assistant_security_warning" msgid="4881965750615394002">"Η εφαρμογή <xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> θα μπορεί να διαβάζει πληροφορίες σχετικά με τις εφαρμογές που χρησιμοποιούνται στο σύστημά σας, όπως είναι οι πληροφορίες που εμφανίζονται στην οθόνη σας ή αυτές στις οποίες έχουν πρόσβαση οι εφαρμογές."</string>
     <string name="assistant_security_warning_agree" msgid="7710290206928033908">"Συμφωνώ"</string>
@@ -2781,14 +2782,15 @@
     <string name="memory_avg_desc" msgid="1551240906596518412">"Μέση χρήση <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
     <string name="memory_use_running_format" msgid="4172488041800743760">"<xliff:g id="MEMORY">%1$s</xliff:g> / <xliff:g id="RUNNING">%2$s</xliff:g>"</string>
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
-    <string name="high_power_apps" msgid="2116416853043103135">"Παράβλεψη βελτιστοποιήσεων"</string>
-    <string name="high_power_filter_on" msgid="3862942127137594196">"Επιτρέπεται"</string>
-    <string name="high_power_on" msgid="148473814103292724">"Παράβλεψη βελτιστοποιήσεων μπαταρίας"</string>
-    <string name="high_power_off" msgid="221092098425904010">"Δεν επιτρέπεται"</string>
-    <string name="high_power_desc" msgid="8412735192889327770">"Να μην εφαρμόζονται βελτιστοποιήσεις μπαταρίας. Η μπαταρία σας ενδέχεται να εξαντλείται πιο γρήγορα."</string>
-    <plurals name="high_power_count" formatted="false" msgid="4343190376439806186">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> εφαρμογές επιτρέπονται να αγνοήσουν τις βελτιστοποιήσεις μπαταρίας</item>
-      <item quantity="one">1 εφαρμογή επιτρέπεται να αγνοήσει τις βελτιστοποιήσεις μπαταρίας</item>
+    <string name="high_power_apps" msgid="3459065925679828230">"Βελτιστοποίηση μπαταρίας"</string>
+    <string name="high_power_filter_on" msgid="3222265297576680099">"Χωρίς βελτιστοποίηση"</string>
+    <string name="high_power_on" msgid="3382367497549906927">"Παράβλεψη βελτιστοποιήσεων μπαταρίας"</string>
+    <string name="high_power_off" msgid="3393904131961263278">"Βελτιστοποίηση χρήσης μπαταρίας"</string>
+    <string name="high_power_system" msgid="7362862974428225301">"Η βελτιστοποίηση μπαταρίας δεν είναι διαθέσιμη"</string>
+    <string name="high_power_desc" msgid="6283926163708585760">"Να μην εφαρμόζεται βελτιστοποίηση μπαταρίας. Η μπαταρία σας ενδέχεται να εξαντλείται πιο γρήγορα."</string>
+    <plurals name="high_power_count" formatted="false" msgid="2464701722383894640">
+      <item quantity="other">Επιτράπηκε σε <xliff:g id="COUNT">%d</xliff:g> εφαρμογές να αγνοήσουν τη βελτιστοποίηση μπαταρίας</item>
+      <item quantity="one">Επιτράπηκε σε 1 εφαρμογή να αγνοήσει τη βελτιστοποίηση μπαταρίας</item>
     </plurals>
     <string name="battery_summary" msgid="101415762036784289">"Χρήση <xliff:g id="PERCENTAGE">%1$d</xliff:g>%% από την τελευταία πλήρη φόρτιση"</string>
     <string name="no_battery_summary" msgid="3528036835462846814">"Δεν έγινε χρήση της μπαταρίας από την τελευταία πλήρη φόρτιση"</string>
@@ -2832,8 +2834,8 @@
     <string name="no_data_usage" msgid="9131454024293628063">"Δεν χρησιμοποιούνται δεδομένα"</string>
     <string name="zen_access_warning_dialog_title" msgid="1198189958031157142">"Να επιτρέπεται η πρόσβαση στη λειτουργία \"Μην ενοχλείτε\" για την εφαρμογή <xliff:g id="APP">%1$s</xliff:g>;"</string>
     <string name="zen_access_warning_dialog_summary" msgid="4015885767653010873">"Η εφαρμογή θα είναι σε θέση να ενεργοποιεί/απενεργοποιεί τη λειτουργία \"Μην ενοχλείτε\" και να τροποποιεί τις σχετικές ρυθμίσεις."</string>
-    <string name="ignore_optimizations_on" msgid="2417358456267927315">"Αποδοχή"</string>
-    <string name="ignore_optimizations_off" msgid="9069942099715006633">"Να μην επιτρέπεται"</string>
+    <string name="ignore_optimizations_on" msgid="6915689518016285116">"Να μη γίνει βελτιστοποίηση"</string>
+    <string name="ignore_optimizations_off" msgid="6153196256410296835">"Βελτιστοποίηση"</string>
     <string name="ignore_optimizations_on_desc" msgid="2321398930330555815">"Η μπαταρία σας ενδέχεται να εξαντλείται πιο γρήγορα."</string>
     <string name="ignore_optimizations_off_desc" msgid="5255731062045426544">"Συνιστάται για μεγαλύτερη διάρκεια μπαταρίας"</string>
     <string name="ignore_optimizations_title" msgid="2829637961185027768">"Να επιτρέπεται στην εφαρμογή <xliff:g id="APP">%s</xliff:g> να αγνοεί τις βελτιστοποιήσεις μπαταρίας;"</string>

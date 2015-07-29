@@ -327,7 +327,7 @@
     <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"Настройте резервен начин за заключване на екрана"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_2" msgid="4158160658182631304">"Да добавим отпечатъка ви."</string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Отключване с отпечатък"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="5061093614328964700">"Трябва само да докоснете сензора за отпечатъци, за да отключите телефона си, да оторизирате покупка или да влезете в приложение. Тези неща ще могат да се извършват с добавените към телефона ви отпечатъци, така че внимавайте кого добавяте."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="9193978734907066950">"Трябва само да докоснете сензора за отпечатъци, за да отключите телефона си, да оторизирате покупка или да влезете в приложение. Внимавайте чии отпечатъци добавяте, защото съответните хора ще могат да правят тези неща."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="7173290350577831813">"Забележка: Отпечатъкът ви може да е по-малко сигурен в сравнение с надеждна фигура или ПИН код."</string>
     <string name="security_settings_fingerprint_enroll_introduction_risk_link_text" msgid="9129531466157620977">"Научете повече"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Отказ"</string>
@@ -412,26 +412,24 @@
     <string name="unlock_set_unlock_mode_password" msgid="1203938057264146610">"Парола"</string>
     <string name="unlock_setup_wizard_fingerprint_details" msgid="7893457665921363009">"След като сте настроили заключване на екрана, можете да настроите и отпечатъка си от „Настройки“ &gt; „Сигурност“."</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"Изключване на заключването на екрана"</string>
-    <!-- no translation found for unlock_disable_frp_warning_title (264008934468492550) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern (8869767290771023461) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern_fingerprint (8212242533942400457) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin (586996206210265131) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin_fingerprint (875669051899437197) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password (5420612686852555537) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password_fingerprint (2228159168587170445) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_unknown (1550718040483548220) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_unknown_fingerprint (6363091330281670692) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_ok (7075138677177748705) -->
-    <skip />
+    <string name="unlock_disable_frp_warning_title" msgid="264008934468492550">"Да се премахне ли защитата на устройството?"</string>
+    <string name="unlock_disable_frp_warning_content_pattern" msgid="8869767290771023461">"Функциите за защита на устройството няма да работят без фигурата ви."</string>
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="8212242533942400457">"Функциите за защита на устройството няма да работят без фигурата ви.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Запазените ви отпечатъци също ще бъдат премахнати от това устройство и няма да можете да ги използвате за отключване на телефона си, оторизиране на покупки или влизане в приложения."</string>
+    <string name="unlock_disable_frp_warning_content_pin" msgid="586996206210265131">"Функциите за защита на устройството няма да работят без ПИН кода ви."</string>
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="875669051899437197">"Функциите за защита на устройството няма да работят без ПИН кода ви.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Запазените ви отпечатъци също ще бъдат премахнати от това устройство и няма да можете да ги използвате за отключване на телефона си, оторизиране на покупки или влизане в приложения."</string>
+    <string name="unlock_disable_frp_warning_content_password" msgid="5420612686852555537">"Функциите за защита на устройството няма да работят без паролата ви."</string>
+    <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="2228159168587170445">"Функциите за защита на устройството няма да работят без паролата ви.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Запазените ви отпечатъци също ще бъдат премахнати от това устройство и няма да можете да ги използвате за отключване на телефона си, оторизиране на покупки или влизане в приложения."</string>
+    <string name="unlock_disable_frp_warning_content_unknown" msgid="1550718040483548220">"Функциите за защита на устройството няма да работят без опцията ви за заключване на екрана."</string>
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="6363091330281670692">"Функциите за защита на устройството няма да работят без опцията ви за заключване на екрана.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Запазените ви отпечатъци също ще бъдат премахнати от това устройство и няма да можете да ги използвате за отключване на телефона си, оторизиране на покупки или влизане в приложения."</string>
+    <string name="unlock_disable_frp_warning_ok" msgid="7075138677177748705">"Да, да се премахне"</string>
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"Промяна на фигурата за отключване"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"Промяна на PIN кода за отключване"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"Промяна на паролата за отключване"</string>
@@ -2355,18 +2353,21 @@
     <string name="global_font_change_title" msgid="1887126466191012035">"Промяна на размера на шрифта"</string>
     <string name="nfc_payment_settings_title" msgid="1807298287380821613">"Докоснете и платете"</string>
     <string name="nfc_payment_how_it_works" msgid="3028822263837896720">"Начин на работа"</string>
-    <string name="nfc_payment_no_apps" msgid="3453656795093776889">"Използвайте функцията за мобилно плащане, за да извършвате покупки от магазини"</string>
+    <!-- no translation found for nfc_payment_no_apps (5477904979148086424) -->
+    <skip />
     <string name="nfc_payment_default" msgid="8648420259219150395">"Основно приложение за плащане"</string>
     <string name="nfc_payment_default_not_set" msgid="7485060884228447765">"Не е зададено"</string>
     <string name="nfc_payment_app_and_desc" msgid="7942415346564794258">"<xliff:g id="APP">%1$s</xliff:g> – <xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
-    <string name="nfc_payment_open_app" msgid="5550268485421927976">"Ако отвореното приложение поддържа функцията за мобилно плащане"</string>
-    <string name="nfc_payment_favor_open" msgid="7513784422533299982">"Да се използва това приложение вместо <xliff:g id="APP">%1$s</xliff:g>"</string>
-    <string name="nfc_payment_favor_open_default_unknown" msgid="1179489206233351756">"Да се използва това приложение"</string>
-    <string name="nfc_payment_favor_default" msgid="8238320071435721803">"Пак да се използва <xliff:g id="APP">%1$s</xliff:g>"</string>
-    <string name="nfc_payment_favor_default_default_unknown" msgid="7029467023485683077">"Пак да се използва основното приложение"</string>
+    <!-- no translation found for nfc_payment_use_default (3234730182120288495) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_default (5743781166099608372) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_open (1923314062109977944) -->
+    <skip />
     <string name="nfc_payment_pay_with" msgid="7524904024378144072">"На терминали за мобилно плащане да се използва:"</string>
     <string name="nfc_how_it_works_title" msgid="1984068457698797207">"Плащане на терминал"</string>
-    <string name="nfc_how_it_works_content" msgid="5820288675316257177">"След като настроите приложение за мобилно плащане, допрете телефона си (трябва да е включен) до който и да е терминал с логото на функцията, за да извършите покупка."</string>
+    <!-- no translation found for nfc_how_it_works_content (4749007806393224934) -->
+    <skip />
     <string name="nfc_how_it_works_got_it" msgid="259653300203217402">"Разбрах"</string>
     <string name="nfc_more_title" msgid="815910943655133280">"Още..."</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"Да се зададе ли като ваше предпочитание?"</string>
@@ -2755,7 +2756,7 @@
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"Помощник и гласово въвеждане"</string>
     <string name="default_assist_title" msgid="8868488975409247921">"Помощно приложение"</string>
     <string name="default_assist_none" msgid="3709083569608735487">"Няма"</string>
-    <string name="choose_assist_title" msgid="554234448228740980">"Избиране на помощно приложение"</string>
+    <string name="choose_assist_title" msgid="2373353478479305516">"Избиране на помощно приложение"</string>
     <string name="assistant_security_warning_title" msgid="8673079231955467177">"Искате ли <xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> да е помощникът ви?"</string>
     <string name="assistant_security_warning" msgid="4881965750615394002">"<xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> ще може да чете информацията за използваните в системата приложения, включително данните, видими на екрана или достъпни в тях."</string>
     <string name="assistant_security_warning_agree" msgid="7710290206928033908">"Приемам"</string>
@@ -2781,14 +2782,15 @@
     <string name="memory_avg_desc" msgid="1551240906596518412">"Средно <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
     <string name="memory_use_running_format" msgid="4172488041800743760">"<xliff:g id="MEMORY">%1$s</xliff:g>/<xliff:g id="RUNNING">%2$s</xliff:g>"</string>
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
-    <string name="high_power_apps" msgid="2116416853043103135">"Игнориране на оптимизациите"</string>
-    <string name="high_power_filter_on" msgid="3862942127137594196">"Разрешено"</string>
-    <string name="high_power_on" msgid="148473814103292724">"Пренебр. на оптимизац. на батерията"</string>
-    <string name="high_power_off" msgid="221092098425904010">"Не е разрешено"</string>
-    <string name="high_power_desc" msgid="8412735192889327770">"Батерията не се оптимизира и може да се изразходва по-бързо."</string>
-    <plurals name="high_power_count" formatted="false" msgid="4343190376439806186">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> приложения имат разрешение да пренебрегват оптимизациите на батерията</item>
-      <item quantity="one">1 приложение има разрешение да пренебрегва оптимизациите на батерията</item>
+    <string name="high_power_apps" msgid="3459065925679828230">"Оптимизиране на батерията"</string>
+    <string name="high_power_filter_on" msgid="3222265297576680099">"Без оптимизиране"</string>
+    <string name="high_power_on" msgid="3382367497549906927">"Оптимизирането на батерията се пренебрегва"</string>
+    <string name="high_power_off" msgid="3393904131961263278">"Разходът на батерията се оптимизира"</string>
+    <string name="high_power_system" msgid="7362862974428225301">"Няма настройка за оптимизиране на батерията"</string>
+    <string name="high_power_desc" msgid="6283926163708585760">"Батерията не се оптимизира и може да се изразходва по-бързо."</string>
+    <plurals name="high_power_count" formatted="false" msgid="2464701722383894640">
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> приложения имат разрешение да пренебрегват оптимизирането на батерията</item>
+      <item quantity="one">1 приложение има разрешение да пренебрегва оптимизирането на батерията</item>
     </plurals>
     <string name="battery_summary" msgid="101415762036784289">"Изразходване на <xliff:g id="PERCENTAGE">%1$d</xliff:g>%% от последното пълно зареждане"</string>
     <string name="no_battery_summary" msgid="3528036835462846814">"Батерията не е изразходвана от последното пълно зареждане"</string>
@@ -2832,8 +2834,8 @@
     <string name="no_data_usage" msgid="9131454024293628063">"Не са използвани данни"</string>
     <string name="zen_access_warning_dialog_title" msgid="1198189958031157142">"Да се разреши ли достъпът до „Не безпокойте“ за <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_access_warning_dialog_summary" msgid="4015885767653010873">"Това приложение ще може да включва/изключва „Не безпокойте“ и да извършва промени в свързаните настройки."</string>
-    <string name="ignore_optimizations_on" msgid="2417358456267927315">"Разрешаване"</string>
-    <string name="ignore_optimizations_off" msgid="9069942099715006633">"Без разрешаване"</string>
+    <string name="ignore_optimizations_on" msgid="6915689518016285116">"Без оптимизиране"</string>
+    <string name="ignore_optimizations_off" msgid="6153196256410296835">"Оптимизиране"</string>
     <string name="ignore_optimizations_on_desc" msgid="2321398930330555815">"Батерията може да се изразходва по-бързо"</string>
     <string name="ignore_optimizations_off_desc" msgid="5255731062045426544">"Препоръчително за удължаване на живота на батерията"</string>
     <string name="ignore_optimizations_title" msgid="2829637961185027768">"Да се разреши ли на <xliff:g id="APP">%s</xliff:g> да пренебрегва оптимизациите на батерията?"</string>

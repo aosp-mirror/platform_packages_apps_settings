@@ -327,7 +327,7 @@
     <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"Set up your backup screen lock method"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_2" msgid="4158160658182631304">"Add your fingerprint"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Unlock with fingerprint"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="5061093614328964700">"Just touch the fingerprint sensor to unlock your phone, authorise purchases or sign in to apps. Any fingerprints that are added to your phone will be able to do these things, so be careful who you add."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="9193978734907066950">"Just touch the fingerprint sensor to unlock your phone, authorise purchases or sign in to apps. Be careful whose fingerprints you add – any fingerprints that are added will be able to do these things."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="7173290350577831813">"Note: Your fingerprint may be less secure than a strong pattern or PIN."</string>
     <string name="security_settings_fingerprint_enroll_introduction_risk_link_text" msgid="9129531466157620977">"Find out more"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Cancel"</string>
@@ -2353,18 +2353,21 @@
     <string name="global_font_change_title" msgid="1887126466191012035">"Change font size"</string>
     <string name="nfc_payment_settings_title" msgid="1807298287380821613">"Tap &amp; pay"</string>
     <string name="nfc_payment_how_it_works" msgid="3028822263837896720">"How it works"</string>
-    <string name="nfc_payment_no_apps" msgid="3453656795093776889">"Use Tap &amp; pay to make in-store purchases"</string>
+    <!-- no translation found for nfc_payment_no_apps (5477904979148086424) -->
+    <skip />
     <string name="nfc_payment_default" msgid="8648420259219150395">"Payment default"</string>
     <string name="nfc_payment_default_not_set" msgid="7485060884228447765">"Not set"</string>
     <string name="nfc_payment_app_and_desc" msgid="7942415346564794258">"<xliff:g id="APP">%1$s</xliff:g> - <xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
-    <string name="nfc_payment_open_app" msgid="5550268485421927976">"If open app supports Tap &amp; pay"</string>
-    <string name="nfc_payment_favor_open" msgid="7513784422533299982">"Use that app instead of <xliff:g id="APP">%1$s</xliff:g>"</string>
-    <string name="nfc_payment_favor_open_default_unknown" msgid="1179489206233351756">"Use that app instead"</string>
-    <string name="nfc_payment_favor_default" msgid="8238320071435721803">"Still use <xliff:g id="APP">%1$s</xliff:g>"</string>
-    <string name="nfc_payment_favor_default_default_unknown" msgid="7029467023485683077">"Still use default"</string>
+    <!-- no translation found for nfc_payment_use_default (3234730182120288495) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_default (5743781166099608372) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_open (1923314062109977944) -->
+    <skip />
     <string name="nfc_payment_pay_with" msgid="7524904024378144072">"At a Tap &amp; pay terminal, pay with:"</string>
     <string name="nfc_how_it_works_title" msgid="1984068457698797207">"Paying at the terminal"</string>
-    <string name="nfc_how_it_works_content" msgid="5820288675316257177">"Once you\'ve set up a Tap &amp; pay app and your phone is turned on, tap your phone on any terminal with the Tap &amp; pay logo on it to make a purchase."</string>
+    <!-- no translation found for nfc_how_it_works_content (4749007806393224934) -->
+    <skip />
     <string name="nfc_how_it_works_got_it" msgid="259653300203217402">"Understood"</string>
     <string name="nfc_more_title" msgid="815910943655133280">"More..."</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"Set as your preference?"</string>
@@ -2753,7 +2756,7 @@
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"Assist &amp; voice input"</string>
     <string name="default_assist_title" msgid="8868488975409247921">"Assist app"</string>
     <string name="default_assist_none" msgid="3709083569608735487">"None"</string>
-    <string name="choose_assist_title" msgid="554234448228740980">"Choose Assist"</string>
+    <string name="choose_assist_title" msgid="2373353478479305516">"Choose Assist app"</string>
     <string name="assistant_security_warning_title" msgid="8673079231955467177">"Make <xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> your assistant?"</string>
     <string name="assistant_security_warning" msgid="4881965750615394002">"<xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> will be able to read information about apps in use on your system, including information visible on your screen or accessible within the apps."</string>
     <string name="assistant_security_warning_agree" msgid="7710290206928033908">"Agree"</string>
@@ -2779,14 +2782,15 @@
     <string name="memory_avg_desc" msgid="1551240906596518412">"Average <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
     <string name="memory_use_running_format" msgid="4172488041800743760">"<xliff:g id="MEMORY">%1$s</xliff:g> / <xliff:g id="RUNNING">%2$s</xliff:g>"</string>
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
-    <string name="high_power_apps" msgid="2116416853043103135">"Ignore optimisations"</string>
-    <string name="high_power_filter_on" msgid="3862942127137594196">"Allowed"</string>
-    <string name="high_power_on" msgid="148473814103292724">"Ignoring battery optimisations"</string>
-    <string name="high_power_off" msgid="221092098425904010">"Not allowed"</string>
-    <string name="high_power_desc" msgid="8412735192889327770">"Don’t apply battery optimisations. May drain your battery more quickly."</string>
-    <plurals name="high_power_count" formatted="false" msgid="4343190376439806186">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> apps allowed to ignore battery optimisations</item>
-      <item quantity="one">1 app allowed to ignore battery optimisations</item>
+    <string name="high_power_apps" msgid="3459065925679828230">"Battery optimisation"</string>
+    <string name="high_power_filter_on" msgid="3222265297576680099">"Not optimised"</string>
+    <string name="high_power_on" msgid="3382367497549906927">"Ignoring battery optimisation"</string>
+    <string name="high_power_off" msgid="3393904131961263278">"Optimising battery use"</string>
+    <string name="high_power_system" msgid="7362862974428225301">"Battery optimisation not available"</string>
+    <string name="high_power_desc" msgid="6283926163708585760">"Don’t apply battery optimisation. May drain your battery more quickly."</string>
+    <plurals name="high_power_count" formatted="false" msgid="2464701722383894640">
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> apps allowed to ignore battery optimisation</item>
+      <item quantity="one">1 app allowed to ignore battery optimisation</item>
     </plurals>
     <string name="battery_summary" msgid="101415762036784289">"<xliff:g id="PERCENTAGE">%1$d</xliff:g>%% use since last full charge"</string>
     <string name="no_battery_summary" msgid="3528036835462846814">"No battery use since last full charge"</string>
@@ -2830,8 +2834,8 @@
     <string name="no_data_usage" msgid="9131454024293628063">"No data used"</string>
     <string name="zen_access_warning_dialog_title" msgid="1198189958031157142">"Allow access to Do Not Disturb for <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_access_warning_dialog_summary" msgid="4015885767653010873">"The app will be able to turn on/off Do Not Disturb and make changes to related settings."</string>
-    <string name="ignore_optimizations_on" msgid="2417358456267927315">"Allow"</string>
-    <string name="ignore_optimizations_off" msgid="9069942099715006633">"Don\'t allow"</string>
+    <string name="ignore_optimizations_on" msgid="6915689518016285116">"Don’t optimise"</string>
+    <string name="ignore_optimizations_off" msgid="6153196256410296835">"Optimise"</string>
     <string name="ignore_optimizations_on_desc" msgid="2321398930330555815">"May drain your battery more quickly"</string>
     <string name="ignore_optimizations_off_desc" msgid="5255731062045426544">"Recommended for better battery life"</string>
     <string name="ignore_optimizations_title" msgid="2829637961185027768">"Allow <xliff:g id="APP">%s</xliff:g> to ignore battery optimisations?"</string>

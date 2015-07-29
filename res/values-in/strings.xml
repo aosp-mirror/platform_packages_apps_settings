@@ -327,7 +327,7 @@
     <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"Menyiapkan metode kunci layar cadangan"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_2" msgid="4158160658182631304">"Menambahkan sidik jari Anda"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Membuka kunci dengan sidik jari"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="5061093614328964700">"Cukup sentuh sensor sidik jari untuk membuka kunci ponsel, mengotorisasi pembelian, atau masuk ke aplikasi. Setiap sidik jari yang ditambahkan ke ponsel dapat melakukannya, jadi berhati-hatilah saat menambahkan orang."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="9193978734907066950">"Cukup sentuh sensor sidik jari untuk membuka kunci ponsel, mengotorisasi pembelian, atau masuk ke aplikasi. Namun berhati-hatilah saat menambahkan sidik jari, karena setiap sidik jari yang ditambahkan dapat melakukan hal-hal tersebut."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="7173290350577831813">"Catatan: Sidik jari mungkin kurang aman dibandingkan dengan pola atau PIN yang rumit."</string>
     <string name="security_settings_fingerprint_enroll_introduction_risk_link_text" msgid="9129531466157620977">"Pelajari lebih lanjut"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Batal"</string>
@@ -2353,18 +2353,21 @@
     <string name="global_font_change_title" msgid="1887126466191012035">"Ubah ukuran font"</string>
     <string name="nfc_payment_settings_title" msgid="1807298287380821613">"Ketuk &amp; bayar"</string>
     <string name="nfc_payment_how_it_works" msgid="3028822263837896720">"Cara kerjanya"</string>
-    <string name="nfc_payment_no_apps" msgid="3453656795093776889">"Gunakan Ketuk &amp; bayar untuk membeli di toko"</string>
+    <!-- no translation found for nfc_payment_no_apps (5477904979148086424) -->
+    <skip />
     <string name="nfc_payment_default" msgid="8648420259219150395">"Pembayaran default"</string>
     <string name="nfc_payment_default_not_set" msgid="7485060884228447765">"Belum disetel"</string>
     <string name="nfc_payment_app_and_desc" msgid="7942415346564794258">"<xliff:g id="APP">%1$s</xliff:g> - <xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
-    <string name="nfc_payment_open_app" msgid="5550268485421927976">"Jika aplikasi terbuka mendukung Ketuk &amp; bayar"</string>
-    <string name="nfc_payment_favor_open" msgid="7513784422533299982">"Gunakan aplikasi tersebut, bukan <xliff:g id="APP">%1$s</xliff:g>"</string>
-    <string name="nfc_payment_favor_open_default_unknown" msgid="1179489206233351756">"Gunakan aplikasi tersebut"</string>
-    <string name="nfc_payment_favor_default" msgid="8238320071435721803">"Tetap gunakan <xliff:g id="APP">%1$s</xliff:g>"</string>
-    <string name="nfc_payment_favor_default_default_unknown" msgid="7029467023485683077">"Tetap gunakan default"</string>
+    <!-- no translation found for nfc_payment_use_default (3234730182120288495) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_default (5743781166099608372) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_open (1923314062109977944) -->
+    <skip />
     <string name="nfc_payment_pay_with" msgid="7524904024378144072">"Di terminal Ketuk &amp; bayar, bayar dengan:"</string>
     <string name="nfc_how_it_works_title" msgid="1984068457698797207">"Membayar di terminal"</string>
-    <string name="nfc_how_it_works_content" msgid="5820288675316257177">"Setelah Anda menyiapkan aplikasi Ketuk &amp; bayar dan ponsel dinyalakan, ketukkan ponsel ke terminal yang memiliki logo Ketuk &amp; bayar untuk melakukan pembelian."</string>
+    <!-- no translation found for nfc_how_it_works_content (4749007806393224934) -->
+    <skip />
     <string name="nfc_how_it_works_got_it" msgid="259653300203217402">"Mengerti"</string>
     <string name="nfc_more_title" msgid="815910943655133280">"Lainnya..."</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"Jadikan preferensi Anda?"</string>
@@ -2753,7 +2756,7 @@
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"Bantuan &amp; masukan suara"</string>
     <string name="default_assist_title" msgid="8868488975409247921">"Aplikasi bantuan"</string>
     <string name="default_assist_none" msgid="3709083569608735487">"Tidak ada"</string>
-    <string name="choose_assist_title" msgid="554234448228740980">"Pilih Bantuan"</string>
+    <string name="choose_assist_title" msgid="2373353478479305516">"Pilih aplikasi Bantuan"</string>
     <string name="assistant_security_warning_title" msgid="8673079231955467177">"Jadikan <xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> sebagai asisten?"</string>
     <string name="assistant_security_warning" msgid="4881965750615394002">"<xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> dapat membaca informasi aplikasi yang sedang digunakan di sistem, termasuk informasi yang terlihat di layar atau dapat diakses dalam aplikasi."</string>
     <string name="assistant_security_warning_agree" msgid="7710290206928033908">"Setuju"</string>
@@ -2779,12 +2782,13 @@
     <string name="memory_avg_desc" msgid="1551240906596518412">"Rata-rata <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
     <string name="memory_use_running_format" msgid="4172488041800743760">"<xliff:g id="MEMORY">%1$s</xliff:g> / <xliff:g id="RUNNING">%2$s</xliff:g>"</string>
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
-    <string name="high_power_apps" msgid="2116416853043103135">"Abaikan pengoptimalan"</string>
-    <string name="high_power_filter_on" msgid="3862942127137594196">"Diizinkan"</string>
-    <string name="high_power_on" msgid="148473814103292724">"Mengabaikan pengoptimalan baterai"</string>
-    <string name="high_power_off" msgid="221092098425904010">"Tidak diizinkan"</string>
-    <string name="high_power_desc" msgid="8412735192889327770">"Jangan terapkan pengoptimalan baterai. Baterai akan lebih cepat habis."</string>
-    <plurals name="high_power_count" formatted="false" msgid="4343190376439806186">
+    <string name="high_power_apps" msgid="3459065925679828230">"Pengoptimalan baterai"</string>
+    <string name="high_power_filter_on" msgid="3222265297576680099">"Tidak dioptimalkan"</string>
+    <string name="high_power_on" msgid="3382367497549906927">"Mengabaikan pengoptimalan baterai"</string>
+    <string name="high_power_off" msgid="3393904131961263278">"Mengoptimalkan penggunaan baterai"</string>
+    <string name="high_power_system" msgid="7362862974428225301">"Pengoptimalan baterai tidak tersedia"</string>
+    <string name="high_power_desc" msgid="6283926163708585760">"Jangan terapkan pengoptimalan baterai. Baterai akan lebih cepat habis."</string>
+    <plurals name="high_power_count" formatted="false" msgid="2464701722383894640">
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aplikasi diizinkan untuk mengabaikan pengoptimalan baterai</item>
       <item quantity="one">1 aplikasi diizinkan untuk mengabaikan pengoptimalan baterai</item>
     </plurals>
@@ -2830,8 +2834,8 @@
     <string name="no_data_usage" msgid="9131454024293628063">"Tidak ada data yang digunakan"</string>
     <string name="zen_access_warning_dialog_title" msgid="1198189958031157142">"Izinkan akses ke status Jangan Ganggu untuk <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_access_warning_dialog_summary" msgid="4015885767653010873">"Aplikasi dapat mengaktifkan/menonaktifkan status Jangan Ganggu dan mengubah setelan terkait."</string>
-    <string name="ignore_optimizations_on" msgid="2417358456267927315">"Izinkan"</string>
-    <string name="ignore_optimizations_off" msgid="9069942099715006633">"Jangan izinkan"</string>
+    <string name="ignore_optimizations_on" msgid="6915689518016285116">"Jangan optimalkan"</string>
+    <string name="ignore_optimizations_off" msgid="6153196256410296835">"Optimalkan"</string>
     <string name="ignore_optimizations_on_desc" msgid="2321398930330555815">"Dapat menghabiskan baterai lebih cepat"</string>
     <string name="ignore_optimizations_off_desc" msgid="5255731062045426544">"Disarankan agar baterai lebih tahan lama"</string>
     <string name="ignore_optimizations_title" msgid="2829637961185027768">"Izinkan <xliff:g id="APP">%s</xliff:g> untuk mengabaikan pengoptimalan baterai?"</string>

@@ -327,7 +327,8 @@
     <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"Configurer le mode de verrouillage d\'écran d\'arrière-plan"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_2" msgid="4158160658182631304">"Ajouter votre empreinte digitale"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Déver. avec empr. dig."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="5061093614328964700">"Il vous suffit de toucher le capteur d\'empreinte digitale pour déverrouiller votre téléphone, autoriser des achats ou vous connecter à des applications. Toutes les personnes dont les empreintes digitales sont ajoutées sur votre téléphone peuvent effectuer ces opérations. Sélectionnez donc ces personnes avec soin."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_introduction_message (9193978734907066950) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="7173290350577831813">"Remarque : Vos empreintes digitales peuvent être moins sécurisées qu\'un motif ou un NIP fiables."</string>
     <string name="security_settings_fingerprint_enroll_introduction_risk_link_text" msgid="9129531466157620977">"En savoir plus"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Annuler"</string>
@@ -412,26 +413,24 @@
     <string name="unlock_set_unlock_mode_password" msgid="1203938057264146610">"Mot de passe"</string>
     <string name="unlock_setup_wizard_fingerprint_details" msgid="7893457665921363009">"Une fois que vous avez défini un verrouillage de l\'écran, vous pouvez également configurer une empreinte digitale dans le menu Paramètres &gt; Sécurité."</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"Désactiver le verrouillage de l\'écran"</string>
-    <!-- no translation found for unlock_disable_frp_warning_title (264008934468492550) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern (8869767290771023461) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern_fingerprint (8212242533942400457) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin (586996206210265131) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin_fingerprint (875669051899437197) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password (5420612686852555537) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password_fingerprint (2228159168587170445) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_unknown (1550718040483548220) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_unknown_fingerprint (6363091330281670692) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_ok (7075138677177748705) -->
-    <skip />
+    <string name="unlock_disable_frp_warning_title" msgid="264008934468492550">"Supprimer la protection de l\'appareil?"</string>
+    <string name="unlock_disable_frp_warning_content_pattern" msgid="8869767290771023461">"Les fonctions de protection de l\'appareil ne fonctionneront pas sans votre motif."</string>
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="8212242533942400457">"Les fonctions de protection de l\'appareil ne fonctionneront pas sans votre motif.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Vos empreintes digitales enregistrées seront également supprimées de cet appareil et vous ne pourrez pas déverrouiller votre téléphone, autoriser des achats ou vous connecter à des applications avec celles-ci."</string>
+    <string name="unlock_disable_frp_warning_content_pin" msgid="586996206210265131">"Les fonctions de protection de l\'appareil ne fonctionneront pas sans votre NIP."</string>
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="875669051899437197">"Les fonctions de protection de l\'appareil ne fonctionneront pas sans votre NIP.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Vos empreintes digitales enregistrées seront également supprimées de cet appareil et vous ne pourrez pas déverrouiller votre téléphone, autoriser des achats ou vous connecter à des applications avec celles-ci."</string>
+    <string name="unlock_disable_frp_warning_content_password" msgid="5420612686852555537">"Les fonctions de protection de l\'appareil ne fonctionneront pas sans votre mot de passe."</string>
+    <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="2228159168587170445">"Les fonctions de protection de l\'appareil ne fonctionneront pas sans votre mot de passe. <xliff:g id="EMPTY_LINE">
+
+</xliff:g>Vos empreintes digitales enregistrées seront également supprimées de cet appareil et vous ne pourrez pas déverrouiller votre téléphone, autoriser des achats ou vous connecter à des applications avec celles-ci."</string>
+    <string name="unlock_disable_frp_warning_content_unknown" msgid="1550718040483548220">"Les fonctions de protection de l\'appareil ne fonctionneront pas sans votre verrouillage d\'écran."</string>
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="6363091330281670692">"Les fonctions de protection de l\'appareil ne fonctionneront pas sans votre verrouillage d\'écran.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Vos empreintes digitales enregistrées seront également supprimées de cet appareil et vous ne pourrez pas déverrouiller votre téléphone, autoriser des achats ou vous connecter à des applications avec celles-ci."</string>
+    <string name="unlock_disable_frp_warning_ok" msgid="7075138677177748705">"Oui, supprimer"</string>
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"Modifier le schéma"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"Modifier le NIP de déverrouillage"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"Modifier le mot de passe de déverrouillage"</string>
@@ -2355,18 +2354,21 @@
     <string name="global_font_change_title" msgid="1887126466191012035">"Modifier la taille de la police"</string>
     <string name="nfc_payment_settings_title" msgid="1807298287380821613">"Toucher et payer"</string>
     <string name="nfc_payment_how_it_works" msgid="3028822263837896720">"Fonctionnement"</string>
-    <string name="nfc_payment_no_apps" msgid="3453656795093776889">"Utiliser la fonctionnalité de paiement sans contact pour payer les achats en magasin"</string>
+    <!-- no translation found for nfc_payment_no_apps (5477904979148086424) -->
+    <skip />
     <string name="nfc_payment_default" msgid="8648420259219150395">"Mode de paiement par défaut"</string>
     <string name="nfc_payment_default_not_set" msgid="7485060884228447765">"Non défini"</string>
     <string name="nfc_payment_app_and_desc" msgid="7942415346564794258">"<xliff:g id="APP">%1$s</xliff:g> - <xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
-    <string name="nfc_payment_open_app" msgid="5550268485421927976">"Si l\'application ouverte est compatible avec la fonctionnalité de paiement sans contact"</string>
-    <string name="nfc_payment_favor_open" msgid="7513784422533299982">"Utilisez cette application au lieu de <xliff:g id="APP">%1$s</xliff:g>"</string>
-    <string name="nfc_payment_favor_open_default_unknown" msgid="1179489206233351756">"Utilisez cette application à la place"</string>
-    <string name="nfc_payment_favor_default" msgid="8238320071435721803">"Toujours utiliser <xliff:g id="APP">%1$s</xliff:g>"</string>
-    <string name="nfc_payment_favor_default_default_unknown" msgid="7029467023485683077">"Toujours utiliser l\'application par défaut"</string>
+    <!-- no translation found for nfc_payment_use_default (3234730182120288495) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_default (5743781166099608372) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_open (1923314062109977944) -->
+    <skip />
     <string name="nfc_payment_pay_with" msgid="7524904024378144072">"Application à utiliser aux terminaux de paiement sans contact :"</string>
     <string name="nfc_how_it_works_title" msgid="1984068457698797207">"Paiement à un terminal"</string>
-    <string name="nfc_how_it_works_content" msgid="5820288675316257177">"Une fois que vous avez configuré une application « Toucher et payer » et que votre téléphone est allumé, passez celui-ci sur un terminal disposant du logo Toucher et payer pour effectuer un achat."</string>
+    <!-- no translation found for nfc_how_it_works_content (4749007806393224934) -->
+    <skip />
     <string name="nfc_how_it_works_got_it" msgid="259653300203217402">"OK"</string>
     <string name="nfc_more_title" msgid="815910943655133280">"Plus..."</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"Définir comme application de paiement par défaut?"</string>
@@ -2755,7 +2757,8 @@
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"Assistance et entrée vocale"</string>
     <string name="default_assist_title" msgid="8868488975409247921">"Application d\'assistance"</string>
     <string name="default_assist_none" msgid="3709083569608735487">"Aucun"</string>
-    <string name="choose_assist_title" msgid="554234448228740980">"Sélect. appli d\'assistance"</string>
+    <!-- no translation found for choose_assist_title (2373353478479305516) -->
+    <skip />
     <string name="assistant_security_warning_title" msgid="8673079231955467177">"Définir <xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> comme assistant?"</string>
     <string name="assistant_security_warning" msgid="4881965750615394002">"<xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> pourra accéder aux données relatives aux applications en cours d\'utilisation sur votre système, y compris aux données visibles à l\'écran ou accessibles au sein des applications."</string>
     <string name="assistant_security_warning_agree" msgid="7710290206928033908">"J\'accepte"</string>
@@ -2781,15 +2784,19 @@
     <string name="memory_avg_desc" msgid="1551240906596518412">"Moyenne : <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
     <string name="memory_use_running_format" msgid="4172488041800743760">"<xliff:g id="MEMORY">%1$s</xliff:g>/<xliff:g id="RUNNING">%2$s</xliff:g>"</string>
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
-    <string name="high_power_apps" msgid="2116416853043103135">"Ignorer les optimisations"</string>
-    <string name="high_power_filter_on" msgid="3862942127137594196">"Autorisée"</string>
-    <string name="high_power_on" msgid="148473814103292724">"Applications autorisées à ignorer les optimisations"</string>
-    <string name="high_power_off" msgid="221092098425904010">"Non autorisée"</string>
-    <string name="high_power_desc" msgid="8412735192889327770">"Ne pas appliquer les optimisations de la pile. Cela peut épuiser la pile de votre appareil plus rapidement."</string>
-    <plurals name="high_power_count" formatted="false" msgid="4343190376439806186">
-      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> application est autorisée à ignorer les optimisations de la pile</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> applications sont autorisées à ignorer les optimisations de la pile</item>
-    </plurals>
+    <!-- no translation found for high_power_apps (3459065925679828230) -->
+    <skip />
+    <!-- no translation found for high_power_filter_on (3222265297576680099) -->
+    <skip />
+    <!-- no translation found for high_power_on (3382367497549906927) -->
+    <skip />
+    <!-- no translation found for high_power_off (3393904131961263278) -->
+    <skip />
+    <!-- no translation found for high_power_system (7362862974428225301) -->
+    <skip />
+    <!-- no translation found for high_power_desc (6283926163708585760) -->
+    <skip />
+    <!-- no translation found for high_power_count (2464701722383894640) -->
     <string name="battery_summary" msgid="101415762036784289">"Usage depuis la dernière charge complète : <xliff:g id="PERCENTAGE">%1$d</xliff:g> %%"</string>
     <string name="no_battery_summary" msgid="3528036835462846814">"Aucune utilisation de la pile depuis la dernière charge complète"</string>
     <string name="app_notification_preferences" msgid="1599319335092722613">"Paramètres de l\'application"</string>
@@ -2832,8 +2839,10 @@
     <string name="no_data_usage" msgid="9131454024293628063">"Aucune donnée utilisée"</string>
     <string name="zen_access_warning_dialog_title" msgid="1198189958031157142">"Autoriser l\'accès au mode Ne pas déranger pour <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_access_warning_dialog_summary" msgid="4015885767653010873">"L\'application disposera d\'une autorisation d\'activation ou de désactivation du mode Ne pas déranger et de modification des paramètres associés."</string>
-    <string name="ignore_optimizations_on" msgid="2417358456267927315">"Autoriser"</string>
-    <string name="ignore_optimizations_off" msgid="9069942099715006633">"Ne pas autoriser"</string>
+    <!-- no translation found for ignore_optimizations_on (6915689518016285116) -->
+    <skip />
+    <!-- no translation found for ignore_optimizations_off (6153196256410296835) -->
+    <skip />
     <string name="ignore_optimizations_on_desc" msgid="2321398930330555815">"Cela peut épuiser la pile de votre appareil plus rapidement"</string>
     <string name="ignore_optimizations_off_desc" msgid="5255731062045426544">"Recommandé pour une meilleure autonomie de la pile"</string>
     <string name="ignore_optimizations_title" msgid="2829637961185027768">"Autoriser <xliff:g id="APP">%s</xliff:g> à ignorer les optimisations de la pile?"</string>

@@ -331,7 +331,7 @@
     <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"Nastavte záložnú zámku obrazovky"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_2" msgid="4158160658182631304">"pridať odtlačok prsta."</string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Odomknúť odtlačkom"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="5061093614328964700">"Ak chcete odomknúť telefón, autorizovať nákupy alebo sa prihlásiť do aplikácií, stačí sa dotknúť senzora odtlačkov prstov. Tieto operácie budú môcť vykonávať všetky odtlačky pridané do telefónu, takže dávajte pozor, koho odtlačky pridáte."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="9193978734907066950">"Ak chcete odomknúť telefón, autorizovať nákupy alebo sa prihlásiť do aplikácií, stačí sa dotknúť senzora odtlačkov prstov. Tieto operácie budú môcť vykonávať všetky odtlačky pridané do telefónu, takže dávajte pozor, čie odtlačky pridáte."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="7173290350577831813">"Poznámka: Odtlačok môže byť menej bezpečný ako silný bezpečnostný vzor alebo kód PIN."</string>
     <string name="security_settings_fingerprint_enroll_introduction_risk_link_text" msgid="9129531466157620977">"Ďalšie informácie"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Zrušiť"</string>
@@ -416,26 +416,24 @@
     <string name="unlock_set_unlock_mode_password" msgid="1203938057264146610">"Heslo"</string>
     <string name="unlock_setup_wizard_fingerprint_details" msgid="7893457665921363009">"Po nastavení zámky obrazovky si môžete nastaviť aj svoj odtlačok prsta v časti Nastavenia &gt; Zabezpečenie."</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"Vypnúť zámku obrazovky"</string>
-    <!-- no translation found for unlock_disable_frp_warning_title (264008934468492550) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern (8869767290771023461) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern_fingerprint (8212242533942400457) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin (586996206210265131) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin_fingerprint (875669051899437197) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password (5420612686852555537) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password_fingerprint (2228159168587170445) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_unknown (1550718040483548220) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_unknown_fingerprint (6363091330281670692) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_ok (7075138677177748705) -->
-    <skip />
+    <string name="unlock_disable_frp_warning_title" msgid="264008934468492550">"Odstrániť ochranu zariadenia?"</string>
+    <string name="unlock_disable_frp_warning_content_pattern" msgid="8869767290771023461">"Funkcie ochrany zariadenia nebudú fungovať bez vášho vzoru."</string>
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="8212242533942400457">"Funkcie ochrany zariadenia nebudú fungovať bez vášho vzoru.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Z tohto zariadenia sa tiež odstránia vaše uložené odtlačky prstov a nebudete môcť pomocou nich ďalej odomykať svoj telefón, autorizovať nákupy ani sa prihlasovať do aplikácií.“"</string>
+    <string name="unlock_disable_frp_warning_content_pin" msgid="586996206210265131">"Funkcie ochrany zariadenia nebudú fungovať bez vášho kódu PIN."</string>
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="875669051899437197">"Funkcie ochrany zariadenia nebudú fungovať bez vášho kódu PIN.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Z tohto zariadenia sa tiež odstránia vaše uložené odtlačky prstov a nebudete môcť pomocou nich ďalej odomykať svoj telefón, autorizovať nákupy ani sa prihlasovať do aplikácií.“"</string>
+    <string name="unlock_disable_frp_warning_content_password" msgid="5420612686852555537">"Funkcie ochrany zariadenia nebudú fungovať bez vášho hesla."</string>
+    <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="2228159168587170445">"Funkcie ochrany zariadenia nebudú fungovať bez vášho hesla.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Z tohto zariadenia sa tiež odstránia vaše uložené odtlačky prstov a nebudete môcť pomocou nich ďalej odomykať svoj telefón, autorizovať nákupy ani sa prihlasovať do aplikácií.“"</string>
+    <string name="unlock_disable_frp_warning_content_unknown" msgid="1550718040483548220">"Funkcie ochrany zariadenia nebudú fungovať bez vašej zámky obrazovky."</string>
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="6363091330281670692">"Funkcie ochrany zariadenia nebudú fungovať bez vašej zámky obrazovky.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Z tohto zariadenia sa tiež odstránia vaše uložené odtlačky prstov a nebudete môcť pomocou nich ďalej odomykať svoj telefón, autorizovať nákupy ani sa prihlasovať do aplikácií.“"</string>
+    <string name="unlock_disable_frp_warning_ok" msgid="7075138677177748705">"Áno, odstrániť"</string>
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"Zmena bezpečnostného vzoru"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"Zmena bezpečnostného kódu PIN"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"Zmeniť bezpečnostné heslo"</string>
@@ -2373,18 +2371,21 @@
     <string name="global_font_change_title" msgid="1887126466191012035">"Zmeniť veľkosť písma"</string>
     <string name="nfc_payment_settings_title" msgid="1807298287380821613">"Platby mobilom"</string>
     <string name="nfc_payment_how_it_works" msgid="3028822263837896720">"Ako to funguje"</string>
-    <string name="nfc_payment_no_apps" msgid="3453656795093776889">"Na nákupy v obchode použiť platby priložením"</string>
+    <!-- no translation found for nfc_payment_no_apps (5477904979148086424) -->
+    <skip />
     <string name="nfc_payment_default" msgid="8648420259219150395">"Predvolená platobná aplikácia"</string>
     <string name="nfc_payment_default_not_set" msgid="7485060884228447765">"Nenastavené"</string>
     <string name="nfc_payment_app_and_desc" msgid="7942415346564794258">"<xliff:g id="APP">%1$s</xliff:g> – <xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
-    <string name="nfc_payment_open_app" msgid="5550268485421927976">"Ak otvorená aplikácia podporuje platby priložením"</string>
-    <string name="nfc_payment_favor_open" msgid="7513784422533299982">"Použiť túto aplikáciu namiesto aplikácie <xliff:g id="APP">%1$s</xliff:g>"</string>
-    <string name="nfc_payment_favor_open_default_unknown" msgid="1179489206233351756">"Použiť namiesto toho túto aplikáciu"</string>
-    <string name="nfc_payment_favor_default" msgid="8238320071435721803">"Naďalej používať aplikáciu <xliff:g id="APP">%1$s</xliff:g>"</string>
-    <string name="nfc_payment_favor_default_default_unknown" msgid="7029467023485683077">"Naďalej používať predvolenú aplikáciu"</string>
+    <!-- no translation found for nfc_payment_use_default (3234730182120288495) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_default (5743781166099608372) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_open (1923314062109977944) -->
+    <skip />
     <string name="nfc_payment_pay_with" msgid="7524904024378144072">"Na platobnom termináli podporujúcom platby priložením platiť pomocou aplikácie:"</string>
     <string name="nfc_how_it_works_title" msgid="1984068457698797207">"Platenie pri termináli"</string>
-    <string name="nfc_how_it_works_content" msgid="5820288675316257177">"Ak máte nastavenú aplikáciu umožňujúcu platby priložením a zapnutý telefón, môžete nakupovať priložením telefónu k akémukoľvek terminálu s logom platieb priložením."</string>
+    <!-- no translation found for nfc_how_it_works_content (4749007806393224934) -->
+    <skip />
     <string name="nfc_how_it_works_got_it" msgid="259653300203217402">"Dobre"</string>
     <string name="nfc_more_title" msgid="815910943655133280">"Viac..."</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"Nastaviť ako predvoľbu?"</string>
@@ -2787,7 +2788,7 @@
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"Asistencia a hlasový vstup"</string>
     <string name="default_assist_title" msgid="8868488975409247921">"Asistenčná aplikácia"</string>
     <string name="default_assist_none" msgid="3709083569608735487">"Žiadna"</string>
-    <string name="choose_assist_title" msgid="554234448228740980">"Výber pomocnej aplikácie"</string>
+    <string name="choose_assist_title" msgid="2373353478479305516">"Výber pomocnej aplikácie"</string>
     <string name="assistant_security_warning_title" msgid="8673079231955467177">"Chcete urobiť z aplikácie <xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> pomocnú aplikáciu?"</string>
     <string name="assistant_security_warning" msgid="4881965750615394002">"Aplikácia <xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> bude môcť čítať informácie o aplikáciách používaných vo vašom systéme, ako aj údaje viditeľné na obrazovke alebo prístupné v rámci aplikácií."</string>
     <string name="assistant_security_warning_agree" msgid="7710290206928033908">"Súhlasím"</string>
@@ -2813,16 +2814,17 @@
     <string name="memory_avg_desc" msgid="1551240906596518412">"Priemer <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
     <string name="memory_use_running_format" msgid="4172488041800743760">"<xliff:g id="MEMORY">%1$s</xliff:g> / <xliff:g id="RUNNING">%2$s</xliff:g>"</string>
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
-    <string name="high_power_apps" msgid="2116416853043103135">"Ignorovať optimalizácie"</string>
-    <string name="high_power_filter_on" msgid="3862942127137594196">"Povolené"</string>
-    <string name="high_power_on" msgid="148473814103292724">"Ignorovanie optimalizácií batérie"</string>
-    <string name="high_power_off" msgid="221092098425904010">"Nepovolené"</string>
-    <string name="high_power_desc" msgid="8412735192889327770">"Nepoužívajte optimalizácie batérie. Môžu rýchlejšie vybiť batériu."</string>
-    <plurals name="high_power_count" formatted="false" msgid="4343190376439806186">
-      <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> aplikácie majú povolené ignorovať optimalizácie batérie</item>
-      <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> aplikácie má povolené ignorovať optimalizácie batérie</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aplikácií má povolené ignorovať optimalizácie batérie</item>
-      <item quantity="one">1 aplikácia má povolené ignorovať optimalizácie batérie</item>
+    <string name="high_power_apps" msgid="3459065925679828230">"Optimalizácia batérie"</string>
+    <string name="high_power_filter_on" msgid="3222265297576680099">"Neoptimalizované"</string>
+    <string name="high_power_on" msgid="3382367497549906927">"Ignoruje optimalizáciu batérie"</string>
+    <string name="high_power_off" msgid="3393904131961263278">"Optimalizuje používanie batérie"</string>
+    <string name="high_power_system" msgid="7362862974428225301">"Optimalizácia batérie nie je k dispozícii"</string>
+    <string name="high_power_desc" msgid="6283926163708585760">"Nepoužívajte optimalizáciu batérie. Môže rýchlejšie vybiť vašu batériu."</string>
+    <plurals name="high_power_count" formatted="false" msgid="2464701722383894640">
+      <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> aplikácie majú povolené ignorovať optimalizáciu batérie</item>
+      <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> aplikácie má povolené ignorovať optimalizáciu batérie</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aplikácií má povolené ignorovať optimalizáciu batérie</item>
+      <item quantity="one">Jedna aplikácia má povolené ignorovať optimalizáciu batérie</item>
     </plurals>
     <string name="battery_summary" msgid="101415762036784289">"<xliff:g id="PERCENTAGE">%1$d</xliff:g> %% využitie od posledného úplného dobitia"</string>
     <string name="no_battery_summary" msgid="3528036835462846814">"Žiadne využitie batérie od posledného úplného dobitia"</string>
@@ -2868,8 +2870,8 @@
     <string name="no_data_usage" msgid="9131454024293628063">"Neboli využité žiadne údaje"</string>
     <string name="zen_access_warning_dialog_title" msgid="1198189958031157142">"Povoliť prístup k nastaveniu Nerušiť pre aplikáciu <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_access_warning_dialog_summary" msgid="4015885767653010873">"Aplikácia bude môcť vypnúť alebo zapnúť nastavenie Nerušiť a meniť súvisiace nastavenia."</string>
-    <string name="ignore_optimizations_on" msgid="2417358456267927315">"Povoliť"</string>
-    <string name="ignore_optimizations_off" msgid="9069942099715006633">"Nepovoliť"</string>
+    <string name="ignore_optimizations_on" msgid="6915689518016285116">"Neoptimalizovať"</string>
+    <string name="ignore_optimizations_off" msgid="6153196256410296835">"Optimalizovať"</string>
     <string name="ignore_optimizations_on_desc" msgid="2321398930330555815">"Môžu rýchlejšie vybiť batériu"</string>
     <string name="ignore_optimizations_off_desc" msgid="5255731062045426544">"Odporúčajú sa na predĺženie výdrže batérie"</string>
     <string name="ignore_optimizations_title" msgid="2829637961185027768">"Povoliť aplikácii <xliff:g id="APP">%s</xliff:g> ignorovať optimalizácie batérie?"</string>

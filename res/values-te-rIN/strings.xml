@@ -327,7 +327,7 @@
     <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"మీ బ్యాకప్ స్క్రీన్ లాక్ పద్ధతిని సెటప్ చేయండి"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_2" msgid="4158160658182631304">"మీ వేలిముద్రను జోడించండి"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"వేలిముద్రతో అన్‌లాక్ చేయండి"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="5061093614328964700">"మీ ఫోన్‌ని అన్‌లాక్ చేయడానికి, కొనుగోళ్లను ప్రామాణీకరించడానికి లేదా అనువర్తనాలకు సైన్ ఇన్ చేయడానికి కేవలం వేలిముద్ర సెన్సార్‌ను తాకండి. మీ ఫోన్‌కి జోడించే ఏ వేలిముద్రల ద్వారా అయినా ఈ విషయాలను చేయవచ్చు, కాబట్టి మీరు వేలిముద్రలను జోడించే విషయంలో జాగ్రత్త వహించండి."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="9193978734907066950">"మీ ఫోన్‌ని అన్‌లాక్ చేయడానికి, కొనుగోళ్లను ప్రామాణీకరించడానికి లేదా అనువర్తనాలకు సైన్ ఇన్ చేయడానికి కేవలం వేలిముద్ర సెన్సార్‌ను తాకండి. మీరు ఎవరి వేలిముద్రలు జోడిస్తున్నారనే విషయంలో జాగ్రత్త వహించండి - వేలిముద్రలు జోడించబడిన ఎవరైనా పైవాటిని చేయగలుగుతారు."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="7173290350577831813">"గమనిక: మీ వేలిముద్ర దృఢమైన నమూనా లేదా PIN కంటే తక్కువ సురక్షితంగా ఉండవచ్చు."</string>
     <string name="security_settings_fingerprint_enroll_introduction_risk_link_text" msgid="9129531466157620977">"మరింత తెలుసుకోండి"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"రద్దు చేయి"</string>
@@ -412,26 +412,24 @@
     <string name="unlock_set_unlock_mode_password" msgid="1203938057264146610">"పాస్‌వర్డ్"</string>
     <string name="unlock_setup_wizard_fingerprint_details" msgid="7893457665921363009">"మీరు స్క్రీన్ లాక్‌ను సెటప్ చేసిన తర్వాత, సెట్టింగ్‌లు &gt; భద్రతలో మీ వేలిముద్రను కూడా సెటప్ చేయవచ్చు."</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"స్క్రీన్ లాక్‌ను ఆఫ్ చేయి"</string>
-    <!-- no translation found for unlock_disable_frp_warning_title (264008934468492550) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern (8869767290771023461) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern_fingerprint (8212242533942400457) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin (586996206210265131) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin_fingerprint (875669051899437197) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password (5420612686852555537) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password_fingerprint (2228159168587170445) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_unknown (1550718040483548220) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_unknown_fingerprint (6363091330281670692) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_ok (7075138677177748705) -->
-    <skip />
+    <string name="unlock_disable_frp_warning_title" msgid="264008934468492550">"పరికర సంరక్షణను తీసివేయాలా?"</string>
+    <string name="unlock_disable_frp_warning_content_pattern" msgid="8869767290771023461">"పరికర సంరక్షణ లక్షణాలు మీ నమూనా లేకుండా పని చేయవు."</string>
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="8212242533942400457">"పరికర సంరక్షణ లక్షణాలు మీ నమూనా లేకుండా పని చేయవు.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>అలాగే మీ సేవ్ చేయబడిన వేలిముద్రలు ఈ పరికరం నుండి తీసివేయబడతాయి, ఆపై మీరు వాటితో మీ ఫోన్‌ను అన్‌లాక్ చేయలేరు, కొనుగోళ్లను ప్రామాణీకరించలేరు లేదా అనువర్తనాలకు సైన్ ఇన్ చేయలేరు.\""</string>
+    <string name="unlock_disable_frp_warning_content_pin" msgid="586996206210265131">"పరికర సంరక్షణ లక్షణాలు మీ PIN లేకుండా పని చేయవు."</string>
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="875669051899437197">"పరికర సంరక్షణ లక్షణాలు మీ PIN లేకుండా పని చేయవు.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>అలాగే మీ సేవ్ చేయబడిన వేలిముద్రలు ఈ పరికరం నుండి తీసివేయబడతాయి, ఆపై మీరు వాటితో మీ ఫోన్‌ను అన్‌లాక్ చేయలేరు, కొనుగోళ్లను ప్రామాణీకరించలేరు లేదా అనువర్తనాలకు సైన్ ఇన్ చేయలేరు.\""</string>
+    <string name="unlock_disable_frp_warning_content_password" msgid="5420612686852555537">"పరికర సంరక్షణ లక్షణాలు మీ పాస్‌వర్డ్ లేకుండా పని చేయవు."</string>
+    <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="2228159168587170445">"పరికర సంరక్షణ లక్షణాలు మీ పాస్‌వర్డ్ లేకుండా పని చేయవు.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>అలాగే మీ సేవ్ చేయబడిన వేలిముద్రలు ఈ పరికరం నుండి తీసివేయబడతాయి, ఆపై మీరు వాటితో మీ ఫోన్‌ను అన్‌లాక్ చేయలేరు, కొనుగోళ్లను ప్రామాణీకరించలేరు లేదా అనువర్తనాలకు సైన్ ఇన్ చేయలేరు.\""</string>
+    <string name="unlock_disable_frp_warning_content_unknown" msgid="1550718040483548220">"పరికర సంరక్షణ లక్షణాలు మీ స్క్రీన్ లాక్ లేకుండా పని చేయవు."</string>
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="6363091330281670692">"పరికర సంరక్షణ లక్షణాలు మీ స్క్రీన్ లాక్ లేకుండా పని చేయవు.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>అలాగే మీ సేవ్ చేయబడిన వేలిముద్రలు ఈ పరికరం నుండి తీసివేయబడతాయి, ఆపై మీరు వాటితో మీ ఫోన్‌ను అన్‌లాక్ చేయలేరు, కొనుగోళ్లను ప్రామాణీకరించలేరు లేదా అనువర్తనాలకు సైన్ ఇన్ చేయలేరు.\""</string>
+    <string name="unlock_disable_frp_warning_ok" msgid="7075138677177748705">"అవును, తీసివేయి"</string>
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"అన్‌లాక్ నమూనాను మార్చు"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"అన్‌లాక్ పిన్‌ను మార్చండి"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"అన్‌లాక్ పాస్‌వర్డ్‌ను మార్చు"</string>
@@ -2355,18 +2353,21 @@
     <string name="global_font_change_title" msgid="1887126466191012035">"ఫాంట్ ఆకృతిని మార్చండి"</string>
     <string name="nfc_payment_settings_title" msgid="1807298287380821613">"నొక్కి చెల్లించండి"</string>
     <string name="nfc_payment_how_it_works" msgid="3028822263837896720">"ఇది ఎలా పని చేస్తుంది"</string>
-    <string name="nfc_payment_no_apps" msgid="3453656795093776889">"స్టోర్‌లో కొనుగోళ్లు చేయడానికి నొక్కి &amp; చెల్లింపు చేయి లక్షణాన్ని ఉపయోగించండి"</string>
+    <!-- no translation found for nfc_payment_no_apps (5477904979148086424) -->
+    <skip />
     <string name="nfc_payment_default" msgid="8648420259219150395">"చెల్లింపు డిఫాల్ట్"</string>
     <string name="nfc_payment_default_not_set" msgid="7485060884228447765">"సెట్ చేయలేదు"</string>
     <string name="nfc_payment_app_and_desc" msgid="7942415346564794258">"<xliff:g id="APP">%1$s</xliff:g> - <xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
-    <string name="nfc_payment_open_app" msgid="5550268485421927976">"తెరిచిన అనువర్తనం నొక్కి &amp; చెల్లింపు చేయి లక్షణానికి మద్దతిస్తే"</string>
-    <string name="nfc_payment_favor_open" msgid="7513784422533299982">"<xliff:g id="APP">%1$s</xliff:g>కి బదులుగా ఆ అనువర్తనాన్ని ఉపయోగించు"</string>
-    <string name="nfc_payment_favor_open_default_unknown" msgid="1179489206233351756">"బదులుగా ఆ అనువర్తనాన్ని ఉపయోగించు"</string>
-    <string name="nfc_payment_favor_default" msgid="8238320071435721803">"ఇప్పటికీ <xliff:g id="APP">%1$s</xliff:g>ని ఉపయోగించు"</string>
-    <string name="nfc_payment_favor_default_default_unknown" msgid="7029467023485683077">"ఇప్పటికీ డిఫాల్ట్‌ను ఉపయోగించు"</string>
+    <!-- no translation found for nfc_payment_use_default (3234730182120288495) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_default (5743781166099608372) -->
+    <skip />
+    <!-- no translation found for nfc_payment_favor_open (1923314062109977944) -->
+    <skip />
     <string name="nfc_payment_pay_with" msgid="7524904024378144072">"నొక్కి &amp; చెల్లింపు చేయి విభాగంలో, దీనితో చెల్లించండి:"</string>
     <string name="nfc_how_it_works_title" msgid="1984068457698797207">"టెర్మినల్ వద్ద చెల్లించడం"</string>
-    <string name="nfc_how_it_works_content" msgid="5820288675316257177">"మీరు నొక్కి &amp; చెల్లించండి అనువర్తనాన్ని సెటప్ చేసి, మీ ఫోన్ పవర్ ఆన్ చేసిన తర్వాత, కొనుగోలు చేయడానికి మీ ఫోన్‌లో నొక్కి &amp; చెల్లించండి చిహ్నం గల ఏ టెర్మినల్‌పై అయినా నొక్కండి."</string>
+    <!-- no translation found for nfc_how_it_works_content (4749007806393224934) -->
+    <skip />
     <string name="nfc_how_it_works_got_it" msgid="259653300203217402">"అర్థమైంది"</string>
     <string name="nfc_more_title" msgid="815910943655133280">"మరిన్ని..."</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"మీ ప్రాధాన్యతగా సెట్ చేయాలా?"</string>
@@ -2755,7 +2756,7 @@
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"సహాయకం &amp; వాయిస్ ఇన్‌పుట్"</string>
     <string name="default_assist_title" msgid="8868488975409247921">"సహాయక అనువర్తనం"</string>
     <string name="default_assist_none" msgid="3709083569608735487">"ఏదీ లేదు"</string>
-    <string name="choose_assist_title" msgid="554234448228740980">"సహాయకాన్ని ఎంచుకోండి"</string>
+    <string name="choose_assist_title" msgid="2373353478479305516">"సహాయక అనువర్తనాన్ని ఎంచుకోండి"</string>
     <string name="assistant_security_warning_title" msgid="8673079231955467177">"<xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g>ని మీ సహాయకంగా చేయాలా?"</string>
     <string name="assistant_security_warning" msgid="4881965750615394002">"<xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> మీ స్క్రీన్‌లో కనిపించే లేదా అనువర్తనాల్లో ప్రాప్యత చేయదగిన సమాచారంతో సహా మీ సిస్టమ్‌లో ఉపయోగించబడుతున్న అనువర్తనాలకు సంబంధించిన సమాచారాన్ని చదవగలదు."</string>
     <string name="assistant_security_warning_agree" msgid="7710290206928033908">"అంగీకరిస్తున్నాను"</string>
@@ -2781,14 +2782,15 @@
     <string name="memory_avg_desc" msgid="1551240906596518412">"సగటు <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
     <string name="memory_use_running_format" msgid="4172488041800743760">"<xliff:g id="MEMORY">%1$s</xliff:g> / <xliff:g id="RUNNING">%2$s</xliff:g>"</string>
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
-    <string name="high_power_apps" msgid="2116416853043103135">"అనుకూలీ. విస్మరించాల్సి."</string>
-    <string name="high_power_filter_on" msgid="3862942127137594196">"అనుమతించినవి"</string>
-    <string name="high_power_on" msgid="148473814103292724">"బ్యాటరీ అనుకూలీకరణలను విస్మరిస్తోంది"</string>
-    <string name="high_power_off" msgid="221092098425904010">"అనుమతించబడలేదు"</string>
-    <string name="high_power_desc" msgid="8412735192889327770">"బ్యాటరీ అనుకూలీకరణలను వర్తింపజేయదు. మీ బ్యాటరీ మరింత శీఘ్రంగా వినియోగించబడవచ్చు."</string>
-    <plurals name="high_power_count" formatted="false" msgid="4343190376439806186">
-      <item quantity="other">బ్యాటరీ అనుకూలీకరణలను విస్మరించడానికి <xliff:g id="COUNT">%d</xliff:g> అనువర్తనాలు అనుమతించబడ్డాయి</item>
-      <item quantity="one">బ్యాటరీ అనుకూలీకరణలను విస్మరించడానికి 1 అనువర్తనం అనుమతించబడింది</item>
+    <string name="high_power_apps" msgid="3459065925679828230">"బ్యాటరీ అనుకూలీకరణ"</string>
+    <string name="high_power_filter_on" msgid="3222265297576680099">"అనుకూలీకరించనివి"</string>
+    <string name="high_power_on" msgid="3382367497549906927">"బ్యాటరీ అనుకూలీకరణను విస్మరిస్తోంది"</string>
+    <string name="high_power_off" msgid="3393904131961263278">"బ్యాటరీ వినియోగాన్ని అనుకూలీకరిస్తోంది"</string>
+    <string name="high_power_system" msgid="7362862974428225301">"బ్యాటరీ అనుకూలీకరణ అందుబాటులో లేదు"</string>
+    <string name="high_power_desc" msgid="6283926163708585760">"బ్యాటరీ అనుకూలీకరణను వర్తింపజేయదు. మీ బ్యాటరీ మరింత శీఘ్రంగా వినియోగించబడవచ్చు."</string>
+    <plurals name="high_power_count" formatted="false" msgid="2464701722383894640">
+      <item quantity="other">బ్యాటరీ అనుకూలీకరణను విస్మరించడానికి <xliff:g id="COUNT">%d</xliff:g> అనువర్తనాలు అనుమతించబడ్డాయి</item>
+      <item quantity="one">బ్యాటరీ అనుకూలీకరణను విస్మరించడానికి 1 అనువర్తనం అనుమతించబడింది</item>
     </plurals>
     <string name="battery_summary" msgid="101415762036784289">"చివరిగా పూర్తి ఛార్జింగ్ చేసినప్పటి నుండి <xliff:g id="PERCENTAGE">%1$d</xliff:g>%% వినియోగించబడింది"</string>
     <string name="no_battery_summary" msgid="3528036835462846814">"చివరిగా పూర్తి ఛార్జింగ్ చేేసినప్పటి నుండి బ్యాటరీని అసలు వినియోగించలేదు"</string>
@@ -2832,8 +2834,8 @@
     <string name="no_data_usage" msgid="9131454024293628063">"డేటా ఏదీ వినియోగించలేదు"</string>
     <string name="zen_access_warning_dialog_title" msgid="1198189958031157142">"<xliff:g id="APP">%1$s</xliff:g> కోసం అంతరాయం కలిగించవద్దు ఎంపికకు ప్రాప్యతను అనుమతించాలా?"</string>
     <string name="zen_access_warning_dialog_summary" msgid="4015885767653010873">"అనువర్తనం అంతరాయం కలిగించవద్దు ఎంపికను ఆన్/ఆఫ్ చేయగలదు మరియు సంబంధిత సెట్టింగ్‌లకు మార్పులు చేయగలదు."</string>
-    <string name="ignore_optimizations_on" msgid="2417358456267927315">"అనుమతించు"</string>
-    <string name="ignore_optimizations_off" msgid="9069942099715006633">"అనుమతించవద్దు"</string>
+    <string name="ignore_optimizations_on" msgid="6915689518016285116">"అనుకూలీకరించవద్దు"</string>
+    <string name="ignore_optimizations_off" msgid="6153196256410296835">"అనుకూలీకరించు"</string>
     <string name="ignore_optimizations_on_desc" msgid="2321398930330555815">"మీ బ్యాటరీ మరింత శీఘ్రంగా వినియోగించబడవచ్చు"</string>
     <string name="ignore_optimizations_off_desc" msgid="5255731062045426544">"మెరుగైన బ్యాటరీ సామర్థ్యం కోసం సిఫార్సు చేయబడింది"</string>
     <string name="ignore_optimizations_title" msgid="2829637961185027768">"బ్యాటరీ అనుకూలీకరణలను విస్మరించడానికి <xliff:g id="APP">%s</xliff:g>ని అనుమతించాలా?"</string>
