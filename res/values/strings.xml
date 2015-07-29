@@ -5588,29 +5588,25 @@
     <!-- Caption for button linking to a page explaining how Tap and Pay works-->
     <string name="nfc_payment_how_it_works">How it works</string>
     <!-- String shown when there are no NFC payment applications installed -->
-    <string name="nfc_payment_no_apps">Use Tap &amp; pay to make in-store purchases</string>
+    <string name="nfc_payment_no_apps">Pay with your phone in stores</string>
     <!-- Header text that can be clicked on to change the default payment app -->
     <string name="nfc_payment_default">Payment default</string>
     <!-- Summary text that is shown when no default app is set -->
     <string name="nfc_payment_default_not_set">Not set</string>
     <!-- String indicating the label of the default payment app and a description of its state; eg Google Wallet - MasterCard 1234 -->
     <string name="nfc_payment_app_and_desc"><xliff:g id="app">%1$s</xliff:g> - <xliff:g id="description">%2$s</xliff:g></string>
-    <!-- Header for action to choose when the open app supports TapPay -->
-    <string name="nfc_payment_open_app">If open app supports Tap &amp; pay</string>
+    <!-- Header for what to do when the open app supports TapPay: use the default set app, or the open app -->
+    <string name="nfc_payment_use_default">Use default</string>
+    <!-- Always use the default app (independent of what app is open) -->
+    <string name="nfc_payment_favor_default">Always</string>
     <!-- If open app supports TapPay, use that app instead of the default -->
-    <string name="nfc_payment_favor_open">Use that app instead of <xliff:g id="app">%1$s</xliff:g></string>
-    <!-- If open app supports TapPay, use that app instead of the default (name of default app unknown) -->
-    <string name="nfc_payment_favor_open_default_unknown">Use that app instead</string>
-    <!-- If open app supports TapPay, still use the default app -->
-    <string name="nfc_payment_favor_default">Still use <xliff:g id="app">%1$s</xliff:g></string>
-    <!-- If open app supports TapPay, still use the default app (name of default app unknown) -->
-    <string name="nfc_payment_favor_default_default_unknown">Still use default</string>
+    <string name="nfc_payment_favor_open">Except when another payment app is open</string>
     <!-- Header for a dialog asking the user which payment app to use -->
     <string name="nfc_payment_pay_with">At a Tap &amp; pay terminal, pay with:</string>
     <!-- Header for text explaning how to pay at a payment terminal in a store -->
     <string name="nfc_how_it_works_title">Paying at the terminal</string>
     <!-- Content for text explaning how to pay at a payment terminal in a store -->
-    <string name="nfc_how_it_works_content">Once you\u2019ve set up a Tap &amp; pay app and your phone is powered on, tap your phone on any terminal with the Tap &amp; pay logo on it to make a purchase.</string>
+    <string name="nfc_how_it_works_content">Set up a payment app. Then just hold the back of your phone up to any terminal with the contactless symbol.</string>
     <!-- Button the user can click to indicate he understood and dismiss the screen -->
     <string name="nfc_how_it_works_got_it">Got it</string>
     <!-- NFC More... title.  [CHAR LIMIT=40] -->
