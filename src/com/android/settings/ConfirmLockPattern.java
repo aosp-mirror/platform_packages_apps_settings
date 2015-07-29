@@ -26,24 +26,14 @@ import com.android.settingslib.animation.AppearAnimationCreator;
 import com.android.settingslib.animation.AppearAnimationUtils;
 import com.android.settingslib.animation.DisappearAnimationUtils;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.ValueAnimator;
-import android.annotation.Nullable;
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
 import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.storage.StorageManager;
-import android.view.MenuItem;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
 import android.widget.TextView;
@@ -52,7 +42,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -149,7 +138,10 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                         ConfirmDeviceCredentialBaseFragment.DETAILS_TEXT);
             }
 
-            mLockPatternView.setTactileFeedbackEnabled(mLockPatternUtils.isTactileFeedbackEnabled());
+            mLockPatternView.setTactileFeedbackEnabled(
+                    mLockPatternUtils.isTactileFeedbackEnabled());
+            mLockPatternView.setInStealthMode(!mLockPatternUtils.isVisiblePatternEnabled(
+                    UserHandle.myUserId()));
             mLockPatternView.setOnPatternListener(mConfirmExistingLockPatternListener);
             updateStage(Stage.NeedToUnlock);
 
