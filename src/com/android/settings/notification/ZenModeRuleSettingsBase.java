@@ -33,7 +33,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.internal.logging.MetricsLogger;
@@ -231,7 +233,7 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase
     }
 
     private void showDeleteRuleDialog() {
-        new AlertDialog.Builder(mContext)
+        final AlertDialog dialog = new AlertDialog.Builder(mContext)
                 .setMessage(getString(R.string.zen_mode_delete_rule_confirmation, mRule.name))
                 .setNegativeButton(R.string.cancel, null)
                 .setPositiveButton(R.string.zen_mode_delete_rule_button, new OnClickListener() {
@@ -244,6 +246,10 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase
                     }
                 })
                 .show();
+        final View messageView = dialog.findViewById(android.R.id.message);
+        if (messageView != null) {
+            messageView.setTextDirection(View.TEXT_DIRECTION_LOCALE);
+        }
     }
 
     private void toastAndFinish() {
