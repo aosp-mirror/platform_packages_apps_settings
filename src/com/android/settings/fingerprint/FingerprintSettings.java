@@ -63,7 +63,6 @@ import com.android.settings.HelpUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.SubSettings;
-import com.android.settings.search.Indexable;
 
 import java.util.List;
 
@@ -569,11 +568,7 @@ public class FingerprintSettings extends SubSettings {
                                 new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        if (DEBUG) Log.v(TAG, "Removing fpId=" + mFp.getFingerId());
-                                        FingerprintSettingsFragment parent
-                                                = (FingerprintSettingsFragment) getTargetFragment();
-                                        parent.deleteFingerPrint(mFp);
-                                        dialog.dismiss();
+                                        onDeleteClick(dialog);
                                     }
                                 })
                         .create();
@@ -599,6 +594,24 @@ public class FingerprintSettings extends SubSettings {
                 return alertDialog;
             }
 
+            private void onDeleteClick(DialogInterface dialog) {
+                if (DEBUG) Log.v(TAG, "Removing fpId=" + mFp.getFingerId());
+                FingerprintSettingsFragment parent
+                        = (FingerprintSettingsFragment) getTargetFragment();
+                if (parent.mFingerprintManager.getEnrolledFingerprints().size() > 1) {
+                    parent.deleteFingerPrint(mFp);
+                } else {
+                    ConfirmLastDeleteDialog lastDeleteDialog = new ConfirmLastDeleteDialog();
+                    Bundle args = new Bundle();
+                    args.putParcelable("fingerprint", mFp);
+                    lastDeleteDialog.setArguments(args);
+                    lastDeleteDialog.setTargetFragment(getTargetFragment(), 0);
+                    lastDeleteDialog.show(getFragmentManager(),
+                            ConfirmLastDeleteDialog.class.getName());
+                }
+                dialog.dismiss();
+            }
+
             @Override
             public void onSaveInstanceState(Bundle outState) {
                 super.onSaveInstanceState(outState);
@@ -608,6 +621,39 @@ public class FingerprintSettings extends SubSettings {
                     outState.putInt("startSelection", mDialogTextField.getSelectionStart());
                     outState.putInt("endSelection", mDialogTextField.getSelectionEnd());
                 }
+            }
+        }
+
+        public static class ConfirmLastDeleteDialog extends DialogFragment {
+
+            private Fingerprint mFp;
+
+            @Override
+            public Dialog onCreateDialog(Bundle savedInstanceState) {
+                mFp = getArguments().getParcelable("fingerprint");
+                final AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
+                        .setTitle(R.string.fingerprint_last_delete_title)
+                        .setMessage(R.string.fingerprint_last_delete_message)
+                        .setPositiveButton(R.string.fingerprint_last_delete_confirm,
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        FingerprintSettingsFragment parent
+                                                = (FingerprintSettingsFragment) getTargetFragment();
+                                        parent.deleteFingerPrint(mFp);
+                                        dialog.dismiss();
+                                    }
+                                })
+                        .setNegativeButton(
+                                R.string.cancel,
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                })
+                        .create();
+                return alertDialog;
             }
         }
     }
