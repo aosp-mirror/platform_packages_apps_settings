@@ -143,6 +143,8 @@ public class DrawOverlayDetails extends AppInfoWithHeader implements OnPreferenc
 
         boolean isAllowed = mOverlayState.isPermissible();
         mSwitchPref.setChecked(isAllowed);
+        // you cannot ask a user to grant you a permission you did not have!
+        mSwitchPref.setEnabled(mOverlayState.permissionDeclared);
         mOverlayPrefs.setEnabled(isAllowed);
         getPreferenceScreen().removePreference(mOverlayPrefs);
 

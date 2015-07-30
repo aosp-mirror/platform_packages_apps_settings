@@ -57,6 +57,7 @@ public class AppStateUsageBridge extends AppStateAppOpsBridge {
             this.packageInfo = permissionState.packageInfo;
             this.appOpMode = permissionState.appOpMode;
             this.permissionDeclared = permissionState.permissionDeclared;
+            this.staticPermissionGranted = permissionState.staticPermissionGranted;
         }
     }
 

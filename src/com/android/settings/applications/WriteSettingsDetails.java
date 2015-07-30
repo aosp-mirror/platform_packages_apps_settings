@@ -142,6 +142,8 @@ public class WriteSettingsDetails extends AppInfoWithHeader implements OnPrefere
 
         boolean canWrite = mWriteSettingsState.isPermissible();
         mSwitchPref.setChecked(canWrite);
+        // you can't ask a user for a permission you didn't even declare!
+        mSwitchPref.setEnabled(mWriteSettingsState.permissionDeclared);
         mWriteSettingsPrefs.setEnabled(canWrite);
         getPreferenceScreen().removePreference(mWriteSettingsPrefs);
 
