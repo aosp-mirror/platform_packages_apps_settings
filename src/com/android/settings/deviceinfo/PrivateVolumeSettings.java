@@ -192,8 +192,8 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         for (int userIndex = 0; userIndex < userCount; ++userIndex) {
             final UserInfo userInfo = allUsers.get(userIndex);
             if (isProfileOf(mCurrentUser, userInfo)) {
-                PreferenceCategory details = addCategory(screen,
-                        showHeaders ? userInfo.name : null);
+                final PreferenceGroup details = showHeaders ?
+                        addCategory(screen, userInfo.name) : screen;
                 addDetailItems(details, showShared, userInfo.id);
                 ++addedUserCount;
             }
@@ -201,7 +201,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
 
         // Add rest of users
         if (userCount - addedUserCount > 0) {
-            PreferenceCategory otherUsers = addCategory(screen,
+            PreferenceGroup otherUsers = addCategory(screen,
                     getText(R.string.storage_other_users));
             for (int userIndex = 0; userIndex < userCount; ++userIndex) {
                 final UserInfo userInfo = allUsers.get(userIndex);
@@ -253,7 +253,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         return category;
     }
 
-    private void addDetailItems(PreferenceCategory category, boolean showShared, int userId) {
+    private void addDetailItems(PreferenceGroup category, boolean showShared, int userId) {
         final int[] itemsToAdd = (showShared ? ITEMS_SHOW_SHARED : ITEMS_NO_SHOW_SHARED);
         for (int i = 0; i < itemsToAdd.length; ++i) {
             addItem(category, itemsToAdd[i], null, userId);
@@ -719,7 +719,12 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         public void onRemoveCompleted(final String packageName, final boolean succeeded) {
             synchronized (this) {
                 if (--mRemaining == 0) {
-                    mTarget.update();
+                    mTarget.getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mTarget.update();
+                        }
+                    });
                 }
             }
         }
