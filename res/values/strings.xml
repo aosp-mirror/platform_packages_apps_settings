@@ -777,6 +777,15 @@
     <!-- Text shown when "Add fingerprint" button is disabled -->
     <string name="fingerprint_add_max">You can add up to <xliff:g id="count" example="5">%d</xliff:g> fingerprints</string>
 
+    <!-- Title shown in a dialog which asks the user to confirm when the last fingerprint gets deleted by him. [CHAR LIMIT=35]-->
+    <string name="fingerprint_last_delete_title">Remove all fingerprints?</string>
+
+    <!-- Message shown in a dialog which asks the user to confirm when the last fingerprint gets deleted by him. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_last_delete_message">You won\'t be able to use your fingerprints to unlock your phone, authorize purchases, or sign in to apps with them.</string>
+
+    <!-- Button to confirm the last removing the last fingerprint. [CHAR LIMIT=20]-->
+    <string name="fingerprint_last_delete_confirm">Yes, remove</string>
+
     <!-- Content description for the fingerprint icon when the user is prompted to enter his credentials. Not shown on the screen. [CHAR LIMIT=NONE] -->
     <string name="confirm_fingerprint_icon_content_description">Use your fingerprint to continue.</string>
 
