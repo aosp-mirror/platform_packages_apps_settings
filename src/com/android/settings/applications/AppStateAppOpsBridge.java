@@ -88,10 +88,12 @@ public abstract class AppStateAppOpsBridge extends AppStateBaseBridge {
             int[] permissionFlags = permissionState.packageInfo.requestedPermissionsFlags;
             if (requestedPermissions != null) {
                 for (int i = 0; i < requestedPermissions.length; i++) {
-                    if (mPermissions[0].equals(requestedPermissions[i]) &&
-                            (permissionFlags[i] & PackageInfo.REQUESTED_PERMISSION_GRANTED) != 0) {
+                    if (mPermissions[0].equals(requestedPermissions[i])) {
                         permissionState.permissionDeclared = true;
-                        break;
+                        if ((permissionFlags[i] & PackageInfo.REQUESTED_PERMISSION_GRANTED) != 0) {
+                            permissionState.staticPermissionGranted = true;
+                            break;
+                        }
                     }
                 }
             }
@@ -164,7 +166,7 @@ public abstract class AppStateAppOpsBridge extends AppStateBaseBridge {
     }
 
     /*
-     * This method will set the packageInfo and permissionDeclared field of the associated
+     * This method will set the packageInfo and staticPermissionGranted field of the associated
      * PermissionState, which describes a particular package.
      */
     private void loadPermissionsStates(SparseArray<ArrayMap<String, PermissionState>> entries) {
@@ -185,7 +187,7 @@ public abstract class AppStateAppOpsBridge extends AppStateBaseBridge {
                     final PermissionState pe = entriesForProfile.get(packageInfo.packageName);
                     if (pe != null) {
                         pe.packageInfo = packageInfo;
-                        pe.permissionDeclared = true;
+                        pe.staticPermissionGranted = true;
                     }
                 }
             }
@@ -279,6 +281,7 @@ public abstract class AppStateAppOpsBridge extends AppStateBaseBridge {
         public final String packageName;
         public final UserHandle userHandle;
         public PackageInfo packageInfo;
+        public boolean staticPermissionGranted;
         public boolean permissionDeclared;
         public int appOpMode;
 
@@ -293,7 +296,7 @@ public abstract class AppStateAppOpsBridge extends AppStateBaseBridge {
             // permission (this means pre-M gets approval during install time; M apps gets approval
             // during runtime.
             if (appOpMode == AppOpsManager.MODE_DEFAULT) {
-                return permissionDeclared;
+                return staticPermissionGranted;
             }
             return appOpMode == AppOpsManager.MODE_ALLOWED;
         }
