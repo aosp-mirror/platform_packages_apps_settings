@@ -354,6 +354,12 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4504501581228672208">"Skærmlåsfunktionen er deaktiveret. Du kan stadig bruge dit fingeraftryk til at godkende køb og få adgang til apps. "<annotation id="url">"Få flere oplysninger"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Løft fingeren, og tryk på sensoren igen"</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"Du kan tilføje op til <xliff:g id="COUNT">%d</xliff:g> fingeraftryk"</string>
+    <!-- no translation found for fingerprint_last_delete_title (6410310101247028988) -->
+    <skip />
+    <!-- no translation found for fingerprint_last_delete_message (8318926239554839722) -->
+    <skip />
+    <!-- no translation found for fingerprint_last_delete_confirm (2634726361059274289) -->
+    <skip />
     <string name="confirm_fingerprint_icon_content_description" msgid="5255544532157079096">"Brug dit fingeraftryk for at få adgang."</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Kryptering"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"Krypter tablet"</string>
@@ -414,19 +420,19 @@
     <string name="unlock_disable_frp_warning_content_pattern" msgid="8869767290771023461">"Funktionerne til enhedsbeskyttelse fungerer ikke uden dit mønster."</string>
     <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="8212242533942400457">"Funktionerne til enhedsbeskyttelse fungerer ikke uden dit mønster.<xliff:g id="EMPTY_LINE">
 
-</xliff:g>Dine gemte fingeraftryk bliver også fjernet fra denne enhed, og du vil ikke kunne bruge dem til at låse din telefon op, godkende køb eller logge ind på apps\"."</string>
+</xliff:g>Dine gemte fingeraftryk bliver også fjernet fra denne enhed, og du vil ikke kunne bruge dem til at låse din telefon op, godkende køb eller logge ind på apps."</string>
     <string name="unlock_disable_frp_warning_content_pin" msgid="586996206210265131">"Funktionerne til enhedsbeskyttelse fungerer ikke uden din pinkode."</string>
     <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="875669051899437197">"Funktionerne til enhedsbeskyttelse fungerer ikke uden din pinkode.<xliff:g id="EMPTY_LINE">
 
-</xliff:g>Dine gemte fingeraftryk bliver også fjernet fra denne enhed, og du vil ikke kunne bruge dem til at låse din telefon op, godkende køb eller logge ind på apps\"."</string>
+</xliff:g>Dine gemte fingeraftryk bliver også fjernet fra denne enhed, og du vil ikke kunne bruge dem til at låse din telefon op, godkende køb eller logge ind på apps."</string>
     <string name="unlock_disable_frp_warning_content_password" msgid="5420612686852555537">"Funktionerne til enhedsbeskyttelse fungerer ikke uden din adgangskode."</string>
     <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="2228159168587170445">"Funktionerne til enhedsbeskyttelse fungerer ikke uden din adgangskode.<xliff:g id="EMPTY_LINE">
 
-</xliff:g>Dine gemte fingeraftryk bliver også fjernet fra denne enhed, og du vil ikke kunne bruge dem til at låse din telefon op, godkende køb eller logge ind på apps\"."</string>
+</xliff:g>Dine gemte fingeraftryk bliver også fjernet fra denne enhed, og du vil ikke kunne bruge dem til at låse din telefon op, godkende køb eller logge ind på apps."</string>
     <string name="unlock_disable_frp_warning_content_unknown" msgid="1550718040483548220">"Funktionerne til enhedsbeskyttelse fungerer ikke uden din skærmlås."</string>
     <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="6363091330281670692">"Funktionerne til enhedsbeskyttelse fungerer ikke uden din skærmlås.<xliff:g id="EMPTY_LINE">
 
-</xliff:g>Dine gemte fingeraftryk bliver også fjernet fra denne enhed, og du vil ikke kunne bruge dem til at låse din telefon op, godkende køb eller logge ind på apps\"."</string>
+</xliff:g>Dine gemte fingeraftryk bliver også fjernet fra denne enhed, og du vil ikke kunne bruge dem til at låse din telefon op, godkende køb eller logge ind på apps."</string>
     <string name="unlock_disable_frp_warning_ok" msgid="7075138677177748705">"Ja, fjern den"</string>
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"Skift oplåsningsmønster"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"Skift pinkode til oplåsning"</string>
@@ -2351,21 +2357,16 @@
     <string name="global_font_change_title" msgid="1887126466191012035">"Skift skriftstørrelse"</string>
     <string name="nfc_payment_settings_title" msgid="1807298287380821613">"Tryk og betal"</string>
     <string name="nfc_payment_how_it_works" msgid="3028822263837896720">"Sådan fungerer det"</string>
-    <!-- no translation found for nfc_payment_no_apps (5477904979148086424) -->
-    <skip />
+    <string name="nfc_payment_no_apps" msgid="5477904979148086424">"Betal med din telefon i butikker"</string>
     <string name="nfc_payment_default" msgid="8648420259219150395">"Standardbetalingsapp"</string>
     <string name="nfc_payment_default_not_set" msgid="7485060884228447765">"Ikke angivet"</string>
     <string name="nfc_payment_app_and_desc" msgid="7942415346564794258">"<xliff:g id="APP">%1$s</xliff:g> – <xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
-    <!-- no translation found for nfc_payment_use_default (3234730182120288495) -->
-    <skip />
-    <!-- no translation found for nfc_payment_favor_default (5743781166099608372) -->
-    <skip />
-    <!-- no translation found for nfc_payment_favor_open (1923314062109977944) -->
-    <skip />
+    <string name="nfc_payment_use_default" msgid="3234730182120288495">"Brug standard"</string>
+    <string name="nfc_payment_favor_default" msgid="5743781166099608372">"Altid"</string>
+    <string name="nfc_payment_favor_open" msgid="1923314062109977944">"Undtagen når en anden betalingsapp er åben"</string>
     <string name="nfc_payment_pay_with" msgid="7524904024378144072">"Ved en Tryk og betal-terminal vil jeg betale med:"</string>
     <string name="nfc_how_it_works_title" msgid="1984068457698797207">"Betaling på terminalen"</string>
-    <!-- no translation found for nfc_how_it_works_content (4749007806393224934) -->
-    <skip />
+    <string name="nfc_how_it_works_content" msgid="4749007806393224934">"Konfigurer en betalingsapp. Derefter skal du blot holde bagsiden af din telefon mod en terminal med symbolet for kontaktløs betaling."</string>
     <string name="nfc_how_it_works_got_it" msgid="259653300203217402">"OK, det er forstået"</string>
     <string name="nfc_more_title" msgid="815910943655133280">"Flere..."</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"Vil du angive dette som din præference?"</string>
@@ -2782,7 +2783,7 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="3459065925679828230">"Batterioptimering"</string>
     <string name="high_power_filter_on" msgid="3222265297576680099">"Ikke-optimeret"</string>
-    <string name="high_power_on" msgid="3382367497549906927">"Ignorerer batterioptimering"</string>
+    <string name="high_power_on" msgid="3382367497549906927">"Ingen batterioptimering"</string>
     <string name="high_power_off" msgid="3393904131961263278">"Optimeret batteriforbrug"</string>
     <string name="high_power_system" msgid="7362862974428225301">"Batterioptimering er ikke tilgængelig"</string>
     <string name="high_power_desc" msgid="6283926163708585760">"Undlad at anvende batterioptimering. Batteriet aflades muligvis hurtigere."</string>
