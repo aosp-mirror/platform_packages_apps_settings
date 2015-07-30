@@ -2541,6 +2541,18 @@
                 android:value="com.android.settings.applications.ManageApplications" />
         </activity>
 
+        <activity android:name="Settings$AppDrawOverlaySettingsActivity"
+                android:label="@string/draw_overlay_title"
+                android:taskAffinity="">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.action.MANAGE_OVERLAY_PERMISSION" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="package" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.applications.DrawOverlayDetails" />
+        </activity>
+
         <activity android:name="Settings$WriteSettingsActivity"
                 android:label="@string/write_settings_title"
                 android:taskAffinity="">
@@ -2550,6 +2562,18 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.applications.ManageApplications" />
+        </activity>
+
+        <activity android:name="Settings$AppWriteSettingsActivity"
+                android:label="@string/write_settings_title"
+                android:taskAffinity="">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.action.MANAGE_WRITE_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="package" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.applications.WriteSettingsDetails" />
         </activity>
 
     </application>
