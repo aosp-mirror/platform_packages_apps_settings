@@ -190,6 +190,10 @@ public abstract class StorageWizardBase extends Activity {
         }
     }
 
+    protected void setKeepScreenOn(boolean keepScreenOn) {
+        getSetupWizardLayout().setKeepScreenOn(keepScreenOn);
+    }
+
     public void onNavigateNext() {
         throw new UnsupportedOperationException();
     }
