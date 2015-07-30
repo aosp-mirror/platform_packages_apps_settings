@@ -22,6 +22,8 @@ import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.hardware.usb.UsbManager;
 import android.os.Bundle;
 import android.os.UserManager;
@@ -35,23 +37,34 @@ import com.android.settings.R;
 public class UsbModeChooserActivity extends Activity {
 
     private UsbManager mUsbManager;
+    private String[] mFunctions;
+    private boolean mIsUnlocked;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        Intent i = getBaseContext().registerReceiver(null, new IntentFilter(UsbManager.ACTION_USB_STATE));
+        mIsUnlocked = i.getBooleanExtra(UsbManager.USB_DATA_UNLOCKED, false);
+
         super.onCreate(savedInstanceState);
         mUsbManager = (UsbManager) getSystemService(Context.USB_SERVICE);
+        boolean isFileTransferRestricted = ((UserManager) getSystemService(Context.USER_SERVICE))
+                .hasUserRestriction(UserManager.DISALLOW_USB_FILE_TRANSFER);
         CharSequence[] items;
-        UserManager userManager =
-                (UserManager) getSystemService(Context.USER_SERVICE);
-        if (userManager.hasUserRestriction(UserManager.DISALLOW_USB_FILE_TRANSFER)) {
-            items = new CharSequence[] { getText(R.string.usb_use_charging_only) };
+        if (isFileTransferRestricted) {
+            items = new CharSequence[] { getText(R.string.usb_use_charging_only), getText(R.string.usb_use_MIDI)};
+            mFunctions = new String[] { null, UsbManager.USB_FUNCTION_MIDI };
         } else {
-            items = getResources().getTextArray(R.array.usb_available_functions);
+            items = new CharSequence[] {
+                    getText(R.string.usb_use_charging_only), getText(R.string.usb_use_file_transfers),
+                    getText(R.string.usb_use_photo_transfers), getText(R.string.usb_use_MIDI)};
+            mFunctions = new String[] { null, UsbManager.USB_FUNCTION_MTP,
+                    UsbManager.USB_FUNCTION_PTP, UsbManager.USB_FUNCTION_MIDI };
         }
 
         final AlertDialog levelDialog;
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.usb_use);
+
         builder.setSingleChoiceItems(items, getCurrentFunction(),
                 new DialogInterface.OnClickListener() {
                     @Override
@@ -79,45 +92,27 @@ public class UsbModeChooserActivity extends Activity {
         levelDialog.show();
     }
 
-    /*
-     * If you change the numbers here, you also need to change R.array.usb_available_functions
-     * so that everything matches.
-     */
     private int getCurrentFunction() {
-        if (!mUsbManager.isUsbDataUnlocked()) {
+        if (!mIsUnlocked) {
             return 0;
-        } else if (mUsbManager.isFunctionEnabled(UsbManager.USB_FUNCTION_MTP)) {
-            return 1;
-        } else if (mUsbManager.isFunctionEnabled(UsbManager.USB_FUNCTION_PTP)) {
-            return 2;
-        } else if (mUsbManager.isFunctionEnabled(UsbManager.USB_FUNCTION_MIDI)) {
-            return 3;
+        }
+
+        for (int i = 1; i < mFunctions.length; i++) {
+            if (mUsbManager.isFunctionEnabled(mFunctions[i])) {
+                return i;
+            }
         }
         return 0;
     }
 
-    /*
-     * If you change the numbers here, you also need to change R.array.usb_available_functions
-     * so that everything matches.
-     */
     private void setCurrentFunction(int which) {
-        switch (which) {
-            case 0:
-                mUsbManager.setCurrentFunction(null);
-                mUsbManager.setUsbDataUnlocked(false);
-                break;
-            case 1:
-                mUsbManager.setCurrentFunction(UsbManager.USB_FUNCTION_MTP);
-                mUsbManager.setUsbDataUnlocked(true);
-                break;
-            case 2:
-                mUsbManager.setCurrentFunction(UsbManager.USB_FUNCTION_PTP);
-                mUsbManager.setUsbDataUnlocked(true);
-                break;
-            case 3:
-                mUsbManager.setCurrentFunction(UsbManager.USB_FUNCTION_MIDI);
-                mUsbManager.setUsbDataUnlocked(true);
-                break;
+        if (which == 0) {
+            mUsbManager.setCurrentFunction(null);
+            mUsbManager.setUsbDataUnlocked(false);
+            return;
         }
+
+        mUsbManager.setCurrentFunction(mFunctions[which]);
+        mUsbManager.setUsbDataUnlocked(true);
     }
 }
