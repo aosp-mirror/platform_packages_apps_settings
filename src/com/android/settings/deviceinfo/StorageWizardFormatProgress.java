@@ -27,7 +27,6 @@ import android.content.Intent;
 import android.content.pm.IPackageMoveObserver;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.RemoteException;
 import android.os.storage.DiskInfo;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
@@ -55,6 +54,7 @@ public class StorageWizardFormatProgress extends StorageWizardBase {
             return;
         }
         setContentView(R.layout.storage_wizard_progress);
+        setKeepScreenOn(true);
 
         mFormatPrivate = getIntent().getBooleanExtra(
                 StorageWizardFormatConfirm.EXTRA_FORMAT_PRIVATE, false);
@@ -144,13 +144,19 @@ public class StorageWizardFormatProgress extends StorageWizardBase {
                 return;
             }
 
-            final float pct = (float) mInternalBench / (float) mPrivateBench;
-            Log.d(TAG, "New volume is " + pct + "x the speed of internal");
+            if (activity.mFormatPrivate) {
+                final float pct = (float) mInternalBench / (float) mPrivateBench;
+                Log.d(TAG, "New volume is " + pct + "x the speed of internal");
 
-            // TODO: refine this warning threshold
-            if (mPrivateBench > 2000000000) {
-                final SlowWarningFragment dialog = new SlowWarningFragment();
-                dialog.show(activity.getFragmentManager(), TAG_SLOW_WARNING);
+                // To help set user expectations around device performance, we
+                // warn if the adopted media is 0.25x the speed of internal
+                // storage or slower.
+                if (Float.isNaN(pct) || pct < 0.25) {
+                    final SlowWarningFragment dialog = new SlowWarningFragment();
+                    dialog.show(activity.getFragmentManager(), TAG_SLOW_WARNING);
+                } else {
+                    activity.onFormatFinished();
+                }
             } else {
                 activity.onFormatFinished();
             }
