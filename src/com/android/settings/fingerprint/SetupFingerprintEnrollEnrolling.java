@@ -53,6 +53,7 @@ public class SetupFingerprintEnrollEnrolling extends FingerprintEnrollEnrolling
         final NavigationBar navigationBar = getNavigationBar();
         navigationBar.setNavigationBarListener(this);
         navigationBar.getNextButton().setText(R.string.skip_label);
+        navigationBar.getBackButton().setVisibility(View.GONE);
     }
 
     @Override
