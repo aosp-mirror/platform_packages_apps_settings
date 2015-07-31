@@ -451,9 +451,11 @@ public class FingerprintSettings extends SubSettings {
         @Override
         public void onDestroy() {
             super.onDestroy();
-            int result = mFingerprintManager.postEnroll();
-            if (result < 0) {
-                Log.w(TAG, "postEnroll failed: result = " + result);
+            if (getActivity().isFinishing()) {
+                int result = mFingerprintManager.postEnroll();
+                if (result < 0) {
+                    Log.w(TAG, "postEnroll failed: result = " + result);
+                }
             }
         }
 
