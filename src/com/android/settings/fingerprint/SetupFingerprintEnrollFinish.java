@@ -20,6 +20,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.android.settings.ChooseLockSettingsHelper;
 import com.android.settings.R;
@@ -55,6 +56,12 @@ public class SetupFingerprintEnrollFinish extends FingerprintEnrollFinish
         final NavigationBar navigationBar = getNavigationBar();
         navigationBar.setNavigationBarListener(this);
         navigationBar.getBackButton().setVisibility(View.GONE);
+
+        final TextView message = (TextView) findViewById(R.id.message);
+        message.setText(R.string.setup_fingerprint_enroll_finish_message);
+
+        final TextView secondaryMessage = (TextView) findViewById(R.id.message_secondary);
+        secondaryMessage.setVisibility(View.VISIBLE);
     }
 
     @Override
