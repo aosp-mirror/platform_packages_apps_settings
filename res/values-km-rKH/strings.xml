@@ -344,6 +344,8 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="8846866512704467036">"ដាក់ម្រាមដៃដដែលនៅលើឧបករណ៍ផ្តិតម្រាមដៃ ហើយលើកវាឡើងបន្ទាប់ពីមានភាពរំញ័រ។"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"បានបន្ថែមស្នាមម្រាមដៃ!"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"នៅពេលដែលអ្នកឃើញរូបតំណាងនេះ អ្នកអាចប្រើស្នាមម្រាមដៃដើម្បីធ្វើជាអត្តសញ្ញាណ ឬដើម្បីអនុញ្ញាតការទិញ។"</string>
+    <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"គ្រាន់តែប៉ះឧបករណ៍ចាប់ស្នាមម្រាមដៃដើម្បីដាស់ និងដោះសោឧបករណ៍របស់អ្នក។"</string>
+    <string name="setup_fingerprint_enroll_finish_message_secondary" msgid="7280546429133276374">"នៅពេលដែលអ្នកឃើញរូបតំណាងនេះ អ្នកអាចប្រើស្នាមម្រាមដៃរបស់អ្នក។"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"កំណត់ការចាក់សោអេក្រង់"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"រួចរាល់"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"អូ នោះមិនមែនជាឧបករណ៍ចាប់សញ្ញាទេ"</string>
@@ -354,6 +356,9 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4504501581228672208">"ជម្រើសចាក់សោអេក្រង់បានបិទដំណើរការ អ្នកនៅតែអាចប្រើស្នាមម្រាមដៃរបស់អ្នកដើម្បីផ្តល់សិទ្ធិលើការចូលប្រើការទិញ និងកម្មវិធី។ "<annotation id="url">"ស្វែងយល់បន្ថែម"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"លើកម្រាមដៃ ហើយបន្ទាប់មកប៉ះឧបករណ៍ចាប់សញ្ញាម្តងទៀត"</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"អ្នកអាចបន្ថែមស្នាមម្រាមដៃរហូតដល់ <xliff:g id="COUNT">%d</xliff:g>"</string>
+    <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"យកស្នាមម្រាមដៃទាំងអស់ចេញ?"</string>
+    <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"អ្នកនឹងមិនអាចប្រើស្នាមម្រាមដៃរបស់អ្នកដើម្បីដោះសោទូរស័ព្ទរបស់អ្នក ផ្តល់សិទ្ធិក្នុងការទិញ ឬចូលកម្មវិធីដោយប្រើពួកវាបានទេ។"</string>
+    <string name="fingerprint_last_delete_confirm" msgid="2634726361059274289">"បាទ/ចាស យកចេញ"</string>
     <string name="confirm_fingerprint_icon_content_description" msgid="5255544532157079096">"សូមប្រើស្នាមម្រាមដៃរបស់អ្នកដើម្បីបន្ត។"</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"ការ​ដាក់​លេខ​កូដ"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"ដាក់​លេខ​កូដ​កុំព្យូទ័រ​បន្ទះ"</string>
@@ -2351,21 +2356,16 @@
     <string name="global_font_change_title" msgid="1887126466191012035">"ប្ដូរ​ទំហំ​ពុម្ពអក្សរ"</string>
     <string name="nfc_payment_settings_title" msgid="1807298287380821613">"ប៉ះ &amp; បង់​ប្រាក់"</string>
     <string name="nfc_payment_how_it_works" msgid="3028822263837896720">"របៀប​ដែល​វា​​ដំណើរការ"</string>
-    <!-- no translation found for nfc_payment_no_apps (5477904979148086424) -->
-    <skip />
+    <string name="nfc_payment_no_apps" msgid="5477904979148086424">"បង់ប្រាក់ដោយប្រើទូរស័ព្ទរបស់អ្នកនៅក្នុងហាង"</string>
     <string name="nfc_payment_default" msgid="8648420259219150395">"លំនាំដើមការបង់ប្រាក់"</string>
     <string name="nfc_payment_default_not_set" msgid="7485060884228447765">"មិនបាន​កំណត់"</string>
     <string name="nfc_payment_app_and_desc" msgid="7942415346564794258">"<xliff:g id="APP">%1$s</xliff:g> - <xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
-    <!-- no translation found for nfc_payment_use_default (3234730182120288495) -->
-    <skip />
-    <!-- no translation found for nfc_payment_favor_default (5743781166099608372) -->
-    <skip />
-    <!-- no translation found for nfc_payment_favor_open (1923314062109977944) -->
-    <skip />
+    <string name="nfc_payment_use_default" msgid="3234730182120288495">"ប្រើលំនាំដើម"</string>
+    <string name="nfc_payment_favor_default" msgid="5743781166099608372">"ជានិច្ច"</string>
+    <string name="nfc_payment_favor_open" msgid="1923314062109977944">"លើកលែងតែកម្មវិធីបង់ប្រាក់ផ្សេងទៀតបើក"</string>
     <string name="nfc_payment_pay_with" msgid="7524904024378144072">"នៅឯស្ថានីយ៍ ប៉ះ និងបង់ប្រាក់ ត្រូវបង់ប្រាក់ដោយ៖"</string>
     <string name="nfc_how_it_works_title" msgid="1984068457698797207">"បង់ប្រាក់នៅកន្លែងដែលមានឧបករណ៍គិតប្រាក់"</string>
-    <!-- no translation found for nfc_how_it_works_content (4749007806393224934) -->
-    <skip />
+    <string name="nfc_how_it_works_content" msgid="4749007806393224934">"ដំឡើងកម្មវិធីបង់ប្រាក់ ហើយបន្ទាប់មកដាក់ផ្នែកខាងក្រោយនៃទូរស័ព្ទរបស់អ្នកទៅស្ថានីយ៍ណាមួយដែលមាននិមិត្តសញ្ញាគ្មានទំនាក់ទំនង (contactless symbol)។"</string>
     <string name="nfc_how_it_works_got_it" msgid="259653300203217402">"យល់ហើយ"</string>
     <string name="nfc_more_title" msgid="815910943655133280">"ច្រើន​ទៀត..."</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"កំណត់​ជា​ចំណូលចិត្ត​របស់​អ្នក?"</string>
@@ -2756,7 +2756,7 @@
     <string name="default_assist_none" msgid="3709083569608735487">"គ្មាន"</string>
     <string name="choose_assist_title" msgid="2373353478479305516">"ជ្រើសកម្មវិធីជំនួយ"</string>
     <string name="assistant_security_warning_title" msgid="8673079231955467177">"កំណត់ឲ្យ <xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> ជាជំនួយការរបស់អ្នក?"</string>
-    <string name="assistant_security_warning" msgid="4881965750615394002">"<xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> នឹងអាចអានព័ត៌មានអំពីកម្មវិធីដែលកំពុងប្រើនៅលើប្រព័ន្ធរបស់អ្នក រាប់បញ្ចូលទាំងព័ត៌មានដែលអាចមើលឃើញនៅលើអេក្រង់របស់អ្នក ឬព័ត៌មានដែលអាចចូលដំណើរការបាននៅក្នុងកម្មវិធី។"</string>
+    <string name="assistant_security_warning" msgid="8498726261327239136">"ជំនួយការនឹងមិនអាចអានព័ត៌មានអំពីកម្មវិធីដែលកំពុងប្រើនៅក្នុងប្រព័ន្ធរបស់អ្នកបានទេ ដោយរាប់បញ្ចូលទាំងព័ត៌មានដែលអាចមើលឃើញនៅលើអេក្រង់របស់អ្នក ឬព័ត៌មានដែលអាចចូលបាននៅក្នុងកម្មវិធី។"</string>
     <string name="assistant_security_warning_agree" msgid="7710290206928033908">"យល់ព្រម"</string>
     <string name="assistant_security_warning_disagree" msgid="877419950830205913">"មិនយល់ព្រម"</string>
     <string name="choose_voice_input_title" msgid="975471367067718019">"ជ្រើសការបញ្ចូលសំឡេង"</string>
