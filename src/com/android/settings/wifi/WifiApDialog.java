@@ -34,6 +34,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import java.nio.charset.Charset;
 
 import com.android.settings.R;
 
@@ -213,9 +214,11 @@ public class WifiApDialog extends AlertDialog implements View.OnClickListener,
     }
 
     private void validate() {
-        if ((mSsid != null && mSsid.length() == 0) ||
-                   ((mSecurityTypeIndex == WPA2_INDEX)&&
-                        mPassword.length() < 8)) {
+        String mSsidString = mSsid.getText().toString();
+        if ((mSsid != null && mSsid.length() == 0)
+                || ((mSecurityTypeIndex == WPA2_INDEX) && mPassword.length() < 8)
+                || (mSsid != null &&
+                Charset.forName("UTF-8").encode(mSsidString).limit() > 32)) {
             getButton(BUTTON_SUBMIT).setEnabled(false);
         } else {
             getButton(BUTTON_SUBMIT).setEnabled(true);
