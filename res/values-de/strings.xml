@@ -344,6 +344,8 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="8846866512704467036">"Legen Sie den gleichen Finger auf den Sensor und heben Sie ihn an, sobald Sie eine Vibration spüren."</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"Abdruck hinzugefügt"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"Wenn Sie dieses Symbol sehen, können Sie Ihren Fingerabdruck zur Identifizierung oder zur Autorisierung eines Kaufs verwenden."</string>
+    <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"Tippen Sie einfach auf den Fingerabdrucksensor, um Ihr Gerät zu aktivieren und zu entsperren."</string>
+    <string name="setup_fingerprint_enroll_finish_message_secondary" msgid="7280546429133276374">"Wenn Sie dieses Symbol sehen, können Sie Ihren Fingerabdruck verwenden."</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"Displaysperre einrichten"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"Fertig"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"Das ist nicht der Sensor"</string>
@@ -356,6 +358,9 @@
     <string name="setup_fingerprint_enroll_finish_message" msgid="4132164775128798343">"Wenn Sie dieses Symbol sehen, können Sie Ihren Fingerabdruck verwenden."</string>
     <string name="setup_fingerprint_enroll_finish_secondary_message" msgid="3734962461534384882">"Die Einstellungen können Sie unter \"Einstellungen\" &gt; \"Sicherheit\" &gt; \"Fingerabdruck\" ändern."</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"Sie können bis zu <xliff:g id="COUNT">%d</xliff:g> Fingerabdrücke hinzufügen."</string>
+    <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"Alle Fingerabdrücke entfernen?"</string>
+    <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"Sie können dann Ihre Fingerabdrücke nicht verwenden, um Ihr Smartphone zu entsperren, Käufe zu autorisieren oder sich in Apps anzumelden."</string>
+    <string name="fingerprint_last_delete_confirm" msgid="2634726361059274289">"Ja, entfernen"</string>
     <string name="confirm_fingerprint_icon_content_description" msgid="5255544532157079096">"Mithilfe Ihres Fingerabdrucks fortfahren"</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Verschlüsselung"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"Tablet verschlüsseln"</string>
@@ -2354,21 +2359,16 @@
     <string name="global_font_change_title" msgid="1887126466191012035">"Schriftgröße ändern"</string>
     <string name="nfc_payment_settings_title" msgid="1807298287380821613">"Mobil bezahlen"</string>
     <string name="nfc_payment_how_it_works" msgid="3028822263837896720">"Funktionsweise"</string>
-    <!-- no translation found for nfc_payment_no_apps (5477904979148086424) -->
-    <skip />
+    <string name="nfc_payment_no_apps" msgid="5477904979148086424">"Mit Ihrem Smartphone in Geschäften bezahlen"</string>
     <string name="nfc_payment_default" msgid="8648420259219150395">"Standard-App für Zahlungen"</string>
     <string name="nfc_payment_default_not_set" msgid="7485060884228447765">"Nicht festgelegt"</string>
     <string name="nfc_payment_app_and_desc" msgid="7942415346564794258">"<xliff:g id="APP">%1$s</xliff:g> – <xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
-    <!-- no translation found for nfc_payment_use_default (3234730182120288495) -->
-    <skip />
-    <!-- no translation found for nfc_payment_favor_default (5743781166099608372) -->
-    <skip />
-    <!-- no translation found for nfc_payment_favor_open (1923314062109977944) -->
-    <skip />
+    <string name="nfc_payment_use_default" msgid="3234730182120288495">"Standard-App verwenden"</string>
+    <string name="nfc_payment_favor_default" msgid="5743781166099608372">"Immer"</string>
+    <string name="nfc_payment_favor_open" msgid="1923314062109977944">"Außer wenn eine andere Zahlungs-App geöffnet ist"</string>
     <string name="nfc_payment_pay_with" msgid="7524904024378144072">"Am Terminal für das mobile Bezahlen mit folgender App bezahlen:"</string>
     <string name="nfc_how_it_works_title" msgid="1984068457698797207">"An der Kasse bezahlen"</string>
-    <!-- no translation found for nfc_how_it_works_content (4749007806393224934) -->
-    <skip />
+    <string name="nfc_how_it_works_content" msgid="4749007806393224934">"Richten Sie eine Zahlungs-App ein. Halten Sie die Rückseite Ihres Smartphones an jede Kasse mit dem Symbol zum mobilen Bezahlen."</string>
     <string name="nfc_how_it_works_got_it" msgid="259653300203217402">"OK"</string>
     <string name="nfc_more_title" msgid="815910943655133280">"Mehr…"</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"Als bevorzugte Einstellung festlegen?"</string>
@@ -2759,7 +2759,7 @@
     <string name="default_assist_none" msgid="3709083569608735487">"Keine"</string>
     <string name="choose_assist_title" msgid="2373353478479305516">"Assistent-App auswählen"</string>
     <string name="assistant_security_warning_title" msgid="8673079231955467177">"<xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> als Assistenten festlegen?"</string>
-    <string name="assistant_security_warning" msgid="4881965750615394002">"<xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> darf Informationen zu auf Ihrem System verwendeten Apps lesen, einschließlich solchen, die auf dem Bildschirm sichtbar oder innerhalb der Apps zugänglich sind."</string>
+    <string name="assistant_security_warning" msgid="8498726261327239136">"Der Assistent kann Informationen zu Apps abrufen, die Sie auf Ihrem System verwenden, einschließlich Informationen, die auf Ihrem Bildschirm angezeigt werden oder die in Apps zugänglich sind."</string>
     <string name="assistant_security_warning_agree" msgid="7710290206928033908">"Zustimmen"</string>
     <string name="assistant_security_warning_disagree" msgid="877419950830205913">"Nicht zustimmen"</string>
     <string name="choose_voice_input_title" msgid="975471367067718019">"Spracheingabe wählen"</string>

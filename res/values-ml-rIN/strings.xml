@@ -344,6 +344,8 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="8846866512704467036">"ഫിംഗർപ്രിന്റ് സെൻസറിൽ സമാന വിരൽ തന്നെ വയ്‌ക്കുകയും വൈബ്രേഷൻ അനുഭവപ്പെട്ടുകഴിഞ്ഞാൽ മാറ്റുകയും ചെയ്യുക."</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"വിരലടയാളം ചേർത്തു!"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"നിങ്ങൾ ഈ ഐക്കൺ കാണുമ്പോഴെല്ലാം, തിരിച്ചറിയാനോ ഒരു വാങ്ങലിന് അംഗീകാരം നൽകാനോ വിരലടയാളം ഉപയോഗിക്കാനാകും."</string>
+    <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"നിങ്ങളുടെ ഉപകരണം ഉണർത്താനും അൺലോക്കുചെയ്യാനും വിരലടയാള സെൻസറിൽ തൊട്ടാൽ മതിയാകും."</string>
+    <string name="setup_fingerprint_enroll_finish_message_secondary" msgid="7280546429133276374">"ഈ ഐക്കൺ കാണുമ്പോൾ, നിങ്ങൾക്ക് വിരലടയാളം ഉപയോഗിക്കാനാകും."</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"സ്‌ക്രീൻ ലോക്ക് സജ്ജമാക്കുക"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"പൂർത്തിയായി"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"ക്ഷമിക്കണം, അത് സെൻസർ അല്ല"</string>
@@ -356,6 +358,9 @@
     <string name="setup_fingerprint_enroll_finish_message" msgid="4132164775128798343">"നിങ്ങൾ ഈ ഐക്കൺ കാണുമ്പോഴെല്ലാം, നിങ്ങൾക്ക് വിരലടയാളം ഉപയോഗിക്കാനാകും."</string>
     <string name="setup_fingerprint_enroll_finish_secondary_message" msgid="3734962461534384882">"ഈ ക്രമീകരണം മാറ്റുന്നതിന്, ക്രമീകരണം &gt; സുരക്ഷ &gt; വിരലടയാളം എന്നതിലേക്ക് പോവുക."</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"നിങ്ങൾക്ക് <xliff:g id="COUNT">%d</xliff:g> വരെ ഫിംഗർപ്രിൻറുകൾ ചേർക്കാനാകും"</string>
+    <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"എല്ലാ വിരലടയാളങ്ങളും നീക്കംചെയ്യണോ?"</string>
+    <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"ഫോൺ അൺലോക്കുചെയ്യുന്നതിനോ വാങ്ങലുകൾ അംഗീകരിക്കുന്നതിനോ ആപ്സിലേക്ക് സൈൻ ഇൻ ചെയ്യുന്നതിനോ നിങ്ങളുടെ വിരലടയാളങ്ങൾ ഉപയോഗിക്കാനാവില്ല."</string>
+    <string name="fingerprint_last_delete_confirm" msgid="2634726361059274289">"അതെ, നീക്കംചെയ്യുക"</string>
     <string name="confirm_fingerprint_icon_content_description" msgid="5255544532157079096">"തുടരുന്നതിന് നിങ്ങളുടെ ഫിംഗർപ്രിന്റ് ഉപയോഗിക്കുക."</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"എൻ‌ക്രിപ്ഷൻ"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"ടാ‌ബ്‌ലെറ്റ് എൻ‌ക്രിപ്റ്റുചെയ്യുക"</string>
@@ -2353,21 +2358,16 @@
     <string name="global_font_change_title" msgid="1887126466191012035">"ഫോണ്ട് വലുപ്പം മാറ്റുക"</string>
     <string name="nfc_payment_settings_title" msgid="1807298287380821613">"മൊബൈൽ തൊടീച്ച് പണമടയ്ക്കുക"</string>
     <string name="nfc_payment_how_it_works" msgid="3028822263837896720">"ഇത് എങ്ങനെ പ്രവർത്തിക്കുന്നു"</string>
-    <!-- no translation found for nfc_payment_no_apps (5477904979148086424) -->
-    <skip />
+    <string name="nfc_payment_no_apps" msgid="5477904979148086424">"സ്റ്റോറുകളിൽ നിങ്ങളുടെ ഫോൺ ഉപയോഗിച്ച് പണമടയ്ക്കുക"</string>
     <string name="nfc_payment_default" msgid="8648420259219150395">"സ്ഥിര പേയ്‌മെന്റ് അപ്ലിക്കേഷൻ"</string>
     <string name="nfc_payment_default_not_set" msgid="7485060884228447765">"സജ്ജീകരിച്ചിട്ടില്ല"</string>
     <string name="nfc_payment_app_and_desc" msgid="7942415346564794258">"<xliff:g id="APP">%1$s</xliff:g> - <xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
-    <!-- no translation found for nfc_payment_use_default (3234730182120288495) -->
-    <skip />
-    <!-- no translation found for nfc_payment_favor_default (5743781166099608372) -->
-    <skip />
-    <!-- no translation found for nfc_payment_favor_open (1923314062109977944) -->
-    <skip />
+    <string name="nfc_payment_use_default" msgid="3234730182120288495">"സ്ഥിരസ്ഥിതിയായി ഉപയോഗിക്കുക"</string>
+    <string name="nfc_payment_favor_default" msgid="5743781166099608372">"എല്ലായ്പ്പോഴും"</string>
+    <string name="nfc_payment_favor_open" msgid="1923314062109977944">"മറ്റൊരു പണമടയ്ക്കൽ ആപ്പ് തുറന്നിരിക്കുമ്പോൾ ഒഴികെ"</string>
     <string name="nfc_payment_pay_with" msgid="7524904024378144072">"\'മൊബൈൽ തൊടീച്ച് പണമടയ്ക്കുക\' ടെർമിനലിൽ, ഇതുപയോഗിച്ച് പണമടയ്‌ക്കുക:"</string>
     <string name="nfc_how_it_works_title" msgid="1984068457698797207">"ടെർമിനലിൽ പണമടയ്ക്കൽ"</string>
-    <!-- no translation found for nfc_how_it_works_content (4749007806393224934) -->
-    <skip />
+    <string name="nfc_how_it_works_content" msgid="4749007806393224934">"ഒരു പണമടക്കൽ ആപ്പ് സജ്ജീകരിക്കുക. തുടർന്ന് കോൺടാക്റ്റ് രഹിത അടയാളമുള്ള ഏത് ടെർമിനലിലേക്കും നിങ്ങളുടെ ഫോണിന്റെ പിൻവശം തൊടുവിക്കുക."</string>
     <string name="nfc_how_it_works_got_it" msgid="259653300203217402">"മനസ്സിലായി"</string>
     <string name="nfc_more_title" msgid="815910943655133280">"കൂടുതല്‍..."</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"നിങ്ങളുടെ മുൻഗണയായി സജ്ജമാക്കണോ?"</string>
@@ -2758,7 +2758,7 @@
     <string name="default_assist_none" msgid="3709083569608735487">"ഒന്നുമില്ല"</string>
     <string name="choose_assist_title" msgid="2373353478479305516">"അസിസ്റ്റ് ആപ്പ് തിരഞ്ഞെടുക്കുക"</string>
     <string name="assistant_security_warning_title" msgid="8673079231955467177">"<xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g>-നെ നിങ്ങളുടെ സഹായി ആക്കണോ?"</string>
-    <string name="assistant_security_warning" msgid="4881965750615394002">"സ്ക്രീൻ ദൃശ്യമാകുന്നതോ ആപ്സിനുള്ളിൽ ആക്സസ് ചെയ്യാവുന്നതോ ആയ വിവരങ്ങൾ ഉൾപ്പെടെ, നിങ്ങളുടെ സിസ്റ്റത്തിൽ ഉപയോഗത്തിലുള്ള ആപ്സിനെ കുറിച്ചുള്ള വിവരങ്ങൾ വായിക്കാൻ <xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g>-ന് കഴിയും."</string>
+    <string name="assistant_security_warning" msgid="8498726261327239136">"നിങ്ങളുടെ സ്ക്രീനിൽ ദൃശ്യമാകുന്നതോ ആപ്സിനുള്ളിൽ ആക്സസ് ചെയ്യാവുന്നതോ ആയ വിവരങ്ങൾ ഉൾപ്പെടെ, നിങ്ങളുടെ സിസ്റ്റത്തിൽ ഉപയോഗത്തിലുള്ള ആപ്സിനെ കുറിച്ചുള്ള വിവരങ്ങൾ വായിക്കാൻ അസിസ്റ്റന്റിന് കഴിയും."</string>
     <string name="assistant_security_warning_agree" msgid="7710290206928033908">"അംഗീകരിക്കുക"</string>
     <string name="assistant_security_warning_disagree" msgid="877419950830205913">"അംഗീകരിക്കുന്നില്ല"</string>
     <string name="choose_voice_input_title" msgid="975471367067718019">"വോയ്‌സ് ഇൻപുട്ട് ഉപയോഗിക്കുക"</string>

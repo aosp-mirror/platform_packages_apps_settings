@@ -344,6 +344,8 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="8846866512704467036">"지문 센서에 같은 손가락을 올려놓은 뒤 진동이 느껴지면 뗍니다."</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"지문이 추가되었습니다."</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"이 아이콘이 표시되면 지문을 사용하여 사용자 본인임을 증명하거나 구매를 승인할 수 있습니다."</string>
+    <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"기기의 대기 모드 및 잠금을 해제하려면 지문 센서를 터치하기만 하면 됩니다."</string>
+    <string name="setup_fingerprint_enroll_finish_message_secondary" msgid="7280546429133276374">"이 아이콘이 표시되면 지문을 사용할 수 있습니다."</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"화면 잠금 설정"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"완료"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"죄송합니다. 센서가 아닙니다."</string>
@@ -356,6 +358,9 @@
     <string name="setup_fingerprint_enroll_finish_message" msgid="4132164775128798343">"이 아이콘이 표시되면 지문 파일을 사용할 수 있습니다."</string>
     <string name="setup_fingerprint_enroll_finish_secondary_message" msgid="3734962461534384882">"설정을 변경하려면 설정 &gt; 보안 &gt; 지문 파일로 이동합니다."</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"지문을 <xliff:g id="COUNT">%d</xliff:g>개까지 추가할 수 있습니다."</string>
+    <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"모든 지문을 삭제할까요?"</string>
+    <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"지문을 사용하여 휴대전화를 잠금 해제하거나, 구매를 승인하거나, 앱에 로그인할 수 없게 됩니다."</string>
+    <string name="fingerprint_last_delete_confirm" msgid="2634726361059274289">"예, 삭제합니다."</string>
     <string name="confirm_fingerprint_icon_content_description" msgid="5255544532157079096">"계속하려면 지문을 사용하세요."</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"암호화"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"태블릿 암호화"</string>
@@ -2353,21 +2358,16 @@
     <string name="global_font_change_title" msgid="1887126466191012035">"글꼴 크기 변경"</string>
     <string name="nfc_payment_settings_title" msgid="1807298287380821613">"탭앤페이"</string>
     <string name="nfc_payment_how_it_works" msgid="3028822263837896720">"작동 방식"</string>
-    <!-- no translation found for nfc_payment_no_apps (5477904979148086424) -->
-    <skip />
+    <string name="nfc_payment_no_apps" msgid="5477904979148086424">"판매점에서 휴대전화로 결제"</string>
     <string name="nfc_payment_default" msgid="8648420259219150395">"기본 결제 앱"</string>
     <string name="nfc_payment_default_not_set" msgid="7485060884228447765">"설정되지 않음"</string>
     <string name="nfc_payment_app_and_desc" msgid="7942415346564794258">"<xliff:g id="APP">%1$s</xliff:g> - <xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
-    <!-- no translation found for nfc_payment_use_default (3234730182120288495) -->
-    <skip />
-    <!-- no translation found for nfc_payment_favor_default (5743781166099608372) -->
-    <skip />
-    <!-- no translation found for nfc_payment_favor_open (1923314062109977944) -->
-    <skip />
+    <string name="nfc_payment_use_default" msgid="3234730182120288495">"기본값 사용"</string>
+    <string name="nfc_payment_favor_default" msgid="5743781166099608372">"항상"</string>
+    <string name="nfc_payment_favor_open" msgid="1923314062109977944">"다른 결제 앱이 열려 있는 경우 제외"</string>
     <string name="nfc_payment_pay_with" msgid="7524904024378144072">"탭앤페이 터미널에서 결제에 사용할 앱:"</string>
     <string name="nfc_how_it_works_title" msgid="1984068457698797207">"단말기에서 결제"</string>
-    <!-- no translation found for nfc_how_it_works_content (4749007806393224934) -->
-    <skip />
+    <string name="nfc_how_it_works_content" msgid="4749007806393224934">"결제 앱을 설정하세요. 그런 다음 비접촉 기호가 있는 터미널 위에 휴대전화의 뒷면을 갖다 대세요."</string>
     <string name="nfc_how_it_works_got_it" msgid="259653300203217402">"확인"</string>
     <string name="nfc_more_title" msgid="815910943655133280">"더보기..."</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"기본으로 설정하시겠습니까?"</string>
@@ -2758,7 +2758,7 @@
     <string name="default_assist_none" msgid="3709083569608735487">"없음"</string>
     <string name="choose_assist_title" msgid="2373353478479305516">"지원 앱 선택"</string>
     <string name="assistant_security_warning_title" msgid="8673079231955467177">"<xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g>을(를) 어시스턴트로 설정하시겠습니까?"</string>
-    <string name="assistant_security_warning" msgid="4881965750615394002">"<xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g>에서 사용자의 화면에 표시되는 정보나 앱 내에서 액세스할 수 있는 정보 등 Google 시스템에서 사용하는 앱 관련 정보를 읽을 수 있게 됩니다."</string>
+    <string name="assistant_security_warning" msgid="8498726261327239136">"어시스턴트가 시스템에서 사용 중인 앱에 관한 정보를 읽을 수 있게 됩니다. 여기에는 화면에 표시된 정보 또는 앱 내에서 액세스할 수 있는 정보가 포함됩니다."</string>
     <string name="assistant_security_warning_agree" msgid="7710290206928033908">"동의"</string>
     <string name="assistant_security_warning_disagree" msgid="877419950830205913">"동의 안함"</string>
     <string name="choose_voice_input_title" msgid="975471367067718019">"음성 입력 선택"</string>
