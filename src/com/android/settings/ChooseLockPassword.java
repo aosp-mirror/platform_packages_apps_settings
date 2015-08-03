@@ -128,6 +128,7 @@ public class ChooseLockPassword extends SettingsActivity {
         private static final String KEY_CURRENT_PASSWORD = "current_password";
 
         private String mCurrentPassword;
+        private String mChosenPassword;
         private boolean mHasChallenge;
         private long mChallenge;
         private TextView mPasswordEntry;
@@ -145,7 +146,6 @@ public class ChooseLockPassword extends SettingsActivity {
         private int mRequestedQuality = DevicePolicyManager.PASSWORD_QUALITY_NUMERIC;
         private ChooseLockSettingsHelper mChooseLockSettingsHelper;
         private Stage mUiStage = Stage.Introduction;
-        private boolean mDone = false;
         private TextView mHeaderText;
         private String mFirstPin;
         private KeyboardView mKeyboardView;
@@ -302,7 +302,6 @@ public class ChooseLockPassword extends SettingsActivity {
                     mCurrentPassword = savedInstanceState.getString(KEY_CURRENT_PASSWORD);
                 }
             }
-            mDone = false;
             if (activity instanceof SettingsActivity) {
                 final SettingsActivity sa = (SettingsActivity) activity;
                 int id = mIsAlphaMode ? R.string.lockpassword_choose_your_password_header
@@ -478,37 +477,54 @@ public class ChooseLockPassword extends SettingsActivity {
             return null;
         }
 
-        public void handleNext() {
-            if (mDone) return;
+        private class SaveChosenPasswordAndFinish extends AsyncTask<Void, Void, Void> {
+            boolean mWasSecureBefore;
 
-            final String pin = mPasswordEntry.getText().toString();
-            if (TextUtils.isEmpty(pin)) {
+            @Override
+            public void onPreExecute() {
+                mWasSecureBefore = mLockPatternUtils.isSecure(UserHandle.myUserId());
+                final boolean required = getActivity().getIntent().getBooleanExtra(
+                        EncryptionInterstitial.EXTRA_REQUIRE_PASSWORD, true);
+                mLockPatternUtils.setCredentialRequiredToDecrypt(required);
+            }
+
+            @Override
+            public Void doInBackground(Void... v) {
+                mLockPatternUtils.saveLockPassword(mChosenPassword, mCurrentPassword, mRequestedQuality,
+                                                   UserHandle.myUserId());
+                return null;
+            }
+
+            @Override
+            public void onPostExecute(Void v) {
+                if (mHasChallenge) {
+                    startVerifyPassword(mChosenPassword, mWasSecureBefore);
+                    return;
+                } else {
+                    getActivity().setResult(RESULT_FINISHED);
+                }
+                finishConfirmStage(mWasSecureBefore);
+            }
+        }
+
+
+        public void handleNext() {
+            mChosenPassword = mPasswordEntry.getText().toString();
+            if (TextUtils.isEmpty(mChosenPassword)) {
                 return;
             }
             String errorMsg = null;
             if (mUiStage == Stage.Introduction) {
-                errorMsg = validatePassword(pin);
+                errorMsg = validatePassword(mChosenPassword);
                 if (errorMsg == null) {
-                    mFirstPin = pin;
+                    mFirstPin = mChosenPassword;
                     mPasswordEntry.setText("");
                     updateStage(Stage.NeedToConfirm);
                 }
             } else if (mUiStage == Stage.NeedToConfirm) {
-                if (mFirstPin.equals(pin)) {
-                    boolean wasSecureBefore = mLockPatternUtils.isSecure(UserHandle.myUserId());
-                    final boolean required = getActivity().getIntent().getBooleanExtra(
-                            EncryptionInterstitial.EXTRA_REQUIRE_PASSWORD, true);
-                    mLockPatternUtils.setCredentialRequiredToDecrypt(required);
-                    mLockPatternUtils.saveLockPassword(pin, mCurrentPassword, mRequestedQuality,
-                            UserHandle.myUserId());
-
-                    if (mHasChallenge) {
-                        startVerifyPassword(pin, wasSecureBefore);
-                        return;
-                    } else {
-                        getActivity().setResult(RESULT_FINISHED);
-                    }
-                    finishConfirmStage(wasSecureBefore);
+                if (mFirstPin.equals(mChosenPassword)) {
+                    setNextEnabled(false);
+                    new SaveChosenPasswordAndFinish().execute();
                 } else {
                     CharSequence tmp = mPasswordEntry.getText();
                     if (tmp != null) {
@@ -557,7 +573,6 @@ public class ChooseLockPassword extends SettingsActivity {
 
         private void finishConfirmStage(boolean wasSecureBefore) {
             getActivity().finish();
-            mDone = true;
             if (!wasSecureBefore) {
                 Intent intent = getRedactionInterstitialIntent(getActivity());
                 if (intent != null) {
