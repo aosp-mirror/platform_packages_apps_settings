@@ -41,7 +41,7 @@ abstract public class VoiceSettingsActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (isVoiceInteraction() || savedInstanceState == null) {
+        if (isVoiceInteractionRoot()) {
             // Only permit if this is a voice interaction.
             if (onVoiceSettingInteraction(getIntent())) {
                 // If it's complete, finish.
@@ -60,7 +60,7 @@ abstract public class VoiceSettingsActivity extends Activity {
     abstract protected boolean onVoiceSettingInteraction(Intent intent);
 
     /**
-     * Send a notification that the interaction was successful. If {@link prompt} is
+     * Send a notification that the interaction was successful. If {@param prompt} is
      * not null, then it will be read to the user.
      */
     protected void notifySuccess(CharSequence prompt) {
