@@ -16,6 +16,8 @@
 package com.android.settings.deviceinfo;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.hardware.usb.UsbManager;
 import android.hardware.usb.UsbPort;
 import android.hardware.usb.UsbPortStatus;
@@ -40,7 +42,13 @@ public class UsbBackend {
     private UsbPort mPort;
     private UsbPortStatus mPortStatus;
 
+    private boolean mIsUnlocked;
+
     public UsbBackend(Context context) {
+        Intent intent = context.registerReceiver(null,
+                new IntentFilter(UsbManager.ACTION_USB_STATE));
+        mIsUnlocked = intent.getBooleanExtra(UsbManager.USB_DATA_UNLOCKED, false);
+
         mUserManager = UserManager.get(context);
         mUsbManager = context.getSystemService(UsbManager.class);
 
@@ -70,7 +78,7 @@ public class UsbBackend {
     }
 
     public int getUsbDataMode() {
-        if (!mUsbManager.isUsbDataUnlocked()) {
+        if (!mIsUnlocked) {
             return MODE_DATA_NONE;
         } else if (mUsbManager.isFunctionEnabled(UsbManager.USB_FUNCTION_MTP)) {
             return MODE_DATA_MTP;
@@ -123,7 +131,8 @@ public class UsbBackend {
     }
 
     public boolean isModeSupported(int mode) {
-        if (mRestricted && (mode & MODE_DATA_MASK) != MODE_DATA_NONE) {
+        if (mRestricted && (mode & MODE_DATA_MASK) != MODE_DATA_NONE
+                && (mode & MODE_DATA_MASK) != MODE_DATA_MIDI) {
             // No USB data modes are supported.
             return false;
         }
