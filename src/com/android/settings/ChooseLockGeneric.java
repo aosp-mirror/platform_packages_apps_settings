@@ -38,7 +38,10 @@ import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.fingerprint.FingerprintManager.RemovalCallback;
 import android.util.EventLog;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.accessibility.AccessibilityManager;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.android.internal.logging.MetricsLogger;
@@ -164,6 +167,18 @@ public class ChooseLockGeneric extends SettingsActivity {
                 } else {
                     mWaitingForConfirmation = true;
                 }
+            }
+        }
+
+        @Override
+        public void onViewCreated(View view, Bundle savedInstanceState) {
+            super.onViewCreated(view, savedInstanceState);
+            if (mForFingerprint) {
+                final LayoutInflater inflater = LayoutInflater.from(getContext());
+                final ListView listView = getListView();
+                final View fingerprintHeader = inflater.inflate(
+                        R.layout.choose_lock_generic_fingerprint_header, listView, false);
+                listView.addHeaderView(fingerprintHeader, null, false);
             }
         }
 
