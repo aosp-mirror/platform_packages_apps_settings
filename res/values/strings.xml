@@ -6760,22 +6760,46 @@
     <!-- Description of how many more permissions to view on next page [CHAR LIMIT=30] -->
     <string name="additional_permissions_more"><xliff:g id="count" example="2">%1$d</xliff:g> more</string>
 
-    <!-- One of the choices in a dialog (with title defined in usb_use) that lets the user
+    <!-- Title of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
          is for charging only. -->
-    <string name="usb_use_charging_only">Charging only</string>
-    <!-- One of the choices in a dialog (with title defined in usb_use) that lets the user
+    <string name="usb_use_charging_only">Charging</string>
+    <!-- Decription of one of the choices in a dialog (with title defined in usb_use) that lets the
+         user select what the USB connection for this device should be used for. This choice
+         is for charging only. -->
+    <string name="usb_use_charging_only_desc">Just charge this device</string>
+    <!-- Title of one of the choices in a dialog (with title defined in usb_use) that lets the user
+         select what the USB connection for this device should be used for. This choice
+         is for powering the other device only. -->
+    <string name="usb_use_power_only">Power supply</string>
+    <!-- Decription of one of the choices in a dialog (with title defined in usb_use) that lets the
+         user select what the USB connection for this device should be used for. This choice
+         is for powering the other device only. -->
+    <string name="usb_use_power_only_desc">Charge the other connected device</string>
+    <!-- Title of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
          is for transferring files via MTP. -->
-    <string name="usb_use_file_transfers">Transfer files (MTP)</string>
-    <!-- One of the choices in a dialog (with title defined in usb_use) that lets the user
+    <string name="usb_use_file_transfers">File transfers</string>
+    <!-- Description of one of the choices in a dialog (with title defined in usb_use) that lets the user
+         select what the USB connection for this device should be used for. This choice
+         is for transferring files via MTP. -->
+    <string name="usb_use_file_transfers_desc">Transfer files to Windows or Mac (MTP)</string>
+    <!-- Title of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
          is for transferring photos via PTP. -->
-    <string name="usb_use_photo_transfers">Transfer photos (PTP)</string>
-    <!-- One of the choices in a dialog (with title defined in usb_use) that lets the user
+    <string name="usb_use_photo_transfers">Photo transfer (PTP)</string>
+    <!-- Description of one of the choices in a dialog (with title defined in usb_use) that lets the user
+         select what the USB connection for this device should be used for. This choice
+         is for transferring photos via PTP. -->
+    <string name="usb_use_photo_transfers_desc">Transfer photos or files if MTP is not supported (PTP)</string>
+    <!-- Title of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
          is for entering MIDI mode. -->
     <string name="usb_use_MIDI">MIDI</string>
+    <!-- Description of one of the choices in a dialog (with title defined in usb_use) that lets the user
+         select what the USB connection for this device should be used for. This choice
+         is for entering MIDI mode. -->
+    <string name="usb_use_MIDI_desc">Use device for MIDI input</string>
     <!-- The title used in a dialog which lets the user select what the USB connection
          for this device should be used for. Choices are usb_use_charging_only,
          usb_use_file_transfer, use_use_photo_transfer, and usb_use_MIDI -->
