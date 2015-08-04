@@ -20,11 +20,14 @@ import android.annotation.Nullable;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.hardware.usb.UsbManager;
 import android.os.Bundle;
-import android.os.UserManager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Checkable;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.android.settings.R;
 
@@ -34,90 +37,101 @@ import com.android.settings.R;
  */
 public class UsbModeChooserActivity extends Activity {
 
-    private UsbManager mUsbManager;
+    public static final int[] DEFAULT_MODES = {
+        UsbBackend.MODE_POWER_SINK | UsbBackend.MODE_DATA_NONE,
+        UsbBackend.MODE_POWER_SOURCE | UsbBackend.MODE_DATA_NONE,
+        UsbBackend.MODE_POWER_SINK | UsbBackend.MODE_DATA_MTP,
+        UsbBackend.MODE_POWER_SINK | UsbBackend.MODE_DATA_PTP,
+        UsbBackend.MODE_POWER_SINK | UsbBackend.MODE_DATA_MIDI
+    };
+
+    private UsbBackend mBackend;
+    private AlertDialog mDialog;
+    private LayoutInflater mLayoutInflater;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mUsbManager = (UsbManager) getSystemService(Context.USB_SERVICE);
-        CharSequence[] items;
-        UserManager userManager =
-                (UserManager) getSystemService(Context.USER_SERVICE);
-        if (userManager.hasUserRestriction(UserManager.DISALLOW_USB_FILE_TRANSFER)) {
-            items = new CharSequence[] { getText(R.string.usb_use_charging_only) };
-        } else {
-            items = getResources().getTextArray(R.array.usb_available_functions);
-        }
 
-        final AlertDialog levelDialog;
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(R.string.usb_use);
-        builder.setSingleChoiceItems(items, getCurrentFunction(),
-                new DialogInterface.OnClickListener() {
+        mLayoutInflater = LayoutInflater.from(this);
+
+        mDialog = new AlertDialog.Builder(this)
+                .setTitle(R.string.usb_use)
+                .setView(R.layout.usb_dialog_container)
+                .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        finish();
+                    }
+                })
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (!ActivityManager.isUserAMonkey()) {
-                            setCurrentFunction(which);
-                        }
-                        dialog.dismiss();
-                        UsbModeChooserActivity.this.finish();
+                        finish();
                     }
-                });
-        builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                UsbModeChooserActivity.this.finish();
+                }).create();
+        mDialog.show();
+
+        LinearLayout container = (LinearLayout) mDialog.findViewById(R.id.container);
+
+        mBackend = new UsbBackend(this);
+        int current = mBackend.getCurrentMode();
+        for (int i = 0; i < DEFAULT_MODES.length; i++) {
+            if (mBackend.isModeSupported(DEFAULT_MODES[i])) {
+                inflateOption(DEFAULT_MODES[i], current == DEFAULT_MODES[i], container);
             }
-        });
-        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                UsbModeChooserActivity.this.finish();
-            }
-        });
-        levelDialog = builder.create();
-        levelDialog.show();
+        }
     }
 
-    /*
-     * If you change the numbers here, you also need to change R.array.usb_available_functions
-     * so that everything matches.
-     */
-    private int getCurrentFunction() {
-        if (!mUsbManager.isUsbDataUnlocked()) {
-            return 0;
-        } else if (mUsbManager.isFunctionEnabled(UsbManager.USB_FUNCTION_MTP)) {
-            return 1;
-        } else if (mUsbManager.isFunctionEnabled(UsbManager.USB_FUNCTION_PTP)) {
-            return 2;
-        } else if (mUsbManager.isFunctionEnabled(UsbManager.USB_FUNCTION_MIDI)) {
-            return 3;
+    private void inflateOption(final int mode, boolean selected, LinearLayout container) {
+        View v = mLayoutInflater.inflate(R.layout.radio_with_summary, container, false);
+
+        ((TextView) v.findViewById(android.R.id.title)).setText(getTitle(mode));
+        ((TextView) v.findViewById(android.R.id.summary)).setText(getSummary(mode));
+
+        v.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!ActivityManager.isUserAMonkey()) {
+                    mBackend.setMode(mode);
+                }
+                mDialog.dismiss();
+                finish();
+            }
+        });
+        ((Checkable) v).setChecked(selected);
+        container.addView(v);
+    }
+
+    private static int getSummary(int mode) {
+        switch (mode) {
+            case UsbBackend.MODE_POWER_SINK | UsbBackend.MODE_DATA_NONE:
+                return R.string.usb_use_charging_only_desc;
+            case UsbBackend.MODE_POWER_SOURCE | UsbBackend.MODE_DATA_NONE:
+                return R.string.usb_use_power_only_desc;
+            case UsbBackend.MODE_POWER_SINK | UsbBackend.MODE_DATA_MTP:
+                return R.string.usb_use_file_transfers_desc;
+            case UsbBackend.MODE_POWER_SINK | UsbBackend.MODE_DATA_PTP:
+                return R.string.usb_use_photo_transfers_desc;
+            case UsbBackend.MODE_POWER_SINK | UsbBackend.MODE_DATA_MIDI:
+                return R.string.usb_use_MIDI_desc;
         }
         return 0;
     }
 
-    /*
-     * If you change the numbers here, you also need to change R.array.usb_available_functions
-     * so that everything matches.
-     */
-    private void setCurrentFunction(int which) {
-        switch (which) {
-            case 0:
-                mUsbManager.setCurrentFunction(null);
-                mUsbManager.setUsbDataUnlocked(false);
-                break;
-            case 1:
-                mUsbManager.setCurrentFunction(UsbManager.USB_FUNCTION_MTP);
-                mUsbManager.setUsbDataUnlocked(true);
-                break;
-            case 2:
-                mUsbManager.setCurrentFunction(UsbManager.USB_FUNCTION_PTP);
-                mUsbManager.setUsbDataUnlocked(true);
-                break;
-            case 3:
-                mUsbManager.setCurrentFunction(UsbManager.USB_FUNCTION_MIDI);
-                mUsbManager.setUsbDataUnlocked(true);
-                break;
+    private static int getTitle(int mode) {
+        switch (mode) {
+            case UsbBackend.MODE_POWER_SINK | UsbBackend.MODE_DATA_NONE:
+                return R.string.usb_use_charging_only;
+            case UsbBackend.MODE_POWER_SOURCE | UsbBackend.MODE_DATA_NONE:
+                return R.string.usb_use_power_only;
+            case UsbBackend.MODE_POWER_SINK | UsbBackend.MODE_DATA_MTP:
+                return R.string.usb_use_file_transfers;
+            case UsbBackend.MODE_POWER_SINK | UsbBackend.MODE_DATA_PTP:
+                return R.string.usb_use_photo_transfers;
+            case UsbBackend.MODE_POWER_SINK | UsbBackend.MODE_DATA_MIDI:
+                return R.string.usb_use_MIDI;
         }
+        return 0;
     }
 }
