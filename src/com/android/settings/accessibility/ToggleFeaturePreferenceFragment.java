@@ -78,6 +78,7 @@ public abstract class ToggleFeaturePreferenceFragment
                 }
             }
         };
+        mSummaryPreference.setSelectable(false);
         mSummaryPreference.setPersistent(false);
         mSummaryPreference.setLayoutResource(R.layout.text_description_preference);
         preferenceScreen.addPreference(mSummaryPreference);
