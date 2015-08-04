@@ -20,17 +20,39 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
-import com.android.settings.accessibility.ListDialogPreference;
 
+import com.android.settings.accessibility.ListDialogPreference;
 import com.android.settings.R;
 
 public class AppDomainsPreference extends ListDialogPreference {
+    private int mNumEntries;
 
     public AppDomainsPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         setDialogLayoutResource(R.layout.app_domains_dialog);
         setListItemLayoutResource(R.layout.app_domains_item);
+    }
+
+    @Override
+    public void setTitles(CharSequence[] titles) {
+        mNumEntries = (titles != null) ? titles.length : 0;
+        super.setTitles(titles);
+    }
+
+    @Override
+    public CharSequence getSummary() {
+        final Context context = getContext();
+        if (mNumEntries == 0) {
+            return context.getString(R.string.domain_urls_summary_none);
+        }
+
+        // The superclass summary is the text of the first entry in the list
+        final CharSequence summary = super.getSummary();
+        final int whichVersion = (mNumEntries == 1)
+                ? R.string.domain_urls_summary_one
+                : R.string.domain_urls_summary_some;
+        return context.getString(whichVersion, summary);
     }
 
     @Override
