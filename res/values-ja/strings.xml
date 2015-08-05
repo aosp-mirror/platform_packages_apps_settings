@@ -341,9 +341,12 @@
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4150384963879569750">"OK"</string>
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"削除"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"登録の開始"</string>
-    <string name="security_settings_fingerprint_enroll_start_message" msgid="6294541599045187369">"指を指紋センサーに当て、振動したら指を離してください。"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="3732060789409510229">"OK。繰り返してください"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="8846866512704467036">"同じ指を指紋センサーに当て、振動したら指を離してください。"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_start_message (3909929328942564524) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_repeat_title (4327640138658832625) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_repeat_message (4232813847507193627) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"指紋を追加しました。"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"このアイコンが表示されているときは、本人確認や購入の承認に指紋を使用できます。"</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"指紋センサーに触れるだけで端末を復帰させてロックを解除できます。"</string>
@@ -394,6 +397,7 @@
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"入力したパスワードは正しいのですが、データが破損しています。\n\nスマートフォンの使用を再開するには出荷時設定にリセットする必要があります。リセット後、スマートフォンのセットアップの段階で、Googleアカウントにバックアップしたデータの復元を選択できます。"</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"入力方法の切り替え"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"画面ロックを選択"</string>
+    <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"予備の画面ロック方式を選択してください"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"画面ロック"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"ロック解除方法を変更する"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"パターン、PIN、パスワードセキュリティを変更または無効にする"</string>
@@ -492,9 +496,8 @@
     <string name="bluetooth_settings" msgid="1810521656168174329">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"Bluetooth"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"接続、端末名、検出の許可を設定する"</string>
-    <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Bluetoothのペア設定リクエスト"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="4954085254142996877">"デバイス"</string>
-    <string name="bluetooth_pairing_key_msg" msgid="333005542843637754">"ペア設定コード"</string>
+    <string name="bluetooth_pairing_request" msgid="2605098826364694673">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>をペアに設定しますか？"</string>
+    <string name="bluetooth_pairing_key_msg" msgid="418124944140102021">"Bluetoothペア設定コード"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"ペア設定コードを入力してからReturnキーまたはEnterキーを押してください"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"PINに文字か記号が含まれる"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"通常は0000または1234です"</string>
@@ -504,7 +507,7 @@
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"次のデバイスをペアに設定する場合:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;次のパスキーが表示されていることを確認してください:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"発信元:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;このデバイスをペアに設定しますか？"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>をペアに設定するには、「<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>」と入力してから、ReturnキーまたはEnterキーを押します。"</string>
-    <string name="bluetooth_pairing_shares_phonebook" msgid="1655930908614072491">"接続時に連絡先や通話履歴へのアクセスを許可する"</string>
+    <string name="bluetooth_pairing_shares_phonebook" msgid="2277931851483023208">"自分の連絡先や通話履歴へのアクセスを<xliff:g id="DEVICE_NAME">%1$s</xliff:g>に許可する"</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_connecting_error_message" msgid="1397388344342081090">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>に接続できませんでした。"</string>
     <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"デバイスのスキャン"</string>
@@ -2802,10 +2805,25 @@
     <string name="system_ui_settings" msgid="579824306467081123">"SystemUI調整ツールを表示"</string>
     <string name="additional_permissions" msgid="6463784193877056080">"その他の権限"</string>
     <string name="additional_permissions_more" msgid="3538612272673191451">"他<xliff:g id="COUNT">%1$d</xliff:g>件"</string>
-    <string name="usb_use_charging_only" msgid="2625934955897625321">"充電のみ"</string>
-    <string name="usb_use_file_transfers" msgid="479119385461326763">"ファイルの転送（MTP）"</string>
-    <string name="usb_use_photo_transfers" msgid="7794775645350330454">"写真の転送（PTP）"</string>
+    <!-- no translation found for usb_use_charging_only (167707234832117768) -->
+    <skip />
+    <!-- no translation found for usb_use_charging_only_desc (3066256793008540627) -->
+    <skip />
+    <!-- no translation found for usb_use_power_only (6304554004177083963) -->
+    <skip />
+    <!-- no translation found for usb_use_power_only_desc (708134382305728112) -->
+    <skip />
+    <!-- no translation found for usb_use_file_transfers (6978904665877785548) -->
+    <skip />
+    <!-- no translation found for usb_use_file_transfers_desc (1663579896876922124) -->
+    <skip />
+    <!-- no translation found for usb_use_photo_transfers (8276445551694259039) -->
+    <skip />
+    <!-- no translation found for usb_use_photo_transfers_desc (2963034811151325996) -->
+    <skip />
     <string name="usb_use_MIDI" msgid="5116404702692483166">"MIDI"</string>
+    <!-- no translation found for usb_use_MIDI_desc (6895383550910152384) -->
+    <skip />
     <string name="usb_use" msgid="3372728031108932425">"USBの使用"</string>
     <string name="inactive_apps_title" msgid="1317817863508274533">"無効なアプリ"</string>
     <string name="inactive_app_inactive_summary" msgid="6768756967594202411">"無効。タップすると切り替わります。"</string>

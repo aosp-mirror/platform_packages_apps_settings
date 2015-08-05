@@ -339,9 +339,12 @@
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4150384963879569750">"ठीक आहे"</string>
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"हटवा"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"आपण प्रारंभ करूया!"</string>
-    <string name="security_settings_fingerprint_enroll_start_message" msgid="6294541599045187369">"फिंगरप्रिंट सेन्सरवर आपले बोट ठेवा. आपल्याला कंपन जाणवल्यानंतर उचला."</string>
-    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="3732060789409510229">"छान! आता पुनरावृत्ती करा."</string>
-    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="8846866512704467036">"फिंगरप्रिंट सेन्सरवर तेच बोट ठेवा आणि आपल्याला कंपन जाणवल्यानंतर उचला."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_start_message (3909929328942564524) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_repeat_title (4327640138658832625) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_repeat_message (4232813847507193627) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"फिंगरप्रिंट जोडले!"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"जेव्हाही आपण हे चिन्ह पाहता, तेव्हा आपण ओळखीसाठी किंवा खरेदी अधिकृत करण्यासाठी आपले फिंगरप्रिंट वापरू शकता."</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"आपले डिव्‍हाइस सक्रिय आणि अनलॉक करण्‍यासाठी फक्त फिंगरप्रिंट सेन्सरला स्पर्श करा."</string>
@@ -392,6 +395,7 @@
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"आपण प्रविष्ट केलेला संकेतशब्द बरोबर आहे, परंतु दुर्दैवाने आपला डेटा दूषित आहे. \n\nआपला फोन वापरणे पुनः सुरु करण्यासाठी, आपल्याला फॅक्टरी रीसेट करणे आवश्यक आहे. रीसेट केल्यानंतर आपण आपला फोन सेट करता, तेव्हा आपल्याला आपल्या Google खात्यावर बॅक अप घेतलेला कोणताही डेटा पुनर्संचयित करण्याची संधी असेल."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"इनपुट पद्धत स्विच करा"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"स्क्रीन लॉक निवडा"</string>
+    <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"आपली बॅक अप स्क्रीन लॉक पद्धत निवडा"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"स्क्रीन लॉक"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"लॉक स्क्रीन बदला"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"नमुना, पिन वा संकेतशब्द सुरक्षा बदला/अक्षम करा"</string>
@@ -490,9 +494,8 @@
     <string name="bluetooth_settings" msgid="1810521656168174329">"ब्लूटुथ"</string>
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"ब्लूटुथ"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"कनेक्शन व्यवस्थापित करा, डिव्हाइस नाव आणि शोधयोग्यता सेट करा"</string>
-    <string name="bluetooth_pairing_request" msgid="6385750334766370310">"ब्लूटुथ जोडणी विनंती"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="4954085254142996877">"डिव्हाइस"</string>
-    <string name="bluetooth_pairing_key_msg" msgid="333005542843637754">"जोडणी कोड"</string>
+    <string name="bluetooth_pairing_request" msgid="2605098826364694673">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> सह जोडायचे?"</string>
+    <string name="bluetooth_pairing_key_msg" msgid="418124944140102021">"ब्लूटुथ जोडणी कोड"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"जोडणी कोड टाइप करा नंतर Return किंवा Enter दाबा"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"पिन मध्ये अक्षरे किंवा प्रतीके आहेत"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"सामान्यतः 0000 किंवा 1234"</string>
@@ -502,7 +505,7 @@
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"यासह जोडण्यासाठी:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;हे ही पासकी दर्शवत असल्याचे सुनिश्चित करा:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"यावरून:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;हे डिव्हाइस जोडायचे?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"यासह जोडण्यासाठी:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>यावर टाइप करा:<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>, नंतर Return किंवा Enter दाबा."</string>
-    <string name="bluetooth_pairing_shares_phonebook" msgid="1655930908614072491">"कनेक्‍ट केलेले असताना आपले संपर्क आणि कॉल इतिहास यामध्‍ये प्रवेशाची मंजूरी द्या."</string>
+    <string name="bluetooth_pairing_shares_phonebook" msgid="2277931851483023208">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ला आपले संपर्क आणि कॉल इतिहासामध्‍ये प्रवेश करण्‍याची अनुमती द्या"</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_connecting_error_message" msgid="1397388344342081090">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> सह कनेक्ट करणे शक्य झाले नाही."</string>
     <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"डिव्हाइसेससाठी स्कॅन करा"</string>
@@ -2365,7 +2368,7 @@
     <string name="nfc_payment_favor_open" msgid="1923314062109977944">"दुसरा देयक अॅप खुला असतो तेव्हा त्यास वगळून"</string>
     <string name="nfc_payment_pay_with" msgid="7524904024378144072">"टॅप करा आणि देय द्या टर्मिनलवर, यासह देय द्या:"</string>
     <string name="nfc_how_it_works_title" msgid="1984068457698797207">"टर्मिनलवर देय द्या"</string>
-    <string name="nfc_how_it_works_content" msgid="4749007806393224934">"देयक अॅप सेट करा. त्यानंतर contactless चिन्ह असलेल्या कोणत्याही टर्मिनलवर आपल्‍या फोनची मागील बाजू धरा."</string>
+    <string name="nfc_how_it_works_content" msgid="4749007806393224934">"देयक अॅप सेट करा. त्यानंतर संपर्करहित चिन्ह असलेल्या कोणत्याही टर्मिनलवर आपल्‍या फोनची मागील बाजू धरा."</string>
     <string name="nfc_how_it_works_got_it" msgid="259653300203217402">"समजले"</string>
     <string name="nfc_more_title" msgid="815910943655133280">"आणखी..."</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"आपले प्राधान्य म्हणून सेट करायचे?"</string>
@@ -2796,10 +2799,25 @@
     <string name="system_ui_settings" msgid="579824306467081123">"SystemUI ट्यूनर दर्शवा"</string>
     <string name="additional_permissions" msgid="6463784193877056080">"अतिरिक्त परवानग्या"</string>
     <string name="additional_permissions_more" msgid="3538612272673191451">"<xliff:g id="COUNT">%1$d</xliff:g> अधिक"</string>
-    <string name="usb_use_charging_only" msgid="2625934955897625321">"केवळ चार्जिंग"</string>
-    <string name="usb_use_file_transfers" msgid="479119385461326763">"फायली स्थानांतरित करा (MTP)"</string>
-    <string name="usb_use_photo_transfers" msgid="7794775645350330454">"फोटो स्थानांतरित करा (PTP)"</string>
+    <!-- no translation found for usb_use_charging_only (167707234832117768) -->
+    <skip />
+    <!-- no translation found for usb_use_charging_only_desc (3066256793008540627) -->
+    <skip />
+    <!-- no translation found for usb_use_power_only (6304554004177083963) -->
+    <skip />
+    <!-- no translation found for usb_use_power_only_desc (708134382305728112) -->
+    <skip />
+    <!-- no translation found for usb_use_file_transfers (6978904665877785548) -->
+    <skip />
+    <!-- no translation found for usb_use_file_transfers_desc (1663579896876922124) -->
+    <skip />
+    <!-- no translation found for usb_use_photo_transfers (8276445551694259039) -->
+    <skip />
+    <!-- no translation found for usb_use_photo_transfers_desc (2963034811151325996) -->
+    <skip />
     <string name="usb_use_MIDI" msgid="5116404702692483166">"MIDI"</string>
+    <!-- no translation found for usb_use_MIDI_desc (6895383550910152384) -->
+    <skip />
     <string name="usb_use" msgid="3372728031108932425">"यासाठी USB वापरा"</string>
     <string name="inactive_apps_title" msgid="1317817863508274533">"निष्क्रिय अ‍ॅप्स"</string>
     <string name="inactive_app_inactive_summary" msgid="6768756967594202411">"निष्क्रिय. टॉगल करण्‍यासाठी स्पर्श करा."</string>
