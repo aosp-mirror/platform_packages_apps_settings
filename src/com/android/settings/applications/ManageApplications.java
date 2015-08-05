@@ -553,8 +553,10 @@ public class ManageApplications extends InstrumentedFragment
         mOptionsMenu.findItem(R.id.sort_order_size).setVisible(mListType == LIST_TYPE_STORAGE
                 && mSortOrder != R.id.sort_order_size);
 
-        mOptionsMenu.findItem(R.id.show_system).setVisible(!mShowSystem);
-        mOptionsMenu.findItem(R.id.hide_system).setVisible(mShowSystem);
+        mOptionsMenu.findItem(R.id.show_system).setVisible(!mShowSystem
+                && mListType != LIST_TYPE_HIGH_POWER);
+        mOptionsMenu.findItem(R.id.hide_system).setVisible(mShowSystem
+                && mListType != LIST_TYPE_HIGH_POWER);
     }
 
     @Override
