@@ -72,50 +72,6 @@ public class AdvancedAppSettings extends SettingsPreferenceFragment implements
         mHighPowerPreference = findPreference(KEY_HIGH_POWER_APPS);
         mSystemAlertWindowPreference = findPreference(KEY_SYSTEM_ALERT_WINDOW);
         mWriteSettingsPreference = findPreference(KEY_WRITE_SETTINGS_APPS);
-        updateUI();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (mPermissionReceiver != null) {
-            getContext().unregisterReceiver(mPermissionReceiver);
-            mPermissionReceiver = null;
-        }
-    }
-
-    private void updateUI() {
-        ArrayList<AppEntry> allApps = mSession.getAllApps();
-
-        int countAppWithDomainURLs = 0;
-        for (AppEntry entry : allApps) {
-            boolean hasDomainURLs =
-                    (entry.info.privateFlags & ApplicationInfo.PRIVATE_FLAG_HAS_DOMAIN_URLS) != 0;
-            if (hasDomainURLs) countAppWithDomainURLs++;
-        }
-        String summary = getResources().getQuantityString(
-                R.plurals.domain_urls_apps_summary, countAppWithDomainURLs, countAppWithDomainURLs);
-        mAppDomainURLsPreference.setSummary(summary);
-
-        int highPowerCount = PowerWhitelistBackend.getInstance().getWhitelistSize();
-        mHighPowerPreference.setSummary(getResources().getQuantityString(R.plurals.high_power_count,
-                highPowerCount, highPowerCount));
-
-        if (mPermissionReceiver != null) {
-            getContext().unregisterReceiver(mPermissionReceiver);
-        }
-        mPermissionReceiver = PermissionsSummaryHelper.getAppWithPermissionsCounts(getContext(),
-                mPermissionCallback);
-
-        Activity activity = getActivity();
-        ApplicationsState appState = ApplicationsState.getInstance(activity
-                .getApplication());
-        AppStateOverlayBridge overlayBridge = new AppStateOverlayBridge(activity,
-                appState, null);
-        AppStateWriteSettingsBridge writeSettingsBridge = new AppStateWriteSettingsBridge(
-                activity, appState, null);
-        new CountAppsWithOverlayPermission().execute(overlayBridge);
-        new CountAppsWithWriteSettingsPermission().execute(writeSettingsBridge);
     }
 
     @Override
@@ -130,7 +86,7 @@ public class AdvancedAppSettings extends SettingsPreferenceFragment implements
 
     @Override
     public void onPackageListChanged() {
-        updateUI();
+        // No-op.
     }
 
     @Override
