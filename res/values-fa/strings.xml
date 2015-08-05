@@ -339,9 +339,12 @@
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4150384963879569750">"تأیید"</string>
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"حذف"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"بیایید شروع کنیم."</string>
-    <string name="security_settings_fingerprint_enroll_start_message" msgid="6294541599045187369">"انگشتتان را روی حسگر اثر انگشت بگذارید. بعد از احساس لرزش آن را بردارید."</string>
-    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="3732060789409510229">"عالی است! اکنون دوباره تکرار کنید."</string>
-    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="8846866512704467036">"همان انگشت را روی حسگر اثر انگشت بگذارید و بعد از احساس لرزش آن را بردارید."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_start_message (3909929328942564524) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_repeat_title (4327640138658832625) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_repeat_message (4232813847507193627) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"اثر انگشت اضافه شد."</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"هر زمان این نماد را ببینید، می‌توانید از اثر انگشتتان برای شناسایی یا تأیید خرید استفاده کنید."</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"برای روشن کردن و باز کردن قفل دستگاهتان کافیست حسگر اثر انگشت را لمس کنید."</string>
@@ -394,6 +397,7 @@
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"‏گذروا‌ژه‌ای که وارد کردید درست است، اما متأسفانه داده‌ها مخدوش است. \n\nبرای ازسرگیری استفاده از تلفنتان، باید بازنشانی به تنظیمات کارخانه را انجام دهید. وقتی پس از بازنشانی، تلفنتان را راه‌اندازی می‌کنید، فرصت دارید تا هر داده‌ای را که در حساب Google شما پشتیبان گرفته شده بود، بازیابی کنید."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"تغییر روش ورودی"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"انتخاب قفل صفحه‌نمایش"</string>
+    <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"روش پشتیبان قفل صفحه را انتخاب کنید"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"قفل صفحه"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"تغییر قفل صفحه"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"‏تغییر/غیرفعال کردن الگو، PIN و گذرواژه امنیتی"</string>
@@ -492,9 +496,8 @@
     <string name="bluetooth_settings" msgid="1810521656168174329">"بلوتوث"</string>
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"بلوتوث"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"مدیریت اتصال ها، تنظیم نام دستگاه و قابلیت شناسایی"</string>
-    <string name="bluetooth_pairing_request" msgid="6385750334766370310">"درخواست مرتبط‌سازی بلوتوث"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="4954085254142996877">"دستگاه"</string>
-    <string name="bluetooth_pairing_key_msg" msgid="333005542843637754">"کد مرتبط‌سازی"</string>
+    <string name="bluetooth_pairing_request" msgid="2605098826364694673">"با <xliff:g id="DEVICE_NAME">%1$s</xliff:g> مرتبط شود؟"</string>
+    <string name="bluetooth_pairing_key_msg" msgid="418124944140102021">"کد مرتبط‌سازی بلوتوث"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"کد مرتبط‌سازی را وارد کنید سپس بازگشت یا ورود را فشار دهید"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"پین شامل حروف یا نماد است"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"معمولا 0000 یا 1234"</string>
@@ -504,7 +507,7 @@
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"‏برای مرتبط‌سازی با:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;مطمئن شوید که دستگاه این کلیدواژه را نمایش می‌دهد:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"‏از::&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;با این دستگاه جفت شود؟"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"‏برای جفت کردن با:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>روی آن تایپ کنید:<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>، سپس Return یا Enter را فشار دهید."</string>
-    <string name="bluetooth_pairing_shares_phonebook" msgid="1655930908614072491">"وقتی متصل است، اجازه دسترسی به مخاطبین و سابقه تماس شما داده شود."</string>
+    <string name="bluetooth_pairing_shares_phonebook" msgid="2277931851483023208">"به <xliff:g id="DEVICE_NAME">%1$s</xliff:g> اجازه داده شود به مخاطبین و سابقه تماس شما دسترسی داشته باشد"</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_connecting_error_message" msgid="1397388344342081090">"اتصال به <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ممکن نیست."</string>
     <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"اسکن برای دستگاه‌ها"</string>
@@ -2798,10 +2801,25 @@
     <string name="system_ui_settings" msgid="579824306467081123">"نمایش تنظیم‌گر واسط کاربری سیستم"</string>
     <string name="additional_permissions" msgid="6463784193877056080">"مجوزهای بیشتر"</string>
     <string name="additional_permissions_more" msgid="3538612272673191451">"<xliff:g id="COUNT">%1$d</xliff:g> مورد دیگر"</string>
-    <string name="usb_use_charging_only" msgid="2625934955897625321">"فقط هنگام شارژ"</string>
-    <string name="usb_use_file_transfers" msgid="479119385461326763">"‏انتقال فایل‌ها (MTP)"</string>
-    <string name="usb_use_photo_transfers" msgid="7794775645350330454">"‏انتقال عکس‌ها (PTP)"</string>
+    <!-- no translation found for usb_use_charging_only (167707234832117768) -->
+    <skip />
+    <!-- no translation found for usb_use_charging_only_desc (3066256793008540627) -->
+    <skip />
+    <!-- no translation found for usb_use_power_only (6304554004177083963) -->
+    <skip />
+    <!-- no translation found for usb_use_power_only_desc (708134382305728112) -->
+    <skip />
+    <!-- no translation found for usb_use_file_transfers (6978904665877785548) -->
+    <skip />
+    <!-- no translation found for usb_use_file_transfers_desc (1663579896876922124) -->
+    <skip />
+    <!-- no translation found for usb_use_photo_transfers (8276445551694259039) -->
+    <skip />
+    <!-- no translation found for usb_use_photo_transfers_desc (2963034811151325996) -->
+    <skip />
     <string name="usb_use_MIDI" msgid="5116404702692483166">"MIDI"</string>
+    <!-- no translation found for usb_use_MIDI_desc (6895383550910152384) -->
+    <skip />
     <string name="usb_use" msgid="3372728031108932425">"‏استفاده از USB برای"</string>
     <string name="inactive_apps_title" msgid="1317817863508274533">"برنامه‌های غیرفعال"</string>
     <string name="inactive_app_inactive_summary" msgid="6768756967594202411">"غیرفعال. برای تغییر حالت لمس کنید."</string>

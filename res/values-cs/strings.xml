@@ -343,9 +343,12 @@
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4150384963879569750">"OK"</string>
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"Smazat"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"Začínáme!"</string>
-    <string name="security_settings_fingerprint_enroll_start_message" msgid="6294541599045187369">"Přiložte prst na senzor otisků. Až ucítíte vibraci, zvedněte jej."</string>
-    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="3732060789409510229">"OK, nyní to zopakujte"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="8846866512704467036">"Přiložte na senzor otisků stejný prst a až ucítíte vibraci, zvedněte jej."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_start_message (3909929328942564524) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_repeat_title (4327640138658832625) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_repeat_message (4232813847507193627) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"Otisk byl přidán!"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"Kdykoli se zobrazí tato ikona, můžete se identifikovat nebo autorizovat nákup pomocí svého otisku prstu."</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"Probuďte a odemkněte zařízení klepnutím na senzor otisků prstů."</string>
@@ -398,6 +401,7 @@
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"Zadané heslo je správné, avšak data jsou poškozena.\n\nChcete-li telefon nadále používat, je nutné v něm obnovit tovární nastavení. Až budete telefon po obnově znovu nastavovat, bude možné obnovit veškerá data, která byla zálohována na váš účet Google."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Přepnout metodu zadávání"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Zámek obrazovky"</string>
+    <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Zvolte záložní metodu zámku obrazovky"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Zámek obrazovky"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Změna zámku obrazovky"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Změnit nebo deaktivovat bezpečnostní gesto, kód PIN nebo heslo"</string>
@@ -508,9 +512,8 @@
     <string name="bluetooth_settings" msgid="1810521656168174329">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"Bluetooth"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Umožňuje spravovat připojení, nastavit název zařízení a viditelnost"</string>
-    <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Požadavek na párování zařízení Bluetooth"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="4954085254142996877">"Zařízení"</string>
-    <string name="bluetooth_pairing_key_msg" msgid="333005542843637754">"Párovací kód"</string>
+    <string name="bluetooth_pairing_request" msgid="2605098826364694673">"Spárovat se zařízením <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
+    <string name="bluetooth_pairing_key_msg" msgid="418124944140102021">"Párovací kód Bluetooth"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"Zadejte párovací kód a poté stiskněte Return nebo Enter."</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"Kód PIN obsahuje písmena nebo symboly"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"Obvykle 0000 nebo 1234"</string>
@@ -520,7 +523,7 @@
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"Párování se zařízením:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Zkontrolujte, zda zařízení zobrazuje tento přístupový klíč:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"Ze zařízení:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Spárovat s tímto zařízením?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"Párování se zařízením:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Zadejte:<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g> a poté stiskněte klávesu Return nebo Enter."</string>
-    <string name="bluetooth_pairing_shares_phonebook" msgid="1655930908614072491">"Udělit připojenému zařízení přístup ke kontaktům a historii volání"</string>
+    <string name="bluetooth_pairing_shares_phonebook" msgid="2277931851483023208">"Povolit zařízení <xliff:g id="DEVICE_NAME">%1$s</xliff:g> přístup k vašim kontaktům a historii volání"</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_connecting_error_message" msgid="1397388344342081090">"K zařízení <xliff:g id="DEVICE_NAME">%1$s</xliff:g> se nelze připojit."</string>
     <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"Vyhledat zařízení"</string>
@@ -2832,10 +2835,25 @@
     <string name="system_ui_settings" msgid="579824306467081123">"Zobrazit tuner SystemUI"</string>
     <string name="additional_permissions" msgid="6463784193877056080">"Další oprávnění"</string>
     <string name="additional_permissions_more" msgid="3538612272673191451">"Počet: <xliff:g id="COUNT">%1$d</xliff:g>"</string>
-    <string name="usb_use_charging_only" msgid="2625934955897625321">"Pouze nabíjení"</string>
-    <string name="usb_use_file_transfers" msgid="479119385461326763">"Přenos souborů (MTP)"</string>
-    <string name="usb_use_photo_transfers" msgid="7794775645350330454">"Přenos fotek (PTP)"</string>
+    <!-- no translation found for usb_use_charging_only (167707234832117768) -->
+    <skip />
+    <!-- no translation found for usb_use_charging_only_desc (3066256793008540627) -->
+    <skip />
+    <!-- no translation found for usb_use_power_only (6304554004177083963) -->
+    <skip />
+    <!-- no translation found for usb_use_power_only_desc (708134382305728112) -->
+    <skip />
+    <!-- no translation found for usb_use_file_transfers (6978904665877785548) -->
+    <skip />
+    <!-- no translation found for usb_use_file_transfers_desc (1663579896876922124) -->
+    <skip />
+    <!-- no translation found for usb_use_photo_transfers (8276445551694259039) -->
+    <skip />
+    <!-- no translation found for usb_use_photo_transfers_desc (2963034811151325996) -->
+    <skip />
     <string name="usb_use_MIDI" msgid="5116404702692483166">"MIDI"</string>
+    <!-- no translation found for usb_use_MIDI_desc (6895383550910152384) -->
+    <skip />
     <string name="usb_use" msgid="3372728031108932425">"Použití USB:"</string>
     <string name="inactive_apps_title" msgid="1317817863508274533">"Neaktivní aplikace"</string>
     <string name="inactive_app_inactive_summary" msgid="6768756967594202411">"Neaktivní. Přepnete klepnutím."</string>
