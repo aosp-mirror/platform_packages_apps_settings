@@ -193,6 +193,19 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
             public void onClick(DialogInterface dialog, int which) {
                 if (which == DialogInterface.BUTTON_POSITIVE) {
                     if (mWifiP2pManager != null) {
+                        String name = mDeviceNameText.getText().toString();
+                        if (name != null) {
+                            for (int i = 0; i < name.length(); i++) {
+                                char cur = name.charAt(i);
+                                if(!Character.isDigit(cur) && !Character.isLetter(cur)
+                                        && cur != '-' && cur != '_' && cur != ' ') {
+                                    Toast.makeText(getActivity(),
+                                            R.string.wifi_p2p_failed_rename_message,
+                                            Toast.LENGTH_LONG).show();
+                                    return;
+                                }
+                            }
+                        }
                         mWifiP2pManager.setDeviceName(mChannel,
                                 mDeviceNameText.getText().toString(),
                                 new WifiP2pManager.ActionListener() {
