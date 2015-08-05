@@ -18,6 +18,7 @@ package com.android.settings;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.bluetooth.BluetoothManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkPolicyManager;
 import android.net.wifi.WifiManager;
@@ -91,6 +92,12 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
             if (policyManager != null) {
                 String subscriberId = telephonyManager.getSubscriberId(mSubId);
                 policyManager.factoryReset(subscriberId);
+            }
+
+            BluetoothManager btManager = (BluetoothManager)
+                    context.getSystemService(Context.BLUETOOTH_SERVICE);
+            if (btManager != null) {
+                btManager.getAdapter().factoryReset();
             }
 
             Toast.makeText(context, R.string.reset_network_complete_toast, Toast.LENGTH_SHORT)
