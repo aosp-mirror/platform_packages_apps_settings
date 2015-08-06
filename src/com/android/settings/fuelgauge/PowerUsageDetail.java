@@ -430,7 +430,8 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
             } else {
                 removePreference(KEY_TWO_BUTTONS);
             }
-            if (mApp != null) {
+            if (mApp != null
+                    && PowerWhitelistBackend.getInstance().isWhitelisted(mApp.packageName)) {
                 mHighPower = findPreference(KEY_HIGH_POWER);
                 mHighPower.setOnPreferenceClickListener(new OnPreferenceClickListener() {
                     @Override
