@@ -339,9 +339,9 @@
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4150384963879569750">"Í lagi"</string>
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"Eyða"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"Við skulum byrja!"</string>
-    <string name="security_settings_fingerprint_enroll_start_message" msgid="6294541599045187369">"Settu fingurinn á fingrafaraskynjarann. Lyftu honum eftir að þú finnur fyrir titringi."</string>
-    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="3732060789409510229">"Gott! Endurtaktu svo."</string>
-    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="8846866512704467036">"Settu sama fingur á fingrafaraskynjarann og lyftu honum eftir að þú finnur fyrir titringi."</string>
+    <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"Settu fingurinn á skynjarann og lyftu honum þegar þú finnur titring"</string>
+    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="4327640138658832625">"Gott! Gerðu þetta nú aftur"</string>
+    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"Færðu fingurinn svolítið til að bæta við mismunandi hlutum fingrafarsins"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"Fingrafari bætt við!"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"Alltaf þegar þú sérð þetta tákn geturðu notað fingrafarið þitt til að auðkenna þig eða til að heimila kaup."</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"Snertu einfaldlega fingrafaraskynjarann til að taka tækið úr biðstöðu og lás."</string>
@@ -392,6 +392,7 @@
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"Aðgangsorðið sem þú slóst inn er rétt en því miður eru gögnin þín skemmd. \n\nÞú þarft að núllstilla símann til að halda áfram að nota hann. Þegar þú hefur sett símann upp aftur eftir núllstillingu færðu tækifæri til að endurheimta gögn sem þú hefur afritað yfir á Google reikninginn þinn."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Skipta um innsláttaraðferð"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Veldu skjálás"</string>
+    <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Veldu varaleið fyrir skjálás"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Skjálás"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Breyta lásskjá"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Breyta eða slökkva á öryggi með mynstri, PIN eða aðgangsorði"</string>
@@ -490,9 +491,8 @@
     <string name="bluetooth_settings" msgid="1810521656168174329">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"Bluetooth"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Stjórna tengingum, stilla heiti tækisins og sýnileika"</string>
-    <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Beiðni um Bluetooth-pörun"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="4954085254142996877">"Tæki"</string>
-    <string name="bluetooth_pairing_key_msg" msgid="333005542843637754">"Pörunarkóði"</string>
+    <string name="bluetooth_pairing_request" msgid="2605098826364694673">"Para við <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
+    <string name="bluetooth_pairing_key_msg" msgid="418124944140102021">"Bluetooth-pörunarkóði"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"Sláðu inn pörunarkóðann og ýttu svo á Return eða Enter"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"PIN inniheldur bókstafi eða tákn"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"Yfirleitt 0000 eða 1234"</string>
@@ -502,7 +502,7 @@
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"Til að para við:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Gakktu úr skugga um að þessi aðgangslykill birtist:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"Frá:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Para við þetta tæki?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"Til að para við:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Sláðu inn:<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g> og ýttu síðan á vendihnappinn eða Enter."</string>
-    <string name="bluetooth_pairing_shares_phonebook" msgid="1655930908614072491">"Veita aðgang að tengiliðunum þínum og símtalaferli þegar tengingu hefur verið komið á."</string>
+    <string name="bluetooth_pairing_shares_phonebook" msgid="2277931851483023208">"Veita <xliff:g id="DEVICE_NAME">%1$s</xliff:g> aðgang að tengiliðunum þínum og símtalaferli"</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_connecting_error_message" msgid="1397388344342081090">"Ekki tókst að tengjast <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"Leita að tækjum"</string>

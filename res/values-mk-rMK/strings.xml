@@ -339,9 +339,9 @@
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4150384963879569750">"Во ред"</string>
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"Избриши"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"Да почнеме!"</string>
-    <string name="security_settings_fingerprint_enroll_start_message" msgid="6294541599045187369">"Поставете го прстот на сензорот за отпечатоци. Подигнете го откако ќе почувствувате вибрација."</string>
-    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="3732060789409510229">"Одлично! Сега повтор."</string>
-    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="8846866512704467036">"Поставете го истиот прст на сензорот за отпечатоци и подигнете го откако ќе почувствувате вибрација."</string>
+    <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"Ставете го прстот на сензорот и подигнете го откако ќе почувствувате вибрации"</string>
+    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="4327640138658832625">"Одлично! Сега повторете"</string>
+    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"Мрдајте малку со прстот за да ги додадете сите различни делови од вашиот отпечаток"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"Додај отпечаток!"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"Секогаш кога ќе ја видите оваа икона, може да го користите вашиот отпечаток за идентификација или да авторизирате купување."</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"Само допрете го сензорот за отпечатоци за да го разбудите и отклучите уредот."</string>
@@ -392,6 +392,7 @@
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"Лозинката што ја внесовте е правилна, но, за жал, податоците се оштетени. \n\nЗа да продолжите да го користите телефонот, треба да извршите фабричко ресетирање. Кога ќе го поставувате телефонот по ресетирањето, ќе имате можност да ги обновите сите податоци што имаат резервни копии на вашата сметка на Google."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Префрли метод на внес"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Избери заклучување на екранот"</string>
+    <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Изберете резервен метод за заклучување на екранот"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Заклучи екран"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Промени закл. на екран"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Промени/оневозможи обезб. со шема, ПИН или лозинка"</string>
@@ -490,9 +491,8 @@
     <string name="bluetooth_settings" msgid="1810521656168174329">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"Bluetooth"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Управувај со конекции, подеси име и откривливост на уредот"</string>
-    <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Барање за спарување со Bluetooth"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="4954085254142996877">"Уред"</string>
-    <string name="bluetooth_pairing_key_msg" msgid="333005542843637754">"Код за спарување"</string>
+    <string name="bluetooth_pairing_request" msgid="2605098826364694673">"Спарете со <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
+    <string name="bluetooth_pairing_key_msg" msgid="418124944140102021">"Код за спарување на Bluetooth"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"Внесете го кодот за спарување, а потоа притиснете Врати или Внеси"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"ПИН-от содржи букви или симболи"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"Обично 0000 или 1234"</string>
@@ -502,7 +502,7 @@
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"За да се спари со:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Проверете дали се прикажува оваа лозинка:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"Од:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Спари се со овој уред?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"За да се спари со:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Напишете на него:<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>, потоа притиснете „Врати“ или „Внеси“."</string>
-    <string name="bluetooth_pairing_shares_phonebook" msgid="1655930908614072491">"Кога е поврзано, одобри пристап до контактите и историјата на повиците."</string>
+    <string name="bluetooth_pairing_shares_phonebook" msgid="2277931851483023208">"Дозволете <xliff:g id="DEVICE_NAME">%1$s</xliff:g> да пристапува до контактите и историјата на повици."</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_connecting_error_message" msgid="1397388344342081090">"Не можеше да се поврзе со <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"Скенирај за уреди"</string>

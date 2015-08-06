@@ -339,9 +339,9 @@
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4150384963879569750">"ตกลง"</string>
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"ลบ"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"มาเริ่มต้นกันเลย!"</string>
-    <string name="security_settings_fingerprint_enroll_start_message" msgid="6294541599045187369">"วางนิ้วมือบนเซ็นเซอร์ลายนิ้วมือ แล้วยกขึ้นหลังจากที่คุณรู้สึกว่ามีการสั่น"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="3732060789409510229">"เยี่ยม! ทำซ้ำเลย"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="8846866512704467036">"วางนิ้วมือเดียวกันบนเซ็นเซอร์ลายนิ้วมือและยกขึ้นหลังจากที่คุณรู้สึกว่ามีการสั่น"</string>
+    <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"วางนิ้วลงบนเซ็นเซอร์และยกขึ้นหลังจากรู้สึกถึงการสั่น"</string>
+    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="4327640138658832625">"เยี่ยม! ทำซ้ำเลย"</string>
+    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"เลื่อนนิ้วเล็กน้อยเพื่อเพิ่มส่วนต่างๆ ทั้งหมดของลายนิ้วมือ"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"เพิ่มลายนิ้วมือแล้ว!"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"เมื่อใดก็ตามที่คุณเห็นไอคอนนี้ คุณสามารถใช้ลายนิ้วมือเพื่อระบุตัวตนหรือเพื่ออนุญาตการซื้อได้"</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"เพียงแค่แตะเซ็นเซอร์ลายนิ้วมือเพื่อปลุกและปลดล็อกอุปกรณ์"</string>
@@ -392,6 +392,7 @@
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"รหัสผ่านที่คุณป้อนถูกต้อง แต่ปรากฏว่ามีข้อมูลเสียหาย \n\nหากต้องการใช้โทรศัพท์ต่อ คุณต้องรีเซ็ตเครื่องเป็นค่าเริ่มต้น เมื่อคุณตั้งค่าโทรศัพท์หลังรีเซ็ตแล้ว คุณจะสามารถคืนค่าข้อมูลที่ได้สำรองไว้ในบัญชี Google ได้"</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"สลับวิธีการป้อนข้อมูล"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"เลือกการล็อกหน้าจอ"</string>
+    <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"เลือกวิธีสำรองในการล็อกหน้าจอ"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"ล็อกหน้าจอ"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"เปลี่ยนหน้าจอล็อก"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"เปลี่ยนหรือปิดการใช้งานรูปแบบ, PIN หรือความปลอดภัยของรหัสผ่าน"</string>
@@ -490,9 +491,8 @@
     <string name="bluetooth_settings" msgid="1810521656168174329">"บลูทูธ"</string>
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"บลูทูธ"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"จัดการการเชื่อมต่อ ตั้งชื่ออุปกรณ์และการค้นพบ"</string>
-    <string name="bluetooth_pairing_request" msgid="6385750334766370310">"คำขอกำหนดค่าอุปกรณ์ให้ตรงกันทางบลูทูธ"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="4954085254142996877">"อุปกรณ์"</string>
-    <string name="bluetooth_pairing_key_msg" msgid="333005542843637754">"รหัสการจับคู่"</string>
+    <string name="bluetooth_pairing_request" msgid="2605098826364694673">"จับคู่กับ <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ไหม"</string>
+    <string name="bluetooth_pairing_key_msg" msgid="418124944140102021">"รหัสการจับคู่บลูทูธ"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"พิมพ์รหัสการจับคู่แล้วกด Return หรือ Enter"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"PIN ประกอบดัวยตัวอักษรหรือสัญลักษณ์"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"ปกติจะเป็น 0000 หรือ 1234"</string>
@@ -502,7 +502,7 @@
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"หากต้องการจับคู่กับ:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;ตรวจสอบให้แน่ใจว่าอุปกรณ์แสดงรหัสผ่านนี้:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"จาก:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;จับคู่กับอุปกรณ์นี้หรือไม่"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"ในการจับคู่กับ: <xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g> ให้พิมพ์: <xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g> แล้วกด Return หรือ Enter"</string>
-    <string name="bluetooth_pairing_shares_phonebook" msgid="1655930908614072491">"ให้สิทธิ์การเข้าถึงรายชื่อติดต่อและประวัติการโทรเมื่อเชื่อมต่อแล้ว"</string>
+    <string name="bluetooth_pairing_shares_phonebook" msgid="2277931851483023208">"อนุญาตให้ <xliff:g id="DEVICE_NAME">%1$s</xliff:g> เข้าถึงรายชื่อติดต่อและประวัติการโทรของคุณ"</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_connecting_error_message" msgid="1397388344342081090">"ไม่สามารถเชื่อมต่อกับ <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"สแกนหาอุปกรณ์"</string>

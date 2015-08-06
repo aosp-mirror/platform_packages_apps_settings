@@ -339,9 +339,9 @@
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4150384963879569750">"OK"</string>
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"Törlés"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"Lássunk neki!"</string>
-    <string name="security_settings_fingerprint_enroll_start_message" msgid="6294541599045187369">"Helyezze ujját az ujjlenyomat-olvasóra. Emelje fel, ha rezgést érez."</string>
-    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="3732060789409510229">"Sikerült! Most újra."</string>
-    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="8846866512704467036">"Helyezze ugyanazt az ujját az ujjlenyomat-olvasóra, majd emelje fel, ha rezgést érez."</string>
+    <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"Helyezze az ujját az érzékelőre, és emelje fel a rezgést követően"</string>
+    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="4327640138658832625">"Sikerült! Most ismételje meg"</string>
+    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"Óvatosan mozgassa ujját a teljes ujjlenyomat levételéhez"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"Ujjlenyomat hozzáadva!"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"Ha ezt az ikont látja, akkor lehetősége van arra, hogy ujjlenyomatával azonosítsa magát, vagy engedélyezze a vásárlást."</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"Csak érintse meg az ujjlenyomat-érzékelőt az eszköz felébresztéséhez és feloldásához."</string>
@@ -392,6 +392,7 @@
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"A megadott jelszó helyes, adatai azonban sajnos sérültek. \n\nA telefon használatának folytatásához végre kell hajtania a gyári adatok visszaállítását. Amikor ezt követően beállítja a telefont, lehetősége nyílik arra, hogy helyreállítsa mindazokat az adatokat, amelyekről másolat található Google-fiókjában."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Beviteli mód váltása"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Képernyőzár választása"</string>
+    <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Válassza ki a biztonsági képernyő-zárolási módszert"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Képernyő zárolása"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Képernyőzár mód."</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Minta, PIN kód és jelszavas védelem módosítása és kikapcsolása"</string>
@@ -490,9 +491,8 @@
     <string name="bluetooth_settings" msgid="1810521656168174329">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"Bluetooth"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Kapcsolatok kezelése, eszközök nevének és felderíthetőségének beállítása"</string>
-    <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Bluetooth párosítási kérelem"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="4954085254142996877">"Eszköz"</string>
-    <string name="bluetooth_pairing_key_msg" msgid="333005542843637754">"Párosítókód"</string>
+    <string name="bluetooth_pairing_request" msgid="2605098826364694673">"Párosítja a következővel: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
+    <string name="bluetooth_pairing_key_msg" msgid="418124944140102021">"Bluetooth-párosítókód"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"Gépelje be a párosítókódot, majd nyomja meg az Enter vagy a Return gombot"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"A PIN kód betűket vagy szimbólumokat tartalmaz"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"Általában 0000 vagy 1234"</string>
@@ -502,7 +502,7 @@
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"Párosítás ezzel:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Győződjön meg arról, hogy a következő azonosítókulcs látható rajta:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"Küldő:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Párosítja a készüléket?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"A(z) <xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g> eszközzel való párosításhoz írja be rajta a következőt: <xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g> <xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>, majd nyomja meg a Return vagy az Enter billentyűt."</string>
-    <string name="bluetooth_pairing_shares_phonebook" msgid="1655930908614072491">"Hozzáférés biztosítása a névjegyekhez és híváselőzményekhez összekapcsolt állapotban."</string>
+    <string name="bluetooth_pairing_shares_phonebook" msgid="2277931851483023208">"A(z) <xliff:g id="DEVICE_NAME">%1$s</xliff:g> engedélyezése a névjegyek és híváselőzmények eléréséhez"</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_connecting_error_message" msgid="1397388344342081090">"Nem sikerült csatlakozni a következőhöz: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"Eszközök keresése"</string>

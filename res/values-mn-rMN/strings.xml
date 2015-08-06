@@ -339,9 +339,9 @@
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4150384963879569750">"ТИЙМ"</string>
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"Устгах"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"Эхэлцгээе!"</string>
-    <string name="security_settings_fingerprint_enroll_start_message" msgid="6294541599045187369">"Хурууны хээ мэдрэгч дээр хурууны хээ нь орсон хурууг уншуулна уу. Чичиргээг мэдэрсний дараа хурууг авна уу."</string>
-    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="3732060789409510229">"Маш сайн байна! Үйлдлийг дахин давтана уу."</string>
-    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="8846866512704467036">"Хурууны хээ мэдрэгч дээр хурууны хээ нь орсон хурууг уншуулна уу мөн чичиргээг мэдэрсний дараа хурууг авна уу."</string>
+    <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"Мэдрэгч дээр хуруугаа тавиад, чичиргээ мэдрэгдэхэд аваарай"</string>
+    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="4327640138658832625">"Сайн байна! Үйлдлийг дахин давтана уу."</string>
+    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"Хурууны хээгээ бүрэн гаргахын тулд хуруугаа удаанаар хөдөлгөнө үү."</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"Хурууны хээг нэмж оруулсан болно!"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"Энэ тэмдэг гарч ирсэн тохиолдолд та өөрийн хурууны хээг оруулах эсвэл худалдан авалт хийх зөвшөөрөл олгох боломжтой болох юм."</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"Утсаа сэрээх, түгжээг тайлахдаа хурууны хээ мэдрэгчид хүрээрэй."</string>
@@ -392,6 +392,7 @@
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"Таны оруулсан нууц үг зөв боловч таны өгөгдөл гэмтсэн байна. \n\nУтсаа үргэлжлүүлэн ашиглахын тулд үйлдвэрээс гарсан анхны төлөв рүү сэргээх хэрэгтэй. Сэргээсний дараа утсаа тохируулахдаа өөрийн Google бүртгэл дээр нөөцөлсөн аливаа өгөгдлийг эргүүлэн сэргээх боломжтой."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Оруулах аргыг солих"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Дэлгэцийн түгжээг сонгоно уу"</string>
+    <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Дэлгэц түгжих нөөц аргачлалаа сонгох"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Дэлгэцийн түгжээ"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Дэлгэцийн түгжээг өөрчлөх"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Загвар, PIN, буюу нууц үгийг өөрчлөх буюу идэвхгүйжүүлэх"</string>
@@ -480,9 +481,8 @@
     <string name="bluetooth_settings" msgid="1810521656168174329">"Блютүүт"</string>
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"Блютүүт"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Холболтуудыг удирдах, төхөөрөмжийн нэр &amp; харагдалтыг тохируулах"</string>
-    <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Блютүүт хослуулах хүсэлт"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="4954085254142996877">"Төхөөрөмж"</string>
-    <string name="bluetooth_pairing_key_msg" msgid="333005542843637754">"Хослуулах код"</string>
+    <string name="bluetooth_pairing_request" msgid="2605098826364694673">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>-тай хослох уу?"</string>
+    <string name="bluetooth_pairing_key_msg" msgid="418124944140102021">"Bluetooth хослох код"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"Хослуулах кодыг оруулаад Return буюу Enter дарна уу"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"PIN нь үсэг буюу тэмдэгт агуулна"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"Гол төлөв 0000 буюу 1234"</string>
@@ -492,7 +492,7 @@
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"Дараахтай хослуулах:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Дараах түлхүүрийг харуулж байгаа эсэхийг анхаарна уу:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"Юунаас:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Энэ төхөөрөмжтэй хослуулах уу?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>-тай хослуулахын тулд дээр нь <xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>-г оруулаанд Буцах буюу Оруулах товчийг дарна уу."</string>
-    <string name="bluetooth_pairing_shares_phonebook" msgid="1655930908614072491">"Холбогдсон үед таны харилцагч болон дуудлагын түүхэд хандалт хийх боломжтой."</string>
+    <string name="bluetooth_pairing_shares_phonebook" msgid="2277931851483023208">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> таны харилцагчийн хаяг, дуудлагын түүхэнд хандахыг зөвшөөрөх"</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_connecting_error_message" msgid="1397388344342081090">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>-д холбогдож чадсангүй."</string>
     <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"Төхөөрөмжүүдийг скан хийх"</string>
@@ -2744,7 +2744,7 @@
     <string name="default_assist_none" msgid="3709083569608735487">"Байхгүй"</string>
     <string name="choose_assist_title" msgid="2373353478479305516">"Туслах апп сонгох"</string>
     <string name="assistant_security_warning_title" msgid="8673079231955467177">"<xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g>-г туслахаа болгох уу?"</string>
-    <string name="assistant_security_warning" msgid="8498726261327239136">"Туслах нь дэлгэцэнд харагддаг болон апп дотор ашигладаг мэдээлэл зэрэг таны системд ашигладаг мэдээллийг уншина."</string>
+    <string name="assistant_security_warning" msgid="8498726261327239136">"Туслах нь дэлгэцэнд харагддаг, апп дотор ашигладаг мэдээлэл зэрэг таны системд ашигладаг мэдээллийг уншина."</string>
     <string name="assistant_security_warning_agree" msgid="7710290206928033908">"Зөвшөөрөх"</string>
     <string name="assistant_security_warning_disagree" msgid="877419950830205913">"Зөвшөөрөхгүй"</string>
     <string name="choose_voice_input_title" msgid="975471367067718019">"Дууны оролтыг сонгох"</string>

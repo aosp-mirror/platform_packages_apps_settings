@@ -339,9 +339,9 @@
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4150384963879569750">"ठीक छ"</string>
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"मेटाउनुहोस्"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"सुरु गरौं!"</string>
-    <string name="security_settings_fingerprint_enroll_start_message" msgid="6294541599045187369">"औठाछाप सेन्सरमा तपाईँको औंला राख्नुहोस्। तपाईंले एक कम्पन महसुस गर्नुभएपछि उठाउनुहोस्।"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="3732060789409510229">"उत्तम! अब दोहोर्‍याउनुहोस्।"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="8846866512704467036">"औंठाछाप सेन्सरमा उही औंला राख्नुहोस् र तपाईंले एक कम्पन महसुस गर्नुभएपछि औंला उठाउनुहोस्।"</string>
+    <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"सेन्सरमा आफ्नो औंला राख्नुहोस्  र तपाईंले भाइब्रेसन महसुस गरेपछि उठाउनुहोस्"</string>
+    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="4327640138658832625">"अति उत्तम! अब दोहोर्‍याउनुहोस्।"</string>
+    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"तपाईंको फिंगरप्रिन्टको सबै फरक भागहरु थप्न आफ्नो औंला बिस्तारै सार्नुहोस्"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"औँठाछाप थपियो!"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"तपाईं यस आइकन जहिले देख्नुहुन्छ, तपाईं पहिचानको लागि वा एक खरीद अधिकारको निम्ति आफ्नो औठाछाप प्रयोग गर्न सक्नुहुन्छ।"</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"जगाउन र तपाईँको यन्त्रलाई अनलक गर्न फिंगरप्रिन्ट सेन्सरमा छुनुहोस्।"</string>
@@ -392,6 +392,7 @@
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"तपाईँले प्रविष्ट गर्नुभएको पासवर्ड ठीक छ, तर दुर्भाग्यबश तपाईँको डेटा बिग्रिएको छ।\n\n तपाईँको फोन पुन: प्रयोग गर्न फ्याक्ट्री रिसेट गर्न पर्छ। रिसेट गरे पश्चात जब तपाईँ आफ्नो फोन सेटअप गर्नुहुन्छ तपाईँले Google खातामा ब्याकअप भए सम्मका डेटा पुनर्स्थापना गर्ने अवसर प्राप्त गर्नु हुनेछ।"</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"स्विच इनपुट विधि"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"स्क्रिन लक छान्नुहोस्"</string>
+    <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"तपाईँको ब्याकअप स्क्रिन लक विधि छनौंट गर्नुहोस्"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"स्क्रिन लक"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"लक स्क्रिन बदल्नुहोस्"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"ढाँचा, PIN वा पासवर्ड सुरक्षा बदल्नुहोस् वा असक्षम पार्नुहोस्"</string>
@@ -490,9 +491,8 @@
     <string name="bluetooth_settings" msgid="1810521656168174329">"ब्लुटुथ"</string>
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"ब्लुटुथ"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"जडान प्रबन्ध गर्नुहोस्, उपकरण नाम मिलाउनुहोस्, पत्ता लगाउन योग्यता"</string>
-    <string name="bluetooth_pairing_request" msgid="6385750334766370310">"ब्लुटुथ जोडा बाँध्ने अनुरोध"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="4954085254142996877">"उपकरण"</string>
-    <string name="bluetooth_pairing_key_msg" msgid="333005542843637754">"जोडी कोड"</string>
+    <string name="bluetooth_pairing_request" msgid="2605098826364694673">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> सँग जोडा मिलाउने हो?"</string>
+    <string name="bluetooth_pairing_key_msg" msgid="418124944140102021">"ब्लुटुथ जोडा मिलाउने कोड"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"जोडी कोड टाइप गर्नुहोस् त्यसपछि रिटर्न वा इन्टर थिच्नुहोस्"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"PIN मा अक्षर वा प्रतीकहरू समाविष्ट हुन्छ"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"सामान्यत ०००० वा १२३४"</string>
@@ -502,7 +502,7 @@
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> को साथ जोडी पार्न निश्चित गर्नुहोस् यसले यो पास कुञ्जी देखाइरहेको छ <xliff:g id="PASSKEY">%2$s</xliff:g>"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"बाट: &lt;br&gt; &lt;b&gt; <xliff:g id="DEVICE_NAME">%1$s</xliff:g> &lt;/ b&gt; यस उपकरणका साथ जोडा बाँध्ने हो?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>सँग जोडी गर्न यसमा टाइप गर्नुहोस्: <xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g> <xliff:g id="PASSKEY">%2$s</xliff:g> <xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g> अनि रिटर्न वा इन्टर थिच्नुहोस्।"</string>
-    <string name="bluetooth_pairing_shares_phonebook" msgid="1655930908614072491">"जडान भएको बेला आफ्ना सम्पर्क र कल इतिहासमा पहुँच दिनुहोस्।"</string>
+    <string name="bluetooth_pairing_shares_phonebook" msgid="2277931851483023208">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>लाई तपाईंको सम्पर्क र कल इतिहास पहुँच गर्न अनुमति दिनुहोस्"</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_connecting_error_message" msgid="1397388344342081090">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> उपकरणसँग जडान गर्न सकेन।"</string>
     <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"उपकरणहरूको लागि स्क्यान गर्नुहोस्"</string>
