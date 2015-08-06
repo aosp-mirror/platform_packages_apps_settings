@@ -118,7 +118,10 @@ public final class ChooseLockSettingsHelper {
             boolean returnCredentials, boolean external, boolean hasChallenge,
             long challenge) {
         boolean launched = false;
-        switch (mLockPatternUtils.getKeyguardStoredPasswordQuality(UserHandle.myUserId())) {
+
+        int effectiveUserId = Utils.getEffectiveUserId(mActivity);
+
+        switch (mLockPatternUtils.getKeyguardStoredPasswordQuality(effectiveUserId)) {
             case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
                 launched = launchConfirmationActivity(request, title, header, description,
                         returnCredentials || hasChallenge
