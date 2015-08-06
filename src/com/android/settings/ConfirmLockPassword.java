@@ -28,8 +28,8 @@ import com.android.settingslib.animation.DisappearAnimationUtils;
 
 import android.app.Fragment;
 import android.app.admin.DevicePolicyManager;
-import android.content.Context;
 import android.content.Intent;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -98,6 +98,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
         private AppearAnimationUtils mAppearAnimationUtils;
         private DisappearAnimationUtils mDisappearAnimationUtils;
         private boolean mBlockImm;
+        private int mEffectiveUserId;
 
         // required constructor for fragments
         public ConfirmLockPasswordFragment() {
@@ -108,6 +109,8 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             mLockPatternUtils = new LockPatternUtils(getActivity());
+            mEffectiveUserId = Utils.getEffectiveUserId(getActivity());
+
             if (savedInstanceState != null) {
                 mNumWrongConfirmAttempts = savedInstanceState.getInt(
                         KEY_NUM_WRONG_CONFIRM_ATTEMPTS, 0);
@@ -118,7 +121,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
             final int storedQuality = mLockPatternUtils.getKeyguardStoredPasswordQuality(
-                    UserHandle.myUserId());
+                    mEffectiveUserId);
             View view = inflater.inflate(R.layout.confirm_lock_password, null);
 
             mPasswordEntry = (TextView) view.findViewById(R.id.password_entry);
@@ -238,7 +241,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
         @Override
         public void onResume() {
             super.onResume();
-            long deadline = mLockPatternUtils.getLockoutAttemptDeadline(UserHandle.myUserId());
+            long deadline = mLockPatternUtils.getLockoutAttemptDeadline(mEffectiveUserId);
             if (deadline != 0) {
                 handleAttemptLockout(deadline);
             } else {
@@ -314,7 +317,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                 return;
             }
 
-            onPasswordChecked(false, intent, 0);
+            onPasswordChecked(false, intent, 0, mEffectiveUserId);
         }
 
         private boolean isInternalActivity() {
@@ -324,11 +327,12 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
         private void startVerifyPassword(final String pin, final Intent intent) {
             long challenge = getActivity().getIntent().getLongExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, 0);
+            final int localEffectiveUserId = mEffectiveUserId;
             mPendingLockCheck = LockPatternChecker.verifyPassword(
                     mLockPatternUtils,
                     pin,
                     challenge,
-                    UserHandle.myUserId(),
+                    localEffectiveUserId,
                     new LockPatternChecker.OnVerifyCallback() {
                         @Override
                         public void onVerified(byte[] token, int timeoutMs) {
@@ -340,16 +344,17 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                                         ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN,
                                         token);
                             }
-                            onPasswordChecked(matched, intent, timeoutMs);
+                            onPasswordChecked(matched, intent, timeoutMs, localEffectiveUserId);
                         }
                     });
         }
 
         private void startCheckPassword(final String pin, final Intent intent) {
+            final int localEffectiveUserId = mEffectiveUserId;
             mPendingLockCheck = LockPatternChecker.checkPassword(
                     mLockPatternUtils,
                     pin,
-                    UserHandle.myUserId(),
+                    localEffectiveUserId,
                     new LockPatternChecker.OnCheckCallback() {
                         @Override
                         public void onChecked(boolean matched, int timeoutMs) {
@@ -361,7 +366,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                                 intent.putExtra(
                                         ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD, pin);
                             }
-                            onPasswordChecked(matched, intent, timeoutMs);
+                            onPasswordChecked(matched, intent, timeoutMs, localEffectiveUserId);
                         }
                     });
         }
@@ -384,14 +389,15 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             }
         }
 
-        private void onPasswordChecked(boolean matched, Intent intent, int timeoutMs) {
+        private void onPasswordChecked(boolean matched, Intent intent, int timeoutMs,
+                int effectiveUserId) {
             mPasswordEntryInputDisabler.setInputEnabled(true);
             if (matched) {
                 startDisappearAnimation(intent);
             } else {
                 if (timeoutMs > 0) {
                     long deadline = mLockPatternUtils.setLockoutAttemptDeadline(
-                            UserHandle.myUserId(), timeoutMs);
+                            effectiveUserId, timeoutMs);
                     handleAttemptLockout(deadline);
                 } else {
                     showError(getErrorMessage());
