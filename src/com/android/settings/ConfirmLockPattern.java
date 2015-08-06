@@ -102,6 +102,8 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
         private AppearAnimationUtils mAppearAnimationUtils;
         private DisappearAnimationUtils mDisappearAnimationUtils;
 
+        private int mEffectiveUserId;
+
         // required constructor for fragments
         public ConfirmLockPatternFragment() {
 
@@ -111,6 +113,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             mLockPatternUtils = new LockPatternUtils(getActivity());
+            mEffectiveUserId = Utils.getEffectiveUserId(getActivity());
         }
 
         @Override
@@ -151,7 +154,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                 // on first launch, if no lock pattern is set, then finish with
                 // success (don't want user to get stuck confirming something that
                 // doesn't exist).
-                if (!mLockPatternUtils.isLockPatternEnabled(UserHandle.myUserId())) {
+                if (!mLockPatternUtils.isLockPatternEnabled(mEffectiveUserId)) {
                     getActivity().setResult(Activity.RESULT_OK);
                     getActivity().finish();
                 }
@@ -203,7 +206,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             super.onResume();
 
             // if the user is currently locked out, enforce it.
-            long deadline = mLockPatternUtils.getLockoutAttemptDeadline(UserHandle.myUserId());
+            long deadline = mLockPatternUtils.getLockoutAttemptDeadline(mEffectiveUserId);
             if (deadline != 0) {
                 handleAttemptLockout(deadline);
             } else if (!mLockPatternView.isEnabled()) {
@@ -385,7 +388,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                     return;
                 }
 
-                onPatternChecked(pattern, false, intent, 0);
+                onPatternChecked(pattern, false, intent, 0, mEffectiveUserId);
             }
 
             private boolean isInternalActivity() {
@@ -394,13 +397,14 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
 
             private void startVerifyPattern(final List<LockPatternView.Cell> pattern,
                     final Intent intent) {
+                final int localEffectiveUserId = mEffectiveUserId;
                 long challenge = getActivity().getIntent().getLongExtra(
                         ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, 0);
                 mPendingLockCheck = LockPatternChecker.verifyPattern(
                         mLockPatternUtils,
                         pattern,
                         challenge,
-                        UserHandle.myUserId(),
+                        localEffectiveUserId,
                         new LockPatternChecker.OnVerifyCallback() {
                             @Override
                             public void onVerified(byte[] token, int timeoutMs) {
@@ -412,7 +416,8 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                                             ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN,
                                             token);
                                 }
-                                onPatternChecked(pattern, matched, intent, timeoutMs);
+                                onPatternChecked(pattern,
+                                        matched, intent, timeoutMs, localEffectiveUserId);
                             }
                         });
             }
@@ -420,14 +425,15 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             private void startCheckPattern(final List<LockPatternView.Cell> pattern,
                     final Intent intent) {
                 if (pattern.size() < LockPatternUtils.MIN_PATTERN_REGISTER_FAIL) {
-                    onPatternChecked(pattern, false, intent, 0);
+                    onPatternChecked(pattern, false, intent, 0, mEffectiveUserId);
                     return;
                 }
 
+                final int localEffectiveUserId = mEffectiveUserId;
                 mPendingLockCheck = LockPatternChecker.checkPattern(
                         mLockPatternUtils,
                         pattern,
-                        UserHandle.myUserId(),
+                        localEffectiveUserId,
                         new LockPatternChecker.OnCheckCallback() {
                             @Override
                             public void onChecked(boolean matched, int timeoutMs) {
@@ -438,20 +444,21 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                                     intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD,
                                                     LockPatternUtils.patternToString(pattern));
                                 }
-                                onPatternChecked(pattern, matched, intent, timeoutMs);
+                                onPatternChecked(pattern, matched, intent, timeoutMs,
+                                        localEffectiveUserId);
                             }
                         });
             }
 
             private void onPatternChecked(List<LockPatternView.Cell> pattern,
-                    boolean matched, Intent intent, int timeoutMs) {
+                    boolean matched, Intent intent, int timeoutMs, int effectiveUserId) {
                 mLockPatternView.setEnabled(true);
                 if (matched) {
                     startDisappearAnimation(intent);
                 } else {
                     if (timeoutMs > 0) {
                         long deadline = mLockPatternUtils.setLockoutAttemptDeadline(
-                                UserHandle.myUserId(), timeoutMs);
+                                effectiveUserId, timeoutMs);
                         handleAttemptLockout(deadline);
                     } else {
                         updateStage(Stage.NeedToUnlockWrong);
