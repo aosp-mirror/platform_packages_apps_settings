@@ -645,6 +645,7 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
     private void addControl(int pageSummary, int actionTitle, final int action) {
         Preference pref = new Preference(getActivity());
         pref.setTitle(actionTitle);
+        pref.setLayoutResource(R.layout.horizontal_preference);
         pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
