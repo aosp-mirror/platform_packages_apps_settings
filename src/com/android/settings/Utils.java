@@ -1235,4 +1235,15 @@ public final class Utils {
                 Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         return str;
     }
+
+    public static int getEffectiveUserId(Context context) {
+        UserManager um = UserManager.get(context);
+        if (um != null) {
+            return um.getCredentialOwnerProfile(UserHandle.myUserId());
+        } else {
+            Log.e(TAG, "Unable to acquire UserManager");
+            return UserHandle.myUserId();
+        }
+    }
 }
+
