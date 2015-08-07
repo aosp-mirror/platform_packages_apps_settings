@@ -34,9 +34,12 @@ public class AppStateOverlayBridge extends AppStateAppOpsBridge {
     private static final String TAG = "AppStateOverlayBridge";
     private static final int APP_OPS_OP_CODE = AppOpsManager.OP_SYSTEM_ALERT_WINDOW;
     private static final String PM_SYSTEM_ALERT_WINDOW = Manifest.permission.SYSTEM_ALERT_WINDOW;
+    private static final String[] PM_PERMISSION = {
+            PM_SYSTEM_ALERT_WINDOW
+    };
 
     public AppStateOverlayBridge(Context context, ApplicationsState appState, Callback callback) {
-        super(context, appState, callback, APP_OPS_OP_CODE, PM_SYSTEM_ALERT_WINDOW);
+        super(context, appState, callback, APP_OPS_OP_CODE, PM_PERMISSION);
     }
 
     @Override
