@@ -18,15 +18,18 @@ package com.android.settings.applications;
 
 import android.app.ActivityManager;
 import android.app.AlertDialog;
+import android.app.AppGlobals;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageDataObserver;
+import android.content.pm.IPackageManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.os.RemoteException;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
 import android.preference.Preference;
@@ -183,8 +186,18 @@ public class AppStorageSettings extends AppInfoWithHeader
             } else {
                 showDialogInner(DLG_CLEAR_DATA, 0);
             }
-        } else if (v == mChangeStorageButton && mDialogBuilder != null) {
+        } else if (v == mChangeStorageButton && mDialogBuilder != null && !isMoveInProgress()) {
             mDialogBuilder.show();
+        }
+    }
+
+    private boolean isMoveInProgress() {
+        final IPackageManager pm = AppGlobals.getPackageManager();
+        try {
+            // TODO: define a cleaner API for this
+            return pm.isPackageFrozen(mPackageName);
+        } catch (RemoteException e) {
+            return false;
         }
     }
 
