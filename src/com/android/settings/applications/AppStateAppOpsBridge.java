@@ -34,8 +34,11 @@ import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.ApplicationsState.AppFilter;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /*
  * Connects app ops info to the ApplicationsState. Makes use of AppOpsManager to
@@ -54,7 +57,7 @@ public abstract class AppStateAppOpsBridge extends AppStateBaseBridge {
     private final String[] mPermissions;
 
     public AppStateAppOpsBridge(Context context, ApplicationsState appState, Callback callback,
-            int appOpsOpCode, String permissionName) {
+            int appOpsOpCode, String[] permissions) {
         super(appState, callback);
         mContext = context;
         mIPackageManager = AppGlobals.getPackageManager();
@@ -62,7 +65,7 @@ public abstract class AppStateAppOpsBridge extends AppStateBaseBridge {
         mProfiles = mUserManager.getUserProfiles();
         mAppOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
         mAppOpsOpCodes = new int[] {appOpsOpCode};
-        mPermissions = new String[] {permissionName};
+        mPermissions = permissions;
     }
 
     private boolean isThisUserAProfileOfCurrentUser(final int userId) {
@@ -77,6 +80,15 @@ public abstract class AppStateAppOpsBridge extends AppStateBaseBridge {
 
     protected abstract void updateExtraInfo(AppEntry app, String pkg, int uid);
 
+    private boolean doesAnyPermissionMatch(String permissionToMatch, String[] permissions) {
+        for (String permission : permissions) {
+            if (permissionToMatch.equals(permission)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public PermissionState getPermissionInfo(String pkg, int uid) {
         PermissionState permissionState = new PermissionState(pkg, new UserHandle(UserHandle
                 .getUserId(uid)));
@@ -88,7 +100,7 @@ public abstract class AppStateAppOpsBridge extends AppStateBaseBridge {
             int[] permissionFlags = permissionState.packageInfo.requestedPermissionsFlags;
             if (requestedPermissions != null) {
                 for (int i = 0; i < requestedPermissions.length; i++) {
-                    if (mPermissions[0].equals(requestedPermissions[i])) {
+                    if (doesAnyPermissionMatch(requestedPermissions[i], mPermissions)) {
                         permissionState.permissionDeclared = true;
                         if ((permissionFlags[i] & PackageInfo.REQUESTED_PERMISSION_GRANTED) != 0) {
                             permissionState.staticPermissionGranted = true;
@@ -133,9 +145,15 @@ public abstract class AppStateAppOpsBridge extends AppStateBaseBridge {
      */
     private SparseArray<ArrayMap<String, PermissionState>> getEntries() {
         try {
-            final String[] packages = mIPackageManager.getAppOpPermissionPackages(mPermissions[0]);
+            Set<String> packagesSet = new HashSet<>();
+            for (String permission : mPermissions) {
+                String[] pkgs = mIPackageManager.getAppOpPermissionPackages(permission);
+                if (pkgs != null) {
+                    packagesSet.addAll(Arrays.asList(pkgs));
+                }
+            }
 
-            if (packages == null) {
+            if (packagesSet.isEmpty()) {
                 // No packages are requesting permission as specified by mPermissions.
                 return null;
             }
@@ -147,7 +165,7 @@ public abstract class AppStateAppOpsBridge extends AppStateBaseBridge {
                 final ArrayMap<String, PermissionState> entriesForProfile = new ArrayMap<>();
                 final int profileId = profile.getIdentifier();
                 entries.put(profileId, entriesForProfile);
-                for (final String packageName : packages) {
+                for (final String packageName : packagesSet) {
                     final boolean isAvailable = mIPackageManager.isPackageAvailable(packageName,
                             profileId);
                     if (!shouldIgnorePackage(packageName) && isAvailable) {
@@ -193,7 +211,7 @@ public abstract class AppStateAppOpsBridge extends AppStateBaseBridge {
             }
         } catch (RemoteException e) {
             Log.w(TAG, "PackageManager is dead. Can't get list of packages granted "
-                    + mPermissions[0], e);
+                    + mPermissions, e);
             return;
         }
     }
@@ -223,7 +241,7 @@ public abstract class AppStateAppOpsBridge extends AppStateBaseBridge {
             if (pe == null) {
                 Log.w(TAG, "AppOp permission exists for package " + packageOp.getPackageName()
                         + " of user " + userId + " but package doesn't exist or did not request "
-                        + mPermissions[0] + " access");
+                        + mPermissions + " access");
                 continue;
             }
 
