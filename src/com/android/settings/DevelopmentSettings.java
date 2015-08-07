@@ -123,6 +123,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private static final String MOCK_LOCATION_APP_KEY = "mock_location_app";
     private static final String VERIFY_APPS_OVER_USB_KEY = "verify_apps_over_usb";
     private static final String DEBUG_VIEW_ATTRIBUTES =  "debug_view_attributes";
+    private static final String FORCE_ALLOW_ON_EXTERNAL_KEY = "force_allow_on_external";
     private static final String STRICT_MODE_KEY = "strict_mode";
     private static final String POINTER_LOCATION_KEY = "pointer_location";
     private static final String SHOW_TOUCHES_KEY = "show_touches";
@@ -206,6 +207,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private SwitchPreference mBtHciSnoopLog;
     private SwitchPreference mEnableOemUnlock;
     private SwitchPreference mDebugViewAttributes;
+    private SwitchPreference mForceAllowOnExternal;
 
     private PreferenceScreen mPassword;
     private String mDebugApp;
@@ -325,6 +327,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         }
 
         mDebugViewAttributes = findAndInitSwitchPref(DEBUG_VIEW_ATTRIBUTES);
+        mForceAllowOnExternal = findAndInitSwitchPref(FORCE_ALLOW_ON_EXTERNAL_KEY);
         mPassword = (PreferenceScreen) findPreference(LOCAL_BACKUP_PASSWORD);
         mAllPrefs.add(mPassword);
 
@@ -587,6 +590,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         }
         updateSwitchPreference(mDebugViewAttributes, Settings.Global.getInt(cr,
                 Settings.Global.DEBUG_VIEW_ATTRIBUTES, 0) != 0);
+        updateSwitchPreference(mForceAllowOnExternal, Settings.Global.getInt(cr,
+                Settings.Global.FORCE_ALLOW_ON_EXTERNAL, 0) != 0);
         updateHdcpValues();
         updatePasswordSummary();
         updateDebuggerOptions();
@@ -1649,6 +1654,10 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             Settings.Global.putInt(getActivity().getContentResolver(),
                     Settings.Global.DEBUG_VIEW_ATTRIBUTES,
                     mDebugViewAttributes.isChecked() ? 1 : 0);
+        } else if (preference == mForceAllowOnExternal) {
+            Settings.Global.putInt(getActivity().getContentResolver(),
+                    Settings.Global.FORCE_ALLOW_ON_EXTERNAL,
+                    mForceAllowOnExternal.isChecked() ? 1 : 0);
         } else if (preference == mDebugAppPref) {
             Intent intent = new Intent(getActivity(), AppPicker.class);
             intent.putExtra(AppPicker.EXTRA_DEBUGGABLE, true);

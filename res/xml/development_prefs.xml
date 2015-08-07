@@ -342,6 +342,11 @@
                 android:key="inactive_apps"
                 android:title="@string/inactive_apps_title" />
 
+        <SwitchPreference
+            android:key="force_allow_on_external"
+            android:title="@string/force_allow_on_external"
+            android:summary="@string/force_allow_on_external_summary"/>
+
      </PreferenceCategory>
 
 </PreferenceScreen>
