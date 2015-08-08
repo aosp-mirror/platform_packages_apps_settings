@@ -324,7 +324,7 @@
     </plurals>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Conf. empremta digital"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"Per fer servir la teva empremta digital per desbloquejar la pantalla o confirmar compres, ens caldrà:"</string>
-    <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"Configura el mètode de bloqueig de pantalla de seguretat"</string>
+    <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"Configura un mètode de bloqueig de pantalla alternatiu"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_2" msgid="4158160658182631304">"Afegir la teva empremta digital"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Desbloq. amb empremta"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="9193978734907066950">"Només cal que toquis el sensor d\'empremtes digitals per desbloquejar el telèfon, per autoritzar les compres o per iniciar la sessió en una aplicació. Vés amb compte a l\'hora d\'afegir empremtes digitals; tingues present que totes les que afegeixis podran fer tot això."</string>
@@ -341,7 +341,7 @@
     <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"Comencem"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"Col·loca el dit al sensor i aixeca\'l quan notis una vibració"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="4327640138658832625">"Molt bé. Repeteix-ho"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"Mou el diu lleugerament per afegir totes les parts de l\'empremta digital"</string>
+    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"Mou el dit lleugerament perquè es pugui captar l’empremta digital sencera"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"Empremta dig. afegida"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"Quan vegis aquesta icona, pots fer servir la teva empremta digital per identificar o per autoritzar una compra."</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"Toca el sensor d\'empremtes digitals per activar i desbloquejar el dispositiu."</string>
@@ -392,7 +392,7 @@
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"La contrasenya és correcta, però malauradament les dades estan malmeses. \n\nPer continuar fent servir el telèfon, has de restablir les característiques de fàbrica. Quan configuris el telèfon després de restablir-lo, podràs recuperar les dades de què hagis fet una còpia de seguretat al compte de Google."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Canvia el mètode d\'introducció"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Tria un bloqueig de pantalla"</string>
-    <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Tria el mètode auxiliar de bloqueig de pantalla"</string>
+    <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Tria un mètode de bloqueig de pantalla alternatiu"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Bloqueig de pantalla"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Canvi pantalla bloq."</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Canvia o desactiva la seguretat de contrasenyes, PIN o patrons"</string>
@@ -491,8 +491,8 @@
     <string name="bluetooth_settings" msgid="1810521656168174329">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"Bluetooth"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Gestiona les connexions, defineix el nom i la visibilitat del dispositiu"</string>
-    <string name="bluetooth_pairing_request" msgid="2605098826364694673">"Vols fer la vinculació amb <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
-    <string name="bluetooth_pairing_key_msg" msgid="418124944140102021">"Codi de vinculació de Bluetooth"</string>
+    <string name="bluetooth_pairing_request" msgid="2605098826364694673">"Vincular amb <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
+    <string name="bluetooth_pairing_key_msg" msgid="418124944140102021">"Codi de vinculació per Bluetooth"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"Escriu el codi de vinculació i, a continuació, prem la tecla de retorn."</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"El PIN conté lletres o símbols"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"En general, 0000 o 1234"</string>
@@ -2790,6 +2790,10 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aplicacions amb permís per ignorar l\'optimització de la bateria</item>
       <item quantity="one">1 aplicació amb permís per ignorar l\'optimització de la bateria</item>
     </plurals>
+    <!-- no translation found for high_power_prompt_title (6375210212743608784) -->
+    <skip />
+    <!-- no translation found for high_power_prompt_body (4369380004442148639) -->
+    <skip />
     <string name="battery_summary" msgid="101415762036784289">"<xliff:g id="PERCENTAGE">%1$d</xliff:g>%% d\'ús des de l\'última càrrega completa"</string>
     <string name="no_battery_summary" msgid="3528036835462846814">"Cap ús de la bateria des de l\'última càrrega completa"</string>
     <string name="app_notification_preferences" msgid="1599319335092722613">"Configuració de l\'aplicació"</string>
@@ -2797,7 +2801,7 @@
     <string name="additional_permissions" msgid="6463784193877056080">"Permisos addicionals"</string>
     <string name="additional_permissions_more" msgid="3538612272673191451">"<xliff:g id="COUNT">%1$d</xliff:g> més"</string>
     <string name="usb_use_charging_only" msgid="167707234832117768">"Càrrega"</string>
-    <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"Carrega el dispositiu únicament"</string>
+    <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"Carrega només aquest dispositiu"</string>
     <string name="usb_use_power_only" msgid="6304554004177083963">"Font d\'alimentació"</string>
     <string name="usb_use_power_only_desc" msgid="708134382305728112">"Carrega l\'altre dispositiu connectat"</string>
     <string name="usb_use_file_transfers" msgid="6978904665877785548">"Transferència de fitxers"</string>
