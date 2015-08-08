@@ -6747,6 +6747,14 @@
         <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> apps allowed to ignore battery optimization</item>
     </plurals>
 
+    <!-- Title of prompt dialog app can invoke to turn off optimization [CHAR LIMIT=NONE] -->
+    <string name="high_power_prompt_title">Ignore battery optimizations</string>
+
+    <!-- Body text of prompt dialog app can invoke to turn off optimization [CHAR LIMIT=NONE] -->
+    <string name="high_power_prompt_body">Allow
+        <xliff:g id="app_name" example="Settings">%1$s</xliff:g> to stay connected in the
+        background (may use more battery)?</string>
+
     <!-- Summary of power usage for an app [CHAR LIMIT=NONE] -->
     <string name="battery_summary"><xliff:g id="percentage" example="2">%1$d</xliff:g>%% use since last full charge</string>
 
