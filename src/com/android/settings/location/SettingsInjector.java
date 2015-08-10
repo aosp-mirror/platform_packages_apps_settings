@@ -299,7 +299,17 @@ class SettingsInjector {
             // Settings > Location.
             Intent settingIntent = new Intent();
             settingIntent.setClassName(mInfo.packageName, mInfo.settingsActivity);
-            settingIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            // Sometimes the user may navigate back to "Settings" and launch another different
+            // injected setting after one injected setting has been launched.
+            //
+            // FLAG_ACTIVITY_CLEAR_TOP allows multiple Activities to stack on each other. When
+            // "back" button is clicked, the user will navigate through all the injected settings
+            // launched before. Such behavior could be quite confusing sometimes.
+            //
+            // In order to avoid such confusion, we use FLAG_ACTIVITY_CLEAR_TASK, which always clear
+            // up all existing injected settings and make sure that "back" button always brings the
+            // user back to "Settings" directly.
+            settingIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             mContext.startActivityAsUser(settingIntent, mInfo.mUserHandle);
             return true;
         }
