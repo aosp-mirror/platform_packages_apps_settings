@@ -258,16 +258,6 @@ public class ManageApplications extends InstrumentedFragment
             mListType = LIST_TYPE_HIGH_POWER;
             // Default to showing system.
             mShowSystem = true;
-            if (Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS.equals(intent.getAction())
-                    && intent.getData() != null) {
-                mCurrentPkgName = intent.getData().getSchemeSpecificPart();
-                if (mCurrentPkgName != null) {
-                    mCurrentUid = mApplicationsState.getEntry(mCurrentPkgName,
-                            UserHandle.myUserId()).info.uid;
-                    mFinishAfterDialog = true;
-                    startApplicationDetailsActivity();
-                }
-            }
         } else if (className.equals(OverlaySettingsActivity.class.getName())) {
             mListType = LIST_TYPE_OVERLAY;
             getActivity().getActionBar().setTitle(R.string.system_alert_window_access_title);
