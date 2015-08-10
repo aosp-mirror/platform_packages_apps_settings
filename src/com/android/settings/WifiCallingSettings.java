@@ -57,6 +57,8 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
     private ListPreference mButtonWfcMode;
     private TextView mEmptyView;
 
+    private boolean mValidListener = false;
+
     private final PhoneStateListener mPhoneStateListener = new PhoneStateListener() {
         /*
          * Enable/disable controls when in/out of a call and depending on
@@ -172,6 +174,8 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
             tm.listen(mPhoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
 
             mSwitchBar.addOnSwitchChangeListener(this);
+
+            mValidListener = true;
         }
 
         // NOTE: Buttons will be enabled/disabled in mPhoneStateListener
@@ -196,7 +200,9 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
 
         final Context context = getActivity();
 
-        if (ImsManager.isWfcEnabledByPlatform(getActivity())) {
+        if (mValidListener) {
+            mValidListener = false;
+
             TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
             tm.listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);
 
