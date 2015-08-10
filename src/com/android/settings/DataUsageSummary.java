@@ -68,6 +68,8 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.icu.impl.ICUResourceBundle;
+import android.icu.util.UResourceBundle;
 import android.net.ConnectivityManager;
 import android.net.INetworkPolicyManager;
 import android.net.INetworkStatsService;
@@ -2576,7 +2578,18 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
             limited.add(getText(R.string.data_usage_list_none));
         }
 
-        return TextUtils.join(limited);
+        final ICUResourceBundle icuBundle = (ICUResourceBundle) UResourceBundle.
+                getBundleInstance(ICUResourceBundle.ICU_BASE_NAME);
+        final String listMiddlePattern =
+                icuBundle.getStringWithFallback("listPattern/standard/middle");
+        // The returned pattern is something like "{0}, {1}", from which we want
+        // to extract the ", " part.
+        final int firstClosingBrace = listMiddlePattern.indexOf('}');
+        final int lastOpeningBrace = listMiddlePattern.lastIndexOf('{');
+        final CharSequence delimiter = listMiddlePattern.substring(
+                firstClosingBrace+1, lastOpeningBrace);
+
+        return TextUtils.join(delimiter, limited);
     }
 
     /**
