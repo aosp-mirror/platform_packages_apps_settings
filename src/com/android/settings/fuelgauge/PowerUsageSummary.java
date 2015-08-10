@@ -129,7 +129,6 @@ public class PowerUsageSummary extends PowerUsageBase {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
         if (DEBUG) {
             menu.add(0, MENU_STATS_TYPE, 0, R.string.menu_stats_total)
                     .setIcon(com.android.internal.R.drawable.ic_menu_info_details)
@@ -140,12 +139,12 @@ public class PowerUsageSummary extends PowerUsageBase {
         batterySaver.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
 
         menu.add(0, MENU_HIGH_POWER_APPS, 0, R.string.high_power_apps);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
 
-        String helpUrl;
-        if (!TextUtils.isEmpty(helpUrl = getResources().getString(R.string.help_url_battery))) {
-            final MenuItem help = menu.add(0, MENU_HELP, 0, R.string.help_label);
-            HelpUtils.prepareHelpMenuItem(getActivity(), help, helpUrl, getClass().getName());
-        }
+    @Override
+    protected int getHelpResource() {
+        return R.string.help_url_battery;
     }
 
     @Override
