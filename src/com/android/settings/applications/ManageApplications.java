@@ -864,6 +864,11 @@ public class ManageApplications extends InstrumentedFragment
                 // Don't have new list yet, but can continue using the old one.
                 return;
             }
+            onRebuildComplete(entries);
+        }
+
+        @Override
+        public void onRebuildComplete(ArrayList<AppEntry> entries) {
             mBaseEntries = entries;
             if (mBaseEntries != null) {
                 mEntries = applyPrefixFilter(mCurFilterPrefix, mBaseEntries);
@@ -923,21 +928,6 @@ public class ManageApplications extends InstrumentedFragment
         }
 
         @Override
-        public void onRebuildComplete(ArrayList<AppEntry> apps) {
-            if (mManageApplications.mLoadingContainer.getVisibility() == View.VISIBLE) {
-                mManageApplications.mLoadingContainer.startAnimation(AnimationUtils.loadAnimation(
-                        mContext, android.R.anim.fade_out));
-                mManageApplications.mListContainer.startAnimation(AnimationUtils.loadAnimation(
-                        mContext, android.R.anim.fade_in));
-            }
-            mManageApplications.mListContainer.setVisibility(View.VISIBLE);
-            mManageApplications.mLoadingContainer.setVisibility(View.GONE);
-            mBaseEntries = apps;
-            mEntries = applyPrefixFilter(mCurFilterPrefix, mBaseEntries);
-            notifyDataSetChanged();
-        }
-
-        @Override
         public void onPackageListChanged() {
             rebuild(false);
         }
@@ -951,6 +941,8 @@ public class ManageApplications extends InstrumentedFragment
         @Override
         public void onLoadEntriesCompleted() {
             mHasReceivedLoadEntries = true;
+            // We may have been skipping rebuilds until this came in, trigger one now.
+            rebuild(false);
         }
 
         @Override
