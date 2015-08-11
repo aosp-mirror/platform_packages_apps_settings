@@ -17,7 +17,7 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@android:id/background">
         <shape
-            android:innerRadius="@dimen/fingerprint_ring_radius"
+            android:innerRadius="?attr/fingerprint_ring_radius"
             android:shape="ring"
             android:thickness="@dimen/fingerprint_ring_thickness"
             android:useLevel="false">
@@ -26,7 +26,7 @@
     </item>
     <item android:id="@android:id/progress">
         <shape
-            android:innerRadius="@dimen/fingerprint_ring_radius"
+            android:innerRadius="?attr/fingerprint_ring_radius"
             android:shape="ring"
             android:thickness="@dimen/fingerprint_ring_thickness">
             <gradient
