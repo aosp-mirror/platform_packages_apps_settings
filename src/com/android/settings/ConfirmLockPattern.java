@@ -144,7 +144,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             mLockPatternView.setTactileFeedbackEnabled(
                     mLockPatternUtils.isTactileFeedbackEnabled());
             mLockPatternView.setInStealthMode(!mLockPatternUtils.isVisiblePatternEnabled(
-                    UserHandle.myUserId()));
+                    mEffectiveUserId));
             mLockPatternView.setOnPatternListener(mConfirmExistingLockPatternListener);
             updateStage(Stage.NeedToUnlock);
 
