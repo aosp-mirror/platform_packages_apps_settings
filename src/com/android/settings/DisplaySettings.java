@@ -22,6 +22,7 @@ import com.android.settings.DropDownPreference.Callback;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 
+import static android.provider.Settings.Secure.CAMERA_GESTURE_DISABLED;
 import static android.provider.Settings.Secure.DOUBLE_TAP_TO_WAKE;
 import static android.provider.Settings.Secure.DOZE_ENABLED;
 import static android.provider.Settings.Secure.WAKE_GESTURE_ENABLED;
@@ -74,6 +75,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_AUTO_BRIGHTNESS = "auto_brightness";
     private static final String KEY_AUTO_ROTATE = "auto_rotate";
     private static final String KEY_NIGHT_MODE = "night_mode";
+    private static final String KEY_CAMERA_GESTURE = "camera_gesture";
 
     private static final int DLG_GLOBAL_CHANGE_WARNING = 1;
 
@@ -88,6 +90,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private SwitchPreference mDozePreference;
     private SwitchPreference mTapToWakePreference;
     private SwitchPreference mAutoBrightnessPreference;
+    private SwitchPreference mCameraGesturePreference;
 
     @Override
     protected int getMetricsCategory() {
@@ -147,6 +150,13 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             mTapToWakePreference.setOnPreferenceChangeListener(this);
         } else {
             removePreference(KEY_TAP_TO_WAKE);
+        }
+
+        if (isCameraGestureAvailable(getResources())) {
+            mCameraGesturePreference = (SwitchPreference) findPreference(KEY_CAMERA_GESTURE);
+            mCameraGesturePreference.setOnPreferenceChangeListener(this);
+        } else {
+            removePreference(KEY_CAMERA_GESTURE);
         }
 
         if (RotationPolicy.isRotationLockToggleVisible(activity)) {
@@ -222,6 +232,13 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
     private static boolean isAutomaticBrightnessAvailable(Resources res) {
         return res.getBoolean(com.android.internal.R.bool.config_automatic_brightness_available);
+    }
+
+    private static boolean isCameraGestureAvailable(Resources res) {
+        boolean configSet = res.getInteger(
+                com.android.internal.R.integer.config_cameraLaunchGestureSensorType) != -1;
+        return configSet &&
+                !SystemProperties.getBoolean("gesture.disable_camera_launch", false);
     }
 
     private void updateTimeoutPreferenceDescription(long currentTimeout) {
@@ -370,6 +387,12 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             int value = Settings.Secure.getInt(getContentResolver(), DOUBLE_TAP_TO_WAKE, 0);
             mTapToWakePreference.setChecked(value != 0);
         }
+
+        // Update camera gesture if it is available.
+        if (mCameraGesturePreference != null) {
+            int value = Settings.Secure.getInt(getContentResolver(), CAMERA_GESTURE_DISABLED, 0);
+            mCameraGesturePreference.setChecked(value == 0);
+        }
     }
 
     private void updateScreenSaverSummary() {
@@ -424,6 +447,11 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         if (preference == mTapToWakePreference) {
             boolean value = (Boolean) objValue;
             Settings.Secure.putInt(getContentResolver(), DOUBLE_TAP_TO_WAKE, value ? 1 : 0);
+        }
+        if (preference == mCameraGesturePreference) {
+            boolean value = (Boolean) objValue;
+            Settings.Secure.putInt(getContentResolver(), CAMERA_GESTURE_DISABLED,
+                    value ? 0 : 1 /* Backwards because setting is for disabling */);
         }
         if (preference == mNightModePreference) {
             try {
@@ -492,6 +520,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                     }
                     if (!isTapToWakeAvailable(context.getResources())) {
                         result.add(KEY_TAP_TO_WAKE);
+                    }
+                    if (!isCameraGestureAvailable(context.getResources())) {
+                        result.add(KEY_CAMERA_GESTURE);
                     }
                     return result;
                 }
