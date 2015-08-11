@@ -57,6 +57,12 @@
                 android:entries="@array/screen_timeout_entries"
                 android:entryValues="@array/screen_timeout_values" />
 
+        <SwitchPreference
+                android:key="camera_gesture"
+                android:title="@string/camera_gesture_title"
+                android:summary="@string/camera_gesture_desc"
+                android:persistent="false" />
+
         <PreferenceScreen
                 android:key="screensaver"
                 android:title="@string/screensaver_settings_title"
