@@ -32,8 +32,8 @@
 
     <ProgressBar
         android:id="@+id/fingerprint_progress_bar"
-        android:layout_width="@dimen/fingerprint_progress_bar_size"
-        android:layout_height="@dimen/fingerprint_progress_bar_size"
+        android:layout_width="?attr/fingerprint_progress_bar_size"
+        android:layout_height="?attr/fingerprint_progress_bar_size"
         android:layout_centerInParent="true"
         style="?android:attr/progressBarStyleHorizontal"
         android:max="10000"
