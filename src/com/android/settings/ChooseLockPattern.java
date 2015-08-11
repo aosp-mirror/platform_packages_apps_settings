@@ -346,7 +346,6 @@ public class ChooseLockPattern extends SettingsActivity {
         }
 
         private Stage mUiStage = Stage.Introduction;
-        private boolean mDone = false;
 
         private Runnable mClearPatternRunnable = new Runnable() {
             public void run() {
@@ -435,7 +434,6 @@ public class ChooseLockPattern extends SettingsActivity {
                 }
                 updateStage(Stage.values()[savedInstanceState.getInt(KEY_UI_STAGE)]);
             }
-            mDone = false;
         }
 
         @Override
@@ -483,7 +481,7 @@ public class ChooseLockPattern extends SettingsActivity {
                     throw new IllegalStateException("expected ui stage " + Stage.ChoiceConfirmed
                             + " when button is " + RightButtonMode.Confirm);
                 }
-                saveChosenPatternAndFinish();
+                new SaveChosenPatternAndFinish().execute();
             } else if (mUiStage.rightMode == RightButtonMode.Ok) {
                 if (mUiStage != Stage.HelpScreen) {
                     throw new IllegalStateException("Help screen is only mode with ok button, "
@@ -623,34 +621,49 @@ public class ChooseLockPattern extends SettingsActivity {
             mLockPatternView.postDelayed(mClearPatternRunnable, WRONG_PATTERN_CLEAR_TIMEOUT_MS);
         }
 
-        private void saveChosenPatternAndFinish() {
-            if (mDone) return;
-            LockPatternUtils utils = mChooseLockSettingsHelper.utils();
-            final boolean lockVirgin = !utils.isPatternEverChosen(UserHandle.myUserId());
+        private class SaveChosenPatternAndFinish extends AsyncTask<Void,Void,Void> {
+            boolean mLockVirgin;
+            LockPatternUtils mUtils;
+            boolean mWasSecureBefore;
 
-            boolean wasSecureBefore = utils.isSecure(UserHandle.myUserId());
+            @Override
+            protected void onPreExecute(){
+                setRightButtonEnabled(false);
+                mUtils = mChooseLockSettingsHelper.utils();
+                mLockVirgin = !mUtils.isPatternEverChosen(UserHandle.myUserId());
 
-            final boolean required = getActivity().getIntent().getBooleanExtra(
+                mWasSecureBefore = mUtils.isSecure(UserHandle.myUserId());
+
+                final boolean required = getActivity().getIntent().getBooleanExtra(
                     EncryptionInterstitial.EXTRA_REQUIRE_PASSWORD, true);
 
-            utils.setCredentialRequiredToDecrypt(required);
-            utils.saveLockPattern(mChosenPattern, mCurrentPattern, UserHandle.myUserId());
-
-            if (lockVirgin) {
-                utils.setVisiblePatternEnabled(true, UserHandle.myUserId());
+                mUtils.setCredentialRequiredToDecrypt(required);
             }
 
-            if (mHasChallenge) {
-                startVerifyPattern(utils, wasSecureBefore);
-            } else {
-                if (!wasSecureBefore) {
-                    Intent intent = getRedactionInterstitialIntent(getActivity());
-                    if (intent != null) {
-                        startActivity(intent);
-                    }
+            @Override
+            protected Void doInBackground(Void... params){
+                mUtils.saveLockPattern(mChosenPattern, mCurrentPattern, UserHandle.myUserId());
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void param) {
+                if (mLockVirgin) {
+                    mUtils.setVisiblePatternEnabled(true, UserHandle.myUserId());
                 }
-                getActivity().setResult(RESULT_FINISHED);
-                doFinish();
+
+                if (mHasChallenge) {
+                    startVerifyPattern(mUtils, mWasSecureBefore);
+                } else {
+                    if (!mWasSecureBefore) {
+                        Intent intent = getRedactionInterstitialIntent(getActivity());
+                        if (intent != null) {
+                            startActivity(intent);
+                        }
+                    }
+                    getActivity().setResult(RESULT_FINISHED);
+                    doFinish();
+                }
             }
         }
 
@@ -693,7 +706,6 @@ public class ChooseLockPattern extends SettingsActivity {
 
         private void doFinish() {
             getActivity().finish();
-            mDone = true;
         }
     }
 }
