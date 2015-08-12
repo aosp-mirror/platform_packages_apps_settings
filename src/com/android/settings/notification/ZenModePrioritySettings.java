@@ -83,17 +83,17 @@ public class ZenModePrioritySettings extends ZenModeSettingsBase implements Inde
 
         mMessages = (DropDownPreference) root.findPreference(KEY_MESSAGES);
         addSources(mMessages);
-        mMessages.setCallback(new DropDownPreference.Callback() {
+        mMessages.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
             @Override
-            public boolean onItemSelected(int pos, Object newValue) {
-                if (mDisableListeners) return true;
-                final int val = (Integer) newValue;
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                if (mDisableListeners) return false;
+                final int val = Integer.parseInt((String) newValue);
                 MetricsLogger.action(mContext, MetricsLogger.ACTION_ZEN_ALLOW_MESSAGES, val);
                 final boolean allowMessages = val != SOURCE_NONE;
                 final int allowMessagesFrom = val == SOURCE_NONE ? mConfig.allowMessagesFrom : val;
                 if (allowMessages == mConfig.allowMessages
                         && allowMessagesFrom == mConfig.allowMessagesFrom) {
-                    return true;
+                    return false;
                 }
                 if (DEBUG) Log.d(TAG, "onPrefChange allowMessages=" + allowMessages
                         + " allowMessagesFrom=" + ZenModeConfig.sourceToString(allowMessagesFrom));
@@ -106,24 +106,24 @@ public class ZenModePrioritySettings extends ZenModeSettingsBase implements Inde
 
         mCalls = (DropDownPreference) root.findPreference(KEY_CALLS);
         addSources(mCalls);
-        mCalls.setCallback(new DropDownPreference.Callback() {
+        mCalls.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
             @Override
-            public boolean onItemSelected(int pos, Object newValue) {
-                if (mDisableListeners) return true;
-                final int val = (Integer) newValue;
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                if (mDisableListeners) return false;
+                final int val = Integer.parseInt((String) newValue);
                 MetricsLogger.action(mContext, MetricsLogger.ACTION_ZEN_ALLOW_CALLS, val);
                 final boolean allowCalls = val != SOURCE_NONE;
                 final int allowCallsFrom = val == SOURCE_NONE ? mConfig.allowCallsFrom : val;
                 if (allowCalls == mConfig.allowCalls
                         && allowCallsFrom == mConfig.allowCallsFrom) {
-                    return true;
+                    return false;
                 }
                 if (DEBUG) Log.d(TAG, "onPrefChange allowCalls=" + allowCalls
                         + " allowCallsFrom=" + ZenModeConfig.sourceToString(allowCallsFrom));
                 final ZenModeConfig newConfig = mConfig.copy();
                 newConfig.allowCalls = allowCalls;
                 newConfig.allowCallsFrom = allowCallsFrom;
-                return setZenModeConfig(newConfig);
+                return !setZenModeConfig(newConfig);
             }
         });
 
@@ -161,9 +161,11 @@ public class ZenModePrioritySettings extends ZenModeSettingsBase implements Inde
     private void updateControls() {
         mDisableListeners = true;
         if (mCalls != null) {
-            mCalls.setSelectedValue(mConfig.allowCalls ? mConfig.allowCallsFrom : SOURCE_NONE);
+            mCalls.setValue(Integer.toString(mConfig.allowCalls ? mConfig.allowCallsFrom
+                    : SOURCE_NONE));
         }
-        mMessages.setSelectedValue(mConfig.allowMessages ? mConfig.allowMessagesFrom : SOURCE_NONE);
+        mMessages.setValue(Integer.toString(mConfig.allowMessages ? mConfig.allowMessagesFrom
+                : SOURCE_NONE));
         mReminders.setChecked(mConfig.allowReminders);
         mEvents.setChecked(mConfig.allowEvents);
         mRepeatCallers.setChecked(mConfig.allowRepeatCallers);
@@ -178,10 +180,18 @@ public class ZenModePrioritySettings extends ZenModeSettingsBase implements Inde
     }
 
     private static void addSources(DropDownPreference pref) {
-        pref.addItem(R.string.zen_mode_from_anyone, ZenModeConfig.SOURCE_ANYONE);
-        pref.addItem(R.string.zen_mode_from_contacts, ZenModeConfig.SOURCE_CONTACT);
-        pref.addItem(R.string.zen_mode_from_starred, ZenModeConfig.SOURCE_STAR);
-        pref.addItem(R.string.zen_mode_from_none, SOURCE_NONE);
+        pref.setEntryValues(new CharSequence[] {
+                pref.getContext().getString(R.string.zen_mode_from_anyone),
+                pref.getContext().getString(R.string.zen_mode_from_contacts),
+                pref.getContext().getString(R.string.zen_mode_from_starred),
+                pref.getContext().getString(R.string.zen_mode_from_none),
+        });
+        pref.setEntryValues(new CharSequence[] {
+                Integer.toString(ZenModeConfig.SOURCE_ANYONE),
+                Integer.toString(ZenModeConfig.SOURCE_CONTACT),
+                Integer.toString(ZenModeConfig.SOURCE_STAR),
+                Integer.toString(SOURCE_NONE),
+        });
     }
 
 }

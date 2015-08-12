@@ -21,6 +21,8 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.database.Cursor;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.preference.Preference;
+import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceScreen;
 import android.provider.CalendarContract.Calendars;
 import android.provider.Settings;
@@ -78,19 +80,25 @@ public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
 
     private void reloadCalendar() {
         mCalendars = getCalendars(mContext);
-        mCalendar.clearItems();
-        mCalendar.addItem(R.string.zen_mode_event_rule_calendar_any, key(0, null));
+        ArrayList<CharSequence> entries = new ArrayList<>();
+        ArrayList<CharSequence> values = new ArrayList<>();
+        entries.add(getString(R.string.zen_mode_event_rule_calendar_any));
+        values.add(key(0, null));
         final String eventCalendar = mEvent != null ? mEvent.calendar : null;
         boolean found = false;
         for (CalendarInfo calendar : mCalendars) {
-            mCalendar.addItem(calendar.name, key(calendar));
+            entries.add(calendar.name);
+            values.add(key(calendar));
             if (eventCalendar != null && eventCalendar.equals(calendar.name)) {
                 found = true;
             }
         }
         if (eventCalendar != null && !found) {
-            mCalendar.addItem(eventCalendar, key(mEvent.userId, eventCalendar));
+            entries.add(eventCalendar);
+            values.add(key(mEvent.userId, eventCalendar));
         }
+        mCalendar.setEntries(entries.toArray(new CharSequence[entries.size()]));
+        mCalendar.setEntryValues(values.toArray(new CharSequence[values.size()]));
     }
 
     @Override
@@ -100,11 +108,11 @@ public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
         final PreferenceScreen root = getPreferenceScreen();
 
         mCalendar = (DropDownPreference) root.findPreference(KEY_CALENDAR);
-        mCalendar.setCallback(new DropDownPreference.Callback() {
+        mCalendar.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
             @Override
-            public boolean onItemSelected(int pos, Object value) {
-                final String calendarKey = (String) value;
-                if (calendarKey.equals(key(mEvent))) return true;
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                final String calendarKey = (String) newValue;
+                if (calendarKey.equals(key(mEvent))) return false;
                 final int i = calendarKey.indexOf(':');
                 mEvent.userId = Integer.parseInt(calendarKey.substring(0, i));
                 mEvent.calendar = calendarKey.substring(i + 1);
@@ -117,17 +125,21 @@ public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
         });
 
         mReply = (DropDownPreference) root.findPreference(KEY_REPLY);
-        mReply.addItem(R.string.zen_mode_event_rule_reply_any_except_no,
-                EventInfo.REPLY_ANY_EXCEPT_NO);
-        mReply.addItem(R.string.zen_mode_event_rule_reply_yes_or_maybe,
-                EventInfo.REPLY_YES_OR_MAYBE);
-        mReply.addItem(R.string.zen_mode_event_rule_reply_yes,
-                EventInfo.REPLY_YES);
-        mReply.setCallback(new DropDownPreference.Callback() {
+        mReply.setEntries(new CharSequence[] {
+                getString(R.string.zen_mode_event_rule_reply_any_except_no),
+                getString(R.string.zen_mode_event_rule_reply_yes_or_maybe),
+                getString(R.string.zen_mode_event_rule_reply_yes),
+        });
+        mReply.setEntryValues(new CharSequence[] {
+                Integer.toString(EventInfo.REPLY_ANY_EXCEPT_NO),
+                Integer.toString(EventInfo.REPLY_YES_OR_MAYBE),
+                Integer.toString(EventInfo.REPLY_YES),
+        });
+        mReply.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
             @Override
-            public boolean onItemSelected(int pos, Object value) {
-                final int reply = (Integer) value;
-                if (reply == mEvent.reply) return true;
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                final int reply = Integer.parseInt((String) newValue);
+                if (reply == mEvent.reply) return false;
                 mEvent.reply = reply;
                 updateRule(ZenModeConfig.toEventConditionId(mEvent));
                 return true;
@@ -140,8 +152,8 @@ public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
 
     @Override
     protected void updateControlsInternal() {
-        mCalendar.setSelectedValue(key(mEvent));
-        mReply.setSelectedValue(mEvent.reply);
+        mCalendar.setValue(key(mEvent));
+        mReply.setValue(Integer.toString(mEvent.reply));
     }
 
     @Override

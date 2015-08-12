@@ -24,7 +24,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.preference.Preference;
-import android.preference.SwitchPreference;
+import android.preference.Preference.OnPreferenceChangeListener;
 import android.util.ArraySet;
 import android.util.Log;
 import android.view.View;
@@ -32,16 +32,15 @@ import android.view.View.OnClickListener;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.DropDownPreference;
-import com.android.settings.DropDownPreference.Callback;
 import com.android.settings.R;
 import com.android.settings.Utils;
 
-import static android.content.pm.PackageManager.INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_UNDEFINED;
-import static android.content.pm.PackageManager.INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_ASK;
-import static android.content.pm.PackageManager.INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_ALWAYS;
-import static android.content.pm.PackageManager.INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_NEVER;
-
 import java.util.List;
+
+import static android.content.pm.PackageManager.INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_ALWAYS;
+import static android.content.pm.PackageManager.INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_ASK;
+import static android.content.pm.PackageManager.INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_NEVER;
+import static android.content.pm.PackageManager.INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_UNDEFINED;
 
 public class AppLaunchSettings extends AppInfoWithHeader implements OnClickListener,
         Preference.OnPreferenceChangeListener {
@@ -90,12 +89,16 @@ public class AppLaunchSettings extends AppInfoWithHeader implements OnClickListe
         // * always
         // * ask
         // * never
-        mAppLinkState.addItem(R.string.app_link_open_always,
-                INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_ALWAYS);
-        mAppLinkState.addItem(R.string.app_link_open_ask,
-                INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_ASK);
-        mAppLinkState.addItem(R.string.app_link_open_never,
-                INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_NEVER);
+        mAppLinkState.setEntries(new CharSequence[] {
+                getString(R.string.app_link_open_always),
+                getString(R.string.app_link_open_ask),
+                getString(R.string.app_link_open_never),
+        });
+        mAppLinkState.setEntryValues(new CharSequence[] {
+                Integer.toString(INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_ALWAYS),
+                Integer.toString(INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_ASK),
+                Integer.toString(INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_NEVER),
+        });
 
         mAppLinkState.setEnabled(mHasDomainUrls);
         if (mHasDomainUrls) {
@@ -103,16 +106,16 @@ public class AppLaunchSettings extends AppInfoWithHeader implements OnClickListe
             // purposes of the UI (and does the right thing around pending domain
             // verifications that might arrive after the user chooses 'ask' in this UI).
             final int state = mPm.getIntentVerificationStatus(mPackageName, UserHandle.myUserId());
-            mAppLinkState.setSelectedValue(
-                    (state == INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_UNDEFINED)
+            mAppLinkState.setValue(
+                    Integer.toString((state == INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_UNDEFINED)
                         ? INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_ASK
-                        : state);
+                        : state));
 
             // Set the callback only after setting the initial selected item
-            mAppLinkState.setCallback(new Callback() {
+            mAppLinkState.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
                 @Override
-                public boolean onItemSelected(int pos, Object value) {
-                    return updateAppLinkState((Integer) value);
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    return updateAppLinkState(Integer.parseInt((String) newValue));
                 }
             });
         }

@@ -416,10 +416,10 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         final UiModeManager uiManager = (UiModeManager) getSystemService(
                 Context.UI_MODE_SERVICE);
         final int currentNightMode = uiManager.getNightMode();
-        mNightModePreference.setSelectedValue(String.valueOf(currentNightMode));
-        mNightModePreference.setCallback(new DropDownPreference.Callback() {
+        mNightModePreference.setValue(String.valueOf(currentNightMode));
+        mNightModePreference.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
             @Override
-            public boolean onItemSelected(int pos, Object newValue) {
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
                 try {
                     final int value = Integer.parseInt((String) newValue);
                     final UiModeManager uiManager = (UiModeManager) getSystemService(

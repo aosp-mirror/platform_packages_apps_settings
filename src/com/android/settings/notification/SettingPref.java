@@ -72,9 +72,14 @@ public class SettingPref {
             mTwoState = (TwoStatePreference) p;
         } else if (p instanceof DropDownPreference) {
             mDropDown = (DropDownPreference) p;
-            for (int value : mValues) {
-                mDropDown.addItem(getCaption(context.getResources(), value), value);
+            CharSequence[] entries = new CharSequence[mValues.length];
+            CharSequence[] values = new CharSequence[mValues.length];
+            for (int i = 0; i < mValues.length; i++) {
+                entries[i] = getCaption(context.getResources(), mValues[i]);
+                values[i] = Integer.toString(mValues[i]);
             }
+            mDropDown.setEntries(entries);
+            mDropDown.setEntryValues(values);
         }
         update(context);
         if (mTwoState != null) {
@@ -88,10 +93,10 @@ public class SettingPref {
             return mTwoState;
         }
         if (mDropDown != null) {
-            mDropDown.setCallback(new DropDownPreference.Callback() {
+            p.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
                 @Override
-                public boolean onItemSelected(int pos, Object value) {
-                    return setSetting(context, (Integer) value);
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    return setSetting(context, Integer.parseInt((String) newValue));
                 }
             });
             return mDropDown;
@@ -116,7 +121,7 @@ public class SettingPref {
         if (mTwoState != null) {
             mTwoState.setChecked(val != 0);
         } else if (mDropDown != null) {
-            mDropDown.setSelectedValue(val);
+            mDropDown.setValue(Integer.toString(val));
         }
     }
 
