@@ -85,14 +85,13 @@
                 android:summary="@string/tap_to_wake_summary"
                 android:persistent="false" />
 
-        <com.android.settings.WarnedListPreference
+        <com.android.settings.DropDownPreference
                 android:key="font_size"
                 android:title="@string/title_font_size"
                 settings:keywords="@string/keywords_display_font_size"
                 android:summary="@string/summary_font_size"
                 android:entries="@array/entries_font_size"
-                android:entryValues="@array/entryvalues_font_size"
-                android:dialogTitle="@string/dialog_title_font_size" />
+                android:entryValues="@array/entryvalues_font_size" />
 
         <com.android.settings.DropDownPreference
                 android:key="auto_rotate"

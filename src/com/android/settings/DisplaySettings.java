@@ -60,7 +60,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DisplaySettings extends SettingsPreferenceFragment implements
-        Preference.OnPreferenceChangeListener, OnPreferenceClickListener, Indexable {
+        Preference.OnPreferenceChangeListener, Indexable {
     private static final String TAG = "DisplaySettings";
 
     /** If there is no setting in the provider, use this. */
@@ -77,9 +77,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_NIGHT_MODE = "night_mode";
     private static final String KEY_CAMERA_GESTURE = "camera_gesture";
 
-    private static final int DLG_GLOBAL_CHANGE_WARNING = 1;
-
-    private WarnedListPreference mFontSizePref;
+    private DropDownPreference mFontSizePref;
 
     private final Configuration mCurConfig = new Configuration();
 
@@ -120,9 +118,8 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         disableUnusableTimeouts(mScreenTimeoutPreference);
         updateTimeoutPreferenceDescription(currentTimeout);
 
-        mFontSizePref = (WarnedListPreference) findPreference(KEY_FONT_SIZE);
+        mFontSizePref = (DropDownPreference) findPreference(KEY_FONT_SIZE);
         mFontSizePref.setOnPreferenceChangeListener(this);
-        mFontSizePref.setOnPreferenceClickListener(this);
 
         if (isAutomaticBrightnessAvailable(getResources())) {
             mAutoBrightnessPreference = (SwitchPreference) findPreference(KEY_AUTO_BRIGHTNESS);
@@ -347,20 +344,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         updateState();
     }
 
-    @Override
-    public Dialog onCreateDialog(int dialogId) {
-        if (dialogId == DLG_GLOBAL_CHANGE_WARNING) {
-            return Utils.buildGlobalChangeWarningDialog(getActivity(),
-                    R.string.global_font_change_title,
-                    new Runnable() {
-                        public void run() {
-                            mFontSizePref.click();
-                        }
-                    });
-        }
-        return null;
-    }
-
     private void updateState() {
         readFontSizePreference(mFontSizePref);
         updateScreenSaverSummary();
@@ -466,19 +449,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             }
         }
         return true;
-    }
-
-    @Override
-    public boolean onPreferenceClick(Preference preference) {
-        if (preference == mFontSizePref) {
-            if (Utils.hasMultipleUsers(getActivity())) {
-                showDialog(DLG_GLOBAL_CHANGE_WARNING);
-                return true;
-            } else {
-                mFontSizePref.click();
-            }
-        }
-        return false;
     }
 
     @Override
