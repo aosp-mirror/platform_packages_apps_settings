@@ -16,12 +16,6 @@
 
 package com.android.settings;
 
-import com.android.internal.logging.MetricsLogger;
-import com.android.internal.view.RotationPolicy;
-import com.android.settings.DropDownPreference.Callback;
-import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
-
 import static android.provider.Settings.Secure.CAMERA_GESTURE_DISABLED;
 import static android.provider.Settings.Secure.DOUBLE_TAP_TO_WAKE;
 import static android.provider.Settings.Secure.DOZE_ENABLED;
@@ -48,6 +42,7 @@ import android.os.RemoteException;
 import android.os.SystemProperties;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
@@ -55,6 +50,11 @@ import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
+
+import com.android.internal.logging.MetricsLogger;
+import com.android.internal.view.RotationPolicy;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -162,8 +162,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         if (RotationPolicy.isRotationLockToggleVisible(activity)) {
             DropDownPreference rotatePreference =
                     (DropDownPreference) findPreference(KEY_AUTO_ROTATE);
-            rotatePreference.addItem(activity.getString(R.string.display_auto_rotate_rotate),
-                    false);
             int rotateLockedResourceId;
             // The following block sets the string used when rotation is locked.
             // If the device locks specifically to portrait or landscape (rather than current
@@ -180,13 +178,17 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                             R.string.display_auto_rotate_stay_in_landscape;
                 }
             }
-            rotatePreference.addItem(activity.getString(rotateLockedResourceId), true);
-            rotatePreference.setSelectedItem(RotationPolicy.isRotationLocked(activity) ?
+            rotatePreference.setEntries(new CharSequence[] {
+                    activity.getString(R.string.display_auto_rotate_rotate),
+                    activity.getString(rotateLockedResourceId),
+            });
+            rotatePreference.setEntryValues(new CharSequence[] { "0", "1" });
+            rotatePreference.setValueIndex(RotationPolicy.isRotationLocked(activity) ?
                     1 : 0);
-            rotatePreference.setCallback(new Callback() {
+            rotatePreference.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
                 @Override
-                public boolean onItemSelected(int pos, Object value) {
-                    final boolean locked = (Boolean) value;
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    final boolean locked = Integer.parseInt((String) newValue) != 0;
                     MetricsLogger.action(getActivity(), MetricsLogger.ACTION_ROTATION_LOCK,
                             locked);
                     RotationPolicy.setRotationLock(activity, locked);

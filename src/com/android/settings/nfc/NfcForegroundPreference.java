@@ -16,18 +16,18 @@
 package com.android.settings.nfc;
 
 import android.content.Context;
+
 import com.android.settings.DropDownPreference;
 import com.android.settings.R;
 
 public class NfcForegroundPreference extends DropDownPreference implements
-        DropDownPreference.Callback, PaymentBackend.Callback {
+        PaymentBackend.Callback {
 
     private final PaymentBackend mPaymentBackend;
     public NfcForegroundPreference(Context context, PaymentBackend backend) {
         super(context);
         mPaymentBackend = backend;
         mPaymentBackend.registerCallback(this);
-        setCallback(this);
         refresh();
     }
 
@@ -43,19 +43,21 @@ public class NfcForegroundPreference extends DropDownPreference implements
         setTitle(getContext().getString(R.string.nfc_payment_use_default));
         CharSequence favorOpen;
         CharSequence favorDefault;
-        clearItems();
-        addItem(getContext().getString(R.string.nfc_payment_favor_open), true);
-        addItem(getContext().getString(R.string.nfc_payment_favor_default), false);
+        setEntries(new CharSequence[] {
+                getContext().getString(R.string.nfc_payment_favor_open),
+                getContext().getString(R.string.nfc_payment_favor_default)
+        });
+        setEntryValues(new CharSequence[] { "1", "0" });
         if (foregroundMode) {
-            setSelectedValue(true);
+            setValue("1");
         } else {
-            setSelectedValue(false);
+            setValue("0");
         }
     }
 
     @Override
-    public boolean onItemSelected(int pos, Object value) {
-        mPaymentBackend.setForegroundMode((Boolean) value);
+    protected boolean persistString(String value) {
+        mPaymentBackend.setForegroundMode(Integer.parseInt(value) != 0);
         return true;
     }
 }

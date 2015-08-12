@@ -24,6 +24,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
+import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceScreen;
 import android.provider.Settings.Global;
@@ -35,7 +36,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.internal.logging.MetricsLogger;
@@ -105,17 +105,22 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase
         });
 
         mZenMode = (DropDownPreference) root.findPreference(KEY_ZEN_MODE);
-        mZenMode.addItem(R.string.zen_mode_option_important_interruptions,
-                Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS);
-        mZenMode.addItem(R.string.zen_mode_option_alarms, Global.ZEN_MODE_ALARMS);
-        mZenMode.addItem(R.string.zen_mode_option_no_interruptions,
-                Global.ZEN_MODE_NO_INTERRUPTIONS);
-        mZenMode.setCallback(new DropDownPreference.Callback() {
+        mZenMode.setEntries(new CharSequence[] {
+                getString(R.string.zen_mode_option_important_interruptions),
+                getString(R.string.zen_mode_option_alarms),
+                getString(R.string.zen_mode_option_no_interruptions),
+        });
+        mZenMode.setEntryValues(new CharSequence[] {
+                Integer.toString(Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS),
+                Integer.toString(Global.ZEN_MODE_ALARMS),
+                Integer.toString(Global.ZEN_MODE_NO_INTERRUPTIONS),
+        });
+        mZenMode.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
             @Override
-            public boolean onItemSelected(int pos, Object value) {
-                if (mDisableListeners) return true;
-                final int zenMode = (Integer) value;
-                if (zenMode == mRule.zenMode) return true;
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                if (mDisableListeners) return false;
+                final int zenMode = Integer.parseInt((String) newValue);
+                if (zenMode == mRule.zenMode) return false;
                 if (DEBUG) Log.d(TAG, "onPrefChange zenMode=" + zenMode);
                 mRule.zenMode = zenMode;
                 setZenModeConfig(mConfig);
@@ -269,7 +274,7 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase
         mDisableListeners = true;
         updateRuleName();
         updateControlsInternal();
-        mZenMode.setSelectedValue(mRule.zenMode);
+        mZenMode.setValue(Integer.toString(mRule.zenMode));
         if (mSwitchBar != null) {
             mSwitchBar.setChecked(mRule.enabled);
         }

@@ -451,24 +451,26 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
 
         boolean isSecureNotificationsDisabled = isSecureNotificationsDisabled();
         boolean isUnredactedNotificationsDisabled = isUnredactedNotificationsDisabled();
+        ArrayList<CharSequence> entries = new ArrayList<>();
+        ArrayList<CharSequence> values = new ArrayList<>();
         if (!isSecureNotificationsDisabled && !isUnredactedNotificationsDisabled) {
-            mLockscreen.addItem(R.string.lock_screen_notifications_summary_show,
-                    R.string.lock_screen_notifications_summary_show);
+            entries.add(getString(R.string.lock_screen_notifications_summary_show));
+            values.add(Integer.toString(R.string.lock_screen_notifications_summary_show));
         }
         if (mSecure && !isSecureNotificationsDisabled) {
-            mLockscreen.addItem(R.string.lock_screen_notifications_summary_hide,
-                    R.string.lock_screen_notifications_summary_hide);
+            entries.add(getString(R.string.lock_screen_notifications_summary_hide));
+            values.add(Integer.toString(R.string.lock_screen_notifications_summary_hide));
         }
-        mLockscreen.addItem(R.string.lock_screen_notifications_summary_disable,
-                R.string.lock_screen_notifications_summary_disable);
+        entries.add(getString(R.string.lock_screen_notifications_summary_disable));
+        values.add(Integer.toString(R.string.lock_screen_notifications_summary_disable));
         updateLockscreenNotifications();
-        if (mLockscreen.getItemCount() > 1) {
-            mLockscreen.setCallback(new DropDownPreference.Callback() {
+        if (mLockscreen.getEntries().length > 1) {
+            mLockscreen.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
                 @Override
-                public boolean onItemSelected(int pos, Object value) {
-                    final int val = (Integer) value;
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    final int val = Integer.parseInt((String) newValue);
                     if (val == mLockscreenSelectedValue) {
-                        return true;
+                        return false;
                     }
                     final boolean enabled =
                             val != R.string.lock_screen_notifications_summary_disable;
@@ -510,7 +512,7 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
         mLockscreenSelectedValue = !enabled ? R.string.lock_screen_notifications_summary_disable :
                 allowPrivate ? R.string.lock_screen_notifications_summary_show :
                 R.string.lock_screen_notifications_summary_hide;
-        mLockscreen.setSelectedValue(mLockscreenSelectedValue);
+        mLockscreen.setValue(Integer.toString(mLockscreenSelectedValue));
     }
 
     private boolean getLockscreenNotificationsEnabled() {

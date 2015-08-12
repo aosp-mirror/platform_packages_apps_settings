@@ -17,9 +17,9 @@
 package com.android.settings;
 
 import android.content.Context;
-import android.content.res.TypedArray;
-import android.preference.Preference;
+import android.preference.ListPreference;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -27,16 +27,13 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-import java.util.ArrayList;
+import libcore.util.Objects;
 
-public class DropDownPreference extends Preference {
+public class DropDownPreference extends ListPreference {
+
     private final Context mContext;
     private final ArrayAdapter<String> mAdapter;
     private final Spinner mSpinner;
-    private final ArrayList<Object> mValues = new ArrayList<Object>();
-
-    private Callback mCallback;
-    private int mSelectedPosition = -1;
 
     public DropDownPreference(Context context) {
         this(context, null);
@@ -55,7 +52,12 @@ public class DropDownPreference extends Preference {
         mSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
-                setSelectedItem(position, true);
+                if (position >= 0) {
+                    String value = getEntryValues()[position].toString();
+                    if (!value.equals(getValue()) && callChangeListener(value)) {
+                        setValue(value);
+                    }
+                }
             }
 
             @Override
@@ -64,75 +66,42 @@ public class DropDownPreference extends Preference {
             }
         });
         setPersistent(false);
-        setOnPreferenceClickListener(new OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                mSpinner.performClick();
-                return true;
-            }
-        });
+        updateEntries();
+    }
 
-        // Support XML specification like ListPreferences do.
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.DropDownPreference);
-        CharSequence[] entries = a.getTextArray(R.styleable.DropDownPreference_android_entries);
-        CharSequence[] values = a.getTextArray(R.styleable.DropDownPreference_android_entryValues);
-        if (entries != null && values != null) {
-            for (int i= 0; i < entries.length; i++) {
-                addItem(entries[i].toString(), values[i]);
-            }
-        }
+    @Override
+    protected void onClick() {
+        mSpinner.performClick();
     }
 
     public void setDropDownWidth(int dimenResId) {
         mSpinner.setDropDownWidth(mContext.getResources().getDimensionPixelSize(dimenResId));
     }
 
-    public void setCallback(Callback callback) {
-        mCallback = callback;
+    @Override
+    public void setEntries(CharSequence[] entries) {
+        super.setEntries(entries);
+        updateEntries();
     }
 
-    public void setSelectedItem(int position) {
-        setSelectedItem(position, false);
-    }
-
-    public void setSelectedItem(int position, boolean fromSpinner) {
-        if (fromSpinner && position == mSelectedPosition) {
-            return;
-        }
-        final Object value = mValues.get(position);
-        if (mCallback != null && !mCallback.onItemSelected(position, value)) {
-            return;
-        }
-        mSpinner.setSelection(position);
-        mSelectedPosition = mSpinner.getSelectedItemPosition();
-        setSummary(mAdapter.getItem(position));
-        final boolean disableDependents = value == null;
-        notifyDependencyChange(disableDependents);
-    }
-
-    public void setSelectedValue(Object value) {
-        final int i = mValues.indexOf(value);
-        if (i > -1) {
-            setSelectedItem(i);
-        }
-    }
-
-    public void addItem(int captionResid, Object value) {
-        addItem(mContext.getResources().getString(captionResid), value);
-    }
-
-    public void addItem(String caption, Object value) {
-        mAdapter.add(caption);
-        mValues.add(value);
-    }
-
-    public int getItemCount() {
-        return mAdapter.getCount();
-    }
-
-    public void clearItems(){
+    private void updateEntries() {
         mAdapter.clear();
-        mValues.clear();
+        if (getEntries() != null) {
+            for (CharSequence c : getEntries()) {
+                mAdapter.add(c.toString());
+            }
+        }
+    }
+
+    @Override
+    public void setValue(String value) {
+        super.setValue(value);
+        mSpinner.setSelection(findIndexOfValue(getValue()));
+        setSummary(getEntry());
+    }
+
+    public void setValueIndex(int index) {
+        setValue(getEntryValues()[index].toString());
     }
 
     @Override
@@ -140,16 +109,12 @@ public class DropDownPreference extends Preference {
         super.onBindView(view);
         if (view.equals(mSpinner.getParent())) return;
         if (mSpinner.getParent() != null) {
-            ((ViewGroup)mSpinner.getParent()).removeView(mSpinner);
+            ((ViewGroup) mSpinner.getParent()).removeView(mSpinner);
         }
-        final ViewGroup vg = (ViewGroup)view;
+        final ViewGroup vg = (ViewGroup) view;
         vg.addView(mSpinner, 0);
         final ViewGroup.LayoutParams lp = mSpinner.getLayoutParams();
         lp.width = 0;
         mSpinner.setLayoutParams(lp);
-    }
-
-    public interface Callback {
-        boolean onItemSelected(int pos, Object value);
     }
 }
