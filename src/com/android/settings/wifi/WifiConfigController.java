@@ -458,9 +458,17 @@ public class WifiConfigController implements TextWatcher,
                 String clientCert = (String) mEapUserCertSpinner.getSelectedItem();
                 if (clientCert.equals(unspecifiedCert)) clientCert = "";
                 config.enterpriseConfig.setClientCertificateAlias(clientCert);
-                config.enterpriseConfig.setIdentity(mEapIdentityView.getText().toString());
-                config.enterpriseConfig.setAnonymousIdentity(
-                        mEapAnonymousView.getText().toString());
+                if (eapMethod == Eap.SIM || eapMethod == Eap.AKA || eapMethod == Eap.AKA_PRIME) {
+                    config.enterpriseConfig.setIdentity("");
+                    config.enterpriseConfig.setAnonymousIdentity("");
+                } else if (eapMethod == Eap.PWD) {
+                    config.enterpriseConfig.setIdentity(mEapIdentityView.getText().toString());
+                    config.enterpriseConfig.setAnonymousIdentity("");
+                } else {
+                    config.enterpriseConfig.setIdentity(mEapIdentityView.getText().toString());
+                    config.enterpriseConfig.setAnonymousIdentity(
+                            mEapAnonymousView.getText().toString());
+                }
 
                 if (mPasswordView.isShown()) {
                     // For security reasons, a previous password is not displayed to user.
