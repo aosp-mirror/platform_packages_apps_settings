@@ -146,6 +146,10 @@ public class ChooseLockPassword extends SettingsActivity {
         private int mRequestedQuality = DevicePolicyManager.PASSWORD_QUALITY_NUMERIC;
         private ChooseLockSettingsHelper mChooseLockSettingsHelper;
         private Stage mUiStage = Stage.Introduction;
+
+        // True once we have confirmed new PIN/password to prevent virtual keyboard
+        // re-entries of the same PIN
+        private boolean mDone = false;
         private TextView mHeaderText;
         private String mFirstPin;
         private KeyboardView mKeyboardView;
@@ -302,6 +306,7 @@ public class ChooseLockPassword extends SettingsActivity {
                     mCurrentPassword = savedInstanceState.getString(KEY_CURRENT_PASSWORD);
                 }
             }
+            mDone = false;
             if (activity instanceof SettingsActivity) {
                 final SettingsActivity sa = (SettingsActivity) activity;
                 int id = mIsAlphaMode ? R.string.lockpassword_choose_your_password_header
@@ -509,6 +514,7 @@ public class ChooseLockPassword extends SettingsActivity {
 
 
         public void handleNext() {
+            if (mDone) return;
             mChosenPassword = mPasswordEntry.getText().toString();
             if (TextUtils.isEmpty(mChosenPassword)) {
                 return;
@@ -524,6 +530,7 @@ public class ChooseLockPassword extends SettingsActivity {
             } else if (mUiStage == Stage.NeedToConfirm) {
                 if (mFirstPin.equals(mChosenPassword)) {
                     setNextEnabled(false);
+                    mDone = true;
                     new SaveChosenPasswordAndFinish().execute();
                 } else {
                     CharSequence tmp = mPasswordEntry.getText();
