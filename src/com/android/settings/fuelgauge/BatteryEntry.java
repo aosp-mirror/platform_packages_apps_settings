@@ -24,7 +24,6 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
-import android.os.BatteryStats;
 import android.os.Handler;
 import android.os.RemoteException;
 import android.os.UserHandle;
@@ -191,7 +190,7 @@ public class BatteryEntry {
             icon = context.getDrawable(iconId);
         }
         if ((name == null || iconId == 0) && this.sipper.uidObj != null) {
-            getQuickNameIconForUid(this.sipper.uidObj);
+            getQuickNameIconForUid(this.sipper.uidObj.getUid());
         }
     }
 
@@ -206,8 +205,7 @@ public class BatteryEntry {
         return name;
     }
 
-    void getQuickNameIconForUid(BatteryStats.Uid uidObj) {
-        final int uid = uidObj.getUid();
+    void getQuickNameIconForUid(final int uid) {
         final String uidString = Integer.toString(uid);
         if (sUidCache.containsKey(uidString)) {
             UidToDetail utd = sUidCache.get(uidString);
@@ -217,10 +215,8 @@ public class BatteryEntry {
             return;
         }
         PackageManager pm = context.getPackageManager();
-        String[] packages = pm.getPackagesForUid(uid);
         icon = pm.getDefaultActivityIcon();
-        if (packages == null) {
-            //name = Integer.toString(uid);
+        if (pm.getPackagesForUid(uid) == null) {
             if (uid == 0) {
                 name = context.getResources().getString(R.string.process_kernel_label);
             } else if ("mediaserver".equals(name)) {
@@ -230,10 +226,8 @@ public class BatteryEntry {
             }
             iconId = R.drawable.ic_power_system;
             icon = context.getDrawable(iconId);
-            return;
-        } else {
-            //name = packages[0];
         }
+
         if (sHandler != null) {
             synchronized (mRequestQueue) {
                 mRequestQueue.add(this);
@@ -249,79 +243,82 @@ public class BatteryEntry {
         if (sipper.uidObj == null) {
             return;
         }
+
         PackageManager pm = context.getPackageManager();
         final int uid = sipper.uidObj.getUid();
-        final Drawable defaultActivityIcon = pm.getDefaultActivityIcon();
         sipper.mPackages = pm.getPackagesForUid(uid);
-        if (sipper.mPackages == null) {
-            name = Integer.toString(uid);
-            return;
-        }
+        if (sipper.mPackages != null) {
+            String[] packageLabels = new String[sipper.mPackages.length];
+            System.arraycopy(sipper.mPackages, 0, packageLabels, 0, sipper.mPackages.length);
 
-        String[] packageLabels = new String[sipper.mPackages.length];
-        System.arraycopy(sipper.mPackages, 0, packageLabels, 0, sipper.mPackages.length);
-
-        // Convert package names to user-facing labels where possible
-        IPackageManager ipm = AppGlobals.getPackageManager();
-        final int userId = UserHandle.getUserId(uid);
-        for (int i = 0; i < packageLabels.length; i++) {
-            try {
-                final ApplicationInfo ai = ipm.getApplicationInfo(packageLabels[i],
-                        0 /* no flags */, userId);
-                if (ai == null) {
-                    Log.d(PowerUsageSummary.TAG, "Retrieving null app info for package "
-                            + packageLabels[i] + ", user " + userId);
-                    continue;
-                }
-                CharSequence label = ai.loadLabel(pm);
-                if (label != null) {
-                    packageLabels[i] = label.toString();
-                }
-                if (ai.icon != 0) {
-                    defaultPackageName = sipper.mPackages[i];
-                    icon = ai.loadIcon(pm);
-                    break;
-                }
-            } catch (RemoteException e) {
-                Log.d(PowerUsageSummary.TAG, "Error while retrieving app info for package "
-                        + packageLabels[i] + ", user " + userId, e);
-            }
-        }
-        if (icon == null) {
-            icon = defaultActivityIcon;
-        }
-
-        if (packageLabels.length == 1) {
-            name = packageLabels[0];
-        } else {
-            // Look for an official name for this UID.
-            for (String pkgName : sipper.mPackages) {
+            // Convert package names to user-facing labels where possible
+            IPackageManager ipm = AppGlobals.getPackageManager();
+            final int userId = UserHandle.getUserId(uid);
+            for (int i = 0; i < packageLabels.length; i++) {
                 try {
-                    final PackageInfo pi = ipm.getPackageInfo(pkgName, 0 /* no flags */, userId);
-                    if (pi == null) {
-                        Log.d(PowerUsageSummary.TAG, "Retrieving null package info for package "
-                                + pkgName + ", user " + userId);
+                    final ApplicationInfo ai = ipm.getApplicationInfo(packageLabels[i],
+                            0 /* no flags */, userId);
+                    if (ai == null) {
+                        Log.d(PowerUsageSummary.TAG, "Retrieving null app info for package "
+                                + packageLabels[i] + ", user " + userId);
                         continue;
                     }
-                    if (pi.sharedUserLabel != 0) {
-                        final CharSequence nm = pm.getText(pkgName,
-                                pi.sharedUserLabel, pi.applicationInfo);
-                        if (nm != null) {
-                            name = nm.toString();
-                            if (pi.applicationInfo.icon != 0) {
-                                defaultPackageName = pkgName;
-                                icon = pi.applicationInfo.loadIcon(pm);
-                            }
-                            break;
-                        }
+                    CharSequence label = ai.loadLabel(pm);
+                    if (label != null) {
+                        packageLabels[i] = label.toString();
+                    }
+                    if (ai.icon != 0) {
+                        defaultPackageName = sipper.mPackages[i];
+                        icon = ai.loadIcon(pm);
+                        break;
                     }
                 } catch (RemoteException e) {
-                    Log.d(PowerUsageSummary.TAG, "Error while retrieving package info for package "
-                            + pkgName + ", user " + userId, e);
+                    Log.d(PowerUsageSummary.TAG, "Error while retrieving app info for package "
+                            + packageLabels[i] + ", user " + userId, e);
+                }
+            }
+
+            if (packageLabels.length == 1) {
+                name = packageLabels[0];
+            } else {
+                // Look for an official name for this UID.
+                for (String pkgName : sipper.mPackages) {
+                    try {
+                        final PackageInfo pi = ipm.getPackageInfo(pkgName, 0 /* no flags */, userId);
+                        if (pi == null) {
+                            Log.d(PowerUsageSummary.TAG, "Retrieving null package info for package "
+                                    + pkgName + ", user " + userId);
+                            continue;
+                        }
+                        if (pi.sharedUserLabel != 0) {
+                            final CharSequence nm = pm.getText(pkgName,
+                                    pi.sharedUserLabel, pi.applicationInfo);
+                            if (nm != null) {
+                                name = nm.toString();
+                                if (pi.applicationInfo.icon != 0) {
+                                    defaultPackageName = pkgName;
+                                    icon = pi.applicationInfo.loadIcon(pm);
+                                }
+                                break;
+                            }
+                        }
+                    } catch (RemoteException e) {
+                        Log.d(PowerUsageSummary.TAG, "Error while retrieving package info for package "
+                                + pkgName + ", user " + userId, e);
+                    }
                 }
             }
         }
-        final String uidString = Integer.toString(sipper.uidObj.getUid());
+
+        final String uidString = Integer.toString(uid);
+        if (name == null) {
+            name = uidString;
+        }
+
+        if (icon == null) {
+            icon = pm.getDefaultActivityIcon();
+        }
+
         UidToDetail utd = new UidToDetail();
         utd.name = name;
         utd.icon = icon;
