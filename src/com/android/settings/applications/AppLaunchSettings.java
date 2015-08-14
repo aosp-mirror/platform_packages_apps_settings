@@ -39,6 +39,7 @@ import com.android.settings.Utils;
 import static android.content.pm.PackageManager.INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_UNDEFINED;
 import static android.content.pm.PackageManager.INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_ASK;
 import static android.content.pm.PackageManager.INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_ALWAYS;
+import static android.content.pm.PackageManager.INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_ALWAYS_ASK;
 import static android.content.pm.PackageManager.INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_NEVER;
 
 import java.util.List;
@@ -93,7 +94,7 @@ public class AppLaunchSettings extends AppInfoWithHeader implements OnClickListe
         mAppLinkState.addItem(R.string.app_link_open_always,
                 INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_ALWAYS);
         mAppLinkState.addItem(R.string.app_link_open_ask,
-                INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_ASK);
+                INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_ALWAYS_ASK);
         mAppLinkState.addItem(R.string.app_link_open_never,
                 INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_NEVER);
 
@@ -105,7 +106,7 @@ public class AppLaunchSettings extends AppInfoWithHeader implements OnClickListe
             final int state = mPm.getIntentVerificationStatus(mPackageName, UserHandle.myUserId());
             mAppLinkState.setSelectedValue(
                     (state == INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_UNDEFINED)
-                        ? INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_ASK
+                        ? INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_ALWAYS_ASK
                         : state);
 
             // Set the callback only after setting the initial selected item
