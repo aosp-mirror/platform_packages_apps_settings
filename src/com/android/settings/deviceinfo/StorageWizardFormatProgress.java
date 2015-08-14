@@ -154,7 +154,7 @@ public class StorageWizardFormatProgress extends StorageWizardBase {
                 // storage or slower.
                 if (Float.isNaN(pct) || pct < 0.25) {
                     final SlowWarningFragment dialog = new SlowWarningFragment();
-                    dialog.show(activity.getFragmentManager(), TAG_SLOW_WARNING);
+                    dialog.showAllowingStateLoss(activity.getFragmentManager(), TAG_SLOW_WARNING);
                 } else {
                     activity.onFormatFinished();
                 }
