@@ -354,7 +354,9 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         // Only offer to migrate when not current storage
         final VolumeInfo privateVol = getActivity().getPackageManager()
                 .getPrimaryStorageCurrentVolume();
-        migrate.setVisible(!Objects.equals(mVolume, privateVol));
+        migrate.setVisible((privateVol != null)
+                && (privateVol.getType() == VolumeInfo.TYPE_PRIVATE)
+                && !Objects.equals(mVolume, privateVol));
     }
 
     @Override
