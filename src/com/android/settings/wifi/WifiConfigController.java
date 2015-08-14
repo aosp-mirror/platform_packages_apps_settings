@@ -364,6 +364,11 @@ public class WifiConfigController implements TextWatcher,
                 enabled = false;
             }
         }
+        if (mEapCaCertSpinner != null &&
+                mView.findViewById(R.id.l_ca_cert).getVisibility() != View.GONE &&
+                ((String)mEapCaCertSpinner.getSelectedItem()).equals(unspecifiedCert)) {
+            enabled = false;
+        }
         submit.setEnabled(enabled);
     }
 
@@ -656,6 +661,7 @@ public class WifiConfigController implements TextWatcher,
             }
             mPhase2Spinner = (Spinner) mView.findViewById(R.id.phase2);
             mEapCaCertSpinner = (Spinner) mView.findViewById(R.id.ca_cert);
+            mEapCaCertSpinner.setOnItemSelectedListener(this);
             mEapUserCertSpinner = (Spinner) mView.findViewById(R.id.user_cert);
             mEapIdentityView = (TextView) mView.findViewById(R.id.identity);
             mEapAnonymousView = (TextView) mView.findViewById(R.id.anonymous);
