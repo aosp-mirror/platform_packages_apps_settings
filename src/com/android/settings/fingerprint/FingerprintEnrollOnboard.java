@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.ChooseLockGeneric;
 import com.android.settings.ChooseLockSettingsHelper;
 import com.android.settings.R;
@@ -81,5 +82,10 @@ public class FingerprintEnrollOnboard extends FingerprintEnrollBase {
 
     protected Intent getFindSensorIntent() {
         return new Intent(this, FingerprintEnrollFindSensor.class);
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.FINGERPRINT_ENROLL_ONBOARD;
     }
 }
