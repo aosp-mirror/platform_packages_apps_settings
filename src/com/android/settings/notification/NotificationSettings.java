@@ -463,6 +463,9 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
         }
         entries.add(getString(R.string.lock_screen_notifications_summary_disable));
         values.add(Integer.toString(R.string.lock_screen_notifications_summary_disable));
+
+        mLockscreen.setEntries(entries.toArray(new CharSequence[entries.size()]));
+        mLockscreen.setEntryValues(values.toArray(new CharSequence[values.size()]));
         updateLockscreenNotifications();
         if (mLockscreen.getEntries().length > 1) {
             mLockscreen.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
