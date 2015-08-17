@@ -38,6 +38,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.ChooseLockSettingsHelper;
 import com.android.settings.R;
 
@@ -379,6 +380,11 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
             showError(getString(R.string.security_settings_fingerprint_enroll_lift_touch_again));
         }
     };
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.FINGERPRINT_ENROLLING;
+    }
 
     public static class IconTouchDialog extends DialogFragment {
 

@@ -21,6 +21,7 @@ import android.content.res.Resources;
 import android.view.View;
 import android.widget.Button;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
 import com.android.setupwizardlib.view.NavigationBar;
@@ -73,5 +74,10 @@ public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntrodu
     @Override
     public void onNavigateNext() {
         onNextButtonClick();
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.FINGERPRINT_ENROLL_INTRO_SETUP;
     }
 }
