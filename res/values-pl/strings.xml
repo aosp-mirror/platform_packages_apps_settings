@@ -94,7 +94,7 @@
     <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"Widoczne dla wszystkich urządzeń Bluetooth (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
     <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"Widoczne dla wszystkich urządzeń Bluetooth"</string>
     <string name="bluetooth_not_visible_to_other_devices" msgid="9120274591523391910">"Niewidoczne dla innych urządzeń Bluetooth"</string>
-    <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"Widoczne tylko dla urządzeń sparowanych"</string>
+    <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"Widoczne tylko na urządzenia sparowanych"</string>
     <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"Czas widoczności"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"Zablokuj wybieranie głosowe"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"Zapobiegaj używaniu wybierania Bluetooth, gdy ekran jest zablokowany"</string>
@@ -109,7 +109,7 @@
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Rozłączyć?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Spowoduje to zakończenie połączenia z urządzeniem:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="603521233563983689">"Nie masz uprawnień, by zmienić ustawienia Bluetootha."</string>
-    <string name="bluetooth_is_visible_message" msgid="6222396240776971862">"Urządzenie <xliff:g id="DEVICE_NAME">%1$s</xliff:g> jest widoczne dla urządzeń w pobliżu, gdy ustawienia Bluetooth są otwarte."</string>
+    <string name="bluetooth_is_visible_message" msgid="6222396240776971862">"Urządzenie <xliff:g id="DEVICE_NAME">%1$s</xliff:g> jest widoczne na urządzenia w pobliżu, gdy ustawienia Bluetooth są otwarte."</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"Odłączyć urządzenie <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Transmisja"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Wyłączyć profil?"</string>
@@ -866,7 +866,6 @@
     <string name="doze_title" msgid="2259176504273878294">"Ekran dostosowany do otoczenia"</string>
     <string name="doze_summary" msgid="7128970177894383698">"Włącz ekran po podniesieniu urządzenia lub otrzymaniu powiadomień"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Rozmiar czcionki"</string>
-    <string name="dialog_title_font_size" msgid="2231507851258955038">"Rozmiar czcionki"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Ustawienia blokady karty SIM"</string>
     <string name="sim_lock_settings_category" msgid="5136244267576697004">"Ustaw blokadę SIM"</string>
     <string name="sim_lock_settings_title" msgid="9018585580955414596">"Blokada karty SIM"</string>
@@ -909,6 +908,7 @@
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"Aktualizacje systemowe"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Wersja systemu Android"</string>
+    <string name="security_patch" msgid="8438384045870296634">"Poziom poprawek zabezpieczeń Androida"</string>
     <string name="model_number" msgid="3765737700545384794">"Numer modelu"</string>
     <string name="fcc_equipment_id" msgid="149114368246356737">"Identyfikator sprzętu"</string>
     <string name="baseband_version" msgid="1848990160763524801">"Wersja pasma podstawowego"</string>
@@ -2155,6 +2155,8 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"Limit procesów w tle"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"Pokaż wszystkie ANR"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"Pokaż okno Aplikacja Nie Reaguje dla aplikacji w tle"</string>
+    <string name="force_allow_on_external" msgid="3215759785081916381">"Wymuś zezwalanie na aplikacje w pamięci zewn."</string>
+    <string name="force_allow_on_external_summary" msgid="3191952505860343233">"Pozwala na zapis aplikacji w pamięci zewn. niezależnie od wartości w pliku manifestu"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Użycie danych"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"Przesył danych w aplikacji"</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"Operator sieci komórkowej może obliczać ilość przesłanych danych inaczej niż urządzenie."</string>
@@ -2373,7 +2375,6 @@
     <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"To ustawienie obowiązuje wszystkich użytkowników tego tabletu."</string>
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"To ustawienie obowiązuje wszystkich użytkowników tego telefonu."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"Zmień język"</string>
-    <string name="global_font_change_title" msgid="1887126466191012035">"Zmień rozmiar czcionki"</string>
     <string name="nfc_payment_settings_title" msgid="1807298287380821613">"Dotknij i zapłać"</string>
     <string name="nfc_payment_how_it_works" msgid="3028822263837896720">"Jak to działa"</string>
     <string name="nfc_payment_no_apps" msgid="5477904979148086424">"Płać telefonem w sklepie"</string>

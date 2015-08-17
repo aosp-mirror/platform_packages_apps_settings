@@ -850,7 +850,6 @@
     <string name="doze_title" msgid="2259176504273878294">"절전 모드 자동 해제"</string>
     <string name="doze_summary" msgid="7128970177894383698">"기기를 들거나 알림을 수신 시 절전 모드를 해제합니다."</string>
     <string name="title_font_size" msgid="4405544325522105222">"글꼴 크기"</string>
-    <string name="dialog_title_font_size" msgid="2231507851258955038">"글꼴 크기"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"SIM 카드 잠금 설정"</string>
     <string name="sim_lock_settings_category" msgid="5136244267576697004">"SIM 카드 잠금 설정"</string>
     <string name="sim_lock_settings_title" msgid="9018585580955414596">"SIM 카드 잠금"</string>
@@ -891,6 +890,7 @@
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"시스템 업데이트"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Android 버전"</string>
+    <string name="security_patch" msgid="8438384045870296634">"Android 보안 패치 수준"</string>
     <string name="model_number" msgid="3765737700545384794">"모델 번호"</string>
     <string name="fcc_equipment_id" msgid="149114368246356737">"장비 ID"</string>
     <string name="baseband_version" msgid="1848990160763524801">"기저대역 버전"</string>
@@ -2137,6 +2137,8 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"백그라운드 프로세스 수 제한"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"모든 ANR 보기"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"백그라운드 앱에 대해 앱 응답 없음 대화상자 표시"</string>
+    <string name="force_allow_on_external" msgid="3215759785081916381">"외부에서 앱 강제 허용"</string>
+    <string name="force_allow_on_external_summary" msgid="3191952505860343233">"매니페스트 값에 관계없이 앱을 외부 저장소에 작성"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"데이터 사용량"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"앱 데이터 사용"</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"이동통신사 데이터 사용량 계산은 기기와 다를 수 있습니다."</string>
@@ -2355,7 +2357,6 @@
     <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"이 설정은 태블릿의 모든 사용자에게 영향을 줍니다."</string>
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"이 설정은 휴대전화의 모든 사용자에게 영향을 줍니다."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"언어 변경"</string>
-    <string name="global_font_change_title" msgid="1887126466191012035">"글꼴 크기 변경"</string>
     <string name="nfc_payment_settings_title" msgid="1807298287380821613">"탭앤페이"</string>
     <string name="nfc_payment_how_it_works" msgid="3028822263837896720">"작동 방식"</string>
     <string name="nfc_payment_no_apps" msgid="5477904979148086424">"판매점에서 휴대전화로 결제"</string>
@@ -2864,27 +2865,17 @@
     <string name="filter_overlay_apps" msgid="6965969283342557573">"권한을 가진 앱"</string>
     <string name="system_alert_window_on" msgid="2939489395109048888">"예"</string>
     <string name="system_alert_window_off" msgid="6189115687233061992">"아니요"</string>
-    <!-- no translation found for write_settings (4797457275727195681) -->
-    <skip />
+    <string name="write_settings" msgid="4797457275727195681">"시스템 설정 수정"</string>
     <string name="keywords_write_settings" msgid="6415597272561105138">"시스템 설정 수정 쓰기"</string>
-    <!-- no translation found for write_settings_summary (4302268998611412696) -->
-    <skip />
-    <!-- no translation found for filter_write_settings_apps (2914615026197322551) -->
-    <skip />
-    <!-- no translation found for write_settings_title (4232152481902542284) -->
-    <skip />
-    <!-- no translation found for write_system_settings (3482913590601096763) -->
-    <skip />
-    <!-- no translation found for write_settings_preference (3407383041273067448) -->
-    <skip />
-    <!-- no translation found for permit_write_settings (6393779336656870080) -->
-    <skip />
-    <!-- no translation found for write_settings_description (6868293938839954623) -->
-    <skip />
+    <string name="write_settings_summary" msgid="4302268998611412696">"앱 <xliff:g id="COUNT_1">%d</xliff:g>개 중 <xliff:g id="COUNT_0">%d</xliff:g>개에서 시스템 설정을 수정하도록 허용했습니다."</string>
+    <string name="filter_write_settings_apps" msgid="2914615026197322551">"시스템 설정 수정 가능"</string>
+    <string name="write_settings_title" msgid="4232152481902542284">"시스템 설정 수정 가능"</string>
+    <string name="write_system_settings" msgid="3482913590601096763">"시스템 설정 수정"</string>
+    <string name="write_settings_preference" msgid="3407383041273067448">"앱의 시스템 설정 수정 권한"</string>
+    <string name="permit_write_settings" msgid="6393779336656870080">"시스템 설정 수정 허용"</string>
+    <string name="write_settings_description" msgid="6868293938839954623">"이 권한은 앱이 시스템 설정을 수정하도록 허용합니다."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"예"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"아니요"</string>
-    <!-- no translation found for camera_gesture_title (1075838577642393011) -->
-    <skip />
-    <!-- no translation found for camera_gesture_desc (1831390075255870960) -->
-    <skip />
+    <string name="camera_gesture_title" msgid="1075838577642393011">"손목을 두 번 돌려 카메라 열기"</string>
+    <string name="camera_gesture_desc" msgid="1831390075255870960">"손목을 두 번 돌리면 카메라 앱이 열립니다."</string>
 </resources>
