@@ -30,6 +30,7 @@ import android.content.pm.IPackageManager;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.pm.ParceledListSlice;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -556,8 +557,11 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         // Get the list of apps already installed for the user
         mUserApps = null;
         try {
-            mUserApps = ipm.getInstalledApplications(
-                    PackageManager.GET_UNINSTALLED_PACKAGES, mUser.getIdentifier()).getList();
+            ParceledListSlice listSlice = ipm.getInstalledApplications(
+                    PackageManager.GET_UNINSTALLED_PACKAGES, mUser.getIdentifier());
+            if (listSlice != null) {
+                mUserApps = listSlice.getList();
+            }
         } catch (RemoteException re) {
         }
 
