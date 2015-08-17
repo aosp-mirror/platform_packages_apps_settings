@@ -83,7 +83,7 @@ public class UsbBackend {
         } else if (mUsbManager.isFunctionEnabled(UsbManager.USB_FUNCTION_MTP)) {
             return MODE_DATA_MTP;
         } else if (mUsbManager.isFunctionEnabled(UsbManager.USB_FUNCTION_PTP)) {
-            return MODE_DATA_MTP;
+            return MODE_DATA_PTP;
         } else if (mUsbManager.isFunctionEnabled(UsbManager.USB_FUNCTION_MIDI)) {
             return MODE_DATA_MIDI;
         }
