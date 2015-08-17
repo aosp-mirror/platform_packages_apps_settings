@@ -28,6 +28,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.settings.ChooseLockSettingsHelper;
+import com.android.settings.InstrumentedActivity;
 import com.android.settings.R;
 import com.android.setupwizardlib.SetupWizardLayout;
 import com.android.setupwizardlib.view.NavigationBar;
@@ -35,7 +36,8 @@ import com.android.setupwizardlib.view.NavigationBar;
 /**
  * Base activity for all fingerprint enrollment steps.
  */
-public class FingerprintEnrollBase extends Activity implements View.OnClickListener {
+public abstract class FingerprintEnrollBase extends InstrumentedActivity
+        implements View.OnClickListener {
 
     /**
      * Used by the choose fingerprint wizard to indicate the wizard is

@@ -22,6 +22,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.ChooseLockSettingsHelper;
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
@@ -77,5 +78,10 @@ public class SetupFingerprintEnrollFinish extends FingerprintEnrollFinish
     @Override
     public void onNavigateNext() {
         onNextButtonClick();
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.FINGERPRINT_ENROLL_FINISH_SETUP;
     }
 }
