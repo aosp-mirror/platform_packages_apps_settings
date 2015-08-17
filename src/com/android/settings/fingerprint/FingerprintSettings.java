@@ -403,7 +403,7 @@ public class FingerprintSettings extends SubSettings {
         }
 
         private void showRenameDeleteDialog(final Fingerprint fp) {
-            RenameDeleteDialog renameDeleteDialog = new RenameDeleteDialog();
+            RenameDeleteDialog renameDeleteDialog = new RenameDeleteDialog(getContext());
             Bundle args = new Bundle();
             args.putParcelable("fingerprint", fp);
             renameDeleteDialog.setArguments(args);
@@ -527,12 +527,17 @@ public class FingerprintSettings extends SubSettings {
 
         public static class RenameDeleteDialog extends DialogFragment {
 
+            private final Context mContext;
             private Fingerprint mFp;
             private EditText mDialogTextField;
             private String mFingerName;
             private Boolean mTextHadFocus;
             private int mTextSelectionStart;
             private int mTextSelectionEnd;
+
+            public RenameDeleteDialog(Context context) {
+                mContext = context;
+            }
 
             @Override
             public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -556,6 +561,9 @@ public class FingerprintSettings extends SubSettings {
                                             if (DEBUG) {
                                                 Log.v(TAG, "rename " + name + " to " + newName);
                                             }
+                                            MetricsLogger.action(mContext,
+                                                    MetricsLogger.ACTION_FINGERPRINT_RENAME,
+                                                    mFp.getFingerId());
                                             FingerprintSettingsFragment parent
                                                     = (FingerprintSettingsFragment)
                                                     getTargetFragment();
@@ -598,6 +606,8 @@ public class FingerprintSettings extends SubSettings {
 
             private void onDeleteClick(DialogInterface dialog) {
                 if (DEBUG) Log.v(TAG, "Removing fpId=" + mFp.getFingerId());
+                MetricsLogger.action(mContext, MetricsLogger.ACTION_FINGERPRINT_DELETE,
+                        mFp.getFingerId());
                 FingerprintSettingsFragment parent
                         = (FingerprintSettingsFragment) getTargetFragment();
                 if (parent.mFingerprintManager.getEnrolledFingerprints().size() > 1) {
