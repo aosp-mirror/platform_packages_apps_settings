@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.view.View;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.ChooseLockSettingsHelper;
 import com.android.settings.HelpUtils;
 import com.android.settings.R;
@@ -91,5 +92,10 @@ public class FingerprintEnrollIntroduction extends FingerprintEnrollBase {
         Intent helpIntent = HelpUtils.getHelpIntent(this,
                 getString(R.string.help_url_fingerprint), getClass().getName());
         startActivity(helpIntent);
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.FINGERPRINT_ENROLL_INTRO;
     }
 }
