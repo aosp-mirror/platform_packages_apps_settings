@@ -33,6 +33,7 @@ import com.android.settings.WallpaperTypeSettings;
 import com.android.settings.WifiCallingSettings;
 import com.android.settings.WirelessSettings;
 import com.android.settings.accessibility.AccessibilitySettings;
+import com.android.settings.accounts.AccountSettings;
 import com.android.settings.applications.AdvancedAppSettings;
 import com.android.settings.applications.ManageDefaultApps;
 import com.android.settings.bluetooth.BluetoothSettings;
@@ -239,6 +240,13 @@ public final class SearchIndexableResources {
                         NO_DATA_RES_ID,
                         ScreenPinningSettings.class.getName(),
                         R.drawable.ic_settings_security));
+
+        sResMap.put(AccountSettings.class.getName(),
+                new SearchIndexableResource(
+                        Ranking.getRankForClassName(AccountSettings.class.getName()),
+                        NO_DATA_RES_ID,
+                        AccountSettings.class.getName(),
+                        R.drawable.ic_settings_accounts));
 
         sResMap.put(InputMethodAndLanguageSettings.class.getName(),
                 new SearchIndexableResource(

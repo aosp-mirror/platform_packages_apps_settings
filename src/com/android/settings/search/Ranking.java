@@ -31,6 +31,7 @@ import com.android.settings.WallpaperTypeSettings;
 import com.android.settings.WifiCallingSettings;
 import com.android.settings.WirelessSettings;
 import com.android.settings.accessibility.AccessibilitySettings;
+import com.android.settings.accounts.AccountSettings;
 import com.android.settings.applications.AdvancedAppSettings;
 import com.android.settings.applications.ManageDefaultApps;
 import com.android.settings.bluetooth.BluetoothSettings;
@@ -75,13 +76,14 @@ public final class Ranking {
     public static final int RANK_USERS = 13;
     public static final int RANK_LOCATION = 14;
     public static final int RANK_SECURITY = 15;
-    public static final int RANK_IME = 16;
-    public static final int RANK_PRIVACY = 17;
-    public static final int RANK_DATE_TIME = 18;
-    public static final int RANK_ACCESSIBILITY = 19;
-    public static final int RANK_PRINTING = 20;
-    public static final int RANK_DEVELOPEMENT = 21;
-    public static final int RANK_DEVICE_INFO = 22;
+    public static final int RANK_ACCOUNT = 16;
+    public static final int RANK_IME = 17;
+    public static final int RANK_PRIVACY = 18;
+    public static final int RANK_DATE_TIME = 19;
+    public static final int RANK_ACCESSIBILITY = 20;
+    public static final int RANK_PRINTING = 21;
+    public static final int RANK_DEVELOPEMENT = 22;
+    public static final int RANK_DEVICE_INFO = 23;
 
     public static final int RANK_UNDEFINED = -1;
     public static final int RANK_OTHERS = 1024;
@@ -150,6 +152,9 @@ public final class Ranking {
         sRankMap.put(SecuritySettings.class.getName(), RANK_SECURITY);
         sRankMap.put(ChooseLockGeneric.ChooseLockGenericFragment.class.getName(), RANK_SECURITY);
         sRankMap.put(ScreenPinningSettings.class.getName(), RANK_SECURITY);
+
+        // Accounts
+        sRankMap.put(AccountSettings.class.getName(), RANK_ACCOUNT);
 
         // IMEs
         sRankMap.put(InputMethodAndLanguageSettings.class.getName(), RANK_IME);
