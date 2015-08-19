@@ -78,8 +78,10 @@ public class MasterClearConfirm extends InstrumentedFragment {
                     @Override
                     protected void onPostExecute(Void aVoid) {
                         mProgressDialog.hide();
-                        getActivity().setRequestedOrientation(mOldOrientation);
-                        doMasterClear();
+                        if (getActivity() != null) {
+                            getActivity().setRequestedOrientation(mOldOrientation);
+                            doMasterClear();
+                        }
                     }
 
                     @Override
