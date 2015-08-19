@@ -43,6 +43,7 @@ import com.android.settings.HelpUtils;
 import com.android.settings.R;
 import com.android.settings.Settings.HighPowerApplicationsActivity;
 import com.android.settings.SettingsActivity;
+import com.android.settings.Utils;
 import com.android.settings.applications.ManageApplications;
 
 import java.util.ArrayList;
@@ -123,7 +124,7 @@ public class PowerUsageSummary extends PowerUsageBase {
         PowerGaugePreference pgp = (PowerGaugePreference) preference;
         BatteryEntry entry = pgp.getInfo();
         PowerUsageDetail.startBatteryDetailPage((SettingsActivity) getActivity(), mStatsHelper,
-                mStatsType, entry, true);
+                mStatsType, entry, true, true);
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 

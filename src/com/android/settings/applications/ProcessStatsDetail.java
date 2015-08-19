@@ -121,8 +121,7 @@ public class ProcessStatsDetail extends SettingsPreferenceFragment {
 
         AppHeader.createAppHeader(this,
                 mApp.mUiTargetApp != null ? mApp.mUiTargetApp.loadIcon(mPm) : new ColorDrawable(0),
-                mApp.mUiLabel, mApp.mPackage.equals(Utils.OS_PKG) ? null
-                        : AppInfoWithHeader.getInfoIntent(this, mApp.mPackage));
+                mApp.mUiLabel, mApp.mPackage, mApp.mUiTargetApp.uid);
     }
 
     @Override

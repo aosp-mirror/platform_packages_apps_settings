@@ -67,6 +67,7 @@ import android.widget.TextView;
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
+import com.android.settings.AppHeader;
 import com.android.settings.DataUsageSummary;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -680,7 +681,7 @@ public class InstalledAppDetails extends AppInfoBase
         // start new activity to manage app permissions
         Intent intent = new Intent(Intent.ACTION_MANAGE_APP_PERMISSIONS);
         intent.putExtra(Intent.EXTRA_PACKAGE_NAME, mAppEntry.info.packageName);
-        intent.putExtra(AppInfoWithHeader.EXTRA_HIDE_INFO_BUTTON, true);
+        intent.putExtra(AppHeader.EXTRA_HIDE_INFO_BUTTON, true);
         try {
             startActivity(intent);
         } catch (ActivityNotFoundException e) {
@@ -693,7 +694,7 @@ public class InstalledAppDetails extends AppInfoBase
         Bundle args = new Bundle();
         args.putString(ARG_PACKAGE_NAME, mAppEntry.info.packageName);
         args.putInt(ARG_PACKAGE_UID, mAppEntry.info.uid);
-        args.putBoolean(AppInfoWithHeader.EXTRA_HIDE_INFO_BUTTON, true);
+        args.putBoolean(AppHeader.EXTRA_HIDE_INFO_BUTTON, true);
 
         SettingsActivity sa = (SettingsActivity) getActivity();
         sa.startPreferencePanel(fragment.getName(), args, -1, title, this, SUB_INFO_FRAGMENT);
@@ -742,7 +743,7 @@ public class InstalledAppDetails extends AppInfoBase
             startAppInfoFragment(AppLaunchSettings.class, mLaunchPreference.getTitle());
         } else if (preference == mMemoryPreference) {
             ProcessStatsBase.launchMemoryDetail((SettingsActivity) getActivity(),
-                    mStatsManager.getMemInfo(), mStats);
+                    mStatsManager.getMemInfo(), mStats, false);
         } else if (preference == mDataPreference) {
             Bundle args = new Bundle();
             args.putString(DataUsageSummary.EXTRA_SHOW_APP_IMMEDIATE_PKG,
@@ -754,7 +755,7 @@ public class InstalledAppDetails extends AppInfoBase
         } else if (preference == mBatteryPreference) {
             BatteryEntry entry = new BatteryEntry(getActivity(), null, mUserManager, mSipper);
             PowerUsageDetail.startBatteryDetailPage((SettingsActivity) getActivity(),
-                    mBatteryHelper, BatteryStats.STATS_SINCE_CHARGED, entry, true);
+                    mBatteryHelper, BatteryStats.STATS_SINCE_CHARGED, entry, true, false);
         } else {
             return false;
         }

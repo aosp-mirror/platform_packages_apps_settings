@@ -108,7 +108,7 @@ public class ProcessStatsUi extends ProcessStatsBase {
         }
         ProcessStatsPreference pgp = (ProcessStatsPreference) preference;
         MemInfo memInfo = mStatsManager.getMemInfo();
-        launchMemoryDetail((SettingsActivity) getActivity(), memInfo, pgp.getEntry());
+        launchMemoryDetail((SettingsActivity) getActivity(), memInfo, pgp.getEntry(), true);
 
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }

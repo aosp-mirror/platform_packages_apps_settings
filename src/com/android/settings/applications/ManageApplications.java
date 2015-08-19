@@ -363,7 +363,7 @@ public class ManageApplications extends InstrumentedFragment
         super.onViewCreated(view, savedInstanceState);
         if (mListType == LIST_TYPE_STORAGE) {
             FrameLayout pinnedHeader = (FrameLayout) mRootView.findViewById(R.id.pinned_header);
-            AppHeader.createAppHeader(getActivity(), null, mVolumeName, null, pinnedHeader);
+            AppHeader.createAppHeader(getActivity(), null, mVolumeName, null, -1, pinnedHeader);
         }
     }
 

@@ -24,6 +24,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.android.internal.app.ProcessStats;
+import com.android.settings.AppHeader;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
@@ -128,7 +129,7 @@ public abstract class ProcessStatsBase extends SettingsPreferenceFragment
     public abstract void refreshUi();
 
     public static void launchMemoryDetail(SettingsActivity activity, MemInfo memInfo,
-            ProcStatsPackageEntry entry) {
+            ProcStatsPackageEntry entry, boolean includeAppInfo) {
         Bundle args = new Bundle();
         args.putParcelable(ProcessStatsDetail.EXTRA_PACKAGE_ENTRY, entry);
         args.putDouble(ProcessStatsDetail.EXTRA_WEIGHT_TO_RAM, memInfo.weightToRam);
@@ -136,6 +137,7 @@ public abstract class ProcessStatsBase extends SettingsPreferenceFragment
         args.putDouble(ProcessStatsDetail.EXTRA_MAX_MEMORY_USAGE,
                 memInfo.usedWeight * memInfo.weightToRam);
         args.putDouble(ProcessStatsDetail.EXTRA_TOTAL_SCALE, memInfo.totalScale);
+        args.putBoolean(AppHeader.EXTRA_HIDE_INFO_BUTTON, !includeAppInfo);
         activity.startPreferencePanel(ProcessStatsDetail.class.getName(), args,
                 R.string.memory_usage, null, null, 0);
     }
