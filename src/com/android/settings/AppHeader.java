@@ -17,38 +17,49 @@
 package com.android.settings;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.settings.applications.AppInfoBase;
+import com.android.settings.applications.InstalledAppDetails;
+
 public class AppHeader {
 
+    public static final String EXTRA_HIDE_INFO_BUTTON = "hideInfoButton";
+    // constant value that can be used to check return code from sub activity.
+    private static final int INSTALLED_APP_DETAILS = 1;
+
     public static void createAppHeader(SettingsPreferenceFragment fragment, Drawable icon,
-            CharSequence label, final Intent settingsIntent) {
-        createAppHeader(fragment, icon, label, settingsIntent, 0);
+            CharSequence label, String pkgName, int uid) {
+        createAppHeader(fragment, icon, label, pkgName, uid, 0);
     }
 
     public static void createAppHeader(Activity activity, Drawable icon, CharSequence label,
-            final Intent settingsIntent, ViewGroup pinnedHeader) {
+            String pkgName, int uid, ViewGroup pinnedHeader) {
         final View bar = activity.getLayoutInflater().inflate(R.layout.app_header,
                 pinnedHeader, false);
-        setupHeaderView(activity, icon, label, settingsIntent, 0, bar);
+        setupHeaderView(activity, icon, label, pkgName, uid, false, 0, bar);
         pinnedHeader.addView(bar);
     }
 
     public static void createAppHeader(SettingsPreferenceFragment fragment, Drawable icon,
-            CharSequence label, Intent settingsIntent, int tintColorRes) {
+            CharSequence label, String pkgName, int uid, int tintColorRes) {
         View bar = fragment.setPinnedHeaderView(R.layout.app_header);
-        setupHeaderView(fragment.getActivity(), icon, label, settingsIntent, tintColorRes, bar);
+        setupHeaderView(fragment.getActivity(), icon, label, pkgName, uid, includeAppInfo(fragment),
+                tintColorRes, bar);
     }
 
     private static View setupHeaderView(final Activity activity, Drawable icon, CharSequence label,
-            final Intent settingsIntent, int tintColorRes, View bar) {
+            final String pkgName, final int uid, boolean includeAppInfo, int tintColorRes,
+            View bar) {
         final ImageView appIcon = (ImageView) bar.findViewById(R.id.app_icon);
         appIcon.setImageDrawable(icon);
         if (tintColorRes != 0) {
@@ -59,19 +70,32 @@ public class AppHeader {
         appName.setText(label);
 
         final View appSettings = bar.findViewById(R.id.app_settings);
-        if (settingsIntent == null) {
-            appSettings.setVisibility(View.GONE);
-        } else {
+        if (includeAppInfo && pkgName != null && !pkgName.equals(Utils.OS_PKG)) {
             appSettings.setClickable(true);
             appSettings.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    activity.startActivity(settingsIntent);
+                    AppInfoBase.startAppInfoFragment(InstalledAppDetails.class,
+                            R.string.application_info_label, pkgName, uid, activity,
+                            INSTALLED_APP_DETAILS);
                 }
             });
+        } else {
+            appSettings.setVisibility(View.GONE);
         }
-
         return bar;
     }
 
+    private static boolean includeAppInfo(final Fragment fragment) {
+        Bundle args = fragment.getArguments();
+        boolean showInfo = true;
+        if (args != null && args.getBoolean(EXTRA_HIDE_INFO_BUTTON, false)) {
+            showInfo = false;
+        }
+        Intent intent = fragment.getActivity().getIntent();
+        if (intent != null && intent.getBooleanExtra(EXTRA_HIDE_INFO_BUTTON, false)) {
+            showInfo = false;
+        }
+        return showInfo;
+    }
 }

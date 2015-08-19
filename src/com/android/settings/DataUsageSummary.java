@@ -486,8 +486,9 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
             // When we are going straight to an app then we are coming from App Info and want
             // a header at the top.
             FrameLayout pinnedHeader = (FrameLayout) rootView.findViewById(R.id.pinned_header);
-            AppHeader.createAppHeader(getActivity(), detail.icon, detail.label, null, pinnedHeader);
-            AppDetailsFragment.show(DataUsageSummary.this, app, detail.label, true);
+            AppHeader.createAppHeader(getActivity(), detail.icon, detail.label,
+                    mShowAppImmediatePkg, uid, pinnedHeader);
+            AppDetailsFragment.show(DataUsageSummary.this, app, detail.label, false);
         } catch (NameNotFoundException e) {
             Log.w(TAG, "Could not find " + mShowAppImmediatePkg, e);
             Toast.makeText(getActivity(), getString(R.string.unknown_app), Toast.LENGTH_LONG)

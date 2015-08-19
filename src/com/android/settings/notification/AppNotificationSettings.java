@@ -44,7 +44,6 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.applications.AppInfoBase;
-import com.android.settings.applications.AppInfoWithHeader;
 import com.android.settings.notification.NotificationBackend.AppRow;
 
 import java.util.List;
@@ -86,8 +85,7 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
         }
         mCreated = true;
         if (mAppRow == null) return;
-        AppHeader.createAppHeader(this, mAppRow.icon, mAppRow.label,
-                AppInfoWithHeader.getInfoIntent(this, mAppRow.pkg));
+        AppHeader.createAppHeader(this, mAppRow.icon, mAppRow.label, mAppRow.pkg, mAppRow.uid);
     }
 
     @Override

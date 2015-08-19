@@ -195,13 +195,18 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
 
     public static void startAppInfoFragment(Class<?> fragment, int titleRes,
             String pkg, int uid, Fragment source, int request) {
+        startAppInfoFragment(fragment, titleRes, pkg, uid, source.getActivity(), request);
+    }
+
+    public static void startAppInfoFragment(Class<?> fragment, int titleRes,
+            String pkg, int uid, Activity source, int request) {
         Bundle args = new Bundle();
         args.putString(AppInfoBase.ARG_PACKAGE_NAME, pkg);
         args.putInt(AppInfoBase.ARG_PACKAGE_UID, uid);
 
-        Intent intent = Utils.onBuildStartFragmentIntent(source.getActivity(), fragment.getName(),
+        Intent intent = Utils.onBuildStartFragmentIntent(source, fragment.getName(),
                 args, null, titleRes, null, false);
-        source.getActivity().startActivityForResultAsUser(intent, request,
+        source.startActivityForResultAsUser(intent, request,
                 new UserHandle(UserHandle.getUserId(uid)));
     }
 

@@ -84,7 +84,7 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
 
     public static void startBatteryDetailPage(
             SettingsActivity caller, BatteryStatsHelper helper, int statsType, BatteryEntry entry,
-            boolean showLocationButton) {
+            boolean showLocationButton, boolean includeAppInfo) {
         // Initialize mStats if necessary.
         helper.getStats();
 
@@ -104,6 +104,7 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
         }
         args.putSerializable(PowerUsageDetail.EXTRA_DRAIN_TYPE, entry.sipper.drainType);
         args.putBoolean(PowerUsageDetail.EXTRA_SHOW_LOCATION_BUTTON, showLocationButton);
+        args.putBoolean(AppHeader.EXTRA_HIDE_INFO_BUTTON, !includeAppInfo);
 
         int userId = UserHandle.myUserId();
         int[] types;
@@ -462,13 +463,15 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
         String pkg = args.getString(EXTRA_ICON_PACKAGE);
         int iconId = args.getInt(EXTRA_ICON_ID, 0);
         Drawable appIcon = null;
+        int uid = -1;
+        final PackageManager pm = getActivity().getPackageManager();
 
         if (!TextUtils.isEmpty(pkg)) {
             try {
-                final PackageManager pm = getActivity().getPackageManager();
                 ApplicationInfo ai = pm.getPackageInfo(pkg, 0).applicationInfo;
                 if (ai != null) {
                     appIcon = ai.loadIcon(pm);
+                    uid = ai.uid;
                 }
             } catch (NameNotFoundException nnfe) {
                 // Use default icon
@@ -483,8 +486,7 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
         if (pkg == null && mPackages != null) {
             pkg = mPackages[0];
         }
-        AppHeader.createAppHeader(this, appIcon, title,
-                pkg != null ? AppInfoWithHeader.getInfoIntent(this, pkg) : null,
+        AppHeader.createAppHeader(this, appIcon, title, pkg, uid,
                 mDrainType != DrainType.APP ? android.R.color.white : 0);
     }
 
