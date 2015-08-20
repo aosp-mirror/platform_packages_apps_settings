@@ -25,6 +25,7 @@ import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.media.AudioManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
@@ -92,13 +93,19 @@ public class OtherSoundSettings extends SettingsPreferenceFragment implements In
     private static final SettingPref PREF_TOUCH_SOUNDS = new SettingPref(
             TYPE_SYSTEM, KEY_TOUCH_SOUNDS, System.SOUND_EFFECTS_ENABLED, DEFAULT_ON) {
         @Override
-        protected boolean setSetting(Context context, int value) {
-            final AudioManager am = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-            if (value != 0) {
-                am.loadSoundEffects();
-            } else {
-                am.unloadSoundEffects();
-            }
+        protected boolean setSetting(final Context context, final int value) {
+            AsyncTask.execute(new Runnable() {
+                @Override
+                public void run() {
+                    final AudioManager am =
+                            (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+                    if (value != 0) {
+                        am.loadSoundEffects();
+                    } else {
+                        am.unloadSoundEffects();
+                    }
+                }
+            });
             return super.setSetting(context, value);
         }
     };
