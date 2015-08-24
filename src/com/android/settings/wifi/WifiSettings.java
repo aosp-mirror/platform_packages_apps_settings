@@ -839,7 +839,9 @@ public class WifiSettings extends RestrictedSettingsFragment
             mWifiManager.save(config, mSaveListener);
         } else {
             mWifiManager.save(config, mSaveListener);
-            connect(config);
+            if (mSelectedAccessPoint != null) { // Not an "Add network"
+                connect(config);
+            }
         }
 
         mWifiTracker.resumeScanning();
