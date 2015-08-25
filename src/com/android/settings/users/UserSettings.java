@@ -64,10 +64,10 @@ import com.android.settings.SelectableEditTextPreference;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
-import com.android.settings.drawable.CircleFramedDrawable;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
+import com.android.settingslib.drawable.CircleFramedDrawable;
 
 import java.util.ArrayList;
 import java.util.Collections;

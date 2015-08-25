@@ -32,7 +32,7 @@ import android.util.Log;
 
 import com.android.internal.os.BatterySipper;
 import com.android.settings.R;
-import com.android.settings.Utils;
+import com.android.settingslib.Utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;

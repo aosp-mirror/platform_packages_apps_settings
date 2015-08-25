@@ -129,8 +129,6 @@ import com.android.internal.logging.MetricsLogger;
 import com.android.internal.telephony.PhoneConstants;
 import com.android.settings.drawable.InsetBoundsDrawable;
 import com.android.settings.net.DataUsageMeteredSettings;
-import com.android.settings.net.UidDetail;
-import com.android.settings.net.UidDetailProvider;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
@@ -142,6 +140,8 @@ import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.net.ChartData;
 import com.android.settingslib.net.ChartDataLoader;
 import com.android.settingslib.net.SummaryForAllUidLoader;
+import com.android.settingslib.net.UidDetail;
+import com.android.settingslib.net.UidDetailProvider;
 import com.google.android.collect.Lists;
 
 import libcore.util.Objects;
