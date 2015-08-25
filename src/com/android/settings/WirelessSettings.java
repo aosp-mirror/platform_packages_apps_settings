@@ -329,7 +329,7 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
             getPreferenceScreen().removePreference(findPreference(KEY_TETHER_SETTINGS));
         } else {
             Preference p = findPreference(KEY_TETHER_SETTINGS);
-            p.setTitle(Utils.getTetheringLabel(cm));
+            p.setTitle(com.android.settingslib.Utils.getTetheringLabel(cm));
 
             // Grey out if provisioning is not available.
             p.setEnabled(!TetherSettings

@@ -33,7 +33,7 @@ import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import com.android.internal.util.UserIcons;
-import com.android.settings.drawable.CircleFramedDrawable;
+import com.android.settingslib.drawable.CircleFramedDrawable;
 
 import java.util.ArrayList;
 
