@@ -47,7 +47,8 @@ public class UsbBackend {
     public UsbBackend(Context context) {
         Intent intent = context.registerReceiver(null,
                 new IntentFilter(UsbManager.ACTION_USB_STATE));
-        mIsUnlocked = intent.getBooleanExtra(UsbManager.USB_DATA_UNLOCKED, false);
+        mIsUnlocked = intent == null ?
+                false : intent.getBooleanExtra(UsbManager.USB_DATA_UNLOCKED, false);
 
         mUserManager = UserManager.get(context);
         mUsbManager = context.getSystemService(UsbManager.class);
