@@ -4582,6 +4582,10 @@
     <string name="trusted_credentials">Trusted credentials</string>
     <!-- Summary of preference to display trusted credentials (aka CA certificates) [CHAR LIMIT=NONE] -->
     <string name="trusted_credentials_summary">Display trusted CA certificates</string>
+    <!-- Title of preference to display user credentials and keys [CHAR LIMIT=30] -->
+    <string name="user_credentials">User credentials</string>
+    <!-- Summary of preference to display user credentials and keys [CHAR LIMIT=NONE] -->
+    <string name="user_credentials_summary">View and modify stored credentials</string>
     <!-- Title of preference group for advance security settings [CHAR LIMIT=30] -->
     <string name="advanced_security_title">Advanced</string>
     <!-- Title of preference of what type of credential storage this device has: hardware or software [CHAR LIMIT=30] -->
@@ -5424,6 +5428,17 @@
     <string name="trusted_credentials_disable_confirmation">Disable the system CA certificate?</string>
     <!-- Alert dialog confirmation when removing a user CA certificate. -->
     <string name="trusted_credentials_remove_confirmation">Permanently remove the user CA certificate?</string>
+
+    <!-- Item found in the PKCS12 keystore being investigated [CHAR LIMIT=NONE] -->
+    <string name="one_userkey">one user key</string>
+    <!-- Item found in the PKCS12 keystore being investigated [CHAR LIMIT=NONE] -->
+    <string name="one_usercrt">one user certificate</string>
+    <!-- Item found in the PKCS12 keystore being investigated [CHAR LIMIT=NONE] -->
+    <string name="one_cacrt">one CA certificate</string>
+    <!-- Item found in thee PKCS12 keystore being investigated [CHAR LIMIT=NONE]-->
+    <string name="n_cacrts">%d CA certificates</string>
+    <!-- Alert dialog when viewing a set of user credentials. -->
+    <string name="user_credential_title">Credential Details</string>
 
     <!--  Title for spell checker settings -->
     <string name="spellcheckers_settings_title">Spell checker</string>
