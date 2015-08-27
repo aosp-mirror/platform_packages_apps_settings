@@ -16,19 +16,15 @@
 
 package com.android.settings.wifi;
 
-import static android.net.wifi.WifiConfiguration.INVALID_NETWORK_ID;
 import static android.os.UserManager.DISALLOW_CONFIG_WIFI;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AppGlobals;
 import android.app.Dialog;
-import android.app.admin.DeviceAdminInfo;
 import android.app.admin.DevicePolicyManager;
-import android.app.admin.DevicePolicyManagerInternal;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageManager;
@@ -48,7 +44,6 @@ import android.os.HandlerThread;
 import android.os.Process;
 import android.os.RemoteException;
 import android.os.UserHandle;
-import android.os.UserManager;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
@@ -69,7 +64,6 @@ import android.widget.TextView.BufferType;
 import android.widget.Toast;
 
 import com.android.internal.logging.MetricsLogger;
-import com.android.server.LocalServices;
 import com.android.settings.LinkifyUtils;
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
@@ -96,8 +90,8 @@ import java.util.List;
  * and menus.
  */
 public class WifiSettings extends RestrictedSettingsFragment
-        implements DialogInterface.OnClickListener, Indexable, WifiTracker.WifiListener,
-        AccessPointListener {
+        implements Indexable, WifiTracker.WifiListener, AccessPointListener,
+        WifiDialog.WifiDialogListener {
 
     private static final String TAG = "WifiSettings";
 
@@ -816,13 +810,14 @@ public class WifiSettings extends RestrictedSettingsFragment
     }
 
     @Override
-    public void onClick(DialogInterface dialogInterface, int button) {
-        if (button == WifiDialog.BUTTON_FORGET && mSelectedAccessPoint != null) {
-            forget();
-        } else if (button == WifiDialog.BUTTON_SUBMIT) {
-            if (mDialog != null) {
-                submit(mDialog.getController());
-            }
+    public void onForget(WifiDialog dialog) {
+        forget();
+    }
+
+    @Override
+    public void onSubmit(WifiDialog dialog) {
+        if (mDialog != null) {
+            submit(mDialog.getController());
         }
     }
 
@@ -1020,5 +1015,4 @@ public class WifiSettings extends RestrictedSettingsFragment
                 Settings.Global.WIFI_DEVICE_OWNER_CONFIGS_LOCKDOWN, 0) != 0;
         return !isLockdownFeatureEnabled;
     }
-
 }

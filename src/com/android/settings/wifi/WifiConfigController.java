@@ -42,8 +42,10 @@ import android.text.InputType;
 import android.text.TextWatcher;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -68,7 +70,8 @@ import java.util.Iterator;
  * share the logic for controlling buttons, text fields, etc.
  */
 public class WifiConfigController implements TextWatcher,
-       AdapterView.OnItemSelectedListener, OnCheckedChangeListener {
+        AdapterView.OnItemSelectedListener, OnCheckedChangeListener,
+        TextView.OnEditorActionListener, View.OnKeyListener{
     private static final String TAG = "WifiConfigController";
 
     private final WifiConfigUiBase mConfigUi;
@@ -344,32 +347,32 @@ public class WifiConfigController implements TextWatcher,
         Button submit = mConfigUi.getSubmitButton();
         if (submit == null) return;
 
+        submit.setEnabled(isSubmittable());
+    }
+
+    boolean isSubmittable() {
         boolean enabled = false;
         boolean passwordInvalid = false;
 
         if (mPasswordView != null &&
-            ((mAccessPointSecurity == AccessPoint.SECURITY_WEP && mPasswordView.length() == 0) ||
-            (mAccessPointSecurity == AccessPoint.SECURITY_PSK && mPasswordView.length() < 8))) {
+                ((mAccessPointSecurity == AccessPoint.SECURITY_WEP && mPasswordView.length() == 0) ||
+                        (mAccessPointSecurity == AccessPoint.SECURITY_PSK && mPasswordView.length() < 8))) {
             passwordInvalid = true;
         }
 
         if ((mSsidView != null && mSsidView.length() == 0) ||
-            ((mAccessPoint == null || !mAccessPoint.isSaved()) &&
-            passwordInvalid)) {
+                ((mAccessPoint == null || !mAccessPoint.isSaved()) &&
+                        passwordInvalid)) {
             enabled = false;
         } else {
-            if (ipAndProxyFieldsAreValid()) {
-                enabled = true;
-            } else {
-                enabled = false;
-            }
+            enabled = ipAndProxyFieldsAreValid();
         }
         if (mEapCaCertSpinner != null &&
                 mView.findViewById(R.id.l_ca_cert).getVisibility() != View.GONE &&
                 ((String)mEapCaCertSpinner.getSelectedItem()).equals(unspecifiedCert)) {
             enabled = false;
         }
-        submit.setEnabled(enabled);
+        return enabled;
     }
 
     /* package */ WifiConfiguration getConfig() {
@@ -632,6 +635,8 @@ public class WifiConfigController implements TextWatcher,
         if (mPasswordView == null) {
             mPasswordView = (TextView) mView.findViewById(R.id.password);
             mPasswordView.addTextChangedListener(this);
+            mPasswordView.setOnEditorActionListener(this);
+            mPasswordView.setOnKeyListener(this);
             ((CheckBox) mView.findViewById(R.id.show_password))
                 .setOnCheckedChangeListener(this);
 
@@ -986,6 +991,28 @@ public class WifiConfigController implements TextWatcher,
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
         // work done in afterTextChanged
+    }
+
+    @Override
+    public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
+        if (textView == mPasswordView) {
+            if (id == EditorInfo.IME_ACTION_DONE && isSubmittable()) {
+                mConfigUi.dispatchSubmit();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
+        if (view == mPasswordView) {
+            if (keyCode == KeyEvent.KEYCODE_ENTER && isSubmittable()) {
+                mConfigUi.dispatchSubmit();
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

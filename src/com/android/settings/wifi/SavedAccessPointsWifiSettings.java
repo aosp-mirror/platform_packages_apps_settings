@@ -18,7 +18,6 @@ package com.android.settings.wifi;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -45,7 +44,7 @@ import java.util.List;
  * UI to manage saved networks/access points.
  */
 public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
-        implements DialogInterface.OnClickListener, Indexable {
+        implements Indexable, WifiDialog.WifiDialogListener {
     private static final String TAG = "SavedAccessPointsWifiSettings";
 
     private WifiDialog mDialog;
@@ -170,12 +169,17 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
     }
 
     @Override
-    public void onClick(DialogInterface dialogInterface, int button) {
-        if (button == WifiDialog.BUTTON_FORGET && mSelectedAccessPoint != null) {
+    public void onForget(WifiDialog dialog) {
+        if (mSelectedAccessPoint != null) {
             mWifiManager.forget(mSelectedAccessPoint.getConfig().networkId, null);
             getPreferenceScreen().removePreference((Preference) mSelectedAccessPoint.getTag());
             mSelectedAccessPoint = null;
         }
+    }
+
+    @Override
+    public void onSubmit(WifiDialog dialog) {
+        // Ignored
     }
 
     @Override
