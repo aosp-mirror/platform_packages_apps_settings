@@ -393,10 +393,9 @@ public class UserSettings extends SettingsPreferenceFragment
         }
     }
 
-    private UserInfo createLimitedUser() {
-        UserInfo newUserInfo = mUserManager.createUser(
-                getResources().getString(R.string.user_new_profile_name),
-                UserInfo.FLAG_RESTRICTED);
+    private UserInfo createRestrictedProfile() {
+        UserInfo newUserInfo = mUserManager.createRestrictedProfile(
+                getResources().getString(R.string.user_new_profile_name));
         int userId = newUserInfo.id;
         UserHandle user = new UserHandle(userId);
         mUserManager.setUserRestriction(UserManager.DISALLOW_MODIFY_ACCOUNTS, true, user);
@@ -658,7 +657,7 @@ public class UserSettings extends SettingsPreferenceFragment
                     if (userType == USER_TYPE_USER) {
                         user = createTrustedUser();
                     } else {
-                        user = createLimitedUser();
+                        user = createRestrictedProfile();
                     }
                     synchronized (mUserLock) {
                         mAddingUser = false;
