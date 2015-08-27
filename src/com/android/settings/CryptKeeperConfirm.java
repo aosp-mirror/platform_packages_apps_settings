@@ -122,16 +122,16 @@ public class CryptKeeperConfirm extends InstrumentedFragment {
             // 1. The owner info.
             LockPatternUtils utils = new LockPatternUtils(getActivity());
             utils.setVisiblePatternEnabled(
-                    utils.isVisiblePatternEnabled(UserHandle.USER_OWNER),
-                    UserHandle.USER_OWNER);
-            if (utils.isOwnerInfoEnabled(UserHandle.USER_OWNER)) {
-                utils.setOwnerInfo(utils.getOwnerInfo(UserHandle.USER_OWNER),
-                                   UserHandle.USER_OWNER);
+                    utils.isVisiblePatternEnabled(UserHandle.USER_SYSTEM),
+                    UserHandle.USER_SYSTEM);
+            if (utils.isOwnerInfoEnabled(UserHandle.USER_SYSTEM)) {
+                utils.setOwnerInfo(utils.getOwnerInfo(UserHandle.USER_SYSTEM),
+                                   UserHandle.USER_SYSTEM);
             }
             int value = Settings.System.getInt(getContext().getContentResolver(),
                                                Settings.System.TEXT_SHOW_PASSWORD,
                                                1);
-            utils.setVisiblePasswordEnabled(value != 0, UserHandle.USER_OWNER);
+            utils.setVisiblePasswordEnabled(value != 0, UserHandle.USER_SYSTEM);
 
             Intent intent = new Intent(getActivity(), Blank.class);
             intent.putExtras(getArguments());
