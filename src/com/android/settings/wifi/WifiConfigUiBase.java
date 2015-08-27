@@ -29,6 +29,8 @@ public interface WifiConfigUiBase {
     public LayoutInflater getLayoutInflater();
     public boolean isEdit();
 
+    public void dispatchSubmit();
+
     public void setTitle(int id);
     public void setTitle(CharSequence title);
 
