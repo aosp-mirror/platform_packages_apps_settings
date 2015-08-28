@@ -19,8 +19,8 @@ package com.android.settings;
 import com.android.internal.logging.MetricsLogger;
 import com.google.android.collect.Lists;
 import com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient;
-import com.android.internal.widget.LockPatternChecker;
 import com.android.internal.widget.LockPatternUtils;
+import com.android.internal.widget.LockPatternUtils.RequestThrottledException;
 import com.android.internal.widget.LockPatternView;
 import com.android.internal.widget.LockPatternView.Cell;
 import com.android.settings.notification.RedactionInterstitial;
@@ -31,7 +31,6 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.util.Log;
@@ -125,7 +124,7 @@ public class ChooseLockPattern extends SettingsActivity {
     }
 
     public static class ChooseLockPatternFragment extends InstrumentedFragment
-            implements View.OnClickListener {
+            implements View.OnClickListener, SaveAndFinishWorker.Listener {
 
         public static final int CONFIRM_EXISTING_REQUEST = 55;
 
@@ -136,6 +135,8 @@ public class ChooseLockPattern extends SettingsActivity {
         private static final int WRONG_PATTERN_CLEAR_TIMEOUT_MS = 2000;
 
         private static final int ID_EMPTY_MESSAGE = -1;
+
+        private static final String FRAGMENT_TAG_SAVE_AND_FINISH = "save_and_finish_worker";
 
         private String mCurrentPattern;
         private boolean mHasChallenge;
@@ -354,7 +355,7 @@ public class ChooseLockPattern extends SettingsActivity {
         };
 
         private ChooseLockSettingsHelper mChooseLockSettingsHelper;
-        private AsyncTask<?, ?, ?> mPendingLockCheck;
+        private SaveAndFinishWorker mSaveAndFinishWorker;
 
         private static final String KEY_UI_STAGE = "uiStage";
         private static final String KEY_PATTERN_CHOICE = "chosenPattern";
@@ -433,21 +434,29 @@ public class ChooseLockPattern extends SettingsActivity {
                     mCurrentPattern = savedInstanceState.getString(KEY_CURRENT_PATTERN);
                 }
                 updateStage(Stage.values()[savedInstanceState.getInt(KEY_UI_STAGE)]);
+
+                // Re-attach to the exiting worker if there is one.
+                mSaveAndFinishWorker = (SaveAndFinishWorker) getFragmentManager().findFragmentByTag(
+                        FRAGMENT_TAG_SAVE_AND_FINISH);
             }
         }
 
         @Override
         public void onResume() {
             super.onResume();
-            mLockPatternView.enableInput();
+            if (mSaveAndFinishWorker != null) {
+                setRightButtonEnabled(false);
+                mSaveAndFinishWorker.setListener(this);
+            } else {
+                mLockPatternView.enableInput();
+            }
         }
 
         @Override
         public void onPause() {
             super.onPause();
-            if (mPendingLockCheck != null) {
-                mPendingLockCheck.cancel(false);
-                mPendingLockCheck = null;
+            if (mSaveAndFinishWorker != null) {
+                mSaveAndFinishWorker.setListener(null);
             }
         }
 
@@ -481,7 +490,7 @@ public class ChooseLockPattern extends SettingsActivity {
                     throw new IllegalStateException("expected ui stage " + Stage.ChoiceConfirmed
                             + " when button is " + RightButtonMode.Confirm);
                 }
-                new SaveChosenPatternAndFinish().execute();
+                startSaveAndFinish();
             } else if (mUiStage.rightMode == RightButtonMode.Ok) {
                 if (mUiStage != Stage.HelpScreen) {
                     throw new IllegalStateException("Help screen is only mode with ok button, "
@@ -568,7 +577,7 @@ public class ChooseLockPattern extends SettingsActivity {
             setRightButtonText(stage.rightMode.text);
             setRightButtonEnabled(stage.rightMode.enabled);
 
-            // same for whether the patten is enabled
+            // same for whether the pattern is enabled
             if (stage.patternEnabled) {
                 mLockPatternView.enableInput();
             } else {
@@ -613,7 +622,6 @@ public class ChooseLockPattern extends SettingsActivity {
             }
         }
 
-
         // clear the wrong pattern unless they have started a new one
         // already
         private void postClearPatternRunnable() {
@@ -621,91 +629,90 @@ public class ChooseLockPattern extends SettingsActivity {
             mLockPatternView.postDelayed(mClearPatternRunnable, WRONG_PATTERN_CLEAR_TIMEOUT_MS);
         }
 
-        private class SaveChosenPatternAndFinish extends AsyncTask<Void,Void,Void> {
-            boolean mLockVirgin;
-            LockPatternUtils mUtils;
-            boolean mWasSecureBefore;
+        private void startSaveAndFinish() {
+            if (mSaveAndFinishWorker != null) {
+                Log.w(TAG, "startSaveAndFinish with an existing SaveAndFinishWorker.");
+                return;
+            }
 
-            @Override
-            protected void onPreExecute(){
-                setRightButtonEnabled(false);
-                mUtils = mChooseLockSettingsHelper.utils();
-                mLockVirgin = !mUtils.isPatternEverChosen(UserHandle.myUserId());
+            setRightButtonEnabled(false);
 
-                mWasSecureBefore = mUtils.isSecure(UserHandle.myUserId());
+            mSaveAndFinishWorker = new SaveAndFinishWorker();
+            getFragmentManager().beginTransaction().add(mSaveAndFinishWorker,
+                    FRAGMENT_TAG_SAVE_AND_FINISH).commit();
+            mSaveAndFinishWorker.setListener(this);
 
-                final boolean required = getActivity().getIntent().getBooleanExtra(
+            final boolean required = getActivity().getIntent().getBooleanExtra(
                     EncryptionInterstitial.EXTRA_REQUIRE_PASSWORD, true);
-
-                mUtils.setCredentialRequiredToDecrypt(required);
-            }
-
-            @Override
-            protected Void doInBackground(Void... params){
-                mUtils.saveLockPattern(mChosenPattern, mCurrentPattern, UserHandle.myUserId());
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void param) {
-                if (mLockVirgin) {
-                    mUtils.setVisiblePatternEnabled(true, UserHandle.myUserId());
-                }
-
-                if (mHasChallenge) {
-                    startVerifyPattern(mUtils, mWasSecureBefore);
-                } else {
-                    if (!mWasSecureBefore) {
-                        Intent intent = getRedactionInterstitialIntent(getActivity());
-                        if (intent != null) {
-                            startActivity(intent);
-                        }
-                    }
-                    getActivity().setResult(RESULT_FINISHED);
-                    doFinish();
-                }
-            }
+            mSaveAndFinishWorker.start(mChooseLockSettingsHelper.utils(), required,
+                    mHasChallenge, mChallenge, mChosenPattern, mCurrentPattern);
         }
 
-        private void startVerifyPattern(LockPatternUtils utils, final boolean wasSecureBefore) {
-            mLockPatternView.disableInput();
-            if (mPendingLockCheck != null) {
-                mPendingLockCheck.cancel(false);
-            }
-
-            mPendingLockCheck = LockPatternChecker.verifyPattern(
-                    utils,
-                    mChosenPattern,
-                    mChallenge,
-                    UserHandle.myUserId(),
-                    new LockPatternChecker.OnVerifyCallback() {
-                        @Override
-                        public void onVerified(byte[] token, int timeoutMs) {
-                            if (token == null) {
-                                Log.e(TAG, "critical: no token returned for known good pattern");
-                            }
-
-                            mLockPatternView.enableInput();
-                            mPendingLockCheck = null;
-
-                            if (!wasSecureBefore) {
-                                Intent intent = getRedactionInterstitialIntent(getActivity());
-                                if (intent != null) {
-                                    startActivity(intent);
-                                }
-                            }
-
-                            Intent intent = new Intent();
-                            intent.putExtra(
-                                    ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
-                            getActivity().setResult(RESULT_FINISHED, intent);
-                            doFinish();
-                        }
-                    });
-        }
-
-        private void doFinish() {
+        @Override
+        public void onChosenLockSaveFinished(boolean wasSecureBefore, Intent resultData) {
+            getActivity().setResult(RESULT_FINISHED, resultData);
             getActivity().finish();
+
+            if (!wasSecureBefore) {
+                Intent intent = getRedactionInterstitialIntent(getActivity());
+                if (intent != null) {
+                    startActivity(intent);
+                }
+            }
+        }
+    }
+
+    private static class SaveAndFinishWorker extends SaveChosenLockWorkerBase {
+
+        private List<LockPatternView.Cell> mChosenPattern;
+        private String mCurrentPattern;
+        private boolean mLockVirgin;
+
+        public void start(LockPatternUtils utils, boolean credentialRequired,
+                boolean hasChallenge, long challenge,
+                List<LockPatternView.Cell> chosenPattern, String currentPattern) {
+            prepare(utils, credentialRequired, hasChallenge, challenge);
+
+            mCurrentPattern = currentPattern;
+            mChosenPattern = chosenPattern;
+
+            mLockVirgin = !mUtils.isPatternEverChosen(UserHandle.myUserId());
+
+            start();
+        }
+
+        @Override
+        protected Intent saveAndVerifyInBackground() {
+            Intent result = null;
+            final int userId = UserHandle.myUserId();
+            mUtils.saveLockPattern(mChosenPattern, mCurrentPattern, userId);
+
+            if (mHasChallenge) {
+                byte[] token;
+                try {
+                    token = mUtils.verifyPattern(mChosenPattern, mChallenge, userId);
+                } catch (RequestThrottledException e) {
+                    token = null;
+                }
+
+                if (token == null) {
+                    Log.e(TAG, "critical: no token returned for known good pattern");
+                }
+
+                result = new Intent();
+                result.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
+            }
+
+            return result;
+        }
+
+        @Override
+        protected void finish(Intent resultData) {
+            if (mLockVirgin) {
+                mUtils.setVisiblePatternEnabled(true, UserHandle.myUserId());
+            }
+
+            super.finish(resultData);
         }
     }
 }
