@@ -16,18 +16,28 @@
 
 package com.android.settings.fingerprint;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.app.FragmentManager;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
+import com.android.setupwizardlib.util.SystemBarHelper;
 import com.android.setupwizardlib.view.NavigationBar;
 
 public class SetupFingerprintEnrollEnrolling extends FingerprintEnrollEnrolling
         implements NavigationBar.NavigationBarListener {
+
+    private static final String TAG_DIALOG = "dialog";
 
     @Override
     protected Intent getFinishIntent() {
@@ -69,12 +79,53 @@ public class SetupFingerprintEnrollEnrolling extends FingerprintEnrollEnrolling
 
     @Override
     public void onNavigateNext() {
-        setResult(RESULT_SKIP);
-        finish();
+        new SkipDialog().show(getFragmentManager(), TAG_DIALOG);
     }
 
     @Override
     protected int getMetricsCategory() {
         return MetricsLogger.FINGERPRINT_ENROLLING_SETUP;
+    }
+
+    public static class SkipDialog extends DialogFragment {
+
+        @Override
+        public void show(FragmentManager manager, String tag) {
+            if (manager.findFragmentByTag(tag) == null) {
+                super.show(manager, tag);
+            }
+        }
+
+        public SkipDialog() {
+            // no-arg constructor for fragment
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            final AlertDialog dialog = new AlertDialog.Builder(getActivity())
+                    .setTitle(R.string.setup_fingerprint_enroll_enrolling_skip_title)
+                    .setMessage(R.string.setup_fingerprint_enroll_enrolling_skip_message)
+                    .setCancelable(false)
+                    .setPositiveButton(R.string.skip_label,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int id) {
+                                    Activity activity = getActivity();
+                                    if (activity != null) {
+                                        activity.setResult(RESULT_SKIP);
+                                        activity.finish();
+                                    }
+                                }
+                            })
+                    .setNegativeButton(R.string.setup_fingerprint_enroll_enrolling_stay_button,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int id) {
+                                }
+                            })
+                    .create();
+            SystemBarHelper.hideSystemBars(dialog);
+            return dialog;
+        }
     }
 }
