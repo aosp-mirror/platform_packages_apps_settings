@@ -109,7 +109,7 @@
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"切断しますか？"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"この操作を行うと、次のデバイスとの接続が切断されます:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="603521233563983689">"Bluetooth設定を変更する権限がありません。"</string>
-    <string name="bluetooth_is_visible_message" msgid="6222396240776971862">"Bluetooth設定により<xliff:g id="DEVICE_NAME">%1$s</xliff:g>は付近のデバイスに表示されています。"</string>
+    <string name="bluetooth_is_visible_message" msgid="6222396240776971862">"Bluetooth設定を開いている間は、<xliff:g id="DEVICE_NAME">%1$s</xliff:g>は付近のデバイスに表示されています。"</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>を切断しますか？"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"ブロードキャスト"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"プロフィールを無効にしますか？"</string>
@@ -321,16 +321,16 @@
     <string name="fingerprint_add_title" msgid="1926752654454033904">"指紋を追加"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5078060939636911795">"画面ロック"</string>
     <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="624961700033979880">
-      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g>個の指紋がセットアップされています</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g>個の指紋がセットアップされています</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g>個の指紋を登録済み</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g>個の指紋を登録済み</item>
     </plurals>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"指紋の設定"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"指紋を使って画面ロックの解除や購入の確認を行うには、次の手順を行う必要があります。"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"予備の画面ロック方式を設定"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_2" msgid="4158160658182631304">"指紋を追加"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"指紋によるロック解除"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="9193978734907066950">"指紋センサーに触れるだけで、スマートフォンのロック解除、購入の許可、アプリへのログインを行うことができます。これらの操作は、登録したどの指紋でも行えるため、登録する指紋については十分にご注意ください。"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="7173290350577831813">"注: 指紋は強度の高いパターンやPINよりも安全面で劣ることがあります。"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="9193978734907066950">"指紋センサーに触れるだけで、スマートフォンのロック解除、購入の許可、アプリへのログインを行うことができます。これらの操作は、登録したどの指紋でも行えるため、誰の指紋を登録するかについては十分にご注意ください。"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="7173290350577831813">"注: 指紋は複雑なパターンやPINよりも安全面で劣る可能性があります。"</string>
     <string name="security_settings_fingerprint_enroll_introduction_risk_link_text" msgid="9129531466157620977">"詳細"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"キャンセル"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"次へ"</string>
@@ -341,27 +341,27 @@
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4150384963879569750">"OK"</string>
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"削除"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"登録の開始"</string>
-    <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"指をセンサーに当て、振動したら離してください"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="4327640138658832625">"OK、繰り返してください"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"指を少しずつ動かして、あらゆる角度から指紋を登録してください"</string>
-    <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"指紋を追加しました。"</string>
-    <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"このアイコンが表示されているときは、本人確認や購入の承認に指紋を使用できます。"</string>
+    <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"指をセンサーに当て、振動したら離します。"</string>
+    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="4327640138658832625">"引き続き登録を行います"</string>
+    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"指を少しずつ動かして、指紋全体を登録します。"</string>
+    <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"指紋の登録完了"</string>
+    <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"このアイコンが表示されているときは、本人確認や購入の承認に指紋認証を使用できます。"</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"指紋センサーに触れるだけで端末を復帰させてロックを解除できます。"</string>
     <string name="setup_fingerprint_enroll_finish_message_secondary" msgid="7280546429133276374">"このアイコンが表示されている場合は指紋を利用できます。"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"画面ロックを設定"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"完了"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"これはセンサーではありません"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="5053971232594165142">"端末の指紋センサーを使用してください。"</string>
-    <string name="fingerprint_enroll_button_add" msgid="6317978977419045463">"他の指紋を追加"</string>
+    <string name="fingerprint_enroll_button_add" msgid="6317978977419045463">"別の指紋を登録"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"次へ"</string>
-    <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"スマートフォンのロック解除に加えて、指紋を使用して購入やアプリのアクセスを許可することもできます。"<annotation id="url">"詳細"</annotation></string>
+    <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"スマートフォンのロック解除に加えて、指紋認証を使用して購入やアプリのアクセスを許可することもできます。"<annotation id="url">"詳細"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4504501581228672208">"画面ロックは無効になっていますが、指紋で購入やアプリのアクセスを許可できます。"<annotation id="url">"詳細"</annotation></string>
-    <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"指を離してから、もう一度センサーに触れてください"</string>
+    <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"指を離してから、もう一度センサーに触れてください。"</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"最大で<xliff:g id="COUNT">%d</xliff:g>個の指紋を追加できます"</string>
     <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"すべての指紋を削除しますか？"</string>
-    <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"指紋を使用して端末のロックを解除したり、購入を承認したり、アプリにログインしたりすることはできなくなります。"</string>
+    <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"指紋認証を使用して端末のロックを解除したり、購入を許可したり、アプリにログインしたりすることはできなくなります。"</string>
     <string name="fingerprint_last_delete_confirm" msgid="2634726361059274289">"削除"</string>
-    <string name="confirm_fingerprint_icon_content_description" msgid="5255544532157079096">"続行するには指紋を使用してください。"</string>
+    <string name="confirm_fingerprint_icon_content_description" msgid="5255544532157079096">"続行するには指紋認証を使用してください。"</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"暗号化"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"タブレットの暗号化"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"スマートフォンの暗号化"</string>
@@ -422,19 +422,19 @@
     <string name="unlock_disable_frp_warning_content_pattern" msgid="8869767290771023461">"パターンがないと、端末保護機能は利用できません。"</string>
     <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="8212242533942400457">"パターンがないと、端末保護機能は利用できません。<xliff:g id="EMPTY_LINE">
 
-</xliff:g>保存してある指紋もこの端末から削除されるため、指紋を使用してスマートフォンのロック解除、購入の許可、アプリへのログインを行うことはできなくなります。"</string>
+</xliff:g>保存してある指紋もこの端末から削除されるため、指紋認証を使用してスマートフォンのロック解除、購入の許可、アプリへのログインを行うことはできなくなります。"</string>
     <string name="unlock_disable_frp_warning_content_pin" msgid="586996206210265131">"PINがないと、端末保護機能は利用できません。"</string>
     <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="875669051899437197">"PINがないと、端末保護機能は利用できません。<xliff:g id="EMPTY_LINE">
 
-</xliff:g>保存してある指紋もこの端末から削除されるため、指紋を使用してスマートフォンのロック解除、購入の許可、アプリへのログインを行うことはできなくなります。"</string>
+</xliff:g>保存してある指紋もこの端末から削除されるため、指紋認証を使用してスマートフォンのロック解除、購入の許可、アプリへのログインを行うことはできなくなります。"</string>
     <string name="unlock_disable_frp_warning_content_password" msgid="5420612686852555537">"パスワードがないと、端末保護機能は利用できません。"</string>
     <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="2228159168587170445">"パスワードがないと、端末保護機能は利用できません。<xliff:g id="EMPTY_LINE">
 
-</xliff:g>保存してある指紋もこの端末から削除されるため、指紋を使用してスマートフォンのロック解除、購入の許可、アプリへのログインを行うことはできなくなります。"</string>
+</xliff:g>保存してある指紋もこの端末から削除されるため、指紋認証を使用してスマートフォンのロック解除、購入の許可、アプリへのログインを行うことはできなくなります。"</string>
     <string name="unlock_disable_frp_warning_content_unknown" msgid="1550718040483548220">"画面ロックがないと、端末保護機能は利用できません。"</string>
     <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="6363091330281670692">"画面ロックがないと、端末保護機能は利用できません。<xliff:g id="EMPTY_LINE">
 
-</xliff:g>保存してある指紋もこの端末から削除されるため、指紋を使用してスマートフォンのロック解除、購入の許可、アプリへのログインを行うことはできなくなります。"</string>
+</xliff:g>保存してある指紋もこの端末から削除されるため、指紋認証を使用してスマートフォンのロック解除、購入の許可、アプリへのログインを行うことはできなくなります。"</string>
     <string name="unlock_disable_frp_warning_ok" msgid="7075138677177748705">"削除する"</string>
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"ロック解除パターンの変更"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"ロック解除PINの変更"</string>
@@ -847,7 +847,7 @@
     <string name="screensaver_settings_button" msgid="7292214707625717013">"設定"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"明るさを自動調整"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"指を離してスリープ状態から復帰"</string>
-    <string name="doze_title" msgid="2259176504273878294">"常時オン ディスプレイ"</string>
+    <string name="doze_title" msgid="2259176504273878294">"アンビエント表示"</string>
     <string name="doze_summary" msgid="7128970177894383698">"端末を取り上げたとき、または通知を受信したときにスリープ状態から復帰"</string>
     <string name="title_font_size" msgid="4405544325522105222">"フォントサイズ"</string>
     <string name="dialog_title_font_size" msgid="2231507851258955038">"フォントサイズ"</string>
@@ -891,8 +891,7 @@
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"システムアップデート"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Androidバージョン"</string>
-    <!-- no translation found for security_patch (8438384045870296634) -->
-    <skip />
+    <string name="security_patch" msgid="8438384045870296634">"Androidセキュリティパッチレベル"</string>
     <string name="model_number" msgid="3765737700545384794">"モデル番号"</string>
     <string name="fcc_equipment_id" msgid="149114368246356737">"装置ID"</string>
     <string name="baseband_version" msgid="1848990160763524801">"ベースバンドバージョン"</string>
@@ -1189,9 +1188,9 @@
     <string name="location_menu_scanning" msgid="8536245838478802959">"スキャン"</string>
     <string name="location_scanning_screen_title" msgid="4408076862929611554">"スキャン"</string>
     <string name="location_scanning_wifi_always_scanning_title" msgid="6216705505621183645">"Wi‑Fiのスキャン"</string>
-    <string name="location_scanning_wifi_always_scanning_description" msgid="8036382029606868081">"システムのアプリやサービスにいつでもWi‑Fiネットワークを検出できるようにすることで、位置情報を向上させます。"</string>
+    <string name="location_scanning_wifi_always_scanning_description" msgid="8036382029606868081">"位置情報の精度を向上させるため、システムのアプリやサービスがいつでもWi‑Fiネットワークを検出できるようにします"</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="5444989508204520019">"Bluetoothのスキャン"</string>
-    <string name="location_scanning_bluetooth_always_scanning_description" msgid="8602726521250591852">"システムのアプリやサービスにいつでもBluetoothデバイスを検出できるようにすることで、位置情報を向上させます。"</string>
+    <string name="location_scanning_bluetooth_always_scanning_description" msgid="8602726521250591852">"位置情報の精度を向上させるため、システムのアプリやサービスがいつでもBluetoothデバイスを検出できるようにします"</string>
     <string name="location_network_based" msgid="6010456018401296590">"Wi-Fi/モバイル接続時の位置情報"</string>
     <string name="location_neighborhood_level" msgid="5141318121229984788">"Googleの位置情報サービスで現在地をすばやく推定することをアプリに許可します。匿名の現在地データが収集され、Googleに送信されます。"</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Wi-Fiで検出される現在地"</string>
@@ -1321,7 +1320,7 @@
     <string name="default_emergency_app" msgid="1951760659640369980">"緊急アプリ"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"アプリの設定をリセット"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"設定をリセットしますか？"</string>
-    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"この操作により、次の設定がすべてリセットされます:\n\n "<li>"無効化されているアプリ"</li>\n" "<li>"無効化されているアプリの通知"</li>\n" "<li>"特定の操作で使用するデフォルトのアプリ"</li>\n" "<li>"アプリのバックグラウンドデータの制限"</li>\n" "<li>"権限のすべての制限"</li>\n\n"アプリのデータが失われることはありません。"</string>
+    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"この操作により、次の設定がすべてリセットされます。\n\n "<li>"無効化されているアプリ"</li>\n" "<li>"無効化されているアプリの通知"</li>\n" "<li>"特定の操作で使用するデフォルトのアプリ"</li>\n" "<li>"アプリのバックグラウンドデータの制限"</li>\n" "<li>"権限のすべての制限"</li>\n\n"アプリのデータが失われることはありません。"</string>
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"アプリをリセット"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"容量を管理"</string>
     <string name="filter" msgid="2018011724373033887">"フィルタ"</string>
@@ -2682,7 +2681,7 @@
     <string name="encrypt_talkback_dialog_require_password" msgid="8841994614218049215">"パスワードが必要ですか？"</string>
     <string name="encrypt_talkback_dialog_message_pin" msgid="7582096542997635316">"PINを入力してこの端末を開始しても、<xliff:g id="SERVICE">%1$s</xliff:g>のようなユーザー補助サービスはまだご利用になれません。"</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="2020083142199612743">"パターンを入力してこの端末を開始しても、<xliff:g id="SERVICE">%1$s</xliff:g>のようなユーザー補助サービスはまだご利用になれません。"</string>
-    <string name="encrypt_talkback_dialog_message_password" msgid="4155875981789127796">"パスワードを入力してこの端末を開始しても、<xliff:g id="SERVICE">%1$s</xliff:g>のようなユーザー補助サービスはまだご利用になれません。"</string>
+    <string name="encrypt_talkback_dialog_message_password" msgid="4155875981789127796">"パスワードを入力してこの端末を開始する場合、<xliff:g id="SERVICE">%1$s</xliff:g>のようなユーザー補助サービスはまだご利用になれません。"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI情報"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI関連情報"</string>
     <string name="slot_number" msgid="3762676044904653577">"（スロット<xliff:g id="SLOT_NUM">%1$d</xliff:g>）"</string>
@@ -2792,7 +2791,7 @@
     <string name="high_power_filter_on" msgid="3222265297576680099">"最適化していないアプリ"</string>
     <string name="high_power_on" msgid="3382367497549906927">"電池の最適化を無視"</string>
     <string name="high_power_off" msgid="3393904131961263278">"電池の使用を最適化"</string>
-    <string name="high_power_system" msgid="7362862974428225301">"電池の最適化を利用できない"</string>
+    <string name="high_power_system" msgid="7362862974428225301">"電池の最適化の利用不可"</string>
     <string name="high_power_desc" msgid="6283926163708585760">"電池の最適化を適用しません。電池の消耗が速くなる可能性があります。"</string>
     <plurals name="high_power_count" formatted="false" msgid="2464701722383894640">
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g>個のアプリに電池の最適化を無視することを許可</item>
@@ -2839,7 +2838,7 @@
     </plurals>
     <string name="running_frequency" msgid="6622624669948277693">"頻度"</string>
     <string name="memory_maximum_usage" msgid="6513785462055278341">"最大使用量"</string>
-    <string name="no_data_usage" msgid="9131454024293628063">"データ使用量はありません"</string>
+    <string name="no_data_usage" msgid="9131454024293628063">"データ通信の使用はありません"</string>
     <string name="zen_access_warning_dialog_title" msgid="1198189958031157142">"<xliff:g id="APP">%1$s</xliff:g>の[通知を非表示]へのアクセスを許可しますか？"</string>
     <string name="zen_access_warning_dialog_summary" msgid="4015885767653010873">"アプリは[通知を非表示]のON/OFFを切り替えたり、関連する設定を変更したりできるようになります。"</string>
     <string name="ignore_optimizations_on" msgid="6915689518016285116">"最適化しない"</string>

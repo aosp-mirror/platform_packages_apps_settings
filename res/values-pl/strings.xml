@@ -94,7 +94,7 @@
     <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"Widoczne dla wszystkich urządzeń Bluetooth (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
     <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"Widoczne dla wszystkich urządzeń Bluetooth"</string>
     <string name="bluetooth_not_visible_to_other_devices" msgid="9120274591523391910">"Niewidoczne dla innych urządzeń Bluetooth"</string>
-    <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"Widoczne tylko dla urządzeń sparowanych"</string>
+    <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"Widoczne tylko na urządzenia sparowanych"</string>
     <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"Czas widoczności"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"Zablokuj wybieranie głosowe"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"Zapobiegaj używaniu wybierania Bluetooth, gdy ekran jest zablokowany"</string>
@@ -109,7 +109,7 @@
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Rozłączyć?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Spowoduje to zakończenie połączenia z urządzeniem:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="603521233563983689">"Nie masz uprawnień, by zmienić ustawienia Bluetootha."</string>
-    <string name="bluetooth_is_visible_message" msgid="6222396240776971862">"Urządzenie <xliff:g id="DEVICE_NAME">%1$s</xliff:g> jest widoczne dla urządzeń w pobliżu, gdy ustawienia Bluetooth są otwarte."</string>
+    <string name="bluetooth_is_visible_message" msgid="6222396240776971862">"Urządzenie <xliff:g id="DEVICE_NAME">%1$s</xliff:g> jest widoczne na urządzenia w pobliżu, gdy ustawienia Bluetooth są otwarte."</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"Odłączyć urządzenie <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Transmisja"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Wyłączyć profil?"</string>
@@ -296,7 +296,7 @@
     <string name="time_picker_title" msgid="483460752287255019">"Godzina"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Blokuj automatycznie"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"Po <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> uśpienia"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"Zaraz po uśpieniu, ale nie wtedy, gdy jest odblokowany przez <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"Zaraz po uśpieniu (z wyjątkiem sytuacji, gdy blokadę anuluje <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>)"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> po uśpieniu (z wyjątkiem sytuacji, gdy blokadę anuluje <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>)"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Pokaż tę informację na ekranie blokady"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Wiadomość przy blokadzie"</string>
@@ -321,17 +321,17 @@
     <string name="fingerprint_add_title" msgid="1926752654454033904">"Dodaj odcisk palca"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5078060939636911795">"blokada ekranu"</string>
     <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="624961700033979880">
-      <item quantity="few">Konfiguracja odcisku: <xliff:g id="COUNT_1">%1$d</xliff:g> palce</item>
-      <item quantity="many">Konfiguracja odcisku: <xliff:g id="COUNT_1">%1$d</xliff:g> palców</item>
-      <item quantity="other">Konfiguracja odcisku: <xliff:g id="COUNT_1">%1$d</xliff:g> palca</item>
-      <item quantity="one">Konfiguracja odcisku: <xliff:g id="COUNT_0">%1$d</xliff:g> palec</item>
+      <item quantity="few">Ustawiono <xliff:g id="COUNT_1">%1$d</xliff:g> odciski palców</item>
+      <item quantity="many">Ustawiono <xliff:g id="COUNT_1">%1$d</xliff:g> odcisków palców</item>
+      <item quantity="other">Ustawiono <xliff:g id="COUNT_1">%1$d</xliff:g> odcisku palca</item>
+      <item quantity="one">Ustawiono <xliff:g id="COUNT_0">%1$d</xliff:g> odcisk palca</item>
     </plurals>
-    <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Konf. odcisku palca"</string>
+    <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Ustaw odcisk palca"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"Aby odblokowywać ekran lub potwierdzać zakupy przy użyciu odcisku palca, musisz:"</string>
-    <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"Skonfiguruj zapasową metodę blokowania ekranu"</string>
+    <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"Skonfiguruj dodatkową metodę blokowania ekranu"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_2" msgid="4158160658182631304">"Dodać swój odcisk palca"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Odblokuj odciskiem palca"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="9193978734907066950">"Wystarczy dotknąć czujnika linii papilarnych, by odblokować telefon, autoryzować zakupy lub zalogować się w aplikacjach. Dobrze się jednak zastanów, czyje odciski palców dodasz, bo każda dodana osoba będzie mogła robić wszystkie wymienione tutaj rzeczy."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="9193978734907066950">"Dotknij czytnika linii papilarnych, by odblokować telefon, autoryzować zakupy lub zalogować się w aplikacjach. Z rozwagą dodawaj odciski palców innych osób – każda dodana osoba będzie mogła wykonywać wszystkie powyższe działania."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="7173290350577831813">"Uwaga: odcisk palca może być mniej bezpieczny niż trudny wzór lub kod PIN."</string>
     <string name="security_settings_fingerprint_enroll_introduction_risk_link_text" msgid="9129531466157620977">"Więcej informacji"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Anuluj"</string>
@@ -343,11 +343,11 @@
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4150384963879569750">"OK"</string>
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"Usuń"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"Rozpocznij"</string>
-    <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"Przyłóż palec do czytnika, a potem odsuń, gdy poczujesz wibracje"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="4327640138658832625">"Świetnie. Teraz powtórz"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"Obróć delikatnie palec, by odcisk był dokładniejszy"</string>
-    <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"Dodano odcisk palca."</string>
-    <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"Gdy wyświetla się ta ikona, możesz użyć odcisku palca na potrzeby identyfikacji lub autoryzacji zakupu."</string>
+    <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"Przyłóż palec do czytnika. Podnieś go, gdy poczujesz wibracje."</string>
+    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="4327640138658832625">"Powtórz czynność"</string>
+    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"Obróć lekko palcem, by odcisk był bardziej dokładny."</string>
+    <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"Odcisk palca dodany"</string>
+    <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"Za każdym razem, gdy zobaczysz tę ikonę, możesz użyć odcisku palca, aby potwierdzić swoją tożsamość lub autoryzować zakup."</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"Dotknij czytnika linii papilarnych, by wybudzić i odblokować urządzenie."</string>
     <string name="setup_fingerprint_enroll_finish_message_secondary" msgid="7280546429133276374">"Ta ikona oznacza, że możesz użyć odcisku palca."</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"Skonfiguruj blokadę ekranu"</string>
@@ -358,10 +358,10 @@
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"Dalej"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Odcisk palca pozwala nie tylko odblokowywać telefon, ale też autoryzować zakupy i dostęp do aplikacji. "<annotation id="url">"Więcej informacji"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4504501581228672208">"Opcja blokady ekranu jest wyłączona. Odcisku palca wciąż możesz używać do autoryzowania zakupów i dostępu do aplikacji. "<annotation id="url">"Więcej informacji"</annotation></string>
-    <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Unieś palec, a potem znowu dotknij czujnika"</string>
+    <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Podnieś palec, a potem przyłóż go do czytnika jeszcze raz."</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"Możesz dodać do <xliff:g id="COUNT">%d</xliff:g> odcisków palców"</string>
     <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"Usunąć wszystkie odciski palców?"</string>
-    <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"Odcisków palców nie będzie można używać do odblokowywania telefonu, autoryzowania płatności ani logowania się w aplikacjach."</string>
+    <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"Odcisków palców nie będzie można używać do odblokowywania telefonu, autoryzowania zakupów ani logowania się w aplikacjach."</string>
     <string name="fingerprint_last_delete_confirm" msgid="2634726361059274289">"Tak, usuń"</string>
     <string name="confirm_fingerprint_icon_content_description" msgid="5255544532157079096">"Użyj odcisku palca, by kontynuować."</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Szyfrowanie"</string>
@@ -396,7 +396,7 @@
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"Wpisane hasło jest prawidłowe, ale Twoje dane są uszkodzone. \n\nAby móc korzystać z telefonu, musisz zresetować go do ustawień fabrycznych. Następnie podczas konfigurowania urządzenia możesz przywrócić wszystkie dane, których kopię zapasową masz na koncie Google."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Przełącz metodę wprowadzania"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Wybierz blokadę ekranu"</string>
-    <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Wybierz zapasową metodę blokowania ekranu"</string>
+    <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Wybierz dodatkową metodę blokowania ekranu"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Blokada ekranu"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Zmiana blokady ekranu"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Zmień lub wyłącz zabezpieczenie ekranu (wzór, PIN lub hasło)"</string>
@@ -907,8 +907,7 @@
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"Aktualizacje systemowe"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Wersja systemu Android"</string>
-    <!-- no translation found for security_patch (8438384045870296634) -->
-    <skip />
+    <string name="security_patch" msgid="8438384045870296634">"Poziom poprawek zabezpieczeń Androida"</string>
     <string name="model_number" msgid="3765737700545384794">"Numer modelu"</string>
     <string name="fcc_equipment_id" msgid="149114368246356737">"Identyfikator sprzętu"</string>
     <string name="baseband_version" msgid="1848990160763524801">"Wersja pasma podstawowego"</string>
@@ -2686,9 +2685,9 @@
     <string name="encryption_interstitial_message_pin" msgid="7164072567822375682">"Możesz wzmocnić ochronę urządzenia przez wymaganie kodu PIN do jego uruchomienia. Dopiero po uruchomieniu urządzenie może odbierać połączenia, wiadomości czy powiadomienia, w tym alarmy. \n\nZwiększa to bezpieczeństwo danych na zgubionym lub skradzionym urządzeniu."</string>
     <string name="encryption_interstitial_message_pattern" msgid="6747091924626566031">"Możesz wzmocnić ochronę urządzenia przez wymaganie wzoru do jego uruchomienia. Dopiero po uruchomieniu urządzenie może odbierać połączenia, wiadomości czy powiadomienia, w tym alarmy. \n\nZwiększa to bezpieczeństwo danych na zgubionym lub skradzionym urządzeniu."</string>
     <string name="encryption_interstitial_message_password" msgid="3462225324186045679">"Możesz wzmocnić ochronę urządzenia przez wymaganie hasła do jego uruchomienia. Dopiero po uruchomieniu urządzenie może odbierać połączenia, wiadomości czy powiadomienia, w tym alarmy. \n\nZwiększa to bezpieczeństwo danych na zgubionym lub skradzionym urządzeniu."</string>
-    <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="3775537118799831558">"Jako uzupełnienie odblokowywania odciskiem palca, dla większego bezpieczeństwa możesz wymagać podania kodu PIN przed uruchomieniem urządzenia. Dopóki urządzenie nie zostanie uruchomione, nie może odbierać połączeń, wiadomości ani powiadomień (w tym alarmów).\n\nPomaga to chronić dane na zgubionych lub skradzionych urządzeniach."</string>
-    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="1105290967535237237">"Jako uzupełnienie odblokowywania odciskiem palca, dla większego bezpieczeństwa możesz wymagać podania wzoru przed uruchomieniem urządzenia. Dopóki urządzenie nie zostanie uruchomione, nie może odbierać połączeń, wiadomości ani powiadomień (w tym alarmów).\n\nPomaga to chronić dane na zgubionych lub skradzionych urządzeniach."</string>
-    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="3512482682507378424">"Jako uzupełnienie odblokowywania odciskiem palca, dla większego bezpieczeństwa możesz wymagać podania hasła przed uruchomieniem urządzenia. Dopóki urządzenie nie zostanie uruchomione, nie może odbierać połączeń, wiadomości ani powiadomień (w tym alarmów).\n\nPomaga to chronić dane na zgubionych lub skradzionych urządzeniach."</string>
+    <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="3775537118799831558">"Jeśli korzystasz z funkcji odblokowywania odciskiem palca, dla większego bezpieczeństwa możesz wymagać podania kodu PIN przed uruchomieniem urządzenia. Dopóki urządzenie nie zostanie uruchomione, nie może odbierać połączeń, wiadomości ani powiadomień (w tym alarmów).\n\nPomaga to chronić dane na zgubionych lub skradzionych urządzeniach."</string>
+    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="1105290967535237237">"Jeśli korzystasz z funkcji odblokowywania odciskiem palca, dla większego bezpieczeństwa możesz wymagać podania wzoru przed uruchomieniem urządzenia. Dopóki urządzenie nie zostanie uruchomione, nie może odbierać połączeń, wiadomości ani powiadomień (w tym alarmów).\n\nPomaga to chronić dane na zgubionych lub skradzionych urządzeniach."</string>
+    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="3512482682507378424">"Jeśli korzystasz z funkcji odblokowywania odciskiem palca, dla większego bezpieczeństwa możesz wymagać podania hasła przed uruchomieniem urządzenia. Dopóki urządzenie nie zostanie uruchomione, nie może odbierać połączeń, wiadomości ani powiadomień (w tym alarmów).\n\nPomaga to chronić dane na zgubionych lub skradzionych urządzeniach."</string>
     <string name="encrypt_require_pin" msgid="2063945047845243752">"Wymagaj kodu PIN przy włączaniu urządzenia"</string>
     <string name="encrypt_require_pattern" msgid="6898479411004015810">"Wymagaj wzoru przy włączaniu urządzenia"</string>
     <string name="encrypt_require_password" msgid="8770628366276570518">"Wymagaj hasła przy włączaniu urządzenia"</string>
@@ -2751,7 +2750,7 @@
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7655100570513818534">"Brak próśb o przyznanie uprawnień"</string>
     <string name="launch_defaults_some" msgid="313159469856372621">"Część ustawień domyślnych"</string>
     <string name="launch_defaults_none" msgid="4241129108140034876">"Brak ustawień domyślnych"</string>
-    <string name="filter_all_apps" msgid="1988403195820688644">"Wszystkie aplikacje"</string>
+    <string name="filter_all_apps" msgid="1988403195820688644">"Pokaż wszystkie aplikacje"</string>
     <string name="filter_enabled_apps" msgid="3318021007093070639">"Włączone"</string>
     <string name="filter_personal_apps" msgid="3277727374174355971">"Osobiste"</string>
     <string name="filter_work_apps" msgid="24519936790795574">"Do pracy"</string>
@@ -2783,7 +2782,7 @@
     <string name="app_link_open_always" msgid="2474058700623948148">"Otwieraj w tej aplikacji"</string>
     <string name="app_link_open_ask" msgid="7800878430190575991">"Pytaj za każdym razem"</string>
     <string name="app_link_open_never" msgid="3407647600352398543">"Nie otwieraj w tej aplikacji"</string>
-    <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Nie rozpoznano"</string>
+    <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Nie rozpoznano odcisku palca."</string>
     <string name="default_apps_title" msgid="1854974637597514435">"Domyślne aplikacje"</string>
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"Asystent i rozpoznawanie mowy"</string>
     <string name="default_assist_title" msgid="8868488975409247921">"Aplikacja asystująca"</string>
@@ -2819,7 +2818,7 @@
     <string name="high_power_on" msgid="3382367497549906927">"Ignoruje optymalizację baterii"</string>
     <string name="high_power_off" msgid="3393904131961263278">"Ma włączoną optymalizację baterii"</string>
     <string name="high_power_system" msgid="7362862974428225301">"Optymalizacja baterii niedostępna"</string>
-    <string name="high_power_desc" msgid="6283926163708585760">"Nie stosuj optymalizacji baterii. Może powodować szybsze zużywanie energii."</string>
+    <string name="high_power_desc" msgid="6283926163708585760">"Nie stosuj optymalizacji baterii. Może powodować szybsze wyczerpywanie się baterii."</string>
     <plurals name="high_power_count" formatted="false" msgid="2464701722383894640">
       <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> aplikacje mogą ignorować optymalizację baterii</item>
       <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> aplikacji może ignorować optymalizację baterii</item>
