@@ -444,11 +444,11 @@ public class ChooseLockPattern extends SettingsActivity {
         @Override
         public void onResume() {
             super.onResume();
+            updateStage(mUiStage);
+
             if (mSaveAndFinishWorker != null) {
                 setRightButtonEnabled(false);
                 mSaveAndFinishWorker.setListener(this);
-            } else {
-                mLockPatternView.enableInput();
             }
         }
 
