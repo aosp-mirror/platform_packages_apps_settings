@@ -69,7 +69,7 @@ public class TetherService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        if (DEBUG) Log.d(TAG, "Creating WifiProvisionService");
+        if (DEBUG) Log.d(TAG, "Creating TetherService");
         String provisionResponse = getResources().getString(
                 com.android.internal.R.string.config_mobile_hotspot_provision_response);
         registerReceiver(mReceiver, new IntentFilter(provisionResponse),
@@ -137,7 +137,7 @@ public class TetherService extends Service {
         SharedPreferences prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
         prefs.edit().putString(KEY_TETHERS, tethersToString(mCurrentTethers)).commit();
 
-        if (DEBUG) Log.d(TAG, "Destroying WifiProvisionService");
+        if (DEBUG) Log.d(TAG, "Destroying TetherService");
         unregisterReceiver(mReceiver);
         super.onDestroy();
     }
@@ -262,6 +262,10 @@ public class TetherService extends Service {
             String provisionResponse = context.getResources().getString(
                     com.android.internal.R.string.config_mobile_hotspot_provision_response);
             if (provisionResponse.equals(intent.getAction())) {
+                if (!mInProvisionCheck) {
+                    Log.e(TAG, "Unexpected provision response " + intent);
+                    return;
+                }
                 mInProvisionCheck = false;
                 int checkType = mCurrentTethers.get(mCurrentTypeIndex);
                 if (intent.getIntExtra(EXTRA_RESULT, RESULT_DEFAULT) == RESULT_OK) {
