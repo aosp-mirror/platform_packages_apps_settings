@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.pm.UserInfo;
 import android.util.Log;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -45,14 +46,15 @@ public class ManagedProfileSetup extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent broadcast) {
         final UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
-        if (!Utils.isManagedProfile(um)) {
+        UserInfo userInfo = um.getUserInfo(UserHandle.myUserId());
+        if (userInfo == null || !userInfo.isManagedProfile()) {
             return;
         }
         Log.i(TAG, "Received broadcast: " + broadcast.getAction()
                 + ". Setting up intent forwarding for managed profile.");
         final PackageManager pm  = context.getPackageManager();
         // Clear any previous intent forwarding we set up
-        pm.clearCrossProfileIntentFilters(UserHandle.myUserId());
+        pm.clearCrossProfileIntentFilters(userInfo.id);
 
         // Set up intent forwarding for implicit intents
         Intent intent = new Intent();
@@ -70,8 +72,8 @@ public class ManagedProfileSetup extends BroadcastReceiver {
                 boolean shouldForward = info.activityInfo.metaData.getBoolean(
                         PRIMARY_PROFILE_SETTING);
                 if (shouldForward) {
-                    pm.addCrossProfileIntentFilter(info.filter, UserHandle.myUserId(),
-                        UserHandle.USER_OWNER, PackageManager.SKIP_CURRENT_PROFILE);
+                    pm.addCrossProfileIntentFilter(info.filter, userInfo.id,
+                        userInfo.profileGroupId, PackageManager.SKIP_CURRENT_PROFILE);
                 }
             }
         }
