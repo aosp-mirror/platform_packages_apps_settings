@@ -20,6 +20,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -29,6 +30,7 @@ import android.content.res.ColorStateList;
 import android.graphics.drawable.Animatable2;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.Drawable;
+import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -245,9 +247,22 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
     }
 
     @Override
-    public void onEnrollmentError(CharSequence errString) {
-        showError(errString);
+    public void onEnrollmentError(int errMsgId, CharSequence errString) {
+        int msgId;
+        switch (errMsgId) {
+            case FingerprintManager.FINGERPRINT_ERROR_TIMEOUT:
+                // This message happens when the underlying crypto layer decides to revoke the
+                // enrollment auth token.
+                msgId = R.string.security_settings_fingerprint_enroll_error_timeout_dialog_message;
+                break;
+            default:
+                // There's nothing specific to tell the user about. Ask them to try again.
+                msgId = R.string.security_settings_fingerprint_enroll_error_generic_dialog_message;
+                break;
+        }
+        showErrorDialog(getText(msgId), errMsgId);
         stopIconAnimation();
+        mErrorText.removeCallbacks(mTouchAgainRunnable);
     }
 
     @Override
@@ -276,6 +291,11 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
         }
         int progress = Math.max(0, steps + 1 - remaining);
         return PROGRESS_BAR_MAX * progress / (steps + 1);
+    }
+
+    private void showErrorDialog(CharSequence msg, int msgId) {
+        ErrorDialog dlg = ErrorDialog.newInstance(msg, msgId);
+        dlg.show(getFragmentManager(), ErrorDialog.class.getName());
     }
 
     private void showIconTouchDialog() {
@@ -401,6 +421,51 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
                                 }
                             });
             return builder.create();
+        }
+    }
+
+    public static class ErrorDialog extends DialogFragment {
+
+        /**
+         * Create a new instance of ErrorDialog.
+         *
+         * @param msg the string to show for message text
+         * @param msgId the FingerprintManager error id so we know the cause
+         * @return a new ErrorDialog
+         */
+        static ErrorDialog newInstance(CharSequence msg, int msgId) {
+            ErrorDialog dlg = new ErrorDialog();
+            Bundle args = new Bundle();
+            args.putCharSequence("error_msg", msg);
+            args.putInt("error_id", msgId);
+            dlg.setArguments(args);
+            return dlg;
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            CharSequence errorString = getArguments().getCharSequence("error_msg");
+            final int errMsgId = getArguments().getInt("error_id");
+            builder.setTitle(R.string.security_settings_fingerprint_enroll_error_dialog_title)
+                    .setMessage(errorString)
+                    .setCancelable(false)
+                    .setPositiveButton(R.string.security_settings_fingerprint_enroll_dialog_ok,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                    boolean wasTimeout =
+                                        errMsgId == FingerprintManager.FINGERPRINT_ERROR_TIMEOUT;
+                                    Activity activity = getActivity();
+                                    activity.setResult(wasTimeout ?
+                                            RESULT_TIMEOUT : RESULT_FINISHED);
+                                    activity.finish();
+                                }
+                            });
+            AlertDialog dialog = builder.create();
+            dialog.setCanceledOnTouchOutside(false);
+            return dialog;
         }
     }
 }
