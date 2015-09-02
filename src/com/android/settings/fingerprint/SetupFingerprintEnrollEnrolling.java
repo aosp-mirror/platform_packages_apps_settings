@@ -106,7 +106,7 @@ public class SetupFingerprintEnrollEnrolling extends FingerprintEnrollEnrolling
                     .setTitle(R.string.setup_fingerprint_enroll_enrolling_skip_title)
                     .setMessage(R.string.setup_fingerprint_enroll_enrolling_skip_message)
                     .setCancelable(false)
-                    .setPositiveButton(R.string.skip_label,
+                    .setPositiveButton(R.string.wifi_skip_anyway,
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int id) {
@@ -117,7 +117,7 @@ public class SetupFingerprintEnrollEnrolling extends FingerprintEnrollEnrolling
                                     }
                                 }
                             })
-                    .setNegativeButton(R.string.setup_fingerprint_enroll_enrolling_stay_button,
+                    .setNegativeButton(R.string.wifi_dont_skip,
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int id) {
