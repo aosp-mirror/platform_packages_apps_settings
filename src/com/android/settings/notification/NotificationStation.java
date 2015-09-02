@@ -238,7 +238,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
         if (pkg != null) {
             try {
                 if (userId == UserHandle.USER_ALL) {
-                    userId = UserHandle.USER_OWNER;
+                    userId = UserHandle.USER_SYSTEM;
                 }
                 r = mPm.getResourcesForApplicationAsUser(pkg, userId);
             } catch (PackageManager.NameNotFoundException ex) {

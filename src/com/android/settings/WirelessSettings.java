@@ -26,6 +26,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -225,8 +226,7 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
 
         addPreferencesFromResource(R.xml.wireless_settings);
 
-        final int myUserId = UserHandle.myUserId();
-        final boolean isSecondaryUser = myUserId != UserHandle.USER_OWNER;
+        final boolean isAdmin = mUm.isAdminUser();
 
         final Activity activity = getActivity();
         mAirplaneModePreference = (SwitchPreference) findPreference(KEY_TOGGLE_AIRPLANE);
@@ -247,17 +247,17 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
                 Settings.Global.AIRPLANE_MODE_TOGGLEABLE_RADIOS);
 
         //enable/disable wimax depending on the value in config.xml
-        final boolean isWimaxEnabled = !isSecondaryUser && this.getResources().getBoolean(
+        final boolean isWimaxEnabled = isAdmin && this.getResources().getBoolean(
                 com.android.internal.R.bool.config_wimaxEnabled);
         if (!isWimaxEnabled
                 || mUm.hasUserRestriction(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS)) {
             PreferenceScreen root = getPreferenceScreen();
-            Preference ps = (Preference) findPreference(KEY_WIMAX_SETTINGS);
+            Preference ps = findPreference(KEY_WIMAX_SETTINGS);
             if (ps != null) root.removePreference(ps);
         } else {
             if (toggleable == null || !toggleable.contains(Settings.Global.RADIO_WIMAX )
                     && isWimaxEnabled) {
-                Preference ps = (Preference) findPreference(KEY_WIMAX_SETTINGS);
+                Preference ps = findPreference(KEY_WIMAX_SETTINGS);
                 ps.setDependency(KEY_TOGGLE_AIRPLANE);
             }
         }
@@ -267,7 +267,8 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
             findPreference(KEY_VPN_SETTINGS).setDependency(KEY_TOGGLE_AIRPLANE);
         }
         // Disable VPN.
-        if (isSecondaryUser || mUm.hasUserRestriction(UserManager.DISALLOW_CONFIG_VPN)) {
+        // TODO: http://b/23693383
+        if (!isAdmin || mUm.hasUserRestriction(UserManager.DISALLOW_CONFIG_VPN)) {
             removePreference(KEY_VPN_SETTINGS);
         }
 
@@ -292,7 +293,7 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
 
         // Remove Mobile Network Settings and Manage Mobile Plan for secondary users,
         // if it's a wifi-only device, or if the settings are restricted.
-        if (isSecondaryUser || Utils.isWifiOnly(getActivity())
+        if (!isAdmin || Utils.isWifiOnly(getActivity())
                 || mUm.hasUserRestriction(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS)) {
             removePreference(KEY_MOBILE_NETWORK_SETTINGS);
             removePreference(KEY_MANAGE_MOBILE_PLAN);
@@ -324,7 +325,7 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
         // Disable Tethering if it's not allowed or if it's a wifi-only device
         final ConnectivityManager cm =
                 (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (isSecondaryUser || !cm.isTetheringSupported()
+        if (!isAdmin || !cm.isTetheringSupported()
                 || mUm.hasUserRestriction(UserManager.DISALLOW_CONFIG_TETHERING)) {
             getPreferenceScreen().removePreference(findPreference(KEY_TETHER_SETTINGS));
         } else {
@@ -349,7 +350,7 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
         } catch (IllegalArgumentException ignored) {
             isCellBroadcastAppLinkEnabled = false;  // CMAS app not installed
         }
-        if (isSecondaryUser || !isCellBroadcastAppLinkEnabled
+        if (!isAdmin || !isCellBroadcastAppLinkEnabled
                 || mUm.hasUserRestriction(UserManager.DISALLOW_CONFIG_CELL_BROADCASTS)) {
             PreferenceScreen root = getPreferenceScreen();
             Preference ps = findPreference(KEY_CELL_BROADCAST_SETTINGS);

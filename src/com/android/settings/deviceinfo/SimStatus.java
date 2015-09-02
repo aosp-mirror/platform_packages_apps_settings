@@ -24,8 +24,8 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.telephony.CellBroadcastMessage;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.PhoneStateListener;
@@ -43,7 +43,6 @@ import com.android.internal.telephony.Phone;
 import com.android.internal.telephony.PhoneFactory;
 import com.android.settings.InstrumentedPreferenceActivity;
 import com.android.settings.R;
-import com.android.settings.Utils;
 
 import android.view.View;
 import android.widget.ListView;
@@ -53,7 +52,6 @@ import android.widget.TabHost.TabContentFactory;
 import android.widget.TabHost.TabSpec;
 import android.widget.TabWidget;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -379,9 +377,10 @@ public class SimStatus extends InstrumentedPreferenceActivity {
 
     private void updatePhoneInfos() {
         if (mSir != null) {
+            // TODO: http://b/23763013
             final Phone phone = PhoneFactory.getPhone(SubscriptionManager.getPhoneId(
                         mSir.getSubscriptionId()));
-            if (UserHandle.myUserId() == UserHandle.USER_OWNER
+            if (UserManager.get(this).isAdminUser()
                     && SubscriptionManager.isValidSubscriptionId(mSir.getSubscriptionId())) {
                 if (phone == null) {
                     Log.e(TAG, "Unable to locate a phone object for the given Subscription ID.");

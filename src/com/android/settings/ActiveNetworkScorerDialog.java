@@ -70,8 +70,9 @@ public final class ActiveNetworkScorerDialog extends AlertActivity implements
     }
 
     private boolean buildDialog() {
-        if (UserHandle.myUserId() != UserHandle.USER_OWNER) {
-            Log.i(TAG, "Can only set scorer for owner user.");
+        // TOOD: http://b/23422763
+        if (UserHandle.myUserId() != UserHandle.USER_SYSTEM) {
+            Log.i(TAG, "Can only set scorer for owner/system user.");
             return false;
         }
         NetworkScorerAppData newScorer = NetworkScorerAppManager.getScorer(this, mNewPackageName);
