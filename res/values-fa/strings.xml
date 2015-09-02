@@ -118,7 +118,7 @@
     <string name="bluetooth_no_devices_found" msgid="1085232930277181436">"هیچ دستگاه بلوتوثی در این اطراف پیدا نشد."</string>
     <string name="bluetooth_notif_ticker" msgid="4726721390078512173">"درخواست مرتبط‌سازی"</string>
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"درخواست مرتبط‌سازی"</string>
-    <string name="bluetooth_notif_message" msgid="5300852675110479862">"لمس کردن برای جفت کردن با <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <string name="bluetooth_notif_message" msgid="5300852675110479862">"برای مرتبط‌سازی با <xliff:g id="DEVICE_NAME">%1$s</xliff:g> لمس کنید."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"نمایش فایل‌های دریافتی"</string>
     <string name="device_picker" msgid="4978696506172252813">"انتخاب دستگاه بلوتوث"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"درخواست مجوز بلوتوث"</string>
@@ -346,12 +346,9 @@
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"هر زمان این نماد را ببینید، می‌توانید از اثر انگشتتان برای شناسایی یا تأیید خرید استفاده کنید."</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"برای روشن کردن و باز کردن قفل دستگاهتان کافیست حسگر اثر انگشت را لمس کنید."</string>
     <string name="setup_fingerprint_enroll_finish_message_secondary" msgid="7280546429133276374">"وقتی این نماد را می‌بینید، می‌توانید از اثر انگشتتان استفاده کنید."</string>
-    <!-- no translation found for setup_fingerprint_enroll_enrolling_skip_title (6808422329107426923) -->
-    <skip />
-    <!-- no translation found for setup_fingerprint_enroll_enrolling_skip_message (6241441010981601552) -->
-    <skip />
-    <!-- no translation found for setup_fingerprint_enroll_enrolling_stay_button (2128463023559624620) -->
-    <skip />
+    <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"از تنظیم اثر انگشت رد می‌شوید؟"</string>
+    <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="6241441010981601552">"برای تنظیم دسترسی با اثر انگشت، در این صفحه‌نمایش بمانید و دستورالعمل‌ها را دنبال کنید."</string>
+    <string name="setup_fingerprint_enroll_enrolling_stay_button" msgid="2128463023559624620">"ماندن"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"تنظیم قفل صفحه"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"انجام شد"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"اووه، آن حسگر نیست"</string>
@@ -497,7 +494,7 @@
     <string name="bluetooth_settings" msgid="1810521656168174329">"بلوتوث"</string>
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"بلوتوث"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"مدیریت اتصال ها، تنظیم نام دستگاه و قابلیت شناسایی"</string>
-    <string name="bluetooth_pairing_request" msgid="2605098826364694673">"با <xliff:g id="DEVICE_NAME">%1$s</xliff:g> مرتبط شود؟"</string>
+    <string name="bluetooth_pairing_request" msgid="2605098826364694673">"با <xliff:g id="DEVICE_NAME">%1$s</xliff:g> مرتبط‌سازی شود؟"</string>
     <string name="bluetooth_pairing_key_msg" msgid="418124944140102021">"کد مرتبط‌سازی بلوتوث"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"کد مرتبط‌سازی را وارد کنید سپس بازگشت یا ورود را فشار دهید"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"پین شامل حروف یا نماد است"</string>
@@ -506,8 +503,8 @@
     <string name="bluetooth_enter_pin_other_device" msgid="4637977124526813470">"ممکن است لازم باشد که این پین را در دستگاه دیگری وارد کنید."</string>
     <string name="bluetooth_enter_passkey_other_device" msgid="2798719004030279602">"ممکن است لازم باشد این کلیدواژه را نیز در دستگاه دیگر وارد کنید."</string>
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"‏برای مرتبط‌سازی با:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;مطمئن شوید که دستگاه این کلیدواژه را نمایش می‌دهد:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
-    <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"‏از::&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;با این دستگاه جفت شود؟"</string>
-    <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"‏برای جفت کردن با:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>روی آن تایپ کنید:<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>، سپس Return یا Enter را فشار دهید."</string>
+    <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"‏از::&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;با این دستگاه مرتبط‌سازی شود؟"</string>
+    <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"‏برای مرتبط‌سازی با:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>روی آن تایپ کنید:<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>، سپس Return یا Enter را فشار دهید."</string>
     <string name="bluetooth_pairing_shares_phonebook" msgid="2277931851483023208">"به <xliff:g id="DEVICE_NAME">%1$s</xliff:g> اجازه داده شود به مخاطبین و سابقه تماس شما دسترسی داشته باشد"</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_connecting_error_message" msgid="1397388344342081090">"اتصال به <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ممکن نیست."</string>
@@ -520,16 +517,16 @@
     <string name="bluetooth_preference_paired_dialog_internet_option" msgid="7112953286863428412">"اتصال به اینترنت"</string>
     <string name="bluetooth_preference_paired_dialog_keyboard_option" msgid="2271954176947879628">"صفحه‌کلید"</string>
     <string name="bluetooth_preference_paired_dialog_contacts_option" msgid="7747163316331917594">"سابقه تماس و مخاطبین"</string>
-    <string name="bluetooth_pairing_dialog_title" msgid="1417255032435317301">"با این دستگاه مرتبط شود؟"</string>
+    <string name="bluetooth_pairing_dialog_title" msgid="1417255032435317301">"با این دستگاه مرتبط‌سازی شود؟"</string>
     <string name="bluetooth_pairing_dialog_sharing_phonebook_title" msgid="7664141669886358618">"دفترچه تلفن به اشتراک گذاشته شود؟"</string>
     <string name="bluetooth_pairing_dialog_contants_request" msgid="5531109163573611348">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> می‌خواهد به مخاطبین و سابقه تماس شما دسترسی داشته باشد."</string>
-    <string name="bluetooth_pairing_dialog_paring_request" msgid="8451248193517851958">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> می‌خواهد با بلوتوث مرتبط شود. وقتی وصل شد، به مخاطبین و سابقه تماستان دسترسی دارد."</string>
+    <string name="bluetooth_pairing_dialog_paring_request" msgid="8451248193517851958">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> می‌خواهد با بلوتوث مرتبط‌سازی کند. وقتی وصل شود، به مخاطبین و سابقه تماستان دسترسی دارد."</string>
     <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"دستگاه‌های مرتبط شده"</string>
     <string name="bluetooth_preference_found_devices" msgid="1647983835063249680">"دستگاه‌های در دسترس"</string>
     <string name="bluetooth_preference_no_found_devices" msgid="7594339669961811591">"دستگاهی موجود نیست"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"اتصال"</string>
     <string name="bluetooth_device_context_disconnect" msgid="8220072022970148683">"قطع اتصال"</string>
-    <string name="bluetooth_device_context_pair_connect" msgid="7611522504813927727">"جفت کردن و اتصال"</string>
+    <string name="bluetooth_device_context_pair_connect" msgid="7611522504813927727">"مرتبط‌سازی و اتصال"</string>
     <string name="bluetooth_device_context_unpair" msgid="662992425948536144">"لغو جفت سازی"</string>
     <string name="bluetooth_device_context_disconnect_unpair" msgid="7644014238070043798">"قطع اتصال و لغو جفت سازی"</string>
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"گزینه‌ها…"</string>
