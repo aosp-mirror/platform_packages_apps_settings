@@ -361,6 +361,10 @@ public class ChooseLockGeneric extends SettingsActivity {
                     boolean visible = true;
                     if (KEY_UNLOCK_SET_OFF.equals(key)) {
                         enabled = quality <= DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
+                        if (getResources().getBoolean(R.bool.config_hide_none_security_option)) {
+                            enabled = false;
+                            visible = false;
+                        }
                     } else if (KEY_UNLOCK_SET_NONE.equals(key)) {
                         enabled = quality <= DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
                     } else if (KEY_UNLOCK_SET_PATTERN.equals(key)) {
