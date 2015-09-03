@@ -125,7 +125,7 @@ public class TetherService extends Service {
         }
         // We want to be started if we are killed accidently, so that we can be sure we finish
         // the check.
-        return START_STICKY;
+        return START_REDELIVER_INTENT;
     }
 
     @Override
