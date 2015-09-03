@@ -181,6 +181,7 @@ public class FingerprintSettings extends SubSettings {
                     case MSG_REFRESH_FINGERPRINT_TEMPLATES:
                         removeFingerprintPreference(msg.arg1);
                         updateAddPreference();
+                        retryFingerprint();
                     break;
                     case MSG_FINGER_AUTH_SUCCESS:
                         mFingerprintCancel = null;
@@ -480,10 +481,10 @@ public class FingerprintSettings extends SubSettings {
                 highlight.setHotspot(centerX, centerY);
                 view.setBackground(highlight);
                 view.setPressed(true);
+                view.setPressed(false);
                 mHandler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        view.setPressed(false);
                         view.setBackground(null);
                     }
                 }, RESET_HIGHLIGHT_DELAY_MS);
