@@ -193,7 +193,7 @@ public class PrivacySettings extends SettingsPreferenceFragment implements Index
         public PrivacySearchIndexProvider() {
             super();
 
-            mIsPrimary = UserHandle.myUserId() == UserHandle.USER_OWNER;
+            mIsPrimary = UserHandle.myUserId() == UserHandle.USER_SYSTEM;
         }
 
         @Override
@@ -203,6 +203,7 @@ public class PrivacySettings extends SettingsPreferenceFragment implements Index
             List<SearchIndexableResource> result = new ArrayList<SearchIndexableResource>();
 
             // For non-primary user, no backup or reset is available
+            // TODO: http://b/22388012
             if (!mIsPrimary) {
                 return result;
             }
