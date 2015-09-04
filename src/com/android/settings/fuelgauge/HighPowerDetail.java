@@ -143,7 +143,7 @@ public class HighPowerDetail extends DialogFragment implements OnClickListener,
     public static CharSequence getSummary(Context context, String pkg) {
         PowerWhitelistBackend powerWhitelist = PowerWhitelistBackend.getInstance();
         return context.getString(powerWhitelist.isSysWhitelisted(pkg) ? R.string.high_power_system
-                : powerWhitelist.isWhitelisted(pkg) ? R.string.high_power_filter_on
+                : powerWhitelist.isWhitelisted(pkg) ? R.string.high_power_on
                 : R.string.high_power_off);
     }
 
