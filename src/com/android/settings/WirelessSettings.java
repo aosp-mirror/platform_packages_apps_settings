@@ -26,7 +26,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -35,7 +34,6 @@ import android.nfc.NfcAdapter;
 import android.nfc.NfcManager;
 import android.os.Bundle;
 import android.os.SystemProperties;
-import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
@@ -70,7 +68,6 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
     private static final String KEY_PROXY_SETTINGS = "proxy_settings";
     private static final String KEY_MOBILE_NETWORK_SETTINGS = "mobile_network_settings";
     private static final String KEY_MANAGE_MOBILE_PLAN = "manage_mobile_plan";
-    private static final String KEY_TOGGLE_NSD = "toggle_nsd"; //network service discovery
     private static final String KEY_CELL_BROADCAST_SETTINGS = "cell_broadcast_settings";
     private static final String KEY_WFC_SETTINGS = "wifi_calling_settings";
 
@@ -81,7 +78,6 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
     private SwitchPreference mAirplaneModePreference;
     private NfcEnabler mNfcEnabler;
     private NfcAdapter mNfcAdapter;
-    private NsdEnabler mNsdEnabler;
 
     private ConnectivityManager mCm;
     private TelephonyManager mTm;
@@ -232,16 +228,11 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
         mAirplaneModePreference = (SwitchPreference) findPreference(KEY_TOGGLE_AIRPLANE);
         SwitchPreference nfc = (SwitchPreference) findPreference(KEY_TOGGLE_NFC);
         PreferenceScreen androidBeam = (PreferenceScreen) findPreference(KEY_ANDROID_BEAM_SETTINGS);
-        SwitchPreference nsd = (SwitchPreference) findPreference(KEY_TOGGLE_NSD);
 
         mAirplaneModeEnabler = new AirplaneModeEnabler(activity, mAirplaneModePreference);
         mNfcEnabler = new NfcEnabler(activity, nfc, androidBeam);
 
         mButtonWfc = (PreferenceScreen) findPreference(KEY_WFC_SETTINGS);
-
-        // Remove NSD checkbox by default
-        getPreferenceScreen().removePreference(nsd);
-        //mNsdEnabler = new NsdEnabler(activity, nsd);
 
         String toggleable = Settings.Global.getString(activity.getContentResolver(),
                 Settings.Global.AIRPLANE_MODE_TOGGLEABLE_RADIOS);
@@ -366,9 +357,6 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
         if (mNfcEnabler != null) {
             mNfcEnabler.resume();
         }
-        if (mNsdEnabler != null) {
-            mNsdEnabler.resume();
-        }
 
         // update WFC setting
         final Context context = getActivity();
@@ -398,9 +386,6 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
         mAirplaneModeEnabler.pause();
         if (mNfcEnabler != null) {
             mNfcEnabler.pause();
-        }
-        if (mNsdEnabler != null) {
-            mNsdEnabler.pause();
         }
     }
 
@@ -436,8 +421,6 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
             @Override
             public List<String> getNonIndexableKeys(Context context) {
                 final ArrayList<String> result = new ArrayList<String>();
-
-                result.add(KEY_TOGGLE_NSD);
 
                 final UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
                 final boolean isSecondaryUser = !um.isAdminUser();
