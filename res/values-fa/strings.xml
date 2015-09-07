@@ -347,8 +347,7 @@
     <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"برای روشن کردن و باز کردن قفل دستگاهتان کافیست حسگر اثر انگشت را لمس کنید."</string>
     <string name="setup_fingerprint_enroll_finish_message_secondary" msgid="7280546429133276374">"وقتی این نماد را می‌بینید، می‌توانید از اثر انگشتتان استفاده کنید."</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"از تنظیم اثر انگشت رد می‌شوید؟"</string>
-    <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="6241441010981601552">"برای تنظیم دسترسی با اثر انگشت، در این صفحه‌نمایش بمانید و دستورالعمل‌ها را دنبال کنید."</string>
-    <string name="setup_fingerprint_enroll_enrolling_stay_button" msgid="2128463023559624620">"ماندن"</string>
+    <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"انتخاب کرده‌اید که از اثر انگشتتان به‌عنوان روشی برای باز کردن قفل تلفن استفاده کنید. اگر اکنون این مرحله را رد کنید، باید بعداً آن را تنظیم کنید. تنظیم فقط یک دقیقه یا همین حدود طول می‌کشد."</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"تنظیم قفل صفحه"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"انجام شد"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"اووه، آن حسگر نیست"</string>
@@ -582,8 +581,6 @@
     <string name="android_beam_disabled_summary" msgid="1737782116894793393">"‏در دسترس نیست زیرا NFC خاموش است"</string>
     <string name="android_beam_label" msgid="6257036050366775040">"Android Beam"</string>
     <string name="android_beam_explained" msgid="6981652347448777459">"‏در صورت روشن بودن این ویژگی، می‌توانید با نگهداشتن دستگاه‌ها نزدیک به یکدیگر، محتوای برنامه را به دستگاه دارای قابلیت NFC دیگری مخابره کنید. به‌عنوان مثال، می‌توانید صفحات مرورگر، ویدیوهای YouTube، تماس‌های افراد و موارد دیگر را مخابره کنید.\n\n کافیست دستگاه‌ها را نزدیک هم بگذارید (معمولاً پشت به پشت) و سپس صفحهٔ نمایش خود را لمس کنید. برنامه‌ کاربردی آنچه را مخابره می‌شود تعیین می‌کند."</string>
-    <string name="nsd_quick_toggle_title" msgid="3125572815278848258">"کاوش سرویس شبکه"</string>
-    <string name="nsd_quick_toggle_summary" msgid="155692215972781276">"‏به برنامه‎های دستگاه‌های دیگر اجازه داده شود برنامه‎های این دستگاه را ببینند"</string>
     <string name="wifi_quick_toggle_title" msgid="8850161330437693895">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="2696547080481267642">"‏روشن کردن Wi-Fi"</string>
     <string name="wifi_settings" msgid="29722149822540994">"Wi‑Fi"</string>
@@ -692,7 +689,8 @@
     <string name="wifi_failed_save_message" msgid="6650004874143815692">"شبکه ذخیره نشد"</string>
     <string name="wifi_cancel" msgid="6763568902542968964">"لغو"</string>
     <string name="wifi_skip_anyway" msgid="6965361454438011190">"با این وجود، رد می‌شوید"</string>
-    <string name="wifi_dont_skip" msgid="1677493161164629163">"رد نمی‌شوید"</string>
+    <!-- no translation found for wifi_dont_skip (3615535136327231588) -->
+    <skip />
     <string name="wifi_skipped_message" product="tablet" msgid="6761689889733331124">"‏هشدار: اگر از اتصال Wi‑Fi صرف نظر کنید، رایانه لوحی‌تان فقط از داده‌های شبکه تلفن همراه برای دانلودها و به‌روزرسانی‌های اولیه استفاده خواهد کرد. برای اجتناب از هزینه‌های احتمالی داده‌های شبکه تلفن همراه، به Wi‑Fi وصل شوید."</string>
     <string name="wifi_skipped_message" product="device" msgid="1385490367826852775">"‏هشدار: اگر از اتصال Wi‑Fi صرف نظر کنید، دستگاهتان فقط از داده‌های شبکه تلفن همراه برای دانلودها و به‌روزرسانی‌های اولیه استفاده خواهد کرد. برای اجتناب از هزینه‌های احتمالی داده‌های شبکه تلفن همراه، به Wi‑Fi وصل شوید."</string>
     <string name="wifi_skipped_message" product="default" msgid="6084295135297772350">"‏هشدار: اگر از اتصال Wi‑Fi صرف نظر کنید، تلفنتان فقط از داده‌های شبکه تلفن همراه برای دانلودها و به‌روزرسانی‌های اولیه استفاده خواهد کرد. برای اجتناب از هزینه‌های احتمالی داده‌های شبکه تلفن همراه، به Wi‑Fi وصل شوید."</string>
@@ -2733,7 +2731,7 @@
     <string name="filter_notif_priority_apps" msgid="5965001885749195239">"اولویت‌دار"</string>
     <string name="filter_notif_sensitive_apps" msgid="4909289478844197927">"محتوای حساس پنهان است"</string>
     <string name="filter_notif_no_peeking" msgid="5197968265625096563">"بدون نمایش اجمالی"</string>
-    <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"با نشانی‌های اینترنتی دامنه"</string>
+    <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"با نشانی‌های وب دامنه"</string>
     <string name="trust_agent_disabled_device_admin" msgid="5982562414642596563">"توسط سرپرست سیستم غیرفعال شد"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"پیشرفته"</string>
     <string name="configure_apps" msgid="6685680790825882528">"پیکربندی برنامه‌ها"</string>
