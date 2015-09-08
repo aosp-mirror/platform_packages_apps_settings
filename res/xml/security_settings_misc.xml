@@ -75,6 +75,12 @@
                 android:persistent="false"
                 android:fragment="com.android.settings.TrustedCredentialsSettings"/>
 
+        <Preference android:key="user_credentials"
+                android:title="@string/user_credentials"
+                android:summary="@string/user_credentials_summary"
+                android:persistent="false"
+                android:fragment="com.android.settings.UserCredentialsSettings"/>
+
         <Preference android:key="credentials_install"
                 android:title="@string/credentials_install"
                 android:summary="@string/credentials_install_summary"
