@@ -144,23 +144,20 @@ public class WifiConfigController implements TextWatcher,
     private StaticIpConfiguration mStaticIpConfiguration = null;
 
     private String[] mLevels;
-    private boolean mEdit;
-    private boolean mModify;
+    private int mMode;
     private TextView mSsidView;
 
     private Context mContext;
 
-    public WifiConfigController(
-            WifiConfigUiBase parent, View view, AccessPoint accessPoint, boolean edit,
-            boolean modify) {
+    public WifiConfigController(WifiConfigUiBase parent, View view, AccessPoint accessPoint,
+            int mode) {
         mConfigUi = parent;
 
         mView = view;
         mAccessPoint = accessPoint;
         mAccessPointSecurity = (accessPoint == null) ? AccessPoint.SECURITY_NONE :
                 accessPoint.getSecurity();
-        mEdit = edit;
-        mModify = modify;
+        mMode = mode;
 
         mTextViewChangedHandler = new Handler();
         mContext = mConfigUi.getContext();
@@ -238,7 +235,7 @@ public class WifiConfigController implements TextWatcher,
             }
 
             if ((!mAccessPoint.isSaved() && !mAccessPoint.isActive())
-                    || mEdit) {
+                    || mMode != WifiConfigUiBase.MODE_VIEW) {
                 showSecurityFields();
                 showIpConfigFields();
                 showProxyFields();
@@ -251,8 +248,10 @@ public class WifiConfigController implements TextWatcher,
                 }
             }
 
-            if (mModify) {
+            if (mMode == WifiConfigUiBase.MODE_MODIFY) {
                 mConfigUi.setSubmitButton(res.getString(R.string.wifi_save));
+            } else if (mMode == WifiConfigUiBase.MODE_CONNECT) {
+                mConfigUi.setSubmitButton(res.getString(R.string.wifi_connect));
             } else {
                 final DetailedState state = mAccessPoint.getDetailedState();
                 final String signalLevel = getSignalString();
@@ -376,7 +375,7 @@ public class WifiConfigController implements TextWatcher,
     }
 
     /* package */ WifiConfiguration getConfig() {
-        if (!mEdit) {
+        if (mMode == WifiConfigUiBase.MODE_VIEW) {
             return null;
         }
 
@@ -966,12 +965,8 @@ public class WifiConfigController implements TextWatcher,
         }
     }
 
-    public boolean isEdit() {
-        return mEdit;
-    }
-
-    public boolean isModify() {
-        return mModify;
+    public int getMode() {
+        return mMode;
     }
 
     @Override
@@ -1065,5 +1060,9 @@ public class WifiConfigController implements TextWatcher,
                 (((CheckBox) mView.findViewById(R.id.show_password)).isChecked() ?
                 InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD :
                 InputType.TYPE_TEXT_VARIATION_PASSWORD));
+    }
+
+    public AccessPoint getAccessPoint() {
+        return mAccessPoint;
     }
 }

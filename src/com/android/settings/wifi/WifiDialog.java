@@ -24,6 +24,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 
 class WifiDialog extends AlertDialog implements WifiConfigUiBase, DialogInterface.OnClickListener {
@@ -36,8 +37,7 @@ class WifiDialog extends AlertDialog implements WifiConfigUiBase, DialogInterfac
     private static final int BUTTON_SUBMIT = DialogInterface.BUTTON_POSITIVE;
     private static final int BUTTON_FORGET = DialogInterface.BUTTON_NEUTRAL;
 
-    private final boolean mEdit;
-    private final boolean mModify;
+    private final int mMode;
     private final WifiDialogListener mListener;
     private final AccessPoint mAccessPoint;
 
@@ -46,19 +46,17 @@ class WifiDialog extends AlertDialog implements WifiConfigUiBase, DialogInterfac
     private boolean mHideSubmitButton;
     private boolean mHideForgetButton;
 
-    public WifiDialog(Context context, WifiDialogListener listener,
-            AccessPoint accessPoint, boolean edit, boolean modify,
-            boolean hideSubmitButton, boolean hideForgetButton) {
-        this(context, listener, accessPoint, edit, modify);
+    public WifiDialog(Context context, WifiDialogListener listener, AccessPoint accessPoint,
+            int mode, boolean hideSubmitButton, boolean hideForgetButton) {
+        this(context, listener, accessPoint, mode);
         mHideSubmitButton = hideSubmitButton;
         mHideForgetButton = hideForgetButton;
     }
 
-    public WifiDialog(Context context, WifiDialogListener listener,
-            AccessPoint accessPoint, boolean edit, boolean modify) {
+    public WifiDialog(Context context, WifiDialogListener listener, AccessPoint accessPoint,
+            int mode) {
         super(context);
-        mEdit = edit;
-        mModify = modify;
+        mMode = mode;
         mListener = listener;
         mAccessPoint = accessPoint;
         mHideSubmitButton = false;
@@ -75,7 +73,7 @@ class WifiDialog extends AlertDialog implements WifiConfigUiBase, DialogInterfac
         mView = getLayoutInflater().inflate(R.layout.wifi_dialog, null);
         setView(mView);
         setInverseBackgroundForced(true);
-        mController = new WifiConfigController(this, mView, mAccessPoint, mEdit, mModify);
+        mController = new WifiConfigController(this, mView, mAccessPoint, mMode);
         super.onCreate(savedInstanceState);
 
         if (mHideSubmitButton) {
@@ -119,8 +117,8 @@ class WifiDialog extends AlertDialog implements WifiConfigUiBase, DialogInterfac
     }
 
     @Override
-    public boolean isEdit() {
-        return mEdit;
+    public int getMode() {
+        return mMode;
     }
 
     @Override
