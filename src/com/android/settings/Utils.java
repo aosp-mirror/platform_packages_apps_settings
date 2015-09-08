@@ -1146,9 +1146,9 @@ public final class Utils {
         boolean hasPreferred = hasPreferredActivities(pm, packageName)
                 || hasUsbDefaults(usbManager, packageName);
         int status = pm.getIntentVerificationStatus(packageName, UserHandle.myUserId());
+        // consider a visible current link-handling state to be any explicitly designated behavior
         boolean hasDomainURLsPreference =
-                (status == PackageManager.INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_ALWAYS) ||
-                (status == PackageManager.INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_NEVER);
+                status != PackageManager.INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_UNDEFINED;
         return context.getString(hasPreferred || hasDomainURLsPreference
                 ? R.string.launch_defaults_some
                 : R.string.launch_defaults_none);
