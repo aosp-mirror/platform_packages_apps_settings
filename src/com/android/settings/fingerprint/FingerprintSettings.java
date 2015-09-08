@@ -404,7 +404,7 @@ public class FingerprintSettings extends SubSettings {
         }
 
         private void showRenameDeleteDialog(final Fingerprint fp) {
-            RenameDeleteDialog renameDeleteDialog = new RenameDeleteDialog(getContext());
+            RenameDeleteDialog renameDeleteDialog = new RenameDeleteDialog();
             Bundle args = new Bundle();
             args.putParcelable("fingerprint", fp);
             renameDeleteDialog.setArguments(args);
