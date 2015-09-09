@@ -130,7 +130,7 @@ public class FingerprintEnrollSidecar extends InstrumentedFragment {
         @Override
         public void onEnrollmentError(int errMsgId, CharSequence errString) {
             if (mListener != null) {
-                mListener.onEnrollmentError(errString);
+                mListener.onEnrollmentError(errMsgId, errString);
             }
         }
     };
@@ -149,7 +149,7 @@ public class FingerprintEnrollSidecar extends InstrumentedFragment {
 
     public interface Listener {
         void onEnrollmentHelp(CharSequence helpString);
-        void onEnrollmentError(CharSequence errString);
+        void onEnrollmentError(int errMsgId, CharSequence errString);
         void onEnrollmentProgressChange(int steps, int remaining);
     }
 }
