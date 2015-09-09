@@ -80,6 +80,9 @@ public class FingerprintEnrollFindSensor extends FingerprintEnrollBase {
             } else if (resultCode == RESULT_SKIP) {
                 setResult(RESULT_SKIP);
                 finish();
+            } else if (resultCode == RESULT_TIMEOUT) {
+                setResult(RESULT_TIMEOUT);
+                finish();
             } else {
                 FingerprintManager fpm = getSystemService(FingerprintManager.class);
                 int enrolled = fpm.getEnrolledFingerprints().size();
