@@ -33,12 +33,14 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
+import android.os.PersistableBundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.Preference;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.provider.Telephony;
+import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.text.TextUtils;
@@ -111,6 +113,8 @@ public class ApnSettings extends SettingsPreferenceFragment implements
 
     private boolean mUnavailable;
 
+    private boolean mHideImsApn;
+
     private final BroadcastReceiver mMobileStateReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -162,6 +166,11 @@ public class ApnSettings extends SettingsPreferenceFragment implements
 
         mSubscriptionInfo = SubscriptionManager.from(activity).getActiveSubscriptionInfo(subId);
         mUiccController = UiccController.getInstance();
+
+        CarrierConfigManager configManager = (CarrierConfigManager)
+                getSystemService(Context.CARRIER_CONFIG_SERVICE);
+        PersistableBundle b = configManager.getConfig();
+        mHideImsApn = b.getBoolean(CarrierConfigManager.KEY_HIDE_IMS_APN_BOOL);
     }
 
     @Override
@@ -226,9 +235,12 @@ public class ApnSettings extends SettingsPreferenceFragment implements
         final String mccmnc = mSubscriptionInfo == null ? ""
             : tm.getSimOperator(mSubscriptionInfo.getSubscriptionId());
         Log.d(TAG, "mccmnc = " + mccmnc);
-        final String where = "numeric=\""
+        String where = "numeric=\""
             + mccmnc
             + "\" AND NOT (type='ia' AND (apn=\"\" OR apn IS NULL))";
+        if (mHideImsApn) {
+            where = where + " AND NOT (type='ims')";
+        }
 
         Cursor cursor = getContentResolver().query(Telephony.Carriers.CONTENT_URI, new String[] {
                 "_id", "name", "apn", "type", "mvno_type", "mvno_match_data"}, where, null,
