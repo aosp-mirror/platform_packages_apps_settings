@@ -772,6 +772,12 @@
     <string name="security_settings_fingerprint_enroll_touch_dialog_title">Whoops, that\u2019s not the sensor</string>
     <!-- Dialog message for dialog which shows when user touches the icon on the screen, instead of the sensor at the back [CHAR LIMIT=45] -->
     <string name="security_settings_fingerprint_enroll_touch_dialog_message">Use the fingerprint sensor on your device.</string>
+    <!-- Dialog message for dialog which shows when finger cannot be enrolled. [CHAR LIMIT=45] -->
+    <string name="security_settings_fingerprint_enroll_error_dialog_title">Enrollment was not completed</string>
+    <!-- Dialog message for dialog which shows when finger cannot be enrolled due to being idle too long. -->
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message">Fingerprint enrollment time limit reached. Try again.</string>
+    <!-- Dialog message for dialog which shows when finger cannot be enrolled due to an internal error or fingerprint can't be read. -->
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message">Fingerprint enrollment didn\'t work. Try again or use a different finger.</string>
     <!-- Button text shown at the end of enrollment that allows the user to add another fingerprint -->
     <string name="fingerprint_enroll_button_add">Add another</string>
     <!-- Button text shown at the end of enrollment that allows the user to move to the next step -->
