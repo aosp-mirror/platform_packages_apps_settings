@@ -19,6 +19,7 @@ package com.android.settings.wifi;
 import android.app.Dialog;
 import android.net.wifi.WifiConfiguration;
 import android.os.Bundle;
+import android.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -94,7 +95,8 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
     @Override
     public void onAccessPointsChanged() {
         super.onAccessPointsChanged();
-        updateFooter(getPreferenceScreen().getPreferenceCount() == 0);
+        PreferenceScreen preferenceScreen = getPreferenceScreen();
+        updateFooter(preferenceScreen == null || preferenceScreen.getPreferenceCount() == 0);
     }
 
     @Override
