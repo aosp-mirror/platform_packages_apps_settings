@@ -28,6 +28,7 @@ import android.widget.TextView;
 import com.android.settings.ProfileSelectDialog;
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settingslib.drawer.DashboardTile;
 
 public class DashboardTileView extends FrameLayout implements View.OnClickListener {
 
@@ -91,17 +92,21 @@ public class DashboardTileView extends FrameLayout implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        if (mTile.fragment != null) {
-            Utils.startWithFragment(getContext(), mTile.fragment, mTile.fragmentArguments, null, 0,
-                    mTile.titleRes, mTile.getTitle(getResources()));
-        } else if (mTile.intent != null) {
-            int numUserHandles = mTile.userHandle.size();
+        clickTile(getContext(), mTile);
+    }
+
+    public static void clickTile(Context context, DashboardTile tile) {
+        if (tile.fragment != null) {
+            Utils.startWithFragment(context, tile.fragment, tile.fragmentArguments, null, 0,
+                    0, tile.title);
+        } else if (tile.intent != null) {
+            int numUserHandles = tile.userHandle.size();
             if (numUserHandles > 1) {
-                ProfileSelectDialog.show(((Activity) getContext()).getFragmentManager(), mTile);
+                ProfileSelectDialog.show(((Activity) context).getFragmentManager(), tile);
             } else if (numUserHandles == 1) {
-                getContext().startActivityAsUser(mTile.intent, mTile.userHandle.get(0));
+                context.startActivityAsUser(tile.intent, tile.userHandle.get(0));
             } else {
-                getContext().startActivity(mTile.intent);
+                context.startActivity(tile.intent);
             }
         }
     }

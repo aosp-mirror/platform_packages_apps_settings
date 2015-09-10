@@ -41,12 +41,10 @@ import android.content.pm.ResolveInfo;
 import android.content.pm.Signature;
 import android.content.pm.UserInfo;
 import android.content.res.Resources;
-import android.content.res.Resources.NotFoundException;
 import android.content.res.TypedArray;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.hardware.usb.IUsbManager;
 import android.net.ConnectivityManager;
 import android.net.LinkProperties;
 import android.net.Uri;
@@ -84,11 +82,8 @@ import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.widget.ListView;
 import android.widget.TabWidget;
-
 import com.android.internal.util.UserIcons;
 import com.android.settings.UserAdapter.UserDetails;
-import com.android.settings.dashboard.DashboardTile;
-import com.android.settingslib.applications.ApplicationsState;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -122,24 +117,6 @@ public final class Utils {
             0x00000000, 0xffc43828, 0xffe54918, 0xfff47b00,
             0xfffabf2c, 0xff679e37, 0xff0a7f42
     };
-
-    /**
-     * Name of the meta-data item that should be set in the AndroidManifest.xml
-     * to specify the icon that should be displayed for the preference.
-     */
-    public static final String META_DATA_PREFERENCE_ICON = "com.android.settings.icon";
-
-    /**
-     * Name of the meta-data item that should be set in the AndroidManifest.xml
-     * to specify the title that should be displayed for the preference.
-     */
-    public static final String META_DATA_PREFERENCE_TITLE = "com.android.settings.title";
-
-    /**
-     * Name of the meta-data item that should be set in the AndroidManifest.xml
-     * to specify the summary text that should be displayed for the preference.
-     */
-    public static final String META_DATA_PREFERENCE_SUMMARY = "com.android.settings.summary";
 
     private static final String SETTINGS_PACKAGE_NAME = "com.android.settings";
 
@@ -202,74 +179,6 @@ public final class Utils {
 
         // Did not find a matching activity, so remove the preference
         parentPreferenceGroup.removePreference(preference);
-
-        return false;
-    }
-
-    public static boolean updateTileToSpecificActivityFromMetaDataOrRemove(Context context,
-            DashboardTile tile) {
-
-        Intent intent = tile.intent;
-        if (intent != null) {
-            // Find the activity that is in the system image
-            PackageManager pm = context.getPackageManager();
-            List<ResolveInfo> list = tile.userHandle.size() != 0
-                    ? pm.queryIntentActivitiesAsUser(intent, PackageManager.GET_META_DATA,
-                            tile.userHandle.get(0).getIdentifier())
-                    : pm.queryIntentActivities(intent, PackageManager.GET_META_DATA);
-            int listSize = list.size();
-            for (int i = 0; i < listSize; i++) {
-                ResolveInfo resolveInfo = list.get(i);
-                if ((resolveInfo.activityInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM)
-                        != 0) {
-                    int icon = 0;
-                    CharSequence title = null;
-                    String summary = null;
-
-                    // Get the activity's meta-data
-                    try {
-                        Resources res = pm.getResourcesForApplication(
-                                resolveInfo.activityInfo.packageName);
-                        Bundle metaData = resolveInfo.activityInfo.metaData;
-
-                        if (res != null && metaData != null) {
-                            if (metaData.containsKey(META_DATA_PREFERENCE_ICON)) {
-                                icon = metaData.getInt(META_DATA_PREFERENCE_ICON);
-                            }
-                            if (metaData.containsKey(META_DATA_PREFERENCE_TITLE)) {
-                                title = res.getString(metaData.getInt(META_DATA_PREFERENCE_TITLE));
-                            }
-                            if (metaData.containsKey(META_DATA_PREFERENCE_SUMMARY)) {
-                                summary = res.getString(
-                                        metaData.getInt(META_DATA_PREFERENCE_SUMMARY));
-                            }
-                        }
-                    } catch (NameNotFoundException | NotFoundException e) {
-                        // Ignore
-                    }
-
-                    // Set the preference title to the activity's label if no
-                    // meta-data is found
-                    if (TextUtils.isEmpty(title)) {
-                        title = resolveInfo.loadLabel(pm).toString();
-                    }
-                    if (icon == 0) {
-                        icon = resolveInfo.activityInfo.icon;
-                    }
-
-                    // Set icon, title and summary for the preference
-                    tile.iconRes = icon;
-                    tile.iconPkg = resolveInfo.activityInfo.packageName;
-                    tile.title = title;
-                    tile.summary = summary;
-                    // Replace the intent with this specific activity
-                    tile.intent = new Intent().setClassName(resolveInfo.activityInfo.packageName,
-                            resolveInfo.activityInfo.name);
-
-                    return true;
-                }
-            }
-        }
 
         return false;
     }

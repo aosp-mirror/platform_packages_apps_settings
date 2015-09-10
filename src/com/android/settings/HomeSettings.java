@@ -161,17 +161,6 @@ public class HomeSettings extends SettingsPreferenceFragment implements Indexabl
                 }
             }
         }
-
-        // If we're down to just one possible home app, back out of this settings
-        // fragment and show a dialog explaining to the user that they won't see
-        // 'Home' settings now until such time as there are multiple available.
-        if (mPrefs.size() < 2) {
-            if (mShowNotice) {
-                mShowNotice = false;
-                SettingsActivity.requestHomeNotice();
-            }
-            finishFragment();
-        }
     }
 
     private void buildHomeActivitiesList() {
