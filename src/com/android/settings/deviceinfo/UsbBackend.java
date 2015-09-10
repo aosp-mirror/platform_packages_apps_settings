@@ -71,8 +71,7 @@ public class UsbBackend {
         if (mPort != null) {
             int power = mPortStatus.getCurrentPowerRole() == UsbPort.POWER_ROLE_SOURCE
                     ? MODE_POWER_SOURCE : MODE_POWER_SINK;
-            return power | (mPortStatus.getCurrentDataRole() == UsbPort.DATA_ROLE_DEVICE
-                    ? getUsbDataMode() : MODE_DATA_NONE);
+            return power | getUsbDataMode();
         }
         return MODE_POWER_SINK | getUsbDataMode();
     }
