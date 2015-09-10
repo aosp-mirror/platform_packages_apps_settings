@@ -109,7 +109,13 @@ Preference.OnPreferenceClickListener {
             alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                     Editable value = input.getText();
-                    netid = Integer.parseInt(value.toString());
+                    try {
+                        netid = Integer.parseInt(value.toString());
+                    } catch (NumberFormatException e) {
+                        // Invalid netid
+                        e.printStackTrace();
+                        return;
+                    }
                     mWifiManager.disableNetwork(netid);
                     }
                     });
