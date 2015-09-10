@@ -67,7 +67,6 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
                 Bundle savedInstanceState) {
             final SetupWizardListLayout layout = (SetupWizardListLayout) inflater.inflate(
                     R.layout.setup_choose_lock_generic, container, false);
-            layout.setHeaderText(getActivity().getTitle());
 
             final NavigationBar navigationBar = layout.getNavigationBar();
             navigationBar.getNextButton().setEnabled(false);
