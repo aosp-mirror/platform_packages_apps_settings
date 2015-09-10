@@ -17,6 +17,7 @@
 package com.android.settings.applications;
 
 import android.content.Intent;
+
 import com.android.settings.SettingsActivity;
 
 public class InstalledAppDetailsTop extends SettingsActivity {

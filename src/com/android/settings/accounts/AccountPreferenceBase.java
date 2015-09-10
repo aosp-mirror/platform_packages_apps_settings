@@ -30,7 +30,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.preference.PreferenceScreen;
+import android.support.v7.preference.PreferenceScreen;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.ContextThemeWrapper;

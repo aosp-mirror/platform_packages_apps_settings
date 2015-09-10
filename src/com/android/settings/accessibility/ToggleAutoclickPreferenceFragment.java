@@ -18,16 +18,16 @@ package com.android.settings.accessibility;
 
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.preference.SeekBarPreference;
-import android.preference.Preference;
 import android.provider.Settings;
+import android.support.v7.preference.Preference;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Switch;
 
-import com.android.settings.widget.SwitchBar;
 import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
+import com.android.settings.SeekBarPreference;
+import com.android.settings.widget.SwitchBar;
 
 
 /**

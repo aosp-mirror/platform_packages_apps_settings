@@ -17,17 +17,15 @@
 package com.android.settings;
 
 import android.content.Context;
-import android.preference.ListPreference;
+import android.support.v7.preference.ListPreference;
+import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-
-import libcore.util.Objects;
 
 public class DropDownPreference extends ListPreference {
 
@@ -105,13 +103,13 @@ public class DropDownPreference extends ListPreference {
     }
 
     @Override
-    protected void onBindView(View view) {
-        super.onBindView(view);
+    public void onBindViewHolder(PreferenceViewHolder view) {
+        super.onBindViewHolder(view);
         if (view.equals(mSpinner.getParent())) return;
         if (mSpinner.getParent() != null) {
             ((ViewGroup) mSpinner.getParent()).removeView(mSpinner);
         }
-        final ViewGroup vg = (ViewGroup) view;
+        final ViewGroup vg = (ViewGroup) view.itemView;
         vg.addView(mSpinner, 0);
         final ViewGroup.LayoutParams lp = mSpinner.getLayoutParams();
         lp.width = 0;

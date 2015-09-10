@@ -17,7 +17,7 @@
 package com.android.settings.accessibility;
 
 import android.content.Context;
-import android.preference.ListPreference;
+import android.support.v7.preference.ListPreference;
 import android.util.AttributeSet;
 
 import com.android.internal.app.LocalePicker;

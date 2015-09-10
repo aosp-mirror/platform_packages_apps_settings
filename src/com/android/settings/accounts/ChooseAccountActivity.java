@@ -28,10 +28,8 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.preference.Preference;
-import android.preference.PreferenceActivity;
-import android.preference.PreferenceGroup;
-import android.preference.PreferenceScreen;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceGroup;
 import android.util.Log;
 
 import com.android.internal.logging.MetricsLogger;
@@ -39,7 +37,6 @@ import com.android.internal.util.CharSequences;
 import com.android.settings.InstrumentedPreferenceActivity;
 import com.android.settings.R;
 import com.android.settings.Utils;
-
 import com.google.android.collect.Maps;
 
 import java.util.ArrayList;
@@ -171,8 +168,8 @@ public class ChooseAccountActivity extends InstrumentedPreferenceActivity {
             mAddAccountGroup.removeAll();
             for (ProviderEntry pref : mProviderList) {
                 Drawable drawable = getDrawableForType(pref.type);
-                ProviderPreference p =
-                        new ProviderPreference(this, pref.type, drawable, pref.name);
+                ProviderPreference p = new ProviderPreference(getPreferenceScreen().getContext(),
+                        pref.type, drawable, pref.name);
                 mAddAccountGroup.addPreference(p);
             }
         } else {
@@ -260,7 +257,7 @@ public class ChooseAccountActivity extends InstrumentedPreferenceActivity {
     }
 
     @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen preferences, Preference preference) {
+    public boolean onPreferenceTreeClick(Preference preference) {
         if (preference instanceof ProviderPreference) {
             ProviderPreference pref = (ProviderPreference) preference;
             if (Log.isLoggable(TAG, Log.VERBOSE)) {

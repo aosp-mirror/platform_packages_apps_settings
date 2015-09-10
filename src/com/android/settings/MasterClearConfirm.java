@@ -18,20 +18,19 @@ package com.android.settings;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
-import android.service.persistentdata.PersistentDataBlockManager;
-
-import com.android.internal.logging.MetricsLogger;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserManager;
+import android.service.persistentdata.PersistentDataBlockManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.android.internal.logging.MetricsLogger;
 
 /**
  * Confirm and execute a reset of the device to a clean "just out of the box"

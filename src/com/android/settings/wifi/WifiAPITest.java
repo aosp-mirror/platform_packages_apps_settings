@@ -16,18 +16,17 @@
 
 package com.android.settings.wifi;
 
-import com.android.settings.R;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.net.wifi.WifiManager;
-
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceActivity;
-import android.preference.PreferenceScreen;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceScreen;
 import android.text.Editable;
 import android.widget.EditText;
+
+import com.android.settings.PreferenceActivity;
+import com.android.settings.R;
 
 
 /**
@@ -88,8 +87,8 @@ Preference.OnPreferenceClickListener {
     //============================
 
     @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        super.onPreferenceTreeClick(preferenceScreen, preference);
+    public boolean onPreferenceTreeClick(Preference preference) {
+        super.onPreferenceTreeClick(preference);
         return false;
     }
 

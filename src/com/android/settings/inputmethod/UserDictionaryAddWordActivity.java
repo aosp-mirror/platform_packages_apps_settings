@@ -16,8 +16,6 @@
 
 package com.android.settings.inputmethod;
 
-import com.android.settings.R;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,6 +23,8 @@ import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
 import android.view.View;
+
+import com.android.settings.R;
 
 public class UserDictionaryAddWordActivity extends Activity {
 

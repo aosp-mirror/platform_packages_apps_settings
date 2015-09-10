@@ -21,7 +21,6 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.admin.DevicePolicyManager;
 import android.content.Intent;
-import android.os.UserHandle;
 
 import com.android.internal.widget.LockPatternUtils;
 

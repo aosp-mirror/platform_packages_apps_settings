@@ -16,8 +16,6 @@
 
 package com.android.settings.notification;
 
-import com.android.settings.R;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -34,6 +32,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.android.settings.R;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;

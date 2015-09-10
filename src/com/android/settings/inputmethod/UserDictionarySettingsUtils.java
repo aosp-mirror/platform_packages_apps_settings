@@ -16,11 +16,11 @@
 
 package com.android.settings.inputmethod;
 
-import com.android.settings.R;
-import com.android.settings.Utils;
-
 import android.content.Context;
 import android.text.TextUtils;
+
+import com.android.settings.R;
+import com.android.settings.Utils;
 
 import java.util.Locale;
 

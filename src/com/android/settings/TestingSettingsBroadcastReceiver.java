@@ -1,10 +1,10 @@
 package com.android.settings;
 
-import static com.android.internal.telephony.TelephonyIntents.SECRET_CODE_ACTION;
-
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.BroadcastReceiver;
+
+import static com.android.internal.telephony.TelephonyIntents.SECRET_CODE_ACTION;
 
 
 public class TestingSettingsBroadcastReceiver extends BroadcastReceiver {

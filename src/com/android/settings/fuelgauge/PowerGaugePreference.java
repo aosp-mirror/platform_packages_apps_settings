@@ -19,7 +19,7 @@ package com.android.settings.fuelgauge;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.view.View;
+import android.support.v7.preference.PreferenceViewHolder;
 import android.widget.TextView;
 
 import com.android.settings.AppProgressPreference;
@@ -51,8 +51,8 @@ public class PowerGaugePreference extends AppProgressPreference {
     }
 
     @Override
-    protected void onBindView(View view) {
-        super.onBindView(view);
+    public void onBindViewHolder(PreferenceViewHolder view) {
+        super.onBindViewHolder(view);
 
         if (mContentDescription != null) {
             final TextView titleView = (TextView) view.findViewById(android.R.id.title);

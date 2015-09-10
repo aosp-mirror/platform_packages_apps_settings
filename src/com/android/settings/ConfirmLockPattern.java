@@ -16,29 +16,29 @@
 
 package com.android.settings;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.SystemClock;
+import android.os.storage.StorageManager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.view.animation.Interpolator;
+import android.widget.TextView;
+
 import com.android.internal.logging.MetricsLogger;
-import com.android.internal.widget.LockPatternUtils;
-import com.android.internal.widget.LockPatternView;
 import com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient;
 import com.android.internal.widget.LockPatternChecker;
+import com.android.internal.widget.LockPatternUtils;
+import com.android.internal.widget.LockPatternView;
 import com.android.internal.widget.LockPatternView.Cell;
 import com.android.settingslib.animation.AppearAnimationCreator;
 import com.android.settingslib.animation.AppearAnimationUtils;
 import com.android.settingslib.animation.DisappearAnimationUtils;
-
-import android.app.Activity;
-import android.content.Intent;
-import android.os.CountDownTimer;
-import android.os.SystemClock;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.os.storage.StorageManager;
-import android.view.animation.AnimationUtils;
-import android.view.animation.Interpolator;
-import android.widget.TextView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.Collections;

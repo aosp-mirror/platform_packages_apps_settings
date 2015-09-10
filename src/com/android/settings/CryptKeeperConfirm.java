@@ -17,7 +17,6 @@
 package com.android.settings;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.StatusBarManager;
 import android.content.Context;
 import android.content.Intent;

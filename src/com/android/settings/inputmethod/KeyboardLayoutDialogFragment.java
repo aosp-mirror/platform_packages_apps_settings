@@ -16,10 +16,8 @@
 
 package com.android.settings.inputmethod;
 
-import com.android.settings.R;
-
-import android.app.AlertDialog;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.LoaderManager.LoaderCallbacks;
@@ -30,8 +28,8 @@ import android.content.Intent;
 import android.content.Loader;
 import android.hardware.input.InputDeviceIdentifier;
 import android.hardware.input.InputManager;
-import android.hardware.input.KeyboardLayout;
 import android.hardware.input.InputManager.InputDeviceListener;
+import android.hardware.input.KeyboardLayout;
 import android.os.Bundle;
 import android.view.InputDevice;
 import android.view.LayoutInflater;
@@ -41,6 +39,8 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckedTextView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+
+import com.android.settings.R;
 
 import java.util.ArrayList;
 import java.util.Collections;

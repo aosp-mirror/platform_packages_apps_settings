@@ -19,10 +19,9 @@ package com.android.settings.bluetooth;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceCategory;
-import android.preference.PreferenceGroup;
-import android.preference.PreferenceScreen;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceCategory;
+import android.support.v7.preference.PreferenceGroup;
 import android.util.Log;
 
 import com.android.settings.RestrictedSettingsFragment;
@@ -136,8 +135,7 @@ public abstract class DeviceListPreferenceFragment extends
     }
 
     @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
-            Preference preference) {
+    public boolean onPreferenceTreeClick(Preference preference) {
         if (KEY_BT_SCAN.equals(preference.getKey())) {
             mLocalAdapter.startScanning(true);
             return true;
@@ -151,7 +149,7 @@ public abstract class DeviceListPreferenceFragment extends
             return true;
         }
 
-        return super.onPreferenceTreeClick(preferenceScreen, preference);
+        return super.onPreferenceTreeClick(preference);
     }
 
     void onDevicePreferenceClick(BluetoothDevicePreference btPreference) {
@@ -179,7 +177,7 @@ public abstract class DeviceListPreferenceFragment extends
         }
 
         BluetoothDevicePreference preference = new BluetoothDevicePreference(
-                getActivity(), cachedDevice);
+                getPrefContext(), cachedDevice);
 
         initDevicePreference(preference);
         mDeviceListGroup.addPreference(preference);

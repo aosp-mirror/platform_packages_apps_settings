@@ -15,6 +15,7 @@
  */
 package com.android.settings.wifi;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
@@ -22,7 +23,8 @@ import android.graphics.drawable.StateListDrawable;
 import android.net.wifi.WifiConfiguration;
 import android.os.Looper;
 import android.os.UserHandle;
-import android.preference.Preference;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceViewHolder;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.SparseArray;
@@ -45,6 +47,8 @@ public class AccessPointPreference extends Preference {
     private final int mBadgePadding;
     private final UserBadgeCache mBadgeCache;
 
+    private final Fragment mFragment;
+
     private TextView mTitleView;
     private boolean mForSavedNetworks = false;
     private AccessPoint mAccessPoint;
@@ -65,11 +69,13 @@ public class AccessPointPreference extends Preference {
         mWifiSld = null;
         mBadgePadding = 0;
         mBadgeCache = null;
+        mFragment = null;
     }
 
     public AccessPointPreference(AccessPoint accessPoint, Context context, UserBadgeCache cache,
-                                 boolean forSavedNetworks) {
+            boolean forSavedNetworks, Fragment fragment) {
         super(context);
+        mFragment = fragment;
         mBadgeCache = cache;
         mAccessPoint = accessPoint;
         mForSavedNetworks = forSavedNetworks;
@@ -90,8 +96,19 @@ public class AccessPointPreference extends Preference {
     }
 
     @Override
-    protected void onBindView(View view) {
-        super.onBindView(view);
+    public void onBindViewHolder(final PreferenceViewHolder view) {
+        super.onBindViewHolder(view);
+        if (mFragment != null) {
+            view.itemView.setOnCreateContextMenuListener(mFragment);
+            view.itemView.setTag(this);
+            view.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    view.itemView.showContextMenu();
+                    return true;
+                }
+            });
+        }
         if (mAccessPoint == null) {
             // Used for dummy pref.
             return;
@@ -107,7 +124,7 @@ public class AccessPointPreference extends Preference {
             mTitleView.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, mBadge, null);
             mTitleView.setCompoundDrawablePadding(mBadgePadding);
         }
-        view.setContentDescription(mContentDescription);
+        view.itemView.setContentDescription(mContentDescription);
     }
 
     protected void updateIcon(int level, Context context) {

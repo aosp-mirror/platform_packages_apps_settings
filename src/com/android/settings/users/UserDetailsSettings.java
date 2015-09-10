@@ -23,8 +23,8 @@ import android.content.pm.UserInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.preference.Preference;
-import android.preference.SwitchPreference;
+import android.support.v14.preference.SwitchPreference;
+import android.support.v7.preference.Preference;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;

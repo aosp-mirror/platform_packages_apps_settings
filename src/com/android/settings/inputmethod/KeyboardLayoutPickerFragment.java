@@ -16,19 +16,19 @@
 
 package com.android.settings.inputmethod;
 
-import com.android.internal.logging.MetricsLogger;
-import com.android.settings.SettingsPreferenceFragment;
-
 import android.content.Context;
 import android.hardware.input.InputDeviceIdentifier;
 import android.hardware.input.InputManager;
 import android.hardware.input.InputManager.InputDeviceListener;
 import android.hardware.input.KeyboardLayout;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
-import android.preference.Preference;
-import android.preference.PreferenceScreen;
+import android.support.v7.preference.CheckBoxPreference;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceScreen;
 import android.view.InputDevice;
+
+import com.android.internal.logging.MetricsLogger;
+import com.android.settings.SettingsPreferenceFragment;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -96,8 +96,7 @@ public class KeyboardLayoutPickerFragment extends SettingsPreferenceFragment
     }
 
     @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
-            Preference preference) {
+    public boolean onPreferenceTreeClick(Preference preference) {
         if (preference instanceof CheckBoxPreference) {
             CheckBoxPreference checkboxPref = (CheckBoxPreference)preference;
             KeyboardLayout layout = mPreferenceMap.get(checkboxPref);
@@ -113,7 +112,7 @@ public class KeyboardLayoutPickerFragment extends SettingsPreferenceFragment
                 return true;
             }
         }
-        return super.onPreferenceTreeClick(preferenceScreen, preference);
+        return super.onPreferenceTreeClick(preference);
     }
 
     @Override
@@ -139,7 +138,7 @@ public class KeyboardLayoutPickerFragment extends SettingsPreferenceFragment
         Context context = getActivity();
 
         for (KeyboardLayout layout : mKeyboardLayouts) {
-            CheckBoxPreference pref = new CheckBoxPreference(context);
+            CheckBoxPreference pref = new CheckBoxPreference(getPrefContext());
             pref.setTitle(layout.getLabel());
             pref.setSummary(layout.getCollection());
             root.addPreference(pref);

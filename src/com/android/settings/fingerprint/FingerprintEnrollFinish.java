@@ -18,18 +18,13 @@ package com.android.settings.fingerprint;
 
 import android.content.Context;
 import android.content.Intent;
-import android.hardware.fingerprint.Fingerprint;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
-import android.preference.Preference;
 import android.view.View;
 import android.widget.Button;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
-import com.android.settings.fingerprint.FingerprintSettings.FingerprintPreference;
-
-import java.util.List;
 
 /**
  * Activity which concludes fingerprint enrollment.

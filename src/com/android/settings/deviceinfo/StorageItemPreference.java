@@ -17,8 +17,8 @@
 package com.android.settings.deviceinfo;
 
 import android.content.Context;
-import android.os.UserHandle;
-import android.preference.Preference;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceViewHolder;
 import android.text.format.Formatter;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -58,9 +58,9 @@ public class StorageItemPreference extends Preference {
     }
 
     @Override
-    protected void onBindView(View view) {
+    public void onBindViewHolder(PreferenceViewHolder view) {
         progressBar = (ProgressBar) view.findViewById(android.R.id.progress);
         updateProgressBar();
-        super.onBindView(view);
+        super.onBindViewHolder(view);
     }
 }

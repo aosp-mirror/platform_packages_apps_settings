@@ -28,9 +28,9 @@ import android.os.storage.StorageEventListener;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
 import android.os.storage.VolumeRecord;
-import android.preference.Preference;
-import android.preference.PreferenceScreen;
 import android.provider.DocumentsContract;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.text.format.Formatter;
 import android.text.format.Formatter.BytesResult;
@@ -114,7 +114,7 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
         addPreferencesFromResource(R.xml.device_info_storage_volume);
         getPreferenceScreen().setOrderingAsAdded(true);
 
-        mSummary = new StorageSummaryPreference(context);
+        mSummary = new StorageSummaryPreference(getPrefContext());
 
         mMount = buildAction(R.string.storage_menu_mount);
         mUnmount = new Button(getActivity());
@@ -187,7 +187,7 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
     }
 
     private Preference buildAction(int titleRes) {
-        final Preference pref = new Preference(getActivity());
+        final Preference pref = new Preference(getPrefContext());
         pref.setTitle(titleRes);
         return pref;
     }
@@ -214,7 +214,7 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
     }
 
     @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference pref) {
+    public boolean onPreferenceTreeClick(Preference pref) {
         final Context context = getActivity();
         if (pref == mMount) {
             new MountTask(context, mVolume).execute();
@@ -230,7 +230,7 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
             startActivity(intent);
         }
 
-        return super.onPreferenceTreeClick(preferenceScreen, pref);
+        return super.onPreferenceTreeClick(pref);
     }
 
     private final View.OnClickListener mUnmountListener = new View.OnClickListener() {

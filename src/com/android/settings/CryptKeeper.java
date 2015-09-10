@@ -65,10 +65,9 @@ import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockPatternView;
 import com.android.internal.widget.LockPatternView.Cell;
+import com.android.internal.widget.LockPatternView.DisplayMode;
 
 import java.util.List;
-
-import static com.android.internal.widget.LockPatternView.DisplayMode;
 
 /**
  * Settings screens to show the UI flows for encrypting/decrypting the device.

@@ -27,9 +27,9 @@ import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.format.DateUtils;
-
 import android.util.Log;
 import android.util.SparseArray;
+
 import com.android.settings.R;
 
 import java.io.File;

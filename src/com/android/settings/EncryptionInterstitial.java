@@ -16,14 +16,6 @@
 
 package com.android.settings;
 
-import com.android.internal.logging.MetricsLogger;
-import com.android.internal.widget.LockPatternUtils;
-import com.android.settings.R;
-import com.android.settings.SettingsActivity;
-import com.android.settings.SettingsPreferenceFragment;
-
-import java.util.List;
-
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -40,6 +32,11 @@ import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.RadioButton;
 import android.widget.TextView;
+
+import com.android.internal.logging.MetricsLogger;
+import com.android.internal.widget.LockPatternUtils;
+
+import java.util.List;
 
 public class EncryptionInterstitial extends SettingsActivity {
 

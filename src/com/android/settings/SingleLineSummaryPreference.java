@@ -16,10 +16,10 @@
 package com.android.settings;
 
 import android.content.Context;
-import android.preference.Preference;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceViewHolder;
 import android.text.TextUtils.TruncateAt;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.TextView;
 
 public class SingleLineSummaryPreference extends Preference {
@@ -29,8 +29,8 @@ public class SingleLineSummaryPreference extends Preference {
     }
 
     @Override
-    protected void onBindView(View view) {
-        super.onBindView(view);
+    public void onBindViewHolder(PreferenceViewHolder view) {
+        super.onBindViewHolder(view);
 
         final TextView summaryView = (TextView) view.findViewById(
                 com.android.internal.R.id.summary);

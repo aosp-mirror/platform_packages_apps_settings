@@ -17,7 +17,6 @@
 package com.android.settings.fingerprint;
 
 import android.annotation.Nullable;
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;

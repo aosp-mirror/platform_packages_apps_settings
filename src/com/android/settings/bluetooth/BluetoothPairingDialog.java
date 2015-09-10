@@ -25,12 +25,12 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.Html;
 import android.text.InputFilter;
+import android.text.InputFilter.LengthFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
-import android.text.InputFilter.LengthFilter;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -43,8 +43,6 @@ import com.android.internal.app.AlertController;
 import com.android.settings.R;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
-
-import android.view.KeyEvent;
 
 import java.util.Locale;
 

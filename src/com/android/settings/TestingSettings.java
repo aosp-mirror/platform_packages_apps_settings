@@ -18,8 +18,7 @@ package com.android.settings;
 
 import android.os.Bundle;
 import android.os.UserManager;
-import android.preference.PreferenceActivity;
-import android.preference.PreferenceScreen;
+import android.support.v7.preference.PreferenceScreen;
 
 public class TestingSettings extends PreferenceActivity {
 

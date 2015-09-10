@@ -21,7 +21,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.preference.RingtonePreference;
 import android.util.AttributeSet;
 
 public class DefaultRingtonePreference extends RingtonePreference {
@@ -32,7 +31,7 @@ public class DefaultRingtonePreference extends RingtonePreference {
     }
 
     @Override
-    protected void onPrepareRingtonePickerIntent(Intent ringtonePickerIntent) {
+    public void onPrepareRingtonePickerIntent(Intent ringtonePickerIntent) {
         super.onPrepareRingtonePickerIntent(ringtonePickerIntent);
         
         /*

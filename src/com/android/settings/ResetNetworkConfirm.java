@@ -16,9 +16,8 @@
 
 package com.android.settings;
 
-import android.app.Fragment;
-import android.content.Context;
 import android.bluetooth.BluetoothManager;
+import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkPolicyManager;
 import android.net.wifi.WifiManager;
@@ -29,16 +28,11 @@ import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.telephony.PhoneConstants;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Confirm and execute a reset of the network settings to a clean "just out of the box"

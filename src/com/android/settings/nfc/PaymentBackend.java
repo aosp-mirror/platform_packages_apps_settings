@@ -16,7 +16,6 @@
 
 package com.android.settings.nfc;
 
-import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -25,13 +24,11 @@ import android.graphics.drawable.Drawable;
 import android.nfc.NfcAdapter;
 import android.nfc.cardemulation.ApduServiceInfo;
 import android.nfc.cardemulation.CardEmulation;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.UserHandle;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
-import android.util.Log;
+
 import com.android.internal.content.PackageMonitor;
 
 import java.util.ArrayList;

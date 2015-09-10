@@ -18,7 +18,6 @@ package com.android.settings;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Fragment;
 import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -29,12 +28,13 @@ import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.storage.StorageManager;
-import android.preference.Preference;
+import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
 import com.android.internal.logging.MetricsLogger;
 
 public class CryptKeeperSettings extends InstrumentedFragment {
@@ -193,7 +193,7 @@ public class CryptKeeperSettings extends InstrumentedFragment {
     }
 
     private void showFinalConfirmation(int type, String password) {
-        Preference preference = new Preference(getActivity());
+        Preference preference = new Preference(getPreferenceManager().getContext());
         preference.setFragment(CryptKeeperConfirm.class.getName());
         preference.setTitle(R.string.crypt_keeper_confirm_title);
         addEncryptionInfoToPreference(preference, type, password);

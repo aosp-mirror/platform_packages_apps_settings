@@ -16,8 +16,6 @@
 
 package com.android.settings.bluetooth;
 
-import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
-
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothDevicePicker;
@@ -32,6 +30,8 @@ import android.view.MenuItem;
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+
+import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 
 /**
  * BluetoothSettings is the Settings screen for Bluetooth configuration and

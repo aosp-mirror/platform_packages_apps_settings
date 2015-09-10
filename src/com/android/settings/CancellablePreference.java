@@ -16,7 +16,8 @@
 package com.android.settings;
 
 import android.content.Context;
-import android.preference.Preference;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -47,8 +48,8 @@ public class CancellablePreference extends Preference implements OnClickListener
     }
 
     @Override
-    protected void onBindView(View view) {
-        super.onBindView(view);
+    public void onBindViewHolder(PreferenceViewHolder view) {
+        super.onBindViewHolder(view);
 
         ImageView cancel = (ImageView) view.findViewById(R.id.cancel);
         cancel.setVisibility(mCancellable ? View.VISIBLE : View.INVISIBLE);

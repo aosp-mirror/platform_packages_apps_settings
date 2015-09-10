@@ -16,8 +16,6 @@
 
 package com.android.settings.accounts;
 
-import com.google.android.collect.Maps;
-
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AuthenticatorDescription;
@@ -34,6 +32,8 @@ import android.os.AsyncTask;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
+
+import com.google.android.collect.Maps;
 
 import java.util.ArrayList;
 import java.util.HashMap;

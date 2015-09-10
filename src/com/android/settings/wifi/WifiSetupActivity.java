@@ -29,7 +29,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.preference.PreferenceFragment;
+import android.support.v14.preference.PreferenceFragment;
 import android.util.Log;
 
 import com.android.settings.ButtonBarHandler;

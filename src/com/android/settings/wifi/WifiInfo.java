@@ -16,10 +16,10 @@
 
 package com.android.settings.wifi;
 
-import com.android.settings.R;
-
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
+
+import com.android.settings.PreferenceActivity;
+import com.android.settings.R;
 
 
 /**

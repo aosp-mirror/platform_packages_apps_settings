@@ -16,8 +16,6 @@
 
 package com.android.settings.fuelgauge;
 
-import static android.os.PowerManager.ACTION_POWER_SAVE_MODE_CHANGING;
-
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -41,6 +39,8 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.notification.SettingPref;
 import com.android.settings.widget.SwitchBar;
+
+import static android.os.PowerManager.ACTION_POWER_SAVE_MODE_CHANGING;
 
 public class BatterySaverSettings extends SettingsPreferenceFragment
         implements SwitchBar.OnSwitchChangeListener {

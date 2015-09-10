@@ -21,25 +21,26 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceScreen;
+import android.os.SystemProperties;
 import android.provider.SearchIndexableResource;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceScreen;
+import android.telecom.PhoneAccountHandle;
+import android.telecom.TelecomManager;
 import android.telephony.PhoneStateListener;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
-import android.telecom.PhoneAccountHandle;
-import android.telecom.TelecomManager;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.android.internal.logging.MetricsLogger;
+import com.android.internal.telephony.TelephonyProperties;
+import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
 import com.android.settings.Utils;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
-import com.android.settings.R;
-import android.os.SystemProperties;
-import com.android.internal.telephony.TelephonyProperties;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -118,7 +119,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
         for (int i = 0; i < mNumSlots; ++i) {
             final SubscriptionInfo sir = mSubscriptionManager
                     .getActiveSubscriptionInfoForSimSlotIndex(i);
-            SimPreference simPreference = new SimPreference(mContext, sir, i);
+            SimPreference simPreference = new SimPreference(getPrefContext(), sir, i);
             simPreference.setOrder(i-mNumSlots);
             mSimCards.addPreference(simPreference);
             mAvailableSubInfos.add(sir);
@@ -229,8 +230,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
     };
 
     @Override
-    public boolean onPreferenceTreeClick(final PreferenceScreen preferenceScreen,
-            final Preference preference) {
+    public boolean onPreferenceTreeClick(final Preference preference) {
         final Context context = mContext;
         Intent intent = new Intent(context, SimDialogActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

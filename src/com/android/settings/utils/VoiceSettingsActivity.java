@@ -17,14 +17,10 @@
 package com.android.settings.utils;
 
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.VoiceInteractor;
 import android.app.VoiceInteractor.AbortVoiceRequest;
 import android.app.VoiceInteractor.CompleteVoiceRequest;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.TextView;
 import android.util.Log;
 
 /**

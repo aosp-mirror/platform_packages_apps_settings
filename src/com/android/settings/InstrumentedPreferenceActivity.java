@@ -16,7 +16,6 @@
 
 package com.android.settings;
 
-import android.preference.PreferenceActivity;
 import com.android.internal.logging.MetricsLogger;
 
 /**

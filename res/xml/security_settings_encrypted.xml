@@ -22,7 +22,8 @@
         android:title="@string/crypt_keeper_settings_title">
 
         <Preference
-            style="?android:preferenceInformationStyle"
+            android:enabled="false"
+            android:shouldDisableView="false"
             android:key="crypt_keeper_encrypt_title"
             android:title="@string/crypt_keeper_encrypt_title"
             android:summary="@string/crypt_keeper_encrypted_summary"/>

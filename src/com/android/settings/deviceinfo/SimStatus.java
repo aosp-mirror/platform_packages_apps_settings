@@ -25,7 +25,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.preference.Preference;
+import android.support.v7.preference.Preference;
 import android.telephony.CellBroadcastMessage;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.PhoneStateListener;
@@ -36,14 +36,6 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
-
-import com.android.internal.logging.MetricsLogger;
-import com.android.internal.telephony.DefaultPhoneNotifier;
-import com.android.internal.telephony.Phone;
-import com.android.internal.telephony.PhoneFactory;
-import com.android.settings.InstrumentedPreferenceActivity;
-import com.android.settings.R;
-
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TabHost;
@@ -51,6 +43,13 @@ import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabContentFactory;
 import android.widget.TabHost.TabSpec;
 import android.widget.TabWidget;
+
+import com.android.internal.logging.MetricsLogger;
+import com.android.internal.telephony.DefaultPhoneNotifier;
+import com.android.internal.telephony.Phone;
+import com.android.internal.telephony.PhoneFactory;
+import com.android.settings.InstrumentedPreferenceActivity;
+import com.android.settings.R;
 
 import java.util.List;
 

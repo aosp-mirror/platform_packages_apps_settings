@@ -16,12 +16,12 @@
 
 package com.android.settings;
 
-import com.android.setupwizardlib.util.SystemBarHelper;
-import com.android.setupwizardlib.util.WizardManagerHelper;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+
+import com.android.setupwizardlib.util.SystemBarHelper;
+import com.android.setupwizardlib.util.WizardManagerHelper;
 
 public class SetupWizardUtils {
     private static final String TAG = "SetupWizardUtils";

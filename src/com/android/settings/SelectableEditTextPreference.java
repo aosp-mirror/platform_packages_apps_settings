@@ -17,13 +17,12 @@
 package com.android.settings;
 
 import android.content.Context;
-import android.preference.EditTextPreference;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.EditText;
 
-public class SelectableEditTextPreference extends EditTextPreference {
+public class SelectableEditTextPreference extends CustomEditTextPreference {
 
     private int mSelectionMode;
 

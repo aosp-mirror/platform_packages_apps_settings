@@ -31,8 +31,8 @@ import android.content.pm.ServiceInfo;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Process;
-import android.preference.Preference;
-import android.preference.PreferenceCategory;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceCategory;
 import android.text.format.Formatter;
 import android.util.ArrayMap;
 import android.util.Log;
@@ -48,7 +48,6 @@ import com.android.settings.CancellablePreference;
 import com.android.settings.CancellablePreference.OnCancelListener;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.Utils;
 import com.android.settings.applications.ProcStatsEntry.Service;
 
 import java.util.ArrayList;
@@ -245,7 +244,7 @@ public class ProcessStatsDetail extends SettingsPreferenceFragment {
         Collections.sort(entries, sEntryCompare);
         for (int ie = 0; ie < entries.size(); ie++) {
             ProcStatsEntry entry = entries.get(ie);
-            Preference processPref = new Preference(getActivity());
+            Preference processPref = new Preference(getPrefContext());
             processPref.setTitle(entry.mLabel);
             processPref.setSelectable(false);
 
@@ -350,7 +349,7 @@ public class ProcessStatsDetail extends SettingsPreferenceFragment {
             for (int is=0; is<services.size(); is++) {
                 final ProcStatsEntry.Service service = services.get(is);
                 CharSequence label = getLabel(service);
-                CancellablePreference servicePref = new CancellablePreference(getActivity());
+                CancellablePreference servicePref = new CancellablePreference(getPrefContext());
                 servicePref.setSelectable(false);
                 servicePref.setTitle(label);
                 servicePref.setSummary(ProcStatsPackageEntry.getFrequency(

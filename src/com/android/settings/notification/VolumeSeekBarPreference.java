@@ -20,9 +20,8 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.media.AudioManager;
 import android.net.Uri;
-import android.preference.PreferenceManager;
-import android.preference.SeekBarPreference;
 import android.preference.SeekBarVolumizer;
+import android.support.v7.preference.PreferenceViewHolder;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -32,12 +31,12 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.android.settings.R;
+import com.android.settings.SeekBarPreference;
 
 import java.util.Objects;
 
 /** A slider preference that directly controls an audio stream volume (no dialog) **/
-public class VolumeSeekBarPreference extends SeekBarPreference
-        implements PreferenceManager.OnActivityStopListener {
+public class VolumeSeekBarPreference extends SeekBarPreference {
     private static final String TAG = "VolumeSeekBarPreference";
 
     private int mStream;
@@ -85,17 +84,16 @@ public class VolumeSeekBarPreference extends SeekBarPreference
         }
     }
 
-    @Override
-    public void onActivityStop() {
+    public void onActivityPause() {
         mStopped = true;
         if (mVolumizer != null) {
             mVolumizer.stop();
         }
     }
-
+    
     @Override
-    protected void onBindView(View view) {
-        super.onBindView(view);
+    public void onBindViewHolder(PreferenceViewHolder view) {
+        super.onBindViewHolder(view);
         if (mStream == 0) {
             Log.w(TAG, "No stream found, not binding volumizer");
             return;
@@ -108,7 +106,6 @@ public class VolumeSeekBarPreference extends SeekBarPreference
 
     private void init() {
         if (mSeekBar == null) return;
-        getPreferenceManager().registerOnActivityStopListener(this);
         final SeekBarVolumizer.Callback sbvc = new SeekBarVolumizer.Callback() {
             @Override
             public void onSampleStarting(SeekBarVolumizer sbv) {

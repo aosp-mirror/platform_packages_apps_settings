@@ -23,16 +23,15 @@ import android.provider.SearchIndexablesProvider;
 
 import java.util.Collection;
 
-import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_RANK;
-import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_RESID;
 import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_CLASS_NAME;
 import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_ICON_RESID;
 import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_INTENT_ACTION;
-import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_INTENT_TARGET_PACKAGE;
 import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_INTENT_TARGET_CLASS;
-
-import static android.provider.SearchIndexablesContract.INDEXABLES_XML_RES_COLUMNS;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_INTENT_TARGET_PACKAGE;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_RANK;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_RESID;
 import static android.provider.SearchIndexablesContract.INDEXABLES_RAW_COLUMNS;
+import static android.provider.SearchIndexablesContract.INDEXABLES_XML_RES_COLUMNS;
 import static android.provider.SearchIndexablesContract.NON_INDEXABLES_KEYS_COLUMNS;
 
 public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {

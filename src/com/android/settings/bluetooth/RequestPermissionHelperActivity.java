@@ -16,17 +16,17 @@
 
 package com.android.settings.bluetooth;
 
-import com.android.internal.app.AlertActivity;
-import com.android.internal.app.AlertController;
-import com.android.settings.R;
-import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
-import com.android.settingslib.bluetooth.LocalBluetoothManager;
-
 import android.bluetooth.BluetoothAdapter;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+
+import com.android.internal.app.AlertActivity;
+import com.android.internal.app.AlertController;
+import com.android.settings.R;
+import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
+import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 /**
  * RequestPermissionHelperActivity asks the user whether to enable discovery.

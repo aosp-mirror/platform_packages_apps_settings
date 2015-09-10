@@ -29,16 +29,14 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.net.wifi.WpsInfo;
 import android.os.Bundle;
-import android.os.UserHandle;
 import android.os.UserManager;
-import android.preference.ListPreference;
-import android.preference.Preference;
-import android.preference.Preference.OnPreferenceClickListener;
-import android.preference.PreferenceScreen;
-import android.preference.SwitchPreference;
 import android.provider.Settings;
 import android.provider.Settings.Global;
 import android.security.Credentials;
+import android.support.v14.preference.SwitchPreference;
+import android.support.v7.preference.ListPreference;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
@@ -239,7 +237,7 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
     }
 
     @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen screen, Preference preference) {
+    public boolean onPreferenceTreeClick(Preference preference) {
         String key = preference.getKey();
 
         if (KEY_NOTIFY_OPEN_NETWORKS.equals(key)) {
@@ -247,7 +245,7 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
                     Settings.Global.WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON,
                     ((SwitchPreference) preference).isChecked() ? 1 : 0);
         } else {
-            return super.onPreferenceTreeClick(screen, preference);
+            return super.onPreferenceTreeClick(preference);
         }
         return true;
     }

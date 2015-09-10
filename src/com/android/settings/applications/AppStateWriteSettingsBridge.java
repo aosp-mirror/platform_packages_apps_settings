@@ -18,7 +18,6 @@ package com.android.settings.applications;
 import android.Manifest;
 import android.app.AppOpsManager;
 import android.content.Context;
-import android.util.Log;
 
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;

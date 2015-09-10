@@ -19,7 +19,8 @@ package com.android.settings.inputmethod;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.preference.Preference;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceViewHolder;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -80,8 +81,8 @@ class SpellCheckerPreference extends Preference implements OnClickListener {
     }
 
     @Override
-    protected void onBindView(View view) {
-        super.onBindView(view);
+    public void onBindViewHolder(PreferenceViewHolder view) {
+        super.onBindViewHolder(view);
         mRadioButton = (RadioButton)view.findViewById(R.id.pref_radio);
         mPrefLeftButton = view.findViewById(R.id.pref_left_button);
         mPrefLeftButton.setOnClickListener(this);

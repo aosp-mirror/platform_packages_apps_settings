@@ -16,9 +16,9 @@
 
 package com.android.settings;
 
-import com.android.internal.logging.MetricsLogger;
-
 import android.app.Activity;
+
+import com.android.internal.logging.MetricsLogger;
 
 /**
  * Instrumented activity that logs visibility state.

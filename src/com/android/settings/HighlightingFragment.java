@@ -16,7 +16,6 @@
 
 package com.android.settings;
 
-import android.app.Fragment;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;

@@ -35,19 +35,19 @@ import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Process;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.os.Process;
+import android.provider.SearchIndexableResource;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.Preference.OnPreferenceClickListener;
+import android.support.v7.preference.PreferenceGroup;
+import android.support.v7.preference.PreferenceScreen;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.preference.Preference;
-import android.preference.Preference.OnPreferenceClickListener;
-import android.provider.SearchIndexableResource;
-import android.preference.PreferenceGroup;
-import android.preference.PreferenceScreen;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.AccessiblePreferenceCategory;
@@ -133,7 +133,7 @@ public class AccountSettings extends SettingsPreferenceFragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mUm = (UserManager) getSystemService(Context.USER_SERVICE);
-        mProfileNotAvailablePreference = new Preference(getActivity());
+        mProfileNotAvailablePreference = new Preference(getPrefContext());
         mAuthorities = getActivity().getIntent().getStringArrayExtra(EXTRA_AUTHORITIES);
         if (mAuthorities != null) {
             mAuthoritiesCount = mAuthorities.length;
@@ -277,7 +277,7 @@ public class AccountSettings extends SettingsPreferenceFragment
         final ProfileData profileData = new ProfileData();
         profileData.userInfo = userInfo;
         if (addCategory) {
-            profileData.preferenceGroup = new AccessiblePreferenceCategory(context);
+            profileData.preferenceGroup = new AccessiblePreferenceCategory(getPrefContext());
             if (userInfo.isManagedProfile()) {
                 profileData.preferenceGroup.setLayoutResource(R.layout.work_profile_category);
                 profileData.preferenceGroup.setTitle(R.string.category_work);
@@ -308,7 +308,7 @@ public class AccountSettings extends SettingsPreferenceFragment
     }
 
     private Preference newAddAccountPreference(Context context) {
-        Preference preference = new Preference(context);
+        Preference preference = new Preference(getPrefContext());
         preference.setTitle(R.string.add_account_label);
         preference.setIcon(R.drawable.ic_menu_add);
         preference.setOnPreferenceClickListener(this);
@@ -317,7 +317,7 @@ public class AccountSettings extends SettingsPreferenceFragment
     }
 
     private Preference newRemoveWorkProfilePreference(Context context) {
-        Preference preference = new Preference(context);
+        Preference preference = new Preference(getPrefContext());
         preference.setTitle(R.string.remove_managed_profile_label);
         preference.setIcon(R.drawable.ic_menu_delete);
         preference.setOnPreferenceClickListener(this);
@@ -419,7 +419,7 @@ public class AccountSettings extends SettingsPreferenceFragment
                         accounts[0]);
                 fragmentArguments.putParcelable(EXTRA_USER, userHandle);
 
-                accountTypePreferences.add(new AccountPreference(getActivity(), label,
+                accountTypePreferences.add(new AccountPreference(getPrefContext(), label,
                         titleResPackageName, titleResId, AccountSyncSettings.class.getName(),
                         fragmentArguments,
                         helper.getDrawableForType(getActivity(), accountType)));
@@ -430,7 +430,7 @@ public class AccountSettings extends SettingsPreferenceFragment
                         label.toString());
                 fragmentArguments.putParcelable(EXTRA_USER, userHandle);
 
-                accountTypePreferences.add(new AccountPreference(getActivity(), label,
+                accountTypePreferences.add(new AccountPreference(getPrefContext(), label,
                         titleResPackageName, titleResId, ManageAccountsSettings.class.getName(),
                         fragmentArguments,
                         helper.getDrawableForType(getActivity(), accountType)));

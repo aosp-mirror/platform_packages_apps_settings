@@ -16,8 +16,8 @@
 package com.android.settings;
 
 import android.content.Context;
+import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.ProgressBar;
 
 public class AppProgressPreference extends TintablePreference {
@@ -36,8 +36,8 @@ public class AppProgressPreference extends TintablePreference {
     }
 
     @Override
-    protected void onBindView(View view) {
-        super.onBindView(view);
+    public void onBindViewHolder(PreferenceViewHolder view) {
+        super.onBindViewHolder(view);
 
         final ProgressBar progress = (ProgressBar) view.findViewById(android.R.id.progress);
         progress.setProgress(mProgress);

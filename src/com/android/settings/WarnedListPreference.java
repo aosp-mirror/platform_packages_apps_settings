@@ -17,7 +17,7 @@
 package com.android.settings;
 
 import android.content.Context;
-import android.preference.ListPreference;
+import android.support.v7.preference.ListPreference;
 import android.util.AttributeSet;
 
 public class WarnedListPreference extends ListPreference {

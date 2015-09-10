@@ -23,7 +23,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+
 import com.android.settings.SettingsPreferenceFragment.SettingsDialogFragment;
+
 import java.util.Locale;
 
 public class LocalePicker extends com.android.internal.app.LocalePicker

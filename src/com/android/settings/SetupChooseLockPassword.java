@@ -16,10 +16,6 @@
 
 package com.android.settings;
 
-import com.android.setupwizardlib.SetupWizardLayout;
-import com.android.setupwizardlib.util.SystemBarHelper;
-import com.android.setupwizardlib.view.NavigationBar;
-
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
@@ -29,6 +25,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.android.setupwizardlib.SetupWizardLayout;
+import com.android.setupwizardlib.util.SystemBarHelper;
+import com.android.setupwizardlib.view.NavigationBar;
 
 /**
  * Setup Wizard's version of ChooseLockPassword screen. It inherits the logic and basic structure

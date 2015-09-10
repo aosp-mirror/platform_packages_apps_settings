@@ -27,21 +27,19 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Bundle;
-import android.os.Process;
-import android.os.UserHandle;
-import android.preference.Preference;
-import android.preference.PreferenceScreen;
-import android.security.KeyStore;
 import android.hardware.fingerprint.Fingerprint;
 import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.fingerprint.FingerprintManager.RemovalCallback;
+import android.os.Bundle;
+import android.os.Process;
+import android.os.UserHandle;
+import android.security.KeyStore;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceScreen;
 import android.util.EventLog;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.android.internal.logging.MetricsLogger;
@@ -181,17 +179,12 @@ public class ChooseLockGeneric extends SettingsActivity {
         public void onViewCreated(View view, Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
             if (mForFingerprint) {
-                final LayoutInflater inflater = LayoutInflater.from(getContext());
-                final ListView listView = getListView();
-                final View fingerprintHeader = inflater.inflate(
-                        R.layout.choose_lock_generic_fingerprint_header, listView, false);
-                listView.addHeaderView(fingerprintHeader, null, false);
+                setHeaderView(R.layout.choose_lock_generic_fingerprint_header);
             }
         }
 
         @Override
-        public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
-                Preference preference) {
+        public boolean onPreferenceTreeClick(Preference preference) {
             final String key = preference.getKey();
 
             if (!isUnlockMethodSecure(key) && mLockPatternUtils.isSecure(UserHandle.myUserId())) {

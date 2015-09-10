@@ -34,9 +34,9 @@ import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.preference.Preference;
-import android.preference.Preference.OnPreferenceClickListener;
-import android.preference.PreferenceScreen;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.Preference.OnPreferenceClickListener;
+import android.support.v7.preference.PreferenceScreen;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -155,7 +155,7 @@ public class ManageAccountsSettings extends AccountPreferenceBase
     }
 
     @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen preferences, Preference preference) {
+    public boolean onPreferenceTreeClick(Preference preference) {
         if (preference instanceof AccountPreference) {
             startAccountSettings((AccountPreference) preference);
         } else {
@@ -385,7 +385,7 @@ public class ManageAccountsSettings extends AccountPreferenceBase
             if (showAccount) {
                 final Drawable icon = getDrawableForType(account.type);
                 final AccountPreference preference =
-                        new AccountPreference(getActivity(), account, icon, auths, false);
+                        new AccountPreference(getPrefContext(), account, icon, auths, false);
                 getPreferenceScreen().addPreference(preference);
                 if (mFirstAccount == null) {
                     mFirstAccount = account;

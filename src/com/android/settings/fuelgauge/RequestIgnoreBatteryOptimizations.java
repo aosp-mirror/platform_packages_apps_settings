@@ -20,17 +20,17 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Bundle;
 import android.os.IDeviceIdleController;
 import android.os.PowerManager;
 import android.os.RemoteException;
 import android.os.ServiceManager;
-import com.android.settings.R;
-
-import android.net.Uri;
-import android.os.Bundle;
 import android.util.Log;
+
 import com.android.internal.app.AlertActivity;
 import com.android.internal.app.AlertController;
+import com.android.settings.R;
 
 public class RequestIgnoreBatteryOptimizations extends AlertActivity implements
         DialogInterface.OnClickListener {

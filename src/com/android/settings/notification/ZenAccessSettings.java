@@ -31,11 +31,11 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.preference.Preference;
-import android.preference.Preference.OnPreferenceChangeListener;
-import android.preference.PreferenceScreen;
-import android.preference.SwitchPreference;
 import android.provider.Settings.Secure;
+import android.support.v14.preference.SwitchPreference;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.Preference.OnPreferenceChangeListener;
+import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import android.view.LayoutInflater;
@@ -118,7 +118,7 @@ public class ZenAccessSettings extends SettingsPreferenceFragment {
         for (ApplicationInfo app : apps) {
             final String pkg = app.packageName;
             final CharSequence label = app.loadLabel(mPkgMan);
-            final SwitchPreference pref = new SwitchPreference(mContext);
+            final SwitchPreference pref = new SwitchPreference(getPrefContext());
             pref.setPersistent(false);
             pref.setIcon(app.loadIcon(mPkgMan));
             pref.setTitle(label);

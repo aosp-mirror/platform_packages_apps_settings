@@ -3,6 +3,7 @@ package com.android.settings;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,8 +22,8 @@ public class AppListPreferenceWithSettings extends AppListPreference {
     }
 
     @Override
-    protected void onBindView(View view) {
-        super.onBindView(view);
+    public void onBindViewHolder(PreferenceViewHolder view) {
+        super.onBindViewHolder(view);
 
         mSettingsIcon = view.findViewById(R.id.settings_button);
         mSettingsIcon.setOnClickListener(new View.OnClickListener() {

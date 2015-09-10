@@ -15,20 +15,16 @@
  */
 package com.android.settings.applications;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.os.Bundle;
 import android.os.AsyncTask;
-import android.preference.Preference;
-import android.provider.Settings;
+import android.os.Bundle;
+import android.support.v7.preference.Preference;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.PermissionsSummaryHelper.PermissionsResultCallback;
-import com.android.settings.fuelgauge.PowerWhitelistBackend;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.ApplicationsState.Session;

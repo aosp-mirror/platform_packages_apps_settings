@@ -16,15 +16,16 @@
 
 package com.android.settings.users;
 
-import com.android.settings.R;
-
 import android.content.Context;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.preference.Preference;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.View.OnClickListener;
+
+import com.android.settings.R;
 
 import java.util.Comparator;
 
@@ -71,7 +72,7 @@ public class UserPreference extends Preference {
     }
 
     @Override
-    protected void onBindView(View view) {
+    public void onBindViewHolder(PreferenceViewHolder view) {
         UserManager um = (UserManager) getContext().getSystemService(Context.USER_SERVICE);
         View deleteDividerView = view.findViewById(R.id.divider_delete);
         View manageDividerView = view.findViewById(R.id.divider_manage);
@@ -99,7 +100,7 @@ public class UserPreference extends Preference {
                 manageDividerView.setVisibility(View.GONE);
             }
         }
-        super.onBindView(view);
+        super.onBindViewHolder(view);
     }
 
     private int getSerialNumber() {

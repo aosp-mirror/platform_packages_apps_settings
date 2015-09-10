@@ -20,11 +20,11 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
 import android.net.Uri;
-import android.preference.Preference;
-import android.preference.TwoStatePreference;
-import android.preference.Preference.OnPreferenceChangeListener;
 import android.provider.Settings.Global;
 import android.provider.Settings.System;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.Preference.OnPreferenceChangeListener;
+import android.support.v7.preference.TwoStatePreference;
 
 import com.android.settings.DropDownPreference;
 import com.android.settings.SettingsPreferenceFragment;

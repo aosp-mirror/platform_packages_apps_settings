@@ -37,10 +37,11 @@ import android.hardware.fingerprint.FingerprintManager.RemovalCallback;
 import android.os.Bundle;
 import android.os.CancellationSignal;
 import android.os.Handler;
-import android.preference.Preference;
-import android.preference.Preference.OnPreferenceChangeListener;
-import android.preference.PreferenceGroup;
-import android.preference.PreferenceScreen;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.Preference.OnPreferenceChangeListener;
+import android.support.v7.preference.PreferenceGroup;
+import android.support.v7.preference.PreferenceScreen;
+import android.support.v7.preference.PreferenceViewHolder;
 import android.text.Annotation;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
@@ -295,8 +296,7 @@ public class FingerprintSettings extends SubSettings {
                             : R.string.security_settings_fingerprint_enroll_disclaimer),
                     getString(getHelpResource())));
             v.setMovementMethod(new LinkMovementMethod());
-            getListView().addFooterView(v);
-            getListView().setFooterDividersEnabled(false);
+            setFooterView(v);
         }
 
         private boolean isFingerprintDisabled() {
@@ -401,7 +401,7 @@ public class FingerprintSettings extends SubSettings {
         }
 
         @Override
-        public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference pref) {
+        public boolean onPreferenceTreeClick(Preference pref) {
             final String key = pref.getKey();
             if (KEY_FINGERPRINT_ADD.equals(key)) {
                 Intent intent = new Intent();
@@ -413,7 +413,7 @@ public class FingerprintSettings extends SubSettings {
                 FingerprintPreference fpref = (FingerprintPreference) pref;
                 final Fingerprint fp =fpref.getFingerprint();
                 showRenameDeleteDialog(fp);
-                return super.onPreferenceTreeClick(preferenceScreen, pref);
+                return super.onPreferenceTreeClick(pref);
             }
             return true;
         }
@@ -718,9 +718,9 @@ public class FingerprintSettings extends SubSettings {
         }
 
         @Override
-        protected void onBindView(View view) {
-            super.onBindView(view);
-            mView = view;
+        public void onBindViewHolder(PreferenceViewHolder view) {
+            super.onBindViewHolder(view);
+            mView = view.itemView;
         }
     };
 

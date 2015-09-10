@@ -20,10 +20,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.BatteryStats;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceScreen;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.internal.os.BatteryStatsHelper;
@@ -48,9 +47,9 @@ public class BatteryHistoryPreference extends Preference {
     public BatteryHistoryPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
-
+    
     @Override
-    public void performClick(PreferenceScreen preferenceScreen) {
+    protected void onClick() {
         if (!isEnabled()) {
             return;
         }
@@ -84,8 +83,8 @@ public class BatteryHistoryPreference extends Preference {
     }
 
     @Override
-    protected void onBindView(View view) {
-        super.onBindView(view);
+    public void onBindViewHolder(PreferenceViewHolder view) {
+        super.onBindViewHolder(view);
 
         if (mStats == null) {
             return;

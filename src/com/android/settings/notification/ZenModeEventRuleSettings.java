@@ -22,13 +22,13 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.database.Cursor;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.preference.Preference;
-import android.preference.Preference.OnPreferenceChangeListener;
-import android.preference.PreferenceScreen;
 import android.provider.CalendarContract.Calendars;
 import android.provider.Settings;
 import android.service.notification.ZenModeConfig;
 import android.service.notification.ZenModeConfig.EventInfo;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.Preference.OnPreferenceChangeListener;
+import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.DropDownPreference;

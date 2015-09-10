@@ -18,7 +18,6 @@ package com.android.settings;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.preference.EditTextPreference;
 import android.text.InputType;
 import android.util.AttributeSet;
 import android.view.View;
@@ -27,7 +26,7 @@ import android.widget.EditText;
 /**
  * TODO: Add a soft dialpad for PIN entry.
  */
-class EditPinPreference extends EditTextPreference {
+class EditPinPreference extends CustomEditTextPreference {
 
     interface OnPinEnteredListener {
         void onPinEntered(EditPinPreference preference, boolean positiveResult);
@@ -55,7 +54,7 @@ class EditPinPreference extends EditTextPreference {
 
         if (editText != null) {
             editText.setInputType(InputType.TYPE_CLASS_NUMBER |
-                InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+                    InputType.TYPE_NUMBER_VARIATION_PASSWORD);
         }
     }
 
@@ -75,7 +74,7 @@ class EditPinPreference extends EditTextPreference {
     public void showPinDialog() {
         Dialog dialog = getDialog();
         if (dialog == null || !dialog.isShowing()) {
-            showDialog(null);
+            onClick();
         }
     }
 }

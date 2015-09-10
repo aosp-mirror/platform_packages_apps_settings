@@ -16,7 +16,8 @@
 
 package com.android.settings;
 
-import android.preference.PreferenceFragment;
+import android.support.v14.preference.PreferenceFragment;
+
 import com.android.internal.logging.MetricsLogger;
 
 /**

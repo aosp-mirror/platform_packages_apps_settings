@@ -28,13 +28,11 @@ import android.os.PersistableBundle;
 import android.os.SELinux;
 import android.os.SystemClock;
 import android.os.SystemProperties;
-import android.os.UserHandle;
 import android.os.UserManager;
-import android.preference.Preference;
-import android.preference.PreferenceGroup;
-import android.preference.PreferenceScreen;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceGroup;
 import android.telephony.CarrierConfigManager;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
@@ -208,7 +206,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
     }
 
     @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+    public boolean onPreferenceTreeClick(Preference preference) {
         if (preference.getKey().equals(KEY_FIRMWARE_VERSION)) {
             System.arraycopy(mHits, 1, mHits, 0, mHits.length-1);
             mHits[mHits.length-1] = SystemClock.uptimeMillis();
@@ -278,7 +276,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
                 ciActionOnSysUpdate(b);
             }
         }
-        return super.onPreferenceTreeClick(preferenceScreen, preference);
+        return super.onPreferenceTreeClick(preference);
     }
 
     /**

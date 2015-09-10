@@ -23,9 +23,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.preference.ListPreference;
-import android.preference.Preference;
-import android.preference.PreferenceScreen;
+import android.support.v7.preference.ListPreference;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceScreen;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -97,7 +97,7 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
         mSwitchBar.show();
 
         mEmptyView = (TextView) getView().findViewById(android.R.id.empty);
-        getListView().setEmptyView(mEmptyView);
+        setEmptyView(mEmptyView);
         mEmptyView.setText(R.string.wifi_calling_off_explanation);
     }
 

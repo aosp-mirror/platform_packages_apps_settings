@@ -26,22 +26,22 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.NetworkInfo;
+import android.net.wifi.WpsInfo;
 import android.net.wifi.p2p.WifiP2pConfig;
-import android.net.wifi.p2p.WifiP2pInfo;
 import android.net.wifi.p2p.WifiP2pDevice;
 import android.net.wifi.p2p.WifiP2pDeviceList;
 import android.net.wifi.p2p.WifiP2pGroup;
 import android.net.wifi.p2p.WifiP2pGroupList;
+import android.net.wifi.p2p.WifiP2pInfo;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.net.wifi.p2p.WifiP2pManager.PeerListListener;
 import android.net.wifi.p2p.WifiP2pManager.PersistentGroupInfoListener;
-import android.net.wifi.WpsInfo;
 import android.os.Bundle;
 import android.os.SystemProperties;
-import android.preference.Preference;
-import android.preference.PreferenceCategory;
-import android.preference.PreferenceGroup;
-import android.preference.PreferenceScreen;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceCategory;
+import android.support.v7.preference.PreferenceGroup;
+import android.support.v7.preference.PreferenceScreen;
 import android.text.InputFilter;
 import android.text.TextUtils;
 import android.util.Log;
@@ -301,16 +301,16 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
         preferenceScreen.removeAll();
         preferenceScreen.setOrderingAsAdded(true);
 
-        mThisDevicePref = new Preference(getActivity());
+        mThisDevicePref = new Preference(getPrefContext());
         mThisDevicePref.setPersistent(false);
         mThisDevicePref.setSelectable(false);
         preferenceScreen.addPreference(mThisDevicePref);
 
-        mPeersGroup = new PreferenceCategory(getActivity());
+        mPeersGroup = new PreferenceCategory(getPrefContext());
         mPeersGroup.setTitle(R.string.wifi_p2p_peer_devices);
         preferenceScreen.addPreference(mPeersGroup);
 
-        mPersistentGroup = new PreferenceCategory(getActivity());
+        mPersistentGroup = new PreferenceCategory(getPrefContext());
         mPersistentGroup.setTitle(R.string.wifi_p2p_remembered_groups);
         preferenceScreen.addPreference(mPersistentGroup);
 
@@ -381,7 +381,7 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
     }
 
     @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen screen, Preference preference) {
+    public boolean onPreferenceTreeClick(Preference preference) {
         if (preference instanceof WifiP2pPeer) {
             mSelectedWifiPeer = (WifiP2pPeer) preference;
             if (mSelectedWifiPeer.device.status == WifiP2pDevice.CONNECTED) {
@@ -423,7 +423,7 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
             mSelectedGroup = (WifiP2pPersistentGroup) preference;
             showDialog(DIALOG_DELETE_GROUP);
         }
-        return super.onPreferenceTreeClick(screen, preference);
+        return super.onPreferenceTreeClick(preference);
     }
 
     @Override

@@ -16,14 +16,6 @@
 
 package com.android.settings;
 
-import com.android.internal.logging.MetricsLogger;
-import com.android.internal.widget.LockPatternUtils;
-import com.android.internal.widget.PasswordEntryKeyboardHelper;
-import com.android.internal.widget.PasswordEntryKeyboardView;
-import com.android.internal.widget.TextViewInputDisabler;
-import com.android.internal.widget.LockPatternUtils.RequestThrottledException;
-import com.android.settings.notification.RedactionInterstitial;
-
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.admin.DevicePolicyManager;
@@ -44,12 +36,20 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
+
+import com.android.internal.logging.MetricsLogger;
+import com.android.internal.widget.LockPatternUtils;
+import com.android.internal.widget.LockPatternUtils.RequestThrottledException;
+import com.android.internal.widget.PasswordEntryKeyboardHelper;
+import com.android.internal.widget.PasswordEntryKeyboardView;
+import com.android.internal.widget.TextViewInputDisabler;
+import com.android.settings.notification.RedactionInterstitial;
 
 public class ChooseLockPassword extends SettingsActivity {
     public static final String PASSWORD_MIN_KEY = "lockscreen.password_min";

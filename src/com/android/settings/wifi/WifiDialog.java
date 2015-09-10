@@ -16,16 +16,15 @@
 
 package com.android.settings.wifi;
 
-import com.android.settings.R;
-import com.android.settingslib.wifi.AccessPoint;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
+
+import com.android.settings.R;
+import com.android.settingslib.wifi.AccessPoint;
 
 class WifiDialog extends AlertDialog implements WifiConfigUiBase, DialogInterface.OnClickListener {
 

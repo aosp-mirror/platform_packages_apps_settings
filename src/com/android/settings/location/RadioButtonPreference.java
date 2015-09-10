@@ -17,9 +17,9 @@
 package com.android.settings.location;
 
 import android.content.Context;
-import android.preference.CheckBoxPreference;
+import android.support.v7.preference.CheckBoxPreference;
+import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.TextView;
 
 import com.android.settings.R;
@@ -66,8 +66,8 @@ public class RadioButtonPreference extends CheckBoxPreference {
     }
 
     @Override
-    protected void onBindView(View view) {
-        super.onBindView(view);
+    public void onBindViewHolder(PreferenceViewHolder view) {
+        super.onBindViewHolder(view);
 
         TextView title = (TextView) view.findViewById(android.R.id.title);
         if (title != null) {

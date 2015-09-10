@@ -15,24 +15,16 @@
  */
 package com.android.settings;
 
-import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.res.Resources;
 import android.hardware.display.DisplayManager;
 import android.hardware.display.DisplayManager.DisplayListener;
 import android.os.Handler;
 import android.os.Looper;
-import android.preference.DialogPreference;
-import android.preference.SwitchPreference;
+import android.support.v14.preference.SwitchPreference;
 import android.util.AttributeSet;
 import android.view.Display;
 import android.view.Display.ColorTransform;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Checkable;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 

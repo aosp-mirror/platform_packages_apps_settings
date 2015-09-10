@@ -40,7 +40,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.settings.R;
-import com.android.settings.Utils;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;

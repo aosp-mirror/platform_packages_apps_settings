@@ -26,13 +26,12 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.EditTextPreference;
-import android.preference.ListPreference;
-import android.preference.MultiSelectListPreference;
-import android.preference.Preference;
-import android.preference.PreferenceActivity;
-import android.preference.SwitchPreference;
 import android.provider.Telephony;
+import android.support.v14.preference.MultiSelectListPreference;
+import android.support.v14.preference.SwitchPreference;
+import android.support.v7.preference.EditTextPreference;
+import android.support.v7.preference.ListPreference;
+import android.support.v7.preference.Preference;
 import android.telephony.ServiceState;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -41,6 +40,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+
 import com.android.internal.logging.MetricsLogger;
 
 import java.util.HashSet;

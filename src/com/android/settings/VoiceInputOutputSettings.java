@@ -16,12 +16,10 @@
 
 package com.android.settings;
 
-import android.preference.Preference;
-import android.preference.PreferenceCategory;
-import android.preference.PreferenceGroup;
 import android.speech.tts.TtsEngines;
-
-import com.android.settings.voice.VoiceInputHelper;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceCategory;
+import android.support.v7.preference.PreferenceGroup;
 
 /**
  * Settings screen for voice input/output.

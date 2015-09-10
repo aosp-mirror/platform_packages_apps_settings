@@ -16,8 +16,6 @@
 
 package com.android.settings.deviceinfo;
 
-import static com.android.settings.deviceinfo.StorageSettings.TAG;
-
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -37,6 +35,8 @@ import com.android.internal.app.IMediaContainerService;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
+
+import static com.android.settings.deviceinfo.StorageSettings.TAG;
 
 public abstract class MigrateEstimateTask extends AsyncTask<Void, Void, Long> implements
         ServiceConnection {

@@ -25,10 +25,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Process;
 import android.os.UserHandle;
-import android.preference.Preference;
-import android.preference.PreferenceGroup;
-import android.preference.PreferenceScreen;
-import android.text.TextUtils;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceGroup;
 import android.util.SparseArray;
 import android.util.TypedValue;
 import android.view.Menu;
@@ -39,11 +37,9 @@ import com.android.internal.logging.MetricsLogger;
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatterySipper.DrainType;
 import com.android.internal.os.PowerProfile;
-import com.android.settings.HelpUtils;
 import com.android.settings.R;
 import com.android.settings.Settings.HighPowerApplicationsActivity;
 import com.android.settings.SettingsActivity;
-import com.android.settings.Utils;
 import com.android.settings.applications.ManageApplications;
 
 import java.util.ArrayList;
@@ -117,7 +113,7 @@ public class PowerUsageSummary extends PowerUsageBase {
     }
 
     @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+    public boolean onPreferenceTreeClick(Preference preference) {
         if (!(preference instanceof PowerGaugePreference)) {
             return false;
         }
@@ -125,7 +121,7 @@ public class PowerUsageSummary extends PowerUsageBase {
         BatteryEntry entry = pgp.getInfo();
         PowerUsageDetail.startBatteryDetailPage((SettingsActivity) getActivity(), mStatsHelper,
                 mStatsType, entry, true, true);
-        return super.onPreferenceTreeClick(preferenceScreen, preference);
+        return super.onPreferenceTreeClick(preference);
     }
 
     @Override
@@ -177,7 +173,7 @@ public class PowerUsageSummary extends PowerUsageBase {
     }
 
     private void addNotAvailableMessage() {
-        Preference notAvailable = new Preference(getActivity());
+        Preference notAvailable = new Preference(getPrefContext());
         notAvailable.setTitle(R.string.power_usage_not_available);
         mAppListGroup.addPreference(notAvailable);
     }
@@ -345,7 +341,7 @@ public class PowerUsageSummary extends PowerUsageBase {
                         userHandle);
                 final CharSequence contentDescription = mUm.getBadgedLabelForUser(entry.getLabel(),
                         userHandle);
-                final PowerGaugePreference pref = new PowerGaugePreference(getActivity(),
+                final PowerGaugePreference pref = new PowerGaugePreference(getPrefContext(),
                         badgedIcon, contentDescription, entry);
 
                 final double percentOfMax = (sipper.totalPowerMah * 100)

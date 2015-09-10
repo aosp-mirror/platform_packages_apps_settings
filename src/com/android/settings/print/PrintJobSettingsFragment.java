@@ -19,12 +19,12 @@ package com.android.settings.print;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.preference.Preference;
 import android.print.PrintJob;
 import android.print.PrintJobId;
 import android.print.PrintJobInfo;
 import android.print.PrintManager;
 import android.print.PrintManager.PrintJobStateChangeListener;
+import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.view.Menu;
@@ -235,10 +235,8 @@ public class PrintJobSettingsFragment extends SettingsPreferenceFragment {
                 getPreferenceScreen().addPreference(mMessagePreference);
             }
             mMessagePreference.setSummary(stateReason);
-            getListView().setDivider(null);
         } else {
             getPreferenceScreen().removePreference(mMessagePreference);
-            getListView().setDivider(mListDivider);
         }
 
         getActivity().invalidateOptionsMenu();

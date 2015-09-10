@@ -17,7 +17,7 @@
 package com.android.settings.inputmethod;
 
 import android.content.Context;
-import android.preference.Preference;
+import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodSubtype;

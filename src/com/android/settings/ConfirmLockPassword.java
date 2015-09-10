@@ -16,18 +16,10 @@
 
 package com.android.settings;
 
-import android.text.TextUtils;
-import com.android.internal.logging.MetricsLogger;
-import com.android.internal.widget.LockPatternChecker;
-import com.android.internal.widget.LockPatternUtils;
-import com.android.internal.widget.TextViewInputDisabler;
-import com.android.settingslib.animation.AppearAnimationUtils;
-import com.android.settingslib.animation.DisappearAnimationUtils;
-
 import android.app.Fragment;
 import android.app.admin.DevicePolicyManager;
-import android.content.Intent;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -35,6 +27,7 @@ import android.os.Handler;
 import android.os.SystemClock;
 import android.os.storage.StorageManager;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,6 +38,13 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
+
+import com.android.internal.logging.MetricsLogger;
+import com.android.internal.widget.LockPatternChecker;
+import com.android.internal.widget.LockPatternUtils;
+import com.android.internal.widget.TextViewInputDisabler;
+import com.android.settingslib.animation.AppearAnimationUtils;
+import com.android.settingslib.animation.DisappearAnimationUtils;
 
 import java.util.ArrayList;
 

@@ -16,7 +16,9 @@
 
 package com.android.settings;
 
-import android.preference.PreferenceFragment;
+import android.os.Bundle;
+import android.support.v14.preference.PreferenceFragment;
+
 import com.android.internal.logging.MetricsLogger;
 
 /**
@@ -36,6 +38,10 @@ public abstract class InstrumentedFragment extends PreferenceFragment {
      * {@link com.android.settings.InstrumentedFragment}.
      */
     protected abstract int getMetricsCategory();
+
+    @Override
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+    }
 
     @Override
     public void onResume() {

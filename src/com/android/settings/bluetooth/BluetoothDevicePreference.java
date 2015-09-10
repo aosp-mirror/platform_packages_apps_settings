@@ -16,15 +16,14 @@
 
 package com.android.settings.bluetooth;
 
-import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
-
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.UserManager;
-import android.preference.Preference;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceViewHolder;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
@@ -41,6 +40,8 @@ import com.android.settingslib.bluetooth.HidProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothProfile;
 
 import java.util.List;
+
+import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 
 /**
  * BluetoothDevicePreference is the preference type used to display each remote
@@ -129,7 +130,7 @@ public final class BluetoothDevicePreference extends Preference implements
     }
 
     @Override
-    protected void onBindView(View view) {
+    public void onBindViewHolder(PreferenceViewHolder view) {
         // Disable this view if the bluetooth enable/disable preference view is off
         if (null != findPreferenceInHierarchy("bt_checkbox")) {
             setDependency("bt_checkbox");
@@ -144,7 +145,7 @@ public final class BluetoothDevicePreference extends Preference implements
             }
         }
 
-        super.onBindView(view);
+        super.onBindViewHolder(view);
     }
 
     public void onClick(View v) {

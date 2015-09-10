@@ -16,8 +16,6 @@
 
 package com.android.settings.deviceinfo;
 
-import static com.android.settings.deviceinfo.StorageSettings.TAG;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -38,6 +36,8 @@ import android.widget.Toast;
 import com.android.settings.R;
 
 import java.util.Objects;
+
+import static com.android.settings.deviceinfo.StorageSettings.TAG;
 
 public class StorageWizardFormatProgress extends StorageWizardBase {
     private static final String TAG_SLOW_WARNING = "slow_warning";

@@ -30,18 +30,19 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.RemoteException;
 import android.os.UserHandle;
-import android.preference.ListPreference;
-import android.preference.Preference;
-import android.preference.PreferenceCategory;
-import android.preference.PreferenceScreen;
-import android.preference.SwitchPreference;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
+import android.support.v14.preference.SwitchPreference;
+import android.support.v7.preference.ListPreference;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceCategory;
+import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.text.TextUtils.SimpleStringSplitter;
 import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
 import android.view.accessibility.AccessibilityManager;
+
 import com.android.internal.content.PackageMonitor;
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.view.RotationPolicy;
@@ -270,7 +271,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     }
 
     @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+    public boolean onPreferenceTreeClick(Preference preference) {
         if (mToggleLargeTextPreference == preference) {
             handleToggleLargeTextPreferenceClick();
             return true;
@@ -293,7 +294,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             handleDisplayMagnificationPreferenceScreenClick();
             return true;
         }
-        return super.onPreferenceTreeClick(preferenceScreen, preference);
+        return super.onPreferenceTreeClick(preference);
     }
 
     private void handleToggleLargeTextPreferenceClick() {
@@ -338,8 +339,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                 R.string.accessibility_global_gesture_preference_description));
         extras.putBoolean(EXTRA_CHECKED, Settings.Global.getInt(getContentResolver(),
                 Settings.Global.ENABLE_ACCESSIBILITY_GLOBAL_GESTURE_ENABLED, 0) == 1);
-        super.onPreferenceTreeClick(mGlobalGesturePreferenceScreen,
-                mGlobalGesturePreferenceScreen);
+        super.onPreferenceTreeClick(mGlobalGesturePreferenceScreen);
     }
 
     private void handleDisplayMagnificationPreferenceScreenClick() {
@@ -350,8 +350,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                 R.string.accessibility_screen_magnification_summary));
         extras.putBoolean(EXTRA_CHECKED, Settings.Secure.getInt(getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED, 0) == 1);
-        super.onPreferenceTreeClick(mDisplayMagnificationPreferenceScreen,
-                mDisplayMagnificationPreferenceScreen);
+        super.onPreferenceTreeClick(mDisplayMagnificationPreferenceScreen);
     }
 
     private void initializeAllPreferences() {
@@ -527,7 +526,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
 
         if (mServicesCategory.getPreferenceCount() == 0) {
             if (mNoServicesMessagePreference == null) {
-                mNoServicesMessagePreference = new Preference(getActivity());
+                mNoServicesMessagePreference = new Preference(getPrefContext());
                 mNoServicesMessagePreference.setPersistent(false);
                 mNoServicesMessagePreference.setLayoutResource(
                         R.layout.text_description_preference);

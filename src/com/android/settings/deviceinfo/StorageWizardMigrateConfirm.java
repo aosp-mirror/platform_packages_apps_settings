@@ -16,8 +16,6 @@
 
 package com.android.settings.deviceinfo;
 
-import static com.android.settings.deviceinfo.StorageSettings.TAG;
-
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -25,6 +23,8 @@ import android.os.storage.VolumeInfo;
 import android.util.Log;
 
 import com.android.settings.R;
+
+import static com.android.settings.deviceinfo.StorageSettings.TAG;
 
 public class StorageWizardMigrateConfirm extends StorageWizardBase {
     private MigrateEstimateTask mEstimate;

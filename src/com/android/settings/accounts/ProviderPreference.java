@@ -18,7 +18,7 @@ package com.android.settings.accounts;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.preference.Preference;
+import android.support.v7.preference.Preference;
 
 /**
  * ProviderPreference is used to display an image to the left of a provider name.

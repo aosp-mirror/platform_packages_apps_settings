@@ -16,8 +16,6 @@
 
 package com.android.settings;
 
-import java.util.List;
-
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -27,15 +25,17 @@ import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.preference.Preference;
-import android.preference.PreferenceGroup;
-import android.preference.SwitchPreference;
 import android.service.trust.TrustAgentService;
+import android.support.v14.preference.SwitchPreference;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceGroup;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.widget.LockPatternUtils;
+
+import java.util.List;
 
 public class TrustAgentSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
@@ -102,7 +102,7 @@ public class TrustAgentSettings extends SettingsPreferenceFragment implements
         final int count = mAvailableAgents.size();
         for (int i = 0; i < count; i++) {
             AgentInfo agent = mAvailableAgents.valueAt(i);
-            final SwitchPreference preference = new SwitchPreference(context);
+            final SwitchPreference preference = new SwitchPreference(getPrefContext());
             agent.preference = preference;
             preference.setPersistent(false);
             preference.setTitle(agent.label);

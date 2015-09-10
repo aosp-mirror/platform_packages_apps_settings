@@ -16,8 +16,6 @@
 
 package com.android.settings;
 
-import static com.android.settings.dashboard.DashboardTile.TILE_ID_UNDEFINED;
-
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
@@ -42,10 +40,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.preference.Preference;
-import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
-import android.preference.PreferenceScreen;
+import android.support.v14.preference.PreferenceFragment;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.transition.TransitionManager;
 import android.util.ArrayMap;
@@ -107,8 +104,8 @@ import com.android.settings.notification.ZenAccessSettings;
 import com.android.settings.notification.ZenModeAutomationSettings;
 import com.android.settings.notification.ZenModeEventRuleSettings;
 import com.android.settings.notification.ZenModePrioritySettings;
-import com.android.settings.notification.ZenModeSettings;
 import com.android.settings.notification.ZenModeScheduleRuleSettings;
+import com.android.settings.notification.ZenModeSettings;
 import com.android.settings.print.PrintJobSettingsFragment;
 import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.search.DynamicIndexableContentMonitor;
@@ -132,6 +129,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import static com.android.settings.dashboard.DashboardTile.TILE_ID_UNDEFINED;
 
 public class SettingsActivity extends Activity
         implements PreferenceManager.OnPreferenceTreeClickListener,
@@ -438,17 +437,17 @@ public class SettingsActivity extends Activity
     @Override
     public boolean onPreferenceStartFragment(PreferenceFragment caller, Preference pref) {
         // Override the fragment title for Wallpaper settings
-        int titleRes = pref.getTitleRes();
+        CharSequence title = pref.getTitle();
         if (pref.getFragment().equals(WallpaperTypeSettings.class.getName())) {
-            titleRes = R.string.wallpaper_settings_fragment_title;
+            title = getString(R.string.wallpaper_settings_fragment_title);
         }
-        startPreferencePanel(pref.getFragment(), pref.getExtras(), titleRes, pref.getTitle(),
+        startPreferencePanel(pref.getFragment(), pref.getExtras(), 0, title,
                 null, 0);
         return true;
     }
 
     @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+    public boolean onPreferenceTreeClick(Preference preference) {
         return false;
     }
 
@@ -795,7 +794,7 @@ public class SettingsActivity extends Activity
     }
 
     @Override
-    public void onResume() {
+    protected void onResume() {
         super.onResume();
         if (mIsShowingDashboard) {
             MetricsLogger.visible(this, MetricsLogger.MAIN_SETTINGS);
@@ -826,7 +825,7 @@ public class SettingsActivity extends Activity
     }
 
     @Override
-    public void onPause() {
+    protected void onPause() {
         super.onPause();
         if (mIsShowingDashboard) {
             MetricsLogger.hidden(this, MetricsLogger.MAIN_SETTINGS);

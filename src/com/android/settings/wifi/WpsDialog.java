@@ -32,10 +32,10 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.android.settings.R;
+
 import java.util.Timer;
 import java.util.TimerTask;
-
-import com.android.settings.R;
 
 
 /**

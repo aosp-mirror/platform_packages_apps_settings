@@ -6,7 +6,6 @@ import android.app.AlertDialog;
 import android.app.ApplicationErrorReport;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.app.Fragment;
 import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;

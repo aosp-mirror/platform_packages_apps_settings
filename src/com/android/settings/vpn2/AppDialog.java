@@ -20,12 +20,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.TextView;
 
-import com.android.internal.net.VpnConfig;
 import com.android.settings.R;
 
 /**

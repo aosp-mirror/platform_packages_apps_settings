@@ -26,10 +26,10 @@ import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.Preference.OnPreferenceChangeListener;
-import android.preference.PreferenceScreen;
-import android.preference.SwitchPreference;
+import android.support.v14.preference.SwitchPreference;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.Preference.OnPreferenceChangeListener;
+import android.support.v7.preference.PreferenceScreen;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -102,7 +102,7 @@ public abstract class ManagedServiceSettings extends SettingsPreferenceFragment 
         for (ServiceInfo service : services) {
             final ComponentName cn = new ComponentName(service.packageName, service.name);
             final String title = service.loadLabel(mPM).toString();
-            final SwitchPreference pref = new SwitchPreference(mContext);
+            final SwitchPreference pref = new SwitchPreference(getPrefContext());
             pref.setPersistent(false);
             pref.setIcon(service.loadIcon(mPM));
             pref.setTitle(title);

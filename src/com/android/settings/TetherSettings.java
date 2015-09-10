@@ -16,11 +16,6 @@
 
 package com.android.settings;
 
-import static com.android.settingslib.TetherUtil.TETHERING_INVALID;
-import static com.android.settingslib.TetherUtil.TETHERING_WIFI;
-import static com.android.settingslib.TetherUtil.TETHERING_USB;
-import static com.android.settingslib.TetherUtil.TETHERING_BLUETOOTH;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.bluetooth.BluetoothAdapter;
@@ -38,11 +33,10 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.UserHandle;
 import android.os.UserManager;
-import android.preference.Preference;
-import android.preference.PreferenceScreen;
-import android.preference.SwitchPreference;
+import android.support.v14.preference.SwitchPreference;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceScreen;
 import android.widget.TextView;
 
 import com.android.internal.logging.MetricsLogger;
@@ -52,6 +46,11 @@ import com.android.settingslib.TetherUtil;
 
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicReference;
+
+import static com.android.settingslib.TetherUtil.TETHERING_BLUETOOTH;
+import static com.android.settingslib.TetherUtil.TETHERING_INVALID;
+import static com.android.settingslib.TetherUtil.TETHERING_USB;
+import static com.android.settingslib.TetherUtil.TETHERING_WIFI;
 
 /*
  * Displays preferences for Tethering.
@@ -127,7 +126,7 @@ public class TetherSettings extends SettingsPreferenceFragment
         if (mUm.hasUserRestriction(UserManager.DISALLOW_CONFIG_TETHERING)
                 || !mUm.isAdminUser()) {
             mUnavailable = true;
-            setPreferenceScreen(new PreferenceScreen(getActivity(), null));
+            setPreferenceScreen(new PreferenceScreen(getPrefContext(), null));
             return;
         }
 
@@ -286,7 +285,7 @@ public class TetherSettings extends SettingsPreferenceFragment
 
         if (mUnavailable) {
             TextView emptyView = (TextView) getView().findViewById(android.R.id.empty);
-            getListView().setEmptyView(emptyView);
+            setEmptyView(emptyView);
             if (emptyView != null) {
                 emptyView.setText(R.string.tethering_settings_not_available);
             }
@@ -561,7 +560,7 @@ public class TetherSettings extends SettingsPreferenceFragment
     }
 
     @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen screen, Preference preference) {
+    public boolean onPreferenceTreeClick(Preference preference) {
         ConnectivityManager cm =
                 (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
 
@@ -606,7 +605,7 @@ public class TetherSettings extends SettingsPreferenceFragment
             showDialog(DIALOG_AP_SETTINGS);
         }
 
-        return super.onPreferenceTreeClick(screen, preference);
+        return super.onPreferenceTreeClick(preference);
     }
 
     private static String findIface(String[] ifaces, String[] regexes) {

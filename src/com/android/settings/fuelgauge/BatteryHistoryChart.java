@@ -16,32 +16,33 @@
 
 package com.android.settings.fuelgauge;
 
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.DashPathEffect;
-import android.os.BatteryManager;
-import android.text.format.DateFormat;
-import android.text.format.Formatter;
-import android.util.Log;
-import android.util.TimeUtils;
-import com.android.settings.R;
-import com.android.settings.Utils;
-
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Typeface;
+import android.os.BatteryManager;
 import android.os.BatteryStats;
-import android.os.SystemClock;
 import android.os.BatteryStats.HistoryItem;
+import android.os.SystemClock;
 import android.telephony.ServiceState;
 import android.text.TextPaint;
+import android.text.format.DateFormat;
+import android.text.format.Formatter;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.util.TimeUtils;
 import android.util.TypedValue;
 import android.view.View;
+
+import com.android.settings.R;
+import com.android.settings.Utils;
+
 import libcore.icu.LocaleData;
 
 import java.util.ArrayList;

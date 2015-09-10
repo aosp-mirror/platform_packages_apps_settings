@@ -21,8 +21,8 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceScreen;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceScreen;
 import android.util.Log;
 
 import com.android.internal.logging.MetricsLogger;
@@ -91,7 +91,7 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
 
     private void initPreferences() {
         PreferenceScreen preferenceScreen = getPreferenceScreen();
-        final Context context = getActivity();
+        final Context context = getPrefContext();
 
         final List<AccessPoint> accessPoints = WifiTracker.getCurrentAccessPoints(context, true,
                 false, true);
@@ -109,7 +109,7 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
         final int accessPointsSize = accessPoints.size();
         for (int i = 0; i < accessPointsSize; ++i){
             AccessPointPreference preference = new AccessPointPreference(accessPoints.get(i),
-                    context, mUserBadgeCache, true);
+                    context, mUserBadgeCache, true, this);
             preference.setIcon(null);
             preferenceScreen.addPreference(preference);
         }
@@ -183,12 +183,12 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
     }
 
     @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen screen, Preference preference) {
+    public boolean onPreferenceTreeClick(Preference preference) {
         if (preference instanceof AccessPointPreference) {
             showDialog((AccessPointPreference) preference, false);
             return true;
         } else{
-            return super.onPreferenceTreeClick(screen, preference);
+            return super.onPreferenceTreeClick(preference);
         }
     }
 

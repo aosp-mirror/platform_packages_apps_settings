@@ -23,9 +23,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.SystemProperties;
 import android.os.UserHandle;
-import android.preference.Preference;
-import android.preference.SwitchPreference;
 import android.provider.Settings;
+import android.support.v14.preference.SwitchPreference;
+import android.support.v7.preference.Preference;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.telephony.PhoneStateIntentReceiver;

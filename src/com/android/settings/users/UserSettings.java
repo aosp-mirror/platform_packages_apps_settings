@@ -16,8 +16,6 @@
 
 package com.android.settings.users;
 
-import android.accounts.Account;
-import android.accounts.AccountManager;
 import android.app.Activity;
 import android.app.ActivityManagerNative;
 import android.app.AlertDialog;
@@ -40,12 +38,11 @@ import android.os.Message;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.preference.Preference;
-import android.preference.Preference.OnPreferenceClickListener;
-import android.preference.PreferenceGroup;
-import android.preference.PreferenceScreen;
 import android.provider.Settings;
-import android.provider.Settings.Secure;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.Preference.OnPreferenceClickListener;
+import android.support.v7.preference.PreferenceGroup;
+import android.support.v7.preference.PreferenceScreen;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.Menu;
@@ -206,7 +203,7 @@ public class UserSettings extends SettingsPreferenceFragment
 
         addPreferencesFromResource(R.xml.user_settings);
         mUserListCategory = (PreferenceGroup) findPreference(KEY_USER_LIST);
-        mMePreference = new UserPreference(context, null /* attrs */, myUserId,
+        mMePreference = new UserPreference(getPrefContext(), null /* attrs */, myUserId,
                 null /* settings icon handler */,
                 null /* delete icon handler */);
         mMePreference.setKey(KEY_USER_ME);
@@ -713,7 +710,7 @@ public class UserSettings extends SettingsPreferenceFragment
                         && (voiceCapable || user.isRestricted());
                 final boolean showDelete = mUserCaps.mIsAdmin
                         && (!voiceCapable && !user.isRestricted() && !user.isGuest());
-                pref = new UserPreference(context, null, user.id,
+                pref = new UserPreference(getPrefContext(), null, user.id,
                         showSettings ? this : null,
                         showDelete ? this : null);
                 pref.setOnPreferenceClickListener(this);
@@ -749,7 +746,7 @@ public class UserSettings extends SettingsPreferenceFragment
 
         // Add a temporary entry for the user being created
         if (mAddingUser) {
-            UserPreference pref = new UserPreference(getActivity(), null,
+            UserPreference pref = new UserPreference(getPrefContext(), null,
                     UserPreference.USERID_UNKNOWN, null, null);
             pref.setEnabled(false);
             pref.setTitle(R.string.user_new_user_name);
@@ -759,7 +756,7 @@ public class UserSettings extends SettingsPreferenceFragment
 
         if (!mUserCaps.mIsGuest && (mUserCaps.mCanAddGuest || findGuest() != null)) {
             // Add a virtual Guest user for guest defaults
-            UserPreference pref = new UserPreference(getActivity(), null,
+            UserPreference pref = new UserPreference(getPrefContext(), null,
                     UserPreference.USERID_GUEST_DEFAULTS,
                     mUserCaps.mIsAdmin && voiceCapable? this : null /* settings icon handler */,
                     null /* delete icon handler */);

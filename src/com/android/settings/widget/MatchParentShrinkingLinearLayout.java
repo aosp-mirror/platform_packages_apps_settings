@@ -16,8 +16,6 @@
 
 package com.android.settings.widget;
 
-import com.android.internal.R;
-
 import android.annotation.IntDef;
 import android.annotation.NonNull;
 import android.annotation.Nullable;
@@ -31,6 +29,8 @@ import android.view.View;
 import android.view.ViewDebug;
 import android.view.ViewGroup;
 import android.view.ViewHierarchyEncoder;
+
+import com.android.internal.R;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

@@ -35,7 +35,6 @@ import android.widget.Toast;
 
 import com.android.internal.net.VpnProfile;
 import com.android.settings.R;
-import com.google.android.collect.Lists;
 
 import java.util.ArrayList;
 import java.util.List;

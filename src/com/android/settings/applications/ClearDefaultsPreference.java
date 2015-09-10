@@ -24,14 +24,14 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
-import android.preference.Preference;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceViewHolder;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.style.BulletSpan;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -43,7 +43,6 @@ public class ClearDefaultsPreference extends Preference {
 
     protected static final String TAG = ClearDefaultsPreference.class.getSimpleName();
 
-    private View mRootView;
     private Button mActivitiesButton;
 
     private AppWidgetManager mAppWidgetManager;
@@ -85,10 +84,10 @@ public class ClearDefaultsPreference extends Preference {
     }
 
     @Override
-    protected View onCreateView(ViewGroup parent) {
-        mRootView = super.onCreateView(parent);
+    public void onBindViewHolder(final PreferenceViewHolder view) {
+        super.onBindViewHolder(view);
 
-        mActivitiesButton = (Button) mRootView.findViewById(R.id.clear_activities_button);
+        mActivitiesButton = (Button) view.findViewById(R.id.clear_activities_button);
         mActivitiesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,27 +103,20 @@ public class ClearDefaultsPreference extends Preference {
                         Log.e(TAG, "mUsbManager.clearDefaults", e);
                     }
                     mAppWidgetManager.setBindAppWidgetPermission(mPackageName, false);
-                    TextView autoLaunchView = (TextView) mRootView.findViewById(R.id.auto_launch);
+                    TextView autoLaunchView = (TextView) view.findViewById(R.id.auto_launch);
                     resetLaunchDefaultsUi(autoLaunchView);
                 }
             }
         });
 
-        return mRootView;
+        updateUI(view);
     }
 
-    @Override
-    protected void onBindView(View view) {
-        super.onBindView(view);
-
-        updateUI();
-    }
-
-    public boolean updateUI() {
+    public boolean updateUI(PreferenceViewHolder view) {
         boolean hasBindAppWidgetPermission =
                 mAppWidgetManager.hasBindAppWidgetPermission(mAppEntry.info.packageName);
 
-        TextView autoLaunchView = (TextView) mRootView.findViewById(R.id.auto_launch);
+        TextView autoLaunchView = (TextView) view.findViewById(R.id.auto_launch);
         boolean autoLaunchEnabled = Utils.hasPreferredActivities(mPm, mPackageName)
                 || isDefaultBrowser(mPackageName)
                 || Utils.hasUsbDefaults(mUsbManager, mPackageName);

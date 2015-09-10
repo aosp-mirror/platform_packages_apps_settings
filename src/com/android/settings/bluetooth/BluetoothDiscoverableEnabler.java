@@ -24,7 +24,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.SystemProperties;
-import android.preference.Preference;
+import android.support.v7.preference.Preference;
 import android.util.Log;
 
 import com.android.settings.R;

@@ -18,7 +18,6 @@ package com.android.settings.applications;
 
 import android.app.Activity;
 import android.app.AppOpsManager;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;

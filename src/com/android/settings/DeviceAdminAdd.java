@@ -16,13 +16,10 @@
 
 package com.android.settings;
 
-import android.app.AppOpsManager;
-
-import org.xmlpull.v1.XmlPullParserException;
-
 import android.app.Activity;
 import android.app.ActivityManagerNative;
 import android.app.AlertDialog;
+import android.app.AppOpsManager;
 import android.app.Dialog;
 import android.app.admin.DeviceAdminInfo;
 import android.app.admin.DeviceAdminReceiver;
@@ -56,6 +53,8 @@ import android.widget.AppSecurityPermissions;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.util.ArrayList;

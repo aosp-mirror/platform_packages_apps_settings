@@ -17,9 +17,10 @@
 package com.android.settings.location;
 
 import android.content.Intent;
+import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.os.UserHandle;
+
 import com.android.internal.annotations.Immutable;
 import com.android.internal.util.Preconditions;
 
@@ -44,12 +45,12 @@ class InjectedSetting {
     public final String className;
 
     /**
-     * The {@link android.preference.Preference#getTitle()} value.
+     * The {@link android.support.v7.preference.Preference#getTitle()} value.
      */
     public final String title;
 
     /**
-     * The {@link android.preference.Preference#getIcon()} value.
+     * The {@link android.support.v7.preference.Preference#getIcon()} value.
      */
     public final int iconId;
 

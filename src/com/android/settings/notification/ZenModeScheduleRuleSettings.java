@@ -16,8 +16,6 @@
 
 package com.android.settings.notification;
 
-import static com.android.settings.notification.ZenModeScheduleDaysSelection.DAYS;
-
 import android.app.AlertDialog;
 import android.app.AutomaticZenRule;
 import android.app.Dialog;
@@ -28,12 +26,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.Preference.OnPreferenceClickListener;
-import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.service.notification.ZenModeConfig;
 import android.service.notification.ZenModeConfig.ScheduleInfo;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.Preference.OnPreferenceClickListener;
+import android.support.v7.preference.PreferenceScreen;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.widget.TimePicker;
@@ -44,6 +42,8 @@ import com.android.settings.R;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
+
+import static com.android.settings.notification.ZenModeScheduleDaysSelection.DAYS;
 
 public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
     private static final String KEY_DAYS = "days";
@@ -94,7 +94,7 @@ public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
 
         final FragmentManager mgr = getFragmentManager();
 
-        mStart = new TimePickerPreference(mContext, mgr);
+        mStart = new TimePickerPreference(getPrefContext(), mgr);
         mStart.setKey(KEY_START_TIME);
         mStart.setTitle(R.string.zen_mode_start_time);
         mStart.setCallback(new TimePickerPreference.Callback() {
@@ -116,7 +116,7 @@ public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
         root.addPreference(mStart);
         mStart.setDependency(mDays.getKey());
 
-        mEnd = new TimePickerPreference(mContext, mgr);
+        mEnd = new TimePickerPreference(getPrefContext(), mgr);
         mEnd.setKey(KEY_END_TIME);
         mEnd.setTitle(R.string.zen_mode_end_time);
         mEnd.setCallback(new TimePickerPreference.Callback() {

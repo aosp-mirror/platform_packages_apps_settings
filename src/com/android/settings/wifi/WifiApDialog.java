@@ -27,6 +27,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -34,11 +35,10 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import java.nio.charset.Charset;
 
 import com.android.settings.R;
 
-import android.util.Log;
+import java.nio.charset.Charset;
 
 /**
  * Dialog to configure the SSID and security settings

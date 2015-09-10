@@ -17,13 +17,13 @@
 package com.android.settings.accessibility;
 
 import android.os.Bundle;
-import android.preference.ListPreference;
-import android.preference.Preference;
 import android.provider.Settings;
+import android.support.v7.preference.ListPreference;
+import android.support.v7.preference.Preference;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
-
 import android.widget.Switch;
+
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settings.widget.SwitchBar;

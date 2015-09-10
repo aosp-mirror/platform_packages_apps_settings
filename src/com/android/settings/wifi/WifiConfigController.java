@@ -39,8 +39,8 @@ import android.security.Credentials;
 import android.security.KeyStore;
 import android.text.Editable;
 import android.text.InputType;
-import android.text.TextWatcher;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -58,11 +58,11 @@ import android.widget.TextView;
 
 import com.android.settings.ProxySelector;
 import com.android.settings.R;
-import com.android.settingslib.wifi.AccessPoint;
 import com.android.settings.Utils;
+import com.android.settingslib.wifi.AccessPoint;
 
-import java.net.InetAddress;
 import java.net.Inet4Address;
+import java.net.InetAddress;
 import java.util.Iterator;
 
 /**

@@ -25,14 +25,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.preference.Preference;
 import android.provider.SearchIndexableResource;
+import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.internal.content.PackageMonitor;
 import com.android.internal.logging.MetricsLogger;
-import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;

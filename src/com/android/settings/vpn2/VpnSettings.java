@@ -35,11 +35,11 @@ import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.preference.Preference;
-import android.preference.PreferenceGroup;
-import android.preference.PreferenceScreen;
 import android.security.Credentials;
 import android.security.KeyStore;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceGroup;
+import android.support.v7.preference.PreferenceScreen;
 import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -58,7 +58,6 @@ import com.google.android.collect.Lists;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 
 import static android.app.AppOpsManager.OP_ACTIVATE_VPN;
@@ -108,7 +107,7 @@ public class VpnSettings extends SettingsPreferenceFragment implements
         mUserManager = (UserManager) getSystemService(Context.USER_SERVICE);
         if (mUserManager.hasUserRestriction(UserManager.DISALLOW_CONFIG_VPN)) {
             mUnavailable = true;
-            setPreferenceScreen(new PreferenceScreen(getActivity(), null));
+            setPreferenceScreen(new PreferenceScreen(getPrefContext(), null));
             setHasOptionsMenu(false);
             return;
         }
@@ -163,7 +162,7 @@ public class VpnSettings extends SettingsPreferenceFragment implements
         if (mUnavailable) {
             // Show a message to explain that VPN settings have been disabled
             TextView emptyView = (TextView) getView().findViewById(android.R.id.empty);
-            getListView().setEmptyView(emptyView);
+            setEmptyView(emptyView);
             if (emptyView != null) {
                 emptyView.setText(R.string.vpn_settings_not_available);
             }
@@ -215,7 +214,7 @@ public class VpnSettings extends SettingsPreferenceFragment implements
 
         // Fetch configured VPN profiles from KeyStore
         for (VpnProfile profile : loadVpnProfiles(mKeyStore)) {
-            final ConfigPreference pref = new ConfigPreference(getActivity(), mManageListener,
+            final ConfigPreference pref = new ConfigPreference(getPrefContext(), mManageListener,
                     profile);
             pref.setOnPreferenceClickListener(this);
             mConfigPreferences.put(profile.key, pref);
@@ -225,7 +224,7 @@ public class VpnSettings extends SettingsPreferenceFragment implements
         // 3rd-party VPN apps can change elsewhere. Reload them every time.
         for (AppOpsManager.PackageOps pkg : getVpnApps()) {
             String key = getVpnIdentifier(UserHandle.getUserId(pkg.getUid()), pkg.getPackageName());
-            final AppPreference pref = new AppPreference(getActivity(), mManageListener,
+            final AppPreference pref = new AppPreference(getPrefContext(), mManageListener,
                     pkg.getPackageName(), pkg.getUid());
             pref.setOnPreferenceClickListener(this);
             mAppPreferences.put(key, pref);

@@ -16,23 +16,23 @@
 
 package com.android.settings.inputmethod;
 
-import com.android.internal.logging.MetricsLogger;
-import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.Utils;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceGroup;
 import android.provider.UserDictionary;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceGroup;
 import android.text.TextUtils;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.view.inputmethod.InputMethodSubtype;
+
+import com.android.internal.logging.MetricsLogger;
+import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.Utils;
 
 import java.util.List;
 import java.util.Locale;
@@ -167,7 +167,7 @@ public class UserDictionaryList extends SettingsPreferenceFragment {
      * @return The corresponding preference.
      */
     protected Preference createUserDictionaryPreference(String locale, Activity activity) {
-        final Preference newPref = new Preference(getActivity());
+        final Preference newPref = new Preference(getPrefContext());
         final Intent intent = new Intent(USER_DICTIONARY_SETTINGS_INTENT_ACTION);
         if (null == locale) {
             newPref.setTitle(Locale.getDefault().getDisplayName());

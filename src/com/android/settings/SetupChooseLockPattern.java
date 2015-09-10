@@ -16,9 +16,6 @@
 
 package com.android.settings;
 
-import com.android.setupwizardlib.SetupWizardLayout;
-import com.android.setupwizardlib.view.NavigationBar;
-
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
@@ -29,6 +26,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import com.android.setupwizardlib.SetupWizardLayout;
+import com.android.setupwizardlib.view.NavigationBar;
 
 /**
  * Setup Wizard's version of ChooseLockPattern screen. It inherits the logic and basic structure

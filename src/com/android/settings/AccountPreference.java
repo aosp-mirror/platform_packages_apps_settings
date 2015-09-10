@@ -16,15 +16,15 @@
 
 package com.android.settings;
 
-import java.util.ArrayList;
-
 import android.accounts.Account;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.preference.Preference;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceViewHolder;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
+
+import java.util.ArrayList;
 
 /**
  * AccountPreference is used to display a username, status and provider icon for an account on
@@ -68,8 +68,8 @@ public class AccountPreference extends Preference {
     }
 
     @Override
-    protected void onBindView(View view) {
-        super.onBindView(view);
+    public void onBindViewHolder(PreferenceViewHolder view) {
+        super.onBindViewHolder(view);
         if (!mShowTypeIcon) {
             mSyncStatusIcon = (ImageView) view.findViewById(android.R.id.icon);
             mSyncStatusIcon.setImageResource(getSyncStatusIcon(mStatus));

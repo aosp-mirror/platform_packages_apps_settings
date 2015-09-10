@@ -19,10 +19,10 @@ package com.android.settings;
 import android.annotation.Nullable;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.preference.Preference;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceViewHolder;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.TextView;
 
 /**
@@ -66,8 +66,8 @@ public class DimmableIconPreference extends Preference {
     }
 
     @Override
-    protected void onBindView(View view) {
-        super.onBindView(view);
+    public void onBindViewHolder(PreferenceViewHolder view) {
+        super.onBindViewHolder(view);
         if (!TextUtils.isEmpty(mContentDescription)) {
             final TextView titleView = (TextView) view.findViewById(android.R.id.title);
             titleView.setContentDescription(mContentDescription);

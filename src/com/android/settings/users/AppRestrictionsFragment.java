@@ -40,13 +40,14 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.preference.ListPreference;
-import android.preference.MultiSelectListPreference;
-import android.preference.Preference;
-import android.preference.Preference.OnPreferenceChangeListener;
-import android.preference.Preference.OnPreferenceClickListener;
-import android.preference.PreferenceGroup;
-import android.preference.SwitchPreference;
+import android.support.v14.preference.MultiSelectListPreference;
+import android.support.v14.preference.SwitchPreference;
+import android.support.v7.preference.ListPreference;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.Preference.OnPreferenceChangeListener;
+import android.support.v7.preference.Preference.OnPreferenceClickListener;
+import android.support.v7.preference.PreferenceGroup;
+import android.support.v7.preference.PreferenceViewHolder;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -62,6 +63,7 @@ import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -197,8 +199,8 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         }
 
         @Override
-        protected void onBindView(View view) {
-            super.onBindView(view);
+        public void onBindViewHolder(PreferenceViewHolder view) {
+            super.onBindViewHolder(view);
 
             View appRestrictionsSettings = view.findViewById(R.id.app_restrictions_settings);
             appRestrictionsSettings.setVisibility(hasSettings ? View.VISIBLE : View.GONE);
@@ -643,7 +645,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
             String packageName = app.packageName;
             if (packageName == null) continue;
             final boolean isSettingsApp = packageName.equals(context.getPackageName());
-            AppRestrictionsPreference p = new AppRestrictionsPreference(context, this);
+            AppRestrictionsPreference p = new AppRestrictionsPreference(getPrefContext(), this);
             final boolean hasSettings = resolveInfoListHasPackage(receivers, packageName);
             if (isSettingsApp) {
                 addLocationAppRestrictionsPreference(app, p);
@@ -965,14 +967,14 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
             Preference p = null;
             switch (entry.getType()) {
             case RestrictionEntry.TYPE_BOOLEAN:
-                p = new SwitchPreference(context);
+                p = new SwitchPreference(getPrefContext());
                 p.setTitle(entry.getTitle());
                 p.setSummary(entry.getDescription());
                 ((SwitchPreference)p).setChecked(entry.getSelectedState());
                 break;
             case RestrictionEntry.TYPE_CHOICE:
             case RestrictionEntry.TYPE_CHOICE_LEVEL:
-                p = new ListPreference(context);
+                p = new ListPreference(getPrefContext());
                 p.setTitle(entry.getTitle());
                 String value = entry.getSelectedString();
                 if (value == null) {
@@ -986,7 +988,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                 ((ListPreference)p).setDialogTitle(entry.getTitle());
                 break;
             case RestrictionEntry.TYPE_MULTI_SELECT:
-                p = new MultiSelectListPreference(context);
+                p = new MultiSelectListPreference(getPrefContext());
                 p.setTitle(entry.getTitle());
                 ((MultiSelectListPreference)p).setEntryValues(entry.getChoiceValues());
                 ((MultiSelectListPreference)p).setEntries(entry.getChoiceEntries());

@@ -21,6 +21,7 @@ import android.content.res.Resources;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.android.settings.R;
 
 public class DashboardContainerView extends ViewGroup {

@@ -15,19 +15,18 @@
  */
 package com.android.settings.deviceinfo;
 
+import android.content.Context;
+import android.os.Bundle;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceScreen;
+import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyManager;
+import android.text.TextUtils;
+
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.telephony.Phone;
 import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.telephony.PhoneFactory;
-
-import android.content.Context;
-import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceActivity;
-import android.preference.PreferenceScreen;
-import android.telephony.SubscriptionManager;
-import android.telephony.TelephonyManager;
-import android.text.TextUtils;
 import com.android.settings.InstrumentedPreferenceActivity;
 import com.android.settings.R;
 

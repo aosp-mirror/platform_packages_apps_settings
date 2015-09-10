@@ -40,21 +40,22 @@ import android.os.Message;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.Vibrator;
-import android.preference.Preference;
-import android.preference.Preference.OnPreferenceChangeListener;
-import android.preference.PreferenceCategory;
 import android.preference.SeekBarVolumizer;
-import android.preference.TwoStatePreference;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.Preference.OnPreferenceChangeListener;
+import android.support.v7.preference.PreferenceCategory;
+import android.support.v7.preference.TwoStatePreference;
 import android.util.Log;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.DropDownPreference;
 import com.android.settings.R;
+import com.android.settings.RingtonePreference;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -121,6 +122,7 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
     private int mRingerMode = -1;
 
     private UserManager mUserManager;
+    private RingtonePreference mRequestPreference;
 
     @Override
     protected int getMetricsCategory() {
@@ -201,9 +203,31 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
     @Override
     public void onPause() {
         super.onPause();
+        for (VolumeSeekBarPreference volumePref : mVolumePrefs) {
+            volumePref.onActivityPause();
+        }
         mVolumeCallback.stopSample();
         mSettingsObserver.register(false);
         mReceiver.register(false);
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(Preference preference) {
+        if (preference instanceof RingtonePreference) {
+            mRequestPreference = (RingtonePreference) preference;
+            mRequestPreference.onPrepareRingtonePickerIntent(mRequestPreference.getIntent());
+            startActivityForResult(preference.getIntent(), mRequestPreference.getRequestCode());
+            return true;
+        }
+        return super.onPreferenceTreeClick(preference);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (mRequestPreference != null) {
+            mRequestPreference.onActivityResult(requestCode, resultCode, data);
+            mRequestPreference = null;
+        }
     }
 
     // === Volumes ===

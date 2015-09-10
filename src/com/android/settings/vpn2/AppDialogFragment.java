@@ -22,7 +22,6 @@ import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.net.IConnectivityManager;
 import android.os.Bundle;
 import android.os.RemoteException;

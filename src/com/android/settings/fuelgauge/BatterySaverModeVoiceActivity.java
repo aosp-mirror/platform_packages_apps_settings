@@ -16,14 +16,14 @@
 
 package com.android.settings.fuelgauge;
 
-import static android.provider.Settings.EXTRA_BATTERY_SAVER_MODE_ENABLED;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.PowerManager;
 import android.util.Log;
 
 import com.android.settings.utils.VoiceSettingsActivity;
+
+import static android.provider.Settings.EXTRA_BATTERY_SAVER_MODE_ENABLED;
 
 /**
  * Activity for modifying the {@link android.os.PowerManager} power save mode

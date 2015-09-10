@@ -24,15 +24,16 @@ import android.location.SettingInjectorService;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.preference.Preference;
-import android.preference.PreferenceCategory;
-import android.preference.PreferenceGroup;
-import android.preference.PreferenceScreen;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceCategory;
+import android.support.v7.preference.PreferenceGroup;
+import android.support.v7.preference.PreferenceScreen;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Switch;
+
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -194,13 +195,13 @@ public class LocationSettings extends LocationSettingsBase
 
         mCategoryRecentLocationRequests =
                 (PreferenceCategory) root.findPreference(KEY_RECENT_LOCATION_REQUESTS);
-        RecentLocationApps recentApps = new RecentLocationApps(activity);
+        RecentLocationApps recentApps = new RecentLocationApps(activity, getPrefContext());
         List<Preference> recentLocationRequests = recentApps.getAppList();
         if (recentLocationRequests.size() > 0) {
             addPreferencesSorted(recentLocationRequests, mCategoryRecentLocationRequests);
         } else {
             // If there's no item to display, add a "No recent apps" item.
-            Preference banner = new Preference(activity);
+            Preference banner = new Preference(getPrefContext());
             banner.setLayoutResource(R.layout.location_list_no_item);
             banner.setTitle(R.string.location_no_recent_apps);
             banner.setSelectable(false);

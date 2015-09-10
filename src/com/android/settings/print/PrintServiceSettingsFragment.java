@@ -63,14 +63,13 @@ import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.widget.SwitchBar;
+import com.android.settings.widget.ToggleSwitch;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.android.settings.widget.SwitchBar;
-import com.android.settings.widget.ToggleSwitch;
 
 /**
  * Fragment with print service settings.
@@ -177,6 +176,8 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         super.onViewCreated(view, savedInstanceState);
         initComponents();
         updateUiForArguments();
+        getView().findViewById(R.id.list_container).setVisibility(View.GONE);
+        getBackupListView().setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -242,10 +243,13 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         }
     }
 
+    private ListView getBackupListView() {
+        return (ListView) getView().findViewById(R.id.backup_list);
+    }
+
     private void updateEmptyView() {
-        ListView listView = getListView();
-        ViewGroup contentRoot = (ViewGroup) listView.getParent();
-        View emptyView = listView.getEmptyView();
+        ViewGroup contentRoot = (ViewGroup) getListView().getParent();
+        View emptyView = getEmptyView();
         if (!mToggleSwitch.isChecked()) {
             if (emptyView != null && emptyView.getId() != R.id.empty_print_state) {
                 contentRoot.removeView(emptyView);
@@ -259,7 +263,7 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
                 TextView textView = (TextView) emptyView.findViewById(R.id.message);
                 textView.setText(R.string.print_service_disabled);
                 contentRoot.addView(emptyView);
-                listView.setEmptyView(emptyView);
+                getBackupListView().setEmptyView(emptyView);
             }
         } else if (mPrintersAdapter.getUnfilteredCount() <= 0) {
             if (emptyView != null
@@ -271,7 +275,7 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
                 emptyView = getActivity().getLayoutInflater().inflate(
                         R.layout.empty_printers_list_service_enabled, contentRoot, false);
                 contentRoot.addView(emptyView);
-                listView.setEmptyView(emptyView);
+                getBackupListView().setEmptyView(emptyView);
             }
         } else if (mPrintersAdapter.getCount() <= 0) {
             if (emptyView != null && emptyView.getId() != R.id.empty_print_state) {
@@ -286,7 +290,7 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
                 TextView textView = (TextView) emptyView.findViewById(R.id.message);
                 textView.setText(R.string.print_no_printers_found);
                 contentRoot.addView(emptyView);
-                listView.setEmptyView(emptyView);
+                getBackupListView().setEmptyView(emptyView);
             }
         }
     }
@@ -333,8 +337,8 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
             }
         });
 
-        getListView().setSelector(new ColorDrawable(Color.TRANSPARENT));
-        getListView().setAdapter(mPrintersAdapter);
+        getBackupListView().setSelector(new ColorDrawable(Color.TRANSPARENT));
+        getBackupListView().setAdapter(mPrintersAdapter);
     }
 
 

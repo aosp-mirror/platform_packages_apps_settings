@@ -1,10 +1,9 @@
 package com.android.settings;
 
 import android.content.Context;
-import android.os.Bundle;
+import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.View;
 import android.widget.Checkable;
 
 /**
@@ -23,14 +22,14 @@ public class AppListSwitchPreference extends AppListPreference {
     }
 
     @Override
-    protected void onBindView(View view) {
-        super.onBindView(view);
+    public void onBindViewHolder(PreferenceViewHolder view) {
+        super.onBindViewHolder(view);
         mSwitch = (Checkable) view.findViewById(com.android.internal.R.id.switchWidget);
         mSwitch.setChecked(getValue() != null);
     }
 
     @Override
-    protected void showDialog(Bundle state) {
+    protected void onClick() {
         if (getValue() != null) {
             // Turning off the current value.
             if (callChangeListener(null)) {
@@ -45,7 +44,7 @@ public class AppListSwitchPreference extends AppListPreference {
                 setValue(value);
             }
         } else {
-            super.showDialog(state);
+            super.onClick();
         }
     }
 

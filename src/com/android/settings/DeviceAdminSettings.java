@@ -16,8 +16,6 @@
 
 package com.android.settings;
 
-import org.xmlpull.v1.XmlPullParserException;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ListFragment;
@@ -46,6 +44,8 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.util.ArrayList;

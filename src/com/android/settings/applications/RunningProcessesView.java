@@ -16,11 +16,6 @@
 
 package com.android.settings.applications;
 
-import android.content.res.Resources;
-import android.text.BidiFormatter;
-import com.android.internal.util.MemInfoReader;
-import com.android.settings.R;
-
 import android.app.ActivityManager;
 import android.app.Dialog;
 import android.app.Fragment;
@@ -29,19 +24,23 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.os.UserHandle;
+import android.text.BidiFormatter;
 import android.text.format.DateUtils;
 import android.text.format.Formatter;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView.RecyclerListener;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.AbsListView.RecyclerListener;
+
+import com.android.internal.util.MemInfoReader;
+import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 
 import java.util.ArrayList;

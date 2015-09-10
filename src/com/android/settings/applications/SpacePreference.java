@@ -17,12 +17,12 @@ package com.android.settings.applications;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.preference.Preference;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
-import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.Space;
+
+import com.android.settings.R;
 
 /**
  * A blank preference that has a specified height by android:layout_height.  It can be used
@@ -42,6 +42,7 @@ public class SpacePreference extends Preference {
 
     public SpacePreference(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
+        setLayoutResource(R.layout.space_preference);
 
         final TypedArray a = context.obtainStyledAttributes(attrs,
                 new int[] { com.android.internal.R.attr.layout_height }, defStyleAttr, defStyleRes);
@@ -53,16 +54,11 @@ public class SpacePreference extends Preference {
     }
 
     @Override
-    protected View onCreateView(ViewGroup parent) {
-        return new Space(getContext());
-    }
-
-    @Override
-    protected void onBindView(View view) {
-        super.onBindView(view);
+    public void onBindViewHolder(PreferenceViewHolder view) {
+        super.onBindViewHolder(view);
 
         LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, mHeight);
-        view.setLayoutParams(params);
+        view.itemView.setLayoutParams(params);
     }
 
 }

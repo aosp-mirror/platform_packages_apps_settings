@@ -17,16 +17,16 @@
 package com.android.settings.vpn2;
 
 import android.content.Context;
-import android.preference.Preference;
+import android.support.v7.preference.Preference;
 import android.view.View.OnClickListener;
-
-import static com.android.internal.net.LegacyVpnInfo.STATE_CONNECTED;
 
 import com.android.internal.net.VpnProfile;
 import com.android.settings.R;
 
+import static com.android.internal.net.LegacyVpnInfo.STATE_CONNECTED;
+
 /**
- * {@link android.preference.Preference} referencing a VPN
+ * {@link android.support.v7.preference.Preference} referencing a VPN
  * configuration. Tracks the underlying profile and its connection
  * state.
  */

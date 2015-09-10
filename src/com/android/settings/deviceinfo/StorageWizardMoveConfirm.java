@@ -16,11 +16,6 @@
 
 package com.android.settings.deviceinfo;
 
-import static android.content.Intent.EXTRA_PACKAGE_NAME;
-import static android.content.Intent.EXTRA_TITLE;
-import static android.content.pm.PackageManager.EXTRA_MOVE_ID;
-import static android.os.storage.VolumeInfo.EXTRA_VOLUME_ID;
-
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -28,6 +23,11 @@ import android.os.Bundle;
 
 import com.android.internal.util.Preconditions;
 import com.android.settings.R;
+
+import static android.content.Intent.EXTRA_PACKAGE_NAME;
+import static android.content.Intent.EXTRA_TITLE;
+import static android.content.pm.PackageManager.EXTRA_MOVE_ID;
+import static android.os.storage.VolumeInfo.EXTRA_VOLUME_ID;
 
 public class StorageWizardMoveConfirm extends StorageWizardBase {
     private String mPackageName;

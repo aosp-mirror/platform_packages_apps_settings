@@ -16,8 +16,6 @@
 
 package com.android.settings.wifi;
 
-import com.android.settings.R;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -29,6 +27,8 @@ import android.content.pm.PackageManager;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.provider.Settings;
+
+import com.android.settings.R;
 
 /**
  * This activity requests users permission to allow scanning even when Wi-Fi is turned off

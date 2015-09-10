@@ -34,9 +34,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.preference.Preference;
-import android.preference.PreferenceCategory;
-import android.preference.PreferenceScreen;
 import android.print.PrintJob;
 import android.print.PrintJobId;
 import android.print.PrintJobInfo;
@@ -45,6 +42,9 @@ import android.print.PrintManager.PrintJobStateChangeListener;
 import android.printservice.PrintServiceInfo;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceCategory;
+import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.Log;
@@ -188,7 +188,7 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
         }
 
         contentRoot.addView(emptyView);
-        getListView().setEmptyView(emptyView);
+        setEmptyView(emptyView);
 
         final UserManager um = (UserManager) getSystemService(Context.USER_SERVICE);
         mProfileSpinnerAdapter = Utils.createUserSpinnerAdapter(um, getActivity());
@@ -302,7 +302,7 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
         if (addNewServiceIntent == null) {
             return null;
         }
-        Preference preference = new Preference(getContext());
+        Preference preference = new Preference(getPrefContext());
         preference.setTitle(R.string.print_menu_item_add_service);
         preference.setIcon(R.drawable.ic_menu_add);
         preference.setOrder(ORDER_LAST);
@@ -329,7 +329,7 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
             getArguments().remove(EXTRA_PRINT_SERVICE_COMPONENT_NAME);
             Preference prereference = findPreference(componentName);
             if (prereference != null) {
-                prereference.performClick(getPreferenceScreen());
+                prereference.performClick();
             }
         }
     }

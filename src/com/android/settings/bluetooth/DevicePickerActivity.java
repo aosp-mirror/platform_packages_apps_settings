@@ -16,10 +16,10 @@
 
 package com.android.settings.bluetooth;
 
-import com.android.settings.R;
-
 import android.app.Activity;
 import android.os.Bundle;
+
+import com.android.settings.R;
 
 /**
  * Activity for Bluetooth device picker dialog. The device picker logic

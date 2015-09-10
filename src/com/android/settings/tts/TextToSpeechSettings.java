@@ -16,31 +16,28 @@
 
 package com.android.settings.tts;
 
-import static android.provider.Settings.Secure.TTS_DEFAULT_RATE;
-import static android.provider.Settings.Secure.TTS_DEFAULT_SYNTH;
+import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
+import android.content.ContentResolver;
+import android.content.Intent;
+import android.os.Bundle;
+import android.provider.Settings.SettingNotFoundException;
+import android.speech.tts.TextToSpeech;
+import android.speech.tts.TextToSpeech.EngineInfo;
+import android.speech.tts.TtsEngines;
+import android.speech.tts.UtteranceProgressListener;
+import android.support.v7.preference.ListPreference;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceCategory;
+import android.text.TextUtils;
+import android.util.Log;
+import android.widget.Checkable;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.tts.TtsEnginePreference.RadioButtonGroupState;
-
-import android.app.AlertDialog;
-import android.content.ActivityNotFoundException;
-import android.content.ContentResolver;
-import android.content.Intent;
-import android.os.Bundle;
-import android.preference.ListPreference;
-import android.preference.Preference;
-import android.preference.PreferenceCategory;
-import android.provider.Settings.SettingNotFoundException;
-import android.speech.tts.TextToSpeech;
-import android.speech.tts.UtteranceProgressListener;
-import android.speech.tts.TextToSpeech.EngineInfo;
-import android.speech.tts.TtsEngines;
-import android.text.TextUtils;
-import android.util.Log;
-import android.widget.Checkable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -49,6 +46,9 @@ import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.Objects;
 import java.util.Set;
+
+import static android.provider.Settings.Secure.TTS_DEFAULT_RATE;
+import static android.provider.Settings.Secure.TTS_DEFAULT_SYNTH;
 
 public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener,
@@ -244,7 +244,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
 
         List<EngineInfo> engines = mEnginesHelper.getEngines();
         for (EngineInfo engine : engines) {
-            TtsEnginePreference enginePref = new TtsEnginePreference(getActivity(), engine,
+            TtsEnginePreference enginePref = new TtsEnginePreference(getPrefContext(), engine,
                     this, activity);
             mEnginePreferenceCategory.addPreference(enginePref);
         }

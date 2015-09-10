@@ -17,9 +17,9 @@
 package com.android.settings.fuelgauge;
 
 import android.content.Context;
-import android.preference.Preference;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.TextView;
 
 public class WallOfTextPreference extends Preference {
@@ -42,8 +42,8 @@ public class WallOfTextPreference extends Preference {
     }
 
     @Override
-    protected void onBindView(View view) {
-        super.onBindView(view);
+    public void onBindViewHolder(PreferenceViewHolder view) {
+        super.onBindViewHolder(view);
         final TextView summary = (TextView) view.findViewById(android.R.id.summary);
         summary.setMaxLines(20);
     }

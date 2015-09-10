@@ -21,14 +21,13 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.preference.Preference;
-import android.preference.Preference.OnPreferenceChangeListener;
-import android.preference.PreferenceScreen;
-import android.preference.SwitchPreference;
 import android.provider.Settings;
+import android.support.v14.preference.SwitchPreference;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.Preference.OnPreferenceChangeListener;
+import android.support.v7.preference.PreferenceScreen;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Switch;
 
 import com.android.internal.logging.MetricsLogger;
@@ -68,8 +67,7 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
 
         View emptyView = LayoutInflater.from(activity)
                 .inflate(R.layout.screen_pinning_instructions, null);
-        ((ViewGroup) getListView().getParent()).addView(emptyView);
-        getListView().setEmptyView(emptyView);
+        setEmptyView(emptyView);
 
         mSwitchBar = activity.getSwitchBar();
         mSwitchBar.addOnSwitchChangeListener(this);

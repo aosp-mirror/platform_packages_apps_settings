@@ -21,8 +21,8 @@ import android.app.NotificationManager.Policy;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceScreen;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceScreen;
 import android.util.SparseArray;
 
 import com.android.internal.logging.MetricsLogger;

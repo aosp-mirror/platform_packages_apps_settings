@@ -32,16 +32,16 @@ import android.hardware.input.InputManager;
 import android.hardware.input.KeyboardLayout;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.ListPreference;
-import android.preference.Preference;
-import android.preference.Preference.OnPreferenceClickListener;
-import android.preference.PreferenceCategory;
-import android.preference.PreferenceManager;
-import android.preference.PreferenceScreen;
-import android.preference.SwitchPreference;
 import android.provider.Settings;
 import android.provider.Settings.System;
 import android.speech.tts.TtsEngines;
+import android.support.v14.preference.SwitchPreference;
+import android.support.v7.preference.ListPreference;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.Preference.OnPreferenceClickListener;
+import android.support.v7.preference.PreferenceCategory;
+import android.support.v7.preference.PreferenceManager;
+import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.view.InputDevice;
 import android.view.inputmethod.InputMethodInfo;
@@ -315,7 +315,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
     }
 
     @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+    public boolean onPreferenceTreeClick(Preference preference) {
         // Input Method stuff
         if (Utils.isMonkeyRunning()) {
             return false;
@@ -336,7 +336,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
                 return true;
             }
         }
-        return super.onPreferenceTreeClick(preferenceScreen, preference);
+        return super.onPreferenceTreeClick(preference);
     }
 
     private static String getLocaleName(Context context) {
@@ -390,7 +390,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             }
             mInputMethodPreferenceList.clear();
             List<String> permittedList = mDpm.getPermittedInputMethodsForCurrentUser();
-            final Context context = getActivity();
+            final Context context = getPrefContext();
             final List<InputMethodInfo> imis = mShowsOnlyFullImeAndKeyboardList
                     ? mInputMethodSettingValues.getInputMethodList()
                     : mImm.getEnabledInputMethodList();
@@ -530,7 +530,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
                 final KeyboardLayout keyboardLayout = keyboardLayoutDescriptor != null ?
                     mIm.getKeyboardLayout(keyboardLayoutDescriptor) : null;
 
-                final PreferenceScreen pref = new PreferenceScreen(getActivity(), null);
+                final PreferenceScreen pref = new PreferenceScreen(getPrefContext(), null);
                 pref.setTitle(device.getName());
                 if (keyboardLayout != null) {
                     pref.setSummary(keyboardLayout.toString());

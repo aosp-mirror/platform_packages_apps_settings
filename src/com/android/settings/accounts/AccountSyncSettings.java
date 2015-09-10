@@ -16,9 +16,6 @@
 
 package com.android.settings.accounts;
 
-import com.android.internal.logging.MetricsLogger;
-import com.google.android.collect.Lists;
-
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AccountManagerCallback;
@@ -40,8 +37,7 @@ import android.os.Binder;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.preference.Preference;
-import android.preference.PreferenceScreen;
+import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -54,8 +50,10 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.google.android.collect.Lists;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -232,7 +230,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
 
     private void addSyncStateSwitch(Account account, String authority) {
         SyncStateSwitchPreference item =
-                new SyncStateSwitchPreference(getActivity(), account, authority);
+                new SyncStateSwitchPreference(getPrefContext(), account, authority);
         item.setPersistent(false);
         final ProviderInfo providerInfo = getPackageManager().resolveContentProviderAsUser(
                 authority, 0, mUserHandle.getIdentifier());
@@ -302,7 +300,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
     }
 
     @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen preferences, Preference preference) {
+    public boolean onPreferenceTreeClick(Preference preference) {
         if (preference instanceof SyncStateSwitchPreference) {
             SyncStateSwitchPreference syncPref = (SyncStateSwitchPreference) preference;
             String authority = syncPref.getAuthority();
@@ -328,7 +326,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
             }
             return true;
         } else {
-            return super.onPreferenceTreeClick(preferences, preference);
+            return super.onPreferenceTreeClick(preference);
         }
     }
 

@@ -16,15 +16,15 @@
 
 package com.android.settings.wifi.p2p;
 
-import com.android.settings.R;
-
 import android.content.Context;
 import android.net.wifi.WifiManager;
 import android.net.wifi.p2p.WifiP2pDevice;
-import android.preference.Preference;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceViewHolder;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.ImageView;
+
+import com.android.settings.R;
 
 public class WifiP2pPeer extends Preference {
 
@@ -44,7 +44,7 @@ public class WifiP2pPeer extends Preference {
     }
 
     @Override
-    protected void onBindView(View view) {
+    public void onBindViewHolder(PreferenceViewHolder view) {
         if (TextUtils.isEmpty(device.deviceName)) {
             setTitle(device.deviceAddress);
         } else {
@@ -58,7 +58,7 @@ public class WifiP2pPeer extends Preference {
             mSignal.setImageState(STATE_SECURED,  true);
         }
         refresh();
-        super.onBindView(view);
+        super.onBindViewHolder(view);
     }
 
     @Override

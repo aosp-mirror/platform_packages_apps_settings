@@ -15,7 +15,6 @@
  */
 package com.android.settings.applications;
 
-import android.Manifest;
 import android.app.AppGlobals;
 import android.app.AppOpsManager;
 import android.app.AppOpsManager.PackageOps;
@@ -32,7 +31,6 @@ import android.util.SparseArray;
 
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
-import com.android.settingslib.applications.ApplicationsState.AppFilter;
 
 import java.util.Arrays;
 import java.util.Collection;

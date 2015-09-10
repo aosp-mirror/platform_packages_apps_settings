@@ -21,6 +21,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
+
 import com.android.settings.R;
 
 public class NoHomeDialogFragment extends DialogFragment {

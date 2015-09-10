@@ -16,10 +16,6 @@
 
 package com.android.settings.sim;
 
-import com.android.internal.telephony.IccCardConstants;
-import com.android.settings.R;
-import com.android.settings.Settings.SimSettingsActivity;
-
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -32,6 +28,10 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+
+import com.android.internal.telephony.IccCardConstants;
+import com.android.settings.R;
+import com.android.settings.Settings.SimSettingsActivity;
 
 import java.util.List;
 

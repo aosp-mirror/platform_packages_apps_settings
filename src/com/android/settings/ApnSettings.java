@@ -34,15 +34,15 @@ import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
 import android.os.PersistableBundle;
-import android.os.UserHandle;
 import android.os.UserManager;
-import android.preference.Preference;
-import android.preference.PreferenceGroup;
-import android.preference.PreferenceScreen;
 import android.provider.Telephony;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceGroup;
+import android.support.v7.preference.PreferenceScreen;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
@@ -57,8 +57,6 @@ import com.android.internal.telephony.TelephonyIntents;
 import com.android.internal.telephony.dataconnection.ApnSetting;
 import com.android.internal.telephony.uicc.IccRecords;
 import com.android.internal.telephony.uicc.UiccController;
-
-import android.telephony.TelephonyManager;
 
 import java.util.ArrayList;
 
@@ -180,19 +178,17 @@ public class ApnSettings extends SettingsPreferenceFragment implements
         TextView empty = (TextView) getView().findViewById(android.R.id.empty);
         if (empty != null) {
             empty.setText(R.string.apn_settings_not_available);
-            getListView().setEmptyView(empty);
+            setEmptyView(empty);
         }
 
         if (mUm.hasUserRestriction(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS)
                 || !mUm.isAdminUser()) {
             mUnavailable = true;
-            setPreferenceScreen(new PreferenceScreen(getActivity(), null));
+            setPreferenceScreen(new PreferenceScreen(getPrefContext(), null));
             return;
         }
 
         addPreferencesFromResource(R.xml.apn_settings);
-
-        getListView().setItemsCanFocus(true);
     }
 
     @Override
@@ -270,7 +266,7 @@ public class ApnSettings extends SettingsPreferenceFragment implements
                 String mvnoType = cursor.getString(MVNO_TYPE_INDEX);
                 String mvnoMatchData = cursor.getString(MVNO_MATCH_DATA_INDEX);
 
-                ApnPreference pref = new ApnPreference(getActivity());
+                ApnPreference pref = new ApnPreference(getPrefContext());
 
                 pref.setKey(key);
                 pref.setTitle(name);
@@ -365,7 +361,7 @@ public class ApnSettings extends SettingsPreferenceFragment implements
     }
 
     @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+    public boolean onPreferenceTreeClick(Preference preference) {
         int pos = Integer.parseInt(preference.getKey());
         Uri url = ContentUris.withAppendedId(Telephony.Carriers.CONTENT_URI, pos);
         startActivity(new Intent(Intent.ACTION_EDIT, url));

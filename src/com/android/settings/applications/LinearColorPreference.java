@@ -17,8 +17,9 @@
 package com.android.settings.applications;
 
 import android.content.Context;
-import android.preference.Preference;
-import android.view.View;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceViewHolder;
+
 import com.android.settings.R;
 
 public class LinearColorPreference extends Preference {
@@ -61,8 +62,8 @@ public class LinearColorPreference extends Preference {
     }
 
     @Override
-    protected void onBindView(View view) {
-        super.onBindView(view);
+    public void onBindViewHolder(PreferenceViewHolder view) {
+        super.onBindViewHolder(view);
 
         LinearColorBar colors = (LinearColorBar)view.findViewById(
                 R.id.linear_color_bar);

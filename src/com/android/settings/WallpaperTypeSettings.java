@@ -22,8 +22,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceScreen;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceScreen;
+
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
@@ -63,7 +64,7 @@ public class WallpaperTypeSettings extends SettingsPreferenceFragment implements
         parent.setOrderingAsAdded(false);
         // Add Preference items for each of the matching activities
         for (ResolveInfo info : rList) {
-            Preference pref = new Preference(getActivity());
+            Preference pref = new Preference(getPrefContext());
             Intent prefIntent = new Intent(intent);
             prefIntent.setComponent(new ComponentName(
                     info.activityInfo.packageName, info.activityInfo.name));

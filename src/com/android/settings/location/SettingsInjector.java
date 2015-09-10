@@ -34,7 +34,7 @@ import android.os.Messenger;
 import android.os.SystemClock;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.preference.Preference;
+import android.support.v7.preference.Preference;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Xml;

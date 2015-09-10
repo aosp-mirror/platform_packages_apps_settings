@@ -21,9 +21,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.ApplicationInfo;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.Preference.OnPreferenceClickListener;
-import android.preference.PreferenceScreen;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.Preference.OnPreferenceClickListener;
+import android.support.v7.preference.PreferenceScreen;
 import android.util.Log;
 import android.view.textservice.SpellCheckerInfo;
 import android.view.textservice.SpellCheckerSubtype;
@@ -79,7 +79,8 @@ public class SpellCheckersSettings extends SettingsPreferenceFragment
         final int count = (mEnabledScis == null) ? 0 : mEnabledScis.length;
         for (int index = 0; index < count; ++index) {
             final SpellCheckerInfo sci = mEnabledScis[index];
-            final SpellCheckerPreference pref = new SpellCheckerPreference(context, sci, this);
+            final SpellCheckerPreference pref = new SpellCheckerPreference(getPrefContext(), sci,
+                    this);
             screen.addPreference(pref);
             InputMethodAndSubtypeUtil.removeUnnecessaryNonPersistentPreference(pref);
         }

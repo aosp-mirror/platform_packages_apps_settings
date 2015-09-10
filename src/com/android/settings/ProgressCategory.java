@@ -17,7 +17,8 @@
 package com.android.settings;
 
 import android.content.Context;
-import android.preference.Preference;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -54,8 +55,8 @@ public class ProgressCategory extends ProgressCategoryBase {
     }
 
     @Override
-    public void onBindView(View view) {
-        super.onBindView(view);
+    public void onBindViewHolder(PreferenceViewHolder view) {
+        super.onBindViewHolder(view);
         final View progressBar = view.findViewById(R.id.scanning_progress);
 
         boolean noDeviceFound = (getPreferenceCount() == 0 ||
@@ -70,7 +71,7 @@ public class ProgressCategory extends ProgressCategoryBase {
         } else {
             if (!mNoDeviceFoundAdded) {
                 if (mNoDeviceFoundPreference == null) {
-                    mNoDeviceFoundPreference = new Preference(getContext());
+                    mNoDeviceFoundPreference = new Preference(getPreferenceManager().getContext());
                     mNoDeviceFoundPreference.setLayoutResource(R.layout.preference_empty_list);
                     mNoDeviceFoundPreference.setTitle(mEmptyTextRes);
                     mNoDeviceFoundPreference.setSelectable(false);

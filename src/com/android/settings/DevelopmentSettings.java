@@ -52,16 +52,15 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.StrictMode;
 import android.os.SystemProperties;
-import android.os.UserHandle;
 import android.os.UserManager;
-import android.preference.ListPreference;
-import android.preference.Preference;
-import android.preference.Preference.OnPreferenceChangeListener;
-import android.preference.PreferenceGroup;
-import android.preference.PreferenceScreen;
-import android.preference.SwitchPreference;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
+import android.support.v14.preference.SwitchPreference;
+import android.support.v7.preference.ListPreference;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.Preference.OnPreferenceChangeListener;
+import android.support.v7.preference.PreferenceGroup;
+import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.HardwareRenderer;
@@ -294,7 +293,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         if (!mUm.isAdminUser()
                 || mUm.hasUserRestriction(UserManager.DISALLOW_DEBUGGING_FEATURES)) {
             mUnavailable = true;
-            setPreferenceScreen(new PreferenceScreen(getActivity(), null));
+            setPreferenceScreen(new PreferenceScreen(getPrefContext(), null));
             return;
         }
 
@@ -500,7 +499,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         if (mUnavailable) {
             // Show error message
             TextView emptyView = (TextView) getView().findViewById(android.R.id.empty);
-            getListView().setEmptyView(emptyView);
+            setEmptyView(emptyView);
             if (emptyView != null) {
                 emptyView.setText(R.string.development_settings_not_available);
             }
@@ -645,7 +644,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             SwitchPreference cb = mResetSwitchPrefs.get(i);
             if (cb.isChecked()) {
                 cb.setChecked(false);
-                onPreferenceTreeClick(null, cb);
+                onPreferenceTreeClick(cb);
             }
         }
         resetDebuggerOptions();
@@ -1570,7 +1569,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     }
 
     @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+    public boolean onPreferenceTreeClick(Preference preference) {
         if (Utils.isMonkeyRunning()) {
             return false;
         }
@@ -1690,7 +1689,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         } else if (INACTIVE_APPS_KEY.equals(preference.getKey())) {
             startInactiveAppsFragment();
         } else {
-            return super.onPreferenceTreeClick(preferenceScreen, preference);
+            return super.onPreferenceTreeClick(preference);
         }
 
         return false;

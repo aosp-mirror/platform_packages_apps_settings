@@ -18,13 +18,14 @@ package com.android.settings.nfc;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.preference.PreferenceScreen;
+import android.support.v7.preference.PreferenceManager;
+import android.support.v7.preference.PreferenceScreen;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -56,7 +57,7 @@ public class PaymentSettings extends SettingsPreferenceFragment {
         View emptyView = getActivity().getLayoutInflater().inflate(
                 R.layout.nfc_payment_empty, contentRoot, false);
         contentRoot.addView(emptyView);
-        getListView().setEmptyView(emptyView);
+        setEmptyView(emptyView);
 
         PreferenceManager manager = getPreferenceManager();
         PreferenceScreen screen = manager.createPreferenceScreen(getActivity());
@@ -64,9 +65,10 @@ public class PaymentSettings extends SettingsPreferenceFragment {
         List<PaymentAppInfo> appInfos = mPaymentBackend.getPaymentAppInfos();
         if (appInfos != null && appInfos.size() > 0) {
             NfcPaymentPreference preference =
-                    new NfcPaymentPreference(getActivity(), mPaymentBackend);
+                    new NfcPaymentPreference(getPrefContext(), mPaymentBackend);
+            preference.setKey("payment");
             screen.addPreference(preference);
-            NfcForegroundPreference foreground = new NfcForegroundPreference(getActivity(),
+            NfcForegroundPreference foreground = new NfcForegroundPreference(getPrefContext(),
                     mPaymentBackend);
             screen.addPreference(foreground);
         }

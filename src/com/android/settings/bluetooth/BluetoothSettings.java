@@ -16,8 +16,6 @@
 
 package com.android.settings.bluetooth;
 
-import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
-
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
@@ -27,11 +25,11 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceCategory;
-import android.preference.PreferenceGroup;
-import android.preference.PreferenceScreen;
 import android.provider.Settings;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceCategory;
+import android.support.v7.preference.PreferenceGroup;
+import android.support.v7.preference.PreferenceScreen;
 import android.text.Spannable;
 import android.text.style.TextAppearanceSpan;
 import android.util.Log;
@@ -58,6 +56,8 @@ import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
+import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 
 /**
  * BluetoothSettings is the Settings screen for Bluetooth configuration and
@@ -135,7 +135,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
         mInitiateDiscoverable = true;
 
         mEmptyView = (TextView) getView().findViewById(android.R.id.empty);
-        getListView().setEmptyView(mEmptyView);
+        setEmptyView(mEmptyView);
         mEmptyView.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
 
         final SettingsActivity activity = (SettingsActivity) getActivity();
@@ -302,7 +302,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
 
                 // Paired devices category
                 if (mPairedDevicesCategory == null) {
-                    mPairedDevicesCategory = new PreferenceCategory(getActivity());
+                    mPairedDevicesCategory = new PreferenceCategory(getPrefContext());
                 } else {
                     mPairedDevicesCategory.removeAll();
                 }
@@ -332,7 +332,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
                 }
 
                 if (mMyDevicePreference == null) {
-                    mMyDevicePreference = new Preference(getActivity());
+                    mMyDevicePreference = new Preference(getPrefContext());
                 }
 
                 mMyDevicePreference.setSummary(getResources().getString(

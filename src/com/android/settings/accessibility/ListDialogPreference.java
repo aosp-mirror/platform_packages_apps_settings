@@ -16,26 +16,27 @@
 
 package com.android.settings.accessibility;
 
-import android.app.AlertDialog.Builder;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.TypedArray;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.preference.DialogPreference;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
+
+import com.android.settings.CustomDialogPreference;
 
 /**
  * Abstract dialog preference that displays a set of values and optional titles.
  */
-public abstract class ListDialogPreference extends DialogPreference {
+public abstract class ListDialogPreference extends CustomDialogPreference {
     private CharSequence[] mEntryTitles;
     private int[] mEntryValues;
 
@@ -137,8 +138,9 @@ public abstract class ListDialogPreference extends DialogPreference {
     }
 
     @Override
-    protected void onPrepareDialogBuilder(Builder builder) {
-        super.onPrepareDialogBuilder(builder);
+    protected void onPrepareDialogBuilder(AlertDialog.Builder builder,
+            DialogInterface.OnClickListener listener) {
+        super.onPrepareDialogBuilder(builder, listener);
 
         final Context context = getContext();
         final int dialogLayout = getDialogLayoutResource();
@@ -146,7 +148,7 @@ public abstract class ListDialogPreference extends DialogPreference {
         final ListPreferenceAdapter adapter = new ListPreferenceAdapter();
         final AbsListView list = (AbsListView) picker.findViewById(android.R.id.list);
         list.setAdapter(adapter);
-        list.setOnItemClickListener(new OnItemClickListener() {
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter, View v, int position, long id) {
                 if (callChangeListener((int) id)) {

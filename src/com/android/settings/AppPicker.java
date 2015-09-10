@@ -16,20 +16,12 @@
 
 package com.android.settings;
 
-import java.text.Collator;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import com.android.settings.applications.AppViewHolder;
-
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Process;
@@ -38,6 +30,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.android.settings.applications.AppViewHolder;
+
+import java.text.Collator;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class AppPicker extends ListActivity {
     private AppListAdapter mAdapter;

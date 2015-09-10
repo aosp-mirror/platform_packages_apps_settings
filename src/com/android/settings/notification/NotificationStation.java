@@ -35,15 +35,13 @@ import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceViewHolder;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.DateTimeView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.internal.logging.MetricsLogger;
@@ -52,6 +50,7 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -99,7 +98,6 @@ public class NotificationStation extends SettingsPreferenceFragment {
         }
     };
 
-    private NotificationHistoryAdapter mAdapter;
     private Context mContext;
 
     private final Comparator<HistoricalNotificationInfo> mNotificationSorter
@@ -147,11 +145,8 @@ public class NotificationStation extends SettingsPreferenceFragment {
         logd("onActivityCreated(%s)", savedInstanceState);
         super.onActivityCreated(savedInstanceState);
 
-        ListView listView = getListView();
+        RecyclerView listView = getListView();
         Utils.forceCustomPadding(listView, false /* non additive padding */);
-
-        mAdapter = new NotificationHistoryAdapter(mContext);
-        listView.setAdapter(mAdapter);
     }
 
     @Override
@@ -164,10 +159,17 @@ public class NotificationStation extends SettingsPreferenceFragment {
     private void refreshList() {
         List<HistoricalNotificationInfo> infos = loadNotifications();
         if (infos != null) {
-            logd("adding %d infos", infos.size());
-            mAdapter.clear();
-            mAdapter.addAll(infos);
-            mAdapter.sort(mNotificationSorter);
+            final int N = infos.size();
+            logd("adding %d infos", N);
+            Collections.sort(infos, mNotificationSorter);
+            if (getPreferenceScreen() == null) {
+                setPreferenceScreen(getPreferenceManager().createPreferenceScreen(getContext()));
+            }
+            getPreferenceScreen().removeAll();
+            for (int i = 0; i < N; i++) {
+                getPreferenceScreen().addPreference(
+                        new HistoricalNotificationPreference(getPrefContext(), infos.get(i)));
+            }
         }
     }
 
@@ -291,58 +293,38 @@ public class NotificationStation extends SettingsPreferenceFragment {
         return null;
     }
 
-    private class NotificationHistoryAdapter extends ArrayAdapter<HistoricalNotificationInfo> {
-        private final LayoutInflater mInflater;
+    private static class HistoricalNotificationPreference extends Preference {
+        private final HistoricalNotificationInfo mInfo;
 
-        public NotificationHistoryAdapter(Context context) {
-            super(context, 0);
-            mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        public HistoricalNotificationPreference(Context context, HistoricalNotificationInfo info) {
+            super(context);
+            setLayoutResource(R.layout.notification_log_row);
+            mInfo = info;
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            final HistoricalNotificationInfo info = getItem(position);
-            logd("getView(%s/%s)", info.pkg, info.title);
-
-            final View row = convertView != null ? convertView : createRow(parent);
-            row.setTag(info);
-
-            // bind icon
-            if (info.icon != null) {
-                ((ImageView) row.findViewById(android.R.id.icon)).setImageDrawable(info.icon);
+        public void onBindViewHolder(PreferenceViewHolder row) {
+            if (mInfo.icon != null) {
+                ((ImageView) row.findViewById(android.R.id.icon)).setImageDrawable(mInfo.icon);
             }
-            if (info.pkgicon != null) {
-                ((ImageView) row.findViewById(R.id.pkgicon)).setImageDrawable(info.pkgicon);
+            if (mInfo.pkgicon != null) {
+                ((ImageView) row.findViewById(R.id.pkgicon)).setImageDrawable(mInfo.pkgicon);
             }
 
-            ((DateTimeView) row.findViewById(R.id.timestamp)).setTime(info.timestamp);
-            ((TextView) row.findViewById(android.R.id.title)).setText(info.title);
-            ((TextView) row.findViewById(R.id.pkgname)).setText(info.pkgname);
+            ((DateTimeView) row.findViewById(R.id.timestamp)).setTime(mInfo.timestamp);
+            ((TextView) row.findViewById(android.R.id.title)).setText(mInfo.title);
+            ((TextView) row.findViewById(R.id.pkgname)).setText(mInfo.pkgname);
 
             row.findViewById(R.id.extra).setVisibility(View.GONE);
-            row.setAlpha(info.active ? 1.0f : 0.5f);
-
-            // set up click handler
-            row.setOnClickListener(new OnClickListener(){
-                @Override
-                public void onClick(View v) {
-                    v.setPressed(true);
-                    startApplicationDetailsActivity(info.pkg);
-                }});
-
-            return row;
+            row.itemView.setAlpha(mInfo.active ? 1.0f : 0.5f);
         }
 
-        private View createRow(ViewGroup parent) {
-            return mInflater.inflate(R.layout.notification_log_row, parent, false);
+        @Override
+        public void performClick() {
+            Intent intent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                    Uri.fromParts("package", mInfo.pkg, null));
+            intent.setComponent(intent.resolveActivity(getContext().getPackageManager()));
+            getContext().startActivity(intent);
         }
-
-    }
-
-    private void startApplicationDetailsActivity(String packageName) {
-        Intent intent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                Uri.fromParts("package", packageName, null));
-        intent.setComponent(intent.resolveActivity(mPm));
-        startActivity(intent);
     }
 }

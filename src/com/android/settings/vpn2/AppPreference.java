@@ -16,14 +16,12 @@
 
 package com.android.settings.vpn2;
 
-import android.app.AppGlobals;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
-import android.os.RemoteException;
 import android.os.UserHandle;
-import android.preference.Preference;
+import android.support.v7.preference.Preference;
 import android.view.View.OnClickListener;
 
 import com.android.internal.net.LegacyVpnInfo;
@@ -31,7 +29,7 @@ import com.android.internal.net.VpnConfig;
 import com.android.settings.R;
 
 /**
- * {@link android.preference.Preference} containing information about a VPN
+ * {@link android.support.v7.preference.Preference} containing information about a VPN
  * application. Tracks the package name and connection state.
  */
 public class AppPreference extends ManageablePreference {

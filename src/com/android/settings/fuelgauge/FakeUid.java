@@ -18,7 +18,6 @@ package com.android.settings.fuelgauge;
 
 import android.os.BatteryStats.Timer;
 import android.os.BatteryStats.Uid;
-import android.os.Process;
 import android.util.ArrayMap;
 import android.util.SparseArray;
 

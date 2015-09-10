@@ -25,8 +25,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceViewHolder;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -35,10 +36,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -46,6 +44,7 @@ import android.widget.TextView;
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.dream.DreamBackend;
+import com.android.settingslib.dream.DreamBackend.DreamInfo;
 
 import java.util.List;
 
@@ -60,7 +59,6 @@ public class DreamSettings extends SettingsPreferenceFragment implements
 
     private Context mContext;
     private DreamBackend mBackend;
-    private DreamInfoAdapter mAdapter;
     private SwitchBar mSwitchBar;
     private MenuItem[] mMenuItemsWhenEnabled;
     private boolean mRefreshing;
@@ -120,15 +118,9 @@ public class DreamSettings extends SettingsPreferenceFragment implements
         logd("onActivityCreated(%s)", savedInstanceState);
         super.onActivityCreated(savedInstanceState);
 
-        ListView listView = getListView();
-        listView.setItemsCanFocus(true);
-
         TextView emptyView = (TextView) getView().findViewById(android.R.id.empty);
         emptyView.setText(R.string.screensaver_settings_disabled_prompt);
-        listView.setEmptyView(emptyView);
-
-        mAdapter = new DreamInfoAdapter(mContext);
-        listView.setAdapter(mAdapter);
+        setEmptyView(emptyView);
 
         final SettingsActivity sa = (SettingsActivity) getActivity();
         mSwitchBar = sa.getSwitchBar();
@@ -269,10 +261,17 @@ public class DreamSettings extends SettingsPreferenceFragment implements
         if (mSwitchBar.isChecked() != dreamsEnabled)
             mSwitchBar.setChecked(dreamsEnabled);
 
-        mAdapter.clear();
+        if (getPreferenceScreen() == null) {
+            setPreferenceScreen(getPreferenceManager().createPreferenceScreen(getContext()));
+        }
+        getPreferenceScreen().removeAll();
         if (dreamsEnabled) {
             List<DreamBackend.DreamInfo> dreamInfos = mBackend.getDreamInfos();
-            mAdapter.addAll(dreamInfos);
+            final int N = dreamInfos.size();
+            for (int i = 0; i < N; i++) {
+                getPreferenceScreen().addPreference(
+                        new DreamInfoPreference(getPrefContext(), dreamInfos.get(i)));
+            }
         }
         if (mMenuItemsWhenEnabled != null)
             for (MenuItem menuItem : mMenuItemsWhenEnabled)
@@ -285,85 +284,63 @@ public class DreamSettings extends SettingsPreferenceFragment implements
             Log.d(TAG, args == null || args.length == 0 ? msg : String.format(msg, args));
     }
 
-    private class DreamInfoAdapter extends ArrayAdapter<DreamBackend.DreamInfo> {
-        private final LayoutInflater mInflater;
+    private class DreamInfoPreference extends Preference {
 
-        public DreamInfoAdapter(Context context) {
-            super(context, 0);
-            mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        private final DreamInfo mInfo;
+
+        public DreamInfoPreference(Context context, DreamInfo info) {
+            super(context);
+            mInfo = info;
+            setLayoutResource(R.layout.dream_info_row);
+            setTitle(mInfo.caption);
+            setIcon(mInfo.icon);
         }
 
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            DreamBackend.DreamInfo dreamInfo = getItem(position);
-            logd("getView(%s)", dreamInfo.caption);
-            final View row = convertView != null ? convertView : createDreamInfoRow(parent);
-            row.setTag(dreamInfo);
-
-            // bind icon
-            ((ImageView) row.findViewById(android.R.id.icon)).setImageDrawable(dreamInfo.icon);
-
-            // bind caption
-            ((TextView) row.findViewById(android.R.id.title)).setText(dreamInfo.caption);
+        public void onBindViewHolder(final PreferenceViewHolder holder) {
+            super.onBindViewHolder(holder);
 
             // bind radio button
-            RadioButton radioButton = (RadioButton) row.findViewById(android.R.id.button1);
-            radioButton.setChecked(dreamInfo.isActive);
+            RadioButton radioButton = (RadioButton) holder.findViewById(android.R.id.button1);
+            radioButton.setChecked(mInfo.isActive);
             radioButton.setOnTouchListener(new OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
-                    row.onTouchEvent(event);
+                    holder.itemView.onTouchEvent(event);
                     return false;
-                }});
+                }
+            });
 
             // bind settings button + divider
-            boolean showSettings = dreamInfo.settingsComponentName != null;
-            View settingsDivider = row.findViewById(R.id.divider);
+            boolean showSettings = mInfo.settingsComponentName != null;
+            View settingsDivider = holder.findViewById(R.id.divider);
             settingsDivider.setVisibility(showSettings ? View.VISIBLE : View.INVISIBLE);
 
-            ImageView settingsButton = (ImageView) row.findViewById(android.R.id.button2);
+            ImageView settingsButton = (ImageView) holder.findViewById(android.R.id.button2);
             settingsButton.setVisibility(showSettings ? View.VISIBLE : View.INVISIBLE);
-            settingsButton.setAlpha(dreamInfo.isActive ? 1f : Utils.DISABLED_ALPHA);
-            settingsButton.setEnabled(dreamInfo.isActive);
-            settingsButton.setFocusable(dreamInfo.isActive);
+            settingsButton.setAlpha(mInfo.isActive ? 1f : Utils.DISABLED_ALPHA);
+            settingsButton.setEnabled(mInfo.isActive);
+            settingsButton.setFocusable(mInfo.isActive);
             settingsButton.setOnClickListener(new OnClickListener(){
                 @Override
                 public void onClick(View v) {
-                    mBackend.launchSettings((DreamBackend.DreamInfo) row.getTag());
-                }});
-
-            return row;
+                    mBackend.launchSettings(mInfo);
+                }
+            });
         }
 
-        private View createDreamInfoRow(ViewGroup parent) {
-            final View row =  mInflater.inflate(R.layout.dream_info_row, parent, false);
-            final View header = row.findViewById(android.R.id.widget_frame);
-            header.setOnClickListener(new OnClickListener(){
-                @Override
-                public void onClick(View v) {
-                    v.setPressed(true);
-                    activate((DreamBackend.DreamInfo) row.getTag());
-                }});
-            return row;
-        }
-
-        private DreamBackend.DreamInfo getCurrentSelection() {
-            for (int i = 0; i < getCount(); i++) {
-                DreamBackend.DreamInfo dreamInfo = getItem(i);
-                if (dreamInfo.isActive)
-                    return dreamInfo;
-            }
-            return null;
-        }
-        private void activate(DreamBackend.DreamInfo dreamInfo) {
-            if (dreamInfo.equals(getCurrentSelection()))
+        @Override
+        public void performClick() {
+            if (mInfo.isActive)
                 return;
-            for (int i = 0; i < getCount(); i++) {
-                getItem(i).isActive = false;
+            for (int i = 0; i < getPreferenceScreen().getPreferenceCount(); i++) {
+                DreamInfoPreference preference =
+                        (DreamInfoPreference) getPreferenceScreen().getPreference(i);
+                preference.mInfo.isActive = false;
+                preference.notifyChanged();
             }
-            dreamInfo.isActive = true;
-            mBackend.setActiveDream(dreamInfo.componentName);
-            notifyDataSetChanged();
+            mInfo.isActive = true;
+            mBackend.setActiveDream(mInfo.componentName);
+            notifyChanged();
         }
     }
 

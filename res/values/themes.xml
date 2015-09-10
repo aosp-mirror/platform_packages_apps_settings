@@ -89,6 +89,7 @@
     <style name="Theme.SettingsBase" parent="@android:style/Theme.Material.Settings" />
 
     <style name="Theme.Settings" parent="Theme.SettingsBase">
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
         <item name="@*android:preferenceStyle">@style/Preference</item>
         <item name="@*android:preferenceHeaderPanelStyle">@style/PreferenceHeaderPanelSinglePane</item>
         <item name="@*android:preferencePanelStyle">@style/PreferencePanelSinglePane</item>
@@ -171,6 +172,7 @@
     </style>
 
     <style name="Theme.SubSettingsDialogWhenLarge" parent="Theme.DialogWhenLarge">
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
         <item name="android:actionBarWidgetTheme">@null</item>
         <item name="android:actionBarTheme">@android:style/ThemeOverlay.Material.Dark.ActionBar</item>
 
@@ -188,7 +190,7 @@
         <item name="android:actionBarStyle">@style/Theme.ActionBar</item>
     </style>
 
-    <style name="Theme.NotificationStation" parent="@android:style/Theme.Material">
+    <style name="Theme.NotificationStation" parent="@style/Theme.Settings">
         <!-- Redefine the ActionBar style for contentInsetStart -->
         <item name="android:actionBarStyle">@style/Theme.ActionBar.SubSettings</item>
         <item name="@*android:actionBarSize">@dimen/actionbar_size</item>

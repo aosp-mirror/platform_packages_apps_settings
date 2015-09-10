@@ -17,11 +17,10 @@
 package com.android.settings.accessibility;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceScreen;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceScreen;
+import android.support.v7.preference.PreferenceViewHolder;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -54,10 +53,12 @@ public abstract class ToggleFeaturePreferenceFragment
         PreferenceScreen preferenceScreen = getPreferenceManager().createPreferenceScreen(
                 getActivity());
         setPreferenceScreen(preferenceScreen);
-        mSummaryPreference = new Preference(getActivity()) {
+        mSummaryPreference = new Preference(getPrefContext()) {
             @Override
-            protected void onBindView(View view) {
-                super.onBindView(view);
+            public void onBindViewHolder(PreferenceViewHolder view) {
+                super.onBindViewHolder(view);
+                view.setDividerAllowedAbove(false);
+                view.setDividerAllowedBelow(false);
                 final TextView summaryView = (TextView) view.findViewById(android.R.id.summary);
                 summaryView.setText(getSummary());
                 sendAccessibilityEvent(summaryView);
@@ -167,10 +168,6 @@ public abstract class ToggleFeaturePreferenceFragment
             final CharSequence summary = arguments.getCharSequence(
                     AccessibilitySettings.EXTRA_SUMMARY);
             mSummaryPreference.setSummary(summary);
-
-            // Set a transparent drawable to prevent use of the default one.
-            getListView().setSelector(new ColorDrawable(Color.TRANSPARENT));
-            getListView().setDivider(null);
         } else {
             getPreferenceScreen().removePreference(mSummaryPreference);
         }

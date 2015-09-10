@@ -19,11 +19,11 @@ package com.android.settings.accounts;
 import android.accounts.Account;
 import android.app.ActivityManager;
 import android.content.Context;
-import android.preference.SwitchPreference;
+import android.support.v14.preference.SwitchPreference;
+import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.settings.R;
@@ -56,8 +56,8 @@ public class SyncStateSwitchPreference extends SwitchPreference {
     }
 
     @Override
-    public void onBindView(View view) {
-        super.onBindView(view);
+    public void onBindViewHolder(PreferenceViewHolder view) {
+        super.onBindViewHolder(view);
         final AnimatedImageView syncActiveView = (AnimatedImageView) view.findViewById(
                 R.id.sync_active);
         final View syncFailedView = view.findViewById(R.id.sync_failed);

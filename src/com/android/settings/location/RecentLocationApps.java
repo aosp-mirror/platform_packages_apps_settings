@@ -20,8 +20,8 @@ import android.app.AppGlobals;
 import android.app.AppOpsManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 import android.content.pm.IPackageManager;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -29,7 +29,7 @@ import android.os.Process;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.preference.Preference;
+import android.support.v7.preference.Preference;
 import android.util.Log;
 
 import com.android.settings.DimmableIconPreference;
@@ -51,9 +51,11 @@ public class RecentLocationApps {
 
     private final SettingsActivity mActivity;
     private final PackageManager mPackageManager;
+    private final Context mContext;
 
-    public RecentLocationApps(SettingsActivity activity) {
+    public RecentLocationApps(SettingsActivity activity, Context context) {
         mActivity = activity;
+        mContext = context;
         mPackageManager = activity.getPackageManager();
     }
 
@@ -84,7 +86,7 @@ public class RecentLocationApps {
             boolean isHighBattery,
             CharSequence contentDescription,
             Preference.OnPreferenceClickListener listener) {
-        DimmableIconPreference pref = new DimmableIconPreference(mActivity, contentDescription);
+        DimmableIconPreference pref = new DimmableIconPreference(mContext, contentDescription);
         pref.setIcon(icon);
         pref.setTitle(label);
         if (isHighBattery) {

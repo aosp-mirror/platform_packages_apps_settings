@@ -20,12 +20,12 @@ import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.preference.Preference;
 import android.provider.Telephony;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
@@ -53,8 +53,8 @@ public class ApnPreference extends Preference implements
     private boolean mSelectable = true;
 
     @Override
-    public View getView(View convertView, ViewGroup parent) {
-        View view = super.getView(convertView, parent);
+    public void onBindViewHolder(PreferenceViewHolder view) {
+        super.onBindViewHolder(view);
 
         View widget = view.findViewById(R.id.apn_radiobutton);
         if ((widget != null) && widget instanceof RadioButton) {
@@ -81,8 +81,6 @@ public class ApnPreference extends Preference implements
         if ((textLayout != null) && textLayout instanceof RelativeLayout) {
             textLayout.setOnClickListener(this);
         }
-
-        return view;
     }
 
     public boolean isChecked() {

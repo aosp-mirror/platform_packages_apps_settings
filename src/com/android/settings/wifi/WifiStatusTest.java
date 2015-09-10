@@ -16,20 +16,13 @@
 
 package com.android.settings.wifi;
 
-import com.android.settings.R;
-import com.android.settingslib.wifi.AccessPoint;
-
-import android.net.wifi.ScanResult;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.List;
-
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.NetworkInfo;
+import android.net.wifi.ScanResult;
 import android.net.wifi.SupplicantState;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
@@ -43,8 +36,14 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.android.settings.R;
+import com.android.settingslib.wifi.AccessPoint;
+
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.net.UnknownHostException;
+import java.util.List;
 
 
 /**

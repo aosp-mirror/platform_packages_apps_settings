@@ -17,22 +17,13 @@
 package com.android.settings.notification;
 
 import android.app.AlertDialog;
-import android.app.AutomaticZenRule;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.res.ColorStateList;
-import android.text.Editable;
-import android.text.TextUtils;
-import android.text.TextWatcher;
-import android.util.ArraySet;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
 import com.android.settings.R;
-
-import java.util.List;
 
 public abstract class ZenRuleNameDialog {
     private static final String TAG = "ZenRuleNameDialog";

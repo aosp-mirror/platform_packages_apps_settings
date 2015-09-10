@@ -30,12 +30,13 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.Preference.OnPreferenceClickListener;
-import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.service.notification.ConditionProviderService;
 import android.service.notification.ZenModeConfig;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.Preference.OnPreferenceClickListener;
+import android.support.v7.preference.PreferenceScreen;
+import android.support.v7.preference.PreferenceViewHolder;
 import android.util.Log;
 import android.view.View;
 
@@ -161,9 +162,9 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
         if (mRules.size() == 0) return;
         final AutomaticZenRule[] sortedRules = sortedRules();
         for (AutomaticZenRule sortedRule : sortedRules) {
-            root.addPreference(new ZenRulePreference(mContext, sortedRule));
+            root.addPreference(new ZenRulePreference(getPrefContext(), sortedRule));
         }
-        final Preference p = new Preference(mContext);
+        final Preference p = new Preference(getPrefContext());
         p.setIcon(R.drawable.ic_add);
         p.setTitle(R.string.zen_mode_add_rule);
         p.setPersistent(false);
@@ -314,8 +315,8 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
         }
 
         @Override
-        protected void onBindView(View view) {
-            super.onBindView(view);
+        public void onBindViewHolder(PreferenceViewHolder view) {
+            super.onBindViewHolder(view);
 
             View v = view.findViewById(R.id.delete_zen_rule);
             if (v != null) {

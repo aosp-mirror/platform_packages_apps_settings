@@ -17,15 +17,15 @@
 package com.android.settings;
 
 import android.app.Activity;
-import android.app.AlertDialog.Builder;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.preference.ListPreference;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,7 +43,7 @@ import java.util.List;
  * because the names of applications are very similar and the user may not be able to determine what
  * app they are selecting without an icon.
  */
-public class AppListPreference extends ListPreference {
+public class AppListPreference extends CustomListPreference {
 
     public static final String ITEM_NONE_VALUE = "";
 
@@ -63,7 +63,7 @@ public class AppListPreference extends ListPreference {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            LayoutInflater inflater = ((Activity)getContext()).getLayoutInflater();
+            LayoutInflater inflater = LayoutInflater.from(getContext());
             View view = inflater.inflate(R.layout.app_preference_item, parent, false);
             TextView textView = (TextView) view.findViewById(R.id.app_label);
             textView.setText(getItem(position));
@@ -141,9 +141,9 @@ public class AppListPreference extends ListPreference {
     }
 
     @Override
-    protected void onPrepareDialogBuilder(Builder builder) {
-        builder.setAdapter(createListAdapter(), this);
-        super.onPrepareDialogBuilder(builder);
+    protected void onPrepareDialogBuilder(AlertDialog.Builder builder,
+            DialogInterface.OnClickListener listener) {
+        builder.setAdapter(createListAdapter(), listener);
     }
 
     @Override

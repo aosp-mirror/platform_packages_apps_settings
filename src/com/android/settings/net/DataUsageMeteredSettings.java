@@ -16,11 +16,6 @@
 
 package com.android.settings.net;
 
-import static android.net.NetworkPolicy.LIMIT_DISABLED;
-import static android.net.wifi.WifiInfo.removeDoubleQuotes;
-import static com.android.settings.DataUsageSummary.hasReadyMobileRadio;
-import static com.android.settings.DataUsageSummary.hasWifiRadio;
-
 import android.content.Context;
 import android.content.res.Resources;
 import android.net.NetworkPolicy;
@@ -29,9 +24,9 @@ import android.net.NetworkTemplate;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceCategory;
-import android.preference.SwitchPreference;
+import android.support.v14.preference.SwitchPreference;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceCategory;
 import android.telephony.TelephonyManager;
 
 import com.android.internal.logging.MetricsLogger;
@@ -44,6 +39,11 @@ import com.android.settingslib.NetworkPolicyEditor;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.net.NetworkPolicy.LIMIT_DISABLED;
+import static android.net.wifi.WifiInfo.removeDoubleQuotes;
+import static com.android.settings.DataUsageSummary.hasReadyMobileRadio;
+import static com.android.settings.DataUsageSummary.hasWifiRadio;
 
 /**
  * Panel to configure {@link NetworkPolicy#metered} for networks.
@@ -109,7 +109,7 @@ public class DataUsageMeteredSettings extends SettingsPreferenceFragment impleme
         final TelephonyManager tele = TelephonyManager.from(context);
         final NetworkTemplate template = NetworkTemplate.buildTemplateMobileAll(
                 tele.getSubscriberId());
-        final MeteredPreference pref = new MeteredPreference(context, template);
+        final MeteredPreference pref = new MeteredPreference(getPrefContext(), template);
         pref.setTitle(tele.getNetworkOperatorName());
         return pref;
     }

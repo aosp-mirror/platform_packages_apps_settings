@@ -16,10 +16,6 @@
 
 package com.android.settings;
 
-import com.android.internal.widget.LockPatternUtils;
-import com.android.setupwizardlib.SetupWizardListLayout;
-import com.android.setupwizardlib.view.NavigationBar;
-
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
@@ -27,10 +23,14 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.preference.PreferenceFragment;
+import android.support.v14.preference.PreferenceFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.android.internal.widget.LockPatternUtils;
+import com.android.setupwizardlib.SetupWizardListLayout;
+import com.android.setupwizardlib.view.NavigationBar;
 
 /**
  * Setup Wizard's version of ChooseLockGeneric screen. It inherits the logic and basic structure

@@ -23,9 +23,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
-import android.util.Log;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.util.Log;
 
 import java.util.List;
 

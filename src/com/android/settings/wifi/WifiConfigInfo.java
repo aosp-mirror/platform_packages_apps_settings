@@ -17,13 +17,14 @@
 package com.android.settings.wifi;
 
 import android.app.Activity;
+import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.widget.TextView;
-import android.net.wifi.WifiConfiguration;
-import java.util.List;
 
 import com.android.settings.R;
+
+import java.util.List;
 
 
 /**

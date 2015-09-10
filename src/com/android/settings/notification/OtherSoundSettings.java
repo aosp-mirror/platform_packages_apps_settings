@@ -16,9 +16,6 @@
 
 package com.android.settings.notification;
 
-import static com.android.settings.notification.SettingPref.TYPE_GLOBAL;
-import static com.android.settings.notification.SettingPref.TYPE_SYSTEM;
-
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
@@ -44,6 +41,9 @@ import com.android.settings.search.Indexable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static com.android.settings.notification.SettingPref.TYPE_GLOBAL;
+import static com.android.settings.notification.SettingPref.TYPE_SYSTEM;
 
 public class OtherSoundSettings extends SettingsPreferenceFragment implements Indexable {
     private static final String TAG = "OtherSoundSettings";

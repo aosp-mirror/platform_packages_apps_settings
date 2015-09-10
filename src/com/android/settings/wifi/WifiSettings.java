@@ -16,8 +16,6 @@
 
 package com.android.settings.wifi;
 
-import static android.os.UserManager.DISALLOW_CONFIG_WIFI;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AppGlobals;
@@ -44,9 +42,8 @@ import android.os.HandlerThread;
 import android.os.Process;
 import android.os.RemoteException;
 import android.os.UserHandle;
-import android.preference.Preference;
-import android.preference.PreferenceScreen;
 import android.provider.Settings;
+import android.support.v7.preference.Preference;
 import android.text.Spannable;
 import android.text.style.TextAppearanceSpan;
 import android.util.Log;
@@ -57,7 +54,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
@@ -80,6 +76,8 @@ import com.android.settingslib.wifi.WifiTracker;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import static android.os.UserManager.DISALLOW_CONFIG_WIFI;
 
 /**
  * Two types of UI are provided here.
@@ -450,9 +448,7 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View view, ContextMenuInfo info) {
-        if (info instanceof AdapterContextMenuInfo) {
-            Preference preference = (Preference) getListView().getItemAtPosition(
-                    ((AdapterContextMenuInfo) info).position);
+            Preference preference = (Preference) view.getTag();
 
             if (preference instanceof AccessPointPreference) {
                 mSelectedAccessPoint = ((AccessPointPreference) preference).getAccessPoint();
@@ -483,7 +479,6 @@ public class WifiSettings extends RestrictedSettingsFragment
                     }
                 }
             }
-        }
     }
 
     @Override
@@ -521,7 +516,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     }
 
     @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen screen, Preference preference) {
+    public boolean onPreferenceTreeClick(Preference preference) {
         if (preference instanceof AccessPointPreference) {
             mSelectedAccessPoint = ((AccessPointPreference) preference).getAccessPoint();
             /** Bypass dialog for unsecured, unsaved, and inactive networks */
@@ -539,7 +534,7 @@ public class WifiSettings extends RestrictedSettingsFragment
                 showDialog(mSelectedAccessPoint, WifiConfigUiBase.MODE_CONNECT);
             }
         } else {
-            return super.onPreferenceTreeClick(screen, preference);
+            return super.onPreferenceTreeClick(preference);
         }
         return true;
     }
@@ -661,13 +656,13 @@ public class WifiSettings extends RestrictedSettingsFragment
                             continue;
                         }
                         AccessPointPreference preference = new AccessPointPreference(accessPoint,
-                                getActivity(), mUserBadgeCache, false);
+                                getPrefContext(), mUserBadgeCache, false, this);
                         preference.setOrder(index++);
 
                         if (mOpenSsid != null && mOpenSsid.equals(accessPoint.getSsidStr())
                                 && !accessPoint.isSaved()
                                 && accessPoint.getSecurity() != AccessPoint.SECURITY_NONE) {
-                            onPreferenceTreeClick(getPreferenceScreen(), preference);
+                            onPreferenceTreeClick(preference);
                             mOpenSsid = null;
                         }
                         getPreferenceScreen().addPreference(preference);
@@ -707,7 +702,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     protected TextView initEmptyView() {
         TextView emptyView = (TextView) getActivity().findViewById(android.R.id.empty);
         emptyView.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
-        getListView().setEmptyView(emptyView);
+        setEmptyView(emptyView);
         return emptyView;
     }
 

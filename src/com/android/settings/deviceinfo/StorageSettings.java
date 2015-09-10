@@ -32,9 +32,8 @@ import android.os.storage.StorageEventListener;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
 import android.os.storage.VolumeRecord;
-import android.preference.Preference;
-import android.preference.PreferenceCategory;
-import android.preference.PreferenceScreen;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceCategory;
 import android.text.TextUtils;
 import android.text.format.Formatter;
 import android.text.format.Formatter.BytesResult;
@@ -105,7 +104,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
         mInternalCategory = (PreferenceCategory) findPreference("storage_internal");
         mExternalCategory = (PreferenceCategory) findPreference("storage_external");
 
-        mInternalSummary = new StorageSummaryPreference(context);
+        mInternalSummary = new StorageSummaryPreference(getPrefContext());
 
         setHasOptionsMenu(true);
     }
@@ -130,7 +129,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
     }
 
     private void refresh() {
-        final Context context = getActivity();
+        final Context context = getPrefContext();
 
         getPreferenceScreen().removeAll();
         mInternalCategory.removeAll();
@@ -231,7 +230,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
     }
 
     @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference pref) {
+    public boolean onPreferenceTreeClick(Preference pref) {
         final String key = pref.getKey();
         if (pref instanceof StorageVolumePreference) {
             // Picked a normal volume

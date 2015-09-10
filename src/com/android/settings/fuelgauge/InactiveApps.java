@@ -22,9 +22,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.Preference.OnPreferenceClickListener;
-import android.preference.PreferenceGroup;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.Preference.OnPreferenceClickListener;
+import android.support.v7.preference.PreferenceGroup;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
@@ -68,7 +68,7 @@ public class InactiveApps extends SettingsPreferenceFragment implements OnPrefer
         List<ResolveInfo> apps = pm.queryIntentActivities(launcherIntent, 0);
         for (ResolveInfo app : apps) {
             String packageName = app.activityInfo.applicationInfo.packageName;
-            Preference p = new Preference(context);
+            Preference p = new Preference(getPrefContext());
             p.setTitle(app.loadLabel(pm));
             p.setIcon(app.loadIcon(pm));
             p.setKey(packageName);

@@ -23,8 +23,8 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
-import android.preference.PreferenceGroup;
 import android.provider.SearchIndexableResource;
+import android.support.v7.preference.PreferenceGroup;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.search.BaseSearchIndexProvider;

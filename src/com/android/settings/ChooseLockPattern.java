@@ -16,17 +16,6 @@
 
 package com.android.settings;
 
-import com.android.internal.logging.MetricsLogger;
-import com.google.android.collect.Lists;
-import com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient;
-import com.android.internal.widget.LockPatternUtils;
-import com.android.internal.widget.LockPatternUtils.RequestThrottledException;
-import com.android.internal.widget.LockPatternView;
-import com.android.internal.widget.LockPatternView.Cell;
-import com.android.settings.notification.RedactionInterstitial;
-
-import static com.android.internal.widget.LockPatternView.DisplayMode;
-
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
@@ -39,6 +28,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.android.internal.logging.MetricsLogger;
+import com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient;
+import com.android.internal.widget.LockPatternUtils;
+import com.android.internal.widget.LockPatternUtils.RequestThrottledException;
+import com.android.internal.widget.LockPatternView;
+import com.android.internal.widget.LockPatternView.Cell;
+import com.android.internal.widget.LockPatternView.DisplayMode;
+import com.android.settings.notification.RedactionInterstitial;
+import com.google.android.collect.Lists;
 
 import java.util.ArrayList;
 import java.util.Collections;

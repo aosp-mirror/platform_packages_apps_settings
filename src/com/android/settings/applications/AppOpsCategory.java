@@ -36,11 +36,11 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.List;
-
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.applications.AppOpsState.AppOpEntry;
+
+import java.util.List;
 
 public class AppOpsCategory extends ListFragment implements
         LoaderManager.LoaderCallbacks<List<AppOpEntry>> {

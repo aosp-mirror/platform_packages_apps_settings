@@ -18,7 +18,6 @@ package com.android.settings.fingerprint;
 
 import android.annotation.Nullable;
 import android.app.Activity;
-import android.app.Fragment;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.os.CancellationSignal;

@@ -29,11 +29,10 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceScreen;
-import android.preference.SwitchPreference;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
+import android.support.v14.preference.SwitchPreference;
+import android.support.v7.preference.Preference;
 import android.text.format.DateFormat;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
@@ -270,7 +269,7 @@ public class DateTimeSettings extends SettingsPreferenceFragment
     }
     */
     @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+    public boolean onPreferenceTreeClick(Preference preference) {
         if (preference == mDatePref) {
             showDialog(DIALOG_DATEPICKER);
         } else if (preference == mTimePref) {
@@ -283,7 +282,7 @@ public class DateTimeSettings extends SettingsPreferenceFragment
             updateTimeAndDateDisplay(getActivity());
             timeUpdated(is24Hour);
         }
-        return super.onPreferenceTreeClick(preferenceScreen, preference);
+        return super.onPreferenceTreeClick(preference);
     }
 
     @Override

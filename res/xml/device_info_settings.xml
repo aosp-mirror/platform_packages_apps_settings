@@ -67,49 +67,57 @@
 
         <!-- Device hardware model -->
         <Preference android:key="device_model"
-                style="?android:preferenceInformationStyle"
+                android:enabled="false"
+                android:shouldDisableView="false"
                 android:title="@string/model_number"
                 android:summary="@string/device_info_default"/>
 
         <!-- Device firmware version -->
         <Preference android:key="firmware_version"
-                style="?android:preferenceInformationStyle"
+                android:enabled="false"
+                android:shouldDisableView="false"
                 android:title="@string/firmware_version"
                 android:summary="@string/device_info_default"/>
 
         <!-- Security patch level -->
         <Preference android:key="security_patch"
-                style="?android:preferenceInformationStyle"
+                android:enabled="false"
+                android:shouldDisableView="false"
                 android:title="@string/security_patch"
                 android:summary="@string/device_info_default"/>
 
         <!-- Device FCC equipment id -->
         <Preference android:key="fcc_equipment_id"
-                style="?android:preferenceInformationStyle"
+                android:enabled="false"
+                android:shouldDisableView="false"
                 android:title="@string/fcc_equipment_id"
                 android:summary="@string/device_info_default"/>
 
         <!-- Device Baseband version -->
         <Preference android:key="baseband_version"
-                style="?android:preferenceInformationStyle"
+                android:enabled="false"
+                android:shouldDisableView="false"
                 android:title="@string/baseband_version"
                 android:summary="@string/device_info_default"/>
 
         <!-- Device Kernel version -->
         <Preference android:key="kernel_version"
-                style="?android:preferenceInformationStyle"
+                android:enabled="false"
+                android:shouldDisableView="false"
                 android:title="@string/kernel_version"
                 android:summary="@string/device_info_default"/>
 
         <!-- Detailed build version -->
         <Preference android:key="build_number"
-                style="?android:preferenceInformationStyle"
+                android:enabled="false"
+                android:shouldDisableView="false"
                 android:title="@string/build_number"
                 android:summary="@string/device_info_default"/>
 
         <!-- SELinux status information -->
         <Preference android:key="selinux_status"
-                style="?android:preferenceInformationStyle"
+                android:enabled="false"
+                android:shouldDisableView="false"
                 android:title="@string/selinux_status"
                 android:summary="@string/selinux_status_enforcing"/>
 

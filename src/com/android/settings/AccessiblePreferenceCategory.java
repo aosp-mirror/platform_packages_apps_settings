@@ -17,8 +17,8 @@
 package com.android.settings;
 
 import android.content.Context;
-import android.preference.PreferenceCategory;
-import android.view.View;
+import android.support.v7.preference.PreferenceCategory;
+import android.support.v7.preference.PreferenceViewHolder;
 
 /**
  * Preference category that accepts a content description for accessibility.
@@ -35,9 +35,9 @@ public class AccessiblePreferenceCategory extends PreferenceCategory {
     }
 
     @Override
-    protected void onBindView(View view) {
-        super.onBindView(view);
+    public void onBindViewHolder(PreferenceViewHolder view) {
+        super.onBindViewHolder(view);
 
-        view.setContentDescription(mContentDescription);
+        view.itemView.setContentDescription(mContentDescription);
     }
 }

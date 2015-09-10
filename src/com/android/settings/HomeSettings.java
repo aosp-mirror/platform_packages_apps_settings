@@ -16,9 +16,6 @@
 
 package com.android.settings;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
@@ -32,8 +29,8 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.content.res.Resources;
 import android.content.pm.UserInfo;
+import android.content.res.Resources;
 import android.graphics.ColorFilter;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
@@ -43,19 +40,24 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.UserManager;
-import android.preference.Preference;
-import android.preference.PreferenceGroup;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceGroup;
+import android.support.v7.preference.PreferenceViewHolder;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Index;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomeSettings extends SettingsPreferenceFragment implements Indexable {
     static final String TAG = "HomeSettings";
@@ -176,7 +178,7 @@ public class HomeSettings extends SettingsPreferenceFragment implements Indexabl
         ArrayList<ResolveInfo> homeActivities = new ArrayList<ResolveInfo>();
         ComponentName currentDefaultHome  = mPm.getHomeActivities(homeActivities);
 
-        Context context = getActivity();
+        Context context = getPrefContext();
         mCurrentHome = null;
         mPrefGroup.removeAll();
         mPrefs = new ArrayList<HomeAppPreference>();
@@ -350,8 +352,8 @@ public class HomeSettings extends SettingsPreferenceFragment implements Indexabl
         }
 
         @Override
-        protected void onBindView(View view) {
-            super.onBindView(view);
+        public void onBindViewHolder(PreferenceViewHolder view) {
+            super.onBindViewHolder(view);
 
             RadioButton radio = (RadioButton) view.findViewById(R.id.home_radio);
             radio.setChecked(isChecked);

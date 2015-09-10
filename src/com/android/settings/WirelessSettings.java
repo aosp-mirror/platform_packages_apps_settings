@@ -35,11 +35,11 @@ import android.nfc.NfcManager;
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.os.UserManager;
-import android.preference.Preference;
-import android.preference.PreferenceScreen;
-import android.preference.SwitchPreference;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
+import android.support.v14.preference.SwitchPreference;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceScreen;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -95,7 +95,7 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
      * preference click events.
      */
     @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+    public boolean onPreferenceTreeClick(Preference preference) {
         log("onPreferenceTreeClick: preference=" + preference);
         if (preference == mAirplaneModePreference && Boolean.parseBoolean(
                 SystemProperties.get(TelephonyProperties.PROPERTY_INECM_MODE))) {
@@ -108,7 +108,7 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
             onManageMobilePlanClick();
         }
         // Let the intents be launched by the Preference manager
-        return super.onPreferenceTreeClick(preferenceScreen, preference);
+        return super.onPreferenceTreeClick(preference);
     }
 
     private String mManageMobilePlanMessage;
