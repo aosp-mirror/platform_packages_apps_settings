@@ -22,6 +22,7 @@ import com.android.settings.DropDownPreference.Callback;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 
+import static android.provider.Settings.Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED;
 import static android.provider.Settings.Secure.CAMERA_GESTURE_DISABLED;
 import static android.provider.Settings.Secure.DOUBLE_TAP_TO_WAKE;
 import static android.provider.Settings.Secure.DOZE_ENABLED;
@@ -76,6 +77,8 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_AUTO_ROTATE = "auto_rotate";
     private static final String KEY_NIGHT_MODE = "night_mode";
     private static final String KEY_CAMERA_GESTURE = "camera_gesture";
+    private static final String KEY_CAMERA_DOUBLE_TAP_POWER_GESTURE
+            = "camera_double_tap_power_gesture";
 
     private static final int DLG_GLOBAL_CHANGE_WARNING = 1;
 
@@ -91,6 +94,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private SwitchPreference mTapToWakePreference;
     private SwitchPreference mAutoBrightnessPreference;
     private SwitchPreference mCameraGesturePreference;
+    private SwitchPreference mCameraDoubleTapPowerGesturePreference;
 
     @Override
     protected int getMetricsCategory() {
@@ -157,6 +161,14 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             mCameraGesturePreference.setOnPreferenceChangeListener(this);
         } else {
             removePreference(KEY_CAMERA_GESTURE);
+        }
+
+        if (isCameraDoubleTapPowerGestureAvailable(getResources())) {
+            mCameraDoubleTapPowerGesturePreference
+                    = (SwitchPreference) findPreference(KEY_CAMERA_DOUBLE_TAP_POWER_GESTURE);
+            mCameraDoubleTapPowerGesturePreference.setOnPreferenceChangeListener(this);
+        } else {
+            removePreference(KEY_CAMERA_DOUBLE_TAP_POWER_GESTURE);
         }
 
         if (RotationPolicy.isRotationLockToggleVisible(activity)) {
@@ -239,6 +251,11 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                 com.android.internal.R.integer.config_cameraLaunchGestureSensorType) != -1;
         return configSet &&
                 !SystemProperties.getBoolean("gesture.disable_camera_launch", false);
+    }
+
+    private static boolean isCameraDoubleTapPowerGestureAvailable(Resources res) {
+        return res.getBoolean(
+                com.android.internal.R.bool.config_cameraDoubleTapPowerGestureEnabled);
     }
 
     private void updateTimeoutPreferenceDescription(long currentTimeout) {
@@ -388,10 +405,17 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             mTapToWakePreference.setChecked(value != 0);
         }
 
-        // Update camera gesture if it is available.
+        // Update camera gesture #1 if it is available.
         if (mCameraGesturePreference != null) {
             int value = Settings.Secure.getInt(getContentResolver(), CAMERA_GESTURE_DISABLED, 0);
             mCameraGesturePreference.setChecked(value == 0);
+        }
+
+        // Update camera gesture #2 if it is available.
+        if (mCameraDoubleTapPowerGesturePreference != null) {
+            int value = Settings.Secure.getInt(
+                    getContentResolver(), CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, 0);
+            mCameraDoubleTapPowerGesturePreference.setChecked(value == 0);
         }
     }
 
@@ -451,6 +475,11 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         if (preference == mCameraGesturePreference) {
             boolean value = (Boolean) objValue;
             Settings.Secure.putInt(getContentResolver(), CAMERA_GESTURE_DISABLED,
+                    value ? 0 : 1 /* Backwards because setting is for disabling */);
+        }
+        if (preference == mCameraDoubleTapPowerGesturePreference) {
+            boolean value = (Boolean) objValue;
+            Settings.Secure.putInt(getContentResolver(), CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED,
                     value ? 0 : 1 /* Backwards because setting is for disabling */);
         }
         if (preference == mNightModePreference) {
@@ -523,6 +552,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                     }
                     if (!isCameraGestureAvailable(context.getResources())) {
                         result.add(KEY_CAMERA_GESTURE);
+                    }
+                    if (!isCameraDoubleTapPowerGestureAvailable(context.getResources())) {
+                        result.add(KEY_CAMERA_DOUBLE_TAP_POWER_GESTURE);
                     }
                     return result;
                 }
