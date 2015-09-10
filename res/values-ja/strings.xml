@@ -354,6 +354,12 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"完了"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"これはセンサーではありません"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="5053971232594165142">"端末の指紋センサーを使用してください。"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (3618021988442639280) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (2942551158278899627) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_generic_dialog_message (3624760637222239293) -->
+    <skip />
     <string name="fingerprint_enroll_button_add" msgid="6317978977419045463">"別の指紋を登録"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"次へ"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"スマートフォンのロック解除に加えて、指紋認証を使用して購入やアプリのアクセスを許可することもできます。"<annotation id="url">"詳細"</annotation></string>
@@ -691,8 +697,7 @@
     <string name="wifi_failed_save_message" msgid="6650004874143815692">"ネットワークを保存できませんでした"</string>
     <string name="wifi_cancel" msgid="6763568902542968964">"キャンセル"</string>
     <string name="wifi_skip_anyway" msgid="6965361454438011190">"無視してスキップ"</string>
-    <!-- no translation found for wifi_dont_skip (3615535136327231588) -->
-    <skip />
+    <string name="wifi_dont_skip" msgid="3615535136327231588">"戻る"</string>
     <string name="wifi_skipped_message" product="tablet" msgid="6761689889733331124">"警告: [Wi‑Fi]をスキップすると、タブレットはモバイルデータのみを使って最初のダウンロードやアップデートを行います。データ通信料が発生する可能性を防ぐにはWi‑Fiに接続してください。"</string>
     <string name="wifi_skipped_message" product="device" msgid="1385490367826852775">"警告: [Wi‑Fi]をスキップすると、端末はモバイルデータのみを使って最初のダウンロードやアップデートを行います。データ通信料が発生する可能性を防ぐにはWi‑Fiに接続してください。"</string>
     <string name="wifi_skipped_message" product="default" msgid="6084295135297772350">"警告: [Wi‑Fi]をスキップすると、携帯電話はモバイルデータのみを使って最初のダウンロードやアップデートを行います。データ通信料が発生する可能性を防ぐにはWi‑Fiに接続してください。"</string>
@@ -828,10 +833,13 @@
     <string name="brightness_summary" msgid="838917350127550703">"画面の明るさを調整する"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"明るさの自動調節"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"周囲に合わせて明るさを最適化する"</string>
-    <string name="night_mode_title" msgid="6928425617491943384">"テーマ"</string>
+    <!-- no translation found for night_mode_title (2594133148531256513) -->
+    <skip />
     <string name="night_mode_summary" msgid="9196605054622017193">"%s"</string>
-    <string name="night_mode_no" msgid="7682792841791457238">"ライト"</string>
-    <string name="night_mode_yes" msgid="4847655033618591567">"ダーク"</string>
+    <!-- no translation found for night_mode_no (9171772244775838901) -->
+    <skip />
+    <!-- no translation found for night_mode_yes (2218157265997633432) -->
+    <skip />
     <string name="night_mode_auto" msgid="7508348175804304327">"自動"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"スリープ"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"画面がOFFになったとき"</string>
@@ -996,9 +1004,9 @@
     <string name="storage_other_users" msgid="808708845102611856">"その他のユーザー"</string>
     <string name="storage_internal_title" msgid="690771193137801021">"端末のストレージ"</string>
     <string name="storage_external_title" msgid="3433462910096848696">"外部ストレージ"</string>
-    <string name="storage_volume_summary" msgid="7023441974367853372">"合計容量<xliff:g id="TOTAL">%2$s</xliff:g>のうち<xliff:g id="USED">%1$s</xliff:g>を使用中"</string>
+    <string name="storage_volume_summary" msgid="7023441974367853372">"<xliff:g id="USED">%1$s</xliff:g> / <xliff:g id="TOTAL">%2$s</xliff:g>を使用中"</string>
     <string name="storage_size_large" msgid="5691585991420946254">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>"<xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
-    <string name="storage_volume_used" msgid="1303803057698959872">"<xliff:g id="TOTAL">%1$s</xliff:g>を使用中"</string>
+    <string name="storage_volume_used" msgid="1303803057698959872">"/ <xliff:g id="TOTAL">%1$s</xliff:g>を使用中"</string>
     <string name="storage_volume_used_total" msgid="6113121714019000244">"合計<xliff:g id="TOTAL">%1$s</xliff:g>を使用中"</string>
     <string name="storage_mount_success" msgid="687641090137253647">"<xliff:g id="NAME">%1$s</xliff:g>をマウントしました"</string>
     <string name="storage_mount_failure" msgid="1042621107954547316">"<xliff:g id="NAME">%1$s</xliff:g>をマウントできませんでした"</string>
@@ -1931,6 +1939,10 @@
     <string name="credentials_reset_summary" msgid="3369361230171260282">"証明書をすべて削除する"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"信頼できる認証情報"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"信頼できるCA証明書を表示する"</string>
+    <!-- no translation found for user_credentials (3719013347787187083) -->
+    <skip />
+    <!-- no translation found for user_credentials_summary (7271228342106080167) -->
+    <skip />
     <string name="advanced_security_title" msgid="2434776238010578865">"詳細設定"</string>
     <string name="credential_storage_type" msgid="8629968543494001364">"ストレージのタイプ"</string>
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"ハードウェア式"</string>
@@ -2282,6 +2294,16 @@
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"システムのCA証明書を有効にしますか？"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"システムのCA証明書を無効にしますか？"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"ユーザーのCA証明書を完全に削除しますか？"</string>
+    <!-- no translation found for one_userkey (6034020579534914349) -->
+    <skip />
+    <!-- no translation found for one_usercrt (2150319011101639509) -->
+    <skip />
+    <!-- no translation found for one_cacrt (6844397037970164809) -->
+    <skip />
+    <!-- no translation found for n_cacrts (5979300323482053820) -->
+    <skip />
+    <!-- no translation found for user_credential_title (1329449215749665378) -->
+    <skip />
     <string name="spellcheckers_settings_title" msgid="399981228588011501">"スペルチェック"</string>
     <string name="current_backup_pw_prompt" msgid="7735254412051914576">"現在のフルバックアップパスワードをここに入力してください"</string>
     <string name="new_backup_pw_prompt" msgid="8755501377391998428">"フルバックアップ用の新しいパスワードをここに入力してください"</string>
@@ -2792,7 +2814,8 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g>（<xliff:g id="COUNT">%2$d</xliff:g>）"</string>
     <string name="high_power_apps" msgid="3459065925679828230">"電池の最適化"</string>
     <string name="high_power_filter_on" msgid="3222265297576680099">"最適化していないアプリ"</string>
-    <string name="high_power_on" msgid="3382367497549906927">"電池の最適化を無視"</string>
+    <!-- no translation found for high_power_on (6216293998227583810) -->
+    <skip />
     <string name="high_power_off" msgid="3393904131961263278">"電池の使用を最適化"</string>
     <string name="high_power_system" msgid="7362862974428225301">"電池の最適化の利用不可"</string>
     <string name="high_power_desc" msgid="6283926163708585760">"電池の最適化を適用しません。電池の消耗が速くなる可能性があります。"</string>
@@ -2885,4 +2908,8 @@
     <string name="write_settings_off" msgid="5156104383386336233">"不可"</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"2回ひねる動作でカメラアプリを開く"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"手首を2回ひねる動作でカメラアプリを開きます"</string>
+    <!-- no translation found for camera_double_tap_power_gesture_title (1651873760405034645) -->
+    <skip />
+    <!-- no translation found for camera_double_tap_power_gesture_desc (7355664631775680376) -->
+    <skip />
 </resources>

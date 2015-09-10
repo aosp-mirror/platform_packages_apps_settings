@@ -352,6 +352,12 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"完成"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"糟糕，这不是传感器"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="5053971232594165142">"使用您设备上的指纹传感器。"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (3618021988442639280) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (2942551158278899627) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_generic_dialog_message (3624760637222239293) -->
+    <skip />
     <string name="fingerprint_enroll_button_add" msgid="6317978977419045463">"再添加一个"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"下一步"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"除了将手机解锁，您还可以在购买物品时和登录应用时使用自己的指纹来验证身份。"<annotation id="url">"了解详情"</annotation></string>
@@ -689,8 +695,7 @@
     <string name="wifi_failed_save_message" msgid="6650004874143815692">"无法保存网络"</string>
     <string name="wifi_cancel" msgid="6763568902542968964">"取消"</string>
     <string name="wifi_skip_anyway" msgid="6965361454438011190">"仍然跳过"</string>
-    <!-- no translation found for wifi_dont_skip (3615535136327231588) -->
-    <skip />
+    <string name="wifi_dont_skip" msgid="3615535136327231588">"返回"</string>
     <string name="wifi_skipped_message" product="tablet" msgid="6761689889733331124">"警告：如果您跳过WLAN网络设置，您的平板电脑将只能通过移动数据网络进行初始下载和更新。为了避免产生数据流量费，请连接到WLAN网络。"</string>
     <string name="wifi_skipped_message" product="device" msgid="1385490367826852775">"警告：如果您跳过WLAN网络设置，您的设备将只能通过移动数据网络进行初始下载和更新。为了避免产生数据流量费，请连接到WLAN网络。"</string>
     <string name="wifi_skipped_message" product="default" msgid="6084295135297772350">"警告：如果您跳过WLAN网络设置，您的手机将只能通过移动数据网络进行初始下载和更新。为了避免产生数据流量费，请连接到WLAN网络。"</string>
@@ -826,10 +831,13 @@
     <string name="brightness_summary" msgid="838917350127550703">"调整屏幕亮度"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"自动调节亮度"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"根据环境光线情况优化亮度"</string>
-    <string name="night_mode_title" msgid="6928425617491943384">"主题背景"</string>
+    <!-- no translation found for night_mode_title (2594133148531256513) -->
+    <skip />
     <string name="night_mode_summary" msgid="9196605054622017193">"%s"</string>
-    <string name="night_mode_no" msgid="7682792841791457238">"浅色"</string>
-    <string name="night_mode_yes" msgid="4847655033618591567">"深色"</string>
+    <!-- no translation found for night_mode_no (9171772244775838901) -->
+    <skip />
+    <!-- no translation found for night_mode_yes (2218157265997633432) -->
+    <skip />
     <string name="night_mode_auto" msgid="7508348175804304327">"自动"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"休眠"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"屏幕关闭"</string>
@@ -1925,6 +1933,10 @@
     <string name="credentials_reset_summary" msgid="3369361230171260282">"删除所有证书"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"信任的凭据"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"显示信任的CA证书"</string>
+    <!-- no translation found for user_credentials (3719013347787187083) -->
+    <skip />
+    <!-- no translation found for user_credentials_summary (7271228342106080167) -->
+    <skip />
     <string name="advanced_security_title" msgid="2434776238010578865">"高级"</string>
     <string name="credential_storage_type" msgid="8629968543494001364">"存储类型"</string>
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"硬件支持"</string>
@@ -2276,6 +2288,16 @@
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"要启用该系统CA证书吗？"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"要停用该系统CA证书吗？"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"要永久移除该用户CA证书吗？"</string>
+    <!-- no translation found for one_userkey (6034020579534914349) -->
+    <skip />
+    <!-- no translation found for one_usercrt (2150319011101639509) -->
+    <skip />
+    <!-- no translation found for one_cacrt (6844397037970164809) -->
+    <skip />
+    <!-- no translation found for n_cacrts (5979300323482053820) -->
+    <skip />
+    <!-- no translation found for user_credential_title (1329449215749665378) -->
+    <skip />
     <string name="spellcheckers_settings_title" msgid="399981228588011501">"拼写检查工具"</string>
     <string name="current_backup_pw_prompt" msgid="7735254412051914576">"在此键入您当前的完整备份密码"</string>
     <string name="new_backup_pw_prompt" msgid="8755501377391998428">"在此键入新的完整备份密码"</string>
@@ -2786,7 +2808,8 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="3459065925679828230">"电池优化"</string>
     <string name="high_power_filter_on" msgid="3222265297576680099">"未优化"</string>
-    <string name="high_power_on" msgid="3382367497549906927">"忽略电池优化"</string>
+    <!-- no translation found for high_power_on (6216293998227583810) -->
+    <skip />
     <string name="high_power_off" msgid="3393904131961263278">"优化电池使用"</string>
     <string name="high_power_system" msgid="7362862974428225301">"没有电池优化设置"</string>
     <string name="high_power_desc" msgid="6283926163708585760">"不应用电池优化设置，但电量的消耗速度可能会更快。"</string>
@@ -2879,4 +2902,8 @@
     <string name="write_settings_off" msgid="5156104383386336233">"不允许"</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"扭转两次即可打开相机"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"扭转手腕两次即可打开相机应用"</string>
+    <!-- no translation found for camera_double_tap_power_gesture_title (1651873760405034645) -->
+    <skip />
+    <!-- no translation found for camera_double_tap_power_gesture_desc (7355664631775680376) -->
+    <skip />
 </resources>
