@@ -58,23 +58,12 @@ public class ConfirmDeviceCredentialActivity extends Activity {
         String title = intent.getStringExtra(KeyguardManager.EXTRA_TITLE);
         String details = intent.getStringExtra(KeyguardManager.EXTRA_DESCRIPTION);
 
-        // Ignore rotates and ensure we only launch this once
-        if (savedInstanceState == null) {
-            ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(this);
-            if (!helper.launchConfirmationActivity(0 /* request code */, null /* title */, title,
-                    details, false /* returnCredentials */, true /* isExternal */)) {
-                Log.d(TAG, "No pattern, password or PIN set.");
-                setResult(Activity.RESULT_OK);
-                finish();
-            }
+        ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(this);
+        if (!helper.launchConfirmationActivity(0 /* request code */, null /* title */, title,
+                details, false /* returnCredentials */, true /* isExternal */)) {
+            Log.d(TAG, "No pattern, password or PIN set.");
+            setResult(Activity.RESULT_OK);
         }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        boolean credentialsConfirmed = (resultCode == Activity.RESULT_OK);
-        Log.d(TAG, "Device credentials confirmed: " + credentialsConfirmed);
-        setResult(credentialsConfirmed ? Activity.RESULT_OK : Activity.RESULT_CANCELED);
         finish();
     }
 }
