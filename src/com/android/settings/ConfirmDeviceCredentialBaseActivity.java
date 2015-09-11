@@ -19,6 +19,7 @@ package com.android.settings;
 import android.app.Fragment;
 import android.app.KeyguardManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
 import android.view.WindowManager;
 
@@ -28,6 +29,7 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
     private boolean mDark;
     private boolean mEnterAnimationPending;
     private boolean mFirstTimeVisible = true;
+    private final Handler mHandler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedState) {
@@ -67,6 +69,7 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
             mFirstTimeVisible = false;
             prepareEnterAnimation();
             mEnterAnimationPending = true;
+            mHandler.postDelayed(mEnterAnimationCompleteTimeoutRunnable, 1000);
         }
     }
 
@@ -82,6 +85,7 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
     public void onEnterAnimationComplete() {
         super.onEnterAnimationComplete();
         if (mEnterAnimationPending) {
+            mHandler.removeCallbacks(mEnterAnimationCompleteTimeoutRunnable);
             startEnterAnimation();
             mEnterAnimationPending = false;
         }
@@ -94,4 +98,15 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
     public void startEnterAnimation() {
         getFragment().startEnterAnimation();
     }
+
+    /**
+     * Workaround for a bug in window manager which results that onEnterAnimationComplete doesn't
+     * get called in all cases.
+     */
+    private final Runnable mEnterAnimationCompleteTimeoutRunnable = new Runnable() {
+        @Override
+        public void run() {
+            onEnterAnimationComplete();
+        }
+    };
 }
