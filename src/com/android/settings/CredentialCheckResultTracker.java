@@ -23,7 +23,7 @@ import android.os.Bundle;
 /**
  * An invisible retained fragment to track lock check result.
  */
-class CredentialCheckResultTracker extends Fragment {
+public class CredentialCheckResultTracker extends Fragment {
 
     private Listener mListener;
     private boolean mHasResult = false;
