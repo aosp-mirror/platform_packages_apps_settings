@@ -158,10 +158,19 @@ public final class ChooseLockSettingsHelper {
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, hasChallenge);
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, challenge);
         intent.setClassName(ConfirmDeviceCredentialBaseFragment.PACKAGE, activityClass.getName());
-        if (mFragment != null) {
-            mFragment.startActivityForResult(intent, request);
+        if (external) {
+            intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+            if (mFragment != null) {
+                mFragment.startActivity(intent);
+            } else {
+                mActivity.startActivity(intent);
+            }
         } else {
-            mActivity.startActivityForResult(intent, request);
+            if (mFragment != null) {
+                mFragment.startActivityForResult(intent, request);
+            } else {
+                mActivity.startActivityForResult(intent, request);
+            }
         }
         return true;
     }
