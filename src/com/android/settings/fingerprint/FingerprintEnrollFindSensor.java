@@ -16,7 +16,6 @@
 
 package com.android.settings.fingerprint;
 
-import android.content.Context;
 import android.content.Intent;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
@@ -32,15 +31,19 @@ public class FingerprintEnrollFindSensor extends FingerprintEnrollBase {
 
     private static final int CONFIRM_REQUEST = 1;
     private static final int ENROLLING = 2;
+    public static final String EXTRA_KEY_LAUNCHED_CONFIRM = "launched_confirm_lock";
 
     private FingerprintLocationAnimationView mAnimation;
+    private boolean mLaunchedConfirmLock;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fingerprint_enroll_find_sensor);
         setHeaderText(R.string.security_settings_fingerprint_enroll_find_sensor_title);
-        if (mToken == null) {
+        mLaunchedConfirmLock = savedInstanceState != null && savedInstanceState.getBoolean(
+                EXTRA_KEY_LAUNCHED_CONFIRM);
+        if (mToken == null && !mLaunchedConfirmLock) {
             launchConfirmLock();
         }
         mAnimation = (FingerprintLocationAnimationView) findViewById(
@@ -57,6 +60,12 @@ public class FingerprintEnrollFindSensor extends FingerprintEnrollBase {
     protected void onStop() {
         super.onStop();
         mAnimation.stopAnimation();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(EXTRA_KEY_LAUNCHED_CONFIRM, mLaunchedConfirmLock);
     }
 
     @Override
@@ -107,6 +116,8 @@ public class FingerprintEnrollFindSensor extends FingerprintEnrollBase {
             // This shouldn't happen, as we should only end up at this step if a lock thingy is
             // already set.
             finish();
+        } else {
+            mLaunchedConfirmLock = true;
         }
     }
 
