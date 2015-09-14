@@ -352,12 +352,9 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"Terminé"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"Oups, ce n\'est pas le capteur"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="5053971232594165142">"Utilisez capteur empreinte dig. sur appareil."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (3618021988442639280) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (2942551158278899627) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_generic_dialog_message (3624760637222239293) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="3618021988442639280">"L\'inscription n\'a pas été terminée"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="2942551158278899627">"Le temps attribué pour l\'enregistrement des empreintes digitales est écoulé. Veuillez essayer de nouveau."</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="3624760637222239293">"L\'enregistrement des empreintes digitales ne fonctionne pas. Essayez à nouveau ou utilisez un autre doigt."</string>
     <string name="fingerprint_enroll_button_add" msgid="6317978977419045463">"Ajouter une ligne"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"Suivant"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Votre empreinte digitale vous permet non seulement de déverrouiller votre téléphone, mais également d\'autoriser des achats et l\'accès à l\'application. "<annotation id="url">"En savoir plus"</annotation></string>
@@ -402,6 +399,7 @@
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"Le mot de passe entré est correct. Malheureusement, vos données sont corrompues.\n\nPour continuer d\'utiliser votre téléphone, vous devez rétablir sa configuration d\'usine. Une fois cette opération terminée, vous pourrez restaurer toutes les données que vous aviez sauvegardées dans votre compte Google lors de la nouvelle configuration de votre téléphone."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Changer le mode de saisie"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Sélect. verr. écran"</string>
+    <string name="setup_lock_settings_picker_title" msgid="1584792702475081908">"Sélectionner le verrouillage de l\'écran"</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Choisissez votre méthode secondaire de verrouillage d\'écran"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Verrouillage de l\'écran"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Modifier écran verr."</string>
@@ -831,13 +829,10 @@
     <string name="brightness_summary" msgid="838917350127550703">"Régler la luminosité de l\'écran"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"Luminosité adaptative"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"Optimise le niveau de luminosité en fonction de l\'éclairage ambiant"</string>
-    <!-- no translation found for night_mode_title (2594133148531256513) -->
-    <skip />
+    <string name="night_mode_title" msgid="2594133148531256513">"Mode Nuit"</string>
     <string name="night_mode_summary" msgid="9196605054622017193">"%s"</string>
-    <!-- no translation found for night_mode_no (9171772244775838901) -->
-    <skip />
-    <!-- no translation found for night_mode_yes (2218157265997633432) -->
-    <skip />
+    <string name="night_mode_no" msgid="9171772244775838901">"Désactivé"</string>
+    <string name="night_mode_yes" msgid="2218157265997633432">"Toujours actif"</string>
     <string name="night_mode_auto" msgid="7508348175804304327">"Automatique"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Veille"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"L\'écran s\'éteint"</string>
@@ -1933,10 +1928,8 @@
     <string name="credentials_reset_summary" msgid="3369361230171260282">"Supprimer tous les certificats"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"Certificats de confiance"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"Afficher les certificats d\'autorité de confiance"</string>
-    <!-- no translation found for user_credentials (3719013347787187083) -->
-    <skip />
-    <!-- no translation found for user_credentials_summary (7271228342106080167) -->
-    <skip />
+    <string name="user_credentials" msgid="3719013347787187083">"Authentifiants de l\'utilisateur"</string>
+    <string name="user_credentials_summary" msgid="7271228342106080167">"Afficher et modifier les authentifiants stockés"</string>
     <string name="advanced_security_title" msgid="2434776238010578865">"Avancés"</string>
     <string name="credential_storage_type" msgid="8629968543494001364">"Type de stockage"</string>
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"Intégré au matériel"</string>
@@ -2288,16 +2281,11 @@
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"Activer le certificat d\'autorité du système?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"Désactiver le certificat d\'autorité du système?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"Supprimer définitivement le certificat d\'autorité utilisateur?"</string>
-    <!-- no translation found for one_userkey (6034020579534914349) -->
-    <skip />
-    <!-- no translation found for one_usercrt (2150319011101639509) -->
-    <skip />
-    <!-- no translation found for one_cacrt (6844397037970164809) -->
-    <skip />
-    <!-- no translation found for n_cacrts (5979300323482053820) -->
-    <skip />
-    <!-- no translation found for user_credential_title (1329449215749665378) -->
-    <skip />
+    <string name="one_userkey" msgid="6034020579534914349">"une clé d\'utilisateur"</string>
+    <string name="one_usercrt" msgid="2150319011101639509">"un certificat d\'utilisateur"</string>
+    <string name="one_cacrt" msgid="6844397037970164809">"un certificat CA"</string>
+    <string name="n_cacrts" msgid="5979300323482053820">"%d certificats CA"</string>
+    <string name="user_credential_title" msgid="1329449215749665378">"Détails de l\'authentifiant"</string>
     <string name="spellcheckers_settings_title" msgid="399981228588011501">"Correcteur orthographique"</string>
     <string name="current_backup_pw_prompt" msgid="7735254412051914576">"Saisissez le mot de passe actuel utilisé pour les sauvegardes complètes."</string>
     <string name="new_backup_pw_prompt" msgid="8755501377391998428">"Saisissez votre nouveau mot de passe pour les sauvegardes complètes."</string>
@@ -2808,8 +2796,7 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="3459065925679828230">"Optimisation de la pile"</string>
     <string name="high_power_filter_on" msgid="3222265297576680099">"Non optimisée"</string>
-    <!-- no translation found for high_power_on (6216293998227583810) -->
-    <skip />
+    <string name="high_power_on" msgid="6216293998227583810">"Non optimisée"</string>
     <string name="high_power_off" msgid="3393904131961263278">"L\'utilisation de la pile est optimisée"</string>
     <string name="high_power_system" msgid="7362862974428225301">"L\'optimisation de la pile n\'est pas disponible"</string>
     <string name="high_power_desc" msgid="6283926163708585760">"N\'appliquer aucune optimisation de la pile. Cela risque de décharger la pile plus rapidement."</string>
@@ -2856,7 +2843,7 @@
     <string name="memory_performance" msgid="5661005192284103281">"Performance"</string>
     <string name="total_memory" msgid="2017287600738630165">"Mémoire totale"</string>
     <string name="average_used" msgid="5338339266517245782">"Utilisation moyenne (%)"</string>
-    <string name="free_memory" msgid="4003936141603549746">"Gratuit"</string>
+    <string name="free_memory" msgid="4003936141603549746">"Libre"</string>
     <string name="memory_usage_apps" msgid="5650192998273294098">"Mémoire utilisée par les applications"</string>
     <plurals name="memory_usage_apps_summary" formatted="false" msgid="6089210945574265774">
       <item quantity="one"><xliff:g id="COUNT">%1$d</xliff:g> application a utilisé de la mémoire au cours de la période suivante : <xliff:g id="DURATION_1">%2$s</xliff:g></item>
@@ -2902,8 +2889,6 @@
     <string name="write_settings_off" msgid="5156104383386336233">"Non"</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"Pivot. poignet deux fois pour app. photo"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Ouvrez l\'application de l\'appareil photo en pivotant votre poignet deux fois"</string>
-    <!-- no translation found for camera_double_tap_power_gesture_title (1651873760405034645) -->
-    <skip />
-    <!-- no translation found for camera_double_tap_power_gesture_desc (7355664631775680376) -->
-    <skip />
+    <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"App. 2x sur interr. pr activ. app. photo"</string>
+    <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Lancez rapidement l\'appareil photo sans déverrouiller l\'écran"</string>
 </resources>

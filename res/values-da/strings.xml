@@ -352,12 +352,9 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"Færdig"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"Hov! Dette er ikke sensoren"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="5053971232594165142">"Brug fingeraftrykssensoren på din enhed."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (3618021988442639280) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (2942551158278899627) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_generic_dialog_message (3624760637222239293) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="3618021988442639280">"Registreringen kunne ikke gennemføres"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="2942551158278899627">"Tidsgrænsen for registrering af fingeraftryk blev overskredet. Prøv igen."</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="3624760637222239293">"Registrering af fingeraftryk virkede ikke. Prøv igen, eller brug en anden finger."</string>
     <string name="fingerprint_enroll_button_add" msgid="6317978977419045463">"Tilføj endnu et"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"Næste"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Ud over at bruge fingeraftryk til at låse telefonen op kan du også bruge fingeraftryk til at godkende køb og få adgang til apps. "<annotation id="url">"Få flere oplysninger"</annotation></string>
@@ -402,6 +399,7 @@
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"Den indtastede adgangskode er korrekt, men desværre er dine data beskadigede. \n\nFør du kan bruge din telefon igen, skal du gendanne fabriksindstillingerne. Under den efterfølgende opsætning af telefonen får du mulighed for at gendanne eventuelle data, der er sikkerhedskopieret på din Google-konto."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Skift indtastningsmetode"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Vælg skærmlås"</string>
+    <string name="setup_lock_settings_picker_title" msgid="1584792702475081908">"Vælg skærmlås"</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Vælg din alternative metode til skærmlåsning"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Skærmlås"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Skifte låseskærm"</string>
@@ -831,13 +829,10 @@
     <string name="brightness_summary" msgid="838917350127550703">"Juster skærmens lysstyrke"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"Tilpasset lysstyrke"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"Optimer lysstyrken til det omgivende lys"</string>
-    <!-- no translation found for night_mode_title (2594133148531256513) -->
-    <skip />
+    <string name="night_mode_title" msgid="2594133148531256513">"Nattilstand"</string>
     <string name="night_mode_summary" msgid="9196605054622017193">"%s"</string>
-    <!-- no translation found for night_mode_no (9171772244775838901) -->
-    <skip />
-    <!-- no translation found for night_mode_yes (2218157265997633432) -->
-    <skip />
+    <string name="night_mode_no" msgid="9171772244775838901">"Deaktiveret"</string>
+    <string name="night_mode_yes" msgid="2218157265997633432">"Altid slået til"</string>
     <string name="night_mode_auto" msgid="7508348175804304327">"Automatisk"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Dvale"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Skærmen slukker"</string>
@@ -1933,10 +1928,8 @@
     <string name="credentials_reset_summary" msgid="3369361230171260282">"Fjern alle certifikater"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"Pålidelige loginoplysninger"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"Vis pålidelige CA-certifikater"</string>
-    <!-- no translation found for user_credentials (3719013347787187083) -->
-    <skip />
-    <!-- no translation found for user_credentials_summary (7271228342106080167) -->
-    <skip />
+    <string name="user_credentials" msgid="3719013347787187083">"Brugerloginoplysninger"</string>
+    <string name="user_credentials_summary" msgid="7271228342106080167">"Se og rediger gemte loginoplysninger"</string>
     <string name="advanced_security_title" msgid="2434776238010578865">"Avanceret"</string>
     <string name="credential_storage_type" msgid="8629968543494001364">"Lagertype"</string>
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"Hardwarebaseret"</string>
@@ -2288,16 +2281,11 @@
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"Vil du aktivere systemets CA-certifikat?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"Vil du deaktivere systemets CA-certifikat?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"Vil du fjerne bruger-CA-certifikatet?"</string>
-    <!-- no translation found for one_userkey (6034020579534914349) -->
-    <skip />
-    <!-- no translation found for one_usercrt (2150319011101639509) -->
-    <skip />
-    <!-- no translation found for one_cacrt (6844397037970164809) -->
-    <skip />
-    <!-- no translation found for n_cacrts (5979300323482053820) -->
-    <skip />
-    <!-- no translation found for user_credential_title (1329449215749665378) -->
-    <skip />
+    <string name="one_userkey" msgid="6034020579534914349">"én brugernøgle"</string>
+    <string name="one_usercrt" msgid="2150319011101639509">"ét brugercertifikat"</string>
+    <string name="one_cacrt" msgid="6844397037970164809">"ét CA-certifikat"</string>
+    <string name="n_cacrts" msgid="5979300323482053820">"%d CA-certifikater"</string>
+    <string name="user_credential_title" msgid="1329449215749665378">"Loginoplysninger"</string>
     <string name="spellcheckers_settings_title" msgid="399981228588011501">"Stavekontrol"</string>
     <string name="current_backup_pw_prompt" msgid="7735254412051914576">"Indtast her din aktuelle adgangskode til fuldstændig sikkerhedskopiering"</string>
     <string name="new_backup_pw_prompt" msgid="8755501377391998428">"Angiv her en ny adgangskode til fuldstændig sikkerhedskopiering"</string>
@@ -2808,8 +2796,7 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="3459065925679828230">"Batterioptimering"</string>
     <string name="high_power_filter_on" msgid="3222265297576680099">"Ikke-optimeret"</string>
-    <!-- no translation found for high_power_on (6216293998227583810) -->
-    <skip />
+    <string name="high_power_on" msgid="6216293998227583810">"Ikke-optimeret"</string>
     <string name="high_power_off" msgid="3393904131961263278">"Optimeret batteriforbrug"</string>
     <string name="high_power_system" msgid="7362862974428225301">"Batterioptimering er ikke tilgængelig"</string>
     <string name="high_power_desc" msgid="6283926163708585760">"Undlad at anvende batterioptimering. Batteriet aflades muligvis hurtigere."</string>
@@ -2902,8 +2889,6 @@
     <string name="write_settings_off" msgid="5156104383386336233">"Nej"</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"Drej to gange for at åbne kameraet"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Åbn kameraappen ved at dreje håndleddet to gange"</string>
-    <!-- no translation found for camera_double_tap_power_gesture_title (1651873760405034645) -->
-    <skip />
-    <!-- no translation found for camera_double_tap_power_gesture_desc (7355664631775680376) -->
-    <skip />
+    <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Tryk to gange på afbryderknappen for at åbne kameraet"</string>
+    <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Åbn hurtigt kameraet uden at låse skærmen op"</string>
 </resources>

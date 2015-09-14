@@ -352,12 +352,9 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"முடிந்தது"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"அச்சச்சோ, அது உணர்வி இல்லை"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="5053971232594165142">"சாதனத்தின் கைரேகை உணர்வியைப் பயன்படுத்தவும்."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (3618021988442639280) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (2942551158278899627) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_generic_dialog_message (3624760637222239293) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="3618021988442639280">"பதிவுசெய்ய முடியவில்லை"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="2942551158278899627">"கைரேகையைப் பதிவுசெய்வதற்கான நேரம் முடிந்தது. மீண்டும் முயற்சிக்கவும்."</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="3624760637222239293">"கைரேகையைப் பதிவுசெய்ய முடியவில்லை. மீண்டும் முயற்சிக்கவும் அல்லது வேறு விரலைப் பயன்படுத்தவும்."</string>
     <string name="fingerprint_enroll_button_add" msgid="6317978977419045463">"மற்றொன்றைச் சேர்"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"அடுத்து"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"மொபைலைத் திறக்க மட்டுமில்லாமல், பர்ச்சேஸ்களை உறுதிப்படுத்தவும் பயன்பாட்டை அணுகவும் கைரேகையைப் பயன்படுத்தலாம். "<annotation id="url">"மேலும் அறிக"</annotation></string>
@@ -402,6 +399,7 @@
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"சரியான கடவுச்சொல்லை உள்ளிட்டீர்கள், ஆனால் எதிர்பாராதவிதமாக உங்கள் தரவு சிதைந்துவிட்டது. \n\nமொபைலை மீண்டும் பயன்படுத்த, ஆரம்பநிலை மீட்டமைவைச் செயல்படுத்தவும். மீட்டமைத்த பின் மொபைலை அமைக்கும் போது, Google கணக்கில் காப்புப் பிரதி எடுக்கப்பட்ட எந்தத் தரவையும் நீங்கள் மீட்டெடுக்க முடியும்."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"உள்ளீட்டு முறையை மாற்று"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"திரைப் பூட்டைத் தேர்வுசெய்யவும்"</string>
+    <string name="setup_lock_settings_picker_title" msgid="1584792702475081908">"திரைப் பூட்டைத் தேர்வுசெய்யவும்"</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"மாற்றுத் திரைப் பூட்டு முறையைத் தேர்வுசெய்க"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"திரைப் பூட்டு"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"பூட்டுத் திரையை மாற்றவும்"</string>
@@ -831,13 +829,10 @@
     <string name="brightness_summary" msgid="838917350127550703">"திரையின் ஒளிர்வைச் சரிசெய்யவும்"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"ஒளிர்வைத் தானாகச் சரிசெய்தல்"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"கிடைக்கும் ஒளிக்கேற்ப ஒளிர்வை சரிசெய்"</string>
-    <!-- no translation found for night_mode_title (2594133148531256513) -->
-    <skip />
+    <string name="night_mode_title" msgid="2594133148531256513">"இரவு பயன்முறை"</string>
     <string name="night_mode_summary" msgid="9196605054622017193">"%s"</string>
-    <!-- no translation found for night_mode_no (9171772244775838901) -->
-    <skip />
-    <!-- no translation found for night_mode_yes (2218157265997633432) -->
-    <skip />
+    <string name="night_mode_no" msgid="9171772244775838901">"முடக்கப்பட்டது"</string>
+    <string name="night_mode_yes" msgid="2218157265997633432">"எப்போதும் இயக்கத்தில் வை"</string>
     <string name="night_mode_auto" msgid="7508348175804304327">"தானியங்கு"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"உறக்கநிலையிலிரு"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"திரை முடக்கப்படும்"</string>
@@ -1933,10 +1928,8 @@
     <string name="credentials_reset_summary" msgid="3369361230171260282">"எல்லா சான்றிதழ்களையும் அகற்று"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"நம்பிக்கைச் சான்றுகள்"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"நம்பகமான CA சான்றிதழ்களைக் காட்டவும்"</string>
-    <!-- no translation found for user_credentials (3719013347787187083) -->
-    <skip />
-    <!-- no translation found for user_credentials_summary (7271228342106080167) -->
-    <skip />
+    <string name="user_credentials" msgid="3719013347787187083">"பயனரின் நற்சான்றிதழ்கள்"</string>
+    <string name="user_credentials_summary" msgid="7271228342106080167">"சேமித்த நற்சான்றிதழ்களைப் பார்க்கும், திருத்தும்"</string>
     <string name="advanced_security_title" msgid="2434776238010578865">"மேம்பட்டது"</string>
     <string name="credential_storage_type" msgid="8629968543494001364">"சேமிப்பிடத்தின் வகை"</string>
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"வன்பொருள்-காப்புப் பிரதியெடுக்கப்பட்டது"</string>
@@ -2288,16 +2281,11 @@
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"அமைப்பின் CA சான்றிதழை இயக்கவா?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"அமைப்பின் CA சான்றிதழை முடக்கவா?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"பயனரின் CA சான்றிதழை நிரந்தரமாக அகற்றவா?"</string>
-    <!-- no translation found for one_userkey (6034020579534914349) -->
-    <skip />
-    <!-- no translation found for one_usercrt (2150319011101639509) -->
-    <skip />
-    <!-- no translation found for one_cacrt (6844397037970164809) -->
-    <skip />
-    <!-- no translation found for n_cacrts (5979300323482053820) -->
-    <skip />
-    <!-- no translation found for user_credential_title (1329449215749665378) -->
-    <skip />
+    <string name="one_userkey" msgid="6034020579534914349">"ஒரு பயனர் குறியீடு"</string>
+    <string name="one_usercrt" msgid="2150319011101639509">"ஒரு பயனர் சான்றிதழ்"</string>
+    <string name="one_cacrt" msgid="6844397037970164809">"ஒரு CA சான்றிதழ்"</string>
+    <string name="n_cacrts" msgid="5979300323482053820">"%d CA சான்றிதழ்கள்"</string>
+    <string name="user_credential_title" msgid="1329449215749665378">"நற்சான்றிதழின் விவரங்கள்"</string>
     <string name="spellcheckers_settings_title" msgid="399981228588011501">"பிழைத்திருத்தி"</string>
     <string name="current_backup_pw_prompt" msgid="7735254412051914576">"உங்கள் தற்போதைய முழு காப்புப்பிரதி கடவுச்சொல்லை இங்கே உள்ளிடவும்"</string>
     <string name="new_backup_pw_prompt" msgid="8755501377391998428">"முழு காப்புப்பிரதிக்கான புதிய கடவுச்சொல்லை இங்கே உள்ளிடவும்"</string>
@@ -2808,8 +2796,7 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="3459065925679828230">"பேட்டரி மேம்படுத்தல்"</string>
     <string name="high_power_filter_on" msgid="3222265297576680099">"மேம்படுத்தப்படாதவை"</string>
-    <!-- no translation found for high_power_on (6216293998227583810) -->
-    <skip />
+    <string name="high_power_on" msgid="6216293998227583810">"மேம்படுத்தப்படாதது"</string>
     <string name="high_power_off" msgid="3393904131961263278">"பேட்டரி உபயோகத்தை மேம்படுத்தும்"</string>
     <string name="high_power_system" msgid="7362862974428225301">"பேட்டரி மேம்படுத்தல் இல்லை"</string>
     <string name="high_power_desc" msgid="6283926163708585760">"பேட்டரி மேம்படுத்தலைப் பயன்படுத்தவில்லை எனில், உங்கள் பேட்டரி மிக விரைவில் தீர்ந்துவிடக்கூடும்."</string>
@@ -2902,8 +2889,6 @@
     <string name="write_settings_off" msgid="5156104383386336233">"அனுமதிக்கப்படவில்லை"</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"கேமராவைத் திறக்க, இருமுறை திருப்புதல்"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"உங்கள் மணிக்கட்டை இருமுறை திருப்புவதன் மூலம் கேமரா பயன்பாட்டைத் திறக்கலாம்"</string>
-    <!-- no translation found for camera_double_tap_power_gesture_title (1651873760405034645) -->
-    <skip />
-    <!-- no translation found for camera_double_tap_power_gesture_desc (7355664631775680376) -->
-    <skip />
+    <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"கேமராவிற்கு பவர் பட்டனை இருமுறை அழுத்துக"</string>
+    <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"திரையைத் திறக்காமலேயே கேமராவை வேகமாகத் திறக்கும்"</string>
 </resources>

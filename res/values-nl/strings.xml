@@ -352,12 +352,9 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"Gereed"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"Dat is niet de sensor"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="5053971232594165142">"Gebruik de vingerafdruksensor op je apparaat."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (3618021988442639280) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (2942551158278899627) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_generic_dialog_message (3624760637222239293) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="3618021988442639280">"Registratie is niet voltooid"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="2942551158278899627">"Tijdlimiet voor vingerafdrukregistratie is bereikt. Probeer het opnieuw."</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="3624760637222239293">"Vingerafdrukregistratie is mislukt. Probeer het opnieuw of gebruik een andere vinger."</string>
     <string name="fingerprint_enroll_button_add" msgid="6317978977419045463">"Nog een toevoegen"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"Volgende"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Behalve voor het ontgrendelen van je telefoon kun je je vingerafdruk ook gebruiken voor het autoriseren van aankopen en app-toegang. "<annotation id="url">"Meer informatie"</annotation></string>
@@ -402,6 +399,7 @@
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"Het wachtwoord dat je hebt opgegeven, is correct, maar je gegevens zijn beschadigd. \n\nAls je je telefoon weer wilt gebruiken, moet je deze terugzetten naar de fabrieksinstellingen. Wanneer je je telefoon configureert na het terugzetten, heb je de mogelijkheid gegevens waarvan je een back-up in je Google-account hebt gemaakt, te herstellen."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Invoermethode schakelen"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Schermvergrendeling kiezen"</string>
+    <string name="setup_lock_settings_picker_title" msgid="1584792702475081908">"Schermvergrendeling kiezen"</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Kies je back-upmethode voor schermvergrendeling"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Schermvergrendeling"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Schermvergr. wijzigen"</string>
@@ -831,13 +829,10 @@
     <string name="brightness_summary" msgid="838917350127550703">"Helderheid van het scherm aanpassen"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"Aanpasbare helderheid"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"Helderheidsniveau optimaliseren voor beschikbaar licht"</string>
-    <!-- no translation found for night_mode_title (2594133148531256513) -->
-    <skip />
+    <string name="night_mode_title" msgid="2594133148531256513">"Nachtmodus"</string>
     <string name="night_mode_summary" msgid="9196605054622017193">"%s"</string>
-    <!-- no translation found for night_mode_no (9171772244775838901) -->
-    <skip />
-    <!-- no translation found for night_mode_yes (2218157265997633432) -->
-    <skip />
+    <string name="night_mode_no" msgid="9171772244775838901">"Uitgeschakeld"</string>
+    <string name="night_mode_yes" msgid="2218157265997633432">"Altijd aan"</string>
     <string name="night_mode_auto" msgid="7508348175804304327">"Automatisch"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Slaapstand"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Scherm wordt uitgeschakeld"</string>
@@ -1933,10 +1928,8 @@
     <string name="credentials_reset_summary" msgid="3369361230171260282">"Alle certificaten verwijderen"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"Vertrouwde certificaatgegevens"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"Vertrouwde CA-certificaten weergeven"</string>
-    <!-- no translation found for user_credentials (3719013347787187083) -->
-    <skip />
-    <!-- no translation found for user_credentials_summary (7271228342106080167) -->
-    <skip />
+    <string name="user_credentials" msgid="3719013347787187083">"Inloggegevens van gebruiker"</string>
+    <string name="user_credentials_summary" msgid="7271228342106080167">"Opgeslagen inloggegevens bekijken en aanpassen"</string>
     <string name="advanced_security_title" msgid="2434776238010578865">"Geavanceerd"</string>
     <string name="credential_storage_type" msgid="8629968543494001364">"Opslagtype"</string>
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"Ondersteund door hardware"</string>
@@ -2288,16 +2281,11 @@
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"Het CA-certificaat voor het systeem inschakelen?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"Het CA-certificaat voor het systeem uitschakelen?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"CA-certificaat van gebruiker permanent verwijderen?"</string>
-    <!-- no translation found for one_userkey (6034020579534914349) -->
-    <skip />
-    <!-- no translation found for one_usercrt (2150319011101639509) -->
-    <skip />
-    <!-- no translation found for one_cacrt (6844397037970164809) -->
-    <skip />
-    <!-- no translation found for n_cacrts (5979300323482053820) -->
-    <skip />
-    <!-- no translation found for user_credential_title (1329449215749665378) -->
-    <skip />
+    <string name="one_userkey" msgid="6034020579534914349">"één gebruikerssleutel"</string>
+    <string name="one_usercrt" msgid="2150319011101639509">"één gebruikerscertificaat"</string>
+    <string name="one_cacrt" msgid="6844397037970164809">"één CA-certificaat"</string>
+    <string name="n_cacrts" msgid="5979300323482053820">"%d CA-certificaten"</string>
+    <string name="user_credential_title" msgid="1329449215749665378">"Inloggegevens"</string>
     <string name="spellcheckers_settings_title" msgid="399981228588011501">"Spellingcontrole"</string>
     <string name="current_backup_pw_prompt" msgid="7735254412051914576">"Typ hier je huidige wachtwoord voor volledige back-up"</string>
     <string name="new_backup_pw_prompt" msgid="8755501377391998428">"Typ hier je nieuwe wachtwoord voor volledige back-up"</string>
@@ -2808,8 +2796,7 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="3459065925679828230">"Accuoptimalisatie"</string>
     <string name="high_power_filter_on" msgid="3222265297576680099">"Niet geoptimaliseerd"</string>
-    <!-- no translation found for high_power_on (6216293998227583810) -->
-    <skip />
+    <string name="high_power_on" msgid="6216293998227583810">"Niet geoptimaliseerd"</string>
     <string name="high_power_off" msgid="3393904131961263278">"Accuverbruik optimaliseren"</string>
     <string name="high_power_system" msgid="7362862974428225301">"Accuoptimalisatie niet beschikbaar"</string>
     <string name="high_power_desc" msgid="6283926163708585760">"Accuoptimalisatie niet toepassen. Hierdoor kan je accuverbruik toenemen."</string>
@@ -2902,8 +2889,6 @@
     <string name="write_settings_off" msgid="5156104383386336233">"Nee"</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"Twee keer draaien voor camera"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Open de camera-app door je pols twee keer te draaien"</string>
-    <!-- no translation found for camera_double_tap_power_gesture_title (1651873760405034645) -->
-    <skip />
-    <!-- no translation found for camera_double_tap_power_gesture_desc (7355664631775680376) -->
-    <skip />
+    <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Druk twee keer op aan/uit voor de camera"</string>
+    <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Camera snel openen zonder het scherm te ontgrendelen"</string>
 </resources>
