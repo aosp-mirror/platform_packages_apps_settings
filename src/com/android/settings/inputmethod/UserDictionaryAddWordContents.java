@@ -126,7 +126,7 @@ public class UserDictionaryAddWordContents {
         }
         final String newWord = mWordEditText.getText().toString();
         final String newShortcut;
-        if (null == mShortcutEditText) {
+        if (null == mShortcutEditText || mShortcutEditText.contains(" ")) {
             newShortcut = null;
         } else {
             final String tmpShortcut = mShortcutEditText.getText().toString();
