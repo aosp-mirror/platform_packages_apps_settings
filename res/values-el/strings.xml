@@ -352,12 +352,9 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"Τέλος"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"Ωχ, αυτό δεν είναι ο αισθητήρας"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="5053971232594165142">"Χρήση αισθητήρα μοναδικού χαρακτ. συσκευής."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (3618021988442639280) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (2942551158278899627) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_generic_dialog_message (3624760637222239293) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="3618021988442639280">"Η εγγραφή δεν ολοκληρώθηκε"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="2942551158278899627">"Λήξη χρονικού ορίου εγγραφής δακτυλικών αποτυπωμάτων. Δοκιμάστε ξανά."</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="3624760637222239293">"Αποτυχία εγγραφής δακτυλικών αποτυπωμάτων. Δοκιμάστε ξανά ή χρησιμοποιήστε ένα άλλο δάκτυλο."</string>
     <string name="fingerprint_enroll_button_add" msgid="6317978977419045463">"Προσθήκη άλλου"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"Επόμενο"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Εκτός από τη δυνατότητα ξεκλειδώματος του τηλεφώνου σας, μπορείτε επίσης να χρησιμοποιήσετε το μοναδικό χαρακτηριστικό σας, για να εξουσιοδοτήσετε αγορές και πρόσβαση σε εφαρμογές. "<annotation id="url">"Μάθετε περισσότερα"</annotation></string>
@@ -402,6 +399,7 @@
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"Ο κωδικός που καταχωρίσατε είναι σωστός, αλλά, δυστυχώς, τα δεδομένα σας είναι κατεστραμμένα.\n\nΓια να συνεχίσετε να χρησιμοποιείτε το τηλέφωνό σας, θα πρέπει να κάνετε επαναφορά των εργοστασιακών ρυθμίσεων. Κατά τη ρύθμιση του τηλεφώνου σας μετά την επαναφορά, θα έχετε την ευκαιρία να αποκαταστήσετε όλα τα δεδομένα για τα οποία δημιουργήσατε αντίγραφα ασφαλείας στο Λογαριασμό σας Google."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Εναλλαγή μεθόδου εισαγωγής"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Επιλογή κλειδ. οθ."</string>
+    <string name="setup_lock_settings_picker_title" msgid="1584792702475081908">"Επιλογή κλειδιού οθόνης"</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Επιλέξτε εφεδρική μέθοδο κλειδώματος οθόνης"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Κλείδωμα οθόνης"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Αλλαγή κλειδώματος οθ."</string>
@@ -831,13 +829,10 @@
     <string name="brightness_summary" msgid="838917350127550703">"Ρύθμιση της φωτεινότητας της οθόνης"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"Προσαρμοστική φωτεινότητα"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"Βελτιστοποίηση του επιπέδου φωτεινότητας για το διαθέσιμο φως"</string>
-    <!-- no translation found for night_mode_title (2594133148531256513) -->
-    <skip />
+    <string name="night_mode_title" msgid="2594133148531256513">"Λειτουργία νύχτας"</string>
     <string name="night_mode_summary" msgid="9196605054622017193">"%s"</string>
-    <!-- no translation found for night_mode_no (9171772244775838901) -->
-    <skip />
-    <!-- no translation found for night_mode_yes (2218157265997633432) -->
-    <skip />
+    <string name="night_mode_no" msgid="9171772244775838901">"Ανενεργό"</string>
+    <string name="night_mode_yes" msgid="2218157265997633432">"Πάντα ενεργό"</string>
     <string name="night_mode_auto" msgid="7508348175804304327">"Αυτόματο"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Χρόνος αδράνειας"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Η οθόνη απενεργοποιείται"</string>
@@ -1933,10 +1928,8 @@
     <string name="credentials_reset_summary" msgid="3369361230171260282">"Κατάργηση όλων των πιστοποιητικών"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"Αξιόπιστα διαπ/τήρια"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"Προβολή αξιόπιστων πιστοποιητικών CA"</string>
-    <!-- no translation found for user_credentials (3719013347787187083) -->
-    <skip />
-    <!-- no translation found for user_credentials_summary (7271228342106080167) -->
-    <skip />
+    <string name="user_credentials" msgid="3719013347787187083">"Διαπιστευτήρια χρήστη"</string>
+    <string name="user_credentials_summary" msgid="7271228342106080167">"Προβολή και τροποποίηση αποθηκευμένων διαπιστευτηρίων"</string>
     <string name="advanced_security_title" msgid="2434776238010578865">"Για προχωρημένους"</string>
     <string name="credential_storage_type" msgid="8629968543494001364">"Τύπος αποθήκευσης"</string>
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"Με υποστήριξη εξοπλισμού"</string>
@@ -2288,16 +2281,11 @@
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"Ενεργοποίηση πιστοποιητικού CA συστήματος;"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"Απενεργοποίηση πιστοποιητικού CA συστήματος;"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"Να καταργηθεί οριστικά το πιστοποιητικό CA χρήστη;"</string>
-    <!-- no translation found for one_userkey (6034020579534914349) -->
-    <skip />
-    <!-- no translation found for one_usercrt (2150319011101639509) -->
-    <skip />
-    <!-- no translation found for one_cacrt (6844397037970164809) -->
-    <skip />
-    <!-- no translation found for n_cacrts (5979300323482053820) -->
-    <skip />
-    <!-- no translation found for user_credential_title (1329449215749665378) -->
-    <skip />
+    <string name="one_userkey" msgid="6034020579534914349">"κλειδί για ένα χρήστη"</string>
+    <string name="one_usercrt" msgid="2150319011101639509">"πιστοποιητικό για ένα χρήστη"</string>
+    <string name="one_cacrt" msgid="6844397037970164809">"πιστοποιητικό μίας αρχής πιστοποίησης"</string>
+    <string name="n_cacrts" msgid="5979300323482053820">"Πιστοποιητικά αρχών πιστοποίησης %d"</string>
+    <string name="user_credential_title" msgid="1329449215749665378">"Λεπτομέρειες διαπιστευτηρίων"</string>
     <string name="spellcheckers_settings_title" msgid="399981228588011501">"Ορθογραφικός έλεγχος"</string>
     <string name="current_backup_pw_prompt" msgid="7735254412051914576">"Πληκτρολογήστε τον τρέχοντα κωδικό πρόσβασής σας για πλήρες αντίγραφο ασφαλείας εδώ"</string>
     <string name="new_backup_pw_prompt" msgid="8755501377391998428">"Πληκτρολογήστε εδώ έναν νέο κωδικό πρόσβασης για πλήρη αντίγραφα ασφαλείας"</string>
@@ -2808,8 +2796,7 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="3459065925679828230">"Βελτιστοποίηση μπαταρίας"</string>
     <string name="high_power_filter_on" msgid="3222265297576680099">"Χωρίς βελτιστοποίηση"</string>
-    <!-- no translation found for high_power_on (6216293998227583810) -->
-    <skip />
+    <string name="high_power_on" msgid="6216293998227583810">"Χωρίς βελτιστοποίηση"</string>
     <string name="high_power_off" msgid="3393904131961263278">"Βελτιστοποίηση χρήσης μπαταρίας"</string>
     <string name="high_power_system" msgid="7362862974428225301">"Η βελτιστοποίηση μπαταρίας δεν είναι διαθέσιμη"</string>
     <string name="high_power_desc" msgid="6283926163708585760">"Να μην εφαρμόζεται βελτιστοποίηση μπαταρίας. Η μπαταρία σας ενδέχεται να εξαντλείται πιο γρήγορα."</string>
@@ -2902,8 +2889,6 @@
     <string name="write_settings_off" msgid="5156104383386336233">"Όχι"</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"Περιστρέψτε δύο φορές για κάμερα"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Ανοίξτε την εφαρμογή κάμερας περιστρέφοντας δύο φορές τον καρπό σας"</string>
-    <!-- no translation found for camera_double_tap_power_gesture_title (1651873760405034645) -->
-    <skip />
-    <!-- no translation found for camera_double_tap_power_gesture_desc (7355664631775680376) -->
-    <skip />
+    <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Διπλό πάτημα κουμπιού λειτ. για κάμερα"</string>
+    <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Γρήγορο άνοιγμα κάμερας χωρίς ξεκλείδωμα οθόνης"</string>
 </resources>

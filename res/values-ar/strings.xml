@@ -360,12 +360,9 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"تم"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"عفوًا، هذا ليس جهاز الاستشعار"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="5053971232594165142">"استخدم جهاز استشعار بصمة الإصبع على جهازك."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (3618021988442639280) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (2942551158278899627) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_generic_dialog_message (3624760637222239293) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="3618021988442639280">"لم يكتمل التسجيل"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="2942551158278899627">"تم بلوغ الحد الأقصى لزمن تسجيل بصمة الإصبع. يمكنك إعادة المحاولة."</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="3624760637222239293">"Fingerprint enrollment didn\'t work. Try again or use a different finger."</string>
     <string name="fingerprint_enroll_button_add" msgid="6317978977419045463">"إضافة بصمة إصبع أخرى"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"التالي"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"بالإضافة إلى إلغاء قفل هاتفك، يمكنك أيضًا استخدام بصمة إصبعك للسماح بعمليات الشراء والوصول إلى التطبيق. "<annotation id="url">"مزيد من المعلومات"</annotation></string>
@@ -410,6 +407,7 @@
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"‏كلمة المرور التي أدخلتها صحيحة، ولكن للأسف بياناتك تالفة. \n\nلاستئناف استخدام هاتفك، يلزمك إجراء إعادة تعيين إعدادات المصنع. عند إعداد الهاتف بعد إعادة التعيين، ستكون لديك فرصة لاستعادة أية بيانات تم نسخها احتياطيًا في حسابك على Google."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"تبديل أسلوب الإدخال"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"اختيار قفل الشاشة"</string>
+    <string name="setup_lock_settings_picker_title" msgid="1584792702475081908">"اختيار قفل الشاشة"</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"اختيار الطريقة الاحتياطية لقفل الشاشة"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"تأمين الشاشة"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"تغيير تأمين الشاشة"</string>
@@ -863,13 +861,10 @@
     <string name="brightness_summary" msgid="838917350127550703">"ضبط سطوع الشاشة"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"السطوع المتكيف"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"تحسين مستوى السطوع بحسب الإضاءة المتاحة"</string>
-    <!-- no translation found for night_mode_title (2594133148531256513) -->
-    <skip />
+    <string name="night_mode_title" msgid="2594133148531256513">"الوضع الليلي"</string>
     <string name="night_mode_summary" msgid="9196605054622017193">"%s"</string>
-    <!-- no translation found for night_mode_no (9171772244775838901) -->
-    <skip />
-    <!-- no translation found for night_mode_yes (2218157265997633432) -->
-    <skip />
+    <string name="night_mode_no" msgid="9171772244775838901">"معطَّل"</string>
+    <string name="night_mode_yes" msgid="2218157265997633432">"التشغيل دائمًا"</string>
     <string name="night_mode_auto" msgid="7508348175804304327">"تلقائيًا"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"السكون"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"إيقاف الشاشة"</string>
@@ -1969,10 +1964,8 @@
     <string name="credentials_reset_summary" msgid="3369361230171260282">"إزالة جميع الشهادات"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"بيانات اعتماد موثوقة"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"‏عرض شهادات CA الموثوقة"</string>
-    <!-- no translation found for user_credentials (3719013347787187083) -->
-    <skip />
-    <!-- no translation found for user_credentials_summary (7271228342106080167) -->
-    <skip />
+    <string name="user_credentials" msgid="3719013347787187083">"بيانات اعتماد المستخدم"</string>
+    <string name="user_credentials_summary" msgid="7271228342106080167">"عرض بيانات الاعتماد المخزَّنة وتعديلها"</string>
     <string name="advanced_security_title" msgid="2434776238010578865">"إعدادات متقدمة"</string>
     <string name="credential_storage_type" msgid="8629968543494001364">"نوع وحدة التخزين"</string>
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"وحدة تخزين صلبة"</string>
@@ -2324,16 +2317,11 @@
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"‏هل تريد تمكين شهادة CA للنظام؟"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"‏هل تريد تعطيل شهادة CA للنظام؟"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"‏هل تريد إزالة شهادة CA للمستخدم بشكل دائم؟"</string>
-    <!-- no translation found for one_userkey (6034020579534914349) -->
-    <skip />
-    <!-- no translation found for one_usercrt (2150319011101639509) -->
-    <skip />
-    <!-- no translation found for one_cacrt (6844397037970164809) -->
-    <skip />
-    <!-- no translation found for n_cacrts (5979300323482053820) -->
-    <skip />
-    <!-- no translation found for user_credential_title (1329449215749665378) -->
-    <skip />
+    <string name="one_userkey" msgid="6034020579534914349">"مفتاح مستخدم واحد"</string>
+    <string name="one_usercrt" msgid="2150319011101639509">"شهادة مستخدم واحدة"</string>
+    <string name="one_cacrt" msgid="6844397037970164809">"‏شهادة CA واحدة"</string>
+    <string name="n_cacrts" msgid="5979300323482053820">"‏%d شهادات CA"</string>
+    <string name="user_credential_title" msgid="1329449215749665378">"تفاصيل الاعتماد"</string>
     <string name="spellcheckers_settings_title" msgid="399981228588011501">"المدقق الإملائي"</string>
     <string name="current_backup_pw_prompt" msgid="7735254412051914576">"اكتب كلمة المرور الحالية للنسخة الاحتياطية الكاملة هنا"</string>
     <string name="new_backup_pw_prompt" msgid="8755501377391998428">"اكتب كلمة مرور جديدة للنسخ الاحتياطية الكاملة هنا"</string>
@@ -2872,8 +2860,7 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="3459065925679828230">"تحسين البطارية"</string>
     <string name="high_power_filter_on" msgid="3222265297576680099">"بدون تحسين"</string>
-    <!-- no translation found for high_power_on (6216293998227583810) -->
-    <skip />
+    <string name="high_power_on" msgid="6216293998227583810">"بدون تحسين"</string>
     <string name="high_power_off" msgid="3393904131961263278">"يحسِّن من استخدام البطارية"</string>
     <string name="high_power_system" msgid="7362862974428225301">"لا يتوفر تحسين للبطارية"</string>
     <string name="high_power_desc" msgid="6283926163708585760">"لا تستخدم تحسين البطارية، لأن ذلك قد يستنزف طاقة بطاريتك بسرعة."</string>
@@ -2974,8 +2961,6 @@
     <string name="write_settings_off" msgid="5156104383386336233">"لا"</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"يمكنك اللف مرتين لفتح الكاميرا"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"يمكنك فتح تطبيق الكاميرا من خلال لف رسغك مرتين"</string>
-    <!-- no translation found for camera_double_tap_power_gesture_title (1651873760405034645) -->
-    <skip />
-    <!-- no translation found for camera_double_tap_power_gesture_desc (7355664631775680376) -->
-    <skip />
+    <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"اضغط على زر التشغيل مرتين لتشغيل الكاميرا"</string>
+    <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"فتح الكاميرا سريعًا بدون إلغاء تأمين الشاشة"</string>
 </resources>

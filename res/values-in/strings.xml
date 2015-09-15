@@ -352,12 +352,9 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"Selesai"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"Ups, bukan itu sensornya"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="5053971232594165142">"Gunakan sensor sidik jari di perangkat."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (3618021988442639280) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (2942551158278899627) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_generic_dialog_message (3624760637222239293) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="3618021988442639280">"Pendaftaran tidak selesai"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="2942551158278899627">"Batas waktu pendaftaran sidik jari tercapai. Coba lagi."</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="3624760637222239293">"Pendaftaran sidik jari tidak berhasil. Coba lagi atau gunakan jari lain."</string>
     <string name="fingerprint_enroll_button_add" msgid="6317978977419045463">"Tambahkan yang lain"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"Berikutnya"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Selain membuka kunci ponsel, Anda juga dapat menggunakan sidik jari untuk mengotorisasi pembelian dan akses aplikasi. "<annotation id="url">"Pelajari lebih lanjut"</annotation></string>
@@ -402,6 +399,7 @@
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"Sandi yang Anda masukkan benar, namun sayangnya data rusak. \n\nUntuk melanjutkan dengan ponsel, Anda perlu mengembalikannya ke setelan pabrik. Jika Anda menyiapkan ponsel setelah setel ulang, akan ada kesempatan untuk memulihkan data apa pun yang telah dicadangkan ke Akun Google."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Beralih metode masukan"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Pilih kunci layar"</string>
+    <string name="setup_lock_settings_picker_title" msgid="1584792702475081908">"Pilih kunci layar"</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Pilih metode kunci layar cadangan"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Gembok layar"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Ubah layar gembok"</string>
@@ -831,13 +829,10 @@
     <string name="brightness_summary" msgid="838917350127550703">"Sesuaikan kecerahan layar"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"Kecerahan adaptif"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"Optimalkan tingkat kecerahan untuk cahaya yang tersedia"</string>
-    <!-- no translation found for night_mode_title (2594133148531256513) -->
-    <skip />
+    <string name="night_mode_title" msgid="2594133148531256513">"Mode malam"</string>
     <string name="night_mode_summary" msgid="9196605054622017193">"%s"</string>
-    <!-- no translation found for night_mode_no (9171772244775838901) -->
-    <skip />
-    <!-- no translation found for night_mode_yes (2218157265997633432) -->
-    <skip />
+    <string name="night_mode_no" msgid="9171772244775838901">"Dinonaktifkan"</string>
+    <string name="night_mode_yes" msgid="2218157265997633432">"Selalu aktif"</string>
     <string name="night_mode_auto" msgid="7508348175804304327">"Otomatis"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Tidur"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Layar mati"</string>
@@ -1933,10 +1928,8 @@
     <string name="credentials_reset_summary" msgid="3369361230171260282">"Hapus semua sertifikat"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"Kredensial tepercaya"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"Tampilkan sertifikat CA tepercaya"</string>
-    <!-- no translation found for user_credentials (3719013347787187083) -->
-    <skip />
-    <!-- no translation found for user_credentials_summary (7271228342106080167) -->
-    <skip />
+    <string name="user_credentials" msgid="3719013347787187083">"Kredensial pengguna"</string>
+    <string name="user_credentials_summary" msgid="7271228342106080167">"Lihat dan ubah kredensial yang tersimpan"</string>
     <string name="advanced_security_title" msgid="2434776238010578865">"Lanjutan"</string>
     <string name="credential_storage_type" msgid="8629968543494001364">"Jenis penyimpanan"</string>
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"Menggunakan perangkat keras"</string>
@@ -2288,16 +2281,11 @@
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"Aktifkan sertifikat CA sistem?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"Nonaktifkan sertifikat CA sistem?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"Hapus sertifikat CA pengguna secara permanen?"</string>
-    <!-- no translation found for one_userkey (6034020579534914349) -->
-    <skip />
-    <!-- no translation found for one_usercrt (2150319011101639509) -->
-    <skip />
-    <!-- no translation found for one_cacrt (6844397037970164809) -->
-    <skip />
-    <!-- no translation found for n_cacrts (5979300323482053820) -->
-    <skip />
-    <!-- no translation found for user_credential_title (1329449215749665378) -->
-    <skip />
+    <string name="one_userkey" msgid="6034020579534914349">"satu kunci pengguna"</string>
+    <string name="one_usercrt" msgid="2150319011101639509">"satu sertifikat pengguna"</string>
+    <string name="one_cacrt" msgid="6844397037970164809">"satu Sertifikat CA"</string>
+    <string name="n_cacrts" msgid="5979300323482053820">"Sertifikat CA %d"</string>
+    <string name="user_credential_title" msgid="1329449215749665378">"Detail Kredensial"</string>
     <string name="spellcheckers_settings_title" msgid="399981228588011501">"Pemeriksa ejaan"</string>
     <string name="current_backup_pw_prompt" msgid="7735254412051914576">"Ketikkan sandi cadangan penuh saat ini di sini"</string>
     <string name="new_backup_pw_prompt" msgid="8755501377391998428">"Ketik sandi baru untuk cadangan penuh di sini"</string>
@@ -2808,8 +2796,7 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="3459065925679828230">"Pengoptimalan baterai"</string>
     <string name="high_power_filter_on" msgid="3222265297576680099">"Tidak dioptimalkan"</string>
-    <!-- no translation found for high_power_on (6216293998227583810) -->
-    <skip />
+    <string name="high_power_on" msgid="6216293998227583810">"Tidak dioptimalkan"</string>
     <string name="high_power_off" msgid="3393904131961263278">"Mengoptimalkan penggunaan baterai"</string>
     <string name="high_power_system" msgid="7362862974428225301">"Pengoptimalan baterai tidak tersedia"</string>
     <string name="high_power_desc" msgid="6283926163708585760">"Jangan terapkan pengoptimalan baterai. Baterai akan lebih cepat habis."</string>
@@ -2902,8 +2889,6 @@
     <string name="write_settings_off" msgid="5156104383386336233">"Tidak"</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"Putar dua kali untuk kamera"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Membuka aplikasi kamera dengan memutar pergelangan tangan dua kali"</string>
-    <!-- no translation found for camera_double_tap_power_gesture_title (1651873760405034645) -->
-    <skip />
-    <!-- no translation found for camera_double_tap_power_gesture_desc (7355664631775680376) -->
-    <skip />
+    <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Tekan tombol daya dua kali untuk kamera"</string>
+    <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Buka kamera dengan cepat tanpa membuka kunci layar"</string>
 </resources>

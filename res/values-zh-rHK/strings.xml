@@ -352,12 +352,9 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"完成"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"糟糕，這不是感應器"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="5053971232594165142">"使用您裝置上的指紋感應器。"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (3618021988442639280) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (2942551158278899627) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_generic_dialog_message (3624760637222239293) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="3618021988442639280">"尚未完成註冊"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="2942551158278899627">"已達到指紋註冊次數上限，請重試。"</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="3624760637222239293">"無法註冊指紋，請重試或使用另一隻手指。"</string>
     <string name="fingerprint_enroll_button_add" msgid="6317978977419045463">"新增其他"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"下一步"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"除了解鎖您的手機，您也可以使用您的指紋授權購買和存取應用程式。"<annotation id="url">"瞭解詳情"</annotation></string>
@@ -402,6 +399,7 @@
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"您輸入的密碼正確，不過您的數據已損毀。\n\n如要繼續使用，您必須將手機恢復原廠設定。經過重設後，您可以在設定手機時將早前備份到個人 Google 帳戶的數據全部還原。"</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"切換輸入法"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"選擇螢幕鎖定方式"</string>
+    <string name="setup_lock_settings_picker_title" msgid="1584792702475081908">"選擇螢幕鎖定方式"</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"選擇您的後備螢幕鎖定方式"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"螢幕鎖定"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"更改螢幕鎖定"</string>
@@ -831,13 +829,10 @@
     <string name="brightness_summary" msgid="838917350127550703">"調校螢幕亮度"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"自動調校亮度"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"按環境光線優化亮度"</string>
-    <!-- no translation found for night_mode_title (2594133148531256513) -->
-    <skip />
+    <string name="night_mode_title" msgid="2594133148531256513">"夜間模式"</string>
     <string name="night_mode_summary" msgid="9196605054622017193">"%s"</string>
-    <!-- no translation found for night_mode_no (9171772244775838901) -->
-    <skip />
-    <!-- no translation found for night_mode_yes (2218157265997633432) -->
-    <skip />
+    <string name="night_mode_no" msgid="9171772244775838901">"已停用"</string>
+    <string name="night_mode_yes" msgid="2218157265997633432">"永遠開啟"</string>
     <string name="night_mode_auto" msgid="7508348175804304327">"自動"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"休眠"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"螢幕關閉時"</string>
@@ -1938,10 +1933,8 @@
     <string name="credentials_reset_summary" msgid="3369361230171260282">"移除所有憑證"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"可信的憑證"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"顯示可信的 CA 憑證"</string>
-    <!-- no translation found for user_credentials (3719013347787187083) -->
-    <skip />
-    <!-- no translation found for user_credentials_summary (7271228342106080167) -->
-    <skip />
+    <string name="user_credentials" msgid="3719013347787187083">"使用者憑證"</string>
+    <string name="user_credentials_summary" msgid="7271228342106080167">"查看和修改已儲存的憑證"</string>
     <string name="advanced_security_title" msgid="2434776238010578865">"進階"</string>
     <string name="credential_storage_type" msgid="8629968543494001364">"儲存空間類型"</string>
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"硬件支援"</string>
@@ -2293,16 +2286,11 @@
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"啟用系統 CA 憑證嗎？"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"停用系統 CA 憑證嗎？"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"永久移除使用者 CA 憑證嗎？"</string>
-    <!-- no translation found for one_userkey (6034020579534914349) -->
-    <skip />
-    <!-- no translation found for one_usercrt (2150319011101639509) -->
-    <skip />
-    <!-- no translation found for one_cacrt (6844397037970164809) -->
-    <skip />
-    <!-- no translation found for n_cacrts (5979300323482053820) -->
-    <skip />
-    <!-- no translation found for user_credential_title (1329449215749665378) -->
-    <skip />
+    <string name="one_userkey" msgid="6034020579534914349">"一個使用者金鑰"</string>
+    <string name="one_usercrt" msgid="2150319011101639509">"一個使用者憑證"</string>
+    <string name="one_cacrt" msgid="6844397037970164809">"1 個 CA 憑證"</string>
+    <string name="n_cacrts" msgid="5979300323482053820">"%d 個 CA 憑證"</string>
+    <string name="user_credential_title" msgid="1329449215749665378">"憑證詳細資料"</string>
     <string name="spellcheckers_settings_title" msgid="399981228588011501">"拼字檢查"</string>
     <string name="current_backup_pw_prompt" msgid="7735254412051914576">"在這裡輸入您現時的完整備份密碼"</string>
     <string name="new_backup_pw_prompt" msgid="8755501377391998428">"在這裡輸入完整備份所用的新密碼"</string>
@@ -2813,8 +2801,7 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="3459065925679828230">"電池優化"</string>
     <string name="high_power_filter_on" msgid="3222265297576680099">"尚未優化"</string>
-    <!-- no translation found for high_power_on (6216293998227583810) -->
-    <skip />
+    <string name="high_power_on" msgid="6216293998227583810">"尚未優化"</string>
     <string name="high_power_off" msgid="3393904131961263278">"正在優化電池使用"</string>
     <string name="high_power_system" msgid="7362862974428225301">"不支援電池優化"</string>
     <string name="high_power_desc" msgid="6283926163708585760">"不使用電池優化，可能會加速耗電。"</string>
@@ -2907,8 +2894,6 @@
     <string name="write_settings_off" msgid="5156104383386336233">"不允許"</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"轉動兩下即可使用相機功能"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"轉動手腕兩下即可開啟相機應用程式"</string>
-    <!-- no translation found for camera_double_tap_power_gesture_title (1651873760405034645) -->
-    <skip />
-    <!-- no translation found for camera_double_tap_power_gesture_desc (7355664631775680376) -->
-    <skip />
+    <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"按開關按鈕兩次即可開啟相機"</string>
+    <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"快速開啟相機，無需解鎖螢幕"</string>
 </resources>

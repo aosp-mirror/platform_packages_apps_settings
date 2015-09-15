@@ -352,12 +352,9 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"Hazırdır"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"Ups, bu sensor deyil"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="5053971232594165142">"Cihazınızda barmaq izi sensorundan istifadə edin."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (3618021988442639280) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (2942551158278899627) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_generic_dialog_message (3624760637222239293) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="3618021988442639280">"Qeydiyyat tamamlanmadı"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="2942551158278899627">"Barmaq izi qeydiyyatı üçün vaxt limiti ba çatdı. Yenidən cəhd edin."</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="3624760637222239293">"Barmaq izi qeydiyyatı işləmədi. Yenidən cəhd edin və ya başqa barmaq istifadə edin."</string>
     <string name="fingerprint_enroll_button_add" msgid="6317978977419045463">"Başqasını əlavə edin"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"Növbəti"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Telefonun kiliddən çıxarılmasından əlavə, alışları doğrulamaq və tətbiqlərə giriş üçün barmaq izinizi də istifadə edə bilərsiniz. "<annotation id="url">"Ətraflı məlumat"</annotation></string>
@@ -402,6 +399,7 @@
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"Daxil etdiyiniz parol düzgündür, lakin datanız zədəlidir. \n\nTelefonu istifadə etməyə davam etmək üçün zavod sıfırlaması etməlisiniz. Sıfırlanandan sonra Google Hesabınızda yedəklənmiş istənilən datanı bərpa edə bilərsiniz."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Daxiletmə metoduna keç"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Ekran kilidi seçin"</string>
+    <string name="setup_lock_settings_picker_title" msgid="1584792702475081908">"Ekran kilidi seçin"</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Yedəkləmə ekranı kilid metodunu seçin"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Ekran kilidi"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Ekran kilidlənməsini dəyişin"</string>
@@ -831,13 +829,10 @@
     <string name="brightness_summary" msgid="838917350127550703">"Ekran parlaqlığını tənzimləyin"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"Adaptiv parlaqlıq"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"Hazırkı işıq üçün parlaqlığı optimallaşdırın"</string>
-    <!-- no translation found for night_mode_title (2594133148531256513) -->
-    <skip />
+    <string name="night_mode_title" msgid="2594133148531256513">"Gecə rejimi"</string>
     <string name="night_mode_summary" msgid="9196605054622017193">"%s"</string>
-    <!-- no translation found for night_mode_no (9171772244775838901) -->
-    <skip />
-    <!-- no translation found for night_mode_yes (2218157265997633432) -->
-    <skip />
+    <string name="night_mode_no" msgid="9171772244775838901">"Qeyri-aktiv"</string>
+    <string name="night_mode_yes" msgid="2218157265997633432">"Həmişə aktiv"</string>
     <string name="night_mode_auto" msgid="7508348175804304327">"Avtomatik"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Yuxu"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Ekran sönür"</string>
@@ -1933,10 +1928,8 @@
     <string name="credentials_reset_summary" msgid="3369361230171260282">"Bütün sertifikatları sil"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"İnanılmış etimadlar"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"İnanılmış CA sertifikatları göstər"</string>
-    <!-- no translation found for user_credentials (3719013347787187083) -->
-    <skip />
-    <!-- no translation found for user_credentials_summary (7271228342106080167) -->
-    <skip />
+    <string name="user_credentials" msgid="3719013347787187083">"İstifadəçi haqqında məlumatlar"</string>
+    <string name="user_credentials_summary" msgid="7271228342106080167">"Saxlanılan məlumatlara baxın və dəyişin"</string>
     <string name="advanced_security_title" msgid="2434776238010578865">"Qabaqcıl"</string>
     <string name="credential_storage_type" msgid="8629968543494001364">"Saxlama növü"</string>
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"Avadanlıq təminatı"</string>
@@ -2288,16 +2281,11 @@
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"Sistem CA sertifikatı aktiv edilsin?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"Sistem CA sertifikatı deaktiv edilsin?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"İstifadəçi CA sertifikatı həmişəlik silinsin?"</string>
-    <!-- no translation found for one_userkey (6034020579534914349) -->
-    <skip />
-    <!-- no translation found for one_usercrt (2150319011101639509) -->
-    <skip />
-    <!-- no translation found for one_cacrt (6844397037970164809) -->
-    <skip />
-    <!-- no translation found for n_cacrts (5979300323482053820) -->
-    <skip />
-    <!-- no translation found for user_credential_title (1329449215749665378) -->
-    <skip />
+    <string name="one_userkey" msgid="6034020579534914349">"istifadəçi düyməsi"</string>
+    <string name="one_usercrt" msgid="2150319011101639509">"istifadəçi sertifikatı"</string>
+    <string name="one_cacrt" msgid="6844397037970164809">"bir CA sertifikatı"</string>
+    <string name="n_cacrts" msgid="5979300323482053820">"%d CA sertifikatlar"</string>
+    <string name="user_credential_title" msgid="1329449215749665378">"Məlumat detalları"</string>
     <string name="spellcheckers_settings_title" msgid="399981228588011501">"Orfoqrafik yoxlama"</string>
     <string name="current_backup_pw_prompt" msgid="7735254412051914576">"Mövcud tam yedəkləmə parolunuzu bura daxil edin"</string>
     <string name="new_backup_pw_prompt" msgid="8755501377391998428">"Burada tam yedəkləmə etmək üçün yeni parol daxil edin"</string>
@@ -2808,8 +2796,7 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="3459065925679828230">"Batareya optimallaşdırılması"</string>
     <string name="high_power_filter_on" msgid="3222265297576680099">"Enerjiyə qənaət etmir"</string>
-    <!-- no translation found for high_power_on (6216293998227583810) -->
-    <skip />
+    <string name="high_power_on" msgid="6216293998227583810">"Enerjiyə qənaət etmir"</string>
     <string name="high_power_off" msgid="3393904131961263278">"Batareya istifadəsi optimallaşdırılır"</string>
     <string name="high_power_system" msgid="7362862974428225301">"Batareya optimallaşdırılması əlçatan deyil"</string>
     <string name="high_power_desc" msgid="6283926163708585760">"Batareya optimallaşdırılması tətbiq etməyin. Batareya daha tez qurtara bilər."</string>
@@ -2902,8 +2889,6 @@
     <string name="write_settings_off" msgid="5156104383386336233">"Xeyr"</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"Kamera üçün iki dəfə burun"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Biləyinizi iki dəfə buraraq kamera tətbiqini açın"</string>
-    <!-- no translation found for camera_double_tap_power_gesture_title (1651873760405034645) -->
-    <skip />
-    <!-- no translation found for camera_double_tap_power_gesture_desc (7355664631775680376) -->
-    <skip />
+    <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Kamera üçün yandırıb söndürmə düyməsinə iki dəfə basın"</string>
+    <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Ekranınızın kilidini açmadan kameranı cəld açın"</string>
 </resources>

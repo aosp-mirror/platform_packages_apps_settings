@@ -352,12 +352,9 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"Feito"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"Iso non é o sensor"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="5053971232594165142">"Utiliza o sensor de impresión dixital."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (3618021988442639280) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (2942551158278899627) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_generic_dialog_message (3624760637222239293) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="3618021988442639280">"Non se completou a inscrición"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="2942551158278899627">"Esgotouse o tempo de espera da inscrición de impresión dixital. Téntao de novo."</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="3624760637222239293">"A inscrición de impresión dixital non funcionou. Téntao de novo ou utiliza outro dedo."</string>
     <string name="fingerprint_enroll_button_add" msgid="6317978977419045463">"Engadir outro"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"Seguinte"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Ademais de desbloquear o teu teléfono, tamén podes utilizar a túa impresión dixital para autorizar compras e o acceso a aplicacións. "<annotation id="url">"Máis información"</annotation></string>
@@ -402,6 +399,7 @@
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"O contrasinal que introduciches é correcto, pero lamentablemente os teus datos están danados. \n\nPara continuar usando o teu teléfono, necesitas realizar un restablecemento de fábrica. Cando configures o teu teléfono despois do restablecemento, poderás restaurar os datos dos que se fixo unha copia de seguranza na túa conta de Google."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Cambiar o método de entrada"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Bloqueo pantalla"</string>
+    <string name="setup_lock_settings_picker_title" msgid="1584792702475081908">"Seleccionar bloqueo da pantalla"</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Escolle o método de bloqueo da pantalla alternativo"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Bloqueo da pantalla"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Cambiar pant. bloqueo"</string>
@@ -831,13 +829,10 @@
     <string name="brightness_summary" msgid="838917350127550703">"Axusta o brillo da pantalla"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"Brillo adaptable"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"Optimiza o nivel de brillo en función da luz dispoñible"</string>
-    <!-- no translation found for night_mode_title (2594133148531256513) -->
-    <skip />
+    <string name="night_mode_title" msgid="2594133148531256513">"Modo nocturno"</string>
     <string name="night_mode_summary" msgid="9196605054622017193">"%s"</string>
-    <!-- no translation found for night_mode_no (9171772244775838901) -->
-    <skip />
-    <!-- no translation found for night_mode_yes (2218157265997633432) -->
-    <skip />
+    <string name="night_mode_no" msgid="9171772244775838901">"Desactivouse"</string>
+    <string name="night_mode_yes" msgid="2218157265997633432">"Sempre activada"</string>
     <string name="night_mode_auto" msgid="7508348175804304327">"Automático"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Suspensión"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"A pantalla apágase"</string>
@@ -1933,10 +1928,8 @@
     <string name="credentials_reset_summary" msgid="3369361230171260282">"Eliminar todos os certificados"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"Credenciais de confianza"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"Mostrar certificados de CA de confianza"</string>
-    <!-- no translation found for user_credentials (3719013347787187083) -->
-    <skip />
-    <!-- no translation found for user_credentials_summary (7271228342106080167) -->
-    <skip />
+    <string name="user_credentials" msgid="3719013347787187083">"Credenciais do usuario"</string>
+    <string name="user_credentials_summary" msgid="7271228342106080167">"Ver e modificar credenciais almacenadas"</string>
     <string name="advanced_security_title" msgid="2434776238010578865">"Avanzada"</string>
     <string name="credential_storage_type" msgid="8629968543494001364">"Tipo de almacenamento"</string>
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"Almacenado en hardware"</string>
@@ -2288,16 +2281,11 @@
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"Queres activar o certificado de CA do sistema?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"Queres desactivar o certificado da autoridade de certificación do sistema?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"Queres eliminar o certificado de CA do usuario permanentemente?"</string>
-    <!-- no translation found for one_userkey (6034020579534914349) -->
-    <skip />
-    <!-- no translation found for one_usercrt (2150319011101639509) -->
-    <skip />
-    <!-- no translation found for one_cacrt (6844397037970164809) -->
-    <skip />
-    <!-- no translation found for n_cacrts (5979300323482053820) -->
-    <skip />
-    <!-- no translation found for user_credential_title (1329449215749665378) -->
-    <skip />
+    <string name="one_userkey" msgid="6034020579534914349">"unha clave de usuario"</string>
+    <string name="one_usercrt" msgid="2150319011101639509">"un certificado de usuario"</string>
+    <string name="one_cacrt" msgid="6844397037970164809">"un certificado de CA"</string>
+    <string name="n_cacrts" msgid="5979300323482053820">"%d certificados de CA"</string>
+    <string name="user_credential_title" msgid="1329449215749665378">"Detalles das credenciais"</string>
     <string name="spellcheckers_settings_title" msgid="399981228588011501">"Corrector ortográfico"</string>
     <string name="current_backup_pw_prompt" msgid="7735254412051914576">"Escribe o teu contrasinal secundario completo actual aquí"</string>
     <string name="new_backup_pw_prompt" msgid="8755501377391998428">"Escribe un contrasinal novo para copias de seguranza completas"</string>
@@ -2808,8 +2796,7 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="3459065925679828230">"Optimización da batería"</string>
     <string name="high_power_filter_on" msgid="3222265297576680099">"Sen optimizar"</string>
-    <!-- no translation found for high_power_on (6216293998227583810) -->
-    <skip />
+    <string name="high_power_on" msgid="6216293998227583810">"Sen optimizar"</string>
     <string name="high_power_off" msgid="3393904131961263278">"Optimizando o uso da batería"</string>
     <string name="high_power_system" msgid="7362862974428225301">"A optimización da batería non está dispoñible"</string>
     <string name="high_power_desc" msgid="6283926163708585760">"Non aplicar a optimización da batería, xa que esta pode esgotarse máis rápido."</string>
@@ -2902,8 +2889,6 @@
     <string name="write_settings_off" msgid="5156104383386336233">"Non"</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"Dobre xiro para abrir a cámara"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Xira o pulso dúas veces para abrir a aplicación da cámara"</string>
-    <!-- no translation found for camera_double_tap_power_gesture_title (1651873760405034645) -->
-    <skip />
-    <!-- no translation found for camera_double_tap_power_gesture_desc (7355664631775680376) -->
-    <skip />
+    <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Botón de acendido dúas veces para cámara"</string>
+    <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Abre a cámara rapidamente sen desbloquear a pantalla"</string>
 </resources>
