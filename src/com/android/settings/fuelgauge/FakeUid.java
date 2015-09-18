@@ -246,7 +246,7 @@ public class FakeUid extends Uid {
     }
 
     @Override
-    public long getTimeAtCpuSpeed(int step, int which) {
+    public long getTimeAtCpuSpeed(int cluster, int step, int which) {
         return 0;
     }
 
