@@ -16,14 +16,18 @@
 
 package com.android.settings.notification;
 
-import static android.service.notification.ZenModeConfig.ALL_DAYS;
-
+import android.app.AlertDialog;
 import android.content.ComponentName;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.UserHandle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceScreen;
@@ -31,33 +35,27 @@ import android.provider.Settings;
 import android.provider.Settings.Global;
 import android.service.notification.ConditionProviderService;
 import android.service.notification.ZenModeConfig;
-import android.service.notification.ZenModeConfig.EventInfo;
-import android.service.notification.ZenModeConfig.ScheduleInfo;
 import android.service.notification.ZenModeConfig.ZenRule;
-import android.text.format.DateFormat;
 import android.util.Log;
+import android.view.View;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settings.notification.ManagedServiceSettings.Config;
-import com.android.settings.notification.ZenModeEventRuleSettings.CalendarInfo;
 import com.android.settings.notification.ZenRuleNameDialog.RuleInfo;
 
+import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Comparator;
 import java.util.List;
-import java.util.TreeSet;
 
 public class ZenModeAutomationSettings extends ZenModeSettingsBase {
 
     static final Config CONFIG = getConditionProviderConfig();
 
-    // per-instance to ensure we're always using the current locale
-    private final SimpleDateFormat mDayFormat = new SimpleDateFormat("EEE");
-    private final Calendar mCalendar = Calendar.getInstance();
-
+    private PackageManager mPm;
     private ServiceListing mServiceListing;
 
     @Override
@@ -68,6 +66,7 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
         mServiceListing.addCallback(mServiceListingCallback);
         mServiceListing.reload();
         mServiceListing.setListening(true);
+        mPm = mContext.getPackageManager();
     }
 
     @Override
@@ -114,6 +113,22 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
         }.show();
     }
 
+    private void showDeleteRuleDialog(final String ruleName, final String ruleId) {
+        new AlertDialog.Builder(mContext)
+                .setMessage(getString(R.string.zen_mode_delete_rule_confirmation, ruleName))
+                .setNegativeButton(R.string.cancel, null)
+                .setPositiveButton(R.string.zen_mode_delete_rule_button,
+                        new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        MetricsLogger.action(mContext, MetricsLogger.ACTION_ZEN_DELETE_RULE_OK);
+                        mConfig.automaticRules.remove(ruleId);
+                        setZenModeConfig(mConfig);
+                    }
+                })
+                .show();
+    }
+
     private void showRule(String settingsAction, ComponentName configurationActivity,
             String ruleId, String ruleName) {
         if (DEBUG) Log.d(TAG, "showRule " + ruleId + " name=" + ruleName);
@@ -142,26 +157,7 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
         for (int i = 0; i < sortedRules.length; i++) {
             final String id = sortedRules[i].id;
             final ZenRule rule = sortedRules[i].rule;
-            final boolean isSchedule = ZenModeConfig.isValidScheduleConditionId(rule.conditionId);
-            final boolean isEvent = ZenModeConfig.isValidEventConditionId(rule.conditionId);
-            final Preference p = new Preference(mContext);
-            p.setIcon(isSchedule ? R.drawable.ic_schedule
-                    : isEvent ? R.drawable.ic_event
-                    : R.drawable.ic_label);
-            p.setTitle(rule.name);
-            p.setSummary(computeRuleSummary(rule));
-            p.setPersistent(false);
-            p.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-                @Override
-                public boolean onPreferenceClick(Preference preference) {
-                    final String action = isSchedule ? ZenModeScheduleRuleSettings.ACTION
-                            : isEvent ? ZenModeEventRuleSettings.ACTION
-                            : ZenModeExternalRuleSettings.ACTION;
-                    showRule(action, null, id, rule.name);
-                    return true;
-                }
-            });
-            root.addPreference(p);
+            root.addPreference(new ZenRulePreference(mContext, rule, id));
         }
         final Preference p = new Preference(mContext);
         p.setIcon(R.drawable.ic_add);
@@ -183,96 +179,16 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
         return MetricsLogger.NOTIFICATION_ZEN_MODE_AUTOMATION;
     }
 
-    private String computeRuleSummary(ZenRule rule) {
-        if (rule == null || !rule.enabled) return getString(R.string.switch_off_text);
+    private String computeRuleSummary(ZenRule rule, boolean isSystemRule,
+            CharSequence providerLabel) {
         final String mode = computeZenModeCaption(getResources(), rule.zenMode);
-        String summary = getString(R.string.switch_on_text);
-        final ScheduleInfo schedule = ZenModeConfig.tryParseScheduleConditionId(rule.conditionId);
-        final EventInfo event = ZenModeConfig.tryParseEventConditionId(rule.conditionId);
-        if (schedule != null) {
-            summary = computeScheduleRuleSummary(schedule);
-        } else if (event != null) {
-            summary = computeEventRuleSummary(event);
-        }
-        return getString(R.string.zen_mode_rule_summary_combination, summary, mode);
-    }
+        final String ruleState = (rule == null || !rule.enabled)
+                ? getString(R.string.switch_off_text)
+                : getString(R.string.zen_mode_rule_summary_enabled_combination, mode);
 
-    private String computeScheduleRuleSummary(ScheduleInfo schedule) {
-        final String days = computeContiguousDayRanges(schedule.days);
-        final String start = getTime(schedule.startHour, schedule.startMinute);
-        final String end = getTime(schedule.endHour, schedule.endMinute);
-        final String time = getString(R.string.summary_range_verbal_combination, start, end);
-        return getString(R.string.zen_mode_rule_summary_combination, days, time);
-    }
-
-    private String computeEventRuleSummary(EventInfo event) {
-        final String calendar = getString(R.string.zen_mode_event_rule_summary_calendar_template,
-                computeCalendarName(event));
-        final String reply = getString(R.string.zen_mode_event_rule_summary_reply_template,
-                getString(computeReply(event)));
-        return getString(R.string.zen_mode_rule_summary_combination, calendar, reply);
-    }
-
-    private String computeCalendarName(EventInfo event) {
-        return event.calendar != null ? event.calendar
-                : getString(R.string.zen_mode_event_rule_summary_any_calendar);
-    }
-
-    private int computeReply(EventInfo event) {
-        switch (event.reply) {
-            case EventInfo.REPLY_ANY_EXCEPT_NO:
-                return R.string.zen_mode_event_rule_reply_any_except_no;
-            case EventInfo.REPLY_YES:
-                return R.string.zen_mode_event_rule_reply_yes;
-            case EventInfo.REPLY_YES_OR_MAYBE:
-                return R.string.zen_mode_event_rule_reply_yes_or_maybe;
-            default:
-                throw new IllegalArgumentException("Bad reply: " + event.reply);
-        }
-    }
-
-    private String getTime(int hour, int minute) {
-        mCalendar.set(Calendar.HOUR_OF_DAY, hour);
-        mCalendar.set(Calendar.MINUTE, minute);
-        return DateFormat.getTimeFormat(mContext).format(mCalendar.getTime());
-    }
-
-    private String computeContiguousDayRanges(int[] days) {
-        final TreeSet<Integer> daySet = new TreeSet<>();
-        for (int i = 0; days != null && i < days.length; i++) {
-            daySet.add(days[i]);
-        }
-        if (daySet.isEmpty()) {
-            return getString(R.string.zen_mode_schedule_rule_days_none);
-        }
-        final int N = ALL_DAYS.length;
-        if (daySet.size() == N) {
-            return getString(R.string.zen_mode_schedule_rule_days_all);
-        }
-        String rt = null;
-        for (int i = 0; i < N; i++) {
-            final int startDay = ALL_DAYS[i];
-            final boolean active = daySet.contains(startDay);
-            if (!active) continue;
-            int end = 0;
-            while (daySet.contains(ALL_DAYS[(i + end + 1) % N])) {
-                end++;
-            }
-            if (!(i == 0 && daySet.contains(ALL_DAYS[N - 1]))) {
-                final String v = end == 0 ? dayString(startDay)
-                        : getString(R.string.summary_range_symbol_combination,
-                                dayString(startDay),
-                                dayString(ALL_DAYS[(i + end) % N]));
-                rt = rt == null ? v : getString(R.string.summary_divider_text, rt, v);
-            }
-            i += end;
-        }
-        return rt;
-    }
-
-    private String dayString(int day) {
-        mCalendar.set(Calendar.DAY_OF_WEEK, day);
-        return mDayFormat.format(mCalendar.getTime());
+        return isSystemRule ? ruleState
+                : getString(R.string.zen_mode_rule_summary_provider_combination,
+                        providerLabel, ruleState);
     }
 
     private static Config getConditionProviderConfig() {
@@ -314,6 +230,7 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
         }
     };
 
+    // TODO: Sort by creation date, once that data is available.
     private static final Comparator<ZenRuleInfo> RULE_COMPARATOR = new Comparator<ZenRuleInfo>() {
         @Override
         public int compare(ZenRuleInfo lhs, ZenRuleInfo rhs) {
@@ -332,6 +249,82 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
     private static class ZenRuleInfo {
         String id;
         ZenRule rule;
+    }
+
+    private class ZenRulePreference extends Preference {
+        final String mName;
+        final String mId;
+
+        public ZenRulePreference(Context context, final ZenRule rule, final String id) {
+            super(context);
+
+            mName = rule.name;
+            this.mId = id;
+
+            final boolean isSchedule = ZenModeConfig.isValidScheduleConditionId(rule.conditionId);
+            final boolean isEvent = ZenModeConfig.isValidEventConditionId(rule.conditionId);
+            final boolean isSystemRule = isSchedule || isEvent;
+
+            try {
+                ApplicationInfo info = mPm.getApplicationInfo(
+                        rule.component.getPackageName(), 0);
+                LoadIconTask task = new LoadIconTask(this);
+                task.execute(info);
+                setSummary(computeRuleSummary(rule, isSystemRule, info.loadLabel(mPm)));
+            } catch (PackageManager.NameNotFoundException e) {
+                setIcon(R.drawable.ic_label);
+            }
+
+            setTitle(rule.name);
+            setPersistent(false);
+            setOnPreferenceClickListener(new OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    final String action = isSchedule ? ZenModeScheduleRuleSettings.ACTION
+                            : isEvent ? ZenModeEventRuleSettings.ACTION
+                            : ZenModeExternalRuleSettings.ACTION;
+                    showRule(action, null, id, rule.name);
+                    return true;
+                }
+            });
+            setWidgetLayoutResource(R.layout.zen_rule_widget);
+        }
+
+        @Override
+        protected void onBindView(View view) {
+            super.onBindView(view);
+
+            View v = view.findViewById(R.id.delete_zen_rule);
+            v.setOnClickListener(mDeleteListener);
+        }
+
+        private final View.OnClickListener mDeleteListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDeleteRuleDialog(mName, mId);
+            }
+        };
+    }
+
+    private class LoadIconTask extends AsyncTask<ApplicationInfo, Void, Drawable> {
+        private final WeakReference<Preference> prefReference;
+
+        public LoadIconTask(Preference pref) {
+            prefReference = new WeakReference<Preference>(pref);
+        }
+
+        @Override
+        protected Drawable doInBackground(ApplicationInfo... params) {
+            return params[0].loadIcon(mPm);
+        }
+
+        @Override
+        protected void onPostExecute(Drawable icon) {
+            if (prefReference != null && icon != null) {
+                final Preference pref = prefReference.get();
+                pref.setIcon(icon);
+            }
+        }
     }
 
 }

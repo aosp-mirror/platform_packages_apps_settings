@@ -6272,7 +6272,10 @@
     <string name="zen_mode_rule_not_found_text">Rule not found.</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Rule summary template (when enabled) -->
-    <string name="zen_mode_rule_summary_combination"><xliff:g id="description" example="Sun - Thu">%1$s</xliff:g> / <xliff:g id="mode" example="Alarms only">%2$s</xliff:g></string>
+    <string name="zen_mode_rule_summary_enabled_combination">On / <xliff:g id="mode" example="Alarms only">%1$s</xliff:g></string>
+
+    <!-- [CHAR LIMIT=40] Zen mode settings: Third party Rule summary template -->
+    <string name="zen_mode_rule_summary_provider_combination"><xliff:g id="package" example="Condition Provider App">%1$s</xliff:g>\n<xliff:g id="summary" example="On / Alarms only">%2$s</xliff:g></string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Time-based rule days option title -->
     <string name="zen_mode_schedule_rule_days">Days</string>

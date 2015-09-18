@@ -100,7 +100,7 @@ abstract public class ZenModeSettingsBase extends RestrictedSettingsFragment {
         final String reason = getClass().getSimpleName();
         final boolean success = NotificationManager.from(mContext).setZenModeConfig(config, reason);
         if (success) {
-            mConfig = config;
+            mConfig = getZenModeConfig();
             if (DEBUG) Log.d(TAG, "Saved mConfig=" + mConfig);
             onZenModeConfigChanged();
         }
