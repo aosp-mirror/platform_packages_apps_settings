@@ -5978,6 +5978,7 @@
     <string name="keywords_app_permissions">apps permissions security</string>
     <string name="keywords_default_apps">apps default</string>
     <string name="keywords_ignore_optimizations">ignore optimizations doze app standby</string>
+    <string name="keywords_color_mode">vibrant rgb srgb color natural standard</string>
     <!-- Search keywords for different screen unlock modes : slide to unlock, password, pattern and PIN [CHAR LIMIT=none] -->
     <string name="keywords_lockscreen">slide password pattern pin</string>
 
@@ -7032,4 +7033,21 @@
 
     <!-- Description of setting that controls gesture to open camera by double tapping the power button [CHAR LIMIT=NONE] -->
     <string name="camera_double_tap_power_gesture_desc">Quickly open camera without unlocking your screen</string>
+
+    <!-- Name of each color mode for the display. [CHAR LIMIT=40] -->
+    <string-array name="color_mode_names">
+        <item>Vibrant (default)</item>
+        <item>Natural</item>
+        <item>Standard</item>
+    </string-array>
+
+    <!-- Description of each color mode for the display. [CHAR LIMIT=NONE] -->
+    <string-array name="color_mode_descriptions">
+        <item>Enhanced colors</item>
+        <item>Natural colors as seen by the eye</item>
+        <item>Colors optimized for digital content</item>
+    </string-array>
+
+    <!-- Name of feature to change color setting for the display [CHAR LIMIT=60] -->
+    <string name="picture_color_mode">Picture color mode</string>
 </resources>

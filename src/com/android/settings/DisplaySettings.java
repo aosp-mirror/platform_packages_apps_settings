@@ -79,6 +79,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_CAMERA_GESTURE = "camera_gesture";
     private static final String KEY_CAMERA_DOUBLE_TAP_POWER_GESTURE
             = "camera_double_tap_power_gesture";
+    private static final String KEY_COLOR_MODE = "color_mode";
 
     private DropDownPreference mFontSizePref;
 
@@ -93,6 +94,8 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private SwitchPreference mAutoBrightnessPreference;
     private SwitchPreference mCameraGesturePreference;
     private SwitchPreference mCameraDoubleTapPowerGesturePreference;
+
+    private ColorModePreference mColorModePreference;
 
     @Override
     protected int getMetricsCategory() {
@@ -166,6 +169,13 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             mCameraDoubleTapPowerGesturePreference.setOnPreferenceChangeListener(this);
         } else {
             removePreference(KEY_CAMERA_DOUBLE_TAP_POWER_GESTURE);
+        }
+
+        mColorModePreference = (ColorModePreference) findPreference(KEY_COLOR_MODE);
+        mColorModePreference.updateCurrentAndSupported();
+        if (mColorModePreference.getTransformsCount() < 2) {
+            removePreference(KEY_COLOR_MODE);
+            mColorModePreference = null;
         }
 
         if (RotationPolicy.isRotationLockToggleVisible(activity)) {
@@ -359,6 +369,17 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     public void onResume() {
         super.onResume();
         updateState();
+        if (mColorModePreference != null) {
+            mColorModePreference.startListening();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (mColorModePreference != null) {
+            mColorModePreference.stopListening();
+        }
     }
 
     private void updateState() {
@@ -401,6 +422,10 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             int value = Settings.Secure.getInt(
                     getContentResolver(), CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, 0);
             mCameraDoubleTapPowerGesturePreference.setChecked(value == 0);
+        }
+
+        if (mColorModePreference != null) {
+            mColorModePreference.updateCurrentAndSupported();
         }
     }
 
@@ -527,6 +552,11 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                     }
                     if (!isCameraDoubleTapPowerGestureAvailable(context.getResources())) {
                         result.add(KEY_CAMERA_DOUBLE_TAP_POWER_GESTURE);
+                    }
+                    ColorModePreference pref = new ColorModePreference(context, null);
+                    pref.updateCurrentAndSupported();
+                    if (pref.getTransformsCount() < 2) {
+                        result.add(KEY_COLOR_MODE);
                     }
                     return result;
                 }
