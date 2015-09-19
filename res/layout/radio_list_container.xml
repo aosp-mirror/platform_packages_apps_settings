@@ -14,20 +14,9 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingTop="8dp"
     android:paddingBottom="4dp"
-    android:orientation="vertical">
-
-    <include
-        layout="@layout/radio_with_summary"
-        android:id="@+id/ignore_off" />
-
-    <include
-        layout="@layout/radio_with_summary"
-        android:id="@+id/ignore_on" />
-
-</LinearLayout>
+    android:orientation="vertical" />
