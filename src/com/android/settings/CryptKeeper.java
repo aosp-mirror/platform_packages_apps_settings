@@ -1023,6 +1023,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         PackageManager pm = context.getPackageManager();
         ComponentName name = new ComponentName(context, CryptKeeper.class);
         Log.d(TAG, "Disabling component " + name);
-        pm.setComponentEnabledSetting(name, PackageManager.COMPONENT_ENABLED_STATE_DISABLED, 0);
+        pm.setComponentEnabledSetting(name, PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                PackageManager.DONT_KILL_APP);
     }
 }
