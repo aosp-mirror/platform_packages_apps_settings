@@ -36,6 +36,7 @@ import android.content.SyncInfo;
 import android.content.SyncStatusInfo;
 import android.content.pm.ProviderInfo;
 import android.content.pm.UserInfo;
+import android.os.Binder;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -219,8 +220,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
         removePreference("dummy");
         mAuthenticatorHelper.listenToAccountUpdates();
         updateAuthDescriptions();
-        onAccountsUpdate(UserHandle.getCallingUserHandle());
-
+        onAccountsUpdate(Binder.getCallingUserHandle());
         super.onResume();
     }
 
