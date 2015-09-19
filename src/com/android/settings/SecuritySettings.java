@@ -364,6 +364,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
                     fingerprintCount, fingerprintCount));
             clazz = FingerprintSettings.class.getName();
         } else {
+            fingerprintPreference.setSummary(
+                    R.string.security_settings_fingerprint_preference_summary_none);
             clazz = FingerprintEnrollIntroduction.class.getName();
         }
         intent.setClassName("com.android.settings", clazz);
