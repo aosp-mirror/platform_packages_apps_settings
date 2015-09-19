@@ -104,6 +104,12 @@
                 android:key="auto_rotate"
                 android:title="@string/display_auto_rotate_title" />
 
+        <com.android.settings.ColorModePreference
+                android:key="color_mode"
+                android:title="@string/picture_color_mode"
+                android:persistent="false"
+                settings:keywords="@string/keywords_color_mode" />
+
         <PreferenceScreen
                 android:key="wifi_display"
                 android:title="@string/wifi_display_settings_title"
