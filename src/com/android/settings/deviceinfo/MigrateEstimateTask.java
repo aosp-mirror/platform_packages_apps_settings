@@ -90,7 +90,7 @@ public abstract class MigrateEstimateTask extends AsyncTask<Void, Void, Long> im
         Log.d(TAG, "Estimating for current path " + path);
 
         final Intent intent = new Intent().setComponent(DEFAULT_CONTAINER_COMPONENT);
-        mContext.bindServiceAsUser(intent, this, Context.BIND_AUTO_CREATE, UserHandle.OWNER);
+        mContext.bindServiceAsUser(intent, this, Context.BIND_AUTO_CREATE, UserHandle.SYSTEM);
 
         try {
             if (mConnected.await(15, TimeUnit.SECONDS)) {
