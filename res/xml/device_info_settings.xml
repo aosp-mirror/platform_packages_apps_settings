@@ -110,6 +110,12 @@
                 android:title="@string/firmware_version"
                 android:summary="@string/device_info_default"/>
 
+        <!-- Security patch level -->
+        <Preference android:key="security_patch"
+                style="?android:preferenceInformationStyle"
+                android:title="@string/security_patch"
+                android:summary="@string/device_info_default"/>
+
         <!-- Device FCC equipment id -->
         <Preference android:key="fcc_equipment_id"
                 style="?android:preferenceInformationStyle"
