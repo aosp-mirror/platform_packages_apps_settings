@@ -117,6 +117,7 @@ public class LocationSettings extends LocationSettingsBase
         final SettingsActivity activity = (SettingsActivity) getActivity();
         mUm = (UserManager) activity.getSystemService(Context.USER_SERVICE);
 
+        setHasOptionsMenu(true);
         mSwitchBar = activity.getSwitchBar();
         mSwitch = mSwitchBar.getSwitch();
         mSwitchBar.show();
