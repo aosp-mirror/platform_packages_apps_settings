@@ -322,6 +322,7 @@
       <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> ഫിംഗർപ്രിന്റ് സജ്ജമാക്കൽ</item>
       <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> ഫിംഗർപ്രിന്റ് സജ്ജമാക്കൽ</item>
     </plurals>
+    <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"വിരലടയാള സജ്ജീകരണം"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"നിങ്ങളുടെ സ്‌ക്രീൻ അൺലോക്കുചെയ്യാനോ വാങ്ങലുകൾ സ്ഥിരീകരിക്കാനോ വിരലടയാളം ഉപയോഗിക്കുന്നതിന്, ഞങ്ങൾക്ക് ഇവ ചെയ്യേണ്ടതുണ്ട്:"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"നിങ്ങളുടെ ബാക്കപ്പ് സ്‌ക്രീൻ ലോക്ക് രീതി സജ്ജമാക്കുക"</string>
@@ -779,7 +780,7 @@
     <string name="media_volume_summary" msgid="5363248930648849974">"സംഗീതത്തിനും വീഡിയോകൾക്കുമായി വോളിയം സജ്ജീകരിക്കുക"</string>
     <string name="alarm_volume_title" msgid="2285597478377758706">"അലാറം"</string>
     <string name="dock_settings_summary" msgid="455802113668982481">"അറ്റാച്ചുചെ‌യ്ത ഡോക്കിനുള്ള ഓഡിയോ ക്രമീകരണങ്ങൾ"</string>
-    <string name="dtmf_tone_enable_title" msgid="8533399267725365088">"പാഡ് ടച്ച് ടോണുകൾ ഡയൽ ചെയ്യുക"</string>
+    <string name="dtmf_tone_enable_title" msgid="8533399267725365088">"ഡയൽ പാഡ് ടച്ച് ടോണുകൾ"</string>
     <string name="sound_effects_enable_title" msgid="1171590821131077296">"സ്‌പർശന ശബ്ദം"</string>
     <string name="lock_sounds_enable_title" msgid="450098505659399520">"സ്‌ക്രീൻ ലോക്ക് ശബ്ദം"</string>
     <string name="haptic_feedback_enable_title" msgid="2438293710530828760">"സ്‌പർശിക്കുമ്പോൾ വൈബ്രേറ്റുചെയ്യുക"</string>
@@ -2507,6 +2508,7 @@
     <string name="keywords_app_permissions" msgid="8677901415217188314">"അപ്ലിക്കേഷൻ അനുമതി സുരക്ഷ"</string>
     <string name="keywords_default_apps" msgid="3581727483175522599">"സ്ഥിര അപ്ലിക്കേഷനുകൾ"</string>
     <string name="keywords_ignore_optimizations" msgid="946516741848647905">"ഒപ്റ്റിമൈസേഷൻ ഡോസ് ആപ്പ് സ്‌റ്റാൻഡ്‌ബൈ അവഗണിക്കുക"</string>
+    <string name="keywords_color_mode" msgid="4670570451841540200">"വൈബ്രന്റ് rgb srgb വർണ്ണ സ്വാഭാവിക സ്റ്റാൻഡേർഡ്"</string>
     <string name="keywords_lockscreen" msgid="4806191868723291541">"പാസ്‌വേഡ് പാറ്റേൺ പിൻ സ്ലൈഡുചെയ്യുക"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"വൈഫൈ NFC ടാഗ് സജ്ജമാക്കുക"</string>
     <string name="write_tag" msgid="8571858602896222537">"റൈറ്റുചെയ്യുക"</string>
@@ -2883,4 +2885,15 @@
     <string name="camera_gesture_desc" msgid="1831390075255870960">"നിങ്ങളുടെ കൈത്തണ്ട രണ്ടുപ്രാവശ്യം തിരിച്ചുകൊണ്ട് ക്യാമറാ ആപ്പ് തുറക്കുക"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"ക്യാമറയ്ക്കായി പവർ ബട്ടൺ രണ്ടുതവണ അമർത്തുക"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"സ്ക്രീൻ അൺലോക്ക് ചെയ്യാതെ തന്നെ, അതിവേഗം ക്യാമറ തുറക്കുക"</string>
+  <string-array name="color_mode_names">
+    <item msgid="2425514299220523812">"വൈബ്രന്റ് (സ്ഥിരമായത്)"</item>
+    <item msgid="8446070607501413455">"സ്വാഭാവികം"</item>
+    <item msgid="6553408765810699025">"സ്റ്റാന്‍ഡേര്‍ഡ്"</item>
+  </string-array>
+  <string-array name="color_mode_descriptions">
+    <item msgid="4979629397075120893">"മെച്ചപ്പെടുത്തിയ വര്‍ണ്ണങ്ങൾ"</item>
+    <item msgid="8280754435979370728">"നമ്മൾ കാണുന്നത് പോലെയുള്ള സ്വാഭാവിക വർണ്ണങ്ങൾ"</item>
+    <item msgid="5363960654009010371">"ഡിജിറ്റൽ ഉള്ളടക്കത്തിനായി വർണ്ണങ്ങൾ ഒപ്റ്റിമൈസ് ചെയ്തു"</item>
+  </string-array>
+    <string name="picture_color_mode" msgid="4560755008730283695">"ചിത്ര വർണ്ണ മോഡ്"</string>
 </resources>

@@ -326,6 +326,7 @@
       <item quantity="many">Настроено <xliff:g id="COUNT_1">%1$d</xliff:g> отпечатков</item>
       <item quantity="other">Настроено <xliff:g id="COUNT_1">%1$d</xliff:g> отпечатка</item>
     </plurals>
+    <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Добавление отпечатка"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"Чтобы использовать сканер для разблокировки экрана и подтверждения покупок:"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"Настройте дополнительный способ блокировки экрана"</string>
@@ -359,7 +360,7 @@
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="3618021988442639280">"Отпечаток не добавлен"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="2942551158278899627">"Превышен срок ожидания. Повторите попытку"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="3624760637222239293">"Не удалось добавить отпечаток. Повторите попытку или попробуйте сохранить отпечаток другого пальца."</string>
-    <string name="fingerprint_enroll_button_add" msgid="6317978977419045463">"Добавить"</string>
+    <string name="fingerprint_enroll_button_add" msgid="6317978977419045463">"Добавить еще"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"Далее"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Добавьте отпечаток пальца, чтобы только вы смогли разблокировать телефон, совершать покупки и открывать приложения. "<annotation id="url">"Подробнее…"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4504501581228672208">"Блокировка экрана отключена. Добавьте отпечаток пальца, чтобы только вы смогли совершать покупки и открывать приложения. "<annotation id="url">"Подробнее…"</annotation></string>
@@ -2525,6 +2526,7 @@
     <string name="keywords_app_permissions" msgid="8677901415217188314">"Защита разрешений для приложений"</string>
     <string name="keywords_default_apps" msgid="3581727483175522599">"приложения по умолчанию"</string>
     <string name="keywords_ignore_optimizations" msgid="946516741848647905">"игнорировать ограничения оптимизация спящий режим"</string>
+    <string name="keywords_color_mode" msgid="4670570451841540200">"насыщенный RGB SRGB цвет естественный стандартный"</string>
     <string name="keywords_lockscreen" msgid="4806191868723291541">"провести пальцем по экрану пароль графический ключ PIN-код"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Настройка NFC-метки"</string>
     <string name="write_tag" msgid="8571858602896222537">"Записать"</string>
@@ -2919,4 +2921,15 @@
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Чтобы открыть приложение \"Камера\", дважды поверните запястье."</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Открывать камеру, дважды нажимая кнопку питания"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Быстро открывать камеру, не снимая блокировку экрана."</string>
+  <string-array name="color_mode_names">
+    <item msgid="2425514299220523812">"Насыщенный (по умолчанию)"</item>
+    <item msgid="8446070607501413455">"Естественный"</item>
+    <item msgid="6553408765810699025">"Стандартный"</item>
+  </string-array>
+  <string-array name="color_mode_descriptions">
+    <item msgid="4979629397075120893">"Улучшенные цвета"</item>
+    <item msgid="8280754435979370728">"Натуральные цвета, привычные глазу"</item>
+    <item msgid="5363960654009010371">"Цвета, оптимизированные для цифрового контента"</item>
+  </string-array>
+    <string name="picture_color_mode" msgid="4560755008730283695">"Цветовой режим"</string>
 </resources>

@@ -322,6 +322,7 @@
       <item quantity="one"><xliff:g id="COUNT_1">%1$d</xliff:g> ಫಿಂಗರ್‌ಪ್ರಿಂಟ್‌ಗಳ ಹೊಂದಾಣಿಕೆ</item>
       <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> ಫಿಂಗರ್‌ಪ್ರಿಂಟ್‌ಗಳ ಹೊಂದಾಣಿಕೆ</item>
     </plurals>
+    <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"ಫಿಂಗರ್‌ಪ್ರಿಂಟ್ ಸೆಟಪ್"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"ನಿಮ್ಮ ಪರದೆಯನ್ನು ಅನ್‌ಲಾಕ್ ಮಾಡಲು ಅಥವಾ ಖರೀದಿಗಳನ್ನು ಖಚಿತಪಡಿಸಲು ನಿಮ್ಮ ಫಿಂಗರ್‌ಪ್ರಿಂಟ್ ಬಳಸಲು, ನಾವು ಹೀಗೆ ಮಾಡಬೇಕಾದ ಅಗತ್ಯವಿದೆ:"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"ನಿಮ್ಮ ಬ್ಯಾಕಪ್ ಪರದೆ ಲಾಕ್ ವಿಧಾನವನ್ನು ಹೊಂದಿಸಿ"</string>
@@ -2507,6 +2508,7 @@
     <string name="keywords_app_permissions" msgid="8677901415217188314">"ಅಪ್ಲಿಕೇಶನ್‌ಗಳು ಅನುಮತಿಗಳು ಭದ್ರತೆ"</string>
     <string name="keywords_default_apps" msgid="3581727483175522599">"ಅಪ್ಲಿಕೇಶನ್‌ಗಳ ಡೀಫಾಲ್ಟ್"</string>
     <string name="keywords_ignore_optimizations" msgid="946516741848647905">"ಆಪ್ಟಿಮೈಸೇಶನ್‌ಗಳ ಡೋಜ್ ಅಪ್ಲಿಕೇಶನ್ ಸ್ಟ್ಯಾಂಡ್‌ಬೈ ಅನ್ನು ನಿರ್ಲಕ್ಷಿಸಿ"</string>
+    <string name="keywords_color_mode" msgid="4670570451841540200">"ಸ್ಪಂದನಾತ್ಮಕ rgb srgb ಬಣ್ಣ ನೈಸರ್ಗಿಕ ಪ್ರಮಾಣಿತ"</string>
     <string name="keywords_lockscreen" msgid="4806191868723291541">"ಸ್ಲೈಡ್ ಪಾಸ್‌ವರ್ಡ್ ಮಾದರಿ ಪಿನ್"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Wi-Fi NFC ಟ್ಯಾಗ್‌ ಹೊಂದಿಸಿ"</string>
     <string name="write_tag" msgid="8571858602896222537">"ಬರೆಯಿರಿ"</string>
@@ -2883,4 +2885,15 @@
     <string name="camera_gesture_desc" msgid="1831390075255870960">"ನಿಮ್ಮ ಮಣಿಕಟ್ಟನ್ನು ಎರಡು ಬಾರಿ ತಿರುಗಿಸುವ ಮೂಲಕ ಕ್ಯಾಮರಾ ಅಪ್ಲಿಕೇಶನ್ ತೆರೆಯಿರಿ"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"ಕ್ಯಾಮರಾಗೆ ಪವರ್ ಬಟನ್ ಎರಡು ಬಾರಿ ಒತ್ತಿ"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"ನಿಮ್ಮ ಪರದೆಯನ್ನು ಅನ್‌ಲಾಕ್ ಮಾಡದೆಯೇ ಕ್ಯಾಮರಾವನ್ನು ತ್ವರಿತವಾಗಿ ತೆರೆಯಿರಿ"</string>
+  <string-array name="color_mode_names">
+    <item msgid="2425514299220523812">"ಸ್ಪಂದನಾತ್ಮಕ (ಡೀಫಾಲ್ಟ್)"</item>
+    <item msgid="8446070607501413455">"ಪ್ರಾಕೃತಿಕ"</item>
+    <item msgid="6553408765810699025">"ಪ್ರಮಾಣಿತ"</item>
+  </string-array>
+  <string-array name="color_mode_descriptions">
+    <item msgid="4979629397075120893">"ವರ್ಧಿತ ಬಣ್ಣಗಳು"</item>
+    <item msgid="8280754435979370728">"ಕಣ್ಣಿಗೆ ಕಾಣಿಸುವ ರೀತಿಯಲ್ಲಿ ನೈಸರ್ಗಿಕ ಬಣ್ಣಗಳು"</item>
+    <item msgid="5363960654009010371">"ಡಿಜಿಟಲ್ ವಿಷಯಕ್ಕಾಗಿ ಆಪ್ಟಿಮೈಜ್ ಮಾಡಲಾಗಿರುವ ಬಣ್ಣಗಳು"</item>
+  </string-array>
+    <string name="picture_color_mode" msgid="4560755008730283695">"ಚಿತ್ರ ಬಣ್ಣದ ಮೋಡ್"</string>
 </resources>
