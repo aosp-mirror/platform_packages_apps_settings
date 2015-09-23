@@ -17,6 +17,8 @@
 package com.android.settings.notification;
 
 import android.app.AlertDialog;
+import android.app.AutomaticZenRule;
+import android.app.NotificationManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -32,10 +34,8 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
-import android.provider.Settings.Global;
 import android.service.notification.ConditionProviderService;
 import android.service.notification.ZenModeConfig;
-import android.service.notification.ZenModeConfig.ZenRule;
 import android.util.Log;
 import android.view.View;
 
@@ -45,11 +45,10 @@ import com.android.settings.notification.ManagedServiceSettings.Config;
 import com.android.settings.notification.ZenRuleNameDialog.RuleInfo;
 
 import java.lang.ref.WeakReference;
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 public class ZenModeAutomationSettings extends ZenModeSettingsBase {
 
@@ -93,27 +92,20 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
     }
 
     private void showAddRuleDialog() {
-        new ZenRuleNameDialog(mContext, mServiceListing, null, mConfig.getAutomaticRuleNames()) {
+        new ZenRuleNameDialog(mContext, mServiceListing, null, mRules) {
             @Override
             public void onOk(String ruleName, RuleInfo ri) {
                 MetricsLogger.action(mContext, MetricsLogger.ACTION_ZEN_ADD_RULE_OK);
-                final ZenRule rule = new ZenRule();
-                rule.name = ruleName;
-                rule.enabled = true;
-                rule.zenMode = Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS;
-                rule.conditionId = ri.defaultConditionId;
-                rule.component = ri.serviceComponent;
-                final ZenModeConfig newConfig = mConfig.copy();
-                final String ruleId = newConfig.newRuleId();
-                newConfig.automaticRules.put(ruleId, rule);
-                if (setZenModeConfig(newConfig)) {
-                    showRule(ri.settingsAction, ri.configurationActivity, ruleId, rule.name);
+                AutomaticZenRule rule = new AutomaticZenRule(ruleName, ri.serviceComponent, ri.defaultConditionId,
+                        NotificationManager.INTERRUPTION_FILTER_PRIORITY, true);
+                if (setZenRule(rule)) {
+                    showRule(ri.settingsAction, ri.configurationActivity, rule.getName());
                 }
             }
         }.show();
     }
 
-    private void showDeleteRuleDialog(final String ruleName, final String ruleId) {
+    private void showDeleteRuleDialog(final String ruleName) {
         new AlertDialog.Builder(mContext)
                 .setMessage(getString(R.string.zen_mode_delete_rule_confirmation, ruleName))
                 .setNegativeButton(R.string.cancel, null)
@@ -122,29 +114,22 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         MetricsLogger.action(mContext, MetricsLogger.ACTION_ZEN_DELETE_RULE_OK);
-                        mConfig.automaticRules.remove(ruleId);
-                        setZenModeConfig(mConfig);
+                        removeZenRule(ruleName);
                     }
                 })
                 .show();
     }
 
     private void showRule(String settingsAction, ComponentName configurationActivity,
-            String ruleId, String ruleName) {
-        if (DEBUG) Log.d(TAG, "showRule " + ruleId + " name=" + ruleName);
+            String ruleName) {
+        if (DEBUG) Log.d(TAG, "showRule name=" + ruleName);
         mContext.startActivity(new Intent(settingsAction)
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                .putExtra(ZenModeRuleSettingsBase.EXTRA_RULE_ID, ruleId));
+                .putExtra(ZenModeRuleSettingsBase.EXTRA_RULE_NAME, ruleName));
     }
 
-    private ZenRuleInfo[] sortedRules() {
-        final ZenRuleInfo[] rt = new ZenRuleInfo[mConfig.automaticRules.size()];
-        for (int i = 0; i < rt.length; i++) {
-            final ZenRuleInfo zri = new ZenRuleInfo();
-            zri.id = mConfig.automaticRules.keyAt(i);
-            zri.rule = mConfig.automaticRules.valueAt(i);
-            rt[i] = zri;
-        }
+    private AutomaticZenRule[] sortedRules() {
+        final AutomaticZenRule[] rt = mRules.toArray(new AutomaticZenRule[mRules.size()]);
         Arrays.sort(rt, RULE_COMPARATOR);
         return rt;
     }
@@ -152,12 +137,10 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
     private void updateControls() {
         final PreferenceScreen root = getPreferenceScreen();
         root.removeAll();
-        if (mConfig == null) return;
-        final ZenRuleInfo[] sortedRules = sortedRules();
-        for (int i = 0; i < sortedRules.length; i++) {
-            final String id = sortedRules[i].id;
-            final ZenRule rule = sortedRules[i].rule;
-            root.addPreference(new ZenRulePreference(mContext, rule, id));
+        if (mRules.size() == 0) return;
+        final AutomaticZenRule[] sortedRules = sortedRules();
+        for (AutomaticZenRule sortedRule : sortedRules) {
+            root.addPreference(new ZenRulePreference(mContext, sortedRule));
         }
         final Preference p = new Preference(mContext);
         p.setIcon(R.drawable.ic_add);
@@ -179,10 +162,10 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
         return MetricsLogger.NOTIFICATION_ZEN_MODE_AUTOMATION;
     }
 
-    private String computeRuleSummary(ZenRule rule, boolean isSystemRule,
+    private String computeRuleSummary(AutomaticZenRule rule, boolean isSystemRule,
             CharSequence providerLabel) {
-        final String mode = computeZenModeCaption(getResources(), rule.zenMode);
-        final String ruleState = (rule == null || !rule.enabled)
+        final String mode = computeZenModeCaption(getResources(), rule.getInterruptionFilter());
+        final String ruleState = (rule == null || !rule.isEnabled())
                 ? getString(R.string.switch_off_text)
                 : getString(R.string.zen_mode_rule_summary_enabled_combination, mode);
 
@@ -203,11 +186,11 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
 
     private static String computeZenModeCaption(Resources res, int zenMode) {
         switch (zenMode) {
-            case Global.ZEN_MODE_ALARMS:
+            case NotificationManager.INTERRUPTION_FILTER_ALARMS:
                 return res.getString(R.string.zen_mode_option_alarms);
-            case Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS:
+            case NotificationManager.INTERRUPTION_FILTER_PRIORITY:
                 return res.getString(R.string.zen_mode_option_important_interruptions);
-            case Global.ZEN_MODE_NO_INTERRUPTIONS:
+            case NotificationManager.INTERRUPTION_FILTER_NONE:
                 return res.getString(R.string.zen_mode_option_no_interruptions);
             default:
                 return null;
@@ -220,7 +203,7 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
             for (ServiceInfo service : services) {
                 final RuleInfo ri = ZenModeExternalRuleSettings.getRuleInfo(service);
                 if (ri != null && ri.serviceComponent != null
-                        && ri.settingsAction == ZenModeExternalRuleSettings.ACTION) {
+                        && Objects.equals(ri.settingsAction, ZenModeExternalRuleSettings.ACTION)) {
                     if (!mServiceListing.isEnabled(ri.serviceComponent)) {
                         Log.i(TAG, "Enabling external condition provider: " + ri.serviceComponent);
                         mServiceListing.setEnabled(ri.serviceComponent, true);
@@ -231,43 +214,37 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
     };
 
     // TODO: Sort by creation date, once that data is available.
-    private static final Comparator<ZenRuleInfo> RULE_COMPARATOR = new Comparator<ZenRuleInfo>() {
+    private static final Comparator<AutomaticZenRule> RULE_COMPARATOR =
+            new Comparator<AutomaticZenRule>() {
         @Override
-        public int compare(ZenRuleInfo lhs, ZenRuleInfo rhs) {
+        public int compare(AutomaticZenRule lhs, AutomaticZenRule rhs) {
             return key(lhs).compareTo(key(rhs));
         }
 
-        private String key(ZenRuleInfo zri) {
-            final ZenRule rule = zri.rule;
-            final int type = ZenModeConfig.isValidScheduleConditionId(rule.conditionId) ? 1
-                    : ZenModeConfig.isValidEventConditionId(rule.conditionId) ? 2
+        private String key(AutomaticZenRule rule) {
+            final int type = ZenModeConfig.isValidScheduleConditionId(rule.getConditionId()) ? 1
+                    : ZenModeConfig.isValidEventConditionId(rule.getConditionId()) ? 2
                     : 3;
-            return type + rule.name;
+            return type + rule.getName();
         }
     };
 
-    private static class ZenRuleInfo {
-        String id;
-        ZenRule rule;
-    }
-
     private class ZenRulePreference extends Preference {
         final String mName;
-        final String mId;
 
-        public ZenRulePreference(Context context, final ZenRule rule, final String id) {
+        public ZenRulePreference(Context context, final AutomaticZenRule rule) {
             super(context);
 
-            mName = rule.name;
-            this.mId = id;
+            mName = rule.getName();
 
-            final boolean isSchedule = ZenModeConfig.isValidScheduleConditionId(rule.conditionId);
-            final boolean isEvent = ZenModeConfig.isValidEventConditionId(rule.conditionId);
+            final boolean isSchedule = ZenModeConfig.isValidScheduleConditionId(
+                    rule.getConditionId());
+            final boolean isEvent = ZenModeConfig.isValidEventConditionId(rule.getConditionId());
             final boolean isSystemRule = isSchedule || isEvent;
 
             try {
                 ApplicationInfo info = mPm.getApplicationInfo(
-                        rule.component.getPackageName(), 0);
+                        rule.getOwner().getPackageName(), 0);
                 LoadIconTask task = new LoadIconTask(this);
                 task.execute(info);
                 setSummary(computeRuleSummary(rule, isSystemRule, info.loadLabel(mPm)));
@@ -275,7 +252,7 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
                 setIcon(R.drawable.ic_label);
             }
 
-            setTitle(rule.name);
+            setTitle(rule.getName());
             setPersistent(false);
             setOnPreferenceClickListener(new OnPreferenceClickListener() {
                 @Override
@@ -283,7 +260,7 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
                     final String action = isSchedule ? ZenModeScheduleRuleSettings.ACTION
                             : isEvent ? ZenModeEventRuleSettings.ACTION
                             : ZenModeExternalRuleSettings.ACTION;
-                    showRule(action, null, id, rule.name);
+                    showRule(action, null, rule.getName());
                     return true;
                 }
             });
@@ -295,13 +272,15 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
             super.onBindView(view);
 
             View v = view.findViewById(R.id.delete_zen_rule);
-            v.setOnClickListener(mDeleteListener);
+            if (v != null) {
+                v.setOnClickListener(mDeleteListener);
+            }
         }
 
         private final View.OnClickListener mDeleteListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDeleteRuleDialog(mName, mId);
+                showDeleteRuleDialog(mName);
             }
         };
     }
@@ -310,7 +289,7 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
         private final WeakReference<Preference> prefReference;
 
         public LoadIconTask(Preference pref) {
-            prefReference = new WeakReference<Preference>(pref);
+            prefReference = new WeakReference<>(pref);
         }
 
         @Override
@@ -320,7 +299,7 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
 
         @Override
         protected void onPostExecute(Drawable icon) {
-            if (prefReference != null && icon != null) {
+            if (icon != null) {
                 final Preference pref = prefReference.get();
                 pref.setIcon(icon);
             }

@@ -16,6 +16,7 @@
 
 package com.android.settings.notification;
 
+import android.app.AutomaticZenRule;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.database.ContentObserver;
@@ -30,7 +31,7 @@ import android.util.Log;
 
 import com.android.settings.RestrictedSettingsFragment;
 
-import java.util.Objects;
+import java.util.List;
 
 abstract public class ZenModeSettingsBase extends RestrictedSettingsFragment {
     protected static final String TAG = "ZenModeSettings";
@@ -40,7 +41,7 @@ abstract public class ZenModeSettingsBase extends RestrictedSettingsFragment {
     private final SettingsObserver mSettingsObserver = new SettingsObserver();
 
     protected Context mContext;
-    protected ZenModeConfig mConfig;
+    protected List<AutomaticZenRule> mRules;
     protected int mZenMode;
 
     abstract protected void onZenModeChanged();
@@ -55,15 +56,15 @@ abstract public class ZenModeSettingsBase extends RestrictedSettingsFragment {
         super.onCreate(icicle);
         mContext = getActivity();
         updateZenMode(false /*fireChanged*/);
-        updateZenModeConfig(false /*fireChanged*/);
-        if (DEBUG) Log.d(TAG, "Loaded mConfig=" + mConfig);
+        maybeRefreshRules(true, false /*fireChanged*/);
+        if (DEBUG) Log.d(TAG, "Loaded mRules=" + mRules);
     }
 
     @Override
     public void onResume() {
         super.onResume();
         updateZenMode(true /*fireChanged*/);
-        updateZenModeConfig(true /*fireChanged*/);
+        maybeRefreshRules(true, true /*fireChanged*/);
         mSettingsObserver.register();
         if (isUiRestricted()) {
             finish();
@@ -86,25 +87,28 @@ abstract public class ZenModeSettingsBase extends RestrictedSettingsFragment {
         }
     }
 
-    private void updateZenModeConfig(boolean fireChanged) {
-        final ZenModeConfig config = getZenModeConfig();
-        if (Objects.equals(config, mConfig)) return;
-        mConfig = config;
-        if (DEBUG) Log.d(TAG, "updateZenModeConfig mConfig=" + mConfig);
-        if (fireChanged) {
-            onZenModeConfigChanged();
-        }
+    protected boolean setZenRule(AutomaticZenRule rule) {
+        final boolean success =
+                NotificationManager.from(mContext).addOrUpdateAutomaticZenRule(rule);
+        maybeRefreshRules(success, true);
+        return success;
     }
 
-    protected boolean setZenModeConfig(ZenModeConfig config) {
-        final String reason = getClass().getSimpleName();
-        final boolean success = NotificationManager.from(mContext).setZenModeConfig(config, reason);
-        if (success) {
-            mConfig = getZenModeConfig();
-            if (DEBUG) Log.d(TAG, "Saved mConfig=" + mConfig);
-            onZenModeConfigChanged();
-        }
+    protected boolean removeZenRule(String name) {
+        final boolean success =
+                NotificationManager.from(mContext).removeAutomaticZenRule(name);
+        maybeRefreshRules(success, true);
         return success;
+    }
+
+    protected void maybeRefreshRules(boolean success, boolean fireChanged) {
+        if (success) {
+            mRules = getZenModeRules();
+            if (DEBUG) Log.d(TAG, "Refreshed mRules=" + mRules);
+            if (fireChanged) {
+                onZenModeConfigChanged();
+            }
+        }
     }
 
     protected void setZenMode(int zenMode, Uri conditionId) {
@@ -116,8 +120,8 @@ abstract public class ZenModeSettingsBase extends RestrictedSettingsFragment {
                 .isSystemConditionProviderEnabled(ZenModeConfig.SCHEDULE_PATH);
     }
 
-    private ZenModeConfig getZenModeConfig() {
-        return NotificationManager.from(mContext).getZenModeConfig();
+    private List<AutomaticZenRule> getZenModeRules() {
+        return NotificationManager.from(mContext).getAutomaticZenRules();
     }
 
     private final class SettingsObserver extends ContentObserver {
@@ -144,7 +148,7 @@ abstract public class ZenModeSettingsBase extends RestrictedSettingsFragment {
                 updateZenMode(true /*fireChanged*/);
             }
             if (ZEN_MODE_CONFIG_ETAG_URI.equals(uri)) {
-                updateZenModeConfig(true /*fireChanged*/);
+                maybeRefreshRules(true, true /*fireChanged*/);
             }
         }
     }

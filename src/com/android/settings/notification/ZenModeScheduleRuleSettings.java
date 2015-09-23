@@ -19,6 +19,7 @@ package com.android.settings.notification;
 import static com.android.settings.notification.ZenModeScheduleDaysSelection.DAYS;
 
 import android.app.AlertDialog;
+import android.app.AutomaticZenRule;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
@@ -33,7 +34,6 @@ import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.service.notification.ZenModeConfig;
 import android.service.notification.ZenModeConfig.ScheduleInfo;
-import android.service.notification.ZenModeConfig.ZenRule;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.widget.TimePicker;
@@ -62,8 +62,8 @@ public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
     private ScheduleInfo mSchedule;
 
     @Override
-    protected boolean setRule(ZenRule rule) {
-        mSchedule = rule != null ? ZenModeConfig.tryParseScheduleConditionId(rule.conditionId)
+    protected boolean setRule(AutomaticZenRule rule) {
+        mSchedule = rule != null ? ZenModeConfig.tryParseScheduleConditionId(rule.getConditionId())
                 : null;
         return mSchedule != null;
     }
