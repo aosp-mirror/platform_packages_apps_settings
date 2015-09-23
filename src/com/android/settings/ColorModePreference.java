@@ -23,6 +23,7 @@ import android.hardware.display.DisplayManager.DisplayListener;
 import android.os.Handler;
 import android.os.Looper;
 import android.preference.DialogPreference;
+import android.preference.SwitchPreference;
 import android.util.AttributeSet;
 import android.view.Display;
 import android.view.Display.ColorTransform;
@@ -35,8 +36,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class ColorModePreference extends DialogPreference implements
-        OnClickListener, DisplayListener {
+public class ColorModePreference extends SwitchPreference implements DisplayListener {
 
     private DisplayManager mDisplayManager;
     private Display mDisplay;
@@ -91,7 +91,7 @@ public class ColorModePreference extends DialogPreference implements
         String[] descriptions = resources.getStringArray(R.array.color_mode_descriptions);
         // Map the resource information describing color transforms.
         for (int i = 0; i < transforms.length; i++) {
-            if (transforms[i] != -1) {
+            if (transforms[i] != -1 && i != 1 /* Skip Natural for now. */) {
                 ColorTransformDescription desc = new ColorTransformDescription();
                 desc.colorTransform = transforms[i];
                 desc.title = titles[i];
@@ -126,46 +126,20 @@ public class ColorModePreference extends DialogPreference implements
                 break;
             }
         }
-        if (mCurrentIndex != -1) {
-            setSummary(mDescriptions.get(mCurrentIndex).title);
-        } else {
-            setSummary(null);
+        setChecked(mCurrentIndex == 1);
+    }
+
+    @Override
+    protected boolean persistBoolean(boolean value) {
+        // Right now this is a switch, so we only support two modes.
+        if (mDescriptions.size() == 2) {
+            ColorTransformDescription desc = mDescriptions.get(value ? 1 : 0);
+
+            mDisplay.requestColorTransform(desc.transform);
+            mCurrentIndex = mDescriptions.indexOf(desc);
         }
-    }
 
-    @Override
-    protected View onCreateDialogView() {
-        LayoutInflater inflater = LayoutInflater.from(getContext());
-        LinearLayout v = (LinearLayout) inflater.inflate(R.layout.radio_list_container, null);
-        for (int i = 0; i < mDescriptions.size(); i++) {
-            View child = inflater.inflate(R.layout.radio_with_summary, v, false);
-            ColorTransformDescription desc = mDescriptions.get(i);
-            child.setTag(desc);
-            ((TextView) child.findViewById(android.R.id.title)).setText(desc.title);
-            ((TextView) child.findViewById(android.R.id.summary)).setText(desc.summary);
-            ((Checkable) child).setChecked(i == mCurrentIndex);
-            child.setClickable(true);
-            child.setOnClickListener(this);
-            v.addView(child);
-        }
-        return v;
-    }
-
-    @Override
-    protected void onPrepareDialogBuilder(Builder builder) {
-        super.onPrepareDialogBuilder(builder);
-        builder.setPositiveButton(null, null);
-    }
-
-    @Override
-    public void onClick(View v) {
-        ColorTransformDescription desc = (ColorTransformDescription) v.getTag();
-
-        mDisplay.requestColorTransform(desc.transform);
-        mCurrentIndex = mDescriptions.indexOf(desc);
-
-        setSummary(desc.title);
-        getDialog().dismiss();
+        return true;
     }
 
     private static class ColorTransformDescription {
