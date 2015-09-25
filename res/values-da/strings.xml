@@ -322,6 +322,7 @@
       <item quantity="one"><xliff:g id="COUNT_1">%1$d</xliff:g> fingeraftryk er oprettet</item>
       <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> fingeraftryk er oprettet</item>
     </plurals>
+    <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Registrer fingeraftryk"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"Før du kan bruge dit fingeraftryk til at låse skærmen op eller bekræfte køb, skal vi:"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"Konfigurer din alternative metode til skærmlåsning"</string>
@@ -2515,6 +2516,7 @@
     <string name="keywords_app_permissions" msgid="8677901415217188314">"apps tilladelser sikkerhed"</string>
     <string name="keywords_default_apps" msgid="3581727483175522599">"apps standard"</string>
     <string name="keywords_ignore_optimizations" msgid="946516741848647905">"ignorer, optimeringer, doze-app, standby"</string>
+    <string name="keywords_color_mode" msgid="4670570451841540200">"klare rgb srgb farve naturlige standard"</string>
     <string name="keywords_lockscreen" msgid="4806191868723291541">"stryg adgangskode mønster pinkode"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Konfigurer NFC-tag for Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Skriv"</string>
@@ -2570,13 +2572,13 @@
     <string name="no_notification_listeners" msgid="3487091564454192821">"Ingen installerede apps har anmodet om adgang til underretninger."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Tillad adgang til underretninger for <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="548925084229440829">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> vil kunne læse alle underretninger, herunder personlige oplysninger, som f.eks. kontaktpersoner og teksten i beskeder, du modtager. Den vil også kunne afvise underretninger eller udløse handlingsknapper i dem."</string>
-    <string name="manage_zen_access_title" msgid="2611116122628520522">"Adgang til \"vil ikke forstyrres\""</string>
-    <string name="zen_access_empty_text" msgid="8772967285742259540">"Ingen installerede apps har anmodet om adgang, når indstillingen \"vil ikke forstyrres\" er aktiveret."</string>
+    <string name="manage_zen_access_title" msgid="2611116122628520522">"Adgang til \"Forstyr ikke\""</string>
+    <string name="zen_access_empty_text" msgid="8772967285742259540">"Ingen installerede apps har anmodet om adgang, når indstillingen \"Forstyr ikke\" er aktiveret."</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Indlæser apps..."</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"Bloker alle"</string>
     <string name="app_notification_block_summary" msgid="9049487483231233726">"Vis aldrig underretninger fra denne app"</string>
     <string name="app_notification_priority_title" msgid="5949923919607295595">"Vis som prioritet"</string>
-    <string name="app_notification_priority_summary" msgid="2538018111338754446">"Tillad, at underretninger fra denne app høres, når \"Vil ikke forstyrres\" er indstillet til \"Kun prioritet\""</string>
+    <string name="app_notification_priority_summary" msgid="2538018111338754446">"Tillad, at underretninger fra denne app høres, når \"Forstyr ikke\" er indstillet til \"Kun prioritet\""</string>
     <string name="app_notification_peekable_title" msgid="8647856880382324822">"Tillad smugkig"</string>
     <string name="app_notification_peekable_summary" msgid="678845517890921158">"Lad denne app fremhæve visse underretninger ved kortvarigt at lade dem glide ind i synsfeltet på den aktuelle skærm"</string>
     <string name="app_notification_sensitive_title" msgid="8465860579482264139">"Skjul følsomt indhold"</string>
@@ -2596,9 +2598,9 @@
     <string name="zen_mode_rule_type_unknown" msgid="3049377282766700600">"Ukendt"</string>
     <string name="zen_mode_configure_rule" msgid="8865785428056490305">"Konfigurer regel"</string>
     <string name="zen_schedule_rule_type_name" msgid="142936744435271449">"Tidsafhængig regel"</string>
-    <string name="zen_schedule_rule_enabled_toast" msgid="3379499360390382259">"Der er oprettet en automatisk regel om at aktivere \"Vil ikke forstyrres\" på bestemte tidspunkter"</string>
+    <string name="zen_schedule_rule_enabled_toast" msgid="3379499360390382259">"Der er oprettet en automatisk regel om at aktivere \"Forstyr ikke\" på bestemte tidspunkter"</string>
     <string name="zen_event_rule_type_name" msgid="2645981990973086797">"Regel for begivenheder"</string>
-    <string name="zen_event_rule_enabled_toast" msgid="6910577623330811480">"En automatisk regel er indstillet til at slå \"Vil ikke forstyrres\" til ved bestemte begivenheder"</string>
+    <string name="zen_event_rule_enabled_toast" msgid="6910577623330811480">"En automatisk regel er indstillet til at slå \"Forstyr ikke\" til ved bestemte begivenheder"</string>
     <string name="zen_mode_event_rule_calendar" msgid="8787906563769067418">"Under begivenheder for"</string>
     <string name="zen_mode_event_rule_summary_calendar_template" msgid="5135844750232403975">"Under begivenheder for <xliff:g id="CALENDAR">%1$s</xliff:g>"</string>
     <string name="zen_mode_event_rule_summary_any_calendar" msgid="4936646399126636358">"enhver kalender"</string>
@@ -2609,7 +2611,8 @@
     <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="2769656565454495824">"Ja eller Måske"</string>
     <string name="zen_mode_event_rule_reply_yes" msgid="1003598835878784659">"Ja"</string>
     <string name="zen_mode_rule_not_found_text" msgid="8963662446092059836">"Reglen blev ikke fundet."</string>
-    <string name="zen_mode_rule_summary_combination" msgid="2526506268333198254">"<xliff:g id="DESCRIPTION">%1$s</xliff:g>/<xliff:g id="MODE">%2$s</xliff:g>"</string>
+    <string name="zen_mode_rule_summary_enabled_combination" msgid="976098744828219297">"Til/<xliff:g id="MODE">%1$s</xliff:g>"</string>
+    <string name="zen_mode_rule_summary_provider_combination" msgid="2101201392041867409">"<xliff:g id="PACKAGE">%1$s</xliff:g>\n<xliff:g id="SUMMARY">%2$s</xliff:g>"</string>
     <string name="zen_mode_schedule_rule_days" msgid="3195058680641389948">"Dage"</string>
     <string name="zen_mode_schedule_rule_days_none" msgid="4954143628634166317">"Ingen"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="146511166522076034">"Hver dag"</string>
@@ -2852,8 +2855,8 @@
     <string name="running_frequency" msgid="6622624669948277693">"Hyppighed"</string>
     <string name="memory_maximum_usage" msgid="6513785462055278341">"Maksimal forbrug"</string>
     <string name="no_data_usage" msgid="9131454024293628063">"Der blev ikke brugt nogen data"</string>
-    <string name="zen_access_warning_dialog_title" msgid="1198189958031157142">"Vil du give <xliff:g id="APP">%1$s</xliff:g> adgang til Vil ikke forstyrres?"</string>
-    <string name="zen_access_warning_dialog_summary" msgid="4015885767653010873">"Appen vil kunne aktivere/deaktivere Vil ikke forstyrres og foretage ændringer i relaterede indstillinger."</string>
+    <string name="zen_access_warning_dialog_title" msgid="1198189958031157142">"Vil du give <xliff:g id="APP">%1$s</xliff:g> adgang til Forstyr ikke?"</string>
+    <string name="zen_access_warning_dialog_summary" msgid="4015885767653010873">"Appen vil kunne aktivere/deaktivere Forstyr ikke og foretage ændringer i relaterede indstillinger."</string>
     <string name="ignore_optimizations_on" msgid="6915689518016285116">"Undlad at optimere"</string>
     <string name="ignore_optimizations_off" msgid="6153196256410296835">"Optimer"</string>
     <string name="ignore_optimizations_on_desc" msgid="2321398930330555815">"Kan medføre, at batteriet aflades hurtigere."</string>
@@ -2891,4 +2894,16 @@
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Åbn kameraappen ved at dreje håndleddet to gange"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Tryk to gange på afbryderknappen for at åbne kameraet"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Åbn hurtigt kameraet uden at låse skærmen op"</string>
+  <string-array name="color_mode_names">
+    <item msgid="2425514299220523812">"Klare (standard)"</item>
+    <item msgid="8446070607501413455">"Naturlige"</item>
+    <item msgid="6553408765810699025">"Standard"</item>
+  </string-array>
+  <string-array name="color_mode_descriptions">
+    <item msgid="4979629397075120893">"Forbedrede farver"</item>
+    <item msgid="8280754435979370728">"Naturlige farver, som øjet opfatter dem"</item>
+    <item msgid="5363960654009010371">"Farver, der er optimeret til digitalt indhold"</item>
+  </string-array>
+    <string name="picture_color_mode" msgid="4560755008730283695">"Farvetilstand for billeder"</string>
+    <string name="picture_color_mode_desc" msgid="1141891467675548590">"Brug sRGB"</string>
 </resources>

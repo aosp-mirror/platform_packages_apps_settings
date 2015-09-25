@@ -322,6 +322,7 @@
       <item quantity="other">已設定 <xliff:g id="COUNT_1">%1$d</xliff:g> 枚指紋</item>
       <item quantity="one">已設定 <xliff:g id="COUNT_0">%1$d</xliff:g> 枚指紋</item>
     </plurals>
+    <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"指紋設定"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"如要使用您的指紋解鎖螢幕或確認購物交易，必須先完成以下工作："</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"設定備用螢幕鎖定方法"</string>
@@ -352,12 +353,9 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"完成"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"糟糕，這不是感應器"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="5053971232594165142">"使用裝置上的指紋感應器。"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (3618021988442639280) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (2942551158278899627) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_generic_dialog_message (3624760637222239293) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="3618021988442639280">"未完成註冊"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="2942551158278899627">"已達指紋註冊時間上限，請再試一次。"</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="3624760637222239293">"無法註冊指紋。請再試一次或使用不同的手指。"</string>
     <string name="fingerprint_enroll_button_add" msgid="6317978977419045463">"新增另一個"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"下一步"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"除了將手機解鎖，您也可以使用指紋授權購物交易及存取應用程式。"<annotation id="url">"瞭解詳情"</annotation></string>
@@ -402,8 +400,7 @@
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"您所輸入的密碼正確，但您的資料已毀損。\n\n如要繼續使用手機，請將該裝置重設為原廠設定。重設完成後，當您對手機進行設定時，可以將備份在個人 Google 帳戶中的資料全部還原。"</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"切換輸入法"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"選擇螢幕鎖定方式"</string>
-    <!-- no translation found for setup_lock_settings_picker_title (1584792702475081908) -->
-    <skip />
+    <string name="setup_lock_settings_picker_title" msgid="1584792702475081908">"選擇螢幕鎖定方式"</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"選擇您的備用螢幕鎖定方法"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"螢幕鎖定"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"變更鎖定畫面"</string>
@@ -833,13 +830,10 @@
     <string name="brightness_summary" msgid="838917350127550703">"調整螢幕亮度"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"自動調整亮度"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"根據環境光源調整最佳亮度"</string>
-    <!-- no translation found for night_mode_title (2594133148531256513) -->
-    <skip />
+    <string name="night_mode_title" msgid="2594133148531256513">"夜間模式"</string>
     <string name="night_mode_summary" msgid="9196605054622017193">"%s"</string>
-    <!-- no translation found for night_mode_no (9171772244775838901) -->
-    <skip />
-    <!-- no translation found for night_mode_yes (2218157265997633432) -->
-    <skip />
+    <string name="night_mode_no" msgid="9171772244775838901">"已停用"</string>
+    <string name="night_mode_yes" msgid="2218157265997633432">"一律開啟"</string>
     <string name="night_mode_auto" msgid="7508348175804304327">"自動"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"休眠"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"螢幕關閉時"</string>
@@ -1939,10 +1933,8 @@
     <string name="credentials_reset_summary" msgid="3369361230171260282">"移除所有憑證"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"信任的憑證"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"顯示信任的 CA 憑證"</string>
-    <!-- no translation found for user_credentials (3719013347787187083) -->
-    <skip />
-    <!-- no translation found for user_credentials_summary (7271228342106080167) -->
-    <skip />
+    <string name="user_credentials" msgid="3719013347787187083">"使用者憑證"</string>
+    <string name="user_credentials_summary" msgid="7271228342106080167">"查看及修改已儲存的憑證"</string>
     <string name="advanced_security_title" msgid="2434776238010578865">"進階"</string>
     <string name="credential_storage_type" msgid="8629968543494001364">"儲存空間類型"</string>
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"硬體備份"</string>
@@ -2294,16 +2286,11 @@
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"啟用系統 CA 憑證嗎？"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"停用系統 CA 憑證嗎？"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"永久移除使用者 CA 憑證嗎？"</string>
-    <!-- no translation found for one_userkey (6034020579534914349) -->
-    <skip />
-    <!-- no translation found for one_usercrt (2150319011101639509) -->
-    <skip />
-    <!-- no translation found for one_cacrt (6844397037970164809) -->
-    <skip />
-    <!-- no translation found for n_cacrts (5979300323482053820) -->
-    <skip />
-    <!-- no translation found for user_credential_title (1329449215749665378) -->
-    <skip />
+    <string name="one_userkey" msgid="6034020579534914349">"一個使用者金鑰"</string>
+    <string name="one_usercrt" msgid="2150319011101639509">"一個使用者憑證"</string>
+    <string name="one_cacrt" msgid="6844397037970164809">"一個 CA 憑證"</string>
+    <string name="n_cacrts" msgid="5979300323482053820">"%d 個 CA 憑證"</string>
+    <string name="user_credential_title" msgid="1329449215749665378">"憑證詳細資料"</string>
     <string name="spellcheckers_settings_title" msgid="399981228588011501">"拼字檢查"</string>
     <string name="current_backup_pw_prompt" msgid="7735254412051914576">"在這裡輸入您目前的完整備份密碼"</string>
     <string name="new_backup_pw_prompt" msgid="8755501377391998428">"在這裡輸入完整備份的新密碼"</string>
@@ -2533,6 +2520,7 @@
     <string name="keywords_app_permissions" msgid="8677901415217188314">"應用程式權限安全性"</string>
     <string name="keywords_default_apps" msgid="3581727483175522599">"應用程式 預設"</string>
     <string name="keywords_ignore_optimizations" msgid="946516741848647905">"忽略 最佳化設定 休眠 應用程式待命"</string>
+    <string name="keywords_color_mode" msgid="4670570451841540200">"鮮活 rgb srgb 色彩 自然 標準"</string>
     <string name="keywords_lockscreen" msgid="4806191868723291541">"滑動 密碼 圖形 PIN"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"設定 Wi-Fi NFC 標記"</string>
     <string name="write_tag" msgid="8571858602896222537">"寫入"</string>
@@ -2627,7 +2615,8 @@
     <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="2769656565454495824">"「是」或「不確定」"</string>
     <string name="zen_mode_event_rule_reply_yes" msgid="1003598835878784659">"是"</string>
     <string name="zen_mode_rule_not_found_text" msgid="8963662446092059836">"找不到規則。"</string>
-    <string name="zen_mode_rule_summary_combination" msgid="2526506268333198254">"<xliff:g id="DESCRIPTION">%1$s</xliff:g>/<xliff:g id="MODE">%2$s</xliff:g>"</string>
+    <string name="zen_mode_rule_summary_enabled_combination" msgid="976098744828219297">"開啟/<xliff:g id="MODE">%1$s</xliff:g>"</string>
+    <string name="zen_mode_rule_summary_provider_combination" msgid="2101201392041867409">"<xliff:g id="PACKAGE">%1$s</xliff:g>\n<xliff:g id="SUMMARY">%2$s</xliff:g>"</string>
     <string name="zen_mode_schedule_rule_days" msgid="3195058680641389948">"星期幾"</string>
     <string name="zen_mode_schedule_rule_days_none" msgid="4954143628634166317">"無"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="146511166522076034">"每天"</string>
@@ -2814,8 +2803,7 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="3459065925679828230">"電池效能最佳化"</string>
     <string name="high_power_filter_on" msgid="3222265297576680099">"未套用最佳化設定"</string>
-    <!-- no translation found for high_power_on (6216293998227583810) -->
-    <skip />
+    <string name="high_power_on" msgid="6216293998227583810">"未套用最佳化設定"</string>
     <string name="high_power_off" msgid="3393904131961263278">"採用電池效能最佳化設定"</string>
     <string name="high_power_system" msgid="7362862974428225301">"沒有電池效能最佳化設定"</string>
     <string name="high_power_desc" msgid="6283926163708585760">"不套用電池效能最佳化設定，這可能會加快電池消耗速度。"</string>
@@ -2908,8 +2896,18 @@
     <string name="write_settings_off" msgid="5156104383386336233">"否"</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"扭兩下即可開啟相機"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"扭動手腕兩次即可開啟「相機」應用程式"</string>
-    <!-- no translation found for camera_double_tap_power_gesture_title (1651873760405034645) -->
-    <skip />
-    <!-- no translation found for camera_double_tap_power_gesture_desc (7355664631775680376) -->
-    <skip />
+    <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"按兩下電源按鈕即可開啟相機"</string>
+    <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"不必將螢幕解鎖就能快速開啟相機"</string>
+  <string-array name="color_mode_names">
+    <item msgid="2425514299220523812">"鮮活 (預設)"</item>
+    <item msgid="8446070607501413455">"自然"</item>
+    <item msgid="6553408765810699025">"標準"</item>
+  </string-array>
+  <string-array name="color_mode_descriptions">
+    <item msgid="4979629397075120893">"增強的色彩"</item>
+    <item msgid="8280754435979370728">"眼睛所見的自然色彩"</item>
+    <item msgid="5363960654009010371">"針對數位內容最佳化的色彩"</item>
+  </string-array>
+    <string name="picture_color_mode" msgid="4560755008730283695">"螢幕色彩模式"</string>
+    <string name="picture_color_mode_desc" msgid="1141891467675548590">"使用 sRGB"</string>
 </resources>

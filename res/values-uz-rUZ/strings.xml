@@ -322,6 +322,7 @@
       <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> ta barmoq izi qo‘shilgan</item>
       <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> ta barmoq izi qo‘shilgan</item>
     </plurals>
+    <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Barmoq izini sozlash"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"Ekranni qulfdan chiqarish yoki xaridlarni tasdiqlashda barmoq izidan foydalanish uchun:"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"Ekranni qulflash uchun muqobil usulni sozlang"</string>
@@ -352,12 +353,9 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"Tayyor"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"Obbo, bu sensor emas."</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="5053971232594165142">"Qurilmadagi barmoq izi skanerini toping."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (3618021988442639280) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (2942551158278899627) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_generic_dialog_message (3624760637222239293) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="3618021988442639280">"Barmoq izini kiritish tugallanmadi"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="2942551158278899627">"Barmoq izini kiritish vaqti tugab qoldi. Qayta urinib ko‘ring."</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="3624760637222239293">"Barmoq izini kiritish amalga oshmadi. Qayta urinib ko‘ring yoki boshqa barmoqdan foydalaning."</string>
     <string name="fingerprint_enroll_button_add" msgid="6317978977419045463">"Boshqa barmoq izini qo‘shish"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"Keyingi"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Shuningdek, telefoningizni qulfdan chiqarish, xaridlarni tasdiqlash va ilovalarga kirish uchun ham barmoq izidan foydalanishingiz mumkin. "<annotation id="url">"Batafsil ma’lumot"</annotation></string>
@@ -402,8 +400,7 @@
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"Siz kiritgan parol to‘g‘ri, biroq telefondagi ma’lumotlar shikastlangan.\n\nTelefondan foydalanishda davom etish uchun uning zavod sozlamalarini tiklashingiz lozim. Shundan so‘ng, Google hisobingizga zaxiralangan barcha ma’lumotlaringizni qayta tiklab olishingiz mumkin bo‘ladi."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Yozish usulini o‘zgartirish"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Ekran qulfini tanlang"</string>
-    <!-- no translation found for setup_lock_settings_picker_title (1584792702475081908) -->
-    <skip />
+    <string name="setup_lock_settings_picker_title" msgid="1584792702475081908">"Ekran qulfini tanlang"</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Ekran qulfi uchun muqobil usulni tanlang"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Ekran qulfi"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Ekran qulfini o‘zgartirish"</string>
@@ -833,13 +830,10 @@
     <string name="brightness_summary" msgid="838917350127550703">"Ekran yorqinligini moslash"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"Moslashuvchan yorqinlik"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"Yorqinlikni yorug‘lik darajasiga qarab moslashtirish"</string>
-    <!-- no translation found for night_mode_title (2594133148531256513) -->
-    <skip />
+    <string name="night_mode_title" msgid="2594133148531256513">"Tungi rejim"</string>
     <string name="night_mode_summary" msgid="9196605054622017193">"%s"</string>
-    <!-- no translation found for night_mode_no (9171772244775838901) -->
-    <skip />
-    <!-- no translation found for night_mode_yes (2218157265997633432) -->
-    <skip />
+    <string name="night_mode_no" msgid="9171772244775838901">"O‘chiq"</string>
+    <string name="night_mode_yes" msgid="2218157265997633432">"Har doim yoniq tursin"</string>
     <string name="night_mode_auto" msgid="7508348175804304327">"Avtomatik"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Uyqu rejimi"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Ekranning o‘chishi"</string>
@@ -1935,10 +1929,8 @@
     <string name="credentials_reset_summary" msgid="3369361230171260282">"Barcha sertifikatlarni o‘chirish"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"Ishonchli sertifikatlar"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"Ishonchli SM sertifikatlarini ko‘rsatish"</string>
-    <!-- no translation found for user_credentials (3719013347787187083) -->
-    <skip />
-    <!-- no translation found for user_credentials_summary (7271228342106080167) -->
-    <skip />
+    <string name="user_credentials" msgid="3719013347787187083">"Profil hisob ma’lumotlari"</string>
+    <string name="user_credentials_summary" msgid="7271228342106080167">"Hisob ma’lumotlarini ko‘rish va o‘zgartirish"</string>
     <string name="advanced_security_title" msgid="2434776238010578865">"Qo‘shimcha"</string>
     <string name="credential_storage_type" msgid="8629968543494001364">"Ombor turi"</string>
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"Apparat bilan qo‘llab-quvvatlangan"</string>
@@ -2290,16 +2282,11 @@
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"Tizimning SM sertifikati yoqilsinmi?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"Tizimning SM sertifikati o‘chirib qo‘yilsinmi?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"Foydalanuvchining SM sertifikati butunlay o‘chirilsinmi?"</string>
-    <!-- no translation found for one_userkey (6034020579534914349) -->
-    <skip />
-    <!-- no translation found for one_usercrt (2150319011101639509) -->
-    <skip />
-    <!-- no translation found for one_cacrt (6844397037970164809) -->
-    <skip />
-    <!-- no translation found for n_cacrts (5979300323482053820) -->
-    <skip />
-    <!-- no translation found for user_credential_title (1329449215749665378) -->
-    <skip />
+    <string name="one_userkey" msgid="6034020579534914349">"bitta foydalanuvchi kaliti"</string>
+    <string name="one_usercrt" msgid="2150319011101639509">"bitta foydalanuvchi sertifikati"</string>
+    <string name="one_cacrt" msgid="6844397037970164809">"sertifikatlashtirish markazining bitta sertifikati"</string>
+    <string name="n_cacrts" msgid="5979300323482053820">"%d CA sertifikatlari"</string>
+    <string name="user_credential_title" msgid="1329449215749665378">"Hisob ma’lumotlari"</string>
     <string name="spellcheckers_settings_title" msgid="399981228588011501">"Imlo tekshirgich"</string>
     <string name="current_backup_pw_prompt" msgid="7735254412051914576">"Joriy parolni kiriting"</string>
     <string name="new_backup_pw_prompt" msgid="8755501377391998428">"Yangi parolni kiriting"</string>
@@ -2529,6 +2516,7 @@
     <string name="keywords_app_permissions" msgid="8677901415217188314">"ilovalar ruxsatnomalar xavfsizlik"</string>
     <string name="keywords_default_apps" msgid="3581727483175522599">"ilovalar birlamchi"</string>
     <string name="keywords_ignore_optimizations" msgid="946516741848647905">"cheklovlarni e’tiborsiz qoldirish kutish rejimi"</string>
+    <string name="keywords_color_mode" msgid="4670570451841540200">"yorqin rgb srgb rang tabiiy standart"</string>
     <string name="keywords_lockscreen" msgid="4806191868723291541">"surish, parol, chizmali parol, PIN-kod"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Wi-Fi’ni sozlash u-n NFC yorliq"</string>
     <string name="write_tag" msgid="8571858602896222537">"Yozish"</string>
@@ -2623,7 +2611,8 @@
     <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="2769656565454495824">"Ha/Balki"</string>
     <string name="zen_mode_event_rule_reply_yes" msgid="1003598835878784659">"Ha"</string>
     <string name="zen_mode_rule_not_found_text" msgid="8963662446092059836">"Qoida topilmadi"</string>
-    <string name="zen_mode_rule_summary_combination" msgid="2526506268333198254">"<xliff:g id="DESCRIPTION">%1$s</xliff:g> / <xliff:g id="MODE">%2$s</xliff:g>"</string>
+    <string name="zen_mode_rule_summary_enabled_combination" msgid="976098744828219297">"Yoqilgan / <xliff:g id="MODE">%1$s</xliff:g>"</string>
+    <string name="zen_mode_rule_summary_provider_combination" msgid="2101201392041867409">"<xliff:g id="PACKAGE">%1$s</xliff:g>\n<xliff:g id="SUMMARY">%2$s</xliff:g>"</string>
     <string name="zen_mode_schedule_rule_days" msgid="3195058680641389948">"Kunlar"</string>
     <string name="zen_mode_schedule_rule_days_none" msgid="4954143628634166317">"–"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="146511166522076034">"Har kuni"</string>
@@ -2810,8 +2799,7 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="3459065925679828230">"Batareya cheklovlari"</string>
     <string name="high_power_filter_on" msgid="3222265297576680099">"Cheklov o‘rnatilmagan"</string>
-    <!-- no translation found for high_power_on (6216293998227583810) -->
-    <skip />
+    <string name="high_power_on" msgid="6216293998227583810">"Cheklov o‘rnatilmagan"</string>
     <string name="high_power_off" msgid="3393904131961263278">"Batareya cheklovi o‘rnatilgan"</string>
     <string name="high_power_system" msgid="7362862974428225301">"Batareya cheklovi mavjud emas"</string>
     <string name="high_power_desc" msgid="6283926163708585760">"Batareya cheklovlari joriy etilmasin. Batareya quvvati tez sarflanishi mumkin."</string>
@@ -2904,8 +2892,18 @@
     <string name="write_settings_off" msgid="5156104383386336233">"Yo‘q"</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"Kamera uchun bilakni ikki marta bukish"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Kamera ilovasini ochish uchun bilagingizni ikki marta buking"</string>
-    <!-- no translation found for camera_double_tap_power_gesture_title (1651873760405034645) -->
-    <skip />
-    <!-- no translation found for camera_double_tap_power_gesture_desc (7355664631775680376) -->
-    <skip />
+    <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Quvvat tugmasini ikki marta bosish bilan kamerani ochish"</string>
+    <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Ekran qulfini ochmasdan kamerani tezroq ishga tushirish"</string>
+  <string-array name="color_mode_names">
+    <item msgid="2425514299220523812">"Yorqin (birlamchi)"</item>
+    <item msgid="8446070607501413455">"Tabiiy"</item>
+    <item msgid="6553408765810699025">"Standart"</item>
+  </string-array>
+  <string-array name="color_mode_descriptions">
+    <item msgid="4979629397075120893">"Ishlov berilgan ranglar"</item>
+    <item msgid="8280754435979370728">"Ko‘zga ko‘rinadigan tabiiy ranglar"</item>
+    <item msgid="5363960654009010371">"Raqamli kontentga moslashtirilgan ranglar"</item>
+  </string-array>
+    <string name="picture_color_mode" msgid="4560755008730283695">"Rang rejimi"</string>
+    <string name="picture_color_mode_desc" msgid="1141891467675548590">"sRGB ranglaridan foydalanish"</string>
 </resources>

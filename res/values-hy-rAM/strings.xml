@@ -322,6 +322,7 @@
       <item quantity="one"><xliff:g id="COUNT_1">%1$d</xliff:g> մատնահետք կարգավորված է</item>
       <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> մատնահետք կարգավորված է</item>
     </plurals>
+    <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Մատնահետքի գրանցում"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"Մատնահետքի միջոցով էկրանն ապակողպելու կամ գնումները հաստատելու համար մեզ անհրաժեշտ է՝"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"Կարգավորեք պահուստային էկրանի կողպման եղանակը"</string>
@@ -352,12 +353,9 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"Պատրաստ է"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"Դա սենսորը չէ"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="5053971232594165142">"Օգտագործեք մատնահետքի սենսորը:"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (3618021988442639280) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (2942551158278899627) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_generic_dialog_message (3624760637222239293) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="3618021988442639280">"Գրանցումը չի ավարտվել"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="2942551158278899627">"Մատնահետքի գրանցման ժամանակը սպառվել է: Փորձեք նորից:"</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="3624760637222239293">"Մատնահետքը չգրանցվեց: Փորձեք նորից կամ փորձեք այլ մատ:"</string>
     <string name="fingerprint_enroll_button_add" msgid="6317978977419045463">"Ավելացնել այլ մատնահետք"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"Հաջորդը"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Բացի հեռախոսը ապակողպելուց՝ մատնահետքը կարող եք նաև օգտագործել գնումները հաստատելու և հավելվածներից օգտվելու համար: "<annotation id="url">"Մանրամասն"</annotation></string>
@@ -402,8 +400,7 @@
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"Մուտքագրած գաղտնաբառը ճիշտ է, բայց ձեր տվյալները վնասված են: \n\nՈրպեսզի նորից կարողանաք օգտագործել հեռախոսը, պետք է կատարեք գործարանային վերակայում: Երբ կարգավորեք հեռախոսը վերակայումից հետո, կկարողանաք վերականգնել Google հաշվում պահուստավորված տվյալները:"</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Փոխարկել մուտքագրման եղանակը"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Ընտրել կողպէկրանը"</string>
-    <!-- no translation found for setup_lock_settings_picker_title (1584792702475081908) -->
-    <skip />
+    <string name="setup_lock_settings_picker_title" msgid="1584792702475081908">"Ընտրեք էկրանի կողպման եղանակը"</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Ընտրեք էկրանի կողպման պահուստային եղանակը"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Էկրանի կողպում"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Փոխել էկրանի կողպումը"</string>
@@ -833,13 +830,10 @@
     <string name="brightness_summary" msgid="838917350127550703">"Կարգաբերել էկրանի պայծառությունը"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"Հարմարողական պայծառություն"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"Լույսի պայծառության մակարդակի լավարկում"</string>
-    <!-- no translation found for night_mode_title (2594133148531256513) -->
-    <skip />
+    <string name="night_mode_title" msgid="2594133148531256513">"Գիշերային ռեժիմ"</string>
     <string name="night_mode_summary" msgid="9196605054622017193">"%s"</string>
-    <!-- no translation found for night_mode_no (9171772244775838901) -->
-    <skip />
-    <!-- no translation found for night_mode_yes (2218157265997633432) -->
-    <skip />
+    <string name="night_mode_no" msgid="9171772244775838901">"Անջատված"</string>
+    <string name="night_mode_yes" msgid="2218157265997633432">"Միշտ միացված"</string>
     <string name="night_mode_auto" msgid="7508348175804304327">"Ավտոմատ"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Քնել"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Էկրանը անջատվում է"</string>
@@ -1935,10 +1929,8 @@
     <string name="credentials_reset_summary" msgid="3369361230171260282">"Հեռացնել բոլոր վկայագրերը"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"Վստահելի վկայագրեր"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"Ցույց տալ վստահելի CA վկայագրերը"</string>
-    <!-- no translation found for user_credentials (3719013347787187083) -->
-    <skip />
-    <!-- no translation found for user_credentials_summary (7271228342106080167) -->
-    <skip />
+    <string name="user_credentials" msgid="3719013347787187083">"Օգտվողի հավատարմագրեր"</string>
+    <string name="user_credentials_summary" msgid="7271228342106080167">"Պահված հավատարմագրերի դիտում և փոփոխում"</string>
     <string name="advanced_security_title" msgid="2434776238010578865">"Ընդլայնված"</string>
     <string name="credential_storage_type" msgid="8629968543494001364">"Պահոցի տեսակը"</string>
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"Պահուստավորված սարք"</string>
@@ -2290,16 +2282,11 @@
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"Ապաակտիվացնե՞լ համակարգի CA վկայագիրը:"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"Ապաակտիվացնե՞լ համակարգի CA վկայագիրը:"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"Ժամանակավորապես հեռացնե՞լ օգտվողի CA վկայագիրը:"</string>
-    <!-- no translation found for one_userkey (6034020579534914349) -->
-    <skip />
-    <!-- no translation found for one_usercrt (2150319011101639509) -->
-    <skip />
-    <!-- no translation found for one_cacrt (6844397037970164809) -->
-    <skip />
-    <!-- no translation found for n_cacrts (5979300323482053820) -->
-    <skip />
-    <!-- no translation found for user_credential_title (1329449215749665378) -->
-    <skip />
+    <string name="one_userkey" msgid="6034020579534914349">"մեկ օգտվողի բանալի"</string>
+    <string name="one_usercrt" msgid="2150319011101639509">"մեկ օգտվողի վկայագիր"</string>
+    <string name="one_cacrt" msgid="6844397037970164809">"մեկ CA վկայագիր"</string>
+    <string name="n_cacrts" msgid="5979300323482053820">"%d CA վկայագրեր"</string>
+    <string name="user_credential_title" msgid="1329449215749665378">"Հավատարմագրերի տվյալներ"</string>
     <string name="spellcheckers_settings_title" msgid="399981228588011501">"Տառասխալների ուղղիչ"</string>
     <string name="current_backup_pw_prompt" msgid="7735254412051914576">"Մուտքագրեք ձեր ընթացիկ ամբողջական պահուստավորման գաղտնաբառը այստեղ"</string>
     <string name="new_backup_pw_prompt" msgid="8755501377391998428">"Մուտքագրեք այստեղ նոր գաղտնաբառը` ամբողջական պահուստավորման համար"</string>
@@ -2529,6 +2516,7 @@
     <string name="keywords_app_permissions" msgid="8677901415217188314">"հավելվածների թույլտվություններին վերաբերող անվտանգություն"</string>
     <string name="keywords_default_apps" msgid="3581727483175522599">"կանխադրված հավելվածները"</string>
     <string name="keywords_ignore_optimizations" msgid="946516741848647905">"անտեսել օպտիմալացումները Doze հավելվածի նիրհի ռեժիմի դեպքում"</string>
+    <string name="keywords_color_mode" msgid="4670570451841540200">"պայծառ rgb srgb գույն բնական սովորական"</string>
     <string name="keywords_lockscreen" msgid="4806191868723291541">"սահեցնել գաղտնաբառ նախշ pin"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Կարգավորել Wi-Fi NFC պիտակը"</string>
     <string name="write_tag" msgid="8571858602896222537">"Գրել"</string>
@@ -2623,7 +2611,8 @@
     <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="2769656565454495824">"Այո կամ Միգուցե"</string>
     <string name="zen_mode_event_rule_reply_yes" msgid="1003598835878784659">"Այո"</string>
     <string name="zen_mode_rule_not_found_text" msgid="8963662446092059836">"Կանոնը չի գտնվել:"</string>
-    <string name="zen_mode_rule_summary_combination" msgid="2526506268333198254">"<xliff:g id="DESCRIPTION">%1$s</xliff:g>/<xliff:g id="MODE">%2$s</xliff:g>"</string>
+    <string name="zen_mode_rule_summary_enabled_combination" msgid="976098744828219297">"Միացրած / <xliff:g id="MODE">%1$s</xliff:g>"</string>
+    <string name="zen_mode_rule_summary_provider_combination" msgid="2101201392041867409">"<xliff:g id="PACKAGE">%1$s</xliff:g>\n<xliff:g id="SUMMARY">%2$s</xliff:g>"</string>
     <string name="zen_mode_schedule_rule_days" msgid="3195058680641389948">"Օրեր"</string>
     <string name="zen_mode_schedule_rule_days_none" msgid="4954143628634166317">"Չկան"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="146511166522076034">"Ամեն օր"</string>
@@ -2810,8 +2799,7 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="3459065925679828230">"Մարտկոցի օպտիմալացում"</string>
     <string name="high_power_filter_on" msgid="3222265297576680099">"Չօպտիմալացված"</string>
-    <!-- no translation found for high_power_on (6216293998227583810) -->
-    <skip />
+    <string name="high_power_on" msgid="6216293998227583810">"Չօպտիմալացված"</string>
     <string name="high_power_off" msgid="3393904131961263278">"Մարտկոցի սպառման օպտիմալացում"</string>
     <string name="high_power_system" msgid="7362862974428225301">"Մարտկոցի օպտիմալացումը հասանելի չէ"</string>
     <string name="high_power_desc" msgid="6283926163708585760">"Մի կիրառեք մարտկոցի օպտիմալացումը: Մարտկոցի լիցքը կարող է ավելի արագ սպառվել:"</string>
@@ -2904,8 +2892,18 @@
     <string name="write_settings_off" msgid="5156104383386336233">"Ոչ"</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"Տեսախցիկի բացում կրկնակի պտտման միջոցով"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Տեսախցիկի բացում դաստակի կրկնակի պտտման միջոցով"</string>
-    <!-- no translation found for camera_double_tap_power_gesture_title (1651873760405034645) -->
-    <skip />
-    <!-- no translation found for camera_double_tap_power_gesture_desc (7355664631775680376) -->
-    <skip />
+    <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Խցիկ - սնուցման կոճակի կրկնակի սեղմամբ"</string>
+    <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Խցիկի արագ բացում առանց էկրանը ապակողպելու"</string>
+  <string-array name="color_mode_names">
+    <item msgid="2425514299220523812">"Պայծառ (կանխադրված)"</item>
+    <item msgid="8446070607501413455">"Բնական"</item>
+    <item msgid="6553408765810699025">"Սովորական"</item>
+  </string-array>
+  <string-array name="color_mode_descriptions">
+    <item msgid="4979629397075120893">"Բարելավված գույներ"</item>
+    <item msgid="8280754435979370728">"Բնական գույներ"</item>
+    <item msgid="5363960654009010371">"Թվային բովանդակության համար հարմարեցված գույներ"</item>
+  </string-array>
+    <string name="picture_color_mode" msgid="4560755008730283695">"Նկարի գունային ռեժիմ"</string>
+    <string name="picture_color_mode_desc" msgid="1141891467675548590">"Օգտագործել sRGB-ը"</string>
 </resources>

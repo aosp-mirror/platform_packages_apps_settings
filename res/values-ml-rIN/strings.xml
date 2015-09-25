@@ -322,6 +322,7 @@
       <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> ഫിംഗർപ്രിന്റ് സജ്ജമാക്കൽ</item>
       <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> ഫിംഗർപ്രിന്റ് സജ്ജമാക്കൽ</item>
     </plurals>
+    <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"വിരലടയാള സജ്ജീകരണം"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"നിങ്ങളുടെ സ്‌ക്രീൻ അൺലോക്കുചെയ്യാനോ വാങ്ങലുകൾ സ്ഥിരീകരിക്കാനോ വിരലടയാളം ഉപയോഗിക്കുന്നതിന്, ഞങ്ങൾക്ക് ഇവ ചെയ്യേണ്ടതുണ്ട്:"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"നിങ്ങളുടെ ബാക്കപ്പ് സ്‌ക്രീൻ ലോക്ക് രീതി സജ്ജമാക്കുക"</string>
@@ -352,12 +353,9 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"പൂർത്തിയായി"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"ക്ഷമിക്കണം, അത് സെൻസർ അല്ല"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="5053971232594165142">"നിങ്ങളുടെ ഉപകരണത്തിൽ ഫിംഗർപ്രിന്റ് സെൻസർ ഉപയോഗിക്കുക."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (3618021988442639280) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (2942551158278899627) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_generic_dialog_message (3624760637222239293) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="3618021988442639280">"എൻറോൾമെന്റ് പൂർത്തിയായിട്ടില്ല"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="2942551158278899627">"വിരലടയാള എൻറോൾമെന്റിന്റെ സമയ പരിധി എത്തി. വീണ്ടും ശ്രമിക്കുക."</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="3624760637222239293">"വിരലടയാള എൻറോൾമെന്റ് പ്രവർത്തിച്ചില്ല. വീണ്ടും ശ്രമിക്കുകയോ മറ്റൊരു വിരൽ ഉപയോഗിക്കുകയോ ചെയ്യുക."</string>
     <string name="fingerprint_enroll_button_add" msgid="6317978977419045463">"മറ്റൊന്ന് ചേർക്കുക"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"അടുത്തത്"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"നിങ്ങളുടെ ഫോൺ അൺലോക്കുചെയ്യുന്നതുകൂടാതെ, വാങ്ങലുകളും അപ്ലിക്കേഷൻ ആക്‌സസ്സും അംഗീകരിക്കാൻ നിങ്ങൾക്ക് വിരലടയാളം ഉപയോഗിക്കാനുമാകും. "<annotation id="url">"കൂടുതലറിയുക"</annotation></string>
@@ -402,8 +400,7 @@
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"നിങ്ങൾ നൽകിയ പാസ്‌വേഡ് ശരിയാണെങ്കിലും നിർഭാഗ്യവശാൽ ഡാറ്റ കേടായി. \n\nനിങ്ങളുടെ ഫോൺ ഉപയോഗിച്ച് പുനരാരംഭിക്കാൻ ഒരു ഫാക്‌ടറി പുനഃസജ്ജീകരണം നടത്തേണ്ടതുണ്ട്. പുനഃസജ്ജീകരിച്ച ശേഷം നിങ്ങളുടെ ഫോൺ സജ്ജീകരിക്കുമ്പോൾ, Google അക്കൗണ്ടിൽ ബാക്കപ്പുചെയ്‌തിരിക്കുന്ന എല്ലാ ഡാറ്റയും പുനഃസ്ഥാപിക്കാൻ അവസരം ലഭിക്കും."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"ടൈപ്പിംഗ് രീതി മാറുക"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"സ്‌ക്രീൻലോക്ക് തിരഞ്ഞെടുക്കൂ"</string>
-    <!-- no translation found for setup_lock_settings_picker_title (1584792702475081908) -->
-    <skip />
+    <string name="setup_lock_settings_picker_title" msgid="1584792702475081908">"സ്‌ക്രീൻലോക്ക് തിരഞ്ഞെടുക്കൂ"</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"നിങ്ങളുടെ ബാക്കപ്പ് സ്ക്രീൻ ലോക്ക് രീതി തിരഞ്ഞെടുക്കുക"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"സ്ക്രീൻ ലോക്ക്"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"ലോക്ക് സ്‌ക്രീൻ മാറ്റുക"</string>
@@ -784,7 +781,7 @@
     <string name="media_volume_summary" msgid="5363248930648849974">"സംഗീതത്തിനും വീഡിയോകൾക്കുമായി വോളിയം സജ്ജീകരിക്കുക"</string>
     <string name="alarm_volume_title" msgid="2285597478377758706">"അലാറം"</string>
     <string name="dock_settings_summary" msgid="455802113668982481">"അറ്റാച്ചുചെ‌യ്ത ഡോക്കിനുള്ള ഓഡിയോ ക്രമീകരണങ്ങൾ"</string>
-    <string name="dtmf_tone_enable_title" msgid="8533399267725365088">"പാഡ് ടച്ച് ടോണുകൾ ഡയൽ ചെയ്യുക"</string>
+    <string name="dtmf_tone_enable_title" msgid="8533399267725365088">"ഡയൽ പാഡ് ടച്ച് ടോണുകൾ"</string>
     <string name="sound_effects_enable_title" msgid="1171590821131077296">"സ്‌പർശന ശബ്ദം"</string>
     <string name="lock_sounds_enable_title" msgid="450098505659399520">"സ്‌ക്രീൻ ലോക്ക് ശബ്ദം"</string>
     <string name="haptic_feedback_enable_title" msgid="2438293710530828760">"സ്‌പർശിക്കുമ്പോൾ വൈബ്രേറ്റുചെയ്യുക"</string>
@@ -833,13 +830,10 @@
     <string name="brightness_summary" msgid="838917350127550703">"സ്‌ക്രീനിന്റെ തെളിച്ചം ക്രമീകരിക്കുക"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"അനുയോജ്യമായ തെളിച്ചം"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"ലഭ്യമായ പ്രകാശത്തിനായി തെളിച്ചനില അനുരൂപമാക്കുക"</string>
-    <!-- no translation found for night_mode_title (2594133148531256513) -->
-    <skip />
+    <string name="night_mode_title" msgid="2594133148531256513">"നൈറ്റ് മോഡ്"</string>
     <string name="night_mode_summary" msgid="9196605054622017193">"%s"</string>
-    <!-- no translation found for night_mode_no (9171772244775838901) -->
-    <skip />
-    <!-- no translation found for night_mode_yes (2218157265997633432) -->
-    <skip />
+    <string name="night_mode_no" msgid="9171772244775838901">"പ്രവർത്തനരഹിതമാക്കി"</string>
+    <string name="night_mode_yes" msgid="2218157265997633432">"എല്ലായ്‌പ്പോഴും ഓണാണ്"</string>
     <string name="night_mode_auto" msgid="7508348175804304327">"ഓട്ടോമാറ്റിക്"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"സുഷുപ്തിയിലാക്കുക"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"സ്ക്രീൻ ഓഫാക്കുന്നു"</string>
@@ -1935,10 +1929,8 @@
     <string name="credentials_reset_summary" msgid="3369361230171260282">"എല്ലാം നീക്കംചെയ്യുക"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"പരിചിത ക്രെഡൻഷ്യൽ"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"വിശ്വാസയോഗ്യമായ CA സർട്ടിഫിക്കറ്റുകൾ പ്രദർശിപ്പിക്കുക"</string>
-    <!-- no translation found for user_credentials (3719013347787187083) -->
-    <skip />
-    <!-- no translation found for user_credentials_summary (7271228342106080167) -->
-    <skip />
+    <string name="user_credentials" msgid="3719013347787187083">"ഉപയോക്തൃ ക്രെഡന്‍ഷ്യലുകൾ"</string>
+    <string name="user_credentials_summary" msgid="7271228342106080167">"സംഭരിച്ച ക്രെഡന്‍ഷ്യലുകൾ കാണുക, പരിഷ്ക്കരിക്കുക"</string>
     <string name="advanced_security_title" msgid="2434776238010578865">"വിപുലമായത്"</string>
     <string name="credential_storage_type" msgid="8629968543494001364">"സംഭരണ തരം"</string>
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"ഹാർഡ്‌വെയറിൽ സംഭരിച്ചത്"</string>
@@ -2290,16 +2282,11 @@
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"സി‌സ്റ്റം CA സർട്ടിഫിക്കറ്റ് പ്രവർത്തനക്ഷമമാക്കണോ?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"സി‌സ്റ്റം CA സർട്ടിഫിക്കറ്റ് പ്രവർത്തനരഹിതമാക്കണോ?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"ഉപയോക്തൃ CA സർട്ടിഫിക്കറ്റ് ശാശ്വതമായി നീക്കംചെയ്യണോ?"</string>
-    <!-- no translation found for one_userkey (6034020579534914349) -->
-    <skip />
-    <!-- no translation found for one_usercrt (2150319011101639509) -->
-    <skip />
-    <!-- no translation found for one_cacrt (6844397037970164809) -->
-    <skip />
-    <!-- no translation found for n_cacrts (5979300323482053820) -->
-    <skip />
-    <!-- no translation found for user_credential_title (1329449215749665378) -->
-    <skip />
+    <string name="one_userkey" msgid="6034020579534914349">"ഒരു ഉപയോക്തൃ കീ"</string>
+    <string name="one_usercrt" msgid="2150319011101639509">"ഒരു ഉപയോക്തൃ സർട്ടിഫിക്കറ്റ്"</string>
+    <string name="one_cacrt" msgid="6844397037970164809">"ഒരു CA സർട്ടിഫിക്കറ്റ്"</string>
+    <string name="n_cacrts" msgid="5979300323482053820">"%d CA സർട്ടിഫിക്കറ്റുകൾ"</string>
+    <string name="user_credential_title" msgid="1329449215749665378">"ക്രെഡന്‍ഷ്യല്‍ വിശദാംശങ്ങൾ"</string>
     <string name="spellcheckers_settings_title" msgid="399981228588011501">"സ്പെൽചെക്കർ"</string>
     <string name="current_backup_pw_prompt" msgid="7735254412051914576">"നിലവിലെ നിങ്ങളുടെ പൂർണ്ണ ബാക്കപ്പ് പാ‌സ്‌വേഡ് ഇവിടെ ടൈപ്പുചെയ്യുക"</string>
     <string name="new_backup_pw_prompt" msgid="8755501377391998428">"പൂർണ്ണ ബാക്കപ്പിനായി ഇവിടെ പുതിയ പാസ്‌വേഡ് ടൈപ്പുചെയ്യുക"</string>
@@ -2529,6 +2516,7 @@
     <string name="keywords_app_permissions" msgid="8677901415217188314">"അപ്ലിക്കേഷൻ അനുമതി സുരക്ഷ"</string>
     <string name="keywords_default_apps" msgid="3581727483175522599">"സ്ഥിര അപ്ലിക്കേഷനുകൾ"</string>
     <string name="keywords_ignore_optimizations" msgid="946516741848647905">"ഒപ്റ്റിമൈസേഷൻ ഡോസ് ആപ്പ് സ്‌റ്റാൻഡ്‌ബൈ അവഗണിക്കുക"</string>
+    <string name="keywords_color_mode" msgid="4670570451841540200">"വൈബ്രന്റ് rgb srgb വർണ്ണ സ്വാഭാവിക സ്റ്റാൻഡേർഡ്"</string>
     <string name="keywords_lockscreen" msgid="4806191868723291541">"പാസ്‌വേഡ് പാറ്റേൺ പിൻ സ്ലൈഡുചെയ്യുക"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"വൈഫൈ NFC ടാഗ് സജ്ജമാക്കുക"</string>
     <string name="write_tag" msgid="8571858602896222537">"റൈറ്റുചെയ്യുക"</string>
@@ -2623,7 +2611,8 @@
     <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="2769656565454495824">"അതെ അല്ലെങ്കിൽ ഒരുപക്ഷേ"</string>
     <string name="zen_mode_event_rule_reply_yes" msgid="1003598835878784659">"അതെ"</string>
     <string name="zen_mode_rule_not_found_text" msgid="8963662446092059836">"നയം കണ്ടെത്തിയില്ല."</string>
-    <string name="zen_mode_rule_summary_combination" msgid="2526506268333198254">"<xliff:g id="DESCRIPTION">%1$s</xliff:g> / <xliff:g id="MODE">%2$s</xliff:g>"</string>
+    <string name="zen_mode_rule_summary_enabled_combination" msgid="976098744828219297">"ഓൺ / <xliff:g id="MODE">%1$s</xliff:g>"</string>
+    <string name="zen_mode_rule_summary_provider_combination" msgid="2101201392041867409">"<xliff:g id="PACKAGE">%1$s</xliff:g>\n<xliff:g id="SUMMARY">%2$s</xliff:g>"</string>
     <string name="zen_mode_schedule_rule_days" msgid="3195058680641389948">"ദിവസം"</string>
     <string name="zen_mode_schedule_rule_days_none" msgid="4954143628634166317">"ഒന്നുമില്ല"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="146511166522076034">"എല്ലാ ദിവസവും"</string>
@@ -2810,8 +2799,7 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="3459065925679828230">"ബാറ്ററി ഓപ്റ്റിമൈസേഷൻ"</string>
     <string name="high_power_filter_on" msgid="3222265297576680099">"ഓപ്റ്റിമൈസ് ചെയ്തിട്ടില്ല"</string>
-    <!-- no translation found for high_power_on (6216293998227583810) -->
-    <skip />
+    <string name="high_power_on" msgid="6216293998227583810">"ഓപ്റ്റിമൈസ് ചെയ്തിട്ടില്ല"</string>
     <string name="high_power_off" msgid="3393904131961263278">"ബാറ്ററി ഉപയോഗം ഓപ്റ്റിമൈസ് ചെയ്യുന്നു"</string>
     <string name="high_power_system" msgid="7362862974428225301">"ബാറ്ററി ഓപ്റ്റിമൈസേഷൻ ലഭ്യമല്ല"</string>
     <string name="high_power_desc" msgid="6283926163708585760">"ബാറ്ററി ഒപ്റ്റിമൈസേഷൻ പ്രയോഗിക്കരുത്. ഇത് ബാറ്ററിയെ വേഗത്തിൽ തീർത്തേക്കാം."</string>
@@ -2904,8 +2892,18 @@
     <string name="write_settings_off" msgid="5156104383386336233">"ഇല്ല"</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"ക്യാമറയ്ക്കായി രണ്ടുതവണ തിരിക്കുക"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"നിങ്ങളുടെ കൈത്തണ്ട രണ്ടുപ്രാവശ്യം തിരിച്ചുകൊണ്ട് ക്യാമറാ ആപ്പ് തുറക്കുക"</string>
-    <!-- no translation found for camera_double_tap_power_gesture_title (1651873760405034645) -->
-    <skip />
-    <!-- no translation found for camera_double_tap_power_gesture_desc (7355664631775680376) -->
-    <skip />
+    <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"ക്യാമറയ്ക്കായി പവർ ബട്ടൺ രണ്ടുതവണ അമർത്തുക"</string>
+    <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"സ്ക്രീൻ അൺലോക്ക് ചെയ്യാതെ തന്നെ, അതിവേഗം ക്യാമറ തുറക്കുക"</string>
+  <string-array name="color_mode_names">
+    <item msgid="2425514299220523812">"വൈബ്രന്റ് (സ്ഥിരമായത്)"</item>
+    <item msgid="8446070607501413455">"സ്വാഭാവികം"</item>
+    <item msgid="6553408765810699025">"സ്റ്റാന്‍ഡേര്‍ഡ്"</item>
+  </string-array>
+  <string-array name="color_mode_descriptions">
+    <item msgid="4979629397075120893">"മെച്ചപ്പെടുത്തിയ വര്‍ണ്ണങ്ങൾ"</item>
+    <item msgid="8280754435979370728">"നമ്മൾ കാണുന്നത് പോലെയുള്ള സ്വാഭാവിക വർണ്ണങ്ങൾ"</item>
+    <item msgid="5363960654009010371">"ഡിജിറ്റൽ ഉള്ളടക്കത്തിനായി വർണ്ണങ്ങൾ ഒപ്റ്റിമൈസ് ചെയ്തു"</item>
+  </string-array>
+    <string name="picture_color_mode" msgid="4560755008730283695">"ചിത്ര വർണ്ണ മോഡ്"</string>
+    <string name="picture_color_mode_desc" msgid="1141891467675548590">"sRGB ഉപയോഗിക്കുക"</string>
 </resources>

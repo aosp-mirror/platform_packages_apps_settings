@@ -326,6 +326,7 @@
       <item quantity="many">Настроено <xliff:g id="COUNT_1">%1$d</xliff:g> отпечатков</item>
       <item quantity="other">Настроено <xliff:g id="COUNT_1">%1$d</xliff:g> отпечатка</item>
     </plurals>
+    <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Добавление отпечатка"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"Чтобы использовать сканер для разблокировки экрана и подтверждения покупок:"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"Настройте дополнительный способ блокировки экрана"</string>
@@ -356,13 +357,10 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"Готово"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"Мимо! Это не сканер отпечатков пальцев..."</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="5053971232594165142">"Он точно есть на устройстве. Найдите его!"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (3618021988442639280) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (2942551158278899627) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_generic_dialog_message (3624760637222239293) -->
-    <skip />
-    <string name="fingerprint_enroll_button_add" msgid="6317978977419045463">"Добавить"</string>
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="3618021988442639280">"Отпечаток не добавлен"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="2942551158278899627">"Превышен срок ожидания. Повторите попытку"</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="3624760637222239293">"Не удалось добавить отпечаток. Повторите попытку или попробуйте сохранить отпечаток другого пальца."</string>
+    <string name="fingerprint_enroll_button_add" msgid="6317978977419045463">"Добавить еще"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"Далее"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Добавьте отпечаток пальца, чтобы только вы смогли разблокировать телефон, совершать покупки и открывать приложения. "<annotation id="url">"Подробнее…"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4504501581228672208">"Блокировка экрана отключена. Добавьте отпечаток пальца, чтобы только вы смогли совершать покупки и открывать приложения. "<annotation id="url">"Подробнее…"</annotation></string>
@@ -406,8 +404,7 @@
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"Вы ввели правильный пароль, но данные на телефоне повреждены.\n\nЧтобы продолжить работу, выполните возврат к заводским настройкам. После этого вы сможете восстановить данные, резервная копия которых хранится в вашем аккаунте Google."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Сменить способ ввода"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Блокировка экрана"</string>
-    <!-- no translation found for setup_lock_settings_picker_title (1584792702475081908) -->
-    <skip />
+    <string name="setup_lock_settings_picker_title" msgid="1584792702475081908">"Выберите способ блокировки экрана"</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Выберите дополнительный способ блокировки экрана"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Блокировка экрана"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Изменение блок. экрана"</string>
@@ -849,13 +846,10 @@
     <string name="brightness_summary" msgid="838917350127550703">"Настроить яркость экрана"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"Адаптивная регулировка"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"Настройка яркости с учетом уровня освещенности"</string>
-    <!-- no translation found for night_mode_title (2594133148531256513) -->
-    <skip />
+    <string name="night_mode_title" msgid="2594133148531256513">"Ночной режим"</string>
     <string name="night_mode_summary" msgid="9196605054622017193">"%s"</string>
-    <!-- no translation found for night_mode_no (9171772244775838901) -->
-    <skip />
-    <!-- no translation found for night_mode_yes (2218157265997633432) -->
-    <skip />
+    <string name="night_mode_no" msgid="9171772244775838901">"Отключено"</string>
+    <string name="night_mode_yes" msgid="2218157265997633432">"Всегда включено"</string>
     <string name="night_mode_auto" msgid="7508348175804304327">"Автоматическое переключение"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Спящий режим"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Отключение экрана"</string>
@@ -919,7 +913,7 @@
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"Обновление системы"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Версия Android"</string>
-    <string name="security_patch" msgid="8438384045870296634">"Уровень обновления для системы безопасности Android"</string>
+    <string name="security_patch" msgid="8438384045870296634">"Обновление системы безопасности"</string>
     <string name="model_number" msgid="3765737700545384794">"Модель"</string>
     <string name="fcc_equipment_id" msgid="149114368246356737">"Идентификатор оборудования"</string>
     <string name="baseband_version" msgid="1848990160763524801">"Прошивка модуля связи"</string>
@@ -1953,10 +1947,8 @@
     <string name="credentials_reset_summary" msgid="3369361230171260282">"Удалить все сертификаты"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"Надежные сертификаты"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"Показывать надежные сертификаты ЦС"</string>
-    <!-- no translation found for user_credentials (3719013347787187083) -->
-    <skip />
-    <!-- no translation found for user_credentials_summary (7271228342106080167) -->
-    <skip />
+    <string name="user_credentials" msgid="3719013347787187083">"Учетные данные пользователя"</string>
+    <string name="user_credentials_summary" msgid="7271228342106080167">"Просматривать и изменять сохраненные учетные данные."</string>
     <string name="advanced_security_title" msgid="2434776238010578865">"Дополнительные настройки"</string>
     <string name="credential_storage_type" msgid="8629968543494001364">"Тип хранилища"</string>
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"Аппаратное"</string>
@@ -2308,16 +2300,11 @@
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"Включить сертификат ЦС системы?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"Отключить сертификат ЦС системы?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"Полностью удалить сертификат ЦС пользователя?"</string>
-    <!-- no translation found for one_userkey (6034020579534914349) -->
-    <skip />
-    <!-- no translation found for one_usercrt (2150319011101639509) -->
-    <skip />
-    <!-- no translation found for one_cacrt (6844397037970164809) -->
-    <skip />
-    <!-- no translation found for n_cacrts (5979300323482053820) -->
-    <skip />
-    <!-- no translation found for user_credential_title (1329449215749665378) -->
-    <skip />
+    <string name="one_userkey" msgid="6034020579534914349">"один ключ пользователя"</string>
+    <string name="one_usercrt" msgid="2150319011101639509">"один сертификат пользователя"</string>
+    <string name="one_cacrt" msgid="6844397037970164809">"один сертификат ЦС"</string>
+    <string name="n_cacrts" msgid="5979300323482053820">"Сертификатов ЦС: %d"</string>
+    <string name="user_credential_title" msgid="1329449215749665378">"Учетные данные"</string>
     <string name="spellcheckers_settings_title" msgid="399981228588011501">"Проверка правописания"</string>
     <string name="current_backup_pw_prompt" msgid="7735254412051914576">"Введите текущий пароль"</string>
     <string name="new_backup_pw_prompt" msgid="8755501377391998428">"Введите новый пароль"</string>
@@ -2547,6 +2534,7 @@
     <string name="keywords_app_permissions" msgid="8677901415217188314">"Защита разрешений для приложений"</string>
     <string name="keywords_default_apps" msgid="3581727483175522599">"приложения по умолчанию"</string>
     <string name="keywords_ignore_optimizations" msgid="946516741848647905">"игнорировать ограничения оптимизация спящий режим"</string>
+    <string name="keywords_color_mode" msgid="4670570451841540200">"насыщенный RGB SRGB цвет естественный стандартный"</string>
     <string name="keywords_lockscreen" msgid="4806191868723291541">"провести пальцем по экрану пароль графический ключ PIN-код"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Настройка NFC-метки"</string>
     <string name="write_tag" msgid="8571858602896222537">"Записать"</string>
@@ -2643,7 +2631,8 @@
     <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="2769656565454495824">"Да/Возможно"</string>
     <string name="zen_mode_event_rule_reply_yes" msgid="1003598835878784659">"Да"</string>
     <string name="zen_mode_rule_not_found_text" msgid="8963662446092059836">"Правило не найдено."</string>
-    <string name="zen_mode_rule_summary_combination" msgid="2526506268333198254">"<xliff:g id="DESCRIPTION">%1$s</xliff:g>/<xliff:g id="MODE">%2$s</xliff:g>"</string>
+    <string name="zen_mode_rule_summary_enabled_combination" msgid="976098744828219297">"Вкл./<xliff:g id="MODE">%1$s</xliff:g>"</string>
+    <string name="zen_mode_rule_summary_provider_combination" msgid="2101201392041867409">"<xliff:g id="PACKAGE">%1$s</xliff:g>\n<xliff:g id="SUMMARY">%2$s</xliff:g>"</string>
     <string name="zen_mode_schedule_rule_days" msgid="3195058680641389948">"Дни"</string>
     <string name="zen_mode_schedule_rule_days_none" msgid="4954143628634166317">"–"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="146511166522076034">"Каждый день"</string>
@@ -2842,8 +2831,7 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="3459065925679828230">"Экономия заряда батареи"</string>
     <string name="high_power_filter_on" msgid="3222265297576680099">"Не экономят заряд"</string>
-    <!-- no translation found for high_power_on (6216293998227583810) -->
-    <skip />
+    <string name="high_power_on" msgid="6216293998227583810">"Не экономит заряд"</string>
     <string name="high_power_off" msgid="3393904131961263278">"Экономия заряда включена"</string>
     <string name="high_power_system" msgid="7362862974428225301">"Экономия заряда недоступна"</string>
     <string name="high_power_desc" msgid="6283926163708585760">"Не экономить заряд. Батарея может разряжаться быстрее."</string>
@@ -2940,8 +2928,18 @@
     <string name="write_settings_off" msgid="5156104383386336233">"Нет"</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"Включать камеру движением запястья"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Чтобы открыть приложение \"Камера\", дважды поверните запястье."</string>
-    <!-- no translation found for camera_double_tap_power_gesture_title (1651873760405034645) -->
-    <skip />
-    <!-- no translation found for camera_double_tap_power_gesture_desc (7355664631775680376) -->
-    <skip />
+    <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Открывать камеру, дважды нажимая кнопку питания"</string>
+    <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Быстро открывать камеру, не снимая блокировку экрана."</string>
+  <string-array name="color_mode_names">
+    <item msgid="2425514299220523812">"Насыщенный (по умолчанию)"</item>
+    <item msgid="8446070607501413455">"Естественный"</item>
+    <item msgid="6553408765810699025">"Стандартный"</item>
+  </string-array>
+  <string-array name="color_mode_descriptions">
+    <item msgid="4979629397075120893">"Улучшенные цвета"</item>
+    <item msgid="8280754435979370728">"Натуральные цвета, привычные глазу"</item>
+    <item msgid="5363960654009010371">"Цвета, оптимизированные для цифрового контента"</item>
+  </string-array>
+    <string name="picture_color_mode" msgid="4560755008730283695">"Цветовой режим"</string>
+    <string name="picture_color_mode_desc" msgid="1141891467675548590">"Использовать sRGB"</string>
 </resources>

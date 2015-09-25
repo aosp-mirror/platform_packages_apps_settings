@@ -322,6 +322,7 @@
       <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> хурууны хээг тохируулах</item>
       <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> хурууны хээг тохируулах</item>
     </plurals>
+    <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Хурууны хээний тохиргоо"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"Таны хурууны хээг ашиглан дэлгэцийн түгжээг тайлах эсвэл худалдан авалт баталгаажуулахын тулд бид дараах зүйлийг хийх шаардлагатай:"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"Нөөцлөлтийн дэлгэц түгжих аргыг тохируулах"</string>
@@ -352,12 +353,9 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"Үйлдлийг гүйцэтгэсэн байна"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"Уучлаарай, энэ мэдрэгч биш байна"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="5053971232594165142">"Төхөөрөмж дээрээ хурууны хээ мэдрэгчээ ашиглана уу"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (3618021988442639280) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (2942551158278899627) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_generic_dialog_message (3624760637222239293) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="3618021988442639280">"Бүртгэлийг гүйцэт хийж чадсангүй"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="2942551158278899627">"Хурууны хээ оруулах хугацаа өнгөрсөн байна. Дахин оруулна уу."</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="3624760637222239293">"Хурууны хээг оруулж чадсангүй. Дахин оролдох, эсвэл өөр хуруу ашиглана уу."</string>
     <string name="fingerprint_enroll_button_add" msgid="6317978977419045463">"Өөрийг нэмэх"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"Дараах"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Хурууны хээгээ ашиглан утасны түгжээг нээхээс гадна, худалдан авалт хийж, апп-д нэвтэрч болно. "<annotation id="url">"Дэлгэрэнгүй мэдээлэл"</annotation></string>
@@ -402,8 +400,7 @@
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"Таны оруулсан нууц үг зөв боловч таны өгөгдөл гэмтсэн байна. \n\nУтсаа үргэлжлүүлэн ашиглахын тулд үйлдвэрээс гарсан анхны төлөв рүү сэргээх хэрэгтэй. Сэргээсний дараа утсаа тохируулахдаа өөрийн Google бүртгэл дээр нөөцөлсөн аливаа өгөгдлийг эргүүлэн сэргээх боломжтой."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Оруулах аргыг солих"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Дэлгэцийн түгжээг сонгоно уу"</string>
-    <!-- no translation found for setup_lock_settings_picker_title (1584792702475081908) -->
-    <skip />
+    <string name="setup_lock_settings_picker_title" msgid="1584792702475081908">"Дэлгэцийн түгжээг сонгоно уу"</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Дэлгэц түгжих нөөц аргачлалаа сонгох"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Дэлгэцийн түгжээ"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Дэлгэцийн түгжээг өөрчлөх"</string>
@@ -823,13 +820,10 @@
     <string name="brightness_summary" msgid="838917350127550703">"Дэлгэцийн тодролыг тохируулах"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"Зохицогч гэрэлтүүлэг"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"Боломжит гэрэлд тохируулан гэрэлтүүлгийг зохицуулах"</string>
-    <!-- no translation found for night_mode_title (2594133148531256513) -->
-    <skip />
+    <string name="night_mode_title" msgid="2594133148531256513">"Шөнийн горим"</string>
     <string name="night_mode_summary" msgid="9196605054622017193">"%s"</string>
-    <!-- no translation found for night_mode_no (9171772244775838901) -->
-    <skip />
-    <!-- no translation found for night_mode_yes (2218157265997633432) -->
-    <skip />
+    <string name="night_mode_no" msgid="9171772244775838901">"Идэвхгүй"</string>
+    <string name="night_mode_yes" msgid="2218157265997633432">"Байнга асаалттай"</string>
     <string name="night_mode_auto" msgid="7508348175804304327">"Автоматаар"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Идэвхгүй"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Дэлгэц унтарна"</string>
@@ -1925,10 +1919,8 @@
     <string name="credentials_reset_summary" msgid="3369361230171260282">"Бүх сертификатыг устгах"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"Итгэмжлэгдсэн жуухууд"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"Итгэлтэй CA сертификатуудыг харуулах"</string>
-    <!-- no translation found for user_credentials (3719013347787187083) -->
-    <skip />
-    <!-- no translation found for user_credentials_summary (7271228342106080167) -->
-    <skip />
+    <string name="user_credentials" msgid="3719013347787187083">"Хэрэглэгчийн өгөгдөл"</string>
+    <string name="user_credentials_summary" msgid="7271228342106080167">"Хадгалсан өгөгдлийг харах, өөрчлөх"</string>
     <string name="advanced_security_title" msgid="2434776238010578865">"Дэлгэрэнгүй"</string>
     <string name="credential_storage_type" msgid="8629968543494001364">"Хадгалалтын сангийн төрөл"</string>
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"Техник хангамжаар дэмжигдсэн"</string>
@@ -2280,16 +2272,11 @@
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"Системийн CA сертификатыг идэвхжүүлэх үү?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"Системийн CA сертификатыг идэвхгүйжүүлэх үү?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"Хэрэглэгчийн CA сертификатыг бүрмөсөн арилгах уу?"</string>
-    <!-- no translation found for one_userkey (6034020579534914349) -->
-    <skip />
-    <!-- no translation found for one_usercrt (2150319011101639509) -->
-    <skip />
-    <!-- no translation found for one_cacrt (6844397037970164809) -->
-    <skip />
-    <!-- no translation found for n_cacrts (5979300323482053820) -->
-    <skip />
-    <!-- no translation found for user_credential_title (1329449215749665378) -->
-    <skip />
+    <string name="one_userkey" msgid="6034020579534914349">"Нэг хэрэглэгчийн түлхүүр"</string>
+    <string name="one_usercrt" msgid="2150319011101639509">"Нэг хэрэглэгчийн сертификат"</string>
+    <string name="one_cacrt" msgid="6844397037970164809">"нэг CA сертификат"</string>
+    <string name="n_cacrts" msgid="5979300323482053820">"%d CA сертификат"</string>
+    <string name="user_credential_title" msgid="1329449215749665378">"Хэрэглэгчийн өгөгдлийн дэлгэрэнгүй"</string>
     <string name="spellcheckers_settings_title" msgid="399981228588011501">"Алдаа шалгагч"</string>
     <string name="current_backup_pw_prompt" msgid="7735254412051914576">"Өөрийн бүрэн нөөцлөх нууц үгийг энд оруулна уу"</string>
     <string name="new_backup_pw_prompt" msgid="8755501377391998428">"Бүрэн нөөцлөлт хийхэд зориулсан шинэ нууц үгийг энд оруулна уу"</string>
@@ -2519,6 +2506,7 @@
     <string name="keywords_app_permissions" msgid="8677901415217188314">"апп-уудын зөвшөөрлийн аюулгүй байдал"</string>
     <string name="keywords_default_apps" msgid="3581727483175522599">"үндсэн апликейшнүүд"</string>
     <string name="keywords_ignore_optimizations" msgid="946516741848647905">"Апп түр зогсонги үед оновчлолыг алгасах"</string>
+    <string name="keywords_color_mode" msgid="4670570451841540200">"байгалийн стандарт хурц rgb srgb өнгө"</string>
     <string name="keywords_lockscreen" msgid="4806191868723291541">"слайд нууц үг хээ пин"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Wi-Fi NFC Tагь тохируулах"</string>
     <string name="write_tag" msgid="8571858602896222537">"Бичих"</string>
@@ -2611,7 +2599,8 @@
     <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="2769656565454495824">"Тийм, эсвэл Магадгүй"</string>
     <string name="zen_mode_event_rule_reply_yes" msgid="1003598835878784659">"Тийм"</string>
     <string name="zen_mode_rule_not_found_text" msgid="8963662446092059836">"Горим олдсонгүй."</string>
-    <string name="zen_mode_rule_summary_combination" msgid="2526506268333198254">"<xliff:g id="DESCRIPTION">%1$s</xliff:g> / <xliff:g id="MODE">%2$s</xliff:g>"</string>
+    <string name="zen_mode_rule_summary_enabled_combination" msgid="976098744828219297">"Дээр / <xliff:g id="MODE">%1$s</xliff:g>"</string>
+    <string name="zen_mode_rule_summary_provider_combination" msgid="2101201392041867409">"<xliff:g id="PACKAGE">%1$s</xliff:g>\n<xliff:g id="SUMMARY">%2$s</xliff:g>"</string>
     <string name="zen_mode_schedule_rule_days" msgid="3195058680641389948">"Өдөр"</string>
     <string name="zen_mode_schedule_rule_days_none" msgid="4954143628634166317">"Байхгүй"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="146511166522076034">"Өдөр бүр"</string>
@@ -2798,8 +2787,7 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="3459065925679828230">"Тэжээлийн оновчлол"</string>
     <string name="high_power_filter_on" msgid="3222265297576680099">"Оновчлоогүй"</string>
-    <!-- no translation found for high_power_on (6216293998227583810) -->
-    <skip />
+    <string name="high_power_on" msgid="6216293998227583810">"Оновчлоогүй"</string>
     <string name="high_power_off" msgid="3393904131961263278">"Тэжээлийн хэрэглээг оновчилж байна"</string>
     <string name="high_power_system" msgid="7362862974428225301">"Тэжээлийн оновчлолыг ашиглах боломжгүй байна"</string>
     <string name="high_power_desc" msgid="6283926163708585760">"Тэжээлийн оновчлол ашиглах шаардлагагүй. Учир нь тэжээлийг илүү түргэн дуусгаж болох юм."</string>
@@ -2892,8 +2880,18 @@
     <string name="write_settings_off" msgid="5156104383386336233">"Үгүй"</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"Камер нээхийн тулд бугуйгаа 2 удаа эргүүлэх"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Бугуйгаа 2 удаа эргүүлэн камерын апп-ыг нээгээрэй"</string>
-    <!-- no translation found for camera_double_tap_power_gesture_title (1651873760405034645) -->
-    <skip />
-    <!-- no translation found for camera_double_tap_power_gesture_desc (7355664631775680376) -->
-    <skip />
+    <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Камер нээхийн тулд асаах/унтраах товчлуурыг 2 удаа дараарай"</string>
+    <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Камерыг дэлгэцийн түгжээ тайлалгүйгээр төвөггүй нээх"</string>
+  <string-array name="color_mode_names">
+    <item msgid="2425514299220523812">"Хурц (үндсэн)"</item>
+    <item msgid="8446070607501413455">"Байгалийн"</item>
+    <item msgid="6553408765810699025">"Стандарт"</item>
+  </string-array>
+  <string-array name="color_mode_descriptions">
+    <item msgid="4979629397075120893">"Сайжруулсан өнгө"</item>
+    <item msgid="8280754435979370728">"Нүдээр харж болох байгалийн өнгө"</item>
+    <item msgid="5363960654009010371">"Дижитал агуулгад зориулан тааруулсан өнгө"</item>
+  </string-array>
+    <string name="picture_color_mode" msgid="4560755008730283695">"\"Зургийн өнгө\" горим"</string>
+    <string name="picture_color_mode_desc" msgid="1141891467675548590">"sRGB ашиглах"</string>
 </resources>

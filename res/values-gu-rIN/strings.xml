@@ -322,6 +322,7 @@
       <item quantity="one"><xliff:g id="COUNT_1">%1$d</xliff:g> ફિંગરપ્રિન્ટ સેટ અપ</item>
       <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> ફિંગરપ્રિન્ટ સેટ અપ</item>
     </plurals>
+    <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"ફિંગરપ્રિન્ટ સેટઅપ"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"તમારી સ્ક્રીન અનલૉક કરવા અથવા ખરીદીની પુષ્ટિ કરવા માટે તમારી ફિંગરપ્રિન્ટનો ઉપયોગ કરવા , તમને આની જરૂર પડશે:"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"તમારી બેકઅપ સ્ક્રીન લૉક પદ્ધતિને સેટ કરો"</string>
@@ -2051,7 +2052,7 @@
     <string name="sync_one_time_sync" msgid="6766593624598183090">"હમણાં સમન્વયિત કરવા માટે ટચ કરો<xliff:g id="LAST_SYNC_TIME">
 %1$s</xliff:g>"</string>
     <string name="sync_gmail" msgid="714886122098006477">"Gmail"</string>
-    <string name="sync_calendar" msgid="9056527206714733735">"કૅલેન્ડર"</string>
+    <string name="sync_calendar" msgid="9056527206714733735">"કેલેન્ડર"</string>
     <string name="sync_contacts" msgid="9174914394377828043">"સંપર્કો"</string>
     <string name="sync_plug" msgid="3905078969081888738"><font fgcolor="#ffffffff">"Google સમન્વયન પર સ્વાગત છે!"</font>" \nતમારા સંપર્કો, એપોઇન્ટમેન્ટ્સ અને વધુના અ‍ૅક્સેસની તમે જ્યાં પણ હોવ ત્યાંથી મંજૂરી આપવા માટે ડેટાને સમન્વયિત કરવાનો એક Google અભિગમ."</string>
     <string name="header_application_sync_settings" msgid="6205903695598000286">"એપ્લિકેશન સમન્વયન સેટિંગ્સ"</string>
@@ -2517,6 +2518,7 @@
     <string name="keywords_app_permissions" msgid="8677901415217188314">"એપ્લિકેશનો પરવાનગીઓની સુરક્ષા"</string>
     <string name="keywords_default_apps" msgid="3581727483175522599">"એપ્લિકેશનો ડિફોલ્ટ"</string>
     <string name="keywords_ignore_optimizations" msgid="946516741848647905">"ઓપ્ટિમાઇઝેશન્સ ડોઝ એપ્લિકેશન સ્ટેન્ડબાયને અવગણો"</string>
+    <string name="keywords_color_mode" msgid="4670570451841540200">"વાઇબ્રન્ટ rgb srgb રંગ કુદરતી માનક"</string>
     <string name="keywords_lockscreen" msgid="4806191868723291541">"સ્લાઇડ પાસવર્ડ પેટર્ન પિન"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Wi-Fi NFC ટેગ સેટ કરો"</string>
     <string name="write_tag" msgid="8571858602896222537">"લખો"</string>
@@ -2611,7 +2613,8 @@
     <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="2769656565454495824">"હા અથવા કદાચ"</string>
     <string name="zen_mode_event_rule_reply_yes" msgid="1003598835878784659">"હા"</string>
     <string name="zen_mode_rule_not_found_text" msgid="8963662446092059836">"નિયમ મળ્યો નથી."</string>
-    <string name="zen_mode_rule_summary_combination" msgid="2526506268333198254">"<xliff:g id="DESCRIPTION">%1$s</xliff:g> / <xliff:g id="MODE">%2$s</xliff:g>"</string>
+    <string name="zen_mode_rule_summary_enabled_combination" msgid="976098744828219297">"ચાલુ / <xliff:g id="MODE">%1$s</xliff:g>"</string>
+    <string name="zen_mode_rule_summary_provider_combination" msgid="2101201392041867409">"<xliff:g id="PACKAGE">%1$s</xliff:g>\n<xliff:g id="SUMMARY">%2$s</xliff:g>"</string>
     <string name="zen_mode_schedule_rule_days" msgid="3195058680641389948">"દિવસ"</string>
     <string name="zen_mode_schedule_rule_days_none" msgid="4954143628634166317">"કોઈ નહીં"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="146511166522076034">"દરરોજ"</string>
@@ -2893,4 +2896,16 @@
     <string name="camera_gesture_desc" msgid="1831390075255870960">"તમારા કાંડાને બે વાર મરડીને કૅમેરા એપ્લિકેશન ખોલો"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"કૅમેરા માટે બે વખત પાવર બટન દબાવો"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"તમારી સ્ક્રીન અનલૉક કર્યાં વગર ઝડપથી કૅમેરો ખોલો"</string>
+  <string-array name="color_mode_names">
+    <item msgid="2425514299220523812">"વાઇબ્રન્ટ (ડિફોલ્ટ)"</item>
+    <item msgid="8446070607501413455">"કુદરતી"</item>
+    <item msgid="6553408765810699025">"માનક"</item>
+  </string-array>
+  <string-array name="color_mode_descriptions">
+    <item msgid="4979629397075120893">"વધારેલ રંગો"</item>
+    <item msgid="8280754435979370728">"આંખો વડે જોઈ શકાતાં કુદરતી રંગો"</item>
+    <item msgid="5363960654009010371">"ડિજિટલ સામગ્રી માટે ઓપ્ટિમાઇઝ કરાયેલા રંગો"</item>
+  </string-array>
+    <string name="picture_color_mode" msgid="4560755008730283695">"ચિત્ર રંગ મોડ"</string>
+    <string name="picture_color_mode_desc" msgid="1141891467675548590">"sRGB નો ઉપયોગ કરો"</string>
 </resources>

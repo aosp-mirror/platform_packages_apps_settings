@@ -322,6 +322,7 @@
       <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> Fingerabdrücke einrichten</item>
       <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> Fingerabdruck einrichten</item>
     </plurals>
+    <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Abdruck einrichten"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"Zum Entsperren des Displays oder Bestätigen von Käufen per Fingerabdruck sind folgende Aktionen erforderlich:"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"Richten Sie Ihre alternative Methode für die Displaysperre ein."</string>
@@ -2516,6 +2517,7 @@
     <string name="keywords_app_permissions" msgid="8677901415217188314">"App-Berechtigungen – Sicherheit"</string>
     <string name="keywords_default_apps" msgid="3581727483175522599">"Apps-Standardeinstellung"</string>
     <string name="keywords_ignore_optimizations" msgid="946516741848647905">"Ignorieren Optimierungen Stromsparmodus App Standby"</string>
+    <string name="keywords_color_mode" msgid="4670570451841540200">"brillant rgb srgb farbe natürlich standard"</string>
     <string name="keywords_lockscreen" msgid="4806191868723291541">"ziehen passwort muster pin slide password pattern"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"WLAN-NFC-Tag einrichten"</string>
     <string name="write_tag" msgid="8571858602896222537">"Schreiben"</string>
@@ -2610,7 +2612,8 @@
     <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="2769656565454495824">"\"Ja\" oder \"Vielleicht\""</string>
     <string name="zen_mode_event_rule_reply_yes" msgid="1003598835878784659">"Ja"</string>
     <string name="zen_mode_rule_not_found_text" msgid="8963662446092059836">"Regel nicht gefunden"</string>
-    <string name="zen_mode_rule_summary_combination" msgid="2526506268333198254">"<xliff:g id="DESCRIPTION">%1$s</xliff:g>/<xliff:g id="MODE">%2$s</xliff:g>"</string>
+    <string name="zen_mode_rule_summary_enabled_combination" msgid="976098744828219297">"An/<xliff:g id="MODE">%1$s</xliff:g>"</string>
+    <string name="zen_mode_rule_summary_provider_combination" msgid="2101201392041867409">"<xliff:g id="PACKAGE">%1$s</xliff:g>\n: <xliff:g id="SUMMARY">%2$s</xliff:g>"</string>
     <string name="zen_mode_schedule_rule_days" msgid="3195058680641389948">"Tage"</string>
     <string name="zen_mode_schedule_rule_days_none" msgid="4954143628634166317">"Keine"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="146511166522076034">"Täglich"</string>
@@ -2894,4 +2897,16 @@
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Kamera App durch zweimaliges Drehen des Handgelenks öffnen"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Für Kamera Ein/Aus zweimal drücken"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Kamera ohne Entsperren des Displays schnell öffnen"</string>
+  <string-array name="color_mode_names">
+    <item msgid="2425514299220523812">"Brillant (Standardeinstellung)"</item>
+    <item msgid="8446070607501413455">"Natürlich"</item>
+    <item msgid="6553408765810699025">"Standard"</item>
+  </string-array>
+  <string-array name="color_mode_descriptions">
+    <item msgid="4979629397075120893">"Verstärkte Farben"</item>
+    <item msgid="8280754435979370728">"Natürliche Farben wie vom Auge wahrgenommen"</item>
+    <item msgid="5363960654009010371">"Für digitale Inhalte optimierte Farben"</item>
+  </string-array>
+    <string name="picture_color_mode" msgid="4560755008730283695">"Farbmodus für Bilder"</string>
+    <string name="picture_color_mode_desc" msgid="1141891467675548590">"sRGB verwenden"</string>
 </resources>

@@ -322,6 +322,7 @@
       <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> vingerafdrukken ingesteld</item>
       <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> vingerafdruk ingesteld</item>
     </plurals>
+    <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Vingerafdruk config."</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"Als je je vingerafdruk wilt gebruiken om je scherm te ontgrendelen of aankopen te bevestigen, moeten we het volgende doen:"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"Je achterliggende schermvergrendelingsmethode instellen"</string>
@@ -851,7 +852,7 @@
     <string name="screensaver_settings_button" msgid="7292214707625717013">"Instellingen"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Automatische helderheid"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Optillen om te activeren"</string>
-    <string name="doze_title" msgid="2259176504273878294">"Omgevingsdisplay"</string>
+    <string name="doze_title" msgid="2259176504273878294">"Actieve display"</string>
     <string name="doze_summary" msgid="7128970177894383698">"Scherm activeren wanneer je het apparaat oppakt of meldingen ontvangt"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Lettergrootte"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Instellingen SIM-kaartvergrendeling"</string>
@@ -2515,6 +2516,7 @@
     <string name="keywords_app_permissions" msgid="8677901415217188314">"apps rechten beveiliging"</string>
     <string name="keywords_default_apps" msgid="3581727483175522599">"standaard voor apps"</string>
     <string name="keywords_ignore_optimizations" msgid="946516741848647905">"negeren optimalisaties sluimeren app standby"</string>
+    <string name="keywords_color_mode" msgid="4670570451841540200">"levendig rgb srgb kleur natuurlijk standaard"</string>
     <string name="keywords_lockscreen" msgid="4806191868723291541">"vegen wachtwoord patroon pincode"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Wifi NFC-tag instellen"</string>
     <string name="write_tag" msgid="8571858602896222537">"Schrijven"</string>
@@ -2609,7 +2611,8 @@
     <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="2769656565454495824">"Ja of Misschien"</string>
     <string name="zen_mode_event_rule_reply_yes" msgid="1003598835878784659">"Ja"</string>
     <string name="zen_mode_rule_not_found_text" msgid="8963662446092059836">"Regel niet gevonden."</string>
-    <string name="zen_mode_rule_summary_combination" msgid="2526506268333198254">"<xliff:g id="DESCRIPTION">%1$s</xliff:g>/<xliff:g id="MODE">%2$s</xliff:g>"</string>
+    <string name="zen_mode_rule_summary_enabled_combination" msgid="976098744828219297">"Aan / <xliff:g id="MODE">%1$s</xliff:g>"</string>
+    <string name="zen_mode_rule_summary_provider_combination" msgid="2101201392041867409">"<xliff:g id="PACKAGE">%1$s</xliff:g>\n<xliff:g id="SUMMARY">%2$s</xliff:g>"</string>
     <string name="zen_mode_schedule_rule_days" msgid="3195058680641389948">"Dagen"</string>
     <string name="zen_mode_schedule_rule_days_none" msgid="4954143628634166317">"Geen"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="146511166522076034">"Elke dag"</string>
@@ -2747,7 +2750,7 @@
     <string name="configure_apps" msgid="6685680790825882528">"Apps configureren"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Onbekende app"</string>
     <string name="choose_profile" msgid="8229363046053568878">"Profiel kiezen"</string>
-    <string name="app_permissions" msgid="4148222031991883874">"App-rechten"</string>
+    <string name="app_permissions" msgid="4148222031991883874">"App-machtigingen"</string>
     <string name="app_permissions_summary" msgid="2098173899436407221">"Extra toegang verleend aan <xliff:g id="COUNT_0">%d</xliff:g> van <xliff:g id="COUNT_1">%d</xliff:g> apps"</string>
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"Verleend aan <xliff:g id="COUNT_0">%d</xliff:g> van <xliff:g id="COUNT_1">%d</xliff:g> apps"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Tikken om te activeren"</string>
@@ -2882,7 +2885,7 @@
     <string name="filter_write_settings_apps" msgid="2914615026197322551">"Kan systeeminstellingen aanpassen"</string>
     <string name="write_settings_title" msgid="4232152481902542284">"Kan systeeminstellingen aanpassen"</string>
     <string name="write_system_settings" msgid="3482913590601096763">"Systeeminstellingen aanpassen"</string>
-    <string name="write_settings_preference" msgid="3407383041273067448">"App-rechten voor aanpassen van systeeminstellingen"</string>
+    <string name="write_settings_preference" msgid="3407383041273067448">"App-machtigingen voor aanpassen van systeeminstellingen"</string>
     <string name="permit_write_settings" msgid="6393779336656870080">"Aanpassen van systeeminstellingen toestaan"</string>
     <string name="write_settings_description" msgid="6868293938839954623">"Met deze rechten kan een app de systeeminstellingen aanpassen."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"Ja"</string>
@@ -2891,4 +2894,16 @@
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Open de camera-app door je pols twee keer te draaien"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Druk twee keer op aan/uit voor de camera"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Camera snel openen zonder het scherm te ontgrendelen"</string>
+  <string-array name="color_mode_names">
+    <item msgid="2425514299220523812">"Levendig (standaard)"</item>
+    <item msgid="8446070607501413455">"Natuurlijk"</item>
+    <item msgid="6553408765810699025">"Standaard"</item>
+  </string-array>
+  <string-array name="color_mode_descriptions">
+    <item msgid="4979629397075120893">"Verbeterde kleuren"</item>
+    <item msgid="8280754435979370728">"Natuurlijke kleuren zoals gezien door het menselijk oog"</item>
+    <item msgid="5363960654009010371">"Kleuren geoptimaliseerd voor digitale content"</item>
+  </string-array>
+    <string name="picture_color_mode" msgid="4560755008730283695">"Kleurenmodus voor afbeeldingen"</string>
+    <string name="picture_color_mode_desc" msgid="1141891467675548590">"sRGB gebruiken"</string>
 </resources>
