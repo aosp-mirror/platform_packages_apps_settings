@@ -130,7 +130,7 @@
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Desconectar?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Isto finalizará a túa conexión con:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="1185354873716211496">"Non tes permiso para cambiar a configuración de Bluetooth."</string>
-    <string name="bluetooth_is_visible_message" msgid="3956514990287788968">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> visible para disp próximos con axus BT abertos."</string>
+    <string name="bluetooth_is_visible_message" msgid="3956514990287788968">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> será visible para dispositivos próximos coa configuración de Bluetooth activada."</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"Queres desconectar <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Difusión"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Desactivar o perfil?"</string>
@@ -610,8 +610,8 @@
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"Xestionar automaticamente a wifi"</string>
     <string name="wifi_automatically_manage_summary" msgid="6952470763378312488">"Permitir que <xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> xestione a túa conexión wifi"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Instalar certificados"</string>
-    <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Para mellorar a precisión da localización e para outros fins, é posible que Google e outras aplicacións busquen redes próximas, aínda que a wifi estea desactivada. Se non queres que isto pase, vai a Avanzado &gt; Exploración sempre dispoñible."</string>
-    <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"É posible que as aplicacións busquen redes próximas, aínda que a wifi estea desactivada. Se non queres que isto pase, vai a Avanzado &gt; Exploración sempre dispoñible."</string>
+    <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Para mellorar a precisión da localización e para outros fins, é posible que Google e outras aplicacións busquen redes próximas, aínda que a wifi estea desactivada. Se non queres que isto pase, accede a Avanzado &gt; Buscar redes sempre."</string>
+    <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"É posible que as aplicacións busquen redes próximas, aínda que a wifi estea desactivada. Se non queres que isto pase, accede a Avanzado &gt; Buscar redes sempre."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="5340097010842405981">"Non mostrar outra vez"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"Manter a wifi activada durante o modo de suspensión"</string>
     <string name="wifi_setting_on_during_sleep_title" msgid="8308975500029751565">"Wifi activada na suspensión"</string>
@@ -873,6 +873,7 @@
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"Actualizacións do sistema"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Versión de Android"</string>
+    <string name="security_patch" msgid="8438384045870296634">"Nivel de parche de seguranza de Android"</string>
     <string name="model_number" msgid="3765737700545384794">"Número de modelo"</string>
     <string name="fcc_equipment_id" msgid="149114368246356737">"ID de equipamento"</string>
     <string name="baseband_version" msgid="1848990160763524801">"Versión de banda base"</string>
@@ -1239,7 +1240,7 @@
     <string name="disabled" msgid="9206776641295849915">"Desactivada"</string>
     <string name="not_installed" msgid="1475144352069281880">"Non instalada"</string>
     <string name="no_applications" msgid="7336588977497084921">"Ningunha aplicación."</string>
-    <string name="internal_storage" msgid="1584700623164275282">"Almac. interno"</string>
+    <string name="internal_storage" msgid="1584700623164275282">"Almacenamento interno"</string>
     <string name="sd_card_storage" product="nosdcard" msgid="2673203150465132465">"Almac. USB"</string>
     <string name="sd_card_storage" product="default" msgid="7623513618171928235">"Tarxeta SD"</string>
     <string name="recompute_size" msgid="7722567982831691718">"Recalculando o tamaño…"</string>
@@ -2037,7 +2038,7 @@
     <string name="data_usage_menu_auto_sync" msgid="8203999775948778560">"Sincronización automática de datos"</string>
     <string name="data_usage_menu_sim_cards" msgid="6410498422797244073">"Tarxetas SIM"</string>
     <string name="data_usage_menu_cellular_networks" msgid="5243515735055652279">"Redes móbiles"</string>
-    <string name="account_settings_menu_auto_sync" msgid="6243013719753700377">"Sincronización de datos auto."</string>
+    <string name="account_settings_menu_auto_sync" msgid="6243013719753700377">"Sincronización automática"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="785541379617346438">"Sincr. auto. de datos persoais"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="329565580969147026">"Sincr. auto. datos do traballo"</string>
     <string name="data_usage_change_cycle" msgid="7776556448920114866">"Cambiar ciclo…"</string>
@@ -2193,7 +2194,7 @@
     <string name="user_cannot_manage_message" product="default" msgid="1133251987818014757">"Só o propietario do teléfono pode xestionar usuarios."</string>
     <string name="user_cannot_add_accounts_message" msgid="5116692653439737050">"Os perfís restrinxidos non poden engadir contas"</string>
     <string name="user_remove_user_menu" msgid="6897150520686691355">"Eliminar <xliff:g id="USER_NAME">%1$s</xliff:g> do dispositivo"</string>
-    <string name="user_add_on_lockscreen_menu" msgid="3025132738715222247">"Engadir us. co disp. bloqueado"</string>
+    <string name="user_add_on_lockscreen_menu" msgid="3025132738715222247">"Engade usuarios co disp. bloq."</string>
     <string name="user_new_user_name" msgid="369856859816028856">"Novo usuario"</string>
     <string name="user_new_profile_name" msgid="2632088404952119900">"Novo perfil"</string>
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Queres eliminarte a ti mesmo?"</string>
@@ -2350,7 +2351,7 @@
     <string name="keywords_sounds_and_notifications" msgid="5965996187974887000">"alarma sonora do altofalante"</string>
     <string name="keywords_sounds_and_notifications_interruptions" msgid="2912933812460077912">"non non molestar interromper interrupción pausa"</string>
     <string name="keywords_app" msgid="6334757056536837791">"RAM"</string>
-    <string name="keywords_location" msgid="782326973714313480">"informes do historial de localizacións próximas"</string>
+    <string name="keywords_location" msgid="782326973714313480">"informes do Historial de localizacións próximas"</string>
     <string name="keywords_location_mode" msgid="8584992704568356084">"precisión"</string>
     <string name="keywords_accounts" msgid="1957925565953357627">"conta"</string>
     <string name="keywords_users" msgid="4673901601478559100">"restrición restrinxir restrinxido"</string>
