@@ -38,6 +38,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
+import android.os.Binder;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.RemoteCallback;
@@ -472,7 +473,7 @@ public class DeviceAdminAdd extends Activity {
 
     private void addDeviceAdminPolicies(boolean showDescription) {
         if (!mAdminPoliciesInitialized) {
-            boolean isOwner = UserHandle.getCallingUserHandle().isOwner();
+            boolean isOwner = Binder.getCallingUserHandle().isOwner();
             for (DeviceAdminInfo.PolicyInfo pi : mDeviceAdmin.getUsedPolicies()) {
                 int descriptionId = isOwner ? pi.description : pi.descriptionForSecondaryUsers;
                 int labelId = isOwner ? pi.label : pi.labelForSecondaryUsers;
