@@ -80,10 +80,10 @@
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"SD卡"</string>
     <string name="battery_info_status_label" msgid="8109155295509700309">"电池状态："</string>
     <string name="battery_info_power_label" msgid="7465140230991349382">"是否已插电："</string>
-    <string name="battery_info_scale_label" msgid="3649763192389778437">"电池电量："</string>
+    <string name="battery_info_scale_label" msgid="3649763192389778437">"电池最大容量："</string>
     <string name="battery_info_level_label" msgid="8706526709307788737">"电池电量："</string>
     <string name="battery_info_health_label" msgid="6416051542741886958">"电池运行状况："</string>
-    <string name="battery_info_technology_label" msgid="788304533220748681">"电池技术："</string>
+    <string name="battery_info_technology_label" msgid="788304533220748681">"电池类型："</string>
     <string name="battery_info_voltage_label" msgid="8971764146757637863">"电池电压："</string>
     <string name="battery_info_voltage_units" msgid="8658490792208288107">"mV"</string>
     <string name="battery_info_temperature_label" msgid="1968383098818648037">"电池温度："</string>
@@ -316,7 +316,7 @@
     <string name="zone_auto_summaryOn" msgid="6142830927278458314">"使用网络提供的时区"</string>
     <string name="zone_auto_summaryOff" msgid="2597745783162041390">"使用网络提供的时区"</string>
     <string name="date_time_24hour_title" msgid="3203537578602803850">"24小时制"</string>
-    <string name="date_time_24hour" msgid="1193032284921000063">"使用24小时格式"</string>
+    <string name="date_time_24hour" msgid="1193032284921000063">"使用 24 小时制"</string>
     <string name="date_time_set_time_title" msgid="6296795651349047016">"时间"</string>
     <string name="date_time_set_time" msgid="5716856602742530696">"设置时间"</string>
     <string name="date_time_set_timezone_title" msgid="3047322337368233197">"时区"</string>
@@ -327,7 +327,7 @@
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"按时区排序"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"日期"</string>
     <string name="time_picker_title" msgid="483460752287255019">"时间"</string>
-    <string name="biometric_weak_improve_matching_title" msgid="8754080894393195194">"改善面部匹配"</string>
+    <string name="biometric_weak_improve_matching_title" msgid="8754080894393195194">"提高面部匹配准确度"</string>
     <string name="biometric_weak_liveliness_title" msgid="2661613702124561096">"真人判断"</string>
     <string name="biometric_weak_liveliness_summary" msgid="4199587000948042325">"解锁时需要眨眼"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"自动锁定"</string>
@@ -877,6 +877,7 @@
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"系统更新"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Android版本"</string>
+    <string name="security_patch" msgid="8438384045870296634">"Android 安全补丁程序级别"</string>
     <string name="model_number" msgid="3765737700545384794">"型号"</string>
     <string name="fcc_equipment_id" msgid="149114368246356737">"设备 ID"</string>
     <string name="baseband_version" msgid="1848990160763524801">"基带版本"</string>
@@ -888,7 +889,7 @@
     <string name="device_status" msgid="607405385799807324">"状态信息"</string>
     <string name="device_status_summary" product="tablet" msgid="3292717754497039686">"电池状态、网络状态和其他信息"</string>
     <string name="device_status_summary" product="default" msgid="2599162787451519618">"电话号码、信号等"</string>
-    <string name="storage_settings" msgid="4211799979832404953">"存储"</string>
+    <string name="storage_settings" msgid="4211799979832404953">"存储空间"</string>
     <string name="storage_settings_title" msgid="8746016738388094064">"存储设置"</string>
     <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"卸载USB存储设备，查看可用存储设备"</string>
     <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"卸载SD卡，查看可用存储设备"</string>
@@ -1094,8 +1095,8 @@
     <string name="managed_profile_location_switch_title" msgid="6712332547063039683">"工作资料存储位置"</string>
     <string name="managed_profile_location_switch_lockdown" msgid="3851708343340350369">"您的公司已将其关闭"</string>
     <string name="location_mode_title" msgid="3982009713118421689">"模式"</string>
-    <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"准确度高"</string>
-    <string name="location_mode_battery_saving_title" msgid="711273645208158637">"耗电量低"</string>
+    <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"高精确度"</string>
+    <string name="location_mode_battery_saving_title" msgid="711273645208158637">"节电"</string>
     <string name="location_mode_sensors_only_title" msgid="3040366132175435160">"仅限设备"</string>
     <string name="location_mode_location_off_title" msgid="2829713015012529465">"位置信息：关闭"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"最近的位置信息请求"</string>
@@ -1145,7 +1146,7 @@
     <string name="lockpassword_choose_your_pin_header" msgid="7598849519816138302">"选择PIN码"</string>
     <string name="lockpassword_confirm_your_password_header" msgid="6308478184889846633">"确认您的密码"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"确认您的图案"</string>
-    <string name="lockpassword_confirm_your_pin_header" msgid="49038294648213197">"确认PIN码"</string>
+    <string name="lockpassword_confirm_your_pin_header" msgid="49038294648213197">"确认 PIN 码"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="6850677112663979120">"密码不匹配"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="4757532830594400147">"PIN码不匹配！"</string>
     <string name="lockpassword_choose_lock_generic_header" msgid="3811438094903786145">"解锁方式选择"</string>
@@ -1195,7 +1196,7 @@
     <string name="advanced_settings" msgid="1777249286757067969">"高级设置"</string>
     <string name="advanced_settings_summary" msgid="4016682978071086747">"启用更多设置选项"</string>
     <string name="application_info_label" msgid="5736524913065714880">"应用信息"</string>
-    <string name="storage_label" msgid="8700867073480107253">"存储"</string>
+    <string name="storage_label" msgid="8700867073480107253">"存储空间"</string>
     <string name="auto_launch_label" msgid="3012617472833815382">"默认操作"</string>
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"默认操作"</string>
     <string name="screen_compatibility_label" msgid="663250687205465394">"屏幕兼容性"</string>
@@ -1232,7 +1233,7 @@
     <string name="show_background_processes" msgid="2009840211972293429">"显示缓存进程"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"重置应用偏好设置"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"要重置应用偏好设置吗？"</string>
-    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"这将重置以下所有偏好设置：\n\n "<li>"停用的应用"</li>\n" "<li>"停用的应用通知"</li>\n" "<li>"执行操作的默认应用"</li>\n" "<li>"应用的后台流量限制"</li>\n" "<li>"权限限制"</li>\n\n" 您将不会丢失任何应用数据。"</string>
+    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"这将重置以下所有偏好设置：\n\n "<li>"已停用的应用"</li>\n" "<li>"已停用的应用通知"</li>\n" "<li>"用于执行操作的默认应用"</li>\n" "<li>"应用的后台流量限制"</li>\n" "<li>"所有权限限制"</li>\n\n" 您将不会丢失任何应用数据。"</string>
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"重置应用"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"管理空间"</string>
     <string name="filter" msgid="2018011724373033887">"过滤"</string>
@@ -1684,7 +1685,7 @@
     <string name="battery_sugg_bluetooth_headset" msgid="4071352514714259230">"尝试连接另一蓝牙设备"</string>
     <string name="battery_desc_apps" msgid="8530418792605735226">"该应用所耗的电量"</string>
     <string name="battery_sugg_apps_info" msgid="6907588126789841231">"停止或卸载应用"</string>
-    <string name="battery_sugg_apps_gps" msgid="5959067516281866135">"选择“耗电量低”模式"</string>
+    <string name="battery_sugg_apps_gps" msgid="5959067516281866135">"选择“节电”模式"</string>
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"该应用中可能提供了用于减少耗电量的设置"</string>
     <string name="battery_desc_users" msgid="7682989161885027823">"用户所耗的电量"</string>
     <string name="battery_desc_unaccounted" msgid="7404256448541818019">"其他耗电量"</string>
@@ -1727,7 +1728,7 @@
     <string name="menu_duration_6h" msgid="1940846763432184132">"6小时"</string>
     <string name="menu_duration_12h" msgid="7890465404584356294">"12小时"</string>
     <string name="menu_duration_1d" msgid="3393631127622285458">"1天"</string>
-    <string name="menu_show_system" msgid="8864603400415567635">"显示系统"</string>
+    <string name="menu_show_system" msgid="8864603400415567635">"显示系统进程"</string>
     <string name="menu_use_uss" msgid="467765290771543089">"使用 USS"</string>
     <string name="menu_proc_stats_type" msgid="4700209061072120948">"统计信息类型"</string>
     <string name="menu_proc_stats_type_background" msgid="2236161340134898852">"后台"</string>
@@ -1743,7 +1744,7 @@
     <string name="voice_service_preference_section_title" msgid="3778706644257601021">"语音输入服务"</string>
     <string name="voice_interactor_preference_summary" msgid="1801414022026937190">"全语音启动指令和互动"</string>
     <string name="voice_recognizer_preference_summary" msgid="669880813593690527">"简单的语音转文字"</string>
-    <string name="voice_interaction_security_warning" msgid="6378608263983737325">"此语音输入服务能够始终进行语音监测，并能替您控制所有支持语音功能的应用。该服务由<xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g>应用提供。要启用此服务吗？"</string>
+    <string name="voice_interaction_security_warning" msgid="6378608263983737325">"此语音输入服务能够始终进行语音监测，并能替您控制所有支持语音功能的应用。该服务由“<xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g>”提供。要启用此服务吗？"</string>
     <string name="tts_settings" msgid="8186971894801348327">"文字转语音设置"</string>
     <string name="tts_settings_title" msgid="1237820681016639683">"文字转语音 (TTS) 输出"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"总是使用我的设置"</string>
@@ -1828,12 +1829,12 @@
     <string name="credentials_unlock" msgid="385427939577366499"></string>
     <string name="credentials_unlock_hint" msgid="2301301378040499348">"键入凭据存储的密码。"</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"当前密码："</string>
-    <string name="credentials_reset_hint" msgid="6297256880896133631">"要删除所有内容吗？"</string>
+    <string name="credentials_reset_hint" msgid="6297256880896133631">"要移除所有内容吗？"</string>
     <string name="credentials_password_too_short" msgid="7502749986405522663">"密码至少应包含8个字符。"</string>
     <string name="credentials_wrong_password" msgid="2541932597104054807">"密码不正确。"</string>
     <string name="credentials_reset_warning" msgid="5320653011511797600">"密码不正确。您还可以重试一次，如果输入的密码仍不正确，系统将删除凭据存储。"</string>
     <string name="credentials_reset_warning_plural" msgid="6514085665301095279">"密码不正确。您还可以重试 <xliff:g id="NUMBER">%1$d</xliff:g> 次，如果输入的密码仍不正确，系统将删除凭据存储。"</string>
-    <string name="credentials_erased" msgid="2907836028586342969">"凭据存储已删除。"</string>
+    <string name="credentials_erased" msgid="2907836028586342969">"凭据存储空间已清空。"</string>
     <string name="credentials_not_erased" msgid="93461830775441220">"系统无法清除凭据存储。"</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"凭证存储已启用。"</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"您需要先设置锁屏PIN码或密码才能使用凭据存储。"</string>
