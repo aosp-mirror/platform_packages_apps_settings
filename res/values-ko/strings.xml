@@ -40,6 +40,8 @@
     <string name="sms_over_ims_off" msgid="8354792045992793959">"IMS로 SMS 끄기"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"IMS 등록을 사용해야 합니다."</string>
     <string name="ims_reg_required_off" msgid="1720570343422743943">"IMS 등록을 사용 중지해야 합니다."</string>
+    <string name="volte_provisioned_flag_on" msgid="6023503159480902956">"VoLTE 프로비저닝 신고 사용"</string>
+    <string name="volte_provisioned_flag_off" msgid="6168612015904744405">"VoLTE 프로비저닝 신고 사용 중지"</string>
     <string name="lte_ram_dump_on" msgid="8568568019520172177">"lte ram 덤프 사용"</string>
     <string name="lte_ram_dump_off" msgid="2514507918652378283">"lte ram 덤프 사용안함"</string>
     <string name="radioInfo_menu_viewADN" msgid="8743377494429930831">"SIM 주소록 보기"</string>
@@ -192,7 +194,7 @@
     <string name="proxy_settings_title" msgid="9049437837600320881">"프록시"</string>
     <string name="proxy_clear_text" msgid="5555400754952012657">"지우기"</string>
     <string name="proxy_port_label" msgid="5655276502233453400">"프록시 포트"</string>
-    <string name="proxy_exclusionlist_label" msgid="7700491504623418701">"프록시 우회 대상:"</string>
+    <string name="proxy_exclusionlist_label" msgid="7700491504623418701">"프록시 우회 대상"</string>
     <string name="proxy_exclusionlist_hint" msgid="6084099226687226948">"example.com,mycomp.test.com,localhost"</string>
     <string name="proxy_defaultView_text" msgid="6387985519141433291">"기본값 복원"</string>
     <string name="proxy_action_text" msgid="2957063145357903951">"완료"</string>
@@ -322,13 +324,13 @@
     <string name="date_time_set_date_title" msgid="6928286765325608604">"날짜"</string>
     <string name="date_time_set_date" msgid="7021491668550232105">"날짜 설정"</string>
     <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"가나다순으로 정렬"</string>
-    <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"시간대순 정렬"</string>
+    <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"시간대순으로 정렬"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"날짜"</string>
     <string name="time_picker_title" msgid="483460752287255019">"시간"</string>
     <string name="biometric_weak_improve_matching_title" msgid="8754080894393195194">"얼굴 인식 잠금해제 개선"</string>
     <string name="biometric_weak_liveliness_title" msgid="2661613702124561096">"동적 이미지 확인"</string>
     <string name="biometric_weak_liveliness_summary" msgid="4199587000948042325">"잠금 해제하려면 눈 깜박임 필요"</string>
-    <string name="lock_after_timeout" msgid="4590337686681194648">"자동 잠김"</string>
+    <string name="lock_after_timeout" msgid="4590337686681194648">"자동 잠금"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"절전 모드 후 <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>에 의해 잠금 해제된 경우를 제외하고 절전 모드 후 <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"화면 잠금에 소유자 정보 표시"</string>
@@ -640,7 +642,7 @@
     <string name="wifi_wps_setup_title" msgid="8207552222481570175">"Wi-Fi Protected 설정"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"WPS을 시작하는 중…"</string>
     <string name="wifi_wps_onstart_pbc" msgid="5940801028985255304">"공유기에서 Wi-Fi Protected 설정 버튼을 누르세요. \'WPS\'라고 줄여 부르기도 하며 다음 기호를 포함할 수도 있습니다."</string>
-    <string name="wifi_wps_onstart_pin" msgid="223344506445335358">"Wi-Fi 공유기에 PIN(개인 식별 번호) <xliff:g id="NUMBER">%1$s</xliff:g>을(를) 입력하세요. 설정을 완료하는 데 최대 2분이 소요됩니다."</string>
+    <string name="wifi_wps_onstart_pin" msgid="223344506445335358">"Wi-Fi 공유기에 PIN(<xliff:g id="NUMBER">%1$s</xliff:g>)을 입력하세요. 설정을 완료하는 데 최대 2분이 소요됩니다."</string>
     <string name="wifi_wps_complete" msgid="2388138550456729134">"WPS 성공. 네트워크에 연결 중…"</string>
     <string name="wifi_wps_connected" msgid="7153432445748931183">"Wi-Fi 네트워크 <xliff:g id="NETWORK_NAME">%s</xliff:g>에 연결됨"</string>
     <string name="wifi_wps_in_progress" msgid="3372311348221357944">"WPS 설정이 이미 진행 중이며 완료하는 데 최대 2분이 소요됩니다."</string>
@@ -875,6 +877,7 @@
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"시스템 업데이트"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Android 버전"</string>
+    <string name="security_patch" msgid="8438384045870296634">"Android 보안 패치 수준"</string>
     <string name="model_number" msgid="3765737700545384794">"모델 번호"</string>
     <string name="fcc_equipment_id" msgid="149114368246356737">"장비 ID"</string>
     <string name="baseband_version" msgid="1848990160763524801">"기저대역 버전"</string>
@@ -1003,7 +1006,7 @@
     <string name="error_name_empty" msgid="8418502878620394756">"이름 입력란은 비워둘 수 없습니다."</string>
     <string name="error_apn_empty" msgid="6056233831214537267">"APN을 비워둘 수 없습니다."</string>
     <string name="error_mcc_not3" msgid="4560171714156251661">"MCC는 3자리 숫자여야 합니다."</string>
-    <string name="error_mnc_not23" msgid="8418177072458379439">"MNC는 2~ 3자리 숫자여야 합니다."</string>
+    <string name="error_mnc_not23" msgid="8418177072458379439">"MNC는 2~3자리 숫자여야 합니다."</string>
     <string name="restore_default_apn" msgid="8178010218751639581">"기본 APN 설정 복원 중"</string>
     <string name="menu_restore" msgid="8260067415075573273">"초기화"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"기본 APN 설정을 초기화했습니다."</string>
@@ -1104,7 +1107,7 @@
     <string name="location_mode_screen_title" msgid="4528716772270246542">"위치 모드"</string>
     <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"GPS, Wi‑Fi 및 이동통신망을 사용하여 위치를 찾습니다."</string>
     <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"Wi‑Fi와 이동통신망을 사용하여 위치를 찾습니다."</string>
-    <string name="location_mode_sensors_only_description" msgid="7178415350457794366">"GPS를 사용하여 내 위치를 찾습니다."</string>
+    <string name="location_mode_sensors_only_description" msgid="788127681455735699">"GPS를 사용하여 위치를 찾습니다."</string>
     <string name="location_network_based" msgid="6010456018401296590">"Wi‑Fi 및 이동통신망 위치"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"사용자의 위치를 빠르게 파악하도록 앱에서 Google의 위치 서비스를 사용합니다. 익명의 위치 정보가 수집되어 Google로 전송됩니다."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Wi-Fi에서 측정된 위치"</string>
@@ -1218,8 +1221,8 @@
     <string name="app_factory_reset" msgid="6635744722502563022">"업데이트 제거"</string>
     <string name="auto_launch_enable_text" msgid="2652825923953591251">"이 앱을 해당 작업에 대한 기본 프로그램으로 실행하도록 선택했습니다."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="3368654672141202604">"이 앱이 위젯을 만들고 자체 데이터에 액세스할 수 있도록 선택했습니다."</string>
-    <string name="auto_launch_disable_text" msgid="7800385822185540166">"기본값이 설정되지 않았습니다."</string>
-    <string name="clear_activities" msgid="7408923511535174430">"기본 작업 지우기"</string>
+    <string name="auto_launch_disable_text" msgid="7800385822185540166">"기본값이 설정되지 않음"</string>
+    <string name="clear_activities" msgid="7408923511535174430">"기본값 지우기"</string>
     <string name="screen_compatibility_text" msgid="1616155457673106022">"이 앱은 사용 중인 화면에 맞게 개발되지 않았을 수 있습니다. 여기에서 어떻게 앱을 화면에 맞출지 선택할 수 있습니다."</string>
     <string name="ask_compatibility" msgid="7225195569089607846">"설치 시 확인"</string>
     <string name="enable_compatibility" msgid="5806819252068617811">"앱 확장"</string>
@@ -1228,10 +1231,10 @@
     <string name="sort_order_size" msgid="7024513286636502362">"크기순 정렬"</string>
     <string name="show_running_services" msgid="5736278767975544570">"실행 중인 서비스 표시"</string>
     <string name="show_background_processes" msgid="2009840211972293429">"캐시된 프로세스 표시"</string>
-    <string name="reset_app_preferences" msgid="1321050641018356925">"앱 환경설정 재설정"</string>
-    <string name="reset_app_preferences_title" msgid="6093179367325336662">"앱 환경설정을 재설정하시겠습니까?"</string>
-    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"이 작업을 수행하면\n\n "<li>"사용 중지된 앱"</li>\n" "<li>"사용 중지된 앱 알림"</li>\n" "<li>"작업을 수행할 때 사용하는 기본 애플리케이션"</li>\n" "<li>"앱에 대한 백그라운드 데이터 제한"</li>\n" "<li>"그 밖의 권한 제한"</li>"에 대한 모든 환경설정이 재설정됩니다.\n\n 앱 데이터는 손실되지 않습니다."</string>
-    <string name="reset_app_preferences_button" msgid="2559089511841281242">"앱 재설정"</string>
+    <string name="reset_app_preferences" msgid="1321050641018356925">"앱 환경설정 초기화"</string>
+    <string name="reset_app_preferences_title" msgid="6093179367325336662">"앱 환경설정을 초기화하시겠습니까?"</string>
+    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"이 작업을 수행하면 다음 환경설정이 초기화됩니다.\n\n "<li>"사용 중지된 앱"</li>\n" "<li>"사용 중지된 앱 알림"</li>\n" "<li>"작업을 수행할 때 사용하는 기본 애플리케이션"</li>\n" "<li>"앱에 대한 백그라운드 데이터 제한"</li>\n" "<li>"그 밖의 권한 제한"</li>\n\n" 앱 데이터는 손실되지 않습니다."</string>
+    <string name="reset_app_preferences_button" msgid="2559089511841281242">"앱 초기화"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"공간 관리"</string>
     <string name="filter" msgid="2018011724373033887">"필터"</string>
     <string name="filter_dlg_title" msgid="8693024463731076091">"필터 옵션 선택"</string>
@@ -1447,7 +1450,7 @@
     <string name="confirm_enable_oem_unlock_text" msgid="5517144575601647022">"경고: 이 설정을 사용하는 동안에는 이 기기에서 기기 보호 기능이 작동하지 않습니다."</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"무선 디스플레이 인증서"</string>
     <string name="wifi_verbose_logging" msgid="4203729756047242344">"Wi-Fi 상세 로깅 사용"</string>
-    <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Wi-Fi에서 데이터 네트워크로 적극 핸드오버"</string>
+    <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Wi-Fi-셀룰러 적극 핸드오버"</string>
     <string name="wifi_allow_scan_with_traffic" msgid="3601853081178265786">"Wi‑Fi 로밍 스캔 항상 허용"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"무선 디스플레이 인증서 옵션 표시"</string>
     <string name="wifi_verbose_logging_summary" msgid="6615071616111731958">"Wi‑Fi 로깅 수준을 높이고, Wi‑Fi 선택도구에서 SSID RSSI당 값을 표시합니다."</string>
@@ -1500,7 +1503,7 @@
     <string name="accessibility_display_title" msgid="7610175687949675162">"디스플레이"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"캡션"</string>
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"확대 동작"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="2380627654189671754">"이 기능을 사용하면 화면을 3번 탭하여 확대 및 축소할 수 있습니다.\n\n화면을 확대한 상태에서 다음 작업을 수행할 수 있습니다.\n"<ul><li>"이동: 화면에서 두 개 이상의 손가락을 드래그"</li>\n<li>"확대/축소 수준 조정: 두 개 이상의 손가락을 오므리거나 벌림"</li></ul>\n\n"또한 3번 탭한 상태를 유지하여 손가락 아래에 있는 항목을 일시적으로 확대할 수 있습니다. 확대한 상태에서 손가락을 드래그하여 화면의 다른 부분을 탐색할 수 있습니다. 손가락을 떼면 이전 상태로 돌아갑니다.\n\n참고: 세 번 탭하여 확대 기능은 키보드와 탐색 바에서는 작동하지 않습니다."</string>
+    <string name="accessibility_screen_magnification_summary" msgid="2380627654189671754">"이 기능을 사용하면 화면을 세 번 탭하여 확대 및 축소할 수 있습니다.\n\n화면을 확대한 상태에서 다음 작업을 수행할 수 있습니다.\n"<ul><li>"이동: 화면에서 두 개 이상의 손가락을 드래그"</li>\n<li>"확대/축소 수준 조정: 두 개 이상의 손가락을 오므리거나 벌림"</li></ul>\n\n"또한 세 번 탭한 상태를 유지하여 손가락 아래에 있는 항목을 일시적으로 확대할 수 있습니다. 확대한 상태에서 손가락을 드래그하여 화면의 다른 부분을 탐색할 수 있습니다. 손가락을 떼면 이전 상태로 돌아갑니다.\n\n참고: 세 번 탭하여 확대 기능은 키보드와 탐색 바에서는 작동하지 않습니다."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"접근성 단축키"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"켜기"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"사용 안함"</string>
@@ -1581,8 +1584,8 @@
     <string name="print_no_printers_found" msgid="989018646884973683">"프린터 없음"</string>
     <string name="print_menu_item_settings" msgid="6591330373682227082">"설정"</string>
     <string name="print_menu_item_add_printers" msgid="2890738028215834012">"프린터 추가"</string>
-    <string name="print_feature_state_on" msgid="8098901852502441048">"ON"</string>
-    <string name="print_feature_state_off" msgid="7294876968403966040">"OFF"</string>
+    <string name="print_feature_state_on" msgid="8098901852502441048">"사용"</string>
+    <string name="print_feature_state_off" msgid="7294876968403966040">"사용 안함"</string>
     <string name="print_menu_item_add_service" msgid="3811645167869797802">"서비스 추가"</string>
     <string name="print_menu_item_add_printer" msgid="8251218970577291032">"프린터 추가"</string>
     <string name="print_menu_item_search" msgid="7025589328240514553">"검색"</string>
@@ -1750,7 +1753,7 @@
     <string name="tts_default_synth_title" msgid="4755558388333117572">"기본 엔진"</string>
     <string name="tts_default_synth_summary" msgid="6482936537135251690">"음성 텍스트에 대해 음성 합성 엔진을 사용하도록 설정"</string>
     <string name="tts_default_rate_title" msgid="6030550998379310088">"말하는 속도"</string>
-    <string name="tts_default_rate_summary" msgid="4061815292287182801">"텍스트를 읽어주는 빠르기"</string>
+    <string name="tts_default_rate_summary" msgid="4061815292287182801">"텍스트를 읽어주는 속도"</string>
     <string name="tts_default_pitch_title" msgid="6135942113172488671">"피치"</string>
     <string name="tts_default_pitch_summary" msgid="1328298665182885277">"발음된 텍스트의 톤에 적용"</string>
     <string name="tts_default_lang_title" msgid="8018087612299820556">"언어"</string>
@@ -1794,7 +1797,7 @@
     <string name="gadget_toggle_wifi" msgid="319262861956544493">"Wi-Fi 설정 업데이트"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"블루투스 설정 업데이트"</string>
     <string name="gadget_state_template" msgid="5156935629902649932">"<xliff:g id="ID_1">%1$s</xliff:g> <xliff:g id="ID_2">%2$s</xliff:g>"</string>
-    <string name="gadget_state_on" msgid="6909119593004937688">"켜짐"</string>
+    <string name="gadget_state_on" msgid="6909119593004937688">"사용"</string>
     <string name="gadget_state_off" msgid="5220212352953066317">"꺼짐"</string>
     <string name="gadget_state_turning_on" msgid="3395992057029439039">"켜는 중"</string>
     <string name="gadget_state_turning_off" msgid="2395546048102176157">"끄는 중"</string>
@@ -1856,9 +1859,9 @@
     <string name="local_backup_password_title" msgid="3860471654439418822">"데스크톱 백업 비밀번호"</string>
     <string name="local_backup_password_summary_none" msgid="393503434408227110">"데스크톱 전체 백업에 비밀번호가 설정되어 있지 않음"</string>
     <string name="local_backup_password_summary_change" msgid="2731163425081172638">"데스크톱 전체 백업에 대한 비밀번호를 변경하거나 삭제하려면 터치하세요."</string>
-    <string name="local_backup_password_toast_success" msgid="582016086228434290">"새로운 백업 비밀번호 세트"</string>
+    <string name="local_backup_password_toast_success" msgid="582016086228434290">"새 백업 비밀번호가 설정되었습니다."</string>
     <string name="local_backup_password_toast_confirmation_mismatch" msgid="3495167398824569524">"새 비밀번호와 확인한 비밀번호가 일치하지 않습니다."</string>
-    <string name="local_backup_password_toast_validation_failure" msgid="5646377234895626531">"백업 비밀번호를 설정하지 못함"</string>
+    <string name="local_backup_password_toast_validation_failure" msgid="5646377234895626531">"백업 비밀번호를 설정하지 못했습니다."</string>
     <string name="backup_erase_dialog_title" msgid="1027640829482174106"></string>
     <string name="backup_erase_dialog_message" msgid="5221011285568343155">"Wi-Fi 비밀번호, 북마크, 기타 설정 및 앱 데이터 백업을 중지하고 Google 서버에 있는 모든 사본을 지우시겠습니까?"</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"기기 관리 설정"</string>
@@ -1870,11 +1873,11 @@
     <string name="personal_device_admin_title" msgid="2849617316347669861">"개인"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"직장"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"사용 가능한 Trust Agent 없음"</string>
-    <string name="add_device_admin_msg" msgid="6246742476064507965">"기기 관리자를 활성화하시겠습니까?"</string>
+    <string name="add_device_admin_msg" msgid="6246742476064507965">"기기 관리자 활성화"</string>
     <string name="add_device_admin" msgid="7133327675884827091">"활성화"</string>
     <string name="device_admin_add_title" msgid="7705551449705676363">"기기 관리자"</string>
     <string name="device_admin_warning" msgid="2026747446313628233">"관리자를 활성화하면 <xliff:g id="APP_NAME">%1$s</xliff:g> 앱에서 다음 작업을 수행할 수 있습니다."</string>
-    <string name="device_admin_status" msgid="4252975713178851910">"관리자가 활성 상태이며 <xliff:g id="APP_NAME">%1$s</xliff:g> 앱에서 다음 작업을 수행할 수 있도록 허용합니다:"</string>
+    <string name="device_admin_status" msgid="4252975713178851910">"관리자가 활성 상태이며 <xliff:g id="APP_NAME">%1$s</xliff:g> 앱에서 다음 작업을 수행할 수 있도록 허용합니다."</string>
     <string name="profile_owner_add_title" msgid="6249331160676175009">"프로필 관리자를 활성화하시겠습니까?"</string>
     <string name="adding_profile_owner_warning" msgid="6469780138110334180">"계속하면 내 사용자를 내 관리자가 관리하게 되며 관리자가 관련 데이터와 내 개인 데이터를 저장할 수 있게 됩니다.\n\n관리자는 설정, 액세스, 앱, 사용자와 연결된 데이터(예: 네트워크 활동, 기기의 위치 정보)를 모니터링하고 관리할 수 있습니다."</string>
     <string name="untitled_apn" msgid="1230060359198685513">"제목 없음"</string>
@@ -2002,7 +2005,7 @@
     <string name="debug_hw_overdraw" msgid="2968692419951565417">"GPU 오버드로 디버깅"</string>
     <string name="disable_overlays" msgid="2074488440505934665">"HW 오버레이 사용 안함"</string>
     <string name="disable_overlays_summary" msgid="3578941133710758592">"화면 합성 목적으로 항상 GPU 사용"</string>
-    <string name="simulate_color_space" msgid="6745847141353345872">"색상 공간 적용"</string>
+    <string name="simulate_color_space" msgid="6745847141353345872">"색상 공간 시뮬레이션"</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"OpenGL 추적 사용 설정"</string>
     <string name="use_awesomeplayer" msgid="1583337008516364226">"AwesomePlayer 사용(지원 중단됨)"</string>
     <string name="use_awesomeplayer_summary" msgid="6757734070733387140">"대부분의 미디어 재생에 NuPlayer 대신 AwesomePlayer 사용"</string>
@@ -2023,7 +2026,7 @@
     <string name="window_animation_scale_title" msgid="6162587588166114700">"창 애니메이션 배율"</string>
     <string name="transition_animation_scale_title" msgid="387527540523595875">"전환 애니메이션 배율"</string>
     <string name="animator_duration_scale_title" msgid="3406722410819934083">"Animator 길이 배율"</string>
-    <string name="overlay_display_devices_title" msgid="5364176287998398539">"보조 디스플레이 시뮬레이트"</string>
+    <string name="overlay_display_devices_title" msgid="5364176287998398539">"보조 디스플레이 시뮬레이션"</string>
     <string name="debug_applications_category" msgid="4206913653849771549">"앱"</string>
     <string name="immediately_destroy_activities" msgid="8366775083630234121">"액티비티 유지 안함"</string>
     <string name="immediately_destroy_activities_summary" msgid="3592221124808773368">"사용자가 종료하는 즉시 바로 제거"</string>
@@ -2134,7 +2137,7 @@
     <string name="vpn_username" msgid="1863901629860867849">"사용자 이름"</string>
     <string name="vpn_password" msgid="6756043647233596772">"비밀번호"</string>
     <string name="vpn_save_login" msgid="6350322456427484881">"계정 정보 저장"</string>
-    <string name="vpn_not_used" msgid="9094191054524660891">"(사용되지 않음}"</string>
+    <string name="vpn_not_used" msgid="9094191054524660891">"(사용되지 않음)"</string>
     <string name="vpn_no_ca_cert" msgid="2095005387500126113">"(서버를 인증하지 않음)"</string>
     <string name="vpn_no_server_cert" msgid="2167487440231913330">"(서버에서 수신)"</string>
     <string name="vpn_cancel" msgid="1979937976123659332">"취소"</string>
@@ -2479,7 +2482,7 @@
     <string name="switch_on_text" msgid="1124106706920572386">"사용"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"사용 안함"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"화면 고정"</string>
-    <string name="screen_pinning_description" msgid="1137904524037468263">"이 설정이 사용 설정되어 있는 경우 화면 고정을 사용하여 고정 해제하기 전까지 현재 화면을 계속 표시할 수 있습니다.\n\n화면 고정을 사용하려면 다음 단계를 따르세요.\n\n1. 화면 고정을 사용하도록 설정했는지 확인합니다.\n\n2. 고정하려는 화면을 엽니다.\n\n3. 개요를 터치합니다.\n\n4. 위로 스와이프한 다음 핀 아이콘을 터치합니다."</string>
+    <string name="screen_pinning_description" msgid="1137904524037468263">"이 설정이 사용 설정되어 있는 경우 화면 고정을 사용하여 고정 해제하기 전까지 현재 화면을 계속 표시할 수 있습니다.\n\n화면 고정을 사용하려면 다음 단계를 따르세요.\n\n1. 화면 고정을 사용하도록 설정했는지 확인합니다.\n\n2. 고정하려는 화면을 엽니다.\n\n3. 최근 사용을 터치합니다.\n\n4. 위로 스와이프한 다음 핀 아이콘을 터치합니다."</string>
     <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"고정 해제 이전에 잠금해제 패턴 요청"</string>
     <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"고정 해제 이전에 PIN 요청"</string>
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"고정 해제 이전에 비밀번호 요청"</string>

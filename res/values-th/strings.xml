@@ -40,6 +40,8 @@
     <string name="sms_over_ims_off" msgid="8354792045992793959">"ปิดการรับส่ง SMS ผ่าน IMS"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"จำเป็นต้องเปิดการลงทะเบียน IMS"</string>
     <string name="ims_reg_required_off" msgid="1720570343422743943">"จำเป็นต้องปิดการลงทะเบียน IMS"</string>
+    <string name="volte_provisioned_flag_on" msgid="6023503159480902956">"เปิดการตั้งค่าสถานะที่จัดสรรแล้วของ VoLTE"</string>
+    <string name="volte_provisioned_flag_off" msgid="6168612015904744405">"ปิดการตั้งค่าสถานะที่จัดสรรแล้วของ VoLTE"</string>
     <string name="lte_ram_dump_on" msgid="8568568019520172177">"เปิดการดัมพ์หน่วยความจำระบบของ LTE"</string>
     <string name="lte_ram_dump_off" msgid="2514507918652378283">"ปิดการดัมพ์หน่วยความจำระบบของ LTE"</string>
     <string name="radioInfo_menu_viewADN" msgid="8743377494429930831">"ดูสมุดที่อยู่ของซิม"</string>
@@ -86,7 +88,7 @@
     <string name="battery_info_voltage_units" msgid="8658490792208288107">"mV"</string>
     <string name="battery_info_temperature_label" msgid="1968383098818648037">"อุณหภูมิแบตเตอรี่:"</string>
     <string name="battery_info_temperature_units" msgid="9098950587249987550">"° C"</string>
-    <string name="battery_info_uptime" msgid="5548545143573527992">"เวลาตั้งแต่บูต:"</string>
+    <string name="battery_info_uptime" msgid="5548545143573527992">"เวลาตั้งแต่เปิดเครื่อง:"</string>
     <string name="battery_info_awake_battery" msgid="2557725975486185849">"เวลาใช้งานเมื่อใช้แบตเตอรี่:"</string>
     <string name="battery_info_awake_plugged" msgid="176716874713478188">"เวลาใช้งานขณะชาร์จ:"</string>
     <string name="battery_info_screen_on" msgid="376277447175613889">"เวลาเปิดหน้าจอ:"</string>
@@ -202,8 +204,8 @@
     <string name="proxy_error_dismiss" msgid="4993171795485460060">"ตกลง"</string>
     <string name="proxy_error_invalid_host" msgid="8052095511862922213">"ชื่อโฮสต์ที่คุณพิมพ์ไม่ถูกต้อง"</string>
     <string name="proxy_error_invalid_exclusion_list" msgid="6467799485443290961">"รายการยกเว้นที่คุณพิมพ์มีรูปแบบไม่ถูกต้อง พิมพ์รายการโดเมนที่ยกเว้นโดยคั่นด้วยเครื่องหมายจุลภาค"</string>
-    <string name="proxy_error_empty_port" msgid="5539106187558215246">"คุณต้องกรอกข้อมูลในฟิลด์พอร์ต"</string>
-    <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"ฟิลด์พอร์ตจะต้องว่างถ้าไม่ได้ใส่ข้อมูลฟิลด์โฮสต์"</string>
+    <string name="proxy_error_empty_port" msgid="5539106187558215246">"คุณต้องกรอกข้อมูลในช่องพอร์ต"</string>
+    <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"ช่องพอร์ตจะต้องว่างถ้าไม่ได้ใส่ข้อมูลช่องโฮสต์"</string>
     <string name="proxy_error_invalid_port" msgid="2671425042711054494">"พอร์ตที่คุณพิมพ์ไม่ถูกต้อง"</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"พร็อกซี HTTP มีการใช้งานโดยเบราว์เซอร์ แต่อาจไม่มีการใช้งานโดยแอปพลิเคชันอื่น"</string>
     <string name="proxy_url_title" msgid="7185282894936042359">"PAC URL: "</string>
@@ -348,34 +350,34 @@
     <string name="security_settings_summary" msgid="967393342537986570">"ตั้งค่าตำแหน่งของฉัน ปลดล็อกหน้าจอ ล็อกซิมการ์ด ล็อกที่จัดเก็บข้อมูลรับรอง"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"ตั้งค่าตำแหน่งของฉัน การปลดล็อกหน้าจอ การล็อกที่จัดเก็บข้อมูลรับรอง"</string>
     <string name="security_passwords_title" msgid="2930627259125138363">"รหัสผ่าน"</string>
-    <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"การเข้ารหัส"</string>
-    <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"เข้ารหัสแท็บเล็ต"</string>
-    <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"เข้ารหัสโทรศัพท์"</string>
-    <string name="crypt_keeper_encrypted_summary" msgid="1868233637888132906">"ที่เข้ารหัส"</string>
-    <string name="crypt_keeper_desc" product="tablet" msgid="2876073029767953111">"คุณสามารถเข้ารหัสบัญชี การตั้งค่า แอปที่ดาวน์โหลดและข้อมูลของแอปนั้น สื่อ และไฟล์อื่นๆ หลังจากที่คุณเข้ารหัสแท็บเล็ตแล้ว ในกรณีที่คุณตั้งค่าล็อกหน้าจอไว้ (ที่เป็นรูปแบบ, PIN ตัวเลข หรือรหัสผ่าน) คุณจะต้องปลดล็อกหน้าจอเพื่อถอดรหัสแท็บเล็ตทุกครั้งที่เปิดเครื่อง วิธีการถอดรหัสอีกวิธีหนึ่งคือการรีเซ็ตข้อมูลเป็นค่าเริ่มต้น ซึ่งจะลบข้อมูลทั้งหมด\n\nการเข้ารหัสจะใช้เวลาอย่างน้อย 1 ชั่วโมง คุณต้องดำเนินการเมื่อแท็บเล็ตมีแบตเตอรี่ที่ชาร์จแล้วและเสียบปลั๊กไว้ตลอดขั้นตอนนี้ หากคุณขัดจังหวะการทำงาน ข้อมูลบางส่วนหรือทั้งหมดจะหายไป"</string>
-    <string name="crypt_keeper_desc" product="default" msgid="5573427498609458721">"คุณสามารถเข้ารหัสบัญชี การตั้งค่า แอปที่ดาวน์โหลดและข้อมูลของแอปนั้น สื่อ และไฟล์อื่นๆ หลังจากที่คุณเข้ารหัสโทรศัพท์แล้ว ในกรณีที่คุณตั้งค่าล็อกหน้าจอไว้ (ที่เป็นรูปแบบ, PIN ตัวเลข หรือรหัสผ่าน) คุณจะต้องปลดล็อกหน้าจอเพื่อถอดรหัสโทรศัพท์ทุกครั้งที่เปิดเครื่อง วิธีการถอดรหัสอีกวิธีหนึ่งคือการรีเซ็ตข้อมูลเป็นค่าเริ่มต้น ซึ่งจะลบข้อมูลทั้งหมด\n\nการเข้ารหัสจะใช้เวลาอย่างน้อย 1 ชั่วโมง คุณต้องดำเนินการเมื่อโทรศัพท์มีแบตเตอรี่ที่ชาร์จแล้วและเสียบปลั๊กไว้ตลอดขั้นตอนนี้ หากคุณขัดจังหวะการทำงาน ข้อมูลบางส่วนหรือทั้งหมดจะหายไป"</string>
-    <string name="crypt_keeper_button_text" product="tablet" msgid="1189623490604750854">"เข้ารหัสแท็บเล็ต"</string>
-    <string name="crypt_keeper_button_text" product="default" msgid="2008346408473255519">"เข้ารหัสโทรศัพท์"</string>
+    <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"การเข้ารหัสความปลอดภัย"</string>
+    <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"เข้ารหัสความปลอดภัยให้แท็บเล็ต"</string>
+    <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"เข้ารหัสความปลอดภัย"</string>
+    <string name="crypt_keeper_encrypted_summary" msgid="1868233637888132906">"เข้ารหัสความปลอดภัยแล้ว"</string>
+    <string name="crypt_keeper_desc" product="tablet" msgid="2876073029767953111">"คุณสามารถเข้ารหัสความปลอดภัยให้บัญชี การตั้งค่า แอปที่ดาวน์โหลดและข้อมูลของแอปนั้น สื่อ และไฟล์อื่นๆ หลังจากที่คุณเข้ารหัสความปลอดภัยให้แท็บเล็ตแล้ว ในกรณีที่คุณตั้งค่าล็อกหน้าจอไว้ (ที่เป็นรูปแบบ, PIN ตัวเลข หรือรหัสผ่าน) คุณจะต้องปลดล็อกหน้าจอเพื่อถอดรหัสแท็บเล็ตทุกครั้งที่เปิดเครื่อง วิธีการถอดรหัสอีกวิธีหนึ่งคือการรีเซ็ตข้อมูลเป็นค่าเริ่มต้น ซึ่งจะลบข้อมูลทั้งหมด\n\nการเข้ารหัสความปลอดภัยจะใช้เวลาอย่างน้อย 1 ชั่วโมง คุณต้องดำเนินการเมื่อแท็บเล็ตมีแบตเตอรี่ที่ชาร์จแล้วและเสียบปลั๊กไว้ตลอดขั้นตอนนี้ หากคุณขัดจังหวะการทำงาน ข้อมูลบางส่วนหรือทั้งหมดจะหายไป"</string>
+    <string name="crypt_keeper_desc" product="default" msgid="5573427498609458721">"คุณสามารถเข้ารหัสความปลอดภัยให้บัญชี การตั้งค่า แอปที่ดาวน์โหลดและข้อมูลของแอปนั้น สื่อ และไฟล์อื่นๆ หลังจากที่คุณเข้ารหัสความปลอดภัยแล้ว ในกรณีที่คุณตั้งค่าล็อกหน้าจอไว้ (ที่เป็นรูปแบบ, PIN ตัวเลข หรือรหัสผ่าน) คุณจะต้องปลดล็อกหน้าจอเพื่อถอดรหัสโทรศัพท์ทุกครั้งที่เปิดเครื่อง วิธีการถอดรหัสอีกวิธีหนึ่งคือการรีเซ็ตข้อมูลเป็นค่าเริ่มต้น ซึ่งจะลบข้อมูลทั้งหมด\n\nการเข้ารหัสความปลอดภัยจะใช้เวลาอย่างน้อย 1 ชั่วโมง คุณต้องดำเนินการเมื่อโทรศัพท์มีแบตเตอรี่ที่ชาร์จแล้วและเสียบปลั๊กไว้ตลอดขั้นตอนนี้ หากคุณขัดจังหวะการทำงาน ข้อมูลบางส่วนหรือทั้งหมดจะหายไป"</string>
+    <string name="crypt_keeper_button_text" product="tablet" msgid="1189623490604750854">"เข้ารหัสความปลอดภัยให้แท็บเล็ต"</string>
+    <string name="crypt_keeper_button_text" product="default" msgid="2008346408473255519">"เข้ารหัสความปลอดภัย"</string>
     <string name="crypt_keeper_low_charge_text" msgid="2029407131227814893">"ชาร์จแบตเตอรี่และลองอีกครั้ง"</string>
     <string name="crypt_keeper_unplugged_text" msgid="4785376766063053901">"เสียบที่ชาร์จของคุณ แล้วลองอีกครั้ง"</string>
     <string name="crypt_keeper_dialog_need_password_title" msgid="4058971800557767">"ไม่มี PIN หรือรหัสผ่านล็อกหน้าจอ"</string>
-    <string name="crypt_keeper_dialog_need_password_message" msgid="4071395977297369642">"คุณต้องตั้งค่า PIN หรือรหัสผ่านสำหรับการล็อกหน้าจอก่อนจึงจะเริ่มการเข้ารหัสได้"</string>
-    <string name="crypt_keeper_confirm_encrypt" msgid="736289627726831055">"คุณจำเป็นต้องวาดรูปแบบการปลดล็อกเพื่อยืนยันการเข้ารหัสอุปกรณ์"</string>
-    <string name="crypt_keeper_confirm_title" msgid="5100339496381875522">"เข้ารหัสหรือไม่"</string>
+    <string name="crypt_keeper_dialog_need_password_message" msgid="4071395977297369642">"คุณต้องตั้งค่า PIN หรือรหัสผ่านสำหรับการล็อกหน้าจอก่อนจึงจะเริ่มการเข้ารหัสความปลอดภัยได้"</string>
+    <string name="crypt_keeper_confirm_encrypt" msgid="736289627726831055">"คุณจำเป็นต้องวาดรูปแบบการปลดล็อกเพื่อยืนยันการเข้ารหัสความปลอดภัยให้อุปกรณ์"</string>
+    <string name="crypt_keeper_confirm_title" msgid="5100339496381875522">"เข้ารหัสความปลอดภัยไหม"</string>
     <string name="crypt_keeper_final_desc" product="tablet" msgid="4453629424172409792">"การเข้ารหัสนี้ไม่สามารถย้อนกลับได้และข้อมูลจะสูญหายหากการดำเนินการหยุดชะงัก การเข้ารหัสจะใช้เวลาอย่างน้อยหนึ่งชั่วโมง โดยในระหว่างนั้น แท็บเล็ตจะรีสตาร์ทหลายครั้ง"</string>
-    <string name="crypt_keeper_final_desc" product="default" msgid="5682944380460921880">"การเข้ารหัสนี้ไม่สามารถย้อนกลับได้และข้อมูลจะสูญหายหากการดำเนินการหยุดชะงัก การเข้ารหัสจะใช้เวลาอย่างน้อยหนึ่งชั่วโมง โดยในระหว่างนั้น โทรศัพท์จะรีสตาร์ทหลายครั้ง"</string>
-    <string name="crypt_keeper_setup_title" msgid="1783951453124244969">"กำลังเข้ารหัส"</string>
-    <string name="crypt_keeper_setup_description" product="tablet" msgid="6689952371032099350">"รอสักครู่ขณะกำลังเข้ารหัสแท็บเล็ตของคุณ เสร็จสมบูรณ์ <xliff:g id="PERCENT">^1</xliff:g>"</string>
-    <string name="crypt_keeper_setup_description" product="default" msgid="951918761585534875">"รอสักครู่ขณะกำลังเข้ารหัสโทรศัพท์ของคุณ เสร็จสมบูรณ์ <xliff:g id="PERCENT">^1</xliff:g>%"</string>
-    <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="1655047311546745695">"โปรดรอสักครู่ขณะเข้ารหัสแท็บเล็ต เหลืออีก <xliff:g id="DURATION">^1</xliff:g>"</string>
-    <string name="crypt_keeper_setup_time_remaining" product="default" msgid="1862964662304683072">"โปรดรอสักครู่ขณะเข้ารหัสโทรศัพท์ เหลืออีก <xliff:g id="DURATION">^1</xliff:g>"</string>
+    <string name="crypt_keeper_final_desc" product="default" msgid="5682944380460921880">"การเข้ารหัสความปลอดภัยนี้ไม่สามารถย้อนกลับได้และข้อมูลจะสูญหายหากการดำเนินการหยุดชะงัก การเข้ารหัสจะใช้เวลาอย่างน้อยหนึ่งชั่วโมง โดยในระหว่างนั้น โทรศัพท์จะรีสตาร์ทหลายครั้ง"</string>
+    <string name="crypt_keeper_setup_title" msgid="1783951453124244969">"กำลังเข้ารหัสความปลอดภัย"</string>
+    <string name="crypt_keeper_setup_description" product="tablet" msgid="6689952371032099350">"รอสักครู่ขณะกำลังเข้ารหัสความปลอดภัยให้แท็บเล็ตของคุณ เสร็จสมบูรณ์ไปแล้ว <xliff:g id="PERCENT">^1</xliff:g>"</string>
+    <string name="crypt_keeper_setup_description" product="default" msgid="951918761585534875">"รอสักครู่ขณะกำลังเข้ารหัสความปลอดภัยให้คุณ เสร็จสมบูรณ์ไปแล้ว <xliff:g id="PERCENT">^1</xliff:g>%"</string>
+    <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="1655047311546745695">"โปรดรอสักครู่ขณะเข้ารหัสความปลอดภัยให้แท็บเล็ต เหลืออีก <xliff:g id="DURATION">^1</xliff:g>"</string>
+    <string name="crypt_keeper_setup_time_remaining" product="default" msgid="1862964662304683072">"โปรดรอสักครู่ขณะเข้ารหัสความปลอดภัย เหลืออีก <xliff:g id="DURATION">^1</xliff:g>"</string>
     <string name="crypt_keeper_force_power_cycle" product="tablet" msgid="556504311511212648">"ปิดแท็บเล็ตแล้วเปิดอีกครั้งเพื่อปลดล็อก"</string>
     <string name="crypt_keeper_force_power_cycle" product="default" msgid="1794353635603020327">"ปิดโทรศัพท์แล้วเปิดอีกครั้งเพื่อปลดล็อก"</string>
     <string name="crypt_keeper_warn_wipe" msgid="2738374897337991667">"คำเตือน: ระบบจะล้างข้อมูลในอุปกรณ์หลังจากปลดล็อกไม่สำเร็จอีก <xliff:g id="COUNT">^1</xliff:g> ครั้ง!"</string>
     <string name="crypt_keeper_enter_password" msgid="2223340178473871064">"พิมพ์รหัสผ่านของคุณ"</string>
-    <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"การเข้ารหัสไม่สำเร็จ"</string>
-    <string name="crypt_keeper_failed_summary" product="tablet" msgid="4478225241476039013">"การเข้ารหัสถูกขัดจังหวะและไม่สามารถดำเนินการให้เสร็จสิ้น คุณจึงไม่สามารถเข้าถึงข้อมูลในแท็บเล็ตได้อีกต่อไป\n\nในการใช้งานแท็บเล็ตต่อ คุณต้องรีเซ็ตข้อมูลเป็นค่าเริ่มต้น เมื่อคุณตั้งค่าแท็บเล็ตหลังจากรีเซ็ตแล้ว คุณจะสามารถกู้คืนข้อมูลทั้งหมดที่มีการสำรองไว้ในบัญชี Google ของคุณได้"</string>
-    <string name="crypt_keeper_failed_summary" product="default" msgid="3083477162766772532">"การเข้ารหัสถูกขัดจังหวะและไม่สามารถดำเนินการให้เสร็จสิ้น คุณจึงไม่สามารถเข้าถึงข้อมูลในโทรศัพท์ได้อีกต่อไป\n\nในการใช้งานโทรศัพท์ต่อ คุณต้องรีเซ็ตข้อมูลเป็นค่าเริ่มต้น เมื่อคุณตั้งค่าโทรศัพท์หลังจากรีเซ็ตแล้ว คุณจะสามารถกู้คืนข้อมูลทั้งหมดที่มีการสำรองไว้ในบัญชี Google ของคุณได้"</string>
+    <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"การเข้ารหัสความปลอดภัยไม่สำเร็จ"</string>
+    <string name="crypt_keeper_failed_summary" product="tablet" msgid="4478225241476039013">"การเข้ารหัสความปลอดภัยถูกขัดจังหวะและไม่สามารถดำเนินการให้เสร็จสิ้น คุณจึงไม่สามารถเข้าถึงข้อมูลในแท็บเล็ตได้อีกต่อไป\n\nในการใช้งานแท็บเล็ตต่อ คุณต้องรีเซ็ตข้อมูลเป็นค่าเริ่มต้น เมื่อคุณตั้งค่าแท็บเล็ตหลังจากรีเซ็ตแล้ว คุณจะสามารถกู้คืนข้อมูลทั้งหมดที่มีการสำรองไว้ในบัญชี Google ของคุณได้"</string>
+    <string name="crypt_keeper_failed_summary" product="default" msgid="3083477162766772532">"การเข้ารหัสความปลอดภัยถูกขัดจังหวะและไม่สามารถดำเนินการให้เสร็จสิ้น คุณจึงไม่สามารถเข้าถึงข้อมูลในโทรศัพท์ได้อีกต่อไป\n\nในการใช้งานโทรศัพท์ต่อ คุณต้องรีเซ็ตข้อมูลเป็นค่าเริ่มต้น เมื่อคุณตั้งค่าโทรศัพท์หลังจากรีเซ็ตแล้ว คุณจะสามารถกู้คืนข้อมูลทั้งหมดที่มีการสำรองไว้ในบัญชี Google ของคุณได้"</string>
     <string name="crypt_keeper_data_corrupt_title" msgid="8759119849089795751">"การถอดรหัสล้มเหลว"</string>
     <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="3775740783651700375">"รหัสผ่านที่คุณป้อนถูกต้อง แต่ปรากฏว่ามีข้อมูลเสียหาย \n\nหากต้องการใช้แท็บเล็ตต่อ คุณต้องรีเซ็ตเครื่องเป็นค่าเริ่มต้นจากโรงงาน เมื่อคุณตั้งค่าแท็บเล็ตหลังรีเซ็ตแล้ว คุณจะสามารถกู้คืนข้อมูลที่ได้สำรองไว้ในบัญชี Google ได้"</string>
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="6898436151871328007">"รหัสผ่านที่คุณป้อนถูกต้อง แต่ปรากฏว่ามีข้อมูลเสียหาย \n\nหากต้องการใช้โทรศัพท์ต่อ คุณต้องรีเซ็ตเครื่องเป็นค่าเริ่มต้นจากโรงงาน เมื่อคุณตั้งค่าโทรศัพท์หลังรีเซ็ตแล้ว คุณจะสามารถกู้คืนข้อมูลที่ได้สำรองไว้ในบัญชี Google ได้"</string>
@@ -389,7 +391,7 @@
     <string name="unlock_backup_info_summary" msgid="108524727803788172">"เมื่อ Face Unlock ไม่สามารถระบุตัวคุณได้ คุณต้องการจะปลดล็อกอย่างไร"</string>
     <string name="unlock_set_unlock_off_title" msgid="7117155352183088342">"ไม่มี"</string>
     <string name="unlock_set_unlock_off_summary" msgid="94361581669110415"></string>
-    <string name="unlock_set_unlock_none_title" msgid="5679243878975864640">"กวาดนิ้ว"</string>
+    <string name="unlock_set_unlock_none_title" msgid="5679243878975864640">"เลื่อน"</string>
     <string name="unlock_set_unlock_none_summary" msgid="8914673583104628191">"ไม่มีการรักษาความปลอดภัย"</string>
     <string name="unlock_set_unlock_biometric_weak_title" msgid="2227215291604628670">"Face Unlock"</string>
     <string name="unlock_set_unlock_biometric_weak_summary" msgid="180083326982058964">"ความปลอดภัยระดับต่ำ เป็นการทดลอง"</string>
@@ -402,7 +404,7 @@
     <string name="unlock_disable_frp_warning_content" msgid="7070131836291098244">"คุณลักษณะการปกป้องอุปกรณ์จะไม่ทำงานอีกต่อไป"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"ปิดใช้งานโดยผู้ดูแลระบบ นโยบายการเข้ารหัส หรือที่จัดเก็บข้อมูลรับรอง"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"ไม่มี"</string>
-    <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"กวาดนิ้ว"</string>
+    <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"เลื่อน"</string>
     <string name="unlock_set_unlock_mode_biometric_weak" msgid="3008473624490350142">"Face Unlock"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="7837270780919299289">"รูปแบบ"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="3541326261341386690">"PIN"</string>
@@ -558,7 +560,7 @@
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"จำการตั้งค่า"</string>
     <string name="wifi_assistant_title" msgid="2553267316621598101">"Wi‑Fi Assistant"</string>
     <string name="connected_via_wfa" msgid="3805736726317410714">"เชื่อมต่อผ่านตัวช่วย Wi-Fi อยู่"</string>
-    <string name="wifi_display_settings_title" msgid="2925465988657380522">"ส่งหน้าจอ"</string>
+    <string name="wifi_display_settings_title" msgid="2925465988657380522">"แคสต์หน้าจอ"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"เปิดใช้การแสดงผลแบบไร้สาย"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"ไม่พบอุปกรณ์ในบริเวณใกล้เคียง"</string>
     <string name="wifi_display_status_connecting" msgid="5688608834000748607">"กำลังเชื่อมต่อ"</string>
@@ -729,7 +731,7 @@
     <string name="wifi_p2p_menu_search" msgid="3436429984738771974">"ค้นหาอุปกรณ์"</string>
     <string name="wifi_p2p_menu_searching" msgid="2396704492143633876">"กำลังค้นหา…"</string>
     <string name="wifi_p2p_menu_rename" msgid="8448896306960060415">"เปลี่ยนชื่ออุปกรณ์"</string>
-    <string name="wifi_p2p_peer_devices" msgid="299526878463303432">"อุปกรณ์สำหรับ Peer"</string>
+    <string name="wifi_p2p_peer_devices" msgid="299526878463303432">"อุปกรณ์สำหรับเชื่อมต่อ"</string>
     <string name="wifi_p2p_remembered_groups" msgid="3847022927914068230">"กลุ่มที่จดจำ"</string>
     <string name="wifi_p2p_failed_connect_message" msgid="8921447388048243547">"ไม่สามารถเชื่อมต่อ"</string>
     <string name="wifi_p2p_failed_rename_message" msgid="2562182284946936380">"ไม่สามารถเปลี่ยนชื่ออุปกรณ์"</string>
@@ -826,7 +828,7 @@
     <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"ในขณะวางอยู่บนแท่นชาร์จ"</string>
     <string name="screensaver_settings_summary_off" msgid="2481581696365146473">"ปิด"</string>
     <string name="screensaver_settings_disabled_prompt" msgid="3857507943322777651">"หากต้องการควบคุมสิ่งที่จะเกิดขึ้นเมื่อโทรศัพท์วางอยู่บนแท่นชาร์จและ/หรืออยู่ในโหมดสลีป ให้เปิดโหมดเดย์ดรีมเอาไว้"</string>
-    <string name="screensaver_settings_when_to_dream" msgid="8352267826043957746">"เข้าโหมดเดย์ดรีมเมื่อ"</string>
+    <string name="screensaver_settings_when_to_dream" msgid="8352267826043957746">"เข้าโหมดเดย์ดรีม"</string>
     <string name="screensaver_settings_dream_start" msgid="4998187847985120168">"เริ่มเลย"</string>
     <string name="screensaver_settings_button" msgid="7292214707625717013">"การตั้งค่า"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"ปรับความสว่างอัตโนมัติ"</string>
@@ -875,11 +877,12 @@
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"การอัปเดตระบบ"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"เวอร์ชันของ Android"</string>
+    <string name="security_patch" msgid="8438384045870296634">"ระดับแพตช์ความปลอดภัยของ Android"</string>
     <string name="model_number" msgid="3765737700545384794">"หมายเลขรุ่น"</string>
     <string name="fcc_equipment_id" msgid="149114368246356737">"รหัสอุปกรณ์"</string>
     <string name="baseband_version" msgid="1848990160763524801">"เวอร์ชันเบสแบนด์"</string>
     <string name="kernel_version" msgid="9192574954196167602">"เวอร์ชันเคอร์เนล"</string>
-    <string name="build_number" msgid="3075795840572241758">"หมายเลขบิวด์"</string>
+    <string name="build_number" msgid="3075795840572241758">"หมายเลขบิลด์"</string>
     <string name="selinux_status" msgid="6212165375172061672">"สถานะ SELinux"</string>
     <string name="device_info_not_available" msgid="8062521887156825182">"ใช้งานไม่ได้"</string>
     <string name="device_status_activity_title" msgid="1411201799384697904">"สถานะ"</string>
@@ -1000,10 +1003,10 @@
     <string name="menu_save" msgid="8109345640668285399">"บันทึก"</string>
     <string name="menu_cancel" msgid="2194502410474697474">"ยกเลิก"</string>
     <string name="error_title" msgid="7631322303341024692"></string>
-    <string name="error_name_empty" msgid="8418502878620394756">"ต้องใส่ข้อมูลในฟิลด์ชื่อ"</string>
+    <string name="error_name_empty" msgid="8418502878620394756">"ต้องใส่ข้อมูลในช่องชื่อ"</string>
     <string name="error_apn_empty" msgid="6056233831214537267">"ต้องใส่ข้อมูล APN"</string>
-    <string name="error_mcc_not3" msgid="4560171714156251661">"ฟิลด์ MCC ต้องเป็นเลข 3 หลัก"</string>
-    <string name="error_mnc_not23" msgid="8418177072458379439">"ฟิลด์ MNC ต้องมีเลขอย่างน้อย 2 หรือ 3 หลัก"</string>
+    <string name="error_mcc_not3" msgid="4560171714156251661">"ช่อง MCC ต้องเป็นเลข 3 หลัก"</string>
+    <string name="error_mnc_not23" msgid="8418177072458379439">"ช่อง MNC ต้องมีเลขอย่างน้อย 2 หรือ 3 หลัก"</string>
     <string name="restore_default_apn" msgid="8178010218751639581">"กำลังเรียกคืนการตั้งค่า APN เริ่มต้น"</string>
     <string name="menu_restore" msgid="8260067415075573273">"รีเซ็ตเป็นค่าเริ่มต้น"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"รีเซ็ตการตั้งค่า APN กลับเป็นค่าเริ่มต้นเรียบร้อยแล้ว"</string>
@@ -1104,7 +1107,7 @@
     <string name="location_mode_screen_title" msgid="4528716772270246542">"โหมดตำแหน่ง"</string>
     <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"ใช้ GPS, Wi-Fi และเครือข่ายมือถือเพื่อระบุตำแหน่ง"</string>
     <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"ใช้ Wi-Fi และเครือข่ายมือถือเพื่อระบุตำแหน่ง"</string>
-    <string name="location_mode_sensors_only_description" msgid="7178415350457794366">"ใช้ GPS เพื่อหาตำแหน่งของคุณ"</string>
+    <string name="location_mode_sensors_only_description" msgid="788127681455735699">"ใช้ GPS เพื่อระบุตำแหน่ง"</string>
     <string name="location_network_based" msgid="6010456018401296590">"ตำแหน่ง Wi-Fi และเครือข่าย"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"ให้แอปต่างๆ ใช้บริการระบุตำแหน่งของ Google เพื่อระบุตำแหน่งโดยประมาณของคุณรวดเร็วยิ่งขึ้น โดยจะมีการรวบรวมและส่งข้อมูลตำแหน่งที่ไม่ระบุชื่อให้ Google"</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"ตำแหน่งที่กำหนดโดย WiFi"</string>
@@ -1192,7 +1195,7 @@
     <string name="install_all_warning" product="default" msgid="8113734576826384682">"โทรศัพท์และข้อมูลส่วนบุคคลของคุณมีความเสี่ยงยิ่งขึ้นที่จะถูกโจมตีจากแอปพลิเคชันที่ไม่รู้จักแหล่งที่มา คุณยอมรับว่าคุณจะเป็นผู้รับผิดชอบแต่เพียงผู้เดียวต่อความเสียหายใดๆ ที่เกิดกับโทรศัพท์หรือหรือการสูญเสียข้อมูลที่เป็นผลจากการใช้แอปพลิเคชันเหล่านี้"</string>
     <string name="advanced_settings" msgid="1777249286757067969">"การตั้งค่าขั้นสูง"</string>
     <string name="advanced_settings_summary" msgid="4016682978071086747">"เปิดใช้งานตัวเลือกการตั้งค่าเพิ่มเติม"</string>
-    <string name="application_info_label" msgid="5736524913065714880">"ข้อมูลแอปพลิเคชัน"</string>
+    <string name="application_info_label" msgid="5736524913065714880">"ข้อมูลแอป"</string>
     <string name="storage_label" msgid="8700867073480107253">"พื้นที่เก็บข้อมูล"</string>
     <string name="auto_launch_label" msgid="3012617472833815382">"เริ่มใช้งานตามค่าเริ่มต้น"</string>
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"ค่าเริ่มต้น"</string>
@@ -1205,7 +1208,7 @@
     <string name="force_stop" msgid="7435006169872876756">"บังคับให้หยุด"</string>
     <string name="total_size_label" msgid="1048676419552557254">"ทั้งหมด"</string>
     <string name="application_size_label" msgid="8494609207373874267">"แอปพลิเคชัน"</string>
-    <string name="external_code_size_label" msgid="3459343140355961335">"แอปพลิเคชันสำหรับจัดเก็บข้อมูล USB"</string>
+    <string name="external_code_size_label" msgid="3459343140355961335">"แอปสำหรับจัดเก็บข้อมูล USB"</string>
     <string name="data_size_label" msgid="8679376373625710107">"ข้อมูล"</string>
     <string name="external_data_size_label" product="nosdcard" msgid="7533821466482000453">"ข้อมูลที่จัดเก็บใน USB"</string>
     <string name="external_data_size_label" product="default" msgid="626414192825329708">"การ์ด SD"</string>
@@ -1230,7 +1233,7 @@
     <string name="show_background_processes" msgid="2009840211972293429">"แสดงกระบวนการที่เก็บแคชไว้"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"รีเซ็ตค่ากำหนดแอปพลิเคชัน"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"รีเซ็ตค่ากำหนดแอปหรือไม่"</string>
-    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"การดำเนินการนี้จะรีเซ็ตค่ากำหนดทั้งหมดสำหรับ:\n\n "<li>"แอปที่ปิดใช้งาน"</li>\n" "<li>"การแจ้งเตือนแอปที่ปิดใช้งาน"</li>\n" "<li>"แอปพลิเคชันเริ่มต้นสำหรับการทำงานต่างๆ"</li>\n" "<li>"}ข้อจำกัดข้อมูลในพื้นหลังสำหรับแอป"</li>\n" "<li>"ข้อจำกัดสิทธิ์ใดๆ"</li>\n\n" ทั้งนี้ คุณจะไม่สูญเสียข้อมูลใดๆ ของแอป"</string>
+    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"การดำเนินการนี้จะรีเซ็ตค่ากำหนดทั้งหมดสำหรับ:\n\n "<li>"แอปที่ปิดใช้งาน"</li>\n" "<li>"การแจ้งเตือนแอปที่ปิดใช้งาน"</li>\n" "<li>"แอปพลิเคชันเริ่มต้นสำหรับการทำงานต่างๆ"</li>\n" "<li>"ข้อจำกัดข้อมูลในพื้นหลังสำหรับแอป"</li>\n" "<li>"ข้อจำกัดสิทธิ์ใดๆ"</li>\n\n" ทั้งนี้ คุณจะไม่สูญเสียข้อมูลใดๆ ของแอป"</string>
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"รีเซ็ตแอปพลิเคชัน"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"จัดการพื้นที่"</string>
     <string name="filter" msgid="2018011724373033887">"ตัวกรอง"</string>
@@ -1272,7 +1275,7 @@
     <string name="computing_size" msgid="1599186977475211186">"กำลังคำนวณ..."</string>
     <string name="invalid_size_value" msgid="7563537715280712285">"คำนวณขนาดแพ็กเกจไม่ได้"</string>
     <string name="empty_list_msg" msgid="5993162337235907160">"คุณไม่ได้ติดตั้งแอปพลิเคชันของบุคคลที่สามไว้เลย"</string>
-    <string name="version_text" msgid="9189073826278676425">"เวอร์ชันของ <xliff:g id="VERSION_NUM">%1$s</xliff:g>"</string>
+    <string name="version_text" msgid="9189073826278676425">"เวอร์ชัน <xliff:g id="VERSION_NUM">%1$s</xliff:g>"</string>
     <string name="move_app" msgid="5042838441401731346">"ย้าย"</string>
     <string name="move_app_to_internal" product="tablet" msgid="2299714147283854957">"ย้ายไปยังแท็บเล็ต"</string>
     <string name="move_app_to_internal" product="default" msgid="3895430471913858185">"ย้ายไปที่โทรศัพท์"</string>
@@ -1460,7 +1463,7 @@
     <string name="debug_view_attributes" msgid="6485448367803310384">"เปิดใช้การตรวจสอบแอตทริบิวต์มุมมอง"</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"อนุญาตให้แก้ไขข้อบกพร่อง USB หรือไม่"</string>
     <string name="adb_warning_message" msgid="7316799925425402244">"การแก้ไขข้อบกพร่อง USB มีไว้เพื่อการพัฒนาเท่านั้น ให้ใช้การแก้ไขนี้เพื่อคัดลอกข้อมูลระหว่างคอมพิวเตอร์และอุปกรณ์ ติดตั้งแอปพลิเคชันบนอุปกรณ์โดยไม่มีการแจ้งเตือน และอ่านข้อมูลบันทึก"</string>
-    <string name="adb_keys_warning_message" msgid="6932230298032192937">"ยกเลิกการเข้าถึงเพื่อแก้ปัญหา USB จากคอมพิวเตอร์ทุกเครื่องที่คุณได้ให้สิทธิ์ก่อนหน้านี้หรือไม่"</string>
+    <string name="adb_keys_warning_message" msgid="6932230298032192937">"ยกเลิกการเข้าถึงเพื่อแก้ปัญหาผ่าน USB จากคอมพิวเตอร์ทุกเครื่องที่คุณได้ให้สิทธิ์ก่อนหน้านี้ไหม"</string>
     <string name="dev_settings_warning_title" msgid="7244607768088540165">"อนุญาตการตั้งค่าสำหรับการพัฒนาหรือไม่"</string>
     <string name="dev_settings_warning_message" msgid="2298337781139097964">"การตั้งค่านี้มีไว้เพื่อการพัฒนาเท่านั้น จึงอาจทำให้อุปกรณ์และแอปพลิเคชันที่มีอยู่เสียหายหรือทำงานผิดพลาดได้"</string>
     <string name="verify_apps_over_usb_title" msgid="4177086489869041953">"ยืนยันแอปพลิเคชันผ่าน USB"</string>
@@ -1499,7 +1502,7 @@
     <string name="accessibility_system_title" msgid="7187919089874130484">"ระบบ"</string>
     <string name="accessibility_display_title" msgid="7610175687949675162">"การแสดง"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"คำอธิบายภาพ"</string>
-    <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"ท่าทางสัมผัสการขยาย"</string>
+    <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"ใช้นิ้วในการย่อขยาย"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2380627654189671754">"เมื่อเปิดคุณลักษณะนี้ คุณสามารถย่อและขยายด้วยการแตะสามครั้งบนหน้าจอ\n\nขณะที่ขยายอยู่ คุณสามารถ:\n"<ul><li>"แพน: ใช้อย่างน้อยสองนิ้วลากผ่านหน้าจอ"</li>\n<li>"ปรับระดับการย่อ/ขยาย: บีบหรือแยกอย่างน้อยสองนิ้วเพื่อปรับระดับ"</li></ul>\n\n"คุณยังสามารถขยายสิ่งที่นิ้วคุณแตะอยู่ชั่วคราวได้ด้วยการแตะสามครั้งค้างไว้ เมื่อขยายแล้ว คุณสามารถใช้นิ้วลากเพื่อดูส่วนต่างๆ ของหน้าจอได้ด้วย ยกนิ้วขึ้นเพื่อกลับไปยังสถานะก่อนหน้า\n\nหมายเหตุ: การแตะสามครั้งเพื่อขยายใช้ได้กับทุกส่วนยกเว้นแป้นพิมพ์และแถบนำทาง"</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"ทางลัดสำหรับการเข้าถึง"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"เปิด"</string>
@@ -1576,7 +1579,7 @@
     <string name="print_settings" msgid="4742428530112487843">"การพิมพ์"</string>
     <string name="print_settings_title" msgid="3685449667822217816">"บริการการพิมพ์"</string>
     <string name="print_service_security_warning_title" msgid="2338435517408144841">"ใช้ <xliff:g id="SERVICE">%1$s</xliff:g> หรือไม่"</string>
-    <string name="print_service_security_warning_summary" msgid="7567131958613064363">"เอกสารของคุณอาจต้องผ่านมากกว่าหนึ่ง เซิร์ฟเวอร์ระหว่างส่งไปยังเครื่องพิมพ์"</string>
+    <string name="print_service_security_warning_summary" msgid="7567131958613064363">"เอกสารของคุณอาจต้องผ่านมากกว่าหนึ่งเซิร์ฟเวอร์ระหว่างส่งไปยังเครื่องพิมพ์"</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"ไม่ได้ติดตั้งบริการใดไว้"</string>
     <string name="print_no_printers_found" msgid="989018646884973683">"ไม่พบเครื่องพิมพ์"</string>
     <string name="print_menu_item_settings" msgid="6591330373682227082">"การตั้งค่า"</string>
@@ -1587,7 +1590,7 @@
     <string name="print_menu_item_add_printer" msgid="8251218970577291032">"เพิ่มเครื่องพิมพ์"</string>
     <string name="print_menu_item_search" msgid="7025589328240514553">"ค้นหา"</string>
     <string name="print_searching_for_printers" msgid="4680248496457576358">"กำลังค้นหาเครื่องพิมพ์"</string>
-    <string name="print_service_disabled" msgid="7739452396114245222">"ปิดใช้งานบริการไว้"</string>
+    <string name="print_service_disabled" msgid="7739452396114245222">"ปิดใช้บริการไว้"</string>
     <string name="print_print_jobs" msgid="3582094777756968793">"งานพิมพ์"</string>
     <string name="print_print_job" msgid="7563741676053287211">"งานพิมพ์"</string>
     <string name="print_restart" msgid="8373999687329384202">"เริ่มต้นใหม่"</string>
@@ -1636,7 +1639,7 @@
     <string name="power_flashlight" msgid="7794409781003567614">"ไฟฉาย"</string>
     <string name="power_wifi" msgid="1135085252964054957">"WiFi"</string>
     <string name="power_bluetooth" msgid="4373329044379008289">"บลูทูธ"</string>
-    <string name="power_cell" msgid="6596471490976003056">"การไม่ใช้งานเครือข่าย"</string>
+    <string name="power_cell" msgid="6596471490976003056">"สแตนด์บายเครือข่าย"</string>
     <string name="power_phone" msgid="5392641106474567277">"การโทรด้วยเสียง"</string>
     <string name="power_idle" product="tablet" msgid="4612478572401640759">"ไม่มีการใช้งานแท็บเล็ต"</string>
     <string name="power_idle" product="default" msgid="9055659695602194990">"ไม่มีการใช้งานโทรศัพท์"</string>
@@ -1662,7 +1665,7 @@
     <string name="usage_type_computed_power" msgid="5862792259009981479">"การใช้พลังงานที่คำนวณได้"</string>
     <string name="usage_type_actual_power" msgid="7047814738685578335">"การใช้พลังงานที่พบเห็น"</string>
     <string name="battery_action_stop" msgid="649958863744041872">"บังคับให้หยุด"</string>
-    <string name="battery_action_app_details" msgid="7861051816778419018">"ข้อมูลแอปพลิเคชัน"</string>
+    <string name="battery_action_app_details" msgid="7861051816778419018">"ข้อมูลแอป"</string>
     <string name="battery_action_app_settings" msgid="4570481408106287454">"การตั้งค่าแอปพลิเคชัน"</string>
     <string name="battery_action_display" msgid="7338551244519110831">"การตั้งค่าหน้าจอ"</string>
     <string name="battery_action_wifi" msgid="8181553479021841207">"การตั้งค่า WiFi"</string>
@@ -1949,8 +1952,8 @@
     <string name="header_add_an_account" msgid="756108499532023798">"เพิ่มบัญชี"</string>
     <string name="finish_button_label" msgid="481587707657751116">"เสร็จสิ้น"</string>
     <string name="really_remove_account_title" msgid="8800653398717172460">"นำบัญชีออกหรือไม่"</string>
-    <string name="really_remove_account_message" product="tablet" msgid="1936147502815641161">"การนำบัญชีนี้ออกจะเป็นการลบข้อความ รายชื่อติดต่อ และข้อมูลอื่นๆ ทั้งหมดของบัญชีออกจากแท็บเล็ต!"</string>
-    <string name="really_remove_account_message" product="default" msgid="3483528757922948356">"การนำบัญชีนี้ออกจะเป็นการลบข้อความ รายชื่อติดต่อ และข้อมูลอื่นๆ ทั้งหมดจากโทรศัพท์!"</string>
+    <string name="really_remove_account_message" product="tablet" msgid="1936147502815641161">"การนำบัญชีนี้ออกจะเป็นการลบข้อความ รายชื่อติดต่อ และข้อมูลอื่นๆ ทั้งหมดของบัญชีออกจากแท็บเล็ต"</string>
+    <string name="really_remove_account_message" product="default" msgid="3483528757922948356">"การนำบัญชีนี้ออกจะเป็นการลบข้อความ รายชื่อติดต่อ และข้อมูลอื่นๆ ทั้งหมดจากโทรศัพท์"</string>
     <string name="remove_account_failed" msgid="4010643669489606536">"ผู้ดูแลระบบไม่อนุญาตให้ทำการเปลี่ยนแปลงนี้"</string>
     <string name="provider_label" msgid="7724593781904508866">"การสมัครรับข้อมูลแบบ Push"</string>
     <!-- no translation found for sync_item_title (4782834606909853006) -->
@@ -1980,8 +1983,8 @@
     <string name="debug_app_set" msgid="2063077997870280017">"แอปพลิเคชันแก้ไขข้อบกพร่อง: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="select_application" msgid="5156029161289091703">"เลือกแอปพลิเคชัน"</string>
     <string name="no_application" msgid="2813387563129153880">"ไม่มี"</string>
-    <string name="wait_for_debugger" msgid="1202370874528893091">"รอเครื่องมือแก้ไขข้อบกพร่อง"</string>
-    <string name="wait_for_debugger_summary" msgid="1766918303462746804">"แอปฯ ที่ถูกแก้จะรอให้เครื่องซ่อมแซมเพิ่มก่อนทำงาน"</string>
+    <string name="wait_for_debugger" msgid="1202370874528893091">"รอโปรแกรมแก้ไขข้อบกพร่อง"</string>
+    <string name="wait_for_debugger_summary" msgid="1766918303462746804">"แอปพลิเคชันที่มีการแก้ปัญหาจะรอให้โปรแกรมแก้ไขข้อบกพร่องแนบข้อมูลก่อนปฏิบัติการ"</string>
     <string name="debug_input_category" msgid="1811069939601180246">"อินพุต"</string>
     <string name="debug_drawing_category" msgid="6755716469267367852">"การวาดภาพ"</string>
     <string name="debug_hw_drawing_category" msgid="6220174216912308658">"การแสดงผลที่มีการเร่งด้วยฮาร์ดแวร์"</string>
@@ -1999,11 +2002,11 @@
     <string name="show_hw_screen_updates_summary" msgid="1115593565980196197">"แฟลชมุมมองภายในหน้าต่างเมื่อวาดด้วย GPU"</string>
     <string name="show_hw_layers_updates" msgid="5645728765605699821">"แสดงอัปเดตเลเยอร์ฮาร์ดแวร์"</string>
     <string name="show_hw_layers_updates_summary" msgid="5296917233236661465">"เลเยอร์ฮาร์ดแวร์กะพริบเป็นสีเขียว เมื่อมีการอัปเดต"</string>
-    <string name="debug_hw_overdraw" msgid="2968692419951565417">"ดีบักการวาดทับ GPU"</string>
+    <string name="debug_hw_overdraw" msgid="2968692419951565417">"แก้ปัญหาการวาดทับด้วย GPU"</string>
     <string name="disable_overlays" msgid="2074488440505934665">"ปิดใช้งานการวางซ้อน HW"</string>
     <string name="disable_overlays_summary" msgid="3578941133710758592">"ใช้ GPU ในการจัดวางองค์ประกอบหน้าจอเสมอ"</string>
     <string name="simulate_color_space" msgid="6745847141353345872">"จำลองระบบสี"</string>
-    <string name="enable_opengl_traces_title" msgid="6790444011053219871">"เปิดใช้ร่องรอยใน OpenGL"</string>
+    <string name="enable_opengl_traces_title" msgid="6790444011053219871">"เปิดใช้การติดตามใน OpenGL"</string>
     <string name="use_awesomeplayer" msgid="1583337008516364226">"ใช้ Awesome (เลิกใช้แล้ว)"</string>
     <string name="use_awesomeplayer_summary" msgid="6757734070733387140">"ใช้ AwesomePlayer แทน NuPlayer ในการเล่นสื่อทั่วไป"</string>
     <string name="usb_audio_disable_routing" msgid="8114498436003102671">"ปิดการกำหนดเส้นทางเสียงทาง USB"</string>
@@ -2088,7 +2091,7 @@
     <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"การเปลี่ยนแปลงใดๆ ที่คุณทำกับบัญชีของคุณบนเว็บจะมีการคัดลอกไปยังแท็บเล็ตโดยอัตโนมัติ\n\nบางบัญชีอาจคัดลอกการเปลี่ยนแปลงที่คุณทำบนแท็บเล็ตไปยังเว็บโดยอัตโนมัติ นี่คือการทำงานของบัญชี Google"</string>
     <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"การเปลี่ยนแปลงใดๆ ที่คุณทำกับบัญชีของคุณบนเว็บจะมีการคัดลอกไปยังโทรศัพท์โดยอัตโนมัติ\n\nบางบัญชีอาจคัดลอกการเปลี่ยนแปลงที่คุณทำบนโทรศัพท์ไปยังเว็บโดยอัตโนมัติ นี่คือการทำงานของบัญชี Google"</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"ปิดซิงค์ข้อมูลอัตโนมัติหรือไม่"</string>
-    <string name="data_usage_auto_sync_off_dialog" msgid="4744145757533455623">"การกระทำดังกล่าวจะเป็นการประหยัดการใช้ข้อมูลและแบตเตอรี่ แต่คุณจะต้องซิงค์แต่ละบัญชีด้วยตนเองเพื่อรวบรวมข้อมูลล่าสุด และคุณจะไม่ได้รับการแจ้งเตือนเมื่อมีการอัปเดต"</string>
+    <string name="data_usage_auto_sync_off_dialog" msgid="4744145757533455623">"การกระทำดังกล่าวจะเป็นการประหยัดปริมาณการใช้อินเทอร์เน็ตและแบตเตอรี่ แต่คุณจะต้องซิงค์แต่ละบัญชีด้วยตนเองเพื่อรวบรวมข้อมูลล่าสุด และคุณจะไม่ได้รับการแจ้งเตือนเมื่อมีการอัปเดต"</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"วันที่รีเซ็ตรอบการใช้"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"วันที่ของแต่ละเดือน:"</string>
     <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"ตั้งค่าแล้ว"</string>
@@ -2147,7 +2150,7 @@
     <string name="vpn_menu_edit" msgid="408275284159243490">"แก้ไขโปรไฟล์"</string>
     <string name="vpn_menu_delete" msgid="8098021690546891414">"ลบโปรไฟล์"</string>
     <string name="vpn_menu_lockdown" msgid="7863024538064268139">"VPN แบบเปิดตลอดเวลา"</string>
-    <string name="vpn_lockdown_summary" msgid="2200032066376720339">"เลือกโปรไฟล์ VPN เพื่อคงการเชื่อมต่อเอาไว้ตลอดเวลา การจราจรบนเครือข่ายจะได้รับอนุญาตเฉพาะเมื่อมีการเชื่อมต่อกับ VPN นี้เท่านั้น"</string>
+    <string name="vpn_lockdown_summary" msgid="2200032066376720339">"เลือกโปรไฟล์ VPN เพื่อคงการเชื่อมต่อเอาไว้ตลอดเวลา การเข้าใช้เครือข่ายจะได้รับอนุญาตเฉพาะเมื่อมีการเชื่อมต่อกับ VPN นี้เท่านั้น"</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"ไม่มี"</string>
     <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"VPN แบบเปิดตลอดเวลาจำเป็นต้องใช้ที่อยู่ IP ทั้งสำหรับเซิร์ฟเวอร์และ DNS"</string>
     <string name="vpn_no_network" msgid="3050233675132726155">"ไม่มีการเชื่อมต่อเครือข่าย โปรดลองอีกครั้งในภายหลัง"</string>
@@ -2479,7 +2482,7 @@
     <string name="switch_on_text" msgid="1124106706920572386">"เปิด"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"ปิด"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"การตรึงหน้าจอ"</string>
-    <string name="screen_pinning_description" msgid="1137904524037468263">"เมื่อเปิดใช้การตั้งค่านี้ คุณสามารถใช้การตรึงหน้าจอเพื่อให้หน้าจอปัจจุบันเปิดอยู่เสมอจนกว่าคุณจะเลิกตรึง\n\nหากต้องการใช้การตรีงหน้าจอ ให้ทำดังนี้:\n\n1. ตรวจสอบว่าเปิดการตรึงหน้าจออยู่\n\n2. เปิดหน้าจอที่คุณต้องการตรึง\n\n3. แตะภาพรวม\n\n4. กวาดขึ้น จากนั้นแตะไอคอนตรึง"</string>
+    <string name="screen_pinning_description" msgid="1137904524037468263">"เมื่อเปิดใช้การตั้งค่านี้ คุณสามารถใช้การตรึงหน้าจอเพื่อให้หน้าจอปัจจุบันเปิดอยู่เสมอจนกว่าคุณจะเลิกตรึง\n\nหากต้องการใช้การตรีงหน้าจอ ให้ทำดังนี้:\n\n1. ตรวจสอบว่าเปิดการตรึงหน้าจออยู่\n\n2. เปิดหน้าจอที่คุณต้องการตรึง\n\n3. แตะภาพรวม\n\n4. เลื่อนขึ้น จากนั้นแตะไอคอนตรึง"</string>
     <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"ขอรูปแบบการปลดล็อกก่อนเลิกตรึง"</string>
     <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"ขอ PIN ก่อนเลิกตรึง"</string>
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"ขอรหัสผ่านก่อนเลิกตรึง"</string>
@@ -2492,7 +2495,7 @@
     <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"ใช้มุมมองแนวนอน"</string>
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"ใช้การวางแนวเดิม"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"ข้อมูล IMEI"</string>
-    <string name="encryption_interstitial_header" msgid="5790264941172726485">"การเข้ารหัส"</string>
+    <string name="encryption_interstitial_header" msgid="5790264941172726485">"การเข้ารหัสความปลอดภัย"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"ต่อไป"</string>
     <string name="encryption_interstitial_message_pin" msgid="3705622704667901162">"นอกจากนี้คุณยังสามารถปกป้องอุปกรณ์เครื่องนี้เพิ่มเติมโดยกำหนดให้ต้องป้อน PIN ก่อนที่อุปกรณ์จะเริ่มต้นขึ้น อุปกรณ์จะไม่สามารถรับสาย ข้อความ หรือการแจ้งเตือน รวมถึงเสียงเตือนได้จนกว่าอุปกรณ์จะเริ่มต้นขึ้น \n\nซึ่งจะช่วยปกป้องข้อมูลในอุปกรณ์ที่สูญหายหรือถูกขโมย"</string>
     <string name="encryption_interstitial_message_pattern" msgid="2944051427890104942">"นอกจากนี้คุณยังสามารถปกป้องอุปกรณ์เครื่องนี้เพิ่มเติมโดยกำหนดให้ต้องป้อนรูปแบบก่อนที่อุปกรณ์จะเริ่มต้นขึ้น อุปกรณ์จะไม่สามารถรับสาย ข้อความ หรือการแจ้งเตือน รวมถึงเสียงเตือนได้จนกว่าอุปกรณ์จะเริ่มต้นขึ้น \n\nซึ่งจะช่วยปกป้องข้อมูลในอุปกรณ์ที่สูญหายหรือถูกขโมย"</string>
