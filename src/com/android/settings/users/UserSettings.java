@@ -396,7 +396,23 @@ public class UserSettings extends SettingsPreferenceFragment
     private UserInfo createRestrictedProfile() {
         UserInfo newUserInfo = mUserManager.createRestrictedProfile(
                 getResources().getString(R.string.user_new_profile_name));
+        int userId = newUserInfo.id;
+        UserHandle user = new UserHandle(userId);
+        mUserManager.setUserRestriction(UserManager.DISALLOW_MODIFY_ACCOUNTS, true, user);
+        // Change the setting before applying the DISALLOW_SHARE_LOCATION restriction, otherwise
+        // the putIntForUser() will fail.
+        Secure.putIntForUser(getContentResolver(),
+                Secure.LOCATION_MODE, Secure.LOCATION_MODE_OFF, userId);
+        mUserManager.setUserRestriction(UserManager.DISALLOW_SHARE_LOCATION, true, user);
         assignDefaultPhoto(newUserInfo);
+        // Add shared accounts
+        AccountManager am = AccountManager.get(getActivity());
+        Account [] accounts = am.getAccounts();
+        if (accounts != null) {
+            for (Account account : accounts) {
+                am.addSharedAccount(account, user);
+            }
+        }
         return newUserInfo;
     }
 
