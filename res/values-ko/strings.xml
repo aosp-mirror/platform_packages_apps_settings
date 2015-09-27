@@ -322,6 +322,7 @@
       <item quantity="other">지문 <xliff:g id="COUNT_1">%1$d</xliff:g>개 설정됨</item>
       <item quantity="one">지문 <xliff:g id="COUNT_0">%1$d</xliff:g>개 설정됨</item>
     </plurals>
+    <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"지문 설정"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"지문을 사용하여 화면 잠금을 해제하거나 구매를 확인하려면 다음을 수행해야 합니다."</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"백업 화면 잠금 방식을 설정하세요."</string>
@@ -352,12 +353,9 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"완료"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"죄송합니다. 센서가 아닙니다."</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="5053971232594165142">"기기에서 지문 센서를 사용합니다."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (3618021988442639280) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (2942551158278899627) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_generic_dialog_message (3624760637222239293) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="3618021988442639280">"등록이 완료되지 않았습니다."</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="2942551158278899627">"지문 파일 등록 제한 시간에 도달했습니다. 다시 시도하세요."</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="3624760637222239293">"지문 파일 등록이 되지 않았습니다. 다시 시도하거나 다른 손가락을 사용하세요."</string>
     <string name="fingerprint_enroll_button_add" msgid="6317978977419045463">"다른 지문 추가"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"다음"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"지문 파일은 휴대전화의 잠금 해제뿐 아니라 구매 및 앱 액세스를 승인하는 데 사용할 수 있습니다. "<annotation id="url">"자세히 알아보기"</annotation></string>
@@ -402,8 +400,7 @@
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"입력한 비밀번호는 정확하지만 안타깝게도 사용자의 데이터가 손상되었습니다. \n\n휴대전화를 다시 사용하려면 초기화해야 합니다. 초기화 후 휴대전화를 설정할 때 Google 계정에 백업된 데이터를 복원할 수 있습니다."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"입력 방법 전환"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"화면 잠금 선택"</string>
-    <!-- no translation found for setup_lock_settings_picker_title (1584792702475081908) -->
-    <skip />
+    <string name="setup_lock_settings_picker_title" msgid="1584792702475081908">"화면 잠금 선택"</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"백업 화면 잠금 방식 선택"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"화면 잠금"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"화면 잠금 변경"</string>
@@ -833,13 +830,10 @@
     <string name="brightness_summary" msgid="838917350127550703">"화면 밝기 조정"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"밝기 자동 조절"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"빛의 양에 따라 밝기 수준 최적화"</string>
-    <!-- no translation found for night_mode_title (2594133148531256513) -->
-    <skip />
+    <string name="night_mode_title" msgid="2594133148531256513">"야간 모드"</string>
     <string name="night_mode_summary" msgid="9196605054622017193">"%s"</string>
-    <!-- no translation found for night_mode_no (9171772244775838901) -->
-    <skip />
-    <!-- no translation found for night_mode_yes (2218157265997633432) -->
-    <skip />
+    <string name="night_mode_no" msgid="9171772244775838901">"사용 안함"</string>
+    <string name="night_mode_yes" msgid="2218157265997633432">"항상 사용"</string>
     <string name="night_mode_auto" msgid="7508348175804304327">"자동"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"절전 모드"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"화면이 꺼짐"</string>
@@ -1935,10 +1929,8 @@
     <string name="credentials_reset_summary" msgid="3369361230171260282">"모든 인증서 삭제"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"신뢰할 수 있는 자격증명"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"신뢰할 수 있는 CA 인증서 표시"</string>
-    <!-- no translation found for user_credentials (3719013347787187083) -->
-    <skip />
-    <!-- no translation found for user_credentials_summary (7271228342106080167) -->
-    <skip />
+    <string name="user_credentials" msgid="3719013347787187083">"사용자 인증 정보"</string>
+    <string name="user_credentials_summary" msgid="7271228342106080167">"저장된 사용자 인증 정보를 확인하고 수정"</string>
     <string name="advanced_security_title" msgid="2434776238010578865">"고급"</string>
     <string name="credential_storage_type" msgid="8629968543494001364">"저장공간 유형"</string>
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"하드웨어 지원"</string>
@@ -2290,16 +2282,11 @@
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"시스템 CA 인증서를 사용하시겠습니까?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"시스템 CA 인증서를 사용 중지하시겠습니까?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"사용자 CA 인증서를 영구 삭제하시겠습니까?"</string>
-    <!-- no translation found for one_userkey (6034020579534914349) -->
-    <skip />
-    <!-- no translation found for one_usercrt (2150319011101639509) -->
-    <skip />
-    <!-- no translation found for one_cacrt (6844397037970164809) -->
-    <skip />
-    <!-- no translation found for n_cacrts (5979300323482053820) -->
-    <skip />
-    <!-- no translation found for user_credential_title (1329449215749665378) -->
-    <skip />
+    <string name="one_userkey" msgid="6034020579534914349">"사용자 키 1개"</string>
+    <string name="one_usercrt" msgid="2150319011101639509">"사용자 인증서 1개"</string>
+    <string name="one_cacrt" msgid="6844397037970164809">"CA 인증서 1개"</string>
+    <string name="n_cacrts" msgid="5979300323482053820">"CA 인증서 %d개"</string>
+    <string name="user_credential_title" msgid="1329449215749665378">"사용자 인증 정보 세부정보"</string>
     <string name="spellcheckers_settings_title" msgid="399981228588011501">"맞춤법 검사기"</string>
     <string name="current_backup_pw_prompt" msgid="7735254412051914576">"전체 백업에 대한 현재 사용중인 비밀번호를 입력하세요."</string>
     <string name="new_backup_pw_prompt" msgid="8755501377391998428">"전체 백업에 대한 새 비밀번호를 입력하세요."</string>
@@ -2529,6 +2516,7 @@
     <string name="keywords_app_permissions" msgid="8677901415217188314">"앱 권한 보안"</string>
     <string name="keywords_default_apps" msgid="3581727483175522599">"앱 기본"</string>
     <string name="keywords_ignore_optimizations" msgid="946516741848647905">"최적화 수면 앱 대기 무시"</string>
+    <string name="keywords_color_mode" msgid="4670570451841540200">"생동감 rgb srgb 색상 내츄럴 표준"</string>
     <string name="keywords_lockscreen" msgid="4806191868723291541">"슬라이드 비밀번호 패턴 PIN"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Wi-Fi NFC 태그 설정"</string>
     <string name="write_tag" msgid="8571858602896222537">"쓰기"</string>
@@ -2623,7 +2611,8 @@
     <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="2769656565454495824">"예 또는 미정"</string>
     <string name="zen_mode_event_rule_reply_yes" msgid="1003598835878784659">"예"</string>
     <string name="zen_mode_rule_not_found_text" msgid="8963662446092059836">"규칙을 찾을 수 없습니다."</string>
-    <string name="zen_mode_rule_summary_combination" msgid="2526506268333198254">"<xliff:g id="DESCRIPTION">%1$s</xliff:g>/<xliff:g id="MODE">%2$s</xliff:g>"</string>
+    <string name="zen_mode_rule_summary_enabled_combination" msgid="976098744828219297">"사용 / <xliff:g id="MODE">%1$s</xliff:g>"</string>
+    <string name="zen_mode_rule_summary_provider_combination" msgid="2101201392041867409">"<xliff:g id="PACKAGE">%1$s</xliff:g>\n<xliff:g id="SUMMARY">%2$s</xliff:g>"</string>
     <string name="zen_mode_schedule_rule_days" msgid="3195058680641389948">"요일"</string>
     <string name="zen_mode_schedule_rule_days_none" msgid="4954143628634166317">"없음"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="146511166522076034">"매일"</string>
@@ -2810,8 +2799,7 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g>(<xliff:g id="COUNT">%2$d</xliff:g>개)"</string>
     <string name="high_power_apps" msgid="3459065925679828230">"배터리 최적화"</string>
     <string name="high_power_filter_on" msgid="3222265297576680099">"최적화되지 않음"</string>
-    <!-- no translation found for high_power_on (6216293998227583810) -->
-    <skip />
+    <string name="high_power_on" msgid="6216293998227583810">"최적화되지 않음"</string>
     <string name="high_power_off" msgid="3393904131961263278">"배터리 최적화 사용"</string>
     <string name="high_power_system" msgid="7362862974428225301">"배터리 최적화를 사용할 수 없음"</string>
     <string name="high_power_desc" msgid="6283926163708585760">"배터리 최적화를 적용하지 마세요. 배터리가 더 빨리 방전될 수 있습니다."</string>
@@ -2904,8 +2892,18 @@
     <string name="write_settings_off" msgid="5156104383386336233">"아니요"</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"손목을 두 번 돌려 카메라 열기"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"손목을 두 번 돌리면 카메라 앱이 열립니다."</string>
-    <!-- no translation found for camera_double_tap_power_gesture_title (1651873760405034645) -->
-    <skip />
-    <!-- no translation found for camera_double_tap_power_gesture_desc (7355664631775680376) -->
-    <skip />
+    <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"전원 버튼을 두 번 눌러 카메라 열기"</string>
+    <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"화면을 잠금 해제하지 않고 신속하게 카메라를 열 수 있습니다."</string>
+  <string-array name="color_mode_names">
+    <item msgid="2425514299220523812">"생동감(기본값)"</item>
+    <item msgid="8446070607501413455">"내츄럴"</item>
+    <item msgid="6553408765810699025">"표준"</item>
+  </string-array>
+  <string-array name="color_mode_descriptions">
+    <item msgid="4979629397075120893">"보정 색상"</item>
+    <item msgid="8280754435979370728">"눈으로 보는 듯한 내츄럴 색상"</item>
+    <item msgid="5363960654009010371">"디지털 콘텐츠에 최적화된 색상"</item>
+  </string-array>
+    <string name="picture_color_mode" msgid="4560755008730283695">"사진 색상 모드"</string>
+    <string name="picture_color_mode_desc" msgid="1141891467675548590">"sRGB를 사용합니다."</string>
 </resources>

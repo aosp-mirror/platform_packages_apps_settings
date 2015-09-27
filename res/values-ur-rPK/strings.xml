@@ -322,6 +322,7 @@
       <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> فنگر پرنٹس ترتیب دیے گئے</item>
       <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> فنگر پرنٹ ترتیب دیا گیا</item>
     </plurals>
+    <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"فنگر پرنٹ سیٹ اپ"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"آپ کی اسکرین کو غیر مقفل کرنے یا خریداریوں کی توثیق کرنے کیلئے آپ کے فنگر پرنٹ کا استعمال کرنے کیلئے، ہمیں یہ کرنے کی ضرورت ہوگی:"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"بیک اپ اسکرین لاک کے اپنے طریقے کو ترتیب دیں"</string>
@@ -352,12 +353,9 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"ہوگیا"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"افوہ، یہ سینسر نہیں ہے"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="5053971232594165142">"اپنے آلہ پر فنگر پرنٹ سینسر کا استعمال کریں"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (3618021988442639280) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (2942551158278899627) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_generic_dialog_message (3624760637222239293) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="3618021988442639280">"اندراج مکمل نہیں ہوا تھا"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="2942551158278899627">"فنگر پرنٹ اندراج کی حدِ وقت پوری ہو گئی۔ دوبارہ کوشش کریں۔"</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="3624760637222239293">"فنگر پرنٹ اندراج نہیں ہوا۔ دوبارہ کوشش کریں یا مختلف انگلی استعمال کریں۔"</string>
     <string name="fingerprint_enroll_button_add" msgid="6317978977419045463">"کوئی دوسرا شامل کریں"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"آگے جائیں"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"اپنے فون کو غیر مقفل کرنے کے علاوہ، آپ خریداریوں کی توثیق کرنے اور ایپ تک رسائی حاصل کرنے کیلئے اپنے فنگر پرنٹ کا بھی استعمال کر سکتے ہیں۔ "<annotation id="url">"مزید جانیں"</annotation></string>
@@ -402,8 +400,7 @@
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"‏آپ کا درج کردہ پاس ورڈ درست ہے لیکن بدقسمتی سے آپ کا ڈیٹا خراب ہے۔ ‎\n\n‎اپنا فون دوبارہ استعمال کرنا شروع کرنے کیلئے آپ کو فیکٹری ری سیٹ انجام دینے کی ضرورت ہے۔ ری سیٹ کے بعد اپنا فون سیٹ اپ کر لینے پر، آپ کو کوئی بھی ایسا ڈیٹا بحال کرنے کا ایک موقع ملے گا جس کا بیک اپ آپ کے Google اکاؤنٹ میں لیا گیا تھا۔"</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"اندراج کا طریقہ سوئچ کریں"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"اسکرین لاک منتخب کریں"</string>
-    <!-- no translation found for setup_lock_settings_picker_title (1584792702475081908) -->
-    <skip />
+    <string name="setup_lock_settings_picker_title" msgid="1584792702475081908">"اسکرین قفل منتخب کریں"</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"اسکرین مقفل کرنے کا اپنا بیک اپ طریقہ کار منتخب کریں"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"اسکرین لاک"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"لاک اسکرین کو تبدیل کریں"</string>
@@ -833,13 +830,10 @@
     <string name="brightness_summary" msgid="838917350127550703">"اسکرین کی چمک کو ایڈجسٹ کریں"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"تغیر پذیر چمک"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"دستیاب روشنی کیلئے چمک کی سطح کو بہتر بنائیں"</string>
-    <!-- no translation found for night_mode_title (2594133148531256513) -->
-    <skip />
+    <string name="night_mode_title" msgid="2594133148531256513">"رات موڈ"</string>
     <string name="night_mode_summary" msgid="9196605054622017193">"‎%s"</string>
-    <!-- no translation found for night_mode_no (9171772244775838901) -->
-    <skip />
-    <!-- no translation found for night_mode_yes (2218157265997633432) -->
-    <skip />
+    <string name="night_mode_no" msgid="9171772244775838901">"غیر فعال"</string>
+    <string name="night_mode_yes" msgid="2218157265997633432">"ہمیشہ آن"</string>
     <string name="night_mode_auto" msgid="7508348175804304327">"خودکار"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"سلیپ"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"اسکرین آف ہوجاتی ہے"</string>
@@ -1935,10 +1929,8 @@
     <string name="credentials_reset_summary" msgid="3369361230171260282">"سبھی سرٹیفیکیٹس کو ہٹائیں"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"بھروسہ مند اسنادات"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"‏بھروسہ مند CA سرٹیفیکیٹس ڈسپلے کریں"</string>
-    <!-- no translation found for user_credentials (3719013347787187083) -->
-    <skip />
-    <!-- no translation found for user_credentials_summary (7271228342106080167) -->
-    <skip />
+    <string name="user_credentials" msgid="3719013347787187083">"صارف اسناد"</string>
+    <string name="user_credentials_summary" msgid="7271228342106080167">"اسٹور کردہ اسناد دیکھیں اور ان میں ترمیم کریں"</string>
     <string name="advanced_security_title" msgid="2434776238010578865">"جدید ترین"</string>
     <string name="credential_storage_type" msgid="8629968543494001364">"اسٹوریج کی قسم"</string>
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"ہارڈ ویئر کے ذریعے تعاون یافتہ"</string>
@@ -2290,16 +2282,11 @@
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"‏سسٹم CA سرٹیفیکیٹ کو فعال کریں؟"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"‏سسٹم CA سرٹیفیکیٹ کو غیر فعال کریں؟"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"‏صارف کا CA سرٹیفیکیٹ مستقل طور پر ہٹا دیں؟"</string>
-    <!-- no translation found for one_userkey (6034020579534914349) -->
-    <skip />
-    <!-- no translation found for one_usercrt (2150319011101639509) -->
-    <skip />
-    <!-- no translation found for one_cacrt (6844397037970164809) -->
-    <skip />
-    <!-- no translation found for n_cacrts (5979300323482053820) -->
-    <skip />
-    <!-- no translation found for user_credential_title (1329449215749665378) -->
-    <skip />
+    <string name="one_userkey" msgid="6034020579534914349">"ایک صارف کلید"</string>
+    <string name="one_usercrt" msgid="2150319011101639509">"ایک صارف سرٹیفیکیٹ"</string>
+    <string name="one_cacrt" msgid="6844397037970164809">"‏ایک CA سرٹیفیکیٹ"</string>
+    <string name="n_cacrts" msgid="5979300323482053820">"‏‎%d CA سرٹیفیکیٹس"</string>
+    <string name="user_credential_title" msgid="1329449215749665378">"اسناد کی تفصیلات"</string>
     <string name="spellcheckers_settings_title" msgid="399981228588011501">"سپیل چیکر"</string>
     <string name="current_backup_pw_prompt" msgid="7735254412051914576">"اپنا موجودہ مکمل بیک اپ پاس ورڈ یہاں ٹائپ کریں"</string>
     <string name="new_backup_pw_prompt" msgid="8755501377391998428">"یہاں مکمل بیک اپس کیلئے ایک نیا پاس ورڈ ٹائپ کریں"</string>
@@ -2529,6 +2516,7 @@
     <string name="keywords_app_permissions" msgid="8677901415217188314">"ایپس کی اجازتوں کی سیکیورٹی"</string>
     <string name="keywords_default_apps" msgid="3581727483175522599">"ڈیفالٹ ایپس"</string>
     <string name="keywords_ignore_optimizations" msgid="946516741848647905">"نظر انداز کریں بہتریاں ڈوز ایپ اسٹینڈ بائی"</string>
+    <string name="keywords_color_mode" msgid="4670570451841540200">"‏پرجوش rgb srgb رنگ کا قدرتی معیار"</string>
     <string name="keywords_lockscreen" msgid="4806191868723291541">"‏سلائیڈ پاس ورڈ پیٹرن pin"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"‏Wi-Fi NFC ٹیگ ترتیب دیں"</string>
     <string name="write_tag" msgid="8571858602896222537">"تحریر کریں"</string>
@@ -2623,7 +2611,8 @@
     <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="2769656565454495824">"ہاں یا شاید"</string>
     <string name="zen_mode_event_rule_reply_yes" msgid="1003598835878784659">"ہاں"</string>
     <string name="zen_mode_rule_not_found_text" msgid="8963662446092059836">"اصول نہیں ملا۔"</string>
-    <string name="zen_mode_rule_summary_combination" msgid="2526506268333198254">"<xliff:g id="DESCRIPTION">%1$s</xliff:g> / <xliff:g id="MODE">%2$s</xliff:g>"</string>
+    <string name="zen_mode_rule_summary_enabled_combination" msgid="976098744828219297">"آن / <xliff:g id="MODE">%1$s</xliff:g>"</string>
+    <string name="zen_mode_rule_summary_provider_combination" msgid="2101201392041867409">"<xliff:g id="PACKAGE">%1$s</xliff:g>\n<xliff:g id="SUMMARY">%2$s</xliff:g>"</string>
     <string name="zen_mode_schedule_rule_days" msgid="3195058680641389948">"دن"</string>
     <string name="zen_mode_schedule_rule_days_none" msgid="4954143628634166317">"کوئی نہیں"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="146511166522076034">"ہر دن"</string>
@@ -2810,8 +2799,7 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="3459065925679828230">"بیٹری بہترین بنانا"</string>
     <string name="high_power_filter_on" msgid="3222265297576680099">"بہترین بنائی گئی نہیں ہیں"</string>
-    <!-- no translation found for high_power_on (6216293998227583810) -->
-    <skip />
+    <string name="high_power_on" msgid="6216293998227583810">"بہترین بنائی گئی نہیں ہیں"</string>
     <string name="high_power_off" msgid="3393904131961263278">"بیٹری استعمال کو بہترین بنا رہی ہے"</string>
     <string name="high_power_system" msgid="7362862974428225301">"بیٹری بہترین بنانا دستیاب نہیں ہے"</string>
     <string name="high_power_desc" msgid="6283926163708585760">"بیٹری بہترین بنانا لاگو مت کریں۔ ممکن ہے یہ آپ کی بیٹری مزید تیزی سے ختم کر دے۔"</string>
@@ -2904,8 +2892,18 @@
     <string name="write_settings_off" msgid="5156104383386336233">"نہیں"</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"کیمرا کیلئے دو بار مروڑیں"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"اپنی کلائی کو دو بار مروڑ کر کیمرا ایپ کھولیں"</string>
-    <!-- no translation found for camera_double_tap_power_gesture_title (1651873760405034645) -->
-    <skip />
-    <!-- no translation found for camera_double_tap_power_gesture_desc (7355664631775680376) -->
-    <skip />
+    <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"کیمرا کیلئے پاور بٹن دو بار دبائیں"</string>
+    <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"اپنی اسکرین غیر مقفل کئے بغیر تیزی سے کیمرا کھولیں"</string>
+  <string-array name="color_mode_names">
+    <item msgid="2425514299220523812">"پرجوش (ڈیفالٹ)"</item>
+    <item msgid="8446070607501413455">"قدرتی"</item>
+    <item msgid="6553408765810699025">"معیاری"</item>
+  </string-array>
+  <string-array name="color_mode_descriptions">
+    <item msgid="4979629397075120893">"بہتر رنگ"</item>
+    <item msgid="8280754435979370728">"آنکھ سے نظر آنے والے قدرتی رنگ"</item>
+    <item msgid="5363960654009010371">"ڈیجیٹیل مواد کیلئے بہترین کردہ رنگ"</item>
+  </string-array>
+    <string name="picture_color_mode" msgid="4560755008730283695">"تصویری رنگ موڈ"</string>
+    <string name="picture_color_mode_desc" msgid="1141891467675548590">"‏sRGB استعمال کریں"</string>
 </resources>

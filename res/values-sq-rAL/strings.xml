@@ -322,6 +322,7 @@
       <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> gjurmë gishti u konfiguruan</item>
       <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> gjurmë gishti u konfigurua</item>
     </plurals>
+    <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Konfigurimi i gjurmës"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"Për të përdorur gjurmën e gishtit për të shkyçur ekranin ose për të konfirmuar blerjet, të duhet që:"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"Konfiguro metodën rezervë të kyçjes së ekranit"</string>
@@ -352,12 +353,9 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"U krye"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"Jo, sensori nuk është ai"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="5053971232594165142">"Përdor sensorin e gjurmës së gishtit në pajisje."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (3618021988442639280) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (2942551158278899627) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_generic_dialog_message (3624760637222239293) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="3618021988442639280">"Regjistrimi nuk përfundoi"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="2942551158278899627">"U arrit kufiri kohor për regjistrimin e gjurmës së gishtit. Provo përsëri."</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="3624760637222239293">"Regjistrimi i gjurmës së gishtit nuk funksionoi. Provo përsëri ose përdor një gisht tjetër."</string>
     <string name="fingerprint_enroll_button_add" msgid="6317978977419045463">"Shto një tjetër"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"Përpara"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Përveç shkyçjes së telefonit, gjurmën e gishtit mund ta përdorësh edhe për të autorizuar blerjet dhe qasjen në aplikacione. "<annotation id="url">"Mëso më shumë"</annotation></string>
@@ -402,8 +400,7 @@
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"Fjalëkalimi që fute është i saktë, por fatkeqësisht të dhënat e tua janë të dëmtuara. \n\nPër të rifilluar përdorimin e telefonit, duhet të kryesh një vendosje në gjendje fabrike. Pas kësaj, do të kesh mundësinë për të restauruar çdo të dhënë që është rezervuar në llogarinë e Google."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Ndërro metodën e hyrjes"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Zgjidh kyçjen e ekranit"</string>
-    <!-- no translation found for setup_lock_settings_picker_title (1584792702475081908) -->
-    <skip />
+    <string name="setup_lock_settings_picker_title" msgid="1584792702475081908">"Zgjidh kyçjen e ekranit"</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Zgjidh mënyrën rezervë të kyçjes së ekranit"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Kyçja e ekranit"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Ndrysho ekranin e kyçjes"</string>
@@ -833,13 +830,10 @@
     <string name="brightness_summary" msgid="838917350127550703">"Rregullo ndriçimin e ekranit"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"Ndriçimi i përshtatshëm"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"Optimizo nivelin e ndriçimit sipas ambientit"</string>
-    <!-- no translation found for night_mode_title (2594133148531256513) -->
-    <skip />
+    <string name="night_mode_title" msgid="2594133148531256513">"Modaliteti i natës"</string>
     <string name="night_mode_summary" msgid="9196605054622017193">"%s"</string>
-    <!-- no translation found for night_mode_no (9171772244775838901) -->
-    <skip />
-    <!-- no translation found for night_mode_yes (2218157265997633432) -->
-    <skip />
+    <string name="night_mode_no" msgid="9171772244775838901">"Çaktivizuar"</string>
+    <string name="night_mode_yes" msgid="2218157265997633432">"Gjithmonë aktive"</string>
     <string name="night_mode_auto" msgid="7508348175804304327">"Automatike"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Në gjendje gjumi"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Ekrani çaktivizohet"</string>
@@ -1935,10 +1929,8 @@
     <string name="credentials_reset_summary" msgid="3369361230171260282">"Hiqi të gjitha certifikatat"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"Kredencialet e besuara"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"Shfaq certifikatat CA të besuara"</string>
-    <!-- no translation found for user_credentials (3719013347787187083) -->
-    <skip />
-    <!-- no translation found for user_credentials_summary (7271228342106080167) -->
-    <skip />
+    <string name="user_credentials" msgid="3719013347787187083">"Kredencialet e përdoruesit"</string>
+    <string name="user_credentials_summary" msgid="7271228342106080167">"Shiko dhe modifiko kredencialet e ruajtura"</string>
     <string name="advanced_security_title" msgid="2434776238010578865">"Të përparuara"</string>
     <string name="credential_storage_type" msgid="8629968543494001364">"Lloji i hapësirës ruajtëse"</string>
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"E mbështetur nga hardueri"</string>
@@ -2290,16 +2282,11 @@
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"Të aktivizohet certifikata CA e sistemit?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"Të çaktivizohet certifikata CA e sistemit?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"Të hiqet përgjithmonë certifikata CA e përdoruesit?"</string>
-    <!-- no translation found for one_userkey (6034020579534914349) -->
-    <skip />
-    <!-- no translation found for one_usercrt (2150319011101639509) -->
-    <skip />
-    <!-- no translation found for one_cacrt (6844397037970164809) -->
-    <skip />
-    <!-- no translation found for n_cacrts (5979300323482053820) -->
-    <skip />
-    <!-- no translation found for user_credential_title (1329449215749665378) -->
-    <skip />
+    <string name="one_userkey" msgid="6034020579534914349">"çelës për një përdorues"</string>
+    <string name="one_usercrt" msgid="2150319011101639509">"certifikatë për një përdorues"</string>
+    <string name="one_cacrt" msgid="6844397037970164809">"një certifikatë CA"</string>
+    <string name="n_cacrts" msgid="5979300323482053820">"%d certifikata CA"</string>
+    <string name="user_credential_title" msgid="1329449215749665378">"Detajet e kredencialeve"</string>
     <string name="spellcheckers_settings_title" msgid="399981228588011501">"Kontrolluesi drejtshkrimor"</string>
     <string name="current_backup_pw_prompt" msgid="7735254412051914576">"Shkruaj fjalëkalimin aktual për rezervimin e plotë"</string>
     <string name="new_backup_pw_prompt" msgid="8755501377391998428">"Shkruaj fjalëkalimin e ri për rezervimin e plotë"</string>
@@ -2529,6 +2516,7 @@
     <string name="keywords_app_permissions" msgid="8677901415217188314">"siguria e lejeve të aplikacioneve"</string>
     <string name="keywords_default_apps" msgid="3581727483175522599">"aplikacionet e parazgjedhura"</string>
     <string name="keywords_ignore_optimizations" msgid="946516741848647905">"sasia e shpërfilljes së optimizimeve aplikacioni në modalitet gatishmërie"</string>
+    <string name="keywords_color_mode" msgid="4670570451841540200">"ngjyrë e gjallë rgb srgb natyrale standarde"</string>
     <string name="keywords_lockscreen" msgid="4806191868723291541">"rrëshqit fjalëkalim motiv pin"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Cakto një etiketë NFC për Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Shkruaj"</string>
@@ -2623,7 +2611,8 @@
     <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="2769656565454495824">"\"Po\" ose \"Ndoshta\""</string>
     <string name="zen_mode_event_rule_reply_yes" msgid="1003598835878784659">"Po"</string>
     <string name="zen_mode_rule_not_found_text" msgid="8963662446092059836">"Rregulli nuk u gjet."</string>
-    <string name="zen_mode_rule_summary_combination" msgid="2526506268333198254">"<xliff:g id="DESCRIPTION">%1$s</xliff:g> / <xliff:g id="MODE">%2$s</xliff:g>"</string>
+    <string name="zen_mode_rule_summary_enabled_combination" msgid="976098744828219297">"Aktive / <xliff:g id="MODE">%1$s</xliff:g>"</string>
+    <string name="zen_mode_rule_summary_provider_combination" msgid="2101201392041867409">"<xliff:g id="PACKAGE">%1$s</xliff:g>\n<xliff:g id="SUMMARY">%2$s</xliff:g>"</string>
     <string name="zen_mode_schedule_rule_days" msgid="3195058680641389948">"Ditët"</string>
     <string name="zen_mode_schedule_rule_days_none" msgid="4954143628634166317">"Asnjë"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="146511166522076034">"Çdo ditë"</string>
@@ -2810,8 +2799,7 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="3459065925679828230">"Optimizimi i baterisë"</string>
     <string name="high_power_filter_on" msgid="3222265297576680099">"Jo të optimizuara"</string>
-    <!-- no translation found for high_power_on (6216293998227583810) -->
-    <skip />
+    <string name="high_power_on" msgid="6216293998227583810">"Nuk është i optimizuar"</string>
     <string name="high_power_off" msgid="3393904131961263278">"Optimizojnë përdorimin e baterisë"</string>
     <string name="high_power_system" msgid="7362862974428225301">"Optimizimi i baterisë nuk ofrohet"</string>
     <string name="high_power_desc" msgid="6283926163708585760">"Mos zbato optimizimin e baterisë. Kjo mund ta shkarkojë baterinë më shpejt."</string>
@@ -2904,8 +2892,18 @@
     <string name="write_settings_off" msgid="5156104383386336233">"Jo"</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"Rrotullo dy herë për kamerën"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Hap aplikacionin e kamerës duke rrotulluar kyçin e dorës dy herë"</string>
-    <!-- no translation found for camera_double_tap_power_gesture_title (1651873760405034645) -->
-    <skip />
-    <!-- no translation found for camera_double_tap_power_gesture_desc (7355664631775680376) -->
-    <skip />
+    <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Shtyp butonin e energjisë dy herë për kamerën"</string>
+    <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Hap me shpejtësi kamerën pa e shkyçur ekranin"</string>
+  <string-array name="color_mode_names">
+    <item msgid="2425514299220523812">"Të gjalla (parazgjedhja)"</item>
+    <item msgid="8446070607501413455">"Natyrale"</item>
+    <item msgid="6553408765810699025">"Standarde"</item>
+  </string-array>
+  <string-array name="color_mode_descriptions">
+    <item msgid="4979629397075120893">"Ngjyra të përmirësuara"</item>
+    <item msgid="8280754435979370728">"Ngjyra natyrale siç shikohen me sy të lirë"</item>
+    <item msgid="5363960654009010371">"Ngjyra të optimizuara për përmbajtjet dixhitale"</item>
+  </string-array>
+    <string name="picture_color_mode" msgid="4560755008730283695">"Modalitti i ngjyrave të figurës"</string>
+    <string name="picture_color_mode_desc" msgid="1141891467675548590">"Përdor sRGB"</string>
 </resources>

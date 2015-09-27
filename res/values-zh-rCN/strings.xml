@@ -322,6 +322,7 @@
       <item quantity="other">已设置 <xliff:g id="COUNT_1">%1$d</xliff:g> 个指纹</item>
       <item quantity="one">已设置 <xliff:g id="COUNT_0">%1$d</xliff:g> 个指纹</item>
     </plurals>
+    <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"指纹设置"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"要使用您的指纹解锁屏幕或确认购买交易，您需要："</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"设置备用屏幕锁定方式"</string>
@@ -352,12 +353,9 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"完成"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"糟糕，这不是传感器"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="5053971232594165142">"使用您设备上的指纹传感器。"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (3618021988442639280) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (2942551158278899627) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_generic_dialog_message (3624760637222239293) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="3618021988442639280">"未完成注册"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="2942551158278899627">"指纹注册操作超时，请重试。"</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="3624760637222239293">"无法注册指纹。请重试或使用其他手指。"</string>
     <string name="fingerprint_enroll_button_add" msgid="6317978977419045463">"再添加一个"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"下一步"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"除了将手机解锁，您还可以在购买物品时和登录应用时使用自己的指纹来验证身份。"<annotation id="url">"了解详情"</annotation></string>
@@ -402,8 +400,7 @@
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"您输入的密码正确无误，但遗憾的是，您的数据已损坏。\n\n要继续使用您的手机，您需要将其恢复出厂设置。对恢复出厂设置后的手机进行设置时，您可以恢复之前备份到 Google 帐户的任何数据。"</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"切换输入法"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"选择屏幕锁定方式"</string>
-    <!-- no translation found for setup_lock_settings_picker_title (1584792702475081908) -->
-    <skip />
+    <string name="setup_lock_settings_picker_title" msgid="1584792702475081908">"选择屏幕锁定方式"</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"选择您的备用屏幕锁定方式"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"屏幕锁定方式"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"更改屏幕锁定方式"</string>
@@ -833,13 +830,10 @@
     <string name="brightness_summary" msgid="838917350127550703">"调整屏幕亮度"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"自动调节亮度"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"根据环境光线情况优化亮度"</string>
-    <!-- no translation found for night_mode_title (2594133148531256513) -->
-    <skip />
+    <string name="night_mode_title" msgid="2594133148531256513">"夜间模式"</string>
     <string name="night_mode_summary" msgid="9196605054622017193">"%s"</string>
-    <!-- no translation found for night_mode_no (9171772244775838901) -->
-    <skip />
-    <!-- no translation found for night_mode_yes (2218157265997633432) -->
-    <skip />
+    <string name="night_mode_no" msgid="9171772244775838901">"已停用"</string>
+    <string name="night_mode_yes" msgid="2218157265997633432">"始终开启"</string>
     <string name="night_mode_auto" msgid="7508348175804304327">"自动"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"休眠"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"屏幕关闭"</string>
@@ -1935,10 +1929,8 @@
     <string name="credentials_reset_summary" msgid="3369361230171260282">"删除所有证书"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"信任的凭据"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"显示信任的CA证书"</string>
-    <!-- no translation found for user_credentials (3719013347787187083) -->
-    <skip />
-    <!-- no translation found for user_credentials_summary (7271228342106080167) -->
-    <skip />
+    <string name="user_credentials" msgid="3719013347787187083">"用户凭据"</string>
+    <string name="user_credentials_summary" msgid="7271228342106080167">"查看和修改存储的凭据"</string>
     <string name="advanced_security_title" msgid="2434776238010578865">"高级"</string>
     <string name="credential_storage_type" msgid="8629968543494001364">"存储类型"</string>
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"硬件支持"</string>
@@ -2290,16 +2282,11 @@
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"要启用该系统CA证书吗？"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"要停用该系统CA证书吗？"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"要永久移除该用户CA证书吗？"</string>
-    <!-- no translation found for one_userkey (6034020579534914349) -->
-    <skip />
-    <!-- no translation found for one_usercrt (2150319011101639509) -->
-    <skip />
-    <!-- no translation found for one_cacrt (6844397037970164809) -->
-    <skip />
-    <!-- no translation found for n_cacrts (5979300323482053820) -->
-    <skip />
-    <!-- no translation found for user_credential_title (1329449215749665378) -->
-    <skip />
+    <string name="one_userkey" msgid="6034020579534914349">"一个用户密钥"</string>
+    <string name="one_usercrt" msgid="2150319011101639509">"一个用户证书"</string>
+    <string name="one_cacrt" msgid="6844397037970164809">"1 个 CA 证书"</string>
+    <string name="n_cacrts" msgid="5979300323482053820">"%d 个 CA 证书"</string>
+    <string name="user_credential_title" msgid="1329449215749665378">"凭据详情"</string>
     <string name="spellcheckers_settings_title" msgid="399981228588011501">"拼写检查工具"</string>
     <string name="current_backup_pw_prompt" msgid="7735254412051914576">"在此键入您当前的完整备份密码"</string>
     <string name="new_backup_pw_prompt" msgid="8755501377391998428">"在此键入新的完整备份密码"</string>
@@ -2529,6 +2516,7 @@
     <string name="keywords_app_permissions" msgid="8677901415217188314">"应用 权限 安全"</string>
     <string name="keywords_default_apps" msgid="3581727483175522599">"应用 默认"</string>
     <string name="keywords_ignore_optimizations" msgid="946516741848647905">"忽略对低电耗模式应用的待机优化"</string>
+    <string name="keywords_color_mode" msgid="4670570451841540200">"鲜亮 RGB SRGB 颜色 自然 标准"</string>
     <string name="keywords_lockscreen" msgid="4806191868723291541">"滑动 密码 图案 PIN码"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"设置WLAN NFC标签"</string>
     <string name="write_tag" msgid="8571858602896222537">"写入"</string>
@@ -2623,7 +2611,8 @@
     <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="2769656565454495824">"“参加”或“可能参加”"</string>
     <string name="zen_mode_event_rule_reply_yes" msgid="1003598835878784659">"是"</string>
     <string name="zen_mode_rule_not_found_text" msgid="8963662446092059836">"找不到规则。"</string>
-    <string name="zen_mode_rule_summary_combination" msgid="2526506268333198254">"<xliff:g id="DESCRIPTION">%1$s</xliff:g> / <xliff:g id="MODE">%2$s</xliff:g>"</string>
+    <string name="zen_mode_rule_summary_enabled_combination" msgid="976098744828219297">"开启/<xliff:g id="MODE">%1$s</xliff:g>"</string>
+    <string name="zen_mode_rule_summary_provider_combination" msgid="2101201392041867409">"<xliff:g id="PACKAGE">%1$s</xliff:g>\n<xliff:g id="SUMMARY">%2$s</xliff:g>"</string>
     <string name="zen_mode_schedule_rule_days" msgid="3195058680641389948">"星期几"</string>
     <string name="zen_mode_schedule_rule_days_none" msgid="4954143628634166317">"无"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="146511166522076034">"每天"</string>
@@ -2761,7 +2750,7 @@
     <string name="configure_apps" msgid="6685680790825882528">"配置应用"</string>
     <string name="unknown_app" msgid="5275921288718717656">"未知应用"</string>
     <string name="choose_profile" msgid="8229363046053568878">"选择个人资料"</string>
-    <string name="app_permissions" msgid="4148222031991883874">"应用权限"</string>
+    <string name="app_permissions" msgid="4148222031991883874">"应用所需权限"</string>
     <string name="app_permissions_summary" msgid="2098173899436407221">"已授予 <xliff:g id="COUNT_0">%d</xliff:g> 个应用（共 <xliff:g id="COUNT_1">%d</xliff:g> 个）其他权限"</string>
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"已授权 <xliff:g id="COUNT_0">%d</xliff:g> 个应用（共 <xliff:g id="COUNT_1">%d</xliff:g> 个）"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"点按唤醒"</string>
@@ -2810,8 +2799,7 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="3459065925679828230">"电池优化"</string>
     <string name="high_power_filter_on" msgid="3222265297576680099">"未优化"</string>
-    <!-- no translation found for high_power_on (6216293998227583810) -->
-    <skip />
+    <string name="high_power_on" msgid="6216293998227583810">"未优化"</string>
     <string name="high_power_off" msgid="3393904131961263278">"优化电池使用"</string>
     <string name="high_power_system" msgid="7362862974428225301">"没有电池优化设置"</string>
     <string name="high_power_desc" msgid="6283926163708585760">"不应用电池优化设置，但电量的消耗速度可能会更快。"</string>
@@ -2904,8 +2892,18 @@
     <string name="write_settings_off" msgid="5156104383386336233">"不允许"</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"扭转两次即可打开相机"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"扭转手腕两次即可打开相机应用"</string>
-    <!-- no translation found for camera_double_tap_power_gesture_title (1651873760405034645) -->
-    <skip />
-    <!-- no translation found for camera_double_tap_power_gesture_desc (7355664631775680376) -->
-    <skip />
+    <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"按电源按钮两次即可打开相机"</string>
+    <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"在不解锁屏幕的情况下快速打开相机"</string>
+  <string-array name="color_mode_names">
+    <item msgid="2425514299220523812">"鲜亮（默认）"</item>
+    <item msgid="8446070607501413455">"自然"</item>
+    <item msgid="6553408765810699025">"标准"</item>
+  </string-array>
+  <string-array name="color_mode_descriptions">
+    <item msgid="4979629397075120893">"增强的颜色"</item>
+    <item msgid="8280754435979370728">"肉眼所看到的自然颜色"</item>
+    <item msgid="5363960654009010371">"针对数字内容优化的颜色"</item>
+  </string-array>
+    <string name="picture_color_mode" msgid="4560755008730283695">"图片颜色模式"</string>
+    <string name="picture_color_mode_desc" msgid="1141891467675548590">"使用 sRGB"</string>
 </resources>

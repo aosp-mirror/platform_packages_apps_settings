@@ -322,6 +322,7 @@
       <item quantity="other">Configuráronse <xliff:g id="COUNT_1">%1$d</xliff:g> impresións dixitais</item>
       <item quantity="one">Configurouse <xliff:g id="COUNT_0">%1$d</xliff:g> impresión dixital</item>
     </plurals>
+    <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Config. identificación"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"Para usar a túa impresión dixital para desbloquear a túa pantalla ou confirmar compras, teremos que:"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"Configurar o método de bloqueo da pantalla en segundo plano"</string>
@@ -831,7 +832,7 @@
     <string name="auto_brightness_summary" msgid="1799041158760605375">"Optimiza o nivel de brillo en función da luz dispoñible"</string>
     <string name="night_mode_title" msgid="2594133148531256513">"Modo nocturno"</string>
     <string name="night_mode_summary" msgid="9196605054622017193">"%s"</string>
-    <string name="night_mode_no" msgid="9171772244775838901">"Desactivouse"</string>
+    <string name="night_mode_no" msgid="9171772244775838901">"Desactivado"</string>
     <string name="night_mode_yes" msgid="2218157265997633432">"Sempre activada"</string>
     <string name="night_mode_auto" msgid="7508348175804304327">"Automático"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Suspensión"</string>
@@ -2515,6 +2516,7 @@
     <string name="keywords_app_permissions" msgid="8677901415217188314">"seguranza dos permisos das aplicacións"</string>
     <string name="keywords_default_apps" msgid="3581727483175522599">"aplicacións predeterminadas"</string>
     <string name="keywords_ignore_optimizations" msgid="946516741848647905">"ignorar optimizacións do modo de espera da aplicación"</string>
+    <string name="keywords_color_mode" msgid="4670570451841540200">"estándar rgb srgb cor natural estándar"</string>
     <string name="keywords_lockscreen" msgid="4806191868723291541">"pasar o dedo contrasinal padrón pin"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Configurar etiqueta NFC wifi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Escribir"</string>
@@ -2609,7 +2611,8 @@
     <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="2769656565454495824">"Si ou Quizais"</string>
     <string name="zen_mode_event_rule_reply_yes" msgid="1003598835878784659">"Si"</string>
     <string name="zen_mode_rule_not_found_text" msgid="8963662446092059836">"Non se atopou a norma."</string>
-    <string name="zen_mode_rule_summary_combination" msgid="2526506268333198254">"<xliff:g id="DESCRIPTION">%1$s</xliff:g>/<xliff:g id="MODE">%2$s</xliff:g>"</string>
+    <string name="zen_mode_rule_summary_enabled_combination" msgid="976098744828219297">"Activado/<xliff:g id="MODE">%1$s</xliff:g>"</string>
+    <string name="zen_mode_rule_summary_provider_combination" msgid="2101201392041867409">"<xliff:g id="PACKAGE">%1$s</xliff:g>\n<xliff:g id="SUMMARY">%2$s</xliff:g>"</string>
     <string name="zen_mode_schedule_rule_days" msgid="3195058680641389948">"Días"</string>
     <string name="zen_mode_schedule_rule_days_none" msgid="4954143628634166317">"Ningún"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="146511166522076034">"Cada día"</string>
@@ -2889,6 +2892,18 @@
     <string name="write_settings_off" msgid="5156104383386336233">"Non"</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"Dobre xiro para abrir a cámara"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Xira o pulso dúas veces para abrir a aplicación da cámara"</string>
-    <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Botón de acendido dúas veces para cámara"</string>
+    <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Premer botón de acendido dúas veces para abrir a cámara"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Abre a cámara rapidamente sen desbloquear a pantalla"</string>
+  <string-array name="color_mode_names">
+    <item msgid="2425514299220523812">"Brillante (predeterminado)"</item>
+    <item msgid="8446070607501413455">"Natural"</item>
+    <item msgid="6553408765810699025">"Estándar"</item>
+  </string-array>
+  <string-array name="color_mode_descriptions">
+    <item msgid="4979629397075120893">"Cores melloradas"</item>
+    <item msgid="8280754435979370728">"Cores naturais tal e o como se ven"</item>
+    <item msgid="5363960654009010371">"Cores optimizadas para contido dixital"</item>
+  </string-array>
+    <string name="picture_color_mode" msgid="4560755008730283695">"Modo de cor da imaxe"</string>
+    <string name="picture_color_mode_desc" msgid="1141891467675548590">"Utiliza sRGB"</string>
 </resources>

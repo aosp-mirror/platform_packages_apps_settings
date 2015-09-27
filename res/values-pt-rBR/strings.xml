@@ -322,6 +322,7 @@
       <item quantity="one"><xliff:g id="COUNT_1">%1$d</xliff:g> impressões digitais configuradas</item>
       <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> impressões digitais configuradas</item>
     </plurals>
+    <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Config. de imp digital"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"Para usar sua impressão digital para desbloquear sua tela ou confirmar compras, precisaremos:"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"Configure seu método secundário de bloqueio de tela"</string>
@@ -1592,7 +1593,7 @@
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Configurações de acessibilidade"</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"Serviços"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"Sistema"</string>
-    <string name="accessibility_display_title" msgid="7610175687949675162">"Display"</string>
+    <string name="accessibility_display_title" msgid="7610175687949675162">"Exibição"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"Legendas"</string>
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"Gestos de ampliação"</string>
     <string name="accessibility_screen_magnification_summary" msgid="1178289000423776584">"Quando este recurso está ativado, você pode aumentar e diminuir o zoom com um toque triplo na tela.\n\nQuando o zoom é aplicado, você pode:\n"<ul><li>"Deslocar: arraste dois ou mais dedos pela tela."</li>\n<li>"Ajustar o nível de zoom: use o gesto de pinçagem ou expanda usando dois ou mais dedos."</li></ul>\n\n"Você também pode ampliar temporariamente o que estiver sob seu dedo dando um toque triplo e segurando. No estado ampliado, arraste o dedo para explorar as diferentes partes da tela. Levante o dedo para voltar ao estado anterior.\n\nObservação: o toque triplo para ampliar funciona em qualquer parte da tela, exceto no teclado e na barra de navegação."</string>
@@ -2515,6 +2516,7 @@
     <string name="keywords_app_permissions" msgid="8677901415217188314">"segurança das permissões de apps"</string>
     <string name="keywords_default_apps" msgid="3581727483175522599">"apps padrão"</string>
     <string name="keywords_ignore_optimizations" msgid="946516741848647905">"ignorar otimizações hibernação app em espera"</string>
+    <string name="keywords_color_mode" msgid="4670570451841540200">"cor vibrante RGB sRGB natural padrão"</string>
     <string name="keywords_lockscreen" msgid="4806191868723291541">"deslizar senha padrão pin"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Configurar etiqueta NFC Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Gravar"</string>
@@ -2609,7 +2611,8 @@
     <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="2769656565454495824">"\"Sim\" ou \"Talvez\""</string>
     <string name="zen_mode_event_rule_reply_yes" msgid="1003598835878784659">"Sim"</string>
     <string name="zen_mode_rule_not_found_text" msgid="8963662446092059836">"Regra não encontrada."</string>
-    <string name="zen_mode_rule_summary_combination" msgid="2526506268333198254">"<xliff:g id="DESCRIPTION">%1$s</xliff:g> / <xliff:g id="MODE">%2$s</xliff:g>"</string>
+    <string name="zen_mode_rule_summary_enabled_combination" msgid="976098744828219297">"Ativado / <xliff:g id="MODE">%1$s</xliff:g>"</string>
+    <string name="zen_mode_rule_summary_provider_combination" msgid="2101201392041867409">"<xliff:g id="PACKAGE">%1$s</xliff:g>\n<xliff:g id="SUMMARY">%2$s</xliff:g>"</string>
     <string name="zen_mode_schedule_rule_days" msgid="3195058680641389948">"Dias"</string>
     <string name="zen_mode_schedule_rule_days_none" msgid="4954143628634166317">"Nenhum"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="146511166522076034">"Todos os dias"</string>
@@ -2891,4 +2894,16 @@
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Abrir o app Câmera girando o pulso duas vezes"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Press. o botão liga/desliga duas vezes p/ abrir a câmera"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Abrir a câmera rapidamente sem desbloquear a tela"</string>
+  <string-array name="color_mode_names">
+    <item msgid="2425514299220523812">"Vibrante (padrão)"</item>
+    <item msgid="8446070607501413455">"Natural"</item>
+    <item msgid="6553408765810699025">"Padrão"</item>
+  </string-array>
+  <string-array name="color_mode_descriptions">
+    <item msgid="4979629397075120893">"Cores aprimoradas"</item>
+    <item msgid="8280754435979370728">"Cores naturais, como vistas pelos olhos"</item>
+    <item msgid="5363960654009010371">"Cores otimizadas para conteúdo digital"</item>
+  </string-array>
+    <string name="picture_color_mode" msgid="4560755008730283695">"Modo de cor da imagem"</string>
+    <string name="picture_color_mode_desc" msgid="1141891467675548590">"Usar o sistema de cores sRGB"</string>
 </resources>

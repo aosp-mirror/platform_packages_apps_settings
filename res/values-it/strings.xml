@@ -322,6 +322,7 @@
       <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> impronte digitali configurate</item>
       <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> impronta digitale configurata</item>
     </plurals>
+    <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Configura impronta digitale"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"Per sbloccare lo schermo o confermare acquisti con l\'impronta digitale, devi:"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"Impostare il metodo di blocco schermo dello sfondo"</string>
@@ -1798,7 +1799,7 @@
     <string name="process_kernel_label" msgid="3916858646836739323">"Sistema operativo Android"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"MediaServer"</string>
     <string name="process_dex2oat_label" msgid="2592408651060518226">"Ottimizzazione delle app"</string>
-    <string name="battery_saver" msgid="1426682272004907982">"Risparmio batteria"</string>
+    <string name="battery_saver" msgid="1426682272004907982">"Risparmio energetico"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Attiva automaticamente"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Mai"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="7536784431655058267">"al %1$s di batteria"</string>
@@ -2515,6 +2516,7 @@
     <string name="keywords_app_permissions" msgid="8677901415217188314">"sicurezza delle autorizzazioni app"</string>
     <string name="keywords_default_apps" msgid="3581727483175522599">"impostazioni predefinite per le app"</string>
     <string name="keywords_ignore_optimizations" msgid="946516741848647905">"ignora ottimizzazioni sospensione app standby"</string>
+    <string name="keywords_color_mode" msgid="4670570451841540200">"vivaci rgb srgb colori naturali standard"</string>
     <string name="keywords_lockscreen" msgid="4806191868723291541">"scorrimento password sequenza pin"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Configura tag NFC Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Modifica"</string>
@@ -2609,7 +2611,8 @@
     <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="2769656565454495824">"Sì o Forse"</string>
     <string name="zen_mode_event_rule_reply_yes" msgid="1003598835878784659">"Sì"</string>
     <string name="zen_mode_rule_not_found_text" msgid="8963662446092059836">"Regola non trovata."</string>
-    <string name="zen_mode_rule_summary_combination" msgid="2526506268333198254">"<xliff:g id="DESCRIPTION">%1$s</xliff:g>/<xliff:g id="MODE">%2$s</xliff:g>"</string>
+    <string name="zen_mode_rule_summary_enabled_combination" msgid="976098744828219297">"Attivato/<xliff:g id="MODE">%1$s</xliff:g>"</string>
+    <string name="zen_mode_rule_summary_provider_combination" msgid="2101201392041867409">"<xliff:g id="PACKAGE">%1$s</xliff:g>\n<xliff:g id="SUMMARY">%2$s</xliff:g>"</string>
     <string name="zen_mode_schedule_rule_days" msgid="3195058680641389948">"Giorni"</string>
     <string name="zen_mode_schedule_rule_days_none" msgid="4954143628634166317">"Nessuno"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="146511166522076034">"Ogni giorno"</string>
@@ -2891,4 +2894,16 @@
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Apri l\'app Fotocamera ruotando due volte il polso"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Premi due volte tasto di acc. per fotoc."</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Consente di aprire rapidamente la fotocamera senza sbloccare lo schermo"</string>
+  <string-array name="color_mode_names">
+    <item msgid="2425514299220523812">"Vivaci (opzione predefinita)"</item>
+    <item msgid="8446070607501413455">"Naturali"</item>
+    <item msgid="6553408765810699025">"Standard"</item>
+  </string-array>
+  <string-array name="color_mode_descriptions">
+    <item msgid="4979629397075120893">"Colori migliorati"</item>
+    <item msgid="8280754435979370728">"Colori naturali e realistici"</item>
+    <item msgid="5363960654009010371">"Colori ottimizzati per i contenuti digitali"</item>
+  </string-array>
+    <string name="picture_color_mode" msgid="4560755008730283695">"Modalità colori immagini"</string>
+    <string name="picture_color_mode_desc" msgid="1141891467675548590">"Utilizza sRGB"</string>
 </resources>

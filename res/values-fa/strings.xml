@@ -165,7 +165,7 @@
     <string name="proxy_exclusionlist_label" msgid="7700491504623418701">"‏پروکسی Bypass برای"</string>
     <string name="proxy_exclusionlist_hint" msgid="6084099226687226948">"example.com,mycomp.test.com,localhost"</string>
     <string name="proxy_defaultView_text" msgid="6387985519141433291">"بازیابی موارد پیش‌فرض"</string>
-    <string name="proxy_action_text" msgid="2957063145357903951">"انجام شد"</string>
+    <string name="proxy_action_text" msgid="2957063145357903951">"تمام"</string>
     <string name="proxy_hostname_label" msgid="8490171412999373362">"نام میزبان پروکسی"</string>
     <string name="proxy_hostname_hint" msgid="2076157057003936176">"proxy.example.com"</string>
     <string name="proxy_error" msgid="8926675299638611451">"توجه"</string>
@@ -247,7 +247,7 @@
     <string name="okay" msgid="1997666393121016642">"تأیید"</string>
     <string name="forget" msgid="1400428660472591263">"فراموش کردن"</string>
     <string name="save" msgid="879993180139353333">"ذخیره‌"</string>
-    <string name="done" msgid="6942539184162713160">"انجام شد"</string>
+    <string name="done" msgid="6942539184162713160">"تمام"</string>
     <string name="settings_label" msgid="1626402585530130914">"تنظیمات"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"تنظیمات"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"میان‌بر تنظیمات"</string>
@@ -322,6 +322,7 @@
       <item quantity="one"><xliff:g id="COUNT_1">%1$d</xliff:g> تنظیم اثر انگشت</item>
       <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> تنظیم اثر انگشت</item>
     </plurals>
+    <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"تنظیم اثر انگشت"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"برای استفاده از اثر انگشت شما جهت باز کردن قفل صفحه‌نمایش یا تأیید خریدها، نیاز داریم:"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"روش قفل صفحه پشتیبانتان را تنظیم کنید"</string>
@@ -349,7 +350,7 @@
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"از تنظیم اثر انگشت رد می‌شوید؟"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"انتخاب کرده‌اید که از اثر انگشتتان به‌عنوان روشی برای باز کردن قفل تلفن استفاده کنید. اگر اکنون این مرحله را رد کنید، باید بعداً آن را تنظیم کنید. تنظیم فقط یک دقیقه یا همین حدود طول می‌کشد."</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"تنظیم قفل صفحه"</string>
-    <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"انجام شد"</string>
+    <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"تمام"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"اووه، آن حسگر نیست"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="5053971232594165142">"از حسگر اثر انگشت در دستگاهتان استفاده کنید."</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="3618021988442639280">"ثبت انجام نشد"</string>
@@ -570,7 +571,7 @@
     <string name="wifi_display_details" msgid="7791118209992162698">"تنظیمات نمایش"</string>
     <string name="wifi_display_options_title" msgid="5740656401635054838">"گزینه‌های صفحه‌نمایش بی‌سیم"</string>
     <string name="wifi_display_options_forget" msgid="9119048225398894580">"فراموش کردن"</string>
-    <string name="wifi_display_options_done" msgid="5703116500357822557">"انجام شد"</string>
+    <string name="wifi_display_options_done" msgid="5703116500357822557">"تمام"</string>
     <string name="wifi_display_options_name" msgid="4756080222307467898">"نام"</string>
     <string name="wifi_band_24ghz" msgid="852929254171856911">"۲٫۴ گیگاهرتز"</string>
     <string name="wifi_band_5ghz" msgid="6433822023268515117">"۵ گیگاهرتز"</string>
@@ -1039,9 +1040,9 @@
     <string name="storage_wizard_format_progress_body" msgid="4445041233802828430">"در طول قالب‌بندی، <xliff:g id="NAME">^1</xliff:g> را جدا نکنید."</string>
     <string name="storage_wizard_migrate_title" msgid="1363078147938160407">"انتقال اطلاعات به حافظه جدید"</string>
     <string name="storage_wizard_migrate_body" msgid="890751699549542345">"می‌توانید عکس‌ها، فایل‌ها و برخی از برنامه‌هایتان را به این <xliff:g id="NAME">^1</xliff:g> جدید منتقل کنید. \n\nانتقال حدود <xliff:g id="TIME">^2</xliff:g> طول می‌کشد و <xliff:g id="SIZE">^3</xliff:g> از حافظه داخلی را آزاد می‌کند. در طول انتقال بعضی از برنامه‌ها کار نمی‌کنند."</string>
-    <string name="storage_wizard_migrate_now" msgid="4523444323744239143">"انتقال در این لحظه"</string>
+    <string name="storage_wizard_migrate_now" msgid="4523444323744239143">"اکنون منتقل شود"</string>
     <string name="storage_wizard_migrate_later" msgid="3173482328116026253">"انتقال در زمانی دیگر"</string>
-    <string name="storage_wizard_migrate_confirm_title" msgid="8564833529613286965">"انتقال داده‌ها، هم‌اکنون"</string>
+    <string name="storage_wizard_migrate_confirm_title" msgid="8564833529613286965">"اکنون داده منتقل شود"</string>
     <string name="storage_wizard_migrate_confirm_body" msgid="4212060581792135962"><b>"انتقال حدود <xliff:g id="TIME">^1</xliff:g> طول می‌کشد. این کار <xliff:g id="SIZE">^2</xliff:g> از فضای <xliff:g id="NAME">^3</xliff:g> را آزاد می‌کند."</b></string>
     <string name="storage_wizard_migrate_confirm_next" msgid="5509475628423823202">"انتقال"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="1665479429044202868">"در حال انتقال اطلاعات..."</string>
@@ -2297,7 +2298,7 @@
     <string name="selinux_status_permissive" msgid="6004965534713398778">"مجاز"</string>
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"در حال اعمال"</string>
     <string name="ssl_ca_cert_warning" msgid="2045866713601984673">"ممکن است شبکه پایش شود"</string>
-    <string name="done_button" msgid="1991471253042622230">"انجام شد"</string>
+    <string name="done_button" msgid="1991471253042622230">"تمام"</string>
     <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"پایش شبکه"</string>
     <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"این دستگاه توسط این افراد مدیریت می‌شود:\n<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>\n\nسرپرستتان قادر است بر فعالیت شبکه شما از جمله ایمیل‌ها، برنامه‌ها و وب‌سایت‌های ایمن نظارت داشته باشد.\n\nبرای کسب اطلاعات بیشتر، با سرپرستتان تماس بگیرید."</string>
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"شخص ثالتی می‌تواند بر فعالیت‌های شبکه شما از جمله ایمیل‌ها، برنامه‌ها و وب‌سایت‌های ایمن نظارت داشته باشد.\n\nیک اعتبارنامه مورد اعتماد نصب شده در دستگاه شما این مورد را ممکن می‌سازد."</string>
@@ -2327,8 +2328,8 @@
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"هم اکنون کاربر تنظیم شود؟"</string>
     <string name="user_setup_dialog_message" msgid="1004068621380867148">"مطمئن شوید شخص در دسترس است تا دستگاه را بگیرد و فضایش را تنظیم کند"</string>
     <string name="user_setup_profile_dialog_message" msgid="3896568553327558731">"اکنون نمایه را تنظیم می‌کنید؟"</string>
-    <string name="user_setup_button_setup_now" msgid="3391388430158437629">"هم اکنون تنظیم شود"</string>
-    <string name="user_setup_button_setup_later" msgid="3068729597269172401">"اکنون خیر"</string>
+    <string name="user_setup_button_setup_now" msgid="3391388430158437629">"اکنون تنظیم شود"</string>
+    <string name="user_setup_button_setup_later" msgid="3068729597269172401">"اکنون نه"</string>
     <string name="user_cannot_manage_message" product="tablet" msgid="7153048188252553320">"فقط صاحب رایانه لوحی می‌تواند کاربران را مدیریت کند."</string>
     <string name="user_cannot_manage_message" product="default" msgid="959315813089950649">"فقط صاحب گوشی می‌تواند کاربران را مدیریت کند."</string>
     <string name="user_cannot_add_accounts_message" msgid="5116692653439737050">"نمایه‌های محدود نمی‌توانند حسابی را اضافه کنند"</string>
@@ -2515,6 +2516,7 @@
     <string name="keywords_app_permissions" msgid="8677901415217188314">"امنیت مجوزهای برنامه‌ها"</string>
     <string name="keywords_default_apps" msgid="3581727483175522599">"پیش‌فرض برنامه‌ها"</string>
     <string name="keywords_ignore_optimizations" msgid="946516741848647905">"نادیده گرفتن بهینه‌سازی خواب کوتاه برنامه آماده به‌کار"</string>
+    <string name="keywords_color_mode" msgid="4670570451841540200">"‏استاندارد طبیعی رنگ پرطراوت rgb srgb"</string>
     <string name="keywords_lockscreen" msgid="4806191868723291541">"لغزاندن گذرواژه الگو پین"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"‏تنظیم برچسب NFC برای Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"نوشتن"</string>
@@ -2584,7 +2586,7 @@
     <string name="app_notification_row_banned" msgid="5983655258784814773">"مسدود شده"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"اولویت‌دار"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"حساس"</string>
-    <string name="app_notifications_dialog_done" msgid="3484067728568791014">"انجام شد"</string>
+    <string name="app_notifications_dialog_done" msgid="3484067728568791014">"تمام"</string>
     <string name="zen_mode_rule_name" msgid="5149068059383837549">"نام قانون"</string>
     <string name="zen_mode_rule_name_hint" msgid="3781174510556433384">"نام قانون را وارد کنید"</string>
     <string name="zen_mode_rule_name_warning" msgid="4517805381294494314">"نام قانون از قبل درحال استفاده است"</string>
@@ -2609,7 +2611,8 @@
     <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="2769656565454495824">"بله یا شاید"</string>
     <string name="zen_mode_event_rule_reply_yes" msgid="1003598835878784659">"بله"</string>
     <string name="zen_mode_rule_not_found_text" msgid="8963662446092059836">"قانون پیدا نشد."</string>
-    <string name="zen_mode_rule_summary_combination" msgid="2526506268333198254">"<xliff:g id="DESCRIPTION">%1$s</xliff:g> / <xliff:g id="MODE">%2$s</xliff:g>"</string>
+    <string name="zen_mode_rule_summary_enabled_combination" msgid="976098744828219297">"روشن / <xliff:g id="MODE">%1$s</xliff:g>"</string>
+    <string name="zen_mode_rule_summary_provider_combination" msgid="2101201392041867409">"<xliff:g id="PACKAGE">%1$s</xliff:g>\n<xliff:g id="SUMMARY">%2$s</xliff:g>"</string>
     <string name="zen_mode_schedule_rule_days" msgid="3195058680641389948">"روزها"</string>
     <string name="zen_mode_schedule_rule_days_none" msgid="4954143628634166317">"هیچ‌کدام"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="146511166522076034">"هر روز"</string>
@@ -2891,4 +2894,16 @@
     <string name="camera_gesture_desc" msgid="1831390075255870960">"با دو بار چرخاندن مچتان، برنامه دوربین را باز کنید"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"دو ضربه روی دکمه روشن/خاموش برای دوربین"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"دوربین را سریع و بدون باز کردن قفل صفحه باز کنید"</string>
+  <string-array name="color_mode_names">
+    <item msgid="2425514299220523812">"پرطروات (پیش‌فرض)"</item>
+    <item msgid="8446070607501413455">"طبیعی"</item>
+    <item msgid="6553408765810699025">"استاندارد"</item>
+  </string-array>
+  <string-array name="color_mode_descriptions">
+    <item msgid="4979629397075120893">"رنگ‌های پیشرفته"</item>
+    <item msgid="8280754435979370728">"رنگ‌های طبیعی به‌همان صورتی که با چشم دیده می‌شوند"</item>
+    <item msgid="5363960654009010371">"رنگ‌های بهینه‌شده برای محتوای دیجیتالی"</item>
+  </string-array>
+    <string name="picture_color_mode" msgid="4560755008730283695">"حالت رنگ عکس"</string>
+    <string name="picture_color_mode_desc" msgid="1141891467675548590">"‏استفاده از sRGB"</string>
 </resources>
