@@ -16,6 +16,8 @@
 
 package com.android.settings.notification;
 
+import android.app.NotificationManager;
+import android.app.NotificationManager.Policy;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -77,13 +79,33 @@ public class ZenModeSettings extends ZenModeSettingsBase implements Indexable {
     }
 
     private void updatePrioritySettingsSummary() {
-        final boolean callers = mConfig.allowCalls || mConfig.allowRepeatCallers;
+        Policy policy = NotificationManager.from(mContext).getNotificationPolicy();
         String s = getResources().getString(R.string.zen_mode_alarms);
-        s = appendLowercase(s, mConfig.allowReminders, R.string.zen_mode_reminders);
-        s = appendLowercase(s, mConfig.allowEvents, R.string.zen_mode_events);
-        s = appendLowercase(s, callers, R.string.zen_mode_selected_callers);
-        s = appendLowercase(s, mConfig.allowMessages, R.string.zen_mode_selected_messages);
+        s = appendLowercase(s, isCategoryEnabled(policy, Policy.PRIORITY_CATEGORY_REMINDERS),
+                R.string.zen_mode_reminders);
+        s = appendLowercase(s, isCategoryEnabled(policy, Policy.PRIORITY_CATEGORY_EVENTS),
+                R.string.zen_mode_events);
+        if (isCategoryEnabled(policy, Policy.PRIORITY_CATEGORY_MESSAGES)) {
+            if (policy.priorityMessageSenders == Policy.PRIORITY_SENDERS_ANY) {
+                s = appendLowercase(s, true, R.string.zen_mode_all_messages);
+            } else {
+                s = appendLowercase(s, true, R.string.zen_mode_selected_messages);
+            }
+        }
+        if (isCategoryEnabled(policy, Policy.PRIORITY_CATEGORY_CALLS)) {
+            if (policy.priorityCallSenders == Policy.PRIORITY_SENDERS_ANY) {
+                s = appendLowercase(s, true, R.string.zen_mode_all_callers);
+            } else {
+                s = appendLowercase(s, true, R.string.zen_mode_selected_callers);
+            }
+        } else if (isCategoryEnabled(policy, Policy.PRIORITY_CATEGORY_REPEAT_CALLERS)) {
+            s = appendLowercase(s, true, R.string.zen_mode_repeat_callers);
+        }
         mPrioritySettings.setSummary(s);
+    }
+
+    private boolean isCategoryEnabled(Policy policy, int categoryType) {
+        return (policy.priorityCategories & categoryType) != 0;
     }
 
     private String appendLowercase(String s, boolean condition, int resId) {
