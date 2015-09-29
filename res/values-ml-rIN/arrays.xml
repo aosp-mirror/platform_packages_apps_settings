@@ -39,7 +39,7 @@
     <item msgid="6864027152847611413">"30 മിനിറ്റ്"</item>
   </string-array>
   <string-array name="dream_timeout_entries">
-    <item msgid="3149294732238283185">"ഒരിക്കലുമില്ല"</item>
+    <item msgid="3149294732238283185">"ഒരിക്കലും"</item>
     <item msgid="2194151041885903260">"15 സെക്കൻഡ്"</item>
     <item msgid="5892295237131074341">"30 സെക്കൻഡ്"</item>
     <item msgid="3538441365970038213">"ഒരു മിനിറ്റ്"</item>
@@ -129,6 +129,12 @@
     <item msgid="1023893786681286517">"AKA"</item>
     <item msgid="3030483188676375009">"AKA\'"</item>
   </string-array>
+  <string-array name="eap_method_without_sim_auth">
+    <item msgid="4047867891913819797">"PEAP"</item>
+    <item msgid="641030570679578504">"TLS"</item>
+    <item msgid="3079489731769553856">"TTLS"</item>
+    <item msgid="35269224158638258">"PWD"</item>
+  </string-array>
     <!-- no translation found for wifi_ap_band_config_full:0 (1085243288162893079) -->
     <!-- no translation found for wifi_ap_band_config_full:1 (5531376834915607202) -->
     <!-- no translation found for wifi_ap_band_config_2G_only:0 (7006771583217001015) -->
@@ -158,13 +164,13 @@
   </string-array>
   <string-array name="wifi_sleep_policy_entries">
     <item msgid="3269131034472904310">"എല്ലായ്പ്പോഴും"</item>
-    <item msgid="844721238536786870">"പ്ലഗ്ഗുചെയ്‌തിരിക്കുമ്പോൾ മാത്രം"</item>
-    <item msgid="1986753720941888596">"ഒരിക്കലുമില്ല"</item>
+    <item msgid="844721238536786870">"പ്ലഗ്ഗുചെയ്‌തിരിക്കവേ"</item>
+    <item msgid="1986753720941888596">"ഒരിക്കലും"</item>
   </string-array>
   <string-array name="wifi_sleep_policy_entries_wifi_only">
     <item msgid="2124319326282651391">"എല്ലായ്പ്പോഴും"</item>
-    <item msgid="7433294150916905997">"പ്ലഗ്ഗുചെയ്‌തിരിക്കുമ്പോൾ മാത്രം"</item>
-    <item msgid="1390404486722375028">"ഒരിക്കലുമില്ല"</item>
+    <item msgid="7433294150916905997">"പ്ലഗ്ഗുചെയ്‌തിരിക്കവേ"</item>
+    <item msgid="1390404486722375028">"ഒരിക്കലും"</item>
   </string-array>
   <string-array name="data_usage_data_range">
     <item msgid="5013973108901348144">"കഴിഞ്ഞ 30 ദിവസം"</item>
@@ -205,7 +211,7 @@
   <string-array name="wifi_proxy_settings">
     <item msgid="4473276491748503377">"ഒന്നുമില്ല"</item>
     <item msgid="8673874894887358090">"സ്വമേധയാലുള്ളത്"</item>
-    <item msgid="168893341855953140">"പ്രോക്‌സി യാന്ത്രിക കോൺഫിഗറേഷൻ"</item>
+    <item msgid="168893341855953140">"പ്രോക്‌സി ഓട്ടോകോൺഫിഗറേഷൻ"</item>
   </string-array>
   <string-array name="apn_auth_entries">
     <item msgid="3856896061242872146">"ഒന്നുമില്ല"</item>
@@ -219,9 +225,22 @@
     <item msgid="8084938354605535381">"IPv4/IPv6"</item>
   </string-array>
   <string-array name="bearer_entries">
-    <item msgid="1770285336669531300">"LTE"</item>
-    <item msgid="3044323519470167625">"eHRPD"</item>
-    <item msgid="6848428671997893147">"വ്യക്തമാക്കാത്തത്"</item>
+    <item msgid="1697455674244601285">"വ്യക്തമാക്കാത്തത്"</item>
+    <item msgid="1317061551798123908">"LTE"</item>
+    <item msgid="5005435684511894770">"HSPAP"</item>
+    <item msgid="7700603056475539235">"HSPA"</item>
+    <item msgid="245973007602397887">"HSUPA"</item>
+    <item msgid="6291566767651194016">"HSDPA"</item>
+    <item msgid="2005841400859926251">"UMTS"</item>
+    <item msgid="3757385691174882861">"EDG"</item>
+    <item msgid="2979115073474306864">"GPRS"</item>
+    <item msgid="2271750502778879106">"eHRPD"</item>
+    <item msgid="4173379084783381337">"EVDO_B"</item>
+    <item msgid="2033682802005776093">"EVDO_A"</item>
+    <item msgid="5753917125831466719">"EVDO_0"</item>
+    <item msgid="4713807936577071142">"1xRTT"</item>
+    <item msgid="1142355797022021906">"IS95B"</item>
+    <item msgid="7471182818083460781">"IS95A"</item>
   </string-array>
   <string-array name="mvno_type_entries">
     <item msgid="4367119357633573465">"ഒന്നുമില്ല"</item>
@@ -230,7 +249,7 @@
     <item msgid="2681427309183221543">"GID"</item>
   </string-array>
   <string-array name="app_install_location_entries">
-    <item msgid="8151497958991952759">"ആന്തരിക ഉപകരണ സംഭരണം"</item>
+    <item msgid="8151497958991952759">"ആന്തരിക ഉപകരണ സ്റ്റോറേജ്"</item>
     <item msgid="3738430123799803530">"നീക്കംചെയ്യാനാകുന്ന SD കാർഡ്"</item>
     <item msgid="4498124044785815005">"സി‌സ്റ്റത്തിനെ തീരുമാനമെടുക്കാൻ അനുവദിക്കുക"</item>
   </string-array>
@@ -346,7 +365,7 @@
     <item msgid="7872852746938272552">"അസിസ്റ്റ് സ്‌ക്രീൻഷോട്ട്"</item>
   </string-array>
   <string-array name="long_press_timeout_selector_titles">
-    <item msgid="3511504869290423954">"ഹ്രസ്വമായത്"</item>
+    <item msgid="3511504869290423954">"ഹ്രസ്വം"</item>
     <item msgid="2560532955514699713">"ഇടത്തരം"</item>
     <item msgid="2372711992605524591">"ദൈർഘ്യമുള്ളത്"</item>
   </string-array>
@@ -383,7 +402,7 @@
     <item msgid="8342334626783983353">"100%"</item>
   </string-array>
   <string-array name="captioning_preset_selector_titles">
-    <item msgid="7009918361545506251">"സ്ഥിരമായ അപ്ലിക്കേഷൻ ഉപയോഗിക്കുക"</item>
+    <item msgid="7009918361545506251">"സ്ഥിര ആപ്പ് ഉപയോഗിക്കൂ"</item>
     <item msgid="1770533843436933500">"കറുപ്പിൽ വെളുപ്പ്"</item>
     <item msgid="758587126802411846">"വെളുപ്പിൽ കറുപ്പ്"</item>
     <item msgid="1495307195241623402">"കറുപ്പിൽ മഞ്ഞ"</item>
@@ -448,13 +467,17 @@
   </string-array>
   <string-array name="overlay_display_devices_entries">
     <item msgid="1606809880904982133">"ഒന്നുമില്ല"</item>
-    <item msgid="688482401508173818">"720x480 mdpi"</item>
-    <item msgid="6027541158956821790">"720x480 mdpi (സുരക്ഷിതം)"</item>
-    <item msgid="8181151155909301030">"1280x720 tvdpi"</item>
-    <item msgid="2920655562462493148">"1280x720 tvdpi (സുരക്ഷിതം)"</item>
-    <item msgid="8910371271391940941">"1920x1080 xhdpi"</item>
-    <item msgid="4171600481380800455">"1920x1080 xhdpi (സുരക്ഷിതം)"</item>
-    <item msgid="1937752114395156918">"1280x720 tvdpi, 1920x1080 xhdpi എന്നിവ"</item>
+    <item msgid="9033194758688161545">"480p"</item>
+    <item msgid="1025306206556583600">"480p (സുരക്ഷിതം)"</item>
+    <item msgid="1853913333042744661">"720p"</item>
+    <item msgid="3414540279805870511">"720p (സുരക്ഷിതം)"</item>
+    <item msgid="9039818062847141551">"1080p"</item>
+    <item msgid="4939496949750174834">"1080p (സുരക്ഷിതം)"</item>
+    <item msgid="1833612718524903568">"4K"</item>
+    <item msgid="238303513127879234">"4K (സുരക്ഷിതം)"</item>
+    <item msgid="3547211260846843098">"4K (അപ്‌സ്കെയിൽ ചെയ്തത്)"</item>
+    <item msgid="5411365648951414254">"4K (അപ്‌സ്കെയിൽ ചെയ്തത്, സുരക്ഷിതം)"</item>
+    <item msgid="1311305077526792901">"720p, 1080p (ഇരട്ട സ്ക്രീൻ)"</item>
   </string-array>
   <string-array name="enable_opengl_traces_entries">
     <item msgid="3191973083884253830">"ഒന്നുമില്ല"</item>
@@ -503,14 +526,15 @@
   </string-array>
   <string-array name="security_settings_premium_sms_values">
     <item msgid="7389829271787670252">"ചോദിക്കുക"</item>
-    <item msgid="5077768429488260031">"ഒരിക്കലും അനുവദിക്കരുത്"</item>
+    <item msgid="5077768429488260031">"ഒരിക്കലുമനുവദിക്കരുത്"</item>
     <item msgid="1417929597727989746">"എല്ലായ്‌പ്പോഴും അനുവദിക്കുക"</item>
   </string-array>
   <string-array name="ram_states">
-    <item msgid="7088762389498381203">"സാധാരണം"</item>
-    <item msgid="4517779899383204000">"മിതമായത്"</item>
-    <item msgid="406385694840950802">"കുറവ്"</item>
-    <item msgid="4212263919458209842">"കഴിയാറായി"</item>
+    <item msgid="3944681673818150669">"സാധാരണം"</item>
+    <item msgid="3256987280393708586">"ഇടത്തരം"</item>
+    <item msgid="4662917179231875995">"കുറഞ്ഞത്"</item>
+    <item msgid="5264929699714647509">"കഴിയാറായി"</item>
+    <item msgid="5606155978847838966">"?"</item>
   </string-array>
   <string-array name="proc_stats_memory_states">
     <item msgid="8845855295876909468">"സാധാരണം"</item>
@@ -542,11 +566,5 @@
     <item msgid="4608643045752965568">"പിങ്ക്"</item>
     <item msgid="6131821495505931173">"ചുവപ്പ്"</item>
   </string-array>
-  <string-array name="usb_configuration_titles">
-    <item msgid="5350926807680564950">"MTP (മീഡിയ ട്രാൻസ്‌ഫർ പ്രോട്ടോകോൾ)"</item>
-    <item msgid="8856820259201251036">"PTP (പിക്‌ചർ ട്രാൻസ്‌ഫർ പ്രോട്ടോകോൾ)"</item>
-    <item msgid="216135047298423770">"RNDIS (USB ഇതർനെറ്റ്)"</item>
-    <item msgid="2686051673589572111">"ഓഡിയോ ഉറവിടം"</item>
-    <item msgid="7014054229609338176">"MIDI"</item>
-  </string-array>
+    <!-- no translation found for usb_configuration_titles:0 (292902998500371970) -->
 </resources>

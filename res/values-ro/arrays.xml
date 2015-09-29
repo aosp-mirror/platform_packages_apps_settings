@@ -88,12 +88,12 @@
     <item msgid="8934131797783724664">"În curs de scanare..."</item>
     <item msgid="8513729475867537913">"Se conectează..."</item>
     <item msgid="515055375277271756">"În curs de autentificare…"</item>
-    <item msgid="1943354004029184381">"Se obţine adresa IP..."</item>
+    <item msgid="1943354004029184381">"Se obține adresa IP..."</item>
     <item msgid="4221763391123233270">"Conectată"</item>
     <item msgid="624838831631122137">"Suspendată"</item>
     <item msgid="7979680559596111948">"În curs de deconectare..."</item>
     <item msgid="1634960474403853625">"Deconectată"</item>
-    <item msgid="746097431216080650">"Nereuşit"</item>
+    <item msgid="746097431216080650">"Nereușit"</item>
     <item msgid="6367044185730295334">"Blocat"</item>
     <item msgid="503942654197908005">"Evitarea temporară a conexiunii slabe"</item>
   </string-array>
@@ -102,12 +102,12 @@
     <item msgid="8878186979715711006">"În curs de scanare..."</item>
     <item msgid="355508996603873860">"Se conectează la <xliff:g id="NETWORK_NAME">%1$s</xliff:g>..."</item>
     <item msgid="554971459996405634">"Se autentifică cu <xliff:g id="NETWORK_NAME">%1$s</xliff:g>…"</item>
-    <item msgid="7928343808033020343">"Se obţine adresa IP de la <xliff:g id="NETWORK_NAME">%1$s</xliff:g>…"</item>
+    <item msgid="7928343808033020343">"Se obține adresa IP de la <xliff:g id="NETWORK_NAME">%1$s</xliff:g>…"</item>
     <item msgid="8937994881315223448">"Conectat la <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</item>
     <item msgid="1330262655415760617">"Suspendată"</item>
     <item msgid="7698638434317271902">"În curs de deconectare de la <xliff:g id="NETWORK_NAME">%1$s</xliff:g>..."</item>
     <item msgid="197508606402264311">"Deconectată"</item>
-    <item msgid="8578370891960825148">"Nereuşit"</item>
+    <item msgid="8578370891960825148">"Nereușit"</item>
     <item msgid="5660739516542454527">"Blocat"</item>
     <item msgid="1805837518286731242">"Evitarea temporară a conexiunii slabe"</item>
   </string-array>
@@ -129,6 +129,12 @@
     <item msgid="1023893786681286517">"AKA"</item>
     <item msgid="3030483188676375009">"AKA\'"</item>
   </string-array>
+  <string-array name="eap_method_without_sim_auth">
+    <item msgid="4047867891913819797">"PEAP"</item>
+    <item msgid="641030570679578504">"TLS"</item>
+    <item msgid="3079489731769553856">"TTLS"</item>
+    <item msgid="35269224158638258">"PWD"</item>
+  </string-array>
     <!-- no translation found for wifi_ap_band_config_full:0 (1085243288162893079) -->
     <!-- no translation found for wifi_ap_band_config_full:1 (5531376834915607202) -->
     <!-- no translation found for wifi_ap_band_config_2G_only:0 (7006771583217001015) -->
@@ -140,7 +146,7 @@
   <string-array name="wifi_p2p_status">
     <item msgid="1701505390737218306">"Conectat"</item>
     <item msgid="3189211552661432651">"Invitat(ă)"</item>
-    <item msgid="3206450250360237549">"Nereuşită"</item>
+    <item msgid="3206450250360237549">"Nereușită"</item>
     <item msgid="7785896708926971207">"Disponibil"</item>
     <item msgid="2330782789550628803">"Fără acoperire"</item>
   </string-array>
@@ -219,9 +225,22 @@
     <item msgid="8084938354605535381">"IPv4/IPv6"</item>
   </string-array>
   <string-array name="bearer_entries">
-    <item msgid="1770285336669531300">"LTE"</item>
-    <item msgid="3044323519470167625">"eHRPD"</item>
-    <item msgid="6848428671997893147">"Nespecificat"</item>
+    <item msgid="1697455674244601285">"Nespecificat"</item>
+    <item msgid="1317061551798123908">"LTE"</item>
+    <item msgid="5005435684511894770">"HSPAP"</item>
+    <item msgid="7700603056475539235">"HSPA"</item>
+    <item msgid="245973007602397887">"HSUPA"</item>
+    <item msgid="6291566767651194016">"HSDPA"</item>
+    <item msgid="2005841400859926251">"UMTS"</item>
+    <item msgid="3757385691174882861">"EDGE"</item>
+    <item msgid="2979115073474306864">"GPRS"</item>
+    <item msgid="2271750502778879106">"eHRPD"</item>
+    <item msgid="4173379084783381337">"EVDO_B"</item>
+    <item msgid="2033682802005776093">"EVDO_A"</item>
+    <item msgid="5753917125831466719">"EVDO_0"</item>
+    <item msgid="4713807936577071142">"1xRTT"</item>
+    <item msgid="1142355797022021906">"IS95B"</item>
+    <item msgid="7471182818083460781">"IS95A"</item>
   </string-array>
   <string-array name="mvno_type_entries">
     <item msgid="4367119357633573465">"Niciuna"</item>
@@ -231,8 +250,8 @@
   </string-array>
   <string-array name="app_install_location_entries">
     <item msgid="8151497958991952759">"Stocare internă pe dispozitiv"</item>
-    <item msgid="3738430123799803530">"Card SD detaşabil"</item>
-    <item msgid="4498124044785815005">"Permiteţi sistemului să decidă"</item>
+    <item msgid="3738430123799803530">"Card SD detașabil"</item>
+    <item msgid="4498124044785815005">"Permiteți sistemului să decidă"</item>
   </string-array>
   <string-array name="app_ops_categories">
     <item msgid="6358963769537892925">"Locație"</item>
@@ -383,7 +402,7 @@
     <item msgid="8342334626783983353">"100%"</item>
   </string-array>
   <string-array name="captioning_preset_selector_titles">
-    <item msgid="7009918361545506251">"Util. setările prest. ale aplic."</item>
+    <item msgid="7009918361545506251">"Setările prestabilite"</item>
     <item msgid="1770533843436933500">"Alb pe negru"</item>
     <item msgid="758587126802411846">"Negru pe alb"</item>
     <item msgid="1495307195241623402">"Galben pe negru"</item>
@@ -411,7 +430,7 @@
   </string-array>
   <string-array name="hdcp_checking_titles">
     <item msgid="441827799230089869">"Nu verifica niciodată"</item>
-    <item msgid="6042769699089883931">"Verifică doar pentru conţinut DRM"</item>
+    <item msgid="6042769699089883931">"Verifică doar pentru conținut DRM"</item>
     <item msgid="9174900380056846820">"Verifică întotdeauna"</item>
   </string-array>
   <string-array name="hdcp_checking_summaries">
@@ -420,22 +439,22 @@
     <item msgid="45075631231212732">"Utilizează întotdeauna verificarea HDCP"</item>
   </string-array>
   <string-array name="window_animation_scale_entries">
-    <item msgid="8134156599370824081">"Animaţie dezactivată"</item>
-    <item msgid="6624864048416710414">"Animaţie la scara 0,5x"</item>
-    <item msgid="2219332261255416635">"Animaţie la scara 1x"</item>
-    <item msgid="3544428804137048509">"Animaţie la scara 1,5x"</item>
-    <item msgid="3110710404225974514">"Animaţie la scara 2x"</item>
+    <item msgid="8134156599370824081">"Animație dezactivată"</item>
+    <item msgid="6624864048416710414">"Animație la scara 0,5x"</item>
+    <item msgid="2219332261255416635">"Animație la scara 1x"</item>
+    <item msgid="3544428804137048509">"Animație la scara 1,5x"</item>
+    <item msgid="3110710404225974514">"Animație la scara 2x"</item>
     <item msgid="4402738611528318731">"Animaţie la scara 5x"</item>
-    <item msgid="6189539267968330656">"Animaţie la scara 10x"</item>
+    <item msgid="6189539267968330656">"Animație la scara 10x"</item>
   </string-array>
   <string-array name="transition_animation_scale_entries">
-    <item msgid="8464255836173039442">"Animaţie dezactivată"</item>
-    <item msgid="3375781541913316411">"Animaţie la scara 0,5x"</item>
-    <item msgid="1991041427801869945">"Animaţie la scara 1x"</item>
-    <item msgid="4012689927622382874">"Animaţie la scara 1,5x"</item>
-    <item msgid="3289156759925947169">"Animaţie la scara 2x"</item>
-    <item msgid="7705857441213621835">"Animaţie la scara 5x"</item>
-    <item msgid="6660750935954853365">"Animaţie la scara 10x"</item>
+    <item msgid="8464255836173039442">"Animație dezactivată"</item>
+    <item msgid="3375781541913316411">"Animație la scara 0,5x"</item>
+    <item msgid="1991041427801869945">"Animație la scara 1x"</item>
+    <item msgid="4012689927622382874">"Animație la scara 1,5x"</item>
+    <item msgid="3289156759925947169">"Animație la scara 2x"</item>
+    <item msgid="7705857441213621835">"Animație la scara 5x"</item>
+    <item msgid="6660750935954853365">"Animație la scara 10x"</item>
   </string-array>
   <string-array name="animator_duration_scale_entries">
     <item msgid="6039901060648228241">"Animaţie dezactivată"</item>
@@ -448,13 +467,17 @@
   </string-array>
   <string-array name="overlay_display_devices_entries">
     <item msgid="1606809880904982133">"Niciuna"</item>
-    <item msgid="688482401508173818">"720x480 mdpi"</item>
-    <item msgid="6027541158956821790">"720x480 mdpi (securizat)"</item>
-    <item msgid="8181151155909301030">"1280x720 tvdpi"</item>
-    <item msgid="2920655562462493148">"1280x720 tvdpi (securizat)"</item>
-    <item msgid="8910371271391940941">"1920x1080 xhdpi"</item>
-    <item msgid="4171600481380800455">"1920x1080 xhdpi (securizat)"</item>
-    <item msgid="1937752114395156918">"1280x720 tvdpi și 1920x1080 xhdpi"</item>
+    <item msgid="9033194758688161545">"480p"</item>
+    <item msgid="1025306206556583600">"480p (securizat)"</item>
+    <item msgid="1853913333042744661">"720p"</item>
+    <item msgid="3414540279805870511">"720p (securizat)"</item>
+    <item msgid="9039818062847141551">"1080p"</item>
+    <item msgid="4939496949750174834">"1080p (securizat)"</item>
+    <item msgid="1833612718524903568">"4K"</item>
+    <item msgid="238303513127879234">"4K (securizat)"</item>
+    <item msgid="3547211260846843098">"4K (îmbunătățit)"</item>
+    <item msgid="5411365648951414254">"4K (îmbunătățit, securizat)"</item>
+    <item msgid="1311305077526792901">"720p, 1080p (ecran dual)"</item>
   </string-array>
   <string-array name="enable_opengl_traces_entries">
     <item msgid="3191973083884253830">"Niciuna"</item>
@@ -495,22 +518,23 @@
   </string-array>
   <string-array name="vpn_states">
     <item msgid="8621078286418985762">"Deconectată"</item>
-    <item msgid="6692305604213080515">"Se iniţializează..."</item>
+    <item msgid="6692305604213080515">"Se inițializează..."</item>
     <item msgid="8001704909356800092">"Se conectează..."</item>
     <item msgid="4039737283841672166">"Conectată"</item>
     <item msgid="4042143101664725090">"Timp limită"</item>
-    <item msgid="7664124146786465092">"Nereuşită"</item>
+    <item msgid="7664124146786465092">"Nereușită"</item>
   </string-array>
   <string-array name="security_settings_premium_sms_values">
-    <item msgid="7389829271787670252">"Întrebaţi"</item>
+    <item msgid="7389829271787670252">"Întrebați"</item>
     <item msgid="5077768429488260031">"Nu permiteţi niciodată"</item>
     <item msgid="1417929597727989746">"Permiteţi întotdeauna"</item>
   </string-array>
   <string-array name="ram_states">
-    <item msgid="7088762389498381203">"normală"</item>
-    <item msgid="4517779899383204000">"medie"</item>
-    <item msgid="406385694840950802">"redusă"</item>
-    <item msgid="4212263919458209842">"critică"</item>
+    <item msgid="3944681673818150669">"Normală"</item>
+    <item msgid="3256987280393708586">"Moderată"</item>
+    <item msgid="4662917179231875995">"Scăzută"</item>
+    <item msgid="5264929699714647509">"Critică"</item>
+    <item msgid="5606155978847838966">"?"</item>
   </string-array>
   <string-array name="proc_stats_memory_states">
     <item msgid="8845855295876909468">"Normală"</item>
@@ -542,11 +566,5 @@
     <item msgid="4608643045752965568">"Roz"</item>
     <item msgid="6131821495505931173">"Roșu"</item>
   </string-array>
-  <string-array name="usb_configuration_titles">
-    <item msgid="5350926807680564950">"MTP (Media Transfer Protocol)"</item>
-    <item msgid="8856820259201251036">"PTP (Picture Transfer Protocol)"</item>
-    <item msgid="216135047298423770">"RNDIS (USB Ethernet)"</item>
-    <item msgid="2686051673589572111">"Sursă audio"</item>
-    <item msgid="7014054229609338176">"MIDI"</item>
-  </string-array>
+    <!-- no translation found for usb_configuration_titles:0 (292902998500371970) -->
 </resources>

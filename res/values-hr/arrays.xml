@@ -129,6 +129,12 @@
     <item msgid="1023893786681286517">"AKA"</item>
     <item msgid="3030483188676375009">"AKA\'"</item>
   </string-array>
+  <string-array name="eap_method_without_sim_auth">
+    <item msgid="4047867891913819797">"PEAP"</item>
+    <item msgid="641030570679578504">"TLS"</item>
+    <item msgid="3079489731769553856">"TTLS"</item>
+    <item msgid="35269224158638258">"PWD"</item>
+  </string-array>
     <!-- no translation found for wifi_ap_band_config_full:0 (1085243288162893079) -->
     <!-- no translation found for wifi_ap_band_config_full:1 (5531376834915607202) -->
     <!-- no translation found for wifi_ap_band_config_2G_only:0 (7006771583217001015) -->
@@ -163,7 +169,7 @@
   </string-array>
   <string-array name="wifi_sleep_policy_entries_wifi_only">
     <item msgid="2124319326282651391">"Uvijek"</item>
-    <item msgid="7433294150916905997">"Samo kad je uključeno"</item>
+    <item msgid="7433294150916905997">"Samo kad je priključen na napajanje"</item>
     <item msgid="1390404486722375028">"Nikad"</item>
   </string-array>
   <string-array name="data_usage_data_range">
@@ -205,7 +211,7 @@
   <string-array name="wifi_proxy_settings">
     <item msgid="4473276491748503377">"Ništa"</item>
     <item msgid="8673874894887358090">"Ručno"</item>
-    <item msgid="168893341855953140">"Automatska konf. proxyja"</item>
+    <item msgid="168893341855953140">"Autom. konfig. proxyja"</item>
   </string-array>
   <string-array name="apn_auth_entries">
     <item msgid="3856896061242872146">"Ništa"</item>
@@ -219,9 +225,22 @@
     <item msgid="8084938354605535381">"IPv4/IPv6"</item>
   </string-array>
   <string-array name="bearer_entries">
-    <item msgid="1770285336669531300">"LTE"</item>
-    <item msgid="3044323519470167625">"eHRPD"</item>
-    <item msgid="6848428671997893147">"Neodređeno"</item>
+    <item msgid="1697455674244601285">"Nije navedeno"</item>
+    <item msgid="1317061551798123908">"LTE"</item>
+    <item msgid="5005435684511894770">"HSPAP"</item>
+    <item msgid="7700603056475539235">"HSPA"</item>
+    <item msgid="245973007602397887">"HSUPA"</item>
+    <item msgid="6291566767651194016">"HSDPA"</item>
+    <item msgid="2005841400859926251">"UMTS"</item>
+    <item msgid="3757385691174882861">"EDGE"</item>
+    <item msgid="2979115073474306864">"GPRS"</item>
+    <item msgid="2271750502778879106">"eHRPD"</item>
+    <item msgid="4173379084783381337">"EVDO_B"</item>
+    <item msgid="2033682802005776093">"EVDO_A"</item>
+    <item msgid="5753917125831466719">"EVDO_0"</item>
+    <item msgid="4713807936577071142">"1 x RTT"</item>
+    <item msgid="1142355797022021906">"IS95B"</item>
+    <item msgid="7471182818083460781">"IS95A"</item>
   </string-array>
   <string-array name="mvno_type_entries">
     <item msgid="4367119357633573465">"Ništa"</item>
@@ -421,40 +440,44 @@
   </string-array>
   <string-array name="window_animation_scale_entries">
     <item msgid="8134156599370824081">"Animacija isključena"</item>
-    <item msgid="6624864048416710414">"Animacija razmjera 0,5 x"</item>
-    <item msgid="2219332261255416635">"Animacija razmjera 1x"</item>
-    <item msgid="3544428804137048509">"Animacija razmjera 1,5 x"</item>
-    <item msgid="3110710404225974514">"Animacija razmjera 2x"</item>
-    <item msgid="4402738611528318731">"Animacija razmjera 5x"</item>
-    <item msgid="6189539267968330656">"Animacija razmjera 10x"</item>
+    <item msgid="6624864048416710414">"Brzina animacije 0,5x"</item>
+    <item msgid="2219332261255416635">"Brzina animacije 1x"</item>
+    <item msgid="3544428804137048509">"Brzina animacije 1,5x"</item>
+    <item msgid="3110710404225974514">"Brzina animacije 2x"</item>
+    <item msgid="4402738611528318731">"Brzina animacije 5x"</item>
+    <item msgid="6189539267968330656">"Brzina animacije 10x"</item>
   </string-array>
   <string-array name="transition_animation_scale_entries">
     <item msgid="8464255836173039442">"Animacija isključena"</item>
-    <item msgid="3375781541913316411">"Animacija razmjera 0,5 x"</item>
-    <item msgid="1991041427801869945">"Animacija razmjera 1x"</item>
-    <item msgid="4012689927622382874">"Animacija razmjera 1,5 x"</item>
-    <item msgid="3289156759925947169">"Animacija razmjera 2x"</item>
-    <item msgid="7705857441213621835">"Animacija razmjera 5x"</item>
-    <item msgid="6660750935954853365">"Animacija razmjera 10x"</item>
+    <item msgid="3375781541913316411">"Brzina animacije 0,5x"</item>
+    <item msgid="1991041427801869945">"Brzina animacije 1x"</item>
+    <item msgid="4012689927622382874">"Brzina animacije 1,5x"</item>
+    <item msgid="3289156759925947169">"Brzina animacije 2x"</item>
+    <item msgid="7705857441213621835">"Brzina animacije 5x"</item>
+    <item msgid="6660750935954853365">"Brzina animacije 10x"</item>
   </string-array>
   <string-array name="animator_duration_scale_entries">
     <item msgid="6039901060648228241">"Animacija isključena"</item>
-    <item msgid="1138649021950863198">"Animacija razmjera 0,5 x"</item>
-    <item msgid="4394388961370833040">"Animacija razmjera 1 x"</item>
-    <item msgid="8125427921655194973">"Animacija razmjera 1,5 x"</item>
-    <item msgid="3334024790739189573">"Animacija razmjera 2 x"</item>
-    <item msgid="3170120558236848008">"Animacija razmjera 5 x"</item>
-    <item msgid="1069584980746680398">"Animacija razmjera 10 x"</item>
+    <item msgid="1138649021950863198">"Brzina animacije 0,5x"</item>
+    <item msgid="4394388961370833040">"Brzina animacije 1x"</item>
+    <item msgid="8125427921655194973">"Brzina animacije 1,5x"</item>
+    <item msgid="3334024790739189573">"Brzina animacije 2x"</item>
+    <item msgid="3170120558236848008">"Brzina animacije 5x"</item>
+    <item msgid="1069584980746680398">"Brzina animacije 10x"</item>
   </string-array>
   <string-array name="overlay_display_devices_entries">
     <item msgid="1606809880904982133">"Ništa"</item>
-    <item msgid="688482401508173818">"720 x 480 mdpi"</item>
-    <item msgid="6027541158956821790">"720 x 480 mdpi (sigurno)"</item>
-    <item msgid="8181151155909301030">"1280 x 720 tvdpi"</item>
-    <item msgid="2920655562462493148">"1280 x 720 tvdpi (sigurno)"</item>
-    <item msgid="8910371271391940941">"1920 x 1080 xhdpi"</item>
-    <item msgid="4171600481380800455">"1920 x 1080 xhdpi (sigurno)"</item>
-    <item msgid="1937752114395156918">"1280 x 720 tvdpi, 1920 x 1080 xhdpi"</item>
+    <item msgid="9033194758688161545">"480 p"</item>
+    <item msgid="1025306206556583600">"480 p (sigurno)"</item>
+    <item msgid="1853913333042744661">"720 p"</item>
+    <item msgid="3414540279805870511">"720 p (sigurno)"</item>
+    <item msgid="9039818062847141551">"1080 p"</item>
+    <item msgid="4939496949750174834">"1080 p (sigurno)"</item>
+    <item msgid="1833612718524903568">"4000"</item>
+    <item msgid="238303513127879234">"4000 (sigurno)"</item>
+    <item msgid="3547211260846843098">"4000 (povećanje razlučivosti)"</item>
+    <item msgid="5411365648951414254">"4000 (poveć. razlučiv., sigurno)"</item>
+    <item msgid="1311305077526792901">"720 p, 1080 p (dvojni zaslon)"</item>
   </string-array>
   <string-array name="enable_opengl_traces_entries">
     <item msgid="3191973083884253830">"Ništa"</item>
@@ -478,7 +501,7 @@
     <item msgid="2290859360633824369">"Prikaži područja za deuteranomaliju"</item>
   </string-array>
   <string-array name="app_process_limit_entries">
-    <item msgid="3401625457385943795">"Standardna granica"</item>
+    <item msgid="3401625457385943795">"Standardna ograničenje"</item>
     <item msgid="4071574792028999443">"Nema pozadinskih procesa"</item>
     <item msgid="4810006996171705398">"Najviše 1 proces"</item>
     <item msgid="8586370216857360863">"Najviše 2 procesa"</item>
@@ -507,10 +530,11 @@
     <item msgid="1417929597727989746">"Dopusti uvijek"</item>
   </string-array>
   <string-array name="ram_states">
-    <item msgid="7088762389498381203">"uobičajeno"</item>
-    <item msgid="4517779899383204000">"umjereno"</item>
-    <item msgid="406385694840950802">"nisko"</item>
-    <item msgid="4212263919458209842">"kritično"</item>
+    <item msgid="3944681673818150669">"Uobičajeno"</item>
+    <item msgid="3256987280393708586">"Umjereno"</item>
+    <item msgid="4662917179231875995">"Nisko"</item>
+    <item msgid="5264929699714647509">"Kritično"</item>
+    <item msgid="5606155978847838966">"?"</item>
   </string-array>
   <string-array name="proc_stats_memory_states">
     <item msgid="8845855295876909468">"Uobičajena"</item>
@@ -542,11 +566,5 @@
     <item msgid="4608643045752965568">"Ružičasta"</item>
     <item msgid="6131821495505931173">"Crvena"</item>
   </string-array>
-  <string-array name="usb_configuration_titles">
-    <item msgid="5350926807680564950">"MTP (protokol za prijenos medija)"</item>
-    <item msgid="8856820259201251036">"PTP (protokol za prijenos fotografija)"</item>
-    <item msgid="216135047298423770">"RNDIS (USB ethernet)"</item>
-    <item msgid="2686051673589572111">"Audioizvor"</item>
-    <item msgid="7014054229609338176">"MIDI"</item>
-  </string-array>
+    <!-- no translation found for usb_configuration_titles:0 (292902998500371970) -->
 </resources>

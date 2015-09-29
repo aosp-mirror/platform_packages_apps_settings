@@ -49,7 +49,7 @@
     <item msgid="6415509612413178727">"30 daqiqa"</item>
   </string-array>
   <string-array name="lock_after_timeout_entries">
-    <item msgid="8929270399652145290">"Hoziroq"</item>
+    <item msgid="8929270399652145290">"darhol"</item>
     <item msgid="6736512735606834431">"5 soniya"</item>
     <item msgid="8044619388267891375">"15 soniya"</item>
     <item msgid="1822002388249545488">"30 soniya"</item>
@@ -89,7 +89,7 @@
     <item msgid="8513729475867537913">"Ulanmoqda…"</item>
     <item msgid="515055375277271756">"Tasdiqdan o‘tilmoqda…"</item>
     <item msgid="1943354004029184381">"IP manzil o‘zlashtirilmoqda…"</item>
-    <item msgid="4221763391123233270">"Ulandi"</item>
+    <item msgid="4221763391123233270">"Ulangan"</item>
     <item msgid="624838831631122137">"Muzlatildi"</item>
     <item msgid="7979680559596111948">"Uzilmoqda…"</item>
     <item msgid="1634960474403853625">"Uzilgan"</item>
@@ -129,12 +129,18 @@
     <item msgid="1023893786681286517">"AKA"</item>
     <item msgid="3030483188676375009">"AKA\'"</item>
   </string-array>
+  <string-array name="eap_method_without_sim_auth">
+    <item msgid="4047867891913819797">"PEAP"</item>
+    <item msgid="641030570679578504">"TLS"</item>
+    <item msgid="3079489731769553856">"TTLS"</item>
+    <item msgid="35269224158638258">"PWD"</item>
+  </string-array>
     <!-- no translation found for wifi_ap_band_config_full:0 (1085243288162893079) -->
     <!-- no translation found for wifi_ap_band_config_full:1 (5531376834915607202) -->
     <!-- no translation found for wifi_ap_band_config_2G_only:0 (7006771583217001015) -->
   <string-array name="wifi_p2p_wps_setup">
     <item msgid="5085064298144493867">"Bog‘lash tugmasi"</item>
-    <item msgid="1624323946324499595">"ulashma qurilmadagi PIN kod"</item>
+    <item msgid="1624323946324499595">"ulashma qurilmadagi PIN-kod"</item>
     <item msgid="5366790421523328066">"Ushbu qurilmaning PIN kodi"</item>
   </string-array>
   <string-array name="wifi_p2p_status">
@@ -157,13 +163,13 @@
     <item msgid="5702329417707689835">"Zo‘r"</item>
   </string-array>
   <string-array name="wifi_sleep_policy_entries">
-    <item msgid="3269131034472904310">"Doimo"</item>
-    <item msgid="844721238536786870">"Faqat quvvatlantirilayotganda"</item>
+    <item msgid="3269131034472904310">"O‘chirilmasin"</item>
+    <item msgid="844721238536786870">"Faqat quvvat olayotganda"</item>
     <item msgid="1986753720941888596">"Hech qachon"</item>
   </string-array>
   <string-array name="wifi_sleep_policy_entries_wifi_only">
-    <item msgid="2124319326282651391">"Doimo"</item>
-    <item msgid="7433294150916905997">"Faqat quvvatlantirilayotganda"</item>
+    <item msgid="2124319326282651391">"O‘chirilmasin"</item>
+    <item msgid="7433294150916905997">"Faqat quvvat olayotganda"</item>
     <item msgid="1390404486722375028">"Hech qachon"</item>
   </string-array>
   <string-array name="data_usage_data_range">
@@ -187,12 +193,12 @@
     <item msgid="2318274046749286642">"PWD"</item>
   </string-array>
   <string-array name="wifi_peap_phase2_entries">
-    <item msgid="2577747762745812488">"Hech biri"</item>
+    <item msgid="2577747762745812488">"Yo‘q"</item>
     <item msgid="937786527870979616">"MSCHAPV2"</item>
     <item msgid="5302613883318643629">"GTC"</item>
   </string-array>
   <string-array name="wifi_phase2_entries">
-    <item msgid="1818786254010764570">"Hech qaysi"</item>
+    <item msgid="1818786254010764570">"Yo‘q"</item>
     <item msgid="6189918678874123056">"PAP"</item>
     <item msgid="1524112260493662517">"MSCHAP"</item>
     <item msgid="5923246669412752932">"MSCHAPV2"</item>
@@ -203,12 +209,12 @@
     <item msgid="628395202971532382">"Statik"</item>
   </string-array>
   <string-array name="wifi_proxy_settings">
-    <item msgid="4473276491748503377">"Hech qaysi"</item>
-    <item msgid="8673874894887358090">"Qo‘lbola"</item>
+    <item msgid="4473276491748503377">"Yo‘q"</item>
+    <item msgid="8673874894887358090">"Qo‘lda"</item>
     <item msgid="168893341855953140">"Proksi avto-sozlamalari"</item>
   </string-array>
   <string-array name="apn_auth_entries">
-    <item msgid="3856896061242872146">"Hech biri"</item>
+    <item msgid="3856896061242872146">"Yo‘q"</item>
     <item msgid="5756844015743664882">"PAP"</item>
     <item msgid="535934025797984365">"CHAP"</item>
     <item msgid="8383098660619805783">"PAP yoki CHAP"</item>
@@ -219,12 +225,25 @@
     <item msgid="8084938354605535381">"IPv4/IPv6"</item>
   </string-array>
   <string-array name="bearer_entries">
-    <item msgid="1770285336669531300">"LTE"</item>
-    <item msgid="3044323519470167625">"eHRPD"</item>
-    <item msgid="6848428671997893147">"Ko‘rsatilmagan"</item>
+    <item msgid="1697455674244601285">"Ko‘rsatilmagan"</item>
+    <item msgid="1317061551798123908">"LTE"</item>
+    <item msgid="5005435684511894770">"HSPAP"</item>
+    <item msgid="7700603056475539235">"HSPA"</item>
+    <item msgid="245973007602397887">"HSUPA"</item>
+    <item msgid="6291566767651194016">"HSDPA"</item>
+    <item msgid="2005841400859926251">"UMTS"</item>
+    <item msgid="3757385691174882861">"EDGE"</item>
+    <item msgid="2979115073474306864">"GPRS"</item>
+    <item msgid="2271750502778879106">"eHRPD"</item>
+    <item msgid="4173379084783381337">"EVDO_B"</item>
+    <item msgid="2033682802005776093">"EVDO_A"</item>
+    <item msgid="5753917125831466719">"EVDO_0"</item>
+    <item msgid="4713807936577071142">"1xRTT"</item>
+    <item msgid="1142355797022021906">"IS95B"</item>
+    <item msgid="7471182818083460781">"IS95A"</item>
   </string-array>
   <string-array name="mvno_type_entries">
-    <item msgid="4367119357633573465">"Hech biri"</item>
+    <item msgid="4367119357633573465">"Yo‘q"</item>
     <item msgid="6062567900587138000">"SPN"</item>
     <item msgid="2454085083342423481">"IMSI"</item>
     <item msgid="2681427309183221543">"GID"</item>
@@ -269,7 +288,7 @@
     <item msgid="1545733463471924009">"ustiga chizish"</item>
     <item msgid="3609046903962454582">"xabarnomalarga kirish"</item>
     <item msgid="4671646036128214513">"kamera"</item>
-    <item msgid="1097324338692486211">"audioqayd yozish"</item>
+    <item msgid="1097324338692486211">"ovoz yozib olish"</item>
     <item msgid="5031552983987798163">"audioqaydni ijro etish"</item>
     <item msgid="8374996688066472414">"vaqtinchalik xotira ma‘lumotini o‘qish"</item>
     <item msgid="3045529469061083747">"vaqtinchalik xotira ma‘lumotini o‘zgartirish"</item>
@@ -277,9 +296,9 @@
     <item msgid="4547883971364273343">"audio fokus"</item>
     <item msgid="2603878814882344450">"umumiy tovush balandligi"</item>
     <item msgid="7136963238377062018">"ovoz balandligi"</item>
-    <item msgid="4270236897655923007">"jiringlash tovush balandligi"</item>
-    <item msgid="6325739889222559394">"multimedia tovush balandligi"</item>
-    <item msgid="5762123934816216821">"signal tovush balandligi"</item>
+    <item msgid="4270236897655923007">"qo‘ng‘iroq ovozi"</item>
+    <item msgid="6325739889222559394">"multimedia ovozi"</item>
+    <item msgid="5762123934816216821">"signal ovozi"</item>
     <item msgid="785049718065337473">"xabarnoma tovush balandligi"</item>
     <item msgid="6700305533746877052">"bluetooth tovush balandligi"</item>
     <item msgid="2029227495214047094">"uyg‘oq turish"</item>
@@ -321,7 +340,7 @@
     <item msgid="736541391767350377">"Ustiga chizish"</item>
     <item msgid="5530815681721654194">"Xabarnomalarga kirish"</item>
     <item msgid="781213371706962767">"Kamera"</item>
-    <item msgid="1720492593061838172">"Audioqayd yozish"</item>
+    <item msgid="1720492593061838172">"Ovoz yozib olish"</item>
     <item msgid="3493046322001257041">"Audioqaydni ijro etish"</item>
     <item msgid="136815868796597058">"Vaqtinchalik xotira ma‘lumotini o‘qish"</item>
     <item msgid="5238692940326972503">"Vaqtinchalik xotirani o‘zgartirish"</item>
@@ -329,9 +348,9 @@
     <item msgid="3265262911688671938">"Audio fokus"</item>
     <item msgid="2098976479485046797">"Umumiy tovush balandligi"</item>
     <item msgid="5660213838861789350">"Ovoz balandligi"</item>
-    <item msgid="7983336752371254444">"Jiringlash tovush balandligi"</item>
-    <item msgid="7878027809189330917">"Multimedia tovush balandligi"</item>
-    <item msgid="7260546305036218513">"Signal tovush balandligi"</item>
+    <item msgid="7983336752371254444">"Qo‘ng‘iroq ovozi"</item>
+    <item msgid="7878027809189330917">"Multimedia ovozi"</item>
+    <item msgid="7260546305036218513">"Signal ovozi"</item>
     <item msgid="9103719301075748925">"Xabarnoma tovush balandligi"</item>
     <item msgid="7025966722295861512">"Bluetooth tovush balandligi"</item>
     <item msgid="4665183401128289653">"Uyg‘oq turish"</item>
@@ -348,7 +367,7 @@
   <string-array name="long_press_timeout_selector_titles">
     <item msgid="3511504869290423954">"Qisqa"</item>
     <item msgid="2560532955514699713">"O‘rtacha"</item>
-    <item msgid="2372711992605524591">"Uzun"</item>
+    <item msgid="2372711992605524591">"Uzoq"</item>
   </string-array>
   <string-array name="captioning_typeface_selector_titles">
     <item msgid="1319652728542138112">"Standart"</item>
@@ -362,15 +381,15 @@
     <item msgid="561832997193039673">"Kichik bosh harflar"</item>
   </string-array>
   <string-array name="captioning_font_size_selector_titles">
-    <item msgid="4800919809575254054">"Juda kichikina"</item>
-    <item msgid="6781094565687692782">"Kichkina"</item>
+    <item msgid="4800919809575254054">"Juda kichik"</item>
+    <item msgid="6781094565687692782">"Kichik"</item>
     <item msgid="8222123259497646551">"Normal"</item>
     <item msgid="5813217276778560466">"Katta"</item>
     <item msgid="9044232017390975191">"Juda katta"</item>
   </string-array>
   <string-array name="captioning_edge_type_selector_titles">
     <item msgid="4733815704128258753">"Birlamchi"</item>
-    <item msgid="3217099060748617005">"Hech biri"</item>
+    <item msgid="3217099060748617005">"Yo‘q"</item>
     <item msgid="7467615139904599420">"Chegara"</item>
     <item msgid="5623165557468608975">"Soyani olib tashlash"</item>
     <item msgid="8088451174058214588">"Ko‘tarilgan"</item>
@@ -383,12 +402,12 @@
     <item msgid="8342334626783983353">"100%"</item>
   </string-array>
   <string-array name="captioning_preset_selector_titles">
-    <item msgid="7009918361545506251">"Ilova birlamchi soz-laridan foyd-sh"</item>
+    <item msgid="7009918361545506251">"Standart"</item>
     <item msgid="1770533843436933500">"Qora ustida oq"</item>
     <item msgid="758587126802411846">"Oq ustida qora"</item>
     <item msgid="1495307195241623402">"Qora ustida sariq"</item>
     <item msgid="6039700130994371612">"Ko‘k ustida sariq"</item>
-    <item msgid="7169235156349580064">"Boshqa"</item>
+    <item msgid="7169235156349580064">"Maxsus"</item>
   </string-array>
   <string-array name="select_logd_size_titles">
     <item msgid="3100534874529240291">"64 KB"</item>
@@ -412,74 +431,78 @@
   <string-array name="hdcp_checking_titles">
     <item msgid="441827799230089869">"Hech qachon tekshirilmasin"</item>
     <item msgid="6042769699089883931">"Faqat DRM kontent tekshirilsin"</item>
-    <item msgid="9174900380056846820">"Doim tekshirilsin"</item>
+    <item msgid="9174900380056846820">"Har doim tekshirilsin"</item>
   </string-array>
   <string-array name="hdcp_checking_summaries">
     <item msgid="505558545611516707">"Hech qachon HDCP tekshiruvidan foydalanilmasin"</item>
-    <item msgid="3878793616631049349">"HDCP‘dan faqat DRM kontent tekshiruvi uchun foydalanish"</item>
+    <item msgid="3878793616631049349">"HDCP tekshiruvi faqat DRM kontent uchun ishlatilsin"</item>
     <item msgid="45075631231212732">"Har doim HDCP tekshiruvidan foydalanilsin"</item>
   </string-array>
   <string-array name="window_animation_scale_entries">
     <item msgid="8134156599370824081">"Animatsiya o‘chiq"</item>
-    <item msgid="6624864048416710414">"Animatsiya o‘lchovi .5x"</item>
-    <item msgid="2219332261255416635">"Animatsiya o‘lchovi 1x"</item>
-    <item msgid="3544428804137048509">"Animatsiya o‘lchovi 1.5x"</item>
-    <item msgid="3110710404225974514">"Animatsiya o‘lchovi 2x"</item>
-    <item msgid="4402738611528318731">"Animatsiya o‘lchovi 5x"</item>
-    <item msgid="6189539267968330656">"Animatsiya o‘lchovi 10x"</item>
+    <item msgid="6624864048416710414">"Animatsiya (0,5x)"</item>
+    <item msgid="2219332261255416635">"Animatsiya (1x)"</item>
+    <item msgid="3544428804137048509">"Animatsiya (1,5x)"</item>
+    <item msgid="3110710404225974514">"Animatsiya (2x)"</item>
+    <item msgid="4402738611528318731">"Animatsiya (5x)"</item>
+    <item msgid="6189539267968330656">"Animatsiya (10x)"</item>
   </string-array>
   <string-array name="transition_animation_scale_entries">
     <item msgid="8464255836173039442">"Animatsiya o‘chiq"</item>
-    <item msgid="3375781541913316411">"Animatsiya o‘lchovi .5x"</item>
-    <item msgid="1991041427801869945">"Animatiya o‘lchovi 1x"</item>
-    <item msgid="4012689927622382874">"Animatsiya o‘lchovi 1.5x"</item>
-    <item msgid="3289156759925947169">"Animatsiya o‘lchovi 2x"</item>
-    <item msgid="7705857441213621835">"Animatsiya o‘lchovi 5x"</item>
-    <item msgid="6660750935954853365">"Animatsiya o‘lchovi 10x"</item>
+    <item msgid="3375781541913316411">"Animatsiya (0,5x)"</item>
+    <item msgid="1991041427801869945">"Animatiya (1x)"</item>
+    <item msgid="4012689927622382874">"Animatsiya (1,5x)"</item>
+    <item msgid="3289156759925947169">"Animatsiya (2x)"</item>
+    <item msgid="7705857441213621835">"Animatsiya (5x)"</item>
+    <item msgid="6660750935954853365">"Animatsiya (10x)"</item>
   </string-array>
   <string-array name="animator_duration_scale_entries">
-    <item msgid="6039901060648228241">"Animatsiya o‘chirilgan"</item>
-    <item msgid="1138649021950863198">"Animatsiya o‘lchami .5x"</item>
-    <item msgid="4394388961370833040">"Animatsiya o‘lchami 1x"</item>
-    <item msgid="8125427921655194973">"Animatsiya o‘lchami 1.5x"</item>
-    <item msgid="3334024790739189573">"Animatsiya o‘lchami 2x"</item>
-    <item msgid="3170120558236848008">"Animatsiya o‘lchami 5x"</item>
-    <item msgid="1069584980746680398">"Animatsiya o‘lchami 10x"</item>
+    <item msgid="6039901060648228241">"Animatsiya o‘chiq"</item>
+    <item msgid="1138649021950863198">"0,5x tezlik"</item>
+    <item msgid="4394388961370833040">"1x tezlik"</item>
+    <item msgid="8125427921655194973">"1,5x tezlik"</item>
+    <item msgid="3334024790739189573">"2x tezlik"</item>
+    <item msgid="3170120558236848008">"5x tezlik"</item>
+    <item msgid="1069584980746680398">"10x tezlik"</item>
   </string-array>
   <string-array name="overlay_display_devices_entries">
-    <item msgid="1606809880904982133">"Hech biri"</item>
-    <item msgid="688482401508173818">"720x480 mdpi"</item>
-    <item msgid="6027541158956821790">"720x480 mdpi (xavfsiz)"</item>
-    <item msgid="8181151155909301030">"1280x720 tvdpi"</item>
-    <item msgid="2920655562462493148">"1280x720 tvdpi (xavfsiz)"</item>
-    <item msgid="8910371271391940941">"1920x1080 xhdpi"</item>
-    <item msgid="4171600481380800455">"1920x1080 xhdpi (xavfsiz)"</item>
-    <item msgid="1937752114395156918">"1280x720 tvdpi va 1920x1080 xhdpi"</item>
+    <item msgid="1606809880904982133">"Ma’lumot yo‘q"</item>
+    <item msgid="9033194758688161545">"480p"</item>
+    <item msgid="1025306206556583600">"480p (xavfsiz)"</item>
+    <item msgid="1853913333042744661">"720p"</item>
+    <item msgid="3414540279805870511">"720p (xavfsiz)"</item>
+    <item msgid="9039818062847141551">"1080p"</item>
+    <item msgid="4939496949750174834">"1080p (xavfsiz)"</item>
+    <item msgid="1833612718524903568">"4K"</item>
+    <item msgid="238303513127879234">"4K (xavfsiz)"</item>
+    <item msgid="3547211260846843098">"4K (miqyosi o‘zgaradi)"</item>
+    <item msgid="5411365648951414254">"4K (miqyosi o‘zgaradi, xavfsiz)"</item>
+    <item msgid="1311305077526792901">"720p, 1080p (ikkita ekran)"</item>
   </string-array>
   <string-array name="enable_opengl_traces_entries">
-    <item msgid="3191973083884253830">"Hech biri"</item>
-    <item msgid="9089630089455370183">"Jurnal darajasi"</item>
+    <item msgid="3191973083884253830">"Ma’lumot yo‘q"</item>
+    <item msgid="9089630089455370183">"Logcat"</item>
     <item msgid="5397807424362304288">"Systrace (Grafika)"</item>
-    <item msgid="1340692776955662664">"glGetError‘dagi qo‘ng‘iroqlar ro‘yxati"</item>
+    <item msgid="1340692776955662664">"glGetError’dagi chaqiruvlar ro‘yxati"</item>
   </string-array>
   <string-array name="show_non_rect_clip_entries">
-    <item msgid="993742912147090253">"O‘chirilgan"</item>
-    <item msgid="675719912558941285">"To‘g‘riburchak bo‘lmagan o‘rnatma maydonini ko‘k rangga bo‘yash"</item>
-    <item msgid="1064373276095698656">"Sinalgan chizish buyruqlarini yashil rang bilan ajratish"</item>
+    <item msgid="993742912147090253">"O‘ch."</item>
+    <item msgid="675719912558941285">"To‘g‘ri burchakli bo‘lmagan kesishmalarni ko‘k bilan"</item>
+    <item msgid="1064373276095698656">"Chizmaning sinov buyruqlarini yashil bilan"</item>
   </string-array>
   <string-array name="track_frame_time_entries">
-    <item msgid="2193584639058893150">"O‘chirilgan"</item>
+    <item msgid="2193584639058893150">"O‘chirib qo‘yish"</item>
     <item msgid="2751513398307949636">"Ekranda bo‘laklar tarzida"</item>
     <item msgid="1851438178120770973">"adb shell dumpsys gfxinfo ichida"</item>
   </string-array>
   <string-array name="debug_hw_overdraw_entries">
-    <item msgid="8190572633763871652">"O‘chirilgan"</item>
+    <item msgid="8190572633763871652">"O‘CHIQ"</item>
     <item msgid="7688197031296835369">"Ortiqcha chizilgan joylarni ko‘rsatish"</item>
-    <item msgid="2290859360633824369">"Deyter-nonormal shaxslar uchun joylarni ko‘rsatish"</item>
+    <item msgid="2290859360633824369">"Muayyan rangdagi hududlarni ajratib belgilash"</item>
   </string-array>
   <string-array name="app_process_limit_entries">
     <item msgid="3401625457385943795">"Standard cheklov"</item>
-    <item msgid="4071574792028999443">"Fon jarayonlari mavjud emas"</item>
+    <item msgid="4071574792028999443">"Fondagi jarayonlarsiz"</item>
     <item msgid="4810006996171705398">"Ko‘pi bilan 1 ta jarayon"</item>
     <item msgid="8586370216857360863">"ko‘pi bilan 2 jarayonda"</item>
     <item msgid="836593137872605381">"Ko‘pi bilan 3 ta jarayon"</item>
@@ -497,7 +520,7 @@
     <item msgid="8621078286418985762">"Uzildi"</item>
     <item msgid="6692305604213080515">"Ishga tushirilmoqda…"</item>
     <item msgid="8001704909356800092">"Ulanmoqda…"</item>
-    <item msgid="4039737283841672166">"Ulandi"</item>
+    <item msgid="4039737283841672166">"Ulangan"</item>
     <item msgid="4042143101664725090">"Vaqt bo‘ldi"</item>
     <item msgid="7664124146786465092">"Muvaffaqiyatsiz"</item>
   </string-array>
@@ -507,13 +530,14 @@
     <item msgid="1417929597727989746">"Har doim ruxsat berilsin"</item>
   </string-array>
   <string-array name="ram_states">
-    <item msgid="7088762389498381203">"normal"</item>
-    <item msgid="4517779899383204000">"o‘rtacha"</item>
-    <item msgid="406385694840950802">"past"</item>
-    <item msgid="4212263919458209842">"jiddiy"</item>
+    <item msgid="3944681673818150669">"Yetarli"</item>
+    <item msgid="3256987280393708586">"Hozircha yetarli"</item>
+    <item msgid="4662917179231875995">"Kam"</item>
+    <item msgid="5264929699714647509">"Juda kam"</item>
+    <item msgid="5606155978847838966">"?"</item>
   </string-array>
   <string-array name="proc_stats_memory_states">
-    <item msgid="8845855295876909468">"O‘rtacha"</item>
+    <item msgid="8845855295876909468">"Normal"</item>
     <item msgid="866544120205026771">"Qoniqarli"</item>
     <item msgid="7851902244436886890">"Past"</item>
     <item msgid="3022922196817563960">"Jiddiy"</item>
@@ -542,11 +566,5 @@
     <item msgid="4608643045752965568">"Pushti"</item>
     <item msgid="6131821495505931173">"Qizil"</item>
   </string-array>
-  <string-array name="usb_configuration_titles">
-    <item msgid="5350926807680564950">"MTP (Media fayllarni o‘tkazish protokoli)"</item>
-    <item msgid="8856820259201251036">"PTP (Rasmlarni o‘tkazish protokoli)"</item>
-    <item msgid="216135047298423770">"RNDIS (USB Ethernet)"</item>
-    <item msgid="2686051673589572111">"Audio manbasi"</item>
-    <item msgid="7014054229609338176">"MIDI"</item>
-  </string-array>
+    <!-- no translation found for usb_configuration_titles:0 (292902998500371970) -->
 </resources>
