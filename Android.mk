@@ -23,7 +23,6 @@ ifneq ($(INCREMENTAL_BUILDS),)
     LOCAL_JACK_ENABLED := incremental
 endif
 
-include frameworks/opt/setupwizard/navigationbar/common.mk
 include frameworks/opt/setupwizard/library/common.mk
 include frameworks/base/packages/SettingsLib/common.mk
 
