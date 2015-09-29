@@ -106,7 +106,6 @@ import com.android.settings.notification.OtherSoundSettings;
 import com.android.settings.notification.ZenAccessSettings;
 import com.android.settings.notification.ZenModeAutomationSettings;
 import com.android.settings.notification.ZenModeEventRuleSettings;
-import com.android.settings.notification.ZenModeExternalRuleSettings;
 import com.android.settings.notification.ZenModePrioritySettings;
 import com.android.settings.notification.ZenModeSettings;
 import com.android.settings.notification.ZenModeScheduleRuleSettings;
@@ -348,7 +347,6 @@ public class SettingsActivity extends Activity
             ZenModeAutomationSettings.class.getName(),
             ZenModeScheduleRuleSettings.class.getName(),
             ZenModeEventRuleSettings.class.getName(),
-            ZenModeExternalRuleSettings.class.getName(),
             ProcessStatsUi.class.getName(),
             PowerUsageDetail.class.getName(),
             ProcessStatsSummary.class.getName(),

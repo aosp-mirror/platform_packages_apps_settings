@@ -18,46 +18,34 @@ package com.android.settings.notification;
 
 import android.app.AlertDialog;
 import android.app.AutomaticZenRule;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnDismissListener;
-import android.content.pm.ServiceInfo;
 import android.content.res.ColorStateList;
-import android.net.Uri;
-import android.service.notification.ZenModeConfig;
-import android.service.notification.ZenModeConfig.EventInfo;
-import android.service.notification.ZenModeConfig.ScheduleInfo;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.ArraySet;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
 import com.android.settings.R;
 
 import java.util.List;
 
 public abstract class ZenRuleNameDialog {
-    private static final String TAG = ZenModeSettings.TAG;
+    private static final String TAG = "ZenRuleNameDialog";
     private static final boolean DEBUG = ZenModeSettings.DEBUG;
 
     private final AlertDialog mDialog;
     private final EditText mEditText;
     private final View mWarning;
-    private final RadioGroup mTypes;
     private final ColorStateList mWarningTint;
     private final ColorStateList mOriginalTint;
     private final String mOriginalRuleName;
     private final ArraySet<String> mExistingNames;
     private final ServiceListing mServiceListing;
-    private final RuleInfo[] mExternalRules = new RuleInfo[3];
     private final boolean mIsNew;
 
     public ZenRuleNameDialog(Context context, ServiceListing serviceListing, String ruleName,
@@ -76,16 +64,7 @@ public abstract class ZenRuleNameDialog {
         context.getTheme().resolveAttribute(android.R.attr.colorAccent, outValue, true);
         mOriginalTint = ColorStateList.valueOf(outValue.data);
         mEditText.setSelectAllOnFocus(true);
-        mTypes = (RadioGroup) v.findViewById(R.id.rule_types);
-        if (mServiceListing != null) {
-            bindType(R.id.rule_type_schedule, defaultNewSchedule());
-            bindType(R.id.rule_type_event, defaultNewEvent());
-            bindExternalRules();
-            mServiceListing.addCallback(mServiceListingCallback);
-            mServiceListing.reload();
-        } else {
-            mTypes.setVisibility(View.GONE);
-        }
+
         mDialog = new AlertDialog.Builder(context)
                 .setTitle(mIsNew ? R.string.zen_mode_add_rule : R.string.zen_mode_rule_name)
                 .setView(v)
@@ -97,15 +76,7 @@ public abstract class ZenRuleNameDialog {
                                 && mOriginalRuleName.equalsIgnoreCase(newName)) {
                             return;  // no change to an existing rule, just dismiss
                         }
-                        onOk(newName, selectedRuleInfo());
-                    }
-                })
-                .setOnDismissListener(new OnDismissListener() {
-                    @Override
-                    public void onDismiss(DialogInterface dialog) {
-                        if (mServiceListing != null) {
-                            mServiceListing.removeCallback(mServiceListingCallback);
-                        }
+                        onOk(newName);
                     }
                 })
                 .setNegativeButton(R.string.cancel, null)
@@ -129,7 +100,7 @@ public abstract class ZenRuleNameDialog {
         mExistingNames = getAutomaticRuleNames(rules);
     }
 
-    abstract public void onOk(String ruleName, RuleInfo ruleInfo);
+    abstract public void onOk(String ruleName);
 
     public void show() {
         mDialog.show();
@@ -142,26 +113,6 @@ public abstract class ZenRuleNameDialog {
             rt.add(rules.get(i).getName().toLowerCase());
         }
         return rt;
-    }
-
-    private void bindType(int id, RuleInfo ri) {
-        final RadioButton rb = (RadioButton) mTypes.findViewById(id);
-        if (ri == null) {
-            rb.setVisibility(View.GONE);
-            return;
-        }
-        rb.setVisibility(View.VISIBLE);
-        if (ri.caption != null) {
-            rb.setText(ri.caption);
-        }
-        rb.setTag(ri);
-    }
-
-    private RuleInfo selectedRuleInfo() {
-        final int id = mTypes.getCheckedRadioButtonId();
-        if (id == -1) return null;
-        final RadioButton rb = (RadioButton) mTypes.findViewById(id);
-        return (RuleInfo) rb.getTag();
     }
 
     private String trimmedText() {
@@ -178,62 +129,4 @@ public abstract class ZenRuleNameDialog {
         mWarning.setVisibility(showWarning ? View.VISIBLE : View.INVISIBLE);
         mEditText.setBackgroundTintList(showWarning ? mWarningTint : mOriginalTint);
     }
-
-    private static RuleInfo defaultNewSchedule() {
-        final ScheduleInfo schedule = new ScheduleInfo();
-        schedule.days = ZenModeConfig.ALL_DAYS;
-        schedule.startHour = 22;
-        schedule.endHour = 7;
-        final RuleInfo rt = new RuleInfo();
-        rt.settingsAction = ZenModeScheduleRuleSettings.ACTION;
-        rt.defaultConditionId = ZenModeConfig.toScheduleConditionId(schedule);
-        rt.serviceComponent = ZenModeConfig.getScheduleConditionProvider();
-        return rt;
-    }
-
-    private static RuleInfo defaultNewEvent() {
-        final EventInfo event = new EventInfo();
-        event.calendar = null; // any calendar
-        event.reply = EventInfo.REPLY_ANY_EXCEPT_NO;
-        final RuleInfo rt = new RuleInfo();
-        rt.settingsAction = ZenModeEventRuleSettings.ACTION;
-        rt.defaultConditionId = ZenModeConfig.toEventConditionId(event);
-        rt.serviceComponent = ZenModeConfig.getEventConditionProvider();
-        return rt;
-    }
-
-    private void bindExternalRules() {
-        bindType(R.id.rule_type_3, mExternalRules[0]);
-        bindType(R.id.rule_type_4, mExternalRules[1]);
-        bindType(R.id.rule_type_5, mExternalRules[2]);
-    }
-
-    private final ServiceListing.Callback mServiceListingCallback = new ServiceListing.Callback() {
-        @Override
-        public void onServicesReloaded(List<ServiceInfo> services) {
-            if (DEBUG) Log.d(TAG, "Services reloaded: count=" + services.size());
-            mExternalRules[0] = mExternalRules[1] = mExternalRules[2] = null;
-            int i = 0;
-            for (ServiceInfo si : services) {
-                final RuleInfo ri = ZenModeExternalRuleSettings.getRuleInfo(si);
-                if (ri != null) {
-                    mExternalRules[i] = ri;
-                    i++;
-                    if (i == mExternalRules.length) {
-                        break;
-                    }
-                }
-            }
-            bindExternalRules();
-        }
-    };
-
-    public static class RuleInfo {
-        public String caption;
-        public String settingsAction;
-        public Uri defaultConditionId;
-        public ComponentName serviceComponent;
-        public ComponentName configurationActivity;
-    }
-
 }
