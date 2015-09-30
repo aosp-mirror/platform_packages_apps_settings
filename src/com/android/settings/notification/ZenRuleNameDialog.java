@@ -17,6 +17,7 @@
 package com.android.settings.notification;
 
 import android.app.AlertDialog;
+import android.app.AutomaticZenRule;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -60,7 +61,7 @@ public abstract class ZenRuleNameDialog {
     private final boolean mIsNew;
 
     public ZenRuleNameDialog(Context context, ServiceListing serviceListing, String ruleName,
-            ArraySet<String> existingNames) {
+            List<AutomaticZenRule> rules) {
         mServiceListing = serviceListing;
         mIsNew = ruleName == null;
         mOriginalRuleName = ruleName;
@@ -125,10 +126,7 @@ public abstract class ZenRuleNameDialog {
                 updatePositiveButtonAndWarning();
             }
         });
-        mExistingNames = new ArraySet<String>(existingNames.size());
-        for (String existingName : existingNames) {
-            mExistingNames.add(existingName.toLowerCase());
-        }
+        mExistingNames = getAutomaticRuleNames(rules);
     }
 
     abstract public void onOk(String ruleName, RuleInfo ruleInfo);
@@ -136,6 +134,14 @@ public abstract class ZenRuleNameDialog {
     public void show() {
         mDialog.show();
         updatePositiveButtonAndWarning();
+    }
+
+    public ArraySet<String> getAutomaticRuleNames(List<AutomaticZenRule> rules) {
+        final ArraySet<String> rt = new ArraySet<String>(rules.size());
+        for (int i = 0; i < rules.size(); i++) {
+            rt.add(rules.get(i).getName().toLowerCase());
+        }
+        return rt;
     }
 
     private void bindType(int id, RuleInfo ri) {
@@ -181,6 +187,7 @@ public abstract class ZenRuleNameDialog {
         final RuleInfo rt = new RuleInfo();
         rt.settingsAction = ZenModeScheduleRuleSettings.ACTION;
         rt.defaultConditionId = ZenModeConfig.toScheduleConditionId(schedule);
+        rt.serviceComponent = ZenModeConfig.getScheduleConditionProvider();
         return rt;
     }
 
@@ -191,6 +198,7 @@ public abstract class ZenRuleNameDialog {
         final RuleInfo rt = new RuleInfo();
         rt.settingsAction = ZenModeEventRuleSettings.ACTION;
         rt.defaultConditionId = ZenModeConfig.toEventConditionId(event);
+        rt.serviceComponent = ZenModeConfig.getEventConditionProvider();
         return rt;
     }
 

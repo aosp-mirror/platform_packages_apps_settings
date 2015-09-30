@@ -16,6 +16,7 @@
 
 package com.android.settings.notification;
 
+import android.app.AutomaticZenRule;
 import android.content.Context;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.database.Cursor;
@@ -28,7 +29,6 @@ import android.provider.CalendarContract.Calendars;
 import android.provider.Settings;
 import android.service.notification.ZenModeConfig;
 import android.service.notification.ZenModeConfig.EventInfo;
-import android.service.notification.ZenModeConfig.ZenRule;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.DropDownPreference;
@@ -53,8 +53,8 @@ public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
     private boolean mCreate;
 
     @Override
-    protected boolean setRule(ZenRule rule) {
-        mEvent = rule != null ? ZenModeConfig.tryParseEventConditionId(rule.conditionId)
+    protected boolean setRule(AutomaticZenRule rule) {
+        mEvent = rule != null ? ZenModeConfig.tryParseEventConditionId(rule.getConditionId())
                 : null;
         return mEvent != null;
     }

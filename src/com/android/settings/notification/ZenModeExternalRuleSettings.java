@@ -17,6 +17,7 @@
 package com.android.settings.notification;
 
 import android.app.Activity;
+import android.app.AutomaticZenRule;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.ServiceInfo;
@@ -26,7 +27,6 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.service.notification.ConditionProviderService;
-import android.service.notification.ZenModeConfig.ZenRule;
 import android.util.Log;
 
 import com.android.internal.logging.MetricsLogger;
@@ -44,7 +44,7 @@ public class ZenModeExternalRuleSettings extends ZenModeRuleSettingsBase {
     private Preference mConfigure;
 
     @Override
-    protected boolean setRule(ZenRule rule) {
+    protected boolean setRule(AutomaticZenRule rule) {
         return rule != null;
     }
 
@@ -63,7 +63,7 @@ public class ZenModeExternalRuleSettings extends ZenModeRuleSettingsBase {
         addPreferencesFromResource(R.xml.zen_mode_external_rule_settings);
         final PreferenceScreen root = getPreferenceScreen();
         final ServiceInfo si = ServiceListing.findService(mContext,
-                ZenModeAutomationSettings.CONFIG, mRule.component);
+                ZenModeAutomationSettings.CONFIG, mRule.getOwner());
         if (DEBUG) Log.d(TAG, "ServiceInfo: " + si);
         final RuleInfo ri = getRuleInfo(si);
         if (DEBUG) Log.d(TAG, "RuleInfo: " + ri);
@@ -82,8 +82,9 @@ public class ZenModeExternalRuleSettings extends ZenModeRuleSettingsBase {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
                     Intent intent = new Intent().setComponent(ri.configurationActivity);
-                    intent.putExtra(ConditionProviderService.EXTRA_RULE_NAME, mRule.name);
-                    intent.putExtra(ConditionProviderService.EXTRA_CONDITION_ID, mRule.conditionId);
+                    intent.putExtra(ConditionProviderService.EXTRA_RULE_NAME, mRule.getName());
+                    intent.putExtra(ConditionProviderService.EXTRA_CONDITION_ID,
+                            mRule.getConditionId());
                     startActivityForResult(intent, REQUEST_CODE_CONFIGURE);
                     return true;
                 }
@@ -98,7 +99,7 @@ public class ZenModeExternalRuleSettings extends ZenModeRuleSettingsBase {
             if (resultCode == Activity.RESULT_OK && data != null) {
                 final Uri conditionId =
                         data.getParcelableExtra(ConditionProviderService.EXTRA_CONDITION_ID);
-                if (conditionId != null && !conditionId.equals(mRule.conditionId)) {
+                if (conditionId != null && !conditionId.equals(mRule.getConditionId())) {
                     updateRule(conditionId);
                 }
             }
