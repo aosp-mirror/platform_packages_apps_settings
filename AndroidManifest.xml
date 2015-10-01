@@ -2514,6 +2514,16 @@
             android:excludeFromRecents="true">
         </activity>
 
+        <activity android:name=".wifi.WifiDialogActivity"
+            android:theme="@style/Transparent"
+            android:excludeFromRecents="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.android.settings.WIFI_DIALOG" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".sim.SimDialogActivity"
                 android:theme="@android:style/Theme.Material.Light.Dialog.NoActionBar"
                 android:label="@string/sim_settings_title"
