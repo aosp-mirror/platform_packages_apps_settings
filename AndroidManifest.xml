@@ -2420,6 +2420,19 @@
                 android:resource="@id/notification_settings" />
         </activity>
 
+        <!-- Show Manual (from settings item) -->
+        <activity android:name="ManualDisplayActivity"
+                  android:label="@string/manual"
+                  android:taskAffinity=""
+                  android:enabled="@bool/config_show_manual">
+            <intent-filter>
+                <action android:name="android.settings.SHOW_MANUAL" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
+        </activity>
+
         <!-- Show regulatory info (from settings item or dialing "*#07#") -->
         <activity android:name="RegulatoryInfoDisplayActivity"
                   android:label="@string/regulatory_information"
