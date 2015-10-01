@@ -42,7 +42,6 @@ import android.view.View;
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settings.notification.ManagedServiceSettings.Config;
-import com.android.settings.notification.ZenRuleNameDialog.RuleInfo;
 
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
@@ -92,14 +91,30 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
     }
 
     private void showAddRuleDialog() {
+        new ZenRuleSelectionDialog(mContext, mServiceListing) {
+            @Override
+            public void onSystemRuleSelected(ZenRuleInfo ri) {
+                showNameRuleDialog(ri);
+            }
+
+            @Override
+            public void onExternalRuleSelected(ZenRuleInfo ri) {
+                Intent intent = new Intent().setComponent(ri.configurationActivity);
+                startActivity(intent);
+            }
+        }.show();
+    }
+
+    private void showNameRuleDialog(final ZenRuleInfo ri) {
         new ZenRuleNameDialog(mContext, mServiceListing, null, mRules) {
             @Override
-            public void onOk(String ruleName, RuleInfo ri) {
+            public void onOk(String ruleName) {
                 MetricsLogger.action(mContext, MetricsLogger.ACTION_ZEN_ADD_RULE_OK);
-                AutomaticZenRule rule = new AutomaticZenRule(ruleName, ri.serviceComponent, ri.defaultConditionId,
-                        NotificationManager.INTERRUPTION_FILTER_PRIORITY, true);
+                AutomaticZenRule rule = new AutomaticZenRule(ruleName, ri.serviceComponent,
+                        ri.defaultConditionId, NotificationManager.INTERRUPTION_FILTER_PRIORITY,
+                        true);
                 if (setZenRule(rule)) {
-                    showRule(ri.settingsAction, ri.configurationActivity, rule.getName());
+                    startActivity(getRuleIntent(ri.settingsAction, null, rule.getName()));
                 }
             }
         }.show();
@@ -120,12 +135,17 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
                 .show();
     }
 
-    private void showRule(String settingsAction, ComponentName configurationActivity,
+    private Intent getRuleIntent(String settingsAction, ComponentName configurationActivity,
             String ruleName) {
-        if (DEBUG) Log.d(TAG, "showRule name=" + ruleName);
-        mContext.startActivity(new Intent(settingsAction)
+        Intent intent = new Intent()
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                .putExtra(ZenModeRuleSettingsBase.EXTRA_RULE_NAME, ruleName));
+                .putExtra(ConditionProviderService.EXTRA_RULE_NAME, ruleName);
+        if (configurationActivity != null) {
+            intent.setComponent(configurationActivity);
+        } else {
+            intent.setAction(settingsAction);
+        }
+        return intent;
     }
 
     private AutomaticZenRule[] sortedRules() {
@@ -201,9 +221,10 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
         @Override
         public void onServicesReloaded(List<ServiceInfo> services) {
             for (ServiceInfo service : services) {
-                final RuleInfo ri = ZenModeExternalRuleSettings.getRuleInfo(service);
+                final ZenRuleInfo ri = getRuleInfo(service);
                 if (ri != null && ri.serviceComponent != null
-                        && Objects.equals(ri.settingsAction, ZenModeExternalRuleSettings.ACTION)) {
+                        && Objects.equals(ri.settingsAction,
+                        Settings.ACTION_ZEN_MODE_EXTERNAL_RULE_SETTINGS)) {
                     if (!mServiceListing.isEnabled(ri.serviceComponent)) {
                         Log.i(TAG, "Enabling external condition provider: " + ri.serviceComponent);
                         mServiceListing.setEnabled(ri.serviceComponent, true);
@@ -212,6 +233,33 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
             }
         }
     };
+
+    public static ZenRuleInfo getRuleInfo(ServiceInfo si) {
+        if (si == null || si.metaData == null) return null;
+        final String ruleType = si.metaData.getString(ConditionProviderService.META_DATA_RULE_TYPE);
+        final String defaultConditionId =
+                si.metaData.getString(ConditionProviderService.META_DATA_DEFAULT_CONDITION_ID);
+        if (ruleType != null && !ruleType.trim().isEmpty() && defaultConditionId != null) {
+            final ZenRuleInfo ri = new ZenRuleInfo();
+            ri.settingsAction = Settings.ACTION_ZEN_MODE_EXTERNAL_RULE_SETTINGS;
+            ri.title = ruleType;
+            ri.packageName = si.packageName;
+            ri.configurationActivity = getSettingsActivity(si);
+
+            return ri;
+        }
+        return null;
+    }
+
+    private static ComponentName getSettingsActivity(ServiceInfo si) {
+        if (si == null || si.metaData == null) return null;
+        final String configurationActivity =
+                si.metaData.getString(ConditionProviderService.META_DATA_CONFIGURATION_ACTIVITY);
+        if (configurationActivity != null) {
+            return ComponentName.unflattenFromString(configurationActivity);
+        }
+        return null;
+    }
 
     // TODO: Sort by creation date, once that data is available.
     private static final Comparator<AutomaticZenRule> RULE_COMPARATOR =
@@ -243,8 +291,7 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
             final boolean isSystemRule = isSchedule || isEvent;
 
             try {
-                ApplicationInfo info = mPm.getApplicationInfo(
-                        rule.getOwner().getPackageName(), 0);
+                ApplicationInfo info = mPm.getApplicationInfo(rule.getOwner().getPackageName(), 0);
                 LoadIconTask task = new LoadIconTask(this);
                 task.execute(info);
                 setSummary(computeRuleSummary(rule, isSystemRule, info.loadLabel(mPm)));
@@ -254,16 +301,13 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
 
             setTitle(rule.getName());
             setPersistent(false);
-            setOnPreferenceClickListener(new OnPreferenceClickListener() {
-                @Override
-                public boolean onPreferenceClick(Preference preference) {
-                    final String action = isSchedule ? ZenModeScheduleRuleSettings.ACTION
-                            : isEvent ? ZenModeEventRuleSettings.ACTION
-                            : ZenModeExternalRuleSettings.ACTION;
-                    showRule(action, null, rule.getName());
-                    return true;
-                }
-            });
+
+            final String action = isSchedule ? ZenModeScheduleRuleSettings.ACTION
+                    : isEvent ? ZenModeEventRuleSettings.ACTION : "";
+            ServiceInfo si = mServiceListing.findService(mContext, CONFIG, rule.getOwner());
+            ComponentName settingsActivity = getSettingsActivity(si);
+            setIntent(getRuleIntent(action, settingsActivity, rule.getName()));
+
             setWidgetLayoutResource(R.layout.zen_rule_widget);
         }
 

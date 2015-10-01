@@ -43,37 +43,4 @@
         android:textColor="@color/zen_rule_name_warning"
         android:text="@string/zen_mode_rule_name_warning" />
 
-    <RadioGroup
-        android:id="@+id/rule_types"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="22dp"
-        android:layout_marginRight="22dp"
-        android:orientation="vertical"
-        android:checkedButton="@+id/rule_type_schedule" >
-
-        <RadioButton android:id="@+id/rule_type_schedule"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/zen_schedule_rule_type_name" />
-
-        <RadioButton android:id="@+id/rule_type_event"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/zen_event_rule_type_name" />
-
-        <RadioButton android:id="@+id/rule_type_3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <RadioButton android:id="@+id/rule_type_4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <RadioButton android:id="@+id/rule_type_5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </RadioGroup>
-
 </LinearLayout>

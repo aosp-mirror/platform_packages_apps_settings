@@ -29,6 +29,7 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceScreen;
+import android.service.notification.ConditionProviderService;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -48,7 +49,6 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase
     protected static final String TAG = ZenModeSettingsBase.TAG;
     protected static final boolean DEBUG = ZenModeSettingsBase.DEBUG;
 
-    public static final String EXTRA_RULE_NAME = "rule_name";
     private static final String KEY_RULE_NAME = "rule_name";
     private static final String KEY_ZEN_MODE = "zen_mode";
 
@@ -83,7 +83,7 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase
             return;
         }
 
-        mName = intent.getStringExtra(EXTRA_RULE_NAME);
+        mName = intent.getStringExtra(ConditionProviderService.EXTRA_RULE_NAME);
         if (DEBUG) Log.d(TAG, "mName=" + mName);
         if (refreshRuleOrFinish()) {
             return;
@@ -213,7 +213,7 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase
     private void showRuleNameDialog() {
         new ZenRuleNameDialog(mContext, null, mRule.getName(), mRules) {
             @Override
-            public void onOk(String ruleName, RuleInfo type) {
+            public void onOk(String ruleName) {
                 renameZenRule(mRule.getName(), ruleName);
             }
         }.show();
