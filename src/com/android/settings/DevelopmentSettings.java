@@ -1964,9 +1964,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
                     if (!showEnableOemUnlockPreference()) {
                         keys.add(ENABLE_OEM_UNLOCK);
                     }
-                    if (!showEnableMultiWindowPreference()) {
-                        keys.add(ENABLE_MULTI_WINDOW_KEY);
-                    }
                     return keys;
                 }
             };
