@@ -26,6 +26,8 @@ public abstract class InstrumentedFragment extends PreferenceFragment {
     // Declare new temporary categories here, starting after this value.
     public static final int UNDECLARED = 100000;
 
+    public static final int ACCESSIBILITY_TOGGLE_AUTOCLICK = UNDECLARED + 1;
+
     /**
      * Declare the view of this category.
      *

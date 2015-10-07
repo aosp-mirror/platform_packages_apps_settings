@@ -96,6 +96,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             "captioning_preference_screen";
     private static final String DISPLAY_MAGNIFICATION_PREFERENCE_SCREEN =
             "screen_magnification_preference_screen";
+    private static final String AUTOCLICK_PREFERENCE_SCREEN =
+            "autoclick_preference_screen";
     private static final String DISPLAY_DALTONIZER_PREFERENCE_SCREEN =
             "daltonizer_preference_screen";
 
@@ -190,6 +192,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private Preference mNoServicesMessagePreference;
     private PreferenceScreen mCaptioningPreferenceScreen;
     private PreferenceScreen mDisplayMagnificationPreferenceScreen;
+    private PreferenceScreen mAutoclickPreferenceScreen;
     private PreferenceScreen mGlobalGesturePreferenceScreen;
     private PreferenceScreen mDisplayDaltonizerPreferenceScreen;
     private SwitchPreference mToggleInversionPreference;
@@ -410,6 +413,10 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         mDisplayMagnificationPreferenceScreen = (PreferenceScreen) findPreference(
                 DISPLAY_MAGNIFICATION_PREFERENCE_SCREEN);
 
+        // Autoclick after pointer stops.
+        mAutoclickPreferenceScreen = (PreferenceScreen) findPreference(
+                AUTOCLICK_PREFERENCE_SCREEN);
+
         // Display color adjustments.
         mDisplayDaltonizerPreferenceScreen = (PreferenceScreen) findPreference(
                 DISPLAY_DALTONIZER_PREFERENCE_SCREEN);
@@ -582,6 +589,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         updateFeatureSummary(Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED,
                 mDisplayDaltonizerPreferenceScreen);
 
+        updateAutoclickSummary(mAutoclickPreferenceScreen);
+
         // Global gesture
         final boolean globalGestureEnabled = Settings.Global.getInt(getContentResolver(),
                 Settings.Global.ENABLE_ACCESSIBILITY_GLOBAL_GESTURE_ENABLED, 0) == 1;
@@ -598,6 +607,20 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         final boolean enabled = Settings.Secure.getInt(getContentResolver(), prefKey, 0) == 1;
         pref.setSummary(enabled ? R.string.accessibility_feature_state_on
                 : R.string.accessibility_feature_state_off);
+    }
+
+    private void updateAutoclickSummary(Preference pref) {
+        final boolean enabled = Settings.Secure.getInt(
+                getContentResolver(), Settings.Secure.ACCESSIBILITY_AUTOCLICK_ENABLED, 0) == 1;
+        if (!enabled) {
+            pref.setSummary(R.string.accessibility_feature_state_off);
+            return;
+        }
+        int delay = Settings.Secure.getInt(
+                getContentResolver(), Settings.Secure.ACCESSIBILITY_AUTOCLICK_DELAY,
+                AccessibilityManager.AUTOCLICK_DELAY_DEFAULT);
+        pref.setSummary(ToggleAutoclickPreferenceFragment.getAutoclickPreferenceSummary(
+                getResources(), delay));
     }
 
     private void updateLockScreenRotationCheckbox() {
