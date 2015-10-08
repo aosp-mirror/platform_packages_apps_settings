@@ -106,21 +106,22 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
     }
 
     private void showNameRuleDialog(final ZenRuleInfo ri) {
-        new ZenRuleNameDialog(mContext, mServiceListing, null, mRules) {
+        new ZenRuleNameDialog(mContext, null) {
             @Override
             public void onOk(String ruleName) {
                 MetricsLogger.action(mContext, MetricsLogger.ACTION_ZEN_ADD_RULE_OK);
                 AutomaticZenRule rule = new AutomaticZenRule(ruleName, ri.serviceComponent,
                         ri.defaultConditionId, NotificationManager.INTERRUPTION_FILTER_PRIORITY,
                         true);
-                if (setZenRule(rule)) {
-                    startActivity(getRuleIntent(ri.settingsAction, null, rule.getName()));
+                AutomaticZenRule savedRule = addZenRule(rule);
+                if (savedRule != null) {
+                    startActivity(getRuleIntent(ri.settingsAction, null, savedRule.getId()));
                 }
             }
         }.show();
     }
 
-    private void showDeleteRuleDialog(final String ruleName) {
+    private void showDeleteRuleDialog(final String ruleId, final String ruleName) {
         new AlertDialog.Builder(mContext)
                 .setMessage(getString(R.string.zen_mode_delete_rule_confirmation, ruleName))
                 .setNegativeButton(R.string.cancel, null)
@@ -129,17 +130,17 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         MetricsLogger.action(mContext, MetricsLogger.ACTION_ZEN_DELETE_RULE_OK);
-                        removeZenRule(ruleName);
+                        removeZenRule(ruleId);
                     }
                 })
                 .show();
     }
 
     private Intent getRuleIntent(String settingsAction, ComponentName configurationActivity,
-            String ruleName) {
+            String ruleId) {
         Intent intent = new Intent()
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                .putExtra(ConditionProviderService.EXTRA_RULE_NAME, ruleName);
+                .putExtra(ConditionProviderService.EXTRA_RULE_ID, ruleId);
         if (configurationActivity != null) {
             intent.setComponent(configurationActivity);
         } else {
@@ -237,9 +238,8 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
     public static ZenRuleInfo getRuleInfo(ServiceInfo si) {
         if (si == null || si.metaData == null) return null;
         final String ruleType = si.metaData.getString(ConditionProviderService.META_DATA_RULE_TYPE);
-        final String defaultConditionId =
-                si.metaData.getString(ConditionProviderService.META_DATA_DEFAULT_CONDITION_ID);
-        if (ruleType != null && !ruleType.trim().isEmpty() && defaultConditionId != null) {
+        final ComponentName configurationActivity = getSettingsActivity(si);
+        if (ruleType != null && !ruleType.trim().isEmpty() && configurationActivity != null) {
             final ZenRuleInfo ri = new ZenRuleInfo();
             ri.settingsAction = Settings.ACTION_ZEN_MODE_EXTERNAL_RULE_SETTINGS;
             ri.title = ruleType;
@@ -279,11 +279,13 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
 
     private class ZenRulePreference extends Preference {
         final String mName;
+        final String mId;
 
         public ZenRulePreference(Context context, final AutomaticZenRule rule) {
             super(context);
 
             mName = rule.getName();
+            mId = rule.getId();
 
             final boolean isSchedule = ZenModeConfig.isValidScheduleConditionId(
                     rule.getConditionId());
@@ -306,7 +308,7 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
                     : isEvent ? ZenModeEventRuleSettings.ACTION : "";
             ServiceInfo si = mServiceListing.findService(mContext, CONFIG, rule.getOwner());
             ComponentName settingsActivity = getSettingsActivity(si);
-            setIntent(getRuleIntent(action, settingsActivity, rule.getName()));
+            setIntent(getRuleIntent(action, settingsActivity, mId));
 
             setWidgetLayoutResource(R.layout.zen_rule_widget);
         }
@@ -324,7 +326,7 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
         private final View.OnClickListener mDeleteListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDeleteRuleDialog(mName);
+                showDeleteRuleDialog(mId, mName);
             }
         };
     }

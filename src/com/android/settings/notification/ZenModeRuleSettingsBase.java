@@ -55,7 +55,7 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase
     protected Context mContext;
     protected boolean mDisableListeners;
     protected AutomaticZenRule mRule;
-    protected String mName;
+    protected String mId;
 
     private boolean mDeleting;
     private Preference mRuleName;
@@ -83,8 +83,8 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase
             return;
         }
 
-        mName = intent.getStringExtra(ConditionProviderService.EXTRA_RULE_NAME);
-        if (DEBUG) Log.d(TAG, "mName=" + mName);
+        mId = intent.getStringExtra(ConditionProviderService.EXTRA_RULE_ID);
+        if (DEBUG) Log.d(TAG, "mId=" + mId);
         if (refreshRuleOrFinish()) {
             return;
         }
@@ -211,10 +211,11 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase
     }
 
     private void showRuleNameDialog() {
-        new ZenRuleNameDialog(mContext, null, mRule.getName(), mRules) {
+        new ZenRuleNameDialog(mContext, mRule.getName()) {
             @Override
             public void onOk(String ruleName) {
-                renameZenRule(mRule.getName(), ruleName);
+                mRule.setName(ruleName);
+                setZenRule(mRule);
             }
         }.show();
     }
@@ -238,7 +239,7 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase
                     public void onClick(DialogInterface dialog, int which) {
                         MetricsLogger.action(mContext, MetricsLogger.ACTION_ZEN_DELETE_RULE_OK);
                         mDeleting = true;
-                        removeZenRule(mRule.getName());
+                        removeZenRule(mRule.getId());
                     }
                 })
                 .show();
@@ -262,17 +263,7 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase
     }
 
     private AutomaticZenRule getZenRule() {
-        return NotificationManager.from(mContext).getAutomaticZenRule(mName);
-    }
-
-    private boolean renameZenRule(String oldName, String newName) {
-        final boolean success =
-                NotificationManager.from(mContext).renameAutomaticZenRule(oldName, newName);
-        if (success) {
-            mName = newName;
-        }
-        maybeRefreshRules(success, true);
-        return success;
+        return NotificationManager.from(mContext).getAutomaticZenRule(mId);
     }
 
     private void updateControls() {

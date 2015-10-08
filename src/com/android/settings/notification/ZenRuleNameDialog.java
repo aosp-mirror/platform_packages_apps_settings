@@ -40,29 +40,17 @@ public abstract class ZenRuleNameDialog {
 
     private final AlertDialog mDialog;
     private final EditText mEditText;
-    private final View mWarning;
-    private final ColorStateList mWarningTint;
-    private final ColorStateList mOriginalTint;
     private final String mOriginalRuleName;
-    private final ArraySet<String> mExistingNames;
-    private final ServiceListing mServiceListing;
     private final boolean mIsNew;
 
-    public ZenRuleNameDialog(Context context, ServiceListing serviceListing, String ruleName,
-            List<AutomaticZenRule> rules) {
-        mServiceListing = serviceListing;
+    public ZenRuleNameDialog(Context context, String ruleName) {
         mIsNew = ruleName == null;
         mOriginalRuleName = ruleName;
-        mWarningTint = ColorStateList.valueOf(context.getColor(R.color.zen_rule_name_warning));
         final View v = LayoutInflater.from(context).inflate(R.layout.zen_rule_name, null, false);
         mEditText = (EditText) v.findViewById(R.id.rule_name);
-        mWarning = v.findViewById(R.id.rule_name_warning);
         if (!mIsNew) {
             mEditText.setText(ruleName);
         }
-        TypedValue outValue = new TypedValue();
-        context.getTheme().resolveAttribute(android.R.attr.colorAccent, outValue, true);
-        mOriginalTint = ColorStateList.valueOf(outValue.data);
         mEditText.setSelectAllOnFocus(true);
 
         mDialog = new AlertDialog.Builder(context)
@@ -81,52 +69,15 @@ public abstract class ZenRuleNameDialog {
                 })
                 .setNegativeButton(R.string.cancel, null)
                 .create();
-        mEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // noop
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // noop
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                updatePositiveButtonAndWarning();
-            }
-        });
-        mExistingNames = getAutomaticRuleNames(rules);
     }
 
     abstract public void onOk(String ruleName);
 
     public void show() {
         mDialog.show();
-        updatePositiveButtonAndWarning();
-    }
-
-    public ArraySet<String> getAutomaticRuleNames(List<AutomaticZenRule> rules) {
-        final ArraySet<String> rt = new ArraySet<String>(rules.size());
-        for (int i = 0; i < rules.size(); i++) {
-            rt.add(rules.get(i).getName().toLowerCase());
-        }
-        return rt;
     }
 
     private String trimmedText() {
         return mEditText.getText() == null ? null : mEditText.getText().toString().trim();
-    }
-
-    private void updatePositiveButtonAndWarning() {
-        final String name = trimmedText();
-        final boolean validName = !TextUtils.isEmpty(name)
-                && (name.equalsIgnoreCase(mOriginalRuleName)
-                        || !mExistingNames.contains(name.toLowerCase()));
-        mDialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(validName);
-        final boolean showWarning = !TextUtils.isEmpty(name) && !validName;
-        mWarning.setVisibility(showWarning ? View.VISIBLE : View.INVISIBLE);
-        mEditText.setBackgroundTintList(showWarning ? mWarningTint : mOriginalTint);
     }
 }
