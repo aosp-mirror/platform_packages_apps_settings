@@ -1001,7 +1001,7 @@
     <string name="storage_external_title" msgid="3433462910096848696">"Mobiler Speicher"</string>
     <string name="storage_volume_summary" msgid="7023441974367853372">"<xliff:g id="USED">%1$s</xliff:g> von <xliff:g id="TOTAL">%2$s</xliff:g> verwendet"</string>
     <string name="storage_size_large" msgid="5691585991420946254">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
-    <string name="storage_volume_used" msgid="1303803057698959872">"Von <xliff:g id="TOTAL">%1$s</xliff:g> verwendet"</string>
+    <string name="storage_volume_used" msgid="1303803057698959872">"von <xliff:g id="TOTAL">%1$s</xliff:g> verwendet"</string>
     <string name="storage_volume_used_total" msgid="6113121714019000244">"Von <xliff:g id="TOTAL">%1$s</xliff:g> insgesamt verwendet"</string>
     <string name="storage_mount_success" msgid="687641090137253647">"<xliff:g id="NAME">%1$s</xliff:g> wurde bereitgestellt."</string>
     <string name="storage_mount_failure" msgid="1042621107954547316">"<xliff:g id="NAME">%1$s</xliff:g> konnte nicht bereitgestellt werden."</string>
@@ -1617,6 +1617,8 @@
     <string name="accessibility_display_inversion_preference_subtitle" msgid="8658240868230680912">"(Experimentell) Kann sich auf die Leistung auswirken."</string>
     <string name="accessibility_display_daltonizer_preference_title" msgid="5800761362678707872">"Farbkorrektur"</string>
     <string name="accessibility_display_daltonizer_preference_subtitle" msgid="3484969015295282911">"Hierbei handelt es sich um eine experimentelle Funktion. Dies kann sich auf die Leistung auswirken."</string>
+    <string name="accessibility_autoclick_preference_title" msgid="7014499339068449623">"Klicken, wenn sich der Zeiger nicht mehr bewegt"</string>
+    <string name="accessibility_autoclick_delay_preference_title" msgid="3962261178385106006">"Verzögerung vor Klick"</string>
     <string name="enable_quick_setting" msgid="2366999897816894536">"In Schnelleinstellungen anzeigen"</string>
     <string name="daltonizer_type" msgid="1124178250809091080">"Korrekturmodus"</string>
     <string name="daltonizer_type_overridden" msgid="3116947244410245916">"Außer Kraft gesetzt von \"<xliff:g id="TITLE">%1$s</xliff:g>\""</string>
@@ -1625,6 +1627,11 @@
     <string name="daltonizer_mode_deuteranomaly" msgid="5475532989673586329">"Deuteranomalie (Rot-Grün-Sehschwäche)"</string>
     <string name="daltonizer_mode_protanomaly" msgid="8424148009038666065">"Protanomalie (Rot-Grün-Sehschwäche)"</string>
     <string name="daltonizer_mode_tritanomaly" msgid="481725854987912389">"Tritanomalie (Blau-Gelb-Sehschwäche)"</string>
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_extremely_short_delay (4522776665472271034) -->
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_very_short_delay (6435649125927410629) -->
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_short_delay (4595820735124183245) -->
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_long_delay (72913018575475150) -->
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_very_long_delay (7228313329025277292) -->
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Einstellungen"</string>
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"An"</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"Aus"</string>
@@ -2138,10 +2145,6 @@
     <string name="transition_animation_scale_title" msgid="387527540523595875">"Maßstab Übergangsanimation"</string>
     <string name="animator_duration_scale_title" msgid="3406722410819934083">"Maßstab für Animatorzeit"</string>
     <string name="overlay_display_devices_title" msgid="5364176287998398539">"Sekundäre Displays simulieren"</string>
-    <string name="enable_multi_window" msgid="1091779249819137016">"Mehrfenstermodus"</string>
-    <string name="enable_multi_window_summary" msgid="5837641304114783514">"Mehrere Aktivitäten gleichzeitig auf dem Bildschirm"</string>
-    <string name="confirm_enable_multi_window_title" msgid="950964546995895971">"Mehrfenstermodus aktivieren?"</string>
-    <string name="confirm_enable_multi_window_text" msgid="565834092374755117">"Achtung: Hierbei handelt es sich um eine äußerst experimentelle Funktion, die über die Benutzeroberfläche zuletzt aktiver Apps mehrere Aktivitäten gleichzeitig auf dem Bildschirm zulässt. Bei Verwendung mit dieser Funktion stürzen einige Apps möglicherweise ab oder funktionieren nicht richtig."</string>
     <string name="debug_applications_category" msgid="4206913653849771549">"Apps"</string>
     <string name="immediately_destroy_activities" msgid="1579659389568133959">"Aktionen nicht speichern"</string>
     <string name="immediately_destroy_activities_summary" msgid="3592221124808773368">"Aktivität löschen, sobald der Nutzer diese beendet"</string>

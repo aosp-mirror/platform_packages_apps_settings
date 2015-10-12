@@ -998,9 +998,9 @@
     <string name="storage_other_users" msgid="808708845102611856">"ผู้ใช้รายอื่นๆ"</string>
     <string name="storage_internal_title" msgid="690771193137801021">"ที่เก็บข้อมูลอุปกรณ์"</string>
     <string name="storage_external_title" msgid="3433462910096848696">"ที่จัดเก็บข้อมูลแบบพกพา"</string>
-    <string name="storage_volume_summary" msgid="7023441974367853372">"ใช้ไป <xliff:g id="USED">%1$s</xliff:g> จาก <xliff:g id="TOTAL">%2$s</xliff:g>"</string>
+    <string name="storage_volume_summary" msgid="7023441974367853372">"ใช้ไป <xliff:g id="USED">%1$s</xliff:g> จากทั้งหมด <xliff:g id="TOTAL">%2$s</xliff:g>"</string>
     <string name="storage_size_large" msgid="5691585991420946254">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
-    <string name="storage_volume_used" msgid="1303803057698959872">"ใช้ไปจาก <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
+    <string name="storage_volume_used" msgid="1303803057698959872">"ที่ใช้ไปจากทั้งหมด <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_volume_used_total" msgid="6113121714019000244">"ใช้ไปทั้งหมดจาก <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_mount_success" msgid="687641090137253647">"ต่อเชื่อม<xliff:g id="NAME">%1$s</xliff:g>แล้ว"</string>
     <string name="storage_mount_failure" msgid="1042621107954547316">"ไม่สามารถต่อเชื่อม<xliff:g id="NAME">%1$s</xliff:g>"</string>
@@ -1616,6 +1616,8 @@
     <string name="accessibility_display_inversion_preference_subtitle" msgid="8658240868230680912">"(ทดลอง) อาจส่งผลต่อประสิทธิภาพการทำงาน"</string>
     <string name="accessibility_display_daltonizer_preference_title" msgid="5800761362678707872">"การแก้สี"</string>
     <string name="accessibility_display_daltonizer_preference_subtitle" msgid="3484969015295282911">"คุณลักษณะนี้เป็นแบบทดลองและอาจส่งผลต่อประสิทธิภาพการทำงาน"</string>
+    <string name="accessibility_autoclick_preference_title" msgid="7014499339068449623">"คลิกหลังจากตัวชี้หยุดเคลื่อนที่"</string>
+    <string name="accessibility_autoclick_delay_preference_title" msgid="3962261178385106006">"หน่วงเวลาก่อนคลิก"</string>
     <string name="enable_quick_setting" msgid="2366999897816894536">"แสดงในการตั้งค่าด่วน"</string>
     <string name="daltonizer_type" msgid="1124178250809091080">"โหมดแก้ไข"</string>
     <string name="daltonizer_type_overridden" msgid="3116947244410245916">"แทนที่โดย <xliff:g id="TITLE">%1$s</xliff:g>"</string>
@@ -1624,6 +1626,11 @@
     <string name="daltonizer_mode_deuteranomaly" msgid="5475532989673586329">"ตาบอดจางสีเขียว (สีแดง/เขียว)"</string>
     <string name="daltonizer_mode_protanomaly" msgid="8424148009038666065">"ตาบอดจางสีแดง (สีแดง/เขียว)"</string>
     <string name="daltonizer_mode_tritanomaly" msgid="481725854987912389">"ตาบอดจางสีน้ำเงิน (สีน้ำเงิน/เหลือง)"</string>
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_extremely_short_delay (4522776665472271034) -->
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_very_short_delay (6435649125927410629) -->
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_short_delay (4595820735124183245) -->
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_long_delay (72913018575475150) -->
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_very_long_delay (7228313329025277292) -->
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"การตั้งค่า"</string>
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"เปิด"</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"ปิด"</string>
@@ -2137,10 +2144,6 @@
     <string name="transition_animation_scale_title" msgid="387527540523595875">"อัตราการสลับภาพเคลื่อนไหว"</string>
     <string name="animator_duration_scale_title" msgid="3406722410819934083">"ความเร็วตามผู้สร้างกำหนด"</string>
     <string name="overlay_display_devices_title" msgid="5364176287998398539">"จำลองจอแสดงผลที่สอง"</string>
-    <string name="enable_multi_window" msgid="1091779249819137016">"โหมดหลายหน้าต่าง"</string>
-    <string name="enable_multi_window_summary" msgid="5837641304114783514">"หลายกิจกรรมบนหน้าจอในเวลาเดียวกัน"</string>
-    <string name="confirm_enable_multi_window_title" msgid="950964546995895971">"เปิดใช้โหมดหลายหน้าต่างไหม"</string>
-    <string name="confirm_enable_multi_window_text" msgid="565834092374755117">"คำเตือน: นี่เป็นคุณลักษณะทดลองขั้นสูงซึ่งอนุญาตให้หลายกิจกรรมอยู่บนหน้าจอในเวลาเดียวกันผ่าน UI ของแอปล่าสุด บางแอปอาจมีข้อขัดข้องหรือทำงานไม่ถูกต้องเมื่อใช้กับคุณลักษณะนี้"</string>
     <string name="debug_applications_category" msgid="4206913653849771549">"แอปพลิเคชัน"</string>
     <string name="immediately_destroy_activities" msgid="1579659389568133959">"ไม่เก็บกิจกรรม"</string>
     <string name="immediately_destroy_activities_summary" msgid="3592221124808773368">"ล้างทุกกิจกรรมทันทีที่ผู้ใช้ออกไป"</string>

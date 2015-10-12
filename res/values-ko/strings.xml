@@ -998,9 +998,9 @@
     <string name="storage_other_users" msgid="808708845102611856">"다른 사용자"</string>
     <string name="storage_internal_title" msgid="690771193137801021">"기기 저장용량"</string>
     <string name="storage_external_title" msgid="3433462910096848696">"휴대용 저장소"</string>
-    <string name="storage_volume_summary" msgid="7023441974367853372">"<xliff:g id="TOTAL">%2$s</xliff:g> 중 <xliff:g id="USED">%1$s</xliff:g> 사용"</string>
+    <string name="storage_volume_summary" msgid="7023441974367853372">"<xliff:g id="USED">%1$s</xliff:g> / <xliff:g id="TOTAL">%2$s</xliff:g>"</string>
     <string name="storage_size_large" msgid="5691585991420946254">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>"<xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
-    <string name="storage_volume_used" msgid="1303803057698959872">"<xliff:g id="TOTAL">%1$s</xliff:g> 중 사용"</string>
+    <string name="storage_volume_used" msgid="1303803057698959872">"/ <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_volume_used_total" msgid="6113121714019000244">"<xliff:g id="TOTAL">%1$s</xliff:g> 중 총 사용"</string>
     <string name="storage_mount_success" msgid="687641090137253647">"<xliff:g id="NAME">%1$s</xliff:g>이(가) 마운트되었습니다."</string>
     <string name="storage_mount_failure" msgid="1042621107954547316">"<xliff:g id="NAME">%1$s</xliff:g>을(를) 마운트하지 못했습니다."</string>
@@ -1616,6 +1616,8 @@
     <string name="accessibility_display_inversion_preference_subtitle" msgid="8658240868230680912">"(실험실 기능) 성능에 영향을 줄 수 있음"</string>
     <string name="accessibility_display_daltonizer_preference_title" msgid="5800761362678707872">"색보정"</string>
     <string name="accessibility_display_daltonizer_preference_subtitle" msgid="3484969015295282911">"실험실 기능이며 성능에 영향을 줄 수 있습니다."</string>
+    <string name="accessibility_autoclick_preference_title" msgid="7014499339068449623">"포인터 이동이 멈춘 뒤 클릭"</string>
+    <string name="accessibility_autoclick_delay_preference_title" msgid="3962261178385106006">"지연 후 클릭"</string>
     <string name="enable_quick_setting" msgid="2366999897816894536">"빠른 설정에 표시"</string>
     <string name="daltonizer_type" msgid="1124178250809091080">"보정 모드"</string>
     <string name="daltonizer_type_overridden" msgid="3116947244410245916">"<xliff:g id="TITLE">%1$s</xliff:g> 우선 적용됨"</string>
@@ -1624,6 +1626,11 @@
     <string name="daltonizer_mode_deuteranomaly" msgid="5475532989673586329">"녹색약(적녹)"</string>
     <string name="daltonizer_mode_protanomaly" msgid="8424148009038666065">"적색약(적녹)"</string>
     <string name="daltonizer_mode_tritanomaly" msgid="481725854987912389">"청색약(청황)"</string>
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_extremely_short_delay (4522776665472271034) -->
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_very_short_delay (6435649125927410629) -->
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_short_delay (4595820735124183245) -->
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_long_delay (72913018575475150) -->
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_very_long_delay (7228313329025277292) -->
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"설정"</string>
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"사용"</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"사용 안함"</string>
@@ -2137,10 +2144,6 @@
     <string name="transition_animation_scale_title" msgid="387527540523595875">"전환 애니메이션 배율"</string>
     <string name="animator_duration_scale_title" msgid="3406722410819934083">"Animator 길이 배율"</string>
     <string name="overlay_display_devices_title" msgid="5364176287998398539">"보조 디스플레이 시뮬레이션"</string>
-    <string name="enable_multi_window" msgid="1091779249819137016">"멀티 윈도우 모드"</string>
-    <string name="enable_multi_window_summary" msgid="5837641304114783514">"화면에서 여러 작업을 동시에 수행합니다."</string>
-    <string name="confirm_enable_multi_window_title" msgid="950964546995895971">"멀티 윈도우 모드를 사용하시겠습니까?"</string>
-    <string name="confirm_enable_multi_window_text" msgid="565834092374755117">"경고: 이 기능은 매우 실험적인 기능으로 최근 사용 앱 UI를 통해 화면에서 여러 작업을 동시에 수행할 수 있도록 지원합니다. 이 기능을 사용하는 경우 일부 앱이 충돌하거나 제대로 작동하지 않을 수 있습니다."</string>
     <string name="debug_applications_category" msgid="4206913653849771549">"앱"</string>
     <string name="immediately_destroy_activities" msgid="1579659389568133959">"액티비티 유지 안함"</string>
     <string name="immediately_destroy_activities_summary" msgid="3592221124808773368">"사용자가 종료하는 즉시 바로 제거"</string>
