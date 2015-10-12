@@ -1165,6 +1165,38 @@ public final class Utils {
         return str;
     }
 
+    /**
+     * Returns the user id present in the bundle with {@link ChooseLockGeneric#KEY_USER_ID} if it
+     * belongs to the current user.
+     *
+     * @throws SecurityException if the given userId does not belong to the current user group.
+     */
+    public static int getSameOwnerUserId(Context context, Bundle bundle) {
+        if (bundle == null) {
+            return getEffectiveUserId(context);
+        }
+        int userId = bundle.getInt(ChooseLockGeneric.KEY_USER_ID, UserHandle.myUserId());
+        return getSameOwnerUserId(context, userId);
+    }
+
+    /**
+     * Returns the given user id if it belongs to the current user.
+     *
+     * @throws SecurityException if the given userId does not belong to the current user group.
+     */
+    public static int getSameOwnerUserId(Context context, int userId) {
+        UserManager um = UserManager.get(context);
+        if (um != null) {
+            if (um.getUserProfiles().contains(new UserHandle(userId))) {
+                return userId;
+            } else {
+                throw new SecurityException("Given user id " + userId + " does not belong to user "
+                        + UserHandle.myUserId());
+            }
+        }
+        return getEffectiveUserId(context);
+    }
+
     public static int getEffectiveUserId(Context context) {
         UserManager um = UserManager.get(context);
         if (um != null) {

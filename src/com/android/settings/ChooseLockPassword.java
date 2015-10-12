@@ -83,10 +83,27 @@ public class ChooseLockPassword extends SettingsActivity {
     }
 
     public static Intent createIntent(Context context, int quality,
+            int minLength, final int maxLength, boolean requirePasswordToDecrypt,
+            boolean confirmCredentials, int userId) {
+        Intent intent = createIntent(context, quality, minLength, maxLength,
+                requirePasswordToDecrypt, confirmCredentials);
+        intent.putExtra(ChooseLockGeneric.KEY_USER_ID, userId);
+        return intent;
+    }
+
+    public static Intent createIntent(Context context, int quality,
             int minLength, final int maxLength, boolean requirePasswordToDecrypt, String password) {
         Intent intent = createIntent(context, quality, minLength, maxLength,
                 requirePasswordToDecrypt, false);
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD, password);
+        return intent;
+    }
+
+    public static Intent createIntent(Context context, int quality, int minLength,
+            int maxLength, boolean requirePasswordToDecrypt, String password, int userId) {
+        Intent intent = createIntent(context, quality, minLength, maxLength,
+                requirePasswordToDecrypt, password);
+        intent.putExtra(ChooseLockGeneric.KEY_USER_ID, userId);
         return intent;
     }
 
@@ -96,6 +113,14 @@ public class ChooseLockPassword extends SettingsActivity {
                 requirePasswordToDecrypt, false);
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, true);
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, challenge);
+        return intent;
+    }
+
+    public static Intent createIntent(Context context, int quality, int minLength,
+            int maxLength, boolean requirePasswordToDecrypt, long challenge, int userId) {
+        Intent intent = createIntent(context, quality, minLength, maxLength,
+                requirePasswordToDecrypt, challenge);
+        intent.putExtra(ChooseLockGeneric.KEY_USER_ID, userId);
         return intent;
     }
 
@@ -160,6 +185,8 @@ public class ChooseLockPassword extends SettingsActivity {
         private static final long ERROR_MESSAGE_TIMEOUT = 3000;
         private static final int MSG_SHOW_ERROR = 1;
 
+        private int mUserId;
+
         private Handler mHandler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
@@ -210,32 +237,34 @@ public class ChooseLockPassword extends SettingsActivity {
             if (!(getActivity() instanceof ChooseLockPassword)) {
                 throw new SecurityException("Fragment contained in wrong activity");
             }
+            // Only take this argument into account if it belongs to the current profile.
+            mUserId = Utils.getSameOwnerUserId(getActivity(), intent.getExtras());
             mRequestedQuality = Math.max(intent.getIntExtra(LockPatternUtils.PASSWORD_TYPE_KEY,
                     mRequestedQuality), mLockPatternUtils.getRequestedPasswordQuality(
-                    UserHandle.myUserId()));
+                    mUserId));
             mPasswordMinLength = Math.max(Math.max(
                     LockPatternUtils.MIN_LOCK_PASSWORD_SIZE,
                     intent.getIntExtra(PASSWORD_MIN_KEY, mPasswordMinLength)),
-                    mLockPatternUtils.getRequestedMinimumPasswordLength(UserHandle.myUserId()));
+                    mLockPatternUtils.getRequestedMinimumPasswordLength(mUserId));
             mPasswordMaxLength = intent.getIntExtra(PASSWORD_MAX_KEY, mPasswordMaxLength);
             mPasswordMinLetters = Math.max(intent.getIntExtra(PASSWORD_MIN_LETTERS_KEY,
                     mPasswordMinLetters), mLockPatternUtils.getRequestedPasswordMinimumLetters(
-                    UserHandle.myUserId()));
+                    mUserId));
             mPasswordMinUpperCase = Math.max(intent.getIntExtra(PASSWORD_MIN_UPPERCASE_KEY,
                     mPasswordMinUpperCase), mLockPatternUtils.getRequestedPasswordMinimumUpperCase(
-                    UserHandle.myUserId()));
+                    mUserId));
             mPasswordMinLowerCase = Math.max(intent.getIntExtra(PASSWORD_MIN_LOWERCASE_KEY,
                     mPasswordMinLowerCase), mLockPatternUtils.getRequestedPasswordMinimumLowerCase(
-                    UserHandle.myUserId()));
+                    mUserId));
             mPasswordMinNumeric = Math.max(intent.getIntExtra(PASSWORD_MIN_NUMERIC_KEY,
                     mPasswordMinNumeric), mLockPatternUtils.getRequestedPasswordMinimumNumeric(
-                    UserHandle.myUserId()));
+                    mUserId));
             mPasswordMinSymbols = Math.max(intent.getIntExtra(PASSWORD_MIN_SYMBOLS_KEY,
                     mPasswordMinSymbols), mLockPatternUtils.getRequestedPasswordMinimumSymbols(
-                    UserHandle.myUserId()));
+                    mUserId));
             mPasswordMinNonLetter = Math.max(intent.getIntExtra(PASSWORD_MIN_NONLETTER_KEY,
                     mPasswordMinNonLetter), mLockPatternUtils.getRequestedPasswordMinimumNonLetter(
-                    UserHandle.myUserId()));
+                    mUserId));
 
             mChooseLockSettingsHelper = new ChooseLockSettingsHelper(getActivity());
         }
@@ -289,7 +318,8 @@ public class ChooseLockPassword extends SettingsActivity {
                 updateStage(Stage.Introduction);
                 if (confirmCredentials) {
                     mChooseLockSettingsHelper.launchConfirmationActivity(CONFIRM_EXISTING_REQUEST,
-                            getString(R.string.unlock_set_unlock_launch_picker_title), true);
+                            getString(R.string.unlock_set_unlock_launch_picker_title), true,
+                            mUserId);
                 }
             } else {
                 // restore from previous state
@@ -477,7 +507,7 @@ public class ChooseLockPassword extends SettingsActivity {
                     return getString(R.string.lockpassword_password_requires_digit);
                 }
             }
-            if(mLockPatternUtils.checkPasswordHistory(password, UserHandle.myUserId())) {
+            if(mLockPatternUtils.checkPasswordHistory(password, mUserId)) {
                 return getString(mIsAlphaMode ? R.string.lockpassword_password_recently_used
                         : R.string.lockpassword_pin_recently_used);
             }
@@ -618,7 +648,7 @@ public class ChooseLockPassword extends SettingsActivity {
             final boolean required = getActivity().getIntent().getBooleanExtra(
                     EncryptionInterstitial.EXTRA_REQUIRE_PASSWORD, true);
             mSaveAndFinishWorker.start(mLockPatternUtils, required, mHasChallenge, mChallenge,
-                    mChosenPassword, mCurrentPassword, mRequestedQuality);
+                    mChosenPassword, mCurrentPassword, mRequestedQuality, mUserId);
         }
 
         @Override
@@ -640,15 +670,17 @@ public class ChooseLockPassword extends SettingsActivity {
         private String mChosenPassword;
         private String mCurrentPassword;
         private int mRequestedQuality;
+        private int mUserId;
 
         public void start(LockPatternUtils utils, boolean required,
                 boolean hasChallenge, long challenge,
-                String chosenPassword, String currentPassword, int requestedQuality) {
+                String chosenPassword, String currentPassword, int requestedQuality, int userId) {
             prepare(utils, required, hasChallenge, challenge);
 
             mChosenPassword = chosenPassword;
             mCurrentPassword = currentPassword;
             mRequestedQuality = requestedQuality;
+            mUserId = userId;
 
             start();
         }
@@ -656,14 +688,13 @@ public class ChooseLockPassword extends SettingsActivity {
         @Override
         protected Intent saveAndVerifyInBackground() {
             Intent result = null;
-            final int userId = UserHandle.myUserId();
             mUtils.saveLockPassword(mChosenPassword, mCurrentPassword, mRequestedQuality,
-                    userId);
+                    mUserId);
 
             if (mHasChallenge) {
                 byte[] token;
                 try {
-                    token = mUtils.verifyPassword(mChosenPassword, mChallenge, userId);
+                    token = mUtils.verifyPassword(mChosenPassword, mChallenge, mUserId);
                 } catch (RequestThrottledException e) {
                     token = null;
                 }

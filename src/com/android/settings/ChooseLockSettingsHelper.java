@@ -80,6 +80,22 @@ public final class ChooseLockSettingsHelper {
      * If a pattern, password or PIN exists, prompt the user before allowing them to change it.
      *
      * @param title title of the confirmation screen; shown in the action bar
+     * @param returnCredentials if true, put credentials into intent. Note that if this is true,
+     *                          this can only be called internally.
+     * @param userId The userId for whom the lock should be confirmed.
+     * @return true if one exists and we launched an activity to confirm it
+     * @see Activity#onActivityResult(int, int, android.content.Intent)
+     */
+    boolean launchConfirmationActivity(int request, CharSequence title, boolean returnCredentials,
+            int userId) {
+        return launchConfirmationActivity(request, title, null, null,
+                returnCredentials, false, false, 0, Utils.getSameOwnerUserId(mActivity, userId));
+    }
+
+    /**
+     * If a pattern, password or PIN exists, prompt the user before allowing them to change it.
+     *
+     * @param title title of the confirmation screen; shown in the action bar
      * @param header header of the confirmation screen; shown as large text
      * @param description description of the confirmation screen
      * @param returnCredentials if true, put credentials into intent. Note that if this is true,
@@ -93,7 +109,7 @@ public final class ChooseLockSettingsHelper {
             @Nullable CharSequence header, @Nullable CharSequence description,
             boolean returnCredentials, boolean external) {
         return launchConfirmationActivity(request, title, header, description,
-                returnCredentials, external, false, 0);
+                returnCredentials, external, false, 0, Utils.getEffectiveUserId(mActivity));
     }
 
     /**
@@ -109,16 +125,14 @@ public final class ChooseLockSettingsHelper {
             @Nullable CharSequence header, @Nullable CharSequence description,
             long challenge) {
         return launchConfirmationActivity(request, title, header, description,
-                false, false, true, challenge);
+                false, false, true, challenge, Utils.getEffectiveUserId(mActivity));
     }
 
     private boolean launchConfirmationActivity(int request, @Nullable CharSequence title,
             @Nullable CharSequence header, @Nullable CharSequence description,
             boolean returnCredentials, boolean external, boolean hasChallenge,
-            long challenge) {
+            long challenge, int effectiveUserId) {
         boolean launched = false;
-
-        int effectiveUserId = Utils.getEffectiveUserId(mActivity);
 
         switch (mLockPatternUtils.getKeyguardStoredPasswordQuality(effectiveUserId)) {
             case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
@@ -126,7 +140,7 @@ public final class ChooseLockSettingsHelper {
                         returnCredentials || hasChallenge
                                 ? ConfirmLockPattern.InternalActivity.class
                                 : ConfirmLockPattern.class, external,
-                                hasChallenge, challenge);
+                                hasChallenge, challenge, effectiveUserId);
                 break;
             case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
             case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX:
@@ -137,7 +151,7 @@ public final class ChooseLockSettingsHelper {
                         returnCredentials || hasChallenge
                                 ? ConfirmLockPassword.InternalActivity.class
                                 : ConfirmLockPassword.class, external,
-                                hasChallenge, challenge);
+                                hasChallenge, challenge, effectiveUserId);
                 break;
         }
         return launched;
@@ -145,7 +159,7 @@ public final class ChooseLockSettingsHelper {
 
     private boolean launchConfirmationActivity(int request, CharSequence title, CharSequence header,
             CharSequence message, Class<?> activityClass, boolean external, boolean hasChallenge,
-            long challenge) {
+            long challenge, int userId) {
         final Intent intent = new Intent();
         intent.putExtra(ConfirmDeviceCredentialBaseFragment.TITLE_TEXT, title);
         intent.putExtra(ConfirmDeviceCredentialBaseFragment.HEADER_TEXT, header);
@@ -156,6 +170,7 @@ public final class ChooseLockSettingsHelper {
         intent.putExtra(ConfirmDeviceCredentialBaseFragment.SHOW_WHEN_LOCKED, external);
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, hasChallenge);
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, challenge);
+        intent.putExtra(ChooseLockGeneric.KEY_USER_ID, userId);
         intent.setClassName(ConfirmDeviceCredentialBaseFragment.PACKAGE, activityClass.getName());
         if (external) {
             intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
