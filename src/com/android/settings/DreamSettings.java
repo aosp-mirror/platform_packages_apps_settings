@@ -44,8 +44,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.android.internal.logging.MetricsLogger;
-import com.android.settings.DreamBackend.DreamInfo;
 import com.android.settings.widget.SwitchBar;
+import com.android.settingslib.dream.DreamBackend;
 
 import java.util.List;
 
@@ -271,7 +271,7 @@ public class DreamSettings extends SettingsPreferenceFragment implements
 
         mAdapter.clear();
         if (dreamsEnabled) {
-            List<DreamInfo> dreamInfos = mBackend.getDreamInfos();
+            List<DreamBackend.DreamInfo> dreamInfos = mBackend.getDreamInfos();
             mAdapter.addAll(dreamInfos);
         }
         if (mMenuItemsWhenEnabled != null)
@@ -285,7 +285,7 @@ public class DreamSettings extends SettingsPreferenceFragment implements
             Log.d(TAG, args == null || args.length == 0 ? msg : String.format(msg, args));
     }
 
-    private class DreamInfoAdapter extends ArrayAdapter<DreamInfo> {
+    private class DreamInfoAdapter extends ArrayAdapter<DreamBackend.DreamInfo> {
         private final LayoutInflater mInflater;
 
         public DreamInfoAdapter(Context context) {
@@ -295,7 +295,7 @@ public class DreamSettings extends SettingsPreferenceFragment implements
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            DreamInfo dreamInfo = getItem(position);
+            DreamBackend.DreamInfo dreamInfo = getItem(position);
             logd("getView(%s)", dreamInfo.caption);
             final View row = convertView != null ? convertView : createDreamInfoRow(parent);
             row.setTag(dreamInfo);
@@ -329,7 +329,7 @@ public class DreamSettings extends SettingsPreferenceFragment implements
             settingsButton.setOnClickListener(new OnClickListener(){
                 @Override
                 public void onClick(View v) {
-                    mBackend.launchSettings((DreamInfo) row.getTag());
+                    mBackend.launchSettings((DreamBackend.DreamInfo) row.getTag());
                 }});
 
             return row;
@@ -342,20 +342,20 @@ public class DreamSettings extends SettingsPreferenceFragment implements
                 @Override
                 public void onClick(View v) {
                     v.setPressed(true);
-                    activate((DreamInfo) row.getTag());
+                    activate((DreamBackend.DreamInfo) row.getTag());
                 }});
             return row;
         }
 
-        private DreamInfo getCurrentSelection() {
+        private DreamBackend.DreamInfo getCurrentSelection() {
             for (int i = 0; i < getCount(); i++) {
-                DreamInfo dreamInfo = getItem(i);
+                DreamBackend.DreamInfo dreamInfo = getItem(i);
                 if (dreamInfo.isActive)
                     return dreamInfo;
             }
             return null;
         }
-        private void activate(DreamInfo dreamInfo) {
+        private void activate(DreamBackend.DreamInfo dreamInfo) {
             if (dreamInfo.equals(getCurrentSelection()))
                 return;
             for (int i = 0; i < getCount(); i++) {
