@@ -61,11 +61,11 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         addPreferencesFromResource(R.xml.zen_mode_automation_settings);
+        mPm = mContext.getPackageManager();
         mServiceListing = new ServiceListing(mContext, CONFIG);
         mServiceListing.addCallback(mServiceListingCallback);
         mServiceListing.reload();
         mServiceListing.setListening(true);
-        mPm = mContext.getPackageManager();
     }
 
     @Override
@@ -223,7 +223,7 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
         @Override
         public void onServicesReloaded(List<ServiceInfo> services) {
             for (ServiceInfo service : services) {
-                final ZenRuleInfo ri = getRuleInfo(service);
+                final ZenRuleInfo ri = getRuleInfo(mPm, service);
                 if (ri != null && ri.serviceComponent != null
                         && Objects.equals(ri.settingsAction,
                         Settings.ACTION_ZEN_MODE_EXTERNAL_RULE_SETTINGS)) {
@@ -236,7 +236,7 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
         }
     };
 
-    public static ZenRuleInfo getRuleInfo(ServiceInfo si) {
+    public static ZenRuleInfo getRuleInfo(PackageManager pm, ServiceInfo si) {
         if (si == null || si.metaData == null) return null;
         final String ruleType = si.metaData.getString(ConditionProviderService.META_DATA_RULE_TYPE);
         final ComponentName configurationActivity = getSettingsActivity(si);
@@ -246,6 +246,7 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
             ri.title = ruleType;
             ri.packageName = si.packageName;
             ri.configurationActivity = getSettingsActivity(si);
+            ri.packageLabel = si.applicationInfo.loadLabel(pm);
 
             return ri;
         }
@@ -262,12 +263,16 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
         return null;
     }
 
-    // TODO: Sort by creation date, once that data is available.
     private static final Comparator<AutomaticZenRule> RULE_COMPARATOR =
             new Comparator<AutomaticZenRule>() {
         @Override
         public int compare(AutomaticZenRule lhs, AutomaticZenRule rhs) {
-            return key(lhs).compareTo(key(rhs));
+            int byDate = Long.compare(lhs.getCreationTime(), rhs.getCreationTime());
+            if (byDate != 0) {
+                return byDate;
+            } else {
+                return key(lhs).compareTo(key(rhs));
+            }
         }
 
         private String key(AutomaticZenRule rule) {

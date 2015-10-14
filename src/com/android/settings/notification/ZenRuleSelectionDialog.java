@@ -17,6 +17,7 @@
 package com.android.settings.notification;
 
 import android.app.AlertDialog;
+import android.app.AutomaticZenRule;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
@@ -36,7 +37,10 @@ import android.widget.TextView;
 import com.android.settings.R;
 
 import java.lang.ref.WeakReference;
+import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 public abstract class ZenRuleSelectionDialog {
@@ -48,7 +52,6 @@ public abstract class ZenRuleSelectionDialog {
     private final AlertDialog mDialog;
     private final LinearLayout mRuleContainer;
     private final ServiceListing mServiceListing;
-    private final List<ZenRuleInfo> mExternalRuleTypes = new ArrayList<ZenRuleInfo>();
 
     public ZenRuleSelectionDialog(Context context, ServiceListing serviceListing) {
         mContext = context;
@@ -59,9 +62,8 @@ public abstract class ZenRuleSelectionDialog {
 
         mRuleContainer = (LinearLayout) v.findViewById(R.id.rule_container);
         if (mServiceListing != null) {
-            bindType(defaultNewSchedule());
             bindType(defaultNewEvent());
-            bindExternalRules();
+            bindType(defaultNewSchedule());
             mServiceListing.addCallback(mServiceListingCallback);
             mServiceListing.reload();
         }
@@ -147,8 +149,9 @@ public abstract class ZenRuleSelectionDialog {
         return rt;
     }
 
-    private void bindExternalRules() {
-        for (ZenRuleInfo ri : mExternalRuleTypes) {
+    private void bindExternalRules(ZenRuleInfo[] externalRuleTypes) {
+        Arrays.sort(externalRuleTypes, RULE_TYPE_COMPARATOR);
+        for (ZenRuleInfo ri : externalRuleTypes) {
             bindType(ri);
         }
     }
@@ -157,15 +160,31 @@ public abstract class ZenRuleSelectionDialog {
         @Override
         public void onServicesReloaded(List<ServiceInfo> services) {
             if (DEBUG) Log.d(TAG, "Services reloaded: count=" + services.size());
-            for (ServiceInfo si : services) {
-                final ZenRuleInfo ri = ZenModeAutomationSettings.getRuleInfo(si);
+            ZenRuleInfo[] externalRuleTypes = new ZenRuleInfo[services.size()];
+            for (int i = 0; i < services.size(); i++) {
+                final ZenRuleInfo ri = ZenModeAutomationSettings.getRuleInfo(mPm, services.get(i));
                 if (ri != null && ri.configurationActivity != null) {
-                    mExternalRuleTypes.add(ri);
+                    externalRuleTypes[i] = ri;
                 }
             }
-            bindExternalRules();
+            bindExternalRules(externalRuleTypes);
         }
     };
+
+    private static final Comparator<ZenRuleInfo> RULE_TYPE_COMPARATOR =
+            new Comparator<ZenRuleInfo>() {
+                private final Collator mCollator = Collator.getInstance();
+
+                @Override
+                public int compare(ZenRuleInfo lhs, ZenRuleInfo rhs) {
+                    int byAppName = mCollator.compare(lhs.packageLabel, rhs.packageLabel);
+                    if (byAppName != 0) {
+                        return byAppName;
+                    } else {
+                        return mCollator.compare(lhs.title, rhs.title);
+                    }
+                }
+            };
 
     private class LoadIconTask extends AsyncTask<ApplicationInfo, Void, Drawable> {
         private final WeakReference<ImageView> viewReference;
