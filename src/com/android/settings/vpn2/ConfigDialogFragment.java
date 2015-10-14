@@ -16,6 +16,8 @@
 
 package com.android.settings.vpn2;
 
+import java.util.Arrays;
+
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
@@ -123,7 +125,18 @@ public class ConfigDialogFragment extends DialogFragment implements
             disconnect(profile);
 
             // Delete from KeyStore
-            KeyStore.getInstance().delete(Credentials.VPN + profile.key, KeyStore.UID_SELF);
+            KeyStore keyStore = KeyStore.getInstance();
+            keyStore.delete(Credentials.VPN + profile.key, KeyStore.UID_SELF);
+
+            // If this was the current lockdown VPN, clear it.
+            if (Arrays.equals(profile.key.getBytes(), keyStore.get(Credentials.LOCKDOWN_VPN))) {
+                keyStore.delete(Credentials.LOCKDOWN_VPN);
+                try {
+                    mService.updateLockdownVpn();
+                } catch (RemoteException e) {
+                    Log.e(TAG, "Failed to clear lockdown VPN configuration");
+                }
+            }
         }
         dismiss();
     }
