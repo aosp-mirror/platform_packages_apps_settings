@@ -335,6 +335,17 @@ public class SettingsActivity extends SettingsDrawerActivity
         }
     };
 
+    private final BroadcastReceiver mUserAddRemoveReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals(Intent.ACTION_USER_ADDED)
+                    || action.equals(Intent.ACTION_USER_REMOVED)) {
+                Index.getInstance(getApplicationContext()).update();
+            }
+        }
+    };
+
     private final DynamicIndexableContentMonitor mDynamicIndexableContentMonitor =
             new DynamicIndexableContentMonitor();
 
@@ -752,6 +763,8 @@ public class SettingsActivity extends SettingsDrawerActivity
                 mDevelopmentPreferencesListener);
 
         registerReceiver(mBatteryInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        registerReceiver(mUserAddRemoveReceiver, new IntentFilter(Intent.ACTION_USER_ADDED));
+        registerReceiver(mUserAddRemoveReceiver, new IntentFilter(Intent.ACTION_USER_REMOVED));
 
         mDynamicIndexableContentMonitor.register(this);
 

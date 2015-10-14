@@ -1026,7 +1026,7 @@ public final class Utils {
         if (bundle == null) {
             return getEffectiveUserId(context);
         }
-        int userId = bundle.getInt(ChooseLockGeneric.KEY_USER_ID, UserHandle.myUserId());
+        int userId = bundle.getInt(Intent.EXTRA_USER_ID, UserHandle.myUserId());
         return getSameOwnerUserId(context, userId);
     }
 

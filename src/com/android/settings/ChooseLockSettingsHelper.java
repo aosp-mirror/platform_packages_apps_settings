@@ -192,7 +192,7 @@ public final class ChooseLockSettingsHelper {
         intent.putExtra(ConfirmDeviceCredentialBaseFragment.SHOW_WHEN_LOCKED, external);
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, hasChallenge);
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, challenge);
-        intent.putExtra(ChooseLockGeneric.KEY_USER_ID, userId);
+        intent.putExtra(Intent.EXTRA_USER_ID, userId);
         intent.setClassName(ConfirmDeviceCredentialBaseFragment.PACKAGE, activityClass.getName());
         if (external) {
             intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
