@@ -494,7 +494,7 @@
     <string name="manage_device_admin_summary" msgid="7672709110988761075">"Vis eller deaktiver enhedsadministratorer"</string>
     <string name="manage_trust_agents" msgid="4629279457536987768">"Trust agents"</string>
     <string name="disabled_because_no_backup_security" msgid="6877660253409580377">"Hvis du vil bruge dette, skal du først indstille en skærmlås"</string>
-    <string name="manage_trust_agents_summary" msgid="6804319935640148441">"Se eller deaktivere trust agents"</string>
+    <string name="manage_trust_agents_summary" msgid="6804319935640148441">"Se eller deaktiver trust agents"</string>
     <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"Bluetooth"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"Slå Bluetooth til"</string>
     <string name="bluetooth_settings" msgid="1810521656168174329">"Bluetooth"</string>
@@ -744,7 +744,7 @@
     <string name="wifi_hotspot_checkbox_text_summary" msgid="3800646230853724318">"Brug mobilforbindelsen til angivelse Wi-Fi-netværk"</string>
     <string name="wifi_tether_starting" msgid="1322237938998639724">"Aktiverer hotspot..."</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"Deaktiverer hotspot..."</string>
-    <string name="wifi_tether_enabled_subtext" msgid="8948641212931906143">"Det mobile hotspot <xliff:g id="NETWORK_SSID">%1$s</xliff:g> er aktivt"</string>
+    <string name="wifi_tether_enabled_subtext" msgid="8948641212931906143">"Mobilhotspottet <xliff:g id="NETWORK_SSID">%1$s</xliff:g> er aktivt"</string>
     <string name="wifi_tether_failed_subtext" msgid="1484941858530919002">"Fejl ved mobilt Wi-Fi-hotspot"</string>
     <string name="wifi_tether_configure_ap_text" msgid="7974681394041609308">"Konfiguration af Wi-Fi-hotspot"</string>
     <string name="wifi_hotspot_configure_ap_text" msgid="5478614731464220432">"Konfiguration af Wi-Fi-hotspot"</string>
@@ -908,7 +908,7 @@
     <string name="device_status_summary" product="tablet" msgid="3292717754497039686">"Status for batteri, netværk og andre oplysninger"</string>
     <string name="device_status_summary" product="default" msgid="2599162787451519618">"Telefonnummer, signal osv."</string>
     <string name="storage_settings" msgid="4211799979832404953">"Lagerplads"</string>
-    <string name="storage_usb_settings" msgid="642612065405691122">"Lager og USB"</string>
+    <string name="storage_usb_settings" msgid="642612065405691122">"Lagerplads og USB"</string>
     <string name="storage_settings_title" msgid="8746016738388094064">"Indstillinger for lagerplads"</string>
     <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"Demonter USB-lager, vis ledig lagerplads"</string>
     <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"Demonter SD-kort, vis ledig lagerplads"</string>
@@ -1000,8 +1000,8 @@
     <string name="storage_external_title" msgid="3433462910096848696">"Ekstern lagerplads"</string>
     <string name="storage_volume_summary" msgid="7023441974367853372">"Der er anvendt <xliff:g id="USED">%1$s</xliff:g> ud af <xliff:g id="TOTAL">%2$s</xliff:g>"</string>
     <string name="storage_size_large" msgid="5691585991420946254">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
-    <string name="storage_volume_used" msgid="1303803057698959872">"Lagerplads, der er anvendt ud af <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
-    <string name="storage_volume_used_total" msgid="6113121714019000244">"Samlet lagerplads, der er anvendt ud af <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
+    <string name="storage_volume_used" msgid="1303803057698959872">"Anvendt lagerplads ud af <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
+    <string name="storage_volume_used_total" msgid="6113121714019000244">"Samlet anvendt lagerplads ud af <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_mount_success" msgid="687641090137253647">"<xliff:g id="NAME">%1$s</xliff:g> blev monteret"</string>
     <string name="storage_mount_failure" msgid="1042621107954547316">"<xliff:g id="NAME">%1$s</xliff:g> kunne ikke monteres"</string>
     <string name="storage_unmount_success" msgid="5737203344673441677">"<xliff:g id="NAME">%1$s</xliff:g> blev skubbet sikkert ud"</string>
@@ -1626,11 +1626,26 @@
     <string name="daltonizer_mode_deuteranomaly" msgid="5475532989673586329">"Deuteranopi (rød-grøn)"</string>
     <string name="daltonizer_mode_protanomaly" msgid="8424148009038666065">"Protanopi (rød-grøn)"</string>
     <string name="daltonizer_mode_tritanomaly" msgid="481725854987912389">"Tritanopi (blå-gul)"</string>
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_extremely_short_delay (4522776665472271034) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_very_short_delay (6435649125927410629) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_short_delay (4595820735124183245) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_long_delay (72913018575475150) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_very_long_delay (7228313329025277292) -->
+    <plurals name="accessibilty_autoclick_preference_subtitle_extremely_short_delay" formatted="false" msgid="7340347830562315800">
+      <item quantity="one">Ekstremt lille forsinkelse (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> ms)</item>
+      <item quantity="other">Ekstremt lille forsinkelse (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> ms)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_very_short_delay" formatted="false" msgid="5589565607652364932">
+      <item quantity="one">Meget lille forsinkelse (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> ms)</item>
+      <item quantity="other">Meget lille forsinkelse (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> ms)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5887754135102768400">
+      <item quantity="one">Lille forsinkelse (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> ms)</item>
+      <item quantity="other">Lille forsinkelse (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> ms)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_long_delay" formatted="false" msgid="6340683412750219405">
+      <item quantity="one">Stor forsinkelse (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> ms)</item>
+      <item quantity="other">Stor forsinkelse (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> ms)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_very_long_delay" formatted="false" msgid="3503199424330634970">
+      <item quantity="one">Meget stor forsinkelse (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> ms)</item>
+      <item quantity="other">Meget stor forsinkelse (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> ms)</item>
+    </plurals>
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Indstillinger"</string>
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"Til"</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"Fra"</string>
@@ -2414,7 +2429,7 @@
     <string name="cell_broadcast_settings" msgid="2451014351355183338">"Nødudsendelser"</string>
     <string name="network_operators_settings" msgid="2583178259504630435">"Netværksudbydere"</string>
     <string name="access_point_names" msgid="1381602020438634481">"Adgangspunkter (APN)"</string>
-    <string name="enhanced_4g_lte_mode_title" msgid="5808043757309522392">"Forbedret 4G LTE-tilstand"</string>
+    <string name="enhanced_4g_lte_mode_title" msgid="5808043757309522392">"Udvidet 4G LTE-tilstand"</string>
     <string name="enhanced_4g_lte_mode_summary" msgid="1376589643017218924">"Brug LTE-data til at forbedre indtalingslyden og kommunikationen (anbefales)"</string>
     <string name="preferred_network_type_title" msgid="3431041717309776341">"Foretrukken netværkstype"</string>
     <string name="preferred_network_type_summary" msgid="6564884693884755019">"LTE (anbefales)"</string>
@@ -2843,7 +2858,7 @@
     <string name="assist_access_screenshot_title" msgid="4034721336291215819">"Brug skærmbillede"</string>
     <string name="assist_access_screenshot_summary" msgid="6761636689013259901">"Giv assistanceappen adgang til et billede af skærmen"</string>
     <string name="assist_footer" msgid="1982791172085896864">"Assistanceapps kan hjælpe dig med afsæt i oplysningerne på den aktuelle skærm. Nogle apps understøtter både startertjenester og tjenester til taleinput for at give dig integreret assistance."</string>
-    <string name="average_memory_use" msgid="829566450150198512">"Gennemsnit. hukommelsesforbrug"</string>
+    <string name="average_memory_use" msgid="829566450150198512">"Gennemsnitligt hukommelsesforbrug"</string>
     <string name="maximum_memory_use" msgid="7493720799710132496">"Maksimal hukommelsesforbrug"</string>
     <string name="memory_usage" msgid="1781358557214390033">"Hukommelsesforbrug"</string>
     <string name="app_list_memory_use" msgid="6987417883876419338">"Appforbrug"</string>
@@ -2852,7 +2867,7 @@
     <string name="no_memory_use_summary" msgid="2016900536806235588">"Der er ikke brugt hukommelse inden for de sidste tre timer"</string>
     <string name="sort_avg_use" msgid="3998036180505143129">"Sortér efter gennemsnitligt forbrug"</string>
     <string name="sort_max_use" msgid="4629247978290075124">"Sortér efter maksimal forbrug"</string>
-    <string name="memory_performance" msgid="5661005192284103281">"Præstation"</string>
+    <string name="memory_performance" msgid="5661005192284103281">"Ydelse"</string>
     <string name="total_memory" msgid="2017287600738630165">"Hukommelse i alt"</string>
     <string name="average_used" msgid="5338339266517245782">"Brugt i gennemsnit (%)"</string>
     <string name="free_memory" msgid="4003936141603549746">"Ledig"</string>
@@ -2888,12 +2903,12 @@
     <string name="filter_overlay_apps" msgid="6965969283342557573">"Apps med tilladelse"</string>
     <string name="system_alert_window_on" msgid="2939489395109048888">"Ja"</string>
     <string name="system_alert_window_off" msgid="6189115687233061992">"Nej"</string>
-    <string name="write_settings" msgid="4797457275727195681">"Skift systemindstillinger"</string>
+    <string name="write_settings" msgid="4797457275727195681">"Rediger systemindstillinger"</string>
     <string name="keywords_write_settings" msgid="6415597272561105138">"redigere ændre systemindstillinger"</string>
     <string name="write_settings_summary" msgid="4302268998611412696">"<xliff:g id="COUNT_0">%d</xliff:g> af <xliff:g id="COUNT_1">%d</xliff:g> apps med tilladelse til at ændre systemindstillinger"</string>
     <string name="filter_write_settings_apps" msgid="2914615026197322551">"Apps, som kan ændre systemindstillinger"</string>
     <string name="write_settings_title" msgid="4232152481902542284">"Apps, som kan ændre systemindstillinger"</string>
-    <string name="write_system_settings" msgid="3482913590601096763">"Skift systemindstillinger"</string>
+    <string name="write_system_settings" msgid="3482913590601096763">"Rediger systemindstillinger"</string>
     <string name="write_settings_preference" msgid="3407383041273067448">"Apptilladelse til at ændre systemindstillinger"</string>
     <string name="permit_write_settings" msgid="6393779336656870080">"Tillad ændring af systemindstillinger"</string>
     <string name="write_settings_description" msgid="6868293938839954623">"Denne tilladelse giver en app lov til at ændre systemindstillinger."</string>
