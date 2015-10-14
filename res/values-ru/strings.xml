@@ -1644,11 +1644,36 @@
     <string name="daltonizer_mode_deuteranomaly" msgid="5475532989673586329">"Дейтераномалия (красный/зеленый)"</string>
     <string name="daltonizer_mode_protanomaly" msgid="8424148009038666065">"Протаномалия (красный/зеленый)"</string>
     <string name="daltonizer_mode_tritanomaly" msgid="481725854987912389">"Тританомалия (синий/желтый)"</string>
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_extremely_short_delay (4522776665472271034) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_very_short_delay (6435649125927410629) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_short_delay (4595820735124183245) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_long_delay (72913018575475150) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_very_long_delay (7228313329025277292) -->
+    <plurals name="accessibilty_autoclick_preference_subtitle_extremely_short_delay" formatted="false" msgid="7340347830562315800">
+      <item quantity="one">Сверхкраткая задержка (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> мсек.)</item>
+      <item quantity="few">Сверхкраткая задержка (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> мсек.)</item>
+      <item quantity="many">Сверхкраткая задержка (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> мсек.)</item>
+      <item quantity="other">Сверхкраткая задержка (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> мсек.)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_very_short_delay" formatted="false" msgid="5589565607652364932">
+      <item quantity="one">Очень короткая задержка (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> мсек.)</item>
+      <item quantity="few">Очень короткая задержка (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> мсек.)</item>
+      <item quantity="many">Очень короткая задержка (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> мсек.)</item>
+      <item quantity="other">Очень короткая задержка (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> мсек.)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5887754135102768400">
+      <item quantity="one">Короткая задержка (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> мсек.)</item>
+      <item quantity="few">Короткая задержка (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> мсек.)</item>
+      <item quantity="many">Короткая задержка (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> мсек.)</item>
+      <item quantity="other">Короткая задержка (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> мсек.)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_long_delay" formatted="false" msgid="6340683412750219405">
+      <item quantity="one">Долгая задержка (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> мсек.)</item>
+      <item quantity="few">Долгая задержка (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> мсек.)</item>
+      <item quantity="many">Долгая задержка (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> мсек.)</item>
+      <item quantity="other">Долгая задержка (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> мсек.)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_very_long_delay" formatted="false" msgid="3503199424330634970">
+      <item quantity="one">Очень долгая задержка (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> мсек.)</item>
+      <item quantity="few">Очень долгая задержка (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> мсек.)</item>
+      <item quantity="many">Очень долгая задержка (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> мсек.)</item>
+      <item quantity="other">Очень долгая задержка (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> мсек.)</item>
+    </plurals>
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Настройки"</string>
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"Включено"</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"Выключено"</string>
@@ -2937,7 +2962,7 @@
     <string name="write_settings_off" msgid="5156104383386336233">"Нет"</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"Включать камеру движением запястья"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Чтобы открыть приложение \"Камера\", дважды поверните запястье."</string>
-    <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Открывать камеру, дважды нажимая кнопку питания"</string>
+    <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Камера двойным нажатием кнопки питания"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Быстро открывать камеру, не снимая блокировку экрана."</string>
   <string-array name="color_mode_names">
     <item msgid="2425514299220523812">"Насыщенный (по умолчанию)"</item>
