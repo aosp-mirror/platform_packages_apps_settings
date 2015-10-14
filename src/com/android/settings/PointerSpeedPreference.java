@@ -20,11 +20,9 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.database.ContentObserver;
 import android.hardware.input.InputManager;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.preference.SeekBarDialogPreference;
 import android.provider.Settings;
 import android.util.AttributeSet;
 import android.view.View;
@@ -53,8 +51,8 @@ public class PointerSpeedPreference extends SeekBarDialogPreference implements
     }
 
     @Override
-    protected void showDialog(Bundle state) {
-        super.showDialog(state);
+    protected void onClick() {
+        super.onClick();
 
         getContext().getContentResolver().registerContentObserver(
                 Settings.System.getUriFor(Settings.System.POINTER_SPEED), true,

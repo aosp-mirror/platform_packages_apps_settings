@@ -23,6 +23,7 @@ import android.os.Bundle;
 import android.support.v14.preference.PreferenceDialogFragment;
 import android.support.v7.preference.DialogPreference;
 import android.util.AttributeSet;
+import android.view.View;
 
 public class CustomDialogPreference extends DialogPreference {
 
@@ -62,6 +63,9 @@ public class CustomDialogPreference extends DialogPreference {
     protected void onClick(DialogInterface dialog, int which) {
     }
 
+    protected void onBindDialogView(View view) {
+    }
+
     private void setFragment(CustomPreferenceDialogFragment fragment) {
         mFragment = fragment;
     }
@@ -90,6 +94,12 @@ public class CustomDialogPreference extends DialogPreference {
         @Override
         public void onDialogClosed(boolean positiveResult) {
             getCustomizablePreference().onDialogClosed(positiveResult);
+        }
+
+        @Override
+        protected void onBindDialogView(View view) {
+            super.onBindDialogView(view);
+            getCustomizablePreference().onBindDialogView(view);
         }
 
         @Override
