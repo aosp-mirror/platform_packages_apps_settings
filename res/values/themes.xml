@@ -29,13 +29,12 @@
     <style name="SetupWizardDisableAppStartingTheme">
         <!-- Theme to disable the app starting window. The actual theme of the activity needs to
              be then set in code via setTheme or onApplyThemeResource. -->
-        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.SetupWizard</item>
         <item name="android:windowBackground">@null</item>
     </style>
 
     <style name="SetupWizardTheme" parent="SuwThemeMaterial">
         <!-- For all Alert Dialogs -->
-        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
         <item name="android:alertDialogTheme">@style/ThemeOverlay.AlertDialog</item>
         <item name="android:listPreferredItemPaddingEnd">@dimen/suw_layout_margin_sides</item>
         <item name="android:listPreferredItemPaddingStart">@dimen/suw_layout_margin_sides</item>
@@ -52,6 +51,7 @@
         <item name="wifi_signal_color">@color/setup_wizard_wifi_color_dark</item>
         <item name="wifi_signal">@drawable/wifi_signal</item>
         <item name="preferenceBackgroundColor">?android:attr/colorBackground</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.SetupWizard</item>
 
         <!-- LockPatternView colors -->
         <item name="@*android:regularColor">@color/setup_lock_pattern_view_regular_color_dark</item>
@@ -61,7 +61,6 @@
 
     <style name="SetupWizardTheme.Light" parent="SuwThemeMaterial.Light">
         <!-- For all Alert Dialogs -->
-        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
         <item name="android:alertDialogTheme">@style/ThemeOverlay.AlertDialog</item>
         <item name="android:listPreferredItemPaddingEnd">@dimen/suw_layout_margin_sides</item>
         <item name="android:listPreferredItemPaddingStart">@dimen/suw_layout_margin_sides</item>
@@ -78,11 +77,20 @@
         <item name="wifi_signal_color">@color/setup_wizard_wifi_color_light</item>
         <item name="wifi_signal">@drawable/wifi_signal</item>
         <item name="preferenceBackgroundColor">?android:attr/colorBackground</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.SetupWizard</item>
 
         <!-- LockPatternView colors -->
         <item name="@*android:regularColor">@color/setup_lock_pattern_view_regular_color_light</item>
         <item name="@*android:successColor">@color/setup_lock_pattern_view_success_color_light</item>
         <item name="@*android:errorColor">@color/setup_lock_pattern_view_error_color_light</item>
+    </style>
+
+    <style name="PreferenceThemeOverlay.SetupWizard" parent="PreferenceThemeOverlay.v14.Material">
+        <item name="preferenceFragmentStyle">@style/SetupWizardPreferenceFragmentStyle</item>
+    </style>
+
+    <style name="SetupWizardPreferenceFragmentStyle" parent="PreferenceFragment.Material">
+        <item name="android:layout">@layout/setup_preference</item>
     </style>
 
     <!-- Theme with no local references, used by AccountPreferenceBase where we have to inflate

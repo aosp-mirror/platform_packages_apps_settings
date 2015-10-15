@@ -24,12 +24,10 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.support.v14.preference.PreferenceFragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.android.internal.widget.LockPatternUtils;
-import com.android.setupwizardlib.SetupWizardListLayout;
+import com.android.setupwizardlib.SetupWizardLayout;
 import com.android.setupwizardlib.view.NavigationBar;
 
 /**
@@ -63,22 +61,19 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
         private static final String EXTRA_PASSWORD_QUALITY = ":settings:password_quality";
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            final SetupWizardListLayout layout = (SetupWizardListLayout) inflater.inflate(
-                    R.layout.setup_choose_lock_generic, container, false);
+        public void onViewCreated(View view, Bundle savedInstanceState) {
+            super.onViewCreated(view, savedInstanceState);
 
+            SetupWizardUtils.setImmersiveMode(getActivity());
+
+            SetupWizardLayout layout = (SetupWizardLayout) view;
             final NavigationBar navigationBar = layout.getNavigationBar();
             navigationBar.getNextButton().setEnabled(false);
             navigationBar.setNavigationBarListener(this);
 
-            return layout;
-        }
-
-        @Override
-        public void onViewCreated(View view, Bundle savedInstanceState) {
-            super.onViewCreated(view, savedInstanceState);
-            SetupWizardUtils.setImmersiveMode(getActivity());
+            layout.setIllustration(R.drawable.setup_illustration_lock_screen,
+                    R.drawable.setup_illustration_horizontal_tile);
+            layout.setHeaderText(R.string.setup_lock_settings_picker_title);
         }
 
         @Override
