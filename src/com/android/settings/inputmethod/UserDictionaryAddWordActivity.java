@@ -56,7 +56,10 @@ public class UserDictionaryAddWordActivity extends Activity {
         // The following will get the EXTRA_WORD and EXTRA_LOCALE fields that are in the intent.
         // We do need to add the action by hand, because UserDictionaryAddWordContents expects
         // it to be in the bundle, in the EXTRA_MODE key.
-        final Bundle args = intent.getExtras();
+        Bundle args = intent.getExtras();
+        if (args == null) {
+            args = new Bundle();
+        }
         args.putInt(UserDictionaryAddWordContents.EXTRA_MODE, mode);
 
         if (null != savedInstanceState) {
@@ -74,6 +77,7 @@ public class UserDictionaryAddWordActivity extends Activity {
 
     private void reportBackToCaller(final int resultCode, final Bundle result) {
         final Intent senderIntent = getIntent();
+        if (senderIntent.getExtras() == null) return;
         final Object listener = senderIntent.getExtras().get("listener");
         if (!(listener instanceof Messenger)) return; // This will work if listener is null too.
         final Messenger messenger = (Messenger)listener;
