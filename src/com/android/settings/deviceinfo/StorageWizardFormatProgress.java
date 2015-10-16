@@ -137,6 +137,10 @@ public class StorageWizardFormatProgress extends StorageWizardBase {
         @Override
         protected void onPostExecute(Exception e) {
             final StorageWizardFormatProgress activity = mActivity;
+            if (activity.isDestroyed()) {
+                return;
+            }
+
             if (e != null) {
                 Log.e(TAG, "Failed to partition", e);
                 Toast.makeText(activity, e.getMessage(), Toast.LENGTH_LONG).show();
