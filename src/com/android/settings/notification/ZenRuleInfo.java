@@ -11,4 +11,5 @@ public class ZenRuleInfo {
     public Uri defaultConditionId;
     public ComponentName serviceComponent;
     public boolean isSystem;
+    public CharSequence packageLabel;
 }
