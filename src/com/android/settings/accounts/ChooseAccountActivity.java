@@ -96,7 +96,6 @@ public class ChooseAccountActivity extends InstrumentedPreferenceActivity {
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
-        setContentView(R.layout.add_account_screen);
         addPreferencesFromResource(R.xml.add_account_settings);
         mAuthorities = getIntent().getStringArrayExtra(
                 AccountPreferenceBase.AUTHORITIES_FILTER_KEY);
