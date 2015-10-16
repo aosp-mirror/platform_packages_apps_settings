@@ -215,6 +215,7 @@ public class ChooseLockGeneric extends SettingsActivity {
         private void maybeEnableEncryption(int quality, boolean disabled) {
             DevicePolicyManager dpm = (DevicePolicyManager) getSystemService(DEVICE_POLICY_SERVICE);
             if (UserManager.get(getActivity()).isAdminUser()
+                    && mUserId == UserHandle.myUserId()
                     && LockPatternUtils.isDeviceEncryptionEnabled()
                     && !dpm.getDoNotAskCredentialsOnBoot()) {
                 mEncryptionRequestQuality = quality;
