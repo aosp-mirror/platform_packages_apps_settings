@@ -16,6 +16,7 @@
 
 package com.android.settings.notification;
 
+import android.annotation.Nullable;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -38,27 +39,21 @@ import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.ArraySet;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ZenAccessSettings extends SettingsPreferenceFragment {
+public class ZenAccessSettings extends EmptyTextSettings {
 
     private final SettingObserver mObserver = new SettingObserver();
 
     private Context mContext;
     private PackageManager mPkgMan;
     private NotificationManager mNoMan;
-    private TextView mEmpty;
 
     @Override
     protected int getMetricsCategory() {
@@ -76,12 +71,9 @@ public class ZenAccessSettings extends SettingsPreferenceFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        final View v =  inflater.inflate(R.layout.managed_service_settings, container, false);
-        mEmpty = (TextView) v.findViewById(android.R.id.empty);
-        mEmpty.setText(R.string.zen_access_empty_text);
-        return v;
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setEmptyText(R.string.zen_access_empty_text);
     }
 
     @Override
@@ -141,7 +133,6 @@ public class ZenAccessSettings extends SettingsPreferenceFragment {
             });
             screen.addPreference(pref);
         }
-        mEmpty.setVisibility(apps.isEmpty() ? View.VISIBLE : View.GONE);
     }
 
     private boolean hasAccess(String pkg) {

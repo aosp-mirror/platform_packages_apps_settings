@@ -16,6 +16,7 @@
 
 package com.android.settings.notification;
 
+import android.annotation.Nullable;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -30,19 +31,14 @@ import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.PreferenceScreen;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.TextView;
-
 import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
 
 import java.util.Collections;
 import java.util.List;
 
-public abstract class ManagedServiceSettings extends SettingsPreferenceFragment {
+public abstract class ManagedServiceSettings extends EmptyTextSettings {
     private final Config mConfig;
 
     private Context mContext;
@@ -73,13 +69,9 @@ public abstract class ManagedServiceSettings extends SettingsPreferenceFragment 
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        final View v =  inflater.inflate(R.layout.managed_service_settings, container, false);
-        mEmpty = (TextView) v.findViewById(android.R.id.empty);
-        mEmpty.setText(mConfig.emptyText);
-        ((ListView) v.findViewById(android.R.id.list)).setEmptyView(mEmpty);
-        return v;
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setEmptyText(mConfig.emptyText);
     }
 
     @Override
