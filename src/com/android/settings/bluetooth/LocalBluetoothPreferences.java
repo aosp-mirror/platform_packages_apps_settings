@@ -20,6 +20,7 @@ import android.app.QueuedWork;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
@@ -62,10 +63,10 @@ final class LocalBluetoothPreferences {
     }
 
     static boolean shouldShowDialogInForeground(Context context,
-            String deviceAddress) {
+            String deviceAddress, String deviceName) {
         LocalBluetoothManager manager = Utils.getLocalBtManager(context);
         if (manager == null) {
-            if(DEBUG) Log.v(TAG, "manager == null - do not show dialog.");
+            if (DEBUG) Log.v(TAG, "manager == null - do not show dialog.");
             return false;
         }
 
@@ -115,6 +116,18 @@ final class LocalBluetoothPreferences {
                 }
             }
         }
+
+
+        if (!TextUtils.isEmpty(deviceName)) {
+            // If the device is a custom BT keyboard specifically for this device
+            String packagedKeyboardName = context.getString(
+                    com.android.internal.R.string.config_packagedKeyboardName);
+            if (deviceName.equals(packagedKeyboardName)) {
+                if (DEBUG) Log.v(TAG, "showing dialog for packaged keyboard");
+                return true;
+            }
+        }
+
         if (DEBUG) Log.v(TAG, "Found no reason to show the dialog - do not show dialog.");
         return false;
     }
