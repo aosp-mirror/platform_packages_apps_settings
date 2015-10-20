@@ -107,6 +107,7 @@ public final class BluetoothPermissionRequest extends BroadcastReceiver {
             connectionAccessIntent.putExtra(BluetoothDevice.EXTRA_CLASS_NAME, mReturnClass);
 
             String deviceAddress = mDevice != null ? mDevice.getAddress() : null;
+            String deviceName = mDevice != null ? mDevice.getName() : null;
             String title = null;
             String message = null;
             PowerManager powerManager =
@@ -114,7 +115,7 @@ public final class BluetoothPermissionRequest extends BroadcastReceiver {
 
             if (powerManager.isScreenOn()
                     && LocalBluetoothPreferences.shouldShowDialogInForeground(
-                            context, deviceAddress)) {
+                            context, deviceAddress, deviceName)) {
                 context.startActivity(connectionAccessIntent);
             } else {
                 // Acquire wakelock so that LCD comes up since screen is off
@@ -134,27 +135,27 @@ public final class BluetoothPermissionRequest extends BroadcastReceiver {
                 deleteIntent.putExtra(BluetoothDevice.EXTRA_CONNECTION_ACCESS_RESULT,
                         BluetoothDevice.CONNECTION_ACCESS_NO);
                 deleteIntent.putExtra(BluetoothDevice.EXTRA_ACCESS_REQUEST_TYPE, mRequestType);
-                String deviceName = mDevice != null ? mDevice.getAliasName() : null;
+                String deviceAlias = mDevice != null ? mDevice.getAliasName() : null;
                 switch (mRequestType) {
                     case BluetoothDevice.REQUEST_TYPE_PHONEBOOK_ACCESS:
                         title = context.getString(R.string.bluetooth_phonebook_request);
                         message = context.getString(R.string.bluetooth_pb_acceptance_dialog_text,
-                                deviceName, deviceName);
+                                deviceAlias, deviceAlias);
                         break;
                     case BluetoothDevice.REQUEST_TYPE_MESSAGE_ACCESS:
                         title = context.getString(R.string.bluetooth_map_request);
                         message = context.getString(R.string.bluetooth_map_acceptance_dialog_text,
-                                deviceName, deviceName);
+                                deviceAlias, deviceAlias);
                         break;
                     case BluetoothDevice.REQUEST_TYPE_SIM_ACCESS:
                         title = context.getString(R.string.bluetooth_sap_request);
                         message = context.getString(R.string.bluetooth_sap_acceptance_dialog_text,
-                                deviceName, deviceName);
+                                deviceAlias, deviceAlias);
                         break;
                     default:
                         title = context.getString(R.string.bluetooth_connection_permission_request);
                         message = context.getString(R.string.bluetooth_connection_dialog_text,
-                                deviceName, deviceName);
+                                deviceAlias, deviceAlias);
                         break;
                 }
                 Notification notification = new Notification.Builder(context)
