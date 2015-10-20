@@ -1166,6 +1166,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         mCycleAdapter.clear();
 
         final Context context = mCycleSpinner.getContext();
+        NetworkStatsHistory.Entry entry = null;
 
         long historyStart = Long.MAX_VALUE;
         long historyEnd = Long.MIN_VALUE;
@@ -1188,9 +1189,20 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
                 final long cycleStart = computeLastCycleBoundary(cycleEnd, policy);
                 Log.d(TAG, "generating cs=" + cycleStart + " to ce=" + cycleEnd + " waiting for hs="
                         + historyStart);
-                mCycleAdapter.add(new CycleItem(context, cycleStart, cycleEnd));
+
+                final boolean includeCycle;
+                if (mChartData != null) {
+                    entry = mChartData.network.getValues(cycleStart, cycleEnd, entry);
+                    includeCycle = (entry.rxBytes + entry.txBytes) > 0;
+                } else {
+                    includeCycle = true;
+                }
+
+                if (includeCycle) {
+                    mCycleAdapter.add(new CycleItem(context, cycleStart, cycleEnd));
+                    hasCycles = true;
+                }
                 cycleEnd = cycleStart;
-                hasCycles = true;
             }
 
             // one last cycle entry to modify policy cycle day
@@ -1202,7 +1214,18 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
             long cycleEnd = historyEnd;
             while (cycleEnd > historyStart) {
                 final long cycleStart = cycleEnd - (DateUtils.WEEK_IN_MILLIS * 4);
-                mCycleAdapter.add(new CycleItem(context, cycleStart, cycleEnd));
+
+                final boolean includeCycle;
+                if (mChartData != null) {
+                    entry = mChartData.network.getValues(cycleStart, cycleEnd, entry);
+                    includeCycle = (entry.rxBytes + entry.txBytes) > 0;
+                } else {
+                    includeCycle = true;
+                }
+
+                if (includeCycle) {
+                    mCycleAdapter.add(new CycleItem(context, cycleStart, cycleEnd));
+                }
                 cycleEnd = cycleStart;
             }
 
