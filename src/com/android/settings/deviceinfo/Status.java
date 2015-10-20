@@ -199,9 +199,11 @@ public class Status extends InstrumentedPreferenceActivity {
             removePreferenceFromScreen(KEY_SERIAL_NUMBER);
         }
 
-        //Remove SimStatus and Imei for Secondary user as it access Phone b/19165700
+        // Remove SimStatus and Imei for Secondary user as it access Phone b/19165700
+        // Also remove on Wi-Fi only devices.
         //TODO: the bug above will surface in split system user mode.
-        if (!UserManager.get(this).isAdminUser()) {
+        if (!UserManager.get(this).isAdminUser()
+                || Utils.isWifiOnly(this)) {
             removePreferenceFromScreen(KEY_SIM_STATUS);
             removePreferenceFromScreen(KEY_IMEI_INFO);
         }
