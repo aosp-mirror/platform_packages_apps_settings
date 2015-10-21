@@ -36,7 +36,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.settings.R;
-import com.android.settings.Utils;
+import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 
 public class ClearDefaultsPreference extends Preference {
@@ -117,9 +117,9 @@ public class ClearDefaultsPreference extends Preference {
                 mAppWidgetManager.hasBindAppWidgetPermission(mAppEntry.info.packageName);
 
         TextView autoLaunchView = (TextView) view.findViewById(R.id.auto_launch);
-        boolean autoLaunchEnabled = Utils.hasPreferredActivities(mPm, mPackageName)
+        boolean autoLaunchEnabled = AppUtils.hasPreferredActivities(mPm, mPackageName)
                 || isDefaultBrowser(mPackageName)
-                || Utils.hasUsbDefaults(mUsbManager, mPackageName);
+                || AppUtils.hasUsbDefaults(mUsbManager, mPackageName);
         if (!autoLaunchEnabled && !hasBindAppWidgetPermission) {
             resetLaunchDefaultsUi(autoLaunchView);
         } else {

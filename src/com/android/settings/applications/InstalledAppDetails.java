@@ -79,6 +79,7 @@ import com.android.settings.notification.AppNotificationSettings;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.NotificationBackend.AppRow;
 import com.android.settingslib.AppItem;
+import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.net.ChartData;
@@ -504,7 +505,7 @@ public class InstalledAppDetails extends AppInfoBase
         }
         mPermissionReceiver = PermissionsSummaryHelper.getPermissionSummary(getContext(),
                 mPackageName, mPermissionCallback);
-        mLaunchPreference.setSummary(Utils.getLaunchByDeafaultSummary(mAppEntry, mUsbManager,
+        mLaunchPreference.setSummary(AppUtils.getLaunchByDefaultSummary(mAppEntry, mUsbManager,
                 mPm, context));
         mNotificationPreference.setSummary(getNotificationSummary(mAppEntry, context,
                 mBackend));
