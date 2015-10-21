@@ -41,6 +41,7 @@ import android.os.Handler;
 import android.os.RemoteCallback;
 import android.os.RemoteException;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.text.TextUtils.TruncateAt;
 import android.util.EventLog;
 import android.util.Log;
@@ -472,10 +473,10 @@ public class DeviceAdminAdd extends Activity {
 
     private void addDeviceAdminPolicies(boolean showDescription) {
         if (!mAdminPoliciesInitialized) {
-            boolean isOwner = Binder.getCallingUserHandle().isOwner();
+            boolean isAdminUser = UserManager.get(this).isAdminUser();
             for (DeviceAdminInfo.PolicyInfo pi : mDeviceAdmin.getUsedPolicies()) {
-                int descriptionId = isOwner ? pi.description : pi.descriptionForSecondaryUsers;
-                int labelId = isOwner ? pi.label : pi.labelForSecondaryUsers;
+                int descriptionId = isAdminUser ? pi.description : pi.descriptionForSecondaryUsers;
+                int labelId = isAdminUser ? pi.label : pi.labelForSecondaryUsers;
                 View view = AppSecurityPermissions.getPermissionItemView(this, getText(labelId),
                         showDescription ? getText(descriptionId) : "", true);
                 mAdminPolicies.addView(view);

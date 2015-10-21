@@ -33,6 +33,7 @@ import android.hardware.fingerprint.FingerprintManager.RemovalCallback;
 import android.os.Bundle;
 import android.os.Process;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.security.KeyStore;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
@@ -208,7 +209,8 @@ public class ChooseLockGeneric extends SettingsActivity {
         // what makes sense with disabled == true
         private void maybeEnableEncryption(int quality, boolean disabled) {
             DevicePolicyManager dpm = (DevicePolicyManager) getSystemService(DEVICE_POLICY_SERVICE);
-            if (Process.myUserHandle().isOwner() && LockPatternUtils.isDeviceEncryptionEnabled()
+            if (UserManager.get(getActivity()).isAdminUser()
+                    && LockPatternUtils.isDeviceEncryptionEnabled()
                     && !dpm.getDoNotAskCredentialsOnBoot()) {
                 mEncryptionRequestQuality = quality;
                 mEncryptionRequestDisabled = disabled;
