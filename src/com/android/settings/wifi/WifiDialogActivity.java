@@ -43,7 +43,10 @@ public class WifiDialogActivity extends Activity implements WifiDialog.WifiDialo
 
         final Intent intent = getIntent();
         final Bundle accessPointState = intent.getBundleExtra(KEY_ACCESS_POINT_STATE);
-        final AccessPoint accessPoint = new AccessPoint(this, accessPointState);
+        AccessPoint accessPoint = null;
+        if (accessPointState != null) {
+            accessPoint = new AccessPoint(this, accessPointState);
+        }
 
         WifiDialog dialog = new WifiDialog(this, this, accessPoint, WifiConfigUiBase.MODE_CONNECT);
         dialog.show();
