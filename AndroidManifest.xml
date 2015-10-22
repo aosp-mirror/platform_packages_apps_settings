@@ -1468,6 +1468,17 @@
             </intent-filter>
         </activity>
 
+        <!-- Note this must not be exported since it authenticates the given user -->
+        <activity android:name="ConfirmDeviceCredentialActivity$InternalActivity"
+            android:exported="false"
+            android:permission="android.permission.MANAGE_USERS"
+            android:theme="@android:style/Theme.NoDisplay">
+            <intent-filter android:priority="1">
+                <action android:name="android.app.action.CONFIRM_DEVICE_CREDENTIAL_WITH_USER" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".SetupRedactionInterstitial"
             android:taskAffinity="com.android.wizard"
             android:theme="@style/SetupWizardDisableAppStartingTheme"/>

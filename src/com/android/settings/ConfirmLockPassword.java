@@ -20,6 +20,7 @@ import android.app.Fragment;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -405,6 +406,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             mPasswordEntryInputDisabler.setInputEnabled(true);
             if (matched) {
                 startDisappearAnimation(intent);
+                checkForPendingIntent();
             } else {
                 if (timeoutMs > 0) {
                     long deadline = mLockPatternUtils.setLockoutAttemptDeadline(

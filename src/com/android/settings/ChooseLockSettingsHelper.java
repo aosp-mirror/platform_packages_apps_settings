@@ -21,6 +21,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.admin.DevicePolicyManager;
 import android.content.Intent;
+import android.content.IntentSender;
 
 import com.android.internal.widget.LockPatternUtils;
 
@@ -114,6 +115,27 @@ public final class ChooseLockSettingsHelper {
 
     /**
      * If a pattern, password or PIN exists, prompt the user before allowing them to change it.
+     *
+     * @param title title of the confirmation screen; shown in the action bar
+     * @param header header of the confirmation screen; shown as large text
+     * @param description description of the confirmation screen
+     * @param returnCredentials if true, put credentials into intent. Note that if this is true,
+     *                          this can only be called internally.
+     * @param external specifies whether this activity is launched externally, meaning that it will
+     *                 get a dark theme and allow fingerprint authentication
+     * @param userId The userId for whom the lock should be confirmed.
+     * @return true if one exists and we launched an activity to confirm it
+     * @see Activity#onActivityResult(int, int, android.content.Intent)
+     */
+    boolean launchConfirmationActivity(int request, @Nullable CharSequence title,
+            @Nullable CharSequence header, @Nullable CharSequence description,
+            boolean returnCredentials, boolean external, int userId) {
+        return launchConfirmationActivity(request, title, header, description,
+                returnCredentials, external, false, 0, Utils.getSameOwnerUserId(mActivity, userId));
+    }
+
+    /**
+     * If a pattern, password or PIN exists, prompt the user before allowing them to change it.
      * @param message optional message to display about the action about to be done
      * @param details optional detail message to display
      * @param challenge a challenge to be verified against the device credential.
@@ -175,8 +197,18 @@ public final class ChooseLockSettingsHelper {
         if (external) {
             intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
             if (mFragment != null) {
+                IntentSender intentSender = mFragment.getActivity().getIntent()
+                        .getParcelableExtra(Intent.EXTRA_INTENT);
+                if (intentSender != null) {
+                    intent.putExtra(Intent.EXTRA_INTENT, intentSender);
+                }
                 mFragment.startActivity(intent);
             } else {
+                IntentSender intentSender = mActivity.getIntent()
+                        .getParcelableExtra(Intent.EXTRA_INTENT);
+                if (intentSender != null) {
+                    intent.putExtra(Intent.EXTRA_INTENT, intentSender);
+                }
                 mActivity.startActivity(intent);
             }
         } else {

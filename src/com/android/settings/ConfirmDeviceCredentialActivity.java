@@ -20,7 +20,11 @@ package com.android.settings;
 import android.app.Activity;
 import android.app.KeyguardManager;
 import android.content.Intent;
+import android.os.Binder;
 import android.os.Bundle;
+import android.os.Process;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.util.Log;
 
 /**
@@ -29,6 +33,9 @@ import android.util.Log;
  */
 public class ConfirmDeviceCredentialActivity extends Activity {
     public static final String TAG = ConfirmDeviceCredentialActivity.class.getSimpleName();
+
+    public static class InternalActivity extends ConfirmDeviceCredentialActivity {
+    }
 
     public static Intent createIntent(CharSequence title, CharSequence details) {
         Intent intent = new Intent();
@@ -57,13 +64,24 @@ public class ConfirmDeviceCredentialActivity extends Activity {
         Intent intent = getIntent();
         String title = intent.getStringExtra(KeyguardManager.EXTRA_TITLE);
         String details = intent.getStringExtra(KeyguardManager.EXTRA_DESCRIPTION);
-
+        int userId = Utils.getEffectiveUserId(this);
+        if (isInternalActivity()) {
+            int givenUserId = intent.getIntExtra(Intent.EXTRA_USER_ID, userId);
+            UserManager userManager = UserManager.get(this);
+            if (userManager.isSameProfileGroup(givenUserId, userId)) {
+                userId = givenUserId;
+            }
+        }
         ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(this);
         if (!helper.launchConfirmationActivity(0 /* request code */, null /* title */, title,
-                details, false /* returnCredentials */, true /* isExternal */)) {
+                details, false /* returnCredentials */, true /* isExternal */, userId)) {
             Log.d(TAG, "No pattern, password or PIN set.");
             setResult(Activity.RESULT_OK);
         }
         finish();
+    }
+
+    private boolean isInternalActivity() {
+        return this instanceof ConfirmDeviceCredentialActivity.InternalActivity;
     }
 }

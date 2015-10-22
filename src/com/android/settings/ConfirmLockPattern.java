@@ -18,6 +18,7 @@ package com.android.settings;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -473,6 +474,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             mLockPatternView.setEnabled(true);
             if (matched) {
                 startDisappearAnimation(intent);
+                checkForPendingIntent();
             } else {
                 if (timeoutMs > 0) {
                     long deadline = mLockPatternUtils.setLockoutAttemptDeadline(

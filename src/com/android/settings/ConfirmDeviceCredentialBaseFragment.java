@@ -18,6 +18,7 @@ package com.android.settings;
 
 import android.annotation.Nullable;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -123,5 +124,17 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
     }
 
     public void startEnterAnimation() {
+    }
+
+    protected void checkForPendingIntent() {
+        IntentSender intentSender = getActivity().getIntent()
+                .getParcelableExtra(Intent.EXTRA_INTENT);
+        if (intentSender != null) {
+            try {
+                getActivity().startIntentSenderForResult(intentSender, -1, null, 0, 0, 0);
+            } catch (IntentSender.SendIntentException e) {
+                /* ignore */
+            }
+        }
     }
 }
