@@ -36,6 +36,7 @@ public class WifiDialogActivity extends Activity implements WifiDialog.WifiDialo
     private static final int RESULT_FORGET = RESULT_FIRST_USER + 1;
 
     private static final String KEY_ACCESS_POINT_STATE = "access_point_state";
+    private static final String KEY_WIFI_CONFIGURATION = "wifi_configuration";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +110,9 @@ public class WifiDialogActivity extends Activity implements WifiDialog.WifiDialo
             Bundle accessPointState = new Bundle();
             accessPoint.saveWifiState(accessPointState);
             resultData.putExtra(KEY_ACCESS_POINT_STATE, accessPointState);
+        }
+        if (config != null) {
+            resultData.putExtra(KEY_WIFI_CONFIGURATION, config);
         }
         setResult(RESULT_CONNECTED, resultData);
         finish();
