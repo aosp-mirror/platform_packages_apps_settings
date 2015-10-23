@@ -48,6 +48,7 @@ import com.android.internal.widget.LockPatternUtils;
 
 public class ChooseLockGeneric extends SettingsActivity {
     public static final String CONFIRM_CREDENTIALS = "confirm_credentials";
+    public static final String KEY_USER_ID = "user_id";
 
     @Override
     public Intent getIntent() {
@@ -103,6 +104,7 @@ public class ChooseLockGeneric extends SettingsActivity {
         private String mUserPassword;
         private LockPatternUtils mLockPatternUtils;
         private FingerprintManager mFingerprintManager;
+        private int mUserId;
         private RemovalCallback mRemovalCallback = new RemovalCallback() {
 
             @Override
@@ -161,13 +163,16 @@ public class ChooseLockGeneric extends SettingsActivity {
                         ENCRYPT_REQUESTED_DISABLED);
             }
 
+            // Only take this argument into account if it belongs to the current profile.
+            mUserId = Utils.getSameOwnerUserId(getContext(), getArguments());
+
             if (mPasswordConfirmed) {
                 updatePreferencesOrFinish();
             } else if (!mWaitingForConfirmation) {
                 ChooseLockSettingsHelper helper =
                         new ChooseLockSettingsHelper(this.getActivity(), this);
                 if (!helper.launchConfirmationActivity(CONFIRM_EXISTING_REQUEST,
-                        getString(R.string.unlock_set_unlock_launch_picker_title), true)) {
+                        getString(R.string.unlock_set_unlock_launch_picker_title), true, mUserId)) {
                     mPasswordConfirmed = true; // no password set, so no need to confirm
                     updatePreferencesOrFinish();
                 } else {
@@ -188,7 +193,7 @@ public class ChooseLockGeneric extends SettingsActivity {
         public boolean onPreferenceTreeClick(Preference preference) {
             final String key = preference.getKey();
 
-            if (!isUnlockMethodSecure(key) && mLockPatternUtils.isSecure(UserHandle.myUserId())) {
+            if (!isUnlockMethodSecure(key) && mLockPatternUtils.isSecure(mUserId)) {
                 // Show the disabling FRP warning only when the user is switching from a secure
                 // unlock method to an insecure one
                 showFactoryResetProtectionWarningDialog(key);
@@ -293,10 +298,10 @@ public class ChooseLockGeneric extends SettingsActivity {
         }
 
         private String getKeyForCurrent() {
-            if (mLockPatternUtils.isLockScreenDisabled(UserHandle.myUserId())) {
+            if (mLockPatternUtils.isLockScreenDisabled(mUserId)) {
                 return KEY_UNLOCK_SET_OFF;
             }
-            switch (mLockPatternUtils.getKeyguardStoredPasswordQuality(UserHandle.myUserId())) {
+            switch (mLockPatternUtils.getKeyguardStoredPasswordQuality(mUserId)) {
                 case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
                     return KEY_UNLOCK_SET_PATTERN;
                 case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
@@ -410,38 +415,38 @@ public class ChooseLockGeneric extends SettingsActivity {
 
         protected Intent getLockPasswordIntent(Context context, int quality,
                 int minLength, final int maxLength,
-                boolean requirePasswordToDecrypt, boolean confirmCredentials) {
+                boolean requirePasswordToDecrypt, boolean confirmCredentials, int userId) {
             return ChooseLockPassword.createIntent(context, quality, minLength,
-                    maxLength, requirePasswordToDecrypt, confirmCredentials);
+                    maxLength, requirePasswordToDecrypt, confirmCredentials, userId);
         }
 
         protected Intent getLockPasswordIntent(Context context, int quality,
                 int minLength, final int maxLength,
-                boolean requirePasswordToDecrypt, long challenge) {
+                boolean requirePasswordToDecrypt, long challenge, int userId) {
             return ChooseLockPassword.createIntent(context, quality, minLength,
-                    maxLength, requirePasswordToDecrypt, challenge);
+                    maxLength, requirePasswordToDecrypt, challenge, userId);
         }
 
         protected Intent getLockPasswordIntent(Context context, int quality, int minLength,
-                final int maxLength, boolean requirePasswordToDecrypt, String password) {
+                int maxLength, boolean requirePasswordToDecrypt, String password, int userId) {
             return ChooseLockPassword.createIntent(context, quality, minLength, maxLength,
-                    requirePasswordToDecrypt, password);
+                    requirePasswordToDecrypt, password, userId);
         }
 
         protected Intent getLockPatternIntent(Context context, final boolean requirePassword,
-                final boolean confirmCredentials) {
+                final boolean confirmCredentials, int userId) {
             return ChooseLockPattern.createIntent(context, requirePassword,
-                    confirmCredentials);
+                    confirmCredentials, userId);
         }
 
         protected Intent getLockPatternIntent(Context context, final boolean requirePassword,
-               long challenge) {
-            return ChooseLockPattern.createIntent(context, requirePassword, challenge);
+               long challenge, int userId) {
+            return ChooseLockPattern.createIntent(context, requirePassword, challenge, userId);
         }
 
         protected Intent getLockPatternIntent(Context context, final boolean requirePassword,
-                final String pattern) {
-            return ChooseLockPattern.createIntent(context, requirePassword, pattern);
+                final String pattern, int userId) {
+            return ChooseLockPattern.createIntent(context, requirePassword, pattern, userId);
         }
 
         protected Intent getEncryptionInterstitialIntent(Context context, int quality,
@@ -476,26 +481,25 @@ public class ChooseLockGeneric extends SettingsActivity {
                 Intent intent;
                 if (mHasChallenge) {
                     intent = getLockPasswordIntent(context, quality, minLength,
-                            maxLength, mRequirePassword, mChallenge);
+                            maxLength, mRequirePassword, mChallenge, mUserId);
                 } else {
                     intent = getLockPasswordIntent(context, quality, minLength,
-                        maxLength, mRequirePassword, mUserPassword);
+                        maxLength, mRequirePassword, mUserPassword, mUserId);
                 }
                 startActivityForResult(intent, CHOOSE_LOCK_REQUEST);
             } else if (quality == DevicePolicyManager.PASSWORD_QUALITY_SOMETHING) {
                 Intent intent;
                 if (mHasChallenge) {
                     intent = getLockPatternIntent(context, mRequirePassword,
-                        mChallenge);
+                        mChallenge, mUserId);
                 } else {
                     intent = getLockPatternIntent(context, mRequirePassword,
-                        mUserPassword);
+                        mUserPassword, mUserId);
                 }
                 startActivityForResult(intent, CHOOSE_LOCK_REQUEST);
             } else if (quality == DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED) {
-                mChooseLockSettingsHelper.utils().clearLock(UserHandle.myUserId());
-                mChooseLockSettingsHelper.utils().setLockScreenDisabled(disabled,
-                        UserHandle.myUserId());
+                mChooseLockSettingsHelper.utils().clearLock(mUserId);
+                mChooseLockSettingsHelper.utils().setLockScreenDisabled(disabled, mUserId);
                 removeAllFingerprintTemplatesAndFinish();
                 getActivity().setResult(Activity.RESULT_OK);
             } else {
@@ -524,7 +528,7 @@ public class ChooseLockGeneric extends SettingsActivity {
 
         private int getResIdForFactoryResetProtectionWarningMessage() {
             boolean hasFingerprints = mFingerprintManager.hasEnrolledFingerprints();
-            switch (mLockPatternUtils.getKeyguardStoredPasswordQuality(UserHandle.myUserId())) {
+            switch (mLockPatternUtils.getKeyguardStoredPasswordQuality(mUserId)) {
                 case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
                     return hasFingerprints
                             ? R.string.unlock_disable_frp_warning_content_pattern_fingerprint

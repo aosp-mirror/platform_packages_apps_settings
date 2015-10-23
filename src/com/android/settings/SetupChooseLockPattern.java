@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,19 +43,21 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
     public static Intent createIntent(Context context, boolean requirePassword,
             boolean confirmCredentials) {
         Intent intent = ChooseLockPattern.createIntent(context, requirePassword,
-                confirmCredentials);
+                confirmCredentials, UserHandle.myUserId());
         intent.setClass(context, SetupChooseLockPattern.class);
         return intent;
     }
 
     public static Intent createIntent(Context context, boolean requirePassword, String pattern) {
-        Intent intent = ChooseLockPattern.createIntent(context, requirePassword, pattern);
+        Intent intent = ChooseLockPattern.createIntent(
+                context, requirePassword, pattern, UserHandle.myUserId());
         intent.setClass(context, SetupChooseLockPattern.class);
         return intent;
     }
 
     public static Intent createIntent(Context context, boolean requirePassword, long challenge) {
-        Intent intent = ChooseLockPattern.createIntent(context, requirePassword, challenge);
+        Intent intent = ChooseLockPattern.createIntent(
+                context, requirePassword, challenge, UserHandle.myUserId());
         intent.setClass(context, SetupChooseLockPattern.class);
         return intent;
     }
