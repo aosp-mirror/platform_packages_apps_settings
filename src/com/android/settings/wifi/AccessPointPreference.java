@@ -101,13 +101,7 @@ public class AccessPointPreference extends Preference {
         if (mFragment != null) {
             view.itemView.setOnCreateContextMenuListener(mFragment);
             view.itemView.setTag(this);
-            view.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    view.itemView.showContextMenu();
-                    return true;
-                }
-            });
+            view.itemView.setLongClickable(true);
         }
         if (mAccessPoint == null) {
             // Used for dummy pref.
