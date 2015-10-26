@@ -78,16 +78,17 @@ public class RestrictionUtils {
     public static void setRestrictions(Context context, ArrayList<RestrictionEntry> entries,
             UserHandle user) {
         UserManager um = UserManager.get(context);
-        Bundle userRestrictions = um.getUserRestrictions(user);
 
         for (RestrictionEntry entry : entries) {
-            userRestrictions.putBoolean(entry.getKey(), !entry.getSelectedState());
+            um.setUserRestriction(entry.getKey(), !entry.getSelectedState());
+
+            // TODO This will no longer be needed once b/23902097 is fixed. um.setUserRestriction
+            // should do it.
             if (entry.getKey().equals(UserManager.DISALLOW_SHARE_LOCATION)
                     && !entry.getSelectedState()) {
                 Secure.putIntForUser(context.getContentResolver(),
                         Secure.LOCATION_MODE, Secure.LOCATION_MODE_OFF, user.getIdentifier());
             }
         }
-        um.setUserRestrictions(userRestrictions, user);
     }
 }

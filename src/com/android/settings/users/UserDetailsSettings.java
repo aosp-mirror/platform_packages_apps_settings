@@ -123,7 +123,8 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (Boolean.TRUE.equals(newValue)) {
-            showDialog(mGuestUser? DIALOG_CONFIRM_ENABLE_CALLING : DIALOG_CONFIRM_ENABLE_CALLING_AND_SMS);
+            showDialog(mGuestUser ? DIALOG_CONFIRM_ENABLE_CALLING
+                    : DIALOG_CONFIRM_ENABLE_CALLING_AND_SMS);
             return false;
         }
         enableCallsAndSms(false);
@@ -137,14 +138,17 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             // SMS is always disabled for guest
             mDefaultGuestRestrictions.putBoolean(UserManager.DISALLOW_SMS, true);
             mUserManager.setDefaultGuestRestrictions(mDefaultGuestRestrictions);
+
             // Update the guest's restrictions, if there is a guest
+            // TODO: Maybe setDefaultGuestRestrictions() can internally just set the restrictions
+            // on any existing guest rather than do it here with multiple Binder calls.
             List<UserInfo> users = mUserManager.getUsers(true);
             for (UserInfo user: users) {
                 if (user.isGuest()) {
-                    UserHandle userHandle = new UserHandle(user.id);
-                    Bundle userRestrictions = mUserManager.getUserRestrictions(userHandle);
-                    userRestrictions.putAll(mDefaultGuestRestrictions);
-                    mUserManager.setUserRestrictions(userRestrictions, userHandle);
+                    for (String key : mDefaultGuestRestrictions.keySet()) {
+                        mUserManager.setUserRestriction(
+                                key, mDefaultGuestRestrictions.getBoolean(key));
+                    }
                 }
             }
         } else {
