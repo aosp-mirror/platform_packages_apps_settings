@@ -1024,17 +1024,6 @@ public final class Utils {
         return bitmap;
     }
 
-    public static boolean hasUsbDefaults(IUsbManager usbManager, String packageName) {
-        try {
-            if (usbManager != null) {
-                return usbManager.hasDefaults(packageName, UserHandle.myUserId());
-            }
-        } catch (RemoteException e) {
-            Log.e(TAG, "mUsbManager.hasDefaults", e);
-        }
-        return false;
-    }
-
     public static boolean hasPreferredActivities(PackageManager pm, String packageName) {
         // Get list of preferred activities
         List<ComponentName> prefActList = new ArrayList<>();
@@ -1067,20 +1056,6 @@ public final class Utils {
             }
         }
         return result;
-    }
-
-    public static CharSequence getLaunchByDeafaultSummary(ApplicationsState.AppEntry appEntry,
-            IUsbManager usbManager, PackageManager pm, Context context) {
-        String packageName = appEntry.info.packageName;
-        boolean hasPreferred = hasPreferredActivities(pm, packageName)
-                || hasUsbDefaults(usbManager, packageName);
-        int status = pm.getIntentVerificationStatus(packageName, UserHandle.myUserId());
-        // consider a visible current link-handling state to be any explicitly designated behavior
-        boolean hasDomainURLsPreference =
-                status != PackageManager.INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_UNDEFINED;
-        return context.getString(hasPreferred || hasDomainURLsPreference
-                ? R.string.launch_defaults_some
-                : R.string.launch_defaults_none);
     }
 
     public static void handleLoadingContainer(View loading, View doneLoading, boolean done,
