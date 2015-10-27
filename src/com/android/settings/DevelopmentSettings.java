@@ -55,6 +55,7 @@ import android.os.SystemProperties;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
+import android.provider.Settings.Global;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
@@ -157,6 +158,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private static final String WIFI_LEGACY_DHCP_CLIENT_KEY = "legacy_dhcp_client";
     private static final String MOBILE_DATA_ALWAYS_ON = "mobile_data_always_on";
     private static final String KEY_COLOR_MODE = "color_mode";
+    private static final String FORCE_RESIZABLE_KEY = "force_resizable_activities";
 
     private static final String INACTIVE_APPS_KEY = "inactive_apps";
 
@@ -258,6 +260,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private DropDownPreference mNightModePreference;
 
     private ColorModePreference mColorModePreference;
+
+    private SwitchPreference mForceResizable;
 
     private final ArrayList<Preference> mAllPrefs = new ArrayList<Preference>();
 
@@ -383,6 +387,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         mOpenGLTraces = addListPreference(OPENGL_TRACES_KEY);
         mSimulateColorSpace = addListPreference(SIMULATE_COLOR_SPACE);
         mUSBAudio = findAndInitSwitchPref(USB_AUDIO_KEY);
+        mForceResizable = findAndInitSwitchPref(FORCE_RESIZABLE_KEY);
 
         mImmediatelyDestroyActivities = (SwitchPreference) findPreference(
                 IMMEDIATELY_DESTROY_ACTIVITIES_KEY);
@@ -636,6 +641,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         updateMobileDataAlwaysOnOptions();
         updateSimulateColorSpace();
         updateUSBAudioOptions();
+        updateForceResizableOptions();
     }
 
     private void resetDangerousOptions() {
@@ -1182,6 +1188,18 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
                 mUSBAudio.isChecked() ? 1 : 0);
     }
 
+    private void updateForceResizableOptions() {
+        updateSwitchPreference(mForceResizable, Settings.Global.getInt(getContentResolver(),
+                Settings.Global.DEVELOPMENT_FORCE_RESIZABLE_ACTIVITIES,
+                Build.IS_DEBUGGABLE ? 1 : 0) != 0);
+    }
+
+    private void writeForceResizableOptions() {
+        Settings.Global.putInt(getContentResolver(),
+                Settings.Global.DEVELOPMENT_FORCE_RESIZABLE_ACTIVITIES,
+                mForceResizable.isChecked() ? 1 : 0);
+    }
+
     private void updateForceRtlOptions() {
         updateSwitchPreference(mForceRtlLayout,
                 Settings.Global.getInt(getActivity().getContentResolver(),
@@ -1686,6 +1704,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             writeMobileDataAlwaysOnOptions();
         } else if (preference == mUSBAudio) {
             writeUSBAudioOptions();
+        } else if (preference == mForceResizable) {
+            writeForceResizableOptions();
         } else if (INACTIVE_APPS_KEY.equals(preference.getKey())) {
             startInactiveAppsFragment();
         } else {
