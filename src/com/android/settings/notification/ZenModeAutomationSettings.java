@@ -159,7 +159,6 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
     private void updateControls() {
         final PreferenceScreen root = getPreferenceScreen();
         root.removeAll();
-        if (mRules.size() == 0) return;
         final AutomaticZenRule[] sortedRules = sortedRules();
         for (AutomaticZenRule sortedRule : sortedRules) {
             root.addPreference(new ZenRulePreference(getPrefContext(), sortedRule));
