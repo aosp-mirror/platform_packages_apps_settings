@@ -1118,8 +1118,13 @@ public class BatteryHistoryChart extends View {
                 if (startRoundTime < endRoundTime) {
                     addDateLabel(calStart, mLevelLeft, mLevelRight, isDayFirst);
                     Calendar calMid = Calendar.getInstance();
-                    calMid.setTimeInMillis(startRoundTime + ((endRoundTime - startRoundTime) / 2));
+
+                    // The middle between two beginnings of days can be anywhere between -1 to 13
+                    // after the beginning of the "median" day.
+                    calMid.setTimeInMillis(startRoundTime + ((endRoundTime - startRoundTime) / 2)
+                                           + 2 * 60 * 60 * 1000);
                     calMid.set(Calendar.HOUR_OF_DAY, 0);
+                    calMid.set(Calendar.MINUTE, 0);
                     long calMidMillis = calMid.getTimeInMillis();
                     if (calMidMillis > startRoundTime && calMidMillis < endRoundTime) {
                         addDateLabel(calMid, mLevelLeft, mLevelRight, isDayFirst);
