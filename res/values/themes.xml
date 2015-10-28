@@ -29,7 +29,7 @@
     <style name="SetupWizardDisableAppStartingTheme">
         <!-- Theme to disable the app starting window. The actual theme of the activity needs to
              be then set in code via setTheme or onApplyThemeResource. -->
-        <item name="preferenceTheme">@style/PreferenceThemeOverlay.SetupWizard</item>
+        <item name="preferenceTheme">@style/PreferenceTheme.SetupWizard</item>
         <item name="android:windowBackground">@null</item>
     </style>
 
@@ -51,7 +51,7 @@
         <item name="wifi_signal_color">@color/setup_wizard_wifi_color_dark</item>
         <item name="wifi_signal">@drawable/wifi_signal</item>
         <item name="preferenceBackgroundColor">?android:attr/colorBackground</item>
-        <item name="preferenceTheme">@style/PreferenceThemeOverlay.SetupWizard</item>
+        <item name="preferenceTheme">@style/PreferenceTheme.SetupWizard</item>
 
         <!-- LockPatternView colors -->
         <item name="@*android:regularColor">@color/setup_lock_pattern_view_regular_color_dark</item>
@@ -77,7 +77,7 @@
         <item name="wifi_signal_color">@color/setup_wizard_wifi_color_light</item>
         <item name="wifi_signal">@drawable/wifi_signal</item>
         <item name="preferenceBackgroundColor">?android:attr/colorBackground</item>
-        <item name="preferenceTheme">@style/PreferenceThemeOverlay.SetupWizard</item>
+        <item name="preferenceTheme">@style/PreferenceTheme.SetupWizard</item>
 
         <!-- LockPatternView colors -->
         <item name="@*android:regularColor">@color/setup_lock_pattern_view_regular_color_light</item>
@@ -99,7 +99,14 @@
         <item name="android:windowAnimationStyle">@null</item>
     </style>
 
-    <style name="PreferenceThemeOverlay.SetupWizard" parent="PreferenceThemeOverlay.v14.Material">
+    <style name="PreferenceTheme" parent="@android:style/Theme.DeviceDefault.Settings">
+        <item name="@android:preferenceStyle">@style/Preference</item>
+        <item name="@android:preferenceFragmentStyle">@style/PreferenceFragmentStyle</item>
+
+        <item name="apnPreferenceStyle">@style/ApnPreference</item>
+    </style>
+
+    <style name="PreferenceTheme.SetupWizard">
         <item name="preferenceFragmentStyle">@style/SetupWizardPreferenceFragmentStyle</item>
     </style>
 
@@ -114,16 +121,12 @@
     <style name="Theme.SettingsBase" parent="@android:style/Theme.Material.Settings" />
 
     <style name="Theme.Settings" parent="Theme.SettingsBase">
-        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
-        <item name="@*android:preferenceStyle">@style/Preference</item>
+        <item name="preferenceTheme">@style/PreferenceTheme</item>
         <item name="@*android:preferenceHeaderPanelStyle">@style/PreferenceHeaderPanelSinglePane</item>
         <item name="@*android:preferencePanelStyle">@style/PreferencePanelSinglePane</item>
         <item name="@*android:preferenceListStyle">@style/PreferenceHeaderListSinglePane</item>
         <item name="@*android:preferenceFragmentListStyle">@style/PreferenceFragmentListSinglePane</item>
-        <item name="@*android:preferenceFragmentStyle">@style/PreferenceFragmentStyle</item>
         <item name="@*android:preferenceFragmentPaddingSide">@dimen/settings_side_margin</item>
-
-        <item name="apnPreferenceStyle">@style/ApnPreference</item>
 
         <item name="fingerprint_layout_theme">@style/FingerprintLayoutTheme</item>
         <item name="fingerprint_progress_bar_size">@dimen/fingerprint_progress_bar_size</item>
@@ -197,7 +200,7 @@
     </style>
 
     <style name="Theme.SubSettingsDialogWhenLarge" parent="Theme.DialogWhenLarge">
-        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
+        <item name="preferenceTheme">@style/PreferenceTheme</item>
         <item name="android:actionBarWidgetTheme">@null</item>
         <item name="android:actionBarTheme">@android:style/ThemeOverlay.Material.Dark.ActionBar</item>
 

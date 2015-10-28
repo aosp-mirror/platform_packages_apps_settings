@@ -24,7 +24,7 @@ public class AppListSwitchPreference extends AppListPreference {
     @Override
     public void onBindViewHolder(PreferenceViewHolder view) {
         super.onBindViewHolder(view);
-        mSwitch = (Checkable) view.findViewById(com.android.internal.R.id.switchWidget);
+        mSwitch = (Checkable) view.findViewById(com.android.internal.R.id.switch_widget);
         mSwitch.setChecked(getValue() != null);
     }
 
