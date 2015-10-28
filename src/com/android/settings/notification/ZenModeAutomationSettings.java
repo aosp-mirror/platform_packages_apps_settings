@@ -241,6 +241,7 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
         final ComponentName configurationActivity = getSettingsActivity(si);
         if (ruleType != null && !ruleType.trim().isEmpty() && configurationActivity != null) {
             final ZenRuleInfo ri = new ZenRuleInfo();
+            ri.serviceComponent = new ComponentName(si.packageName, si.name);
             ri.settingsAction = Settings.ACTION_ZEN_MODE_EXTERNAL_RULE_SETTINGS;
             ri.title = ruleType;
             ri.packageName = si.packageName;
