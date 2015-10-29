@@ -2495,7 +2495,8 @@
         <activity android:name=".wifi.WifiDialogActivity"
             android:theme="@style/Transparent"
             android:excludeFromRecents="true"
-            android:exported="true">
+            android:exported="true"
+            android:permission="android.permission.CHANGE_WIFI_STATE">
             <intent-filter>
                 <action android:name="com.android.settings.WIFI_DIALOG" />
                 <category android:name="android.intent.category.DEFAULT" />
