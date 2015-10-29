@@ -44,6 +44,7 @@ import com.android.settings.accessibility.ListDialogPreference.OnValueChangedLis
 import com.android.settings.widget.SwitchBar;
 import com.android.settings.widget.ToggleSwitch;
 import com.android.settings.widget.ToggleSwitch.OnBeforeCheckedChangeListener;
+import com.android.settingslib.accessibility.AccessibilityUtils;
 
 import java.util.Locale;
 

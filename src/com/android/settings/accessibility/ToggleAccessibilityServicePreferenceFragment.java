@@ -47,6 +47,7 @@ import com.android.settings.ConfirmDeviceCredentialActivity;
 import com.android.settings.R;
 import com.android.settings.widget.ToggleSwitch;
 import com.android.settings.widget.ToggleSwitch.OnBeforeCheckedChangeListener;
+import com.android.settingslib.accessibility.AccessibilityUtils;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -138,7 +139,7 @@ public class ToggleAccessibilityServicePreferenceFragment
         for (ComponentName enabledService : enabledServices) {
             enabledServicesBuilder.append(enabledService.flattenToString());
             enabledServicesBuilder.append(
-                    AccessibilitySettings.ENABLED_ACCESSIBILITY_SERVICES_SEPARATOR);
+                    AccessibilityUtils.ENABLED_ACCESSIBILITY_SERVICES_SEPARATOR);
         }
         final int enabledServicesBuilderLength = enabledServicesBuilder.length();
         if (enabledServicesBuilderLength > 0) {
