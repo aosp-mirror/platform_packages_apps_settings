@@ -38,7 +38,6 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
-import android.text.TextUtils.SimpleStringSplitter;
 import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
 import android.view.accessibility.AccessibilityManager;
@@ -54,6 +53,7 @@ import com.android.settings.Utils;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
+import com.android.settingslib.accessibility.AccessibilityUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -69,8 +69,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener, Indexable {
 
     private static final float LARGE_FONT_SCALE = 1.3f;
-
-    static final char ENABLED_ACCESSIBILITY_SERVICES_SEPARATOR = ':';
 
     // Preference categories
     private static final String SERVICES_CATEGORY = "services_category";
@@ -118,13 +116,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private static final long DELAY_UPDATE_SERVICES_MILLIS = 1000;
 
     // Auxiliary members.
-    final static SimpleStringSplitter sStringColonSplitter =
-            new SimpleStringSplitter(ENABLED_ACCESSIBILITY_SERVICES_SEPARATOR);
+    static final Set<ComponentName> sInstalledServices = new HashSet<>();
 
-    static final Set<ComponentName> sInstalledServices = new HashSet<ComponentName>();
-
-    private final Map<String, String> mLongPressTimeoutValuetoTitleMap =
-            new HashMap<String, String>();
+    private final Map<String, String> mLongPressTimeoutValuetoTitleMap = new HashMap<>();
 
     private final Configuration mCurConfig = new Configuration();
 
