@@ -116,6 +116,11 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
                 refresh();
             }
         }
+
+        @Override
+        public void onDiskDestroyed(DiskInfo disk) {
+            refresh();
+        }
     };
 
     private static boolean isInteresting(VolumeInfo vol) {
