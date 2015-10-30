@@ -72,13 +72,14 @@ public final class ProcStatsEntry implements Parcelable {
                 + " avgpss=" + mAvgBgMem + " weight=" + mBgWeight);
     }
 
-    public ProcStatsEntry(String pkgName, int uid, String procName, long duration, long mem) {
+    public ProcStatsEntry(String pkgName, int uid, String procName, long duration, long mem,
+            long memDuration) {
         mPackage = pkgName;
         mUid = uid;
         mName = procName;
         mBgDuration = mRunDuration = duration;
         mAvgBgMem = mMaxBgMem = mAvgRunMem = mMaxRunMem = mem;
-        mBgWeight = mRunWeight = ((double)duration) * mem;
+        mBgWeight = mRunWeight = ((double)memDuration) * mem;
         if (DEBUG) Log.d(TAG, "New proc entry " + procName + ": dur=" + mBgDuration
                 + " avgpss=" + mAvgBgMem + " weight=" + mBgWeight);
     }
