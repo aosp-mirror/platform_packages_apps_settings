@@ -17,7 +17,7 @@
 package com.android.settings.notification;
 
 import android.app.AlertDialog;
-import android.app.AutomaticZenRule;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
@@ -39,7 +39,7 @@ import com.android.settings.R;
 import java.lang.ref.WeakReference;
 import java.text.Collator;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -49,6 +49,7 @@ public abstract class ZenRuleSelectionDialog {
 
     private final Context mContext;
     private final PackageManager mPm;
+    private NotificationManager mNm;
     private final AlertDialog mDialog;
     private final LinearLayout mRuleContainer;
     private final ServiceListing mServiceListing;
@@ -56,6 +57,7 @@ public abstract class ZenRuleSelectionDialog {
     public ZenRuleSelectionDialog(Context context, ServiceListing serviceListing) {
         mContext = context;
         mPm = context.getPackageManager();
+        mNm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         mServiceListing = serviceListing;
         final View v =
                 LayoutInflater.from(context).inflate(R.layout.zen_rule_type_selection, null, false);
@@ -149,8 +151,8 @@ public abstract class ZenRuleSelectionDialog {
         return rt;
     }
 
-    private void bindExternalRules(ZenRuleInfo[] externalRuleTypes) {
-        Arrays.sort(externalRuleTypes, RULE_TYPE_COMPARATOR);
+    private void bindExternalRules(List<ZenRuleInfo> externalRuleTypes) {
+        Collections.sort(externalRuleTypes, RULE_TYPE_COMPARATOR);
         for (ZenRuleInfo ri : externalRuleTypes) {
             bindType(ri);
         }
@@ -160,11 +162,12 @@ public abstract class ZenRuleSelectionDialog {
         @Override
         public void onServicesReloaded(List<ServiceInfo> services) {
             if (DEBUG) Log.d(TAG, "Services reloaded: count=" + services.size());
-            ZenRuleInfo[] externalRuleTypes = new ZenRuleInfo[services.size()];
+            List<ZenRuleInfo> externalRuleTypes = new ArrayList<>();
             for (int i = 0; i < services.size(); i++) {
                 final ZenRuleInfo ri = ZenModeAutomationSettings.getRuleInfo(mPm, services.get(i));
-                if (ri != null && ri.configurationActivity != null) {
-                    externalRuleTypes[i] = ri;
+                if (ri != null && ri.configurationActivity != null
+                        && mNm.isNotificationPolicyAccessGrantedForPackage(ri.packageName)) {
+                    externalRuleTypes.add(ri);
                 }
             }
             bindExternalRules(externalRuleTypes);

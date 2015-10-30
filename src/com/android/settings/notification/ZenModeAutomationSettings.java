@@ -37,7 +37,6 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.support.v7.preference.PreferenceScreen;
 import android.support.v7.preference.PreferenceViewHolder;
-import android.util.Log;
 import android.view.View;
 
 import com.android.internal.logging.MetricsLogger;
@@ -47,8 +46,6 @@ import com.android.settings.notification.ManagedServiceSettings.Config;
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
 
 public class ZenModeAutomationSettings extends ZenModeSettingsBase {
 
@@ -63,7 +60,6 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
         addPreferencesFromResource(R.xml.zen_mode_automation_settings);
         mPm = mContext.getPackageManager();
         mServiceListing = new ServiceListing(mContext, CONFIG);
-        mServiceListing.addCallback(mServiceListingCallback);
         mServiceListing.reload();
         mServiceListing.setListening(true);
     }
@@ -72,7 +68,6 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
     public void onDestroy() {
         super.onDestroy();
         mServiceListing.setListening(false);
-        mServiceListing.removeCallback(mServiceListingCallback);
     }
 
     @Override
@@ -198,7 +193,7 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
     private static Config getConditionProviderConfig() {
         final Config c = new Config();
         c.tag = TAG;
-        c.setting = Settings.Secure.ENABLED_CONDITION_PROVIDERS;
+        c.setting = Settings.Secure.ENABLED_NOTIFICATION_POLICY_ACCESS_PACKAGES;
         c.intentAction = ConditionProviderService.SERVICE_INTERFACE;
         c.permission = android.Manifest.permission.BIND_CONDITION_PROVIDER_SERVICE;
         c.noun = "condition provider";
@@ -217,23 +212,6 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
                 return null;
         }
     }
-
-    private final ServiceListing.Callback mServiceListingCallback = new ServiceListing.Callback() {
-        @Override
-        public void onServicesReloaded(List<ServiceInfo> services) {
-            for (ServiceInfo service : services) {
-                final ZenRuleInfo ri = getRuleInfo(mPm, service);
-                if (ri != null && ri.serviceComponent != null
-                        && Objects.equals(ri.settingsAction,
-                        Settings.ACTION_ZEN_MODE_EXTERNAL_RULE_SETTINGS)) {
-                    if (!mServiceListing.isEnabled(ri.serviceComponent)) {
-                        Log.i(TAG, "Enabling external condition provider: " + ri.serviceComponent);
-                        mServiceListing.setEnabled(ri.serviceComponent, true);
-                    }
-                }
-            }
-        }
-    };
 
     public static ZenRuleInfo getRuleInfo(PackageManager pm, ServiceInfo si) {
         if (si == null || si.metaData == null) return null;
