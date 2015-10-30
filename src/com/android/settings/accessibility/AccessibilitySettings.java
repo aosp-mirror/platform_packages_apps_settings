@@ -127,7 +127,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private final Runnable mUpdateRunnable = new Runnable() {
         @Override
         public void run() {
-            loadInstalledServices();
             updateServicesPreferences();
         }
     };
@@ -162,7 +161,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             new SettingsContentObserver(mHandler) {
                 @Override
                 public void onChange(boolean selfChange, Uri uri) {
-                    loadInstalledServices();
                     updateServicesPreferences();
                 }
             };
@@ -218,7 +216,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     @Override
     public void onResume() {
         super.onResume();
-        loadInstalledServices();
         updateAllPreferences();
 
         mSettingsPackageMonitor.register(getActivity(), getActivity().getMainLooper(), false);
@@ -621,27 +618,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         if (context != null) {
             mToggleLockScreenRotationPreference.setChecked(
                     !RotationPolicy.isRotationLocked(context));
-        }
-    }
-
-    private void loadInstalledServices() {
-        Set<ComponentName> installedServices = sInstalledServices;
-        installedServices.clear();
-
-        List<AccessibilityServiceInfo> installedServiceInfos =
-                AccessibilityManager.getInstance(getActivity())
-                        .getInstalledAccessibilityServiceList();
-        if (installedServiceInfos == null) {
-            return;
-        }
-
-        final int installedServiceInfoCount = installedServiceInfos.size();
-        for (int i = 0; i < installedServiceInfoCount; i++) {
-            ResolveInfo resolveInfo = installedServiceInfos.get(i).getResolveInfo();
-            ComponentName installedService = new ComponentName(
-                    resolveInfo.serviceInfo.packageName,
-                    resolveInfo.serviceInfo.name);
-            installedServices.add(installedService);
         }
     }
 

@@ -49,10 +49,7 @@ import com.android.settings.widget.ToggleSwitch;
 import com.android.settings.widget.ToggleSwitch.OnBeforeCheckedChangeListener;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ToggleAccessibilityServicePreferenceFragment
         extends ToggleFeaturePreferenceFragment implements DialogInterface.OnClickListener {
@@ -102,56 +99,8 @@ public class ToggleAccessibilityServicePreferenceFragment
 
     @Override
     public void onPreferenceToggled(String preferenceKey, boolean enabled) {
-        // Parse the enabled services.
-        Set<ComponentName> enabledServices = AccessibilityUtils.getEnabledServicesFromSettings(
-                getActivity());
-
-        if (enabledServices == (Set<?>) Collections.emptySet()) {
-            enabledServices = new HashSet<ComponentName>();
-        }
-
-        // Determine enabled services and accessibility state.
         ComponentName toggledService = ComponentName.unflattenFromString(preferenceKey);
-        boolean accessibilityEnabled = false;
-        if (enabled) {
-            enabledServices.add(toggledService);
-            // Enabling at least one service enables accessibility.
-            accessibilityEnabled = true;
-        } else {
-            enabledServices.remove(toggledService);
-            // Check how many enabled and installed services are present.
-            Set<ComponentName> installedServices = AccessibilitySettings.sInstalledServices;
-            for (ComponentName enabledService : enabledServices) {
-                if (installedServices.contains(enabledService)) {
-                    // Disabling the last service disables accessibility.
-                    accessibilityEnabled = true;
-                    break;
-                }
-            }
-        }
-
-        // Update the enabled services setting.
-        StringBuilder enabledServicesBuilder = new StringBuilder();
-        // Keep the enabled services even if they are not installed since we
-        // have no way to know whether the application restore process has
-        // completed. In general the system should be responsible for the
-        // clean up not settings.
-        for (ComponentName enabledService : enabledServices) {
-            enabledServicesBuilder.append(enabledService.flattenToString());
-            enabledServicesBuilder.append(
-                    AccessibilityUtils.ENABLED_ACCESSIBILITY_SERVICES_SEPARATOR);
-        }
-        final int enabledServicesBuilderLength = enabledServicesBuilder.length();
-        if (enabledServicesBuilderLength > 0) {
-            enabledServicesBuilder.deleteCharAt(enabledServicesBuilderLength - 1);
-        }
-        Settings.Secure.putString(getContentResolver(),
-                Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES,
-                enabledServicesBuilder.toString());
-
-        // Update accessibility enabled.
-        Settings.Secure.putInt(getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_ENABLED, accessibilityEnabled ? 1 : 0);
+        AccessibilityUtils.setAccessibilityServiceState(getActivity(), toggledService, enabled);
     }
 
     // IMPORTANT: Refresh the info since there are dynamically changing
