@@ -594,7 +594,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
                             == PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
         }
         updateSwitchPreference(mBugreportInPower, Settings.Secure.getInt(cr,
-                Settings.Secure.BUGREPORT_IN_POWER_MENU, 0) != 0);
+                Settings.Global.BUGREPORT_IN_POWER_MENU, 0) != 0);
         updateSwitchPreference(mKeepScreenOn, Settings.Global.getInt(cr,
                 Settings.Global.STAY_ON_WHILE_PLUGGED_IN, 0) != 0);
         updateSwitchPreference(mBtHciSnoopLog, Settings.Secure.getInt(cr,
@@ -858,34 +858,19 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     }
 
     private void updateBugreportOptions() {
-        final ComponentName bugreportStorageProviderComponentName =
-                new ComponentName("com.android.shell",
-                        "com.android.shell.BugreportStorageProvider");
-        if ("user".equals(Build.TYPE)) {
-            final ContentResolver resolver = getActivity().getContentResolver();
-            final boolean adbEnabled = Settings.Global.getInt(
-                    resolver, Settings.Global.ADB_ENABLED, 0) != 0;
-            if (adbEnabled) {
-                mBugreport.setEnabled(true);
-                mBugreportInPower.setEnabled(true);
-                getPackageManager().setComponentEnabledSetting(
-                        bugreportStorageProviderComponentName,
-                        PackageManager.COMPONENT_ENABLED_STATE_ENABLED, 0);
-            } else {
-                mBugreport.setEnabled(false);
-                mBugreportInPower.setEnabled(false);
-                mBugreportInPower.setChecked(false);
-                Settings.Secure.putInt(resolver, Settings.Secure.BUGREPORT_IN_POWER_MENU, 0);
-                getPackageManager().setComponentEnabledSetting(
-                        bugreportStorageProviderComponentName,
-                        PackageManager.COMPONENT_ENABLED_STATE_DEFAULT, 0);
-            }
-        } else {
-            mBugreportInPower.setEnabled(true);
-            getPackageManager().setComponentEnabledSetting(
-                    bugreportStorageProviderComponentName,
-                    PackageManager.COMPONENT_ENABLED_STATE_ENABLED, 0);
-        }
+        mBugreport.setEnabled(true);
+        mBugreportInPower.setEnabled(true);
+        setBugreportStorageProviderStatus();
+    }
+
+    private void setBugreportStorageProviderStatus() {
+        final ComponentName componentName = new ComponentName("com.android.shell",
+                "com.android.shell.BugreportStorageProvider");
+        final boolean enabled = mBugreportInPower.isChecked();
+        getPackageManager().setComponentEnabledSetting(componentName,
+                enabled ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+                        : PackageManager.COMPONENT_ENABLED_STATE_DEFAULT,
+                0);
     }
 
     // Returns the current state of the system property that controls
@@ -1624,8 +1609,9 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
                             : PackageManager.COMPONENT_ENABLED_STATE_DEFAULT, 0);
         } else if (preference == mBugreportInPower) {
             Settings.Secure.putInt(getActivity().getContentResolver(),
-                    Settings.Secure.BUGREPORT_IN_POWER_MENU,
+                    Settings.Global.BUGREPORT_IN_POWER_MENU,
                     mBugreportInPower.isChecked() ? 1 : 0);
+            setBugreportStorageProviderStatus();
         } else if (preference == mKeepScreenOn) {
             Settings.Global.putInt(getActivity().getContentResolver(),
                     Settings.Global.STAY_ON_WHILE_PLUGGED_IN,
