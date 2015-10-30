@@ -161,8 +161,10 @@ public class AccountSyncSettings extends AccountPreferenceBase {
             Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.account_sync_screen, container, false);
 
-        final ListView list = (ListView) view.findViewById(android.R.id.list);
-        Utils.prepareCustomPreferencesList(container, view, list, false);
+        final ViewGroup prefs_container = (ViewGroup) view.findViewById(R.id.prefs_container);
+        Utils.prepareCustomPreferencesList(container, view, prefs_container, false);
+        View prefs = super.onCreateView(inflater, prefs_container, savedInstanceState);
+        prefs_container.addView(prefs);
 
         initializeUi(view);
 
