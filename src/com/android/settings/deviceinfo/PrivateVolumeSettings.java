@@ -117,9 +117,15 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
 
     private Preference mExplore;
 
+    private boolean mDetached;
+
     private boolean isVolumeValid() {
         return (mVolume != null) && (mVolume.getType() == VolumeInfo.TYPE_PRIVATE)
                 && mVolume.isMountedReadable();
+    }
+
+    public PrivateVolumeSettings() {
+        setRetainInstance(true);
     }
 
     @Override
@@ -158,10 +164,12 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
 
         mExplore = buildAction(R.string.storage_menu_explore);
 
+        mDetached = false;
+
         setHasOptionsMenu(true);
     }
 
-    public void update() {
+    private void update() {
         if (!isVolumeValid()) {
             getActivity().finish();
             return;
@@ -304,7 +312,10 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         }
 
         mStorageManager.registerListener(mStorageListener);
-        update();
+
+        if (!mDetached) {
+            update();
+        }
     }
 
     @Override
@@ -314,11 +325,18 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
     }
 
     @Override
+    public void onDetach() {
+        super.onDetach();
+        mDetached = true;
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
         if (mMeasure != null) {
             mMeasure.onDestroy();
         }
+        mDetached = false;
     }
 
     @Override
