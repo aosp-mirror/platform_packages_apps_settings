@@ -99,6 +99,13 @@
                 android:entries="@array/entries_font_size"
                 android:entryValues="@array/entryvalues_font_size" />
 
+        <com.android.settings.DisplayDensityPreference
+                android:key="display_density"
+                android:title="@string/force_density_preference_title"
+                android:summary="%s"
+                settings:keywords="@string/force_density_keywords"
+                android:persistent="false" />
+
         <com.android.settings.DropDownPreference
                 android:key="auto_rotate"
                 android:title="@string/display_auto_rotate_title" />
