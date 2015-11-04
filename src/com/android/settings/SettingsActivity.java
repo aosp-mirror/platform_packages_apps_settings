@@ -1133,6 +1133,13 @@ public class SettingsActivity extends SettingsDrawerActivity
         }
     }
 
+    @Override
+    public void onProfileTileOpen() {
+        if (!mIsShowingDashboard) {
+            finish();
+        }
+    }
+
     private void switchToSearchResultsFragmentIfNeeded() {
         if (mSearchResultsFragment != null) {
             return;

@@ -56,17 +56,15 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 import com.android.internal.content.PackageMonitor;
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.DialogCreatable;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.UserAdapter;
-import com.android.settings.Utils;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
+import com.android.settingslib.drawer.UserAdapter;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -191,7 +189,7 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
         setEmptyView(emptyView);
 
         final UserManager um = (UserManager) getSystemService(Context.USER_SERVICE);
-        mProfileSpinnerAdapter = Utils.createUserSpinnerAdapter(um, getActivity());
+        mProfileSpinnerAdapter = UserAdapter.createUserSpinnerAdapter(um, getActivity());
         if (mProfileSpinnerAdapter != null) {
             mSpinner = (Spinner) setPinnedHeaderView(R.layout.spinner_view);
             mSpinner.setAdapter(mProfileSpinnerAdapter);

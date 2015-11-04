@@ -83,7 +83,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.ListView;
 import android.widget.TabWidget;
 import com.android.internal.util.UserIcons;
-import com.android.settings.UserAdapter.UserDetails;
+import com.android.settingslib.drawer.UserAdapter;
+import com.android.settingslib.drawer.UserAdapter.UserDetails;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -629,39 +630,6 @@ public final class Utils {
     public static boolean isManagedProfile(UserManager userManager) {
         UserInfo currentUser = userManager.getUserInfo(userManager.getUserHandle());
         return currentUser.isManagedProfile();
-    }
-
-    /**
-     * Creates a {@link UserAdapter} if there is more than one profile on the device.
-     *
-     * <p> The adapter can be used to populate a spinner that switches between the Settings
-     * app on the different profiles.
-     *
-     * @return a {@link UserAdapter} or null if there is only one profile.
-     */
-    public static UserAdapter createUserSpinnerAdapter(UserManager userManager,
-            Context context) {
-        List<UserHandle> userProfiles = userManager.getUserProfiles();
-        if (userProfiles.size() < 2) {
-            return null;
-        }
-
-        UserHandle myUserHandle = new UserHandle(UserHandle.myUserId());
-        // The first option should be the current profile
-        userProfiles.remove(myUserHandle);
-        userProfiles.add(0, myUserHandle);
-
-        return createUserAdapter(userManager, context, userProfiles);
-    }
-
-    public static UserAdapter createUserAdapter(UserManager userManager,
-            Context context, List<UserHandle> userProfiles) {
-        ArrayList<UserDetails> userDetails = new ArrayList<UserDetails>(userProfiles.size());
-        final int count = userProfiles.size();
-        for (int i = 0; i < count; i++) {
-            userDetails.add(new UserDetails(userProfiles.get(i), userManager, context));
-        }
-        return new UserAdapter(context, userDetails);
     }
 
     /**
