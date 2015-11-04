@@ -1879,54 +1879,6 @@
     <string name="voice_interactor_preference_summary" msgid="1801414022026937190">"Toimintosanat ja vuorovaikutus"</string>
     <string name="voice_recognizer_preference_summary" msgid="669880813593690527">"Yksinkertainen puheesta tekstiksi -palvelu"</string>
     <string name="voice_interaction_security_warning" msgid="6378608263983737325">"Tämä puheohjauspalvelu huolehtii, että puheohjaus on aina päällä ja ohjaa puheohjausta käyttäviä sovelluksia automaattisesti puolestasi. Palvelu sisältyy sovellukseen <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g>. Otetaanko palvelu käyttöön?"</string>
-    <string name="tts_settings" msgid="8186971894801348327">"Tekstistä puheeksi -asetukset"</string>
-    <string name="tts_settings_title" msgid="1237820681016639683">"Tekstistä puheeksi -toisto"</string>
-    <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Käytä aina omia asetuksiani"</string>
-    <string name="use_default_tts_settings_summary" msgid="5916421806783703823">"Alla olevat oletusasetukset ohittavat sovelluksen asetukset."</string>
-    <string name="tts_default_settings_section" msgid="5787915620218907443">"Oletusasetukset"</string>
-    <string name="tts_default_synth_title" msgid="4755558388333117572">"Oletusmoottori"</string>
-    <string name="tts_default_synth_summary" msgid="7326298606388069173">"Aseta puhesynteesimoottori puhuttua tekstiä varten"</string>
-    <string name="tts_default_rate_title" msgid="6030550998379310088">"Puheen nopeus"</string>
-    <string name="tts_default_rate_summary" msgid="4061815292287182801">"Tekstin puhumisnopeus"</string>
-    <string name="tts_default_pitch_title" msgid="6135942113172488671">"Äänenkorkeus"</string>
-    <string name="tts_default_pitch_summary" msgid="1328298665182885277">"Vaikuttaa puhutun tekstin äänenkorkeuteen"</string>
-    <string name="tts_default_lang_title" msgid="8018087612299820556">"Kieli"</string>
-    <string name="tts_lang_use_system" msgid="2679252467416513208">"Käytä järjestelmän kieltä"</string>
-    <string name="tts_lang_not_selected" msgid="7395787019276734765">"Kieltä ei ole valittu"</string>
-    <string name="tts_default_lang_summary" msgid="5219362163902707785">"Asettaa puhutulle tekstille kielikohtaisen äänen"</string>
-    <string name="tts_play_example_title" msgid="7094780383253097230">"Kuuntele esimerkki"</string>
-    <string name="tts_play_example_summary" msgid="8029071615047894486">"Toista lyhyt esittely puhesynteesistä"</string>
-    <string name="tts_install_data_title" msgid="4264378440508149986">"Asenna äänitiedot"</string>
-    <string name="tts_install_data_summary" msgid="5742135732511822589">"Asenna puhesynteesiin tarvittavat äänitiedot"</string>
-    <string name="tts_data_installed_summary" msgid="9162111552859972809">"Puhesynteesiin tarvittavat äänet on jo asennettu"</string>
-    <string name="tts_settings_changed_demo" msgid="4926518555912328645">"Asetuksia muutettiin. Tässä esimerkki, miltä ne kuulostavat:"</string>
-    <string name="tts_engine_error" msgid="6336134545728152761">"Valitsemaasi syntetisaattoria ei voi käyttää."</string>
-    <string name="tts_engine_error_config" msgid="5820525416624637313">"Määritä"</string>
-    <string name="tts_engine_error_reselect" msgid="2415399149293842112">"Valitse toinen moottori"</string>
-    <string name="tts_engine_security_warning" msgid="8786238102020223650">"Tämä puhesynteesimoottori saattaa kerätä kaiken puhutun tekstin, mukaan lukien henkilökohtaiset tiedot kuten salasanat ja luottokorttinumerot. Se on lähtöisin moottorista <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>. Haluatko ottaa tämän puhesynteesimoottorin käyttöön?"</string>
-    <string name="tts_engine_network_required" msgid="1190837151485314743">"Tämä kieli vaatii verkkoyhteyden, jotta tekstistä puheeksi muuntaminen toimii."</string>
-    <string name="tts_default_sample_string" msgid="4040835213373086322">"Tämä on esimerkki puhesynteesistä."</string>
-    <string name="tts_status_title" msgid="7268566550242584413">"Oletuskieliasetus"</string>
-    <string name="tts_status_ok" msgid="1309762510278029765">"Kieltä <xliff:g id="LOCALE">%1$s</xliff:g> tuetaan"</string>
-    <string name="tts_status_requires_network" msgid="6042500821503226892">"Kieli <xliff:g id="LOCALE">%1$s</xliff:g> tarvitsee yhteyden verkostoon"</string>
-    <string name="tts_status_not_supported" msgid="4491154212762472495">"Kieltä <xliff:g id="LOCALE">%1$s</xliff:g> ei tueta"</string>
-    <string name="tts_status_checking" msgid="4983413982985913047">"Tarkistetaan"</string>
-    <string name="tts_engines_section" msgid="7515470972378742429">"Moottorit"</string>
-    <string name="tts_engine_name_settings" msgid="4974538563074395920">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>-asetukset"</string>
-    <string name="tts_engine_name_is_enabled_summary" msgid="4909484006804022115">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> on käytössä"</string>
-    <string name="tts_engine_name_is_disabled_summary" msgid="7644198182255168200">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> on poistettu käytöstä"</string>
-    <string name="tts_engine_settings_section" msgid="2346105138448751893">"Koneen asetukset"</string>
-    <string name="tts_engine_settings_title" msgid="3499112142425680334">"Asetukset: <xliff:g id="TTS_ENGINE_NAME">%s</xliff:g>"</string>
-    <string name="pico_languages_and_voices" msgid="4611320375917773238">"Kielet ja äänet"</string>
-    <string name="pico_installed" msgid="2452546687858267414">"Asennettu"</string>
-    <string name="pico_not_installed" msgid="6266845418419994311">"Ei asennettu"</string>
-    <string name="pico_voice_summary_female" msgid="8047327176247727492">"Nainen"</string>
-    <string name="pico_voice_summary_male" msgid="8331266854058577610">"Mies"</string>
-    <string name="tts_notif_engine_install_title" msgid="7000346872482649034">"Puhesynteesimoottori asennettu"</string>
-    <string name="tts_notif_engine_install_message" msgid="7250804349781973329">"Ota puhesynt. ensin käyttöön"</string>
-    <string name="tts_engine_settings_button" msgid="1030512042040722285">"Käynnistä moottorin asetukset"</string>
-    <string name="tts_engine_preference_section_title" msgid="448294500990971413">"Ensisijainen kone"</string>
-    <string name="tts_general_section_title" msgid="4402572014604490502">"Yleiset"</string>
     <string name="gadget_title" msgid="5519037532720577836">"Virranhallinta"</string>
     <string name="gadget_toggle_wifi" msgid="319262861956544493">"Päivitetään Wi-Fi-asetuksia"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"Päivitetään Bluetooth-asetuksia"</string>
@@ -2167,10 +2119,8 @@
     <string name="show_all_anrs_summary" msgid="641908614413544127">"Näytä Sovellus ei vastaa -ikkuna taustasovell."</string>
     <string name="force_allow_on_external" msgid="3215759785081916381">"Salli aina ulkoinen tallennus"</string>
     <string name="force_allow_on_external_summary" msgid="3191952505860343233">"Mahdollistaa sovellusten tallentamisen ulkoiseen tall.tilaan luettelosta riippumatta"</string>
-    <!-- no translation found for force_resizable_activities (8615764378147824985) -->
-    <skip />
-    <!-- no translation found for force_resizable_activities_summary (4508217476997182216) -->
-    <skip />
+    <string name="force_resizable_activities" msgid="8615764378147824985">"Pakota kaikki toiminnot hyväksymään koon muutos"</string>
+    <string name="force_resizable_activities_summary" msgid="4508217476997182216">"Pakottaa kaikki toiminnot hyväksymään koon muuttamisen rinnakkaisnäkymään luettelon arvoista riippumatta."</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Datan käyttö"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"Sovelluksen tiedonsiirto"</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"Operaattorin mittaustulos saattaa erota laitteesi mittaamasta."</string>
@@ -2932,4 +2882,20 @@
   </string-array>
     <string name="picture_color_mode" msgid="4560755008730283695">"Kuvien värit"</string>
     <string name="picture_color_mode_desc" msgid="1141891467675548590">"Ota sRGB käyttöön"</string>
+    <!-- no translation found for force_density_preference_title (7269059903952009908) -->
+    <skip />
+    <!-- no translation found for force_density_keywords (3810424110118041972) -->
+    <skip />
+    <!-- no translation found for force_density_summary_small (5481649550774706354) -->
+    <skip />
+    <!-- no translation found for force_density_summary_normal (4706658853225294667) -->
+    <skip />
+    <!-- no translation found for force_density_summary_large (4636190645503741863) -->
+    <skip />
+    <!-- no translation found for force_density_summary_very_large (8328063057394895318) -->
+    <skip />
+    <!-- no translation found for force_density_summary_extremely_large (846919277362198243) -->
+    <skip />
+    <!-- no translation found for force_density_summary_custom (6663681104268192485) -->
+    <skip />
 </resources>

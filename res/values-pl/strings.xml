@@ -549,7 +549,7 @@
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"Połącz"</string>
     <string name="bluetooth_device_context_disconnect" msgid="8220072022970148683">"Rozłącz"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="7611522504813927727">"Sparuj i połącz"</string>
-    <string name="bluetooth_device_context_unpair" msgid="662992425948536144">"Rozłącz parę"</string>
+    <string name="bluetooth_device_context_unpair" msgid="662992425948536144">"Anuluj sparowanie"</string>
     <string name="bluetooth_device_context_disconnect_unpair" msgid="7644014238070043798">"Rozłącz i anuluj parowanie"</string>
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"Opcje…"</string>
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Zaawansowane"</string>
@@ -1907,54 +1907,6 @@
     <string name="voice_interactor_preference_summary" msgid="1801414022026937190">"Pełne słowo-klucz i interakcja"</string>
     <string name="voice_recognizer_preference_summary" msgid="669880813593690527">"Prosta zamiana mowy na tekst"</string>
     <string name="voice_interaction_security_warning" msgid="6378608263983737325">"Ta usługa głosowego wprowadzania tekstu będzie mogła nieustannie monitorować aktywność głosową i sterować aplikacjami z włączoną obsługą głosową w Twoim imieniu. Pochodzi z tej aplikacji: <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g>. Włączyć ją?"</string>
-    <string name="tts_settings" msgid="8186971894801348327">"Zamiana tekstu na mowę"</string>
-    <string name="tts_settings_title" msgid="1237820681016639683">"Zamiana tekstu na mowę"</string>
-    <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Używaj moich ustawień"</string>
-    <string name="use_default_tts_settings_summary" msgid="5916421806783703823">"Poniższe ustawienia domyślne zastępują ustawienia aplikacji."</string>
-    <string name="tts_default_settings_section" msgid="5787915620218907443">"Ustawienia domyślne"</string>
-    <string name="tts_default_synth_title" msgid="4755558388333117572">"Mechanizm domyślny"</string>
-    <string name="tts_default_synth_summary" msgid="7326298606388069173">"Ustaw mechanizm syntezy mowy do obsługi tekstu mówionego"</string>
-    <string name="tts_default_rate_title" msgid="6030550998379310088">"Szybkość mowy"</string>
-    <string name="tts_default_rate_summary" msgid="4061815292287182801">"Szybkość czytania tekstu"</string>
-    <string name="tts_default_pitch_title" msgid="6135942113172488671">"Tony"</string>
-    <string name="tts_default_pitch_summary" msgid="1328298665182885277">"Określa ton czytanego tekstu"</string>
-    <string name="tts_default_lang_title" msgid="8018087612299820556">"Język"</string>
-    <string name="tts_lang_use_system" msgid="2679252467416513208">"Użyj języka systemu"</string>
-    <string name="tts_lang_not_selected" msgid="7395787019276734765">"Nie wybrano języka"</string>
-    <string name="tts_default_lang_summary" msgid="5219362163902707785">"Ustawia zależny od języka głos dla czytanych tekstów"</string>
-    <string name="tts_play_example_title" msgid="7094780383253097230">"Posłuchaj przykładu"</string>
-    <string name="tts_play_example_summary" msgid="8029071615047894486">"Odtwórz krótką prezentację syntezy mowy"</string>
-    <string name="tts_install_data_title" msgid="4264378440508149986">"Zainstaluj dane głosowe"</string>
-    <string name="tts_install_data_summary" msgid="5742135732511822589">"Zainstaluj dane głosowe wymagane do syntezy mowy"</string>
-    <string name="tts_data_installed_summary" msgid="9162111552859972809">"Dane głosowe wymagane do syntezy mowy zostały już poprawnie zainstalowane"</string>
-    <string name="tts_settings_changed_demo" msgid="4926518555912328645">"Ustawienia zostały zmienione. Oto przykład aktualnie skonfigurowanego brzmienia."</string>
-    <string name="tts_engine_error" msgid="6336134545728152761">"Nie można uruchomić wybranego mechanizmu."</string>
-    <string name="tts_engine_error_config" msgid="5820525416624637313">"Konfiguruj"</string>
-    <string name="tts_engine_error_reselect" msgid="2415399149293842112">"Wybierz inny mechanizm"</string>
-    <string name="tts_engine_security_warning" msgid="8786238102020223650">"Ten mechanizm syntezy mowy może gromadzić cały odczytywany tekst, w tym dane osobiste w postaci haseł i numerów kart kredytowych. Nazwa mechanizmu to <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>. Włączyć ten mechanizm syntezy mowy?"</string>
-    <string name="tts_engine_network_required" msgid="1190837151485314743">"Do przetwarzania tekstu na mowę w tym języku wymagane jest działające połączenie sieciowe."</string>
-    <string name="tts_default_sample_string" msgid="4040835213373086322">"To jest przykład syntezy mowy"</string>
-    <string name="tts_status_title" msgid="7268566550242584413">"Stan domyślnego języka"</string>
-    <string name="tts_status_ok" msgid="1309762510278029765">"Język <xliff:g id="LOCALE">%1$s</xliff:g> jest w pełni obsługiwany"</string>
-    <string name="tts_status_requires_network" msgid="6042500821503226892">"Język <xliff:g id="LOCALE">%1$s</xliff:g> wymaga połączenia z siecią"</string>
-    <string name="tts_status_not_supported" msgid="4491154212762472495">"Język <xliff:g id="LOCALE">%1$s</xliff:g> nie jest obsługiwany"</string>
-    <string name="tts_status_checking" msgid="4983413982985913047">"Sprawdzam..."</string>
-    <string name="tts_engines_section" msgid="7515470972378742429">"Mechanizmy"</string>
-    <string name="tts_engine_name_settings" msgid="4974538563074395920">"Ustawienia <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>"</string>
-    <string name="tts_engine_name_is_enabled_summary" msgid="4909484006804022115">"Mechanizm <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> jest włączony"</string>
-    <string name="tts_engine_name_is_disabled_summary" msgid="7644198182255168200">"Mechanizm <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> jest wyłączony"</string>
-    <string name="tts_engine_settings_section" msgid="2346105138448751893">"Ustawienia mechanizmu"</string>
-    <string name="tts_engine_settings_title" msgid="3499112142425680334">"Ustawienia <xliff:g id="TTS_ENGINE_NAME">%s</xliff:g>"</string>
-    <string name="pico_languages_and_voices" msgid="4611320375917773238">"Języki i głosy"</string>
-    <string name="pico_installed" msgid="2452546687858267414">"Zainstalowano"</string>
-    <string name="pico_not_installed" msgid="6266845418419994311">"Nie zainstalowano"</string>
-    <string name="pico_voice_summary_female" msgid="8047327176247727492">"Kobieta"</string>
-    <string name="pico_voice_summary_male" msgid="8331266854058577610">"Mężczyzna"</string>
-    <string name="tts_notif_engine_install_title" msgid="7000346872482649034">"Zainstalowano mechanizm syntezy mowy"</string>
-    <string name="tts_notif_engine_install_message" msgid="7250804349781973329">"Najpierw włącz nowy mechanizm."</string>
-    <string name="tts_engine_settings_button" msgid="1030512042040722285">"Otwórz ustawienia mechanizmu"</string>
-    <string name="tts_engine_preference_section_title" msgid="448294500990971413">"Preferowany mechanizm"</string>
-    <string name="tts_general_section_title" msgid="4402572014604490502">"Ogólne"</string>
     <string name="gadget_title" msgid="5519037532720577836">"Zarządzanie energią"</string>
     <string name="gadget_toggle_wifi" msgid="319262861956544493">"Aktualizowanie ustawień Wi-Fi"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"Aktualizowanie ustawień Bluetooth"</string>
@@ -2195,10 +2147,8 @@
     <string name="show_all_anrs_summary" msgid="641908614413544127">"Pokaż okno Aplikacja Nie Reaguje dla aplikacji w tle"</string>
     <string name="force_allow_on_external" msgid="3215759785081916381">"Wymuś zezwalanie na aplikacje w pamięci zewn."</string>
     <string name="force_allow_on_external_summary" msgid="3191952505860343233">"Pozwala na zapis aplikacji w pamięci zewn. niezależnie od wartości w pliku manifestu"</string>
-    <!-- no translation found for force_resizable_activities (8615764378147824985) -->
-    <skip />
-    <!-- no translation found for force_resizable_activities_summary (4508217476997182216) -->
-    <skip />
+    <string name="force_resizable_activities" msgid="8615764378147824985">"Wymuś zmianę rozmiaru okien aktywności"</string>
+    <string name="force_resizable_activities_summary" msgid="4508217476997182216">"Umożliwia zmianę rozmiaru wszystkich okien aktywności w trybie wielu okien niezależnie od ustawień w pliku manifestu."</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Użycie danych"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"Przesył danych w aplikacji"</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"Operator sieci komórkowej może obliczać ilość przesłanych danych inaczej niż urządzenie."</string>
@@ -2978,4 +2928,20 @@
   </string-array>
     <string name="picture_color_mode" msgid="4560755008730283695">"Tryb kolorów obrazu"</string>
     <string name="picture_color_mode_desc" msgid="1141891467675548590">"Użyj sRGB"</string>
+    <!-- no translation found for force_density_preference_title (7269059903952009908) -->
+    <skip />
+    <!-- no translation found for force_density_keywords (3810424110118041972) -->
+    <skip />
+    <!-- no translation found for force_density_summary_small (5481649550774706354) -->
+    <skip />
+    <!-- no translation found for force_density_summary_normal (4706658853225294667) -->
+    <skip />
+    <!-- no translation found for force_density_summary_large (4636190645503741863) -->
+    <skip />
+    <!-- no translation found for force_density_summary_very_large (8328063057394895318) -->
+    <skip />
+    <!-- no translation found for force_density_summary_extremely_large (846919277362198243) -->
+    <skip />
+    <!-- no translation found for force_density_summary_custom (6663681104268192485) -->
+    <skip />
 </resources>
