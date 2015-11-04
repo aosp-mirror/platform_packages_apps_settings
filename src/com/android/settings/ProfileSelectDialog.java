@@ -26,7 +26,7 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 
-import com.android.settings.dashboard.DashboardTile;
+import com.android.settingslib.drawer.DashboardTile;
 
 public class ProfileSelectDialog extends DialogFragment implements OnClickListener {
 

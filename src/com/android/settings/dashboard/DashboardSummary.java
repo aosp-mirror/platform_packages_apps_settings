@@ -20,7 +20,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -42,6 +41,8 @@ import com.android.settings.HelpUtils;
 import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settingslib.drawer.DashboardCategory;
+import com.android.settingslib.drawer.DashboardTile;
 
 import java.util.List;
 
@@ -147,7 +148,7 @@ public class DashboardSummary extends InstrumentedFragment {
                     false);
 
             TextView categoryLabel = (TextView) categoryView.findViewById(R.id.category_title);
-            categoryLabel.setText(category.getTitle(res));
+            categoryLabel.setText(category.title);
 
             ViewGroup categoryContent =
                     (ViewGroup) categoryView.findViewById(R.id.category_content);
@@ -175,11 +176,11 @@ public class DashboardSummary extends InstrumentedFragment {
     private void updateTileView(Context context, Resources res, DashboardTile tile,
             ImageView tileIcon, TextView tileTextView, TextView statusTextView) {
 
-        if (!TextUtils.isEmpty(tile.iconPkg)) {
-            try {
-                Drawable drawable = context.getPackageManager()
-                        .getResourcesForApplication(tile.iconPkg).getDrawable(tile.iconRes, null);
-                if (!tile.iconPkg.equals(context.getPackageName()) && drawable != null) {
+        if (tile.icon != null) {
+            if (!TextUtils.isEmpty(tile.icon.getResPackage())) {
+                Drawable drawable = tile.icon.loadDrawable(context);
+                if (!tile.icon.getResPackage().equals(context.getPackageName())
+                        && drawable != null) {
                     // If this drawable is coming from outside Settings, tint it to match the color.
                     TypedValue tintColor = new TypedValue();
                     context.getTheme().resolveAttribute(com.android.internal.R.attr.colorAccent,
@@ -187,20 +188,17 @@ public class DashboardSummary extends InstrumentedFragment {
                     drawable.setTint(tintColor.data);
                 }
                 tileIcon.setImageDrawable(drawable);
-            } catch (NameNotFoundException | Resources.NotFoundException e) {
-                tileIcon.setImageDrawable(null);
-                tileIcon.setBackground(null);
+            } else {
+                tileIcon.setImageIcon(tile.icon);
             }
-        } else if (tile.iconRes > 0) {
-            tileIcon.setImageResource(tile.iconRes);
         } else {
             tileIcon.setImageDrawable(null);
             tileIcon.setBackground(null);
         }
 
-        tileTextView.setText(tile.getTitle(res));
+        tileTextView.setText(tile.title);
 
-        CharSequence summary = tile.getSummary(res);
+        CharSequence summary = tile.summary;
         if (!TextUtils.isEmpty(summary)) {
             statusTextView.setVisibility(View.VISIBLE);
             statusTextView.setText(summary);
