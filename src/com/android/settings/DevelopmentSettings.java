@@ -409,11 +409,18 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             removePreferenceForProduction(hdcpChecking);
         }
 
+        PreferenceScreen convertFbePreference =
+            (PreferenceScreen) findPreference(KEY_CONVERT_FBE);
+
         try {
             IBinder service = ServiceManager.getService("mount");
             IMountService mountService = IMountService.Stub.asInterface(service);
             if (!mountService.isConvertibleToFBE()) {
                 removePreference(KEY_CONVERT_FBE);
+            } else if (mountService.isPerUserEncryptionEnabled()) {
+                convertFbePreference.setEnabled(false);
+                convertFbePreference.setSummary(getResources()
+                                   .getString(R.string.convert_to_file_encryption_done));
             }
         } catch(RemoteException e) {
             removePreference(KEY_CONVERT_FBE);
