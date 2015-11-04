@@ -331,7 +331,9 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
         protected void onPostExecute(Drawable icon) {
             if (icon != null) {
                 final Preference pref = prefReference.get();
-                pref.setIcon(icon);
+                if (pref != null) {
+                    pref.setIcon(icon);
+                }
             }
         }
     }
