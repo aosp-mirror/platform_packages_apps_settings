@@ -16,7 +16,6 @@
 
 package com.android.settings.dashboard;
 
-import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -24,10 +23,8 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.android.settings.ProfileSelectDialog;
 import com.android.settings.R;
-import com.android.settings.Utils;
+import com.android.settings.SettingsActivity;
 import com.android.settingslib.drawer.DashboardTile;
 
 public class DashboardTileView extends FrameLayout implements View.OnClickListener {
@@ -92,22 +89,6 @@ public class DashboardTileView extends FrameLayout implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        clickTile(getContext(), mTile);
-    }
-
-    public static void clickTile(Context context, DashboardTile tile) {
-        if (tile.fragment != null) {
-            Utils.startWithFragment(context, tile.fragment, tile.fragmentArguments, null, 0,
-                    0, tile.title);
-        } else if (tile.intent != null) {
-            int numUserHandles = tile.userHandle.size();
-            if (numUserHandles > 1) {
-                ProfileSelectDialog.show(((Activity) context).getFragmentManager(), tile);
-            } else if (numUserHandles == 1) {
-                context.startActivityAsUser(tile.intent, tile.userHandle.get(0));
-            } else {
-                context.startActivity(tile.intent);
-            }
-        }
+        ((SettingsActivity) getContext()).openTile(mTile);
     }
 }
