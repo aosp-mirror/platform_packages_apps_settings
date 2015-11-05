@@ -53,6 +53,7 @@ import android.os.ServiceManager;
 import android.os.StrictMode;
 import android.os.SystemProperties;
 import android.os.UserManager;
+import android.os.storage.IMountService;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.provider.Settings.Global;
@@ -175,6 +176,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private static final String TERMINAL_APP_PACKAGE = "com.android.terminal";
 
     private static final String KEY_NIGHT_MODE = "night_mode";
+    private static final String KEY_CONVERT_FBE = "convert_to_file_encryption";
 
     private static final int RESULT_DEBUG_APP = 1000;
     private static final int RESULT_MOCK_LOCATION_APP = 1001;
@@ -405,6 +407,16 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         if (hdcpChecking != null) {
             mAllPrefs.add(hdcpChecking);
             removePreferenceForProduction(hdcpChecking);
+        }
+
+        try {
+            IBinder service = ServiceManager.getService("mount");
+            IMountService mountService = IMountService.Stub.asInterface(service);
+            if (!mountService.isConvertibleToFBE()) {
+                removePreference(KEY_CONVERT_FBE);
+            }
+        } catch(RemoteException e) {
+            removePreference(KEY_CONVERT_FBE);
         }
 
         mNightModePreference = (DropDownPreference) findPreference(KEY_NIGHT_MODE);

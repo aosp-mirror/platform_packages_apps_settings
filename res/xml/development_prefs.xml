@@ -67,6 +67,12 @@
         android:entries="@array/night_mode_entries"
         android:entryValues="@array/night_mode_values" />
 
+    <PreferenceScreen
+        android:key="convert_to_file_encryption"
+        android:title="@string/convert_to_file_encryption"
+        android:summary="@string/convert_to_file_encryption_enabled"
+        android:fragment="com.android.settings.applications.ConvertToFBE" />
+
     <com.android.settings.ColorModePreference
         android:key="color_mode"
         android:title="@string/picture_color_mode"
