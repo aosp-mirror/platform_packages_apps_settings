@@ -50,7 +50,7 @@ import com.android.settings.R;
 public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
         implements FingerprintEnrollSidecar.Listener {
 
-    private static final String TAG_SIDECAR = "sidecar";
+    static final String TAG_SIDECAR = "sidecar";
 
     private static final int PROGRESS_BAR_MAX = 10000;
     private static final int FINISH_DELAY = 250;
