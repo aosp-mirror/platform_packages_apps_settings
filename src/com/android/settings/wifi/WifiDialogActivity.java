@@ -25,7 +25,9 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.android.settings.SetupWizardUtils;
 import com.android.settingslib.wifi.AccessPoint;
+import com.android.setupwizardlib.util.WizardManagerHelper;
 
 public class WifiDialogActivity extends Activity implements WifiDialog.WifiDialogListener,
         DialogInterface.OnDismissListener {
@@ -40,9 +42,13 @@ public class WifiDialogActivity extends Activity implements WifiDialog.WifiDialo
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        final Intent intent = getIntent();
+        if (WizardManagerHelper.isSetupWizardIntent(intent)) {
+            setTheme(SetupWizardUtils.getTransparentTheme(intent));
+        }
+
         super.onCreate(savedInstanceState);
 
-        final Intent intent = getIntent();
         final Bundle accessPointState = intent.getBundleExtra(KEY_ACCESS_POINT_STATE);
         AccessPoint accessPoint = null;
         if (accessPointState != null) {
