@@ -41,6 +41,14 @@ public class SetupWizardUtils {
         }
     }
 
+    public static int getTransparentTheme(Intent intent) {
+        if (WizardManagerHelper.isLightTheme(intent, true)) {
+            return R.style.SetupWizardTheme_Light_Transparent;
+        } else {
+            return R.style.SetupWizardTheme_Transparent;
+        }
+    }
+
     /**
      * Sets the immersive mode related flags based on the extra in the intent which started the
      * activity.
