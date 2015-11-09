@@ -209,6 +209,12 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
             // Don't enable developer options for secondary users.
             if (UserHandle.myUserId() != UserHandle.USER_OWNER) return true;
 
+            // Don't enable developer options until device has been provisioned
+            if (Settings.Global.getInt(getActivity().getContentResolver(),
+                    Settings.Global.DEVICE_PROVISIONED, 0) == 0) {
+                return true;
+            }
+
             final UserManager um = (UserManager) getSystemService(Context.USER_SERVICE);
             if (um.hasUserRestriction(UserManager.DISALLOW_DEBUGGING_FEATURES)) return true;
 
