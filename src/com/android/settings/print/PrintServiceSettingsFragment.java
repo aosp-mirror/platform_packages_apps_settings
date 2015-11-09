@@ -17,13 +17,10 @@
 package com.android.settings.print;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.LoaderManager;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.content.pm.PackageInfo;
@@ -75,11 +72,9 @@ import java.util.Map;
  * Fragment with print service settings.
  */
 public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
-        implements DialogInterface.OnClickListener, SwitchBar.OnSwitchChangeListener {
+        implements SwitchBar.OnSwitchChangeListener {
 
     private static final int LOADER_ID_PRINTERS_LOADER = 1;
-
-    private static final int DIALOG_ID_ENABLE_WARNING = 1;
 
     private final SettingsContentObserver mSettingsContentObserver =
             new SettingsContentObserver(new Handler()) {
@@ -121,9 +116,6 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
 
     private CharSequence mAddPrintersTitle;
     private Intent mAddPrintersIntent;
-
-    private CharSequence mEnableWarningTitle;
-    private CharSequence mEnableWarningMessage;
 
     private ComponentName mComponentName;
 
@@ -199,48 +191,6 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
             services.remove(service);
         }
         PrintSettingsUtils.writeEnabledPrintServices(getActivity(), services);
-    }
-
-    @Override
-    public Dialog onCreateDialog(int dialogId) {
-        CharSequence title = null;
-        CharSequence message = null;
-        switch (dialogId) {
-            case DIALOG_ID_ENABLE_WARNING:
-                title = mEnableWarningTitle;
-                message = mEnableWarningMessage;
-                break;
-            default:
-                throw new IllegalArgumentException();
-        }
-        return new AlertDialog.Builder(getActivity())
-                .setTitle(title)
-                .setMessage(message)
-                .setCancelable(true)
-                .setPositiveButton(android.R.string.ok, this)
-                .setNegativeButton(android.R.string.cancel, this)
-                .create();
-    }
-
-    @Override
-    public void onClick(DialogInterface dialog, int which) {
-        final boolean checked;
-        switch (which) {
-            case DialogInterface.BUTTON_POSITIVE:
-                checked = true;
-                mSwitchBar.setCheckedInternal(checked);
-                getArguments().putBoolean(PrintSettingsFragment.EXTRA_CHECKED, checked);
-                onPreferenceToggled(mPreferenceKey, checked);
-                break;
-            case DialogInterface.BUTTON_NEGATIVE:
-                checked = false;
-                mSwitchBar.setCheckedInternal(checked);
-                getArguments().putBoolean(PrintSettingsFragment.EXTRA_CHECKED, checked);
-                onPreferenceToggled(mPreferenceKey, checked);
-                break;
-            default:
-                throw new IllegalArgumentException();
-        }
     }
 
     private ListView getBackupListView() {
@@ -322,17 +272,7 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         mToggleSwitch.setOnBeforeCheckedChangeListener(new ToggleSwitch.OnBeforeCheckedChangeListener() {
             @Override
             public boolean onBeforeCheckedChanged(ToggleSwitch toggleSwitch, boolean checked) {
-                if (checked) {
-                    if (!TextUtils.isEmpty(mEnableWarningMessage)) {
-                        mSwitchBar.setCheckedInternal(false);
-                        getArguments().putBoolean(PrintSettingsFragment.EXTRA_CHECKED, false);
-                        showDialog(DIALOG_ID_ENABLE_WARNING);
-                        return true;
-                    }
-                    onPreferenceToggled(mPreferenceKey, true);
-                } else {
-                    onPreferenceToggled(mPreferenceKey, false);
-                }
+                onPreferenceToggled(mPreferenceKey, checked);
                 return false;
             }
         });
@@ -394,14 +334,6 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
                 }
             }
         }
-
-        // Enable warning title.
-        mEnableWarningTitle = arguments.getCharSequence(
-                PrintSettingsFragment.EXTRA_ENABLE_WARNING_TITLE);
-
-        // Enable warning message.
-        mEnableWarningMessage = arguments.getCharSequence(
-                PrintSettingsFragment.EXTRA_ENABLE_WARNING_MESSAGE);
 
         // Component name.
         mComponentName = ComponentName.unflattenFromString(arguments

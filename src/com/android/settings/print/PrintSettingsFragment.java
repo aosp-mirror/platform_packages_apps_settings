@@ -85,8 +85,6 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
     static final String EXTRA_PREFERENCE_KEY = "EXTRA_PREFERENCE_KEY";
     static final String EXTRA_CHECKED = "EXTRA_CHECKED";
     static final String EXTRA_TITLE = "EXTRA_TITLE";
-    static final String EXTRA_ENABLE_WARNING_TITLE = "EXTRA_ENABLE_WARNING_TITLE";
-    static final String EXTRA_ENABLE_WARNING_MESSAGE = "EXTRA_ENABLE_WARNING_MESSAGE";
     static final String EXTRA_SETTINGS_TITLE = "EXTRA_SETTINGS_TITLE";
     static final String EXTRA_SETTINGS_COMPONENT_NAME = "EXTRA_SETTINGS_COMPONENT_NAME";
     static final String EXTRA_ADD_PRINTERS_TITLE = "EXTRA_ADD_PRINTERS_TITLE";
@@ -254,13 +252,6 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
 
             PrintServiceInfo printServiceInfo = PrintServiceInfo.create(
                     installedService, getActivity());
-
-            CharSequence applicationLabel = installedService.loadLabel(getPackageManager());
-
-            extras.putString(EXTRA_ENABLE_WARNING_TITLE, getString(
-                    R.string.print_service_security_warning_title, applicationLabel));
-            extras.putString(EXTRA_ENABLE_WARNING_MESSAGE, getString(
-                    R.string.print_service_security_warning_summary, applicationLabel));
 
             String settingsClassName = printServiceInfo.getSettingsActivityName();
             if (!TextUtils.isEmpty(settingsClassName)) {
