@@ -297,6 +297,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
     private Preference buildAction(int titleRes) {
         final Preference pref = new Preference(getPrefContext());
         pref.setTitle(titleRes);
+        pref.setKey(Integer.toString(titleRes));
         return pref;
     }
 
