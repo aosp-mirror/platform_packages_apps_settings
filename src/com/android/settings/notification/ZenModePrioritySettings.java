@@ -66,7 +66,8 @@ public class ZenModePrioritySettings extends ZenModeSettingsBase implements Inde
                 MetricsLogger.action(mContext, MetricsLogger.ACTION_ZEN_ALLOW_REMINDERS, val);
                 if (DEBUG) Log.d(TAG, "onPrefChange allowReminders=" + val);
                 savePolicy(getNewPriorityCategories(val, Policy.PRIORITY_CATEGORY_REMINDERS),
-                        mPolicy.priorityCallSenders, mPolicy.priorityMessageSenders);
+                        mPolicy.priorityCallSenders, mPolicy.priorityMessageSenders,
+                        mPolicy.suppressedVisualEffects);
                 return true;
             }
         });
@@ -80,7 +81,8 @@ public class ZenModePrioritySettings extends ZenModeSettingsBase implements Inde
                 MetricsLogger.action(mContext, MetricsLogger.ACTION_ZEN_ALLOW_EVENTS, val);
                 if (DEBUG) Log.d(TAG, "onPrefChange allowEvents=" + val);
                 savePolicy(getNewPriorityCategories(val, Policy.PRIORITY_CATEGORY_EVENTS),
-                        mPolicy.priorityCallSenders, mPolicy.priorityMessageSenders);
+                        mPolicy.priorityCallSenders, mPolicy.priorityMessageSenders,
+                        mPolicy.suppressedVisualEffects);
                 return true;
             }
         });
@@ -100,7 +102,8 @@ public class ZenModePrioritySettings extends ZenModeSettingsBase implements Inde
                         + " allowMessagesFrom=" + ZenModeConfig.sourceToString(allowMessagesFrom));
                 savePolicy(
                         getNewPriorityCategories(allowMessages, Policy.PRIORITY_CATEGORY_MESSAGES),
-                        mPolicy.priorityCallSenders, allowMessagesFrom);
+                        mPolicy.priorityCallSenders, allowMessagesFrom,
+                        mPolicy.suppressedVisualEffects);
                 return true;
             }
         });
@@ -118,7 +121,8 @@ public class ZenModePrioritySettings extends ZenModeSettingsBase implements Inde
                 if (DEBUG) Log.d(TAG, "onPrefChange allowCalls=" + allowCalls
                         + " allowCallsFrom=" + ZenModeConfig.sourceToString(allowCallsFrom));
                 savePolicy(getNewPriorityCategories(allowCalls, Policy.PRIORITY_CATEGORY_CALLS),
-                        allowCallsFrom, mPolicy.priorityMessageSenders);
+                        allowCallsFrom, mPolicy.priorityMessageSenders,
+                        mPolicy.suppressedVisualEffects);
                 return true;
             }
         });
@@ -137,7 +141,7 @@ public class ZenModePrioritySettings extends ZenModeSettingsBase implements Inde
                 int priorityCategories = getNewPriorityCategories(val,
                         NotificationManager.Policy.PRIORITY_CATEGORY_REPEAT_CALLERS);
                 savePolicy(priorityCategories, mPolicy.priorityCallSenders,
-                        mPolicy.priorityMessageSenders);
+                        mPolicy.priorityMessageSenders, mPolicy.suppressedVisualEffects);
                 return true;
             }
         });
@@ -210,8 +214,9 @@ public class ZenModePrioritySettings extends ZenModeSettingsBase implements Inde
     }
 
     private void savePolicy(int priorityCategories, int priorityCallSenders,
-            int priorityMessageSenders) {
-        mPolicy = new Policy(priorityCategories, priorityCallSenders, priorityMessageSenders);
+            int priorityMessageSenders, int suppressedVisualEffects) {
+        mPolicy = new Policy(priorityCategories, priorityCallSenders, priorityMessageSenders,
+                suppressedVisualEffects);
         NotificationManager.from(mContext).setNotificationPolicy(mPolicy);
     }
 

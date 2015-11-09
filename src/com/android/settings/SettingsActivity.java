@@ -92,6 +92,7 @@ import com.android.settings.notification.ZenModeEventRuleSettings;
 import com.android.settings.notification.ZenModePrioritySettings;
 import com.android.settings.notification.ZenModeScheduleRuleSettings;
 import com.android.settings.notification.ZenModeSettings;
+import com.android.settings.notification.ZenModeVisualInterruptionSettings;
 import com.android.settings.print.PrintJobSettingsFragment;
 import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.search.DynamicIndexableContentMonitor;
@@ -296,6 +297,7 @@ public class SettingsActivity extends SettingsDrawerActivity
             ZenModeAutomationSettings.class.getName(),
             ZenModeScheduleRuleSettings.class.getName(),
             ZenModeEventRuleSettings.class.getName(),
+            ZenModeVisualInterruptionSettings.class.getName(),
             ProcessStatsUi.class.getName(),
             PowerUsageDetail.class.getName(),
             ProcessStatsSummary.class.getName(),
