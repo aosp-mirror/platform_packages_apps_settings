@@ -827,8 +827,6 @@
     <string name="dock_sounds_enable_summary_off" product="tablet" msgid="4308252722466813560">"Neprehrávať zvuk pri vkladaní alebo odstraňovaní tabletu z doku"</string>
     <string name="dock_sounds_enable_summary_off" product="default" msgid="2034927992716667672">"Neprehrávať zvuk pri vkladaní alebo odstraňovaní telefónu z doku"</string>
     <string name="account_settings" msgid="6403589284618783461">"Účty"</string>
-    <string name="category_personal" msgid="1299663247844969448">"Osobné"</string>
-    <string name="category_work" msgid="8699184680584175622">"Práca"</string>
     <string name="accessibility_category_work" msgid="4339262969083355720">"Účty pracovných profilov – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_category_personal" msgid="1263518850905945594">"Účty osobných profilov"</string>
     <string name="accessibility_work_account_title" msgid="1231830766637939527">"Pracovný účet – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
@@ -851,6 +849,11 @@
     <string name="night_mode_no" msgid="9171772244775838901">"Vypnuté"</string>
     <string name="night_mode_yes" msgid="2218157265997633432">"Vždy zapnuté"</string>
     <string name="night_mode_auto" msgid="7508348175804304327">"Automatický"</string>
+    <string name="convert_to_file_encryption" msgid="3060156730651061223">"Konvertovať na šifrovanie súborov"</string>
+    <string name="convert_to_file_encryption_enabled" msgid="4342629236458204730">"Konvertovať…"</string>
+    <string name="convert_to_file_encryption_done" msgid="7859766358000523953">"Súbory sú už šifrované"</string>
+    <string name="convert_to_fbe_warning" msgid="6406541045331190366">"Chystáte sa konvertovať dátový oddiel na šifrovanie založené na súboroch.\n !!Upozornenie!! Týmto procesom vymažete všetky dáta.\n Táto funkcia je v alfa verzii a nemusí fungovať správne.\n Ak chcete pokračovať, stlačte tlačidlo „Vymazať a konvertovať…“."</string>
+    <string name="button_convert_fbe" msgid="8142438555983531496">"Vymazať a konvertovať…"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Režim spánku"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Vypnutie obrazovky"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> nečinnosti"</string>
@@ -2674,7 +2677,6 @@
     <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"Pred uvoľnením požiadať o PIN"</string>
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"Pred uvoľnením požiadať o heslo"</string>
     <string name="screen_pinning_unlock_none" msgid="3814188275713871856">"Uzamknúť zariadenie počas uvoľňovania"</string>
-    <string name="managed_user_title" msgid="8101244883654409696">"Pracovný profil"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2232461523882170874">"Tento pracovný profil spravuje aplikácia:"</string>
     <string name="managing_admin" msgid="8843802210377459055">"Spravované aplikáciou <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(Experimentálne)"</string>
@@ -2765,7 +2767,6 @@
     <string name="advanced_apps" msgid="4812975097124803873">"Rozšírené"</string>
     <string name="configure_apps" msgid="6685680790825882528">"Konfigurácia aplikácií"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Neznáma aplikácia"</string>
-    <string name="choose_profile" msgid="8229363046053568878">"Výber profilu"</string>
     <string name="app_permissions" msgid="4148222031991883874">"Povolenia aplikácií"</string>
     <string name="app_permissions_summary" msgid="2098173899436407221">"Ďalší prístup povolený <xliff:g id="COUNT_0">%d</xliff:g> z <xliff:g id="COUNT_1">%d</xliff:g> aplikácií"</string>
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"Povolené: <xliff:g id="COUNT_0">%d</xliff:g> z <xliff:g id="COUNT_1">%d</xliff:g> aplikácií"</string>
@@ -2928,20 +2929,12 @@
   </string-array>
     <string name="picture_color_mode" msgid="4560755008730283695">"Farebný režim obrázka"</string>
     <string name="picture_color_mode_desc" msgid="1141891467675548590">"Použije sa sRGB"</string>
-    <!-- no translation found for force_density_preference_title (7269059903952009908) -->
-    <skip />
-    <!-- no translation found for force_density_keywords (3810424110118041972) -->
-    <skip />
-    <!-- no translation found for force_density_summary_small (5481649550774706354) -->
-    <skip />
-    <!-- no translation found for force_density_summary_normal (4706658853225294667) -->
-    <skip />
-    <!-- no translation found for force_density_summary_large (4636190645503741863) -->
-    <skip />
-    <!-- no translation found for force_density_summary_very_large (8328063057394895318) -->
-    <skip />
-    <!-- no translation found for force_density_summary_extremely_large (846919277362198243) -->
-    <skip />
-    <!-- no translation found for force_density_summary_custom (6663681104268192485) -->
-    <skip />
+    <string name="force_density_preference_title" msgid="7269059903952009908">"Hustota zobrazenia"</string>
+    <string name="force_density_keywords" msgid="3810424110118041972">"zobrazenie hustota priblížiť upraviť hustotu úprava hustoty"</string>
+    <string name="force_density_summary_small" msgid="5481649550774706354">"Malá"</string>
+    <string name="force_density_summary_normal" msgid="4706658853225294667">"Štandardná"</string>
+    <string name="force_density_summary_large" msgid="4636190645503741863">"Veľká"</string>
+    <string name="force_density_summary_very_large" msgid="8328063057394895318">"Väčšia"</string>
+    <string name="force_density_summary_extremely_large" msgid="846919277362198243">"Najväčšia"</string>
+    <string name="force_density_summary_custom" msgid="6663681104268192485">"Vlastná (<xliff:g id="DENSITYDPI">%d</xliff:g>)"</string>
 </resources>

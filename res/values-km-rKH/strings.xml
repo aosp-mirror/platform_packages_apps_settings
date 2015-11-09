@@ -811,8 +811,6 @@
     <string name="dock_sounds_enable_summary_off" product="tablet" msgid="4308252722466813560">"កុំ​បន្លឺ​សំឡេង​ពេល​បញ្ចូល ឬ​ដក​កុំព្យូទ័រ​បន្ទះ​​ពី​ការ​ភ្ជាប់"</string>
     <string name="dock_sounds_enable_summary_off" product="default" msgid="2034927992716667672">"កុំ​បន្លឺ​សំឡេង​ពេល​បញ្ចូល ឬ​ដក​ទូរស័ព្ទ​ពី​ការ​ភ្ជាប់"</string>
     <string name="account_settings" msgid="6403589284618783461">"គណនី"</string>
-    <string name="category_personal" msgid="1299663247844969448">"ផ្ទាល់ខ្លួន"</string>
-    <string name="category_work" msgid="8699184680584175622">"កន្លែង​ធ្វើការ"</string>
     <string name="accessibility_category_work" msgid="4339262969083355720">"គណនីប្រវត្តិរូបការងារ៖ <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_category_personal" msgid="1263518850905945594">"គណនីប្រវត្តិរូបផ្ទាល់ខ្លួន"</string>
     <string name="accessibility_work_account_title" msgid="1231830766637939527">"គណនីការងារ៖ <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
@@ -835,6 +833,11 @@
     <string name="night_mode_no" msgid="9171772244775838901">"បានបិទ"</string>
     <string name="night_mode_yes" msgid="2218157265997633432">"បើកជានិច្ច"</string>
     <string name="night_mode_auto" msgid="7508348175804304327">"ស្វ័យប្រវត្តិ"</string>
+    <string name="convert_to_file_encryption" msgid="3060156730651061223">"បម្លែងទៅជាការអ៊ីនគ្រីបឯកសារ"</string>
+    <string name="convert_to_file_encryption_enabled" msgid="4342629236458204730">"បម្លែង ..."</string>
+    <string name="convert_to_file_encryption_done" msgid="7859766358000523953">"បានអ៊ីនគ្រីបឯកសាររួចហើយ"</string>
+    <string name="convert_to_fbe_warning" msgid="6406541045331190366">"បម្លែងការបែងចែកទិន្នន័យទៅជាការអ៊ីនគ្រីបដោយផ្អែកលើឯកសារ។\n !!ព្រមាន!! សកម្មភាពនេះនឹងលុបទិន្នន័យរបស់អ្នកទាំងអស់\n លក្ខណៈពិសេសនេះជាការសាកល្បងដំបូង និងអាចនឹងដំណើរការមិនប្រក្រតី។\n សូមចុច \'សម្អាត និងបម្លែង...\' ដើម្បីបន្ត។"</string>
+    <string name="button_convert_fbe" msgid="8142438555983531496">"សម្អាត និងបម្លែង..."</string>
     <string name="screen_timeout" msgid="4351334843529712571">"ដេក"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"អេក្រង់​បិទ"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"បន្ទាប់​ពី​អសកម្ម <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
@@ -2640,7 +2643,6 @@
     <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"សួរ​រក​កូដ PIN មុន​ពេល​ផ្ដាច់"</string>
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"សួរ​រក​ពាក្យ​សម្ងាត់​មុន​ពេល​ផ្ដាច់"</string>
     <string name="screen_pinning_unlock_none" msgid="3814188275713871856">"ចាក់​សោ​ឧបករណ៍​ពេល​មិន​ភ្ជាប់"</string>
-    <string name="managed_user_title" msgid="8101244883654409696">"ប្រវត្តិរូប​ការងារ"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2232461523882170874">"ប្រវត្តិរូបការងារនេះត្រូវបានគ្រប់គ្រងដោយ៖"</string>
     <string name="managing_admin" msgid="8843802210377459055">"គ្រប់គ្រងដោយ <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(ពិសោធន៍​)"</string>
@@ -2725,7 +2727,6 @@
     <string name="advanced_apps" msgid="4812975097124803873">"កម្រិតខ្ពស់"</string>
     <string name="configure_apps" msgid="6685680790825882528">"កំណត់រចនាសម្ព័ន្ធកម្មវិធី"</string>
     <string name="unknown_app" msgid="5275921288718717656">"កម្មវិធីមិនស្គាល់"</string>
-    <string name="choose_profile" msgid="8229363046053568878">"ជ្រើសប្រវត្តិរូប"</string>
     <string name="app_permissions" msgid="4148222031991883874">"សិទ្ធិ​កម្មវិធី"</string>
     <string name="app_permissions_summary" msgid="2098173899436407221">"កម្មវិធី <xliff:g id="COUNT_0">%d</xliff:g> នៃ <xliff:g id="COUNT_1">%d</xliff:g> បានអនុញ្ញាតការចូលប្រើបន្ថែម"</string>
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"បានអនុញ្ញាតកម្មវិធី <xliff:g id="COUNT_0">%d</xliff:g> នៃ <xliff:g id="COUNT_1">%d</xliff:g>"</string>
@@ -2882,20 +2883,12 @@
   </string-array>
     <string name="picture_color_mode" msgid="4560755008730283695">"របៀបនៃពណ៌រូបភាព"</string>
     <string name="picture_color_mode_desc" msgid="1141891467675548590">"ប្រើ sRGB"</string>
-    <!-- no translation found for force_density_preference_title (7269059903952009908) -->
-    <skip />
-    <!-- no translation found for force_density_keywords (3810424110118041972) -->
-    <skip />
-    <!-- no translation found for force_density_summary_small (5481649550774706354) -->
-    <skip />
-    <!-- no translation found for force_density_summary_normal (4706658853225294667) -->
-    <skip />
-    <!-- no translation found for force_density_summary_large (4636190645503741863) -->
-    <skip />
-    <!-- no translation found for force_density_summary_very_large (8328063057394895318) -->
-    <skip />
-    <!-- no translation found for force_density_summary_extremely_large (846919277362198243) -->
-    <skip />
-    <!-- no translation found for force_density_summary_custom (6663681104268192485) -->
-    <skip />
+    <string name="force_density_preference_title" msgid="7269059903952009908">"មាត្រដ្ឋានអេក្រង់"</string>
+    <string name="force_density_keywords" msgid="3810424110118041972">"ការកំណត់មាត្រដ្ឋានពង្រីកដង់ស៊ីតេអេក្រង់"</string>
+    <string name="force_density_summary_small" msgid="5481649550774706354">"តូច"</string>
+    <string name="force_density_summary_normal" msgid="4706658853225294667">"ធម្មតា"</string>
+    <string name="force_density_summary_large" msgid="4636190645503741863">"ធំ"</string>
+    <string name="force_density_summary_very_large" msgid="8328063057394895318">"ធំជាង"</string>
+    <string name="force_density_summary_extremely_large" msgid="846919277362198243">"ធំបំផុត"</string>
+    <string name="force_density_summary_custom" msgid="6663681104268192485">"ផ្ទាល់ខ្លួន (<xliff:g id="DENSITYDPI">%d</xliff:g>)"</string>
 </resources>

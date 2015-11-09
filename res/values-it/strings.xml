@@ -811,8 +811,6 @@
     <string name="dock_sounds_enable_summary_off" product="tablet" msgid="4308252722466813560">"Non riprodurre suono all\'inserimento o alla rimozione del tablet dal dock"</string>
     <string name="dock_sounds_enable_summary_off" product="default" msgid="2034927992716667672">"Non riprodurre suono all\'inserimento o alla rimozione del telefono dal dock"</string>
     <string name="account_settings" msgid="6403589284618783461">"Account"</string>
-    <string name="category_personal" msgid="1299663247844969448">"Personali"</string>
-    <string name="category_work" msgid="8699184680584175622">"Lavoro"</string>
     <string name="accessibility_category_work" msgid="4339262969083355720">"Account di profili di lavoro - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_category_personal" msgid="1263518850905945594">"Account di profili personali"</string>
     <string name="accessibility_work_account_title" msgid="1231830766637939527">"Account di lavoro - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
@@ -835,6 +833,11 @@
     <string name="night_mode_no" msgid="9171772244775838901">"Disattivato"</string>
     <string name="night_mode_yes" msgid="2218157265997633432">"Sempre attivo"</string>
     <string name="night_mode_auto" msgid="7508348175804304327">"Automatico"</string>
+    <string name="convert_to_file_encryption" msgid="3060156730651061223">"Converti in crittografia basata su file"</string>
+    <string name="convert_to_file_encryption_enabled" msgid="4342629236458204730">"Converti..."</string>
+    <string name="convert_to_file_encryption_done" msgid="7859766358000523953">"Crittografia su base file già eseguita"</string>
+    <string name="convert_to_fbe_warning" msgid="6406541045331190366">"Converti la partizione di dati in crittografia basata su file.\n Attenzione. Questa operazione eliminerà tutti i tuoi dati.\n Questa funzione è in versione alpha, perciò potrebbe non funzionare correttamente.\n Premi \"Cancella e converti...\" per continuare."</string>
+    <string name="button_convert_fbe" msgid="8142438555983531496">"Cancella e converti..."</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Sospensione"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Lo schermo si spegne"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Dopo <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> di inattività"</string>
@@ -2640,7 +2643,6 @@
     <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"Richiedi il PIN per lo sblocco"</string>
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"Richiedi password prima di sbloccare"</string>
     <string name="screen_pinning_unlock_none" msgid="3814188275713871856">"Blocca dispositivo per sblocco"</string>
-    <string name="managed_user_title" msgid="8101244883654409696">"Profilo di lavoro"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2232461523882170874">"Questo profilo di lavoro è gestito da:"</string>
     <string name="managing_admin" msgid="8843802210377459055">"Gestito da <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(Sperimentale)"</string>
@@ -2725,7 +2727,6 @@
     <string name="advanced_apps" msgid="4812975097124803873">"Avanzate"</string>
     <string name="configure_apps" msgid="6685680790825882528">"Configura app"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Applicazione sconosciuta"</string>
-    <string name="choose_profile" msgid="8229363046053568878">"Scegli profilo"</string>
     <string name="app_permissions" msgid="4148222031991883874">"Autorizzazioni app"</string>
     <string name="app_permissions_summary" msgid="2098173899436407221">"A <xliff:g id="COUNT_0">%d</xliff:g> app su <xliff:g id="COUNT_1">%d</xliff:g> è stato autorizzato un ulteriore accesso"</string>
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"Sono consentite <xliff:g id="COUNT_0">%d</xliff:g> app su <xliff:g id="COUNT_1">%d</xliff:g>"</string>
@@ -2882,20 +2883,12 @@
   </string-array>
     <string name="picture_color_mode" msgid="4560755008730283695">"Modalità colori immagini"</string>
     <string name="picture_color_mode_desc" msgid="1141891467675548590">"Use sRGB"</string>
-    <!-- no translation found for force_density_preference_title (7269059903952009908) -->
-    <skip />
-    <!-- no translation found for force_density_keywords (3810424110118041972) -->
-    <skip />
-    <!-- no translation found for force_density_summary_small (5481649550774706354) -->
-    <skip />
-    <!-- no translation found for force_density_summary_normal (4706658853225294667) -->
-    <skip />
-    <!-- no translation found for force_density_summary_large (4636190645503741863) -->
-    <skip />
-    <!-- no translation found for force_density_summary_very_large (8328063057394895318) -->
-    <skip />
-    <!-- no translation found for force_density_summary_extremely_large (846919277362198243) -->
-    <skip />
-    <!-- no translation found for force_density_summary_custom (6663681104268192485) -->
-    <skip />
+    <string name="force_density_preference_title" msgid="7269059903952009908">"Scala display"</string>
+    <string name="force_density_keywords" msgid="3810424110118041972">"compattezza zoom scala ridimensionamento"</string>
+    <string name="force_density_summary_small" msgid="5481649550774706354">"Piccola"</string>
+    <string name="force_density_summary_normal" msgid="4706658853225294667">"Normale"</string>
+    <string name="force_density_summary_large" msgid="4636190645503741863">"Grande"</string>
+    <string name="force_density_summary_very_large" msgid="8328063057394895318">"Più grande"</string>
+    <string name="force_density_summary_extremely_large" msgid="846919277362198243">"Massima"</string>
+    <string name="force_density_summary_custom" msgid="6663681104268192485">"Personalizzata (<xliff:g id="DENSITYDPI">%d</xliff:g>)"</string>
 </resources>

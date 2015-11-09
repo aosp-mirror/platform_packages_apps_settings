@@ -811,8 +811,6 @@
     <string name="dock_sounds_enable_summary_off" product="tablet" msgid="4308252722466813560">"Не пуштај звук кога се вметнува или отстранува таблетот од полначот"</string>
     <string name="dock_sounds_enable_summary_off" product="default" msgid="2034927992716667672">"Не пуштај звук кога се вметнува или отстранува телефонот од полначот"</string>
     <string name="account_settings" msgid="6403589284618783461">"Кориснички сметки"</string>
-    <string name="category_personal" msgid="1299663247844969448">"Лични"</string>
-    <string name="category_work" msgid="8699184680584175622">"Работа"</string>
     <string name="accessibility_category_work" msgid="4339262969083355720">"Сметки со работен профил - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_category_personal" msgid="1263518850905945594">"Сметки со личен профил"</string>
     <string name="accessibility_work_account_title" msgid="1231830766637939527">"Работна сметка - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
@@ -835,6 +833,11 @@
     <string name="night_mode_no" msgid="9171772244775838901">"Оневозможено"</string>
     <string name="night_mode_yes" msgid="2218157265997633432">"Секогаш вклучено"</string>
     <string name="night_mode_auto" msgid="7508348175804304327">"Автоматски"</string>
+    <string name="convert_to_file_encryption" msgid="3060156730651061223">"Конвертирајте до шифрирање датотеки"</string>
+    <string name="convert_to_file_encryption_enabled" msgid="4342629236458204730">"Конвертирај..."</string>
+    <string name="convert_to_file_encryption_done" msgid="7859766358000523953">"Датотеката е веќе шифрирана"</string>
+    <string name="convert_to_fbe_warning" msgid="6406541045331190366">"Конвертирајте ја партицијата со податоци до шифрирање на база на датотеки.\n !!Предупредување!! Тоа ќе ги избрише сите податоци.\n Функцијава е алфа и може да не работи правилно.\n Притиснете „Избриши и конвертирај... за да продолжите."</string>
+    <string name="button_convert_fbe" msgid="8142438555983531496">"Избриши и конвертирај..."</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Режим на штедење"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Екранот се исклучува"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"По <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> на неактивност"</string>
@@ -2640,7 +2643,6 @@
     <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"Прашај за ПИН пред откачување"</string>
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"Прашај за лозинка пред откачување"</string>
     <string name="screen_pinning_unlock_none" msgid="3814188275713871856">"Заклучи го уредот при откачување"</string>
-    <string name="managed_user_title" msgid="8101244883654409696">"Работен профил"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2232461523882170874">"Овој работен профил е управуван од:"</string>
     <string name="managing_admin" msgid="8843802210377459055">"Управувано од <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(Експериментално)"</string>
@@ -2725,7 +2727,6 @@
     <string name="advanced_apps" msgid="4812975097124803873">"Напредни"</string>
     <string name="configure_apps" msgid="6685680790825882528">"Конфигурирање апликации"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Непозната апликација"</string>
-    <string name="choose_profile" msgid="8229363046053568878">"Изберете профил"</string>
     <string name="app_permissions" msgid="4148222031991883874">"Дозволи за апликацијата"</string>
     <string name="app_permissions_summary" msgid="2098173899436407221">"Дозволен е дополнителен пристап на <xliff:g id="COUNT_0">%d</xliff:g> од <xliff:g id="COUNT_1">%d</xliff:g> апликации"</string>
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"Дозволени се <xliff:g id="COUNT_0">%d</xliff:g> од <xliff:g id="COUNT_1">%d</xliff:g> апликации"</string>
@@ -2882,20 +2883,12 @@
   </string-array>
     <string name="picture_color_mode" msgid="4560755008730283695">"Режим на боја на слика"</string>
     <string name="picture_color_mode_desc" msgid="1141891467675548590">"Користи sRGB"</string>
-    <!-- no translation found for force_density_preference_title (7269059903952009908) -->
-    <skip />
-    <!-- no translation found for force_density_keywords (3810424110118041972) -->
-    <skip />
-    <!-- no translation found for force_density_summary_small (5481649550774706354) -->
-    <skip />
-    <!-- no translation found for force_density_summary_normal (4706658853225294667) -->
-    <skip />
-    <!-- no translation found for force_density_summary_large (4636190645503741863) -->
-    <skip />
-    <!-- no translation found for force_density_summary_very_large (8328063057394895318) -->
-    <skip />
-    <!-- no translation found for force_density_summary_extremely_large (846919277362198243) -->
-    <skip />
-    <!-- no translation found for force_density_summary_custom (6663681104268192485) -->
-    <skip />
+    <string name="force_density_preference_title" msgid="7269059903952009908">"Приказ на скала"</string>
+    <string name="force_density_keywords" msgid="3810424110118041972">"прикажи го степенувањето на скалата за зумирање на густината"</string>
+    <string name="force_density_summary_small" msgid="5481649550774706354">"Мала"</string>
+    <string name="force_density_summary_normal" msgid="4706658853225294667">"Нормална"</string>
+    <string name="force_density_summary_large" msgid="4636190645503741863">"Голема"</string>
+    <string name="force_density_summary_very_large" msgid="8328063057394895318">"Поголема"</string>
+    <string name="force_density_summary_extremely_large" msgid="846919277362198243">"Најголема"</string>
+    <string name="force_density_summary_custom" msgid="6663681104268192485">"Приспособено (<xliff:g id="DENSITYDPI">%d</xliff:g>)"</string>
 </resources>

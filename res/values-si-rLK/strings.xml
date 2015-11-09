@@ -811,8 +811,6 @@
     <string name="dock_sounds_enable_summary_off" product="tablet" msgid="4308252722466813560">"ටැබ්ලටය රඳවනයට දමන විට එයින් ඉවත් කරන විට ශබ්දයක් ඇති නොකරන්න"</string>
     <string name="dock_sounds_enable_summary_off" product="default" msgid="2034927992716667672">"දුරකථනය රඳවනය වෙතින් ඉවත් කරන විට ඊට හෝ ඇතුලත් කරන විට ශබ්දයක් ඇති නොකරන්න"</string>
     <string name="account_settings" msgid="6403589284618783461">"ගිණුම්"</string>
-    <string name="category_personal" msgid="1299663247844969448">"පෞද්ගලික"</string>
-    <string name="category_work" msgid="8699184680584175622">"කාර්යාලය"</string>
     <string name="accessibility_category_work" msgid="4339262969083355720">"කාර්යාල පැතිකඩ ගිණුම් - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_category_personal" msgid="1263518850905945594">"පුද්ගලික පැතිකඩ ගිණුම්"</string>
     <string name="accessibility_work_account_title" msgid="1231830766637939527">"කාර්යාල ගිණුම - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
@@ -835,6 +833,11 @@
     <string name="night_mode_no" msgid="9171772244775838901">"අබලයි"</string>
     <string name="night_mode_yes" msgid="2218157265997633432">"සැමවිට ක්‍රියාත්මක"</string>
     <string name="night_mode_auto" msgid="7508348175804304327">"ස්වයංක්‍රීය"</string>
+    <string name="convert_to_file_encryption" msgid="3060156730651061223">"ගොනු සංකේතනයට පරිවර්තනය කරන්න"</string>
+    <string name="convert_to_file_encryption_enabled" msgid="4342629236458204730">"පරිවර්තනය කරන්න ..."</string>
+    <string name="convert_to_file_encryption_done" msgid="7859766358000523953">"දැනටමත් ගොනුව සංකේතනය කර ඇත"</string>
+    <string name="convert_to_fbe_warning" msgid="6406541045331190366">"දත්ත වෙන් කිරීම ගොනු පදනම් සංකේතනයට පරිවර්තනය කරන්න.\n !!අනතුරු ඇඟවීමයි!! මෙය ඔබේ සියලු දත්ත මකනු ඇත.\n මෙම විශේෂාංගය ඇල්ෆා වන අතර, නිවැරදිව ක්‍රියා නොකළ හැකිය.\n දිගටම කරගෙන යාමට \'මකා පරිවර්තනය කරන්න...\' ඔබන්න."</string>
+    <string name="button_convert_fbe" msgid="8142438555983531496">"මකා පරිවර්තනය කරන්න..."</string>
     <string name="screen_timeout" msgid="4351334843529712571">"නිද්‍රාව"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"තිරය අක්‍රිය කරන්න"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"අක්‍රියතාවයෙන් <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> පසු"</string>
@@ -2642,7 +2645,6 @@
     <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"ගැලවීමට පෙර PIN විමසන්න"</string>
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"ගැලවීමට පෙර මුරපදය විමසන්න"</string>
     <string name="screen_pinning_unlock_none" msgid="3814188275713871856">"ගැලවීමට උපාංගය අගුළු දමා ඇත"</string>
-    <string name="managed_user_title" msgid="8101244883654409696">"කාර්යාල පැතිකඩ"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2232461523882170874">"මෙම කාර්යාල පැතිකඩ කළමනාකරණය කරන්නේ:"</string>
     <string name="managing_admin" msgid="8843802210377459055">"<xliff:g id="ADMIN_APP_LABEL">%s</xliff:g> විසින් කළමනාකරණය කරන ලදී"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(පරීක්ෂණාත්මක)"</string>
@@ -2727,7 +2729,6 @@
     <string name="advanced_apps" msgid="4812975097124803873">"උසස්"</string>
     <string name="configure_apps" msgid="6685680790825882528">"යෙදුම් වින්‍යාස කරන්න"</string>
     <string name="unknown_app" msgid="5275921288718717656">"නොදන්නා යෙදුම"</string>
-    <string name="choose_profile" msgid="8229363046053568878">"පැතිකඩ තෝරන්න"</string>
     <string name="app_permissions" msgid="4148222031991883874">"යෙදුම් අවසර"</string>
     <string name="app_permissions_summary" msgid="2098173899436407221">"යෙදුම් <xliff:g id="COUNT_1">%d</xliff:g> කින් <xliff:g id="COUNT_0">%d</xliff:g> කට අමතර ප්‍රවේශය ඉඩ දෙන ලදී"</string>
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"යෙදුම් <xliff:g id="COUNT_1">%d</xliff:g> න් <xliff:g id="COUNT_0">%d</xliff:g> කට ඉඩ දෙන ලදී"</string>
@@ -2884,20 +2885,12 @@
   </string-array>
     <string name="picture_color_mode" msgid="4560755008730283695">"පින්තූර වර්ණ ප්‍රකාරය"</string>
     <string name="picture_color_mode_desc" msgid="1141891467675548590">"sRGB භාවිතා කරන්න"</string>
-    <!-- no translation found for force_density_preference_title (7269059903952009908) -->
-    <skip />
-    <!-- no translation found for force_density_keywords (3810424110118041972) -->
-    <skip />
-    <!-- no translation found for force_density_summary_small (5481649550774706354) -->
-    <skip />
-    <!-- no translation found for force_density_summary_normal (4706658853225294667) -->
-    <skip />
-    <!-- no translation found for force_density_summary_large (4636190645503741863) -->
-    <skip />
-    <!-- no translation found for force_density_summary_very_large (8328063057394895318) -->
-    <skip />
-    <!-- no translation found for force_density_summary_extremely_large (846919277362198243) -->
-    <skip />
-    <!-- no translation found for force_density_summary_custom (6663681104268192485) -->
-    <skip />
+    <string name="force_density_preference_title" msgid="7269059903952009908">"සංදර්ශන පරිමාණය"</string>
+    <string name="force_density_keywords" msgid="3810424110118041972">"සංදර්ශන ඝනත්ව විශාලන පරිමාණය පරිමාණ කිරීම"</string>
+    <string name="force_density_summary_small" msgid="5481649550774706354">"කුඩා"</string>
+    <string name="force_density_summary_normal" msgid="4706658853225294667">"සාමාන්‍ය"</string>
+    <string name="force_density_summary_large" msgid="4636190645503741863">"විශාල"</string>
+    <string name="force_density_summary_very_large" msgid="8328063057394895318">"වඩා විශාල"</string>
+    <string name="force_density_summary_extremely_large" msgid="846919277362198243">"විශාලතම"</string>
+    <string name="force_density_summary_custom" msgid="6663681104268192485">"අභිරුචි (<xliff:g id="DENSITYDPI">%d</xliff:g>)"</string>
 </resources>

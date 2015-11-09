@@ -811,8 +811,6 @@
     <string name="dock_sounds_enable_summary_off" product="tablet" msgid="4308252722466813560">"Älä toista ääntä, kun tabletti asetetaan telakkaan tai poistetaan telakasta"</string>
     <string name="dock_sounds_enable_summary_off" product="default" msgid="2034927992716667672">"Älä toista ääntä, kun puhelinta liitetään telakkaan tai irrotetaan telakasta"</string>
     <string name="account_settings" msgid="6403589284618783461">"Tilit"</string>
-    <string name="category_personal" msgid="1299663247844969448">"Henkilökohtainen"</string>
-    <string name="category_work" msgid="8699184680584175622">"Työ"</string>
     <string name="accessibility_category_work" msgid="4339262969083355720">"Työprofiilit – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_category_personal" msgid="1263518850905945594">"Henkilökohtaiset profiilit"</string>
     <string name="accessibility_work_account_title" msgid="1231830766637939527">"Työtili – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
@@ -835,6 +833,11 @@
     <string name="night_mode_no" msgid="9171772244775838901">"Ei käytössä"</string>
     <string name="night_mode_yes" msgid="2218157265997633432">"Aina käytössä"</string>
     <string name="night_mode_auto" msgid="7508348175804304327">"Automaattinen"</string>
+    <string name="convert_to_file_encryption" msgid="3060156730651061223">"Muunna tiedostojen salaukseksi"</string>
+    <string name="convert_to_file_encryption_enabled" msgid="4342629236458204730">"Muunna…"</string>
+    <string name="convert_to_file_encryption_done" msgid="7859766358000523953">"Tiedostot on jo salattu."</string>
+    <string name="convert_to_fbe_warning" msgid="6406541045331190366">"Muunna dataosio tiedostopohjaiseksi salaukseksi.\n Varoitus! Kaikki tiedot poistetaan.\n Tämä ominaisuus on alfavaiheessa eikä välttämättä toimi oikein.\n Jatka painamalla Poista ja muunna…"</string>
+    <string name="button_convert_fbe" msgid="8142438555983531496">"Poista ja muunna…"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Siirtyminen virransäästöön"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Näyttö sammuu"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Laitteen oltua käyttämättä: <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
@@ -2640,7 +2643,6 @@
     <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"Pyydä PIN ennen irrotusta"</string>
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"Pyydä salasana ennen irrotusta"</string>
     <string name="screen_pinning_unlock_none" msgid="3814188275713871856">"Lukitse laite irrotuksen aikana"</string>
-    <string name="managed_user_title" msgid="8101244883654409696">"Työprofiili"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2232461523882170874">"Tätä työprofiilia hallinnoi"</string>
     <string name="managing_admin" msgid="8843802210377459055">"Hallinnoija: <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(Kokeellinen)"</string>
@@ -2725,7 +2727,6 @@
     <string name="advanced_apps" msgid="4812975097124803873">"Lisäasetukset"</string>
     <string name="configure_apps" msgid="6685680790825882528">"Sovellusten konfigurointi"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Tuntematon sovellus"</string>
-    <string name="choose_profile" msgid="8229363046053568878">"Valitse profiili"</string>
     <string name="app_permissions" msgid="4148222031991883874">"Sovelluksen käyttöoikeudet"</string>
     <string name="app_permissions_summary" msgid="2098173899436407221">"<xliff:g id="COUNT_0">%d</xliff:g>/<xliff:g id="COUNT_1">%d</xliff:g> sovelluksella on ylimääräinen käyttöoikeus"</string>
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"<xliff:g id="COUNT_0">%d</xliff:g>/<xliff:g id="COUNT_1">%d</xliff:g> sovelluksella käyttöoikeus"</string>
@@ -2882,20 +2883,12 @@
   </string-array>
     <string name="picture_color_mode" msgid="4560755008730283695">"Kuvien värit"</string>
     <string name="picture_color_mode_desc" msgid="1141891467675548590">"Ota sRGB käyttöön"</string>
-    <!-- no translation found for force_density_preference_title (7269059903952009908) -->
-    <skip />
-    <!-- no translation found for force_density_keywords (3810424110118041972) -->
-    <skip />
-    <!-- no translation found for force_density_summary_small (5481649550774706354) -->
-    <skip />
-    <!-- no translation found for force_density_summary_normal (4706658853225294667) -->
-    <skip />
-    <!-- no translation found for force_density_summary_large (4636190645503741863) -->
-    <skip />
-    <!-- no translation found for force_density_summary_very_large (8328063057394895318) -->
-    <skip />
-    <!-- no translation found for force_density_summary_extremely_large (846919277362198243) -->
-    <skip />
-    <!-- no translation found for force_density_summary_custom (6663681104268192485) -->
-    <skip />
+    <string name="force_density_preference_title" msgid="7269059903952009908">"Näytön skaalaus"</string>
+    <string name="force_density_keywords" msgid="3810424110118041972">"näytön tiheys zoomaus skaala skaalaus"</string>
+    <string name="force_density_summary_small" msgid="5481649550774706354">"Pieni"</string>
+    <string name="force_density_summary_normal" msgid="4706658853225294667">"Normaali"</string>
+    <string name="force_density_summary_large" msgid="4636190645503741863">"Suuri"</string>
+    <string name="force_density_summary_very_large" msgid="8328063057394895318">"Suurempi"</string>
+    <string name="force_density_summary_extremely_large" msgid="846919277362198243">"Suurin"</string>
+    <string name="force_density_summary_custom" msgid="6663681104268192485">"Muokattu (<xliff:g id="DENSITYDPI">%d</xliff:g>)"</string>
 </resources>

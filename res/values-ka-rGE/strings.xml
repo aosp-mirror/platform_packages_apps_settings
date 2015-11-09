@@ -811,8 +811,6 @@
     <string name="dock_sounds_enable_summary_off" product="tablet" msgid="4308252722466813560">"ტაბლეტის სამაგრში დაყენებისას ან მისი სამაგრიდან ამოღებისას არ განხორციელდეს ხმის დაკვრა"</string>
     <string name="dock_sounds_enable_summary_off" product="default" msgid="2034927992716667672">"ტელეფონის დაყენებისას ან ამოღებისას არ განხორციელდეს ხმის დაკვრა"</string>
     <string name="account_settings" msgid="6403589284618783461">"ანგარიშები"</string>
-    <string name="category_personal" msgid="1299663247844969448">"პირადი"</string>
-    <string name="category_work" msgid="8699184680584175622">"სამსახური"</string>
     <string name="accessibility_category_work" msgid="4339262969083355720">"სამუშაო პროფილის ანგარიშები - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_category_personal" msgid="1263518850905945594">"პირადი პროფილის ანგარიშები"</string>
     <string name="accessibility_work_account_title" msgid="1231830766637939527">"სამუშაო ანგარიში - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
@@ -835,6 +833,11 @@
     <string name="night_mode_no" msgid="9171772244775838901">"გამორთულია"</string>
     <string name="night_mode_yes" msgid="2218157265997633432">"ყოველთვის ჩართული"</string>
     <string name="night_mode_auto" msgid="7508348175804304327">"ავტომატური"</string>
+    <string name="convert_to_file_encryption" msgid="3060156730651061223">"ფაილების დაშიფვრაზე გარდაქმნა"</string>
+    <string name="convert_to_file_encryption_enabled" msgid="4342629236458204730">"გარდაქმნა ..."</string>
+    <string name="convert_to_file_encryption_done" msgid="7859766358000523953">"უკვე დაშიფრულია ფაილების დონეზე"</string>
+    <string name="convert_to_fbe_warning" msgid="6406541045331190366">"მონაცემთა დანაყოფის გარდაქმნა ფაილების დონეზე დაშიფვრაზე.\n ყურადღება!!! ეს მოქმედება ყველა თქვენს მონაცემს ამოშლის.\n ეს ფუნქცია alpha სტადიაშია და შეიძლება არასწორად მუშაობდეს.\n გასაგრძელებლად დააჭირეთ „ამოშლა და გარდაქმნა...“-ს."</string>
+    <string name="button_convert_fbe" msgid="8142438555983531496">"ამოშლა და გარდაქმნა..."</string>
     <string name="screen_timeout" msgid="4351334843529712571">"ძილი"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"ეკრანი გამოირთვება"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> განმავლობაში უმოქმედობის შემდეგ"</string>
@@ -2640,7 +2643,6 @@
     <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"ფიქსაციის მოხსნამდე PIN-ის მოთხოვნა"</string>
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"ფიქსაციის მოხსნამდე პაროლის მოთხოვნა"</string>
     <string name="screen_pinning_unlock_none" msgid="3814188275713871856">"ჩამაგრების მოხსნიდან მოწყობილობის ჩაკეტვა"</string>
-    <string name="managed_user_title" msgid="8101244883654409696">"სამუშაო პროფილი"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2232461523882170874">"ამ სამუშაო პროფილს მართავს:"</string>
     <string name="managing_admin" msgid="8843802210377459055">"მმართველი: <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(ექსპერიმენტული)"</string>
@@ -2725,7 +2727,6 @@
     <string name="advanced_apps" msgid="4812975097124803873">"გაფართოებული"</string>
     <string name="configure_apps" msgid="6685680790825882528">"აპების კონფიგურაცია"</string>
     <string name="unknown_app" msgid="5275921288718717656">"უცნობი აპი"</string>
-    <string name="choose_profile" msgid="8229363046053568878">"პროფილის არჩევა"</string>
     <string name="app_permissions" msgid="4148222031991883874">"აპის უფლებები"</string>
     <string name="app_permissions_summary" msgid="2098173899436407221">"<xliff:g id="COUNT_1">%d</xliff:g>-დან <xliff:g id="COUNT_0">%d</xliff:g> აპლიკაციის დამატებითი წვდომის უფლება"</string>
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"<xliff:g id="COUNT_1">%d</xliff:g>-დან <xliff:g id="COUNT_0">%d</xliff:g> დაშვებული აპლიკაცია"</string>
@@ -2882,20 +2883,12 @@
   </string-array>
     <string name="picture_color_mode" msgid="4560755008730283695">"გამოსახულების ფერების რეჟიმი"</string>
     <string name="picture_color_mode_desc" msgid="1141891467675548590">"sRGB-ს გამოყენება"</string>
-    <!-- no translation found for force_density_preference_title (7269059903952009908) -->
-    <skip />
-    <!-- no translation found for force_density_keywords (3810424110118041972) -->
-    <skip />
-    <!-- no translation found for force_density_summary_small (5481649550774706354) -->
-    <skip />
-    <!-- no translation found for force_density_summary_normal (4706658853225294667) -->
-    <skip />
-    <!-- no translation found for force_density_summary_large (4636190645503741863) -->
-    <skip />
-    <!-- no translation found for force_density_summary_very_large (8328063057394895318) -->
-    <skip />
-    <!-- no translation found for force_density_summary_extremely_large (846919277362198243) -->
-    <skip />
-    <!-- no translation found for force_density_summary_custom (6663681104268192485) -->
-    <skip />
+    <string name="force_density_preference_title" msgid="7269059903952009908">"სკალის ჩვენება"</string>
+    <string name="force_density_keywords" msgid="3810424110118041972">"ჩვენება სიმკვრივე მასშტაბირება სკალა სკალირება"</string>
+    <string name="force_density_summary_small" msgid="5481649550774706354">"პატარა"</string>
+    <string name="force_density_summary_normal" msgid="4706658853225294667">"ჩვეულებრივი"</string>
+    <string name="force_density_summary_large" msgid="4636190645503741863">"დიდი"</string>
+    <string name="force_density_summary_very_large" msgid="8328063057394895318">"უფრო დიდი"</string>
+    <string name="force_density_summary_extremely_large" msgid="846919277362198243">"უდიდესი"</string>
+    <string name="force_density_summary_custom" msgid="6663681104268192485">"მორგებული (<xliff:g id="DENSITYDPI">%d</xliff:g>)"</string>
 </resources>

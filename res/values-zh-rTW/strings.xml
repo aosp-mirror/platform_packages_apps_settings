@@ -811,8 +811,6 @@
     <string name="dock_sounds_enable_summary_off" product="tablet" msgid="4308252722466813560">"將平板電腦置入座架或移出座架時，不要播放音效"</string>
     <string name="dock_sounds_enable_summary_off" product="default" msgid="2034927992716667672">"手機插入底座或離開底座時，不要播放音效"</string>
     <string name="account_settings" msgid="6403589284618783461">"帳戶"</string>
-    <string name="category_personal" msgid="1299663247844969448">"個人"</string>
-    <string name="category_work" msgid="8699184680584175622">"公司"</string>
     <string name="accessibility_category_work" msgid="4339262969083355720">"Work 設定檔帳戶 - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_category_personal" msgid="1263518850905945594">"個人設定檔帳戶"</string>
     <string name="accessibility_work_account_title" msgid="1231830766637939527">"Work 帳戶 - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
@@ -835,6 +833,11 @@
     <string name="night_mode_no" msgid="9171772244775838901">"已停用"</string>
     <string name="night_mode_yes" msgid="2218157265997633432">"一律開啟"</string>
     <string name="night_mode_auto" msgid="7508348175804304327">"自動"</string>
+    <string name="convert_to_file_encryption" msgid="3060156730651061223">"轉換成檔案加密"</string>
+    <string name="convert_to_file_encryption_enabled" msgid="4342629236458204730">"轉換..."</string>
+    <string name="convert_to_file_encryption_done" msgid="7859766358000523953">"已將檔案加密"</string>
+    <string name="convert_to_fbe_warning" msgid="6406541045331190366">"將資料分割轉換成檔案式加密。\n警告！這項操作將清除您的所有資料。\n這是 Alpha 版功能，可能無法正常運作。\n按下 [清除並轉換...] 即可繼續。"</string>
+    <string name="button_convert_fbe" msgid="8142438555983531496">"清除並轉換..."</string>
     <string name="screen_timeout" msgid="4351334843529712571">"休眠"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"螢幕關閉時"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"閒置 <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>後"</string>
@@ -2644,7 +2647,6 @@
     <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"取消固定時必須輸入 PIN"</string>
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"取消固定時必須輸入密碼"</string>
     <string name="screen_pinning_unlock_none" msgid="3814188275713871856">"取消固定時鎖定裝置"</string>
-    <string name="managed_user_title" msgid="8101244883654409696">"工作設定檔"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2232461523882170874">"這個 Work 設定檔是由下列應用程式管理："</string>
     <string name="managing_admin" msgid="8843802210377459055">"由 <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g> 管理"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(實驗性)"</string>
@@ -2729,7 +2731,6 @@
     <string name="advanced_apps" msgid="4812975097124803873">"進階"</string>
     <string name="configure_apps" msgid="6685680790825882528">"設定應用程式"</string>
     <string name="unknown_app" msgid="5275921288718717656">"不明的應用程式"</string>
-    <string name="choose_profile" msgid="8229363046053568878">"選擇設定檔"</string>
     <string name="app_permissions" msgid="4148222031991883874">"應用程式權限"</string>
     <string name="app_permissions_summary" msgid="2098173899436407221">"已將額外存取權授予 <xliff:g id="COUNT_0">%d</xliff:g> 個應用程式 (共 <xliff:g id="COUNT_1">%d</xliff:g> 個)"</string>
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"已授權 <xliff:g id="COUNT_0">%d</xliff:g> 個應用程式 (共 <xliff:g id="COUNT_1">%d</xliff:g> 個)"</string>
@@ -2886,20 +2887,12 @@
   </string-array>
     <string name="picture_color_mode" msgid="4560755008730283695">"螢幕色彩模式"</string>
     <string name="picture_color_mode_desc" msgid="1141891467675548590">"使用 sRGB"</string>
-    <!-- no translation found for force_density_preference_title (7269059903952009908) -->
-    <skip />
-    <!-- no translation found for force_density_keywords (3810424110118041972) -->
-    <skip />
-    <!-- no translation found for force_density_summary_small (5481649550774706354) -->
-    <skip />
-    <!-- no translation found for force_density_summary_normal (4706658853225294667) -->
-    <skip />
-    <!-- no translation found for force_density_summary_large (4636190645503741863) -->
-    <skip />
-    <!-- no translation found for force_density_summary_very_large (8328063057394895318) -->
-    <skip />
-    <!-- no translation found for force_density_summary_extremely_large (846919277362198243) -->
-    <skip />
-    <!-- no translation found for force_density_summary_custom (6663681104268192485) -->
-    <skip />
+    <string name="force_density_preference_title" msgid="7269059903952009908">"顯示比例"</string>
+    <string name="force_density_keywords" msgid="3810424110118041972">"顯示 密度 縮放 比例 調整比例"</string>
+    <string name="force_density_summary_small" msgid="5481649550774706354">"小"</string>
+    <string name="force_density_summary_normal" msgid="4706658853225294667">"適中"</string>
+    <string name="force_density_summary_large" msgid="4636190645503741863">"大"</string>
+    <string name="force_density_summary_very_large" msgid="8328063057394895318">"較大"</string>
+    <string name="force_density_summary_extremely_large" msgid="846919277362198243">"最大"</string>
+    <string name="force_density_summary_custom" msgid="6663681104268192485">"自訂 (<xliff:g id="DENSITYDPI">%d</xliff:g>)"</string>
 </resources>

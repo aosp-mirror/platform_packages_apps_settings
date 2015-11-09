@@ -843,8 +843,6 @@
     <string name="dock_sounds_enable_summary_off" product="tablet" msgid="4308252722466813560">"عدم تشغيل صوت أثناء إدراج الجهاز اللوحي أو إزالته من المرسى"</string>
     <string name="dock_sounds_enable_summary_off" product="default" msgid="2034927992716667672">"عدم تشغيل صوت عند إدراج أو إزالة الهاتف من الإرساء"</string>
     <string name="account_settings" msgid="6403589284618783461">"الحسابات"</string>
-    <string name="category_personal" msgid="1299663247844969448">"شخصي"</string>
-    <string name="category_work" msgid="8699184680584175622">"العمل"</string>
     <string name="accessibility_category_work" msgid="4339262969083355720">"حسابات الملفات الشخصية للعمل - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_category_personal" msgid="1263518850905945594">"حسابات الملفات الشخصية"</string>
     <string name="accessibility_work_account_title" msgid="1231830766637939527">"حساب العمل - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
@@ -867,6 +865,11 @@
     <string name="night_mode_no" msgid="9171772244775838901">"معطَّل"</string>
     <string name="night_mode_yes" msgid="2218157265997633432">"التشغيل دائمًا"</string>
     <string name="night_mode_auto" msgid="7508348175804304327">"تلقائيًا"</string>
+    <string name="convert_to_file_encryption" msgid="3060156730651061223">"التحويل إلى تشفير ملفات"</string>
+    <string name="convert_to_file_encryption_enabled" msgid="4342629236458204730">"تحويل …"</string>
+    <string name="convert_to_file_encryption_done" msgid="7859766358000523953">"تم استخدام تشفير ملفات من قبل"</string>
+    <string name="convert_to_fbe_warning" msgid="6406541045331190366">"تحويل قسم البيانات إلى تشفير على الملف.\n !!تحذير!! سيؤدي هذا إلى محو جميع بياناتك.\n لا تزال هذه الميزة في مرحلة ألفا، وقد لا تعمل على نحو سليم.\n للمتابعة، اضغط على \"مسح وتحويل...\"."</string>
+    <string name="button_convert_fbe" msgid="8142438555983531496">"مسح وتحويل..."</string>
     <string name="screen_timeout" msgid="4351334843529712571">"السكون"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"إيقاف الشاشة"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"بعد <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> من عدم النشاط"</string>
@@ -2708,7 +2711,6 @@
     <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"مطالبة برقم تعريف قبل إزالة التثبيت"</string>
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"المطالبة بكلمة المرور قبل إزالة التثبيت"</string>
     <string name="screen_pinning_unlock_none" msgid="3814188275713871856">"قفل الجهاز عند إزالة التثبيت"</string>
-    <string name="managed_user_title" msgid="8101244883654409696">"الملف الشخصي للعمل"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2232461523882170874">"تتم إدارة الملف الشخصي للعمل هذا بواسطة:"</string>
     <string name="managing_admin" msgid="8843802210377459055">"يديرها <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(تجريبي)"</string>
@@ -2805,7 +2807,6 @@
     <string name="advanced_apps" msgid="4812975097124803873">"متقدمة"</string>
     <string name="configure_apps" msgid="6685680790825882528">"تهيئة التطبيقات"</string>
     <string name="unknown_app" msgid="5275921288718717656">"تطبيق غير معروف"</string>
-    <string name="choose_profile" msgid="8229363046053568878">"اختيار ملف شخصي"</string>
     <string name="app_permissions" msgid="4148222031991883874">"أذونات التطبيق"</string>
     <string name="app_permissions_summary" msgid="2098173899436407221">"تم السماح بدخول إضافي لعدد <xliff:g id="COUNT_0">%d</xliff:g> من إجمالي <xliff:g id="COUNT_1">%d</xliff:g> من التطبيقات"</string>
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"تم السماح لعدد <xliff:g id="COUNT_0">%d</xliff:g> من إجمالي <xliff:g id="COUNT_1">%d</xliff:g> من التطبيقات"</string>
@@ -2974,20 +2975,12 @@
   </string-array>
     <string name="picture_color_mode" msgid="4560755008730283695">"نمط لون الصورة"</string>
     <string name="picture_color_mode_desc" msgid="1141891467675548590">"‏استخدام sRGB"</string>
-    <!-- no translation found for force_density_preference_title (7269059903952009908) -->
-    <skip />
-    <!-- no translation found for force_density_keywords (3810424110118041972) -->
-    <skip />
-    <!-- no translation found for force_density_summary_small (5481649550774706354) -->
-    <skip />
-    <!-- no translation found for force_density_summary_normal (4706658853225294667) -->
-    <skip />
-    <!-- no translation found for force_density_summary_large (4636190645503741863) -->
-    <skip />
-    <!-- no translation found for force_density_summary_very_large (8328063057394895318) -->
-    <skip />
-    <!-- no translation found for force_density_summary_extremely_large (846919277362198243) -->
-    <skip />
-    <!-- no translation found for force_density_summary_custom (6663681104268192485) -->
-    <skip />
+    <string name="force_density_preference_title" msgid="7269059903952009908">"مقياس العرض"</string>
+    <string name="force_density_keywords" msgid="3810424110118041972">"ضبط مقياس تكبير كثافة العرض"</string>
+    <string name="force_density_summary_small" msgid="5481649550774706354">"صغير"</string>
+    <string name="force_density_summary_normal" msgid="4706658853225294667">"عادي"</string>
+    <string name="force_density_summary_large" msgid="4636190645503741863">"كبير"</string>
+    <string name="force_density_summary_very_large" msgid="8328063057394895318">"أكبر"</string>
+    <string name="force_density_summary_extremely_large" msgid="846919277362198243">"الأكبر"</string>
+    <string name="force_density_summary_custom" msgid="6663681104268192485">"مخصص (<xliff:g id="DENSITYDPI">%d</xliff:g>)"</string>
 </resources>

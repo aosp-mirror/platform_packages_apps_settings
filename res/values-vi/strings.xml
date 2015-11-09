@@ -811,8 +811,6 @@
     <string name="dock_sounds_enable_summary_off" product="tablet" msgid="4308252722466813560">"Không phát âm thanh khi lắp hoặc tháo máy tính bảng khỏi đế"</string>
     <string name="dock_sounds_enable_summary_off" product="default" msgid="2034927992716667672">"Không phát âm thanh khi lắp hoặc tháo điện thoại khỏi đế"</string>
     <string name="account_settings" msgid="6403589284618783461">"Tài khoản"</string>
-    <string name="category_personal" msgid="1299663247844969448">"Cá nhân"</string>
-    <string name="category_work" msgid="8699184680584175622">"Cơ quan"</string>
     <string name="accessibility_category_work" msgid="4339262969083355720">"Tài khoản hồ sơ công việc - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_category_personal" msgid="1263518850905945594">"Tài khoản hồ sơ cá nhân"</string>
     <string name="accessibility_work_account_title" msgid="1231830766637939527">"Tài khoản công việc - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
@@ -835,6 +833,11 @@
     <string name="night_mode_no" msgid="9171772244775838901">"Đã tắt"</string>
     <string name="night_mode_yes" msgid="2218157265997633432">"Luôn bật"</string>
     <string name="night_mode_auto" msgid="7508348175804304327">"Tự động"</string>
+    <string name="convert_to_file_encryption" msgid="3060156730651061223">"Chuyển đổi sang mã hóa tệp"</string>
+    <string name="convert_to_file_encryption_enabled" msgid="4342629236458204730">"Chuyển đổi ..."</string>
+    <string name="convert_to_file_encryption_done" msgid="7859766358000523953">"Đã mã hóa tệp"</string>
+    <string name="convert_to_fbe_warning" msgid="6406541045331190366">"Chuyển đổi phân vùng dữ liệu sang chế độ mã hóa dựa trên tệp.\n !!Cảnh báo!! Tính năng này sẽ xóa tất cả dữ liệu của bạn.\n Tính năng này là alpha và có thể không hoạt động đúng cách.\n Nhấn \'Xóa và chuyển đổi...\' để tiếp tục."</string>
+    <string name="button_convert_fbe" msgid="8142438555983531496">"Xóa và chuyển đổi..."</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Thời gian chờ"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Màn hình tắt"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Sau khi không hoạt động <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
@@ -2640,7 +2643,6 @@
     <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"Hỏi mã PIN trước khi bỏ ghim"</string>
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"Hỏi mật khẩu trước khi bỏ khóa màn hình"</string>
     <string name="screen_pinning_unlock_none" msgid="3814188275713871856">"Khóa thiết bị khi bỏ khóa màn hình"</string>
-    <string name="managed_user_title" msgid="8101244883654409696">"Hồ sơ công việc"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2232461523882170874">"Hồ sơ công việc này được quản lý bằng:"</string>
     <string name="managing_admin" msgid="8843802210377459055">"Quản lý bởi <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(Thử nghiệm)"</string>
@@ -2725,7 +2727,6 @@
     <string name="advanced_apps" msgid="4812975097124803873">"Nâng cao"</string>
     <string name="configure_apps" msgid="6685680790825882528">"Định cấu hình ứng dụng"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Ứng dụng không xác định"</string>
-    <string name="choose_profile" msgid="8229363046053568878">"Chọn hồ sơ"</string>
     <string name="app_permissions" msgid="4148222031991883874">"Giấy phép ứng dụng"</string>
     <string name="app_permissions_summary" msgid="2098173899436407221">"Đã cấp quyền truy cập bổ sung cho <xliff:g id="COUNT_0">%d</xliff:g> trong số <xliff:g id="COUNT_1">%d</xliff:g> ứng dụng"</string>
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"Đã cho phép <xliff:g id="COUNT_0">%d</xliff:g> trong số <xliff:g id="COUNT_1">%d</xliff:g> ứng dụng"</string>
@@ -2882,20 +2883,12 @@
   </string-array>
     <string name="picture_color_mode" msgid="4560755008730283695">"Chế độ màu của ảnh"</string>
     <string name="picture_color_mode_desc" msgid="1141891467675548590">"Sử dụng sRGB"</string>
-    <!-- no translation found for force_density_preference_title (7269059903952009908) -->
-    <skip />
-    <!-- no translation found for force_density_keywords (3810424110118041972) -->
-    <skip />
-    <!-- no translation found for force_density_summary_small (5481649550774706354) -->
-    <skip />
-    <!-- no translation found for force_density_summary_normal (4706658853225294667) -->
-    <skip />
-    <!-- no translation found for force_density_summary_large (4636190645503741863) -->
-    <skip />
-    <!-- no translation found for force_density_summary_very_large (8328063057394895318) -->
-    <skip />
-    <!-- no translation found for force_density_summary_extremely_large (846919277362198243) -->
-    <skip />
-    <!-- no translation found for force_density_summary_custom (6663681104268192485) -->
-    <skip />
+    <string name="force_density_preference_title" msgid="7269059903952009908">"Tỷ lệ hiển thị"</string>
+    <string name="force_density_keywords" msgid="3810424110118041972">"mật độ hiển thị tỷ lệ thu phóng chia tỷ lệ"</string>
+    <string name="force_density_summary_small" msgid="5481649550774706354">"Nhỏ"</string>
+    <string name="force_density_summary_normal" msgid="4706658853225294667">"Bình thường"</string>
+    <string name="force_density_summary_large" msgid="4636190645503741863">"Lớn"</string>
+    <string name="force_density_summary_very_large" msgid="8328063057394895318">"Lớn hơn"</string>
+    <string name="force_density_summary_extremely_large" msgid="846919277362198243">"Lớn nhất"</string>
+    <string name="force_density_summary_custom" msgid="6663681104268192485">"Tùy chỉnh (<xliff:g id="DENSITYDPI">%d</xliff:g>)"</string>
 </resources>
