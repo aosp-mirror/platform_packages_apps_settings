@@ -233,7 +233,8 @@ public final class DynamicIndexableContentMonitor extends PackageMonitor impleme
     private void handlePackageAvailable(String packageName) {
         if (!mAccessibilityServices.contains(packageName)) {
             final Intent intent = getAccessibilityServiceIntent(packageName);
-            if (!mContext.getPackageManager().queryIntentServices(intent, 0).isEmpty()) {
+            List<?> services = mContext.getPackageManager().queryIntentServices(intent, 0);
+            if (services != null && !services.isEmpty()) {
                 mAccessibilityServices.add(packageName);
                 Index.getInstance(mContext).updateFromClassNameResource(
                         AccessibilitySettings.class.getName(), false, true);
@@ -243,7 +244,8 @@ public final class DynamicIndexableContentMonitor extends PackageMonitor impleme
         if (mHasFeaturePrinting) {
             if (!mPrintServices.contains(packageName)) {
                 final Intent intent = getPrintServiceIntent(packageName);
-                if (!mContext.getPackageManager().queryIntentServices(intent, 0).isEmpty()) {
+                List<?> services = mContext.getPackageManager().queryIntentServices(intent, 0);
+                if (services != null && !services.isEmpty()) {
                     mPrintServices.add(packageName);
                     Index.getInstance(mContext).updateFromClassNameResource(
                             PrintSettingsFragment.class.getName(), false, true);
@@ -254,7 +256,8 @@ public final class DynamicIndexableContentMonitor extends PackageMonitor impleme
         if (mHasFeatureIme) {
             if (!mImeServices.contains(packageName)) {
                 Intent intent = getIMEServiceIntent(packageName);
-                if (!mContext.getPackageManager().queryIntentServices(intent, 0).isEmpty()) {
+                List<?> services = mContext.getPackageManager().queryIntentServices(intent, 0);
+                if (services != null && !services.isEmpty()) {
                     mImeServices.add(packageName);
                     Index.getInstance(mContext).updateFromClassNameResource(
                             InputMethodAndLanguageSettings.class.getName(), false, true);
