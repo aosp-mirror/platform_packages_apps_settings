@@ -25,11 +25,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.nfc.PaymentBackend.PaymentAppInfo;
 
 import java.util.List;
 
@@ -48,21 +46,11 @@ public class PaymentSettings extends SettingsPreferenceFragment {
 
         mPaymentBackend = new PaymentBackend(getActivity());
         setHasOptionsMenu(true);
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        ViewGroup contentRoot = (ViewGroup) getListView().getParent();
-        View emptyView = getActivity().getLayoutInflater().inflate(
-                R.layout.nfc_payment_empty, contentRoot, false);
-        contentRoot.addView(emptyView);
-        setEmptyView(emptyView);
 
         PreferenceManager manager = getPreferenceManager();
         PreferenceScreen screen = manager.createPreferenceScreen(getActivity());
 
-        List<PaymentAppInfo> appInfos = mPaymentBackend.getPaymentAppInfos();
+        List<PaymentBackend.PaymentAppInfo> appInfos = mPaymentBackend.getPaymentAppInfos();
         if (appInfos != null && appInfos.size() > 0) {
             NfcPaymentPreference preference =
                     new NfcPaymentPreference(getPrefContext(), mPaymentBackend);
@@ -73,6 +61,16 @@ public class PaymentSettings extends SettingsPreferenceFragment {
             screen.addPreference(foreground);
         }
         setPreferenceScreen(screen);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ViewGroup contentRoot = (ViewGroup) getListView().getParent();
+        View emptyView = getActivity().getLayoutInflater().inflate(
+                R.layout.nfc_payment_empty, contentRoot, false);
+        contentRoot.addView(emptyView);
+        setEmptyView(emptyView);
     }
 
     @Override
