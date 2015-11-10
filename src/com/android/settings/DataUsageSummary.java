@@ -551,7 +551,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
 
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
-        final Context context = getActivity();
+        final Context context = getContext();
         final boolean appDetailMode = isAppDetailMode();
         final boolean isAdmin = mUserManager.isAdminUser();
 
