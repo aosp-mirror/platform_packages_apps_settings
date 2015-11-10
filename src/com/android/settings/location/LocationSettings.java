@@ -35,11 +35,16 @@ import android.view.MenuItem;
 import android.widget.Switch;
 
 import com.android.internal.logging.MetricsLogger;
+import com.android.settings.DimmableIconPreference;
+import com.android.settings.PreferenceActivity;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
+import com.android.settings.applications.InstalledAppDetails;
 import com.android.settings.widget.SwitchBar;
+import com.android.settingslib.location.RecentLocationApps;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -195,10 +200,26 @@ public class LocationSettings extends LocationSettingsBase
 
         mCategoryRecentLocationRequests =
                 (PreferenceCategory) root.findPreference(KEY_RECENT_LOCATION_REQUESTS);
-        RecentLocationApps recentApps = new RecentLocationApps(activity, getPrefContext());
-        List<Preference> recentLocationRequests = recentApps.getAppList();
+        RecentLocationApps recentApps = new RecentLocationApps(activity);
+        List<RecentLocationApps.Request> recentLocationRequests = recentApps.getAppList();
+        List<Preference> recentLocationPrefs = new ArrayList<>(recentLocationRequests.size());
+        for (final RecentLocationApps.Request request : recentLocationRequests) {
+            DimmableIconPreference pref = new DimmableIconPreference(getPrefContext(),
+                    request.contentDescription);
+            pref.setIcon(request.icon);
+            pref.setTitle(request.label);
+            if (request.isHighBattery) {
+                pref.setSummary(R.string.location_high_battery_use);
+            } else {
+                pref.setSummary(R.string.location_low_battery_use);
+            }
+            pref.setOnPreferenceClickListener(
+                    new PackageEntryClickedListener(request.packageName, request.userHandle));
+            recentLocationPrefs.add(pref);
+
+        }
         if (recentLocationRequests.size() > 0) {
-            addPreferencesSorted(recentLocationRequests, mCategoryRecentLocationRequests);
+            addPreferencesSorted(recentLocationPrefs, mCategoryRecentLocationRequests);
         } else {
             // If there's no item to display, add a "No recent apps" item.
             Preference banner = new Preference(getPrefContext());
@@ -377,6 +398,28 @@ public class LocationSettings extends LocationSettingsBase
             setLocationMode(android.provider.Settings.Secure.LOCATION_MODE_HIGH_ACCURACY);
         } else {
             setLocationMode(android.provider.Settings.Secure.LOCATION_MODE_OFF);
+        }
+    }
+
+    private class PackageEntryClickedListener
+            implements Preference.OnPreferenceClickListener {
+        private String mPackage;
+        private UserHandle mUserHandle;
+
+        public PackageEntryClickedListener(String packageName, UserHandle userHandle) {
+            mPackage = packageName;
+            mUserHandle = userHandle;
+        }
+
+        @Override
+        public boolean onPreferenceClick(Preference preference) {
+            // start new fragment to display extended information
+            Bundle args = new Bundle();
+            args.putString(InstalledAppDetails.ARG_PACKAGE_NAME, mPackage);
+            ((PreferenceActivity) getActivity()).startPreferencePanelAsUser(
+                    InstalledAppDetails.class.getName(), args,
+                    R.string.application_info_label, null, mUserHandle);
+            return true;
         }
     }
 }
