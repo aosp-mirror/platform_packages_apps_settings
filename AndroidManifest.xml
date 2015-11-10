@@ -382,16 +382,6 @@
                 android:value="true" />
         </activity>
 
-        <!-- Suspect activity alias: targetActivity is Settings itself, does not define a name. Remove? -->
-        <activity-alias android:name=".wifi.WifiApSettings"
-                android:targetActivity="Settings">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.VOICE_LAUNCH" />
-            </intent-filter>
-        </activity-alias>
-
         <!-- Runs in the phone process since it needs access to UiccController -->
         <activity android:name="Settings$ApnSettingsActivity"
                 android:label="@string/apn_settings"
@@ -1947,17 +1937,6 @@
                 <category android:name="android.intent.category.DEVELOPMENT_PREFERENCE" />
             </intent-filter>
         </activity>
-
-        <!-- Suspect activity alias: targetActivity is Settings itself, does not define a name. Remove? -->
-        <activity-alias android:name="ProxySelector"
-            android:label="@string/proxy_settings_label"
-            android:targetActivity="Settings">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.VOICE_LAUNCH" />
-            </intent-filter>
-        </activity-alias>
 
         <!-- TODO: Is this needed? -->
         <activity android:name="BandMode"

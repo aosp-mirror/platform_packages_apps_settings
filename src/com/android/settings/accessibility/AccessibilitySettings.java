@@ -22,7 +22,6 @@ import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.content.res.Configuration;
 import android.net.Uri;
@@ -41,7 +40,6 @@ import android.text.TextUtils;
 import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
 import android.view.accessibility.AccessibilityManager;
-
 import com.android.internal.content.PackageMonitor;
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.view.RotationPolicy;
@@ -127,7 +125,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private final Runnable mUpdateRunnable = new Runnable() {
         @Override
         public void run() {
-            updateServicesPreferences();
+            if (getActivity() != null) {
+                updateServicesPreferences();
+            }
         }
     };
 
