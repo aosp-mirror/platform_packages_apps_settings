@@ -44,9 +44,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.TextView;
-
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.AccountPreference;
 import com.android.settings.R;
@@ -117,8 +115,10 @@ public class ManageAccountsSettings extends AccountPreferenceBase
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.manage_accounts_screen, container, false);
-        final ListView list = (ListView) view.findViewById(android.R.id.list);
-        Utils.prepareCustomPreferencesList(container, view, list, false);
+        final ViewGroup prefs_container = (ViewGroup) view.findViewById(R.id.prefs_container);
+        Utils.prepareCustomPreferencesList(container, view, prefs_container, false);
+        View prefs = super.onCreateView(inflater, prefs_container, savedInstanceState);
+        prefs_container.addView(prefs);
         return view;
     }
 
