@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2014 The Android Open Source Project
+<!-- Copyright (C) 2015 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,13 +14,6 @@
      limitations under the License.
 -->
 
-<android.support.v7.widget.RecyclerView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/dashboard_container"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingStart="@dimen/dashboard_padding_start"
-    android:paddingEnd="@dimen/dashboard_padding_end"
-    android:paddingTop="@dimen/dashboard_padding_top"
-    android:paddingBottom="@dimen/dashboard_padding_bottom"
-    android:clipToPadding="false" />
+<View xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
