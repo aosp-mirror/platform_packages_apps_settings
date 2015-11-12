@@ -27,6 +27,7 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
+import android.telephony.PhoneNumberUtils;
 import android.telephony.PhoneStateListener;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -278,7 +279,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
                     setSummary(mSubInfoRecord.getDisplayName());
                 } else {
                     setSummary(mSubInfoRecord.getDisplayName() + " - " +
-                            getPhoneNumber(mSubInfoRecord));
+                            PhoneNumberUtils.createTtsSpannable(getPhoneNumber(mSubInfoRecord)));
                     setEnabled(true);
                 }
                 setIcon(new BitmapDrawable(res, (mSubInfoRecord.createIconBitmap(mContext))));
