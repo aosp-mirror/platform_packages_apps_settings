@@ -168,7 +168,6 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         super.onViewCreated(view, savedInstanceState);
         initComponents();
         updateUiForArguments();
-        getView().findViewById(R.id.list_container).setVisibility(View.GONE);
         getBackupListView().setVisibility(View.VISIBLE);
     }
 
@@ -199,7 +198,7 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
 
     private void updateEmptyView() {
         ViewGroup contentRoot = (ViewGroup) getListView().getParent();
-        View emptyView = getEmptyView();
+        View emptyView = getBackupListView().getEmptyView();
         if (!mToggleSwitch.isChecked()) {
             if (emptyView != null && emptyView.getId() != R.id.empty_print_state) {
                 contentRoot.removeView(emptyView);
