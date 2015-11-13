@@ -129,6 +129,11 @@ public class VpnSettings extends SettingsPreferenceFragment implements
     public void onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
 
+        // Disable all actions if VPN configuration has been disallowed
+        for (int i = 0; i < menu.size(); i++) {
+            menu.getItem(i).setEnabled(!mUnavailable);
+        }
+
         // Hide lockdown VPN on devices that require IMS authentication
         if (SystemProperties.getBoolean("persist.radio.imsregrequired", false)) {
             menu.findItem(R.id.vpn_lockdown).setVisible(false);
