@@ -59,7 +59,7 @@ public final class ChooseLockSettingsHelper {
      * @return true if one exists and we launched an activity to confirm it
      * @see Activity#onActivityResult(int, int, android.content.Intent)
      */
-    boolean launchConfirmationActivity(int request, CharSequence title) {
+    public boolean launchConfirmationActivity(int request, CharSequence title) {
         return launchConfirmationActivity(request, title, null, null, false, false);
     }
 
