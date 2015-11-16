@@ -39,18 +39,13 @@ public class AppPreference extends ManageablePreference {
     private int mState = STATE_DISCONNECTED;
     private String mPackageName;
     private String mName;
-    private int mUid;
+    private int mUserId = UserHandle.USER_NULL;
 
-    public AppPreference(Context context, OnClickListener onManage, final String packageName,
-            int uid) {
+    public AppPreference(Context context, OnClickListener onManage) {
         super(context, null /* attrs */, onManage);
-        mPackageName = packageName;
-        mUid = uid;
-        update();
     }
 
     public PackageInfo getPackageInfo() {
-        UserHandle user = new UserHandle(UserHandle.getUserId(mUid));
         try {
             PackageManager pm = getUserContext().getPackageManager();
             return pm.getPackageInfo(mPackageName, 0 /* flags */);
@@ -67,8 +62,18 @@ public class AppPreference extends ManageablePreference {
         return mPackageName;
     }
 
-    public int getUid() {
-        return mUid;
+    public void setPackageName(String name) {
+        mPackageName = name;
+        update();
+    }
+
+    public int getUserId() {
+        return mUserId;
+    }
+
+    public void setUserId(int userId) {
+        mUserId = userId;
+        update();
     }
 
     public int getState() {
@@ -81,6 +86,10 @@ public class AppPreference extends ManageablePreference {
     }
 
     private void update() {
+        if (mPackageName == null || mUserId == UserHandle.USER_NULL) {
+            return;
+        }
+
         final String[] states = getContext().getResources().getStringArray(R.array.vpn_states);
         setSummary(mState != STATE_DISCONNECTED ? states[mState] : "");
 
@@ -116,7 +125,7 @@ public class AppPreference extends ManageablePreference {
     }
 
     private Context getUserContext() throws PackageManager.NameNotFoundException {
-        UserHandle user = new UserHandle(UserHandle.getUserId(mUid));
+        UserHandle user = UserHandle.of(mUserId);
         return getContext().createPackageContextAsUser(
                 getContext().getPackageName(), 0 /* flags */, user);
     }
@@ -128,7 +137,7 @@ public class AppPreference extends ManageablePreference {
             if ((result = another.mState - mState) == 0 &&
                     (result = mName.compareToIgnoreCase(another.mName)) == 0 &&
                     (result = mPackageName.compareTo(another.mPackageName)) == 0) {
-                result = mUid - another.mUid;
+                result = mUserId - another.mUserId;
             }
             return result;
         } else if (preference instanceof ConfigPreference) {
