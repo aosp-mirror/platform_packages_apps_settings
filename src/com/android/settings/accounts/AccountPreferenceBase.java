@@ -37,6 +37,7 @@ import android.view.ContextThemeWrapper;
 
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.android.settingslib.accounts.AuthenticatorHelper;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -66,7 +67,7 @@ abstract class AccountPreferenceBase extends SettingsPreferenceFragment
         final Activity activity = getActivity();
         mUserHandle = Utils.getSecureTargetUser(activity.getActivityToken(), mUm, getArguments(),
                 activity.getIntent().getExtras());
-        mAuthenticatorHelper = new AuthenticatorHelper(activity, mUserHandle, mUm, this);
+        mAuthenticatorHelper = new AuthenticatorHelper(activity, mUserHandle, this);
     }
 
     /**

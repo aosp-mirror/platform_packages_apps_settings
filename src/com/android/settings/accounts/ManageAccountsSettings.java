@@ -51,6 +51,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.location.LocationSettings;
+import com.android.settingslib.accounts.AuthenticatorHelper;
 
 import java.util.ArrayList;
 import java.util.Date;
