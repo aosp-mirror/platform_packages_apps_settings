@@ -17,6 +17,7 @@
 package com.android.settings.applications;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -45,7 +46,6 @@ import android.widget.Filterable;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
-
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.AppHeader;
 import com.android.settings.HelpUtils;
@@ -63,6 +63,7 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.applications.AppStateAppOpsBridge.PermissionState;
 import com.android.settings.applications.AppStateUsageBridge.UsageState;
+import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.fuelgauge.HighPowerDetail;
 import com.android.settings.fuelgauge.PowerWhitelistBackend;
 import com.android.settings.notification.AppNotificationSettings;
@@ -113,60 +114,60 @@ public class ManageApplications extends InstrumentedFragment
 
     // Filter options used for displayed list of applications
     // The order which they appear is the order they will show when spinner is present.
-    public static final int FILTER_APPS_POWER_WHITELIST         = 0;
-    public static final int FILTER_APPS_POWER_WHITELIST_ALL     = 1;
-    public static final int FILTER_APPS_ALL                     = 2;
-    public static final int FILTER_APPS_ENABLED                 = 3;
-    public static final int FILTER_APPS_DISABLED                = 4;
-    public static final int FILTER_APPS_BLOCKED                 = 5;
-    public static final int FILTER_APPS_PRIORITY                = 6;
-    public static final int FILTER_APPS_NO_PEEKING              = 7;
-    public static final int FILTER_APPS_SENSITIVE               = 8;
-    public static final int FILTER_APPS_PERSONAL                = 9;
-    public static final int FILTER_APPS_WORK                    = 10;
-    public static final int FILTER_APPS_WITH_DOMAIN_URLS        = 11;
-    public static final int FILTER_APPS_USAGE_ACCESS            = 12;
-    public static final int FILTER_APPS_WITH_OVERLAY            = 13;
-    public static final int FILTER_APPS_WRITE_SETTINGS          = 14;
+    public static final int FILTER_APPS_POWER_WHITELIST = 0;
+    public static final int FILTER_APPS_POWER_WHITELIST_ALL = 1;
+    public static final int FILTER_APPS_ALL = 2;
+    public static final int FILTER_APPS_ENABLED = 3;
+    public static final int FILTER_APPS_DISABLED = 4;
+    public static final int FILTER_APPS_BLOCKED = 5;
+    public static final int FILTER_APPS_PRIORITY = 6;
+    public static final int FILTER_APPS_NO_PEEKING = 7;
+    public static final int FILTER_APPS_SENSITIVE = 8;
+    public static final int FILTER_APPS_PERSONAL = 9;
+    public static final int FILTER_APPS_WORK = 10;
+    public static final int FILTER_APPS_WITH_DOMAIN_URLS = 11;
+    public static final int FILTER_APPS_USAGE_ACCESS = 12;
+    public static final int FILTER_APPS_WITH_OVERLAY = 13;
+    public static final int FILTER_APPS_WRITE_SETTINGS = 14;
 
     // This is the string labels for the filter modes above, the order must be kept in sync.
-    public static final int[] FILTER_LABELS = new int[] {
-        R.string.high_power_filter_on, // High power whitelist, on
-        R.string.filter_all_apps,      // All apps label, but personal filter (for high power);
-        R.string.filter_all_apps,      // All apps
-        R.string.filter_enabled_apps,  // Enabled
-        R.string.filter_apps_disabled, // Disabled
-        R.string.filter_notif_blocked_apps,   // Blocked Notifications
-        R.string.filter_notif_priority_apps,  // Priority Notifications
-        R.string.filter_notif_no_peeking,     // No peeking Notifications
-        R.string.filter_notif_sensitive_apps, // Sensitive Notifications
-        R.string.filter_personal_apps, // Personal
-        R.string.filter_work_apps,     // Work
-        R.string.filter_with_domain_urls_apps,     // Domain URLs
-        R.string.filter_all_apps,      // Usage access screen, never displayed
-        R.string.filter_overlay_apps,   // Apps with overlay permission
-        R.string.filter_write_settings_apps,   // Apps that can write system settings
+    public static final int[] FILTER_LABELS = new int[]{
+            R.string.high_power_filter_on, // High power whitelist, on
+            R.string.filter_all_apps,      // All apps label, but personal filter (for high power);
+            R.string.filter_all_apps,      // All apps
+            R.string.filter_enabled_apps,  // Enabled
+            R.string.filter_apps_disabled, // Disabled
+            R.string.filter_notif_blocked_apps,   // Blocked Notifications
+            R.string.filter_notif_priority_apps,  // Priority Notifications
+            R.string.filter_notif_no_peeking,     // No peeking Notifications
+            R.string.filter_notif_sensitive_apps, // Sensitive Notifications
+            R.string.filter_personal_apps, // Personal
+            R.string.filter_work_apps,     // Work
+            R.string.filter_with_domain_urls_apps,     // Domain URLs
+            R.string.filter_all_apps,      // Usage access screen, never displayed
+            R.string.filter_overlay_apps,   // Apps with overlay permission
+            R.string.filter_write_settings_apps,   // Apps that can write system settings
     };
     // This is the actual mapping to filters from FILTER_ constants above, the order must
     // be kept in sync.
-    public static final AppFilter[] FILTERS = new AppFilter[] {
-        new CompoundFilter(AppStatePowerBridge.FILTER_POWER_WHITELISTED,
-                ApplicationsState.FILTER_ALL_ENABLED),     // High power whitelist, on
-        new CompoundFilter(ApplicationsState.FILTER_PERSONAL_WITHOUT_DISABLED_UNTIL_USED,
-                ApplicationsState.FILTER_ALL_ENABLED),     // All apps label, but personal filter
-        ApplicationsState.FILTER_EVERYTHING,  // All apps
-        ApplicationsState.FILTER_ALL_ENABLED, // Enabled
-        ApplicationsState.FILTER_DISABLED,    // Disabled
-        AppStateNotificationBridge.FILTER_APP_NOTIFICATION_BLOCKED,   // Blocked Notifications
-        AppStateNotificationBridge.FILTER_APP_NOTIFICATION_PRIORITY,  // Priority Notifications
-        AppStateNotificationBridge.FILTER_APP_NOTIFICATION_NO_PEEK,   // No peeking Notifications
-        AppStateNotificationBridge.FILTER_APP_NOTIFICATION_SENSITIVE, // Sensitive Notifications
-        ApplicationsState.FILTER_PERSONAL,    // Personal
-        ApplicationsState.FILTER_WORK,        // Work
-        ApplicationsState.FILTER_WITH_DOMAIN_URLS,   // Apps with Domain URLs
-        AppStateUsageBridge.FILTER_APP_USAGE, // Apps with Domain URLs
-        AppStateOverlayBridge.FILTER_SYSTEM_ALERT_WINDOW,   // Apps that can draw overlays
-        AppStateWriteSettingsBridge.FILTER_WRITE_SETTINGS,  // Apps that can write system settings
+    public static final AppFilter[] FILTERS = new AppFilter[]{
+            new CompoundFilter(AppStatePowerBridge.FILTER_POWER_WHITELISTED,
+                    ApplicationsState.FILTER_ALL_ENABLED),     // High power whitelist, on
+            new CompoundFilter(ApplicationsState.FILTER_PERSONAL_WITHOUT_DISABLED_UNTIL_USED,
+                    ApplicationsState.FILTER_ALL_ENABLED),     // All apps label, but personal filter
+            ApplicationsState.FILTER_EVERYTHING,  // All apps
+            ApplicationsState.FILTER_ALL_ENABLED, // Enabled
+            ApplicationsState.FILTER_DISABLED,    // Disabled
+            AppStateNotificationBridge.FILTER_APP_NOTIFICATION_BLOCKED,   // Blocked Notifications
+            AppStateNotificationBridge.FILTER_APP_NOTIFICATION_PRIORITY,  // Priority Notifications
+            AppStateNotificationBridge.FILTER_APP_NOTIFICATION_NO_PEEK,   // No peeking Notifications
+            AppStateNotificationBridge.FILTER_APP_NOTIFICATION_SENSITIVE, // Sensitive Notifications
+            ApplicationsState.FILTER_PERSONAL,    // Personal
+            ApplicationsState.FILTER_WORK,        // Work
+            ApplicationsState.FILTER_WITH_DOMAIN_URLS,   // Apps with Domain URLs
+            AppStateUsageBridge.FILTER_APP_USAGE, // Apps with Domain URLs
+            AppStateOverlayBridge.FILTER_SYSTEM_ALERT_WINDOW,   // Apps that can draw overlays
+            AppStateWriteSettingsBridge.FILTER_WRITE_SETTINGS,  // Apps that can write system settings
     };
 
     // sort order
@@ -201,13 +202,13 @@ public class ManageApplications extends InstrumentedFragment
 
     private Menu mOptionsMenu;
 
-    public static final int LIST_TYPE_MAIN         = 0;
+    public static final int LIST_TYPE_MAIN = 0;
     public static final int LIST_TYPE_NOTIFICATION = 1;
     public static final int LIST_TYPE_DOMAINS_URLS = 2;
-    public static final int LIST_TYPE_STORAGE      = 3;
+    public static final int LIST_TYPE_STORAGE = 3;
     public static final int LIST_TYPE_USAGE_ACCESS = 4;
-    public static final int LIST_TYPE_HIGH_POWER   = 5;
-    public static final int LIST_TYPE_OVERLAY      = 6;
+    public static final int LIST_TYPE_HIGH_POWER = 5;
+    public static final int LIST_TYPE_OVERLAY = 6;
     public static final int LIST_TYPE_WRITE_SETTINGS = 7;
 
     private View mRootView;
@@ -280,7 +281,7 @@ public class ManageApplications extends InstrumentedFragment
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         // initialize the inflater
         mInflater = inflater;
 
@@ -550,7 +551,7 @@ public class ManageApplications extends InstrumentedFragment
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int menuId = item.getItemId();
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             case R.id.sort_order_alpha:
             case R.id.sort_order_size:
                 mSortOrder = menuId;
@@ -713,7 +714,7 @@ public class ManageApplications extends InstrumentedFragment
         private ArrayList<ApplicationsState.AppEntry> mBaseEntries;
         private ArrayList<ApplicationsState.AppEntry> mEntries;
         private boolean mResumed;
-        private int mLastSortMode=-1;
+        private int mLastSortMode = -1;
         private int mWhichSize = SIZE_TOTAL;
         CharSequence mCurFilterPrefix;
         private PackageManager mPm;
@@ -742,7 +743,7 @@ public class ManageApplications extends InstrumentedFragment
         };
 
         public ApplicationsAdapter(ApplicationsState state, ManageApplications manageApplications,
-                int filterMode) {
+                                   int filterMode) {
             mState = state;
             mSession = state.newSession(this);
             mManageApplications = manageApplications;
@@ -895,7 +896,7 @@ public class ManageApplications extends InstrumentedFragment
         }
 
         ArrayList<ApplicationsState.AppEntry> applyPrefixFilter(CharSequence prefix,
-                ArrayList<ApplicationsState.AppEntry> origEntries) {
+                                                                ArrayList<ApplicationsState.AppEntry> origEntries) {
             if (prefix == null || prefix.length() == 0) {
                 return origEntries;
             } else {
@@ -903,7 +904,7 @@ public class ManageApplications extends InstrumentedFragment
                 final String spacePrefixStr = " " + prefixStr;
                 ArrayList<ApplicationsState.AppEntry> newEntries
                         = new ArrayList<ApplicationsState.AppEntry>();
-                for (int i=0; i<origEntries.size(); i++) {
+                for (int i = 0; i < origEntries.size(); i++) {
                     ApplicationsState.AppEntry entry = origEntries.get(i);
                     String nlabel = entry.getNormalizedLabel();
                     if (nlabel.startsWith(prefixStr) || nlabel.indexOf(spacePrefixStr) != -1) {
@@ -945,8 +946,8 @@ public class ManageApplications extends InstrumentedFragment
 
         @Override
         public void onPackageSizeChanged(String packageName) {
-            for (int i=0; i<mActive.size(); i++) {
-                AppViewHolder holder = (AppViewHolder)mActive.get(i).getTag();
+            for (int i = 0; i < mActive.size(); i++) {
+                AppViewHolder holder = (AppViewHolder) mActive.get(i).getTag();
                 if (holder.entry.info.packageName.equals(packageName)) {
                     synchronized (holder.entry) {
                         updateSummary(holder);
@@ -1027,7 +1028,7 @@ public class ManageApplications extends InstrumentedFragment
                     holder.appIcon.setImageDrawable(entry.icon);
                 }
                 updateSummary(holder);
-                if ((entry.info.flags&ApplicationInfo.FLAG_INSTALLED) == 0) {
+                if ((entry.info.flags & ApplicationInfo.FLAG_INSTALLED) == 0) {
                     holder.disabled.setVisibility(View.VISIBLE);
                     holder.disabled.setText(R.string.not_installed);
                 } else if (!entry.info.enabled) {
@@ -1060,7 +1061,7 @@ public class ManageApplications extends InstrumentedFragment
 
                 case LIST_TYPE_USAGE_ACCESS:
                     if (holder.entry.extraInfo != null) {
-                        holder.summary.setText((new UsageState((PermissionState)holder.entry
+                        holder.summary.setText((new UsageState((PermissionState) holder.entry
                                 .extraInfo)).isPermissible() ? R.string.switch_on_text :
                                 R.string.switch_off_text);
                     } else {
@@ -1116,4 +1117,84 @@ public class ManageApplications extends InstrumentedFragment
             }
         }
     }
+
+    private static class SummaryProvider implements SummaryLoader.SummaryProvider,
+            ApplicationsState.Callbacks {
+
+        private final Context mContext;
+        private final SummaryLoader mLoader;
+        // TODO: Can probably hack together with less than full app state.
+        private final ApplicationsState mAppState;
+        private final ApplicationsState.Session mSession;
+
+        private SummaryProvider(Context context, SummaryLoader loader) {
+            mContext = context;
+            mLoader = loader;
+            mAppState =
+                    ApplicationsState.getInstance((Application) context.getApplicationContext());
+            mSession = mAppState.newSession(this);
+        }
+
+        @Override
+        public void setListening(boolean listening) {
+            if (listening) {
+                mSession.resume();
+            } else {
+                mSession.pause();
+            }
+        }
+
+        private void updateSummary(ArrayList<AppEntry> apps) {
+            if (apps == null) return;
+            mLoader.setSummary(this, mContext.getString(R.string.apps_summary, apps.size()));
+        }
+
+        @Override
+        public void onRebuildComplete(ArrayList<AppEntry> apps) {
+            updateSummary(apps);
+        }
+
+        @Override
+        public void onPackageListChanged() {
+            updateSummary(mSession.rebuild(ApplicationsState.FILTER_DOWNLOADED_AND_LAUNCHER,
+                    ApplicationsState.ALPHA_COMPARATOR));
+        }
+
+        @Override
+        public void onLauncherInfoChanged() {
+            updateSummary(mSession.rebuild(ApplicationsState.FILTER_DOWNLOADED_AND_LAUNCHER,
+                    ApplicationsState.ALPHA_COMPARATOR));
+        }
+
+        @Override
+        public void onLoadEntriesCompleted() {
+            updateSummary(mSession.rebuild(ApplicationsState.FILTER_DOWNLOADED_AND_LAUNCHER,
+                    ApplicationsState.ALPHA_COMPARATOR));
+        }
+
+        @Override
+        public void onRunningStateChanged(boolean running) {
+        }
+
+        @Override
+        public void onPackageIconChanged() {
+        }
+
+        @Override
+        public void onPackageSizeChanged(String packageName) {
+        }
+
+        @Override
+        public void onAllSizesComputed() {
+        }
+    }
+
+    public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
+            = new SummaryLoader.SummaryProviderFactory() {
+        @Override
+        public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
+                                                                   SummaryLoader summaryLoader) {
+            return new SummaryProvider(activity, summaryLoader);
+        }
+    };
 }

@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import android.animation.LayoutTransition;
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -24,8 +25,6 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.app.LoaderManager.LoaderCallbacks;
-import android.icu.impl.ICUResourceBundle;
-import android.icu.util.UResourceBundle;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -39,6 +38,8 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.icu.impl.ICUResourceBundle;
+import android.icu.util.UResourceBundle;
 import android.net.ConnectivityManager;
 import android.net.INetworkPolicyManager;
 import android.net.INetworkStatsService;
@@ -95,9 +96,9 @@ import android.widget.TabHost.TabSpec;
 import android.widget.TabWidget;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.telephony.PhoneConstants;
+import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.drawable.InsetBoundsDrawable;
 import com.android.settings.net.DataUsageMeteredSettings;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -110,11 +111,11 @@ import com.android.settingslib.AppItem;
 import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.net.ChartData;
 import com.android.settingslib.net.ChartDataLoader;
+import com.android.settingslib.net.MobileDataController;
 import com.android.settingslib.net.SummaryForAllUidLoader;
 import com.android.settingslib.net.UidDetail;
 import com.android.settingslib.net.UidDetailProvider;
 import com.google.android.collect.Lists;
-
 import libcore.util.Objects;
 
 import java.util.ArrayList;
@@ -2800,4 +2801,44 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         private boolean isMobileDataAvailable(int subId) {
             return mSubscriptionManager.getActiveSubscriptionInfo(subId) != null;
         }
+
+    private static class SummaryProvider
+            implements SummaryLoader.SummaryProvider {
+
+        private final Activity mActivity;
+        private final SummaryLoader mSummaryLoader;
+        private final MobileDataController mDataController;
+
+        public SummaryProvider(Activity activity, SummaryLoader summaryLoader) {
+            mActivity = activity;
+            mSummaryLoader = summaryLoader;
+            mDataController = new MobileDataController(activity);
+        }
+
+        @Override
+        public void setListening(boolean listening) {
+            if (listening) {
+                MobileDataController.DataUsageInfo info = mDataController.getDataUsageInfo();
+                String used;
+                if (info == null) {
+                    used = Formatter.formatFileSize(mActivity, 0);
+                } else if (info.limitLevel <= 0) {
+                    used = Formatter.formatFileSize(mActivity, info.usageLevel);
+                } else {
+                    used = Utils.formatPercentage(info.usageLevel, info.limitLevel);
+                }
+                mSummaryLoader.setSummary(this,
+                        mActivity.getString(R.string.data_usage_summary_format, used));
+            }
+        }
+    }
+
+    public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
+            = new SummaryLoader.SummaryProviderFactory() {
+        @Override
+        public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
+                                                                   SummaryLoader summaryLoader) {
+            return new SummaryProvider(activity, summaryLoader);
+        }
+    };
 }
