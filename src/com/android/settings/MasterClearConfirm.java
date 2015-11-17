@@ -20,6 +20,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
+import android.provider.Settings;
 import android.service.persistentdata.PersistentDataBlockManager;
 
 import com.android.internal.logging.MetricsLogger;
@@ -63,8 +64,12 @@ public class MasterClearConfirm extends InstrumentedFragment {
             final PersistentDataBlockManager pdbManager = (PersistentDataBlockManager)
                     getActivity().getSystemService(Context.PERSISTENT_DATA_BLOCK_SERVICE);
 
-            if (pdbManager != null && !pdbManager.getOemUnlockEnabled()) {
-                // if OEM unlock is enabled, this will be wiped during FR process.
+            if (pdbManager != null && !pdbManager.getOemUnlockEnabled() &&
+                    Settings.Global.getInt(getActivity().getContentResolver(),
+                            Settings.Global.DEVICE_PROVISIONED, 0) != 0) {
+                // if OEM unlock is enabled, this will be wiped during FR process. If disabled, it
+                // will be wiped here, unless the device is still being provisioned, in which case
+                // the persistent data block will be preserved.
                 new AsyncTask<Void, Void, Void>() {
                     int mOldOrientation;
                     ProgressDialog mProgressDialog;
