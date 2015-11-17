@@ -20,11 +20,11 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.TypedValue;
@@ -35,43 +35,39 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.android.internal.logging.MetricsLogger;
+import com.android.internal.util.ArrayUtils;
 import com.android.settings.HelpUtils;
 import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
+import com.android.settings.Settings;
 import com.android.settings.SettingsActivity;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.DashboardTile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DashboardSummary extends InstrumentedFragment {
-    private static final String LOG_TAG = "DashboardSummary";
+    private static final boolean DEBUG = true;
+    private static final String TAG = "DashboardSummary";
 
-    private LayoutInflater mLayoutInflater;
-    private ViewGroup mDashboard;
-
-    private static final int MSG_REBUILD_UI = 1;
-    private Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case MSG_REBUILD_UI: {
-                    final Context context = getActivity();
-                    rebuildUI(context);
-                } break;
-            }
-        }
+    public static final String[] INITIAL_ITEMS = new String[] {
+            Settings.WifiSettingsActivity.class.getName(),
+            Settings.DataUsageSummaryActivity.class.getName(),
+            Settings.PowerUsageSummaryActivity.class.getName(),
+            Settings.ManageApplicationsActivity.class.getName(),
+            Settings.StorageSettingsActivity.class.getName(),
+            Settings.DisplaySettingsActivity.class.getName(),
+            Settings.NotificationSettingsActivity.class.getName(),
     };
 
-    private class HomePackageReceiver extends BroadcastReceiver {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            rebuildUI(context);
-        }
-    }
-    private HomePackageReceiver mHomePackageReceiver = new HomePackageReceiver();
+    private static final int MSG_REBUILD_UI = 1;
+
+    private final HomePackageReceiver mHomePackageReceiver = new HomePackageReceiver();
+
+    private RecyclerView mDashboard;
+    private DashboardAdapter mAdapter;
 
     @Override
     protected int getMetricsCategory() {
@@ -117,100 +113,212 @@ public class DashboardSummary extends InstrumentedFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.dashboard, container, false);
+    }
 
-        mLayoutInflater = inflater;
+    @Override
+    public void onViewCreated(View view, Bundle bundle) {
+        mDashboard = (RecyclerView) view.findViewById(R.id.dashboard_container);
+        LinearLayoutManager llm = new LinearLayoutManager(getContext());
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        mDashboard.setLayoutManager(llm);
+        mDashboard.setHasFixedSize(true);
 
-        final View rootView = inflater.inflate(R.layout.dashboard, container, false);
-        mDashboard = (ViewGroup) rootView.findViewById(R.id.dashboard_container);
-
-        return rootView;
+        rebuildUI(getContext());
     }
 
     private void rebuildUI(Context context) {
         if (!isAdded()) {
-            Log.w(LOG_TAG, "Cannot build the DashboardSummary UI yet as the Fragment is not added");
+            Log.w(TAG, "Cannot build the DashboardSummary UI yet as the Fragment is not added");
             return;
         }
 
         long start = System.currentTimeMillis();
-        final Resources res = getResources();
+        mAdapter = new DashboardAdapter(getContext(),
+                ((SettingsActivity) getActivity()).getDashboardCategories(true));
+        mDashboard.setAdapter(mAdapter);
 
-        mDashboard.removeAllViews();
-
-        List<DashboardCategory> categories =
-                ((SettingsActivity) context).getDashboardCategories(true);
-
-        final int count = categories.size();
-
-        for (int n = 0; n < count; n++) {
-            DashboardCategory category = categories.get(n);
-
-            View categoryView = mLayoutInflater.inflate(R.layout.dashboard_category, mDashboard,
-                    false);
-
-            TextView categoryLabel = (TextView) categoryView.findViewById(R.id.category_title);
-            categoryLabel.setText(category.title);
-
-            ViewGroup categoryContent =
-                    (ViewGroup) categoryView.findViewById(R.id.category_content);
-
-            final int tilesCount = category.getTilesCount();
-            for (int i = 0; i < tilesCount; i++) {
-                DashboardTile tile = category.getTile(i);
-
-                DashboardTileView tileView = new DashboardTileView(context);
-                updateTileView(context, res, tile, tileView.getImageView(),
-                        tileView.getTitleTextView(), tileView.getStatusTextView());
-
-                tileView.setTile(tile);
-
-                categoryContent.addView(tileView);
-            }
-
-            // Add the category
-            mDashboard.addView(categoryView);
-        }
         long delta = System.currentTimeMillis() - start;
-        Log.d(LOG_TAG, "rebuildUI took: " + delta + " ms");
-    }
-
-    private void updateTileView(Context context, Resources res, DashboardTile tile,
-            ImageView tileIcon, TextView tileTextView, TextView statusTextView) {
-
-        if (tile.icon != null) {
-            if (!TextUtils.isEmpty(tile.icon.getResPackage())) {
-                Drawable drawable = tile.icon.loadDrawable(context);
-                if (!tile.icon.getResPackage().equals(context.getPackageName())
-                        && drawable != null) {
-                    // If this drawable is coming from outside Settings, tint it to match the color.
-                    TypedValue tintColor = new TypedValue();
-                    context.getTheme().resolveAttribute(com.android.internal.R.attr.colorAccent,
-                            tintColor, true);
-                    drawable.setTint(tintColor.data);
-                }
-                tileIcon.setImageDrawable(drawable);
-            } else {
-                tileIcon.setImageIcon(tile.icon);
-            }
-        } else {
-            tileIcon.setImageDrawable(null);
-            tileIcon.setBackground(null);
-        }
-
-        tileTextView.setText(tile.title);
-
-        CharSequence summary = tile.summary;
-        if (!TextUtils.isEmpty(summary)) {
-            statusTextView.setVisibility(View.VISIBLE);
-            statusTextView.setText(summary);
-        } else {
-            statusTextView.setVisibility(View.GONE);
-        }
+        Log.d(TAG, "rebuildUI took: " + delta + " ms");
     }
 
     private void sendRebuildUI() {
         if (!mHandler.hasMessages(MSG_REBUILD_UI)) {
             mHandler.sendEmptyMessage(MSG_REBUILD_UI);
+        }
+    }
+
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case MSG_REBUILD_UI: {
+                    final Context context = getActivity();
+                    rebuildUI(context);
+                } break;
+            }
+        }
+    };
+
+    private class HomePackageReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            rebuildUI(context);
+        }
+    }
+
+    private static class DashboardItemHolder extends RecyclerView.ViewHolder {
+        private final ImageView icon;
+        private final TextView title;
+        private final TextView summary;
+
+        public DashboardItemHolder(View itemView) {
+            super(itemView);
+            icon = (ImageView) itemView.findViewById(android.R.id.icon);
+            title = (TextView) itemView.findViewById(android.R.id.title);
+            summary = (TextView) itemView.findViewById(android.R.id.summary);
+        }
+    }
+
+    private static class DashboardAdapter extends RecyclerView.Adapter<DashboardItemHolder> {
+
+        private final List<Object> mItems = new ArrayList<>();
+        private final List<Integer> mTypes = new ArrayList<>();
+        private final List<Integer> mIds = new ArrayList<>();
+
+        private final List<DashboardCategory> mCategories;
+        private final Context mContext;
+
+        private boolean mIsShowingAll;
+        // Used for counting items;
+        private int mId;
+
+        public DashboardAdapter(Context context, List<DashboardCategory> categories) {
+            mContext = context;
+            mCategories = categories;
+
+            // TODO: Better place for tinting?
+            TypedValue tintColor = new TypedValue();
+            context.getTheme().resolveAttribute(com.android.internal.R.attr.colorAccent,
+                    tintColor, true);
+            for (int i = 0; i < categories.size(); i++) {
+                for (int j = 0; j < categories.get(i).tiles.size(); j++) {
+                    DashboardTile tile = categories.get(i).tiles.get(j);
+
+                    if (!context.getPackageName().equals(
+                            tile.intent.getComponent().getPackageName())) {
+                        // If this drawable is coming from outside Settings, tint it to match the
+                        // color.
+                        tile.icon.setTint(tintColor.data);
+                    }
+                }
+            }
+
+            setShowingAll(false);
+            setHasStableIds(true);
+        }
+
+        public void setShowingAll(boolean showingAll) {
+            mIsShowingAll = showingAll;
+            reset();
+            countItem(null, R.layout.dashboard_spacer, true);
+            for (int i = 0; i < mCategories.size(); i++) {
+                DashboardCategory category = mCategories.get(i);
+                countItem(category, R.layout.dashboard_category, mIsShowingAll);
+                for (int j = 0; j < category.tiles.size(); j++) {
+                    DashboardTile tile = category.tiles.get(j);
+                    Log.d(TAG, "Maybe adding " + tile.intent.getComponent().getClassName());
+                    countItem(tile, R.layout.dashboard_tile, mIsShowingAll
+                            || ArrayUtils.contains(INITIAL_ITEMS,
+                            tile.intent.getComponent().getClassName()));
+                }
+            }
+            countItem(null, R.layout.see_all, true);
+            notifyDataSetChanged();
+        }
+
+        private void reset() {
+            mItems.clear();
+            mTypes.clear();
+            mIds.clear();
+            mId = 0;
+        }
+
+        private void countItem(Object object, int type, boolean add) {
+            if (add) {
+                mItems.add(object);
+                mTypes.add(type);
+                mIds.add(mId);
+            }
+            mId++;
+        }
+
+        @Override
+        public DashboardItemHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            return new DashboardItemHolder(LayoutInflater.from(parent.getContext()).inflate(
+                    viewType, parent, false));
+        }
+
+        @Override
+        public void onBindViewHolder(DashboardItemHolder holder, int position) {
+            switch (mTypes.get(position)) {
+                case R.layout.dashboard_category:
+                    onBindCategory(holder, (DashboardCategory) mItems.get(position));
+                    break;
+                case R.layout.dashboard_tile:
+                    final DashboardTile tile = (DashboardTile) mItems.get(position);
+                    onBindTile(holder, tile);
+                    holder.itemView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            ((SettingsActivity) mContext).openTile(tile);
+                        }
+                    });
+                    break;
+                case R.layout.see_all:
+                    onBindSeeAll(holder);
+                    holder.itemView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            setShowingAll(!mIsShowingAll);
+                        }
+                    });
+                    break;
+            }
+        }
+
+        private void onBindTile(DashboardItemHolder holder, DashboardTile dashboardTile) {
+            holder.icon.setImageIcon(dashboardTile.icon);
+            holder.title.setText(dashboardTile.title);
+            if (!TextUtils.isEmpty(dashboardTile.summary)) {
+                holder.summary.setText(dashboardTile.summary);
+                holder.summary.setVisibility(View.VISIBLE);
+            } else {
+                holder.summary.setVisibility(View.GONE);
+            }
+        }
+
+        private void onBindCategory(DashboardItemHolder holder, DashboardCategory category) {
+            holder.title.setText(category.title);
+        }
+
+        private void onBindSeeAll(DashboardItemHolder holder) {
+            holder.title.setText(mIsShowingAll ? R.string.see_less : R.string.see_all);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return mIds.get(position);
+        }
+
+        @Override
+        public int getItemViewType(int position) {
+            return mTypes.get(position);
+        }
+
+        @Override
+        public int getItemCount() {
+            return mIds.size();
         }
     }
 }
