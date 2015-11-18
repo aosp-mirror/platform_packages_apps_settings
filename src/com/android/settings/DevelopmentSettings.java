@@ -297,7 +297,11 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
 
         if (!mUm.isAdminUser()
-                || mUm.hasUserRestriction(UserManager.DISALLOW_DEBUGGING_FEATURES)) {
+                || mUm.hasUserRestriction(UserManager.DISALLOW_DEBUGGING_FEATURES)
+                || Settings.Global.getInt(getActivity().getContentResolver(),
+                        Settings.Global.DEVICE_PROVISIONED, 0) == 0) {
+            // Block access to developer options if the user is not the owner, if user policy
+            // restricts it, or if the device has not been provisioned
             mUnavailable = true;
             setPreferenceScreen(new PreferenceScreen(getPrefContext(), null));
             return;
