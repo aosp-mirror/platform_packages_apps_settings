@@ -436,19 +436,19 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
 
             } break;
             case R.string.storage_detail_images: {
-                intent = new Intent(DocumentsContract.ACTION_BROWSE_DOCUMENT_ROOT);
+                intent = new Intent(DocumentsContract.ACTION_BROWSE);
                 intent.setData(DocumentsContract.buildRootUri(AUTHORITY_MEDIA, "images_root"));
                 intent.addCategory(Intent.CATEGORY_DEFAULT);
 
             } break;
             case R.string.storage_detail_videos: {
-                intent = new Intent(DocumentsContract.ACTION_BROWSE_DOCUMENT_ROOT);
+                intent = new Intent(DocumentsContract.ACTION_BROWSE);
                 intent.setData(DocumentsContract.buildRootUri(AUTHORITY_MEDIA, "videos_root"));
                 intent.addCategory(Intent.CATEGORY_DEFAULT);
 
             } break;
             case R.string.storage_detail_audio: {
-                intent = new Intent(DocumentsContract.ACTION_BROWSE_DOCUMENT_ROOT);
+                intent = new Intent(DocumentsContract.ACTION_BROWSE);
                 intent.setData(DocumentsContract.buildRootUri(AUTHORITY_MEDIA, "audio_root"));
                 intent.addCategory(Intent.CATEGORY_DEFAULT);
 
