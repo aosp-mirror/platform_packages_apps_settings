@@ -47,6 +47,7 @@ import com.android.settings.notification.OtherSoundSettings;
 import com.android.settings.notification.ZenModeAutomationSettings;
 import com.android.settings.notification.ZenModePrioritySettings;
 import com.android.settings.notification.ZenModeSettings;
+import com.android.settings.notification.ZenModeVisualInterruptionSettings;
 import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.sim.SimSettings;
 import com.android.settings.users.UserSettings;
@@ -129,6 +130,7 @@ public final class Ranking {
         sRankMap.put(ZenModeSettings.class.getName(), RANK_NOTIFICATIONS);
         sRankMap.put(ZenModePrioritySettings.class.getName(), RANK_NOTIFICATIONS);
         sRankMap.put(ZenModeAutomationSettings.class.getName(), RANK_NOTIFICATIONS);
+        sRankMap.put(ZenModeVisualInterruptionSettings.class.getName(), RANK_NOTIFICATIONS);
 
         // Storage
         sRankMap.put(StorageSettings.class.getName(), RANK_STORAGE);

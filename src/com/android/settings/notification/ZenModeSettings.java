@@ -37,6 +37,7 @@ import java.util.List;
 public class ZenModeSettings extends ZenModeSettingsBase implements Indexable {
     private static final String KEY_PRIORITY_SETTINGS = "priority_settings";
     private static final String KEY_AUTOMATION_SETTINGS = "automation_settings";
+    private static final String KEY_VISUAL_INTERRUPTIONS_SETTINGS = "visual_interruptions_settings";
 
     private Preference mPrioritySettings;
 
@@ -116,10 +117,12 @@ public class ZenModeSettings extends ZenModeSettingsBase implements Indexable {
         return s;
     }
 
-    private static SparseArray<String> allKeyTitles(Context context) {
+    private static SparseArray<String> allKeyTitles() {
         final SparseArray<String> rt = new SparseArray<String>();
         rt.put(R.string.zen_mode_priority_settings_title, KEY_PRIORITY_SETTINGS);
         rt.put(R.string.zen_mode_automation_settings_title, KEY_AUTOMATION_SETTINGS);
+        rt.put(R.string.zen_mode_visual_interruptions_settings_title,
+                KEY_VISUAL_INTERRUPTIONS_SETTINGS);
         return rt;
     }
 
@@ -134,7 +137,7 @@ public class ZenModeSettings extends ZenModeSettingsBase implements Indexable {
 
             @Override
             public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
-                final SparseArray<String> keyTitles = allKeyTitles(context);
+                final SparseArray<String> keyTitles = allKeyTitles();
                 final int N = keyTitles.size();
                 final List<SearchIndexableRaw> result = new ArrayList<SearchIndexableRaw>(N);
                 final Resources res = context.getResources();

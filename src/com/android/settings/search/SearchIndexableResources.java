@@ -48,6 +48,7 @@ import com.android.settings.notification.NotificationSettings;
 import com.android.settings.notification.OtherSoundSettings;
 import com.android.settings.notification.ZenModePrioritySettings;
 import com.android.settings.notification.ZenModeSettings;
+import com.android.settings.notification.ZenModeVisualInterruptionSettings;
 import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.sim.SimSettings;
 import com.android.settings.users.UserSettings;
@@ -310,6 +311,14 @@ public final class SearchIndexableResources {
                         R.xml.wifi_calling_settings,
                         WifiCallingSettings.class.getName(),
                         R.drawable.ic_settings_wireless));
+
+        sResMap.put(ZenModeVisualInterruptionSettings.class.getName(),
+                new SearchIndexableResource(
+                        Ranking.getRankForClassName(
+                                ZenModeVisualInterruptionSettings.class.getName()),
+                        R.xml.zen_mode_visual_interruptions_settings,
+                        ZenModeVisualInterruptionSettings.class.getName(),
+                        R.drawable.ic_settings_notifications));
     }
 
     private SearchIndexableResources() {

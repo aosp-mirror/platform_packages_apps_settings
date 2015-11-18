@@ -25,9 +25,15 @@
             android:title="@string/zen_mode_priority_settings_title"
             android:fragment="com.android.settings.notification.ZenModePrioritySettings" />
 
-    <!-- Downtime -->
+    <!-- Automated rules -->
     <PreferenceScreen
             android:key="automation_settings"
             android:title="@string/zen_mode_automation_settings_title"
             android:fragment="com.android.settings.notification.ZenModeAutomationSettings" />
+
+    <!-- Visual interruptions -->
+    <PreferenceScreen
+            android:key="visual_interruptions_settings"
+            android:title="@string/zen_mode_visual_interruptions_settings_title"
+            android:fragment="com.android.settings.notification.ZenModeVisualInterruptionSettings" />
 </PreferenceScreen>
