@@ -59,6 +59,7 @@ import com.android.settings.search.Index;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.users.UserDialogs;
+import com.android.settingslib.accounts.AuthenticatorHelper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -297,7 +298,7 @@ public class AccountSettings extends SettingsPreferenceFragment
         }
         if (userInfo.isEnabled()) {
             profileData.authenticatorHelper = new AuthenticatorHelper(context,
-                    userInfo.getUserHandle(), mUm, this);
+                    userInfo.getUserHandle(), this);
             if (!mUm.hasUserRestriction(DISALLOW_MODIFY_ACCOUNTS, userInfo.getUserHandle())) {
                 profileData.addAccountPreference = newAddAccountPreference(context);
             }
