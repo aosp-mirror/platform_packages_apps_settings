@@ -45,7 +45,6 @@ public class NotificationBackend {
         row.icon = app.loadIcon(pm);
         row.banned = getNotificationsBanned(row.pkg, row.uid);
         row.priority = getHighPriority(row.pkg, row.uid);
-        row.peekable = getPeekable(row.pkg, row.uid);
         row.sensitive = getSensitive(row.pkg, row.uid);
         return row;
     }
@@ -90,25 +89,6 @@ public class NotificationBackend {
         }
     }
 
-    public boolean getPeekable(String pkg, int uid) {
-        try {
-            return sINM.getPackagePeekable(pkg, uid);
-        } catch (Exception e) {
-            Log.w(TAG, "Error calling NoMan", e);
-            return false;
-        }
-    }
-
-    public boolean setPeekable(String pkg, int uid, boolean peekable) {
-        try {
-            sINM.setPackagePeekable(pkg, uid, peekable);
-            return true;
-        } catch (Exception e) {
-           Log.w(TAG, "Error calling NoMan", e);
-           return false;
-        }
-    }
-
     public boolean getSensitive(String pkg, int uid) {
         try {
             return sINM.getPackageVisibilityOverride(pkg, uid) == Notification.VISIBILITY_PRIVATE;
@@ -142,7 +122,6 @@ public class NotificationBackend {
         public Intent settingsIntent;
         public boolean banned;
         public boolean priority;
-        public boolean peekable;
         public boolean sensitive;
         public boolean first;  // first app in section
     }

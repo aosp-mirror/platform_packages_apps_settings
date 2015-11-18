@@ -88,15 +88,4 @@ public class AppStateNotificationBridge extends AppStateBaseBridge {
             return info.extraInfo != null && ((AppRow) info.extraInfo).sensitive;
         }
     };
-
-    public static final AppFilter FILTER_APP_NOTIFICATION_NO_PEEK = new AppFilter() {
-        @Override
-        public void init() {
-        }
-
-        @Override
-        public boolean filterApp(AppEntry info) {
-            return info.extraInfo != null && !((AppRow) info.extraInfo).peekable;
-        }
-    };
 }

@@ -821,9 +821,6 @@ public class InstalledAppDetails extends AppInfoBase
         if (appRow.sensitive) {
             notifSummary.add(context.getString(R.string.notifications_sensitive));
         }
-        if (!appRow.peekable) {
-            notifSummary.add(context.getString(R.string.notifications_no_peeking));
-        }
         switch (notifSummary.size()) {
             case 3:
                 return context.getString(R.string.notifications_three_items,
