@@ -38,9 +38,9 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.text.TextUtils;
 import android.util.Log;
-
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.view.RotationPolicy;
+import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 
@@ -480,6 +480,40 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     protected int getHelpResource() {
         return R.string.help_uri_display;
     }
+
+    private static class SummaryProvider implements SummaryLoader.SummaryProvider {
+        private final Context mContext;
+        private final SummaryLoader mLoader;
+
+        private SummaryProvider(Context context, SummaryLoader loader) {
+            mContext = context;
+            mLoader = loader;
+        }
+
+        @Override
+        public void setListening(boolean listening) {
+            if (listening) {
+                updateSummary();
+            }
+        }
+
+        private void updateSummary() {
+            boolean auto = Settings.System.getInt(mContext.getContentResolver(),
+                    SCREEN_BRIGHTNESS_MODE, SCREEN_BRIGHTNESS_MODE_AUTOMATIC)
+                    == SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
+            mLoader.setSummary(this, mContext.getString(auto ? R.string.display_summary_on
+                    : R.string.display_summary_off));
+        }
+    }
+
+    public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
+            = new SummaryLoader.SummaryProviderFactory() {
+        @Override
+        public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
+                                                                   SummaryLoader summaryLoader) {
+            return new SummaryProvider(activity, summaryLoader);
+        }
+    };
 
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {

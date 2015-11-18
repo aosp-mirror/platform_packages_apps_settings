@@ -189,7 +189,7 @@ public class SettingsActivity extends SettingsDrawerActivity
     public static final String EXTRA_SHOW_FRAGMENT_AS_SUBSETTING =
             ":settings:show_fragment_as_subsetting";
 
-    private static final String META_DATA_KEY_FRAGMENT_CLASS =
+    public static final String META_DATA_KEY_FRAGMENT_CLASS =
         "com.android.settings.FRAGMENT_CLASS";
 
     private static final String EXTRA_UI_OPTIONS = "settings:ui_options";

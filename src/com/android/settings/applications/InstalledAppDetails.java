@@ -790,7 +790,7 @@ public class InstalledAppDetails extends AppInfoBase
         }
     }
 
-    private static NetworkTemplate getTemplate(Context context) {
+    public static NetworkTemplate getTemplate(Context context) {
         if (DataUsageSummary.hasReadyMobileRadio(context)) {
             return NetworkTemplate.buildTemplateMobileWildcard();
         }

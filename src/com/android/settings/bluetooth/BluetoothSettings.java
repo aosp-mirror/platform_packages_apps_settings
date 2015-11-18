@@ -16,6 +16,7 @@
 
 package com.android.settings.bluetooth;
 
+import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
@@ -39,16 +40,17 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.LinkifyUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.location.ScanningSettings;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.widget.SwitchBar;
+import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.BluetoothDeviceFilter;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
@@ -476,6 +478,84 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
     protected int getHelpResource() {
         return R.string.help_url_bluetooth;
     }
+
+    private static class SummaryProvider
+            implements SummaryLoader.SummaryProvider, BluetoothCallback {
+
+        private final LocalBluetoothManager mBluetoothManager;
+        private final Context mContext;
+        private final SummaryLoader mSummaryLoader;
+
+        private boolean mEnabled;
+        private boolean mConnected;
+
+        public SummaryProvider(Context context, SummaryLoader summaryLoader) {
+            mBluetoothManager = Utils.getLocalBtManager(context);
+            mContext = context;
+            mSummaryLoader = summaryLoader;
+        }
+
+        @Override
+        public void setListening(boolean listening) {
+            if (listening) {
+                BluetoothAdapter defaultAdapter = BluetoothAdapter.getDefaultAdapter();
+                mEnabled = defaultAdapter.isEnabled();
+                mConnected =
+                        defaultAdapter.getConnectionState() == BluetoothAdapter.STATE_CONNECTED;
+                mSummaryLoader.setSummary(this, getSummary());
+                mBluetoothManager.getEventManager().registerCallback(this);
+            } else {
+                mBluetoothManager.getEventManager().unregisterCallback(this);
+            }
+        }
+
+        private CharSequence getSummary() {
+            return mContext.getString(!mEnabled ? R.string.disabled
+                    : mConnected ? R.string.bluetooth_connected
+                    : R.string.bluetooth_disconnected);
+        }
+
+        @Override
+        public void onBluetoothStateChanged(int bluetoothState) {
+            mEnabled = bluetoothState == BluetoothAdapter.STATE_ON;
+            mSummaryLoader.setSummary(this, getSummary());
+        }
+
+        @Override
+        public void onConnectionStateChanged(CachedBluetoothDevice cachedDevice, int state) {
+            mConnected = state == BluetoothAdapter.STATE_CONNECTED;
+            mSummaryLoader.setSummary(this, getSummary());
+        }
+
+        @Override
+        public void onScanningStateChanged(boolean started) {
+
+        }
+
+        @Override
+        public void onDeviceAdded(CachedBluetoothDevice cachedDevice) {
+
+        }
+
+        @Override
+        public void onDeviceDeleted(CachedBluetoothDevice cachedDevice) {
+
+        }
+
+        @Override
+        public void onDeviceBondStateChanged(CachedBluetoothDevice cachedDevice, int bondState) {
+
+        }
+    }
+
+    public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
+            = new SummaryLoader.SummaryProviderFactory() {
+        @Override
+        public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
+                                                                   SummaryLoader summaryLoader) {
+            return new SummaryProvider(activity, summaryLoader);
+        }
+    };
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
         new BaseSearchIndexProvider() {

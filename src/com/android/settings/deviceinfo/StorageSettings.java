@@ -16,6 +16,7 @@
 
 package com.android.settings.deviceinfo;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -39,10 +40,10 @@ import android.text.format.Formatter;
 import android.text.format.Formatter.BytesResult;
 import android.util.Log;
 import android.widget.Toast;
-
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
@@ -432,6 +433,52 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
             return builder.create();
         }
     }
+
+    private static class SummaryProvider implements SummaryLoader.SummaryProvider {
+        private final Context mContext;
+        private final SummaryLoader mLoader;
+
+        private SummaryProvider(Context context, SummaryLoader loader) {
+            mContext = context;
+            mLoader = loader;
+        }
+
+        @Override
+        public void setListening(boolean listening) {
+            if (listening) {
+                updateSummary();
+            }
+        }
+
+        private void updateSummary() {
+            // TODO: Register listener.
+            StorageManager storageManager = mContext.getSystemService(StorageManager.class);
+            final List<VolumeInfo> volumes = storageManager.getVolumes();
+            long privateUsedBytes = 0;
+            long privateTotalBytes = 0;
+            for (VolumeInfo info : volumes) {
+                if (info.getType() != VolumeInfo.TYPE_PUBLIC
+                        && info.getType() != VolumeInfo.TYPE_PRIVATE) {
+                    continue;
+                }
+                final File path = info.getPath();
+                privateUsedBytes += path.getTotalSpace() - path.getFreeSpace();
+                privateTotalBytes += path.getTotalSpace();
+            }
+            mLoader.setSummary(this, mContext.getString(R.string.storage_summary,
+                    Formatter.formatFileSize(mContext, privateUsedBytes),
+                    Formatter.formatFileSize(mContext, privateTotalBytes)));
+        }
+    }
+
+    public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
+            = new SummaryLoader.SummaryProviderFactory() {
+        @Override
+        public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
+                                                                   SummaryLoader summaryLoader) {
+            return new SummaryProvider(activity, summaryLoader);
+        }
+    };
 
     /**
      * Enable indexing of searchable data

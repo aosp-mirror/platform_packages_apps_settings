@@ -155,15 +155,13 @@ public class BatteryHistoryChart extends View {
     final Path mWifiRunningPath = new Path();
     final Path mCpuRunningPath = new Path();
     final Path mDateLinePath = new Path();
-    
+
     BatteryStats mStats;
     Intent mBatteryBroadcast;
     long mStatsPeriod;
-    int mBatteryLevel;
     String mMaxPercentLabelString;
     String mMinPercentLabelString;
     String mDurationString;
-    String mChargeLabelString;
     String mChargeDurationString;
     String mDrainString;
     String mChargingLabel;
@@ -174,6 +172,8 @@ public class BatteryHistoryChart extends View {
     String mWifiRunningLabel;
     String mCpuRunningLabel;
     String mPhoneSignalLabel;
+
+    BatteryInfo mInfo;
 
     int mChartMinHeight;
     int mHeaderHeight;
@@ -220,7 +220,6 @@ public class BatteryHistoryChart extends View {
     long mStartWallTime;
     long mEndDataWallTime;
     long mEndWallTime;
-    boolean mDischarging;
     int mBatLow;
     int mBatHigh;
     boolean mHaveWifi;
@@ -510,54 +509,10 @@ public class BatteryHistoryChart extends View {
 
         mMaxPercentLabelString = Utils.formatPercentage(100);
         mMinPercentLabelString = Utils.formatPercentage(0);
-
-        mBatteryLevel = com.android.settings.Utils.getBatteryLevel(mBatteryBroadcast);
-        String batteryPercentString = Utils.formatPercentage(mBatteryLevel);
-        long remainingTimeUs = 0;
-        mDischarging = true;
-        if (mBatteryBroadcast.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0) == 0) {
-            final long drainTime = mStats.computeBatteryTimeRemaining(elapsedRealtimeUs);
-            if (drainTime > 0) {
-                remainingTimeUs = drainTime;
-                String timeString = Formatter.formatShortElapsedTime(getContext(),
-                        drainTime / 1000);
-                mChargeLabelString = getContext().getResources().getString(
-                        R.string.power_discharging_duration, batteryPercentString, timeString);
-            } else {
-                mChargeLabelString = batteryPercentString;
-            }
-        } else {
-            final long chargeTime = mStats.computeChargeTimeRemaining(elapsedRealtimeUs);
-            final String statusLabel = com.android.settings.Utils.getBatteryStatus(getResources(),
-                    mBatteryBroadcast);
-            final int status = mBatteryBroadcast.getIntExtra(BatteryManager.EXTRA_STATUS,
-                    BatteryManager.BATTERY_STATUS_UNKNOWN);
-            if (chargeTime > 0 && status != BatteryManager.BATTERY_STATUS_FULL) {
-                mDischarging = false;
-                remainingTimeUs = chargeTime;
-                String timeString = Formatter.formatShortElapsedTime(getContext(),
-                        chargeTime / 1000);
-                int plugType = mBatteryBroadcast.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0);
-                int resId;
-                if (plugType == BatteryManager.BATTERY_PLUGGED_AC) {
-                    resId = R.string.power_charging_duration_ac;
-                } else if (plugType == BatteryManager.BATTERY_PLUGGED_USB) {
-                    resId = R.string.power_charging_duration_usb;
-                } else if (plugType == BatteryManager.BATTERY_PLUGGED_WIRELESS) {
-                    resId = R.string.power_charging_duration_wireless;
-                } else {
-                    resId = R.string.power_charging_duration;
-                }
-                mChargeLabelString = getContext().getResources().getString(
-                        resId, batteryPercentString, timeString);
-            } else {
-                mChargeLabelString = getContext().getResources().getString(
-                        R.string.power_charging, batteryPercentString, statusLabel);
-            }
-        }
+        mInfo = getBatteryInfo(getContext(), mBatteryBroadcast, mStats, elapsedRealtimeUs);
         mDrainString = "";
         mChargeDurationString = "";
-        setContentDescription(mChargeLabelString);
+        setContentDescription(mInfo.mChargeLabelString);
 
         int pos = 0;
         int lastInteresting = 0;
@@ -613,9 +568,9 @@ public class BatteryHistoryChart extends View {
                 }
             }
         }
-        mHistEnd = mHistDataEnd + (remainingTimeUs/1000);
+        mHistEnd = mHistDataEnd + (mInfo.remainingTimeUs/1000);
         mEndDataWallTime = lastWallTime + mHistDataEnd - lastRealtime;
-        mEndWallTime = mEndDataWallTime + (remainingTimeUs/1000);
+        mEndWallTime = mEndDataWallTime + (mInfo.remainingTimeUs/1000);
         mNumHist = lastInteresting;
         mHaveGps = (aggrStates&HistoryItem.STATE_GPS_ON_FLAG) != 0;
         mHaveFlashlight = (aggrStates2&HistoryItem.STATE2_FLASHLIGHT_FLAG) != 0;
@@ -635,7 +590,7 @@ public class BatteryHistoryChart extends View {
         mMaxPercentLabelStringWidth = (int)mTextPaint.measureText(mMaxPercentLabelString);
         mMinPercentLabelStringWidth = (int)mTextPaint.measureText(mMinPercentLabelString);
         mDrainStringWidth = (int)mHeaderTextPaint.measureText(mDrainString);
-        mChargeLabelStringWidth = (int)mHeaderTextPaint.measureText(mChargeLabelString);
+        mChargeLabelStringWidth = (int)mHeaderTextPaint.measureText(mInfo.mChargeLabelString);
         mChargeDurationStringWidth = (int)mHeaderTextPaint.measureText(mChargeDurationString);
         mTextAscent = (int)mTextPaint.ascent();
         mTextDescent = (int)mTextPaint.descent();
@@ -1029,9 +984,9 @@ public class BatteryHistoryChart extends View {
         if (lastY < 0 || lastX < 0) {
             // Didn't get any data...
             x = lastX = mLevelLeft;
-            y = lastY = mLevelTop + levelh - ((mBatteryLevel-batLow)*(levelh-1))/batChange;
+            y = lastY = mLevelTop + levelh - ((mInfo.mBatteryLevel-batLow)*(levelh-1))/batChange;
             Path path;
-            byte value = (byte)mBatteryLevel;
+            byte value = (byte)mInfo.mBatteryLevel;
             if (value <= mBatteryCriticalLevel) path = mBatCriticalPath;
             else if (value <= mBatteryWarnLevel) path = mBatWarnPath;
             else path = null; //mBatGoodPath;
@@ -1060,7 +1015,7 @@ public class BatteryHistoryChart extends View {
             mTimeRemainPath.moveTo(x, lastY);
             int fullY = mLevelTop + levelh - ((100-batLow)*(levelh-1))/batChange;
             int emptyY = mLevelTop + levelh - ((0-batLow)*(levelh-1))/batChange;
-            if (mDischarging) {
+            if (mInfo.mDischarging) {
                 mTimeRemainPath.lineTo(mLevelRight, emptyY);
             } else {
                 mTimeRemainPath.lineTo(mLevelRight, fullY);
@@ -1257,8 +1212,8 @@ public class BatteryHistoryChart extends View {
 
         int headerTop = -mHeaderTextAscent + (mHeaderTextDescent-mHeaderTextAscent)/3;
         mHeaderTextPaint.setTextAlign(textAlignLeft);
-        if (DEBUG) Log.d(TAG, "Drawing charge label string: " + mChargeLabelString);
-        canvas.drawText(mChargeLabelString, textStartX, headerTop, mHeaderTextPaint);
+        if (DEBUG) Log.d(TAG, "Drawing charge label string: " + mInfo.mChargeLabelString);
+        canvas.drawText(mInfo.mChargeLabelString, textStartX, headerTop, mHeaderTextPaint);
         int stringHalfWidth = mChargeDurationStringWidth / 2;
         if (layoutRtl) stringHalfWidth = -stringHalfWidth;
         int headerCenter = ((width-mChargeDurationStringWidth-mDrainStringWidth)/2)
@@ -1403,5 +1358,60 @@ public class BatteryHistoryChart extends View {
                 canvas.drawText(label.label, x, ytop - mTextAscent, mTextPaint);
             }
         }
+    }
+
+    public static class BatteryInfo {
+        public String mChargeLabelString;
+        public int mBatteryLevel;
+        public boolean mDischarging = true;
+        public long remainingTimeUs = 0;
+    }
+
+    public static BatteryInfo getBatteryInfo(Context context, Intent batteryBroadcast,
+                                             BatteryStats stats, long elapsedRealtimeUs) {
+        BatteryInfo info = new BatteryInfo();
+        info.mBatteryLevel = com.android.settings.Utils.getBatteryLevel(batteryBroadcast);
+        String batteryPercentString = Utils.formatPercentage(info.mBatteryLevel);
+        if (batteryBroadcast.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0) == 0) {
+            final long drainTime = stats.computeBatteryTimeRemaining(elapsedRealtimeUs);
+            if (drainTime > 0) {
+                info.remainingTimeUs = drainTime;
+                String timeString = Formatter.formatShortElapsedTime(context,
+                        drainTime / 1000);
+                info.mChargeLabelString = context.getResources().getString(
+                        R.string.power_discharging_duration, batteryPercentString, timeString);
+            } else {
+                info.mChargeLabelString = batteryPercentString;
+            }
+        } else {
+            final long chargeTime = stats.computeChargeTimeRemaining(elapsedRealtimeUs);
+            final String statusLabel = com.android.settings.Utils.getBatteryStatus(
+                    context.getResources(), batteryBroadcast);
+            final int status = batteryBroadcast.getIntExtra(BatteryManager.EXTRA_STATUS,
+                    BatteryManager.BATTERY_STATUS_UNKNOWN);
+            if (chargeTime > 0 && status != BatteryManager.BATTERY_STATUS_FULL) {
+                info.mDischarging = false;
+                info.remainingTimeUs = chargeTime;
+                String timeString = Formatter.formatShortElapsedTime(context,
+                        chargeTime / 1000);
+                int plugType = batteryBroadcast.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0);
+                int resId;
+                if (plugType == BatteryManager.BATTERY_PLUGGED_AC) {
+                    resId = R.string.power_charging_duration_ac;
+                } else if (plugType == BatteryManager.BATTERY_PLUGGED_USB) {
+                    resId = R.string.power_charging_duration_usb;
+                } else if (plugType == BatteryManager.BATTERY_PLUGGED_WIRELESS) {
+                    resId = R.string.power_charging_duration_wireless;
+                } else {
+                    resId = R.string.power_charging_duration;
+                }
+                info.mChargeLabelString = context.getResources().getString(
+                        resId, batteryPercentString, timeString);
+            } else {
+                info.mChargeLabelString = context.getResources().getString(
+                        R.string.power_charging, batteryPercentString, statusLabel);
+            }
+        }
+        return info;
     }
 }
