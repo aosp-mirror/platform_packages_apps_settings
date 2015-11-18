@@ -2690,6 +2690,116 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         summary.setText(string);
     }
 
+    private void addMobileTab(Context context, SubscriptionInfo subInfo, boolean isMultiSim) {
+        if (subInfo != null && mMobileTagMap != null) {
+            if (hasReadyMobileRadio(context, subInfo.getSubscriptionId())) {
+                if (isMultiSim) {
+                    mTabHost.addTab(buildTabSpec(mMobileTagMap.get(subInfo.getSubscriptionId()),
+                            subInfo.getDisplayName()));
+                } else {
+                    mTabHost.addTab(buildTabSpec(mMobileTagMap.get(subInfo.getSubscriptionId()),
+                            R.string.data_usage_tab_mobile));
+                }
+            }
+        } else {
+            if (LOGD) Log.d(TAG, "addMobileTab: subInfoList is null");
+        }
+    }
+
+    private SubscriptionInfo getCurrentTabSubInfo(Context context) {
+        if (mSubInfoList != null && mTabHost != null) {
+            final int currentTagIndex = mTabHost.getCurrentTab();
+            int i = 0;
+            for (SubscriptionInfo subInfo : mSubInfoList) {
+                if (hasReadyMobileRadio(context, subInfo.getSubscriptionId())) {
+                    if (i++ == currentTagIndex) {
+                        return subInfo;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Init a map with subId key and mobile tag name
+     * @param subInfoList The subscription Info List
+     * @return The map or null if no activated subscription
+     */
+    private Map<Integer, String> initMobileTabTag(List<SubscriptionInfo> subInfoList) {
+        Map<Integer, String> map = null;
+        if (subInfoList != null) {
+            String mobileTag;
+            map = new HashMap<Integer, String>();
+            for (SubscriptionInfo subInfo : subInfoList) {
+                mobileTag = TAB_MOBILE + String.valueOf(subInfo.getSubscriptionId());
+                map.put(subInfo.getSubscriptionId(), mobileTag);
+            }
+        }
+        return map;
+    }
+
+    private static boolean isMobileTab(String currentTab) {
+        return currentTab != null ? currentTab.contains(TAB_MOBILE) : false;
+    }
+
+    private int getSubId(String currentTab) {
+        if (mMobileTagMap != null) {
+            Set<Integer> set = mMobileTagMap.keySet();
+            for (Integer subId : set) {
+                if (mMobileTagMap.get(subId).equals(currentTab)) {
+                    return subId;
+                }
+            }
+        }
+        Log.e(TAG, "currentTab = " + currentTab + " non mobile tab called this function");
+        return -1;
+    }
+
+    private boolean isMobileDataAvailable(int subId) {
+        return mSubscriptionManager.getActiveSubscriptionInfo(subId) != null;
+    }
+
+    private static class SummaryProvider
+            implements SummaryLoader.SummaryProvider {
+
+        private final Activity mActivity;
+        private final SummaryLoader mSummaryLoader;
+        private final MobileDataController mDataController;
+
+        public SummaryProvider(Activity activity, SummaryLoader summaryLoader) {
+            mActivity = activity;
+            mSummaryLoader = summaryLoader;
+            mDataController = new MobileDataController(activity);
+        }
+
+        @Override
+        public void setListening(boolean listening) {
+            if (listening) {
+                MobileDataController.DataUsageInfo info = mDataController.getDataUsageInfo();
+                String used;
+                if (info == null) {
+                    used = Formatter.formatFileSize(mActivity, 0);
+                } else if (info.limitLevel <= 0) {
+                    used = Formatter.formatFileSize(mActivity, info.usageLevel);
+                } else {
+                    used = Utils.formatPercentage(info.usageLevel, info.limitLevel);
+                }
+                mSummaryLoader.setSummary(this,
+                        mActivity.getString(R.string.data_usage_summary_format, used));
+            }
+        }
+    }
+
+    public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
+            = new SummaryLoader.SummaryProviderFactory() {
+        @Override
+        public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
+                                                                   SummaryLoader summaryLoader) {
+            return new SummaryProvider(activity, summaryLoader);
+        }
+    };
+
     /**
      * For search
      */
@@ -2731,114 +2841,4 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
                 return result;
             }
         };
-
-        private void addMobileTab(Context context, SubscriptionInfo subInfo, boolean isMultiSim) {
-            if (subInfo != null && mMobileTagMap != null) {
-                if (hasReadyMobileRadio(context, subInfo.getSubscriptionId())) {
-                    if (isMultiSim) {
-                        mTabHost.addTab(buildTabSpec(mMobileTagMap.get(subInfo.getSubscriptionId()),
-                                subInfo.getDisplayName()));
-                    } else {
-                        mTabHost.addTab(buildTabSpec(mMobileTagMap.get(subInfo.getSubscriptionId()),
-                                R.string.data_usage_tab_mobile));
-                    }
-                }
-            } else {
-                if (LOGD) Log.d(TAG, "addMobileTab: subInfoList is null");
-            }
-        }
-
-        private SubscriptionInfo getCurrentTabSubInfo(Context context) {
-            if (mSubInfoList != null && mTabHost != null) {
-                final int currentTagIndex = mTabHost.getCurrentTab();
-                int i = 0;
-                for (SubscriptionInfo subInfo : mSubInfoList) {
-                    if (hasReadyMobileRadio(context, subInfo.getSubscriptionId())) {
-                        if (i++ == currentTagIndex) {
-                            return subInfo;
-                        }
-                    }
-                }
-            }
-            return null;
-        }
-
-        /**
-         * Init a map with subId key and mobile tag name
-         * @param subInfoList The subscription Info List
-         * @return The map or null if no activated subscription
-         */
-        private Map<Integer, String> initMobileTabTag(List<SubscriptionInfo> subInfoList) {
-            Map<Integer, String> map = null;
-            if (subInfoList != null) {
-                String mobileTag;
-                map = new HashMap<Integer, String>();
-                for (SubscriptionInfo subInfo : subInfoList) {
-                    mobileTag = TAB_MOBILE + String.valueOf(subInfo.getSubscriptionId());
-                    map.put(subInfo.getSubscriptionId(), mobileTag);
-                }
-            }
-            return map;
-        }
-
-        private static boolean isMobileTab(String currentTab) {
-            return currentTab != null ? currentTab.contains(TAB_MOBILE) : false;
-        }
-
-        private int getSubId(String currentTab) {
-            if (mMobileTagMap != null) {
-                Set<Integer> set = mMobileTagMap.keySet();
-                for (Integer subId : set) {
-                    if (mMobileTagMap.get(subId).equals(currentTab)) {
-                        return subId;
-                    }
-                }
-            }
-            Log.e(TAG, "currentTab = " + currentTab + " non mobile tab called this function");
-            return -1;
-        }
-
-        private boolean isMobileDataAvailable(int subId) {
-            return mSubscriptionManager.getActiveSubscriptionInfo(subId) != null;
-        }
-
-    private static class SummaryProvider
-            implements SummaryLoader.SummaryProvider {
-
-        private final Activity mActivity;
-        private final SummaryLoader mSummaryLoader;
-        private final MobileDataController mDataController;
-
-        public SummaryProvider(Activity activity, SummaryLoader summaryLoader) {
-            mActivity = activity;
-            mSummaryLoader = summaryLoader;
-            mDataController = new MobileDataController(activity);
-        }
-
-        @Override
-        public void setListening(boolean listening) {
-            if (listening) {
-                MobileDataController.DataUsageInfo info = mDataController.getDataUsageInfo();
-                String used;
-                if (info == null) {
-                    used = Formatter.formatFileSize(mActivity, 0);
-                } else if (info.limitLevel <= 0) {
-                    used = Formatter.formatFileSize(mActivity, info.usageLevel);
-                } else {
-                    used = Utils.formatPercentage(info.usageLevel, info.limitLevel);
-                }
-                mSummaryLoader.setSummary(this,
-                        mActivity.getString(R.string.data_usage_summary_format, used));
-            }
-        }
-    }
-
-    public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
-            = new SummaryLoader.SummaryProviderFactory() {
-        @Override
-        public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
-                                                                   SummaryLoader summaryLoader) {
-            return new SummaryProvider(activity, summaryLoader);
-        }
-    };
 }
