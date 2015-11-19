@@ -23,12 +23,11 @@ import android.os.Bundle;
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.ChooseLockSettingsHelper;
 import com.android.settings.R;
-import com.android.settings.fingerprint.FingerprintEnrollSidecar.Listener;
 
 /**
  * Activity explaining the fingerprint sensor location for fingerprint enrollment.
  */
-public class FingerprintEnrollFindSensor extends FingerprintEnrollBase implements Listener {
+public class FingerprintEnrollFindSensor extends FingerprintEnrollBase {
 
     private static final int CONFIRM_REQUEST = 1;
     private static final int ENROLLING = 2;
@@ -36,7 +35,6 @@ public class FingerprintEnrollFindSensor extends FingerprintEnrollBase implement
 
     private FingerprintLocationAnimationView mAnimation;
     private boolean mLaunchedConfirmLock;
-    private FingerprintEnrollSidecar mSidecar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,14 +54,6 @@ public class FingerprintEnrollFindSensor extends FingerprintEnrollBase implement
     protected void onStart() {
         super.onStart();
         mAnimation.startAnimation();
-        mSidecar = (FingerprintEnrollSidecar) getFragmentManager().findFragmentByTag(
-                FingerprintEnrollEnrolling.TAG_SIDECAR);
-        if (mSidecar == null) {
-            mSidecar = new FingerprintEnrollSidecar();
-            getFragmentManager().beginTransaction()
-                    .add(mSidecar, FingerprintEnrollEnrolling.TAG_SIDECAR).commit();
-        }
-        mSidecar.setListener(this);
     }
 
     @Override
@@ -134,21 +124,5 @@ public class FingerprintEnrollFindSensor extends FingerprintEnrollBase implement
     @Override
     protected int getMetricsCategory() {
         return MetricsLogger.FINGERPRINT_FIND_SENSOR;
-    }
-
-    @Override
-    public void onEnrollmentHelp(CharSequence helpString) {
-    }
-
-    @Override
-    public void onEnrollmentError(int errMsgId, CharSequence errString) {
-    }
-
-    @Override
-    public void onEnrollmentProgressChange(int steps, int remaining) {
-        // Activity on the sensor should auto-advance to the enrolling step
-        mSidecar.setListener(null);
-        getFragmentManager().beginTransaction().remove(mSidecar).commit();
-        onNextButtonClick();
     }
 }
