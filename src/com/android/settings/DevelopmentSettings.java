@@ -54,6 +54,7 @@ import android.os.StrictMode;
 import android.os.SystemProperties;
 import android.os.UserManager;
 import android.os.storage.IMountService;
+import android.os.storage.StorageManager;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.provider.Settings.Global;
@@ -421,7 +422,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             IMountService mountService = IMountService.Stub.asInterface(service);
             if (!mountService.isConvertibleToFBE()) {
                 removePreference(KEY_CONVERT_FBE);
-            } else if (mountService.isPerUserEncryptionEnabled()) {
+            } else if ("file".equals(SystemProperties.get("ro.crypto.type", "none"))) {
                 convertFbePreference.setEnabled(false);
                 convertFbePreference.setSummary(getResources()
                                    .getString(R.string.convert_to_file_encryption_done));
