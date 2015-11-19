@@ -55,7 +55,6 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
 
     private static final String KEY_BLOCK = "block";
     private static final String KEY_PRIORITY = "priority";
-    private static final String KEY_PEEKABLE = "peekable";
     private static final String KEY_SENSITIVE = "sensitive";
     private static final String KEY_APP_SETTINGS = "app_settings";
 
@@ -68,7 +67,6 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
     private Context mContext;
     private SwitchPreference mBlock;
     private SwitchPreference mPriority;
-    private SwitchPreference mPeekable;
     private SwitchPreference mSensitive;
     private AppRow mAppRow;
     private boolean mCreated;
@@ -133,7 +131,6 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
         addPreferencesFromResource(R.xml.app_notification_settings);
         mBlock = (SwitchPreference) findPreference(KEY_BLOCK);
         mPriority = (SwitchPreference) findPreference(KEY_PRIORITY);
-        mPeekable = (SwitchPreference) findPreference(KEY_PEEKABLE);
         mSensitive = (SwitchPreference) findPreference(KEY_SENSITIVE);
 
         mAppRow = mBackend.loadAppRow(pm, info.applicationInfo);
@@ -146,7 +143,6 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
         mBlock.setChecked(mAppRow.banned);
         updateDependents(mAppRow.banned);
         mPriority.setChecked(mAppRow.priority);
-        mPeekable.setChecked(mAppRow.peekable);
         mSensitive.setChecked(mAppRow.sensitive);
 
         mBlock.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
@@ -169,14 +165,6 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 final boolean priority = (Boolean) newValue;
                 return mBackend.setHighPriority(pkg, mUid, priority);
-            }
-        });
-
-        mPeekable.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                final boolean peekable = (Boolean) newValue;
-                return mBackend.setPeekable(pkg, mUid, peekable);
             }
         });
 
@@ -219,7 +207,6 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
 
         setVisible(mBlock, !mIsSystemPackage);
         setVisible(mPriority, mIsSystemPackage || !banned);
-        setVisible(mPeekable, mIsSystemPackage || !banned);
         setVisible(mSensitive, mIsSystemPackage || !banned && lockscreenSecure
                 && lockscreenNotificationsEnabled && allowPrivate);
     }

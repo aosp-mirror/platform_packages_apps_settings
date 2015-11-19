@@ -139,7 +139,6 @@ public class ManageApplications extends InstrumentedFragment
             R.string.filter_apps_disabled, // Disabled
             R.string.filter_notif_blocked_apps,   // Blocked Notifications
             R.string.filter_notif_priority_apps,  // Priority Notifications
-            R.string.filter_notif_no_peeking,     // No peeking Notifications
             R.string.filter_notif_sensitive_apps, // Sensitive Notifications
             R.string.filter_personal_apps, // Personal
             R.string.filter_work_apps,     // Work
@@ -160,7 +159,6 @@ public class ManageApplications extends InstrumentedFragment
             ApplicationsState.FILTER_DISABLED,    // Disabled
             AppStateNotificationBridge.FILTER_APP_NOTIFICATION_BLOCKED,   // Blocked Notifications
             AppStateNotificationBridge.FILTER_APP_NOTIFICATION_PRIORITY,  // Priority Notifications
-            AppStateNotificationBridge.FILTER_APP_NOTIFICATION_NO_PEEK,   // No peeking Notifications
             AppStateNotificationBridge.FILTER_APP_NOTIFICATION_SENSITIVE, // Sensitive Notifications
             ApplicationsState.FILTER_PERSONAL,    // Personal
             ApplicationsState.FILTER_WORK,        // Work
