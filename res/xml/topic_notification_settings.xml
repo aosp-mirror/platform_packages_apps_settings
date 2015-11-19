@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2014 The Android Open Source Project
+<!-- Copyright (C) 2015 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,22 +15,23 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        android:title="@string/app_notifications_title"
-        android:key="app_notification_settings">
+        android:title="@string/topic_notifications_title"
+        android:key="topic_notification_settings">
 
-    <!-- Block -->
+    <!-- Bypass DND -->
     <SwitchPreference
-            android:key="block"
-            android:title="@string/app_notification_block_title"
-            android:summary="@string/app_notification_block_summary"
-            android:order="1"
+            android:key="bypass_dnd"
+            android:title="@string/app_notification_override_dnd_title"
+            android:summary="@string/app_notification_override_dnd_summary"
+            android:order="2"
             android:persistent="false" />
 
-    <!-- App notification preferences -->
-    <Preference
-            android:key="app_settings"
-            android:title="@string/app_notification_preferences"
-            android:order="5"
+    <!-- Sensitive -->
+    <SwitchPreference
+            android:key="sensitive"
+            android:title="@string/app_notification_sensitive_title"
+            android:summary="@string/app_notification_sensitive_summary"
+            android:order="4"
             android:persistent="false" />
 
 </PreferenceScreen>

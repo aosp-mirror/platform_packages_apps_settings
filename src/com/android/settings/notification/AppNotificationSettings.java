@@ -54,8 +54,6 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     private static final String KEY_BLOCK = "block";
-    private static final String KEY_PRIORITY = "priority";
-    private static final String KEY_SENSITIVE = "sensitive";
     private static final String KEY_APP_SETTINGS = "app_settings";
 
     private static final Intent APP_NOTIFICATION_PREFS_CATEGORY_INTENT
@@ -66,8 +64,6 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
 
     private Context mContext;
     private SwitchPreference mBlock;
-    private SwitchPreference mPriority;
-    private SwitchPreference mSensitive;
     private AppRow mAppRow;
     private boolean mCreated;
     private boolean mIsSystemPackage;
@@ -130,8 +126,6 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
 
         addPreferencesFromResource(R.xml.app_notification_settings);
         mBlock = (SwitchPreference) findPreference(KEY_BLOCK);
-        mPriority = (SwitchPreference) findPreference(KEY_PRIORITY);
-        mSensitive = (SwitchPreference) findPreference(KEY_SENSITIVE);
 
         mAppRow = mBackend.loadAppRow(pm, info.applicationInfo);
 
@@ -140,10 +134,29 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
         rows.put(mAppRow.pkg, mAppRow);
         collectConfigActivities(getPackageManager(), rows);
 
+        // Add topics
+        List<Notification.Topic> topics = mBackend.getTopics(pkg, mUid);
+        for (Notification.Topic topic : topics) {
+            Preference topicPreference = new Preference(mContext);
+            topicPreference.setKey(topic.getId());
+            topicPreference.setTitle(topic.getLabel());
+            // Create intent for this preference.
+            Bundle topicArgs = new Bundle();
+            topicArgs.putInt(AppInfoBase.ARG_PACKAGE_UID, mUid);
+            topicArgs.putParcelable(TopicNotificationSettings.ARG_TOPIC, topic);
+            topicArgs.putBoolean(AppHeader.EXTRA_HIDE_INFO_BUTTON, true);
+            topicArgs.putParcelable(TopicNotificationSettings.ARG_PACKAGE_INFO, info);
+
+            Intent topicIntent = Utils.onBuildStartFragmentIntent(getActivity(),
+                    TopicNotificationSettings.class.getName(),
+                    topicArgs, null, R.string.topic_notifications_title, null, false);
+            topicPreference.setIntent(topicIntent);
+            // Add preference to the settings menu.
+            getPreferenceScreen().addPreference(topicPreference);
+        }
+
         mBlock.setChecked(mAppRow.banned);
         updateDependents(mAppRow.banned);
-        mPriority.setChecked(mAppRow.priority);
-        mSensitive.setChecked(mAppRow.sensitive);
 
         mBlock.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
             @Override
@@ -157,22 +170,6 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
                     updateDependents(banned);
                 }
                 return success;
-            }
-        });
-
-        mPriority.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                final boolean priority = (Boolean) newValue;
-                return mBackend.setHighPriority(pkg, mUid, priority);
-            }
-        });
-
-        mSensitive.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                final boolean sensitive = (Boolean) newValue;
-                return mBackend.setSensitive(pkg, mUid, sensitive);
             }
         });
 
@@ -200,15 +197,7 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
     }
 
     private void updateDependents(boolean banned) {
-        final boolean lockscreenSecure = new LockPatternUtils(getActivity()).isSecure(
-                UserHandle.myUserId());
-        final boolean lockscreenNotificationsEnabled = getLockscreenNotificationsEnabled();
-        final boolean allowPrivate = getLockscreenAllowPrivateNotifications();
-
         setVisible(mBlock, !mIsSystemPackage);
-        setVisible(mPriority, mIsSystemPackage || !banned);
-        setVisible(mSensitive, mIsSystemPackage || !banned && lockscreenSecure
-                && lockscreenNotificationsEnabled && allowPrivate);
     }
 
     private void setVisible(Preference p, boolean visible) {
@@ -219,16 +208,6 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
         } else {
             getPreferenceScreen().removePreference(p);
         }
-    }
-
-    private boolean getLockscreenNotificationsEnabled() {
-        return Settings.Secure.getInt(getContentResolver(),
-                Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS, 0) != 0;
-    }
-
-    private boolean getLockscreenAllowPrivateNotifications() {
-        return Settings.Secure.getInt(getContentResolver(),
-                Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, 0) != 0;
     }
 
     private void toastAndFinish() {

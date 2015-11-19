@@ -814,25 +814,7 @@ public class InstalledAppDetails extends AppInfoBase
         if (appRow.banned) {
             return context.getString(R.string.notifications_disabled);
         }
-        ArrayList<CharSequence> notifSummary = new ArrayList<>();
-        if (appRow.priority) {
-            notifSummary.add(context.getString(R.string.notifications_priority));
-        }
-        if (appRow.sensitive) {
-            notifSummary.add(context.getString(R.string.notifications_sensitive));
-        }
-        switch (notifSummary.size()) {
-            case 3:
-                return context.getString(R.string.notifications_three_items,
-                        notifSummary.get(0), notifSummary.get(1), notifSummary.get(2));
-            case 2:
-                return context.getString(R.string.notifications_two_items,
-                        notifSummary.get(0), notifSummary.get(1));
-            case 1:
-                return notifSummary.get(0);
-            default:
-                return context.getString(R.string.notifications_enabled);
-        }
+        return context.getString(R.string.notifications_enabled);
     }
 
     private class MemoryUpdater extends AsyncTask<Void, Void, ProcStatsPackageEntry> {

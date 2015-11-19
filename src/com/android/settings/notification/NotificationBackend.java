@@ -15,16 +15,21 @@
  */
 package com.android.settings.notification;
 
+import com.google.android.collect.Lists;
+
 import android.app.INotificationManager;
 import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.ParceledListSlice;
 import android.graphics.drawable.Drawable;
 import android.os.ServiceManager;
 import android.service.notification.NotificationListenerService;
 import android.util.Log;
+
+import java.util.List;
 
 public class NotificationBackend {
     private static final String TAG = "NotificationBackend";
@@ -44,8 +49,19 @@ public class NotificationBackend {
         }
         row.icon = app.loadIcon(pm);
         row.banned = getNotificationsBanned(row.pkg, row.uid);
-        row.priority = getHighPriority(row.pkg, row.uid);
-        row.sensitive = getSensitive(row.pkg, row.uid);
+        return row;
+    }
+
+    public TopicRow loadTopicRow(PackageManager pm, ApplicationInfo app, Notification.Topic topic) {
+        final TopicRow row = new TopicRow();
+        row.pkg = app.packageName;
+        row.uid = app.uid;
+        row.label = topic.getLabel();
+        row.icon = app.loadIcon(pm);
+        row.topic = topic;
+        row.priority = getBypassZenMode(row.pkg, row.uid, row.topic);
+        row.sensitive = getSensitive(row.pkg, row.uid, row.topic);
+        row.banned = getNotificationsBanned(row.pkg, row.uid);
         return row;
     }
 
@@ -69,19 +85,20 @@ public class NotificationBackend {
         }
     }
 
-    public boolean getHighPriority(String pkg, int uid) {
+    public boolean getBypassZenMode(String pkg, int uid, Notification.Topic topic) {
         try {
-            return sINM.getPackagePriority(pkg, uid) == Notification.PRIORITY_MAX;
+            return sINM.getTopicPriority(pkg, uid, topic) == Notification.PRIORITY_MAX;
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
             return false;
         }
     }
 
-    public boolean setHighPriority(String pkg, int uid, boolean highPriority) {
+    public boolean setBypassZenMode(String pkg, int uid, Notification.Topic topic,
+            boolean bypassZen) {
         try {
-            sINM.setPackagePriority(pkg, uid,
-                    highPriority ? Notification.PRIORITY_MAX : Notification.PRIORITY_DEFAULT);
+            sINM.setTopicPriority(pkg, uid, topic,
+                    bypassZen ? Notification.PRIORITY_MAX : Notification.PRIORITY_DEFAULT);
             return true;
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
@@ -89,24 +106,35 @@ public class NotificationBackend {
         }
     }
 
-    public boolean getSensitive(String pkg, int uid) {
+    public boolean getSensitive(String pkg, int uid, Notification.Topic topic) {
         try {
-            return sINM.getPackageVisibilityOverride(pkg, uid) == Notification.VISIBILITY_PRIVATE;
+            return sINM.getTopicVisibilityOverride(pkg, uid, topic)
+                    == Notification.VISIBILITY_PRIVATE;
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
             return false;
         }
     }
 
-    public boolean setSensitive(String pkg, int uid, boolean sensitive) {
+    public boolean setSensitive(String pkg, int uid, Notification.Topic topic, boolean sensitive) {
         try {
-            sINM.setPackageVisibilityOverride(pkg, uid,
+            sINM.setTopicVisibilityOverride(pkg, uid, topic,
                     sensitive ? Notification.VISIBILITY_PRIVATE
                             : NotificationListenerService.Ranking.VISIBILITY_NO_OVERRIDE);
             return true;
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
             return false;
+        }
+    }
+
+    public List<Notification.Topic> getTopics(String pkg, int uid) {
+        try {
+            final ParceledListSlice<Notification.Topic> parceledList = sINM.getTopics(pkg, uid);
+            return parceledList.getList();
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return Lists.newArrayList();
         }
     }
 
@@ -121,9 +149,13 @@ public class NotificationBackend {
         public CharSequence label;
         public Intent settingsIntent;
         public boolean banned;
+        public boolean first;  // first app in section
+    }
+
+    public static class TopicRow extends AppRow {
+        public Notification.Topic topic;
         public boolean priority;
         public boolean sensitive;
-        public boolean first;  // first app in section
     }
 
 }
