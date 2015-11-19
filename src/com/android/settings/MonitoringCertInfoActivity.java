@@ -47,12 +47,13 @@ public class MonitoringCertInfoActivity extends Activity implements OnClickListe
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.ssl_ca_cert_dialog_title);
         builder.setCancelable(true);
-        hasDeviceOwner = dpm.getDeviceOwner() != null;
+        // TODO See b/25772443
+        hasDeviceOwner = dpm.getDeviceOwnerComponentOnCallingUser() != null;
         int buttonLabel;
         if (hasDeviceOwner) {
             // Institutional case.  Show informational message.
             String message = this.getResources().getString(R.string.ssl_ca_cert_info_message,
-                    dpm.getDeviceOwnerName());
+                    dpm.getDeviceOwnerNameOnAnyUser());
             builder.setMessage(message);
             buttonLabel = R.string.done_button;
         } else {

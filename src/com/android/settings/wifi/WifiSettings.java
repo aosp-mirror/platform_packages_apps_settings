@@ -22,6 +22,7 @@ import android.app.AppGlobals;
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -985,11 +986,12 @@ public class WifiSettings extends RestrictedSettingsFragment
 
         boolean isConfigEligibleForLockdown = false;
         if (dpm != null) {
-            final String deviceOwnerPackageName = dpm.getDeviceOwner();
-            if (deviceOwnerPackageName != null) {
+            final ComponentName deviceOwner = dpm.getDeviceOwnerComponentOnAnyUser();
+            if (deviceOwner != null) {
+                final int deviceOwnerUserId = dpm.getDeviceOwnerUserId();
                 try {
-                    final int deviceOwnerUid = pm.getPackageUid(deviceOwnerPackageName,
-                            UserHandle.USER_SYSTEM);
+                    final int deviceOwnerUid = pm.getPackageUid(deviceOwner.getPackageName(),
+                            deviceOwnerUserId);
                     isConfigEligibleForLockdown = deviceOwnerUid == config.creatorUid;
                 } catch (NameNotFoundException e) {
                     // don't care

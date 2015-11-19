@@ -108,10 +108,10 @@ public class DeviceAdminSettings extends ListFragment {
         filter.addAction(DevicePolicyManager.ACTION_DEVICE_POLICY_MANAGER_STATE_CHANGED);
         getActivity().registerReceiverAsUser(
                 mBroadcastReceiver, UserHandle.ALL, filter, null, null);
-        mDeviceOwnerPkg = mDPM.getDeviceOwner();
-        if (mDeviceOwnerPkg != null && !mDPM.isDeviceOwner(mDeviceOwnerPkg)) {
-            mDeviceOwnerPkg = null;
-        }
+
+        final ComponentName deviceOwnerComponent = mDPM.getDeviceOwnerComponentOnAnyUser();
+        mDeviceOwnerPkg =
+                deviceOwnerComponent != null ? deviceOwnerComponent.getPackageName() : null;
         mProfileOwnerComponents.clear();
         final List<UserHandle> profiles = mUm.getUserProfiles();
         final int profilesSize = profiles.size();

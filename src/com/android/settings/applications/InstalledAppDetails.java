@@ -206,6 +206,9 @@ public class InstalledAppDetails extends AppInfoBase
             enabled = false;
         }
 
+        // We don't allow uninstalling DO/PO on *any* users, because if it's a system app,
+        // "uninstall" is actually "downgrade to the system version + disable", and "downgrade"
+        // will clear data on all users.
         if (isProfileOrDeviceOwner(mPackageInfo.packageName)) {
             enabled = false;
         }
@@ -250,7 +253,7 @@ public class InstalledAppDetails extends AppInfoBase
         List<UserInfo> userInfos = mUserManager.getUsers();
         DevicePolicyManager dpm = (DevicePolicyManager)
                 getContext().getSystemService(Context.DEVICE_POLICY_SERVICE);
-        if (packageName.equals(dpm.getDeviceOwner())) {
+        if (dpm.isDeviceOwnerAppOnAnyUser(packageName)) {
             return true;
         }
         for (UserInfo userInfo : userInfos) {
