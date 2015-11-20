@@ -16,6 +16,7 @@
 
 package com.android.settings.location;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -24,6 +25,7 @@ import android.location.SettingInjectorService;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceGroup;
@@ -41,6 +43,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.applications.InstalledAppDetails;
+import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.location.RecentLocationApps;
 
@@ -331,23 +334,25 @@ public class LocationSettings extends LocationSettingsBase
         return R.string.help_url_location_access;
     }
 
-    @Override
-    public void onModeChanged(int mode, boolean restricted) {
+    private static int getLocationString(int mode) {
         switch (mode) {
             case android.provider.Settings.Secure.LOCATION_MODE_OFF:
-                mLocationMode.setSummary(R.string.location_mode_location_off_title);
-                break;
+                return R.string.location_mode_location_off_title;
             case android.provider.Settings.Secure.LOCATION_MODE_SENSORS_ONLY:
-                mLocationMode.setSummary(R.string.location_mode_sensors_only_title);
-                break;
+                return R.string.location_mode_sensors_only_title;
             case android.provider.Settings.Secure.LOCATION_MODE_BATTERY_SAVING:
-                mLocationMode.setSummary(R.string.location_mode_battery_saving_title);
-                break;
+                return R.string.location_mode_battery_saving_title;
             case android.provider.Settings.Secure.LOCATION_MODE_HIGH_ACCURACY:
-                mLocationMode.setSummary(R.string.location_mode_high_accuracy_title);
-                break;
-            default:
-                break;
+                return R.string.location_mode_high_accuracy_title;
+        }
+        return 0;
+    }
+
+    @Override
+    public void onModeChanged(int mode, boolean restricted) {
+        int modeDescription = getLocationString(mode);
+        if (modeDescription != 0) {
+            mLocationMode.setSummary(modeDescription);
         }
 
         // Restricted user can't change the location mode, so disable the master switch. But in some
@@ -422,4 +427,39 @@ public class LocationSettings extends LocationSettingsBase
             return true;
         }
     }
+
+    private static class SummaryProvider implements SummaryLoader.SummaryProvider {
+
+        private final Context mContext;
+        private final SummaryLoader mSummaryLoader;
+
+        public SummaryProvider(Context context, SummaryLoader summaryLoader) {
+            mContext = context;
+            mSummaryLoader = summaryLoader;
+        }
+
+        @Override
+        public void setListening(boolean listening) {
+            if (listening) {
+                int mode = Settings.Secure.getInt(mContext.getContentResolver(),
+                        Settings.Secure.LOCATION_MODE, Settings.Secure.LOCATION_MODE_OFF);
+                if (mode != Settings.Secure.LOCATION_MODE_OFF) {
+                    mSummaryLoader.setSummary(this, mContext.getString(R.string.location_on_summary,
+                            mContext.getString(getLocationString(mode))));
+                } else {
+                    mSummaryLoader.setSummary(this,
+                            mContext.getString(R.string.location_off_summary));
+                }
+            }
+        }
+    }
+
+    public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
+            = new SummaryLoader.SummaryProviderFactory() {
+        @Override
+        public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
+                                                                   SummaryLoader summaryLoader) {
+            return new SummaryProvider(activity, summaryLoader);
+        }
+    };
 }
