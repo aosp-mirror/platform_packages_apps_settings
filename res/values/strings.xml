@@ -6011,6 +6011,9 @@
     <!-- Sound & notification > Notification section: Title for the option managing notifications per application. [CHAR LIMIT=30] -->
     <string name="app_notifications_title">App notifications</string>
 
+    <!-- Sound & notification > Notification section: Title for the option managing notifications per topic. [CHAR LIMIT=30] -->
+    <string name="topic_notifications_title">Topic notifications</string>
+
     <!-- Sound & notification > Sound section: Title for the other sounds option and associated settings page. [CHAR LIMIT=30] -->
     <string name="other_sound_settings">Other sounds</string>
 
@@ -6093,17 +6096,17 @@
     <!-- [CHAR LIMIT=NONE] App notification settings: Block option description-->
     <string name="app_notification_block_summary">Never show notifications from this app</string>
 
-    <!-- [CHAR LIMIT=NONE] App notification settings: Priority option title -->
-    <string name="app_notification_priority_title">Treat as priority</string>
+    <!-- [CHAR LIMIT=NONE] App notification settings: Override DND option title -->
+    <string name="app_notification_override_dnd_title">Override Do Not Disturb</string>
 
-    <!-- [CHAR LIMIT=NONE] App notification settings: Priority option description-->
-    <string name="app_notification_priority_summary">Let this app\u2019s notifications be heard when Do not disturb is set to Priority only</string>
+    <!-- [CHAR LIMIT=NONE] App notification settings: Override DND option description-->
+    <string name="app_notification_override_dnd_summary">Let these notifications continue to interrupt when Do Not Disturb is set to Priority Only</string>
 
     <!-- [CHAR LIMIT=NONE] App notification settings: Sensitive option title -->
     <string name="app_notification_sensitive_title">Hide sensitive content</string>
 
     <!-- [CHAR LIMIT=NONE] App notification settings: Sensitive option description-->
-    <string name="app_notification_sensitive_summary">When the device is locked, hide content in this app\u2019s notifications that might reveal private information</string>
+    <string name="app_notification_sensitive_summary">When the device is locked, hide content in these notifications that might reveal private information</string>
 
     <!-- [CHAR LIMIT=20] Notification settings: App notifications row summary when banned -->
     <string name="app_notification_row_banned">Blocked</string>
@@ -6484,10 +6487,6 @@
    <string name="notifications_enabled">Normal</string>
    <!-- App notification summary with notifications disabled [CHAR LIMIT=40] -->
    <string name="notifications_disabled">Block</string>
-   <!-- App notification summary with notifications sensitive [CHAR LIMIT=40] -->
-   <string name="notifications_sensitive">Sensitive content hidden</string>
-   <!-- App notification summary with notifications priority [CHAR LIMIT=40] -->
-   <string name="notifications_priority">Priority</string>
    <!-- App notification summary with 2 items [CHAR LIMIT=15] -->
    <string name="notifications_two_items"><xliff:g id="notif_state" example="Priority">%1$s</xliff:g> / <xliff:g id="notif_state" example="Priority">%2$s</xliff:g></string>
    <!-- App notification summary with 3 items [CHAR LIMIT=15] -->
@@ -6528,10 +6527,6 @@
     <string name="filter_work_apps">Work</string>
     <!-- Label for showing apps with blocked notifications in list [CHAR LIMIT=30] -->
     <string name="filter_notif_blocked_apps">Blocked</string>
-    <!-- Label for showing apps with priority notifications in list [CHAR LIMIT=30] -->
-    <string name="filter_notif_priority_apps">Priority</string>
-    <!-- Label for showing apps with sensitive notifications in list [CHAR LIMIT=30] -->
-    <string name="filter_notif_sensitive_apps">Sensitive content hidden</string>
     <!-- Label for showing apps with domain URLs (data URI with http or https) in list [CHAR LIMIT=30] -->
     <string name="filter_with_domain_urls_apps">With domain URLs</string>
 

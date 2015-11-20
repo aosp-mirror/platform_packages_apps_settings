@@ -66,26 +66,4 @@ public class AppStateNotificationBridge extends AppStateBaseBridge {
             return info.extraInfo != null && ((AppRow) info.extraInfo).banned;
         }
     };
-
-    public static final AppFilter FILTER_APP_NOTIFICATION_PRIORITY = new AppFilter() {
-        @Override
-        public void init() {
-        }
-
-        @Override
-        public boolean filterApp(AppEntry info) {
-            return info.extraInfo != null && ((AppRow) info.extraInfo).priority;
-        }
-    };
-
-    public static final AppFilter FILTER_APP_NOTIFICATION_SENSITIVE = new AppFilter() {
-        @Override
-        public void init() {
-        }
-
-        @Override
-        public boolean filterApp(AppEntry info) {
-            return info.extraInfo != null && ((AppRow) info.extraInfo).sensitive;
-        }
-    };
 }

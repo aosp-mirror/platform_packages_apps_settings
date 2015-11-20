@@ -138,8 +138,6 @@ public class ManageApplications extends InstrumentedFragment
             R.string.filter_enabled_apps,  // Enabled
             R.string.filter_apps_disabled, // Disabled
             R.string.filter_notif_blocked_apps,   // Blocked Notifications
-            R.string.filter_notif_priority_apps,  // Priority Notifications
-            R.string.filter_notif_sensitive_apps, // Sensitive Notifications
             R.string.filter_personal_apps, // Personal
             R.string.filter_work_apps,     // Work
             R.string.filter_with_domain_urls_apps,     // Domain URLs
@@ -158,8 +156,6 @@ public class ManageApplications extends InstrumentedFragment
             ApplicationsState.FILTER_ALL_ENABLED, // Enabled
             ApplicationsState.FILTER_DISABLED,    // Disabled
             AppStateNotificationBridge.FILTER_APP_NOTIFICATION_BLOCKED,   // Blocked Notifications
-            AppStateNotificationBridge.FILTER_APP_NOTIFICATION_PRIORITY,  // Priority Notifications
-            AppStateNotificationBridge.FILTER_APP_NOTIFICATION_SENSITIVE, // Sensitive Notifications
             ApplicationsState.FILTER_PERSONAL,    // Personal
             ApplicationsState.FILTER_WORK,        // Work
             ApplicationsState.FILTER_WITH_DOMAIN_URLS,   // Apps with Domain URLs
