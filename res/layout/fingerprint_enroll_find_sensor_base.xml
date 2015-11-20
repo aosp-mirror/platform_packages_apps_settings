@@ -22,48 +22,50 @@
     android:layout_height="match_parent"
     style="?attr/fingerprint_layout_theme">
 
-    <LinearLayout
-        style="@style/SuwContentFrame"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:clipToPadding="false"
         android:clipChildren="false">
 
-        <TextView
-            style="@style/TextAppearance.FingerprintMessage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/suw_description_margin_top"
-            android:text="@string/security_settings_fingerprint_enroll_find_sensor_message"/>
-
-        <View
-            android:layout_height="0dp"
-            android:layout_width="match_parent"
-            android:layout_weight="1"/>
-
         <include
             layout="@layout/fingerprint_enroll_find_sensor_graphic"
-            android:layout_width="@dimen/fingerprint_find_sensor_graphic_size"
-            android:layout_height="@dimen/fingerprint_find_sensor_graphic_size"
-            android:layout_gravity="center_horizontal"/>
-
-        <View
-            android:layout_height="0dp"
             android:layout_width="match_parent"
-            android:layout_weight="1"/>
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal|bottom"/>
 
-        <Button
-            style="@style/Button.FingerprintButton"
-            android:id="@+id/next_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:layout_marginEnd="-12dp"
-            android:layout_gravity="end"
-            android:gravity="end|center_vertical"
-            android:text="@string/fingerprint_enroll_button_next" />
+        <LinearLayout
+            style="@style/SuwContentFrame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:clipToPadding="false"
+            android:clipChildren="false">
 
-    </LinearLayout>
+            <TextView
+                style="@style/TextAppearance.FingerprintMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/suw_description_margin_top"
+                android:text="@string/security_settings_fingerprint_enroll_find_sensor_message"/>
 
+            <View
+                android:layout_height="0dp"
+                android:layout_width="match_parent"
+                android:layout_weight="1"/>
+
+            <Button
+                style="@style/Button.FingerprintButton"
+                android:id="@+id/next_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:layout_marginEnd="-12dp"
+                android:layout_gravity="end"
+                android:gravity="end|center_vertical"
+                android:text="@string/fingerprint_enroll_button_next" />
+
+        </LinearLayout>
+    </FrameLayout>
 </com.android.setupwizardlib.SetupWizardLayout>

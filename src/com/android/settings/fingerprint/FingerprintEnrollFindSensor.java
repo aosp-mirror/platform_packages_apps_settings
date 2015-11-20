@@ -33,7 +33,7 @@ public class FingerprintEnrollFindSensor extends FingerprintEnrollBase {
     private static final int ENROLLING = 2;
     public static final String EXTRA_KEY_LAUNCHED_CONFIRM = "launched_confirm_lock";
 
-    private FingerprintLocationAnimationView mAnimation;
+    private FingerprintFindSensorAnimation mAnimation;
     private boolean mLaunchedConfirmLock;
 
     @Override
@@ -46,7 +46,7 @@ public class FingerprintEnrollFindSensor extends FingerprintEnrollBase {
         if (mToken == null && !mLaunchedConfirmLock) {
             launchConfirmLock();
         }
-        mAnimation = (FingerprintLocationAnimationView) findViewById(
+        mAnimation = (FingerprintFindSensorAnimation) findViewById(
                 R.id.fingerprint_sensor_location_animation);
     }
 

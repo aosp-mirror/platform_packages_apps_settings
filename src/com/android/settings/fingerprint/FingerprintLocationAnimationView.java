@@ -34,7 +34,8 @@ import com.android.settings.R;
 /**
  * View which plays an animation to indicate where the sensor is on the device.
  */
-public class FingerprintLocationAnimationView extends View {
+public class FingerprintLocationAnimationView extends View implements
+        FingerprintFindSensorAnimation {
 
     private static final float MAX_PULSE_ALPHA = 0.15f;
     private static final long DELAY_BETWEEN_PHASE = 1000;
@@ -95,10 +96,12 @@ public class FingerprintLocationAnimationView extends View {
         return getHeight() * mFractionCenterY;
     }
 
+    @Override
     public void startAnimation() {
         startPhase();
     }
 
+    @Override
     public void stopAnimation() {
         removeCallbacks(mStartPhaseRunnable);
         if (mRadiusAnimator != null) {
