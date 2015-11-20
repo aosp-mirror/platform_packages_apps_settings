@@ -39,7 +39,7 @@ public abstract class EmptyTextSettings extends SettingsPreferenceFragment {
         TypedValue value = new TypedValue();
         getContext().getTheme().resolveAttribute(android.R.attr.textAppearanceMedium, value, true);
         mEmpty.setTextAppearance(value.resourceId);
-        ((ViewGroup) view.findViewById(R.id.list_container)).addView(mEmpty,
+        ((ViewGroup) view.findViewById(android.R.id.list_container)).addView(mEmpty,
                 new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
         setEmptyView(mEmpty);
     }
