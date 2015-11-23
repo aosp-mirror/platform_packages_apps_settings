@@ -148,8 +148,7 @@ public class WifiStatusTest extends Activity {
         mScanList = (TextView) findViewById(R.id.scan_list);
 
 
-        mPingIpAddr = (TextView) findViewById(R.id.pingIpAddr);
-        mPingHostname = (TextView) findViewById(R.id.pingHostname);
+        mPingHostname = (TextView) findViewById(R.id.pingHostnameV4);
         mHttpClientTest = (TextView) findViewById(R.id.httpClientTest);
 
         pingTestButton = (Button) findViewById(R.id.ping_test);
@@ -317,19 +316,10 @@ public class WifiStatusTest extends Activity {
 
         final Runnable updatePingResults = new Runnable() {
             public void run() {
-                mPingIpAddr.setText(mPingIpAddrResult);
                 mPingHostname.setText(mPingHostnameResult);
                 mHttpClientTest.setText(mHttpClientTestResult);
             }
         };
-        Thread ipAddrThread = new Thread() {
-            @Override
-            public void run() {
-                pingIpAddr();
-                handler.post(updatePingResults);
-            }
-        };
-        ipAddrThread.start();
 
         Thread hostnameThread = new Thread() {
             @Override
@@ -348,28 +338,6 @@ public class WifiStatusTest extends Activity {
             }
         };
         httpClientThread.start();
-    }
-
-    /**
-     * The ping functions have been borrowed from Radio diagnostic app to
-     * enable quick access on the wifi status screen
-     */
-    private final void pingIpAddr() {
-        try {
-            // TODO: Hardcoded for now, make it UI configurable
-            String ipAddress = "74.125.47.104";
-            Process p = Runtime.getRuntime().exec("ping -c 1 -w 100 " + ipAddress);
-            int status = p.waitFor();
-            if (status == 0) {
-                mPingIpAddrResult = "Pass";
-            } else {
-                mPingIpAddrResult = "Fail: IP addr not reachable";
-            }
-        } catch (IOException e) {
-            mPingIpAddrResult = "Fail: IOException";
-        } catch (InterruptedException e) {
-            mPingIpAddrResult = "Fail: InterruptedException";
-        }
     }
 
     private final void pingHostname() {
