@@ -1826,7 +1826,7 @@
     <string name="process_kernel_label" msgid="3916858646836739323">"Android 作業系統"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"媒體伺服器"</string>
     <string name="process_dex2oat_label" msgid="2592408651060518226">"應用程式最佳化"</string>
-    <string name="battery_saver" msgid="1426682272004907982">"節約耗電量"</string>
+    <string name="battery_saver" msgid="1426682272004907982">"省電模式"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"自動開啟"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"永遠不要"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="7536784431655058267">"電量為 %1$s 時"</string>
@@ -2518,6 +2518,7 @@
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"僅允許鬧鐘"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"完全靜音"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>：<xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
+    <string name="zen_mode_visual_interruptions_settings_title" msgid="168576844124787420">"視覺干擾"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"電話鈴聲"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"預設通知鈴聲"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"來電時同時震動"</string>
@@ -2531,14 +2532,16 @@
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"當裝置鎖定時，您要如何顯示通知？"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"通知"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"應用程式通知"</string>
+    <!-- no translation found for topic_notifications_title (7243623930984080881) -->
+    <skip />
     <string name="other_sound_settings" msgid="3151004537006844718">"其他音效"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"撥號鍵盤音效"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"螢幕鎖定音效"</string>
     <string name="charging_sounds_title" msgid="1132272552057504251">"充電音效"</string>
-    <string name="docking_sounds_title" msgid="155236288949940607">"固定音效"</string>
+    <string name="docking_sounds_title" msgid="155236288949940607">"座架插入音效"</string>
     <string name="touch_sounds_title" msgid="5326587106892390176">"觸控音效"</string>
     <string name="vibrate_on_touch_title" msgid="674710566941697253">"觸控時震動"</string>
-    <string name="dock_audio_media_title" msgid="1346838179626123900">"固定喇叭播放音效"</string>
+    <string name="dock_audio_media_title" msgid="1346838179626123900">"座架喇叭播放音效"</string>
     <string name="dock_audio_media_disabled" msgid="3430953622491538080">"所有音訊"</string>
     <string name="dock_audio_media_enabled" msgid="667849382924908673">"僅限媒體音訊"</string>
     <string name="emergency_tone_silent" msgid="1067515631635824291">"靜音"</string>
@@ -2558,12 +2561,13 @@
     <string name="loading_notification_apps" msgid="5031818677010335895">"正在載入應用程式..."</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"全部封鎖"</string>
     <string name="app_notification_block_summary" msgid="9049487483231233726">"永不顯示這個應用程式的通知"</string>
-    <string name="app_notification_priority_title" msgid="5949923919607295595">"視為優先通知"</string>
-    <string name="app_notification_priority_summary" msgid="2538018111338754446">"當干擾模式設定為 [僅限優先通知] 時，讓這個應用程式的通知發出聲響"</string>
-    <string name="app_notification_peekable_title" msgid="8647856880382324822">"允許迅速瀏覽"</string>
-    <string name="app_notification_peekable_summary" msgid="678845517890921158">"允許這個應用程式將特定通知暫時滑入目前的畫面，藉此突顯這些通知"</string>
+    <!-- no translation found for app_notification_override_dnd_title (7867458246395884830) -->
+    <skip />
+    <!-- no translation found for app_notification_override_dnd_summary (3516007157020189746) -->
+    <skip />
     <string name="app_notification_sensitive_title" msgid="8465860579482264139">"隱藏機密內容"</string>
-    <string name="app_notification_sensitive_summary" msgid="3263836642625157920">"當裝置鎖定時，隱藏這個應用程式通知中可能涉及私人資訊的內容"</string>
+    <!-- no translation found for app_notification_sensitive_summary (2515056180303710894) -->
+    <skip />
     <string name="app_notification_row_banned" msgid="5983655258784814773">"已封鎖"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"優先"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"機密"</string>
@@ -2634,6 +2638,10 @@
     </plurals>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="7465525754879341907">"變更為僅允許鬧鐘模式，結束時間為 <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"變更為一律允許干擾模式"</string>
+    <string name="zen_mode_peek" msgid="1468557671879175931">"禁止畫面干擾"</string>
+    <string name="zen_mode_peek_summary" msgid="27622220787132681">"禁止「零打擾」模式設為靜音的通知在目前的畫面上短暫或持續顯示"</string>
+    <string name="zen_mode_lights" msgid="904184586121619154">"禁止使用指示燈號"</string>
+    <string name="zen_mode_lights_summary" msgid="6953305086643633530">"禁止「零打擾」模式設為靜音的通知使用指示燈號"</string>
     <string name="notification_settings_apps_title" msgid="1125354590652967250">"應用程式通知"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"通知設定"</string>
     <string name="device_feedback" msgid="3238056036766293294">"傳送您對這個裝置的意見回饋"</string>
@@ -2698,9 +2706,6 @@
     <string name="notifications_label" msgid="2872668710589600731">"通知"</string>
     <string name="notifications_enabled" msgid="4386196629684749507">"一般"</string>
     <string name="notifications_disabled" msgid="4326096527874762629">"封鎖"</string>
-    <string name="notifications_sensitive" msgid="7636231039287237132">"已隱藏敏感內容"</string>
-    <string name="notifications_priority" msgid="1812498477331421719">"優先"</string>
-    <string name="notifications_no_peeking" msgid="999951669023262823">"已停用迅速瀏覽"</string>
     <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
     <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g> / <xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
@@ -2722,9 +2727,6 @@
     <string name="filter_personal_apps" msgid="3277727374174355971">"個人"</string>
     <string name="filter_work_apps" msgid="24519936790795574">"公司"</string>
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"已封鎖"</string>
-    <string name="filter_notif_priority_apps" msgid="5965001885749195239">"優先"</string>
-    <string name="filter_notif_sensitive_apps" msgid="4909289478844197927">"已隱藏敏感內容"</string>
-    <string name="filter_notif_no_peeking" msgid="5197968265625096563">"已停用迅速瀏覽"</string>
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"包含網域網址"</string>
     <string name="trust_agent_disabled_device_admin" msgid="5982562414642596563">"已由管理員停用"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"進階"</string>
@@ -2894,8 +2896,14 @@
     <string name="force_density_summary_very_large" msgid="8328063057394895318">"較大"</string>
     <string name="force_density_summary_extremely_large" msgid="846919277362198243">"最大"</string>
     <string name="force_density_summary_custom" msgid="6663681104268192485">"自訂 (<xliff:g id="DENSITYDPI">%d</xliff:g>)"</string>
-    <!-- no translation found for see_all (8883901630052886984) -->
+    <string name="see_all" msgid="8883901630052886984">"全部顯示"</string>
+    <string name="see_less" msgid="1250265310929558370">"顯示較少"</string>
+    <string name="disconnected" msgid="5787956818111197212">"已中斷連線"</string>
+    <string name="data_usage_summary_format" msgid="7507047900192160585">"已使用 <xliff:g id="AMOUNT">%1$s</xliff:g> 的數據用量"</string>
+    <string name="apps_summary" msgid="193158055537070092">"已安裝 <xliff:g id="COUNT">%1$d</xliff:g> 個應用程式"</string>
+    <string name="storage_summary" msgid="1110250618334248745">"已使用 <xliff:g id="SIZE1">%1$s</xliff:g>，共 <xliff:g id="SIZE2">%2$s</xliff:g>"</string>
+    <!-- no translation found for display_summary_on (5628868543070268634) -->
     <skip />
-    <!-- no translation found for see_less (1250265310929558370) -->
+    <!-- no translation found for display_summary_off (6399558022426312990) -->
     <skip />
 </resources>

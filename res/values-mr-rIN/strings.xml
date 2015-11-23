@@ -2514,6 +2514,7 @@
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"केवळ अलार्म"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"संपूर्ण शांतता"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
+    <string name="zen_mode_visual_interruptions_settings_title" msgid="168576844124787420">"व्हिज्युअल व्यत्यय"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"फोन रिंगटोन"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"डिफॉल्ट सूचना रिंगटोन"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"कॉल साठी कंपन देखील"</string>
@@ -2527,6 +2528,7 @@
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"आपले डिव्हाइस लॉक केलेले असताना आपण सूचना कशा दर्शविल्या जाऊ इच्छिता?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"सूचना"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"अॅप सूचना"</string>
+    <string name="topic_notifications_title" msgid="7243623930984080881">"विषय सूचना"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"इतर ध्वनी"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"डायल पॅड टोन"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"स्‍क्रीन लॉक करणारे ध्वनी"</string>
@@ -2554,12 +2556,10 @@
     <string name="loading_notification_apps" msgid="5031818677010335895">"अॅप्स लोड करीत आहे..."</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"सर्व अवरोधित करा"</string>
     <string name="app_notification_block_summary" msgid="9049487483231233726">"या अॅपकडील सूचना कधीही दर्शवू नका"</string>
-    <string name="app_notification_priority_title" msgid="5949923919607295595">"प्राधान्य म्हणून हाताळा"</string>
-    <string name="app_notification_priority_summary" msgid="2538018111338754446">"व्यत्यय आणू नका प्राधान्यावर सेट केले असते केवळ तेव्हा या अ‍ॅपच्या सूचना ऐकल्या जाऊ द्या"</string>
-    <string name="app_notification_peekable_title" msgid="8647856880382324822">"डोकावून पाहण्यास अनुमती द्या"</string>
-    <string name="app_notification_peekable_summary" msgid="678845517890921158">"या अ‍ॅपला विशिष्‍ट सूचनांना थोडक्यात वर्तमान स्क्रीनवरील दृश्यामध्‍ये स्लाइड करून महत्त्व देऊ द्या"</string>
+    <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"व्यत्यय आणू नका अधिशून्य करा"</string>
+    <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"व्यत्यय आणू नका केवळ प्राधान्यावर सेट केले असते तेव्‍हा या सूचनांना व्यत्यय आणणे सुरु ठेवू द्या"</string>
     <string name="app_notification_sensitive_title" msgid="8465860579482264139">"संवेदनशील सामग्री लपवा"</string>
-    <string name="app_notification_sensitive_summary" msgid="3263836642625157920">"डिव्‍हाइस लॉक केले असते तेव्हा, खाजगी माहिती कदाचित उघड करू शकणारी या अ‍ॅपच्या सूचनांमधील सामग्री लपवा"</string>
+    <string name="app_notification_sensitive_summary" msgid="2515056180303710894">"डिव्‍हाइस लॉक केले असते तेव्‍हा, खाजगी  माहिती कदाचित उघड करू शकणारी या सूचनेमधील सामग्री लपवा"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"अवरोधित"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"प्राधान्य"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"संवेदनशील"</string>
@@ -2630,6 +2630,10 @@
     </plurals>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="7465525754879341907">"केवळ <xliff:g id="FORMATTEDTIME">%1$s</xliff:g> पर्यंत अलार्मवर बदला"</string>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"नेहमी व्‍यत्यय आणा वर बदला"</string>
+    <string name="zen_mode_peek" msgid="1468557671879175931">"स्क्रीन व्यत्यय नाही"</string>
+    <string name="zen_mode_peek_summary" msgid="27622220787132681">"व्यत्यय आणू नका द्वारे न दिसणार्‍या सूचनांना विद्यमान स्क्रीनवर दिसण्यापासून प्रतिबंधित करा"</string>
+    <string name="zen_mode_lights" msgid="904184586121619154">"सूचना प्रकाश नाही"</string>
+    <string name="zen_mode_lights_summary" msgid="6953305086643633530">"व्यत्यय आणू नका द्वारे न दिसणार्‍या ज्या सूचनांमुळे प्रकाशाची उघडझाप होते त्यांना प्रतिबंधित करा"</string>
     <string name="notification_settings_apps_title" msgid="1125354590652967250">"अॅप सूचना"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"सूचना सेटिंग्ज"</string>
     <string name="device_feedback" msgid="3238056036766293294">"या डिव्हाइस बद्दल अभिप्राय पाठवा"</string>
@@ -2694,9 +2698,6 @@
     <string name="notifications_label" msgid="2872668710589600731">"सूचना"</string>
     <string name="notifications_enabled" msgid="4386196629684749507">"सामान्य"</string>
     <string name="notifications_disabled" msgid="4326096527874762629">"अवरोधित करा"</string>
-    <string name="notifications_sensitive" msgid="7636231039287237132">"संवेदनशील सामग्री लपविली"</string>
-    <string name="notifications_priority" msgid="1812498477331421719">"प्राधान्य"</string>
-    <string name="notifications_no_peeking" msgid="999951669023262823">"डोकावून पाहणे नाही"</string>
     <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
     <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g> / <xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
@@ -2718,9 +2719,6 @@
     <string name="filter_personal_apps" msgid="3277727374174355971">"वैयक्तिक"</string>
     <string name="filter_work_apps" msgid="24519936790795574">"कार्य"</string>
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"अवरोधित केले"</string>
-    <string name="filter_notif_priority_apps" msgid="5965001885749195239">"प्राधान्य"</string>
-    <string name="filter_notif_sensitive_apps" msgid="4909289478844197927">"संवेदनशील सामग्री लपविली"</string>
-    <string name="filter_notif_no_peeking" msgid="5197968265625096563">"डोकावून पाहणे नाही"</string>
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"डोमेन URL सह"</string>
     <string name="trust_agent_disabled_device_admin" msgid="5982562414642596563">"प्रशासकाद्वारे अक्षम केलेले"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"प्रगत"</string>
@@ -2890,8 +2888,12 @@
     <string name="force_density_summary_very_large" msgid="8328063057394895318">"मोठा"</string>
     <string name="force_density_summary_extremely_large" msgid="846919277362198243">"सर्वात मोठे"</string>
     <string name="force_density_summary_custom" msgid="6663681104268192485">"सानुकूल करा (<xliff:g id="DENSITYDPI">%d</xliff:g>)"</string>
-    <!-- no translation found for see_all (8883901630052886984) -->
-    <skip />
-    <!-- no translation found for see_less (1250265310929558370) -->
-    <skip />
+    <string name="see_all" msgid="8883901630052886984">"सर्व पहा"</string>
+    <string name="see_less" msgid="1250265310929558370">"कमी पहा"</string>
+    <string name="disconnected" msgid="5787956818111197212">"डिस्कनेक्ट केले"</string>
+    <string name="data_usage_summary_format" msgid="7507047900192160585">"<xliff:g id="AMOUNT">%1$s</xliff:g> डेटा वापरला"</string>
+    <string name="apps_summary" msgid="193158055537070092">"<xliff:g id="COUNT">%1$d</xliff:g> अॅप्स स्थापित केले"</string>
+    <string name="storage_summary" msgid="1110250618334248745">"<xliff:g id="SIZE2">%2$s</xliff:g> पैकी <xliff:g id="SIZE1">%1$s</xliff:g> वापरले"</string>
+    <string name="display_summary_on" msgid="5628868543070268634">"अनुकूल चकाकी चालू आहे"</string>
+    <string name="display_summary_off" msgid="6399558022426312990">"अनुकूल चकाकी बंद आहे"</string>
 </resources>

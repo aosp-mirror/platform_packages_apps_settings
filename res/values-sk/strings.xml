@@ -850,15 +850,11 @@
     <string name="night_mode_yes" msgid="2218157265997633432">"Vždy zapnuté"</string>
     <string name="night_mode_auto" msgid="7508348175804304327">"Automatický"</string>
     <string name="convert_to_file_encryption" msgid="3060156730651061223">"Konvertovať na šifrovanie súborov"</string>
-    <!-- no translation found for convert_to_file_encryption_enabled (2861258671151428346) -->
-    <skip />
+    <string name="convert_to_file_encryption_enabled" msgid="2861258671151428346">"Konvertovať…"</string>
     <string name="convert_to_file_encryption_done" msgid="7859766358000523953">"Súbory sú už šifrované"</string>
-    <!-- no translation found for title_convert_fbe (1263622876196444453) -->
-    <skip />
-    <!-- no translation found for convert_to_fbe_warning (6139067817148865527) -->
-    <skip />
-    <!-- no translation found for button_convert_fbe (5152671181309826405) -->
-    <skip />
+    <string name="title_convert_fbe" msgid="1263622876196444453">"Konvertovanie na šifrovanie založené na súboroch"</string>
+    <string name="convert_to_fbe_warning" msgid="6139067817148865527">"Chystáte sa konvertovať dátový oddiel na šifrovanie založené na súboroch.\n !!Upozornenie!! Týmto procesom vymažete všetky dáta.\n Táto funkcia je v alfa verzii a nemusí fungovať správne.\n Ak chcete pokračovať, stlačte tlačidlo „Vymazať a konvertovať…“."</string>
+    <string name="button_convert_fbe" msgid="5152671181309826405">"Vymazať a konvertovať…"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Režim spánku"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Vypnutie obrazovky"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> nečinnosti"</string>
@@ -2546,6 +2542,7 @@
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Iba budíky"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"Úplné ticho"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
+    <string name="zen_mode_visual_interruptions_settings_title" msgid="168576844124787420">"Vizuálne vyrušenia"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Tón zvonenia telefónu"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Predvolený tón upozornení"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Pri hovoroch aj vibrovať"</string>
@@ -2559,6 +2556,8 @@
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"Akým spôsobom chcete zobrazovať upozornenia na uzamknutom zariadení?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"Upozornenia"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"Upozornenia aplikácií"</string>
+    <!-- no translation found for topic_notifications_title (7243623930984080881) -->
+    <skip />
     <string name="other_sound_settings" msgid="3151004537006844718">"Iné zvuky"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Zvuky číselnej klávesnice"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Zvuky zámky obrazovky"</string>
@@ -2588,12 +2587,13 @@
     <string name="loading_notification_apps" msgid="5031818677010335895">"Načítavajú sa aplikácie..."</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"Blokovať všetko"</string>
     <string name="app_notification_block_summary" msgid="9049487483231233726">"Nikdy nezobrazovať upozornenia z tejto aplikácie"</string>
-    <string name="app_notification_priority_title" msgid="5949923919607295595">"Považovať za prioritné"</string>
-    <string name="app_notification_priority_summary" msgid="2538018111338754446">"Umožniť aplikácii zobrazovať upozornenia, keď je režim Nerušiť nastavený na hodnotu Iba prioritné"</string>
-    <string name="app_notification_peekable_title" msgid="8647856880382324822">"Povoliť nahliadnutie"</string>
-    <string name="app_notification_peekable_summary" msgid="678845517890921158">"Umožniť aplikácii zdôrazniť určité upozornenia tak, že ich krátko zobrazí na aktuálnej obrazovke"</string>
+    <!-- no translation found for app_notification_override_dnd_title (7867458246395884830) -->
+    <skip />
+    <!-- no translation found for app_notification_override_dnd_summary (3516007157020189746) -->
+    <skip />
     <string name="app_notification_sensitive_title" msgid="8465860579482264139">"Skryť citlivý obsah"</string>
-    <string name="app_notification_sensitive_summary" msgid="3263836642625157920">"Keď je zariadenie uzamknuté, skryte obsah upozornení tejto aplikácie, ktorý by mohol odhaliť súkromné informácie"</string>
+    <!-- no translation found for app_notification_sensitive_summary (2515056180303710894) -->
+    <skip />
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Blokované"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Priorita"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Citlivé"</string>
@@ -2668,6 +2668,10 @@
     </plurals>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="7465525754879341907">"Zmena na možnosť Iba budíky platná do <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"Zmena na možnosť Vždy prerušiť"</string>
+    <string name="zen_mode_peek" msgid="1468557671879175931">"Žiadne preruš. obr."</string>
+    <string name="zen_mode_peek_summary" msgid="27622220787132681">"Zabráňte, aby sa upozornenia stlmené nastavením Nerušiť čiastočne alebo úplne zobrazovali na aktuálnej obrazovke"</string>
+    <string name="zen_mode_lights" msgid="904184586121619154">"Žiadne svetlo upoz."</string>
+    <string name="zen_mode_lights_summary" msgid="6953305086643633530">"Zabráňte, aby upozornenia stlmené nastavením Nerušiť nespúšťali blikajúce svetlo"</string>
     <string name="notification_settings_apps_title" msgid="1125354590652967250">"Upozornenia aplikácií"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Nastavenia upozornení"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Odoslať spätnú väzbu o zariadení"</string>
@@ -2732,9 +2736,6 @@
     <string name="notifications_label" msgid="2872668710589600731">"Upozornenia"</string>
     <string name="notifications_enabled" msgid="4386196629684749507">"Normálne"</string>
     <string name="notifications_disabled" msgid="4326096527874762629">"Blokované"</string>
-    <string name="notifications_sensitive" msgid="7636231039287237132">"Citlivý obsah je skrytý"</string>
-    <string name="notifications_priority" msgid="1812498477331421719">"Prioritné"</string>
-    <string name="notifications_no_peeking" msgid="999951669023262823">"Žiadny náhľad"</string>
     <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
     <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g> / <xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
@@ -2762,9 +2763,6 @@
     <string name="filter_personal_apps" msgid="3277727374174355971">"Osobné"</string>
     <string name="filter_work_apps" msgid="24519936790795574">"Pracovné"</string>
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"Blokované"</string>
-    <string name="filter_notif_priority_apps" msgid="5965001885749195239">"Prioritné"</string>
-    <string name="filter_notif_sensitive_apps" msgid="4909289478844197927">"Citlivý obsah je skrytý"</string>
-    <string name="filter_notif_no_peeking" msgid="5197968265625096563">"Žiadny náhľad"</string>
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"S webovými adresami domény"</string>
     <string name="trust_agent_disabled_device_admin" msgid="5982562414642596563">"Zakázané správcom"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Rozšírené"</string>
@@ -2940,8 +2938,14 @@
     <string name="force_density_summary_very_large" msgid="8328063057394895318">"Väčšia"</string>
     <string name="force_density_summary_extremely_large" msgid="846919277362198243">"Najväčšia"</string>
     <string name="force_density_summary_custom" msgid="6663681104268192485">"Vlastná (<xliff:g id="DENSITYDPI">%d</xliff:g>)"</string>
-    <!-- no translation found for see_all (8883901630052886984) -->
+    <string name="see_all" msgid="8883901630052886984">"Zobraziť všetko"</string>
+    <string name="see_less" msgid="1250265310929558370">"Zobraziť menej"</string>
+    <string name="disconnected" msgid="5787956818111197212">"Odpojené"</string>
+    <string name="data_usage_summary_format" msgid="7507047900192160585">"Objem využitých dát: <xliff:g id="AMOUNT">%1$s</xliff:g>"</string>
+    <string name="apps_summary" msgid="193158055537070092">"Počet nainštalovaných aplikácií: <xliff:g id="COUNT">%1$d</xliff:g>"</string>
+    <string name="storage_summary" msgid="1110250618334248745">"Využité miesto: <xliff:g id="SIZE1">%1$s</xliff:g> z <xliff:g id="SIZE2">%2$s</xliff:g>"</string>
+    <!-- no translation found for display_summary_on (5628868543070268634) -->
     <skip />
-    <!-- no translation found for see_less (1250265310929558370) -->
+    <!-- no translation found for display_summary_off (6399558022426312990) -->
     <skip />
 </resources>

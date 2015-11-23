@@ -842,15 +842,11 @@
     <string name="night_mode_yes" msgid="2218157265997633432">"Activată permanent"</string>
     <string name="night_mode_auto" msgid="7508348175804304327">"Automat"</string>
     <string name="convert_to_file_encryption" msgid="3060156730651061223">"Faceți conversia la criptarea bazată pe sistemul de fișiere"</string>
-    <!-- no translation found for convert_to_file_encryption_enabled (2861258671151428346) -->
-    <skip />
+    <string name="convert_to_file_encryption_enabled" msgid="2861258671151428346">"Convertiți…"</string>
     <string name="convert_to_file_encryption_done" msgid="7859766358000523953">"Criptarea bazată pe sistemul de fișiere este finalizată"</string>
-    <!-- no translation found for title_convert_fbe (1263622876196444453) -->
-    <skip />
-    <!-- no translation found for convert_to_fbe_warning (6139067817148865527) -->
-    <skip />
-    <!-- no translation found for button_convert_fbe (5152671181309826405) -->
-    <skip />
+    <string name="title_convert_fbe" msgid="1263622876196444453">"Se face conversia la criptarea bazată pe sistemul de fișiere"</string>
+    <string name="convert_to_fbe_warning" msgid="6139067817148865527">"Faceți conversia partiției de date la criptarea bazată pe sistemul de fișiere. \n !!Avertisment!! Astfel, toate datele dvs. vor fi șterse.\n Aceasta este o funcție în versiune alpha și este posibil să nu funcționeze corect.\n Apăsați pe „Ștergeți și convertiți…” pentru a continua."</string>
+    <string name="button_convert_fbe" msgid="5152671181309826405">"Ștergeți și convertiți…"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Inactivitate"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Ecranul se dezactivează"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"După <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> de inactivitate"</string>
@@ -2533,6 +2529,7 @@
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Numai alarme"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"Niciun sunet"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
+    <string name="zen_mode_visual_interruptions_settings_title" msgid="168576844124787420">"Întreruperi vizuale"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Ton de apel al telefonului"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Ton de apel implicit pentru notificări"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Vibrații și pentru apeluri"</string>
@@ -2546,6 +2543,8 @@
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"Când dispozitivul este blocat, cum doriți să se afișeze notificările?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"Notificări"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"Notificări din aplicații"</string>
+    <!-- no translation found for topic_notifications_title (7243623930984080881) -->
+    <skip />
     <string name="other_sound_settings" msgid="3151004537006844718">"Alte sunete"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Tonuri pentru tastatura numerică"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Sunete la blocarea ecranului"</string>
@@ -2574,12 +2573,13 @@
     <string name="loading_notification_apps" msgid="5031818677010335895">"Se încarcă aplicațiile..."</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"Blocați-le pe toate"</string>
     <string name="app_notification_block_summary" msgid="9049487483231233726">"Nu afișați notificări de la această aplicație"</string>
-    <string name="app_notification_priority_title" msgid="5949923919607295595">"Tratați ca având prioritate"</string>
-    <string name="app_notification_priority_summary" msgid="2538018111338754446">"Permiteți ca notificările acestei aplicații să se audă când opțiunea Nu deranja este setată la Numai cu prioritate"</string>
-    <string name="app_notification_peekable_title" msgid="8647856880382324822">"Afișează scurt timp"</string>
-    <string name="app_notification_peekable_summary" msgid="678845517890921158">"Permiteți ca această aplicație să evidențieze anumite notificări glisându-le pentru scurt timp la vedere pe ecranul actual"</string>
+    <!-- no translation found for app_notification_override_dnd_title (7867458246395884830) -->
+    <skip />
+    <!-- no translation found for app_notification_override_dnd_summary (3516007157020189746) -->
+    <skip />
     <string name="app_notification_sensitive_title" msgid="8465860579482264139">"Ascundeți conținutul confidențial"</string>
-    <string name="app_notification_sensitive_summary" msgid="3263836642625157920">"Când dispozitivul este blocat, ascundeți conținutul din notificările acestei aplicații, care poate dezvălui informații private"</string>
+    <!-- no translation found for app_notification_sensitive_summary (2515056180303710894) -->
+    <skip />
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Blocat"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Prioritate"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Confidențial"</string>
@@ -2652,6 +2652,10 @@
     </plurals>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="7465525754879341907">"Schimbați la „Numai alarme” până la <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"Schimbați la „Întrerupe întotdeauna”"</string>
+    <string name="zen_mode_peek" msgid="1468557671879175931">"Nicio întrerupere pe ecran"</string>
+    <string name="zen_mode_peek_summary" msgid="27622220787132681">"Împiedicați afișarea de scurtă durată sau pe ecranul actual a notificărilor dezactivate prin Nu deranja"</string>
+    <string name="zen_mode_lights" msgid="904184586121619154">"Nicio lumină de notificare"</string>
+    <string name="zen_mode_lights_summary" msgid="6953305086643633530">"Împiedicați lumina intermitentă de la notificările dezactivate prin Nu deranja"</string>
     <string name="notification_settings_apps_title" msgid="1125354590652967250">"Notificări aplicații"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Setări pentru notificări"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Trimiteți feedback despre dispoz."</string>
@@ -2716,9 +2720,6 @@
     <string name="notifications_label" msgid="2872668710589600731">"Notificări"</string>
     <string name="notifications_enabled" msgid="4386196629684749507">"Normal"</string>
     <string name="notifications_disabled" msgid="4326096527874762629">"Blocate"</string>
-    <string name="notifications_sensitive" msgid="7636231039287237132">"Conținut confidențial ascuns"</string>
-    <string name="notifications_priority" msgid="1812498477331421719">"Prioritare"</string>
-    <string name="notifications_no_peeking" msgid="999951669023262823">"Fără afișare de scurtă durată"</string>
     <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g>/<xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
     <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g>/<xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>/<xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
@@ -2743,9 +2744,6 @@
     <string name="filter_personal_apps" msgid="3277727374174355971">"Personale"</string>
     <string name="filter_work_apps" msgid="24519936790795574">"Serviciu"</string>
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"Blocate"</string>
-    <string name="filter_notif_priority_apps" msgid="5965001885749195239">"Prioritare"</string>
-    <string name="filter_notif_sensitive_apps" msgid="4909289478844197927">"Conținut confidențial ascuns"</string>
-    <string name="filter_notif_no_peeking" msgid="5197968265625096563">"Fără afișare de scurtă durată"</string>
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"Cu adrese URL de domeniu"</string>
     <string name="trust_agent_disabled_device_admin" msgid="5982562414642596563">"Setare dezactivată de administrator"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Avansate"</string>
@@ -2918,8 +2916,14 @@
     <string name="force_density_summary_very_large" msgid="8328063057394895318">"Mai mare"</string>
     <string name="force_density_summary_extremely_large" msgid="846919277362198243">"Cea mai mare"</string>
     <string name="force_density_summary_custom" msgid="6663681104268192485">"Personalizată (<xliff:g id="DENSITYDPI">%d</xliff:g>)"</string>
-    <!-- no translation found for see_all (8883901630052886984) -->
+    <string name="see_all" msgid="8883901630052886984">"Afișați-le pe toate"</string>
+    <string name="see_less" msgid="1250265310929558370">"Afișați mai puține"</string>
+    <string name="disconnected" msgid="5787956818111197212">"Deconectată"</string>
+    <string name="data_usage_summary_format" msgid="7507047900192160585">"Date folosite: <xliff:g id="AMOUNT">%1$s</xliff:g>"</string>
+    <string name="apps_summary" msgid="193158055537070092">"<xliff:g id="COUNT">%1$d</xliff:g> (de) aplicații instalate"</string>
+    <string name="storage_summary" msgid="1110250618334248745">"Stocare utilizată: <xliff:g id="SIZE1">%1$s</xliff:g> din <xliff:g id="SIZE2">%2$s</xliff:g>"</string>
+    <!-- no translation found for display_summary_on (5628868543070268634) -->
     <skip />
-    <!-- no translation found for see_less (1250265310929558370) -->
+    <!-- no translation found for display_summary_off (6399558022426312990) -->
     <skip />
 </resources>

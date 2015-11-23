@@ -836,7 +836,7 @@
     <string name="convert_to_file_encryption" msgid="3060156730651061223">"Eman fitxategietan oinarritutako enkriptatzea"</string>
     <string name="convert_to_file_encryption_enabled" msgid="2861258671151428346">"Enkriptatu…"</string>
     <string name="convert_to_file_encryption_done" msgid="7859766358000523953">"Fitxategietan oinarritutako enkriptatzea dauka dagoeneko"</string>
-    <string name="title_convert_fbe" msgid="1263622876196444453">"Fitxategietan oinarritutako enkriptatzea ematen"</string>
+    <string name="title_convert_fbe" msgid="1263622876196444453">"Fitxategietan oinarritutako enkriptatzea ematea"</string>
     <string name="convert_to_fbe_warning" msgid="6139067817148865527">"Eman datuen partizioari fitxategietan oinarritutako enkriptatzea.\n Kontuz!! Ekintza horrek ezabatu egingo ditu datu guztiak.\n Eginbidearen alpha bertsioa da; beraz, baliteke behar bezala ez funtzionatzea.\n Aurrera egiteko, sakatu \"Ezabatu eduki guztia eta enkriptatu…\"."</string>
     <string name="button_convert_fbe" msgid="5152671181309826405">"Ezabatu eduki guztia eta enkriptatu…"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Ezarri egonean moduan"</string>
@@ -2514,6 +2514,7 @@
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Alarmak soilik"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"Isiltasun osoa"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
+    <string name="zen_mode_visual_interruptions_settings_title" msgid="168576844124787420">"Eten bisualak"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Telefonoaren tonu-jotzailea"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Jakinarazpenen tonu lehenetsia"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Egin dar-dar deietan ere"</string>
@@ -2527,6 +2528,8 @@
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"Gailua blokeatuta dagoenean, nola ikusi nahi dituzu jakinarazpenak?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"Jakinarazpenak"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"Aplikazioen jakinarazpenak"</string>
+    <!-- no translation found for topic_notifications_title (7243623930984080881) -->
+    <skip />
     <string name="other_sound_settings" msgid="3151004537006844718">"Beste soinu batzuk"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Markagailuaren tonuak"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Pantaila blokeatzearen soinua"</string>
@@ -2554,12 +2557,13 @@
     <string name="loading_notification_apps" msgid="5031818677010335895">"Aplikazioak kargatzen…"</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"Blokeatu guztiak"</string>
     <string name="app_notification_block_summary" msgid="9049487483231233726">"Ez erakutsi inoiz aplikazio honen jakinarazpenak"</string>
-    <string name="app_notification_priority_title" msgid="5949923919607295595">"Hartu lehentasunezkotzat"</string>
-    <string name="app_notification_priority_summary" msgid="2538018111338754446">"Baimendu aplikazioari jakinarazpenak entzunaraztea \"Ez molestatu\" aukera aukeratuta dagoenean, baina lehentasunezko jakinarazpenen salbuespenarekin."</string>
-    <string name="app_notification_peekable_title" msgid="8647856880382324822">"Baimendu agerraraztea"</string>
-    <string name="app_notification_peekable_summary" msgid="678845517890921158">"Baimendu aplikazioari jakinarazpenetako batzuk nabarmentzea, uneko pantailan une batez agerrarazita."</string>
+    <!-- no translation found for app_notification_override_dnd_title (7867458246395884830) -->
+    <skip />
+    <!-- no translation found for app_notification_override_dnd_summary (3516007157020189746) -->
+    <skip />
     <string name="app_notification_sensitive_title" msgid="8465860579482264139">"Ezkutatu isilpeko informazioa"</string>
-    <string name="app_notification_sensitive_summary" msgid="3263836642625157920">"Gailua blokeatuta dagoenean, ezkutatu aplikazio honen jakinarazpenak, isilpeko edukia badute"</string>
+    <!-- no translation found for app_notification_sensitive_summary (2515056180303710894) -->
+    <skip />
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Blokeatuta"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Lehentasuna"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Isilpekoa"</string>
@@ -2630,6 +2634,10 @@
     </plurals>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="7465525754879341907">"Aldatu \"Alarmak soilik\" modura <xliff:g id="FORMATTEDTIME">%1$s</xliff:g> arte"</string>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"Aldatu \"Eten beti\" modura"</string>
+    <string name="zen_mode_peek" msgid="1468557671879175931">"Pantaila-etenik ez"</string>
+    <string name="zen_mode_peek_summary" msgid="27622220787132681">"Eragotzi \"Ez molestatu\" moduan isilarazitako jakinarazpenak pantailan agertzea"</string>
+    <string name="zen_mode_lights" msgid="904184586121619154">"Abisu-argirik ez"</string>
+    <string name="zen_mode_lights_summary" msgid="6953305086643633530">"Eragotzi \"Ez molestatu\" moduan isilarazitako jakinarazpenek argi keinukaria aktibatzea"</string>
     <string name="notification_settings_apps_title" msgid="1125354590652967250">"Aplikazioen jakinarazpenak"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Jakinarazpen-ezarpenak"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Bidali gailu honi buruzko iritzia"</string>
@@ -2694,9 +2702,6 @@
     <string name="notifications_label" msgid="2872668710589600731">"Jakinarazpenak"</string>
     <string name="notifications_enabled" msgid="4386196629684749507">"Normala"</string>
     <string name="notifications_disabled" msgid="4326096527874762629">"Blokeatu"</string>
-    <string name="notifications_sensitive" msgid="7636231039287237132">"Isilpeko edukia ezkutatuta"</string>
-    <string name="notifications_priority" msgid="1812498477331421719">"Lehentasuna"</string>
-    <string name="notifications_no_peeking" msgid="999951669023262823">"Ezin da agertu"</string>
     <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
     <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g> / <xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
@@ -2718,9 +2723,6 @@
     <string name="filter_personal_apps" msgid="3277727374174355971">"Pertsonalak"</string>
     <string name="filter_work_apps" msgid="24519936790795574">"Lanekoak"</string>
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"Blokeatutakoak"</string>
-    <string name="filter_notif_priority_apps" msgid="5965001885749195239">"Lehentasunezkoak"</string>
-    <string name="filter_notif_sensitive_apps" msgid="4909289478844197927">"Isilpeko edukia ezkutatuta"</string>
-    <string name="filter_notif_no_peeking" msgid="5197968265625096563">"Ezin da agertu"</string>
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"Domeinuaren URLekin"</string>
     <string name="trust_agent_disabled_device_admin" msgid="5982562414642596563">"Administratzaileak desgaitu du"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Ezarpen aurreratuak"</string>
@@ -2890,8 +2892,14 @@
     <string name="force_density_summary_very_large" msgid="8328063057394895318">"Oso handia"</string>
     <string name="force_density_summary_extremely_large" msgid="846919277362198243">"Handiena"</string>
     <string name="force_density_summary_custom" msgid="6663681104268192485">"Pertsonalizatua (<xliff:g id="DENSITYDPI">%d</xliff:g>)"</string>
-    <!-- no translation found for see_all (8883901630052886984) -->
+    <string name="see_all" msgid="8883901630052886984">"Ikusi guztiak"</string>
+    <string name="see_less" msgid="1250265310929558370">"Ikusi gutxiago"</string>
+    <string name="disconnected" msgid="5787956818111197212">"Deskonektatuta"</string>
+    <string name="data_usage_summary_format" msgid="7507047900192160585">"Datuen <xliff:g id="AMOUNT">%1$s</xliff:g> erabili da"</string>
+    <string name="apps_summary" msgid="193158055537070092">"<xliff:g id="COUNT">%1$d</xliff:g> aplikazio instalatu dira"</string>
+    <string name="storage_summary" msgid="1110250618334248745">"<xliff:g id="SIZE1">%1$s</xliff:g>/<xliff:g id="SIZE2">%2$s</xliff:g> erabilita"</string>
+    <!-- no translation found for display_summary_on (5628868543070268634) -->
     <skip />
-    <!-- no translation found for see_less (1250265310929558370) -->
+    <!-- no translation found for display_summary_off (6399558022426312990) -->
     <skip />
 </resources>

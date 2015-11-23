@@ -850,15 +850,11 @@
     <string name="night_mode_yes" msgid="2218157265997633432">"Всегда включено"</string>
     <string name="night_mode_auto" msgid="7508348175804304327">"Автоматическое переключение"</string>
     <string name="convert_to_file_encryption" msgid="3060156730651061223">"Переход к шифрованию файлов"</string>
-    <!-- no translation found for convert_to_file_encryption_enabled (2861258671151428346) -->
-    <skip />
+    <string name="convert_to_file_encryption_enabled" msgid="2861258671151428346">"Перейти…"</string>
     <string name="convert_to_file_encryption_done" msgid="7859766358000523953">"Шифрование файлов уже включено"</string>
-    <!-- no translation found for title_convert_fbe (1263622876196444453) -->
-    <skip />
-    <!-- no translation found for convert_to_fbe_warning (6139067817148865527) -->
-    <skip />
-    <!-- no translation found for button_convert_fbe (5152671181309826405) -->
-    <skip />
+    <string name="title_convert_fbe" msgid="1263622876196444453">"Переход к шифрованию отдельных файлов"</string>
+    <string name="convert_to_fbe_warning" msgid="6139067817148865527">"Перейти к шифрованию отдельных файлов.\nВнимание! Все ваши данные будут удалены.\nЭто альфа-версия функции. Возможны ошибки.\nНажмите \"Очистить и перейти…\"."</string>
+    <string name="button_convert_fbe" msgid="5152671181309826405">"Очистить и перейти…"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Спящий режим"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Отключение экрана"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"После <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> бездействия"</string>
@@ -2546,6 +2542,7 @@
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Только будильник"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"Полная тишина"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
+    <string name="zen_mode_visual_interruptions_settings_title" msgid="168576844124787420">"Визуальное оповещение"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Рингтон"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Мелодия уведомлений по умолчанию"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Вибрация при звонке"</string>
@@ -2559,6 +2556,8 @@
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"Выберите режим уведомлений на заблокированном устройстве."</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"Уведомления"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"Уведомления приложений"</string>
+    <!-- no translation found for topic_notifications_title (7243623930984080881) -->
+    <skip />
     <string name="other_sound_settings" msgid="3151004537006844718">"Другие звуки"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Звук при наборе номера"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Звук блокировки экрана"</string>
@@ -2588,12 +2587,13 @@
     <string name="loading_notification_apps" msgid="5031818677010335895">"Загрузка..."</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"Блокировать все"</string>
     <string name="app_notification_block_summary" msgid="9049487483231233726">"Не показывать уведомления из этого приложения"</string>
-    <string name="app_notification_priority_title" msgid="5949923919607295595">"Считать важными"</string>
-    <string name="app_notification_priority_summary" msgid="2538018111338754446">"Разрешить звуковые уведомления от этого приложения в режиме оповещения \"Важные\""</string>
-    <string name="app_notification_peekable_title" msgid="8647856880382324822">"Краткие уведомления"</string>
-    <string name="app_notification_peekable_summary" msgid="678845517890921158">"Разрешить приложению ненадолго выводить некоторые уведомления на текущий экран"</string>
+    <!-- no translation found for app_notification_override_dnd_title (7867458246395884830) -->
+    <skip />
+    <!-- no translation found for app_notification_override_dnd_summary (3516007157020189746) -->
+    <skip />
     <string name="app_notification_sensitive_title" msgid="8465860579482264139">"Скрыть конфиденциальные данные"</string>
-    <string name="app_notification_sensitive_summary" msgid="3263836642625157920">"Не показывать конфиденциальные данные в уведомлениях этого приложения, когда устройство заблокировано"</string>
+    <!-- no translation found for app_notification_sensitive_summary (2515056180303710894) -->
+    <skip />
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Заблокировано"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Важные"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Конфиденциальные"</string>
@@ -2668,6 +2668,10 @@
     </plurals>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="7465525754879341907">"Активировать режим \"Только будильник\" до <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"Режим \"Не беспокоить\" отключен."</string>
+    <string name="zen_mode_peek" msgid="1468557671879175931">"Без появления на экране"</string>
+    <string name="zen_mode_peek_summary" msgid="27622220787132681">"В режиме \"Не беспокоить\" информация об уведомлениях не будет появляться на экране."</string>
+    <string name="zen_mode_lights" msgid="904184586121619154">"Без свет. индикатора"</string>
+    <string name="zen_mode_lights_summary" msgid="6953305086643633530">"В режиме \"Не беспокоить\" световой индикатор не будет мигать при появлении заблокированных уведомлений."</string>
     <string name="notification_settings_apps_title" msgid="1125354590652967250">"Приложения"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Настройки уведомлений"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Отправить отзыв об устройстве"</string>
@@ -2732,9 +2736,6 @@
     <string name="notifications_label" msgid="2872668710589600731">"Уведомления"</string>
     <string name="notifications_enabled" msgid="4386196629684749507">"Обычные"</string>
     <string name="notifications_disabled" msgid="4326096527874762629">"Заблокировать"</string>
-    <string name="notifications_sensitive" msgid="7636231039287237132">"Конфиденциальные данные скрыты"</string>
-    <string name="notifications_priority" msgid="1812498477331421719">"Важные"</string>
-    <string name="notifications_no_peeking" msgid="999951669023262823">"Без кратких уведомлений"</string>
     <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g>/<xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
     <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g>/<xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>/<xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
@@ -2762,9 +2763,6 @@
     <string name="filter_personal_apps" msgid="3277727374174355971">"Личные"</string>
     <string name="filter_work_apps" msgid="24519936790795574">"Рабочие"</string>
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"Заблокированные"</string>
-    <string name="filter_notif_priority_apps" msgid="5965001885749195239">"Важные"</string>
-    <string name="filter_notif_sensitive_apps" msgid="4909289478844197927">"Конфиденциальные данные скрыты"</string>
-    <string name="filter_notif_no_peeking" msgid="5197968265625096563">"Без кратких уведомлений"</string>
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"С URL домена"</string>
     <string name="trust_agent_disabled_device_admin" msgid="5982562414642596563">"Отключено администратором"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Дополнительные настройки"</string>
@@ -2940,8 +2938,14 @@
     <string name="force_density_summary_very_large" msgid="8328063057394895318">"Очень крупный"</string>
     <string name="force_density_summary_extremely_large" msgid="846919277362198243">"Максимальный"</string>
     <string name="force_density_summary_custom" msgid="6663681104268192485">"Другой (<xliff:g id="DENSITYDPI">%d</xliff:g>)"</string>
-    <!-- no translation found for see_all (8883901630052886984) -->
+    <string name="see_all" msgid="8883901630052886984">"Показать все"</string>
+    <string name="see_less" msgid="1250265310929558370">"Скрыть"</string>
+    <string name="disconnected" msgid="5787956818111197212">"Отключено"</string>
+    <string name="data_usage_summary_format" msgid="7507047900192160585">"Использовано трафика: <xliff:g id="AMOUNT">%1$s</xliff:g>"</string>
+    <string name="apps_summary" msgid="193158055537070092">"Установлено приложений: <xliff:g id="COUNT">%1$d</xliff:g>"</string>
+    <string name="storage_summary" msgid="1110250618334248745">"Использовано: <xliff:g id="SIZE1">%1$s</xliff:g> из <xliff:g id="SIZE2">%2$s</xliff:g>"</string>
+    <!-- no translation found for display_summary_on (5628868543070268634) -->
     <skip />
-    <!-- no translation found for see_less (1250265310929558370) -->
+    <!-- no translation found for display_summary_off (6399558022426312990) -->
     <skip />
 </resources>

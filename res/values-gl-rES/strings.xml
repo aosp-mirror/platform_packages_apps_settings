@@ -834,15 +834,11 @@
     <string name="night_mode_yes" msgid="2218157265997633432">"Sempre activada"</string>
     <string name="night_mode_auto" msgid="7508348175804304327">"Automático"</string>
     <string name="convert_to_file_encryption" msgid="3060156730651061223">"Converter no encriptado baseado en ficheiros"</string>
-    <!-- no translation found for convert_to_file_encryption_enabled (2861258671151428346) -->
-    <skip />
+    <string name="convert_to_file_encryption_enabled" msgid="2861258671151428346">"Converter..."</string>
     <string name="convert_to_file_encryption_done" msgid="7859766358000523953">"Xa se encriptou o ficheiro"</string>
-    <!-- no translation found for title_convert_fbe (1263622876196444453) -->
-    <skip />
-    <!-- no translation found for convert_to_fbe_warning (6139067817148865527) -->
-    <skip />
-    <!-- no translation found for button_convert_fbe (5152671181309826405) -->
-    <skip />
+    <string name="title_convert_fbe" msgid="1263622876196444453">"Convertendo no encriptado baseado en ficheiros"</string>
+    <string name="convert_to_fbe_warning" msgid="6139067817148865527">"Converte a partición de datos nun encriptado baseado en ficheiros.\n Advertencia: Esta acción borrará todos os datos.\n Esta función é alfa e quizais non funcione correctamente.\n Toca Borrar e converter... para continuar."</string>
+    <string name="button_convert_fbe" msgid="5152671181309826405">"Borrar e converter..."</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Suspensión"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"A pantalla apágase"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Despois de <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> de inactividade"</string>
@@ -2518,6 +2514,7 @@
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Só alarmas"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"Silencio total"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
+    <string name="zen_mode_visual_interruptions_settings_title" msgid="168576844124787420">"Interrupcións visuais"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Ton de chamada do teléfono"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Ton de chamada de notificación predeterminado"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Vibrar tamén nas chamadas"</string>
@@ -2531,6 +2528,8 @@
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"Cando o teu dispositivo está bloqueado, como queres que se mostren as notificacións?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"Notificacións"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"Notificacións de aplicacións"</string>
+    <!-- no translation found for topic_notifications_title (7243623930984080881) -->
+    <skip />
     <string name="other_sound_settings" msgid="3151004537006844718">"Outros sons"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Tons do teclado de marcación"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Sons de bloqueo da pantalla"</string>
@@ -2558,12 +2557,13 @@
     <string name="loading_notification_apps" msgid="5031818677010335895">"Cargando aplicacións..."</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"Bloquear todo"</string>
     <string name="app_notification_block_summary" msgid="9049487483231233726">"Non mostrar nunca as notificacións desta aplicación"</string>
-    <string name="app_notification_priority_title" msgid="5949923919607295595">"Tratar como prioridade"</string>
-    <string name="app_notification_priority_summary" msgid="2538018111338754446">"Permite oír as notificacións da aplicación cando a opción Non molestar está definida en Só prioridade"</string>
-    <string name="app_notification_peekable_title" msgid="8647856880382324822">"Permitir unha ollada"</string>
-    <string name="app_notification_peekable_summary" msgid="678845517890921158">"Permite que esta aplicación enfatice certas notificacións introducíndoas brevemente na visualización da pantalla actual"</string>
+    <!-- no translation found for app_notification_override_dnd_title (7867458246395884830) -->
+    <skip />
+    <!-- no translation found for app_notification_override_dnd_summary (3516007157020189746) -->
+    <skip />
     <string name="app_notification_sensitive_title" msgid="8465860579482264139">"Ocultar contido confidencial"</string>
-    <string name="app_notification_sensitive_summary" msgid="3263836642625157920">"Oculta o contido das notificacións desta aplicación que poida revelar información privada cando o dispositivo está bloqueado."</string>
+    <!-- no translation found for app_notification_sensitive_summary (2515056180303710894) -->
+    <skip />
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Bloqueada"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Prioridade"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Confidencial"</string>
@@ -2634,6 +2634,10 @@
     </plurals>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="7465525754879341907">"Cambiar ao modo Só alarmas ata as <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"Cambia a interromper sempre"</string>
+    <string name="zen_mode_peek" msgid="1468557671879175931">"Sen interrupcións na pantalla"</string>
+    <string name="zen_mode_peek_summary" msgid="27622220787132681">"Evita que as notificacións silenciadas pola función Non molestar se asomen ou aparezan na pantalla actual"</string>
+    <string name="zen_mode_lights" msgid="904184586121619154">"Non hai ningunha luz de notificación"</string>
+    <string name="zen_mode_lights_summary" msgid="6953305086643633530">"Evita que as notificacións silenciadas pola función Non molestar fagan que se acenda a luz"</string>
     <string name="notification_settings_apps_title" msgid="1125354590652967250">"Notific. aplicacións"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Configuración das notificacións"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Enviar comentarios do dispositivo"</string>
@@ -2698,9 +2702,6 @@
     <string name="notifications_label" msgid="2872668710589600731">"Notificacións"</string>
     <string name="notifications_enabled" msgid="4386196629684749507">"Normal"</string>
     <string name="notifications_disabled" msgid="4326096527874762629">"Bloqueadas"</string>
-    <string name="notifications_sensitive" msgid="7636231039287237132">"Contido confidencial oculto"</string>
-    <string name="notifications_priority" msgid="1812498477331421719">"Prioridade"</string>
-    <string name="notifications_no_peeking" msgid="999951669023262823">"Ningunha ollada"</string>
     <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g>/<xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
     <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g>/<xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>/<xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
@@ -2722,9 +2723,6 @@
     <string name="filter_personal_apps" msgid="3277727374174355971">"Persoais"</string>
     <string name="filter_work_apps" msgid="24519936790795574">"Do traballo"</string>
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"Bloqueadas"</string>
-    <string name="filter_notif_priority_apps" msgid="5965001885749195239">"Con prioridade"</string>
-    <string name="filter_notif_sensitive_apps" msgid="4909289478844197927">"Contido confidencial oculto"</string>
-    <string name="filter_notif_no_peeking" msgid="5197968265625096563">"Ningunha ollada"</string>
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"Con URL de dominio"</string>
     <string name="trust_agent_disabled_device_admin" msgid="5982562414642596563">"Desactivado polo administrador"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Avanzada"</string>
@@ -2894,8 +2892,14 @@
     <string name="force_density_summary_very_large" msgid="8328063057394895318">"Máis grande"</string>
     <string name="force_density_summary_extremely_large" msgid="846919277362198243">"A máis grande"</string>
     <string name="force_density_summary_custom" msgid="6663681104268192485">"Personalizada (<xliff:g id="DENSITYDPI">%d</xliff:g>)"</string>
-    <!-- no translation found for see_all (8883901630052886984) -->
+    <string name="see_all" msgid="8883901630052886984">"Ver todo"</string>
+    <string name="see_less" msgid="1250265310929558370">"Ver menos"</string>
+    <string name="disconnected" msgid="5787956818111197212">"Desconectada"</string>
+    <string name="data_usage_summary_format" msgid="7507047900192160585">"<xliff:g id="AMOUNT">%1$s</xliff:g> de datos utilizados"</string>
+    <string name="apps_summary" msgid="193158055537070092">"<xliff:g id="COUNT">%1$d</xliff:g> aplicacións instaladas"</string>
+    <string name="storage_summary" msgid="1110250618334248745">"<xliff:g id="SIZE1">%1$s</xliff:g> de <xliff:g id="SIZE2">%2$s</xliff:g> utilizados"</string>
+    <!-- no translation found for display_summary_on (5628868543070268634) -->
     <skip />
-    <!-- no translation found for see_less (1250265310929558370) -->
+    <!-- no translation found for display_summary_off (6399558022426312990) -->
     <skip />
 </resources>

@@ -2542,6 +2542,7 @@
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Лише будильник"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"Без сигналів"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>. <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
+    <string name="zen_mode_visual_interruptions_settings_title" msgid="168576844124787420">"Візуальні сповіщення"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Мелодія телефона"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Сигнал сповіщень за умовчанням"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Також вібросигнал для дзвінків"</string>
@@ -2555,6 +2556,7 @@
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"Як показувати сповіщення, коли пристрій заблоковано?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"Сповіщення"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"Сповіщення з додатків"</string>
+    <string name="topic_notifications_title" msgid="7243623930984080881">"Сповіщення за темами"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Інші звуки"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Звуки цифрової клавіатури"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Звуки блокування екрана"</string>
@@ -2584,12 +2586,10 @@
     <string name="loading_notification_apps" msgid="5031818677010335895">"Завантаження додатків…"</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"Блокувати всі"</string>
     <string name="app_notification_block_summary" msgid="9049487483231233726">"Ніколи не показувати сповіщення з цього додатка"</string>
-    <string name="app_notification_priority_title" msgid="5949923919607295595">"Вважати пріоритетними"</string>
-    <string name="app_notification_priority_summary" msgid="2538018111338754446">"Дозволити сигнал для сповіщень цього додатка, коли в режимі \"Не турбувати\" вибрано \"Лише пріоритетні\""</string>
-    <string name="app_notification_peekable_title" msgid="8647856880382324822">"Дозволити короткий показ"</string>
-    <string name="app_notification_peekable_summary" msgid="678845517890921158">"Дозволити цьому додатку ненадовго виводити важливі сповіщення на поточний екран"</string>
+    <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"Заміна режиму \"Не турбувати\""</string>
+    <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"Показувати ці сповіщення, коли в режимі \"Не турбувати\" вибрано \"Лише пріоритетні\""</string>
     <string name="app_notification_sensitive_title" msgid="8465860579482264139">"Ховати конфіденційний вміст"</string>
-    <string name="app_notification_sensitive_summary" msgid="3263836642625157920">"Коли пристрій заблоковано, ховати конфіденційний вміст сповіщень цього додатка"</string>
+    <string name="app_notification_sensitive_summary" msgid="2515056180303710894">"Коли пристрій заблоковано, ховати конфіденційний вміст цих сповіщень"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Заблоковано"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Пріоритетні"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Конфіденційно"</string>
@@ -2664,6 +2664,10 @@
     </plurals>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="7465525754879341907">"Активувати режим \"Лише будильник\" до <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"Вибрати опцію \"Завжди надсилати\""</string>
+    <string name="zen_mode_peek" msgid="1468557671879175931">"Не виводити на екран"</string>
+    <string name="zen_mode_peek_summary" msgid="27622220787132681">"Не виводити на поточний екран сповіщення, для яких вибрано режим \"Не турбувати\""</string>
+    <string name="zen_mode_lights" msgid="904184586121619154">"Без індикатора"</string>
+    <string name="zen_mode_lights_summary" msgid="6953305086643633530">"Не вмикати індикатор сповіщень, для яких вибрано режим \"Не турбувати\""</string>
     <string name="notification_settings_apps_title" msgid="1125354590652967250">"Сповіщення додатків"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Налаштування сповіщень"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Надіслати відгук про цей пристрій"</string>
@@ -2728,9 +2732,6 @@
     <string name="notifications_label" msgid="2872668710589600731">"Сповіщення"</string>
     <string name="notifications_enabled" msgid="4386196629684749507">"Звичайні"</string>
     <string name="notifications_disabled" msgid="4326096527874762629">"Заблокувати"</string>
-    <string name="notifications_sensitive" msgid="7636231039287237132">"Конфіденційний вміст сховано"</string>
-    <string name="notifications_priority" msgid="1812498477331421719">"Пріоритетні"</string>
-    <string name="notifications_no_peeking" msgid="999951669023262823">"Коротке сповіщення вимкнено"</string>
     <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
     <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g> / <xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
@@ -2758,9 +2759,6 @@
     <string name="filter_personal_apps" msgid="3277727374174355971">"Особисті"</string>
     <string name="filter_work_apps" msgid="24519936790795574">"Робочі"</string>
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"Заблоковані"</string>
-    <string name="filter_notif_priority_apps" msgid="5965001885749195239">"Пріоритетні"</string>
-    <string name="filter_notif_sensitive_apps" msgid="4909289478844197927">"Конфіденційний вміст сховано"</string>
-    <string name="filter_notif_no_peeking" msgid="5197968265625096563">"Коротке сповіщення вимкнено"</string>
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"З URL-адресами домену"</string>
     <string name="trust_agent_disabled_device_admin" msgid="5982562414642596563">"Вимкнено адміністратором"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Розширені налаштування"</string>
@@ -2936,8 +2934,12 @@
     <string name="force_density_summary_very_large" msgid="8328063057394895318">"Більші елементи"</string>
     <string name="force_density_summary_extremely_large" msgid="846919277362198243">"Найбільші елементи"</string>
     <string name="force_density_summary_custom" msgid="6663681104268192485">"Спеціальний масштаб (<xliff:g id="DENSITYDPI">%d</xliff:g>)"</string>
-    <!-- no translation found for see_all (8883901630052886984) -->
-    <skip />
-    <!-- no translation found for see_less (1250265310929558370) -->
-    <skip />
+    <string name="see_all" msgid="8883901630052886984">"Показати все"</string>
+    <string name="see_less" msgid="1250265310929558370">"Показати менше"</string>
+    <string name="disconnected" msgid="5787956818111197212">"Від’єднано"</string>
+    <string name="data_usage_summary_format" msgid="7507047900192160585">"Використовується трафіку: <xliff:g id="AMOUNT">%1$s</xliff:g>"</string>
+    <string name="apps_summary" msgid="193158055537070092">"Установлено додатків: <xliff:g id="COUNT">%1$d</xliff:g>"</string>
+    <string name="storage_summary" msgid="1110250618334248745">"Використано <xliff:g id="SIZE1">%1$s</xliff:g> з <xliff:g id="SIZE2">%2$s</xliff:g>"</string>
+    <string name="display_summary_on" msgid="5628868543070268634">"Регульовану яскравість УВІМКНЕНО"</string>
+    <string name="display_summary_off" msgid="6399558022426312990">"Регульовану яскравість ВИМКНЕНО"</string>
 </resources>

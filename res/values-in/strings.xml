@@ -837,7 +837,7 @@
     <string name="convert_to_file_encryption_enabled" msgid="2861258671151428346">"Konversi..."</string>
     <string name="convert_to_file_encryption_done" msgid="7859766358000523953">"Sudah dienkripsi berbasis file"</string>
     <string name="title_convert_fbe" msgid="1263622876196444453">"Mengonversi ke enkripsi berbasis file"</string>
-    <string name="convert_to_fbe_warning" msgid="6139067817148865527">"Konversi partisi data ke enkripsi berbasis file.\n !!Peringatan!! Tindakan ini akan menghapus semua data.\n Fitur ini tahap alfa dan mungkin tidak berfungsi dengan benar.\n Tekan \'Hapus dan konversi…\' untuk melanjutkan."</string>
+    <string name="convert_to_fbe_warning" msgid="6139067817148865527">"Konversi partisi data ke enkripsi berbasis file.\n !!Peringatan!! Tindakan ini akan menghapus semua data.\n Fitur ini masih dalam tahap alfa dan mungkin tidak berfungsi dengan baik.\n Tekan \'Hapus dan konversi…\' untuk melanjutkan."</string>
     <string name="button_convert_fbe" msgid="5152671181309826405">"Hapus dan konversi…"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Tidur"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Layar mati"</string>
@@ -2514,6 +2514,7 @@
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Hanya alarm"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"Senyap total"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
+    <string name="zen_mode_visual_interruptions_settings_title" msgid="168576844124787420">"Gangguan visual"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Nada dering ponsel"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Dering notifikasi default"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Juga getar saat ada panggilan"</string>
@@ -2527,6 +2528,8 @@
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"Saat perangkat dikunci, Anda ingin notifikasi ditampilkan seperti apa?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"Notifikasi"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"Notifikasi apl"</string>
+    <!-- no translation found for topic_notifications_title (7243623930984080881) -->
+    <skip />
     <string name="other_sound_settings" msgid="3151004537006844718">"Suara lainnya"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Nada tombol nomor"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Suara kunci layar"</string>
@@ -2554,12 +2557,13 @@
     <string name="loading_notification_apps" msgid="5031818677010335895">"Memuat aplikasi..."</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"Blokir semua"</string>
     <string name="app_notification_block_summary" msgid="9049487483231233726">"Jangan pernah tampilkan notifikasi dari aplikasi ini"</string>
-    <string name="app_notification_priority_title" msgid="5949923919607295595">"Perlakukan sebagai prioritas"</string>
-    <string name="app_notification_priority_summary" msgid="2538018111338754446">"Izinkan notifikasi aplikasi ini didengarkan saat Jangan ganggu disetel menjadi Hanya untuk prioritas"</string>
-    <string name="app_notification_peekable_title" msgid="8647856880382324822">"Izinkan mengintip"</string>
-    <string name="app_notification_peekable_summary" msgid="678845517890921158">"Izinkan aplikasi ini menekankan notifikasi tertentu dengan menggeser sebentar untuk ditampilkan di layar saat ini"</string>
+    <!-- no translation found for app_notification_override_dnd_title (7867458246395884830) -->
+    <skip />
+    <!-- no translation found for app_notification_override_dnd_summary (3516007157020189746) -->
+    <skip />
     <string name="app_notification_sensitive_title" msgid="8465860579482264139">"Sembunyikan konten sensitif"</string>
-    <string name="app_notification_sensitive_summary" msgid="3263836642625157920">"Jika perangkat terkunci, sembunyikan konten notifikasi aplikasi ini yang dapat mengungkapkan informasi pribadi"</string>
+    <!-- no translation found for app_notification_sensitive_summary (2515056180303710894) -->
+    <skip />
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Diblokir"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Prioritas"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Sensitif"</string>
@@ -2630,6 +2634,10 @@
     </plurals>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="7465525754879341907">"Ubah ke mode hanya alarm hingga <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"Ubah ke mode selalu ganggu"</string>
+    <string name="zen_mode_peek" msgid="1468557671879175931">"Tidak ada gangguan layar"</string>
+    <string name="zen_mode_peek_summary" msgid="27622220787132681">"Mencegah notifikasi yang dibisukan oleh mode Jangan Ganggu agar tidak diintip atau muncul di layar saat ini"</string>
+    <string name="zen_mode_lights" msgid="904184586121619154">"Tanpa lampu notifikasi"</string>
+    <string name="zen_mode_lights_summary" msgid="6953305086643633530">"Mencegah notifikasi yang dibisukan oleh mode Jangan Ganggu agar lampu tidak berkedip"</string>
     <string name="notification_settings_apps_title" msgid="1125354590652967250">"Notifikasi apl"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Setelan notifikasi"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Kirim masukan tentang perangkat ini"</string>
@@ -2694,9 +2702,6 @@
     <string name="notifications_label" msgid="2872668710589600731">"Notifikasi"</string>
     <string name="notifications_enabled" msgid="4386196629684749507">"Normal"</string>
     <string name="notifications_disabled" msgid="4326096527874762629">"Blokir"</string>
-    <string name="notifications_sensitive" msgid="7636231039287237132">"Konten sensitif disembunyikan"</string>
-    <string name="notifications_priority" msgid="1812498477331421719">"Prioritas"</string>
-    <string name="notifications_no_peeking" msgid="999951669023262823">"Tidak boleh mengintip"</string>
     <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
     <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g> / <xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
@@ -2718,9 +2723,6 @@
     <string name="filter_personal_apps" msgid="3277727374174355971">"Pribadi"</string>
     <string name="filter_work_apps" msgid="24519936790795574">"Kantor"</string>
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"Diblokir"</string>
-    <string name="filter_notif_priority_apps" msgid="5965001885749195239">"Prioritas"</string>
-    <string name="filter_notif_sensitive_apps" msgid="4909289478844197927">"Konten sensitif disembunyikan"</string>
-    <string name="filter_notif_no_peeking" msgid="5197968265625096563">"Tidak boleh mengintip"</string>
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"Dengan URL domain"</string>
     <string name="trust_agent_disabled_device_admin" msgid="5982562414642596563">"Dinonaktifkan oleh administrator"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Lanjutan"</string>
@@ -2890,8 +2892,14 @@
     <string name="force_density_summary_very_large" msgid="8328063057394895318">"Lebih besar"</string>
     <string name="force_density_summary_extremely_large" msgid="846919277362198243">"Terbesar"</string>
     <string name="force_density_summary_custom" msgid="6663681104268192485">"(<xliff:g id="DENSITYDPI">%d</xliff:g>) khusus"</string>
-    <!-- no translation found for see_all (8883901630052886984) -->
+    <string name="see_all" msgid="8883901630052886984">"Lihat semua"</string>
+    <string name="see_less" msgid="1250265310929558370">"Lihat lebih sedikit"</string>
+    <string name="disconnected" msgid="5787956818111197212">"Terputus"</string>
+    <string name="data_usage_summary_format" msgid="7507047900192160585">"<xliff:g id="AMOUNT">%1$s</xliff:g> data digunakan"</string>
+    <string name="apps_summary" msgid="193158055537070092">"<xliff:g id="COUNT">%1$d</xliff:g> aplikasi terpasang"</string>
+    <string name="storage_summary" msgid="1110250618334248745">"<xliff:g id="SIZE1">%1$s</xliff:g> dari <xliff:g id="SIZE2">%2$s</xliff:g> digunakan"</string>
+    <!-- no translation found for display_summary_on (5628868543070268634) -->
     <skip />
-    <!-- no translation found for see_less (1250265310929558370) -->
+    <!-- no translation found for display_summary_off (6399558022426312990) -->
     <skip />
 </resources>

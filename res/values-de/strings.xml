@@ -913,7 +913,7 @@
     <string name="device_status_summary" product="tablet" msgid="3292717754497039686">"Akku- und Netzwerkstatus und andere Informationen"</string>
     <string name="device_status_summary" product="default" msgid="2599162787451519618">"Telefonnummer, Signal usw."</string>
     <string name="storage_settings" msgid="4211799979832404953">"Speicher"</string>
-    <string name="storage_usb_settings" msgid="642612065405691122">"Speicher &amp; USB"</string>
+    <string name="storage_usb_settings" msgid="642612065405691122">"Speicherplatz &amp; USB"</string>
     <string name="storage_settings_title" msgid="8746016738388094064">"Speichereinstellungen"</string>
     <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"USB-Speicher trennen, verfügbaren Speicher anzeigen"</string>
     <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"SD-Karte entnehmen, verfügbaren Speicher anzeigen"</string>
@@ -2515,6 +2515,7 @@
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Nur Wecker"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"Lautlos"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
+    <string name="zen_mode_visual_interruptions_settings_title" msgid="168576844124787420">"Visuelle Unterbrechungen"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Klingelton"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Standardton für Benachrichtigungen"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Bei Anrufen auch vibrieren"</string>
@@ -2528,6 +2529,8 @@
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"Wie sollen Benachrichtigungen angezeigt werden, wenn Ihr Gerät gesperrt ist?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"Benachrichtigungen"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"App-Benachrichtigungen"</string>
+    <!-- no translation found for topic_notifications_title (7243623930984080881) -->
+    <skip />
     <string name="other_sound_settings" msgid="3151004537006844718">"Andere Töne"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Wähltastentöne"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Töne für die Displaysperre"</string>
@@ -2555,12 +2558,13 @@
     <string name="loading_notification_apps" msgid="5031818677010335895">"Apps werden geladen..."</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"Alle blockieren"</string>
     <string name="app_notification_block_summary" msgid="9049487483231233726">"Benachrichtigungen von dieser App nie anzeigen"</string>
-    <string name="app_notification_priority_title" msgid="5949923919607295595">"Als Priorität behandeln"</string>
-    <string name="app_notification_priority_summary" msgid="2538018111338754446">"Die Benachrichtigungen dieser App dürfen hörbar sein, wenn \"Nicht stören\" auf \"Nur wichtige\" festgelegt ist."</string>
-    <string name="app_notification_peekable_title" msgid="8647856880382324822">"Kurzes Einblenden zulassen"</string>
-    <string name="app_notification_peekable_summary" msgid="678845517890921158">"Diese App darf bestimmte Benachrichtigungen durch kurzes Einblenden auf dem aktuellen Bildschirm hervorheben."</string>
+    <!-- no translation found for app_notification_override_dnd_title (7867458246395884830) -->
+    <skip />
+    <!-- no translation found for app_notification_override_dnd_summary (3516007157020189746) -->
+    <skip />
     <string name="app_notification_sensitive_title" msgid="8465860579482264139">"Vertrauliche Inhalte ausblenden"</string>
-    <string name="app_notification_sensitive_summary" msgid="3263836642625157920">"Wenn das Gerät gesperrt ist, werden Inhalte aus den Benachrichtigungen der App ausgeblendet, die personenbezogene Daten preisgeben könnten."</string>
+    <!-- no translation found for app_notification_sensitive_summary (2515056180303710894) -->
+    <skip />
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Blockiert"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Wichtig"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Sensibel"</string>
@@ -2631,6 +2635,10 @@
     </plurals>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="7465525754879341907">"Bis <xliff:g id="FORMATTEDTIME">%1$s</xliff:g> zur Option \"Nur Wecker\" wechseln"</string>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"Zur Option \"Immer unterbrechen\" wechseln"</string>
+    <string name="zen_mode_peek" msgid="1468557671879175931">"Keine Unterbrechungen auf dem Bildschirm"</string>
+    <string name="zen_mode_peek_summary" msgid="27622220787132681">"Kein Erscheinen von Benachrichtigungen auf dem aktuellen Bildschirm, die mittels \"Bitte nicht stören\" stummgeschaltet wurden"</string>
+    <string name="zen_mode_lights" msgid="904184586121619154">"Keine Benachrichtigungsleuchte"</string>
+    <string name="zen_mode_lights_summary" msgid="6953305086643633530">"Kein Pulsieren der Leuchte bei mittels \"Bitte nicht stören\" stummgeschalteten Benachrichtigungen"</string>
     <string name="notification_settings_apps_title" msgid="1125354590652967250">"App-Benachrichtigungen"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Benachrichtigungseinstellungen"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Feedback zu diesem Gerät senden"</string>
@@ -2695,9 +2703,6 @@
     <string name="notifications_label" msgid="2872668710589600731">"Benachrichtigungen"</string>
     <string name="notifications_enabled" msgid="4386196629684749507">"Normal"</string>
     <string name="notifications_disabled" msgid="4326096527874762629">"Aus"</string>
-    <string name="notifications_sensitive" msgid="7636231039287237132">"Vertrauliche Inhalte verborgen"</string>
-    <string name="notifications_priority" msgid="1812498477331421719">"Wichtig"</string>
-    <string name="notifications_no_peeking" msgid="999951669023262823">"Kein kurzes Einblenden"</string>
     <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g>/<xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
     <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g>/<xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>/<xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
@@ -2719,9 +2724,6 @@
     <string name="filter_personal_apps" msgid="3277727374174355971">"Nutzer"</string>
     <string name="filter_work_apps" msgid="24519936790795574">"Arbeit"</string>
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"Blockiert"</string>
-    <string name="filter_notif_priority_apps" msgid="5965001885749195239">"Wichtig"</string>
-    <string name="filter_notif_sensitive_apps" msgid="4909289478844197927">"Vertrauliche Inhalte verborgen"</string>
-    <string name="filter_notif_no_peeking" msgid="5197968265625096563">"Kein kurzes Einblenden"</string>
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"Mit Domain-URLs"</string>
     <string name="trust_agent_disabled_device_admin" msgid="5982562414642596563">"Vom Administrator deaktiviert"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Erweitert"</string>
@@ -2763,7 +2765,7 @@
     <string name="permit_usage_access" msgid="4012876269445832300">"Zugriff auf Nutzungsdaten gewähren"</string>
     <string name="app_usage_preference" msgid="7065701732733134991">"App-Nutzungseinstellungen"</string>
     <string name="usage_access_description" msgid="1352111094596416795">"Der Zugriff auf die Nutzungsdaten ermöglicht es einer App, verschiedene Informationen zu erfassen, unter anderem, welche anderen Apps Sie wie oft verwenden, welchen Mobilfunkanbieter Sie nutzen und welche Spracheinstellungen Sie festgelegt haben."</string>
-    <string name="memory_settings_title" msgid="7490541005204254222">"Speicher"</string>
+    <string name="memory_settings_title" msgid="7490541005204254222">"Arbeitsspeicher"</string>
     <string name="memory_details_title" msgid="8542565326053693320">"Speicherdetails"</string>
     <string name="always_running" msgid="6042448320077429656">"Immer ausgeführt (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
     <string name="sometimes_running" msgid="6611250683037700864">"Gelegentlich ausgeführt (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
@@ -2893,8 +2895,14 @@
     <string name="force_density_summary_very_large" msgid="8328063057394895318">"Größer"</string>
     <string name="force_density_summary_extremely_large" msgid="846919277362198243">"Am größten"</string>
     <string name="force_density_summary_custom" msgid="6663681104268192485">"Benutzerdefiniert (<xliff:g id="DENSITYDPI">%d</xliff:g>)"</string>
-    <!-- no translation found for see_all (8883901630052886984) -->
+    <string name="see_all" msgid="8883901630052886984">"Alle anzeigen"</string>
+    <string name="see_less" msgid="1250265310929558370">"Weniger anzeigen"</string>
+    <string name="disconnected" msgid="5787956818111197212">"Verbindung getrennt"</string>
+    <string name="data_usage_summary_format" msgid="7507047900192160585">"<xliff:g id="AMOUNT">%1$s</xliff:g> der Daten genutzt"</string>
+    <string name="apps_summary" msgid="193158055537070092">"<xliff:g id="COUNT">%1$d</xliff:g> Apps installiert"</string>
+    <string name="storage_summary" msgid="1110250618334248745">"<xliff:g id="SIZE1">%1$s</xliff:g> von <xliff:g id="SIZE2">%2$s</xliff:g> genutzt"</string>
+    <!-- no translation found for display_summary_on (5628868543070268634) -->
     <skip />
-    <!-- no translation found for see_less (1250265310929558370) -->
+    <!-- no translation found for display_summary_off (6399558022426312990) -->
     <skip />
 </resources>

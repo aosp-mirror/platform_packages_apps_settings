@@ -2542,6 +2542,7 @@
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Tik įspėjimai"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"Visiška tyla"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
+    <string name="zen_mode_visual_interruptions_settings_title" msgid="168576844124787420">"Vaizdinė pertrauktis"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Telefono skambėjimo tonas"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Numatytasis pranešimo skambėjimo tonas"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Taip pat vibruoti, kai skamb."</string>
@@ -2555,6 +2556,7 @@
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"Kaip norite matyti pranešimus, kai įrenginys bus užrakintas?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"Pranešimai"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"Programų pranešimai"</string>
+    <string name="topic_notifications_title" msgid="7243623930984080881">"Temų pranešimai"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Kiti garsai"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Skambinimo skydelio tonai"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Ekrano užrakinimo garsai"</string>
@@ -2584,12 +2586,10 @@
     <string name="loading_notification_apps" msgid="5031818677010335895">"Įkeliamos programos..."</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"Blokuoti viską"</string>
     <string name="app_notification_block_summary" msgid="9049487483231233726">"Niekada nerodyti iš šios programos gautų pranešimų"</string>
-    <string name="app_notification_priority_title" msgid="5949923919607295595">"Laikyti prioritetiniais"</string>
-    <string name="app_notification_priority_summary" msgid="2538018111338754446">"Leisti pateikti programos pranešimus, kai funkcija „Netrukdyti“ nustatyta į „Tik prioritetiniai įvykiai“"</string>
-    <string name="app_notification_peekable_title" msgid="8647856880382324822">"Leisti sparčiai peržiūrėti"</string>
-    <string name="app_notification_peekable_summary" msgid="678845517890921158">"Leisti programai akcentuoti konkrečius pranešimus, trumpai nuslenkant juos į rodinį dabartiniame ekrane"</string>
+    <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"Nepaisyti netrukdymo režimo"</string>
+    <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"Leisti ir toliau teikti šiuos pranešimus, kai netrukdymo režimas nustatytas į „Tik prioritetiniai“"</string>
     <string name="app_notification_sensitive_title" msgid="8465860579482264139">"Slėpti neskelbtiną turinį"</string>
-    <string name="app_notification_sensitive_summary" msgid="3263836642625157920">"Kai įrenginys užrakintas, slėpti turinį šios programos pranešimuose, kuriuose gali būti atskleidžiama privati informacija"</string>
+    <string name="app_notification_sensitive_summary" msgid="2515056180303710894">"Kai įrenginys užrakintas, slėpti šių pranešimų turinį, kuris galėtų atskleisti privačią informaciją"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Užblokuotas"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Prioritetas"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Delikatus"</string>
@@ -2664,6 +2664,10 @@
     </plurals>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="7465525754879341907">"Pakeisti tik į signalus iki <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"Pakeisti į pertraukimo nustatymą visam laikui"</string>
+    <string name="zen_mode_peek" msgid="1468557671879175931">"Nėra jokių ekr. pertr."</string>
+    <string name="zen_mode_peek_summary" msgid="27622220787132681">"Neleisti, kad gavus praneš., nutildytų naud. rež. „Netrukdyti“, jie būtų rodomi dabart. ekrane"</string>
+    <string name="zen_mode_lights" msgid="904184586121619154">"Nėra praneš. lemp."</string>
+    <string name="zen_mode_lights_summary" msgid="6953305086643633530">"Neleisti, kad lemputė pulsuotų gavus praneš., nutildytų naud. rež. „Netrukdyti“"</string>
     <string name="notification_settings_apps_title" msgid="1125354590652967250">"Programų pranešimai"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Įspėjimų nustatymai"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Siųsti atsiliepimą apie šį įrenginį"</string>
@@ -2728,9 +2732,6 @@
     <string name="notifications_label" msgid="2872668710589600731">"Informaciniai pranešimai"</string>
     <string name="notifications_enabled" msgid="4386196629684749507">"Įprastas"</string>
     <string name="notifications_disabled" msgid="4326096527874762629">"Užblokuota"</string>
-    <string name="notifications_sensitive" msgid="7636231039287237132">"Neskelbtinas turinys paslėptas"</string>
-    <string name="notifications_priority" msgid="1812498477331421719">"Prioritetiniai"</string>
-    <string name="notifications_no_peeking" msgid="999951669023262823">"Nežiūrėti"</string>
     <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
     <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g> / <xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
@@ -2758,9 +2759,6 @@
     <string name="filter_personal_apps" msgid="3277727374174355971">"Asmeninės"</string>
     <string name="filter_work_apps" msgid="24519936790795574">"Darbas"</string>
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"Užblokuoti"</string>
-    <string name="filter_notif_priority_apps" msgid="5965001885749195239">"Prioritetiniai"</string>
-    <string name="filter_notif_sensitive_apps" msgid="4909289478844197927">"Neskelbtinas turinys paslėptas"</string>
-    <string name="filter_notif_no_peeking" msgid="5197968265625096563">"Nežiūrėti"</string>
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"Su domeno URL"</string>
     <string name="trust_agent_disabled_device_admin" msgid="5982562414642596563">"Išjungė administratorius"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Išplėstiniai"</string>
@@ -2938,8 +2936,12 @@
     <string name="force_density_summary_very_large" msgid="8328063057394895318">"Didesnis"</string>
     <string name="force_density_summary_extremely_large" msgid="846919277362198243">"Didžiausias"</string>
     <string name="force_density_summary_custom" msgid="6663681104268192485">"Tinkintas (<xliff:g id="DENSITYDPI">%d</xliff:g>)"</string>
-    <!-- no translation found for see_all (8883901630052886984) -->
-    <skip />
-    <!-- no translation found for see_less (1250265310929558370) -->
-    <skip />
+    <string name="see_all" msgid="8883901630052886984">"Žr. viską"</string>
+    <string name="see_less" msgid="1250265310929558370">"Žr. mažiau"</string>
+    <string name="disconnected" msgid="5787956818111197212">"Atsijungta"</string>
+    <string name="data_usage_summary_format" msgid="7507047900192160585">"Panaudota duomenų: <xliff:g id="AMOUNT">%1$s</xliff:g>"</string>
+    <string name="apps_summary" msgid="193158055537070092">"Įdiegtų programų: <xliff:g id="COUNT">%1$d</xliff:g>"</string>
+    <string name="storage_summary" msgid="1110250618334248745">"Panaudota: <xliff:g id="SIZE1">%1$s</xliff:g> iš <xliff:g id="SIZE2">%2$s</xliff:g>"</string>
+    <string name="display_summary_on" msgid="5628868543070268634">"Prisitaikantis šviesumas yra ĮJUNGTAS"</string>
+    <string name="display_summary_off" msgid="6399558022426312990">"Prisitaikantis šviesumas yra IŠJUNGTAS"</string>
 </resources>

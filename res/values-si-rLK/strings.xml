@@ -2516,6 +2516,7 @@
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"එලාම පමණයි"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"සම්පූර්ණ නිහඬතාව"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g> : <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
+    <string name="zen_mode_visual_interruptions_settings_title" msgid="168576844124787420">"දෘශ්‍ය බාධා"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"දුරකථන රිගින්ටෝනය"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"සුපුරුදු දැනුම්දීම් රිගින්ටෝනය"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"ඇමතුම් සඳහා කම්පනයද කරන්න"</string>
@@ -2529,6 +2530,7 @@
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"උපාංගය අගුළු දමා ඇති විට, ඔබට දැනුම්දීම් පෙන්න විය යූත්තේ කෙසේද?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"දැනුම්දීම්"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"යෙදුම් දැනුම්දීම්"</string>
+    <string name="topic_notifications_title" msgid="7243623930984080881">"මාතෘකාව දැනුම්දීම්"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"වෙනත් ශබ්ද"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"ඇමතුම් පැඩ නාද"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"තිරය අඟුළු දැමීමේ ශබ්ද"</string>
@@ -2556,12 +2558,10 @@
     <string name="loading_notification_apps" msgid="5031818677010335895">"යෙදුම් පූරණය වේ..."</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"සියල්ල අවහිර කරන්න"</string>
     <string name="app_notification_block_summary" msgid="9049487483231233726">"මෙම යෙදුමෙන් කවදාවත් දැනුම්දීම් පෙන්වන්න එපා"</string>
-    <string name="app_notification_priority_title" msgid="5949923919607295595">"ප්‍රමුඛතාව ලෙස සලකන්න"</string>
-    <string name="app_notification_priority_summary" msgid="2538018111338754446">"බාධා නොකරන්න යන්න ප්‍රමුඛතාව පමණි වෙත සකසා ඇති විට මෙම යෙදුමේ දැනුම්දීම් ඇසීමට ඉඩ දෙන්න"</string>
-    <string name="app_notification_peekable_title" msgid="8647856880382324822">"හොරෙන් බැලීමට ඉඩ දෙන්න"</string>
-    <string name="app_notification_peekable_summary" msgid="678845517890921158">"වත්මන් තිරය මත බැලීමට ඒවා සැකෙවින් ස්ලයිඩ් කිරීම මගින් සමහර දැනුම්දීම් අවධාරණය කිරීමට මෙම යෙදුමට ඉඩ දෙන්න"</string>
+    <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"බාධා නොකරන්න ඉක්මවන්න"</string>
+    <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"බාධා නොකරන්න, ප්‍රමුඛතා පමණි වෙත සකසා ඇති විට මෙම දැනුම්දීම්වලට බාධා කිරීමට දිගටම ඉඩ දෙන්න"</string>
     <string name="app_notification_sensitive_title" msgid="8465860579482264139">"සංවේදී අන්තර්ගතය සඟවන්න"</string>
-    <string name="app_notification_sensitive_summary" msgid="3263836642625157920">"උපාංගය අගුළු දමා ඇති විට, මෙම යෙදුමේ දැනුම්දීම්වල ඇති පෞද්ගලික තොරතුරු අනාවරණය කළ හැකි අන්තර්ගතය සඟවන්න"</string>
+    <string name="app_notification_sensitive_summary" msgid="2515056180303710894">"උපාංගය අගුලු දමා ඇති විට, පුද්ගලික තොරතුරු හෙළිදරව් කළ හැකි මෙම දැනුම්දීම්වල ඇති අන්තර්ගතය සඟවන්න"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"අවහිර කරන ලදි"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"ප්‍රමුඛතාව"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"සංවේදී"</string>
@@ -2632,6 +2632,10 @@
     </plurals>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="7465525754879341907">"<xliff:g id="FORMATTEDTIME">%1$s</xliff:g> පමණක් දක්වා ඇති සීනු වෙත මාරු වෙන්න"</string>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"සෑම විටම බාධා කිරීම වෙත මාරු වෙන්න"</string>
+    <string name="zen_mode_peek" msgid="1468557671879175931">"තිර බාධා නැත"</string>
+    <string name="zen_mode_peek_summary" msgid="27622220787132681">"වත්මන් තිරය මත පෙනී සිටීමෙන් හෝ දිස් වීමෙන් බාධා නොකරන්න වෙතින් දැනුම්දීම් නිහඬ වීම වළක්වන්න"</string>
+    <string name="zen_mode_lights" msgid="904184586121619154">"දැනුම්දීම් ආලෝකය නැත"</string>
+    <string name="zen_mode_lights_summary" msgid="6953305086643633530">"ආලෝකය ස්පන්දනය වීමෙන් බාධා නොකරන්න වෙතින් දැනුම්දීම් නිහඬ වීම වළක්වන්න"</string>
     <string name="notification_settings_apps_title" msgid="1125354590652967250">"යෙදුම් දැනුම්දීම්"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"දැනුම්දීම් සැකසීම්"</string>
     <string name="device_feedback" msgid="3238056036766293294">"මෙම උපාංගය පිළිබඳ ප්‍රතිපෝෂණ යවන්න"</string>
@@ -2696,9 +2700,6 @@
     <string name="notifications_label" msgid="2872668710589600731">"දැනුම්දීම්"</string>
     <string name="notifications_enabled" msgid="4386196629684749507">"සාමාන්‍ය"</string>
     <string name="notifications_disabled" msgid="4326096527874762629">"අවහිර කරන්න"</string>
-    <string name="notifications_sensitive" msgid="7636231039287237132">"සංවේදී අන්තර්ගතය සඟවන ලද"</string>
-    <string name="notifications_priority" msgid="1812498477331421719">"ප්‍රමුඛතාවය"</string>
-    <string name="notifications_no_peeking" msgid="999951669023262823">"එබී බැලීම් නැත"</string>
     <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
     <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g> / <xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
@@ -2720,9 +2721,6 @@
     <string name="filter_personal_apps" msgid="3277727374174355971">"පුද්ගලික"</string>
     <string name="filter_work_apps" msgid="24519936790795574">"කාර්යාලය"</string>
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"අවහිර කරන ලදි"</string>
-    <string name="filter_notif_priority_apps" msgid="5965001885749195239">"ප්‍රමුඛතාව"</string>
-    <string name="filter_notif_sensitive_apps" msgid="4909289478844197927">"සංවේදී අන්තර්ගතය සඟවන ලද"</string>
-    <string name="filter_notif_no_peeking" msgid="5197968265625096563">"එබී බැලීම් නැත"</string>
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"වසම් URL සමග"</string>
     <string name="trust_agent_disabled_device_admin" msgid="5982562414642596563">"පරිපාලක මඟින් අබල කරන ලදි"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"උසස්"</string>
@@ -2892,8 +2890,12 @@
     <string name="force_density_summary_very_large" msgid="8328063057394895318">"වඩා විශාල"</string>
     <string name="force_density_summary_extremely_large" msgid="846919277362198243">"විශාලතම"</string>
     <string name="force_density_summary_custom" msgid="6663681104268192485">"අභිරුචි (<xliff:g id="DENSITYDPI">%d</xliff:g>)"</string>
-    <!-- no translation found for see_all (8883901630052886984) -->
-    <skip />
-    <!-- no translation found for see_less (1250265310929558370) -->
-    <skip />
+    <string name="see_all" msgid="8883901630052886984">"සියල්ල බලන්න"</string>
+    <string name="see_less" msgid="1250265310929558370">"අඩුවෙන් බලන්න"</string>
+    <string name="disconnected" msgid="5787956818111197212">"විසන්ධි වුණි"</string>
+    <string name="data_usage_summary_format" msgid="7507047900192160585">"දත්තවලින් <xliff:g id="AMOUNT">%1$s</xliff:g>ක් ස්ථාපනය කරන ලදී"</string>
+    <string name="apps_summary" msgid="193158055537070092">"යෙදුම් <xliff:g id="COUNT">%1$d</xliff:g>ක් ස්ථාපනය කරන ලදී"</string>
+    <string name="storage_summary" msgid="1110250618334248745">"<xliff:g id="SIZE2">%2$s</xliff:g>න් <xliff:g id="SIZE1">%1$s</xliff:g>ක් භාවිත කරන ලදී"</string>
+    <string name="display_summary_on" msgid="5628868543070268634">"අනුවර්තී දීප්තිය ක්‍රියාත්මකයි"</string>
+    <string name="display_summary_off" msgid="6399558022426312990">"අනුවර්තී දීප්තිය ක්‍රියාවිරහිතයි"</string>
 </resources>

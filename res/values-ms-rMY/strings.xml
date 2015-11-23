@@ -2514,6 +2514,7 @@
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Penggera sahaja"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"Senyap sepenuhnya"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
+    <string name="zen_mode_visual_interruptions_settings_title" msgid="168576844124787420">"Gangguan visual"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Nada dering telefon"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Nada dering pemberitahuan lalai"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Juga bergetar untuk panggilan"</string>
@@ -2527,6 +2528,7 @@
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"Apabila peranti anda dikunci, bagaimanakah pemberitahuan harus dipaparkan?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"Pemberitahuan"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"Pemberitahuan apl"</string>
+    <string name="topic_notifications_title" msgid="7243623930984080881">"Pemberitahuan topik"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Bunyi lain"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Nada pad dail"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Bunyi mengunci skrin"</string>
@@ -2554,12 +2556,10 @@
     <string name="loading_notification_apps" msgid="5031818677010335895">"Memuatkan apl..."</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"Sekat semua"</string>
     <string name="app_notification_block_summary" msgid="9049487483231233726">"Jangan sekali-kali paparkan pemberitahuan dari apl ini"</string>
-    <string name="app_notification_priority_title" msgid="5949923919607295595">"Anggap sebagai penting"</string>
-    <string name="app_notification_priority_summary" msgid="2538018111338754446">"Benarkan pemberitahuan apl ini kedengaran apabila Jangan ganggu ditetapkan kepada Perkara penting sahaja"</string>
-    <string name="app_notification_peekable_title" msgid="8647856880382324822">"Benarkan mengintai"</string>
-    <string name="app_notification_peekable_summary" msgid="678845517890921158">"Benarkan apl ini menekankan pemberitahuan tertentu dengan meluncurkan pemberitahuan agar kelihatan seketika pada skrin semasa"</string>
+    <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"Atasi Jangan Ganggu"</string>
+    <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"Benarkan pemberitahuan ini terus mengganggu apabila tetapan Jangan Ganggu ditetapkan kepada Keutamaan Sahaja"</string>
     <string name="app_notification_sensitive_title" msgid="8465860579482264139">"Sembunyikan kandungan sensitif"</string>
-    <string name="app_notification_sensitive_summary" msgid="3263836642625157920">"Apabila peranti dikunci, sembunyikan kandungan dalam pemberitahuan apl ini yang mungkin mendedahkan maklumat peribadi"</string>
+    <string name="app_notification_sensitive_summary" msgid="2515056180303710894">"Apabila peranti dikunci, sembunyikan kandungan dalam pemberitahuan ini yang mungkin mendedahkan maklumat peribadi"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Disekat"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Keutamaan"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Sensitif"</string>
@@ -2630,6 +2630,10 @@
     </plurals>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="7465525754879341907">"Tukar kepada penggera sahaja hingga <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"Tukar kepada sentiasa ganggu"</string>
+    <string name="zen_mode_peek" msgid="1468557671879175931">"Tiada gangguan skrin"</string>
+    <string name="zen_mode_peek_summary" msgid="27622220787132681">"Mengelakkan pemberitahuan yang disenyapkan oleh Jangan Ganggu daripada mengintai atau muncul pada skrin semasa"</string>
+    <string name="zen_mode_lights" msgid="904184586121619154">"Tiada lampu pemberitahuan"</string>
+    <string name="zen_mode_lights_summary" msgid="6953305086643633530">"Mengelakkan pemberitahuan yang disenyapkan oleh Jangan Ganggu daripada menyebabkan lampu berdenyut"</string>
     <string name="notification_settings_apps_title" msgid="1125354590652967250">"Pemberitahuan apl"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Tetapan pemberitahuan"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Hntr mklm balas mngenai peranti ini"</string>
@@ -2694,9 +2698,6 @@
     <string name="notifications_label" msgid="2872668710589600731">"Pemberitahuan"</string>
     <string name="notifications_enabled" msgid="4386196629684749507">"Biasa"</string>
     <string name="notifications_disabled" msgid="4326096527874762629">"Sekat"</string>
-    <string name="notifications_sensitive" msgid="7636231039287237132">"Kandungan sensitif tersembunyi"</string>
-    <string name="notifications_priority" msgid="1812498477331421719">"Keutamaan"</string>
-    <string name="notifications_no_peeking" msgid="999951669023262823">"Tidak boleh mengintai"</string>
     <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
     <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g> / <xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
@@ -2718,9 +2719,6 @@
     <string name="filter_personal_apps" msgid="3277727374174355971">"Peribadi"</string>
     <string name="filter_work_apps" msgid="24519936790795574">"Kerja"</string>
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"Disekat"</string>
-    <string name="filter_notif_priority_apps" msgid="5965001885749195239">"Keutamaan"</string>
-    <string name="filter_notif_sensitive_apps" msgid="4909289478844197927">"Kandungan sensitif tersembunyi"</string>
-    <string name="filter_notif_no_peeking" msgid="5197968265625096563">"Tidak boleh mengintai"</string>
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"Dengan URL domain"</string>
     <string name="trust_agent_disabled_device_admin" msgid="5982562414642596563">"Dilumpuhkan oleh pentadbir"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Terperinci"</string>
@@ -2890,8 +2888,12 @@
     <string name="force_density_summary_very_large" msgid="8328063057394895318">"Lebih besar"</string>
     <string name="force_density_summary_extremely_large" msgid="846919277362198243">"Terbesar"</string>
     <string name="force_density_summary_custom" msgid="6663681104268192485">"Tersuai (<xliff:g id="DENSITYDPI">%d</xliff:g>)"</string>
-    <!-- no translation found for see_all (8883901630052886984) -->
-    <skip />
-    <!-- no translation found for see_less (1250265310929558370) -->
-    <skip />
+    <string name="see_all" msgid="8883901630052886984">"Lihat semua"</string>
+    <string name="see_less" msgid="1250265310929558370">"Lihat kurang"</string>
+    <string name="disconnected" msgid="5787956818111197212">"Diputuskan sambungan"</string>
+    <string name="data_usage_summary_format" msgid="7507047900192160585">"<xliff:g id="AMOUNT">%1$s</xliff:g> data digunakan"</string>
+    <string name="apps_summary" msgid="193158055537070092">"<xliff:g id="COUNT">%1$d</xliff:g> apl dipasang"</string>
+    <string name="storage_summary" msgid="1110250618334248745">"<xliff:g id="SIZE1">%1$s</xliff:g> daripada <xliff:g id="SIZE2">%2$s</xliff:g> digunakan"</string>
+    <string name="display_summary_on" msgid="5628868543070268634">"Kecerahan mudah suai DIHIDUPKAN"</string>
+    <string name="display_summary_off" msgid="6399558022426312990">"Kecerahan mudah suai DIMATIKAN"</string>
 </resources>

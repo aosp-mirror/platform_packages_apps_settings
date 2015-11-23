@@ -858,7 +858,7 @@
     <string name="screensaver_settings_button" msgid="7292214707625717013">"設定"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"明るさを自動調整"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"指を離してスリープ状態から復帰"</string>
-    <string name="doze_title" msgid="2259176504273878294">"アンビエント表示"</string>
+    <string name="doze_title" msgid="2259176504273878294">"常に画面表示ディスプレイ"</string>
     <string name="doze_summary" msgid="7128970177894383698">"端末を取り上げたとき、または通知を受信したときにスリープ状態から復帰"</string>
     <string name="title_font_size" msgid="4405544325522105222">"フォントサイズ"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"SIMカードロック設定"</string>
@@ -2520,6 +2520,7 @@
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"アラームのみ"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"サイレント"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
+    <string name="zen_mode_visual_interruptions_settings_title" msgid="168576844124787420">"視覚的な設定"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"着信音"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"デフォルトの通知音"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"着信時もバイブレーションON"</string>
@@ -2533,6 +2534,8 @@
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"端末がロックされている場合、通知をどのように表示しますか？"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"通知"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"アプリの通知"</string>
+    <!-- no translation found for topic_notifications_title (7243623930984080881) -->
+    <skip />
     <string name="other_sound_settings" msgid="3151004537006844718">"その他の音"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"ダイヤルパッドの操作音"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"画面ロック音"</string>
@@ -2560,12 +2563,13 @@
     <string name="loading_notification_apps" msgid="5031818677010335895">"アプリを読み込んでいます..."</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"すべてブロック"</string>
     <string name="app_notification_block_summary" msgid="9049487483231233726">"このアプリからの通知を表示しない"</string>
-    <string name="app_notification_priority_title" msgid="5949923919607295595">"優先通知"</string>
-    <string name="app_notification_priority_summary" msgid="2538018111338754446">"[通知を非表示]が[優先する通知のみ]に設定されている場合でも、このアプリの通知を鳴らす"</string>
-    <string name="app_notification_peekable_title" msgid="8647856880382324822">"通知の瞬間表示を許可"</string>
-    <string name="app_notification_peekable_summary" msgid="678845517890921158">"現在の画面で特定の通知をスライド表示することをこのアプリに許可する"</string>
+    <!-- no translation found for app_notification_override_dnd_title (7867458246395884830) -->
+    <skip />
+    <!-- no translation found for app_notification_override_dnd_summary (3516007157020189746) -->
+    <skip />
     <string name="app_notification_sensitive_title" msgid="8465860579482264139">"プライベートな内容を非表示"</string>
-    <string name="app_notification_sensitive_summary" msgid="3263836642625157920">"端末がロックされている場合、プライベートな情報を公開する可能性があるコンテンツをこのアプリの通知に表示しない"</string>
+    <!-- no translation found for app_notification_sensitive_summary (2515056180303710894) -->
+    <skip />
     <string name="app_notification_row_banned" msgid="5983655258784814773">"ブロック済み"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"優先"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"プライベート"</string>
@@ -2636,6 +2640,10 @@
     </plurals>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="7465525754879341907">"<xliff:g id="FORMATTEDTIME">%1$s</xliff:g>までアラームのみに変更します"</string>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"常に割り込みに変更します"</string>
+    <string name="zen_mode_peek" msgid="1468557671879175931">"画面に表示しない"</string>
+    <string name="zen_mode_peek_summary" msgid="27622220787132681">"[通知を非表示] でサイレントに設定した通知を受信したときに画面にプレビューまたは表示されなくなります"</string>
+    <string name="zen_mode_lights" msgid="904184586121619154">"光を点滅しない"</string>
+    <string name="zen_mode_lights_summary" msgid="6953305086643633530">"[通知を非表示] でサイレントに設定した通知を受信したときに光が点滅しなくなります"</string>
     <string name="notification_settings_apps_title" msgid="1125354590652967250">"アプリの通知"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"通知設定"</string>
     <string name="device_feedback" msgid="3238056036766293294">"この端末についてフィードバックを送信"</string>
@@ -2700,9 +2708,6 @@
     <string name="notifications_label" msgid="2872668710589600731">"通知"</string>
     <string name="notifications_enabled" msgid="4386196629684749507">"標準"</string>
     <string name="notifications_disabled" msgid="4326096527874762629">"ブロック"</string>
-    <string name="notifications_sensitive" msgid="7636231039287237132">"プライベートな内容の非表示"</string>
-    <string name="notifications_priority" msgid="1812498477331421719">"優先"</string>
-    <string name="notifications_no_peeking" msgid="999951669023262823">"重要な通知をポップアップしない"</string>
     <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g>/<xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
     <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g>/<xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>/<xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
@@ -2724,9 +2729,6 @@
     <string name="filter_personal_apps" msgid="3277727374174355971">"個人用"</string>
     <string name="filter_work_apps" msgid="24519936790795574">"仕事用"</string>
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"ブロック中"</string>
-    <string name="filter_notif_priority_apps" msgid="5965001885749195239">"優先"</string>
-    <string name="filter_notif_sensitive_apps" msgid="4909289478844197927">"プライベートな内容の非表示"</string>
-    <string name="filter_notif_no_peeking" msgid="5197968265625096563">"重要な通知をポップアップしない"</string>
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"ドメインURLあり"</string>
     <string name="trust_agent_disabled_device_admin" msgid="5982562414642596563">"管理者によって無効にされています"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"詳細設定"</string>
@@ -2896,8 +2898,14 @@
     <string name="force_density_summary_very_large" msgid="8328063057394895318">"特大"</string>
     <string name="force_density_summary_extremely_large" msgid="846919277362198243">"最大"</string>
     <string name="force_density_summary_custom" msgid="6663681104268192485">"カスタム（<xliff:g id="DENSITYDPI">%d</xliff:g>）"</string>
-    <!-- no translation found for see_all (8883901630052886984) -->
+    <string name="see_all" msgid="8883901630052886984">"すべて表示"</string>
+    <string name="see_less" msgid="1250265310929558370">"一部を表示"</string>
+    <string name="disconnected" msgid="5787956818111197212">"切断されています"</string>
+    <string name="data_usage_summary_format" msgid="7507047900192160585">"データの <xliff:g id="AMOUNT">%1$s</xliff:g> を使用しています"</string>
+    <string name="apps_summary" msgid="193158055537070092">"<xliff:g id="COUNT">%1$d</xliff:g> 個のアプリがインストールされています"</string>
+    <string name="storage_summary" msgid="1110250618334248745">"<xliff:g id="SIZE2">%2$s</xliff:g> のうち <xliff:g id="SIZE1">%1$s</xliff:g> を使用しています"</string>
+    <!-- no translation found for display_summary_on (5628868543070268634) -->
     <skip />
-    <!-- no translation found for see_less (1250265310929558370) -->
+    <!-- no translation found for display_summary_off (6399558022426312990) -->
     <skip />
 </resources>
