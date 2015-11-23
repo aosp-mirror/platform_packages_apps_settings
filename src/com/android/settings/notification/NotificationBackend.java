@@ -62,6 +62,7 @@ public class NotificationBackend {
         row.priority = getBypassZenMode(row.pkg, row.uid, row.topic);
         row.sensitive = getSensitive(row.pkg, row.uid, row.topic);
         row.banned = getNotificationsBanned(row.pkg, row.uid);
+        row.importance = getImportance(row.pkg, row.uid, row.topic);
         return row;
     }
 
@@ -128,6 +129,25 @@ public class NotificationBackend {
         }
     }
 
+    public boolean setImportance(String pkg, int uid, Notification.Topic topic, int importance) {
+        try {
+            sINM.setTopicImportance(pkg, uid, topic, importance);
+            return true;
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return false;
+        }
+    }
+
+    public int getImportance(String pkg, int uid, Notification.Topic topic) {
+        try {
+            return sINM.getTopicImportance(pkg, uid, topic);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return NotificationListenerService.Ranking.IMPORTANCE_DEFAULT;
+        }
+    }
+
     public List<Notification.Topic> getTopics(String pkg, int uid) {
         try {
             final ParceledListSlice<Notification.Topic> parceledList = sINM.getTopics(pkg, uid);
@@ -156,6 +176,7 @@ public class NotificationBackend {
         public Notification.Topic topic;
         public boolean priority;
         public boolean sensitive;
+        public int importance;
     }
 
 }

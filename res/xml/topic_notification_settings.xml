@@ -18,6 +18,13 @@
         android:title="@string/topic_notifications_title"
         android:key="topic_notification_settings">
 
+    <!-- Importance -->
+    <com.android.settings.notification.ImportanceSeekBarPreference
+            android:key="importance"
+            android:title="@string/app_notification_importance_title"
+            android:order="1"
+            android:persistent="false" />
+
     <!-- Bypass DND -->
     <SwitchPreference
             android:key="bypass_dnd"

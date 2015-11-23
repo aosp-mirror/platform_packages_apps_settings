@@ -30,14 +30,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
+import android.service.notification.NotificationListenerService;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
-import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -50,10 +49,12 @@ public class TopicNotificationSettings extends SettingsPreferenceFragment {
     protected static final String ARG_PACKAGE_INFO = "arg_info";
     private static final String KEY_BYPASS_DND = "bypass_dnd";
     private static final String KEY_SENSITIVE = "sensitive";
+    private static final String KEY_IMPORTANCE = "importance";
 
     private final NotificationBackend mBackend = new NotificationBackend();
 
     private Context mContext;
+    private ImportanceSeekBarPreference mImportance;
     private SwitchPreference mPriority;
     private SwitchPreference mSensitive;
     private TopicRow mTopicRow;
@@ -122,11 +123,27 @@ public class TopicNotificationSettings extends SettingsPreferenceFragment {
         mIsSystemPackage = Utils.isSystemPackage(pm, info);
 
         addPreferencesFromResource(R.xml.topic_notification_settings);
+        mImportance = (ImportanceSeekBarPreference) findPreference(KEY_IMPORTANCE);
         mPriority = (SwitchPreference) findPreference(KEY_BYPASS_DND);
         mSensitive = (SwitchPreference) findPreference(KEY_SENSITIVE);
 
         mTopicRow = mBackend.loadTopicRow(pm, info.applicationInfo, topic);
 
+        mImportance.setMax(4);
+        // TODO: stop defaulting to 'normal' in the UI when there are mocks for this scenario.
+        int importance =
+                mTopicRow.importance == NotificationListenerService.Ranking.IMPORTANCE_UNSPECIFIED
+                ? NotificationListenerService.Ranking.IMPORTANCE_DEFAULT
+                        : mTopicRow.importance;
+        mImportance.setProgress(
+                importance + ImportanceSeekBarPreference.IMPORTANCE_PROGRESS_OFFSET);
+        mImportance.setCallback(new ImportanceSeekBarPreference.Callback() {
+            @Override
+            public void onImportanceChanged(int progress) {
+                mBackend.setImportance(mTopicRow.pkg, mTopicRow.uid, mTopicRow.topic,
+                        progress - ImportanceSeekBarPreference.IMPORTANCE_PROGRESS_OFFSET);
+            }
+        });
         mPriority.setChecked(mTopicRow.priority);
         mSensitive.setChecked(mTopicRow.sensitive);
 
@@ -167,6 +184,7 @@ public class TopicNotificationSettings extends SettingsPreferenceFragment {
         setVisible(mPriority, mIsSystemPackage || !banned);
         setVisible(mSensitive, mIsSystemPackage || !banned && lockscreenSecure
                 && lockscreenNotificationsEnabled && allowPrivate);
+        setVisible(mImportance, !banned);
     }
 
     private void setVisible(Preference p, boolean visible) {
