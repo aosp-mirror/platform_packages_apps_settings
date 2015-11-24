@@ -107,6 +107,8 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     private static final String FORCE_VIEW_ERROR = "error";
     private static final String FORCE_VIEW_PASSWORD = "password";
 
+    private static final String STATE_COOLDOWN = "cooldown";
+
     /** When encryption is detected, this flag indicates whether or not we've checked for errors. */
     private boolean mValidationComplete;
     private boolean mValidationRequested;
@@ -426,6 +428,10 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         mStatusBar = (StatusBarManager) getSystemService(Context.STATUS_BAR_SERVICE);
         mStatusBar.disable(sWidgetsToDisable);
 
+        if (savedInstanceState != null) {
+            mCooldown = savedInstanceState.getBoolean(STATE_COOLDOWN);
+        }
+
         setAirplaneModeIfNecessary();
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         // Check for (and recover) retained instance data
@@ -435,6 +441,11 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             mWakeLock = retained.wakelock;
             Log.d(TAG, "Restoring wakelock from NonConfigurationInstanceState");
         }
+    }
+
+    @Override
+    public void  onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putBoolean(STATE_COOLDOWN, mCooldown);
     }
 
     /**
