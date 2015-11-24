@@ -18,26 +18,19 @@ package com.android.settings.notification;
 
 import android.app.NotificationManager;
 import android.app.NotificationManager.Policy;
-import android.content.Context;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
-import android.util.SparseArray;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
-import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
-import com.android.settings.search.SearchIndexableRaw;
+import com.android.settings.SettingsActivity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class ZenModeSettings extends ZenModeSettingsBase implements Indexable {
+public class ZenModeSettings extends ZenModeSettingsBase {
     private static final String KEY_PRIORITY_SETTINGS = "priority_settings";
-    private static final String KEY_AUTOMATION_SETTINGS = "automation_settings";
-    private static final String KEY_VISUAL_INTERRUPTIONS_SETTINGS = "visual_interruptions_settings";
 
     private Preference mPrioritySettings;
 
@@ -49,9 +42,6 @@ public class ZenModeSettings extends ZenModeSettingsBase implements Indexable {
         final PreferenceScreen root = getPreferenceScreen();
 
         mPrioritySettings = root.findPreference(KEY_PRIORITY_SETTINGS);
-        if (!isScheduleSupported(mContext)) {
-            removePreference(KEY_AUTOMATION_SETTINGS);
-        }
     }
 
     @Override
@@ -77,6 +67,23 @@ public class ZenModeSettings extends ZenModeSettingsBase implements Indexable {
 
     private void updateControls() {
         updatePrioritySettingsSummary();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.zen_settings_menu, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.zen_access:
+                ((SettingsActivity) getActivity()).startPreferencePanel(
+                            ZenAccessSettings.class.getCanonicalName(), null,
+                            R.string.manage_zen_access_title, null, this, 0);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void updatePrioritySettingsSummary() {
@@ -117,47 +124,8 @@ public class ZenModeSettings extends ZenModeSettingsBase implements Indexable {
         return s;
     }
 
-    private static SparseArray<String> allKeyTitles() {
-        final SparseArray<String> rt = new SparseArray<String>();
-        rt.put(R.string.zen_mode_priority_settings_title, KEY_PRIORITY_SETTINGS);
-        rt.put(R.string.zen_mode_automation_settings_title, KEY_AUTOMATION_SETTINGS);
-        rt.put(R.string.zen_mode_visual_interruptions_settings_title,
-                KEY_VISUAL_INTERRUPTIONS_SETTINGS);
-        return rt;
-    }
-
     @Override
     protected int getHelpResource() {
         return R.string.help_uri_interruptions;
     }
-
-    // Enable indexing of searchable data
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-        new BaseSearchIndexProvider() {
-
-            @Override
-            public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
-                final SparseArray<String> keyTitles = allKeyTitles();
-                final int N = keyTitles.size();
-                final List<SearchIndexableRaw> result = new ArrayList<SearchIndexableRaw>(N);
-                final Resources res = context.getResources();
-                for (int i = 0; i < N; i++) {
-                    final SearchIndexableRaw data = new SearchIndexableRaw(context);
-                    data.key = keyTitles.valueAt(i);
-                    data.title = res.getString(keyTitles.keyAt(i));
-                    data.screenTitle = res.getString(R.string.zen_mode_settings_title);
-                    result.add(data);
-                }
-                return result;
-            }
-
-            @Override
-            public List<String> getNonIndexableKeys(Context context) {
-                final ArrayList<String> rt = new ArrayList<String>();
-                if (!isScheduleSupported(context)) {
-                    rt.add(KEY_AUTOMATION_SETTINGS);
-                }
-                return rt;
-            }
-        };
 }

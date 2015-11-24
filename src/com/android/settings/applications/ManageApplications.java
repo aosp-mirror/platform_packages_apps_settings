@@ -67,6 +67,7 @@ import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.fuelgauge.HighPowerDetail;
 import com.android.settings.fuelgauge.PowerWhitelistBackend;
 import com.android.settings.notification.AppNotificationSettings;
+import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.NotificationBackend.AppRow;
 import com.android.settingslib.applications.ApplicationsState;
@@ -523,7 +524,8 @@ public class ManageApplications extends InstrumentedFragment
         if (mOptionsMenu == null) {
             return;
         }
-        mOptionsMenu.findItem(R.id.advanced).setVisible(mListType == LIST_TYPE_MAIN);
+        mOptionsMenu.findItem(R.id.advanced).setVisible(
+                mListType == LIST_TYPE_MAIN || mListType == LIST_TYPE_NOTIFICATION);
 
         mOptionsMenu.findItem(R.id.sort_order_alpha).setVisible(mListType == LIST_TYPE_STORAGE
                 && mSortOrder != R.id.sort_order_alpha);
@@ -556,9 +558,15 @@ public class ManageApplications extends InstrumentedFragment
                 mResetAppsHelper.buildResetDialog();
                 return true;
             case R.id.advanced:
-                ((SettingsActivity) getActivity()).startPreferencePanel(
-                        AdvancedAppSettings.class.getName(), null, R.string.configure_apps,
-                        null, this, ADVANCED_SETTINGS);
+                if (mListType == LIST_TYPE_NOTIFICATION) {
+                    ((SettingsActivity) getActivity()).startPreferencePanel(
+                            ConfigureNotificationSettings.class.getName(), null,
+                            R.string.configure_notification_settings, null, this, ADVANCED_SETTINGS);
+                } else {
+                    ((SettingsActivity) getActivity()).startPreferencePanel(
+                            AdvancedAppSettings.class.getName(), null, R.string.configure_apps,
+                            null, this, ADVANCED_SETTINGS);
+                }
                 return true;
             default:
                 // Handle the home button
