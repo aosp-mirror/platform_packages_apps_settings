@@ -65,6 +65,7 @@ public class WallpaperTypeSettings extends SettingsPreferenceFragment implements
         // Add Preference items for each of the matching activities
         for (ResolveInfo info : rList) {
             Preference pref = new Preference(getPrefContext());
+            pref.setLayoutResource(R.layout.preference_wallpaper_type);
             Intent prefIntent = new Intent(intent);
             prefIntent.setComponent(new ComponentName(
                     info.activityInfo.packageName, info.activityInfo.name));
@@ -72,6 +73,7 @@ public class WallpaperTypeSettings extends SettingsPreferenceFragment implements
             CharSequence label = info.loadLabel(pm);
             if (label == null) label = info.activityInfo.packageName;
             pref.setTitle(label);
+            pref.setIcon(info.loadIcon(pm));
             parent.addPreference(pref);
         }
     }
