@@ -214,13 +214,17 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
         mOwnerInfoPref = findPreference(KEY_OWNER_INFO_SETTINGS);
         if (mOwnerInfoPref != null) {
-            mOwnerInfoPref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-                @Override
-                public boolean onPreferenceClick(Preference preference) {
-                    OwnerInfoSettings.show(SecuritySettings.this);
-                    return true;
-                }
-            });
+            mOwnerInfoPref.setEnabled(!mLockPatternUtils.isDeviceOwnerInfoEnabled());
+
+            if (mOwnerInfoPref.isEnabled()) {
+                mOwnerInfoPref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+                    @Override
+                    public boolean onPreferenceClick(Preference preference) {
+                        OwnerInfoSettings.show(SecuritySettings.this);
+                        return true;
+                    }
+                });
+            }
         }
 
         if (mIsAdmin) {
@@ -630,9 +634,13 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
     public void updateOwnerInfo() {
         if (mOwnerInfoPref != null) {
-            mOwnerInfoPref.setSummary(mLockPatternUtils.isOwnerInfoEnabled(MY_USER_ID)
-                    ? mLockPatternUtils.getOwnerInfo(MY_USER_ID)
-                    : getString(R.string.owner_info_settings_summary));
+            if (mLockPatternUtils.isDeviceOwnerInfoEnabled()) {
+                mOwnerInfoPref.setSummary(R.string.disabled_by_administrator_summary);
+            } else {
+                mOwnerInfoPref.setSummary(mLockPatternUtils.isOwnerInfoEnabled(MY_USER_ID)
+                        ? mLockPatternUtils.getOwnerInfo(MY_USER_ID)
+                        : getString(R.string.owner_info_settings_summary));
+            }
         }
     }
 
