@@ -99,16 +99,16 @@ public class PrintJobSettingsFragment extends SettingsPreferenceFragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onStart() {
+        super.onStart();
         mPrintManager.addPrintJobStateChangeListener(
                 mPrintJobStateChangeListener);
         updateUi();
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
+    public void onStop() {
+        super.onStop();
         mPrintManager.removePrintJobStateChangeListener(
                 mPrintJobStateChangeListener);
     }

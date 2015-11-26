@@ -150,8 +150,8 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onStart() {
+        super.onStart();
         mSettingsPackageMonitor.register(getActivity(), getActivity().getMainLooper(), false);
         mSettingsContentObserver.register(getContentResolver());
         updateServicesPreferences();
@@ -160,10 +160,10 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
     }
 
     @Override
-    public void onPause() {
+    public void onStop() {
         mSettingsPackageMonitor.unregister();
         mSettingsContentObserver.unregister(getContentResolver());
-        super.onPause();
+        super.onStop();
     }
 
     @Override

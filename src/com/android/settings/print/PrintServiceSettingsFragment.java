@@ -147,8 +147,8 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onStart() {
+        super.onStart();
         mSettingsContentObserver.register(getContentResolver());
         updateEmptyView();
         updateUiForServiceState();
@@ -156,11 +156,16 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
 
     @Override
     public void onPause() {
-        mSettingsContentObserver.unregister(getContentResolver());
         if (mSearchView != null) {
             mSearchView.setOnQueryTextListener(null);
         }
         super.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        mSettingsContentObserver.unregister(getContentResolver());
+        super.onStop();
     }
 
     @Override
