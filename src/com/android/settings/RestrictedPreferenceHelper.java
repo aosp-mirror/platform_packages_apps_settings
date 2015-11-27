@@ -16,36 +16,33 @@
 
 package com.android.settings;
 
-import android.app.admin.DevicePolicyManager;
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 import android.os.UserHandle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
+import android.text.Spanned;
+import android.text.SpannableStringBuilder;
+import android.text.style.ImageSpan;
 import android.util.AttributeSet;
 import android.util.TypedValue;
-import android.view.View;
 import android.widget.TextView;
+
+import static com.android.settings.RestrictedLockUtils.EnforcedAdmin;
 
 /**
  * Helper class for managing settings preferences that can be disabled
  * by device admins via user restrictions.
- *
- **/
+ */
 public class RestrictedPreferenceHelper {
     private final Context mContext;
     private final Preference mPreference;
     private final Drawable mRestrictedPadlock;
     private final int mRestrictedPadlockPadding;
-    private final DevicePolicyManager mDevicePolicyManager;
 
     private boolean mDisabledByAdmin;
-    private ComponentName mEnforcedAdmin;
-    private int mUserId = UserHandle.USER_NULL;
+    private EnforcedAdmin mEnforcedAdmin;
     private String mAttrUserRestriction = null;
 
     RestrictedPreferenceHelper(Context context, Preference preference,
@@ -53,12 +50,9 @@ public class RestrictedPreferenceHelper {
         mContext = context;
         mPreference = preference;
 
-        mRestrictedPadlock = getRestrictedPadlock(mContext);
+        mRestrictedPadlock = RestrictedLockUtils.getRestrictedPadlock(mContext);
         mRestrictedPadlockPadding = mContext.getResources().getDimensionPixelSize(
                 R.dimen.restricted_lock_icon_padding);
-
-        mDevicePolicyManager = (DevicePolicyManager) mContext.getSystemService(
-                Context.DEVICE_POLICY_SERVICE);
 
         mAttrUserRestriction = attrs.getAttributeValue(
                 R.styleable.RestrictedPreference_userRestriction);
@@ -83,12 +77,9 @@ public class RestrictedPreferenceHelper {
     public void onBindViewHolder(PreferenceViewHolder holder) {
         final TextView titleView = (TextView) holder.findViewById(android.R.id.title);
         if (titleView != null) {
+            RestrictedLockUtils.setTextViewPadlock(mContext, titleView, mDisabledByAdmin);
             if (mDisabledByAdmin) {
-                titleView.setCompoundDrawablesRelative(null, null, mRestrictedPadlock, null);
-                titleView.setCompoundDrawablePadding(mRestrictedPadlockPadding);
                 holder.itemView.setEnabled(true);
-            } else {
-                titleView.setCompoundDrawablesRelative(null, null, null, null);
             }
         }
     }
@@ -100,14 +91,7 @@ public class RestrictedPreferenceHelper {
      */
     public boolean performClick() {
         if (mDisabledByAdmin) {
-            Intent intent = new Intent(mContext, ShowAdminSupportDetailsDialog.class);
-            if (mEnforcedAdmin != null) {
-                intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, mEnforcedAdmin);
-            }
-            if (mUserId != UserHandle.USER_NULL) {
-                intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
-            }
-            mContext.startActivity(intent);
+            RestrictedLockUtils.sendShowAdminSupportDetailsIntent(mContext, mEnforcedAdmin);
             return true;
         }
         return false;
@@ -129,57 +113,23 @@ public class RestrictedPreferenceHelper {
      * @param userId user to check the restriction for.
      */
     public void checkRestrictionAndSetDisabled(String userRestriction, int userId) {
-        ComponentName deviceOwner = mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser();
-        int deviceOwnerUserId = mDevicePolicyManager.getDeviceOwnerUserId();
-        boolean enforcedByDeviceOwner = false;
-        if (deviceOwner != null && deviceOwnerUserId != UserHandle.USER_NULL) {
-            enforcedByDeviceOwner = isEnforcedByAdmin(
-                    deviceOwner, userRestriction, deviceOwnerUserId);
-        }
-
-        ComponentName profileOwner = mDevicePolicyManager.getProfileOwnerAsUser(userId);
-        boolean enforcedByProfileOwner = false;
-        if (profileOwner != null && userId != UserHandle.USER_NULL) {
-            enforcedByProfileOwner = isEnforcedByAdmin(
-                    profileOwner, userRestriction, userId);
-        }
-
-        if (!enforcedByDeviceOwner && !enforcedByProfileOwner) {
-            setDisabledByAdmin(false, null, UserHandle.USER_NULL);
-            return;
-        }
-
-        if (enforcedByDeviceOwner && enforcedByProfileOwner) {
-            setDisabledByAdmin(true, null, UserHandle.USER_NULL);
-        } else if (enforcedByDeviceOwner) {
-            setDisabledByAdmin(true, deviceOwner, deviceOwnerUserId);
-        } else {
-            setDisabledByAdmin(true, profileOwner, userId);
-        }
-    }
-
-    private boolean isEnforcedByAdmin(ComponentName admin, String userRestriction, int userId) {
-        Bundle enforcedRestrictions = mDevicePolicyManager.getUserRestrictions(admin, userId);
-        if (enforcedRestrictions != null
-                && enforcedRestrictions.getBoolean(userRestriction, false)) {
-            return true;
-        }
-        return false;
+        EnforcedAdmin admin = RestrictedLockUtils.checkIfRestrictionEnforced(mContext,
+                userRestriction, userId);
+        setDisabledByAdmin(admin);
     }
 
     /**
-     * Disable this preference.
+     * Disable this preference based on the enforce admin.
      *
-     * @param disabled true if preference should be disabled.
-     * @param admin Device admin that disabled the preference.
-     * @param userId userId the device admin is installed for.
+     * @param EnforcedAdmin Details of the admin who enforced the restriction. If it
+     * is {@code null}, then this preference will be enabled. Otherwise, it will be disabled.
      * @return true if the disabled state was changed.
      */
-    public boolean setDisabledByAdmin(boolean disabled, ComponentName admin, int userId) {
+    public boolean setDisabledByAdmin(EnforcedAdmin admin) {
+        final boolean disabled = (admin != null ? true : false);
+        mEnforcedAdmin = (disabled ? admin : null);
         if (mDisabledByAdmin != disabled) {
             mDisabledByAdmin = disabled;
-            mEnforcedAdmin = admin;
-            mUserId = userId;
             mPreference.setEnabled(!disabled);
             return true;
         }
@@ -188,16 +138,5 @@ public class RestrictedPreferenceHelper {
 
     public boolean isDisabledByAdmin() {
         return mDisabledByAdmin;
-    }
-
-    /**
-     * @return drawables for displaying with settings that are locked by a device admin.
-     */
-    public static Drawable getRestrictedPadlock(Context context) {
-        Drawable restrictedPadlock = context.getDrawable(R.drawable.ic_settings_lock_outline);
-        final int iconSize = context.getResources().getDimensionPixelSize(
-                R.dimen.restricted_lock_icon_size);
-        restrictedPadlock.setBounds(0, 0, iconSize, iconSize);
-        return restrictedPadlock;
     }
 }
