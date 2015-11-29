@@ -39,8 +39,8 @@ import android.security.Credentials;
 import android.security.KeyStore;
 import android.text.Editable;
 import android.text.InputType;
-import android.text.TextWatcher;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,11 +56,13 @@ import android.widget.TextView;
 
 import com.android.settings.ProxySelector;
 import com.android.settings.R;
-import com.android.settingslib.wifi.AccessPoint;
 import com.android.settings.Utils;
+import com.android.settingslib.wifi.AccessPoint;
 
-import java.net.InetAddress;
 import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 
 /**
@@ -111,6 +113,8 @@ public class WifiConfigController implements TextWatcher,
 
     private String unspecifiedCert = "unspecified";
     private static final int unspecifiedCertIndex = 0;
+    private String multipleCertSet = "multipleCert";
+    private static final int multipleCertSetIndex = 1;
 
     private Spinner mSecuritySpinner;
     private Spinner mEapMethodSpinner;
@@ -175,6 +179,7 @@ public class WifiConfigController implements TextWatcher,
         PHASE2_FULL_ADAPTER.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         unspecifiedCert = mContext.getString(R.string.wifi_unspecified);
+        multipleCertSet = mContext.getString(R.string.wifi_multiple_cert_added);
         mIpSettingsSpinner = (Spinner) mView.findViewById(R.id.ip_settings);
         mIpSettingsSpinner.setOnItemSelectedListener(this);
         mProxySettingsSpinner = (Spinner) mView.findViewById(R.id.proxy_settings);
@@ -453,8 +458,20 @@ public class WifiConfigController implements TextWatcher,
                         break;
                 }
                 String caCert = (String) mEapCaCertSpinner.getSelectedItem();
-                if (caCert.equals(unspecifiedCert)) caCert = "";
-                config.enterpriseConfig.setCaCertificateAlias(caCert);
+                if (caCert.equals(unspecifiedCert)) {
+                    config.enterpriseConfig.setCaCertificateAliases(null);
+                } else if (caCert.equals(multipleCertSet)) {
+                    if (mAccessPoint != null) {
+                        if (!mAccessPoint.isSaved()) {
+                            Log.e(TAG, "Multiple certs can only be set when editing saved network");
+                        }
+                        config.enterpriseConfig.setCaCertificateAliases(
+                                mAccessPoint.getConfig().enterpriseConfig.getCaCertificateAliases());
+                    }
+                } else {
+                    config.enterpriseConfig.setCaCertificateAliases(new String[] {caCert});
+                }
+
                 String clientCert = (String) mEapUserCertSpinner.getSelectedItem();
                 if (clientCert.equals(unspecifiedCert)) clientCert = "";
                 config.enterpriseConfig.setClientCertificateAlias(clientCert);
@@ -660,8 +677,8 @@ public class WifiConfigController implements TextWatcher,
             mEapIdentityView = (TextView) mView.findViewById(R.id.identity);
             mEapAnonymousView = (TextView) mView.findViewById(R.id.anonymous);
 
-            loadCertificates(mEapCaCertSpinner, Credentials.CA_CERTIFICATE);
-            loadCertificates(mEapUserCertSpinner, Credentials.USER_PRIVATE_KEY);
+            loadCertificates(mEapCaCertSpinner, Credentials.CA_CERTIFICATE, false);
+            loadCertificates(mEapUserCertSpinner, Credentials.USER_PRIVATE_KEY, false);
 
             // Modifying an existing network
             if (mAccessPoint != null && mAccessPoint.isSaved()) {
@@ -691,7 +708,17 @@ public class WifiConfigController implements TextWatcher,
                         mPhase2Spinner.setSelection(phase2Method);
                         break;
                 }
-                setSelection(mEapCaCertSpinner, enterpriseConfig.getCaCertificateAlias());
+                String[] caCerts = enterpriseConfig.getCaCertificateAliases();
+                if (caCerts == null) {
+                    setSelection(mEapCaCertSpinner, unspecifiedCert);
+                } else if (caCerts.length == 1) {
+                    setSelection(mEapCaCertSpinner, caCerts[0]);
+                } else {
+                    // Reload the cert spinner with an extra "multiple certificates added" item
+                    loadCertificates(mEapCaCertSpinner,
+                            Credentials.CA_CERTIFICATE, true);
+                    mEapCaCertSpinner.setSelection(multipleCertSetIndex);
+                }
                 setSelection(mEapUserCertSpinner, enterpriseConfig.getClientCertificateAlias());
                 mEapIdentityView.setText(enterpriseConfig.getIdentity());
                 mEapAnonymousView.setText(enterpriseConfig.getAnonymousIdentity());
@@ -923,21 +950,20 @@ public class WifiConfigController implements TextWatcher,
         }
     }
 
-    private void loadCertificates(Spinner spinner, String prefix) {
+    private void loadCertificates(Spinner spinner, String prefix, boolean showMultipleCerts) {
         final Context context = mConfigUi.getContext();
 
-        String[] certs = KeyStore.getInstance().list(prefix, android.os.Process.WIFI_UID);
-        if (certs == null || certs.length == 0) {
-            certs = new String[] {unspecifiedCert};
-        } else {
-            final String[] array = new String[certs.length + 1];
-            array[0] = unspecifiedCert;
-            System.arraycopy(certs, 0, array, 1, certs.length);
-            certs = array;
+        ArrayList<String> certs = new ArrayList<String>();
+        certs.add(unspecifiedCert);
+        if (showMultipleCerts) {
+            certs.add(multipleCertSet);
         }
+        certs.addAll(
+                Arrays.asList(KeyStore.getInstance().list(prefix, android.os.Process.WIFI_UID)));
 
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                context, android.R.layout.simple_spinner_item, certs);
+                context, android.R.layout.simple_spinner_item,
+                certs.toArray(new String[certs.size()]));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
     }
