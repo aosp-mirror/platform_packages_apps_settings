@@ -33,10 +33,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Switch;
-
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.DimmableIconPreference;
-import com.android.settings.PreferenceActivity;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
@@ -416,7 +414,7 @@ public class LocationSettings extends LocationSettingsBase
             // start new fragment to display extended information
             Bundle args = new Bundle();
             args.putString(InstalledAppDetails.ARG_PACKAGE_NAME, mPackage);
-            ((PreferenceActivity) getActivity()).startPreferencePanelAsUser(
+            ((SettingsActivity) getActivity()).startPreferencePanelAsUser(
                     InstalledAppDetails.class.getName(), args,
                     R.string.application_info_label, null, mUserHandle);
             return true;
