@@ -1932,16 +1932,6 @@
                 android:value="com.android.settings.wfd.WifiDisplaySettings" />
         </activity>
 
-
-        <!-- Development settings -->
-
-        <!-- DeviceInfo adds the user's requested build to stats upload.  -->
-        <receiver android:name=".DeviceInfo$StatsReportReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.STATISTICS_REPORT" />
-            </intent-filter>
-        </receiver>
-
         <activity android:name="Display" android:label="@string/display_label"
                 android:configChanges="fontScale"
                 android:taskAffinity="com.android.settings"
