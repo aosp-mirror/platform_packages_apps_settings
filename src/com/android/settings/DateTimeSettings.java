@@ -38,6 +38,7 @@ import android.widget.DatePicker;
 import android.widget.TimePicker;
 
 import com.android.internal.logging.MetricsLogger;
+import com.android.settings.dashboard.SummaryLoader;
 import com.android.settingslib.datetime.ZoneGetter;
 
 import java.util.Calendar;
@@ -351,6 +352,35 @@ public class DateTimeSettings extends SettingsPreferenceFragment
             if (activity != null) {
                 updateTimeAndDateDisplay(activity);
             }
+        }
+    };
+
+    private static class SummaryProvider implements SummaryLoader.SummaryProvider {
+
+        private final Context mContext;
+        private final SummaryLoader mSummaryLoader;
+
+        public SummaryProvider(Context context, SummaryLoader summaryLoader) {
+            mContext = context;
+            mSummaryLoader = summaryLoader;
+        }
+
+        @Override
+        public void setListening(boolean listening) {
+            if (listening) {
+                final Calendar now = Calendar.getInstance();
+                mSummaryLoader.setSummary(this, ZoneGetter.getTimeZoneOffsetAndName(
+                        now.getTimeZone(), now.getTime()));
+            }
+        }
+    }
+
+    public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
+            = new SummaryLoader.SummaryProviderFactory() {
+        @Override
+        public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
+                                                                   SummaryLoader summaryLoader) {
+            return new SummaryProvider(activity, summaryLoader);
         }
     };
 }
