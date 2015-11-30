@@ -33,12 +33,13 @@ public class SummaryLoader {
     private static final boolean DEBUG = DashboardSummary.DEBUG;
     private static final String TAG = "SummaryLoader";
 
+    public static final String SUMMARY_PROVIDER_FACTORY = "SUMMARY_PROVIDER_FACTORY";
+
     private final Activity mActivity;
-    private final DashboardAdapter mAdapter;
     private final ArrayMap<SummaryProvider, DashboardTile> mSummaryMap = new ArrayMap<>();
     private final List<DashboardTile> mTiles = new ArrayList<>();
 
-    public static final String SUMMARY_PROVIDER_FACTORY = "SUMMARY_PROVIDER_FACTORY";
+    private DashboardAdapter mAdapter;
 
     public SummaryLoader(Activity activity, DashboardAdapter adapter,
                   List<DashboardCategory> categories) {
@@ -54,6 +55,10 @@ public class SummaryLoader {
                 }
             }
         }
+    }
+
+    public void setAdapter(DashboardAdapter adapter) {
+        mAdapter = adapter;
     }
 
     public void setSummary(SummaryProvider provider, CharSequence summary) {

@@ -133,6 +133,13 @@ public class DashboardSummary extends InstrumentedFragment {
         }
 
         long start = System.currentTimeMillis();
+        // TODO: Cache summaries from old categories somehow.
+        List<DashboardCategory> categories =
+                ((SettingsActivity) getActivity()).getDashboardCategories(true);
+        boolean showingAll = mAdapter != null && mAdapter.isShowingAll();
+        mAdapter = new DashboardAdapter(getContext(), categories);
+        mSummaryLoader.setAdapter(mAdapter);
+        mAdapter.setShowingAll(showingAll);
         mDashboard.setAdapter(mAdapter);
 
         long delta = System.currentTimeMillis() - start;
