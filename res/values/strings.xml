@@ -5888,7 +5888,7 @@
     <string name="keywords_network_reset">reset restore factory</string>
     <string name="keywords_factory_data_reset">wipe delete restore clear remove</string>
     <string name="keywords_printing">printer</string>
-    <string name="keywords_sounds_and_notifications">speaker beep</string>
+    <string name="keywords_sounds">speaker beep</string>
     <string name="keywords_sounds_and_notifications_interruptions">dont don\u2019t disturb interrupt interruption break</string>
     <string name="keywords_app">RAM</string>
     <string name="keywords_location">nearby location history reporting</string>
@@ -5929,78 +5929,117 @@
 
 
     <!-- Sounds and Notification -->
+    <!-- Sound: Dashboard summary. [CHAR LIMIT=100] -->
+    <string name="sound_settings_summary">Ringer volume at <xliff:g id="percentage" example="2">%1$s</xliff:g></string>
 
-    <!-- Sound & notification: Settings header. [CHAR LIMIT=30] -->
-    <string name="notification_settings">Sound &amp; notification</string>
-
-    <!-- Sound & notification > Sound section: Title for the option managing media volume. [CHAR LIMIT=30] -->
+    <!-- Sound: Title for the option managing media volume. [CHAR LIMIT=30] -->
     <string name="media_volume_option_title">Media volume</string>
 
-    <!-- Sound & notification > Sound section: Title for the option managing alarm volume. [CHAR LIMIT=30] -->
+    <!-- Sound: Title for the option managing alarm volume. [CHAR LIMIT=30] -->
     <string name="alarm_volume_option_title">Alarm volume</string>
 
-    <!-- Sound & notification > Sound section: Title for the option managing ringer volume. [CHAR LIMIT=30] -->
+    <!-- Sound: Title for the option managing ringer volume. [CHAR LIMIT=30] -->
     <string name="ring_volume_option_title">Ring volume</string>
 
-    <!-- Sound & notification > Sound section: Title for the option managing notification volume. [CHAR LIMIT=30] -->
+    <!-- Sound: Title for the option managing notification volume. [CHAR LIMIT=30] -->
     <string name="notification_volume_option_title">Notification volume</string>
 
-    <!-- Sound & notification > Sound section: Title for the Interruptions option and associated settings page. [CHAR LIMIT=30] -->
-    <string name="zen_mode_settings_title" translatable="false">@*android:string/zen_mode_feature_name</string>
-
-    <!-- Sound & notification > Sound section: Title for the Priority interruptions option and associated settings page. [CHAR LIMIT=30] -->
-    <string name="zen_mode_priority_settings_title">Priority only allows</string>
-
-    <!-- Sound & notification > Sound section: Title for the zen mode automation option and associated settings page. [CHAR LIMIT=30] -->
-    <string name="zen_mode_automation_settings_title">Automatic rules</string>
-
-    <!-- Sound & notification > Sound section: Zen mode option: Important interruptions [CHAR LIMIT=60] -->
-    <string name="zen_mode_option_important_interruptions">Priority only</string>
-
-    <!-- Sound & notification > Sound section: Zen mode option: Alarms only [CHAR LIMIT=60] -->
-    <string name="zen_mode_option_alarms">Alarms only</string>
-
-    <!-- Sound & notification > Sound section: Zen mode option: No interruptions [CHAR LIMIT=60] -->
-    <string name="zen_mode_option_no_interruptions">Total silence</string>
-
-    <!-- Sound & notification > Sound section: Zen mode combined summary + condition line [CHAR LIMIT=60] -->
-    <string name="zen_mode_summary_combination"><xliff:g id="mode" example="Priority only">%1$s</xliff:g>: <xliff:g id="exit condition" example="Until you turn this off">%2$s</xliff:g></string>
-
-    <!-- Sound & notification > Do not disturb section: Title for the Visual interruptions option and associated settings page. [CHAR LIMIT=30] -->
-    <string name="zen_mode_visual_interruptions_settings_title">Visual interruptions</string>
-
-    <!-- Sound & notification > Sound section: Title for the option defining the phone ringtone. [CHAR LIMIT=30] -->
+    <!-- Sound: Title for the option defining the phone ringtone. [CHAR LIMIT=30] -->
     <string name="ringtone_title">Phone ringtone</string>
 
-    <!-- Sound & notification > Sound section: Title for the option defining the default notification ringtone. [CHAR LIMIT=30] -->
+    <!-- Sound: Title for the option defining the default notification ringtone. [CHAR LIMIT=30] -->
     <string name="notification_ringtone_title">Default notification ringtone</string>
 
-    <!-- Sound & notification > Sound section: Title for the option managing whether or not to vibrate when ringing. [CHAR LIMIT=30] -->
+    <!-- Sound: Title for the option managing whether or not to vibrate when ringing. [CHAR LIMIT=30] -->
     <string name="vibrate_when_ringing_title">Also vibrate for calls</string>
 
-    <!-- Sound & notification: Notification section header [CHAR LIMIT=30] -->
-    <string name="notification_section_header">Notification</string>
+    <!-- Sound: Title for the other sounds option and associated settings page. [CHAR LIMIT=30] -->
+    <string name="other_sound_settings">Other sounds</string>
 
-    <!-- Sound & notification: Advanced section header [CHAR LIMIT=30] -->
+    <!-- Sound: Other sounds: Title for the option enabling touch sounds for dial pad tones. [CHAR LIMIT=30] -->
+    <string name="dial_pad_tones_title">Dial pad tones</string>
+
+    <!-- Sound: Other sounds: Title for the option enabling touch sounds for screen locking sounds. [CHAR LIMIT=30] -->
+    <string name="screen_locking_sounds_title">Screen locking sounds</string>
+
+    <!-- Sound: Other sounds: Title for the option enabling charging sounds. [CHAR LIMIT=30] -->
+    <string name="charging_sounds_title">Charging sounds</string>
+
+    <!-- Sound: Other sounds: Title for the option enabling docking sounds. [CHAR LIMIT=30] -->
+    <string name="docking_sounds_title">Docking sounds</string>
+
+    <!-- Sound: Other sounds: Title for the option enabling touch sounds. [CHAR LIMIT=30] -->
+    <string name="touch_sounds_title">Touch sounds</string>
+
+    <!-- Sound: Other sounds: Title for the option enabling haptic feedback on touch. [CHAR LIMIT=30] -->
+    <string name="vibrate_on_touch_title">Vibrate on touch</string>
+
+    <!-- Sound: Other sounds: Title for the option enabling dock audio media. [CHAR LIMIT=50] -->
+    <string name="dock_audio_media_title">Dock speaker plays</string>
+
+    <!-- Sound: Other sounds: Value for the dock audio media with value 0: disabled. [CHAR LIMIT=30] -->
+    <string name="dock_audio_media_disabled">All audio</string>
+
+    <!-- Sound: Other sounds: Value for the dock audio media with value 1: enabled. [CHAR LIMIT=30] -->
+    <string name="dock_audio_media_enabled">Media audio only</string>
+
+    <!-- Sound: Other sounds: Value for the emergency tone option with value 0: silent. [CHAR LIMIT=30] -->
+    <string name="emergency_tone_silent">Silent</string>
+
+    <!-- Sound: Other sounds: Value for the emergency tone option with value 1: alert. [CHAR LIMIT=30] -->
+    <string name="emergency_tone_alert">Alert</string>
+
+    <!-- Sound: Other sounds: Value for the emergency tone option with value 2: vibrate. [CHAR LIMIT=30] -->
+    <string name="emergency_tone_vibrate">Vibrate</string>
+
+    <!-- Sound: Title for the Do not Disturb option and associated settings page. [CHAR LIMIT=30] -->
+    <string name="zen_mode_settings_title" translatable="false">@*android:string/zen_mode_feature_name</string>
+
+    <!-- Do not disturb: Title for the Priority interruptions option and associated settings page. [CHAR LIMIT=30] -->
+    <string name="zen_mode_priority_settings_title">Priority only allows</string>
+
+    <!--  Do not disturb: Title for the zen mode automation option and associated settings page. [CHAR LIMIT=30] -->
+    <string name="zen_mode_automation_settings_title">Automatic rules</string>
+
+    <!--  Do not disturb: Zen mode option: Important interruptions [CHAR LIMIT=60] -->
+    <string name="zen_mode_option_important_interruptions">Priority only</string>
+
+    <!--  Do not disturb: Zen mode option: Alarms only [CHAR LIMIT=60] -->
+    <string name="zen_mode_option_alarms">Alarms only</string>
+
+    <!--  Do not disturb: Zen mode option: No interruptions [CHAR LIMIT=60] -->
+    <string name="zen_mode_option_no_interruptions">Total silence</string>
+
+    <!--  Do not disturb: Zen mode combined summary + condition line [CHAR LIMIT=60] -->
+    <string name="zen_mode_summary_combination"><xliff:g id="mode" example="Priority only">%1$s</xliff:g>: <xliff:g id="exit condition" example="Until you turn this off">%2$s</xliff:g></string>
+
+    <!--  Do not disturb: Title for the Visual interruptions option and associated settings page. [CHAR LIMIT=30] -->
+    <string name="zen_mode_visual_interruptions_settings_title">Visual interruptions</string>
+
+
+    <!-- Configure Notifications Settings title. [CHAR LIMIT=30] -->
+    <string name="configure_notification_settings">Configure notifications</string>
+
+    <!-- Configure Notifications: Advanced section header [CHAR LIMIT=30] -->
     <string name="advanced_section_header">Advanced</string>
 
-    <!-- Sound & notification > Notification section: Title for the pulse notification light option. [CHAR LIMIT=30] -->
+    <!-- Configure Notifications: Title for the pulse notification light option. [CHAR LIMIT=30] -->
     <string name="notification_pulse_title">Pulse notification light</string>
 
-    <!-- Sound & notification > Notification section: Title for the option controlling notifications on the lockscreen. [CHAR LIMIT=30] -->
+    <!-- Configure Notifications: Title for the option controlling notifications on the lockscreen. [CHAR LIMIT=30] -->
     <string name="lock_screen_notifications_title">When device is locked</string>
 
-    <!-- Sound & notification > Notification section: Value for lockscreen notifications:  all information will be
+    <!-- Configure Notifications: Value for lockscreen notifications:  all information will be
          shown in notifications shown on a secure lock screen
          [CHAR LIMIT=50] -->
     <string name="lock_screen_notifications_summary_show">Show all notification content</string>
 
-    <!-- Sound & notification > Notification section: Value for lockscreen notifications: sensitive information will be
+    <!-- Configure Notifications: Value for lockscreen notifications: sensitive information will be
          hidden or redacted from notifications shown on a secure lock screen
          [CHAR LIMIT=50] -->
     <string name="lock_screen_notifications_summary_hide">Hide sensitive notification content</string>
 
-    <!-- Sound & notification > Notification section: Value for lockscreen notifications: notifications will not appear on a secure lock screen
+    <!-- Configure Notifications: Value for lockscreen notifications: notifications will not appear on a secure lock screen
          [CHAR LIMIT=50] -->
     <string name="lock_screen_notifications_summary_disable">Don\u2019t show notifications at all</string>
 
@@ -6010,50 +6049,13 @@
     <!-- Security > Choose PIN/PW/Pattern > Notification redaction interstitial: Title for the screen asking the user how they want their notifications to appear when the device is locked [CHAR LIMIT=30] -->
     <string name="lock_screen_notifications_interstitial_title">Notifications</string>
 
-    <!-- Sound & notification > Notification section: Title for the option managing notifications per application. [CHAR LIMIT=30] -->
-    <string name="app_notifications_title">App notifications</string>
+    <!-- Notification Settings: Title for the option managing notifications per application. [CHAR LIMIT=30] -->
+    <string name="app_notifications_title">Notifications</string>
 
     <!-- Sound & notification > Notification section: Title for the option managing notifications per topic. [CHAR LIMIT=30] -->
     <string name="topic_notifications_title">Topic notifications</string>
 
-    <!-- Sound & notification > Sound section: Title for the other sounds option and associated settings page. [CHAR LIMIT=30] -->
-    <string name="other_sound_settings">Other sounds</string>
 
-    <!-- Sound & notification > Other sounds: Title for the option enabling touch sounds for dial pad tones. [CHAR LIMIT=30] -->
-    <string name="dial_pad_tones_title">Dial pad tones</string>
-
-    <!-- Sound & notification > Other sounds: Title for the option enabling touch sounds for screen locking sounds. [CHAR LIMIT=30] -->
-    <string name="screen_locking_sounds_title">Screen locking sounds</string>
-
-    <!-- Sound & notification > Other sounds: Title for the option enabling charging sounds. [CHAR LIMIT=30] -->
-    <string name="charging_sounds_title">Charging sounds</string>
-
-    <!-- Sound & notification > Other sounds: Title for the option enabling docking sounds. [CHAR LIMIT=30] -->
-    <string name="docking_sounds_title">Docking sounds</string>
-
-    <!-- Sound & notification > Other sounds: Title for the option enabling touch sounds. [CHAR LIMIT=30] -->
-    <string name="touch_sounds_title">Touch sounds</string>
-
-    <!-- Sound & notification > Other sounds: Title for the option enabling haptic feedback on touch. [CHAR LIMIT=30] -->
-    <string name="vibrate_on_touch_title">Vibrate on touch</string>
-
-    <!-- Sound & notification > Other sounds: Title for the option enabling dock audio media. [CHAR LIMIT=50] -->
-    <string name="dock_audio_media_title">Dock speaker plays</string>
-
-    <!-- Sound & notification > Other sounds: Value for the dock audio media with value 0: disabled. [CHAR LIMIT=30] -->
-    <string name="dock_audio_media_disabled">All audio</string>
-
-    <!-- Sound & notification > Other sounds: Value for the dock audio media with value 1: enabled. [CHAR LIMIT=30] -->
-    <string name="dock_audio_media_enabled">Media audio only</string>
-
-    <!-- Sound & notification > Other sounds: Value for the emergency tone option with value 0: silent. [CHAR LIMIT=30] -->
-    <string name="emergency_tone_silent">Silent</string>
-
-    <!-- Sound & notification > Other sounds: Value for the emergency tone option with value 1: alert. [CHAR LIMIT=30] -->
-    <string name="emergency_tone_alert">Alert</string>
-
-    <!-- Sound & notification > Other sounds: Value for the emergency tone option with value 2: vibrate. [CHAR LIMIT=30] -->
-    <string name="emergency_tone_vibrate">Vibrate</string>
 
     <!-- Sound & notification > Advanced section: Title for managing notification listeners option. [CHAR LIMIT=30] -->
     <string name="manage_notification_access_title">Notification access</string>
@@ -6319,9 +6321,6 @@
 
     <!-- [CHAR LIMIT=105] Zen mode settings: No notification light summary -->
     <string name="zen_mode_lights_summary">Prevent notifications silenced by Do Not Disturb from causing the light to pulse</string>
-
-    <!-- [CHAR LIMIT=20] Notifications settings: Apps section header -->
-    <string name="notification_settings_apps_title">App notifications</string>
 
     <!-- [CHAR LIMIT=NONE] Content description for per-app notification
          settings button -->

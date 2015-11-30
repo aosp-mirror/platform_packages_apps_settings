@@ -122,11 +122,6 @@ abstract public class ZenModeSettingsBase extends RestrictedSettingsFragment {
         NotificationManager.from(mContext).setZenMode(zenMode, conditionId, TAG);
     }
 
-    protected static boolean isScheduleSupported(Context context) {
-        return NotificationManager.from(context)
-                .isSystemConditionProviderEnabled(ZenModeConfig.SCHEDULE_PATH);
-    }
-
     private List<AutomaticZenRule> getZenModeRules() {
         return NotificationManager.from(mContext).getAutomaticZenRules();
     }

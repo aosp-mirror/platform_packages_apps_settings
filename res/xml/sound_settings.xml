@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2014 The Android Open Source Project
+<!-- Copyright (C) 2015 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -16,13 +16,9 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
                   xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
-        android:title="@string/notification_settings"
-        android:key="notification_settings"
-        settings:keywords="@string/keywords_sounds_and_notifications">
-
-    <PreferenceCategory
-        android:key="sound"
-        android:title="@string/sound_settings" >
+        android:title="@string/sound_settings"
+        android:key="sound_settings"
+        settings:keywords="@string/keywords_sounds">
 
         <!-- Media volume -->
         <com.android.settings.notification.VolumeSeekBarPreference
@@ -77,6 +73,15 @@
                 android:persistent="false"
                 android:ringtoneType="notification" />
 
+        <PreferenceScreen
+                android:key="cell_broadcast_settings"
+                android:title="@string/cell_broadcast_settings" >
+                <intent
+                        android:action="android.intent.action.MAIN"
+                        android:targetPackage="com.android.cellbroadcastreceiver"
+                        android:targetClass="com.android.cellbroadcastreceiver.CellBroadcastSettings" />
+        </PreferenceScreen>
+
         <!-- Other sounds -->
         <Preference
                 android:key="other_sounds"
@@ -89,55 +94,5 @@
                 android:key="wifi_display"
                 android:title="@string/wifi_display_settings_title"
                 android:fragment="com.android.settings.wfd.WifiDisplaySettings" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:key="notification"
-        android:title="@string/notification_section_header" >
-
-        <!-- Pulse notification light -->
-        <SwitchPreference
-                android:key="notification_pulse"
-                android:title="@string/notification_pulse_title"
-                android:persistent="false" />
-
-         <!-- When device is locked -->
-        <com.android.settings.DropDownPreference
-                android:key="lock_screen_notifications"
-                android:title="@string/lock_screen_notifications_title"
-                android:persistent="false" />
-
-        <!-- App notifications -->
-        <PreferenceScreen
-                android:key="app_notifications"
-                android:title="@string/app_notifications_title"
-                android:fragment="com.android.settings.applications.ManageApplications">
-                <extra
-                    android:name="classname"
-                    android:value="com.android.settings.Settings$NotificationAppListActivity" />
-        </PreferenceScreen>
-
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:key="advanced"
-        android:title="@string/advanced_section_header" >
-
-        <!-- Notification access -->
-        <Preference
-                android:key="manage_notification_access"
-                android:title="@string/manage_notification_access_title"
-                android:persistent="false"
-                android:fragment="com.android.settings.notification.NotificationAccessSettings" />
-
-        <!-- Do Not Disturb access -->
-        <Preference
-                android:key="manage_zen_access"
-                android:title="@string/manage_zen_access_title"
-                android:persistent="false"
-                android:fragment="com.android.settings.notification.ZenAccessSettings" />
-
-    </PreferenceCategory>
 
 </PreferenceScreen>

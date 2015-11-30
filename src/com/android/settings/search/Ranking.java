@@ -42,8 +42,9 @@ import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
 import com.android.settings.location.LocationSettings;
 import com.android.settings.location.ScanningSettings;
 import com.android.settings.net.DataUsageMeteredSettings;
-import com.android.settings.notification.NotificationSettings;
+import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.OtherSoundSettings;
+import com.android.settings.notification.SoundSettings;
 import com.android.settings.notification.ZenModeAutomationSettings;
 import com.android.settings.notification.ZenModePrioritySettings;
 import com.android.settings.notification.ZenModeSettings;
@@ -71,20 +72,21 @@ public final class Ranking {
     public static final int RANK_DISPLAY = 7;
     public static final int RANK_WALLPAPER = 8;
     public static final int RANK_NOTIFICATIONS = 9;
-    public static final int RANK_APPS = 10;
-    public static final int RANK_STORAGE = 11;
-    public static final int RANK_POWER_USAGE = 12;
-    public static final int RANK_USERS = 13;
-    public static final int RANK_LOCATION = 14;
-    public static final int RANK_SECURITY = 15;
-    public static final int RANK_ACCOUNT = 16;
-    public static final int RANK_IME = 17;
-    public static final int RANK_PRIVACY = 18;
-    public static final int RANK_DATE_TIME = 19;
-    public static final int RANK_ACCESSIBILITY = 20;
-    public static final int RANK_PRINTING = 21;
-    public static final int RANK_DEVELOPEMENT = 22;
-    public static final int RANK_DEVICE_INFO = 23;
+    public static final int RANK_SOUND = 10;
+    public static final int RANK_APPS = 11;
+    public static final int RANK_STORAGE = 12;
+    public static final int RANK_POWER_USAGE = 13;
+    public static final int RANK_USERS = 14;
+    public static final int RANK_LOCATION = 15;
+    public static final int RANK_SECURITY = 16;
+    public static final int RANK_ACCOUNT = 17;
+    public static final int RANK_IME = 18;
+    public static final int RANK_PRIVACY = 19;
+    public static final int RANK_DATE_TIME = 20;
+    public static final int RANK_ACCESSIBILITY = 21;
+    public static final int RANK_PRINTING = 22;
+    public static final int RANK_DEVELOPEMENT = 23;
+    public static final int RANK_DEVICE_INFO = 24;
 
     public static final int RANK_UNDEFINED = -1;
     public static final int RANK_OTHERS = 1024;
@@ -124,8 +126,11 @@ public final class Ranking {
         // Wallpapers
         sRankMap.put(WallpaperTypeSettings.class.getName(), RANK_WALLPAPER);
 
+        // Sound
+        sRankMap.put(SoundSettings.class.getName(), RANK_SOUND);
+
         // Notifications
-        sRankMap.put(NotificationSettings.class.getName(), RANK_NOTIFICATIONS);
+        sRankMap.put(ConfigureNotificationSettings.class.getName(), RANK_NOTIFICATIONS);
         sRankMap.put(OtherSoundSettings.class.getName(), RANK_NOTIFICATIONS);
         sRankMap.put(ZenModeSettings.class.getName(), RANK_NOTIFICATIONS);
         sRankMap.put(ZenModePrioritySettings.class.getName(), RANK_NOTIFICATIONS);

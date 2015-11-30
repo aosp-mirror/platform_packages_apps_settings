@@ -29,6 +29,8 @@ public abstract class InstrumentedFragment extends PreferenceFragment {
     public static final int UNDECLARED = 100000;
 
     public static final int ACCESSIBILITY_TOGGLE_AUTOCLICK = UNDECLARED + 1;
+    public static final int SOUND = UNDECLARED + 2;
+    public static final int CONFIGURE_NOTIFICATION = UNDECLARED + 3;
 
     /**
      * Declare the view of this category.

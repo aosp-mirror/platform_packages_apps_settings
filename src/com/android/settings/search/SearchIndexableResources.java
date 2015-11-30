@@ -44,8 +44,9 @@ import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
 import com.android.settings.location.LocationSettings;
 import com.android.settings.location.ScanningSettings;
 import com.android.settings.net.DataUsageMeteredSettings;
-import com.android.settings.notification.NotificationSettings;
+import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.OtherSoundSettings;
+import com.android.settings.notification.SoundSettings;
 import com.android.settings.notification.ZenModePrioritySettings;
 import com.android.settings.notification.ZenModeSettings;
 import com.android.settings.notification.ZenModeVisualInterruptionSettings;
@@ -144,24 +145,31 @@ public final class SearchIndexableResources {
                         WallpaperTypeSettings.class.getName(),
                         R.drawable.ic_settings_display));
 
-        sResMap.put(NotificationSettings.class.getName(),
+        sResMap.put(ConfigureNotificationSettings.class.getName(),
                 new SearchIndexableResource(
-                        Ranking.getRankForClassName(NotificationSettings.class.getName()),
-                        NO_DATA_RES_ID,
-                        NotificationSettings.class.getName(),
+                        Ranking.getRankForClassName(ConfigureNotificationSettings.class.getName()),
+                        R.xml.configure_notification_settings,
+                        ConfigureNotificationSettings.class.getName(),
                         R.drawable.ic_settings_notifications));
+
+        sResMap.put(SoundSettings.class.getName(),
+                new SearchIndexableResource(
+                        Ranking.getRankForClassName(SoundSettings.class.getName()),
+                        R.xml.sound_settings,
+                        SoundSettings.class.getName(),
+                        R.drawable.ic_settings_sound));
 
         sResMap.put(OtherSoundSettings.class.getName(),
                 new SearchIndexableResource(
                         Ranking.getRankForClassName(OtherSoundSettings.class.getName()),
                         NO_DATA_RES_ID,
                         OtherSoundSettings.class.getName(),
-                        R.drawable.ic_settings_notifications));
+                        R.drawable.ic_settings_sound));
 
         sResMap.put(ZenModeSettings.class.getName(),
                 new SearchIndexableResource(
                         Ranking.getRankForClassName(ZenModeSettings.class.getName()),
-                        NO_DATA_RES_ID,
+                        R.xml.zen_mode_settings,
                         ZenModeSettings.class.getName(),
                         R.drawable.ic_settings_notifications));
 

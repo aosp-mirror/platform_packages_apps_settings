@@ -859,7 +859,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
-            <intent-filter android:priority="9">
+            <intent-filter android:priority="10">
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
             <meta-data android:name="com.android.settings.category"
@@ -885,7 +885,7 @@
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
-            <intent-filter android:priority="8">
+            <intent-filter android:priority="9">
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
             <meta-data android:name="com.android.settings.category"
@@ -2326,8 +2326,8 @@
                        android:value="com.android.settings.notification.ZenAccessSettings" />
         </activity>
 
-        <activity android:name="Settings$NotificationSettingsActivity"
-                android:label="@string/notification_settings"
+        <activity android:name="Settings$ConfigureNotificationSettingsActivity"
+                android:label="@string/configure_notification_settings"
                 android:icon="@drawable/ic_settings_notifications"
                 android:exported="true"
                 android:taskAffinity="">
@@ -2340,22 +2340,18 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
-            <intent-filter android:priority="7">
-                <action android:name="com.android.settings.action.SETTINGS" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.category"
-                android:value="com.android.settings.category.device" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.notification.NotificationSettings" />
+                android:value="com.android.settings.notification.ConfigureNotificationSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
 
         <!-- Keep compatibility with old shortcuts. -->
-        <activity-alias android:name="Settings$SoundSettingsActivity"
-                android:label="@string/notification_settings"
+        <activity android:name="Settings$SoundSettingsActivity"
+                android:label="@string/sound_settings"
+                android:icon="@drawable/ic_settings_sound"
                 android:taskAffinity=""
-                android:targetActivity="Settings$NotificationSettingsActivity">
+                android:exported="true">
             <intent-filter android:priority="1">
                 <action android:name="com.android.settings.SOUND_SETTINGS" />
                 <action android:name="android.settings.SOUND_SETTINGS" />
@@ -2365,20 +2361,26 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
+                <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
+            <intent-filter android:priority="7">
+                <action android:name="com.android.settings.action.SETTINGS" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.device" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.notification.NotificationSettings" />
+                android:value="com.android.settings.notification.SoundSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
-        </activity-alias>
+        </activity>
 
         <!-- Keep compatibility with old shortcuts. -->
         <activity-alias android:name="SoundSettings"
-                android:label="@string/notification_settings"
+                android:label="@string/sound_settings"
                 android:exported="true"
-                android:targetActivity="Settings$NotificationSettingsActivity">
+                android:targetActivity="Settings$SoundSettingsActivity">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.notification.NotificationSettings" />
+                android:value="com.android.settings.notification.SoundSettings" />
         </activity-alias>
 
         <activity android:name="Settings$OtherSoundSettingsActivity"
@@ -2402,8 +2404,14 @@
         <!-- Show apps for which application-level notification settings are applicable -->
         <activity android:name="Settings$NotificationAppListActivity"
                 android:label="@string/app_notifications_title"
+                android:icon="@drawable/ic_settings_notifications"
                 android:exported="true"
                 android:taskAffinity="">
+            <intent-filter android:priority="8">
+                <action android:name="com.android.settings.action.SETTINGS" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.device" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.applications.ManageApplications" />
         </activity>
