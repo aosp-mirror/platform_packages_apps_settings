@@ -523,6 +523,9 @@ public class WifiSettings extends RestrictedSettingsFragment
     public boolean onPreferenceTreeClick(Preference preference) {
         if (preference instanceof AccessPointPreference) {
             mSelectedAccessPoint = ((AccessPointPreference) preference).getAccessPoint();
+            if (mSelectedAccessPoint == null) {
+                return false;
+            }
             /** Bypass dialog for unsecured, unsaved, and inactive networks */
             if (mSelectedAccessPoint.getSecurity() == AccessPoint.SECURITY_NONE &&
                     !mSelectedAccessPoint.isSaved() && !mSelectedAccessPoint.isActive()) {
