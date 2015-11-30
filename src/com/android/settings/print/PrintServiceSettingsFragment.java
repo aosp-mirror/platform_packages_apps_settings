@@ -378,7 +378,7 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
 
                 @Override
                 public boolean onQueryTextChange(String searchString) {
-                    ((Filterable) getListView().getAdapter()).getFilter().filter(searchString);
+                    mPrintersAdapter.getFilter().filter(searchString);
                     return true;
                 }
             });
