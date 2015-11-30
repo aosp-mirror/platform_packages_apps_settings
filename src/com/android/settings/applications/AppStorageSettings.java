@@ -30,6 +30,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.os.RemoteException;
+import android.os.UserHandle;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
 import android.support.v7.preference.Preference;
@@ -192,12 +193,13 @@ public class AppStorageSettings extends AppInfoWithHeader
     }
 
     private boolean isMoveInProgress() {
-        final IPackageManager pm = AppGlobals.getPackageManager();
         try {
             // TODO: define a cleaner API for this
-            return pm.isPackageFrozen(mPackageName);
-        } catch (RemoteException e) {
+            AppGlobals.getPackageManager().checkPackageStartable(mPackageName,
+                    UserHandle.myUserId());
             return false;
+        } catch (RemoteException | SecurityException e) {
+            return true;
         }
     }
 
