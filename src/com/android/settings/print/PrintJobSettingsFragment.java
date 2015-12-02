@@ -229,12 +229,12 @@ public class PrintJobSettingsFragment extends SettingsPreferenceFragment {
             } break;
         }
 
-        String stateReason = info.getStateReason();
-        if (!TextUtils.isEmpty(stateReason)) {
+        CharSequence status = info.getStatus();
+        if (!TextUtils.isEmpty(status)) {
             if (getPreferenceScreen().findPreference(PRINT_JOB_MESSAGE_PREFERENCE) == null) {
                 getPreferenceScreen().addPreference(mMessagePreference);
             }
-            mMessagePreference.setSummary(stateReason);
+            mMessagePreference.setSummary(status);
         } else {
             getPreferenceScreen().removePreference(mMessagePreference);
         }
