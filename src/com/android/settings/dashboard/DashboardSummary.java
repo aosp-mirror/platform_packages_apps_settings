@@ -16,13 +16,7 @@
 
 package com.android.settings.dashboard;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -38,11 +32,14 @@ import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.SettingsActivity;
 import com.android.settingslib.drawer.DashboardCategory;
+import com.android.settingslib.drawer.SettingsDrawerActivity;
 
 import java.util.List;
 
-public class DashboardSummary extends InstrumentedFragment {
-    public static final boolean DEBUG = true;
+public class DashboardSummary extends InstrumentedFragment
+        implements SettingsDrawerActivity.CategoryListener {
+    public static final boolean DEBUG = false;
+    private static final boolean DEBUG_TIMING = false;
     private static final String TAG = "DashboardSummary";
 
     public static final String[] INITIAL_ITEMS = new String[] {
@@ -55,8 +52,6 @@ public class DashboardSummary extends InstrumentedFragment {
     };
 
     private static final int MSG_REBUILD_UI = 1;
-
-    private final HomePackageReceiver mHomePackageReceiver = new HomePackageReceiver();
 
     private RecyclerView mDashboard;
     private DashboardAdapter mAdapter;
@@ -71,11 +66,19 @@ public class DashboardSummary extends InstrumentedFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        long startTime = System.currentTimeMillis();
         List<DashboardCategory> categories =
-                ((SettingsActivity) getActivity()).getDashboardCategories(true);
-        mAdapter = new DashboardAdapter(getContext(), categories);
-        mSummaryLoader = new SummaryLoader(getActivity(), mAdapter, categories);
+                ((SettingsActivity) getActivity()).getDashboardCategories();
+        mSummaryLoader = new SummaryLoader(getActivity(), categories);
         setHasOptionsMenu(true);
+        if (DEBUG_TIMING) Log.d(TAG, "onCreate took " + (System.currentTimeMillis() - startTime)
+                + " ms");
+    }
+
+    @Override
+    public void onDestroy() {
+        mSummaryLoader.release();
+        super.onDestroy();
     }
 
     @Override
@@ -90,14 +93,7 @@ public class DashboardSummary extends InstrumentedFragment {
     public void onResume() {
         super.onResume();
 
-        sendRebuildUI();
-
-        final IntentFilter filter = new IntentFilter(Intent.ACTION_PACKAGE_ADDED);
-        filter.addAction(Intent.ACTION_PACKAGE_REMOVED);
-        filter.addAction(Intent.ACTION_PACKAGE_CHANGED);
-        filter.addAction(Intent.ACTION_PACKAGE_REPLACED);
-        filter.addDataScheme("package");
-        getActivity().registerReceiver(mHomePackageReceiver, filter);
+        ((SettingsDrawerActivity) getActivity()).addCategoryListener(this);
         mSummaryLoader.setListening(true);
     }
 
@@ -105,7 +101,7 @@ public class DashboardSummary extends InstrumentedFragment {
     public void onPause() {
         super.onPause();
 
-        getActivity().unregisterReceiver(mHomePackageReceiver);
+        ((SettingsDrawerActivity) getActivity()).remCategoryListener(this);
         mSummaryLoader.setListening(false);
     }
 
@@ -123,10 +119,10 @@ public class DashboardSummary extends InstrumentedFragment {
         mDashboard.setLayoutManager(llm);
         mDashboard.setHasFixedSize(true);
 
-        rebuildUI(getContext());
+        rebuildUI();
     }
 
-    private void rebuildUI(Context context) {
+    private void rebuildUI() {
         if (!isAdded()) {
             Log.w(TAG, "Cannot build the DashboardSummary UI yet as the Fragment is not added");
             return;
@@ -135,7 +131,7 @@ public class DashboardSummary extends InstrumentedFragment {
         long start = System.currentTimeMillis();
         // TODO: Cache summaries from old categories somehow.
         List<DashboardCategory> categories =
-                ((SettingsActivity) getActivity()).getDashboardCategories(true);
+                ((SettingsActivity) getActivity()).getDashboardCategories();
         boolean showingAll = mAdapter != null && mAdapter.isShowingAll();
         mAdapter = new DashboardAdapter(getContext(), categories);
         mSummaryLoader.setAdapter(mAdapter);
@@ -146,29 +142,8 @@ public class DashboardSummary extends InstrumentedFragment {
         Log.d(TAG, "rebuildUI took: " + delta + " ms");
     }
 
-    private void sendRebuildUI() {
-        if (!mHandler.hasMessages(MSG_REBUILD_UI)) {
-            mHandler.sendEmptyMessage(MSG_REBUILD_UI);
-        }
+    @Override
+    public void onCategoriesChanged() {
+        rebuildUI();
     }
-
-    private Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case MSG_REBUILD_UI: {
-                    final Context context = getActivity();
-                    rebuildUI(context);
-                } break;
-            }
-        }
-    };
-
-    private class HomePackageReceiver extends BroadcastReceiver {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            rebuildUI(context);
-        }
-    }
-
 }

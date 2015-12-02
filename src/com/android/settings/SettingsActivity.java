@@ -32,6 +32,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.nfc.NfcAdapter;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -453,6 +454,7 @@ public class SettingsActivity extends SettingsDrawerActivity
     @Override
     protected void onCreate(Bundle savedState) {
         super.onCreate(savedState);
+        long startTime = System.currentTimeMillis();
 
         // Should happen before any call to getIntent()
         getMetaData();
@@ -506,7 +508,15 @@ public class SettingsActivity extends SettingsDrawerActivity
         if (mIsShowingDashboard) {
             // Run the Index update only if we have some space
             if (!Utils.isLowStorage(this)) {
-                Index.getInstance(getApplicationContext()).update();
+                long indexStartTime = System.currentTimeMillis();
+                AsyncTask.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        Index.getInstance(getApplicationContext()).update();
+                    }
+                });
+                if (DEBUG_TIMING) Log.d(LOG_TAG, "Index.update() took "
+                        + (System.currentTimeMillis() - indexStartTime) + " ms");
             } else {
                 Log.w(LOG_TAG, "Cannot update the Indexer as we are running low on storage space!");
             }
@@ -621,6 +631,8 @@ public class SettingsActivity extends SettingsDrawerActivity
         }
 
         mHomeActivitiesCount = getHomeActivitiesCount();
+        if (DEBUG_TIMING) Log.d(LOG_TAG, "onCreate took " + (System.currentTimeMillis() - startTime)
+                + " ms");
     }
 
     private int getHomeActivitiesCount() {
@@ -955,6 +967,18 @@ public class SettingsActivity extends SettingsDrawerActivity
     }
 
     private void updateTilesList() {
+        // Generally the items that are will be changing from these updates will
+        // not be in the top list of tiles, so run it in the background and the
+        // SettingsDrawerActivity will pick up on the updates automatically.
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                doUpdateTilesList();
+            }
+        });
+    }
+
+    private void doUpdateTilesList() {
         PackageManager pm = getPackageManager();
         final UserManager um = UserManager.get(this);
         final boolean isAdmin = um.isAdminUser();
@@ -1009,7 +1033,7 @@ public class SettingsActivity extends SettingsDrawerActivity
 
         if (UserHandle.MU_ENABLED && !isAdmin) {
             // When on restricted users, disable all extra categories (but only the settings ones).
-            List<DashboardCategory> categories = getDashboardCategories(true);
+            List<DashboardCategory> categories = getDashboardCategories();
             for (DashboardCategory category : categories) {
                 for (DashboardTile tile : category.tiles) {
                     ComponentName component = tile.intent.getComponent();
@@ -1020,8 +1044,6 @@ public class SettingsActivity extends SettingsDrawerActivity
                 }
             }
         }
-
-        updateDrawer();
     }
 
     private void setTileEnabled(ComponentName component, boolean enabled, boolean isAdmin,
