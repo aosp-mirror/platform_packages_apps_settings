@@ -68,7 +68,6 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
     private static final String KEY_PROXY_SETTINGS = "proxy_settings";
     private static final String KEY_MOBILE_NETWORK_SETTINGS = "mobile_network_settings";
     private static final String KEY_MANAGE_MOBILE_PLAN = "manage_mobile_plan";
-    private static final String KEY_CELL_BROADCAST_SETTINGS = "cell_broadcast_settings";
     private static final String KEY_WFC_SETTINGS = "wifi_calling_settings";
 
     public static final String EXIT_ECM_RESULT = "exit_ecm_result";
@@ -327,26 +326,6 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
             p.setEnabled(!TetherSettings
                     .isProvisioningNeededButUnavailable(getActivity()));
         }
-
-        // Enable link to CMAS app settings depending on the value in config.xml.
-        boolean isCellBroadcastAppLinkEnabled = this.getResources().getBoolean(
-                com.android.internal.R.bool.config_cellBroadcastAppLinks);
-        try {
-            if (isCellBroadcastAppLinkEnabled) {
-                if (mPm.getApplicationEnabledSetting("com.android.cellbroadcastreceiver")
-                        == PackageManager.COMPONENT_ENABLED_STATE_DISABLED) {
-                    isCellBroadcastAppLinkEnabled = false;  // CMAS app disabled
-                }
-            }
-        } catch (IllegalArgumentException ignored) {
-            isCellBroadcastAppLinkEnabled = false;  // CMAS app not installed
-        }
-        if (!isAdmin || !isCellBroadcastAppLinkEnabled
-                || mUm.hasUserRestriction(UserManager.DISALLOW_CONFIG_CELL_BROADCASTS)) {
-            PreferenceScreen root = getPreferenceScreen();
-            Preference ps = findPreference(KEY_CELL_BROADCAST_SETTINGS);
-            if (ps != null) root.removePreference(ps);
-        }
     }
 
     @Override
@@ -476,23 +455,6 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
                         context.getSystemService(Context.CONNECTIVITY_SERVICE);
                 if (isSecondaryUser || !cm.isTetheringSupported()) {
                     result.add(KEY_TETHER_SETTINGS);
-                }
-
-                // Enable link to CMAS app settings depending on the value in config.xml.
-                boolean isCellBroadcastAppLinkEnabled = context.getResources().getBoolean(
-                        com.android.internal.R.bool.config_cellBroadcastAppLinks);
-                try {
-                    if (isCellBroadcastAppLinkEnabled) {
-                        if (pm.getApplicationEnabledSetting("com.android.cellbroadcastreceiver")
-                                == PackageManager.COMPONENT_ENABLED_STATE_DISABLED) {
-                            isCellBroadcastAppLinkEnabled = false;  // CMAS app disabled
-                        }
-                    }
-                } catch (IllegalArgumentException ignored) {
-                    isCellBroadcastAppLinkEnabled = false;  // CMAS app not installed
-                }
-                if (isSecondaryUser || !isCellBroadcastAppLinkEnabled) {
-                    result.add(KEY_CELL_BROADCAST_SETTINGS);
                 }
 
                 return result;

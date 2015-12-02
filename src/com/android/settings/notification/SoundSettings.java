@@ -76,6 +76,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements Indexab
     private static final String KEY_VIBRATE_WHEN_RINGING = "vibrate_when_ringing";
     private static final String KEY_WIFI_DISPLAY = "wifi_display";
     private static final String KEY_ZEN_MODE = "zen_mode";
+    private static final String KEY_CELL_BROADCAST_SETTINGS = "cell_broadcast_settings";
 
     private static final String[] RESTRICTED_KEYS = {
         KEY_MEDIA_VOLUME,
@@ -105,6 +106,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements Indexab
     private ComponentName mSuppressor;
     private int mRingerMode = -1;
 
+    private PackageManager mPm;
     private UserManager mUserManager;
     private RingtonePreference mRequestPreference;
 
@@ -117,6 +119,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements Indexab
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = getActivity();
+        mPm = getPackageManager();
         mUserManager = UserManager.get(getContext());
         mVoiceCapable = Utils.isVoiceCapable(mContext);
 
@@ -142,6 +145,24 @@ public class SoundSettings extends SettingsPreferenceFragment implements Indexab
                     initVolumePreference(KEY_NOTIFICATION_VOLUME, AudioManager.STREAM_NOTIFICATION,
                             com.android.internal.R.drawable.ic_audio_ring_notif_mute);
             removePreference(KEY_RING_VOLUME);
+        }
+
+        // Enable link to CMAS app settings depending on the value in config.xml.
+        boolean isCellBroadcastAppLinkEnabled = this.getResources().getBoolean(
+                com.android.internal.R.bool.config_cellBroadcastAppLinks);
+        try {
+            if (isCellBroadcastAppLinkEnabled) {
+                if (mPm.getApplicationEnabledSetting("com.android.cellbroadcastreceiver")
+                        == PackageManager.COMPONENT_ENABLED_STATE_DISABLED) {
+                    isCellBroadcastAppLinkEnabled = false;  // CMAS app disabled
+                }
+            }
+        } catch (IllegalArgumentException ignored) {
+            isCellBroadcastAppLinkEnabled = false;  // CMAS app not installed
+        }
+        if (!mUserManager.isAdminUser() || !isCellBroadcastAppLinkEnabled
+                || mUserManager.hasUserRestriction(UserManager.DISALLOW_CONFIG_CELL_BROADCASTS)) {
+            removePreference(KEY_CELL_BROADCAST_SETTINGS);
         }
         initRingtones();
         initVibrateWhenRinging();
@@ -545,7 +566,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements Indexab
         public List<SearchIndexableResource> getXmlResourcesToIndex(
                 Context context, boolean enabled) {
             final SearchIndexableResource sir = new SearchIndexableResource(context);
-            sir.xmlResId = R.xml.configure_notification_settings;
+            sir.xmlResId = R.xml.sound_settings;
             return Arrays.asList(sir);
         }
 
@@ -559,6 +580,27 @@ public class SoundSettings extends SettingsPreferenceFragment implements Indexab
                 rt.add(KEY_WIFI_DISPLAY);
                 rt.add(KEY_VIBRATE_WHEN_RINGING);
             }
+
+            final PackageManager pm = context.getPackageManager();
+            final UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
+
+            // Enable link to CMAS app settings depending on the value in config.xml.
+            boolean isCellBroadcastAppLinkEnabled = context.getResources().getBoolean(
+                    com.android.internal.R.bool.config_cellBroadcastAppLinks);
+            try {
+                if (isCellBroadcastAppLinkEnabled) {
+                    if (pm.getApplicationEnabledSetting("com.android.cellbroadcastreceiver")
+                            == PackageManager.COMPONENT_ENABLED_STATE_DISABLED) {
+                        isCellBroadcastAppLinkEnabled = false;  // CMAS app disabled
+                    }
+                }
+            } catch (IllegalArgumentException ignored) {
+                isCellBroadcastAppLinkEnabled = false;  // CMAS app not installed
+            }
+            if (!um.isAdminUser() || !isCellBroadcastAppLinkEnabled) {
+                rt.add(KEY_CELL_BROADCAST_SETTINGS);
+            }
+
             return rt;
         }
     };
