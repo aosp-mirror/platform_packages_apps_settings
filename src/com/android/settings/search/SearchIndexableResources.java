@@ -155,7 +155,7 @@ public final class SearchIndexableResources {
         sResMap.put(SoundSettings.class.getName(),
                 new SearchIndexableResource(
                         Ranking.getRankForClassName(SoundSettings.class.getName()),
-                        R.xml.sound_settings,
+                        NO_DATA_RES_ID,
                         SoundSettings.class.getName(),
                         R.drawable.ic_settings_sound));
 
