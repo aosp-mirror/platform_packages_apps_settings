@@ -119,15 +119,15 @@ public class ZenAccessSettings extends EmptyTextSettings {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
                     final boolean access = (Boolean) newValue;
-                    if (!access) {
-                        // disabling access
-                        setAccess(mContext, pkg, access);
-                        return true;
+                    if (access) {
+                        new ScaryWarningDialogFragment()
+                                .setPkgInfo(pkg, label)
+                                .show(getFragmentManager(), "dialog");
+                    } else {
+                        new FriendlyWarningDialogFragment()
+                                .setPkgInfo(pkg, label)
+                                .show(getFragmentManager(), "dialog");
                     }
-                    // enabling access: show a scary dialog first
-                    new ScaryWarningDialogFragment()
-                            .setPkgInfo(pkg, label)
-                            .show(getFragmentManager(), "dialog");
                     return false;
                 }
             });
@@ -149,6 +149,16 @@ public class ZenAccessSettings extends EmptyTextSettings {
         });
     }
 
+    private static void deleteRules(final Context context, final String pkg) {
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                final NotificationManager mgr = context.getSystemService(NotificationManager.class);
+                mgr.removeAutomaticZenRules(pkg);
+            }
+        });
+    }
+
     private final class SettingObserver extends ContentObserver {
         public SettingObserver() {
             super(new Handler(Looper.getMainLooper()));
@@ -160,6 +170,9 @@ public class ZenAccessSettings extends EmptyTextSettings {
         }
     }
 
+    /**
+     * Warning dialog when allowing zen access warning about the privileges being granted.
+     */
     public static class ScaryWarningDialogFragment extends DialogFragment {
         static final String KEY_PKG = "p";
         static final String KEY_LABEL = "l";
@@ -194,6 +207,53 @@ public class ZenAccessSettings extends EmptyTextSettings {
                                 }
                             })
                     .setNegativeButton(R.string.deny,
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    // pass
+                                }
+                            })
+                    .create();
+        }
+    }
+
+    /**
+     * Warning dialog when revoking zen access warning that zen rule instances will be deleted.
+     */
+    public static class FriendlyWarningDialogFragment extends DialogFragment {
+        static final String KEY_PKG = "p";
+        static final String KEY_LABEL = "l";
+
+        public FriendlyWarningDialogFragment setPkgInfo(String pkg, CharSequence label) {
+            Bundle args = new Bundle();
+            args.putString(KEY_PKG, pkg);
+            args.putString(KEY_LABEL, TextUtils.isEmpty(label) ? pkg : label.toString());
+            setArguments(args);
+            return this;
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            final Bundle args = getArguments();
+            final String pkg = args.getString(KEY_PKG);
+            final String label = args.getString(KEY_LABEL);
+
+            final String title = getResources().getString(
+                    R.string.zen_access_revoke_warning_dialog_title, label);
+            final String summary = getResources()
+                    .getString(R.string.zen_access_revoke_warning_dialog_summary);
+            return new AlertDialog.Builder(getContext())
+                    .setMessage(summary)
+                    .setTitle(title)
+                    .setCancelable(true)
+                    .setPositiveButton(R.string.okay,
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    deleteRules(getContext(), pkg);
+                                    setAccess(getContext(), pkg, false);
+                                }
+                            })
+                    .setNegativeButton(R.string.cancel,
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
                                     // pass
