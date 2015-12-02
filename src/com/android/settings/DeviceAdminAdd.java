@@ -303,16 +303,16 @@ public class DeviceAdminAdd extends Activity {
                     }
                     mWaitingForRemoveMsg = true;
                     mDPM.getRemoveWarning(mDeviceAdmin.getComponent(),
-                            new RemoteCallback(mHandler) {
-                        @Override
-                        protected void onResult(Bundle bundle) {
-                            CharSequence msg = bundle != null
-                                    ? bundle.getCharSequence(
+                            new RemoteCallback(new RemoteCallback.OnResultListener() {
+                                @Override
+                                public void onResult(Bundle result) {
+                                    CharSequence msg = result != null
+                                            ? result.getCharSequence(
                                             DeviceAdminReceiver.EXTRA_DISABLE_WARNING)
-                                    : null;
-                            continueRemoveAction(msg);
-                        }
-                    });
+                                            : null;
+                                    continueRemoveAction(msg);
+                                }
+                            }, mHandler));
                     // Don't want to wait too long.
                     getWindow().getDecorView().getHandler().postDelayed(new Runnable() {
                         @Override public void run() {
