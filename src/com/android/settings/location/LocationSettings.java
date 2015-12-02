@@ -398,7 +398,7 @@ public class LocationSettings extends LocationSettingsBase
     @Override
     public void onSwitchChanged(Switch switchView, boolean isChecked) {
         if (isChecked) {
-            setLocationMode(android.provider.Settings.Secure.LOCATION_MODE_HIGH_ACCURACY);
+            setLocationMode(android.provider.Settings.Secure.LOCATION_MODE_PREVIOUS);
         } else {
             setLocationMode(android.provider.Settings.Secure.LOCATION_MODE_OFF);
         }

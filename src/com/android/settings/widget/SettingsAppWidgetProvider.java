@@ -569,7 +569,7 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
                                 mode = Settings.Secure.LOCATION_MODE_OFF;
                                 break;
                             case Settings.Secure.LOCATION_MODE_OFF:
-                                mode = Settings.Secure.LOCATION_MODE_HIGH_ACCURACY;
+                                mode = Settings.Secure.LOCATION_MODE_PREVIOUS;
                                 break;
                         }
                         Settings.Secure.putInt(resolver, Settings.Secure.LOCATION_MODE, mode);
