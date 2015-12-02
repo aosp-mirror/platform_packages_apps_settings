@@ -16,9 +16,11 @@
 package com.android.settings.dashboard;
 
 import android.app.Activity;
-import android.content.pm.ActivityInfo;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Looper;
+import android.os.Message;
 import android.util.ArrayMap;
 import android.util.Log;
 import com.android.settings.SettingsActivity;
@@ -39,38 +41,48 @@ public class SummaryLoader {
     private final ArrayMap<SummaryProvider, DashboardTile> mSummaryMap = new ArrayMap<>();
     private final List<DashboardTile> mTiles = new ArrayList<>();
 
+    private final Worker mWorker;
+    private final Handler mHandler;
+    private final HandlerThread mWorkerThread;
+
     private DashboardAdapter mAdapter;
 
-    public SummaryLoader(Activity activity, DashboardAdapter adapter,
-                  List<DashboardCategory> categories) {
+    public SummaryLoader(Activity activity, List<DashboardCategory> categories) {
+        mHandler = new Handler();
+        mWorkerThread = new HandlerThread("SummaryLoader");
+        mWorkerThread.start();
+        mWorker = new Worker(mWorkerThread.getLooper());
         mActivity = activity;
-        mAdapter = adapter;
         for (int i = 0; i < categories.size(); i++) {
             List<DashboardTile> tiles = categories.get(i).tiles;
             for (int j = 0; j < tiles.size(); j++) {
                 DashboardTile tile = tiles.get(j);
-                SummaryProvider provider = getSummaryProvider(tile);
-                if (provider != null) {
-                    mSummaryMap.put(provider, tile);
-                }
+                mWorker.obtainMessage(Worker.MSG_GET_PROVIDER, tile).sendToTarget();
             }
         }
+    }
+
+    public void release() {
+        mWorkerThread.quit();
     }
 
     public void setAdapter(DashboardAdapter adapter) {
         mAdapter = adapter;
     }
 
-    public void setSummary(SummaryProvider provider, CharSequence summary) {
-        DashboardTile tile = mSummaryMap.get(provider);
-        tile.summary = summary;
-        mAdapter.notifyChanged(tile);
+    public void setSummary(SummaryProvider provider, final CharSequence summary) {
+        final DashboardTile tile = mSummaryMap.get(provider);
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                tile.summary = summary;
+                mAdapter.notifyChanged(tile);
+            }
+        });
     }
 
     public void setListening(boolean listening) {
-        for (SummaryProvider provider : mSummaryMap.keySet()) {
-            provider.setListening(listening);
-        }
+        mWorker.obtainMessage(Worker.MSG_SET_LISTENING, listening ? 1 : 0, 0).sendToTarget();
     }
 
     private SummaryProvider getSummaryProvider(DashboardTile tile) {
@@ -107,14 +119,7 @@ public class SummaryLoader {
     }
 
     private Bundle getMetaData(DashboardTile tile) {
-        // TODO: Cache this in TileUtils so this doesn't need to be loaded again.
-        try {
-            ActivityInfo activityInfo = mActivity.getPackageManager().getActivityInfo(
-                    tile.intent.getComponent(), PackageManager.GET_META_DATA);
-            return activityInfo.metaData;
-        } catch (PackageManager.NameNotFoundException e) {
-            return null;
-        }
+        return tile.metaData;
     }
 
     public interface SummaryProvider {
@@ -123,5 +128,35 @@ public class SummaryLoader {
 
     public interface SummaryProviderFactory {
         SummaryProvider createSummaryProvider(Activity activity, SummaryLoader summaryLoader);
+    }
+
+    private class Worker extends Handler {
+        private static final int MSG_GET_PROVIDER = 1;
+        private static final int MSG_SET_LISTENING = 2;
+
+        public Worker(Looper looper) {
+            super(looper);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case MSG_GET_PROVIDER:
+                    DashboardTile tile = (DashboardTile) msg.obj;
+                    SummaryProvider provider = getSummaryProvider(tile);
+                    if (provider != null) {
+                        if (DEBUG) Log.d(TAG, "Creating " + tile);
+                        mSummaryMap.put(provider, tile);
+                    }
+                    break;
+                case MSG_SET_LISTENING:
+                    boolean listening = msg.arg1 != 0;
+                    if (DEBUG) Log.d(TAG, "Listening " + listening);
+                    for (SummaryProvider p : mSummaryMap.keySet()) {
+                        p.setListening(listening);
+                    }
+                    break;
+            }
+        }
     }
 }
