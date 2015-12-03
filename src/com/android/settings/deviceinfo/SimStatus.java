@@ -120,9 +120,7 @@ public class SimStatus extends InstrumentedPreferenceActivity {
                     return;
                 }
                 CellBroadcastMessage cbMessage = (CellBroadcastMessage) extras.get("message");
-                if (cbMessage != null
-                        && cbMessage.getServiceCategory() == 50
-                        && mSir.getSubscriptionId() == cbMessage.getSubId()) {
+                if (cbMessage != null && cbMessage.getServiceCategory() == 50) {
                     String latestAreaInfo = cbMessage.getMessageBody();
                     updateAreaInfo(latestAreaInfo);
                 }
