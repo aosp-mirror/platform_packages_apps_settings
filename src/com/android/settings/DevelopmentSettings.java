@@ -66,7 +66,7 @@ import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.HardwareRenderer;
+import android.view.ThreadedRenderer;
 import android.view.IWindowManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -1023,7 +1023,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     }
 
     private void updateTrackFrameTimeOptions() {
-        String value = SystemProperties.get(HardwareRenderer.PROFILE_PROPERTY);
+        String value = SystemProperties.get(ThreadedRenderer.PROFILE_PROPERTY);
         if (value == null) {
             value = "";
         }
@@ -1041,7 +1041,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     }
 
     private void writeTrackFrameTimeOptions(Object newValue) {
-        SystemProperties.set(HardwareRenderer.PROFILE_PROPERTY,
+        SystemProperties.set(ThreadedRenderer.PROFILE_PROPERTY,
                 newValue == null ? "" : newValue.toString());
         pokeSystemProperties();
         updateTrackFrameTimeOptions();
@@ -1049,7 +1049,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
 
     private void updateShowNonRectClipOptions() {
         String value = SystemProperties.get(
-                HardwareRenderer.DEBUG_SHOW_NON_RECTANGULAR_CLIP_PROPERTY);
+                ThreadedRenderer.DEBUG_SHOW_NON_RECTANGULAR_CLIP_PROPERTY);
         if (value == null) {
             value = "hide";
         }
@@ -1067,7 +1067,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     }
 
     private void writeShowNonRectClipOptions(Object newValue) {
-        SystemProperties.set(HardwareRenderer.DEBUG_SHOW_NON_RECTANGULAR_CLIP_PROPERTY,
+        SystemProperties.set(ThreadedRenderer.DEBUG_SHOW_NON_RECTANGULAR_CLIP_PROPERTY,
                 newValue == null ? "" : newValue.toString());
         pokeSystemProperties();
         updateShowNonRectClipOptions();
@@ -1075,28 +1075,28 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
 
     private void updateShowHwScreenUpdatesOptions() {
         updateSwitchPreference(mShowHwScreenUpdates,
-                SystemProperties.getBoolean(HardwareRenderer.DEBUG_DIRTY_REGIONS_PROPERTY, false));
+                SystemProperties.getBoolean(ThreadedRenderer.DEBUG_DIRTY_REGIONS_PROPERTY, false));
     }
 
     private void writeShowHwScreenUpdatesOptions() {
-        SystemProperties.set(HardwareRenderer.DEBUG_DIRTY_REGIONS_PROPERTY,
+        SystemProperties.set(ThreadedRenderer.DEBUG_DIRTY_REGIONS_PROPERTY,
                 mShowHwScreenUpdates.isChecked() ? "true" : null);
         pokeSystemProperties();
     }
 
     private void updateShowHwLayersUpdatesOptions() {
         updateSwitchPreference(mShowHwLayersUpdates, SystemProperties.getBoolean(
-                HardwareRenderer.DEBUG_SHOW_LAYERS_UPDATES_PROPERTY, false));
+                ThreadedRenderer.DEBUG_SHOW_LAYERS_UPDATES_PROPERTY, false));
     }
 
     private void writeShowHwLayersUpdatesOptions() {
-        SystemProperties.set(HardwareRenderer.DEBUG_SHOW_LAYERS_UPDATES_PROPERTY,
+        SystemProperties.set(ThreadedRenderer.DEBUG_SHOW_LAYERS_UPDATES_PROPERTY,
                 mShowHwLayersUpdates.isChecked() ? "true" : null);
         pokeSystemProperties();
     }
 
     private void updateDebugHwOverdrawOptions() {
-        String value = SystemProperties.get(HardwareRenderer.DEBUG_OVERDRAW_PROPERTY);
+        String value = SystemProperties.get(ThreadedRenderer.DEBUG_OVERDRAW_PROPERTY);
         if (value == null) {
             value = "";
         }
@@ -1114,7 +1114,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     }
 
     private void writeDebugHwOverdrawOptions(Object newValue) {
-        SystemProperties.set(HardwareRenderer.DEBUG_OVERDRAW_PROPERTY,
+        SystemProperties.set(ThreadedRenderer.DEBUG_OVERDRAW_PROPERTY,
                 newValue == null ? "" : newValue.toString());
         pokeSystemProperties();
         updateDebugHwOverdrawOptions();
