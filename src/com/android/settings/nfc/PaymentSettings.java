@@ -115,8 +115,10 @@ public class PaymentSettings extends SettingsPreferenceFragment {
                 PaymentBackend paymentBackend = new PaymentBackend(mContext);
                 paymentBackend.refresh();
                 PaymentAppInfo app = paymentBackend.getDefaultApp();
-                mSummaryLoader.setSummary(this, mContext.getString(R.string.payment_summary,
-                        app.label));
+                if (app != null) {
+                    mSummaryLoader.setSummary(this, mContext.getString(R.string.payment_summary,
+                            app.label));
+                }
             }
         }
     }
