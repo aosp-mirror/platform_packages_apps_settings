@@ -145,14 +145,15 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             List<UserInfo> users = mUserManager.getUsers(true);
             for (UserInfo user: users) {
                 if (user.isGuest()) {
+                    UserHandle userHandle = UserHandle.of(user.id);
                     for (String key : mDefaultGuestRestrictions.keySet()) {
                         mUserManager.setUserRestriction(
-                                key, mDefaultGuestRestrictions.getBoolean(key));
+                                key, mDefaultGuestRestrictions.getBoolean(key), userHandle);
                     }
                 }
             }
         } else {
-            UserHandle userHandle = new UserHandle(mUserInfo.id);
+            UserHandle userHandle = UserHandle.of(mUserInfo.id);
             mUserManager.setUserRestriction(UserManager.DISALLOW_OUTGOING_CALLS, !enabled,
                     userHandle);
             mUserManager.setUserRestriction(UserManager.DISALLOW_SMS, !enabled, userHandle);
