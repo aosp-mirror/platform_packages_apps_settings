@@ -51,13 +51,13 @@
                 />
  
         <LinearLayout style="@style/entry_layout">
-            <TextView android:text="@string/radio_info_ping_ipaddr" style="@style/info_label" />
-            <TextView android:id="@+id/pingIpAddr" style="@style/info_value" />
+            <TextView android:text="@string/radio_info_ping_hostname_v4" style="@style/info_label" />
+            <TextView android:id="@+id/pingHostnameV4" style="@style/info_value" />
         </LinearLayout>
 
         <LinearLayout style="@style/entry_layout">
-            <TextView android:text="@string/radio_info_ping_hostname" style="@style/info_label" />
-            <TextView android:id="@+id/pingHostname" style="@style/info_value" />
+            <TextView android:text="@string/radio_info_ping_hostname_v6" style="@style/info_label" />
+            <TextView android:id="@+id/pingHostnameV6" style="@style/info_value" />
         </LinearLayout>
 
         <LinearLayout style="@style/entry_layout">
@@ -70,6 +70,14 @@
             <TextView android:text="@string/radio_info_signal_strength_label" style="@style/info_label" />
             <TextView android:id="@+id/dbm" style="@style/info_value" />
         </LinearLayout>
+
+        <!-- CellInfoListRate -->
+        <Button android:id="@+id/cell_info_list_rate"
+                android:textSize="14sp"
+                android:layout_marginTop="8dip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
 
         <!-- Location -->
         <LinearLayout style="@style/entry_layout">
@@ -88,6 +96,8 @@
         <LinearLayout style="@style/entry_layout">
             <TextView android:text="@string/radio_info_cellinfo_label"
                       style="@style/info_label" />
+        </LinearLayout>
+        <LinearLayout style="@style/entry_layout">
             <TextView android:id="@+id/cellinfo" style="@style/info_value" />
         </LinearLayout>
 
@@ -139,7 +149,6 @@
             <TextView android:text="@string/radio_info_call_status_label" style="@style/info_label" />
             <TextView android:id="@+id/call" style="@style/info_value" />
         </LinearLayout>
-
 
         <!-- Radio Resets -->
         <LinearLayout style="@style/entry_layout">
@@ -210,15 +219,7 @@
                 android:layout_height="wrap_content"
                 />
 
-        <!-- CellInfoListRate -->
-        <Button android:id="@+id/cell_info_list_rate"
-                android:textSize="14sp"
-                android:layout_marginTop="8dip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                />
-
-        <!-- IMS registration required -->
+       <!-- IMS registration required -->
         <Button android:id="@+id/ims_reg_required"
                 android:textSize="14sp"
                 android:layout_marginTop="8dip"
