@@ -32,7 +32,7 @@ import android.content.pm.IPackageManager;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
-import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.NetworkInfo.State;
@@ -47,9 +47,11 @@ import android.os.RemoteException;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceViewHolder;
 import android.text.Spannable;
 import android.text.style.TextAppearanceSpan;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Gravity;
@@ -99,14 +101,13 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     /* package */ static final int MENU_ID_WPS_PBC = Menu.FIRST;
     private static final int MENU_ID_WPS_PIN = Menu.FIRST + 1;
-    private static final int MENU_ID_SAVED_NETWORK = Menu.FIRST + 2;
-    /* package */ static final int MENU_ID_ADD_NETWORK = Menu.FIRST + 3;
     private static final int MENU_ID_ADVANCED = Menu.FIRST + 4;
     private static final int MENU_ID_SCAN = Menu.FIRST + 5;
     private static final int MENU_ID_CONNECT = Menu.FIRST + 6;
     private static final int MENU_ID_FORGET = Menu.FIRST + 7;
     private static final int MENU_ID_MODIFY = Menu.FIRST + 8;
     private static final int MENU_ID_WRITE_NFC = Menu.FIRST + 9;
+    private static final int MENU_ID_CONFIGURE = Menu.FIRST + 10;
 
     public static final int WIFI_DIALOG_ID = 1;
     /* package */ static final int WPS_PBC_DIALOG_ID = 2;
@@ -117,8 +118,6 @@ public class WifiSettings extends RestrictedSettingsFragment
     private static final String SAVE_DIALOG_MODE = "dialog_mode";
     private static final String SAVE_DIALOG_ACCESS_POINT_STATE = "wifi_ap_state";
     private static final String SAVED_WIFI_NFC_DIALOG_STATE = "wifi_nfc_dlg_state";
-
-    private static boolean savedNetworksExist;
 
     protected WifiManager mWifiManager;
     private WifiManager.ActionListener mConnectListener;
@@ -157,6 +156,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     private HandlerThread mBgThread;
 
     private UserBadgeCache mUserBadgeCache;
+    private Preference mAddPreference;
 
     /* End of "used in Wifi Setup context" */
 
@@ -177,6 +177,14 @@ public class WifiSettings extends RestrictedSettingsFragment
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         addPreferencesFromResource(R.xml.wifi_settings);
+        mAddPreference = new Preference(getContext());
+        Drawable ic_add = getContext().getDrawable(R.drawable.ic_menu_add).mutate();
+        TypedValue tv = new TypedValue();
+        getContext().getTheme().resolveAttribute(android.R.attr.colorAccent, tv, true);
+        ic_add.setTint(getContext().getColor(tv.resourceId));
+        mAddPreference.setIcon(ic_add);
+        mAddPreference.setTitle(R.string.wifi_add_network);
+
         mUserBadgeCache = new UserBadgeCache(getPackageManager());
 
         mBgThread = new HandlerThread(TAG, Process.THREAD_PRIORITY_BACKGROUND);
@@ -343,24 +351,14 @@ public class WifiSettings extends RestrictedSettingsFragment
      */
     void addOptionsMenuItems(Menu menu) {
         final boolean wifiIsEnabled = mWifiTracker.isWifiEnabled();
-        TypedArray ta = getActivity().getTheme().obtainStyledAttributes(
-                new int[] {R.attr.ic_menu_add, R.attr.ic_wps});
-        menu.add(Menu.NONE, MENU_ID_ADD_NETWORK, 0, R.string.wifi_add_network)
-                .setIcon(ta.getDrawable(0))
-                .setEnabled(wifiIsEnabled)
-                .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
-        if (savedNetworksExist) {
-            menu.add(Menu.NONE, MENU_ID_SAVED_NETWORK, 0, R.string.wifi_saved_access_points_label)
-                    .setIcon(ta.getDrawable(0))
-                    .setEnabled(wifiIsEnabled)
-                    .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
-        }
         menu.add(Menu.NONE, MENU_ID_SCAN, 0, R.string.menu_stats_refresh)
                .setEnabled(wifiIsEnabled)
                .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
         menu.add(Menu.NONE, MENU_ID_ADVANCED, 0, R.string.wifi_menu_advanced)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
-        ta.recycle();
+        menu.add(Menu.NONE, MENU_ID_CONFIGURE, 0, R.string.wifi_menu_configure)
+                .setIcon(R.drawable.ic_settings_24dp)
+                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
     }
 
     @Override
@@ -419,22 +417,6 @@ public class WifiSettings extends RestrictedSettingsFragment
                 MetricsLogger.action(getActivity(), MetricsLogger.ACTION_WIFI_FORCE_SCAN);
                 mWifiTracker.forceScan();
                 return true;
-            case MENU_ID_ADD_NETWORK:
-                if (mWifiTracker.isWifiEnabled()) {
-                    onAddNetworkPressed();
-                }
-                return true;
-            case MENU_ID_SAVED_NETWORK:
-                if (getActivity() instanceof SettingsActivity) {
-                    ((SettingsActivity) getActivity()).startPreferencePanel(
-                            SavedAccessPointsWifiSettings.class.getCanonicalName(), null,
-                            R.string.wifi_saved_access_points_titlebar, null, this, 0);
-                } else {
-                    startFragment(this, SavedAccessPointsWifiSettings.class.getCanonicalName(),
-                            R.string.wifi_saved_access_points_titlebar,
-                            -1 /* Do not request a result */, null);
-                }
-                return true;
             case MENU_ID_ADVANCED:
                 if (getActivity() instanceof SettingsActivity) {
                     ((SettingsActivity) getActivity()).startPreferencePanel(
@@ -446,6 +428,18 @@ public class WifiSettings extends RestrictedSettingsFragment
                             null);
                 }
                 return true;
+            case MENU_ID_CONFIGURE:
+                if (getActivity() instanceof SettingsActivity) {
+                    ((SettingsActivity) getActivity()).startPreferencePanel(
+                            ConfigureWifiSettings.class.getCanonicalName(), null,
+                            R.string.wifi_configure_titlebar, null, this, 0);
+                } else {
+                    startFragment(this, ConfigureWifiSettings.class.getCanonicalName(),
+                            R.string.wifi_configure_titlebar, -1 /* Do not request a results */,
+                            null);
+                }
+                return true;
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -530,16 +524,14 @@ public class WifiSettings extends RestrictedSettingsFragment
             if (mSelectedAccessPoint.getSecurity() == AccessPoint.SECURITY_NONE &&
                     !mSelectedAccessPoint.isSaved() && !mSelectedAccessPoint.isActive()) {
                 mSelectedAccessPoint.generateOpenNetworkConfig();
-                if (!savedNetworksExist) {
-                    savedNetworksExist = true;
-                    getActivity().invalidateOptionsMenu();
-                }
                 connect(mSelectedAccessPoint.getConfig());
-            } else if (mSelectedAccessPoint.isSaved()){
+            } else if (mSelectedAccessPoint.isSaved()) {
                 showDialog(mSelectedAccessPoint, WifiConfigUiBase.MODE_VIEW);
             } else {
                 showDialog(mSelectedAccessPoint, WifiConfigUiBase.MODE_CONNECT);
             }
+        } else if (preference == mAddPreference) {
+            onAddNetworkPressed();
         } else {
             return super.onPreferenceTreeClick(preference);
         }
@@ -678,8 +670,23 @@ public class WifiSettings extends RestrictedSettingsFragment
                 }
                 if (!hasAvailableAccessPoints) {
                     setProgressBarVisible(true);
-                    addMessagePreference(R.string.wifi_empty_list_wifi_on);
+                    Preference pref = new Preference(getContext()) {
+                        @Override
+                        public void onBindViewHolder(PreferenceViewHolder holder) {
+                            super.onBindViewHolder(holder);
+                            // Show a line on each side of add network.
+                            holder.setDividerAllowedBelow(true);
+                        }
+                    };
+                    pref.setSelectable(false);
+                    pref.setSummary(R.string.wifi_empty_list_wifi_on);
+                    pref.setOrder(0);
+                    getPreferenceScreen().addPreference(pref);
+                    mAddPreference.setOrder(1);
+                    getPreferenceScreen().addPreference(mAddPreference);
                 } else {
+                    mAddPreference.setOrder(index++);
+                    getPreferenceScreen().addPreference(mAddPreference);
                     setProgressBarVisible(false);
                 }
                 break;
@@ -698,11 +705,6 @@ public class WifiSettings extends RestrictedSettingsFragment
                 setOffMessage();
                 setProgressBarVisible(false);
                 break;
-        }
-        // Update "Saved Networks" menu option.
-        if (savedNetworksExist != mWifiTracker.doSavedNetworksExist()) {
-            savedNetworksExist = !savedNetworksExist;
-            getActivity().invalidateOptionsMenu();
         }
     }
 
@@ -768,11 +770,6 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     @Override
     public void onWifiStateChanged(int state) {
-        Activity activity = getActivity();
-        if (activity != null) {
-            activity.invalidateOptionsMenu();
-        }
-
         switch (state) {
             case WifiManager.WIFI_STATE_ENABLING:
                 addMessagePreference(R.string.wifi_starting);
