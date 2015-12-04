@@ -737,9 +737,6 @@ public class SettingsActivity extends SettingsDrawerActivity
     @Override
     protected void onResume() {
         super.onResume();
-        if (mIsShowingDashboard) {
-            MetricsLogger.visible(this, MetricsLogger.MAIN_SETTINGS);
-        }
 
         mDevelopmentPreferencesListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
             @Override
@@ -763,9 +760,6 @@ public class SettingsActivity extends SettingsDrawerActivity
     @Override
     protected void onPause() {
         super.onPause();
-        if (mIsShowingDashboard) {
-            MetricsLogger.hidden(this, MetricsLogger.MAIN_SETTINGS);
-        }
         unregisterReceiver(mBatteryInfoReceiver);
         mDynamicIndexableContentMonitor.unregister();
     }
