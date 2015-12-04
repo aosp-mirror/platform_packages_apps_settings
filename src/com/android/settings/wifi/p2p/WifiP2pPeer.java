@@ -23,7 +23,6 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.text.TextUtils;
 import android.widget.ImageView;
-
 import com.android.settings.R;
 
 public class WifiP2pPeer extends Preference {
@@ -41,15 +40,18 @@ public class WifiP2pPeer extends Preference {
         device = dev;
         setWidgetLayoutResource(R.layout.preference_widget_wifi_signal);
         mRssi = 60; //TODO: fix
-    }
-
-    @Override
-    public void onBindViewHolder(PreferenceViewHolder view) {
         if (TextUtils.isEmpty(device.deviceName)) {
             setTitle(device.deviceAddress);
         } else {
             setTitle(device.deviceName);
         }
+        String[] statusArray = context.getResources().getStringArray(R.array.wifi_p2p_status);
+        setSummary(statusArray[device.status]);
+    }
+
+    @Override
+    public void onBindViewHolder(PreferenceViewHolder view) {
+        super.onBindViewHolder(view);
         mSignal = (ImageView) view.findViewById(R.id.signal);
         if (mRssi == Integer.MAX_VALUE) {
             mSignal.setImageDrawable(null);
@@ -57,8 +59,7 @@ public class WifiP2pPeer extends Preference {
             mSignal.setImageResource(R.drawable.wifi_signal_dark);
             mSignal.setImageState(STATE_SECURED,  true);
         }
-        refresh();
-        super.onBindViewHolder(view);
+        mSignal.setImageLevel(getLevel());
     }
 
     @Override
@@ -86,15 +87,5 @@ public class WifiP2pPeer extends Preference {
             return -1;
         }
         return WifiManager.calculateSignalLevel(mRssi, SIGNAL_LEVELS);
-    }
-
-    private void refresh() {
-        if (mSignal == null) {
-            return;
-        }
-        Context context = getContext();
-        mSignal.setImageLevel(getLevel());
-        String[] statusArray = context.getResources().getStringArray(R.array.wifi_p2p_status);
-        setSummary(statusArray[device.status]);
     }
 }
