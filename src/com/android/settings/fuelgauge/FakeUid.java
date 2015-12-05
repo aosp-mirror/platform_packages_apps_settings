@@ -78,6 +78,11 @@ public class FakeUid extends Uid {
     }
 
     @Override
+    public long getBluetoothControllerActivity(int type, int which) {
+        return 0;
+    }
+
+    @Override
     public void noteWifiRunningLocked(long elapsedRealtime) {
     }
 
