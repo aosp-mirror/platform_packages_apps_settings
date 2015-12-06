@@ -34,6 +34,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.android.ims.ImsManager;
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.telephony.PhoneConstants;
 
@@ -99,6 +100,8 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
             if (btManager != null) {
                 btManager.getAdapter().factoryReset();
             }
+
+            ImsManager.factoryReset(context);
 
             Toast.makeText(context, R.string.reset_network_complete_toast, Toast.LENGTH_SHORT)
                     .show();
