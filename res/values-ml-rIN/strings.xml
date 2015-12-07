@@ -182,7 +182,7 @@
     <string name="radio_info_cellinfo_label" msgid="1300937728020622362">"സെൽവിവരം:"</string>
     <string name="radio_info_dcrtinfo_label" msgid="6802395441317448068">"DcRtInfo:"</string>
     <string name="radio_info_data_attempts_label" msgid="1731106244577323381">"ഡാറ്റ ശ്രമങ്ങൾ:"</string>
-    <string name="radio_info_gprs_service_label" msgid="2331818110375395364">"GPRS സേവനം:"</string>
+    <string name="radio_info_gprs_service_label" msgid="6699616076706524202">"ഡാറ്റാ സാങ്കേതികവിദ്യ:"</string>
     <string name="radio_info_roaming_label" msgid="6141505430275138647">"റോമിംഗ്:"</string>
     <string name="radio_info_imei_label" msgid="1220524224732944192">"IMEI:"</string>
     <string name="radio_info_call_redirect_label" msgid="1654674226961476872">"കോൾ റീഡയറക്‌ടുചെയ്യുക:"</string>
@@ -191,7 +191,7 @@
     <string name="radio_info_current_network_label" msgid="3256402602440102610">"നിലവിലെ നെ‌റ്റ്‌വർക്ക്:"</string>
     <string name="radio_info_data_successes_label" msgid="4417894113689054945">"ഡാറ്റ വിജയങ്ങൾ:"</string>
     <string name="radio_info_ppp_received_label" msgid="3345184342444878849">"PPP ലഭിച്ചത്:"</string>
-    <string name="radio_info_gsm_service_label" msgid="2082332114596916985">"GSM സേവനം:"</string>
+    <string name="radio_info_gsm_service_label" msgid="8595694240281347716">"ശബ്ദ സാങ്കേതികവിദ്യ:"</string>
     <string name="radio_info_signal_strength_label" msgid="1931937920896925766">"സിഗ്‌നൽ ശക്തി:"</string>
     <string name="radio_info_call_status_label" msgid="4896238900685510883">"കോൾ നില:"</string>
     <string name="radio_info_ppp_sent_label" msgid="5009102250704375687">"PPP അയച്ചത്:"</string>
@@ -201,8 +201,8 @@
     <string name="radio_info_band_mode_label" msgid="441469694142042022">"റേഡിയോ ബാൻഡ് തിരഞ്ഞെടുക്കുക"</string>
     <string name="radio_info_network_type_label" msgid="3706382548257257987">"നെറ്റ്‌വർക്ക് തരം:"</string>
     <string name="radio_info_set_perferred_label" msgid="9039200405863503267">"തിരഞ്ഞെടുത്ത നെറ്റ്‌വർക്ക് തരം സജ്ജീകരിക്കുക:"</string>
-    <string name="radio_info_ping_ipaddr" msgid="498747917793263530">"പിംഗ് IpAddr:"</string>
-    <string name="radio_info_ping_hostname" msgid="3054888474808217853">"പിംഗ് ഹോസ്‌റ്റ്നെയിം(www.google.com):"</string>
+    <string name="radio_info_ping_hostname_v4" msgid="7045103377818314709">"ഹോസ്റ്റുനാമം(www.google.com) IPv4 പിംഗുചെയ്യുക:"</string>
+    <string name="radio_info_ping_hostname_v6" msgid="1130906124160553954">"ഹോസ്റ്റുനാമം(www.google.com) IPv6 പിംഗുചെയ്യുക:"</string>
     <string name="radio_info_http_client_test" msgid="5733604021077701555">"HTTP ക്ലയന്റ് പരിശോധന:"</string>
     <string name="ping_test_label" msgid="7255376471490860631">"പിംഗ് പരിശോധന പ്രവർത്തിപ്പിക്കുക"</string>
     <string name="radio_info_smsc_label" msgid="6399460520126501354">"SMSC:"</string>
@@ -627,6 +627,7 @@
     <string name="wifi_menu_p2p" msgid="7619851399250896797">"വൈഫൈ ഡയറക്‌ട്"</string>
     <string name="wifi_menu_scan" msgid="1470911530412095868">"സ്‌കാൻ ചെയ്യുക"</string>
     <string name="wifi_menu_advanced" msgid="7522252991919573664">"വിപുലമായത്"</string>
+    <string name="wifi_menu_configure" msgid="6150926852602171938">"കോൺഫിഗർ ചെയ്യുക"</string>
     <string name="wifi_menu_connect" msgid="4996220309848349408">"നെ‌റ്റ്‌വർക്കിൽ കണക്‌റ്റുചെയ്യുക"</string>
     <string name="wifi_menu_remember" msgid="8814185749388713796">"നെറ്റ്‌വർക്ക് ഓർമ്മിക്കുക"</string>
     <string name="wifi_menu_forget" msgid="8736964302477327114">"നെറ്റ്‌വർക്ക് മറക്കുക"</string>
@@ -707,6 +708,7 @@
     <string name="wifi_connect_failed_message" product="default" msgid="2185803140161396572">"ഫോൺ ഈ വൈഫൈ നെറ്റ്‌വർക്കിൽ കണക്റ്റുചെയ്യാനായില്ല."</string>
     <string name="wifi_saved_access_points_titlebar" msgid="2996149477240134064">"സംരക്ഷിച്ച നെറ്റ്‌വർക്ക്"</string>
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"വിപുലമായ വൈഫൈ"</string>
+    <string name="wifi_configure_titlebar" msgid="7977475161589303074">"വൈഫൈ കോൺഫിഗർ ചെയ്യുക"</string>
     <string name="wifi_setting_frequency_band_title" msgid="3655327399028584656">"വൈഫൈ ആവൃത്തി ബാൻഡ്"</string>
     <string name="wifi_setting_frequency_band_summary" msgid="3250740757118009784">"പ്രവർത്തനത്തിന്റെ ആവൃത്തി പരിധി വ്യക്തമാക്കുക"</string>
     <string name="wifi_setting_frequency_band_error" msgid="837281974489794378">"ആവൃത്തി ബാൻഡ് സജ്ജീകരിക്കുന്നതിൽ ഒരു പ്രശ്നമുണ്ടായിരുന്നു."</string>
@@ -829,17 +831,6 @@
     <string name="brightness_summary" msgid="838917350127550703">"സ്‌ക്രീനിന്റെ തെളിച്ചം ക്രമീകരിക്കുക"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"അനുയോജ്യമായ തെളിച്ചം"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"ലഭ്യമായ പ്രകാശത്തിനായി തെളിച്ചനില അനുരൂപമാക്കുക"</string>
-    <string name="night_mode_title" msgid="2594133148531256513">"നൈറ്റ് മോഡ്"</string>
-    <string name="night_mode_summary" msgid="9196605054622017193">"%s"</string>
-    <string name="night_mode_no" msgid="9171772244775838901">"പ്രവർത്തനരഹിതമാക്കി"</string>
-    <string name="night_mode_yes" msgid="2218157265997633432">"എല്ലായ്‌പ്പോഴും ഓണാണ്"</string>
-    <string name="night_mode_auto" msgid="7508348175804304327">"ഓട്ടോമാറ്റിക്"</string>
-    <string name="convert_to_file_encryption" msgid="3060156730651061223">"ഫയൽ എൻക്രിപ്ഷനിലേക്ക് പരിവർത്തിപ്പിക്കുക"</string>
-    <string name="convert_to_file_encryption_enabled" msgid="2861258671151428346">"പരിവർത്തിപ്പിക്കുക…"</string>
-    <string name="convert_to_file_encryption_done" msgid="7859766358000523953">"ഇതിനകം തന്നെ ഫയൽ എൻക്രിപ്റ്റ് ചെയ്തു"</string>
-    <string name="title_convert_fbe" msgid="1263622876196444453">"ഫയൽ അധിഷ്ഠിത എൻക്രിപ്ഷനിലേക്ക് പരിവർത്തിപ്പിക്കുന്നു"</string>
-    <string name="convert_to_fbe_warning" msgid="6139067817148865527">"ഡാറ്റാ വിഭജനം, ഫയൽ അധിഷ്ഠിത എൻക്രിപ്ഷനിലേക്ക് പരിവർത്തിപ്പിക്കുക.\n !!മുന്നറിയിപ്പ്!! ഇങ്ങനെ ചെയ്താൽ നിങ്ങളുടെ എല്ലാ ഡാറ്റയും മായ്ക്കപ്പെടും.\n ഈ ഫീച്ചറിപ്പോൾ ആൽഫാ ഘട്ടത്തിലാണ്, ശരിയായി പ്രവർത്തിച്ചേക്കില്ല.\n തുടരുന്നതിന് \'വൈപ്പുചെയ്ത് പരിവർത്തിപ്പിക്കുക...\' അമർത്തുക."</string>
-    <string name="button_convert_fbe" msgid="5152671181309826405">"വൈപ്പുചെയ്ത് പരിവർത്തിപ്പിക്കുക…"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"സുഷുപ്തിയിലാക്കുക"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"സ്ക്രീൻ ഓഫാക്കുന്നു"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"നിഷ്ക്രിയത്വത്തിന് <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> കഴിഞ്ഞ്"</string>
@@ -1406,8 +1397,6 @@
     <string name="no_default_apps" msgid="2915315663141025400">"സ്ഥിര അപ്ലിക്കേഷനുകളൊന്നുമില്ല."</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"സംഭരണ ഉപയോഗം"</string>
     <string name="storageuse_settings_summary" msgid="3748286507165697834">"അപ്ലിക്കേഷൻ ഉപയോഗിച്ച സ്റ്റോറേജ്  കാണുക"</string>
-    <string name="runningservices_settings_title" msgid="8097287939865165213">"പ്രവർത്തിക്കുന്ന സേവനങ്ങൾ"</string>
-    <string name="runningservices_settings_summary" msgid="854608995821032748">"നിലവിൽ പ്രവർത്തിക്കുന്ന സേവങ്ങൾ കാണുക, നിയന്ത്രിക്കുക"</string>
     <string name="service_restarting" msgid="2242747937372354306">"പുനരാരംഭിക്കുന്നു"</string>
     <string name="cached" msgid="1059590879740175019">"കാഷെ ചെയ്ത പശ്ചാത്തല പ്രോസസ്സ്"</string>
     <string name="no_running_services" msgid="2059536495597645347">"ഒന്നും പ്രവർത്തിക്കുന്നില്ല."</string>
@@ -1517,68 +1506,6 @@
     <string name="onscreen_keyboard_settings_summary" msgid="5841558383556238653">"ഓൺ സ്ക്രീൻ കീബോർഡ് ക്രമീകരണങ്ങൾ"</string>
     <string name="builtin_keyboard_settings_title" msgid="7688732909551116798">"ഭൗതിക കീബോർഡ്"</string>
     <string name="builtin_keyboard_settings_summary" msgid="2392531685358035899">"ഭൗതിക കീബോർഡ് ക്രമീകരണങ്ങൾ"</string>
-    <string name="development_settings_title" msgid="215179176067683667">"ഡവലപ്പർ ഓ‌പ്ഷനുകൾ"</string>
-    <string name="development_settings_summary" msgid="1815795401632854041">"അപ്ലിക്കേഷൻ വികസനത്തിന് ഓപ്ഷനുകൾ സജ്ജീകരിക്കുക"</string>
-    <string name="development_settings_not_available" msgid="4308569041701535607">"ഈ ഉപയോക്താവിനായി ഡവലപ്പർ ഓപ്‌ഷനുകൾ ലഭ്യമല്ല"</string>
-    <string name="vpn_settings_not_available" msgid="956841430176985598">"ഈ ഉപയോക്താവിനായി VPN ക്രമീകരണങ്ങൾ ലഭ്യമല്ല"</string>
-    <string name="tethering_settings_not_available" msgid="6765770438438291012">"ഈ ഉപയോക്താവിനായി ടെതറിംഗ് ക്രമീകരണങ്ങൾ ലഭ്യമല്ല"</string>
-    <string name="apn_settings_not_available" msgid="7873729032165324000">"ആക്‌സസ്സ് പോയിന്റ് നെയിം ക്രമീകരണങ്ങൾ ഈ ഉപയോക്താവിനായി ലഭ്യമല്ല"</string>
-    <string name="enable_adb" msgid="7982306934419797485">"USB ഡീബഗ്ഗിംഗ്"</string>
-    <string name="enable_adb_summary" msgid="4881186971746056635">"USB കണ‌ക്റ്റുചെയ്‌തിരിക്കുമ്പോൾ ഡീബഗ് മോഡ്"</string>
-    <string name="clear_adb_keys" msgid="4038889221503122743">"USB ഡീബഗ്ഗിംഗ് അംഗീകാരം പിൻവലിക്കുക"</string>
-    <string name="bugreport_in_power" msgid="7923901846375587241">"ബഗ് റിപ്പോർട്ട് കുറുക്കുവഴി"</string>
-    <string name="bugreport_in_power_summary" msgid="1778455732762984579">"ബഗ് റിപ്പോർട്ട് എടുക്കുന്നതിന് പവർ മെനുവിൽ ഒരു ബട്ടൺ കാണിക്കുക"</string>
-    <string name="keep_screen_on" msgid="1146389631208760344">"സജീവമായി തുടരുക"</string>
-    <string name="keep_screen_on_summary" msgid="2173114350754293009">"ചാർജ്ജുചെയ്യുമ്പോൾ സ്‌ക്രീൻ ഒരിക്കലും സുഷുപ്തിയിലാകില്ല"</string>
-    <string name="bt_hci_snoop_log" msgid="3340699311158865670">"ബ്ലൂടൂത്ത് HCI സ്‌നൂപ്പ് ലോഗ് സജീവമാക്കൂ"</string>
-    <string name="bt_hci_snoop_log_summary" msgid="730247028210113851">"ഒരു ഫയലിൽ എല്ലാ ബ്ലൂടൂത്ത് HCI പാക്കറ്റുകളും ക്യാപ്‌ചർ ചെയ്യുക"</string>
-    <string name="oem_unlock_enable" msgid="6040763321967327691">"OEM അൺലോക്കുചെയ്യൽ"</string>
-    <string name="oem_unlock_enable_summary" msgid="4720281828891618376">"അൺലോക്കാകാൻ ബൂട്ട്‌ലോഡറിനെ അനുവദിക്കുക"</string>
-    <string name="confirm_enable_oem_unlock_title" msgid="4802157344812385674">"OEM അൺലോക്കുചെയ്യൽ അനുവദിക്കണോ?"</string>
-    <string name="confirm_enable_oem_unlock_text" msgid="5517144575601647022">"മുന്നറിയിപ്പ്: ഈ ക്രമീകരണം ഓണായിരിക്കുമ്പോൾ, ഉപകരണ സുരക്ഷാ ഫീച്ചറുകൾ ഈ ഉപകരണത്തിൽ പ്രവർത്തിക്കില്ല."</string>
-    <string name="select_logd_size_title" msgid="7433137108348553508">"ലോഗർ ബഫർ വലുപ്പം"</string>
-    <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"ഓരോ ലോഗ് ബഫറിനും വലുപ്പം തിരഞ്ഞെടുക്കൂ"</string>
-    <string name="mock_location_app" msgid="7966220972812881854">"മോക്ക്‌ലൊക്കേഷൻ ആപ്പ് തിരഞ്ഞെടുക്കൂ"</string>
-    <string name="mock_location_app_not_set" msgid="809543285495344223">"വ്യാജ ലൊക്കേഷൻ ആപ്പ് സജ്ജമാക്കിയിട്ടില്ല"</string>
-    <string name="mock_location_app_set" msgid="8966420655295102685">"വ്യാജ ലൊക്കേഷൻ ആപ്പ്: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <string name="debug_view_attributes" msgid="6485448367803310384">"ആട്രിബ്യൂട്ട് പരിശോധന കാണൽ സജീവമാക്കൂ"</string>
-    <string name="debug_networking_category" msgid="7044075693643009662">"നെറ്റ്‍വര്‍ക്കിംഗ്"</string>
-    <string name="wifi_display_certification" msgid="8611569543791307533">"വയർലെസ് ഡിസ്‌പ്ലേ സർട്ടിഫിക്കേഷൻ"</string>
-    <string name="wifi_verbose_logging" msgid="4203729756047242344">"വൈഫൈ വെർബോസ് ലോഗിംഗ് പ്രവർത്തനക്ഷമമാക്കുക"</string>
-    <string name="wifi_aggressive_handover" msgid="9194078645887480917">"സെല്ലുലാർ ഹാൻഡ്ഓവറിലേക്ക് വൈഫൈ അഗ്രസ്സീവാക്കുക"</string>
-    <string name="wifi_allow_scan_with_traffic" msgid="3601853081178265786">"എപ്പോഴും വൈഫൈ റോം സ്‌‌കാൻ അനുവദിക്കൂ"</string>
-    <string name="legacy_dhcp_client" msgid="694426978909127287">"പഴയ DHCP ക്ലയന്റ് ഉപയോഗിക്കുക"</string>
-    <string name="mobile_data_always_on" msgid="7745605759775320362">"സെല്ലുലാർ ഡാറ്റ എല്ലായ്‌പ്പോഴും സജീവം"</string>
-    <string name="wifi_display_certification_summary" msgid="1155182309166746973">"വയർലെസ് ഡിസ്‌പ്ലേ സർട്ടിഫിക്കേഷനായി ഓപ്‌ഷനുകൾ ദൃശ്യമാക്കുക"</string>
-    <string name="wifi_verbose_logging_summary" msgid="6615071616111731958">"വൈഫൈ പിക്കറിൽ ഓരോ SSID RSSI പ്രകാരം കാണിക്കാൻ വൈഫൈ ലോഗിംഗ് നില വർദ്ധിപ്പിക്കുക"</string>
-    <string name="wifi_aggressive_handover_summary" msgid="6328455667642570371">"പ്രവർത്തനക്ഷമമായിരിക്കുമ്പോൾ, വൈഫൈ സിഗ്‌നൽ കുറവായിരിക്കുന്ന സമയത്ത് സെല്ലുലാറിലേക്ക് ഡാറ്റ കണക്ഷൻ മുഖേന കൈമാറുന്നതിൽ വൈഫൈ കൂടുതൽ പ്രവർത്തനക്ഷമമാകും"</string>
-    <string name="wifi_allow_scan_with_traffic_summary" msgid="2575101424972686310">"ഇന്റർഫേസിലെ ഡാറ്റ ട്രാഫിക്ക് സാന്നിദ്ധ്യത്തിന്റെ കണക്ക് അടിസ്ഥാനമാക്കി വൈഫൈ റോം സ്‌കാനുകൾ അനുവദിക്കുക/അനുവദിക്കാതിരിക്കുക"</string>
-    <string name="select_logd_size_title" msgid="7433137108348553508">"ലോഗർ ബഫർ വലുപ്പം"</string>
-    <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"ഓരോ ലോഗ് ബഫറിനും വലുപ്പം തിരഞ്ഞെടുക്കൂ"</string>
-    <string name="select_usb_configuration_title" msgid="2649938511506971843">"USB കോൺഫിഗറേഷൻ തിരഞ്ഞെടുക്കൂ"</string>
-    <string name="select_usb_configuration_dialog_title" msgid="6385564442851599963">"USB കോൺഫിഗറേഷൻ തിരഞ്ഞെടുക്കൂ"</string>
-    <string name="allow_mock_location" msgid="2787962564578664888">"വ്യാജ ലൊക്കേഷനുകൾ അനുവദിക്കുക"</string>
-    <string name="allow_mock_location_summary" msgid="317615105156345626">"വ്യാജ ലൊക്കേഷനുകൾ അനുവദിക്കുക"</string>
-    <string name="debug_view_attributes" msgid="6485448367803310384">"ആട്രിബ്യൂട്ട് പരിശോധന കാണൽ സജീവമാക്കൂ"</string>
-    <string name="legacy_dhcp_client_summary" msgid="163383566317652040">"പുതിയ Android DHCP ക്ലയന്റിനുപകരം Lollipop-ൽ നിന്ന് DHCP ക്ലയന്റ് ഉപയോഗിക്കുക."</string>
-    <string name="mobile_data_always_on_summary" msgid="8149773901431697910">"വൈഫൈ സജീവമാണെങ്കിലും, മൊബൈൽ ഡാറ്റ സജീവമായി നിർത്തുക (വേഗത്തിൽ നെറ്റ്‌വർക്ക് മാറുന്നതിനായി)."</string>
-    <string name="adb_warning_title" msgid="6234463310896563253">"USB ഡീബഗ്ഗുചെയ്യാൻ അനുവദിക്കണോ?"</string>
-    <string name="adb_warning_message" msgid="7316799925425402244">"USB ഡീബഗ്ഗിംഗ് വികസന ആവശ്യകതകൾക്ക് മാത്രമുള്ളതാണ്. നിങ്ങളുടെ കമ്പ്യൂട്ടറിനും ഉപകരണത്തിനുമിടയിൽ ഡാറ്റ പകർത്തുന്നതിനും അറിയിപ്പില്ലാതെ തന്നെ നിങ്ങളുടെ ഉപകരണത്തിൽ അപ്ലിക്കേഷനുകൾ ഇൻസ്‌റ്റാളുചെയ്യുന്നതിനും ലോഗ് ഡാറ്റ റീഡുചെയ്യുന്നതിനും ഇത് ഉപയോഗിക്കുക."</string>
-    <string name="adb_keys_warning_message" msgid="5659849457135841625">"നിങ്ങൾ മുമ്പ് അംഗീകരിച്ച എല്ലാ കമ്പ്യൂട്ടറുകളിൽ നിന്നും USB ഡീബഗ്ഗുചെയ്യുന്നതിനുള്ള ആക്‌സസ്സ് പിൻവലിക്കണോ?"</string>
-    <string name="dev_settings_warning_title" msgid="7244607768088540165">"വികസന ക്രമീകരണങ്ങൾ അനുവദിക്കണോ?"</string>
-    <string name="dev_settings_warning_message" msgid="2298337781139097964">"ഈ ക്രമീകരണങ്ങൾ വികസന ഉപയോഗത്തിന് മാത്രമായുള്ളതാണ്. അവ നിങ്ങളുടെ ഉപകരണവും അതിലെ അപ്ലിക്കേഷനുകളും തകരാറിലാക്കുന്നതിനോ തെറ്റായി പ്രവർത്തിക്കുന്നതിനോ ഇടയാക്കാം."</string>
-    <string name="verify_apps_over_usb_title" msgid="4177086489869041953">"USB വഴി ആപ്സ് പരിശോധിച്ചുറപ്പിക്കൂ"</string>
-    <string name="verify_apps_over_usb_summary" msgid="9164096969924529200">"കേടാക്കുന്ന പ്രവർത്തനരീതിയുള്ള ADB/ADT വഴി ഇൻസ്റ്റാളുചെയ്‌ത അപ്ലിക്കേഷനുകൾ പരിശോധിക്കുക."</string>
-    <string name="enforce_read_external_title" product="nosdcard" msgid="7733257271454664956">"USB സ്റ്റോറേജ്  പരിരക്ഷിക്കുക"</string>
-    <string name="enforce_read_external_summary" product="nosdcard" msgid="1798088409346660567">"USB കാർഡ് റീഡുചെയ്യാൻ അപ്ലിക്കേഷനുകൾ അനുമതി അഭ്യർത്ഥിക്കേണ്ടതുണ്ട്"</string>
-    <string name="enforce_read_external_confirm_title" product="nosdcard" msgid="2112813067171502209">"USB സ്റ്റോറേജ്  പരിരക്ഷിക്കണോ?"</string>
-    <string name="enforce_read_external_confirm_message" product="nosdcard" msgid="605444326545922054">"USB കാർഡ് പരിരക്ഷിച്ചിരിക്കുമ്പോൾ, ബാഹ്യ സംഭരണത്തിൽ നിന്നും ഡാറ്റ റീഡുചെയ്യാൻ അപ്ലിക്കേഷനുകൾ അനുമതി അഭ്യർത്ഥിക്കേണ്ടതുണ്ട്.\n\nചില അപ്ലിക്കേഷനുകൾ, അവയുടെ ഡവലപ്പർമാർ അപ്‌ഡേറ്റുചെയ്യുന്നതുവരെ പ്രവർത്തിക്കാനിടയില്ല."</string>
-    <string name="enforce_read_external_title" product="default" msgid="2226662853797940829">"SD കാർഡ് പരിരക്ഷിക്കുക"</string>
-    <string name="enforce_read_external_summary" product="default" msgid="2750027486786530064">"SD കാർഡ് റീഡുചെയ്യാൻ അപ്ലിക്കേഷനുകൾ അനുമതി അഭ്യർത്ഥിക്കേണ്ടതുണ്ട്"</string>
-    <string name="enforce_read_external_confirm_title" product="default" msgid="273220585729800783">"SD കാർഡ് പരിരക്ഷിക്കണോ?"</string>
-    <string name="enforce_read_external_confirm_message" product="default" msgid="3858482712337574407">"SD കാർഡ് പരിരക്ഷിച്ചിരിക്കുമ്പോൾ, ബാഹ്യ സംഭരണത്തിൽ നിന്നും ഡാറ്റ റീഡുചെയ്യാൻ അപ്ലിക്കേഷനുകൾ അനുമതി അഭ്യർത്ഥിക്കേണ്ടതുണ്ട്.\n\nചില അപ്ലിക്കേഷനുകൾ, അവയുടെ ഡവലപ്പർമാർ അപ്‌ഡേറ്റുചെയ്യുന്നതുവരെ പ്രവർത്തിക്കാനിടയില്ല."</string>
-    <string name="enable_terminal_title" msgid="95572094356054120">"പ്രാദേശിക ടെർമിനൽ"</string>
-    <string name="enable_terminal_summary" msgid="67667852659359206">"പ്രാദേശിക ഷെൽ ആക്‌സസ് നൽകുന്ന ടെർമിനൽ അപ്ലിക്കേഷൻ പ്രവർത്തനക്ഷമമാക്കുക"</string>
     <string name="gadget_picker_title" msgid="98374951396755811">"ഗാഡ്ജറ്റ് തിരഞ്ഞെടുക്കുക"</string>
     <string name="widget_picker_title" msgid="9130684134213467557">"വിജറ്റ് തിരഞ്ഞെടുക്കുക"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="2538303018392590627">"വിജറ്റ് സൃഷ്ടിച്ച് ആക്‌സസ്സ് അനുവദിക്കണോ?"</string>
@@ -1619,18 +1546,10 @@
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"സ്‌പർശിച്ച് കുറെനേരം അമർത്തിപ്പിടിക്കൂ"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"വർണ്ണവൈപരീത്യം"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="8658240868230680912">"(പരീക്ഷണാത്മകം) പ്രകടനത്തെ ബാധിച്ചേക്കാം"</string>
-    <string name="accessibility_display_daltonizer_preference_title" msgid="5800761362678707872">"വർണ്ണം ക്രമീകരിക്കൽ"</string>
-    <string name="accessibility_display_daltonizer_preference_subtitle" msgid="3484969015295282911">"ഈ ഫീച്ചർ പരീക്ഷണാത്മകമായതിനാൽ പ്രകടനത്തെ ബാധിച്ചേക്കാം."</string>
     <string name="accessibility_autoclick_preference_title" msgid="7014499339068449623">"പോയിന്റർ ചലിക്കുന്നത് നിന്നതിന് ശേഷം ക്ലിക്കുചെയ്യുക"</string>
     <string name="accessibility_autoclick_delay_preference_title" msgid="3962261178385106006">"ക്ലിക്കിന് മുമ്പുള്ള കാലതാമസം"</string>
     <string name="enable_quick_setting" msgid="2366999897816894536">"ദ്രുത്ര ക്രമീകരണങ്ങളിൽ ദൃശ്യമാക്കുക"</string>
     <string name="daltonizer_type" msgid="1124178250809091080">"തിരുത്തൽ മോഡ്"</string>
-    <string name="daltonizer_type_overridden" msgid="3116947244410245916">"<xliff:g id="TITLE">%1$s</xliff:g> ഉപയോഗിച്ച് അസാധുവാക്കി"</string>
-    <string name="daltonizer_mode_disabled" msgid="7482661936053801862">"പ്രവർത്തനരഹിതമാക്കി"</string>
-    <string name="daltonizer_mode_monochromacy" msgid="8485709880666106721">"മോണോക്രോമസി"</string>
-    <string name="daltonizer_mode_deuteranomaly" msgid="5475532989673586329">"വർണ്ണാന്ധത (ചുവപ്പ്-പച്ച‌)"</string>
-    <string name="daltonizer_mode_protanomaly" msgid="8424148009038666065">"പ്രോട്ടാനോമലി (ചുവപ്പ്-പച്ച)"</string>
-    <string name="daltonizer_mode_tritanomaly" msgid="481725854987912389">"ട്രിട്ടാനോമലി (നീല-മഞ്ഞ)"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_extremely_short_delay" formatted="false" msgid="7340347830562315800">
       <item quantity="other">തീരെ ചെറിയ കാലതാമസം (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> മിസെ)</item>
       <item quantity="one">തീരെ ചെറിയ കാലതാമസം (<xliff:g id="CLICK_DELAY_LABEL_0">%1$d</xliff:g> മിസെ)</item>
@@ -1943,12 +1862,6 @@
     <string name="auto_restore_summary" msgid="4235615056371993807">"ഒരു അപ്ലിക്കേഷൻ വീണ്ടും ഇൻസ്റ്റാൾ ചെയ്യുമ്പോൾ, ബാക്കപ്പുചെയ്‌ത ക്രമീകരണങ്ങളും ഡാറ്റയും പുനഃസ്ഥാപിക്കുക"</string>
     <string name="backup_inactive_title" msgid="5355557151569037197">"ബാക്കപ്പ് സേവനം നിർജ്ജീവമാണ്."</string>
     <string name="backup_configure_account_default_summary" msgid="2436933224764745553">"നിലവിൽ അക്കൗണ്ടുകളൊന്നും ബാക്കപ്പ് ചെയ്ത ഡാറ്റ സംഭരിക്കുന്നില്ല"</string>
-    <string name="local_backup_password_title" msgid="3860471654439418822">"ഡെ‌സ്‌ക്ടോപ്പ് ബാക്കപ്പ് പാസ്‌വേഡ്"</string>
-    <string name="local_backup_password_summary_none" msgid="6951095485537767956">"ഡെസ്‌ക്‌ടോപ്പ് പൂർണ്ണ ബാക്കപ്പുകൾ നിലവിൽ പരിരക്ഷിച്ചിട്ടില്ല"</string>
-    <string name="local_backup_password_summary_change" msgid="2731163425081172638">"ഡെസ്‌ക്‌ടോപ്പ് പൂർണ്ണ ബാക്കപ്പുകൾക്കായി പാസ്‌വേഡുകൾ മാറ്റാനോ നീക്കംചെയ്യാനോ സ്‌പർശിക്കുക"</string>
-    <string name="local_backup_password_toast_success" msgid="582016086228434290">"പുതിയ ബാക്കപ്പ് പാസ്‌വേഡ് സജ്ജമാക്കി"</string>
-    <string name="local_backup_password_toast_confirmation_mismatch" msgid="7805892532752708288">"പുതിയ പാസ്‌വേഡും സ്ഥിരീകരണവും പൊരുത്തപ്പെടുന്നില്ല"</string>
-    <string name="local_backup_password_toast_validation_failure" msgid="5646377234895626531">"ബാക്കപ്പ് പാസ്‌വേഡ് സജ്ജമാക്കുന്നതിൽ പരാജയപ്പെട്ടു"</string>
     <string name="backup_erase_dialog_title" msgid="1027640829482174106"></string>
     <string name="backup_erase_dialog_message" msgid="5221011285568343155">"Google സെർവറുകളിൽ നിങ്ങളുടെ വൈഫൈ പാസ്‌വേഡുകൾ, ബുക്ക്‌മാർക്കുകൾ, മറ്റ് ക്രമീകരണങ്ങൾ, അപ്ലിക്കേഷൻ ഡാറ്റ എന്നിവ ബാക്കപ്പുചെയ്യുന്നത് അവസാനിപ്പിക്കുകയും അതിലെ എല്ലാ പകർപ്പുകളും മായ്‌ക്കുകയും ചെയ്യണോ?"</string>
     <string name="fullbackup_erase_dialog_message" msgid="694766389396659626">"ഉപകരണ വിവരവും (വൈഫൈ പാസ്‌വേഡുകളും കോൾ ചരിത്രവും പോലുള്ളവ) ആപ്പ് വിവരവും (ആപ്പ്‌സ് സംഭരിച്ച ക്രമീകരണവും ഫയലുകളും പോലുള്ളവ) ബാക്കപ്പുചെയ്യുന്നത് നിർത്തുകയും വിദൂര സെർവറുകളിലെ എല്ലാ പകർപ്പുകളും മായ്‌ക്കുകയും ചെയ്യണോ?"</string>
@@ -2064,66 +1977,6 @@
     <string name="misc_files_selected_count" msgid="4647048020823912088">"<xliff:g id="TOTAL">%2$d</xliff:g>-ൽ <xliff:g id="NUMBER">%1$d</xliff:g> എണ്ണം തിരഞ്ഞടുത്തു"</string>
     <string name="misc_files_selected_count_bytes" msgid="2876232009069114352">"<xliff:g id="TOTAL">%2$s</xliff:g>-ൽ <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
     <string name="select_all" msgid="1562774643280376715">"എല്ലാം തിരഞ്ഞെടുക്കുക"</string>
-    <string name="hdcp_checking_title" msgid="8605478913544273282">"HDCP പരിശോധന"</string>
-    <string name="hdcp_checking_dialog_title" msgid="5141305530923283">"HDCP ചെക്കിംഗ്‌രീതി സജ്ജമാക്കുക"</string>
-    <string name="debug_debugging_category" msgid="6781250159513471316">"ഡീബഗ് ചെയ്യുന്നു"</string>
-    <string name="debug_app" msgid="8349591734751384446">"ഡീബഗ് അപ്ലിക്കേഷൻ തിരഞ്ഞെടുക്കുക"</string>
-    <string name="debug_app_not_set" msgid="718752499586403499">"ഡീബഗ് അപ്ലിക്കേഷനുകളൊന്നും സജ്ജമാക്കിയിട്ടില്ല"</string>
-    <string name="debug_app_set" msgid="2063077997870280017">"ഡീബഗ്ഗുചെയ്യൽ അപ്ലിക്കേഷൻ: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <string name="select_application" msgid="5156029161289091703">"ആപ്പ് തിരഞ്ഞെടുക്കൂ"</string>
-    <string name="no_application" msgid="2813387563129153880">"ഒന്നുമില്ല"</string>
-    <string name="wait_for_debugger" msgid="1202370874528893091">"ഡീബഗ്ഗറിനായി കാത്തിരിക്കുക"</string>
-    <string name="wait_for_debugger_summary" msgid="1766918303462746804">"ഡീബഗ്ഗുചെയ്‌ത അപ്ലിക്കേഷൻ നിർവ്വഹണത്തിനുമുമ്പായി അറ്റാച്ചുചെയ്യുന്നതിന് ഡീബഗ്ഗറിനായി കാത്തിരിക്കുന്നു."</string>
-    <string name="debug_input_category" msgid="1811069939601180246">"ഇൻപുട്ട്"</string>
-    <string name="debug_drawing_category" msgid="6755716469267367852">"ഡ്രോയിംഗ്"</string>
-    <string name="debug_hw_drawing_category" msgid="6220174216912308658">"ഹാർഡ്‌വെയർ ത്വരിതപ്പെടുത്തിയ റെൻഡർ ചെയ്യൽ"</string>
-    <string name="media_category" msgid="4388305075496848353">"മീഡിയ"</string>
-    <string name="debug_monitoring_category" msgid="7640508148375798343">"മോണിറ്ററിംഗ്"</string>
-    <string name="strict_mode" msgid="1938795874357830695">"ഫോഴ്സ്‌മോഡ് സജീവമാക്കി"</string>
-    <string name="strict_mode_summary" msgid="142834318897332338">"പ്രധാന ത്രെഡിൽ അപ്ലിക്കേഷനുകൾ ദൈർഘ്യമേറിയ പ്രവർത്തനങ്ങൾ നടത്തുമ്പോൾ സ്‌ക്രീൻ ഫ്ലാഷ് ചെയ്യുക"</string>
-    <string name="pointer_location" msgid="6084434787496938001">"പോയിന്റർ ലൊക്കേഷൻ"</string>
-    <string name="pointer_location_summary" msgid="840819275172753713">"സ്‌ക്രീൻ ഓവർലേ നിലവിലെ ടച്ച് ഡാറ്റ ദൃശ്യമാക്കുന്നു"</string>
-    <string name="show_touches" msgid="1356420386500834339">"ടച്ചുകൾ ദൃശ്യമാക്കുക"</string>
-    <string name="show_touches_summary" msgid="6684407913145150041">"ടച്ചുകൾക്കുള്ള ദൃശ്യ ഫീഡ്ബാക്ക് ദൃശ്യമാക്കുക"</string>
-    <string name="show_screen_updates" msgid="5470814345876056420">"സർഫേസ് അപ്‌ഡേറ്റ് കാണിക്കൂ"</string>
-    <string name="show_screen_updates_summary" msgid="2569622766672785529">"മുഴുവൻ വിൻഡോ സർഫേസുകളും അപ്‌ഡേറ്റുചെയ്‌തുകഴിയുമ്പോൾ അവ ഫ്ലാഷുചെയ്യുക"</string>
-    <string name="show_hw_screen_updates" msgid="5036904558145941590">"GPU കാഴ്ച അപ്‌ഡേറ്റ് കാണിക്കൂ"</string>
-    <string name="show_hw_screen_updates_summary" msgid="1115593565980196197">"GPU ഉപയോഗിച്ച് വലിക്കുമ്പോൾ വിൻഡോകൾക്കുള്ളിൽ കാഴ്‌ചകൾ ഫ്ലാഷുചെയ്യുക"</string>
-    <string name="show_hw_layers_updates" msgid="5645728765605699821">"ഹാർഡ്‌വെയർ ലേയർ അപ്‌ഡേറ്റ് കാണിക്കൂ"</string>
-    <string name="show_hw_layers_updates_summary" msgid="5296917233236661465">"ഹാർഡ്‌വെയർ ലേയറുകളുടെ അപ്‌ഡേറ്റുകൾ പൂർത്തിയാകുമ്പോൾ അവ പച്ച നിറത്തിൽ പ്രകാശിപ്പിക്കുക"</string>
-    <string name="debug_hw_overdraw" msgid="2968692419951565417">"GPU ഓവർഡ്രോ ഡീബഗ്ഗുചെയ്യുക"</string>
-    <string name="disable_overlays" msgid="2074488440505934665">"HW ഓവർലേ നിഷ്ക്രിയമാക്കൂ"</string>
-    <string name="disable_overlays_summary" msgid="3578941133710758592">"സ്‌ക്രീൻ കമ്പോസിറ്റുചെയ്യലിനായി എല്ലായ്‌പ്പോഴും GPU ഉപയോഗിക്കുക"</string>
-    <string name="simulate_color_space" msgid="6745847141353345872">"വർണ്ണ സ്‌പെയ്‌സ് പ്രവർത്തിപ്പിക്കുക"</string>
-    <string name="enable_opengl_traces_title" msgid="6790444011053219871">"OpenGL ട്രെയ്‌സ് സജീവമാക്കൂ"</string>
-    <string name="usb_audio_disable_routing" msgid="8114498436003102671">"USB ഓഡിയോ റൂട്ടിംഗ് പ്രവർത്തനരഹിതമാക്കുക"</string>
-    <string name="usb_audio_disable_routing_summary" msgid="980282760277312264">"USB ഓഡിയോ പെരിഫറലുകളിലേക്കുള്ള യാന്ത്രിക റൂട്ടിംഗ് പ്രവർത്തനരഹിതമാക്കുക"</string>
-    <string name="debug_layout" msgid="5981361776594526155">"ലേഔട്ട് ബൗണ്ട് കാണിക്കൂ"</string>
-    <string name="debug_layout_summary" msgid="2001775315258637682">"ക്ലിപ്പ് ബൗണ്ടുകൾ, മാർജിനുകൾ തുടങ്ങിയവ ദൃശ്യമാക്കുക"</string>
-    <string name="force_rtl_layout_all_locales" msgid="2259906643093138978">"RTL ലേഔട്ട് ഡയറക്ഷൻ നിർബന്ധമാക്കുക"</string>
-    <string name="force_rtl_layout_all_locales_summary" msgid="9192797796616132534">"എല്ലാ ഭാഷകൾക്കുമായി സ്‌ക്രീൻ ലേഔട്ട് ഡയറക്ഷൻ RTL-ലേക്ക് നിർബന്ധമാക്കുക"</string>
-    <string name="show_cpu_usage" msgid="2389212910758076024">"CPU ഉപയോഗം ദൃശ്യമാക്കുക"</string>
-    <string name="show_cpu_usage_summary" msgid="2113341923988958266">"സ്ക്രീൻ ഓവർലേ നിലവിലെ CPU ഉപയോഗം ദൃശ്യമാക്കുന്നു"</string>
-    <string name="force_hw_ui" msgid="6426383462520888732">"GPU റെൻഡറിംഗ് ഫോഴ്സ്ചെയ്യുക"</string>
-    <string name="force_hw_ui_summary" msgid="5535991166074861515">"2d ഡ്രോയിംഗിനായുള്ള നിരബന്ധിത GPU ഉപയോഗം"</string>
-    <string name="force_msaa" msgid="7920323238677284387">"4x MSAA നിർബന്ധമാക്കുക"</string>
-    <string name="force_msaa_summary" msgid="9123553203895817537">"OpenGL ES 2.0 അപ്ലിക്കേഷനുകളിൽ 4x MSAA പ്രവർത്തനക്ഷമമാക്കുക"</string>
-    <string name="show_non_rect_clip" msgid="505954950474595172">"ചതുരാകൃതിയിലല്ലാത്ത ക്ലിപ്പ്‌പ്രവർത്തനം ഡീബഗുചെയ്യൂ"</string>
-    <string name="track_frame_time" msgid="6146354853663863443">"പ്രൊഫൈൽ GPU റെൻഡർചെയ്യൽ"</string>
-    <string name="window_animation_scale_title" msgid="6162587588166114700">"വിൻഡോ ആനിമേഷൻ സ്‌കെയിൽ"</string>
-    <string name="transition_animation_scale_title" msgid="387527540523595875">"സംക്രമണ ആനിമേഷൻ സ്‌കെയിൽ"</string>
-    <string name="animator_duration_scale_title" msgid="3406722410819934083">"ആനിമേറ്റർ ദൈർഘ്യ സ്‌കെയിൽ"</string>
-    <string name="overlay_display_devices_title" msgid="5364176287998398539">"രണ്ടാം ഡിസ്‌പ്ലേകൾ പ്രവർത്തിപ്പിക്കുക"</string>
-    <string name="debug_applications_category" msgid="4206913653849771549">"അപ്ലിക്കേഷനുകൾ"</string>
-    <string name="immediately_destroy_activities" msgid="1579659389568133959">"പ്രവർത്തനങ്ങൾ സൂക്ഷിക്കരുത്"</string>
-    <string name="immediately_destroy_activities_summary" msgid="3592221124808773368">"ഉപയോക്താവ് ഉപേക്ഷിക്കുന്നതിനനുസരിച്ച് എല്ലാ പ്രവർത്തനങ്ങളും നശിപ്പിക്കുക"</string>
-    <string name="app_process_limit_title" msgid="4280600650253107163">"പശ്ചാത്തല പ്രോസ‌സ്സ് പരിധി"</string>
-    <string name="show_all_anrs" msgid="28462979638729082">"എല്ലാ ANR-കളും ദൃശ്യമാക്കുക"</string>
-    <string name="show_all_anrs_summary" msgid="641908614413544127">"പ‌ശ്ചാത്തല അപ്ലിക്കേഷനുകൾക്ക് അപ്ലിക്കേഷൻ പ്രതികരിക്കുന്നില്ല എന്ന ഡയലോഗ് കാണിക്കുക"</string>
-    <string name="force_allow_on_external" msgid="3215759785081916381">"ബാഹ്യമായതിൽ നിർബന്ധിച്ച് അനുവദിക്കുക"</string>
-    <string name="force_allow_on_external_summary" msgid="3191952505860343233">"മാനിഫെസ്റ്റ് മൂല്യങ്ങൾ പരിഗണിക്കാതെ, ബാഹ്യ സ്റ്റോറേജിലേക്ക് എഴുതപ്പെടുന്നതിന് ഏതൊരു ആപ്പിനെയും യോഗ്യമാക്കുന്നു"</string>
-    <string name="force_resizable_activities" msgid="8615764378147824985">"വലിപ്പം മാറ്റാൻ പ്രവർത്തനങ്ങളെ നിർബന്ധിക്കുക"</string>
-    <string name="force_resizable_activities_summary" msgid="4508217476997182216">"മാനിഫെസ്റ്റ് മൂല്യങ്ങൾ പരിഗണിക്കാതെ, എല്ലാ പ്രവർത്തനങ്ങളെയും മൾട്ടി-വിൻഡോയ്ക്കായി വലിപ്പം മാറ്റുന്നു."</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"ഡാറ്റ ഉപയോഗം"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"ആപ്പ് ഡാറ്റ ഉപയോഗം"</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"കാരിയർ ഡാറ്റ കണക്കാക്കുന്നത് ഉപകരണത്തിൽ നിന്നും വ്യത്യാസപ്പെട്ടിരിക്കാം."</string>
@@ -2479,7 +2332,7 @@
     <string name="keywords_network_reset" msgid="6346978754090557056">"\'ഫാക്‌ടറി പുനഃസ്ഥാപിക്കുക\' റീസെറ്റുചെയ്യുക"</string>
     <string name="keywords_factory_data_reset" msgid="4355133848707691977">"മായ്ക്കുക ഇല്ലാതാക്കുക പുനഃസ്ഥാപിക്കുക മായ്‌ക്കുക നീക്കംചെയ്യുക"</string>
     <string name="keywords_printing" msgid="1701778563617114846">"പ്രിന്റർ"</string>
-    <string name="keywords_sounds_and_notifications" msgid="5965996187974887000">"സ്‌പീക്കർ ബീപ്"</string>
+    <string name="keywords_sounds" msgid="7146245090127541167">"സ്‌പീക്കർ ബീപ്"</string>
     <string name="keywords_sounds_and_notifications_interruptions" msgid="543023766902917716">"അരുത് ശല്യപ്പെടുത്തരുത് തടസപ്പെടുത്തുക തടസം ബ്രേക്ക്"</string>
     <string name="keywords_app" msgid="6334757056536837791">"RAM"</string>
     <string name="keywords_location" msgid="782326973714313480">"അടുത്തുള്ള ലൊക്കേഷൻ ചരിത്രം റിപ്പോർട്ടുചെയ്യൽ"</string>
@@ -2504,32 +2357,14 @@
     <string name="status_failed_to_write" msgid="8072752734686294718">"NFC ടാഗിൽ ഡാറ്റ റൈറ്റുചെയ്യാനായില്ല. പ്രശ്‌നം നിലനിൽക്കുകന്നുവെങ്കിൽ, മറ്റൊരു ടാഗിൽ ശ്രമിക്കുക"</string>
     <string name="status_tag_not_writable" msgid="2511611539977682175">"NFC ടാഗ് റൈറ്റുചെയ്യാനാകുന്നതല്ല. മറ്റൊരു ടാഗ് ഉപയോഗിക്കുക."</string>
     <string name="default_sound" msgid="8821684447333687810">"സ്ഥിര ശബ്‌ദം"</string>
-    <string name="notification_settings" msgid="8791730980212496561">"ശ‌ബ്‌ദവും അറിയിപ്പും"</string>
+    <string name="sound_settings_summary" msgid="3651751880569558828">"റിംഗർ വോളിയം <xliff:g id="PERCENTAGE">%1$s</xliff:g> ശതമാനത്തിലാണ്"</string>
     <string name="media_volume_option_title" msgid="2811531786073003825">"മീഡിയ വോളിയം"</string>
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"അലാറം വോളിയം"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"റിംഗ് വോളിയം"</string>
     <string name="notification_volume_option_title" msgid="6064656124416882130">"അറിയിപ്പ് വോളിയം"</string>
-    <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"മുൻഗണനയുള്ളവ മാത്രം"</string>
-    <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"സ്വയമേയുള്ള നയങ്ങൾ"</string>
-    <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"മുൻഗണന മാത്രം"</string>
-    <string name="zen_mode_option_alarms" msgid="5785372117288803600">"അലാറങ്ങൾ മാത്രം"</string>
-    <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"പൂർണ്ണ നിശബ്‌ദത"</string>
-    <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <string name="zen_mode_visual_interruptions_settings_title" msgid="168576844124787420">"ദൃശ്യപരമായ തടസ്സങ്ങൾ"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"ഫോൺ റിംഗ്ടോൺ"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"അറിയിപ്പുകൾക്കുള്ള സ്ഥിരം റിംഗ്‌ടോൺ"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"കോളുകൾക്കും വൈബ്രേറ്റ്"</string>
-    <string name="notification_section_header" msgid="95661783916799134">"അറിയിപ്പ്"</string>
-    <string name="advanced_section_header" msgid="8833934850242546903">"വിപുലമായത്"</string>
-    <string name="notification_pulse_title" msgid="1247988024534030629">"അറിയിപ്പുലൈറ്റ് പ്രകാശിപ്പിക്കൂ"</string>
-    <string name="lock_screen_notifications_title" msgid="9118805570775519455">"ഉപകരണം ലോക്കായിരിക്കുമ്പോൾ"</string>
-    <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"എല്ലാ അറിയിപ്പുകളും കാണിക്കുക"</string>
-    <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"രഹസ്യാത്മകമായ അറിയിപ്പുകൾ മറയ്‌ക്കുക"</string>
-    <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"ഒരു അറിയിപ്പും കാണിക്കരുത്"</string>
-    <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"നിങ്ങളുടെ ഉപകരണം ലോക്ക് ചെയ്തിരിക്കുമ്പോൾ, അറിയിപ്പുകൾ എങ്ങനെയാണ് കാണിക്കേണ്ടത്?"</string>
-    <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"അറിയിപ്പുകൾ"</string>
-    <string name="app_notifications_title" msgid="5810577805218003760">"ആപ്പ് അറിയിപ്പുകൾ"</string>
-    <string name="topic_notifications_title" msgid="7243623930984080881">"വിഷയ അറിയിപ്പുകൾ"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"മറ്റു ശബ്‌ദങ്ങൾ"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"ഡയൽ പാഡ്  ടോണുകൾ"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"സ്‌ക്രീൻലോക്കിംഗ് ശബ്‌ദങ്ങൾ"</string>
@@ -2543,6 +2378,24 @@
     <string name="emergency_tone_silent" msgid="1067515631635824291">"നിശബ്‌ദം"</string>
     <string name="emergency_tone_alert" msgid="8941852695428130667">"അലേർട്ട്"</string>
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"വൈബ്രേറ്റുചെയ്യുക"</string>
+    <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"മുൻഗണനയുള്ളവ മാത്രം"</string>
+    <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"സ്വയമേയുള്ള നയങ്ങൾ"</string>
+    <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"മുൻഗണന മാത്രം"</string>
+    <string name="zen_mode_option_alarms" msgid="5785372117288803600">"അലാറങ്ങൾ മാത്രം"</string>
+    <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"പൂർണ്ണ നിശബ്‌ദത"</string>
+    <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
+    <string name="zen_mode_visual_interruptions_settings_title" msgid="168576844124787420">"ദൃശ്യപരമായ തടസ്സങ്ങൾ"</string>
+    <string name="configure_notification_settings" msgid="3558846607192693233">"അറിയിപ്പുകൾ കോൺഫിഗർ ചെയ്യുക"</string>
+    <string name="advanced_section_header" msgid="8833934850242546903">"വിപുലമായത്"</string>
+    <string name="notification_pulse_title" msgid="1247988024534030629">"അറിയിപ്പുലൈറ്റ് പ്രകാശിപ്പിക്കൂ"</string>
+    <string name="lock_screen_notifications_title" msgid="9118805570775519455">"ഉപകരണം ലോക്കായിരിക്കുമ്പോൾ"</string>
+    <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"എല്ലാ അറിയിപ്പുകളും കാണിക്കുക"</string>
+    <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"രഹസ്യാത്മകമായ അറിയിപ്പുകൾ മറയ്‌ക്കുക"</string>
+    <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"ഒരു അറിയിപ്പും കാണിക്കരുത്"</string>
+    <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"നിങ്ങളുടെ ഉപകരണം ലോക്ക് ചെയ്തിരിക്കുമ്പോൾ, അറിയിപ്പുകൾ എങ്ങനെയാണ് കാണിക്കേണ്ടത്?"</string>
+    <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"അറിയിപ്പുകൾ"</string>
+    <string name="app_notifications_title" msgid="139788604658984593">"അറിയിപ്പുകൾ"</string>
+    <string name="topic_notifications_title" msgid="7243623930984080881">"വിഷയ അറിയിപ്പുകൾ"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"അറിയിപ്പ് ക്രമീകരണം"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"അപ്ലിക്കേഷനുകൾക്ക് അറിയിപ്പുകൾ വായിക്കാനായില്ല"</string>
     <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
@@ -2565,6 +2418,7 @@
     <string name="app_notification_row_priority" msgid="7723839972982746568">"പ്രധാനപ്പെട്ടവ"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"സെൻസി‌റ്റീവ്"</string>
     <string name="app_notifications_dialog_done" msgid="3484067728568791014">"പൂർത്തിയായി"</string>
+    <string name="app_notification_importance_title" msgid="8002263131149345584">"പ്രാധാന്യം"</string>
     <string name="zen_mode_rule_name" msgid="5149068059383837549">"നയത്തിന്റെ പേര്"</string>
     <string name="zen_mode_rule_name_hint" msgid="3781174510556433384">"നയത്തിന്റെ പേര് നൽകുക"</string>
     <string name="zen_mode_rule_name_warning" msgid="4517805381294494314">"നയത്തിന്റെ പേര് ഇപ്പോൾ ഉപയോഗത്തിലുണ്ട്"</string>
@@ -2635,7 +2489,6 @@
     <string name="zen_mode_peek_summary" msgid="27622220787132681">"നിലവിലെ സ്ക്രീനിൽ എത്തിനോക്കുന്നതിൽ നിന്നോ പ്രത്യക്ഷപ്പെടുന്നതിൽ നിന്നോ, \'ശല്യപ്പെടുത്തരുത്\' വഴി നിശബ്ദമാക്കപ്പെടുന്ന അറിയിപ്പുകളെ തടയുക"</string>
     <string name="zen_mode_lights" msgid="904184586121619154">"അറിയിപ്പ് വെളിച്ചമില്ല"</string>
     <string name="zen_mode_lights_summary" msgid="6953305086643633530">"തുടിപ്പായി വെളിച്ചം മാറുന്നതിൽ നിന്ന്, \'ശല്യപ്പെടുത്തരുത്\' വഴി നിശബ്ദമാക്കപ്പെടുന്ന അറിയിപ്പുകളെ തടയുക"</string>
-    <string name="notification_settings_apps_title" msgid="1125354590652967250">"ആപ്പ് അറിയിപ്പുകൾ"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"അറിയിപ്പ് ക്രമീകരണങ്ങൾ"</string>
     <string name="device_feedback" msgid="3238056036766293294">"ഇതേക്കുറിച്ചുള്ള ഫീഡ്‌ബാക്ക് അയയ്‌ക്കൂ"</string>
     <string name="restr_pin_enter_admin_pin" msgid="2451187374960131018">"അഡ്‌മിനിസ്‌ട്രേറ്റർ പിൻ നൽകുക"</string>
@@ -2801,9 +2654,6 @@
     <string name="usb_use_MIDI" msgid="5116404702692483166">"MIDI"</string>
     <string name="usb_use_MIDI_desc" msgid="6895383550910152384">"MIDI ഇൻപുട്ടിനായി ഉപകരണം ഉപയോഗിക്കുക"</string>
     <string name="usb_use" msgid="3372728031108932425">"ഇതിനായി USB ഉപയോഗിക്കുക"</string>
-    <string name="inactive_apps_title" msgid="1317817863508274533">"നിഷ്‌ക്രിയ ആപ്പ്‌സ്"</string>
-    <string name="inactive_app_inactive_summary" msgid="6768756967594202411">"നിഷ്‌ക്രിയം. ടോഗിൾ ചെയ്യാൻ സ്‌പർശിക്കുക."</string>
-    <string name="inactive_app_active_summary" msgid="4512911571954375968">"സജീവം. ടോഗിൾ ചെയ്യാൻ സ്‌പർശിക്കുക."</string>
     <string name="assist_access_context_title" msgid="2269032346698890257">"സ്ക്രീനിലെ ടെക്‌സ്റ്റ് ഉപയോഗിക്കുക"</string>
     <string name="assist_access_context_summary" msgid="1991421283142279560">"ടെക്സ്റ്റ് ആയി സ്ക്രീൻ ഉള്ളടക്കങ്ങൾ ആക്സസ് ചെയ്യാൻ അസിസ്റ്റ് ആപ്പിനെ അനുവദിക്കുക"</string>
     <string name="assist_access_screenshot_title" msgid="4034721336291215819">"സ്ക്രീൻഷോട്ട് ഉപയോഗിക്കുക"</string>
@@ -2832,6 +2682,8 @@
     <string name="no_data_usage" msgid="9131454024293628063">"ഡാറ്റയൊന്നും ഉപയോഗിച്ചില്ല"</string>
     <string name="zen_access_warning_dialog_title" msgid="1198189958031157142">"\'ശല്യപ്പെടുത്തരുത്\' എന്നതിലേക്ക് <xliff:g id="APP">%1$s</xliff:g>-ന് ആക്സസ് അനുവദിക്കണോ?"</string>
     <string name="zen_access_warning_dialog_summary" msgid="4015885767653010873">"\'ശല്യപ്പെടുത്തരുത്\' ഓണാക്കാനും/ഓഫാക്കാനും ബന്ധപ്പെട്ട ക്രമീകരണത്തിലേക്ക് മാറ്റങ്ങൾ വരുത്താനും ആപ്പിന് കഴിയും."</string>
+    <string name="zen_access_revoke_warning_dialog_title" msgid="558779234015793950">"\'ശല്യപ്പെടുത്തരുത്\' എന്നതിലേക്ക് <xliff:g id="APP">%1$s</xliff:g> ആപ്പിനുള്ള ആക്സസ് പിൻവലിക്കണോ?"</string>
+    <string name="zen_access_revoke_warning_dialog_summary" msgid="5518216907304930148">"ഈ ആപ്പ് സൃഷ്ടിച്ചിട്ടുള്ള എല്ലാ \'ശല്യപ്പെടുത്തരുത്\' നിയമങ്ങളും നീക്കംചെയ്യപ്പെടും."</string>
     <string name="ignore_optimizations_on" msgid="6915689518016285116">"ഓപ്റ്റിമൈസ് ചെയ്യരുത്"</string>
     <string name="ignore_optimizations_off" msgid="6153196256410296835">"ഓപ്‌റ്റിമൈസ് ചെയ്യുക"</string>
     <string name="ignore_optimizations_on_desc" msgid="2321398930330555815">"ബാറ്ററിയെ വേഗത്തിൽ തീർത്തേക്കാം"</string>
@@ -2869,18 +2721,6 @@
     <string name="camera_gesture_desc" msgid="1831390075255870960">"നിങ്ങളുടെ കൈത്തണ്ട രണ്ടുപ്രാവശ്യം തിരിച്ചുകൊണ്ട് ക്യാമറാ ആപ്പ് തുറക്കുക"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"ക്യാമറയ്ക്കായി പവർ ബട്ടൺ രണ്ടുതവണ അമർത്തുക"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"സ്ക്രീൻ അൺലോക്ക് ചെയ്യാതെ തന്നെ, അതിവേഗം ക്യാമറ തുറക്കുക"</string>
-  <string-array name="color_mode_names">
-    <item msgid="2425514299220523812">"വൈബ്രന്റ് (സ്ഥിരമായത്)"</item>
-    <item msgid="8446070607501413455">"സ്വാഭാവികം"</item>
-    <item msgid="6553408765810699025">"സ്റ്റാന്‍ഡേര്‍ഡ്"</item>
-  </string-array>
-  <string-array name="color_mode_descriptions">
-    <item msgid="4979629397075120893">"മെച്ചപ്പെടുത്തിയ വര്‍ണ്ണങ്ങൾ"</item>
-    <item msgid="8280754435979370728">"നമ്മൾ കാണുന്നത് പോലെയുള്ള സ്വാഭാവിക വർണ്ണങ്ങൾ"</item>
-    <item msgid="5363960654009010371">"ഡിജിറ്റൽ ഉള്ളടക്കത്തിനായി വർണ്ണങ്ങൾ ഒപ്റ്റിമൈസ് ചെയ്തു"</item>
-  </string-array>
-    <string name="picture_color_mode" msgid="4560755008730283695">"ചിത്ര വർണ്ണ മോഡ്"</string>
-    <string name="picture_color_mode_desc" msgid="1141891467675548590">"sRGB ഉപയോഗിക്കുക"</string>
     <string name="force_density_preference_title" msgid="7269059903952009908">"ഡിസ്പ്ലേ സ്കെയിൽ"</string>
     <string name="force_density_keywords" msgid="3810424110118041972">"ഡിസ്‌പ്ലേ ഡെൻസിറ്റി സൂം സ്കെയിൽ സ്കെയിലിംഗ്"</string>
     <string name="force_density_summary_small" msgid="5481649550774706354">"ചെറുത്"</string>
@@ -2897,4 +2737,11 @@
     <string name="storage_summary" msgid="1110250618334248745">"<xliff:g id="SIZE1">%1$s</xliff:g> / <xliff:g id="SIZE2">%2$s</xliff:g> ഉപയോഗിച്ചു"</string>
     <string name="display_summary_on" msgid="5628868543070268634">"അനുരൂപമാക്കാവുന്ന തെളിച്ചനില ഓണാണ്"</string>
     <string name="display_summary_off" msgid="6399558022426312990">"അനുരൂപമാക്കാവുന്ന തെളിച്ചനില ഓഫാണ്"</string>
+    <string name="memory_summary" msgid="8080825904671961872">"ശരാശരി <xliff:g id="USED_MEMORY">%1$s</xliff:g> / <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> മെമ്മറി ഉപയോഗിച്ചു"</string>
+    <string name="user_summary" msgid="1617826998097722499">"<xliff:g id="USER_NAME">%1$s</xliff:g> എന്നയാളായി സൈൻ ഇൻ ചെയ്‌തു"</string>
+    <string name="payment_summary" msgid="3472482669588561110">"<xliff:g id="APP_NAME">%1$s</xliff:g> ഡിഫോൾട്ട് ആണ്"</string>
+    <string name="location_on_summary" msgid="5127631544018313587">"ഓൺ / <xliff:g id="LOCATION_MODE">%1$s</xliff:g>"</string>
+    <string name="location_off_summary" msgid="6474350053215707957">"ഓഫ്"</string>
+    <string name="backup_disabled" msgid="485189128759595412">"ബാക്കപ്പ് പ്രവർത്തനരഹിതമാക്കി"</string>
+    <string name="about_summary" msgid="8460677224778433924">"Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
 </resources>

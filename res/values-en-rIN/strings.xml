@@ -182,7 +182,7 @@
     <string name="radio_info_cellinfo_label" msgid="1300937728020622362">"CellInfo:"</string>
     <string name="radio_info_dcrtinfo_label" msgid="6802395441317448068">"DcRtInfo:"</string>
     <string name="radio_info_data_attempts_label" msgid="1731106244577323381">"Data attempts:"</string>
-    <string name="radio_info_gprs_service_label" msgid="2331818110375395364">"GPRS service:"</string>
+    <string name="radio_info_gprs_service_label" msgid="6699616076706524202">"Data Technology:"</string>
     <string name="radio_info_roaming_label" msgid="6141505430275138647">"Roaming:"</string>
     <string name="radio_info_imei_label" msgid="1220524224732944192">"IMEI:"</string>
     <string name="radio_info_call_redirect_label" msgid="1654674226961476872">"Call redirect:"</string>
@@ -191,7 +191,7 @@
     <string name="radio_info_current_network_label" msgid="3256402602440102610">"Current network:"</string>
     <string name="radio_info_data_successes_label" msgid="4417894113689054945">"Data successes:"</string>
     <string name="radio_info_ppp_received_label" msgid="3345184342444878849">"PPP received:"</string>
-    <string name="radio_info_gsm_service_label" msgid="2082332114596916985">"GSM service:"</string>
+    <string name="radio_info_gsm_service_label" msgid="8595694240281347716">"Voice Technology:"</string>
     <string name="radio_info_signal_strength_label" msgid="1931937920896925766">"Signal strength:"</string>
     <string name="radio_info_call_status_label" msgid="4896238900685510883">"Call status:"</string>
     <string name="radio_info_ppp_sent_label" msgid="5009102250704375687">"PPP sent:"</string>
@@ -201,8 +201,8 @@
     <string name="radio_info_band_mode_label" msgid="441469694142042022">"Select radio band"</string>
     <string name="radio_info_network_type_label" msgid="3706382548257257987">"Network type:"</string>
     <string name="radio_info_set_perferred_label" msgid="9039200405863503267">"Set preferred network type:"</string>
-    <string name="radio_info_ping_ipaddr" msgid="498747917793263530">"Ping IpAddr:"</string>
-    <string name="radio_info_ping_hostname" msgid="3054888474808217853">"Ping Host Name (www.google.co.uk):"</string>
+    <string name="radio_info_ping_hostname_v4" msgid="7045103377818314709">"Ping Hostname(www.google.com) IPv4:"</string>
+    <string name="radio_info_ping_hostname_v6" msgid="1130906124160553954">"Ping Hostname(www.google.com) IPv6:"</string>
     <string name="radio_info_http_client_test" msgid="5733604021077701555">"HTTP Client test:"</string>
     <string name="ping_test_label" msgid="7255376471490860631">"Run ping test"</string>
     <string name="radio_info_smsc_label" msgid="6399460520126501354">"SMSC:"</string>
@@ -627,6 +627,7 @@
     <string name="wifi_menu_p2p" msgid="7619851399250896797">"Wi‑Fi Direct"</string>
     <string name="wifi_menu_scan" msgid="1470911530412095868">"Scan"</string>
     <string name="wifi_menu_advanced" msgid="7522252991919573664">"Advanced"</string>
+    <string name="wifi_menu_configure" msgid="6150926852602171938">"Configure"</string>
     <string name="wifi_menu_connect" msgid="4996220309848349408">"Connect to network"</string>
     <string name="wifi_menu_remember" msgid="8814185749388713796">"Remember network"</string>
     <string name="wifi_menu_forget" msgid="8736964302477327114">"Forget network"</string>
@@ -707,6 +708,7 @@
     <string name="wifi_connect_failed_message" product="default" msgid="2185803140161396572">"The phone was unable to connect to this Wi‑Fi network."</string>
     <string name="wifi_saved_access_points_titlebar" msgid="2996149477240134064">"Saved networks"</string>
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"Advanced Wi‑Fi"</string>
+    <string name="wifi_configure_titlebar" msgid="7977475161589303074">"Configure Wi‑Fi"</string>
     <string name="wifi_setting_frequency_band_title" msgid="3655327399028584656">"Wi‑Fi frequency band"</string>
     <string name="wifi_setting_frequency_band_summary" msgid="3250740757118009784">"Specify the frequency range of operation"</string>
     <string name="wifi_setting_frequency_band_error" msgid="837281974489794378">"There was a problem while setting the frequency band."</string>
@@ -829,17 +831,6 @@
     <string name="brightness_summary" msgid="838917350127550703">"Adjust the brightness of the screen"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"Adaptive brightness"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"Optimise brightness level for available light"</string>
-    <string name="night_mode_title" msgid="2594133148531256513">"Night mode"</string>
-    <string name="night_mode_summary" msgid="9196605054622017193">"%s"</string>
-    <string name="night_mode_no" msgid="9171772244775838901">"Disabled"</string>
-    <string name="night_mode_yes" msgid="2218157265997633432">"Always on"</string>
-    <string name="night_mode_auto" msgid="7508348175804304327">"Automatic"</string>
-    <string name="convert_to_file_encryption" msgid="3060156730651061223">"Convert to file encryption"</string>
-    <string name="convert_to_file_encryption_enabled" msgid="2861258671151428346">"Convert…"</string>
-    <string name="convert_to_file_encryption_done" msgid="7859766358000523953">"Already file encrypted"</string>
-    <string name="title_convert_fbe" msgid="1263622876196444453">"Converting to file-based encryption"</string>
-    <string name="convert_to_fbe_warning" msgid="6139067817148865527">"Convert data partition to file-based encryption.\n !!Warning!! This will delete all your data.\n This feature is alpha, and may not work correctly.\n Press \'Wipe and convert…\' to continue."</string>
-    <string name="button_convert_fbe" msgid="5152671181309826405">"Wipe and convert…"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Sleep"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Screen turns off"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"After <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> of inactivity"</string>
@@ -1406,8 +1397,6 @@
     <string name="no_default_apps" msgid="2915315663141025400">"No default Apps."</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Storage use"</string>
     <string name="storageuse_settings_summary" msgid="3748286507165697834">"View storage used by apps"</string>
-    <string name="runningservices_settings_title" msgid="8097287939865165213">"Running services"</string>
-    <string name="runningservices_settings_summary" msgid="854608995821032748">"View and control currently running services"</string>
     <string name="service_restarting" msgid="2242747937372354306">"Restarting"</string>
     <string name="cached" msgid="1059590879740175019">"Cached background process"</string>
     <string name="no_running_services" msgid="2059536495597645347">"Nothing running."</string>
@@ -1517,68 +1506,6 @@
     <string name="onscreen_keyboard_settings_summary" msgid="5841558383556238653">"On-screen keyboard settings"</string>
     <string name="builtin_keyboard_settings_title" msgid="7688732909551116798">"Physical keyboard"</string>
     <string name="builtin_keyboard_settings_summary" msgid="2392531685358035899">"Physical keyboard settings"</string>
-    <string name="development_settings_title" msgid="215179176067683667">"Developer options"</string>
-    <string name="development_settings_summary" msgid="1815795401632854041">"Set options for app development"</string>
-    <string name="development_settings_not_available" msgid="4308569041701535607">"Developer options are not available for this user"</string>
-    <string name="vpn_settings_not_available" msgid="956841430176985598">"VPN settings are not available for this user"</string>
-    <string name="tethering_settings_not_available" msgid="6765770438438291012">"Tethering settings are not available for this user"</string>
-    <string name="apn_settings_not_available" msgid="7873729032165324000">"Access Point Name settings are not available for this user"</string>
-    <string name="enable_adb" msgid="7982306934419797485">"USB debugging"</string>
-    <string name="enable_adb_summary" msgid="4881186971746056635">"Debug mode when USB is connected"</string>
-    <string name="clear_adb_keys" msgid="4038889221503122743">"Revoke USB debugging authorisations"</string>
-    <string name="bugreport_in_power" msgid="7923901846375587241">"Bug report shortcut"</string>
-    <string name="bugreport_in_power_summary" msgid="1778455732762984579">"Show a button in the power menu for taking a bug report"</string>
-    <string name="keep_screen_on" msgid="1146389631208760344">"Stay awake"</string>
-    <string name="keep_screen_on_summary" msgid="2173114350754293009">"Screen will never sleep while charging"</string>
-    <string name="bt_hci_snoop_log" msgid="3340699311158865670">"Enable Bluetooth HCI snoop log"</string>
-    <string name="bt_hci_snoop_log_summary" msgid="730247028210113851">"Capture all Bluetooth HCI packets in a file"</string>
-    <string name="oem_unlock_enable" msgid="6040763321967327691">"OEM unlocking"</string>
-    <string name="oem_unlock_enable_summary" msgid="4720281828891618376">"Allow the bootloader to be unlocked"</string>
-    <string name="confirm_enable_oem_unlock_title" msgid="4802157344812385674">"Allow OEM unlocking?"</string>
-    <string name="confirm_enable_oem_unlock_text" msgid="5517144575601647022">"WARNING: Device protection features will not work on this device while this setting is turned on."</string>
-    <string name="select_logd_size_title" msgid="7433137108348553508">"Logger buffer sizes"</string>
-    <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"Select Logger sizes per log buffer"</string>
-    <string name="mock_location_app" msgid="7966220972812881854">"Select mock location app"</string>
-    <string name="mock_location_app_not_set" msgid="809543285495344223">"No mock location app set"</string>
-    <string name="mock_location_app_set" msgid="8966420655295102685">"Mock location app: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <string name="debug_view_attributes" msgid="6485448367803310384">"Enable view attribute inspection"</string>
-    <string name="debug_networking_category" msgid="7044075693643009662">"Networking"</string>
-    <string name="wifi_display_certification" msgid="8611569543791307533">"Wireless display certification"</string>
-    <string name="wifi_verbose_logging" msgid="4203729756047242344">"Enable Wi‑Fi verbose logging"</string>
-    <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Aggressive Wi‑Fi to Mobile handover"</string>
-    <string name="wifi_allow_scan_with_traffic" msgid="3601853081178265786">"Always allow Wi‑Fi Roam Scans"</string>
-    <string name="legacy_dhcp_client" msgid="694426978909127287">"Use legacy DHCP client"</string>
-    <string name="mobile_data_always_on" msgid="7745605759775320362">"Mobile data always active"</string>
-    <string name="wifi_display_certification_summary" msgid="1155182309166746973">"Show options for wireless display certification"</string>
-    <string name="wifi_verbose_logging_summary" msgid="6615071616111731958">"Increase Wi‑Fi logging level, show per SSID RSSI in Wi‑Fi Picker"</string>
-    <string name="wifi_aggressive_handover_summary" msgid="6328455667642570371">"When enabled, Wi‑Fi will be more aggressive in handing over the data connection to Mobile, when Wi‑Fi signal is low"</string>
-    <string name="wifi_allow_scan_with_traffic_summary" msgid="2575101424972686310">"Allow/Disallow Wi‑Fi Roam Scans based on the amount of data traffic present at the interface"</string>
-    <string name="select_logd_size_title" msgid="7433137108348553508">"Logger buffer sizes"</string>
-    <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"Select Logger sizes per log buffer"</string>
-    <string name="select_usb_configuration_title" msgid="2649938511506971843">"Select USB Configuration"</string>
-    <string name="select_usb_configuration_dialog_title" msgid="6385564442851599963">"Select USB Configuration"</string>
-    <string name="allow_mock_location" msgid="2787962564578664888">"Allow mock locations"</string>
-    <string name="allow_mock_location_summary" msgid="317615105156345626">"Allow mock locations"</string>
-    <string name="debug_view_attributes" msgid="6485448367803310384">"Enable view attribute inspection"</string>
-    <string name="legacy_dhcp_client_summary" msgid="163383566317652040">"Use the DHCP client from Lollipop instead of the new Android DHCP client."</string>
-    <string name="mobile_data_always_on_summary" msgid="8149773901431697910">"Always keep mobile data active, even when Wi‑Fi is active (for fast network switching)."</string>
-    <string name="adb_warning_title" msgid="6234463310896563253">"Allow USB debugging?"</string>
-    <string name="adb_warning_message" msgid="7316799925425402244">"USB debugging is intended for development purposes only. Use it to copy data between your computer and your device, install apps on your device without notification and read log data."</string>
-    <string name="adb_keys_warning_message" msgid="5659849457135841625">"Revoke access to USB debugging from all computers you\'ve previously authorised?"</string>
-    <string name="dev_settings_warning_title" msgid="7244607768088540165">"Allow development settings?"</string>
-    <string name="dev_settings_warning_message" msgid="2298337781139097964">"These settings are intended for development use only. They can cause your device and the applications on it to break or misbehave."</string>
-    <string name="verify_apps_over_usb_title" msgid="4177086489869041953">"Verify apps over USB"</string>
-    <string name="verify_apps_over_usb_summary" msgid="9164096969924529200">"Check apps installed via ADB/ADT for harmful behaviour."</string>
-    <string name="enforce_read_external_title" product="nosdcard" msgid="7733257271454664956">"Protect USB storage"</string>
-    <string name="enforce_read_external_summary" product="nosdcard" msgid="1798088409346660567">"Apps must request permission to read USB storage"</string>
-    <string name="enforce_read_external_confirm_title" product="nosdcard" msgid="2112813067171502209">"Protect USB storage?"</string>
-    <string name="enforce_read_external_confirm_message" product="nosdcard" msgid="605444326545922054">"When USB storage is protected, apps must request permission to read data from external storage.\n\nSome apps may not work until updated by their developers."</string>
-    <string name="enforce_read_external_title" product="default" msgid="2226662853797940829">"Protect SD card"</string>
-    <string name="enforce_read_external_summary" product="default" msgid="2750027486786530064">"Apps must request permission to read SD card"</string>
-    <string name="enforce_read_external_confirm_title" product="default" msgid="273220585729800783">"Protect SD card?"</string>
-    <string name="enforce_read_external_confirm_message" product="default" msgid="3858482712337574407">"When SD card is protected, apps must request permission to read data from external storage.\n\nSome apps may not work until updated by their developers."</string>
-    <string name="enable_terminal_title" msgid="95572094356054120">"Local terminal"</string>
-    <string name="enable_terminal_summary" msgid="67667852659359206">"Enable terminal app that offers local shell access"</string>
     <string name="gadget_picker_title" msgid="98374951396755811">"Choose gadget"</string>
     <string name="widget_picker_title" msgid="9130684134213467557">"Choose widget"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="2538303018392590627">"Create widget and allow access?"</string>
@@ -1619,18 +1546,10 @@
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Touch &amp; hold delay"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Colour inversion"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="8658240868230680912">"(Experimental) May affect performance"</string>
-    <string name="accessibility_display_daltonizer_preference_title" msgid="5800761362678707872">"Colour correction"</string>
-    <string name="accessibility_display_daltonizer_preference_subtitle" msgid="3484969015295282911">"This feature is experimental and may affect performance."</string>
     <string name="accessibility_autoclick_preference_title" msgid="7014499339068449623">"Click after cursor stops moving"</string>
     <string name="accessibility_autoclick_delay_preference_title" msgid="3962261178385106006">"Delay before click"</string>
     <string name="enable_quick_setting" msgid="2366999897816894536">"Show in Quick Settings"</string>
     <string name="daltonizer_type" msgid="1124178250809091080">"Correction mode"</string>
-    <string name="daltonizer_type_overridden" msgid="3116947244410245916">"Overridden by <xliff:g id="TITLE">%1$s</xliff:g>"</string>
-    <string name="daltonizer_mode_disabled" msgid="7482661936053801862">"Disabled"</string>
-    <string name="daltonizer_mode_monochromacy" msgid="8485709880666106721">"Monochromacy"</string>
-    <string name="daltonizer_mode_deuteranomaly" msgid="5475532989673586329">"Deuteranomaly (red-green)"</string>
-    <string name="daltonizer_mode_protanomaly" msgid="8424148009038666065">"Protanomaly (red-green)"</string>
-    <string name="daltonizer_mode_tritanomaly" msgid="481725854987912389">"Tritanomaly (blue-yellow)"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_extremely_short_delay" formatted="false" msgid="7340347830562315800">
       <item quantity="other">Extremely short delay (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> ms)</item>
       <item quantity="one">Extremely short delay (<xliff:g id="CLICK_DELAY_LABEL_0">%1$d</xliff:g> ms)</item>
@@ -1943,12 +1862,6 @@
     <string name="auto_restore_summary" msgid="4235615056371993807">"When reinstalling an app, restore backed up settings and data"</string>
     <string name="backup_inactive_title" msgid="5355557151569037197">"Backup service is inactive."</string>
     <string name="backup_configure_account_default_summary" msgid="2436933224764745553">"No account is currently storing backed up data"</string>
-    <string name="local_backup_password_title" msgid="3860471654439418822">"Desktop backup password"</string>
-    <string name="local_backup_password_summary_none" msgid="6951095485537767956">"Desktop full backups aren\'t currently protected"</string>
-    <string name="local_backup_password_summary_change" msgid="2731163425081172638">"Touch to change or remove the password for desktop full backups"</string>
-    <string name="local_backup_password_toast_success" msgid="582016086228434290">"New backup password set"</string>
-    <string name="local_backup_password_toast_confirmation_mismatch" msgid="7805892532752708288">"New password and confirmation don\'t match"</string>
-    <string name="local_backup_password_toast_validation_failure" msgid="5646377234895626531">"Failure setting backup password"</string>
     <string name="backup_erase_dialog_title" msgid="1027640829482174106"></string>
     <string name="backup_erase_dialog_message" msgid="5221011285568343155">"Stop backing up your Wi‑Fi passwords, bookmarks, other settings and app data, plus erase all copies on Google servers?"</string>
     <string name="fullbackup_erase_dialog_message" msgid="694766389396659626">"Stop backing up device data (such as Wi-Fi passwords and call history) and app data (such as settings and files stored by apps), plus erase all copies on remote servers?"</string>
@@ -2064,66 +1977,6 @@
     <string name="misc_files_selected_count" msgid="4647048020823912088">"selected <xliff:g id="NUMBER">%1$d</xliff:g> out of <xliff:g id="TOTAL">%2$d</xliff:g>"</string>
     <string name="misc_files_selected_count_bytes" msgid="2876232009069114352">"<xliff:g id="NUMBER">%1$s</xliff:g> out of <xliff:g id="TOTAL">%2$s</xliff:g>"</string>
     <string name="select_all" msgid="1562774643280376715">"Select all"</string>
-    <string name="hdcp_checking_title" msgid="8605478913544273282">"HDCP checking"</string>
-    <string name="hdcp_checking_dialog_title" msgid="5141305530923283">"Set HDCP checking behaviour"</string>
-    <string name="debug_debugging_category" msgid="6781250159513471316">"Debugging"</string>
-    <string name="debug_app" msgid="8349591734751384446">"Select debug app"</string>
-    <string name="debug_app_not_set" msgid="718752499586403499">"No debug application set"</string>
-    <string name="debug_app_set" msgid="2063077997870280017">"Debugging application: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <string name="select_application" msgid="5156029161289091703">"Select application"</string>
-    <string name="no_application" msgid="2813387563129153880">"Nothing"</string>
-    <string name="wait_for_debugger" msgid="1202370874528893091">"Wait for debugger"</string>
-    <string name="wait_for_debugger_summary" msgid="1766918303462746804">"Debugged application waits for debugger to attach before executing"</string>
-    <string name="debug_input_category" msgid="1811069939601180246">"Input"</string>
-    <string name="debug_drawing_category" msgid="6755716469267367852">"Drawing"</string>
-    <string name="debug_hw_drawing_category" msgid="6220174216912308658">"Hardware accelerated rendering"</string>
-    <string name="media_category" msgid="4388305075496848353">"Media"</string>
-    <string name="debug_monitoring_category" msgid="7640508148375798343">"Monitoring"</string>
-    <string name="strict_mode" msgid="1938795874357830695">"Strict mode enabled"</string>
-    <string name="strict_mode_summary" msgid="142834318897332338">"Flash screen when apps do long operations on main thread"</string>
-    <string name="pointer_location" msgid="6084434787496938001">"Pointer location"</string>
-    <string name="pointer_location_summary" msgid="840819275172753713">"Screen overlay showing current touch data"</string>
-    <string name="show_touches" msgid="1356420386500834339">"Show touches"</string>
-    <string name="show_touches_summary" msgid="6684407913145150041">"Show visual feedback for touches"</string>
-    <string name="show_screen_updates" msgid="5470814345876056420">"Show surface updates"</string>
-    <string name="show_screen_updates_summary" msgid="2569622766672785529">"Flash entire window surfaces when they update"</string>
-    <string name="show_hw_screen_updates" msgid="5036904558145941590">"Show GPU view updates"</string>
-    <string name="show_hw_screen_updates_summary" msgid="1115593565980196197">"Flash views inside windows when drawn with the GPU"</string>
-    <string name="show_hw_layers_updates" msgid="5645728765605699821">"Show hardware layers updates"</string>
-    <string name="show_hw_layers_updates_summary" msgid="5296917233236661465">"Flash hardware layers green when they update"</string>
-    <string name="debug_hw_overdraw" msgid="2968692419951565417">"Debug GPU overdraw"</string>
-    <string name="disable_overlays" msgid="2074488440505934665">"Disable HW overlays"</string>
-    <string name="disable_overlays_summary" msgid="3578941133710758592">"Always use GPU for screen compositing"</string>
-    <string name="simulate_color_space" msgid="6745847141353345872">"Simulate colour space"</string>
-    <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Enable OpenGL traces"</string>
-    <string name="usb_audio_disable_routing" msgid="8114498436003102671">"Disable USB audio routing"</string>
-    <string name="usb_audio_disable_routing_summary" msgid="980282760277312264">"Disable automatic routing to USB audio peripherals"</string>
-    <string name="debug_layout" msgid="5981361776594526155">"Show layout bounds"</string>
-    <string name="debug_layout_summary" msgid="2001775315258637682">"Show clip bounds, margins, etc."</string>
-    <string name="force_rtl_layout_all_locales" msgid="2259906643093138978">"Force RTL layout direction"</string>
-    <string name="force_rtl_layout_all_locales_summary" msgid="9192797796616132534">"Force screen layout direction to RTL for all locales"</string>
-    <string name="show_cpu_usage" msgid="2389212910758076024">"Show CPU usage"</string>
-    <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Screen overlay showing current CPU usage"</string>
-    <string name="force_hw_ui" msgid="6426383462520888732">"Force GPU rendering"</string>
-    <string name="force_hw_ui_summary" msgid="5535991166074861515">"Force use of GPU for 2D drawing"</string>
-    <string name="force_msaa" msgid="7920323238677284387">"Force 4x MSAA"</string>
-    <string name="force_msaa_summary" msgid="9123553203895817537">"Enable 4x MSAA in OpenGL ES 2.0 apps"</string>
-    <string name="show_non_rect_clip" msgid="505954950474595172">"Debug non-rectangular clip operations"</string>
-    <string name="track_frame_time" msgid="6146354853663863443">"Profile GPU rendering"</string>
-    <string name="window_animation_scale_title" msgid="6162587588166114700">"Window animation scale"</string>
-    <string name="transition_animation_scale_title" msgid="387527540523595875">"Transition animation scale"</string>
-    <string name="animator_duration_scale_title" msgid="3406722410819934083">"Animator duration scale"</string>
-    <string name="overlay_display_devices_title" msgid="5364176287998398539">"Simulate secondary displays"</string>
-    <string name="debug_applications_category" msgid="4206913653849771549">"Apps"</string>
-    <string name="immediately_destroy_activities" msgid="1579659389568133959">"Don\'t keep activities"</string>
-    <string name="immediately_destroy_activities_summary" msgid="3592221124808773368">"Destroy every activity as soon as the user leaves it"</string>
-    <string name="app_process_limit_title" msgid="4280600650253107163">"Background process limit"</string>
-    <string name="show_all_anrs" msgid="28462979638729082">"Show all ANRs"</string>
-    <string name="show_all_anrs_summary" msgid="641908614413544127">"Show App Not Responding dialogue for background apps"</string>
-    <string name="force_allow_on_external" msgid="3215759785081916381">"Force allow apps on external"</string>
-    <string name="force_allow_on_external_summary" msgid="3191952505860343233">"Makes any app eligible to be written to external storage, regardless of manifest values"</string>
-    <string name="force_resizable_activities" msgid="8615764378147824985">"Force activities to be re-sizable"</string>
-    <string name="force_resizable_activities_summary" msgid="4508217476997182216">"Makes all activities re-sizable for multi-window, regardless of manifest values."</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Data usage"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"App data usage"</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"Operator data accounting may differ from your device."</string>
@@ -2479,7 +2332,7 @@
     <string name="keywords_network_reset" msgid="6346978754090557056">"reset restore factory"</string>
     <string name="keywords_factory_data_reset" msgid="4355133848707691977">"wipe delete restore clear remove"</string>
     <string name="keywords_printing" msgid="1701778563617114846">"printer"</string>
-    <string name="keywords_sounds_and_notifications" msgid="5965996187974887000">"speaker beep"</string>
+    <string name="keywords_sounds" msgid="7146245090127541167">"speaker beep"</string>
     <string name="keywords_sounds_and_notifications_interruptions" msgid="543023766902917716">"dont don\'t disturb interrupt interruption break"</string>
     <string name="keywords_app" msgid="6334757056536837791">"RAM"</string>
     <string name="keywords_location" msgid="782326973714313480">"nearby location history reporting"</string>
@@ -2504,32 +2357,14 @@
     <string name="status_failed_to_write" msgid="8072752734686294718">"Unable to write data to NFC tag. If the problem persists, try a different tag"</string>
     <string name="status_tag_not_writable" msgid="2511611539977682175">"NFC tag is not writeable. Please use a different tag."</string>
     <string name="default_sound" msgid="8821684447333687810">"Default sound"</string>
-    <string name="notification_settings" msgid="8791730980212496561">"Sound &amp; notification"</string>
+    <string name="sound_settings_summary" msgid="3651751880569558828">"Ringer volume at <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="media_volume_option_title" msgid="2811531786073003825">"Media volume"</string>
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"Alarm volume"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"Ring volume"</string>
     <string name="notification_volume_option_title" msgid="6064656124416882130">"Notification volume"</string>
-    <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Priority only allows"</string>
-    <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Automatic rules"</string>
-    <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"Priority only"</string>
-    <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Alarms only"</string>
-    <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"Total silence"</string>
-    <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <string name="zen_mode_visual_interruptions_settings_title" msgid="168576844124787420">"Visual interruptions"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Phone ringtone"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Default notification ringtone"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Also vibrate for calls"</string>
-    <string name="notification_section_header" msgid="95661783916799134">"Notification"</string>
-    <string name="advanced_section_header" msgid="8833934850242546903">"Advanced"</string>
-    <string name="notification_pulse_title" msgid="1247988024534030629">"Pulse notification light"</string>
-    <string name="lock_screen_notifications_title" msgid="9118805570775519455">"When device is locked"</string>
-    <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Show all notification content"</string>
-    <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"Hide sensitive notification content"</string>
-    <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Don\'t show notifications at all"</string>
-    <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"When your device is locked, how do you want notifications to show?"</string>
-    <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"Notifications"</string>
-    <string name="app_notifications_title" msgid="5810577805218003760">"App notifications"</string>
-    <string name="topic_notifications_title" msgid="7243623930984080881">"Topic notifications"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Other sounds"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Dial pad tones"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Screen locking sounds"</string>
@@ -2543,6 +2378,24 @@
     <string name="emergency_tone_silent" msgid="1067515631635824291">"Silent"</string>
     <string name="emergency_tone_alert" msgid="8941852695428130667">"Alert"</string>
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Vibrate"</string>
+    <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Priority only allows"</string>
+    <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Automatic rules"</string>
+    <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"Priority only"</string>
+    <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Alarms only"</string>
+    <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"Total silence"</string>
+    <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
+    <string name="zen_mode_visual_interruptions_settings_title" msgid="168576844124787420">"Visual interruptions"</string>
+    <string name="configure_notification_settings" msgid="3558846607192693233">"Configure notifications"</string>
+    <string name="advanced_section_header" msgid="8833934850242546903">"Advanced"</string>
+    <string name="notification_pulse_title" msgid="1247988024534030629">"Pulse notification light"</string>
+    <string name="lock_screen_notifications_title" msgid="9118805570775519455">"When device is locked"</string>
+    <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Show all notification content"</string>
+    <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"Hide sensitive notification content"</string>
+    <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Don\'t show notifications at all"</string>
+    <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"When your device is locked, how do you want notifications to show?"</string>
+    <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"Notifications"</string>
+    <string name="app_notifications_title" msgid="139788604658984593">"Notifications"</string>
+    <string name="topic_notifications_title" msgid="7243623930984080881">"Topic notifications"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Notification access"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Apps cannot read notifications"</string>
     <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
@@ -2565,6 +2418,7 @@
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Priority"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Sensitive"</string>
     <string name="app_notifications_dialog_done" msgid="3484067728568791014">"Done"</string>
+    <string name="app_notification_importance_title" msgid="8002263131149345584">"Importance"</string>
     <string name="zen_mode_rule_name" msgid="5149068059383837549">"Rule name"</string>
     <string name="zen_mode_rule_name_hint" msgid="3781174510556433384">"Enter rule name"</string>
     <string name="zen_mode_rule_name_warning" msgid="4517805381294494314">"Rule name already in use"</string>
@@ -2635,7 +2489,6 @@
     <string name="zen_mode_peek_summary" msgid="27622220787132681">"Prevent notifications silenced by Do Not Disturb from peeking or appearing on the current screen"</string>
     <string name="zen_mode_lights" msgid="904184586121619154">"No notification light"</string>
     <string name="zen_mode_lights_summary" msgid="6953305086643633530">"Prevent notifications silenced by Do Not Disturb from causing the light to pulse"</string>
-    <string name="notification_settings_apps_title" msgid="1125354590652967250">"App notifications"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Notification settings"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Send feedback about this device"</string>
     <string name="restr_pin_enter_admin_pin" msgid="2451187374960131018">"Enter administrator PIN"</string>
@@ -2801,9 +2654,6 @@
     <string name="usb_use_MIDI" msgid="5116404702692483166">"MIDI"</string>
     <string name="usb_use_MIDI_desc" msgid="6895383550910152384">"Use device for MIDI input"</string>
     <string name="usb_use" msgid="3372728031108932425">"Use USB for"</string>
-    <string name="inactive_apps_title" msgid="1317817863508274533">"Inactive apps"</string>
-    <string name="inactive_app_inactive_summary" msgid="6768756967594202411">"Inactive. Touch to toggle."</string>
-    <string name="inactive_app_active_summary" msgid="4512911571954375968">"Active. Touch to toggle."</string>
     <string name="assist_access_context_title" msgid="2269032346698890257">"Use text from screen"</string>
     <string name="assist_access_context_summary" msgid="1991421283142279560">"Allow the assist app to access the screen contents as text"</string>
     <string name="assist_access_screenshot_title" msgid="4034721336291215819">"Use screenshot"</string>
@@ -2832,6 +2682,8 @@
     <string name="no_data_usage" msgid="9131454024293628063">"No data used"</string>
     <string name="zen_access_warning_dialog_title" msgid="1198189958031157142">"Allow access to Do Not Disturb for <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_access_warning_dialog_summary" msgid="4015885767653010873">"The app will be able to turn on/off Do Not Disturb and make changes to related settings."</string>
+    <string name="zen_access_revoke_warning_dialog_title" msgid="558779234015793950">"Revoke access to Do Not Disturb for <xliff:g id="APP">%1$s</xliff:g>?"</string>
+    <string name="zen_access_revoke_warning_dialog_summary" msgid="5518216907304930148">"All Do Not Disturb rules created by this app will be removed."</string>
     <string name="ignore_optimizations_on" msgid="6915689518016285116">"Don’t optimise"</string>
     <string name="ignore_optimizations_off" msgid="6153196256410296835">"Optimise"</string>
     <string name="ignore_optimizations_on_desc" msgid="2321398930330555815">"May drain your battery more quickly"</string>
@@ -2869,18 +2721,6 @@
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Open the camera app by twisting your wrist twice"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Press power button twice for camera"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Quickly open camera without unlocking your screen"</string>
-  <string-array name="color_mode_names">
-    <item msgid="2425514299220523812">"Vibrant (default)"</item>
-    <item msgid="8446070607501413455">"Natural"</item>
-    <item msgid="6553408765810699025">"Standard"</item>
-  </string-array>
-  <string-array name="color_mode_descriptions">
-    <item msgid="4979629397075120893">"Enhanced colours"</item>
-    <item msgid="8280754435979370728">"Natural colours as seen by the eye"</item>
-    <item msgid="5363960654009010371">"Colours optimised for digital content"</item>
-  </string-array>
-    <string name="picture_color_mode" msgid="4560755008730283695">"Picture colour mode"</string>
-    <string name="picture_color_mode_desc" msgid="1141891467675548590">"Use sRGB"</string>
     <string name="force_density_preference_title" msgid="7269059903952009908">"Display scale"</string>
     <string name="force_density_keywords" msgid="3810424110118041972">"display density zoom scale scaling"</string>
     <string name="force_density_summary_small" msgid="5481649550774706354">"Small"</string>
@@ -2897,4 +2737,11 @@
     <string name="storage_summary" msgid="1110250618334248745">"<xliff:g id="SIZE1">%1$s</xliff:g> of <xliff:g id="SIZE2">%2$s</xliff:g> used"</string>
     <string name="display_summary_on" msgid="5628868543070268634">"Adaptive brightness is ON"</string>
     <string name="display_summary_off" msgid="6399558022426312990">"Adaptive brightness is OFF"</string>
+    <string name="memory_summary" msgid="8080825904671961872">"Avg <xliff:g id="USED_MEMORY">%1$s</xliff:g> of <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> memory used"</string>
+    <string name="user_summary" msgid="1617826998097722499">"Signed in as <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
+    <string name="payment_summary" msgid="3472482669588561110">"<xliff:g id="APP_NAME">%1$s</xliff:g> is default"</string>
+    <string name="location_on_summary" msgid="5127631544018313587">"ON / <xliff:g id="LOCATION_MODE">%1$s</xliff:g>"</string>
+    <string name="location_off_summary" msgid="6474350053215707957">"OFF"</string>
+    <string name="backup_disabled" msgid="485189128759595412">"Back up disabled"</string>
+    <string name="about_summary" msgid="8460677224778433924">"Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
 </resources>
