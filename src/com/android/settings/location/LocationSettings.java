@@ -17,7 +17,9 @@
 package com.android.settings.location;
 
 import android.app.Activity;
+import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -30,6 +32,7 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
+import android.support.v14.preference.SwitchPreference;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -81,16 +84,10 @@ public class LocationSettings extends LocationSettingsBase
     private static final String TAG = "LocationSettings";
 
     /**
-     * Key for managed profile location preference category. Category is shown only
-     * if there is a managed profile
+     * Key for managed profile location switch preference. Shown only
+     * if there is a managed profile.
      */
-    private static final String KEY_MANAGED_PROFILE_CATEGORY = "managed_profile_location_category";
-    /**
-     * Key for managed profile location preference. Note it used to be a switch pref and we had to
-     * keep the key as strings had been submitted for string freeze before the decision to
-     * demote this to a simple preference was made. TODO: Candidate for refactoring.
-     */
-    private static final String KEY_MANAGED_PROFILE_PREFERENCE = "managed_profile_location_switch";
+    private static final String KEY_MANAGED_PROFILE_SWITCH = "managed_profile_location_switch";
     /** Key for preference screen "Mode" */
     private static final String KEY_LOCATION_MODE = "location_mode";
     /** Key for preference category "Recent location requests" */
@@ -104,7 +101,7 @@ public class LocationSettings extends LocationSettingsBase
     private Switch mSwitch;
     private boolean mValidListener = false;
     private UserHandle mManagedProfile;
-    private Preference mManagedProfilePreference;
+    private SwitchPreference mManagedProfileSwitch;
     private Preference mLocationMode;
     private PreferenceCategory mCategoryRecentLocationRequests;
     /** Receives UPDATE_INTENT  */
@@ -250,20 +247,39 @@ public class LocationSettings extends LocationSettingsBase
         mManagedProfile = Utils.getManagedProfile(mUm);
         if (mManagedProfile == null) {
             // There is no managed profile
-            root.removePreference(root.findPreference(KEY_MANAGED_PROFILE_CATEGORY));
-            mManagedProfilePreference = null;
+            root.removePreference(root.findPreference(KEY_MANAGED_PROFILE_SWITCH));
+            mManagedProfileSwitch = null;
         } else {
-            mManagedProfilePreference = root.findPreference(KEY_MANAGED_PROFILE_PREFERENCE);
-            mManagedProfilePreference.setOnPreferenceClickListener(null);
+            mManagedProfileSwitch = (SwitchPreference)root
+                    .findPreference(KEY_MANAGED_PROFILE_SWITCH);
+            mManagedProfileSwitch.setOnPreferenceClickListener(null);
         }
     }
 
-    private void changeManagedProfileLocationAccessStatus(boolean enabled, int summaryResId) {
-        if (mManagedProfilePreference == null) {
+    private void changeManagedProfileLocationAccessStatus(boolean mainSwitchOn) {
+        if (mManagedProfileSwitch == null) {
             return;
         }
-        mManagedProfilePreference.setEnabled(enabled);
-        mManagedProfilePreference.setSummary(summaryResId);
+        boolean enabled = mainSwitchOn;
+        int summaryResId = R.string.switch_off_text;
+        if (mUm.hasUserRestriction(UserManager.DISALLOW_SHARE_LOCATION, mManagedProfile)
+                && getAdminRestrictingManagedProfile() != null) {
+                    summaryResId = R.string.managed_profile_location_switch_lockdown;
+                    enabled = false;
+        }
+
+        mManagedProfileSwitch.setEnabled(enabled);
+        mManagedProfileSwitch.setOnPreferenceClickListener(null);
+        if (!enabled) {
+            mManagedProfileSwitch.setChecked(false);
+        } else {
+            final boolean isRestricted = isManagedProfileRestrictedByBase();
+            mManagedProfileSwitch.setChecked(!isRestricted);
+            summaryResId = (isRestricted ?
+                    R.string.switch_off_text : R.string.switch_on_text);
+            mManagedProfileSwitch.setOnPreferenceClickListener(mManagedProfileSwitchClickListener);
+        }
+        mManagedProfileSwitch.setSummary(summaryResId);
     }
 
     /**
@@ -374,18 +390,7 @@ public class LocationSettings extends LocationSettingsBase
             }
         }
 
-        if (mManagedProfilePreference != null) {
-            if (mUm.hasUserRestriction(UserManager.DISALLOW_SHARE_LOCATION, mManagedProfile)) {
-                changeManagedProfileLocationAccessStatus(false,
-                        R.string.managed_profile_location_switch_lockdown);
-            } else {
-                if (enabled) {
-                    changeManagedProfileLocationAccessStatus(true, R.string.switch_on_text);
-                } else {
-                    changeManagedProfileLocationAccessStatus(false, R.string.switch_off_text);
-                }
-            }
-        }
+        changeManagedProfileLocationAccessStatus(enabled);
 
         // As a safety measure, also reloads on location mode change to ensure the settings are
         // up-to-date even if an affected app doesn't send the setting changed broadcast.
@@ -403,6 +408,47 @@ public class LocationSettings extends LocationSettingsBase
             setLocationMode(android.provider.Settings.Secure.LOCATION_MODE_OFF);
         }
     }
+
+    private ComponentName getAdminRestrictingManagedProfile() {
+        if (mManagedProfile == null) {
+            return null;
+        }
+        DevicePolicyManager dpm = (DevicePolicyManager)getActivity().getSystemService(
+                Context.DEVICE_POLICY_SERVICE);
+        if (dpm == null) {
+            return null;
+        }
+        List<ComponentName> admins = dpm.getActiveAdminsAsUser(mManagedProfile.getIdentifier());
+        for (int i = 0; i < admins.size(); ++i) {
+            final ComponentName admin = admins.get(i);
+            Bundle restrictions = dpm.getUserRestrictions(admin, mManagedProfile.getIdentifier());
+            if (restrictions != null && restrictions.getBoolean(UserManager.DISALLOW_SHARE_LOCATION,
+                    false)) {
+                return admin;
+            }
+        }
+        return null;
+    }
+
+    private boolean isManagedProfileRestrictedByBase() {
+        if (mManagedProfile == null) {
+            return false;
+        }
+        return mUm.hasBaseUserRestriction(UserManager.DISALLOW_SHARE_LOCATION, mManagedProfile);
+    }
+
+    private Preference.OnPreferenceClickListener mManagedProfileSwitchClickListener =
+            new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    final boolean switchState = mManagedProfileSwitch.isChecked();
+                    mUm.setUserRestriction(UserManager.DISALLOW_SHARE_LOCATION,
+                            !switchState, mManagedProfile);
+                    mManagedProfileSwitch.setSummary(switchState ?
+                            R.string.switch_on_text : R.string.switch_off_text);
+                    return true;
+                }
+            };
 
     private class PackageEntryClickedListener
             implements Preference.OnPreferenceClickListener {
