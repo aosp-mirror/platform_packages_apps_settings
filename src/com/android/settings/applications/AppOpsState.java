@@ -180,6 +180,7 @@ public class AppOpsState {
                     false,
                     false,
                     false,
+                    false,
                     false }
             );
 
@@ -206,9 +207,14 @@ public class AppOpsState {
                     false }
             );
 
+    public static final OpsTemplate RUN_IN_BACKGROUND_TEMPLATE = new OpsTemplate(
+            new int[] { AppOpsManager.OP_RUN_IN_BACKGROUND },
+            new boolean[] { false }
+            );
+
     public static final OpsTemplate[] ALL_TEMPLATES = new OpsTemplate[] {
             LOCATION_TEMPLATE, PERSONAL_TEMPLATE, MESSAGING_TEMPLATE,
-            MEDIA_TEMPLATE, DEVICE_TEMPLATE
+            MEDIA_TEMPLATE, DEVICE_TEMPLATE, RUN_IN_BACKGROUND_TEMPLATE
     };
 
     /**
@@ -306,6 +312,7 @@ public class AppOpsState {
                 = new ArrayList<AppOpsManager.OpEntry>();
         private final AppEntry mApp;
         private final int mSwitchOrder;
+        private int mOverriddenPrimaryMode = -1;
 
         public AppOpEntry(AppOpsManager.PackageOps pkg, AppOpsManager.OpEntry op, AppEntry app,
                 int switchOrder) {
@@ -363,6 +370,14 @@ public class AppOpsState {
             return mOps.get(pos);
         }
 
+        public int getPrimaryOpMode() {
+            return mOverriddenPrimaryMode >= 0 ? mOverriddenPrimaryMode : mOps.get(0).getMode();
+        }
+
+        public void overridePrimaryOpMode(int mode) {
+            mOverriddenPrimaryMode = mode;
+        }
+
         private CharSequence getCombinedText(ArrayList<AppOpsManager.OpEntry> ops,
                 CharSequence[] items) {
             if (ops.size() == 1) {
@@ -418,9 +433,9 @@ public class AppOpsState {
     }
 
     /**
-     * Perform alphabetical comparison of application entry objects.
+     * Perform app op state comparison of application entry objects.
      */
-    public static final Comparator<AppOpEntry> APP_OP_COMPARATOR = new Comparator<AppOpEntry>() {
+    public static final Comparator<AppOpEntry> RECENCY_COMPARATOR = new Comparator<AppOpEntry>() {
         private final Collator sCollator = Collator.getInstance();
         @Override
         public int compare(AppOpEntry object1, AppOpEntry object2) {
@@ -435,6 +450,18 @@ public class AppOpsState {
                 // More recent times go first.
                 return object1.getTime() > object2.getTime() ? -1 : 1;
             }
+            return sCollator.compare(object1.getAppEntry().getLabel(),
+                    object2.getAppEntry().getLabel());
+        }
+    };
+
+    /**
+     * Perform alphabetical comparison of application entry objects.
+     */
+    public static final Comparator<AppOpEntry> LABEL_COMPARATOR = new Comparator<AppOpEntry>() {
+        private final Collator sCollator = Collator.getInstance();
+        @Override
+        public int compare(AppOpEntry object1, AppOpEntry object2) {
             return sCollator.compare(object1.getAppEntry().getLabel(),
                     object2.getAppEntry().getLabel());
         }
@@ -466,8 +493,12 @@ public class AppOpsState {
         entries.add(entry);
     }
 
+    public AppOpsManager getAppOpsManager() {
+        return mAppOps;
+    }
+
     public List<AppOpEntry> buildState(OpsTemplate tpl) {
-        return buildState(tpl, 0, null);
+        return buildState(tpl, 0, null, RECENCY_COMPARATOR);
     }
 
     private AppEntry getAppEntry(final Context context, final HashMap<String, AppEntry> appEntries,
@@ -492,6 +523,11 @@ public class AppOpsState {
     }
 
     public List<AppOpEntry> buildState(OpsTemplate tpl, int uid, String packageName) {
+        return buildState(tpl, uid, packageName, RECENCY_COMPARATOR);
+    }
+
+    public List<AppOpEntry> buildState(OpsTemplate tpl, int uid, String packageName,
+            Comparator<AppOpEntry> comparator) {
         final Context context = mContext;
 
         final HashMap<String, AppEntry> appEntries = new HashMap<String, AppEntry>();
@@ -593,7 +629,7 @@ public class AppOpsState {
         }
 
         // Sort the list.
-        Collections.sort(entries, APP_OP_COMPARATOR);
+        Collections.sort(entries, comparator);
 
         // Done!
         return entries;

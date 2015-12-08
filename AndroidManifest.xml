@@ -1161,6 +1161,18 @@
         </activity>
         -->
 
+        <activity android:name="Settings$BackgroundCheckSummaryActivity"
+                android:label="@string/background_check_title"
+                android:taskAffinity=""
+                android:enabled="false">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.applications.BackgroundCheckSummary" />
+        </activity>
+
         <activity android:name="Settings$LocationSettingsActivity"
                 android:label="@string/location_settings_title"
                 android:icon="@drawable/ic_settings_location"

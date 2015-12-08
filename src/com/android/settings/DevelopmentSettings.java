@@ -76,6 +76,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.android.internal.logging.MetricsLogger;
+import com.android.settings.applications.BackgroundCheckSummary;
 import com.android.settings.fuelgauge.InactiveApps;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
@@ -169,6 +170,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private static final String IMMEDIATELY_DESTROY_ACTIVITIES_KEY
             = "immediately_destroy_activities";
     private static final String APP_PROCESS_LIMIT_KEY = "app_process_limit";
+
+    private static final String BACKGROUND_CHECK_KEY = "background_check";
 
     private static final String SHOW_ALL_ANRS_KEY = "show_all_anrs";
 
@@ -1718,6 +1721,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             writeForceResizableOptions();
         } else if (INACTIVE_APPS_KEY.equals(preference.getKey())) {
             startInactiveAppsFragment();
+        } else if (BACKGROUND_CHECK_KEY.equals(preference.getKey())) {
+            startBackgroundCheckFragment();
         } else {
             return super.onPreferenceTreeClick(preference);
         }
@@ -1729,6 +1734,12 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         ((SettingsActivity) getActivity()).startPreferencePanel(
                 InactiveApps.class.getName(),
                 null, R.string.inactive_apps_title, null, null, 0);
+    }
+
+    private void startBackgroundCheckFragment() {
+        ((SettingsActivity) getActivity()).startPreferencePanel(
+                BackgroundCheckSummary.class.getName(),
+                null, R.string.background_check_title, null, null, 0);
     }
 
     private boolean showKeyguardConfirmation(Resources resources, int requestCode) {

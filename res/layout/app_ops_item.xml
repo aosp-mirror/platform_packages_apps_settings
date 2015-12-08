@@ -25,7 +25,7 @@
     android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
     android:paddingTop="8dip"
     android:paddingBottom="8dip"
-    android:columnCount="3">
+    android:columnCount="4">
 
     <ImageView
         android:id="@+id/app_icon"
@@ -46,6 +46,14 @@
         android:ellipsize="marquee"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textAlignment="viewStart" />
+
+    <Switch
+        android:id="@+id/op_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_rowSpan="2"
+        android:focusable="false"
+        android:clickable="false" />
 
     <TextView
         android:id="@+id/op_name"
