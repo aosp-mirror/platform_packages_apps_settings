@@ -16,13 +16,16 @@
 
 package com.android.settings.vpn2;
 
+import android.annotation.NonNull;
+import android.annotation.UiThread;
+import android.annotation.WorkerThread;
 import android.app.AppOpsManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.net.ConnectivityManager;
 import android.net.ConnectivityManager.NetworkCallback;
+import android.net.ConnectivityManager;
 import android.net.IConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
@@ -40,7 +43,9 @@ import android.security.KeyStore;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
-import android.util.SparseArray;
+import android.util.ArrayMap;
+import android.util.ArraySet;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -57,8 +62,10 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.google.android.collect.Lists;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import static android.app.AppOpsManager.OP_ACTIVATE_VPN;
 
@@ -87,8 +94,8 @@ public class VpnSettings extends SettingsPreferenceFragment implements
 
     private final KeyStore mKeyStore = KeyStore.getInstance();
 
-    private HashMap<String, ConfigPreference> mConfigPreferences = new HashMap<>();
-    private HashMap<String, AppPreference> mAppPreferences = new HashMap<>();
+    private Map<String, ConfigPreference> mConfigPreferences = new ArrayMap<>();
+    private Map<AppVpnInfo, AppPreference> mAppPreferences = new ArrayMap<>();
 
     private Handler mUpdater;
     private LegacyVpnInfo mConnectedLegacyVpn;
@@ -211,58 +218,64 @@ public class VpnSettings extends SettingsPreferenceFragment implements
     public boolean handleMessage(Message message) {
         mUpdater.removeMessages(RESCAN_MESSAGE);
 
-        // Pref group within which to list VPNs
-        PreferenceGroup vpnGroup = getPreferenceScreen();
-        vpnGroup.removeAll();
-        mConfigPreferences.clear();
-        mAppPreferences.clear();
+        final List<VpnProfile> vpnProfiles = loadVpnProfiles(mKeyStore);
+        final List<AppVpnInfo> vpnApps = getVpnApps();
 
-        // Fetch configured VPN profiles from KeyStore
-        for (VpnProfile profile : loadVpnProfiles(mKeyStore)) {
-            final ConfigPreference pref = new ConfigPreference(getPrefContext(), mManageListener,
-                    profile);
-            pref.setOnPreferenceClickListener(this);
-            mConfigPreferences.put(profile.key, pref);
-            vpnGroup.addPreference(pref);
-        }
+        final List<LegacyVpnInfo> connectedLegacyVpns = getConnectedLegacyVpns();
+        final List<AppVpnInfo> connectedAppVpns = getConnectedAppVpns();
 
-        // 3rd-party VPN apps can change elsewhere. Reload them every time.
-        for (AppOpsManager.PackageOps pkg : getVpnApps()) {
-            String key = getVpnIdentifier(UserHandle.getUserId(pkg.getUid()), pkg.getPackageName());
-            final AppPreference pref = new AppPreference(getPrefContext(), mManageListener,
-                    pkg.getPackageName(), pkg.getUid());
-            pref.setOnPreferenceClickListener(this);
-            mAppPreferences.put(key, pref);
-            vpnGroup.addPreference(pref);
-        }
+        // Refresh the PreferenceGroup which lists VPNs
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                // Find new VPNs by subtracting existing ones from the full set
+                final Set<Preference> updates = new ArraySet<>();
 
-        // Mark out connections with a subtitle
-        try {
-            // Legacy VPNs
-            mConnectedLegacyVpn = null;
-            LegacyVpnInfo info = mConnectivityService.getLegacyVpnInfo(UserHandle.myUserId());
-            if (info != null) {
-                ConfigPreference preference = mConfigPreferences.get(info.key);
-                if (preference != null) {
-                    preference.setState(info.state);
-                    mConnectedLegacyVpn = info;
+                for (VpnProfile profile : vpnProfiles) {
+                    ConfigPreference p = findOrCreatePreference(profile);
+                    p.setState(ConfigPreference.STATE_NONE);
+                    updates.add(p);
                 }
-            }
+                for (AppVpnInfo app : vpnApps) {
+                    AppPreference p = findOrCreatePreference(app);
+                    p.setState(AppPreference.STATE_DISCONNECTED);
+                    updates.add(p);
+                }
 
-            // Third-party VPNs
-            for (UserHandle profile : mUserManager.getUserProfiles()) {
-                VpnConfig cfg = mConnectivityService.getVpnConfig(profile.getIdentifier());
-                if (cfg != null) {
-                    final String key = getVpnIdentifier(profile.getIdentifier(), cfg.user);
-                    final AppPreference preference = mAppPreferences.get(key);
+                // Trim preferences for deleted VPNs
+                mConfigPreferences.values().retainAll(updates);
+                mAppPreferences.values().retainAll(updates);
+
+                final PreferenceGroup vpnGroup = getPreferenceScreen();
+                for (int i = vpnGroup.getPreferenceCount() - 1; i >= 0; i--) {
+                    Preference p = vpnGroup.getPreference(i);
+                    if (updates.contains(p)) {
+                        updates.remove(p);
+                    } else {
+                        vpnGroup.removePreference(p);
+                    }
+                }
+
+                // Show any new preferences on the screen
+                for (Preference pref : updates) {
+                    vpnGroup.addPreference(pref);
+                }
+
+                // Mark connected VPNs
+                for (LegacyVpnInfo info : connectedLegacyVpns) {
+                    final ConfigPreference preference = mConfigPreferences.get(info.key);
+                    if (preference != null) {
+                        preference.setState(info.state);
+                    }
+                }
+                for (AppVpnInfo app : connectedAppVpns) {
+                    final AppPreference preference = mAppPreferences.get(app);
                     if (preference != null) {
                         preference.setState(AppPreference.STATE_CONNECTED);
                     }
                 }
             }
-        } catch (RemoteException e) {
-            // ignore
-        }
+        });
 
         mUpdater.sendEmptyMessageDelayed(RESCAN_MESSAGE, RESCAN_INTERVAL_MS);
         return true;
@@ -278,7 +291,7 @@ public class VpnSettings extends SettingsPreferenceFragment implements
                     mConnectedLegacyVpn.intent.send();
                     return true;
                 } catch (Exception e) {
-                    // ignore
+                    Log.w(LOG_TAG, "Starting config intent failed", e);
                 }
             }
             ConfigDialogFragment.show(this, profile, false /* editing */, true /* exists */);
@@ -289,7 +302,7 @@ public class VpnSettings extends SettingsPreferenceFragment implements
 
             if (!connected) {
                 try {
-                    UserHandle user = new UserHandle(UserHandle.getUserId(pref.getUid()));
+                    UserHandle user = UserHandle.of(pref.getUserId());
                     Context userContext = getActivity().createPackageContextAsUser(
                             getActivity().getPackageName(), 0 /* flags */, user);
                     PackageManager pm = userContext.getPackageManager();
@@ -299,16 +312,21 @@ public class VpnSettings extends SettingsPreferenceFragment implements
                         return true;
                     }
                 } catch (PackageManager.NameNotFoundException nnfe) {
-                    // Fall through
+                    Log.w(LOG_TAG, "VPN provider does not exist: " + pref.getPackageName(), nnfe);
                 }
             }
 
-            // Already onnected or no launch intent available - show an info dialog
+            // Already connected or no launch intent available - show an info dialog
             PackageInfo pkgInfo = pref.getPackageInfo();
             AppDialogFragment.show(this, pkgInfo, pref.getLabel(), false /* editing */, connected);
             return true;
         }
         return false;
+    }
+
+    @Override
+    protected int getHelpResource() {
+        return R.string.help_url_vpn;
     }
 
     private View.OnClickListener mManageListener = new View.OnClickListener() {
@@ -329,10 +347,6 @@ public class VpnSettings extends SettingsPreferenceFragment implements
         }
     };
 
-    private static String getVpnIdentifier(int userId, String packageName) {
-        return Integer.toString(userId)+ "_" + packageName;
-    }
-
     private NetworkCallback mNetworkCallback = new NetworkCallback() {
         @Override
         public void onAvailable(Network network) {
@@ -349,18 +363,68 @@ public class VpnSettings extends SettingsPreferenceFragment implements
         }
     };
 
-    @Override
-    protected int getHelpResource() {
-        return R.string.help_url_vpn;
+    @UiThread
+    private ConfigPreference findOrCreatePreference(VpnProfile profile) {
+        ConfigPreference pref = mConfigPreferences.get(profile.key);
+        if (pref == null) {
+            pref = new ConfigPreference(getPrefContext(), mManageListener);
+            pref.setOnPreferenceClickListener(this);
+            mConfigPreferences.put(profile.key, pref);
+        }
+        pref.setProfile(profile);
+        return pref;
     }
 
-    private List<AppOpsManager.PackageOps> getVpnApps() {
-        List<AppOpsManager.PackageOps> result = Lists.newArrayList();
+    @UiThread
+    private AppPreference findOrCreatePreference(AppVpnInfo app) {
+        AppPreference pref = mAppPreferences.get(app);
+        if (pref == null) {
+            pref = new AppPreference(getPrefContext(), mManageListener);
+            pref.setOnPreferenceClickListener(this);
+            mAppPreferences.put(app, pref);
+        }
+        pref.setUserId(app.userId);
+        pref.setPackageName(app.packageName);
+        return pref;
+    }
+
+    @WorkerThread
+    private List<LegacyVpnInfo> getConnectedLegacyVpns() {
+        try {
+            mConnectedLegacyVpn = mConnectivityService.getLegacyVpnInfo(UserHandle.myUserId());
+            if (mConnectedLegacyVpn != null) {
+                return Collections.singletonList(mConnectedLegacyVpn);
+            }
+        } catch (RemoteException e) {
+            Log.e(LOG_TAG, "Failure updating VPN list with connected legacy VPNs", e);
+        }
+        return Collections.emptyList();
+    }
+
+    @WorkerThread
+    private List<AppVpnInfo> getConnectedAppVpns() {
+        // Mark connected third-party services
+        List<AppVpnInfo> connections = new ArrayList<>();
+        try {
+            for (UserHandle profile : mUserManager.getUserProfiles()) {
+                VpnConfig config = mConnectivityService.getVpnConfig(profile.getIdentifier());
+                if (config != null && !config.legacy) {
+                    connections.add(new AppVpnInfo(profile.getIdentifier(), config.user));
+                }
+            }
+        } catch (RemoteException e) {
+            Log.e(LOG_TAG, "Failure updating VPN list with connected app VPNs", e);
+        }
+        return connections;
+    }
+
+    private List<AppVpnInfo> getVpnApps() {
+        List<AppVpnInfo> result = Lists.newArrayList();
 
         // Build a filter of currently active user profiles.
-        SparseArray<Boolean> currentProfileIds = new SparseArray<>();
+        Set<Integer> currentProfileIds = new ArraySet<>();
         for (UserHandle profile : mUserManager.getUserProfiles()) {
-            currentProfileIds.put(profile.getIdentifier(), Boolean.TRUE);
+            currentProfileIds.add(profile.getIdentifier());
         }
 
         // Fetch VPN-enabled apps from AppOps.
@@ -369,7 +433,7 @@ public class VpnSettings extends SettingsPreferenceFragment implements
         if (apps != null) {
             for (AppOpsManager.PackageOps pkg : apps) {
                 int userId = UserHandle.getUserId(pkg.getUid());
-                if (currentProfileIds.get(userId) == null) {
+                if (!currentProfileIds.contains(userId)) {
                     // Skip packages for users outside of our profile group.
                     continue;
                 }
@@ -382,7 +446,7 @@ public class VpnSettings extends SettingsPreferenceFragment implements
                     }
                 }
                 if (allowed) {
-                    result.add(pkg);
+                    result.add(new AppVpnInfo(userId, pkg.getPackageName()));
                 }
             }
         }
@@ -406,5 +470,30 @@ public class VpnSettings extends SettingsPreferenceFragment implements
             }
         }
         return result;
+    }
+
+    /** Utility holder for packageName:userId pairs */
+    private static class AppVpnInfo {
+        public int userId;
+        public String packageName;
+
+        public AppVpnInfo(int userId, @NonNull String packageName) {
+            this.userId = userId;
+            this.packageName = packageName;
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if (other instanceof AppVpnInfo) {
+                AppVpnInfo that = (AppVpnInfo) other;
+                return userId == that.userId && packageName.equals(that.packageName);
+            }
+            return false;
+        }
+
+        @Override
+        public int hashCode() {
+            return (packageName != null ? packageName.hashCode() : 0) * 31 + userId;
+        }
     }
 }

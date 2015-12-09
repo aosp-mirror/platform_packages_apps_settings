@@ -31,12 +31,15 @@ import static com.android.internal.net.LegacyVpnInfo.STATE_CONNECTED;
  * state.
  */
 public class ConfigPreference extends ManageablePreference {
-    private VpnProfile mProfile;
-    private int mState = -1;
+    public static int STATE_NONE = -1;
 
-    ConfigPreference(Context context, OnClickListener onManage, VpnProfile profile) {
+    private VpnProfile mProfile;
+
+    /** One of the STATE_* fields from LegacyVpnInfo, or STATE_NONE */
+    private int mState = STATE_NONE;
+
+    ConfigPreference(Context context, OnClickListener onManage) {
         super(context, null /* attrs */, onManage);
-        setProfile(profile);
     }
 
     public VpnProfile getProfile() {
@@ -54,15 +57,16 @@ public class ConfigPreference extends ManageablePreference {
     }
 
     private void update() {
-        if (mState < 0) {
+        if (mState == STATE_NONE) {
             setSummary("");
         } else {
-            String[] states = getContext().getResources()
-                    .getStringArray(R.array.vpn_states);
+            final String[] states = getContext().getResources().getStringArray(R.array.vpn_states);
             setSummary(states[mState]);
         }
-        setIcon(R.mipmap.ic_launcher_settings);
-        setTitle(mProfile.name);
+        if (mProfile != null) {
+            setIcon(R.mipmap.ic_launcher_settings);
+            setTitle(mProfile.name);
+        }
         notifyHierarchyChanged();
     }
 
@@ -72,7 +76,7 @@ public class ConfigPreference extends ManageablePreference {
             ConfigPreference another = (ConfigPreference) preference;
             int result;
             if ((result = another.mState - mState) == 0 &&
-                    (result = mProfile.name.compareTo(another.mProfile.name)) == 0 &&
+                    (result = mProfile.name.compareToIgnoreCase(another.mProfile.name)) == 0 &&
                     (result = mProfile.type - another.mProfile.type) == 0) {
                 result = mProfile.key.compareTo(another.mProfile.key);
             }
