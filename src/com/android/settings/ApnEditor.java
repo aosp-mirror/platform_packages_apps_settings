@@ -203,10 +203,22 @@ public class ApnEditor extends InstrumentedPreferenceActivity
         mFirstTime = icicle == null;
 
         if (action.equals(Intent.ACTION_EDIT)) {
-            mUri = intent.getData();
+            Uri uri = intent.getData();
+            if (!uri.isPathPrefixMatch(Telephony.Carriers.CONTENT_URI)) {
+                Log.e(TAG, "Edit request not for carrier table. Uri: " + uri);
+                finish();
+                return;
+            }
+            mUri = uri;
         } else if (action.equals(Intent.ACTION_INSERT)) {
             if (mFirstTime || icicle.getInt(SAVED_POS) == 0) {
-                mUri = getContentResolver().insert(intent.getData(), new ContentValues());
+                Uri uri = intent.getData();
+                if (!uri.isPathPrefixMatch(Telephony.Carriers.CONTENT_URI)) {
+                    Log.e(TAG, "Insert request not for carrier table. Uri: " + uri);
+                    finish();
+                    return;
+                }
+                mUri = getContentResolver().insert(uri, new ContentValues());
             } else {
                 mUri = ContentUris.withAppendedId(Telephony.Carriers.CONTENT_URI,
                         icicle.getInt(SAVED_POS));
