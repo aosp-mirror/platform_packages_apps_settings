@@ -38,9 +38,9 @@ import com.android.setupwizardlib.view.NavigationBar;
 public class SetupEncryptionInterstitial extends EncryptionInterstitial {
 
     public static Intent createStartIntent(Context ctx, int quality,
-            boolean requirePasswordDefault) {
+            boolean requirePasswordDefault, Intent unlockMethodIntent) {
         Intent startIntent = EncryptionInterstitial.createStartIntent(ctx, quality,
-                requirePasswordDefault);
+                requirePasswordDefault, unlockMethodIntent);
         startIntent.setClass(ctx, SetupEncryptionInterstitial.class);
         startIntent.putExtra(EXTRA_PREFS_SHOW_BUTTON_BAR, false)
                 .putExtra(EXTRA_SHOW_FRAGMENT_TITLE_RESID, -1);
@@ -102,12 +102,7 @@ public class SetupEncryptionInterstitial extends EncryptionInterstitial {
 
         @Override
         public void onNavigateNext() {
-            final SetupEncryptionInterstitial activity =
-                    (SetupEncryptionInterstitial) getActivity();
-            if (activity != null) {
-                activity.setResult(RESULT_OK, activity.getResultIntentData());
-                finish();
-            }
+            startLockIntent();
         }
     }
 }
