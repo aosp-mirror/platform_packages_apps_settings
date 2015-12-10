@@ -36,6 +36,7 @@ import com.android.settings.applications.AdvancedAppSettings;
 import com.android.settings.applications.ManageDefaultApps;
 import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.deviceinfo.StorageSettings;
+import com.android.settings.display.ScreenZoomSettings;
 import com.android.settings.fuelgauge.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
@@ -122,6 +123,7 @@ public final class Ranking {
 
         // Display
         sRankMap.put(DisplaySettings.class.getName(), RANK_DISPLAY);
+        sRankMap.put(ScreenZoomSettings.class.getName(), RANK_WIFI);
 
         // Wallpapers
         sRankMap.put(WallpaperTypeSettings.class.getName(), RANK_WALLPAPER);
