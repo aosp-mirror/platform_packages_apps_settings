@@ -38,6 +38,7 @@ import com.android.settings.applications.AdvancedAppSettings;
 import com.android.settings.applications.ManageDefaultApps;
 import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.deviceinfo.StorageSettings;
+import com.android.settings.display.ScreenZoomSettings;
 import com.android.settings.fuelgauge.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
@@ -130,6 +131,13 @@ public final class SearchIndexableResources {
                         NO_DATA_RES_ID,
                         HomeSettings.class.getName(),
                         R.drawable.ic_settings_home));
+
+        sResMap.put(ScreenZoomSettings.class.getName(),
+                new SearchIndexableResource(
+                        Ranking.getRankForClassName(ScreenZoomSettings.class.getName()),
+                        NO_DATA_RES_ID,
+                        ScreenZoomSettings.class.getName(),
+                        R.drawable.ic_settings_display));
 
         sResMap.put(DisplaySettings.class.getName(),
                 new SearchIndexableResource(

@@ -76,7 +76,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_CAMERA_GESTURE = "camera_gesture";
     private static final String KEY_CAMERA_DOUBLE_TAP_POWER_GESTURE
             = "camera_double_tap_power_gesture";
-    private static final String KEY_DISPLAY_DENSITY = "display_density";
 
     private DropDownPreference mFontSizePref;
 
@@ -214,9 +213,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             mNightModePreference.setValue(String.valueOf(currentNightMode));
             mNightModePreference.setOnPreferenceChangeListener(this);
         }
-
-        final Preference displayDensity = findPreference(KEY_DISPLAY_DENSITY);
-        displayDensity.setOnPreferenceChangeListener(this);
     }
 
     private static boolean allowAllRotations(Context context) {

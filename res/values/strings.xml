@@ -6613,23 +6613,33 @@
     <!-- Description of setting that controls gesture to open camera by double tapping the power button [CHAR LIMIT=NONE] -->
     <string name="camera_double_tap_power_gesture_desc">Quickly open camera without unlocking your screen</string>
 
-    <!-- Title of setting that controls display scale (e.g. density). [CHAR LIMIT=40] -->
-    <string name="force_density_preference_title">Display scale</string>
-    <!-- Keywords for setting that controls display scale (e.g. density). [CHAR LIMIT=NONE] -->
-    <string name="force_density_keywords">display density zoom scale scaling</string>
-    <!-- Description for the display scale that makes interface elements small. [CHAR LIMIT=24] -->
-    <string name="force_density_summary_small">Small</string>
-    <!-- Description for the device's default display scale. [CHAR LIMIT=24] -->
-    <string name="force_density_summary_normal">Normal</string>
-    <!-- Description for the display scale that makes interface elements large. [CHAR LIMIT=24] -->
-    <string name="force_density_summary_large">Large</string>
-    <!-- Description for the display scale that makes interface elements larger. [CHAR LIMIT=24] -->
-    <string name="force_density_summary_very_large">Larger</string>
-    <!-- Description for the display scale that makes interface elements largest. [CHAR LIMIT=24] -->
-    <string name="force_density_summary_extremely_large">Largest</string>
-    <!-- Description for a custom display scale. This shows the requested display
-         density in raw pixels per inch rather than computing a scale amount. [CHAR LIMIT=24] -->
-    <string name="force_density_summary_custom">Custom (<xliff:g id="densityDpi" example="160">%d</xliff:g>)</string>
+    <!-- Title of setting that controls screen zoom (e.g. how large interface elements appear). [CHAR LIMIT=40] -->
+    <string name="screen_zoom_title">Screen zoom</string>
+    <!-- Keywords for setting that controls screen zoom (e.g. how large interface elements appear). [CHAR LIMIT=NONE] -->
+    <string name="screen_zoom_keywords">display density screen zoom scale scaling</string>
+
+    <string name="screen_zoom_summary">Choose how zoomed you want the screen using the slider below the preview image.</string>
+
+    <!-- Title of the screen zoom preview activity. -->
+    <string name="screen_zoom_preview_title">Preview</string>
+    <!-- Description for the button that makes interface elements smaller. [CHAR_LIMIT=NONE] -->
+    <string name="screen_zoom_make_smaller_desc">Make smaller</string>
+    <!-- Description for the button that makes interface elements larger. [CHAR_LIMIT=NONE] -->
+    <string name="screen_zoom_make_larger_desc">Make larger</string>
+
+    <!-- Description for the screen zoom level that makes interface elements small. [CHAR LIMIT=24] -->
+    <string name="screen_zoom_summary_small">Small</string>
+    <!-- Description for the device's default screen zoom level. [CHAR LIMIT=24] -->
+    <string name="screen_zoom_summary_normal">Normal</string>
+    <!-- Description for the screen zoom level that makes interface elements large. [CHAR LIMIT=24] -->
+    <string name="screen_zoom_summary_large">Large</string>
+    <!-- Description for the screen zoom level that makes interface elements larger. [CHAR LIMIT=24] -->
+    <string name="screen_zoom_summary_very_large">Larger</string>
+    <!-- Description for the screen zoom level that makes interface elements largest. [CHAR LIMIT=24] -->
+    <string name="screen_zoom_summary_extremely_large">Largest</string>
+    <!-- Description for a custom screen zoom level. This shows the requested display
+         density in raw pixels per inch rather than using a relative description. [CHAR LIMIT=24] -->
+    <string name="screen_zoom_summary_custom">Custom (<xliff:g id="densityDpi" example="160">%d</xliff:g>)</string>
 
     <!-- Button to show all top-level settings items [CHAR LIMIT=20] -->
     <string name="see_all">See all</string>
