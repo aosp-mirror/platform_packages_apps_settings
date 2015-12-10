@@ -17,9 +17,15 @@
 package com.android.settings;
 
 import android.annotation.Nullable;
+import android.app.ActivityManager;
+import android.app.ActivityManagerNative;
+import android.app.ActivityOptions;
+import android.app.IActivityManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.os.Bundle;
+import android.os.RemoteException;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -127,6 +133,18 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
     }
 
     protected void checkForPendingIntent() {
+        int taskId = getActivity().getIntent().getIntExtra(Intent.EXTRA_TASK_ID, -1);
+        if (taskId != -1) {
+            try {
+                IActivityManager activityManager = ActivityManagerNative.getDefault();
+                final ActivityOptions options = ActivityOptions.makeBasic();
+                options.setLaunchStackId(ActivityManager.StackId.INVALID_STACK_ID);
+                activityManager.startActivityFromRecents(taskId, options.toBundle());
+                return;
+            } catch (RemoteException e) {
+                // Do nothing.
+            }
+        }
         IntentSender intentSender = getActivity().getIntent()
                 .getParcelableExtra(Intent.EXTRA_INTENT);
         if (intentSender != null) {
