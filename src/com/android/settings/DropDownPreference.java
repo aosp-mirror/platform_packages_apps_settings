@@ -64,6 +64,7 @@ public class DropDownPreference extends ListPreference {
             }
         });
         setPersistent(false);
+        setSummary("%s");
         updateEntries();
     }
 
@@ -95,7 +96,6 @@ public class DropDownPreference extends ListPreference {
     public void setValue(String value) {
         super.setValue(value);
         mSpinner.setSelection(findIndexOfValue(getValue()));
-        setSummary(getEntry());
     }
 
     public void setValueIndex(int index) {
