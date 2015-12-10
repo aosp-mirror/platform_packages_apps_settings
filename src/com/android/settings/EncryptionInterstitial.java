@@ -26,10 +26,12 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityManager;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -39,9 +41,12 @@ import com.android.internal.widget.LockPatternUtils;
 import java.util.List;
 
 public class EncryptionInterstitial extends SettingsActivity {
+    private final static String TAG = EncryptionInterstitial.class.getSimpleName();
 
     protected static final String EXTRA_PASSWORD_QUALITY = "extra_password_quality";
+    protected static final String EXTRA_UNLOCK_METHOD_INTENT = "extra_unlock_method_intent";
     public static final String EXTRA_REQUIRE_PASSWORD = "extra_require_password";
+    private static final int CHOOSE_LOCK_REQUEST = 100;
 
     @Override
     public Intent getIntent() {
@@ -56,7 +61,7 @@ public class EncryptionInterstitial extends SettingsActivity {
     }
 
     public static Intent createStartIntent(Context ctx, int quality,
-            boolean requirePasswordDefault) {
+            boolean requirePasswordDefault, Intent unlockMethodIntent) {
         return new Intent(ctx, EncryptionInterstitial.class)
                 .putExtra(EXTRA_PREFS_SHOW_BUTTON_BAR, true)
                 .putExtra(EXTRA_PREFS_SET_BACK_TEXT, (String) null)
@@ -64,7 +69,8 @@ public class EncryptionInterstitial extends SettingsActivity {
                         R.string.encryption_continue_button))
                 .putExtra(EXTRA_PASSWORD_QUALITY, quality)
                 .putExtra(EXTRA_SHOW_FRAGMENT_TITLE_RESID, R.string.encryption_interstitial_header)
-                .putExtra(EXTRA_REQUIRE_PASSWORD, requirePasswordDefault);
+                .putExtra(EXTRA_REQUIRE_PASSWORD, requirePasswordDefault)
+                .putExtra(EXTRA_UNLOCK_METHOD_INTENT, unlockMethodIntent);
     }
 
     public static class EncryptionInterstitialFragment extends SettingsPreferenceFragment
@@ -75,6 +81,7 @@ public class EncryptionInterstitial extends SettingsActivity {
         private RadioButton mDontRequirePasswordToDecryptButton;
         private TextView mEncryptionMessage;
         private boolean mPasswordRequired;
+        private Intent mUnlockMethodIntent;
 
         @Override
         protected int getMetricsCategory() {
@@ -98,7 +105,9 @@ public class EncryptionInterstitial extends SettingsActivity {
                     (TextView) view.findViewById(R.id.encryption_message);
             boolean forFingerprint = getActivity().getIntent().getBooleanExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, false);
-            int quality = getActivity().getIntent().getIntExtra(EXTRA_PASSWORD_QUALITY, 0);
+            Intent intent = getActivity().getIntent();
+            final int quality = intent.getIntExtra(EXTRA_PASSWORD_QUALITY, 0);
+            mUnlockMethodIntent = (Intent) intent.getParcelableExtra(EXTRA_UNLOCK_METHOD_INTENT);
             final int msgId;
             final int enableId;
             final int disableId;
@@ -136,6 +145,36 @@ public class EncryptionInterstitial extends SettingsActivity {
 
             setRequirePasswordState(getActivity().getIntent().getBooleanExtra(
                     EXTRA_REQUIRE_PASSWORD, true));
+
+            Button nextButton = getNextButton();
+            if (nextButton != null) {
+                nextButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startLockIntent();
+                    }
+                });
+            }
+        }
+
+        protected void startLockIntent() {
+            if (mUnlockMethodIntent != null) {
+                mUnlockMethodIntent.putExtra(EXTRA_REQUIRE_PASSWORD, mPasswordRequired);
+                startActivityForResult(mUnlockMethodIntent, CHOOSE_LOCK_REQUEST);
+            } else {
+                Log.wtf(TAG, "no unlock intent to start");
+                finish();
+            }
+        }
+
+        @Override
+        public void onActivityResult(int requestCode, int resultCode, Intent data) {
+            super.onActivityResult(requestCode, resultCode, data);
+            if (requestCode == CHOOSE_LOCK_REQUEST &&
+                    resultCode == RESULT_FIRST_USER) {
+                getActivity().setResult(RESULT_OK, data);
+                finish();
+            }
         }
 
         @Override
@@ -206,15 +245,6 @@ public class EncryptionInterstitial extends SettingsActivity {
             mPasswordRequired = required;
             mRequirePasswordToDecryptButton.setChecked(required);
             mDontRequirePasswordToDecryptButton.setChecked(!required);
-
-            // Updates value returned by SettingsActivity.onActivityResult().
-            SettingsActivity sa = (SettingsActivity)getActivity();
-            Intent resultIntentData = sa.getResultIntentData();
-            if (resultIntentData == null) {
-                resultIntentData = new Intent();
-                sa.setResultIntentData(resultIntentData);
-            }
-            resultIntentData.putExtra(EXTRA_REQUIRE_PASSWORD, mPasswordRequired);
         }
 
         @Override

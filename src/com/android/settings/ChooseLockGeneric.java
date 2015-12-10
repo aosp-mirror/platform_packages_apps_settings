@@ -220,13 +220,17 @@ public class ChooseLockGeneric extends SettingsActivity {
                     && !dpm.getDoNotAskCredentialsOnBoot()) {
                 mEncryptionRequestQuality = quality;
                 mEncryptionRequestDisabled = disabled;
+                // Get the intent that the encryption interstitial should start for creating
+                // the new unlock method.
+                Intent unlockMethodIntent = getIntentForUnlockMethod(quality, disabled);
                 final Context context = getActivity();
                 // If accessibility is enabled and the user hasn't seen this dialog before, set the
                 // default state to agree with that which is compatible with accessibility
                 // (password not required).
                 final boolean accEn = AccessibilityManager.getInstance(context).isEnabled();
                 final boolean required = mLockPatternUtils.isCredentialRequiredToDecrypt(!accEn);
-                Intent intent = getEncryptionInterstitialIntent(context, quality, required);
+                Intent intent = getEncryptionInterstitialIntent(context, quality, required,
+                        unlockMethodIntent);
                 intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT,
                         mForFingerprint);
                 startActivityForResult(intent, ENABLE_ENCRYPTION_REQUEST);
@@ -246,9 +250,8 @@ public class ChooseLockGeneric extends SettingsActivity {
                 updatePreferencesOrFinish();
             } else if (requestCode == ENABLE_ENCRYPTION_REQUEST
                     && resultCode == Activity.RESULT_OK) {
-                mRequirePassword = data.getBooleanExtra(
-                        EncryptionInterstitial.EXTRA_REQUIRE_PASSWORD, true);
-                updateUnlockMethodAndFinish(mEncryptionRequestQuality, mEncryptionRequestDisabled);
+                getActivity().setResult(resultCode, data);
+                finish();
             } else if (requestCode == CHOOSE_LOCK_REQUEST) {
                 getActivity().setResult(resultCode, data);
                 finish();
@@ -451,8 +454,9 @@ public class ChooseLockGeneric extends SettingsActivity {
         }
 
         protected Intent getEncryptionInterstitialIntent(Context context, int quality,
-                boolean required) {
-            return EncryptionInterstitial.createStartIntent(context, quality, required);
+                boolean required, Intent unlockMethodIntent) {
+            return EncryptionInterstitial.createStartIntent(context, quality, required,
+                    unlockMethodIntent);
         }
 
         /**
@@ -471,34 +475,13 @@ public class ChooseLockGeneric extends SettingsActivity {
             }
 
             quality = upgradeQuality(quality);
+            Intent intent = getIntentForUnlockMethod(quality, disabled);
+            if (intent != null) {
+                startActivityForResult(intent, CHOOSE_LOCK_REQUEST);
+                return;
+            }
 
-            final Context context = getActivity();
-            if (quality >= DevicePolicyManager.PASSWORD_QUALITY_NUMERIC) {
-                int minLength = mDPM.getPasswordMinimumLength(null);
-                if (minLength < MIN_PASSWORD_LENGTH) {
-                    minLength = MIN_PASSWORD_LENGTH;
-                }
-                final int maxLength = mDPM.getPasswordMaximumLength(quality);
-                Intent intent;
-                if (mHasChallenge) {
-                    intent = getLockPasswordIntent(context, quality, minLength,
-                            maxLength, mRequirePassword, mChallenge, mUserId);
-                } else {
-                    intent = getLockPasswordIntent(context, quality, minLength,
-                        maxLength, mRequirePassword, mUserPassword, mUserId);
-                }
-                startActivityForResult(intent, CHOOSE_LOCK_REQUEST);
-            } else if (quality == DevicePolicyManager.PASSWORD_QUALITY_SOMETHING) {
-                Intent intent;
-                if (mHasChallenge) {
-                    intent = getLockPatternIntent(context, mRequirePassword,
-                        mChallenge, mUserId);
-                } else {
-                    intent = getLockPatternIntent(context, mRequirePassword,
-                        mUserPassword, mUserId);
-                }
-                startActivityForResult(intent, CHOOSE_LOCK_REQUEST);
-            } else if (quality == DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED) {
+            if (quality == DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED) {
                 mChooseLockSettingsHelper.utils().clearLock(mUserId);
                 mChooseLockSettingsHelper.utils().setLockScreenDisabled(disabled, mUserId);
                 removeAllFingerprintTemplatesAndFinish();
@@ -506,6 +489,34 @@ public class ChooseLockGeneric extends SettingsActivity {
             } else {
                 removeAllFingerprintTemplatesAndFinish();
             }
+        }
+
+        private Intent getIntentForUnlockMethod(int quality, boolean disabled) {
+            Intent intent = null;
+            final Context context = getActivity();
+            if (quality >= DevicePolicyManager.PASSWORD_QUALITY_NUMERIC) {
+                int minLength = mDPM.getPasswordMinimumLength(null);
+                if (minLength < MIN_PASSWORD_LENGTH) {
+                    minLength = MIN_PASSWORD_LENGTH;
+                }
+                final int maxLength = mDPM.getPasswordMaximumLength(quality);
+                if (mHasChallenge) {
+                    intent = getLockPasswordIntent(context, quality, minLength,
+                            maxLength, mRequirePassword, mChallenge, mUserId);
+                } else {
+                    intent = getLockPasswordIntent(context, quality, minLength,
+                            maxLength, mRequirePassword, mUserPassword, mUserId);
+                }
+            } else if (quality == DevicePolicyManager.PASSWORD_QUALITY_SOMETHING) {
+                if (mHasChallenge) {
+                    intent = getLockPatternIntent(context, mRequirePassword,
+                            mChallenge, mUserId);
+                } else {
+                    intent = getLockPatternIntent(context, mRequirePassword,
+                            mUserPassword, mUserId);
+                }
+            }
+            return intent;
         }
 
         private void removeAllFingerprintTemplatesAndFinish() {

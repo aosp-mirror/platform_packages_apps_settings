@@ -170,9 +170,9 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
 
         @Override
         protected Intent getEncryptionInterstitialIntent(Context context, int quality,
-                boolean required) {
+                boolean required, Intent unlockMethodIntent) {
             Intent intent = SetupEncryptionInterstitial.createStartIntent(context, quality,
-                    required);
+                    required, unlockMethodIntent);
             SetupWizardUtils.copySetupExtras(getActivity().getIntent(), intent);
             return intent;
         }
