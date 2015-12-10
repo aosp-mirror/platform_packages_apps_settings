@@ -37,7 +37,7 @@ public class BugreportPreference extends CustomDialogPreference {
     @Override
     protected void onClick(DialogInterface dialog, int which) {
         if (which == DialogInterface.BUTTON_POSITIVE) {
-            SystemProperties.set("ctl.start", "bugreport");
+            SystemProperties.set("ctl.start", "bugreportplus");
         }
     }
 }
