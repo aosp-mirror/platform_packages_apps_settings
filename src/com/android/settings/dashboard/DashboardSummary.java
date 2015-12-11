@@ -18,7 +18,6 @@ package com.android.settings.dashboard;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -31,13 +30,17 @@ import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.SettingsActivity;
+import com.android.settings.dashboard.conditional.ConditionAdapterUtils;
+import com.android.settings.dashboard.conditional.ConditionManager;
+import com.android.settings.dashboard.conditional.FocusRecyclerView;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
 
 import java.util.List;
 
 public class DashboardSummary extends InstrumentedFragment
-        implements SettingsDrawerActivity.CategoryListener {
+        implements SettingsDrawerActivity.CategoryListener, ConditionManager.ConditionListener,
+        FocusRecyclerView.FocusListener {
     public static final boolean DEBUG = false;
     private static final boolean DEBUG_TIMING = false;
     private static final String TAG = "DashboardSummary";
@@ -51,11 +54,10 @@ public class DashboardSummary extends InstrumentedFragment
             Settings.StorageSettingsActivity.class.getName(),
     };
 
-    private static final int MSG_REBUILD_UI = 1;
-
-    private RecyclerView mDashboard;
+    private FocusRecyclerView mDashboard;
     private DashboardAdapter mAdapter;
     private SummaryLoader mSummaryLoader;
+    private ConditionManager mConditionManager;
 
     @Override
     protected int getMetricsCategory() {
@@ -73,6 +75,7 @@ public class DashboardSummary extends InstrumentedFragment
         setHasOptionsMenu(true);
         if (DEBUG_TIMING) Log.d(TAG, "onCreate took " + (System.currentTimeMillis() - startTime)
                 + " ms");
+        mConditionManager = ConditionManager.get(getContext());
     }
 
     @Override
@@ -95,6 +98,7 @@ public class DashboardSummary extends InstrumentedFragment
 
         ((SettingsDrawerActivity) getActivity()).addCategoryListener(this);
         mSummaryLoader.setListening(true);
+        Log.d(TAG, "onResume");
     }
 
     @Override
@@ -106,6 +110,16 @@ public class DashboardSummary extends InstrumentedFragment
     }
 
     @Override
+    public void onWindowFocusChanged(boolean hasWindowFocus) {
+        if (hasWindowFocus) {
+            mConditionManager.addListener(this);
+            mConditionManager.refreshAll();
+        } else {
+            mConditionManager.remListener(this);
+        }
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.dashboard, container, false);
@@ -113,11 +127,16 @@ public class DashboardSummary extends InstrumentedFragment
 
     @Override
     public void onViewCreated(View view, Bundle bundle) {
-        mDashboard = (RecyclerView) view.findViewById(R.id.dashboard_container);
+        mDashboard = (FocusRecyclerView) view.findViewById(R.id.dashboard_container);
         LinearLayoutManager llm = new LinearLayoutManager(getContext());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         mDashboard.setLayoutManager(llm);
         mDashboard.setHasFixedSize(true);
+        mDashboard.setListener(this);
+        mAdapter = new DashboardAdapter(getContext());
+        mAdapter.setConditions(mConditionManager.getConditions());
+        mSummaryLoader.setAdapter(mAdapter);
+        ConditionAdapterUtils.addDismiss(mDashboard);
 
         rebuildUI();
     }
@@ -132,10 +151,7 @@ public class DashboardSummary extends InstrumentedFragment
         // TODO: Cache summaries from old categories somehow.
         List<DashboardCategory> categories =
                 ((SettingsActivity) getActivity()).getDashboardCategories();
-        boolean showingAll = mAdapter != null && mAdapter.isShowingAll();
-        mAdapter = new DashboardAdapter(getContext(), categories);
-        mSummaryLoader.setAdapter(mAdapter);
-        mAdapter.setShowingAll(showingAll);
+        mAdapter.setCategories(categories);
         mDashboard.setAdapter(mAdapter);
 
         long delta = System.currentTimeMillis() - start;
@@ -145,5 +161,11 @@ public class DashboardSummary extends InstrumentedFragment
     @Override
     public void onCategoriesChanged() {
         rebuildUI();
+    }
+
+    @Override
+    public void onConditionsChanged() {
+        Log.d(TAG, "onConditionsChanged");
+        mAdapter.setConditions(mConditionManager.getConditions());
     }
 }

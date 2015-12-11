@@ -74,6 +74,7 @@ import android.text.style.TtsSpan;
 import android.util.ArraySet;
 import android.util.Log;
 import android.util.SparseArray;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,8 +84,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.ListView;
 import android.widget.TabWidget;
 import com.android.internal.util.UserIcons;
-import com.android.settingslib.drawer.UserAdapter;
-import com.android.settingslib.drawer.UserAdapter.UserDetails;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -1057,6 +1056,12 @@ public final class Utils {
             Log.e(TAG, "Unable to acquire UserManager");
             return UserHandle.myUserId();
         }
+    }
+
+    public static int resolveResource(Context context, int attr) {
+        TypedValue value = new TypedValue();
+        context.getTheme().resolveAttribute(attr, value, true);
+        return value.resourceId;
     }
 }
 
