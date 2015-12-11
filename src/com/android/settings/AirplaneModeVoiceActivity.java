@@ -16,7 +16,9 @@
 
 package com.android.settings;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.provider.Settings;
 import android.util.Log;
 
@@ -31,9 +33,10 @@ public class AirplaneModeVoiceActivity extends VoiceSettingsActivity {
 
     protected boolean onVoiceSettingInteraction(Intent intent) {
         if (intent.hasExtra(Settings.EXTRA_AIRPLANE_MODE_ENABLED)) {
-            Settings.Global.putInt(getContentResolver(),
-                    Settings.Global.AIRPLANE_MODE_ON,
-                    intent.getBooleanExtra(Settings.EXTRA_AIRPLANE_MODE_ENABLED, false) ? 1 : 0);
+            ConnectivityManager mgr = (ConnectivityManager) getSystemService(
+                    Context.CONNECTIVITY_SERVICE);
+            mgr.setAirplaneMode(intent.getBooleanExtra(
+                    Settings.EXTRA_AIRPLANE_MODE_ENABLED, false));
         } else {
             Log.v(TAG, "Missing airplane mode extra");
         }
