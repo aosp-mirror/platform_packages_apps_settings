@@ -33,7 +33,6 @@ public class ImportanceSeekBarPreference extends SeekBarPreference implements
         SeekBar.OnSeekBarChangeListener {
     private static final String TAG = "ImportanceSeekBarPref";
 
-    public static final int IMPORTANCE_PROGRESS_OFFSET = 2;
     private Callback mCallback;
     private TextView mSummaryTextView;
     private String mSummary;
@@ -89,8 +88,6 @@ public class ImportanceSeekBarPreference extends SeekBarPreference implements
     }
 
     private String getProgressSummary(int progress) {
-        // Map progress 0-4 values to Importance's -2-2.
-        progress = progress - IMPORTANCE_PROGRESS_OFFSET;
         switch (progress) {
             case NotificationListenerService.Ranking.IMPORTANCE_NONE:
                 return getContext().getString(

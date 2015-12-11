@@ -135,13 +135,11 @@ public class TopicNotificationSettings extends SettingsPreferenceFragment {
                 mTopicRow.importance == NotificationListenerService.Ranking.IMPORTANCE_UNSPECIFIED
                 ? NotificationListenerService.Ranking.IMPORTANCE_DEFAULT
                         : mTopicRow.importance;
-        mImportance.setProgress(
-                importance + ImportanceSeekBarPreference.IMPORTANCE_PROGRESS_OFFSET);
+        mImportance.setProgress(importance);
         mImportance.setCallback(new ImportanceSeekBarPreference.Callback() {
             @Override
             public void onImportanceChanged(int progress) {
-                mBackend.setImportance(mTopicRow.pkg, mTopicRow.uid, mTopicRow.topic,
-                        progress - ImportanceSeekBarPreference.IMPORTANCE_PROGRESS_OFFSET);
+                mBackend.setImportance(mTopicRow.pkg, mTopicRow.uid, mTopicRow.topic, progress);
             }
         });
         mPriority.setChecked(mTopicRow.priority);
