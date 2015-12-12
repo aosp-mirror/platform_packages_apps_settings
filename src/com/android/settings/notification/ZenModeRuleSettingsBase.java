@@ -26,6 +26,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.service.notification.ConditionProviderService;
+import android.support.v7.preference.DropDownPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
@@ -39,7 +40,6 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import com.android.internal.logging.MetricsLogger;
-import com.android.settings.DropDownPreference;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.widget.SwitchBar;

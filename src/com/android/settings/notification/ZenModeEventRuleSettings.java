@@ -26,12 +26,12 @@ import android.provider.CalendarContract.Calendars;
 import android.provider.Settings;
 import android.service.notification.ZenModeConfig;
 import android.service.notification.ZenModeConfig.EventInfo;
+import android.support.v7.preference.DropDownPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.logging.MetricsLogger;
-import com.android.settings.DropDownPreference;
 import com.android.settings.R;
 
 import java.util.ArrayList;

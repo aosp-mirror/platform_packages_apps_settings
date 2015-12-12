@@ -25,21 +25,24 @@
         android:persistent="false" />
 
     <!-- During events for -->
-    <com.android.settings.DropDownPreference
+    <DropDownPreference
         android:key="calendar"
         android:title="@string/zen_mode_event_rule_calendar"
+        android:summary="%s"
         android:persistent="false" />
 
     <!-- Where reply is -->
-    <com.android.settings.DropDownPreference
+    <DropDownPreference
         android:key="reply"
         android:title="@string/zen_mode_event_rule_reply"
+        android:summary="%s"
         android:persistent="false" />
 
     <!-- Zen mode -->
-    <com.android.settings.DropDownPreference
+    <DropDownPreference
         android:key="zen_mode"
         android:title="@string/zen_mode_settings_title"
+        android:summary="%s"
         android:persistent="false" />
 
 </PreferenceScreen>

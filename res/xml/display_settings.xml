@@ -91,11 +91,12 @@
                 android:summary="@string/tap_to_wake_summary"
                 android:persistent="false" />
 
-        <com.android.settings.DropDownPreference
+        <DropDownPreference
                 android:key="font_size"
                 android:title="@string/title_font_size"
                 settings:keywords="@string/keywords_display_font_size"
-                android:summary="@string/summary_font_size"
+                android:persistent="false"
+                android:summary="%s"
                 android:entries="@array/entries_font_size"
                 android:entryValues="@array/entryvalues_font_size" />
 
@@ -104,8 +105,10 @@
                 android:title="@string/screen_zoom_title"
                 settings:keywords="@string/screen_zoom_keywords" />
 
-        <com.android.settings.DropDownPreference
+        <DropDownPreference
                 android:key="auto_rotate"
+                android:persistent="false"
+                android:summary="%s"
                 android:title="@string/display_auto_rotate_title" />
 
         <PreferenceScreen

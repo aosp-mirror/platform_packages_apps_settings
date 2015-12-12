@@ -16,8 +16,8 @@
 package com.android.settings.nfc;
 
 import android.content.Context;
+import android.support.v7.preference.DropDownPreference;
 
-import com.android.settings.DropDownPreference;
 import com.android.settings.R;
 
 public class NfcForegroundPreference extends DropDownPreference implements

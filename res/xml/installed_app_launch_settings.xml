@@ -20,9 +20,10 @@
     <PreferenceCategory android:key="app_launch_domain_links"
                         android:title="@string/app_launch_domain_links_title">
 
-        <com.android.settings.DropDownPreference
+        <DropDownPreference
                 android:key="app_link_state"
                 android:persistent="false"
+                android:summary="%s"
                 android:title="@string/app_launch_open_domain_urls_title" />
 
         <com.android.settings.applications.AppDomainsPreference

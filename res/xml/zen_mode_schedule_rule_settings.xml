@@ -33,10 +33,11 @@
     <!-- Start time/End time added and removed here! :-) -->
 
     <!-- Zen mode -->
-    <com.android.settings.DropDownPreference
+    <DropDownPreference
             android:key="zen_mode"
             android:title="@string/zen_mode_settings_title"
             android:order="100"
+            android:summary="%s"
             android:persistent="false" />
 
 </PreferenceScreen>
