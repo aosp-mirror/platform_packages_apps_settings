@@ -129,6 +129,12 @@
     <item msgid="1023893786681286517">"AKA"</item>
     <item msgid="3030483188676375009">"AKA\'"</item>
   </string-array>
+  <string-array name="eap_method_without_sim_auth">
+    <item msgid="4047867891913819797">"PEAP"</item>
+    <item msgid="641030570679578504">"TLS"</item>
+    <item msgid="3079489731769553856">"TTLS"</item>
+    <item msgid="35269224158638258">"PWD"</item>
+  </string-array>
     <!-- no translation found for wifi_ap_band_config_full:0 (1085243288162893079) -->
     <!-- no translation found for wifi_ap_band_config_full:1 (5531376834915607202) -->
     <!-- no translation found for wifi_ap_band_config_2G_only:0 (7006771583217001015) -->
@@ -219,9 +225,22 @@
     <item msgid="8084938354605535381">"IPv4/IPv6"</item>
   </string-array>
   <string-array name="bearer_entries">
-    <item msgid="1770285336669531300">"LTE"</item>
-    <item msgid="3044323519470167625">"eHRPD"</item>
-    <item msgid="6848428671997893147">"Määrittelemätön"</item>
+    <item msgid="1697455674244601285">"Määrittelemätön"</item>
+    <item msgid="1317061551798123908">"LTE"</item>
+    <item msgid="5005435684511894770">"HSPAP"</item>
+    <item msgid="7700603056475539235">"HSPA"</item>
+    <item msgid="245973007602397887">"HSUPA"</item>
+    <item msgid="6291566767651194016">"HSDPA"</item>
+    <item msgid="2005841400859926251">"UMTS"</item>
+    <item msgid="3757385691174882861">"EDGE"</item>
+    <item msgid="2979115073474306864">"GPRS"</item>
+    <item msgid="2271750502778879106">"eHRPD"</item>
+    <item msgid="4173379084783381337">"EVDO_B"</item>
+    <item msgid="2033682802005776093">"EVDO_A"</item>
+    <item msgid="5753917125831466719">"EVDO_0"</item>
+    <item msgid="4713807936577071142">"1xRTT"</item>
+    <item msgid="1142355797022021906">"IS95B"</item>
+    <item msgid="7471182818083460781">"IS95A"</item>
   </string-array>
   <string-array name="mvno_type_entries">
     <item msgid="4367119357633573465">"Ei mitään"</item>
@@ -404,7 +423,7 @@
   </string-array>
   <string-array name="select_logd_size_summaries">
     <item msgid="7346595473588765019">"64 kt / lokipuskuri"</item>
-    <item msgid="2822309747675758628">"256 kt / lokipusk."</item>
+    <item msgid="2822309747675758628">"256 kt / lokipuskuri"</item>
     <item msgid="6699306198357496731">"1 Mt / lokipuskuri"</item>
     <item msgid="5748528643937500349">"4 Mt / lokipuskuri"</item>
     <item msgid="1978629051085111592">"16 Mt / lokipuskuri"</item>
@@ -421,40 +440,44 @@
   </string-array>
   <string-array name="window_animation_scale_entries">
     <item msgid="8134156599370824081">"Animaatio pois käytöstä"</item>
-    <item msgid="6624864048416710414">"Animaation mittakaava 0,5-kertainen"</item>
-    <item msgid="2219332261255416635">"Animaation mittakaava 1-kertainen"</item>
-    <item msgid="3544428804137048509">"Animaation mittakaava 1,5-kertainen"</item>
-    <item msgid="3110710404225974514">"Animaation mittakaava 2-kertainen"</item>
-    <item msgid="4402738611528318731">"Animaation mittakaava 5-kertainen"</item>
-    <item msgid="6189539267968330656">"Animaation mittakaava 10-kertainen"</item>
+    <item msgid="6624864048416710414">"Animaatioasteikko 0,5-kertainen"</item>
+    <item msgid="2219332261255416635">"Animaatioasteikko 1-kertainen"</item>
+    <item msgid="3544428804137048509">"Animaatioasteikko 1,5-kertainen"</item>
+    <item msgid="3110710404225974514">"Animaatioasteikko 2-kertainen"</item>
+    <item msgid="4402738611528318731">"Animaatioasteikko 5-kertainen"</item>
+    <item msgid="6189539267968330656">"Animaatioasteikko 10-kertainen"</item>
   </string-array>
   <string-array name="transition_animation_scale_entries">
     <item msgid="8464255836173039442">"Animaatio pois käytöstä"</item>
-    <item msgid="3375781541913316411">"Animaation mittakaava 0,5-kertainen"</item>
-    <item msgid="1991041427801869945">"Animaation mittakaava 1-kertainen"</item>
-    <item msgid="4012689927622382874">"Animaation mittakaava 0,5-kertainen"</item>
-    <item msgid="3289156759925947169">"Animaation mittakaava 2-kertainen"</item>
-    <item msgid="7705857441213621835">"Animaation mittakaava 5-kertainen"</item>
-    <item msgid="6660750935954853365">"Animaation mittakaava 10-kertainen"</item>
+    <item msgid="3375781541913316411">"Animaatioasteikko 0,5-kertainen"</item>
+    <item msgid="1991041427801869945">"Animaatioasteikko 1-kertainen"</item>
+    <item msgid="4012689927622382874">"Animaatioasteikko 0,5-kertainen"</item>
+    <item msgid="3289156759925947169">"Animaatioasteikko 2-kertainen"</item>
+    <item msgid="7705857441213621835">"Animaatioasteikko 5-kertainen"</item>
+    <item msgid="6660750935954853365">"Animaatioasteikko 10-kertainen"</item>
   </string-array>
   <string-array name="animator_duration_scale_entries">
     <item msgid="6039901060648228241">"Animaatio pois käytöstä"</item>
-    <item msgid="1138649021950863198">"Animaation mittakaava 0,5-kertainen"</item>
-    <item msgid="4394388961370833040">"Animaation mittakaava 1-kertainen"</item>
-    <item msgid="8125427921655194973">"Animaation mittakaava 1,5-kertainen"</item>
-    <item msgid="3334024790739189573">"Animaation mittakaava 2-kertainen"</item>
-    <item msgid="3170120558236848008">"Animaation mittakaava 5-kertainen"</item>
-    <item msgid="1069584980746680398">"Animaation mittakaava 10-kertainen"</item>
+    <item msgid="1138649021950863198">"Animaatioasteikko 0,5-kertainen"</item>
+    <item msgid="4394388961370833040">"Animaatioasteikko 1-kertainen"</item>
+    <item msgid="8125427921655194973">"Animaatioasteikko 1,5-kertainen"</item>
+    <item msgid="3334024790739189573">"Animaatioasteikko 2-kertainen"</item>
+    <item msgid="3170120558236848008">"Animaatioasteikko 5-kertainen"</item>
+    <item msgid="1069584980746680398">"Animaatioasteikko 10-kertainen"</item>
   </string-array>
   <string-array name="overlay_display_devices_entries">
     <item msgid="1606809880904982133">"Ei mitään"</item>
-    <item msgid="688482401508173818">"720x480 mdpi"</item>
-    <item msgid="6027541158956821790">"720 x 480 mdpi (suojattu)"</item>
-    <item msgid="8181151155909301030">"1280 x 720 tvdpi"</item>
-    <item msgid="2920655562462493148">"1280 x 720 tvdpi (suojattu)"</item>
-    <item msgid="8910371271391940941">"1920 x 1080 xhdpi"</item>
-    <item msgid="4171600481380800455">"1920 x 1080 xhdpi (suojattu)"</item>
-    <item msgid="1937752114395156918">"1280 x 720 tvdpi ja 1920 x 1080 xhdpi"</item>
+    <item msgid="9033194758688161545">"480p"</item>
+    <item msgid="1025306206556583600">"480p (turvallinen)"</item>
+    <item msgid="1853913333042744661">"720p"</item>
+    <item msgid="3414540279805870511">"720p (turvallinen)"</item>
+    <item msgid="9039818062847141551">"1080p"</item>
+    <item msgid="4939496949750174834">"1080p (turvallinen)"</item>
+    <item msgid="1833612718524903568">"4K"</item>
+    <item msgid="238303513127879234">"4K (turvallinen)"</item>
+    <item msgid="3547211260846843098">"4K (skaalattu)"</item>
+    <item msgid="5411365648951414254">"4K (skaalattu, turvallinen)"</item>
+    <item msgid="1311305077526792901">"720p, 1080p (kaksoisnäyttö)"</item>
   </string-array>
   <string-array name="enable_opengl_traces_entries">
     <item msgid="3191973083884253830">"Ei mitään"</item>
@@ -507,10 +530,11 @@
     <item msgid="1417929597727989746">"Salli aina"</item>
   </string-array>
   <string-array name="ram_states">
-    <item msgid="7088762389498381203">"normaali"</item>
-    <item msgid="4517779899383204000">"keskitaso"</item>
-    <item msgid="406385694840950802">"matala"</item>
-    <item msgid="4212263919458209842">"kriittinen"</item>
+    <item msgid="3944681673818150669">"Normaali"</item>
+    <item msgid="3256987280393708586">"Tyydyttävä"</item>
+    <item msgid="4662917179231875995">"Matala"</item>
+    <item msgid="5264929699714647509">"Kriittinen"</item>
+    <item msgid="5606155978847838966">"?"</item>
   </string-array>
   <string-array name="proc_stats_memory_states">
     <item msgid="8845855295876909468">"Normaali"</item>
@@ -542,11 +566,5 @@
     <item msgid="4608643045752965568">"Vaaleanpunainen"</item>
     <item msgid="6131821495505931173">"Punainen"</item>
   </string-array>
-  <string-array name="usb_configuration_titles">
-    <item msgid="5350926807680564950">"MTP (median siirtoprotokolla)"</item>
-    <item msgid="8856820259201251036">"PTP (kuvan siirtoprotokolla)"</item>
-    <item msgid="216135047298423770">"RNDIS (USB-ethernet)"</item>
-    <item msgid="2686051673589572111">"Äänilähde"</item>
-    <item msgid="7014054229609338176">"MIDI"</item>
-  </string-array>
+    <!-- no translation found for usb_configuration_titles:0 (292902998500371970) -->
 </resources>
