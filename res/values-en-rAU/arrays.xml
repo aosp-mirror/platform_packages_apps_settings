@@ -129,6 +129,12 @@
     <item msgid="1023893786681286517">"AKA"</item>
     <item msgid="3030483188676375009">"AKA\'"</item>
   </string-array>
+  <string-array name="eap_method_without_sim_auth">
+    <item msgid="4047867891913819797">"PEAP"</item>
+    <item msgid="641030570679578504">"TLS"</item>
+    <item msgid="3079489731769553856">"TTLS"</item>
+    <item msgid="35269224158638258">"PWD"</item>
+  </string-array>
     <!-- no translation found for wifi_ap_band_config_full:0 (1085243288162893079) -->
     <!-- no translation found for wifi_ap_band_config_full:1 (5531376834915607202) -->
     <!-- no translation found for wifi_ap_band_config_2G_only:0 (7006771583217001015) -->
@@ -219,9 +225,22 @@
     <item msgid="8084938354605535381">"IPv4/IPv6"</item>
   </string-array>
   <string-array name="bearer_entries">
-    <item msgid="1770285336669531300">"LTE"</item>
-    <item msgid="3044323519470167625">"eHRPD"</item>
-    <item msgid="6848428671997893147">"Unspecified"</item>
+    <item msgid="1697455674244601285">"Unspecified"</item>
+    <item msgid="1317061551798123908">"LTE"</item>
+    <item msgid="5005435684511894770">"HSPAP"</item>
+    <item msgid="7700603056475539235">"HSPA"</item>
+    <item msgid="245973007602397887">"HSUPA"</item>
+    <item msgid="6291566767651194016">"HSDPA"</item>
+    <item msgid="2005841400859926251">"UMTS"</item>
+    <item msgid="3757385691174882861">"EDGE"</item>
+    <item msgid="2979115073474306864">"GPRS"</item>
+    <item msgid="2271750502778879106">"eHRPD"</item>
+    <item msgid="4173379084783381337">"EVDO_B"</item>
+    <item msgid="2033682802005776093">"EVDO_A"</item>
+    <item msgid="5753917125831466719">"EVDO_0"</item>
+    <item msgid="4713807936577071142">"1xRTT"</item>
+    <item msgid="1142355797022021906">"IS95B"</item>
+    <item msgid="7471182818083460781">"IS95A"</item>
   </string-array>
   <string-array name="mvno_type_entries">
     <item msgid="4367119357633573465">"None"</item>
@@ -448,13 +467,17 @@
   </string-array>
   <string-array name="overlay_display_devices_entries">
     <item msgid="1606809880904982133">"None"</item>
-    <item msgid="688482401508173818">"720x480 mdpi"</item>
-    <item msgid="6027541158956821790">"720 x 480 mdpi (secure)"</item>
-    <item msgid="8181151155909301030">"1280 x 720 tvdpi"</item>
-    <item msgid="2920655562462493148">"1280 x 720 tvdpi (secure)"</item>
-    <item msgid="8910371271391940941">"1920 x 1080 xhdpi"</item>
-    <item msgid="4171600481380800455">"1920 x 1080 xhdpi (secure)"</item>
-    <item msgid="1937752114395156918">"1280 x 720 tvdpi and 1920 x 1080 xhdpi"</item>
+    <item msgid="9033194758688161545">"480 p"</item>
+    <item msgid="1025306206556583600">"480p (secure)"</item>
+    <item msgid="1853913333042744661">"720p"</item>
+    <item msgid="3414540279805870511">"720p (secure)"</item>
+    <item msgid="9039818062847141551">"1080p"</item>
+    <item msgid="4939496949750174834">"1080p (secure)"</item>
+    <item msgid="1833612718524903568">"4K"</item>
+    <item msgid="238303513127879234">"4K (secure)"</item>
+    <item msgid="3547211260846843098">"4K (upscaled)"</item>
+    <item msgid="5411365648951414254">"4K (upscaled, secure)"</item>
+    <item msgid="1311305077526792901">"720p, 1080p (dual screen)"</item>
   </string-array>
   <string-array name="enable_opengl_traces_entries">
     <item msgid="3191973083884253830">"None"</item>
@@ -507,10 +530,11 @@
     <item msgid="1417929597727989746">"Always allow"</item>
   </string-array>
   <string-array name="ram_states">
-    <item msgid="7088762389498381203">"normal"</item>
-    <item msgid="4517779899383204000">"moderate"</item>
-    <item msgid="406385694840950802">"low"</item>
-    <item msgid="4212263919458209842">"critical"</item>
+    <item msgid="3944681673818150669">"Normal"</item>
+    <item msgid="3256987280393708586">"Moderate"</item>
+    <item msgid="4662917179231875995">"Low"</item>
+    <item msgid="5264929699714647509">"Critical"</item>
+    <item msgid="5606155978847838966">"?"</item>
   </string-array>
   <string-array name="proc_stats_memory_states">
     <item msgid="8845855295876909468">"Normal"</item>
@@ -542,11 +566,5 @@
     <item msgid="4608643045752965568">"Pink"</item>
     <item msgid="6131821495505931173">"Red"</item>
   </string-array>
-  <string-array name="usb_configuration_titles">
-    <item msgid="5350926807680564950">"MTP (Media Transfer Protocol)"</item>
-    <item msgid="8856820259201251036">"PTP (Picture Transfer Protocol)"</item>
-    <item msgid="216135047298423770">"RNDIS (USB Ethernet)"</item>
-    <item msgid="2686051673589572111">"Audio Source"</item>
-    <item msgid="7014054229609338176">"MIDI"</item>
-  </string-array>
+    <!-- no translation found for usb_configuration_titles:0 (292902998500371970) -->
 </resources>
