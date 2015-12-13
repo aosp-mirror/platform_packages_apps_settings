@@ -2673,5 +2673,13 @@
             </intent-filter>
        </receiver>
 
+        <receiver
+            android:name=".dashboard.conditional.DndCondition$Receiver"
+            android:enabled="false">
+            <intent-filter>
+                 <action android:name="android.app.action.INTERRUPTION_FILTER_CHANGED_INTERNAL" />
+            </intent-filter>
+       </receiver>
+
     </application>
 </manifest>
