@@ -44,6 +44,8 @@ public class CustomListPreference extends ListPreference{
 
     public static class CustomListPreferenceDialogFragment extends ListPreferenceDialogFragment {
 
+        private int mClickedDialogEntryIndex;
+
         public static ListPreferenceDialogFragment newInstance(String key) {
             final ListPreferenceDialogFragment fragment = new CustomListPreferenceDialogFragment();
             final Bundle b = new Bundle(1);
@@ -59,12 +61,35 @@ public class CustomListPreference extends ListPreference{
         @Override
         protected void onPrepareDialogBuilder(AlertDialog.Builder builder) {
             super.onPrepareDialogBuilder(builder);
-            getCustomizablePreference().onPrepareDialogBuilder(builder, this);
+            mClickedDialogEntryIndex = getCustomizablePreference()
+                    .findIndexOfValue(getCustomizablePreference().getValue());
+            getCustomizablePreference().onPrepareDialogBuilder(builder,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        mClickedDialogEntryIndex = which;
+
+                        /*
+                         * Clicking on an item simulates the positive button
+                         * click, and dismisses the dialog.
+                         */
+                        CustomListPreferenceDialogFragment.this.onClick(dialog,
+                                DialogInterface.BUTTON_POSITIVE);
+                        dialog.dismiss();
+                    }
+                });
         }
 
         @Override
         public void onDialogClosed(boolean positiveResult) {
             getCustomizablePreference().onDialogClosed(positiveResult);
+            final ListPreference preference = getCustomizablePreference();
+            if (positiveResult && mClickedDialogEntryIndex >= 0 &&
+                    preference.getEntryValues() != null) {
+                String value = preference.getEntryValues()[mClickedDialogEntryIndex].toString();
+                if (preference.callChangeListener(value)) {
+                    preference.setValue(value);
+                }
+            }
         }
     }
 }
