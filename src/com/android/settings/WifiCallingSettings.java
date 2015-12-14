@@ -35,7 +35,7 @@ import android.widget.TextView;
 import com.android.ims.ImsConfig;
 import com.android.ims.ImsManager;
 import com.android.internal.logging.MetricsLogger;
-import com.android.internal.telephony.imsphone.ImsPhone;
+import com.android.internal.telephony.Phone;
 import com.android.settings.widget.SwitchBar;
 
 /**
@@ -110,8 +110,8 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
     private void showAlert(Intent intent) {
         Context context = getActivity();
 
-        CharSequence title = intent.getCharSequenceExtra(ImsPhone.EXTRA_KEY_ALERT_TITLE);
-        CharSequence message = intent.getCharSequenceExtra(ImsPhone.EXTRA_KEY_ALERT_MESSAGE);
+        CharSequence title = intent.getCharSequenceExtra(Phone.EXTRA_KEY_ALERT_TITLE);
+        CharSequence message = intent.getCharSequenceExtra(Phone.EXTRA_KEY_ALERT_MESSAGE);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage(message)
@@ -189,7 +189,7 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
         context.registerReceiver(mIntentReceiver, mIntentFilter);
 
         Intent intent = getActivity().getIntent();
-        if (intent.getBooleanExtra(ImsPhone.EXTRA_KEY_ALERT_SHOW, false)) {
+        if (intent.getBooleanExtra(Phone.EXTRA_KEY_ALERT_SHOW, false)) {
             showAlert(intent);
         }
     }
