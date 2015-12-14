@@ -169,14 +169,14 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
         }
     }
 
-    protected static class Config {
-        String tag;
-        String setting;
-        String intentAction;
-        String permission;
-        String noun;
-        int warningDialogTitle;
-        int warningDialogSummary;
-        int emptyText;
+    public static class Config {
+        public String tag;
+        public String setting;
+        public String intentAction;
+        public String permission;
+        public String noun;
+        public int warningDialogTitle;
+        public int warningDialogSummary;
+        public int emptyText;
     }
 }

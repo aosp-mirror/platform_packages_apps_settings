@@ -121,6 +121,7 @@ public class Settings extends SettingsActivity {
     public static class WriteSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AppDrawOverlaySettingsActivity extends SettingsActivity { /* empty */ }
     public static class AppWriteSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class ManageDefaultAppsActivity extends SettingsActivity { /* empty */ }
 
     // Categories.
     public static class WirelessSettings extends SettingsActivity { /* empty */ }

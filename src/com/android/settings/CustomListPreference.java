@@ -24,7 +24,7 @@ import android.support.v14.preference.ListPreferenceDialogFragment;
 import android.support.v7.preference.ListPreference;
 import android.util.AttributeSet;
 
-public class CustomListPreference extends ListPreference{
+public class CustomListPreference extends ListPreference {
 
     public CustomListPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
