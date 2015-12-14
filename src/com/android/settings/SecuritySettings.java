@@ -129,7 +129,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private KeyStore mKeyStore;
     private Preference mResetCredentials;
 
-    private SwitchPreference mToggleAppInstallation;
+    private RestrictedSwitchPreference mToggleAppInstallation;
     private DialogInterface mWarnInstallApps;
     private SwitchPreference mPowerButtonInstantlyLocks;
 
@@ -313,15 +313,19 @@ public class SecuritySettings extends SettingsPreferenceFragment
         // Application install
         PreferenceGroup deviceAdminCategory = (PreferenceGroup)
                 root.findPreference(KEY_DEVICE_ADMIN_CATEGORY);
-        mToggleAppInstallation = (SwitchPreference) findPreference(
+        mToggleAppInstallation = (RestrictedSwitchPreference) findPreference(
                 KEY_TOGGLE_INSTALL_APPLICATIONS);
         mToggleAppInstallation.setChecked(isNonMarketAppsAllowed());
         // Side loading of apps.
         // Disable for restricted profiles. For others, check if policy disallows it.
         mToggleAppInstallation.setEnabled(!um.getUserInfo(MY_USER_ID).isRestricted());
-        if (um.hasUserRestriction(UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES)
-                || um.hasUserRestriction(UserManager.DISALLOW_INSTALL_APPS)) {
-            mToggleAppInstallation.setEnabled(false);
+        if (mToggleAppInstallation.isEnabled()) {
+            mToggleAppInstallation.checkRestrictionAndSetDisabled(
+                    UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES);
+            if (!mToggleAppInstallation.isDisabledByAdmin()) {
+                mToggleAppInstallation.checkRestrictionAndSetDisabled(
+                        UserManager.DISALLOW_INSTALL_APPS);
+            }
         }
 
         // Advanced Security features

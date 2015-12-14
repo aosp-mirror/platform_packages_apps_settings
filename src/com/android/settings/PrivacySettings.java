@@ -291,10 +291,6 @@ public class PrivacySettings extends SettingsPreferenceFragment implements Index
             nonVisibleKeys.add(CONFIGURE_ACCOUNT);
         }
         if (UserManager.get(context).hasUserRestriction(
-                UserManager.DISALLOW_FACTORY_RESET)) {
-            nonVisibleKeys.add(FACTORY_RESET);
-        }
-        if (UserManager.get(context).hasUserRestriction(
                 UserManager.DISALLOW_NETWORK_RESET)) {
             nonVisibleKeys.add(NETWORK_RESET);
         }
