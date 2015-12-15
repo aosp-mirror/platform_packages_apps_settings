@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.display;
+package com.android.settings;
 
 import android.annotation.Nullable;
 import android.content.Context;
