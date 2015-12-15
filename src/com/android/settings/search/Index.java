@@ -150,7 +150,9 @@ public class Index {
 
     private static final String EMPTY = "";
     private static final String NON_BREAKING_HYPHEN = "\u2011";
+    private static final String LIST_DELIMITERS = "[,]\\s*";
     private static final String HYPHEN = "-";
+    private static final String SPACE = " ";
 
     private static final String FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER =
             "SEARCH_INDEX_DATA_PROVIDER";
@@ -1002,12 +1004,13 @@ public class Index {
         final String normalizedSummaryOn = normalizeString(updatedSummaryOn);
         final String normalizedSummaryOff = normalizeString(updatedSummaryOff);
 
+        final String spaceDelimitedKeywords = normalizeKeywords(keywords);
+
         updateOneRow(database, locale,
                 updatedTitle, normalizedTitle, updatedSummaryOn, normalizedSummaryOn,
-                updatedSummaryOff, normalizedSummaryOff, entries,
-                className, screenTitle, iconResId,
-                rank, keywords, intentAction, intentTargetPackage, intentTargetClass, enabled,
-                key, userId);
+                updatedSummaryOff, normalizedSummaryOff, entries, className, screenTitle, iconResId,
+                rank, spaceDelimitedKeywords, intentAction, intentTargetPackage, intentTargetClass,
+                enabled, key, userId);
     }
 
     private static String normalizeHyphen(String input) {
@@ -1021,11 +1024,14 @@ public class Index {
         return REMOVE_DIACRITICALS_PATTERN.matcher(normalized).replaceAll("").toLowerCase();
     }
 
-    private void updateOneRow(SQLiteDatabase database, String locale,
-            String updatedTitle, String normalizedTitle,
-            String updatedSummaryOn, String normalizedSummaryOn,
-            String updatedSummaryOff, String normalizedSummaryOff, String entries,
-            String className, String screenTitle, int iconResId, int rank, String keywords,
+    private static String normalizeKeywords(String input) {
+        return (input != null) ? input.replaceAll(LIST_DELIMITERS, SPACE) : EMPTY;
+    }
+
+    private void updateOneRow(SQLiteDatabase database, String locale, String updatedTitle,
+            String normalizedTitle, String updatedSummaryOn, String normalizedSummaryOn,
+            String updatedSummaryOff, String normalizedSummaryOff, String entries, String className,
+            String screenTitle, int iconResId, int rank, String spaceDelimitedKeywords,
             String intentAction, String intentTargetPackage, String intentTargetClass,
             boolean enabled, String key, int userId) {
 
@@ -1050,7 +1056,7 @@ public class Index {
         values.put(IndexColumns.DATA_SUMMARY_OFF, updatedSummaryOff);
         values.put(IndexColumns.DATA_SUMMARY_OFF_NORMALIZED, normalizedSummaryOff);
         values.put(IndexColumns.DATA_ENTRIES, entries);
-        values.put(IndexColumns.DATA_KEYWORDS, keywords);
+        values.put(IndexColumns.DATA_KEYWORDS, spaceDelimitedKeywords);
         values.put(IndexColumns.CLASS_NAME, className);
         values.put(IndexColumns.SCREEN_TITLE, screenTitle);
         values.put(IndexColumns.INTENT_ACTION, intentAction);
