@@ -27,8 +27,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -132,6 +130,7 @@ public class ConditionManager {
         addIfMissing(HotspotCondition.class);
         addIfMissing(DndCondition.class);
         addIfMissing(BatterySaverCondition.class);
+        addIfMissing(CellularDataCondition.class);
     }
 
     private void addIfMissing(Class<? extends Condition> clz) {
@@ -150,14 +149,10 @@ public class ConditionManager {
             return new DndCondition(this);
         } else if (BatterySaverCondition.class == clz) {
             return new BatterySaverCondition(this);
+        } else if (CellularDataCondition.class == clz) {
+            return new CellularDataCondition(this);
         }
-        try {
-            Constructor<?> constructor = clz.getConstructor(ConditionManager.class);
-            return (Condition) constructor.newInstance(this);
-        } catch (NoSuchMethodException | IllegalAccessException | InstantiationException
-                | InvocationTargetException e) {
-        }
-        return null;
+        throw new RuntimeException("Unexpected Condition " + clz);
     }
 
     Context getContext() {

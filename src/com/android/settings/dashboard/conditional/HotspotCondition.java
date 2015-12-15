@@ -16,10 +16,8 @@
 package com.android.settings.dashboard.conditional;
 
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.drawable.Icon;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
@@ -44,13 +42,8 @@ public class HotspotCondition extends Condition {
     }
 
     @Override
-    protected void onSilenceChanged(boolean silenced) {
-        // Only need to listen for hotspot changes when hotspot has been silenced.
-        PackageManager pm = mManager.getContext().getPackageManager();
-        pm.setComponentEnabledSetting(new ComponentName(mManager.getContext(), Receiver.class),
-                silenced ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED
-                        : PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-                PackageManager.DONT_KILL_APP);
+    protected Class<?> getReceiverClass() {
+        return Receiver.class;
     }
 
     @Override

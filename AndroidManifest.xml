@@ -2692,5 +2692,13 @@
             </intent-filter>
        </receiver>
 
+        <receiver
+            android:name=".dashboard.conditional.CellularDataCondition$Receiver"
+            android:enabled="false">
+            <intent-filter>
+                 <action android:name="android.intent.action.ANY_DATA_STATE" />
+            </intent-filter>
+       </receiver>
+
     </application>
 </manifest>

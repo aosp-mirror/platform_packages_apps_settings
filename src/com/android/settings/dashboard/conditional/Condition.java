@@ -16,9 +16,10 @@
 
 package com.android.settings.dashboard.conditional;
 
+import android.content.ComponentName;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Icon;
 import android.os.PersistableBundle;
-import android.util.Log;
 
 public abstract class Condition {
 
@@ -81,8 +82,21 @@ public abstract class Condition {
         }
     }
 
-    protected void onSilenceChanged(boolean state) {
-        // Optional enable/disable receivers based on silence state.
+    private void onSilenceChanged(boolean silenced) {
+        Class<?> clz = getReceiverClass();
+        if (clz == null) {
+            return;
+        }
+        // Only need to listen for changes when its been silenced.
+        PackageManager pm = mManager.getContext().getPackageManager();
+        pm.setComponentEnabledSetting(new ComponentName(mManager.getContext(), clz),
+                silenced ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+                        : PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                PackageManager.DONT_KILL_APP);
+    }
+
+    protected Class<?> getReceiverClass() {
+        return null;
     }
 
     public boolean shouldShow() {
