@@ -170,9 +170,8 @@ public class EncryptionInterstitial extends SettingsActivity {
         @Override
         public void onActivityResult(int requestCode, int resultCode, Intent data) {
             super.onActivityResult(requestCode, resultCode, data);
-            if (requestCode == CHOOSE_LOCK_REQUEST &&
-                    resultCode == RESULT_FIRST_USER) {
-                getActivity().setResult(RESULT_OK, data);
+            if (requestCode == CHOOSE_LOCK_REQUEST && resultCode != RESULT_CANCELED) {
+                getActivity().setResult(resultCode, data);
                 finish();
             }
         }

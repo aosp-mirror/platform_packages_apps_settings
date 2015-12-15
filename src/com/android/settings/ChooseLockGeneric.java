@@ -248,13 +248,12 @@ public class ChooseLockGeneric extends SettingsActivity {
                 mPasswordConfirmed = true;
                 mUserPassword = data.getStringExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
                 updatePreferencesOrFinish();
-            } else if (requestCode == ENABLE_ENCRYPTION_REQUEST
-                    && resultCode == Activity.RESULT_OK) {
-                getActivity().setResult(resultCode, data);
-                finish();
-            } else if (requestCode == CHOOSE_LOCK_REQUEST) {
-                getActivity().setResult(resultCode, data);
-                finish();
+            } else if (requestCode == CHOOSE_LOCK_REQUEST
+                    || requestCode == ENABLE_ENCRYPTION_REQUEST) {
+                if (resultCode != RESULT_CANCELED) {
+                    getActivity().setResult(resultCode, data);
+                    finish();
+                }
             } else {
                 getActivity().setResult(Activity.RESULT_CANCELED);
                 finish();
