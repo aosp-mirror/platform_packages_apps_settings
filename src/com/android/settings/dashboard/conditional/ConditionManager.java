@@ -131,6 +131,7 @@ public class ConditionManager {
         addIfMissing(AirplaneModeCondition.class);
         addIfMissing(HotspotCondition.class);
         addIfMissing(DndCondition.class);
+        addIfMissing(BatterySaverCondition.class);
     }
 
     private void addIfMissing(Class<? extends Condition> clz) {
@@ -147,6 +148,8 @@ public class ConditionManager {
             return new HotspotCondition(this);
         } else if (DndCondition.class == clz) {
             return new DndCondition(this);
+        } else if (BatterySaverCondition.class == clz) {
+            return new BatterySaverCondition(this);
         }
         try {
             Constructor<?> constructor = clz.getConstructor(ConditionManager.class);

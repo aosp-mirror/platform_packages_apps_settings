@@ -37,6 +37,8 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.android.settings.dashboard.conditional.BatterySaverCondition;
+import com.android.settings.dashboard.conditional.ConditionManager;
 import com.android.settings.notification.SettingPref;
 import com.android.settings.widget.SwitchBar;
 
@@ -144,6 +146,8 @@ public class BatterySaverSettings extends SettingsPreferenceFragment
             if (DEBUG) Log.d(TAG, "Setting mode failed, fallback to current value");
             mHandler.post(mUpdateSwitch);
         }
+        // TODO: Remove once broadcast is in place.
+        ConditionManager.get(getContext()).getCondition(BatterySaverCondition.class).refreshState();
     }
 
     private void updateSwitch() {
