@@ -21,13 +21,13 @@ import android.app.NotificationManager.Policy;
 import android.os.Bundle;
 import android.service.notification.ZenModeConfig;
 import android.support.v14.preference.SwitchPreference;
+import android.support.v7.preference.DropDownPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.PreferenceScreen;
 import android.util.Log;
 
 import com.android.internal.logging.MetricsLogger;
-import com.android.settings.DropDownPreference;
 import com.android.settings.R;
 import com.android.settings.search.Indexable;
 

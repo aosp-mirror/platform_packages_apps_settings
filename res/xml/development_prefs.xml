@@ -60,10 +60,11 @@
         android:summary="@string/runningservices_settings_summary"
         android:fragment="com.android.settings.applications.RunningServices" />
 
-    <com.android.settings.DropDownPreference
+    <DropDownPreference
         android:key="night_mode"
         android:title="@string/night_mode_title"
-        android:summary="@string/night_mode_summary"
+        android:summary="%s"
+        android:persistent="false"
         android:entries="@array/night_mode_entries"
         android:entryValues="@array/night_mode_values" />
 

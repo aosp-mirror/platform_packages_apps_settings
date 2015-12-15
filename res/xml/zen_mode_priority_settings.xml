@@ -40,15 +40,17 @@
         android:persistent="false"/>
 
     <!-- Messages -->
-    <com.android.settings.DropDownPreference
+    <DropDownPreference
         android:key="messages"
         android:title="@string/zen_mode_messages"
+        android:summary="%s"
         android:persistent="false" />
 
     <!-- Calls -->
-    <com.android.settings.DropDownPreference
+    <DropDownPreference
         android:key="calls"
         android:title="@string/zen_mode_calls"
+        android:summary="%s"
         android:persistent="false" />
 
     <!-- Repeat callers -->

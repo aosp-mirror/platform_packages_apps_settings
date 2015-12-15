@@ -26,6 +26,7 @@ import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.support.v7.preference.DropDownPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.util.ArraySet;
@@ -34,7 +35,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 import com.android.internal.logging.MetricsLogger;
-import com.android.settings.DropDownPreference;
 import com.android.settings.R;
 import com.android.settings.Utils;
 
