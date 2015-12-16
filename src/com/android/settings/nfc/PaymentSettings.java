@@ -19,6 +19,7 @@ package com.android.settings.nfc;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceScreen;
@@ -111,7 +112,7 @@ public class PaymentSettings extends SettingsPreferenceFragment {
 
         @Override
         public void setListening(boolean listening) {
-            if (listening) {
+            if (listening && NfcAdapter.getDefaultAdapter(mContext) != null) {
                 PaymentBackend paymentBackend = new PaymentBackend(mContext);
                 paymentBackend.refresh();
                 PaymentAppInfo app = paymentBackend.getDefaultApp();
