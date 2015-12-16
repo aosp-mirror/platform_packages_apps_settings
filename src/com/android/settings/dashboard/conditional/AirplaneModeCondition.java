@@ -63,7 +63,7 @@ public class AirplaneModeCondition extends Condition {
     @Override
     public void onPrimaryClick() {
         mManager.getContext().startActivity(new Intent(mManager.getContext(),
-                Settings.WirelessSettings.class));
+                Settings.WirelessSettingsActivity.class));
     }
 
     @Override
