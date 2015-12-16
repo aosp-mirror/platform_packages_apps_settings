@@ -78,6 +78,7 @@ import android.webkit.WebViewProviderInfo;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.android.internal.app.LocalePicker;
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.applications.BackgroundCheckSummary;
 import com.android.settings.fuelgauge.InactiveApps;

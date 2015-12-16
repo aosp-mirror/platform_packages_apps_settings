@@ -28,8 +28,8 @@ import com.android.settings.SettingsPreferenceFragment.SettingsDialogFragment;
 
 import java.util.Locale;
 
-public class LocalePicker extends com.android.internal.app.LocalePicker
-        implements com.android.internal.app.LocalePicker.LocaleSelectionListener,
+public class LocalePicker extends com.android.internal.app.LocalePickerWithRegion
+        implements com.android.internal.app.LocalePickerWithRegion.LocaleSelectionListener,
         DialogCreatable {
 
     private static final String TAG = "LocalePicker";
@@ -69,7 +69,7 @@ public class LocalePicker extends com.android.internal.app.LocalePicker
             showDialog(DLG_SHOW_GLOBAL_WARNING);
         } else {
             getActivity().onBackPressed();
-            LocalePicker.updateLocale(locale);
+            com.android.internal.app.LocalePicker.updateLocale(locale);
         }
     }
 
@@ -97,7 +97,7 @@ public class LocalePicker extends com.android.internal.app.LocalePicker
                     public void run() {
                         removeDialog(dialogId);
                         getActivity().onBackPressed();
-                        LocalePicker.updateLocale(mTargetLocale);
+                        com.android.internal.app.LocalePicker.updateLocale(mTargetLocale);
                     }
                 }
         );
