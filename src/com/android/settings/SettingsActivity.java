@@ -375,7 +375,7 @@ public class SettingsActivity extends SettingsDrawerActivity
         if (pref.getFragment().equals(WallpaperTypeSettings.class.getName())) {
             title = getString(R.string.wallpaper_settings_fragment_title);
         }
-        startPreferencePanel(pref.getFragment(), pref.getExtras(), 0, title,
+        startPreferencePanel(pref.getFragment(), pref.getExtras(), -1, title,
                 null, 0);
         return true;
     }
