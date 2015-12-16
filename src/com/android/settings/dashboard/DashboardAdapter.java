@@ -91,12 +91,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     }
 
     public void notifyChanged(DashboardTile tile) {
-        for (int i = 0; i < mItems.size(); i++) {
-            if (mItems.get(i) == tile) {
-                notifyItemChanged(i);
-                return;
-            }
-        }
+        notifyDataSetChanged();
     }
 
     public void setShowingAll(boolean showingAll) {
