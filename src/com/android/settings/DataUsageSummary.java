@@ -99,6 +99,8 @@ import android.widget.Toast;
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.telephony.PhoneConstants;
 import com.android.settings.dashboard.SummaryLoader;
+import com.android.settings.dashboard.conditional.BackgroundDataCondition;
+import com.android.settings.dashboard.conditional.ConditionManager;
 import com.android.settings.drawable.InsetBoundsDrawable;
 import com.android.settings.net.DataUsageMeteredSettings;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -1100,6 +1102,8 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
     public void setRestrictBackground(boolean restrictBackground) {
         mPolicyManager.setRestrictBackground(restrictBackground);
         updateMenuTitles();
+        ConditionManager.get(getContext()).getCondition(BackgroundDataCondition.class)
+                .refreshState();
     }
 
     private boolean getAppRestrictBackground() {
