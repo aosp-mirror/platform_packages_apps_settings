@@ -502,6 +502,24 @@
                             android:inputType="textNoSuggestions" />
                 </LinearLayout>
             </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/wifi_section">
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/wifi_item" >
+                    <CheckBox android:id="@+id/shared"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            style="@style/wifi_item_content"
+                            android:textSize="14sp"
+                            android:text="@string/wifi_shared"
+                            android:checked="true" />
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </ScrollView>
