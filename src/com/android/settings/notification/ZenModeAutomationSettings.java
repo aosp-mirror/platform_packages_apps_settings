@@ -156,7 +156,10 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
         root.removeAll();
         final AutomaticZenRule[] sortedRules = sortedRules();
         for (AutomaticZenRule sortedRule : sortedRules) {
-            root.addPreference(new ZenRulePreference(getPrefContext(), sortedRule));
+            ZenRulePreference pref = new ZenRulePreference(getPrefContext(), sortedRule);
+            if (pref.appExists) {
+                root.addPreference(pref);
+            }
         }
         final Preference p = new Preference(getPrefContext());
         p.setIcon(R.drawable.ic_add);
@@ -264,6 +267,7 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
     private class ZenRulePreference extends Preference {
         final String mName;
         final String mId;
+        final boolean appExists;
 
         public ZenRulePreference(Context context, final AutomaticZenRule rule) {
             super(context);
@@ -283,8 +287,11 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
                 setSummary(computeRuleSummary(rule, isSystemRule, info.loadLabel(mPm)));
             } catch (PackageManager.NameNotFoundException e) {
                 setIcon(R.drawable.ic_label);
+                appExists = false;
+                return;
             }
 
+            appExists = true;
             setTitle(rule.getName());
             setPersistent(false);
 
