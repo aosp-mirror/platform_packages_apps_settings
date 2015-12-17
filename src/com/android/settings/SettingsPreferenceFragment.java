@@ -27,8 +27,11 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceGroupAdapter;
 import android.support.v7.preference.PreferenceScreen;
+import android.support.v7.preference.PreferenceViewHolder;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
@@ -38,7 +41,6 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.widget.FloatingActionButton;
 
@@ -50,7 +52,7 @@ import java.util.UUID;
 public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceFragment
         implements DialogCreatable {
 
-    private static final String TAG = "SettingsPreferenceFragment";
+    private static final String TAG = "SettingsPreference";
 
     private static final int DELAY_HIGHLIGHT_DURATION_MILLIS = 600;
 
@@ -65,7 +67,6 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
 
     private String mPreferenceKey;
     private boolean mPreferenceHighlighted = false;
-    private Drawable mHighlightDrawable;
 
     private RecyclerView.Adapter mCurrentRootAdapter;
     private boolean mIsDataSetObserverRegistered = false;
@@ -85,6 +86,8 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
 
     private LayoutPreference mFooter;
     private View mEmptyView;
+    private LinearLayoutManager mLayoutManager;
+    private HighlightablePreferenceGroupAdapter mAdapter;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -216,13 +219,6 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
         updateEmptyView();
     }
 
-    private Drawable getHighlightDrawable() {
-        if (mHighlightDrawable == null) {
-            mHighlightDrawable = getActivity().getDrawable(R.drawable.preference_highlight);
-        }
-        return mHighlightDrawable;
-    }
-
     public LayoutPreference getHeaderView() {
         return mHeader;
     }
@@ -314,41 +310,30 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
         return -1;
     }
 
-    private void highlightPreference(String key) {
-        final Drawable highlight = getHighlightDrawable();
+    @Override
+    public RecyclerView.LayoutManager onCreateLayoutManager() {
+        mLayoutManager = new LinearLayoutManager(getContext());
+        return mLayoutManager;
+    }
 
+    @Override
+    protected RecyclerView.Adapter onCreateAdapter(PreferenceScreen preferenceScreen) {
+        mAdapter = new HighlightablePreferenceGroupAdapter(preferenceScreen);
+        return mAdapter;
+    }
+
+    private void highlightPreference(String key) {
         final int position = canUseListViewForHighLighting(key);
         if (position >= 0) {
             mPreferenceHighlighted = true;
+            mLayoutManager.scrollToPosition(position);
 
-            // TODO: Need to find a way to scroll to and highlight search items now
-            // that we are using RecyclerView instead.
-//            final RecyclerView listView = getListView();
-//            final RecyclerView.Adapter adapter = listView.getAdapter();
-//
-////            ((PreferenceGroupAdapter) adapter).setHighlightedDrawable(highlight);
-////            ((PreferenceGroupAdapter) adapter).setHighlighted(position);
-//
-//            listView.post(new Runnable() {
-//                @Override
-//                public void run() {
-//                    listView.setSelection(position);
-//                    listView.postDelayed(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            final int index = position - listView.getFirstVisiblePosition();
-//                            if (index >= 0 && index < listView.getChildCount()) {
-//                                final View v = listView.getChildAt(index);
-//                                final int centerX = v.getWidth() / 2;
-//                                final int centerY = v.getHeight() / 2;
-//                                highlight.setHotspot(centerX, centerY);
-//                                v.setPressed(true);
-//                                v.setPressed(false);
-//                            }
-//                        }
-//                    }, DELAY_HIGHLIGHT_DURATION_MILLIS);
-//                }
-//            });
+            getView().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mAdapter.highlight(position);
+                }
+            }, DELAY_HIGHLIGHT_DURATION_MILLIS);
         }
     }
 
@@ -645,6 +630,36 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
                     + "launch the given Fragment (name: " + fragmentClass
                     + ", requestCode: " + requestCode + ")");
             return false;
+        }
+    }
+
+    public static class HighlightablePreferenceGroupAdapter extends PreferenceGroupAdapter {
+
+        private int mHighlightPosition = -1;
+
+        public HighlightablePreferenceGroupAdapter(PreferenceGroup preferenceGroup) {
+            super(preferenceGroup);
+        }
+
+        public void highlight(int position) {
+            mHighlightPosition = position;
+            notifyDataSetChanged();
+        }
+
+        @Override
+        public void onBindViewHolder(PreferenceViewHolder holder, int position) {
+            super.onBindViewHolder(holder, position);
+            if (position == mHighlightPosition) {
+                View v = holder.itemView;
+                if (v.getBackground() != null) {
+                    final int centerX = v.getWidth() / 2;
+                    final int centerY = v.getHeight() / 2;
+                    v.getBackground().setHotspot(centerX, centerY);
+                }
+                v.setPressed(true);
+                v.setPressed(false);
+                mHighlightPosition = -1;
+            }
         }
     }
 }
