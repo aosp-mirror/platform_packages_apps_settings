@@ -710,6 +710,10 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             IWebViewUpdateService.Stub.asInterface(ServiceManager.getService("webviewupdate"));
         try {
             WebViewProviderInfo[] providers = webViewUpdateService.getValidWebViewPackages();
+            if (providers == null) {
+                Log.e(TAG, "No WebView providers available");
+                return;
+            }
             String[] options = new String[providers.length];
             String[] values = new String[providers.length];
             for(int n = 0; n < providers.length; n++) {
