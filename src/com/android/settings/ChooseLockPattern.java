@@ -671,12 +671,11 @@ public class ChooseLockPattern extends SettingsActivity {
         private List<LockPatternView.Cell> mChosenPattern;
         private String mCurrentPattern;
         private boolean mLockVirgin;
-        private int mUserId;
 
         public void start(LockPatternUtils utils, boolean credentialRequired,
                 boolean hasChallenge, long challenge,
                 List<LockPatternView.Cell> chosenPattern, String currentPattern, int userId) {
-            prepare(utils, credentialRequired, hasChallenge, challenge);
+            prepare(utils, credentialRequired, hasChallenge, challenge, userId);
 
             mCurrentPattern = currentPattern;
             mChosenPattern = chosenPattern;

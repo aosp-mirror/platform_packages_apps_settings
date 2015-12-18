@@ -20,7 +20,6 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.UserHandle;
 
 import com.android.internal.widget.LockPatternUtils;
 
@@ -38,6 +37,7 @@ abstract class SaveChosenLockWorkerBase extends Fragment {
     protected boolean mHasChallenge;
     protected long mChallenge;
     protected boolean mWasSecureBefore;
+    protected int mUserId;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,12 +57,15 @@ abstract class SaveChosenLockWorkerBase extends Fragment {
     }
 
     protected void prepare(LockPatternUtils utils, boolean credentialRequired,
-            boolean hasChallenge, long challenge) {
+            boolean hasChallenge, long challenge, int userId) {
         mUtils = utils;
+        mUserId = userId;
 
         mHasChallenge = hasChallenge;
         mChallenge = challenge;
-        mWasSecureBefore = mUtils.isSecure(UserHandle.myUserId());
+        // This will be a no-op for non managed profiles.
+        mUtils.setSeparateProfileChallengeEnabled(mUserId, true);
+        mWasSecureBefore = mUtils.isSecure(mUserId);
 
         mUtils.setCredentialRequiredToDecrypt(credentialRequired);
 

@@ -670,12 +670,11 @@ public class ChooseLockPassword extends SettingsActivity {
         private String mChosenPassword;
         private String mCurrentPassword;
         private int mRequestedQuality;
-        private int mUserId;
 
         public void start(LockPatternUtils utils, boolean required,
                 boolean hasChallenge, long challenge,
                 String chosenPassword, String currentPassword, int requestedQuality, int userId) {
-            prepare(utils, required, hasChallenge, challenge);
+            prepare(utils, required, hasChallenge, challenge, userId);
 
             mChosenPassword = chosenPassword;
             mCurrentPassword = currentPassword;

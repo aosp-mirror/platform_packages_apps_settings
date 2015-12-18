@@ -223,7 +223,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
                     mProfileChallengeUserId = profile.id;
                 }
             }
-            if (LockPatternUtils.isSeparateWorkChallengeEnabled()) {
+            if (mLockPatternUtils.isSeparateProfileChallengeAllowed(mProfileChallengeUserId)) {
                 addPreferencesFromResource(R.xml.security_settings_profile);
             }
         }
@@ -776,11 +776,21 @@ public class SecuritySettings extends SettingsPreferenceFragment
             result.add(sir);
 
             final UserManager um = UserManager.get(context);
-            boolean hasChildProfile = um.getProfiles(UserHandle.myUserId()).size() > 1;
-            if (hasChildProfile && LockPatternUtils.isSeparateWorkChallengeEnabled()) {
-                sir = new SearchIndexableResource(context);
-                sir.xmlResId = R.xml.security_settings_profile;
-                result.add(sir);
+            List<UserInfo> profiles = um.getProfiles(UserHandle.myUserId());
+            int numProfiles = profiles.size();
+            if (numProfiles > 1) {
+                int profileUserId = -1;
+                for (int i = 0; i < numProfiles; ++i) {
+                    UserInfo profile = profiles.get(i);
+                    if (profile.id != UserHandle.myUserId()) {
+                        profileUserId = profile.id;
+                    }
+                }
+                if (lockPatternUtils.isSeparateProfileChallengeAllowed(profileUserId)) {
+                    sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.security_settings_profile;
+                    result.add(sir);
+                }
             }
 
             if (um.isAdminUser()) {
