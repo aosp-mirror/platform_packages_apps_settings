@@ -17,7 +17,6 @@
 package com.android.settings.print;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.print.PrintJob;
 import android.print.PrintJobId;
@@ -49,8 +48,6 @@ public class PrintJobSettingsFragment extends SettingsPreferenceFragment {
 
     private static final String PRINT_JOB_PREFERENCE = "print_job_preference";
     private static final String PRINT_JOB_MESSAGE_PREFERENCE = "print_job_message_preference";
-
-    private Drawable mListDivider;
 
     private final PrintJobStateChangeListener mPrintJobStateChangeListener =
             new PrintJobStateChangeListener() {
