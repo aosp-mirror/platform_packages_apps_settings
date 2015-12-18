@@ -21,11 +21,11 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.AppHeader;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.Utils;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.notification.NotificationBackend.TopicRow;
 
 import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -59,8 +59,8 @@ public class TopicNotificationSettings extends SettingsPreferenceFragment {
     private SwitchPreference mSensitive;
     private TopicRow mTopicRow;
     private boolean mCreated;
-    private boolean mIsSystemPackage;
     private int mUid;
+    private boolean mDndVisualEffectsSuppressed;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -94,6 +94,10 @@ public class TopicNotificationSettings extends SettingsPreferenceFragment {
             return;
         }
 
+        NotificationManager.Policy policy =
+                NotificationManager.from(mContext).getNotificationPolicy();
+        mDndVisualEffectsSuppressed = policy == null ? false : policy.suppressedVisualEffects != 0;
+
         final Notification.Topic topic = args != null && args.containsKey(ARG_TOPIC)
                 ? (Notification.Topic) args.getParcelable(ARG_TOPIC) : null;
 
@@ -120,7 +124,6 @@ public class TopicNotificationSettings extends SettingsPreferenceFragment {
         }
 
         final PackageManager pm = getPackageManager();
-        mIsSystemPackage = Utils.isSystemPackage(pm, info);
 
         addPreferencesFromResource(R.xml.topic_notification_settings);
         mImportance = (ImportanceSeekBarPreference) findPreference(KEY_IMPORTANCE);
@@ -140,6 +143,7 @@ public class TopicNotificationSettings extends SettingsPreferenceFragment {
             @Override
             public void onImportanceChanged(int progress) {
                 mBackend.setImportance(mTopicRow.pkg, mTopicRow.uid, mTopicRow.topic, progress);
+                updateDependents(progress);
             }
         });
         mPriority.setChecked(mTopicRow.priority);
@@ -160,7 +164,7 @@ public class TopicNotificationSettings extends SettingsPreferenceFragment {
                 return mBackend.setSensitive(info.packageName, mUid, topic, sensitive);
             }
         });
-        updateDependents(mTopicRow.banned);
+        updateDependents(mTopicRow.importance);
 
     }
 
@@ -173,16 +177,17 @@ public class TopicNotificationSettings extends SettingsPreferenceFragment {
         }
     }
 
-    private void updateDependents(boolean banned) {
+    private void updateDependents(int importance) {
         final boolean lockscreenSecure = new LockPatternUtils(getActivity()).isSecure(
                 UserHandle.myUserId());
         final boolean lockscreenNotificationsEnabled = getLockscreenNotificationsEnabled();
         final boolean allowPrivate = getLockscreenAllowPrivateNotifications();
 
-        setVisible(mPriority, mIsSystemPackage || !banned);
-        setVisible(mSensitive, mIsSystemPackage || !banned && lockscreenSecure
-                && lockscreenNotificationsEnabled && allowPrivate);
-        setVisible(mImportance, !banned);
+
+        setVisible(mPriority, importance > NotificationListenerService.Ranking.IMPORTANCE_DEFAULT
+                && !mDndVisualEffectsSuppressed);
+        setVisible(mSensitive, (importance > NotificationListenerService.Ranking.IMPORTANCE_LOW)
+                && lockscreenSecure && lockscreenNotificationsEnabled && allowPrivate);
     }
 
     private void setVisible(Preference p, boolean visible) {

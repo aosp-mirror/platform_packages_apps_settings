@@ -30,7 +30,12 @@
     <Preference
             android:key="app_settings"
             android:title="@string/app_notification_preferences"
-            android:order="5"
+            android:order="2"
             android:persistent="false" />
+
+    <PreferenceCategory
+            android:key="categories"
+            android:title="@string/notification_topic_categories"
+            android:order="3" />
 
 </PreferenceScreen>

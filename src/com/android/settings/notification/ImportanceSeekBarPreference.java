@@ -90,20 +90,15 @@ public class ImportanceSeekBarPreference extends SeekBarPreference implements
     private String getProgressSummary(int progress) {
         switch (progress) {
             case NotificationListenerService.Ranking.IMPORTANCE_NONE:
-                return getContext().getString(
-                        com.android.internal.R.string.notification_importance_blocked);
+                return getContext().getString(R.string.notification_importance_blocked);
             case NotificationListenerService.Ranking.IMPORTANCE_LOW:
-                return getContext().getString(
-                        com.android.internal.R.string.notification_importance_low);
+                return getContext().getString(R.string.notification_importance_low);
             case NotificationListenerService.Ranking.IMPORTANCE_DEFAULT:
-                return getContext().getString(
-                        com.android.internal.R.string.notification_importance_default);
+                return getContext().getString(R.string.notification_importance_default);
             case NotificationListenerService.Ranking.IMPORTANCE_HIGH:
-                return getContext().getString(
-                        com.android.internal.R.string.notification_importance_high);
+                return getContext().getString(R.string.notification_importance_high);
             case NotificationListenerService.Ranking.IMPORTANCE_MAX:
-                return getContext().getString(
-                        com.android.internal.R.string.notification_importance_max);
+                return getContext().getString(R.string.notification_importance_max);
             default:
                 return "";
         }

@@ -28,10 +28,12 @@ import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
+import android.service.notification.NotificationListenerService;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
+import android.support.v7.preference.PreferenceCategory;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
@@ -55,6 +57,7 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
 
     private static final String KEY_BLOCK = "block";
     private static final String KEY_APP_SETTINGS = "app_settings";
+    private static final String KEY_CATEGORIES = "categories";
 
     private static final Intent APP_NOTIFICATION_PREFS_CATEGORY_INTENT
             = new Intent(Intent.ACTION_MAIN)
@@ -64,6 +67,7 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
 
     private Context mContext;
     private SwitchPreference mBlock;
+    private PreferenceCategory mCategories;
     private AppRow mAppRow;
     private boolean mCreated;
     private boolean mIsSystemPackage;
@@ -136,6 +140,7 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
 
         // Add topics
         List<Notification.Topic> topics = mBackend.getTopics(pkg, mUid);
+        mCategories = (PreferenceCategory) getPreferenceScreen().findPreference(KEY_CATEGORIES);
         for (Notification.Topic topic : topics) {
             Preference topicPreference = new Preference(mContext);
             topicPreference.setKey(topic.getId());
@@ -151,8 +156,7 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
                     TopicNotificationSettings.class.getName(),
                     topicArgs, null, R.string.topic_notifications_title, null, false);
             topicPreference.setIntent(topicIntent);
-            // Add preference to the settings menu.
-            getPreferenceScreen().addPreference(topicPreference);
+            mCategories.addPreference(topicPreference);
         }
 
         mBlock.setChecked(mAppRow.banned);
@@ -198,6 +202,9 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
 
     private void updateDependents(boolean banned) {
         setVisible(mBlock, !mIsSystemPackage);
+        if (mCategories != null) {
+            setVisible(mCategories, !banned);
+        }
     }
 
     private void setVisible(Preference p, boolean visible) {

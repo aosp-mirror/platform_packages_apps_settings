@@ -144,7 +144,7 @@ public class NotificationBackend {
             return sINM.getTopicImportance(pkg, uid, topic);
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
-            return NotificationListenerService.Ranking.IMPORTANCE_DEFAULT;
+            return NotificationListenerService.Ranking.IMPORTANCE_UNSPECIFIED;
         }
     }
 
