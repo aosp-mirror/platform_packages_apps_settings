@@ -21,8 +21,14 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.ResolveInfo;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.UserManager;
 import android.util.Log;
+
+import java.util.Objects;
 
 public class FallbackHome extends Activity {
     private static final String TAG = "FallbackHome";
@@ -30,16 +36,42 @@ public class FallbackHome extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         registerReceiver(mReceiver, new IntentFilter(Intent.ACTION_USER_UNLOCKED));
+        maybeFinish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mReceiver);
     }
 
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Log.d(TAG, "User unlocked; leaving to find real home");
-            unregisterReceiver(this);
-            finish();
+            maybeFinish();
+        }
+    };
+
+    private void maybeFinish() {
+        if (getSystemService(UserManager.class).isUserUnlocked()) {
+            final Intent homeIntent = new Intent(Intent.ACTION_MAIN)
+                    .addCategory(Intent.CATEGORY_HOME);
+            final ResolveInfo homeInfo = getPackageManager().resolveActivity(homeIntent, 0);
+            if (Objects.equals(getPackageName(), homeInfo.activityInfo.packageName)) {
+                Log.d(TAG, "User unlocked but no home; let's hope someone enables one soon?");
+                mHandler.sendEmptyMessageDelayed(0, 500);
+            } else {
+                Log.d(TAG, "User unlocked and real home found; let's go!");
+                finish();
+            }
+        }
+    }
+
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            maybeFinish();
         }
     };
 }
