@@ -2568,7 +2568,8 @@
             android:theme="@style/Transparent"
             android:excludeFromRecents="true"
             android:exported="true"
-            android:permission="android.permission.CHANGE_WIFI_STATE">
+            android:permission="android.permission.CHANGE_WIFI_STATE"
+            android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter>
                 <action android:name="com.android.settings.WIFI_DIALOG" />
                 <category android:name="android.intent.category.DEFAULT" />
