@@ -191,13 +191,13 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
 
     private void onPreferenceToggled(String preferenceKey, boolean enabled) {
         ComponentName service = ComponentName.unflattenFromString(preferenceKey);
-        List<ComponentName> services = PrintSettingsUtils.readEnabledPrintServices(getActivity());
+        List<ComponentName> services = PrintSettingsUtils.readDisabledPrintServices(getActivity());
         if (enabled) {
-            services.add(service);
-        } else {
             services.remove(service);
+        } else {
+            services.add(service);
         }
-        PrintSettingsUtils.writeEnabledPrintServices(getActivity(), services);
+        PrintSettingsUtils.writeDisabledPrintServices(getActivity(), services);
     }
 
     private ListView getBackupListView() {
@@ -253,8 +253,9 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
     }
 
     private void updateUiForServiceState() {
-        List<ComponentName> services = PrintSettingsUtils.readEnabledPrintServices(getActivity());
-        mServiceEnabled = services.contains(mComponentName);
+        List<ComponentName> disabledServices = PrintSettingsUtils
+                .readDisabledPrintServices(getActivity());
+        mServiceEnabled = !disabledServices.contains(mComponentName);
         if (mServiceEnabled) {
             mSwitchBar.setCheckedInternal(true);
             mPrintersAdapter.enable();
@@ -431,7 +432,7 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
 
         public void register(ContentResolver contentResolver) {
             contentResolver.registerContentObserver(android.provider.Settings.Secure.getUriFor(
-                    android.provider.Settings.Secure.ENABLED_PRINT_SERVICES), false, this);
+                    android.provider.Settings.Secure.DISABLED_PRINT_SERVICES), false, this);
         }
 
         public void unregister(ContentResolver contentResolver) {

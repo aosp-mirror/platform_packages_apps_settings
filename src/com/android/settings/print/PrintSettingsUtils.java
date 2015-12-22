@@ -30,50 +30,50 @@ import java.util.List;
  */
 public class PrintSettingsUtils {
 
-    private static final char ENABLED_PRINT_SERVICES_SEPARATOR = ':';
+    private static final char DISABLED_PRINT_SERVICES_SEPARATOR = ':';
 
     private PrintSettingsUtils() {
         /* do nothing */
     }
 
-    public static List<ComponentName> readEnabledPrintServices(Context context) {
-        List<ComponentName> enabledServices = new ArrayList<ComponentName>();
+    public static List<ComponentName> readDisabledPrintServices(Context context) {
+        List<ComponentName> disabledServices = new ArrayList<ComponentName>();
 
-        String enabledServicesSetting = Settings.Secure.getString(context
-                .getContentResolver(), Settings.Secure.ENABLED_PRINT_SERVICES);
-        if (TextUtils.isEmpty(enabledServicesSetting)) {
-            return enabledServices;
+        String disabledServicesSetting = Settings.Secure.getString(context
+                .getContentResolver(), Settings.Secure.DISABLED_PRINT_SERVICES);
+        if (TextUtils.isEmpty(disabledServicesSetting)) {
+            return disabledServices;
         }
 
         SimpleStringSplitter colonSplitter = new SimpleStringSplitter(
-                ENABLED_PRINT_SERVICES_SEPARATOR);
-        colonSplitter.setString(enabledServicesSetting);
+                DISABLED_PRINT_SERVICES_SEPARATOR);
+        colonSplitter.setString(disabledServicesSetting);
 
         while (colonSplitter.hasNext()) {
             String componentNameString = colonSplitter.next();
-            ComponentName enabledService = ComponentName.unflattenFromString(
+            ComponentName disabledService = ComponentName.unflattenFromString(
                     componentNameString);
-            if (enabledService != null) {
-                enabledServices.add(enabledService);
+            if (disabledService != null) {
+                disabledServices.add(disabledService);
             }
         }
 
-        return enabledServices;
+        return disabledServices;
     }
 
-    public static void writeEnabledPrintServices(Context context,
+    public static void writeDisabledPrintServices(Context context,
             List<ComponentName> services) {
         StringBuilder builder = new StringBuilder();
         final int serviceCount = services.size();
         for (int i = 0; i < serviceCount; i++) {
             ComponentName service = services.get(i);
             if (builder.length() > 0) {
-                builder.append(ENABLED_PRINT_SERVICES_SEPARATOR);
+                builder.append(DISABLED_PRINT_SERVICES_SEPARATOR);
             }
             builder.append(service.flattenToString());
         }
         Settings.Secure.putString(context.getContentResolver(),
-                Settings.Secure.ENABLED_PRINT_SERVICES,
+                Settings.Secure.DISABLED_PRINT_SERVICES,
                 builder.toString());
     }
 }

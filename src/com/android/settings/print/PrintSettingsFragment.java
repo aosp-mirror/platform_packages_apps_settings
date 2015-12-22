@@ -207,8 +207,8 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
             mPrintServicesCategory.removeAll();
         }
 
-        List<ComponentName> enabledServices = PrintSettingsUtils
-                .readEnabledPrintServices(getActivity());
+        List<ComponentName> disabledServices = PrintSettingsUtils
+                .readDisabledPrintServices(getActivity());
 
         final PackageManager pm = getActivity().getPackageManager();
 
@@ -236,7 +236,7 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
             preference.setFragment(PrintServiceSettingsFragment.class.getName());
             preference.setPersistent(false);
 
-            final boolean serviceEnabled = enabledServices.contains(componentName);
+            final boolean serviceEnabled = !disabledServices.contains(componentName);
             if (serviceEnabled) {
                 preference.setSummary(getString(R.string.print_feature_state_on));
             } else {
@@ -388,7 +388,7 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
 
         public void register(ContentResolver contentResolver) {
             contentResolver.registerContentObserver(Settings.Secure.getUriFor(
-                    Settings.Secure.ENABLED_PRINT_SERVICES), false, this);
+                    Settings.Secure.DISABLED_PRINT_SERVICES), false, this);
         }
 
         public void unregister(ContentResolver contentResolver) {
