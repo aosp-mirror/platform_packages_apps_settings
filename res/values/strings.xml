@@ -4435,7 +4435,6 @@
     <!-- Message when there are no available device admins to display -->
     <string name="no_device_admins">No available device administrators</string>
     <!-- Message displayed when the device admin can only be disabled by deleting the work profile [CHAR_LIMIT=120] -->
-    <string name="managed_profile_device_admin_info">To stop <xliff:g id="app_name">%1$s</xliff:g> from accessing your work profile, remove the profile under Settings &gt; Accounts</string>
     <!-- Title for personal device admins on the list [CHAR_LIMIT=25] -->
     <string name="personal_device_admin_title">Personal</string>
     <!-- Title for managed device admins on the list [CHAR_LIMIT=25] -->
@@ -6712,11 +6711,18 @@
     <string name="about_summary">Android <xliff:g id="version" example="6.0">%1$s</xliff:g></string>
 
     <!-- TODO: Update these strings with the finalized ones. -->
+    <!-- Title for dialog displayed when user clicks on a setting locked by an admin [CHAR LIMIT=30] -->
     <string name="disabled_by_policy_title">Disabled by policy</string>
-    <string name="disabled_by_admin_msg">Disabled by your <xliff:g id="organisation_name" example="organisation">%s</xliff:g>\'s administrator.</string>
-    <string name="default_organisation_name">organisation</string>
-    <string name="default_admin_support_msg">Contact them to learn more.</string>
-    <string name="list_of_administrators">List of administrators</string>
+    <!-- Shown when the user tries to change a settings locked by an admin [CHAR LIMIT=200] -->
+    <string name="default_admin_support_msg">Disabled by your organisation\'s administrator.\nContact them to learn more.</string>
+    <!-- Shown in dialog to allow user to see more information about the device admin [CHAR LIMIT=30] -->
+    <string name="admin_support_more_info">More details</string>
+    <!-- Shown in admin details page to warn user about policies the admin can set in a work profile. [CHAR LIMIT=NONE] -->
+    <string name="admin_profile_owner_message">Your administrator has the ability to monitor and manage settings, corporate access, apps, permissions, and data associated with the profile, including network activity and your device\'s location information.</string>
+    <!-- Shown in admin details page to warn user about policies the admin can set on a user. [CHAR LIMIT=NONE] -->
+    <string name="admin_profile_owner_user_message">Your administrator has the ability to monitor and manage settings, corporate access, apps, permissions, and data associated with this user, including network activity and your device\'s location information.</string>
+    <!-- Shown in admin details page to warn user about policies the admin can set on a device. [CHAR LIMIT=NONE] -->
+    <string name="admin_device_owner_message">Your administrator has the ability to monitor and manage settings, corporate access, apps, permissions, and data associated with this device, including network activity and your device\'s location information.</string>
 
     <!-- Turn off a conditional state of the device (e.g. airplane mode, or hotspot) [CHAR LIMIT=30] -->
     <string name="condition_turn_off">Turn off</string>

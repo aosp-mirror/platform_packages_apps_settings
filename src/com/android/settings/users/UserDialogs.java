@@ -55,13 +55,7 @@ public final class UserDialogs {
         AlertDialog.Builder builder = new AlertDialog.Builder(context)
                 .setPositiveButton(R.string.user_delete_button, onConfirmListener)
                 .setNegativeButton(android.R.string.cancel, null);
-        if (UserHandle.myUserId() == removingUserId) {
-            builder.setTitle(R.string.user_confirm_remove_self_title);
-            builder.setMessage(R.string.user_confirm_remove_self_message);
-        } else if (userInfo.isRestricted()) {
-            builder.setTitle(R.string.user_profile_confirm_remove_title);
-            builder.setMessage(R.string.user_profile_confirm_remove_message);
-        } else if (userInfo.isManagedProfile()) {
+        if (userInfo.isManagedProfile()) {
             builder.setTitle(R.string.work_profile_confirm_remove_title);
             View view = createRemoveManagedUserDialogView(context, removingUserId);
             if (view != null) {
@@ -69,6 +63,12 @@ public final class UserDialogs {
             } else {
                 builder.setMessage(R.string.work_profile_confirm_remove_message);
             }
+        } else if (UserHandle.myUserId() == removingUserId) {
+            builder.setTitle(R.string.user_confirm_remove_self_title);
+            builder.setMessage(R.string.user_confirm_remove_self_message);
+        } else if (userInfo.isRestricted()) {
+            builder.setTitle(R.string.user_profile_confirm_remove_title);
+            builder.setMessage(R.string.user_profile_confirm_remove_message);
         } else {
             builder.setTitle(R.string.user_confirm_remove_title);
             builder.setMessage(R.string.user_confirm_remove_message);
