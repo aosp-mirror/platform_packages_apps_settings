@@ -22,9 +22,8 @@ import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentSender.SendIntentException;
 import android.content.Loader;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.database.ContentObserver;
 import android.database.DataSetObserver;
@@ -47,6 +46,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityManager;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
@@ -73,6 +73,8 @@ import java.util.Map;
  */
 public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         implements SwitchBar.OnSwitchChangeListener {
+
+    private static final String LOG_TAG = "PrintServiceSettingsFragment";
 
     private static final int LOADER_ID_PRINTERS_LOADER = 1;
 
@@ -150,6 +152,7 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
     public void onStart() {
         super.onStart();
         mSettingsContentObserver.register(getContentResolver());
+
         updateEmptyView();
         updateUiForServiceState();
     }
@@ -283,6 +286,21 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
 
         getBackupListView().setSelector(new ColorDrawable(Color.TRANSPARENT));
         getBackupListView().setAdapter(mPrintersAdapter);
+        getBackupListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                PrinterInfo printer = (PrinterInfo) mPrintersAdapter.getItem(position);
+
+                if (printer.getInfoIntent() != null) {
+                    try {
+                        getActivity().startIntentSender(printer.getInfoIntent().getIntentSender(),
+                                null, 0, 0, 0);
+                    } catch (SendIntentException e) {
+                        Log.e(LOG_TAG, "Could not execute info intent: %s", e);
+                    }
+                }
+            }
+        });
     }
 
 
@@ -518,16 +536,8 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
 
             PrinterInfo printer = (PrinterInfo) getItem(position);
             CharSequence title = printer.getName();
-            CharSequence subtitle = null;
-            Drawable icon = null;
-            try {
-                PackageInfo packageInfo = getPackageManager().getPackageInfo(
-                        printer.getId().getServiceName().getPackageName(), 0);
-                        subtitle = packageInfo.applicationInfo.loadLabel(getPackageManager());
-                        icon = packageInfo.applicationInfo.loadIcon(getPackageManager());
-            } catch (NameNotFoundException nnfe) {
-                /* ignore */
-            }
+            CharSequence subtitle = printer.getDescription();
+            Drawable icon = printer.loadIcon(getActivity());
 
             TextView titleView = (TextView) convertView.findViewById(R.id.title);
             titleView.setText(title);
@@ -550,11 +560,6 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
             }
 
             return convertView;
-        }
-
-        @Override
-        public boolean isEnabled(int position) {
-            return false;
         }
 
         @Override
