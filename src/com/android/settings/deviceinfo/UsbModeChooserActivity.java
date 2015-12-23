@@ -20,7 +20,12 @@ import android.annotation.Nullable;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.hardware.usb.UsbManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,6 +53,19 @@ public class UsbModeChooserActivity extends Activity {
     private UsbBackend mBackend;
     private AlertDialog mDialog;
     private LayoutInflater mLayoutInflater;
+
+    private BroadcastReceiver mDisconnectedReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (UsbManager.ACTION_USB_STATE.equals(action)) {
+                boolean connected = intent.getBooleanExtra(UsbManager.USB_CONNECTED, false);
+                if (!connected) {
+                    mDialog.dismiss();
+                }
+            }
+        }
+    };
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -82,6 +100,20 @@ public class UsbModeChooserActivity extends Activity {
                 inflateOption(DEFAULT_MODES[i], current == DEFAULT_MODES[i], container);
             }
         }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        IntentFilter filter = new IntentFilter(UsbManager.ACTION_USB_STATE);
+        registerReceiver(mDisconnectedReceiver, filter);
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(mDisconnectedReceiver);
+        super.onStop();
     }
 
     private void inflateOption(final int mode, boolean selected, LinearLayout container) {
