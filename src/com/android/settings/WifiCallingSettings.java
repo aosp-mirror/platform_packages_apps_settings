@@ -23,9 +23,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
+import android.telephony.CarrierConfigManager;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -58,6 +60,7 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
     private TextView mEmptyView;
 
     private boolean mValidListener = false;
+    private boolean mEditableWfcMode = true;
 
     private final PhoneStateListener mPhoneStateListener = new PhoneStateListener() {
         /*
@@ -161,6 +164,15 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
 
         mIntentFilter = new IntentFilter();
         mIntentFilter.addAction(ImsManager.ACTION_IMS_REGISTRATION_ERROR);
+
+        CarrierConfigManager configManager = (CarrierConfigManager)
+                getSystemService(Context.CARRIER_CONFIG_SERVICE);
+        if (configManager != null) {
+            PersistableBundle b = configManager.getConfig();
+            if (b != null) {
+                mEditableWfcMode = b.getBoolean(CarrierConfigManager.KEY_EDITABLE_WFC_MODE_BOOL);
+            }
+        }
     }
 
     @Override
@@ -240,6 +252,7 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
         } else {
             preferenceScreen.removePreference(mButtonWfcMode);
         }
+        preferenceScreen.setEnabled(mEditableWfcMode);
     }
 
     @Override
