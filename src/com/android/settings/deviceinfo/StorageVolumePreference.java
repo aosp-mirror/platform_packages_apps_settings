@@ -74,7 +74,9 @@ public class StorageVolumePreference extends Preference {
             final String used = Formatter.formatFileSize(context, usedBytes);
             final String total = Formatter.formatFileSize(context, totalBytes);
             setSummary(context.getString(R.string.storage_volume_summary, used, total));
-            mUsedPercent = (int) ((usedBytes * 100) / totalBytes);
+            if (totalBytes > 0) {
+                mUsedPercent = (int) ((usedBytes * 100) / totalBytes);
+            }
 
             if (freeBytes < mStorageManager.getStorageLowBytes(path)) {
                 mColor = StorageSettings.COLOR_WARNING;
