@@ -147,6 +147,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private static final String DEBUG_DEBUGGING_CATEGORY_KEY = "debug_debugging_category";
     private static final String SELECT_LOGD_SIZE_KEY = "select_logd_size";
     private static final String SELECT_LOGD_SIZE_PROPERTY = "persist.logd.size";
+    private static final String SELECT_LOGD_TAG_PROPERTY = "persist.log.tag";
     private static final String SELECT_LOGD_DEFAULT_SIZE_PROPERTY = "ro.logd.size";
 
     private static final String WIFI_DISPLAY_CERTIFICATION_KEY = "wifi_display_certification";
@@ -1262,21 +1263,30 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
 
     private void updateLogdSizeValues() {
         if (mLogdSize != null) {
+            String currentTag = SystemProperties.get(SELECT_LOGD_TAG_PROPERTY);
             String currentValue = SystemProperties.get(SELECT_LOGD_SIZE_PROPERTY);
+            if ((currentTag != null) && currentTag.equals("S")) {
+                currentValue = "32768";
+            }
             if (currentValue == null) {
                 currentValue = SystemProperties.get(SELECT_LOGD_DEFAULT_SIZE_PROPERTY);
                 if (currentValue == null) {
-                    currentValue = "256K";
+                    if (SystemProperties.get("ro.config.low_ram").equals("true")) {
+                        currentValue = "64K";
+                    } else {
+                        currentValue = "256K";
+                    }
                 }
             }
             String[] values = getResources().getStringArray(R.array.select_logd_size_values);
             String[] titles = getResources().getStringArray(R.array.select_logd_size_titles);
+            int index = 2; // punt to second entry if not found
             if (SystemProperties.get("ro.config.low_ram").equals("true")) {
                 mLogdSize.setEntries(R.array.select_logd_size_lowram_titles);
                 titles = getResources().getStringArray(R.array.select_logd_size_lowram_titles);
+                index = 1;
             }
             String[] summaries = getResources().getStringArray(R.array.select_logd_size_summaries);
-            int index = 1; // punt to second entry if not found
             for (int i = 0; i < titles.length; i++) {
                 if (currentValue.equals(values[i])
                         || currentValue.equals(titles[i])) {
@@ -1294,6 +1304,13 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         String currentValue = SystemProperties.get(SELECT_LOGD_DEFAULT_SIZE_PROPERTY);
         if (currentValue != null) {
             DEFAULT_LOG_RING_BUFFER_SIZE_IN_BYTES = currentValue;
+        }
+        boolean disable = (newValue != null) && (newValue.equals("32768"));
+        if (disable) {
+            newValue = "65536";
+            SystemProperties.set(SELECT_LOGD_TAG_PROPERTY, "S");
+        } else {
+            SystemProperties.set(SELECT_LOGD_TAG_PROPERTY, "");
         }
         final String size = (newValue != null) ?
                 newValue.toString() : DEFAULT_LOG_RING_BUFFER_SIZE_IN_BYTES;
