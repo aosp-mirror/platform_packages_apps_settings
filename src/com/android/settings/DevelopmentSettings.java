@@ -54,10 +54,8 @@ import android.os.StrictMode;
 import android.os.SystemProperties;
 import android.os.UserManager;
 import android.os.storage.IMountService;
-import android.os.storage.StorageManager;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
-import android.provider.Settings.Global;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.DropDownPreference;
 import android.support.v7.preference.ListPreference;
@@ -168,6 +166,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private static final String MOBILE_DATA_ALWAYS_ON = "mobile_data_always_on";
     private static final String KEY_COLOR_MODE = "color_mode";
     private static final String FORCE_RESIZABLE_KEY = "force_resizable_activities";
+    private static final String ENABLE_FREEFORM_SUPPORT_KEY = "enable_freeform_support";
 
     private static final String INACTIVE_APPS_KEY = "inactive_apps";
 
@@ -275,6 +274,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private ColorModePreference mColorModePreference;
 
     private SwitchPreference mForceResizable;
+
+    private SwitchPreference mEnableFreeformSupport;
 
     private final ArrayList<Preference> mAllPrefs = new ArrayList<Preference>();
 
@@ -406,6 +407,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         mSimulateColorSpace = addListPreference(SIMULATE_COLOR_SPACE);
         mUSBAudio = findAndInitSwitchPref(USB_AUDIO_KEY);
         mForceResizable = findAndInitSwitchPref(FORCE_RESIZABLE_KEY);
+        mEnableFreeformSupport = findAndInitSwitchPref(ENABLE_FREEFORM_SUPPORT_KEY);
 
         mImmediatelyDestroyActivities = (SwitchPreference) findPreference(
                 IMMEDIATELY_DESTROY_ACTIVITIES_KEY);
@@ -678,6 +680,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         updateSimulateColorSpace();
         updateUSBAudioOptions();
         updateForceResizableOptions();
+        updateEnableFreeformWindowsSupportOptions();
         updateWebViewProviderOptions();
     }
 
@@ -907,7 +910,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
 
     private void writeVerifyAppsOverUsbOptions() {
         Settings.Global.putInt(getActivity().getContentResolver(),
-              Settings.Global.PACKAGE_VERIFIER_INCLUDE_ADB, mVerifyAppsOverUsb.isChecked() ? 1 : 0);
+                Settings.Global.PACKAGE_VERIFIER_INCLUDE_ADB,
+                mVerifyAppsOverUsb.isChecked() ? 1 : 0);
     }
 
     private boolean enableVerifierSetting() {
@@ -988,7 +992,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private void updatePointerLocationOptions() {
         updateSwitchPreference(mPointerLocation,
                 Settings.System.getInt(getActivity().getContentResolver(),
-                Settings.System.POINTER_LOCATION, 0) != 0);
+                        Settings.System.POINTER_LOCATION, 0) != 0);
     }
 
     private void writeShowTouchesOptions() {
@@ -999,7 +1003,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private void updateShowTouchesOptions() {
         updateSwitchPreference(mShowTouches,
                 Settings.System.getInt(getActivity().getContentResolver(),
-                Settings.System.SHOW_TOUCHES, 0) != 0);
+                        Settings.System.SHOW_TOUCHES, 0) != 0);
     }
 
     private void updateFlingerOptions() {
@@ -1063,7 +1067,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     }
 
     private void updateHardwareUiOptions() {
-        updateSwitchPreference(mForceHardwareUi, SystemProperties.getBoolean(HARDWARE_UI_PROPERTY, false));
+        updateSwitchPreference(mForceHardwareUi,
+                SystemProperties.getBoolean(HARDWARE_UI_PROPERTY, false));
     }
 
     private void writeHardwareUiOptions() {
@@ -1267,10 +1272,21 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
                 mForceResizable.isChecked() ? 1 : 0);
     }
 
+    private void updateEnableFreeformWindowsSupportOptions() {
+        updateSwitchPreference(mEnableFreeformSupport, Settings.Global.getInt(getContentResolver(),
+                Settings.Global.DEVELOPMENT_ENABLE_FREEFORM_WINDOWS_SUPPORT, 0) != 0);
+    }
+
+    private void writeEnableFreeformWindowsSupportOptions() {
+        Settings.Global.putInt(getContentResolver(),
+                Settings.Global.DEVELOPMENT_ENABLE_FREEFORM_WINDOWS_SUPPORT,
+                mEnableFreeformSupport.isChecked() ? 1 : 0);
+    }
+
     private void updateForceRtlOptions() {
         updateSwitchPreference(mForceRtlLayout,
                 Settings.Global.getInt(getActivity().getContentResolver(),
-                Settings.Global.DEVELOPMENT_FORCE_RTL, 0) != 0);
+                        Settings.Global.DEVELOPMENT_FORCE_RTL, 0) != 0);
     }
 
     private void writeForceRtlOptions() {
@@ -1442,7 +1458,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private void updateCpuUsageOptions() {
         updateSwitchPreference(mShowCpuUsage,
                 Settings.Global.getInt(getActivity().getContentResolver(),
-                Settings.Global.SHOW_PROCESSES, 0) != 0);
+                        Settings.Global.SHOW_PROCESSES, 0) != 0);
     }
 
     private void writeCpuUsageOptions() {
@@ -1528,7 +1544,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
 
     private void writeOverlayDisplayDevicesOptions(Object newValue) {
         Settings.Global.putString(getActivity().getContentResolver(),
-                Settings.Global.OVERLAY_DISPLAY_DEVICES, (String)newValue);
+                Settings.Global.OVERLAY_DISPLAY_DEVICES, (String) newValue);
         updateOverlayDisplayDevicesOptions();
     }
 
@@ -1790,6 +1806,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             writeUSBAudioOptions();
         } else if (preference == mForceResizable) {
             writeForceResizableOptions();
+        } else if (preference == mEnableFreeformSupport){
+            writeEnableFreeformWindowsSupportOptions();
         } else if (INACTIVE_APPS_KEY.equals(preference.getKey())) {
             startInactiveAppsFragment();
         } else if (BACKGROUND_CHECK_KEY.equals(preference.getKey())) {
