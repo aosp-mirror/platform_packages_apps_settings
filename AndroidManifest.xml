@@ -2175,7 +2175,7 @@
         <activity android:name=".FallbackHome"
                   android:excludeFromRecents="true"
                   android:theme="@android:style/Theme.Translucent.NoTitleBar">
-            <intent-filter android:priority="-10">
+            <intent-filter android:priority="-1000">
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.HOME" />
                 <category android:name="android.intent.category.DEFAULT" />
