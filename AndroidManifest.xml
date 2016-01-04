@@ -2668,6 +2668,19 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="Settings$ManageDefaultAppsActivity"
+                  android:taskAffinity=""
+                  android:exported="true">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.MANAGE_DEFAULT_APPS_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.applications.ManageDefaultApps" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
+        </activity>
+
         <!-- Conditional receivers, only enabled during silenced state, default off-->
         <receiver
             android:name=".dashboard.conditional.HotspotCondition$Receiver"

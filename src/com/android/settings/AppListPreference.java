@@ -18,6 +18,7 @@ package com.android.settings;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.ApplicationInfo;
@@ -122,6 +123,48 @@ public class AppListPreference extends CustomListPreference {
         setEntries(applicationNames.toArray(new CharSequence[applicationNames.size()]));
         setEntryValues(
                 validatedPackageNames.toArray(new CharSequence[validatedPackageNames.size()]));
+        mEntryDrawables = entryDrawables.toArray(new Drawable[entryDrawables.size()]);
+
+        if (selectedIndex != -1) {
+            setValueIndex(selectedIndex);
+        } else {
+            setValue(null);
+        }
+    }
+
+    public void setComponentNames(ComponentName[] componentNames, ComponentName defaultCN) {
+        // Look up all package names in PackageManager. Skip ones we can't find.
+        PackageManager pm = getContext().getPackageManager();
+        final int entryCount = componentNames.length + (mShowItemNone ? 1 : 0);
+        List<CharSequence> applicationNames = new ArrayList<>(entryCount);
+        List<CharSequence> validatedComponentNames = new ArrayList<>(entryCount);
+        List<Drawable> entryDrawables = new ArrayList<>(entryCount);
+        int selectedIndex = -1;
+        for (int i = 0; i < componentNames.length; i++) {
+            try {
+                ApplicationInfo appInfo = pm.getApplicationInfo(
+                        componentNames[i].getPackageName().toString(), 0);
+                applicationNames.add(appInfo.loadLabel(pm));
+                validatedComponentNames.add(componentNames[i].flattenToString());
+                entryDrawables.add(appInfo.loadIcon(pm));
+                if (defaultCN != null && componentNames[i].equals(defaultCN)) {
+                    selectedIndex = i;
+                }
+            } catch (NameNotFoundException e) {
+                // Skip unknown packages.
+            }
+        }
+
+        if (mShowItemNone) {
+            applicationNames.add(
+                    getContext().getResources().getText(R.string.app_list_preference_none));
+            validatedComponentNames.add(ITEM_NONE_VALUE);
+            entryDrawables.add(getContext().getDrawable(R.drawable.ic_remove_circle));
+        }
+
+        setEntries(applicationNames.toArray(new CharSequence[applicationNames.size()]));
+        setEntryValues(
+                validatedComponentNames.toArray(new CharSequence[validatedComponentNames.size()]));
         mEntryDrawables = entryDrawables.toArray(new Drawable[entryDrawables.size()]);
 
         if (selectedIndex != -1) {
