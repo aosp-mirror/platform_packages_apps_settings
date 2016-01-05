@@ -38,9 +38,11 @@ public class ZenModeVisualInterruptionSettings extends ZenModeSettingsBase {
 
     private static final String KEY_PEEK = "peek";
     private static final String KEY_LIGHTS = "lights";
+    private static final String KEY_SCREEN_ON = "screen_on";
 
     private SwitchPreference mPeek;
     private SwitchPreference mLights;
+    private SwitchPreference mScreenOn;
 
     private boolean mDisableListeners;
     private NotificationManager.Policy mPolicy;
@@ -78,6 +80,19 @@ public class ZenModeVisualInterruptionSettings extends ZenModeSettingsBase {
                 return true;
             }
         });
+
+        mScreenOn = (SwitchPreference) root.findPreference(KEY_SCREEN_ON);
+        mScreenOn.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                if (mDisableListeners) return true;
+                final boolean val = (Boolean) newValue;
+                MetricsLogger.action(mContext, MetricsLogger.ACTION_ZEN_ALLOW_SCREEN_ON, val);
+                if (DEBUG) Log.d(TAG, "onPrefChange suppressScreenOn=" + val);
+                savePolicy(getNewSuppressedEffects(val, Policy.SUPPRESSED_EFFECT_SCREEN_ON));
+                return true;
+            }
+        });
     }
 
     @Override
@@ -100,6 +115,7 @@ public class ZenModeVisualInterruptionSettings extends ZenModeSettingsBase {
         mDisableListeners = true;
         mPeek.setChecked(isEffectSuppressed(Policy.SUPPRESSED_EFFECT_PEEK));
         mLights.setChecked(isEffectSuppressed(Policy.SUPPRESSED_EFFECT_LIGHTS));
+        mScreenOn.setChecked(isEffectSuppressed(Policy.SUPPRESSED_EFFECT_SCREEN_ON));
         mDisableListeners = false;
     }
 
