@@ -1262,8 +1262,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
 
     private void updateForceResizableOptions() {
         updateSwitchPreference(mForceResizable, Settings.Global.getInt(getContentResolver(),
-                Settings.Global.DEVELOPMENT_FORCE_RESIZABLE_ACTIVITIES,
-                Build.IS_DEBUGGABLE ? 1 : 0) != 0);
+                Settings.Global.DEVELOPMENT_FORCE_RESIZABLE_ACTIVITIES, 0) != 0);
     }
 
     private void writeForceResizableOptions() {
