@@ -21,22 +21,28 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.security.Credentials;
 import android.security.KeyStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.android.internal.net.VpnConfig;
 import com.android.internal.net.VpnProfile;
 import com.android.settings.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -44,10 +50,12 @@ import java.util.List;
  */
 public class LockdownConfigFragment extends DialogFragment {
     private List<VpnProfile> mProfiles;
+    private List<AppVpnInfo> mApps;
     private List<CharSequence> mTitles;
     private int mCurrentIndex;
 
     private static final String TAG_LOCKDOWN = "lockdown";
+    private static final String LOG_TAG = "LockdownConfigFragment";
 
     private static class TitleAdapter extends ArrayAdapter<CharSequence> {
         public TitleAdapter(Context context, List<CharSequence> objects) {
@@ -69,18 +77,42 @@ public class LockdownConfigFragment extends DialogFragment {
     }
 
     private void initProfiles(KeyStore keyStore, Resources res) {
+        final ConnectivityManager cm = ConnectivityManager.from(getActivity());
         final String lockdownKey = getStringOrNull(keyStore, Credentials.LOCKDOWN_VPN);
+        final String alwaysOnPackage =  cm.getAlwaysOnVpnPackageForUser(UserHandle.myUserId());
 
-        mProfiles = VpnSettings.loadVpnProfiles(keyStore, VpnProfile.TYPE_PPTP);
-        mTitles = new ArrayList<>(1 + mProfiles.size());
+        // Legacy VPN has a separate always-on mechanism which takes over the whole device, so
+        // this option is restricted to the primary user only.
+        if (UserManager.get(getContext()).isPrimaryUser()) {
+            mProfiles = VpnSettings.loadVpnProfiles(keyStore, VpnProfile.TYPE_PPTP);
+        } else {
+            mProfiles = Collections.<VpnProfile>emptyList();
+        }
+        mApps = VpnSettings.getVpnApps(getActivity(), /* includeProfiles */ false);
+
+        mTitles = new ArrayList<>(1 + mProfiles.size() + mApps.size());
         mTitles.add(res.getText(R.string.vpn_lockdown_none));
-
         mCurrentIndex = 0;
+
+        // Add true lockdown VPNs to the list first.
         for (VpnProfile profile : mProfiles) {
             if (TextUtils.equals(profile.key, lockdownKey)) {
                 mCurrentIndex = mTitles.size();
             }
             mTitles.add(profile.name);
+        }
+
+        // Add third-party app VPNs (VpnService) for the current profile to set as always-on.
+        for (AppVpnInfo app : mApps) {
+            try {
+                String appName = VpnConfig.getVpnLabel(getContext(), app.packageName).toString();
+                if (TextUtils.equals(app.packageName, alwaysOnPackage)) {
+                    mCurrentIndex = mTitles.size();
+                }
+                mTitles.add(appName);
+            } catch (PackageManager.NameNotFoundException pkgNotFound) {
+                Log.w(LOG_TAG, "VPN package not found: '" + app.packageName + "'", pkgNotFound);
+            }
         }
     }
 
@@ -109,21 +141,30 @@ public class LockdownConfigFragment extends DialogFragment {
                 final int newIndex = listView.getCheckedItemPosition();
                 if (mCurrentIndex == newIndex) return;
 
+                final ConnectivityManager conn = ConnectivityManager.from(getActivity());
+
                 if (newIndex == 0) {
                     keyStore.delete(Credentials.LOCKDOWN_VPN);
-                } else {
+                    conn.setAlwaysOnVpnPackageForUser(UserHandle.myUserId(), null);
+                } else if (newIndex <= mProfiles.size()) {
                     final VpnProfile profile = mProfiles.get(newIndex - 1);
                     if (!profile.isValidLockdownProfile()) {
                         Toast.makeText(context, R.string.vpn_lockdown_config_error,
                                 Toast.LENGTH_LONG).show();
                         return;
                     }
+                    conn.setAlwaysOnVpnPackageForUser(UserHandle.myUserId(), null);
                     keyStore.put(Credentials.LOCKDOWN_VPN, profile.key.getBytes(),
                             KeyStore.UID_SELF, /* flags */ 0);
+                } else {
+                    keyStore.delete(Credentials.LOCKDOWN_VPN);
+
+                    final AppVpnInfo appVpn = mApps.get(newIndex - 1 - mProfiles.size());
+                    conn.setAlwaysOnVpnPackageForUser(appVpn.userId, appVpn.packageName);
                 }
 
                 // kick profiles since we changed them
-                ConnectivityManager.from(getActivity()).updateLockdownVpn();
+                conn.updateLockdownVpn();
             }
         });
 
