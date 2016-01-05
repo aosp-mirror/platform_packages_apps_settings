@@ -28,4 +28,10 @@
             android:title="@string/user_add_user_or_profile_menu"
             android:icon="@drawable/ic_menu_add_dark" />
 
+    <PreferenceCategory
+            android:key="lock_screen_settings"
+            android:title="@string/user_lockscreen_settings">
+        <SwitchPreference android:key="add_users_when_locked"  android:title="@string/user_add_on_lockscreen_menu"
+                            android:summary="@string/user_add_on_lockscreen_menu_summary" />
+    </PreferenceCategory>
 </PreferenceScreen>
