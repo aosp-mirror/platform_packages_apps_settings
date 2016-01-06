@@ -59,12 +59,29 @@ public class DeviceAdminSettings extends ListFragment {
     private DevicePolicyManager mDPM;
     private UserManager mUm;
 
+
+    private static class DeviceAdminListItem implements Comparable<DeviceAdminListItem> {
+        public DeviceAdminInfo info;
+
+        // These aren't updated so they keep a stable sort order if user activates / de-activates
+        // an admin.
+        public String name;
+        public boolean active;
+
+        public int compareTo(DeviceAdminListItem other)  {
+            // Sort active admins first, then by name.
+            if (this.active != other.active) {
+                return this.active ? -1 : 1;
+            }
+            return this.name.compareTo(other.name);
+        }
+    }
     /**
      * Internal collection of device admin info objects for all profiles associated with the current
      * user.
      */
-    private final SparseArray<ArrayList<DeviceAdminInfo>>
-            mAdminsByProfile = new SparseArray<ArrayList<DeviceAdminInfo>>();
+    private final ArrayList<DeviceAdminListItem>
+            mAdmins = new ArrayList<DeviceAdminListItem>();
 
     private String mDeviceOwnerPkg;
     private SparseArray<ComponentName> mProfileOwnerComponents = new SparseArray<ComponentName>();
@@ -133,7 +150,7 @@ public class DeviceAdminSettings extends ListFragment {
      * current user.
      */
     void updateList() {
-        mAdminsByProfile.clear();
+        mAdmins.clear();
 
         final List<UserHandle> profiles = mUm.getUserProfiles();
         final int profilesSize = profiles.size();
@@ -141,6 +158,7 @@ public class DeviceAdminSettings extends ListFragment {
             final int profileId = profiles.get(i).getIdentifier();
             updateAvailableAdminsForProfile(profileId);
         }
+        Collections.sort(mAdmins);
 
         getListView().setAdapter(new PolicyListAdapter());
     }
@@ -148,25 +166,12 @@ public class DeviceAdminSettings extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         Object o = l.getAdapter().getItem(position);
-        if (!(o instanceof DeviceAdminInfo)) {
-            // race conditions may cause this
-            return;
-        }
         DeviceAdminInfo dpi = (DeviceAdminInfo) o;
+        final UserHandle user = new UserHandle(getUserId(dpi));
         final Activity activity = getActivity();
-        final int userId = getUserId(dpi);
-        if (userId == UserHandle.myUserId() || !isProfileOwner(dpi)) {
-            Intent intent = new Intent();
-            intent.setClass(activity, DeviceAdminAdd.class);
-            intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, dpi.getComponent());
-            activity.startActivityAsUser(intent, new UserHandle(userId));
-        } else {
-            AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-            builder.setMessage(getString(R.string.managed_profile_device_admin_info,
-                    dpi.loadLabel(activity.getPackageManager())));
-            builder.setPositiveButton(android.R.string.ok, null);
-            builder.create().show();
-        }
+        Intent intent = new Intent(activity, DeviceAdminAdd.class);
+        intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, dpi.getComponent());
+        activity.startActivityAsUser(intent, user);
     }
 
     static class ViewHolder {
@@ -191,55 +196,17 @@ public class DeviceAdminSettings extends ListFragment {
 
         @Override
         public int getCount() {
-            int adminCount = 0;
-            final int profileCount = mAdminsByProfile.size();
-            for (int i = 0; i < profileCount; ++i) {
-                adminCount += mAdminsByProfile.valueAt(i).size();
-            }
-            // Add 'profileCount' for title items.
-            return adminCount + profileCount;
+            return mAdmins.size();
         }
 
         /**
          * The item for the given position in the list.
          *
-         * @return a String object for title items and a DeviceAdminInfo object for actual device
-         *         admins.
+         * @return DeviceAdminInfo object for actual device admins.
          */
         @Override
         public Object getItem(int position) {
-            if (position < 0) {
-                throw new ArrayIndexOutOfBoundsException();
-            }
-            // The position of the item in the list of admins.
-            // We start from the given position and discount the length of the upper lists until we
-            // get the one for the right profile
-            int adminPosition = position;
-            final int n = mAdminsByProfile.size();
-            int i = 0;
-            for (; i < n; ++i) {
-                // The elements in that section including the title item (that's why adding one).
-                final int listSize = mAdminsByProfile.valueAt(i).size() + 1;
-                if (adminPosition < listSize) {
-                    break;
-                }
-                adminPosition -= listSize;
-            }
-            if (i == n) {
-                throw new ArrayIndexOutOfBoundsException();
-            }
-            // If countdown == 0 that means the title item
-            if (adminPosition == 0) {
-                Resources res = getActivity().getResources();
-                if (mAdminsByProfile.keyAt(i) == UserHandle.myUserId()) {
-                    return res.getString(R.string.personal_device_admin_title);
-                } else {
-                    return res.getString(R.string.managed_device_admin_title);
-                }
-            } else {
-                // Subtracting one for the title.
-                return mAdminsByProfile.valueAt(i).get(adminPosition - 1);
-            }
+            return ((DeviceAdminListItem) (mAdmins.get(position))).info;
         }
 
         @Override
@@ -257,16 +224,15 @@ public class DeviceAdminSettings extends ListFragment {
          */
         @Override
         public int getViewTypeCount() {
-            return 2;
+            return 1;
         }
 
         /**
-         * Returns 1 for title items and 0 for anything else.
+         * Returns 0 for all types.
          */
         @Override
         public int getItemViewType(int position) {
-            Object o = getItem(position);
-            return (o instanceof String) ? 1 : 0;
+            return 0;
         }
 
         @Override
@@ -276,15 +242,7 @@ public class DeviceAdminSettings extends ListFragment {
         }
 
         private boolean isEnabled(Object o) {
-            if (!(o instanceof DeviceAdminInfo)) {
-                // Title item
-                return false;
-            }
             DeviceAdminInfo info = (DeviceAdminInfo) o;
-            if (isActiveAdmin(info) && getUserId(info) == UserHandle.myUserId()
-                    && (isDeviceOwner(info) || isProfileOwner(info))) {
-                return false;
-            }
             // Disable item if admin is being removed
             if (isRemovingAdmin(info)) {
                 return false;
@@ -295,28 +253,20 @@ public class DeviceAdminSettings extends ListFragment {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             Object o = getItem(position);
-            if (o instanceof DeviceAdminInfo) {
-                if (convertView == null) {
-                    convertView = newDeviceAdminView(parent);
-                }
-                bindView(convertView, (DeviceAdminInfo) o);
-            } else {
-                if (convertView == null) {
-                    convertView = Utils.inflateCategoryHeader(mInflater, parent);
-                }
-                final TextView title = (TextView) convertView.findViewById(android.R.id.title);
-                title.setText((String)o);
+            if (convertView == null) {
+                convertView = newDeviceAdminView(parent);
             }
+            bindView(convertView, (DeviceAdminInfo) o);
             return convertView;
         }
 
         private View newDeviceAdminView(ViewGroup parent) {
             View v = mInflater.inflate(R.layout.device_admin_item, parent, false);
             ViewHolder h = new ViewHolder();
-            h.icon = (ImageView)v.findViewById(R.id.icon);
-            h.name = (TextView)v.findViewById(R.id.name);
-            h.checkbox = (CheckBox)v.findViewById(R.id.checkbox);
-            h.description = (TextView)v.findViewById(R.id.description);
+            h.icon = (ImageView) v.findViewById(R.id.icon);
+            h.name = (TextView) v.findViewById(R.id.name);
+            h.checkbox = (CheckBox) v.findViewById(R.id.checkbox);
+            h.description = (TextView) v.findViewById(R.id.description);
             v.setTag(h);
             return v;
         }
@@ -399,10 +349,6 @@ public class DeviceAdminSettings extends ListFragment {
             enabledForProfile = Collections.emptyList();
         }
         final int n = enabledForProfile.size();
-        ArrayList<DeviceAdminInfo> deviceAdmins = mAdminsByProfile.get(profileId);
-        if (deviceAdmins == null) {
-            deviceAdmins = new ArrayList<DeviceAdminInfo>(n);
-        }
         for (int i = 0; i < n; ++i) {
             ResolveInfo resolveInfo = enabledForProfile.get(i);
             ComponentName riComponentName =
@@ -410,15 +356,17 @@ public class DeviceAdminSettings extends ListFragment {
                             resolveInfo.activityInfo.name);
             if (alreadyAddedComponents == null
                     || !alreadyAddedComponents.contains(riComponentName)) {
-                DeviceAdminInfo deviceAdminInfo = createDeviceAdminInfo(resolveInfo);
+                DeviceAdminInfo deviceAdminInfo =  createDeviceAdminInfo(resolveInfo);
                 // add only visible ones (note: active admins are added regardless of visibility)
                 if (deviceAdminInfo != null && deviceAdminInfo.isVisible()) {
-                    deviceAdmins.add(deviceAdminInfo);
+                    DeviceAdminListItem item = new DeviceAdminListItem();
+                    item.info = deviceAdminInfo;
+                    item.name = deviceAdminInfo.loadLabel(pm).toString();
+                    // Active ones already added.
+                    item.active = false;
+                    mAdmins.add(item);
                 }
             }
-        }
-        if (!deviceAdmins.isEmpty()) {
-            mAdminsByProfile.put(profileId, deviceAdmins);
         }
     }
 
@@ -433,7 +381,6 @@ public class DeviceAdminSettings extends ListFragment {
         if (activeAdmins != null) {
             final PackageManager packageManager = getActivity().getPackageManager();
             final int n = activeAdmins.size();
-            ArrayList<DeviceAdminInfo> deviceAdmins = new ArrayList<DeviceAdminInfo>(n);
             for (int i = 0; i < n; ++i) {
                 ComponentName activeAdmin = activeAdmins.get(i);
                 List<ResolveInfo> resolved = packageManager.queryBroadcastReceivers(
@@ -444,13 +391,14 @@ public class DeviceAdminSettings extends ListFragment {
                     for (int j = 0; j < resolvedMax; ++j) {
                         DeviceAdminInfo deviceAdminInfo = createDeviceAdminInfo(resolved.get(j));
                         if (deviceAdminInfo != null) {
-                            deviceAdmins.add(deviceAdminInfo);
+                            DeviceAdminListItem item = new DeviceAdminListItem();
+                            item.info = deviceAdminInfo;
+                            item.name = deviceAdminInfo.loadLabel(packageManager).toString();
+                            item.active = true;
+                            mAdmins.add(item);
                         }
                     }
                 }
-            }
-            if (!deviceAdmins.isEmpty()) {
-                mAdminsByProfile.put(profileId, deviceAdmins);
             }
         }
     }

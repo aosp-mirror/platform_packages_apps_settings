@@ -53,10 +53,7 @@ public class RestrictedPreferenceHelper {
         mContext = context;
         mPreference = preference;
 
-        mRestrictedPadlock = mContext.getDrawable(R.drawable.ic_settings_lock_outline);
-        final int iconSize = mContext.getResources().getDimensionPixelSize(
-                R.dimen.restricted_lock_icon_size);
-        mRestrictedPadlock.setBounds(0, 0, iconSize, iconSize);
+        mRestrictedPadlock = getRestrictedPadlock(mContext);
         mRestrictedPadlockPadding = mContext.getResources().getDimensionPixelSize(
                 R.dimen.restricted_lock_icon_padding);
 
@@ -191,5 +188,16 @@ public class RestrictedPreferenceHelper {
 
     public boolean isDisabledByAdmin() {
         return mDisabledByAdmin;
+    }
+
+    /**
+     * @return drawables for displaying with settings that are locked by a device admin.
+     */
+    public static Drawable getRestrictedPadlock(Context context) {
+        Drawable restrictedPadlock = context.getDrawable(R.drawable.ic_settings_lock_outline);
+        final int iconSize = context.getResources().getDimensionPixelSize(
+                R.dimen.restricted_lock_icon_size);
+        restrictedPadlock.setBounds(0, 0, iconSize, iconSize);
+        return restrictedPadlock;
     }
 }
