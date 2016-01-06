@@ -197,18 +197,10 @@ public final class ChooseLockSettingsHelper {
         if (external) {
             intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
             if (mFragment != null) {
-                IntentSender intentSender = mFragment.getActivity().getIntent()
-                        .getParcelableExtra(Intent.EXTRA_INTENT);
-                if (intentSender != null) {
-                    intent.putExtra(Intent.EXTRA_INTENT, intentSender);
-                }
+                copyOptionalExtras(mFragment.getActivity().getIntent(), intent);
                 mFragment.startActivity(intent);
             } else {
-                IntentSender intentSender = mActivity.getIntent()
-                        .getParcelableExtra(Intent.EXTRA_INTENT);
-                if (intentSender != null) {
-                    intent.putExtra(Intent.EXTRA_INTENT, intentSender);
-                }
+                copyOptionalExtras(mActivity.getIntent(), intent);
                 mActivity.startActivity(intent);
             }
         } else {
@@ -219,5 +211,23 @@ public final class ChooseLockSettingsHelper {
             }
         }
         return true;
+    }
+
+    private void copyOptionalExtras(Intent inIntent, Intent outIntent) {
+        IntentSender intentSender = inIntent.getParcelableExtra(Intent.EXTRA_INTENT);
+        if (intentSender != null) {
+            outIntent.putExtra(Intent.EXTRA_INTENT, intentSender);
+        }
+        int taskId = inIntent.getIntExtra(Intent.EXTRA_TASK_ID, -1);
+        if (taskId != -1) {
+            outIntent.putExtra(Intent.EXTRA_TASK_ID, taskId);
+        }
+        // If we will launch another activity once credentials are confirmed, exclude from recents.
+        // This is a workaround to a framework bug where affinity is incorrect for activities
+        // that are started from a no display activity, as is ConfirmDeviceCredentialActivity.
+        // TODO: Remove once that bug is fixed.
+        if (intentSender != null || taskId != -1) {
+            outIntent.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+        }
     }
 }
