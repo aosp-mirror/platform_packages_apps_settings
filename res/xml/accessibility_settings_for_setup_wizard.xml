@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2009 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+        android:title="@string/accessibility_settings_title"
+        android:persistent="true" >
+
+    <Preference
+        android:fragment="com.android.settings.accessibility.ToggleScreenMagnificationPreferenceFragment"
+        android:key="screen_magnification_preference"
+        android:layout="@layout/preference_button"
+        android:title="@string/accessibility_screen_magnification_title" />
+
+    <Preference
+        android:key="font_size_preference"
+        android:layout="@layout/preference_button"
+        android:title="@string/title_font_size" />
+
+    <com.android.settings.DisplayDensityPreference
+        android:key="force_density_preference"
+        android:layout="@layout/preference_button"
+        settings:keywords="@string/screen_zoom_keywords"
+        android:title="@string/screen_zoom_title"
+        android:summary="%s" />
+
+    <Preference
+        android:fragment="com.android.settings.accessibility.ToggleDaltonizerPreferenceFragment"
+        android:key="daltonizer_preference"
+        android:layout="@layout/preference_button"
+        android:title="@string/accessibility_display_daltonizer_preference_title" />
+
+    <Preference
+        android:key="talkback_preference"
+        android:layout="@layout/preference_button" />
+
+</PreferenceScreen>
