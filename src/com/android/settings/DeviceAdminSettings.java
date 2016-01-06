@@ -391,7 +391,7 @@ public class DeviceAdminSettings extends ListFragment {
     private void addDeviceAdminBroadcastReceiversForProfile(
             Collection<ComponentName> alreadyAddedComponents, final int profileId) {
         final PackageManager pm = getActivity().getPackageManager();
-        List<ResolveInfo> enabledForProfile = pm.queryBroadcastReceivers(
+        List<ResolveInfo> enabledForProfile = pm.queryBroadcastReceiversAsUser(
                 new Intent(DeviceAdminReceiver.ACTION_DEVICE_ADMIN_ENABLED),
                 PackageManager.GET_META_DATA | PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS,
                 profileId);
@@ -436,7 +436,7 @@ public class DeviceAdminSettings extends ListFragment {
             ArrayList<DeviceAdminInfo> deviceAdmins = new ArrayList<DeviceAdminInfo>(n);
             for (int i = 0; i < n; ++i) {
                 ComponentName activeAdmin = activeAdmins.get(i);
-                List<ResolveInfo> resolved = packageManager.queryBroadcastReceivers(
+                List<ResolveInfo> resolved = packageManager.queryBroadcastReceiversAsUser(
                         new Intent().setComponent(activeAdmin), PackageManager.GET_META_DATA
                                 | PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS, profileId);
                 if (resolved != null) {

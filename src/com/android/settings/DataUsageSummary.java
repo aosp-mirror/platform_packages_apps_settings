@@ -480,7 +480,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
             return;
         }
         try {
-            int uid = getActivity().getPackageManager().getPackageUid(mShowAppImmediatePkg,
+            int uid = getActivity().getPackageManager().getPackageUidAsUser(mShowAppImmediatePkg,
                 UserHandle.myUserId());
             AppItem app = new AppItem(uid);
             app.addUid(uid);

@@ -139,7 +139,7 @@ public class AppLaunchSettings extends AppInfoWithHeader implements OnClickListe
                 // Present 'undefined' as 'ask' because the OS treats them identically for
                 // purposes of the UI (and does the right thing around pending domain
                 // verifications that might arrive after the user chooses 'ask' in this UI).
-                final int state = mPm.getIntentVerificationStatus(mPackageName, UserHandle.myUserId());
+                final int state = mPm.getIntentVerificationStatusAsUser(mPackageName, UserHandle.myUserId());
                 mAppLinkState.setValue(
                         Integer.toString((state == INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_UNDEFINED)
                                 ? INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_ALWAYS_ASK
@@ -164,16 +164,16 @@ public class AppLaunchSettings extends AppInfoWithHeader implements OnClickListe
         }
 
         final int userId = UserHandle.myUserId();
-        final int priorState = mPm.getIntentVerificationStatus(mPackageName, userId);
+        final int priorState = mPm.getIntentVerificationStatusAsUser(mPackageName, userId);
 
         if (priorState == newState) {
             return false;
         }
 
-        boolean success = mPm.updateIntentVerificationStatus(mPackageName, newState, userId);
+        boolean success = mPm.updateIntentVerificationStatusAsUser(mPackageName, newState, userId);
         if (success) {
             // Read back the state to see if the change worked
-            final int updatedState = mPm.getIntentVerificationStatus(mPackageName, userId);
+            final int updatedState = mPm.getIntentVerificationStatusAsUser(mPackageName, userId);
             success = (newState == updatedState);
         } else {
             Log.e(TAG, "Couldn't update intent verification status!");
