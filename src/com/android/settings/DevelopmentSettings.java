@@ -1315,14 +1315,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         final String size = (newValue != null) ?
                 newValue.toString() : DEFAULT_LOG_RING_BUFFER_SIZE_IN_BYTES;
         SystemProperties.set(SELECT_LOGD_SIZE_PROPERTY, size);
+        SystemProperties.set("ctl.start", "logd-reinit");
         pokeSystemProperties();
-        try {
-            Process p = Runtime.getRuntime().exec("logcat -b all -G " + size);
-            p.waitFor();
-            Log.i(TAG, "Logcat ring buffer sizes set to: " + size);
-        } catch (Exception e) {
-            Log.w(TAG, "Cannot set logcat ring buffer sizes", e);
-        }
         updateLogdSizeValues();
     }
 
