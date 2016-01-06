@@ -64,9 +64,6 @@ public class LockdownConfigFragment extends DialogFragment {
     }
 
     private static String getStringOrNull(KeyStore keyStore, String key) {
-        if (!keyStore.isUnlocked()) {
-            return null;
-        }
         final byte[] value = keyStore.get(key);
         return value == null ? null : new String(value);
     }
@@ -122,7 +119,7 @@ public class LockdownConfigFragment extends DialogFragment {
                         return;
                     }
                     keyStore.put(Credentials.LOCKDOWN_VPN, profile.key.getBytes(),
-                            KeyStore.UID_SELF, KeyStore.FLAG_ENCRYPTED);
+                            KeyStore.UID_SELF, /* flags */ 0);
                 }
 
                 // kick profiles since we changed them

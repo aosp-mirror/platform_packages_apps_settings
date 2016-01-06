@@ -456,13 +456,6 @@ public class VpnSettings extends SettingsPreferenceFragment implements
     protected static List<VpnProfile> loadVpnProfiles(KeyStore keyStore, int... excludeTypes) {
         final ArrayList<VpnProfile> result = Lists.newArrayList();
 
-        // This might happen if the user does not yet have a keystore. Quietly short-circuit because
-        // no keystore means no VPN configs.
-        if (!keyStore.isUnlocked()) {
-            return result;
-        }
-
-        // We are the only user of profiles in KeyStore so no locks are needed.
         for (String key : keyStore.list(Credentials.VPN)) {
             final VpnProfile profile = VpnProfile.decode(key, keyStore.get(Credentials.VPN + key));
             if (profile != null && !ArrayUtils.contains(excludeTypes, profile.type)) {

@@ -107,7 +107,7 @@ public class ConfigDialogFragment extends DialogFragment implements
         if (button == DialogInterface.BUTTON_POSITIVE) {
             // Update KeyStore entry
             KeyStore.getInstance().put(Credentials.VPN + profile.key, profile.encode(),
-                    KeyStore.UID_SELF, KeyStore.FLAG_ENCRYPTED);
+                    KeyStore.UID_SELF, /* flags */ 0);
 
             // Flush out old version of profile
             disconnect(profile);
