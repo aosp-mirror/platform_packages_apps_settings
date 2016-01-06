@@ -554,7 +554,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         }
         mToggleLargeTextPreference.setChecked(mCurConfig.fontScale == LARGE_FONT_SCALE);
 
-        // Text contrast.
         mToggleHighTextContrastPreference.setChecked(
                 Settings.Secure.getInt(getContentResolver(),
                         Settings.Secure.ACCESSIBILITY_HIGH_TEXT_CONTRAST_ENABLED, 0) == 1);
