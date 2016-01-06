@@ -990,7 +990,7 @@ public class WifiSettings extends RestrictedSettingsFragment
             if (deviceOwner != null) {
                 final int deviceOwnerUserId = dpm.getDeviceOwnerUserId();
                 try {
-                    final int deviceOwnerUid = pm.getPackageUid(deviceOwner.getPackageName(),
+                    final int deviceOwnerUid = pm.getPackageUidAsUser(deviceOwner.getPackageName(),
                             deviceOwnerUserId);
                     isConfigEligibleForLockdown = deviceOwnerUid == config.creatorUid;
                 } catch (NameNotFoundException e) {

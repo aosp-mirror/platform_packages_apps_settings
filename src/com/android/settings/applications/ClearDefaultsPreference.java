@@ -95,7 +95,7 @@ public class ClearDefaultsPreference extends Preference {
                     final int userId = UserHandle.myUserId();
                     mPm.clearPackagePreferredActivities(mPackageName);
                     if (isDefaultBrowser(mPackageName)) {
-                        mPm.setDefaultBrowserPackageName(null, userId);
+                        mPm.setDefaultBrowserPackageNameAsUser(null, userId);
                     }
                     try {
                         mUsbManager.clearDefaults(mPackageName, userId);
@@ -163,7 +163,7 @@ public class ClearDefaultsPreference extends Preference {
     }
 
     private boolean isDefaultBrowser(String packageName) {
-        final String defaultBrowser = mPm.getDefaultBrowserPackageName(UserHandle.myUserId());
+        final String defaultBrowser = mPm.getDefaultBrowserPackageNameAsUser(UserHandle.myUserId());
         return packageName.equals(defaultBrowser);
     }
 

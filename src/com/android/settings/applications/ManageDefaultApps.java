@@ -98,7 +98,7 @@ public class ManageDefaultApps extends SettingsPreferenceFragment
 
         final PackageManager pm = getPackageManager();
 
-        String packageName = pm.getDefaultBrowserPackageName(UserHandle.myUserId());
+        String packageName = pm.getDefaultBrowserPackageNameAsUser(UserHandle.myUserId());
         if (!TextUtils.isEmpty(packageName)) {
             // Check if the default Browser package is still there
             Intent intent = new Intent();
@@ -142,7 +142,7 @@ public class ManageDefaultApps extends SettingsPreferenceFragment
                         if (TextUtils.isEmpty(packageName)) {
                             return false;
                         }
-                        boolean result = mPm.setDefaultBrowserPackageName(
+                        boolean result = mPm.setDefaultBrowserPackageNameAsUser(
                                 packageName.toString(), myUserId);
                         if (result) {
                             mDefaultBrowserPreference.setValue(packageName.toString());

@@ -1097,7 +1097,7 @@ public class ManageApplications extends InstrumentedFragment
         private CharSequence getDomainsSummary(String packageName) {
             // If the user has explicitly said "no" for this package, that's the
             // string we should show.
-            int domainStatus = mPm.getIntentVerificationStatus(packageName, UserHandle.myUserId());
+            int domainStatus = mPm.getIntentVerificationStatusAsUser(packageName, UserHandle.myUserId());
             if (domainStatus == PackageManager.INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_NEVER) {
                 return mContext.getString(R.string.domain_urls_summary_none);
             }
