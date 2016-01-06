@@ -39,6 +39,7 @@ import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
+import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.support.v7.preference.PreferenceGroup;
@@ -97,7 +98,6 @@ public class UserSettings extends SettingsPreferenceFragment
     private static final String KEY_ADD_USER = "user_add";
 
     private static final int MENU_REMOVE_USER = Menu.FIRST;
-    private static final int MENU_ADD_ON_LOCKSCREEN = Menu.FIRST + 1;
 
     private static final int DIALOG_CONFIRM_REMOVE = 1;
     private static final int DIALOG_ADD_USER = 2;
@@ -126,8 +126,9 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private PreferenceGroup mUserListCategory;
     private UserPreference mMePreference;
-    private SelectableEditTextPreference mNicknamePreference;
     private Preference mAddUser;
+    private PreferenceGroup mLockScreenSettings;
+    private SwitchPreference mAddUserWhenLocked;
     private int mRemovingUserId = -1;
     private int mAddedUserId = 0;
     private boolean mAddingUser;
@@ -221,6 +222,8 @@ public class UserSettings extends SettingsPreferenceFragment
                 mAddUser.setTitle(R.string.user_add_user_menu);
             }
         }
+        mLockScreenSettings = (PreferenceGroup) findPreference("lock_screen_settings");
+        mAddUserWhenLocked = (SwitchPreference) findPreference("add_users_when_locked");
         loadProfile();
         setHasOptionsMenu(true);
         IntentFilter filter = new IntentFilter(Intent.ACTION_USER_REMOVED);
@@ -272,13 +275,6 @@ public class UserSettings extends SettingsPreferenceFragment
                     getResources().getString(R.string.user_remove_user_menu, nickname));
             removeThisUser.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
         }
-        if (mUserCaps.mIsAdmin && !um.hasUserRestriction(UserManager.DISALLOW_ADD_USER)) {
-            MenuItem allowAddOnLockscreen = menu.add(0, MENU_ADD_ON_LOCKSCREEN, pos++,
-                    R.string.user_add_on_lockscreen_menu);
-            allowAddOnLockscreen.setCheckable(true);
-            allowAddOnLockscreen.setChecked(Settings.Global.getInt(getContentResolver(),
-                    Settings.Global.ADD_USERS_WHEN_LOCKED, 0) == 1);
-        }
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -287,12 +283,6 @@ public class UserSettings extends SettingsPreferenceFragment
         final int itemId = item.getItemId();
         if (itemId == MENU_REMOVE_USER) {
             onRemoveUserClicked(UserHandle.myUserId());
-            return true;
-        } else if (itemId == MENU_ADD_ON_LOCKSCREEN) {
-            final boolean isChecked = item.isChecked();
-            Settings.Global.putInt(getContentResolver(), Settings.Global.ADD_USERS_WHEN_LOCKED,
-                    isChecked ? 0 : 1);
-            item.setChecked(!isChecked);
             return true;
         } else {
             return super.onOptionsItemSelected(item);
@@ -809,6 +799,13 @@ public class UserSettings extends SettingsPreferenceFragment
                 mAddUser.setSummary(null);
             }
         }
+        if (mUserCaps.mIsAdmin && !mUserCaps.mDisallowAddUser) {
+            mLockScreenSettings.setOrder(Preference.DEFAULT_ORDER);
+            preferenceScreen.addPreference(mLockScreenSettings);
+            mAddUserWhenLocked.setChecked(Settings.Global.getInt(getContentResolver(),
+                    Settings.Global.ADD_USERS_WHEN_LOCKED, 0) == 1);
+            mAddUserWhenLocked.setOnPreferenceChangeListener(this);
+        }
     }
 
     private int getMaxRealUsers() {
@@ -869,12 +866,6 @@ public class UserSettings extends SettingsPreferenceFragment
         if (bitmap != null) {
             pref.setIcon(encircle(bitmap));
         }
-    }
-
-    private void setUserName(String name) {
-        mUserManager.setUserName(UserHandle.myUserId(), name);
-        mNicknamePreference.setSummary(name);
-        getActivity().invalidateOptionsMenu();
     }
 
     @Override
@@ -974,14 +965,13 @@ public class UserSettings extends SettingsPreferenceFragment
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference == mNicknamePreference) {
-            String value = (String) newValue;
-            if (preference == mNicknamePreference && value != null
-                    && value.length() > 0) {
-                setUserName(value);
-            }
+        if (preference == mAddUserWhenLocked) {
+            Boolean value = (Boolean) newValue;
+            Settings.Global.putInt(getContentResolver(), Settings.Global.ADD_USERS_WHEN_LOCKED,
+                    value != null && value ? 1 : 0);
             return true;
         }
+
         return false;
     }
 
@@ -1007,6 +997,7 @@ public class UserSettings extends SettingsPreferenceFragment
         boolean mIsAdmin;
         boolean mIsGuest;
         boolean mCanAddGuest;
+        boolean mDisallowAddUser;
 
         private UserCapabilities() {}
 
@@ -1021,11 +1012,11 @@ public class UserSettings extends SettingsPreferenceFragment
             final UserInfo myUserInfo = userManager.getUserInfo(UserHandle.myUserId());
             caps.mIsGuest = myUserInfo.isGuest();
             caps.mIsAdmin = myUserInfo.isAdmin();
-            final boolean disallowAddUser = userManager.hasUserRestriction(
+            caps.mDisallowAddUser = userManager.hasUserRestriction(
                     UserManager.DISALLOW_ADD_USER);
             if (!caps.mIsAdmin || UserManager.getMaxSupportedUsers() < 2
                     || !UserManager.supportsMultipleUsers()
-                    || disallowAddUser) {
+                    || caps.mDisallowAddUser) {
                 caps.mCanAddUser = false;
             }
             DevicePolicyManager dpm = (DevicePolicyManager) context.getSystemService(
@@ -1037,7 +1028,7 @@ public class UserSettings extends SettingsPreferenceFragment
 
             final boolean canAddUsersWhenLocked = caps.mIsAdmin || Settings.Global.getInt(
                     context.getContentResolver(), Settings.Global.ADD_USERS_WHEN_LOCKED, 0) == 1;
-            caps.mCanAddGuest = !caps.mIsGuest && !disallowAddUser && canAddUsersWhenLocked;
+            caps.mCanAddGuest = !caps.mIsGuest && !caps.mDisallowAddUser && canAddUsersWhenLocked;
             return caps;
         }
 
