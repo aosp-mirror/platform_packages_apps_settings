@@ -590,18 +590,24 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
             }
             return printJobInfos;
         }
+    }
 
-        private static boolean shouldShowToUser(PrintJobInfo printJob) {
-            switch (printJob.getState()) {
-                case PrintJobInfo.STATE_QUEUED:
-                case PrintJobInfo.STATE_STARTED:
-                case PrintJobInfo.STATE_BLOCKED:
-                case PrintJobInfo.STATE_FAILED: {
-                    return true;
-                }
+    /**
+     * Should the print job the shown to the user in the settings app.
+     *
+     * @param printJob The print job in question.
+     * @return true iff the print job should be shown.
+     */
+    private static boolean shouldShowToUser(PrintJobInfo printJob) {
+        switch (printJob.getState()) {
+            case PrintJobInfo.STATE_QUEUED:
+            case PrintJobInfo.STATE_STARTED:
+            case PrintJobInfo.STATE_BLOCKED:
+            case PrintJobInfo.STATE_FAILED: {
+                return true;
             }
-            return false;
         }
+        return false;
     }
 
     /**
@@ -624,29 +630,32 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
             mSummaryLoader = summaryLoader;
             mPrintManager = ((PrintManager) context.getSystemService(Context.PRINT_SERVICE))
                     .getGlobalPrintManagerForUser(context.getUserId());
-            mPrintManager.addPrintJobStateChangeListener(this);
         }
 
         @Override
         public void setListening(boolean isListening) {
-            mPrintManager.removePrintJobStateChangeListener(this);
-
             if (isListening) {
                 mPrintManager.addPrintJobStateChangeListener(this);
+                onPrintJobStateChanged(null);
+            } else {
+                mPrintManager.removePrintJobStateChangeListener(this);
             }
-            onPrintJobStateChanged(null);
         }
 
         @Override
         public void onPrintJobStateChanged(PrintJobId printJobId) {
-            int numPrintJobs = mPrintManager.getPrintJobs().size();
-            mSummaryLoader.setSummary(this, mContext.getResources().getQuantityString(
-                    R.plurals.print_settings_title, numPrintJobs, numPrintJobs));
-        }
+            List<PrintJob> printJobs = mPrintManager.getPrintJobs();
 
-        @Override
-        protected void finalize() {
-            mPrintManager.removePrintJobStateChangeListener(this);
+            int numActivePrintJobs = 0;
+            final int numPrintJobs = printJobs.size();
+            for (int i = 0; i < numPrintJobs; i++) {
+                if (shouldShowToUser(printJobs.get(i).getInfo())) {
+                    numActivePrintJobs++;
+                }
+            }
+
+            mSummaryLoader.setSummary(this, mContext.getResources().getQuantityString(
+                    R.plurals.print_settings_title, numActivePrintJobs, numActivePrintJobs));
         }
     }
 
