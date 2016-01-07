@@ -25,7 +25,7 @@ import android.util.ArrayMap;
 import android.util.Log;
 import com.android.settings.SettingsActivity;
 import com.android.settingslib.drawer.DashboardCategory;
-import com.android.settingslib.drawer.DashboardTile;
+import com.android.settingslib.drawer.Tile;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -38,8 +38,8 @@ public class SummaryLoader {
     public static final String SUMMARY_PROVIDER_FACTORY = "SUMMARY_PROVIDER_FACTORY";
 
     private final Activity mActivity;
-    private final ArrayMap<SummaryProvider, DashboardTile> mSummaryMap = new ArrayMap<>();
-    private final List<DashboardTile> mTiles = new ArrayList<>();
+    private final ArrayMap<SummaryProvider, Tile> mSummaryMap = new ArrayMap<>();
+    private final List<Tile> mTiles = new ArrayList<>();
 
     private final Worker mWorker;
     private final Handler mHandler;
@@ -54,9 +54,9 @@ public class SummaryLoader {
         mWorker = new Worker(mWorkerThread.getLooper());
         mActivity = activity;
         for (int i = 0; i < categories.size(); i++) {
-            List<DashboardTile> tiles = categories.get(i).tiles;
+            List<Tile> tiles = categories.get(i).tiles;
             for (int j = 0; j < tiles.size(); j++) {
-                DashboardTile tile = tiles.get(j);
+                Tile tile = tiles.get(j);
                 mWorker.obtainMessage(Worker.MSG_GET_PROVIDER, tile).sendToTarget();
             }
         }
@@ -71,7 +71,7 @@ public class SummaryLoader {
     }
 
     public void setSummary(SummaryProvider provider, final CharSequence summary) {
-        final DashboardTile tile = mSummaryMap.get(provider);
+        final Tile tile = mSummaryMap.get(provider);
         mHandler.post(new Runnable() {
             @Override
             public void run() {
@@ -85,7 +85,7 @@ public class SummaryLoader {
         mWorker.obtainMessage(Worker.MSG_SET_LISTENING, listening ? 1 : 0, 0).sendToTarget();
     }
 
-    private SummaryProvider getSummaryProvider(DashboardTile tile) {
+    private SummaryProvider getSummaryProvider(Tile tile) {
         if (!mActivity.getPackageName().equals(tile.intent.getComponent().getPackageName())) {
             // Not within Settings, can't load Summary directly.
             // TODO: Load summary indirectly.
@@ -118,7 +118,7 @@ public class SummaryLoader {
         return null;
     }
 
-    private Bundle getMetaData(DashboardTile tile) {
+    private Bundle getMetaData(Tile tile) {
         return tile.metaData;
     }
 
@@ -142,7 +142,7 @@ public class SummaryLoader {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case MSG_GET_PROVIDER:
-                    DashboardTile tile = (DashboardTile) msg.obj;
+                    Tile tile = (Tile) msg.obj;
                     SummaryProvider provider = getSummaryProvider(tile);
                     if (provider != null) {
                         if (DEBUG) Log.d(TAG, "Creating " + tile);

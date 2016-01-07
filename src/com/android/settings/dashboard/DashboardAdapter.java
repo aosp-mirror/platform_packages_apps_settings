@@ -16,10 +16,14 @@
 package com.android.settings.dashboard;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.TypedValue;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -30,13 +34,20 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.dashboard.conditional.Condition;
 import com.android.settings.dashboard.conditional.ConditionAdapterUtils;
 import com.android.settingslib.drawer.DashboardCategory;
-import com.android.settingslib.drawer.DashboardTile;
+import com.android.settingslib.drawer.Tile;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.DashboardItemHolder> implements View.OnClickListener {
+public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.DashboardItemHolder>
+        implements View.OnClickListener {
     public static final String TAG = "DashboardAdapter";
+
+    private static int SUGGESTION_MODE_DEFAULT = 0;
+    private static int SUGGESTION_MODE_COLLAPSED = 1;
+    private static int SUGGESTION_MODE_EXPANDED = 2;
+
+    private static final int DEFAULT_SUGGESTION_COUNT = 2;
 
     private final List<Object> mItems = new ArrayList<>();
     private final List<Integer> mTypes = new ArrayList<>();
@@ -46,10 +57,13 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
 
     private List<DashboardCategory> mCategories;
     private List<Condition> mConditions;
+    private List<Tile> mSuggestions;
 
     private boolean mIsShowingAll;
     // Used for counting items;
     private int mId;
+
+    private int mSuggestionMode = SUGGESTION_MODE_DEFAULT;
 
     private Condition mExpandedCondition = null;
 
@@ -57,6 +71,11 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         mContext = context;
 
         setHasStableIds(true);
+    }
+
+    public void setSuggestions(List<Tile> suggestions) {
+        mSuggestions = suggestions;
+        recountItems();
     }
 
     public void setCategories(List<DashboardCategory> categories) {
@@ -68,7 +87,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                 tintColor, true);
         for (int i = 0; i < categories.size(); i++) {
             for (int j = 0; j < categories.get(i).tiles.size(); j++) {
-                DashboardTile tile = categories.get(i).tiles.get(j);
+                Tile tile = categories.get(i).tiles.get(j);
 
                 if (!mContext.getPackageName().equals(
                         tile.intent.getComponent().getPackageName())) {
@@ -78,34 +97,53 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                 }
             }
         }
-        setShowingAll(mIsShowingAll);
+        recountItems();
     }
 
     public void setConditions(List<Condition> conditions) {
         mConditions = conditions;
-        setShowingAll(mIsShowingAll);
+        recountItems();
     }
 
     public boolean isShowingAll() {
         return mIsShowingAll;
     }
 
-    public void notifyChanged(DashboardTile tile) {
+    public void notifyChanged(Tile tile) {
         notifyDataSetChanged();
     }
 
     public void setShowingAll(boolean showingAll) {
         mIsShowingAll = showingAll;
+        recountItems();
+    }
+
+    private void recountItems() {
         reset();
+        boolean hasConditions = false;
         for (int i = 0; mConditions != null && i < mConditions.size(); i++) {
-            countItem(mConditions.get(i), R.layout.condition_card, mConditions.get(i).shouldShow());
+            boolean shouldShow = mConditions.get(i).shouldShow();
+            hasConditions |= shouldShow;
+            countItem(mConditions.get(i), R.layout.condition_card, shouldShow);
+        }
+        boolean hasSuggestions = mSuggestions != null && mSuggestions.size() != 0;
+        countItem(null, R.layout.dashboard_spacer, hasConditions && hasSuggestions);
+        countItem(null, R.layout.suggestion_header, hasSuggestions);
+        if (mSuggestions != null) {
+            int maxSuggestions = mSuggestionMode == SUGGESTION_MODE_DEFAULT
+                    ? Math.min(DEFAULT_SUGGESTION_COUNT, mSuggestions.size())
+                    : mSuggestionMode == SUGGESTION_MODE_EXPANDED ? mSuggestions.size()
+                    : 0;
+            for (int i = 0; i < mSuggestions.size(); i++) {
+                countItem(mSuggestions.get(i), R.layout.suggestion_tile, i < maxSuggestions);
+            }
         }
         countItem(null, R.layout.dashboard_spacer, true);
         for (int i = 0; mCategories != null && i < mCategories.size(); i++) {
             DashboardCategory category = mCategories.get(i);
             countItem(category, R.layout.dashboard_category, mIsShowingAll);
             for (int j = 0; j < category.tiles.size(); j++) {
-                DashboardTile tile = category.tiles.get(j);
+                Tile tile = category.tiles.get(j);
                 countItem(tile, R.layout.dashboard_tile, mIsShowingAll
                         || ArrayUtils.contains(DashboardSummary.INITIAL_ITEMS,
                         tile.intent.getComponent().getClassName()));
@@ -126,6 +164,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         if (add) {
             mItems.add(object);
             mTypes.add(type);
+            // TODO: Counting namespaces for handling of suggestions/conds appearing/disappearing.
             mIds.add(mId);
         }
         mId++;
@@ -144,7 +183,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                 onBindCategory(holder, (DashboardCategory) mItems.get(position));
                 break;
             case R.layout.dashboard_tile:
-                final DashboardTile tile = (DashboardTile) mItems.get(position);
+                final Tile tile = (Tile) mItems.get(position);
                 onBindTile(holder, tile);
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -153,14 +192,28 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                     }
                 });
                 break;
-            case R.layout.see_all:
-                onBindSeeAll(holder);
+            case R.layout.suggestion_header:
+                onBindSuggestionHeader(holder);
+                break;
+            case R.layout.suggestion_tile:
+                final Tile suggestion = (Tile) mItems.get(position);
+                onBindTile(holder, suggestion);
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        setShowingAll(!mIsShowingAll);
+                        ((SettingsActivity) mContext).startSuggestion(suggestion.intent);
                     }
                 });
+                holder.itemView.findViewById(R.id.overflow).setOnClickListener(
+                        new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                showRemoveOption(v, suggestion);
+                            }
+                        });
+                break;
+            case R.layout.see_all:
+                onBindSeeAll(holder);
                 break;
             case R.layout.condition_card:
                 ConditionAdapterUtils.bindViews((Condition) mItems.get(position), holder,
@@ -175,11 +228,53 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         }
     }
 
-    private void onBindTile(DashboardItemHolder holder, DashboardTile dashboardTile) {
-        holder.icon.setImageIcon(dashboardTile.icon);
-        holder.title.setText(dashboardTile.title);
-        if (!TextUtils.isEmpty(dashboardTile.summary)) {
-            holder.summary.setText(dashboardTile.summary);
+    private void showRemoveOption(View v, final Tile suggestion) {
+        PopupMenu popup = new PopupMenu(
+                new ContextThemeWrapper(mContext, R.style.Theme_AppCompat_DayNight), v);
+        popup.getMenu().add(R.string.suggestion_remove).setOnMenuItemClickListener(
+                new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                mContext.getPackageManager().setComponentEnabledSetting(
+                        suggestion.intent.getComponent(),
+                        PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                        PackageManager.DONT_KILL_APP);
+                mSuggestions.remove(suggestion);
+                recountItems();
+                return true;
+            }
+        });
+        popup.show();
+    }
+
+    private void onBindSuggestionHeader(final DashboardItemHolder holder) {
+        holder.icon.setImageResource(hasMoreSuggestions() ? R.drawable.ic_expand_more
+                : R.drawable.ic_expand_less);
+        holder.title.setText(mContext.getString(R.string.suggestions_title, mSuggestions.size()));
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (hasMoreSuggestions()) {
+                    mSuggestionMode = SUGGESTION_MODE_EXPANDED;
+                } else {
+                    mSuggestionMode = SUGGESTION_MODE_COLLAPSED;
+                }
+                recountItems();
+            }
+        });
+    }
+
+    private boolean hasMoreSuggestions() {
+        return mSuggestionMode == SUGGESTION_MODE_COLLAPSED
+                || (mSuggestionMode == SUGGESTION_MODE_DEFAULT
+                && mSuggestions.size() > DEFAULT_SUGGESTION_COUNT);
+    }
+
+    private void onBindTile(DashboardItemHolder holder, Tile tile) {
+        holder.icon.setImageIcon(tile.icon);
+        holder.title.setText(tile.title);
+        if (!TextUtils.isEmpty(tile.summary)) {
+            holder.summary.setText(tile.summary);
             holder.summary.setVisibility(View.VISIBLE);
         } else {
             holder.summary.setVisibility(View.GONE);
@@ -193,6 +288,12 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     private void onBindSeeAll(DashboardItemHolder holder) {
         holder.title.setText(mIsShowingAll ? R.string.see_less
                 : R.string.see_all);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setShowingAll(!mIsShowingAll);
+            }
+        });
     }
 
     @Override

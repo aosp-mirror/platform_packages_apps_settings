@@ -33,6 +33,7 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.dashboard.conditional.ConditionAdapterUtils;
 import com.android.settings.dashboard.conditional.ConditionManager;
 import com.android.settings.dashboard.conditional.FocusRecyclerView;
+import com.android.settingslib.SuggestionParser;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
 
@@ -58,6 +59,7 @@ public class DashboardSummary extends InstrumentedFragment
     private DashboardAdapter mAdapter;
     private SummaryLoader mSummaryLoader;
     private ConditionManager mConditionManager;
+    private SuggestionParser mSuggestionParser;
 
     @Override
     protected int getMetricsCategory() {
@@ -76,6 +78,7 @@ public class DashboardSummary extends InstrumentedFragment
         if (DEBUG_TIMING) Log.d(TAG, "onCreate took " + (System.currentTimeMillis() - startTime)
                 + " ms");
         mConditionManager = ConditionManager.get(getContext());
+        mSuggestionParser = new SuggestionParser(getContext(), R.xml.suggestion_ordering);
     }
 
     @Override
@@ -135,6 +138,7 @@ public class DashboardSummary extends InstrumentedFragment
         mDashboard.setListener(this);
         mAdapter = new DashboardAdapter(getContext());
         mAdapter.setConditions(mConditionManager.getConditions());
+        mAdapter.setSuggestions(mSuggestionParser.getSuggestions());
         mSummaryLoader.setAdapter(mAdapter);
         ConditionAdapterUtils.addDismiss(mDashboard);
 
