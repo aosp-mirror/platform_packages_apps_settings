@@ -72,6 +72,8 @@ import java.util.List;
  */
 public class FingerprintSettings extends SubSettings {
 
+    private static final String TAG = "FingerprintSettings";
+
     /**
      * Used by the choose fingerprint wizard to indicate the wizard is
      * finished, and each activity in the wizard should finish.
@@ -97,6 +99,8 @@ public class FingerprintSettings extends SubSettings {
     protected static final int RESULT_TIMEOUT = RESULT_FIRST_USER + 2;
 
     private static final long LOCKOUT_DURATION = 30000; // time we have to wait for fp to reset, ms
+
+    public static final String KEY_FINGERPRINT_SETTINGS = "fingerprint_settings";
 
     @Override
     public Intent getIntent() {
@@ -764,5 +768,35 @@ public class FingerprintSettings extends SubSettings {
             }
             return builder;
         }
+    }
+
+    public static Preference getFingerprintPreferenceForUser(Context context, int userId) {
+        FingerprintManager fpm = (FingerprintManager) context.getSystemService(
+                Context.FINGERPRINT_SERVICE);
+        if (!fpm.isHardwareDetected()) {
+            Log.v(TAG, "No fingerprint hardware detected!!");
+            return null;
+        }
+        Preference fingerprintPreference = new Preference(context);
+        fingerprintPreference.setKey(KEY_FINGERPRINT_SETTINGS);
+        fingerprintPreference.setTitle(R.string.security_settings_fingerprint_preference_title);
+        Intent intent = new Intent();
+        final List<Fingerprint> items = fpm.getEnrolledFingerprints(userId);
+        final int fingerprintCount = items != null ? items.size() : 0;
+        final String clazz;
+        if (fingerprintCount > 0) {
+            fingerprintPreference.setSummary(context.getResources().getQuantityString(
+                    R.plurals.security_settings_fingerprint_preference_summary,
+                    fingerprintCount, fingerprintCount));
+            clazz = FingerprintSettings.class.getName();
+        } else {
+            fingerprintPreference.setSummary(
+                    R.string.security_settings_fingerprint_preference_summary_none);
+            clazz = FingerprintEnrollIntroduction.class.getName();
+        }
+        intent.setClassName("com.android.settings", clazz);
+        intent.putExtra(Intent.EXTRA_USER_ID, userId);
+        fingerprintPreference.setIntent(intent);
+        return fingerprintPreference;
     }
 }

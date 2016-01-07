@@ -22,6 +22,7 @@ import android.app.ActivityManagerNative;
 import android.app.ActivityOptions;
 import android.app.IActivityManager;
 import android.app.admin.DevicePolicyManager;
+import android.app.trust.TrustManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
@@ -63,12 +64,16 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
     private boolean mAllowFpAuthentication;
     protected Button mCancelButton;
     protected ImageView mFingerprintIcon;
+    protected int mEffectiveUserId;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAllowFpAuthentication = getActivity().getIntent().getBooleanExtra(
                 ALLOW_FP_AUTHENTICATION, false);
+        // Only take this argument into account if it belongs to the current profile.
+        Intent intent = getActivity().getIntent();
+        mEffectiveUserId = Utils.getUserIdFromBundle(getActivity(), intent.getExtras());
     }
 
     @Override
@@ -78,7 +83,7 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
         mFingerprintIcon = (ImageView) view.findViewById(R.id.fingerprintIcon);
         mFingerprintHelper = new FingerprintUiHelper(
                 mFingerprintIcon,
-                (TextView) view.findViewById(R.id.errorText), this);
+                (TextView) view.findViewById(R.id.errorText), this, mEffectiveUserId);
         boolean showCancelButton = getActivity().getIntent().getBooleanExtra(
                 SHOW_CANCEL_BUTTON, false);
         mCancelButton.setVisibility(showCancelButton ? View.VISIBLE : View.GONE);
@@ -132,7 +137,12 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
     public void onAuthenticated() {
         // Check whether we are still active.
         if (getActivity() != null && getActivity().isResumed()) {
+            TrustManager trustManager =
+                (TrustManager) getActivity().getSystemService(Context.TRUST_SERVICE);
+            trustManager.setDeviceLockedForUser(mEffectiveUserId, false);
             authenticationSucceeded();
+            authenticationSucceeded();
+            checkForPendingIntent();
         }
     }
 

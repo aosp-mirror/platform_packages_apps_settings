@@ -150,6 +150,23 @@ public final class ChooseLockSettingsHelper {
                 false, false, true, challenge, Utils.getCredentialOwnerUserId(mActivity));
     }
 
+    /**
+     * If a pattern, password or PIN exists, prompt the user before allowing them to change it.
+     * @param message optional message to display about the action about to be done
+     * @param details optional detail message to display
+     * @param challenge a challenge to be verified against the device credential.
+     *                  This method can only be called internally.
+     * @param userId The userId for whom the lock should be confirmed.
+     * @return true if one exists and we launched an activity to confirm it
+     * @see #onActivityResult(int, int, android.content.Intent)
+     */
+    public boolean launchConfirmationActivity(int request, @Nullable CharSequence title,
+            @Nullable CharSequence header, @Nullable CharSequence description,
+            long challenge, int userId) {
+        return launchConfirmationActivity(request, title, header, description,
+                false, false, true, challenge, Utils.enforceSameOwner(mActivity, userId));
+    }
+
     private boolean launchConfirmationActivity(int request, @Nullable CharSequence title,
             @Nullable CharSequence header, @Nullable CharSequence description,
             boolean returnCredentials, boolean external, boolean hasChallenge,

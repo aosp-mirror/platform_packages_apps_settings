@@ -25,6 +25,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.UserInfo;
+import android.hardware.fingerprint.Fingerprint;
+import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -34,12 +36,15 @@ import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
+import android.util.Log;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.fingerprint.FingerprintEnrollIntroduction;
+import com.android.settings.fingerprint.FingerprintSettings;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -218,6 +223,7 @@ public class ProfileChallengePreferenceFragment extends SettingsPreferenceFragme
         PreferenceGroup securityCategory = (PreferenceGroup)
                 root.findPreference(KEY_SECURITY_CATEGORY);
         if (securityCategory != null) {
+            maybeAddFingerprintPreference(securityCategory);
             if (mLockPatternUtils.isSeparateProfileChallengeEnabled(mProfileUserId)) {
                 maybeAddUnificationPreference(securityCategory);
             } else {
@@ -238,6 +244,14 @@ public class ProfileChallengePreferenceFragment extends SettingsPreferenceFragme
             unificationPreference.setTitle(R.string.lock_settings_profile_unification_title);
             unificationPreference.setSummary(R.string.lock_settings_profile_unification_summary);
             securityCategory.addPreference(unificationPreference);
+        }
+    }
+
+    private void maybeAddFingerprintPreference(PreferenceGroup securityCategory) {
+        Preference fingerprintPreference =
+                FingerprintSettings.getFingerprintPreferenceForUser(getActivity(), mProfileUserId);
+        if (fingerprintPreference != null) {
+            securityCategory.addPreference(fingerprintPreference);
         }
     }
 

@@ -20,6 +20,7 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Intent;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
+import android.os.UserHandle;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.ChooseLockGeneric;
@@ -66,6 +67,9 @@ public class FingerprintEnrollOnboard extends FingerprintEnrollBase {
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, true);
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, challenge);
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, true);
+        if (mUserId != UserHandle.USER_NULL) {
+            intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
+        }
         startActivityForResult(intent, CHOOSE_LOCK_GENERIC_REQUEST);
     }
 
@@ -76,6 +80,9 @@ public class FingerprintEnrollOnboard extends FingerprintEnrollBase {
     private void launchFindSensor(byte[] token) {
         Intent intent = getFindSensorIntent();
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
+        if (mUserId != UserHandle.USER_NULL) {
+            intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
+        }
         startActivity(intent);
         finish();
     }

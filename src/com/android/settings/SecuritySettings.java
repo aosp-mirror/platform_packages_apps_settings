@@ -90,7 +90,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static final String KEY_OWNER_INFO_SETTINGS = "owner_info_settings";
     private static final String KEY_ADVANCED_SECURITY = "advanced_security";
     private static final String KEY_MANAGE_TRUST_AGENTS = "manage_trust_agents";
-    private static final String KEY_FINGERPRINT_SETTINGS = "fingerprint_settings";
 
     private static final int SET_OR_CHANGE_LOCK_METHOD_REQUEST = 123;
     private static final int CHANGE_TRUST_AGENT_SETTINGS = 126;
@@ -375,32 +374,12 @@ public class SecuritySettings extends SettingsPreferenceFragment
     }
 
     private void maybeAddFingerprintPreference(PreferenceGroup securityCategory) {
-        FingerprintManager fpm = (FingerprintManager) getActivity().getSystemService(
-                Context.FINGERPRINT_SERVICE);
-        if (!fpm.isHardwareDetected()) {
-            Log.v(TAG, "No fingerprint hardware detected!!");
-            return;
+        Preference fingerprintPreference =
+                FingerprintSettings.getFingerprintPreferenceForUser(
+                        securityCategory.getContext(), UserHandle.myUserId());
+        if (fingerprintPreference != null) {
+            securityCategory.addPreference(fingerprintPreference);
         }
-        Preference fingerprintPreference = new Preference(securityCategory.getContext());
-        fingerprintPreference.setKey(KEY_FINGERPRINT_SETTINGS);
-        fingerprintPreference.setTitle(R.string.security_settings_fingerprint_preference_title);
-        Intent intent = new Intent();
-        final List<Fingerprint> items = fpm.getEnrolledFingerprints();
-        final int fingerprintCount = items != null ? items.size() : 0;
-        final String clazz;
-        if (fingerprintCount > 0) {
-            fingerprintPreference.setSummary(getResources().getQuantityString(
-                    R.plurals.security_settings_fingerprint_preference_summary,
-                    fingerprintCount, fingerprintCount));
-            clazz = FingerprintSettings.class.getName();
-        } else {
-            fingerprintPreference.setSummary(
-                    R.string.security_settings_fingerprint_preference_summary_none);
-            clazz = FingerprintEnrollIntroduction.class.getName();
-        }
-        intent.setClassName("com.android.settings", clazz);
-        fingerprintPreference.setIntent(intent);
-        securityCategory.addPreference(fingerprintPreference);
     }
 
     private void addTrustAgentSettings(PreferenceGroup securityCategory) {
