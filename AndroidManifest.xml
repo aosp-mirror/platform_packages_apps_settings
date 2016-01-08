@@ -1548,6 +1548,7 @@
             android:excludeFromRecents="true" >
             <intent-filter android:priority="1">
                 <action android:name="android.app.action.SET_NEW_PASSWORD" />
+                <action android:name="android.app.action.SET_NEW_PARENT_PROFILE_PASSWORD" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
