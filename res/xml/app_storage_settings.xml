@@ -86,4 +86,16 @@
         android:selectable="false"
         android:layout="@layout/single_button_panel" />
 
+    <com.android.settings.applications.SpacePreference
+        android:layout_height="8dp" />
+
+    <PreferenceCategory
+        android:key="uri_category"
+        android:layout="@layout/headerless_preference_category" >
+        <com.android.settings.applications.LayoutPreference
+            android:key="clear_uri_button"
+            android:layout="@layout/single_button_panel"
+            android:selectable="false" />
+    </PreferenceCategory>
+
 </PreferenceScreen>

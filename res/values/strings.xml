@@ -3065,6 +3065,13 @@
     <string name="clear_cache_btn_text">Clear cache</string>
     <!-- Manage applications, label that appears next to the cache size -->
     <string name="cache_size_label">Cache</string>
+    <!-- Manage applications, individual application info storage screen. Describes the number of URIs (directories or files) an app has been granted access (by another apps)-->
+    <plurals name="uri_permissions_text">
+        <item quantity="one">1 item</item>
+        <item quantity="other">%d items</item>
+    </plurals>
+    <!-- Manage applications, individual application info storage screen. Button below list of URIs. -->
+    <string name="clear_uri_btn_text">Clear access</string>
     <!-- Manage applications, Header name used for other controls -->
     <string name="controls_label">Controls</string>
     <!-- Manage applications, text label for button to kill / force stop an application -->

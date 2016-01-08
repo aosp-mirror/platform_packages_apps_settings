@@ -22,9 +22,11 @@ import android.app.AppGlobals;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.UriPermission;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageDataObserver;
-import android.content.pm.IPackageManager;
+import android.content.pm.PackageManager;
+import android.content.pm.ProviderInfo;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -37,6 +39,7 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.text.format.Formatter;
 import android.util.Log;
+import android.util.MutableInt;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -49,9 +52,12 @@ import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.ApplicationsState.Callbacks;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.TreeMap;
 
 public class AppStorageSettings extends AppInfoWithHeader
         implements OnClickListener, Callbacks, DialogInterface.OnClickListener {
@@ -88,6 +94,9 @@ public class AppStorageSettings extends AppInfoWithHeader
     private static final String KEY_CLEAR_DATA = "clear_data_button";
     private static final String KEY_CLEAR_CACHE = "clear_cache_button";
 
+    private static final String KEY_URI_CATEGORY = "uri_category";
+    private static final String KEY_CLEAR_URI = "clear_uri_button";
+
     private Preference mTotalSize;
     private Preference mAppSize;
     private Preference mDataSize;
@@ -101,6 +110,11 @@ public class AppStorageSettings extends AppInfoWithHeader
 
     private Preference mStorageUsed;
     private Button mChangeStorageButton;
+
+    // Views related to URI permissions
+    private Button mClearUriButton;
+    private LayoutPreference mClearUri;
+    private PreferenceCategory mUri;
 
     private boolean mCanClearData = true;
     private boolean mHaveSizes = false;
@@ -166,6 +180,13 @@ public class AppStorageSettings extends AppInfoWithHeader
         mClearCacheButton = (Button) ((LayoutPreference) findPreference(KEY_CLEAR_CACHE))
                 .findViewById(R.id.button);
         mClearCacheButton.setText(R.string.clear_cache_btn_text);
+
+        // URI permissions section
+        mUri = (PreferenceCategory) findPreference(KEY_URI_CATEGORY);
+        mClearUri = (LayoutPreference) mUri.findPreference(KEY_CLEAR_URI);
+        mClearUriButton = (Button) mClearUri.findViewById(R.id.button);
+        mClearUriButton.setText(R.string.clear_uri_btn_text);
+        mClearUriButton.setOnClickListener(this);
     }
 
     @Override
@@ -189,6 +210,8 @@ public class AppStorageSettings extends AppInfoWithHeader
             }
         } else if (v == mChangeStorageButton && mDialogBuilder != null && !isMoveInProgress()) {
             mDialogBuilder.show();
+        } else if (v == mClearUriButton) {
+            clearUriPermissions();
         }
     }
 
@@ -239,7 +262,6 @@ public class AppStorageSettings extends AppInfoWithHeader
             }
             mClearDataButton.setEnabled(false);
             mClearCacheButton.setEnabled(false);
-
         } else {
             mHaveSizes = true;
             long codeSize = mAppEntry.codeSize;
@@ -301,6 +323,7 @@ public class AppStorageSettings extends AppInfoWithHeader
             return false;
         }
         refreshSizeInfo();
+        refreshGrantedUriPermissions();
 
         final VolumeInfo currentVol = getActivity().getPackageManager()
                 .getPackageCurrentVolume(mAppEntry.info);
@@ -410,6 +433,83 @@ public class AppStorageSettings extends AppInfoWithHeader
             mState.requestSize(mPackageName, mUserId);
         } else {
             mClearDataButton.setEnabled(true);
+        }
+    }
+
+    private void refreshGrantedUriPermissions() {
+        // Clear UI first (in case the activity has been resumed)
+        removeUriPermissionsFromUi();
+
+        // Gets all URI permissions from am.
+        ActivityManager am = (ActivityManager) getActivity().getSystemService(
+                Context.ACTIVITY_SERVICE);
+        List<UriPermission> perms =
+                am.getGrantedUriPermissions(mAppEntry.info.packageName).getList();
+
+        if (perms.isEmpty()) {
+            mClearUriButton.setVisibility(View.GONE);
+            return;
+        }
+
+        PackageManager pm = getActivity().getPackageManager();
+
+        // Group number of URIs by app.
+        Map<CharSequence, MutableInt> uriCounters = new TreeMap<>();
+        for (UriPermission perm : perms) {
+            String authority = perm.getUri().getAuthority();
+            ProviderInfo provider = pm.resolveContentProvider(authority, 0);
+            CharSequence app = provider.applicationInfo.loadLabel(pm);
+            MutableInt count = uriCounters.get(app);
+            if (count == null) {
+                uriCounters.put(app, new MutableInt(1));
+            } else {
+                count.value++;
+            }
+        }
+
+        // Dynamically add the preferences, one per app.
+        int order = 0;
+        for (Map.Entry<CharSequence, MutableInt> entry : uriCounters.entrySet()) {
+            int numberResources = entry.getValue().value;
+            Preference pref = new Preference(getPrefContext());
+            pref.setTitle(entry.getKey());
+            pref.setSummary(getPrefContext().getResources()
+                    .getQuantityString(R.plurals.uri_permissions_text, numberResources,
+                            numberResources));
+            pref.setSelectable(false);
+            pref.setLayoutResource(R.layout.horizontal_preference);
+            pref.setOrder(order);
+            Log.v(TAG, "Adding preference '" + pref + "' at order " + order);
+            mUri.addPreference(pref);
+        }
+
+        if (mAppControlRestricted) {
+            mClearUriButton.setEnabled(false);
+        }
+
+        mClearUri.setOrder(order);
+        mClearUriButton.setVisibility(View.VISIBLE);
+
+    }
+
+    private void clearUriPermissions() {
+        // Synchronously revoke the permissions.
+        final ActivityManager am = (ActivityManager) getActivity().getSystemService(
+                Context.ACTIVITY_SERVICE);
+        am.clearGrantedUriPermissions(mAppEntry.info.packageName);
+
+        // Update UI
+        refreshGrantedUriPermissions();
+    }
+
+    private void removeUriPermissionsFromUi() {
+        // Remove all preferences but the clear button.
+        int count = mUri.getPreferenceCount();
+        for (int i = count - 1; i >= 0; i--) {
+            Preference pref = mUri.getPreference(i);
+            if (pref != mClearUri) {
+                mUri.removePreference(pref);
+            }
         }
     }
 
