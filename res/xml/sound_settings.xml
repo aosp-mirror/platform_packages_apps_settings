@@ -50,6 +50,14 @@
                 android:title="@string/vibrate_when_ringing_title"
                 android:persistent="false" />
 
+        <!-- Master mono -->
+        <SwitchPreference
+                android:key="master_mono"
+                android:title="@string/master_mono_title"
+                android:persistent="false"
+                android:summaryOn="@string/master_mono_on"
+                android:summaryOff="@string/master_mono_off" />
+
         <!-- Interruptions -->
         <PreferenceScreen
                 android:key="zen_mode"
