@@ -16,6 +16,7 @@
 
 package com.android.settings;
 
+import android.app.ActivityManager;
 import android.app.ActivityManagerNative;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
@@ -83,7 +84,7 @@ public class BugreportPreference extends CustomDialogPreference {
 
             if (mFullTitle.isChecked()) {
                 Log.v(TAG, "Taking full bugreport right away");
-                takeBugreport(false);
+                takeBugreport(ActivityManager.BUGREPORT_OPTION_FULL);
             } else {
                 Log.v(TAG, "Taking interactive bugreport in " + BUGREPORT_DELAY_SECONDS + "s");
                 // Add a little delay before executing, to give the user a chance to close
@@ -97,18 +98,18 @@ public class BugreportPreference extends CustomDialogPreference {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        takeBugreport(true);
+                        takeBugreport(ActivityManager.BUGREPORT_OPTION_INTERACTIVE);
                     }
                 }, BUGREPORT_DELAY_SECONDS * DateUtils.SECOND_IN_MILLIS);
             }
         }
     }
 
-    private void takeBugreport(boolean progress) {
+    private void takeBugreport(int bugreportType) {
         try {
-            ActivityManagerNative.getDefault().requestBugReport(progress);
+            ActivityManagerNative.getDefault().requestBugReport(bugreportType);
         } catch (RemoteException e) {
-            Log.e(TAG, "error taking bugreport (progress=" + progress + ")", e);
+            Log.e(TAG, "error taking bugreport (bugreportType=" + bugreportType + ")", e);
         }
     }
 }
