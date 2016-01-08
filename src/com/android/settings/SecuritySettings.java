@@ -214,7 +214,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
         mOwnerInfoPref = findPreference(KEY_OWNER_INFO_SETTINGS);
         if (mOwnerInfoPref != null) {
-            mOwnerInfoPref.setEnabled(!mLockPatternUtils.isDeviceOwnerInfoEnabled());
+            mOwnerInfoPref.setEnabled(!mLockPatternUtils.isLockScreenDisabled(MY_USER_ID)
+                    && !mLockPatternUtils.isDeviceOwnerInfoEnabled());
 
             if (mOwnerInfoPref.isEnabled()) {
                 mOwnerInfoPref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
