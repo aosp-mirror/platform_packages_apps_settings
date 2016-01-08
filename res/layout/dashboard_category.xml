@@ -15,15 +15,14 @@
 -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/category"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="@dimen/dashboard_category_padding_start"
-        android:paddingEnd="@dimen/dashboard_category_padding_end"
-        android:orientation="vertical"
-        android:paddingBottom="8dip"
-        android:background="@color/card_background"
-        android:elevation="@dimen/dashboard_category_elevation" >
+    android:id="@+id/category"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dashboard_category_height"
+    android:paddingStart="@dimen/dashboard_category_padding_start"
+    android:paddingEnd="@dimen/dashboard_category_padding_end"
+    android:orientation="vertical"
+    android:paddingBottom="8dip"
+    android:background="@color/card_background" >
 
     <View
         android:layout_width="match_parent"
@@ -31,14 +30,14 @@
         android:background="?android:attr/listDivider" />
 
     <TextView android:id="@android:id/title"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dashboard_category_title_height"
-            android:paddingStart="@dimen/dashboard_category_title_margin_start"
-            android:singleLine="true"
-            android:ellipsize="marquee"
-            android:gravity="center_vertical"
-            android:textAppearance="@style/TextAppearance.CategoryTitle"
-            android:textAlignment="viewStart"
-            />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="@dimen/dashboard_category_title_margin_start"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:gravity="center_vertical"
+        android:textAppearance="@style/TextAppearance.CategoryTitle"
+        android:textAlignment="viewStart"
+        />
 
 </LinearLayout>

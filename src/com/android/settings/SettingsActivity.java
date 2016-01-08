@@ -50,7 +50,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.SearchView;
-import com.android.internal.logging.MetricsLogger;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.Settings.WifiSettingsActivity;
 import com.android.settings.accessibility.AccessibilitySettings;
@@ -111,7 +110,7 @@ import com.android.settings.wifi.SavedAccessPointsWifiSettings;
 import com.android.settings.wifi.WifiSettings;
 import com.android.settings.wifi.p2p.WifiP2pSettings;
 import com.android.settingslib.drawer.DashboardCategory;
-import com.android.settingslib.drawer.DashboardTile;
+import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
 
 import java.util.ArrayList;
@@ -198,6 +197,8 @@ public class SettingsActivity extends SettingsDrawerActivity
     private static final String EXTRA_UI_OPTIONS = "settings:ui_options";
 
     private static final String EMPTY_QUERY = "";
+
+    private static final int REQUEST_SUGGESTION = 42;
 
     private String mFragmentClass;
 
@@ -365,6 +366,7 @@ public class SettingsActivity extends SettingsDrawerActivity
     private int mHomeActivitiesCount = 1;
 
     private Intent mResultIntentData;
+    private ComponentName mCurrentSuggestion;
 
     public SwitchBar getSwitchBar() {
         return mSwitchBar;
@@ -1031,7 +1033,7 @@ public class SettingsActivity extends SettingsDrawerActivity
             // When on restricted users, disable all extra categories (but only the settings ones).
             List<DashboardCategory> categories = getDashboardCategories();
             for (DashboardCategory category : categories) {
-                for (DashboardTile tile : category.tiles) {
+                for (Tile tile : category.tiles) {
                     ComponentName component = tile.intent.getComponent();
                     if (packageName.equals(component)&& !ArrayUtils.contains(
                             SETTINGS_FOR_RESTRICTED, component.getClassName())) {
@@ -1146,7 +1148,7 @@ public class SettingsActivity extends SettingsDrawerActivity
     }
 
     @Override
-    protected void onTileClicked(DashboardTile tile) {
+    protected void onTileClicked(Tile tile) {
         if (mIsShowingDashboard) {
             // If on dashboard, don't finish so the back comes back to here.
             openTile(tile);
@@ -1200,4 +1202,20 @@ public class SettingsActivity extends SettingsDrawerActivity
     public void setResultIntentData(Intent resultIntentData) {
         mResultIntentData = resultIntentData;
     }
+
+    public void startSuggestion(Intent intent) {
+        mCurrentSuggestion = intent.getComponent();
+        startActivityForResult(intent, REQUEST_SUGGESTION);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_SUGGESTION && mCurrentSuggestion != null
+                && resultCode != RESULT_CANCELED) {
+            getPackageManager().setComponentEnabledSetting(mCurrentSuggestion,
+                    PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
 }
