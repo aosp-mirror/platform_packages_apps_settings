@@ -53,6 +53,7 @@ import android.widget.SearchView;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.Settings.WifiSettingsActivity;
 import com.android.settings.accessibility.AccessibilitySettings;
+import com.android.settings.accessibility.AccessibilitySettingsForSetupWizard;
 import com.android.settings.accessibility.CaptionPropertiesFragment;
 import com.android.settings.accounts.AccountSettings;
 import com.android.settings.accounts.AccountSyncSettings;
@@ -264,6 +265,7 @@ public class SettingsActivity extends SettingsDrawerActivity
             PrivacySettings.class.getName(),
             DeviceAdminSettings.class.getName(),
             AccessibilitySettings.class.getName(),
+            AccessibilitySettingsForSetupWizard.class.getName(),
             CaptionPropertiesFragment.class.getName(),
             com.android.settings.accessibility.ToggleDaltonizerPreferenceFragment.class.getName(),
             TextToSpeechSettings.class.getName(),

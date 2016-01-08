@@ -103,7 +103,6 @@
         <item name="@android:preferenceStyle">@style/Preference</item>
         <item name="@dropdownPreferenceStyle">@style/Preference.DropDown.Material</item>
         <item name="@android:preferenceFragmentStyle">@style/PreferenceFragmentStyle</item>
-
         <item name="apnPreferenceStyle">@style/ApnPreference</item>
     </style>
 
@@ -113,6 +112,14 @@
 
     <style name="SetupWizardPreferenceFragmentStyle" parent="PreferenceFragment.Material">
         <item name="android:layout">@layout/setup_preference</item>
+    </style>
+
+    <!-- Accessibility portion of Setup Wizard -->
+    <style name="SetupWizardAccessibilityTheme" parent="Theme.SettingsBase">
+        <item name="android:colorPrimary">@color/material_blue_700</item>
+        <item name="android:colorPrimaryDark">@color/material_blue_700</item>
+        <item name="preferenceTheme">@style/PreferenceTheme</item>
+        <item name="switchBarTheme">@style/ThemeOverlay.SwitchBar.Settings</item>
     </style>
 
     <!-- Theme with no local references, used by AccountPreferenceBase where we have to inflate

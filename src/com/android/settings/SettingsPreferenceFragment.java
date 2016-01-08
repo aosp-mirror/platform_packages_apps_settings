@@ -40,6 +40,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import com.android.settings.accessibility.AccessibilitySettingsForSetupWizardActivity;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.widget.FloatingActionButton;
 
@@ -148,7 +149,8 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if (!TextUtils.isEmpty(mHelpUri)) {
+        if (!TextUtils.isEmpty(mHelpUri)
+                && !(getActivity() instanceof AccessibilitySettingsForSetupWizardActivity)) {
             setHasOptionsMenu(true);
         }
     }
