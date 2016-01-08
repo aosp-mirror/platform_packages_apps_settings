@@ -15,8 +15,14 @@
  */
 package com.android.settings;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.app.FragmentManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.UserInfo;
 import android.os.Bundle;
@@ -49,8 +55,12 @@ public class ProfileChallengePreferenceFragment extends SettingsPreferenceFragme
 
     private static final String KEY_UNLOCK_SET_OR_CHANGE = "unlock_set_or_change";
     private static final String KEY_VISIBLE_PATTERN = "visiblepattern";
+    private static final String KEY_SECURITY_CATEGORY = "security_category";
+    private static final String KEY_UNIFICATION = "unification";
+    public static final String TAG_UNIFICATION_DIALOG = "unification_dialog";
 
     private static final int SET_OR_CHANGE_LOCK_METHOD_REQUEST = 123;
+    private static final int UNIFY_LOCK_METHOD_REQUEST = 124;
 
     // Not all preferences make sense for the Work Challenge, this is a whitelist.
     private static final Set<String> ALLOWED_PREFERENCE_KEYS = new HashSet<>();
@@ -95,6 +105,11 @@ public class ProfileChallengePreferenceFragment extends SettingsPreferenceFragme
             startFragment(this, "com.android.settings.ChooseLockGeneric$ChooseLockGenericFragment",
                     R.string.lock_settings_picker_title, SET_OR_CHANGE_LOCK_METHOD_REQUEST, extras);
             return true;
+        } else if (KEY_UNIFICATION.equals(key)) {
+            UnificationConfirmationDialog dialog =
+                    UnificationConfirmationDialog.newIntance(mProfileUserId);
+            dialog.show(getChildFragmentManager(), TAG_UNIFICATION_DIALOG);
+            return true;
         }
         return super.onPreferenceTreeClick(preference);
     }
@@ -107,6 +122,16 @@ public class ProfileChallengePreferenceFragment extends SettingsPreferenceFragme
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == UNIFY_LOCK_METHOD_REQUEST && resultCode == Activity.RESULT_OK) {
+            mLockPatternUtils.clearLock(mProfileUserId);
+            mLockPatternUtils.setSeparateProfileChallengeEnabled(mProfileUserId, false);
+            return;
+        }
     }
 
     @Override
@@ -138,6 +163,28 @@ public class ProfileChallengePreferenceFragment extends SettingsPreferenceFragme
         mVisiblePattern = (SwitchPreference) root.findPreference(KEY_VISIBLE_PATTERN);
 
         removeNonWhitelistedItems(root);
+
+        PreferenceGroup securityCategory = (PreferenceGroup)
+                root.findPreference(KEY_SECURITY_CATEGORY);
+        if (securityCategory != null) {
+            if (mLockPatternUtils.isSeparateProfileChallengeEnabled(mProfileUserId)) {
+                addUnificationPreference(securityCategory);
+            } else {
+                Preference lockPreference =
+                        securityCategory.findPreference(KEY_UNLOCK_SET_OR_CHANGE);
+                String summary =
+                        getContext().getString(R.string.lock_settings_profile_unified_summary);
+                lockPreference.setSummary(summary);
+            }
+        }
+    }
+
+    private void addUnificationPreference(PreferenceGroup securityCategory) {
+        Preference unificationPreference = new Preference(securityCategory.getContext());
+        unificationPreference.setKey(KEY_UNIFICATION);
+        unificationPreference.setTitle(R.string.lock_settings_profile_unification_title);
+        unificationPreference.setSummary(R.string.lock_settings_profile_unification_summary);
+        securityCategory.addPreference(unificationPreference);
     }
 
     private void removeNonWhitelistedItems(PreferenceGroup prefScreen) {
@@ -189,5 +236,56 @@ public class ProfileChallengePreferenceFragment extends SettingsPreferenceFragme
             }
         }
         return resid;
+    }
+
+    public static class UnificationConfirmationDialog extends DialogFragment {
+        private static final String ARG_USER_ID = "userId";
+
+        public static UnificationConfirmationDialog newIntance(int userId) {
+            UnificationConfirmationDialog dialog = new UnificationConfirmationDialog();
+            Bundle args = new Bundle();
+            args.putInt(ARG_USER_ID, userId);
+            dialog.setArguments(args);
+            return dialog;
+        }
+
+        @Override
+        public void show(FragmentManager manager, String tag) {
+            if (manager.findFragmentByTag(tag) == null) {
+                // Prevent opening multiple dialogs if tapped on button quickly
+                super.show(manager, tag);
+            }
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            final Bundle args = getArguments();
+            return new AlertDialog.Builder(getActivity())
+                    .setTitle(R.string.lock_settings_profile_unification_dialog_title)
+                    .setMessage(R.string.lock_settings_profile_unification_dialog_body)
+                    .setPositiveButton(R.string.okay,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int whichButton) {
+                                    String title = getContext().getString(
+                                            R.string.lock_settings_profile_screen_lock_title);
+                                    ChooseLockSettingsHelper helper =
+                                            new ChooseLockSettingsHelper(
+                                                    getActivity(), getParentFragment());
+                                    helper.launchConfirmationActivity(UNIFY_LOCK_METHOD_REQUEST,
+                                            title, true, args.getInt(ARG_USER_ID));
+                                }
+                            }
+                    )
+                    .setNegativeButton(R.string.cancel,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int whichButton) {
+                                    dismiss();
+                                }
+                            }
+                    )
+                    .create();
+        }
     }
 }
