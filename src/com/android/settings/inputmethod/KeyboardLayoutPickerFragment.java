@@ -65,7 +65,7 @@ public class KeyboardLayoutPickerFragment extends SettingsPreferenceFragment
         }
 
         mIm = (InputManager)getSystemService(Context.INPUT_SERVICE);
-        mKeyboardLayouts = mIm.getKeyboardLayouts();
+        mKeyboardLayouts = mIm.getKeyboardLayoutsForInputDevice(mInputDeviceIdentifier);
         Arrays.sort(mKeyboardLayouts);
         setPreferenceScreen(createPreferenceHierarchy());
     }
@@ -148,7 +148,7 @@ public class KeyboardLayoutPickerFragment extends SettingsPreferenceFragment
     }
 
     private void updateCheckedState() {
-        String[] enabledKeyboardLayouts = mIm.getKeyboardLayoutsForInputDevice(
+        String[] enabledKeyboardLayouts = mIm.getEnabledKeyboardLayoutsForInputDevice(
                 mInputDeviceIdentifier);
         Arrays.sort(enabledKeyboardLayouts);
 

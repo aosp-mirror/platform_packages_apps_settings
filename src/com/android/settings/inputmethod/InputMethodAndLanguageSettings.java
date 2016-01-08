@@ -572,10 +572,13 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
     }
 
     private void showKeyboardLayoutDialog(InputDeviceIdentifier inputDeviceIdentifier) {
-        KeyboardLayoutDialogFragment fragment = new KeyboardLayoutDialogFragment(
-                inputDeviceIdentifier);
-        fragment.setTargetFragment(this, 0);
-        fragment.show(getActivity().getFragmentManager(), "keyboardLayout");
+        KeyboardLayoutDialogFragment fragment = (KeyboardLayoutDialogFragment)
+                getFragmentManager().findFragmentByTag("keyboardLayout");
+        if (fragment == null) {
+            fragment = new KeyboardLayoutDialogFragment(inputDeviceIdentifier);
+            fragment.setTargetFragment(this, 0);
+            fragment.show(getActivity().getFragmentManager(), "keyboardLayout");
+        }
     }
 
     @Override
