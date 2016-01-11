@@ -67,6 +67,7 @@ import android.telephony.TelephonyManager;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextUtils;
+import android.text.format.DateUtils;
 import android.text.style.TtsSpan;
 import android.util.ArraySet;
 import android.util.Log;
@@ -81,6 +82,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ListView;
 import android.widget.TabWidget;
 import com.android.internal.util.UserIcons;
+import com.android.settings.datausage.DataUsageList;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -91,6 +93,8 @@ import java.util.List;
 import java.util.Locale;
 
 import static android.content.Intent.EXTRA_USER;
+import static android.text.format.DateUtils.FORMAT_ABBREV_MONTH;
+import static android.text.format.DateUtils.FORMAT_SHOW_DATE;
 
 public final class Utils extends com.android.settingslib.Utils {
 
@@ -977,6 +981,20 @@ public final class Utils extends com.android.settingslib.Utils {
         TypedValue value = new TypedValue();
         context.getTheme().resolveAttribute(attr, value, true);
         return value.resourceId;
+    }
+
+    private static final StringBuilder sBuilder = new StringBuilder(50);
+    private static final java.util.Formatter sFormatter = new java.util.Formatter(
+            sBuilder, Locale.getDefault());
+
+    public static String formatDateRange(Context context, long start, long end) {
+        final int flags = FORMAT_SHOW_DATE | FORMAT_ABBREV_MONTH;
+
+        synchronized (sBuilder) {
+            sBuilder.setLength(0);
+            return DateUtils.formatDateRange(context, sFormatter, start, end, flags, null)
+                    .toString();
+        }
     }
 }
 

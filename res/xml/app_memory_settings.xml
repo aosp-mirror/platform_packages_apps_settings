@@ -18,11 +18,15 @@
                   android:title="@string/memory_usage">
 
     <PreferenceCategory
-        android:title="@string/average_memory_use" />
+        android:title="@string/average_memory_use"
+        android:layout="@layout/preference_category_short" />
 
-    <com.android.settings.applications.LayoutPreference
+    <com.android.settings.SummaryPreference
         android:key="status_header"
-        android:layout="@layout/proc_stats_ui" />
+        android:selectable="false" />
+
+    <com.android.settings.applications.SpacePreference
+        android:layout_height="5dp" />
 
     <Preference
         android:key="frequency"

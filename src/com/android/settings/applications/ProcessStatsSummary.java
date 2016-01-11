@@ -16,18 +16,15 @@
 package com.android.settings.applications;
 
 import android.app.Activity;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
-import android.text.TextUtils;
 import android.text.format.Formatter;
 import android.text.format.Formatter.BytesResult;
-import android.widget.TextView;
-
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
+import com.android.settings.SummaryPreference;
 import com.android.settings.Utils;
 import com.android.settings.applications.ProcStatsData.MemInfo;
 import com.android.settings.dashboard.SummaryLoader;
@@ -42,9 +39,7 @@ public class ProcessStatsSummary extends ProcessStatsBase implements OnPreferenc
     private static final String KEY_FREE = "free";
     private static final String KEY_APP_LIST = "apps_list";
 
-    private LinearColorBar mColors;
-    private LayoutPreference mHeader;
-    private TextView mMemStatus;
+    private SummaryPreference mSummaryPref;
 
     private Preference mPerformance;
     private Preference mTotalMemory;
@@ -57,9 +52,10 @@ public class ProcessStatsSummary extends ProcessStatsBase implements OnPreferenc
         super.onCreate(icicle);
 
         addPreferencesFromResource(R.xml.process_stats_summary);
-        mHeader = (LayoutPreference) findPreference(KEY_STATUS_HEADER);
-        mMemStatus = (TextView) mHeader.findViewById(R.id.memory_state);
-        mColors = (LinearColorBar) mHeader.findViewById(R.id.color_bar);
+        mSummaryPref = (SummaryPreference) findPreference(KEY_STATUS_HEADER);
+        int memColor = getContext().getColor(R.color.running_processes_apps_ram);
+        mSummaryPref.setColors(memColor, memColor,
+                getContext().getColor(R.color.running_processes_free_ram));
 
         mPerformance = findPreference(KEY_PERFORMANCE);
         mTotalMemory = findPreference(KEY_TOTAL_MEMORY);
@@ -72,8 +68,6 @@ public class ProcessStatsSummary extends ProcessStatsBase implements OnPreferenc
     @Override
     public void refreshUi() {
         Context context = getContext();
-        int memColor = context.getColor(R.color.running_processes_apps_ram);
-        mColors.setColors(memColor, memColor, context.getColor(R.color.running_processes_free_ram));
 
         MemInfo memInfo = mStatsManager.getMemInfo();
 
@@ -92,10 +86,10 @@ public class ProcessStatsSummary extends ProcessStatsBase implements OnPreferenc
         } else {
             memString = memStatesStr[memStatesStr.length - 1];
         }
-        mMemStatus.setText(TextUtils.expandTemplate(getText(R.string.storage_size_large),
-                usedResult.value, usedResult.units));
+        mSummaryPref.setAmount(usedResult.value);
+        mSummaryPref.setUnits(usedResult.units);
         float usedRatio = (float)(usedRam / (freeRam + usedRam));
-        mColors.setRatios(usedRatio, 0, 1 - usedRatio);
+        mSummaryPref.setRatios(usedRatio, 0, 1 - usedRatio);
 
         mPerformance.setSummary(memString);
         mTotalMemory.setSummary(totalString);

@@ -32,7 +32,7 @@ import android.view.View;
 import com.android.internal.util.Preconditions;
 import com.android.settings.R;
 
-import static com.android.settings.DataUsageSummary.formatDateRange;
+import static com.android.settings.Utils.formatDateRange;
 
 /**
  * Background of {@link ChartView} that renders grid lines as requested by

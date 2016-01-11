@@ -18,13 +18,17 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/app_memory_use"
     android:key="app_list">
-    <PreferenceCategory
-        android:title="@string/average_memory_use" />
 
-    <com.android.settings.applications.LayoutPreference
+    <PreferenceCategory
+        android:title="@string/average_memory_use"
+        android:layout="@layout/preference_category_short" />
+
+    <com.android.settings.SummaryPreference
         android:key="status_header"
-        android:selectable="false"
-        android:layout="@layout/proc_stats_ui" />
+        android:selectable="false" />
+
+    <com.android.settings.applications.SpacePreference
+        android:layout_height="5dp" />
 
     <Preference
         android:key="performance"

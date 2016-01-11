@@ -586,7 +586,7 @@
     <!-- mobile network settings screen, button on dialog box that appears when you are roaming and clear the "Data roaming" check box -->
     <string name="roaming_turn_it_on_button">Turn it on</string>
     <!-- mobile network settings screen, message in dialog box that appears when you select the "Data roaming" check box -->
-    <string name="roaming_warning">When you allow data roaming, you may incur significant roaming charges!</string>
+    <string name="roaming_warning">You may incur significant charges.</string>
     <!-- mobile network settings screen, message in dialog box that appears when you select the "Data roaming" check box. This is for multiuser tablets [CHAR LIMIT=none] -->
     <string name="roaming_warning_multiuser" product="tablet">When you allow data roaming, you may incur significant roaming charges!\n\nThis setting affects all users on this tablet.</string>
     <!-- mobile network settings screen, message in dialog box that appears when you select the "Data roaming" check box. This is for multiuser phones [CHAR LIMIT=none] -->
@@ -6809,4 +6809,75 @@
 
     <!-- Description of the setting to change the display's color temperature -->
     <string name="color_temperature_desc">Enable cool temperature</string>
+
+    <!-- Label for category for data usage [CHAR LIMIT=30] -->
+    <string name="usage">Usage</string>
+
+    <!-- Label for cellular data usage in data usage screen [CHAR LIMIT=60] -->
+    <string name="cellular_data_usage">Cellular data usage</string>
+
+    <!-- Label for wifi data usage in data usage screen [CHAR LIMIT=60] -->
+    <string name="wifi_data_usage">Wi-Fi data usage</string>
+
+    <!-- Label for ethernet data usage in data usage screen [CHAR LIMIT=60] -->
+    <string name="ethernet_data_usage">Ethernet data usage</string>
+
+    <!-- Label for section about wifi in data usage screen [CHAR LIMIT=60] -->
+    <string name="wifi">Wi-Fi</string>
+
+    <!-- Label for section about ethernet in data usage screen [CHAR LIMIT=60] -->
+    <string name="ethernet">Ethernet</string>
+
+    <!-- Format string for amount of cellular data used [CHAR LIMIT=30] -->
+    <string name="cell_data_template"><xliff:g name="units" example="GB">%1$s</xliff:g> cellular data</string>
+
+    <!-- Format string for amount of wifi data used [CHAR LIMIT=30] -->
+    <string name="wifi_data_template"><xliff:g name="units" example="GB">%1$s</xliff:g> Wi-Fi data</string>
+
+    <!-- Format string for amount of ethernet data used [CHAR LIMIT=30] -->
+    <string name="ethernet_data_template"><xliff:g name="units" example="GB">%1$s</xliff:g> ethernet data</string>
+
+    <!-- Format for a summary describing the amount of data before the user is warned [CHAR LIMIT=NONE] -->
+    <string name="cell_warning_only"><xliff:g name="amount" example="1 GB">%1$s</xliff:g> Data warning</string>
+
+    <!-- Format for a summary describing the amount of data before the user is warned or limited [CHAR LIMIT=NONE] -->
+    <string name="cell_warning_and_limit"><xliff:g name="amount" example="1 GB">%1$s</xliff:g> Data warning / <xliff:g name="amount" example="2 GB">%2$s</xliff:g> Data limit</string>
+
+    <!-- Title of button and screen for billing cycle preferences [CHAR LIMIT=30 -->
+    <string name="billing_cycle">Billing cycle</string>
+
+    <!-- Summary describing when the billing cycle for their phone carrier starts [CHAR LIMIT=NONE] -->
+    <string name="billing_cycle_summary">Monthly cycle starts on the <xliff:g name="day" example="1st">%1$s</xliff:g> of every month</string>
+
+    <!-- Summary describing when the billing cycle for their phone carrier starts [CHAR LIMIT=NONE] -->
+    <string name="billing_cycle_fragment_summary">Monthly starting <xliff:g name="day_of_month" example="1st">%1$s</xliff:g></string>
+
+    <!-- Title of button and screen for which wifi networks have data restrictions [CHAR LIMIT=30 -->
+    <string name="network_restrictions">Network restrictions</string>
+
+    <!-- A summary shown on data usage screens to indicate inaccuracy of data tracking [CHAR LIMIT=NONE] -->
+    <string name="operator_warning">Operator data accounting may differ from your device.</string>
+
+    <!-- Format string describing how much data has been used [CHAR LIMIT=20] -->
+    <string name="data_used_template"><xliff:g name="amount" example="1 GB">%1$s</xliff:g> used</string>
+
+    <!-- Label for button to set the amount of data before user is warned about usage [CHAR LIMIT=30] -->
+    <string name="data_warning">Data warning</string>
+
+    <!-- Label for switch about whether to limit how much data can be used [CHAR LIMIT=30] -->
+    <string name="set_data_limit">Set data limit</string>
+
+    <!-- Label for button to set the amount of data before user is limited [CHAR LIMIT=30] -->
+    <string name="data_limit">Data limit</string>
+
+    <!-- Summary about how much data has been used in a date range [CHAR LIMIT=NONE] -->
+    <string name="data_usage_template"><xliff:g name="amount" example="200 MB">%1$s</xliff:g> used between <xliff:g name="date_range" example="Jan 1 -- Feb 2">%2$s</xliff:g></string>
+
+    <!-- Accessibility label for button that leads to screen with more configuration options [CHAR LIMIT=NONE] -->
+    <string name="configure">Configure</string>
+
+    <!-- TODO: Actually figure out what to do with the extra apps, and update
+         the code to do that -->
+    <string name="data_usage_other_apps" translatable="false">Other apps included in usage</string>
+
 </resources>

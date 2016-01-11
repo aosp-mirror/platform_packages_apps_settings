@@ -21,7 +21,6 @@ import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.app.admin.DevicePolicyManager;
-import android.icu.text.ListFormatter;
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -37,6 +36,7 @@ import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.icu.text.ListFormatter;
 import android.net.INetworkStatsService;
 import android.net.INetworkStatsSession;
 import android.net.NetworkTemplate;
@@ -63,16 +63,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.AppHeader;
-import com.android.settings.DataUsageSummary;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.applications.PermissionsSummaryHelper.PermissionsResultCallback;
+import com.android.settings.datausage.AppDataUsage;
+import com.android.settings.datausage.DataUsageList;
+import com.android.settings.datausage.DataUsageSummary;
 import com.android.settings.fuelgauge.BatteryEntry;
 import com.android.settings.fuelgauge.PowerUsageDetail;
 import com.android.settings.notification.AppNotificationSettings;
@@ -753,13 +754,7 @@ public class InstalledAppDetails extends AppInfoBase
             ProcessStatsBase.launchMemoryDetail((SettingsActivity) getActivity(),
                     mStatsManager.getMemInfo(), mStats, false);
         } else if (preference == mDataPreference) {
-            Bundle args = new Bundle();
-            args.putString(DataUsageSummary.EXTRA_SHOW_APP_IMMEDIATE_PKG,
-                    mAppEntry.info.packageName);
-
-            SettingsActivity sa = (SettingsActivity) getActivity();
-            sa.startPreferencePanel(DataUsageSummary.class.getName(), args, -1,
-                    getString(R.string.app_data_usage), this, SUB_INFO_FRAGMENT);
+            startAppInfoFragment(AppDataUsage.class, getString(R.string.app_data_usage));
         } else if (preference == mBatteryPreference) {
             BatteryEntry entry = new BatteryEntry(getActivity(), null, mUserManager, mSipper);
             PowerUsageDetail.startBatteryDetailPage((SettingsActivity) getActivity(),
@@ -794,7 +789,7 @@ public class InstalledAppDetails extends AppInfoBase
     }
 
     public static NetworkTemplate getTemplate(Context context) {
-        if (DataUsageSummary.hasReadyMobileRadio(context)) {
+        if (DataUsageList.hasReadyMobileRadio(context)) {
             return NetworkTemplate.buildTemplateMobileWildcard();
         }
         if (DataUsageSummary.hasWifiRadio(context)) {
