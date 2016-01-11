@@ -18,17 +18,13 @@ package com.android.settings.fuelgauge;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.BatteryStats;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Process;
-import android.os.SystemClock;
 import android.os.UserHandle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
@@ -40,13 +36,13 @@ import android.view.MenuItem;
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatterySipper.DrainType;
-import com.android.internal.os.BatteryStatsHelper;
 import com.android.internal.os.PowerProfile;
 import com.android.settings.R;
 import com.android.settings.Settings.HighPowerApplicationsActivity;
 import com.android.settings.SettingsActivity;
 import com.android.settings.applications.ManageApplications;
 import com.android.settings.dashboard.SummaryLoader;
+import com.android.settingslib.BatteryInfo;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -451,25 +447,12 @@ public class PowerUsageSummary extends PowerUsageBase {
         public void setListening(boolean listening) {
             if (listening) {
                 // TODO: Listen.
-                new AsyncTask<Void, Void, BatteryStats>() {
+                BatteryInfo.getBatteryInfo(mContext, new BatteryInfo.Callback() {
                     @Override
-                    protected BatteryStats doInBackground(Void... params) {
-                        BatteryStatsHelper statsHelper = new BatteryStatsHelper(mContext, true);
-                        statsHelper.create((Bundle) null);
-                        return statsHelper.getStats();
+                    public void onBatteryInfoLoaded(BatteryInfo info) {
+                        mLoader.setSummary(SummaryProvider.this, info.mChargeLabelString);
                     }
-
-                    @Override
-                    protected void onPostExecute(BatteryStats batteryStats) {
-                        final long elapsedRealtimeUs = SystemClock.elapsedRealtime() * 1000;
-                        Intent batteryBroadcast = mContext.registerReceiver(null,
-                                new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-                        BatteryHistoryChart.BatteryInfo batteryInfo = BatteryHistoryChart
-                                .getBatteryInfo(mContext, batteryBroadcast, batteryStats,
-                                        elapsedRealtimeUs);
-                        mLoader.setSummary(SummaryProvider.this, batteryInfo.mChargeLabelString);
-                    }
-                }.execute();
+                });
             }
         }
     }
