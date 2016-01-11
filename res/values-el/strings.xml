@@ -1525,12 +1525,15 @@
     <string name="usage_time_label" msgid="295954901452833058">"Χρόνος χρήσης"</string>
     <string name="accessibility_settings" msgid="3975902491934816215">"Προσβασιμότητα"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Ρυθμίσεις προσβασιμότητας"</string>
+    <!-- no translation found for accessibility_settings_for_setup_wizard_title (7148099953002332324) -->
+    <skip />
     <string name="accessibility_services_title" msgid="2592221829284342237">"Υπηρεσίες"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"Σύστημα"</string>
     <string name="accessibility_display_title" msgid="7610175687949675162">"Οθόνη"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"Υπότιτλοι"</string>
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"Κινήσεις μεγέθυνσης"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="1178289000423776584">"Όταν είναι ενεργοποιημένη αυτή η λειτουργία, μπορείτε να κάνετε μεγέθυνση και σμίκρυνση πατώντας τρεις φορές την οθόνη.\n\nΚατά τη μεγέθυνση, μπορείτε να κάνετε:\n"<ul><li>"Πανοραμική λήψη: σύρετε δύο ή περισσότερα δάχτυλα κατά μήκος της οθόνης."</li>\n<li>"Προσαρμογή του επιπέδου μεγέθυνσης: πλησιάστε δύο ή περισσότερα δάχτυλα ή απομακρύνετέ τα."</li></ul>\n\n"Μπορείτε επίσης να μεγεθύνετε προσωρινά το περιεχόμενο που βρίσκεται κάτω από το δάχτυλό σας πατώντας τρεις φορές και κρατώντας παρατεταμένα. Κατά τη μεγέθυνση, μπορείτε να σύρετε το δάχτυλό σας για να εξερευνήσετε διάφορα τμήματα της οθόνης. Σηκώστε το δάχτυλό σας για να επιστρέψετε στην προηγούμενη κατάσταση.\n\nΣημείωση: το πάτημα τρεις φορές για μεγέθυνση λειτουργεί παντού εκτός από το πληκτρολόγιο και τη γραμμή πλοήγησης."</string>
+    <!-- no translation found for accessibility_screen_magnification_summary (7545798238172451540) -->
+    <skip />
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Συντόμευση προσβασιμότητας"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"Ενεργό"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"Απενεργοποίηση"</string>
@@ -1620,6 +1623,10 @@
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"Δεν υπάρχει περιγραφή."</string>
     <string name="settings_button" msgid="3006713718908152930">"Ρυθμίσεις"</string>
     <string name="print_settings" msgid="4742428530112487843">"Εκτύπωση"</string>
+    <plurals name="print_settings_title" formatted="false" msgid="6994238166067938432">
+      <item quantity="other">%d εργασίες εκτύπωσης</item>
+      <item quantity="one">1 εργασία εκτύπωσης</item>
+    </plurals>
     <string name="print_settings_title" msgid="3685449667822217816">"Υπηρεσίες εκτύπωσης"</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"Δεν έχουν εγκατασταθεί υπηρεσίες"</string>
     <string name="print_no_printers_found" msgid="989018646884973683">"Δεν βρέθηκαν εκτυπωτές"</string>
@@ -1871,7 +1878,6 @@
     <string name="remove_device_admin" msgid="3596845261596451437">"Απενεργοποίηση"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"Διαχειριστές συσκευών"</string>
     <string name="no_device_admins" msgid="702695100241728775">"Δεν υπάρχουν διαθέσιμοι διαχειριστές συσκευών"</string>
-    <string name="managed_profile_device_admin_info" msgid="5048846624960067582">"Για διακοπή της πρόσβασης του <xliff:g id="APP_NAME">%1$s</xliff:g> στο προφίλ εργασίας, καταργήστε το προφίλ στην περιοχή Ρυθμίσεις και λογαριασμοί."</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"Προσωπική"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"Εργασία"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"Δεν υπάρχουν διαθέσιμοι trust agents"</string>
@@ -2165,7 +2171,9 @@
     <string name="user_cannot_manage_message" product="default" msgid="959315813089950649">"Μόνο ο κάτοχος του τηλεφώνου μπορεί να διαχειριστεί χρήστες."</string>
     <string name="user_cannot_add_accounts_message" msgid="5116692653439737050">"Δεν είναι δυνατή η προσθήκη λογαριασμών από περιορισμένα προφίλ"</string>
     <string name="user_remove_user_menu" msgid="6897150520686691355">"Διαγρ. <xliff:g id="USER_NAME">%1$s</xliff:g> από τη συσκ."</string>
-    <string name="user_add_on_lockscreen_menu" msgid="3025132738715222247">"Προσ.χρηστών σε κλειδ.συσκευή"</string>
+    <string name="user_lockscreen_settings" msgid="4965661345247084878">"Ρυθμίσεις κλειδώματος οθόνης"</string>
+    <string name="user_add_on_lockscreen_menu" msgid="2250956835192699766">"Προσθήκη χρηστών"</string>
+    <string name="user_add_on_lockscreen_menu_summary" msgid="133203601188164761">"όταν η συσκευή είναι κλειδωμένη"</string>
     <string name="user_new_user_name" msgid="369856859816028856">"Νέος χρήστης"</string>
     <string name="user_new_profile_name" msgid="2632088404952119900">"Νέο προφίλ"</string>
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Διαγραφή του εαυτού σας;"</string>
@@ -2365,6 +2373,12 @@
     <string name="ringtone_title" msgid="5379026328015343686">"Ήχος κλήσης τηλεφώνου"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Προεπιλεγμένος ήχος ειδοποίησης"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Και δόνηση στις κλήσεις"</string>
+    <!-- no translation found for master_mono_title (8123291759393322551) -->
+    <skip />
+    <!-- no translation found for master_mono_on (53180785336592938) -->
+    <skip />
+    <!-- no translation found for master_mono_off (1232052197508060475) -->
+    <skip />
     <string name="other_sound_settings" msgid="3151004537006844718">"Άλλοι ήχοι"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Ήχοι πληκτρολογίου κλήσης"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Ήχοι κλειδώματος οθόνης"</string>
@@ -2761,10 +2775,11 @@
     <string name="backup_disabled" msgid="485189128759595412">"Η δημιουργία αντιγράφων ασφαλείας έχει απενεργοποιηθεί"</string>
     <string name="about_summary" msgid="8460677224778433924">"Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="disabled_by_policy_title" msgid="5358385863927403279">"Απενεργοποιήθηκε βάσει πολιτικής"</string>
-    <string name="disabled_by_admin_msg" msgid="2059840751288839837">"Απενεργοποιήθηκε από το διαχειριστή του οργανισμού <xliff:g id="ORGANISATION_NAME">%s</xliff:g>."</string>
-    <string name="default_organisation_name" msgid="8264985007488786995">"οργάνωση"</string>
-    <string name="default_admin_support_msg" msgid="4087747704156389949">"Επικοινωνήστε μαζί τους για να μάθετε περισσότερα."</string>
-    <string name="list_of_administrators" msgid="7496688366756590804">"Λίστα διαχειριστών"</string>
+    <string name="default_admin_support_msg" msgid="1088691978121877039">"Απενεργοποιήθηκε από το διαχειριστή του οργανισμού σας.\nΕπικοινωνήστε με το διαχειριστή για να μάθετε περισσότερα."</string>
+    <string name="admin_support_more_info" msgid="8901377038510512654">"Περισσότερες λεπτομέρειες"</string>
+    <string name="admin_profile_owner_message" msgid="859900284865115324">"Ο διαχειριστής σας έχει τη δυνατότητα να παρακολουθεί και να διαχειρίζεται τις ρυθμίσεις, την εταιρική πρόσβαση, τις εφαρμογές, τα δικαιώματα και τα δεδομένα που σχετίζονται με το προφίλ, συμπεριλαμβανομένης της δραστηριότητας δικτύου και των πληροφοριών τοποθεσίας της συσκευής σας."</string>
+    <string name="admin_profile_owner_user_message" msgid="853830977317489321">"Ο διαχειριστής σας έχει τη δυνατότητα να παρακολουθεί και να διαχειρίζεται τις ρυθμίσεις, την εταιρική πρόσβαση, τις εφαρμογές, τα δικαιώματα και τα δεδομένα που σχετίζονται με αυτόν το χρήστη, συμπεριλαμβανομένης της δραστηριότητας δικτύου και των πληροφοριών τοποθεσίας της συσκευής σας."</string>
+    <string name="admin_device_owner_message" msgid="2060220398673683105">"Ο διαχειριστής σας έχει τη δυνατότητα να παρακολουθεί και να διαχειρίζεται τις ρυθμίσεις, την εταιρική πρόσβαση, τις εφαρμογές, τα δικαιώματα και τα δεδομένα που σχετίζονται με αυτήν τη συσκευή, συμπεριλαμβανομένης της δραστηριότητας δικτύου και των πληροφοριών τοποθεσίας της συσκευής σας."</string>
     <string name="condition_turn_off" msgid="1960945836880080298">"Απενεργοποίηση"</string>
     <string name="condition_turn_on" msgid="9089876276117874591">"Ενεργοποίηση"</string>
     <string name="condition_hotspot_title" msgid="7778958849468560027">"Σημείο πρόσβασης Wi-Fi ενεργό"</string>
@@ -2778,4 +2793,8 @@
     <string name="condition_cellular_summary" msgid="1818046558419658463">"Το διαδίκτυο είναι διαθέσιμο μόνο μέσω Wi-Fi"</string>
     <string name="condition_bg_data_title" msgid="1422001615923482010">"Ανενεργά δεδομένα παρασκηνίου"</string>
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Τα δεδομένα παρασκηνίου είναι διαθέσιμα μόνο μέσω Wi-Fi. Αυτό ενδέχεται να επηρεάσει ορισμένες εφαρμογές ή υπηρεσίες όταν δεν υπάρχει διαθέσιμο δίκτυο Wi-Fi."</string>
+    <!-- no translation found for suggestions_title (8758376306825920705) -->
+    <skip />
+    <!-- no translation found for suggestion_remove (904627293892092439) -->
+    <skip />
 </resources>

@@ -1561,12 +1561,13 @@
     <string name="usage_time_label" msgid="295954901452833058">"وقت الاستخدام"</string>
     <string name="accessibility_settings" msgid="3975902491934816215">"إمكانية الدخول"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"إعدادات إمكانية الدخول"</string>
+    <string name="accessibility_settings_for_setup_wizard_title" msgid="7148099953002332324">"إرشادي"</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"الخدمات"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"النظام"</string>
     <string name="accessibility_display_title" msgid="7610175687949675162">"الشاشة"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"التسميات التوضيحية"</string>
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"إيماءات التكبير"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="1178289000423776584">"عند تشغيل هذه الميزة، يمكنك التكبير والتصغير بالنقر نقرًا ثلاثيًا على الشاشة.\n\nأثناء التكبير، يمكنك إجراء التالي:\n"<ul><li>"التدوير: اسحب إصبعين أو أكثر على الشاشة."</li>\n<li>"ضبط مستوى التكبير/التصغير: اضغط بإصبعين أو أكثر معًا أو باعد بينهم."</li></ul>\n\n"كما يمكنك أيضًا التكبير المؤقت لما يقع تحت إصبعك بالنقر نقرًا ثلاثيًا مع الاستمرار. في حالة التكبير هذه، يمكنك سحب إصبعك لاستكشاف الأجزاء المختلفة من الشاشة. ارفع إصبعك للعودة إلى الحالة السابقة.\n\nملاحظة: يعمل النقر نقرًا ثلاثيًا للتكبير في أي مكان ماعدا لوحة المفاتيح وشريط التنقل."</string>
+    <string name="accessibility_screen_magnification_summary" msgid="7545798238172451540">"يمكنك التكبير والتصغير من خلال استخدام النقر الثلاثي على الشاشة بإصبع واحد.\n\nأثناء التكبير، يمكنك:\n"<ul><li>"تمرير الشاشة: يمكنك سحب إصبعين أو أكثر عبر الشاشة."</li>\n<li>"ضبط مستوى التكبير/التصغير: يمكنك إحداث تقارب بين إصبعين أو أكثر معًا أو إحداث تباعد بين هذه الأصابع."</li>\n<li>"التكبير مؤقتًا: يمكنك استخدام النقر الثلاثي مع الاستمرار وسحب إصبعك لاستكشاف أجزاء مختلفة من الشاشة. ثم ارفع إصبعك للعودة إلى الحالة السابقة."</li></ul>\n\n"يمكن استخدام النقر الثلاثي للتكبير في كل مكان باستثناء لوحة المفاتيح وشريط التنقل."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"اختصارات تسهيل الدخول"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"تشغيل"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"إيقاف"</string>
@@ -1676,6 +1677,14 @@
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"لم يتم تقديم أي وصف."</string>
     <string name="settings_button" msgid="3006713718908152930">"الإعدادات"</string>
     <string name="print_settings" msgid="4742428530112487843">"الطباعة"</string>
+    <plurals name="print_settings_title" formatted="false" msgid="6994238166067938432">
+      <item quantity="zero">‏%d مهمة طباعة</item>
+      <item quantity="two">‏مهمتا طباعة (%d)</item>
+      <item quantity="few">‏%d مهام طباعة</item>
+      <item quantity="many">‏%d مهمة طباعة</item>
+      <item quantity="other">‏%d مهمة طباعة</item>
+      <item quantity="one">مهمة طباعة واحدة</item>
+    </plurals>
     <string name="print_settings_title" msgid="3685449667822217816">"خدمات الطباعة"</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"لم يتم تثبيت أية خدمات"</string>
     <string name="print_no_printers_found" msgid="989018646884973683">"لم يتم العثور على طابعات"</string>
@@ -1927,7 +1936,6 @@
     <string name="remove_device_admin" msgid="3596845261596451437">"إلغاء التنشيط"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"مشرفو الجهاز"</string>
     <string name="no_device_admins" msgid="702695100241728775">"ليس هناك مشرفو أجهزة متاحين"</string>
-    <string name="managed_profile_device_admin_info" msgid="5048846624960067582">"‏لمنع <xliff:g id="APP_NAME">%1$s</xliff:g> من الدخول إلى الملف الشخصي لعملك، عليك إزالة الملف الشخصي ضمن الإعدادات &gt; الحسابات"</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"شخصي"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"العمل"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"ليس هناك وكلاء معتمدون متاحون"</string>
@@ -2221,7 +2229,9 @@
     <string name="user_cannot_manage_message" product="default" msgid="959315813089950649">"يمكن لمالك الهاتف فقط إدارة المستخدمين."</string>
     <string name="user_cannot_add_accounts_message" msgid="5116692653439737050">"لا يمكن للملفات الشخصية إضافة حسابات"</string>
     <string name="user_remove_user_menu" msgid="6897150520686691355">"حذف <xliff:g id="USER_NAME">%1$s</xliff:g> من هذا الجهاز"</string>
-    <string name="user_add_on_lockscreen_menu" msgid="3025132738715222247">"إضافة مستخدمين والجهاز مقفل"</string>
+    <string name="user_lockscreen_settings" msgid="4965661345247084878">"إعدادات شاشة التأمين"</string>
+    <string name="user_add_on_lockscreen_menu" msgid="2250956835192699766">"إضافة مستخدمين"</string>
+    <string name="user_add_on_lockscreen_menu_summary" msgid="133203601188164761">"عند قفل الجهاز"</string>
     <string name="user_new_user_name" msgid="369856859816028856">"مستخدم جديد"</string>
     <string name="user_new_profile_name" msgid="2632088404952119900">"ملف شخصي جديد"</string>
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"هل تريد حذف نفسك؟"</string>
@@ -2421,6 +2431,9 @@
     <string name="ringtone_title" msgid="5379026328015343686">"نغمة رنين الهاتف"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"نغمة رنين الإشعارات الافتراضية"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"الاهتزاز أيضًا مع المكالمات"</string>
+    <string name="master_mono_title" msgid="8123291759393322551">"التشغيل الأحادي"</string>
+    <string name="master_mono_on" msgid="53180785336592938">"تشغيل الصوت عبر إخراج صوتي أحادي دائمًا"</string>
+    <string name="master_mono_off" msgid="1232052197508060475">"تشغيل الصوت عبر إخراج صوتي أحادي دائمًا"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"أصوات أخرى"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"نغمات لوحة الاتصال"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"أصوات قفل الشاشة"</string>
@@ -2853,10 +2866,11 @@
     <string name="backup_disabled" msgid="485189128759595412">"تم تعطيل الاحتفاظ بنسخة احتياطية"</string>
     <string name="about_summary" msgid="8460677224778433924">"‏إصدار Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="disabled_by_policy_title" msgid="5358385863927403279">"تم التعطيل بواسطة السياسة"</string>
-    <string name="disabled_by_admin_msg" msgid="2059840751288839837">"تم التعطيل بواسطة مشرف <xliff:g id="ORGANISATION_NAME">%s</xliff:g>"</string>
-    <string name="default_organisation_name" msgid="8264985007488786995">"المؤسسة"</string>
-    <string name="default_admin_support_msg" msgid="4087747704156389949">"يمكنك الاتصال بهم للتعرف على مزيد من المعلومات."</string>
-    <string name="list_of_administrators" msgid="7496688366756590804">"قائمة المشرفين"</string>
+    <string name="default_admin_support_msg" msgid="1088691978121877039">"تم التعطيل بواسطة مشرف مؤسستك.\nيمكنك الاتصال به للتعرف على المزيد."</string>
+    <string name="admin_support_more_info" msgid="8901377038510512654">"مزيد من التفاصيل"</string>
+    <string name="admin_profile_owner_message" msgid="859900284865115324">"لدى المشرف إمكانية مراقبة وإدارة كل من الإعدادات والدخول إلى المؤسسة والتطبيقات والأذونات والبيانات المرتبطة بهذا الملف الشخصي، بما في ذلك أنشطة الشبكة ومعلومات موقع جهازك."</string>
+    <string name="admin_profile_owner_user_message" msgid="853830977317489321">"لدى المشرف إمكانية مراقبة وإدارة كل من الإعدادات والدخول إلى المؤسسة والتطبيقات والأذونات والبيانات المرتبطة بهذا المستخدم، بما في ذلك أنشطة الشبكة ومعلومات موقع جهازك."</string>
+    <string name="admin_device_owner_message" msgid="2060220398673683105">"لدى المشرف إمكانية مراقبة وإدارة كل من الإعدادات والدخول إلى المؤسسة والتطبيقات والأذونات والبيانات المرتبطة بهذا الجهاز، بما في ذلك أنشطة الشبكة ومعلومات موقع جهازك."</string>
     <string name="condition_turn_off" msgid="1960945836880080298">"إيقاف"</string>
     <string name="condition_turn_on" msgid="9089876276117874591">"تشغيل"</string>
     <string name="condition_hotspot_title" msgid="7778958849468560027">"نقطة الاتصال تعمل"</string>
@@ -2870,4 +2884,6 @@
     <string name="condition_cellular_summary" msgid="1818046558419658463">"‏لا تتوفر خدمة الإنترنت إلا عبر Wi-Fi"</string>
     <string name="condition_bg_data_title" msgid="1422001615923482010">"تم تعطيل بيانات الخلفية"</string>
     <string name="condition_bg_data_summary" msgid="656957852895282228">"‏لا تتوفر بيانات الخلفية إلا عبر Wi-Fi. وقد يؤثر هذا في أداء بعض التطبيقات أو الخدمات عند عدم توفر خدمة Wi-Fi."</string>
+    <string name="suggestions_title" msgid="8758376306825920705">"الاقتراحات (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
+    <string name="suggestion_remove" msgid="904627293892092439">"إزالة"</string>
 </resources>

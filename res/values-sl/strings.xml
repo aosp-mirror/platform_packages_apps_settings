@@ -1543,12 +1543,13 @@
     <string name="usage_time_label" msgid="295954901452833058">"Čas uporabe"</string>
     <string name="accessibility_settings" msgid="3975902491934816215">"Pripomočki za ljudi s posebnimi potrebami"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Nastavitve pripomočkov za ljudi s posebnimi potrebami"</string>
+    <string name="accessibility_settings_for_setup_wizard_title" msgid="7148099953002332324">"Vodi me"</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"Storitve"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"Sistem"</string>
     <string name="accessibility_display_title" msgid="7610175687949675162">"Zaslon"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"Napisi"</string>
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"Poteze za povečavo"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="1178289000423776584">"Če je ta funkcija vklopljena, lahko vsebino na zaslonu povečate ali pomanjšate tako, da se trikrat dotaknete zaslona.\n\nPri povečavi lahko:\n"<ul><li>"Pomikate vsebino na zaslonu: Dva prsta ali več povlecite po zaslonu."</li>\n<li>"Prilagodite stopnjo povečave/pomanjšave: Najmanj dva prsta približajte ali razširite."</li></ul>\n\n"Začasno lahko tisto, kar je pod vašim prstom, povečate tudi tako, da se zaslona trikrat dotaknete in ga pridržite. V tem načinu povečave lahko povlečete s prstom in raziščete različne dele zaslona. Dvignite prst, če se želite vrniti v prejšnje stanje.\n\nOpomba: Trojni dotik za povečavo deluje povsod, razen pri tipkovnici in v vrstici za krmarjenje"</string>
+    <string name="accessibility_screen_magnification_summary" msgid="7545798238172451540">"Povečajte in pomanjšajte sliko, tako da se z enim prstom trikrat dotaknete zaslona.\n\nPri povečavi lahko:\n"<ul><li>"Pomikate vsebino na zaslonu: dva prsta ali več povlecite po zaslonu."</li>\n<li>"Prilagodite stopnjo povečave/pomanjšave: najmanj dva prsta približajte ali razširite."</li>\n<li>"Začasno povečate: trikrat se dotaknite zaslona, ga pridržite in vlecite s prstom, če želite raziskati različne dele zaslona. Dvignite prst, če se želite vrniti v prejšnje stanje."</li></ul>\n\n"Trojni dotik za povečavo deluje povsod, razen pri tipkovnici in v vrstici za krmarjenje."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Bližnj. za ljudi s pos. potrebami"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"Vklopljeno"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"Izklopljeno"</string>
@@ -1648,6 +1649,12 @@
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"Ni opisa."</string>
     <string name="settings_button" msgid="3006713718908152930">"Nastavitve"</string>
     <string name="print_settings" msgid="4742428530112487843">"Tiskanje"</string>
+    <plurals name="print_settings_title" formatted="false" msgid="6994238166067938432">
+      <item quantity="one">%d tiskalno opravilo</item>
+      <item quantity="two">%d tiskalni opravili</item>
+      <item quantity="few">%d tiskalna opravila</item>
+      <item quantity="other">%d tiskalnih opravil</item>
+    </plurals>
     <string name="print_settings_title" msgid="3685449667822217816">"Tiskalne storitve"</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"Nameščena ni nobena storitev"</string>
     <string name="print_no_printers_found" msgid="989018646884973683">"Tiskalnikov ni mogoče najti"</string>
@@ -1899,7 +1906,6 @@
     <string name="remove_device_admin" msgid="3596845261596451437">"Izklopi"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"Skrbniki naprave"</string>
     <string name="no_device_admins" msgid="702695100241728775">"Na voljo ni nobenega skrbnika naprave"</string>
-    <string name="managed_profile_device_admin_info" msgid="5048846624960067582">"Če želite aplikaciji <xliff:g id="APP_NAME">%1$s</xliff:g> onemogočiti dostop do delovnega profila, v Nastavitve &gt; Računi odstranite profil"</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"Osebno"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"Delo"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"Na voljo ni nobenega posrednika zaupanja"</string>
@@ -2193,7 +2199,9 @@
     <string name="user_cannot_manage_message" product="default" msgid="959315813089950649">"Uporabnike lahko upravlja samo lastnik telefona."</string>
     <string name="user_cannot_add_accounts_message" msgid="5116692653439737050">"Profili z omejitvami ne morejo dodajati računov"</string>
     <string name="user_remove_user_menu" msgid="6897150520686691355">"Izbris up. <xliff:g id="USER_NAME">%1$s</xliff:g> iz napr."</string>
-    <string name="user_add_on_lockscreen_menu" msgid="3025132738715222247">"Dodajanje uporabnikov, ko je naprava zaklenjena"</string>
+    <string name="user_lockscreen_settings" msgid="4965661345247084878">"Nastavitve zaklepanja zaslona"</string>
+    <string name="user_add_on_lockscreen_menu" msgid="2250956835192699766">"Dodajanje uporabnikov"</string>
+    <string name="user_add_on_lockscreen_menu_summary" msgid="133203601188164761">"ko je naprava zaklenjena"</string>
     <string name="user_new_user_name" msgid="369856859816028856">"Nov uporabnik"</string>
     <string name="user_new_profile_name" msgid="2632088404952119900">"Nov profil"</string>
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Želite izbrisati sebe?"</string>
@@ -2393,6 +2401,9 @@
     <string name="ringtone_title" msgid="5379026328015343686">"Melodija zvonjenja telefona"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Privzeti ton zvonjenja za obvestila"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Vibriranje tudi za klice"</string>
+    <string name="master_mono_title" msgid="8123291759393322551">"Mono predvajanje"</string>
+    <string name="master_mono_on" msgid="53180785336592938">"Vedno predvaja zvok v obliki mono"</string>
+    <string name="master_mono_off" msgid="1232052197508060475">"Vedno predvaja zvok v obliki mono"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Drugi zvoki"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Toni tipkovnice"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Zvoki ob zaklepanju zaslona"</string>
@@ -2531,10 +2542,8 @@
     <string name="zen_mode_peek_summary" msgid="27622220787132681">"Preprečevanje, da bi si bilo mogoče obvestila, utišana z načinom »ne moti«, ogledati s kukanjem, ali da bi se prikazala na trenutnem zaslonu"</string>
     <string name="zen_mode_lights" msgid="904184586121619154">"Brez lučke za obvestila"</string>
     <string name="zen_mode_lights_summary" msgid="6953305086643633530">"Preprečevanje, da bi obvestila, utišana z načinom »ne moti«, povzročila utripanje lučke"</string>
-    <!-- no translation found for zen_mode_screen_on (200863707448412727) -->
-    <skip />
-    <!-- no translation found for zen_mode_screen_on_summary (5397223499131913528) -->
-    <skip />
+    <string name="zen_mode_screen_on" msgid="200863707448412727">"Nikoli ne vklopi zaslona"</string>
+    <string name="zen_mode_screen_on_summary" msgid="5397223499131913528">"Preprečevanje, da bi obvestila, utišana z načinom »ne moti«, vklopila zaslon, če je izklopljen"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Nastavitve obvestil"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Pošlji povratne info. o tej napravi"</string>
     <string name="restr_pin_enter_admin_pin" msgid="2451187374960131018">"Vnesite skrbniški PIN"</string>
@@ -2809,10 +2818,11 @@
     <string name="backup_disabled" msgid="485189128759595412">"Varnostno kopiranje je onemogočeno"</string>
     <string name="about_summary" msgid="8460677224778433924">"Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="disabled_by_policy_title" msgid="5358385863927403279">"Onemogočil pravilnik"</string>
-    <string name="disabled_by_admin_msg" msgid="2059840751288839837">"Onemogočil skrbnik organizacije <xliff:g id="ORGANISATION_NAME">%s</xliff:g>."</string>
-    <string name="default_organisation_name" msgid="8264985007488786995">"organizacija"</string>
-    <string name="default_admin_support_msg" msgid="4087747704156389949">"Obrnite se nanje, če želite izvedeti več."</string>
-    <string name="list_of_administrators" msgid="7496688366756590804">"Seznam skrbnikov"</string>
+    <string name="default_admin_support_msg" msgid="1088691978121877039">"Onemogočil skrbnik organizacije.\nObrnite se nanj, če želite izvedeti več."</string>
+    <string name="admin_support_more_info" msgid="8901377038510512654">"Več podrobnosti"</string>
+    <string name="admin_profile_owner_message" msgid="859900284865115324">"Skrbnik lahko nadzira in upravlja nastavitve, dostop za podjetje, aplikacije, dovoljenja in podatke, povezane s tem profilom, vključno z omrežno dejavnostjo in podatki o lokaciji naprave."</string>
+    <string name="admin_profile_owner_user_message" msgid="853830977317489321">"Skrbnik lahko nadzira in upravlja nastavitve, dostop za podjetje, aplikacije, dovoljenja in podatke, povezane s tem uporabnikom, vključno z omrežno dejavnostjo in podatki o lokaciji naprave."</string>
+    <string name="admin_device_owner_message" msgid="2060220398673683105">"Skrbnik lahko nadzira in upravlja nastavitve, dostop za podjetje, aplikacije, dovoljenja in podatke, povezane s to napravo, vključno z omrežno dejavnostjo in podatki o lokaciji naprave."</string>
     <string name="condition_turn_off" msgid="1960945836880080298">"Izklop"</string>
     <string name="condition_turn_on" msgid="9089876276117874591">"Vklop"</string>
     <string name="condition_hotspot_title" msgid="7778958849468560027">"Dostopna točka je vklopljena"</string>
@@ -2826,4 +2836,6 @@
     <string name="condition_cellular_summary" msgid="1818046558419658463">"Internet je na voljo samo prek omrežja Wi-Fi"</string>
     <string name="condition_bg_data_title" msgid="1422001615923482010">"Prenos podat. v ozadju je izk."</string>
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Prenos podatkov v ozadju je na voljo samo prek omrežja Wi-Fi. To morda vpliva na nekatere aplikacije ali storitve, ko omrežje Wi-Fi ni na voljo."</string>
+    <string name="suggestions_title" msgid="8758376306825920705">"Predlogi (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
+    <string name="suggestion_remove" msgid="904627293892092439">"Odstrani"</string>
 </resources>

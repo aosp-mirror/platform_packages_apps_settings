@@ -1543,12 +1543,15 @@
     <string name="usage_time_label" msgid="295954901452833058">"Doba použití"</string>
     <string name="accessibility_settings" msgid="3975902491934816215">"Přístupnost"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Nastavení přístupnosti"</string>
+    <!-- no translation found for accessibility_settings_for_setup_wizard_title (7148099953002332324) -->
+    <skip />
     <string name="accessibility_services_title" msgid="2592221829284342237">"Služby"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"Systém"</string>
     <string name="accessibility_display_title" msgid="7610175687949675162">"Obrazovka"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"Titulky"</string>
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"Gesta pro přiblížení"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="1178289000423776584">"Je-li tato funkce zapnutá, můžete zobrazení přibližovat a oddalovat tak, že třikrát klepnete na obrazovku.\n\nPři přiblížení můžete provádět tyto činnosti:\n"<ul><li>"Posunutí: táhněte po obrazovce minimálně dvěma prsty."</li>\n<li>"Změna úrovně přiblížení: alespoň dva prsty stáhněte k sobě, nebo roztáhněte od sebe."</li></ul>\n\n"Také je možné dočasně zvětšit oblast pod prstem. Stačí na ni třikrát klepnout a podržet ji. V takto zvětšeném náhledu můžete přetáhnutím prstu prohlížet libovolné části obrazovky. Do předchozího zobrazení se vrátíte zdvihnutím prstu.\n\nPoznámka: Zvětšení trojitým klepnutím funguje ve všech částech obrazovky s výjimkou klávesnice a navigační lišty."</string>
+    <!-- no translation found for accessibility_screen_magnification_summary (7545798238172451540) -->
+    <skip />
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Zkratka přístupnosti"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"Zapnuto"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"Vypnuto"</string>
@@ -1648,6 +1651,12 @@
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"K dispozici není žádný popis."</string>
     <string name="settings_button" msgid="3006713718908152930">"Nastavení"</string>
     <string name="print_settings" msgid="4742428530112487843">"Tisk"</string>
+    <plurals name="print_settings_title" formatted="false" msgid="6994238166067938432">
+      <item quantity="few">%d tiskové úlohy</item>
+      <item quantity="many">%d tiskové úlohy</item>
+      <item quantity="other">%d tiskových úloh</item>
+      <item quantity="one">1 tisková úloha</item>
+    </plurals>
     <string name="print_settings_title" msgid="3685449667822217816">"Tiskové služby"</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"Žádná služba není nainstalována"</string>
     <string name="print_no_printers_found" msgid="989018646884973683">"Nebyly nalezeny žádné tiskárny"</string>
@@ -1899,7 +1908,6 @@
     <string name="remove_device_admin" msgid="3596845261596451437">"Deaktivovat"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"Správci zařízení"</string>
     <string name="no_device_admins" msgid="702695100241728775">"Není k dispozici žádný správce zařízení"</string>
-    <string name="managed_profile_device_admin_info" msgid="5048846624960067582">"Chcete-li aplikaci <xliff:g id="APP_NAME">%1$s</xliff:g> zakázat přístup k pracovnímu profilu, odstraňte jej v sekci Nastavení &gt; Účty."</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"Osobní"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"Pracovní"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"Nejsou k dispozici žádní zástupci důvěryhodnosti."</string>
@@ -2193,7 +2201,9 @@
     <string name="user_cannot_manage_message" product="default" msgid="959315813089950649">"Uživatele smí spravovat pouze vlastník telefonu."</string>
     <string name="user_cannot_add_accounts_message" msgid="5116692653439737050">"Pomocí omezených profilů nelze přidávat účty."</string>
     <string name="user_remove_user_menu" msgid="6897150520686691355">"Smazat <xliff:g id="USER_NAME">%1$s</xliff:g> ze zařízení"</string>
-    <string name="user_add_on_lockscreen_menu" msgid="3025132738715222247">"Přid. uživatele i při uzamčení"</string>
+    <string name="user_lockscreen_settings" msgid="4965661345247084878">"Nastavení obrazovky uzamčení"</string>
+    <string name="user_add_on_lockscreen_menu" msgid="2250956835192699766">"Přidání uživatelů"</string>
+    <string name="user_add_on_lockscreen_menu_summary" msgid="133203601188164761">"když je zařízení zamknuto"</string>
     <string name="user_new_user_name" msgid="369856859816028856">"Nový uživatel"</string>
     <string name="user_new_profile_name" msgid="2632088404952119900">"Nový profil"</string>
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Chcete se smazat?"</string>
@@ -2393,6 +2403,12 @@
     <string name="ringtone_title" msgid="5379026328015343686">"Vyzváněcí tón telefonu"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Výchozí tón oznámení"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Vibrovat také u volání"</string>
+    <!-- no translation found for master_mono_title (8123291759393322551) -->
+    <skip />
+    <!-- no translation found for master_mono_on (53180785336592938) -->
+    <skip />
+    <!-- no translation found for master_mono_off (1232052197508060475) -->
+    <skip />
     <string name="other_sound_settings" msgid="3151004537006844718">"Ostatní zvuky"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Tóny číselníku"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Zvuky zámku obrazovky"</string>
@@ -2807,10 +2823,11 @@
     <string name="backup_disabled" msgid="485189128759595412">"Zálohování bylo zakázáno"</string>
     <string name="about_summary" msgid="8460677224778433924">"Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="disabled_by_policy_title" msgid="5358385863927403279">"Zakázáno zásadami"</string>
-    <string name="disabled_by_admin_msg" msgid="2059840751288839837">"Zakázáno administrátorem organizace <xliff:g id="ORGANISATION_NAME">%s</xliff:g>."</string>
-    <string name="default_organisation_name" msgid="8264985007488786995">"organizace"</string>
-    <string name="default_admin_support_msg" msgid="4087747704156389949">"Chcete-li získat další informace, kontaktujte je."</string>
-    <string name="list_of_administrators" msgid="7496688366756590804">"Seznam administrátorů"</string>
+    <string name="default_admin_support_msg" msgid="1088691978121877039">"Zakázáno administrátorem organizace.\nChcete-li získat další informace, kontaktujte jej."</string>
+    <string name="admin_support_more_info" msgid="8901377038510512654">"Další podrobnosti"</string>
+    <string name="admin_profile_owner_message" msgid="859900284865115324">"Administrátor může sledovat a spravovat nastavení, firemní přístup, aplikace, oprávnění a data přidružená k tomuto profilu, včetně aktivity v síti a informací o poloze vašeho zařízení."</string>
+    <string name="admin_profile_owner_user_message" msgid="853830977317489321">"Administrátor může sledovat a spravovat nastavení, firemní přístup, aplikace, oprávnění a data přidružená k tomuto uživateli, včetně aktivity v síti a informací o poloze vašeho zařízení."</string>
+    <string name="admin_device_owner_message" msgid="2060220398673683105">"Administrátor může sledovat a spravovat nastavení, firemní přístup, aplikace, oprávnění a data přidružená k tomuto zařízení, včetně aktivity v síti a informací o poloze vašeho zařízení."</string>
     <string name="condition_turn_off" msgid="1960945836880080298">"Vypnout"</string>
     <string name="condition_turn_on" msgid="9089876276117874591">"Zapnout"</string>
     <string name="condition_hotspot_title" msgid="7778958849468560027">"Hotspot je aktivní"</string>
@@ -2824,4 +2841,8 @@
     <string name="condition_cellular_summary" msgid="1818046558419658463">"Internet je dostupný pouze prostřednictvím Wi-Fi"</string>
     <string name="condition_bg_data_title" msgid="1422001615923482010">"Data na pozadí jsou vypnuta"</string>
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Data na pozadí jsou dostupná pouze prostřednictvím Wi-Fi. Tato skutečnost může mít vliv na některé aplikace a služby, pokud síť Wi-Fi není k dispozici."</string>
+    <!-- no translation found for suggestions_title (8758376306825920705) -->
+    <skip />
+    <!-- no translation found for suggestion_remove (904627293892092439) -->
+    <skip />
 </resources>

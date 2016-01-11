@@ -1515,12 +1515,13 @@
     <string name="usage_time_label" msgid="295954901452833058">"Ашиглалтын цаг"</string>
     <string name="accessibility_settings" msgid="3975902491934816215">"Хандалт"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Хандалтын тохиргоо"</string>
+    <string name="accessibility_settings_for_setup_wizard_title" msgid="7148099953002332324">"Намайг чиглүүл"</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"Үйлчилгээнүүд"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"Систем"</string>
     <string name="accessibility_display_title" msgid="7610175687949675162">"Дэлгэц"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"Титрүүд"</string>
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"Томруулах зангаа"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="1178289000423776584">"Энэ функцыг асаасан үед та дэлгэцэн дээр гурав товших замаар томруулж, багасгаж болно.\n\nТомруулсан үед:\n"<ul><li>"Эргүүлэх: Хоёр буюу түүнээс дээш тооны хурууг дэлгэцээр чирнэ."</li>\n<li>"Томруулалтыг тохируулах: Хоёр буюу түүнээс дээш тооны хурууг хумих буюу дэлгэнэ."</li></ul>\n\n"Мөн та хуруун доор байгаа зүйлийг гурав товшиж барих замаар түр томруулж болно. Томруулсан үед дэлгэцийн өөр хэсгүүдийг харахын тулд хуруугаа чирэх хэрэгтэй. Өмнөх байдал руу буцахын тулд хуруугаа авахад болно.\n\nТэмдэглэл: Гурав товшиж томруулах нь гар болон навигацын шугамаас бусад газар хаана ч ажилладаг."</string>
+    <string name="accessibility_screen_magnification_summary" msgid="7545798238172451540">"Дэлгэцийг нэг хуруугаар гурван удаа товшиж томруулаарай.\n\nТомруулсны дараа та:\n"<ul><li>"PAN: Хоёр буюу түүнээс дээш хуруугаар дэлгэцийг хөндлөн гулгуурай."</li>\n<li>"Томруулах хэмжээг нэмэх: Хоёр буюу түүнээс дээш хурууг чимхэж, эсвэл салгаж хөдөлгөөрэй."</li>\n<li>"Түр зуур томруулах: Дэлгэцийн бусад хэсгийг ашиглахын тулд гурван удаа дараад хүлээж, хуруугаа чирээрэй. Өмнөх төлөвт очихын тулд хуруугаа өргөөрэй."</li></ul>\n\n"Гурван удаа дарснаар гар болон навигацийн талбараас бусад томруулах боломжтой хэсгийг ажлуулаарай."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Хандалтын товчилбор"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"Идэвхтэй"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"Идэвхгүй"</string>
@@ -1610,6 +1611,10 @@
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"Тайлбар байхгүй."</string>
     <string name="settings_button" msgid="3006713718908152930">"Тохиргоо"</string>
     <string name="print_settings" msgid="4742428530112487843">"Хэвлэлт"</string>
+    <plurals name="print_settings_title" formatted="false" msgid="6994238166067938432">
+      <item quantity="other">%d хэвлэх ажил</item>
+      <item quantity="one">1 хэвлэх ажил</item>
+    </plurals>
     <string name="print_settings_title" msgid="3685449667822217816">"Хэвлэх үйлчилгээнүүд"</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"Үйлчилгээ суулгагдаагүй байна"</string>
     <string name="print_no_printers_found" msgid="989018646884973683">"Принтер олдсонгүй"</string>
@@ -1861,7 +1866,6 @@
     <string name="remove_device_admin" msgid="3596845261596451437">"Идэвхгүйжүүлэх"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"Төхөөрөмжийн администратор"</string>
     <string name="no_device_admins" msgid="702695100241728775">"Төхөөрөмжийн боломжит администратор байхгүй"</string>
-    <string name="managed_profile_device_admin_info" msgid="5048846624960067582">"<xliff:g id="APP_NAME">%1$s</xliff:g>-г өөрийн ажлын профайлд хандахыг зогсоохын тулд профайлыг Тохиргоо &gt; Aкаунт дотроос хасна уу"</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"Хувийн"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"Ажил"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"Ашиглах боломжтой итгэмжлэгдсэн төлөөлөгч байхгүй байна"</string>
@@ -2155,7 +2159,9 @@
     <string name="user_cannot_manage_message" product="default" msgid="959315813089950649">"Зөвхөн утасны эзэмшигч л хэрэглэгчдийг удирдаж болно."</string>
     <string name="user_cannot_add_accounts_message" msgid="5116692653439737050">"Хязгаарлагдсан профайлууд акаунт нэмэх боломжгүй"</string>
     <string name="user_remove_user_menu" msgid="6897150520686691355">"<xliff:g id="USER_NAME">%1$s</xliff:g>-г энэ төхөөрөмжөөс устгах"</string>
-    <string name="user_add_on_lockscreen_menu" msgid="3025132738715222247">"Төхөөрөмж түгжээтэй үед хэрэглэгч нэмэх"</string>
+    <string name="user_lockscreen_settings" msgid="4965661345247084878">"дэлгэц түгжих тохиргоо"</string>
+    <string name="user_add_on_lockscreen_menu" msgid="2250956835192699766">"Хэрэглэгч нэмэх"</string>
+    <string name="user_add_on_lockscreen_menu_summary" msgid="133203601188164761">"төхөөрөмж цоожтой үед"</string>
     <string name="user_new_user_name" msgid="369856859816028856">"Шинэ хэрэглэгч"</string>
     <string name="user_new_profile_name" msgid="2632088404952119900">"Шинэ профайл"</string>
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Өөрийгөө устгах уу?"</string>
@@ -2355,6 +2361,9 @@
     <string name="ringtone_title" msgid="5379026328015343686">"Утасны хонхны ая"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Мэдэгдлийн үндсэн хонхны ая"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Дуудлагад бас чичрэх"</string>
+    <string name="master_mono_title" msgid="8123291759393322551">"Моно хэлбэрээр дахин тоглуулах"</string>
+    <string name="master_mono_on" msgid="53180785336592938">"Аудиог үргэлж моно хэлбэрээр дахин тоглуулах"</string>
+    <string name="master_mono_off" msgid="1232052197508060475">"Аудиог үргэлж моно хэлбэрээр дахин тоглуулах"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Бусад ая"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Диалпадын ая"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Дэлгэц түгжих ая"</string>
@@ -2485,10 +2494,8 @@
     <string name="zen_mode_peek_summary" msgid="27622220787132681">"\"Бүү саад бол\"-оос хаасан мэдэгдлийг гэнэт гарч ирэх, дэлгэцэнд харагдахаас сэргийлэх"</string>
     <string name="zen_mode_lights" msgid="904184586121619154">"Мэдэгдлийн гэрэл байхгүй"</string>
     <string name="zen_mode_lights_summary" msgid="6953305086643633530">"\"Бүү саад бол\"-оос хаасан мэдэгдлийг гэрэл тасалдуулахаас хамгаалах"</string>
-    <!-- no translation found for zen_mode_screen_on (200863707448412727) -->
-    <skip />
-    <!-- no translation found for zen_mode_screen_on_summary (5397223499131913528) -->
-    <skip />
+    <string name="zen_mode_screen_on" msgid="200863707448412727">"Дэлгэцийг хэзээ ч асаахгүй байх"</string>
+    <string name="zen_mode_screen_on_summary" msgid="5397223499131913528">"Хэрэв дэлгэц унтарсан байвал \"Бүү саад бол\"-оос хаасан мэдэгдэл үүнийг асаахаас сэргийлэх"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Мэдэгдлийн тохиргоо"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Энэ төхөөрөмжийн талаар санал илгээх"</string>
     <string name="restr_pin_enter_admin_pin" msgid="2451187374960131018">"Админ PIN оруулна уу"</string>
@@ -2751,10 +2758,11 @@
     <string name="backup_disabled" msgid="485189128759595412">"Нөөцлөлт идэвхгүй болсон"</string>
     <string name="about_summary" msgid="8460677224778433924">"Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="disabled_by_policy_title" msgid="5358385863927403279">"Удирдамжийн дагуу идэвхгүй болгосон"</string>
-    <string name="disabled_by_admin_msg" msgid="2059840751288839837">"Таны <xliff:g id="ORGANISATION_NAME">%s</xliff:g>-н админ идэвхгүй болсон"</string>
-    <string name="default_organisation_name" msgid="8264985007488786995">"байгууллага"</string>
-    <string name="default_admin_support_msg" msgid="4087747704156389949">"Дэлгэрэнгүй үзэхийг хүсвэл тэдэнтэй холбоо барина уу."</string>
-    <string name="list_of_administrators" msgid="7496688366756590804">"Администраторын жагсаалт"</string>
+    <string name="default_admin_support_msg" msgid="1088691978121877039">"Таны байгууллагын админ үүнийг идэвхгүй болгосон.\nДэлгэрэнгүй мэдээлэл авахын тулд тэдэнтэй холбогдоно уу."</string>
+    <string name="admin_support_more_info" msgid="8901377038510512654">"Илүү дэлгэрэнгүй"</string>
+    <string name="admin_profile_owner_message" msgid="859900284865115324">"Тохиргоо, байгууллагын хандалт, апп, зөвшөөрөл, мөн сүлжээний идэвхтэй байдал, төхөөрөмжийн байршлын мэдээлэл гэх мэт энэ профайлтай холбоотой өгөгдөл зэргийг хянах, удирдах эрх таны админд байдаг."</string>
+    <string name="admin_profile_owner_user_message" msgid="853830977317489321">"Тохиргоо, байгууллагын хандалт, апп, зөвшөөрөл, мөн сүлжээний идэвхтэй байдал, төхөөрөмжийн байршлын мэдээлэл гэх мэт энэ хэрэглэгчтэй холбоотой өгөгдөл зэргийг хянах, удирдах эрх таны админд байдаг."</string>
+    <string name="admin_device_owner_message" msgid="2060220398673683105">"Тохиргоо, байгууллагын хандалт, апп, зөвшөөрөл, мөн сүлжээний идэвхтэй байдал, төхөөрөмжийн байршлын мэдээлэл гэх мэт энэ төхөөрөмжтэй холбоотой өгөгдөл зэргийг хянах, удирдах эрх таны админд байдаг."</string>
     <string name="condition_turn_off" msgid="1960945836880080298">"Унтраах"</string>
     <string name="condition_turn_on" msgid="9089876276117874591">"Асаах"</string>
     <string name="condition_hotspot_title" msgid="7778958849468560027">"Сүлжээний цэг асаалттай байна"</string>
@@ -2768,4 +2776,6 @@
     <string name="condition_cellular_summary" msgid="1818046558419658463">"Интернэтийг Wi-Fi-тай үед ашиглах боломжтой"</string>
     <string name="condition_bg_data_title" msgid="1422001615923482010">"Ар дэвсгэрийн дата унтраалттай байна"</string>
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Дэвсгэр дата зөвхөн Wi-Fi-р дамжуулсан тохиолдолд боломжтой. Ингэснээр Wi-Fi байхгүй үед зарим апп эсвэл үйлчилгээнд нөлөөлж болзошгүй."</string>
+    <string name="suggestions_title" msgid="8758376306825920705">"Санал болголт (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
+    <string name="suggestion_remove" msgid="904627293892092439">"Арилгах"</string>
 </resources>

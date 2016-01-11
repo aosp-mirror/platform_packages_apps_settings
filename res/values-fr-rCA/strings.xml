@@ -1525,12 +1525,15 @@
     <string name="usage_time_label" msgid="295954901452833058">"Temps d\'utilisation"</string>
     <string name="accessibility_settings" msgid="3975902491934816215">"Accessibilité"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Paramètres d\'accessibilité"</string>
+    <!-- no translation found for accessibility_settings_for_setup_wizard_title (7148099953002332324) -->
+    <skip />
     <string name="accessibility_services_title" msgid="2592221829284342237">"Services"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"Système"</string>
     <string name="accessibility_display_title" msgid="7610175687949675162">"Affichage"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"Sous-titres"</string>
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"Gestes d\'agrandissement"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="1178289000423776584">"Lorsque cette fonctionnalité est activée, vous pouvez effectuer des zooms avant et arrière en appuyant trois fois sur l\'écran.\n\nLorsque vous effectuez un zoom avant, vous pouvez :\n"<ul><li>"Effectuer un panoramique : faites glisser deux doigts ou plus sur l\'écran."</li>\n<li>"Régler le niveau de zoom : pincez deux doigts ou plus, ou écartez-les."</li></ul>\n\n"Vous pouvez également agrandir le contenu se trouvant sous votre doigt en appuyant trois fois sur l\'écran et en prolongeant la troisième pression. Lorsque la loupe est activée, vous pouvez faire glisser votre doigt sur l\'écran pour en explorer les différentes parties. Relevez votre doigt pour revenir à l\'état précédent.\n\nRemarque : vous pouvez appuyer trois fois sur l\'écran pour agrandir le contenu partout, sauf sur le clavier et la barre de navigation."</string>
+    <!-- no translation found for accessibility_screen_magnification_summary (7545798238172451540) -->
+    <skip />
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Raccourci d\'accessibilité"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"Activé"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"Désactivé"</string>
@@ -1620,6 +1623,10 @@
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"Aucune description fournie"</string>
     <string name="settings_button" msgid="3006713718908152930">"Paramètres"</string>
     <string name="print_settings" msgid="4742428530112487843">"Impression"</string>
+    <plurals name="print_settings_title" formatted="false" msgid="6994238166067938432">
+      <item quantity="one">%d tâche d\'impression</item>
+      <item quantity="other">%d tâches d\'impression</item>
+    </plurals>
     <string name="print_settings_title" msgid="3685449667822217816">"Services d\'impression"</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"Aucun service installé"</string>
     <string name="print_no_printers_found" msgid="989018646884973683">"Aucune imprimante trouvée"</string>
@@ -1871,7 +1878,6 @@
     <string name="remove_device_admin" msgid="3596845261596451437">"Désactiver"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"Administrateurs de l\'appareil"</string>
     <string name="no_device_admins" msgid="702695100241728775">"Aucun administrateur de périphérique disponible"</string>
-    <string name="managed_profile_device_admin_info" msgid="5048846624960067582">"Pour empêcher <xliff:g id="APP_NAME">%1$s</xliff:g> d\'accéder à votre profil professionnel, supprimez le profil sous Paramètres &gt; Comptes."</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"Personnel"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"Travail"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"Aucun agent de confiance disponible"</string>
@@ -2165,7 +2171,9 @@
     <string name="user_cannot_manage_message" product="default" msgid="959315813089950649">"Seul le propriétaire de la tablette peut gérer les utilisateurs."</string>
     <string name="user_cannot_add_accounts_message" msgid="5116692653439737050">"Les profils limités ne peuvent pas ajouter de compte."</string>
     <string name="user_remove_user_menu" msgid="6897150520686691355">"Supp. <xliff:g id="USER_NAME">%1$s</xliff:g> de l\'appareil"</string>
-    <string name="user_add_on_lockscreen_menu" msgid="3025132738715222247">"Aj. utilis. quand appar. verr."</string>
+    <string name="user_lockscreen_settings" msgid="4965661345247084878">"Paramètres de l\'écran de verrouillage"</string>
+    <string name="user_add_on_lockscreen_menu" msgid="2250956835192699766">"Ajouter des utilisateurs"</string>
+    <string name="user_add_on_lockscreen_menu_summary" msgid="133203601188164761">"si l\'appareil est verrouillé"</string>
     <string name="user_new_user_name" msgid="369856859816028856">"Nouvel utilisateur"</string>
     <string name="user_new_profile_name" msgid="2632088404952119900">"Nouveau profil"</string>
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Vous supprimer?"</string>
@@ -2365,6 +2373,12 @@
     <string name="ringtone_title" msgid="5379026328015343686">"Sonnerie du téléphone"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Sonnerie de notification par défaut"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Vibreur aussi pour les appels"</string>
+    <!-- no translation found for master_mono_title (8123291759393322551) -->
+    <skip />
+    <!-- no translation found for master_mono_on (53180785336592938) -->
+    <skip />
+    <!-- no translation found for master_mono_off (1232052197508060475) -->
+    <skip />
     <string name="other_sound_settings" msgid="3151004537006844718">"Autres sons"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Tonalités du clavier"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Sons du verrouillage d\'écran"</string>
@@ -2497,10 +2511,8 @@
     <string name="zen_mode_peek_summary" msgid="27622220787132681">"Empêcher les notifications désactivées par le mode Ne pas déranger de s\'afficher à l\'écran actuel"</string>
     <string name="zen_mode_lights" msgid="904184586121619154">"Aucune témoin de notification"</string>
     <string name="zen_mode_lights_summary" msgid="6953305086643633530">"Empêcher les notifications désactivées par le mode Ne pas déranger de faire clignoter le voyant"</string>
-    <!-- no translation found for zen_mode_screen_on (200863707448412727) -->
-    <skip />
-    <!-- no translation found for zen_mode_screen_on_summary (5397223499131913528) -->
-    <skip />
+    <string name="zen_mode_screen_on" msgid="200863707448412727">"Ne jamais activer l\'écran"</string>
+    <string name="zen_mode_screen_on_summary" msgid="5397223499131913528">"Si l\'écran est éteint, empêche les notifications désactivées par le mode Ne pas déranger de l\'allumer."</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Paramètres de notification"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Commentaires sur cet appareil"</string>
     <string name="restr_pin_enter_admin_pin" msgid="2451187374960131018">"Entrez le NIP d\'administrateur"</string>
@@ -2763,10 +2775,11 @@
     <string name="backup_disabled" msgid="485189128759595412">"Sauvegardes désactivées"</string>
     <string name="about_summary" msgid="8460677224778433924">"Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="disabled_by_policy_title" msgid="5358385863927403279">"Désactivé par une politique"</string>
-    <string name="disabled_by_admin_msg" msgid="2059840751288839837">"Désactivé par l\'administrateur de <xliff:g id="ORGANISATION_NAME">%s</xliff:g>."</string>
-    <string name="default_organisation_name" msgid="8264985007488786995">"organisation"</string>
-    <string name="default_admin_support_msg" msgid="4087747704156389949">"Communiquez avec eux pour en apprendre davantage."</string>
-    <string name="list_of_administrators" msgid="7496688366756590804">"Liste des administrateurs"</string>
+    <string name="default_admin_support_msg" msgid="1088691978121877039">"Ce paramètre a été désactivé par l\'administrateur de votre organisation.\nCommuniquez avec lui pour en savoir plus."</string>
+    <string name="admin_support_more_info" msgid="8901377038510512654">"Détails supplémentaires"</string>
+    <string name="admin_profile_owner_message" msgid="859900284865115324">"Votre administrateur peut surveiller et gérer les paramètres, l\'accès aux données d\'entreprise, les applications, les autorisations et les données associées au profil, y compris l\'activité réseau et les données de localisation de votre appareil."</string>
+    <string name="admin_profile_owner_user_message" msgid="853830977317489321">"L\'administrateur de votre entreprise peut surveiller et gérer les paramètres, les accès, les applications, les autorisations et les données associés à cet utilisateur, y compris votre activité réseau et les données de localisation de votre appareil."</string>
+    <string name="admin_device_owner_message" msgid="2060220398673683105">"L\'administrateur de votre entreprise peut surveiller et gérer les paramètres, les accès, les applications, les autorisations et les données associés à cet appareil, y compris votre activité réseau et les données de localisation de votre appareil."</string>
     <string name="condition_turn_off" msgid="1960945836880080298">"Désactiver"</string>
     <string name="condition_turn_on" msgid="9089876276117874591">"Activer"</string>
     <string name="condition_hotspot_title" msgid="7778958849468560027">"Le point d\'accès est activé"</string>
@@ -2780,4 +2793,8 @@
     <string name="condition_cellular_summary" msgid="1818046558419658463">"Internet est uniquement accessible par Wi-Fi"</string>
     <string name="condition_bg_data_title" msgid="1422001615923482010">"Données arrière-plan désactivées"</string>
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Les données en arrière-plan ne sont accessibles que par Wi-Fi. Cela peut nuire à certaines applications ou certains services lorsque le Wi-Fi n\'est pas accessible."</string>
+    <!-- no translation found for suggestions_title (8758376306825920705) -->
+    <skip />
+    <!-- no translation found for suggestion_remove (904627293892092439) -->
+    <skip />
 </resources>

@@ -1525,12 +1525,15 @@
     <string name="usage_time_label" msgid="295954901452833058">"Tempo de uso"</string>
     <string name="accessibility_settings" msgid="3975902491934816215">"Accesibilidade"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Configuración de accesibilidade"</string>
+    <!-- no translation found for accessibility_settings_for_setup_wizard_title (7148099953002332324) -->
+    <skip />
     <string name="accessibility_services_title" msgid="2592221829284342237">"Servizos"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"Sistema"</string>
     <string name="accessibility_display_title" msgid="7610175687949675162">"Pantalla"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"Subtítulos"</string>
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"Xestos de ampliación"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="1178289000423776584">"Cando esta función estea activada, poderás achegar e afastar o zoom tocando tres veces a pantalla.\n\nCo zoom achegado podes:\n"<ul><li>"Facer unha panorámica: arrastra dous ou máis dedos pola pantalla."</li>\n<li>"Axustar o nivel do zoom: xunta dous ou máis dedos ou afástaos entre si."</li></ul>\n\n"Tamén podes ampliar o contido seleccionado de forma temporal tocando tres veces e mantendo premida a pantalla. Co contido ampliado, podes arrastrar o dedo para explorar diferentes partes da pantalla. Levanta o dedo para volver ao teu estado anterior.\n\nNota: Podes tocar tres veces a pantalla para ampliar o contido en calquera parte excepto no teclado e na barra de navegación."</string>
+    <!-- no translation found for accessibility_screen_magnification_summary (7545798238172451540) -->
+    <skip />
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Atallo de accesibilidade"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"Activado"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"Desactivado"</string>
@@ -1620,6 +1623,10 @@
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"Ningunha descrición fornecida."</string>
     <string name="settings_button" msgid="3006713718908152930">"Configuración"</string>
     <string name="print_settings" msgid="4742428530112487843">"Impresión"</string>
+    <plurals name="print_settings_title" formatted="false" msgid="6994238166067938432">
+      <item quantity="other">%d traballos de impresión</item>
+      <item quantity="one">1 traballo de impresión</item>
+    </plurals>
     <string name="print_settings_title" msgid="3685449667822217816">"Servizos de impresión"</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"Non hai servizos instalados"</string>
     <string name="print_no_printers_found" msgid="989018646884973683">"Non se encontrou ningunha impresora"</string>
@@ -1871,7 +1878,6 @@
     <string name="remove_device_admin" msgid="3596845261596451437">"Desactivar"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"Administradores de dispositivos"</string>
     <string name="no_device_admins" msgid="702695100241728775">"Non hai administradores de dispositivos dispoñibles"</string>
-    <string name="managed_profile_device_admin_info" msgid="5048846624960067582">"Para evitar que <xliff:g id="APP_NAME">%1$s</xliff:g> acceda ao teu perfil do traballo, elimina o perfil en Configuración &gt; Contas."</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"Persoal"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"Traballo"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"Non hai ningún axente de confianza dispoñible"</string>
@@ -2165,7 +2171,9 @@
     <string name="user_cannot_manage_message" product="default" msgid="959315813089950649">"Só o propietario do teléfono pode xestionar usuarios."</string>
     <string name="user_cannot_add_accounts_message" msgid="5116692653439737050">"Os perfís restrinxidos non poden engadir contas"</string>
     <string name="user_remove_user_menu" msgid="6897150520686691355">"Eliminar <xliff:g id="USER_NAME">%1$s</xliff:g> do dispositivo"</string>
-    <string name="user_add_on_lockscreen_menu" msgid="3025132738715222247">"Engade usuarios co disp. bloq."</string>
+    <string name="user_lockscreen_settings" msgid="4965661345247084878">"Configuración da pantalla de bloqueo"</string>
+    <string name="user_add_on_lockscreen_menu" msgid="2250956835192699766">"Engadir usuarios"</string>
+    <string name="user_add_on_lockscreen_menu_summary" msgid="133203601188164761">"co dispositivo bloqueado"</string>
     <string name="user_new_user_name" msgid="369856859816028856">"Novo usuario"</string>
     <string name="user_new_profile_name" msgid="2632088404952119900">"Novo perfil"</string>
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Queres eliminarte a ti mesmo?"</string>
@@ -2365,6 +2373,12 @@
     <string name="ringtone_title" msgid="5379026328015343686">"Ton de chamada do teléfono"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Ton de chamada de notificación predeterminado"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Vibrar tamén nas chamadas"</string>
+    <!-- no translation found for master_mono_title (8123291759393322551) -->
+    <skip />
+    <!-- no translation found for master_mono_on (53180785336592938) -->
+    <skip />
+    <!-- no translation found for master_mono_off (1232052197508060475) -->
+    <skip />
     <string name="other_sound_settings" msgid="3151004537006844718">"Outros sons"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Tons do teclado de marcación"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Sons de bloqueo da pantalla"</string>
@@ -2498,7 +2512,7 @@
     <string name="zen_mode_lights" msgid="904184586121619154">"Non hai ningunha luz de notificación"</string>
     <string name="zen_mode_lights_summary" msgid="6953305086643633530">"Evita que as notificacións silenciadas pola función Non molestar fagan que se acenda a luz"</string>
     <string name="zen_mode_screen_on" msgid="200863707448412727">"Non activar nunca a pantalla"</string>
-    <string name="zen_mode_screen_on_summary" msgid="5397223499131913528">"Se a pantalla está desactivada, evita que as notificacións silenciadas pola función Non molestar activen este modo"</string>
+    <string name="zen_mode_screen_on_summary" msgid="5397223499131913528">"Se a pantalla está desactivada, evita que a activen as notificacións silenciadas pola función Non molestar"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Configuración das notificacións"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Enviar comentarios do dispositivo"</string>
     <string name="restr_pin_enter_admin_pin" msgid="2451187374960131018">"Introduce o PIN de administrador"</string>
@@ -2761,10 +2775,11 @@
     <string name="backup_disabled" msgid="485189128759595412">"Desactivouse a función de copia de seguranza"</string>
     <string name="about_summary" msgid="8460677224778433924">"Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="disabled_by_policy_title" msgid="5358385863927403279">"Desactivado pola política"</string>
-    <string name="disabled_by_admin_msg" msgid="2059840751288839837">"Desactivado polo administrador de <xliff:g id="ORGANISATION_NAME">%s</xliff:g>."</string>
-    <string name="default_organisation_name" msgid="8264985007488786995">"organización"</string>
-    <string name="default_admin_support_msg" msgid="4087747704156389949">"Ponte en contacto con eles para obter máis información."</string>
-    <string name="list_of_administrators" msgid="7496688366756590804">"Lista de administradores"</string>
+    <string name="default_admin_support_msg" msgid="1088691978121877039">"O administrador da túa organización desactivou esta opción de configuración.\nContacta con el para obter máis información."</string>
+    <string name="admin_support_more_info" msgid="8901377038510512654">"Máis detalles"</string>
+    <string name="admin_profile_owner_message" msgid="859900284865115324">"O teu administrador pode supervisar e xestionar a configuración, o acceso corporativo, as aplicacións, os permisos e os datos asociados ao perfil, incluída a actividade da rede e a información de localización do teu dispositivo."</string>
+    <string name="admin_profile_owner_user_message" msgid="853830977317489321">"O teu administrador pode supervisar e xestionar a configuración, o acceso corporativo, as aplicacións, os permisos e os datos asociados a este usuario, incluída a actividade da rede e a información de localización do teu dispositivo."</string>
+    <string name="admin_device_owner_message" msgid="2060220398673683105">"O teu administrador pode supervisar e xestionar a configuración, o acceso corporativo, as aplicacións, os permisos e os datos asociados a este dispositivo, incluída a actividade da rede e a información de localización do teu dispositivo."</string>
     <string name="condition_turn_off" msgid="1960945836880080298">"Desactivar"</string>
     <string name="condition_turn_on" msgid="9089876276117874591">"Activar"</string>
     <string name="condition_hotspot_title" msgid="7778958849468560027">"Zona wifi activada"</string>
@@ -2778,4 +2793,8 @@
     <string name="condition_cellular_summary" msgid="1818046558419658463">"Só hai Internet a través de wifi"</string>
     <string name="condition_bg_data_title" msgid="1422001615923482010">"Datos en seg. plano desactiv."</string>
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Os datos en segundo plano só están dispoñibles a través de wifi. Esta opción pode afectar a algunhas aplicacións ou servizos cando non haxa wifi."</string>
+    <!-- no translation found for suggestions_title (8758376306825920705) -->
+    <skip />
+    <!-- no translation found for suggestion_remove (904627293892092439) -->
+    <skip />
 </resources>

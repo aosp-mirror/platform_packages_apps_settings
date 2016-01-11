@@ -1543,12 +1543,13 @@
     <string name="usage_time_label" msgid="295954901452833058">"Naudojimo laikas"</string>
     <string name="accessibility_settings" msgid="3975902491934816215">"Pasiekiamumas"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Pasiekiamumo nustatymai"</string>
+    <string name="accessibility_settings_for_setup_wizard_title" msgid="7148099953002332324">"Pradėti apžvalgą"</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"Paslaugos"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"Sistema"</string>
     <string name="accessibility_display_title" msgid="7610175687949675162">"Ekranas"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"Subtitrai"</string>
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"Didinimo gestai"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="1178289000423776584">"Kai ši funkcija įjungta, galite artinti ir tolinti tris kartus palietę ekraną.\n\nKai priartinate, galite:\n"<ul><li>"Iš lėto apžvelgti: mažiausiai dviem pirštais vilkite ekranu."</li>\n<li>"Koreguoti priartinimo lygį: suimkite mažiausiai dviem pirštais arba išskėskite juos."</li></ul>\n\n"Be to, galite laikinai padidinti tai, kas po pirštu, tris kartus palietę ir laikydami. Esant šiai padidinto vaizdo būsenai galite vilkti pirštu, jei norite naršyti skirtingas ekrano dalis. Pakelkite pirštą, kad grįžtumėte į ankstesnę būseną.\n\nPastaba: palietimo tris kartus, kad būtų padidinta, funkcija veikia visur, išskyrus klaviatūrą ir naršymo juostą."</string>
+    <string name="accessibility_screen_magnification_summary" msgid="7545798238172451540">"Artinkite ir tolinkite triskart palietę ekraną vienu pirštu.\n\nPriartinę galite atlikti toliau nurodytus veiksmus.\n"<ul><li>"Stumdyti: vilkite dviem ar daugiau pirštų per ekraną."</li>\n<li>"Koreguoti mastelio lygį: suimkite dviem ar daugiau pirštų arba juos išskleiskite."</li>\n<li>"Laikinai padidinti: triskart palieskite, palaikykite ir vilkite pirštą, kad galėtumėte naršyti atskiras ekrano dalis. Pakelkite pirštą, kad grįžtumėte į ankstesnę būseną."</li></ul>\n\n"Didinimo triskart palietus funkcija veikia visur, išskyrus klaviatūrą ir naršymo juostą."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Spart. pritaikymo neįgal. įjungimas"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"Įjungta"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"Išjungta"</string>
@@ -1648,6 +1649,12 @@
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"Nepateikta jokių aprašų."</string>
     <string name="settings_button" msgid="3006713718908152930">"Nustatymai"</string>
     <string name="print_settings" msgid="4742428530112487843">"Spausdinimas"</string>
+    <plurals name="print_settings_title" formatted="false" msgid="6994238166067938432">
+      <item quantity="one">%d spausdinimo užduotis</item>
+      <item quantity="few">%d spausdinimo užduotys</item>
+      <item quantity="many">%d spausdinimo užduoties</item>
+      <item quantity="other">%d spausdinimo užduočių</item>
+    </plurals>
     <string name="print_settings_title" msgid="3685449667822217816">"Spausdinimo paslaugos"</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"Nėra įdiegta jokių paslaugų"</string>
     <string name="print_no_printers_found" msgid="989018646884973683">"Nerasta jokių spausdintuvų"</string>
@@ -1899,7 +1906,6 @@
     <string name="remove_device_admin" msgid="3596845261596451437">"Išaktyvinti"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"Įrenginio administratoriai"</string>
     <string name="no_device_admins" msgid="702695100241728775">"Nėra galimų įrenginio administratorių"</string>
-    <string name="managed_profile_device_admin_info" msgid="5048846624960067582">"Kad „<xliff:g id="APP_NAME">%1$s</xliff:g>“ neleistumėte pasiekti darbo profilio, pašalinkite profilį skiltyje „Nustatymai“ &gt; „Paskyros“"</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"Asmeninis"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"Darbas"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"Nėra jokių galimų „trust agents“"</string>
@@ -2193,7 +2199,9 @@
     <string name="user_cannot_manage_message" product="default" msgid="959315813089950649">"Tik telefono savininkas gali tvarkyti naudotojus."</string>
     <string name="user_cannot_add_accounts_message" msgid="5116692653439737050">"Apribotuose profiliuose negalima pridėti paskyrų"</string>
     <string name="user_remove_user_menu" msgid="6897150520686691355">"Ištrinti <xliff:g id="USER_NAME">%1$s</xliff:g> iš šio įr."</string>
-    <string name="user_add_on_lockscreen_menu" msgid="3025132738715222247">"Prid. naud., kai įr. užrakint."</string>
+    <string name="user_lockscreen_settings" msgid="4965661345247084878">"Užrakinimo ekrano nustatymai"</string>
+    <string name="user_add_on_lockscreen_menu" msgid="2250956835192699766">"Pridėti naudotojų"</string>
+    <string name="user_add_on_lockscreen_menu_summary" msgid="133203601188164761">"(kai įrenginys užrakintas)"</string>
     <string name="user_new_user_name" msgid="369856859816028856">"Naujas naudotojas"</string>
     <string name="user_new_profile_name" msgid="2632088404952119900">"Naujas profilis"</string>
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Ištrinti save?"</string>
@@ -2393,6 +2401,9 @@
     <string name="ringtone_title" msgid="5379026328015343686">"Telefono skambėjimo tonas"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Numatytasis pranešimo skambėjimo tonas"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Taip pat vibruoti, kai skamb."</string>
+    <string name="master_mono_title" msgid="8123291759393322551">"Monofoninis atkūrimas"</string>
+    <string name="master_mono_on" msgid="53180785336592938">"Visada leisti monofoninį garso įrašą"</string>
+    <string name="master_mono_off" msgid="1232052197508060475">"Visada leisti monofoninį garso įrašą"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Kiti garsai"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Skambinimo skydelio tonai"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Ekrano užrakinimo garsai"</string>
@@ -2531,10 +2542,8 @@
     <string name="zen_mode_peek_summary" msgid="27622220787132681">"Neleisti, kad gavus praneš., nutildytų naud. rež. „Netrukdyti“, jie būtų rodomi dabart. ekrane"</string>
     <string name="zen_mode_lights" msgid="904184586121619154">"Nėra praneš. lemp."</string>
     <string name="zen_mode_lights_summary" msgid="6953305086643633530">"Neleisti, kad lemputė pulsuotų gavus praneš., nutildytų naud. rež. „Netrukdyti“"</string>
-    <!-- no translation found for zen_mode_screen_on (200863707448412727) -->
-    <skip />
-    <!-- no translation found for zen_mode_screen_on_summary (5397223499131913528) -->
-    <skip />
+    <string name="zen_mode_screen_on" msgid="200863707448412727">"Niekada neįjungti ekrano"</string>
+    <string name="zen_mode_screen_on_summary" msgid="5397223499131913528">"Jei ekranas išjungtas, neleisti jo įjungti, kai gaunami pranešimai, nutildyti naudojant netrukdymo režimą"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Įspėjimų nustatymai"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Siųsti atsiliepimą apie šį įrenginį"</string>
     <string name="restr_pin_enter_admin_pin" msgid="2451187374960131018">"Įveskite administratoriaus PIN kodą"</string>
@@ -2811,10 +2820,11 @@
     <string name="backup_disabled" msgid="485189128759595412">"Atsarginės kopijos kūrimas išjungtas"</string>
     <string name="about_summary" msgid="8460677224778433924">"<xliff:g id="VERSION">%1$s</xliff:g> versijos „Android“"</string>
     <string name="disabled_by_policy_title" msgid="5358385863927403279">"Išjungta atsižvelgiant į politiką"</string>
-    <string name="disabled_by_admin_msg" msgid="2059840751288839837">"Išjungė „<xliff:g id="ORGANISATION_NAME">%s</xliff:g>“ administratorius."</string>
-    <string name="default_organisation_name" msgid="8264985007488786995">"organizacija"</string>
-    <string name="default_admin_support_msg" msgid="4087747704156389949">"Susisiekite, kad sužinotumėte daugiau."</string>
-    <string name="list_of_administrators" msgid="7496688366756590804">"Administratorių sąrašas"</string>
+    <string name="default_admin_support_msg" msgid="1088691978121877039">"Išjungė organizacijos administratorius.\nSusisiekite su juo, kad sužinotumėte daugiau."</string>
+    <string name="admin_support_more_info" msgid="8901377038510512654">"Daugiau išsamios informacijos"</string>
+    <string name="admin_profile_owner_message" msgid="859900284865115324">"Administratorius gali stebėti ir tvarkyti nustatymus, įmonės duomenų pasiekiamumo parinktis, programas, leidimus ir su profiliu susietus duomenis, įskaitant tinklo veiklą ir įrenginio vietovės informaciją."</string>
+    <string name="admin_profile_owner_user_message" msgid="853830977317489321">"Administratorius gali stebėti ir tvarkyti nustatymus, įmonės duomenų pasiekiamumo parinktis, programas ir su šiuo naudotoju susietus duomenis, įskaitant tinklo veiklą ir įrenginio vietovės informaciją."</string>
+    <string name="admin_device_owner_message" msgid="2060220398673683105">"Administratorius gali stebėti ir tvarkyti nustatymus, įmonės duomenų pasiekiamumo parinktis, programas ir su šiuo įrenginiu susietus duomenis, įskaitant tinklo veiklą ir įrenginio vietovės informaciją."</string>
     <string name="condition_turn_off" msgid="1960945836880080298">"Išjungti"</string>
     <string name="condition_turn_on" msgid="9089876276117874591">"Įjungti"</string>
     <string name="condition_hotspot_title" msgid="7778958849468560027">"Vieš. intern. pr. taškas įj."</string>
@@ -2828,4 +2838,6 @@
     <string name="condition_cellular_summary" msgid="1818046558419658463">"Internetas pasiekiamas tik prisijungus prie „Wi-Fi“ ryšio"</string>
     <string name="condition_bg_data_title" msgid="1422001615923482010">"Foniniai duomenys išjungti"</string>
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Foniniai duomenys pasiekiami tik prisijungus prie „Wi-Fi“ ryšio. Tai gali paveikti kai kurias programas ar paslaugas, kai „Wi-Fi“ ryšys nepasiekiamas."</string>
+    <string name="suggestions_title" msgid="8758376306825920705">"Pasiūlymai (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
+    <string name="suggestion_remove" msgid="904627293892092439">"Pašalinti"</string>
 </resources>

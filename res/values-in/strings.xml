@@ -1525,12 +1525,13 @@
     <string name="usage_time_label" msgid="295954901452833058">"Waktu penggunaan"</string>
     <string name="accessibility_settings" msgid="3975902491934816215">"Aksesibilitas"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Setelan aksesibilitas"</string>
+    <string name="accessibility_settings_for_setup_wizard_title" msgid="7148099953002332324">"Bimbing saya"</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"Layanan"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"Sistem"</string>
     <string name="accessibility_display_title" msgid="7610175687949675162">"Tampilan"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"Teks"</string>
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"Isyarat pembesaran"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="1178289000423776584">"Saat fitur ini diaktifkan, Anda dapat memperbesar dan memperkecil dengan mengetuk layar tiga kali.\n\nSaat memperbesar, Anda dapat:\n"<ul><li>"Menggeser: Seret dua jari atau lebih melintasi layar."</li>\n<li>"Menyesuaikan tingkat pembesaran/pengecilan: Cubit dua jari atau lebih bersamaan atau rentangkan jari Anda."</li></ul>\n\n"Anda juga dapat memperbesar yang ada di bawah jari Anda secara sementara dengan mengetuk tiga kali lalu tahan. Dalam keadaan yang diperbesar ini, Anda dapat menyeret jari untuk menjelajah bagian layar yang berbeda. Angkat jari Anda untuk mengembalikan ke keadaan sebelumnya.\n\nCatatan: Ketukan tiga kali untuk pembesaran bekerja di mana pun kecuali pada keyboard dan bilah navigasi."</string>
+    <string name="accessibility_screen_magnification_summary" msgid="7545798238172451540">"Perbesar dan perkecil dengan mengetuk layar tiga kali menggunakan satu jari.\n\nSaat diperbesar, Anda dapat:\n"<ul><li>"Menggeser: Seret dua jari atau lebih melintasi layar."</li>\n<li>"Menyesuaikan tingkat zoom: Cubit dua jari atau lebih bersamaan atau rentangkan jari."</li>\n<li>"Memperbesar sementara: Ketuk tiga kali, tahan, dan seret jari untuk menjelajah bagian layar yang berbeda. Angkat jari untuk mengembalikan ke keadaan sebelumnya."</li></ul>\n\n"Ketukan tiga kali untuk pembesaran dapat berfungsi di mana saja kecuali pada keyboard dan bilah navigasi."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Pintasan aksesibilitas"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"Aktif"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"Mati"</string>
@@ -1620,6 +1621,10 @@
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"Tidak tersedia deskripsi."</string>
     <string name="settings_button" msgid="3006713718908152930">"Setelan"</string>
     <string name="print_settings" msgid="4742428530112487843">"Pencetakan"</string>
+    <plurals name="print_settings_title" formatted="false" msgid="6994238166067938432">
+      <item quantity="other">%d tugas pencetakan</item>
+      <item quantity="one">1 tugas pencetakan</item>
+    </plurals>
     <string name="print_settings_title" msgid="3685449667822217816">"Layanan cetak"</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"Tidak ada layanan terpasang"</string>
     <string name="print_no_printers_found" msgid="989018646884973683">"Tidak ditemukan printer"</string>
@@ -1871,7 +1876,6 @@
     <string name="remove_device_admin" msgid="3596845261596451437">"Nonaktifkan"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"Administrator perangkat"</string>
     <string name="no_device_admins" msgid="702695100241728775">"Administrator perangkat tidak tersedia"</string>
-    <string name="managed_profile_device_admin_info" msgid="5048846624960067582">"Untuk menghentikan <xliff:g id="APP_NAME">%1$s</xliff:g> dari mengakses profil kerja Anda, buang profil pada Setelan &gt; Akun"</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"Pribadi"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"Kantor"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"Agen tepercaya tidak tersedia"</string>
@@ -2165,7 +2169,9 @@
     <string name="user_cannot_manage_message" product="default" msgid="959315813089950649">"Hanya pemilik ponsel yang dapat mengelola pengguna."</string>
     <string name="user_cannot_add_accounts_message" msgid="5116692653439737050">"Profil yang dibatasi tidak dapat menambahkan akun"</string>
     <string name="user_remove_user_menu" msgid="6897150520686691355">"Hapus <xliff:g id="USER_NAME">%1$s</xliff:g> di perangkat"</string>
-    <string name="user_add_on_lockscreen_menu" msgid="3025132738715222247">"+ pengguna dari layar terkunci"</string>
+    <string name="user_lockscreen_settings" msgid="4965661345247084878">"Setelan layar kunci"</string>
+    <string name="user_add_on_lockscreen_menu" msgid="2250956835192699766">"Tambahkan pengguna"</string>
+    <string name="user_add_on_lockscreen_menu_summary" msgid="133203601188164761">"saat perangkat terkunci"</string>
     <string name="user_new_user_name" msgid="369856859816028856">"Pengguna baru"</string>
     <string name="user_new_profile_name" msgid="2632088404952119900">"Profil baru"</string>
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Hapus diri Anda sendiri?"</string>
@@ -2365,6 +2371,9 @@
     <string name="ringtone_title" msgid="5379026328015343686">"Nada dering ponsel"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Dering notifikasi default"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Juga getar saat ada panggilan"</string>
+    <string name="master_mono_title" msgid="8123291759393322551">"Pemutaran mono"</string>
+    <string name="master_mono_on" msgid="53180785336592938">"Selalu memutar audio dalam mono"</string>
+    <string name="master_mono_off" msgid="1232052197508060475">"Selalu memutar audio dalam mono"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Suara lainnya"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Nada tombol nomor"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Suara kunci layar"</string>
@@ -2497,10 +2506,8 @@
     <string name="zen_mode_peek_summary" msgid="27622220787132681">"Mencegah notifikasi yang dibisukan oleh mode Jangan Ganggu agar tidak diintip atau muncul di layar saat ini"</string>
     <string name="zen_mode_lights" msgid="904184586121619154">"Tanpa lampu notifikasi"</string>
     <string name="zen_mode_lights_summary" msgid="6953305086643633530">"Mencegah notifikasi yang dibisukan oleh mode Jangan Ganggu agar lampu tidak berkedip"</string>
-    <!-- no translation found for zen_mode_screen_on (200863707448412727) -->
-    <skip />
-    <!-- no translation found for zen_mode_screen_on_summary (5397223499131913528) -->
-    <skip />
+    <string name="zen_mode_screen_on" msgid="200863707448412727">"Jangan aktifkan layar"</string>
+    <string name="zen_mode_screen_on_summary" msgid="5397223499131913528">"Jika layar tidak aktif, mencegah agar notifikasi yang dibisukan oleh mode Jangan Ganggu tidak aktif"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Setelan notifikasi"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Kirim masukan tentang perangkat ini"</string>
     <string name="restr_pin_enter_admin_pin" msgid="2451187374960131018">"Masukkan PIN administrator"</string>
@@ -2763,10 +2770,11 @@
     <string name="backup_disabled" msgid="485189128759595412">"Cadangan dinonaktifkan"</string>
     <string name="about_summary" msgid="8460677224778433924">"Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="disabled_by_policy_title" msgid="5358385863927403279">"Dinonaktifkan menurut kebijakan"</string>
-    <string name="disabled_by_admin_msg" msgid="2059840751288839837">"Dinonaktifkan oleh administrator <xliff:g id="ORGANISATION_NAME">%s</xliff:g>."</string>
-    <string name="default_organisation_name" msgid="8264985007488786995">"organisasi"</string>
-    <string name="default_admin_support_msg" msgid="4087747704156389949">"Hubungi mereka untuk mempelajari lebih lanjut."</string>
-    <string name="list_of_administrators" msgid="7496688366756590804">"Daftar administrator"</string>
+    <string name="default_admin_support_msg" msgid="1088691978121877039">"Dinonaktifkan oleh administrator.\nHubungi administrator untuk mempelajari lebih lanjut."</string>
+    <string name="admin_support_more_info" msgid="8901377038510512654">"Detail selengkapnya"</string>
+    <string name="admin_profile_owner_message" msgid="859900284865115324">"Administrator memiliki kemampuan untuk memantau dan mengelola setelan, akses perusahaan, aplikasi, izin, dan data yang terkait dengan profil ini, termasuk aktivitas jaringan dan informasi lokasi perangkat Anda."</string>
+    <string name="admin_profile_owner_user_message" msgid="853830977317489321">"Administrator memiliki kemampuan untuk memantau dan mengelola setelan, akses perusahaan, aplikasi, izin, dan data yang terkait dengan pengguna ini, termasuk aktivitas jaringan dan informasi lokasi perangkat Anda."</string>
+    <string name="admin_device_owner_message" msgid="2060220398673683105">"Administrator memiliki kemampuan untuk memantau dan mengelola setelan, akses perusahaan, aplikasi, izin, dan data yang terkait dengan perangkat ini, termasuk aktivitas jaringan dan informasi lokasi perangkat Anda."</string>
     <string name="condition_turn_off" msgid="1960945836880080298">"Nonaktifkan"</string>
     <string name="condition_turn_on" msgid="9089876276117874591">"Aktifkan"</string>
     <string name="condition_hotspot_title" msgid="7778958849468560027">"Hotspot aktif"</string>
@@ -2780,4 +2788,6 @@
     <string name="condition_cellular_summary" msgid="1818046558419658463">"Internet hanya tersedia melalui Wi-Fi"</string>
     <string name="condition_bg_data_title" msgid="1422001615923482010">"Data latar belakang nonaktif"</string>
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Data latar belakang hanya tersedia melalui Wi-Fi. Hal ini dapat memengaruhi beberapa aplikasi atau layanan saat Wi-Fi tidak tersedia."</string>
+    <string name="suggestions_title" msgid="8758376306825920705">"Saran (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
+    <string name="suggestion_remove" msgid="904627293892092439">"Hapus"</string>
 </resources>

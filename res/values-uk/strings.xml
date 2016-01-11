@@ -1543,12 +1543,13 @@
     <string name="usage_time_label" msgid="295954901452833058">"Час використ."</string>
     <string name="accessibility_settings" msgid="3975902491934816215">"Спеціальні можливості"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Налаштування доступності"</string>
+    <string name="accessibility_settings_for_setup_wizard_title" msgid="7148099953002332324">"Покрокові інструкції"</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"Служби"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"Система"</string>
     <string name="accessibility_display_title" msgid="7610175687949675162">"Екран"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"Субтитри"</string>
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"Жести збільшення"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="1178289000423776584">"Якщо цю функцію ввімкнено, масштаб можна змінювати, тричі торкнувшись екрана.\n\nУ збільшеному масштабі можна:\n"<ul><li>"панорамувати – проведіть принаймні двома пальцями по екрану;"</li>\n<li>"налаштовувати рівень масштабування – стисніть або розведіть принаймні два пальці."</li></ul>\n\n"Можна також тимчасово збільшувати вміст під пальцем – тричі торкніться й утримуйте. У такому збільшеному стані можна досліджувати різні частини екрана, пересуваючи палець. Підніміть палець, щоб повернутися до попереднього стану.\n\nПримітка. Потрійний дотик для збільшення працює всюди, окрім клавіатури та панелі навігації."</string>
+    <string name="accessibility_screen_magnification_summary" msgid="7545798238172451540">"Змінюйте масштаб, тричі торкнувшись екрана одним пальцем.\n\nЗбільшивши масштаб, можна:\n"<ul><li>"панорамувати – проведіть двома чи кількома пальцями по екрану;"</li>\n<li>"змінювати рівень масштабування – зведіть або розведіть принаймні два пальці;"</li>\n<li>"тимчасово збільшувати вміст – тричі торкніться екрана та не піднімайте палець, а проводьте ним, щоб переглядати різні частини екрана; підніміть палець, щоб повернутись до попереднього стану."</li></ul>\n\n"Потрійним дотиком можна збільшити все, крім клавіатури та панелі навігації."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Ярлик доступності"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"Увімкнути"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"Вимк."</string>
@@ -1648,6 +1649,12 @@
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"Немає опису."</string>
     <string name="settings_button" msgid="3006713718908152930">"Налаштування"</string>
     <string name="print_settings" msgid="4742428530112487843">"Друк"</string>
+    <plurals name="print_settings_title" formatted="false" msgid="6994238166067938432">
+      <item quantity="one">%d завдання друку</item>
+      <item quantity="few">%d завдання друку</item>
+      <item quantity="many">%d завдань друку</item>
+      <item quantity="other">%d завдання друку</item>
+    </plurals>
     <string name="print_settings_title" msgid="3685449667822217816">"Налаштування друку"</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"Не встановлено жодну службу"</string>
     <string name="print_no_printers_found" msgid="989018646884973683">"Принтери не знайдено"</string>
@@ -1899,7 +1906,6 @@
     <string name="remove_device_admin" msgid="3596845261596451437">"Деактивувати"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"Адміністратори пристрою"</string>
     <string name="no_device_admins" msgid="702695100241728775">"Немає доступн. адміністраторів мережі"</string>
-    <string name="managed_profile_device_admin_info" msgid="5048846624960067582">"Щоб додаток <xliff:g id="APP_NAME">%1$s</xliff:g> втратив доступ до вашого робочого профілю, видаліть профіль у меню \"Налаштування\" &gt; \"Облікові записи\""</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"Особисте"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"Робота"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"Немає довірчих агентів"</string>
@@ -2193,7 +2199,9 @@
     <string name="user_cannot_manage_message" product="default" msgid="959315813089950649">"Лише власник телефону може керувати користувачами."</string>
     <string name="user_cannot_add_accounts_message" msgid="5116692653439737050">"Обмежені профілі не можуть додавати облікові записи"</string>
     <string name="user_remove_user_menu" msgid="6897150520686691355">"<xliff:g id="USER_NAME">%1$s</xliff:g> – видалити з пристрою"</string>
-    <string name="user_add_on_lockscreen_menu" msgid="3025132738715222247">"Додавати користувачів із заблокованого екрана"</string>
+    <string name="user_lockscreen_settings" msgid="4965661345247084878">"Параметри блокування екрана"</string>
+    <string name="user_add_on_lockscreen_menu" msgid="2250956835192699766">"Додати користувачів"</string>
+    <string name="user_add_on_lockscreen_menu_summary" msgid="133203601188164761">"коли пристрій заблоковано"</string>
     <string name="user_new_user_name" msgid="369856859816028856">"Новий користувач"</string>
     <string name="user_new_profile_name" msgid="2632088404952119900">"Новий профіль"</string>
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Видалити ваш профіль?"</string>
@@ -2393,6 +2401,9 @@
     <string name="ringtone_title" msgid="5379026328015343686">"Мелодія телефона"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Сигнал сповіщень за умовчанням"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Також вібросигнал для дзвінків"</string>
+    <string name="master_mono_title" msgid="8123291759393322551">"Монофонічний звук"</string>
+    <string name="master_mono_on" msgid="53180785336592938">"Завжди відтворювати монофонічний звук"</string>
+    <string name="master_mono_off" msgid="1232052197508060475">"Завжди відтворювати монофонічний звук"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Інші звуки"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Звуки цифрової клавіатури"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Звуки блокування екрана"</string>
@@ -2807,10 +2818,11 @@
     <string name="backup_disabled" msgid="485189128759595412">"Резервне копіювання вимкнено"</string>
     <string name="about_summary" msgid="8460677224778433924">"Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="disabled_by_policy_title" msgid="5358385863927403279">"Заборонено правилами"</string>
-    <string name="disabled_by_admin_msg" msgid="2059840751288839837">"Вимкнено адміністратором організації <xliff:g id="ORGANISATION_NAME">%s</xliff:g>."</string>
-    <string name="default_organisation_name" msgid="8264985007488786995">"організація"</string>
-    <string name="default_admin_support_msg" msgid="4087747704156389949">"Зв’яжіться з ними, щоб дізнатися більше."</string>
-    <string name="list_of_administrators" msgid="7496688366756590804">"Список адміністраторів"</string>
+    <string name="default_admin_support_msg" msgid="1088691978121877039">"Це налаштування вимкнув адміністратор вашої організації.\nЗв’яжіться з ним, щоб дізнатися більше."</string>
+    <string name="admin_support_more_info" msgid="8901377038510512654">"Докладніше"</string>
+    <string name="admin_profile_owner_message" msgid="859900284865115324">"Адміністратор може відстежувати та контролювати налаштування, корпоративний доступ, додатки, дозволи й дані, пов’язані з цим профілем, зокрема інформацію про активність у мережі чи місцезнаходження пристрою."</string>
+    <string name="admin_profile_owner_user_message" msgid="853830977317489321">"Адміністратор може відстежувати та контролювати налаштування, корпоративний доступ, додатки, дозволи й дані, пов’язані з цим користувачем, зокрема інформацію про активність у мережі чи місцезнаходження пристрою."</string>
+    <string name="admin_device_owner_message" msgid="2060220398673683105">"Адміністратор може відстежувати та контролювати налаштування, корпоративний доступ, додатки, дозволи й дані, пов’язані з цим пристроєм, зокрема інформацію про активність у мережі чи місцезнаходження пристрою."</string>
     <string name="condition_turn_off" msgid="1960945836880080298">"Вимкнути"</string>
     <string name="condition_turn_on" msgid="9089876276117874591">"Увімкнути"</string>
     <string name="condition_hotspot_title" msgid="7778958849468560027">"Точку доступу ввімкнено"</string>
@@ -2824,4 +2836,6 @@
     <string name="condition_cellular_summary" msgid="1818046558419658463">"З’єднання з Інтернетом доступне лише через Wi-Fi"</string>
     <string name="condition_bg_data_title" msgid="1422001615923482010">"Фоновий режим вимкнено"</string>
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Фоновий режим доступний лише через Wi-Fi. Це може вплинути на роботу деяких додатків і служб, коли мережа Wi-Fi недоступна."</string>
+    <string name="suggestions_title" msgid="8758376306825920705">"Пропозиції (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
+    <string name="suggestion_remove" msgid="904627293892092439">"Видалити"</string>
 </resources>

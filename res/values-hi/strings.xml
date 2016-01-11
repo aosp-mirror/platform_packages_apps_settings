@@ -1525,12 +1525,13 @@
     <string name="usage_time_label" msgid="295954901452833058">"उपयोग समय"</string>
     <string name="accessibility_settings" msgid="3975902491934816215">"सरल उपयोग"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"सरल उपयोग सेटिंग"</string>
+    <string name="accessibility_settings_for_setup_wizard_title" msgid="7148099953002332324">"मेरा मार्गदर्शन करें"</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"सेवाएं"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"सिस्‍टम"</string>
     <string name="accessibility_display_title" msgid="7610175687949675162">"प्रदर्शन"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"कैप्शन"</string>
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"अपने हिसाब से स्क्रीन बड़ा करें"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="1178289000423776584">"इस सुविधा के चालू होने पर, आप स्क्रीन को तीन बार टैप करके ज़ूम इन और आउट कर सकते हैं.\n\nज़ूम इन होने पर, आप निम्न कार्य कर सकते हैं:\n"<ul><li>"पैन करना: स्क्रीन पर दो या अधिक अंगुलियों को खींचें."</li>\n<li>"ज़ूम स्तर एडजस्ट करना: दो या अधिक अंगुलियों को साथ में पिंच करें या उन्हें दूर फैलाएं."</li></ul>\n\n"आप तीन बार टैप करके और टैप किया हुआ रखकर, अपनी अंगुलियों के नीचे की सामग्री को अस्थायी रूप से आवर्धित भी कर सकते हैं. इस आवर्धित स्थिति में, आप स्क्रीन के विभिन्न भागों को एक्सप्लोर करने के लिए अपनी अंगुलियों को खींच सकते हैं. अपनी पूर्व स्थिति में पहुंचने के लिए अपनी अंगुली को उठाएं.\n\nध्यान दें: आवर्धन कार्यों के लिए कीबोर्ड और मार्गदर्शक बार को छोड़कर कहीं भी तीन बार टैप करें."</string>
+    <string name="accessibility_screen_magnification_summary" msgid="7545798238172451540">"स्‍क्रीन पर एक अंगुली से तीन बार टैप करके ज़ूम करें और ज़ूम आउट करें.\n\nज़ूम किए हुए होने पर, आप यह कर सकते हैं:\n"<ul><li>"पैन करना: स्‍क्रीन पर दो या इससे अधिक अंगुलियों को खींचना."</li>\n<li>"ज़ूम स्‍तर समायोजित करना: दो या इससे अधिक अंगुलियों को एकसाथ पिंच करें या उन्‍हें दूर फैलाएं."</li>\n<li>"अस्‍थायी रूप से आवर्धित करना: स्‍क्रीन के विभिन्‍न भाग एक्‍सप्‍लोर करने के लिए तीन बार टैप करें, रोकें और अपनी अंगुली खींचें. पिछली स्‍थिति में वापस लौटने के लिए अपनी अंगुली उठा लें."</li></ul>\n\n"आवर्धन के लिए तीन बार टैप करना कीबोर्ड और मार्गदर्शक बार को छोड़कर सभी जगह काम करता है."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"सरल उपयोग शॉर्टकट"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"चालू"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"बंद"</string>
@@ -1620,6 +1621,10 @@
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"कोई विवरण नहीं दिया गया."</string>
     <string name="settings_button" msgid="3006713718908152930">"सेटिंग"</string>
     <string name="print_settings" msgid="4742428530112487843">"प्रिंटिंग"</string>
+    <plurals name="print_settings_title" formatted="false" msgid="6994238166067938432">
+      <item quantity="one">%d प्रिंट कार्य</item>
+      <item quantity="other">%d प्रिंट कार्य</item>
+    </plurals>
     <string name="print_settings_title" msgid="3685449667822217816">"प्रिंट सेवाएं"</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"कोई सेवा इंस्‍टॉल नहीं है"</string>
     <string name="print_no_printers_found" msgid="989018646884973683">"कोई प्रिंटर नहीं मिला"</string>
@@ -1871,7 +1876,6 @@
     <string name="remove_device_admin" msgid="3596845261596451437">"निष्‍क्रिय करें"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"डिवाइस नियंत्रक"</string>
     <string name="no_device_admins" msgid="702695100241728775">"कोई भी उपलब्‍ध डिवाइस नियंत्रक नहीं है"</string>
-    <string name="managed_profile_device_admin_info" msgid="5048846624960067582">"<xliff:g id="APP_NAME">%1$s</xliff:g> को अपनी कार्य प्रोफ़ाइल एक्सेस करने से रोकने के लिए, सेटिंग &gt; खाते के अंतर्गत प्रोफ़ाइल निकालें"</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"व्यक्तिगत"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"कार्यस्थल"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"कोई ट्रस्ट एजेंट उपलब्ध नहीं"</string>
@@ -2165,7 +2169,9 @@
     <string name="user_cannot_manage_message" product="default" msgid="959315813089950649">"केवल फ़ोन का स्वामी उपयोगकर्ताओं को प्रबंधित कर सकता है."</string>
     <string name="user_cannot_add_accounts_message" msgid="5116692653439737050">"प्रतिबंधित प्रोफ़ाइल खाते नहीं जोड़ सकती हैं"</string>
     <string name="user_remove_user_menu" msgid="6897150520686691355">"इस डिवाइस से <xliff:g id="USER_NAME">%1$s</xliff:g> को हटाएं"</string>
-    <string name="user_add_on_lockscreen_menu" msgid="3025132738715222247">"फोन लॉक रहते उपयोगकर्ता जोड़ें"</string>
+    <string name="user_lockscreen_settings" msgid="4965661345247084878">"लॉक स्‍क्रीन सेटिंग"</string>
+    <string name="user_add_on_lockscreen_menu" msgid="2250956835192699766">"उपयोगकर्ता जोड़ें"</string>
+    <string name="user_add_on_lockscreen_menu_summary" msgid="133203601188164761">"जब डिवाइस लॉक किया गया हो"</string>
     <string name="user_new_user_name" msgid="369856859816028856">"नया उपयोगकर्ता"</string>
     <string name="user_new_profile_name" msgid="2632088404952119900">"नई प्रोफ़ाइल"</string>
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"स्वयं को हटाएं?"</string>
@@ -2365,6 +2371,9 @@
     <string name="ringtone_title" msgid="5379026328015343686">"फ़ोन रिंगटोन"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"डिफ़ॉल्ट नोटिफिकेशन रिंगटोन"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"कॉल के लिए भी कंपन"</string>
+    <string name="master_mono_title" msgid="8123291759393322551">"मोनो प्‍लेबैक"</string>
+    <string name="master_mono_on" msgid="53180785336592938">"ऑडियो को हमेशा मोनो में चलाएं"</string>
+    <string name="master_mono_off" msgid="1232052197508060475">"ऑडियो को हमेशा मोनो में चलाएं"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"अन्य ध्वनियां"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"डायल पैड टोन"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"स्क्रीन लॉक करने की ध्वनियां"</string>
@@ -2761,10 +2770,11 @@
     <string name="backup_disabled" msgid="485189128759595412">"बैक अप अक्षम किया गया"</string>
     <string name="about_summary" msgid="8460677224778433924">"Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="disabled_by_policy_title" msgid="5358385863927403279">"पॉलिसी के द्वारा अक्षम है"</string>
-    <string name="disabled_by_admin_msg" msgid="2059840751288839837">"आपके <xliff:g id="ORGANISATION_NAME">%s</xliff:g> के व्यवस्थापक के द्वारा अक्षम किया गया है."</string>
-    <string name="default_organisation_name" msgid="8264985007488786995">"संगठन"</string>
-    <string name="default_admin_support_msg" msgid="4087747704156389949">"अधिक जानने के लिए उन्हें कनेक्ट करें."</string>
-    <string name="list_of_administrators" msgid="7496688366756590804">"व्यवस्थापकों की सूची"</string>
+    <string name="default_admin_support_msg" msgid="1088691978121877039">"आपके संगठन के व्‍यवस्‍थापक द्वारा अक्षम की गई है.\nअधिक जानने के लिए उनसे संपर्क करें."</string>
+    <string name="admin_support_more_info" msgid="8901377038510512654">"अधिक विवरण"</string>
+    <string name="admin_profile_owner_message" msgid="859900284865115324">"आपके नियंत्रक के पास नेटवर्क गतिविधि और आपके डिवाइस के स्थान की जानकारी सहित प्रोफ़ाइल से संबद्ध सेटिंग, कॉर्पोरेट एक्सेस, ऐप्स, अनुमतियों और डेटा की निगरानी करने तथा उसे प्रबंधित करने की क्षमता है."</string>
+    <string name="admin_profile_owner_user_message" msgid="853830977317489321">"आपके व्यवस्थापक के पास नेटवर्क गतिविधि और आपके डिवाइस के स्थान की जानकारी सहित, इस उपयोगकर्ता से संबद्ध सेटिंग, कॉर्पोरेट एक्सेस, ऐप्स, अनुमतियों और डेटा की निगरानी करने और उसे प्रबंधित करने की क्षमता है."</string>
+    <string name="admin_device_owner_message" msgid="2060220398673683105">"आपके व्यवस्थापक के पास नेटवर्क गतिविधि और आपके डिवाइस के स्थान की जानकारी सहित, इस डिवाइस से संबद्ध सेटिंग, कॉर्पोरेट एक्सेस, ऐप्स, अनुमतियों और डेटा की निगरानी करने और उसे प्रबंधित करने की क्षमता है."</string>
     <string name="condition_turn_off" msgid="1960945836880080298">"बंद करें"</string>
     <string name="condition_turn_on" msgid="9089876276117874591">"चालू करें"</string>
     <string name="condition_hotspot_title" msgid="7778958849468560027">"हॉटस्पॉट चालू है"</string>
@@ -2778,4 +2788,6 @@
     <string name="condition_cellular_summary" msgid="1818046558419658463">"इंटरनेट केवल वाई-फ़ाई के द्वारा उपलब्ध है"</string>
     <string name="condition_bg_data_title" msgid="1422001615923482010">"बैकग्राउंड डेटा बंद है"</string>
     <string name="condition_bg_data_summary" msgid="656957852895282228">"बैकग्राउंड डेटा केवल वाई-फ़ाई के द्वारा उपलब्ध है. इससे वाई-फ़ाई के उपलब्ध नहीं रहने पर कुछ ऐप्स या सेवाएं प्रभावित हो सकती हैं."</string>
+    <string name="suggestions_title" msgid="8758376306825920705">"सुझाव (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
+    <string name="suggestion_remove" msgid="904627293892092439">"निकालें"</string>
 </resources>

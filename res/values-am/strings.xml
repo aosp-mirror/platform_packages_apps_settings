@@ -1525,12 +1525,13 @@
     <string name="usage_time_label" msgid="295954901452833058">"ጊዜ አጠቃቀም"</string>
     <string name="accessibility_settings" msgid="3975902491934816215">"ተደራሽነት"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"ተደራሽነት ቅንብሮች"</string>
+    <string name="accessibility_settings_for_setup_wizard_title" msgid="7148099953002332324">"አስጎብኘኝ"</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"አገልግሎቶች"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"ስርዓት"</string>
     <string name="accessibility_display_title" msgid="7610175687949675162">"ማሳያ"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"መግለጫ ፅሑፎች"</string>
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"የማጉላት ምልክቶች"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="1178289000423776584">"ይሄ ባህሪ ሲበራ ማያ ገጹን ሶስቴ መታ በማድረግ ማጉላት እና ማሳነስ ይችላሉ።\n\nአጉልተው ሳሉ እነኚህን ማድረግ ይችላሉ፦\n"<ul><li>"ማንፏቀቅ፦ በማያ ገጹ ላይ ሁለት ወይም ተጨማሪ ጣቶችን ይጎትቱ።"</li>\n<li>"የአጉላ ደረጃን ማስተካከል፦ በሁለት ወይም ተጨማሪ ጣቶች ይቆንጥጡ ወይም ጣቶችዎን ይበትኗቸው።"</li></ul>\n\n"እንዲሁም ሶስቴ መታ በማድረግና በመያዝ ከጣትዎ ስር ያለውን በጊዜያዊነት ማጉላት ይችላሉ። በዚህ የማጉላት ሁኔታ ላይ የማያ ገጹ የተለያዩ ክፍሎችን ለማሰስ ጣትዎን መጎተት ይችላሉ። ወደ ቀዳሚ ሁኔታዎን ለመመለስ ጣትዎን ያንሱ።\n\nማስታወሻ፦ ከቁልፍ ሰሌዳው እና የአሰሳ አሞሌው በስተቀር ለማጉላት ሶስቴ መታ ማድረግ በሁሉም ቦታ ላይ ይሰራል።"</string>
+    <string name="accessibility_screen_magnification_summary" msgid="7545798238172451540">"ማያ ገጹን በአንድ ጣት ሶስት ጊዜ መታ በማድረግ ያጉሉ ወይም ያሳንሱ። \n\nሲጎላ የሚከተሉትን ማድረግ ይችላሉ፦\n"<ul><li>"ማንፏቀቅ፦ በማያ ገጹ ላይ ሁለት ወይም ከሁለት ወይም ከዚያ በላይ ጣቶችን ማንሸራተት።"</li>\n<li>"የማጉላት ደረጃን ማስተካከል፦ ሁለት ወይም ከዚያ በላይ ጣቶችን በአንድ ላይ መቆንጠጥ ወይም አለያይቶ ማሰራጨት።"</li>\n<li>"ለጊዜው ማጉላት፦ የማያ ገጹን የተለያዩ ክፍሎች ለማሰስ በጣትዎ ሶስት ጊዜ-መታ ማድረግ፣ መያዝ እና መጎተት። ወደ ቀዳሚው ሁኔታ ለመመለስ ጣቶችዎን ያንሱ።"</li></ul>\n\n"ከቁልፍ ሰሌዳ እና አሳሽ አሞሌው በስተቀር ለማጉላት ሶስት ጊዜ መታ ማድረግ በሁሉም ቦታ ላይ ላይ ይሰራል።"</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"የተደራሽነት አቋራጭ"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"በርቷል"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"ጠፍቷል"</string>
@@ -1620,6 +1621,10 @@
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"ምንም መግለጫ አልቀረበም።"</string>
     <string name="settings_button" msgid="3006713718908152930">"ቅንብሮች"</string>
     <string name="print_settings" msgid="4742428530112487843">"ማተም"</string>
+    <plurals name="print_settings_title" formatted="false" msgid="6994238166067938432">
+      <item quantity="one">%d የህትመት ስራዎች</item>
+      <item quantity="other">%d የህትመት ስራዎች</item>
+    </plurals>
     <string name="print_settings_title" msgid="3685449667822217816">"የህትመት አገልግሎቶች"</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"ምንም አገልግሎቶች አልተጫኑም"</string>
     <string name="print_no_printers_found" msgid="989018646884973683">"ምንም አታሚዎች አልተገኙም"</string>
@@ -1871,7 +1876,6 @@
     <string name="remove_device_admin" msgid="3596845261596451437">"አቦዝን"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"መሣሪያ አስተዳዳሪዎች"</string>
     <string name="no_device_admins" msgid="702695100241728775">"የመሣሪያ አስተዳዳሪዎች የሉም"</string>
-    <string name="managed_profile_device_admin_info" msgid="5048846624960067582">"<xliff:g id="APP_NAME">%1$s</xliff:g> የስራ መገለጫዎን እንዳይደርስበት ለማቆም መገለጫውን በቅንብሮች &gt; መለያዎች ውስጥ ያስወግዱት"</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"የግል"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"ስራ"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"ምንም የሚገኙ የተአማኒነት ወኪሎች የሉም"</string>
@@ -2165,7 +2169,9 @@
     <string name="user_cannot_manage_message" product="default" msgid="959315813089950649">"የስልኩ ባለቤት ብቻ ነው ተጠቃሚዎችን ማስተዳደር የሚችለው።"</string>
     <string name="user_cannot_add_accounts_message" msgid="5116692653439737050">"የተገደቡ መገለጫዎች መለያዎችን ማከል አይችሉም"</string>
     <string name="user_remove_user_menu" msgid="6897150520686691355">"<xliff:g id="USER_NAME">%1$s</xliff:g>ን ከዚህ መሣሪያ ሰርዝ"</string>
-    <string name="user_add_on_lockscreen_menu" msgid="3025132738715222247">"መሣሪያው ሲቆለፍ ተጠቃሚዎችን አክል"</string>
+    <string name="user_lockscreen_settings" msgid="4965661345247084878">"የቁፍ ገጽ ቅንቦች"</string>
+    <string name="user_add_on_lockscreen_menu" msgid="2250956835192699766">"ተጠቃሚዎችን ያክሉ"</string>
+    <string name="user_add_on_lockscreen_menu_summary" msgid="133203601188164761">"መሣሪያው ሲቆለፍ"</string>
     <string name="user_new_user_name" msgid="369856859816028856">"አዲስ ተጠቃሚ"</string>
     <string name="user_new_profile_name" msgid="2632088404952119900">"አዲስ መገለጫ"</string>
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"እራስዎን ይሰርዙ?"</string>
@@ -2365,6 +2371,9 @@
     <string name="ringtone_title" msgid="5379026328015343686">"የስልክ ጥሪ ድምፅ"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"ነባሪ የማሳወቂያ ጥሪ ቅላጼ"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"እንዲሁም ለጥሪዎችም ንዘር"</string>
+    <string name="master_mono_title" msgid="8123291759393322551">"በሞኖ መልሶ ማጫወት"</string>
+    <string name="master_mono_on" msgid="53180785336592938">"ኦዲዮን ሁልጊዜ በሞኖ መልሰህ አጫውት"</string>
+    <string name="master_mono_off" msgid="1232052197508060475">"ኦዲዮን ሁልጊዜ በሞኖ መልሰህ አጫውት"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"ሌሎች ድምጾች"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"የመደወያ ሰሌዳ ድምጾች"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"የማያ ገጾ መቆለፍ ድምጾች"</string>
@@ -2761,10 +2770,11 @@
     <string name="backup_disabled" msgid="485189128759595412">"ምትኬ ተሰናክሏል"</string>
     <string name="about_summary" msgid="8460677224778433924">"Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="disabled_by_policy_title" msgid="5358385863927403279">"በመመሪያ ተሰናክሏል"</string>
-    <string name="disabled_by_admin_msg" msgid="2059840751288839837">"በእርስዎ <xliff:g id="ORGANISATION_NAME">%s</xliff:g> አስተዳዳሪ ተሰናክሏል።"</string>
-    <string name="default_organisation_name" msgid="8264985007488786995">"ድርጅት"</string>
-    <string name="default_admin_support_msg" msgid="4087747704156389949">"ተጨማሪ ለማወቅ ያነጋግሯቸው።"</string>
-    <string name="list_of_administrators" msgid="7496688366756590804">"የአስተዳዳሪዎች ዝርዝር"</string>
+    <string name="default_admin_support_msg" msgid="1088691978121877039">"በድርጅትዎ አስተዳዳሪ ተሰናክሏል።\nተጨማሪ ለማወቅ ያነጋግሯቸው።"</string>
+    <string name="admin_support_more_info" msgid="8901377038510512654">"ተጨማሪ ዝርዝሮች"</string>
+    <string name="admin_profile_owner_message" msgid="859900284865115324">"የእርስዎ አስተዳዳሪ ቅንብሮችን፣ የኮርፖሬት መዳረሻን፣ መተግበሪያዎችን፣ ፍቃዶችን፣ እና ከመገለጫው ጋር የሚጎዳኝ ውሂብ፣ የአውታረ መረብ እንቅስቃሴ እና የመሣሪያዎ አካባቢ መረጃን ጨምሮ የመከታተልና የማስተዳደር ብቃት አለው።"</string>
+    <string name="admin_profile_owner_user_message" msgid="853830977317489321">"የእርስዎ አስተዳዳሪ ቅንብሮችን፣ የኮርፖሬት መዳረሻን፣ መተግበሪያዎችን፣ ፍቃዶችን፣ እና ከዚህ ተጠቃሚ ጋር የሚጎዳኝ ውሂብ፣ የአውታረ መረብ እንቅስቃሴ እና የመሣሪያዎ አካባቢ መረጃን ጨምሮ የመከታተልና የማስተዳደር ብቃት አለው።"</string>
+    <string name="admin_device_owner_message" msgid="2060220398673683105">"የእርስዎ አስተዳዳሪ ቅንብሮችን፣ የኮርፖሬት መዳረሻን፣ መተግበሪያዎችን፣ ፍቃዶችን፣ እና ከዚህ መሣሪያ ጋር የሚጎዳኝ ውሂብ፣ የአውታረ መረብ እንቅስቃሴ እና የመሣሪያዎ አካባቢ መረጃን ጨምሮ የመከታተልና የማስተዳደር ብቃት አለው።"</string>
     <string name="condition_turn_off" msgid="1960945836880080298">"አጥፋ"</string>
     <string name="condition_turn_on" msgid="9089876276117874591">"አብራ"</string>
     <string name="condition_hotspot_title" msgid="7778958849468560027">"የመገናኛ ነጥብ በርቷል"</string>
@@ -2778,4 +2788,6 @@
     <string name="condition_cellular_summary" msgid="1818046558419658463">"በይነመረብ በWi-Fi በኩል ብቻ ነው የሚገኘው"</string>
     <string name="condition_bg_data_title" msgid="1422001615923482010">"የጀርባ ውሂብ ጠፍቷል"</string>
     <string name="condition_bg_data_summary" msgid="656957852895282228">"የጀርባ ውሂብ በWi-Fi በኩል ብቻ ነው የሚገኘው። ይሄ Wi-Fi በማይገኝበት ጊዜ በአንዳንድ መተግበሪያዎች ወይም አገልግሎቶች ላይ ተጽዕኖ ሊፈጥር ይችላል።"</string>
+    <string name="suggestions_title" msgid="8758376306825920705">"የአስተያየት ጥቆማዎች (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
+    <string name="suggestion_remove" msgid="904627293892092439">"አስወግድ"</string>
 </resources>

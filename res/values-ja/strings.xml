@@ -1527,12 +1527,15 @@
     <string name="usage_time_label" msgid="295954901452833058">"使用時間"</string>
     <string name="accessibility_settings" msgid="3975902491934816215">"ユーザー補助"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"ユーザー補助の設定"</string>
+    <!-- no translation found for accessibility_settings_for_setup_wizard_title (7148099953002332324) -->
+    <skip />
     <string name="accessibility_services_title" msgid="2592221829284342237">"サービス"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"システム"</string>
     <string name="accessibility_display_title" msgid="7610175687949675162">"ディスプレイ"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"字幕"</string>
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"拡大操作"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="1178289000423776584">"この機能をオンにすると、画面をトリプルタップして画面を拡大/縮小できます。\n\n拡大した画面で次のことを実行できます:\n"<ul><li>"パン: 2本以上の指で画面上をドラッグします。"</li>\n<li>"拡大レベルの調整: 2本以上の指でピンチイン/ピンチアウトします。"</li></ul>\n\n"また、トリプルタップして押し続けると、指の下の部分を一時的に拡大することができます。この状態で、指をドラッグして画面の別の部分に移動することができます。指を画面から離すと元の状態に戻ります。\n\n注意: トリプルタップで拡大する方法は、キーボードとナビゲーションバー以外で使用できます。"</string>
+    <!-- no translation found for accessibility_screen_magnification_summary (7545798238172451540) -->
+    <skip />
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"ユーザー補助のショートカット"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"ON"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"OFF"</string>
@@ -1622,6 +1625,10 @@
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"説明はありません。"</string>
     <string name="settings_button" msgid="3006713718908152930">"設定"</string>
     <string name="print_settings" msgid="4742428530112487843">"印刷"</string>
+    <plurals name="print_settings_title" formatted="false" msgid="6994238166067938432">
+      <item quantity="other">%d 個の印刷ジョブ</item>
+      <item quantity="one">1 個の印刷ジョブ</item>
+    </plurals>
     <string name="print_settings_title" msgid="3685449667822217816">"印刷サービス"</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"インストールされているサービスはありません"</string>
     <string name="print_no_printers_found" msgid="989018646884973683">"プリンタが見つかりません"</string>
@@ -1877,7 +1884,6 @@
     <string name="remove_device_admin" msgid="3596845261596451437">"無効にする"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"デバイス管理者"</string>
     <string name="no_device_admins" msgid="702695100241728775">"有効なデバイス管理者がいません"</string>
-    <string name="managed_profile_device_admin_info" msgid="5048846624960067582">"仕事用プロファイルへの<xliff:g id="APP_NAME">%1$s</xliff:g>のアクセスを停止するには、[設定] &gt; [アカウント]でプロファイルを削除します"</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"個人用"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"職場"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"使用可能な信頼できるエージェントがありません"</string>
@@ -2171,7 +2177,9 @@
     <string name="user_cannot_manage_message" product="default" msgid="959315813089950649">"ユーザーを管理できるのは携帯端末の所有者のみです。"</string>
     <string name="user_cannot_add_accounts_message" msgid="5116692653439737050">"制限付きプロファイルではアカウントを追加できません"</string>
     <string name="user_remove_user_menu" msgid="6897150520686691355">"この端末から<xliff:g id="USER_NAME">%1$s</xliff:g>を削除"</string>
-    <string name="user_add_on_lockscreen_menu" msgid="3025132738715222247">"端末のロック時にユーザーを追加"</string>
+    <string name="user_lockscreen_settings" msgid="4965661345247084878">"ロック画面の設定"</string>
+    <string name="user_add_on_lockscreen_menu" msgid="2250956835192699766">"ユーザーを追加"</string>
+    <string name="user_add_on_lockscreen_menu_summary" msgid="133203601188164761">"端末がロックされているとき"</string>
     <string name="user_new_user_name" msgid="369856859816028856">"新しいユーザー"</string>
     <string name="user_new_profile_name" msgid="2632088404952119900">"新しいプロファイル"</string>
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"自分を削除しますか？"</string>
@@ -2371,6 +2379,12 @@
     <string name="ringtone_title" msgid="5379026328015343686">"着信音"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"デフォルトの通知音"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"着信時もバイブレーションON"</string>
+    <!-- no translation found for master_mono_title (8123291759393322551) -->
+    <skip />
+    <!-- no translation found for master_mono_on (53180785336592938) -->
+    <skip />
+    <!-- no translation found for master_mono_off (1232052197508060475) -->
+    <skip />
     <string name="other_sound_settings" msgid="3151004537006844718">"その他の音"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"ダイヤルパッドの操作音"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"画面ロック音"</string>
@@ -2503,10 +2517,8 @@
     <string name="zen_mode_peek_summary" msgid="27622220787132681">"[通知を非表示] でサイレントに設定した通知を受信したときに画面にプレビューまたは表示されなくなります"</string>
     <string name="zen_mode_lights" msgid="904184586121619154">"光を点滅しない"</string>
     <string name="zen_mode_lights_summary" msgid="6953305086643633530">"[通知を非表示] でサイレントに設定した通知を受信したときに光が点滅しなくなります"</string>
-    <!-- no translation found for zen_mode_screen_on (200863707448412727) -->
-    <skip />
-    <!-- no translation found for zen_mode_screen_on_summary (5397223499131913528) -->
-    <skip />
+    <string name="zen_mode_screen_on" msgid="200863707448412727">"画面を ON にしない"</string>
+    <string name="zen_mode_screen_on_summary" msgid="5397223499131913528">"画面が OFF の場合に、[通知を非表示] でサイレントに設定した通知が届いても画面が ON になりません"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"通知設定"</string>
     <string name="device_feedback" msgid="3238056036766293294">"この端末についてフィードバックを送信"</string>
     <string name="restr_pin_enter_admin_pin" msgid="2451187374960131018">"管理者PINを入力"</string>
@@ -2769,10 +2781,11 @@
     <string name="backup_disabled" msgid="485189128759595412">"バックアップは無効です"</string>
     <string name="about_summary" msgid="8460677224778433924">"Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="disabled_by_policy_title" msgid="5358385863927403279">"ポリシーによって無効となっています"</string>
-    <string name="disabled_by_admin_msg" msgid="2059840751288839837">"「<xliff:g id="ORGANISATION_NAME">%s</xliff:g>」の管理者によって無効にされています。"</string>
-    <string name="default_organisation_name" msgid="8264985007488786995">"組織"</string>
-    <string name="default_admin_support_msg" msgid="4087747704156389949">"詳しくは管理者にお問い合わせください。"</string>
-    <string name="list_of_administrators" msgid="7496688366756590804">"管理者一覧"</string>
+    <string name="default_admin_support_msg" msgid="1088691978121877039">"組織の管理者によって無効になっています。\n詳しくは管理者までお問い合わせください。"</string>
+    <string name="admin_support_more_info" msgid="8901377038510512654">"詳細"</string>
+    <string name="admin_profile_owner_message" msgid="859900284865115324">"管理者は、ネットワーク アクティビティや端末の位置情報など、プロフィールに関連付けられた設定、コーポレート アクセス、アプリ、権限、データを監視および管理できます。"</string>
+    <string name="admin_profile_owner_user_message" msgid="853830977317489321">"管理者は、ネットワーク アクティビティや端末の位置情報など、このユーザーに関連付けられた設定、コーポレート アクセス、アプリ、権限、データを監視および管理できます。"</string>
+    <string name="admin_device_owner_message" msgid="2060220398673683105">"管理者は、ネットワーク アクティビティや端末の位置情報など、この端末に関連付けられた設定、コーポレート アクセス、アプリ、権限、データを監視および管理できます。"</string>
     <string name="condition_turn_off" msgid="1960945836880080298">"OFF にする"</string>
     <string name="condition_turn_on" msgid="9089876276117874591">"ON にする"</string>
     <string name="condition_hotspot_title" msgid="7778958849468560027">"アクセス ポイントが ON"</string>
@@ -2786,4 +2799,8 @@
     <string name="condition_cellular_summary" msgid="1818046558419658463">"インターネットは Wi-Fi 接続時のみ利用できます"</string>
     <string name="condition_bg_data_title" msgid="1422001615923482010">"バックグラウンドデータ OFF"</string>
     <string name="condition_bg_data_summary" msgid="656957852895282228">"バックグラウンド  データは Wi-Fi 接続時のみ利用できます。Wi-Fi に接続できない場合、一部のアプリやサービスに影響する可能性があります。"</string>
+    <!-- no translation found for suggestions_title (8758376306825920705) -->
+    <skip />
+    <!-- no translation found for suggestion_remove (904627293892092439) -->
+    <skip />
 </resources>
