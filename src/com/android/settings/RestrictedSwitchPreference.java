@@ -16,7 +16,6 @@
 
 package com.android.settings;
 
-import android.content.ComponentName;
 import android.content.Context;
 import android.os.UserHandle;
 import android.support.v4.content.res.TypedArrayUtils;
@@ -24,6 +23,8 @@ import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.support.v14.preference.SwitchPreference;
 import android.util.AttributeSet;
+
+import static com.android.settings.RestrictedLockUtils.EnforcedAdmin;
 
 /**
  * Version of SwitchPreference that can be disabled by a device admin
@@ -78,12 +79,8 @@ public class RestrictedSwitchPreference extends SwitchPreference {
         mHelper.checkRestrictionAndSetDisabled(userRestriction, userId);
     }
 
-    public void setDisabledByAdmin(boolean disabled) {
-        mHelper.setDisabledByAdmin(disabled, null, UserHandle.USER_NULL);
-    }
-
-    public void setDisabledByAdmin(boolean disabled, ComponentName admin, int userId) {
-        if (mHelper.setDisabledByAdmin(disabled, admin, userId)) {
+    public void setDisabledByAdmin(EnforcedAdmin admin) {
+        if (mHelper.setDisabledByAdmin(admin)) {
             notifyChanged();
         }
     }

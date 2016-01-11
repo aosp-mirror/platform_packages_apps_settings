@@ -28,11 +28,13 @@ import android.app.Dialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SyncAdapterType;
 import android.content.SyncInfo;
 import android.content.SyncStatusInfo;
 import android.content.pm.ProviderInfo;
 import android.content.pm.UserInfo;
+import android.graphics.Color;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -52,6 +54,8 @@ import android.widget.TextView;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
+import com.android.settings.RestrictedLockUtils;
+import com.android.settings.ShowAdminSupportDetailsDialog;
 import com.android.settings.Utils;
 import com.google.android.collect.Lists;
 
@@ -60,6 +64,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+
+import static com.android.settings.RestrictedLockUtils.EnforcedAdmin;
 
 public class AccountSyncSettings extends AccountPreferenceBase {
 
@@ -259,13 +265,17 @@ public class AccountSyncSettings extends AccountPreferenceBase {
         MenuItem syncCancel = menu.add(0, MENU_SYNC_CANCEL_ID, 0,
                 getString(R.string.sync_menu_sync_cancel))
                 .setIcon(com.android.internal.R.drawable.ic_menu_close_clear_cancel);
-        final UserManager um = (UserManager) getSystemService(Context.USER_SERVICE);
-        if (!um.hasUserRestriction(UserManager.DISALLOW_MODIFY_ACCOUNTS, mUserHandle)) {
-            MenuItem removeAccount = menu.add(0, MENU_REMOVE_ACCOUNT_ID, 0,
-                    getString(R.string.remove_account_label))
-                    .setIcon(R.drawable.ic_menu_delete);
-            removeAccount.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER |
-                    MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+        MenuItem removeAccount = menu.add(0, MENU_REMOVE_ACCOUNT_ID, 0,
+                getString(R.string.remove_account_label))
+                .setIcon(R.drawable.ic_menu_delete);
+        removeAccount.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER |
+                MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+        final EnforcedAdmin admin = RestrictedLockUtils.checkIfRestrictionEnforced(
+                getPrefContext(), UserManager.DISALLOW_MODIFY_ACCOUNTS,
+                mUserHandle.getIdentifier());
+        if (admin != null) {
+            RestrictedLockUtils.setMenuItemAsDisabledByAdmin(getPrefContext(),
+                    removeAccount, admin);
         }
         syncNow.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER |
                 MenuItem.SHOW_AS_ACTION_WITH_TEXT);

@@ -19,9 +19,11 @@ package com.android.settings.notification;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
+import com.android.settings.RestrictedDropDownPreference;
+import com.android.settings.RestrictedDropDownPreference.RestrictedItem;
+import com.android.settings.RestrictedLockUtils;
 import com.android.settings.SettingsPreferenceFragment;
 
-import android.app.admin.DevicePolicyManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.ContentObserver;
@@ -30,13 +32,18 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.UserHandle;
 import android.provider.Settings;
-import android.support.v7.preference.DropDownPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.TwoStatePreference;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_SECURE_NOTIFICATIONS;
+import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_UNREDACTED_NOTIFICATIONS;
+
+import static com.android.settings.RestrictedLockUtils.EnforcedAdmin;
 
 public class ConfigureNotificationSettings extends SettingsPreferenceFragment {
     private static final String TAG = "ConfigNotiSettings";
@@ -49,7 +56,7 @@ public class ConfigureNotificationSettings extends SettingsPreferenceFragment {
     private Context mContext;
 
     private TwoStatePreference mNotificationPulse;
-    private DropDownPreference mLockscreen;
+    private RestrictedDropDownPreference mLockscreen;
     private boolean mSecure;
     private int mLockscreenSelectedValue;
 
@@ -124,27 +131,35 @@ public class ConfigureNotificationSettings extends SettingsPreferenceFragment {
     // === Lockscreen (public / private) notifications ===
 
     private void initLockscreenNotifications() {
-        mLockscreen = (DropDownPreference) getPreferenceScreen().findPreference(
+        mLockscreen = (RestrictedDropDownPreference) getPreferenceScreen().findPreference(
                 KEY_LOCK_SCREEN_NOTIFICATIONS);
         if (mLockscreen == null) {
             Log.i(TAG, "Preference not found: " + KEY_LOCK_SCREEN_NOTIFICATIONS);
             return;
         }
 
-        boolean isSecureNotificationsDisabled = isSecureNotificationsDisabled();
-        boolean isUnredactedNotificationsDisabled = isUnredactedNotificationsDisabled();
         ArrayList<CharSequence> entries = new ArrayList<>();
         ArrayList<CharSequence> values = new ArrayList<>();
-        if (!isSecureNotificationsDisabled && !isUnredactedNotificationsDisabled) {
-            entries.add(getString(R.string.lock_screen_notifications_summary_show));
-            values.add(Integer.toString(R.string.lock_screen_notifications_summary_show));
-        }
-        if (mSecure && !isSecureNotificationsDisabled) {
-            entries.add(getString(R.string.lock_screen_notifications_summary_hide));
-            values.add(Integer.toString(R.string.lock_screen_notifications_summary_hide));
-        }
         entries.add(getString(R.string.lock_screen_notifications_summary_disable));
         values.add(Integer.toString(R.string.lock_screen_notifications_summary_disable));
+
+        String summaryShowEntry = getString(R.string.lock_screen_notifications_summary_show);
+        String summaryShowEntryValue = Integer.toString(
+                R.string.lock_screen_notifications_summary_show);
+        entries.add(summaryShowEntry);
+        values.add(summaryShowEntryValue);
+        setRestrictedIfNotificationFeaturesDisabled(summaryShowEntry, summaryShowEntryValue,
+                KEYGUARD_DISABLE_SECURE_NOTIFICATIONS | KEYGUARD_DISABLE_UNREDACTED_NOTIFICATIONS);
+
+        if (mSecure) {
+            String summaryHideEntry = getString(R.string.lock_screen_notifications_summary_hide);
+            String summaryHideEntryValue = Integer.toString(
+                    R.string.lock_screen_notifications_summary_hide);
+            entries.add(summaryHideEntry);
+            values.add(summaryHideEntryValue);
+            setRestrictedIfNotificationFeaturesDisabled(summaryHideEntry, summaryHideEntryValue,
+                    KEYGUARD_DISABLE_SECURE_NOTIFICATIONS);
+        }
 
         mLockscreen.setEntries(entries.toArray(new CharSequence[entries.size()]));
         mLockscreen.setEntryValues(values.toArray(new CharSequence[values.size()]));
@@ -174,18 +189,14 @@ public class ConfigureNotificationSettings extends SettingsPreferenceFragment {
         }
     }
 
-    private boolean isSecureNotificationsDisabled() {
-        final DevicePolicyManager dpm =
-                (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
-        return dpm != null && (dpm.getKeyguardDisabledFeatures(null)
-                & DevicePolicyManager.KEYGUARD_DISABLE_SECURE_NOTIFICATIONS) != 0;
-    }
-
-    private boolean isUnredactedNotificationsDisabled() {
-        final DevicePolicyManager dpm =
-                (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
-        return dpm != null && (dpm.getKeyguardDisabledFeatures(null)
-                & DevicePolicyManager.KEYGUARD_DISABLE_UNREDACTED_NOTIFICATIONS) != 0;
+    private void setRestrictedIfNotificationFeaturesDisabled(CharSequence entry,
+            CharSequence entryValue, int keyguardNotificationFeatures) {
+        EnforcedAdmin admin = RestrictedLockUtils.checkIfKeyguardNotificationFeaturesDisabled(
+                mContext, keyguardNotificationFeatures);
+        if (admin != null) {
+            RestrictedItem item = new RestrictedItem(entry, entryValue, admin);
+            mLockscreen.addRestrictedItem(item);
+        }
     }
 
     private void updateLockscreenNotifications() {
