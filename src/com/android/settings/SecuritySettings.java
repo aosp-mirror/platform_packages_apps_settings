@@ -26,6 +26,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.hardware.fingerprint.Fingerprint;
 import android.hardware.fingerprint.FingerprintManager;
@@ -79,6 +80,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
     // Lock Settings
     private static final String KEY_UNLOCK_SET_OR_CHANGE = "unlock_set_or_change";
+    private static final String KEY_UNLOCK_SET_OR_CHANGE_PROFILE = "profile_challenge";
     private static final String KEY_VISIBLE_PATTERN = "visiblepattern";
     private static final String KEY_SECURITY_CATEGORY = "security_category";
     private static final String KEY_DEVICE_ADMIN_CATEGORY = "device_admin_category";
@@ -137,6 +139,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
     private Intent mTrustAgentClickIntent;
     private Preference mOwnerInfoPref;
+
+    private int mProfileChallengeUserId;
 
     @Override
     protected int getMetricsCategory() {
@@ -208,6 +212,20 @@ public class SecuritySettings extends SettingsPreferenceFragment
         // Add options for lock/unlock screen
         final int resid = getResIdForLockUnlockScreen(getActivity(), mLockPatternUtils);
         addPreferencesFromResource(resid);
+
+        List<UserInfo> profiles = mUm.getProfiles(UserHandle.myUserId());
+        int numProfiles = profiles.size();
+        if (numProfiles > 1) {
+            for (int i = 0; i < numProfiles; ++i) {
+                UserInfo profile = profiles.get(i);
+                if (profile.id != UserHandle.myUserId()) {
+                    mProfileChallengeUserId = profile.id;
+                }
+            }
+            if (LockPatternUtils.isSeparateWorkChallengeEnabled()) {
+                addPreferencesFromResource(R.xml.security_settings_profile);
+            }
+        }
 
         // Add options for device encryption
         mIsAdmin = mUm.isAdminUser();
@@ -655,6 +673,11 @@ public class SecuritySettings extends SettingsPreferenceFragment
         if (KEY_UNLOCK_SET_OR_CHANGE.equals(key)) {
             startFragment(this, "com.android.settings.ChooseLockGeneric$ChooseLockGenericFragment",
                     R.string.lock_settings_picker_title, SET_OR_CHANGE_LOCK_METHOD_REQUEST, null);
+        } else if (KEY_UNLOCK_SET_OR_CHANGE_PROFILE.equals(key)) {
+            Bundle extras = new Bundle();
+            extras.putInt(Intent.EXTRA_USER_ID, mProfileChallengeUserId);
+            startFragment(this, "com.android.settings.ProfileChallengePreferenceFragment",
+                    R.string.lock_settings_profile_label, SET_OR_CHANGE_LOCK_METHOD_REQUEST, extras);
         } else if (KEY_TRUST_AGENT.equals(key)) {
             ChooseLockSettingsHelper helper =
                     new ChooseLockSettingsHelper(this.getActivity(), this);
@@ -752,6 +775,13 @@ public class SecuritySettings extends SettingsPreferenceFragment
             result.add(sir);
 
             final UserManager um = UserManager.get(context);
+            boolean hasChildProfile = um.getProfiles(UserHandle.myUserId()).size() > 1;
+            if (hasChildProfile && LockPatternUtils.isSeparateWorkChallengeEnabled()) {
+                sir = new SearchIndexableResource(context);
+                sir.xmlResId = R.xml.security_settings_profile;
+                result.add(sir);
+            }
+
             if (um.isAdminUser()) {
                 DevicePolicyManager dpm = (DevicePolicyManager)
                         context.getSystemService(Context.DEVICE_POLICY_SERVICE);

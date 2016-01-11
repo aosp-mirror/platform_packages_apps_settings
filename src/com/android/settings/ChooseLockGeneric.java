@@ -48,7 +48,6 @@ import com.android.internal.widget.LockPatternUtils;
 
 public class ChooseLockGeneric extends SettingsActivity {
     public static final String CONFIRM_CREDENTIALS = "confirm_credentials";
-    public static final String KEY_USER_ID = "user_id";
 
     @Override
     public Intent getIntent() {
@@ -369,6 +368,10 @@ public class ChooseLockGeneric extends SettingsActivity {
                             visible = false;
                         }
                     } else if (KEY_UNLOCK_SET_NONE.equals(key)) {
+                        if (mUserId != UserHandle.myUserId()) {
+                            // Swipe doesn't make sense for profiles.
+                            visible = false;
+                        }
                         enabled = quality <= DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
                     } else if (KEY_UNLOCK_SET_PATTERN.equals(key)) {
                         enabled = quality <= DevicePolicyManager.PASSWORD_QUALITY_SOMETHING;

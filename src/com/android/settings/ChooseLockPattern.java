@@ -78,7 +78,7 @@ public class ChooseLockPattern extends SettingsActivity {
         intent.putExtra("key_lock_method", "pattern");
         intent.putExtra(ChooseLockGeneric.CONFIRM_CREDENTIALS, confirmCredentials);
         intent.putExtra(EncryptionInterstitial.EXTRA_REQUIRE_PASSWORD, requirePassword);
-        intent.putExtra(ChooseLockGeneric.KEY_USER_ID, userId);
+        intent.putExtra(Intent.EXTRA_USER_ID, userId);
         return intent;
     }
 

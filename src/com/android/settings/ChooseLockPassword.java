@@ -87,7 +87,7 @@ public class ChooseLockPassword extends SettingsActivity {
             boolean confirmCredentials, int userId) {
         Intent intent = createIntent(context, quality, minLength, maxLength,
                 requirePasswordToDecrypt, confirmCredentials);
-        intent.putExtra(ChooseLockGeneric.KEY_USER_ID, userId);
+        intent.putExtra(Intent.EXTRA_USER_ID, userId);
         return intent;
     }
 
@@ -103,7 +103,7 @@ public class ChooseLockPassword extends SettingsActivity {
             int maxLength, boolean requirePasswordToDecrypt, String password, int userId) {
         Intent intent = createIntent(context, quality, minLength, maxLength,
                 requirePasswordToDecrypt, password);
-        intent.putExtra(ChooseLockGeneric.KEY_USER_ID, userId);
+        intent.putExtra(Intent.EXTRA_USER_ID, userId);
         return intent;
     }
 
@@ -120,7 +120,7 @@ public class ChooseLockPassword extends SettingsActivity {
             int maxLength, boolean requirePasswordToDecrypt, long challenge, int userId) {
         Intent intent = createIntent(context, quality, minLength, maxLength,
                 requirePasswordToDecrypt, challenge);
-        intent.putExtra(ChooseLockGeneric.KEY_USER_ID, userId);
+        intent.putExtra(Intent.EXTRA_USER_ID, userId);
         return intent;
     }
 
