@@ -33,6 +33,7 @@ public abstract class InstrumentedFragment extends PreferenceFragment {
     public static final int CONFIGURE_NOTIFICATION = UNDECLARED + 3;
     public static final int CONFIGURE_WIFI = UNDECLARED + 4;
     public static final int DISPLAY_SCREEN_ZOOM = UNDECLARED + 5;
+    public static final int ACCESSIBILITY_FONT_SIZE = UNDECLARED + 6;
 
     /**
      * Declare the view of this category.
