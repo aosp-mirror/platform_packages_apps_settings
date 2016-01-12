@@ -176,13 +176,6 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
         unregisterObserverIfNeeded();
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-
-        unregisterObserverIfNeeded();
-    }
-
     public void showLoadingWhenEmpty() {
         View loading = getView().findViewById(R.id.loading_container);
         setEmptyView(loading);
@@ -220,7 +213,7 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
         }
     }
 
-    private void onDataSetChanged() {
+    protected void onDataSetChanged() {
         highlightPreferenceIfNeeded();
         updateEmptyView();
     }
@@ -290,6 +283,9 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
     }
 
     public void setEmptyView(View v) {
+        if (mEmptyView != null) {
+            mEmptyView.setVisibility(View.GONE);
+        }
         mEmptyView = v;
         updateEmptyView();
     }

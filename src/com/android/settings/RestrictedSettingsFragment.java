@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import android.app.Activity;
+import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -24,10 +25,18 @@ import android.content.IntentFilter;
 import android.content.RestrictionsManager;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.os.UserHandle;
 import android.os.UserManager;
+import android.view.View;
+import android.widget.TextView;
+
+import com.android.settingslib.RestrictedLockUtils;
+
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 /**
- * Base class for settings screens that should be pin protected when in restricted mode.
+ * Base class for settings screens that should be pin protected when in restricted mode or
+ * that will display an admin support message in case an admin has disabled the options.
  * The constructor for this class will take the restriction key that this screen should be
  * locked by.  If {@link RestrictionsManager.hasRestrictionsProvider()} and
  * {@link UserManager.hasUserRestriction()}, then the user will have to enter the restrictions
@@ -37,7 +46,8 @@ import android.os.UserManager;
  * {@link RestrictionsManager.hasRestrictionsProvider()} returns true, pass in
  * {@link RESTRICT_IF_OVERRIDABLE} to the constructor instead of a restrictions key.
  */
-public abstract class RestrictedSettingsFragment extends SettingsPreferenceFragment {
+public abstract class RestrictedSettingsFragment extends SettingsPreferenceFragment
+            implements View.OnClickListener {
 
     protected static final String RESTRICT_IF_OVERRIDABLE = "restrict_if_overridable";
 
@@ -55,6 +65,9 @@ public abstract class RestrictedSettingsFragment extends SettingsPreferenceFragm
     private RestrictionsManager mRestrictionsManager;
 
     private final String mRestrictionKey;
+    private View mAdminSupportDetails;
+    private EnforcedAdmin mEnforcedAdmin;
+    private TextView mEmptyTextView;
 
     // Receiver to clear pin status when the screen is turned off.
     private BroadcastReceiver mScreenOffReceiver = new BroadcastReceiver() {
@@ -92,6 +105,13 @@ public abstract class RestrictedSettingsFragment extends SettingsPreferenceFragm
         IntentFilter offFilter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
         offFilter.addAction(Intent.ACTION_USER_PRESENT);
         getActivity().registerReceiver(mScreenOffReceiver, offFilter);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mAdminSupportDetails = initAdminSupportDetailsView();
+        mEmptyTextView = initEmptyTextView();
     }
 
     @Override
@@ -176,6 +196,68 @@ public abstract class RestrictedSettingsFragment extends SettingsPreferenceFragm
         boolean restricted = RESTRICT_IF_OVERRIDABLE.equals(restrictionKey)
                 || mUserManager.hasUserRestriction(mRestrictionKey);
         return restricted && mRestrictionsManager.hasRestrictionsProvider();
+    }
+
+    protected View initAdminSupportDetailsView() {
+        return null;
+    }
+
+    protected TextView initEmptyTextView() {
+        return null;
+    }
+
+    private void updateAdminSupportDetailsView() {
+        mEnforcedAdmin = RestrictedLockUtils.checkIfRestrictionEnforced(getActivity(),
+                mRestrictionKey, UserHandle.myUserId());
+        if (mEnforcedAdmin != null) {
+            final Activity activity = getActivity();
+            DevicePolicyManager dpm = (DevicePolicyManager) activity.getSystemService(
+                    Context.DEVICE_POLICY_SERVICE);
+            if (mEnforcedAdmin.userId == UserHandle.USER_NULL) {
+                mEnforcedAdmin.userId = UserHandle.myUserId();
+            }
+            CharSequence supportMessage = dpm.getShortSupportMessageForUser(
+                    mEnforcedAdmin.component, mEnforcedAdmin.userId);
+            if (supportMessage != null) {
+                TextView textView = (TextView) activity.findViewById(R.id.admin_support_msg);
+                textView.setText(supportMessage);
+            }
+            activity.findViewById(R.id.admins_policies_list).setOnClickListener(this);
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        Intent intent = new Intent();
+        if (view.getId() == R.id.admins_policies_list && mEnforcedAdmin != null) {
+            if (mEnforcedAdmin.component != null) {
+                intent.setClass(getActivity(), DeviceAdminAdd.class);
+                intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, mEnforcedAdmin.component);
+                // DeviceAdminAdd class may need to run as managed profile.
+                getActivity().startActivityAsUser(intent, UserHandle.of(mEnforcedAdmin.userId));
+            } else {
+                intent.setClass(getActivity(), Settings.DeviceAdminSettingsActivity.class);
+                // Activity merges both managed profile and parent users
+                // admins so show as same user as this activity.
+                getActivity().startActivity(intent);
+            }
+        }
+    }
+
+    public TextView getEmptyTextView() {
+        return mEmptyTextView;
+    }
+
+    @Override
+    protected void onDataSetChanged() {
+        highlightPreferenceIfNeeded();
+        if (mAdminSupportDetails != null && isUiRestricted()) {
+            updateAdminSupportDetailsView();
+            setEmptyView(mAdminSupportDetails);
+        } else if (mEmptyTextView != null) {
+            setEmptyView(mEmptyTextView);
+        }
+        super.onDataSetChanged();
     }
 
     /**
