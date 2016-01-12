@@ -778,6 +778,7 @@ public class SettingsActivity extends SettingsDrawerActivity
     protected void onPause() {
         super.onPause();
         unregisterReceiver(mBatteryInfoReceiver);
+        unregisterReceiver(mUserAddRemoveReceiver);
         mDynamicIndexableContentMonitor.unregister();
     }
 
