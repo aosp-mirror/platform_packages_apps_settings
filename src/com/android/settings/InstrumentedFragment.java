@@ -37,6 +37,7 @@ public abstract class InstrumentedFragment extends PreferenceFragment {
     public static final int DATA_USAGE_LIST = UNDECLARED + 7;
     public static final int BILLING_CYCLE = UNDECLARED + 8;
     public static final int APP_DATA_USAGE = UNDECLARED + 9;
+    public static final int USER_LOCALE_LIST = UNDECLARED + 10;
 
     /**
      * Declare the view of this category.

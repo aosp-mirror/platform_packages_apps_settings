@@ -513,8 +513,27 @@
     <string name="next_label">Next</string>
 
     <!-- LocalePicker -->
-    <!-- Title for the locale picker activity -->
-    <string name="language_picker_title">Language</string>
+
+    <!-- Title for the language selection screen [CHAR LIMIT=25] -->
+    <string name="pref_title_lang_selection">Language preference</string>
+
+    <!-- Menu item in the locale menu. Will remove the selected locales. [CHAR LIMIT=30] -->
+    <string name="locale_remove_menu">Remove</string>
+
+    <!-- "Button" that opens a language picker. The selected language gets added to the language list. [CHAR LIMIT=30] -->
+    <string name="add_a_language">Add a language</string>
+
+    <!-- The title of the confirmation dialog shown when the user selected several languages and tries to remove them [CHAR LIMIT=60] -->
+    <string name="dlg_remove_locales_title">Remove from your language preference?</string>
+    <!-- TODO: come up with a good string -->
+    <!-- The text of the confirmation dialog shown when the user selected several languages and tries to remove them [CHAR LIMIT=NONE] -->
+    <string name="dlg_remove_locales_message" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit.  Nulla egestas porta aliquet. Ut laoreet orci tellus, id cursus enim volutpat in.</string>
+
+    <!-- The title of the error dialog shown when the user selected all the languages and tries to remove them [CHAR LIMIT=60] -->
+    <string name="dlg_remove_locales_error_title">Language removal error</string>
+    <!-- The text of the error dialog shown when the user selected all the languages and tries to remove them [CHAR LIMIT=NONE] -->
+    <string name="dlg_remove_locales_error_message">Can’t remove all the languages, you should leave at least one.</string>
+
 
     <!-- The title of the dialog to pick an activity.  This is shown when there are multiple activities that can do a particular action.  For example, suppose you click on the "Share" menu item in the Browser.  Since you can share the webpage URL via many communication methods, this dialog would come up with choices like "Email", "IM", etc.  This is a generic message, and the previous example is a single possible scenario (so please don't assume it's for the browser or anything :) ). -->
     <string name="activity_picker_label">Choose activity</string>

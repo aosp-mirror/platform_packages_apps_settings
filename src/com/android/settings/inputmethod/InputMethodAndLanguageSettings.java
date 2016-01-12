@@ -43,6 +43,7 @@ import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
+import android.util.LocaleList;
 import android.view.InputDevice;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -50,6 +51,7 @@ import android.view.inputmethod.InputMethodSubtype;
 import android.view.textservice.SpellCheckerInfo;
 import android.view.textservice.TextServicesManager;
 
+import com.android.internal.app.LocaleHelper;
 import com.android.internal.app.LocalePicker;
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
@@ -266,8 +268,8 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
 
         if (!mShowsOnlyFullImeAndKeyboardList) {
             if (mLanguagePref != null) {
-                String localeName = getLocaleName(getActivity());
-                mLanguagePref.setSummary(localeName);
+                String localeNames = getLocaleNames(getActivity());
+                mLanguagePref.setSummary(localeNames);
             }
 
             updateUserDictionaryPreference(findPreference(KEY_USER_DICTIONARY_SETTINGS));
@@ -340,19 +342,9 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         return super.onPreferenceTreeClick(preference);
     }
 
-    private static String getLocaleName(Context context) {
-        // We want to show the same string that the LocalePicker used.
-        // TODO: should this method be in LocalePicker instead?
-        Locale currentLocale = context.getResources().getConfiguration().locale;
-        List<LocalePicker.LocaleInfo> locales = LocalePicker.getAllAssetLocales(context, true);
-        for (LocalePicker.LocaleInfo locale : locales) {
-            if (locale.getLocale().equals(currentLocale)) {
-                return locale.getLabel();
-            }
-        }
-        // This can't happen as long as the locale was one set by Settings.
-        // Fall back in case a developer is testing an unsupported locale.
-        return currentLocale.getDisplayName(currentLocale);
+    private static String getLocaleNames(Context context) {
+        final LocaleList locales = LocalePicker.getLocales();
+        return LocaleHelper.getDisplayLocaleList(locales, Locale.getDefault());
     }
 
     private void saveInputMethodSelectorVisibility(String value) {
@@ -665,8 +657,8 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         @Override
         public void setListening(boolean listening) {
             if (listening) {
-                String localeName = getLocaleName(mContext);
-                mSummaryLoader.setSummary(this, localeName);
+                String localeNames = getLocaleNames(mContext);
+                mSummaryLoader.setSummary(this, localeNames);
             }
         }
     }
@@ -690,12 +682,12 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
 
             // Locale picker.
             if (context.getAssets().getLocales().length > 1) {
-                String localeName = getLocaleName(context);
+                String localeNames = getLocaleNames(context);
                 SearchIndexableRaw indexable = new SearchIndexableRaw(context);
                 indexable.key = KEY_PHONE_LANGUAGE;
                 indexable.title = context.getString(R.string.phone_language);
-                indexable.summaryOn = localeName;
-                indexable.summaryOff = localeName;
+                indexable.summaryOn = localeNames;
+                indexable.summaryOff = localeNames;
                 indexable.screenTitle = screenTitle;
                 indexables.add(indexable);
             }

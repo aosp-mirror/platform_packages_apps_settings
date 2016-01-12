@@ -80,6 +80,7 @@ import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
 import com.android.settings.inputmethod.KeyboardLayoutPickerFragment;
 import com.android.settings.inputmethod.SpellCheckersSettings;
 import com.android.settings.inputmethod.UserDictionaryList;
+import com.android.settings.localepicker.LocaleListEditor;
 import com.android.settings.location.LocationSettings;
 import com.android.settings.nfc.AndroidBeam;
 import com.android.settings.nfc.PaymentSettings;
@@ -246,7 +247,7 @@ public class SettingsActivity extends SettingsDrawerActivity
             WifiP2pSettings.class.getName(),
             VpnSettings.class.getName(),
             DateTimeSettings.class.getName(),
-            LocalePicker.class.getName(),
+            LocaleListEditor.class.getName(),
             InputMethodAndLanguageSettings.class.getName(),
             SpellCheckersSettings.class.getName(),
             UserDictionaryList.class.getName(),
