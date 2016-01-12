@@ -32,4 +32,9 @@ public interface FingerprintFindSensorAnimation {
      */
     void stopAnimation();
 
+    /**
+     * Pause the animation
+     */
+    void pauseAnimation();
+
 }

@@ -117,10 +117,17 @@ public class FingerprintLocationAnimationVideoView extends TextureView
 
     @Override
     public void stopAnimation() {
-        if (mMediaPlayer != null && mMediaPlayer.isPlaying()) {
+        if (mMediaPlayer != null) {
             mMediaPlayer.stop();
             mMediaPlayer.release();
             mMediaPlayer = null;
+        }
+    }
+
+    @Override
+    public void pauseAnimation() {
+        if (mMediaPlayer != null && mMediaPlayer.isPlaying()) {
+            mMediaPlayer.pause();
         }
     }
 

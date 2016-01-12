@@ -112,6 +112,11 @@ public class FingerprintLocationAnimationView extends View implements
         }
     }
 
+    @Override
+    public void pauseAnimation() {
+        stopAnimation();
+    }
+
     private void startPhase() {
         startRadiusAnimation();
         startAlphaAnimation();
