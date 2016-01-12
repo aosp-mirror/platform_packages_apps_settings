@@ -54,9 +54,9 @@ import android.widget.TextView;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
-import com.android.settings.RestrictedLockUtils;
 import com.android.settings.ShowAdminSupportDetailsDialog;
 import com.android.settings.Utils;
+import com.android.settingslib.RestrictedLockUtils;
 import com.google.android.collect.Lists;
 
 import java.io.IOException;
@@ -65,7 +65,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import static com.android.settings.RestrictedLockUtils.EnforcedAdmin;
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 public class AccountSyncSettings extends AccountPreferenceBase {
 

@@ -61,6 +61,7 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Index;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
+import com.android.settingslib.RestrictedSwitchPreference;
 
 import java.util.ArrayList;
 import java.util.List;

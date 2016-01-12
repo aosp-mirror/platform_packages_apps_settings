@@ -54,7 +54,7 @@
         android:fragment="com.android.settings.ResetNetwork" />
 
     <!-- Factory reset -->
-    <com.android.settings.RestrictedPreference
+    <com.android.settingslib.RestrictedPreference
         android:key="factory_reset"
         android:title="@string/master_clear_title"
         settings:keywords="@string/keywords_factory_data_reset"

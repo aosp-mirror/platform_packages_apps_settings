@@ -16,14 +16,6 @@
 
 package com.android.settings.notification;
 
-import com.android.internal.widget.LockPatternUtils;
-import com.android.settings.InstrumentedFragment;
-import com.android.settings.R;
-import com.android.settings.RestrictedDropDownPreference;
-import com.android.settings.RestrictedDropDownPreference.RestrictedItem;
-import com.android.settings.RestrictedLockUtils;
-import com.android.settings.SettingsPreferenceFragment;
-
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.ContentObserver;
@@ -37,13 +29,21 @@ import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.TwoStatePreference;
 import android.util.Log;
 
+import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.InstrumentedFragment;
+import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
+import com.android.settingslib.RestrictedDropDownPreference;
+import com.android.settingslib.RestrictedDropDownPreference.RestrictedItem;
+import com.android.settingslib.RestrictedLockUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_SECURE_NOTIFICATIONS;
 import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_UNREDACTED_NOTIFICATIONS;
 
-import static com.android.settings.RestrictedLockUtils.EnforcedAdmin;
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 public class ConfigureNotificationSettings extends SettingsPreferenceFragment {
     private static final String TAG = "ConfigNotiSettings";
