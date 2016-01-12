@@ -15,8 +15,9 @@
 -->
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
     <LinearLayout
         android:orientation="vertical"
@@ -26,33 +27,27 @@
         android:paddingStart="?android:attr/listPreferredItemPaddingStart"
         android:paddingEnd="?android:attr/listPreferredItemPaddingEnd">
 
-        <FrameLayout
+        <android.support.v4.view.ViewPager
+            android:id="@+id/preview_pager"
             android:layout_width="match_parent"
             android:layout_height="@dimen/font_size_preview_height"
+            android:layout_weight="1"
             android:background="?android:attr/colorBackgroundFloating"
-            android:elevation="2dp">
+            android:elevation="2dp" />
 
-            <view class="com.android.settings.TouchBlockingFrameLayout"
-                android:id="@+id/preview_frame"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <TextView
-                android:id="@+id/current_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|bottom"
-                android:padding="8dp"
-                android:theme="@android:style/Theme.Material"
-                android:background="?android:attr/colorBackgroundFloating"
-                android:textAppearance="@android:style/TextAppearance.Material.Caption"
-                android:textAllCaps="true"
-                android:elevation="2dp" />
-        </FrameLayout>
+        <TextView
+            android:id="@+id/current_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:padding="8dp"
+            android:textAppearance="@android:style/TextAppearance.Material.Widget.TextView"
+            android:elevation="2dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_vertical"
             android:paddingTop="8dp">
 
             <ImageView
@@ -60,7 +55,7 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:background="?android:attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_remove_24dp"
+                android:src="@drawable/ic_font_size_24dp"
                 android:tint="?android:attr/colorControlNormal"
                 android:tintMode="src_in"
                 android:scaleType="center"
@@ -79,12 +74,19 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:background="?android:attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_add_24dp"
+                android:src="@drawable/ic_font_size_36dp"
                 android:tint="?android:attr/colorControlNormal"
                 android:tintMode="src_in"
                 android:scaleType="center"
                 android:focusable="true"
                 android:contentDescription="@string/font_size_make_larger_desc" />
         </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/font_size_summary"
+            android:layout_marginBottom="16dp"
+            android:textAppearance="@android:style/TextAppearance.Material.Subhead" />
     </LinearLayout>
 </ScrollView>

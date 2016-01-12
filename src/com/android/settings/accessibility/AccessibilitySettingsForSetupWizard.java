@@ -16,6 +16,7 @@
 
 package com.android.settings.accessibility;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
@@ -35,12 +36,14 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
             "screen_magnification_preference";
     private static final String DISPLAY_DALTONIZER_PREFERENCE = "daltonizer_preference";
     private static final String TALKBACK_PREFERENCE = "talkback_preference";
+    private static final String FONT_SIZE_PREFERENCE = "font_size_preference";
 
     private static final String TALKBACK_NAME = "Talkback";
 
     // Preference controls.
     private Preference mDisplayMagnificationPreference;
     private Preference mDisplayDaltonizerPreference;
+    private Preference mFontSizePreference;
     private Preference mTalkbackPreference;
 
     @Override
@@ -60,6 +63,7 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
 
         mDisplayMagnificationPreference = findPreference(DISPLAY_MAGNIFICATION_PREFERENCE);
         mDisplayDaltonizerPreference = findPreference(DISPLAY_DALTONIZER_PREFERENCE);
+        mFontSizePreference = findPreference(FONT_SIZE_PREFERENCE);
 
         mTalkbackPreference = findPreference(TALKBACK_PREFERENCE);
         mTalkbackPreference.setTitle(TALKBACK_NAME);
@@ -104,11 +108,21 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
                 mDisplayMagnificationPreference);
         updateFeatureSummary(Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED,
                 mDisplayDaltonizerPreference);
+        updateFontSizeSummary(mFontSizePreference);
     }
 
     private void updateFeatureSummary(String prefKey, Preference pref) {
         final boolean enabled = Settings.Secure.getInt(getContentResolver(), prefKey, 0) == 1;
         pref.setSummary(enabled ? R.string.accessibility_feature_state_on
                 : R.string.accessibility_feature_state_off);
+    }
+
+    private void updateFontSizeSummary(Preference pref) {
+        final Resources res = getContext().getResources();
+        final String[] entries = res.getStringArray(R.array.entries_font_size);
+        final String[] strEntryValues = res.getStringArray(R.array.entryvalues_font_size);
+        final int index = ToggleFontSizePreferenceFragment.floatToIndex(
+                res.getConfiguration().fontScale, strEntryValues);
+        pref.setSummary(entries[index]);
     }
 }

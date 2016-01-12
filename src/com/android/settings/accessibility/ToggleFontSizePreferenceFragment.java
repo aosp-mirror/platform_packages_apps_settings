@@ -41,7 +41,7 @@ public class ToggleFontSizePreferenceFragment extends PreviewSeekBarPreferenceFr
         super.onCreate(savedInstanceState);
 
         mActivityLayoutResId = R.layout.font_size_activity;
-        mPreviewSampleResId = R.layout.font_size_preview;
+        mPreviewSampleResIds = new int[]{R.layout.font_size_preview};
 
         Resources res = getContext().getResources();
         // Mark the appropriate item in the preferences list.
@@ -82,7 +82,11 @@ public class ToggleFontSizePreferenceFragment extends PreviewSeekBarPreferenceFr
         return InstrumentedFragment.ACCESSIBILITY_FONT_SIZE;
     }
 
-    private int floatToIndex(float val, String[] indices) {
+    /**
+     *  Utility function that returns the index in a string array with which the represented value is
+     *  the closest to a given float value.
+     */
+    static int floatToIndex(float val, String[] indices) {
         float lastVal = Float.parseFloat(indices[0]);
         for (int i=1; i<indices.length; i++) {
             float thisVal = Float.parseFloat(indices[i]);
