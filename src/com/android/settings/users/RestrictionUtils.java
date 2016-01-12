@@ -81,14 +81,6 @@ public class RestrictionUtils {
 
         for (RestrictionEntry entry : entries) {
             um.setUserRestriction(entry.getKey(), !entry.getSelectedState());
-
-            // TODO This will no longer be needed once b/23902097 is fixed. um.setUserRestriction
-            // should do it.
-            if (entry.getKey().equals(UserManager.DISALLOW_SHARE_LOCATION)
-                    && !entry.getSelectedState()) {
-                Secure.putIntForUser(context.getContentResolver(),
-                        Secure.LOCATION_MODE, Secure.LOCATION_MODE_OFF, user.getIdentifier());
-            }
         }
     }
 }
