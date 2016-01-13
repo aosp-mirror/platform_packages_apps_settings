@@ -116,8 +116,8 @@
     <string name="bluetooth_device" msgid="5291950341750186887">"อุปกรณ์บลูทูธที่ไม่มีชื่อ"</string>
     <string name="progress_scanning" msgid="192587958424295789">"กำลังค้นหา"</string>
     <string name="bluetooth_no_devices_found" msgid="1085232930277181436">"ไม่พบอุปกรณ์บลูทูธในบริเวณใกล้เคียง"</string>
-    <string name="bluetooth_notif_ticker" msgid="4726721390078512173">"คำขอกำหนดค่าอุปกรณ์ให้ตรงกันทางบลูทูธ"</string>
-    <string name="bluetooth_notif_title" msgid="2485175521845371514">"คำขอกำหนดค่าอุปกรณ์ให้ตรงกัน"</string>
+    <string name="bluetooth_notif_ticker" msgid="4726721390078512173">"คำขอจับคู่อุปกรณ์ผ่านบลูทูธ"</string>
+    <string name="bluetooth_notif_title" msgid="2485175521845371514">"คำขอจับคู่อุปกรณ์"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"แตะเพื่อจับคู่กับ <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"แสดงไฟล์ที่ได้รับ"</string>
     <string name="device_picker" msgid="4978696506172252813">"เลือกอุปกรณ์บลูทูธ"</string>
@@ -523,9 +523,9 @@
     <string name="bluetooth_preference_no_found_devices" msgid="7594339669961811591">"ไม่พบอุปกรณ์"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"เชื่อมต่อ"</string>
     <string name="bluetooth_device_context_disconnect" msgid="8220072022970148683">"ตัดการเชื่อมต่อ"</string>
-    <string name="bluetooth_device_context_pair_connect" msgid="7611522504813927727">"กำหนดค่าอุปกรณ์ให้ตรงกันและเชื่อมต่อ"</string>
-    <string name="bluetooth_device_context_unpair" msgid="662992425948536144">"ยกเลิกการกำหนดค่าอุปกรณ์ให้ตรงกัน"</string>
-    <string name="bluetooth_device_context_disconnect_unpair" msgid="7644014238070043798">"ตัดการเชื่อมต่อและยกเลิกการกำหนดค่าอุปกรณ์ให้ตรงกัน"</string>
+    <string name="bluetooth_device_context_pair_connect" msgid="7611522504813927727">"จับคู่อุปกรณ์และเชื่อมต่อ"</string>
+    <string name="bluetooth_device_context_unpair" msgid="662992425948536144">"เลิกจับคู่อุปกรณ์"</string>
+    <string name="bluetooth_device_context_disconnect_unpair" msgid="7644014238070043798">"ตัดการเชื่อมต่อและเลิกจับคู่อุปกรณ์"</string>
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"ตัวเลือก…"</string>
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"ขั้นสูง"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"บลูทูธขั้นสูง"</string>
@@ -992,9 +992,9 @@
     <string name="storage_other_users" msgid="808708845102611856">"ผู้ใช้รายอื่นๆ"</string>
     <string name="storage_internal_title" msgid="690771193137801021">"ที่เก็บข้อมูลอุปกรณ์"</string>
     <string name="storage_external_title" msgid="3433462910096848696">"ที่จัดเก็บข้อมูลแบบพกพา"</string>
-    <string name="storage_volume_summary" msgid="7023441974367853372">"ใช้ไป <xliff:g id="USED">%1$s</xliff:g> จาก <xliff:g id="TOTAL">%2$s</xliff:g>"</string>
+    <string name="storage_volume_summary" msgid="7023441974367853372">"ใช้ไป <xliff:g id="USED">%1$s</xliff:g> จากทั้งหมด <xliff:g id="TOTAL">%2$s</xliff:g>"</string>
     <string name="storage_size_large" msgid="5691585991420946254">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
-    <string name="storage_volume_used" msgid="1303803057698959872">"ใช้ไปจาก <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
+    <string name="storage_volume_used" msgid="1303803057698959872">"ที่ใช้ไปจากทั้งหมด <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_volume_used_total" msgid="6113121714019000244">"ใช้ไปทั้งหมดจาก <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_mount_success" msgid="687641090137253647">"ต่อเชื่อม<xliff:g id="NAME">%1$s</xliff:g>แล้ว"</string>
     <string name="storage_mount_failure" msgid="1042621107954547316">"ไม่สามารถต่อเชื่อม<xliff:g id="NAME">%1$s</xliff:g>"</string>
@@ -2824,7 +2824,7 @@
     <string name="memory_performance" msgid="5661005192284103281">"ประสิทธิภาพ"</string>
     <string name="total_memory" msgid="2017287600738630165">"หน่วยความจำทั้งหมด"</string>
     <string name="average_used" msgid="5338339266517245782">"การใช้โดยเฉลี่ย (%)"</string>
-    <string name="free_memory" msgid="4003936141603549746">"ว่าง"</string>
+    <string name="free_memory" msgid="4003936141603549746">"เหลือ"</string>
     <string name="memory_usage_apps" msgid="5650192998273294098">"หน่วยความจำที่แอปใช้"</string>
     <plurals name="memory_usage_apps_summary" formatted="false" msgid="6089210945574265774">
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> แอปใช้หน่วยความจำใน <xliff:g id="DURATION_1">%2$s</xliff:g>ที่ผ่านมา</item>

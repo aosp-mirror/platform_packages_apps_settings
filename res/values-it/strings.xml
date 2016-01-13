@@ -1696,7 +1696,7 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> rimanenti"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> alla ricarica"</string>
-    <string name="power_discharging_duration" msgid="1605929174734600590">"<xliff:g id="LEVEL">%1$s</xliff:g> - circa. <xliff:g id="TIME">%2$s</xliff:g> rimanente"</string>
+    <string name="power_discharging_duration" msgid="1605929174734600590">"<xliff:g id="LEVEL">%1$s</xliff:g> – Tempo rimanente: <xliff:g id="TIME">%2$s</xliff:g> circa"</string>
     <string name="power_charging" msgid="1779532561355864267">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATE">%2$s</xliff:g>"</string>
     <string name="power_charging_duration" msgid="2853265177761520490">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g> alla carica completa"</string>
     <string name="power_charging_duration_ac" msgid="3969186192576594254">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g> alla carica completa tramite CA"</string>
@@ -1793,7 +1793,7 @@
     <string name="process_kernel_label" msgid="3916858646836739323">"Sistema operativo Android"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"MediaServer"</string>
     <string name="process_dex2oat_label" msgid="2592408651060518226">"Ottimizzazione delle app"</string>
-    <string name="battery_saver" msgid="1426682272004907982">"Risparmio batteria"</string>
+    <string name="battery_saver" msgid="1426682272004907982">"Risparmio energetico"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Attiva automaticamente"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Mai"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="7536784431655058267">"al %1$s di batteria"</string>
@@ -2602,7 +2602,7 @@
     <string name="zen_mode_schedule_rule_days_all" msgid="146511166522076034">"Ogni giorno"</string>
     <string name="summary_divider_text" msgid="7228986578690919294">", "</string>
     <string name="summary_range_symbol_combination" msgid="5695218513421897027">"<xliff:g id="START">%1$s</xliff:g> - <xliff:g id="END">%2$s</xliff:g>"</string>
-    <string name="summary_range_verbal_combination" msgid="8467306662961568656">"Dal <xliff:g id="START">%1$s</xliff:g> al <xliff:g id="END">%2$s</xliff:g>"</string>
+    <string name="summary_range_verbal_combination" msgid="8467306662961568656">"Dalle <xliff:g id="START">%1$s</xliff:g> alle <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="zen_mode_calls" msgid="7051492091133751208">"Chiamate"</string>
     <string name="zen_mode_messages" msgid="5886440273537510894">"Messaggi"</string>
     <string name="zen_mode_selected_messages" msgid="8245990149599142281">"Messaggi selezionati"</string>
@@ -2824,7 +2824,7 @@
     <string name="memory_performance" msgid="5661005192284103281">"Prestazioni"</string>
     <string name="total_memory" msgid="2017287600738630165">"Memoria totale"</string>
     <string name="average_used" msgid="5338339266517245782">"Utilizzo medio (%)"</string>
-    <string name="free_memory" msgid="4003936141603549746">"Libera"</string>
+    <string name="free_memory" msgid="4003936141603549746">"Memoria disponibile"</string>
     <string name="memory_usage_apps" msgid="5650192998273294098">"Memoria utilizzata dalle app"</string>
     <plurals name="memory_usage_apps_summary" formatted="false" msgid="6089210945574265774">
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> app hanno utilizzato la memoria nelle ultime <xliff:g id="DURATION_1">%2$s</xliff:g></item>
@@ -2848,10 +2848,10 @@
     <string name="system_alert_window_settings" msgid="1757821151143694951">"Spostamento su altre app"</string>
     <string name="system_alert_window_apps_title" msgid="7005760279028569491">"App"</string>
     <string name="system_alert_window_access_title" msgid="8811695381437304132">"Spostamento su altre app"</string>
-    <string name="permit_draw_overlay" msgid="6606018549732046201">"Consenti spostamento su altre app"</string>
+    <string name="permit_draw_overlay" msgid="6606018549732046201">"Consenti Posizionamento davanti ad altre app"</string>
     <string name="app_overlay_permission_preference" msgid="8355410276571387439">"Autorizzazione Spostamento di app sopra"</string>
-    <string name="allow_overlay_description" msgid="7895191337585827691">"Questa autorizzazione consente a un\'app di spostarsi sopra altre app in uso e potrebbe interferire con il tuo utilizzo dell\'interfaccia in altre applicazioni o cambiare ciò che credi di vedere in altre applicazioni."</string>
-    <string name="keywords_system_alert_window" msgid="8579673659566564926">"finestra dialogo avviso sistema spostamento su altre app"</string>
+    <string name="allow_overlay_description" msgid="7895191337585827691">"Questa autorizzazione consente di visualizzare un\'app sopra altre app in uso. Potrebbe interferire con il tuo utilizzo dell\'interfaccia in altre applicazioni o modificare ciò che credi di vedere in altre applicazioni."</string>
+    <string name="keywords_system_alert_window" msgid="8579673659566564926">"finestra dialogo avviso sistema Posizionamento davanti ad altre appp"</string>
     <string name="overlay_settings" msgid="222062091489691363">"Spostamento su altre app"</string>
     <string name="system_alert_window_summary" msgid="4268867238063922290">"<xliff:g id="COUNT_0">%d</xliff:g> app su <xliff:g id="COUNT_1">%d</xliff:g> sono autorizzate a spostarsi sopra altre app"</string>
     <string name="filter_overlay_apps" msgid="6965969283342557573">"App con autorizzazione"</string>
