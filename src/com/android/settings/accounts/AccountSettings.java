@@ -39,8 +39,10 @@ import android.os.Process;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
+import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
+import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
 import android.util.Log;
@@ -80,7 +82,7 @@ import static android.provider.Settings.EXTRA_AUTHORITIES;
  */
 public class AccountSettings extends SettingsPreferenceFragment
         implements AuthenticatorHelper.OnAccountsUpdateListener,
-        OnPreferenceClickListener, Indexable {
+        OnPreferenceClickListener, OnPreferenceChangeListener, Indexable {
     public static final String TAG = "AccountSettings";
 
     private static final String KEY_ACCOUNT = "account";
@@ -88,8 +90,9 @@ public class AccountSettings extends SettingsPreferenceFragment
     private static final String ADD_ACCOUNT_ACTION = "android.settings.ADD_ACCOUNT_SETTINGS";
     private static final String TAG_CONFIRM_AUTO_SYNC_CHANGE = "confirmAutoSyncChange";
 
-    private static final int ORDER_LAST = 1001;
-    private static final int ORDER_NEXT_TO_LAST = 1000;
+    private static final int ORDER_LAST = 1002;
+    private static final int ORDER_NEXT_TO_LAST = 1001;
+    private static final int ORDER_NEXT_TO_NEXT_TO_LAST = 1000;
 
     private UserManager mUm;
     private SparseArray<ProfileData> mProfiles = new SparseArray<ProfileData>();
@@ -111,6 +114,10 @@ public class AccountSettings extends SettingsPreferenceFragment
          * The preference that displays the add account button.
          */
         public Preference addAccountPreference;
+        /**
+         * The preference that displays the button to toggle work profile.
+         */
+        public SwitchPreference workModeSwitch;
         /**
          * The preference that displays the button to remove the managed profile
          */
@@ -234,6 +241,21 @@ public class AccountSettings extends SettingsPreferenceFragment
         return false;
     }
 
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        // Check the preference
+        final int count = mProfiles.size();
+        for (int i = 0; i < count; i++) {
+            ProfileData profileData = mProfiles.valueAt(i);
+            if (preference == profileData.workModeSwitch) {
+                final int userId = profileData.userInfo.id;
+                mUm.setQuietModeEnabled(userId, !((boolean) newValue));
+                return true;
+            }
+        }
+        return false;
+    }
+
     void updateUi() {
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.account_settings);
@@ -286,6 +308,9 @@ public class AccountSettings extends SettingsPreferenceFragment
                 profileData.preferenceGroup.setSummary(workGroupSummary);
                 ((AccessiblePreferenceCategory) profileData.preferenceGroup).setContentDescription(
                         getString(R.string.accessibility_category_work, workGroupSummary));
+                profileData.workModeSwitch = newWorkModeSwitchPreference(context);
+                final UserHandle userHandle = profileData.userInfo.getUserHandle();
+                profileData.workModeSwitch.setChecked(!mUm.isQuietModeEnabled(userHandle));
                 profileData.removeWorkProfilePreference = newRemoveWorkProfilePreference(context);
             } else {
                 profileData.preferenceGroup.setTitle(R.string.category_personal);
@@ -313,6 +338,15 @@ public class AccountSettings extends SettingsPreferenceFragment
         preference.setTitle(R.string.add_account_label);
         preference.setIcon(R.drawable.ic_menu_add);
         preference.setOnPreferenceClickListener(this);
+        preference.setOrder(ORDER_NEXT_TO_NEXT_TO_LAST);
+        return preference;
+    }
+
+    private SwitchPreference newWorkModeSwitchPreference(Context context) {
+        SwitchPreference preference = new SwitchPreference(getPrefContext());
+        preference.setTitle(R.string.work_mode_label);
+        preference.setSummary(R.string.work_mode_summary);
+        preference.setOnPreferenceChangeListener(this);
         preference.setOrder(ORDER_NEXT_TO_LAST);
         return preference;
     }
@@ -384,6 +418,9 @@ public class AccountSettings extends SettingsPreferenceFragment
             mProfileNotAvailablePreference.setSummary(
                     R.string.managed_profile_not_available_label);
             profileData.preferenceGroup.addPreference(mProfileNotAvailablePreference);
+        }
+        if (profileData.workModeSwitch != null) {
+            profileData.preferenceGroup.addPreference(profileData.workModeSwitch);
         }
         if (profileData.removeWorkProfilePreference != null) {
             profileData.preferenceGroup.addPreference(profileData.removeWorkProfilePreference);
@@ -533,9 +570,9 @@ public class AccountSettings extends SettingsPreferenceFragment
 
         @Override
         public void onReceive(Context context, Intent intent) {
+            Log.v(TAG, "Received broadcast: " + intent.getAction());
             if (intent.getAction().equals(Intent.ACTION_MANAGED_PROFILE_REMOVED)
                     || intent.getAction().equals(Intent.ACTION_MANAGED_PROFILE_ADDED)) {
-                Log.v(TAG, "Received broadcast: " + intent.getAction());
                 // Clean old state
                 stopListeningToAccountUpdates();
                 cleanUpPreferences();
@@ -547,6 +584,17 @@ public class AccountSettings extends SettingsPreferenceFragment
                 getActivity().invalidateOptionsMenu();
                 return;
             }
+
+            if (intent.getAction().equals(Intent.ACTION_MANAGED_PROFILE_AVAILABILITY_CHANGED)) {
+                // We assume there's only one managed profile, otherwise this needs to change.
+                ProfileData profileData = mProfiles.valueAt(1);
+                if (intent.getIntExtra(Intent.EXTRA_USER_HANDLE,
+                        UserHandle.USER_NULL) == profileData.userInfo.id) {
+                    profileData.workModeSwitch.setChecked(
+                            !mUm.isQuietModeEnabled(profileData.userInfo.getUserHandle()));
+                }
+                return;
+            }
             Log.w(TAG, "Cannot handle received broadcast: " + intent.getAction());
         }
 
@@ -555,6 +603,7 @@ public class AccountSettings extends SettingsPreferenceFragment
                 IntentFilter intentFilter = new IntentFilter();
                 intentFilter.addAction(Intent.ACTION_MANAGED_PROFILE_REMOVED);
                 intentFilter.addAction(Intent.ACTION_MANAGED_PROFILE_ADDED);
+                intentFilter.addAction(Intent.ACTION_MANAGED_PROFILE_AVAILABILITY_CHANGED);
                 context.registerReceiver(this, intentFilter);
                 listeningToManagedProfileEvents = true;
             }
