@@ -203,6 +203,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private static final int RESULT_MOCK_LOCATION_APP = 1001;
 
     private static final String PERSISTENT_DATA_BLOCK_PROP = "ro.frp.pst";
+    private static final String FLASH_LOCKED_PROP = "ro.boot.flash.locked";
 
     private static final int REQUEST_CODE_ENABLE_OEM_UNLOCK = 0;
 
@@ -703,6 +704,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         updateForceResizableOptions();
         updateEnableFreeformWindowsSupportOptions();
         updateWebViewProviderOptions();
+        updateOemUnlockOptions();
         if (mColorTemperaturePreference != null) {
             updateColorTemperature();
         }
@@ -965,6 +967,17 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
 
     private static boolean showEnableOemUnlockPreference() {
         return !SystemProperties.get(PERSISTENT_DATA_BLOCK_PROP).equals("");
+    }
+
+    private static boolean enableOemUnlockPreference() {
+        String flashLocked = SystemProperties.get(FLASH_LOCKED_PROP);
+        return !"0".equals(flashLocked);
+    }
+
+    private void updateOemUnlockOptions() {
+        if (mEnableOemUnlock != null) {
+            mEnableOemUnlock.setEnabled(enableOemUnlockPreference());
+        }
     }
 
     private void updateBugreportOptions() {
