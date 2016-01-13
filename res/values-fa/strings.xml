@@ -77,17 +77,11 @@
     <string name="small_font" msgid="2295331917424072635">"کوچک"</string>
     <string name="medium_font" msgid="2068475425515133701">"متوسط"</string>
     <string name="large_font" msgid="599055175160971446">"بزرگ"</string>
+    <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"کوچک‌تر کردن"</string>
+    <string name="font_size_make_larger_desc" msgid="4316986572233686061">"بزرگ‌تر کردن"</string>
     <string name="font_size_save" msgid="3450855718056759095">"تأیید"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"‏حافظهٔ USB"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"‏کارت SD"</string>
-    <string name="battery_info_status_unknown" msgid="196130600938058547">"ناشناس"</string>
-    <string name="battery_info_status_charging" msgid="1705179948350365604">"در حال شارژ شدن"</string>
-    <string name="battery_info_status_charging_ac" msgid="2909861890674399949">"شارژ با جریان متناوب"</string>
-    <string name="battery_info_status_charging_usb" msgid="2207489369680923929">"‏شارژ از طریق USB"</string>
-    <string name="battery_info_status_charging_wireless" msgid="3574032603735446573">"شارژ به صورت بی‌سیم"</string>
-    <string name="battery_info_status_discharging" msgid="310932812698268588">"شارژ نمی‌شود"</string>
-    <string name="battery_info_status_not_charging" msgid="2820070506621483576">"شارژ نمی‌شود"</string>
-    <string name="battery_info_status_full" msgid="2824614753861462808">"پر"</string>
     <string name="bluetooth" msgid="5549625000628014477">"بلوتوث"</string>
     <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"قابل مشاهده برای تمام دستگاه‌های بلوتوث اطراف (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
     <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"قابل مشاهده برای تمام دستگاه‌های بلوتوث اطراف"</string>
@@ -1206,6 +1200,7 @@
     <string name="location_sources_heading" msgid="1278732419851088319">"منابع موقعیت مکانی"</string>
     <string name="about_settings" product="tablet" msgid="593457295516533765">"دربارهٔ رایانهٔ لوحی"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"دربارهٔ گوشی"</string>
+    <string name="about_settings" product="emulator" msgid="221313099578564438">"درباره دستگاه شبیه‌سازی"</string>
     <string name="about_settings_summary" msgid="3371517697156165959">"مشاهدهٔ اطلاعات حقوقی، وضعیت، نسخه نرم‌افزار"</string>
     <string name="legal_information" msgid="5769301644270604095">"اطلاعات حقوقی"</string>
     <string name="contributors_title" msgid="5917703088825286504">"شرکت کنندگان"</string>
@@ -1270,6 +1265,8 @@
     <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"نحوه ترسیم الگوی بازگشایی قفل"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts" msgid="6909161623701848863">"تلاش‌های نادرست بسیاری انجام شده است. پس از <xliff:g id="NUMBER">%d</xliff:g> ثانیه دوباره امتحان کنید."</string>
     <string name="activity_not_found" msgid="5551664692991605325">"برنامه کاربردی در گوشی شما نصب نشد."</string>
+    <string name="lock_settings_profile_title" msgid="7819021341281339182">"نمایه کاری"</string>
+    <string name="lock_settings_profile_label" msgid="4423909470339292809">"امنیت نمایه کاری"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"مدیریت برنامه‌ها"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"مدیریت و حذف برنامه‌های نصب شده"</string>
     <string name="applications_settings" msgid="1721442176406964682">"برنامه‌ها"</string>
@@ -1292,6 +1289,11 @@
     <string name="cache_header_label" msgid="1877197634162461830">"حافظهٔ پنهان"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"پاک کردن حافظهٔ پنهان"</string>
     <string name="cache_size_label" msgid="7505481393108282913">"حافظهٔ پنهان"</string>
+    <plurals name="uri_permissions_text" formatted="false" msgid="3983110543017963732">
+      <item quantity="one">‏%d مورد</item>
+      <item quantity="other">‏%d مورد</item>
+    </plurals>
+    <string name="clear_uri_btn_text" msgid="8575655132961012158">"پاک کردن دسترسی"</string>
     <string name="controls_label" msgid="7611113077086853799">"کنترل ها"</string>
     <string name="force_stop" msgid="7435006169872876756">"توقف اجباری"</string>
     <string name="total_size_label" msgid="1048676419552557254">"مجموع"</string>
@@ -1654,12 +1656,6 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> مانده"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> مانده تا شارژ کامل"</string>
-    <string name="power_discharging_duration" msgid="1605929174734600590">"<xliff:g id="LEVEL">%1$s</xliff:g> - تقریباً ‏<xliff:g id="TIME">%2$s</xliff:g> باقی مانده است"</string>
-    <string name="power_charging" msgid="1779532561355864267">"<xliff:g id="LEVEL">%1$s</xliff:g> - ‏<xliff:g id="STATE">%2$s</xliff:g>"</string>
-    <string name="power_charging_duration" msgid="2853265177761520490">"<xliff:g id="LEVEL">%1$s</xliff:g> - ‏<xliff:g id="TIME">%2$s</xliff:g> تا شارژ کامل"</string>
-    <string name="power_charging_duration_ac" msgid="3969186192576594254">"<xliff:g id="LEVEL">%1$s</xliff:g> - ‏<xliff:g id="TIME">%2$s</xliff:g> تا شارژ کامل با جریان متناوب"</string>
-    <string name="power_charging_duration_usb" msgid="182405645340976546">"‏<xliff:g id="LEVEL">%1$s</xliff:g> - ‏<xliff:g id="TIME">%2$s</xliff:g> تا شارژ کامل از طریق USB"</string>
-    <string name="power_charging_duration_wireless" msgid="1829295708243159464">"<xliff:g id="LEVEL">%1$s</xliff:g> - ‏<xliff:g id="TIME">%2$s</xliff:g> تا شارژ کامل به‌طور بی‌سیم"</string>
     <string name="power_usage_list_summary" msgid="2409288197839512482">"استفاده از زمان آخرین شارژ کامل"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"استفاده از باتری از زمان جدا شدن"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"استفاده از باتری از زمان بازنشانی"</string>
@@ -2355,6 +2351,7 @@
     <string name="keywords_ignore_optimizations" msgid="6102579291119055029">"نادیده گرفتن بهینه‌سازی، چرت، حالت آماده به‌کار برنامه"</string>
     <string name="keywords_color_mode" msgid="6362744316886077510">"‏زنده، RGB، ‏sRGB، رنگ، طبیعی، استاندارد"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"لغزاندن برای بازگشایی قفل، گذرواژه، الگو، پین"</string>
+    <string name="keywords_profile_challenge" msgid="789611397846512845">"چالش کار، کار، نمایه"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"‏تنظیم برچسب NFC برای Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"نوشتن"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"ضربه زدن روی یک برچسب برای نوشتن..."</string>

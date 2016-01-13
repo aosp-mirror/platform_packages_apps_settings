@@ -79,17 +79,11 @@
     <string name="small_font" msgid="2295331917424072635">"Malé"</string>
     <string name="medium_font" msgid="2068475425515133701">"Stredné"</string>
     <string name="large_font" msgid="599055175160971446">"Veľké"</string>
+    <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"Zmenšiť"</string>
+    <string name="font_size_make_larger_desc" msgid="4316986572233686061">"Zväčšiť"</string>
     <string name="font_size_save" msgid="3450855718056759095">"OK"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"Ukladací priestor USB"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"SD karta"</string>
-    <string name="battery_info_status_unknown" msgid="196130600938058547">"Neznáme"</string>
-    <string name="battery_info_status_charging" msgid="1705179948350365604">"Nabíjanie"</string>
-    <string name="battery_info_status_charging_ac" msgid="2909861890674399949">"Nabíjanie zo zásuvky"</string>
-    <string name="battery_info_status_charging_usb" msgid="2207489369680923929">"Nabíjanie cez USB"</string>
-    <string name="battery_info_status_charging_wireless" msgid="3574032603735446573">"Bezdrôtové nabíjanie"</string>
-    <string name="battery_info_status_discharging" msgid="310932812698268588">"Nenabíja sa"</string>
-    <string name="battery_info_status_not_charging" msgid="2820070506621483576">"Nenabíja sa"</string>
-    <string name="battery_info_status_full" msgid="2824614753861462808">"Nabitá"</string>
     <string name="bluetooth" msgid="5549625000628014477">"Bluetooth"</string>
     <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"Viditeľné pre všetky okolité zariadenia Bluetooth (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
     <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"Viditeľné pre všetky okolité zariadenia Bluetooth"</string>
@@ -1224,6 +1218,7 @@
     <string name="location_sources_heading" msgid="1278732419851088319">"Zdroje polohy"</string>
     <string name="about_settings" product="tablet" msgid="593457295516533765">"Informácie o tablete"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"Informácie o telefóne"</string>
+    <string name="about_settings" product="emulator" msgid="221313099578564438">"Informácie o emulovanom zariadení"</string>
     <string name="about_settings_summary" msgid="3371517697156165959">"Zobrazuje právne informácie, stav a verziu softvéru"</string>
     <string name="legal_information" msgid="5769301644270604095">"Právne informácie"</string>
     <string name="contributors_title" msgid="5917703088825286504">"Prispievatelia"</string>
@@ -1288,6 +1283,8 @@
     <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"Bezpečnostný vzor obrazovky nakreslite takto"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts" msgid="6909161623701848863">"Príliš veľa nesprávnych pokusov. Skúste to znova o <xliff:g id="NUMBER">%d</xliff:g> s."</string>
     <string name="activity_not_found" msgid="5551664692991605325">"Aplikácia nie je v telefóne nainštalovaná."</string>
+    <string name="lock_settings_profile_title" msgid="7819021341281339182">"Pracovný profil"</string>
+    <string name="lock_settings_profile_label" msgid="4423909470339292809">"Zabezpečenie pracovného profilu"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Spravovať aplikácie"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Správa a odstraňovanie nainštalovaných aplikácií"</string>
     <string name="applications_settings" msgid="1721442176406964682">"Aplikácie"</string>
@@ -1310,6 +1307,13 @@
     <string name="cache_header_label" msgid="1877197634162461830">"Vyrovnávacia pamäť"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"Vymazať vyrovnávaciu pamäť"</string>
     <string name="cache_size_label" msgid="7505481393108282913">"Vyrovnávacia pamäť"</string>
+    <plurals name="uri_permissions_text" formatted="false" msgid="3983110543017963732">
+      <item quantity="few">%d položky</item>
+      <item quantity="many">%d položky</item>
+      <item quantity="other">%d položiek</item>
+      <item quantity="one">1 položka</item>
+    </plurals>
+    <string name="clear_uri_btn_text" msgid="8575655132961012158">"Zrušiť prístup"</string>
     <string name="controls_label" msgid="7611113077086853799">"Ovládacie prvky"</string>
     <string name="force_stop" msgid="7435006169872876756">"Vynútiť zastavenie"</string>
     <string name="total_size_label" msgid="1048676419552557254">"Celkove"</string>
@@ -1543,15 +1547,13 @@
     <string name="usage_time_label" msgid="295954901452833058">"Doba použitia"</string>
     <string name="accessibility_settings" msgid="3975902491934816215">"Dostupnosť"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Nastavenia dostupnosti"</string>
-    <!-- no translation found for accessibility_settings_for_setup_wizard_title (7148099953002332324) -->
-    <skip />
+    <string name="accessibility_settings_for_setup_wizard_title" msgid="7148099953002332324">"Sprievodca"</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"Služby"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"Systém"</string>
     <string name="accessibility_display_title" msgid="7610175687949675162">"Obrazovka"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"Titulky"</string>
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"Gestá priblíženia"</string>
-    <!-- no translation found for accessibility_screen_magnification_summary (7545798238172451540) -->
-    <skip />
+    <string name="accessibility_screen_magnification_summary" msgid="7545798238172451540">"Priblížte alebo oddiaľte zobrazenie trojitým klepnutím na obrazovku jedným prstom.\n\nPočas priblíženia môžete:\n"<ul><li>"Posúvať zobrazenie: posúvajte dvoma alebo viacerými prstami po obrazovke."</li>\n<li>"Nastaviť úroveň priblíženia: priblížte k sebe dva alebo viac prstov alebo ich od seba oddiaľte."</li>\n<li>"Dočasne priblížiť zobrazenie: trikrát klepnite prstom, podržte ho a jeho posúvaním preskúmajte rôzne časti obrazovky. Zdvihnutím prsta prejdete späť do predchádzajúceho stavu."</li></ul>\n\n"Priblíženie trojitým klepnutím funguje všade s výnimkou klávesnice a navigačného panela."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Skratka dostupnosti"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"Zapnuté"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"Vypnuté"</string>
@@ -1686,12 +1688,6 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"Zostáva <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> do nabitia"</string>
-    <string name="power_discharging_duration" msgid="1605929174734600590">"<xliff:g id="LEVEL">%1$s</xliff:g> – zostáva približne <xliff:g id="TIME">%2$s</xliff:g>"</string>
-    <string name="power_charging" msgid="1779532561355864267">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="STATE">%2$s</xliff:g>"</string>
-    <string name="power_charging_duration" msgid="2853265177761520490">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="TIME">%2$s</xliff:g> do úplného nabitia"</string>
-    <string name="power_charging_duration_ac" msgid="3969186192576594254">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="TIME">%2$s</xliff:g> do úplného nabitia zo zásuvky"</string>
-    <string name="power_charging_duration_usb" msgid="182405645340976546">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="TIME">%2$s</xliff:g> do úplného nabitia cez USB"</string>
-    <string name="power_charging_duration_wireless" msgid="1829295708243159464">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="TIME">%2$s</xliff:g> do úplného nabitia bezdrôtovo"</string>
     <string name="power_usage_list_summary" msgid="2409288197839512482">"Využitie od posledného úplného dobitia"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Využitie batérie od odpojenia"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"Využitie batérie od obnovenia"</string>
@@ -2387,6 +2383,7 @@
     <string name="keywords_ignore_optimizations" msgid="6102579291119055029">"ignorovať optimalizácie, spánok, pohotovostný režim aplikácie"</string>
     <string name="keywords_color_mode" msgid="6362744316886077510">"sýta, RGB, sRGB, farba, naturálna, štandardná"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"odomknúť prejdením prstom, heslo, vzor, pin"</string>
+    <string name="keywords_profile_challenge" msgid="789611397846512845">"pracovná výzva, práca, profil"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Nastavenie značky NFC (Wi-Fi)"</string>
     <string name="write_tag" msgid="8571858602896222537">"Zapísať"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Klepnutím na značku začnete zápis..."</string>
@@ -2403,12 +2400,9 @@
     <string name="ringtone_title" msgid="5379026328015343686">"Tón zvonenia telefónu"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Predvolený tón upozornení"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Pri hovoroch aj vibrovať"</string>
-    <!-- no translation found for master_mono_title (8123291759393322551) -->
-    <skip />
-    <!-- no translation found for master_mono_on (53180785336592938) -->
-    <skip />
-    <!-- no translation found for master_mono_off (1232052197508060475) -->
-    <skip />
+    <string name="master_mono_title" msgid="8123291759393322551">"Prehrávanie v režime mono"</string>
+    <string name="master_mono_on" msgid="53180785336592938">"Vždy prehrávať zvuk v režime mono"</string>
+    <string name="master_mono_off" msgid="1232052197508060475">"Vždy prehrávať zvuk v režime mono"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Iné zvuky"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Zvuky číselnej klávesnice"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Zvuky zámky obrazovky"</string>
@@ -2841,8 +2835,6 @@
     <string name="condition_cellular_summary" msgid="1818046558419658463">"Internet je k dispozícii len prostredníctvom siete Wi-Fi"</string>
     <string name="condition_bg_data_title" msgid="1422001615923482010">"Dáta na pozadí sú vypnuté"</string>
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Dáta na pozadí sú dostupné iba prostredníctvom siete Wi-Fi. Môže to ovplyvniť niektoré aplikácie či služby, keď sieť Wi-Fi nie je dostupná."</string>
-    <!-- no translation found for suggestions_title (8758376306825920705) -->
-    <skip />
-    <!-- no translation found for suggestion_remove (904627293892092439) -->
-    <skip />
+    <string name="suggestions_title" msgid="8758376306825920705">"Návrhy (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
+    <string name="suggestion_remove" msgid="904627293892092439">"Odstrániť"</string>
 </resources>
