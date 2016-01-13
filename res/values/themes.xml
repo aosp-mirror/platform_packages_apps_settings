@@ -255,6 +255,9 @@
 
         <item name="android:windowAnimationStyle">@style/ConfirmDeviceCredentialsAnimationStyle</item>
     </style>
+    <style name="Theme.ConfirmDeviceCredentialsWork" parent="Theme.ConfirmDeviceCredentialsDark">
+        <item name="@*android:regularColor">@*android:color/white</item>
+    </style>
 
     <style name="Theme.FingerprintEnroll" parent="@*android:style/Theme.Material.Settings.NoActionBar">
         <item name="android:windowAnimationStyle">@style/Animation.SuwWindowAnimation</item>

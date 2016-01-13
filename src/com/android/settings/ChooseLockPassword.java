@@ -238,7 +238,7 @@ public class ChooseLockPassword extends SettingsActivity {
                 throw new SecurityException("Fragment contained in wrong activity");
             }
             // Only take this argument into account if it belongs to the current profile.
-            mUserId = Utils.getSameOwnerUserId(getActivity(), intent.getExtras());
+            mUserId = Utils.getUserIdFromBundle(getActivity(), intent.getExtras());
             mRequestedQuality = Math.max(intent.getIntExtra(LockPatternUtils.PASSWORD_TYPE_KEY,
                     mRequestedQuality), mLockPatternUtils.getRequestedPasswordQuality(
                     mUserId));

@@ -18,8 +18,10 @@ package com.android.settings;
 
 import android.app.Fragment;
 import android.app.KeyguardManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.UserManager;
 import android.view.MenuItem;
 import android.view.WindowManager;
 
@@ -33,7 +35,12 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
 
     @Override
     protected void onCreate(Bundle savedState) {
-        if (getIntent().getBooleanExtra(ConfirmDeviceCredentialBaseFragment.DARK_THEME, false)) {
+        int credentialOwnerUserId = Utils.getCredentialOwnerUserId(this,
+                Utils.getUserIdFromBundle(this, getIntent().getExtras()));
+        if (Utils.isManagedProfile(UserManager.get(this), credentialOwnerUserId)) {
+            setTheme(R.style.Theme_ConfirmDeviceCredentialsWork);
+        } else if (getIntent().getBooleanExtra(
+                ConfirmDeviceCredentialBaseFragment.DARK_THEME, false)) {
             setTheme(R.style.Theme_ConfirmDeviceCredentialsDark);
             mDark = true;
         }
