@@ -38,6 +38,7 @@ import com.android.internal.logging.MetricsLogger;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settingslib.RestrictedPreference;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -167,6 +168,12 @@ public class PrivacySettings extends SettingsPreferenceFragment implements Index
         mConfigure.setEnabled(configureEnabled);
         mConfigure.setIntent(configIntent);
         setConfigureSummary(configSummary);
+
+        RestrictedPreference networkResetPref = (RestrictedPreference) findPreference(
+                NETWORK_RESET);
+        if (networkResetPref != null) {
+            networkResetPref.checkRestrictionAndSetDisabled(UserManager.DISALLOW_NETWORK_RESET);
+        }
     }
 
     private void setConfigureSummary(String summary) {
@@ -289,10 +296,6 @@ public class PrivacySettings extends SettingsPreferenceFragment implements Index
             nonVisibleKeys.add(BACKUP_DATA);
             nonVisibleKeys.add(AUTO_RESTORE);
             nonVisibleKeys.add(CONFIGURE_ACCOUNT);
-        }
-        if (UserManager.get(context).hasUserRestriction(
-                UserManager.DISALLOW_NETWORK_RESET)) {
-            nonVisibleKeys.add(NETWORK_RESET);
         }
     }
 }

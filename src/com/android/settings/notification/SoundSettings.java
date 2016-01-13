@@ -37,6 +37,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.Vibrator;
 import android.preference.SeekBarVolumizer;
@@ -57,12 +58,16 @@ import com.android.settings.Utils;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedPreference;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 public class SoundSettings extends SettingsPreferenceFragment implements Indexable {
     private static final String TAG = "SoundSettings";
@@ -164,8 +169,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements Indexab
         } catch (IllegalArgumentException ignored) {
             isCellBroadcastAppLinkEnabled = false;  // CMAS app not installed
         }
-        if (!mUserManager.isAdminUser() || !isCellBroadcastAppLinkEnabled
-                || mUserManager.hasUserRestriction(UserManager.DISALLOW_CONFIG_CELL_BROADCASTS)) {
+        if (!mUserManager.isAdminUser() || !isCellBroadcastAppLinkEnabled) {
             removePreference(KEY_CELL_BROADCAST_SETTINGS);
         }
         initRingtones();
@@ -186,12 +190,22 @@ public class SoundSettings extends SettingsPreferenceFragment implements Indexab
         for (VolumeSeekBarPreference volumePref : mVolumePrefs) {
             volumePref.onActivityResume();
         }
-        boolean isRestricted = mUserManager.hasUserRestriction(UserManager.DISALLOW_ADJUST_VOLUME);
+
+        final EnforcedAdmin admin = RestrictedLockUtils.checkIfRestrictionEnforced(mContext,
+                UserManager.DISALLOW_ADJUST_VOLUME, UserHandle.myUserId());
         for (String key : RESTRICTED_KEYS) {
             Preference pref = findPreference(key);
-            if (pref != null) {
-                pref.setEnabled(!isRestricted);
+            if (pref instanceof RestrictedPreference) {
+                ((RestrictedPreference) pref).setDisabledByAdmin(admin);
+            } else if (pref != null) {
+                pref.setEnabled(admin == null);
             }
+        }
+        RestrictedPreference broadcastSettingsPref = (RestrictedPreference) findPreference(
+                KEY_CELL_BROADCAST_SETTINGS);
+        if (broadcastSettingsPref != null) {
+            broadcastSettingsPref.checkRestrictionAndSetDisabled(
+                    UserManager.DISALLOW_CONFIG_CELL_BROADCASTS);
         }
     }
 

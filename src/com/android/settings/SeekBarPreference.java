@@ -28,10 +28,12 @@ import android.view.View;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
+import com.android.settingslib.RestrictedPreference;
+
 /**
  * Based on android.preference.SeekBarPreference, but uses support preference as base.
  */
-public class SeekBarPreference extends Preference
+public class SeekBarPreference extends RestrictedPreference
         implements OnSeekBarChangeListener, View.OnKeyListener {
 
     private int mProgress;

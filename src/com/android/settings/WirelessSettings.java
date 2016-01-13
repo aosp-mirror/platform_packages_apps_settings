@@ -51,6 +51,7 @@ import com.android.internal.telephony.TelephonyProperties;
 import com.android.settings.nfc.NfcEnabler;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settingslib.RestrictedPreference;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -226,7 +227,8 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
         final Activity activity = getActivity();
         mAirplaneModePreference = (SwitchPreference) findPreference(KEY_TOGGLE_AIRPLANE);
         SwitchPreference nfc = (SwitchPreference) findPreference(KEY_TOGGLE_NFC);
-        PreferenceScreen androidBeam = (PreferenceScreen) findPreference(KEY_ANDROID_BEAM_SETTINGS);
+        RestrictedPreference androidBeam = (RestrictedPreference) findPreference(
+                KEY_ANDROID_BEAM_SETTINGS);
 
         mAirplaneModeEnabler = new AirplaneModeEnabler(activity, mAirplaneModePreference);
         mNfcEnabler = new NfcEnabler(activity, nfc, androidBeam);
@@ -258,7 +260,7 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
         }
         // Disable VPN.
         // TODO: http://b/23693383
-        if (!isAdmin || mUm.hasUserRestriction(UserManager.DISALLOW_CONFIG_VPN)) {
+        if (!isAdmin) {
             removePreference(KEY_VPN_SETTINGS);
         }
 
@@ -315,10 +317,10 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
         // Disable Tethering if it's not allowed or if it's a wifi-only device
         final ConnectivityManager cm =
                 (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (!isAdmin || !cm.isTetheringSupported()
-                || mUm.hasUserRestriction(UserManager.DISALLOW_CONFIG_TETHERING)) {
+
+        if (!isAdmin || !cm.isTetheringSupported()) {
             getPreferenceScreen().removePreference(findPreference(KEY_TETHER_SETTINGS));
-        } else {
+        } else if (!mUm.hasUserRestriction(UserManager.DISALLOW_CONFIG_TETHERING)) {
             Preference p = findPreference(KEY_TETHER_SETTINGS);
             p.setTitle(com.android.settingslib.Utils.getTetheringLabel(cm));
 
@@ -346,6 +348,19 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
                     context, ImsManager.getWfcMode(context)));
         } else {
             removePreference(KEY_WFC_SETTINGS);
+        }
+
+        RestrictedPreference tetherSettingsPref = (RestrictedPreference) findPreference(
+                KEY_TETHER_SETTINGS);
+        if (tetherSettingsPref != null) {
+            tetherSettingsPref.checkRestrictionAndSetDisabled(
+                    UserManager.DISALLOW_CONFIG_TETHERING);
+        }
+
+        RestrictedPreference vpnSettingsPref = (RestrictedPreference) findPreference(
+                KEY_VPN_SETTINGS);
+        if (vpnSettingsPref != null) {
+            vpnSettingsPref.checkRestrictionAndSetDisabled(UserManager.DISALLOW_CONFIG_VPN);
         }
     }
 

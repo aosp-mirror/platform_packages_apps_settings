@@ -25,15 +25,21 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
+import com.android.settingslib.RestrictedPreference;
+
 /**
  * A preference item that can dim the icon when it's disabled, either directly or because its parent
  * is disabled.
  */
-public class DimmableIconPreference extends Preference {
+public class DimmableIconPreference extends RestrictedPreference {
     private static final int ICON_ALPHA_ENABLED = 255;
     private static final int ICON_ALPHA_DISABLED = 102;
 
     private final CharSequence mContentDescription;
+
+    public DimmableIconPreference(Context context) {
+        this(context, (AttributeSet) null);
+    }
 
     public DimmableIconPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -54,23 +60,12 @@ public class DimmableIconPreference extends Preference {
     }
 
     @Override
-    public void onParentChanged(Preference parent, boolean disableChild) {
-        dimIcon(disableChild);
-        super.onParentChanged(parent, disableChild);
-    }
-
-    @Override
-    public void setEnabled(boolean enabled) {
-        dimIcon(!enabled);
-        super.setEnabled(enabled);
-    }
-
-    @Override
     public void onBindViewHolder(PreferenceViewHolder view) {
         super.onBindViewHolder(view);
         if (!TextUtils.isEmpty(mContentDescription)) {
             final TextView titleView = (TextView) view.findViewById(android.R.id.title);
             titleView.setContentDescription(mContentDescription);
         }
+        dimIcon(!isEnabled());
     }
 }

@@ -21,7 +21,7 @@
             android:key="enable_calling"
             android:title="@string/user_enable_calling_sms"
             android:persistent="false" />
-    <Preference
+    <com.android.settingslib.RestrictedPreference
             android:key="remove_user"
             android:title="@string/user_remove_user" />
 
