@@ -79,13 +79,15 @@ public class FingerprintEnrollSidecar extends InstrumentedFragment {
         mEnrolling = true;
     }
 
-    private void cancelEnrollment() {
+    boolean cancelEnrollment() {
         mHandler.removeCallbacks(mTimeoutRunnable);
         if (mEnrolling) {
             mEnrollmentCancel.cancel();
             mEnrolling = false;
             mEnrollmentSteps = -1;
+            return true;
         }
+        return false;
     }
 
     public void setListener(Listener listener) {
@@ -131,6 +133,7 @@ public class FingerprintEnrollSidecar extends InstrumentedFragment {
             if (mListener != null) {
                 mListener.onEnrollmentError(errMsgId, errString);
             }
+            mEnrolling = false;
         }
     };
 
@@ -150,5 +153,9 @@ public class FingerprintEnrollSidecar extends InstrumentedFragment {
         void onEnrollmentHelp(CharSequence helpString);
         void onEnrollmentError(int errMsgId, CharSequence errString);
         void onEnrollmentProgressChange(int steps, int remaining);
+    }
+
+    public boolean isEnrolling() {
+        return mEnrolling;
     }
 }
