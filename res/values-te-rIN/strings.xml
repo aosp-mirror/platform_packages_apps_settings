@@ -77,17 +77,11 @@
     <string name="small_font" msgid="2295331917424072635">"చిన్నది"</string>
     <string name="medium_font" msgid="2068475425515133701">"మధ్యస్థం"</string>
     <string name="large_font" msgid="599055175160971446">"పెద్దది"</string>
+    <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"చిన్నదిగా చేస్తుంది"</string>
+    <string name="font_size_make_larger_desc" msgid="4316986572233686061">"పెద్దదిగా చేస్తుంది"</string>
     <string name="font_size_save" msgid="3450855718056759095">"సరే"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"USB నిల్వ"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"SD కార్డు"</string>
-    <string name="battery_info_status_unknown" msgid="196130600938058547">"తెలియదు"</string>
-    <string name="battery_info_status_charging" msgid="1705179948350365604">"ఛార్జ్ అవుతోంది"</string>
-    <string name="battery_info_status_charging_ac" msgid="2909861890674399949">"ACలో ఛార్జ్ అవుతోంది"</string>
-    <string name="battery_info_status_charging_usb" msgid="2207489369680923929">"USB ద్వారా ఛార్జ్ అవుతోంది"</string>
-    <string name="battery_info_status_charging_wireless" msgid="3574032603735446573">"వైర్‌లెస్‌ ద్వారా ఛార్జ్ అవుతోంది"</string>
-    <string name="battery_info_status_discharging" msgid="310932812698268588">"ఛార్జ్ కావడం లేదు"</string>
-    <string name="battery_info_status_not_charging" msgid="2820070506621483576">"ఛార్జ్ కావడం లేదు"</string>
-    <string name="battery_info_status_full" msgid="2824614753861462808">"నిండింది"</string>
     <string name="bluetooth" msgid="5549625000628014477">"బ్లూటూత్"</string>
     <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"సమీపంలోని అన్ని బ్లూటూత్ పరికరాలకు (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>) కనిపించేలా చేయి"</string>
     <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"సమీపంలోని అన్ని బ్లూటూత్ పరికరాలకు కనిపించేలా చేయి"</string>
@@ -1206,6 +1200,7 @@
     <string name="location_sources_heading" msgid="1278732419851088319">"స్థానం మూలాలు"</string>
     <string name="about_settings" product="tablet" msgid="593457295516533765">"టాబ్లెట్ పరిచయం"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"ఫోన్ పరిచయం"</string>
+    <string name="about_settings" product="emulator" msgid="221313099578564438">"పునరుత్పాదిత పరికరం గురించి"</string>
     <string name="about_settings_summary" msgid="3371517697156165959">"చట్టపరమైన సమాచారం, స్థితి, సాఫ్ట్‌వేర్ సంస్కరణను వీక్షించండి"</string>
     <string name="legal_information" msgid="5769301644270604095">"చట్టబద్ధమైన సమాచారం"</string>
     <string name="contributors_title" msgid="5917703088825286504">"సహకారులు"</string>
@@ -1270,6 +1265,8 @@
     <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"అన్‌లాక్ నమూనాను ఎలా గీయాలి"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts" msgid="6909161623701848863">"చాలా ఎక్కువ తప్పు ప్రయత్నాలు చేసారు. <xliff:g id="NUMBER">%d</xliff:g> సెకన్లలో మళ్లీ ప్రయత్నించండి."</string>
     <string name="activity_not_found" msgid="5551664692991605325">"మీ ఫోన్‌లో అనువర్తనం ఇన్‌స్టాల్ చేయబడలేదు."</string>
+    <string name="lock_settings_profile_title" msgid="7819021341281339182">"కార్యాలయ ప్రొఫైల్‌"</string>
+    <string name="lock_settings_profile_label" msgid="4423909470339292809">"కార్యాలయ ప్రొఫైల్ భద్రత"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"అనువర్తనాలను నిర్వహించు"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"ఇన్‌స్టాల్ చేయబడిన అనువర్తనాలను నిర్వహించు మరియు తీసివేయి"</string>
     <string name="applications_settings" msgid="1721442176406964682">"అనువర్తనాలు"</string>
@@ -1292,6 +1289,11 @@
     <string name="cache_header_label" msgid="1877197634162461830">"కాష్"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"కాష్‌ను క్లియర్ చేయి"</string>
     <string name="cache_size_label" msgid="7505481393108282913">"కాష్"</string>
+    <plurals name="uri_permissions_text" formatted="false" msgid="3983110543017963732">
+      <item quantity="other">%d అంశాలు</item>
+      <item quantity="one">1 అంశం</item>
+    </plurals>
+    <string name="clear_uri_btn_text" msgid="8575655132961012158">"ప్రాప్యతను తీసివేయి"</string>
     <string name="controls_label" msgid="7611113077086853799">"నియంత్రణలు"</string>
     <string name="force_stop" msgid="7435006169872876756">"నిర్బంధ ఆపివేత"</string>
     <string name="total_size_label" msgid="1048676419552557254">"మొత్తం"</string>
@@ -1654,12 +1656,6 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> ఉంది"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g>లోపు ఛార్జ్ చేయాలి"</string>
-    <string name="power_discharging_duration" msgid="1605929174734600590">"<xliff:g id="LEVEL">%1$s</xliff:g> - సుమారు <xliff:g id="TIME">%2$s</xliff:g> మిగిలి ఉంది"</string>
-    <string name="power_charging" msgid="1779532561355864267">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATE">%2$s</xliff:g>"</string>
-    <string name="power_charging_duration" msgid="2853265177761520490">"<xliff:g id="LEVEL">%1$s</xliff:g> - పూర్తిగా నిండటానికి <xliff:g id="TIME">%2$s</xliff:g>"</string>
-    <string name="power_charging_duration_ac" msgid="3969186192576594254">"<xliff:g id="LEVEL">%1$s</xliff:g> - ACలో పూర్తిగా నిండటానికి <xliff:g id="TIME">%2$s</xliff:g>"</string>
-    <string name="power_charging_duration_usb" msgid="182405645340976546">"<xliff:g id="LEVEL">%1$s</xliff:g> - USB ద్వారా పూర్తిగా నిండటానికి <xliff:g id="TIME">%2$s</xliff:g>"</string>
-    <string name="power_charging_duration_wireless" msgid="1829295708243159464">"<xliff:g id="LEVEL">%1$s</xliff:g> - వైర్‌లెస్ నుండి పూర్తిగా నిండటానికి <xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="power_usage_list_summary" msgid="2409288197839512482">"పూర్తిగా ఛార్జ్ అయినప్పటి నుండి ఉపయోగిస్తున్నవి"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"అన్‌ప్లగ్ చేసినప్పటి నుండి బ్యాటరీ వినియోగం"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"రీసెట్ చేసినప్పటి నుండి బ్యాటరీ వినియోగం"</string>
@@ -2355,6 +2351,7 @@
     <string name="keywords_ignore_optimizations" msgid="6102579291119055029">"అనుకూలీకరణలను విస్మరించు, నిద్రావస్థ, అనువర్తన స్టాండ్‌బై"</string>
     <string name="keywords_color_mode" msgid="6362744316886077510">"సచేతనం, RGB, sRGB, రంగు, సహజం, ప్రామాణికం"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"అన్‌లాక్ చేయడానికి స్లైడ్ చేయండి, పాస్‌వర్డ్, నమూనా, PIN"</string>
+    <string name="keywords_profile_challenge" msgid="789611397846512845">"కార్యాలయ సవాలు, కార్యాలయం, ప్రొఫైల్"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Wi-Fi NFC ట్యాగ్‌ను సెటప్ చేయండి"</string>
     <string name="write_tag" msgid="8571858602896222537">"వ్రాయి"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"వ్రాయడానికి ట్యాగ్‌ను నొక్కండి..."</string>

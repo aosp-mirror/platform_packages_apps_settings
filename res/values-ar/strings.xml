@@ -81,17 +81,11 @@
     <string name="small_font" msgid="2295331917424072635">"صغير"</string>
     <string name="medium_font" msgid="2068475425515133701">"متوسط"</string>
     <string name="large_font" msgid="599055175160971446">"كبير"</string>
+    <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"تصغير"</string>
+    <string name="font_size_make_larger_desc" msgid="4316986572233686061">"تكبير"</string>
     <string name="font_size_save" msgid="3450855718056759095">"موافق"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"‏وحدة تخزين USB"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"‏بطاقة SD"</string>
-    <string name="battery_info_status_unknown" msgid="196130600938058547">"غير معروف"</string>
-    <string name="battery_info_status_charging" msgid="1705179948350365604">"شحن"</string>
-    <string name="battery_info_status_charging_ac" msgid="2909861890674399949">"جارٍ الشحن بتيار متردد"</string>
-    <string name="battery_info_status_charging_usb" msgid="2207489369680923929">"‏جارٍ الشحن عبر USB"</string>
-    <string name="battery_info_status_charging_wireless" msgid="3574032603735446573">"جارٍ الشحن لاسلكيًا"</string>
-    <string name="battery_info_status_discharging" msgid="310932812698268588">"لا يتم الشحن"</string>
-    <string name="battery_info_status_not_charging" msgid="2820070506621483576">"لا يتم الشحن"</string>
-    <string name="battery_info_status_full" msgid="2824614753861462808">"ممتلئة"</string>
     <string name="bluetooth" msgid="5549625000628014477">"بلوتوث"</string>
     <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"مرئي لجميع أجهزة بلوتوث القريبة (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
     <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"مرئي لجميع أجهزة بلوتوث القريبة"</string>
@@ -1242,6 +1236,7 @@
     <string name="location_sources_heading" msgid="1278732419851088319">"مصادر الموقع"</string>
     <string name="about_settings" product="tablet" msgid="593457295516533765">"حول الجهاز اللوحي"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"حول الهاتف"</string>
+    <string name="about_settings" product="emulator" msgid="221313099578564438">"حول الجهاز في وضع المحاكاة"</string>
     <string name="about_settings_summary" msgid="3371517697156165959">"عرض المعلومات القانونية والحالة وإصدار البرنامج"</string>
     <string name="legal_information" msgid="5769301644270604095">"المعلومات القانونية"</string>
     <string name="contributors_title" msgid="5917703088825286504">"المساهمون"</string>
@@ -1306,6 +1301,8 @@
     <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"كيفية رسم نقش إلغاء تأمين"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts" msgid="6909161623701848863">"تم إجراء عدد كبير جدًا من المحاولات غير الصحيحة. أعد المحاولة خلال <xliff:g id="NUMBER">%d</xliff:g> من الثواني."</string>
     <string name="activity_not_found" msgid="5551664692991605325">"لم يتم تثبيت التطبيق على هاتفك."</string>
+    <string name="lock_settings_profile_title" msgid="7819021341281339182">"الملف الشخصي للعمل"</string>
+    <string name="lock_settings_profile_label" msgid="4423909470339292809">"أمان الملف الشخصي للعمل"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"إدارة التطبيقات"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"إدارة التطبيقات المثبتة وإزالتها"</string>
     <string name="applications_settings" msgid="1721442176406964682">"التطبيقات"</string>
@@ -1328,6 +1325,15 @@
     <string name="cache_header_label" msgid="1877197634162461830">"ذاكرة التخزين المؤقت"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"محو ذاكرة التخزين المؤقت"</string>
     <string name="cache_size_label" msgid="7505481393108282913">"ذاكرة التخزين المؤقت"</string>
+    <plurals name="uri_permissions_text" formatted="false" msgid="3983110543017963732">
+      <item quantity="zero">‏%d عنصر</item>
+      <item quantity="two">‏عنصران (%d)</item>
+      <item quantity="few">‏%d عناصر</item>
+      <item quantity="many">‏%d عنصرًا</item>
+      <item quantity="other">‏%d عنصر</item>
+      <item quantity="one">عنصر واحد</item>
+    </plurals>
+    <string name="clear_uri_btn_text" msgid="8575655132961012158">"محو إمكانية الدخول"</string>
     <string name="controls_label" msgid="7611113077086853799">"عناصر التحكم"</string>
     <string name="force_stop" msgid="7435006169872876756">"فرض الإيقاف"</string>
     <string name="total_size_label" msgid="1048676419552557254">"المجموع"</string>
@@ -1714,12 +1720,6 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"الوقت المتبقي: <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> للشحن"</string>
-    <string name="power_discharging_duration" msgid="1605929174734600590">"<xliff:g id="LEVEL">%1$s</xliff:g> - تبقى <xliff:g id="TIME">%2$s</xliff:g> تقريبًا"</string>
-    <string name="power_charging" msgid="1779532561355864267">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATE">%2$s</xliff:g>"</string>
-    <string name="power_charging_duration" msgid="2853265177761520490">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g> حتى الاكتمال"</string>
-    <string name="power_charging_duration_ac" msgid="3969186192576594254">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g> حتى الاكتمال باستخدام التيار المتردد"</string>
-    <string name="power_charging_duration_usb" msgid="182405645340976546">"‏<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g> حتى الاكتمال عبر USB"</string>
-    <string name="power_charging_duration_wireless" msgid="1829295708243159464">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g> حتى الاكتمال بالشحن اللاسلكي"</string>
     <string name="power_usage_list_summary" msgid="2409288197839512482">"الاستخدام منذ آخر شحن كامل"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"استخدام البطارية عند فصل الطاقة"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"استخدام البطارية منذ إعادة التعيين"</string>
@@ -2415,6 +2415,7 @@
     <string name="keywords_ignore_optimizations" msgid="6102579291119055029">"تاجه التخصيصات، قيلولة، تطبيقات وضع الاستعداد"</string>
     <string name="keywords_color_mode" msgid="6362744316886077510">"‏نابض بالحياة، نموذج أحمر أخضر أزرق، srgb، لون، طبيعي، قياسي"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"مرر لإلغاء التأمين، كلمة مرور، نقش، رقم تعريف شخصي"</string>
+    <string name="keywords_profile_challenge" msgid="789611397846512845">"المنافسة في العمل، عمل، ملف شخصي"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"‏إعداد علامة NFC عبر Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"كتابة"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"انقر على كلمة علامة لكتابة..."</string>

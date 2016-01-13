@@ -77,17 +77,11 @@
     <string name="small_font" msgid="2295331917424072635">"નાનું"</string>
     <string name="medium_font" msgid="2068475425515133701">"મધ્યમ"</string>
     <string name="large_font" msgid="599055175160971446">"મોટું"</string>
+    <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"વધુ નાનું બનાવો"</string>
+    <string name="font_size_make_larger_desc" msgid="4316986572233686061">"વધુ મોટું બનાવો"</string>
     <string name="font_size_save" msgid="3450855718056759095">"ઑકે"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"USB સંગ્રહ"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"SD કાર્ડ"</string>
-    <string name="battery_info_status_unknown" msgid="196130600938058547">"અજાણ્યું"</string>
-    <string name="battery_info_status_charging" msgid="1705179948350365604">"ચાર્જ થઈ રહ્યું છે"</string>
-    <string name="battery_info_status_charging_ac" msgid="2909861890674399949">"AC પર ચાર્જિંગ"</string>
-    <string name="battery_info_status_charging_usb" msgid="2207489369680923929">"USB થી ચાર્જિંગ"</string>
-    <string name="battery_info_status_charging_wireless" msgid="3574032603735446573">"વાયરલેસથી ચાર્જિંગ"</string>
-    <string name="battery_info_status_discharging" msgid="310932812698268588">"ચાર્જ થઈ રહ્યું નથી"</string>
-    <string name="battery_info_status_not_charging" msgid="2820070506621483576">"ચાર્જ થઈ રહ્યું નથી"</string>
-    <string name="battery_info_status_full" msgid="2824614753861462808">"પૂર્ણ"</string>
     <string name="bluetooth" msgid="5549625000628014477">"Bluetooth"</string>
     <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"નજીકનાં તમામ Bluetooth ઉપકરણો પર દૃશ્યક્ષમ (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
     <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"નજીકનાં તમામ Bluetooth ઉપકરણો પર દૃશ્યક્ષમ"</string>
@@ -1206,6 +1200,7 @@
     <string name="location_sources_heading" msgid="1278732419851088319">"સ્થાન સ્ત્રોતો"</string>
     <string name="about_settings" product="tablet" msgid="593457295516533765">"ટેબ્લેટ વિશે"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"ફોન વિશે"</string>
+    <string name="about_settings" product="emulator" msgid="221313099578564438">"ઇમ્યુલેટ કરેલ ઉપકરણ વિશે"</string>
     <string name="about_settings_summary" msgid="3371517697156165959">"કાનૂની માહિતી, સ્થિતિ, સોફ્ટવેર સંસ્કરણ જુઓ"</string>
     <string name="legal_information" msgid="5769301644270604095">"કાનૂની માહિતી"</string>
     <string name="contributors_title" msgid="5917703088825286504">"સહયોગકર્તાઓ"</string>
@@ -1270,6 +1265,8 @@
     <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"એક અનલૉક પેટર્ન કેવી રીતે દોરવી"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts" msgid="6909161623701848863">"ઘણા બધા ખોટા પ્રયત્નો. <xliff:g id="NUMBER">%d</xliff:g> સેકંડમાં ફરી પ્રયાસ કરો."</string>
     <string name="activity_not_found" msgid="5551664692991605325">"તમારા ફોન પર એપ્લિકેશન ઇન્સ્ટોલ કરેલ નથી."</string>
+    <string name="lock_settings_profile_title" msgid="7819021341281339182">"કાર્ય પ્રોફાઇલ"</string>
+    <string name="lock_settings_profile_label" msgid="4423909470339292809">"કાર્ય પ્રોફાઇલ સુરક્ષા"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"એપ્લિકેશન્સનું સંચાલન કરો"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"ઇન્સ્ટોલ કરેલ એપ્લિકેશન્સનું સંચાલન કરો અને દૂર કરો"</string>
     <string name="applications_settings" msgid="1721442176406964682">"એપ્લિકેશનો"</string>
@@ -1292,6 +1289,11 @@
     <string name="cache_header_label" msgid="1877197634162461830">"કેશ"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"કેશ સાફ કરો"</string>
     <string name="cache_size_label" msgid="7505481393108282913">"કેશ"</string>
+    <plurals name="uri_permissions_text" formatted="false" msgid="3983110543017963732">
+      <item quantity="one">%d આઇટમ</item>
+      <item quantity="other">%d આઇટમ</item>
+    </plurals>
+    <string name="clear_uri_btn_text" msgid="8575655132961012158">"સાફ કરવાની ઍક્સેસ"</string>
     <string name="controls_label" msgid="7611113077086853799">"નિયંત્રણો"</string>
     <string name="force_stop" msgid="7435006169872876756">"ફરજિયાત બંધ કરો"</string>
     <string name="total_size_label" msgid="1048676419552557254">"કુલ"</string>
@@ -1525,15 +1527,13 @@
     <string name="usage_time_label" msgid="295954901452833058">"વપરાશ સમય"</string>
     <string name="accessibility_settings" msgid="3975902491934816215">"ઍક્સેસિબિલિટી"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"ઍક્સેસિબિલિટી સેટિંગ્સ"</string>
-    <!-- no translation found for accessibility_settings_for_setup_wizard_title (7148099953002332324) -->
-    <skip />
+    <string name="accessibility_settings_for_setup_wizard_title" msgid="7148099953002332324">"મને માર્ગદર્શન આપો"</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"સેવાઓ"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"સિસ્ટમ"</string>
     <string name="accessibility_display_title" msgid="7610175687949675162">"ડિસ્પ્લે"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"કૅપ્શન્સ"</string>
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"વિસ્તૃતીકરણ હાવભાવ"</string>
-    <!-- no translation found for accessibility_screen_magnification_summary (7545798238172451540) -->
-    <skip />
+    <string name="accessibility_screen_magnification_summary" msgid="7545798238172451540">"એક આંગળી વડે સ્ક્રીનને ત્રણ વાર ટૅપ કરીને ઝૂમ વધારો અને ઘટાડો.\n\nઝૂમ વધારેલ હોય ત્યારે તમે આ કરી શકો છો:\n"<ul><li>"પૅન: બે કે વધુ આંગળીઓને સમગ્ર સ્ક્રીન પર ખસેડવી."</li>\n<li>"ઝૂમ સ્તર સમાયોજન: બે કે વધુ આંગળીઓને એકસાથે પિંચ કરવી અથવા તેમને એકબીજાથી દૂર ફેલાવવી."</li>\n<li>"અસ્થાયીરૂપે વિસ્તૃતી: ત્રણ વાર ટૅપ કરી, પકડી રાખી અને સ્ક્રીનના વિભિન્ન ભાગોનું અન્વેષણ કરવા માટે તમારી આંગળીને ખેંચવી. આપણી પહેલાની સ્થિતિ પર પાછા આવવા માટે તમારી આંગળીને ઉઠાવી લો."</li></ul>\n\n"વિસ્તૃતીકરણ માટે ત્રણ વાર ટૅપ કરવું કીબોર્ડ અને નેવિગેશન બાર સિવાય સર્વત્ર કાર્ય કરે છે."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"ઍક્સેસિબિલિટી શોર્ટકટ"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"ચાલુ"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"બંધ"</string>
@@ -1656,12 +1656,6 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> બાકી"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"ચાર્જ થવામાં <xliff:g id="UNTIL_CHARGED">%1$s</xliff:g>"</string>
-    <string name="power_discharging_duration" msgid="1605929174734600590">"<xliff:g id="LEVEL">%1$s</xliff:g> - આશરે <xliff:g id="TIME">%2$s</xliff:g> બાકી"</string>
-    <string name="power_charging" msgid="1779532561355864267">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATE">%2$s</xliff:g>"</string>
-    <string name="power_charging_duration" msgid="2853265177761520490">"સંપૂર્ણ થવામાં <xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g>"</string>
-    <string name="power_charging_duration_ac" msgid="3969186192576594254">"<xliff:g id="LEVEL">%1$s</xliff:g>, AC પર પૂર્ણ ચાર્જ થયાંને <xliff:g id="TIME">%2$s</xliff:g>"</string>
-    <string name="power_charging_duration_usb" msgid="182405645340976546">"<xliff:g id="LEVEL">%1$s</xliff:g>, USB પર પૂર્ણ ચાર્જ થયાંને <xliff:g id="TIME">%2$s</xliff:g>"</string>
-    <string name="power_charging_duration_wireless" msgid="1829295708243159464">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g> વાયરલેસ દ્વારા પૂર્ણ થાય ત્યાં સુધી"</string>
     <string name="power_usage_list_summary" msgid="2409288197839512482">"છેલ્લા પૂર્ણ ચાર્જ પછીનો ઉપયોગ"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"અનપ્લગ થયું ત્યારથી બૅટરી ઉપયોગ"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"રીસેટ પછીનો બૅટરી ઉપયોગ"</string>
@@ -2359,6 +2353,7 @@
     <string name="keywords_ignore_optimizations" msgid="6102579291119055029">"ઓપ્ટિમાઇઝેશન્સને અવગણો, ડોઝ, ઍપ્લિકેશન સ્ટેન્ડબાય"</string>
     <string name="keywords_color_mode" msgid="6362744316886077510">"વાઇબ્રન્ટ, RGB, sRGB, રંગ, કુદરતી, માનક"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"અનલૉક કરવા માટે સ્લાઇડ કરો, પાસવર્ડ, પેટર્ન, PIN"</string>
+    <string name="keywords_profile_challenge" msgid="789611397846512845">"કાર્ય પડકાર, કાર્ય, પ્રોફાઇલ"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Wi-Fi NFC ટેગ સેટ કરો"</string>
     <string name="write_tag" msgid="8571858602896222537">"લખો"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"લખવા માટે ટેગ પર ટેપ કરો..."</string>
@@ -2375,12 +2370,9 @@
     <string name="ringtone_title" msgid="5379026328015343686">"ફોન રિંગટોન"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"ડિફોલ્ટ સૂચના રિંગટોન"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"કૉલ્સ માટે પણ વાઇબ્રેટ કરો"</string>
-    <!-- no translation found for master_mono_title (8123291759393322551) -->
-    <skip />
-    <!-- no translation found for master_mono_on (53180785336592938) -->
-    <skip />
-    <!-- no translation found for master_mono_off (1232052197508060475) -->
-    <skip />
+    <string name="master_mono_title" msgid="8123291759393322551">"મૉનો પ્લેબેક"</string>
+    <string name="master_mono_on" msgid="53180785336592938">"ઑડિઓ હંમેશા મૉનોમાં ચલાવો"</string>
+    <string name="master_mono_off" msgid="1232052197508060475">"ઑડિઓ હંમેશા મૉનોમાં ચલાવો"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"અન્ય ધ્વનિઓ"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"ડાયલપેડ ટોન્સ"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"સ્ક્રીન લૉકિંગ ધ્વનિઓ"</string>
@@ -2795,8 +2787,6 @@
     <string name="condition_cellular_summary" msgid="1818046558419658463">"ઇન્ટરનેટ માત્ર Wi-Fi મારફતે ઉપલબ્ધ છે"</string>
     <string name="condition_bg_data_title" msgid="1422001615923482010">"પૃષ્ઠભૂમિ ડેટા બંધ છે"</string>
     <string name="condition_bg_data_summary" msgid="656957852895282228">"પૃષ્ઠભૂમિ ડેટા માત્ર Wi-Fi મારફતે ઉપલબ્ધ છે. જ્યારે Wi-Fi ઉપલબ્ધ ન હોય ત્યારે આ કેટલીક ઍપ્લિકેશનો અથવા સેવાઓને પ્રભાવિત કરી શકે છે."</string>
-    <!-- no translation found for suggestions_title (8758376306825920705) -->
-    <skip />
-    <!-- no translation found for suggestion_remove (904627293892092439) -->
-    <skip />
+    <string name="suggestions_title" msgid="8758376306825920705">"સૂચનો (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
+    <string name="suggestion_remove" msgid="904627293892092439">"દૂર કરો"</string>
 </resources>
