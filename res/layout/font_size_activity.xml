@@ -35,12 +35,20 @@
             android:background="?android:attr/colorBackgroundFloating"
             android:elevation="2dp" />
 
+        <com.android.settings.widget.DotsPageIndicator
+            android:id="@+id/page_indicator"
+            style="@style/PreviewPagerPageIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:padding="6dp" />
+
         <TextView
             android:id="@+id/current_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:padding="8dp"
+            android:padding="6dp"
             android:textAppearance="@android:style/TextAppearance.Material.Widget.TextView"
             android:elevation="2dp" />
 

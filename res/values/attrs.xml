@@ -100,6 +100,15 @@
         <attr name="keywords" format="string" />
     </declare-styleable>
 
+    <!-- For DotsPageIndicator -->
+    <declare-styleable name="DotsPageIndicator">
+        <attr name="dotDiameter" format="dimension" />
+        <attr name="dotGap" format="dimension" />
+        <attr name="animationDuration" format="integer" />
+        <attr name="pageIndicatorColor" format="color" />
+        <attr name="currentPageIndicatorColor" format="color" />
+    </declare-styleable>
+
     <attr name="switchBarTheme" format="reference" />
     <attr name="switchBarMarginStart" format="dimension" />
     <attr name="switchBarMarginEnd" format="dimension" />

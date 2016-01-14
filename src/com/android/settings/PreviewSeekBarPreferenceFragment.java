@@ -27,6 +27,7 @@ import android.view.ViewGroup;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
+import com.android.settings.widget.DotsPageIndicator;
 
 
 /**
@@ -130,6 +131,15 @@ public abstract class PreviewSeekBarPreferenceFragment extends SettingsPreferenc
                 configurations);
         mPreviewPager = (ViewPager) content.findViewById(R.id.preview_pager);
         mPreviewPager.setAdapter(mPreviewPagerAdapter);
+
+        final DotsPageIndicator pageIndicator =
+                (DotsPageIndicator) content.findViewById(R.id.page_indicator);
+        if (mPreviewSampleResIds.length > 1) {
+            pageIndicator.setViewPager(mPreviewPager);
+            pageIndicator.setVisibility(View.VISIBLE);
+        } else {
+            pageIndicator.setVisibility(View.GONE);
+        }
 
         setPreviewLayer(mInitialIndex, false);
         return root;
