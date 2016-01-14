@@ -16,7 +16,6 @@
 
 package com.android.settings.vpn2;
 
-import android.annotation.NonNull;
 import android.annotation.UiThread;
 import android.annotation.WorkerThread;
 import android.app.AppOpsManager;
@@ -219,7 +218,7 @@ public class VpnSettings extends SettingsPreferenceFragment implements
         mUpdater.removeMessages(RESCAN_MESSAGE);
 
         final List<VpnProfile> vpnProfiles = loadVpnProfiles(mKeyStore);
-        final List<AppVpnInfo> vpnApps = getVpnApps();
+        final List<AppVpnInfo> vpnApps = getVpnApps(getActivity(), /* includeProfiles */ true);
 
         final List<LegacyVpnInfo> connectedLegacyVpns = getConnectedLegacyVpns();
         final List<AppVpnInfo> connectedAppVpns = getConnectedAppVpns();
@@ -418,22 +417,26 @@ public class VpnSettings extends SettingsPreferenceFragment implements
         return connections;
     }
 
-    private List<AppVpnInfo> getVpnApps() {
+    static List<AppVpnInfo> getVpnApps(Context context, boolean includeProfiles) {
         List<AppVpnInfo> result = Lists.newArrayList();
 
-        // Build a filter of currently active user profiles.
-        Set<Integer> currentProfileIds = new ArraySet<>();
-        for (UserHandle profile : mUserManager.getUserProfiles()) {
-            currentProfileIds.add(profile.getIdentifier());
+        final Set<Integer> profileIds;
+        if (includeProfiles) {
+            profileIds = new ArraySet<>();
+            for (UserHandle profile : UserManager.get(context).getUserProfiles()) {
+                profileIds.add(profile.getIdentifier());
+            }
+        } else {
+            profileIds = Collections.singleton(UserHandle.myUserId());
         }
 
         // Fetch VPN-enabled apps from AppOps.
-        AppOpsManager aom = (AppOpsManager) getSystemService(Context.APP_OPS_SERVICE);
+        AppOpsManager aom = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
         List<AppOpsManager.PackageOps> apps = aom.getPackagesForOps(new int[] {OP_ACTIVATE_VPN});
         if (apps != null) {
             for (AppOpsManager.PackageOps pkg : apps) {
                 int userId = UserHandle.getUserId(pkg.getUid());
-                if (!currentProfileIds.contains(userId)) {
+                if (!profileIds.contains(userId)) {
                     // Skip packages for users outside of our profile group.
                     continue;
                 }
@@ -450,10 +453,12 @@ public class VpnSettings extends SettingsPreferenceFragment implements
                 }
             }
         }
+
+        Collections.sort(result);
         return result;
     }
 
-    protected static List<VpnProfile> loadVpnProfiles(KeyStore keyStore, int... excludeTypes) {
+    static List<VpnProfile> loadVpnProfiles(KeyStore keyStore, int... excludeTypes) {
         final ArrayList<VpnProfile> result = Lists.newArrayList();
 
         for (String key : keyStore.list(Credentials.VPN)) {
@@ -463,30 +468,5 @@ public class VpnSettings extends SettingsPreferenceFragment implements
             }
         }
         return result;
-    }
-
-    /** Utility holder for packageName:userId pairs */
-    private static class AppVpnInfo {
-        public int userId;
-        public String packageName;
-
-        public AppVpnInfo(int userId, @NonNull String packageName) {
-            this.userId = userId;
-            this.packageName = packageName;
-        }
-
-        @Override
-        public boolean equals(Object other) {
-            if (other instanceof AppVpnInfo) {
-                AppVpnInfo that = (AppVpnInfo) other;
-                return userId == that.userId && packageName.equals(that.packageName);
-            }
-            return false;
-        }
-
-        @Override
-        public int hashCode() {
-            return (packageName != null ? packageName.hashCode() : 0) * 31 + userId;
-        }
     }
 }
