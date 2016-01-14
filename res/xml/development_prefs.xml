@@ -86,6 +86,12 @@
         android:dialogTitle="@string/select_webview_provider_dialog_title"
         android:summary="%s" />
 
+    <SwitchPreference
+        android:key="color_temperature"
+        android:title="@string/color_temperature"
+        android:summary="@string/color_temperature_desc"
+        android:persistent="false" />
+
     <PreferenceCategory android:key="debug_debugging_category"
             android:title="@string/debug_debugging_category">
 
