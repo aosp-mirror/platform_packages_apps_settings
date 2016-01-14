@@ -481,7 +481,8 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
                         final int printerCount = mPrinters.size();
                         for (int i = 0; i < printerCount; i++) {
                             PrinterInfo printer = mPrinters.get(i);
-                            if (printer.getName().toLowerCase().contains(constraintLowerCase)) {
+                            String name = printer.getName();
+                            if (name != null && name.toLowerCase().contains(constraintLowerCase)) {
                                 filteredPrinters.add(printer);
                             }
                         }

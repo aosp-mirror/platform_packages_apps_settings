@@ -153,9 +153,10 @@ public class PrintJobSettingsFragment extends SettingsPreferenceFragment {
 
     private void processArguments() {
         String printJobId = getArguments().getString(EXTRA_PRINT_JOB_ID);
-        mPrintJobId = PrintJobId.unflattenFromString(printJobId);
-        if (mPrintJobId == null) {
+        if (printJobId == null) {
             finish();
+        } else {
+            mPrintJobId = PrintJobId.unflattenFromString(printJobId);
         }
     }
 
