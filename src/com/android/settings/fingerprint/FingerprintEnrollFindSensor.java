@@ -42,7 +42,7 @@ public class FingerprintEnrollFindSensor extends FingerprintEnrollBase {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fingerprint_enroll_find_sensor);
+        setContentView(getContentView());
         setHeaderText(R.string.security_settings_fingerprint_enroll_find_sensor_title);
         if (savedInstanceState != null) {
             mLaunchedConfirmLock = savedInstanceState.getBoolean(EXTRA_KEY_LAUNCHED_CONFIRM);
@@ -56,6 +56,10 @@ public class FingerprintEnrollFindSensor extends FingerprintEnrollBase {
         }
         mAnimation = (FingerprintFindSensorAnimation) findViewById(
                 R.id.fingerprint_sensor_location_animation);
+    }
+
+    protected int getContentView() {
+        return R.layout.fingerprint_enroll_find_sensor;
     }
 
     @Override
