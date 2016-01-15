@@ -55,23 +55,26 @@
 
             <ImageView
                     android:id="@+id/low_importance"
-                    android:src="@android:drawable/ic_menu_close_clear_cancel"
+                    android:src="@*android:drawable/ic_notification_block"
                     android:layout_gravity="center_vertical|start"
                     android:layout_width="24dp"
                     android:layout_height="24dp" />
 
             <SeekBar
                     android:id="@*android:id/seekbar"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginEnd="24dp"
+                    android:layout_marginStart="56dp"
+                    android:layout_marginEnd="56dp"
                     android:layout_gravity="center_vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:focusable="true"/>
+                    android:focusable="true"
+                    android:background="#00ffffff"
+                    style="@android:style/Widget.Material.SeekBar.Discrete"
+                    android:tickMarkTint="@android:color/black"/>
 
             <ImageView
                     android:id="@+id/max_importance"
-                    android:src="@android:drawable/ic_popup_reminder"
+                    android:src="@*android:drawable/ic_notification_alert"
                     android:layout_gravity="center_vertical|end"
                     android:layout_width="24dp"
                     android:layout_height="24dp" />

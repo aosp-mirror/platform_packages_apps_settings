@@ -36,6 +36,7 @@ public class ImportanceSeekBarPreference extends SeekBarPreference implements
     private Callback mCallback;
     private TextView mSummaryTextView;
     private String mSummary;
+    private int mMinProgress;
 
     public ImportanceSeekBarPreference(Context context, AttributeSet attrs, int defStyleAttr,
             int defStyleRes) {
@@ -59,6 +60,10 @@ public class ImportanceSeekBarPreference extends SeekBarPreference implements
         mCallback = callback;
     }
 
+    public void setMinimumProgress(int minProgress) {
+        mMinProgress = minProgress;
+    }
+
     @Override
     public void onBindViewHolder(PreferenceViewHolder view) {
         super.onBindViewHolder(view);
@@ -72,8 +77,12 @@ public class ImportanceSeekBarPreference extends SeekBarPreference implements
     }
 
     @Override
-    public void onProgressChanged(SeekBar seekBar, final int progress, boolean fromTouch) {
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromTouch) {
         super.onProgressChanged(seekBar, progress, fromTouch);
+        if (progress < mMinProgress) {
+            seekBar.setProgress(mMinProgress);
+            progress = mMinProgress;
+        }
         if (mSummaryTextView != null) {
             mSummaryTextView.setText(getProgressSummary(progress));
         }

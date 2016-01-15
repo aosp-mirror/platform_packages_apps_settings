@@ -34,11 +34,8 @@ import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageManager;
 import android.content.pm.IntentFilterVerificationInfo;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
-import android.content.pm.Signature;
 import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -705,35 +702,6 @@ public final class Utils extends com.android.settingslib.Utils {
                 (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
 
         return tm.getSimCount() > 1;
-    }
-
-    /**
-     * Determine whether a package is a "system package", in which case certain things (like
-     * disabling notifications or disabling the package altogether) should be disallowed.
-     */
-    public static boolean isSystemPackage(PackageManager pm, PackageInfo pkg) {
-        if (sSystemSignature == null) {
-            sSystemSignature = new Signature[]{ getSystemSignature(pm) };
-        }
-        return sSystemSignature[0] != null && sSystemSignature[0].equals(getFirstSignature(pkg));
-    }
-
-    private static Signature[] sSystemSignature;
-
-    private static Signature getFirstSignature(PackageInfo pkg) {
-        if (pkg != null && pkg.signatures != null && pkg.signatures.length > 0) {
-            return pkg.signatures[0];
-        }
-        return null;
-    }
-
-    private static Signature getSystemSignature(PackageManager pm) {
-        try {
-            final PackageInfo sys = pm.getPackageInfo("android", PackageManager.GET_SIGNATURES);
-            return getFirstSignature(sys);
-        } catch (NameNotFoundException e) {
-        }
-        return null;
     }
 
     /**

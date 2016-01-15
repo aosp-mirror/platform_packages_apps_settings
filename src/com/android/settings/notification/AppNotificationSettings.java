@@ -70,7 +70,6 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
     private PreferenceCategory mCategories;
     private AppRow mAppRow;
     private boolean mCreated;
-    private boolean mIsSystemPackage;
     private int mUid;
 
     @Override
@@ -126,12 +125,10 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
             toastAndFinish();
             return;
         }
-        mIsSystemPackage = Utils.isSystemPackage(pm, info);
-
         addPreferencesFromResource(R.xml.app_notification_settings);
         mBlock = (SwitchPreference) findPreference(KEY_BLOCK);
 
-        mAppRow = mBackend.loadAppRow(pm, info.applicationInfo);
+        mAppRow = mBackend.loadAppRow(pm, info);
 
         // load settings intent
         ArrayMap<String, AppRow> rows = new ArrayMap<String, AppRow>();
@@ -160,7 +157,7 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
         }
 
         mBlock.setChecked(mAppRow.banned);
-        updateDependents(mAppRow.banned);
+        updateDependents(mAppRow.systemApp, mAppRow.banned);
 
         mBlock.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
             @Override
@@ -171,7 +168,7 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
                 }
                 final boolean success =  mBackend.setNotificationsBanned(pkg, mUid, banned);
                 if (success) {
-                    updateDependents(banned);
+                    updateDependents(mAppRow.systemApp, banned);
                 }
                 return success;
             }
@@ -200,8 +197,8 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
         }
     }
 
-    private void updateDependents(boolean banned) {
-        setVisible(mBlock, !mIsSystemPackage);
+    private void updateDependents(boolean isSystemPackage, boolean banned) {
+        setVisible(mBlock, !isSystemPackage);
         if (mCategories != null) {
             setVisible(mCategories, !banned);
         }

@@ -22,12 +22,14 @@ import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ParceledListSlice;
 import android.graphics.drawable.Drawable;
 import android.os.ServiceManager;
 import android.service.notification.NotificationListenerService;
 import android.util.Log;
+import com.android.settingslib.Utils;
 
 import java.util.List;
 
@@ -52,12 +54,19 @@ public class NotificationBackend {
         return row;
     }
 
-    public TopicRow loadTopicRow(PackageManager pm, ApplicationInfo app, Notification.Topic topic) {
+    public AppRow loadAppRow(PackageManager pm, PackageInfo app) {
+        final AppRow row = loadAppRow(pm, app.applicationInfo);
+        row.systemApp = Utils.isSystemPackage(pm, app);
+        return row;
+    }
+
+    public TopicRow loadTopicRow(PackageManager pm, PackageInfo app, Notification.Topic topic) {
         final TopicRow row = new TopicRow();
         row.pkg = app.packageName;
-        row.uid = app.uid;
+        row.uid = app.applicationInfo.uid;
         row.label = topic.getLabel();
-        row.icon = app.loadIcon(pm);
+        row.icon = app.applicationInfo.loadIcon(pm);
+        row.systemApp = Utils.isSystemPackage(pm, app);
         row.topic = topic;
         row.priority = getBypassZenMode(row.pkg, row.uid, row.topic);
         row.sensitive = getSensitive(row.pkg, row.uid, row.topic);
@@ -170,6 +179,7 @@ public class NotificationBackend {
         public Intent settingsIntent;
         public boolean banned;
         public boolean first;  // first app in section
+        public boolean systemApp;
     }
 
     public static class TopicRow extends AppRow {
