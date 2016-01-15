@@ -162,8 +162,20 @@ public class ChooseLockGeneric extends SettingsActivity {
                         ENCRYPT_REQUESTED_DISABLED);
             }
 
-            // Only take this argument into account if it belongs to the current profile.
-            mUserId = Utils.getSameOwnerUserId(getContext(), getArguments());
+            int targetUser = Utils.getSecureTargetUser(
+                    getActivity().getActivityToken(),
+                    UserManager.get(getActivity()),
+                    null,
+                    getActivity().getIntent().getExtras()).getIdentifier();
+            if (DevicePolicyManager.ACTION_SET_NEW_PARENT_PROFILE_PASSWORD.equals(
+                    getActivity().getIntent().getAction()) ||
+                    !mLockPatternUtils.isSeparateProfileChallengeAllowed(targetUser)) {
+                // Always use parent if explicitely requested or if profile challenge is not
+                // supported
+                mUserId = Utils.getSameOwnerUserId(getContext(), getArguments());
+            } else {
+                mUserId = targetUser;
+            }
 
             if (mPasswordConfirmed) {
                 updatePreferencesOrFinish();
