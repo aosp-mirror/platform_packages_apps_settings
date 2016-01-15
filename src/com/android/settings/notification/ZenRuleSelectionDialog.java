@@ -67,7 +67,7 @@ public abstract class ZenRuleSelectionDialog {
             bindType(defaultNewEvent());
             bindType(defaultNewSchedule());
             mServiceListing.addCallback(mServiceListingCallback);
-            mServiceListing.reload();
+            mServiceListing.reloadApprovedServices();
         }
         mDialog = new AlertDialog.Builder(context)
                 .setTitle(R.string.zen_mode_choose_rule_type)
@@ -166,7 +166,9 @@ public abstract class ZenRuleSelectionDialog {
             for (int i = 0; i < services.size(); i++) {
                 final ZenRuleInfo ri = ZenModeAutomationSettings.getRuleInfo(mPm, services.get(i));
                 if (ri != null && ri.configurationActivity != null
-                        && mNm.isNotificationPolicyAccessGrantedForPackage(ri.packageName)) {
+                        && mNm.isNotificationPolicyAccessGrantedForPackage(ri.packageName)
+                        && (ri.ruleInstanceLimit <= 0 || ri.ruleInstanceLimit
+                        >= (mNm.getRuleInstanceCount(services.get(i).getComponentName()) + 1))) {
                     externalRuleTypes.add(ri);
                 }
             }
