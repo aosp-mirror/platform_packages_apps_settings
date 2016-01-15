@@ -1635,12 +1635,12 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         } else if (preference == mBtHciSnoopLog) {
             writeBtHciSnoopLogOptions();
         } else if (preference == mEnableOemUnlock) {
-            if (!showKeyguardConfirmation(getResources(), REQUEST_CODE_ENABLE_OEM_UNLOCK)) {
-                if (mEnableOemUnlock.isChecked()) {
+            if (mEnableOemUnlock.isChecked()) {
+                if (!showKeyguardConfirmation(getResources(), REQUEST_CODE_ENABLE_OEM_UNLOCK)) {
                     confirmEnableOemUnlock();
-                } else {
-                    Utils.setOemUnlockEnabled(getActivity(), false);
                 }
+            } else {
+                Utils.setOemUnlockEnabled(getActivity(), false);
             }
         } else if (preference == mMockLocationAppPref) {
             Intent intent = new Intent(getActivity(), AppPicker.class);
