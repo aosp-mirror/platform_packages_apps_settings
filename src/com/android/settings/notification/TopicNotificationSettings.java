@@ -34,6 +34,7 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.service.notification.NotificationListenerService;
+import android.service.notification.NotificationListenerService.Ranking;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
@@ -130,9 +131,11 @@ public class TopicNotificationSettings extends SettingsPreferenceFragment {
         mPriority = (SwitchPreference) findPreference(KEY_BYPASS_DND);
         mSensitive = (SwitchPreference) findPreference(KEY_SENSITIVE);
 
-        mTopicRow = mBackend.loadTopicRow(pm, info.applicationInfo, topic);
+        mTopicRow = mBackend.loadTopicRow(pm, info, topic);
 
-        mImportance.setMax(4);
+        mImportance.setMinimumProgress(
+                mTopicRow.systemApp ? Ranking.IMPORTANCE_LOW : Ranking.IMPORTANCE_NONE);
+        mImportance.setMax(Ranking.IMPORTANCE_MAX);
         // TODO: stop defaulting to 'normal' in the UI when there are mocks for this scenario.
         int importance =
                 mTopicRow.importance == NotificationListenerService.Ranking.IMPORTANCE_UNSPECIFIED
