@@ -16,20 +16,14 @@
 
 package com.android.settings;
 
-import android.annotation.Nullable;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.util.AttributeSet;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.DecelerateInterpolator;
-import android.view.animation.Interpolator;
-import android.widget.FrameLayout;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
@@ -53,18 +47,11 @@ public abstract class PreviewSeekBarPreferenceFragment extends SettingsPreferenc
     protected int mActivityLayoutResId;
 
     /** Resource id of the layout that defines the contents instide preview screen. */
-    protected int mPreviewSampleResId;
+    protected int[] mPreviewSampleResIds;
 
-    /** Duration to use when cross-fading between previews. */
-    private static final long CROSS_FADE_DURATION_MS = 400;
+    private ViewPager mPreviewPager;
+    private PreviewPagerAdapter mPreviewPagerAdapter;
 
-    /** Interpolator to use when cross-fading between previews. */
-    private static final Interpolator FADE_IN_INTERPOLATOR = new DecelerateInterpolator();
-
-    /** Interpolator to use when cross-fading between previews. */
-    private static final Interpolator FADE_OUT_INTERPOLATOR = new AccelerateInterpolator();
-
-    private ViewGroup mPreviewFrame;
     private TextView mLabel;
     private View mLarger;
     private View mSmaller;
@@ -96,10 +83,12 @@ public abstract class PreviewSeekBarPreferenceFragment extends SettingsPreferenc
             }
 
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {}
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
 
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {}
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
         });
 
         mSmaller = content.findViewById(R.id.smaller);
@@ -130,29 +119,19 @@ public abstract class PreviewSeekBarPreferenceFragment extends SettingsPreferenc
             seekBar.setEnabled(false);
         }
 
-        mPreviewFrame = (FrameLayout) content.findViewById(R.id.preview_frame);
-
-        // Populate the sample layouts.
         final Context context = getContext();
         final Configuration origConfig = context.getResources().getConfiguration();
+        Configuration[] configurations = new Configuration[mEntries.length];
         for (int i = 0; i < mEntries.length; ++i) {
-            final Configuration config = createConfig(origConfig, i);
-
-            // Create a new configuration for the specified value. It won't
-            // have any theme set, so manually apply the current theme.
-            final Context configContext = context.createConfigurationContext(config);
-            configContext.setTheme(context.getThemeResId());
-
-            final LayoutInflater configInflater = LayoutInflater.from(configContext);
-            final View sampleView = configInflater.inflate(mPreviewSampleResId, mPreviewFrame, false);
-            sampleView.setAlpha(0);
-            sampleView.setVisibility(View.INVISIBLE);
-
-            mPreviewFrame.addView(sampleView);
+            configurations[i] = createConfig(origConfig, i);
         }
 
-        setPreviewLayer(mInitialIndex, false);
+        mPreviewPagerAdapter = new PreviewPagerAdapter(context, mPreviewSampleResIds,
+                configurations);
+        mPreviewPager = (ViewPager) content.findViewById(R.id.preview_pager);
+        mPreviewPager.setAdapter(mPreviewPagerAdapter);
 
+        setPreviewLayer(mInitialIndex, false);
         return root;
     }
 
@@ -172,46 +151,11 @@ public abstract class PreviewSeekBarPreferenceFragment extends SettingsPreferenc
 
     private void setPreviewLayer(int index, boolean animate) {
         mLabel.setText(mEntries[index]);
-
-        if (mCurrentIndex >= 0) {
-            final View lastLayer = mPreviewFrame.getChildAt(mCurrentIndex);
-            if (animate) {
-                lastLayer.animate()
-                        .alpha(0)
-                        .setInterpolator(FADE_OUT_INTERPOLATOR)
-                        .setDuration(CROSS_FADE_DURATION_MS)
-                        .withEndAction(new Runnable() {
-                            @Override
-                            public void run() {
-                                lastLayer.setVisibility(View.INVISIBLE);
-                            }
-                        });
-            } else {
-                lastLayer.setAlpha(0);
-                lastLayer.setVisibility(View.INVISIBLE);
-            }
-        }
-
-        final View nextLayer = mPreviewFrame.getChildAt(index);
-        if (animate) {
-            nextLayer.animate()
-                    .alpha(1)
-                    .setInterpolator(FADE_IN_INTERPOLATOR)
-                    .setDuration(CROSS_FADE_DURATION_MS)
-                    .withStartAction(new Runnable() {
-                        @Override
-                        public void run() {
-                            nextLayer.setVisibility(View.VISIBLE);
-                        }
-                    });
-        } else {
-            nextLayer.setVisibility(View.VISIBLE);
-            nextLayer.setAlpha(1);
-        }
-
         mSmaller.setEnabled(index > 0);
         mLarger.setEnabled(index < mEntries.length - 1);
 
+        mPreviewPagerAdapter.setPreviewLayer(index, mCurrentIndex, mPreviewPager.getCurrentItem(),
+                animate);
         mCurrentIndex = index;
     }
 
