@@ -60,14 +60,12 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
         addPreferencesFromResource(R.xml.zen_mode_automation_settings);
         mPm = mContext.getPackageManager();
         mServiceListing = new ServiceListing(mContext, CONFIG);
-        mServiceListing.reload();
-        mServiceListing.setListening(true);
+        mServiceListing.reloadApprovedServices();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mServiceListing.setListening(false);
     }
 
     @Override
@@ -228,7 +226,8 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
             ri.packageName = si.packageName;
             ri.configurationActivity = getSettingsActivity(si);
             ri.packageLabel = si.applicationInfo.loadLabel(pm);
-
+            ri.ruleInstanceLimit =
+                    si.metaData.getInt(ConditionProviderService.META_DATA_RULE_INSTANCE_LIMIT, -1);
             return ri;
         }
         return null;

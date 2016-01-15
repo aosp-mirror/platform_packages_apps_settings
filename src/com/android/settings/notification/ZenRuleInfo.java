@@ -12,4 +12,5 @@ public class ZenRuleInfo {
     public ComponentName serviceComponent;
     public boolean isSystem;
     public CharSequence packageLabel;
+    public int ruleInstanceLimit = -1;
 }
