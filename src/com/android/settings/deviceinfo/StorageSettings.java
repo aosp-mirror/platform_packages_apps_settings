@@ -28,6 +28,8 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.os.storage.DiskInfo;
 import android.os.storage.StorageEventListener;
 import android.os.storage.StorageManager;
@@ -48,10 +50,14 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
 
+import com.android.settingslib.RestrictedLockUtils;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 /**
  * Panel showing both internal storage (both built-in storage and private
@@ -386,6 +392,13 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
                     new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
+                    EnforcedAdmin admin = RestrictedLockUtils.checkIfRestrictionEnforced(
+                            getActivity(), UserManager.DISALLOW_MOUNT_PHYSICAL_MEDIA,
+                            UserHandle.myUserId());
+                    if (admin != null) {
+                        RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getActivity(), admin);
+                        return;
+                    }
                     new MountTask(context, vol).execute();
                 }
             });

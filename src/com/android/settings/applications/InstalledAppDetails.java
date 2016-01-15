@@ -48,6 +48,7 @@ import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.text.TextUtils;
@@ -80,6 +81,7 @@ import com.android.settings.notification.AppNotificationSettings;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.NotificationBackend.AppRow;
 import com.android.settingslib.AppItem;
+import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
@@ -91,6 +93,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 /**
  * Activity to display application information from Settings. This activity presents
@@ -236,10 +240,6 @@ public class InstalledAppDetails extends AppInfoBase
                     enabled = !mPackageInfo.packageName.equals(currentDefaultHome.getPackageName());
                 }
             }
-        }
-
-        if (mAppControlRestricted) {
-            enabled = false;
         }
 
         mUninstallButton.setEnabled(enabled);
@@ -404,7 +404,12 @@ public class InstalledAppDetails extends AppInfoBase
         }
         menu.findItem(UNINSTALL_ALL_USERS_MENU).setVisible(showIt);
         mUpdatedSysApp = (mAppEntry.info.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0;
-        menu.findItem(UNINSTALL_UPDATES).setVisible(mUpdatedSysApp && !mAppControlRestricted);
+        MenuItem uninstallUpdatesItem = menu.findItem(UNINSTALL_UPDATES);
+        uninstallUpdatesItem.setVisible(mUpdatedSysApp);
+        if (uninstallUpdatesItem.isVisible()) {
+            RestrictedLockUtils.setMenuItemAsDisabledByAdmin(getActivity(),
+                    uninstallUpdatesItem, mAppsControlDisallowedAdmin);
+        }
     }
 
     @Override
@@ -655,12 +660,8 @@ public class InstalledAppDetails extends AppInfoBase
     }
 
     private void updateForceStopButton(boolean enabled) {
-        if (mAppControlRestricted) {
-            mForceStopButton.setEnabled(false);
-        } else {
-            mForceStopButton.setEnabled(enabled);
-            mForceStopButton.setOnClickListener(InstalledAppDetails.this);
-        }
+        mForceStopButton.setEnabled(enabled);
+        mForceStopButton.setOnClickListener(InstalledAppDetails.this);
     }
 
     private void checkForceStop() {
@@ -716,7 +717,11 @@ public class InstalledAppDetails extends AppInfoBase
         }
         String packageName = mAppEntry.info.packageName;
         if(v == mUninstallButton) {
-            if ((mAppEntry.info.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
+            EnforcedAdmin admin = RestrictedLockUtils.checkIfUninstallBlocked(getActivity(),
+                    packageName, mUserId);
+            if (admin != null) {
+                RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getActivity(), admin);
+            } else if ((mAppEntry.info.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
                 if (mAppEntry.info.enabled && !isDisabledUntilUsed()) {
                     if (mUpdatedSysApp) {
                         showDialogInner(DLG_SPECIAL_DISABLE, 0);
@@ -734,8 +739,13 @@ public class InstalledAppDetails extends AppInfoBase
                 uninstallPkg(packageName, false, false);
             }
         } else if (v == mForceStopButton) {
-            showDialogInner(DLG_FORCE_STOP, 0);
-            //forceStopPackage(mAppInfo.packageName);
+            if (mAppsControlDisallowedAdmin != null) {
+                RestrictedLockUtils.sendShowAdminSupportDetailsIntent(
+                        getActivity(), mAppsControlDisallowedAdmin);
+            } else {
+                showDialogInner(DLG_FORCE_STOP, 0);
+                //forceStopPackage(mAppInfo.packageName);
+            }
         }
     }
 

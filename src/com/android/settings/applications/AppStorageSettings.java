@@ -48,6 +48,7 @@ import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.deviceinfo.StorageWizardMoveConfirm;
+import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.ApplicationsState.Callbacks;
@@ -192,13 +193,19 @@ public class AppStorageSettings extends AppInfoWithHeader
     @Override
     public void onClick(View v) {
         if (v == mClearCacheButton) {
-            // Lazy initialization of observer
-            if (mClearCacheObserver == null) {
+            if (mAppsControlDisallowedAdmin != null) {
+                RestrictedLockUtils.sendShowAdminSupportDetailsIntent(
+                        getActivity(), mAppsControlDisallowedAdmin);
+                return;
+            } else if (mClearCacheObserver == null) { // Lazy initialization of observer
                 mClearCacheObserver = new ClearCacheObserver();
             }
             mPm.deleteApplicationCacheFiles(mPackageName, mClearCacheObserver);
         } else if (v == mClearDataButton) {
-            if (mAppEntry.info.manageSpaceActivityName != null) {
+            if (mAppsControlDisallowedAdmin != null) {
+                RestrictedLockUtils.sendShowAdminSupportDetailsIntent(
+                        getActivity(), mAppsControlDisallowedAdmin);
+            } else if (mAppEntry.info.manageSpaceActivityName != null) {
                 if (!Utils.isMonkeyRunning()) {
                     Intent intent = new Intent(Intent.ACTION_DEFAULT);
                     intent.setClassName(mAppEntry.info.packageName,
@@ -211,7 +218,12 @@ public class AppStorageSettings extends AppInfoWithHeader
         } else if (v == mChangeStorageButton && mDialogBuilder != null && !isMoveInProgress()) {
             mDialogBuilder.show();
         } else if (v == mClearUriButton) {
-            clearUriPermissions();
+            if (mAppsControlDisallowedAdmin != null) {
+                RestrictedLockUtils.sendShowAdminSupportDetailsIntent(
+                        getActivity(), mAppsControlDisallowedAdmin);
+            } else {
+                clearUriPermissions();
+            }
         }
     }
 
@@ -310,10 +322,6 @@ public class AppStorageSettings extends AppInfoWithHeader
                 mClearCacheButton.setOnClickListener(this);
             }
         }
-        if (mAppControlRestricted) {
-            mClearCacheButton.setEnabled(false);
-            mClearDataButton.setEnabled(false);
-        }
     }
 
     @Override
@@ -359,10 +367,6 @@ public class AppStorageSettings extends AppInfoWithHeader
                 mClearDataButton.setText(R.string.clear_user_data_text);
             }
             mClearDataButton.setOnClickListener(this);
-        }
-
-        if (mAppControlRestricted) {
-            mClearDataButton.setEnabled(false);
         }
     }
 
@@ -481,10 +485,6 @@ public class AppStorageSettings extends AppInfoWithHeader
             pref.setOrder(order);
             Log.v(TAG, "Adding preference '" + pref + "' at order " + order);
             mUri.addPreference(pref);
-        }
-
-        if (mAppControlRestricted) {
-            mClearUriButton.setEnabled(false);
         }
 
         mClearUri.setOrder(order);

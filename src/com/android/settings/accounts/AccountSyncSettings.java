@@ -273,10 +273,8 @@ public class AccountSyncSettings extends AccountPreferenceBase {
         final EnforcedAdmin admin = RestrictedLockUtils.checkIfRestrictionEnforced(
                 getPrefContext(), UserManager.DISALLOW_MODIFY_ACCOUNTS,
                 mUserHandle.getIdentifier());
-        if (admin != null) {
-            RestrictedLockUtils.setMenuItemAsDisabledByAdmin(getPrefContext(),
-                    removeAccount, admin);
-        }
+        RestrictedLockUtils.setMenuItemAsDisabledByAdmin(getPrefContext(),
+                removeAccount, admin);
         syncNow.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER |
                 MenuItem.SHOW_AS_ACTION_WITH_TEXT);
         syncCancel.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER |
