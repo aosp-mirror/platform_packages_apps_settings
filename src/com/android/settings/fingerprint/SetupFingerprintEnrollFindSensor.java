@@ -31,6 +31,11 @@ public class SetupFingerprintEnrollFindSensor extends FingerprintEnrollFindSenso
         implements NavigationBar.NavigationBarListener {
 
     @Override
+    protected int getContentView() {
+        return R.layout.setup_fingerprint_enroll_find_sensor;
+    }
+
+    @Override
     protected Intent getEnrollingIntent() {
         Intent intent = new Intent(this, SetupFingerprintEnrollEnrolling.class);
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
