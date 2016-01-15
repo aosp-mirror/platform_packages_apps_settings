@@ -57,8 +57,7 @@
 
         <!-- Operator hook -->
         <dashboard-tile
-                android:id="@+id/operator_settings"
-                android:fragment="com.android.settings.WirelessSettings" >
+                android:id="@+id/operator_settings" >
             <intent android:action="com.android.settings.OPERATOR_APPLICATION_SETTING" />
         </dashboard-tile>
 
@@ -152,8 +151,7 @@
 
         <!-- Manufacturer hook -->
         <dashboard-tile
-                android:id="@+id/manufacturer_settings"
-                android:fragment="com.android.settings.WirelessSettings">
+                android:id="@+id/manufacturer_settings" >
             <intent android:action="com.android.settings.MANUFACTURER_APPLICATION_SETTING" />
         </dashboard-tile>
 
