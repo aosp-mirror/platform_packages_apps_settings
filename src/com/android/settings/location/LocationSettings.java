@@ -46,12 +46,15 @@ import com.android.settings.Utils;
 import com.android.settings.applications.InstalledAppDetails;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.widget.SwitchBar;
+import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.location.RecentLocationApps;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 /**
  * System location settings (Settings &gt; Location). The screen has three parts:
@@ -373,9 +376,15 @@ public class LocationSettings extends LocationSettingsBase
         // corner cases, the location might still be enabled. In such case the master switch should
         // be disabled but checked.
         final boolean enabled = (mode != android.provider.Settings.Secure.LOCATION_MODE_OFF);
+        EnforcedAdmin admin = RestrictedLockUtils.checkIfRestrictionEnforced(getActivity(),
+                UserManager.DISALLOW_SHARE_LOCATION, UserHandle.myUserId());
         // Disable the whole switch bar instead of the switch itself. If we disabled the switch
         // only, it would be re-enabled again if the switch bar is not disabled.
-        mSwitchBar.setEnabled(!restricted);
+        if (admin != null) {
+            mSwitchBar.setDisabledByAdmin(admin);
+        } else {
+            mSwitchBar.setEnabled(!restricted);
+        }
         mLocationMode.setEnabled(enabled && !restricted);
         mCategoryRecentLocationRequests.setEnabled(enabled);
 

@@ -169,6 +169,7 @@ public class ChooseAccountActivity extends InstrumentedPreferenceActivity {
                 Drawable drawable = getDrawableForType(pref.type);
                 ProviderPreference p = new ProviderPreference(getPreferenceScreen().getContext(),
                         pref.type, drawable, pref.name);
+                p.checkAccountManagementAndSetDisabled();
                 mAddAccountGroup.addPreference(p);
             }
         } else {

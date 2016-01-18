@@ -19,7 +19,7 @@
         android:title="@string/date_and_time"
         settings:keywords="@string/keywords_date_and_time">
 
-    <SwitchPreference android:key="auto_time"
+    <com.android.settingslib.RestrictedSwitchPreference android:key="auto_time"
         android:title="@string/date_time_auto"
         android:summaryOn="@string/date_time_auto_summaryOn"
         android:summaryOff="@string/date_time_auto_summaryOff"

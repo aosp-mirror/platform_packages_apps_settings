@@ -35,6 +35,9 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.android.settings.R;
+import com.android.settingslib.RestrictedLockUtils;
+
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import java.util.ArrayList;
 
@@ -57,6 +60,9 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
     private TextView mTextView;
     private String mLabel;
     private String mSummary;
+
+    private boolean mDisabledByAdmin = false;
+    private EnforcedAdmin mEnforcedAdmin = null;
 
     private ArrayList<OnSwitchChangeListener> mSwitchChangeListeners =
             new ArrayList<OnSwitchChangeListener>();
@@ -153,9 +159,33 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
     }
 
     public void setEnabled(boolean enabled) {
+        if (enabled && mDisabledByAdmin) {
+            setDisabledByAdmin(null);
+            return;
+        }
         super.setEnabled(enabled);
         mTextView.setEnabled(enabled);
         mSwitch.setEnabled(enabled);
+    }
+
+    /**
+     * If admin is not null, disables the text and switch but keeps the view clickable.
+     * Otherwise, calls setEnabled which will enables the entire view including
+     * the text and switch.
+     */
+    public void setDisabledByAdmin(EnforcedAdmin admin) {
+        mEnforcedAdmin = admin;
+        if (admin != null) {
+            super.setEnabled(true);
+            mDisabledByAdmin = true;
+            RestrictedLockUtils.setTextViewPadlock(mContext, mTextView, true);
+            mTextView.setEnabled(false);
+            mSwitch.setEnabled(false);
+        } else {
+            mDisabledByAdmin = false;
+            RestrictedLockUtils.setTextViewPadlock(mContext, mTextView, false);
+            setEnabled(true);
+        }
     }
 
     public final ToggleSwitch getSwitch() {
@@ -182,8 +212,12 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
 
     @Override
     public void onClick(View v) {
-        final boolean isChecked = !mSwitch.isChecked();
-        setChecked(isChecked);
+        if (mDisabledByAdmin) {
+            RestrictedLockUtils.sendShowAdminSupportDetailsIntent(mContext, mEnforcedAdmin);
+        } else {
+            final boolean isChecked = !mSwitch.isChecked();
+            setChecked(isChecked);
+        }
     }
 
     public void propagateChecked(boolean isChecked) {
