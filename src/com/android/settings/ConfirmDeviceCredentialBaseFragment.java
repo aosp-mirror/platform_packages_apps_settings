@@ -21,11 +21,13 @@ import android.app.ActivityManager;
 import android.app.ActivityManagerNative;
 import android.app.ActivityOptions;
 import android.app.IActivityManager;
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.graphics.Point;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.RemoteException;
@@ -92,7 +94,7 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
                         getActivity(),
                         getActivity().getIntent().getExtras()));
         if (Utils.isManagedProfile(UserManager.get(getActivity()), credentialOwnerUserId)) {
-            setWorkChallengeBackground(view);
+            setWorkChallengeBackground(view, credentialOwnerUserId);
         }
     }
 
@@ -170,7 +172,10 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
         }
     }
 
-    private void setWorkChallengeBackground(View baseView) {
+    private void setWorkChallengeBackground(View baseView, int userId) {
+        DevicePolicyManager dpm = (DevicePolicyManager) getActivity().getSystemService(
+                Context.DEVICE_POLICY_SERVICE);
+        baseView.setBackground(new ColorDrawable(dpm.getOrganizationColorForUser(userId)));
         ImageView imageView = (ImageView) baseView.findViewById(R.id.background_image);
         if (imageView != null) {
             Drawable image = getResources().getDrawable(R.drawable.work_challenge_background);
