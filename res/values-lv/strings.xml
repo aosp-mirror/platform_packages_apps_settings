@@ -75,13 +75,17 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Atvienot SD karti"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Dzēst USB krātuvi"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Dzēst SD karti"</string>
+    <!-- no translation found for font_size_summary (133937309990844030) -->
+    <skip />
     <string name="small_font" msgid="2295331917424072635">"Mazs"</string>
     <string name="medium_font" msgid="2068475425515133701">"Vidējs"</string>
     <string name="large_font" msgid="599055175160971446">"Liels"</string>
-    <!-- no translation found for font_size_make_smaller_desc (7919995133365371569) -->
-    <skip />
-    <!-- no translation found for font_size_make_larger_desc (4316986572233686061) -->
-    <skip />
+    <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"Samazināt"</string>
+    <string name="font_size_make_larger_desc" msgid="4316986572233686061">"Palielināt"</string>
+    <string name="font_size_preview_text_headline" msgid="7955317408475392247">"Teksta paraugs"</string>
+    <string name="font_size_preview_text_title" msgid="4762429961714563135">"Divdesmit tūkstoši ljē pa jūras dzelmi"</string>
+    <string name="font_size_preview_text_subtitle" msgid="5712012075615701561">"23. nodaļa. Koraļļu valstībā"</string>
+    <string name="font_size_preview_text_body" msgid="1608889593334414309">"Otrā rītā es pamodos ar dīvaini tukšu galvu. Par lielu pārsteigumu, es atrados pats savā kajītē. Bez šaubām, mani biedri tāpat bij aizvesti savā kajītē gluži kā es. Tāpat kā es, arī viņi nezināja nekā, kas šajā naktī noticis; šā noslēpuma atrisinājums bij iespējams tikai nākotnē.\nEs iedomājos iziet laukā no savas kajītes. Bet vai es patlaban biju brīvs vai vēl cietumnieks? Izrādījās, ka esmu pilnīgi brīvs. Es atvēru durvis, izgāju pa šauro gaiteni un devos augšup pa centrālo trapu. Vakar noslēgtā lūka tagad bij vaļā. Es izgāju uz klāja.\nNeds Lends un Konsels tur bij jau priekšā. Es sāku viņus izvaicāt. Viņi nezināja itin nekā. Vakarā smagā miegā iemiguši, viņi šorīt ar pārsteigumu atmodušies paši savā kajītē."</string>
     <string name="font_size_save" msgid="3450855718056759095">"Labi"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"USB krātuve"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"SD karte"</string>
@@ -1211,8 +1215,7 @@
     <string name="location_sources_heading" msgid="1278732419851088319">"Atrašanās vietas avoti"</string>
     <string name="about_settings" product="tablet" msgid="593457295516533765">"Par planšetdatoru"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"Par tālruni"</string>
-    <!-- no translation found for about_settings (221313099578564438) -->
-    <skip />
+    <string name="about_settings" product="emulator" msgid="221313099578564438">"Par emulēto ierīci"</string>
     <string name="about_settings_summary" msgid="3371517697156165959">"Skatīt juridisko informāciju, statusu, programmatūras versiju"</string>
     <string name="legal_information" msgid="5769301644270604095">"Juridiskā informācija"</string>
     <string name="contributors_title" msgid="5917703088825286504">"Līdzdalībnieki"</string>
@@ -1279,6 +1282,12 @@
     <string name="activity_not_found" msgid="5551664692991605325">"Lietojumprogramma jūsu tālrunī nav instalēta."</string>
     <string name="lock_settings_profile_title" msgid="7819021341281339182">"Darba profils"</string>
     <string name="lock_settings_profile_label" msgid="4423909470339292809">"Darba profila drošība"</string>
+    <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Darba profila ekrāna bloķēšanas režīms"</string>
+    <string name="lock_settings_profile_unification_title" msgid="3130455578336894831">"Tā paša ekrāna bloķēšanas režīma izmantošana"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="8014208091623293835">"Mainiet galveno profilu, lai tas atbilstu darba profilam."</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="5297248764066294130">"Vai izmantot to pašu ekrāna bloķēšanas režīmu?"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="342417647696962745">"Varat izmantot ierīcē šo bloķēšanas režīmu, taču tiks ietvertas visas ar ekrāna bloķēšanu saistītās politikas, kuras jūsu IT administrators būs iestatījis darba profilam.\nVai vēlaties izmantot to pašu ekrāna bloķēšanas režīmu savā ierīcē?"</string>
+    <string name="lock_settings_profile_unified_summary" msgid="237623767711796217">"Tāds pats kā jūsu ierīces bloķēšanas režīms"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Pārvaldīt lietotnes"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Pārvaldiet un noņemiet instalētās lietotnes"</string>
     <string name="applications_settings" msgid="1721442176406964682">"Lietotnes"</string>
@@ -1301,9 +1310,12 @@
     <string name="cache_header_label" msgid="1877197634162461830">"Kešatmiņa"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"Notīrīt kešatmiņu"</string>
     <string name="cache_size_label" msgid="7505481393108282913">"Kešatmiņa"</string>
-    <!-- no translation found for uri_permissions_text (3983110543017963732) -->
-    <!-- no translation found for clear_uri_btn_text (8575655132961012158) -->
-    <skip />
+    <plurals name="uri_permissions_text" formatted="false" msgid="3983110543017963732">
+      <item quantity="zero">%d vienumu</item>
+      <item quantity="one">%d vienums</item>
+      <item quantity="other">%d vienumi</item>
+    </plurals>
+    <string name="clear_uri_btn_text" msgid="8575655132961012158">"Atcelt piekļuvi"</string>
     <string name="controls_label" msgid="7611113077086853799">"Vadīklas"</string>
     <string name="force_stop" msgid="7435006169872876756">"Forsēt apturēšanu"</string>
     <string name="total_size_label" msgid="1048676419552557254">"Kopā"</string>
@@ -2366,6 +2378,7 @@
     <string name="keywords_default_apps" msgid="223872637509160136">"lietotnes, noklusējums"</string>
     <string name="keywords_ignore_optimizations" msgid="6102579291119055029">"ignorēt optimizāciju, snauda, lietotņu gaidstāve"</string>
     <string name="keywords_color_mode" msgid="6362744316886077510">"spilgts, RGB, sRGB, krāsa, dabisks, standarta"</string>
+    <string name="keywords_color_temperature" msgid="2688947724153266364">"krāsu temperatūra D65 D73 balts dzeltens zils silts vēss"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"vilkt, lai atbloķētu, parole, kombinācija, PIN"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"drošības uzdevums darba profilā, darbs, profils"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Iestatīt Wi-Fi NFC atzīmi"</string>
@@ -2766,7 +2779,8 @@
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Ērta kameras atvēršana, neatbloķējot ekrānu"</string>
     <string name="screen_zoom_title" msgid="6332123593919641665">"Ekrāna tālummaiņa"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"attēlojums, blīvums, ekrāna tālummaiņa, mērogs, mērogošana"</string>
-    <string name="screen_zoom_summary" msgid="7820299878405115849">"Izmantojiet slīdni zem priekšskatījuma attēla, lai iestatītu ekrāna tālummaiņu."</string>
+    <!-- no translation found for screen_zoom_summary (2022973627105802010) -->
+    <skip />
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"Priekšskatījums"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"Samazināt"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"Palielināt"</string>
@@ -2812,4 +2826,6 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Fona dati ir pieejami, izmantojot tikai Wi-Fi savienojumu. Tas var ietekmēt dažu lietotņu vai pakalpojumu darbību, kad Wi-Fī tīkls nav pieejams."</string>
     <string name="suggestions_title" msgid="8758376306825920705">"Ieteikumi (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"Noņemt"</string>
+    <string name="color_temperature" msgid="2501579996151717270">"Ekrāna krāsu temperatūra"</string>
+    <string name="color_temperature_desc" msgid="3603319696846982249">"Iespējot vēsu krāsu temperatūru"</string>
 </resources>

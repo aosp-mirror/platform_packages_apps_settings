@@ -74,13 +74,17 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"SD-kaardi lahutamine"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Kustuta USB-mäluseade"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Kustuta SD-kaart"</string>
+    <!-- no translation found for font_size_summary (133937309990844030) -->
+    <skip />
     <string name="small_font" msgid="2295331917424072635">"Väike"</string>
     <string name="medium_font" msgid="2068475425515133701">"Keskmine"</string>
     <string name="large_font" msgid="599055175160971446">"Suur"</string>
-    <!-- no translation found for font_size_make_smaller_desc (7919995133365371569) -->
-    <skip />
-    <!-- no translation found for font_size_make_larger_desc (4316986572233686061) -->
-    <skip />
+    <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"Vähendamine"</string>
+    <string name="font_size_make_larger_desc" msgid="4316986572233686061">"Suurendamine"</string>
+    <string name="font_size_preview_text_headline" msgid="7955317408475392247">"Näidistekst"</string>
+    <string name="font_size_preview_text_title" msgid="4762429961714563135">"20 000 ljööd vee all"</string>
+    <string name="font_size_preview_text_subtitle" msgid="5712012075615701561">"23. peatükk: Korallide riigis"</string>
+    <string name="font_size_preview_text_body" msgid="1608889593334414309">"Järgmisel päeval tundsin ärgates, et pea on imelikult tühi. Kõige rohkem üllatas mind see, et viibisin oma kajutis. Minu sõbrad olid arvatavasti samuti oma kajutisse toimetatud, ilma et nad oleksid minust midagi enamat märganud. Niisiis viibisime täielikus teadmatuses kõigest sellest, mis öösel oli toimunud. Võisin ainult loota, et tulevikus mõni juhus paljastab saladuse.\nTahtsin oma kajutist lahkuda. Ma ei teadnud, kas olin ikka veel vang või mitte. Ei, ma olin täiesti vaba. Avasin ukse ning läksin mööda koridori trepi juurde. Luugid, mis õhtul olid suletud, seisid pärani. Ronisin laevalaele.\nNed Land ja Conseil ootasid mind juba ees. Küsitlesin neid. Nad ei teadnud midagi. Äärmiselt raske uni oli kustutanud kõik mälestused möödunud ööst. Hommikul olid nemadki olnud väga üllatunud, kui leidsid end oma kajutist."</string>
     <string name="font_size_save" msgid="3450855718056759095">"OK"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"USB-mäluseade"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"SD-kaart"</string>
@@ -1202,8 +1206,7 @@
     <string name="location_sources_heading" msgid="1278732419851088319">"Asukohaallikad"</string>
     <string name="about_settings" product="tablet" msgid="593457295516533765">"Teave tahvelarvuti kohta"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"Telefoni kohta"</string>
-    <!-- no translation found for about_settings (221313099578564438) -->
-    <skip />
+    <string name="about_settings" product="emulator" msgid="221313099578564438">"Teave jäljendatud seadme kohta"</string>
     <string name="about_settings_summary" msgid="3371517697156165959">"Vaadake juriidilist teavet, olekut, tarkvara versiooni"</string>
     <string name="legal_information" msgid="5769301644270604095">"Juriidiline teave"</string>
     <string name="contributors_title" msgid="5917703088825286504">"Kaasautorid"</string>
@@ -1270,6 +1273,12 @@
     <string name="activity_not_found" msgid="5551664692991605325">"Rakendus pole teie telefoni installitud."</string>
     <string name="lock_settings_profile_title" msgid="7819021341281339182">"Tööprofiil"</string>
     <string name="lock_settings_profile_label" msgid="4423909470339292809">"Tööprofiili turvalisus"</string>
+    <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Tööprofiili ekraanilukk"</string>
+    <string name="lock_settings_profile_unification_title" msgid="3130455578336894831">"Kasuta sama ekraanilukku"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="8014208091623293835">"Muutke peamist profiili, et see ühtiks tööprofiiliga"</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="5297248764066294130">"Kas soovite kasutada sama ekraanilukku?"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="342417647696962745">"Saate seda lukku oma seadmes kasutada, kuid see hõlmab kõiki ekraanilukuga seotud eeskirju, mille IT-administraator on tööprofiilil seadistanud.\nKas soovite oma seadmes kasutada sama ekraanilukku?"</string>
+    <string name="lock_settings_profile_unified_summary" msgid="237623767711796217">"Sama mis seadme lukk"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Halda rakendusi"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Installitud rakenduste haldamine ja eemaldamine"</string>
     <string name="applications_settings" msgid="1721442176406964682">"Rakendused"</string>
@@ -1292,9 +1301,11 @@
     <string name="cache_header_label" msgid="1877197634162461830">"Vahemälu"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"Tühjenda vahemälu"</string>
     <string name="cache_size_label" msgid="7505481393108282913">"Vahemälu"</string>
-    <!-- no translation found for uri_permissions_text (3983110543017963732) -->
-    <!-- no translation found for clear_uri_btn_text (8575655132961012158) -->
-    <skip />
+    <plurals name="uri_permissions_text" formatted="false" msgid="3983110543017963732">
+      <item quantity="other">%d üksust</item>
+      <item quantity="one">1 üksus</item>
+    </plurals>
+    <string name="clear_uri_btn_text" msgid="8575655132961012158">"Tühista juurdepääs"</string>
     <string name="controls_label" msgid="7611113077086853799">"Juhtnupud"</string>
     <string name="force_stop" msgid="7435006169872876756">"Sunni peatuma"</string>
     <string name="total_size_label" msgid="1048676419552557254">"Kokku"</string>
@@ -2351,6 +2362,7 @@
     <string name="keywords_default_apps" msgid="223872637509160136">"rakendused, vaikimisi"</string>
     <string name="keywords_ignore_optimizations" msgid="6102579291119055029">"optimeerimiste ignoreerimine, Doze, rakenduse ooterežiim"</string>
     <string name="keywords_color_mode" msgid="6362744316886077510">"ere, RGB, SRGB, värv, loomulik, tavaline"</string>
+    <string name="keywords_color_temperature" msgid="2688947724153266364">"värvitemperatuur D65 D73 valge kollane sinine soe külm"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"libista avamiseks, parool, muster, PIN"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"töö väljakutse, töö, profiil"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"WiFi NFC-kiibi seadistamine"</string>
@@ -2742,7 +2754,8 @@
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Kaamera avatakse kiirelt ekraani avamata"</string>
     <string name="screen_zoom_title" msgid="6332123593919641665">"Ekraani suum"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"ekraani tihedus, ekraani suum, skaala, skaleerimine"</string>
-    <string name="screen_zoom_summary" msgid="7820299878405115849">"Valige eelvaatekujutise all oleva liuguri abil, kui palju soovite ekraani suumida."</string>
+    <!-- no translation found for screen_zoom_summary (2022973627105802010) -->
+    <skip />
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"Eelvaade"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"Vähendamine"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"Suurendamine"</string>
@@ -2788,4 +2801,6 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Taustaandmed on saadaval ainult WiFi kaudu. Kui WiFi pole saadaval, võib see mõjutada mõne rakenduse või teenuse tööd."</string>
     <string name="suggestions_title" msgid="8758376306825920705">"Soovitused (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"Eemalda"</string>
+    <string name="color_temperature" msgid="2501579996151717270">"Värvitemperatuuri kuvamine"</string>
+    <string name="color_temperature_desc" msgid="3603319696846982249">"Luba külm temperatuur"</string>
 </resources>

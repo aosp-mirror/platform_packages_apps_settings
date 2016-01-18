@@ -74,13 +74,17 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Desactivar a tarxeta SD"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Borrar almacenamento USB"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Borrar tarxeta SD"</string>
+    <!-- no translation found for font_size_summary (133937309990844030) -->
+    <skip />
     <string name="small_font" msgid="2295331917424072635">"Pequeno"</string>
     <string name="medium_font" msgid="2068475425515133701">"Medio"</string>
     <string name="large_font" msgid="599055175160971446">"Grande"</string>
-    <!-- no translation found for font_size_make_smaller_desc (7919995133365371569) -->
-    <skip />
-    <!-- no translation found for font_size_make_larger_desc (4316986572233686061) -->
-    <skip />
+    <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"Reducir"</string>
+    <string name="font_size_make_larger_desc" msgid="4316986572233686061">"Ampliar"</string>
+    <string name="font_size_preview_text_headline" msgid="7955317408475392247">"Texto de mostra"</string>
+    <string name="font_size_preview_text_title" msgid="4762429961714563135">"Vinte mil leguas baixo dos mares"</string>
+    <string name="font_size_preview_text_subtitle" msgid="5712012075615701561">"Capítulo 23: O reino de coral"</string>
+    <string name="font_size_preview_text_body" msgid="1608889593334414309">"Ao día seguinte espertei coa cabeza particularmente despexada. Para a miña sorpresa, estaba no meu camarote. Con certeza, os meus compañeiros debían ter sido reinstalados no seu sen darse conta, coma min. Coma min, tamén ignoraban o que tiña ocorrido esa noite. Para desvelar o misterio, só podía confiar no azar do porvir.\nDespois pensei en saír do meu camarote e pregunteime se estaría preso ou libre novamente. En total liberdade. Abrín a porta, percorrín os corredores e subín a escaleira central. Os zapóns, pechados na véspera, estaban abertos. Cheguei á plataforma.\nNed Land e Conseil estaban esperándome. Interrogueinos, pero non sabían nada. Estaban sorprendidos de atoparse nos seus camarotes ao despertar dun pesado sono que os deixara totalmente inconscientes."</string>
     <string name="font_size_save" msgid="3450855718056759095">"Aceptar"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"Almacenamento USB"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"Tarxeta SD"</string>
@@ -1202,8 +1206,7 @@
     <string name="location_sources_heading" msgid="1278732419851088319">"Fontes de localización"</string>
     <string name="about_settings" product="tablet" msgid="593457295516533765">"Acerca do tablet"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"Acerca do teléfono"</string>
-    <!-- no translation found for about_settings (221313099578564438) -->
-    <skip />
+    <string name="about_settings" product="emulator" msgid="221313099578564438">"Acerca do dispositivo emulado"</string>
     <string name="about_settings_summary" msgid="3371517697156165959">"Mostra información legal, o estado e a versión do software"</string>
     <string name="legal_information" msgid="5769301644270604095">"Información legal"</string>
     <string name="contributors_title" msgid="5917703088825286504">"Colaboradores"</string>
@@ -1270,6 +1273,12 @@
     <string name="activity_not_found" msgid="5551664692991605325">"A aplicación non está instalada no teléfono."</string>
     <string name="lock_settings_profile_title" msgid="7819021341281339182">"Perfil de traballo"</string>
     <string name="lock_settings_profile_label" msgid="4423909470339292809">"Seguranza do perfil de traballo"</string>
+    <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Bloqueo da pantalla do perfil de traballo"</string>
+    <string name="lock_settings_profile_unification_title" msgid="3130455578336894831">"Usar o mesmo bloqueo da pantalla"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="8014208091623293835">"Cambiar perfil principal para que coincida co perfil de traballo"</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="5297248764066294130">"Queres usar o mesmo bloqueo da pantalla?"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="342417647696962745">"Podes usar este bloqueo para o teu dispositivo, pero incluirá todos os bloqueos da pantalla relacionados coas políticas establecidas polo administrador de TI no perfil de traballo.\nQueres usar o mesmo bloqueo da pantalla para o teu dispositivo?"</string>
+    <string name="lock_settings_profile_unified_summary" msgid="237623767711796217">"O mesmo que o bloqueo do teu dispositivo"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Xestionar aplicacións"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Xestiona e elimina as aplicacións instaladas"</string>
     <string name="applications_settings" msgid="1721442176406964682">"Aplicacións"</string>
@@ -1292,9 +1301,11 @@
     <string name="cache_header_label" msgid="1877197634162461830">"Caché"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"Borrar caché"</string>
     <string name="cache_size_label" msgid="7505481393108282913">"Caché"</string>
-    <!-- no translation found for uri_permissions_text (3983110543017963732) -->
-    <!-- no translation found for clear_uri_btn_text (8575655132961012158) -->
-    <skip />
+    <plurals name="uri_permissions_text" formatted="false" msgid="3983110543017963732">
+      <item quantity="other">%d elementos</item>
+      <item quantity="one">1 elemento</item>
+    </plurals>
+    <string name="clear_uri_btn_text" msgid="8575655132961012158">"Borrar acceso"</string>
     <string name="controls_label" msgid="7611113077086853799">"Controis"</string>
     <string name="force_stop" msgid="7435006169872876756">"Forzar parada"</string>
     <string name="total_size_label" msgid="1048676419552557254">"Total"</string>
@@ -1534,7 +1545,7 @@
     <string name="accessibility_display_title" msgid="7610175687949675162">"Pantalla"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"Subtítulos"</string>
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"Xestos de ampliación"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="7545798238172451540">"Achega e afasta o zoom tocando tres veces a pantalla cun dedo.\n\nCo zoom achegado podes:\n"<ul><li>"Facer unha panorámica: arrastra dous ou máis dedos pola pantalla."</li>\n<li>"Axustar o nivel do zoom: belisca con dous ou máis dedos ou afástaos entre si."</li>\n<li>"Ampliar o contido de forma temporal: toca tres veces, mantén premido e arrastra o dedo para explorar as diferentes partes da pantalla. Levanta o dedo para volver ao estado anterior."</li></ul>\n\n"Podes tocar tres veces a pantalla para ampliar o contido en calquera parte excepto no teclado e na barra de navegación."</string>
+    <string name="accessibility_screen_magnification_summary" msgid="7545798238172451540">"Achega e afasta o zoom tocando tres veces a pantalla cun dedo.\n\nCo zoom achegado podes:\n"<ul><li>"Facer unha panorámica: arrastra dous ou máis dedos pola pantalla."</li>\n<li>"Axustar o nivel do zoom: belisca con dous ou máis dedos ou afástaos entre si."</li>\n<li>"Ampliar o contido de forma temporal: dá tres toques e, sen levantar o dedo, arrástrao pola pantalla para explorar as diferentes partes. Levanta o dedo para volver ao estado anterior."</li></ul>\n\n"Podes tocar tres veces a pantalla para ampliar o contido en calquera parte excepto no teclado e na barra de navegación."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Atallo de accesibilidade"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"Activado"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"Desactivado"</string>
@@ -2351,6 +2362,7 @@
     <string name="keywords_default_apps" msgid="223872637509160136">"aplicacións, predeterminadas"</string>
     <string name="keywords_ignore_optimizations" msgid="6102579291119055029">"ignorar optimizacións, sesta, modo de espera da aplicación"</string>
     <string name="keywords_color_mode" msgid="6362744316886077510">"brillante, RGB, sRGB, cor, natural, estándar"</string>
+    <string name="keywords_color_temperature" msgid="2688947724153266364">"temperatura da cor D65 D73 branco amarelo azul cálido frío"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"pasar o dedo para desbloquear, contrasinal, padrón, PIN"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"desafío de traballo, traballo, perfil"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Configurar etiqueta NFC wifi"</string>
@@ -2742,7 +2754,8 @@
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Abre a cámara rapidamente sen desbloquear a pantalla"</string>
     <string name="screen_zoom_title" msgid="6332123593919641665">"Zoom da pantalla"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"densidade de visualización, zoom da pantalla, escala, escalado"</string>
-    <string name="screen_zoom_summary" msgid="7820299878405115849">"Escolle o nivel de zoom que queres aplicar á pantalla usando a barra de desprazamento que se atopa debaixo da imaxe de vista previa."</string>
+    <!-- no translation found for screen_zoom_summary (2022973627105802010) -->
+    <skip />
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"Vista previa"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"Facer máis pequeno"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"Facer máis grande"</string>
@@ -2788,4 +2801,6 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Os datos en segundo plano só están dispoñibles a través de wifi. Esta opción pode afectar a algunhas aplicacións ou servizos cando non haxa wifi."</string>
     <string name="suggestions_title" msgid="8758376306825920705">"Suxestións (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"Eliminar"</string>
+    <string name="color_temperature" msgid="2501579996151717270">"Temperatura da cor da pantalla"</string>
+    <string name="color_temperature_desc" msgid="3603319696846982249">"Activar temperatura fría"</string>
 </resources>

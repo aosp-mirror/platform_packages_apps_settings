@@ -75,13 +75,17 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Demontați cardul SD"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Ștergeți stocarea USB"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Ștergeți cardul SD"</string>
+    <!-- no translation found for font_size_summary (133937309990844030) -->
+    <skip />
     <string name="small_font" msgid="2295331917424072635">"Mică"</string>
     <string name="medium_font" msgid="2068475425515133701">"Medie"</string>
     <string name="large_font" msgid="599055175160971446">"Mare"</string>
-    <!-- no translation found for font_size_make_smaller_desc (7919995133365371569) -->
-    <skip />
-    <!-- no translation found for font_size_make_larger_desc (4316986572233686061) -->
-    <skip />
+    <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"Micșorați"</string>
+    <string name="font_size_make_larger_desc" msgid="4316986572233686061">"Măriți"</string>
+    <string name="font_size_preview_text_headline" msgid="7955317408475392247">"Exemplu de text"</string>
+    <string name="font_size_preview_text_title" msgid="4762429961714563135">"Douăzeci de mii de leghe sub mări"</string>
+    <string name="font_size_preview_text_subtitle" msgid="5712012075615701561">"Capitolul 23: Regatul de coral"</string>
+    <string name="font_size_preview_text_body" msgid="1608889593334414309">"A doua zi m-am trezit cu mintea surprinzător de limpede. Spre marea mea surpriză, eram în propria mea cameră. Fără îndoială, tovarășii mei fuseseră reinstalați în cabina lor, fără să fi observat acest lucru, așa cum nici eu nu observasem. Nu știau mai multe decât mine despre ce se întâmplase în timpul nopții, iar pentru a dezlega acest mister mă puteam baza numai pe evenimente viitoare.\nAtunci m-am gândit să ies din cameră. Oare eram liber din nou sau eram prizonier? Eram liber. Am deschis ușa, am mers pe puntea secundară și am urcat pe scările centrale. Panourile, care aseară erau închise, erau deschise acum. Am mers pe platformă. \nNed Land și Conseil mă așteptau acolo. I-am întrebat, dar nu știau nimic. Pierduți într-un somn greu, pierzându-și total conștiența, fuseseră la rândul lor uimiți când s-au trezit în cabinele lor."</string>
     <string name="font_size_save" msgid="3450855718056759095">"OK"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"Stocare USB"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"Card SD"</string>
@@ -1211,8 +1215,7 @@
     <string name="location_sources_heading" msgid="1278732419851088319">"Surse de locații"</string>
     <string name="about_settings" product="tablet" msgid="593457295516533765">"Despre tabletă"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"Despre telefon"</string>
-    <!-- no translation found for about_settings (221313099578564438) -->
-    <skip />
+    <string name="about_settings" product="emulator" msgid="221313099578564438">"Despre dispozitivul emulat"</string>
     <string name="about_settings_summary" msgid="3371517697156165959">"Afișați informații legale, starea și versiunea programului software"</string>
     <string name="legal_information" msgid="5769301644270604095">"Informații de ordin juridic"</string>
     <string name="contributors_title" msgid="5917703088825286504">"Colaboratori"</string>
@@ -1279,6 +1282,12 @@
     <string name="activity_not_found" msgid="5551664692991605325">"Aplicaţia nu este instalată pe telefonul dvs."</string>
     <string name="lock_settings_profile_title" msgid="7819021341281339182">"Profil de serviciu"</string>
     <string name="lock_settings_profile_label" msgid="4423909470339292809">"Securitatea profilului de serviciu"</string>
+    <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Blocarea ecranului în profilul de serviciu"</string>
+    <string name="lock_settings_profile_unification_title" msgid="3130455578336894831">"Folosiți aceeași blocare a ecranului"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="8014208091623293835">"Schimbați profilul principal pentru a corespunde cu profilul de serviciu"</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="5297248764066294130">"Folosiți aceeași blocare a ecranului?"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="342417647696962745">"Puteți folosi această blocare pentru dispozitivul dvs., însă va include toate politicile asociate de blocare a ecranului setate de administratorul IT în profilul de serviciu.\nDoriți să folosiți aceeași blocare a ecranului pentru dispozitivul dvs.?"</string>
+    <string name="lock_settings_profile_unified_summary" msgid="237623767711796217">"Identică cu blocarea dispozitivului"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Gestionați aplicații"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Gestionați și eliminaţi aplicațiile instalate"</string>
     <string name="applications_settings" msgid="1721442176406964682">"Aplicații"</string>
@@ -1301,9 +1310,12 @@
     <string name="cache_header_label" msgid="1877197634162461830">"Memorie cache"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"Goliți memoria cache"</string>
     <string name="cache_size_label" msgid="7505481393108282913">"Memorie cache"</string>
-    <!-- no translation found for uri_permissions_text (3983110543017963732) -->
-    <!-- no translation found for clear_uri_btn_text (8575655132961012158) -->
-    <skip />
+    <plurals name="uri_permissions_text" formatted="false" msgid="3983110543017963732">
+      <item quantity="few">%d elemente</item>
+      <item quantity="other">%d de elemente</item>
+      <item quantity="one">Un element</item>
+    </plurals>
+    <string name="clear_uri_btn_text" msgid="8575655132961012158">"Anulați accesul"</string>
     <string name="controls_label" msgid="7611113077086853799">"Comenzi"</string>
     <string name="force_stop" msgid="7435006169872876756">"Opriți forțat"</string>
     <string name="total_size_label" msgid="1048676419552557254">"Total"</string>
@@ -2367,6 +2379,7 @@
     <string name="keywords_default_apps" msgid="223872637509160136">"aplicații, prestabilite"</string>
     <string name="keywords_ignore_optimizations" msgid="6102579291119055029">"ignorați opțiuni optimizare, doze, standby aplicații"</string>
     <string name="keywords_color_mode" msgid="6362744316886077510">"vibrantă, RGB, sRGB, culoare, naturală, standard"</string>
+    <string name="keywords_color_temperature" msgid="2688947724153266364">"temperatură culoare D65 D73 alb galben albastru cald rece"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"glisați pentru a debloca, parolă, model, PIN"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"provocare la serviciu, serviciu, profil"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Configurarea etichetei NFC pentru Wi-Fi"</string>
@@ -2767,7 +2780,8 @@
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Deschideți rapid camera foto fără să deblocați ecranul"</string>
     <string name="screen_zoom_title" msgid="6332123593919641665">"Zoom ecran"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"densitate afișaj, zoom ecran, scară, scalare"</string>
-    <string name="screen_zoom_summary" msgid="7820299878405115849">"Alegeți nivelul de zoom al ecranului folosind glisorul de sub imaginea de previzualizare."</string>
+    <!-- no translation found for screen_zoom_summary (2022973627105802010) -->
+    <skip />
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"Previzualizați"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"Micșorați"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"Măriți"</string>
@@ -2813,4 +2827,6 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Datele de fundal sunt disponibile doar prin Wi-Fi. Este posibil ca unele aplicații sau servicii să fie afectate când conexiunea Wi-Fi nu este disponibilă."</string>
     <string name="suggestions_title" msgid="8758376306825920705">"Sugestii (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"Eliminați"</string>
+    <string name="color_temperature" msgid="2501579996151717270">"Temperatura de culoare a afișajului"</string>
+    <string name="color_temperature_desc" msgid="3603319696846982249">"Activați culorile reci"</string>
 </resources>

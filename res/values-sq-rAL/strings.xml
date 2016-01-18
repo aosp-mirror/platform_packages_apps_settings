@@ -74,13 +74,17 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Shkëput kartën SD"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Spastro hapësirën për ruajtje të USB-së"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Spastroje kartën SD"</string>
+    <!-- no translation found for font_size_summary (133937309990844030) -->
+    <skip />
     <string name="small_font" msgid="2295331917424072635">"E vogël"</string>
     <string name="medium_font" msgid="2068475425515133701">"Mesatar"</string>
     <string name="large_font" msgid="599055175160971446">"I madh"</string>
-    <!-- no translation found for font_size_make_smaller_desc (7919995133365371569) -->
-    <skip />
-    <!-- no translation found for font_size_make_larger_desc (4316986572233686061) -->
-    <skip />
+    <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"Zvogëlo"</string>
+    <string name="font_size_make_larger_desc" msgid="4316986572233686061">"Zmadho"</string>
+    <string name="font_size_preview_text_headline" msgid="7955317408475392247">"Teksti shembull"</string>
+    <string name="font_size_preview_text_title" msgid="4762429961714563135">"Njëzetë mijë lega nën det"</string>
+    <string name="font_size_preview_text_subtitle" msgid="5712012075615701561">"Kapitulli 23: Mbretëria e Koraleve"</string>
+    <string name="font_size_preview_text_body" msgid="1608889593334414309">"Të nesërmen u zgjova me kokën krejtësisht të kthjellët. Për çudinë time të madhe, isha në dhomën time. Shokët e mi padyshim që ishin kthyer në kabinat e tyre, pa e kuptuar më shumë se sa unë. Për atë që kishte kaluar natën ata ishin po aq të paditur sa edhe unë, dhe shanset për të zhbiruar këtë mister mund t\'i sillte vetëm e ardhmja.\nMë pas mendova të dilja nga dhoma. Isha i lirë apo isha rob? Krejtësisht i lirë. Hapa derën, dola në kuvertën e vogël, u ngjita te shkallët qendrore. Grilat, të mbyllura një natë më parë, ishin të hapura. Shkova në platformë.\nNed Landi dhe Konsili më prisnin atje. I pyeta, por nuk dinin asgjë. Të humbur në një gjumë të rëndë që i kishte mbajtur krejtësisht të pandërgjegjshëm, ata u çuditën kur e gjetën veten në kabinë."</string>
     <string name="font_size_save" msgid="3450855718056759095">"Në rregull"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"Hapësira ruajtëse e USB-së"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"Karta SD"</string>
@@ -1202,8 +1206,7 @@
     <string name="location_sources_heading" msgid="1278732419851088319">"Burimet e vendndodhjes"</string>
     <string name="about_settings" product="tablet" msgid="593457295516533765">"Rreth tabletit"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"Informacion mbi telefonin"</string>
-    <!-- no translation found for about_settings (221313099578564438) -->
-    <skip />
+    <string name="about_settings" product="emulator" msgid="221313099578564438">"Rreth emulatorit"</string>
     <string name="about_settings_summary" msgid="3371517697156165959">"Shiko informacionin ligjor, statusin dhe versionin e softuerit"</string>
     <string name="legal_information" msgid="5769301644270604095">"Informacioni ligjor"</string>
     <string name="contributors_title" msgid="5917703088825286504">"Kontribuuesit"</string>
@@ -1270,6 +1273,12 @@
     <string name="activity_not_found" msgid="5551664692991605325">"Aplikacioni nuk është i instaluar në telefonin tënd."</string>
     <string name="lock_settings_profile_title" msgid="7819021341281339182">"Profili i punës"</string>
     <string name="lock_settings_profile_label" msgid="4423909470339292809">"Siguria e profilit të punës"</string>
+    <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Kyçja e ekranit të profilit të punës"</string>
+    <string name="lock_settings_profile_unification_title" msgid="3130455578336894831">"Përdor të njëjtën kyçje ekrani"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="8014208091623293835">"Ndrysho profilin kryesor që të përputhet me profilin e punës"</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="5297248764066294130">"Të përdoret e njëjta kyçje ekrani?"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="342417647696962745">"Mund ta përdorësh këtë kyçje për pajisjen tënde, por ajo do të përfshijë të gjitha politikat në lidhje me kyçjen e ekranit që përcaktohen nga administratori yt i TI-së në profilin e punës.\nDëshiron të përdorësh të njëjtën kyçje ekrani për pajisjen tënde?"</string>
+    <string name="lock_settings_profile_unified_summary" msgid="237623767711796217">"Njësoj si kyçja e pajisjes tënde"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Menaxho aplikacionet"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Menaxho dhe hiq aplikacionet e instaluara"</string>
     <string name="applications_settings" msgid="1721442176406964682">"Aplikacionet"</string>
@@ -1292,9 +1301,11 @@
     <string name="cache_header_label" msgid="1877197634162461830">"Memoria specifike"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"Pastro memorien specifike"</string>
     <string name="cache_size_label" msgid="7505481393108282913">"Memoria specifike"</string>
-    <!-- no translation found for uri_permissions_text (3983110543017963732) -->
-    <!-- no translation found for clear_uri_btn_text (8575655132961012158) -->
-    <skip />
+    <plurals name="uri_permissions_text" formatted="false" msgid="3983110543017963732">
+      <item quantity="other">%d artikuj</item>
+      <item quantity="one">1 artikull</item>
+    </plurals>
+    <string name="clear_uri_btn_text" msgid="8575655132961012158">"Qasje e pastër"</string>
     <string name="controls_label" msgid="7611113077086853799">"Kontrollet"</string>
     <string name="force_stop" msgid="7435006169872876756">"Ndalo me forcë"</string>
     <string name="total_size_label" msgid="1048676419552557254">"Totali"</string>
@@ -2351,6 +2362,7 @@
     <string name="keywords_default_apps" msgid="223872637509160136">"aplikacionet, e parazgjedhura"</string>
     <string name="keywords_ignore_optimizations" msgid="6102579291119055029">"shpërfill optimizimet, sasia, aplikacioni në modalitet gatishmërie"</string>
     <string name="keywords_color_mode" msgid="6362744316886077510">"ngjyrë e gjallë, RGB, sRGB, ngjyrë, natyrale, standarde"</string>
+    <string name="keywords_color_temperature" msgid="2688947724153266364">"temperaturë e ftohtë D65 D73 e bardhë e verdhë blu e ngrohtë e ftohtë"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"rrëshqit për ta shkyçur, fjalëkalim, motiv, PIN"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"sfidë në punë, punë, profil"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Cakto një etiketë NFC për Wi-Fi"</string>
@@ -2742,7 +2754,8 @@
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Hap me shpejtësi kamerën pa e shkyçur ekranin"</string>
     <string name="screen_zoom_title" msgid="6332123593919641665">"Zmadhimi i ekranit"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"dendësia e pamjes, zmadhimi i ekranit, shkalla, shkallëzimi"</string>
-    <string name="screen_zoom_summary" msgid="7820299878405115849">"Zgjidh zmadhimin e dëshiruar për ekranin duke përdorur rrëshqitësin poshtë imazhit të pamjes paraprake."</string>
+    <!-- no translation found for screen_zoom_summary (2022973627105802010) -->
+    <skip />
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"Pamja paraprake"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"Zvogëlo"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"Zmadho"</string>
@@ -2788,4 +2801,6 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Të dhënat e sfondit janë të disponueshme vetëm përmes lidhjes Wi-Fi. Kjo mund të ndikojë te disa aplikacione ose shërbime kur lidhja Wi-Fi nuk është e disponueshme."</string>
     <string name="suggestions_title" msgid="8758376306825920705">"Sugjerimet (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"Hiqe"</string>
+    <string name="color_temperature" msgid="2501579996151717270">"Shfaq temperaturën e ngjyrës"</string>
+    <string name="color_temperature_desc" msgid="3603319696846982249">"Aktivizo temperaturën e ftohtë"</string>
 </resources>

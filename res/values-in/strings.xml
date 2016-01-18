@@ -74,13 +74,16 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Lepaskan kartu SD"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Hapus penyimpanan USB"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Hapus kartu SD"</string>
+    <string name="font_size_summary" msgid="133937309990844030">"Membuat teks di layar menjadi lebih kecil atau lebih besar."</string>
     <string name="small_font" msgid="2295331917424072635">"Kecil"</string>
     <string name="medium_font" msgid="2068475425515133701">"Sedang"</string>
     <string name="large_font" msgid="599055175160971446">"Besar"</string>
-    <!-- no translation found for font_size_make_smaller_desc (7919995133365371569) -->
-    <skip />
-    <!-- no translation found for font_size_make_larger_desc (4316986572233686061) -->
-    <skip />
+    <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"Buat lebih kecil"</string>
+    <string name="font_size_make_larger_desc" msgid="4316986572233686061">"Buat lebih besar"</string>
+    <string name="font_size_preview_text_headline" msgid="7955317408475392247">"Teks contoh"</string>
+    <string name="font_size_preview_text_title" msgid="4762429961714563135">"Dua Puluh Ribu Liga Di Bawah Laut"</string>
+    <string name="font_size_preview_text_subtitle" msgid="5712012075615701561">"Bab 23: Kerajaan Karang"</string>
+    <string name="font_size_preview_text_body" msgid="1608889593334414309">"Esok harinya aku terbangun dengan pikiran yang sangat jernih. Tanpa kuduga, aku berada di kamarku sendiri. Teman-temanku pasti sudah kembali ke kabin mereka, tanpa memahami apa pun. Tentang yang terjadi semalam, mereka sama tidak tahunya seperti aku, dan untuk memecahkan misteri ini aku hanya mengandalkan kesempatan di masa mendatang.\nLalu aku berpikir untuk keluar dari kamar. Apa aku bebas kembali atau menjadi tawanan? Ternyata bebas. Aku membuka pintu, pergi ke geladak, naik ke tangga tengah. Panelnya yang ditutup pada malam sebelumnya, terbuka. Aku melanjutkan ke balkon.\nNed Land dan Conseil menungguku di sana. Aku menanyai mereka; mereka tidak tahu apa-apa. Karena tertidur lelap dan sama sekali tidak sadar, mereka kaget bisa berada di kabin."</string>
     <string name="font_size_save" msgid="3450855718056759095">"Oke"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"Penyimpanan USB"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"Kartu SD"</string>
@@ -1202,8 +1205,7 @@
     <string name="location_sources_heading" msgid="1278732419851088319">"Sumber lokasi"</string>
     <string name="about_settings" product="tablet" msgid="593457295516533765">"Tentang tablet"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"Tentang ponsel"</string>
-    <!-- no translation found for about_settings (221313099578564438) -->
-    <skip />
+    <string name="about_settings" product="emulator" msgid="221313099578564438">"Tentang perangkat yang diemulasi"</string>
     <string name="about_settings_summary" msgid="3371517697156165959">"Lihat info legal, status, versi perangkat lunak"</string>
     <string name="legal_information" msgid="5769301644270604095">"Informasi hukum"</string>
     <string name="contributors_title" msgid="5917703088825286504">"Kontributor"</string>
@@ -1270,6 +1272,12 @@
     <string name="activity_not_found" msgid="5551664692991605325">"Aplikasi tidak dipasang pada ponsel Anda."</string>
     <string name="lock_settings_profile_title" msgid="7819021341281339182">"Profil kerja"</string>
     <string name="lock_settings_profile_label" msgid="4423909470339292809">"Keamanan profil kerja"</string>
+    <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Kunci layar profil kerja"</string>
+    <string name="lock_settings_profile_unification_title" msgid="3130455578336894831">"Gunakan kunci layar yang sama"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="8014208091623293835">"Ubah profil utama agar cocok dengan profil kerja"</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="5297248764066294130">"Gunakan kunci layar yang sama?"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="342417647696962745">"Anda dapat menggunakan kunci ini untuk perangkat, tetapi ini juga mencakup semua kebijakan terkait kunci layar yang disetel oleh admin IT di profil kerja.\nIngin menggunakan kunci layar yang sama untuk perangkat?"</string>
+    <string name="lock_settings_profile_unified_summary" msgid="237623767711796217">"Sama dengan kunci perangkat Anda"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Kelola aplikasi"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Mengelola dan menghapus apl terpasang"</string>
     <string name="applications_settings" msgid="1721442176406964682">"Aplikasi"</string>
@@ -1292,9 +1300,11 @@
     <string name="cache_header_label" msgid="1877197634162461830">"Cache"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"Hapus cache"</string>
     <string name="cache_size_label" msgid="7505481393108282913">"Cache"</string>
-    <!-- no translation found for uri_permissions_text (3983110543017963732) -->
-    <!-- no translation found for clear_uri_btn_text (8575655132961012158) -->
-    <skip />
+    <plurals name="uri_permissions_text" formatted="false" msgid="3983110543017963732">
+      <item quantity="other">%d item</item>
+      <item quantity="one">1 item</item>
+    </plurals>
+    <string name="clear_uri_btn_text" msgid="8575655132961012158">"Hapus akses"</string>
     <string name="controls_label" msgid="7611113077086853799">"Kontrol"</string>
     <string name="force_stop" msgid="7435006169872876756">"Paksa berhenti"</string>
     <string name="total_size_label" msgid="1048676419552557254">"Total"</string>
@@ -2351,6 +2361,7 @@
     <string name="keywords_default_apps" msgid="223872637509160136">"aplikasi, default"</string>
     <string name="keywords_ignore_optimizations" msgid="6102579291119055029">"abaikan, pengoptimalan, istirahatkan, aplikasi siaga"</string>
     <string name="keywords_color_mode" msgid="6362744316886077510">"terang, RGB, SRGB, warna, alami, standar"</string>
+    <string name="keywords_color_temperature" msgid="2688947724153266364">"suhu foto D65 D73 putih kuning biru hangat sejuk"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"geser untuk membuka kunci, sandi, pola, PIN"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"tantangan kerja, kerja, profil"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Siapkan Tag NFC Wi-Fi"</string>
@@ -2742,7 +2753,7 @@
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Buka kamera dengan cepat tanpa membuka kunci layar"</string>
     <string name="screen_zoom_title" msgid="6332123593919641665">"Zoom layar"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"layar, kepadatan, zoom layar, skala, penskalaan"</string>
-    <string name="screen_zoom_summary" msgid="7820299878405115849">"Pilih ukuran zoom layar yang Anda inginkan menggunakan bilah geser di bawah gambar pratinjau."</string>
+    <string name="screen_zoom_summary" msgid="2022973627105802010">"Membuat semua item di layar menjadi lebih kecil atau lebih besar. Beberapa aplikasi di layar utama dapat berubah posisi jika setelan ini diubah."</string>
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"Pratinjau"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"Buat lebih kecil"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"Buat lebih besar"</string>
@@ -2788,4 +2799,6 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Data latar belakang hanya tersedia melalui Wi-Fi. Hal ini dapat memengaruhi beberapa aplikasi atau layanan saat Wi-Fi tidak tersedia."</string>
     <string name="suggestions_title" msgid="8758376306825920705">"Saran (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"Hapus"</string>
+    <string name="color_temperature" msgid="2501579996151717270">"Tampilkan suhu foto"</string>
+    <string name="color_temperature_desc" msgid="3603319696846982249">"Aktifkan suhu sejuk"</string>
 </resources>

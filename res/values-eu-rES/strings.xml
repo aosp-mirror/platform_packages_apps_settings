@@ -74,11 +74,17 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Desmuntatu SD txartela"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Ezabatu USB memoria"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Ezabatu SD txartela"</string>
+    <!-- no translation found for font_size_summary (133937309990844030) -->
+    <skip />
     <string name="small_font" msgid="2295331917424072635">"Txikia"</string>
     <string name="medium_font" msgid="2068475425515133701">"Ertaina"</string>
     <string name="large_font" msgid="599055175160971446">"Handia"</string>
     <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"Txikitu"</string>
     <string name="font_size_make_larger_desc" msgid="4316986572233686061">"Handitu"</string>
+    <string name="font_size_preview_text_headline" msgid="7955317408475392247">"Testu-lagina"</string>
+    <string name="font_size_preview_text_title" msgid="4762429961714563135">"Hogei mila legoako bidaia itsaspetik"</string>
+    <string name="font_size_preview_text_subtitle" msgid="5712012075615701561">"24. kapitulua: Koralaren erresuma"</string>
+    <string name="font_size_preview_text_body" msgid="1608889593334414309">"Hurrengo egunean, esnatu nintzenean, inoiz baino argiago nuen burua. Nire ustekabean, neure gelan nengoen. Zalantzarik gabe, nire adiskideak beren kabinetara eraman zituzten, baina haiek ere ez ziren ohartu, ni bezala. Ez nik, ez haiek, ez genekien zer gertatu zen gauean, eta gauzak pixkanaka argituz joatea baino ezin nuen espero.\nOndoren, gelatik irtetea pentsatu nuen. Berriz ere libre nintzen, ala preso nengoen? Guztiz libre. Atea ireki eta, bizkar partzialera iritsitakoan, erdiko eskaileretatik igo nintzen. Panelak itxita ikusi nituen gauean, baina dagoeneko zabalik zeuden. Plataformara igo nintzen.\nNed Land eta Conseil zain nituen. Galdetu nien, baina ez zekiten ezer. Lo sakonak erabat inkontziente utzi zituen eta, esnatzean, harrituta geratu ziren beren kabinan zeudela ikusita."</string>
     <string name="font_size_save" msgid="3450855718056759095">"Ados"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"USB memoria"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"SD txartela"</string>
@@ -1267,6 +1273,12 @@
     <string name="activity_not_found" msgid="5551664692991605325">"Ez duzu aplikazioa telefonoan instalatu."</string>
     <string name="lock_settings_profile_title" msgid="7819021341281339182">"Laneko profila"</string>
     <string name="lock_settings_profile_label" msgid="4423909470339292809">"Laneko profilaren segurtasuna"</string>
+    <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Laneko profileko pantailaren blokeoa"</string>
+    <string name="lock_settings_profile_unification_title" msgid="3130455578336894831">"Erabili pantailaren blokeo bera"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="8014208091623293835">"Aldatu profil nagusia laneko profilarekin bat etor dadin"</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="5297248764066294130">"Pantailaren blokeo bera erabili nahi duzu?"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="342417647696962745">"Gailuan erabil dezakezu blokeo hau, baina IKT administratzaileak laneko profilean ezarri dizkizun pantailaren blokeoarekin erlazionatutako gidalerro guztiak sartuko dira.\nBlokeo bera erabili nahi duzu gailuan?"</string>
+    <string name="lock_settings_profile_unified_summary" msgid="237623767711796217">"Gailuaren blokeo bera"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Kudeatu aplikazioak"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Kudeatu eta kendu instalatutako aplikazioak"</string>
     <string name="applications_settings" msgid="1721442176406964682">"Aplikazioak"</string>
@@ -2350,6 +2362,7 @@
     <string name="keywords_default_apps" msgid="223872637509160136">"aplikazio, lehenetsi"</string>
     <string name="keywords_ignore_optimizations" msgid="6102579291119055029">"egin ez ikusi optimizazioei, utzi aplikazioa egonean, lokartu"</string>
     <string name="keywords_color_mode" msgid="6362744316886077510">"bizia, RGB, sRGB, kolorea, naturala, estandarra"</string>
+    <string name="keywords_color_temperature" msgid="2688947724153266364">"kolorearen tenperatura D65 D73 zuria horia urdina beroa hotza"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"lerratu desblokeatzeko, pasahitza, eredua, PIN, kodea"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"laneko erronka, lana, profila"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Konfiguratu Wi-Fi NFC etiketa"</string>
@@ -2741,7 +2754,8 @@
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Ireki kamera bizkor, pantaila desblokeatu beharrik gabe"</string>
     <string name="screen_zoom_title" msgid="6332123593919641665">"Pantailaren zooma"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"pantaila, dentsitate, zoom, eskala, tamaina, egokitu, doitu"</string>
-    <string name="screen_zoom_summary" msgid="7820299878405115849">"Aukeratu zenbateraino handitu edo txikitu nahi duzun pantaila aurrebista-irudiaren azpian dagoen graduatzailea erabilita."</string>
+    <!-- no translation found for screen_zoom_summary (2022973627105802010) -->
+    <skip />
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"Aurrebista"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"Txikitu"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"Handitu"</string>
@@ -2787,4 +2801,6 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Atzeko planoko datuak Wi-Fi bidez soilik erabil daitezke. Horrek eragina izango du aplikazio eta zerbitzu batzuetan, Wi-Fi konexiorik ez dagoenean."</string>
     <string name="suggestions_title" msgid="8758376306825920705">"Iradokizunak (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"Kendu"</string>
+    <string name="color_temperature" msgid="2501579996151717270">"Pantailaren kolorearen tenperatura"</string>
+    <string name="color_temperature_desc" msgid="3603319696846982249">"Gaitu tenperatura hotza"</string>
 </resources>

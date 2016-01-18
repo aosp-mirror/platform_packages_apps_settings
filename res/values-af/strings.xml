@@ -74,13 +74,16 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Ontkoppel SD-kaart"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Vee USB-berging uit"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Vee SD-kaart uit"</string>
+    <string name="font_size_summary" msgid="133937309990844030">"Maak teks op skerm kleiner of groter."</string>
     <string name="small_font" msgid="2295331917424072635">"Klein"</string>
     <string name="medium_font" msgid="2068475425515133701">"Medium"</string>
     <string name="large_font" msgid="599055175160971446">"Groot"</string>
-    <!-- no translation found for font_size_make_smaller_desc (7919995133365371569) -->
-    <skip />
-    <!-- no translation found for font_size_make_larger_desc (4316986572233686061) -->
-    <skip />
+    <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"Maak kleiner"</string>
+    <string name="font_size_make_larger_desc" msgid="4316986572233686061">"Maak groter"</string>
+    <string name="font_size_preview_text_headline" msgid="7955317408475392247">"Voorbeeldteks"</string>
+    <string name="font_size_preview_text_title" msgid="4762429961714563135">"Twenty Thousand Leagues Under The Sea"</string>
+    <string name="font_size_preview_text_subtitle" msgid="5712012075615701561">"Hoofstuk 23: Die koraalkoninkryk"</string>
+    <string name="font_size_preview_text_body" msgid="1608889593334414309">"Die volgende dag word ek met my kop besonder helder wakker. Tot my groot verbasing is ek in my eie kamer. My metgeselle is ongetwyfeld weer in hul kajuit geplaas terwyl hulle dit net so min as ek agtergekom het. Hulle weet net so min as ek van wat in die nag gebeur het, en ek reken dat net die toekoms die moontlikheid sal bied om hierdie raaisel uit te pluis.\nToe dink ek daaraan om my kamer te verlaat. Is ek weer vry of word ek aangehou? Heel vry. Ek maak die deur oop, gaan na die halfdek, gaan by die middelste trappe op. Die panele, wat die vorige aand toegemaak was, is oop. Ek gaan verder na die platform.\nNed Land en Conseil wag daar vir my. Ek vra hulle uit; hulle weet niks nie. Verlore in diep slaap waarin hulle heeltemal onbewus was van wat aangaan, was hulle verbaas om weer in hul kajuit te wees."</string>
     <string name="font_size_save" msgid="3450855718056759095">"OK"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"USB-berging"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"SD-kaart"</string>
@@ -1202,8 +1205,7 @@
     <string name="location_sources_heading" msgid="1278732419851088319">"Liggingsbronne"</string>
     <string name="about_settings" product="tablet" msgid="593457295516533765">"Meer oor tablet"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"Meer oor foon"</string>
-    <!-- no translation found for about_settings (221313099578564438) -->
-    <skip />
+    <string name="about_settings" product="emulator" msgid="221313099578564438">"Meer oor nagebootste toestel"</string>
     <string name="about_settings_summary" msgid="3371517697156165959">"Sien regsinligting, status, sagteware-weergawe"</string>
     <string name="legal_information" msgid="5769301644270604095">"Regsinligting"</string>
     <string name="contributors_title" msgid="5917703088825286504">"Bydraers"</string>
@@ -1270,6 +1272,12 @@
     <string name="activity_not_found" msgid="5551664692991605325">"Die program is nie op jou foon geïnstalleer nie."</string>
     <string name="lock_settings_profile_title" msgid="7819021341281339182">"Werkprofiel"</string>
     <string name="lock_settings_profile_label" msgid="4423909470339292809">"Werkprofielsekuriteit"</string>
+    <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Werkprofiel se skermslot"</string>
+    <string name="lock_settings_profile_unification_title" msgid="3130455578336894831">"Gebruik dieselfde skermslot"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="8014208091623293835">"Verander primêre profiel om by werkprofiel te pas"</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="5297248764066294130">"Gebruik dieselfde skermslot?"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="342417647696962745">"Jy kan hierdie slot vir jou toestel gebruik, maar dit sal alle skermslotverwante beleide insluit wat jou IT-administrateur in die werkprofiel gestel het.\nWil jy dieselfde skermslot vir jou toestel gebruik?"</string>
+    <string name="lock_settings_profile_unified_summary" msgid="237623767711796217">"Dieselfde as jou toestelslot"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Bestuur programme"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Bestuur en verwyder geïnstalleerde programme"</string>
     <string name="applications_settings" msgid="1721442176406964682">"Programme"</string>
@@ -1292,9 +1300,11 @@
     <string name="cache_header_label" msgid="1877197634162461830">"Kasgeheue"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"Maak kas skoon"</string>
     <string name="cache_size_label" msgid="7505481393108282913">"Kasgeheue"</string>
-    <!-- no translation found for uri_permissions_text (3983110543017963732) -->
-    <!-- no translation found for clear_uri_btn_text (8575655132961012158) -->
-    <skip />
+    <plurals name="uri_permissions_text" formatted="false" msgid="3983110543017963732">
+      <item quantity="other">%d items</item>
+      <item quantity="one">1 item</item>
+    </plurals>
+    <string name="clear_uri_btn_text" msgid="8575655132961012158">"Maak toegang skoon"</string>
     <string name="controls_label" msgid="7611113077086853799">"Kontroles"</string>
     <string name="force_stop" msgid="7435006169872876756">"Dwing stop"</string>
     <string name="total_size_label" msgid="1048676419552557254">"Totaal"</string>
@@ -2351,6 +2361,7 @@
     <string name="keywords_default_apps" msgid="223872637509160136">"programme, verstek"</string>
     <string name="keywords_ignore_optimizations" msgid="6102579291119055029">"ignoreer optimerings, dut, programbystand"</string>
     <string name="keywords_color_mode" msgid="6362744316886077510">"lewendig, RGB, sRGB, kleur, natuurlik, standaard"</string>
+    <string name="keywords_color_temperature" msgid="2688947724153266364">"kleur temperatuur D65 D73 wit geel blou warm koel"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"gly om te ontsluit, wagwoord, patroon, PIN"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"werkuitdaging, werk, profiel"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Stel Wi-Fi-NFC-merker op"</string>
@@ -2742,7 +2753,7 @@
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Maak kamera vinnig oop sonder om jou skerm te ontsluit"</string>
     <string name="screen_zoom_title" msgid="6332123593919641665">"Skermzoem"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"skermdigtheid, skermzoem, skaal, skaalverandering"</string>
-    <string name="screen_zoom_summary" msgid="7820299878405115849">"Kies met die glyer onder die voorskouprent hoe ver jy die skerm wil inzoem."</string>
+    <string name="screen_zoom_summary" msgid="2022973627105802010">"Maak alle items op skerm kleiner of groter. Sommige programme op jou tuisskerm kan dalk van posisie verander nadat hierdie instelling verander is."</string>
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"Voorskou"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"Maak kleiner"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"Maak groter"</string>
@@ -2788,4 +2799,6 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Agtergronddata is net deur Wi-Fi beskikbaar. Dit kan sommige programme of dienste beïnvloed wanneer Wi-Fi nie beskikbaar is nie."</string>
     <string name="suggestions_title" msgid="8758376306825920705">"Voorstelle (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"Verwyder"</string>
+    <string name="color_temperature" msgid="2501579996151717270">"Skerm se kleurtemperatuur"</string>
+    <string name="color_temperature_desc" msgid="3603319696846982249">"Aktiveer koel temperatuur"</string>
 </resources>

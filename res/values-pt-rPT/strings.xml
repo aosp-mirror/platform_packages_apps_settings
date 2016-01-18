@@ -74,11 +74,17 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Desmontar cartão SD"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Apagar armazenamento USB"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Apagar cartão SD"</string>
+    <!-- no translation found for font_size_summary (133937309990844030) -->
+    <skip />
     <string name="small_font" msgid="2295331917424072635">"Pequeno"</string>
     <string name="medium_font" msgid="2068475425515133701">"Médio"</string>
     <string name="large_font" msgid="599055175160971446">"Grande"</string>
     <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"Diminuir"</string>
     <string name="font_size_make_larger_desc" msgid="4316986572233686061">"Aumentar"</string>
+    <string name="font_size_preview_text_headline" msgid="7955317408475392247">"Exemplo de texto"</string>
+    <string name="font_size_preview_text_title" msgid="4762429961714563135">"Vinte Mil Léguas Submarinas"</string>
+    <string name="font_size_preview_text_subtitle" msgid="5712012075615701561">"Capítulo 23: The Coral Kingdom"</string>
+    <string name="font_size_preview_text_body" msgid="1608889593334414309">"The next day I woke with my head singularly clear. To my great surprise, I was in my own room. My companions, no doubt, had been reinstated in their cabin, without having perceived it any more than I. Of what had passed during the night they were as ignorant as I was, and to penetrate this mystery I only reckoned upon the chances of the future.\nI then thought of quitting my room. Was I free again or a prisoner? Quite free. I opened the door, went to the half deck, went up the central stairs. The panels, shut the evening before, were open. I went on to the platform.\nNed Land and Conseil waited there for me. I questioned them; they knew nothing. Lost in a heavy sleep in which they had been totally unconscious, they had been astonished at finding themselves in their cabin."</string>
     <string name="font_size_save" msgid="3450855718056759095">"OK"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"Armazenamento USB"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"Cartão SD"</string>
@@ -1267,6 +1273,12 @@
     <string name="activity_not_found" msgid="5551664692991605325">"A aplicação não está instalada no telemóvel."</string>
     <string name="lock_settings_profile_title" msgid="7819021341281339182">"Perfil de trabalho"</string>
     <string name="lock_settings_profile_label" msgid="4423909470339292809">"Segurança do perfil de trabalho"</string>
+    <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Bloqueio de ecrã do perfil de trabalho"</string>
+    <string name="lock_settings_profile_unification_title" msgid="3130455578336894831">"Utilizar o mesmo bloqueio de ecrã"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="8014208091623293835">"Alterar o perfil principal para corresponder ao perfil de trabalho"</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="5297248764066294130">"Pretende utilizar o mesmo bloqueio de ecrã?"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="342417647696962745">"Pode utilizar este bloqueio para o seu dispositivo, embora inclua todas as políticas associadas ao bloqueio de ecrã definidas pelo seu administrador de TI no perfil de trabalho.\nPretende utilizar o mesmo ecrã de bloqueio para o seu dispositivo?"</string>
+    <string name="lock_settings_profile_unified_summary" msgid="237623767711796217">"O mesmo que o bloqueio do dispositivo"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Gerir aplicações"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Gerir e remover aplicações instaladas"</string>
     <string name="applications_settings" msgid="1721442176406964682">"Aplicações"</string>
@@ -1533,7 +1545,7 @@
     <string name="accessibility_display_title" msgid="7610175687949675162">"Visualização"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"Legendas"</string>
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"Gestos de ampliação"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="7545798238172451540">"Aumente e diminua o zoom ao tocar três vezes no ecrã com um dedo.\n\nCom o zoom aumentado, pode:\n"<ul><li>"Deslocar-se: arraste dois ou mais dedos ao longo do ecrã."</li>\n<li>"Ajudar o nível de zoom: junte ou afaste dois ou mais dedos."</li>\n<li>"Aumentar temporariamente: toque três vezes sem soltar e arraste o dedo para explorar diferentes partes do ecrã. Levante o dedo para voltar ao estado anterior."</li></ul>\n\n"Tocar três vezes para aumentar funciona em todos os locais, exceto no teclado e na barra de navegação."</string>
+    <string name="accessibility_screen_magnification_summary" msgid="7545798238172451540">"Aumente e diminua o zoom ao tocar três vezes no ecrã com um dedo.\n\nCom o zoom aumentado, pode:\n"<ul><li>"Deslocar-se: arraste dois ou mais dedos ao longo do ecrã."</li>\n<li>"Ajustar o nível de zoom: junte ou afaste dois ou mais dedos."</li>\n<li>"Aumentar temporariamente: toque três vezes sem soltar e arraste o dedo para explorar diferentes partes do ecrã. Levante o dedo para voltar ao estado anterior."</li></ul>\n\n"Tocar três vezes para aumentar funciona em todos os locais, exceto no teclado e na barra de navegação."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Atalho de acessibilidade"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"Ativado"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"Desligado"</string>
@@ -2350,6 +2362,7 @@
     <string name="keywords_default_apps" msgid="223872637509160136">"aplicações, predefinição"</string>
     <string name="keywords_ignore_optimizations" msgid="6102579291119055029">"ignorar otimizações, soneca, modo de espera das aplicações"</string>
     <string name="keywords_color_mode" msgid="6362744316886077510">"vibrante, RGB, sRGB, cor, natural, padrão"</string>
+    <string name="keywords_color_temperature" msgid="2688947724153266364">"temperatura de cor D65 D73 branco amarelo azul quente frio"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"deslizar lentamente para desbloquear, palavra-passe, padrão, PIN"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"desafio de trabalho, trabalho, perfil"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Config. etiqueta NFC p/ Wi-Fi"</string>
@@ -2741,7 +2754,8 @@
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Abrir rapidamente a câmara sem desbloquear o ecrã"</string>
     <string name="screen_zoom_title" msgid="6332123593919641665">"Zoom do ecrã"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"densidade de apresentação, zoom do ecrã, escala, dimensionamento"</string>
-    <string name="screen_zoom_summary" msgid="7820299878405115849">"Escolha o zoom que pretende aplicar ao ecrã através do controlo deslizante por baixo da imagem de pré-visualização."</string>
+    <!-- no translation found for screen_zoom_summary (2022973627105802010) -->
+    <skip />
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"Pré-visualizar"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"Diminuir"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"Aumentar"</string>
@@ -2787,4 +2801,6 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Os dados de segundo plano só estão disponíveis através de Wi-Fi. Isto pode afetar algumas aplicações ou alguns serviços quando o Wi-Fi não estiver disponível."</string>
     <string name="suggestions_title" msgid="8758376306825920705">"Sugestões (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"Remover"</string>
+    <string name="color_temperature" msgid="2501579996151717270">"Temperatura da cor do ecrã"</string>
+    <string name="color_temperature_desc" msgid="3603319696846982249">"Ativar temperatura fria"</string>
 </resources>

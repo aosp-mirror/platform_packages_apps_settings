@@ -74,12 +74,20 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"卸载SD卡"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"格式化USB存储设备"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"格式化SD卡"</string>
+    <!-- no translation found for font_size_summary (133937309990844030) -->
+    <skip />
     <string name="small_font" msgid="2295331917424072635">"小"</string>
     <string name="medium_font" msgid="2068475425515133701">"中"</string>
     <string name="large_font" msgid="599055175160971446">"大"</string>
-    <!-- no translation found for font_size_make_smaller_desc (7919995133365371569) -->
+    <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"缩小"</string>
+    <string name="font_size_make_larger_desc" msgid="4316986572233686061">"放大"</string>
+    <!-- no translation found for font_size_preview_text_headline (7955317408475392247) -->
     <skip />
-    <!-- no translation found for font_size_make_larger_desc (4316986572233686061) -->
+    <!-- no translation found for font_size_preview_text_title (4762429961714563135) -->
+    <skip />
+    <!-- no translation found for font_size_preview_text_subtitle (5712012075615701561) -->
+    <skip />
+    <!-- no translation found for font_size_preview_text_body (1608889593334414309) -->
     <skip />
     <string name="font_size_save" msgid="3450855718056759095">"确定"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"USB存储设备"</string>
@@ -1202,8 +1210,7 @@
     <string name="location_sources_heading" msgid="1278732419851088319">"位置信息来源"</string>
     <string name="about_settings" product="tablet" msgid="593457295516533765">"关于平板电脑"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"关于手机"</string>
-    <!-- no translation found for about_settings (221313099578564438) -->
-    <skip />
+    <string name="about_settings" product="emulator" msgid="221313099578564438">"关于模拟设备"</string>
     <string name="about_settings_summary" msgid="3371517697156165959">"查看法律信息、状态和软件版本"</string>
     <string name="legal_information" msgid="5769301644270604095">"法律信息"</string>
     <string name="contributors_title" msgid="5917703088825286504">"活动提供商"</string>
@@ -1270,6 +1277,12 @@
     <string name="activity_not_found" msgid="5551664692991605325">"您的手机上未安装相应应用。"</string>
     <string name="lock_settings_profile_title" msgid="7819021341281339182">"工作资料"</string>
     <string name="lock_settings_profile_label" msgid="4423909470339292809">"工作资料安全"</string>
+    <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"工作资料屏幕锁定"</string>
+    <string name="lock_settings_profile_unification_title" msgid="3130455578336894831">"使用相同的屏幕锁定设置"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="8014208091623293835">"更改主资料，以使其与工作资料相符"</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="5297248764066294130">"要使用相同的屏幕锁定设置吗？"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="342417647696962745">"您可以针对自己的设备使用这种锁定，但这样做会使您的 IT 管理员所设置的所有屏幕锁定相关政策都应用到工作资料。\n要针对您的设备使用相同的屏幕锁定设置吗？"</string>
+    <string name="lock_settings_profile_unified_summary" msgid="237623767711796217">"与设备相同的锁定设置"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"管理应用"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"管理和删除已安装的应用"</string>
     <string name="applications_settings" msgid="1721442176406964682">"应用"</string>
@@ -1292,9 +1305,11 @@
     <string name="cache_header_label" msgid="1877197634162461830">"缓存"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"清除缓存"</string>
     <string name="cache_size_label" msgid="7505481393108282913">"缓存"</string>
-    <!-- no translation found for uri_permissions_text (3983110543017963732) -->
-    <!-- no translation found for clear_uri_btn_text (8575655132961012158) -->
-    <skip />
+    <plurals name="uri_permissions_text" formatted="false" msgid="3983110543017963732">
+      <item quantity="other">%d 项</item>
+      <item quantity="one">1 项</item>
+    </plurals>
+    <string name="clear_uri_btn_text" msgid="8575655132961012158">"取消访问权限"</string>
     <string name="controls_label" msgid="7611113077086853799">"控件"</string>
     <string name="force_stop" msgid="7435006169872876756">"强行停止"</string>
     <string name="total_size_label" msgid="1048676419552557254">"总计"</string>
@@ -2351,6 +2366,7 @@
     <string name="keywords_default_apps" msgid="223872637509160136">"应用, 默认"</string>
     <string name="keywords_ignore_optimizations" msgid="6102579291119055029">"忽略优化, 低电耗模式, 应用待机模式"</string>
     <string name="keywords_color_mode" msgid="6362744316886077510">"鲜亮, RGB, SRGB, 颜色, 自然, 标准"</string>
+    <string name="keywords_color_temperature" msgid="2688947724153266364">"色温 D65 D73：白色、黄色、蓝色、暖色、冷色"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"滑动解锁, 密码, 图案, PIN 码"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"工作验证, 工作, 资料"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"设置WLAN NFC标签"</string>
@@ -2742,7 +2758,8 @@
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"在不解锁屏幕的情况下快速打开相机"</string>
     <string name="screen_zoom_title" msgid="6332123593919641665">"屏幕缩放"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"显示密度, 屏幕缩放, 比例, 调整比例"</string>
-    <string name="screen_zoom_summary" msgid="7820299878405115849">"使用预览图片下方的滑块，选择您想要的屏幕缩放级别。"</string>
+    <!-- no translation found for screen_zoom_summary (2022973627105802010) -->
+    <skip />
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"预览"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"缩小"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"放大"</string>
@@ -2788,4 +2805,6 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"您必须连接 WLAN 网络才能使用后台数据。如果无法连接 WLAN 网络，则部分应用或服务可能会受影响。"</string>
     <string name="suggestions_title" msgid="8758376306825920705">"建议 (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"移除"</string>
+    <string name="color_temperature" msgid="2501579996151717270">"显示屏色温"</string>
+    <string name="color_temperature_desc" msgid="3603319696846982249">"启用冷色温"</string>
 </resources>

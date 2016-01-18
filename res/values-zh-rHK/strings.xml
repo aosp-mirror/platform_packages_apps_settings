@@ -74,13 +74,17 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"卸載 SD 卡"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"清除 USB 儲存裝置資料"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"清除 SD 記憶卡資料"</string>
+    <!-- no translation found for font_size_summary (133937309990844030) -->
+    <skip />
     <string name="small_font" msgid="2295331917424072635">"小"</string>
     <string name="medium_font" msgid="2068475425515133701">"中"</string>
     <string name="large_font" msgid="599055175160971446">"大"</string>
-    <!-- no translation found for font_size_make_smaller_desc (7919995133365371569) -->
-    <skip />
-    <!-- no translation found for font_size_make_larger_desc (4316986572233686061) -->
-    <skip />
+    <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"縮小"</string>
+    <string name="font_size_make_larger_desc" msgid="4316986572233686061">"放大"</string>
+    <string name="font_size_preview_text_headline" msgid="7955317408475392247">"範例文字"</string>
+    <string name="font_size_preview_text_title" msgid="4762429961714563135">"《海底兩萬里》"</string>
+    <string name="font_size_preview_text_subtitle" msgid="5712012075615701561">"第 23 章：珊瑚王國"</string>
+    <string name="font_size_preview_text_body" msgid="1608889593334414309">"第二天醒來時，我的頭腦非常清晰。令我詫異的是，我竟在自己的房間裡。我的同伴也一定在不知不覺中回到自己的船艙，對昨晚發生的事一無所知。我只寄望日後還有機會，揭開整件事的謎團。\n然後，我想走出房間。我重獲自由了嗎？還是仍是囚犯？結果是自由的很。我打開門，走上半甲板，再走到中央樓梯。昨晚關上的門板現在是開著的。我踏上平台。\n尼德·蘭和康塞爾在那裡等著我。我向他們提出心中的疑惑，但他們一無所知，只記得自己睡得很沉，徹底失去意識一樣，醒來時很驚訝發現身處自己的船艙中。"</string>
     <string name="font_size_save" msgid="3450855718056759095">"確定"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"USB 儲存裝置"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"SD 卡"</string>
@@ -1203,8 +1207,7 @@
     <string name="location_sources_heading" msgid="1278732419851088319">"位置資訊來源"</string>
     <string name="about_settings" product="tablet" msgid="593457295516533765">"關於平板電腦"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"關於手機"</string>
-    <!-- no translation found for about_settings (221313099578564438) -->
-    <skip />
+    <string name="about_settings" product="emulator" msgid="221313099578564438">"關於模擬裝置"</string>
     <string name="about_settings_summary" msgid="3371517697156165959">"查看法律資訊、狀態、軟件版本"</string>
     <string name="legal_information" msgid="5769301644270604095">"法律資訊"</string>
     <string name="contributors_title" msgid="5917703088825286504">"作者"</string>
@@ -1271,6 +1274,12 @@
     <string name="activity_not_found" msgid="5551664692991605325">"您的手機未安裝應用程式。"</string>
     <string name="lock_settings_profile_title" msgid="7819021341281339182">"工作設定檔"</string>
     <string name="lock_settings_profile_label" msgid="4423909470339292809">"工作設定檔安全性"</string>
+    <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"工作設定檔螢幕鎖定"</string>
+    <string name="lock_settings_profile_unification_title" msgid="3130455578336894831">"使用相同的螢幕鎖定"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="8014208091623293835">"變更主要設定檔，即可與工作設定檔相符"</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="5297248764066294130">"要使用相同的螢幕鎖定嗎？"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="342417647696962745">"您可以為裝置啟用此鎖定功能，但此設定包括工作設定檔上所有由 IT 管理員設定的螢幕鎖定相關政策。\n您要在裝置上使用相同的螢幕鎖定嗎？"</string>
+    <string name="lock_settings_profile_unified_summary" msgid="237623767711796217">"與您裝置的鎖定模式相同"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"管理應用程式"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"管理及移除已安裝的應用程式"</string>
     <string name="applications_settings" msgid="1721442176406964682">"應用程式"</string>
@@ -1293,9 +1302,11 @@
     <string name="cache_header_label" msgid="1877197634162461830">"快取"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"清除快取"</string>
     <string name="cache_size_label" msgid="7505481393108282913">"快取"</string>
-    <!-- no translation found for uri_permissions_text (3983110543017963732) -->
-    <!-- no translation found for clear_uri_btn_text (8575655132961012158) -->
-    <skip />
+    <plurals name="uri_permissions_text" formatted="false" msgid="3983110543017963732">
+      <item quantity="other">%d 個項目</item>
+      <item quantity="one">1 個項目</item>
+    </plurals>
+    <string name="clear_uri_btn_text" msgid="8575655132961012158">"取消存取權"</string>
     <string name="controls_label" msgid="7611113077086853799">"控制按鈕"</string>
     <string name="force_stop" msgid="7435006169872876756">"強制停止"</string>
     <string name="total_size_label" msgid="1048676419552557254">"總數"</string>
@@ -2356,6 +2367,7 @@
     <string name="keywords_default_apps" msgid="223872637509160136">"應用程式, 預設"</string>
     <string name="keywords_ignore_optimizations" msgid="6102579291119055029">"略過, 優化, 休息模式, 備用應用程式"</string>
     <string name="keywords_color_mode" msgid="6362744316886077510">"生動, RGB, sRGB, 顏色, 自然, 標準"</string>
+    <string name="keywords_color_temperature" msgid="2688947724153266364">"色溫 D65 D73 白色 黃色 藍色 暖色 冷色"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"滑動解鎖, 密碼, 上鎖圖案, PIN"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"工作挑戰, 工作, 設定檔"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"設定 Wi-Fi NFC 標籤"</string>
@@ -2381,7 +2393,7 @@
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"撥號鍵盤音效"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"螢幕鎖定音效"</string>
     <string name="charging_sounds_title" msgid="1132272552057504251">"充電音效"</string>
-    <string name="docking_sounds_title" msgid="155236288949940607">"插座音效"</string>
+    <string name="docking_sounds_title" msgid="155236288949940607">"座架插入音效"</string>
     <string name="touch_sounds_title" msgid="5326587106892390176">"輕觸音效"</string>
     <string name="vibrate_on_touch_title" msgid="674710566941697253">"輕觸時震動"</string>
     <string name="dock_audio_media_title" msgid="1346838179626123900">"插座喇叭播放音效"</string>
@@ -2747,7 +2759,8 @@
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"快速開啟相機，無需解鎖螢幕"</string>
     <string name="screen_zoom_title" msgid="6332123593919641665">"螢幕縮放"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"顯示密度, 螢幕縮放, 比例, 按比例"</string>
-    <string name="screen_zoom_summary" msgid="7820299878405115849">"使用預覽圖像下方的滑桿，調整螢幕縮放比例。"</string>
+    <!-- no translation found for screen_zoom_summary (2022973627105802010) -->
+    <skip />
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"預覽"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"縮小"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"放大"</string>
@@ -2793,4 +2806,6 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"您必須連接 Wi-Fi 才能使用背景數據。在沒有 Wi-Fi 的情況下，使用背景數據可能會影響部分應用程式或服務。"</string>
     <string name="suggestions_title" msgid="8758376306825920705">"建議 (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"移除"</string>
+    <string name="color_temperature" msgid="2501579996151717270">"顯示屏的色溫"</string>
+    <string name="color_temperature_desc" msgid="3603319696846982249">"啟用冷色"</string>
 </resources>

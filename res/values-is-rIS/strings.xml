@@ -74,13 +74,17 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Aftengja SD-kort"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Hreinsa út af USB geymslu"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Hreinsa út af SD-korti"</string>
+    <!-- no translation found for font_size_summary (133937309990844030) -->
+    <skip />
     <string name="small_font" msgid="2295331917424072635">"Lítið"</string>
     <string name="medium_font" msgid="2068475425515133701">"Meðalstórt"</string>
     <string name="large_font" msgid="599055175160971446">"Stórt"</string>
-    <!-- no translation found for font_size_make_smaller_desc (7919995133365371569) -->
-    <skip />
-    <!-- no translation found for font_size_make_larger_desc (4316986572233686061) -->
-    <skip />
+    <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"Minnka"</string>
+    <string name="font_size_make_larger_desc" msgid="4316986572233686061">"Stækka"</string>
+    <string name="font_size_preview_text_headline" msgid="7955317408475392247">"Textadæmi"</string>
+    <string name="font_size_preview_text_title" msgid="4762429961714563135">"Tuttugu þúsund mílur neðan sjávar"</string>
+    <string name="font_size_preview_text_subtitle" msgid="5712012075615701561">"23. kafli: Konungsdæmi kóralsins"</string>
+    <string name="font_size_preview_text_body" msgid="1608889593334414309">"Daginn eftir vaknaði ég alveg einstaklega skýr í kollinum. Mér til mikillar undrunar var ég staddur í herberginu mínu. Félagar mínir höfðu án nokkurs vafa hafnað aftur í klefanum sínum, án þess að hafa skynjað nokkuð frekar en ég. Þeir voru alveg jafn grunlausir um atburði næturinnar og aðeins duttlungar framtíðarinnar gætu leitt hið sanna í ljós.\nNæst hvarflaði að mér að yfirgefa herbergið. Var ég frjáls að nýju eða fangi? Vissulega var ég frjáls. Ég opnaði dyrnar, fór upp á skipsþiljur, gekk alla leið að aðalstiganum. Hlerarnir, sem höfðu verið lokaðir kvöldið áður, voru nú opnir. Ég steig upp á pallinn.\nÞar biðu Ned Land og Conseil eftir mér. Ég lagði fyrir þá ýmsar spurningar, en þeir vissu ekki neitt. Þeir höfðu stórfurðað sig á því að komast aftur til vitundar í klefanum sínum eftir að hafa verið týndir í óminnisdjúpi svefnsins."</string>
     <string name="font_size_save" msgid="3450855718056759095">"Í lagi"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"USB-geymsla"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"SD-kort"</string>
@@ -1202,8 +1206,7 @@
     <string name="location_sources_heading" msgid="1278732419851088319">"Staðsetningarbúnaður"</string>
     <string name="about_settings" product="tablet" msgid="593457295516533765">"Um spjaldtölvuna"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"Um símann"</string>
-    <!-- no translation found for about_settings (221313099578564438) -->
-    <skip />
+    <string name="about_settings" product="emulator" msgid="221313099578564438">"Um hermi"</string>
     <string name="about_settings_summary" msgid="3371517697156165959">"Skoða lagalegar upplýsingar, stöðu, útgáfu hugbúnaðar"</string>
     <string name="legal_information" msgid="5769301644270604095">"Lagalegar upplýsingar"</string>
     <string name="contributors_title" msgid="5917703088825286504">"Meðhöfundar"</string>
@@ -1270,6 +1273,12 @@
     <string name="activity_not_found" msgid="5551664692991605325">"Forritið er ekki uppsett í símanum."</string>
     <string name="lock_settings_profile_title" msgid="7819021341281339182">"Vinnusnið"</string>
     <string name="lock_settings_profile_label" msgid="4423909470339292809">"Öryggi vinnusniðs"</string>
+    <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Skjálás fyrir vinnusnið"</string>
+    <string name="lock_settings_profile_unification_title" msgid="3130455578336894831">"Nota sama skjálás"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="8014208091623293835">"Breyta lás aðalprófíls þannig að hann sé eins og lás vinnuprófílsins"</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="5297248764066294130">"Nota sama skjálás?"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="342417647696962745">"Þú getur notað þennan lás fyrir tækið þitt en það felur í sér að framfylgja þarf öllum reglum kerfisstjórans um skjálása fyrir vinnusnið.\nViltu nota sama skjálásinn fyrir tækið þitt?"</string>
+    <string name="lock_settings_profile_unified_summary" msgid="237623767711796217">"Sami skjálás og í tækinu þínu"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Stjórna forritum"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Stjórna og fjarlægja upsett forrit"</string>
     <string name="applications_settings" msgid="1721442176406964682">"Forrit"</string>
@@ -1292,9 +1301,11 @@
     <string name="cache_header_label" msgid="1877197634162461830">"Skyndiminni"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"Hreinsa úr skyndiminni"</string>
     <string name="cache_size_label" msgid="7505481393108282913">"Skyndiminni"</string>
-    <!-- no translation found for uri_permissions_text (3983110543017963732) -->
-    <!-- no translation found for clear_uri_btn_text (8575655132961012158) -->
-    <skip />
+    <plurals name="uri_permissions_text" formatted="false" msgid="3983110543017963732">
+      <item quantity="one">%d atriði</item>
+      <item quantity="other">%d atriði</item>
+    </plurals>
+    <string name="clear_uri_btn_text" msgid="8575655132961012158">"Hreinsa aðgang"</string>
     <string name="controls_label" msgid="7611113077086853799">"Stýringar"</string>
     <string name="force_stop" msgid="7435006169872876756">"Þvinga fram lokun"</string>
     <string name="total_size_label" msgid="1048676419552557254">"Samtals"</string>
@@ -2351,6 +2362,7 @@
     <string name="keywords_default_apps" msgid="223872637509160136">"forrit, sjálfgefin"</string>
     <string name="keywords_ignore_optimizations" msgid="6102579291119055029">"hunsa fínstillingu, blunda, forrit í bið"</string>
     <string name="keywords_color_mode" msgid="6362744316886077510">"líflegir, RGB, sRGB, litir, náttúrulegir, hefðbundnir"</string>
+    <string name="keywords_color_temperature" msgid="2688947724153266364">"lithiti D65 D73 hvítur gulur blár heitur kaldur"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"renna til að opna, aðgangsorð, mynstur, PIN-númer"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"verkefni í vinnu, vinna, snið"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Setja upp Wi-Fi NFC-merki"</string>
@@ -2742,7 +2754,8 @@
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Opnaðu myndavélina hratt án þess að taka skjáinn úr lás"</string>
     <string name="screen_zoom_title" msgid="6332123593919641665">"Aðdráttur á skjá"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"skjár þéttleiki, aðdráttur, stærð"</string>
-    <string name="screen_zoom_summary" msgid="7820299878405115849">"Stilltu aðdráttinn á skjánum með því að nota sleðann fyrir neðan forskoðunarmyndina."</string>
+    <!-- no translation found for screen_zoom_summary (2022973627105802010) -->
+    <skip />
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"Forskoðun"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"Minnka"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"Stækka"</string>
@@ -2788,4 +2801,6 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Bakgrunnsgögn eru aðeins í boði yfir Wi-Fi. Þetta getur haft áhrif á sum forrit eða þjónustu þegar Wi-Fi er ekki í boði."</string>
     <string name="suggestions_title" msgid="8758376306825920705">"Tillögur (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"Fjarlægja"</string>
+    <string name="color_temperature" msgid="2501579996151717270">"Lithiti skjás"</string>
+    <string name="color_temperature_desc" msgid="3603319696846982249">"Virkja kaldan litblæ"</string>
 </resources>

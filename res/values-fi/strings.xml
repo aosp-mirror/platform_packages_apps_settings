@@ -74,13 +74,17 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Poista SD-kortti käytöstä"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Tyhjennä USB-tila"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Tyhjennä SD-kortti"</string>
+    <!-- no translation found for font_size_summary (133937309990844030) -->
+    <skip />
     <string name="small_font" msgid="2295331917424072635">"Pieni"</string>
     <string name="medium_font" msgid="2068475425515133701">"Keskikokoinen"</string>
     <string name="large_font" msgid="599055175160971446">"Suuri"</string>
-    <!-- no translation found for font_size_make_smaller_desc (7919995133365371569) -->
-    <skip />
-    <!-- no translation found for font_size_make_larger_desc (4316986572233686061) -->
-    <skip />
+    <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"Pienennä"</string>
+    <string name="font_size_make_larger_desc" msgid="4316986572233686061">"Suurenna"</string>
+    <string name="font_size_preview_text_headline" msgid="7955317408475392247">"Esimerkkiteksti"</string>
+    <string name="font_size_preview_text_title" msgid="4762429961714563135">"Sukelluslaivalla maapallon ympäri"</string>
+    <string name="font_size_preview_text_subtitle" msgid="5712012075615701561">"Luku 23: Korallien valtakunta"</string>
+    <string name="font_size_preview_text_body" msgid="1608889593334414309">"Seuraavan päivänä heräsin ajatukset kirkkaina. Yllätyin huomatessani, että olin omassa hytissäni. Seuralaiseni oli epäilemättä viety omiin huoneisiinsa, eivätkä he tienneet tapahtumista minua enempää. Viime yön tapahtumista he tiesivät varmaankin yhtä vähän kuin minä. Vain aika voisi tarjota ratkaisun mysteeriin.\nMietin seuraavaksi huoneesta poistumista. Olinko sen vanki, vai vapaa liikkumaan? Totesin olevani vapaa: avasin oven ja kuljin käytäviä pitkin keskusportaikolle. Ikkunaluukut olivat nyt avoinna, vaikka ne eilen olivat olleet kiinni. Saavuin komentosillalle.\nNed Land ja palvelijani odottivat jo minua. Kysyin, mitä he tiesivät; eivät yhtään mitään. Tiedottomasta, syvästä unesta herättyään he olivat yllätyksekseen havainneet olevansa omissa hyteissään."</string>
     <string name="font_size_save" msgid="3450855718056759095">"OK"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"USB-tallennustila"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"SD-kortti"</string>
@@ -1202,8 +1206,7 @@
     <string name="location_sources_heading" msgid="1278732419851088319">"Sijainnin lähteet"</string>
     <string name="about_settings" product="tablet" msgid="593457295516533765">"Tietoja tablet-laitteesta"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"Tietoja puhelimesta"</string>
-    <!-- no translation found for about_settings (221313099578564438) -->
-    <skip />
+    <string name="about_settings" product="emulator" msgid="221313099578564438">"Tietoja jäljitellystä laitteesta"</string>
     <string name="about_settings_summary" msgid="3371517697156165959">"Näytä lakitiedot, tila, ohjelmiston versio"</string>
     <string name="legal_information" msgid="5769301644270604095">"Oikeudelliset tiedot"</string>
     <string name="contributors_title" msgid="5917703088825286504">"Avustajat"</string>
@@ -1270,6 +1273,12 @@
     <string name="activity_not_found" msgid="5551664692991605325">"Sovellusta ei ole asennettu puhelimeesi."</string>
     <string name="lock_settings_profile_title" msgid="7819021341281339182">"Työprofiili"</string>
     <string name="lock_settings_profile_label" msgid="4423909470339292809">"Työprofiilin suojaus"</string>
+    <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Työprofiilin näytön lukitus"</string>
+    <string name="lock_settings_profile_unification_title" msgid="3130455578336894831">"Käytä samaa näytön lukitustapaa."</string>
+    <string name="lock_settings_profile_unification_summary" msgid="8014208091623293835">"Aseta ensisijainen profiili vastaamaan työprofiilia."</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="5297248764066294130">"Käytetäänkö samaa näytön lukitustapaa?"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="342417647696962745">"Voit käyttää tätä lukitustapaa laitteessasi, mutta tällöin noudatetaan kaikkia näytön lukitukseen liittyviä käytäntöjä, jotka järjestelmänvalvoja on määrittänyt työprofiilillesi.\nHaluatko käyttää laitteessasi samaa näytön lukitusta?"</string>
+    <string name="lock_settings_profile_unified_summary" msgid="237623767711796217">"Sama kuin laitteesi lukitus"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Hallinnoi sovelluksia"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Hallinnoi ja poista asennettuja sovelluksia"</string>
     <string name="applications_settings" msgid="1721442176406964682">"Sovellukset"</string>
@@ -1292,9 +1301,11 @@
     <string name="cache_header_label" msgid="1877197634162461830">"Välimuisti"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"Tyhjennä välimuisti"</string>
     <string name="cache_size_label" msgid="7505481393108282913">"Välimuisti"</string>
-    <!-- no translation found for uri_permissions_text (3983110543017963732) -->
-    <!-- no translation found for clear_uri_btn_text (8575655132961012158) -->
-    <skip />
+    <plurals name="uri_permissions_text" formatted="false" msgid="3983110543017963732">
+      <item quantity="other">%d kohdetta</item>
+      <item quantity="one">1 kohde</item>
+    </plurals>
+    <string name="clear_uri_btn_text" msgid="8575655132961012158">"Poista käyttöoikeus"</string>
     <string name="controls_label" msgid="7611113077086853799">"Hallinta"</string>
     <string name="force_stop" msgid="7435006169872876756">"Pakota lopetus"</string>
     <string name="total_size_label" msgid="1048676419552557254">"Yhteensä"</string>
@@ -1966,7 +1977,7 @@
     <string name="wimax_settings" msgid="2655139497028469039">"4G"</string>
     <string name="status_wimax_mac_address" msgid="8390791848661413416">"4G MAC -osoite"</string>
     <string name="enter_password" msgid="8035706727471334122">"Käynnistä Android kirjoittamalla salasana"</string>
-    <string name="enter_pin" msgid="5305333588093263790">"Käynistä Android kirjoittamalla PIN-koodi"</string>
+    <string name="enter_pin" msgid="5305333588093263790">"Käynnistä Android kirjoittamalla PIN-koodi"</string>
     <string name="enter_pattern" msgid="4187435713036808566">"Käynnistä Android piirtämällä kuvio"</string>
     <string name="cryptkeeper_wrong_pattern" msgid="8423835922362956999">"Väärä kuvio"</string>
     <string name="cryptkeeper_wrong_password" msgid="5200857195368904047">"Väärä salasana"</string>
@@ -2351,6 +2362,7 @@
     <string name="keywords_default_apps" msgid="223872637509160136">"sovellukset, oletus"</string>
     <string name="keywords_ignore_optimizations" msgid="6102579291119055029">"ohita optimoinnit, torkku, sovelluksen valmiustila"</string>
     <string name="keywords_color_mode" msgid="6362744316886077510">"voimakas, RGB, sRGB, väri, luonnollinen, normaali"</string>
+    <string name="keywords_color_temperature" msgid="2688947724153266364">"värilämpötila D65 D73 valkoinen keltainen sininen lämmin viileä"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"avaa liu\'uttamalla, salasana, lukituksenpoistokuvio, PIN-koodi"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"työhaaste, työ, profiili"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Määritä Wi-Fi ja NFC-tagi"</string>
@@ -2742,7 +2754,8 @@
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Avaa kamera nopeasti avaamatta näytön lukitusta"</string>
     <string name="screen_zoom_title" msgid="6332123593919641665">"Näytön lähennys"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"näytön tiheys, näytön zoomaus, skaala, skaalaus"</string>
-    <string name="screen_zoom_summary" msgid="7820299878405115849">"Valitse näytön lähennyksen taso esikatselukuvan alla olevan liukusäätimen avulla."</string>
+    <!-- no translation found for screen_zoom_summary (2022973627105802010) -->
+    <skip />
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"Esikatselu"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"Pienennä"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"Suurenna"</string>
@@ -2788,4 +2801,6 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Taustatiedot ovat käytettävissä vain Wi-Fi-yhteyden kautta. Tämä voi vaikuttaa joidenkin sovellusten tai palvelujen toimintaan, kun et käytä Wi-Fi-yhteyttä."</string>
     <string name="suggestions_title" msgid="8758376306825920705">"Ehdotukset (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"Poista"</string>
+    <string name="color_temperature" msgid="2501579996151717270">"Näytä värilämpötila"</string>
+    <string name="color_temperature_desc" msgid="3603319696846982249">"Ota viileä värilämpötila käyttöön."</string>
 </resources>

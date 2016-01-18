@@ -76,13 +76,17 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Извлечь SD-карту"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Очистить USB-накопитель"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Очистить SD-карту"</string>
+    <!-- no translation found for font_size_summary (133937309990844030) -->
+    <skip />
     <string name="small_font" msgid="2295331917424072635">"Маленький"</string>
     <string name="medium_font" msgid="2068475425515133701">"Среднее"</string>
     <string name="large_font" msgid="599055175160971446">"Большой"</string>
-    <!-- no translation found for font_size_make_smaller_desc (7919995133365371569) -->
-    <skip />
-    <!-- no translation found for font_size_make_larger_desc (4316986572233686061) -->
-    <skip />
+    <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"Уменьшить"</string>
+    <string name="font_size_make_larger_desc" msgid="4316986572233686061">"Увеличить"</string>
+    <string name="font_size_preview_text_headline" msgid="7955317408475392247">"Пример текста"</string>
+    <string name="font_size_preview_text_title" msgid="4762429961714563135">"Двадцать тысяч лье под водой"</string>
+    <string name="font_size_preview_text_subtitle" msgid="5712012075615701561">"Глава двадцать четвертая. Коралловое царство."</string>
+    <string name="font_size_preview_text_body" msgid="1608889593334414309">"Я проснулся утром со свежей головой. К моему немалому удивлению, я лежал в постели, в своей каюте. Несомненно, и мои спутники тоже были перенесены в их каюту. Стало быть, они не больше моего могли знать, что произошло минувшей ночью. Оставалось лишь уповать, что какая-нибудь случайность раскроет в будущем эту таинственную историю.\nМне захотелось подышать свежим воздухом. Но могу ли я выйти, не заперта ли каюта на ключ? Я толкнул дверь. Дверь отворилась, и я узким коридором прошел к трапу. Люк, запертый накануне, был открыт. Я вышел на палубу.\nНед Ленд с Конселем уже ожидали меня там. Я спросил, как они провели ночь. Но они ничего не помнили. Заснув вчера тяжелым сном, оба друга очнулись только нынче утром и, к своему удивлению, в своей каюте!"</string>
     <string name="font_size_save" msgid="3450855718056759095">"ОК"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"USB-накопитель"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"SD-карта"</string>
@@ -1220,8 +1224,7 @@
     <string name="location_sources_heading" msgid="1278732419851088319">"Определение местоположения"</string>
     <string name="about_settings" product="tablet" msgid="593457295516533765">"О планшете"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"О телефоне"</string>
-    <!-- no translation found for about_settings (221313099578564438) -->
-    <skip />
+    <string name="about_settings" product="emulator" msgid="221313099578564438">"Об эмулированном устройстве"</string>
     <string name="about_settings_summary" msgid="3371517697156165959">"Просмотр юридической информации, состояния планшетного ПК и версии ПО"</string>
     <string name="legal_information" msgid="5769301644270604095">"Юридическая информация"</string>
     <string name="contributors_title" msgid="5917703088825286504">"Участники"</string>
@@ -1288,6 +1291,12 @@
     <string name="activity_not_found" msgid="5551664692991605325">"Приложение не установлено на телефоне."</string>
     <string name="lock_settings_profile_title" msgid="7819021341281339182">"Рабочий профиль"</string>
     <string name="lock_settings_profile_label" msgid="4423909470339292809">"Защита рабочего профиля"</string>
+    <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Блокировка экрана рабочего профиля"</string>
+    <string name="lock_settings_profile_unification_title" msgid="3130455578336894831">"Использовать одинаковую блокировку экрана"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="8014208091623293835">"Настроить основной профиль в соответствии с рабочим"</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="5297248764066294130">"Использовать одинаковую блокировку экрана?"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="342417647696962745">"Вместе с этой блокировкой на устройстве будут применены правила, которые системный администратор настроил для нее в вашем рабочем профиле.\nПрименить блокировку?"</string>
+    <string name="lock_settings_profile_unified_summary" msgid="237623767711796217">"Блокировка: как на устройстве"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Управление приложениями"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Управление установленными приложениями и их удаление"</string>
     <string name="applications_settings" msgid="1721442176406964682">"Приложения"</string>
@@ -1310,9 +1319,13 @@
     <string name="cache_header_label" msgid="1877197634162461830">"Кеш"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"Очистить кеш"</string>
     <string name="cache_size_label" msgid="7505481393108282913">"Кеш"</string>
-    <!-- no translation found for uri_permissions_text (3983110543017963732) -->
-    <!-- no translation found for clear_uri_btn_text (8575655132961012158) -->
-    <skip />
+    <plurals name="uri_permissions_text" formatted="false" msgid="3983110543017963732">
+      <item quantity="one">%d объект</item>
+      <item quantity="few">%d объекта</item>
+      <item quantity="many">%d объектов</item>
+      <item quantity="other">%d объекта</item>
+    </plurals>
+    <string name="clear_uri_btn_text" msgid="8575655132961012158">"Закрыть доступ"</string>
     <string name="controls_label" msgid="7611113077086853799">"Элементы управления"</string>
     <string name="force_stop" msgid="7435006169872876756">"Остановить"</string>
     <string name="total_size_label" msgid="1048676419552557254">"Всего"</string>
@@ -2381,6 +2394,7 @@
     <string name="keywords_default_apps" msgid="223872637509160136">"приложения, по умолчанию"</string>
     <string name="keywords_ignore_optimizations" msgid="6102579291119055029">"игнорировать ограничения, doze, app standby"</string>
     <string name="keywords_color_mode" msgid="6362744316886077510">"насыщенный, RGB, sRGB, цвет, естественный, стандартный"</string>
+    <string name="keywords_color_temperature" msgid="2688947724153266364">"цветовая температура D65 D73 белый желтый синий теплый холодный"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"провести для разблокировки, пароль, графический ключ, PIN-код"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"защита рабочего профиля, рабочий, профиль"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Настройка NFC-метки"</string>
@@ -2790,7 +2804,8 @@
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Открывать камеру двойным нажатием кнопки питания"</string>
     <string name="screen_zoom_title" msgid="6332123593919641665">"Масштаб"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"разрешение экрана, масштаб, увеличение, уменьшение"</string>
-    <string name="screen_zoom_summary" msgid="7820299878405115849">"Выберите масштаб экрана с помощью ползунка под окном предварительного просмотра."</string>
+    <!-- no translation found for screen_zoom_summary (2022973627105802010) -->
+    <skip />
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"Просмотр"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"Уменьшить"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"Увеличить"</string>
@@ -2836,4 +2851,6 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Для обмена данными в фоновом режиме требуется подключение к сети Wi-Fi. Когда она недоступна, некоторые сервисы и приложения не будут работать."</string>
     <string name="suggestions_title" msgid="8758376306825920705">"Подсказки (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"Убрать"</string>
+    <string name="color_temperature" msgid="2501579996151717270">"Показать цветовую температуру"</string>
+    <string name="color_temperature_desc" msgid="3603319696846982249">"Включить холодные оттенки"</string>
 </resources>

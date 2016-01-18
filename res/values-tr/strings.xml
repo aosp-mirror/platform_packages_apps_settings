@@ -74,13 +74,17 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"SD kartının bağlantısını kes"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"USB belleği sil"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"SD kartı sil"</string>
+    <!-- no translation found for font_size_summary (133937309990844030) -->
+    <skip />
     <string name="small_font" msgid="2295331917424072635">"Küçük"</string>
     <string name="medium_font" msgid="2068475425515133701">"Ortam"</string>
     <string name="large_font" msgid="599055175160971446">"Büyük"</string>
-    <!-- no translation found for font_size_make_smaller_desc (7919995133365371569) -->
-    <skip />
-    <!-- no translation found for font_size_make_larger_desc (4316986572233686061) -->
-    <skip />
+    <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"Küçült"</string>
+    <string name="font_size_make_larger_desc" msgid="4316986572233686061">"Büyüt"</string>
+    <string name="font_size_preview_text_headline" msgid="7955317408475392247">"Örnek metin"</string>
+    <string name="font_size_preview_text_title" msgid="4762429961714563135">"Denizler Altında Yirmi Bin Fersah"</string>
+    <string name="font_size_preview_text_subtitle" msgid="5712012075615701561">"9. Bölüm: Hint Okyanusu"</string>
+    <string name="font_size_preview_text_body" msgid="1608889593334414309">"Yaşadığımız olayların üzerinden zaman akıp gidiyordu. Nautilus kapaklarını kapatıp denizlerin dibindeki seyrine devam etmekteydi. Artık Kaptan’ı daha seyrek görüyordum. Yaşadığımız olaydan sonra, onun insanlar hakkındaki düşünceleri bana daha da tuhaf gelmeye başlamıştı. \nTayfanın gömüldüğü yerde köpek balıklarından çok insanlardan uzak tutulmaya çalıştığı düşüncesi beni huzursuz etmişti. Bu huzursuzluğumu yardımcımla da paylaşmıştım. \nConceil’e göre Kaptan insanlar tarafından anlaşılmayan bir bilim adamı, bir dahiydi. Oysa ben Kaptan’ın bilgisine saygı duysam da, onun insanlığa karşı beslediği bu kinden rahatsız oluyordum."</string>
     <string name="font_size_save" msgid="3450855718056759095">"Tamam"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"USB bellek"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"SD kart"</string>
@@ -1202,8 +1206,7 @@
     <string name="location_sources_heading" msgid="1278732419851088319">"Konum kaynakları"</string>
     <string name="about_settings" product="tablet" msgid="593457295516533765">"Tablet hakkında"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"Telefon hakkında"</string>
-    <!-- no translation found for about_settings (221313099578564438) -->
-    <skip />
+    <string name="about_settings" product="emulator" msgid="221313099578564438">"Öykünülen cihaz hakkında"</string>
     <string name="about_settings_summary" msgid="3371517697156165959">"Yasal bilgileri, durumu, yazılım sürümünü görüntüle"</string>
     <string name="legal_information" msgid="5769301644270604095">"Yasal bilgiler"</string>
     <string name="contributors_title" msgid="5917703088825286504">"Katkıda bulunanlar"</string>
@@ -1270,6 +1273,12 @@
     <string name="activity_not_found" msgid="5551664692991605325">"Uygulama, telefonunuzda yüklü değil."</string>
     <string name="lock_settings_profile_title" msgid="7819021341281339182">"İş profili"</string>
     <string name="lock_settings_profile_label" msgid="4423909470339292809">"İş profili güvenliği"</string>
+    <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"İş profili ekran kilidi"</string>
+    <string name="lock_settings_profile_unification_title" msgid="3130455578336894831">"Aynı ekran kilidini kullan"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="8014208091623293835">"Birincil profili iş profiliyle eşleşecek şekilde değiştir"</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="5297248764066294130">"Aynı ekran kilidi kullanılsın mı?"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="342417647696962745">"Bu kilidi cihazınız için kullanabilirsiniz, ancak iş profilinde BT yöneticiniz tarafından ayarlanan ekran kilidi politikalarının tümünü içerecektir.\nCihazınız için aynı ekran kilidini kullanmak istiyor musunuz?"</string>
+    <string name="lock_settings_profile_unified_summary" msgid="237623767711796217">"Cihaz kilidinizle aynı"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Uygulamaları yönet"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Yüklü uygulamaları yönet ve kaldır"</string>
     <string name="applications_settings" msgid="1721442176406964682">"Uygulamalar"</string>
@@ -1292,9 +1301,11 @@
     <string name="cache_header_label" msgid="1877197634162461830">"Önbellek"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"Önbelleği temizle"</string>
     <string name="cache_size_label" msgid="7505481393108282913">"Önbellek"</string>
-    <!-- no translation found for uri_permissions_text (3983110543017963732) -->
-    <!-- no translation found for clear_uri_btn_text (8575655132961012158) -->
-    <skip />
+    <plurals name="uri_permissions_text" formatted="false" msgid="3983110543017963732">
+      <item quantity="other">%d öğe</item>
+      <item quantity="one">1 öğe</item>
+    </plurals>
+    <string name="clear_uri_btn_text" msgid="8575655132961012158">"Erişimi temizle"</string>
     <string name="controls_label" msgid="7611113077086853799">"Denetimler"</string>
     <string name="force_stop" msgid="7435006169872876756">"Durmaya zorla"</string>
     <string name="total_size_label" msgid="1048676419552557254">"Toplam"</string>
@@ -2351,6 +2362,7 @@
     <string name="keywords_default_apps" msgid="223872637509160136">"uygulamalar, varsayılan"</string>
     <string name="keywords_ignore_optimizations" msgid="6102579291119055029">"optimizasyonları yoksayma, doz, uygulamayı beklemeye alma"</string>
     <string name="keywords_color_mode" msgid="6362744316886077510">"canlı, RGB, sRGB, renk, doğal, standart"</string>
+    <string name="keywords_color_temperature" msgid="2688947724153266364">"renk sıcaklığı D65 D73 beyaz sarı mavi sıcak soğuk"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"kilidini açmak için kaydırma, şifre, desen, PIN"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"iş güvenlik sorusu, iş, profil"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Kablosuz NFC Etiketini ayarla"</string>
@@ -2742,7 +2754,8 @@
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Ekranınızı kilitlemeden kamerayı hızlıca açın"</string>
     <string name="screen_zoom_title" msgid="6332123593919641665">"Ekranı yakınlaştırma"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"ekran yoğunluğu, ekran yakınlaştırma, ölçek, ölçekleme"</string>
-    <string name="screen_zoom_summary" msgid="7820299878405115849">"Önizlenen resmin altındaki kaydırma çubuğunu kullanarak ekranın ne kadar yakınlaştırılacağını seçin."</string>
+    <!-- no translation found for screen_zoom_summary (2022973627105802010) -->
+    <skip />
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"Önizleme"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"Küçült"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"Büyüt"</string>
@@ -2788,4 +2801,6 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Arka plan veriler yalnızca kablosuz bağlantı üzerinden kullanılabilir. Bu durum, kablosuz bağlantı mevcut olmadığında bazı uygulamaları veya hizmetleri etkileyebilir."</string>
     <string name="suggestions_title" msgid="8758376306825920705">"Öneriler (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"Kaldır"</string>
+    <string name="color_temperature" msgid="2501579996151717270">"Ekran renk sıcaklığı"</string>
+    <string name="color_temperature_desc" msgid="3603319696846982249">"Soğuk renkleri etkinleştir"</string>
 </resources>

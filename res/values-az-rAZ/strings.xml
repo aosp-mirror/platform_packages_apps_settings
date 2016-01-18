@@ -74,11 +74,16 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"SD kartı çıxarın"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"USB yaddaşı silin"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"SD kartı silin"</string>
+    <string name="font_size_summary" msgid="133937309990844030">"Ekrandakı mətni kiçildin və ya böyüdün."</string>
     <string name="small_font" msgid="2295331917424072635">"Kiçik"</string>
     <string name="medium_font" msgid="2068475425515133701">"Orta"</string>
     <string name="large_font" msgid="599055175160971446">"Böyük"</string>
     <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"Kiçildin"</string>
     <string name="font_size_make_larger_desc" msgid="4316986572233686061">"Böyüdün"</string>
+    <string name="font_size_preview_text_headline" msgid="7955317408475392247">"Mətn nümunəsi"</string>
+    <string name="font_size_preview_text_title" msgid="4762429961714563135">"Dəniz Altındakı İyirmi Min Birlik"</string>
+    <string name="font_size_preview_text_subtitle" msgid="5712012075615701561">"Fəsil 23: Koral Krallığı"</string>
+    <string name="font_size_preview_text_body" msgid="1608889593334414309">"Ertəsi gün daha aydın baş ilə oyandım. Mənim üçün ən böyük surpriz öz otağımda olmağım idi. Yoldaşlarım isə, şübhəsiz ki, kabinələrində idilər amma onlar da mənim qədər vəziyyətin fərqində deyildilər. Gecə boyu nə baş verdiyi haqqında onlar da mənim kimi xəbərsiz idilər və bu müəmmanı dərk etmək üçün mən yalnız gələcəyə ümid edirdim.\nDaha sonra otağı tərk etmək haqqında düşündüm. Yenidən azad idim yoxsa məhbus? Kifayət qədər azad. Qapını açdım, yarımçıq göyərtəyə çıxdım, orta pilləkənlərlə yuxarı qalxdım. Dünən axşam bağlı olan panellər açıq idi. Platformaya çıxdım.\nNed Land və Conseil orada məni gözləyirdi. Onlardan soruşdum; heçnə bilmirlər. Tamamilə huşsuz olduqları dərin yuxuya dalmışdılar, öz kabinələrində olmaqları onları çox təəccübləndirmişdi."</string>
     <string name="font_size_save" msgid="3450855718056759095">"OK"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"USB yaddaş"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"SD kart"</string>
@@ -1267,6 +1272,12 @@
     <string name="activity_not_found" msgid="5551664692991605325">"Tətbiq telefonunuzda quraşdırılmayıb."</string>
     <string name="lock_settings_profile_title" msgid="7819021341281339182">"İş profili"</string>
     <string name="lock_settings_profile_label" msgid="4423909470339292809">"İş profili təhlükəsizliyi"</string>
+    <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"İş profili ekran kilidi"</string>
+    <string name="lock_settings_profile_unification_title" msgid="3130455578336894831">"Eyni ekran kilidini istifadə edin"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="8014208091623293835">"Əsas profilin iş profili ilə uyğunluğu üçün dəyişdirin"</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="5297248764066294130">"Eyni ekran kilidi istifadə edilsin?"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="342417647696962745">"Cihazınız üçün bu kilidi istifadə edə bilərsiniz, lakin bu, iş profilinizdə İT admini tərəfindən müəyyən edilmiş siyasət ilə əlaqədar olan bütün ekran kilidlərinə aid ediləcək. \n Cihazınız üçün eyni ekran kilidini istifadə etmək istəyirsiniz?"</string>
+    <string name="lock_settings_profile_unified_summary" msgid="237623767711796217">"Cihaz kilidiniz ilə eyni"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Tətbiqləri idarə edin"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Quraşdırılmış tətbiqləri idarə edin və silin"</string>
     <string name="applications_settings" msgid="1721442176406964682">"Tətbiqlər"</string>
@@ -2350,6 +2361,7 @@
     <string name="keywords_default_apps" msgid="223872637509160136">"tətbiq, defolt"</string>
     <string name="keywords_ignore_optimizations" msgid="6102579291119055029">"optimallaşdırmanı iqnor edin, doze, tətbiq gözləmə rejimi"</string>
     <string name="keywords_color_mode" msgid="6362744316886077510">"titrək, RGB, sRGB, rəng, təbii, standart"</string>
+    <string name="keywords_color_temperature" msgid="2688947724153266364">"rəng temperaturu D65 D73 ağ sarı mavi ilıq sərin"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"kilidini açmaq üçün sürüşdürün, parol, qəlib, PIN"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"iş məşqi, iş, profil"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Wi-Fi NFC Teqi quraşdırın"</string>
@@ -2741,7 +2753,7 @@
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Ekranınızın kilidini açmadan kameranı cəld açın"</string>
     <string name="screen_zoom_title" msgid="6332123593919641665">"Ekran yaxınlaşdırma"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"ekran yaxınlığı, ekran sıxlığı, miqyas, ölçmə"</string>
-    <string name="screen_zoom_summary" msgid="7820299878405115849">"Şəkil önizləməsinin altındakı slayderi istifadə edərək ekranı nə qədər yaxınlaşdırmaq istədiyinizi seçin."</string>
+    <string name="screen_zoom_summary" msgid="2022973627105802010">"Ekrandakı bütün elementləri kiçildin və ya böyüdün. Bu ayarı dəyişdikdən sonra əsas ekrandakı bəzi tətbiqlər mövqeyini dəyişə bilər."</string>
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"Önizləmə"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"Kiçildin"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"Böyüdün"</string>
@@ -2787,4 +2799,6 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Arxa fon datası yalnız  Wi-Fi vasitəsilə əlçatandır. Wi-Fi əlçatan olmadıqda, bəzi tətbiq və ya xidmətlərə təsir edə bilər."</string>
     <string name="suggestions_title" msgid="8758376306825920705">"Təkliflər (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"Silin"</string>
+    <string name="color_temperature" msgid="2501579996151717270">"Rəng tempraturunu göstərin"</string>
+    <string name="color_temperature_desc" msgid="3603319696846982249">"Sərin temperaturu aktiv edin"</string>
 </resources>

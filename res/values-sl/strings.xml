@@ -76,13 +76,17 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Izpni kartico SD"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Izbriši pomnilnik USB"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Izbriši kartico SD"</string>
+    <!-- no translation found for font_size_summary (133937309990844030) -->
+    <skip />
     <string name="small_font" msgid="2295331917424072635">"Majhna"</string>
     <string name="medium_font" msgid="2068475425515133701">"Srednja"</string>
     <string name="large_font" msgid="599055175160971446">"Velika"</string>
-    <!-- no translation found for font_size_make_smaller_desc (7919995133365371569) -->
-    <skip />
-    <!-- no translation found for font_size_make_larger_desc (4316986572233686061) -->
-    <skip />
+    <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"Pomanjšanje"</string>
+    <string name="font_size_make_larger_desc" msgid="4316986572233686061">"Povečanje"</string>
+    <string name="font_size_preview_text_headline" msgid="7955317408475392247">"Vzorec besedila"</string>
+    <string name="font_size_preview_text_title" msgid="4762429961714563135">"Dvajset tisoč milj pod morjem"</string>
+    <string name="font_size_preview_text_subtitle" msgid="5712012075615701561">"23. poglavje: Kraljestvo koral"</string>
+    <string name="font_size_preview_text_body" msgid="1608889593334414309">"Drugega dne sem se zbudil, ne da bi me glava količkaj bolela. Na svoje veliko začudenje sem bil v svoji kabini. Torej so nas brez dvoma vse tri prenesli v naše sobe, še preden smo se zbudili. Gotovo tudi oba tovariša nista videla ničesar o tem, kar se je ponoči odigralo. Le slučaj bi nam lahko razkril to skrivnost.\nSklenil sem zapustiti kabino. Ali sem bil še zaprt ali sem bil že svoboden? Da, bil sem svoboden. Vrata so bila odprta. Stopil sem na hodnik in odšel k srednjim stopnicam. Zaklop je bil odprt. Tekel sem po stopnicah na vrhnjo palubo.\nTam sta bila že Ned Land in Konzulent. Vprašal sem ju, ali sta kaj čutila. Nihče od njiju ni vedel ničesar. Kakor jaz sta se zbudila iz težkega spanca v svojih kabinah, ne da bi se česar koli spominjala."</string>
     <string name="font_size_save" msgid="3450855718056759095">"V redu"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"Pomnilnik USB"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"Kartica SD"</string>
@@ -1220,8 +1224,7 @@
     <string name="location_sources_heading" msgid="1278732419851088319">"Viri lokacije"</string>
     <string name="about_settings" product="tablet" msgid="593457295516533765">"O tabličnem računalniku"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"O telefonu"</string>
-    <!-- no translation found for about_settings (221313099578564438) -->
-    <skip />
+    <string name="about_settings" product="emulator" msgid="221313099578564438">"O emulirani napravi"</string>
     <string name="about_settings_summary" msgid="3371517697156165959">"Ogled pravnih informacij, stanja, različice programske opreme"</string>
     <string name="legal_information" msgid="5769301644270604095">"Pravne informacije"</string>
     <string name="contributors_title" msgid="5917703088825286504">"Sodelavci"</string>
@@ -1288,6 +1291,12 @@
     <string name="activity_not_found" msgid="5551664692991605325">"Aplikacija ni nameščena v telefonu."</string>
     <string name="lock_settings_profile_title" msgid="7819021341281339182">"Delovni profil"</string>
     <string name="lock_settings_profile_label" msgid="4423909470339292809">"Varnost delovnega profila"</string>
+    <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Zaklepanje zaslona za delovni profil"</string>
+    <string name="lock_settings_profile_unification_title" msgid="3130455578336894831">"Uporaba enakega zaklepanja zaslona"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="8014208091623293835">"Sprememba primarnega profila, da se ujema z delovnim profilom"</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="5297248764066294130">"Želite uporabiti enako zaklepanje zaslona?"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="342417647696962745">"To zaklepanje lahko uporabite za zaklepanje naprave, vendar bo vključevalo vse pravilnike, povezane z zaklepanjem zaslona, ki jih je za delovni profil nastavil skrbnik za IT.\nŽelite za napravo uporabiti enako zaklepanje zaslona?"</string>
+    <string name="lock_settings_profile_unified_summary" msgid="237623767711796217">"Enako kot zaklepanje naprave"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Upravljaj aplikacije"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Upravljanje in odstranjevanje nameščenih aplikacij"</string>
     <string name="applications_settings" msgid="1721442176406964682">"Aplikacije"</string>
@@ -1310,9 +1319,13 @@
     <string name="cache_header_label" msgid="1877197634162461830">"Predpomnilnik"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"Počisti predpomnilnik"</string>
     <string name="cache_size_label" msgid="7505481393108282913">"Predpomnilnik"</string>
-    <!-- no translation found for uri_permissions_text (3983110543017963732) -->
-    <!-- no translation found for clear_uri_btn_text (8575655132961012158) -->
-    <skip />
+    <plurals name="uri_permissions_text" formatted="false" msgid="3983110543017963732">
+      <item quantity="one">%d element</item>
+      <item quantity="two">%d elementa</item>
+      <item quantity="few">%d elementi</item>
+      <item quantity="other">%d elementov</item>
+    </plurals>
+    <string name="clear_uri_btn_text" msgid="8575655132961012158">"Počisti dostop"</string>
     <string name="controls_label" msgid="7611113077086853799">"Kontrolniki"</string>
     <string name="force_stop" msgid="7435006169872876756">"Prisilna ustavitev"</string>
     <string name="total_size_label" msgid="1048676419552557254">"Skupaj"</string>
@@ -2381,6 +2394,7 @@
     <string name="keywords_default_apps" msgid="223872637509160136">"aplikacije, privzeto"</string>
     <string name="keywords_ignore_optimizations" msgid="6102579291119055029">"prezrtje, optimizacije, dremanje, aplikacija v pripravljenosti"</string>
     <string name="keywords_color_mode" msgid="6362744316886077510">"živo, RGB, sRGB, barva, naravno, standardno"</string>
+    <string name="keywords_color_temperature" msgid="2688947724153266364">"barvna temperatura D65 D73 bela rumena modra toplo hladno"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"podrsanje za odklepanje, geslo, vzorec, PIN"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"delovna preizkušnja, delo, profil"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Nastavitev brezžič. oznake NFC"</string>
@@ -2790,7 +2804,8 @@
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Hitro odpre fotoaparat brez odklepanja zaslona"</string>
     <string name="screen_zoom_title" msgid="6332123593919641665">"Povečava zaslona"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"gostota zaslona, povečava zaslona, razmerje, spreminjanje velikosti"</string>
-    <string name="screen_zoom_summary" msgid="7820299878405115849">"S spodnjim drsnikom pod sliko predogleda izberite povečavo zaslona."</string>
+    <!-- no translation found for screen_zoom_summary (2022973627105802010) -->
+    <skip />
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"Predogled"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"Pomanjšanje"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"Povečanje"</string>
@@ -2836,4 +2851,6 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Prenos podatkov v ozadju je na voljo samo prek omrežja Wi-Fi. To morda vpliva na nekatere aplikacije ali storitve, ko omrežje Wi-Fi ni na voljo."</string>
     <string name="suggestions_title" msgid="8758376306825920705">"Predlogi (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"Odstrani"</string>
+    <string name="color_temperature" msgid="2501579996151717270">"Barvna temperatura zaslona"</string>
+    <string name="color_temperature_desc" msgid="3603319696846982249">"Omogočanje hladne temperature"</string>
 </resources>

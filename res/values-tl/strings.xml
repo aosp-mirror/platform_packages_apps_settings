@@ -74,13 +74,17 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"I-unmount ang SD card"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Burahin imbakan na USB"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Burahin ang SD card"</string>
+    <!-- no translation found for font_size_summary (133937309990844030) -->
+    <skip />
     <string name="small_font" msgid="2295331917424072635">"Maliit"</string>
     <string name="medium_font" msgid="2068475425515133701">"Katamtaman"</string>
     <string name="large_font" msgid="599055175160971446">"Malaki"</string>
-    <!-- no translation found for font_size_make_smaller_desc (7919995133365371569) -->
-    <skip />
-    <!-- no translation found for font_size_make_larger_desc (4316986572233686061) -->
-    <skip />
+    <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"Paliitin"</string>
+    <string name="font_size_make_larger_desc" msgid="4316986572233686061">"Palakihin"</string>
+    <string name="font_size_preview_text_headline" msgid="7955317408475392247">"Sample na text"</string>
+    <string name="font_size_preview_text_title" msgid="4762429961714563135">"Dalawampung Libong Samahan sa Ilalim ng Karagatan"</string>
+    <string name="font_size_preview_text_subtitle" msgid="5712012075615701561">"Kabanata 23: Ang Kaharian ng Korales"</string>
+    <string name="font_size_preview_text_body" msgid="1608889593334414309">"Nang sumunod na araw, namulat akong wala akong maalala. Nagulat akong nasa silid na ako. Malamang, nakabalik na ang aking mga kasamahan sa kanilang silid nang ako lang ang nakapansin. Kung ano man ang nangyari kagabi, katulad ko rin silang walang naiintindihan, at upang maunawaan ang hiwagang ito, sa hinaharap na lang ako umaasa.\nPagkatapos ay naisipan kong lumabas sa aking silid. Malaya na ba akong muli o isa pa ring bilanggo? Malaya na ako. Binuksan ko ang pinto, dumaan ako sa kubyerta at umakyat sa hagdan. Ang mga bintanang nakasarado kagabi ay bukas na ngayon. Umakyat ako patungo sa harap ng barko.\nHinihintay ako doon nila Ned Land at Conseil. Tinanong ko sila ngunit wala rin silang maalala. Masyadong napalalim ang kanilang tulog na hindi na nila nararamdaman ang nangyayari sa paligid, nagulat din sila na sa kanilang silid sila nagising."</string>
     <string name="font_size_save" msgid="3450855718056759095">"OK"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"Imbakan na USB"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"SD card"</string>
@@ -1202,8 +1206,7 @@
     <string name="location_sources_heading" msgid="1278732419851088319">"Mga pinagmulan ng lokasyon"</string>
     <string name="about_settings" product="tablet" msgid="593457295516533765">"Tungkol sa tablet"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"Tungkol sa telepono"</string>
-    <!-- no translation found for about_settings (221313099578564438) -->
-    <skip />
+    <string name="about_settings" product="emulator" msgid="221313099578564438">"Tungkol sa ginayang device"</string>
     <string name="about_settings_summary" msgid="3371517697156165959">"Tingnan ang impormasyong legal, katayuan, bersyon ng software"</string>
     <string name="legal_information" msgid="5769301644270604095">"Legal na impormasyon"</string>
     <string name="contributors_title" msgid="5917703088825286504">"Mga Taga-ambag"</string>
@@ -1270,6 +1273,12 @@
     <string name="activity_not_found" msgid="5551664692991605325">"Hindi naka-install ang application sa iyong telepono."</string>
     <string name="lock_settings_profile_title" msgid="7819021341281339182">"Profile sa trabaho"</string>
     <string name="lock_settings_profile_label" msgid="4423909470339292809">"Seguridad ng profile sa trabaho"</string>
+    <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Lock ng screen ng profile sa trabaho"</string>
+    <string name="lock_settings_profile_unification_title" msgid="3130455578336894831">"Gamitin ang parehong lock ng screen"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="8014208091623293835">"Baguhin ang pangunahing profile upang tumugma sa profile sa trabaho"</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="5297248764066294130">"Gamitin ang parehong lock ng screen?"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="342417647696962745">"Maaari mong gamitin ang lock na ito para sa iyong device ngunit masasama rito ang lahat ng patakarang may kaugnayan sa lock ng screen na itinakda ng iyong IT admin sa profile sa trabaho.\nGusto mo bang gamitin ang parehong lock ng screen para sa iyong device?"</string>
+    <string name="lock_settings_profile_unified_summary" msgid="237623767711796217">"Kapareho ng lock ng iyong device"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Pamahalaan ang apps"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Pamahalaan at alisin ang naka-install na apps"</string>
     <string name="applications_settings" msgid="1721442176406964682">"Apps"</string>
@@ -1292,9 +1301,11 @@
     <string name="cache_header_label" msgid="1877197634162461830">"Cache"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"I-clear ang cache"</string>
     <string name="cache_size_label" msgid="7505481393108282913">"Cache"</string>
-    <!-- no translation found for uri_permissions_text (3983110543017963732) -->
-    <!-- no translation found for clear_uri_btn_text (8575655132961012158) -->
-    <skip />
+    <plurals name="uri_permissions_text" formatted="false" msgid="3983110543017963732">
+      <item quantity="one">%d item</item>
+      <item quantity="other">%d na item</item>
+    </plurals>
+    <string name="clear_uri_btn_text" msgid="8575655132961012158">"I-clear ang access"</string>
     <string name="controls_label" msgid="7611113077086853799">"Mga Kontrol"</string>
     <string name="force_stop" msgid="7435006169872876756">"Sapilitang pagtigil"</string>
     <string name="total_size_label" msgid="1048676419552557254">"Kabuuan"</string>
@@ -2351,6 +2362,7 @@
     <string name="keywords_default_apps" msgid="223872637509160136">"mga app, default"</string>
     <string name="keywords_ignore_optimizations" msgid="6102579291119055029">"balewalain ang mga pag-optimize, i-doze, standby ng app"</string>
     <string name="keywords_color_mode" msgid="6362744316886077510">"vibrant, RGB, sRGB, kulay, natural, karaniwan"</string>
+    <string name="keywords_color_temperature" msgid="2688947724153266364">"kulay temperatura D65 D73 puti dilaw asul mainit malamig"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"i-slide upang i-unlock, password, pattern, PIN"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"hamon sa trabaho, trabaho, profile"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"I-set up ang Tag ng NFC sa Wi-Fi"</string>
@@ -2742,7 +2754,8 @@
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Mabilisang buksan ang camera nang hindi ina-unlock ang iyong screen"</string>
     <string name="screen_zoom_title" msgid="6332123593919641665">"Pag-zoom ng screen"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"density ng display, pag-zoom sa screen, scale, pag-scale"</string>
-    <string name="screen_zoom_summary" msgid="7820299878405115849">"Piliin kung gaano kalaki o kaliit ang gusto mong pagkaka-zoom ng screen gamit ang slider sa ibaba ng larawan ng preview."</string>
+    <!-- no translation found for screen_zoom_summary (2022973627105802010) -->
+    <skip />
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"I-preview"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"Paliitin"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"Palakihin"</string>
@@ -2788,4 +2801,6 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Available lang ang data ng background kapag may Wi-Fi. Maaari itong makaapekto sa ilang app o serbisyo kapag hindi available ang Wi-Fi."</string>
     <string name="suggestions_title" msgid="8758376306825920705">"Mga Suhestyon (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"Alisin"</string>
+    <string name="color_temperature" msgid="2501579996151717270">"Temperatura ng kulay ng display"</string>
+    <string name="color_temperature_desc" msgid="3603319696846982249">"I-enable ang malamig na temperatura"</string>
 </resources>

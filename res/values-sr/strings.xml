@@ -75,13 +75,17 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Ослобађање SD картице"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Брисање USB меморије"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Избриши SD картицу"</string>
+    <!-- no translation found for font_size_summary (133937309990844030) -->
+    <skip />
     <string name="small_font" msgid="2295331917424072635">"Мала"</string>
     <string name="medium_font" msgid="2068475425515133701">"Средња"</string>
     <string name="large_font" msgid="599055175160971446">"Велика"</string>
-    <!-- no translation found for font_size_make_smaller_desc (7919995133365371569) -->
-    <skip />
-    <!-- no translation found for font_size_make_larger_desc (4316986572233686061) -->
-    <skip />
+    <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"Умањи"</string>
+    <string name="font_size_make_larger_desc" msgid="4316986572233686061">"Увећај"</string>
+    <string name="font_size_preview_text_headline" msgid="7955317408475392247">"Пример текста"</string>
+    <string name="font_size_preview_text_title" msgid="4762429961714563135">"Двадесет хиљада миља под морем"</string>
+    <string name="font_size_preview_text_subtitle" msgid="5712012075615701561">"23. поглавље: Краљевство корала"</string>
+    <string name="font_size_preview_text_body" msgid="1608889593334414309">"Следеће сам се јутро пробудио бистрог ума. На своје велико изненађење био сам у својој кабини. Претпоставио сам да су и моје пријатеље однели у њихову кабину. Ни они ни ја нисмо знали шта се збивало током ноћи. Само нам је будућност могла открити тајну.\nХтео сам изаћи из собе. Питао сам се јесам ли слободан или затворен. Отворио сам врата, изашао у ходник и попео се средишњим степеништем. Окна, која су пре била затворена, сада су опет била отворена. Изашао сам на палубу.\nНед Ланд и Консеј су ме чекали. Испитивао сам их, али ни они нису ништа знали. Дубоко су спавали и ничега се нису сећали. И они су се запрепастили кад су се пробудили у својој кабини."</string>
     <string name="font_size_save" msgid="3450855718056759095">"Потврди"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"USB меморија"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"SD картица"</string>
@@ -1211,8 +1215,7 @@
     <string name="location_sources_heading" msgid="1278732419851088319">"Извори локације"</string>
     <string name="about_settings" product="tablet" msgid="593457295516533765">"О таблету"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"О телефону"</string>
-    <!-- no translation found for about_settings (221313099578564438) -->
-    <skip />
+    <string name="about_settings" product="emulator" msgid="221313099578564438">"О емулираном уређају"</string>
     <string name="about_settings_summary" msgid="3371517697156165959">"Преглед правних информација, статуса, верзије софтвера"</string>
     <string name="legal_information" msgid="5769301644270604095">"Правне информације"</string>
     <string name="contributors_title" msgid="5917703088825286504">"Сарадници"</string>
@@ -1279,6 +1282,12 @@
     <string name="activity_not_found" msgid="5551664692991605325">"Апликација није инсталирана на телефону."</string>
     <string name="lock_settings_profile_title" msgid="7819021341281339182">"Профил за Work"</string>
     <string name="lock_settings_profile_label" msgid="4423909470339292809">"Безбедност профила за Work"</string>
+    <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Закључавање екрана за профил за Work"</string>
+    <string name="lock_settings_profile_unification_title" msgid="3130455578336894831">"Користи исто закључавање екрана"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="8014208091623293835">"Мења примарни профил и усклађује га са профилом за Work"</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="5297248764066294130">"Желите ли да користите исто закључавање екрана?"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="342417647696962745">"Можете да користите ово закључавање за уређај, али оно обухвата све смернице у вези са закључавањем екрана које је подесио ваш администратор за ИТ на профилу за Work.\nЖелите ли да користите исто закључавање екрана за уређај?"</string>
+    <string name="lock_settings_profile_unified_summary" msgid="237623767711796217">"Исто као закључавање екрана вашег уређаја"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Управљај апликацијама"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Управљање инсталираним апликацијама и њихово уклањање"</string>
     <string name="applications_settings" msgid="1721442176406964682">"Апликације"</string>
@@ -1301,9 +1310,12 @@
     <string name="cache_header_label" msgid="1877197634162461830">"Кеш"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"Обриши кеш"</string>
     <string name="cache_size_label" msgid="7505481393108282913">"Кеш"</string>
-    <!-- no translation found for uri_permissions_text (3983110543017963732) -->
-    <!-- no translation found for clear_uri_btn_text (8575655132961012158) -->
-    <skip />
+    <plurals name="uri_permissions_text" formatted="false" msgid="3983110543017963732">
+      <item quantity="one">%d ставка</item>
+      <item quantity="few">%d ставке</item>
+      <item quantity="other">%d ставки</item>
+    </plurals>
+    <string name="clear_uri_btn_text" msgid="8575655132961012158">"Обриши приступ"</string>
     <string name="controls_label" msgid="7611113077086853799">"Контроле"</string>
     <string name="force_stop" msgid="7435006169872876756">"Принудно заустави"</string>
     <string name="total_size_label" msgid="1048676419552557254">"Укупно"</string>
@@ -2366,6 +2378,7 @@
     <string name="keywords_default_apps" msgid="223872637509160136">"апликације, подразумевано"</string>
     <string name="keywords_ignore_optimizations" msgid="6102579291119055029">"игнорисање оптимизација, стање неактивности, апликација у мировању"</string>
     <string name="keywords_color_mode" msgid="6362744316886077510">"живописан, RGB, sRGB, боја, природан, стандардан"</string>
+    <string name="keywords_color_temperature" msgid="2688947724153266364">"температура боје D65 D73 бела жута плава топла хладна"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"превлачење за откључавање, лозинка, шаблон, PIN"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"work изазов, work, профил"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Подесите Wi-Fi NFC ознаку"</string>
@@ -2766,7 +2779,8 @@
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Брзо отворите камеру без откључавања екрана"</string>
     <string name="screen_zoom_title" msgid="6332123593919641665">"Ниво зумирања екрана"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"густина екрана, зумирање екрана, размера, прилагођавање"</string>
-    <string name="screen_zoom_summary" msgid="7820299878405115849">"Помоћу клизача испод прегледа слике изаберите ниво зумирања екрана."</string>
+    <!-- no translation found for screen_zoom_summary (2022973627105802010) -->
+    <skip />
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"Преглед"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"Умањи"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"Увећај"</string>
@@ -2812,4 +2826,6 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Позадински подаци су доступни само преко Wi-Fi-ја. То може да утиче на неке апликације или услуге када Wi-Fi није доступан."</string>
     <string name="suggestions_title" msgid="8758376306825920705">"Предлози (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"Уклони"</string>
+    <string name="color_temperature" msgid="2501579996151717270">"Прикажи температуру боје"</string>
+    <string name="color_temperature_desc" msgid="3603319696846982249">"Омогућава хладну температуру"</string>
 </resources>

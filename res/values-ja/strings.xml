@@ -74,13 +74,17 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"SDカードのマウント解除"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"USBストレージ内データの消去"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"SDカード内データを消去"</string>
+    <!-- no translation found for font_size_summary (133937309990844030) -->
+    <skip />
     <string name="small_font" msgid="2295331917424072635">"小"</string>
     <string name="medium_font" msgid="2068475425515133701">"中"</string>
     <string name="large_font" msgid="599055175160971446">"大"</string>
-    <!-- no translation found for font_size_make_smaller_desc (7919995133365371569) -->
-    <skip />
-    <!-- no translation found for font_size_make_larger_desc (4316986572233686061) -->
-    <skip />
+    <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"縮小"</string>
+    <string name="font_size_make_larger_desc" msgid="4316986572233686061">"拡大"</string>
+    <string name="font_size_preview_text_headline" msgid="7955317408475392247">"サンプル テキスト"</string>
+    <string name="font_size_preview_text_title" msgid="4762429961714563135">"海底二万リーグ"</string>
+    <string name="font_size_preview_text_subtitle" msgid="5712012075615701561">"第 23 章: サンゴの国"</string>
+    <string name="font_size_preview_text_body" msgid="1608889593334414309">"翌朝、眼をさましてみると、頭は非常にはっきりしていたが、驚いたことに、いつのまにか私は自分の部屋に寝かされていた。他の二人も、たぶん私同様、眠っている間に彼らの部屋に連れて行かれたに違いない。夜中にどんなことが起こったか、おそらく彼らも知らないだろう。そうだとすると、この神秘を解くには、ただ将来の機会を待つほかはない。\nそれにしても、私はもう自由の身に返ったのだろうか、それともまだ監禁されているのだろうか？だが、案ずるにはおよばなかった。扉はすぐ開いた。そこで廊下づたいに中央階段の下に行ってみると、前夜閉鎖されたはずの昇降口も開いていた。私はさっそく甲板に出てみた。\nそこには、ネッド・ランドとコンセイユが、私を待っていた。二人にたずねると、彼らも何も知らなかった。ぐっすり眠っている間に、自分たちの部屋に運ばれ、眼が覚めて驚いたとのことだった。"</string>
     <string name="font_size_save" msgid="3450855718056759095">"OK"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"USBストレージ"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"SDカード"</string>
@@ -1202,8 +1206,7 @@
     <string name="location_sources_heading" msgid="1278732419851088319">"位置情報源"</string>
     <string name="about_settings" product="tablet" msgid="593457295516533765">"タブレット情報"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"端末情報"</string>
-    <!-- no translation found for about_settings (221313099578564438) -->
-    <skip />
+    <string name="about_settings" product="emulator" msgid="221313099578564438">"エミュレートされた端末について"</string>
     <string name="about_settings_summary" msgid="3371517697156165959">"規約、ステータス、ソフトウェアバージョン"</string>
     <string name="legal_information" msgid="5769301644270604095">"法的情報"</string>
     <string name="contributors_title" msgid="5917703088825286504">"アライアンスパートナー"</string>
@@ -1270,6 +1273,12 @@
     <string name="activity_not_found" msgid="5551664692991605325">"アプリは端末にインストールされていません。"</string>
     <string name="lock_settings_profile_title" msgid="7819021341281339182">"仕事用プロファイル"</string>
     <string name="lock_settings_profile_label" msgid="4423909470339292809">"仕事用プロファイルのセキュリティ"</string>
+    <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"仕事用プロファイルの画面ロック"</string>
+    <string name="lock_settings_profile_unification_title" msgid="3130455578336894831">"同じ画面ロックを使用する"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="8014208091623293835">"仕事用プロファイルに合わせてメイン プロファイルを変更する"</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="5297248764066294130">"同じ画面ロックを使用しますか？"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="342417647696962745">"お使いの端末にこのロックを使用できますが、これには組織の IT 管理者が仕事用プロファイルに設定している画面ロック関連のポリシーがすべて含まれます。\nお使いの端末にも同じ画面ロックを使用しますか？"</string>
+    <string name="lock_settings_profile_unified_summary" msgid="237623767711796217">"端末ロックと同じ"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"アプリを管理"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"インストール済みアプリを管理、削除する"</string>
     <string name="applications_settings" msgid="1721442176406964682">"アプリ"</string>
@@ -1292,9 +1301,11 @@
     <string name="cache_header_label" msgid="1877197634162461830">"キャッシュ"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"キャッシュを消去"</string>
     <string name="cache_size_label" msgid="7505481393108282913">"キャッシュ"</string>
-    <!-- no translation found for uri_permissions_text (3983110543017963732) -->
-    <!-- no translation found for clear_uri_btn_text (8575655132961012158) -->
-    <skip />
+    <plurals name="uri_permissions_text" formatted="false" msgid="3983110543017963732">
+      <item quantity="other">%d 件のアイテム</item>
+      <item quantity="one">1 件のアイテム</item>
+    </plurals>
+    <string name="clear_uri_btn_text" msgid="8575655132961012158">"アクセスをクリア"</string>
     <string name="controls_label" msgid="7611113077086853799">"コントロール"</string>
     <string name="force_stop" msgid="7435006169872876756">"強制停止"</string>
     <string name="total_size_label" msgid="1048676419552557254">"合計"</string>
@@ -2355,6 +2366,7 @@
     <string name="keywords_default_apps" msgid="223872637509160136">"アプリ、デフォルト"</string>
     <string name="keywords_ignore_optimizations" msgid="6102579291119055029">"最適化を無視、Doze、アプリ スタンバイ"</string>
     <string name="keywords_color_mode" msgid="6362744316886077510">"鮮やか、RGB、sRGB、色、自然、標準"</string>
+    <string name="keywords_color_temperature" msgid="2688947724153266364">"色温度 D65 D73 白 黄 青 ウォーム クール"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"スライドでロック解除、パスワード、パターン、PIN"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"ワーク チャレンジ, 仕事用, プロファイル"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Wi-Fi NFCタグのセットアップ"</string>
@@ -2746,7 +2758,8 @@
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"画面ロックを解除せずにすばやくカメラを起動します"</string>
     <string name="screen_zoom_title" msgid="6332123593919641665">"画面のズーム"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"表示間隔、画面のズーム、スケール、拡大縮小"</string>
-    <string name="screen_zoom_summary" msgid="7820299878405115849">"プレビュー画像の下にあるスライダーを使ってお好みの拡大サイズを選びます。"</string>
+    <!-- no translation found for screen_zoom_summary (2022973627105802010) -->
+    <skip />
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"プレビュー"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"縮小"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"拡大"</string>
@@ -2792,4 +2805,6 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"バックグラウンド  データは Wi-Fi 接続時のみ利用できます。Wi-Fi に接続できない場合、一部のアプリやサービスに影響する可能性があります。"</string>
     <string name="suggestions_title" msgid="8758376306825920705">"候補（<xliff:g id="ID_1">%1$d</xliff:g>）"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"削除"</string>
+    <string name="color_temperature" msgid="2501579996151717270">"色温度の表示"</string>
+    <string name="color_temperature_desc" msgid="3603319696846982249">"クールを有効にする"</string>
 </resources>

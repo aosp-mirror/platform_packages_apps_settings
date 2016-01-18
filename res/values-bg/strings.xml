@@ -74,13 +74,17 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Деактивиране на SD карта"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Изтриване на USB"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Изтриване на SD картата"</string>
+    <!-- no translation found for font_size_summary (133937309990844030) -->
+    <skip />
     <string name="small_font" msgid="2295331917424072635">"Малък"</string>
     <string name="medium_font" msgid="2068475425515133701">"Среден"</string>
     <string name="large_font" msgid="599055175160971446">"Голям"</string>
-    <!-- no translation found for font_size_make_smaller_desc (7919995133365371569) -->
-    <skip />
-    <!-- no translation found for font_size_make_larger_desc (4316986572233686061) -->
-    <skip />
+    <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"Намаляване на размера"</string>
+    <string name="font_size_make_larger_desc" msgid="4316986572233686061">"Увеличаване на размера"</string>
+    <string name="font_size_preview_text_headline" msgid="7955317408475392247">"Примерен текст"</string>
+    <string name="font_size_preview_text_title" msgid="4762429961714563135">"Капитан Немо"</string>
+    <string name="font_size_preview_text_subtitle" msgid="5712012075615701561">"Глава XXIV: Царството на коралите"</string>
+    <string name="font_size_preview_text_body" msgid="1608889593334414309">"На другия ден се събудих със съвсем лека глава. За голямо мое учудване бях в стаята си. Несъмнено и спътниците ми са били отнесени в каютата си, без да усетят това, както и аз. И те както мене навярно не знаеха какво се бе случило през тая нощ. За да разкрия загадката, можех да разчитам само на бъдещите случайности.\nРеших да изляза от стаята си. Но дали бях пак свободен или пленник? Бях напълно свободен. Отворих вратата, минах през коридорите и се качих по централната стълба. Люковете, затворени снощи, сега бяха отворени. Изкачих се на палубата.\nНед Ланд и Консей бяха там и ме очакваха. Аз ги разпитах, но те не знаеха нищо. Потънали в тежък сън, от който не помнеха нищо, те се изненадали, когато се намерили в каютата си."</string>
     <string name="font_size_save" msgid="3450855718056759095">"OK"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"USB хранилище"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"SD карта"</string>
@@ -1202,8 +1206,7 @@
     <string name="location_sources_heading" msgid="1278732419851088319">"Източници на местоположение"</string>
     <string name="about_settings" product="tablet" msgid="593457295516533765">"Всичко за таблета"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"Всичко за телефона"</string>
-    <!-- no translation found for about_settings (221313099578564438) -->
-    <skip />
+    <string name="about_settings" product="emulator" msgid="221313099578564438">"Всичко за емулираното устройство"</string>
     <string name="about_settings_summary" msgid="3371517697156165959">"Преглед на състоянието, правната информация и версията на софтуера"</string>
     <string name="legal_information" msgid="5769301644270604095">"Правна информация"</string>
     <string name="contributors_title" msgid="5917703088825286504">"Сътрудници"</string>
@@ -1270,6 +1273,12 @@
     <string name="activity_not_found" msgid="5551664692991605325">"Приложението не е инсталирано на телефона ви."</string>
     <string name="lock_settings_profile_title" msgid="7819021341281339182">"Служебен потребителски профил"</string>
     <string name="lock_settings_profile_label" msgid="4423909470339292809">"Сигурност на служебния потребителски профил"</string>
+    <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Заключване на екрана за служебния потребителски профил"</string>
+    <string name="lock_settings_profile_unification_title" msgid="3130455578336894831">"Използване на същата опция за заключване на екрана"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="8014208091623293835">"Уеднаквяване на заключването за основния и служебния потребителски профил"</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="5297248764066294130">"Да се използва ли същата опция за заключване на екрана?"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="342417647696962745">"Можете да използвате тази опция за заключване на екрана за устройството си, но за нея ще са в сила всички сродни правила, зададени от системния администратор на служебния потребителски профил.\nИскате ли да ползвате същата опция за заключване на екрана?"</string>
+    <string name="lock_settings_profile_unified_summary" msgid="237623767711796217">"Същата опция за заключване като тази за устройството"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Управление на приложенията"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Управление и премахване на инсталирани приложения"</string>
     <string name="applications_settings" msgid="1721442176406964682">"Приложения"</string>
@@ -1292,9 +1301,11 @@
     <string name="cache_header_label" msgid="1877197634162461830">"Кеш"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"Изчистване на кеша"</string>
     <string name="cache_size_label" msgid="7505481393108282913">"Кеш"</string>
-    <!-- no translation found for uri_permissions_text (3983110543017963732) -->
-    <!-- no translation found for clear_uri_btn_text (8575655132961012158) -->
-    <skip />
+    <plurals name="uri_permissions_text" formatted="false" msgid="3983110543017963732">
+      <item quantity="other">%d елемента</item>
+      <item quantity="one">1 елемент</item>
+    </plurals>
+    <string name="clear_uri_btn_text" msgid="8575655132961012158">"Премахване на достъпа"</string>
     <string name="controls_label" msgid="7611113077086853799">"Контроли"</string>
     <string name="force_stop" msgid="7435006169872876756">"Принудително спиране"</string>
     <string name="total_size_label" msgid="1048676419552557254">"Общо"</string>
@@ -2351,6 +2362,7 @@
     <string name="keywords_default_apps" msgid="223872637509160136">"приложения, по подразбиране"</string>
     <string name="keywords_ignore_optimizations" msgid="6102579291119055029">"пренебрегване на оптимизациите, режим на дрямка, режим на готовност за приложенията"</string>
     <string name="keywords_color_mode" msgid="6362744316886077510">"ярко, RGB, sRGB, цвят, естествено, стандартно"</string>
+    <string name="keywords_color_temperature" msgid="2688947724153266364">"цветна температура D65 D73 бяло жълто синьо топло студено"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"отключване чрез плъзгане, парола, фигура, ПИН код"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"служебно предизвикателство, работа, потребителски профил"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Маркер за КБП за Wi-Fi: Настр."</string>
@@ -2742,7 +2754,8 @@
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Бързо отваряйте камерата, без да отключвате екрана си"</string>
     <string name="screen_zoom_title" msgid="6332123593919641665">"Промяна на мащаба на екрана"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"плътност на дисплея, промяна на мащаба на екрана, мащаб, мащабиране"</string>
-    <string name="screen_zoom_summary" msgid="7820299878405115849">"Изберете желания мащаб на екрана посредством плъзгача под изображението за визуализация."</string>
+    <!-- no translation found for screen_zoom_summary (2022973627105802010) -->
+    <skip />
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"Визуализация"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"Намаляване на размера"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"Увеличаване на размера"</string>
@@ -2788,4 +2801,6 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Данните на заден план са налице само през Wi-Fi. Липсата на такава мрежа може да засегне някои приложения или услуги."</string>
     <string name="suggestions_title" msgid="8758376306825920705">"Предложения (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"Премахване"</string>
+    <string name="color_temperature" msgid="2501579996151717270">"Цветна температура на екрана"</string>
+    <string name="color_temperature_desc" msgid="3603319696846982249">"Активиране на студената цветова гама"</string>
 </resources>

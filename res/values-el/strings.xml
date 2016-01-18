@@ -74,13 +74,17 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Αφαίρεση κάρτας SD"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Διαγρ. αποθ. χώρου USB"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Διαγραφή κάρτας SD"</string>
+    <!-- no translation found for font_size_summary (133937309990844030) -->
+    <skip />
     <string name="small_font" msgid="2295331917424072635">"Μικρό"</string>
     <string name="medium_font" msgid="2068475425515133701">"Μέτριο"</string>
     <string name="large_font" msgid="599055175160971446">"Μεγάλο"</string>
-    <!-- no translation found for font_size_make_smaller_desc (7919995133365371569) -->
-    <skip />
-    <!-- no translation found for font_size_make_larger_desc (4316986572233686061) -->
-    <skip />
+    <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"Να γίνουν μικρότερα"</string>
+    <string name="font_size_make_larger_desc" msgid="4316986572233686061">"Να γίνουν μεγαλύτερα"</string>
+    <string name="font_size_preview_text_headline" msgid="7955317408475392247">"Δείγμα κειμένου"</string>
+    <string name="font_size_preview_text_title" msgid="4762429961714563135">"Είκοσι χιλιάδες λεύγες κάτω από τη θάλασσα"</string>
+    <string name="font_size_preview_text_subtitle" msgid="5712012075615701561">"Κεφάλαιο 23: Το κοραλλένιο βασίλειο"</string>
+    <string name="font_size_preview_text_body" msgid="1608889593334414309">"Το επόμενο πρωί που ξύπνησα, είδα έκπληκτος ότι βρισκόμουν στην καμπίνα μου. Κι οι σύντροφοί μου επίσης είχανε, φαίνεται, μεταφερθεί στην καμπίνα τους, χωρίς να το καταλάβουν. Κι οι τρεις δεν είχαμε ιδέα για το τι είχε συμβεί την προηγούμενη νύχτα.\nΣκέφτηκα να βγω από την καμπίνα μου, αλλά δεν ήξερα αν είχα αυτό το δικαίωμα. Δοκίμασα ν\' ανοίξω την πόρτα κι είδα πως ήταν ξεκλείδωτη. Ανέβηκα τότε στο κατάστρωμα.\nΕκεί βρήκα το Σύμβουλο και τον Νεντ Λαντ, που με ρώτησαν τι είχε συμβεί. Κι αυτοί είχαν κοιμηθεί βαριά, όπως κι εγώ, κι όταν ξύπνησαν βρέθηκαν στην καμπίνα τους."</string>
     <string name="font_size_save" msgid="3450855718056759095">"OK"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"Αποθ. χώρος USB"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"Κάρτα SD"</string>
@@ -1202,8 +1206,7 @@
     <string name="location_sources_heading" msgid="1278732419851088319">"Πηγές τοποθεσίας"</string>
     <string name="about_settings" product="tablet" msgid="593457295516533765">"Σχετικά με το tablet"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"Σχετικά με το τηλέφωνο"</string>
-    <!-- no translation found for about_settings (221313099578564438) -->
-    <skip />
+    <string name="about_settings" product="emulator" msgid="221313099578564438">"Σχετικά με τη συσκευή με προσομοίωση"</string>
     <string name="about_settings_summary" msgid="3371517697156165959">"Προβολή νομικών πληροφοριών, κατάστασης, έκδοσης λογισμικού"</string>
     <string name="legal_information" msgid="5769301644270604095">"Νομικές πληροφορίες"</string>
     <string name="contributors_title" msgid="5917703088825286504">"Συνεργάτες"</string>
@@ -1270,6 +1273,12 @@
     <string name="activity_not_found" msgid="5551664692991605325">"Η εφαρμογή δεν έχει εγκατασταθεί στο τηλέφωνό σας."</string>
     <string name="lock_settings_profile_title" msgid="7819021341281339182">"Προφίλ εργασίας"</string>
     <string name="lock_settings_profile_label" msgid="4423909470339292809">"Ασφάλεια προφίλ εργασίας"</string>
+    <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Κλείδωμα οθόνης προφίλ εργασίας"</string>
+    <string name="lock_settings_profile_unification_title" msgid="3130455578336894831">"Χρήση ίδιου κλειδώματος οθόνης"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="8014208091623293835">"Αλλαγή κύριου προφίλ για αντιστοιχία με το προφίλ εργασίας"</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="5297248764066294130">"Χρήση του ίδιου κλειδώματος οθόνης;"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="342417647696962745">"Μπορείτε να χρησιμοποιήσετε αυτό το κλείδωμα για τη συσκευή σας, αλλά θα περιλαμβάνει όλες τις πολιτικές που σχετίζονται με το κλείδωμα οθόνης και έχουν οριστεί από το διαχειριστή IT στο προφίλ εργασίας.\nΘέλετε να χρησιμοποιήσετε το ίδιο κλείδωμα οθόνης για τη συσκευή σας;"</string>
+    <string name="lock_settings_profile_unified_summary" msgid="237623767711796217">"Ίδιο με το κλείδωμα της συσκευής σας"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Διαχείριση εφαρμογών"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Διαχείριση και κατάργηση εγκατεστημένων εφαρμογών"</string>
     <string name="applications_settings" msgid="1721442176406964682">"Εφαρμογές"</string>
@@ -1292,9 +1301,11 @@
     <string name="cache_header_label" msgid="1877197634162461830">"Κρυφή μνήμη"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"Εκκαθάριση προσωρινής μνήμης"</string>
     <string name="cache_size_label" msgid="7505481393108282913">"Κρυφή μνήμη"</string>
-    <!-- no translation found for uri_permissions_text (3983110543017963732) -->
-    <!-- no translation found for clear_uri_btn_text (8575655132961012158) -->
-    <skip />
+    <plurals name="uri_permissions_text" formatted="false" msgid="3983110543017963732">
+      <item quantity="other">%d στοιχεία</item>
+      <item quantity="one">1 στοιχείο</item>
+    </plurals>
+    <string name="clear_uri_btn_text" msgid="8575655132961012158">"Εκκαθάριση πρόσβασης"</string>
     <string name="controls_label" msgid="7611113077086853799">"Στοιχεία ελέγχου"</string>
     <string name="force_stop" msgid="7435006169872876756">"Αναγκαστική διακοπή"</string>
     <string name="total_size_label" msgid="1048676419552557254">"Σύνολο"</string>
@@ -2351,6 +2362,7 @@
     <string name="keywords_default_apps" msgid="223872637509160136">"εφαρμογές, προεπιλογή"</string>
     <string name="keywords_ignore_optimizations" msgid="6102579291119055029">"παράβλεψη βελτιστοποιήσεων, υπνάκος, αναστολή εφαρμογών"</string>
     <string name="keywords_color_mode" msgid="6362744316886077510">"ζωντανό, RGB, sRGB, χρώμα, φυσικό, τυπικό"</string>
+    <string name="keywords_color_temperature" msgid="2688947724153266364">"θερμοκρασία χρώματος D65 D73 λευκό κίτρινο μπλε θερμή ψυχρή"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"σύρετε για ξεκλείδωμα, κωδικός πρόσβασης, μοτίβο, PIN"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"πρόκληση εργασίας, εργασία, προφίλ"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Ρύθμιση ετικέτας ΕΚΠ Wi-Fi"</string>
@@ -2742,7 +2754,8 @@
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Γρήγορο άνοιγμα κάμερας χωρίς ξεκλείδωμα οθόνης"</string>
     <string name="screen_zoom_title" msgid="6332123593919641665">"Εστίαση οθόνης"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"πυκνότητα προβολής, εστίαση οθόνης, κλίμακα, κλιμάκωση"</string>
-    <string name="screen_zoom_summary" msgid="7820299878405115849">"Επιλέξτε το μέγεθος της εστίασης που θέλετε να έχει η οθόνη χρησιμοποιώντας το ρυθμιστικό που βρίσκεται κάτω από την εικόνα προεπισκόπησης."</string>
+    <!-- no translation found for screen_zoom_summary (2022973627105802010) -->
+    <skip />
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"Προεπισκόπηση"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"Να γίνουν μικρότερα"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"Να γίνουν μεγαλύτερα"</string>
@@ -2788,4 +2801,6 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Τα δεδομένα παρασκηνίου είναι διαθέσιμα μόνο μέσω Wi-Fi. Αυτό ενδέχεται να επηρεάσει ορισμένες εφαρμογές ή υπηρεσίες όταν δεν υπάρχει διαθέσιμο δίκτυο Wi-Fi."</string>
     <string name="suggestions_title" msgid="8758376306825920705">"Προτάσεις (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"Κατάργηση"</string>
+    <string name="color_temperature" msgid="2501579996151717270">"Θερμοκρασία χρώματος οθόνης"</string>
+    <string name="color_temperature_desc" msgid="3603319696846982249">"Ενεργοποίηση ψυχρής θερμοκρασίας"</string>
 </resources>

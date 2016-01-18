@@ -76,11 +76,17 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Odpojiť SD kartu"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Vymazať ukladací priestor USB"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Vymazať SD kartu"</string>
+    <!-- no translation found for font_size_summary (133937309990844030) -->
+    <skip />
     <string name="small_font" msgid="2295331917424072635">"Malé"</string>
     <string name="medium_font" msgid="2068475425515133701">"Stredné"</string>
     <string name="large_font" msgid="599055175160971446">"Veľké"</string>
     <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"Zmenšiť"</string>
     <string name="font_size_make_larger_desc" msgid="4316986572233686061">"Zväčšiť"</string>
+    <string name="font_size_preview_text_headline" msgid="7955317408475392247">"Ukážkový text"</string>
+    <string name="font_size_preview_text_title" msgid="4762429961714563135">"Dvadsať tisíc míľ pod morom"</string>
+    <string name="font_size_preview_text_subtitle" msgid="5712012075615701561">"23. kapitola: Korálové kráľovstvo"</string>
+    <string name="font_size_preview_text_body" msgid="1608889593334414309">"Nasledujúci deň som sa zobudil a v hlave som mal úplne jasno. Na moje veľké prekvapenie som bol vo svojej izbe. Moji spoločníci sa samozrejme vrátili do svojej kajuty, pričom si nevšimli o nič viac ako ja. O tom, čo sa stalo počas noci, nevedeli rovnako ako ja vôbec nič. V odhalení tohto tajomstva som sa mohol spoľahnúť iba na budúce príležitosti.\nPotom som sa rozhodol opustiť svoju izbu. Bol som znova voľný alebo väzeň? Úplne voľný. Otvoril som dvere, vyšiel na palubu a potom hlavnými schodmi. Palubné otvory, ktoré boli včera večer zatvorené, boli teraz otvorené. Vyšiel som na plošinu.\nNed Land a Conseil tam na mňa čakali. Povypytoval som sa ich, nič však nevedeli. Po hlbokom spánku, počas ktorého boli úplne nevedomí, sa s prekvapením ocitli vo svojej kajute."</string>
     <string name="font_size_save" msgid="3450855718056759095">"OK"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"Ukladací priestor USB"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"SD karta"</string>
@@ -1285,6 +1291,12 @@
     <string name="activity_not_found" msgid="5551664692991605325">"Aplikácia nie je v telefóne nainštalovaná."</string>
     <string name="lock_settings_profile_title" msgid="7819021341281339182">"Pracovný profil"</string>
     <string name="lock_settings_profile_label" msgid="4423909470339292809">"Zabezpečenie pracovného profilu"</string>
+    <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Zámka obrazovky pre pracovný profil"</string>
+    <string name="lock_settings_profile_unification_title" msgid="3130455578336894831">"Použiť rovnakú zámku obrazovky"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="8014208091623293835">"Zmeniť hlavný profil tak, aby sa zhodoval s pracovným profilom"</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="5297248764066294130">"Použiť rovnakú zámku obrazovky?"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="342417647696962745">"Túto zámku môžete použiť pre vaše zariadenie, bude však zahŕňať všetky pravidlá týkajúce sa zámky obrazovky, ktoré v danom pracovnom profile nastavil váš správca IT.\nChcete pre svoje zariadenie použiť rovnakú zámku obrazovky?"</string>
+    <string name="lock_settings_profile_unified_summary" msgid="237623767711796217">"Rovnaká ako zámka vášho zariadenia"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Spravovať aplikácie"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Správa a odstraňovanie nainštalovaných aplikácií"</string>
     <string name="applications_settings" msgid="1721442176406964682">"Aplikácie"</string>
@@ -2382,6 +2394,7 @@
     <string name="keywords_default_apps" msgid="223872637509160136">"aplikácie, predvolené"</string>
     <string name="keywords_ignore_optimizations" msgid="6102579291119055029">"ignorovať optimalizácie, spánok, pohotovostný režim aplikácie"</string>
     <string name="keywords_color_mode" msgid="6362744316886077510">"sýta, RGB, sRGB, farba, naturálna, štandardná"</string>
+    <string name="keywords_color_temperature" msgid="2688947724153266364">"intenzita farby D65 D73 biela žltá modrá teplá studená"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"odomknúť prejdením prstom, heslo, vzor, pin"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"pracovná výzva, práca, profil"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Nastavenie značky NFC (Wi-Fi)"</string>
@@ -2791,7 +2804,8 @@
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Rýchlo otvorí fotoaparát bez odomknutia obrazovky"</string>
     <string name="screen_zoom_title" msgid="6332123593919641665">"Priblíženie obrazovky"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"hustota obrazovky, priblíženie obrazovky, veľkosť, zmena veľkosti"</string>
-    <string name="screen_zoom_summary" msgid="7820299878405115849">"Pomocou posúvača pod ukážkou nastavte priblíženie obrazovky."</string>
+    <!-- no translation found for screen_zoom_summary (2022973627105802010) -->
+    <skip />
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"Ukážka"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"Zmenšiť"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"Zväčšiť"</string>
@@ -2837,4 +2851,6 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Dáta na pozadí sú dostupné iba prostredníctvom siete Wi-Fi. Môže to ovplyvniť niektoré aplikácie či služby, keď sieť Wi-Fi nie je dostupná."</string>
     <string name="suggestions_title" msgid="8758376306825920705">"Návrhy (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"Odstrániť"</string>
+    <string name="color_temperature" msgid="2501579996151717270">"Intenzita farby zobrazenia"</string>
+    <string name="color_temperature_desc" msgid="3603319696846982249">"Povolenie studených farieb"</string>
 </resources>

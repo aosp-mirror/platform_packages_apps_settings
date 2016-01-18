@@ -76,13 +76,16 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Išimti SD kortelę"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Ištrinti USB atmintinę"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Ištrinti SD kortelę"</string>
+    <string name="font_size_summary" msgid="133937309990844030">"Sumažinkite arba padidinkite ekrane rodomą tekstą."</string>
     <string name="small_font" msgid="2295331917424072635">"Mažas"</string>
     <string name="medium_font" msgid="2068475425515133701">"Vidutinis"</string>
     <string name="large_font" msgid="599055175160971446">"Didelis"</string>
-    <!-- no translation found for font_size_make_smaller_desc (7919995133365371569) -->
-    <skip />
-    <!-- no translation found for font_size_make_larger_desc (4316986572233686061) -->
-    <skip />
+    <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"Padaryti mažesnius"</string>
+    <string name="font_size_make_larger_desc" msgid="4316986572233686061">"Padaryti didesnius"</string>
+    <string name="font_size_preview_text_headline" msgid="7955317408475392247">"Pavyzdinis tekstas"</string>
+    <string name="font_size_preview_text_title" msgid="4762429961714563135">"Dvidešimt tūkstančių mylių po vandeniu"</string>
+    <string name="font_size_preview_text_subtitle" msgid="5712012075615701561">"24 skyrius. Koralų karalystė"</string>
+    <string name="font_size_preview_text_body" msgid="1608889593334414309">"Rytą pabudau su blaivia galva. Kaip nustebau, pajutęs, kad guliu lovoje, savo kajutėje. Be abejojimo, mano draugai buvo nunešti į savo kajutę. Turbūt, ir jie ne daugiau už mane galėjo žinoti, kas įvyko pereitą naktį. Beliko tik laukti, kad dėl kurio nors atsitiktinumo vėliau išaiškės ši paslaptinga istorija.\nAš užsinorėjau pakvėpuoti grynu oru. Bet ar galėsiu išeiti, ar kajutė neužrakinta? Aš pastūmiau duris. Durys atsidarė, ir aš siauru koridoriumi nuėjau prie trapo. Liukas, vakar uždarytas, buvo atviras. Aš išėjau į denį.\nNedas Lendas su Konseliu jau laukė manęs. Aš paklausiau, kaip jie praleido naktį. Bet jie nieko neatsiminė. Vakar užmigę sunkiu miegu, abu draugai pabudo tik šiandien rytą ir kaip nustebo, pasijutę savo kajutėje!"</string>
     <string name="font_size_save" msgid="3450855718056759095">"Gerai"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"USB atmintinė"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"SD kortelė"</string>
@@ -1220,8 +1223,7 @@
     <string name="location_sources_heading" msgid="1278732419851088319">"Vietovės šaltiniai"</string>
     <string name="about_settings" product="tablet" msgid="593457295516533765">"Apie planšetinį kompiuterį"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"Apie telefoną"</string>
-    <!-- no translation found for about_settings (221313099578564438) -->
-    <skip />
+    <string name="about_settings" product="emulator" msgid="221313099578564438">"Apie emuliuojamą įrenginį"</string>
     <string name="about_settings_summary" msgid="3371517697156165959">"Žiūrėti teisinę informaciją, būseną, programinės įrangos versiją"</string>
     <string name="legal_information" msgid="5769301644270604095">"Teisinė informacija"</string>
     <string name="contributors_title" msgid="5917703088825286504">"Pagalbininkai"</string>
@@ -1288,6 +1290,12 @@
     <string name="activity_not_found" msgid="5551664692991605325">"Programa jūsų telefone neįdiegta."</string>
     <string name="lock_settings_profile_title" msgid="7819021341281339182">"Darbo profilis"</string>
     <string name="lock_settings_profile_label" msgid="4423909470339292809">"Darbo profilio sauga"</string>
+    <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Darbo profilio ekrano užraktas"</string>
+    <string name="lock_settings_profile_unification_title" msgid="3130455578336894831">"Naudoti tą patį ekrano užraktą"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="8014208091623293835">"Pakeisti pagrindinį profilį, kad jis atitiktų darbo profilį"</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="5297248764066294130">"Naudoti tą patį ekrano užraktą?"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="342417647696962745">"Įrenginyje galite naudoti šį užraktą, tačiau bus taikoma visa su ekrano užraktu susijusi politika, kurią darbo profilyje nustatė IT administratorius.\nAr norite naudoti tą patį ekrano užraktą įrenginyje?"</string>
+    <string name="lock_settings_profile_unified_summary" msgid="237623767711796217">"Toks pats kaip įrenginio užraktas"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Valdyti programas"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Tvarkykite ir pašalinkite įdiegtas programas"</string>
     <string name="applications_settings" msgid="1721442176406964682">"Programos"</string>
@@ -1310,9 +1318,13 @@
     <string name="cache_header_label" msgid="1877197634162461830">"Talpykla"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"Išvalyti talpyklą"</string>
     <string name="cache_size_label" msgid="7505481393108282913">"Talpykla"</string>
-    <!-- no translation found for uri_permissions_text (3983110543017963732) -->
-    <!-- no translation found for clear_uri_btn_text (8575655132961012158) -->
-    <skip />
+    <plurals name="uri_permissions_text" formatted="false" msgid="3983110543017963732">
+      <item quantity="one">%d elementas</item>
+      <item quantity="few">%d elementai</item>
+      <item quantity="many">%d elemento</item>
+      <item quantity="other">%d elementų</item>
+    </plurals>
+    <string name="clear_uri_btn_text" msgid="8575655132961012158">"Išvalyti prieigą"</string>
     <string name="controls_label" msgid="7611113077086853799">"Valdikliai"</string>
     <string name="force_stop" msgid="7435006169872876756">"Sustabdyti"</string>
     <string name="total_size_label" msgid="1048676419552557254">"Iš viso"</string>
@@ -2381,6 +2393,7 @@
     <string name="keywords_default_apps" msgid="223872637509160136">"programos, numatytosios"</string>
     <string name="keywords_ignore_optimizations" msgid="6102579291119055029">"nepaisyti optimizavimo nustatymų, snustelėti, programų budėjimo režimas"</string>
     <string name="keywords_color_mode" msgid="6362744316886077510">"ryški, RGB, sRGB, spalva, natūrali, standartinė"</string>
+    <string name="keywords_color_temperature" msgid="2688947724153266364">"spalvų temperatūra D65 D73 balta geltona mėlyna šilta šalta"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"slysti ir atrakinti, slaptažodis, šablonas, PIN kodas"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"darbo iššūkis, darbas, profilis"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Nustatyti „Wi-Fi“ ALR žymą"</string>
@@ -2792,7 +2805,7 @@
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Greitai atidarykite fotoaparatą neatrakinę įrenginio"</string>
     <string name="screen_zoom_title" msgid="6332123593919641665">"Ekrano mastelio keitimas"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"ekrano tankis, ekrano mastelio keitimas, mastelis, mastelio nustatymas"</string>
-    <string name="screen_zoom_summary" msgid="7820299878405115849">"Pasirinkite ekrano mastelį naudodami šliaužiklį po peržiūros vaizdu."</string>
+    <string name="screen_zoom_summary" msgid="2022973627105802010">"Sumažinkite arba padidinkite visus ekrane rodomus elementus. Pakeitus šį nustatymą, gali pasikeisti kai kurių pagrindinio ekrano programų vietos."</string>
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"Peržiūrėti"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"Padaryti mažesnius"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"Padaryti didesnius"</string>
@@ -2838,4 +2851,6 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Foniniai duomenys pasiekiami tik prisijungus prie „Wi-Fi“ ryšio. Tai gali paveikti kai kurias programas ar paslaugas, kai „Wi-Fi“ ryšys nepasiekiamas."</string>
     <string name="suggestions_title" msgid="8758376306825920705">"Pasiūlymai (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"Pašalinti"</string>
+    <string name="color_temperature" msgid="2501579996151717270">"Ekrano spalvų temperatūra"</string>
+    <string name="color_temperature_desc" msgid="3603319696846982249">"Įgalinti šaltų spalvų temperatūrą"</string>
 </resources>

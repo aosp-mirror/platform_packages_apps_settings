@@ -74,13 +74,16 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Tháo thẻ SD"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Xóa bộ nhớ USB"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Xóa thẻ SD"</string>
+    <string name="font_size_summary" msgid="133937309990844030">"Làm cho văn bản trên màn hình nhỏ hơn hoặc lớn hơn."</string>
     <string name="small_font" msgid="2295331917424072635">"Nhỏ"</string>
     <string name="medium_font" msgid="2068475425515133701">"Trung bình"</string>
     <string name="large_font" msgid="599055175160971446">"Lớn"</string>
-    <!-- no translation found for font_size_make_smaller_desc (7919995133365371569) -->
-    <skip />
-    <!-- no translation found for font_size_make_larger_desc (4316986572233686061) -->
-    <skip />
+    <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"Thu nhỏ"</string>
+    <string name="font_size_make_larger_desc" msgid="4316986572233686061">"Phóng to"</string>
+    <string name="font_size_preview_text_headline" msgid="7955317408475392247">"Văn bản mẫu"</string>
+    <string name="font_size_preview_text_title" msgid="4762429961714563135">"Hai vạn dặm dưới đáy biển"</string>
+    <string name="font_size_preview_text_subtitle" msgid="5712012075615701561">"Chương 23: The Coral Kingdom"</string>
+    <string name="font_size_preview_text_body" msgid="1608889593334414309">"Ngày hôm sau, tôi đã thức dậy với cái đầu nhẹ bỗng lạ thường. Kỳ lạ thay, tôi lại ở trong phòng của mình. Những người bạn của tôi, không còn nghi ngờ gì nữa, đã trở lại buồng lái mà không hề biết chuyện này nhiều hơn tôi. Những gì đã diễn ra suốt đêm họ đều không hay biết như tôi và để thấu hiểu bí mật này, tôi chỉ trông chờ vào các cơ hội trong tương lai.\nSau đó, tôi định rời khỏi phòng. Tôi đã được tự do trở lại hay trở thành một tù nhân? Hoàn toàn tự do. Tôi đã mở cửa, đi tới nửa boong tàu, đi lên giữa cầu thang. Các tấm cửa chắn, khép lại buổi tối trước đó, đã mở ra. Tôi đi tới bục.\nNed Land và Conseil đã chờ tôi ở đó. Tôi đã hỏi họ nhưng họ không hay biết gì. Họ chìm vào giấc ngủ sâu mà họ hoàn toàn vô thức, họ đã kinh ngạc khi thấy mình ở buồng lái."</string>
     <string name="font_size_save" msgid="3450855718056759095">"OK"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"Bộ nhớ USB"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"Thẻ SD"</string>
@@ -1202,8 +1205,7 @@
     <string name="location_sources_heading" msgid="1278732419851088319">"Nguồn thông tin vị trí"</string>
     <string name="about_settings" product="tablet" msgid="593457295516533765">"Giới thiệu về máy tính bảng"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"Giới thiệu về điện thoại"</string>
-    <!-- no translation found for about_settings (221313099578564438) -->
-    <skip />
+    <string name="about_settings" product="emulator" msgid="221313099578564438">"Giới thiệu về thiết bị được mô phỏng"</string>
     <string name="about_settings_summary" msgid="3371517697156165959">"Xem thông tin pháp lý, trạng thái, phiên bản phần mềm"</string>
     <string name="legal_information" msgid="5769301644270604095">"Thông tin pháp lý"</string>
     <string name="contributors_title" msgid="5917703088825286504">"Người đóng góp"</string>
@@ -1270,6 +1272,12 @@
     <string name="activity_not_found" msgid="5551664692991605325">"Ứng dụng chưa được cài đặt trên điện thoại của bạn."</string>
     <string name="lock_settings_profile_title" msgid="7819021341281339182">"Hồ sơ công việc"</string>
     <string name="lock_settings_profile_label" msgid="4423909470339292809">"Bảo mật hồ sơ công việc"</string>
+    <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Khóa màn hình hồ sơ công việc"</string>
+    <string name="lock_settings_profile_unification_title" msgid="3130455578336894831">"Sử dụng cùng một khóa màn hình"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="8014208091623293835">"Thay đổi hồ sơ chính cho phù hợp với hồ sơ công việc"</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="5297248764066294130">"Sử dụng cùng một khóa màn hình?"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="342417647696962745">"Bạn có thể sử dụng khóa này cho thiết bị của mình. Tuy nhiên, khóa này sẽ phải tuân theo tất cả các chính sách liên quan đến khóa màn hình do quản trị viên CNTT của bạn thiết lập trên hồ sơ công việc.\nBạn có muốn sử dụng cùng một khóa màn hình cho thiết bị của mình không?"</string>
+    <string name="lock_settings_profile_unified_summary" msgid="237623767711796217">"Giống như khóa thiết bị của bạn"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Quản lý ứng dụng"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Quản lý và xóa ứng dụng đã cài đặt"</string>
     <string name="applications_settings" msgid="1721442176406964682">"Ứng dụng"</string>
@@ -1292,9 +1300,11 @@
     <string name="cache_header_label" msgid="1877197634162461830">"Bộ nhớ cache"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"Xóa bộ nhớ cache"</string>
     <string name="cache_size_label" msgid="7505481393108282913">"Bộ nhớ cache"</string>
-    <!-- no translation found for uri_permissions_text (3983110543017963732) -->
-    <!-- no translation found for clear_uri_btn_text (8575655132961012158) -->
-    <skip />
+    <plurals name="uri_permissions_text" formatted="false" msgid="3983110543017963732">
+      <item quantity="other">%d mục</item>
+      <item quantity="one">1 mục</item>
+    </plurals>
+    <string name="clear_uri_btn_text" msgid="8575655132961012158">"Xóa quyền truy cập"</string>
     <string name="controls_label" msgid="7611113077086853799">"Các điều khiển"</string>
     <string name="force_stop" msgid="7435006169872876756">"Buộc dừng"</string>
     <string name="total_size_label" msgid="1048676419552557254">"Tổng"</string>
@@ -2351,6 +2361,7 @@
     <string name="keywords_default_apps" msgid="223872637509160136">"ứng dụng, mặc định"</string>
     <string name="keywords_ignore_optimizations" msgid="6102579291119055029">"bỏ qua, tối ưu hóa, nghỉ, chế độ chờ ứng dụng"</string>
     <string name="keywords_color_mode" msgid="6362744316886077510">"sống động, RGB, sRGB, màu, tự nhiên, chuẩn"</string>
+    <string name="keywords_color_temperature" msgid="2688947724153266364">"nhiệt độ màu D65 D73 trắng vàng lam ấm lạnh"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"trượt để mở khóa, mật khẩu, hình mở khóa, mã PIN"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"thách thức công việc, công việc, hồ sơ"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Thiết lập thẻ NFC Wi-Fi"</string>
@@ -2742,7 +2753,7 @@
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Mở nhanh máy ảnh mà không cần mở khóa màn hình của bạn"</string>
     <string name="screen_zoom_title" msgid="6332123593919641665">"Thu phóng màn hình"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"mật độ hiển thị, thu phóng màn hình, tỷ lệ, chia tỷ lệ"</string>
-    <string name="screen_zoom_summary" msgid="7820299878405115849">"Chọn mức độ bạn muốn thu phóng màn hình bằng thanh trượt bên dưới hình ảnh xem trước."</string>
+    <string name="screen_zoom_summary" msgid="2022973627105802010">"Làm cho tất cả các mục trên màn hình nhỏ hơn hoặc lớn hơn. Một số ứng dụng trên màn hình chính của bạn có thể thay đổi vị trí sau khi thay đổi cài đặt này."</string>
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"Xem trước"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"Thu nhỏ"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"Phóng to"</string>
@@ -2788,4 +2799,6 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Dữ liệu nền chỉ khả dụng qua Wi-Fi. Điều này có thể ảnh hưởng đến một số ứng dụng hoặc dịch vụ khi không có Wi-Fi."</string>
     <string name="suggestions_title" msgid="8758376306825920705">"Đề xuất (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"Xóa"</string>
+    <string name="color_temperature" msgid="2501579996151717270">"Hiển thị nhiệt độ màu"</string>
+    <string name="color_temperature_desc" msgid="3603319696846982249">"Bật tông màu lạnh"</string>
 </resources>

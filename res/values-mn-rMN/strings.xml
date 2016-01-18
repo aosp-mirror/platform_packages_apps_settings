@@ -74,13 +74,17 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"SD картыг салгах"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"USB санг арилгах"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"SD картыг арилгах"</string>
+    <!-- no translation found for font_size_summary (133937309990844030) -->
+    <skip />
     <string name="small_font" msgid="2295331917424072635">"Жижиг"</string>
     <string name="medium_font" msgid="2068475425515133701">"Дундаж"</string>
     <string name="large_font" msgid="599055175160971446">"Том"</string>
-    <!-- no translation found for font_size_make_smaller_desc (7919995133365371569) -->
-    <skip />
-    <!-- no translation found for font_size_make_larger_desc (4316986572233686061) -->
-    <skip />
+    <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"Жижигрүүлэх"</string>
+    <string name="font_size_make_larger_desc" msgid="4316986572233686061">"Томруулах"</string>
+    <string name="font_size_preview_text_headline" msgid="7955317408475392247">"Жишээ текст"</string>
+    <string name="font_size_preview_text_title" msgid="4762429961714563135">"Тэнгисийн гүн дэх хорин мянган лиг"</string>
+    <string name="font_size_preview_text_subtitle" msgid="5712012075615701561">"Бүлэг 23: Шүрэн Вант Улс"</string>
+    <string name="font_size_preview_text_body" msgid="1608889593334414309">"Дараагийн өглөө нь сэрээд би юу ч санахгүй байлаа. Хамгийн хачирхалтай нь би өөрийнхөө өрөөнд байх нь тэр. Миний нөхөд ч мөн адил өөрсдийн кабинд сэрсэн бөгөөд бас л над шиг юу болоод байгааг ойлгохгүй, гайхширч байв. Өчигдөр шөнө ямар ид шид нь болсон талаар бид бүгдээрээ ойлгосонгүй, харин би зөвхөн ирээдүйн сайн сайхны төлөө боломж гарч ирлээ гэж бодож байлаа.\nТэгээд би өрөөгөө орхих талаар бодлоо. Би дахиад эрх чөлөөтэй болсон уу эсвэл хоригдол хэвээр байна уу? Яахын аргагүй л чөлөөтэй байна. Би хаалгаа онгойлгоод нам хашаанд тулан, гол шатаар өгслөө. Өмнөх орой нь хаалттай байсан хашааны хаалга нээлттэй байв. Тэгээд би тавцан дээр гарлаа.\nНед Ланд, Консэйл хоёр намайг тэнд хүлээж байв. Би тэднээс юу болоод байгаа талаар асуухад тэд бас юу ч мэдэхгүй байв. Тэд нойрондоо дийлдэж, нам унтсан бөгөөд кабинд сэрсэндээ маш их гайхширсан байлаа."</string>
     <string name="font_size_save" msgid="3450855718056759095">"Тийм"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"USB сан"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"SD карт"</string>
@@ -1192,8 +1196,7 @@
     <string name="location_sources_heading" msgid="1278732419851088319">"Байршлын эх үүсвэрүүд"</string>
     <string name="about_settings" product="tablet" msgid="593457295516533765">"Таблетын тухай"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"Утасны тухай"</string>
-    <!-- no translation found for about_settings (221313099578564438) -->
-    <skip />
+    <string name="about_settings" product="emulator" msgid="221313099578564438">"Утасны мэдээллийн дэлгэц"</string>
     <string name="about_settings_summary" msgid="3371517697156165959">"Хууль эрх зүйн мэдээлэл, статус, програмын хувилбарыг харах"</string>
     <string name="legal_information" msgid="5769301644270604095">"Хууль эрх зүйн мэдээлэл"</string>
     <string name="contributors_title" msgid="5917703088825286504">"Хувь оруулагчид"</string>
@@ -1260,6 +1263,12 @@
     <string name="activity_not_found" msgid="5551664692991605325">"Таны утсан дээр аппликешн суугаагүй байна."</string>
     <string name="lock_settings_profile_title" msgid="7819021341281339182">"Ажлын профайл"</string>
     <string name="lock_settings_profile_label" msgid="4423909470339292809">"Ажлын профайлын аюулгүй байдал"</string>
+    <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Ажлын профайлын дэлгэцийн түгжээ"</string>
+    <string name="lock_settings_profile_unification_title" msgid="3130455578336894831">"Ижил дэлгэцийн түгжээ ашиглах"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="8014208091623293835">"Ажлын профайлтай нийцүүлэхийн тул үндсэн профайлыг өөрчлөх"</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="5297248764066294130">"Ижил дэлгэцийн түгжээ ашиглах уу?"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="342417647696962745">"Та энэ түгжээг төхөөрөмждөө ашиглаж болно. Гэхдий энэ нь таны IT админы ажлын профайлд тохируулсан дэлгэцийн түгжээний дүрмийг хамруулна.\nТа төхөөрөмждөө ижил дэлгэцийн түгжээг ашиглах уу?"</string>
+    <string name="lock_settings_profile_unified_summary" msgid="237623767711796217">"Таны төхөөрөмжийн түгжээтэй ижил"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Апп удирдах"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Суулгасан апп-уудыг удирдах болон устгах"</string>
     <string name="applications_settings" msgid="1721442176406964682">"Апп"</string>
@@ -1282,9 +1291,11 @@
     <string name="cache_header_label" msgid="1877197634162461830">"Кеш"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"Кешийг арилгах"</string>
     <string name="cache_size_label" msgid="7505481393108282913">"Кеш"</string>
-    <!-- no translation found for uri_permissions_text (3983110543017963732) -->
-    <!-- no translation found for clear_uri_btn_text (8575655132961012158) -->
-    <skip />
+    <plurals name="uri_permissions_text" formatted="false" msgid="3983110543017963732">
+      <item quantity="other">%d зүйлс</item>
+      <item quantity="one"> 1 зүйл</item>
+    </plurals>
+    <string name="clear_uri_btn_text" msgid="8575655132961012158">"Хандалтыг устгах"</string>
     <string name="controls_label" msgid="7611113077086853799">"Контрол"</string>
     <string name="force_stop" msgid="7435006169872876756">"Хүчээр зогсоох"</string>
     <string name="total_size_label" msgid="1048676419552557254">"Нийт"</string>
@@ -2341,6 +2352,7 @@
     <string name="keywords_default_apps" msgid="223872637509160136">"апп, өгөгдмөл"</string>
     <string name="keywords_ignore_optimizations" msgid="6102579291119055029">"оновчлолыг хэрэгсэхгүй байх, зүүрмэглэх, апп зогсолтын горим"</string>
     <string name="keywords_color_mode" msgid="6362744316886077510">"чичиргээ, RGB, sRGB, өнгө, байгалийн, стандарт"</string>
+    <string name="keywords_color_temperature" msgid="2688947724153266364">"өнгөний температур D65 D73 цагаан шар цэнхэр дулаан хүйтэн"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"түгжээг тайлахын тулд гулсуулах, нууц үг,  загвар, PIN"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"ажлын сорилт, ажил, профайл"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Wi-Fi NFC Tагь тохируулах"</string>
@@ -2730,7 +2742,8 @@
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Камерыг дэлгэцийн түгжээ тайлалгүйгээр төвөггүй нээх"</string>
     <string name="screen_zoom_title" msgid="6332123593919641665">"Дэлгэцийг томруулах"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"дэлгэцийн нягтрал, дэлгэцийг томруулах, хэмжих, хэмжээс"</string>
-    <string name="screen_zoom_summary" msgid="7820299878405115849">"Өмнөх зургийн доор байгаа гулсуулагчийг ашиглан дэлгэцийг хэр зэрэг томсгохоо сонгоорой."</string>
+    <!-- no translation found for screen_zoom_summary (2022973627105802010) -->
+    <skip />
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"Урьдчилж харах"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"Жижигрүүлэх"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"Томруулах"</string>
@@ -2776,4 +2789,6 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Дэвсгэр дата зөвхөн Wi-Fi-р дамжуулсан тохиолдолд боломжтой. Ингэснээр Wi-Fi байхгүй үед зарим апп эсвэл үйлчилгээнд нөлөөлж болзошгүй."</string>
     <string name="suggestions_title" msgid="8758376306825920705">"Санал болголт (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"Арилгах"</string>
+    <string name="color_temperature" msgid="2501579996151717270">"Дэлгэцийн өнгөний температур"</string>
+    <string name="color_temperature_desc" msgid="3603319696846982249">"Хүйтэн температур идэвхжүүлэх"</string>
 </resources>

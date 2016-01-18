@@ -74,13 +74,17 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Désinstaller la carte SD"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Effacer la mémoire de stockage USB"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Effacer la carte SD"</string>
+    <!-- no translation found for font_size_summary (133937309990844030) -->
+    <skip />
     <string name="small_font" msgid="2295331917424072635">"Petit"</string>
     <string name="medium_font" msgid="2068475425515133701">"Moyen"</string>
     <string name="large_font" msgid="599055175160971446">"Grande"</string>
-    <!-- no translation found for font_size_make_smaller_desc (7919995133365371569) -->
-    <skip />
-    <!-- no translation found for font_size_make_larger_desc (4316986572233686061) -->
-    <skip />
+    <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"Rapetisser"</string>
+    <string name="font_size_make_larger_desc" msgid="4316986572233686061">"Agrandir"</string>
+    <string name="font_size_preview_text_headline" msgid="7955317408475392247">"Exemple de texte"</string>
+    <string name="font_size_preview_text_title" msgid="4762429961714563135">"Vingt mille lieues sous les mers"</string>
+    <string name="font_size_preview_text_subtitle" msgid="5712012075615701561">"Chapitre 24: Le royaume du corail"</string>
+    <string name="font_size_preview_text_body" msgid="1608889593334414309">"Le lendemain, je me réveillai la tête singulièrement dégagée. À ma grande surprise, j’étais dans ma chambre. Mes compagnons, sans doute, avaient été réintégrés dans leur cabine, sans qu’ils s’en fussent aperçus plus que moi. Ce qui s’était passé pendant cette nuit, ils l’ignoraient comme je l’ignorais moi-même, et pour dévoiler ce mystère, je ne comptais que sur les hasards de l’avenir.\nJe songeai alors à quitter ma chambre. Étais-je encore une fois libre ou prisonnier ? Libre entièrement. J’ouvris la porte, je pris par les coursives, je montai l’escalier central. Les panneaux, fermés la veille, étaient ouverts. J’arrivai sur la plate-forme.\nNed Land et Conseil m’y attendaient. Je les interrogeai. Ils ne savaient rien. Endormis d’un sommeil pesant qui ne leur laissait aucun souvenir, ils avaient été très surpris de se retrouver dans leur cabine."</string>
     <string name="font_size_save" msgid="3450855718056759095">"OK"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"Mémoire de stockage USB"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"Carte SD"</string>
@@ -1202,8 +1206,7 @@
     <string name="location_sources_heading" msgid="1278732419851088319">"Sources de localisation"</string>
     <string name="about_settings" product="tablet" msgid="593457295516533765">"À propos de la tablette"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"À propos du téléphone"</string>
-    <!-- no translation found for about_settings (221313099578564438) -->
-    <skip />
+    <string name="about_settings" product="emulator" msgid="221313099578564438">"À propos de l\'appareil émulé"</string>
     <string name="about_settings_summary" msgid="3371517697156165959">"Informations légales, état et version du logiciel"</string>
     <string name="legal_information" msgid="5769301644270604095">"Renseignements juridiques"</string>
     <string name="contributors_title" msgid="5917703088825286504">"Contributeurs"</string>
@@ -1270,6 +1273,12 @@
     <string name="activity_not_found" msgid="5551664692991605325">"L\'application n\'est pas installée sur votre téléphone."</string>
     <string name="lock_settings_profile_title" msgid="7819021341281339182">"Profil professionnel"</string>
     <string name="lock_settings_profile_label" msgid="4423909470339292809">"Sécurité du profil professionnel"</string>
+    <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Verrouillage de l\'écran du profil professionnel"</string>
+    <string name="lock_settings_profile_unification_title" msgid="3130455578336894831">"Utiliser le même verrouillage d\'écran"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="8014208091623293835">"Modifier le profil principal afin qu\'il corresponde au profil professionnel"</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="5297248764066294130">"Utilisez le même verrouillage d\'écran?"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="342417647696962745">"Vous pouvez utiliser ce verrouillage pour votre appareil, mais sachez qu\'il inclut toutes les règles liées au verrouillage de l\'écran définies par votre administrateur informatique sur le profil professionnel.\nVoulez-vous utiliser le même verrouillage d\'écran sur votre appareil?"</string>
+    <string name="lock_settings_profile_unified_summary" msgid="237623767711796217">"Identique au verrouillage de votre appareil"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Gérer les applications"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Gérer et supprimer les applications installées"</string>
     <string name="applications_settings" msgid="1721442176406964682">"Applications"</string>
@@ -1292,9 +1301,11 @@
     <string name="cache_header_label" msgid="1877197634162461830">"Cache"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"Vider le cache"</string>
     <string name="cache_size_label" msgid="7505481393108282913">"Cache"</string>
-    <!-- no translation found for uri_permissions_text (3983110543017963732) -->
-    <!-- no translation found for clear_uri_btn_text (8575655132961012158) -->
-    <skip />
+    <plurals name="uri_permissions_text" formatted="false" msgid="3983110543017963732">
+      <item quantity="one">%d élément</item>
+      <item quantity="other">%d éléments</item>
+    </plurals>
+    <string name="clear_uri_btn_text" msgid="8575655132961012158">"Supprimer l\'accès"</string>
     <string name="controls_label" msgid="7611113077086853799">"Commandes"</string>
     <string name="force_stop" msgid="7435006169872876756">"Forcer l\'arrêt"</string>
     <string name="total_size_label" msgid="1048676419552557254">"Total"</string>
@@ -2351,6 +2362,7 @@
     <string name="keywords_default_apps" msgid="223872637509160136">"applications, par défaut"</string>
     <string name="keywords_ignore_optimizations" msgid="6102579291119055029">"ignorer les optimisations, mise en veille, mode veille des application"</string>
     <string name="keywords_color_mode" msgid="6362744316886077510">"vibrantes, rvb, srvb, couleurs, naturelles, standard"</string>
+    <string name="keywords_color_temperature" msgid="2688947724153266364">"température couleur D65 D73 bleu jaune blanc froid chaud"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"glisser pour déverrouiller, mot de passe, schéma, nip"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"défi professionnel, travail, profil"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Créer une balise NFC par Wi-Fi"</string>
@@ -2742,7 +2754,8 @@
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Lancez rapidement l\'appareil photo sans déverrouiller l\'écran"</string>
     <string name="screen_zoom_title" msgid="6332123593919641665">"Zoom de l\'écran"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"densité d\'affichage, zoom de l\'écran, échelle, mise à l\'échelle"</string>
-    <string name="screen_zoom_summary" msgid="7820299878405115849">"Faites un zoom avant ou arrière sur l\'écran à l\'aide du curseur en dessous de l\'image d\'aperçu."</string>
+    <!-- no translation found for screen_zoom_summary (2022973627105802010) -->
+    <skip />
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"Aperçu"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"Rapetisser"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"Agrandir"</string>
@@ -2788,4 +2801,6 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Les données en arrière-plan ne sont accessibles que par Wi-Fi. Cela peut nuire à certaines applications ou certains services lorsque le Wi-Fi n\'est pas accessible."</string>
     <string name="suggestions_title" msgid="8758376306825920705">"Suggestions (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"Supprimer"</string>
+    <string name="color_temperature" msgid="2501579996151717270">"Afficher la température des couleurs"</string>
+    <string name="color_temperature_desc" msgid="3603319696846982249">"Activer les couleurs froides"</string>
 </resources>

@@ -74,13 +74,17 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"SD kartani uzish"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"USB xotirani tozalash"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"SD-kartani tozalash"</string>
+    <!-- no translation found for font_size_summary (133937309990844030) -->
+    <skip />
     <string name="small_font" msgid="2295331917424072635">"Kichik"</string>
     <string name="medium_font" msgid="2068475425515133701">"O‘rtacha"</string>
     <string name="large_font" msgid="599055175160971446">"Katta"</string>
-    <!-- no translation found for font_size_make_smaller_desc (7919995133365371569) -->
-    <skip />
-    <!-- no translation found for font_size_make_larger_desc (4316986572233686061) -->
-    <skip />
+    <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"Kichiklashtirish"</string>
+    <string name="font_size_make_larger_desc" msgid="4316986572233686061">"Kattalashtirish"</string>
+    <string name="font_size_preview_text_headline" msgid="7955317408475392247">"Namunaviy matn"</string>
+    <string name="font_size_preview_text_title" msgid="4762429961714563135">"Suv ostida 80 ming kilometr"</string>
+    <string name="font_size_preview_text_subtitle" msgid="5712012075615701561">"23-bob: Marjonlar olamida"</string>
+    <string name="font_size_preview_text_body" msgid="1608889593334414309">"Ertasi kuni uyqudan boshim g‘uvillab turdim. O‘z kayutamda yotganimni ko‘rib g‘oyat taajjublandim. Og‘aynilarimni ham uxlab yotganlarida o‘z kayutalariga ko‘chirishgandir. Binobarin ular ham o‘tgan tundagi voqealarni menchalik bilishsa kerak, shuning uchun kelajak bu sirning pardasini ochishiga umid bog‘lashdan bo‘lak choram qolmagan edi.\nKayutadan chiqqim keldi. Ammo men ozodmikinman yoki ilgarigiday banddamanmi? Yo‘q, hartugul tamoman ozod ekanman. Eshikni ochib, yo‘lak orqali palubaga olib chiqadigan trapga o‘tdim. Voqealar bo‘lib o‘tishidan oldin yopilgan lyuk lang ochiq edi. Palubaga chiqdim.\nU yerda Ned Lend bilan Konsel meni kutib turishgan ekan. Ularni so‘roqqa tutdim. Hech narsani bilishmas edi. Kecha kechqurun og‘ir uyquga ketishganlaricha bugun ertalab o‘z kayutalarida uyg‘onishgan edilar."</string>
     <string name="font_size_save" msgid="3450855718056759095">"OK"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"USB xotira"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"SD karta"</string>
@@ -1202,8 +1206,7 @@
     <string name="location_sources_heading" msgid="1278732419851088319">"Joylashuv manbalari"</string>
     <string name="about_settings" product="tablet" msgid="593457295516533765">"Planshet haqida"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"Telefon haqida"</string>
-    <!-- no translation found for about_settings (221313099578564438) -->
-    <skip />
+    <string name="about_settings" product="emulator" msgid="221313099578564438">"Taqlid qurilma haqida"</string>
     <string name="about_settings_summary" msgid="3371517697156165959">"Yuridik ma’lumotlar, holat, dasturiy ta’minot versiyasini ko‘rish"</string>
     <string name="legal_information" msgid="5769301644270604095">"Huquqiy ma’lumotlar"</string>
     <string name="contributors_title" msgid="5917703088825286504">"Hissa qo‘shganlar"</string>
@@ -1270,6 +1273,12 @@
     <string name="activity_not_found" msgid="5551664692991605325">"Ilova telefoningizga o‘rnatilmagan."</string>
     <string name="lock_settings_profile_title" msgid="7819021341281339182">"Ishchi profil"</string>
     <string name="lock_settings_profile_label" msgid="4423909470339292809">"Ishchi profili xavfsizligi"</string>
+    <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Ishchi profil ekran qulfi"</string>
+    <string name="lock_settings_profile_unification_title" msgid="3130455578336894831">"Bir xil ekran qulfidan foydalanish"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="8014208091623293835">"Ishchi profilni aniqlash uchun asosiy profilni tanlang"</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="5297248764066294130">"Bir xil ekran qulfidan foydalanilsinmi?"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="342417647696962745">"Siz bu qulfdan qurilmangizga foydalanishingiz mumkin, lekin ishchi profilingizda administrator tomonidan o‘rnatilgan barcha ekran qulflariga aloqador siyosatlardan tashkil topgan.\nQurilmangiz uchun bir xil ekran qulfidan foydalanilsinmi?"</string>
+    <string name="lock_settings_profile_unified_summary" msgid="237623767711796217">"Qurilmangiz qulfi bilan bir xil"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Ilovalar boshqaruvi"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"O‘rnatilgan ilovlarni boshqarish yoki o‘chirish"</string>
     <string name="applications_settings" msgid="1721442176406964682">"Ilovalar"</string>
@@ -1292,9 +1301,11 @@
     <string name="cache_header_label" msgid="1877197634162461830">"Kesh"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"Keshni tozalash"</string>
     <string name="cache_size_label" msgid="7505481393108282913">"Kesh"</string>
-    <!-- no translation found for uri_permissions_text (3983110543017963732) -->
-    <!-- no translation found for clear_uri_btn_text (8575655132961012158) -->
-    <skip />
+    <plurals name="uri_permissions_text" formatted="false" msgid="3983110543017963732">
+      <item quantity="other">%d ta element</item>
+      <item quantity="one">1 ta element</item>
+    </plurals>
+    <string name="clear_uri_btn_text" msgid="8575655132961012158">"Ruxsatnomalarni o‘chirish"</string>
     <string name="controls_label" msgid="7611113077086853799">"Boshqaruv"</string>
     <string name="force_stop" msgid="7435006169872876756">"Majburan to‘xtatish"</string>
     <string name="total_size_label" msgid="1048676419552557254">"Jami"</string>
@@ -2351,6 +2362,7 @@
     <string name="keywords_default_apps" msgid="223872637509160136">"ilovalar, birlamchi"</string>
     <string name="keywords_ignore_optimizations" msgid="6102579291119055029">"cheklovlarni e’tiborsiz qoldirish, mudroq rejimi, kutish rejimi"</string>
     <string name="keywords_color_mode" msgid="6362744316886077510">"yorqin, RGB, sRGB, rang, tabiiy, standart"</string>
+    <string name="keywords_color_temperature" msgid="2688947724153266364">"rang harorat D65 D73 oq sariq ko‘k iliq salqin"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"qulfni ochish uchun surish, parol, chizmali kalit, PIN kod"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"ish vazifasi, ish, profil"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Wi-Fi’ni sozlash u-n NFC yorliq"</string>
@@ -2742,7 +2754,8 @@
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Ekran qulfini ochmasdan kamerani tezroq ishga tushirish"</string>
     <string name="screen_zoom_title" msgid="6332123593919641665">"Ekran ko‘lami"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"ekran, zichlik, ekran, ko‘lam, miqyos, oshirish"</string>
-    <string name="screen_zoom_summary" msgid="7820299878405115849">"Oldindan ko‘rish tasvirining pastida joylashgan slayder yordamida o‘zingiz xohlagan ekran ko‘lamini tanlashingiz mumkin."</string>
+    <!-- no translation found for screen_zoom_summary (2022973627105802010) -->
+    <skip />
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"Oldindan ko‘rish"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"Kichiklashtirish"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"Kattalashtirish"</string>
@@ -2788,4 +2801,6 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Fondagi internet faqat Wi-Fi orqali ishlaydi. Agar Wi-Fi o‘chiq bo‘lsa, bu bir qancha ilovalar va xizmatlarning ishlashiga ta’sir qilishi mumkin."</string>
     <string name="suggestions_title" msgid="8758376306825920705">"Takliflar (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"O‘chirish"</string>
+    <string name="color_temperature" msgid="2501579996151717270">"Displey rangi harorati"</string>
+    <string name="color_temperature_desc" msgid="3603319696846982249">"Salqin haroratni yoqish"</string>
 </resources>
