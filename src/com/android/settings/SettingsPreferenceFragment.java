@@ -24,7 +24,6 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
@@ -185,6 +184,11 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
     public void showLoadingWhenEmpty() {
         View loading = getView().findViewById(R.id.loading_container);
         setEmptyView(loading);
+    }
+
+    public void setLoading(boolean loading, boolean animate) {
+        View loading_container = getView().findViewById(R.id.loading_container);
+        Utils.handleLoadingContainer(loading_container, getListView(), !loading, animate);
     }
 
     public void registerObserverIfNeeded() {

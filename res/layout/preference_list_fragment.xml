@@ -18,95 +18,95 @@
 -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-      android:id="@+id/container_material"
-      android:orientation="vertical"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:background="@android:color/transparent">
+    android:id="@+id/container_material"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
 
     <FrameLayout android:id="@+id/pinned_header"
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 android:visibility="gone" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
 
-         <FrameLayout
-                 android:id="@android:id/list_container"
-                 android:layout_height="0px"
-                 android:layout_weight="1"
-                 android:layout_width="match_parent">
+    <FrameLayout
+        android:id="@android:id/list_container"
+        android:layout_height="0px"
+        android:layout_weight="1"
+        android:layout_width="match_parent">
 
         <ListView android:id="@+id/backup_list"
-                  style="@style/PreferenceFragmentListSinglePane"
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:paddingStart="@dimen/settings_side_margin"
-                  android:paddingEnd="@dimen/settings_side_margin"
-                  android:paddingTop="@dimen/dashboard_padding_top"
-                  android:paddingBottom="@dimen/dashboard_padding_bottom"
-                  android:scrollbarStyle="@*android:integer/preference_fragment_scrollbarStyle"
-                  android:clipToPadding="false"
-                  android:drawSelectorOnTop="false"
-                  android:elevation="@dimen/dashboard_category_elevation"
-                  android:visibility="gone"
-                  android:scrollbarAlwaysDrawVerticalTrack="true" />
+            style="@style/PreferenceFragmentListSinglePane"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="@dimen/settings_side_margin"
+            android:paddingEnd="@dimen/settings_side_margin"
+            android:paddingTop="@dimen/dashboard_padding_top"
+            android:paddingBottom="@dimen/dashboard_padding_bottom"
+            android:scrollbarStyle="@*android:integer/preference_fragment_scrollbarStyle"
+            android:clipToPadding="false"
+            android:drawSelectorOnTop="false"
+            android:elevation="@dimen/dashboard_category_elevation"
+            android:visibility="gone"
+            android:scrollbarAlwaysDrawVerticalTrack="true" />
 
         <include layout="@layout/loading_container" />
 
         <com.android.settings.widget.FloatingActionButton
-                  android:id="@+id/fab"
-                  android:visibility="gone"
-                  android:clickable="true"
-                  android:layout_width="@dimen/fab_size"
-                  android:layout_height="@dimen/fab_size"
-                  android:layout_gravity="bottom|end"
-                  android:layout_marginEnd="@dimen/fab_margin"
-                  android:layout_marginBottom="@dimen/fab_margin"
-                  android:elevation="@dimen/fab_elevation"
-                  android:background="@drawable/fab_background" />
+            android:id="@+id/fab"
+            android:visibility="gone"
+            android:clickable="true"
+            android:layout_width="@dimen/fab_size"
+            android:layout_height="@dimen/fab_size"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="@dimen/fab_margin"
+            android:layout_marginBottom="@dimen/fab_margin"
+            android:elevation="@dimen/fab_elevation"
+            android:background="@drawable/fab_background" />
 
     </FrameLayout>
 
     <TextView android:id="@android:id/empty"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:padding="@*android:dimen/preference_fragment_padding_side"
-              android:gravity="center"
-              android:visibility="gone" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@*android:dimen/preference_fragment_padding_side"
+        android:gravity="center"
+        android:visibility="gone" />
 
     <RelativeLayout android:id="@+id/button_bar"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:layout_weight="0"
-                    android:visibility="gone">
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_weight="0"
+        android:visibility="gone">
 
         <Button android:id="@+id/back_button"
+            android:layout_width="150dip"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:layout_alignParentStart="true"
+            android:text="@*android:string/back_button_label"
+            />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true">
+
+            <Button android:id="@+id/skip_button"
                 android:layout_width="150dip"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dip"
-                android:layout_alignParentStart="true"
-                android:text="@*android:string/back_button_label"
+                android:text="@*android:string/skip_button_label"
+                android:visibility="gone"
                 />
 
-        <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true">
-
-            <Button android:id="@+id/skip_button"
-                    android:layout_width="150dip"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dip"
-                    android:text="@*android:string/skip_button_label"
-                    android:visibility="gone"
-                    />
-
             <Button android:id="@+id/next_button"
-                    android:layout_width="150dip"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dip"
-                    android:text="@*android:string/next_button_label"
-                    />
+                android:layout_width="150dip"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:text="@*android:string/next_button_label"
+                />
 
         </LinearLayout>
 

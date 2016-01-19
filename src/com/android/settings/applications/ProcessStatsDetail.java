@@ -40,14 +40,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
-
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.AppHeader;
 import com.android.settings.CancellablePreference;
 import com.android.settings.CancellablePreference.OnCancelListener;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.SummaryPreference;
 import com.android.settings.applications.ProcStatsEntry.Service;
 
 import java.util.ArrayList;
@@ -86,8 +85,6 @@ public class ProcessStatsDetail extends SettingsPreferenceFragment {
     private double mWeightToRam;
     private long mTotalTime;
     private long mOnePercentTime;
-
-    private LinearColorBar mColorBar;
 
     private double mMaxMemoryUsage;
 
@@ -177,20 +174,19 @@ public class ProcessStatsDetail extends SettingsPreferenceFragment {
         mProcGroup = (PreferenceCategory) findPreference(KEY_PROCS);
         fillProcessesSection();
 
-        LayoutPreference headerLayout = (LayoutPreference) findPreference(KEY_DETAILS_HEADER);
+        SummaryPreference summaryPreference = (SummaryPreference) findPreference(KEY_DETAILS_HEADER);
 
         // TODO: Find way to share this code with ProcessStatsPreference.
         boolean statsForeground = mApp.mRunWeight > mApp.mBgWeight;
         double avgRam = (statsForeground ? mApp.mRunWeight : mApp.mBgWeight) * mWeightToRam;
         float avgRatio = (float) (avgRam / mMaxMemoryUsage);
         float remainingRatio = 1 - avgRatio;
-        mColorBar = (LinearColorBar) headerLayout.findViewById(R.id.color_bar);
         Context context = getActivity();
-        mColorBar.setColors( context.getColor(R.color.memory_max_use), 0,
-                context.getColor(R.color.memory_remaining));
-        mColorBar.setRatios(avgRatio, 0, remainingRatio);
-        ((TextView) headerLayout.findViewById(R.id.memory_state)).setText(
-                Formatter.formatShortFileSize(getContext(), (long) avgRam));
+        summaryPreference.setRatios(avgRatio, 0, remainingRatio);
+        Formatter.BytesResult usedResult = Formatter.formatBytes(context.getResources(),
+                (long) avgRam, Formatter.FLAG_SHORTER);
+        summaryPreference.setAmount(usedResult.value);
+        summaryPreference.setUnits(usedResult.units);
 
         long duration = Math.max(mApp.mRunDuration, mApp.mBgDuration);
         CharSequence frequency = ProcStatsPackageEntry.getFrequency(duration

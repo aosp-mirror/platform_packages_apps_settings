@@ -57,7 +57,7 @@ public class AppHeader {
                 tintColorRes, bar);
     }
 
-    private static View setupHeaderView(final Activity activity, Drawable icon, CharSequence label,
+    public static View setupHeaderView(final Activity activity, Drawable icon, CharSequence label,
             final String pkgName, final int uid, boolean includeAppInfo, int tintColorRes,
             View bar) {
         final ImageView appIcon = (ImageView) bar.findViewById(R.id.app_icon);
@@ -86,7 +86,7 @@ public class AppHeader {
         return bar;
     }
 
-    private static boolean includeAppInfo(final Fragment fragment) {
+    public static boolean includeAppInfo(final Fragment fragment) {
         Bundle args = fragment.getArguments();
         boolean showInfo = true;
         if (args != null && args.getBoolean(EXTRA_HIDE_INFO_BUTTON, false)) {

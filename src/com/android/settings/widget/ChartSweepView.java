@@ -143,7 +143,6 @@ public class ChartSweepView extends View {
         a.recycle();
 
         setClickable(true);
-        setFocusable(true);
         setOnClickListener(mClickListener);
 
         setWillNotDraw(false);

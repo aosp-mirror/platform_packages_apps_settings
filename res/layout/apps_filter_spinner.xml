@@ -20,22 +20,34 @@
     android:layout_height="?android:attr/actionBarSize"
     android:background="@drawable/switchbar_background"
     android:gravity="center_vertical"
+    android:paddingEnd="@dimen/switchbar_subsettings_margin_end"
     android:theme="?attr/switchBarTheme" >
 
     <Spinner
         android:id="@+id/filter_spinner"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_marginStart="64dp"
+        android:layout_marginEnd="70dp"
         android:layout_alignWithParentIfMissing="true"
         android:layout_centerVertical="true"
         android:textAlignment="viewStart" />
 
-    <View
-        android:id="@+id/row_divider"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?android:attr/listDivider" />
+    <ImageView
+        android:id="@+id/filter_settings"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:contentDescription="@string/configure"
+        android:scaleType="center"
+        android:src="@drawable/ic_settings_24dp"
+        style="?android:attr/borderlessButtonStyle"
+        android:visibility="gone" />
+
 
 </RelativeLayout>
 

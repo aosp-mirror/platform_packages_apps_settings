@@ -16,9 +16,6 @@
 
 package com.android.settings.search;
 
-import android.provider.SearchIndexableResource;
-
-import com.android.settings.DataUsageSummary;
 import com.android.settings.DateTimeSettings;
 import com.android.settings.DevelopmentSettings;
 import com.android.settings.DeviceInfoSettings;
@@ -37,6 +34,8 @@ import com.android.settings.accounts.AccountSettings;
 import com.android.settings.applications.AdvancedAppSettings;
 import com.android.settings.applications.ManageDefaultApps;
 import com.android.settings.bluetooth.BluetoothSettings;
+import com.android.settings.datausage.DataUsageMeteredSettings;
+import com.android.settings.datausage.DataUsageSummary;
 import com.android.settings.deviceinfo.StorageSettings;
 import com.android.settings.display.ScreenZoomSettings;
 import com.android.settings.fuelgauge.BatterySaverSettings;
@@ -44,7 +43,6 @@ import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
 import com.android.settings.location.LocationSettings;
 import com.android.settings.location.ScanningSettings;
-import com.android.settings.net.DataUsageMeteredSettings;
 import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.OtherSoundSettings;
 import com.android.settings.notification.SoundSettings;
@@ -57,6 +55,8 @@ import com.android.settings.users.UserSettings;
 import com.android.settings.wifi.AdvancedWifiSettings;
 import com.android.settings.wifi.SavedAccessPointsWifiSettings;
 import com.android.settings.wifi.WifiSettings;
+
+import android.provider.SearchIndexableResource;
 
 import java.util.Collection;
 import java.util.HashMap;
