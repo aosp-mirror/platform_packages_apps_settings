@@ -52,6 +52,8 @@ import com.android.settings.Utils;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
+import com.android.settingslib.RestrictedPreference;
+import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 
 import java.util.ArrayList;
@@ -60,6 +62,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 /**
  * Activity with the accessibility settings.
@@ -476,8 +480,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         for (int i = 0, count = installedServices.size(); i < count; ++i) {
             AccessibilityServiceInfo info = installedServices.get(i);
 
-            PreferenceScreen preference = getPreferenceManager().createPreferenceScreen(
-                    getActivity());
+            RestrictedPreference preference = new RestrictedPreference(getActivity());
             String title = info.getResolveInfo().loadLabel(getPackageManager()).toString();
 
             ServiceInfo serviceInfo = info.getResolveInfo().serviceInfo;
@@ -500,7 +503,17 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             String packageName = serviceInfo.packageName;
             boolean serviceAllowed =
                     permittedServices == null || permittedServices.contains(packageName);
-            preference.setEnabled(serviceAllowed || serviceEnabled);
+            if (!serviceAllowed && !serviceEnabled) {
+                EnforcedAdmin admin =
+                        RestrictedLockUtils.getProfileOrDeviceOwnerOnCallingUser(getActivity());
+                if (admin != null) {
+                    preference.setDisabledByAdmin(admin);
+                } else {
+                    preference.setEnabled(false);
+                }
+            } else {
+                preference.setEnabled(true);
+            }
 
             String summaryString;
             if (serviceAllowed) {

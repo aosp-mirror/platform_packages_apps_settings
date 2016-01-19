@@ -61,6 +61,7 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Index;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
+import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.RestrictedSwitchPreference;
 
 import java.util.ArrayList;
@@ -130,7 +131,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private SwitchPreference mShowPassword;
 
     private KeyStore mKeyStore;
-    private Preference mResetCredentials;
+    private RestrictedPreference mResetCredentials;
 
     private RestrictedSwitchPreference mToggleAppInstallation;
     private DialogInterface mWarnInstallApps;
@@ -310,25 +311,26 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
         // Show password
         mShowPassword = (SwitchPreference) root.findPreference(KEY_SHOW_PASSWORD);
-        mResetCredentials = root.findPreference(KEY_RESET_CREDENTIALS);
+        mResetCredentials = (RestrictedPreference) root.findPreference(KEY_RESET_CREDENTIALS);
 
         // Credential storage
         final UserManager um = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
         mKeyStore = KeyStore.getInstance(); // needs to be initialized for onResume()
-        if (!um.hasUserRestriction(UserManager.DISALLOW_CONFIG_CREDENTIALS)) {
-            Preference credentialStorageType = root.findPreference(KEY_CREDENTIAL_STORAGE_TYPE);
 
-            final int storageSummaryRes =
+        RestrictedPreference credentialStorageType = (RestrictedPreference) root.findPreference(
+                KEY_CREDENTIAL_STORAGE_TYPE);
+        credentialStorageType.checkRestrictionAndSetDisabled(
+                UserManager.DISALLOW_CONFIG_CREDENTIALS);
+        RestrictedPreference installCredentials = (RestrictedPreference) root.findPreference(
+                KEY_CREDENTIALS_INSTALL);
+        installCredentials.checkRestrictionAndSetDisabled(UserManager.DISALLOW_CONFIG_CREDENTIALS);
+        mResetCredentials.checkRestrictionAndSetDisabled(UserManager.DISALLOW_CONFIG_CREDENTIALS);
+
+        final int storageSummaryRes =
                 mKeyStore.isHardwareBacked() ? R.string.credential_storage_type_hardware
                         : R.string.credential_storage_type_software;
-            credentialStorageType.setSummary(storageSummaryRes);
-        } else {
-            PreferenceGroup credentialsManager = (PreferenceGroup)
-                    root.findPreference(KEY_CREDENTIALS_MANAGER);
-            credentialsManager.removePreference(root.findPreference(KEY_RESET_CREDENTIALS));
-            credentialsManager.removePreference(root.findPreference(KEY_CREDENTIALS_INSTALL));
-            credentialsManager.removePreference(root.findPreference(KEY_CREDENTIAL_STORAGE_TYPE));
-        }
+        credentialStorageType.setSummary(storageSummaryRes);
+
 
         // Application install
         PreferenceGroup deviceAdminCategory = (PreferenceGroup)
@@ -649,7 +651,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
                     Settings.System.TEXT_SHOW_PASSWORD, 1) != 0);
         }
 
-        if (mResetCredentials != null) {
+        if (mResetCredentials != null && !mResetCredentials.isDisabledByAdmin()) {
             mResetCredentials.setEnabled(!mKeyStore.isEmpty());
         }
 

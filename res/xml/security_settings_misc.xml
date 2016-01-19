@@ -64,10 +64,8 @@
             android:title="@string/credentials_title"
             android:persistent="false">
 
-        <Preference android:key="credential_storage_type"
+        <com.android.settingslib.RestrictedPreference android:key="credential_storage_type"
                 android:title="@string/credential_storage_type"
-                android:enabled="false"
-                android:shouldDisableView="false"
                 android:persistent="false" />
 
         <Preference android:key="trusted_credentials"
@@ -82,7 +80,7 @@
                 android:persistent="false"
                 android:fragment="com.android.settings.UserCredentialsSettings"/>
 
-        <Preference android:key="credentials_install"
+        <com.android.settingslib.RestrictedPreference android:key="credentials_install"
                 android:title="@string/credentials_install"
                 android:summary="@string/credentials_install_summary"
                 android:persistent="false">
@@ -91,9 +89,9 @@
                     android:targetPackage="com.android.certinstaller"
                     android:targetClass="com.android.certinstaller.CertInstallerMain"/>
 
-        </Preference>
+        </com.android.settingslib.RestrictedPreference>
 
-        <Preference android:key="credentials_reset"
+        <com.android.settingslib.RestrictedPreference android:key="credentials_reset"
                 android:title="@string/credentials_reset"
                 android:summary="@string/credentials_reset_summary"
                 android:persistent="false">
@@ -102,7 +100,7 @@
                     android:targetPackage="com.android.settings"
                     android:targetClass="com.android.settings.CredentialStorage"/>
 
-        </Preference>
+        </com.android.settingslib.RestrictedPreference>
 
     </PreferenceCategory>
 

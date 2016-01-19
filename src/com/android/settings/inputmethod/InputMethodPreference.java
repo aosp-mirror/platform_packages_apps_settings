@@ -34,10 +34,14 @@ import android.widget.Toast;
 
 import com.android.internal.inputmethod.InputMethodUtils;
 import com.android.settings.R;
+import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedSwitchPreference;
 
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 /**
  * Input method preference.
@@ -46,7 +50,7 @@ import java.util.List;
  * is used to enable or disable the IME. 2) An instance without a switch is used to invoke the
  * setting activity of the IME.
  */
-class InputMethodPreference extends SwitchPreference implements OnPreferenceClickListener,
+class InputMethodPreference extends RestrictedSwitchPreference implements OnPreferenceClickListener,
         OnPreferenceChangeListener {
     private static final String TAG = InputMethodPreference.class.getSimpleName();
     private static final String EMPTY_TEXT = "";
@@ -80,7 +84,7 @@ class InputMethodPreference extends SwitchPreference implements OnPreferenceClic
      * @param isImeEnabler true if this preference is the IME enabler that has enable/disable
      *     switches for all available IMEs, not the list of enabled IMEs.
      * @param isAllowedByOrganization false if the IME has been disabled by a device or profile
-           owner.
+     *     owner.
      * @param onSaveListener The listener called when this preference has been changed and needs
      *     to save the state to shared preference.
      */
@@ -115,6 +119,11 @@ class InputMethodPreference extends SwitchPreference implements OnPreferenceClic
                 && mInputMethodSettingValues.isValidSystemNonAuxAsciiCapableIme(imi, context);
         setOnPreferenceClickListener(this);
         setOnPreferenceChangeListener(this);
+        if (!isAllowedByOrganization) {
+            EnforcedAdmin admin =
+                    RestrictedLockUtils.getProfileOrDeviceOwnerOnCallingUser(context);
+            setDisabledByAdmin(admin);
+        }
     }
 
     public InputMethodInfo getInputMethodInfo() {

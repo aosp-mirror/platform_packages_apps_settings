@@ -39,10 +39,14 @@ import android.widget.TimePicker;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.dashboard.SummaryLoader;
+import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.datetime.ZoneGetter;
 
 import java.util.Calendar;
 import java.util.Date;
+
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 public class DateTimeSettings extends SettingsPreferenceFragment
         implements OnSharedPreferenceChangeListener,
@@ -64,7 +68,7 @@ public class DateTimeSettings extends SettingsPreferenceFragment
     // have we been launched from the setup wizard?
     protected static final String EXTRA_IS_FIRST_RUN = "firstRun";
 
-    private SwitchPreference mAutoTimePref;
+    private RestrictedSwitchPreference mAutoTimePref;
     private Preference mTimePref;
     private Preference mTime24Pref;
     private SwitchPreference mAutoTimeZonePref;
@@ -89,23 +93,17 @@ public class DateTimeSettings extends SettingsPreferenceFragment
         boolean autoTimeEnabled = getAutoState(Settings.Global.AUTO_TIME);
         boolean autoTimeZoneEnabled = getAutoState(Settings.Global.AUTO_TIME_ZONE);
 
-        mAutoTimePref = (SwitchPreference) findPreference(KEY_AUTO_TIME);
-
-        DevicePolicyManager dpm = (DevicePolicyManager) getSystemService(Context
-                .DEVICE_POLICY_SERVICE);
-        if (dpm.getAutoTimeRequired()) {
-            mAutoTimePref.setEnabled(false);
-
-            // If Settings.Global.AUTO_TIME is false it will be set to true
-            // by the device policy manager very soon.
-            // Note that this app listens to that change.
-        }
+        mAutoTimePref = (RestrictedSwitchPreference) findPreference(KEY_AUTO_TIME);
+        EnforcedAdmin admin = RestrictedLockUtils.checkIfAutoTimeRequired(getActivity());
+        mAutoTimePref.setDisabledByAdmin(admin);
 
         Intent intent = getActivity().getIntent();
         boolean isFirstRun = intent.getBooleanExtra(EXTRA_IS_FIRST_RUN, false);
 
         mDummyDate = Calendar.getInstance();
 
+        // If device admin requires auto time device policy manager will set
+        // Settings.Global.AUTO_TIME to true. Note that this app listens to that change.
         mAutoTimePref.setChecked(autoTimeEnabled);
         mAutoTimeZonePref = (SwitchPreference) findPreference(KEY_AUTO_TIME_ZONE);
         // Override auto-timezone if it's a wifi-only device or if we're still in setup wizard.

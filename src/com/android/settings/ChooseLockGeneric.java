@@ -45,6 +45,10 @@ import android.widget.Toast;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedPreference;
+
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 public class ChooseLockGeneric extends SettingsActivity {
     public static final String CONFIRM_CREDENTIALS = "confirm_credentials";
@@ -367,39 +371,60 @@ public class ChooseLockGeneric extends SettingsActivity {
                 boolean hideDisabled) {
             final PreferenceScreen entries = getPreferenceScreen();
 
+            int adminEnforcedQuality = mDPM.getPasswordQuality(null);
+            EnforcedAdmin enforcedAdmin = RestrictedLockUtils.checkIfPasswordQualityIsSet(
+                    getActivity());
             for (int i = entries.getPreferenceCount() - 1; i >= 0; --i) {
                 Preference pref = entries.getPreference(i);
-                if (pref instanceof PreferenceScreen) {
+                if (pref instanceof RestrictedPreference) {
                     final String key = pref.getKey();
                     boolean enabled = true;
                     boolean visible = true;
+                    boolean disabledByAdmin = false;
                     if (KEY_UNLOCK_SET_OFF.equals(key)) {
                         enabled = quality <= DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
                         if (getResources().getBoolean(R.bool.config_hide_none_security_option)) {
                             enabled = false;
                             visible = false;
                         }
+                        disabledByAdmin = adminEnforcedQuality
+                                > DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
                     } else if (KEY_UNLOCK_SET_NONE.equals(key)) {
                         if (mUserId != UserHandle.myUserId()) {
                             // Swipe doesn't make sense for profiles.
                             visible = false;
                         }
                         enabled = quality <= DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
+                        disabledByAdmin = adminEnforcedQuality
+                                > DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
                     } else if (KEY_UNLOCK_SET_PATTERN.equals(key)) {
                         enabled = quality <= DevicePolicyManager.PASSWORD_QUALITY_SOMETHING;
+                        disabledByAdmin = adminEnforcedQuality
+                                > DevicePolicyManager.PASSWORD_QUALITY_SOMETHING;
                     } else if (KEY_UNLOCK_SET_PIN.equals(key)) {
                         enabled = quality <= DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX;
+                        disabledByAdmin = adminEnforcedQuality
+                                > DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX;
                     } else if (KEY_UNLOCK_SET_PASSWORD.equals(key)) {
                         enabled = quality <= DevicePolicyManager.PASSWORD_QUALITY_COMPLEX;
+                        disabledByAdmin = adminEnforcedQuality
+                                > DevicePolicyManager.PASSWORD_QUALITY_COMPLEX;
                     }
                     if (hideDisabled) {
                         visible = enabled;
                     }
                     if (!visible) {
                         entries.removePreference(pref);
+                    } else if (disabledByAdmin && enforcedAdmin != null) {
+                        ((RestrictedPreference) pref).setDisabledByAdmin(enforcedAdmin);
                     } else if (!enabled) {
+                        // we need to setDisabledByAdmin to null first to disable the padlock
+                        // in case it was set earlier.
+                        ((RestrictedPreference) pref).setDisabledByAdmin(null);
                         pref.setSummary(R.string.unlock_set_unlock_disabled_summary);
                         pref.setEnabled(false);
+                    } else {
+                        ((RestrictedPreference) pref).setDisabledByAdmin(null);
                     }
                 }
             }
