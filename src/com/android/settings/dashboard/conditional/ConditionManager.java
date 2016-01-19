@@ -132,6 +132,7 @@ public class ConditionManager {
         addIfMissing(BatterySaverCondition.class);
         addIfMissing(CellularDataCondition.class);
         addIfMissing(BackgroundDataCondition.class);
+        addIfMissing(WorkModeCondition.class);
     }
 
     private void addIfMissing(Class<? extends Condition> clz) {
@@ -154,6 +155,8 @@ public class ConditionManager {
             return new CellularDataCondition(this);
         } else if (BackgroundDataCondition.class == clz) {
             return new BackgroundDataCondition(this);
+        } else if (WorkModeCondition.class == clz) {
+            return new WorkModeCondition(this);
         }
         throw new RuntimeException("Unexpected Condition " + clz);
     }
