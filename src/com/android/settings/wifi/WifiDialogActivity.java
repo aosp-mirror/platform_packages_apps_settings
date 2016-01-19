@@ -61,6 +61,12 @@ public class WifiDialogActivity extends Activity implements WifiDialog.WifiDialo
     }
 
     @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(0, 0);
+    }
+
+    @Override
     public void onForget(WifiDialog dialog) {
         final WifiManager wifiManager = getSystemService(WifiManager.class);
         final AccessPoint accessPoint = dialog.getController().getAccessPoint();
