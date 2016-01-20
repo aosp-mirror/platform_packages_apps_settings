@@ -26,6 +26,7 @@ import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.RemoteException;
@@ -52,16 +53,10 @@ public class ShowAdminSupportDetailsDialog extends Activity
         int userId = UserHandle.myUserId();
         Intent intent = getIntent();
         if (intent != null) {
-            IActivityManager am = ActivityManagerNative.getDefault();
-            try {
-                int uid = am.getLaunchedFromUid(getActivityToken());
-                // Only allow system to specify admin and user.
-                if (UserHandle.isSameApp(uid, android.os.Process.myUid())) {
-                    admin = intent.getParcelableExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN);
-                    userId = intent.getIntExtra(Intent.EXTRA_USER_ID, UserHandle.myUserId());
-                }
-            } catch (RemoteException e) {
-                Log.e(TAG, "Could not talk to activity manager.", e);
+            // Only allow apps with MANAGE_DEVICE_ADMINS permission to specify admin and user.
+            if (checkIfCallerHasPermission(android.Manifest.permission.MANAGE_DEVICE_ADMINS)) {
+                admin = intent.getParcelableExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN);
+                userId = intent.getIntExtra(Intent.EXTRA_USER_ID, UserHandle.myUserId());
             }
         }
 
@@ -74,6 +69,18 @@ public class ShowAdminSupportDetailsDialog extends Activity
                 .setPositiveButton(R.string.okay, null)
                 .setOnDismissListener(this)
                 .show();
+    }
+
+    private boolean checkIfCallerHasPermission(String permission) {
+        IActivityManager am = ActivityManagerNative.getDefault();
+        try {
+            final int uid = am.getLaunchedFromUid(getActivityToken());
+            return AppGlobals.getPackageManager().checkUidPermission(permission, uid)
+                    == PackageManager.PERMISSION_GRANTED;
+        } catch (RemoteException e) {
+            Log.e(TAG, "Could not talk to activity manager.", e);
+        }
+        return false;
     }
 
     private void setAdminSupportDetails(View root, final ComponentName admin, final int userId) {
