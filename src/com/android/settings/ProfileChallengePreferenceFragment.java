@@ -128,10 +128,14 @@ public class ProfileChallengePreferenceFragment extends SettingsPreferenceFragme
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == UNIFY_LOCK_METHOD_REQUEST && resultCode == Activity.RESULT_OK) {
-            mLockPatternUtils.clearLock(mProfileUserId);
-            mLockPatternUtils.setSeparateProfileChallengeEnabled(mProfileUserId, false);
+            unifyLocks();
             return;
         }
+    }
+
+    private void unifyLocks() {
+        mLockPatternUtils.clearLock(mProfileUserId);
+        mLockPatternUtils.setSeparateProfileChallengeEnabled(mProfileUserId, false);
     }
 
     @Override
@@ -260,6 +264,8 @@ public class ProfileChallengePreferenceFragment extends SettingsPreferenceFragme
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             final Bundle args = getArguments();
+            final ProfileChallengePreferenceFragment parentFragment =
+                    ((ProfileChallengePreferenceFragment) getParentFragment());
             return new AlertDialog.Builder(getActivity())
                     .setTitle(R.string.lock_settings_profile_unification_dialog_title)
                     .setMessage(R.string.lock_settings_profile_unification_dialog_body)
@@ -271,9 +277,13 @@ public class ProfileChallengePreferenceFragment extends SettingsPreferenceFragme
                                             R.string.lock_settings_profile_screen_lock_title);
                                     ChooseLockSettingsHelper helper =
                                             new ChooseLockSettingsHelper(
-                                                    getActivity(), getParentFragment());
-                                    helper.launchConfirmationActivity(UNIFY_LOCK_METHOD_REQUEST,
-                                            title, true, args.getInt(ARG_USER_ID));
+                                                    getActivity(), parentFragment);
+                                    if (!helper.launchConfirmationActivity(
+                                            UNIFY_LOCK_METHOD_REQUEST,
+                                            title, true, args.getInt(ARG_USER_ID))) {
+                                        parentFragment.unifyLocks();
+                                        parentFragment.createPreferenceHierarchy();
+                                    }
                                 }
                             }
                     )
