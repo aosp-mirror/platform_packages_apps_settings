@@ -301,7 +301,7 @@ public class KeyboardLayoutDialogFragment extends DialogFragment
         }
     }
 
-    private static final class KeyboardLayoutLoader extends AsyncTaskLoader<Keyboards> {
+    static final class KeyboardLayoutLoader extends AsyncTaskLoader<Keyboards> {
         private final InputDeviceIdentifier mInputDeviceIdentifier;
 
         public KeyboardLayoutLoader(Context context, InputDeviceIdentifier inputDeviceIdentifier) {

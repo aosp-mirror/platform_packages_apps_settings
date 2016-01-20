@@ -573,14 +573,10 @@
         </activity>
 
         <activity android:name="Settings$InputMethodAndLanguageSettingsActivity"
-                android:label="@string/language_keyboard_settings_title"
-                android:icon="@drawable/ic_settings_language"
-                android:taskAffinity="com.android.settings"
-                android:parentActivityName="Settings">
-            <intent-filter android:priority="1">
-                <action android:name="android.settings.INPUT_METHOD_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
+            android:label="@string/language_keyboard_settings_title"
+            android:icon="@drawable/ic_settings_language"
+            android:taskAffinity="com.android.settings"
+            android:parentActivityName="Settings">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
@@ -595,6 +591,16 @@
                 android:value="com.android.settings.inputmethod.InputMethodAndLanguageSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
+        </activity>
+
+        <activity android:name="Settings$AvailableVirtualKeyboardActivity"
+            android:label="@string/available_virtual_keyboard_category">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.INPUT_METHOD_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.inputmethod.AvailableVirtualKeyboardFragment" />
         </activity>
 
         <activity android:name="Settings$ManageAssistActivity"

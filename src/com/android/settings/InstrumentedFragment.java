@@ -38,6 +38,9 @@ public abstract class InstrumentedFragment extends PreferenceFragment {
     public static final int BILLING_CYCLE = UNDECLARED + 8;
     public static final int APP_DATA_USAGE = UNDECLARED + 9;
     public static final int USER_LOCALE_LIST = UNDECLARED + 10;
+    public static final int VIRTUAL_KEYBOARDS = UNDECLARED + 11;
+    public static final int PHYSICAL_KEYBOARDS = UNDECLARED + 12;
+    public static final int ENABLE_VIRTUAL_KEYBOARDS = UNDECLARED + 13;
 
     /**
      * Declare the view of this category.
