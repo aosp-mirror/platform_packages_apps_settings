@@ -264,7 +264,7 @@
     <string name="roaming_disable" msgid="1295279574370898378">"Verbind aan datadienste wanneer swerf"</string>
     <string name="roaming_reenable_message" msgid="9141007271031717369">"Jy het dataverbinding verloor omdat jy wegbeweeg het van jou tuisnetwerk af sonder om dataswerwing weer aan te skakel."</string>
     <string name="roaming_turn_it_on_button" msgid="4387601818162120589">"Skakel dit aan"</string>
-    <string name="roaming_warning" msgid="7625933694709170887">"As jy dataswerwing toelaat, kan dit moontlik heelwat swerfkoste veroorsaak!"</string>
+    <string name="roaming_warning" msgid="4275443317524544705">"Dit kan baie duur wees."</string>
     <string name="roaming_warning_multiuser" product="tablet" msgid="6458990250829214777">"As jy dataswerwing toelaat, kan hoë swerwingskoste jou in die gesig staar! \n\nHierdie instelling beïnvloed alle gebruikers op hierdie tablet."</string>
     <string name="roaming_warning_multiuser" product="default" msgid="6368421100292355440">"As jy dataswerwing toelaat, kan hoë swerwingskoste jou in die gesig staar! \n\nHierdie instelling beïnvloed alle gebruikers op hierdie foon."</string>
     <string name="roaming_reenable_title" msgid="6068100976707316772">"Laat dataswerwing toe?"</string>
@@ -1936,6 +1936,8 @@
     <string name="sync_is_failing" msgid="1591561768344128377">"Sinkronisering ondervind tans probleme. Dit sal binnekort terug wees."</string>
     <string name="add_account_label" msgid="7811707265834013767">"Voeg rekening by"</string>
     <string name="managed_profile_not_available_label" msgid="852263300911325904">"Werkprofiel is nog nie beskikbaar nie"</string>
+    <string name="work_mode_label" msgid="5794470908668593961">"Werkmodus"</string>
+    <string name="work_mode_summary" msgid="1620246003886940776">"Stel werkprofiel in staat om te werk, insluitend programme, agtergrondsinkronisering en verwante kenmerke"</string>
     <string name="remove_managed_profile_label" msgid="3856519337797285325">"Verwyder werkprofiel"</string>
     <string name="background_data" msgid="5779592891375473817">"Agtergronddata"</string>
     <string name="background_data_summary" msgid="8328521479872763452">"Programme kan te enige tyd data sinkroniseer, stuur en ontvang"</string>
@@ -2797,8 +2799,32 @@
     <string name="condition_cellular_summary" msgid="1818046558419658463">"Internet is net deur Wi-Fi beskikbaar"</string>
     <string name="condition_bg_data_title" msgid="1422001615923482010">"Agtergronddata is af"</string>
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Agtergronddata is net deur Wi-Fi beskikbaar. Dit kan sommige programme of dienste beïnvloed wanneer Wi-Fi nie beskikbaar is nie."</string>
+    <string name="condition_work_title" msgid="7293722361184366648">"Werkprofiel is af"</string>
+    <string name="condition_work_summary" msgid="7543202177571590378">"Programme, agtergrondsinkronisering en ander kenmerke wat met jou werkprofiel verband hou, is afgeskakel."</string>
     <string name="suggestions_title" msgid="8758376306825920705">"Voorstelle (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"Verwyder"</string>
     <string name="color_temperature" msgid="2501579996151717270">"Skerm se kleurtemperatuur"</string>
     <string name="color_temperature_desc" msgid="3603319696846982249">"Aktiveer koel temperatuur"</string>
+    <string name="usage" msgid="2977875522080448986">"Gebruik"</string>
+    <string name="cellular_data_usage" msgid="2763710678354680712">"Sellulêre datagebruik"</string>
+    <string name="wifi_data_usage" msgid="686754111095324306">"Wi-Fi-datagebruik"</string>
+    <string name="ethernet_data_usage" msgid="5108764537574354616">"Ethernet-datagebruik"</string>
+    <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
+    <string name="ethernet" msgid="6600095783781389720">"Ethernet"</string>
+    <string name="cell_data_template" msgid="3308709914705592281">"<xliff:g id="ID_1">%1$s</xliff:g> se sellulêre data"</string>
+    <string name="wifi_data_template" msgid="501654649753761778">"<xliff:g id="ID_1">%1$s</xliff:g> se Wi-Fi-data"</string>
+    <string name="ethernet_data_template" msgid="5775729859383597507">"<xliff:g id="ID_1">%1$s</xliff:g> se ethernet-data"</string>
+    <string name="cell_warning_only" msgid="763147658209027140">"<xliff:g id="ID_1">%1$s</xliff:g>-datawaarskuwing"</string>
+    <string name="cell_warning_and_limit" msgid="2273413629267437470">"<xliff:g id="ID_1">%1$s</xliff:g>-datawaarskuwing / <xliff:g id="ID_2">%2$s</xliff:g>-datalimiet"</string>
+    <string name="billing_cycle" msgid="5169909190811133499">"Faktureringsiklus"</string>
+    <string name="billing_cycle_summary" msgid="9009106526129293752">"Maandelikse siklus begin op die <xliff:g id="ID_1">%1$s</xliff:g> van elke maand"</string>
+    <string name="billing_cycle_fragment_summary" msgid="1940518156600077066">"Maandeliks vanaf <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="network_restrictions" msgid="8234695294536675380">"Netwerkbeperkinge"</string>
+    <string name="operator_warning" msgid="7206980278353372811">"Operateur se datarekeninge kan van jou toestel verskil."</string>
+    <string name="data_used_template" msgid="3245919669966296505">"<xliff:g id="ID_1">%1$s</xliff:g> gebruik"</string>
+    <string name="data_warning" msgid="209133958008062117">"Datawaarskuwing"</string>
+    <string name="set_data_limit" msgid="2901526323210516923">"Stel datalimiet"</string>
+    <string name="data_limit" msgid="1885406964934590552">"Datalimiet"</string>
+    <string name="data_usage_template" msgid="392191945602400904">"<xliff:g id="ID_1">%1$s</xliff:g> gebruik tussen <xliff:g id="ID_2">%2$s</xliff:g>"</string>
+    <string name="configure" msgid="1029654422228677273">"Stel op"</string>
 </resources>

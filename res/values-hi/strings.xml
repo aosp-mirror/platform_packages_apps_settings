@@ -264,7 +264,7 @@
     <string name="roaming_disable" msgid="1295279574370898378">"रोमिंग के समय डेटा सेवाएं कनेक्ट करें"</string>
     <string name="roaming_reenable_message" msgid="9141007271031717369">"आपने डेटा कनेक्टिविटी खो दी है क्योंकि आपने डेटा रोमिंग बंद रखकर अपना होम नेटवर्क छोड़ दिया."</string>
     <string name="roaming_turn_it_on_button" msgid="4387601818162120589">"इसे चालू करें"</string>
-    <string name="roaming_warning" msgid="7625933694709170887">"जब आप डेटा रोमिंग की अनुमति देते हैं, तो परिणामस्वरूप आप पर रोमिंग शुल्‍क लग सकते हैं!"</string>
+    <string name="roaming_warning" msgid="4275443317524544705">"आपको बहुत अधिक शुल्‍क देना पड़ सकता है."</string>
     <string name="roaming_warning_multiuser" product="tablet" msgid="6458990250829214777">"जब आप डेटा रोमिंग की अनुमति देते हैं, तो हो सकता है कि आपको अधिक रोमिंग शुल्क लगे!\n\nयह सेटिंग इस टेबलेट के सभी उपयोगकर्ताओं को प्रभावित करती है."</string>
     <string name="roaming_warning_multiuser" product="default" msgid="6368421100292355440">"जब आप डेटा रोमिंग की अनुमति देते हैं, तो हो सकता है कि आपको अधिक रोमिंग शुल्क लगे!\n\nयह सेटिंग इस फ़ोन के सभी उपयोगकर्ताओं को प्रभावित करती है."</string>
     <string name="roaming_reenable_title" msgid="6068100976707316772">"डेटा रोमिंग की अनुमति दें?"</string>
@@ -1936,6 +1936,8 @@
     <string name="sync_is_failing" msgid="1591561768344128377">"किसी समस्या के कारण अभी समन्वयन नहीं हो पाया.यह शीघ्र ही उपलब्ध होगा."</string>
     <string name="add_account_label" msgid="7811707265834013767">"खाता जोड़ें"</string>
     <string name="managed_profile_not_available_label" msgid="852263300911325904">"कार्य प्रोफ़ाइल अभी तक उपलब्ध नहीं है"</string>
+    <string name="work_mode_label" msgid="5794470908668593961">"कार्य मोड"</string>
+    <string name="work_mode_summary" msgid="1620246003886940776">"ऐप्स, पृष्ठभूमि समन्वयन और संबंधित सुविधाओं सहित कार्य प्रोफ़ाइल को काम करने की अनुमति दें"</string>
     <string name="remove_managed_profile_label" msgid="3856519337797285325">"कार्य प्रोफ़ाइल निकालें"</string>
     <string name="background_data" msgid="5779592891375473817">"पृष्ठभूमि डेटा"</string>
     <string name="background_data_summary" msgid="8328521479872763452">"ऐप्स किसी भी समय डेटा समन्वयित, भेज और प्राप्त कर सकते हैं"</string>
@@ -2797,8 +2799,32 @@
     <string name="condition_cellular_summary" msgid="1818046558419658463">"इंटरनेट केवल वाई-फ़ाई के द्वारा उपलब्ध है"</string>
     <string name="condition_bg_data_title" msgid="1422001615923482010">"बैकग्राउंड डेटा बंद है"</string>
     <string name="condition_bg_data_summary" msgid="656957852895282228">"बैकग्राउंड डेटा केवल वाई-फ़ाई के द्वारा उपलब्ध है. इससे वाई-फ़ाई के उपलब्ध नहीं रहने पर कुछ ऐप्स या सेवाएं प्रभावित हो सकती हैं."</string>
+    <string name="condition_work_title" msgid="7293722361184366648">"कार्य प्रोफ़ाइल बंद है"</string>
+    <string name="condition_work_summary" msgid="7543202177571590378">"आपकी कार्य प्रोफ़ाइल से संबंधित ऐप्स, पृष्ठभूमि समन्वयन और अन्य सुविधाएं बंद हैं."</string>
     <string name="suggestions_title" msgid="8758376306825920705">"सुझाव (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"निकालें"</string>
     <string name="color_temperature" msgid="2501579996151717270">"रंग तापमान दिखाएं"</string>
     <string name="color_temperature_desc" msgid="3603319696846982249">"शीतल तापमान सक्षम करें"</string>
+    <string name="usage" msgid="2977875522080448986">"उपयोग"</string>
+    <string name="cellular_data_usage" msgid="2763710678354680712">"सेल्युलर डेटा उपयोग"</string>
+    <string name="wifi_data_usage" msgid="686754111095324306">"वाई-फ़ाई डेटा उपयोग"</string>
+    <string name="ethernet_data_usage" msgid="5108764537574354616">"ईथरनेट डेटा उपयोग"</string>
+    <string name="wifi" msgid="1081550856200013637">"वाई-फ़ाई"</string>
+    <string name="ethernet" msgid="6600095783781389720">"ईथरनेट"</string>
+    <string name="cell_data_template" msgid="3308709914705592281">"<xliff:g id="ID_1">%1$s</xliff:g> सेल्युलर डेटा"</string>
+    <string name="wifi_data_template" msgid="501654649753761778">"<xliff:g id="ID_1">%1$s</xliff:g> वाई-फ़ाई डेटा"</string>
+    <string name="ethernet_data_template" msgid="5775729859383597507">"<xliff:g id="ID_1">%1$s</xliff:g> ईथरनेट डेटा"</string>
+    <string name="cell_warning_only" msgid="763147658209027140">"<xliff:g id="ID_1">%1$s</xliff:g> डेटा चेतावनी"</string>
+    <string name="cell_warning_and_limit" msgid="2273413629267437470">"<xliff:g id="ID_1">%1$s</xliff:g> डेटा चेतावनी / <xliff:g id="ID_2">%2$s</xliff:g> डेटा सीमा"</string>
+    <string name="billing_cycle" msgid="5169909190811133499">"बिलिंग चक्र"</string>
+    <string name="billing_cycle_summary" msgid="9009106526129293752">"मासिक चक्र प्रत्येक माह के <xliff:g id="ID_1">%1$s</xliff:g> को शुरू होगा"</string>
+    <string name="billing_cycle_fragment_summary" msgid="1940518156600077066">"<xliff:g id="ID_1">%1$s</xliff:g> से मासिक रूप से शुरू"</string>
+    <string name="network_restrictions" msgid="8234695294536675380">"नेटवर्क प्रतिबंध"</string>
+    <string name="operator_warning" msgid="7206980278353372811">"ऑपरेटर की डेटा गणना आपके डिवाइस से भिन्न हो सकती है."</string>
+    <string name="data_used_template" msgid="3245919669966296505">"<xliff:g id="ID_1">%1$s</xliff:g> का उपयोग किया गया"</string>
+    <string name="data_warning" msgid="209133958008062117">"डेटा चेतावनी"</string>
+    <string name="set_data_limit" msgid="2901526323210516923">"डेटा की सीमा सेट करें"</string>
+    <string name="data_limit" msgid="1885406964934590552">"डेटा सीमा"</string>
+    <string name="data_usage_template" msgid="392191945602400904">"<xliff:g id="ID_2">%2$s</xliff:g> के बीच <xliff:g id="ID_1">%1$s</xliff:g> का उपयोग किया गया"</string>
+    <string name="configure" msgid="1029654422228677273">"कॉन्फ़िगर करें"</string>
 </resources>

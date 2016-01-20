@@ -74,8 +74,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"卸載 SD 卡"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"清除 USB 儲存裝置"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"清除 SD 卡"</string>
-    <!-- no translation found for font_size_summary (133937309990844030) -->
-    <skip />
+    <string name="font_size_summary" msgid="133937309990844030">"縮小或放大畫面上的文字。"</string>
     <string name="small_font" msgid="2295331917424072635">"小"</string>
     <string name="medium_font" msgid="2068475425515133701">"中"</string>
     <string name="large_font" msgid="599055175160971446">"大"</string>
@@ -265,7 +264,8 @@
     <string name="roaming_disable" msgid="1295279574370898378">"漫遊時連線到數據傳輸服務"</string>
     <string name="roaming_reenable_message" msgid="9141007271031717369">"由於您不在主要網路蓋涵範圍，且已關閉漫遊服務，資料連線已中斷。"</string>
     <string name="roaming_turn_it_on_button" msgid="4387601818162120589">"開啟"</string>
-    <string name="roaming_warning" msgid="7625933694709170887">"允許漫遊服務時，您可能需要支付龐大的漫遊費用！"</string>
+    <!-- no translation found for roaming_warning (4275443317524544705) -->
+    <skip />
     <string name="roaming_warning_multiuser" product="tablet" msgid="6458990250829214777">"允許使用數據漫遊服務時，您可能需要支付龐大的漫遊費用！\n\n這項設定會影響這台平板電腦的所有使用者。"</string>
     <string name="roaming_warning_multiuser" product="default" msgid="6368421100292355440">"允許使用數據漫遊服務時，您可能需要支付龐大的漫遊費用！\n\n這項設定會影響這支手機的所有使用者。"</string>
     <string name="roaming_reenable_title" msgid="6068100976707316772">"允許漫遊服務？"</string>
@@ -427,8 +427,8 @@
     <string name="unlock_setup_wizard_fingerprint_details" msgid="7893457665921363009">"設定螢幕鎖定之後，您還可以前往 [設定] &gt; [安全性] 設定指紋。"</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"關閉螢幕鎖定"</string>
     <string name="unlock_disable_frp_warning_title" msgid="264008934468492550">"要移除裝置保護措施嗎？"</string>
-    <string name="unlock_disable_frp_warning_content_pattern" msgid="8869767290771023461">"如果移除您的解鎖圖形，裝置保護功能將無法運作。"</string>
-    <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="8212242533942400457">"如果移除您的解鎖圖形，裝置保護功能將無法運作。<xliff:g id="EMPTY_LINE">
+    <string name="unlock_disable_frp_warning_content_pattern" msgid="8869767290771023461">"如果移除您的解鎖圖案，裝置保護功能將無法運作。"</string>
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="8212242533942400457">"如果移除您的解鎖圖案，裝置保護功能將無法運作。<xliff:g id="EMPTY_LINE">
 
 </xliff:g>您儲存的指紋會一併從這部裝置中移除，因此您將無法使用指紋解鎖手機、授權購物交易或登入應用程式。"</string>
     <string name="unlock_disable_frp_warning_content_pin" msgid="586996206210265131">"如果移除您的 PIN 碼，裝置保護功能將無法運作。"</string>
@@ -444,7 +444,7 @@
 
 </xliff:g>您儲存的指紋會一併從這部裝置中移除，因此您將無法使用指紋解鎖手機、授權購物交易或登入應用程式。"</string>
     <string name="unlock_disable_frp_warning_ok" msgid="7075138677177748705">"是，移除裝置保護措施"</string>
-    <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"變更解鎖圖形"</string>
+    <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"變更解鎖圖案"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"變更解鎖 PIN"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"變更解鎖密碼"</string>
     <string name="lockpassword_password_too_short" msgid="7328975683669256660">"密碼必須有至少 %d 個字元"</string>
@@ -1239,36 +1239,36 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"已設定密碼"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"已設定 PIN"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"已設定圖形"</string>
-    <string name="lockpassword_confirm_your_pattern_generic" msgid="7050256155547273836">"請畫出您的裝置解鎖圖形以繼續作業。"</string>
+    <string name="lockpassword_confirm_your_pattern_generic" msgid="7050256155547273836">"請畫出您的裝置解鎖圖案以繼續作業。"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="1072670959803859869">"請輸入您的裝置 PIN 以繼續作業。"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="1022239625083264596">"請輸入您的裝置密碼以繼續作業。"</string>
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"PIN 碼錯誤"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"密碼錯誤"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"圖形錯誤"</string>
     <string name="lock_settings_title" msgid="4213839087748988686">"裝置安全性"</string>
-    <string name="lockpattern_change_lock_pattern_label" msgid="5679630792003440352">"變更解鎖圖形"</string>
+    <string name="lockpattern_change_lock_pattern_label" msgid="5679630792003440352">"變更解鎖圖案"</string>
     <string name="lockpattern_change_lock_pin_label" msgid="266707138486731661">"變更解鎖 PIN"</string>
-    <string name="lockpattern_recording_intro_header" msgid="308287052221942814">"畫出解鎖圖形"</string>
+    <string name="lockpattern_recording_intro_header" msgid="308287052221942814">"畫出解鎖圖案"</string>
     <string name="lockpattern_recording_intro_footer" msgid="1118579101409152113">"請按 [Menu] 以取得說明。"</string>
     <string name="lockpattern_recording_inprogress" msgid="6667844062721656773">"完成時請移開手指"</string>
-    <string name="lockpattern_recording_incorrect_too_short" msgid="1348234155120957561">"圖形至少需連接 <xliff:g id="NUMBER">%d</xliff:g> 點，請再試一次。"</string>
+    <string name="lockpattern_recording_incorrect_too_short" msgid="1348234155120957561">"圖案至少需連接 <xliff:g id="NUMBER">%d</xliff:g> 點，請再試一次。"</string>
     <string name="lockpattern_pattern_entered_header" msgid="4316818983675591604">"圖形已記錄"</string>
     <string name="lockpattern_need_to_confirm" msgid="8054853451639221265">"請再次畫出圖形，以確認圖形無誤"</string>
-    <string name="lockpattern_pattern_confirmed_header" msgid="8455614172231880211">"您的新解鎖圖形"</string>
+    <string name="lockpattern_pattern_confirmed_header" msgid="8455614172231880211">"您的新解鎖圖案"</string>
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"確認"</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"重畫"</string>
     <string name="lockpattern_retry_button_text" msgid="3480423193273588166">"清除"</string>
     <string name="lockpattern_continue_button_text" msgid="4723771754714471410">"繼續"</string>
-    <string name="lockpattern_settings_title" msgid="3207750489460466680">"解鎖圖形"</string>
-    <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"需要解鎖圖形"</string>
-    <string name="lockpattern_settings_enable_summary" msgid="1165707416664252167">"必須畫出解鎖圖形以解鎖螢幕"</string>
-    <string name="lockpattern_settings_enable_visible_pattern_title" msgid="2615606088906120711">"顯示解鎖圖形"</string>
+    <string name="lockpattern_settings_title" msgid="3207750489460466680">"解鎖圖案"</string>
+    <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"需要解鎖圖案"</string>
+    <string name="lockpattern_settings_enable_summary" msgid="1165707416664252167">"必須畫出解鎖圖案以解鎖螢幕"</string>
+    <string name="lockpattern_settings_enable_visible_pattern_title" msgid="2615606088906120711">"顯示解鎖圖案"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="8898518337442601027">"觸控時震動"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"按下電源按鈕立即鎖定"</string>
     <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"由「<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>」維持解鎖狀態時除外"</string>
-    <string name="lockpattern_settings_choose_lock_pattern" msgid="1652352830005653447">"設定解鎖圖形"</string>
-    <string name="lockpattern_settings_change_lock_pattern" msgid="1123908306116495545">"變更解鎖圖形"</string>
-    <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"如何畫出解鎖圖形"</string>
+    <string name="lockpattern_settings_choose_lock_pattern" msgid="1652352830005653447">"設定解鎖圖案"</string>
+    <string name="lockpattern_settings_change_lock_pattern" msgid="1123908306116495545">"變更解鎖圖案"</string>
+    <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"如何畫出解鎖圖案"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts" msgid="6909161623701848863">"錯誤次數過多，請於 <xliff:g id="NUMBER">%d</xliff:g> 秒後再試。"</string>
     <string name="activity_not_found" msgid="5551664692991605325">"您未在手機上安裝應用程式。"</string>
     <string name="lock_settings_profile_title" msgid="7819021341281339182">"Work 設定檔"</string>
@@ -1624,7 +1624,7 @@
     <string name="touch_filtered_warning" msgid="8644034725268915030">"權限要求遭到其他應用程式畫面遮掩，因此「設定」無法驗證您的回應。"</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"如果您開啟 <xliff:g id="SERVICE">%1$s</xliff:g>，您的裝置將無法使用螢幕鎖定加強資料加密。"</string>
     <string name="secure_lock_encryption_warning" msgid="460911459695077779">"您已開啟協助工具服務，因此您的裝置無法使用螢幕鎖定加強資料加密。"</string>
-    <string name="enable_service_pattern_reason" msgid="777577618063306751">"開啟 <xliff:g id="SERVICE">%1$s</xliff:g> 將影響資料加密，因此您必須畫出解鎖圖形。"</string>
+    <string name="enable_service_pattern_reason" msgid="777577618063306751">"開啟 <xliff:g id="SERVICE">%1$s</xliff:g> 將影響資料加密，因此您必須畫出解鎖圖案。"</string>
     <string name="enable_service_pin_reason" msgid="7882035264853248228">"開啟 <xliff:g id="SERVICE">%1$s</xliff:g> 將影響資料加密，因此您必須輸入 PIN。"</string>
     <string name="enable_service_password_reason" msgid="1224075277603097951">"開啟 <xliff:g id="SERVICE">%1$s</xliff:g> 將影響資料加密，因此您必須輸入密碼。"</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"記錄您的操作行為"</string>
@@ -1941,6 +1941,10 @@
     <string name="sync_is_failing" msgid="1591561768344128377">"目前同步處理發生問題。稍後會回復正常。"</string>
     <string name="add_account_label" msgid="7811707265834013767">"新增帳戶"</string>
     <string name="managed_profile_not_available_label" msgid="852263300911325904">"尚未提供工作設定檔"</string>
+    <!-- no translation found for work_mode_label (5794470908668593961) -->
+    <skip />
+    <!-- no translation found for work_mode_summary (1620246003886940776) -->
+    <skip />
     <string name="remove_managed_profile_label" msgid="3856519337797285325">"移除工作設定檔"</string>
     <string name="background_data" msgid="5779592891375473817">"背景資料"</string>
     <string name="background_data_summary" msgid="8328521479872763452">"應用程式隨時可以同步處理、傳送和接收資料"</string>
@@ -1982,7 +1986,7 @@
     <string name="status_wimax_mac_address" msgid="8390791848661413416">"4G MAC 位址"</string>
     <string name="enter_password" msgid="8035706727471334122">"如要啟動 Android，請輸入您的密碼"</string>
     <string name="enter_pin" msgid="5305333588093263790">"如要啟動 Android，請輸入您的 PIN"</string>
-    <string name="enter_pattern" msgid="4187435713036808566">"如要啟動 Android，請畫出解鎖圖形"</string>
+    <string name="enter_pattern" msgid="4187435713036808566">"如要啟動 Android，請畫出解鎖圖案"</string>
     <string name="cryptkeeper_wrong_pattern" msgid="8423835922362956999">"圖形錯誤"</string>
     <string name="cryptkeeper_wrong_password" msgid="5200857195368904047">"密碼錯誤"</string>
     <string name="cryptkeeper_wrong_pin" msgid="755720788765259382">"PIN 碼錯誤"</string>
@@ -2529,7 +2533,7 @@
     <string name="switch_off_text" msgid="1139356348100829659">"關閉"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"螢幕固定"</string>
     <string name="screen_pinning_description" msgid="1137904524037468263">"開啟這項設定時，您可以使用螢幕固定功能讓目前的畫面保持顯示狀態，直到取消固定為止。\n\n如何使用螢幕固定功能：\n\n1. 確認螢幕固定功能已開啟。\n\n2. 開啟您要固定的畫面。\n\n3. 輕觸總覽按鈕。\n\n4. 向上滑動並輕觸圖釘圖示。"</string>
-    <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"取消固定時必須畫出解鎖圖形"</string>
+    <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"取消固定時必須畫出解鎖圖案"</string>
     <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"取消固定時必須輸入 PIN"</string>
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"取消固定時必須輸入密碼"</string>
     <string name="screen_pinning_unlock_none" msgid="3814188275713871856">"取消固定時鎖定裝置"</string>
@@ -2545,22 +2549,22 @@
     <string name="encryption_interstitial_header" msgid="468015813904595613">"安全啟動"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"繼續"</string>
     <string name="encryption_interstitial_message_pin" msgid="7164072567822375682">"如果要進一步保護裝置，您可以將裝置設為需要輸入 PIN 才能啟動，等裝置啟動後方可接收來電、訊息或通知 (包括警告)。\n\n這樣一來，即使裝置遺失或遭竊，其中的資料仍安全無虞。"</string>
-    <string name="encryption_interstitial_message_pattern" msgid="6747091924626566031">"如果要進一步保護裝置，您可以將裝置設為需要畫出解鎖圖形才能啟動，等裝置啟動後方可接收來電、訊息或通知 (包括警告)。\n\n這樣一來，即使裝置遺失或遭竊，其中的資料仍安全無虞。"</string>
+    <string name="encryption_interstitial_message_pattern" msgid="6747091924626566031">"如果要進一步保護裝置，您可以將裝置設為需要畫出解鎖圖案才能啟動，等裝置啟動後方可接收來電、訊息或通知 (包括警告)。\n\n這樣一來，即使裝置遺失或遭竊，其中的資料仍安全無虞。"</string>
     <string name="encryption_interstitial_message_password" msgid="3462225324186045679">"如果要進一步保護裝置，您可以將裝置設為需要輸入密碼才能啟動，等裝置啟動後方可接收來電、訊息或通知 (包括警告)。\n\n這樣一來，即使裝置遺失或遭竊，其中的資料仍安全無虞。"</string>
     <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="3775537118799831558">"除了啟用裝置的指紋解鎖功能，您還可以設定裝置在啟動前要求使用者輸入 PIN 碼，為裝置增添多一道防護。裝置必須成功啟動才能接聽電話及接收訊息或通知 (包括鬧鐘)。\n\n這樣一來，萬一裝置遺失或遭竊，裝置上的資料仍會受到保護。"</string>
-    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="1105290967535237237">"除了啟用裝置的指紋解鎖功能，您還可以設定裝置在啟動前要求使用者輸入解鎖圖形，為裝置增添多一道防護。裝置必須成功啟動才能接聽電話及接收訊息或通知 (包括鬧鐘)。\n\n這樣一來，萬一裝置遺失或遭竊，裝置上的資料仍會受到保護。"</string>
+    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="1105290967535237237">"除了啟用裝置的指紋解鎖功能，您還可以設定裝置在啟動前要求使用者輸入解鎖圖案，為裝置增添多一道防護。裝置必須成功啟動才能接聽電話及接收訊息或通知 (包括鬧鐘)。\n\n這樣一來，萬一裝置遺失或遭竊，裝置上的資料仍會受到保護。"</string>
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="3512482682507378424">"除了啟用裝置的指紋解鎖功能，您還可以設定裝置在啟動前要求使用者輸入密碼，為裝置增添多一道防護。裝置必須成功啟動才能接聽電話及接收訊息或通知 (包括鬧鐘)。\n\n這樣一來，萬一裝置遺失或遭竊，裝置上的資料仍會受到保護。"</string>
     <string name="encrypt_require_pin" msgid="2063945047845243752">"需要輸入 PIN 才能啟動裝置"</string>
-    <string name="encrypt_require_pattern" msgid="6898479411004015810">"需要畫出解鎖圖形才能啟動裝置"</string>
+    <string name="encrypt_require_pattern" msgid="6898479411004015810">"需要畫出解鎖圖案才能啟動裝置"</string>
     <string name="encrypt_require_password" msgid="8770628366276570518">"需要輸入密碼才能啟動裝置"</string>
     <string name="encrypt_dont_require_pin" msgid="1082444817726247368">"不用了，謝謝"</string>
     <string name="encrypt_dont_require_pattern" msgid="6668299362640433843">"不用了，謝謝"</string>
     <string name="encrypt_dont_require_password" msgid="2580403214917009046">"不用了，謝謝"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"需要輸入 PIN？"</string>
-    <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"需要畫出解鎖圖形？"</string>
+    <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"需要畫出解鎖圖案？"</string>
     <string name="encrypt_talkback_dialog_require_password" msgid="8841994614218049215">"需要輸入密碼？"</string>
     <string name="encrypt_talkback_dialog_message_pin" msgid="7582096542997635316">"輸入您的 PIN 啟動裝置後，您將無法使用 <xliff:g id="SERVICE">%1$s</xliff:g> 等各項協助工具服務。"</string>
-    <string name="encrypt_talkback_dialog_message_pattern" msgid="2020083142199612743">"畫出解鎖圖形啟動裝置後，您將無法使用 <xliff:g id="SERVICE">%1$s</xliff:g> 等各項協助工具服務。"</string>
+    <string name="encrypt_talkback_dialog_message_pattern" msgid="2020083142199612743">"畫出解鎖圖案啟動裝置後，您將無法使用 <xliff:g id="SERVICE">%1$s</xliff:g> 等各項協助工具服務。"</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="4155875981789127796">"輸入您的密碼啟動裝置後，您將無法使用 <xliff:g id="SERVICE">%1$s</xliff:g> 等各項協助工具服務。"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI 資訊"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI 相關資訊"</string>
@@ -2758,8 +2762,7 @@
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"不必將螢幕解鎖就能快速開啟相機"</string>
     <string name="screen_zoom_title" msgid="6332123593919641665">"畫面縮放"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"顯示密度, 畫面縮放, 縮放, 縮放比例"</string>
-    <!-- no translation found for screen_zoom_summary (2022973627105802010) -->
-    <skip />
+    <string name="screen_zoom_summary" msgid="2022973627105802010">"縮小或放大畫面上的所有項目。如果變更這項設定，主畫面上的部分應用程式位置可能會有變動。"</string>
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"預覽"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"縮小"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"放大"</string>
@@ -2803,8 +2806,55 @@
     <string name="condition_cellular_summary" msgid="1818046558419658463">"您必須連上 Wi-Fi 才能使用網際網路"</string>
     <string name="condition_bg_data_title" msgid="1422001615923482010">"背景資料功能已關閉"</string>
     <string name="condition_bg_data_summary" msgid="656957852895282228">"您必須連上 Wi-Fi 才能使用背景資料功能。如果無法連上 Wi-Fi，部分應用程式或服務可能會受到影響。"</string>
+    <!-- no translation found for condition_work_title (7293722361184366648) -->
+    <skip />
+    <!-- no translation found for condition_work_summary (7543202177571590378) -->
+    <skip />
     <string name="suggestions_title" msgid="8758376306825920705">"建議 (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"移除"</string>
     <string name="color_temperature" msgid="2501579996151717270">"顯示器色溫"</string>
     <string name="color_temperature_desc" msgid="3603319696846982249">"啟用冷色溫"</string>
+    <!-- no translation found for usage (2977875522080448986) -->
+    <skip />
+    <!-- no translation found for cellular_data_usage (2763710678354680712) -->
+    <skip />
+    <!-- no translation found for wifi_data_usage (686754111095324306) -->
+    <skip />
+    <!-- no translation found for ethernet_data_usage (5108764537574354616) -->
+    <skip />
+    <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
+    <!-- no translation found for ethernet (6600095783781389720) -->
+    <skip />
+    <!-- no translation found for cell_data_template (3308709914705592281) -->
+    <skip />
+    <!-- no translation found for wifi_data_template (501654649753761778) -->
+    <skip />
+    <!-- no translation found for ethernet_data_template (5775729859383597507) -->
+    <skip />
+    <!-- no translation found for cell_warning_only (763147658209027140) -->
+    <skip />
+    <!-- no translation found for cell_warning_and_limit (2273413629267437470) -->
+    <skip />
+    <!-- no translation found for billing_cycle (5169909190811133499) -->
+    <skip />
+    <!-- no translation found for billing_cycle_summary (9009106526129293752) -->
+    <skip />
+    <!-- no translation found for billing_cycle_fragment_summary (1940518156600077066) -->
+    <skip />
+    <!-- no translation found for network_restrictions (8234695294536675380) -->
+    <skip />
+    <!-- no translation found for operator_warning (7206980278353372811) -->
+    <skip />
+    <!-- no translation found for data_used_template (3245919669966296505) -->
+    <skip />
+    <!-- no translation found for data_warning (209133958008062117) -->
+    <skip />
+    <!-- no translation found for set_data_limit (2901526323210516923) -->
+    <skip />
+    <!-- no translation found for data_limit (1885406964934590552) -->
+    <skip />
+    <!-- no translation found for data_usage_template (392191945602400904) -->
+    <skip />
+    <!-- no translation found for configure (1029654422228677273) -->
+    <skip />
 </resources>

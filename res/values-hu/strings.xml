@@ -264,7 +264,7 @@
     <string name="roaming_disable" msgid="1295279574370898378">"Csatlakozás adatszolgáltatásokhoz barangolás során"</string>
     <string name="roaming_reenable_message" msgid="9141007271031717369">"Megszakadt az adatkapcsolat, mert elhagyta az otthoni hálózatot, és az adatbarangolás nincs bekapcsolva."</string>
     <string name="roaming_turn_it_on_button" msgid="4387601818162120589">"Bekapcsolás"</string>
-    <string name="roaming_warning" msgid="7625933694709170887">"Ha engedélyezi az adatbarangolást, akkor jelentős barangolási költség merülhet fel!"</string>
+    <string name="roaming_warning" msgid="4275443317524544705">"Lehet, hogy jelentős összeget számítanak fel érte."</string>
     <string name="roaming_warning_multiuser" product="tablet" msgid="6458990250829214777">"Az adatbarangolás engedélyezése jelentős díjnövekedéssel járhat.\n\nEz a beállítás minden felhasználót érint ezen a táblagépen."</string>
     <string name="roaming_warning_multiuser" product="default" msgid="6368421100292355440">"Az adatbarangolás engedélyezése jelentős díjnövekedéssel járhat.\n\nEz a beállítás minden felhasználót érint ezen a telefonon."</string>
     <string name="roaming_reenable_title" msgid="6068100976707316772">"Engedélyezi az adatbarangolást?"</string>
@@ -1936,6 +1936,8 @@
     <string name="sync_is_failing" msgid="1591561768344128377">"A szinkronizálással problémák vannak. Hamarosan helyreáll."</string>
     <string name="add_account_label" msgid="7811707265834013767">"Fiók hozzáadása"</string>
     <string name="managed_profile_not_available_label" msgid="852263300911325904">"A munkaprofil még nem érhető el"</string>
+    <string name="work_mode_label" msgid="5794470908668593961">"Munka mód"</string>
+    <string name="work_mode_summary" msgid="1620246003886940776">"Munkaprofil használatának engedélyezése, beleértve az alkalmazásokat, a háttérben való szinkronizálást és a kapcsolódó funkciókat"</string>
     <string name="remove_managed_profile_label" msgid="3856519337797285325">"Munkaprofil eltávolítása"</string>
     <string name="background_data" msgid="5779592891375473817">"Háttéradatok"</string>
     <string name="background_data_summary" msgid="8328521479872763452">"Szinkronizálás, adatküldés és -fogadás bármikor"</string>
@@ -2797,8 +2799,32 @@
     <string name="condition_cellular_summary" msgid="1818046558419658463">"Internetkapcsolat csak Wi-Fi-n keresztül lehetséges"</string>
     <string name="condition_bg_data_title" msgid="1422001615923482010">"Háttéradatok kikapcsolva"</string>
     <string name="condition_bg_data_summary" msgid="656957852895282228">"A háttéradatok kizárólag Wi-Fi-n keresztül állnak rendelkezésre. Ez hatással lehet bizonyos alkalmazásokra és szolgáltatásokra, amikor nincs rendelkezésre álló Wi-Fi-kapcsolat."</string>
+    <string name="condition_work_title" msgid="7293722361184366648">"A munkaprofil mód ki van kapcsolva"</string>
+    <string name="condition_work_summary" msgid="7543202177571590378">"Az alkalmazások, a háttérben való szinkronizálás és a munkaprofilhoz kapcsolódó egyéb funkciók kikapcsolva."</string>
     <string name="suggestions_title" msgid="8758376306825920705">"Javaslatok (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"Eltávolítás"</string>
     <string name="color_temperature" msgid="2501579996151717270">"Kijelző színhőmérséklete"</string>
     <string name="color_temperature_desc" msgid="3603319696846982249">"Hideg színhőmérséklet bekapcsolása"</string>
+    <string name="usage" msgid="2977875522080448986">"Használat"</string>
+    <string name="cellular_data_usage" msgid="2763710678354680712">"Mobiladat-használat"</string>
+    <string name="wifi_data_usage" msgid="686754111095324306">"Adathasználat Wi-Fi-kapcsolaton"</string>
+    <string name="ethernet_data_usage" msgid="5108764537574354616">"Adathasználat Ethernet-kapcsolaton"</string>
+    <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
+    <string name="ethernet" msgid="6600095783781389720">"Ethernet"</string>
+    <string name="cell_data_template" msgid="3308709914705592281">"<xliff:g id="ID_1">%1$s</xliff:g> mobiladat-forgalom"</string>
+    <string name="wifi_data_template" msgid="501654649753761778">"<xliff:g id="ID_1">%1$s</xliff:g> adathasználat Wi-Fi-kapcsolaton"</string>
+    <string name="ethernet_data_template" msgid="5775729859383597507">"<xliff:g id="ID_1">%1$s</xliff:g> adathasználat Ethernet-kapcsolaton"</string>
+    <string name="cell_warning_only" msgid="763147658209027140">"<xliff:g id="ID_1">%1$s</xliff:g> adatforgalmi figyelmeztetés"</string>
+    <string name="cell_warning_and_limit" msgid="2273413629267437470">"<xliff:g id="ID_1">%1$s</xliff:g> – adatforgalmi figyelmeztetés / <xliff:g id="ID_2">%2$s</xliff:g> – adatforgalom korlátozása"</string>
+    <string name="billing_cycle" msgid="5169909190811133499">"Számlázási ciklus"</string>
+    <string name="billing_cycle_summary" msgid="9009106526129293752">"A havi ciklus minden hónap <xliff:g id="ID_1">%1$s</xliff:g>. napján kezdődik"</string>
+    <string name="billing_cycle_fragment_summary" msgid="1940518156600077066">"Havonta a hónap <xliff:g id="ID_1">%1$s</xliff:g>. napján"</string>
+    <string name="network_restrictions" msgid="8234695294536675380">"Hálózati korlátozások"</string>
+    <string name="operator_warning" msgid="7206980278353372811">"A szolgáltató adatszámlálási módja eltérhet az eszközétől."</string>
+    <string name="data_used_template" msgid="3245919669966296505">"<xliff:g id="ID_1">%1$s</xliff:g> felhasználva"</string>
+    <string name="data_warning" msgid="209133958008062117">"Adatforgalmi figyelmeztetés"</string>
+    <string name="set_data_limit" msgid="2901526323210516923">"Adatkorlát beállítása"</string>
+    <string name="data_limit" msgid="1885406964934590552">"Adatforgalmi korlátozás"</string>
+    <string name="data_usage_template" msgid="392191945602400904">"<xliff:g id="ID_1">%1$s</xliff:g> felhasználva a következő dátumok között: <xliff:g id="ID_2">%2$s</xliff:g>"</string>
+    <string name="configure" msgid="1029654422228677273">"Beállítás"</string>
 </resources>

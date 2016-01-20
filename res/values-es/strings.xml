@@ -74,8 +74,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Desactivar tarjeta SD"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Borrar almacenamiento USB"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Borrar tarjeta SD"</string>
-    <!-- no translation found for font_size_summary (133937309990844030) -->
-    <skip />
+    <string name="font_size_summary" msgid="133937309990844030">"Aumenta o disminuye el tamaño del texto de la pantalla."</string>
     <string name="small_font" msgid="2295331917424072635">"Pequeño"</string>
     <string name="medium_font" msgid="2068475425515133701">"Mediano"</string>
     <string name="large_font" msgid="599055175160971446">"Grande"</string>
@@ -265,7 +264,7 @@
     <string name="roaming_disable" msgid="1295279574370898378">"Conectarse a servicios de datos en itinerancia"</string>
     <string name="roaming_reenable_message" msgid="9141007271031717369">"Has perdido la conectividad de datos porque has dejado desactivada la itinerancia de datos de tu red doméstica."</string>
     <string name="roaming_turn_it_on_button" msgid="4387601818162120589">"Activarla"</string>
-    <string name="roaming_warning" msgid="7625933694709170887">"Al permitir la itinerancia de datos, es posible que te facturen cargos adicionales elevados."</string>
+    <string name="roaming_warning" msgid="4275443317524544705">"El coste de este servicio puede ser significativo."</string>
     <string name="roaming_warning_multiuser" product="tablet" msgid="6458990250829214777">"Al permitir la itinerancia de datos, los costes de itinerancia que deberás asumir pueden ser significativos.\n\nEsta configuración afecta a todos los usuarios de este tablet."</string>
     <string name="roaming_warning_multiuser" product="default" msgid="6368421100292355440">"Al permitir la itinerancia de datos, los costes de itinerancia que deberás asumir pueden ser significativos.\n\nEsta configuración afecta a todos los usuarios de este teléfono."</string>
     <string name="roaming_reenable_title" msgid="6068100976707316772">"¿Permitir la itinerancia de datos?"</string>
@@ -1937,6 +1936,8 @@
     <string name="sync_is_failing" msgid="1591561768344128377">"En este momento hay incidencias con la sincronización. Se restablecerá en breve."</string>
     <string name="add_account_label" msgid="7811707265834013767">"Añadir cuenta"</string>
     <string name="managed_profile_not_available_label" msgid="852263300911325904">"El perfil de trabajo aún no está disponible"</string>
+    <string name="work_mode_label" msgid="5794470908668593961">"Modo de trabajo"</string>
+    <string name="work_mode_summary" msgid="1620246003886940776">"Permitir que se utilice el modo de trabajo, incluidas las aplicaciones, la sincronización en segundo plano y las funciones relacionadas"</string>
     <string name="remove_managed_profile_label" msgid="3856519337797285325">"Eliminar perfil de trabajo"</string>
     <string name="background_data" msgid="5779592891375473817">"Conexiones automáticas"</string>
     <string name="background_data_summary" msgid="8328521479872763452">"Las aplicaciones pueden sincronizar datos, enviarlos y recibirlos."</string>
@@ -2754,8 +2755,7 @@
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Abre la cámara rápidamente sin desbloquear la pantalla"</string>
     <string name="screen_zoom_title" msgid="6332123593919641665">"Zoom de la pantalla"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"densidad de pantalla, zoom, escala"</string>
-    <!-- no translation found for screen_zoom_summary (2022973627105802010) -->
-    <skip />
+    <string name="screen_zoom_summary" msgid="2022973627105802010">"Aumenta o disminuye todos los elementos de la pantalla. Es posible que cambie la posición de algunas aplicaciones de la pantalla de inicio después de cambiar esta opción."</string>
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"Vista previa"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"Disminuir el tamaño"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"Aumentar el tamaño"</string>
@@ -2799,8 +2799,32 @@
     <string name="condition_cellular_summary" msgid="1818046558419658463">"Internet solo está disponible a través de redes Wi-Fi"</string>
     <string name="condition_bg_data_title" msgid="1422001615923482010">"Conexiones automáticas desactivadas"</string>
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Las conexiones automáticas solo están disponibles a través de redes Wi-Fi. Si la conexión Wi-Fi no está disponible, algunas aplicaciones o algunos servicios pueden verse afectados."</string>
+    <string name="condition_work_title" msgid="7293722361184366648">"Perfil de trabajo desactivado"</string>
+    <string name="condition_work_summary" msgid="7543202177571590378">"Las aplicaciones, la sincronización en segundo plano y otras funciones relacionadas con tu perfil de trabajo están desactivadas."</string>
     <string name="suggestions_title" msgid="8758376306825920705">"Sugerencias (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"Quitar"</string>
     <string name="color_temperature" msgid="2501579996151717270">"Temperatura del color de la pantalla"</string>
     <string name="color_temperature_desc" msgid="3603319696846982249">"Habilitar temperatura del color"</string>
+    <string name="usage" msgid="2977875522080448986">"Uso"</string>
+    <string name="cellular_data_usage" msgid="2763710678354680712">"Uso de datos móviles"</string>
+    <string name="wifi_data_usage" msgid="686754111095324306">"Uso de datos Wi-Fi"</string>
+    <string name="ethernet_data_usage" msgid="5108764537574354616">"Uso de datos de Ethernet"</string>
+    <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
+    <string name="ethernet" msgid="6600095783781389720">"Ethernet"</string>
+    <string name="cell_data_template" msgid="3308709914705592281">"Datos móviles: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="wifi_data_template" msgid="501654649753761778">"Datos Wi-Fi: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="ethernet_data_template" msgid="5775729859383597507">"Datos de Ethernet: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="cell_warning_only" msgid="763147658209027140">"Advertencia de datos: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="cell_warning_and_limit" msgid="2273413629267437470">"Advertencia de datos: <xliff:g id="ID_1">%1$s</xliff:g>/Límite de datos: <xliff:g id="ID_2">%2$s</xliff:g>"</string>
+    <string name="billing_cycle" msgid="5169909190811133499">"Ciclo de facturación"</string>
+    <string name="billing_cycle_summary" msgid="9009106526129293752">"Ciclo mensual a partir del <xliff:g id="ID_1">%1$s</xliff:g> de cada mes"</string>
+    <string name="billing_cycle_fragment_summary" msgid="1940518156600077066">"Mensualmente a partir del <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="network_restrictions" msgid="8234695294536675380">"Restricciones de red"</string>
+    <string name="operator_warning" msgid="7206980278353372811">"El uso de datos determinado por el operador puede variar del recuento del dispositivo."</string>
+    <string name="data_used_template" msgid="3245919669966296505">"Datos utilizados: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="data_warning" msgid="209133958008062117">"Advertencia de datos"</string>
+    <string name="set_data_limit" msgid="2901526323210516923">"Establecer límite de datos"</string>
+    <string name="data_limit" msgid="1885406964934590552">"Límite de datos"</string>
+    <string name="data_usage_template" msgid="392191945602400904">"Datos utilizados entre el <xliff:g id="ID_2">%2$s</xliff:g>: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="configure" msgid="1029654422228677273">"Configurar"</string>
 </resources>

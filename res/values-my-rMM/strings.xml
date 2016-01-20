@@ -264,7 +264,7 @@
     <string name="roaming_disable" msgid="1295279574370898378">"ရုန်းမင်းပြုလုပ်နေစဉ် ဒေတာဝန်ဆောင်မှုများကို ဆက်သွယ်ခြင်း"</string>
     <string name="roaming_reenable_message" msgid="9141007271031717369">"ဒေတာဆက်သွယ်မှုပြတ်တောက်သွားပါသည် အဘယ်ကြောင့်ဆိုသော် သင့်အိမ်၏ကွန်ယက်မှထွက်ကာ ဒေတာရုန်းမင်းကွန်ယက်ကိုလဲပိတ်ထားသောကြောင့်ဖြစ်သည်"</string>
     <string name="roaming_turn_it_on_button" msgid="4387601818162120589">"ဖွင့်မည်"</string>
-    <string name="roaming_warning" msgid="7625933694709170887">"ကွန်ယက်ပြင်ပဒေတာအသုံးပြုခြင်းကို သင် ခွင့်ပြုလျှင် သိသာကြီးမာသောသုံးစွဲခ ကျခံရလိမ့်မည် !"</string>
+    <string name="roaming_warning" msgid="4275443317524544705">"သိသာသည့် ငွေကြေးကုန်ကျမှုများ ရှိနိုင်ပါသည်။"</string>
     <string name="roaming_warning_multiuser" product="tablet" msgid="6458990250829214777">"ကွန်ယက်ပြင်ပဒေတာအသုံးပြုခြင်းကို သင် ခွင့်ပြုလျှင် သိသာကြီးမာသောသုံးစွဲခ ကျခံရလိမ့်မည် !\n\n ဤအစီအမံသည် ဤတက်ဘလက်မှ သူံးစွဲသူအားလုံးကို အကျိုးသက်ရောက်လိမ့်မည်။"</string>
     <string name="roaming_warning_multiuser" product="default" msgid="6368421100292355440">"ကွန်ယက်ပြင်ပဒေတာအသုံးပြုခြင်းကို သင် ခွင့်ပြုလျှင် သိသာကြီးမာသောသုံးစွဲခ ကျခံရလိမ့်မည် !\n\n ဤအစီအမံသည် ဤဖုန်းမှ သူံးစွဲသူအားလုံးကို အကျိုးသက်ရောက်လိမ့်မည်။"</string>
     <string name="roaming_reenable_title" msgid="6068100976707316772">"ကွန်ရက်ပြင်ပဒေတာအသုံးပြုခြင်း ခွင့်​ပြုမည်လား?"</string>
@@ -1936,6 +1936,8 @@
     <string name="sync_is_failing" msgid="1591561768344128377">"ထပ်တူကိုက်ညီအောင်ပြုလုပ်ခြင်းသည် လက်ရှိပြသနာရှိနေပါသည်။ ခဏကြာလျှင်ပြန်လည်ရရှိပါလိမ့်မည်။"</string>
     <string name="add_account_label" msgid="7811707265834013767">"အကောင့်ထပ်ထည့်ရန်"</string>
     <string name="managed_profile_not_available_label" msgid="852263300911325904">"အလုပ် ပရိုဖိုင်ကို မရရှိနိုင်သေးပါ"</string>
+    <string name="work_mode_label" msgid="5794470908668593961">"အလုပ်မုဒ်"</string>
+    <string name="work_mode_summary" msgid="1620246003886940776">"အက်ပ်များ၊ နောက်ခံစင့်ခ်လုပ်ခြင်း၊ နှင့်သက်ဆိုင်သည့်အင်္ဂါရပ်များကို ဆောင်ရွက်ရန် အလုပ်ပရိုဖိုင်ကိုခွင့်ပြုပါ။"</string>
     <string name="remove_managed_profile_label" msgid="3856519337797285325">"အလုပ် ပရိုဖိုင်ကို ဖယ်ရှားပစ်ရန်"</string>
     <string name="background_data" msgid="5779592891375473817">"နောက်ခံတွင်အသုံးပြုသောဒေတာ"</string>
     <string name="background_data_summary" msgid="8328521479872763452">"ဒေတာကိုအချိန်မရွေး ထပ်တူ၊၊ပို့ နှင့်လက်ခံခြင်းလုပ်နိုင်သည်"</string>
@@ -2797,8 +2799,32 @@
     <string name="condition_cellular_summary" msgid="1818046558419658463">"အင်တာနက်သည် ဝိုင်ဖိုင်မှတစ်ဆင့်သာ ရနိုင်သည်"</string>
     <string name="condition_bg_data_title" msgid="1422001615923482010">"နောက်ခံဒေတာပိတ်ထားသည်"</string>
     <string name="condition_bg_data_summary" msgid="656957852895282228">"နောက်ချက်ဒေတာသည် ဝိုင်ဖိုင်မှတစ်ဆင့်သာ ရနိုင်သည်။ ၎င်းသည် ဝိုင်ဖိုင်မရချိန်တွင် အက်ပ်များသို့မဟုတ် ဝန်ဆောင်မှုများကို ထိခိုက်စေပါသည်။"</string>
+    <string name="condition_work_title" msgid="7293722361184366648">"အလုပ်ပရိုဖိုင်ပိတ်ထားသည်"</string>
+    <string name="condition_work_summary" msgid="7543202177571590378">"သင့်အလုပ်ပရိုဖိုင်နှင့် သက်ဆိုင်သည့် အက်ပ်များ၊ နောက်ခံစင့်ခ်လုပ်ခြင်း၊ နှင့်အခြား အင်္ဂါရပ်များကို ပိတ်ထားပါသည်။"</string>
     <string name="suggestions_title" msgid="8758376306825920705">"အကြံပြုချက်များ (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"ဖယ်ရှားပါ"</string>
     <string name="color_temperature" msgid="2501579996151717270">"မြင်ကွင်း အရောင်၏ အပူချိန်"</string>
     <string name="color_temperature_desc" msgid="3603319696846982249">"အေးသော အပူချိန်ကို ဖွင့်ပါ"</string>
+    <string name="usage" msgid="2977875522080448986">"အသုံးပြုမှု"</string>
+    <string name="cellular_data_usage" msgid="2763710678354680712">"ဆဲလ်လူလာဒေတာအသုံးပြုမှု"</string>
+    <string name="wifi_data_usage" msgid="686754111095324306">"ဝိုင်ဖိုင်ဒေတာအသုံးပြုမှု"</string>
+    <string name="ethernet_data_usage" msgid="5108764537574354616">"အီတာနက်ဒေတာအသုံးပြုချက်"</string>
+    <string name="wifi" msgid="1081550856200013637">"ဝိုင်ဖိုင်"</string>
+    <string name="ethernet" msgid="6600095783781389720">"အီတာနက်"</string>
+    <string name="cell_data_template" msgid="3308709914705592281">"<xliff:g id="ID_1">%1$s</xliff:g> ဆဲလ်လူလာဒေတာ"</string>
+    <string name="wifi_data_template" msgid="501654649753761778">"<xliff:g id="ID_1">%1$s</xliff:g> ဝိုင်ဖိုင်ဒေတာ"</string>
+    <string name="ethernet_data_template" msgid="5775729859383597507">"<xliff:g id="ID_1">%1$s</xliff:g> အီတာနက်ဒေတာ"</string>
+    <string name="cell_warning_only" msgid="763147658209027140">"<xliff:g id="ID_1">%1$s</xliff:g> ဒေတာသတိပေးချက်"</string>
+    <string name="cell_warning_and_limit" msgid="2273413629267437470">"<xliff:g id="ID_1">%1$s</xliff:g> ဒေတာသတိပေးချက် / <xliff:g id="ID_2">%2$s</xliff:g> ဒေတာကန့်သတ်ချက်"</string>
+    <string name="billing_cycle" msgid="5169909190811133499">"ငွေတောင်းခ့မှု ကြားကာလ"</string>
+    <string name="billing_cycle_summary" msgid="9009106526129293752">"လစဉ်လည်ပတ်မှုသည် လတိုင်း၏ <xliff:g id="ID_1">%1$s</xliff:g> တွင်စတင်သည်"</string>
+    <string name="billing_cycle_fragment_summary" msgid="1940518156600077066">"လစဉ်အစ <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="network_restrictions" msgid="8234695294536675380">"ကွန်ရက် ကန့်သတ်ချက်များ"</string>
+    <string name="operator_warning" msgid="7206980278353372811">"ဖုန်းလိုင်းဒေတာတွက်ချက်မှုသည် သင့်စက်ပစ္စည်းမှ ကွာခြားနိုင်ပါသည်။"</string>
+    <string name="data_used_template" msgid="3245919669966296505">"<xliff:g id="ID_1">%1$s</xliff:g> အသုံးပြုထားသည်"</string>
+    <string name="data_warning" msgid="209133958008062117">"ဒေတာသတိပေးချက်"</string>
+    <string name="set_data_limit" msgid="2901526323210516923">"ဒေတာအကန့်အသတ် သတ်မှတ်ရန်"</string>
+    <string name="data_limit" msgid="1885406964934590552">"ဒေတာအကန့်အသတ်"</string>
+    <string name="data_usage_template" msgid="392191945602400904">"<xliff:g id="ID_1">%1$s</xliff:g> <xliff:g id="ID_2">%2$s</xliff:g> အကြားအသုံးပြုခဲ့သည်"</string>
+    <string name="configure" msgid="1029654422228677273">"ပြင်ဆင်သတ်မှတ်ရန်"</string>
 </resources>

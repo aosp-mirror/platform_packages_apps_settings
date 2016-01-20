@@ -74,8 +74,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Desmontar la tarjeta SD"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Eliminar almacenamiento USB"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Borrar tarjeta SD"</string>
-    <!-- no translation found for font_size_summary (133937309990844030) -->
-    <skip />
+    <string name="font_size_summary" msgid="133937309990844030">"Aumenta o reduce el tamaño del texto en pantalla."</string>
     <string name="small_font" msgid="2295331917424072635">"Pequeño"</string>
     <string name="medium_font" msgid="2068475425515133701">"Mediano"</string>
     <string name="large_font" msgid="599055175160971446">"Grande"</string>
@@ -265,7 +264,8 @@
     <string name="roaming_disable" msgid="1295279574370898378">"Conectar a servicios de datos en roaming"</string>
     <string name="roaming_reenable_message" msgid="9141007271031717369">"Has perdido la conectividad de los datos porque has dejado la red doméstica con roaming de datos desactivado."</string>
     <string name="roaming_turn_it_on_button" msgid="4387601818162120589">"Enciéndelo"</string>
-    <string name="roaming_warning" msgid="7625933694709170887">"Al permitir el roaming de datos, puedes incurrir en gastos de roaming importantes."</string>
+    <!-- no translation found for roaming_warning (4275443317524544705) -->
+    <skip />
     <string name="roaming_warning_multiuser" product="tablet" msgid="6458990250829214777">"Al permitir el roaming de datos, los costos de roaming que deberás asumir pueden ser altos.\n\nEsta configuración afecta a todos los usuarios de esta tablet."</string>
     <string name="roaming_warning_multiuser" product="default" msgid="6368421100292355440">"Al permitir el roaming de datos, los costos de roaming que deberás asumir pueden ser altos.\n\nEsta configuración afecta a todos los usuarios de este dispositivo."</string>
     <string name="roaming_reenable_title" msgid="6068100976707316772">"¿Permitir el roaming de datos?"</string>
@@ -1937,6 +1937,10 @@
     <string name="sync_is_failing" msgid="1591561768344128377">"En este momento la sincronización experimenta problemas. Volverá en breve."</string>
     <string name="add_account_label" msgid="7811707265834013767">"Agregar cuenta"</string>
     <string name="managed_profile_not_available_label" msgid="852263300911325904">"El perfil de trabajo aún no está disponible."</string>
+    <!-- no translation found for work_mode_label (5794470908668593961) -->
+    <skip />
+    <!-- no translation found for work_mode_summary (1620246003886940776) -->
+    <skip />
     <string name="remove_managed_profile_label" msgid="3856519337797285325">"Eliminar perfil de trabajo"</string>
     <string name="background_data" msgid="5779592891375473817">"Datos de fondo"</string>
     <string name="background_data_summary" msgid="8328521479872763452">"Las aplicaciones pueden sincronizar, enviar y recibir datos."</string>
@@ -2752,8 +2756,7 @@
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Abre la cámara de forma rápida sin desbloquear la pantalla"</string>
     <string name="screen_zoom_title" msgid="6332123593919641665">"Zoom de la pantalla"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"densidad de la pantalla, zoom de la pantalla, escala"</string>
-    <!-- no translation found for screen_zoom_summary (2022973627105802010) -->
-    <skip />
+    <string name="screen_zoom_summary" msgid="2022973627105802010">"Aumenta o reduce el tamaño de todos los elementos en pantalla. Luego de modificar esta configuración, es posible que cambie la posición de algunas apps en la pantalla principal."</string>
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"Vista previa"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"Reducir el tamaño"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"Aumentar el tamaño"</string>
@@ -2797,8 +2800,55 @@
     <string name="condition_cellular_summary" msgid="1818046558419658463">"Internet solo está disponible por medio de Wi-Fi"</string>
     <string name="condition_bg_data_title" msgid="1422001615923482010">"Segundo plano desactivado"</string>
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Los datos en segundo plano solo están disponibles por medio de Wi-Fi. Si no hay una conexión Wi-Fi disponible, podrían verse afectados algunos servicios o apps."</string>
+    <!-- no translation found for condition_work_title (7293722361184366648) -->
+    <skip />
+    <!-- no translation found for condition_work_summary (7543202177571590378) -->
+    <skip />
     <string name="suggestions_title" msgid="8758376306825920705">"Sugerencias (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"Quitar"</string>
     <string name="color_temperature" msgid="2501579996151717270">"Temperatura del color de la pantalla"</string>
     <string name="color_temperature_desc" msgid="3603319696846982249">"Habilitar temperatura del color"</string>
+    <!-- no translation found for usage (2977875522080448986) -->
+    <skip />
+    <!-- no translation found for cellular_data_usage (2763710678354680712) -->
+    <skip />
+    <!-- no translation found for wifi_data_usage (686754111095324306) -->
+    <skip />
+    <!-- no translation found for ethernet_data_usage (5108764537574354616) -->
+    <skip />
+    <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
+    <!-- no translation found for ethernet (6600095783781389720) -->
+    <skip />
+    <!-- no translation found for cell_data_template (3308709914705592281) -->
+    <skip />
+    <!-- no translation found for wifi_data_template (501654649753761778) -->
+    <skip />
+    <!-- no translation found for ethernet_data_template (5775729859383597507) -->
+    <skip />
+    <!-- no translation found for cell_warning_only (763147658209027140) -->
+    <skip />
+    <!-- no translation found for cell_warning_and_limit (2273413629267437470) -->
+    <skip />
+    <!-- no translation found for billing_cycle (5169909190811133499) -->
+    <skip />
+    <!-- no translation found for billing_cycle_summary (9009106526129293752) -->
+    <skip />
+    <!-- no translation found for billing_cycle_fragment_summary (1940518156600077066) -->
+    <skip />
+    <!-- no translation found for network_restrictions (8234695294536675380) -->
+    <skip />
+    <!-- no translation found for operator_warning (7206980278353372811) -->
+    <skip />
+    <!-- no translation found for data_used_template (3245919669966296505) -->
+    <skip />
+    <!-- no translation found for data_warning (209133958008062117) -->
+    <skip />
+    <!-- no translation found for set_data_limit (2901526323210516923) -->
+    <skip />
+    <!-- no translation found for data_limit (1885406964934590552) -->
+    <skip />
+    <!-- no translation found for data_usage_template (392191945602400904) -->
+    <skip />
+    <!-- no translation found for configure (1029654422228677273) -->
+    <skip />
 </resources>
