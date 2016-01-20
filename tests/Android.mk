@@ -7,6 +7,8 @@ LOCAL_CERTIFICATE := platform
 
 LOCAL_JAVA_LIBRARIES := android.test.runner bouncycastle
 
+LOCAL_STATIC_JAVA_LIBRARIES := android-support-test mockito-target
+
 # Include all test java files.
 LOCAL_SRC_FILES := $(call all-java-files-under, src)
 
