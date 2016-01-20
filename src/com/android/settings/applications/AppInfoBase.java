@@ -38,10 +38,13 @@ import android.util.Log;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 
 import java.util.ArrayList;
+
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 public abstract class AppInfoBase extends SettingsPreferenceFragment
         implements ApplicationsState.Callbacks {
@@ -52,7 +55,7 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
     protected static final String TAG = AppInfoBase.class.getSimpleName();
     protected static final boolean localLOGV = false;
 
-    protected boolean mAppControlRestricted = false;
+    protected EnforcedAdmin mAppsControlDisallowedAdmin;
 
     protected ApplicationsState mState;
     protected ApplicationsState.Session mSession;
@@ -92,7 +95,8 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
     public void onResume() {
         super.onResume();
         mSession.resume();
-        mAppControlRestricted = mUserManager.hasUserRestriction(UserManager.DISALLOW_APPS_CONTROL);
+        mAppsControlDisallowedAdmin = RestrictedLockUtils.checkIfRestrictionEnforced(getActivity(),
+                UserManager.DISALLOW_APPS_CONTROL, mUserId);
 
         if (!refreshUi()) {
             setIntentAndFinish(true, true);

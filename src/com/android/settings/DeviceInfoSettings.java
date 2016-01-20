@@ -25,6 +25,7 @@ import android.os.PersistableBundle;
 import android.os.SELinux;
 import android.os.SystemClock;
 import android.os.SystemProperties;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
@@ -41,10 +42,13 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Index;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.DeviceInfoUtils;
+import com.android.settingslib.RestrictedLockUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 public class DeviceInfoSettings extends SettingsPreferenceFragment implements Indexable {
 
@@ -75,6 +79,9 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
     Toast mDevHitToast;
 
     private UserManager mUm;
+
+    private EnforcedAdmin mFunDisallowedAdmin;
+    private EnforcedAdmin mDebuggingFeaturesDisallowedAdmin;
 
     @Override
     protected int getMetricsCategory() {
@@ -183,6 +190,10 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
                 Context.MODE_PRIVATE).getBoolean(DevelopmentSettings.PREF_SHOW,
                         android.os.Build.TYPE.equals("eng")) ? -1 : TAPS_TO_BE_A_DEVELOPER;
         mDevHitToast = null;
+        mFunDisallowedAdmin = RestrictedLockUtils.checkIfRestrictionEnforced(
+                getActivity(), UserManager.DISALLOW_FUN, UserHandle.myUserId());
+        mDebuggingFeaturesDisallowedAdmin = RestrictedLockUtils.checkIfRestrictionEnforced(
+                getActivity(), UserManager.DISALLOW_DEBUGGING_FEATURES, UserHandle.myUserId());
     }
 
     @Override
@@ -191,7 +202,9 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
             System.arraycopy(mHits, 1, mHits, 0, mHits.length-1);
             mHits[mHits.length-1] = SystemClock.uptimeMillis();
             if (mHits[0] >= (SystemClock.uptimeMillis()-500)) {
-                if (mUm.hasUserRestriction(UserManager.DISALLOW_FUN)) {
+                if (mFunDisallowedAdmin != null) {
+                    RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getActivity(),
+                            mFunDisallowedAdmin);
                     Log.d(LOG_TAG, "Sorry, no fun for you!");
                     return false;
                 }
@@ -215,7 +228,11 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
                 return true;
             }
 
-            if (mUm.hasUserRestriction(UserManager.DISALLOW_DEBUGGING_FEATURES)) return true;
+            if (mDebuggingFeaturesDisallowedAdmin != null) {
+                RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getActivity(),
+                        mDebuggingFeaturesDisallowedAdmin);
+                return true;
+            }
 
             if (mDevHitCountdown > 0) {
                 mDevHitCountdown--;
