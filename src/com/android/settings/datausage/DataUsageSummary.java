@@ -89,10 +89,10 @@ public class DataUsageSummary extends DataUsageBase implements Indexable {
         if (hasMobileData) {
             List<SubscriptionInfo> subscriptions =
                     services.mSubscriptionManager.getActiveSubscriptionInfoList();
-            if (subscriptions.size() == 0) {
+            if (subscriptions == null || subscriptions.size() == 0) {
                 addMobileSection(defaultSubId);
             }
-            for (int i = 0; i < subscriptions.size(); i++) {
+            for (int i = 0; subscriptions != null && i < subscriptions.size(); i++) {
                 addMobileSection(subscriptions.get(i).getSubscriptionId());
             }
         }
