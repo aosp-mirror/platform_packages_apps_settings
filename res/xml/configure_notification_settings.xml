@@ -22,15 +22,13 @@
     <!-- Pulse notification light -->
     <SwitchPreference
             android:key="notification_pulse"
-            android:title="@string/notification_pulse_title"
-            android:persistent="false" />
+            android:title="@string/notification_pulse_title" />
 
     <!-- When device is locked -->
     <com.android.settingslib.RestrictedDropDownPreference
             android:key="lock_screen_notifications"
             android:title="@string/lock_screen_notifications_title"
-            android:summary="%s"
-            android:persistent="false" />
+            android:summary="%s" />
 
     <PreferenceCategory
         android:key="advanced"

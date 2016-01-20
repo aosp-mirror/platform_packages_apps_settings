@@ -47,14 +47,12 @@
         <!-- Also vibrate for calls -->
         <SwitchPreference
                 android:key="vibrate_when_ringing"
-                android:title="@string/vibrate_when_ringing_title"
-                android:persistent="false" />
+                android:title="@string/vibrate_when_ringing_title" />
 
         <!-- Master mono -->
         <SwitchPreference
                 android:key="master_mono"
                 android:title="@string/master_mono_title"
-                android:persistent="false"
                 android:summaryOn="@string/master_mono_on"
                 android:summaryOff="@string/master_mono_off" />
 
@@ -71,7 +69,6 @@
                 android:key="ringtone"
                 android:title="@string/ringtone_title"
                 android:dialogTitle="@string/ringtone_title"
-                android:persistent="false"
                 android:ringtoneType="ringtone" />
 
         <!-- Default notification ringtone -->
@@ -79,7 +76,6 @@
                 android:key="notification_ringtone"
                 android:title="@string/notification_ringtone_title"
                 android:dialogTitle="@string/notification_ringtone_title"
-                android:persistent="false"
                 android:ringtoneType="notification" />
 
         <!-- Default alarm ringtone -->

@@ -30,8 +30,7 @@
                 android:key="auto_brightness"
                 android:title="@string/auto_brightness_title"
                 settings:keywords="@string/keywords_display_auto_brightness"
-                android:summary="@string/auto_brightness_summary"
-                android:persistent="false" />
+                android:summary="@string/auto_brightness_summary" />
 
         <!-- Hide night mode for now
         <ListPreference
@@ -39,7 +38,6 @@
             android:title="@string/night_mode_title"
             settings:keywords="@string/keywords_display_night_mode"
             android:summary="@string/night_mode_summary"
-            android:persistent="false"
             android:entries="@array/night_mode_entries"
             android:entryValues="@array/night_mode_values" /> -->
 
@@ -53,21 +51,18 @@
                 android:key="screen_timeout"
                 android:title="@string/screen_timeout"
                 android:summary="@string/screen_timeout_summary"
-                android:persistent="false"
                 android:entries="@array/screen_timeout_entries"
                 android:entryValues="@array/screen_timeout_values" />
 
         <SwitchPreference
                 android:key="camera_gesture"
                 android:title="@string/camera_gesture_title"
-                android:summary="@string/camera_gesture_desc"
-                android:persistent="false" />
+                android:summary="@string/camera_gesture_desc" />
 
         <SwitchPreference
                 android:key="camera_double_tap_power_gesture"
                 android:title="@string/camera_double_tap_power_gesture_title"
-                android:summary="@string/camera_double_tap_power_gesture_desc"
-                android:persistent="false" />
+                android:summary="@string/camera_double_tap_power_gesture_desc" />
 
         <PreferenceScreen
                 android:key="screensaver"
@@ -76,20 +71,17 @@
 
         <SwitchPreference
                 android:key="lift_to_wake"
-                android:title="@string/lift_to_wake_title"
-                android:persistent="false" />
+                android:title="@string/lift_to_wake_title" />
 
         <SwitchPreference
                 android:key="doze"
                 android:title="@string/doze_title"
-                android:summary="@string/doze_summary"
-                android:persistent="false" />
+                android:summary="@string/doze_summary" />
 
         <SwitchPreference
                 android:key="tap_to_wake"
                 android:title="@string/tap_to_wake"
-                android:summary="@string/tap_to_wake_summary"
-                android:persistent="false" />
+                android:summary="@string/tap_to_wake_summary" />
 
         <PreferenceScreen
                 android:key="font_size"
@@ -104,7 +96,6 @@
 
         <DropDownPreference
                 android:key="auto_rotate"
-                android:persistent="false"
                 android:summary="%s"
                 android:title="@string/display_auto_rotate_title" />
 

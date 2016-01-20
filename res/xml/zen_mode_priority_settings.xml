@@ -24,39 +24,33 @@
         android:key="alarms"
         android:title="@string/zen_mode_alarms"
         android:enabled="false"
-        android:defaultValue="true"
-        android:persistent="false"/>
+        android:defaultValue="true"/>
 
     <!-- Reminders -->
     <SwitchPreference
         android:key="reminders"
-        android:title="@string/zen_mode_reminders"
-        android:persistent="false"/>
+        android:title="@string/zen_mode_reminders"/>
 
     <!-- Events -->
     <SwitchPreference
         android:key="events"
-        android:title="@string/zen_mode_events"
-        android:persistent="false"/>
+        android:title="@string/zen_mode_events"/>
 
     <!-- Messages -->
     <DropDownPreference
         android:key="messages"
         android:title="@string/zen_mode_messages"
-        android:summary="%s"
-        android:persistent="false" />
+        android:summary="%s" />
 
     <!-- Calls -->
     <DropDownPreference
         android:key="calls"
         android:title="@string/zen_mode_calls"
-        android:summary="%s"
-        android:persistent="false" />
+        android:summary="%s" />
 
     <!-- Repeat callers -->
     <SwitchPreference
         android:key="repeat_callers"
-        android:title="@string/zen_mode_repeat_callers"
-        android:persistent="false"/>
+        android:title="@string/zen_mode_repeat_callers"/>
 
 </PreferenceScreen>
