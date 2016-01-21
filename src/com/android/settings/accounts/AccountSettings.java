@@ -53,6 +53,7 @@ import android.view.MenuItem;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.AccessiblePreferenceCategory;
+import com.android.settings.DimmableIconPreference;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
@@ -113,7 +114,7 @@ public class AccountSettings extends SettingsPreferenceFragment
         /**
          * The preference that displays the add account button.
          */
-        public Preference addAccountPreference;
+        public DimmableIconPreference addAccountPreference;
         /**
          * The preference that displays the button to toggle work profile.
          */
@@ -324,17 +325,17 @@ public class AccountSettings extends SettingsPreferenceFragment
         if (userInfo.isEnabled()) {
             profileData.authenticatorHelper = new AuthenticatorHelper(context,
                     userInfo.getUserHandle(), this);
-            if (!mUm.hasUserRestriction(DISALLOW_MODIFY_ACCOUNTS, userInfo.getUserHandle())) {
-                profileData.addAccountPreference = newAddAccountPreference(context);
-            }
+            profileData.addAccountPreference = newAddAccountPreference(context);
+            profileData.addAccountPreference.checkRestrictionAndSetDisabled(
+                    DISALLOW_MODIFY_ACCOUNTS, userInfo.id);
         }
         mProfiles.put(userInfo.id, profileData);
         Index.getInstance(getActivity()).updateFromClassNameResource(
                 AccountSettings.class.getName(), true, true);
     }
 
-    private Preference newAddAccountPreference(Context context) {
-        Preference preference = new Preference(getPrefContext());
+    private DimmableIconPreference newAddAccountPreference(Context context) {
+        DimmableIconPreference preference = new DimmableIconPreference(getPrefContext());
         preference.setTitle(R.string.add_account_label);
         preference.setIcon(R.drawable.ic_menu_add);
         preference.setOnPreferenceClickListener(this);
@@ -714,16 +715,13 @@ public class AccountSettings extends SettingsPreferenceFragment
             for (int i = 0; i < profilesCount; i++) {
                 UserInfo userInfo = profiles.get(i);
                 if (userInfo.isEnabled()) {
-                    if (!um.hasUserRestriction(
-                            DISALLOW_MODIFY_ACCOUNTS, userInfo.getUserHandle())) {
-                        SearchIndexableRaw data = new SearchIndexableRaw(context);
-                        data = new SearchIndexableRaw(context);
-                        data.title = res.getString(R.string.add_account_label);
-                        data.screenTitle = screenTitle;
-                        result.add(data);
-                    }
+                    SearchIndexableRaw data = new SearchIndexableRaw(context);
+                    data = new SearchIndexableRaw(context);
+                    data.title = res.getString(R.string.add_account_label);
+                    data.screenTitle = screenTitle;
+                    result.add(data);
                     if (userInfo.isManagedProfile()) {
-                        SearchIndexableRaw data = new SearchIndexableRaw(context);
+                        data = new SearchIndexableRaw(context);
                         data = new SearchIndexableRaw(context);
                         data.title = res.getString(R.string.remove_managed_profile_label);
                         data.screenTitle = screenTitle;

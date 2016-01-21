@@ -56,6 +56,7 @@ import android.widget.SimpleAdapter;
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.ChooseLockGeneric;
+import com.android.settings.DimmableIconPreference;
 import com.android.settings.OwnerInfoSettings;
 import com.android.settings.R;
 import com.android.settings.SelectableEditTextPreference;
@@ -66,12 +67,16 @@ import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
+import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.drawable.CircleFramedDrawable;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 /**
  * Screen that manages the list of users on the device.
@@ -126,9 +131,9 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private PreferenceGroup mUserListCategory;
     private UserPreference mMePreference;
-    private Preference mAddUser;
+    private DimmableIconPreference mAddUser;
     private PreferenceGroup mLockScreenSettings;
-    private SwitchPreference mAddUserWhenLocked;
+    private RestrictedSwitchPreference mAddUserWhenLocked;
     private int mRemovingUserId = -1;
     private int mAddedUserId = 0;
     private boolean mAddingUser;
@@ -213,7 +218,7 @@ public class UserSettings extends SettingsPreferenceFragment
         if (mUserCaps.mIsAdmin) {
             mMePreference.setSummary(R.string.user_admin);
         }
-        mAddUser = findPreference(KEY_ADD_USER);
+        mAddUser = (DimmableIconPreference) findPreference(KEY_ADD_USER);
         // Determine if add user/profile button should be visible
         if (mUserCaps.mCanAddUser) {
             mAddUser.setOnPreferenceClickListener(this);
@@ -223,7 +228,7 @@ public class UserSettings extends SettingsPreferenceFragment
             }
         }
         mLockScreenSettings = (PreferenceGroup) findPreference("lock_screen_settings");
-        mAddUserWhenLocked = (SwitchPreference) findPreference("add_users_when_locked");
+        mAddUserWhenLocked = (RestrictedSwitchPreference) findPreference("add_users_when_locked");
         loadProfile();
         setHasOptionsMenu(true);
         IntentFilter filter = new IntentFilter(Intent.ACTION_USER_REMOVED);
@@ -745,7 +750,8 @@ public class UserSettings extends SettingsPreferenceFragment
             userPreferences.add(pref);
         }
 
-        if (!mUserCaps.mIsGuest && (mUserCaps.mCanAddGuest || findGuest() != null)) {
+        if (!mUserCaps.mIsGuest &&
+                (mUserCaps.mCanAddGuest || findGuest() != null || mUserCaps.mDisallowAddUser)) {
             // Add a virtual Guest user for guest defaults
             UserPreference pref = new UserPreference(getPrefContext(), null,
                     UserPreference.USERID_GUEST_DEFAULTS,
@@ -755,6 +761,8 @@ public class UserSettings extends SettingsPreferenceFragment
             pref.setIcon(getEncircledDefaultIcon());
             pref.setOnPreferenceClickListener(this);
             userPreferences.add(pref);
+            pref.setDisabledByAdmin(
+                    mUserCaps.mDisallowAddUser ? mUserCaps.mEnforcedAdmin : null);
         }
 
         // Sort list of users by serialNum
@@ -788,7 +796,7 @@ public class UserSettings extends SettingsPreferenceFragment
         }
 
         // Append Add user to the end of the list
-        if (mUserCaps.mCanAddUser) {
+        if (mUserCaps.mCanAddUser || mUserCaps.mDisallowAddUser) {
             boolean moreUsers = mUserManager.canAddMoreUsers();
             mAddUser.setOrder(Preference.DEFAULT_ORDER);
             preferenceScreen.addPreference(mAddUser);
@@ -798,13 +806,19 @@ public class UserSettings extends SettingsPreferenceFragment
             } else {
                 mAddUser.setSummary(null);
             }
+            if (mAddUser.isEnabled()) {
+                mAddUser.setDisabledByAdmin(
+                        mUserCaps.mDisallowAddUser ? mUserCaps.mEnforcedAdmin : null);
+            }
         }
-        if (mUserCaps.mIsAdmin && !mUserCaps.mDisallowAddUser) {
+        if (mUserCaps.mIsAdmin) {
             mLockScreenSettings.setOrder(Preference.DEFAULT_ORDER);
             preferenceScreen.addPreference(mLockScreenSettings);
             mAddUserWhenLocked.setChecked(Settings.Global.getInt(getContentResolver(),
                     Settings.Global.ADD_USERS_WHEN_LOCKED, 0) == 1);
             mAddUserWhenLocked.setOnPreferenceChangeListener(this);
+            mAddUserWhenLocked.setDisabledByAdmin(
+                    mUserCaps.mDisallowAddUser ? mUserCaps.mEnforcedAdmin : null);
         }
     }
 
@@ -998,6 +1012,7 @@ public class UserSettings extends SettingsPreferenceFragment
         boolean mIsGuest;
         boolean mCanAddGuest;
         boolean mDisallowAddUser;
+        EnforcedAdmin mEnforcedAdmin;
 
         private UserCapabilities() {}
 
@@ -1012,8 +1027,9 @@ public class UserSettings extends SettingsPreferenceFragment
             final UserInfo myUserInfo = userManager.getUserInfo(UserHandle.myUserId());
             caps.mIsGuest = myUserInfo.isGuest();
             caps.mIsAdmin = myUserInfo.isAdmin();
-            caps.mDisallowAddUser = userManager.hasUserRestriction(
-                    UserManager.DISALLOW_ADD_USER);
+            caps.mEnforcedAdmin = RestrictedLockUtils.checkIfRestrictionEnforced(context,
+                    UserManager.DISALLOW_ADD_USER, UserHandle.myUserId());
+            caps.mDisallowAddUser = (caps.mEnforcedAdmin != null);
             if (!caps.mIsAdmin || UserManager.getMaxSupportedUsers() < 2
                     || !UserManager.supportsMultipleUsers()
                     || caps.mDisallowAddUser) {
@@ -1040,6 +1056,9 @@ public class UserSettings extends SettingsPreferenceFragment
                     ", mCanAddRestrictedProfile=" + mCanAddRestrictedProfile +
                     ", mIsAdmin=" + mIsAdmin +
                     ", mIsGuest=" + mIsGuest +
+                    ", mCanAddGuest=" + mCanAddGuest +
+                    ", mDisallowAddUser=" + mDisallowAddUser +
+                    ", mEnforcedAdmin=" + mEnforcedAdmin +
                     '}';
         }
     }
@@ -1090,7 +1109,7 @@ public class UserSettings extends SettingsPreferenceFragment
                     data.screenTitle = res.getString(R.string.user_settings_title);
                     result.add(data);
 
-                    if (userCaps.mCanAddUser) {
+                    if (userCaps.mCanAddUser || userCaps.mDisallowAddUser) {
                         data = new SearchIndexableRaw(context);
                         data.title = res.getString(userCaps.mCanAddRestrictedProfile ?
                                 R.string.user_add_user_or_profile_menu

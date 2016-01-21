@@ -29,6 +29,7 @@ import android.support.v7.preference.Preference;
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settingslib.RestrictedPreference;
 
 import java.util.List;
 
@@ -59,7 +60,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
 
     private UserManager mUserManager;
     private SwitchPreference mPhonePref;
-    private Preference mRemoveUserPref;
+    private RestrictedPreference mRemoveUserPref;
 
     private UserInfo mUserInfo;
     private boolean mGuestUser;
@@ -79,7 +80,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
 
         addPreferencesFromResource(R.xml.user_details_settings);
         mPhonePref = (SwitchPreference) findPreference(KEY_ENABLE_TELEPHONY);
-        mRemoveUserPref = findPreference(KEY_REMOVE_USER);
+        mRemoveUserPref = (RestrictedPreference) findPreference(KEY_REMOVE_USER);
 
         mGuestUser = getArguments().getBoolean(EXTRA_USER_GUEST, false);
 
@@ -102,10 +103,13 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             mPhonePref.setChecked(
                     !mDefaultGuestRestrictions.getBoolean(UserManager.DISALLOW_OUTGOING_CALLS));
         }
-        if (mUserManager.hasUserRestriction(UserManager.DISALLOW_REMOVE_USER)) {
-            removePreference(KEY_REMOVE_USER);
-        }
         mPhonePref.setOnPreferenceChangeListener(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mRemoveUserPref.checkRestrictionAndSetDisabled(UserManager.DISALLOW_REMOVE_USER);
     }
 
     @Override

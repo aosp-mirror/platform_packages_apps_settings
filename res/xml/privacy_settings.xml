@@ -47,7 +47,7 @@
         android:selectable="false" />
 
     <!-- Network reset -->
-    <PreferenceScreen
+    <com.android.settingslib.RestrictedPreference
         android:key="network_reset"
         android:title="@string/reset_network_title"
         settings:keywords="@string/keywords_network_reset"

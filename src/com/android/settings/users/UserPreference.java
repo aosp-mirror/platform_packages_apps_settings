@@ -17,6 +17,7 @@
 package com.android.settings.users;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.v7.preference.Preference;
@@ -24,12 +25,18 @@ import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageView;
 
 import com.android.settings.R;
+import com.android.settingslib.RestrictedPreference;
 
 import java.util.Comparator;
 
-public class UserPreference extends Preference {
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+
+public class UserPreference extends RestrictedPreference {
+    private static final int ALPHA_ENABLED = 255;
+    private static final int ALPHA_DISABLED = 102;
 
     public static final int USERID_UNKNOWN = -10;
     public static final int USERID_GUEST_DEFAULTS = -11;
@@ -71,6 +78,14 @@ public class UserPreference extends Preference {
         mUserId = userId;
     }
 
+    private void dimIcon(boolean dimmed) {
+        Drawable icon = getIcon();
+        if (icon != null) {
+            icon.mutate().setAlpha(dimmed ? ALPHA_DISABLED : ALPHA_ENABLED);
+            setIcon(icon);
+        }
+    }
+
     @Override
     public void onBindViewHolder(PreferenceViewHolder view) {
         UserManager um = (UserManager) getContext().getSystemService(Context.USER_SERVICE);
@@ -87,7 +102,8 @@ public class UserPreference extends Preference {
                 deleteDividerView.setVisibility(View.GONE);
             }
         }
-        View manageView = view.findViewById(R.id.manage_user);
+        final boolean disabledByAdmin = isDisabledByAdmin();
+        ImageView manageView = (ImageView) view.findViewById(R.id.manage_user);
         if (manageView != null) {
             if (mSettingsClickListener != null) {
                 manageView.setOnClickListener(mSettingsClickListener);
@@ -99,8 +115,10 @@ public class UserPreference extends Preference {
                 manageView.setVisibility(View.GONE);
                 manageDividerView.setVisibility(View.GONE);
             }
+            manageView.setImageAlpha(disabledByAdmin ? ALPHA_DISABLED : ALPHA_ENABLED);
         }
         super.onBindViewHolder(view);
+        dimIcon(disabledByAdmin);
     }
 
     private int getSerialNumber() {
