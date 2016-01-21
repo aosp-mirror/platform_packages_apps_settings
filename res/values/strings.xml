@@ -4914,9 +4914,9 @@
     <!-- Button title for launching application-specific data usage settings. [CHAR LIMIT=32] -->
     <string name="data_usage_app_settings">App settings</string>
     <!-- Checkbox label that restricts background data usage of a specific application. [CHAR LIMIT=40] -->
-    <string name="data_usage_app_restrict_background">Restrict app background data</string>
-    <!-- Summary message for checkbox that restricts background data usage of a specific application. [CHAR LIMIT=64] -->
-    <string name="data_usage_app_restrict_background_summary">Disable background data on cellular networks.</string>
+    <string name="data_usage_app_restrict_background">Background data</string>
+    <!-- Summary message for checkbox that restricts background data usage of a specific application. [CHAR LIMIT=NONE] -->
+    <string name="data_usage_app_restrict_background_summary">Enable usage of cellular data in the background</string>
     <!-- Summary message for checkbox that restricts background data usage of a specific application when no networks have been limited. [CHAR LIMIT=84] -->
     <string name="data_usage_app_restrict_background_summary_disabled">To restrict background data for this app, first set a cellular data limit.</string>
     <!-- Title of dialog shown when user restricts background data usage of a specific application. [CHAR LIMIT=48] -->
@@ -6870,7 +6870,7 @@
     <string name="condition_cellular_summary">Internet is available only via Wi-Fi</string>
 
     <!-- Title of condition that background data is off [CHAR LIMIT=30] -->
-    <string name="condition_bg_data_title">Background data is off</string>
+    <string name="condition_bg_data_title">Data Saver is on</string>
 
     <!-- Summary of condition that background data is off [CHAR LIMIT=NONE] -->
     <string name="condition_bg_data_summary">Background data is only available via Wi-Fi. This may affect some apps or services when Wi-Fi is not available.</string>
@@ -6965,5 +6965,29 @@
     <!-- TODO: Actually figure out what to do with the extra apps, and update
          the code to do that -->
     <string name="data_usage_other_apps" translatable="false">Other apps included in usage</string>
+
+    <!-- Description of number of apps allowed to ignore data saver [CHAR LIMIT=NONE] -->
+    <plurals name="data_saver_unrestricted_summary">
+        <item quantity="one">1 app allowed to use unrestricted data when Data Saver is on</item>
+        <item quantity="other"><xliff:g id="count" example="10">%1$d</xliff:g> apps allowed to use unrestricted data when Data Saver is on</item>
+    </plurals>
+
+    <!-- Name of Data Saver screens [CHAR LIMIT=30] -->
+    <string name="data_saver_title">Data Saver</string>
+
+    <!-- Button that leads to list of apps with unrestricted data access [CHAR LIMIT=60] -->
+    <string name="unrestricted_data_saver">Unrestricted data access</string>
+
+    <!-- Summary for the data saver feature being on [CHAR LIMIT=NONE] -->
+    <string name="data_saver_on">On</string>
+
+    <!-- Summary for the data saver feature being off [CHAR LIMIT=NONE] -->
+    <string name="data_saver_off">Off</string>
+
+    <!-- Title for switch to allow app unrestricted data usage [CHAR LIMIT=30] -->
+    <string name="unrestricted_app_title">Unrestricted data usage</string>
+
+    <!-- Title for switch to allow app unrestricted data usage [CHAR LIMIT=30] -->
+    <string name="unrestricted_app_summary">Allow unrestricted data access when Data Saver is on</string>
 
 </resources>

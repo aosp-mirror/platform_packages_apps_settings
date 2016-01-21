@@ -13,17 +13,15 @@
  */
 package com.android.settings.datausage;
 
-import com.android.settings.Utils;
-import com.android.settingslib.net.ChartData;
-
 import android.content.Context;
 import android.net.NetworkPolicy;
 import android.net.NetworkStatsHistory;
 import android.text.format.DateUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-
+import com.android.settings.R;
+import com.android.settings.Utils;
+import com.android.settingslib.net.ChartData;
 import libcore.util.Objects;
 
 import static android.net.NetworkPolicyManager.computeLastCycleBoundary;
@@ -31,12 +29,13 @@ import static android.net.NetworkPolicyManager.computeNextCycleBoundary;
 
 public class CycleAdapter extends ArrayAdapter<CycleAdapter.CycleItem> {
 
-    private final Spinner mSpinner;
+    private final SpinnerInterface mSpinner;
     private final AdapterView.OnItemSelectedListener mListener;
 
-    public CycleAdapter(Context context, Spinner spinner,
-            AdapterView.OnItemSelectedListener listener) {
-        super(context, com.android.settings.R.layout.filter_spinner_item);
+    public CycleAdapter(Context context, SpinnerInterface spinner,
+            AdapterView.OnItemSelectedListener listener, boolean isHeader) {
+        super(context, isHeader ? R.layout.filter_spinner_item
+                : R.layout.data_usage_cycle_item);
         setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mSpinner = spinner;
         mListener = listener;
@@ -72,7 +71,7 @@ public class CycleAdapter extends ArrayAdapter<CycleAdapter.CycleItem> {
                 mSpinner.getSelectedItem();
         clear();
 
-        final Context context = mSpinner.getContext();
+        final Context context = getContext();
         NetworkStatsHistory.Entry entry = null;
 
         long historyStart = Long.MAX_VALUE;
@@ -141,7 +140,7 @@ public class CycleAdapter extends ArrayAdapter<CycleAdapter.CycleItem> {
             // user-defined inspection region.
             final CycleAdapter.CycleItem selectedItem = getItem(position);
             if (!Objects.equal(selectedItem, previousItem)) {
-                mListener.onItemSelected(mSpinner, null, position, 0);
+                mListener.onItemSelected(null, null, position, 0);
                 return false;
             }
         }
@@ -184,5 +183,12 @@ public class CycleAdapter extends ArrayAdapter<CycleAdapter.CycleItem> {
         public int compareTo(CycleItem another) {
             return Long.compare(start, another.start);
         }
+    }
+
+    public interface SpinnerInterface {
+        void setAdapter(CycleAdapter cycleAdapter);
+        void setOnItemSelectedListener(AdapterView.OnItemSelectedListener listener);
+        Object getSelectedItem();
+        void setSelection(int position);
     }
 }
