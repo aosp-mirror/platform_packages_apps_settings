@@ -77,6 +77,9 @@ public class DataUsageSummary extends DataUsageBase implements Indexable {
         addPreferencesFromResource(R.xml.data_usage);
 
         int defaultSubId = getDefaultSubscriptionId(getContext());
+        if (defaultSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            hasMobileData = false;
+        }
         mDefaultTemplate = getDefaultTemplate(getContext(), defaultSubId);
         if (hasMobileData) {
             mLimitPreference = findPreference(KEY_LIMIT_SUMMARY);
@@ -279,7 +282,7 @@ public class DataUsageSummary extends DataUsageBase implements Indexable {
     }
 
     public static NetworkTemplate getDefaultTemplate(Context context, int defaultSubId) {
-        if (hasMobileData(context)) {
+        if (hasMobileData(context) && defaultSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             TelephonyManager telephonyManager = TelephonyManager.from(context);
             NetworkTemplate mobileAll = NetworkTemplate.buildTemplateMobileAll(
                     telephonyManager.getSubscriberId(defaultSubId));
