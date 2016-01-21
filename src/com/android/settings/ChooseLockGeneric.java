@@ -316,10 +316,11 @@ public class ChooseLockGeneric extends SettingsActivity {
         }
 
         private String getKeyForCurrent() {
-            if (mLockPatternUtils.isLockScreenDisabled(mUserId)) {
+            final int credentialOwner = mUserManager.getCredentialOwnerProfile(mUserId);
+            if (mLockPatternUtils.isLockScreenDisabled(credentialOwner)) {
                 return KEY_UNLOCK_SET_OFF;
             }
-            switch (mLockPatternUtils.getKeyguardStoredPasswordQuality(mUserId)) {
+            switch (mLockPatternUtils.getKeyguardStoredPasswordQuality(credentialOwner)) {
                 case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
                     return KEY_UNLOCK_SET_PATTERN;
                 case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
@@ -521,6 +522,7 @@ public class ChooseLockGeneric extends SettingsActivity {
             }
 
             if (quality == DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED) {
+                mLockPatternUtils.setSeparateProfileChallengeEnabled(mUserId, true);
                 mChooseLockSettingsHelper.utils().clearLock(mUserId);
                 mChooseLockSettingsHelper.utils().setLockScreenDisabled(disabled, mUserId);
                 mLockPatternUtils.setSeparateProfileChallengeEnabled(mUserId, false);
