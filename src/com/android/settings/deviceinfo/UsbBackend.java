@@ -134,13 +134,16 @@ public class UsbBackend {
                     ? UsbPort.POWER_ROLE_SOURCE : UsbPort.POWER_ROLE_SINK;
     }
 
-    public boolean isModeSupported(int mode) {
+    public boolean isModeDisallowedByAdmin(int mode) {
         if (mRestricted && (mode & MODE_DATA_MASK) != MODE_DATA_NONE
                 && (mode & MODE_DATA_MASK) != MODE_DATA_MIDI) {
             // No USB data modes are supported.
-            return false;
+            return true;
         }
+        return false;
+    }
 
+    public boolean isModeSupported(int mode) {
         if (!mMidi && (mode & MODE_DATA_MASK) == MODE_DATA_MIDI) {
             return false;
         }
