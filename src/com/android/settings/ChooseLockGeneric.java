@@ -316,7 +316,8 @@ public class ChooseLockGeneric extends SettingsActivity {
         }
 
         private String getKeyForCurrent() {
-            final int credentialOwner = mUserManager.getCredentialOwnerProfile(mUserId);
+            final int credentialOwner = UserManager.get(getContext())
+                    .getCredentialOwnerProfile(mUserId);
             if (mLockPatternUtils.isLockScreenDisabled(credentialOwner)) {
                 return KEY_UNLOCK_SET_OFF;
             }
