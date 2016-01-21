@@ -51,17 +51,7 @@
         </activity>
     </application>
 
-    <instrumentation android:name="android.test.InstrumentationTestRunner"
-        android:targetPackage="com.android.settings"
-        android:label="Settings App Tests">
-    </instrumentation>
-
-    <instrumentation android:name="SettingsLaunchPerformance"
-        android:targetPackage="com.android.settings"
-        android:label="Settings Launch Performance">
-    </instrumentation>
-
-    <instrumentation android:name="android.test.InstrumentationTestRunner"
+    <instrumentation android:name="android.support.test.runner.AndroidJUnitRunner"
         android:targetPackage="com.android.settings"
         android:label="Settings Test Cases">
     </instrumentation>
