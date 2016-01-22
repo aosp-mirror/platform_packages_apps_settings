@@ -17,10 +17,16 @@
 package com.android.settings;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.security.Credentials;
 import android.security.KeyStore;
 import android.view.LayoutInflater;
@@ -29,7 +35,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -56,7 +61,7 @@ public class UserCredentialsSettings extends InstrumentedFragment implements OnI
     @Override
     public void onResume() {
         super.onResume();
-        new AliasLoader().execute();
+        refreshItems();
     }
 
     @Override
@@ -74,26 +79,62 @@ public class UserCredentialsSettings extends InstrumentedFragment implements OnI
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         final Credential item = (Credential) parent.getItemAtPosition(position);
+        CredentialDialogFragment.show(this, item);
+    }
 
-        View root = getActivity().getLayoutInflater()
-                .inflate(R.layout.user_credential_dialog, null);
-        ViewGroup infoContainer = (ViewGroup) root.findViewById(R.id.credential_container);
-        infoContainer.addView(parent.getAdapter().getView(position, null, null));
+    protected void refreshItems() {
+        if (isAdded()) {
+            new AliasLoader().execute();
+        }
+    }
 
-        new AlertDialog.Builder(getActivity())
-                .setView(root)
-                .setTitle(R.string.user_credential_title)
-                .setPositiveButton(R.string.done, null)
-                .setNegativeButton(R.string.trusted_credentials_remove_label,
-                        new DialogInterface.OnClickListener() {
-                            @Override public void onClick(DialogInterface dialog, int id) {
-                                final KeyStore ks = KeyStore.getInstance();
-                                Credentials.deleteAllTypesForAlias(ks, item.alias);
-                                new AliasLoader().execute();
-                                dialog.dismiss();
-                            }
-                        })
-                .show();
+    public static class CredentialDialogFragment extends DialogFragment {
+        private static final String TAG = "CredentialDialogFragment";
+        private static final String ARG_CREDENTIAL = "credential";
+
+        public static void show(Fragment target, Credential item) {
+            final Bundle args = new Bundle();
+            args.putParcelable(ARG_CREDENTIAL, item);
+
+            final CredentialDialogFragment frag = new CredentialDialogFragment();
+            frag.setTargetFragment(target, /* requestCode */ -1);
+            frag.setArguments(args);
+            frag.show(target.getFragmentManager(), TAG);
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            final Credential item = (Credential) getArguments().getParcelable(ARG_CREDENTIAL);
+            View root = getActivity().getLayoutInflater()
+                    .inflate(R.layout.user_credential_dialog, null);
+            ViewGroup infoContainer = (ViewGroup) root.findViewById(R.id.credential_container);
+            View view = new CredentialAdapter(getActivity(), R.layout.user_credential,
+                    new Credential[] {item}).getView(0, null, null);
+            infoContainer.addView(view);
+
+            return new AlertDialog.Builder(getActivity())
+                    .setView(root)
+                    .setTitle(R.string.user_credential_title)
+                    .setPositiveButton(R.string.done, null)
+                    .setNegativeButton(R.string.trusted_credentials_remove_label,
+                            new DialogInterface.OnClickListener() {
+                                @Override public void onClick(DialogInterface dialog, int id) {
+                                    final KeyStore ks = KeyStore.getInstance();
+                                    Credentials.deleteAllTypesForAlias(ks, item.alias);
+                                    dialog.dismiss();
+                                }
+                            })
+                    .create();
+        }
+
+        @Override
+        public void onDismiss(DialogInterface dialog) {
+            final Fragment target = getTargetFragment();
+            if (target instanceof UserCredentialsSettings) {
+                ((UserCredentialsSettings) target).refreshItems();
+            }
+            super.onDismiss(dialog);
+        }
     }
 
     /**
@@ -101,9 +142,9 @@ public class UserCredentialsSettings extends InstrumentedFragment implements OnI
      * The credentials are stored in a {@link CredentialAdapter} attached to the main
      * {@link ListView} in the fragment.
      */
-    private class AliasLoader extends AsyncTask<Void, Void, ListAdapter> {
+    private class AliasLoader extends AsyncTask<Void, Void, SortedMap<String, Credential>> {
         @Override
-        protected ListAdapter doInBackground(Void... params) {
+        protected SortedMap<String, Credential> doInBackground(Void... params) {
             // Create a list of names for credential sets, ordered by name.
             SortedMap<String, Credential> credentials = new TreeMap<>();
             KeyStore keyStore = KeyStore.getInstance();
@@ -116,15 +157,14 @@ public class UserCredentialsSettings extends InstrumentedFragment implements OnI
                     c.storedTypes.add(type);
                 }
             }
-
-            // Flatten to array so that the list can be presented via ArrayAdapter.
-            Credential[] results = credentials.values().toArray(new Credential[0]);
-            return new CredentialAdapter(getActivity(), R.layout.user_credential, results);
+            return credentials;
         }
 
         @Override
-        protected void onPostExecute(ListAdapter credentials) {
-            mListView.setAdapter(credentials);
+        protected void onPostExecute(SortedMap<String, Credential> credentials) {
+            // Convert the results to an array and present them using an ArrayAdapter.
+            mListView.setAdapter(new CredentialAdapter(getContext(), R.layout.user_credential,
+                    credentials.values().toArray(new Credential[0])));
         }
     }
 
@@ -154,7 +194,7 @@ public class UserCredentialsSettings extends InstrumentedFragment implements OnI
         }
     }
 
-    private static class Credential {
+    private static class Credential implements Parcelable {
         private static enum Type {
             CA_CERTIFICATE (Credentials.CA_CERTIFICATE),
             USER_CERTIFICATE (Credentials.USER_CERTIFICATE),
@@ -183,10 +223,46 @@ public class UserCredentialsSettings extends InstrumentedFragment implements OnI
          *   <li>{@link Credentials.USER_SECRET_KEY}</li>
          * </ul>
          */
-        final Set<Type> storedTypes = EnumSet.noneOf(Type.class);
+        final EnumSet<Type> storedTypes = EnumSet.noneOf(Type.class);
 
         Credential(final String alias) {
             this.alias = alias;
         }
+
+        Credential(Parcel in) {
+            this(in.readString());
+
+            long typeBits = in.readLong();
+            for (Type i : Type.values()) {
+                if ((typeBits & (1L << i.ordinal())) != 0L) {
+                    storedTypes.add(i);
+                }
+            }
+        }
+
+        public void writeToParcel(Parcel out, int flags) {
+            out.writeString(alias);
+
+            long typeBits = 0;
+            for (Type i : storedTypes) {
+                typeBits |= 1L << i.ordinal();
+            }
+            out.writeLong(typeBits);
+        }
+
+        public int describeContents() {
+            return 0;
+        }
+
+        public static final Parcelable.Creator<Credential> CREATOR
+                = new Parcelable.Creator<Credential>() {
+            public Credential createFromParcel(Parcel in) {
+                return new Credential(in);
+            }
+
+            public Credential[] newArray(int size) {
+                return new Credential[size];
+            }
+        };
     }
 }
