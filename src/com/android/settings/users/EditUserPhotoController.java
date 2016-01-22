@@ -32,6 +32,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.UserManager;
 import android.provider.ContactsContract.DisplayPhoto;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
@@ -95,6 +96,10 @@ public class EditUserPhotoController {
                 showUpdatePhotoPopup();
             }
         });
+        final UserManager um = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
+        if (um.hasUserRestriction(UserManager.DISALLOW_SET_USER_ICON)) {
+            mImageView.setEnabled(false);
+        }
         mNewUserPhotoBitmap = bitmap;
         mNewUserPhotoDrawable = drawable;
     }
