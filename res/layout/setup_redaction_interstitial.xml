@@ -51,14 +51,14 @@
             android:layout_marginEnd="?android:attr/listPreferredItemPaddingEnd"
             android:checkedButton="@+id/redact_sensitive">
 
-            <RadioButton
+            <com.android.settings.RestrictedRadioButton
                 android:id="@+id/show_all"
                 style="@style/SuwRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/lock_screen_notifications_summary_show" />
 
-            <RadioButton
+            <com.android.settings.RestrictedRadioButton
                 android:id="@+id/redact_sensitive"
                 style="@style/SuwRadioButton"
                 android:layout_width="wrap_content"
