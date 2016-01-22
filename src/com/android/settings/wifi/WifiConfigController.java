@@ -112,9 +112,13 @@ public class WifiConfigController
     private TextView mPasswordView;
 
     private String mUnspecifiedCertString;
-    private static final int UNSPECIFIED_CERT_INDEX = 0;
     private String mMultipleCertSetString;
-    private static final int MULTIPLE_CERT_SET_INDEX = 1;
+    private static final int UNSPECIFIED_CERT_INDEX = 0;
+    private static final int NO_CERT_INDEX = 1;
+    private static final int MULTIPLE_CERT_SET_INDEX = 2;
+
+    private String mDoNotProvideEapUserCertString;
+    private String mDoNotValidateEapServerString;
 
     private Spinner mSecuritySpinner;
     private Spinner mEapMethodSpinner;
@@ -180,6 +184,11 @@ public class WifiConfigController
 
         mUnspecifiedCertString = mContext.getString(R.string.wifi_unspecified);
         mMultipleCertSetString = mContext.getString(R.string.wifi_multiple_cert_added);
+        mDoNotProvideEapUserCertString =
+            mContext.getString(R.string.wifi_do_not_provide_eap_user_cert);
+        mDoNotValidateEapServerString =
+            mContext.getString(R.string.wifi_do_not_validate_eap_server);
+
         mIpSettingsSpinner = (Spinner) mView.findViewById(R.id.ip_settings);
         mIpSettingsSpinner.setOnItemSelectedListener(this);
         mProxySettingsSpinner = (Spinner) mView.findViewById(R.id.proxy_settings);
@@ -470,7 +479,10 @@ public class WifiConfigController
                         break;
                 }
                 String caCert = (String) mEapCaCertSpinner.getSelectedItem();
-                if (caCert.equals(mUnspecifiedCertString)) {
+                if (caCert.equals(mUnspecifiedCertString)
+                        || caCert.equals(mDoNotValidateEapServerString)) {
+                    // Note: |caCert| should not be able to take the value |unspecifiedCert|,
+                    // since we prevent such configurations from being saved.
                     config.enterpriseConfig.setCaCertificateAliases(null);
                 } else if (caCert.equals(mMultipleCertSetString)) {
                     if (mAccessPoint != null) {
@@ -478,14 +490,20 @@ public class WifiConfigController
                             Log.e(TAG, "Multiple certs can only be set when editing saved network");
                         }
                         config.enterpriseConfig.setCaCertificateAliases(
-                                mAccessPoint.getConfig().enterpriseConfig.getCaCertificateAliases());
+                                mAccessPoint.getConfig().enterpriseConfig
+                                        .getCaCertificateAliases());
                     }
                 } else {
                     config.enterpriseConfig.setCaCertificateAliases(new String[] {caCert});
                 }
 
                 String clientCert = (String) mEapUserCertSpinner.getSelectedItem();
-                if (clientCert.equals(mUnspecifiedCertString)) clientCert = "";
+                if (clientCert.equals(mUnspecifiedCertString)
+                        || clientCert.equals(mDoNotProvideEapUserCertString)) {
+                    // Note: |clientCert| should not be able to take the value |unspecifiedCert|,
+                    // since we prevent such configurations from being saved.
+                    clientCert = "";
+                }
                 config.enterpriseConfig.setClientCertificateAlias(clientCert);
                 if (eapMethod == Eap.SIM || eapMethod == Eap.AKA || eapMethod == Eap.AKA_PRIME) {
                     config.enterpriseConfig.setIdentity("");
@@ -693,8 +711,10 @@ public class WifiConfigController
             mEapIdentityView = (TextView) mView.findViewById(R.id.identity);
             mEapAnonymousView = (TextView) mView.findViewById(R.id.anonymous);
 
-            loadCertificates(mEapCaCertSpinner, Credentials.CA_CERTIFICATE, false);
-            loadCertificates(mEapUserCertSpinner, Credentials.USER_PRIVATE_KEY, false);
+            loadCertificates(mEapCaCertSpinner, Credentials.CA_CERTIFICATE, false,
+                    mDoNotValidateEapServerString);
+            loadCertificates(mEapUserCertSpinner, Credentials.USER_PRIVATE_KEY, false,
+                    mDoNotProvideEapUserCertString);
 
             // Modifying an existing network
             if (mAccessPoint != null && mAccessPoint.isSaved()) {
@@ -732,7 +752,7 @@ public class WifiConfigController
                 } else {
                     // Reload the cert spinner with an extra "multiple certificates added" item
                     loadCertificates(mEapCaCertSpinner,
-                            Credentials.CA_CERTIFICATE, true);
+                            Credentials.CA_CERTIFICATE, true, mDoNotValidateEapServerString);
                     mEapCaCertSpinner.setSelection(MULTIPLE_CERT_SET_INDEX);
                 }
                 setSelection(mEapUserCertSpinner, enterpriseConfig.getClientCertificateAlias());
@@ -966,13 +986,15 @@ public class WifiConfigController
         }
     }
 
-    private void loadCertificates(Spinner spinner, String prefix, boolean showMultipleCerts) {
+    private void loadCertificates(
+            Spinner spinner, String prefix, boolean showMultipleCerts, String noCertificateString) {
         final Context context = mConfigUi.getContext();
 
         ArrayList<String> certs = new ArrayList<String>();
-        certs.add(mUnspecifiedCertString);
+        certs.add(UNSPECIFIED_CERT_INDEX, mUnspecifiedCertString);
+        certs.add(NO_CERT_INDEX, noCertificateString);
         if (showMultipleCerts) {
-            certs.add(mMultipleCertSetString);
+            certs.add(MULTIPLE_CERT_SET_INDEX, mMultipleCertSetString);
         }
         certs.addAll(
                 Arrays.asList(KeyStore.getInstance().list(prefix, android.os.Process.WIFI_UID)));
