@@ -47,6 +47,9 @@ public class ZenModeSettings extends ZenModeSettingsBase {
     @Override
     public void onResume() {
         super.onResume();
+        if (isUiRestricted()) {
+            return;
+        }
         updateControls();
     }
 

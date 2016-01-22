@@ -133,6 +133,9 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase
     @Override
     public void onResume() {
         super.onResume();
+        if (isUiRestricted()) {
+            return;
+        }
         updateControls();
     }
 
