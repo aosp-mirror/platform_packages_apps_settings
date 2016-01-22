@@ -48,7 +48,8 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.org.bouncycastle.asn1.ASN1InputStream;
 import com.android.org.bouncycastle.asn1.pkcs.PrivateKeyInfo;
 
-import org.apache.harmony.security.utils.AlgNameMapper;
+import sun.security.util.ObjectIdentifier;
+import sun.security.x509.AlgorithmId;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -217,8 +218,8 @@ public final class CredentialStorage extends Activity {
         try {
             ASN1InputStream bIn = new ASN1InputStream(new ByteArrayInputStream(keyData));
             PrivateKeyInfo pki = PrivateKeyInfo.getInstance(bIn.readObject());
-            String algId = pki.getAlgorithmId().getAlgorithm().getId();
-            String algName = AlgNameMapper.map2AlgName(algId);
+            String algOid = pki.getAlgorithmId().getAlgorithm().getId();
+            String algName = new AlgorithmId(new ObjectIdentifier(algOid)).getName();
 
             return KeyChain.isBoundKeyAlgorithm(algName);
         } catch (IOException e) {
