@@ -64,8 +64,11 @@ import com.android.settings.HelpUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.SubSettings;
+import com.android.settingslib.RestrictedLockUtils;
 
 import java.util.List;
+
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 /**
  * Settings screen for fingerprints
@@ -291,19 +294,14 @@ public class FingerprintSettings extends SubSettings {
             super.onViewCreated(view, savedInstanceState);
             TextView v = (TextView) LayoutInflater.from(view.getContext()).inflate(
                     R.layout.fingerprint_settings_footer, null);
-            v.setText(LearnMoreSpan.linkify(getText(isFingerprintDisabled()
+            EnforcedAdmin admin = RestrictedLockUtils.checkIfKeyguardFeaturesDisabled(
+                    getActivity(), DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT);
+            v.setText(LearnMoreSpan.linkify(getText(admin != null
                             ? R.string.security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled
                             : R.string.security_settings_fingerprint_enroll_disclaimer),
-                    getString(getHelpResource())));
+                    getString(getHelpResource()), admin));
             v.setMovementMethod(new LinkMovementMethod());
             setFooterView(v);
-        }
-
-        private boolean isFingerprintDisabled() {
-            final DevicePolicyManager dpm =
-                    (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
-            return dpm != null && (dpm.getKeyguardDisabledFeatures(null)
-                    & DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT) != 0;
         }
 
         protected void removeFingerprintPreference(int fingerprintId) {
@@ -332,6 +330,7 @@ public class FingerprintSettings extends SubSettings {
             addPreferencesFromResource(R.xml.security_settings_fingerprint);
             root = getPreferenceScreen();
             addFingerprintItemPreferences(root);
+            setPreferenceScreen(root);
             return root;
         }
 
@@ -729,19 +728,33 @@ public class FingerprintSettings extends SubSettings {
         private static final Typeface TYPEFACE_MEDIUM =
                 Typeface.create("sans-serif-medium", Typeface.NORMAL);
 
+        private static final String ANNOTATION_URL = "url";
+        private static final String ANNOTATION_ADMIN_DETAILS = "admin_details";
+
+        private EnforcedAdmin mEnforcedAdmin = null;
+
         private LearnMoreSpan(String url) {
             super(url);
+        }
+
+        private LearnMoreSpan(EnforcedAdmin admin) {
+            super((String) null);
+            mEnforcedAdmin = admin;
         }
 
         @Override
         public void onClick(View widget) {
             Context ctx = widget.getContext();
-            Intent intent = HelpUtils.getHelpIntent(ctx, getURL(), ctx.getClass().getName());
-            try {
-                ((Activity) ctx).startActivityForResult(intent, 0);
-            } catch (ActivityNotFoundException e) {
-                Log.w(FingerprintSettingsFragment.TAG,
-                        "Actvity was not found for intent, " + intent.toString());
+            if (mEnforcedAdmin != null) {
+                RestrictedLockUtils.sendShowAdminSupportDetailsIntent(ctx, mEnforcedAdmin);
+            } else {
+                Intent intent = HelpUtils.getHelpIntent(ctx, getURL(), ctx.getClass().getName());
+                try {
+                    widget.startActivityForResult(intent, 0);
+                } catch (ActivityNotFoundException e) {
+                    Log.w(FingerprintSettingsFragment.TAG,
+                            "Actvity was not found for intent, " + intent.toString());
+                }
             }
         }
 
@@ -752,15 +765,23 @@ public class FingerprintSettings extends SubSettings {
             ds.setTypeface(TYPEFACE_MEDIUM);
         }
 
-        public static CharSequence linkify(CharSequence rawText, String uri) {
+        public static CharSequence linkify(CharSequence rawText, String uri, EnforcedAdmin admin) {
             SpannableString msg = new SpannableString(rawText);
             Annotation[] spans = msg.getSpans(0, msg.length(), Annotation.class);
             SpannableStringBuilder builder = new SpannableStringBuilder(msg);
             for (Annotation annotation : spans) {
+                final String key = annotation.getValue();
                 int start = msg.getSpanStart(annotation);
                 int end = msg.getSpanEnd(annotation);
-                LearnMoreSpan link = new LearnMoreSpan(uri);
-                builder.setSpan(link, start, end, msg.getSpanFlags(link));
+                LearnMoreSpan link = null;
+                if (ANNOTATION_URL.equals(key)) {
+                    link = new LearnMoreSpan(uri);
+                } else if (ANNOTATION_ADMIN_DETAILS.equals(key)) {
+                    link = new LearnMoreSpan(admin);
+                }
+                if (link != null) {
+                    builder.setSpan(link, start, end, msg.getSpanFlags(link));
+                }
             }
             return builder;
         }

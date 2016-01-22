@@ -110,7 +110,7 @@ public class RedactionInterstitial extends SettingsActivity {
 
         private void checkNotificationFeaturesAndSetDisabled(RestrictedRadioButton button,
                 int keyguardNotifications) {
-            EnforcedAdmin admin = RestrictedLockUtils.checkIfKeyguardNotificationFeaturesDisabled(
+            EnforcedAdmin admin = RestrictedLockUtils.checkIfKeyguardFeaturesDisabled(
                     getActivity(), keyguardNotifications);
             button.setDisabledByAdmin(admin);
         }

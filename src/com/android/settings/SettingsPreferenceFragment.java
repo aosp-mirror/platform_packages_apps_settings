@@ -62,6 +62,9 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
 
     private String mHelpUri;
 
+    private static final int ORDER_FIRST = -1;
+    private static final int ORDER_LAST = Integer.MAX_VALUE -1;
+
     // Cache the content resolver for async callbacks
     private ContentResolver mContentResolver;
 
@@ -235,7 +238,7 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
 
     protected void setHeaderView(int resource) {
         mHeader = new LayoutPreference(getPrefContext(), resource);
-        mHeader.setOrder(-1);
+        mHeader.setOrder(ORDER_FIRST);
         if (getPreferenceScreen() != null) {
             getPreferenceScreen().addPreference(mHeader);
         }
@@ -255,7 +258,7 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
         }
         if (footer != null) {
             mFooter = footer;
-            mFooter.setOrder(Integer.MAX_VALUE);
+            mFooter.setOrder(ORDER_LAST);
             if (getPreferenceScreen() != null) {
                 getPreferenceScreen().addPreference(mFooter);
             }

@@ -72,6 +72,10 @@ public class LayoutPreference extends Preference {
     public void onBindViewHolder(PreferenceViewHolder view) {
         FrameLayout layout = (FrameLayout) view.itemView;
         layout.removeAllViews();
+        ViewGroup parent = (ViewGroup) mRootView.getParent();
+        if (parent != null) {
+            parent.removeView(mRootView);
+        }
         layout.addView(mRootView);
     }
 
