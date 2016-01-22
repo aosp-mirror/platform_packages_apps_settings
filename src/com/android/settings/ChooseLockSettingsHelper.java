@@ -90,7 +90,7 @@ public final class ChooseLockSettingsHelper {
     boolean launchConfirmationActivity(int request, CharSequence title, boolean returnCredentials,
             int userId) {
         return launchConfirmationActivity(request, title, null, null,
-                returnCredentials, false, false, 0, Utils.getSameOwnerUserId(mActivity, userId));
+                returnCredentials, false, false, 0, Utils.enforceSameOwner(mActivity, userId));
     }
 
     /**
@@ -110,7 +110,7 @@ public final class ChooseLockSettingsHelper {
             @Nullable CharSequence header, @Nullable CharSequence description,
             boolean returnCredentials, boolean external) {
         return launchConfirmationActivity(request, title, header, description,
-                returnCredentials, external, false, 0, Utils.getEffectiveUserId(mActivity));
+                returnCredentials, external, false, 0, Utils.getCredentialOwnerUserId(mActivity));
     }
 
     /**
@@ -131,7 +131,7 @@ public final class ChooseLockSettingsHelper {
             @Nullable CharSequence header, @Nullable CharSequence description,
             boolean returnCredentials, boolean external, int userId) {
         return launchConfirmationActivity(request, title, header, description,
-                returnCredentials, external, false, 0, Utils.getSameOwnerUserId(mActivity, userId));
+                returnCredentials, external, false, 0, Utils.enforceSameOwner(mActivity, userId));
     }
 
     /**
@@ -147,7 +147,7 @@ public final class ChooseLockSettingsHelper {
             @Nullable CharSequence header, @Nullable CharSequence description,
             long challenge) {
         return launchConfirmationActivity(request, title, header, description,
-                false, false, true, challenge, Utils.getEffectiveUserId(mActivity));
+                false, false, true, challenge, Utils.getCredentialOwnerUserId(mActivity));
     }
 
     private boolean launchConfirmationActivity(int request, @Nullable CharSequence title,

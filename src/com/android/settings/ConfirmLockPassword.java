@@ -111,7 +111,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             mLockPatternUtils = new LockPatternUtils(getActivity());
             Intent intent = getActivity().getIntent();
             // Only take this argument into account if it belongs to the current profile.
-            mEffectiveUserId = Utils.getSameOwnerUserId(getActivity(), intent.getExtras());
+            mEffectiveUserId = Utils.getUserIdFromBundle(getActivity(), intent.getExtras());
         }
 
         @Override

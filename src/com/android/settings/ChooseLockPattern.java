@@ -370,7 +370,7 @@ public class ChooseLockPattern extends SettingsActivity {
             }
             Intent intent = getActivity().getIntent();
             // Only take this argument into account if it belongs to the current profile.
-            mUserId = Utils.getSameOwnerUserId(getActivity(), intent.getExtras());
+            mUserId = Utils.getUserIdFromBundle(getActivity(), intent.getExtras());
         }
 
         @Override

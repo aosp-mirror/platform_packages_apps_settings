@@ -24,10 +24,16 @@ import android.app.IActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.graphics.Point;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.RemoteException;
+import android.os.UserManager;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -80,6 +86,14 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
                 getActivity().finish();
             }
         });
+        int credentialOwnerUserId = Utils.getCredentialOwnerUserId(
+                getActivity(),
+                Utils.getUserIdFromBundle(
+                        getActivity(),
+                        getActivity().getIntent().getExtras()));
+        if (Utils.isManagedProfile(UserManager.get(getActivity()), credentialOwnerUserId)) {
+            setWorkChallengeBackground(view);
+        }
     }
 
     @Override
@@ -153,6 +167,22 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
             } catch (IntentSender.SendIntentException e) {
                 /* ignore */
             }
+        }
+    }
+
+    private void setWorkChallengeBackground(View baseView) {
+        ImageView imageView = (ImageView) baseView.findViewById(R.id.background_image);
+        if (imageView != null) {
+            Drawable image = getResources().getDrawable(R.drawable.work_challenge_background);
+            image.setColorFilter(
+                    getResources().getColor(R.color.confirm_device_credential_transparent_black),
+                    PorterDuff.Mode.DARKEN);
+            imageView.setImageDrawable(image);
+            Point screenSize = new Point();
+            getActivity().getWindowManager().getDefaultDisplay().getSize(screenSize);
+            imageView.setLayoutParams(new FrameLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    screenSize.y));
         }
     }
 }

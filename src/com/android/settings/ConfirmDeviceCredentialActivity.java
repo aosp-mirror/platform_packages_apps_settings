@@ -64,12 +64,12 @@ public class ConfirmDeviceCredentialActivity extends Activity {
         Intent intent = getIntent();
         String title = intent.getStringExtra(KeyguardManager.EXTRA_TITLE);
         String details = intent.getStringExtra(KeyguardManager.EXTRA_DESCRIPTION);
-        int userId = Utils.getEffectiveUserId(this);
+        int userId = Utils.getCredentialOwnerUserId(this);
         if (isInternalActivity()) {
-            int givenUserId = intent.getIntExtra(Intent.EXTRA_USER_ID, userId);
-            UserManager userManager = UserManager.get(this);
-            if (userManager.isSameProfileGroup(givenUserId, userId)) {
-                userId = givenUserId;
+            try {
+                userId = Utils.getUserIdFromBundle(this, intent.getExtras());
+            } catch (SecurityException se) {
+                Log.e(TAG, "Invalid intent extra", se);
             }
         }
         ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(this);
