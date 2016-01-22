@@ -58,7 +58,7 @@ public class AppHeader {
     }
 
     public static View setupHeaderView(final Activity activity, Drawable icon, CharSequence label,
-            final String pkgName, final int uid, boolean includeAppInfo, int tintColorRes,
+            final String pkgName, final int uid, final boolean includeAppInfo, int tintColorRes,
             View bar) {
         final ImageView appIcon = (ImageView) bar.findViewById(R.id.app_icon);
         appIcon.setImageDrawable(icon);
@@ -69,19 +69,20 @@ public class AppHeader {
         final TextView appName = (TextView) bar.findViewById(R.id.app_name);
         appName.setText(label);
 
-        final View appSettings = bar.findViewById(R.id.app_settings);
-        if (includeAppInfo && pkgName != null && !pkgName.equals(Utils.OS_PKG)) {
-            appSettings.setClickable(true);
-            appSettings.setOnClickListener(new OnClickListener() {
+        if (pkgName != null && !pkgName.equals(Utils.OS_PKG)) {
+            bar.setClickable(true);
+            bar.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    AppInfoBase.startAppInfoFragment(InstalledAppDetails.class,
-                            R.string.application_info_label, pkgName, uid, activity,
-                            INSTALLED_APP_DETAILS);
+                    if (includeAppInfo) {
+                        AppInfoBase.startAppInfoFragment(InstalledAppDetails.class,
+                                R.string.application_info_label, pkgName, uid, activity,
+                                INSTALLED_APP_DETAILS);
+                    } else {
+                        activity.finish();
+                    }
                 }
             });
-        } else {
-            appSettings.setVisibility(View.GONE);
         }
         return bar;
     }
