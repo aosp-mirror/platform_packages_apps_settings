@@ -581,28 +581,62 @@ public class ChooseLockGeneric extends SettingsActivity {
             return R.string.help_url_choose_lockscreen;
         }
 
+        private int getResIdForFactoryResetProtectionWarningTitle() {
+            boolean isProfile = Utils.isManagedProfile(UserManager.get(getActivity()), mUserId);
+            return isProfile ? R.string.unlock_disable_frp_warning_title_profile
+                    : R.string.unlock_disable_frp_warning_title;
+        }
+
         private int getResIdForFactoryResetProtectionWarningMessage() {
             boolean hasFingerprints = mFingerprintManager.hasEnrolledFingerprints();
+            boolean isProfile = Utils.isManagedProfile(UserManager.get(getActivity()), mUserId);
             switch (mLockPatternUtils.getKeyguardStoredPasswordQuality(mUserId)) {
                 case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
-                    return hasFingerprints
-                            ? R.string.unlock_disable_frp_warning_content_pattern_fingerprint
-                            : R.string.unlock_disable_frp_warning_content_pattern;
+                    if (hasFingerprints && isProfile) {
+                        return R.string
+                                .unlock_disable_frp_warning_content_pattern_fingerprint_profile;
+                    } else if (hasFingerprints && !isProfile) {
+                        return R.string.unlock_disable_frp_warning_content_pattern_fingerprint;
+                    } else if (isProfile) {
+                        return R.string.unlock_disable_frp_warning_content_pattern_profile;
+                    } else {
+                        return R.string.unlock_disable_frp_warning_content_pattern;
+                    }
                 case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
                 case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX:
-                    return hasFingerprints
-                            ? R.string.unlock_disable_frp_warning_content_pin_fingerprint
-                            : R.string.unlock_disable_frp_warning_content_pin;
+                    if (hasFingerprints && isProfile) {
+                        return R.string.unlock_disable_frp_warning_content_pin_fingerprint_profile;
+                    } else if (hasFingerprints && !isProfile) {
+                        return R.string.unlock_disable_frp_warning_content_pin_fingerprint;
+                    } else if (isProfile) {
+                        return R.string.unlock_disable_frp_warning_content_pin_profile;
+                    } else {
+                        return R.string.unlock_disable_frp_warning_content_pin;
+                    }
                 case DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC:
                 case DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC:
                 case DevicePolicyManager.PASSWORD_QUALITY_COMPLEX:
-                    return hasFingerprints
-                            ? R.string.unlock_disable_frp_warning_content_password_fingerprint
-                            : R.string.unlock_disable_frp_warning_content_password;
+                    if (hasFingerprints && isProfile) {
+                        return R.string
+                                .unlock_disable_frp_warning_content_password_fingerprint_profile;
+                    } else if (hasFingerprints && !isProfile) {
+                        return R.string.unlock_disable_frp_warning_content_password_fingerprint;
+                    } else if (isProfile) {
+                        return R.string.unlock_disable_frp_warning_content_password_profile;
+                    } else {
+                        return R.string.unlock_disable_frp_warning_content_password;
+                    }
                 default:
-                    return hasFingerprints
-                            ? R.string.unlock_disable_frp_warning_content_unknown_fingerprint
-                            : R.string.unlock_disable_frp_warning_content_unknown;
+                    if (hasFingerprints && isProfile) {
+                        return R.string
+                                .unlock_disable_frp_warning_content_unknown_fingerprint_profile;
+                    } else if (hasFingerprints && !isProfile) {
+                        return R.string.unlock_disable_frp_warning_content_unknown_fingerprint;
+                    } else if (isProfile) {
+                        return R.string.unlock_disable_frp_warning_content_unknown_profile;
+                    } else {
+                        return R.string.unlock_disable_frp_warning_content_unknown;
+                    }
             }
         }
 
@@ -637,22 +671,26 @@ public class ChooseLockGeneric extends SettingsActivity {
         }
 
         private void showFactoryResetProtectionWarningDialog(String unlockMethodToSet) {
+            int title = getResIdForFactoryResetProtectionWarningTitle();
             int message = getResIdForFactoryResetProtectionWarningMessage();
             FactoryResetProtectionWarningDialog dialog =
-                    FactoryResetProtectionWarningDialog.newInstance(message, unlockMethodToSet);
+                    FactoryResetProtectionWarningDialog.newInstance(
+                            title, message, unlockMethodToSet);
             dialog.show(getChildFragmentManager(), TAG_FRP_WARNING_DIALOG);
         }
 
         public static class FactoryResetProtectionWarningDialog extends DialogFragment {
 
+            private static final String ARG_TITLE_RES = "titleRes";
             private static final String ARG_MESSAGE_RES = "messageRes";
             private static final String ARG_UNLOCK_METHOD_TO_SET = "unlockMethodToSet";
 
-            public static FactoryResetProtectionWarningDialog newInstance(int messageRes,
-                    String unlockMethodToSet) {
+            public static FactoryResetProtectionWarningDialog newInstance(
+                    int titleRes, int messageRes, String unlockMethodToSet) {
                 FactoryResetProtectionWarningDialog frag =
                         new FactoryResetProtectionWarningDialog();
                 Bundle args = new Bundle();
+                args.putInt(ARG_TITLE_RES, titleRes);
                 args.putInt(ARG_MESSAGE_RES, messageRes);
                 args.putString(ARG_UNLOCK_METHOD_TO_SET, unlockMethodToSet);
                 frag.setArguments(args);
@@ -672,7 +710,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                 final Bundle args = getArguments();
 
                 return new AlertDialog.Builder(getActivity())
-                        .setTitle(R.string.unlock_disable_frp_warning_title)
+                        .setTitle(args.getInt(ARG_TITLE_RES))
                         .setMessage(args.getInt(ARG_MESSAGE_RES))
                         .setPositiveButton(R.string.unlock_disable_frp_warning_ok,
                                 new DialogInterface.OnClickListener() {

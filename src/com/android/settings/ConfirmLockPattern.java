@@ -23,6 +23,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.SystemClock;
+import android.os.UserManager;
 import android.os.storage.StorageManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -279,9 +280,13 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                     }
                     if (mDetailsText != null) {
                         mDetailsTextView.setText(mDetailsText);
-                    } else {
+                    } else if (!Utils.isManagedProfile(
+                            UserManager.get(getActivity()), mEffectiveUserId)) {
                         mDetailsTextView.setText(
                                 R.string.lockpassword_confirm_your_pattern_generic);
+                    } else {
+                        mDetailsTextView.setText(
+                                R.string.lockpassword_confirm_your_pattern_generic_profile);
                     }
                     mErrorTextView.setText("");
 
