@@ -187,14 +187,14 @@ public final class SmsDefaultDialog extends AlertActivity implements
             Item item = ((Item) getItem(position));
             LayoutInflater inflater = getLayoutInflater();
             View view = inflater.inflate(R.layout.app_preference_item, parent, false);
-            TextView textView = (TextView) view.findViewById(R.id.app_label);
+            TextView textView = (TextView) view.findViewById(android.R.id.title);
             textView.setText(item.label);
             if (position == mSelectedIndex) {
                 view.findViewById(R.id.default_label).setVisibility(View.VISIBLE);
             } else {
                 view.findViewById(R.id.default_label).setVisibility(View.GONE);
             }
-            ImageView imageView = (ImageView)view.findViewById(R.id.app_image);
+            ImageView imageView = (ImageView)view.findViewById(android.R.id.icon);
             imageView.setImageDrawable(item.icon);
             return view;
         }

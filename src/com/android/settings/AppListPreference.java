@@ -16,7 +16,6 @@
 
 package com.android.settings;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Context;
@@ -50,6 +49,7 @@ public class AppListPreference extends CustomListPreference {
 
     private Drawable[] mEntryDrawables;
     private boolean mShowItemNone = false;
+    private CharSequence[] mSummaries;
 
     public class AppArrayAdapter extends ArrayAdapter<CharSequence> {
         private Drawable[] mImageDrawables = null;
@@ -63,16 +63,30 @@ public class AppListPreference extends CustomListPreference {
         }
 
         @Override
+        public boolean isEnabled(int position) {
+            return mSummaries == null || mSummaries[position] == null;
+        }
+
+        @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             LayoutInflater inflater = LayoutInflater.from(getContext());
             View view = inflater.inflate(R.layout.app_preference_item, parent, false);
-            TextView textView = (TextView) view.findViewById(R.id.app_label);
+            TextView textView = (TextView) view.findViewById(android.R.id.title);
             textView.setText(getItem(position));
             if (position == mSelectedIndex) {
                 view.findViewById(R.id.default_label).setVisibility(View.VISIBLE);
             }
-            ImageView imageView = (ImageView)view.findViewById(R.id.app_image);
+            ImageView imageView = (ImageView) view.findViewById(android.R.id.icon);
             imageView.setImageDrawable(mImageDrawables[position]);
+            // Summaries are describing why a item is disabled, so anything with a summary
+            // is not enabled.
+            boolean enabled = mSummaries == null || mSummaries[position] == null;
+            view.setEnabled(enabled);
+            if (!enabled) {
+                TextView summary = (TextView) view.findViewById(android.R.id.summary);
+                summary.setText(mSummaries[position]);
+                summary.setVisibility(View.VISIBLE);
+            }
             return view;
         }
     }
@@ -133,6 +147,12 @@ public class AppListPreference extends CustomListPreference {
     }
 
     public void setComponentNames(ComponentName[] componentNames, ComponentName defaultCN) {
+        setComponentNames(componentNames, defaultCN, null);
+    }
+
+    public void setComponentNames(ComponentName[] componentNames, ComponentName defaultCN,
+            CharSequence[] summaries) {
+        mSummaries = summaries;
         // Look up all package names in PackageManager. Skip ones we can't find.
         PackageManager pm = getContext().getPackageManager();
         final int entryCount = componentNames.length + (mShowItemNone ? 1 : 0);
@@ -192,7 +212,7 @@ public class AppListPreference extends CustomListPreference {
     @Override
     protected Parcelable onSaveInstanceState() {
         Parcelable superState = super.onSaveInstanceState();
-        return new SavedState(getEntryValues(), getValue(), mShowItemNone, superState);
+        return new SavedState(getEntryValues(), getValue(), mSummaries, mShowItemNone, superState);
     }
 
     @Override
@@ -201,6 +221,7 @@ public class AppListPreference extends CustomListPreference {
             SavedState savedState = (SavedState) state;
             mShowItemNone = savedState.showItemNone;
             setPackageNames(savedState.entryValues, savedState.value);
+            mSummaries = savedState.summaries;
             super.onRestoreInstanceState(savedState.superState);
         } else {
             super.onRestoreInstanceState(state);
@@ -213,13 +234,15 @@ public class AppListPreference extends CustomListPreference {
         public final CharSequence value;
         public final boolean showItemNone;
         public final Parcelable superState;
+        public final CharSequence[] summaries;
 
-        public SavedState(CharSequence[] entryValues, CharSequence value, boolean showItemNone,
-                Parcelable superState) {
+        public SavedState(CharSequence[] entryValues, CharSequence value, CharSequence[] summaries,
+                boolean showItemNone, Parcelable superState) {
             this.entryValues = entryValues;
             this.value = value;
             this.showItemNone = showItemNone;
             this.superState = superState;
+            this.summaries = summaries;
         }
 
         @Override
@@ -233,6 +256,7 @@ public class AppListPreference extends CustomListPreference {
             dest.writeCharSequence(value);
             dest.writeInt(showItemNone ? 1 : 0);
             dest.writeParcelable(superState, flags);
+            dest.writeCharSequenceArray(summaries);
         }
 
         public static Creator<SavedState> CREATOR = new Creator<SavedState>() {
@@ -242,7 +266,8 @@ public class AppListPreference extends CustomListPreference {
                 CharSequence value = source.readCharSequence();
                 boolean showItemNone = source.readInt() != 0;
                 Parcelable superState = source.readParcelable(getClass().getClassLoader());
-                return new SavedState(entryValues, value, showItemNone, superState);
+                CharSequence[] summaries = source.readCharSequenceArray();
+                return new SavedState(entryValues, value, summaries, showItemNone, superState);
             }
 
             @Override
