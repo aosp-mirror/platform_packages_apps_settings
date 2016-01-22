@@ -63,6 +63,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
 import android.widget.Toast;
+
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.LinkifyUtils;
 import com.android.settings.R;
@@ -73,9 +74,9 @@ import com.android.settings.location.ScanningSettings;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
-import com.android.settings.wifi.AccessPointPreference.UserBadgeCache;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.AccessPoint.AccessPointListener;
+import com.android.settingslib.wifi.AccessPointPreference;
 import com.android.settingslib.wifi.WifiStatusTracker;
 import com.android.settingslib.wifi.WifiTracker;
 
@@ -155,7 +156,7 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     private HandlerThread mBgThread;
 
-    private UserBadgeCache mUserBadgeCache;
+    private AccessPointPreference.UserBadgeCache mUserBadgeCache;
     private Preference mAddPreference;
 
     /* End of "used in Wifi Setup context" */
@@ -185,7 +186,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         mAddPreference.setIcon(ic_add);
         mAddPreference.setTitle(R.string.wifi_add_network);
 
-        mUserBadgeCache = new UserBadgeCache(getPackageManager());
+        mUserBadgeCache = new AccessPointPreference.UserBadgeCache(getPackageManager());
 
         mBgThread = new HandlerThread(TAG, Process.THREAD_PRIORITY_BACKGROUND);
         mBgThread.start();
@@ -448,8 +449,9 @@ public class WifiSettings extends RestrictedSettingsFragment
     public void onCreateContextMenu(ContextMenu menu, View view, ContextMenuInfo info) {
             Preference preference = (Preference) view.getTag();
 
-            if (preference instanceof AccessPointPreference) {
-                mSelectedAccessPoint = ((AccessPointPreference) preference).getAccessPoint();
+            if (preference instanceof LongPressAccessPointPreference) {
+                mSelectedAccessPoint =
+                        ((LongPressAccessPointPreference) preference).getAccessPoint();
                 menu.setHeaderTitle(mSelectedAccessPoint.getSsid());
                 if (mSelectedAccessPoint.isConnectable()) {
                     menu.add(Menu.NONE, MENU_ID_CONNECT, 0, R.string.wifi_menu_connect);
@@ -515,8 +517,8 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
-        if (preference instanceof AccessPointPreference) {
-            mSelectedAccessPoint = ((AccessPointPreference) preference).getAccessPoint();
+        if (preference instanceof LongPressAccessPointPreference) {
+            mSelectedAccessPoint = ((LongPressAccessPointPreference) preference).getAccessPoint();
             if (mSelectedAccessPoint == null) {
                 return false;
             }
@@ -654,7 +656,8 @@ public class WifiSettings extends RestrictedSettingsFragment
                             getPreferenceScreen().addPreference(pref);
                             continue;
                         }
-                        AccessPointPreference preference = new AccessPointPreference(accessPoint,
+                        LongPressAccessPointPreference
+                                preference = new LongPressAccessPointPreference(accessPoint,
                                 getPrefContext(), mUserBadgeCache, false, this);
                         preference.setOrder(index++);
 
@@ -867,15 +870,6 @@ public class WifiSettings extends RestrictedSettingsFragment
     }
 
     /**
-     * Refreshes acccess points and ask Wifi module to scan networks again.
-     */
-    /* package */ void refreshAccessPoints() {
-        mWifiTracker.resumeScanning();
-
-        getPreferenceScreen().removeAll();
-    }
-
-    /**
      * Called when "add network" button is pressed.
      */
     /* package */ void onAddNetworkPressed() {
@@ -885,29 +879,6 @@ public class WifiSettings extends RestrictedSettingsFragment
         showDialog(null, WifiConfigUiBase.MODE_CONNECT);
     }
 
-    /* package */ int getAccessPointsCount() {
-        final boolean wifiIsEnabled = mWifiTracker.isWifiEnabled();
-        if (wifiIsEnabled) {
-            return getPreferenceScreen().getPreferenceCount();
-        } else {
-            return 0;
-        }
-    }
-
-    /**
-     * Requests wifi module to pause wifi scan. May be ignored when the module is disabled.
-     */
-    /* package */ void pauseWifiScan() {
-        mWifiTracker.pauseScanning();
-    }
-
-    /**
-     * Requests wifi module to resume wifi scan. May be ignored when the module is disabled.
-     */
-    /* package */ void resumeWifiScan() {
-        mWifiTracker.resumeScanning();
-    }
-
     @Override
     protected int getHelpResource() {
         return R.string.help_url_wifi;
@@ -915,19 +886,19 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     @Override
     public void onAccessPointChanged(AccessPoint accessPoint) {
-        ((AccessPointPreference) accessPoint.getTag()).refresh();
+        ((LongPressAccessPointPreference) accessPoint.getTag()).refresh();
     }
 
     @Override
     public void onLevelChanged(AccessPoint accessPoint) {
-        ((AccessPointPreference) accessPoint.getTag()).onLevelChanged();
+        ((LongPressAccessPointPreference) accessPoint.getTag()).onLevelChanged();
     }
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
         new BaseSearchIndexProvider() {
             @Override
             public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
-                final List<SearchIndexableRaw> result = new ArrayList<SearchIndexableRaw>();
+                final List<SearchIndexableRaw> result = new ArrayList<>();
                 final Resources res = context.getResources();
 
                 // Add fragment title
