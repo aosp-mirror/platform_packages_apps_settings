@@ -16,6 +16,7 @@
 
 package com.android.settings.accessibility;
 
+import android.os.Bundle;
 import android.provider.Settings;
 
 import com.android.internal.logging.MetricsLogger;
@@ -24,10 +25,10 @@ import com.android.settings.widget.ToggleSwitch.OnBeforeCheckedChangeListener;
 
 public class ToggleScreenMagnificationPreferenceFragment
         extends ToggleFeaturePreferenceFragment {
+
     @Override
     protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
-        Settings.Secure.putInt(getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED, enabled ? 1 : 0);
+        // Do nothing.
     }
 
     @Override
@@ -42,6 +43,30 @@ public class ToggleScreenMagnificationPreferenceFragment
                 return false;
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        // Temporarily enable Magnification on this screen if it's disabled.
+        if (Settings.Secure.getInt(getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED, 0) == 0) {
+            setMagnificationEnabled(1);
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (!mToggleSwitch.isChecked()) {
+            setMagnificationEnabled(0);
+        }
+    }
+
+    private void setMagnificationEnabled(int enabled) {
+        Settings.Secure.putInt(getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED, enabled);
     }
 
     @Override

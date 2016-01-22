@@ -99,7 +99,6 @@ public abstract class ToggleFeaturePreferenceFragment
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        setHasOptionsMenu(true);
         installActionBarToggleSwitch();
     }
 

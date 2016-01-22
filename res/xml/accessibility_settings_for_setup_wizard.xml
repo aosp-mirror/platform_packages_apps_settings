@@ -15,36 +15,34 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
-        android:title="@string/accessibility_settings_title"
+        android:title="@string/vision_settings_title"
         android:persistent="true" >
 
     <Preference
-        android:fragment="com.android.settings.accessibility.ToggleScreenMagnificationPreferenceFragment"
-        android:key="screen_magnification_preference"
-        android:layout="@layout/preference_button"
-        android:title="@string/accessibility_screen_magnification_title" />
-
-    <Preference
-        android:key="font_size_preference"
-        android:layout="@layout/preference_button"
-        android:title="@string/title_font_size" />
+        android:key="vision_settings_summary"
+        android:title="@string/vision_settings_description"
+        android:layout="@layout/preference_multiline_title" />
 
     <com.android.settings.display.ScreenZoomPreference
         android:key="force_density_preference"
-        android:layout="@layout/preference_button"
-        settings:keywords="@string/screen_zoom_keywords"
         android:title="@string/screen_zoom_title"
         android:summary="%s" />
 
     <Preference
-        android:fragment="com.android.settings.accessibility.ToggleDaltonizerPreferenceFragment"
-        android:key="daltonizer_preference"
-        android:layout="@layout/preference_button"
-        android:title="@string/accessibility_display_daltonizer_preference_title" />
+        android:fragment="com.android.settings.accessibility.ToggleFontSizePreferenceFragment"
+        android:key="font_size_preference"
+        android:title="@string/title_font_size" />
+
+    <Preference
+        android:fragment=
+                "com.android.settings.accessibility.ToggleScreenMagnificationPreferenceFragment"
+        android:key="screen_magnification_preference"
+        android:title="@string/accessibility_screen_magnification_title"
+        android:summary="%s" />
 
     <Preference
         android:key="talkback_preference"
-        android:layout="@layout/preference_button" />
+        android:summary="@string/talkback_summary"
+        android:persistent="true" />
 
 </PreferenceScreen>
