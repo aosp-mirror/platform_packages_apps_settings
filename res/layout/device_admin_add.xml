@@ -149,6 +149,15 @@
                 android:text="@string/cancel"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_height="wrap_content" />
+            <Button android:id="@+id/uninstall_button"
+                android:layout_width="0dip"
+                android:layout_gravity="end"
+                android:layout_weight="1"
+                android:maxLines="2"
+                android:text="@string/uninstall_device_admin"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
             <Button android:id="@+id/action_button"
                 android:layout_width="0dip"
                 android:layout_gravity="start"
