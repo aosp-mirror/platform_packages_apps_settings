@@ -145,6 +145,18 @@
                             android:prompt="@string/wifi_eap_ca_cert" />
                 </LinearLayout>
 
+                <LinearLayout android:id="@+id/no_ca_cert_warning"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        style="@style/wifi_item" >
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="@style/wifi_item_warning"
+                            android:text="@string/wifi_do_not_validate_eap_server_warning" />
+                </LinearLayout>
+
                 <LinearLayout android:id="@+id/l_user_cert"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
