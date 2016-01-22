@@ -409,6 +409,18 @@ public class WifiConfigController implements TextWatcher,
         return enabled;
     }
 
+    void showWarningMessageIfAppropriate() {
+        mView.findViewById(R.id.no_ca_cert_warning).setVisibility(View.GONE);
+        if (mEapCaCertSpinner != null
+                && mView.findViewById(R.id.l_ca_cert).getVisibility() != View.GONE
+                && ((String) mEapCaCertSpinner.getSelectedItem())
+                       .equals(mDoNotValidateEapServerString)) {
+            // Display warning if user chooses not to validate the EAP server with a user-supplied
+            // CA certificate in an EAP network configuration.
+            mView.findViewById(R.id.no_ca_cert_warning).setVisibility(View.VISIBLE);
+        }
+    }
+
     /* package */ WifiConfiguration getConfig() {
         if (mMode == WifiConfigUiBase.MODE_VIEW) {
             return null;
@@ -1115,6 +1127,7 @@ public class WifiConfigController implements TextWatcher,
         } else {
             showIpConfigFields();
         }
+        showWarningMessageIfAppropriate();
         enableSubmitIfAppropriate();
     }
 
