@@ -20,6 +20,9 @@ import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.preference.PreferenceScreen;
 import android.view.inputmethod.InputMethodInfo;
@@ -37,6 +40,8 @@ import java.util.List;
 
 public final class AvailableVirtualKeyboardFragment extends SettingsPreferenceFragment
         implements InputMethodPreference.OnSavePreferenceListener {
+
+    private static final Drawable NO_ICON = new ColorDrawable(Color.TRANSPARENT);
 
     private final ArrayList<InputMethodPreference> mInputMethodPreferenceList = new ArrayList<>();
     private InputMethodSettingValuesWrapper mInputMethodSettingValues;
@@ -93,8 +98,15 @@ public final class AvailableVirtualKeyboardFragment extends SettingsPreferenceFr
             final InputMethodInfo imi = imis.get(i);
             final boolean isAllowedByOrganization = permittedList == null
                     || permittedList.contains(imi.getPackageName());
+            Drawable icon;
+            try {
+                icon = getActivity().getPackageManager().getApplicationIcon(imi.getPackageName());
+            } catch (Exception e) {
+                icon = NO_ICON;
+            }
             final InputMethodPreference pref = new InputMethodPreference(
                     context, imi, true, isAllowedByOrganization, this);
+            pref.setIcon(icon);
             mInputMethodPreferenceList.add(pref);
         }
         final Collator collator = Collator.getInstance();

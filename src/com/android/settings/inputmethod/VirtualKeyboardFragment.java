@@ -19,6 +19,9 @@ package com.android.settings.inputmethod;
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
 import android.view.inputmethod.InputMethodInfo;
@@ -38,6 +41,7 @@ import java.util.List;
 public final class VirtualKeyboardFragment extends SettingsPreferenceFragment {
 
     private static final String ADD_VIRTUAL_KEYBOARD_SCREEN = "add_virtual_keyboard_screen";
+    private static final Drawable NO_ICON = new ColorDrawable(Color.TRANSPARENT);
 
     private final ArrayList<InputMethodPreference> mInputMethodPreferenceList = new ArrayList<>();
     private InputMethodManager mImm;
@@ -78,12 +82,21 @@ public final class VirtualKeyboardFragment extends SettingsPreferenceFragment {
             final InputMethodInfo imi = imis.get(i);
             final boolean isAllowedByOrganization = permittedList == null
                     || permittedList.contains(imi.getPackageName());
+            Drawable icon;
+            try {
+                // TODO: Consider other ways to retrieve an icon to show here.
+                icon = getActivity().getPackageManager().getApplicationIcon(imi.getPackageName());
+            } catch (Exception e) {
+                // TODO: Consider handling the error differently perhaps by showing default icons.
+                icon = NO_ICON;
+            }
             final InputMethodPreference pref = new InputMethodPreference(
                     context,
                     imi,
                     false,  /* isImeEnabler */
                     isAllowedByOrganization,
                     null  /* this can be null since isImeEnabler is false */);
+            pref.setIcon(icon);
             mInputMethodPreferenceList.add(pref);
         }
         final Collator collator = Collator.getInstance();
@@ -101,6 +114,7 @@ public final class VirtualKeyboardFragment extends SettingsPreferenceFragment {
             InputMethodAndSubtypeUtil.removeUnnecessaryNonPersistentPreference(pref);
             pref.updatePreferenceViews();
         }
+        mAddVirtualKeyboardScreen.setIcon(R.drawable.ic_add);
         mAddVirtualKeyboardScreen.setOrder(N);
         getPreferenceScreen().addPreference(mAddVirtualKeyboardScreen);
     }
