@@ -77,6 +77,7 @@ import com.android.settings.deviceinfo.StorageSettings;
 import com.android.settings.fuelgauge.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageDetail;
 import com.android.settings.fuelgauge.PowerUsageSummary;
+import com.android.settings.inputmethod.AvailableVirtualKeyboardFragment;
 import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
 import com.android.settings.inputmethod.KeyboardLayoutPickerFragment;
 import com.android.settings.inputmethod.SpellCheckersSettings;
@@ -250,6 +251,7 @@ public class SettingsActivity extends SettingsDrawerActivity
             DateTimeSettings.class.getName(),
             LocaleListEditor.class.getName(),
             InputMethodAndLanguageSettings.class.getName(),
+            AvailableVirtualKeyboardFragment.class.getName(),
             SpellCheckersSettings.class.getName(),
             UserDictionaryList.class.getName(),
             UserDictionarySettings.class.getName(),

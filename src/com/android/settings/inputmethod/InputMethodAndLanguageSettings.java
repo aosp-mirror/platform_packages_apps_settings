@@ -157,12 +157,16 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
                 startingIntent.getAction());
         if (mShowsOnlyFullImeAndKeyboardList) {
             getPreferenceScreen().removeAll();
-            getPreferenceScreen().addPreference(mHardKeyboardCategory);
+            if (mHardKeyboardCategory != null) {
+                getPreferenceScreen().addPreference(mHardKeyboardCategory);
+            }
             if (SHOW_INPUT_METHOD_SWITCHER_SETTINGS) {
                 getPreferenceScreen().addPreference(mShowInputMethodSelectorPref);
             }
-            mKeyboardSettingsCategory.removeAll();
-            getPreferenceScreen().addPreference(mKeyboardSettingsCategory);
+            if (mKeyboardSettingsCategory != null) {
+                mKeyboardSettingsCategory.removeAll();
+                getPreferenceScreen().addPreference(mKeyboardSettingsCategory);
+            }
         }
 
         // Build hard keyboard and game controller preference categories.
@@ -376,6 +380,10 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
     }
 
     private void updateInputMethodPreferenceViews() {
+        if (mKeyboardSettingsCategory == null) {
+            return;
+        }
+
         synchronized (mInputMethodPreferenceList) {
             // Clear existing "InputMethodPreference"s
             for (final InputMethodPreference pref : mInputMethodPreferenceList) {
@@ -510,6 +518,10 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
     }
 
     private void updateHardKeyboards() {
+        if (mHardKeyboardCategory == null) {
+            return;
+        }
+
         mHardKeyboardPreferenceList.clear();
         final int[] devices = InputDevice.getDeviceIds();
         for (int i = 0; i < devices.length; i++) {
