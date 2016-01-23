@@ -76,6 +76,7 @@ import android.webkit.IWebViewUpdateService;
 import android.webkit.WebViewProviderInfo;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.internal.app.LocalePicker;
 import com.android.internal.logging.MetricsLogger;
@@ -1295,6 +1296,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         SystemProperties.set(COLOR_TEMPERATURE_PROPERTY,
                 mColorTemperaturePreference.isChecked() ? "1" : "0");
         pokeSystemProperties();
+        Toast.makeText(getActivity(), R.string.color_temperature_toast, Toast.LENGTH_LONG).show();
     }
 
     private void updateUSBAudioOptions() {
