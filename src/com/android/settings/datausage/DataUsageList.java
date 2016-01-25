@@ -147,7 +147,27 @@ public class DataUsageList extends DataUsageBase {
 
         mHeader = setPinnedHeaderView(R.layout.apps_filter_spinner);
         mCycleSpinner = (Spinner) mHeader.findViewById(R.id.filter_spinner);
-        mCycleAdapter = new CycleAdapter(getContext(), mCycleSpinner, mCycleListener);
+        mCycleAdapter = new CycleAdapter(getContext(), new CycleAdapter.SpinnerInterface() {
+            @Override
+            public void setAdapter(CycleAdapter cycleAdapter) {
+                mCycleSpinner.setAdapter(cycleAdapter);
+            }
+
+            @Override
+            public void setOnItemSelectedListener(OnItemSelectedListener listener) {
+                mCycleSpinner.setOnItemSelectedListener(listener);
+            }
+
+            @Override
+            public Object getSelectedItem() {
+                return mCycleSpinner.getSelectedItem();
+            }
+
+            @Override
+            public void setSelection(int position) {
+                mCycleSpinner.setSelection(position);
+            }
+        }, mCycleListener, true);
         setLoading(true, false);
     }
 
@@ -470,7 +490,7 @@ public class DataUsageList extends DataUsageBase {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             final CycleAdapter.CycleItem cycle = (CycleAdapter.CycleItem)
-                    parent.getItemAtPosition(position);
+                    mCycleSpinner.getSelectedItem();
 
             if (LOGD) {
                 Log.d(TAG, "showing cycle " + cycle + ", start=" + cycle.start + ", end="

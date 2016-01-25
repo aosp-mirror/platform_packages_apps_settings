@@ -29,9 +29,10 @@
             android:key="limit_summary"
             android:selectable="false" />
 
-        <com.android.settings.datausage.RestrictBackgroundDataPreference
+        <com.android.settings.datausage.DataSaverPreference
             android:key="restrict_background"
-            android:title="@string/data_usage_menu_restrict_background" />
+            android:title="@string/data_saver_title"
+            android:fragment="com.android.settings.datausage.DataSaverSummary" />
 
     </PreferenceCategory>
 

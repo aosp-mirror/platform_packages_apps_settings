@@ -14,14 +14,6 @@
 
 package com.android.settings.datausage;
 
-import com.android.settings.AppHeader;
-import com.android.settings.InstrumentedFragment;
-import com.android.settings.R;
-import com.android.settings.applications.AppInfoBase;
-import com.android.settingslib.AppItem;
-import com.android.settingslib.net.ChartData;
-import com.android.settingslib.net.ChartDataLoader;
-
 import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
@@ -43,10 +35,15 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.text.format.Formatter;
 import android.util.ArraySet;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Spinner;
+import com.android.settings.AppHeader;
+import com.android.settings.InstrumentedFragment;
+import com.android.settings.R;
+import com.android.settings.applications.AppInfoBase;
+import com.android.settingslib.AppItem;
+import com.android.settingslib.net.ChartData;
+import com.android.settingslib.net.ChartDataLoader;
 
 import static android.net.NetworkPolicyManager.POLICY_NONE;
 import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
@@ -62,6 +59,8 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
     private static final String KEY_APP_SETTINGS = "app_settings";
     private static final String KEY_RESTRICT_BACKGROUND = "restrict_background";
     private static final String KEY_APP_LIST = "app_list";
+    private static final String KEY_CYCLE = "cycle";
+    private static final String KEY_UNRESTRICTED_DATA = "unrestricted_data_saver";
 
     private static final int LOADER_CHART_DATA = 2;
 
@@ -76,7 +75,6 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
     private Drawable mIcon;
     private CharSequence mLabel;
     private INetworkStatsSession mStatsSession;
-    private Spinner mCycleSpinner;
     private CycleAdapter mCycleAdapter;
 
     private long mStart;
@@ -86,6 +84,9 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
     private NetworkPolicy mPolicy;
     private AppItem mAppItem;
     private Intent mAppSettingsIntent;
+    private SpinnerPreference mCycle;
+    private SwitchPreference mUnrestrictedData;
+    private DataSaverBackend mDataSaverBackend;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -137,9 +138,15 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
         mForegroundUsage = findPreference(KEY_FOREGROUND_USAGE);
         mBackgroundUsage = findPreference(KEY_BACKGROUND_USAGE);
 
+        mCycle = (SpinnerPreference) findPreference(KEY_CYCLE);
+        mCycleAdapter = new CycleAdapter(getContext(), mCycle, mCycleListener, false);
+
         if (UserHandle.isApp(mAppItem.key)) {
             mRestrictBackground = (SwitchPreference) findPreference(KEY_RESTRICT_BACKGROUND);
             mRestrictBackground.setOnPreferenceChangeListener(this);
+            mUnrestrictedData = (SwitchPreference) findPreference(KEY_UNRESTRICTED_DATA);
+            mUnrestrictedData.setOnPreferenceChangeListener(this);
+            mDataSaverBackend = new DataSaverBackend(getContext());
             mAppSettings = findPreference(KEY_APP_SETTINGS);
 
             mAppSettingsIntent = new Intent(Intent.ACTION_MANAGE_NETWORK_USAGE);
@@ -169,6 +176,7 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
                 removePreference(KEY_APP_LIST);
             }
         } else {
+            removePreference(KEY_UNRESTRICTED_DATA);
             removePreference(KEY_APP_SETTINGS);
             removePreference(KEY_RESTRICT_BACKGROUND);
             removePreference(KEY_APP_LIST);
@@ -195,6 +203,9 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
         if (preference == mRestrictBackground) {
             setAppRestrictBackground((Boolean) newValue);
             return true;
+        } else if (preference == mUnrestrictedData) {
+            mDataSaverBackend.setIsWhitelisted(mAppItem.key, (Boolean) newValue);
+            return true;
         }
         return false;
     }
@@ -213,6 +224,9 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
     private void updatePrefs() {
         if (mRestrictBackground != null) {
             mRestrictBackground.setChecked(getAppRestrictBackground());
+        }
+        if (mUnrestrictedData != null) {
+            mUnrestrictedData.setChecked(mDataSaverBackend.isWhitelisted(mAppItem.key));
         }
     }
 
@@ -260,7 +274,7 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        View header = setPinnedHeaderView(R.layout.data_usage_app_header);
+        View header = setPinnedHeaderView(R.layout.app_header);
         String pkg = mPackages.size() != 0 ? mPackages.valueAt(0) : null;
         int uid = 0;
         try {
@@ -269,9 +283,6 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
         }
         AppHeader.setupHeaderView(getActivity(), mIcon, mLabel,
                 pkg, uid, AppHeader.includeAppInfo(this), 0, header);
-
-        mCycleSpinner = (Spinner) header.findViewById(R.id.filter_spinner);
-        mCycleAdapter = new CycleAdapter(getContext(), mCycleSpinner, mCycleListener);
     }
 
     @Override
@@ -283,8 +294,7 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
             new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            final CycleAdapter.CycleItem cycle =
-                    (CycleAdapter.CycleItem) parent.getItemAtPosition(position);
+            final CycleAdapter.CycleItem cycle = (CycleAdapter.CycleItem) mCycle.getSelectedItem();
 
             mStart = cycle.start;
             mEnd = cycle.end;

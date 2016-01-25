@@ -41,6 +41,8 @@ public abstract class InstrumentedFragment extends PreferenceFragment {
     public static final int VIRTUAL_KEYBOARDS = UNDECLARED + 11;
     public static final int PHYSICAL_KEYBOARDS = UNDECLARED + 12;
     public static final int ENABLE_VIRTUAL_KEYBOARDS = UNDECLARED + 13;
+    public static final int DATA_SAVER_SUMMARY = UNDECLARED + 14;
+    public static final int DATA_USAGE_UNRESTRICTED_ACCESS = UNDECLARED + 15;
 
     /**
      * Declare the view of this category.

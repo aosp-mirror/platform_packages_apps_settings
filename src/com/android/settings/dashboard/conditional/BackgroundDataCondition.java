@@ -34,7 +34,7 @@ public class BackgroundDataCondition extends Condition {
 
     @Override
     public Icon getIcon() {
-        return Icon.createWithResource(mManager.getContext(), R.drawable.ic_cellular_off);
+        return Icon.createWithResource(mManager.getContext(), R.drawable.ic_data_saver);
     }
 
     @Override
