@@ -23,6 +23,7 @@ import android.content.Context;
 import android.service.notification.NotificationListenerService;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -37,6 +38,7 @@ public class ImportanceSeekBarPreference extends SeekBarPreference implements
     private TextView mSummaryTextView;
     private String mSummary;
     private int mMinProgress;
+    private boolean mSystemApp;
 
     public ImportanceSeekBarPreference(Context context, AttributeSet attrs, int defStyleAttr,
             int defStyleRes) {
@@ -64,10 +66,19 @@ public class ImportanceSeekBarPreference extends SeekBarPreference implements
         mMinProgress = minProgress;
     }
 
+    public void setSystemApp(boolean systemApp) {
+        mSystemApp = systemApp;
+        notifyChanged();
+    }
+
     @Override
     public void onBindViewHolder(PreferenceViewHolder view) {
         super.onBindViewHolder(view);
         mSummaryTextView = (TextView) view.findViewById(com.android.internal.R.id.summary);
+        if (mSystemApp) {
+            ((ImageView) view.findViewById(R.id.low_importance)).getDrawable().setTint(
+                    getContext().getColor(R.color.importance_disabled_tint));
+        }
     }
 
     @Override
@@ -83,8 +94,9 @@ public class ImportanceSeekBarPreference extends SeekBarPreference implements
             seekBar.setProgress(mMinProgress);
             progress = mMinProgress;
         }
+        mSummary = getProgressSummary(progress);
         if (mSummaryTextView != null) {
-            mSummaryTextView.setText(getProgressSummary(progress));
+            mSummaryTextView.setText(mSummary);
         }
         if (fromTouch) {
             mCallback.onImportanceChanged(progress);

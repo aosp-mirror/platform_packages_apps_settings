@@ -58,7 +58,8 @@
                     android:src="@*android:drawable/ic_notification_block"
                     android:layout_gravity="center_vertical|start"
                     android:layout_width="24dp"
-                    android:layout_height="24dp" />
+                    android:layout_height="24dp"
+                    android:tint="@color/importance_icon_tint" />
 
             <SeekBar
                     android:id="@*android:id/seekbar"
@@ -66,7 +67,7 @@
                     android:layout_marginEnd="56dp"
                     android:layout_gravity="center_vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:focusable="true"
                     android:background="#00ffffff"
                     style="@android:style/Widget.Material.SeekBar.Discrete"
@@ -77,7 +78,8 @@
                     android:src="@*android:drawable/ic_notification_alert"
                     android:layout_gravity="center_vertical|end"
                     android:layout_width="24dp"
-                    android:layout_height="24dp" />
+                    android:layout_height="24dp"
+                    android:tint="@color/importance_icon_tint" />
 
         </FrameLayout>
 
