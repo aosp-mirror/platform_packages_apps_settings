@@ -18,8 +18,7 @@ package com.android.settings;
 
 import android.os.Parcel;
 import android.test.InstrumentationTestCase;
-import android.test.InstrumentationTestRunner;
-import android.test.suitebuilder.annotation.LargeTest;
+import android.test.suitebuilder.annotation.SmallTest;
 
 import static com.android.settings.UserCredentialsSettings.Credential;
 
@@ -27,13 +26,14 @@ import static com.android.settings.UserCredentialsSettings.Credential;
  * User credentials settings fragment tests
  *
  * To run the test, use command:
- * adb shell am instrument -e class com.android.settings.security.UserCredentialsTests
- * -w com.android.settings.tests/android.test.InstrumentationTestRunner
+ * adb shell am instrument -e class com.android.settings.UserCredentialsTest
+ * -w com.android.settings.tests.unit/android.support.test.runner.AndroidJUnitRunner
  *
  */
-public class UserCredentialsTests extends InstrumentationTestCase {
+public class UserCredentialsTest extends InstrumentationTestCase {
     private static final String TAG = "UserCredentialsTests";
 
+    @SmallTest
     public void testCredentialIsParcelable() {
         final String alias = "credential-test-alias";
         Credential c = new Credential(alias);
