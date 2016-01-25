@@ -465,7 +465,7 @@ public class ChooseLockPattern extends SettingsActivity {
         }
 
         protected Intent getRedactionInterstitialIntent(Context context) {
-            return RedactionInterstitial.createStartIntent(context);
+            return RedactionInterstitial.createStartIntent(context, mUserId);
         }
 
         public void handleLeftButton() {

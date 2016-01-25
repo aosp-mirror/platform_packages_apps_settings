@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +40,7 @@ import com.android.setupwizardlib.view.NavigationBar;
 public class SetupRedactionInterstitial extends RedactionInterstitial {
 
     public static Intent createStartIntent(Context ctx) {
-        Intent startIntent = RedactionInterstitial.createStartIntent(ctx);
+        Intent startIntent = RedactionInterstitial.createStartIntent(ctx, UserHandle.myUserId());
         if (startIntent != null) {
             startIntent.setClass(ctx, SetupRedactionInterstitial.class);
             startIntent.putExtra(EXTRA_PREFS_SHOW_BUTTON_BAR, false)

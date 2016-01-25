@@ -5829,6 +5829,26 @@
     <!-- Security > Choose PIN/PW/Pattern > Notification redaction interstitial: Title for the screen asking the user how they want their notifications to appear when the device is locked [CHAR LIMIT=30] -->
     <string name="lock_screen_notifications_interstitial_title">Notifications</string>
 
+    <!-- Configure Notifications: Value for lockscreen notifications:  all information will be
+         shown in profile notifications shown on a secure lock screen
+         [CHAR LIMIT=50] -->
+    <string name="lock_screen_notifications_summary_show_profile">Show all profile notification content</string>
+
+    <!-- Configure Notifications: Value for lockscreen notifications: sensitive information will be
+         hidden or redacted from profile notifications shown on a secure lock screen
+         [CHAR LIMIT=50] -->
+    <string name="lock_screen_notifications_summary_hide_profile">Hide sensitive profile notification content</string>
+
+    <!-- Configure Notifications: Value for lockscreen notifications: profile notifications will not appear on a secure lock screen
+         [CHAR LIMIT=50] -->
+    <string name="lock_screen_notifications_summary_disable_profile">Don\u2019t show profile notifications at all</string>
+
+    <!-- Security > Choose PIN/PW/Pattern > Notification redaction interstitial: Message asking the user how they want their profile notifications to appear when the device is locked [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_notifications_interstitial_message_profile">When your device is locked, how do you want profile notifications to show?</string>
+
+    <!-- Security > Choose PIN/PW/Pattern > Notification redaction interstitial: Title for the screen asking the user how they want their profile notifications to appear when the device is locked [CHAR LIMIT=30] -->
+    <string name="lock_screen_notifications_interstitial_title_profile">Profile notifications</string>
+
     <!-- Notification Settings: Title for the option managing notifications per application. [CHAR LIMIT=30] -->
     <string name="app_notifications_title">Notifications</string>
 

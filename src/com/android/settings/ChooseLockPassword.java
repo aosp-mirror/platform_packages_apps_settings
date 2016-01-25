@@ -399,7 +399,7 @@ public class ChooseLockPassword extends SettingsActivity {
         }
 
         protected Intent getRedactionInterstitialIntent(Context context) {
-            return RedactionInterstitial.createStartIntent(context);
+            return RedactionInterstitial.createStartIntent(context, mUserId);
         }
 
         protected void updateStage(Stage stage) {

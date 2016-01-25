@@ -304,7 +304,7 @@ public class FingerprintSettings extends SubSettings {
             TextView v = (TextView) LayoutInflater.from(view.getContext()).inflate(
                     R.layout.fingerprint_settings_footer, null);
             EnforcedAdmin admin = RestrictedLockUtils.checkIfKeyguardFeaturesDisabled(
-                    getActivity(), DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT);
+                    getActivity(), DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT, mUserId);
             v.setText(LearnMoreSpan.linkify(getText(admin != null
                             ? R.string.security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled
                             : R.string.security_settings_fingerprint_enroll_disclaimer),
