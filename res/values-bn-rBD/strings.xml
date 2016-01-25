@@ -234,6 +234,12 @@
     <string name="skip_label" msgid="47510779345218297">"এড়িয়ে যান"</string>
     <string name="next_label" msgid="4693520878012668114">"পরবর্তী"</string>
     <string name="language_picker_title" msgid="5349877711342869319">"ভাষা"</string>
+    <string name="pref_title_lang_selection" msgid="5696814792962878791">"পছন্দের ভাষা"</string>
+    <string name="locale_remove_menu" msgid="7651301406723638854">"সরান"</string>
+    <string name="add_a_language" msgid="2330538812283783022">"একটি ভাষা যোগ করুন"</string>
+    <string name="dlg_remove_locales_title" msgid="4143034933365516195">"আপনার পছন্দের ভাষা থেকে সরাতে চান?"</string>
+    <string name="dlg_remove_locales_error_title" msgid="463635546627235043">"ভাষা সরানোর সময় ত্রুটি হয়েছে"</string>
+    <string name="dlg_remove_locales_error_message" msgid="7108948386818227115">"সমস্ত ভাষা সরানো যাবে না, আপনাকে কমপক্ষে একটি ভাষা রাখতে হবে৷"</string>
     <string name="activity_picker_label" msgid="6295660302548177109">"কার্যকলাপ চয়ন করুন"</string>
     <string name="device_info_label" msgid="6551553813651711205">"ডিভাইস তথ্য"</string>
     <string name="display_label" msgid="8074070940506840792">"স্ক্রীন"</string>
@@ -264,8 +270,7 @@
     <string name="roaming_disable" msgid="1295279574370898378">"রোমিংয়ে থাকাকালীন ডেটা পরিষেবাগুলি সংযোগ করুন"</string>
     <string name="roaming_reenable_message" msgid="9141007271031717369">"আপনি আপনার হোম নেটওয়ার্ক থেকে ডেটা রোমিং বন্ধ করে দেওয়ার কারণে আপনি ডেটা সংযোগ হারিয়েছেন।"</string>
     <string name="roaming_turn_it_on_button" msgid="4387601818162120589">"এটি চালু করুন"</string>
-    <!-- no translation found for roaming_warning (4275443317524544705) -->
-    <skip />
+    <string name="roaming_warning" msgid="4275443317524544705">"আপনাকে উল্লেখযোগ্য পরিমাণে চার্জ করা হতে পারে৷"</string>
     <string name="roaming_warning_multiuser" product="tablet" msgid="6458990250829214777">"যখন আপনি ডেটা রোমিংয়ের অনুমতি দেবেন, তখন আপনাকে রোমিং চার্জ ধার্য করা হতে পারে!\n\nএই সেটিংস এই ট্যাবলেটের সমস্ত ব্যবহারকারীর উপর প্রভাব ফেলবে।"</string>
     <string name="roaming_warning_multiuser" product="default" msgid="6368421100292355440">"যখন আপনি ডেটা রোমিংয়ের অনুমতি দেবেন, তখন আপনাকে রোমিং চার্জ ধার্য করা হতে পারে!\n\nএই সেটিংস এই ফোনের সমস্ত ব্যবহারকারীর উপর প্রভাব ফেলবে।"</string>
     <string name="roaming_reenable_title" msgid="6068100976707316772">"ডেটা রোমিংয়ের অনুমতি দেবেন?"</string>
@@ -427,6 +432,8 @@
     <string name="unlock_setup_wizard_fingerprint_details" msgid="7893457665921363009">"আপনি কোনো স্ক্রীন লকের সেট আপ করার পরে, সেটিংস &gt; নিরাপত্তার মধ্যে আপনার আঙুলের ছাপও সেট আপ করতে পারবেন।"</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"স্ক্রীন লক বন্ধ করুন"</string>
     <string name="unlock_disable_frp_warning_title" msgid="264008934468492550">"ডিভাইস সুরক্ষা সরাবেন?"</string>
+    <!-- no translation found for unlock_disable_frp_warning_title_profile (5507136301904313583) -->
+    <skip />
     <string name="unlock_disable_frp_warning_content_pattern" msgid="8869767290771023461">"ডিভাইস সুরক্ষা বৈশিষ্ট্যগুলি আপনার প্যাটার্ন ছাড়া কাজ করবে না৷"</string>
     <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="8212242533942400457">"ডিভাইস সুরক্ষা বৈশিষ্ট্যগুলি আপনার প্যাটার্ন ছাড়া কাজ করবে না৷<xliff:g id="EMPTY_LINE">
 
@@ -443,6 +450,22 @@
     <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="6363091330281670692">"ডিভাইস সুরক্ষা বৈশিষ্ট্যগুলি আপনার স্ক্রীন লক ছাড়া কাজ করবে না৷<xliff:g id="EMPTY_LINE">
 
 </xliff:g>এছাড়াও আপনার সংরক্ষিত আঙ্গুলের ছাপগুলিকে এই ডিভাইস থেকে সরিয়ে দেওয়া হবে এবং আপনি সেগুলি দিয়ে আপনার ফোন আনলক করতে, কেনাকাটা অনুমোদন, বা অ্যাপ্লিকেশানগুলিতে সাইন ইন করতে পারবেন না৷\""</string>
+    <!-- no translation found for unlock_disable_frp_warning_content_pattern_profile (8682200103576359918) -->
+    <skip />
+    <!-- no translation found for unlock_disable_frp_warning_content_pattern_fingerprint_profile (3675154828957224316) -->
+    <skip />
+    <!-- no translation found for unlock_disable_frp_warning_content_pin_profile (7790688070593867767) -->
+    <skip />
+    <!-- no translation found for unlock_disable_frp_warning_content_pin_fingerprint_profile (4879321153584598940) -->
+    <skip />
+    <!-- no translation found for unlock_disable_frp_warning_content_password_profile (7569285520567674461) -->
+    <skip />
+    <!-- no translation found for unlock_disable_frp_warning_content_password_fingerprint_profile (3527188316958917839) -->
+    <skip />
+    <!-- no translation found for unlock_disable_frp_warning_content_unknown_profile (6984215718701688202) -->
+    <skip />
+    <!-- no translation found for unlock_disable_frp_warning_content_unknown_fingerprint_profile (1962204059377724158) -->
+    <skip />
     <string name="unlock_disable_frp_warning_ok" msgid="7075138677177748705">"হ্যাঁ, সরান"</string>
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"আনলক প্যাটার্ন পরিবর্তন করুন"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"আনলক পিন পরিবর্তন করুন"</string>
@@ -1242,6 +1265,12 @@
     <string name="lockpassword_confirm_your_pattern_generic" msgid="7050256155547273836">"অবিরত করতে আপনার ডিভাইসের প্যাটার্ন ব্যবহার করুন৷"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="1072670959803859869">"অবিরত করতে আপনার ডিভাইসের পিন লিখুন৷"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="1022239625083264596">"অবিরত করতে আপনার ডিভাইসের পাসওয়ার্ড লিখুন৷"</string>
+    <!-- no translation found for lockpassword_confirm_your_pattern_generic_profile (5395218530319918943) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_pin_generic_profile (4835615379207382790) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_password_generic_profile (7102131871989498470) -->
+    <skip />
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"ভুল পিন"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"ভুল পাসওয়ার্ড"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"ভুল প্যাটার্ন"</string>
@@ -1470,6 +1499,24 @@
     <string name="spellchecker_quick_settings" msgid="246728645150092058">"সেটিংস"</string>
     <string name="spellchecker_language" msgid="6041050114690541437">"ভাষা"</string>
     <string name="failed_to_open_app_settings_toast" msgid="1251067459298072462">"<xliff:g id="SPELL_APPLICATION_NAME">%1$s</xliff:g> জন্য সেটিংস খুলতে ব্যর্থ হয়েছে"</string>
+    <!-- no translation found for keyboard_and_input_methods_category (212319666432360385) -->
+    <skip />
+    <!-- no translation found for virtual_keyboard_category (1012830752318677119) -->
+    <skip />
+    <!-- no translation found for physical_keyboard_category (7946003168662969622) -->
+    <skip />
+    <!-- no translation found for available_virtual_keyboard_category (7645766574969139819) -->
+    <skip />
+    <!-- no translation found for add_virtual_keyboard (2867069766124874859) -->
+    <skip />
+    <!-- no translation found for keyboard_assistance_category (5843634175231134014) -->
+    <skip />
+    <!-- no translation found for show_ime (2658582193437188227) -->
+    <skip />
+    <!-- no translation found for show_ime_summary (8164993045923240698) -->
+    <skip />
+    <!-- no translation found for keyboard_shortcuts_helper (4839453720463798145) -->
+    <skip />
     <string name="pointer_settings_category" msgid="8183819795164034286">"মাউস/ট্র্যাকপ্যাড"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"পয়েন্টারের গতি"</string>
     <string name="game_controller_settings_category" msgid="8794508575329923718">"গেম নিয়ন্ত্রক"</string>
@@ -1539,8 +1586,10 @@
     <string name="usage_time_label" msgid="295954901452833058">"ব্যবহারের সময়"</string>
     <string name="accessibility_settings" msgid="3975902491934816215">"সহজ ব্যবহার"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"সহজ ব্যবহার সেটিংস"</string>
-    <string name="accessibility_settings_for_setup_wizard_title" msgid="7148099953002332324">"আমাকে গাইড করুন"</string>
+    <string name="vision_settings_title" msgid="4204111425716868288">"দৃষ্টির সেটিংস"</string>
+    <string name="vision_settings_description" msgid="7754433456207334423">"সেট আপ প্রক্রিয়ার অনুস্মারকের মাধ্যেমে আপনাকে সহায়তা করতে এই সেটিংসটি এখন সামঞ্জস্য করুন৷ আপনি ডিভাইস সেটিংসে যেকোনো সময় সেগুলিকে সামঞ্জস্য করতে পারবেন৷"</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"পরিষেবাগুলি"</string>
+    <string name="talkback_summary" msgid="6239954195360531224">"স্ক্রীনরিডার সরঞ্জাম প্রাথমিকভাবে অন্ধত্ব এবং কম দৃষ্টি সম্পন্ন ব্যক্তিদের জন্য"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"সিস্টেম"</string>
     <string name="accessibility_display_title" msgid="7610175687949675162">"প্রদর্শন"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"ক্যাপশান"</string>
@@ -1937,10 +1986,8 @@
     <string name="sync_is_failing" msgid="1591561768344128377">"সমন্বয় বর্তমানে সমস্যার সম্মুখীন হচ্ছে। এটি খুব শীঘ্রই ফিরে আসবে।"</string>
     <string name="add_account_label" msgid="7811707265834013767">"অ্যাকাউন্ট যোগ করুন"</string>
     <string name="managed_profile_not_available_label" msgid="852263300911325904">"কর্মস্থলের প্রোফাইল এখনো উপলব্ধ নয়"</string>
-    <!-- no translation found for work_mode_label (5794470908668593961) -->
-    <skip />
-    <!-- no translation found for work_mode_summary (1620246003886940776) -->
-    <skip />
+    <string name="work_mode_label" msgid="5794470908668593961">"কাজের মোড"</string>
+    <string name="work_mode_summary" msgid="1620246003886940776">"অ্যাপ, পটভূমি সিঙ্ক এবং সম্পর্কিত বৈশিষ্ট্যগুলি সহ কর্মস্থলের প্রোফাইলটিকে কাজ করার মঞ্জুরি দিন"</string>
     <string name="remove_managed_profile_label" msgid="3856519337797285325">"কর্মস্থলের প্রোফাইল সরান"</string>
     <string name="background_data" msgid="5779592891375473817">"পশ্চাদপট ডেটা"</string>
     <string name="background_data_summary" msgid="8328521479872763452">"অ্যাপ্লিকেশানগুলি যে কোনো সময়ে ডেটা সমন্বয়, পাঠাতে ও গ্রহণ করতে পারে"</string>
@@ -2384,6 +2431,7 @@
     <string name="notification_volume_option_title" msgid="6064656124416882130">"বিজ্ঞপ্তির ভলিউম"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"ফোন রিংটোন"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"বিজ্ঞপ্তির ডিফল্ট রিংটোন"</string>
+    <string name="alarm_ringtone_title" msgid="2015124067611102995">"ডিফল্ট অ্যালার্মের রিংটোন"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"এছাড়াও কল এলে স্পন্দিত করুন"</string>
     <string name="master_mono_title" msgid="8123291759393322551">"মোনো প্লেব্যাক"</string>
     <string name="master_mono_on" msgid="53180785336592938">"সর্বদা মনোতে অডিও চালান"</string>
@@ -2756,7 +2804,7 @@
     <string name="camera_gesture_desc" msgid="1831390075255870960">"আপনার কব্জি দুবার ঝাঁকিয়ে ক্যামেরা অ্যাপ্লিকেশানটি খুলুন"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"ক্যামেরার জন্য দুবার পাওয়ার বোতাম টিপুন"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"আপনার স্ক্রীন আনলক না করেই দ্রুত ক্যামেরা খুলুন"</string>
-    <string name="screen_zoom_title" msgid="6332123593919641665">"স্ক্রীনের জুম"</string>
+    <string name="screen_zoom_title" msgid="5530967660604527002">"প্রদর্শন বিবর্ধিত করুন"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"ঘনত্ব হিসাবে প্রদর্শন, স্ক্রীন জুম করা, স্কেল, স্কেলের মাপ"</string>
     <string name="screen_zoom_summary" msgid="2022973627105802010">"স্ক্রীনে সব আইটেম ছোট বা বড় করুন। এই সেটিংটি পরিবর্তন করার পরে আপনার হোম স্ক্রীনের কিছু অ্যাপ্লিকেশান অবস্থান পরিবর্তন করতে পারে।"</string>
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"পূর্বরূপ দেখুন"</string>
@@ -2802,56 +2850,33 @@
     <string name="condition_cellular_summary" msgid="1818046558419658463">"শুধুমাত্র Wi-Fi এর মাধ্যমে ইন্টারনেট উপলব্ধ"</string>
     <string name="condition_bg_data_title" msgid="1422001615923482010">"পশ্চাদপট ডেটা বন্ধ আছে"</string>
     <string name="condition_bg_data_summary" msgid="656957852895282228">"পশ্চাদপট ডেটা শুধুমাত্র Wi-Fi এর মাধ্যমে উপলব্ধ হয়৷ Wi-Fi উপলব্ধ না থাকলে এটি কিছু অ্যাপ্লিকেশান এবং পরিষেবায় প্রভাব ফেলতে পারে৷"</string>
-    <!-- no translation found for condition_work_title (7293722361184366648) -->
-    <skip />
-    <!-- no translation found for condition_work_summary (7543202177571590378) -->
-    <skip />
+    <string name="condition_work_title" msgid="7293722361184366648">"কর্মস্থলের প্রোফাইল বন্ধ রয়েছে"</string>
+    <string name="condition_work_summary" msgid="7543202177571590378">"অ্যাপ, পটভূমি সিঙ্ক এবং আপনার কর্মস্থলের প্রোফাইলের সাথে সম্পর্কিত অন্য বৈশিষ্ট্যগুলিকে বন্ধ করা হয়েছে৷"</string>
     <string name="suggestions_title" msgid="8758376306825920705">"প্রস্তাবনাগুলি (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"সরান"</string>
-    <string name="color_temperature" msgid="2501579996151717270">"কালার টেম্পারেচার প্রদর্শন করুন"</string>
-    <string name="color_temperature_desc" msgid="3603319696846982249">"শীতল টেম্পারেচার সক্ষম করুন"</string>
-    <!-- no translation found for usage (2977875522080448986) -->
-    <skip />
-    <!-- no translation found for cellular_data_usage (2763710678354680712) -->
-    <skip />
-    <!-- no translation found for wifi_data_usage (686754111095324306) -->
-    <skip />
-    <!-- no translation found for ethernet_data_usage (5108764537574354616) -->
-    <skip />
-    <!-- no translation found for wifi (1081550856200013637) -->
-    <skip />
-    <!-- no translation found for ethernet (6600095783781389720) -->
-    <skip />
-    <!-- no translation found for cell_data_template (3308709914705592281) -->
-    <skip />
-    <!-- no translation found for wifi_data_template (501654649753761778) -->
-    <skip />
-    <!-- no translation found for ethernet_data_template (5775729859383597507) -->
-    <skip />
-    <!-- no translation found for cell_warning_only (763147658209027140) -->
-    <skip />
-    <!-- no translation found for cell_warning_and_limit (2273413629267437470) -->
-    <skip />
-    <!-- no translation found for billing_cycle (5169909190811133499) -->
-    <skip />
-    <!-- no translation found for billing_cycle_summary (9009106526129293752) -->
-    <skip />
-    <!-- no translation found for billing_cycle_fragment_summary (1940518156600077066) -->
-    <skip />
-    <!-- no translation found for network_restrictions (8234695294536675380) -->
-    <skip />
-    <!-- no translation found for operator_warning (7206980278353372811) -->
-    <skip />
-    <!-- no translation found for data_used_template (3245919669966296505) -->
-    <skip />
-    <!-- no translation found for data_warning (209133958008062117) -->
-    <skip />
-    <!-- no translation found for set_data_limit (2901526323210516923) -->
-    <skip />
-    <!-- no translation found for data_limit (1885406964934590552) -->
-    <skip />
-    <!-- no translation found for data_usage_template (392191945602400904) -->
-    <skip />
-    <!-- no translation found for configure (1029654422228677273) -->
-    <skip />
+    <string name="color_temperature" msgid="2070126836910615605">"কুল রঙের টেম্পারেচার"</string>
+    <string name="color_temperature_desc" msgid="4793729830226404052">"কুলার প্রদর্শনী রঙগুলি ব্যবহার করুন"</string>
+    <string name="color_temperature_toast" msgid="4974218172133854827">"রঙের পরিবর্তন প্রয়োগ করতে, স্ক্রীন বন্ধ করুন"</string>
+    <string name="usage" msgid="2977875522080448986">"ব্যবহার"</string>
+    <string name="cellular_data_usage" msgid="2763710678354680712">"সেলুলার ডেটার ব্যবহার"</string>
+    <string name="wifi_data_usage" msgid="686754111095324306">"Wi-Fi ডেটার ব্যবহার"</string>
+    <string name="ethernet_data_usage" msgid="5108764537574354616">"ইথারনেট ডেটার ব্যবহার"</string>
+    <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
+    <string name="ethernet" msgid="6600095783781389720">"ইথারনেট"</string>
+    <string name="cell_data_template" msgid="3308709914705592281">"<xliff:g id="ID_1">%1$s</xliff:g> সেলুলার ডেটা"</string>
+    <string name="wifi_data_template" msgid="501654649753761778">"<xliff:g id="ID_1">%1$s</xliff:g> Wi-Fi ডেটা"</string>
+    <string name="ethernet_data_template" msgid="5775729859383597507">"<xliff:g id="ID_1">%1$s</xliff:g> ইথারনেট ডেটা"</string>
+    <string name="cell_warning_only" msgid="763147658209027140">"<xliff:g id="ID_1">%1$s</xliff:g> ডেটা সতর্কতা"</string>
+    <string name="cell_warning_and_limit" msgid="2273413629267437470">"<xliff:g id="ID_1">%1$s</xliff:g> ডেটা সতর্কতা / <xliff:g id="ID_2">%2$s</xliff:g> ডেটা সীমা"</string>
+    <string name="billing_cycle" msgid="5169909190811133499">"বিলিং চক্র"</string>
+    <string name="billing_cycle_summary" msgid="9009106526129293752">"প্রতি মাসের <xliff:g id="ID_1">%1$s</xliff:g> এ মাসিক চক্র শুরু হয়"</string>
+    <string name="billing_cycle_fragment_summary" msgid="1940518156600077066">"মাসিক চক্র <xliff:g id="ID_1">%1$s</xliff:g> এ শুরু হয়"</string>
+    <string name="network_restrictions" msgid="8234695294536675380">"নেটওয়ার্ক সীমাবদ্ধতা"</string>
+    <string name="operator_warning" msgid="7206980278353372811">"অপারেটরের ডেটার হিসাব আপনার ডিভাইসের হিসাবের থেকে আলাদা হতে পারে।"</string>
+    <string name="data_used_template" msgid="3245919669966296505">"<xliff:g id="ID_1">%1$s</xliff:g> ব্যবহৃত হয়েছে"</string>
+    <string name="data_warning" msgid="209133958008062117">"ডেটা সতর্কতা"</string>
+    <string name="set_data_limit" msgid="2901526323210516923">"ডেটা সীমা সেট করুন"</string>
+    <string name="data_limit" msgid="1885406964934590552">"ডেটা সীমা"</string>
+    <string name="data_usage_template" msgid="392191945602400904">"<xliff:g id="ID_2">%2$s</xliff:g> এর মধ্যে <xliff:g id="ID_1">%1$s</xliff:g> ব্যবহৃত হয়েছে"</string>
+    <string name="configure" msgid="1029654422228677273">"কনফিগার করুন"</string>
 </resources>
