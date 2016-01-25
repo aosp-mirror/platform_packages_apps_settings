@@ -31,8 +31,8 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
-import com.android.settings.wifi.AccessPointPreference.UserBadgeCache;
 import com.android.settingslib.wifi.AccessPoint;
+import com.android.settingslib.wifi.AccessPointPreference;
 import com.android.settingslib.wifi.WifiTracker;
 
 import java.util.ArrayList;
@@ -53,7 +53,7 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
     private Bundle mAccessPointSavedState;
     private AccessPoint mSelectedAccessPoint;
 
-    private UserBadgeCache mUserBadgeCache;
+    private AccessPointPreference.UserBadgeCache mUserBadgeCache;
 
     // Instance state key
     private static final String SAVE_DIALOG_ACCESS_POINT_STATE = "wifi_ap_state";
@@ -67,7 +67,7 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.wifi_display_saved_access_points);
-        mUserBadgeCache = new UserBadgeCache(getPackageManager());
+        mUserBadgeCache = new AccessPointPreference.UserBadgeCache(getPackageManager());
     }
 
     @Override
@@ -108,8 +108,9 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
 
         final int accessPointsSize = accessPoints.size();
         for (int i = 0; i < accessPointsSize; ++i){
-            AccessPointPreference preference = new AccessPointPreference(accessPoints.get(i),
-                    context, mUserBadgeCache, true, this);
+            LongPressAccessPointPreference preference =
+                    new LongPressAccessPointPreference(accessPoints.get(i), context,
+                            mUserBadgeCache, true, this);
             preference.setIcon(null);
             preferenceScreen.addPreference(preference);
         }
@@ -119,7 +120,7 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
         }
     }
 
-    private void showDialog(AccessPointPreference accessPoint, boolean edit) {
+    private void showDialog(LongPressAccessPointPreference accessPoint, boolean edit) {
         if (mDialog != null) {
             removeDialog(WifiSettings.WIFI_DIALOG_ID);
             mDialog = null;
@@ -184,8 +185,8 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
 
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
-        if (preference instanceof AccessPointPreference) {
-            showDialog((AccessPointPreference) preference, false);
+        if (preference instanceof LongPressAccessPointPreference) {
+            showDialog((LongPressAccessPointPreference) preference, false);
             return true;
         } else{
             return super.onPreferenceTreeClick(preference);
