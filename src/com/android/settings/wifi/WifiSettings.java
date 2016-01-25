@@ -131,7 +131,6 @@ public class WifiSettings extends RestrictedSettingsFragment
     private WifiDialog mDialog;
     private WriteWifiConfigToNfcDialog mWifiToNfcDialog;
 
-    private TextView mEmptyView;
     private ProgressBar mProgressHeader;
 
     // this boolean extra specifies whether to disable the Next button when not connected. Used by
@@ -280,7 +279,6 @@ public class WifiSettings extends RestrictedSettingsFragment
             }
         }
 
-        mEmptyView = initEmptyView();
         registerForContextMenu(getListView());
         setHasOptionsMenu(true);
 
@@ -628,9 +626,8 @@ public class WifiSettings extends RestrictedSettingsFragment
     public void onAccessPointsChanged() {
         // Safeguard from some delayed event handling
         if (getActivity() == null) return;
-
         if (isUiRestricted()) {
-            addMessagePreference(R.string.wifi_empty_list_user_restricted);
+            getPreferenceScreen().removeAll();
             return;
         }
         final int wifiState = mWifiManager.getWifiState();
@@ -708,15 +705,26 @@ public class WifiSettings extends RestrictedSettingsFragment
         }
     }
 
-    protected TextView initEmptyView() {
+    @Override
+    protected TextView initEmptyTextView() {
         TextView emptyView = (TextView) getActivity().findViewById(android.R.id.empty);
         emptyView.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
-        setEmptyView(emptyView);
         return emptyView;
     }
 
+    @Override
+    protected View initAdminSupportDetailsView() {
+        return getActivity().findViewById(R.id.admin_support_details);
+    }
+
     private void setOffMessage() {
-        if (mEmptyView == null) {
+        if (isUiRestricted()) {
+            getPreferenceScreen().removeAll();
+            return;
+        }
+
+        TextView emptyTextView = getEmptyTextView();
+        if (emptyTextView == null) {
             return;
         }
 
@@ -729,17 +737,17 @@ public class WifiSettings extends RestrictedSettingsFragment
         final boolean wifiScanningMode = Settings.Global.getInt(
                 resolver, Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 0) == 1;
 
-        if (isUiRestricted() || !wifiScanningMode) {
+        if (!wifiScanningMode) {
             // Show only the brief text if the user is not allowed to configure scanning settings,
             // or the scanning mode has been turned off.
-            mEmptyView.setText(briefText, BufferType.SPANNABLE);
+            emptyTextView.setText(briefText, BufferType.SPANNABLE);
         } else {
             // Append the description of scanning settings with link.
             final StringBuilder contentBuilder = new StringBuilder();
             contentBuilder.append(briefText);
             contentBuilder.append("\n\n");
             contentBuilder.append(getText(R.string.wifi_scan_notify_text));
-            LinkifyUtils.linkify(mEmptyView, contentBuilder, new LinkifyUtils.OnClickListener() {
+            LinkifyUtils.linkify(emptyTextView, contentBuilder, new LinkifyUtils.OnClickListener() {
                 @Override
                 public void onClick() {
                     final SettingsActivity activity =
@@ -750,7 +758,7 @@ public class WifiSettings extends RestrictedSettingsFragment
             });
         }
         // Embolden and enlarge the brief description anyway.
-        Spannable boldSpan = (Spannable) mEmptyView.getText();
+        Spannable boldSpan = (Spannable) emptyTextView.getText();
         boldSpan.setSpan(
                 new TextAppearanceSpan(getActivity(), android.R.style.TextAppearance_Medium), 0,
                 briefText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -758,7 +766,8 @@ public class WifiSettings extends RestrictedSettingsFragment
     }
 
     private void addMessagePreference(int messageId) {
-        if (mEmptyView != null) mEmptyView.setText(messageId);
+        TextView emptyTextView = getEmptyTextView();
+        if (emptyTextView != null) emptyTextView.setText(messageId);
         getPreferenceScreen().removeAll();
     }
 

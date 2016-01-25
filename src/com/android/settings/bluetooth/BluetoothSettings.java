@@ -87,7 +87,6 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
     private boolean mInitialScanStarted;
     private boolean mInitiateDiscoverable;
 
-    private TextView mEmptyView;
     private SwitchBar mSwitchBar;
 
     private final IntentFilter mIntentFilter;
@@ -136,10 +135,6 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
         mInitialScanStarted = false;
         mInitiateDiscoverable = true;
 
-        mEmptyView = (TextView) getView().findViewById(android.R.id.empty);
-        setEmptyView(mEmptyView);
-        mEmptyView.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
-
         final SettingsActivity activity = (SettingsActivity) getActivity();
         mSwitchBar = activity.getSwitchBar();
 
@@ -175,7 +170,6 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
         if (isUiRestricted()) {
             setDeviceListGroup(getPreferenceScreen());
             removeAllDevices();
-            mEmptyView.setText(R.string.bluetooth_empty_list_user_restricted);
             return;
         }
 
@@ -298,7 +292,6 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
                 mDevicePreferenceMap.clear();
 
                 if (isUiRestricted()) {
-                    messageId = R.string.bluetooth_empty_list_user_restricted;
                     break;
                 }
 
@@ -360,7 +353,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
             case BluetoothAdapter.STATE_OFF:
                 setOffMessage();
                 if (isUiRestricted()) {
-                    messageId = R.string.bluetooth_empty_list_user_restricted;
+                    messageId = 0;
                 }
                 break;
 
@@ -373,15 +366,28 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
         setDeviceListGroup(preferenceScreen);
         removeAllDevices();
         if (messageId != 0) {
-            mEmptyView.setText(messageId);
+            getEmptyTextView().setText(messageId);
         }
         if (!isUiRestricted()) {
             getActivity().invalidateOptionsMenu();
         }
     }
 
+    @Override
+    protected TextView initEmptyTextView() {
+        TextView textView = (TextView) getView().findViewById(android.R.id.empty);
+        textView.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
+        return textView;
+    }
+
+    @Override
+    protected View initAdminSupportDetailsView() {
+        return getActivity().findViewById(R.id.admin_support_details);
+    }
+
     private void setOffMessage() {
-        if (mEmptyView == null) {
+        final TextView emptyView = getEmptyTextView();
+        if (emptyView == null) {
             return;
         }
         final CharSequence briefText = getText(R.string.bluetooth_empty_list_bluetooth_off);
@@ -392,13 +398,13 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
 
         if (!bleScanningMode) {
             // Show only the brief text if the scanning mode has been turned off.
-            mEmptyView.setText(briefText, TextView.BufferType.SPANNABLE);
+            emptyView.setText(briefText, TextView.BufferType.SPANNABLE);
         } else {
             final StringBuilder contentBuilder = new StringBuilder();
             contentBuilder.append(briefText);
             contentBuilder.append("\n\n");
             contentBuilder.append(getText(R.string.ble_scan_notify_text));
-            LinkifyUtils.linkify(mEmptyView, contentBuilder, new LinkifyUtils.OnClickListener() {
+            LinkifyUtils.linkify(emptyView, contentBuilder, new LinkifyUtils.OnClickListener() {
                 @Override
                 public void onClick() {
                     final SettingsActivity activity =
@@ -409,7 +415,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
             });
         }
         getPreferenceScreen().removeAll();
-        Spannable boldSpan = (Spannable) mEmptyView.getText();
+        Spannable boldSpan = (Spannable) emptyView.getText();
         boldSpan.setSpan(
                 new TextAppearanceSpan(getActivity(), android.R.style.TextAppearance_Medium), 0,
                 briefText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);

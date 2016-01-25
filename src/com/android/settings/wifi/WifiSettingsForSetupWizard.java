@@ -144,7 +144,7 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
     }
 
     @Override
-    protected TextView initEmptyView() {
+    protected TextView initEmptyTextView() {
         final LayoutInflater inflater = LayoutInflater.from(getActivity());
         mEmptyFooter = (TextView) inflater.inflate(R.layout.setup_wifi_empty, getListView(), false);
         return mEmptyFooter;
