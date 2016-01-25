@@ -26,6 +26,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.os.UserManager;
 import android.os.storage.StorageManager;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -180,8 +181,16 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
         }
 
         private int getDefaultDetails() {
-            return mIsAlpha ? R.string.lockpassword_confirm_your_password_generic
-                    : R.string.lockpassword_confirm_your_pin_generic;
+            boolean isProfile = Utils.isManagedProfile(
+                    UserManager.get(getActivity()), mEffectiveUserId);
+            if (mIsAlpha && !isProfile) {
+                return R.string.lockpassword_confirm_your_password_generic;
+            } else if (mIsAlpha && isProfile) {
+                return R.string.lockpassword_confirm_your_password_generic_profile;
+            } else if (!isProfile) {
+                return R.string.lockpassword_confirm_your_pin_generic;
+            }
+            return R.string.lockpassword_confirm_your_pin_generic_profile;
         }
 
         private int getErrorMessage() {
