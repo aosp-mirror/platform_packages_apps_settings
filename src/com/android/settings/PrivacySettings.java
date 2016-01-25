@@ -56,6 +56,7 @@ public class PrivacySettings extends SettingsPreferenceFragment implements Index
     private static final String BACKUP_DATA = "backup_data";
     private static final String AUTO_RESTORE = "auto_restore";
     private static final String CONFIGURE_ACCOUNT = "configure_account";
+    private static final String DATA_MANAGEMENT = "data_management";
     private static final String BACKUP_INACTIVE = "backup_inactive";
     private static final String NETWORK_RESET = "network_reset";
     private static final String FACTORY_RESET = "factory_reset";
@@ -64,6 +65,7 @@ public class PrivacySettings extends SettingsPreferenceFragment implements Index
     private PreferenceScreen mBackup;
     private SwitchPreference mAutoRestore;
     private PreferenceScreen mConfigure;
+    private PreferenceScreen mManageData;
     private boolean mEnabled;
 
     @Override
@@ -92,6 +94,7 @@ public class PrivacySettings extends SettingsPreferenceFragment implements Index
         mAutoRestore.setOnPreferenceChangeListener(preferenceChangeListener);
 
         mConfigure = (PreferenceScreen) screen.findPreference(CONFIGURE_ACCOUNT);
+        mManageData = (PreferenceScreen) screen.findPreference(DATA_MANAGEMENT);
 
         Set<String> keysToRemove = new HashSet<>();
         getNonVisibleKeys(getActivity(), keysToRemove);
@@ -146,11 +149,15 @@ public class PrivacySettings extends SettingsPreferenceFragment implements Index
         boolean backupEnabled = false;
         Intent configIntent = null;
         String configSummary = null;
+        Intent manageIntent = null;
+        String manageLabel = null;
         try {
             backupEnabled = mBackupManager.isBackupEnabled();
             String transport = mBackupManager.getCurrentTransport();
             configIntent = mBackupManager.getConfigurationIntent(transport);
             configSummary = mBackupManager.getDestinationString(transport);
+            manageIntent = mBackupManager.getDataManagementIntent(transport);
+            manageLabel = mBackupManager.getDataManagementLabel(transport);
 
             mBackup.setSummary(backupEnabled
                     ? R.string.accessibility_feature_state_on
@@ -168,6 +175,17 @@ public class PrivacySettings extends SettingsPreferenceFragment implements Index
         mConfigure.setEnabled(configureEnabled);
         mConfigure.setIntent(configIntent);
         setConfigureSummary(configSummary);
+
+        final boolean manageEnabled = (manageIntent != null) && backupEnabled;
+        if (manageEnabled) {
+            mManageData.setIntent(manageIntent);
+            if (manageLabel != null) {
+                mManageData.setTitle(manageLabel);
+            }
+        } else {
+            // Hide the item if data management intent is not supported by transport.
+            getPreferenceScreen().removePreference(mManageData);
+        }
 
         RestrictedPreference networkResetPref = (RestrictedPreference) findPreference(
                 NETWORK_RESET);
