@@ -1,0 +1,76 @@
+/*
+ * Copyright (C) 2016 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.android.settings;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.os.Bundle;
+import android.os.ResultReceiver;
+import android.os.UserHandle;
+import android.util.Log;
+
+/**
+ * Activity which acts as a proxy to the tether provisioning app for sanity checks and permission
+ * restrictions. Specifically, the provisioning apps require
+ * {@link android.permission.CONNECTIVITY_INTERNAL}, while this activity can be started by a caller
+ * with {@link android.permission.TETHER_PRIVILEGED}.
+ */
+public class TetherProvisioningActivity extends Activity {
+    private static final int PROVISION_REQUEST = 0;
+    private static final String TAG = "TetherProvisioningAct";
+    private static final String EXTRA_TETHER_TYPE = "TETHER_TYPE";
+    private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
+    private ResultReceiver mResultReceiver;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        mResultReceiver = (ResultReceiver)getIntent().getParcelableExtra(
+                ConnectivityManager.EXTRA_PROVISION_CALLBACK);
+
+        // TODO: Move isProvisioningNeededButUnavailable into ConnectivityManager and check
+        // it here to short-circuit and fail.
+
+        int tetherType = getIntent().getIntExtra(ConnectivityManager.EXTRA_ADD_TETHER_TYPE,
+                ConnectivityManager.TETHERING_INVALID);
+        String[] provisionApp = getResources().getStringArray(
+                com.android.internal.R.array.config_mobile_hotspot_provision_app);
+
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.setClassName(provisionApp[0], provisionApp[1]);
+        intent.putExtra(EXTRA_TETHER_TYPE, tetherType);
+        if (DEBUG) {
+            Log.d(TAG, "Starting provisioning app: " + provisionApp[0] + "." + provisionApp[1]);
+        }
+        startActivityForResultAsUser(intent, PROVISION_REQUEST, UserHandle.CURRENT);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+        if (requestCode == PROVISION_REQUEST) {
+            if (DEBUG) Log.d(TAG, "Got result from app: " + resultCode);
+            int result = resultCode == Activity.RESULT_OK ?
+                    ConnectivityManager.TETHER_ERROR_NO_ERROR :
+                    ConnectivityManager.TETHER_ERROR_PROVISION_FAILED;
+            mResultReceiver.send(result, null);
+            finish();
+        }
+    }
+}
