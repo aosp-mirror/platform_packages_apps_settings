@@ -18,11 +18,13 @@ package com.android.settings.fingerprint;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.Intent;
+import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.view.View;
 
 import com.android.internal.logging.MetricsLogger;
+import com.android.settings.ChooseLockGeneric;
 import com.android.settings.ChooseLockSettingsHelper;
 import com.android.settings.HelpUtils;
 import com.android.settings.R;
@@ -31,6 +33,9 @@ import com.android.settings.R;
  * Onboarding activity for fingerprint enrollment.
  */
 public class FingerprintEnrollIntroduction extends FingerprintEnrollBase {
+
+    private static final int CHOOSE_LOCK_GENERIC_REQUEST = 1;
+    private static final int FINGERPRINT_FIND_SENSOR_REQUEST = 2;
 
     private boolean mHasPassword;
 
@@ -43,24 +48,48 @@ public class FingerprintEnrollIntroduction extends FingerprintEnrollBase {
         findViewById(R.id.learn_more_button).setOnClickListener(this);
         final int passwordQuality = new ChooseLockSettingsHelper(this).utils()
                 .getActivePasswordQuality(UserHandle.myUserId());
+        updatePasswordQuality();
+    }
+
+    private void updatePasswordQuality() {
+        final int passwordQuality = new ChooseLockSettingsHelper(this).utils()
+                .getActivePasswordQuality(UserHandle.myUserId());
         mHasPassword = passwordQuality != DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
     }
 
     @Override
     protected void onNextButtonClick() {
-        Intent intent;
         if (!mHasPassword) {
             // No fingerprints registered, launch into enrollment wizard.
-            intent = getOnboardIntent();
+            launchChooseLock();
         } else {
             // Lock thingy is already set up, launch directly into find sensor step from wizard.
-            intent = getFindSensorIntent();
+            launchFindSensor(null);
         }
-        startActivityForResult(intent, 0);
     }
 
-    protected Intent getOnboardIntent() {
-        return new Intent(this, FingerprintEnrollOnboard.class);
+    private void launchChooseLock() {
+        Intent intent = getChooseLockIntent();
+        long challenge = getSystemService(FingerprintManager.class).preEnroll();
+        intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.MINIMUM_QUALITY_KEY,
+                DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);
+        intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.HIDE_DISABLED_PREFS, true);
+        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, true);
+        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, challenge);
+        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, true);
+        startActivityForResult(intent, CHOOSE_LOCK_GENERIC_REQUEST);
+    }
+
+    private void launchFindSensor(byte[] token) {
+        Intent intent = getFindSensorIntent();
+        if (token != null) {
+            intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
+        }
+        startActivityForResult(intent, FINGERPRINT_FIND_SENSOR_REQUEST);
+    }
+
+    protected Intent getChooseLockIntent() {
+        return new Intent(this, ChooseLockGeneric.class);
     }
 
     protected Intent getFindSensorIntent() {
@@ -70,8 +99,15 @@ public class FingerprintEnrollIntroduction extends FingerprintEnrollBase {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_FINISHED) {
-            setResult(RESULT_OK);
-            finish();
+            if (requestCode == FINGERPRINT_FIND_SENSOR_REQUEST) {
+                setResult(RESULT_OK);
+                finish();
+            } else if (requestCode == CHOOSE_LOCK_GENERIC_REQUEST) {
+                updatePasswordQuality();
+                byte[] token = data.getByteArrayExtra(
+                        ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
+                launchFindSensor(token);
+            }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
