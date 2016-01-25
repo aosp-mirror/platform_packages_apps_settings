@@ -233,7 +233,12 @@
     <string name="sdcard_settings_read_only_status" product="default" msgid="4518291824764698112">"SD-kortet har bare lesetilgang."</string>
     <string name="skip_label" msgid="47510779345218297">"Hopp over"</string>
     <string name="next_label" msgid="4693520878012668114">"Neste"</string>
-    <string name="language_picker_title" msgid="5349877711342869319">"Språk"</string>
+    <string name="pref_title_lang_selection" msgid="5696814792962878791">"Språkinnstilling"</string>
+    <string name="locale_remove_menu" msgid="7651301406723638854">"Fjern"</string>
+    <string name="add_a_language" msgid="2330538812283783022">"Legg til et språk"</string>
+    <string name="dlg_remove_locales_title" msgid="4143034933365516195">"Vil du fjerne dem fra språkinnstillingen din?"</string>
+    <string name="dlg_remove_locales_error_title" msgid="463635546627235043">"Feil ved fjerning av språk"</string>
+    <string name="dlg_remove_locales_error_message" msgid="7108948386818227115">"Du kan ikke fjerne alle språkene. Du må beholde minst ett av dem."</string>
     <string name="activity_picker_label" msgid="6295660302548177109">"Velg aktivitet"</string>
     <string name="device_info_label" msgid="6551553813651711205">"Enhetsinformasjon"</string>
     <string name="display_label" msgid="8074070940506840792">"Skjerm"</string>
@@ -264,8 +269,7 @@
     <string name="roaming_disable" msgid="1295279574370898378">"Koble til datatjenester ved roaming"</string>
     <string name="roaming_reenable_message" msgid="9141007271031717369">"Du har mistet datatilkobling fordi du forlot hjemmenettet med dataroaming av."</string>
     <string name="roaming_turn_it_on_button" msgid="4387601818162120589">"Slå på"</string>
-    <!-- no translation found for roaming_warning (4275443317524544705) -->
-    <skip />
+    <string name="roaming_warning" msgid="4275443317524544705">"Det kan medføre betydelige kostnader."</string>
     <string name="roaming_warning_multiuser" product="tablet" msgid="6458990250829214777">"Når du tillater roaming, kan dette føre til høye datakostnader.\n\nDenne innstillingen påvirker alle brukerne på dette nettbrettet."</string>
     <string name="roaming_warning_multiuser" product="default" msgid="6368421100292355440">"Når du tillater roaming, kan dette føre til høye datakostnader.\n\nDenne innstillingen påvirker alle brukerne på denne telefonen."</string>
     <string name="roaming_reenable_title" msgid="6068100976707316772">"Vil du tillate roaming?"</string>
@@ -1470,6 +1474,24 @@
     <string name="spellchecker_quick_settings" msgid="246728645150092058">"Innstillinger"</string>
     <string name="spellchecker_language" msgid="6041050114690541437">"Språk"</string>
     <string name="failed_to_open_app_settings_toast" msgid="1251067459298072462">"Kunne ikke åpne innstillingene for <xliff:g id="SPELL_APPLICATION_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for keyboard_and_input_methods_category (212319666432360385) -->
+    <skip />
+    <!-- no translation found for virtual_keyboard_category (1012830752318677119) -->
+    <skip />
+    <!-- no translation found for physical_keyboard_category (7946003168662969622) -->
+    <skip />
+    <!-- no translation found for available_virtual_keyboard_category (7645766574969139819) -->
+    <skip />
+    <!-- no translation found for add_virtual_keyboard (2867069766124874859) -->
+    <skip />
+    <!-- no translation found for keyboard_assistance_category (5843634175231134014) -->
+    <skip />
+    <!-- no translation found for show_ime (2658582193437188227) -->
+    <skip />
+    <!-- no translation found for show_ime_summary (8164993045923240698) -->
+    <skip />
+    <!-- no translation found for keyboard_shortcuts_helper (4839453720463798145) -->
+    <skip />
     <string name="pointer_settings_category" msgid="8183819795164034286">"Mus/styreflate"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"Pekerhastighet"</string>
     <string name="game_controller_settings_category" msgid="8794508575329923718">"Spillkontroller"</string>
@@ -1539,8 +1561,13 @@
     <string name="usage_time_label" msgid="295954901452833058">"Brukstid"</string>
     <string name="accessibility_settings" msgid="3975902491934816215">"Tilgjengelighet"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Tilgjengelighetsinnstillinger"</string>
-    <string name="accessibility_settings_for_setup_wizard_title" msgid="7148099953002332324">"Vis meg hvordan"</string>
+    <!-- no translation found for vision_settings_title (4204111425716868288) -->
+    <skip />
+    <!-- no translation found for vision_settings_description (7754433456207334423) -->
+    <skip />
     <string name="accessibility_services_title" msgid="2592221829284342237">"Tjenester"</string>
+    <!-- no translation found for talkback_summary (6239954195360531224) -->
+    <skip />
     <string name="accessibility_system_title" msgid="7187919089874130484">"System"</string>
     <string name="accessibility_display_title" msgid="7610175687949675162">"Skjerm"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"Teksting"</string>
@@ -1937,10 +1964,8 @@
     <string name="sync_is_failing" msgid="1591561768344128377">"Det er midlertidige problemer med synkroniseringen. Vent litt."</string>
     <string name="add_account_label" msgid="7811707265834013767">"Legg til konto"</string>
     <string name="managed_profile_not_available_label" msgid="852263300911325904">"Arbeidsprofilen er ikke tilgjengelig ennå"</string>
-    <!-- no translation found for work_mode_label (5794470908668593961) -->
-    <skip />
-    <!-- no translation found for work_mode_summary (1620246003886940776) -->
-    <skip />
+    <string name="work_mode_label" msgid="5794470908668593961">"Jobbmodus"</string>
+    <string name="work_mode_summary" msgid="1620246003886940776">"Slå på jobbprofilen, inkludert apper, synkronisering i bakgrunnen og relaterte funksjoner"</string>
     <string name="remove_managed_profile_label" msgid="3856519337797285325">"Fjern arbeidsprofilen"</string>
     <string name="background_data" msgid="5779592891375473817">"Bakgrunnsdata"</string>
     <string name="background_data_summary" msgid="8328521479872763452">"Apper kan når som helst synkronisere, sende og motta data"</string>
@@ -2384,6 +2409,7 @@
     <string name="notification_volume_option_title" msgid="6064656124416882130">"Varselvolum"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Telefonringelyd"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Standard varslingslyd"</string>
+    <string name="alarm_ringtone_title" msgid="2015124067611102995">"Standard alarmringelyd"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Vibrer også når det ringer"</string>
     <string name="master_mono_title" msgid="8123291759393322551">"Monoavspilling"</string>
     <string name="master_mono_on" msgid="53180785336592938">"Spill alltid av lyd i mono"</string>
@@ -2756,7 +2782,8 @@
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Åpne kameraappen ved å vri to ganger på håndleddet"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Tykk på av/på-knappen to ganger for kamera"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Åpne kameraet raskt uten å låse opp skjermen"</string>
-    <string name="screen_zoom_title" msgid="6332123593919641665">"Zoom på skjermen"</string>
+    <!-- no translation found for screen_zoom_title (5530967660604527002) -->
+    <skip />
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"skjermtetthet, zoom på skjermen, skala, skalering"</string>
     <string name="screen_zoom_summary" msgid="2022973627105802010">"Gjør alt på skjermen større eller mindre. Enkelte apper på startskjermen kan skifte plassering hvis du endrer denne innstillingen."</string>
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"Forhåndsvisning"</string>
@@ -2802,55 +2829,36 @@
     <string name="condition_cellular_summary" msgid="1818046558419658463">"Internett er bare tilgjengelig via Wi-Fi"</string>
     <string name="condition_bg_data_title" msgid="1422001615923482010">"Bakgrunnsdata er av"</string>
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Bakgrunnsdata er bare tilgjengelig via Wi-Fi. Dette kan påvirke noen apper og tjenester når Wi-Fi ikke er tilgjengelig."</string>
-    <!-- no translation found for condition_work_title (7293722361184366648) -->
-    <skip />
-    <!-- no translation found for condition_work_summary (7543202177571590378) -->
-    <skip />
+    <string name="condition_work_title" msgid="7293722361184366648">"Jobbprofilen er av"</string>
+    <string name="condition_work_summary" msgid="7543202177571590378">"Apper, synkronisering i bakgrunnen og andre funksjoner som er knyttet til jobbprofilen din, er slått av."</string>
     <string name="suggestions_title" msgid="8758376306825920705">"Forslag (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"Fjern"</string>
-    <string name="color_temperature" msgid="2501579996151717270">"Vis fargetemperatur"</string>
-    <string name="color_temperature_desc" msgid="3603319696846982249">"Slå på kjølig temeperatur"</string>
-    <!-- no translation found for usage (2977875522080448986) -->
+    <!-- no translation found for color_temperature (2070126836910615605) -->
     <skip />
-    <!-- no translation found for cellular_data_usage (2763710678354680712) -->
+    <!-- no translation found for color_temperature_desc (4793729830226404052) -->
     <skip />
-    <!-- no translation found for wifi_data_usage (686754111095324306) -->
+    <!-- no translation found for color_temperature_toast (4974218172133854827) -->
     <skip />
-    <!-- no translation found for ethernet_data_usage (5108764537574354616) -->
-    <skip />
+    <string name="usage" msgid="2977875522080448986">"Bruk"</string>
+    <string name="cellular_data_usage" msgid="2763710678354680712">"Mobildatabruk"</string>
+    <string name="wifi_data_usage" msgid="686754111095324306">"Forbruk av Wi-Fi-data"</string>
+    <string name="ethernet_data_usage" msgid="5108764537574354616">"Ethernet-databruk"</string>
     <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
-    <!-- no translation found for ethernet (6600095783781389720) -->
-    <skip />
-    <!-- no translation found for cell_data_template (3308709914705592281) -->
-    <skip />
-    <!-- no translation found for wifi_data_template (501654649753761778) -->
-    <skip />
-    <!-- no translation found for ethernet_data_template (5775729859383597507) -->
-    <skip />
-    <!-- no translation found for cell_warning_only (763147658209027140) -->
-    <skip />
-    <!-- no translation found for cell_warning_and_limit (2273413629267437470) -->
-    <skip />
-    <!-- no translation found for billing_cycle (5169909190811133499) -->
-    <skip />
-    <!-- no translation found for billing_cycle_summary (9009106526129293752) -->
-    <skip />
-    <!-- no translation found for billing_cycle_fragment_summary (1940518156600077066) -->
-    <skip />
-    <!-- no translation found for network_restrictions (8234695294536675380) -->
-    <skip />
-    <!-- no translation found for operator_warning (7206980278353372811) -->
-    <skip />
-    <!-- no translation found for data_used_template (3245919669966296505) -->
-    <skip />
-    <!-- no translation found for data_warning (209133958008062117) -->
-    <skip />
-    <!-- no translation found for set_data_limit (2901526323210516923) -->
-    <skip />
-    <!-- no translation found for data_limit (1885406964934590552) -->
-    <skip />
-    <!-- no translation found for data_usage_template (392191945602400904) -->
-    <skip />
-    <!-- no translation found for configure (1029654422228677273) -->
-    <skip />
+    <string name="ethernet" msgid="6600095783781389720">"Ethernet"</string>
+    <string name="cell_data_template" msgid="3308709914705592281">"Mobildata: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="wifi_data_template" msgid="501654649753761778">"Wi-Fi-data: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="ethernet_data_template" msgid="5775729859383597507">"<xliff:g id="ID_1">%1$s</xliff:g> Ethernet-data"</string>
+    <string name="cell_warning_only" msgid="763147658209027140">"Advarsel for databruk: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="cell_warning_and_limit" msgid="2273413629267437470">"Advarsel for databruk: <xliff:g id="ID_1">%1$s</xliff:g> / datagrense: <xliff:g id="ID_2">%2$s</xliff:g>"</string>
+    <string name="billing_cycle" msgid="5169909190811133499">"Faktureringssyklus"</string>
+    <string name="billing_cycle_summary" msgid="9009106526129293752">"Den månedlige faktureringssyklusen starter den <xliff:g id="ID_1">%1$s</xliff:g>. dagen i måneden"</string>
+    <string name="billing_cycle_fragment_summary" msgid="1940518156600077066">"Månedlig fakturering starter <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="network_restrictions" msgid="8234695294536675380">"Nettverksbegrensninger"</string>
+    <string name="operator_warning" msgid="7206980278353372811">"Operatørens metoder for måling av databruk kan være forskjellig fra enhetens metoder."</string>
+    <string name="data_used_template" msgid="3245919669966296505">"<xliff:g id="ID_1">%1$s</xliff:g> er brukt"</string>
+    <string name="data_warning" msgid="209133958008062117">"Advarsel for dataforbruk"</string>
+    <string name="set_data_limit" msgid="2901526323210516923">"Angi en datagrense"</string>
+    <string name="data_limit" msgid="1885406964934590552">"Datagrense"</string>
+    <string name="data_usage_template" msgid="392191945602400904">"<xliff:g id="ID_1">%1$s</xliff:g> er brukt i tidsrommet <xliff:g id="ID_2">%2$s</xliff:g>"</string>
+    <string name="configure" msgid="1029654422228677273">"Konfigurer"</string>
 </resources>
