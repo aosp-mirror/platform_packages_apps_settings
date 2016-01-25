@@ -233,12 +233,7 @@
     <string name="sdcard_settings_read_only_status" product="default" msgid="4518291824764698112">"Karta SD e lidhur vetëm për lexim."</string>
     <string name="skip_label" msgid="47510779345218297">"Kapërce"</string>
     <string name="next_label" msgid="4693520878012668114">"Përpara"</string>
-    <string name="pref_title_lang_selection" msgid="5696814792962878791">"Preferenca për gjuhën"</string>
-    <string name="locale_remove_menu" msgid="7651301406723638854">"Hiqe"</string>
-    <string name="add_a_language" msgid="2330538812283783022">"Shto gjuhë"</string>
-    <string name="dlg_remove_locales_title" msgid="4143034933365516195">"Të hiqet nga preferencat e tua për gjuhën?"</string>
-    <string name="dlg_remove_locales_error_title" msgid="463635546627235043">"Gabim në heqjen e gjuhës"</string>
-    <string name="dlg_remove_locales_error_message" msgid="7108948386818227115">"Nuk mund të hiqen të gj itha gjuhët, duhet të kesh të paktën një."</string>
+    <string name="language_picker_title" msgid="5349877711342869319">"Gjuha"</string>
     <string name="activity_picker_label" msgid="6295660302548177109">"Zgjidh aktivitetin"</string>
     <string name="device_info_label" msgid="6551553813651711205">"Informacioni i pajisjes"</string>
     <string name="display_label" msgid="8074070940506840792">"Ekrani"</string>
@@ -1474,24 +1469,6 @@
     <string name="spellchecker_quick_settings" msgid="246728645150092058">"Cilësimet"</string>
     <string name="spellchecker_language" msgid="6041050114690541437">"Gjuha"</string>
     <string name="failed_to_open_app_settings_toast" msgid="1251067459298072462">"Dështoi në hapjen e cilësimeve për <xliff:g id="SPELL_APPLICATION_NAME">%1$s</xliff:g>"</string>
-    <!-- no translation found for keyboard_and_input_methods_category (212319666432360385) -->
-    <skip />
-    <!-- no translation found for virtual_keyboard_category (1012830752318677119) -->
-    <skip />
-    <!-- no translation found for physical_keyboard_category (7946003168662969622) -->
-    <skip />
-    <!-- no translation found for available_virtual_keyboard_category (7645766574969139819) -->
-    <skip />
-    <!-- no translation found for add_virtual_keyboard (2867069766124874859) -->
-    <skip />
-    <!-- no translation found for keyboard_assistance_category (5843634175231134014) -->
-    <skip />
-    <!-- no translation found for show_ime (2658582193437188227) -->
-    <skip />
-    <!-- no translation found for show_ime_summary (8164993045923240698) -->
-    <skip />
-    <!-- no translation found for keyboard_shortcuts_helper (4839453720463798145) -->
-    <skip />
     <string name="pointer_settings_category" msgid="8183819795164034286">"Miu/blloku i prekjes"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"Shpejtësia e treguesit"</string>
     <string name="game_controller_settings_category" msgid="8794508575329923718">"Kontrolluesi i lojës"</string>
@@ -1561,10 +1538,8 @@
     <string name="usage_time_label" msgid="295954901452833058">"Koha e përdorimit"</string>
     <string name="accessibility_settings" msgid="3975902491934816215">"Qasshmëria"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Cilësimet e qasjes"</string>
-    <string name="vision_settings_title" msgid="4204111425716868288">"Cilësimet e shikimit"</string>
-    <string name="vision_settings_description" msgid="7754433456207334423">"Rregullo këto cilësime tani për të të ndihmuar në pjesën e mbetur të procesit të konfigurimit. Ato mund t\'i rregullosh në çdo kohë te cilësimet e pajisjes."</string>
+    <string name="accessibility_settings_for_setup_wizard_title" msgid="7148099953002332324">"Më udhëzo"</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"Shërbimet"</string>
-    <string name="talkback_summary" msgid="6239954195360531224">"Një vegël e lexuesit të ekranit kryesisht për personat e verbër dhe me shikim të dobët"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"Sistemi"</string>
     <string name="accessibility_display_title" msgid="7610175687949675162">"Paraqitja"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"Titrat"</string>
@@ -2406,7 +2381,6 @@
     <string name="notification_volume_option_title" msgid="6064656124416882130">"Volumi i njoftimit"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Zilja e telefonit"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Zilja e parazgjedhur e njoftimit"</string>
-    <string name="alarm_ringtone_title" msgid="2015124067611102995">"Zilja e parazgjedhur e alarmit"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Edhe dridhje për telefonatat"</string>
     <string name="master_mono_title" msgid="8123291759393322551">"Luajtja e audios"</string>
     <string name="master_mono_on" msgid="53180785336592938">"Gjithmonë luaje audion në mono"</string>
@@ -2779,7 +2753,7 @@
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Hap aplikacionin e kamerës duke rrotulluar kyçin e dorës dy herë"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Shtyp butonin e energjisë dy herë për kamerën"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Hap me shpejtësi kamerën pa e shkyçur ekranin"</string>
-    <string name="screen_zoom_title" msgid="5530967660604527002">"Zmadho ekranin"</string>
+    <string name="screen_zoom_title" msgid="6332123593919641665">"Zmadhimi i ekranit"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"dendësia e pamjes, zmadhimi i ekranit, shkalla, shkallëzimi"</string>
     <string name="screen_zoom_summary" msgid="2022973627105802010">"Bëji të gjithë artikujt në ekran më të vegjël ose më të mëdhenj. Disa aplikacione në ekranin bazë mund të ndryshojnë pozicion pas ndryshimit të këtij cilësimi."</string>
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"Pamja paraprake"</string>
@@ -2829,9 +2803,8 @@
     <string name="condition_work_summary" msgid="7543202177571590378">"Janë çaktivizuar aplikacionet, sinkronizimi në sfond dhe veçoritë e tjera që lidhen me profilin e punës."</string>
     <string name="suggestions_title" msgid="8758376306825920705">"Sugjerimet (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"Hiqe"</string>
-    <string name="color_temperature" msgid="2070126836910615605">"Temperatura e ftohtë e ngjyrës"</string>
-    <string name="color_temperature_desc" msgid="4793729830226404052">"Përdor ngjyra të ftohta të ekranit"</string>
-    <string name="color_temperature_toast" msgid="4974218172133854827">"Për të zbatuar ndryshimin e ngjyrës, çaktivizoje ekranin"</string>
+    <string name="color_temperature" msgid="2501579996151717270">"Shfaq temperaturën e ngjyrës"</string>
+    <string name="color_temperature_desc" msgid="3603319696846982249">"Aktivizo temperaturën e ftohtë"</string>
     <string name="usage" msgid="2977875522080448986">"Përdorimi"</string>
     <string name="cellular_data_usage" msgid="2763710678354680712">"Përdorimi i të dhënave celulare"</string>
     <string name="wifi_data_usage" msgid="686754111095324306">"Përdorimi i të dhënave me Wi-Fi"</string>
