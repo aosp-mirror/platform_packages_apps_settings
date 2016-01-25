@@ -33,7 +33,7 @@ import java.util.Arrays;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-public class UtilsTests extends AndroidTestCase {
+public class UtilsTest extends AndroidTestCase {
     private static final int TEST_PRIMARY_USER_ID = 10;
     private static final int TEST_MANAGED_PROFILE_ID = 11;
 

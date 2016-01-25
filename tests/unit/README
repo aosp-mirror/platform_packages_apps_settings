@@ -1,0 +1,17 @@
+To build the tests you can use the following command at the root of your android source tree
+$ make SettingsUnitTests
+
+The test apk then needs to be installed onto your test device via for example
+$ adb install -r out/target/product/shamu/data/app/SettingsUnitTests/SettingsUnitTests.apk
+
+To run all tests:
+$ adb shell am instrument -w com.android.settings.tests.unit/android.support.test.runner.AndroidJUnitRunner
+
+To run all tests in a specific class:
+$ adb shell am instrument -w -e class com.android.settings.<class> com.android.settings.tests.unit/android.support.test.runner.AndroidJUnitRunner
+
+To run a specific test:
+$ adb shell am instrument -w -e class com.android.settings.<class>#<test> com.android.settings.tests.unit/android.support.test.runner.AndroidJUnitRunner
+
+More general information can be found at
+http://developer.android.com/reference/android/support/test/runner/AndroidJUnitRunner.html

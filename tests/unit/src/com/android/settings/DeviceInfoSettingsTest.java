@@ -17,17 +17,20 @@
 package com.android.settings;
 
 import android.test.AndroidTestCase;
+import android.test.suitebuilder.annotation.SmallTest;
 
 import com.android.settingslib.DeviceInfoUtils;
 
 public class DeviceInfoSettingsTest extends AndroidTestCase {
 
+    @SmallTest
     public void testGetFormattedKernelVersion() throws Exception {
         if ("Unavailable".equals(DeviceInfoUtils.getFormattedKernelVersion())) {
             fail("formatKernelVersion can't cope with this device's /proc/version");
         }
     }
 
+    @SmallTest
     public void testFormatKernelVersion() throws Exception {
         assertEquals("Unavailable", DeviceInfoUtils.formatKernelVersion(""));
         assertEquals("2.6.38.8-gg784\n" +
