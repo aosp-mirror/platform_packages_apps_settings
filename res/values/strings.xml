@@ -3548,6 +3548,10 @@
     <string name="show_ime_summary">Keep it on screen while physical keyboard is active</string>
     <!-- Title for the button to trigger the 'keyboard shortcuts helper' dialog. [CHAR LIMIT=35] -->
     <string name="keyboard_shortcuts_helper">Keyboard shortcuts helper</string>
+    <!--
+        Format string for a physical device in the form: InputMethodSubtype - InputMethodEditor.
+        e.g. English (US) - X Keyboard -->
+    <string name="physical_device_title"><xliff:g id="input_method_subtype" example="English (US)">%1$s</xliff:g> - <xliff:g id="input_method_editor" example="X Keyboard">%2$s</xliff:g></string>
 
     <!-- On Language & input settings screen, heading. Inside the "Language & input settings" screen, this is the header for settings that relate to mouse and trackpad devices. [CHAR LIMIT=40] -->
     <string name="pointer_settings_category">Mouse/trackpad</string>

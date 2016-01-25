@@ -18,6 +18,8 @@ package com.android.settings.inputmethod;
 
 import android.app.Activity;
 import android.app.LoaderManager;
+import android.content.AsyncTaskLoader;
+import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.ContentObserver;
@@ -34,6 +36,8 @@ import android.support.v14.preference.SwitchPreference;
 import android.util.Pair;
 import android.view.InputDevice;
 import android.view.inputmethod.InputMethodInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.view.inputmethod.InputMethodSubtype;
 import android.widget.Toast;
 
 import com.android.internal.inputmethod.InputMethodUtils;
@@ -44,22 +48,25 @@ import com.android.settings.Settings;
 import com.android.settings.SettingsPreferenceFragment;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
-        implements LoaderManager.LoaderCallbacks<KeyboardLayoutDialogFragment.Keyboards>,
+        implements LoaderManager.LoaderCallbacks<PhysicalKeyboardFragment.Keyboards>,
         InputManager.InputDeviceListener {
 
     private static final int USER_SYSTEM = 0;
     private static final String KEYBOARD_ASSISTANCE_CATEGORY = "keyboard_assistance_category";
     private static final String SHOW_VIRTUAL_KEYBOARD_SWITCH = "show_virtual_keyboard_switch";
     private static final String KEYBOARD_SHORTCUTS_HELPER = "keyboard_shortcuts_helper";
+    private static final String IM_SUBTYPE_MODE_KEYBOARD = "keyboard";
 
-    private final ArrayList<PreferenceCategory> mHardKeyboardPreferenceList = new ArrayList<>();
     private final HashMap<Integer, Pair<InputDeviceIdentifier, PreferenceCategory>> mLoaderReference
             = new HashMap<>();
+    private final Map<InputMethodInfo, List<InputMethodSubtype>> mImiSubtypes = new HashMap<>();
     private InputManager mIm;
+    private InputMethodManager mImm;
     private PreferenceCategory mKeyboardAssistanceCategory;
     private SwitchPreference mShowVirtualKeyboardSwitch;
     private InputMethodUtils.InputMethodSettings mSettings;
@@ -69,6 +76,7 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         Activity activity = Preconditions.checkNotNull(getActivity());
         addPreferencesFromResource(R.xml.physical_keyboard_settings);
         mIm = Preconditions.checkNotNull(activity.getSystemService(InputManager.class));
+        mImm = Preconditions.checkNotNull(activity.getSystemService(InputMethodManager.class));
         mSettings = new InputMethodUtils.InputMethodSettings(
                 activity.getResources(),
                 getContentResolver(),
@@ -110,29 +118,32 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
     }
 
     @Override
-    public Loader<KeyboardLayoutDialogFragment.Keyboards> onCreateLoader(int id, Bundle args) {
-        InputDeviceIdentifier deviceId = mLoaderReference.get(id).first;
-        return new KeyboardLayoutDialogFragment.KeyboardLayoutLoader(
-                getActivity().getBaseContext(), deviceId);
+    public Loader<Keyboards> onCreateLoader(int id, Bundle args) {
+        final InputDeviceIdentifier deviceId = mLoaderReference.get(id).first;
+        return new KeyboardLayoutLoader(
+                getActivity().getBaseContext(), mIm, mImiSubtypes, deviceId);
     }
 
     @Override
-    public void onLoadFinished(
-            final Loader<KeyboardLayoutDialogFragment.Keyboards> loader,
-            KeyboardLayoutDialogFragment.Keyboards data) {
+    public void onLoadFinished(Loader<Keyboards> loader, Keyboards data) {
         // TODO: Investigate why this is being called twice.
         final InputDeviceIdentifier deviceId = mLoaderReference.get(loader.getId()).first;
         final PreferenceCategory category = mLoaderReference.get(loader.getId()).second;
         category.removeAll();
-        for (KeyboardLayout layout : data.keyboardLayouts) {
-            if (layout != null) {
-                Preference pref = new Preference(getPrefContext(), null);
-                pref.setTitle(layout.getLabel());
-                pref.setSummary(layout.getCollection());
+        for (Keyboards.KeyboardInfo info : data.mInfos) {
+            Preference pref = new Preference(getPrefContext(), null);
+            final InputMethodInfo imi = info.mImi;
+            final InputMethodSubtype imSubtype = info.mImSubtype;
+            if (imi != null && imSubtype != null) {
+                pref.setTitle(getDisplayName(getContext(), imi, imSubtype));
+                KeyboardLayout layout = info.mLayout;
+                if (layout != null) {
+                    pref.setSummary(layout.getLabel());
+                }
                 pref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                     @Override
                     public boolean onPreferenceClick(Preference preference) {
-                        showKeyboardLayoutScreen(deviceId);
+                        showKeyboardLayoutScreen(deviceId, imi, imSubtype);
                         return true;
                     }
                 });
@@ -142,7 +153,7 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
     }
 
     @Override
-    public void onLoaderReset(Loader<KeyboardLayoutDialogFragment.Keyboards> loader) {}
+    public void onLoaderReset(Loader<Keyboards> loader) {}
 
     @Override
     public void onInputDeviceAdded(int deviceId) {
@@ -166,38 +177,21 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
 
     private void updateHardKeyboards() {
         clearHardKeyboardsData();
+        loadInputMethodInfoSubtypes();
         final int[] devices = InputDevice.getDeviceIds();
         for (int deviceIndex = 0; deviceIndex < devices.length; deviceIndex++) {
             InputDevice device = InputDevice.getDevice(devices[deviceIndex]);
             if (device != null
                     && !device.isVirtual()
                     && device.isFullKeyboard()) {
-                final InputDeviceIdentifier deviceId = device.getIdentifier();
-                final String keyboardLayoutDescriptor =
-                        mIm.getCurrentKeyboardLayoutForInputDevice(deviceId);
-                final KeyboardLayout keyboardLayout = keyboardLayoutDescriptor != null ?
-                        mIm.getKeyboardLayout(keyboardLayoutDescriptor) : null;
-
                 final PreferenceCategory category = new PreferenceCategory(getPrefContext(), null);
                 category.setTitle(device.getName());
-                if (keyboardLayout != null) {
-                    category.setSummary(keyboardLayout.toString());
-                } else {
-                    category.setSummary(R.string.keyboard_layout_default_label);
-                }
-                mLoaderReference.put(deviceIndex, new Pair(deviceId, category));
-                mHardKeyboardPreferenceList.add(category);
+                category.setOrder(0);
+                mLoaderReference.put(deviceIndex, new Pair(device.getIdentifier(), category));
+                getPreferenceScreen().addPreference(category);
             }
         }
-
-        Collections.sort(mHardKeyboardPreferenceList);
-        final int count = mHardKeyboardPreferenceList.size();
-        for (int i = 0; i < count; i++) {
-            final PreferenceCategory category = mHardKeyboardPreferenceList.get(i);
-            category.setOrder(i);
-            getPreferenceScreen().addPreference(category);
-        }
-        mKeyboardAssistanceCategory.setOrder(count);
+        mKeyboardAssistanceCategory.setOrder(1);
         getPreferenceScreen().addPreference(mKeyboardAssistanceCategory);
 
         for (int deviceIndex : mLoaderReference.keySet()) {
@@ -206,11 +200,16 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         updateShowVirtualKeyboardSwitch();
     }
 
-    private void showKeyboardLayoutScreen(InputDeviceIdentifier inputDeviceIdentifier) {
+    private void showKeyboardLayoutScreen(
+            InputDeviceIdentifier inputDeviceIdentifier,
+            InputMethodInfo imi,
+            InputMethodSubtype imSubtype) {
         final Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.setClass(getActivity(), Settings.KeyboardLayoutPickerActivity.class);
-        intent.putExtra(KeyboardLayoutPickerFragment.EXTRA_INPUT_DEVICE_IDENTIFIER,
+        intent.putExtra(KeyboardLayoutPickerFragment2.EXTRA_INPUT_DEVICE_IDENTIFIER,
                 inputDeviceIdentifier);
+        intent.putExtra(KeyboardLayoutPickerFragment2.EXTRA_INPUT_METHOD_INFO, imi);
+        intent.putExtra(KeyboardLayoutPickerFragment2.EXTRA_INPUT_METHOD_SUBTYPE, imSubtype);
         startActivity(intent);
     }
 
@@ -220,7 +219,21 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
             getLoaderManager().destroyLoader(index);
         }
         mLoaderReference.clear();
-        mHardKeyboardPreferenceList.clear();
+    }
+
+    private void loadInputMethodInfoSubtypes() {
+        mImiSubtypes.clear();
+        final List<InputMethodInfo> imis = mImm.getEnabledInputMethodList();
+        for (InputMethodInfo imi : imis) {
+            final List<InputMethodSubtype> subtypes = new ArrayList<>();
+            for (InputMethodSubtype subtype : mImm.getEnabledInputMethodSubtypeList(
+                    imi, true /* allowsImplicitlySelectedSubtypes */)) {
+                if (IM_SUBTYPE_MODE_KEYBOARD.equalsIgnoreCase(subtype.getMode())) {
+                    subtypes.add(subtype);
+                }
+            }
+            mImiSubtypes.put(imi, subtypes);
+        }
     }
 
     private void registerShowVirtualKeyboardSettingsObserver() {
@@ -261,4 +274,77 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
             updateShowVirtualKeyboardSwitch();
         }
     };
+
+    static String getDisplayName(
+            Context context, InputMethodInfo imi, InputMethodSubtype imSubtype) {
+        CharSequence imSubtypeName =  imSubtype.getDisplayName(
+                context, imi.getPackageName(),
+                imi.getServiceInfo().applicationInfo);
+        CharSequence imeName = imi.loadLabel(context.getPackageManager());
+        return String.format(
+                context.getString(R.string.physical_device_title), imSubtypeName, imeName);
+    }
+
+    private static final class KeyboardLayoutLoader extends AsyncTaskLoader<Keyboards> {
+
+        private final Map<InputMethodInfo, List<InputMethodSubtype>> mImiSubtypes;
+        private final InputDeviceIdentifier mInputDeviceIdentifier;
+        private final InputManager mIm;
+
+        public KeyboardLayoutLoader(
+                Context context,
+                InputManager im,
+                Map<InputMethodInfo, List<InputMethodSubtype>> imiSubtypes,
+                InputDeviceIdentifier inputDeviceIdentifier) {
+            super(context);
+            mIm = Preconditions.checkNotNull(im);
+            mInputDeviceIdentifier = Preconditions.checkNotNull(inputDeviceIdentifier);
+            mImiSubtypes = new HashMap<>(imiSubtypes);
+        }
+
+        @Override
+        public Keyboards loadInBackground() {
+            final Keyboards keyboards = new Keyboards();
+            for (InputMethodInfo imi : mImiSubtypes.keySet()) {
+                for (InputMethodSubtype subtype : mImiSubtypes.get(imi)) {
+                    final KeyboardLayout layout = mIm.getKeyboardLayoutForInputDevice(
+                            mInputDeviceIdentifier, imi, subtype);
+                    keyboards.mInfos.add(new Keyboards.KeyboardInfo(imi, subtype, layout));
+                }
+            }
+            return keyboards;
+        }
+
+        @Override
+        protected void onStartLoading() {
+            super.onStartLoading();
+            forceLoad();
+        }
+
+        @Override
+        protected void onStopLoading() {
+            super.onStopLoading();
+            cancelLoad();
+        }
+    }
+
+    public static final class Keyboards {
+
+        public final ArrayList<KeyboardInfo> mInfos = new ArrayList<>();
+
+        public static final class KeyboardInfo {
+
+            public final InputMethodInfo mImi;
+            public final InputMethodSubtype mImSubtype;
+            public final KeyboardLayout mLayout;
+
+            public KeyboardInfo(
+                    InputMethodInfo imi, InputMethodSubtype imSubtype, KeyboardLayout layout) {
+                mImi = imi;
+                mImSubtype = imSubtype;
+                mLayout = layout;
+            }
+        }
+    }
+
 }
