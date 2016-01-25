@@ -194,8 +194,8 @@ public class UserCredentialsSettings extends InstrumentedFragment implements OnI
         }
     }
 
-    private static class Credential implements Parcelable {
-        private static enum Type {
+    static class Credential implements Parcelable {
+        static enum Type {
             CA_CERTIFICATE (Credentials.CA_CERTIFICATE),
             USER_CERTIFICATE (Credentials.USER_CERTIFICATE),
             USER_PRIVATE_KEY (Credentials.USER_PRIVATE_KEY),
