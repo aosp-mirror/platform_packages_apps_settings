@@ -62,6 +62,7 @@
         <com.android.settingslib.RestrictedPreference
                 android:key="zen_mode"
                 android:title="@string/zen_mode_settings_title"
+                settings:useAdminDisabledSummary="true"
                 settings:keywords="@string/keywords_sounds_and_notifications_interruptions"
                 android:fragment="com.android.settings.notification.ZenModeSettings" />
 
@@ -91,7 +92,8 @@
 
         <com.android.settingslib.RestrictedPreference
                 android:key="cell_broadcast_settings"
-                android:title="@string/cell_broadcast_settings" >
+                android:title="@string/cell_broadcast_settings"
+                settings:useAdminDisabledSummary="true">
                 <intent
                         android:action="android.intent.action.MAIN"
                         android:targetPackage="com.android.cellbroadcastreceiver"

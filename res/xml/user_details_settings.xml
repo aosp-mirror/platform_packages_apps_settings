@@ -23,6 +23,7 @@
             android:persistent="false" />
     <com.android.settingslib.RestrictedPreference
             android:key="remove_user"
-            android:title="@string/user_remove_user" />
+            android:title="@string/user_remove_user"
+            settings:useAdminDisabledSummary="true" />
 
 </PreferenceScreen>

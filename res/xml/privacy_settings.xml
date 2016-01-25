@@ -51,6 +51,7 @@
         android:key="network_reset"
         android:title="@string/reset_network_title"
         settings:keywords="@string/keywords_network_reset"
+        settings:useAdminDisabledSummary="true"
         android:fragment="com.android.settings.ResetNetwork" />
 
     <!-- Factory reset -->
@@ -59,6 +60,7 @@
         android:title="@string/master_clear_title"
         settings:keywords="@string/keywords_factory_data_reset"
         settings:userRestriction="no_factory_reset"
+        settings:useAdminDisabledSummary="true"
         android:fragment="com.android.settings.MasterClear" />
 
 </PreferenceScreen>

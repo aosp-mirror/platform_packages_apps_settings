@@ -481,6 +481,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             AccessibilityServiceInfo info = installedServices.get(i);
 
             RestrictedPreference preference = new RestrictedPreference(getActivity());
+            preference.useAdminDisabledSummary(true);
             String title = info.getResolveInfo().loadLabel(getPackageManager()).toString();
 
             ServiceInfo serviceInfo = info.getResolveInfo().serviceInfo;
@@ -515,13 +516,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                 preference.setEnabled(true);
             }
 
-            String summaryString;
             if (serviceAllowed) {
-                summaryString = serviceEnabledString;
-            } else  {
-                summaryString = getString(R.string.accessibility_feature_or_input_method_not_allowed);
+                preference.setSummary(serviceEnabledString);
             }
-            preference.setSummary(summaryString);
 
             preference.setOrder(i);
             preference.setFragment(ToggleAccessibilityServicePreferenceFragment.class.getName());

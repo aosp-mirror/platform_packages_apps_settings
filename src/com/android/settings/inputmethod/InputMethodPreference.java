@@ -119,6 +119,7 @@ class InputMethodPreference extends RestrictedSwitchPreference implements OnPref
                 && mInputMethodSettingValues.isValidSystemNonAuxAsciiCapableIme(imi, context);
         setOnPreferenceClickListener(this);
         setOnPreferenceChangeListener(this);
+        useAdminDisabledSummary(true);
         if (!isAllowedByOrganization) {
             EnforcedAdmin admin =
                     RestrictedLockUtils.getProfileOrDeviceOwnerOnCallingUser(context);
@@ -194,7 +195,9 @@ class InputMethodPreference extends RestrictedSwitchPreference implements OnPref
         // this preference should be disabled to prevent accidentally disabling an input method.
         setEnabled(!((isAlwaysChecked && isImeEnabler()) || (!mIsAllowedByOrganization)));
         setChecked(mInputMethodSettingValues.isEnabledImi(mImi));
-        setSummary(getSummaryString());
+        if (mIsAllowedByOrganization) {
+            setSummary(getSummaryString());
+        }
     }
 
     private InputMethodManager getInputMethodManager() {
@@ -203,9 +206,6 @@ class InputMethodPreference extends RestrictedSwitchPreference implements OnPref
 
     private String getSummaryString() {
         final Context context = getContext();
-        if (!mIsAllowedByOrganization) {
-            return context.getString(R.string.accessibility_feature_or_input_method_not_allowed);
-        }
         final InputMethodManager imm = getInputMethodManager();
         final List<InputMethodSubtype> subtypes = imm.getEnabledInputMethodSubtypeList(mImi, true);
         final ArrayList<CharSequence> subtypeLabels = new ArrayList<>();

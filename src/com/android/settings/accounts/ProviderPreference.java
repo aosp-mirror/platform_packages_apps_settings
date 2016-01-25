@@ -39,6 +39,7 @@ public class ProviderPreference extends RestrictedPreference {
         setIcon(icon);
         setPersistent(false);
         setTitle(providerName);
+        useAdminDisabledSummary(true);
     }
 
     public String getAccountType() {
