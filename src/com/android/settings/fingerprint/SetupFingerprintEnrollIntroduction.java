@@ -23,6 +23,7 @@ import android.widget.Button;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
+import com.android.settings.SetupChooseLockGeneric;
 import com.android.settings.SetupWizardUtils;
 import com.android.setupwizardlib.view.NavigationBar;
 
@@ -30,8 +31,8 @@ public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntrodu
         implements NavigationBar.NavigationBarListener {
 
     @Override
-    protected Intent getOnboardIntent() {
-        final Intent intent = new Intent(this, SetupFingerprintEnrollOnboard.class);
+    protected Intent getChooseLockIntent() {
+        Intent intent = new Intent(this, SetupChooseLockGeneric.class);
         SetupWizardUtils.copySetupExtras(getIntent(), intent);
         return intent;
     }

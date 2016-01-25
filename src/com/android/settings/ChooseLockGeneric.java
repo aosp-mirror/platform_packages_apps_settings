@@ -300,10 +300,24 @@ public class ChooseLockGeneric extends SettingsActivity {
                 }
                 addPreferencesFromResource(R.xml.security_settings_picker);
                 disableUnusablePreferences(quality, hideDisabledPrefs);
+                updatePreferenceText();
                 updateCurrentPreference();
                 updatePreferenceSummaryIfNeeded();
             } else {
                 updateUnlockMethodAndFinish(quality, false);
+            }
+        }
+
+        private void updatePreferenceText() {
+            if (mForFingerprint) {
+                Preference pattern = findPreference(KEY_UNLOCK_SET_PATTERN);
+                pattern.setTitle(R.string.fingerprint_unlock_set_unlock_pattern);
+
+                Preference pin = findPreference(KEY_UNLOCK_SET_PIN);
+                pin.setTitle(R.string.fingerprint_unlock_set_unlock_pin);
+
+                Preference password = findPreference(KEY_UNLOCK_SET_PASSWORD);
+                password.setTitle(R.string.fingerprint_unlock_set_unlock_password);
             }
         }
 
