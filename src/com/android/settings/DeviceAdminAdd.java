@@ -36,6 +36,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.Handler;
@@ -74,6 +75,8 @@ public class DeviceAdminAdd extends Activity {
     private static final int MAX_ADD_MSG_LINES_LANDSCAPE = 2;
     private static final int MAX_ADD_MSG_LINES = 15;
 
+    private static final int REQUEST_CODE_UNINSTALL = 1;
+
     Handler mHandler;
 
     DevicePolicyManager mDPM;
@@ -93,6 +96,7 @@ public class DeviceAdminAdd extends Activity {
     TextView mSupportMessage;
     ViewGroup mAdminPolicies;
     Button mActionButton;
+    Button mUninstallButton;
     Button mCancelButton;
 
     boolean mAdding;
@@ -285,6 +289,7 @@ public class DeviceAdminAdd extends Activity {
         mAdminWarning = (TextView) findViewById(R.id.admin_warning);
         mAdminPolicies = (ViewGroup) findViewById(R.id.admin_policies);
         mSupportMessage = (TextView) findViewById(R.id.admin_support_message);
+
         mCancelButton = (Button) findViewById(R.id.cancel_button);
         mCancelButton.setFilterTouchesWhenObscured(true);
         mCancelButton.setOnClickListener(new View.OnClickListener() {
@@ -294,6 +299,17 @@ public class DeviceAdminAdd extends Activity {
                 finish();
             }
         });
+
+        mUninstallButton = (Button) findViewById(R.id.uninstall_button);
+        mUninstallButton.setFilterTouchesWhenObscured(true);
+        mUninstallButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                EventLog.writeEvent(EventLogTags.EXP_DET_DEVICE_ADMIN_UNINSTALLED_BY_USER,
+                        mDeviceAdmin.getActivityInfo().applicationInfo.uid);
+                uninstall();
+            }
+        });
+
         mActionButton = (Button) findViewById(R.id.action_button);
         mActionButton.setFilterTouchesWhenObscured(true);
         mActionButton.setOnClickListener(new View.OnClickListener() {
@@ -448,6 +464,18 @@ public class DeviceAdminAdd extends Activity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case REQUEST_CODE_UNINSTALL:
+                if (resultCode == RESULT_OK) {
+                    finish();
+                }
+                return;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
     void updateInterface() {
         mAdminIcon.setImageDrawable(mDeviceAdmin.loadIcon(getPackageManager()));
         mAdminName.setText(mDeviceAdmin.loadLabel(getPackageManager()));
@@ -516,6 +544,9 @@ public class DeviceAdminAdd extends Activity {
                 setTitle(getText(R.string.add_device_admin_msg));
             }
             mActionButton.setText(getText(R.string.add_device_admin));
+            if (isAdminUninstallable()) {
+                mUninstallButton.setVisibility(View.VISIBLE);
+            }
             mSupportMessage.setVisibility(View.GONE);
             mAdding = true;
         }
@@ -563,5 +594,19 @@ public class DeviceAdminAdd extends Activity {
         UserInfo info = um.getUserInfo(
                 UserHandle.getUserId(adminInfo.getActivityInfo().applicationInfo.uid));
         return info != null ? info.isManagedProfile() : false;
+    }
+
+    private boolean isAdminUninstallable() {
+        // System apps can't be uninstalled.
+        return !mDeviceAdmin.getActivityInfo().applicationInfo.isSystemApp();
+    }
+
+    private void uninstall() {
+        final Uri packageURI = Uri.parse("package:" + mDeviceAdmin.getPackageName());
+        final Intent uninstallIntent = new Intent(Intent.ACTION_UNINSTALL_PACKAGE, packageURI);
+        uninstallIntent.putExtra(Intent.EXTRA_UNINSTALL_ALL_USERS, false);
+        uninstallIntent.putExtra(Intent.EXTRA_RETURN_RESULT, true);
+
+        startActivityForResult(uninstallIntent, REQUEST_CODE_UNINSTALL);
     }
 }
