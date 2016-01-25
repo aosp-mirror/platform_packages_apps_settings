@@ -60,7 +60,8 @@ public class ProfileChallengePreferenceFragment extends SettingsPreferenceFragme
     public static final String TAG_UNIFICATION_DIALOG = "unification_dialog";
 
     private static final int SET_OR_CHANGE_LOCK_METHOD_REQUEST = 123;
-    private static final int UNIFY_LOCK_METHOD_REQUEST = 124;
+    private static final int UNIFY_LOCK_CONFIRM_DEVICE_REQUEST = 124;
+    private static final int UNIFY_LOCK_CONFIRM_PROFILE_REQUEST = 125;
 
     // Not all preferences make sense for the Work Challenge, this is a whitelist.
     private static final Set<String> ALLOWED_PREFERENCE_KEYS = new HashSet<>();
@@ -76,6 +77,9 @@ public class ProfileChallengePreferenceFragment extends SettingsPreferenceFragme
 
     private LockPatternUtils mLockPatternUtils;
     private int mProfileUserId;
+
+    private String mCurrentDevicePassword;
+    private String mCurrentProfilePassword;
 
     private SwitchPreference mVisiblePattern;
 
@@ -127,15 +131,58 @@ public class ProfileChallengePreferenceFragment extends SettingsPreferenceFragme
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == UNIFY_LOCK_METHOD_REQUEST && resultCode == Activity.RESULT_OK) {
+        if (requestCode == UNIFY_LOCK_CONFIRM_DEVICE_REQUEST && resultCode == Activity.RESULT_OK) {
+            mCurrentDevicePassword =
+                    data.getStringExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
+            launchConfirmProfileLockForUnification();
+            return;
+        } else if (requestCode == UNIFY_LOCK_CONFIRM_PROFILE_REQUEST
+                && resultCode == Activity.RESULT_OK) {
+            mCurrentProfilePassword =
+                    data.getStringExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
             unifyLocks();
             return;
         }
     }
 
+    private void launchConfirmDeviceLockForUnification() {
+        final String title = getActivity().getString(
+                R.string.lock_settings_profile_screen_lock_title);
+        final ChooseLockSettingsHelper helper =
+                new ChooseLockSettingsHelper(getActivity(), this);
+        if (!helper.launchConfirmationActivity(
+                UNIFY_LOCK_CONFIRM_DEVICE_REQUEST, title, true, UserHandle.myUserId())) {
+            launchConfirmProfileLockForUnification();
+        }
+    }
+
+    private void launchConfirmProfileLockForUnification() {
+        final String title = getActivity().getString(
+                R.string.lock_settings_profile_screen_lock_title);
+        final ChooseLockSettingsHelper helper =
+                new ChooseLockSettingsHelper(getActivity(), this);
+        if (!helper.launchConfirmationActivity(
+                UNIFY_LOCK_CONFIRM_PROFILE_REQUEST, title, true, mProfileUserId)) {
+            unifyLocks();
+            createPreferenceHierarchy();
+        }
+    }
+
     private void unifyLocks() {
+        int profileQuality = mLockPatternUtils.getKeyguardStoredPasswordQuality(mProfileUserId);
         mLockPatternUtils.clearLock(mProfileUserId);
         mLockPatternUtils.setSeparateProfileChallengeEnabled(mProfileUserId, false);
+        if (profileQuality == DevicePolicyManager.PASSWORD_QUALITY_SOMETHING) {
+            mLockPatternUtils.saveLockPattern(
+                    LockPatternUtils.stringToPattern(mCurrentProfilePassword),
+                    mCurrentDevicePassword, UserHandle.myUserId());
+        } else {
+            mLockPatternUtils.saveLockPassword(
+                    mCurrentProfilePassword, mCurrentDevicePassword,
+                    profileQuality, UserHandle.myUserId());
+        }
+        mCurrentDevicePassword = null;
+        mCurrentProfilePassword = null;
     }
 
     @Override
@@ -172,7 +219,7 @@ public class ProfileChallengePreferenceFragment extends SettingsPreferenceFragme
                 root.findPreference(KEY_SECURITY_CATEGORY);
         if (securityCategory != null) {
             if (mLockPatternUtils.isSeparateProfileChallengeEnabled(mProfileUserId)) {
-                addUnificationPreference(securityCategory);
+                maybeAddUnificationPreference(securityCategory);
             } else {
                 Preference lockPreference =
                         securityCategory.findPreference(KEY_UNLOCK_SET_OR_CHANGE);
@@ -183,12 +230,15 @@ public class ProfileChallengePreferenceFragment extends SettingsPreferenceFragme
         }
     }
 
-    private void addUnificationPreference(PreferenceGroup securityCategory) {
-        Preference unificationPreference = new Preference(securityCategory.getContext());
-        unificationPreference.setKey(KEY_UNIFICATION);
-        unificationPreference.setTitle(R.string.lock_settings_profile_unification_title);
-        unificationPreference.setSummary(R.string.lock_settings_profile_unification_summary);
-        securityCategory.addPreference(unificationPreference);
+    private void maybeAddUnificationPreference(PreferenceGroup securityCategory) {
+        if (mLockPatternUtils.getKeyguardStoredPasswordQuality(mProfileUserId)
+                >= DevicePolicyManager.PASSWORD_QUALITY_SOMETHING) {
+            Preference unificationPreference = new Preference(securityCategory.getContext());
+            unificationPreference.setKey(KEY_UNIFICATION);
+            unificationPreference.setTitle(R.string.lock_settings_profile_unification_title);
+            unificationPreference.setSummary(R.string.lock_settings_profile_unification_summary);
+            securityCategory.addPreference(unificationPreference);
+        }
     }
 
     private void removeNonWhitelistedItems(PreferenceGroup prefScreen) {
@@ -243,13 +293,9 @@ public class ProfileChallengePreferenceFragment extends SettingsPreferenceFragme
     }
 
     public static class UnificationConfirmationDialog extends DialogFragment {
-        private static final String ARG_USER_ID = "userId";
 
         public static UnificationConfirmationDialog newIntance(int userId) {
             UnificationConfirmationDialog dialog = new UnificationConfirmationDialog();
-            Bundle args = new Bundle();
-            args.putInt(ARG_USER_ID, userId);
-            dialog.setArguments(args);
             return dialog;
         }
 
@@ -263,7 +309,6 @@ public class ProfileChallengePreferenceFragment extends SettingsPreferenceFragme
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            final Bundle args = getArguments();
             final ProfileChallengePreferenceFragment parentFragment =
                     ((ProfileChallengePreferenceFragment) getParentFragment());
             return new AlertDialog.Builder(getActivity())
@@ -273,17 +318,7 @@ public class ProfileChallengePreferenceFragment extends SettingsPreferenceFragme
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int whichButton) {
-                                    String title = getContext().getString(
-                                            R.string.lock_settings_profile_screen_lock_title);
-                                    ChooseLockSettingsHelper helper =
-                                            new ChooseLockSettingsHelper(
-                                                    getActivity(), parentFragment);
-                                    if (!helper.launchConfirmationActivity(
-                                            UNIFY_LOCK_METHOD_REQUEST,
-                                            title, true, args.getInt(ARG_USER_ID))) {
-                                        parentFragment.unifyLocks();
-                                        parentFragment.createPreferenceHierarchy();
-                                    }
+                                    parentFragment.launchConfirmDeviceLockForUnification();
                                 }
                             }
                     )
