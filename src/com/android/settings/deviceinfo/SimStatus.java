@@ -360,7 +360,7 @@ public class SimStatus extends InstrumentedPreferenceActivity {
             }
         }
 
-        String rawNumber = mTelephonyManager.getLine1NumberForSubscriber(mSir.getSubscriptionId());
+        String rawNumber = mTelephonyManager.getLine1Number(mSir.getSubscriptionId());
         String formattedNumber = null;
         if (!TextUtils.isEmpty(rawNumber)) {
             formattedNumber = PhoneNumberUtils.formatNumber(rawNumber);
