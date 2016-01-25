@@ -161,6 +161,9 @@ public class DashboardSummary extends InstrumentedFragment
         List<DashboardCategory> categories =
                 ((SettingsActivity) getActivity()).getDashboardCategories();
         mAdapter.setCategories(categories);
+
+        // recheck to see if any suggestions have been changed.
+        mAdapter.setSuggestions(mSuggestionParser);
         mDashboard.setAdapter(mAdapter);
 
         long delta = System.currentTimeMillis() - start;
