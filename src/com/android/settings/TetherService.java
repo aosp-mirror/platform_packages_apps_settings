@@ -29,6 +29,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.os.IBinder;
 import android.os.ResultReceiver;
@@ -121,13 +122,7 @@ public class TetherService extends Service {
                 int index = mCurrentTethers.indexOf(type);
                 if (DEBUG) Log.d(TAG, "Removing tether " + type + ", index " + index);
                 if (index >= 0) {
-                    mCurrentTethers.remove(index);
-                    // If we are currently in the middle of a check, we may need to adjust the
-                    // index accordingly.
-                    if (DEBUG) Log.d(TAG, "mCurrentTypeIndex: " + mCurrentTypeIndex);
-                    if (index <= mCurrentTypeIndex && mCurrentTypeIndex > 0) {
-                        mCurrentTypeIndex--;
-                    }
+                    removeTypeAtIndex(index);
                 }
                 cancelAlarmIfNecessary();
             } else {
@@ -168,6 +163,16 @@ public class TetherService extends Service {
         if (DEBUG) Log.d(TAG, "Destroying TetherService");
         unregisterReceiver(mReceiver);
         super.onDestroy();
+    }
+
+    private void removeTypeAtIndex(int index) {
+        mCurrentTethers.remove(index);
+        // If we are currently in the middle of a check, we may need to adjust the
+        // index accordingly.
+        if (DEBUG) Log.d(TAG, "mCurrentTypeIndex: " + mCurrentTypeIndex);
+        if (index <= mCurrentTypeIndex && mCurrentTypeIndex > 0) {
+            mCurrentTypeIndex--;
+        }
     }
 
     private ArrayList<Integer> stringToTethers(String tethersStr) {
@@ -227,8 +232,20 @@ public class TetherService extends Service {
             if (DEBUG) Log.d(TAG, "Sending provisioning broadcast: " + provisionAction + " type: "
                     + mCurrentTethers.get(index));
             Intent intent = new Intent(provisionAction);
-            intent.putExtra(TETHER_CHOICE, mCurrentTethers.get(index));
+            int type = mCurrentTethers.get(index);
+            intent.putExtra(TETHER_CHOICE, type);
             intent.setFlags(Intent.FLAG_RECEIVER_FOREGROUND);
+
+            // Ensure that the provisioning app will actually handle the intent.
+            final PackageManager packageManager = getPackageManager();
+            if (packageManager.queryBroadcastReceivers(
+                    intent, PackageManager.MATCH_DEFAULT_ONLY).isEmpty()) {
+                Log.e(TAG, "Provisioning app is configured, but not available.");
+                fireCallbacksForType(type, ConnectivityManager.TETHER_ERROR_PROVISION_FAILED);
+                removeTypeAtIndex(index);
+                return;
+            }
+
             sendBroadcast(intent);
             mInProvisionCheck = true;
         }
