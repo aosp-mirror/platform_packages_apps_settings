@@ -16,6 +16,7 @@
 
 package com.android.settings.fuelgauge;
 
+import android.os.BatteryStats;
 import android.os.BatteryStats.Timer;
 import android.os.BatteryStats.Uid;
 import android.util.ArrayMap;
@@ -70,16 +71,6 @@ public class FakeUid extends Uid {
     @Override
     public ArrayMap<String, ? extends Pkg> getPackageStats() {
         return null;
-    }
-
-    @Override
-    public long getWifiControllerActivity(int type, int which) {
-        return 0;
-    }
-
-    @Override
-    public long getBluetoothControllerActivity(int type, int which) {
-        return 0;
     }
 
     @Override
@@ -257,5 +248,20 @@ public class FakeUid extends Uid {
     @Override
     public long getCpuPowerMaUs(int which) {
         return 0;
+    }
+
+    @Override
+    public BatteryStats.ControllerActivityCounter getWifiControllerActivity() {
+        return null;
+    }
+
+    @Override
+    public BatteryStats.ControllerActivityCounter getBluetoothControllerActivity() {
+        return null;
+    }
+
+    @Override
+    public BatteryStats.ControllerActivityCounter getModemControllerActivity() {
+        return null;
     }
 }
