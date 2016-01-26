@@ -84,7 +84,7 @@ public class FingerprintEnrollSidecar extends InstrumentedFragment {
             mFingerprintManager.setActiveUser(mUserId);
         }
         mFingerprintManager.enroll(mToken, mEnrollmentCancel,
-                0 /* flags */, mEnrollmentCallback, mUserId);
+                0 /* flags */, mUserId, mEnrollmentCallback);
         mEnrolling = true;
     }
 

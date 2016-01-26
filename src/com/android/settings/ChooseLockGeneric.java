@@ -579,7 +579,8 @@ public class ChooseLockGeneric extends SettingsActivity {
         private void removeAllFingerprintTemplatesAndFinish() {
             if (mFingerprintManager != null && mFingerprintManager.isHardwareDetected()
                     && mFingerprintManager.getEnrolledFingerprints().size() > 0) {
-                mFingerprintManager.remove(new Fingerprint(null, 0, 0, 0), mRemovalCallback);
+                mFingerprintManager.remove(
+                        new Fingerprint(null, 0, 0, 0), mUserId, mRemovalCallback);
             } else {
                 finish();
             }
