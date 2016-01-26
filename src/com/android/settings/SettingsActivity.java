@@ -79,6 +79,7 @@ import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.inputmethod.AvailableVirtualKeyboardFragment;
 import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
 import com.android.settings.inputmethod.KeyboardLayoutPickerFragment;
+import com.android.settings.inputmethod.KeyboardLayoutPickerFragment2;
 import com.android.settings.inputmethod.SpellCheckersSettings;
 import com.android.settings.inputmethod.UserDictionaryList;
 import com.android.settings.localepicker.LocaleListEditor;
@@ -292,6 +293,7 @@ public class SettingsActivity extends SettingsDrawerActivity
             TrustedCredentialsSettings.class.getName(),
             PaymentSettings.class.getName(),
             KeyboardLayoutPickerFragment.class.getName(),
+            KeyboardLayoutPickerFragment2.class.getName(),
             ZenModeSettings.class.getName(),
             SoundSettings.class.getName(),
             ConfigureNotificationSettings.class.getName(),
