@@ -28,6 +28,7 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 import com.android.settings.widget.DotsPageIndicator;
+import com.android.settings.widget.LabeledSeekBar;
 
 
 /**
@@ -97,7 +98,8 @@ public abstract class PreviewSeekBarPreferenceFragment extends SettingsPreferenc
         // seek bar.
         final int max = Math.max(1, mEntries.length - 1);
 
-        final SeekBar seekBar = (SeekBar) content.findViewById(R.id.seek_bar);
+        final LabeledSeekBar seekBar = (LabeledSeekBar) content.findViewById(R.id.seek_bar);
+        seekBar.setLabels(mEntries);
         seekBar.setMax(max);
         seekBar.setProgress(mInitialIndex);
         seekBar.setOnSeekBarChangeListener(new onPreviewSeekBarChangeListener());
