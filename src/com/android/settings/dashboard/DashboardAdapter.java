@@ -33,6 +33,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.dashboard.conditional.Condition;
 import com.android.settings.dashboard.conditional.ConditionAdapterUtils;
+import com.android.settingslib.SuggestionParser;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
 
@@ -66,6 +67,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     private int mSuggestionMode = SUGGESTION_MODE_DEFAULT;
 
     private Condition mExpandedCondition = null;
+    private SuggestionParser mSuggestionParser;
 
     public DashboardAdapter(Context context) {
         mContext = context;
@@ -73,8 +75,9 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         setHasStableIds(true);
     }
 
-    public void setSuggestions(List<Tile> suggestions) {
-        mSuggestions = suggestions;
+    public void setSuggestions(SuggestionParser suggestionParser) {
+        mSuggestions = suggestionParser.getSuggestions();
+        mSuggestionParser = suggestionParser;
         recountItems();
     }
 
@@ -235,10 +238,12 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                 new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                mContext.getPackageManager().setComponentEnabledSetting(
-                        suggestion.intent.getComponent(),
-                        PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-                        PackageManager.DONT_KILL_APP);
+                if (mSuggestionParser.dismissSuggestion(suggestion)) {
+                    mContext.getPackageManager().setComponentEnabledSetting(
+                            suggestion.intent.getComponent(),
+                            PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                            PackageManager.DONT_KILL_APP);
+                }
                 mSuggestions.remove(suggestion);
                 recountItems();
                 return true;

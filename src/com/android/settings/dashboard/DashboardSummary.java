@@ -16,6 +16,7 @@
 
 package com.android.settings.dashboard;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
@@ -55,6 +56,8 @@ public class DashboardSummary extends InstrumentedFragment
             Settings.StorageSettingsActivity.class.getName(),
     };
 
+    private static final String SUGGESTIONS = "suggestions";
+
     private FocusRecyclerView mDashboard;
     private DashboardAdapter mAdapter;
     private SummaryLoader mSummaryLoader;
@@ -77,8 +80,10 @@ public class DashboardSummary extends InstrumentedFragment
         setHasOptionsMenu(true);
         if (DEBUG_TIMING) Log.d(TAG, "onCreate took " + (System.currentTimeMillis() - startTime)
                 + " ms");
-        mConditionManager = ConditionManager.get(getContext());
-        mSuggestionParser = new SuggestionParser(getContext(), R.xml.suggestion_ordering);
+        Context context = getContext();
+        mConditionManager = ConditionManager.get(context);
+        mSuggestionParser = new SuggestionParser(context,
+                context.getSharedPreferences(SUGGESTIONS, 0), R.xml.suggestion_ordering);
     }
 
     @Override
@@ -138,7 +143,7 @@ public class DashboardSummary extends InstrumentedFragment
         mDashboard.setListener(this);
         mAdapter = new DashboardAdapter(getContext());
         mAdapter.setConditions(mConditionManager.getConditions());
-        mAdapter.setSuggestions(mSuggestionParser.getSuggestions());
+        mAdapter.setSuggestions(mSuggestionParser);
         mSummaryLoader.setAdapter(mAdapter);
         ConditionAdapterUtils.addDismiss(mDashboard);
 
