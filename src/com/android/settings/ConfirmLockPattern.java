@@ -104,8 +104,6 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
         private AppearAnimationUtils mAppearAnimationUtils;
         private DisappearAnimationUtils mDisappearAnimationUtils;
 
-        private int mEffectiveUserId;
-
         // required constructor for fragments
         public ConfirmLockPatternFragment() {
 
@@ -115,9 +113,6 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             mLockPatternUtils = new LockPatternUtils(getActivity());
-            Intent intent = getActivity().getIntent();
-            // Only take this argument into account if it belongs to the current profile.
-            mEffectiveUserId = Utils.getUserIdFromBundle(getActivity(), intent.getExtras());
         }
 
         @Override

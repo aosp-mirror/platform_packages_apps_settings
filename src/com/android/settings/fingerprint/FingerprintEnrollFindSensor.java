@@ -19,6 +19,7 @@ package com.android.settings.fingerprint;
 import android.content.Intent;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
+import android.os.UserHandle;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.ChooseLockSettingsHelper;
@@ -173,10 +174,17 @@ public class FingerprintEnrollFindSensor extends FingerprintEnrollBase {
     private void launchConfirmLock() {
         long challenge = getSystemService(FingerprintManager.class).preEnroll();
         ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(this);
-        if (!helper.launchConfirmationActivity(CONFIRM_REQUEST,
+        boolean launchedConfirmationActivity = false;
+        if (mUserId == UserHandle.USER_NULL) {
+            launchedConfirmationActivity = helper.launchConfirmationActivity(CONFIRM_REQUEST,
                 getString(R.string.security_settings_fingerprint_preference_title),
-                null, null, challenge)) {
-
+                null, null, challenge);
+        } else {
+            launchedConfirmationActivity = helper.launchConfirmationActivity(CONFIRM_REQUEST,
+                    getString(R.string.security_settings_fingerprint_preference_title),
+                    null, null, challenge, mUserId);
+        }
+        if (!launchedConfirmationActivity) {
             // This shouldn't happen, as we should only end up at this step if a lock thingy is
             // already set.
             finish();

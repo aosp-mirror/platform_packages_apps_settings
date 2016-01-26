@@ -34,21 +34,26 @@ public class FingerprintUiHelper extends FingerprintManager.AuthenticationCallba
     private ImageView mIcon;
     private TextView mErrorTextView;
     private CancellationSignal mCancellationSignal;
+    private int mUserId;
 
     private Callback mCallback;
     private FingerprintManager mFingerprintManager;
 
-    public FingerprintUiHelper(ImageView icon, TextView errorTextView, Callback callback) {
+    public FingerprintUiHelper(ImageView icon, TextView errorTextView, Callback callback,
+            int userId) {
         mFingerprintManager = icon.getContext().getSystemService(FingerprintManager.class);
         mIcon = icon;
         mErrorTextView = errorTextView;
         mCallback = callback;
+        mUserId = userId;
     }
 
     public void startListening() {
-        if (mFingerprintManager.getEnrolledFingerprints().size() > 0) {
+        if (mFingerprintManager.getEnrolledFingerprints(mUserId).size() > 0) {
             mCancellationSignal = new CancellationSignal();
-            mFingerprintManager.authenticate(null, mCancellationSignal, 0 /* flags */, this, null);
+            mFingerprintManager.setActiveUser(mUserId);
+            mFingerprintManager.authenticate(
+                    null, mCancellationSignal, 0 /* flags */, this, null, mUserId);
             setFingerprintIconVisibility(true);
             mIcon.setImageResource(R.drawable.ic_fingerprint);
         }

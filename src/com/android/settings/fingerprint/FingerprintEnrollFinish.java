@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.view.View;
 import android.widget.Button;
 
@@ -39,7 +40,7 @@ public class FingerprintEnrollFinish extends FingerprintEnrollBase {
         Button addButton = (Button) findViewById(R.id.add_another_button);
 
         FingerprintManager fpm = (FingerprintManager) getSystemService(Context.FINGERPRINT_SERVICE);
-        int enrolled = fpm.getEnrolledFingerprints().size();
+        int enrolled = fpm.getEnrolledFingerprints(mUserId).size();
         int max = getResources().getInteger(
                 com.android.internal.R.integer.config_fingerprintMaxTemplatesPerUser);
         if (enrolled >= max) {

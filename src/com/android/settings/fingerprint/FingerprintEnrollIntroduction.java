@@ -46,14 +46,12 @@ public class FingerprintEnrollIntroduction extends FingerprintEnrollBase {
         setHeaderText(R.string.security_settings_fingerprint_enroll_introduction_title);
         findViewById(R.id.cancel_button).setOnClickListener(this);
         findViewById(R.id.learn_more_button).setOnClickListener(this);
-        final int passwordQuality = new ChooseLockSettingsHelper(this).utils()
-                .getActivePasswordQuality(UserHandle.myUserId());
         updatePasswordQuality();
     }
 
     private void updatePasswordQuality() {
         final int passwordQuality = new ChooseLockSettingsHelper(this).utils()
-                .getActivePasswordQuality(UserHandle.myUserId());
+                .getActivePasswordQuality(mUserId);
         mHasPassword = passwordQuality != DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
     }
 
@@ -77,6 +75,9 @@ public class FingerprintEnrollIntroduction extends FingerprintEnrollBase {
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, true);
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, challenge);
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, true);
+        if (mUserId != UserHandle.USER_NULL) {
+            intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
+        }
         startActivityForResult(intent, CHOOSE_LOCK_GENERIC_REQUEST);
     }
 
@@ -93,7 +94,11 @@ public class FingerprintEnrollIntroduction extends FingerprintEnrollBase {
     }
 
     protected Intent getFindSensorIntent() {
-        return new Intent(this, FingerprintEnrollFindSensor.class);
+        Intent intent = new Intent(this, FingerprintEnrollFindSensor.class);
+        if (mUserId != UserHandle.USER_NULL) {
+            intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
+        }
+        return intent;
     }
 
     @Override

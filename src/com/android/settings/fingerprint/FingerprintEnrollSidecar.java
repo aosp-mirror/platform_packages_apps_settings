@@ -18,10 +18,12 @@ package com.android.settings.fingerprint;
 
 import android.annotation.Nullable;
 import android.app.Activity;
+import android.content.Intent;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.os.CancellationSignal;
 import android.os.Handler;
+import android.os.UserHandle;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.ChooseLockSettingsHelper;
@@ -40,6 +42,8 @@ public class FingerprintEnrollSidecar extends InstrumentedFragment {
     private Handler mHandler = new Handler();
     private byte[] mToken;
     private boolean mDone;
+    private int mUserId;
+    private FingerprintManager mFingerprintManager;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,8 +54,10 @@ public class FingerprintEnrollSidecar extends InstrumentedFragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+        mFingerprintManager = activity.getSystemService(FingerprintManager.class);
         mToken = activity.getIntent().getByteArrayExtra(
                 ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
+        mUserId = activity.getIntent().getIntExtra(Intent.EXTRA_USER_ID, UserHandle.USER_NULL);
     }
 
     @Override
@@ -74,8 +80,11 @@ public class FingerprintEnrollSidecar extends InstrumentedFragment {
         mHandler.removeCallbacks(mTimeoutRunnable);
         mEnrollmentSteps = -1;
         mEnrollmentCancel = new CancellationSignal();
-        getActivity().getSystemService(FingerprintManager.class).enroll(mToken, mEnrollmentCancel,
-                0 /* flags */, mEnrollmentCallback);
+        if (mUserId != UserHandle.USER_NULL) {
+            mFingerprintManager.setActiveUser(mUserId);
+        }
+        mFingerprintManager.enroll(mToken, mEnrollmentCancel,
+                0 /* flags */, mEnrollmentCallback, mUserId);
         mEnrolling = true;
     }
 

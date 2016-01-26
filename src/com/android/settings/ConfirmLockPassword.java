@@ -99,7 +99,6 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
         private AppearAnimationUtils mAppearAnimationUtils;
         private DisappearAnimationUtils mDisappearAnimationUtils;
         private boolean mBlockImm;
-        private int mEffectiveUserId;
 
         // required constructor for fragments
         public ConfirmLockPasswordFragment() {
@@ -110,9 +109,6 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             mLockPatternUtils = new LockPatternUtils(getActivity());
-            Intent intent = getActivity().getIntent();
-            // Only take this argument into account if it belongs to the current profile.
-            mEffectiveUserId = Utils.getUserIdFromBundle(getActivity(), intent.getExtras());
         }
 
         @Override
@@ -183,14 +179,13 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
         private int getDefaultDetails() {
             boolean isProfile = Utils.isManagedProfile(
                     UserManager.get(getActivity()), mEffectiveUserId);
-            if (mIsAlpha && !isProfile) {
-                return R.string.lockpassword_confirm_your_password_generic;
-            } else if (mIsAlpha && isProfile) {
-                return R.string.lockpassword_confirm_your_password_generic_profile;
-            } else if (!isProfile) {
-                return R.string.lockpassword_confirm_your_pin_generic;
+            if (mIsAlpha) {
+                return isProfile ? R.string.lockpassword_confirm_your_password_generic_profile
+                        : R.string.lockpassword_confirm_your_password_generic;
+            } else {
+                return isProfile ? R.string.lockpassword_confirm_your_pin_generic_profile
+                        : R.string.lockpassword_confirm_your_pin_generic;
             }
-            return R.string.lockpassword_confirm_your_pin_generic_profile;
         }
 
         private int getErrorMessage() {
