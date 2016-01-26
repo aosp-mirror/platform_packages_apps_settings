@@ -191,7 +191,7 @@ public class ConfigureNotificationSettings extends SettingsPreferenceFragment {
 
     private void setRestrictedIfNotificationFeaturesDisabled(CharSequence entry,
             CharSequence entryValue, int keyguardNotificationFeatures) {
-        EnforcedAdmin admin = RestrictedLockUtils.checkIfKeyguardNotificationFeaturesDisabled(
+        EnforcedAdmin admin = RestrictedLockUtils.checkIfKeyguardFeaturesDisabled(
                 mContext, keyguardNotificationFeatures);
         if (admin != null) {
             RestrictedItem item = new RestrictedItem(entry, entryValue, admin);
