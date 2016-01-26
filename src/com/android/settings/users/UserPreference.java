@@ -76,6 +76,7 @@ public class UserPreference extends RestrictedPreference {
         mDeleteClickListener = deleteListener;
         mSettingsClickListener = settingsListener;
         mUserId = userId;
+        useAdminDisabledSummary(true);
     }
 
     private void dimIcon(boolean dimmed) {

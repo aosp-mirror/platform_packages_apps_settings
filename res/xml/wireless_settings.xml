@@ -44,12 +44,14 @@
     <com.android.settingslib.RestrictedPreference
         android:fragment="com.android.settings.TetherSettings"
         android:key="tether_settings"
-        android:title="@string/tether_settings_title_all" />
+        android:title="@string/tether_settings_title_all"
+        settings:useAdminDisabledSummary="true" />
 
     <com.android.settingslib.RestrictedPreference
         android:fragment="com.android.settings.vpn2.VpnSettings"
         android:key="vpn_settings"
-        android:title="@string/vpn_settings_title" />
+        android:title="@string/vpn_settings_title"
+        settings:useAdminDisabledSummary="true" />
 
     <PreferenceScreen
         android:key="mobile_network_settings"

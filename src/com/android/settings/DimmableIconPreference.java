@@ -44,11 +44,13 @@ public class DimmableIconPreference extends RestrictedPreference {
     public DimmableIconPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         mContentDescription = null;
+        useAdminDisabledSummary(true);
     }
 
     public DimmableIconPreference(Context context, @Nullable CharSequence contentDescription) {
         super(context);
         mContentDescription = contentDescription;
+        useAdminDisabledSummary(true);
     }
 
     private void dimIcon(boolean dimmed) {
