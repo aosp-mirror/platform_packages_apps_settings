@@ -40,11 +40,13 @@ import android.print.PrinterId;
 import android.print.PrinterInfo;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
@@ -529,6 +531,17 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
             return position;
         }
 
+        /**
+         * Checks if a printer can be used for printing
+         *
+         * @param position The position of the printer in the list
+         * @return true iff the printer can be used for printing.
+         */
+        public boolean isActionable(int position) {
+            PrinterInfo printer = (PrinterInfo) getItem(position);
+            return printer.getStatus() != PrinterInfo.STATUS_UNAVAILABLE;
+        }
+
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             if (convertView == null) {
@@ -536,7 +549,9 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
                         R.layout.printer_dropdown_item, parent, false);
             }
 
-            PrinterInfo printer = (PrinterInfo) getItem(position);
+            convertView.setEnabled(isActionable(position));
+
+            final PrinterInfo printer = (PrinterInfo) getItem(position);
             CharSequence title = printer.getName();
             CharSequence subtitle = printer.getDescription();
             Drawable icon = printer.loadIcon(getActivity());
@@ -553,10 +568,36 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
                 subtitleView.setVisibility(View.GONE);
             }
 
+            ImageView moreInfoView = (ImageView) convertView.findViewById(R.id.more_info);
+            if (printer.getInfoIntent() != null) {
+                moreInfoView.setVisibility(View.VISIBLE);
+                moreInfoView.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        try {
+                            getActivity().startIntentSender(
+                                    printer.getInfoIntent().getIntentSender(), null, 0, 0, 0);
+                        } catch (SendIntentException e) {
+                            Log.e(LOG_TAG, "Could not execute pending info intent: %s", e);
+                        }
+                    }
+                });
+            } else {
+                moreInfoView.setVisibility(View.GONE);
+            }
+
             ImageView iconView = (ImageView) convertView.findViewById(R.id.icon);
             if (icon != null) {
-                iconView.setImageDrawable(icon);
                 iconView.setVisibility(View.VISIBLE);
+                if (!isActionable(position)) {
+                    icon.mutate();
+
+                    TypedValue value = new TypedValue();
+                    getActivity().getTheme().resolveAttribute(android.R.attr.disabledAlpha, value,
+                            true);
+                    icon.setAlpha((int)(value.getFloat() * 255));
+                }
+                iconView.setImageDrawable(icon);
             } else {
                 iconView.setVisibility(View.GONE);
             }
