@@ -476,7 +476,10 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
             preference.setKey(UUID.randomUUID().toString());
         }
         DialogFragment f = null;
-        if (preference instanceof CustomListPreference) {
+        if (preference instanceof RestrictedListPreference) {
+            f = RestrictedListPreference.RestrictedListPreferenceDialogFragment
+                    .newInstance(preference.getKey());
+        } else if (preference instanceof CustomListPreference) {
             f = CustomListPreference.CustomListPreferenceDialogFragment
                     .newInstance(preference.getKey());
         } else if (preference instanceof CustomDialogPreference) {

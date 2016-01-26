@@ -63,20 +63,27 @@ public class CustomListPreference extends ListPreference {
             super.onPrepareDialogBuilder(builder);
             mClickedDialogEntryIndex = getCustomizablePreference()
                     .findIndexOfValue(getCustomizablePreference().getValue());
-            getCustomizablePreference().onPrepareDialogBuilder(builder,
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        mClickedDialogEntryIndex = which;
+            getCustomizablePreference().onPrepareDialogBuilder(builder, getOnItemClickListener());
+        }
 
-                        /*
-                         * Clicking on an item simulates the positive button
-                         * click, and dismisses the dialog.
-                         */
-                        CustomListPreferenceDialogFragment.this.onClick(dialog,
-                                DialogInterface.BUTTON_POSITIVE);
-                        dialog.dismiss();
-                    }
-                });
+        protected DialogInterface.OnClickListener getOnItemClickListener() {
+            return new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    setClickedDialogEntryIndex(which);
+
+                    /*
+                     * Clicking on an item simulates the positive button
+                     * click, and dismisses the dialog.
+                     */
+                    CustomListPreferenceDialogFragment.this.onClick(dialog,
+                            DialogInterface.BUTTON_POSITIVE);
+                    dialog.dismiss();
+                }
+            };
+        }
+
+        protected void setClickedDialogEntryIndex(int which) {
+            mClickedDialogEntryIndex = which;
         }
 
         @Override

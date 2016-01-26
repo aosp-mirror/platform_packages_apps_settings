@@ -39,7 +39,6 @@ import android.provider.Settings;
 import android.security.KeyStore;
 import android.service.trust.TrustAgentService;
 import android.support.v14.preference.SwitchPreference;
-import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
@@ -54,6 +53,7 @@ import android.util.Log;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.RestrictedListPreference;
 import com.android.settings.TrustAgentUtils.TrustAgentComponentInfo;
 import com.android.settings.fingerprint.FingerprintEnrollIntroduction;
 import com.android.settings.fingerprint.FingerprintSettings;
@@ -61,6 +61,7 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Index;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
+import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.RestrictedSwitchPreference;
 
@@ -68,6 +69,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
+
+import static com.android.settings.RestrictedListPreference.RestrictedItem;
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 /**
  * Gesture lock pattern settings.
@@ -123,7 +127,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
     private ChooseLockSettingsHelper mChooseLockSettingsHelper;
     private LockPatternUtils mLockPatternUtils;
-    private ListPreference mLockAfter;
+    private RestrictedListPreference mLockAfter;
 
     private SwitchPreference mVisiblePattern;
 
@@ -266,7 +270,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
         }
 
         // lock after preference
-        mLockAfter = (ListPreference) root.findPreference(KEY_LOCK_AFTER_TIMEOUT);
+        mLockAfter = (RestrictedListPreference) root.findPreference(KEY_LOCK_AFTER_TIMEOUT);
         if (mLockAfter != null) {
             setupLockAfterPreference();
             updateLockAfterPreferenceSummary();
@@ -531,72 +535,97 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 Settings.Secure.LOCK_SCREEN_LOCK_AFTER_TIMEOUT, 5000);
         mLockAfter.setValue(String.valueOf(currentTimeout));
         mLockAfter.setOnPreferenceChangeListener(this);
-        final long adminTimeout = (mDPM != null ? mDPM.getMaximumTimeToLock(null) : 0);
-        final long displayTimeout = Math.max(0,
-                Settings.System.getInt(getContentResolver(), SCREEN_OFF_TIMEOUT, 0));
-        if (adminTimeout > 0) {
-            // This setting is a slave to display timeout when a device policy is enforced.
-            // As such, maxLockTimeout = adminTimeout - displayTimeout.
-            // If there isn't enough time, shows "immediately" setting.
-            disableUnusableTimeouts(Math.max(0, adminTimeout - displayTimeout));
+        final EnforcedAdmin admin = RestrictedLockUtils.checkIfMaximumTimeToLockIsSet(
+                getActivity());
+        if (admin != null) {
+            final long adminTimeout = (mDPM != null ? mDPM.getMaximumTimeToLock(null) : 0);
+            final long displayTimeout = Math.max(0,
+                    Settings.System.getInt(getContentResolver(), SCREEN_OFF_TIMEOUT, 0));
+            if (adminTimeout > 0) {
+                // This setting is a slave to display timeout when a device policy is enforced.
+                // As such, maxLockTimeout = adminTimeout - displayTimeout.
+                // If there isn't enough time, shows "immediately" setting.
+                disableUnusableTimeouts(Math.max(0, adminTimeout - displayTimeout), admin);
+            }
         }
     }
 
     private void updateLockAfterPreferenceSummary() {
-        // Update summary message with current value
-        long currentTimeout = Settings.Secure.getLong(getContentResolver(),
-                Settings.Secure.LOCK_SCREEN_LOCK_AFTER_TIMEOUT, 5000);
-        final CharSequence[] entries = mLockAfter.getEntries();
-        final CharSequence[] values = mLockAfter.getEntryValues();
-        int best = 0;
-        for (int i = 0; i < values.length; i++) {
-            long timeout = Long.valueOf(values[i].toString());
-            if (currentTimeout >= timeout) {
-                best = i;
-            }
-        }
-
-        Preference preference = getPreferenceScreen().findPreference(KEY_TRUST_AGENT);
-        if (preference != null && preference.getTitle().length() > 0) {
-            if (Long.valueOf(values[best].toString()) == 0) {
-                mLockAfter.setSummary(getString(R.string.lock_immediately_summary_with_exception,
-                        preference.getTitle()));
-            } else {
-                mLockAfter.setSummary(getString(R.string.lock_after_timeout_summary_with_exception,
-                        entries[best], preference.getTitle()));
-            }
+        final String summary;
+        if (mLockAfter.isDisabledByAdmin()) {
+            summary = getString(R.string.disabled_by_policy_title);
         } else {
-            mLockAfter.setSummary(getString(R.string.lock_after_timeout_summary, entries[best]));
+            // Update summary message with current value
+            long currentTimeout = Settings.Secure.getLong(getContentResolver(),
+                    Settings.Secure.LOCK_SCREEN_LOCK_AFTER_TIMEOUT, 5000);
+            final CharSequence[] entries = mLockAfter.getEntries();
+            final CharSequence[] values = mLockAfter.getEntryValues();
+            int best = 0;
+            for (int i = 0; i < values.length; i++) {
+                if (mLockAfter.isRestrictedForEntry(entries[i])) {
+                    break;
+                }
+                long timeout = Long.valueOf(values[i].toString());
+                if (currentTimeout >= timeout) {
+                    best = i;
+                }
+            }
+
+            Preference preference = getPreferenceScreen().findPreference(KEY_TRUST_AGENT);
+            if (preference != null && preference.getTitle().length() > 0) {
+                if (Long.valueOf(values[best].toString()) == 0) {
+                    summary = getString(R.string.lock_immediately_summary_with_exception,
+                            preference.getTitle());
+                } else {
+                    summary = getString(R.string.lock_after_timeout_summary_with_exception,
+                            entries[best], preference.getTitle());
+                }
+            } else {
+                summary = getString(R.string.lock_after_timeout_summary, entries[best]);
+            }
         }
+        mLockAfter.setSummary(summary);
     }
 
-    private void disableUnusableTimeouts(long maxTimeout) {
+    private void disableUnusableTimeouts(long maxTimeout, EnforcedAdmin admin) {
         final CharSequence[] entries = mLockAfter.getEntries();
         final CharSequence[] values = mLockAfter.getEntryValues();
-        ArrayList<CharSequence> revisedEntries = new ArrayList<CharSequence>();
-        ArrayList<CharSequence> revisedValues = new ArrayList<CharSequence>();
+        long maxTimeoutSelectable = 0;
+        int maxTimeoutEntryIndex = -1;
         for (int i = 0; i < values.length; i++) {
-            long timeout = Long.valueOf(values[i].toString());
-            if (timeout <= maxTimeout) {
-                revisedEntries.add(entries[i]);
-                revisedValues.add(values[i]);
+            long timeout = Long.parseLong(values[i].toString());
+            if (timeout > maxTimeout) {
+                break;
             }
+            maxTimeoutSelectable = timeout;
+            maxTimeoutEntryIndex = i;
         }
-        if (revisedEntries.size() != entries.length || revisedValues.size() != values.length) {
-            mLockAfter.setEntries(
-                    revisedEntries.toArray(new CharSequence[revisedEntries.size()]));
-            mLockAfter.setEntryValues(
-                    revisedValues.toArray(new CharSequence[revisedValues.size()]));
-            final int userPreference = Integer.valueOf(mLockAfter.getValue());
-            if (userPreference <= maxTimeout) {
-                mLockAfter.setValue(String.valueOf(userPreference));
-            } else {
-                // There will be no highlighted selection since nothing in the list matches
-                // maxTimeout. The user can still select anything less than maxTimeout.
-                // TODO: maybe append maxTimeout to the list and mark selected.
-            }
+        // If there are no possible options for the user, then set this preference as
+        // disabled by admin, otherwise remove the padlock in case it was set earlier.
+        if (maxTimeoutSelectable == 0) {
+            mLockAfter.setDisabledByAdmin(admin);
+            return;
+        } else {
+            mLockAfter.setDisabledByAdmin(null);
         }
-        mLockAfter.setEnabled(revisedEntries.size() > 0);
+
+        mLockAfter.clearRestrictedItems();
+        // Set all the entries after the maximum selectable timeout as disabled by admin.
+        for (int i = maxTimeoutEntryIndex + 1; i < values.length; i++) {
+            mLockAfter.addRestrictedItem(
+                    new RestrictedItem(entries[i], values[i], admin));
+        }
+
+        final int userPreference = Integer.valueOf(mLockAfter.getValue());
+        if (userPreference <= maxTimeout) {
+            mLockAfter.setValue(String.valueOf(userPreference));
+        } else if (maxTimeoutSelectable == maxTimeout) {
+            mLockAfter.setValue(String.valueOf(maxTimeout));
+        } else {
+            // There will be no highlighted selection since nothing in the list matches
+            // maxTimeout. The user can still select anything less than maxTimeout.
+            // TODO: maybe append maxTimeout to the list and mark selected.
+        }
     }
 
     @Override
@@ -630,7 +659,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
                     Settings.System.TEXT_SHOW_PASSWORD, 1) != 0);
         }
 
-        if (mResetCredentials != null && !mResetCredentials.isDisabledByAdmin()) {
+        if (mResetCredentials != null) {
             mResetCredentials.setEnabled(!mKeyStore.isEmpty());
         }
 

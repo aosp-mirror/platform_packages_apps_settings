@@ -49,7 +49,7 @@
                 settings:keywords="@string/keywords_display_wallpaper"
                 android:fragment="com.android.settings.WallpaperTypeSettings" />
 
-        <ListPreference
+        <com.android.settings.RestrictedListPreference
                 android:key="screen_timeout"
                 android:title="@string/screen_timeout"
                 android:summary="@string/screen_timeout_summary"
