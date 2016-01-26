@@ -72,6 +72,9 @@ public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
     @Override
     public void onResume() {
         super.onResume();
+        if (isUiRestricted()) {
+            return;
+        }
         if (!mCreate) {
             reloadCalendar();
         }
