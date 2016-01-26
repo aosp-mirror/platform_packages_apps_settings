@@ -41,7 +41,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternChecker;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.TextViewInputDisabler;
@@ -242,7 +242,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
 
         @Override
         protected int getMetricsCategory() {
-            return MetricsLogger.CONFIRM_LOCK_PASSWORD;
+            return MetricsEvent.CONFIRM_LOCK_PASSWORD;
         }
 
         @Override

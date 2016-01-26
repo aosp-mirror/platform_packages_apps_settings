@@ -31,7 +31,7 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 
 import java.util.ArrayList;
@@ -161,7 +161,7 @@ public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.NOTIFICATION_ZEN_MODE_EVENT_RULE;
+        return MetricsEvent.NOTIFICATION_ZEN_MODE_EVENT_RULE;
     }
 
     public static CalendarInfo findCalendar(Context context, EventInfo event) {

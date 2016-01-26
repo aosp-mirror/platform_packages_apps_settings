@@ -21,7 +21,7 @@ import android.content.res.Resources;
 import android.view.View;
 import android.widget.Button;
 
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SetupChooseLockGeneric;
 import com.android.settings.SetupWizardUtils;
@@ -79,6 +79,6 @@ public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntrodu
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.FINGERPRINT_ENROLL_INTRO_SETUP;
+        return MetricsEvent.FINGERPRINT_ENROLL_INTRO_SETUP;
     }
 }

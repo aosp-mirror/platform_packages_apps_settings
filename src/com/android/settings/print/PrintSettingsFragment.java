@@ -59,7 +59,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.android.internal.content.PackageMonitor;
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.DialogCreatable;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -128,7 +128,7 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.PRINT_SETTINGS;
+        return MetricsEvent.PRINT_SETTINGS;
     }
 
     @Override

@@ -24,7 +24,7 @@ import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Switch;
 
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.widget.SwitchBar;
 
@@ -38,7 +38,7 @@ public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceF
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.ACCESSIBILITY_TOGGLE_DALTONIZER;
+        return MetricsEvent.ACCESSIBILITY_TOGGLE_DALTONIZER;
     }
 
     @Override

@@ -24,7 +24,7 @@ import android.os.UserHandle;
 import android.view.View;
 import android.widget.Button;
 
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 
 /**
@@ -70,6 +70,6 @@ public class FingerprintEnrollFinish extends FingerprintEnrollBase {
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.FINGERPRINT_ENROLL_FINISH;
+        return MetricsEvent.FINGERPRINT_ENROLL_FINISH;
     }
 }

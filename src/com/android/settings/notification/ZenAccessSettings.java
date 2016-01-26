@@ -40,7 +40,7 @@ import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import android.view.View;
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 
 import java.util.ArrayList;
@@ -57,7 +57,7 @@ public class ZenAccessSettings extends EmptyTextSettings {
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.NOTIFICATION_ZEN_MODE_ACCESS;
+        return MetricsEvent.NOTIFICATION_ZEN_MODE_ACCESS;
     }
 
     @Override

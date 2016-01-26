@@ -31,7 +31,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
@@ -67,7 +67,7 @@ public class PrintJobSettingsFragment extends SettingsPreferenceFragment {
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.PRINT_JOB_SETTINGS;
+        return MetricsEvent.PRINT_JOB_SETTINGS;
     }
 
     @Override

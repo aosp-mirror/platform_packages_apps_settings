@@ -36,7 +36,7 @@ import android.text.format.DateFormat;
 import android.util.Log;
 import android.widget.TimePicker;
 
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 
 import java.text.SimpleDateFormat;
@@ -186,7 +186,7 @@ public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.NOTIFICATION_ZEN_MODE_SCHEDULE_RULE;
+        return MetricsEvent.NOTIFICATION_ZEN_MODE_SCHEDULE_RULE;
     }
 
     private void showDaysDialog() {

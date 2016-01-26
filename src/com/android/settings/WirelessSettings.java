@@ -45,7 +45,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.ims.ImsManager;
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.internal.telephony.TelephonyProperties;
 import com.android.settings.nfc.NfcEnabler;
@@ -205,7 +205,7 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.WIRELESS;
+        return MetricsEvent.WIRELESS;
     }
 
     @Override

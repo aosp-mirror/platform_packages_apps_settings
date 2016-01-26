@@ -26,7 +26,7 @@ import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.RestrictedRadioButton;
 import com.android.settings.SettingsActivity;
@@ -76,7 +76,7 @@ public class RedactionInterstitial extends SettingsActivity {
 
         @Override
         protected int getMetricsCategory() {
-            return MetricsLogger.NOTIFICATION_REDACTION;
+            return MetricsEvent.NOTIFICATION_REDACTION;
         }
 
         @Override

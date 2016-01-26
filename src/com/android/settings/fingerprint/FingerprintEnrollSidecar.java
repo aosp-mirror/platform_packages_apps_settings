@@ -25,7 +25,7 @@ import android.os.CancellationSignal;
 import android.os.Handler;
 import android.os.UserHandle;
 
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.ChooseLockSettingsHelper;
 import com.android.settings.InstrumentedFragment;
 
@@ -155,7 +155,7 @@ public class FingerprintEnrollSidecar extends InstrumentedFragment {
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.FINGERPRINT_ENROLL_SIDECAR;
+        return MetricsEvent.FINGERPRINT_ENROLL_SIDECAR;
     }
 
     public interface Listener {

@@ -25,7 +25,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.HelpUtils;
 import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
@@ -66,7 +66,7 @@ public class DashboardSummary extends InstrumentedFragment
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.DASHBOARD_SUMMARY;
+        return MetricsEvent.DASHBOARD_SUMMARY;
     }
 
     @Override

@@ -38,7 +38,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.util.Preconditions;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -77,7 +77,7 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.DEVICEINFO_STORAGE;
+        return MetricsEvent.DEVICEINFO_STORAGE;
     }
 
     @Override

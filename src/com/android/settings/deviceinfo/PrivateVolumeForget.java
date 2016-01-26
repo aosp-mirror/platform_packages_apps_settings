@@ -33,7 +33,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 
@@ -44,7 +44,7 @@ public class PrivateVolumeForget extends InstrumentedFragment {
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.DEVICEINFO_STORAGE;
+        return MetricsEvent.DEVICEINFO_STORAGE;
     }
 
     @Override

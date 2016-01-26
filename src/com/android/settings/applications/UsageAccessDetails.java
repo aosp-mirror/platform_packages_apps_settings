@@ -33,7 +33,7 @@ import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.util.Log;
 
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.applications.AppStateUsageBridge.UsageState;
 
@@ -163,7 +163,7 @@ public class UsageAccessDetails extends AppInfoWithHeader implements OnPreferenc
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.APPLICATIONS_USAGE_ACCESS_DETAIL;
+        return MetricsEvent.APPLICATIONS_USAGE_ACCESS_DETAIL;
     }
 
 }

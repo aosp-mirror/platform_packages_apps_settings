@@ -28,7 +28,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
 import com.android.setupwizardlib.util.SystemBarHelper;
@@ -84,7 +84,7 @@ public class SetupFingerprintEnrollEnrolling extends FingerprintEnrollEnrolling
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.FINGERPRINT_ENROLLING_SETUP;
+        return MetricsEvent.FINGERPRINT_ENROLLING_SETUP;
     }
 
     public static class SkipDialog extends DialogFragment {

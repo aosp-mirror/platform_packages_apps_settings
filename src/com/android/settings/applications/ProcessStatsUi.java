@@ -28,7 +28,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.android.internal.app.ProcessStats;
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.applications.ProcStatsData.MemInfo;
@@ -92,7 +92,7 @@ public class ProcessStatsUi extends ProcessStatsBase {
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.APPLICATIONS_PROCESS_STATS_UI;
+        return MetricsEvent.APPLICATIONS_PROCESS_STATS_UI;
     }
 
     @Override

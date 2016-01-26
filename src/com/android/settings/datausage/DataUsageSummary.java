@@ -35,7 +35,7 @@ import android.text.format.Formatter;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SummaryPreference;
 import com.android.settings.Utils;
@@ -215,7 +215,7 @@ public class DataUsageSummary extends DataUsageBase implements Indexable {
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.DATA_USAGE_SUMMARY;
+        return MetricsEvent.DATA_USAGE_SUMMARY;
     }
 
     /**

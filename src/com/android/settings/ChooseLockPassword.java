@@ -43,7 +43,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockPatternUtils.RequestThrottledException;
 import com.android.internal.widget.PasswordEntryKeyboardHelper;
@@ -349,7 +349,7 @@ public class ChooseLockPassword extends SettingsActivity {
 
         @Override
         protected int getMetricsCategory() {
-            return MetricsLogger.CHOOSE_LOCK_PASSWORD;
+            return MetricsEvent.CHOOSE_LOCK_PASSWORD;
         }
 
         @Override

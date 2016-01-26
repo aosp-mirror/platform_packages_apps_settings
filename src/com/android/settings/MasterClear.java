@@ -40,7 +40,7 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 
 import java.util.List;
 
@@ -294,6 +294,6 @@ public class MasterClear extends InstrumentedFragment {
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.MASTER_CLEAR;
+        return MetricsEvent.MASTER_CLEAR;
     }
 }

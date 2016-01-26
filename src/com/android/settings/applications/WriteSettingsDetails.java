@@ -31,7 +31,7 @@ import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.util.Log;
 
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.applications.AppStateAppOpsBridge.PermissionState;
 import com.android.settings.applications.AppStateWriteSettingsBridge.WriteSettingsState;
@@ -154,7 +154,7 @@ public class WriteSettingsDetails extends AppInfoWithHeader implements OnPrefere
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.SYSTEM_ALERT_WINDOW_APPS;
+        return MetricsEvent.SYSTEM_ALERT_WINDOW_APPS;
     }
 
     public static CharSequence getSummary(Context context, AppEntry entry) {

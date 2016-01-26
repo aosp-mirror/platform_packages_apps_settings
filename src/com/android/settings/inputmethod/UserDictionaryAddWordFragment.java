@@ -26,7 +26,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -111,7 +111,7 @@ public class UserDictionaryAddWordFragment extends InstrumentedFragment
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.INPUTMETHOD_USER_DICTIONARY_ADD_WORD;
+        return MetricsEvent.INPUTMETHOD_USER_DICTIONARY_ADD_WORD;
     }
 
     @Override

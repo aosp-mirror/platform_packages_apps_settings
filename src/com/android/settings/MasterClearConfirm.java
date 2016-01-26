@@ -31,7 +31,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 
 /**
  * Confirm and execute a reset of the device to a clean "just out of the box"
@@ -168,6 +168,6 @@ public class MasterClearConfirm extends InstrumentedFragment {
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.MASTER_CLEAR_CONFIRM;
+        return MetricsEvent.MASTER_CLEAR_CONFIRM;
     }
 }

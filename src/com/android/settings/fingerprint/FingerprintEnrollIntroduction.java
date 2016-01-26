@@ -23,7 +23,7 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.view.View;
 
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.ChooseLockGeneric;
 import com.android.settings.ChooseLockSettingsHelper;
 import com.android.settings.HelpUtils;
@@ -137,6 +137,6 @@ public class FingerprintEnrollIntroduction extends FingerprintEnrollBase {
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.FINGERPRINT_ENROLL_INTRO;
+        return MetricsEvent.FINGERPRINT_ENROLL_INTRO;
     }
 }

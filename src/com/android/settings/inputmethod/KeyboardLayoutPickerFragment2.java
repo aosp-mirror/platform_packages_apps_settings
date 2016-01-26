@@ -29,6 +29,7 @@ import android.view.InputDevice;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodSubtype;
 import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.util.Preconditions;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -68,7 +69,7 @@ public final class KeyboardLayoutPickerFragment2 extends SettingsPreferenceFragm
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.INPUTMETHOD_KEYBOARD;
+        return MetricsEvent.INPUTMETHOD_KEYBOARD;
     }
 
     @Override

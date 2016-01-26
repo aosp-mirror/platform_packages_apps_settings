@@ -39,7 +39,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.SettingsPreferenceFragment.SettingsDialogFragment;
 
 public class ProxySelector extends InstrumentedFragment implements DialogCreatable {
@@ -273,6 +273,6 @@ public class ProxySelector extends InstrumentedFragment implements DialogCreatab
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.PROXY_SELECTOR;
+        return MetricsEvent.PROXY_SELECTOR;
     }
 }

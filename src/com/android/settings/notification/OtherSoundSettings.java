@@ -31,7 +31,7 @@ import android.provider.Settings.Global;
 import android.provider.Settings.System;
 import android.telephony.TelephonyManager;
 
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
@@ -180,7 +180,7 @@ public class OtherSoundSettings extends SettingsPreferenceFragment implements In
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.NOTIFICATION_OTHER_SOUND;
+        return MetricsEvent.NOTIFICATION_OTHER_SOUND;
     }
 
     @Override

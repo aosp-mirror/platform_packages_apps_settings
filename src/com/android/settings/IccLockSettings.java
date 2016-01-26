@@ -41,7 +41,7 @@ import android.widget.TabHost.TabSpec;
 import android.widget.TabWidget;
 import android.widget.Toast;
 
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.Phone;
 import com.android.internal.telephony.PhoneFactory;
 import com.android.internal.telephony.TelephonyIntents;
@@ -241,7 +241,7 @@ public class IccLockSettings extends InstrumentedPreferenceActivity
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.ICC_LOCK;
+        return MetricsEvent.ICC_LOCK;
     }
 
     @Override

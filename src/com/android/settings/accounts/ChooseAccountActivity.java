@@ -32,12 +32,13 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
 import android.util.Log;
 
-import com.android.internal.logging.MetricsLogger;
+import com.google.android.collect.Maps;
+
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.util.CharSequences;
 import com.android.settings.InstrumentedPreferenceActivity;
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.google.android.collect.Maps;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -89,7 +90,7 @@ public class ChooseAccountActivity extends InstrumentedPreferenceActivity {
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.ACCOUNTS_CHOOSE_ACCOUNT_ACTIVITY;
+        return MetricsEvent.ACCOUNTS_CHOOSE_ACCOUNT_ACTIVITY;
     }
 
     @Override

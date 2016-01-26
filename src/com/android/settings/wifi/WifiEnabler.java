@@ -31,6 +31,7 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.search.Index;
 import com.android.settings.widget.SwitchBar;
@@ -211,7 +212,7 @@ public class WifiEnabler implements SwitchBar.OnSwitchChangeListener  {
             mWifiManager.setWifiApEnabled(null, false);
         }
         MetricsLogger.action(mContext,
-                isChecked ? MetricsLogger.ACTION_WIFI_ON : MetricsLogger.ACTION_WIFI_OFF);
+                isChecked ? MetricsEvent.ACTION_WIFI_ON : MetricsEvent.ACTION_WIFI_OFF);
         if (!mWifiManager.setWifiEnabled(isChecked)) {
             // Error
             mSwitchBar.setEnabled(true);

@@ -16,7 +16,7 @@
 
 package com.android.settings.notification;
 
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.AppHeader;
 import com.android.settings.R;
@@ -60,7 +60,7 @@ public class TopicNotificationSettings extends NotificationSettingsBase {
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.NOTIFICATION_TOPIC_NOTIFICATION;
+        return MetricsEvent.NOTIFICATION_TOPIC_NOTIFICATION;
     }
 
     @Override

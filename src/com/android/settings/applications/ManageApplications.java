@@ -46,7 +46,7 @@ import android.widget.Filterable;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.AppHeader;
 import com.android.settings.HelpUtils;
 import com.android.settings.InstrumentedFragment;
@@ -376,23 +376,23 @@ public class ManageApplications extends InstrumentedFragment
     protected int getMetricsCategory() {
         switch (mListType) {
             case LIST_TYPE_MAIN:
-                return MetricsLogger.MANAGE_APPLICATIONS;
+                return MetricsEvent.MANAGE_APPLICATIONS;
             case LIST_TYPE_NOTIFICATION:
-                return MetricsLogger.MANAGE_APPLICATIONS_NOTIFICATIONS;
+                return MetricsEvent.MANAGE_APPLICATIONS_NOTIFICATIONS;
             case LIST_TYPE_DOMAINS_URLS:
-                return MetricsLogger.MANAGE_DOMAIN_URLS;
+                return MetricsEvent.MANAGE_DOMAIN_URLS;
             case LIST_TYPE_STORAGE:
-                return MetricsLogger.APPLICATIONS_STORAGE_APPS;
+                return MetricsEvent.APPLICATIONS_STORAGE_APPS;
             case LIST_TYPE_USAGE_ACCESS:
-                return MetricsLogger.USAGE_ACCESS;
+                return MetricsEvent.USAGE_ACCESS;
             case LIST_TYPE_HIGH_POWER:
-                return MetricsLogger.APPLICATIONS_HIGH_POWER_APPS;
+                return MetricsEvent.APPLICATIONS_HIGH_POWER_APPS;
             case LIST_TYPE_OVERLAY:
-                return MetricsLogger.SYSTEM_ALERT_WINDOW_APPS;
+                return MetricsEvent.SYSTEM_ALERT_WINDOW_APPS;
             case LIST_TYPE_WRITE_SETTINGS:
-                return MetricsLogger.SYSTEM_ALERT_WINDOW_APPS;
+                return MetricsEvent.SYSTEM_ALERT_WINDOW_APPS;
             default:
-                return MetricsLogger.VIEW_UNKNOWN;
+                return MetricsEvent.VIEW_UNKNOWN;
         }
     }
 

@@ -42,7 +42,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatterySipper.DrainType;
 import com.android.internal.os.BatteryStatsHelper;
@@ -360,7 +360,7 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.FUELGAUGE_POWER_USAGE_DETAIL;
+        return MetricsEvent.FUELGAUGE_POWER_USAGE_DETAIL;
     }
 
     @Override

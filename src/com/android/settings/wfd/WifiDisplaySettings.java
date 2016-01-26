@@ -58,7 +58,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.internal.app.MediaRouteDialogPresenter;
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
@@ -116,7 +116,7 @@ public final class WifiDisplaySettings extends SettingsPreferenceFragment {
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.WFD_WIFI_DISPLAY;
+        return MetricsEvent.WFD_WIFI_DISPLAY;
     }
 
     @Override

@@ -41,8 +41,8 @@ import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
+import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
 import android.util.Log;
@@ -51,7 +51,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.AccessiblePreferenceCategory;
 import com.android.settings.DimmableIconPreference;
 import com.android.settings.R;
@@ -135,7 +135,7 @@ public class AccountSettings extends SettingsPreferenceFragment
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.ACCOUNT;
+        return MetricsEvent.ACCOUNT;
     }
 
     @Override

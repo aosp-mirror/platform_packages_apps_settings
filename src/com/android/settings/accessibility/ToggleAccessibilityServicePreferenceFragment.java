@@ -41,7 +41,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.ConfirmDeviceCredentialActivity;
 import com.android.settings.R;
@@ -75,7 +75,7 @@ public class ToggleAccessibilityServicePreferenceFragment
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.ACCESSIBILITY_SERVICE;
+        return MetricsEvent.ACCESSIBILITY_SERVICE;
     }
 
     @Override

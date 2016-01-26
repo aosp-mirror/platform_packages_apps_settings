@@ -29,7 +29,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 
@@ -39,7 +39,7 @@ public class BackgroundCheckSummary extends InstrumentedFragment {
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.BACKGROUND_CHECK_SUMMARY;
+        return MetricsEvent.BACKGROUND_CHECK_SUMMARY;
     }
 
     @Override

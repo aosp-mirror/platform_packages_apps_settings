@@ -56,7 +56,7 @@ import android.widget.SearchView;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
@@ -135,7 +135,7 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.PRINT_SERVICE_SETTINGS;
+        return MetricsEvent.PRINT_SERVICE_SETTINGS;
     }
 
     @Override
@@ -711,4 +711,3 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         }
     }
 }
-

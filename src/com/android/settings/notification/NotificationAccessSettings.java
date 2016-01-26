@@ -21,7 +21,7 @@ import android.content.pm.PackageManager;
 import android.provider.Settings;
 import android.service.notification.NotificationListenerService;
 
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 
 public class NotificationAccessSettings extends ManagedServiceSettings {
@@ -43,7 +43,7 @@ public class NotificationAccessSettings extends ManagedServiceSettings {
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.NOTIFICATION_ACCESS;
+        return MetricsEvent.NOTIFICATION_ACCESS;
     }
 
     @Override

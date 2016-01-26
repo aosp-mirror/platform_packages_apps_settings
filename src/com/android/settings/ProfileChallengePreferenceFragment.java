@@ -41,7 +41,7 @@ import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.fingerprint.FingerprintEnrollIntroduction;
 import com.android.settings.fingerprint.FingerprintSettings;
@@ -90,7 +90,7 @@ public class ProfileChallengePreferenceFragment extends SettingsPreferenceFragme
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.PROFILE_CHALLENGE;
+        return MetricsEvent.PROFILE_CHALLENGE;
     }
 
     @Override

@@ -79,7 +79,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.internal.app.LocalePicker;
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.applications.BackgroundCheckSummary;
 import com.android.settings.fuelgauge.InactiveApps;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -307,7 +307,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.DEVELOPMENT;
+        return MetricsEvent.DEVELOPMENT;
     }
 
     @Override

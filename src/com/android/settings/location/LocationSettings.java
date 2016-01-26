@@ -37,7 +37,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Switch;
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.DimmableIconPreference;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -114,7 +114,7 @@ public class LocationSettings extends LocationSettingsBase
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.LOCATION;
+        return MetricsEvent.LOCATION;
     }
 
     @Override

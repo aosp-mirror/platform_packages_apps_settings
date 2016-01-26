@@ -23,7 +23,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
@@ -54,6 +54,6 @@ public class BatteryHistoryDetail extends InstrumentedFragment {
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.FUELGAUGE_BATTERY_HISTORY_DETAIL;
+        return MetricsEvent.FUELGAUGE_BATTERY_HISTORY_DETAIL;
     }
 }

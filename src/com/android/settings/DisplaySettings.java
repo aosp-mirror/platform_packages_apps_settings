@@ -42,6 +42,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.view.RotationPolicy;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -100,7 +101,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.DISPLAY;
+        return MetricsEvent.DISPLAY;
     }
 
     @Override
@@ -196,7 +197,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
                     final boolean locked = Integer.parseInt((String) newValue) != 0;
-                    MetricsLogger.action(getActivity(), MetricsLogger.ACTION_ROTATION_LOCK,
+                    MetricsLogger.action(getActivity(), MetricsEvent.ACTION_ROTATION_LOCK,
                             locked);
                     RotationPolicy.setRotationLock(activity, locked);
                     return true;

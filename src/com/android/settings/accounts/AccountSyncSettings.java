@@ -28,13 +28,11 @@ import android.app.Dialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SyncAdapterType;
 import android.content.SyncInfo;
 import android.content.SyncStatusInfo;
 import android.content.pm.ProviderInfo;
 import android.content.pm.UserInfo;
-import android.graphics.Color;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -49,15 +47,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import com.android.internal.logging.MetricsLogger;
+import com.google.android.collect.Lists;
+
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.ShowAdminSupportDetailsDialog;
 import com.android.settings.Utils;
 import com.android.settingslib.RestrictedLockUtils;
-import com.google.android.collect.Lists;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -149,7 +146,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.ACCOUNTS_ACCOUNT_SYNC;
+        return MetricsEvent.ACCOUNTS_ACCOUNT_SYNC;
     }
 
     @Override

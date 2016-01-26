@@ -32,7 +32,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.android.ims.ImsManager;
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.PhoneConstants;
 
 /**
@@ -135,6 +135,6 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.RESET_NETWORK_CONFIRM;
+        return MetricsEvent.RESET_NETWORK_CONFIRM;
     }
 }

@@ -27,7 +27,7 @@ import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.view.accessibility.AccessibilityManager;
 
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto;
 import com.android.settings.DialogCreatable;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -55,7 +55,7 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.ACCESSIBILITY;
+        return MetricsProto.MetricsEvent.ACCESSIBILITY;
     }
 
     @Override

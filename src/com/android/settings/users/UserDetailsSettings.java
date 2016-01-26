@@ -26,7 +26,7 @@ import android.os.UserManager;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settingslib.RestrictedPreference;
@@ -68,7 +68,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.USER_DETAILS;
+        return MetricsEvent.USER_DETAILS;
     }
 
     @Override

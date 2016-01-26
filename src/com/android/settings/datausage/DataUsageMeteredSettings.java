@@ -27,7 +27,7 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.telephony.TelephonyManager;
 
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -61,7 +61,7 @@ public class DataUsageMeteredSettings extends SettingsPreferenceFragment impleme
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.NET_DATA_USAGE_METERED;
+        return MetricsEvent.NET_DATA_USAGE_METERED;
     }
 
     @Override

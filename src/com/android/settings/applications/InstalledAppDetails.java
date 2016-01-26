@@ -64,7 +64,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.AppHeader;
@@ -290,7 +290,7 @@ public class InstalledAppDetails extends AppInfoBase
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.APPLICATIONS_INSTALLED_APP_DETAILS;
+        return MetricsEvent.APPLICATIONS_INSTALLED_APP_DETAILS;
     }
 
     @Override

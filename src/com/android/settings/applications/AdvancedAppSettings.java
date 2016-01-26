@@ -21,7 +21,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
 
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.PermissionsSummaryHelper.PermissionsResultCallback;
@@ -72,7 +72,7 @@ public class AdvancedAppSettings extends SettingsPreferenceFragment implements
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.APPLICATIONS_ADVANCED;
+        return MetricsEvent.APPLICATIONS_ADVANCED;
     }
 
     @Override

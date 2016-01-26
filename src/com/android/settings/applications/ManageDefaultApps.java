@@ -31,7 +31,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.internal.content.PackageMonitor;
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -191,7 +191,7 @@ public class ManageDefaultApps extends SettingsPreferenceFragment
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.APPLICATIONS_DEFAULT_APPS;
+        return MetricsEvent.APPLICATIONS_DEFAULT_APPS;
     }
 
     @Override

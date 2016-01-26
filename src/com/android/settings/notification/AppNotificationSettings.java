@@ -32,6 +32,7 @@ import android.util.ArrayMap;
 import android.util.Log;
 
 import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.AppHeader;
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -66,7 +67,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.NOTIFICATION_APP_NOTIFICATION;
+        return MetricsEvent.NOTIFICATION_APP_NOTIFICATION;
     }
 
     @Override
@@ -150,7 +151,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 final boolean banned = (Boolean) newValue;
                 if (banned) {
-                    MetricsLogger.action(getActivity(), MetricsLogger.ACTION_BAN_APP_NOTES, mPkg);
+                    MetricsLogger.action(getActivity(), MetricsEvent.ACTION_BAN_APP_NOTES, mPkg);
                 }
                 final boolean success =  mBackend.setNotificationsBanned(mPkg, mUid, banned);
                 if (success) {

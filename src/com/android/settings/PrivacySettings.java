@@ -34,7 +34,7 @@ import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.PreferenceScreen;
 import android.util.Log;
 
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
@@ -70,7 +70,7 @@ public class PrivacySettings extends SettingsPreferenceFragment implements Index
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.PRIVACY;
+        return MetricsEvent.PRIVACY;
     }
 
     @Override

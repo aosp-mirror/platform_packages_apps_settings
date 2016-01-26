@@ -27,6 +27,7 @@ import android.support.v7.preference.PreferenceScreen;
 import android.util.Log;
 
 import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.R;
@@ -61,7 +62,7 @@ public class ZenModeVisualInterruptionSettings extends ZenModeSettingsBase {
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 if (mDisableListeners) return true;
                 final boolean val = (Boolean) newValue;
-                MetricsLogger.action(mContext, MetricsLogger.ACTION_ZEN_ALLOW_PEEK, val);
+                MetricsLogger.action(mContext, MetricsEvent.ACTION_ZEN_ALLOW_PEEK, val);
                 if (DEBUG) Log.d(TAG, "onPrefChange suppressPeek=" + val);
                 savePolicy(getNewSuppressedEffects(val, Policy.SUPPRESSED_EFFECT_PEEK));
                 return true;
@@ -74,7 +75,7 @@ public class ZenModeVisualInterruptionSettings extends ZenModeSettingsBase {
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 if (mDisableListeners) return true;
                 final boolean val = (Boolean) newValue;
-                MetricsLogger.action(mContext, MetricsLogger.ACTION_ZEN_ALLOW_LIGHTS, val);
+                MetricsLogger.action(mContext, MetricsEvent.ACTION_ZEN_ALLOW_LIGHTS, val);
                 if (DEBUG) Log.d(TAG, "onPrefChange suppressLights=" + val);
                 savePolicy(getNewSuppressedEffects(val, Policy.SUPPRESSED_EFFECT_LIGHTS));
                 return true;
@@ -87,7 +88,7 @@ public class ZenModeVisualInterruptionSettings extends ZenModeSettingsBase {
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 if (mDisableListeners) return true;
                 final boolean val = (Boolean) newValue;
-                MetricsLogger.action(mContext, MetricsLogger.ACTION_ZEN_ALLOW_SCREEN_ON, val);
+                MetricsLogger.action(mContext, MetricsEvent.ACTION_ZEN_ALLOW_SCREEN_ON, val);
                 if (DEBUG) Log.d(TAG, "onPrefChange suppressScreenOn=" + val);
                 savePolicy(getNewSuppressedEffects(val, Policy.SUPPRESSED_EFFECT_SCREEN_ON));
                 return true;
@@ -97,7 +98,7 @@ public class ZenModeVisualInterruptionSettings extends ZenModeSettingsBase {
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.NOTIFICATION_ZEN_MODE_VISUAL_INTERRUPTIONS;
+        return MetricsEvent.NOTIFICATION_ZEN_MODE_VISUAL_INTERRUPTIONS;
     }
 
     @Override

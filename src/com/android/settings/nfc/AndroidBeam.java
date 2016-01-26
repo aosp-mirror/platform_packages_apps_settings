@@ -28,7 +28,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Switch;
 
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.HelpUtils;
 import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
@@ -113,6 +113,6 @@ public class AndroidBeam extends InstrumentedFragment
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.NFC_BEAM;
+        return MetricsEvent.NFC_BEAM;
     }
 }

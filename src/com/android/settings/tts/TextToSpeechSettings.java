@@ -33,7 +33,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Checkable;
 
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
@@ -145,7 +145,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.TTS_TEXT_TO_SPEECH;
+        return MetricsEvent.TTS_TEXT_TO_SPEECH;
     }
 
     @Override

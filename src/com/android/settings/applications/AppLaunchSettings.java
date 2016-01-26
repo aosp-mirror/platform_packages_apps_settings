@@ -34,7 +34,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
 
@@ -213,6 +213,6 @@ public class AppLaunchSettings extends AppInfoWithHeader implements OnClickListe
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.APPLICATIONS_APP_LAUNCH;
+        return MetricsEvent.APPLICATIONS_APP_LAUNCH;
     }
 }

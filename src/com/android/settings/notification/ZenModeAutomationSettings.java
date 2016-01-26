@@ -40,6 +40,7 @@ import android.support.v7.preference.PreferenceViewHolder;
 import android.view.View;
 
 import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.notification.ManagedServiceSettings.Config;
 
@@ -106,7 +107,7 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
         new ZenRuleNameDialog(mContext, null) {
             @Override
             public void onOk(String ruleName) {
-                MetricsLogger.action(mContext, MetricsLogger.ACTION_ZEN_ADD_RULE_OK);
+                MetricsLogger.action(mContext, MetricsEvent.ACTION_ZEN_ADD_RULE_OK);
                 AutomaticZenRule rule = new AutomaticZenRule(ruleName, ri.serviceComponent,
                         ri.defaultConditionId, NotificationManager.INTERRUPTION_FILTER_PRIORITY,
                         true);
@@ -126,7 +127,7 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
                         new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        MetricsLogger.action(mContext, MetricsLogger.ACTION_ZEN_DELETE_RULE_OK);
+                        MetricsLogger.action(mContext, MetricsEvent.ACTION_ZEN_DELETE_RULE_OK);
                         removeZenRule(ruleId);
                     }
                 })
@@ -169,7 +170,7 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
         p.setOnPreferenceClickListener(new OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                MetricsLogger.action(mContext, MetricsLogger.ACTION_ZEN_ADD_RULE);
+                MetricsLogger.action(mContext, MetricsEvent.ACTION_ZEN_ADD_RULE);
                 showAddRuleDialog();
                 return true;
             }
@@ -179,7 +180,7 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.NOTIFICATION_ZEN_MODE_AUTOMATION;
+        return MetricsEvent.NOTIFICATION_ZEN_MODE_AUTOMATION;
     }
 
     private String computeRuleSummary(AutomaticZenRule rule, boolean isSystemRule,

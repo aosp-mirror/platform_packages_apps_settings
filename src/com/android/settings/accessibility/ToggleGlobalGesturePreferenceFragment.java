@@ -18,7 +18,7 @@ package com.android.settings.accessibility;
 
 import android.provider.Settings;
 
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.widget.ToggleSwitch;
 import com.android.settings.widget.ToggleSwitch.OnBeforeCheckedChangeListener;
 
@@ -46,6 +46,6 @@ public class ToggleGlobalGesturePreferenceFragment
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.ACCESSIBILITY_TOGGLE_GLOBAL_GESTURE;
+        return MetricsEvent.ACCESSIBILITY_TOGGLE_GLOBAL_GESTURE;
     }
 }

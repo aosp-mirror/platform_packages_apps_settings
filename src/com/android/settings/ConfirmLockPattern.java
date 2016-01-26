@@ -32,7 +32,7 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
 import android.widget.TextView;
 
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient;
 import com.android.internal.widget.LockPatternChecker;
 import com.android.internal.widget.LockPatternUtils;
@@ -200,7 +200,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
 
         @Override
         protected int getMetricsCategory() {
-            return MetricsLogger.CONFIRM_LOCK_PATTERN;
+            return MetricsEvent.CONFIRM_LOCK_PATTERN;
         }
 
         @Override

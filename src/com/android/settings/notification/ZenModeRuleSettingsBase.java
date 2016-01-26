@@ -40,6 +40,7 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.widget.SwitchBar;
@@ -162,7 +163,7 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase
         if (mDisableListeners) return;
         final boolean enabled = isChecked;
         if (enabled == mRule.isEnabled()) return;
-        MetricsLogger.action(mContext, MetricsLogger.ACTION_ZEN_ENABLE_RULE, enabled);
+        MetricsLogger.action(mContext, MetricsEvent.ACTION_ZEN_ENABLE_RULE, enabled);
         if (DEBUG) Log.d(TAG, "onSwitchChanged enabled=" + enabled);
         mRule.setEnabled(enabled);
         setZenRule(mRule);
@@ -206,7 +207,7 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase
     public boolean onOptionsItemSelected(MenuItem item) {
         if (DEBUG) Log.d(TAG, "onOptionsItemSelected " + item.getItemId());
         if (item.getItemId() == R.id.delete) {
-            MetricsLogger.action(mContext, MetricsLogger.ACTION_ZEN_DELETE_RULE);
+            MetricsLogger.action(mContext, MetricsEvent.ACTION_ZEN_DELETE_RULE);
             showDeleteRuleDialog();
             return true;
         }
@@ -240,7 +241,7 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase
                 .setPositiveButton(R.string.zen_mode_delete_rule_button, new OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        MetricsLogger.action(mContext, MetricsLogger.ACTION_ZEN_DELETE_RULE_OK);
+                        MetricsLogger.action(mContext, MetricsEvent.ACTION_ZEN_DELETE_RULE_OK);
                         mDeleting = true;
                         removeZenRule(mRule.getId());
                     }

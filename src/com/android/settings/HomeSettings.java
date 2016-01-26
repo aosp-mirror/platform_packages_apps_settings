@@ -50,7 +50,7 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 
-import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Index;
 import com.android.settings.search.Indexable;
@@ -246,7 +246,7 @@ public class HomeSettings extends SettingsPreferenceFragment implements Indexabl
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.HOME;
+        return MetricsEvent.HOME;
     }
 
     @Override
