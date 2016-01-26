@@ -4,6 +4,7 @@ package com.android.settings;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.net.wifi.WifiManager;
 import android.util.Log;
 
@@ -25,7 +26,8 @@ public class HotspotOffReceiver extends BroadcastReceiver {
             if (wifiManager.getWifiApState() == WifiManager.WIFI_AP_STATE_DISABLED) {
                 if (DEBUG) Log.d(TAG, "TetherService.cancelRecheckAlarmIfNecessary called");
                 // The hotspot has been turned off, we don't need to recheck tethering.
-                TetherService.cancelRecheckAlarmIfNecessary(context, TetherUtil.TETHERING_WIFI);
+                TetherService.cancelRecheckAlarmIfNecessary(
+                        context, ConnectivityManager.TETHERING_WIFI);
             }
         }
     }

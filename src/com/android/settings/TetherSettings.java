@@ -47,10 +47,10 @@ import com.android.settingslib.TetherUtil;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicReference;
 
-import static com.android.settingslib.TetherUtil.TETHERING_BLUETOOTH;
-import static com.android.settingslib.TetherUtil.TETHERING_INVALID;
-import static com.android.settingslib.TetherUtil.TETHERING_USB;
-import static com.android.settingslib.TetherUtil.TETHERING_WIFI;
+import static android.net.ConnectivityManager.TETHERING_BLUETOOTH;
+import static android.net.ConnectivityManager.TETHERING_INVALID;
+import static android.net.ConnectivityManager.TETHERING_USB;
+import static android.net.ConnectivityManager.TETHERING_WIFI;
 
 /*
  * Displays preferences for Tethering.
