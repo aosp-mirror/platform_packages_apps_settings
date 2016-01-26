@@ -18,24 +18,10 @@
         android:title="@string/app_notifications_title"
         android:key="app_notification_settings">
 
-    <!-- Block -->
-    <SwitchPreference
-            android:key="block"
-            android:title="@string/app_notification_block_title"
-            android:summary="@string/app_notification_block_summary"
-            android:order="1"
-            android:persistent="false" />
-
-    <!-- App notification preferences -->
+     <!-- App notification preferences -->
     <Preference
             android:key="app_settings"
             android:title="@string/app_notification_preferences"
-            android:order="2"
             android:persistent="false" />
-
-    <PreferenceCategory
-            android:key="categories"
-            android:title="@string/notification_topic_categories"
-            android:order="3" />
 
 </PreferenceScreen>

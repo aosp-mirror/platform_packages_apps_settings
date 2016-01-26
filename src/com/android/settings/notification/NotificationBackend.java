@@ -51,6 +51,9 @@ public class NotificationBackend {
         }
         row.icon = app.loadIcon(pm);
         row.banned = getNotificationsBanned(row.pkg, row.uid);
+        row.appImportance = getImportance(row.pkg, row.uid, null);
+        row.appBypassDnd = getBypassZenMode(row.pkg, row.uid, null);
+        row.appSensitive = getSensitive(row.pkg, row.uid, null);
         return row;
     }
 
@@ -97,7 +100,7 @@ public class NotificationBackend {
 
     public boolean getBypassZenMode(String pkg, int uid, Notification.Topic topic) {
         try {
-            return sINM.getTopicPriority(pkg, uid, topic) == Notification.PRIORITY_MAX;
+            return sINM.getPriority(pkg, uid, topic) == Notification.PRIORITY_MAX;
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
             return false;
@@ -107,7 +110,7 @@ public class NotificationBackend {
     public boolean setBypassZenMode(String pkg, int uid, Notification.Topic topic,
             boolean bypassZen) {
         try {
-            sINM.setTopicPriority(pkg, uid, topic,
+            sINM.setPriority(pkg, uid, topic,
                     bypassZen ? Notification.PRIORITY_MAX : Notification.PRIORITY_DEFAULT);
             return true;
         } catch (Exception e) {
@@ -118,7 +121,7 @@ public class NotificationBackend {
 
     public boolean getSensitive(String pkg, int uid, Notification.Topic topic) {
         try {
-            return sINM.getTopicVisibilityOverride(pkg, uid, topic)
+            return sINM.getVisibilityOverride(pkg, uid, topic)
                     == Notification.VISIBILITY_PRIVATE;
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
@@ -128,7 +131,7 @@ public class NotificationBackend {
 
     public boolean setSensitive(String pkg, int uid, Notification.Topic topic, boolean sensitive) {
         try {
-            sINM.setTopicVisibilityOverride(pkg, uid, topic,
+            sINM.setVisibilityOverride(pkg, uid, topic,
                     sensitive ? Notification.VISIBILITY_PRIVATE
                             : NotificationListenerService.Ranking.VISIBILITY_NO_OVERRIDE);
             return true;
@@ -140,7 +143,7 @@ public class NotificationBackend {
 
     public boolean setImportance(String pkg, int uid, Notification.Topic topic, int importance) {
         try {
-            sINM.setTopicImportance(pkg, uid, topic, importance);
+            sINM.setImportance(pkg, uid, topic, importance);
             return true;
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
@@ -150,7 +153,7 @@ public class NotificationBackend {
 
     public int getImportance(String pkg, int uid, Notification.Topic topic) {
         try {
-            return sINM.getTopicImportance(pkg, uid, topic);
+            return sINM.getImportance(pkg, uid, topic);
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
             return NotificationListenerService.Ranking.IMPORTANCE_UNSPECIFIED;
@@ -180,6 +183,9 @@ public class NotificationBackend {
         public boolean banned;
         public boolean first;  // first app in section
         public boolean systemApp;
+        public int appImportance;
+        public boolean appBypassDnd;
+        public boolean appSensitive;
     }
 
     public static class TopicRow extends AppRow {
@@ -188,5 +194,4 @@ public class NotificationBackend {
         public boolean sensitive;
         public int importance;
     }
-
 }
