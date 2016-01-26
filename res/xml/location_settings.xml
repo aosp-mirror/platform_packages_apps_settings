@@ -27,10 +27,10 @@
             android:summary="@string/location_mode_location_off_title" />
 
         <!-- This preference category gets removed if there is no managed profile -->
-        <SwitchPreference
+        <com.android.settingslib.RestrictedSwitchPreference
             android:key="managed_profile_location_switch"
             android:title="@string/managed_profile_location_switch_title"
-            android:summary="@string/managed_profile_location_switch_lockdown"
+            settings:useAdminDisabledSummary="true"
             android:persistent="false"
             android:enabled="false"
             android:selectable="true" />
