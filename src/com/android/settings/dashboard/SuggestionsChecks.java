@@ -15,8 +15,16 @@
 package com.android.settings.dashboard;
 
 import android.app.AutomaticZenRule;
+import android.app.IWallpaperManager;
+import android.app.IWallpaperManager.Stub;
+import android.app.IWallpaperManagerCallback;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.os.Bundle;
+import android.os.IBinder;
+import android.os.RemoteException;
+import android.os.ServiceManager;
+import com.android.settings.Settings.WallpaperSuggestionActivity;
 import com.android.settings.Settings.ZenModeAutomationSuggestionActivity;
 import com.android.settingslib.drawer.Tile;
 
@@ -34,9 +42,11 @@ public class SuggestionsChecks {
     }
 
     public boolean isSuggestionComplete(Tile suggestion) {
-        if (suggestion.intent.getComponent().getClassName().equals(
-                ZenModeAutomationSuggestionActivity.class.getName())) {
+        String className = suggestion.intent.getComponent().getClassName();
+        if (className.equals(ZenModeAutomationSuggestionActivity.class.getName())) {
             return hasEnabledZenAutoRules();
+        } else if (className.equals(WallpaperSuggestionActivity.class.getName())) {
+            return hasWallpaperSet();
         }
         return false;
     }
@@ -52,4 +62,20 @@ public class SuggestionsChecks {
         return false;
     }
 
+    private boolean hasWallpaperSet() {
+        IBinder b = ServiceManager.getService(Context.WALLPAPER_SERVICE);
+        IWallpaperManager service = Stub.asInterface(b);
+        try {
+            return service.getWallpaper(mCallback, new Bundle()) != null;
+        } catch (RemoteException e) {
+        }
+        return false;
+    }
+
+    private final IWallpaperManagerCallback mCallback = new IWallpaperManagerCallback.Stub() {
+        @Override
+        public void onWallpaperChanged() throws RemoteException {
+             // Don't care.
+        }
+    };
 }
