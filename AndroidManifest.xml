@@ -864,30 +864,6 @@
                 android:value="true" />
         </activity>
 
-        <activity android:name="Settings$HomeSettingsActivity"
-                android:label="@string/home_settings"
-                android:icon="@drawable/ic_settings_home"
-                android:taskAffinity="">
-            <intent-filter android:priority="1">
-                <action android:name="android.settings.HOME_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.VOICE_LAUNCH" />
-            </intent-filter>
-            <intent-filter android:priority="10">
-                <action android:name="com.android.settings.action.SETTINGS" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.category"
-                android:value="com.android.settings.category.device" />
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.HomeSettings" />
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                android:value="true" />
-        </activity>
-
         <activity android:name="Settings$DisplaySettingsActivity"
                 android:label="@string/display_settings"
                 android:icon="@drawable/ic_settings_display"
@@ -2709,6 +2685,10 @@
                   android:exported="true">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.MANAGE_DEFAULT_APPS_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.settings.HOME_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"

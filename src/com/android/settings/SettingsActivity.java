@@ -29,7 +29,6 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.nfc.NfcAdapter;
 import android.os.AsyncTask;
@@ -114,8 +113,8 @@ import com.android.settings.wifi.SavedAccessPointsWifiSettings;
 import com.android.settings.wifi.WifiSettings;
 import com.android.settings.wifi.p2p.WifiP2pSettings;
 import com.android.settingslib.drawer.DashboardCategory;
-import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
+import com.android.settingslib.drawer.Tile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -380,7 +379,6 @@ public class SettingsActivity extends SettingsDrawerActivity
     private static final String MSG_DATA_FORCE_REFRESH = "msg_data_force_refresh";
 
     private boolean mNeedToRevertToInitialFragment = false;
-    private int mHomeActivitiesCount = 1;
 
     private Intent mResultIntentData;
     private ComponentName mCurrentSuggestion;
@@ -561,8 +559,6 @@ public class SettingsActivity extends SettingsDrawerActivity
 
             mDisplayHomeAsUpEnabled = savedState.getBoolean(SAVE_KEY_SHOW_HOME_AS_UP);
             mDisplaySearch = savedState.getBoolean(SAVE_KEY_SHOW_SEARCH);
-            mHomeActivitiesCount = savedState.getInt(SAVE_KEY_HOME_ACTIVITIES_COUNT,
-                    1 /* one home activity by default */);
         } else {
             if (!mIsShowingDashboard) {
                 mDisplaySearch = false;
@@ -651,15 +647,8 @@ public class SettingsActivity extends SettingsDrawerActivity
             }
         }
 
-        mHomeActivitiesCount = getHomeActivitiesCount();
         if (DEBUG_TIMING) Log.d(LOG_TAG, "onCreate took " + (System.currentTimeMillis() - startTime)
                 + " ms");
-    }
-
-    private int getHomeActivitiesCount() {
-        final ArrayList<ResolveInfo> homeApps = new ArrayList<ResolveInfo>();
-        getPackageManager().getHomeActivities(homeApps);
-        return homeApps.size();
     }
 
     private void setTitleFromIntent(Intent intent) {
@@ -751,8 +740,6 @@ public class SettingsActivity extends SettingsDrawerActivity
             String query = (mSearchView != null) ? mSearchView.getQuery().toString() : EMPTY_QUERY;
             outState.putString(SAVE_KEY_SEARCH_QUERY, query);
         }
-
-        outState.putInt(SAVE_KEY_HOME_ACTIVITIES_COUNT, mHomeActivitiesCount);
     }
 
     @Override
@@ -1022,10 +1009,6 @@ public class SettingsActivity extends SettingsDrawerActivity
                 mBatteryPresent, isAdmin, pm);
 
         setTileEnabled(new ComponentName(packageName,
-                Settings.HomeSettingsActivity.class.getName()),
-                updateHomeSettingTiles(), isAdmin, pm);
-
-        setTileEnabled(new ComponentName(packageName,
                 Settings.UserSettingsActivity.class.getName()),
                 UserHandle.MU_ENABLED && UserManager.supportsMultipleUsers()
                 && !Utils.isMonkeyRunning(), isAdmin, pm);
@@ -1079,27 +1062,6 @@ public class SettingsActivity extends SettingsDrawerActivity
                     : PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
                     PackageManager.DONT_KILL_APP);
         }
-    }
-
-    private boolean updateHomeSettingTiles() {
-        // Once we decide to show Home settings, keep showing it forever
-        SharedPreferences sp = getSharedPreferences(HomeSettings.HOME_PREFS, Context.MODE_PRIVATE);
-        if (sp.getBoolean(HomeSettings.HOME_PREFS_DO_SHOW, false)) {
-            return true;
-        }
-
-        try {
-            mHomeActivitiesCount = getHomeActivitiesCount();
-            if (mHomeActivitiesCount < 2) {
-                return false;
-            }
-        } catch (Exception e) {
-            // Can't look up the home activity; bail on configuring the icon
-            Log.w(LOG_TAG, "Problem looking up home activity!", e);
-        }
-
-        sp.edit().putBoolean(HomeSettings.HOME_PREFS_DO_SHOW, true).apply();
-        return true;
     }
 
     private void getMetaData() {

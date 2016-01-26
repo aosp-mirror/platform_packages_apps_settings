@@ -25,6 +25,12 @@
         android:title="@string/assist_and_voice_input_title"
         />
 
+    <com.android.settings.applications.DefaultHomePreference
+            android:key="default_home"
+            android:title="@string/home_app"
+            android:summary="@string/no_default_home"
+            />
+
     <com.android.settings.applications.DefaultBrowserPreference
             android:key="default_browser"
             android:title="@string/default_browser_title"
