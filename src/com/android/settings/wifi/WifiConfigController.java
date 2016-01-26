@@ -35,6 +35,7 @@ import android.net.wifi.WifiEnterpriseConfig.Eap;
 import android.net.wifi.WifiEnterpriseConfig.Phase2;
 import android.net.wifi.WifiInfo;
 import android.os.Handler;
+import android.os.UserManager;
 import android.security.Credentials;
 import android.security.KeyStore;
 import android.text.Editable;
@@ -138,6 +139,8 @@ public class WifiConfigController implements TextWatcher,
     private TextView mProxyExclusionListView;
     private TextView mProxyPacView;
 
+    private CheckBox mSharedCheckBox;
+
     private IpAssignment mIpAssignment = IpAssignment.UNASSIGNED;
     private ProxySettings mProxySettings = ProxySettings.UNASSIGNED;
     private ProxyInfo mHttpProxy = null;
@@ -179,6 +182,7 @@ public class WifiConfigController implements TextWatcher,
         mIpSettingsSpinner.setOnItemSelectedListener(this);
         mProxySettingsSpinner = (Spinner) mView.findViewById(R.id.proxy_settings);
         mProxySettingsSpinner.setOnItemSelectedListener(this);
+        mSharedCheckBox = (CheckBox) mView.findViewById(R.id.shared);
 
         if (mAccessPoint == null) { // new network
             mConfigUi.setTitle(R.string.wifi_add_network);
@@ -218,6 +222,10 @@ public class WifiConfigController implements TextWatcher,
                     mIpSettingsSpinner.setSelection(DHCP);
                 }
 
+                mSharedCheckBox.setEnabled(config.shared);
+                if (!config.shared) {
+                    showAdvancedFields = true;
+                }
 
                 if (config.getProxySettings() == ProxySettings.STATIC) {
                     mProxySettingsSpinner.setSelection(PROXY_STATIC);
@@ -308,6 +316,12 @@ public class WifiConfigController implements TextWatcher,
             }
         }
 
+        final UserManager userManager =
+                (UserManager) mContext.getSystemService(Context.USER_SERVICE);
+        if (!userManager.isSplitSystemUser()) {
+            mSharedCheckBox.setVisibility(View.GONE);
+        }
+
         mConfigUi.setCancelButton(res.getString(R.string.wifi_cancel));
         if (mConfigUi.getSubmitButton() != null) {
             enableSubmitIfAppropriate();
@@ -392,6 +406,8 @@ public class WifiConfigController implements TextWatcher,
         } else {
             config.networkId = mAccessPoint.getConfig().networkId;
         }
+
+        config.shared = mSharedCheckBox.isChecked();
 
         switch (mAccessPointSecurity) {
             case AccessPoint.SECURITY_NONE:
