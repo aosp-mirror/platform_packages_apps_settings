@@ -51,6 +51,7 @@ import com.android.internal.telephony.TelephonyProperties;
 import com.android.settings.nfc.NfcEnabler;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
 
 import java.util.ArrayList;
@@ -241,8 +242,7 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
         //enable/disable wimax depending on the value in config.xml
         final boolean isWimaxEnabled = isAdmin && this.getResources().getBoolean(
                 com.android.internal.R.bool.config_wimaxEnabled);
-        if (!isWimaxEnabled
-                || mUm.hasUserRestriction(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS)) {
+        if (!isWimaxEnabled) {
             PreferenceScreen root = getPreferenceScreen();
             Preference ps = findPreference(KEY_WIMAX_SETTINGS);
             if (ps != null) root.removePreference(ps);
@@ -284,9 +284,8 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
         }
 
         // Remove Mobile Network Settings and Manage Mobile Plan for secondary users,
-        // if it's a wifi-only device, or if the settings are restricted.
-        if (!isAdmin || Utils.isWifiOnly(getActivity())
-                || mUm.hasUserRestriction(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS)) {
+        // if it's a wifi-only device.
+        if (!isAdmin || Utils.isWifiOnly(getActivity())) {
             removePreference(KEY_MOBILE_NETWORK_SETTINGS);
             removePreference(KEY_MANAGE_MOBILE_PLAN);
         }
@@ -318,9 +317,11 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
         final ConnectivityManager cm =
                 (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        if (!isAdmin || !cm.isTetheringSupported()) {
+        final boolean adminDisallowedTetherConfig = mUm.hasUserRestriction(
+                UserManager.DISALLOW_CONFIG_TETHERING);
+        if (!isAdmin || (!cm.isTetheringSupported() && !adminDisallowedTetherConfig)) {
             getPreferenceScreen().removePreference(findPreference(KEY_TETHER_SETTINGS));
-        } else if (!mUm.hasUserRestriction(UserManager.DISALLOW_CONFIG_TETHERING)) {
+        } else if (!adminDisallowedTetherConfig) {
             Preference p = findPreference(KEY_TETHER_SETTINGS);
             p.setTitle(com.android.settingslib.Utils.getTetheringLabel(cm));
 
@@ -348,19 +349,6 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
                     context, ImsManager.getWfcMode(context)));
         } else {
             removePreference(KEY_WFC_SETTINGS);
-        }
-
-        RestrictedPreference tetherSettingsPref = (RestrictedPreference) findPreference(
-                KEY_TETHER_SETTINGS);
-        if (tetherSettingsPref != null) {
-            tetherSettingsPref.checkRestrictionAndSetDisabled(
-                    UserManager.DISALLOW_CONFIG_TETHERING);
-        }
-
-        RestrictedPreference vpnSettingsPref = (RestrictedPreference) findPreference(
-                KEY_VPN_SETTINGS);
-        if (vpnSettingsPref != null) {
-            vpnSettingsPref.checkRestrictionAndSetDisabled(UserManager.DISALLOW_CONFIG_VPN);
         }
     }
 
@@ -421,8 +409,7 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
                 final boolean isWimaxEnabled = !isSecondaryUser
                         && context.getResources().getBoolean(
                         com.android.internal.R.bool.config_wimaxEnabled);
-                if (!isWimaxEnabled
-                        || um.hasUserRestriction(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS)) {
+                if (!isWimaxEnabled) {
                     result.add(KEY_WIMAX_SETTINGS);
                 }
 

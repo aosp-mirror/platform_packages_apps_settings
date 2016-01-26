@@ -45,38 +45,46 @@
         android:fragment="com.android.settings.TetherSettings"
         android:key="tether_settings"
         android:title="@string/tether_settings_title_all"
+        settings:userRestriction="no_config_tethering"
         settings:useAdminDisabledSummary="true" />
 
     <com.android.settingslib.RestrictedPreference
         android:fragment="com.android.settings.vpn2.VpnSettings"
         android:key="vpn_settings"
         android:title="@string/vpn_settings_title"
+        settings:userRestriction="no_config_vpn"
         settings:useAdminDisabledSummary="true" />
 
-    <PreferenceScreen
+    <com.android.settingslib.RestrictedPreference
         android:key="mobile_network_settings"
         android:title="@string/network_settings_title"
         settings:keywords="@string/keywords_more_mobile_networks"
+        settings:userRestriction="no_config_mobile_networks"
+        settings:useAdminDisabledSummary="true"
         android:dependency="toggle_airplane">
         <intent
             android:action="android.intent.action.MAIN"
             android:targetPackage="com.android.phone"
             android:targetClass="com.android.phone.MobileNetworkSettings" />
-    </PreferenceScreen>
+    </com.android.settingslib.RestrictedPreference>
 
-    <Preference
+    <com.android.settingslib.RestrictedPreference
         android:key="manage_mobile_plan"
         android:title="@string/manage_mobile_plan_title"
-        android:persistent="false" />
+        android:persistent="false"
+        settings:userRestriction="no_config_mobile_networks"
+        settings:useAdminDisabledSummary="true" />
 
-    <PreferenceScreen
+    <com.android.settingslib.RestrictedPreference
         android:key="wimax_settings"
-        android:title="@string/wimax_settings" >
+        android:title="@string/wimax_settings"
+        settings:userRestriction="no_config_mobile_networks"
+        settings:useAdminDisabledSummary="true">
         <intent
             android:action="android.intent.action.MAIN"
             android:targetPackage="com.android.settings.wimax"
             android:targetClass="com.android.settings.wimax.WimaxSettings" />
-    </PreferenceScreen>
+    </com.android.settingslib.RestrictedPreference>
 
     <PreferenceScreen
         android:fragment="com.android.settings.ProxySelector"
