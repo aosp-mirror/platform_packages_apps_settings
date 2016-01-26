@@ -43,6 +43,10 @@ import java.util.List;
 public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.DashboardItemHolder>
         implements View.OnClickListener {
     public static final String TAG = "DashboardAdapter";
+    private static final int NS_SPACER = 0;
+    private static final int NS_SUGGESTION = 1000;
+    private static final int NS_ITEMS = 2000;
+    private static final int NS_CONDITION = 3000;
 
     private static int SUGGESTION_MODE_DEFAULT = 0;
     private static int SUGGESTION_MODE_COLLAPSED = 1;
@@ -55,6 +59,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     private final List<Integer> mIds = new ArrayList<>();
 
     private final Context mContext;
+    private final SuggestionsChecks mSuggestionsChecks;
 
     private List<DashboardCategory> mCategories;
     private List<Condition> mConditions;
@@ -71,13 +76,20 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
 
     public DashboardAdapter(Context context) {
         mContext = context;
+        mSuggestionsChecks = new SuggestionsChecks(mContext);
 
         setHasStableIds(true);
     }
 
     public void setSuggestions(SuggestionParser suggestionParser) {
-        mSuggestions = suggestionParser.getSuggestions();
         mSuggestionParser = suggestionParser;
+        mSuggestions = suggestionParser.getSuggestions();
+        for (int i = 0; i < mSuggestions.size(); i++) {
+            if (mSuggestionsChecks.isSuggestionComplete(mSuggestions.get(i))) {
+                disableSuggestion(mSuggestions.get(i));
+                mSuggestions.remove(i--);
+            }
+        }
         recountItems();
     }
 
@@ -127,33 +139,40 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         for (int i = 0; mConditions != null && i < mConditions.size(); i++) {
             boolean shouldShow = mConditions.get(i).shouldShow();
             hasConditions |= shouldShow;
-            countItem(mConditions.get(i), R.layout.condition_card, shouldShow);
+            countItem(mConditions.get(i), R.layout.condition_card, shouldShow, NS_CONDITION);
         }
         boolean hasSuggestions = mSuggestions != null && mSuggestions.size() != 0;
-        countItem(null, R.layout.dashboard_spacer, hasConditions && hasSuggestions);
-        countItem(null, R.layout.suggestion_header, hasSuggestions);
+        countItem(null, R.layout.dashboard_spacer, hasConditions && hasSuggestions, NS_SPACER);
+        countItem(null, R.layout.suggestion_header, hasSuggestions, NS_SPACER);
+        resetCount();
         if (mSuggestions != null) {
             int maxSuggestions = mSuggestionMode == SUGGESTION_MODE_DEFAULT
                     ? Math.min(DEFAULT_SUGGESTION_COUNT, mSuggestions.size())
                     : mSuggestionMode == SUGGESTION_MODE_EXPANDED ? mSuggestions.size()
                     : 0;
             for (int i = 0; i < mSuggestions.size(); i++) {
-                countItem(mSuggestions.get(i), R.layout.suggestion_tile, i < maxSuggestions);
+                countItem(mSuggestions.get(i), R.layout.suggestion_tile, i < maxSuggestions,
+                        NS_SUGGESTION);
             }
         }
-        countItem(null, R.layout.dashboard_spacer, true);
+        countItem(null, R.layout.dashboard_spacer, true, NS_SPACER);
+        resetCount();
         for (int i = 0; mCategories != null && i < mCategories.size(); i++) {
             DashboardCategory category = mCategories.get(i);
-            countItem(category, R.layout.dashboard_category, mIsShowingAll);
+            countItem(category, R.layout.dashboard_category, mIsShowingAll, NS_ITEMS);
             for (int j = 0; j < category.tiles.size(); j++) {
                 Tile tile = category.tiles.get(j);
                 countItem(tile, R.layout.dashboard_tile, mIsShowingAll
                         || ArrayUtils.contains(DashboardSummary.INITIAL_ITEMS,
-                        tile.intent.getComponent().getClassName()));
+                        tile.intent.getComponent().getClassName()), NS_ITEMS);
             }
         }
-        countItem(null, R.layout.see_all, true);
+        countItem(null, R.layout.see_all, true, NS_ITEMS);
         notifyDataSetChanged();
+    }
+
+    private void resetCount() {
+        mId = 0;
     }
 
     private void reset() {
@@ -163,12 +182,12 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         mId = 0;
     }
 
-    private void countItem(Object object, int type, boolean add) {
+    private void countItem(Object object, int type, boolean add, int nameSpace) {
         if (add) {
             mItems.add(object);
             mTypes.add(type);
             // TODO: Counting namespaces for handling of suggestions/conds appearing/disappearing.
-            mIds.add(mId);
+            mIds.add(mId + nameSpace);
         }
         mId++;
     }
@@ -238,18 +257,22 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                 new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                if (mSuggestionParser.dismissSuggestion(suggestion)) {
-                    mContext.getPackageManager().setComponentEnabledSetting(
-                            suggestion.intent.getComponent(),
-                            PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-                            PackageManager.DONT_KILL_APP);
-                }
+                disableSuggestion(suggestion);
                 mSuggestions.remove(suggestion);
                 recountItems();
                 return true;
             }
         });
         popup.show();
+    }
+
+    private void disableSuggestion(Tile suggestion) {
+        if (mSuggestionParser.dismissSuggestion(suggestion)) {
+            mContext.getPackageManager().setComponentEnabledSetting(
+                    suggestion.intent.getComponent(),
+                    PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                    PackageManager.DONT_KILL_APP);
+        }
     }
 
     private void onBindSuggestionHeader(final DashboardItemHolder holder) {
