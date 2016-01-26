@@ -71,15 +71,11 @@ import java.util.Set;
 public class AccessibilitySettings extends SettingsPreferenceFragment implements DialogCreatable,
         Preference.OnPreferenceChangeListener, Indexable {
 
-    private static final float LARGE_FONT_SCALE = 1.3f;
-
     // Preference categories
     private static final String SERVICES_CATEGORY = "services_category";
     private static final String SYSTEM_CATEGORY = "system_category";
 
     // Preferences
-    private static final String TOGGLE_LARGE_TEXT_PREFERENCE =
-            "toggle_large_text_preference";
     private static final String TOGGLE_HIGH_TEXT_CONTRAST_PREFERENCE =
             "toggle_high_text_contrast_preference";
     private static final String TOGGLE_INVERSION_PREFERENCE =
@@ -126,8 +122,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     static final Set<ComponentName> sInstalledServices = new HashSet<>();
 
     private final Map<String, String> mLongPressTimeoutValuetoTitleMap = new HashMap<>();
-
-    private final Configuration mCurConfig = new Configuration();
 
     private final Handler mHandler = new Handler();
 
@@ -185,7 +179,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private PreferenceCategory mServicesCategory;
     private PreferenceCategory mSystemsCategory;
 
-    private SwitchPreference mToggleLargeTextPreference;
     private SwitchPreference mToggleHighTextContrastPreference;
     private SwitchPreference mTogglePowerButtonEndsCallPreference;
     private SwitchPreference mToggleLockScreenRotationPreference;
@@ -274,10 +267,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
 
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
-        if (mToggleLargeTextPreference == preference) {
-            handleToggleLargeTextPreferenceClick();
-            return true;
-        } else if (mToggleHighTextContrastPreference == preference) {
+        if (mToggleHighTextContrastPreference == preference) {
             handleToggleTextContrastPreferenceClick();
             return true;
         } else if (mTogglePowerButtonEndsCallPreference == preference) {
@@ -300,15 +290,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             return true;
         }
         return super.onPreferenceTreeClick(preference);
-    }
-
-    private void handleToggleLargeTextPreferenceClick() {
-        try {
-            mCurConfig.fontScale = mToggleLargeTextPreference.isChecked() ? LARGE_FONT_SCALE : 1;
-            ActivityManagerNative.getDefault().updatePersistentConfiguration(mCurConfig);
-        } catch (RemoteException re) {
-            /* ignore */
-        }
     }
 
     private void handleToggleTextContrastPreferenceClick() {
@@ -367,10 +348,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private void initializeAllPreferences() {
         mServicesCategory = (PreferenceCategory) findPreference(SERVICES_CATEGORY);
         mSystemsCategory = (PreferenceCategory) findPreference(SYSTEM_CATEGORY);
-
-        // Large text.
-        mToggleLargeTextPreference =
-                (SwitchPreference) findPreference(TOGGLE_LARGE_TEXT_PREFERENCE);
 
         // Text contrast.
         mToggleHighTextContrastPreference =
@@ -564,14 +541,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     }
 
     private void updateSystemPreferences() {
-        // Large text.
-        try {
-            mCurConfig.updateFrom(ActivityManagerNative.getDefault().getConfiguration());
-        } catch (RemoteException re) {
-            /* ignore */
-        }
-        mToggleLargeTextPreference.setChecked(mCurConfig.fontScale == LARGE_FONT_SCALE);
-
         // Text contrast.
         mToggleHighTextContrastPreference.setChecked(
                 Settings.Secure.getInt(getContentResolver(),
@@ -658,7 +627,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         final Resources res = getContext().getResources();
         final String[] entries = res.getStringArray(R.array.entries_font_size);
         final String[] strEntryValues = res.getStringArray(R.array.entryvalues_font_size);
-        final int index = ToggleFontSizePreferenceFragment.floatToIndex(
+        final int index = ToggleFontSizePreferenceFragment.fontSizeValueToIndex(
                 res.getConfiguration().fontScale, strEntryValues);
         pref.setSummary(entries[index]);
     }

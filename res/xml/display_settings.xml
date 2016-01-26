@@ -91,14 +91,11 @@
                 android:summary="@string/tap_to_wake_summary"
                 android:persistent="false" />
 
-        <DropDownPreference
+        <PreferenceScreen
                 android:key="font_size"
                 android:title="@string/title_font_size"
-                settings:keywords="@string/keywords_display_font_size"
-                android:persistent="false"
-                android:summary="%s"
-                android:entries="@array/entries_font_size"
-                android:entryValues="@array/entryvalues_font_size" />
+                android:fragment="com.android.settings.accessibility.ToggleFontSizePreferenceFragment"
+                settings:keywords="@string/keywords_display_font_size" />
 
         <com.android.settings.display.ScreenZoomPreference
                 android:key="screen_zoom"

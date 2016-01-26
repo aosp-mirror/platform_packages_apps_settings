@@ -48,7 +48,7 @@ public class ToggleFontSizePreferenceFragment extends PreviewSeekBarPreferenceFr
         final Configuration origConfig = res.getConfiguration();
         mEntries = res.getStringArray(R.array.entries_font_size);
         final String[] strEntryValues = res.getStringArray(R.array.entryvalues_font_size);
-        mInitialIndex = floatToIndex(origConfig.fontScale, strEntryValues);
+        mInitialIndex = fontSizeValueToIndex(origConfig.fontScale, strEntryValues);
         mValues = new float[strEntryValues.length];
         for (int i = 0; i < strEntryValues.length; ++i) {
             mValues[i] = Float.parseFloat(strEntryValues[i]);
@@ -86,7 +86,7 @@ public class ToggleFontSizePreferenceFragment extends PreviewSeekBarPreferenceFr
      *  Utility function that returns the index in a string array with which the represented value is
      *  the closest to a given float value.
      */
-    static int floatToIndex(float val, String[] indices) {
+    public static int fontSizeValueToIndex(float val, String[] indices) {
         float lastVal = Float.parseFloat(indices[0]);
         for (int i=1; i<indices.length; i++) {
             float thisVal = Float.parseFloat(indices[i]);
