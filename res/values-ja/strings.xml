@@ -329,10 +329,6 @@
       <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g>個の指紋を登録済み</item>
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
-    <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"指紋の設定"</string>
-    <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"指紋を使って画面ロックの解除や購入の確認を行うには、次の手順を行う必要があります。"</string>
-    <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"予備の画面ロック方式を設定"</string>
-    <string name="security_settings_fingerprint_enroll_onboard_message_2" msgid="4158160658182631304">"指紋を追加"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"指紋によるロック解除"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="9193978734907066950">"指紋認証センサーに触れるだけで、スマートフォンのロック解除、購入の許可、アプリへのログインを行うことができます。これらの操作は、登録したどの指紋でも行えるため、誰の指紋を登録するかについては十分にご注意ください。"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="7173290350577831813">"注: 指紋は複雑なパターンやPINよりも安全面で劣る可能性があります。"</string>
@@ -365,7 +361,8 @@
     <string name="fingerprint_enroll_button_add" msgid="6317978977419045463">"別の指紋を登録"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"次へ"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"スマートフォンのロック解除に加えて、指紋認証を使用して購入やアプリのアクセスを許可することもできます。"<annotation id="url">"詳細"</annotation></string>
-    <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4504501581228672208">"画面ロックは無効になっていますが、指紋で購入やアプリのアクセスを許可できます。"<annotation id="url">"詳細"</annotation></string>
+    <!-- no translation found for security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled (7007548031540826618) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"指を離してから、もう一度センサーに触れてください。"</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="4132164775128798343">"このアイコンが表示されているときは指紋認証を使用できます。"</string>
     <string name="setup_fingerprint_enroll_finish_secondary_message" msgid="3734962461534384882">"設定を変更するには、[設定]&gt;[セキュリティ]&gt;[指紋]に移動します。"</string>
@@ -423,6 +420,12 @@
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"パスワード"</string>
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"高レベルのセキュリティ"</string>
     <string name="current_screen_lock" msgid="4104091715420072219">"現在の画面ロック"</string>
+    <!-- no translation found for fingerprint_unlock_set_unlock_pattern (4939057588092120368) -->
+    <skip />
+    <!-- no translation found for fingerprint_unlock_set_unlock_pin (8010746824051056986) -->
+    <skip />
+    <!-- no translation found for fingerprint_unlock_set_unlock_password (7351131075806338634) -->
+    <skip />
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"管理者、暗号化ポリシー、または認証情報により無効"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"なし"</string>
     <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"スワイプ"</string>
@@ -697,8 +700,12 @@
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"2.4GHz"</string>
     <string name="wifi_ap_choose_5G" msgid="8137061170937978040">"5GHz"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP設定"</string>
+    <!-- no translation found for wifi_shared (844142443226926070) -->
+    <skip />
     <string name="wifi_unchanged" msgid="3410422020930397102">"（変更なし）"</string>
     <string name="wifi_unspecified" msgid="5431501214192991253">"（指定なし）"</string>
+    <!-- no translation found for wifi_multiple_cert_added (3240743501460165224) -->
+    <skip />
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS利用可"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" （WPS利用可）"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"ネットワークパスワードを入力してください"</string>
@@ -1192,7 +1199,6 @@
     <string name="mobile_connect_to_internet" msgid="1733894125065249639">"インターネットに接続してください"</string>
     <string name="location_title" msgid="1029961368397484576">"現在地"</string>
     <string name="managed_profile_location_switch_title" msgid="6712332547063039683">"仕事用プロファイルの場所"</string>
-    <string name="managed_profile_location_switch_lockdown" msgid="3851708343340350369">"会社がOFFに設定しています"</string>
     <string name="location_mode_title" msgid="3982009713118421689">"モード"</string>
     <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"高精度"</string>
     <string name="location_mode_battery_saving_title" msgid="711273645208158637">"バッテリー節約"</string>
@@ -1517,6 +1523,8 @@
     <skip />
     <!-- no translation found for keyboard_shortcuts_helper (4839453720463798145) -->
     <skip />
+    <!-- no translation found for physical_device_title (79889057252418427) -->
+    <skip />
     <string name="pointer_settings_category" msgid="8183819795164034286">"マウス/トラックパッド"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"ポインタの速度"</string>
     <string name="game_controller_settings_category" msgid="8794508575329923718">"ゲーム用コントローラ"</string>
@@ -1586,13 +1594,10 @@
     <string name="usage_time_label" msgid="295954901452833058">"使用時間"</string>
     <string name="accessibility_settings" msgid="3975902491934816215">"ユーザー補助"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"ユーザー補助の設定"</string>
-    <!-- no translation found for vision_settings_title (4204111425716868288) -->
-    <skip />
-    <!-- no translation found for vision_settings_description (7754433456207334423) -->
-    <skip />
+    <string name="vision_settings_title" msgid="4204111425716868288">"視力の設定"</string>
+    <string name="vision_settings_description" msgid="7754433456207334423">"この設定を調整すると、残りのセットアップ プロセスでサポートを受けられるようになります。この調整は端末の設定でいつでも行えます。"</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"サービス"</string>
-    <!-- no translation found for talkback_summary (6239954195360531224) -->
-    <skip />
+    <string name="talkback_summary" msgid="6239954195360531224">"スクリーンリーダー ツールは主に視覚障害者を対象としています"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"システム"</string>
     <string name="accessibility_display_title" msgid="7610175687949675162">"ディスプレイ"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"字幕"</string>
@@ -1640,7 +1645,6 @@
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"設定"</string>
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"ON"</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"OFF"</string>
-    <string name="accessibility_feature_or_input_method_not_allowed" msgid="5950315477009501647">"組織によって許可されていません"</string>
     <string name="captioning_preview_title" msgid="1234015253497016890">"プレビュー"</string>
     <string name="captioning_standard_options_title" msgid="3284211791180335844">"標準オプション"</string>
     <string name="captioning_locale" msgid="4559155661018823503">"言語"</string>
@@ -1938,6 +1942,8 @@
     <string name="device_admin_settings_title" msgid="1335557832906433309">"端末管理の設定"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"端末管理アプリ"</string>
     <string name="remove_device_admin" msgid="3596845261596451437">"無効にする"</string>
+    <!-- no translation found for uninstall_device_admin (2019687470475335309) -->
+    <skip />
     <string name="select_device_admin_msg" msgid="2645509057946368094">"デバイス管理者"</string>
     <string name="no_device_admins" msgid="702695100241728775">"有効なデバイス管理者がいません"</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"個人用"</string>
@@ -2096,8 +2102,10 @@
     <string name="data_usage_forground_label" msgid="7654319010655983591">"フォアグラウンド:"</string>
     <string name="data_usage_background_label" msgid="2722008379947694926">"バックグラウンド:"</string>
     <string name="data_usage_app_settings" msgid="2279171379771253165">"アプリの設定"</string>
-    <string name="data_usage_app_restrict_background" msgid="7510046552380574925">"バックグラウンドデータを制限する"</string>
-    <string name="data_usage_app_restrict_background_summary" msgid="3720075732277934106">"モバイルネットワークでのバックグラウンドデータを無効にします。"</string>
+    <!-- no translation found for data_usage_app_restrict_background (7359227831562303223) -->
+    <skip />
+    <!-- no translation found for data_usage_app_restrict_background_summary (4669789008211107454) -->
+    <skip />
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="1446565717342917727">"このアプリのバックグラウンドデータを制限するには、先にモバイルデータの上限を設定します。"</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"バックグラウンドデータを制限しますか？"</string>
     <string name="data_usage_app_restrict_dialog" msgid="5871168521456832764">"この機能をONにすると、モバイルネットワークしか使用できない場合にバックグラウンドデータに依存するアプリが停止する可能性があります。\n\nデータ使用をより適切に管理できるオプションがアプリの設定画面にないかどうかを確認してください。"</string>
@@ -2264,6 +2272,10 @@
     <string name="user_enable_calling_confirm_message" msgid="8061594235219352787">"発信履歴がこのユーザーと共有されます。"</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="7243308401401932681">"通話とSMSをONにしますか？"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="4025082715546544967">"通話とSMSの履歴がこのユーザーと共有されます。"</string>
+    <!-- no translation found for emergency_info_title (208607506217060337) -->
+    <skip />
+    <!-- no translation found for emergency_info_subtitle (1301492666470489605) -->
+    <skip />
     <string name="application_restrictions" msgid="8207332020898004394">"アプリとコンテンツの許可"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"制限のあるアプリ"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"アプリの設定を展開"</string>
@@ -2811,8 +2823,7 @@
     <string name="camera_gesture_desc" msgid="1831390075255870960">"手首を2回ひねる動作でカメラアプリを開きます"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"電源ボタンを2回押してカメラを起動"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"画面ロックを解除せずにすばやくカメラを起動します"</string>
-    <!-- no translation found for screen_zoom_title (5530967660604527002) -->
-    <skip />
+    <string name="screen_zoom_title" msgid="5530967660604527002">"表示の拡大"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"表示間隔、画面のズーム、スケール、拡大縮小"</string>
     <string name="screen_zoom_summary" msgid="2022973627105802010">"画面上のすべての項目のサイズを変更します。この設定を変更すると、ホーム画面で一部のアプリの位置が変わる場合があります。"</string>
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"プレビュー"</string>
@@ -2856,18 +2867,16 @@
     <string name="condition_battery_summary" msgid="4418839236027977450">"パフォーマンスが制限されています。位置情報サービスとバックグラウンド データは OFF です。"</string>
     <string name="condition_cellular_title" msgid="2398754272044917264">"モバイルデータ OFF"</string>
     <string name="condition_cellular_summary" msgid="1818046558419658463">"インターネットは Wi-Fi 接続時のみ利用できます"</string>
-    <string name="condition_bg_data_title" msgid="1422001615923482010">"バックグラウンドデータ OFF"</string>
+    <!-- no translation found for condition_bg_data_title (2483860304802846542) -->
+    <skip />
     <string name="condition_bg_data_summary" msgid="656957852895282228">"バックグラウンド  データは Wi-Fi 接続時のみ利用できます。Wi-Fi に接続できない場合、一部のアプリやサービスに影響する可能性があります。"</string>
     <string name="condition_work_title" msgid="7293722361184366648">"仕事用プロファイルが OFF"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"仕事用プロファイルに関連するアプリ、バックグラウンド同期などの機能が OFF になっています。"</string>
     <string name="suggestions_title" msgid="8758376306825920705">"候補（<xliff:g id="ID_1">%1$d</xliff:g>）"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"削除"</string>
-    <!-- no translation found for color_temperature (2070126836910615605) -->
-    <skip />
-    <!-- no translation found for color_temperature_desc (4793729830226404052) -->
-    <skip />
-    <!-- no translation found for color_temperature_toast (4974218172133854827) -->
-    <skip />
+    <string name="color_temperature" msgid="2070126836910615605">"寒色の色温度"</string>
+    <string name="color_temperature_desc" msgid="4793729830226404052">"寒色の表示色を使用します"</string>
+    <string name="color_temperature_toast" msgid="4974218172133854827">"色の変更を適用するには、画面を OFF にしてください"</string>
     <string name="usage" msgid="2977875522080448986">"使用量"</string>
     <string name="cellular_data_usage" msgid="2763710678354680712">"モバイルデータ使用量"</string>
     <string name="wifi_data_usage" msgid="686754111095324306">"Wi-Fi データ使用量"</string>
@@ -2890,4 +2899,21 @@
     <string name="data_limit" msgid="1885406964934590552">"データ上限"</string>
     <string name="data_usage_template" msgid="392191945602400904">"<xliff:g id="ID_1">%1$s</xliff:g> 使用（<xliff:g id="ID_2">%2$s</xliff:g>）"</string>
     <string name="configure" msgid="1029654422228677273">"設定"</string>
+    <!-- no translation found for data_saver_unrestricted_summary (2635267833484232703) -->
+    <!-- no translation found for data_saver_title (8034286939200289826) -->
+    <skip />
+    <!-- no translation found for unrestricted_data_saver (7019858887510062789) -->
+    <skip />
+    <!-- no translation found for data_saver_on (6774217590237934709) -->
+    <skip />
+    <!-- no translation found for data_saver_off (6892309031162738794) -->
+    <skip />
+    <!-- no translation found for unrestricted_app_title (4465437191723332066) -->
+    <skip />
+    <!-- no translation found for unrestricted_app_summary (6458008993501723912) -->
+    <skip />
+    <!-- no translation found for home_app (4066188520886810030) -->
+    <skip />
+    <!-- no translation found for no_default_home (7184117487704520238) -->
+    <skip />
 </resources>

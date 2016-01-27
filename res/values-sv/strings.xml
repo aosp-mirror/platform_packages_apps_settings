@@ -329,10 +329,6 @@
       <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> fingeravtryck har konfigurerats</item>
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
-    <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Konfig. fingeravtryck"</string>
-    <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"Om du vill använda ditt fingeravtryck för att låsa upp skärmen eller bekräfta köp måste vi göra följande:"</string>
-    <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"Ange reservmetod för skärmlås"</string>
-    <string name="security_settings_fingerprint_enroll_onboard_message_2" msgid="4158160658182631304">"Lägg till fingeravtryck"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Lås upp med fingeravtryck"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="9193978734907066950">"När du vill låsa upp mobilen, godkänna köp eller logga in i appar behöver du bara trycka på fingeravtryckssensorn. Var försiktig med vems fingeravtryck du lägger till – alla fingeravtryck du lägger till kan användas på det här sättet."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="7173290350577831813">"Obs! Fingeravtryck kan vara mindre säkra än en säkert lösenord eller en pinkod."</string>
@@ -365,7 +361,8 @@
     <string name="fingerprint_enroll_button_add" msgid="6317978977419045463">"Lägg till en till"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"Nästa"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Förutom att låsa upp mobilen kan du använda fingeravtrycket för att godkänna köp och åtkomst för appar. "<annotation id="url">"Läs mer"</annotation></string>
-    <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4504501581228672208">"Skärmlåsalternativet är inte tillgängligt. Du kan fortfarande använda fingeravtrycket för att godkänna köp och åtkomst för appar. "<annotation id="url">"Läs mer"</annotation></string>
+    <!-- no translation found for security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled (7007548031540826618) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Lyft fingret och tryck sedan på sensorn igen"</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="4132164775128798343">"När du ser den här ikonen kan du använda ditt fingeravtryck."</string>
     <string name="setup_fingerprint_enroll_finish_secondary_message" msgid="3734962461534384882">"Om du vill ändra inställningarna väljer du Inställningar &gt; Säkerhet &gt; Fingeravtryck."</string>
@@ -423,6 +420,12 @@
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Lösenord"</string>
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"Hög säkerhet"</string>
     <string name="current_screen_lock" msgid="4104091715420072219">"Nuvarande skärmlås"</string>
+    <!-- no translation found for fingerprint_unlock_set_unlock_pattern (4939057588092120368) -->
+    <skip />
+    <!-- no translation found for fingerprint_unlock_set_unlock_pin (8010746824051056986) -->
+    <skip />
+    <!-- no translation found for fingerprint_unlock_set_unlock_password (7351131075806338634) -->
+    <skip />
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Inaktiverad p.g.a. admin., kryptering eller uppgiftslagring"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Inget"</string>
     <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"Dra"</string>
@@ -697,8 +700,12 @@
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"2,4 GHz-bandet"</string>
     <string name="wifi_ap_choose_5G" msgid="8137061170937978040">"5 GHz-bandet"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP-inställningar"</string>
+    <!-- no translation found for wifi_shared (844142443226926070) -->
+    <skip />
     <string name="wifi_unchanged" msgid="3410422020930397102">"(oförändrat)"</string>
     <string name="wifi_unspecified" msgid="5431501214192991253">"(ospecificerat)"</string>
+    <!-- no translation found for wifi_multiple_cert_added (3240743501460165224) -->
+    <skip />
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS tillgängligt"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS tillgängligt)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Ange nätverkslösenordet"</string>
@@ -1192,7 +1199,6 @@
     <string name="mobile_connect_to_internet" msgid="1733894125065249639">"Anslut till internet"</string>
     <string name="location_title" msgid="1029961368397484576">"Min plats"</string>
     <string name="managed_profile_location_switch_title" msgid="6712332547063039683">"Plats för jobbprofil"</string>
-    <string name="managed_profile_location_switch_lockdown" msgid="3851708343340350369">"Har inaktiverats av företaget"</string>
     <string name="location_mode_title" msgid="3982009713118421689">"Läge"</string>
     <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"Hög precision"</string>
     <string name="location_mode_battery_saving_title" msgid="711273645208158637">"Batterisparläge"</string>
@@ -1517,6 +1523,8 @@
     <skip />
     <!-- no translation found for keyboard_shortcuts_helper (4839453720463798145) -->
     <skip />
+    <!-- no translation found for physical_device_title (79889057252418427) -->
+    <skip />
     <string name="pointer_settings_category" msgid="8183819795164034286">"Mus/styrplatta"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"Markörens hastighet"</string>
     <string name="game_controller_settings_category" msgid="8794508575329923718">"Spelkontroller"</string>
@@ -1637,7 +1645,6 @@
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Inställningar"</string>
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"På"</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"Av"</string>
-    <string name="accessibility_feature_or_input_method_not_allowed" msgid="5950315477009501647">"Tillåts inte av din organisation"</string>
     <string name="captioning_preview_title" msgid="1234015253497016890">"Förhandsgranskning"</string>
     <string name="captioning_standard_options_title" msgid="3284211791180335844">"Standardalternativ"</string>
     <string name="captioning_locale" msgid="4559155661018823503">"Språk"</string>
@@ -1931,6 +1938,8 @@
     <string name="device_admin_settings_title" msgid="1335557832906433309">"Inställningar för enhetsadministration"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"Enhetsadministratör"</string>
     <string name="remove_device_admin" msgid="3596845261596451437">"Inaktivera"</string>
+    <!-- no translation found for uninstall_device_admin (2019687470475335309) -->
+    <skip />
     <string name="select_device_admin_msg" msgid="2645509057946368094">"Enhetsadministratörer"</string>
     <string name="no_device_admins" msgid="702695100241728775">"Det finns inga tillgängliga enhetsadministratörer"</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"Personlig"</string>
@@ -2089,8 +2098,10 @@
     <string name="data_usage_forground_label" msgid="7654319010655983591">"Förgrund:"</string>
     <string name="data_usage_background_label" msgid="2722008379947694926">"Bakgrund:"</string>
     <string name="data_usage_app_settings" msgid="2279171379771253165">"Appinställningar"</string>
-    <string name="data_usage_app_restrict_background" msgid="7510046552380574925">"Begränsa appens bakgrundsdata"</string>
-    <string name="data_usage_app_restrict_background_summary" msgid="3720075732277934106">"Inaktivera bakgrundsdata på mobilnät."</string>
+    <!-- no translation found for data_usage_app_restrict_background (7359227831562303223) -->
+    <skip />
+    <!-- no translation found for data_usage_app_restrict_background_summary (4669789008211107454) -->
+    <skip />
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="1446565717342917727">"Om du vill begränsa bakgrundsdata för appen börjar du med att ange en mobildatagräns."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"Vill du begränsa bakgrundsdata?"</string>
     <string name="data_usage_app_restrict_dialog" msgid="5871168521456832764">"Denna funktion kan leda till att appar som är beroende av bakgrundsdata slutar att fungera när endast mobilnät är tillgängliga.\n\nDu hittar lämpligare kontroller för dataanvändning i appens inställningar."</string>
@@ -2257,6 +2268,10 @@
     <string name="user_enable_calling_confirm_message" msgid="8061594235219352787">"Samtalshistoriken delas med den här användaren."</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="7243308401401932681">"Vill du aktivera telefonsamtal och sms?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="4025082715546544967">"Samtals- och sms-historiken delas med den här användaren."</string>
+    <!-- no translation found for emergency_info_title (208607506217060337) -->
+    <skip />
+    <!-- no translation found for emergency_info_subtitle (1301492666470489605) -->
+    <skip />
     <string name="application_restrictions" msgid="8207332020898004394">"Tillåt appar och innehåll"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Appar med begränsningar"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Utöka appens inställningar"</string>
@@ -2848,7 +2863,8 @@
     <string name="condition_battery_summary" msgid="4418839236027977450">"Sänkt prestanda. Platstjänster och bakgrundsdata har inaktiverats."</string>
     <string name="condition_cellular_title" msgid="2398754272044917264">"Mobildata har inaktiverats"</string>
     <string name="condition_cellular_summary" msgid="1818046558419658463">"Internet är endast tillgängligt via Wi-Fi"</string>
-    <string name="condition_bg_data_title" msgid="1422001615923482010">"Bakgrundsdata har inaktiverats"</string>
+    <!-- no translation found for condition_bg_data_title (2483860304802846542) -->
+    <skip />
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Bakgrundsdata är endast tillgänglig via Wi-Fi. Det här kan påverka vissa appar eller tjänster när du inte har tillgång till Wi-Fi."</string>
     <string name="condition_work_title" msgid="7293722361184366648">"Jobbprofilen är inaktiverad"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"Appar, bakgrundssynkronisering och andra funktioner som hör till din jobbprofil är inaktiverade."</string>
@@ -2879,4 +2895,21 @@
     <string name="data_limit" msgid="1885406964934590552">"Datagräns"</string>
     <string name="data_usage_template" msgid="392191945602400904">"<xliff:g id="ID_1">%1$s</xliff:g> har använts mellan <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="configure" msgid="1029654422228677273">"Konfigurera"</string>
+    <!-- no translation found for data_saver_unrestricted_summary (2635267833484232703) -->
+    <!-- no translation found for data_saver_title (8034286939200289826) -->
+    <skip />
+    <!-- no translation found for unrestricted_data_saver (7019858887510062789) -->
+    <skip />
+    <!-- no translation found for data_saver_on (6774217590237934709) -->
+    <skip />
+    <!-- no translation found for data_saver_off (6892309031162738794) -->
+    <skip />
+    <!-- no translation found for unrestricted_app_title (4465437191723332066) -->
+    <skip />
+    <!-- no translation found for unrestricted_app_summary (6458008993501723912) -->
+    <skip />
+    <!-- no translation found for home_app (4066188520886810030) -->
+    <skip />
+    <!-- no translation found for no_default_home (7184117487704520238) -->
+    <skip />
 </resources>

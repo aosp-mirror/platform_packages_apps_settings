@@ -333,10 +333,6 @@
       <item quantity="other">Налаштовано <xliff:g id="COUNT_1">%1$d</xliff:g> відбитка пальця</item>
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
-    <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Налаштування відбитка"</string>
-    <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"Щоб розблоковувати екран або підтверджувати покупки за допомогою цифрового відбитка, виконайте вказані нижче дії."</string>
-    <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"Виберіть резервний спосіб блокування екрана"</string>
-    <string name="security_settings_fingerprint_enroll_onboard_message_2" msgid="4158160658182631304">"Додайте цифровий відбиток"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Розблокування відбитком"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="9193978734907066950">"Щоб розблокувати телефон, дозволити покупку або ввійти в додаток, просто торкніться датчика відбитків пальців. Це можна зробити за допомогою будь-якого відбитка, доданого на телефон. Тож будьте обачні."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="7173290350577831813">"Примітка. Відбиток пальця може бути менш надійним, ніж ключ чи PIN-код."</string>
@@ -369,7 +365,8 @@
     <string name="fingerprint_enroll_button_add" msgid="6317978977419045463">"Додати ще"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"Далі"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"За допомогою цифрового відбитка можна не лише розблоковувати телефон, а й підтверджувати покупки та входити в додатки. "<annotation id="url">"Докладніше"</annotation></string>
-    <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4504501581228672208">"Опцію блокування екрана вимкнено. Ви все одно можете підтверджувати покупки та входити в додатки за допомогою цифрового відбитка. "<annotation id="url">"Докладніше"</annotation></string>
+    <!-- no translation found for security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled (7007548031540826618) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Підніміть палець і знову торкніться датчика"</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="4132164775128798343">"Цей значок означає, що приймається відбиток пальця."</string>
     <string name="setup_fingerprint_enroll_finish_secondary_message" msgid="3734962461534384882">"Щоб змінити параметри, виберіть \"Налаштування\" &gt; \"Безпека\" &gt; \"Відбиток пальця\"."</string>
@@ -427,6 +424,12 @@
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Пароль"</string>
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"Високий рівень захисту"</string>
     <string name="current_screen_lock" msgid="4104091715420072219">"Поточне блокування екрана"</string>
+    <!-- no translation found for fingerprint_unlock_set_unlock_pattern (4939057588092120368) -->
+    <skip />
+    <!-- no translation found for fingerprint_unlock_set_unlock_pin (8010746824051056986) -->
+    <skip />
+    <!-- no translation found for fingerprint_unlock_set_unlock_password (7351131075806338634) -->
+    <skip />
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Вимкнено адміністратором, правилом шифрування або сховищем облікових даних"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Немає"</string>
     <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"Провести по екрану"</string>
@@ -713,8 +716,12 @@
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"Діапазон 2,4 ГГц"</string>
     <string name="wifi_ap_choose_5G" msgid="8137061170937978040">"Діапазон 5 ГГц"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"Налаштування IP"</string>
+    <!-- no translation found for wifi_shared (844142443226926070) -->
+    <skip />
     <string name="wifi_unchanged" msgid="3410422020930397102">"(без змін)"</string>
     <string name="wifi_unspecified" msgid="5431501214192991253">"(не вказано)"</string>
+    <!-- no translation found for wifi_multiple_cert_added (3240743501460165224) -->
+    <skip />
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"Є доступ до WPS"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" Є доступ до WPS"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Введіть пароль своєї мережі"</string>
@@ -1210,7 +1217,6 @@
     <string name="mobile_connect_to_internet" msgid="1733894125065249639">"Під’єднайтеся до Інтернету"</string>
     <string name="location_title" msgid="1029961368397484576">"Моє місцезнах."</string>
     <string name="managed_profile_location_switch_title" msgid="6712332547063039683">"Місцезнах.для робочого профілю"</string>
-    <string name="managed_profile_location_switch_lockdown" msgid="3851708343340350369">"Вимкнено вашою компанією"</string>
     <string name="location_mode_title" msgid="3982009713118421689">"Режим"</string>
     <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"Висока точність"</string>
     <string name="location_mode_battery_saving_title" msgid="711273645208158637">"Економія заряду акумулятора"</string>
@@ -1537,6 +1543,8 @@
     <skip />
     <!-- no translation found for keyboard_shortcuts_helper (4839453720463798145) -->
     <skip />
+    <!-- no translation found for physical_device_title (79889057252418427) -->
+    <skip />
     <string name="pointer_settings_category" msgid="8183819795164034286">"Миша/сенсорна панель"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"Швидкість указівника"</string>
     <string name="game_controller_settings_category" msgid="8794508575329923718">"Ігровий контролер"</string>
@@ -1667,7 +1675,6 @@
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Налаштування"</string>
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"Увімкнено"</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"Вимкнено"</string>
-    <string name="accessibility_feature_or_input_method_not_allowed" msgid="5950315477009501647">"Не дозволено вашою організацією"</string>
     <string name="captioning_preview_title" msgid="1234015253497016890">"Переглянути"</string>
     <string name="captioning_standard_options_title" msgid="3284211791180335844">"Стандартні параметри"</string>
     <string name="captioning_locale" msgid="4559155661018823503">"Мова"</string>
@@ -1963,6 +1970,8 @@
     <string name="device_admin_settings_title" msgid="1335557832906433309">"Налашт-ня адміністрації пристрою"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"Адміністратор пристрою"</string>
     <string name="remove_device_admin" msgid="3596845261596451437">"Деактивувати"</string>
+    <!-- no translation found for uninstall_device_admin (2019687470475335309) -->
+    <skip />
     <string name="select_device_admin_msg" msgid="2645509057946368094">"Адміністратори пристрою"</string>
     <string name="no_device_admins" msgid="702695100241728775">"Немає доступн. адміністраторів мережі"</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"Особисте"</string>
@@ -2121,8 +2130,10 @@
     <string name="data_usage_forground_label" msgid="7654319010655983591">"Активні:"</string>
     <string name="data_usage_background_label" msgid="2722008379947694926">"Фоновий режим:"</string>
     <string name="data_usage_app_settings" msgid="2279171379771253165">"Налаштування додатка"</string>
-    <string name="data_usage_app_restrict_background" msgid="7510046552380574925">"Обмежити фонові дані додатка"</string>
-    <string name="data_usage_app_restrict_background_summary" msgid="3720075732277934106">"Вимикати фонові дані в мобільних мережах."</string>
+    <!-- no translation found for data_usage_app_restrict_background (7359227831562303223) -->
+    <skip />
+    <!-- no translation found for data_usage_app_restrict_background_summary (4669789008211107454) -->
+    <skip />
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="1446565717342917727">"Щоб обмежити фонові дані, установіть ліміт передавання даних."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"Обмежити використання фонових даних?"</string>
     <string name="data_usage_app_restrict_dialog" msgid="5871168521456832764">"Якщо доступні лише мобільні мережі, додатки, що використовують фонові дані, можуть не працювати.\n\nВідповідніші елементи керування використанням даних можна знайти в налаштуваннях цього додатка."</string>
@@ -2289,6 +2300,10 @@
     <string name="user_enable_calling_confirm_message" msgid="8061594235219352787">"Цей користувач матиме доступ до історії викликів."</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="7243308401401932681">"Увімкнути телефонні дзвінки й SMS?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="4025082715546544967">"Цей користувач матиме доступ до історії дзвінків і SMS"</string>
+    <!-- no translation found for emergency_info_title (208607506217060337) -->
+    <skip />
+    <!-- no translation found for emergency_info_subtitle (1301492666470489605) -->
+    <skip />
     <string name="application_restrictions" msgid="8207332020898004394">"Дозволи для програм і вмісту"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Програми з обмеженнями"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Розгорнути налаштув. програм"</string>
@@ -2898,7 +2913,8 @@
     <string name="condition_battery_summary" msgid="4418839236027977450">"Продуктивність знизилася. Служби локації та фоновий режим вимкнено."</string>
     <string name="condition_cellular_title" msgid="2398754272044917264">"Мобільний трафік вимкнено"</string>
     <string name="condition_cellular_summary" msgid="1818046558419658463">"З’єднання з Інтернетом доступне лише через Wi-Fi"</string>
-    <string name="condition_bg_data_title" msgid="1422001615923482010">"Фоновий режим вимкнено"</string>
+    <!-- no translation found for condition_bg_data_title (2483860304802846542) -->
+    <skip />
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Фоновий режим доступний лише через Wi-Fi. Це може вплинути на роботу деяких додатків і служб, коли мережа Wi-Fi недоступна."</string>
     <string name="condition_work_title" msgid="7293722361184366648">"Робочий профіль вимкнено"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"Вимкнено додатки, фонову синхронізацію й інші функції, пов’язані з вашим робочим профілем."</string>
@@ -2929,4 +2945,21 @@
     <string name="data_limit" msgid="1885406964934590552">"Ліміт трафіку"</string>
     <string name="data_usage_template" msgid="392191945602400904">"<xliff:g id="ID_2">%2$s</xliff:g> використано <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="configure" msgid="1029654422228677273">"Налаштувати"</string>
+    <!-- no translation found for data_saver_unrestricted_summary (2635267833484232703) -->
+    <!-- no translation found for data_saver_title (8034286939200289826) -->
+    <skip />
+    <!-- no translation found for unrestricted_data_saver (7019858887510062789) -->
+    <skip />
+    <!-- no translation found for data_saver_on (6774217590237934709) -->
+    <skip />
+    <!-- no translation found for data_saver_off (6892309031162738794) -->
+    <skip />
+    <!-- no translation found for unrestricted_app_title (4465437191723332066) -->
+    <skip />
+    <!-- no translation found for unrestricted_app_summary (6458008993501723912) -->
+    <skip />
+    <!-- no translation found for home_app (4066188520886810030) -->
+    <skip />
+    <!-- no translation found for no_default_home (7184117487704520238) -->
+    <skip />
 </resources>

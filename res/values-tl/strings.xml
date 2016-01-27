@@ -329,10 +329,6 @@
       <item quantity="other">Pag-set up ng <xliff:g id="COUNT_1">%1$d</xliff:g> na fingerprint</item>
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
-    <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Setup ng fingerprint"</string>
-    <string name="security_settings_fingerprint_enroll_onboard_message" msgid="2655449737443418341">"Upang magamit ang iyong fingerprint upang i-unlock ang iyong screen o kumpirmahin ang mga pagbili, kakailanganin naming:"</string>
-    <string name="security_settings_fingerprint_enroll_onboard_message_1" msgid="2799884038398627882">"I-set up ang iyong backup na paraan ng pag-lock ng screen"</string>
-    <string name="security_settings_fingerprint_enroll_onboard_message_2" msgid="4158160658182631304">"Idagdag ang iyong fingerprint"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"I-unlock sa fingerprint"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="9193978734907066950">"Pindutin lang ang sensor ng fingerprint upang i-unlock ang iyong telepono, pahintulutan ang mga pagbili, o mag-sign in sa mga app. Pag-isipang mabuti kung kaninong mga fingerprint ang iyong idaragdag - magagawa ng anumang mga fingerprint na idaragdag ang mga bagay na ito."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="7173290350577831813">"Tandaan: Maaaring hindi gaanong secure ang iyong fingerprint kaysa sa isang malakas na pattern o PIN."</string>
@@ -365,7 +361,8 @@
     <string name="fingerprint_enroll_button_add" msgid="6317978977419045463">"Magdagdag ng isa pa"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"Susunod"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Bukod pa sa pag-a-unlock ng iyong telepono, maaari mo ring gamitin ang iyong fingerprint upang pahintulutan ang mga pagbili at pag-access sa app. "<annotation id="url">"Matuto nang higit pa"</annotation></string>
-    <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4504501581228672208">"Naka-disable ang opsyon sa screen lock. Maaari mo pa ring gamitin ang iyong fingerprint upang pahintulutan ang mga pagbili at pag-access sa app. "<annotation id="url">"Matuto nang higit pa"</annotation></string>
+    <!-- no translation found for security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled (7007548031540826618) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Iangat ang daliri, pagkatapos ay muling pindutin ang sensor"</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="4132164775128798343">"Sa tuwing makikita mo ang icon na ito, maaari mong gamitin ang iyong fingerprint."</string>
     <string name="setup_fingerprint_enroll_finish_secondary_message" msgid="3734962461534384882">"Upang baguhin ang iyong mga setting, pumunta sa Mga Setting &gt; Seguridad &gt; Fingerprint."</string>
@@ -423,6 +420,12 @@
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Password"</string>
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"Mataas na seguridad"</string>
     <string name="current_screen_lock" msgid="4104091715420072219">"Kasalukuyang lock ng screen"</string>
+    <!-- no translation found for fingerprint_unlock_set_unlock_pattern (4939057588092120368) -->
+    <skip />
+    <!-- no translation found for fingerprint_unlock_set_unlock_pin (8010746824051056986) -->
+    <skip />
+    <!-- no translation found for fingerprint_unlock_set_unlock_password (7351131075806338634) -->
+    <skip />
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Hindi pinagana ng administrator, patakaran sa pag-encrypt, o storage ng kredensyal"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Wala"</string>
     <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"Mag-swipe"</string>
@@ -697,8 +700,12 @@
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"2.4 GHz Band"</string>
     <string name="wifi_ap_choose_5G" msgid="8137061170937978040">"5 GHz Band"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"Mga setting ng IP"</string>
+    <!-- no translation found for wifi_shared (844142443226926070) -->
+    <skip />
     <string name="wifi_unchanged" msgid="3410422020930397102">"(di-nabago)"</string>
     <string name="wifi_unspecified" msgid="5431501214192991253">"(di-tukoy)"</string>
+    <!-- no translation found for wifi_multiple_cert_added (3240743501460165224) -->
+    <skip />
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"Available ang WPS"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (Available ang WPS)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Ilagay ang iyong password sa network"</string>
@@ -1192,7 +1199,6 @@
     <string name="mobile_connect_to_internet" msgid="1733894125065249639">"Mangyaring kumonekta sa Internet"</string>
     <string name="location_title" msgid="1029961368397484576">"Aking Lokasyon"</string>
     <string name="managed_profile_location_switch_title" msgid="6712332547063039683">"Lokayon ng profile sa trabaho"</string>
-    <string name="managed_profile_location_switch_lockdown" msgid="3851708343340350369">"Na-off ng iyong kumpanya"</string>
     <string name="location_mode_title" msgid="3982009713118421689">"Mode"</string>
     <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"Napakatumpak"</string>
     <string name="location_mode_battery_saving_title" msgid="711273645208158637">"Pagtitipid ng baterya"</string>
@@ -1517,6 +1523,8 @@
     <skip />
     <!-- no translation found for keyboard_shortcuts_helper (4839453720463798145) -->
     <skip />
+    <!-- no translation found for physical_device_title (79889057252418427) -->
+    <skip />
     <string name="pointer_settings_category" msgid="8183819795164034286">"Mouse/trackpad"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"Bilis ng pointer"</string>
     <string name="game_controller_settings_category" msgid="8794508575329923718">"Game Controller"</string>
@@ -1586,13 +1594,10 @@
     <string name="usage_time_label" msgid="295954901452833058">"Oras ng paggamit"</string>
     <string name="accessibility_settings" msgid="3975902491934816215">"Kakayahang Ma-access"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Mga setting ng pagiging maa-access"</string>
-    <!-- no translation found for vision_settings_title (4204111425716868288) -->
-    <skip />
-    <!-- no translation found for vision_settings_description (7754433456207334423) -->
-    <skip />
+    <string name="vision_settings_title" msgid="4204111425716868288">"Mga Setting ng Paningin"</string>
+    <string name="vision_settings_description" msgid="7754433456207334423">"Isaayos ang mga setting na ito ngayon upang matulungan ka sa iba pang bahagi ng proseso ng pag-set up. Maaari mong isaayos ang mga ito anumang oras sa mga setting ng device."</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"Mga Serbisyo"</string>
-    <!-- no translation found for talkback_summary (6239954195360531224) -->
-    <skip />
+    <string name="talkback_summary" msgid="6239954195360531224">"Screenreader tool na pangunahing nakalaan para sa mga taong bulag at malabo ang paningin"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"System"</string>
     <string name="accessibility_display_title" msgid="7610175687949675162">"Display"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"Mga Caption"</string>
@@ -1640,7 +1645,6 @@
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Mga Setting"</string>
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"Naka-on"</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"Naka-off"</string>
-    <string name="accessibility_feature_or_input_method_not_allowed" msgid="5950315477009501647">"Hindi pinapayagan ng iyong organisasyon"</string>
     <string name="captioning_preview_title" msgid="1234015253497016890">"I-preview"</string>
     <string name="captioning_standard_options_title" msgid="3284211791180335844">"Mga karaniwang pagpipilian"</string>
     <string name="captioning_locale" msgid="4559155661018823503">"Wika"</string>
@@ -1934,6 +1938,8 @@
     <string name="device_admin_settings_title" msgid="1335557832906433309">"Mga setting ng administration ng device"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"Administrator ng device"</string>
     <string name="remove_device_admin" msgid="3596845261596451437">"I-deactivate"</string>
+    <!-- no translation found for uninstall_device_admin (2019687470475335309) -->
+    <skip />
     <string name="select_device_admin_msg" msgid="2645509057946368094">"Administrator ng device"</string>
     <string name="no_device_admins" msgid="702695100241728775">"Walang mga available na administrator ng device"</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"Personal"</string>
@@ -2092,8 +2098,10 @@
     <string name="data_usage_forground_label" msgid="7654319010655983591">"Foreground:"</string>
     <string name="data_usage_background_label" msgid="2722008379947694926">"Background:"</string>
     <string name="data_usage_app_settings" msgid="2279171379771253165">"Mga setting ng app"</string>
-    <string name="data_usage_app_restrict_background" msgid="7510046552380574925">"Paghigpitan ang data ng background ng app"</string>
-    <string name="data_usage_app_restrict_background_summary" msgid="3720075732277934106">"I-disable ang data ng background sa mga cellular network."</string>
+    <!-- no translation found for data_usage_app_restrict_background (7359227831562303223) -->
+    <skip />
+    <!-- no translation found for data_usage_app_restrict_background_summary (4669789008211107454) -->
+    <skip />
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="1446565717342917727">"Upang paghigpitan ang data ng background para sa app na ito, magtakda muna ng isang limitasyon sa cellular data."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"Paghigpitan ang data ng background?"</string>
     <string name="data_usage_app_restrict_dialog" msgid="5871168521456832764">"Maaaring magsanhi ang feature na ito sa pagtigil sa paggana ng app na nakadepende sa background na data kapag tanging mga cellular network lang ang available.\n\nMakakahanap ka ng higit pang mga naaangkop na kontrol sa paggamit ng data sa mga setting na available sa loob ng app."</string>
@@ -2260,6 +2268,10 @@
     <string name="user_enable_calling_confirm_message" msgid="8061594235219352787">"Ibabahagi ang history ng pagtawag sa user na ito."</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="7243308401401932681">"I-on ang mga pagtawag sa telepono at SMS?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="4025082715546544967">"Ibabahagi sa user na ito ang history ng pagtawag at SMS."</string>
+    <!-- no translation found for emergency_info_title (208607506217060337) -->
+    <skip />
+    <!-- no translation found for emergency_info_subtitle (1301492666470489605) -->
+    <skip />
     <string name="application_restrictions" msgid="8207332020898004394">"Payagan ang apps at nilalaman"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Mga application na may mga paghihigpit"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Palawakin ang mga setting para sa application"</string>
@@ -2807,8 +2819,7 @@
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Buksan ang camera app sa pamamagitan ng pag-twist sa iyong kamay nang dalawang beses"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Pindutin nang dalawang beses ang power button para sa camera"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Mabilisang buksan ang camera nang hindi ina-unlock ang iyong screen"</string>
-    <!-- no translation found for screen_zoom_title (5530967660604527002) -->
-    <skip />
+    <string name="screen_zoom_title" msgid="5530967660604527002">"Palakihin ang display"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"density ng display, pag-zoom sa screen, scale, pag-scale"</string>
     <string name="screen_zoom_summary" msgid="2022973627105802010">"Paliitin o palakihin ang lahat ng item sa screen. Maaaring mag-iba ng pwesto ang ilang app sa iyong home screen pagkatapos baguhin ang setting na ito."</string>
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"I-preview"</string>
@@ -2852,18 +2863,16 @@
     <string name="condition_battery_summary" msgid="4418839236027977450">"Nabawasan ang pagganap. Naka-off ang mga serbisyo ng lokasyon at data ng background."</string>
     <string name="condition_cellular_title" msgid="2398754272044917264">"Naka-off ang cellular data"</string>
     <string name="condition_cellular_summary" msgid="1818046558419658463">"Available lang ang Internet kapag may Wi-Fi"</string>
-    <string name="condition_bg_data_title" msgid="1422001615923482010">"Data ng background, naka-off"</string>
+    <!-- no translation found for condition_bg_data_title (2483860304802846542) -->
+    <skip />
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Available lang ang data ng background kapag may Wi-Fi. Maaari itong makaapekto sa ilang app o serbisyo kapag hindi available ang Wi-Fi."</string>
     <string name="condition_work_title" msgid="7293722361184366648">"Naka-off, profile sa trabaho"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"Naka-off ang mga app, pag-sync sa background at iba pang mga feature na may kaugnayan sa iyong profile sa trabaho."</string>
     <string name="suggestions_title" msgid="8758376306825920705">"Mga Suhestyon (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"Alisin"</string>
-    <!-- no translation found for color_temperature (2070126836910615605) -->
-    <skip />
-    <!-- no translation found for color_temperature_desc (4793729830226404052) -->
-    <skip />
-    <!-- no translation found for color_temperature_toast (4974218172133854827) -->
-    <skip />
+    <string name="color_temperature" msgid="2070126836910615605">"Malamig na temperatura ng kulay"</string>
+    <string name="color_temperature_desc" msgid="4793729830226404052">"Gumamit ng mas malalamig na kulay ng display"</string>
+    <string name="color_temperature_toast" msgid="4974218172133854827">"Upang ilapat ang pagbabago sa kulay, i-off ang screen"</string>
     <string name="usage" msgid="2977875522080448986">"Paggamit"</string>
     <string name="cellular_data_usage" msgid="2763710678354680712">"Paggamit ng cellular data"</string>
     <string name="wifi_data_usage" msgid="686754111095324306">"Paggamit ng Wi-Fi data"</string>
@@ -2886,4 +2895,21 @@
     <string name="data_limit" msgid="1885406964934590552">"Limitasyon ng data"</string>
     <string name="data_usage_template" msgid="392191945602400904">"<xliff:g id="ID_1">%1$s</xliff:g> ang nagamit noong <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="configure" msgid="1029654422228677273">"I-configure"</string>
+    <!-- no translation found for data_saver_unrestricted_summary (2635267833484232703) -->
+    <!-- no translation found for data_saver_title (8034286939200289826) -->
+    <skip />
+    <!-- no translation found for unrestricted_data_saver (7019858887510062789) -->
+    <skip />
+    <!-- no translation found for data_saver_on (6774217590237934709) -->
+    <skip />
+    <!-- no translation found for data_saver_off (6892309031162738794) -->
+    <skip />
+    <!-- no translation found for unrestricted_app_title (4465437191723332066) -->
+    <skip />
+    <!-- no translation found for unrestricted_app_summary (6458008993501723912) -->
+    <skip />
+    <!-- no translation found for home_app (4066188520886810030) -->
+    <skip />
+    <!-- no translation found for no_default_home (7184117487704520238) -->
+    <skip />
 </resources>
