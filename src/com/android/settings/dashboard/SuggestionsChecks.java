@@ -24,7 +24,9 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import com.android.ims.ImsManager;
 import com.android.settings.Settings.WallpaperSuggestionActivity;
+import com.android.settings.Settings.WifiCallingSuggestionActivity;
 import com.android.settings.Settings.ZenModeAutomationSuggestionActivity;
 import com.android.settingslib.drawer.Tile;
 
@@ -47,8 +49,18 @@ public class SuggestionsChecks {
             return hasEnabledZenAutoRules();
         } else if (className.equals(WallpaperSuggestionActivity.class.getName())) {
             return hasWallpaperSet();
+        } else if (className.equals(WifiCallingSuggestionActivity.class.getName())) {
+            return isWifiCallingUnavailableOrEnabled();
         }
         return false;
+    }
+
+    public boolean isWifiCallingUnavailableOrEnabled() {
+        if (!ImsManager.isWfcEnabledByPlatform(mContext)) {
+            return true;
+        }
+        return ImsManager.isWfcEnabledByUser(mContext)
+                && ImsManager.isNonTtyOrTtyOnVolteEnabled(mContext);
     }
 
     private boolean hasEnabledZenAutoRules() {
