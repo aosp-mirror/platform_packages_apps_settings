@@ -19,6 +19,7 @@ package com.android.settings;
 import android.app.Activity;
 import android.app.ActivityManagerNative;
 import android.app.UiModeManager;
+import android.app.WallpaperManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -78,6 +79,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_CAMERA_GESTURE = "camera_gesture";
     private static final String KEY_CAMERA_DOUBLE_TAP_POWER_GESTURE
             = "camera_double_tap_power_gesture";
+    private static final String KEY_WALLPAPER = "wallpaper";
 
     private DropDownPreference mFontSizePref;
 
@@ -129,6 +131,10 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             mAutoBrightnessPreference.setOnPreferenceChangeListener(this);
         } else {
             removePreference(KEY_AUTO_BRIGHTNESS);
+        }
+
+        if (!isWallpaperSettingAllowed(activity)) {
+            grayPreferenceOut(KEY_WALLPAPER);
         }
 
         if (isLiftToWakeAvailable(activity)) {
@@ -220,6 +226,10 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static boolean allowAllRotations(Context context) {
         return Resources.getSystem().getBoolean(
                 com.android.internal.R.bool.config_allowAllRotations);
+    }
+
+    private static boolean isWallpaperSettingAllowed(Context context) {
+        return WallpaperManager.getInstance(context).isWallpaperSettingAllowed();
     }
 
     private static boolean isLiftToWakeAvailable(Context context) {
@@ -477,6 +487,13 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     @Override
     protected int getHelpResource() {
         return R.string.help_uri_display;
+    }
+
+    private void grayPreferenceOut(String key) {
+        Preference pref = findPreference(key);
+        if (pref != null) {
+            pref.setEnabled(false);
+        }
     }
 
     private static class SummaryProvider implements SummaryLoader.SummaryProvider {
