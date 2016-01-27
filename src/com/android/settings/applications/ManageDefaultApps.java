@@ -26,6 +26,7 @@ import android.os.Handler;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
+import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 import android.util.Log;
@@ -33,28 +34,31 @@ import android.util.Log;
 import com.android.internal.content.PackageMonitor;
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Index;
 import com.android.settings.search.Indexable;
+import com.android.settings.utils.ProfileSettingsPreferenceFragment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ManageDefaultApps extends SettingsPreferenceFragment
+public class ManageDefaultApps extends ProfileSettingsPreferenceFragment
         implements Preference.OnPreferenceClickListener, Indexable {
 
     private static final String TAG = ManageDefaultApps.class.getSimpleName();
 
+    private static final String KEY_ASSIST_AND_VOICE_INPUT = "assist_and_voice_input";
     private static final String KEY_DEFAULT_BROWSER = "default_browser";
     private static final String KEY_DEFAULT_PHONE_APP = "default_phone_app";
     private static final String KEY_DEFAULT_EMERGENCY_APP = "default_emergency_app";
     private static final String KEY_SMS_APPLICATION = "default_sms_app";
+    private static final String KEY_DEFAULT_NOTIFICATION_ASST = "default_notification_asst_app";
 
     private DefaultBrowserPreference mDefaultBrowserPreference;
     private PackageManager mPm;
     private int myUserId;
+
 
     private static final long DELAY_UPDATE_BROWSER_MILLIS = 500;
 
@@ -130,6 +134,7 @@ public class ManageDefaultApps extends SettingsPreferenceFragment
         mPm = getPackageManager();
         myUserId = UserHandle.myUserId();
 
+
         mDefaultBrowserPreference = (DefaultBrowserPreference) findPreference(KEY_DEFAULT_BROWSER);
         mDefaultBrowserPreference.setOnPreferenceChangeListener(
                 new Preference.OnPreferenceChangeListener() {
@@ -151,7 +156,7 @@ public class ManageDefaultApps extends SettingsPreferenceFragment
                         }
                         return result;
                     }
-        });
+                });
         final boolean isRestrictedUser = UserManager.get(getActivity())
                 .getUserInfo(myUserId).isRestricted();
 
@@ -167,6 +172,14 @@ public class ManageDefaultApps extends SettingsPreferenceFragment
 
         if (!DefaultEmergencyPreference.isAvailable(getActivity())) {
             removePreference(KEY_DEFAULT_EMERGENCY_APP);
+        }
+
+        if (!ManageAssist.isAvailable(getActivity())) {
+            removePreference(KEY_ASSIST_AND_VOICE_INPUT);
+        }
+
+        if (!DefaultNotificationAssistantPreference.isAvailable(getActivity())) {
+            removePreference(KEY_DEFAULT_NOTIFICATION_ASST);
         }
 
         if (DefaultEmergencyPreference.isCapable(getActivity())) {
@@ -200,31 +213,36 @@ public class ManageDefaultApps extends SettingsPreferenceFragment
     }
 
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-        new BaseSearchIndexProvider() {
-            @Override
-            public List<SearchIndexableResource> getXmlResourcesToIndex(
-                    Context context, boolean enabled) {
-                SearchIndexableResource sir = new SearchIndexableResource(context);
-                sir.xmlResId = R.xml.default_apps;
-                return Arrays.asList(sir);
-            }
-
-            @Override
-            public List<String> getNonIndexableKeys(Context context) {
-                final ArrayList<String> result = new ArrayList<String>();
-
-                // Remove SMS Application if the device does not support SMS
-                final boolean isRestrictedUser = UserManager.get(context)
-                        .getUserInfo(UserHandle.myUserId()).isRestricted();
-                if (!DefaultSmsPreference.isAvailable(context) || isRestrictedUser) {
-                    result.add(KEY_SMS_APPLICATION);
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.default_apps;
+                    return Arrays.asList(sir);
                 }
 
-                if (!DefaultEmergencyPreference.isAvailable(context)) {
-                    result.add(KEY_DEFAULT_EMERGENCY_APP);
-                }
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    final ArrayList<String> result = new ArrayList<String>();
 
-                return result;
-            }
-    };
+                    // Remove SMS Application if the device does not support SMS
+                    final boolean isRestrictedUser = UserManager.get(context)
+                            .getUserInfo(UserHandle.myUserId()).isRestricted();
+                    if (!DefaultSmsPreference.isAvailable(context) || isRestrictedUser) {
+                        result.add(KEY_SMS_APPLICATION);
+                    }
+
+                    if (!DefaultEmergencyPreference.isAvailable(context)) {
+                        result.add(KEY_DEFAULT_EMERGENCY_APP);
+                    }
+
+                    return result;
+                }
+            };
+
+    protected String getIntentActionString() {
+        return Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS;
+    }
+
 }
