@@ -20,6 +20,7 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.UserManager;
 
 import com.android.internal.widget.LockPatternUtils;
 
@@ -67,7 +68,9 @@ abstract class SaveChosenLockWorkerBase extends Fragment {
         mUtils.setSeparateProfileChallengeEnabled(mUserId, true);
         mWasSecureBefore = mUtils.isSecure(mUserId);
 
-        mUtils.setCredentialRequiredToDecrypt(credentialRequired);
+        if (UserManager.get(getContext()).getUserInfo(mUserId).isPrimary()) {
+            mUtils.setCredentialRequiredToDecrypt(credentialRequired);
+        }
 
         mFinished = false;
         mResultData = null;

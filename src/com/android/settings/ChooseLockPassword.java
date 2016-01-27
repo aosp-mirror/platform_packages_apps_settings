@@ -641,9 +641,11 @@ public class ChooseLockPassword extends SettingsActivity {
             setNextEnabled(false);
 
             mSaveAndFinishWorker = new SaveAndFinishWorker();
+            mSaveAndFinishWorker.setListener(this);
+
             getFragmentManager().beginTransaction().add(mSaveAndFinishWorker,
                     FRAGMENT_TAG_SAVE_AND_FINISH).commit();
-            mSaveAndFinishWorker.setListener(this);
+            getFragmentManager().executePendingTransactions();
 
             final boolean required = getActivity().getIntent().getBooleanExtra(
                     EncryptionInterstitial.EXTRA_REQUIRE_PASSWORD, true);
