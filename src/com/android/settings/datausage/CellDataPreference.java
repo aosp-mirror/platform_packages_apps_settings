@@ -180,7 +180,7 @@ public class CellDataPreference extends CustomDialogPreference implements Templa
             setMobileDataEnabled(true);
             if (nextSir != null && currentSir != null &&
                 currentSir.getSubscriptionId() == nextSir.getSubscriptionId()) {
-                disableDataForOtherSubscriptions(currentSir);
+                disableDataForOtherSubscriptions(mSubId);
             }
             return;
         }
@@ -191,14 +191,15 @@ public class CellDataPreference extends CustomDialogPreference implements Templa
 
         builder.setTitle(R.string.sim_change_data_title);
         builder.setMessage(getContext().getString(R.string.sim_change_data_message,
-                    currentSir.getDisplayName(), previousName));
+                String.valueOf(currentSir != null ? currentSir.getDisplayName() : null),
+                previousName));
 
         builder.setPositiveButton(R.string.okay, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
-                mSubscriptionManager.setDefaultDataSubId(currentSir.getSubscriptionId());
+                mSubscriptionManager.setDefaultDataSubId(mSubId);
                 setMobileDataEnabled(true);
-                disableDataForOtherSubscriptions(currentSir);
+                disableDataForOtherSubscriptions(mSubId);
             }
         });
         builder.setNegativeButton(R.string.cancel, null);
@@ -206,11 +207,11 @@ public class CellDataPreference extends CustomDialogPreference implements Templa
         builder.create().show();
     }
 
-    private void disableDataForOtherSubscriptions(SubscriptionInfo currentSir) {
+    private void disableDataForOtherSubscriptions(int subId) {
         List<SubscriptionInfo> subInfoList = mSubscriptionManager.getActiveSubscriptionInfoList();
         if (subInfoList != null) {
             for (SubscriptionInfo subInfo : subInfoList) {
-                if (subInfo.getSubscriptionId() != currentSir.getSubscriptionId()) {
+                if (subInfo.getSubscriptionId() != subId) {
                     mTelephonyManager.setDataEnabled(subInfo.getSubscriptionId(), false);
                 }
             }
