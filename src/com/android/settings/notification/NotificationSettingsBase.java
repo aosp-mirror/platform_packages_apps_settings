@@ -21,6 +21,7 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
+import com.android.settings.applications.LayoutPreference;
 
 import android.app.Notification;
 import android.content.Context;
@@ -32,10 +33,11 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.service.notification.NotificationListenerService.Ranking;
-import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
@@ -45,10 +47,13 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     protected static final String ARG_PACKAGE_INFO = "arg_info";
+    protected static final String ARG_TOPIC = "arg_topic";
 
     protected static final String KEY_BYPASS_DND = "bypass_dnd";
     protected static final String KEY_SENSITIVE = "sensitive";
     protected static final String KEY_IMPORTANCE = "importance";
+    protected static final String KEY_IMPORTANCE_TITLE = "importance_title";
+    protected static final String KEY_IMPORTANCE_RESET = "importance_reset_button";
 
     protected PackageManager mPm;
     protected final NotificationBackend mBackend = new NotificationBackend();
@@ -58,7 +63,10 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
     protected int mUserId;
     protected String mPkg;
     protected PackageInfo mPkgInfo;
+    protected Notification.Topic mTopic;
     protected ImportanceSeekBarPreference mImportance;
+    protected Preference mImportanceTitle;
+    protected LayoutPreference mImportanceReset;
     protected RestrictedSwitchPreference mPriority;
     protected RestrictedSwitchPreference mSensitive;
 
@@ -114,6 +122,10 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
             toastAndFinish();
             return;
         }
+
+        // Will be null for app wide settings.
+        mTopic = args != null && args.containsKey(ARG_TOPIC)
+                ? (Notification.Topic) args.getParcelable(ARG_TOPIC) : null;
     }
 
     @Override
@@ -137,70 +149,89 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
         }
     }
 
-    protected void setupImportancePref(final NotificationBackend.AppRow appRow,
-            final Notification.Topic topic, int importance) {
-        if (mImportance == null) {
-            mImportance = new ImportanceSeekBarPreference(getPrefContext());
-            mImportance.setDisabledByAdmin(
-                    RestrictedLockUtils.checkIfApplicationIsSuspended(mContext, mPkg, mUserId));
-            mImportance.setTitle(R.string.notification_importance_title);
-            mImportance.setKey(KEY_IMPORTANCE);
-            getPreferenceScreen().addPreference(mImportance);
+    protected void setupImportancePrefs(boolean isSystemApp, int importance) {
+        mImportance.setDisabledByAdmin(
+                RestrictedLockUtils.checkIfApplicationIsSuspended(mContext, mPkg, mUserId));
+        if (importance == Ranking.IMPORTANCE_UNSPECIFIED) {
+            mImportance.setVisible(false);
+            mImportanceReset.setVisible(false);
+            mImportanceTitle.setOnPreferenceClickListener(showEditableImportance);
+        } else {
+            mImportanceTitle.setOnPreferenceClickListener(null);
         }
-        mImportance.setSystemApp(appRow.systemApp);
+
+        mImportanceTitle.setSummary(getProgressSummary(importance));
+        mImportance.setSystemApp(isSystemApp);
         mImportance.setMinimumProgress(
-                appRow.systemApp ? Ranking.IMPORTANCE_LOW : Ranking.IMPORTANCE_NONE);
+                isSystemApp ? Ranking.IMPORTANCE_LOW : Ranking.IMPORTANCE_NONE);
         mImportance.setMax(Ranking.IMPORTANCE_MAX);
-        // TODO: stop defaulting to 'normal' in the UI when there are mocks for this scenario.
-        importance = importance == Ranking.IMPORTANCE_UNSPECIFIED
-                        ? Ranking.IMPORTANCE_DEFAULT
-                        : importance;
         mImportance.setProgress(importance);
         mImportance.setCallback(new ImportanceSeekBarPreference.Callback() {
             @Override
             public void onImportanceChanged(int progress) {
-                mBackend.setImportance(appRow.pkg, appRow.uid, topic, progress);
+                mBackend.setImportance(mPkg, mUid, mTopic, progress);
+                mImportanceTitle.setSummary(getProgressSummary(progress));
                 updateDependents(progress);
             }
         });
+
+        Button button = (Button) mImportanceReset.findViewById(R.id.left_button);
+        button.setText(R.string.importance_reset);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mBackend.setImportance(mPkg, mUid, mTopic, Ranking.IMPORTANCE_UNSPECIFIED);
+                mImportanceReset.setVisible(false);
+                mImportance.setVisible(false);
+                mImportanceTitle.setOnPreferenceClickListener(showEditableImportance);
+                mImportanceTitle.setSummary(getProgressSummary(Ranking.IMPORTANCE_UNSPECIFIED));
+                updateDependents(Ranking.IMPORTANCE_UNSPECIFIED);
+            }
+        });
+        mImportanceReset.findViewById(R.id.right_button).setVisibility(View.INVISIBLE);
     }
 
-    protected void setupPriorityPref(final Notification.Topic topic, boolean priority) {
-        if (mPriority == null) {
-            mPriority = new RestrictedSwitchPreference(getPrefContext());
-            mPriority.setDisabledByAdmin(
-                    RestrictedLockUtils.checkIfApplicationIsSuspended(mContext, mPkg, mUserId));
-            mPriority.setTitle(R.string.app_notification_override_dnd_title);
-            mPriority.setSummary(R.string.app_notification_override_dnd_summary);
-            mPriority.setKey(KEY_BYPASS_DND);
-            getPreferenceScreen().addPreference(mPriority);
+    private String getProgressSummary(int progress) {
+        switch (progress) {
+            case Ranking.IMPORTANCE_NONE:
+                return mContext.getString(R.string.notification_importance_blocked);
+            case Ranking.IMPORTANCE_LOW:
+                return mContext.getString(R.string.notification_importance_low);
+            case Ranking.IMPORTANCE_DEFAULT:
+                return mContext.getString(R.string.notification_importance_default);
+            case Ranking.IMPORTANCE_HIGH:
+                return mContext.getString(R.string.notification_importance_high);
+            case Ranking.IMPORTANCE_MAX:
+                return mContext.getString(R.string.notification_importance_max);
+            case Ranking.IMPORTANCE_UNSPECIFIED:
+                return mContext.getString(R.string.notification_importance_none);
+            default:
+                return "";
         }
+    }
+
+    protected void setupPriorityPref(boolean priority) {
+        mPriority.setDisabledByAdmin(
+                RestrictedLockUtils.checkIfApplicationIsSuspended(mContext, mPkg, mUserId));
         mPriority.setChecked(priority);
         mPriority.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 final boolean bypassZenMode = (Boolean) newValue;
-                return mBackend.setBypassZenMode(mPkgInfo.packageName, mUid, topic, bypassZenMode);
+                return mBackend.setBypassZenMode(mPkgInfo.packageName, mUid, mTopic, bypassZenMode);
             }
         });
     }
 
-    protected void setupSensitivePref(final Notification.Topic topic, boolean sensitive) {
-        if (mSensitive == null) {
-            mSensitive = new RestrictedSwitchPreference(getPrefContext());
-            mSensitive.setDisabledByAdmin(
-                    RestrictedLockUtils.checkIfApplicationIsSuspended(mContext, mPkg, mUserId));
-            mSensitive.setTitle(R.string.app_notification_sensitive_title);
-            mSensitive.setSummary(R.string.app_notification_sensitive_summary);
-            mSensitive.setKey(KEY_SENSITIVE);
-            getPreferenceScreen().addPreference(mSensitive);
-        }
+    protected void setupSensitivePref(boolean sensitive) {
+        mSensitive.setDisabledByAdmin(
+                RestrictedLockUtils.checkIfApplicationIsSuspended(mContext, mPkg, mUserId));
         mSensitive.setChecked(sensitive);
         mSensitive.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 final boolean sensitive = (Boolean) newValue;
-                return mBackend.setSensitive(mPkgInfo.packageName, mUid, topic, sensitive);
+                return mBackend.setSensitive(mPkgInfo.packageName, mUid, mTopic, sensitive);
             }
         });
     }
@@ -239,4 +270,18 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
         }
         return null;
     }
+
+    private Preference.OnPreferenceClickListener showEditableImportance =
+            new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    mBackend.setImportance(mPkg, mUid, mTopic, Ranking.IMPORTANCE_DEFAULT);
+                    mImportance.setProgress(Ranking.IMPORTANCE_DEFAULT);
+                    mImportanceTitle.setSummary(getProgressSummary(Ranking.IMPORTANCE_DEFAULT));
+                    mImportance.setVisible(true);
+                    mImportanceReset.setVisible(true);
+                    mImportanceTitle.setOnPreferenceClickListener(null);
+                    return true;
+                }
+            };
 }

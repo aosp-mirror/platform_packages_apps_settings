@@ -22,6 +22,47 @@
     <Preference
             android:key="app_settings"
             android:title="@string/app_notification_preferences"
-            android:persistent="false" />
+            android:order="1" />
+
+    <!-- Apps without topics -->
+    <!-- Importance -->
+    <Preference
+            android:key="importance_title"
+            android:title="@string/notification_importance_title"
+            android:order="2" />
+    <com.android.settings.notification.ImportanceSeekBarPreference
+            android:key="importance"
+            android:order="3"/>
+
+    <com.android.settings.applications.LayoutPreference
+            android:key="importance_reset_button"
+            android:layout="@layout/two_buttons_panel"
+            android:order="4" />
+
+    <!-- Sensitive -->
+    <com.android.settingslib.RestrictedSwitchPreference
+            android:key="sensitive"
+            android:title="@string/app_notification_sensitive_title"
+            android:summary="@string/app_notification_sensitive_summary"
+            android:order="5" />
+
+    <!-- Bypass DND -->
+    <com.android.settingslib.RestrictedSwitchPreference
+            android:key="bypass_dnd"
+            android:title="@string/app_notification_override_dnd_title"
+            android:summary="@string/app_notification_override_dnd_summary"
+            android:order="6" />
+
+    <!-- Apps with topics -->
+    <!-- Block -->
+    <com.android.settingslib.RestrictedSwitchPreference
+            android:key="block"
+            android:title="@string/app_notification_block_title"
+            android:summary="@string/app_notification_block_summary"
+            android:order="7" />
+    <PreferenceCategory
+            android:key="categories"
+            android:title="@string/notification_topic_categories"
+            android:order="8" />
 
 </PreferenceScreen>

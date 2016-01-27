@@ -20,34 +20,19 @@ import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.AppHeader;
 import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.applications.AppInfoBase;
+import com.android.settings.applications.LayoutPreference;
 import com.android.settings.notification.NotificationBackend.TopicRow;
 import com.android.settingslib.RestrictedSwitchPreference;
 
-import android.app.Notification;
 import android.app.NotificationManager;
-import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
-import android.service.notification.NotificationListenerService;
 import android.service.notification.NotificationListenerService.Ranking;
-import android.support.v14.preference.SwitchPreference;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.Preference.OnPreferenceChangeListener;
-import android.util.Log;
-import android.widget.Toast;
 
 /** These settings are per topic, so should not be returned in global search results. */
 public class TopicNotificationSettings extends NotificationSettingsBase {
     private static final String TAG = "TopicNotiSettings";
-
-    protected static final String ARG_TOPIC = "arg_topic";
-
     private TopicRow mTopicRow;
     private boolean mDndVisualEffectsSuppressed;
 
@@ -72,25 +57,23 @@ public class TopicNotificationSettings extends NotificationSettingsBase {
                 NotificationManager.from(mContext).getNotificationPolicy();
         mDndVisualEffectsSuppressed = policy == null ? false : policy.suppressedVisualEffects != 0;
 
-        Bundle args = getArguments();
-        final Notification.Topic topic = args != null && args.containsKey(ARG_TOPIC)
-                ? (Notification.Topic) args.getParcelable(ARG_TOPIC) : null;
-        if (topic == null) {
+        if (mTopic == null) {
             toastAndFinish();
             return;
         }
 
         addPreferencesFromResource(R.xml.topic_notification_settings);
-        mTopicRow = mBackend.loadTopicRow(mPm, mPkgInfo, topic);
+        mTopicRow = mBackend.loadTopicRow(mPm, mPkgInfo, mTopic);
 
         mImportance = (ImportanceSeekBarPreference) findPreference(KEY_IMPORTANCE);
-        setupImportancePref(mTopicRow, mTopicRow.topic, mTopicRow.importance);
-
+        mImportanceReset = (LayoutPreference) findPreference(KEY_IMPORTANCE_RESET);
+        mImportanceTitle = findPreference(KEY_IMPORTANCE_TITLE);
         mPriority = (RestrictedSwitchPreference) findPreference(KEY_BYPASS_DND);
-        setupPriorityPref(mTopicRow.topic, mTopicRow.priority);
-
         mSensitive = (RestrictedSwitchPreference) findPreference(KEY_SENSITIVE);
-        setupSensitivePref(mTopicRow.topic, mTopicRow.sensitive);
+
+        setupImportancePrefs(mTopicRow.systemApp, mTopicRow.importance);
+        setupPriorityPref(mTopicRow.priority);
+        setupSensitivePref(mTopicRow.sensitive);
 
         updateDependents(mTopicRow.importance);
     }
@@ -102,11 +85,17 @@ public class TopicNotificationSettings extends NotificationSettingsBase {
         final boolean lockscreenNotificationsEnabled = getLockscreenNotificationsEnabled();
         final boolean allowPrivate = getLockscreenAllowPrivateNotifications();
 
-
-        setVisible(mPriority, importance > NotificationListenerService.Ranking.IMPORTANCE_DEFAULT
+        setVisible(mPriority, checkCanBeVisible(Ranking.IMPORTANCE_DEFAULT, importance)
                 && !mDndVisualEffectsSuppressed);
-        setVisible(mSensitive, (importance > NotificationListenerService.Ranking.IMPORTANCE_LOW)
+        setVisible(mSensitive, checkCanBeVisible(Ranking.IMPORTANCE_LOW, importance)
                 && lockscreenSecure && lockscreenNotificationsEnabled && allowPrivate);
+    }
+
+    protected boolean checkCanBeVisible(int minImportanceVisible, int importance) {
+        if (importance == Ranking.IMPORTANCE_UNSPECIFIED) {
+            return true;
+        }
+        return importance > minImportanceVisible;
     }
 
     private boolean getLockscreenNotificationsEnabled() {

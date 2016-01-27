@@ -20,12 +20,10 @@ import com.android.settings.R;
 import com.android.settings.SeekBarPreference;
 
 import android.content.Context;
-import android.service.notification.NotificationListenerService;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 import android.widget.SeekBar;
-import android.widget.TextView;
 
 /**
  * A slider preference that controls notification importance.
@@ -35,8 +33,6 @@ public class ImportanceSeekBarPreference extends SeekBarPreference implements
     private static final String TAG = "ImportanceSeekBarPref";
 
     private Callback mCallback;
-    private TextView mSummaryTextView;
-    private String mSummary;
     private int mMinProgress;
     private boolean mSystemApp;
 
@@ -64,6 +60,7 @@ public class ImportanceSeekBarPreference extends SeekBarPreference implements
 
     public void setMinimumProgress(int minProgress) {
         mMinProgress = minProgress;
+        notifyChanged();
     }
 
     public void setSystemApp(boolean systemApp) {
@@ -74,17 +71,12 @@ public class ImportanceSeekBarPreference extends SeekBarPreference implements
     @Override
     public void onBindViewHolder(PreferenceViewHolder view) {
         super.onBindViewHolder(view);
-        mSummaryTextView = (TextView) view.findViewById(com.android.internal.R.id.summary);
         if (mSystemApp) {
             ((ImageView) view.findViewById(R.id.low_importance)).getDrawable().setTint(
                     getContext().getColor(R.color.importance_disabled_tint));
         }
-    }
-
-    @Override
-    public void setProgress(int progress) {
-        mSummary = getProgressSummary(progress);
-        super.setProgress(progress);
+        view.setDividerAllowedAbove(false);
+        view.setDividerAllowedBelow(false);
     }
 
     @Override
@@ -94,34 +86,8 @@ public class ImportanceSeekBarPreference extends SeekBarPreference implements
             seekBar.setProgress(mMinProgress);
             progress = mMinProgress;
         }
-        mSummary = getProgressSummary(progress);
-        if (mSummaryTextView != null) {
-            mSummaryTextView.setText(mSummary);
-        }
         if (fromTouch) {
             mCallback.onImportanceChanged(progress);
-        }
-    }
-
-    @Override
-    public CharSequence getSummary() {
-        return mSummary;
-    }
-
-    private String getProgressSummary(int progress) {
-        switch (progress) {
-            case NotificationListenerService.Ranking.IMPORTANCE_NONE:
-                return getContext().getString(R.string.notification_importance_blocked);
-            case NotificationListenerService.Ranking.IMPORTANCE_LOW:
-                return getContext().getString(R.string.notification_importance_low);
-            case NotificationListenerService.Ranking.IMPORTANCE_DEFAULT:
-                return getContext().getString(R.string.notification_importance_default);
-            case NotificationListenerService.Ranking.IMPORTANCE_HIGH:
-                return getContext().getString(R.string.notification_importance_high);
-            case NotificationListenerService.Ranking.IMPORTANCE_MAX:
-                return getContext().getString(R.string.notification_importance_max);
-            default:
-                return "";
         }
     }
 

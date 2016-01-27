@@ -22,8 +22,7 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
-import android.service.notification.NotificationListenerService;
-import android.support.v14.preference.SwitchPreference;
+import android.service.notification.NotificationListenerService.Ranking;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
@@ -37,6 +36,7 @@ import com.android.settings.AppHeader;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.applications.AppInfoBase;
+import com.android.settings.applications.LayoutPreference;
 import com.android.settings.notification.NotificationBackend.AppRow;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
@@ -79,7 +79,16 @@ public class AppNotificationSettings extends NotificationSettingsBase {
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.app_notification_settings);
-        getPreferenceScreen().setOrderingAsAdded(true);
+        mCategories = (PreferenceCategory) findPreference(KEY_CATEGORIES);
+        mBlock = (RestrictedSwitchPreference) findPreference(KEY_BLOCK);
+        mImportance = (ImportanceSeekBarPreference) findPreference(KEY_IMPORTANCE);
+        mImportanceReset = (LayoutPreference) findPreference(KEY_IMPORTANCE_RESET);
+        mImportanceTitle = findPreference(KEY_IMPORTANCE_TITLE);
+        mPriority =
+                (RestrictedSwitchPreference) getPreferenceScreen().findPreference(KEY_BYPASS_DND);
+        mSensitive =
+                (RestrictedSwitchPreference) getPreferenceScreen().findPreference(KEY_SENSITIVE);
+
         mAppRow = mBackend.loadAppRow(mPm, mPkgInfo);
 
         // load settings intent
@@ -90,16 +99,13 @@ public class AppNotificationSettings extends NotificationSettingsBase {
         // Add topics
         List<Notification.Topic> topics = mBackend.getTopics(mPkg, mUid);
         if (topics.size() <= 1) {
-            setupImportancePref(mAppRow, null, mAppRow.appImportance);
-            setupPriorityPref(null, mAppRow.appBypassDnd);
-            setupSensitivePref(null, mAppRow.appSensitive);
+            removeAppPrefs();
+            setupImportancePrefs(mAppRow.systemApp, mAppRow.appImportance);
+            setupPriorityPref(mAppRow.appBypassDnd);
+            setupSensitivePref(mAppRow.appSensitive);
         } else {
+            removeTopicPrefs();
             setupBlockSwitch();
-            mCategories = new PreferenceCategory(getPrefContext());
-            mCategories.setKey(KEY_CATEGORIES);
-            mCategories.setTitle(R.string.notification_topic_categories);
-            mCategories.setOrderingAsAdded(true);
-            getPreferenceScreen().addPreference(mCategories);
             for (Notification.Topic topic : topics) {
                 RestrictedPreference topicPreference = new RestrictedPreference(getPrefContext());
                 topicPreference.setDisabledByAdmin(
@@ -138,22 +144,28 @@ public class AppNotificationSettings extends NotificationSettingsBase {
 
     @Override
     protected void updateDependents(int progress) {
-        updateDependents(progress == NotificationListenerService.Ranking.IMPORTANCE_NONE);
+        updateDependents(progress == Ranking.IMPORTANCE_NONE);
+    }
+
+    private void removeTopicPrefs() {
+        setVisible(mImportance, false);
+        setVisible(mImportanceReset, false);
+        setVisible(mImportanceTitle, false);
+        setVisible(mPriority, false);
+        setVisible(mSensitive, false);
+    }
+
+    private void removeAppPrefs() {
+        setVisible(mBlock, false);
+        setVisible(mCategories, false);
     }
 
     private void updateDependents(boolean banned) {
-        if (mBlock != null) {
-            mBlock.setEnabled(!mAppRow.systemApp);
-            mBlock.setDisabledByAdmin(
-                    RestrictedLockUtils.checkIfApplicationIsSuspended(mContext, mPkg, mUserId));
-        }
-        if (mCategories != null) {
-            setVisible(mCategories, !banned);
-        }
+        mBlock.setEnabled(!mAppRow.systemApp);
+        mCategories.setEnabled(!banned);
     }
 
     private void setupBlockSwitch() {
-        mBlock = new RestrictedSwitchPreference(getPrefContext());
         mBlock.setDisabledByAdmin(
                 RestrictedLockUtils.checkIfApplicationIsSuspended(mContext, mPkg, mUserId));
         mBlock.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
@@ -170,10 +182,6 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                 return success;
             }
         });
-        mBlock.setKey(KEY_BLOCK);
-        mBlock.setTitle(R.string.app_notification_block_title);
-        mBlock.setSummary(R.string.app_notification_block_summary);
-        getPreferenceScreen().addPreference(mBlock);
         mBlock.setChecked(mAppRow.banned);
         updateDependents(mAppRow.banned);
     }
