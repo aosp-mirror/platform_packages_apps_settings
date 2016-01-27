@@ -86,6 +86,9 @@ public class FingerprintEnrollIntroduction extends FingerprintEnrollBase {
         if (token != null) {
             intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
         }
+        if (mUserId != UserHandle.USER_NULL) {
+            intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
+        }
         startActivityForResult(intent, FINGERPRINT_FIND_SENSOR_REQUEST);
     }
 
@@ -95,9 +98,6 @@ public class FingerprintEnrollIntroduction extends FingerprintEnrollBase {
 
     protected Intent getFindSensorIntent() {
         Intent intent = new Intent(this, FingerprintEnrollFindSensor.class);
-        if (mUserId != UserHandle.USER_NULL) {
-            intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
-        }
         return intent;
     }
 

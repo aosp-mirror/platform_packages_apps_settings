@@ -18,6 +18,7 @@ package com.android.settings.fingerprint;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.os.UserHandle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -35,6 +36,9 @@ public class SetupFingerprintEnrollFinish extends FingerprintEnrollFinish
     protected Intent getEnrollingIntent() {
         Intent intent = new Intent(this, SetupFingerprintEnrollEnrolling.class);
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
+        if (mUserId != UserHandle.USER_NULL) {
+            intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
+        }
         SetupWizardUtils.copySetupExtras(getIntent(), intent);
         return intent;
     }
