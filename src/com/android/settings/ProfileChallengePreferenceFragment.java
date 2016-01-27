@@ -238,7 +238,8 @@ public class ProfileChallengePreferenceFragment extends SettingsPreferenceFragme
 
     private void maybeAddUnificationPreference(PreferenceGroup securityCategory) {
         if (mLockPatternUtils.getKeyguardStoredPasswordQuality(mProfileUserId)
-                >= DevicePolicyManager.PASSWORD_QUALITY_SOMETHING) {
+                >= DevicePolicyManager.PASSWORD_QUALITY_SOMETHING
+                && mLockPatternUtils.isSeparateProfileChallengeAllowedToUnify(mProfileUserId)) {
             Preference unificationPreference = new Preference(securityCategory.getContext());
             unificationPreference.setKey(KEY_UNIFICATION);
             unificationPreference.setTitle(R.string.lock_settings_profile_unification_title);
