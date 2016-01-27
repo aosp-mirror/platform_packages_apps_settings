@@ -24,13 +24,16 @@
 
     <PreferenceCategory android:key="tts_general_section"
          android:title="@string/tts_general_section_title">
-        <ListPreference
+        <com.android.settings.SeekBarPreference
             android:key="tts_default_rate"
             android:title="@string/tts_default_rate_title"
             android:summary="@string/tts_default_rate_summary"
             android:persistent="false"
-            android:entries="@array/tts_rate_entries"
-            android:entryValues="@array/tts_rate_values" />
+            android:defaultValue="50"
+            android:max="400" />
+        <SwitchPreference
+            android:key="tts_default_higher_speech_rate_enabled"
+            android:title="Higher speech rate" />
     </PreferenceCategory>
 
     <Preference android:key="tts_play_example"
