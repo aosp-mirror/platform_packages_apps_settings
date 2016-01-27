@@ -38,8 +38,6 @@ import android.view.InputDevice;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.view.inputmethod.InputMethodSubtype;
-import android.widget.Toast;
-
 import com.android.internal.inputmethod.InputMethodUtils;
 import com.android.internal.util.Preconditions;
 import com.android.settings.R;
@@ -59,7 +57,6 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
     private static final int USER_SYSTEM = 0;
     private static final String KEYBOARD_ASSISTANCE_CATEGORY = "keyboard_assistance_category";
     private static final String SHOW_VIRTUAL_KEYBOARD_SWITCH = "show_virtual_keyboard_switch";
-    private static final String KEYBOARD_SHORTCUTS_HELPER = "keyboard_shortcuts_helper";
     private static final String IM_SUBTYPE_MODE_KEYBOARD = "keyboard";
 
     private final HashMap<Integer, Pair<InputDeviceIdentifier, PreferenceCategory>> mLoaderReference
@@ -88,14 +85,6 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         mShowVirtualKeyboardSwitch = Preconditions.checkNotNull(
                 (SwitchPreference) mKeyboardAssistanceCategory.findPreference(
                         SHOW_VIRTUAL_KEYBOARD_SWITCH));
-        findPreference(KEYBOARD_SHORTCUTS_HELPER).setOnPreferenceClickListener(
-                new Preference.OnPreferenceClickListener() {
-                    @Override
-                    public boolean onPreferenceClick(Preference preference) {
-                        toggleKeyboardShortcutsMenu();
-                        return true;
-                    }
-                });
     }
 
     @Override
@@ -252,11 +241,6 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
 
     private void updateShowVirtualKeyboardSwitch() {
         mShowVirtualKeyboardSwitch.setChecked(mSettings.isShowImeWithHardKeyboardEnabled());
-    }
-
-    private void toggleKeyboardShortcutsMenu() {
-        // TODO: Implement.
-        Toast.makeText(getActivity(), "toggleKeyboardShortcutsMenu", Toast.LENGTH_SHORT).show();
     }
 
     private final OnPreferenceChangeListener mShowVirtualKeyboardSwitchPreferenceChangeListener =
