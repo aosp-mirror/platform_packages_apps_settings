@@ -316,6 +316,7 @@ public class SettingsActivity extends SettingsDrawerActivity
             DrawOverlayDetails.class.getName(),
             WriteSettingsDetails.class.getName(),
             ManageDefaultApps.class.getName(),
+            WallpaperTypeSettings.class.getName(),
     };
 
 

@@ -103,6 +103,7 @@ public class Settings extends SettingsActivity {
     public static class ZenModeSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ZenModePrioritySettingsActivity extends SettingsActivity { /* empty */ }
     public static class ZenModeAutomationSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class ZenModeAutomationSuggestionActivity extends SettingsActivity { /* empty */ }
     public static class ZenModeScheduleRuleSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ZenModeEventRuleSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ZenModeExternalRuleSettingsActivity extends SettingsActivity { /* empty */ }
@@ -123,6 +124,8 @@ public class Settings extends SettingsActivity {
     public static class AppDrawOverlaySettingsActivity extends SettingsActivity { /* empty */ }
     public static class AppWriteSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ManageDefaultAppsActivity extends SettingsActivity { /* empty */ }
+
+    public static class WallpaperSuggestionActivity extends SettingsActivity { /* empty */ }
 
     // Categories.
     public static class WirelessSettings extends SettingsActivity { /* empty */ }
