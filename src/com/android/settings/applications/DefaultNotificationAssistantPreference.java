@@ -25,6 +25,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
+import android.os.UserManager;
 import android.provider.Settings;
 import android.service.notification.NotificationAssistantService;
 import android.util.AttributeSet;
@@ -34,6 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.notification.ManagedServiceSettings;
 
 public class DefaultNotificationAssistantPreference extends AppListPreference {
@@ -107,5 +109,9 @@ public class DefaultNotificationAssistantPreference extends AppListPreference {
         c.warningDialogSummary = R.string.notification_listener_security_warning_summary;
         c.emptyText = R.string.no_notification_listeners;
         return c;
+    }
+
+    public static boolean isAvailable(Context context) {
+        return !Utils.isManagedProfile(UserManager.get(context));
     }
 }

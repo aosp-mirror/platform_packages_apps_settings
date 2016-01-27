@@ -33,8 +33,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.UserHandle;
-import android.os.UserManager;
 import android.print.PrintJob;
 import android.print.PrintJobId;
 import android.print.PrintJobInfo;
@@ -52,22 +50,18 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.android.internal.content.PackageMonitor;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.DialogCreatable;
 import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.utils.ProfileSettingsPreferenceFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
-import com.android.settingslib.drawer.UserAdapter;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -76,8 +70,8 @@ import java.util.List;
 /**
  * Fragment with the top level print settings.
  */
-public class PrintSettingsFragment extends SettingsPreferenceFragment
-        implements DialogCreatable, Indexable, OnItemSelectedListener, OnClickListener {
+public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
+        implements DialogCreatable, Indexable, OnClickListener {
     public static final String TAG = "PrintSettingsFragment";
     private static final int LOADER_ID_PRINT_JOBS_LOADER = 1;
 
@@ -122,8 +116,6 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
     private PreferenceCategory mPrintServicesCategory;
 
     private PrintJobsController mPrintJobsController;
-    private UserAdapter mProfileSpinnerAdapter;
-    private Spinner mSpinner;
     private Button mAddNewServiceButton;
 
     @Override
@@ -188,14 +180,11 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
 
         contentRoot.addView(emptyView);
         setEmptyView(emptyView);
+    }
 
-        final UserManager um = (UserManager) getSystemService(Context.USER_SERVICE);
-        mProfileSpinnerAdapter = UserAdapter.createUserSpinnerAdapter(um, getActivity());
-        if (mProfileSpinnerAdapter != null) {
-            mSpinner = (Spinner) setPinnedHeaderView(R.layout.spinner_view);
-            mSpinner.setAdapter(mProfileSpinnerAdapter);
-            mSpinner.setOnItemSelectedListener(this);
-        }
+    @Override
+    protected String getIntentActionString() {
+        return Settings.ACTION_PRINT_SETTINGS;
     }
 
     private void updateServicesPreferences() {
@@ -324,24 +313,6 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
                 prereference.performClick();
             }
         }
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        UserHandle selectedUser = mProfileSpinnerAdapter.getUserHandle(position);
-        if (selectedUser.getIdentifier() != UserHandle.myUserId()) {
-            Intent intent = new Intent(Settings.ACTION_PRINT_SETTINGS);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            getActivity().startActivityAsUser(intent, selectedUser);
-            // Go back to default selection, which is the first one
-            mSpinner.setSelection(0);
-        }
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-        // Nothing to do
     }
 
     @Override

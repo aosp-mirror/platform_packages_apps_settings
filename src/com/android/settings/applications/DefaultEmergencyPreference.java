@@ -24,6 +24,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.AsyncTask;
+import android.os.UserManager;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
@@ -31,6 +32,7 @@ import android.util.ArraySet;
 import android.util.AttributeSet;
 
 import com.android.settings.AppListPreference;
+import com.android.settings.Utils;
 
 import java.util.List;
 import java.util.Objects;
@@ -135,7 +137,8 @@ public class DefaultEmergencyPreference extends AppListPreference {
 
     public static boolean isAvailable(Context context) {
         return isCapable(context)
-                && context.getPackageManager().resolveActivity(QUERY_INTENT, 0) != null;
+                && context.getPackageManager().resolveActivity(QUERY_INTENT, 0) != null
+                && !Utils.isManagedProfile(UserManager.get(context)) ;
     }
 
     public static boolean isCapable(Context context) {
