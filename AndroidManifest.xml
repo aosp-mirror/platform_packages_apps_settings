@@ -1539,6 +1539,22 @@
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:theme="@style/Theme.ConfirmDeviceCredentials"/>
 
+        <activity
+            android:name=".Settings$FingerprintSuggestionActivity"
+            android:label="@string/security_settings_fingerprint_preference_title"
+            android:icon="@drawable/ic_fingerprint">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.android.settings.suggested.category.SETTINGS_ONLY" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.dismiss"
+                android:value="10,30" />
+            <meta-data android:name="com.android.settings.require_feature"
+                android:value="android.hardware.fingerprint" />
+            <meta-data android:name="com.android.settings.title"
+                android:resource="@string/suggestion_additional_fingerprints" />
+        </activity>
+
         <activity android:name=".fingerprint.FingerprintSettings" android:exported="false"/>
         <activity android:name=".fingerprint.FingerprintEnrollFindSensor" android:exported="false"/>
         <activity android:name=".fingerprint.FingerprintEnrollEnrolling" android:exported="false"/>
@@ -2664,6 +2680,22 @@
                        android:value="com.android.settings.WifiCallingSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
+        </activity>
+
+        <activity android:name="Settings$WifiCallingSuggestionActivity"
+                  android:label="@string/wifi_calling_settings_title"
+                  android:icon="@drawable/ic_settings_wireless"
+                  android:taskAffinity="">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.android.settings.suggested.category.SETTINGS_ONLY" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.WifiCallingSettings" />
+            <meta-data android:name="com.android.settings.dismiss"
+                android:value="10" />
+            <meta-data android:name="com.android.settings.title"
+                android:resource="@string/wifi_calling_suggestion_title" />
         </activity>
 
         <provider

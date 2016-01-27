@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import com.android.settings.applications.AppOpsSummary;
+import com.android.settings.fingerprint.FingerprintSettings;
 
 /**
  * Top-level Settings activity
@@ -103,7 +104,6 @@ public class Settings extends SettingsActivity {
     public static class ZenModeSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ZenModePrioritySettingsActivity extends SettingsActivity { /* empty */ }
     public static class ZenModeAutomationSettingsActivity extends SettingsActivity { /* empty */ }
-    public static class ZenModeAutomationSuggestionActivity extends SettingsActivity { /* empty */ }
     public static class ZenModeScheduleRuleSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ZenModeEventRuleSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ZenModeExternalRuleSettingsActivity extends SettingsActivity { /* empty */ }
@@ -125,7 +125,10 @@ public class Settings extends SettingsActivity {
     public static class AppWriteSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ManageDefaultAppsActivity extends SettingsActivity { /* empty */ }
 
+    public static class WifiCallingSuggestionActivity extends SettingsActivity { /* empty */ }
+    public static class ZenModeAutomationSuggestionActivity extends SettingsActivity { /* empty */ }
     public static class WallpaperSuggestionActivity extends SettingsActivity { /* empty */ }
+    public static class FingerprintSuggestionActivity extends FingerprintSettings { /* empty */ }
 
     // Categories.
     public static class WirelessSettings extends SettingsActivity { /* empty */ }
