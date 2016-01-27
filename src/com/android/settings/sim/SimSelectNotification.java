@@ -87,9 +87,9 @@ public class SimSelectNotification extends BroadcastReceiver {
         subscriptionManager.clearDefaultsForInactiveSubIds();
 
         boolean dataSelected = SubscriptionManager.isUsableSubIdValue(
-                SubscriptionManager.getDefaultDataSubId());
+                SubscriptionManager.getDefaultDataSubscriptionId());
         boolean smsSelected = SubscriptionManager.isUsableSubIdValue(
-                SubscriptionManager.getDefaultSmsSubId());
+                SubscriptionManager.getDefaultSmsSubscriptionId());
 
         // If data and sms defaults are selected, dont show notification (Calls default is optional)
         if (dataSelected && smsSelected) {

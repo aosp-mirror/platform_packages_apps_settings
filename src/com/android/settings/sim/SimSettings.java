@@ -300,7 +300,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
     private String getPhoneNumber(SubscriptionInfo info) {
         final TelephonyManager tm =
             (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
-        return tm.getLine1NumberForSubscriber(info.getSubscriptionId());
+        return tm.getLine1Number(info.getSubscriptionId());
     }
 
     private void log(String s) {

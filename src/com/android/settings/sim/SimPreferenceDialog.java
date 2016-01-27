@@ -135,16 +135,14 @@ public class SimPreferenceDialog extends Activity {
         final TelephonyManager tm = (TelephonyManager) mContext.getSystemService(
                 Context.TELEPHONY_SERVICE);
         TextView numberView = (TextView)mDialogLayout.findViewById(R.id.number);
-        final String rawNumber =  tm.getLine1NumberForSubscriber(
-                mSubInfoRecord.getSubscriptionId());
+        final String rawNumber =  tm.getLine1Number(mSubInfoRecord.getSubscriptionId());
         if (TextUtils.isEmpty(rawNumber)) {
             numberView.setText(res.getString(com.android.internal.R.string.unknownName));
         } else {
             numberView.setText(PhoneNumberUtils.formatNumber(rawNumber));
         }
 
-        String simCarrierName = tm.getSimOperatorNameForSubscription(mSubInfoRecord
-                .getSubscriptionId());
+        String simCarrierName = tm.getSimOperatorName(mSubInfoRecord.getSubscriptionId());
         TextView carrierView = (TextView)mDialogLayout.findViewById(R.id.carrier);
         carrierView.setText(!TextUtils.isEmpty(simCarrierName) ? simCarrierName :
                 mContext.getString(com.android.internal.R.string.unknownName));
