@@ -286,7 +286,6 @@ public class FingerprintSettings extends SubSettings {
             mUserId = getActivity().getIntent().getIntExtra(
                     Intent.EXTRA_USER_ID, UserHandle.myUserId());
 
-
             Activity activity = getActivity();
             mFingerprintManager = (FingerprintManager) activity.getSystemService(
                     Context.FINGERPRINT_SERVICE);
@@ -536,16 +535,17 @@ public class FingerprintSettings extends SubSettings {
                 intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, true);
                 intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
                 intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, challenge);
+                intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
                 startActivityForResult(intent, CHOOSE_LOCK_GENERIC_REQUEST);
             }
         }
 
         private void deleteFingerPrint(Fingerprint fingerPrint) {
-            mFingerprintManager.remove(fingerPrint, mRemoveCallback);
+            mFingerprintManager.remove(fingerPrint, mUserId, mRemoveCallback);
         }
 
         private void renameFingerPrint(int fingerId, String newName) {
-            mFingerprintManager.rename(fingerId, newName);
+            mFingerprintManager.rename(fingerId, mUserId, newName);
             updatePreferences();
         }
 
