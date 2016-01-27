@@ -158,6 +158,8 @@ public class WifiSettings extends RestrictedSettingsFragment
     private AccessPointPreference.UserBadgeCache mUserBadgeCache;
     private Preference mAddPreference;
 
+    private MenuItem mScanMenuItem;
+
     /* End of "used in Wifi Setup context" */
 
     public WifiSettings() {
@@ -324,6 +326,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         }
 
         mWifiTracker.startTracking();
+        activity.invalidateOptionsMenu();
     }
 
     @Override
@@ -350,8 +353,8 @@ public class WifiSettings extends RestrictedSettingsFragment
      */
     void addOptionsMenuItems(Menu menu) {
         final boolean wifiIsEnabled = mWifiTracker.isWifiEnabled();
-        menu.add(Menu.NONE, MENU_ID_SCAN, 0, R.string.menu_stats_refresh)
-               .setEnabled(wifiIsEnabled)
+        mScanMenuItem = menu.add(Menu.NONE, MENU_ID_SCAN, 0, R.string.menu_stats_refresh);
+        mScanMenuItem.setEnabled(wifiIsEnabled)
                .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
         menu.add(Menu.NONE, MENU_ID_ADVANCED, 0, R.string.wifi_menu_advanced)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
@@ -689,6 +692,9 @@ public class WifiSettings extends RestrictedSettingsFragment
                     getPreferenceScreen().addPreference(mAddPreference);
                     setProgressBarVisible(false);
                 }
+                if (mScanMenuItem != null) {
+                    mScanMenuItem.setEnabled(true);
+                }
                 break;
 
             case WifiManager.WIFI_STATE_ENABLING:
@@ -704,6 +710,9 @@ public class WifiSettings extends RestrictedSettingsFragment
             case WifiManager.WIFI_STATE_DISABLED:
                 setOffMessage();
                 setProgressBarVisible(false);
+                if (mScanMenuItem != null) {
+                    mScanMenuItem.setEnabled(false);
+                }
                 break;
         }
     }
