@@ -57,6 +57,29 @@ public abstract class PreviewSeekBarPreferenceFragment extends SettingsPreferenc
     private View mLarger;
     private View mSmaller;
 
+    private class onPreviewSeekBarChangeListener implements OnSeekBarChangeListener {
+        private boolean mSeekByTouch;
+
+        @Override
+        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            setPreviewLayer(progress, true);
+            if (!mSeekByTouch) {
+                commit();
+            }
+        }
+
+        @Override
+        public void onStartTrackingTouch(SeekBar seekBar) {
+            mSeekByTouch = true;
+        }
+
+        @Override
+        public void onStopTrackingTouch(SeekBar seekBar) {
+            commit();
+            mSeekByTouch = false;
+        }
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -77,20 +100,7 @@ public abstract class PreviewSeekBarPreferenceFragment extends SettingsPreferenc
         final SeekBar seekBar = (SeekBar) content.findViewById(R.id.seek_bar);
         seekBar.setMax(max);
         seekBar.setProgress(mInitialIndex);
-        seekBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                setPreviewLayer(progress, true);
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-            }
-        });
+        seekBar.setOnSeekBarChangeListener(new onPreviewSeekBarChangeListener());
 
         mSmaller = content.findViewById(R.id.smaller);
         mSmaller.setOnClickListener(new OnClickListener() {
