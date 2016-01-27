@@ -38,6 +38,10 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.notification.NotificationBackend.AppRow;
+import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedSwitchPreference;
+import com.android.settingslib.RestrictedPreference;
+
 
 import java.util.List;
 
@@ -54,7 +58,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
             = new Intent(Intent.ACTION_MAIN)
                 .addCategory(Notification.INTENT_CATEGORY_NOTIFICATION_PREFERENCES);
 
-    private SwitchPreference mBlock;
+    private RestrictedSwitchPreference mBlock;
     private PreferenceCategory mCategories;
     private AppRow mAppRow;
 
@@ -97,7 +101,9 @@ public class AppNotificationSettings extends NotificationSettingsBase {
             mCategories.setOrderingAsAdded(true);
             getPreferenceScreen().addPreference(mCategories);
             for (Notification.Topic topic : topics) {
-                Preference topicPreference = new Preference(getPrefContext());
+                RestrictedPreference topicPreference = new RestrictedPreference(getPrefContext());
+                topicPreference.setDisabledByAdmin(
+                        RestrictedLockUtils.checkIfApplicationIsSuspended(mContext, mPkg, mUserId));
                 topicPreference.setKey(topic.getId());
                 topicPreference.setTitle(topic.getLabel());
                 // Create intent for this preference.
@@ -138,6 +144,8 @@ public class AppNotificationSettings extends NotificationSettingsBase {
     private void updateDependents(boolean banned) {
         if (mBlock != null) {
             mBlock.setEnabled(!mAppRow.systemApp);
+            mBlock.setDisabledByAdmin(
+                    RestrictedLockUtils.checkIfApplicationIsSuspended(mContext, mPkg, mUserId));
         }
         if (mCategories != null) {
             setVisible(mCategories, !banned);
@@ -145,7 +153,9 @@ public class AppNotificationSettings extends NotificationSettingsBase {
     }
 
     private void setupBlockSwitch() {
-        mBlock = new SwitchPreference(getPrefContext());
+        mBlock = new RestrictedSwitchPreference(getPrefContext());
+        mBlock.setDisabledByAdmin(
+                RestrictedLockUtils.checkIfApplicationIsSuspended(mContext, mPkg, mUserId));
         mBlock.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -153,7 +163,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                 if (banned) {
                     MetricsLogger.action(getActivity(), MetricsEvent.ACTION_BAN_APP_NOTES, mPkg);
                 }
-                final boolean success =  mBackend.setNotificationsBanned(mPkg, mUid, banned);
+                final boolean success = mBackend.setNotificationsBanned(mPkg, mUid, banned);
                 if (success) {
                     updateDependents(banned);
                 }

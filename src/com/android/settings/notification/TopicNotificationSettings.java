@@ -23,6 +23,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.notification.NotificationBackend.TopicRow;
+import com.android.settingslib.RestrictedSwitchPreference;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -85,10 +86,10 @@ public class TopicNotificationSettings extends NotificationSettingsBase {
         mImportance = (ImportanceSeekBarPreference) findPreference(KEY_IMPORTANCE);
         setupImportancePref(mTopicRow, mTopicRow.topic, mTopicRow.importance);
 
-        mPriority = (SwitchPreference) findPreference(KEY_BYPASS_DND);
+        mPriority = (RestrictedSwitchPreference) findPreference(KEY_BYPASS_DND);
         setupPriorityPref(mTopicRow.topic, mTopicRow.priority);
 
-        mSensitive = (SwitchPreference) findPreference(KEY_SENSITIVE);
+        mSensitive = (RestrictedSwitchPreference) findPreference(KEY_SENSITIVE);
         setupSensitivePref(mTopicRow.topic, mTopicRow.sensitive);
 
         updateDependents(mTopicRow.importance);

@@ -19,6 +19,8 @@ package com.android.settings.notification;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.AppInfoBase;
+import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedSwitchPreference;
 
 import android.app.Notification;
 import android.content.Context;
@@ -27,6 +29,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.service.notification.NotificationListenerService.Ranking;
 import android.support.v14.preference.SwitchPreference;
@@ -34,6 +37,8 @@ import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
+
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 abstract public class NotificationSettingsBase extends SettingsPreferenceFragment {
     private static final String TAG = "NotifiSettingsBase";
@@ -50,11 +55,12 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
     protected Context mContext;
     protected boolean mCreated;
     protected int mUid;
+    protected int mUserId;
     protected String mPkg;
     protected PackageInfo mPkgInfo;
     protected ImportanceSeekBarPreference mImportance;
-    protected SwitchPreference mPriority;
-    protected SwitchPreference mSensitive;
+    protected RestrictedSwitchPreference mPriority;
+    protected RestrictedSwitchPreference mSensitive;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -94,6 +100,7 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
             toastAndFinish();
             return;
         }
+        mUserId = UserHandle.getUserId(mUid);
 
         if (DEBUG) Log.d(TAG, "Load details for pkg=" + mPkg + " uid=" + mUid);
         mPkgInfo = args != null && args.containsKey(ARG_PACKAGE_INFO)
@@ -112,9 +119,21 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
     @Override
     public void onResume() {
         super.onResume();
-        if (mUid != -1 && getPackageManager().getPackagesForUid(mUid) == null) {
+        if ((mUid != -1 && getPackageManager().getPackagesForUid(mUid) == null)) {
             // App isn't around anymore, must have been removed.
             finish();
+            return;
+        }
+        EnforcedAdmin admin = RestrictedLockUtils.checkIfApplicationIsSuspended(
+                mContext, mPkg, mUserId);
+        if (mImportance != null) {
+            mImportance.setDisabledByAdmin(admin);
+        }
+        if (mPriority != null) {
+            mPriority.setDisabledByAdmin(admin);
+        }
+        if (mSensitive != null) {
+            mSensitive.setDisabledByAdmin(admin);
         }
     }
 
@@ -122,6 +141,8 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
             final Notification.Topic topic, int importance) {
         if (mImportance == null) {
             mImportance = new ImportanceSeekBarPreference(getPrefContext());
+            mImportance.setDisabledByAdmin(
+                    RestrictedLockUtils.checkIfApplicationIsSuspended(mContext, mPkg, mUserId));
             mImportance.setTitle(R.string.notification_importance_title);
             mImportance.setKey(KEY_IMPORTANCE);
             getPreferenceScreen().addPreference(mImportance);
@@ -146,7 +167,9 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
 
     protected void setupPriorityPref(final Notification.Topic topic, boolean priority) {
         if (mPriority == null) {
-            mPriority = new SwitchPreference(getPrefContext());
+            mPriority = new RestrictedSwitchPreference(getPrefContext());
+            mPriority.setDisabledByAdmin(
+                    RestrictedLockUtils.checkIfApplicationIsSuspended(mContext, mPkg, mUserId));
             mPriority.setTitle(R.string.app_notification_override_dnd_title);
             mPriority.setSummary(R.string.app_notification_override_dnd_summary);
             mPriority.setKey(KEY_BYPASS_DND);
@@ -164,7 +187,9 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
 
     protected void setupSensitivePref(final Notification.Topic topic, boolean sensitive) {
         if (mSensitive == null) {
-            mSensitive = new SwitchPreference(getPrefContext());
+            mSensitive = new RestrictedSwitchPreference(getPrefContext());
+            mSensitive.setDisabledByAdmin(
+                    RestrictedLockUtils.checkIfApplicationIsSuspended(mContext, mPkg, mUserId));
             mSensitive.setTitle(R.string.app_notification_sensitive_title);
             mSensitive.setSummary(R.string.app_notification_sensitive_summary);
             mSensitive.setKey(KEY_SENSITIVE);
