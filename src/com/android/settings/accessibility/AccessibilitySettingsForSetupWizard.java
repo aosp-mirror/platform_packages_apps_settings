@@ -188,7 +188,7 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
         final Resources res = getContext().getResources();
         final String[] entries = res.getStringArray(R.array.entries_font_size);
         final String[] strEntryValues = res.getStringArray(R.array.entryvalues_font_size);
-        final int index = ToggleFontSizePreferenceFragment.floatToIndex(
+        final int index = ToggleFontSizePreferenceFragment.fontSizeValueToIndex(
                 res.getConfiguration().fontScale, strEntryValues);
         pref.setSummary(entries[index]);
     }

@@ -43,15 +43,14 @@
             android:key="font_size_preference_screen"
             android:title="@string/title_font_size"/>
 
+        <com.android.settings.display.ScreenZoomPreference
+            android:key="screen_zoom"
+            android:title="@string/screen_zoom_title"/>
+
         <PreferenceScreen
             android:fragment="com.android.settings.accessibility.ToggleAutoclickPreferenceFragment"
             android:key="autoclick_preference_screen"
             android:title="@string/accessibility_autoclick_preference_title"/>
-
-        <SwitchPreference
-                android:key="toggle_large_text_preference"
-                android:title="@string/accessibility_toggle_large_text_preference_title"
-                android:persistent="false"/>
 
         <SwitchPreference
                 android:key="toggle_high_text_contrast_preference"
