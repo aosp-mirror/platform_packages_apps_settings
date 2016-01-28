@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import com.android.settings.applications.AppOpsSummary;
+import com.android.settings.fingerprint.FingerprintEnrollIntroduction;
 import com.android.settings.fingerprint.FingerprintSettings;
 
 /**
@@ -129,6 +130,10 @@ public class Settings extends SettingsActivity {
     public static class ZenModeAutomationSuggestionActivity extends SettingsActivity { /* empty */ }
     public static class WallpaperSuggestionActivity extends SettingsActivity { /* empty */ }
     public static class FingerprintSuggestionActivity extends FingerprintSettings { /* empty */ }
+    public static class FingerprintEnrollSuggestionActivity extends FingerprintEnrollIntroduction {
+        /* empty */
+    }
+    public static class ScreenLockSuggestionActivity extends ChooseLockGeneric { /* empty */ }
 
     // Categories.
     public static class WirelessSettings extends SettingsActivity { /* empty */ }

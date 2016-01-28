@@ -24,11 +24,9 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.admin.DevicePolicyManager;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.hardware.fingerprint.Fingerprint;
 import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.fingerprint.FingerprintManager.RemovalCallback;
@@ -269,7 +267,6 @@ public class ChooseLockGeneric extends SettingsActivity {
                     || requestCode == ENABLE_ENCRYPTION_REQUEST) {
                 if (resultCode != RESULT_CANCELED) {
                     getActivity().setResult(resultCode, data);
-                    disableScreenLockSuggestion();
                     finish();
                 }
             } else {
@@ -548,28 +545,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                 getActivity().setResult(Activity.RESULT_OK);
             } else {
                 removeAllFingerprintTemplatesAndFinish();
-                disableScreenLockSuggestion();
             }
-        }
-
-        private void disableScreenLockSuggestion() {
-            final ComponentName suggestionChooseLock = new ComponentName("com.android.settings",
-                    "com.android.settings.suggestion.ChooseLockGeneric");
-            disableComponent(suggestionChooseLock);
-            PackageManager pm = getContext().getPackageManager();
-            if (pm.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)) {
-                final ComponentName suggestionFingerprint = new ComponentName(
-                        "com.android.settings",
-                        "com.android.settings.suggestion.FingerprintEnrollIntroduction");
-                disableComponent(suggestionFingerprint);
-            }
-        }
-
-        private void disableComponent(ComponentName componentName) {
-            getContext().getPackageManager().setComponentEnabledSetting(
-                    componentName,
-                    PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-                    PackageManager.DONT_KILL_APP);
         }
 
         private Intent getIntentForUnlockMethod(int quality, boolean disabled) {
