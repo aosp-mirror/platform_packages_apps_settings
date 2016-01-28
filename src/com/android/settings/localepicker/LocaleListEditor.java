@@ -155,7 +155,7 @@ public class LocaleListEditor extends SettingsPreferenceFragment
         final MenuItem menuItem =
                 menu.add(Menu.NONE, MENU_ID_REMOVE, 0, R.string.locale_remove_menu);
         menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-        menuItem.setIcon(android.R.drawable.ic_menu_delete);
+        menuItem.setIcon(R.drawable.ic_delete);
         super.onCreateOptionsMenu(menu, inflater);
         mMenu = menu;
     }
