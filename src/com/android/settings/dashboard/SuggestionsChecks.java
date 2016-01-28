@@ -18,6 +18,7 @@ import android.app.AutomaticZenRule;
 import android.app.IWallpaperManager;
 import android.app.IWallpaperManager.Stub;
 import android.app.IWallpaperManagerCallback;
+import android.app.KeyguardManager;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.hardware.fingerprint.FingerprintManager;
@@ -26,7 +27,9 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import com.android.ims.ImsManager;
+import com.android.settings.Settings.FingerprintEnrollSuggestionActivity;
 import com.android.settings.Settings.FingerprintSuggestionActivity;
+import com.android.settings.Settings.ScreenLockSuggestionActivity;
 import com.android.settings.Settings.WallpaperSuggestionActivity;
 import com.android.settings.Settings.WifiCallingSuggestionActivity;
 import com.android.settings.Settings.ZenModeAutomationSuggestionActivity;
@@ -55,8 +58,16 @@ public class SuggestionsChecks {
             return isWifiCallingUnavailableOrEnabled();
         } else if (className.equals(FingerprintSuggestionActivity.class.getName())) {
             return isNotSingleFingerprintEnrolled();
+        } else if (className.equals(ScreenLockSuggestionActivity.class.getName())
+                || className.equals(FingerprintEnrollSuggestionActivity.class.getName())) {
+            return isDeviceSecured();
         }
         return false;
+    }
+
+    private boolean isDeviceSecured() {
+        KeyguardManager km = mContext.getSystemService(KeyguardManager.class);
+        return km.isKeyguardSecure();
     }
 
     private boolean isNotSingleFingerprintEnrolled() {
