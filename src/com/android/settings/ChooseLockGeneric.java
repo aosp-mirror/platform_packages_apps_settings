@@ -37,6 +37,7 @@ import android.os.UserManager;
 import android.security.KeyStore;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
+import android.text.TextUtils;
 import android.util.EventLog;
 import android.util.Log;
 import android.view.View;
@@ -104,6 +105,7 @@ public class ChooseLockGeneric extends SettingsActivity {
         private boolean mEncryptionRequestDisabled;
         private boolean mRequirePassword;
         private boolean mForFingerprint = false;
+        private boolean mForChangeCredRequiredForBoot = false;
         private String mUserPassword;
         private LockPatternUtils mLockPatternUtils;
         private FingerprintManager mFingerprintManager;
@@ -157,6 +159,8 @@ public class ChooseLockGeneric extends SettingsActivity {
                     ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, 0);
             mForFingerprint = getActivity().getIntent().getBooleanExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, false);
+            mForChangeCredRequiredForBoot = getArguments() != null && getArguments().getBoolean(
+                    ChooseLockSettingsHelper.EXTRA_KEY_FOR_CHANGE_CRED_REQUIRED_FOR_BOOT);
 
             if (savedInstanceState != null) {
                 mPasswordConfirmed = savedInstanceState.getBoolean(PASSWORD_CONFIRMED);
@@ -183,6 +187,10 @@ public class ChooseLockGeneric extends SettingsActivity {
 
             if (mPasswordConfirmed) {
                 updatePreferencesOrFinish();
+                if (mForChangeCredRequiredForBoot) {
+                    maybeEnableEncryption(mLockPatternUtils.getKeyguardStoredPasswordQuality(
+                            mUserId), false);
+                }
             } else if (!mWaitingForConfirmation) {
                 ChooseLockSettingsHelper helper =
                         new ChooseLockSettingsHelper(this.getActivity(), this);
@@ -238,6 +246,9 @@ public class ChooseLockGeneric extends SettingsActivity {
                 // Get the intent that the encryption interstitial should start for creating
                 // the new unlock method.
                 Intent unlockMethodIntent = getIntentForUnlockMethod(quality, disabled);
+                unlockMethodIntent.putExtra(
+                        ChooseLockSettingsHelper.EXTRA_KEY_FOR_CHANGE_CRED_REQUIRED_FOR_BOOT,
+                        mForChangeCredRequiredForBoot);
                 final Context context = getActivity();
                 // If accessibility is enabled and the user hasn't seen this dialog before, set the
                 // default state to agree with that which is compatible with accessibility
@@ -250,6 +261,11 @@ public class ChooseLockGeneric extends SettingsActivity {
                         mForFingerprint);
                 startActivityForResult(intent, ENABLE_ENCRYPTION_REQUEST);
             } else {
+                if (mForChangeCredRequiredForBoot) {
+                    // Welp, couldn't change it. Oh well.
+                    finish();
+                    return;
+                }
                 mRequirePassword = false; // device encryption not enabled or not device owner.
                 updateUnlockMethodAndFinish(quality, disabled);
             }
@@ -263,6 +279,14 @@ public class ChooseLockGeneric extends SettingsActivity {
                 mPasswordConfirmed = true;
                 mUserPassword = data.getStringExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
                 updatePreferencesOrFinish();
+                if (mForChangeCredRequiredForBoot) {
+                    if (!TextUtils.isEmpty(mUserPassword)) {
+                        maybeEnableEncryption(
+                                mLockPatternUtils.getKeyguardStoredPasswordQuality(mUserId), false);
+                    } else {
+                        finish();
+                    }
+                }
             } else if (requestCode == CHOOSE_LOCK_REQUEST
                     || requestCode == ENABLE_ENCRYPTION_REQUEST) {
                 if (resultCode != RESULT_CANCELED) {
@@ -271,6 +295,9 @@ public class ChooseLockGeneric extends SettingsActivity {
                 }
             } else {
                 getActivity().setResult(Activity.RESULT_CANCELED);
+                finish();
+            }
+            if (requestCode == Activity.RESULT_CANCELED && mForChangeCredRequiredForBoot) {
                 finish();
             }
         }

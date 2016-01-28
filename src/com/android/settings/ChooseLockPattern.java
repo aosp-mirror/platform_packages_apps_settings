@@ -371,6 +371,19 @@ public class ChooseLockPattern extends SettingsActivity {
             Intent intent = getActivity().getIntent();
             // Only take this argument into account if it belongs to the current profile.
             mUserId = Utils.getUserIdFromBundle(getActivity(), intent.getExtras());
+
+            if (intent.getBooleanExtra(
+                    ChooseLockSettingsHelper.EXTRA_KEY_FOR_CHANGE_CRED_REQUIRED_FOR_BOOT, false)) {
+                SaveAndFinishWorker w = new SaveAndFinishWorker();
+                final boolean required = getActivity().getIntent().getBooleanExtra(
+                        EncryptionInterstitial.EXTRA_REQUIRE_PASSWORD, true);
+                String current = intent.getStringExtra(
+                        ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
+                w.setBlocking(true);
+                w.setListener(this);
+                w.start(mChooseLockSettingsHelper.utils(), required,
+                        false, 0, LockPatternUtils.stringToPattern(current), current, mUserId);
+            }
         }
 
         @Override

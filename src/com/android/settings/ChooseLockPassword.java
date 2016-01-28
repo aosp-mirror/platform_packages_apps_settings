@@ -267,6 +267,19 @@ public class ChooseLockPassword extends SettingsActivity {
                     mUserId));
 
             mChooseLockSettingsHelper = new ChooseLockSettingsHelper(getActivity());
+
+            if (intent.getBooleanExtra(
+                    ChooseLockSettingsHelper.EXTRA_KEY_FOR_CHANGE_CRED_REQUIRED_FOR_BOOT, false)) {
+                SaveAndFinishWorker w = new SaveAndFinishWorker();
+                final boolean required = getActivity().getIntent().getBooleanExtra(
+                        EncryptionInterstitial.EXTRA_REQUIRE_PASSWORD, true);
+                String current = intent.getStringExtra(
+                        ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
+                w.setBlocking(true);
+                w.setListener(this);
+                w.start(mChooseLockSettingsHelper.utils(), required,
+                        false, 0, current, current, mRequestedQuality, mUserId);
+            }
         }
 
         @Override

@@ -75,8 +75,8 @@ public class OwnerInfoSettings extends DialogFragment implements OnClickListener
             mLockPatternUtils.setOwnerInfoEnabled(!TextUtils.isEmpty(info), mUserId);
             mLockPatternUtils.setOwnerInfo(info, mUserId);
 
-            if (getTargetFragment() instanceof SecuritySettings) {
-                ((SecuritySettings) getTargetFragment()).updateOwnerInfo();
+            if (getTargetFragment() instanceof SecuritySettings.SecuritySubSettings) {
+                ((SecuritySettings.SecuritySubSettings) getTargetFragment()).updateOwnerInfo();
             }
         }
     }

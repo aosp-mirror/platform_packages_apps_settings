@@ -39,6 +39,8 @@ abstract class SaveChosenLockWorkerBase extends Fragment {
     protected boolean mWasSecureBefore;
     protected int mUserId;
 
+    private boolean mBlocking;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,7 +76,11 @@ abstract class SaveChosenLockWorkerBase extends Fragment {
     }
 
     protected void start() {
-        new Task().execute();
+        if (mBlocking) {
+            finish(saveAndVerifyInBackground());
+        } else {
+            new Task().execute();
+        }
     }
 
     /**
@@ -89,6 +95,10 @@ abstract class SaveChosenLockWorkerBase extends Fragment {
         if (mListener != null) {
             mListener.onChosenLockSaveFinished(mWasSecureBefore, mResultData);
         }
+    }
+
+    public void setBlocking(boolean blocking) {
+        mBlocking = blocking;
     }
 
     private class Task extends AsyncTask<Void, Void, Intent> {
