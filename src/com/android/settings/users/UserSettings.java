@@ -101,7 +101,6 @@ public class UserSettings extends SettingsPreferenceFragment
     private static final String KEY_USER_LIST = "user_list";
     private static final String KEY_USER_ME = "user_me";
     private static final String KEY_ADD_USER = "user_add";
-    private static final String KEY_EMERGENCY_INFO = "emergency_info";
 
     private static final int MENU_REMOVE_USER = Menu.FIRST;
 
@@ -135,7 +134,6 @@ public class UserSettings extends SettingsPreferenceFragment
     private DimmableIconPreference mAddUser;
     private PreferenceGroup mLockScreenSettings;
     private RestrictedSwitchPreference mAddUserWhenLocked;
-    private Preference mEmergencyInfoPreference;
     private int mRemovingUserId = -1;
     private int mAddedUserId = 0;
     private boolean mAddingUser;
@@ -231,8 +229,6 @@ public class UserSettings extends SettingsPreferenceFragment
         }
         mLockScreenSettings = (PreferenceGroup) findPreference("lock_screen_settings");
         mAddUserWhenLocked = (RestrictedSwitchPreference) findPreference("add_users_when_locked");
-        mEmergencyInfoPreference = findPreference(KEY_EMERGENCY_INFO);
-        mEmergencyInfoPreference.setOnPreferenceClickListener(this);
         loadProfile();
         setHasOptionsMenu(true);
         IntentFilter filter = new IntentFilter(Intent.ACTION_USER_REMOVED);
@@ -921,9 +917,6 @@ public class UserSettings extends SettingsPreferenceFragment
             } else {
                 onAddUserClicked(USER_TYPE_USER);
             }
-        } else if (pref == mEmergencyInfoPreference) {
-            Intent intent = new Intent("com.android.emergency.EDIT_EMERGENGY_INFO");
-            startActivity(intent);
         }
         return false;
     }
