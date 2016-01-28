@@ -29,7 +29,8 @@ public class CustomDialogPreference extends DialogPreference {
 
     private CustomPreferenceDialogFragment mFragment;
 
-    public CustomDialogPreference(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public CustomDialogPreference(Context context, AttributeSet attrs, int defStyleAttr,
+            int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
