@@ -138,6 +138,7 @@ public class DataUsageSummary extends DataUsageBase implements Indexable {
         TemplatePreferenceCategory category = (TemplatePreferenceCategory)
                 inflatePreferences(R.xml.data_usage_cellular);
         category.setTemplate(getNetworkTemplate(subId), subId, services);
+        category.pushTemplates(services);
     }
 
     private void addWifiSection() {

@@ -48,7 +48,7 @@ public class CellDataPreference extends CustomDialogPreference implements Templa
 
     private static final String TAG = "CellDataPreference";
 
-    public int mSubId;
+    public int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     public boolean mChecked;
     public boolean mMultiSimDialog;
     private TelephonyManager mTelephonyManager;
@@ -65,8 +65,10 @@ public class CellDataPreference extends CustomDialogPreference implements Templa
         mTelephonyManager = TelephonyManager.from(getContext());
         mChecked = state.mChecked;
         mMultiSimDialog = state.mMultiSimDialog;
-        mSubId = state.mSubId;
-        setKey(getKey() + mSubId);
+        if (mSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            mSubId = state.mSubId;
+            setKey(getKey() + mSubId);
+        }
         notifyChanged();
     }
 
@@ -110,7 +112,6 @@ public class CellDataPreference extends CustomDialogPreference implements Templa
 
     @Override
     protected void performClick(View view) {
-        super.performClick(view);
         MetricsLogger.action(getContext(), MetricsEvent.ACTION_CELL_DATA_TOGGLE, !mChecked);
         if (mChecked) {
             // disabling data; show confirmation dialog which eventually
