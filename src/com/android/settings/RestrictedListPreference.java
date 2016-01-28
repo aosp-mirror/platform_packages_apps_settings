@@ -146,11 +146,10 @@ public class RestrictedListPreference extends CustomListPreference {
             ImageView padlock = (ImageView) root.findViewById(R.id.restricted_lock_icon);
             if (isRestrictedForEntry(entry)) {
                 text.setEnabled(false);
+                text.setChecked(false);
                 padlock.setVisibility(View.VISIBLE);
             } else {
-                if (position == mSelectedIndex) {
-                    text.setChecked(true);
-                }
+                text.setChecked(position == mSelectedIndex);
                 text.setEnabled(true);
                 padlock.setVisibility(View.GONE);
             }
