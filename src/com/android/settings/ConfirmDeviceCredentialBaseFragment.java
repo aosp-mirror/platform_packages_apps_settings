@@ -20,10 +20,13 @@ import android.annotation.Nullable;
 import android.app.ActivityManager;
 import android.app.ActivityManagerNative;
 import android.app.ActivityOptions;
+import android.app.AlertDialog;
 import android.app.IActivityManager;
 import android.app.admin.DevicePolicyManager;
 import android.app.trust.TrustManager;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.graphics.Point;
@@ -31,7 +34,9 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.RemoteException;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +45,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.fingerprint.FingerprintUiHelper;
 
 /**
@@ -65,6 +71,9 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
     protected Button mCancelButton;
     protected ImageView mFingerprintIcon;
     protected int mEffectiveUserId;
+    protected LockPatternUtils mLockPatternUtils;
+    protected TextView mErrorTextView;
+    protected final Handler mHandler = new Handler();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,6 +83,7 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
         // Only take this argument into account if it belongs to the current profile.
         Intent intent = getActivity().getIntent();
         mEffectiveUserId = Utils.getUserIdFromBundle(getActivity(), intent.getExtras());
+        mLockPatternUtils = new LockPatternUtils(getActivity());
     }
 
     @Override
@@ -108,6 +118,10 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
         super.onResume();
         if (mAllowFpAuthentication) {
             mFingerprintHelper.startListening();
+        }
+        if (isProfileChallenge()) {
+            updateErrorMessage(mLockPatternUtils.getCurrentFailedPasswordAttempts(
+                    mEffectiveUserId));
         }
     }
 
@@ -199,5 +213,88 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     screenSize.y));
         }
+    }
+
+    protected boolean isProfileChallenge() {
+        return UserHandle.myUserId() != mEffectiveUserId;
+    }
+
+    protected void reportSuccessfullAttempt() {
+        if (isProfileChallenge()) {
+            mLockPatternUtils.reportSuccessfulPasswordAttempt(mEffectiveUserId);
+        }
+    }
+
+    protected void reportFailedAttempt() {
+        if (isProfileChallenge()) {
+            // + 1 for this attempt.
+            updateErrorMessage(
+                    mLockPatternUtils.getCurrentFailedPasswordAttempts(mEffectiveUserId) + 1);
+            mLockPatternUtils.reportFailedPasswordAttempt(mEffectiveUserId);
+        }
+    }
+
+    protected void updateErrorMessage(int numAttempts) {
+        final int maxAttempts =
+                mLockPatternUtils.getMaximumFailedPasswordsForWipe(mEffectiveUserId);
+        if (maxAttempts > 0 && numAttempts > 0) {
+            int remainingAttempts = maxAttempts - numAttempts;
+            if (remainingAttempts == 1) {
+                // Last try
+                final String title = getActivity().getString(
+                        R.string.lock_profile_wipe_warning_title);
+                final String message = getActivity().getString(getLastTryErrorMessage());
+                showDialog(title, message, android.R.string.ok, false /* dismiss */);
+            } else if (remainingAttempts <= 0) {
+                // Profile is wiped
+                final String message = getActivity().getString(R.string.lock_profile_wipe_content);
+                showDialog(null, message, R.string.lock_profile_wipe_dismiss, true /* dismiss */);
+            }
+            if (mErrorTextView != null) {
+                final String message = getActivity().getString(R.string.lock_profile_wipe_attempts,
+                        numAttempts, maxAttempts);
+                showError(message, 0);
+            }
+        }
+    }
+
+    protected abstract int getLastTryErrorMessage();
+
+    private final Runnable mResetErrorRunnable = new Runnable() {
+        @Override
+        public void run() {
+            mErrorTextView.setText("");
+        }
+    };
+
+    protected void showError(CharSequence msg, long timeout) {
+        mErrorTextView.setText(msg);
+        onShowError();
+        mHandler.removeCallbacks(mResetErrorRunnable);
+        if (timeout != 0) {
+            mHandler.postDelayed(mResetErrorRunnable, timeout);
+        }
+    }
+
+    protected abstract void onShowError();
+
+    protected void showError(int msg, long timeout) {
+        showError(getText(msg), timeout);
+    }
+
+    private void showDialog(String title, String message, int buttonString, final boolean dismiss) {
+        final AlertDialog dialog = new AlertDialog.Builder(getActivity())
+            .setTitle(title)
+            .setMessage(message)
+            .setPositiveButton(buttonString, new OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    if (dismiss) {
+                        getActivity().finish();
+                    }
+                }
+            })
+            .create();
+        dialog.show();
     }
 }
