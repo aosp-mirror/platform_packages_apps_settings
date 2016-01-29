@@ -21,6 +21,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.os.SystemProperties;
 import android.text.TextUtils;
 import android.util.Log;
@@ -65,11 +66,14 @@ public class SettingsLicenseActivity extends Activity {
         intent.setPackage("com.android.htmlviewer");
 
         try {
+            StrictMode.disableDeathOnFileUriExposure();
             startActivity(intent);
             finish();
         } catch (ActivityNotFoundException e) {
             Log.e(TAG, "Failed to find viewer", e);
             showErrorAndFinish();
+        } finally {
+            StrictMode.enableDeathOnFileUriExposure();
         }
     }
 
