@@ -19,6 +19,8 @@ package com.android.settings;
 
 import android.app.Activity;
 import android.app.KeyguardManager;
+import android.app.admin.DevicePolicyManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.Bundle;
@@ -72,6 +74,10 @@ public class ConfirmDeviceCredentialActivity extends Activity {
                 Log.e(TAG, "Invalid intent extra", se);
             }
         }
+        // if the client app did not hand in a title, we check whether there is a policy setting it
+        if (title == null) {
+            title = getTitleFromOrganizationName(userId);
+        }
         ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(this);
         if (!helper.launchConfirmationActivity(0 /* request code */, null /* title */, title,
                 details, false /* returnCredentials */, true /* isExternal */, userId)) {
@@ -83,5 +89,11 @@ public class ConfirmDeviceCredentialActivity extends Activity {
 
     private boolean isInternalActivity() {
         return this instanceof ConfirmDeviceCredentialActivity.InternalActivity;
+    }
+
+    private String getTitleFromOrganizationName(int userId) {
+        DevicePolicyManager dpm = (DevicePolicyManager) getSystemService(
+                Context.DEVICE_POLICY_SERVICE);
+        return (dpm != null) ? dpm.getOrganizationNameForUser(userId) : null;
     }
 }
