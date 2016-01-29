@@ -36,6 +36,7 @@ public class GearPreference extends Preference implements View.OnClickListener {
 
     public void setOnGearClickListener(OnGearClickListener l) {
         mOnGearClickListener = l;
+        notifyChanged();
     }
 
     @Override
