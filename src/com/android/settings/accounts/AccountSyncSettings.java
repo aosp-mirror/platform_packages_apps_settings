@@ -272,7 +272,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
                 mUserHandle.getIdentifier());
         if (admin == null) {
             admin = RestrictedLockUtils.checkIfAccountManagementDisabled(
-                    getPrefContext(), mAccount.type);
+                    getPrefContext(), mAccount.type, mUserHandle.getIdentifier());
         }
         RestrictedLockUtils.setMenuItemAsDisabledByAdmin(getPrefContext(),
                 removeAccount, admin);

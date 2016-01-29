@@ -21,6 +21,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.UserHandle;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
@@ -121,11 +122,6 @@ class InputMethodPreference extends RestrictedSwitchPreference implements OnPref
         setOnPreferenceClickListener(this);
         setOnPreferenceChangeListener(this);
         useAdminDisabledSummary(true);
-        if (!isAllowedByOrganization) {
-            EnforcedAdmin admin =
-                    RestrictedLockUtils.getProfileOrDeviceOwnerOnCallingUser(context);
-            setDisabledByAdmin(admin);
-        }
     }
 
     public InputMethodInfo getInputMethodInfo() {
@@ -192,11 +188,23 @@ class InputMethodPreference extends RestrictedSwitchPreference implements OnPref
     void updatePreferenceViews() {
         final boolean isAlwaysChecked = mInputMethodSettingValues.isAlwaysCheckedIme(
                 mImi, getContext());
-        // Only when this preference has a switch and an input method should be always enabled,
+        // When this preference has a switch and an input method should be always enabled,
         // this preference should be disabled to prevent accidentally disabling an input method.
-        setEnabled(!((isAlwaysChecked && isImeEnabler()) || (!mIsAllowedByOrganization)));
+        // This preference should also be disabled in case the admin does not allow this input
+        // method.
+        if (isAlwaysChecked && isImeEnabler()) {
+            setDisabledByAdmin(null);
+            setEnabled(false);
+        } else if (!mIsAllowedByOrganization) {
+            EnforcedAdmin admin =
+                    RestrictedLockUtils.checkIfInputMethodDisallowed(getContext(),
+                            mImi.getPackageName(), UserHandle.myUserId());
+            setDisabledByAdmin(admin);
+        } else {
+            setEnabled(true);
+        }
         setChecked(mInputMethodSettingValues.isEnabledImi(mImi));
-        if (mIsAllowedByOrganization) {
+        if (!isDisabledByAdmin()) {
             setSummary(getSummaryString());
         }
     }

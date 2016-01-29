@@ -46,9 +46,9 @@ public class ProviderPreference extends RestrictedPreference {
         return mAccountType;
     }
 
-    public void checkAccountManagementAndSetDisabled() {
+    public void checkAccountManagementAndSetDisabled(int userId) {
         EnforcedAdmin admin = RestrictedLockUtils.checkIfAccountManagementDisabled(
-                getContext(), getAccountType());
+                getContext(), getAccountType(), userId);
         setDisabledByAdmin(admin);
     }
 }

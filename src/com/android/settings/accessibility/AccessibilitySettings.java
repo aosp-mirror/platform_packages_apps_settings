@@ -482,8 +482,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             boolean serviceAllowed =
                     permittedServices == null || permittedServices.contains(packageName);
             if (!serviceAllowed && !serviceEnabled) {
-                EnforcedAdmin admin =
-                        RestrictedLockUtils.getProfileOrDeviceOwnerOnCallingUser(getActivity());
+                EnforcedAdmin admin = RestrictedLockUtils.checkIfAccessibilityServiceDisallowed(
+                        getActivity(), serviceInfo.packageName, UserHandle.myUserId());
                 if (admin != null) {
                     preference.setDisabledByAdmin(admin);
                 } else {

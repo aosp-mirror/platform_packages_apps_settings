@@ -39,6 +39,7 @@ import com.android.internal.util.CharSequences;
 import com.android.settings.InstrumentedPreferenceActivity;
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settingslib.RestrictedLockUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -47,6 +48,8 @@ import java.util.HashSet;
 import java.util.Map;
 
 import static android.content.Intent.EXTRA_USER;
+
+import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 /**
  * Activity asking a user to select an account to be set up.
@@ -160,9 +163,19 @@ public class ChooseAccountActivity extends InstrumentedPreferenceActivity {
             }
         }
 
+        final Context context = getPreferenceScreen().getContext();
         if (mProviderList.size() == 1) {
-            // If there's only one provider that matches, just run it.
-            finishWithAccountType(mProviderList.get(0).type);
+            // There's only one provider that matches. If it is disabled by admin show the
+            // support dialog otherwise run it.
+            EnforcedAdmin admin = RestrictedLockUtils.checkIfAccountManagementDisabled(
+                    context, mProviderList.get(0).type, mUserHandle.getIdentifier());
+            if (admin != null) {
+                setResult(RESULT_CANCELED, RestrictedLockUtils.getShowAdminSupportDetailsIntent(
+                        context, admin));
+                finish();
+            } else {
+                finishWithAccountType(mProviderList.get(0).type);
+            }
         } else if (mProviderList.size() > 0) {
             Collections.sort(mProviderList);
             mAddAccountGroup.removeAll();
@@ -170,7 +183,7 @@ public class ChooseAccountActivity extends InstrumentedPreferenceActivity {
                 Drawable drawable = getDrawableForType(pref.type);
                 ProviderPreference p = new ProviderPreference(getPreferenceScreen().getContext(),
                         pref.type, drawable, pref.name);
-                p.checkAccountManagementAndSetDisabled();
+                p.checkAccountManagementAndSetDisabled(mUserHandle.getIdentifier());
                 mAddAccountGroup.addPreference(p);
             }
         } else {
