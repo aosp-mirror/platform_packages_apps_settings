@@ -51,7 +51,6 @@ public class AppNotificationSettings extends NotificationSettingsBase {
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     private static final String KEY_BLOCK = "block";
-    private static final String KEY_APP_SETTINGS = "app_settings";
     private static final String KEY_CATEGORIES = "categories";
 
     private static final Intent APP_NOTIFICATION_PREFS_CATEGORY_INTENT
@@ -66,7 +65,8 @@ public class AppNotificationSettings extends NotificationSettingsBase {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (mAppRow == null) return;
-        AppHeader.createAppHeader(this, mAppRow.icon, mAppRow.label, mAppRow.pkg, mAppRow.uid);
+        AppHeader.createAppHeader(this, mAppRow.icon, mAppRow.label, mAppRow.pkg, mAppRow.uid,
+                mAppRow.settingsIntent);
     }
 
     @Override
@@ -126,19 +126,6 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                 topicPreference.setIntent(topicIntent);
                 mCategories.addPreference(topicPreference);
             }
-        }
-
-        if (mAppRow.settingsIntent != null) {
-            findPreference(KEY_APP_SETTINGS).setOnPreferenceClickListener(
-                    new OnPreferenceClickListener() {
-                @Override
-                public boolean onPreferenceClick(Preference preference) {
-                    mContext.startActivity(mAppRow.settingsIntent);
-                    return true;
-                }
-            });
-        } else {
-            removePreference(KEY_APP_SETTINGS);
         }
     }
 

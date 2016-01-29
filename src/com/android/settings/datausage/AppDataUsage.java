@@ -282,7 +282,7 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
         } catch (PackageManager.NameNotFoundException e) {
         }
         AppHeader.setupHeaderView(getActivity(), mIcon, mLabel,
-                pkg, uid, AppHeader.includeAppInfo(this), 0, header);
+                pkg, uid, AppHeader.includeAppInfo(this), 0, header, null);
     }
 
     @Override
