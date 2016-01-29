@@ -223,6 +223,8 @@ public class VpnSettings extends SettingsPreferenceFragment implements
         final List<LegacyVpnInfo> connectedLegacyVpns = getConnectedLegacyVpns();
         final List<AppVpnInfo> connectedAppVpns = getConnectedAppVpns();
 
+        final Set<Integer> readOnlyUsers = getReadOnlyUserProfiles();
+
         // Refresh the PreferenceGroup which lists VPNs
         getActivity().runOnUiThread(new Runnable() {
             @Override
@@ -233,11 +235,13 @@ public class VpnSettings extends SettingsPreferenceFragment implements
                 for (VpnProfile profile : vpnProfiles) {
                     ConfigPreference p = findOrCreatePreference(profile);
                     p.setState(ConfigPreference.STATE_NONE);
+                    p.setEnabled(!readOnlyUsers.contains(UserHandle.myUserId()));
                     updates.add(p);
                 }
                 for (AppVpnInfo app : vpnApps) {
                     AppPreference p = findOrCreatePreference(app);
                     p.setState(AppPreference.STATE_DISCONNECTED);
+                    p.setEnabled(!readOnlyUsers.contains(app.userId));
                     updates.add(p);
                 }
 
@@ -415,6 +419,19 @@ public class VpnSettings extends SettingsPreferenceFragment implements
             Log.e(LOG_TAG, "Failure updating VPN list with connected app VPNs", e);
         }
         return connections;
+    }
+
+    @WorkerThread
+    private Set<Integer> getReadOnlyUserProfiles() {
+        Set<Integer> result = new ArraySet<>();
+        for (UserHandle profile : mUserManager.getUserProfiles()) {
+            final int profileId = profile.getIdentifier();
+            if (mUserManager.hasUserRestriction(UserManager.DISALLOW_CONFIG_VPN, profile)
+                    || mConnectivityManager.getAlwaysOnVpnPackageForUser(profileId) != null) {
+                result.add(profileId);
+            }
+        }
+        return result;
     }
 
     static List<AppVpnInfo> getVpnApps(Context context, boolean includeProfiles) {
