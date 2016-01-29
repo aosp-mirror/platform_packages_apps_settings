@@ -319,7 +319,7 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
 
         final boolean adminDisallowedTetherConfig = mUm.hasUserRestriction(
                 UserManager.DISALLOW_CONFIG_TETHERING);
-        if (!isAdmin || (!cm.isTetheringSupported() && !adminDisallowedTetherConfig)) {
+        if (!cm.isTetheringSupported() && !adminDisallowedTetherConfig) {
             getPreferenceScreen().removePreference(findPreference(KEY_TETHER_SETTINGS));
         } else if (!adminDisallowedTetherConfig) {
             Preference p = findPreference(KEY_TETHER_SETTINGS);

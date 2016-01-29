@@ -25,14 +25,15 @@ import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
+import android.net.ConnectivityManager;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.MeasureSpec;
 import android.widget.ImageView;
 import android.widget.ListView;
+
 import com.android.settings.Settings.TetherSettingsActivity;
-import com.android.settingslib.TetherUtil;
 
 import java.util.List;
 
@@ -91,11 +92,13 @@ public class CreateShortcut extends LauncherActivity {
     protected List<ResolveInfo> onQueryPackageManager(Intent queryIntent) {
         List<ResolveInfo> activities = getPackageManager().queryIntentActivities(queryIntent,
                 PackageManager.GET_META_DATA);
+        final ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         if (activities == null) return null;
         for (int i = activities.size() - 1; i >= 0; i--) {
             ResolveInfo info = activities.get(i);
             if (info.activityInfo.name.endsWith(TetherSettingsActivity.class.getSimpleName())) {
-                if (!TetherUtil.isTetheringSupported(this)) {
+                if (!cm.isTetheringSupported()) {
                     activities.remove(i);
                 }
             }
