@@ -27,6 +27,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -42,6 +43,7 @@ import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
+import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
 import android.util.Log;
@@ -101,6 +103,10 @@ public class UserSettings extends SettingsPreferenceFragment
     private static final String KEY_USER_LIST = "user_list";
     private static final String KEY_USER_ME = "user_me";
     private static final String KEY_ADD_USER = "user_add";
+    private static final String KEY_EMERGENCY_INFO = "emergency_info";
+    private static final String KEY_LOCK_SCREEN_SETTINGS = "lock_screen_settings";
+
+    private static final String ACTION_EDIT_EMERGENCY_INFO = "android.settings.EDIT_EMERGENGY_INFO";
 
     private static final int MENU_REMOVE_USER = Menu.FIRST;
 
@@ -134,6 +140,7 @@ public class UserSettings extends SettingsPreferenceFragment
     private DimmableIconPreference mAddUser;
     private PreferenceGroup mLockScreenSettings;
     private RestrictedSwitchPreference mAddUserWhenLocked;
+    private Preference mEmergencyInfoPreference;
     private int mRemovingUserId = -1;
     private int mAddedUserId = 0;
     private boolean mAddingUser;
@@ -229,6 +236,15 @@ public class UserSettings extends SettingsPreferenceFragment
         }
         mLockScreenSettings = (PreferenceGroup) findPreference("lock_screen_settings");
         mAddUserWhenLocked = (RestrictedSwitchPreference) findPreference("add_users_when_locked");
+        mEmergencyInfoPreference = findPreference(KEY_EMERGENCY_INFO);
+        if(emergencyInfoActivityPresent()) {
+            mEmergencyInfoPreference.setOnPreferenceClickListener(this);
+        } else {
+            // Remove this view if the emergency info package is not found.
+            PreferenceCategory lockScreenSettingsCategory =
+                    (PreferenceCategory) findPreference(KEY_LOCK_SCREEN_SETTINGS);
+            lockScreenSettingsCategory.removePreference(mEmergencyInfoPreference);
+        }
         loadProfile();
         setHasOptionsMenu(true);
         IntentFilter filter = new IntentFilter(Intent.ACTION_USER_REMOVED);
@@ -598,6 +614,15 @@ public class UserSettings extends SettingsPreferenceFragment
         }
     }
 
+    private boolean emergencyInfoActivityPresent() {
+        Intent intent = new Intent(ACTION_EDIT_EMERGENCY_INFO).setPackage("com.android.emergency");
+        List<ResolveInfo> infos = getContext().getPackageManager().queryIntentActivities(intent, 0);
+        if (infos == null || infos.isEmpty()) {
+            return false;
+        }
+        return true;
+    }
+
     private void removeUserNow() {
         if (mRemovingUserId == UserHandle.myUserId()) {
             removeThisUser();
@@ -917,6 +942,9 @@ public class UserSettings extends SettingsPreferenceFragment
             } else {
                 onAddUserClicked(USER_TYPE_USER);
             }
+        } else if (pref == mEmergencyInfoPreference) {
+            Intent intent = new Intent(ACTION_EDIT_EMERGENCY_INFO);
+            startActivity(intent);
         }
         return false;
     }
