@@ -2787,6 +2787,11 @@
                        android:value="com.android.settings.applications.ManageDefaultApps" />
         </activity>
 
+        <service
+            android:name=".SettingsDumpService"
+            android:exported="true"
+            android:permission="android.permission.DUMP" />
+
         <!-- Conditional receivers, only enabled during silenced state, default off-->
         <receiver
             android:name=".dashboard.conditional.HotspotCondition$Receiver"

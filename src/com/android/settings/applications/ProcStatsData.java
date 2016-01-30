@@ -356,9 +356,9 @@ public class ProcStatsData {
     }
 
     public static class MemInfo {
-        double realUsedRam;
-        double realFreeRam;
-        double realTotalRam;
+        public double realUsedRam;
+        public double realFreeRam;
+        public double realTotalRam;
         long baseCacheRam;
 
         double[] mMemStateWeights = new double[ProcessStats.STATE_COUNT];
