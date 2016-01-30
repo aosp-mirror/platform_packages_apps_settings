@@ -258,8 +258,9 @@ public class DreamSettings extends SettingsPreferenceFragment implements
         logd("refreshFromBackend()");
         mRefreshing = true;
         boolean dreamsEnabled = mBackend.isEnabled();
-        if (mSwitchBar.isChecked() != dreamsEnabled)
+        if (mSwitchBar.isChecked() != dreamsEnabled) {
             mSwitchBar.setChecked(dreamsEnabled);
+        }
 
         if (getPreferenceScreen() == null) {
             setPreferenceScreen(getPreferenceManager().createPreferenceScreen(getContext()));
@@ -273,15 +274,16 @@ public class DreamSettings extends SettingsPreferenceFragment implements
                         new DreamInfoPreference(getPrefContext(), dreamInfos.get(i)));
             }
         }
-        if (mMenuItemsWhenEnabled != null)
-            for (MenuItem menuItem : mMenuItemsWhenEnabled)
+        if (mMenuItemsWhenEnabled != null) {
+            for (MenuItem menuItem : mMenuItemsWhenEnabled) {
                 menuItem.setEnabled(dreamsEnabled);
+            }
+        }
         mRefreshing = false;
     }
 
     private static void logd(String msg, Object... args) {
-        if (DEBUG)
-            Log.d(TAG, args == null || args.length == 0 ? msg : String.format(msg, args));
+        if (DEBUG) Log.d(TAG, args == null || args.length == 0 ? msg : String.format(msg, args));
     }
 
     private class DreamInfoPreference extends Preference {

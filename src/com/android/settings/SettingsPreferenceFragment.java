@@ -197,6 +197,7 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
             mCurrentRootAdapter = getListView().getAdapter();
             mCurrentRootAdapter.registerAdapterDataObserver(mDataSetObserver);
             mIsDataSetObserverRegistered = true;
+            onDataSetChanged();
         }
     }
 
