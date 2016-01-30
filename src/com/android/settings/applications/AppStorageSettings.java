@@ -143,6 +143,7 @@ public class AppStorageSettings extends AppInfoWithHeader
 
         addPreferencesFromResource(R.xml.app_storage_settings);
         setupViews();
+        initMoveDialog();
     }
 
     @Override
