@@ -17,13 +17,11 @@
 package com.android.settings.accessibility;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
-import android.app.ActivityManagerNative;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
-import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
@@ -624,11 +622,13 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     }
 
     private void updateFontSizeSummary(Preference pref) {
+        final float currentScale = Settings.System.getFloat(getContext().getContentResolver(),
+                Settings.System.FONT_SCALE, 1.0f);
         final Resources res = getContext().getResources();
         final String[] entries = res.getStringArray(R.array.entries_font_size);
         final String[] strEntryValues = res.getStringArray(R.array.entryvalues_font_size);
-        final int index = ToggleFontSizePreferenceFragment.fontSizeValueToIndex(
-                res.getConfiguration().fontScale, strEntryValues);
+        final int index = ToggleFontSizePreferenceFragment.fontSizeValueToIndex(currentScale,
+                strEntryValues);
         pref.setSummary(entries[index]);
     }
 

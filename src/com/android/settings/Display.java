@@ -17,12 +17,11 @@
 package com.android.settings;
 
 import android.app.Activity;
-import android.app.ActivityManagerNative;
-import android.content.res.Configuration;
+import android.content.ContentResolver;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.os.Bundle;
-import android.os.RemoteException;
+import android.provider.Settings;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
@@ -73,21 +72,19 @@ public class Display extends Activity implements View.OnClickListener {
         mDisplayMetrics.widthPixels = metrics.widthPixels;
         mDisplayMetrics.xdpi = metrics.xdpi;
         mDisplayMetrics.ydpi = metrics.ydpi;
-        
+
         styledAttributes.recycle();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        try {
-            mCurConfig.updateFrom(
-                ActivityManagerNative.getDefault().getConfiguration());
-        } catch (RemoteException e) {
-        }
-        if (mCurConfig.fontScale < 1) {
+        final ContentResolver resolver = getContentResolver();
+        mFontScale = Settings.System.getFloat(resolver, Settings.System.FONT_SCALE, 1.0f);
+
+        if (mFontScale < 1) {
             mFontSize.setSelection(0);
-        } else if (mCurConfig.fontScale > 1) {
+        } else if (mFontScale > 1) {
             mFontSize.setSelection(2);
         } else {
             mFontSize.setSelection(1);
@@ -96,18 +93,14 @@ public class Display extends Activity implements View.OnClickListener {
     }
 
     private void updateFontScale() {
-        mDisplayMetrics.scaledDensity = mDisplayMetrics.density *
-                mCurConfig.fontScale;
-
+        mDisplayMetrics.scaledDensity = mDisplayMetrics.density * mFontScale;
         float size = mTextSizeTyped.getDimension(mDisplayMetrics);
         mPreview.setTextSize(TypedValue.COMPLEX_UNIT_PX, size);
     }
 
     public void onClick(View v) {
-        try {
-            ActivityManagerNative.getDefault().updatePersistentConfiguration(mCurConfig);
-        } catch (RemoteException e) {
-        }
+        final ContentResolver resolver = getContentResolver();
+        Settings.System.putFloat(resolver, Settings.System.FONT_SCALE, mFontScale);
         finish();
     }
 
@@ -116,11 +109,11 @@ public class Display extends Activity implements View.OnClickListener {
         public void onItemSelected(android.widget.AdapterView av, View v,
                                     int position, long id) {
             if (position == 0) {
-                mCurConfig.fontScale = .75f;
+                mFontScale = .75f;
             } else if (position == 2) {
-                mCurConfig.fontScale = 1.25f;
+                mFontScale = 1.25f;
             } else {
-                mCurConfig.fontScale = 1.0f;
+                mFontScale = 1.0f;
             }
 
             updateFontScale();
@@ -134,5 +127,5 @@ public class Display extends Activity implements View.OnClickListener {
     private TextView mPreview;
     private TypedValue mTextSizeTyped;
     private DisplayMetrics mDisplayMetrics;
-    private Configuration mCurConfig = new Configuration();
+    private float mFontScale = 1.0f;
 }
