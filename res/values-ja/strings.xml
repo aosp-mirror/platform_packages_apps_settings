@@ -361,8 +361,7 @@
     <string name="fingerprint_enroll_button_add" msgid="6317978977419045463">"別の指紋を登録"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"次へ"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"スマートフォンのロック解除に加えて、指紋認証を使用して購入やアプリのアクセスを許可することもできます。"<annotation id="url">"詳細"</annotation></string>
-    <!-- no translation found for security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled (7007548031540826618) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="7007548031540826618">"画面ロックの設定が無効になっています。詳しくは組織の管理者までお問い合わせください。"<annotation id="admin_details">"詳細"</annotation>\n\n"指紋認証を利用して購入を承認したり、アプリにアクセスしたりすることはできます。"<annotation id="url">"詳細"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"指を離してから、もう一度センサーに触れてください。"</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="4132164775128798343">"このアイコンが表示されているときは指紋認証を使用できます。"</string>
     <string name="setup_fingerprint_enroll_finish_secondary_message" msgid="3734962461534384882">"設定を変更するには、[設定]&gt;[セキュリティ]&gt;[指紋]に移動します。"</string>
@@ -402,6 +401,8 @@
     <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="840107296925798402">"入力したパスワードは正しいのですが、データが破損しています。\n\nタブレットの使用を再開するには出荷時設定にリセットする必要があります。リセット後、タブレットのセットアップの段階で、Googleアカウントにバックアップしたデータの復元を選択できます。"</string>
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"入力したパスワードは正しいのですが、データが破損しています。\n\nスマートフォンの使用を再開するには出荷時設定にリセットする必要があります。リセット後、スマートフォンのセットアップの段階で、Googleアカウントにバックアップしたデータの復元を選択できます。"</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"入力方法の切り替え"</string>
+    <string name="suggested_lock_settings_title" msgid="5022405858647120434">"画面ロック"</string>
+    <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"端末の保護"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"画面ロックを選択"</string>
     <string name="setup_lock_settings_picker_title" msgid="1584792702475081908">"画面ロックの選択"</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"予備の画面ロック方式を選択してください"</string>
@@ -700,12 +701,13 @@
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"2.4GHz"</string>
     <string name="wifi_ap_choose_5G" msgid="8137061170937978040">"5GHz"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP設定"</string>
-    <!-- no translation found for wifi_shared (844142443226926070) -->
-    <skip />
+    <string name="wifi_shared" msgid="844142443226926070">"他の端末ユーザーと共有する"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"（変更なし）"</string>
-    <string name="wifi_unspecified" msgid="5431501214192991253">"（指定なし）"</string>
-    <!-- no translation found for wifi_multiple_cert_added (3240743501460165224) -->
-    <skip />
+    <string name="wifi_unspecified" msgid="4917316464723064807">"選択してください"</string>
+    <string name="wifi_multiple_cert_added" msgid="3240743501460165224">"（複数の証明書が追加されています）"</string>
+    <string name="wifi_do_not_provide_eap_user_cert" msgid="5160499244977160665">"指定しない"</string>
+    <string name="wifi_do_not_validate_eap_server" msgid="4266754430576348471">"検証しない"</string>
+    <string name="wifi_do_not_validate_eap_server_warning" msgid="1787190245542586660">"証明書が指定されていません。この接続ではプライバシーが保護されません。"</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS利用可"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" （WPS利用可）"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"ネットワークパスワードを入力してください"</string>
@@ -785,6 +787,7 @@
     <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>ポータブルWi-Fiアクセスポイント"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Wi-Fi通話"</string>
+    <string name="wifi_calling_suggestion_title" msgid="124563351958807514">"Wi-Fi 発信の有効化"</string>
     <string name="wifi_calling_mode_title" msgid="2164073796253284289">"発信の設定"</string>
     <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Wi-Fi通話モード"</string>
   <string-array name="wifi_calling_mode_choices">
@@ -865,6 +868,7 @@
     <string name="screen_timeout_title" msgid="5130038655092628247">"画面がOFFになったとき"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"操作が行われない状態で<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>経過後"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"壁紙"</string>
+    <string name="wallpaper_suggestion_title" msgid="1134468474328980088">"壁紙の設定"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"壁紙タイプの選択"</string>
     <string name="screensaver_settings_title" msgid="3349790120327233241">"スクリーンセーバー"</string>
     <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"ホルダー装着時またはスリープ/充電時"</string>
@@ -1521,10 +1525,7 @@
     <skip />
     <!-- no translation found for show_ime_summary (8164993045923240698) -->
     <skip />
-    <!-- no translation found for keyboard_shortcuts_helper (4839453720463798145) -->
-    <skip />
-    <!-- no translation found for physical_device_title (79889057252418427) -->
-    <skip />
+    <string name="physical_device_title" msgid="79889057252418427">"<xliff:g id="INPUT_METHOD_SUBTYPE">%1$s</xliff:g> - <xliff:g id="INPUT_METHOD_EDITOR">%2$s</xliff:g>"</string>
     <string name="pointer_settings_category" msgid="8183819795164034286">"マウス/トラックパッド"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"ポインタの速度"</string>
     <string name="game_controller_settings_category" msgid="8794508575329923718">"ゲーム用コントローラ"</string>
@@ -1607,7 +1608,6 @@
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"ON"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"OFF"</string>
     <string name="accessibility_global_gesture_preference_description" msgid="750438015254396963">"この機能を有効にすると、次の2つのステップでユーザー補助機能をすぐに有効にできます:\n\nステップ1: 音が鳴るか振動するまで電源ボタンを押し続けます。\n\nステップ2: 確認音が鳴るまで2本の指でタップして押し続けます。\n\n複数のユーザーでこの端末を使用している場合は、ロック画面でこのショートカットを使用すると、端末がロック解除されるまでユーザー補助機能が一時的に有効になります。"</string>
-    <string name="accessibility_toggle_large_text_preference_title" msgid="6307247527580207161">"大きい文字サイズ"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="2567402942683463779">"高コントラストテキスト"</string>
     <string name="accessibility_toggle_screen_magnification_preference_title" msgid="2472285215737820469">"画面の拡大"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="7218498768415430963">"画面の拡大を自動更新"</string>
@@ -2272,10 +2272,8 @@
     <string name="user_enable_calling_confirm_message" msgid="8061594235219352787">"発信履歴がこのユーザーと共有されます。"</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="7243308401401932681">"通話とSMSをONにしますか？"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="4025082715546544967">"通話とSMSの履歴がこのユーザーと共有されます。"</string>
-    <!-- no translation found for emergency_info_title (208607506217060337) -->
-    <skip />
-    <!-- no translation found for emergency_info_subtitle (1301492666470489605) -->
-    <skip />
+    <string name="emergency_info_title" msgid="208607506217060337">"緊急情報"</string>
+    <string name="emergency_info_subtitle" msgid="1301492666470489605">"ロック画面から緊急通報にアクセスして利用できます"</string>
     <string name="application_restrictions" msgid="8207332020898004394">"アプリとコンテンツの許可"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"制限のあるアプリ"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"アプリの設定を展開"</string>
@@ -2470,6 +2468,7 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"バイブレーション"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"優先する通知のみを許可"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"自動ルール"</string>
+    <string name="zen_mode_automation_suggestion_title" msgid="4695313598703536699">"[通知を非表示] スケジュールの設定"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"優先する通知のみ"</string>
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"アラームのみ"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"サイレント"</string>
@@ -2484,15 +2483,27 @@
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"通知をすべて表示しない"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"端末がロックされている場合、通知をどのように表示しますか？"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"通知"</string>
+    <!-- no translation found for lock_screen_notifications_summary_show_profile (552385140686291731) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifications_summary_hide_profile (1253321444387544886) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifications_summary_disable_profile (5687358507957376100) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifications_interstitial_message_profile (8307705621027472346) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifications_interstitial_title_profile (3169806586032521333) -->
+    <skip />
     <string name="app_notifications_title" msgid="139788604658984593">"通知"</string>
     <string name="topic_notifications_title" msgid="7243623930984080881">"トピックの通知"</string>
     <string name="notification_topic_categories" msgid="3399184843660543981">"カテゴリ"</string>
     <string name="notification_importance_title" msgid="848692592679312666">"重要度"</string>
+    <string name="notification_importance_none" msgid="3173515479356106227">"未設定"</string>
     <string name="notification_importance_blocked" msgid="4764559498517003405">"ブロック: 今後はこの通知を表示しない"</string>
     <string name="notification_importance_low" msgid="9187046927980498942">"低: 通知リストの下にマナーモードで表示する"</string>
     <string name="notification_importance_default" msgid="4924370061477615318">"標準: この通知をマナーモードで表示する"</string>
     <string name="notification_importance_high" msgid="1918112760912803959">"高: 通知リストの上に表示し、音声でも知らせる"</string>
     <string name="notification_importance_max" msgid="5501185277889361261">"緊急: 画面にプレビューを表示し、音声でも知らせる"</string>
+    <string name="importance_reset" msgid="7458420788555607007">"リセット"</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"通知アシスタント"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"通知へのアクセス"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"アプリは通知を読み取ることができません"</string>
@@ -2912,8 +2923,11 @@
     <skip />
     <!-- no translation found for unrestricted_app_summary (6458008993501723912) -->
     <skip />
-    <!-- no translation found for home_app (4066188520886810030) -->
-    <skip />
-    <!-- no translation found for no_default_home (7184117487704520238) -->
-    <skip />
+    <string name="home_app" msgid="4066188520886810030">"ホームアプリ"</string>
+    <string name="no_default_home" msgid="7184117487704520238">"デフォルトのホームがありません"</string>
+    <string name="lockpattern_settings_require_cred_before_startup" msgid="3832020101401318248">"安全な起動"</string>
+    <string name="lockpattern_settings_require_pattern_before_startup_summary" msgid="7873036097628404476">"端末を起動するため、パターンが必要です。端末が OFF の場合、通話、メッセージ、通知、アラームを受信できません。"</string>
+    <string name="lockpattern_settings_require_pin_before_startup_summary" msgid="6022831284097476933">"端末を起動するため、PIN が必要です。端末が OFF の場合、通話、メッセージ、通知、アラームを受信できません。"</string>
+    <string name="lockpattern_settings_require_password_before_startup_summary" msgid="6818285221244966231">"端末を起動するため、パスワードが必要です。端末が OFF の場合、通話、メッセージ、通知、アラームを受信できません。"</string>
+    <string name="suggestion_additional_fingerprints" msgid="3683327800671241982">"別の指紋の追加"</string>
 </resources>
