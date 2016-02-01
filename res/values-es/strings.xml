@@ -361,8 +361,7 @@
     <string name="fingerprint_enroll_button_add" msgid="6317978977419045463">"Añadir otra"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"Siguiente"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Además de desbloquear el teléfono, también puedes utilizar tu huella digital para autorizar acceso a aplicaciones y compras. "<annotation id="url">"Más información"</annotation></string>
-    <!-- no translation found for security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled (7007548031540826618) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="7007548031540826618">"Se ha inhabilitado la opción de bloqueo de pantalla. Ponte en contacto con el administrador de tu organización para obtener más información. "<annotation id="admin_details">"Más información"</annotation>\n\n"Puedes seguir utilizando tu huella digital para acceder a aplicaciones y autorizar compras. "<annotation id="url">"Más información"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Levanta el dedo y vuelve a tocar el sensor"</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="4132164775128798343">"Cuando aparezca este icono, puedes usar tu huella digital."</string>
     <string name="setup_fingerprint_enroll_finish_secondary_message" msgid="3734962461534384882">"Para cambiar la configuración, accede a Ajustes &gt; Seguridad &gt; Huella digital."</string>
@@ -402,6 +401,8 @@
     <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="840107296925798402">"La contraseña que has introducido es correcta pero, lamentablemente, tus datos están dañados. \n\nPara seguir utilizando el tablet, debes restablecer los datos de fábrica. Al configurar el dispositivo después de este proceso, podrás restaurar los datos incluidos en la copia de seguridad de tu cuenta de Google."</string>
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"La contraseña que has introducido es correcta pero, lamentablemente, tus datos están dañados. \n\nPara seguir utilizando el teléfono, debes restablecer los datos de fábrica. Al configurar el dispositivo después de este proceso, podrás restaurar los datos incluidos en la copia de seguridad de tu cuenta de Google."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Cambiar método de entrada"</string>
+    <string name="suggested_lock_settings_title" msgid="5022405858647120434">"Bloqueo de pantalla"</string>
+    <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"Protege tu dispositivo"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Elige un bloqueo"</string>
     <string name="setup_lock_settings_picker_title" msgid="1584792702475081908">"Elige un bloqueo de pantalla"</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Selecciona el método de bloqueo de pantalla alternativo"</string>
@@ -420,12 +421,9 @@
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Contraseña"</string>
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"Seguridad alta"</string>
     <string name="current_screen_lock" msgid="4104091715420072219">"Bloqueo de pantalla actual"</string>
-    <!-- no translation found for fingerprint_unlock_set_unlock_pattern (4939057588092120368) -->
-    <skip />
-    <!-- no translation found for fingerprint_unlock_set_unlock_pin (8010746824051056986) -->
-    <skip />
-    <!-- no translation found for fingerprint_unlock_set_unlock_password (7351131075806338634) -->
-    <skip />
+    <string name="fingerprint_unlock_set_unlock_pattern" msgid="4939057588092120368">"Huella digital + patrón"</string>
+    <string name="fingerprint_unlock_set_unlock_pin" msgid="8010746824051056986">"Huella digital + PIN"</string>
+    <string name="fingerprint_unlock_set_unlock_password" msgid="7351131075806338634">"Huella digital + contraseña"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Desactivado por el administrador, política de cifrado o almacenamiento de credenciales"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Ninguno"</string>
     <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"Deslizar"</string>
@@ -435,8 +433,7 @@
     <string name="unlock_setup_wizard_fingerprint_details" msgid="7893457665921363009">"Una vez que hayas configurado un bloqueo de pantalla, podrás configurar también la huella digital en Ajustes &gt; Seguridad."</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"Desactivar bloqueo pantalla"</string>
     <string name="unlock_disable_frp_warning_title" msgid="264008934468492550">"¿Eliminar protección del dispositivo?"</string>
-    <!-- no translation found for unlock_disable_frp_warning_title_profile (5507136301904313583) -->
-    <skip />
+    <string name="unlock_disable_frp_warning_title_profile" msgid="5507136301904313583">"¿Quieres quitar la protección del perfil?"</string>
     <string name="unlock_disable_frp_warning_content_pattern" msgid="8869767290771023461">"Las funciones de protección del dispositivo no funcionarán sin tu patrón."</string>
     <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="8212242533942400457">"Las funciones de protección del dispositivo no funcionarán sin tu patrón.<xliff:g id="EMPTY_LINE">
 
@@ -453,22 +450,22 @@
     <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="6363091330281670692">"Las funciones de protección del dispositivo no funcionarán sin tu bloqueo de pantalla.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>Las huellas digitales guardadas también se eliminarán de este dispositivo y no podrás desbloquear el teléfono, autorizar compras ni iniciar sesión en las aplicaciones con ellas."</string>
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern_profile (8682200103576359918) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern_fingerprint_profile (3675154828957224316) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin_profile (7790688070593867767) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin_fingerprint_profile (4879321153584598940) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password_profile (7569285520567674461) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password_fingerprint_profile (3527188316958917839) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_unknown_profile (6984215718701688202) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_unknown_fingerprint_profile (1962204059377724158) -->
-    <skip />
+    <string name="unlock_disable_frp_warning_content_pattern_profile" msgid="8682200103576359918">"Las funciones de protección del perfil no funcionan sin el patrón."</string>
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint_profile" msgid="3675154828957224316">"Las funciones de protección del perfil no funcionan sin el patrón.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Las huellas digitales guardadas también se eliminarán del perfil y no podrás utilizarlas para desbloquearlo, autorizar compras ni iniciar sesión en aplicaciones."</string>
+    <string name="unlock_disable_frp_warning_content_pin_profile" msgid="7790688070593867767">"Las funciones de protección del perfil no funcionan sin el PIN."</string>
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint_profile" msgid="4879321153584598940">"Las funciones de protección del perfil no funcionan sin el PIN.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Las huellas digitales guardadas también se eliminarán del perfil y no podrás utilizarlas para desbloquearlo, autorizar compras ni iniciar sesión en aplicaciones."</string>
+    <string name="unlock_disable_frp_warning_content_password_profile" msgid="7569285520567674461">"Las funciones de protección del perfil no funcionan sin la contraseña."</string>
+    <string name="unlock_disable_frp_warning_content_password_fingerprint_profile" msgid="3527188316958917839">"Las funciones de protección del perfil no funcionan sin la contraseña.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Las huellas digitales guardadas también se eliminarán del perfil y no podrás utilizarlas para desbloquearlo, autorizar compras ni iniciar sesión en aplicaciones."</string>
+    <string name="unlock_disable_frp_warning_content_unknown_profile" msgid="6984215718701688202">"Las funciones de protección del perfil no funcionan sin el bloqueo de pantalla."</string>
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint_profile" msgid="1962204059377724158">"Las funciones de protección del perfil no funcionan sin el bloqueo de pantalla.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Las huellas digitales guardadas también se eliminarán del perfil y no podrás utilizarlas para desbloquearlo, autorizar compras ni iniciar sesión en aplicaciones."</string>
     <string name="unlock_disable_frp_warning_ok" msgid="7075138677177748705">"Sí, eliminar"</string>
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"Cambiar patrón desbloqueo"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"Cambiar PIN de desbloqueo"</string>
@@ -700,12 +697,13 @@
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"Banda de 2,4 GHz"</string>
     <string name="wifi_ap_choose_5G" msgid="8137061170937978040">"Banda de 5 GHz"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"Ajustes de IP"</string>
-    <!-- no translation found for wifi_shared (844142443226926070) -->
-    <skip />
+    <string name="wifi_shared" msgid="844142443226926070">"Compartir con otros usuarios del dispositivo"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(no modificada)"</string>
-    <string name="wifi_unspecified" msgid="5431501214192991253">"(no especificado)"</string>
-    <!-- no translation found for wifi_multiple_cert_added (3240743501460165224) -->
-    <skip />
+    <string name="wifi_unspecified" msgid="4917316464723064807">"Selecciona una aplicación"</string>
+    <string name="wifi_multiple_cert_added" msgid="3240743501460165224">"(Se han añadido varios certificados)"</string>
+    <string name="wifi_do_not_provide_eap_user_cert" msgid="5160499244977160665">"No proporcionar"</string>
+    <string name="wifi_do_not_validate_eap_server" msgid="4266754430576348471">"No validar"</string>
+    <string name="wifi_do_not_validate_eap_server_warning" msgid="1787190245542586660">"No se ha especificado ningún certificado. La conexión no será privada."</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS disponible"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS disponible)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Introduce la contraseña de tu red"</string>
@@ -785,6 +783,7 @@
     <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"Zona Wi-Fi portátil: <xliff:g id="NETWORK_SSID">%1$s</xliff:g> (<xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>)"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Llamadas Wi-Fi"</string>
+    <string name="wifi_calling_suggestion_title" msgid="124563351958807514">"Habilitar Llamada por Wi-Fi"</string>
     <string name="wifi_calling_mode_title" msgid="2164073796253284289">"Preferencia de llamada"</string>
     <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Modo de llamadas Wi-Fi"</string>
   <string-array name="wifi_calling_mode_choices">
@@ -865,6 +864,7 @@
     <string name="screen_timeout_title" msgid="5130038655092628247">"La pantalla se apaga"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> de inactividad"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Fondo de pantalla"</string>
+    <string name="wallpaper_suggestion_title" msgid="1134468474328980088">"Configurar fondo de pantalla"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Elige una categoría"</string>
     <string name="screensaver_settings_title" msgid="3349790120327233241">"Salvapantallas"</string>
     <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"Con el dispositivo en un dock o inactivo y cargando"</string>
@@ -1271,12 +1271,9 @@
     <string name="lockpassword_confirm_your_pattern_generic" msgid="7050256155547273836">"Para continuar, dibuja el patrón del dispositivo."</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="1072670959803859869">"Para continuar, introduce el PIN del dispositivo."</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="1022239625083264596">"Para continuar, introduce la contraseña del dispositivo."</string>
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic_profile (5395218530319918943) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic_profile (4835615379207382790) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic_profile (7102131871989498470) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="5395218530319918943">"Utiliza el patrón del perfil para continuar."</string>
+    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="4835615379207382790">"Introduce el PIN del perfil para continuar."</string>
+    <string name="lockpassword_confirm_your_password_generic_profile" msgid="7102131871989498470">"Introduce la contraseña del perfil para continuar."</string>
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"PIN incorrecto"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"Contraseña incorrecta"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"Patrón incorrecto"</string>
@@ -1505,26 +1502,15 @@
     <string name="spellchecker_quick_settings" msgid="246728645150092058">"Ajustes"</string>
     <string name="spellchecker_language" msgid="6041050114690541437">"Idioma"</string>
     <string name="failed_to_open_app_settings_toast" msgid="1251067459298072462">"Error al abrir los ajustes de <xliff:g id="SPELL_APPLICATION_NAME">%1$s</xliff:g>"</string>
-    <!-- no translation found for keyboard_and_input_methods_category (212319666432360385) -->
-    <skip />
-    <!-- no translation found for virtual_keyboard_category (1012830752318677119) -->
-    <skip />
-    <!-- no translation found for physical_keyboard_category (7946003168662969622) -->
-    <skip />
-    <!-- no translation found for available_virtual_keyboard_category (7645766574969139819) -->
-    <skip />
-    <!-- no translation found for add_virtual_keyboard (2867069766124874859) -->
-    <skip />
-    <!-- no translation found for keyboard_assistance_category (5843634175231134014) -->
-    <skip />
-    <!-- no translation found for show_ime (2658582193437188227) -->
-    <skip />
-    <!-- no translation found for show_ime_summary (8164993045923240698) -->
-    <skip />
-    <!-- no translation found for keyboard_shortcuts_helper (4839453720463798145) -->
-    <skip />
-    <!-- no translation found for physical_device_title (79889057252418427) -->
-    <skip />
+    <string name="keyboard_and_input_methods_category" msgid="212319666432360385">"Teclado y métodos de introducción"</string>
+    <string name="virtual_keyboard_category" msgid="1012830752318677119">"Teclado virtual"</string>
+    <string name="physical_keyboard_category" msgid="7946003168662969622">"Teclado físico"</string>
+    <string name="available_virtual_keyboard_category" msgid="7645766574969139819">"Teclado virtual disponible"</string>
+    <string name="add_virtual_keyboard" msgid="2867069766124874859">"Añadir un teclado virtual"</string>
+    <string name="keyboard_assistance_category" msgid="5843634175231134014">"Ayuda del teclado"</string>
+    <string name="show_ime" msgid="2658582193437188227">"Mostrar teclado virtual"</string>
+    <string name="show_ime_summary" msgid="8164993045923240698">"Debe seguir en pantalla mientras el teclado físico esté activo"</string>
+    <string name="physical_device_title" msgid="79889057252418427">"<xliff:g id="INPUT_METHOD_SUBTYPE">%1$s</xliff:g>: <xliff:g id="INPUT_METHOD_EDITOR">%2$s</xliff:g>"</string>
     <string name="pointer_settings_category" msgid="8183819795164034286">"Ratón/trackpad"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"Velocidad del puntero"</string>
     <string name="game_controller_settings_category" msgid="8794508575329923718">"Mandos de videojuegos"</string>
@@ -1607,7 +1593,6 @@
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"Sí"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"No"</string>
     <string name="accessibility_global_gesture_preference_description" msgid="750438015254396963">"Cuando esta función está activada, puedes habilitar las funciones de accesibilidad rápidamente en dos pasos.\n\nPaso 1: mantén pulsado el botón de encendido hasta que escuches un sonido o notes una vibración.\n\nPaso 2: mantén la pantalla pulsada con dos dedos hasta que escuches una confirmación.\n\nSi hay varios usuarios en el dispositivo, usar este acceso directo en la pantalla de bloqueo permite habilitar la accesibilidad de forma temporal hasta que el dispositivo se desbloquea."</string>
-    <string name="accessibility_toggle_large_text_preference_title" msgid="6307247527580207161">"Texto grande"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="2567402942683463779">"Texto de alto contraste"</string>
     <string name="accessibility_toggle_screen_magnification_preference_title" msgid="2472285215737820469">"Ampliación de pantalla"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="7218498768415430963">"Actualizar ampliación automáticamente"</string>
@@ -1938,8 +1923,7 @@
     <string name="device_admin_settings_title" msgid="1335557832906433309">"Ajustes de administración de dispositivos"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"Administrador de dispositivos"</string>
     <string name="remove_device_admin" msgid="3596845261596451437">"Desactivar"</string>
-    <!-- no translation found for uninstall_device_admin (2019687470475335309) -->
-    <skip />
+    <string name="uninstall_device_admin" msgid="2019687470475335309">"Desinstalar"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"Administradores de dispositivos"</string>
     <string name="no_device_admins" msgid="702695100241728775">"No hay ningún administrador de dispositivos disponible."</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"Personal"</string>
@@ -2098,10 +2082,8 @@
     <string name="data_usage_forground_label" msgid="7654319010655983591">"Primer plano:"</string>
     <string name="data_usage_background_label" msgid="2722008379947694926">"Conexiones automáticas:"</string>
     <string name="data_usage_app_settings" msgid="2279171379771253165">"Ajustes de la aplicación"</string>
-    <!-- no translation found for data_usage_app_restrict_background (7359227831562303223) -->
-    <skip />
-    <!-- no translation found for data_usage_app_restrict_background_summary (4669789008211107454) -->
-    <skip />
+    <string name="data_usage_app_restrict_background" msgid="7359227831562303223">"Conexiones automáticas"</string>
+    <string name="data_usage_app_restrict_background_summary" msgid="4669789008211107454">"Habilitar el uso de datos móviles de forma automática"</string>
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="1446565717342917727">"Limita datos móviles para restringir conex autom en aplicación."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"¿Restringir conexiones automáticas?"</string>
     <string name="data_usage_app_restrict_dialog" msgid="5871168521456832764">"Esta función puede hacer que una aplicación que depende de las conexiones automáticas deje de funcionar si solo hay redes móviles disponibles.\n\nPuedes encontrar más opciones para controlar el uso de datos en los ajustes disponibles en la aplicación."</string>
@@ -2268,10 +2250,8 @@
     <string name="user_enable_calling_confirm_message" msgid="8061594235219352787">"El historial de llamadas se compartirá con este usuario."</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="7243308401401932681">"¿Activar llamadas y SMS?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="4025082715546544967">"El historial de SMS y de llamadas se compartirán con este usuario."</string>
-    <!-- no translation found for emergency_info_title (208607506217060337) -->
-    <skip />
-    <!-- no translation found for emergency_info_subtitle (1301492666470489605) -->
-    <skip />
+    <string name="emergency_info_title" msgid="208607506217060337">"Información de emergencia"</string>
+    <string name="emergency_info_subtitle" msgid="1301492666470489605">"Disponible al realizar una llamada de emergencia en la pantalla de bloqueo"</string>
     <string name="application_restrictions" msgid="8207332020898004394">"Permitir aplicaciones y contenido"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Aplicaciones con restricciones"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Ampliar ajustes de aplicación"</string>
@@ -2466,6 +2446,7 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Vibrar"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Permitir solo con prioridad"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Reglas automáticas"</string>
+    <string name="zen_mode_automation_suggestion_title" msgid="4695313598703536699">"Configurar No molestar"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"Solo prioritarias"</string>
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Solo alarmas"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"Silencio total"</string>
@@ -2480,15 +2461,27 @@
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"No mostrar notificaciones"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"¿Cómo quieres que se muestren las notificaciones cuando esté bloqueado el dispositivo?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"Notificaciones"</string>
+    <!-- no translation found for lock_screen_notifications_summary_show_profile (552385140686291731) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifications_summary_hide_profile (1253321444387544886) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifications_summary_disable_profile (5687358507957376100) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifications_interstitial_message_profile (8307705621027472346) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifications_interstitial_title_profile (3169806586032521333) -->
+    <skip />
     <string name="app_notifications_title" msgid="139788604658984593">"Notificaciones"</string>
     <string name="topic_notifications_title" msgid="7243623930984080881">"Notificaciones de tema"</string>
     <string name="notification_topic_categories" msgid="3399184843660543981">"Categorías"</string>
     <string name="notification_importance_title" msgid="848692592679312666">"Importancia"</string>
+    <string name="notification_importance_none" msgid="3173515479356106227">"Sin definir"</string>
     <string name="notification_importance_blocked" msgid="4764559498517003405">"Bloqueada: no mostrar estas notificaciones"</string>
     <string name="notification_importance_low" msgid="9187046927980498942">"Baja: mostrar en la parte inferior de la lista de notificaciones de forma silenciosa"</string>
     <string name="notification_importance_default" msgid="4924370061477615318">"Normal: mostrar estas notificaciones de forma silenciosa"</string>
     <string name="notification_importance_high" msgid="1918112760912803959">"Alta: mostrar en la parte superior de la lista de notificaciones y emitir sonido"</string>
     <string name="notification_importance_max" msgid="5501185277889361261">"Urgente: mostrar en la pantalla y emitir sonido"</string>
+    <string name="importance_reset" msgid="7458420788555607007">"Restablecer"</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"Asistente de notificaciones"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Acceso a notificaciones"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Las aplicaciones no pueden leer notificaciones"</string>
@@ -2863,8 +2856,7 @@
     <string name="condition_battery_summary" msgid="4418839236027977450">"Ha disminuido el rendimiento. Las conexiones automáticas y los servicios de ubicación están desactivados."</string>
     <string name="condition_cellular_title" msgid="2398754272044917264">"Datos móviles desactivados"</string>
     <string name="condition_cellular_summary" msgid="1818046558419658463">"Internet solo está disponible a través de redes Wi-Fi"</string>
-    <!-- no translation found for condition_bg_data_title (2483860304802846542) -->
-    <skip />
+    <string name="condition_bg_data_title" msgid="2483860304802846542">"Economizador de datos activado"</string>
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Las conexiones automáticas solo están disponibles a través de redes Wi-Fi. Si la conexión Wi-Fi no está disponible, algunas aplicaciones o algunos servicios pueden verse afectados."</string>
     <string name="condition_work_title" msgid="7293722361184366648">"Perfil de trabajo desactivado"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"Las aplicaciones, la sincronización en segundo plano y otras funciones relacionadas con tu perfil de trabajo están desactivadas."</string>
@@ -2895,21 +2887,21 @@
     <string name="data_limit" msgid="1885406964934590552">"Límite de datos"</string>
     <string name="data_usage_template" msgid="392191945602400904">"Datos utilizados entre el <xliff:g id="ID_2">%2$s</xliff:g>: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="configure" msgid="1029654422228677273">"Configurar"</string>
-    <!-- no translation found for data_saver_unrestricted_summary (2635267833484232703) -->
-    <!-- no translation found for data_saver_title (8034286939200289826) -->
-    <skip />
-    <!-- no translation found for unrestricted_data_saver (7019858887510062789) -->
-    <skip />
-    <!-- no translation found for data_saver_on (6774217590237934709) -->
-    <skip />
-    <!-- no translation found for data_saver_off (6892309031162738794) -->
-    <skip />
-    <!-- no translation found for unrestricted_app_title (4465437191723332066) -->
-    <skip />
-    <!-- no translation found for unrestricted_app_summary (6458008993501723912) -->
-    <skip />
-    <!-- no translation found for home_app (4066188520886810030) -->
-    <skip />
-    <!-- no translation found for no_default_home (7184117487704520238) -->
-    <skip />
+    <plurals name="data_saver_unrestricted_summary" formatted="false" msgid="2635267833484232703">
+      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> aplicaciones han permitido que se utilicen datos no restringidos cuando Economizador de datos está activado</item>
+      <item quantity="one">1 aplicación ha permitido que se utilicen datos no restringidos cuando Economizador de datos está activado</item>
+    </plurals>
+    <string name="data_saver_title" msgid="8034286939200289826">"Economizador de datos"</string>
+    <string name="unrestricted_data_saver" msgid="7019858887510062789">"Acceso a datos no restringidos"</string>
+    <string name="data_saver_on" msgid="6774217590237934709">"Sí"</string>
+    <string name="data_saver_off" msgid="6892309031162738794">"No"</string>
+    <string name="unrestricted_app_title" msgid="4465437191723332066">"Uso de datos no restringidos"</string>
+    <string name="unrestricted_app_summary" msgid="6458008993501723912">"Permitir acceso si Economizador de datos activado"</string>
+    <string name="home_app" msgid="4066188520886810030">"Aplicación de inicio"</string>
+    <string name="no_default_home" msgid="7184117487704520238">"Sin aplicación de inicio predeterminada"</string>
+    <string name="lockpattern_settings_require_cred_before_startup" msgid="3832020101401318248">"Inicio seguro"</string>
+    <string name="lockpattern_settings_require_pattern_before_startup_summary" msgid="7873036097628404476">"Solicitar un patrón para iniciar el dispositivo. Si el dispositivo está apagado, no puede recibir llamadas, mensajes, notificaciones ni alarmas."</string>
+    <string name="lockpattern_settings_require_pin_before_startup_summary" msgid="6022831284097476933">"Solicitar PIN para iniciar el dispositivo. Si el dispositivo está apagado, no puede recibir llamadas, mensajes, notificaciones ni alarmas."</string>
+    <string name="lockpattern_settings_require_password_before_startup_summary" msgid="6818285221244966231">"Solicitar contraseña para iniciar el dispositivo. Si el dispositivo está apagado, no puede recibir llamadas, mensajes, notificaciones ni alarmas."</string>
+    <string name="suggestion_additional_fingerprints" msgid="3683327800671241982">"Otras huellas digitales"</string>
 </resources>
