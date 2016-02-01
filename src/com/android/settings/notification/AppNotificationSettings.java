@@ -83,7 +83,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
         mBlock = (RestrictedSwitchPreference) findPreference(KEY_BLOCK);
         mImportance = (ImportanceSeekBarPreference) findPreference(KEY_IMPORTANCE);
         mImportanceReset = (LayoutPreference) findPreference(KEY_IMPORTANCE_RESET);
-        mImportanceTitle = findPreference(KEY_IMPORTANCE_TITLE);
+        mImportanceTitle = (RestrictedPreference) findPreference(KEY_IMPORTANCE_TITLE);
         mPriority =
                 (RestrictedSwitchPreference) getPreferenceScreen().findPreference(KEY_BYPASS_DND);
         mSensitive =
@@ -108,8 +108,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
             setupBlockSwitch();
             for (Notification.Topic topic : topics) {
                 RestrictedPreference topicPreference = new RestrictedPreference(getPrefContext());
-                topicPreference.setDisabledByAdmin(
-                        RestrictedLockUtils.checkIfApplicationIsSuspended(mContext, mPkg, mUserId));
+                topicPreference.setDisabledByAdmin(mSuspendedAppsAdmin);
                 topicPreference.setKey(topic.getId());
                 topicPreference.setTitle(topic.getLabel());
                 // Create intent for this preference.
@@ -153,8 +152,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
     }
 
     private void setupBlockSwitch() {
-        mBlock.setDisabledByAdmin(
-                RestrictedLockUtils.checkIfApplicationIsSuspended(mContext, mPkg, mUserId));
+        mBlock.setDisabledByAdmin(mSuspendedAppsAdmin);
         mBlock.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {

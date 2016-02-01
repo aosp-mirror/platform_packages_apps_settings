@@ -20,6 +20,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settings.applications.LayoutPreference;
 
@@ -65,10 +66,11 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
     protected PackageInfo mPkgInfo;
     protected Notification.Topic mTopic;
     protected ImportanceSeekBarPreference mImportance;
-    protected Preference mImportanceTitle;
+    protected RestrictedPreference mImportanceTitle;
     protected LayoutPreference mImportanceReset;
     protected RestrictedSwitchPreference mPriority;
     protected RestrictedSwitchPreference mSensitive;
+    protected EnforcedAdmin mSuspendedAppsAdmin;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -126,6 +128,9 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
         // Will be null for app wide settings.
         mTopic = args != null && args.containsKey(ARG_TOPIC)
                 ? (Notification.Topic) args.getParcelable(ARG_TOPIC) : null;
+
+        mSuspendedAppsAdmin = RestrictedLockUtils.checkIfApplicationIsSuspended(
+                mContext, mPkg, mUserId);
     }
 
     @Override
@@ -136,22 +141,25 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
             finish();
             return;
         }
-        EnforcedAdmin admin = RestrictedLockUtils.checkIfApplicationIsSuspended(
+        mSuspendedAppsAdmin = RestrictedLockUtils.checkIfApplicationIsSuspended(
                 mContext, mPkg, mUserId);
         if (mImportance != null) {
-            mImportance.setDisabledByAdmin(admin);
+            mImportance.setDisabledByAdmin(mSuspendedAppsAdmin);
         }
         if (mPriority != null) {
-            mPriority.setDisabledByAdmin(admin);
+            mPriority.setDisabledByAdmin(mSuspendedAppsAdmin);
         }
         if (mSensitive != null) {
-            mSensitive.setDisabledByAdmin(admin);
+            mSensitive.setDisabledByAdmin(mSuspendedAppsAdmin);
+        }
+        if (mImportanceTitle != null) {
+            mImportanceTitle.setDisabledByAdmin(mSuspendedAppsAdmin);
         }
     }
 
     protected void setupImportancePrefs(boolean isSystemApp, int importance) {
-        mImportance.setDisabledByAdmin(
-                RestrictedLockUtils.checkIfApplicationIsSuspended(mContext, mPkg, mUserId));
+        mImportance.setDisabledByAdmin(mSuspendedAppsAdmin);
+        mImportanceTitle.setDisabledByAdmin(mSuspendedAppsAdmin);
         if (importance == Ranking.IMPORTANCE_UNSPECIFIED) {
             mImportance.setVisible(false);
             mImportanceReset.setVisible(false);
@@ -180,6 +188,12 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mSuspendedAppsAdmin != null) {
+                    RestrictedLockUtils.sendShowAdminSupportDetailsIntent(
+                            getActivity(), mSuspendedAppsAdmin);
+                    return;
+                }
+
                 mBackend.setImportance(mPkg, mUid, mTopic, Ranking.IMPORTANCE_UNSPECIFIED);
                 mImportanceReset.setVisible(false);
                 mImportance.setVisible(false);
@@ -211,8 +225,7 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
     }
 
     protected void setupPriorityPref(boolean priority) {
-        mPriority.setDisabledByAdmin(
-                RestrictedLockUtils.checkIfApplicationIsSuspended(mContext, mPkg, mUserId));
+        mPriority.setDisabledByAdmin(mSuspendedAppsAdmin);
         mPriority.setChecked(priority);
         mPriority.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
@@ -224,8 +237,7 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
     }
 
     protected void setupSensitivePref(boolean sensitive) {
-        mSensitive.setDisabledByAdmin(
-                RestrictedLockUtils.checkIfApplicationIsSuspended(mContext, mPkg, mUserId));
+        mSensitive.setDisabledByAdmin(mSuspendedAppsAdmin);
         mSensitive.setChecked(sensitive);
         mSensitive.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
