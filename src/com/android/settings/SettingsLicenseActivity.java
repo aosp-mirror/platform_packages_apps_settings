@@ -66,14 +66,11 @@ public class SettingsLicenseActivity extends Activity {
         intent.setPackage("com.android.htmlviewer");
 
         try {
-            StrictMode.disableDeathOnFileUriExposure();
             startActivity(intent);
             finish();
         } catch (ActivityNotFoundException e) {
             Log.e(TAG, "Failed to find viewer", e);
             showErrorAndFinish();
-        } finally {
-            StrictMode.enableDeathOnFileUriExposure();
         }
     }
 
