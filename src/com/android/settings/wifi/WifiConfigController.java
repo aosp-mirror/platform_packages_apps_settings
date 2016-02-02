@@ -127,6 +127,7 @@ public class WifiConfigController implements TextWatcher,
     private Spinner mSecuritySpinner;
     private Spinner mEapMethodSpinner;
     private Spinner mEapCaCertSpinner;
+    private TextView mEapDomainView;
     private Spinner mPhase2Spinner;
     // Associated with mPhase2Spinner, one of mPhase2FullAdapter or mPhase2PeapAdapter
     private ArrayAdapter<String> mPhase2Adapter;
@@ -414,7 +415,7 @@ public class WifiConfigController implements TextWatcher,
         if (mEapCaCertSpinner != null
                 && mView.findViewById(R.id.l_ca_cert).getVisibility() != View.GONE
                 && ((String) mEapCaCertSpinner.getSelectedItem())
-                       .equals(mDoNotValidateEapServerString)) {
+                        .equals(mDoNotValidateEapServerString)) {
             // Display warning if user chooses not to validate the EAP server with a user-supplied
             // CA certificate in an EAP network configuration.
             mView.findViewById(R.id.no_ca_cert_warning).setVisibility(View.VISIBLE);
@@ -514,17 +515,22 @@ public class WifiConfigController implements TextWatcher,
                     // Note: |caCert| should not be able to take the value |unspecifiedCert|,
                     // since we prevent such configurations from being saved.
                     config.enterpriseConfig.setCaCertificateAliases(null);
-                } else if (caCert.equals(mMultipleCertSetString)) {
-                    if (mAccessPoint != null) {
-                        if (!mAccessPoint.isSaved()) {
-                            Log.e(TAG, "Multiple certs can only be set when editing saved network");
-                        }
-                        config.enterpriseConfig.setCaCertificateAliases(
-                                mAccessPoint.getConfig().enterpriseConfig
-                                        .getCaCertificateAliases());
-                    }
                 } else {
-                    config.enterpriseConfig.setCaCertificateAliases(new String[] {caCert});
+                    config.enterpriseConfig.setDomainSuffixMatch(
+                            mEapDomainView.getText().toString());
+                    if (caCert.equals(mMultipleCertSetString)) {
+                        if (mAccessPoint != null) {
+                            if (!mAccessPoint.isSaved()) {
+                                Log.e(TAG, "Multiple certs can only be set "
+                                        + "when editing saved network");
+                            }
+                            config.enterpriseConfig.setCaCertificateAliases(
+                                    mAccessPoint.getConfig().enterpriseConfig
+                                            .getCaCertificateAliases());
+                        }
+                    } else {
+                        config.enterpriseConfig.setCaCertificateAliases(new String[] {caCert});
+                    }
                 }
 
                 String clientCert = (String) mEapUserCertSpinner.getSelectedItem();
@@ -738,6 +744,7 @@ public class WifiConfigController implements TextWatcher,
             mPhase2Spinner = (Spinner) mView.findViewById(R.id.phase2);
             mEapCaCertSpinner = (Spinner) mView.findViewById(R.id.ca_cert);
             mEapCaCertSpinner.setOnItemSelectedListener(this);
+            mEapDomainView = (TextView) mView.findViewById(R.id.domain);
             mEapUserCertSpinner = (Spinner) mView.findViewById(R.id.user_cert);
             mEapUserCertSpinner.setOnItemSelectedListener(this);
             mEapIdentityView = (TextView) mView.findViewById(R.id.identity);
@@ -787,6 +794,7 @@ public class WifiConfigController implements TextWatcher,
                             Credentials.CA_CERTIFICATE, true, mDoNotValidateEapServerString);
                     mEapCaCertSpinner.setSelection(MULTIPLE_CERT_SET_INDEX);
                 }
+                mEapDomainView.setText(enterpriseConfig.getDomainSuffixMatch());
                 setSelection(mEapUserCertSpinner, enterpriseConfig.getClientCertificateAlias());
                 mEapIdentityView.setText(enterpriseConfig.getIdentity());
                 mEapAnonymousView.setText(enterpriseConfig.getAnonymousIdentity());
@@ -811,6 +819,7 @@ public class WifiConfigController implements TextWatcher,
      * EAP-TLS valid fields include
      *   user_cert
      *   ca_cert
+     *   domain
      *   identity
      * EAP-TTLS valid fields include
      *   phase2: PAP, MSCHAP, MSCHAPV2, GTC
@@ -823,6 +832,7 @@ public class WifiConfigController implements TextWatcher,
         // Common defaults
         mView.findViewById(R.id.l_method).setVisibility(View.VISIBLE);
         mView.findViewById(R.id.l_identity).setVisibility(View.VISIBLE);
+        mView.findViewById(R.id.l_domain).setVisibility(View.VISIBLE);
 
         // Defaults for most of the EAP methods and over-riden by
         // by certain EAP methods
@@ -835,6 +845,7 @@ public class WifiConfigController implements TextWatcher,
             case WIFI_EAP_METHOD_PWD:
                 setPhase2Invisible();
                 setCaCertInvisible();
+                setDomainInvisible();
                 setAnonymousIdentInvisible();
                 setUserCertInvisible();
                 break;
@@ -870,10 +881,21 @@ public class WifiConfigController implements TextWatcher,
                 setPhase2Invisible();
                 setAnonymousIdentInvisible();
                 setCaCertInvisible();
+                setDomainInvisible();
                 setUserCertInvisible();
                 setPasswordInvisible();
                 setIdentityInvisible();
                 break;
+        }
+
+        if (mView.findViewById(R.id.l_ca_cert).getVisibility() != View.GONE) {
+            String eapCertSelection = (String) mEapCaCertSpinner.getSelectedItem();
+            if (eapCertSelection.equals(mDoNotValidateEapServerString)
+                    || eapCertSelection.equals(mUnspecifiedCertString)) {
+                // Domain suffix matching is not relevant if the user hasn't chosen a CA
+                // certificate yet, or chooses not to validate the EAP server.
+                setDomainInvisible();
+            }
         }
     }
 
@@ -890,6 +912,11 @@ public class WifiConfigController implements TextWatcher,
     private void setCaCertInvisible() {
         mView.findViewById(R.id.l_ca_cert).setVisibility(View.GONE);
         mEapCaCertSpinner.setSelection(UNSPECIFIED_CERT_INDEX);
+    }
+
+    private void setDomainInvisible() {
+        mView.findViewById(R.id.l_domain).setVisibility(View.GONE);
+        mEapDomainView.setText("");
     }
 
     private void setUserCertInvisible() {
@@ -1120,7 +1147,7 @@ public class WifiConfigController implements TextWatcher,
         if (parent == mSecuritySpinner) {
             mAccessPointSecurity = position;
             showSecurityFields();
-        } else if (parent == mEapMethodSpinner) {
+        } else if (parent == mEapMethodSpinner || parent == mEapCaCertSpinner) {
             showSecurityFields();
         } else if (parent == mProxySettingsSpinner) {
             showProxyFields();
