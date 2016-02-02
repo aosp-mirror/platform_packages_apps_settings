@@ -73,6 +73,8 @@ public class WifiConfigController
         implements TextWatcher, AdapterView.OnItemSelectedListener, OnCheckedChangeListener {
     private static final String TAG = "WifiConfigController";
 
+    private static final String SYSTEM_CA_STORE_PATH = "/system/etc/security/cacerts";
+
     private final WifiConfigUiBase mConfigUi;
     private final View mView;
     private final AccessPoint mAccessPoint;
@@ -113,10 +115,7 @@ public class WifiConfigController
 
     private String mUnspecifiedCertString;
     private String mMultipleCertSetString;
-    private static final int UNSPECIFIED_CERT_INDEX = 0;
-    private static final int NO_CERT_INDEX = 1;
-    private static final int MULTIPLE_CERT_SET_INDEX = 2;
-
+    private String mUseSystemCertsString;
     private String mDoNotProvideEapUserCertString;
     private String mDoNotValidateEapServerString;
 
@@ -185,6 +184,7 @@ public class WifiConfigController
 
         mUnspecifiedCertString = mContext.getString(R.string.wifi_unspecified);
         mMultipleCertSetString = mContext.getString(R.string.wifi_multiple_cert_added);
+        mUseSystemCertsString = mContext.getString(R.string.wifi_use_system_certs);
         mDoNotProvideEapUserCertString =
             mContext.getString(R.string.wifi_do_not_provide_eap_user_cert);
         mDoNotValidateEapServerString =
@@ -381,28 +381,54 @@ public class WifiConfigController
             }
         }
         if (mEapCaCertSpinner != null
-                && mView.findViewById(R.id.l_ca_cert).getVisibility() != View.GONE
-                && ((String) mEapCaCertSpinner.getSelectedItem()).equals(mUnspecifiedCertString)) {
-            enabled = false;
+                && mView.findViewById(R.id.l_ca_cert).getVisibility() != View.GONE) {
+            String caCertSelection = (String) mEapCaCertSpinner.getSelectedItem();
+            if (caCertSelection.equals(mUnspecifiedCertString)) {
+                // Disallow submit if the user has not selected a CA certificate for an EAP network
+                // configuration.
+                enabled = false;
+            }
+            if (caCertSelection.equals(mUseSystemCertsString)
+                    && mEapDomainView != null
+                    && mView.findViewById(R.id.l_domain).getVisibility() != View.GONE
+                    && TextUtils.isEmpty(mEapDomainView.getText().toString())) {
+                // Disallow submit if the user chooses to use system certificates for EAP server
+                // validation, but does not provide a domain.
+                enabled = false;
+            }
         }
         if (mEapUserCertSpinner != null
                 && mView.findViewById(R.id.l_user_cert).getVisibility() != View.GONE
                 && ((String) mEapUserCertSpinner.getSelectedItem())
                        .equals(mUnspecifiedCertString)) {
+            // Disallow submit if the user has not selected a user certificate for an EAP network
+            // configuration.
             enabled = false;
         }
         submit.setEnabled(enabled);
     }
 
-    void showWarningMessageIfAppropriate() {
+    void showWarningMessagesIfAppropriate() {
         mView.findViewById(R.id.no_ca_cert_warning).setVisibility(View.GONE);
+        mView.findViewById(R.id.no_domain_warning).setVisibility(View.GONE);
+
         if (mEapCaCertSpinner != null
-                && mView.findViewById(R.id.l_ca_cert).getVisibility() != View.GONE
-                && ((String) mEapCaCertSpinner.getSelectedItem())
-                        .equals(mDoNotValidateEapServerString)) {
-            // Display warning if user chooses not to validate the EAP server with a user-supplied
-            // CA certificate in an EAP network configuration.
-            mView.findViewById(R.id.no_ca_cert_warning).setVisibility(View.VISIBLE);
+                && mView.findViewById(R.id.l_ca_cert).getVisibility() != View.GONE) {
+            String caCertSelection = (String) mEapCaCertSpinner.getSelectedItem();
+            if (caCertSelection.equals(mDoNotValidateEapServerString)) {
+                // Display warning if user chooses not to validate the EAP server with a
+                // user-supplied CA certificate in an EAP network configuration.
+                mView.findViewById(R.id.no_ca_cert_warning).setVisibility(View.VISIBLE);
+            }
+            if (caCertSelection.equals(mUseSystemCertsString)
+                    && mEapDomainView != null
+                    && mView.findViewById(R.id.l_domain).getVisibility() != View.GONE
+                    && TextUtils.isEmpty(mEapDomainView.getText().toString())) {
+                // Display warning if user chooses to use pre-installed public CA certificates
+                // without restricting the server domain that these certificates can be used to
+                // validate.
+                mView.findViewById(R.id.no_domain_warning).setVisibility(View.VISIBLE);
+            }
         }
     }
 
@@ -500,7 +526,9 @@ public class WifiConfigController
                 } else {
                     config.enterpriseConfig.setDomainSuffixMatch(
                             mEapDomainView.getText().toString());
-                    if (caCert.equals(mMultipleCertSetString)) {
+                    if (caCert.equals(mUseSystemCertsString)) {
+                        config.enterpriseConfig.setCaPath(SYSTEM_CA_STORE_PATH);
+                    } else if (caCert.equals(mMultipleCertSetString)) {
                         if (mAccessPoint != null) {
                             if (!mAccessPoint.isSaved()) {
                                 Log.e(TAG, "Multiple certs can only be set "
@@ -725,15 +753,24 @@ public class WifiConfigController
             mEapCaCertSpinner = (Spinner) mView.findViewById(R.id.ca_cert);
             mEapCaCertSpinner.setOnItemSelectedListener(this);
             mEapDomainView = (TextView) mView.findViewById(R.id.domain);
+            mEapDomainView.addTextChangedListener(this);
             mEapUserCertSpinner = (Spinner) mView.findViewById(R.id.user_cert);
             mEapUserCertSpinner.setOnItemSelectedListener(this);
             mEapIdentityView = (TextView) mView.findViewById(R.id.identity);
             mEapAnonymousView = (TextView) mView.findViewById(R.id.anonymous);
 
-            loadCertificates(mEapCaCertSpinner, Credentials.CA_CERTIFICATE, false,
-                    mDoNotValidateEapServerString);
-            loadCertificates(mEapUserCertSpinner, Credentials.USER_PRIVATE_KEY, false,
-                    mDoNotProvideEapUserCertString);
+            loadCertificates(
+                    mEapCaCertSpinner,
+                    Credentials.CA_CERTIFICATE,
+                    mDoNotValidateEapServerString,
+                    false,
+                    true);
+            loadCertificates(
+                    mEapUserCertSpinner,
+                    Credentials.USER_PRIVATE_KEY,
+                    mDoNotProvideEapUserCertString,
+                    false,
+                    false);
 
             // Modifying an existing network
             if (mAccessPoint != null && mAccessPoint.isSaved()) {
@@ -763,16 +800,24 @@ public class WifiConfigController
                         mPhase2Spinner.setSelection(phase2Method);
                         break;
                 }
-                String[] caCerts = enterpriseConfig.getCaCertificateAliases();
-                if (caCerts == null) {
-                    setSelection(mEapCaCertSpinner, mDoNotValidateEapServerString);
-                } else if (caCerts.length == 1) {
-                    setSelection(mEapCaCertSpinner, caCerts[0]);
+                if (!TextUtils.isEmpty(enterpriseConfig.getCaPath())) {
+                    setSelection(mEapCaCertSpinner, mUseSystemCertsString);
                 } else {
-                    // Reload the cert spinner with an extra "multiple certificates added" item
-                    loadCertificates(mEapCaCertSpinner,
-                            Credentials.CA_CERTIFICATE, true, mDoNotValidateEapServerString);
-                    mEapCaCertSpinner.setSelection(MULTIPLE_CERT_SET_INDEX);
+                    String[] caCerts = enterpriseConfig.getCaCertificateAliases();
+                    if (caCerts == null) {
+                        setSelection(mEapCaCertSpinner, mDoNotValidateEapServerString);
+                    } else if (caCerts.length == 1) {
+                        setSelection(mEapCaCertSpinner, caCerts[0]);
+                    } else {
+                        // Reload the cert spinner with an extra "multiple certificates added" item.
+                        loadCertificates(
+                                mEapCaCertSpinner,
+                                Credentials.CA_CERTIFICATE,
+                                mDoNotValidateEapServerString,
+                                true,
+                                true);
+                        setSelection(mEapCaCertSpinner, mMultipleCertSetString);
+                    }
                 }
                 mEapDomainView.setText(enterpriseConfig.getDomainSuffixMatch());
                 String userCert = enterpriseConfig.getClientCertificateAlias();
@@ -896,7 +941,7 @@ public class WifiConfigController
 
     private void setCaCertInvisible() {
         mView.findViewById(R.id.l_ca_cert).setVisibility(View.GONE);
-        mEapCaCertSpinner.setSelection(UNSPECIFIED_CERT_INDEX);
+        setSelection(mEapCaCertSpinner, mUnspecifiedCertString);
     }
 
     private void setDomainInvisible() {
@@ -906,7 +951,7 @@ public class WifiConfigController
 
     private void setUserCertInvisible() {
         mView.findViewById(R.id.l_user_cert).setVisibility(View.GONE);
-        mEapUserCertSpinner.setSelection(UNSPECIFIED_CERT_INDEX);
+        setSelection(mEapUserCertSpinner, mUnspecifiedCertString);
     }
 
     private void setAnonymousIdentInvisible() {
@@ -1031,17 +1076,24 @@ public class WifiConfigController
     }
 
     private void loadCertificates(
-            Spinner spinner, String prefix, boolean showMultipleCerts, String noCertificateString) {
+            Spinner spinner,
+            String prefix,
+            String noCertificateString,
+            boolean showMultipleCerts,
+            boolean showUsePreinstalledCertOption) {
         final Context context = mConfigUi.getContext();
 
         ArrayList<String> certs = new ArrayList<String>();
-        certs.add(UNSPECIFIED_CERT_INDEX, mUnspecifiedCertString);
-        certs.add(NO_CERT_INDEX, noCertificateString);
+        certs.add(mUnspecifiedCertString);
         if (showMultipleCerts) {
-            certs.add(MULTIPLE_CERT_SET_INDEX, mMultipleCertSetString);
+            certs.add(mMultipleCertSetString);
+        }
+        if (showUsePreinstalledCertOption) {
+            certs.add(mUseSystemCertsString);
         }
         certs.addAll(
                 Arrays.asList(KeyStore.getInstance().list(prefix, android.os.Process.WIFI_UID)));
+        certs.add(noCertificateString);
 
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 context, android.R.layout.simple_spinner_item,
@@ -1075,6 +1127,7 @@ public class WifiConfigController
     public void afterTextChanged(Editable s) {
         mTextViewChangedHandler.post(new Runnable() {
                 public void run() {
+                    showWarningMessagesIfAppropriate();
                     enableSubmitIfAppropriate();
                 }
             });
@@ -1121,7 +1174,7 @@ public class WifiConfigController
         } else {
             showIpConfigFields();
         }
-        showWarningMessageIfAppropriate();
+        showWarningMessagesIfAppropriate();
         enableSubmitIfAppropriate();
     }
 
