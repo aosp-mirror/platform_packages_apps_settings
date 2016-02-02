@@ -14,6 +14,7 @@
 
 package com.android.settings.datausage;
 
+import android.app.backup.BackupManager;
 import android.content.Context;
 import android.content.res.Resources;
 import android.net.NetworkPolicy;
@@ -150,6 +151,8 @@ public class DataUsageMeteredSettings extends SettingsPreferenceFragment impleme
             super.notifyChanged();
             if (!mBinding) {
                 mPolicyEditor.setPolicyMetered(mTemplate, isChecked());
+                // Stage the backup of the SettingsProvider package which backs this up
+                BackupManager.dataChanged("com.android.providers.settings");
             }
         }
     }
