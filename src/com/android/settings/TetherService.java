@@ -37,6 +37,7 @@ import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settingslib.TetherUtil;
 
 import java.util.ArrayList;
@@ -46,7 +47,8 @@ public class TetherService extends Service {
     private static final String TAG = "TetherService";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
-    private static final String EXTRA_RESULT = "EntitlementResult";
+    @VisibleForTesting
+    public static final String EXTRA_RESULT = "EntitlementResult";
 
     // Activity results to match the activity provision protocol.
     // Default to something not ok.
@@ -295,7 +297,7 @@ public class TetherService extends Service {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (DEBUG) Log.d(TAG, "Got provision result " + intent);
-            String provisionResponse = context.getResources().getString(
+            String provisionResponse = getResources().getString(
                     com.android.internal.R.string.config_mobile_hotspot_provision_response);
 
             if (provisionResponse.equals(intent.getAction())) {
