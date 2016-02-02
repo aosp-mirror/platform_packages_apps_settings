@@ -39,7 +39,7 @@
     <item msgid="6864027152847611413">"۳۰ دقیقه"</item>
   </string-array>
   <string-array name="dream_timeout_entries">
-    <item msgid="3149294732238283185">"هیچوقت"</item>
+    <item msgid="3149294732238283185">"هیچ‌وقت"</item>
     <item msgid="2194151041885903260">"۱۵ ثانیه"</item>
     <item msgid="5892295237131074341">"۳۰ ثانیه"</item>
     <item msgid="3538441365970038213">"۱ دقیقه"</item>
@@ -70,11 +70,11 @@
     <item msgid="2361722960903353554">"آهسته"</item>
     <item msgid="1145554631248513562">"معمولی"</item>
     <item msgid="7553665153391107454">"سریع"</item>
-    <item msgid="1370673569131070146">"سریعتر"</item>
+    <item msgid="1370673569131070146">"سریع‌تر"</item>
     <item msgid="4648206845228970803">"خیلی سریع"</item>
     <item msgid="4977949754169483251">"تند"</item>
     <item msgid="6106302964845503577">"خیلی تند"</item>
-    <item msgid="6800277205640837264">"سریعترین"</item>
+    <item msgid="6800277205640837264">"سریع‌ترین"</item>
   </string-array>
   <string-array name="tts_pitch_entries">
     <item msgid="7526050907652687351">"بسیار کم"</item>
@@ -129,6 +129,12 @@
     <item msgid="1023893786681286517">"AKA"</item>
     <item msgid="3030483188676375009">"AKA\'"</item>
   </string-array>
+  <string-array name="eap_method_without_sim_auth">
+    <item msgid="4047867891913819797">"PEAP"</item>
+    <item msgid="641030570679578504">"TLS"</item>
+    <item msgid="3079489731769553856">"TTLS"</item>
+    <item msgid="35269224158638258">"PWD"</item>
+  </string-array>
     <!-- no translation found for wifi_ap_band_config_full:0 (1085243288162893079) -->
     <!-- no translation found for wifi_ap_band_config_full:1 (5531376834915607202) -->
     <!-- no translation found for wifi_ap_band_config_2G_only:0 (7006771583217001015) -->
@@ -159,12 +165,12 @@
   <string-array name="wifi_sleep_policy_entries">
     <item msgid="3269131034472904310">"همیشه"</item>
     <item msgid="844721238536786870">"تنها زمانی که وصل است"</item>
-    <item msgid="1986753720941888596">"هرگز"</item>
+    <item msgid="1986753720941888596">"هیچ‌وقت"</item>
   </string-array>
   <string-array name="wifi_sleep_policy_entries_wifi_only">
     <item msgid="2124319326282651391">"همیشه"</item>
     <item msgid="7433294150916905997">"تنها زمانی که وصل است"</item>
-    <item msgid="1390404486722375028">"هیچوقت"</item>
+    <item msgid="1390404486722375028">"هیچ‌وقت"</item>
   </string-array>
   <string-array name="data_usage_data_range">
     <item msgid="5013973108901348144">"۳۰ روز گذشته"</item>
@@ -187,12 +193,12 @@
     <item msgid="2318274046749286642">"PWD"</item>
   </string-array>
   <string-array name="wifi_peap_phase2_entries">
-    <item msgid="2577747762745812488">"هیچکدام"</item>
+    <item msgid="2577747762745812488">"هیچ‌کدام"</item>
     <item msgid="937786527870979616">"MSCHAPV2"</item>
     <item msgid="5302613883318643629">"GTC"</item>
   </string-array>
   <string-array name="wifi_phase2_entries">
-    <item msgid="1818786254010764570">"هیچکدام"</item>
+    <item msgid="1818786254010764570">"هیچ‌کدام"</item>
     <item msgid="6189918678874123056">"PAP"</item>
     <item msgid="1524112260493662517">"MSCHAP"</item>
     <item msgid="5923246669412752932">"MSCHAPV2"</item>
@@ -203,12 +209,12 @@
     <item msgid="628395202971532382">"ثابت"</item>
   </string-array>
   <string-array name="wifi_proxy_settings">
-    <item msgid="4473276491748503377">"هیچکدام"</item>
+    <item msgid="4473276491748503377">"هیچ‌کدام"</item>
     <item msgid="8673874894887358090">"دستی"</item>
     <item msgid="168893341855953140">"پیکربندی خودکار پروکسی"</item>
   </string-array>
   <string-array name="apn_auth_entries">
-    <item msgid="3856896061242872146">"هیچکدام"</item>
+    <item msgid="3856896061242872146">"هیچ‌کدام"</item>
     <item msgid="5756844015743664882">"PAP"</item>
     <item msgid="535934025797984365">"CHAP"</item>
     <item msgid="8383098660619805783">"‏PAP یا CHAP"</item>
@@ -219,12 +225,25 @@
     <item msgid="8084938354605535381">"IPv4/IPv6"</item>
   </string-array>
   <string-array name="bearer_entries">
-    <item msgid="1770285336669531300">"LTE"</item>
-    <item msgid="3044323519470167625">"eHRPD"</item>
-    <item msgid="6848428671997893147">"مشخص نشده"</item>
+    <item msgid="1697455674244601285">"نامشخص"</item>
+    <item msgid="1317061551798123908">"LTE"</item>
+    <item msgid="5005435684511894770">"HSPAP"</item>
+    <item msgid="7700603056475539235">"HSPA"</item>
+    <item msgid="245973007602397887">"HSUPA"</item>
+    <item msgid="6291566767651194016">"HSDPA"</item>
+    <item msgid="2005841400859926251">"UMTS"</item>
+    <item msgid="3757385691174882861">"EDGE"</item>
+    <item msgid="2979115073474306864">"GPRS"</item>
+    <item msgid="2271750502778879106">"eHRPD"</item>
+    <item msgid="4173379084783381337">"EVDO_B"</item>
+    <item msgid="2033682802005776093">"EVDO_A"</item>
+    <item msgid="5753917125831466719">"EVDO_0"</item>
+    <item msgid="4713807936577071142">"1xRTT"</item>
+    <item msgid="1142355797022021906">"IS95B"</item>
+    <item msgid="7471182818083460781">"IS95A"</item>
   </string-array>
   <string-array name="mvno_type_entries">
-    <item msgid="4367119357633573465">"None"</item>
+    <item msgid="4367119357633573465">"هیچ‌کدام"</item>
     <item msgid="6062567900587138000">"SPN"</item>
     <item msgid="2454085083342423481">"IMSI"</item>
     <item msgid="2681427309183221543">"GID"</item>
@@ -272,14 +291,14 @@
     <item msgid="1097324338692486211">"ضبط صدا"</item>
     <item msgid="5031552983987798163">"پخش صدا"</item>
     <item msgid="8374996688066472414">"خواندن کلیپ بورد"</item>
-    <item msgid="3045529469061083747">"اصلاح کلیپ‌بورد"</item>
+    <item msgid="3045529469061083747">"اصلاح بریده‌دان"</item>
     <item msgid="5124443975763747838">"دکمه‌های رسانه‌ای"</item>
     <item msgid="4547883971364273343">"فوکوس صدا"</item>
     <item msgid="2603878814882344450">"میزان کنترل"</item>
     <item msgid="7136963238377062018">"میزان صدا"</item>
     <item msgid="4270236897655923007">"حجم حلقه"</item>
     <item msgid="6325739889222559394">"میزان صدای رسانه"</item>
-    <item msgid="5762123934816216821">"میزان صدای زنگ هشدار"</item>
+    <item msgid="5762123934816216821">"میزان صدای هشدار"</item>
     <item msgid="785049718065337473">"میزان صدای اعلان"</item>
     <item msgid="6700305533746877052">"میزان صدای بلوتوث"</item>
     <item msgid="2029227495214047094">"بیدار باش"</item>
@@ -288,8 +307,8 @@
     <item msgid="3356591542543137332">"دریافت آمار استفاده"</item>
     <item msgid="3073734345226842233">"صدادار/بی‌صدا کردن میکروفن"</item>
     <item msgid="1148142988678569310">"فرستادن رسانه"</item>
-    <item msgid="9130014005474445273">"‏فعال‌سازی VPN"</item>
-    <item msgid="1165192162975045562">"نوشتن کاغذ دیواری"</item>
+    <item msgid="9130014005474445273">"‏فعال کردن VPN"</item>
+    <item msgid="1165192162975045562">"نوشتن کاغذدیواری"</item>
     <item msgid="7129487923652967258">"دستیار ساختار"</item>
     <item msgid="1069023208100114540">"دستیار عکس صفحه‌نمایش"</item>
   </string-array>
@@ -331,7 +350,7 @@
     <item msgid="5660213838861789350">"میزان صدای مکالمه"</item>
     <item msgid="7983336752371254444">"میزان صدای زنگ"</item>
     <item msgid="7878027809189330917">"میزان صدای رسانه"</item>
-    <item msgid="7260546305036218513">"میزان صدای زنگ هشدار"</item>
+    <item msgid="7260546305036218513">"میزان صدای هشدار"</item>
     <item msgid="9103719301075748925">"میزان صدای اعلان"</item>
     <item msgid="7025966722295861512">"میزان صدای بلوتوث"</item>
     <item msgid="4665183401128289653">"بیدار باش"</item>
@@ -340,8 +359,8 @@
     <item msgid="3459320345690097795">"دریافت آمار استفاده"</item>
     <item msgid="1312534577834048535">"صدادار/بی‌صدا کردن میکروفن"</item>
     <item msgid="5906017727368097853">"فرستادن رسانه"</item>
-    <item msgid="2486614710846178542">"‏فعال‌سازی VPN"</item>
-    <item msgid="5586547561693629602">"نوشتن کاغذ دیواری"</item>
+    <item msgid="2486614710846178542">"‏فعال کردن VPN"</item>
+    <item msgid="5586547561693629602">"نوشتن کاغذدیواری"</item>
     <item msgid="32794179825485062">"دستیار ساختار"</item>
     <item msgid="7872852746938272552">"دستیار عکس‌ صفحه‌نمایش"</item>
   </string-array>
@@ -447,17 +466,21 @@
     <item msgid="1069584980746680398">"مقیاس پویانمایی 10 برابر"</item>
   </string-array>
   <string-array name="overlay_display_devices_entries">
-    <item msgid="1606809880904982133">"هیچکدام"</item>
-    <item msgid="688482401508173818">"720X480 mdpi"</item>
-    <item msgid="6027541158956821790">"‏720x480 mdpi (امن)"</item>
-    <item msgid="8181151155909301030">"1280x720 tvdpi"</item>
-    <item msgid="2920655562462493148">"‏1280x720 tvdpi (امن)"</item>
-    <item msgid="8910371271391940941">"1920x1080 xhdpi"</item>
-    <item msgid="4171600481380800455">"‏1920x1080 xhdpi (امن)"</item>
-    <item msgid="1937752114395156918">"‏1280x720 tvdpi و 1920x1080 xhdpi"</item>
+    <item msgid="1606809880904982133">"هیچ‌کدام"</item>
+    <item msgid="9033194758688161545">"480p"</item>
+    <item msgid="1025306206556583600">"‏480p (ایمن)"</item>
+    <item msgid="1853913333042744661">"720p"</item>
+    <item msgid="3414540279805870511">"‏720p (ایمن)"</item>
+    <item msgid="9039818062847141551">"1080p"</item>
+    <item msgid="4939496949750174834">"‏1080p (ایمن)"</item>
+    <item msgid="1833612718524903568">"4K"</item>
+    <item msgid="238303513127879234">"‏4K (ایمن)"</item>
+    <item msgid="3547211260846843098">"‏4K (ارتقا یافته)"</item>
+    <item msgid="5411365648951414254">"‏4K (ارتقا یافته، ایمن)"</item>
+    <item msgid="1311305077526792901">"‏720p،‏ 1080p (صفحه‌نمایش دوتایی)"</item>
   </string-array>
   <string-array name="enable_opengl_traces_entries">
-    <item msgid="3191973083884253830">"هیچکدام"</item>
+    <item msgid="3191973083884253830">"هیچ‌کدام"</item>
     <item msgid="9089630089455370183">"Logcat"</item>
     <item msgid="5397807424362304288">"‏Systrace (تصاویر گرافیکی)"</item>
     <item msgid="1340692776955662664">"‏فراخوانی پشته در glGetError"</item>
@@ -469,7 +492,7 @@
   </string-array>
   <string-array name="track_frame_time_entries">
     <item msgid="2193584639058893150">"خاموش"</item>
-    <item msgid="2751513398307949636">"بر روی صفحه نمایش بصورت نوار"</item>
+    <item msgid="2751513398307949636">"روی صفحه نمایش به‌صورت میله‌ای"</item>
     <item msgid="1851438178120770973">"‏در adb shell dumpsys gfxinfo"</item>
   </string-array>
   <string-array name="debug_hw_overdraw_entries">
@@ -504,13 +527,14 @@
   <string-array name="security_settings_premium_sms_values">
     <item msgid="7389829271787670252">"سؤال شود"</item>
     <item msgid="5077768429488260031">"همیشه غیرمجاز"</item>
-    <item msgid="1417929597727989746">"همیشه مجاز"</item>
+    <item msgid="1417929597727989746">"همیشه مجاز است"</item>
   </string-array>
   <string-array name="ram_states">
-    <item msgid="7088762389498381203">"معمولی"</item>
-    <item msgid="4517779899383204000">"متوسط"</item>
-    <item msgid="406385694840950802">"کم"</item>
-    <item msgid="4212263919458209842">"بحرانی"</item>
+    <item msgid="3944681673818150669">"معمولی"</item>
+    <item msgid="3256987280393708586">"متوسط"</item>
+    <item msgid="4662917179231875995">"کم"</item>
+    <item msgid="5264929699714647509">"خیلی کم"</item>
+    <item msgid="5606155978847838966">"؟"</item>
   </string-array>
   <string-array name="proc_stats_memory_states">
     <item msgid="8845855295876909468">"عادی"</item>
@@ -542,11 +566,5 @@
     <item msgid="4608643045752965568">"صورتی"</item>
     <item msgid="6131821495505931173">"قرمز"</item>
   </string-array>
-  <string-array name="usb_configuration_titles">
-    <item msgid="5350926807680564950">"‏MTP (پروتکل انتقال رسانه)"</item>
-    <item msgid="8856820259201251036">"‏PTP (پروتکل انتقال تصویر)"</item>
-    <item msgid="216135047298423770">"‏RNDIS (اترنت USB)"</item>
-    <item msgid="2686051673589572111">"منبع صوتی"</item>
-    <item msgid="7014054229609338176">"MIDI"</item>
-  </string-array>
+    <!-- no translation found for usb_configuration_titles:0 (292902998500371970) -->
 </resources>
