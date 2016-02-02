@@ -54,6 +54,7 @@ public class NotificationBackend {
         row.appImportance = getImportance(row.pkg, row.uid, null);
         row.appBypassDnd = getBypassZenMode(row.pkg, row.uid, null);
         row.appSensitive = getSensitive(row.pkg, row.uid, null);
+        row.bannedTopics = hasBannedTopics(row.pkg, row.uid);
         return row;
     }
 
@@ -170,6 +171,15 @@ public class NotificationBackend {
         }
     }
 
+    public boolean hasBannedTopics(String pkg, int uid) {
+        try {
+            return sINM.hasBannedTopics(pkg, uid);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return false;
+        }
+    }
+
     static class Row {
         public String section;
     }
@@ -186,6 +196,7 @@ public class NotificationBackend {
         public int appImportance;
         public boolean appBypassDnd;
         public boolean appSensitive;
+        public boolean bannedTopics;
     }
 
     public static class TopicRow extends AppRow {
