@@ -25,20 +25,19 @@
         android:id="@+id/dragList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:scrollbars="vertical"/>
 
-    <TextView
+    <Button
         android:id="@+id/add_language"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clickable="true"
-        android:contextClickable="true"
         android:drawableStart="@drawable/ic_add_24dp"
         android:drawablePadding="12dp"
-        android:gravity="center_vertical"
-        android:measureWithLargestChild="false"
-        android:padding="16dp"
+        android:minHeight="64dp"
+        android:textAlignment="textStart"
         android:text="@string/add_a_language"
+        style="@style/Base.Widget.AppCompat.Button.Borderless"
         android:textAppearance="?android:attr/textAppearanceListItem"/>
 
 </LinearLayout>
