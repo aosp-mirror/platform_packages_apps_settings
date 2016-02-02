@@ -240,6 +240,7 @@ public class ChooseLockGeneric extends SettingsActivity {
             if (UserManager.get(getActivity()).isAdminUser()
                     && mUserId == UserHandle.myUserId()
                     && LockPatternUtils.isDeviceEncryptionEnabled()
+                    && !LockPatternUtils.isFileEncryptionEnabled()
                     && !dpm.getDoNotAskCredentialsOnBoot()) {
                 mEncryptionRequestQuality = quality;
                 mEncryptionRequestDisabled = disabled;
