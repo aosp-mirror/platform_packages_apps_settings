@@ -103,19 +103,24 @@ public class FingerprintEnrollIntroduction extends FingerprintEnrollBase {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_FINISHED) {
-            if (requestCode == FINGERPRINT_FIND_SENSOR_REQUEST) {
-                setResult(RESULT_OK);
+        final boolean isResultFinished = resultCode == RESULT_FINISHED;
+        if (requestCode == FINGERPRINT_FIND_SENSOR_REQUEST) {
+            if (isResultFinished || resultCode == RESULT_SKIP) {
+                final int result = isResultFinished ? RESULT_OK : RESULT_SKIP;
+                setResult(result);
                 finish();
-            } else if (requestCode == CHOOSE_LOCK_GENERIC_REQUEST) {
+                return;
+            }
+        } else if (requestCode == CHOOSE_LOCK_GENERIC_REQUEST) {
+            if (isResultFinished) {
                 updatePasswordQuality();
                 byte[] token = data.getByteArrayExtra(
                         ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
                 launchFindSensor(token);
+                return;
             }
-        } else {
-            super.onActivityResult(requestCode, resultCode, data);
         }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
