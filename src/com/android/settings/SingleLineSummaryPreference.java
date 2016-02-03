@@ -22,7 +22,9 @@ import android.text.TextUtils.TruncateAt;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
-public class SingleLineSummaryPreference extends Preference {
+import com.android.settingslib.RestrictedPreference;
+
+public class SingleLineSummaryPreference extends RestrictedPreference {
 
     public SingleLineSummaryPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
