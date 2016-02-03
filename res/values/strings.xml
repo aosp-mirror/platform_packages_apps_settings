@@ -249,7 +249,7 @@
     <!-- Notification title when a Bluetooth device wants to pair with us -->
     <string name="bluetooth_notif_title">Pairing request</string>
     <!-- Notification message when a Bluetooth device wants to pair with us -->
-    <string name="bluetooth_notif_message">Touch to pair with <xliff:g id="device_name">%1$s</xliff:g>.</string>
+    <string name="bluetooth_notif_message">Tap to pair with <xliff:g id="device_name">%1$s</xliff:g>.</string>
     <!-- Bluetooth settings screen, menu to show the list of received files [CHAR LIMIT=30] -->
     <string name="bluetooth_show_received_files">Show received files</string>
 
@@ -300,7 +300,7 @@
     <string name="bluetooth_connection_permission_request">"Bluetooth connection request"</string>
 
     <!-- Notification message when a remote Bluetooth device wants to connect to a Bluetooth profile [CHAR LIMIT=none]-->
-    <string name="bluetooth_connection_notif_message">"Touch to connect to \u0022<xliff:g id="device_name">%1$s</xliff:g>\u0022."</string>
+    <string name="bluetooth_connection_notif_message">"Tap to connect to \u0022<xliff:g id="device_name">%1$s</xliff:g>\u0022."</string>
 
     <!-- Bluetooth connection permission Alert Activity text [CHAR LIMIT=none]-->
     <string name="bluetooth_connection_dialog_text">"Do you want to connect to \u0022<xliff:g id="device_name">%1$s</xliff:g>\u0022?"</string>
@@ -737,7 +737,7 @@
     <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature[CHAR LIMIT=29] -->
     <string name="security_settings_fingerprint_enroll_introduction_title">Unlock with fingerprint</string>
     <!-- Introduction detail message shown in fingerprint enrollment dialog [CHAR LIMIT=NONE]-->
-    <string name="security_settings_fingerprint_enroll_introduction_message">Just touch the fingerprint sensor to unlock your phone, authorize purchases, or sign in to apps. Be careful whose fingerprints you add - any fingerprints added will be able to do these things.</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message">Just touch the fingerprint sensor to unlock your phone, authorize purchases, or sign in to apps. \n\n Be careful whose fingerprints you add - any fingerprints added will be able to do these things.</string>
     <!-- Introduction detail message shown in fingerprint enrollment dialog to warn the user [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_enroll_introduction_message_warning">Note: Your fingerprint may be less secure than a strong pattern or PIN.</string>
     <!-- Link text shown bellow the warning to learn morn about fingerprint risk [CHAR LIMIT=22]-->
@@ -1105,7 +1105,7 @@
     <string name="lockpassword_pin_too_short">PIN must be at least %d digits</string>
 
     <!-- Hint shown after minimum password criteria is met -->
-    <string name="lockpassword_press_continue">Touch Continue when done</string>
+    <string name="lockpassword_press_continue">Tap Continue when done</string>
 
     <!-- Hint shown after minimum password criteria is met -->
     <string name="lockpassword_continue_label">Continue</string>
@@ -1447,7 +1447,7 @@
     <!-- Used in the Android Beam sharing preferences screen. This phrase is a trademark. [CHAR LIMIT=32] -->
     <string name="android_beam_label">Android Beam</string>
     <!-- Explanation of the Android Beam feature in the Android Beam settings panel. The use of "beam" here is as a verb and not considered trademarked. [CHAR LIMIT=NONE] -->
-    <string name="android_beam_explained">When this feature is turned on, you can beam app content to another NFC-capable device by holding the devices close together. For example, you can beam Browser pages, YouTube videos, People contacts, and more.\n\nJust bring the devices together (typically back to back) and then touch your screen. The app determines what gets beamed.</string>
+    <string name="android_beam_explained">When this feature is turned on, you can beam app content to another NFC-capable device by holding the devices close together. For example, you can beam Browser pages, YouTube videos, People contacts, and more.\n\nJust bring the devices together (typically back to back) and then tap your screen. The app determines what gets beamed.</string>
 
     <!-- Wi-Fi Settings --> <skip />
     <!-- Used in the 1st-level settings screen to turn on Wi-Fi -->
@@ -1970,11 +1970,11 @@
     <!-- Sound settings screen, setting check box label -->
     <string name="dtmf_tone_enable_title">Dial pad touch tones</string>
     <!-- Sound settings screen, setting check box label -->
-    <string name="sound_effects_enable_title">Touch sounds</string>
+    <string name="sound_effects_enable_title">Tap sounds</string>
     <!-- Sound settings screen, setting check box label -->
     <string name="lock_sounds_enable_title">Screen lock sound</string>
     <!-- Sound settings screen, setting check box label -->
-    <string name="haptic_feedback_enable_title">Vibrate on touch</string>
+    <string name="haptic_feedback_enable_title">Vibrate on tap</string>
     <!-- Sound settings screen, setting option name checkbox to enable/disable audio recording features that improve audio recording in noisy environments -->
     <string name="audio_record_proc_title">Noise cancellation</string>
     <!-- Volume description for media volume -->
@@ -2498,7 +2498,7 @@
 
     <!-- Body of dialog informing user about other files on a storage device [CHAR LIMIT=NONE]-->
     <string name="storage_detail_dialog_other">Other includes shared files saved by apps, files downloaded from the Internet or Bluetooth, Android files, and so on.
-\n\nTo see the entire contents of this <xliff:g id="name" example="SD card">^1</xliff:g>, touch Explore.</string>
+\n\nTo see the entire contents of this <xliff:g id="name" example="SD card">^1</xliff:g>, tap Explore.</string>
 
     <!-- Body of dialog informing user about other users on a storage device [CHAR LIMIT=NONE]-->
     <string name="storage_detail_dialog_user"><xliff:g id="user" example="Guest user">^1</xliff:g> may have saved photos, music, movies, apps, or other data that is taking up <xliff:g id="size" example="1.2 GB">^2</xliff:g> of storage.
@@ -3073,7 +3073,7 @@
     <!-- Security & location settings screen, setting check box title. This setting controls whether a visible green line is drawn as the user moves his finger around while drawing the unlock pattern.  If checked, this line is drawn.  If unchecked, there is nothing drawn so the user does not reveal his pattern while he unlocks the phone.-->
     <string name="lockpattern_settings_enable_visible_pattern_title">Make pattern visible</string>
     <!-- Security & location settings screen, setting check box title. This setting controls whether tactile feedback will be produced when the user draws the pattern.-->
-    <string name="lockpattern_settings_enable_tactile_feedback_title">Vibrate on touch</string>
+    <string name="lockpattern_settings_enable_tactile_feedback_title">Vibrate on tap</string>
     <!-- Security & location settings screen, setting check box title. This controls whether the device locks immediately when the power button is pressed. [CHAR LIMIT=28]-->
     <string name="lockpattern_settings_enable_power_button_instantly_locks">Power button instantly locks</string>
     <!-- Security & location settings screen, setting optional summary when a trust agent is enabled-->
@@ -3482,7 +3482,7 @@
         There is usually no reason to stop it.</string>
     <!-- Running service details, default description for services that are managed. -->
     <string name="service_manage_description"><xliff:g id="client_name">%1$s</xliff:g>:
-        currently in use. Touch Settings to control it.</string>
+        currently in use. Tap Settings to control it.</string>
     <!-- Description of the main process in the details. -->
     <string name="main_running_process_description">Main process in use.</string>
     <!-- Message that a process's service is in use. -->
@@ -3633,7 +3633,7 @@
     <!-- User dictionary settings. The title of the context menu item to delete the current word -->
     <string name="user_dict_settings_context_menu_delete_title">Delete</string>
     <!-- User dictionary settings. The text to show when there are no user-defined words in the dictionary  [CHAR LIMIT=200] -->
-    <string name="user_dict_settings_empty_text">You don\u2019t have any words in the user dictionary. Add a word by touching the Add (+) button.</string>
+    <string name="user_dict_settings_empty_text">You don\u2019t have any words in the user dictionary. To add a word, tap the Add (+) button.</string>
     <!-- User dictionary settings. The list item to choose to insert a word into the user dictionary for all languages -->
     <string name="user_dict_settings_all_languages">For all languages</string>
     <!-- User dictionary settings. The text to show for the option that shows the entire list of supported locales to choose one [CHAR LIMIT=30] -->
@@ -3769,7 +3769,7 @@
     <!-- Summary for the preference screen to enable the global geture that turns on accessibility (off state). [CHAR LIMIT=35] -->
     <string name="accessibility_global_gesture_preference_summary_off">Off</string>
     <!--  Description for the preference screen to enable the global geture taht turns on accessibility. [CHAR LIMIT=none] -->
-    <string name="accessibility_global_gesture_preference_description">When this feature is turned on, you can quickly enable accessibility features in two steps:\n\nStep 1: Press and hold the power button until you hear a sound or feel a vibration.\n\nStep 2: Touch and hold two fingers until you hear audio confirmation.\n\nIf the device has multiple users, using this shortcut on the lock screen temporarily enables accessibility until the device is unlocked.</string>
+    <string name="accessibility_global_gesture_preference_description">When this feature is turned on, you can quickly activate accessibility features in two steps:\n\nStep 1: Press and hold the power button until you hear a sound or feel a vibration.\n\nStep 2: Tap &amp; hold two fingers until you hear audio confirmation.\n\nIf the device has multiple users, using this shortcut on the lock screen temporarily enables accessibility until the device is unlocked.</string>
     <!-- Title for the accessibility preference to high contrast text. [CHAR LIMIT=35] -->
     <string name="accessibility_toggle_high_text_contrast_preference_title">High contrast text</string>
     <!-- Title for the accessibility preference to enable screen magnification. [CHAR LIMIT=35] -->
@@ -3787,7 +3787,7 @@
     <!-- Title for the accessibility preference for enabling/disabling large icons for mouse/trackpad pointers. [CHAR LIMIT=35] -->
     <string name="accessibility_toggle_large_pointer_icon_title">Large mouse pointer</string>
     <!-- Title for accessibility preference to choose long-press delay i.e. timeout before it is detected. [CHAR LIMIT=35] -->
-    <string name="accessibility_long_press_timeout_preference_title">Touch &amp; hold delay</string>
+    <string name="accessibility_long_press_timeout_preference_title">Tap &amp; hold delay</string>
     <!-- Title for the accessibility preference to configure display color inversion. [CHAR LIMIT=NONE] -->
     <string name="accessibility_display_inversion_preference_title">Color inversion</string>
     <!-- Subtitle for the accessibility preference to configure display color inversion. [CHAR LIMIT=NONE] -->
@@ -3947,7 +3947,7 @@
     <!-- Title for a warning about disabling an accessibility service. [CHAR LIMIT=NONE] -->
     <string name="disable_service_title">Stop <xliff:g id="service" example="TalkBack">%1$s</xliff:g>?</string>
     <!-- Message for a warning about disabling accessibility service. [CHAR LIMIT=NONE] -->
-    <string name="disable_service_message">Touching OK will
+    <string name="disable_service_message">Tapping OK will
         stop <xliff:g id="service" example="TalkBack">%1$s</xliff:g>.</string>
 
     <!-- Title for the prompt shown as a placeholder if no accessibility serivices are installed. [CHAR LIMIT=50] -->
@@ -4656,7 +4656,7 @@
     <string name="wifi_setup_status_scanning">Scanning networks\u2026</string>
     <!-- Message shown above available network when there's no connected network.
          Used in Wifi Setup For Setup Wizard with XL screen. -->
-    <string name="wifi_setup_status_select_network">Touch a network to connect to it</string>
+    <string name="wifi_setup_status_select_network">Tap a network to connect to it</string>
     <!-- Message shown above available networks when a user clicked one of available
          networks and the UI is showing one possible existing network.
          Used in Wifi Setup. -->
@@ -4692,7 +4692,7 @@
     <!-- Message shown when the device is connecting a network [CHAR LIMIT=NONE] -->
     <string name="wifi_setup_description_connecting">Connecting can take a few minutes\u2026</string>
     <!-- Message shown when the device is connected to a network [CHAR LIMIT=NONE] -->
-    <string name="wifi_setup_description_connected">Touch <b>Next</b> to continue with setup.\n\nTouch <b>Back</b> to connect to a different Wi\u2011Fi network.</string>
+    <string name="wifi_setup_description_connected">Tap <b>Next</b> to continue with setup.\n\nTap <b>Back</b> to connect to a different Wi\u2011Fi network.</string>
 
     <!-- Do not translate. This is a stub which will be removed soon. -->
     <string name="time_zone_auto_stub" translatable="false">Select Time Zone</string>
@@ -4756,7 +4756,7 @@
     <!-- Data synchronization settings screen, menu option -->
     <string name="sync_menu_sync_cancel">Cancel sync</string>
     <!-- Data synchronization settings screen, summary of a sync provider (for example, Gmail) when autosync is off and the user wants to do a one-time sync. -->
-    <string name="sync_one_time_sync">Touch to sync now<xliff:g id="last_sync_time">\n%1$s</xliff:g></string>
+    <string name="sync_one_time_sync">Tap to sync now<xliff:g id="last_sync_time">\n%1$s</xliff:g></string>
     <!-- Data synchronization settings screen, checkbox setting option name. Controls whether Gmail should be synced.  Should use "Gmail" to refer to this app.-->
     <string name="sync_gmail">Gmail</string>
     <!-- Data synchronization settings screen, checkbox setting option name. Controls whether Calendar shoudl be synced. -->
@@ -5554,11 +5554,11 @@
     <!-- Message that SIM cards have changed.  [CHAR LIMIT=40] -->
     <string name="sim_cards_changed_message">SIM cards have changed</string>
     <!-- Message smmary that SIM cards have changed.  [CHAR LIMIT=60] -->
-    <string name="sim_cards_changed_message_summary">Touch to set activities</string>
+    <string name="sim_cards_changed_message_summary">Tap to set activities</string>
     <!-- Message that Cellular data is unavailable.  [CHAR LIMIT=40] -->
     <string name="sim_cellular_data_unavailable">Cellular data is unavailable</string>
     <!-- Message summary that Cellular data is unavailable.  [CHAR LIMIT=60] -->
-    <string name="sim_cellular_data_unavailable_summary">Touch to select a data SIM</string>
+    <string name="sim_cellular_data_unavailable_summary">Tap to select a data SIM</string>
     <!-- Checkbox to always use for calls.  [CHAR LIMIT=40] -->
     <string name="sim_calls_always_use">Always use this for calls</string>
     <!-- Message for selecting sim for data in settings.  [CHAR LIMIT=40] -->
@@ -5614,7 +5614,7 @@
     <!-- Title for SIM card notification.  [CHAR LIMIT=40] -->
     <string name="sim_notification_title">SIM cards changed.</string>
     <!-- Message under title informing the user to touch to go to SIM Cards in Settings.  [CHAR LIMIT=40] -->
-    <string name="sim_notification_summary">Touch to set up</string>
+    <string name="sim_notification_summary">Tap to set up</string>
 
     <!-- This is a divider in the SIM cards preferences that is the header of various settings where the user chooses which SIM to use for phone calls, data, and SMS messages [CHAR LIMIT=50] -->
     <string name="sim_pref_divider">Preferred SIM for</string>
@@ -5759,7 +5759,7 @@
     <string name="touch_sounds_title">Touch sounds</string>
 
     <!-- Sound: Other sounds: Title for the option enabling haptic feedback on touch. [CHAR LIMIT=30] -->
-    <string name="vibrate_on_touch_title">Vibrate on touch</string>
+    <string name="vibrate_on_touch_title">Vibrate on tap</string>
 
     <!-- Sound: Other sounds: Title for the option enabling dock audio media. [CHAR LIMIT=50] -->
     <string name="dock_audio_media_title">Dock speaker plays</string>
@@ -6190,7 +6190,7 @@
     <!-- [CHAR LIMIT=28] Screen pinning title -->
     <string name="screen_pinning_title">Screen pinning</string>
     <!-- [CHAR LIMIT=300] Screen pinning description -->
-    <string name="screen_pinning_description">When this setting is turned on, you can use screen pinning to keep the current screen in view until you unpin.\n\nTo use screen pinning:\n\n1. Make sure screen pinning is turned on.\n\n2. Open the screen you want to pin.\n\n3. Touch Overview.\n\n4. Swipe up and then touch the pin icon.</string>
+    <string name="screen_pinning_description">When this setting is turned on, you can use screen pinning to keep the current screen in view until you unpin.\n\nTo use screen pinning:\n\n1. Make sure screen pinning is turned on.\n\n2. Open the screen you want to pin.\n\n3. Tap Overview.\n\n4. Swipe up and then tap the pin icon.</string>
     <!-- [CHAR LIMIT=60] Unlock setting for screen pinning -->
     <string name="screen_pinning_unlock_pattern">Ask for unlock pattern before unpinning</string>
     <!-- [CHAR LIMIT=60] Unlock setting for screen pinning -->
