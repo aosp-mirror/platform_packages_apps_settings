@@ -14,24 +14,21 @@
 
 package com.android.settings;
 
-import com.android.internal.os.BatteryStatsHelper;
-import com.android.settings.applications.ProcStatsData;
-import com.android.settingslib.net.DataUsageController;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.app.Service;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkTemplate;
 import android.os.IBinder;
 import android.os.storage.StorageManager;
-import android.os.storage.StorageVolume;
 import android.os.storage.VolumeInfo;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import com.android.settings.applications.ProcStatsData;
+import com.android.settingslib.net.DataUsageController;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileDescriptor;
@@ -81,12 +78,15 @@ public class SettingsDumpService extends Service {
         SubscriptionManager manager = SubscriptionManager.from(this);
         TelephonyManager telephonyManager = TelephonyManager.from(this);
         if (connectivityManager.isNetworkSupported(ConnectivityManager.TYPE_MOBILE)) {
+            JSONArray array = new JSONArray();
             for (SubscriptionInfo info : manager.getAllSubscriptionInfoList()) {
                 NetworkTemplate mobileAll = NetworkTemplate.buildTemplateMobileAll(
                         telephonyManager.getSubscriberId(info.getSubscriptionId()));
-                obj.put("cell(" + info.getSubscriptionId() + ")",
-                        dumpDataUsage(mobileAll, controller));
+                final JSONObject usage = dumpDataUsage(mobileAll, controller);
+                usage.put("subId", info.getSubscriptionId());
+                array.put(usage);
             }
+            obj.put("cell", array);
         }
         if (connectivityManager.isNetworkSupported(ConnectivityManager.TYPE_WIFI)) {
             obj.put("wifi", dumpDataUsage(NetworkTemplate.buildTemplateWifiWildcard(), controller));
