@@ -765,7 +765,7 @@ public class WifiConfigController
                 }
                 String[] caCerts = enterpriseConfig.getCaCertificateAliases();
                 if (caCerts == null) {
-                    setSelection(mEapCaCertSpinner, mUnspecifiedCertString);
+                    setSelection(mEapCaCertSpinner, mDoNotValidateEapServerString);
                 } else if (caCerts.length == 1) {
                     setSelection(mEapCaCertSpinner, caCerts[0]);
                 } else {
@@ -775,7 +775,12 @@ public class WifiConfigController
                     mEapCaCertSpinner.setSelection(MULTIPLE_CERT_SET_INDEX);
                 }
                 mEapDomainView.setText(enterpriseConfig.getDomainSuffixMatch());
-                setSelection(mEapUserCertSpinner, enterpriseConfig.getClientCertificateAlias());
+                String userCert = enterpriseConfig.getClientCertificateAlias();
+                if (TextUtils.isEmpty(userCert)) {
+                    setSelection(mEapUserCertSpinner, mDoNotProvideEapUserCertString);
+                } else {
+                    setSelection(mEapUserCertSpinner, userCert);
+                }
                 mEapIdentityView.setText(enterpriseConfig.getIdentity());
                 mEapAnonymousView.setText(enterpriseConfig.getAnonymousIdentity());
             } else {
