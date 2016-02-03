@@ -403,6 +403,8 @@
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"உள்ளீட்டு முறையை மாற்று"</string>
     <string name="suggested_lock_settings_title" msgid="5022405858647120434">"திரைப் பூட்டு"</string>
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"சாதனத்தைப் பாதுகாக்கவும்"</string>
+    <!-- no translation found for suggested_fingerprint_lock_settings_summary (2149569133725273864) -->
+    <skip />
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"திரைப் பூட்டைத் தேர்வுசெய்யவும்"</string>
     <string name="setup_lock_settings_picker_title" msgid="1584792702475081908">"திரைப் பூட்டைத் தேர்வுசெய்யவும்"</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"மாற்றுத் திரைப் பூட்டு முறையைத் தேர்வுசெய்க"</string>
@@ -688,6 +690,8 @@
     <string name="wifi_eap_method" msgid="8529436133640730382">"EAP முறை"</string>
     <string name="please_select_phase2" msgid="5231074529772044898">"2 ஆம் நிலை அங்கீகரிப்பு"</string>
     <string name="wifi_eap_ca_cert" msgid="3521574865488892851">"CA சான்றிதழ்"</string>
+    <!-- no translation found for wifi_eap_domain (8471124344218082064) -->
+    <skip />
     <string name="wifi_eap_user_cert" msgid="1291089413368160789">"பயனர் சான்றிதழ்"</string>
     <string name="wifi_eap_identity" msgid="4359453783379679103">"அடையாளம்"</string>
     <string name="wifi_eap_anonymous" msgid="2989469344116577955">"அநாமதேய அடையாளம்"</string>
@@ -1703,6 +1707,7 @@
     <string name="print_blocked_state_title_template" msgid="9065391617425962424">"அச்சுப்பொறி <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g> ஐத் தடுத்தது"</string>
     <string name="print_search_box_shown_utterance" msgid="7730361832020726951">"தேடல் பெட்டி காண்பிக்கப்படுகிறது"</string>
     <string name="print_search_box_hidden_utterance" msgid="7980832833405818400">"தேடல் பெட்டி மறைக்கப்பட்டுள்ளது"</string>
+    <string name="printer_info_desc" msgid="5824995108703060003">"இந்தப் பிரிண்டர் பற்றிய கூடுதல் தகவல்"</string>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"பேட்டரி"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"பேட்டரியை பயன்படுத்துவன"</string>
     <string name="power_usage_not_available" msgid="3109326074656512387">"பேட்டரியின் பயன்பாட்டுத் தரவு கிடைக்கவில்லை."</string>
@@ -2461,16 +2466,11 @@
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"ஒருபோதும் அறிவிப்புகளைக் காட்டாதே"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"சாதனம் பூட்டப்பட்டிருக்கும் போது, எப்படி அறிவிப்புகளைக் காட்ட வேண்டும்?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"அறிவிப்புகள்"</string>
-    <!-- no translation found for lock_screen_notifications_summary_show_profile (552385140686291731) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifications_summary_hide_profile (1253321444387544886) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifications_summary_disable_profile (5687358507957376100) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifications_interstitial_message_profile (8307705621027472346) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifications_interstitial_title_profile (3169806586032521333) -->
-    <skip />
+    <string name="lock_screen_notifications_summary_show_profile" msgid="552385140686291731">"எல்லா சுயவிவர அறிவிப்பு உள்ளடக்கத்தையும் காட்டு"</string>
+    <string name="lock_screen_notifications_summary_hide_profile" msgid="1253321444387544886">"முக்கிய சுயவிவர அறிவிப்பு உள்ளடக்கத்தை மறை"</string>
+    <string name="lock_screen_notifications_summary_disable_profile" msgid="5687358507957376100">"ஒருபோதும் சுயவிவர அறிவிப்புகளைக் காட்டாதே"</string>
+    <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"சாதனம் பூட்டப்பட்டிருக்கும் போது, சுயவிவர அறிவிப்புகளை எப்படிக் காட்ட வேண்டும்?"</string>
+    <string name="lock_screen_notifications_interstitial_title_profile" msgid="3169806586032521333">"சுயவிவர அறிவிப்புகள்"</string>
     <string name="app_notifications_title" msgid="139788604658984593">"அறிவிப்புகள்"</string>
     <string name="topic_notifications_title" msgid="7243623930984080881">"தலைப்பு அறிவிப்புகள்"</string>
     <string name="notification_topic_categories" msgid="3399184843660543981">"வகைகள்"</string>
@@ -2640,7 +2640,10 @@
     <string name="change_storage" msgid="600475265207060436">"சேமிப்பிடத்தை மாற்றவும்"</string>
     <string name="notifications_label" msgid="2872668710589600731">"அறிவிப்புகள்"</string>
     <string name="notifications_enabled" msgid="4386196629684749507">"இயல்பு"</string>
-    <string name="notifications_disabled" msgid="4326096527874762629">"தடைசெய்"</string>
+    <!-- no translation found for notifications_disabled (7021094738660322110) -->
+    <skip />
+    <!-- no translation found for notifications_partially_disabled (7293654891788852646) -->
+    <skip />
     <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
     <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g> / <xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
@@ -2856,7 +2859,7 @@
     <string name="condition_battery_summary" msgid="4418839236027977450">"செயல்திறன் குறைக்கப்பட்டது. இருப்பிடச் சேவைகளும் பின்புலத் தரவும் முடக்கப்பட்டுள்ளன."</string>
     <string name="condition_cellular_title" msgid="2398754272044917264">"செல்லுலார் தரவு: முடக்கத்தில்"</string>
     <string name="condition_cellular_summary" msgid="1818046558419658463">"வைஃபை மூலம் மட்டுமே இணையம் கிடைக்கும்"</string>
-    <string name="condition_bg_data_title" msgid="2483860304802846542">"தரவுச் சேமிப்பான் இயக்கப்பட்டது"</string>
+    <string name="condition_bg_data_title" msgid="2483860304802846542">"தரவு சேமிப்பான் இயக்கப்பட்டது"</string>
     <string name="condition_bg_data_summary" msgid="656957852895282228">"வைஃபை மூலம் மட்டுமே பின்புலத் தரவு செயல்படும். இதனால் வைஃபை கிடைக்காத போது சில பயன்பாடுகள் அல்லது சேவைகள் பாதிக்கப்படலாம்."</string>
     <string name="condition_work_title" msgid="7293722361184366648">"பணி சுயவிவரம் முடக்கப்பட்டது"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"உங்கள் பணி சுயவிவரத்துடன் தொடர்புடைய பயன்பாடுகள், பின்புல ஒத்திசைவு மற்றும் பிற அம்சங்கள் ஆகியவை முடக்கப்பட்டன."</string>
@@ -2888,15 +2891,15 @@
     <string name="data_usage_template" msgid="392191945602400904">"<xliff:g id="ID_1">%1$s</xliff:g> பயன்படுத்தப்பட்டது: <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="configure" msgid="1029654422228677273">"உள்ளமை"</string>
     <plurals name="data_saver_unrestricted_summary" formatted="false" msgid="2635267833484232703">
-      <item quantity="other">தரவுச் சேமிப்பான் இயக்கப்பட்டிருக்கும் போது, வரம்பற்ற தரவைப் பயன்படுத்த <xliff:g id="COUNT">%1$d</xliff:g> பயன்பாடுகள் அனுமதிக்கப்பட்டன</item>
-      <item quantity="one">தரவுச் சேமிப்பான் இயக்கப்பட்டிருக்கும் போது, வரம்பற்ற தரவைப் பயன்படுத்த 1 பயன்பாடு அனுமதிக்கப்பட்டது</item>
+      <item quantity="other">தரவு சேமிப்பான் இயக்கப்பட்டிருக்கும் போது, வரம்பற்ற தரவைப் பயன்படுத்த <xliff:g id="COUNT">%1$d</xliff:g> பயன்பாடுகள் அனுமதிக்கப்பட்டன</item>
+      <item quantity="one">தரவு சேமிப்பான் இயக்கப்பட்டிருக்கும் போது, வரம்பற்ற தரவைப் பயன்படுத்த 1 பயன்பாடு அனுமதிக்கப்பட்டது</item>
     </plurals>
-    <string name="data_saver_title" msgid="8034286939200289826">"தரவுச் சேமிப்பான்"</string>
+    <string name="data_saver_title" msgid="8034286939200289826">"தரவுச்சேமிப்பான்"</string>
     <string name="unrestricted_data_saver" msgid="7019858887510062789">"வரம்பற்ற தரவு அணுகல்"</string>
     <string name="data_saver_on" msgid="6774217590237934709">"இயக்கத்தில்"</string>
     <string name="data_saver_off" msgid="6892309031162738794">"முடக்கத்தில்"</string>
-    <string name="unrestricted_app_title" msgid="4465437191723332066">"வரம்பற்ற தரவுப் பயன்பாடு"</string>
-    <string name="unrestricted_app_summary" msgid="6458008993501723912">"தரவுச் சேமிப்பான் இயக்கப்பட்டிருக்கும் போது வரம்பற்ற தரவை அணுக அனுமதி"</string>
+    <string name="unrestricted_app_title" msgid="4465437191723332066">"வரம்பற்ற தரவு பயன்பாடு"</string>
+    <string name="unrestricted_app_summary" msgid="6458008993501723912">"தரவு சேமிப்பான் இயக்கப்பட்டிருக்கும் போது வரம்பற்ற தரவை அணுக அனுமதி"</string>
     <string name="home_app" msgid="4066188520886810030">"முகப்புப் பயன்பாடு"</string>
     <string name="no_default_home" msgid="7184117487704520238">"இயல்பு முகப்பு இல்லை"</string>
     <string name="lockpattern_settings_require_cred_before_startup" msgid="3832020101401318248">"பாதுகாப்பான தொடக்கம்"</string>

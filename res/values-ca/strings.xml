@@ -361,7 +361,7 @@
     <string name="fingerprint_enroll_button_add" msgid="6317978977419045463">"Afegeix-ne un altre"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"Següent"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"A més de fer servir l\'empremta digital per desbloquejar el telèfon, també la pots fer servir per autoritzar compres i permetre l\'accés a determinades aplicacions. "<annotation id="url">"Més informació"</annotation></string>
-    <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="7007548031540826618">"El bloqueig de pantalla està desactivat. Contacta amb l\'administrador de la teva organització per obtenir-ne més informació. "<annotation id="admin_details">"Més detalls"</annotation>\n\n"Pots continuar utilitzant l\'empremta digital per autoritzar les compres i l\'accés a l\'aplicació. "<annotation id="url">"Més informació"</annotation></string>
+    <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="7007548031540826618">"El bloqueig de pantalla està desactivat. Contacta amb l\'administrador de la teva organització per obtenir-ne més informació. "<annotation id="admin_details">"Més detalls"</annotation>\n\n"Pots continuar utilitzant l\'empremta digital per autoritzar les compres i l\'accés a aplicacions. "<annotation id="url">"Més informació"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Aixeca el dit i, a continuació, torna a tocar el sensor"</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="4132164775128798343">"Quan vegis aquesta icona, pots fer servir la teva empremta digital."</string>
     <string name="setup_fingerprint_enroll_finish_secondary_message" msgid="3734962461534384882">"Per canviar la configuració, vés a Configuració &gt; Seguretat &gt; Empremta digital."</string>
@@ -403,6 +403,8 @@
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Canvia el mètode d\'introducció"</string>
     <string name="suggested_lock_settings_title" msgid="5022405858647120434">"Bloqueig de pantalla"</string>
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"Protegeix el teu dispositiu"</string>
+    <!-- no translation found for suggested_fingerprint_lock_settings_summary (2149569133725273864) -->
+    <skip />
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Tria un bloqueig de pantalla"</string>
     <string name="setup_lock_settings_picker_title" msgid="1584792702475081908">"Tria un bloqueig de pantalla"</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Tria un mètode de bloqueig de pantalla alternatiu"</string>
@@ -688,6 +690,8 @@
     <string name="wifi_eap_method" msgid="8529436133640730382">"Mètode EAP"</string>
     <string name="please_select_phase2" msgid="5231074529772044898">"Autenticació de fase 2"</string>
     <string name="wifi_eap_ca_cert" msgid="3521574865488892851">"Certificat de CA"</string>
+    <!-- no translation found for wifi_eap_domain (8471124344218082064) -->
+    <skip />
     <string name="wifi_eap_user_cert" msgid="1291089413368160789">"Certificat d\'usuari"</string>
     <string name="wifi_eap_identity" msgid="4359453783379679103">"Identitat"</string>
     <string name="wifi_eap_anonymous" msgid="2989469344116577955">"Identitat anònima"</string>
@@ -701,8 +705,8 @@
     <string name="wifi_unchanged" msgid="3410422020930397102">"(sense canvis)"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"Selecciona"</string>
     <string name="wifi_multiple_cert_added" msgid="3240743501460165224">"(S\'han afegit diversos certificats)"</string>
-    <string name="wifi_do_not_provide_eap_user_cert" msgid="5160499244977160665">"No proporcionis"</string>
-    <string name="wifi_do_not_validate_eap_server" msgid="4266754430576348471">"No validis"</string>
+    <string name="wifi_do_not_provide_eap_user_cert" msgid="5160499244977160665">"No proporcionis un certificat d\'usuari"</string>
+    <string name="wifi_do_not_validate_eap_server" msgid="4266754430576348471">"No validis el servidor d\'EAP"</string>
     <string name="wifi_do_not_validate_eap_server_warning" msgid="1787190245542586660">"No s\'ha especificat cap certificat. La connexió no serà privada."</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS disponible"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS disponible)"</string>
@@ -1703,6 +1707,7 @@
     <string name="print_blocked_state_title_template" msgid="9065391617425962424">"Impressora ha bloquejat <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_search_box_shown_utterance" msgid="7730361832020726951">"Es mostra el quadre de cerca"</string>
     <string name="print_search_box_hidden_utterance" msgid="7980832833405818400">"S\'ha amagat el quadre de cerca"</string>
+    <string name="printer_info_desc" msgid="5824995108703060003">"Més informació sobre aquesta impressora"</string>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"Bateria"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Elements que han utilitzat la bateria"</string>
     <string name="power_usage_not_available" msgid="3109326074656512387">"Dades d\'ús de la bateria no disponibles"</string>
@@ -2250,7 +2255,7 @@
     <string name="user_enable_calling_confirm_message" msgid="8061594235219352787">"L\'historial de trucades es compartirà amb aquest usuari."</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="7243308401401932681">"Vols activar les trucades i els SMS?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="4025082715546544967">"L\'historial de trucades i de SMS es compartirà amb aquest usuari."</string>
-    <string name="emergency_info_title" msgid="208607506217060337">"Informació sobre l\'emergència"</string>
+    <string name="emergency_info_title" msgid="208607506217060337">"Informació d\'emergència"</string>
     <string name="emergency_info_subtitle" msgid="1301492666470489605">"S\'hi pot accedir mitjançant la pantalla de bloqueig al marcador d\'emergència"</string>
     <string name="application_restrictions" msgid="8207332020898004394">"Permet aplicacions i contingut"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Aplicacions amb restriccions"</string>
@@ -2461,16 +2466,11 @@
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"No mostris cap notificació"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"Com vols que es mostrin les notificacions quan el dispositiu estigui bloquejat?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"Notificacions"</string>
-    <!-- no translation found for lock_screen_notifications_summary_show_profile (552385140686291731) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifications_summary_hide_profile (1253321444387544886) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifications_summary_disable_profile (5687358507957376100) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifications_interstitial_message_profile (8307705621027472346) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifications_interstitial_title_profile (3169806586032521333) -->
-    <skip />
+    <string name="lock_screen_notifications_summary_show_profile" msgid="552385140686291731">"Mostra tot el contingut de notif. del perfil"</string>
+    <string name="lock_screen_notifications_summary_hide_profile" msgid="1253321444387544886">"Amaga contingut confidencial de notif. del perfil"</string>
+    <string name="lock_screen_notifications_summary_disable_profile" msgid="5687358507957376100">"No mostris cap notificació del perfil"</string>
+    <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"Com vols que es mostrin les notificacions del perfil quan el dispositiu estigui bloquejat?"</string>
+    <string name="lock_screen_notifications_interstitial_title_profile" msgid="3169806586032521333">"Notificacions del perfil"</string>
     <string name="app_notifications_title" msgid="139788604658984593">"Notificacions"</string>
     <string name="topic_notifications_title" msgid="7243623930984080881">"Notificacions per tema"</string>
     <string name="notification_topic_categories" msgid="3399184843660543981">"Categories"</string>
@@ -2640,7 +2640,10 @@
     <string name="change_storage" msgid="600475265207060436">"Canvia l\'emmagatzematge"</string>
     <string name="notifications_label" msgid="2872668710589600731">"Notificacions"</string>
     <string name="notifications_enabled" msgid="4386196629684749507">"Normals"</string>
-    <string name="notifications_disabled" msgid="4326096527874762629">"Bloquejades"</string>
+    <!-- no translation found for notifications_disabled (7021094738660322110) -->
+    <skip />
+    <!-- no translation found for notifications_partially_disabled (7293654891788852646) -->
+    <skip />
     <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
     <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g> / <xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">

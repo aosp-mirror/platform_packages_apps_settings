@@ -175,7 +175,7 @@
     <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"Το πεδίο θύρας θα πρέπει να είναι κενό αν το πεδίο κεντρικού υπολογιστή είναι κενό."</string>
     <string name="proxy_error_invalid_port" msgid="5988270202074492710">"Η θύρα που πληκτρολογήσατε δεν είναι έγκυρη."</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"Ο διακ/στής μεσ/σης ΗΤΤΡ μπορεί να χρησ/θεί απο το πρ/μα περ/σης, αλλά όχι από άλλες εφαρμογές."</string>
-    <string name="proxy_url_title" msgid="7185282894936042359">"Διεύθυνση URL PAC: "</string>
+    <string name="proxy_url_title" msgid="7185282894936042359">"URL PAC: "</string>
     <string name="radio_info_signal_location_label" msgid="16475158265551708">"Τοποθεσία:"</string>
     <string name="radio_info_neighboring_location_label" msgid="2385625674055934880">"Γειτονικά CID:"</string>
     <string name="radio_info_cellinfo_label" msgid="1300937728020622362">"Πληροφορίες κελιού:"</string>
@@ -403,6 +403,8 @@
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Εναλλαγή μεθόδου εισαγωγής"</string>
     <string name="suggested_lock_settings_title" msgid="5022405858647120434">"Κλείδωμα οθόνης"</string>
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"Προστατέψτε τη συσκευή σας"</string>
+    <!-- no translation found for suggested_fingerprint_lock_settings_summary (2149569133725273864) -->
+    <skip />
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Επιλογή κλειδ. οθ."</string>
     <string name="setup_lock_settings_picker_title" msgid="1584792702475081908">"Επιλογή κλειδιού οθόνης"</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Επιλέξτε εφεδρική μέθοδο κλειδώματος οθόνης"</string>
@@ -688,6 +690,8 @@
     <string name="wifi_eap_method" msgid="8529436133640730382">"Μέθοδος EAP"</string>
     <string name="please_select_phase2" msgid="5231074529772044898">"2η φάση ελέγχου ταυτότητας"</string>
     <string name="wifi_eap_ca_cert" msgid="3521574865488892851">"Πιστοποιητικό CA"</string>
+    <!-- no translation found for wifi_eap_domain (8471124344218082064) -->
+    <skip />
     <string name="wifi_eap_user_cert" msgid="1291089413368160789">"Πιστοποιητικό χρήστη"</string>
     <string name="wifi_eap_identity" msgid="4359453783379679103">"Ταυτότητα"</string>
     <string name="wifi_eap_anonymous" msgid="2989469344116577955">"Ανώνυμη ταυτότητα"</string>
@@ -1703,6 +1707,7 @@
     <string name="print_blocked_state_title_template" msgid="9065391617425962424">"Ο εκτυπωτής απέκλεισε <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_search_box_shown_utterance" msgid="7730361832020726951">"Εμφάνιση πλαισίου αναζήτησης"</string>
     <string name="print_search_box_hidden_utterance" msgid="7980832833405818400">"Απόκρυψη πλαισίου αναζήτησης"</string>
+    <string name="printer_info_desc" msgid="5824995108703060003">"Περισσότερες πληροφορίες για αυτόν τον εκτυπωτή"</string>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"Μπαταρία"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Τι χρησιμοποιούσε την μπαταρία"</string>
     <string name="power_usage_not_available" msgid="3109326074656512387">"Μη διαθέσιμα δεδ. χρήσ. μπατ."</string>
@@ -2461,16 +2466,11 @@
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Να μην εμφανίζονται ειδοποιήσεις"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"Πώς θέλετε να εμφανίζονται οι ειδοποιήσεις στη συσκευή σας, όταν η συσκευή σας είναι κλειδωμένη;"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"Ειδοποιήσεις"</string>
-    <!-- no translation found for lock_screen_notifications_summary_show_profile (552385140686291731) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifications_summary_hide_profile (1253321444387544886) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifications_summary_disable_profile (5687358507957376100) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifications_interstitial_message_profile (8307705621027472346) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifications_interstitial_title_profile (3169806586032521333) -->
-    <skip />
+    <string name="lock_screen_notifications_summary_show_profile" msgid="552385140686291731">"Εμφάνιση όλου του περιεχομένου ειδοποιήσεων προφίλ"</string>
+    <string name="lock_screen_notifications_summary_hide_profile" msgid="1253321444387544886">"Απόκρυψη ευαίσθητου περιεχομ. ειδοποιήσεων προφίλ"</string>
+    <string name="lock_screen_notifications_summary_disable_profile" msgid="5687358507957376100">"Να μην εμφανίζονται ειδοποιήσεις προφίλ"</string>
+    <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"Πώς θέλετε να εμφανίζονται οι ειδοποιήσεις προφίλ στη συσκευή σας, όταν η συσκευή σας είναι κλειδωμένη;"</string>
+    <string name="lock_screen_notifications_interstitial_title_profile" msgid="3169806586032521333">"Ειδοποιήσεις προφίλ"</string>
     <string name="app_notifications_title" msgid="139788604658984593">"Ειδοποιήσεις"</string>
     <string name="topic_notifications_title" msgid="7243623930984080881">"Ειδοποιήσεις θέματος"</string>
     <string name="notification_topic_categories" msgid="3399184843660543981">"Κατηγορίες"</string>
@@ -2640,7 +2640,10 @@
     <string name="change_storage" msgid="600475265207060436">"Αλλαγή χώρου αποθήκευσης"</string>
     <string name="notifications_label" msgid="2872668710589600731">"Ειδοποιήσεις"</string>
     <string name="notifications_enabled" msgid="4386196629684749507">"Κανονικό"</string>
-    <string name="notifications_disabled" msgid="4326096527874762629">"Αποκλεισμός"</string>
+    <!-- no translation found for notifications_disabled (7021094738660322110) -->
+    <skip />
+    <!-- no translation found for notifications_partially_disabled (7293654891788852646) -->
+    <skip />
     <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
     <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g> / <xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
