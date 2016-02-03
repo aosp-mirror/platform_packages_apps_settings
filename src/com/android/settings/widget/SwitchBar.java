@@ -67,8 +67,9 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
     private ArrayList<OnSwitchChangeListener> mSwitchChangeListeners =
             new ArrayList<OnSwitchChangeListener>();
 
-    private static int[] MARGIN_ATTRIBUTES = {
-            R.attr.switchBarMarginStart, R.attr.switchBarMarginEnd};
+    private static int[] XML_ATTRIBUTES = {
+            R.attr.switchBarMarginStart, R.attr.switchBarMarginEnd,
+            R.attr.switchBarBackgroundColor};
 
     public SwitchBar(Context context) {
         this(context, null);
@@ -87,9 +88,10 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
 
         LayoutInflater.from(context).inflate(R.layout.switch_bar, this);
 
-        final TypedArray a = context.obtainStyledAttributes(attrs, MARGIN_ATTRIBUTES);
+        final TypedArray a = context.obtainStyledAttributes(attrs, XML_ATTRIBUTES);
         int switchBarMarginStart = (int) a.getDimension(0, 0);
         int switchBarMarginEnd = (int) a.getDimension(1, 0);
+        int switchBarBackgroundColor = (int) a.getColor(2, 0);
         a.recycle();
 
         mTextView = (TextView) findViewById(R.id.switch_text);
@@ -107,6 +109,8 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
         mSwitch.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
         lp = (MarginLayoutParams) mSwitch.getLayoutParams();
         lp.setMarginEnd(switchBarMarginEnd);
+        setBackgroundColor(switchBarBackgroundColor);
+        mSwitch.setBackgroundColor(switchBarBackgroundColor);
 
         addOnSwitchChangeListener(new OnSwitchChangeListener() {
             @Override

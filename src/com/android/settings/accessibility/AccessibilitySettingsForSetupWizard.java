@@ -46,8 +46,6 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
     private static final String TALKBACK_PREFERENCE = "talkback_preference";
     private static final String FONT_SIZE_PREFERENCE = "font_size_preference";
 
-    private static final String TALKBACK_NAME = "Talkback";
-
     // Preference controls.
     private Preference mDisplayMagnificationPreference;
     private Preference mFontSizePreference;
@@ -59,20 +57,13 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
     }
 
     @Override
-    protected int getHelpResource() {
-        return R.string.help_uri_accessibility;
-    }
-
-    @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         addPreferencesFromResource(R.xml.accessibility_settings_for_setup_wizard);
 
         mDisplayMagnificationPreference = findPreference(DISPLAY_MAGNIFICATION_PREFERENCE);
         mFontSizePreference = findPreference(FONT_SIZE_PREFERENCE);
-
         mTalkbackPreference = findPreference(TALKBACK_PREFERENCE);
-        mTalkbackPreference.setTitle(TALKBACK_NAME);
     }
 
     @Override
@@ -136,37 +127,36 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
             extras.putString(AccessibilitySettings.EXTRA_TITLE,
                     getString(R.string.accessibility_screen_magnification_title));
             extras.putCharSequence(AccessibilitySettings.EXTRA_SUMMARY,
-                    getActivity().getResources().getText(
-                    R.string.accessibility_screen_magnification_summary));
+                    getText(R.string.accessibility_screen_magnification_summary));
             extras.putBoolean(AccessibilitySettings.EXTRA_CHECKED,
                     Settings.Secure.getInt(getContentResolver(),
                     Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED, 0) == 1);
         } else if (mTalkbackPreference == preference) {
-            // Toggle Talkback. The tutorial will automatically start when Talkback is first
-            //  activated.
+            // Enable Talkback if disabled. The tutorial will automatically start when Talkback is
+            // first activated.
             final ContentResolver resolver = getContentResolver();
+            final int accessibilityEnabled =
+                    Settings.Secure.getInt(resolver, Settings.Secure.ACCESSIBILITY_ENABLED, 0);
+            if (accessibilityEnabled == 0) {
+                final String servicesToEnable = getAccessibilityServicesFiltered(
+                        getActivity(), AccessibilityServiceInfo.FEEDBACK_SPOKEN);
 
-            final boolean enable =
-                    Settings.Secure.getInt(resolver, Settings.Secure.ACCESSIBILITY_ENABLED, 0) == 0;
-            final String servicesToEnable = getAccessibilityServicesFiltered(
-                    getActivity(), AccessibilityServiceInfo.FEEDBACK_SPOKEN);
+                // Enable all accessibility services with spoken feedback type.
+                Settings.Secure.putString(resolver, Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES,
+                        servicesToEnable);
 
-            // Enable all accessibility services with spoken feedback type.
-            Settings.Secure.putString(resolver, Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES,
-                    enable ? servicesToEnable : "");
+                // Allow the services we just enabled to toggle touch exploration.
+                Settings.Secure.putString(resolver,
+                        Settings.Secure.TOUCH_EXPLORATION_GRANTED_ACCESSIBILITY_SERVICES,
+                        servicesToEnable);
 
-            // Allow the services we just enabled to toggle touch exploration.
-            Settings.Secure.putString(resolver,
-                    Settings.Secure.TOUCH_EXPLORATION_GRANTED_ACCESSIBILITY_SERVICES,
-                    enable ? servicesToEnable : "");
+                // Enable touch exploration.
+                Settings.Secure.putInt(resolver, Settings.Secure.TOUCH_EXPLORATION_ENABLED, 1);
 
-            // Enable touch exploration.
-            Settings.Secure.putInt(resolver, Settings.Secure.TOUCH_EXPLORATION_ENABLED,
-                    enable ? 1 : 0);
-
-            // Turn on accessibility mode last, since enabling accessibility with no
-            // services has no effect.
-            Settings.Secure.putInt(resolver, Settings.Secure.ACCESSIBILITY_ENABLED, enable ? 1 : 0);
+                // Turn on accessibility mode last, since enabling accessibility with no
+                // services has no effect.
+                Settings.Secure.putInt(resolver, Settings.Secure.ACCESSIBILITY_ENABLED, 1);
+            }
         }
 
         return super.onPreferenceTreeClick(preference);
@@ -176,6 +166,7 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
         updateFeatureSummary(Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED,
                 mDisplayMagnificationPreference);
         updateFontSizeSummary(mFontSizePreference);
+        updateTalkbackSummary();
     }
 
     private void updateFeatureSummary(String prefKey, Preference pref) {
@@ -191,5 +182,14 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
         final int index = ToggleFontSizePreferenceFragment.fontSizeValueToIndex(
                 res.getConfiguration().fontScale, strEntryValues);
         pref.setSummary(entries[index]);
+    }
+
+    private void updateTalkbackSummary() {
+        final boolean enabled = Settings.Secure.getInt(getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_ENABLED, 0) == 1;
+        final String enabledText = (enabled
+                ? getString(R.string.accessibility_feature_state_on)
+                : getString(R.string.accessibility_feature_state_off));
+        mTalkbackPreference.setSummary(getString(R.string.talkback_summary, enabledText));
     }
 }

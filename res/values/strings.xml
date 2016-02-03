@@ -3750,8 +3750,10 @@
     <string name="vision_settings_description">Adjust these settings now to assist you through the remainder of the set up process. You can adjust them any time in device settings.</string>
     <!-- Title for the accessibility preference category of accessibility services. [CHAR LIMIT=25] -->
     <string name="accessibility_services_title">Services</string>
-    <!-- Summary for the Talkback Accessibility Service. Lets the user know that Talkback is a screenreader and that it is usually most helpful to blind and low vision users. [CHAR_LIMIT=none] -->
-    <string name="talkback_summary">Screenreader tool primarily for people with blindness and low vision</string>
+    <!-- Title for the Talkback Accessibility Service. Displayed on the Accessibility Settings screen in Setup Wizard. [CHAR_LIMIT=25] -->
+    <string name="talkback_title">Talkback</string>
+    <!-- Summary for the Talkback Accessibility Service. Lets the user know that Talkback is a screenreader and that it is usually most helpful to blind and low vision users and whether the service is on. [CHAR_LIMIT=none] -->
+    <string name="talkback_summary">Screenreader tool primarily for people with blindness and low vision\n<xliff:g id="service_state" example="On">%1$s</xliff:g></string>
     <!-- Title for the accessibility preference category of system related preferences. [CHAR LIMIT=25] -->
     <string name="accessibility_system_title">System</string>
     <!-- Title for the accessibility preference category of display related preferences. [CHAR LIMIT=25] -->
@@ -3761,7 +3763,7 @@
     <!-- Title for the accessibility preference screen to enable screen magnification. [CHAR LIMIT=35] -->
     <string name="accessibility_screen_magnification_title">Magnification gestures</string>
     <!-- Summary for the accessibility preference screen to enable screen magnification. [CHAR LIMIT=none] -->
-    <string name="accessibility_screen_magnification_summary">Zoom in and out by triple-tapping the screen with one finger.\n\nWhile zoomed in, you can:\n<ul><li>Pan: Drag two or more fingers across the screen.</li>\n<li>Adjust zoom level: Pinch two or more fingers together or spread them apart.</li>\n<li>Temporariliy magnify: Triple-tap, hold, and drag your finger to explore different parts of the screen. Lift your finger to return to our previous state.</li></ul>\n\nTriple-tap for magnification works everywhere except the keyboard and navigation bar.</string>
+    <string name="accessibility_screen_magnification_summary">Zoom in and out by triple-tapping the screen with one finger.\n\nWhile zoomed in, you can:\n<ul><li>Pan: Drag two or more fingers across the screen.</li>\n<li>Adjust zoom level: Pinch two or more fingers together or spread them apart.</li>\n<li>Temporariliy magnify: Triple-tap, hold, and drag your finger to explore different parts of the screen. Lift your finger to return to your previous state.</li></ul>\n\nTriple-tap for magnification works everywhere except the keyboard and navigation bar.</string>
     <!-- Title for the preference to enable the global geture that turns on accessibility. [CHAR LIMIT=35] -->
     <string name="accessibility_global_gesture_preference_title">Accessibility shortcut</string>
     <!-- Summary for the preference to enable the global geture that turns on accessibility (on state). [CHAR LIMIT=60] -->

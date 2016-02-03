@@ -118,7 +118,11 @@
         <item name="android:colorPrimary">@color/material_blue_700</item>
         <item name="android:colorPrimaryDark">@color/material_blue_700</item>
         <item name="preferenceTheme">@style/PreferenceTheme</item>
-        <item name="switchBarTheme">@style/ThemeOverlay.SwitchBar.Settings</item>
+        <item name="switchBarTheme">@style/SetupWizardAccessibilitySwitchBarTheme</item>
+    </style>
+
+    <style name="SetupWizardAccessibilitySwitchBarTheme" parent="ThemeOverlay.SwitchBar.Settings">
+        <item name="switchBarBackgroundColor">@color/material_blue_500</item>
     </style>
 
     <!-- Theme with no local references, used by AccountPreferenceBase where we have to inflate
@@ -180,11 +184,13 @@
     <style name="ThemeOverlay.SwitchBar.Settings" parent="@android:style/ThemeOverlay.Material.Dark.ActionBar">
         <item name="switchBarMarginStart">@dimen/switchbar_margin_start</item>
         <item name="switchBarMarginEnd">@dimen/switchbar_margin_end</item>
+        <item name="switchBarBackgroundColor">@color/switchbar_background_color</item>
     </style>
 
     <style name="ThemeOverlay.SwitchBar.SubSettings" parent="@android:style/ThemeOverlay.Material.Dark.ActionBar">
         <item name="switchBarMarginStart">@dimen/switchbar_subsettings_margin_start</item>
         <item name="switchBarMarginEnd">@dimen/switchbar_subsettings_margin_end</item>
+        <item name="switchBarBackgroundColor">@color/switchbar_background_color</item>
     </style>
 
     <style name="Theme.DialogWhenLarge" parent="@*android:style/Theme.Material.Settings.DialogWhenLarge">
@@ -237,6 +243,7 @@
     <style name="ThemeOverlay.SwitchBar" parent="@android:style/ThemeOverlay">
         <!-- Used by controls, e.g. CheckBox, ProgressBar, etc. -->
         <item name="android:colorAccent">@color/switch_accent_color</item>
+        <item name="switchBarBackgroundColor">@color/switchbar_background_color</item>
     </style>
 
     <style name="Theme.ConfirmDeviceCredentials" parent="Theme.SubSettings">

@@ -52,6 +52,12 @@ import java.util.UUID;
 public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceFragment
         implements DialogCreatable {
 
+    /**
+     * The Help Uri Resource key. This can be passed as an extra argument when creating the
+     * Fragment.
+     **/
+    public static final String HELP_URI_RESOURCE_KEY = "help_uri_resource";
+
     private static final String TAG = "SettingsPreference";
 
     private static final int DELAY_HIGHLIGHT_DURATION_MILLIS = 600;
@@ -101,7 +107,13 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
         }
 
         // Prepare help url and enable menu if necessary
-        int helpResource = getHelpResource();
+        Bundle arguments = getArguments();
+        int helpResource;
+        if (arguments != null && arguments.containsKey(HELP_URI_RESOURCE_KEY)) {
+            helpResource = arguments.getInt(HELP_URI_RESOURCE_KEY);
+        } else {
+            helpResource = getHelpResource();
+        }
         if (helpResource != 0) {
             mHelpUri = getResources().getString(helpResource);
         }

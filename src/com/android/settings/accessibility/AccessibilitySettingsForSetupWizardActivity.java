@@ -18,39 +18,41 @@ package com.android.settings.accessibility;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.SettingsPreferenceFragment;
 
 public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivity {
 
-      @Override
-      public boolean onCreateOptionsMenu(Menu menu) {
-          // Return true, so we get notified when items in the menu are clicked.
-          return true;
-      }
 
-      @Override
-      public boolean onOptionsItemSelected(MenuItem item) {
-          onBackPressed();
-          return true;
-      }
+    @Override
+    protected void onCreate(Bundle savedState) {
+        super.onCreate(savedState);
 
-      @Override
-      public void startPreferencePanel(String fragmentClass, Bundle args, int titleRes,
-              CharSequence titleText, Fragment resultTo, int resultRequestCode) {
-          startPreferenceFragment(Fragment.instantiate(this, fragmentClass, args), true);
-      }
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+        setIsDrawerPresent(false);
+    }
 
-      @Override
-      public void openDrawer() {
-          // Do nothing.
-      }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Return true, so we get notified when items in the menu are clicked.
+        return true;
+    }
 
-      @Override
-      public void closeDrawer() {
-          // Do nothing.
-      }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        onBackPressed();
+        return true;
+    }
+
+    @Override
+    public void startPreferencePanel(String fragmentClass, Bundle args, int titleRes,
+            CharSequence titleText, Fragment resultTo, int resultRequestCode) {
+        args.putInt(SettingsPreferenceFragment.HELP_URI_RESOURCE_KEY, 0);
+        startPreferenceFragment(Fragment.instantiate(this, fragmentClass, args), true);
+    }
 }
