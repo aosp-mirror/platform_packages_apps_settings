@@ -21,14 +21,12 @@
     <SwitchPreference
         android:key="toggle_airplane"
         android:title="@string/airplane_mode"
-        android:persistent="false"
         android:disableDependentsState="true" />
 
     <SwitchPreference
         android:key="toggle_nfc"
         android:title="@string/nfc_quick_toggle_title"
-        android:summary="@string/nfc_quick_toggle_summary"
-        android:persistent="false" />
+        android:summary="@string/nfc_quick_toggle_summary" />
 
     <PreferenceScreen
         android:key="wifi_calling_settings"

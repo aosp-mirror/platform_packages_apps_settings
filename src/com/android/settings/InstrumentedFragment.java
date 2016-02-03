@@ -16,10 +16,10 @@
 
 package com.android.settings;
 
+import com.android.internal.logging.MetricsLogger;
+
 import android.os.Bundle;
 import android.support.v14.preference.PreferenceFragment;
-
-import com.android.internal.logging.MetricsLogger;
 
 /**
  * Instrumented fragment that logs visibility state.
@@ -43,6 +43,10 @@ public abstract class InstrumentedFragment extends PreferenceFragment {
     public static final int ENABLE_VIRTUAL_KEYBOARDS = UNDECLARED + 13;
     public static final int DATA_SAVER_SUMMARY = UNDECLARED + 14;
     public static final int DATA_USAGE_UNRESTRICTED_ACCESS = UNDECLARED + 15;
+
+    // Used for generic logging of Settings Preference Persistence, should not be used
+    // outside SharedPreferencesLogger.
+    public static final int ACTION_GENERIC_PACKAGE = UNDECLARED + 16;
 
     /**
      * Declare the view of this category.

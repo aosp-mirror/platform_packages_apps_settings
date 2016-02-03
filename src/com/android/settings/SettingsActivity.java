@@ -457,6 +457,21 @@ public class SettingsActivity extends SettingsDrawerActivity
         return true;
     }
 
+    @Override
+    public SharedPreferences getSharedPreferences(String name, int mode) {
+        if (name.equals(getPackageName() + "_preferences")) {
+            String tag = getClass().getName();
+            if (getIntent() != null && getIntent().hasExtra(EXTRA_SHOW_FRAGMENT)) {
+                tag = getIntent().getStringExtra(EXTRA_SHOW_FRAGMENT);
+            }
+            if (tag.startsWith("com.android.settings.")) {
+                tag = tag.replace("com.android.settings.", "");
+            }
+            return new SharedPreferencesLogger(this, tag);
+        }
+        return super.getSharedPreferences(name, mode);
+    }
+
     private static boolean isShortCutIntent(final Intent intent) {
         Set<String> categories = intent.getCategories();
         return (categories != null) && categories.contains("com.android.settings.SHORTCUT");

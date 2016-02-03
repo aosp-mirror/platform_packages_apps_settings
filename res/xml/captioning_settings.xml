@@ -26,7 +26,6 @@
         android:title="@string/captioning_standard_options_title" >
         <com.android.settings.accessibility.LocalePreference
             android:key="captioning_locale"
-            android:persistent="false"
             android:summary="%s"
             android:title="@string/captioning_locale" />
 
@@ -34,13 +33,11 @@
             android:entries="@array/captioning_font_size_selector_titles"
             android:entryValues="@array/captioning_font_size_selector_values"
             android:key="captioning_font_size"
-            android:persistent="false"
             android:summary="%s"
             android:title="@string/captioning_text_size" />
 
         <com.android.settings.accessibility.PresetPreference
             android:key="captioning_preset"
-            android:persistent="false"
             android:title="@string/captioning_preset" />
     </PreferenceCategory>
     <PreferenceCategory
@@ -50,47 +47,38 @@
             android:entries="@array/captioning_typeface_selector_titles"
             android:entryValues="@array/captioning_typeface_selector_values"
             android:key="captioning_typeface"
-            android:persistent="false"
             android:summary="%s"
             android:title="@string/captioning_typeface" />
 
         <com.android.settings.accessibility.ColorPreference
             android:key="captioning_foreground_color"
-            android:persistent="false"
             android:title="@string/captioning_foreground_color" />
         <com.android.settings.accessibility.ColorPreference
             android:dependency="captioning_foreground_color"
             android:key="captioning_foreground_opacity"
-            android:persistent="false"
             android:title="@string/captioning_foreground_opacity" />
 
         <com.android.settings.accessibility.EdgeTypePreference
             android:key="captioning_edge_type"
-            android:persistent="false"
             android:title="@string/captioning_edge_type" />
 
         <com.android.settings.accessibility.ColorPreference
             android:dependency="captioning_edge_type"
             android:key="captioning_edge_color"
-            android:persistent="false"
             android:title="@string/captioning_edge_color" />
         <com.android.settings.accessibility.ColorPreference
             android:key="captioning_background_color"
-            android:persistent="false"
             android:title="@string/captioning_background_color" />
         <com.android.settings.accessibility.ColorPreference
             android:dependency="captioning_background_color"
             android:key="captioning_background_opacity"
-            android:persistent="false"
             android:title="@string/captioning_background_opacity" />
         <com.android.settings.accessibility.ColorPreference
             android:key="captioning_window_color"
-            android:persistent="false"
             android:title="@string/captioning_window_color" />
         <com.android.settings.accessibility.ColorPreference
             android:dependency="captioning_window_color"
             android:key="captioning_window_opacity"
-            android:persistent="false"
             android:title="@string/captioning_window_opacity" />
     </PreferenceCategory>
 

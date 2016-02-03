@@ -22,14 +22,12 @@
 
         <DropDownPreference
                 android:key="app_link_state"
-                android:persistent="false"
                 android:summary="%s"
                 android:title="@string/app_launch_open_domain_urls_title" />
 
         <com.android.settings.applications.AppDomainsPreference
                 android:key="app_launch_supported_domain_urls"
                 android:title="@string/app_launch_supported_domain_urls_title"
-                android:persistent="false"
                 android:dependency="app_link_state"
                 />
 
@@ -40,7 +38,6 @@
 
         <com.android.settings.applications.ClearDefaultsPreference
                 android:key="app_launch_clear_defaults"
-                android:persistent="false"
                 />
 
     </PreferenceCategory>
