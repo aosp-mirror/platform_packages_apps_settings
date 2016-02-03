@@ -22,12 +22,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.icu.text.AlphabeticIndex;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.PreferenceFrameLayout;
+import android.text.TextUtils;
 import android.util.ArraySet;
+import android.util.LocaleList;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -45,6 +48,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.FrameLayout;
 import android.widget.ListView;
+import android.widget.SectionIndexer;
 import android.widget.Spinner;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.AppHeader;
@@ -79,6 +83,7 @@ import com.android.settingslib.applications.ApplicationsState.VolumeFilter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Locale;
 
 /**
  * Activity to pick an application that will be used to display installation information and
@@ -300,6 +305,7 @@ public class ManageApplications extends InstrumentedFragment
             }
             mListView.setAdapter(mApplications);
             mListView.setRecyclerListener(mApplications);
+            mListView.setFastScrollEnabled(isFastScrollEnabled());
 
             Utils.prepareCustomPreferencesList(container, mRootView, mListView, false);
         }
@@ -369,6 +375,17 @@ public class ManageApplications extends InstrumentedFragment
                 return FILTER_APPS_WRITE_SETTINGS;
             default:
                 return FILTER_APPS_ALL;
+        }
+    }
+
+    private boolean isFastScrollEnabled() {
+        switch (mListType) {
+            case LIST_TYPE_MAIN:
+            case LIST_TYPE_NOTIFICATION:
+            case LIST_TYPE_STORAGE:
+                return mSortOrder == R.id.sort_order_alpha;
+            default:
+                return false;
         }
     }
 
@@ -545,6 +562,7 @@ public class ManageApplications extends InstrumentedFragment
             case R.id.sort_order_alpha:
             case R.id.sort_order_size:
                 mSortOrder = menuId;
+                mListView.setFastScrollEnabled(isFastScrollEnabled());
                 if (mApplications != null) {
                     mApplications.rebuild(mSortOrder);
                 }
@@ -699,7 +717,9 @@ public class ManageApplications extends InstrumentedFragment
      */
     static class ApplicationsAdapter extends BaseAdapter implements Filterable,
             ApplicationsState.Callbacks, AppStateBaseBridge.Callback,
-            AbsListView.RecyclerListener {
+            AbsListView.RecyclerListener, SectionIndexer {
+        private static final SectionInfo[] EMPTY_SECTIONS = new SectionInfo[0];
+
         private final ApplicationsState mState;
         private final ApplicationsState.Session mSession;
         private final ManageApplications mManageApplications;
@@ -717,6 +737,10 @@ public class ManageApplications extends InstrumentedFragment
         private AppFilter mOverrideFilter;
         private boolean mHasReceivedLoadEntries;
         private boolean mHasReceivedBridgeCallback;
+
+        private AlphabeticIndex.ImmutableIndex mIndex;
+        private SectionInfo[] mSections = EMPTY_SECTIONS;
+        private int[] mPositionToSectionIndex;
 
         private Filter mFilter = new Filter() {
             @Override
@@ -867,9 +891,49 @@ public class ManageApplications extends InstrumentedFragment
             mBaseEntries = entries;
             if (mBaseEntries != null) {
                 mEntries = applyPrefixFilter(mCurFilterPrefix, mBaseEntries);
+
+                if (mManageApplications.mListView.isFastScrollEnabled()) {
+                    // Rebuild sections
+                    if (mIndex == null) {
+                        LocaleList locales = mContext.getResources().getConfiguration().getLocales();
+                        if (locales.size() == 0) {
+                            locales = new LocaleList(Locale.ENGLISH);
+                        }
+                        AlphabeticIndex index = new AlphabeticIndex<>(locales.getPrimary());
+                        int localeCount = locales.size();
+                        for (int i = 1; i < localeCount; i++) {
+                            index.addLabels(locales.get(i));
+                        }
+                        // Ensure we always have some base English locale buckets
+                        index.addLabels(Locale.ENGLISH);
+                        mIndex = index.buildImmutableIndex();
+                    }
+
+                    ArrayList<SectionInfo> sections = new ArrayList<>();
+                    int lastSecId = -1;
+                    int totalEntries = mEntries.size();
+                    mPositionToSectionIndex = new int[totalEntries];
+
+                    for (int pos = 0; pos < totalEntries; pos++) {
+                        String label = mEntries.get(pos).label;
+                        int secId = mIndex.getBucketIndex(TextUtils.isEmpty(label) ? "" : label);
+                        if (secId != lastSecId) {
+                            lastSecId = secId;
+                            sections.add(new SectionInfo(mIndex.getBucket(secId).getLabel(), pos));
+                        }
+                        mPositionToSectionIndex[pos] = sections.size() - 1;
+                    }
+                    mSections = sections.toArray(EMPTY_SECTIONS);
+                } else {
+                    mSections = EMPTY_SECTIONS;
+                    mPositionToSectionIndex = null;
+                }
             } else {
                 mEntries = null;
+                mSections = EMPTY_SECTIONS;
+                mPositionToSectionIndex = null;
             }
+
             notifyDataSetChanged();
 
             if (mSession.getAllApps().size() != 0
@@ -1112,6 +1176,21 @@ public class ManageApplications extends InstrumentedFragment
                 return mContext.getString(R.string.domain_urls_summary_some, result.valueAt(0));
             }
         }
+
+        @Override
+        public Object[] getSections() {
+            return mSections;
+        }
+
+        @Override
+        public int getPositionForSection(int sectionIndex) {
+            return mSections[sectionIndex].position;
+        }
+
+        @Override
+        public int getSectionForPosition(int position) {
+            return mPositionToSectionIndex[position];
+        }
     }
 
     private static class SummaryProvider implements SummaryLoader.SummaryProvider,
@@ -1182,6 +1261,21 @@ public class ManageApplications extends InstrumentedFragment
 
         @Override
         public void onAllSizesComputed() {
+        }
+    }
+
+    private static class SectionInfo {
+        final String label;
+        final int position;
+
+        public SectionInfo(String label, int position) {
+            this.label = label;
+            this.position = position;
+        }
+
+        @Override
+        public String toString() {
+            return label;
         }
     }
 
