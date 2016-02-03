@@ -38,6 +38,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.android.internal.logging.MetricsProto.MetricsEvent;
+
 import java.util.EnumSet;
 import java.util.Set;
 import java.util.SortedMap;
@@ -54,8 +56,7 @@ public class UserCredentialsSettings extends InstrumentedFragment implements OnI
 
     @Override
     protected int getMetricsCategory() {
-        // TODO (rgl): Declare a metrics category for user credentials.
-        return UNDECLARED;
+        return MetricsEvent.USER_CREDENTIALS;
     }
 
     @Override
