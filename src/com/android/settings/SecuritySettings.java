@@ -345,11 +345,11 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private void addTrustAgentSettings(PreferenceGroup securityCategory) {
         final boolean hasSecurity = mLockPatternUtils.isSecure(MY_USER_ID);
         ArrayList<TrustAgentComponentInfo> agents =
-                getActiveTrustAgents(getPackageManager(), mLockPatternUtils, mDPM);
+                getActiveTrustAgents(getActivity(), mLockPatternUtils, mDPM);
         for (int i = 0; i < agents.size(); i++) {
             final TrustAgentComponentInfo agent = agents.get(i);
-            Preference trustAgentPreference =
-                    new Preference(securityCategory.getContext());
+            RestrictedPreference trustAgentPreference =
+                    new RestrictedPreference(securityCategory.getContext());
             trustAgentPreference.setKey(KEY_TRUST_AGENT);
             trustAgentPreference.setTitle(agent.title);
             trustAgentPreference.setSummary(agent.summary);
@@ -361,10 +361,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
             // Add preference to the settings menu.
             securityCategory.addPreference(trustAgentPreference);
 
-            if (agent.disabledByAdministrator) {
-                trustAgentPreference.setEnabled(false);
-                trustAgentPreference.setSummary(R.string.trust_agent_disabled_device_admin);
-            } else if (!hasSecurity) {
+            trustAgentPreference.setDisabledByAdmin(agent.admin);
+            if (!trustAgentPreference.isDisabledByAdmin() && !hasSecurity) {
                 trustAgentPreference.setEnabled(false);
                 trustAgentPreference.setSummary(R.string.disabled_because_no_backup_security);
             }
@@ -409,14 +407,15 @@ public class SecuritySettings extends SettingsPreferenceFragment
     }
 
     private static ArrayList<TrustAgentComponentInfo> getActiveTrustAgents(
-            PackageManager pm, LockPatternUtils utils, DevicePolicyManager dpm) {
+            Context context, LockPatternUtils utils, DevicePolicyManager dpm) {
+        PackageManager pm = context.getPackageManager();
         ArrayList<TrustAgentComponentInfo> result = new ArrayList<TrustAgentComponentInfo>();
         List<ResolveInfo> resolveInfos = pm.queryIntentServices(TRUST_AGENT_INTENT,
                 PackageManager.GET_META_DATA);
         List<ComponentName> enabledTrustAgents = utils.getEnabledTrustAgents(MY_USER_ID);
 
-        boolean disableTrustAgents = (dpm.getKeyguardDisabledFeatures(null)
-                & DevicePolicyManager.KEYGUARD_DISABLE_TRUST_AGENTS) != 0;
+        EnforcedAdmin admin = RestrictedLockUtils.checkIfKeyguardFeaturesDisabled(context,
+                DevicePolicyManager.KEYGUARD_DISABLE_TRUST_AGENTS, UserHandle.myUserId());
 
         if (enabledTrustAgents != null && !enabledTrustAgents.isEmpty()) {
             for (int i = 0; i < resolveInfos.size(); i++) {
@@ -429,9 +428,9 @@ public class SecuritySettings extends SettingsPreferenceFragment
                         !enabledTrustAgents.contains(
                                 TrustAgentUtils.getComponentName(resolveInfo)) ||
                         TextUtils.isEmpty(trustAgentComponentInfo.title)) continue;
-                if (disableTrustAgents && dpm.getTrustAgentConfiguration(
+                if (admin != null && dpm.getTrustAgentConfiguration(
                         null, TrustAgentUtils.getComponentName(resolveInfo)) == null) {
-                    trustAgentComponentInfo.disabledByAdministrator = true;
+                    trustAgentComponentInfo.admin = admin;
                 }
                 result.add(trustAgentComponentInfo);
                 if (ONLY_ONE_TRUST_AGENT) break;
@@ -722,7 +721,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
             final LockPatternUtils lockPatternUtils = new LockPatternUtils(context);
             if (lockPatternUtils.isSecure(MY_USER_ID)) {
                 ArrayList<TrustAgentComponentInfo> agents =
-                        getActiveTrustAgents(context.getPackageManager(), lockPatternUtils,
+                        getActiveTrustAgents(context, lockPatternUtils,
                                 context.getSystemService(DevicePolicyManager.class));
                 for (int i = 0; i < agents.size(); i++) {
                     final TrustAgentComponentInfo agent = agents.get(i);
@@ -784,7 +783,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
         private RestrictedListPreference mLockAfter;
         private SwitchPreference mVisiblePattern;
         private SwitchPreference mPowerButtonInstantlyLocks;
-        private Preference mOwnerInfoPref;
+        private RestrictedPreference mOwnerInfoPref;
 
         private LockPatternUtils mLockPatternUtils;
         private DevicePolicyManager mDPM;
@@ -860,19 +859,24 @@ public class SecuritySettings extends SettingsPreferenceFragment
                         trustAgentPreference.getTitle()));
             }
 
-            mOwnerInfoPref = findPreference(KEY_OWNER_INFO_SETTINGS);
+            mOwnerInfoPref = (RestrictedPreference) findPreference(KEY_OWNER_INFO_SETTINGS);
             if (mOwnerInfoPref != null) {
-                mOwnerInfoPref.setEnabled(!mLockPatternUtils.isLockScreenDisabled(MY_USER_ID)
-                        && !mLockPatternUtils.isDeviceOwnerInfoEnabled());
-
-                if (mOwnerInfoPref.isEnabled()) {
-                    mOwnerInfoPref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-                        @Override
-                        public boolean onPreferenceClick(Preference preference) {
-                            OwnerInfoSettings.show(SecuritySubSettings.this);
-                            return true;
-                        }
-                    });
+                if (mLockPatternUtils.isDeviceOwnerInfoEnabled()) {
+                    EnforcedAdmin admin = RestrictedLockUtils.getDeviceOwner(getActivity());
+                    mOwnerInfoPref.setDisabledByAdmin(admin);
+                } else {
+                    mOwnerInfoPref.setDisabledByAdmin(null);
+                    mOwnerInfoPref.setEnabled(!mLockPatternUtils.isLockScreenDisabled(MY_USER_ID));
+                    if (mOwnerInfoPref.isEnabled()) {
+                        mOwnerInfoPref.setOnPreferenceClickListener(
+                                new OnPreferenceClickListener() {
+                                    @Override
+                                    public boolean onPreferenceClick(Preference preference) {
+                                        OwnerInfoSettings.show(SecuritySubSettings.this);
+                                        return true;
+                                    }
+                                });
+                    }
                 }
             }
 
@@ -1000,7 +1004,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
         public void updateOwnerInfo() {
             if (mOwnerInfoPref != null) {
                 if (mLockPatternUtils.isDeviceOwnerInfoEnabled()) {
-                    mOwnerInfoPref.setSummary(R.string.disabled_by_administrator_summary);
+                    mOwnerInfoPref.setSummary(
+                            mLockPatternUtils.getDeviceOwnerInfo());
                 } else {
                     mOwnerInfoPref.setSummary(mLockPatternUtils.isOwnerInfoEnabled(MY_USER_ID)
                             ? mLockPatternUtils.getOwnerInfo(MY_USER_ID)
