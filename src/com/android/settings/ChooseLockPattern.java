@@ -670,7 +670,6 @@ public class ChooseLockPattern extends SettingsActivity {
         @Override
         public void onChosenLockSaveFinished(boolean wasSecureBefore, Intent resultData) {
             getActivity().setResult(RESULT_FINISHED, resultData);
-            getActivity().finish();
 
             if (!wasSecureBefore) {
                 Intent intent = getRedactionInterstitialIntent(getActivity());
@@ -678,6 +677,7 @@ public class ChooseLockPattern extends SettingsActivity {
                     startActivity(intent);
                 }
             }
+            getActivity().finish();
         }
     }
 
