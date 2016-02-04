@@ -44,7 +44,7 @@ public class AppGridView extends GridView {
     }
 
     public AppGridView(Context context, AttributeSet attrs, int defStyleAttr) {
-        this(context, attrs, defStyleAttr);
+        this(context, attrs, defStyleAttr, 0);
     }
 
     public AppGridView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleResId) {
