@@ -21,12 +21,11 @@ import com.android.settings.R;
 import com.android.settings.PreviewSeekBarPreferenceFragment;
 
 import android.annotation.Nullable;
-import android.app.ActivityManagerNative;
+import android.content.ContentResolver;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.os.RemoteException;
-import android.util.Log;
+import android.provider.Settings;
 
 /**
  * Preference fragment used to control font size.
@@ -44,11 +43,13 @@ public class ToggleFontSizePreferenceFragment extends PreviewSeekBarPreferenceFr
         mPreviewSampleResIds = new int[]{R.layout.font_size_preview};
 
         Resources res = getContext().getResources();
+        final ContentResolver resolver = getContext().getContentResolver();
         // Mark the appropriate item in the preferences list.
-        final Configuration origConfig = res.getConfiguration();
         mEntries = res.getStringArray(R.array.entries_font_size);
         final String[] strEntryValues = res.getStringArray(R.array.entryvalues_font_size);
-        mInitialIndex = fontSizeValueToIndex(origConfig.fontScale, strEntryValues);
+        final float currentScale =
+                Settings.System.getFloat(resolver, Settings.System.FONT_SCALE, 1.0f);
+        mInitialIndex = fontSizeValueToIndex(currentScale, strEntryValues);
         mValues = new float[strEntryValues.length];
         for (int i = 0; i < strEntryValues.length; ++i) {
             mValues[i] = Float.parseFloat(strEntryValues[i]);
@@ -64,17 +65,12 @@ public class ToggleFontSizePreferenceFragment extends PreviewSeekBarPreferenceFr
     }
 
     /**
-     * Persists the selected font size and sends a configuration change.
+     * Persists the selected font size.
      */
     @Override
     protected void commit() {
-        Configuration config = getContext().getResources().getConfiguration();
-        config.fontScale = mValues[mCurrentIndex];
-        try {
-            ActivityManagerNative.getDefault().updatePersistentConfiguration(config);
-        } catch (RemoteException e) {
-            Log.w(LOG_TAG, "Unable to save font size setting");
-        }
+        final ContentResolver resolver = getContext().getContentResolver();
+        Settings.System.putFloat(resolver, Settings.System.FONT_SCALE, mValues[mCurrentIndex]);
     }
 
     @Override

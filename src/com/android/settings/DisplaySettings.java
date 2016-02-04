@@ -88,8 +88,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
     private Preference mFontSizePref;
 
-    private final Configuration mCurConfig = new Configuration();
-
     private RestrictedListPreference mScreenTimeoutPreference;
     private ListPreference mNightModePreference;
     private Preference mScreenSaverPreference;
@@ -411,11 +409,14 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     }
 
     private void updateFontSizeSummary() {
-        final Resources res = mFontSizePref.getContext().getResources();
+        final Context context = mFontSizePref.getContext();
+        final float currentScale = Settings.System.getFloat(context.getContentResolver(),
+                Settings.System.FONT_SCALE, 1.0f);
+        final Resources res = context.getResources();
         final String[] entries = res.getStringArray(R.array.entries_font_size);
         final String[] strEntryValues = res.getStringArray(R.array.entryvalues_font_size);
-        final int index = ToggleFontSizePreferenceFragment.fontSizeValueToIndex(
-                res.getConfiguration().fontScale, strEntryValues);
+        final int index = ToggleFontSizePreferenceFragment.fontSizeValueToIndex(currentScale,
+                strEntryValues);
         mFontSizePref.setSummary(entries[index]);
     }
 
