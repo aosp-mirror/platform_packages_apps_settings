@@ -15,9 +15,14 @@
  */
 package com.android.settings.dashboard.conditional;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
+import android.view.View.OnLayoutChangeListener;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.ImageView;
 import com.android.settings.R;
@@ -66,8 +71,10 @@ public class ConditionAdapterUtils {
         expand.setOnClickListener(onExpandListener);
 
         View detailGroup = view.itemView.findViewById(R.id.detail_group);
-        // TODO: Animate expand/collapse
-        detailGroup.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
+        if (isExpanded != (detailGroup.getVisibility() == View.VISIBLE)) {
+            animateChange(view.itemView, view.itemView.findViewById(R.id.content),
+                    detailGroup, isExpanded);
+        }
         if (isExpanded) {
             view.summary.setText(condition.getSummary());
             CharSequence[] actions = condition.getActions();
@@ -89,5 +96,40 @@ public class ConditionAdapterUtils {
                 }
             }
         }
+    }
+
+    private static void animateChange(final View view, final View content,
+            final View detailGroup, final boolean visible) {
+        final int beforeBottom = view.getBottom();
+        setHeight(detailGroup, visible ? LayoutParams.WRAP_CONTENT : 0);
+        detailGroup.setVisibility(View.VISIBLE);
+        view.addOnLayoutChangeListener(new OnLayoutChangeListener() {
+            public static final long DURATION = 250;
+
+            @Override
+            public void onLayoutChange(View v, int left, int top, int right, int bottom,
+                    int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                final int afterBottom = v.getBottom();
+                v.removeOnLayoutChangeListener(this);
+                final ObjectAnimator animator = ObjectAnimator.ofInt(content, "bottom",
+                        beforeBottom, afterBottom);
+                animator.setDuration(DURATION);
+                animator.addListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        if (!visible) {
+                            detailGroup.setVisibility(View.GONE);
+                        }
+                    }
+                });
+                animator.start();
+            }
+        });
+    }
+
+    private static void setHeight(View detailGroup, int height) {
+        final LayoutParams params = detailGroup.getLayoutParams();
+        params.height = height;
+        detailGroup.setLayoutParams(params);
     }
 }
