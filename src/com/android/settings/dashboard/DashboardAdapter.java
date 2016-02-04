@@ -79,6 +79,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         mSuggestionsChecks = new SuggestionsChecks(mContext);
 
         setHasStableIds(true);
+        setShowingAll(true);
     }
 
     public void setSuggestions(SuggestionParser suggestionParser) {
@@ -167,7 +168,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                         tile.intent.getComponent().getClassName()), NS_ITEMS);
             }
         }
-        countItem(null, R.layout.see_all, true, NS_ITEMS);
         notifyDataSetChanged();
     }
 

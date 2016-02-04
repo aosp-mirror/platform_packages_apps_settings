@@ -783,9 +783,6 @@ public class SettingsActivity extends SettingsDrawerActivity
             onQueryTextSubmit(mSearchQuery);
         }
         updateTilesList();
-        if (mIsShowingDashboard) {
-            showMenuIcon();
-        }
     }
 
     @Override
