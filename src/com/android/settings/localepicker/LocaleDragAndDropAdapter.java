@@ -32,6 +32,7 @@ import com.android.settings.R;
 import com.android.internal.app.LocalePicker;
 import com.android.internal.app.LocaleStore;
 
+import java.text.NumberFormat;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -45,6 +46,7 @@ class LocaleDragAndDropAdapter
     private final ItemTouchHelper mItemTouchHelper;
     private boolean mRemoveMode = false;
     private boolean mDragEnabled = true;
+    private NumberFormat mNumberFormatter = NumberFormat.getNumberInstance();
 
     class CustomViewHolder extends RecyclerView.ViewHolder implements View.OnTouchListener {
         private final LocaleDragCell mLocaleDragCell;
@@ -113,7 +115,7 @@ class LocaleDragAndDropAdapter
         String label = feedItem.getFullNameNative();
         dragCell.setLabel(label);
         dragCell.setLocalized(feedItem.isTranslated());
-        dragCell.setMiniLabel(Integer.toString(i + 1));
+        dragCell.setMiniLabel(mNumberFormatter.format(i + 1));
         dragCell.setShowCheckbox(mRemoveMode);
         dragCell.setShowMiniLabel(!mRemoveMode);
         dragCell.setShowHandle(!mRemoveMode);
@@ -195,6 +197,8 @@ class LocaleDragAndDropAdapter
 
         LocaleList ll = new LocaleList(newList);
         LocalePicker.updateLocales(ll);
+
+        mNumberFormatter = NumberFormat.getNumberInstance(Locale.getDefault());
     }
 
     private void setDragEnabled(boolean enabled) {
