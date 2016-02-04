@@ -417,7 +417,7 @@ public class ChooseLockGeneric extends SettingsActivity {
 
             int adminEnforcedQuality = mDPM.getPasswordQuality(null);
             EnforcedAdmin enforcedAdmin = RestrictedLockUtils.checkIfPasswordQualityIsSet(
-                    getActivity());
+                    getActivity(), mUserId);
             for (int i = entries.getPreferenceCount() - 1; i >= 0; --i) {
                 Preference pref = entries.getPreference(i);
                 if (pref instanceof RestrictedPreference) {

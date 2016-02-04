@@ -34,10 +34,13 @@ import android.widget.Toast;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settingslib.RestrictedLockUtils;
 
 import java.io.IOException;
 
 import static android.content.Intent.EXTRA_USER;
+
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 /**
  * Entry point Activity for account setup. Works as follows
@@ -171,6 +174,9 @@ public class AddAccountSettings extends Activity {
         switch (requestCode) {
         case CHOOSE_ACCOUNT_REQUEST:
             if (resultCode == RESULT_CANCELED) {
+                if (data != null) {
+                    startActivityAsUser(data, mUserHandle);
+                }
                 setResult(resultCode);
                 finish();
                 return;
