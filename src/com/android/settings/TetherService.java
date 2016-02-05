@@ -251,13 +251,6 @@ public class TetherService extends Service {
         }
     }
 
-    public static void scheduleRecheckAlarm(Context context, int type) {
-        Intent intent = new Intent(context, TetherService.class);
-        intent.putExtra(ConnectivityManager.EXTRA_ADD_TETHER_TYPE, type);
-        intent.putExtra(ConnectivityManager.EXTRA_SET_ALARM, true);
-        context.startService(intent);
-    }
-
     private void scheduleAlarm() {
         Intent intent = new Intent(this, TetherService.class);
         intent.putExtra(ConnectivityManager.EXTRA_RUN_PROVISION, true);

@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.graphics.drawable.Icon;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
+
 import com.android.settings.R;
 import com.android.settings.TetherSettings;
 import com.android.settings.Utils;
@@ -37,7 +38,7 @@ public class HotspotCondition extends Condition {
 
     @Override
     public void refreshState() {
-        boolean wifiTetherEnabled = TetherUtil.isWifiTetherEnabled(mManager.getContext());
+        boolean wifiTetherEnabled = mWifiManager.isWifiApEnabled();
         setActive(wifiTetherEnabled);
     }
 
