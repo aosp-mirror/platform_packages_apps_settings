@@ -568,7 +568,6 @@ public class ChooseLockGeneric extends SettingsActivity {
                 mLockPatternUtils.setSeparateProfileChallengeEnabled(mUserId, true);
                 mChooseLockSettingsHelper.utils().clearLock(mUserId);
                 mChooseLockSettingsHelper.utils().setLockScreenDisabled(disabled, mUserId);
-                mLockPatternUtils.setSeparateProfileChallengeEnabled(mUserId, false);
                 removeAllFingerprintTemplatesAndFinish();
                 getActivity().setResult(Activity.RESULT_OK);
             } else {
