@@ -17,8 +17,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:layoutDirection="locale"
+              android:paddingTop="8dp"
+              android:paddingBottom="8dp"
               android:orientation="vertical"
+              android:layoutDirection="locale"
               android:textDirection="locale">
 
     <com.android.settings.localepicker.LocaleRecyclerView
@@ -31,10 +33,11 @@
     <Button
         android:id="@+id/add_language"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?android:listPreferredItemHeight"
+        android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+        android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
         android:drawableStart="@drawable/ic_add_24dp"
-        android:drawablePadding="12dp"
-        android:minHeight="64dp"
+        android:drawablePadding="24dp"
         android:textAlignment="textStart"
         android:text="@string/add_a_language"
         style="@style/Base.Widget.AppCompat.Button.Borderless"

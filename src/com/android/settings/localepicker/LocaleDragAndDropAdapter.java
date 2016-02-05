@@ -21,6 +21,7 @@ import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.LocaleList;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -41,6 +42,7 @@ import java.util.Locale;
 class LocaleDragAndDropAdapter
         extends RecyclerView.Adapter<LocaleDragAndDropAdapter.CustomViewHolder> {
 
+    private static final String TAG = "LocaleDragAndDropAdapter";
     private final Context mContext;
     private final List<LocaleStore.LocaleInfo> mFeedItemList;
     private final ItemTouchHelper mItemTouchHelper;
@@ -55,8 +57,6 @@ class LocaleDragAndDropAdapter
             super(view);
             mLocaleDragCell = view;
             mLocaleDragCell.getDragHandle().setOnTouchListener(this);
-            mLocaleDragCell.getTextLabel().setOnTouchListener(this);
-            mLocaleDragCell.getTranslateableLabel().setOnTouchListener(this);
         }
 
         public LocaleDragCell getLocaleDragCell() {
@@ -144,7 +144,14 @@ class LocaleDragAndDropAdapter
     }
 
     private void onItemMove(int fromPosition, int toPosition) {
-        Collections.swap(mFeedItemList, fromPosition, toPosition);
+        if (fromPosition >= 0 && toPosition >= 0) {
+            Collections.swap(mFeedItemList, fromPosition, toPosition);
+        } else {
+            // TODO: It looks like sometimes the RecycleView tries to swap item -1
+            // Investigate and file a bug.
+            Log.e(TAG, String.format(Locale.US,
+                    "Negative position in onItemMove %d -> %d", fromPosition, toPosition));
+        }
         notifyItemChanged(fromPosition); // to update the numbers
         notifyItemChanged(toPosition);
         notifyItemMoved(fromPosition, toPosition);

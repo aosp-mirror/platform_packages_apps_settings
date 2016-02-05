@@ -19,61 +19,64 @@
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:gravity="center_vertical"
-              android:orientation="horizontal"
-              android:baselineAligned="false"
+              android:minHeight="?android:listPreferredItemHeight"
+              android:background="?android:colorBackground"
               android:layoutDirection="locale"
               android:textDirection="locale">
+
+    <CheckBox
+        android:id="@+id/checkbox"
+        style="@style/LanguageCheckboxAndLabel"
+        tools:text="French"
+        android:paddingStart="16dp"
+        android:layout_toStartOf="@+id/dragHandle"/>
+
+    <TextView
+        android:id="@+id/label"
+        style="@style/LanguageCheckboxAndLabel"
+        tools:text="French"
+        android:paddingStart="48dp"
+        android:layout_toStartOf="@+id/dragHandle"/>
 
     <TextView
         android:id="@+id/miniLabel"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
+        android:layout_marginStart="?android:attr/listPreferredItemPaddingStart"
         tools:text="22"
         android:textColor="?android:attr/colorAccent"
-        android:minWidth="20sp"
-        android:textAlignment="textEnd"
-        android:gravity="center_vertical|end"
-        android:background="?android:colorBackground"/>
-
-    <CheckBox
-        android:id="@+id/checkbox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:minWidth="20sp"
-        android:layout_marginLeft="6dp"
-        android:layout_marginRight="6dp"
-        android:visibility="gone"
-        android:background="?android:colorBackground"/>
+        android:minWidth="32sp"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_alignTop="@id/checkbox"
+        android:layout_alignBottom="@id/checkbox"/>
 
     <TextView
-        android:id="@+id/label"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:padding="12dp"
-        tools:text="France"
-        android:textAppearance="?android:attr/textAppearanceListItem"
-        android:background="?android:colorBackground"/>
-
-    <ImageView
         android:id="@+id/l10nWarn"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:src="@android:drawable/stat_sys_warning"
-        android:focusableInTouchMode="false"
-        android:focusable="false"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:tint="?android:attr/colorAccent"/>
+        style="@style/LanguageCheckboxAndLabel"
+        android:layout_marginTop="-28dp"
+        android:paddingStart="48dp"
+        android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+        android:textColor="?android:textColorSecondary"
+        android:text="@string/locale_not_translated"
+        android:layout_toStartOf="@+id/dragHandle"
+        android:layout_below="@id/label"/>
 
     <ImageView
         android:id="@+id/dragHandle"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+        android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
         android:layout_gravity="center_vertical"
-        android:src="@drawable/drag_handle"/>
+        android:src="@drawable/drag_handle"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@id/checkbox"
+        android:layout_alignBottom="@id/checkbox"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        android:layout_alignParentBottom="true"/>
 
 </com.android.settings.localepicker.LocaleDragCell>
