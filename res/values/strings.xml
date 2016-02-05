@@ -6153,23 +6153,26 @@
     <!-- [CHAR LIMIT=NONE] Zen mode summary spoken when changing mode by voice: Turn on all notifications. -->
     <string name="zen_mode_summary_always">Change to always interrupt</string>
 
-    <!-- [CHAR LIMIT=40] Zen mode settings: No screen interruptions option -->
-    <string name="zen_mode_peek">No screen interruptions</string>
+    <!-- [CHAR LIMIT=40] Zen mode settings: visual interruptions: screen is on: title -->
+    <string name="zen_mode_screen_on">Block when screen is on</string>
 
-    <!-- [CHAR LIMIT=130] Zen mode settings: No screen interruptions summary -->
-    <string name="zen_mode_peek_summary">Prevent notifications silenced by Do Not Disturb from peeking or appearing on the current screen</string>
+    <!-- [CHAR LIMIT=130] Zen mode settings:  visual interruptions: screen is on: summary -->
+    <string name="zen_mode_screen_on_summary">Prevent notifications silenced by Do Not Disturb from peeking or popping on screen</string>
 
-    <!-- [CHAR LIMIT=40] Zen mode settings: No notification light option -->
-    <string name="zen_mode_lights">No notification light</string>
+    <!-- [CHAR LIMIT=40] Zen mode settings: visual interruptions: screen is off: title -->
+    <string name="zen_mode_screen_off">Block when screen is off</string>
 
-    <!-- [CHAR LIMIT=105] Zen mode settings: No notification light summary -->
-    <string name="zen_mode_lights_summary">Prevent notifications silenced by Do Not Disturb from causing the light to pulse</string>
+    <!-- [CHAR LIMIT=130] Zen mode settings:  visual interruptions: screen is off: summary -->
+    <string name="zen_mode_screen_off_summary">Prevent notifications silenced by Do Not Disturb from turning on the screen or pulsing the notification light</string>
 
-    <!-- [CHAR LIMIT=40] Zen mode settings: Don't turn the screen on option -->
-    <string name="zen_mode_screen_on">Never turn on the screen</string>
-
-    <!-- [CHAR LIMIT=130] Zen mode settings: Don't turn the screen on summary -->
-    <string name="zen_mode_screen_on_summary">If the screen is off, prevent notifications silenced by Do Not Disturb from turning it on</string>
+    <!-- [CHAR LIMIT=130] Zen mode settings:  visual interruptions summary -->
+    <string name="zen_mode_all_visual_interruptions">Off</string>
+    <!-- [CHAR LIMIT=130] Zen mode settings:  visual interruptions summary -->
+    <string name="zen_mode_screen_on_visual_interruptions">When screen is on</string>
+    <!-- [CHAR LIMIT=130] Zen mode settings:  visual interruptions summary -->
+    <string name="zen_mode_screen_off_visual_interruptions">When screen is off</string>
+    <!-- [CHAR LIMIT=130] Zen mode settings:  visual interruptions summary -->
+    <string name="zen_mode_no_visual_interruptions">When screen is on or off</string>
 
     <!-- [CHAR LIMIT=NONE] Content description for per-app notification
          settings button -->
