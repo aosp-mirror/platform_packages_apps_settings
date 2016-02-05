@@ -802,7 +802,7 @@ public class FingerprintSettings extends SubSettings {
     public static Preference getFingerprintPreferenceForUser(Context context, int userId) {
         FingerprintManager fpm = (FingerprintManager) context.getSystemService(
                 Context.FINGERPRINT_SERVICE);
-        if (!fpm.isHardwareDetected()) {
+        if (fpm == null || !fpm.isHardwareDetected()) {
             Log.v(TAG, "No fingerprint hardware detected!!");
             return null;
         }
