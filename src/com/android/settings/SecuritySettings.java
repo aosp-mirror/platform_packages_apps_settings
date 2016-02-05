@@ -690,7 +690,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
             // Fingerprint
             FingerprintManager fpm =
                     (FingerprintManager) context.getSystemService(Context.FINGERPRINT_SERVICE);
-            if (fpm.isHardwareDetected()) {
+            if (fpm != null && fpm.isHardwareDetected()) {
                 // This catches the title which can be overloaded in an overlay
                 data = new SearchIndexableRaw(context);
                 data.title = res.getString(R.string.security_settings_fingerprint_preference_title);
