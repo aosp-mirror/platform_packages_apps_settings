@@ -31,12 +31,7 @@ public class TouchBlockingFrameLayout extends FrameLayout {
     }
 
     @Override
-    public boolean onInterceptTouchEvent(MotionEvent ev) {
-        return true;
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        return true;
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        return false;
     }
 }
