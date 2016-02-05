@@ -899,7 +899,7 @@ public class ManageApplications extends InstrumentedFragment
                         if (locales.size() == 0) {
                             locales = new LocaleList(Locale.ENGLISH);
                         }
-                        AlphabeticIndex index = new AlphabeticIndex<>(locales.getPrimary());
+                        AlphabeticIndex index = new AlphabeticIndex<>(locales.get(0));
                         int localeCount = locales.size();
                         for (int i = 1; i < localeCount; i++) {
                             index.addLabels(locales.get(i));
