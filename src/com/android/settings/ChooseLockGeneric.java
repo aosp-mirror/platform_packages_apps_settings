@@ -180,7 +180,9 @@ public class ChooseLockGeneric extends SettingsActivity {
                     !mLockPatternUtils.isSeparateProfileChallengeAllowed(targetUser)) {
                 // Always use parent if explicitely requested or if profile challenge is not
                 // supported
-                mUserId = Utils.getUserIdFromBundle(getContext(), getArguments());
+                Bundle arguments = getArguments();
+                mUserId = Utils.getUserIdFromBundle(getContext(), arguments != null ? arguments
+                        : getActivity().getIntent().getExtras());
             } else {
                 mUserId = targetUser;
             }
