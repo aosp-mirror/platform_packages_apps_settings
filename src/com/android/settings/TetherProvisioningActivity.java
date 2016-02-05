@@ -18,6 +18,7 @@ package com.android.settings;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.ResultReceiver;
@@ -44,9 +45,6 @@ public class TetherProvisioningActivity extends Activity {
         mResultReceiver = (ResultReceiver)getIntent().getParcelableExtra(
                 ConnectivityManager.EXTRA_PROVISION_CALLBACK);
 
-        // TODO: Move isProvisioningNeededButUnavailable into ConnectivityManager and check
-        // it here to short-circuit and fail.
-
         int tetherType = getIntent().getIntExtra(ConnectivityManager.EXTRA_ADD_TETHER_TYPE,
                 ConnectivityManager.TETHERING_INVALID);
         String[] provisionApp = getResources().getStringArray(
@@ -58,6 +56,15 @@ public class TetherProvisioningActivity extends Activity {
         if (DEBUG) {
             Log.d(TAG, "Starting provisioning app: " + provisionApp[0] + "." + provisionApp[1]);
         }
+
+        if (getPackageManager().queryIntentActivities(intent,
+                PackageManager.MATCH_DEFAULT_ONLY).isEmpty()) {
+            Log.e(TAG, "Provisioning app is configured, but not available.");
+            mResultReceiver.send(ConnectivityManager.TETHER_ERROR_PROVISION_FAILED, null);
+            finish();
+            return;
+        }
+
         startActivityForResultAsUser(intent, PROVISION_REQUEST, UserHandle.CURRENT);
     }
 
