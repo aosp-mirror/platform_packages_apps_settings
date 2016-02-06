@@ -264,4 +264,9 @@ public class FakeUid extends Uid {
     public BatteryStats.ControllerActivityCounter getModemControllerActivity() {
         return null;
     }
+
+    @Override
+    public Timer getBluetoothScanTimer() {
+        return null;
+    }
 }
