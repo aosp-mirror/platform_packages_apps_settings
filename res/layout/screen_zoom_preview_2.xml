@@ -14,72 +14,45 @@
      limitations under the License.
 -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    android:background="?android:attr/colorBackgroundFloating">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize"
-        android:orientation="horizontal"
-        android:theme="?android:attr/actionBarTheme"
-        style="?android:attr/actionBarStyle">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <TextView
-            android:layout_width="0dp"
+            style="@android:style/TextAppearance.Material.Subhead"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_marginLeft="16dp"
-            android:text="@string/screen_zoom_preview_title"
-            android:textAppearance="@android:style/TextAppearance.Material.Widget.ActionBar.Title" />
+            android:layout_marginTop="16dp"
+            android:text="@string/permissions_label" />
 
-        <ImageView
-            android:layout_width="36dp"
-            android:layout_height="48dp"
-            style="?android:attr/actionOverflowButtonStyle" />
+        <include layout="@layout/screen_zoom_preview_item" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="62dp"
+            android:layout_marginRight="8dp"
+            android:background="#36000000" />
+
+        <include layout="@layout/screen_zoom_preview_item" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="62dp"
+            android:layout_marginRight="8dp"
+            android:background="#36000000" />
+
+        <include layout="@layout/screen_zoom_preview_item" />
+
     </LinearLayout>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="none"
-        android:background="?android:attr/colorBackgroundFloating">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                style="@android:style/TextAppearance.Material.Subhead"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
-                android:text="@string/permissions_label" />
-
-            <include layout="@layout/screen_zoom_preview_item" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="62dp"
-                android:layout_marginRight="8dp"
-                android:background="#36000000" />
-
-            <include layout="@layout/screen_zoom_preview_item" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="62dp"
-                android:layout_marginRight="8dp"
-                android:background="#36000000" />
-
-            <include layout="@layout/screen_zoom_preview_item" />
-
-        </LinearLayout>
-
-    </ScrollView>
-</LinearLayout>
+</ScrollView>
