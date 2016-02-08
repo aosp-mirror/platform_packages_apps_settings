@@ -23,26 +23,28 @@
         android:title="@string/vision_settings_description"
         android:layout="@layout/preference_multiline_title" />
 
-    <com.android.settings.display.ScreenZoomPreference
-        android:key="force_density_preference"
-        android:title="@string/screen_zoom_title"
-        android:summary="%s" />
-
-    <Preference
-        android:fragment="com.android.settings.accessibility.ToggleFontSizePreferenceFragment"
-        android:key="font_size_preference"
-        android:title="@string/title_font_size" />
-
     <Preference
         android:fragment=
                 "com.android.settings.accessibility.ToggleScreenMagnificationPreferenceFragment"
         android:key="screen_magnification_preference"
         android:title="@string/accessibility_screen_magnification_title"
-        android:summary="%s" />
+        android:summary="@string/accessibility_screen_magnification_short_summary" />
+
+    <Preference
+        android:fragment="com.android.settings.accessibility.ToggleFontSizePreferenceFragment"
+        android:key="font_size_preference"
+        android:title="@string/title_font_size"
+        android:summary="@string/short_summary_font_size" />
+
+    <com.android.settings.display.ScreenZoomPreference
+        android:key="force_density_preference"
+        android:title="@string/screen_zoom_title"
+        android:summary="@string/screen_zoom_short_summary" />
 
     <Preference
         android:key="talkback_preference"
         android:title="@string/talkback_title"
+        android:summary="@string/talkback_summary"
         android:persistent="true" />
 
 </PreferenceScreen>
