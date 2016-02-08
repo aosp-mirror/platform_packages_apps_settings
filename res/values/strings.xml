@@ -148,7 +148,7 @@
     <string name="sdcard_format" product="default">Erase SD card</string>
 
     <!-- Summary of font size setting screen. [CHAR LIMIT=NONE] -->
-    <string name="font_size_summary">Make text on screen smaller or larger.</string>
+    <string name="font_size_summary">Make the text on screen smaller or larger.</string>
 
     <!-- choice for the font size spinner -->
     <string name="small_font">Small</string>
@@ -2109,6 +2109,8 @@
     <string name="doze_summary">Wake screen when you pick up device or receive notifications</string>
     <!-- [CHAR LIMIT=30] Sound & display settings screen, setting option name to change font size -->
     <string name="title_font_size">Font size</string>
+    <!-- Summary for Font size. Lets the user know that this will make text larger or smaller. Appears in the accessibility portion of setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="short_summary_font_size">Make text larger or smaller</string>
     <!-- Sound & display settings screen, setting option summary displaying the currently selected font size -->
     <string name="summary_font_size" translatable="false">%1$s</string>
 
@@ -3747,13 +3749,13 @@
     <!-- Settings title for a brief version of Vision-Related Accessibility Settings. Displayed in Setup Wizard only. [CHAR LIMIT=35] -->
     <string name="vision_settings_title">Vision Settings</string>
     <!-- Settings description for a brief version of Vision-Related Accessibility Settings. Tells the user that they can adjust these settings now to help them through the remainder of the Setup Wizard and that they can later be changed in Settings. Displayed in Setup Wizard only. [CHAR LIMIT=none] -->
-    <string name="vision_settings_description">Adjust these settings now to assist you through the remainder of the set up process. You can adjust them any time in device settings.</string>
+    <string name="vision_settings_description">You can customize this device to fit your needs. These accessibility features can be changed later in Settings.</string>
     <!-- Title for the accessibility preference category of accessibility services. [CHAR LIMIT=25] -->
     <string name="accessibility_services_title">Services</string>
     <!-- Title for the Talkback Accessibility Service. Displayed on the Accessibility Settings screen in Setup Wizard. [CHAR_LIMIT=25] -->
     <string name="talkback_title">Talkback</string>
     <!-- Summary for the Talkback Accessibility Service. Lets the user know that Talkback is a screenreader and that it is usually most helpful to blind and low vision users and whether the service is on. [CHAR_LIMIT=none] -->
-    <string name="talkback_summary">Screenreader tool primarily for people with blindness and low vision\n<xliff:g id="service_state" example="On">%1$s</xliff:g></string>
+    <string name="talkback_summary">Screen reader primarily for people with blindness and low vision</string>
     <!-- Title for the accessibility preference category of system related preferences. [CHAR LIMIT=25] -->
     <string name="accessibility_system_title">System</string>
     <!-- Title for the accessibility preference category of display related preferences. [CHAR LIMIT=25] -->
@@ -3761,9 +3763,11 @@
     <!-- Title for the accessibility preference screen to enable video captioning. [CHAR LIMIT=35] -->
     <string name="accessibility_captioning_title">Captions</string>
     <!-- Title for the accessibility preference screen to enable screen magnification. [CHAR LIMIT=35] -->
-    <string name="accessibility_screen_magnification_title">Magnification gestures</string>
+    <string name="accessibility_screen_magnification_title">Magnification gesture</string>
+    <!-- Short summary for Magnification gesture. Tells the user that this feature allows the user to magnify the screen by tapping 3 times. Appears in accessibility portion of setup wizard -->
+    <string name="accessibility_screen_magnification_short_summary">Tap 3 times to zoom</string>
     <!-- Summary for the accessibility preference screen to enable screen magnification. [CHAR LIMIT=none] -->
-    <string name="accessibility_screen_magnification_summary">Zoom in and out by triple-tapping the screen with one finger.\n\nWhile zoomed in, you can:\n<ul><li>Pan: Drag two or more fingers across the screen.</li>\n<li>Adjust zoom level: Pinch two or more fingers together or spread them apart.</li>\n<li>Temporariliy magnify: Triple-tap, hold, and drag your finger to explore different parts of the screen. Lift your finger to return to your previous state.</li></ul>\n\nTriple-tap for magnification works everywhere except the keyboard and navigation bar.</string>
+    <string name="accessibility_screen_magnification_summary">To zoom in and out tap the screen 3 times with one finger.\n\nWhile zoomed in, you can:\n<ul>\n<li>Scroll: Drag 2 or more fingers across the screen</li>\n<li>Adjust zoom level: Pinch 2 or more fingers together or spread them apart</li></ul>\n\nTo zoom temporarily, tap 3 times and hold on the last tap. While holding your finger down, drag to move around the screen. Lift your finger to zoom back out.\n\nNote: Magnification gesture works everywhere except the keyboard and navigation bar.</string>
     <!-- Title for the preference to enable the global geture that turns on accessibility. [CHAR LIMIT=35] -->
     <string name="accessibility_global_gesture_preference_title">Accessibility shortcut</string>
     <!-- Summary for the preference to enable the global geture that turns on accessibility (on state). [CHAR LIMIT=60] -->
@@ -3774,8 +3778,6 @@
     <string name="accessibility_global_gesture_preference_description">When this feature is turned on, you can quickly activate accessibility features in two steps:\n\nStep 1: Press and hold the power button until you hear a sound or feel a vibration.\n\nStep 2: Tap &amp; hold two fingers until you hear audio confirmation.\n\nIf the device has multiple users, using this shortcut on the lock screen temporarily enables accessibility until the device is unlocked.</string>
     <!-- Title for the accessibility preference to high contrast text. [CHAR LIMIT=35] -->
     <string name="accessibility_toggle_high_text_contrast_preference_title">High contrast text</string>
-    <!-- Title for the accessibility preference to enable screen magnification. [CHAR LIMIT=35] -->
-    <string name="accessibility_toggle_screen_magnification_preference_title">Screen magnification</string>
     <!-- Title for the accessibility preference to auto update screen magnification. [CHAR LIMIT=35] -->
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title">Auto
         update screen magnification</string>
@@ -6816,11 +6818,13 @@
     <string name="camera_double_tap_power_gesture_desc">Quickly open camera without unlocking your screen</string>
 
     <!-- Title of setting that controls screen zoom (e.g. how large interface elements appear). [CHAR LIMIT=40] -->
-    <string name="screen_zoom_title">Magnify display</string>
+    <string name="screen_zoom_title">Display size</string>
+    <!-- Short summary for Magnification gesture. Lets the user know that this makes items on screen larger or smaller. Appears in the accessibility portion of Setup Wizard. [CHAR LIMIT=NONE] -->
+    <string name="screen_zoom_short_summary">Make items on screen larger or smaller</string>
     <!-- Keywords for setting that controls screen zoom (e.g. how large interface elements appear). [CHAR LIMIT=NONE] -->
     <string name="screen_zoom_keywords">display density, screen zoom, scale, scaling</string>
     <!-- Summary of screen zoom setting screen. [CHAR LIMIT=NONE] -->
-    <string name="screen_zoom_summary">Make all items on screen smaller or larger. Some apps on your home screen may change position after changing this setting.</string>
+    <string name="screen_zoom_summary">Make the items on your screen smaller or larger. Some apps on your screen may change position.</string>
     <!-- Title of the screen zoom preview activity. -->
     <string name="screen_zoom_preview_title">Preview</string>
     <!-- Description for the button that makes interface elements smaller. [CHAR_LIMIT=NONE] -->
