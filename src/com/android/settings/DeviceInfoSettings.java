@@ -104,7 +104,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
         findPreference(KEY_FIRMWARE_VERSION).setEnabled(true);
 
         final String patch = DeviceInfoUtils.getSecurityPatch();
-        if (TextUtils.isEmpty(patch)) {
+        if (!TextUtils.isEmpty(patch)) {
             setStringSummary(KEY_SECURITY_PATCH, patch);
         } else {
             getPreferenceScreen().removePreference(findPreference(KEY_SECURITY_PATCH));
