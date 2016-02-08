@@ -29,20 +29,17 @@
             android:title="@string/tts_default_rate_title"
             android:summary="@string/tts_default_rate_summary"
             android:defaultValue="50"
-            android:max="400" />
-        <SwitchPreference
-            android:key="tts_default_higher_speech_rate_enabled"
-            android:title="Higher speech rate" />
+            android:max="600" />
+
+        <Preference android:key="tts_play_example"
+            android:persistent="false"
+            android:title="@string/tts_play_example_title"
+            android:summary="@string/tts_play_example_summary" />
+
+       <Preference android:key="tts_status"
+            android:enabled="false"
+            android:shouldDisableView="false"
+            android:persistent="false"
+            android:title="@string/tts_status_title"/>
     </PreferenceCategory>
-
-    <Preference android:key="tts_play_example"
-         android:persistent="false"
-         android:title="@string/tts_play_example_title"
-         android:summary="@string/tts_play_example_summary" />
-
-    <Preference android:key="tts_status"
-         android:enabled="false"
-         android:shouldDisableView="false"
-         android:persistent="false"
-         android:title="@string/tts_status_title"/>
 </PreferenceScreen>
