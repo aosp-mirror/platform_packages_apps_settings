@@ -168,6 +168,11 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private static final String MOBILE_DATA_ALWAYS_ON = "mobile_data_always_on";
     private static final String KEY_COLOR_MODE = "color_mode";
 
+    private static final String BLUETOOTH_DISABLE_ABSOLUTE_VOLUME_KEY =
+                                    "bluetooth_disable_absolute_volume";
+    private static final String BLUETOOTH_DISABLE_ABSOLUTE_VOLUME_PROPERTY =
+                                    "persist.bluetooth.disableabsvol";
+
     private static final String INACTIVE_APPS_KEY = "inactive_apps";
 
     private static final String OPENGL_TRACES_KEY = "enable_opengl_traces";
@@ -227,6 +232,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private SwitchPreference mWifiAggressiveHandover;
     private SwitchPreference mLegacyDhcpClient;
     private SwitchPreference mMobileDataAlwaysOn;
+    private SwitchPreference mBluetoothDisableAbsVolume;
 
     private SwitchPreference mWifiAllowScansWithTraffic;
     private SwitchPreference mStrictMode;
@@ -380,6 +386,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         mMobileDataAlwaysOn = findAndInitSwitchPref(MOBILE_DATA_ALWAYS_ON);
         mLogdSize = addListPreference(SELECT_LOGD_SIZE_KEY);
         mUsbConfiguration = addListPreference(USB_CONFIGURATION_KEY);
+        mBluetoothDisableAbsVolume = findAndInitSwitchPref(BLUETOOTH_DISABLE_ABSOLUTE_VOLUME_KEY);
 
         mWindowAnimationScale = addListPreference(WINDOW_ANIMATION_SCALE_KEY);
         mTransitionAnimationScale = addListPreference(TRANSITION_ANIMATION_SCALE_KEY);
@@ -632,6 +639,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         updateMobileDataAlwaysOnOptions();
         updateSimulateColorSpace();
         updateUSBAudioOptions();
+        updateBluetoothDisableAbsVolumeOptions();
     }
 
     private void resetDangerousOptions() {
@@ -1252,6 +1260,16 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
                 mLegacyDhcpClient.isChecked() ? 1 : 0);
     }
 
+    private void updateBluetoothDisableAbsVolumeOptions() {
+        updateSwitchPreference(mBluetoothDisableAbsVolume,
+                SystemProperties.getBoolean(BLUETOOTH_DISABLE_ABSOLUTE_VOLUME_PROPERTY, false));
+    }
+
+    private void writeBluetoothDisableAbsVolumeOptions() {
+        SystemProperties.set(BLUETOOTH_DISABLE_ABSOLUTE_VOLUME_PROPERTY,
+                mBluetoothDisableAbsVolume.isChecked() ? "true" : "false");
+    }
+
     private void updateMobileDataAlwaysOnOptions() {
         updateSwitchPreference(mMobileDataAlwaysOn, Settings.Global.getInt(
                 getActivity().getContentResolver(),
@@ -1750,6 +1768,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             writeUSBAudioOptions();
         } else if (INACTIVE_APPS_KEY.equals(preference.getKey())) {
             startInactiveAppsFragment();
+        } else if (preference == mBluetoothDisableAbsVolume) {
+            writeBluetoothDisableAbsVolumeOptions();
         } else {
             return super.onPreferenceTreeClick(preferenceScreen, preference);
         }
