@@ -31,8 +31,11 @@ import com.android.settings.SettingsActivity;
 
 public class ZenModeSettings extends ZenModeSettingsBase {
     private static final String KEY_PRIORITY_SETTINGS = "priority_settings";
+    private static final String KEY_VISUAL_SETTINGS = "visual_interruptions_settings";
 
     private Preference mPrioritySettings;
+    private Preference mVisualSettings;
+    private Policy mPolicy;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,8 @@ public class ZenModeSettings extends ZenModeSettingsBase {
         final PreferenceScreen root = getPreferenceScreen();
 
         mPrioritySettings = root.findPreference(KEY_PRIORITY_SETTINGS);
+        mVisualSettings = root.findPreference(KEY_VISUAL_SETTINGS);
+        mPolicy = NotificationManager.from(mContext).getNotificationPolicy();
     }
 
     @Override
@@ -50,7 +55,6 @@ public class ZenModeSettings extends ZenModeSettingsBase {
         if (isUiRestricted()) {
             return;
         }
-        updateControls();
     }
 
     @Override
@@ -65,11 +69,13 @@ public class ZenModeSettings extends ZenModeSettingsBase {
 
     @Override
     protected void onZenModeConfigChanged() {
+        mPolicy = NotificationManager.from(mContext).getNotificationPolicy();
         updateControls();
     }
 
     private void updateControls() {
         updatePrioritySettingsSummary();
+        updateVisualSettingsSummary();
     }
 
     @Override
@@ -90,29 +96,45 @@ public class ZenModeSettings extends ZenModeSettingsBase {
     }
 
     private void updatePrioritySettingsSummary() {
-        Policy policy = NotificationManager.from(mContext).getNotificationPolicy();
         String s = getResources().getString(R.string.zen_mode_alarms);
-        s = appendLowercase(s, isCategoryEnabled(policy, Policy.PRIORITY_CATEGORY_REMINDERS),
+        s = appendLowercase(s, isCategoryEnabled(mPolicy, Policy.PRIORITY_CATEGORY_REMINDERS),
                 R.string.zen_mode_reminders);
-        s = appendLowercase(s, isCategoryEnabled(policy, Policy.PRIORITY_CATEGORY_EVENTS),
+        s = appendLowercase(s, isCategoryEnabled(mPolicy, Policy.PRIORITY_CATEGORY_EVENTS),
                 R.string.zen_mode_events);
-        if (isCategoryEnabled(policy, Policy.PRIORITY_CATEGORY_MESSAGES)) {
-            if (policy.priorityMessageSenders == Policy.PRIORITY_SENDERS_ANY) {
+        if (isCategoryEnabled(mPolicy, Policy.PRIORITY_CATEGORY_MESSAGES)) {
+            if (mPolicy.priorityMessageSenders == Policy.PRIORITY_SENDERS_ANY) {
                 s = appendLowercase(s, true, R.string.zen_mode_all_messages);
             } else {
                 s = appendLowercase(s, true, R.string.zen_mode_selected_messages);
             }
         }
-        if (isCategoryEnabled(policy, Policy.PRIORITY_CATEGORY_CALLS)) {
-            if (policy.priorityCallSenders == Policy.PRIORITY_SENDERS_ANY) {
+        if (isCategoryEnabled(mPolicy, Policy.PRIORITY_CATEGORY_CALLS)) {
+            if (mPolicy.priorityCallSenders == Policy.PRIORITY_SENDERS_ANY) {
                 s = appendLowercase(s, true, R.string.zen_mode_all_callers);
             } else {
                 s = appendLowercase(s, true, R.string.zen_mode_selected_callers);
             }
-        } else if (isCategoryEnabled(policy, Policy.PRIORITY_CATEGORY_REPEAT_CALLERS)) {
+        } else if (isCategoryEnabled(mPolicy, Policy.PRIORITY_CATEGORY_REPEAT_CALLERS)) {
             s = appendLowercase(s, true, R.string.zen_mode_repeat_callers);
         }
         mPrioritySettings.setSummary(s);
+    }
+
+    private void updateVisualSettingsSummary() {
+        String s = getString(R.string.zen_mode_all_visual_interruptions);
+        if (isEffectSuppressed(Policy.SUPPRESSED_EFFECT_SCREEN_ON)
+                && isEffectSuppressed(Policy.SUPPRESSED_EFFECT_SCREEN_OFF)) {
+            s = getString(R.string.zen_mode_no_visual_interruptions);
+        } else if (isEffectSuppressed(Policy.SUPPRESSED_EFFECT_SCREEN_ON)) {
+            s = getString(R.string.zen_mode_screen_on_visual_interruptions);
+        } else if (isEffectSuppressed(Policy.SUPPRESSED_EFFECT_SCREEN_OFF)) {
+            s = getString(R.string.zen_mode_screen_off_visual_interruptions);
+        }
+        mVisualSettings.setSummary(s);
+    }
+
+    private boolean isEffectSuppressed(int effect) {
+        return (mPolicy.suppressedVisualEffects & effect) != 0;
     }
 
     private boolean isCategoryEnabled(Policy policy, int categoryType) {

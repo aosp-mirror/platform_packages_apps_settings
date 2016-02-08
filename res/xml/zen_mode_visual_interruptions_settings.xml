@@ -18,16 +18,14 @@
                   xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
                   android:title="@string/zen_mode_visual_interruptions_settings_title" >
 
-    <SwitchPreference android:key="peek"
-                      android:title="@string/zen_mode_peek"
-                      android:summary="@string/zen_mode_peek_summary" />
-
-    <SwitchPreference android:key="lights"
-                      android:title="@string/zen_mode_lights"
-                      android:summary="@string/zen_mode_lights_summary" />
-
-    <SwitchPreference android:key="screen_on"
+    <SwitchPreference android:key="screenOn"
                       android:title="@string/zen_mode_screen_on"
                       android:summary="@string/zen_mode_screen_on_summary" />
+
+    <SwitchPreference android:key="screenOff"
+                      android:title="@string/zen_mode_screen_off"
+                      android:summary="@string/zen_mode_screen_off_summary" />
+
+
 
 </PreferenceScreen>
