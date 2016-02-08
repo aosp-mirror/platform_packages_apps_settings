@@ -49,7 +49,8 @@ public class FingerprintUiHelper extends FingerprintManager.AuthenticationCallba
     }
 
     public void startListening() {
-        if (mFingerprintManager.getEnrolledFingerprints(mUserId).size() > 0) {
+        if (mFingerprintManager != null
+                && mFingerprintManager.getEnrolledFingerprints(mUserId).size() > 0) {
             mCancellationSignal = new CancellationSignal();
             mFingerprintManager.setActiveUser(mUserId);
             mFingerprintManager.authenticate(
