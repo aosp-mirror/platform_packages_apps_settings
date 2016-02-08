@@ -48,7 +48,6 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
 
     // Preference controls.
     private Preference mDisplayMagnificationPreference;
-    private Preference mFontSizePreference;
     private Preference mTalkbackPreference;
 
     @Override
@@ -62,7 +61,6 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
         addPreferencesFromResource(R.xml.accessibility_settings_for_setup_wizard);
 
         mDisplayMagnificationPreference = findPreference(DISPLAY_MAGNIFICATION_PREFERENCE);
-        mFontSizePreference = findPreference(FONT_SIZE_PREFERENCE);
         mTalkbackPreference = findPreference(TALKBACK_PREFERENCE);
     }
 
@@ -70,12 +68,6 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(false);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        updatePreferences();
     }
 
     @Override
@@ -160,36 +152,5 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
         }
 
         return super.onPreferenceTreeClick(preference);
-    }
-
-    private void updatePreferences() {
-        updateFeatureSummary(Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED,
-                mDisplayMagnificationPreference);
-        updateFontSizeSummary(mFontSizePreference);
-        updateTalkbackSummary();
-    }
-
-    private void updateFeatureSummary(String prefKey, Preference pref) {
-        final boolean enabled = Settings.Secure.getInt(getContentResolver(), prefKey, 0) == 1;
-        pref.setSummary(enabled ? R.string.accessibility_feature_state_on
-                : R.string.accessibility_feature_state_off);
-    }
-
-    private void updateFontSizeSummary(Preference pref) {
-        final Resources res = getContext().getResources();
-        final String[] entries = res.getStringArray(R.array.entries_font_size);
-        final String[] strEntryValues = res.getStringArray(R.array.entryvalues_font_size);
-        final int index = ToggleFontSizePreferenceFragment.fontSizeValueToIndex(
-                res.getConfiguration().fontScale, strEntryValues);
-        pref.setSummary(entries[index]);
-    }
-
-    private void updateTalkbackSummary() {
-        final boolean enabled = Settings.Secure.getInt(getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_ENABLED, 0) == 1;
-        final String enabledText = (enabled
-                ? getString(R.string.accessibility_feature_state_on)
-                : getString(R.string.accessibility_feature_state_off));
-        mTalkbackPreference.setSummary(getString(R.string.talkback_summary, enabledText));
     }
 }
