@@ -29,7 +29,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.os.IBinder;
 import android.os.ResultReceiver;
@@ -235,16 +234,6 @@ public class TetherService extends Service {
             int type = mCurrentTethers.get(index);
             intent.putExtra(TETHER_CHOICE, type);
             intent.setFlags(Intent.FLAG_RECEIVER_FOREGROUND);
-
-            // Ensure that the provisioning app will actually handle the intent.
-            final PackageManager packageManager = getPackageManager();
-            if (packageManager.queryBroadcastReceivers(
-                    intent, PackageManager.MATCH_DEFAULT_ONLY).isEmpty()) {
-                Log.e(TAG, "Provisioning app is configured, but not available.");
-                fireCallbacksForType(type, ConnectivityManager.TETHER_ERROR_PROVISION_FAILED);
-                removeTypeAtIndex(index);
-                return;
-            }
 
             sendBroadcast(intent);
             mInProvisionCheck = true;
