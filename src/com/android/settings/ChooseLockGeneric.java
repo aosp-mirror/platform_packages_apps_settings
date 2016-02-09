@@ -204,11 +204,6 @@ public class ChooseLockGeneric extends SettingsActivity {
                     mWaitingForConfirmation = true;
                 }
             }
-        }
-
-        @Override
-        public void onViewCreated(View view, Bundle savedInstanceState) {
-            super.onViewCreated(view, savedInstanceState);
             if (mForFingerprint) {
                 setHeaderView(R.layout.choose_lock_generic_fingerprint_header);
             }
