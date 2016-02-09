@@ -1644,12 +1644,17 @@
     <string name="wifi_unspecified">Please select</string>
     <!-- Hint for multiple certificates being added to the configuration -->
     <string name="wifi_multiple_cert_added">(Multiple certificates added)</string>
+    <!-- Menu option for using trusted system CA certificates to validate EAP servers -->
+    <string name="wifi_use_system_certs">Use system certificates</string>
     <!-- Menu option for not providing an EAP user certificate -->
     <string name="wifi_do_not_provide_eap_user_cert">Do not provide</string>
     <!-- Menu option for not validating the EAP server -->
     <string name="wifi_do_not_validate_eap_server">Do not validate</string>
     <!-- Warning message displayed if user choses not to validate the EAP server -->
     <string name="wifi_do_not_validate_eap_server_warning">No certificate specified. Your connection will not be private.</string>
+    <!-- Warning message displayed if user does not specify a domain for the CA certificate.
+         Only displayed if the user also chooses to use system certificates. -->
+    <string name="wifi_no_domain_warning">Must specify a domain.</string>
     <!-- Substring of status line when Wi-Fi Protected Setup (WPS) is available and
          string is listed first [CHAR LIMIT=20]-->
     <string name="wifi_wps_available_first_item">WPS available</string>
