@@ -156,6 +156,10 @@
             android:entries="@array/usb_configuration_titles"
             android:entryValues="@array/usb_configuration_values" />
 
+        <SwitchPreference
+            android:key="bluetooth_disable_absolute_volume"
+            android:title="@string/bluetooth_disable_absolute_volume"
+            android:summary="@string/bluetooth_disable_absolute_volume_summary"/>
     </PreferenceCategory>
 
     <PreferenceCategory android:key="debug_input_category"
