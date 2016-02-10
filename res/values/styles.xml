@@ -372,4 +372,14 @@
         <item name="pageIndicatorColor">@android:color/tertiary_text_light</item>
         <item name="currentPageIndicatorColor">@android:color/primary_text_light</item>
     </style>
+
+    <style name="LanguageCheckboxAndLabel">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">?android:attr/listPreferredItemPaddingStart</item>
+        <item name="android:minHeight">?android:attr/listPreferredItemHeight</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceListItem</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
 </resources>
