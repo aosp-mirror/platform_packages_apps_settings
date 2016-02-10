@@ -625,8 +625,8 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
 
     public void finish() {
         Activity activity = getActivity();
-        if (activity != null) {
-            activity.onBackPressed();
+        if (activity != null && !activity.getFragmentManager().popBackStackImmediate()) {
+            finish();
         }
     }
 
