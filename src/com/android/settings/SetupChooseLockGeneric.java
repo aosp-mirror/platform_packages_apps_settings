@@ -23,10 +23,13 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.support.v7.preference.Preference;
 import android.support.v14.preference.PreferenceFragment;
 import android.view.View;
+import android.widget.Button;
 
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.fingerprint.SetupSkipDialog;
 import com.android.setupwizardlib.SetupWizardLayout;
 import com.android.setupwizardlib.view.NavigationBar;
 
@@ -38,6 +41,8 @@ import com.android.setupwizardlib.view.NavigationBar;
  * those changes.
  */
 public class SetupChooseLockGeneric extends ChooseLockGeneric {
+
+    private static final String KEY_UNLOCK_SET_DO_LATER = "unlock_set_do_later";
 
     @Override
     protected boolean isValidFragment(String fragmentName) {
@@ -58,7 +63,7 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
     public static class SetupChooseLockGenericFragment extends ChooseLockGenericFragment
             implements NavigationBar.NavigationBarListener {
 
-        private static final String EXTRA_PASSWORD_QUALITY = ":settings:password_quality";
+        public static final String EXTRA_PASSWORD_QUALITY = ":settings:password_quality";
 
         @Override
         public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -68,12 +73,28 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
 
             SetupWizardLayout layout = (SetupWizardLayout) view;
             final NavigationBar navigationBar = layout.getNavigationBar();
-            navigationBar.getNextButton().setEnabled(false);
+            Button nextButton = navigationBar.getNextButton();
+            nextButton.setText(null);
+            nextButton.setEnabled(false);
             navigationBar.setNavigationBarListener(this);
 
             layout.setIllustration(R.drawable.setup_illustration_lock_screen,
                     R.drawable.setup_illustration_horizontal_tile);
-            layout.setHeaderText(R.string.setup_lock_settings_picker_title);
+            if (!mForFingerprint) {
+                layout.setHeaderText(R.string.setup_lock_settings_picker_title);
+            } else {
+                layout.setHeaderText(R.string.lock_settings_picker_title);
+            }
+
+        }
+
+        @Override
+        protected void addHeaderView() {
+            if (mForFingerprint) {
+                setHeaderView(R.layout.setup_choose_lock_generic_fingerprint_header);
+            } else {
+                setHeaderView(R.layout.setup_choose_lock_generic_header);
+            }
         }
 
         @Override
@@ -110,6 +131,28 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
             final int newQuality = Math.max(quality,
                     DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);
             super.disableUnusablePreferencesImpl(newQuality, true /* hideDisabled */);
+        }
+
+        @Override
+        protected void addPreferences() {
+            if (mForFingerprint) {
+                super.addPreferences();
+            } else {
+                addPreferencesFromResource(R.xml.setup_security_settings_picker);
+            }
+        }
+
+        @Override
+        public boolean onPreferenceTreeClick(Preference preference) {
+            final String key = preference.getKey();
+            if (KEY_UNLOCK_SET_DO_LATER.equals(key)) {
+                // show warning.
+                SetupSkipDialog dialog = SetupSkipDialog.newInstance(getActivity().getIntent()
+                        .getBooleanExtra(SetupSkipDialog.EXTRA_FRP_SUPPORTED, false));
+                dialog.show(getFragmentManager());
+                return true;
+            }
+            return super.onPreferenceTreeClick(preference);
         }
 
         @Override

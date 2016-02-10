@@ -739,13 +739,27 @@
     <!-- Introduction detail message shown in fingerprint enrollment dialog [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_enroll_introduction_message">Just touch the fingerprint sensor to unlock your phone, authorize purchases, or sign in to apps. \n\n Be careful whose fingerprints you add - any fingerprints added will be able to do these things.</string>
     <!-- Introduction detail message shown in fingerprint enrollment dialog to warn the user [CHAR LIMIT=NONE]-->
-    <string name="security_settings_fingerprint_enroll_introduction_message_warning">Note: Your fingerprint may be less secure than a strong pattern or PIN.</string>
-    <!-- Link text shown bellow the warning to learn morn about fingerprint risk [CHAR LIMIT=22]-->
-    <string name="security_settings_fingerprint_enroll_introduction_risk_link_text">Learn more</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_warning">Note: Your fingerprint may be less secure than a strong pattern or PIN. <annotation id="url">Learn more</annotation></string>
     <!-- Button text to cancel enrollment from the introduction [CHAR LIMIT=22] -->
     <string name="security_settings_fingerprint_enroll_introduction_cancel">Cancel</string>
     <!-- Button text to continue to the next screen from the introduction [CHAR LIMIT=22] -->
     <string name="security_settings_fingerprint_enroll_introduction_continue">Continue</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning them of potential consequences of not doing so, including loss of factory reset protection. (tablet) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet">Device protection features will not be activated. You won\u2019t be able to prevent others from using this tablet if it\u2019s lost, stolen or wiped.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning them of potential consequences of not doing so, including loss of factory reset protection. (device) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="device">Device protection features will not be activated. You won\u2019t be able to prevent others from using this device if it\u2019s lost, stolen or wiped.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning them of potential consequences of not doing so, including loss of factory reset protection. (phone) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="default">Device protection features will not be activated. You won\u2019t be able to prevent others from using this phone if it\u2019s lost, stolen or wiped.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning them of potential consequences of not doing so. (tablet) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_intro_skip_dialog_text" product="tablet">Device protection features will not be activated. You won\u2019t be able to prevent others from using this tablet if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning them of potential consequences of not doing so. (device) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_intro_skip_dialog_text" product="device">Device protection features will not be activated. You won\u2019t be able to prevent others from using this device if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning them of potential consequences of not doing so. (phone) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_intro_skip_dialog_text" product="default">Device protection features will not be activated. You won\u2019t be able to prevent others from using this phone if it\u2019s lost or stolen.</string>
+    <!-- Button for skipping a step after having been warned of a potential concern [CHAR LIMIT=30] -->
+    <string name="skip_anyway_button_label">Skip anyway</string>
+    <!-- Button for going to the previous screen or step [CHAR LIMIT=20] -->
+    <string name="go_back_button_label">Go back</string>
     <!-- Introduction title shown in fingerprint enrollment dialog to locate the sensor [CHAR LIMIT=29] -->
     <string name="security_settings_fingerprint_enroll_find_sensor_title">Find the sensor</string>
     <!-- Message shown in fingerprint enrollment dialog to locate the sensor -->
@@ -972,8 +986,18 @@
     <!--  Title for security picker to choose the unlock method: None/Pattern/PIN/Password [CHAR LIMIT=22] -->
     <string name="lock_settings_picker_title">Choose screen lock</string>
 
-    <!-- Title for screen in setup wizard, prompting user to choose the unlock method: None/Pattern/PIN/Password [CHAR LIMIT=40] -->
-    <string name="setup_lock_settings_picker_title">Choose screen lock</string>
+    <!--  Title for security picker in setup wizard to choose the unlock method: None/Pattern/PIN/Password [CHAR LIMIT=22] -->
+    <string name="setup_lock_settings_picker_title">Protect your phone</string>
+
+    <!-- Title for screen in setup wizard, prompting user to choose the their backup screen lock method [CHAR LIMIT=NONE] -->
+    <string name="setup_lock_settings_picker_fingerprint_message">Fingerprint may be less secure than a strong pattern, PIN or password. Set up a backup lock screen to be secure.</string>
+
+    <!-- Description text for screen in setup wizard asking user to set up screen lock, explaining to the user how setting up a screen lock protect them from losing data. (tablet) [CHAR LIMIT=NONE] -->
+    <string name="setup_lock_settings_picker_message" product="tablet">Prevent others from using this tablet without your permission by activating device protection features. Choose the screen lock you want to use.</string>
+    <!-- Description text for screen in setup wizard asking user to set up screen lock, explaining to the user how setting up a screen lock protect them from losing data. (device) [CHAR LIMIT=NONE] -->
+    <string name="setup_lock_settings_picker_message" product="device">Prevent others from using this device without your permission by activating device protection features. Choose the screen lock you want to use.</string>
+    <!-- Description text for screen in setup wizard asking user to set up screen lock, explaining to the user how setting up a screen lock protect them from losing data. (phone) [CHAR LIMIT=NONE] -->
+    <string name="setup_lock_settings_picker_message" product="default">Prevent others from using this phone without your permission by activating device protection features. Choose the screen lock you want to use.</string>
 
     <!-- Message shown in screen lock picker while setting up the backup/fallback screen lock method for fingerprint. Users can choose to use this method to unlock the screen instead of fingerprint, or when fingerprint is not accepted. [CHAR LIMIT=80] [BACKUP_MESSAGE_ID=2799884038398627882] -->
     <string name="lock_settings_picker_fingerprint_message">Choose your backup screen lock method</string>
@@ -1015,6 +1039,9 @@
     <string name="unlock_set_unlock_password_title">Password</string>
     <!-- Title for preference that guides the user through creating an unlock password [CHAR LIMIT=45] -->
     <string name="unlock_set_unlock_password_summary">High security</string>
+
+    <!-- Title for preference that allows the user to setup their lock screen preference later [CHAR LIMIT=22] -->
+    <string name="unlock_set_do_later_title">Not now</string>
 
     <!-- Summary specifying that this is the current screen lock setting [CHAR LIMIT=45] -->
     <string name="current_screen_lock">Current screen lock</string>

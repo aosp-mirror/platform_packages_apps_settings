@@ -18,10 +18,13 @@ package com.android.settings.fingerprint;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.os.UserHandle;
+import android.support.v14.preference.PreferenceFragment;
 import android.view.View;
 import android.widget.Button;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.SetupChooseLockGeneric;
 import com.android.settings.SetupWizardUtils;
@@ -53,18 +56,31 @@ public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntrodu
     @Override
     protected void initViews() {
         SetupWizardUtils.setImmersiveMode(this);
-
-        final View buttonBar = findViewById(R.id.button_bar);
-        if (buttonBar != null) {
-            buttonBar.setVisibility(View.GONE);
-        }
-
         getNavigationBar().setNavigationBarListener(this);
+        Button nextButton = getNavigationBar().getNextButton();
+        nextButton.setText(null);
+        nextButton.setEnabled(false);
     }
 
     @Override
-    protected Button getNextButton() {
-        return getNavigationBar().getNextButton();
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == FINGERPRINT_FIND_SENSOR_REQUEST) {
+            if (data == null) {
+                data = new Intent();
+            }
+            LockPatternUtils lockPatternUtils = new LockPatternUtils(this);
+            data.putExtra(SetupChooseLockGeneric.
+                    SetupChooseLockGenericFragment.EXTRA_PASSWORD_QUALITY,
+                    lockPatternUtils.getKeyguardStoredPasswordQuality(UserHandle.myUserId()));
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    protected void onCancelButtonClick() {
+        SetupSkipDialog dialog = SetupSkipDialog.newInstance(
+                getIntent().getBooleanExtra(SetupSkipDialog.EXTRA_FRP_SUPPORTED, false));
+        dialog.show(getFragmentManager());
     }
 
     @Override
@@ -74,7 +90,7 @@ public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntrodu
 
     @Override
     public void onNavigateNext() {
-        onNextButtonClick();
+        // next is handled via the onNextButtonClick method in FingerprintEnrollIntroduction
     }
 
     @Override
