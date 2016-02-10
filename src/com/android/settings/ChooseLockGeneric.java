@@ -104,7 +104,6 @@ public class ChooseLockGeneric extends SettingsActivity {
         private int mEncryptionRequestQuality;
         private boolean mEncryptionRequestDisabled;
         private boolean mRequirePassword;
-        private boolean mForFingerprint = false;
         private boolean mForChangeCredRequiredForBoot = false;
         private String mUserPassword;
         private LockPatternUtils mLockPatternUtils;
@@ -129,6 +128,8 @@ public class ChooseLockGeneric extends SettingsActivity {
                 finish();
             }
         };
+
+        protected boolean mForFingerprint = false;
 
         @Override
         protected int getMetricsCategory() {
@@ -204,6 +205,10 @@ public class ChooseLockGeneric extends SettingsActivity {
                     mWaitingForConfirmation = true;
                 }
             }
+            addHeaderView();
+        }
+
+        protected void addHeaderView() {
             if (mForFingerprint) {
                 setHeaderView(R.layout.choose_lock_generic_fingerprint_header);
             }
@@ -323,7 +328,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                 if (prefScreen != null) {
                     prefScreen.removeAll();
                 }
-                addPreferencesFromResource(R.xml.security_settings_picker);
+                addPreferences();
                 disableUnusablePreferences(quality, hideDisabledPrefs);
                 updatePreferenceText();
                 updateCurrentPreference();
@@ -331,6 +336,10 @@ public class ChooseLockGeneric extends SettingsActivity {
             } else {
                 updateUnlockMethodAndFinish(quality, false);
             }
+        }
+
+        protected void addPreferences() {
+            addPreferencesFromResource(R.xml.security_settings_picker);
         }
 
         private void updatePreferenceText() {
