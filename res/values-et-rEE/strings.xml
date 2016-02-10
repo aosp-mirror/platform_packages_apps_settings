@@ -74,7 +74,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"SD-kaardi lahutamine"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Kustuta USB-mäluseade"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Kustuta SD-kaart"</string>
-    <string name="font_size_summary" msgid="133937309990844030">"Muutke ekraanil ilmuv tekst suuremaks või väiksemaks."</string>
+    <string name="font_size_summary" msgid="1690992332887488183">"Muutke ekraanil kuvatud tekst suuremaks või väiksemaks."</string>
     <string name="small_font" msgid="2295331917424072635">"Väike"</string>
     <string name="medium_font" msgid="2068475425515133701">"Keskmine"</string>
     <string name="large_font" msgid="599055175160971446">"Suur"</string>
@@ -703,9 +703,11 @@
     <string name="wifi_unchanged" msgid="3410422020930397102">"(muutmata)"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"Valige"</string>
     <string name="wifi_multiple_cert_added" msgid="3240743501460165224">"(Lisati mitu sertifikaati)"</string>
+    <string name="wifi_use_system_certs" msgid="5270879895056893783">"Kasuta süsteemi sertifikaate"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="5160499244977160665">"Ära esita"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4266754430576348471">"Ära kinnita"</string>
     <string name="wifi_do_not_validate_eap_server_warning" msgid="1787190245542586660">"Sertifikaati pole määratud. Teie ühendus pole privaatne."</string>
+    <string name="wifi_no_domain_warning" msgid="5223011964091727376">"Tuleb määrata domeen."</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS on saadaval"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" WPS on saadaval"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Sisestage võrgu parool"</string>
@@ -883,6 +885,7 @@
     <string name="doze_title" msgid="2259176504273878294">"Ambientne ekraan"</string>
     <string name="doze_summary" msgid="7128970177894383698">"Ekraan aktiveerub, kui võtate seadme kätte või saate märguandeid"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Fondi suurus"</string>
+    <string name="short_summary_font_size" msgid="6819778801232989076">"Teksti suuremaks või väiksemaks muutmine"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"SIM-kaardi luku seaded"</string>
     <string name="sim_lock_settings_category" msgid="5136244267576697004">"Seadista SIM-kaardi lukk"</string>
     <string name="sim_lock_settings_title" msgid="9018585580955414596">"SIM-kaardi lukk"</string>
@@ -1583,21 +1586,21 @@
     <string name="accessibility_settings" msgid="3975902491934816215">"Juurdepääsetavus"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Juurdepääsetavuse seaded"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"Nähtavuse seaded"</string>
-    <string name="vision_settings_description" msgid="7754433456207334423">"Ülejäänud seadistusprotsessi läbimiseks kohandage neid seadeid kohe. Saate neid seadme seadetes kohandada mis tahes ajal."</string>
+    <string name="vision_settings_description" msgid="5679491180156408260">"Seda seadet saate kohandada oma vajaduste järgi. Neid juurdepääsetavuse funktsioone saab hiljem muuta menüüs Seaded."</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"Teenused"</string>
     <string name="talkback_title" msgid="7912059827205988080">"TalkBack"</string>
-    <string name="talkback_summary" msgid="8525514803273262361">"Peamiselt pimedatele ja vaegnägijatele mõeldud ekraanilugeja\n<xliff:g id="SERVICE_STATE">%1$s</xliff:g>"</string>
+    <string name="talkback_summary" msgid="8331244650729024963">"Peamiselt pimedatele ja halva nägemisega inimestele mõeldud ekraanilugeja"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"Süsteem"</string>
     <string name="accessibility_display_title" msgid="7610175687949675162">"Ekraan"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"Tiitrid"</string>
-    <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"Suurendamisliigutused"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="6899066389940619096">"Sisse- ja väljasuumimiseks puudutage ekraani ühe sõrmega kolm korda.\n\nPärast sissesuumimist saate teha järgmist.\n"<ul><li>"Panoraamimine: lohistage vähemalt kaht sõrme ekraanil."</li>\n<li>"Suumitaseme reguleerimine: liigutage vähemalt kaht sõrme ekraanil kokku või lahku."</li>\n<li>"Ajutine suurendamine: puudutage kolm korda, hoidke sõrme ekraanil ja lohistage seda ekraani eri osade vaatamiseks. Eelmisesse olekusse naasmiseks tõstke sõrm ekraanilt."</li></ul>\n\n"Kolmikpuudutus suurendamiseks toimib kõikjal peale klaviatuuri ja navigeerimisriba."</string>
+    <string name="accessibility_screen_magnification_title" msgid="9002237235486714636">"Suurendamise liigutus"</string>
+    <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Suumimiseks puudutage kolm korda"</string>
+    <string name="accessibility_screen_magnification_summary" msgid="8274106658579514922">"Sisse- ja väljasuumimiseks puudutage ekraani ühe sõrmega kolm korda.\n\nSissesuumituna saate teha järgmist.\n"<ul>\n<li>"Kerimine: lohistage vähemalt kahte sõrme üle ekraani."</li>\n<li>"Suumi taseme reguleerimine: liigutage vähemalt kahte sõrme kokku või lahku."</li></ul>\n\n"Ajutiselt suumimiseks puudutage kolm korda ja hoidke viimasel puudutusel sõrme all. Lohistage või liigutage sõrme all hoides ekraanil. Uuesti väljasuumimiseks tõstke sõrm ekraanilt.\n\nMärkus. Suurendamise liigutus toimib kõikjal, v.a klaviatuuril ja navigeerimisribal."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Hõlbustuse otsetee"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"Sees"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"Välja"</string>
     <string name="accessibility_global_gesture_preference_description" msgid="2328507978501847573">"Kui see funktsioon on sisse lülitatud, saate kiiresti aktiveerida juurdepääsetavuse funktsiooni kahe toiminguga.\n\n1. toiming: vajutage pikalt toitenuppu, kuni kuulete heli või tunnete vibratsiooni.\n\n2. toiming: puudutage pikalt kahe sõrmega, kuni kuulete helikinnitust.\n\nKui seadmel on mitu kasutajat, kasutage lukustusekraanil seda otseteed, et lubada ajutiselt juurdepääs kuni seadme avamiseni."</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="2567402942683463779">"Suure kontrastsusega tekst"</string>
-    <string name="accessibility_toggle_screen_magnification_preference_title" msgid="2472285215737820469">"Ekraanisuurendus"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="7218498768415430963">"Ekraanisuurenduse värskendus"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"Ekraanisuurenduse kasutus rakenduste vahetamisel"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Toitenupp lõpetab kõne"</string>
@@ -2571,12 +2574,14 @@
     </plurals>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="7465525754879341907">"Muudetakse valikule Ainult alarmid kuni kella <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"Muudetakse valikule Katkesta alati"</string>
-    <string name="zen_mode_peek" msgid="1468557671879175931">"Ekraanikatkest. pole"</string>
-    <string name="zen_mode_peek_summary" msgid="27622220787132681">"Keelab režiimiga „Mitte segada” vaigistatud märguannete piilumise või praegusel ekraanil kuvamise"</string>
-    <string name="zen_mode_lights" msgid="904184586121619154">"Märguandetuld pole"</string>
-    <string name="zen_mode_lights_summary" msgid="6953305086643633530">"Keelab režiimiga „Mitte segada” vaigistatud märguannetel tuld vilgutada"</string>
-    <string name="zen_mode_screen_on" msgid="200863707448412727">"Ära kunagi lülita ekraani sisse"</string>
-    <string name="zen_mode_screen_on_summary" msgid="5397223499131913528">"Kui ekraan on välja lülitatud, ei lubata funktsiooniga „Mitte segada” vaigistatud märguannetel seda sisse lülitada"</string>
+    <string name="zen_mode_screen_on" msgid="7712038508173845101">"Blokeeri, kui ekraan on sees"</string>
+    <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"Keelab režiimiga Mitte segada vaigistatud märguannete piilumise või ekraanile ilmumise"</string>
+    <string name="zen_mode_screen_off" msgid="5026854939192419879">"Blokeeri, kui ekraan on väljas"</string>
+    <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"Keelab režiimiga Mitte segada vaigistatud märguannetel ekraani sisse lülitada või märguandetuld vilgutada"</string>
+    <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"Väljas"</string>
+    <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"Kui ekraan on sees"</string>
+    <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"Kui ekraan on väljas"</string>
+    <string name="zen_mode_no_visual_interruptions" msgid="8742776003822778472">"Kui ekraan on sees või väljas"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Märguandeseaded"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Seadme kohta tagasiside saatmine"</string>
     <string name="restr_pin_enter_admin_pin" msgid="2451187374960131018">"Administraatori PIN-koodi sisestamine"</string>
@@ -2811,9 +2816,10 @@
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Avage kaamerarakendus, pöörates rannet kaks korda"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Kaamera avam. vajut. 2 korda toitenuppu"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Kaamera avatakse kiirelt ekraani avamata"</string>
-    <string name="screen_zoom_title" msgid="5530967660604527002">"Suurenda ekraani"</string>
+    <string name="screen_zoom_title" msgid="5233515303733473927">"Kuvamissuurus"</string>
+    <string name="screen_zoom_short_summary" msgid="7291960817349834688">"Ekraanil kuvatud üksuste suuremaks või väiksemaks muutmine"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"ekraani tihedus, ekraani suum, skaala, skaleerimine"</string>
-    <string name="screen_zoom_summary" msgid="2022973627105802010">"Muutke kõik ekraanil olevad üksused suuremaks või väiksemaks. Pärast selle seade muutmist võib mõne avaekraanil oleva rakenduse asukoht muutuda."</string>
+    <string name="screen_zoom_summary" msgid="6445488991799015407">"Muutke ekraanil kuvatud üksused suuremaks või väiksemaks. Mõne rakenduse asend võib ekraanil muutuda."</string>
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"Eelvaade"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"Vähendamine"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"Suurendamine"</string>

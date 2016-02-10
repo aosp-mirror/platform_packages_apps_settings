@@ -74,7 +74,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Tháo thẻ SD"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Xóa bộ nhớ USB"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Xóa thẻ SD"</string>
-    <string name="font_size_summary" msgid="133937309990844030">"Làm cho văn bản trên màn hình nhỏ hơn hoặc lớn hơn."</string>
+    <string name="font_size_summary" msgid="1690992332887488183">"Thu nhỏ hoặc phóng to văn bản trên màn hình."</string>
     <string name="small_font" msgid="2295331917424072635">"Nhỏ"</string>
     <string name="medium_font" msgid="2068475425515133701">"Trung bình"</string>
     <string name="large_font" msgid="599055175160971446">"Lớn"</string>
@@ -703,9 +703,13 @@
     <string name="wifi_unchanged" msgid="3410422020930397102">"(không thay đổi)"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"Vui lòng chọn"</string>
     <string name="wifi_multiple_cert_added" msgid="3240743501460165224">"(Đã thêm nhiều chứng chỉ)"</string>
+    <!-- no translation found for wifi_use_system_certs (5270879895056893783) -->
+    <skip />
     <string name="wifi_do_not_provide_eap_user_cert" msgid="5160499244977160665">"Không cung cấp"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4266754430576348471">"Không xác thực"</string>
     <string name="wifi_do_not_validate_eap_server_warning" msgid="1787190245542586660">"Không có chứng chỉ nào được chỉ định. Kết nối của bạn sẽ không phải là riêng tư."</string>
+    <!-- no translation found for wifi_no_domain_warning (5223011964091727376) -->
+    <skip />
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"Có WPS"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (Có WPS)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Nhập mật khẩu mạng của bạn"</string>
@@ -883,6 +887,7 @@
     <string name="doze_title" msgid="2259176504273878294">"Màn hình xung quanh"</string>
     <string name="doze_summary" msgid="7128970177894383698">"Bật màn hình khi bạn cầm thiết bị hoặc nhận được thông báo"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Kích thước phông chữ"</string>
+    <string name="short_summary_font_size" msgid="6819778801232989076">"Phóng to hoặc thu nhỏ văn bản"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Cài đặt khóa thẻ SIM"</string>
     <string name="sim_lock_settings_category" msgid="5136244267576697004">"Thiết lập khóa thẻ SIM"</string>
     <string name="sim_lock_settings_title" msgid="9018585580955414596">"Khoá thẻ SIM"</string>
@@ -1583,21 +1588,21 @@
     <string name="accessibility_settings" msgid="3975902491934816215">"Trợ năng"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Cài đặt trợ năng"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"Cài đặt tầm nhìn"</string>
-    <string name="vision_settings_description" msgid="7754433456207334423">"Hãy điều chỉnh các cài đặt này bây giờ để trợ giúp bạn trong phần còn lại của quá trình thiết lập. Bạn có thể điều chỉnh các cài đặt này bất kỳ lúc nào trong cài đặt thiết bị."</string>
+    <string name="vision_settings_description" msgid="5679491180156408260">"Bạn có thể tùy chỉnh thiết bị này cho phù hợp với nhu cầu của mình. Bạn có thể thay đổi các tính năng trợ năng này sau trong Cài đặt."</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"Dịch vụ"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
-    <string name="talkback_summary" msgid="8525514803273262361">"Công cụ trình đọc màn hình chủ yếu dành cho những người khiếm thị hoặc thị lực kém\n<xliff:g id="SERVICE_STATE">%1$s</xliff:g>"</string>
+    <string name="talkback_summary" msgid="8331244650729024963">"Trình đọc màn hình chủ yếu dành cho những người khiếm thị và thị lực kém"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"Hệ thống"</string>
     <string name="accessibility_display_title" msgid="7610175687949675162">"Hiển thị"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"Phụ đề"</string>
-    <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"Thao tác phóng đại"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="6899066389940619096">"Phóng to và thu nhỏ bằng cách nhấn một ngón tay ba lần vào màn hình.\n\nTrong khi phóng to, bạn có thể:\n"<ul><li>"Xoay: Kéo hai hoặc nhiều ngón tay trên màn hình."</li>\n<li>"Điều chỉnh mức thu phóng: Chụm hai hoặc nhiều ngón tay lại hoặc trải chúng ra."</li>\n<li>"Phóng to tạm thời: Nhấn ba lần, giữ và kéo ngón tay của bạn để khám phá các phần khác nhau của màn hình. Nhấc ngón tay để quay về trạng thái trước của bạn."</li></ul>\n\n"Nhấn ba lần để chức năng phóng to hoạt động ở mọi nơi trừ bàn phím và thanh điều hướng."</string>
+    <string name="accessibility_screen_magnification_title" msgid="9002237235486714636">"Cử chỉ thu phóng"</string>
+    <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Nhấn 3 lần để thu phóng"</string>
+    <string name="accessibility_screen_magnification_summary" msgid="8274106658579514922">"Để phóng to và thu nhỏ màn hình 3 lần bằng một ngón tay.\n\nKhi phóng to, bạn có thể:\n"<ul>\n<li>"Cuộn: Kéo 2 ngón tay trở lên trên màn hình"</li>\n<li>"Điều chỉnh mức thu phóng: Chụm 2 ngón tay trở lên hoặc trải ra"</li></ul>\n\n"Để thu phóng tạm thời, nhấn 3 lần và giữ lần nhấn cuối cùng. Khi nhấn ngón tay, kéo để di chuyển xung quanh màn hình. Nhấc ngón tay để thu nhỏ trở lại.\n\nLưu ý: Cử chỉ thu phóng hoạt động ở mọi nơi ngoại trừ bàn phím và thanh điều hướng."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Phím tắt trợ năng"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"Bật"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"Tắt"</string>
     <string name="accessibility_global_gesture_preference_description" msgid="2328507978501847573">"Khi tính năng này được bật, bạn có thể nhanh chóng kích hoạt tính năng trợ năng trong hai bước:\n\nBước 1: Nhấn và giữ nút nguồn cho tới khi bạn nghe thấy âm thanh hoặc thấy rung.\n\nBước 2: Nhấn và giữ hai ngón tay cho tới khi bạn nghe thấy xác nhận âm thanh.\n\nNếu thiết bị có nhiều người dùng, sử dụng phím tắt này trên màn hình khóa sẽ tạm thời bật trợ năng cho tới khi thiết bị được mở khóa."</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="2567402942683463779">"Văn bản có độ tương phản cao"</string>
-    <string name="accessibility_toggle_screen_magnification_preference_title" msgid="2472285215737820469">"Phóng đại màn hình"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="7218498768415430963">"Tự động cập nhật phóng đại màn hình"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"Cập nhật phóng đại màn hình khi chuyển ứng dụng"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Nút nguồn kết thúc cuộc gọi"</string>
@@ -2571,12 +2576,14 @@
     </plurals>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="7465525754879341907">"Đổi sang báo thức chỉ đến khi <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"Đổi sang luôn làm gián đoạn"</string>
-    <string name="zen_mode_peek" msgid="1468557671879175931">"Không có tùy chọn gián đoạn màn hình"</string>
-    <string name="zen_mode_peek_summary" msgid="27622220787132681">"Ngăn thông báo được tắt tiếng bằng tính năng Không làm phiền lướt qua hay xuất hiện trên màn hình hiện tại"</string>
-    <string name="zen_mode_lights" msgid="904184586121619154">"Không có đèn thông báo"</string>
-    <string name="zen_mode_lights_summary" msgid="6953305086643633530">"Ngăn thông báo được tắt tiếng bằng tính năng Không làm phiền khiến ánh sáng xung"</string>
-    <string name="zen_mode_screen_on" msgid="200863707448412727">"Không bao giờ bật màn hình"</string>
-    <string name="zen_mode_screen_on_summary" msgid="5397223499131913528">"Nếu màn hình tắt, hãy ngăn thông báo được tắt tiếng bằng tính năng Không làm phiền bật màn hình lên"</string>
+    <string name="zen_mode_screen_on" msgid="7712038508173845101">"Chặn khi màn hình đang bật"</string>
+    <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"Ngăn chặn thông báo được tắt tiếng bằng tính năng Không làm phiền xem nhanh hoặc bật trên màn hình"</string>
+    <string name="zen_mode_screen_off" msgid="5026854939192419879">"Chặn khi màn hình đang tắt"</string>
+    <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"Ngăn chặn các thông báo được tắt tiếng bởi tính năng Không làm phiền bật màn hình hoặc phát xung đèn thông báo"</string>
+    <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"Tắt"</string>
+    <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"Khi màn hình đang bật"</string>
+    <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"Khi màn hình đang tắt"</string>
+    <string name="zen_mode_no_visual_interruptions" msgid="8742776003822778472">"Khi màn hình đang bật hoặc tắt"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Cài đặt thông báo"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Gửi phản hồi về thiết bị này"</string>
     <string name="restr_pin_enter_admin_pin" msgid="2451187374960131018">"Nhập mã PIN của quản trị viên"</string>
@@ -2811,9 +2818,10 @@
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Mở ứng dụng camera bằng cách vặn cổ tay hai lần"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Nhấn nút nguồn hai lần để mở máy ảnh"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Mở nhanh máy ảnh mà không cần mở khóa màn hình của bạn"</string>
-    <string name="screen_zoom_title" msgid="5530967660604527002">"Phóng to màn hình"</string>
+    <string name="screen_zoom_title" msgid="5233515303733473927">"Kích thước hiển thị"</string>
+    <string name="screen_zoom_short_summary" msgid="7291960817349834688">"Phóng to hoặc thu nhỏ các mục trên màn hình"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"mật độ hiển thị, thu phóng màn hình, tỷ lệ, chia tỷ lệ"</string>
-    <string name="screen_zoom_summary" msgid="2022973627105802010">"Làm cho tất cả các mục trên màn hình nhỏ hơn hoặc lớn hơn. Một số ứng dụng trên màn hình chính của bạn có thể thay đổi vị trí sau khi thay đổi cài đặt này."</string>
+    <string name="screen_zoom_summary" msgid="6445488991799015407">"Thu nhỏ hoặc phóng to các mục trên màn hình. Một số ứng dụng trên màn hình của bạn có thể thay đổi vị trí."</string>
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"Xem trước"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"Thu nhỏ"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"Phóng to"</string>

@@ -75,7 +75,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Isključi SD karticu"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Izbriši memoriju USB"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Izbriši SD karticu"</string>
-    <string name="font_size_summary" msgid="133937309990844030">"Smanjuje ili povećava tekst na zaslonu."</string>
+    <string name="font_size_summary" msgid="1690992332887488183">"Smanjuje ili povećava tekst na zaslonu."</string>
     <string name="small_font" msgid="2295331917424072635">"Mali"</string>
     <string name="medium_font" msgid="2068475425515133701">"Srednji"</string>
     <string name="large_font" msgid="599055175160971446">"Veliki"</string>
@@ -711,9 +711,13 @@
     <string name="wifi_unchanged" msgid="3410422020930397102">"(nepromijenjeno)"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"Odaberite"</string>
     <string name="wifi_multiple_cert_added" msgid="3240743501460165224">"(dodano je više certifikata)"</string>
+    <!-- no translation found for wifi_use_system_certs (5270879895056893783) -->
+    <skip />
     <string name="wifi_do_not_provide_eap_user_cert" msgid="5160499244977160665">"Nemoj pružiti"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4266754430576348471">"Nemoj potvrditi"</string>
     <string name="wifi_do_not_validate_eap_server_warning" msgid="1787190245542586660">"Nije naveden nijedan certifikat. Veza neće biti privatna."</string>
+    <!-- no translation found for wifi_no_domain_warning (5223011964091727376) -->
+    <skip />
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS dostupan"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS dostupan)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Unesite mrežnu zaporku"</string>
@@ -891,6 +895,7 @@
     <string name="doze_title" msgid="2259176504273878294">"Ambijentalni zaslon"</string>
     <string name="doze_summary" msgid="7128970177894383698">"Aktiviraj zaslon prilikom podizanja uređaja ili primanja obavijesti"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Veličina fonta"</string>
+    <string name="short_summary_font_size" msgid="6819778801232989076">"Smanjuje ili povećava tekst"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Postavke zaklj. SIM kartice"</string>
     <string name="sim_lock_settings_category" msgid="5136244267576697004">"Postavite zaključavanje SIM kartice"</string>
     <string name="sim_lock_settings_title" msgid="9018585580955414596">"Zaključavanje SIM kartice"</string>
@@ -1593,21 +1598,21 @@
     <string name="accessibility_settings" msgid="3975902491934816215">"Pristupačnost"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Postavke dostupnosti"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"Postavke za vid"</string>
-    <string name="vision_settings_description" msgid="7754433456207334423">"Prilagodite te postavke odmah kako biste lakše dovršili postupak postavljanja. Možete ih prilagoditi u bilo kojem trenutku u postavkama uređaja."</string>
+    <string name="vision_settings_description" msgid="5679491180156408260">"Ovaj uređaj možete prilagoditi svojim potrebama. Značajke pristupačnosti možete promijeniti kasnije u postavkama."</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"Usluge"</string>
     <string name="talkback_title" msgid="7912059827205988080">"TalkBack"</string>
-    <string name="talkback_summary" msgid="8525514803273262361">"Alat za čitanje zaslona prvenstveno namijenjen slijepim i slabovidnim osobama\n<xliff:g id="SERVICE_STATE">%1$s</xliff:g>"</string>
+    <string name="talkback_summary" msgid="8331244650729024963">"Čitač zaslona namijenjen prvenstveno slijepim i slabovidnim osobama"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"Sustav"</string>
     <string name="accessibility_display_title" msgid="7610175687949675162">"Zaslon"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"Titlovi"</string>
-    <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"Pokret povećavanja"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="6899066389940619096">"Povećajte ili smanjite prikaz tako što ćete triput dodirnuti zaslon jednim prstom.\n\nDok je prikaz povećan, možete činiti sljedeće:\n"<ul><li>"Pomicati prikaz: povlačite prstima po zaslonu."</li>\n<li>"Prilagoditi razinu zumiranja: spojite ili raširite prste."</li>\n<li>"Privremeno povećati prikaz: dodirnite triput, zadržite i povlačite prstom da biste istražili različite dijelove zaslona. Podignite prst da biste se vratili na prethodno stanje."</li></ul>\n\n"Trostruki dodir za povećanje funkcionira na svim mjestima, osim tipkovnice i navigacijske trake."</string>
+    <string name="accessibility_screen_magnification_title" msgid="9002237235486714636">"Pokret za povećanje"</string>
+    <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Dodirnite triput za zumiranje"</string>
+    <string name="accessibility_screen_magnification_summary" msgid="8274106658579514922">"Da biste povećali ili smanjili prikaz, triput dodirnite zaslon jednim prstom.\n\nDok je prikaz povećan, možete činiti sljedeće:\n"<ul>\n<li>"Pomicati prikaz: povlačite prstima po zaslonu."</li>\n<li>"Prilagoditi razinu zumiranja: spojite ili raširite prste."</li></ul>\n\n"Da biste privremeno povećali prikaz, triput dodirnite i zadržite prst dolje pri zadnjem dodiru. Zatim povlačite prstom po zaslonu da biste se kretali po njemu. Podignite prst da biste vratili zaslon na izvornu veličinu.\n\nNapomena: pokret za povećanje funkcionira na svim mjestima, osim tipkovnice i navigacijske trake."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Prečac pristupačnosti"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"Uključeno"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"Isključeno"</string>
     <string name="accessibility_global_gesture_preference_description" msgid="2328507978501847573">"Kada je ta značajka uključena, možete brzo aktivirati značajke pristupačnosti u dva koraka:\n\nPrvi korak: pritisnite i zadržite tipku za uključivanje/isključivanje dok ne začujete zvuk ili ne osjetite vibraciju.\n\nDrugi korak: dodirnite s dva prsta i zadržite dok ne začujete zvučnu potvrdu.\n\nAko uređaj ima više korisnika, upotreba ovog prečaca na zaključanom zaslonu privremeno omogućuje pristupačnost dok se uređaj ne otključa."</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="2567402942683463779">"Tekst s visokim kontrastom"</string>
-    <string name="accessibility_toggle_screen_magnification_preference_title" msgid="2472285215737820469">"Uvećanje zaslona"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="7218498768415430963">"Autom. ažuriranje uvećanja zaslona"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"Ažuriranje uvećanja zaslona pri izmjeni aplikacija"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Tipka za uklj. prekida poziv"</string>
@@ -2590,12 +2595,14 @@
     </plurals>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="7465525754879341907">"Promijeni na \"Samo alarmi\" do <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"Promijeni na \"Uvijek prekidaj\""</string>
-    <string name="zen_mode_peek" msgid="1468557671879175931">"Bez prekida na zasl."</string>
-    <string name="zen_mode_peek_summary" msgid="27622220787132681">"Sprječava da se obavijesti utišane opcijom Ne ometaj pojavljuju na trenutačnom zaslonu"</string>
-    <string name="zen_mode_lights" msgid="904184586121619154">"Bez svjetla obav."</string>
-    <string name="zen_mode_lights_summary" msgid="6953305086643633530">"Sprječava pulsiranje svjetla za obavijesti utišane opcijom Ne ometaj"</string>
-    <string name="zen_mode_screen_on" msgid="200863707448412727">"Nikad ne uključuj zaslon"</string>
-    <string name="zen_mode_screen_on_summary" msgid="5397223499131913528">"Ako je zaslon isključen, sprječava se uključivanje obavijesti utišanih opcijom Ne ometaj."</string>
+    <string name="zen_mode_screen_on" msgid="7712038508173845101">"Blokiraj kada je zaslon uključen"</string>
+    <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"Sprječava da se obavijesti utišane opcijom Ne ometaj pojavljuju na zaslonu"</string>
+    <string name="zen_mode_screen_off" msgid="5026854939192419879">"Blokiraj kada je zaslon isključen"</string>
+    <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"Sprječava pulsiranje svjetla za obavijesti utišane opcijom Ne ometaj ili pojavljivanje tih obavijesti na zaslonu"</string>
+    <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"Isključeno"</string>
+    <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"Kada je zaslon uključen"</string>
+    <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"Kada je zaslon isključen"</string>
+    <string name="zen_mode_no_visual_interruptions" msgid="8742776003822778472">"Kada je zaslon uključen ili isključen"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Postavke obavijesti"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Pošalji povr. informacije o uređaju"</string>
     <string name="restr_pin_enter_admin_pin" msgid="2451187374960131018">"Unesite PIN administratora"</string>
@@ -2836,9 +2843,10 @@
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Otvaranje aplikacije fotoaparata obrtanjem ručnog zgloba dvaput"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Pritisnite uključ. dvaput za fotoaparat"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Brzo otvaranje fotoaparata bez otključavanja zaslona"</string>
-    <string name="screen_zoom_title" msgid="5530967660604527002">"Uvećaj prikaz"</string>
+    <string name="screen_zoom_title" msgid="5233515303733473927">"Veličina zaslona"</string>
+    <string name="screen_zoom_short_summary" msgid="7291960817349834688">"Smanjuje ili povećava stavke na zaslonu"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"prikaz, gustoća, zumiranje zaslona, skalirati, skaliranje"</string>
-    <string name="screen_zoom_summary" msgid="2022973627105802010">"Smanjuje ili povećava sve stavke na zaslonu. Neke aplikacije na početnom zaslonu mogu promijeniti položaj nakon što promijenite tu postavku."</string>
+    <string name="screen_zoom_summary" msgid="6445488991799015407">"Smanjuje ili povećava stavke na zaslonu. Neke aplikacije na zaslonu mogu promijeniti položaj."</string>
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"Pregled"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"Smanji"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"Povećaj"</string>
