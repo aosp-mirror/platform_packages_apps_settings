@@ -77,6 +77,13 @@ public class DeviceAdminAdd extends Activity {
 
     private static final int REQUEST_CODE_UNINSTALL = 1;
 
+    /**
+     * Optional key to map to the package name of the Device Admin.
+     * Currently only used when uninstalling an active device admin.
+     */
+    public static final String EXTRA_DEVICE_ADMIN_PACKAGE_NAME =
+            "android.app.extra.DEVICE_ADMIN_PACKAGE_NAME";
+
     Handler mHandler;
 
     DevicePolicyManager mDPM;
@@ -99,6 +106,7 @@ public class DeviceAdminAdd extends Activity {
     Button mUninstallButton;
     Button mCancelButton;
 
+    boolean mUninstalling = false;
     boolean mAdding;
     boolean mRefreshing;
     boolean mWaitingForRemoveMsg;
@@ -123,13 +131,24 @@ public class DeviceAdminAdd extends Activity {
             return;
         }
 
+
         String action = getIntent().getAction();
         ComponentName who = (ComponentName)getIntent().getParcelableExtra(
                 DevicePolicyManager.EXTRA_DEVICE_ADMIN);
         if (who == null) {
-            Log.w(TAG, "No component specified in " + action);
-            finish();
-            return;
+            String packageName = getIntent().getStringExtra(EXTRA_DEVICE_ADMIN_PACKAGE_NAME);
+            for (ComponentName component : mDPM.getActiveAdmins()) {
+                if (component.getPackageName().equals(packageName)) {
+                    who = component;
+                    mUninstalling = true;
+                    break;
+                }
+            }
+            if (who == null) {
+                Log.w(TAG, "No component specified in " + action);
+                finish();
+                return;
+            }
         }
 
         if (action != null && action.equals(DevicePolicyManager.ACTION_SET_PROFILE_OWNER)) {
@@ -329,6 +348,9 @@ public class DeviceAdminAdd extends Activity {
                                 }
                             }
                             ).show();
+                } else if (mUninstalling) {
+                    mDPM.uninstallPackageWithActiveAdmins(mDeviceAdmin.getPackageName());
+                    finish();
                 } else if (!mWaitingForRemoveMsg) {
                     try {
                         // Don't allow the admin to put a dialog up in front
@@ -524,7 +546,11 @@ public class DeviceAdminAdd extends Activity {
                         mDeviceAdmin.getActivityInfo().applicationInfo.loadLabel(
                         getPackageManager())));
                 setTitle(R.string.active_device_admin_msg);
-                mActionButton.setText(R.string.remove_device_admin);
+                if (mUninstalling) {
+                    mActionButton.setText(R.string.remove_and_uninstall_device_admin);
+                } else {
+                    mActionButton.setText(R.string.remove_device_admin);
+                }
             }
             String supportMessage = mDPM.getLongSupportMessageForUser(
                     mDeviceAdmin.getComponent(), UserHandle.myUserId());
@@ -606,7 +632,6 @@ public class DeviceAdminAdd extends Activity {
         final Intent uninstallIntent = new Intent(Intent.ACTION_UNINSTALL_PACKAGE, packageURI);
         uninstallIntent.putExtra(Intent.EXTRA_UNINSTALL_ALL_USERS, false);
         uninstallIntent.putExtra(Intent.EXTRA_RETURN_RESULT, true);
-
         startActivityForResult(uninstallIntent, REQUEST_CODE_UNINSTALL);
     }
 }

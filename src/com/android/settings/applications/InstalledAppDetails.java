@@ -68,6 +68,7 @@ import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.AppHeader;
+import com.android.settings.DeviceAdminAdd;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
@@ -116,6 +117,8 @@ public class InstalledAppDetails extends AppInfoBase
 
     // Result code identifiers
     public static final int REQUEST_UNINSTALL = 0;
+    private static final int REQUEST_REMOVE_DEVICE_ADMIN = 1;
+
     private static final int SUB_INFO_FRAGMENT = 1;
 
     private static final int LOADER_CHART_DATA = 2;
@@ -207,7 +210,7 @@ public class InstalledAppDetails extends AppInfoBase
         }
         // If this is a device admin, it can't be uninstalled or disabled.
         // We do this here so the text of the button is still set correctly.
-        if (mDpm.packageHasActiveAdmins(mPackageInfo.packageName)) {
+        if (isBundled && mDpm.packageHasActiveAdmins(mPackageInfo.packageName)) {
             enabled = false;
         }
 
@@ -215,6 +218,11 @@ public class InstalledAppDetails extends AppInfoBase
         // "uninstall" is actually "downgrade to the system version + disable", and "downgrade"
         // will clear data on all users.
         if (isProfileOrDeviceOwner(mPackageInfo.packageName)) {
+            enabled = false;
+        }
+
+        // If the uninstall intent is already queued, disable the uninstall button
+        if (mDpm.isUninstallInQueue(mPackageName)) {
             enabled = false;
         }
 
@@ -443,6 +451,11 @@ public class InstalledAppDetails extends AppInfoBase
                 } catch (NameNotFoundException e) {
                 }
             }
+            if (!refreshUi()) {
+                setIntentAndFinish(true, true);
+            }
+        }
+        if (requestCode == REQUEST_REMOVE_DEVICE_ADMIN) {
             if (!refreshUi()) {
                 setIntentAndFinish(true, true);
             }
@@ -717,6 +730,14 @@ public class InstalledAppDetails extends AppInfoBase
         }
         String packageName = mAppEntry.info.packageName;
         if(v == mUninstallButton) {
+            if (mDpm.packageHasActiveAdmins(mPackageInfo.packageName)) {
+                Activity activity = getActivity();
+                Intent uninstallDAIntent = new Intent(activity, DeviceAdminAdd.class);
+                uninstallDAIntent.putExtra(DeviceAdminAdd.EXTRA_DEVICE_ADMIN_PACKAGE_NAME,
+                        mPackageName);
+                activity.startActivityForResult(uninstallDAIntent, REQUEST_REMOVE_DEVICE_ADMIN);
+                return;
+            }
             EnforcedAdmin admin = RestrictedLockUtils.checkIfUninstallBlocked(getActivity(),
                     packageName, mUserId);
             if (admin != null) {
