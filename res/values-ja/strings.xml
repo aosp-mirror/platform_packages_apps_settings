@@ -74,7 +74,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"SDカードのマウント解除"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"USBストレージ内データの消去"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"SDカード内データを消去"</string>
-    <string name="font_size_summary" msgid="133937309990844030">"画面上のテキストのサイズを変更します。"</string>
+    <string name="font_size_summary" msgid="1690992332887488183">"画面上のテキストのサイズを変更します。"</string>
     <string name="small_font" msgid="2295331917424072635">"小"</string>
     <string name="medium_font" msgid="2068475425515133701">"中"</string>
     <string name="large_font" msgid="599055175160971446">"大"</string>
@@ -707,9 +707,13 @@
     <string name="wifi_unchanged" msgid="3410422020930397102">"（変更なし）"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"選択してください"</string>
     <string name="wifi_multiple_cert_added" msgid="3240743501460165224">"（複数の証明書が追加されています）"</string>
+    <!-- no translation found for wifi_use_system_certs (5270879895056893783) -->
+    <skip />
     <string name="wifi_do_not_provide_eap_user_cert" msgid="5160499244977160665">"指定しない"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4266754430576348471">"検証しない"</string>
     <string name="wifi_do_not_validate_eap_server_warning" msgid="1787190245542586660">"証明書が指定されていません。この接続ではプライバシーが保護されません。"</string>
+    <!-- no translation found for wifi_no_domain_warning (5223011964091727376) -->
+    <skip />
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS利用可"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" （WPS利用可）"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"ネットワークパスワードを入力してください"</string>
@@ -887,6 +891,7 @@
     <string name="doze_title" msgid="2259176504273878294">"常に画面表示ディスプレイ"</string>
     <string name="doze_summary" msgid="7128970177894383698">"端末を取り上げたとき、または通知を受信したときにスリープ状態から復帰"</string>
     <string name="title_font_size" msgid="4405544325522105222">"フォントサイズ"</string>
+    <string name="short_summary_font_size" msgid="6819778801232989076">"テキストのサイズを変更します"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"SIMカードロック設定"</string>
     <string name="sim_lock_settings_category" msgid="5136244267576697004">"SIMカードロック設定"</string>
     <string name="sim_lock_settings_title" msgid="9018585580955414596">"SIMカードロック"</string>
@@ -1598,21 +1603,21 @@
     <string name="accessibility_settings" msgid="3975902491934816215">"ユーザー補助"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"ユーザー補助の設定"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"視力の設定"</string>
-    <string name="vision_settings_description" msgid="7754433456207334423">"この設定を調整すると、残りのセットアップ プロセスでサポートを受けられるようになります。この調整は端末の設定でいつでも行えます。"</string>
+    <string name="vision_settings_description" msgid="5679491180156408260">"この端末を必要に応じてカスタマイズできます。このユーザー補助機能は後から [設定] で変更できます。"</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"サービス"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
-    <string name="talkback_summary" msgid="8525514803273262361">"スクリーンリーダー ツールは主に視覚障害者を対象としています\n<xliff:g id="SERVICE_STATE">%1$s</xliff:g>"</string>
+    <string name="talkback_summary" msgid="8331244650729024963">"主に視覚障害者を対象としたスクリーンリーダー ツールです"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"システム"</string>
     <string name="accessibility_display_title" msgid="7610175687949675162">"ディスプレイ"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"字幕"</string>
-    <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"拡大操作"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="6899066389940619096">"1 本の指で画面をトリプルタップして拡大や縮小を行えます。\n\n拡大した画面では次の操作を行えます。\n"<ul><li>"パン: 2 本以上の指で画面上をドラッグします。"</li>\n<li>"拡大レベルの調整: 2 本以上の指でピンチイン / ピンチアウトします。"</li>\n<li>"一時的に拡大: トリプルタップして押し続け、指をドラッグして、画面上の各種部分を拡大します。指を画面から離すと元の状態に戻ります。"</li></ul>\n\n"トリプルタップで拡大する方法は、キーボードとナビゲーション バー以外で使用できます。"</string>
+    <string name="accessibility_screen_magnification_title" msgid="9002237235486714636">"拡大操作"</string>
+    <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"ズームするには 3 回タップします"</string>
+    <string name="accessibility_screen_magnification_summary" msgid="8274106658579514922">"拡大または縮小するには 1 本の指で画面上を 3 回タップします。\n\n拡大した画面では次のことを行えます。\n"<ul>\n<li>"スクロール: 2 本以上の指で画面上をドラッグします"</li>\n<li>"拡大レベルの調整: 2 本以上の指でピンチインまたはピンチアウトします"</li></ul>\n\n"一時的に拡大するには 3 回タップして 3 回目のタップで押し続けます。押し続けたままでドラッグすると、画面の他の場所に移動できます。もう一度縮小するには指を離します。\n\n注: 拡大操作が機能するのは、キーボードおよびナビゲーション バー以外のすべての領域です。"</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"ユーザー補助のショートカット"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"ON"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"OFF"</string>
     <string name="accessibility_global_gesture_preference_description" msgid="2328507978501847573">"この機能をオンにすると、次の 2 つの手順でユーザー補助機能をすぐに有効にできます。\n\n手順 1: 音が鳴るか振動するまで電源ボタンを押し続けます。\n\n手順 2: 確認音がなるまで 2 本の指でタップして押し続けます。\n\n複数のユーザーでこの端末を使用している場合は、ロック画面でこのショートカットを使用すると、端末がロック解除されるまでユーザー補助機能が一時的に有効になります。"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="2567402942683463779">"高コントラストテキスト"</string>
-    <string name="accessibility_toggle_screen_magnification_preference_title" msgid="2472285215737820469">"画面の拡大"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="7218498768415430963">"画面の拡大を自動更新"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"アプリの遷移時に画面の拡大を更新"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"電源ボタンで通話を終了"</string>
@@ -2593,12 +2598,14 @@
     </plurals>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="7465525754879341907">"<xliff:g id="FORMATTEDTIME">%1$s</xliff:g>までアラームのみに変更します"</string>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"常に割り込みに変更します"</string>
-    <string name="zen_mode_peek" msgid="1468557671879175931">"画面に表示しない"</string>
-    <string name="zen_mode_peek_summary" msgid="27622220787132681">"[通知を非表示] でサイレントに設定した通知を受信したときに画面にプレビューまたは表示されなくなります"</string>
-    <string name="zen_mode_lights" msgid="904184586121619154">"光を点滅しない"</string>
-    <string name="zen_mode_lights_summary" msgid="6953305086643633530">"[通知を非表示] でサイレントに設定した通知を受信したときに光が点滅しなくなります"</string>
-    <string name="zen_mode_screen_on" msgid="200863707448412727">"画面を ON にしない"</string>
-    <string name="zen_mode_screen_on_summary" msgid="5397223499131913528">"画面が OFF の場合に、[通知を非表示] でサイレントに設定した通知が届いても画面が ON になりません"</string>
+    <string name="zen_mode_screen_on" msgid="7712038508173845101">"画面が ON のときにブロックする"</string>
+    <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"[通知を非表示] でサイレントに設定した通知を受信したときに、画面上にポップアップ表示されなくなります"</string>
+    <string name="zen_mode_screen_off" msgid="5026854939192419879">"画面が OFF のときにブロックする"</string>
+    <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"[通知を非表示] でサイレントに設定した通知を受信したときに、画面が ON になったり、光が点滅したりしなくなります"</string>
+    <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"OFF"</string>
+    <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"画面が ON のとき"</string>
+    <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"画面が OFF のとき"</string>
+    <string name="zen_mode_no_visual_interruptions" msgid="8742776003822778472">"画面が ON または OFF のとき"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"通知設定"</string>
     <string name="device_feedback" msgid="3238056036766293294">"この端末についてフィードバックを送信"</string>
     <string name="restr_pin_enter_admin_pin" msgid="2451187374960131018">"管理者PINを入力"</string>
@@ -2833,9 +2840,10 @@
     <string name="camera_gesture_desc" msgid="1831390075255870960">"手首を2回ひねる動作でカメラアプリを開きます"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"電源ボタンを2回押してカメラを起動"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"画面ロックを解除せずにすばやくカメラを起動します"</string>
-    <string name="screen_zoom_title" msgid="5530967660604527002">"表示の拡大"</string>
+    <string name="screen_zoom_title" msgid="5233515303733473927">"表示サイズ"</string>
+    <string name="screen_zoom_short_summary" msgid="7291960817349834688">"画面上のアイテムのサイズを変更します"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"表示間隔、画面のズーム、スケール、拡大縮小"</string>
-    <string name="screen_zoom_summary" msgid="2022973627105802010">"画面上のすべての項目のサイズを変更します。この設定を変更すると、ホーム画面で一部のアプリの位置が変わる場合があります。"</string>
+    <string name="screen_zoom_summary" msgid="6445488991799015407">"画面上のアイテムのサイズを変更します。画面上のアプリの位置が変わることがあります。"</string>
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"プレビュー"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"縮小"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"拡大"</string>

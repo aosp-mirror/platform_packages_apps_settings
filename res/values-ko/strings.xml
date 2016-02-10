@@ -74,7 +74,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"SD 카드 마운트 해제"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"USB 저장소 지우기"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"SD 카드 지우기"</string>
-    <string name="font_size_summary" msgid="133937309990844030">"화면 텍스트를 축소 또는 확대합니다."</string>
+    <string name="font_size_summary" msgid="1690992332887488183">"화면 텍스트를 축소 또는 확대합니다."</string>
     <string name="small_font" msgid="2295331917424072635">"작게"</string>
     <string name="medium_font" msgid="2068475425515133701">"보통"</string>
     <string name="large_font" msgid="599055175160971446">"크게"</string>
@@ -703,9 +703,13 @@
     <string name="wifi_unchanged" msgid="3410422020930397102">"(변경 안함)"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"선택하세요."</string>
     <string name="wifi_multiple_cert_added" msgid="3240743501460165224">"(여러 인증서가 추가됨)"</string>
+    <!-- no translation found for wifi_use_system_certs (5270879895056893783) -->
+    <skip />
     <string name="wifi_do_not_provide_eap_user_cert" msgid="5160499244977160665">"제공하지 않음"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4266754430576348471">"확인하지 않음"</string>
     <string name="wifi_do_not_validate_eap_server_warning" msgid="1787190245542586660">"지정한 인증서가 없습니다. 비공개로 연결되지 않습니다."</string>
+    <!-- no translation found for wifi_no_domain_warning (5223011964091727376) -->
+    <skip />
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS 사용 가능"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS 사용 가능)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"네트워크 비밀번호 입력"</string>
@@ -883,6 +887,7 @@
     <string name="doze_title" msgid="2259176504273878294">"절전 모드 자동 해제"</string>
     <string name="doze_summary" msgid="7128970177894383698">"기기를 들거나 알림을 수신 시 절전 모드를 해제합니다."</string>
     <string name="title_font_size" msgid="4405544325522105222">"글꼴 크기"</string>
+    <string name="short_summary_font_size" msgid="6819778801232989076">"텍스트를 확대 또는 축소"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"SIM 카드 잠금 설정"</string>
     <string name="sim_lock_settings_category" msgid="5136244267576697004">"SIM 카드 잠금 설정"</string>
     <string name="sim_lock_settings_title" msgid="9018585580955414596">"SIM 카드 잠금"</string>
@@ -1583,21 +1588,21 @@
     <string name="accessibility_settings" msgid="3975902491934816215">"접근성"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"접근성 설정"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"시력 설정"</string>
-    <string name="vision_settings_description" msgid="7754433456207334423">"지금 이 설정을 조정하면 나머지 설정 과정에서 도움을 받을 수 있습니다. 이 설정은 기기 설정에서 언제든지 조정할 수 있습니다."</string>
+    <string name="vision_settings_description" msgid="5679491180156408260">"필요에 따라 기기를 맞춤설정할 수 있습니다. 다음 접근성 기능은 언제든지 설정에서 변경할 수 있습니다."</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"서비스"</string>
     <string name="talkback_title" msgid="7912059827205988080">"음성 안내 지원"</string>
-    <string name="talkback_summary" msgid="8525514803273262361">"스크린리더 도구의 주요 대상은 시각 장애인입니다.\n<xliff:g id="SERVICE_STATE">%1$s</xliff:g>"</string>
+    <string name="talkback_summary" msgid="8331244650729024963">"주로 시각 장애가 있는 사용자를 위한 스크린 리더"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"시스템"</string>
     <string name="accessibility_display_title" msgid="7610175687949675162">"디스플레이"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"캡션"</string>
-    <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"확대 동작"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="6899066389940619096">"한 손가락으로 화면을 세 번 탭하여 확대 및 축소할 수 있습니다.\n\n화면을 확대한 상태에서 다음 작업을 수행할 수 있습니다.\n"<ul><li>"이동: 화면을 두 개 이상의 손가락으로 드래그합니다."</li>\n<li>"확대/축소 수준 조정: 두 개 이상의 손가락을 오므리거나 벌립니다."</li>\n<li>"일시적으로 확대: 세 번 탭하고 길게 누른 상태에서 손가락을 드래그하여 화면의 다른 부분을 탐색할 수 있습니다. 손가락을 떼면 이전 상태로 돌아갑니다."</li></ul>\n\n"세 번 탭하여 확대 기능은 키보드와 탐색 메뉴에서는 작동하지 않습니다."</string>
+    <string name="accessibility_screen_magnification_title" msgid="9002237235486714636">"확대 동작"</string>
+    <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"확대하려면 3번 탭하세요."</string>
+    <string name="accessibility_screen_magnification_summary" msgid="8274106658579514922">"화면을 확대/축소하려면 한 손가락으로 3번 탭하세요.\n\n확대한 후 다음과 같은 작업을 할 수 있습니다.\n"<ul>\n<li>"스크롤: 화면 위로 2개 이상의 손가락을 드래그"</li>\n<li>"확대 수준 조정: 2개 이상의 손가락을 오므리거나 펼침"</li></ul>\n\n"일시적으로 확대하려면 3번 탭하고 마지막으로 탭한 후에는 길게 누릅니다. 손가락으로 누른 상태에서 드래그하여 화면에서 이동하고 다시 축소하려면 손가락을 뗍니다.\n\n참고: 확대 동작은 키보드와 탐색 메뉴를 제외한 모든 곳에서 작동합니다."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"접근성 단축키"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"켜기"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"사용 안함"</string>
     <string name="accessibility_global_gesture_preference_description" msgid="2328507978501847573">"이 기능을 사용하면 다음 두 단계를 통해 접근성 기능을 빠르게 활성화할 수 있습니다.\n\n1단계: 소리가 나거나 진동이 느껴질 때까지 전원 버튼을 길게 누릅니다.\n\n2단계: 확인음이 들릴 때까지 두 손가락으로 길게 탭합니다.\n\n기기를 여러 사용자가 사용하는 경우 잠금 화면에 있는 바로가기를 사용하여 기기가 잠길 때까지 임시로 접근성 기능을 사용하도록 설정할 수 있습니다."</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="2567402942683463779">"고대비 텍스트"</string>
-    <string name="accessibility_toggle_screen_magnification_preference_title" msgid="2472285215737820469">"화면 확대"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="7218498768415430963">"화면 확대 자동 업데이트"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"앱 전환 시 화면 확대 업데이트"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"전원 버튼으로 통화 종료"</string>
@@ -2571,12 +2576,14 @@
     </plurals>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="7465525754879341907">"<xliff:g id="FORMATTEDTIME">%1$s</xliff:g>까지 알람만 수신 모드로 변경"</string>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"항상 알림 모드로 변경"</string>
-    <string name="zen_mode_peek" msgid="1468557671879175931">"화면 방해 금지"</string>
-    <string name="zen_mode_peek_summary" msgid="27622220787132681">"알림 일시중지로 인해 무음 처리된 알림이 현재 화면에 표시되지 않도록 함"</string>
-    <string name="zen_mode_lights" msgid="904184586121619154">"알림등 없음"</string>
-    <string name="zen_mode_lights_summary" msgid="6953305086643633530">"알림 일시중지로 인해 무음 처리된 알림이 빛을 내는 대신 진동으로 변환되지 않도록 함"</string>
-    <string name="zen_mode_screen_on" msgid="200863707448412727">"화면 켜지 않음"</string>
-    <string name="zen_mode_screen_on_summary" msgid="5397223499131913528">"화면이 꺼져 있을 때, 알림 일시중지로 무음 처리한 알림을 표시하지 않습니다."</string>
+    <string name="zen_mode_screen_on" msgid="7712038508173845101">"화면이 켜져 있을 때 차단"</string>
+    <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"알림 일시중지로 인해 무음 처리된 알림이 화면에 표시되지 않도록 함"</string>
+    <string name="zen_mode_screen_off" msgid="5026854939192419879">"화면이 꺼져 있을 때 차단"</string>
+    <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"알림 일시중지로 인해 무음 처리된 알림이 화면을 켜거나 알림 불빛을 깜박이지 않도록 함"</string>
+    <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"사용 안함"</string>
+    <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"화면이 켜져 있을 때"</string>
+    <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"화면이 꺼져 있을 때"</string>
+    <string name="zen_mode_no_visual_interruptions" msgid="8742776003822778472">"화면이 켜져 있든 꺼져 있든 항상"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"알림 설정"</string>
     <string name="device_feedback" msgid="3238056036766293294">"이 기기에 대한 의견 보내기"</string>
     <string name="restr_pin_enter_admin_pin" msgid="2451187374960131018">"관리자 PIN 입력"</string>
@@ -2811,9 +2818,10 @@
     <string name="camera_gesture_desc" msgid="1831390075255870960">"손목을 두 번 돌리면 카메라 앱이 열립니다."</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"전원 버튼을 두 번 눌러 카메라 열기"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"화면을 잠금 해제하지 않고 신속하게 카메라를 열 수 있습니다."</string>
-    <string name="screen_zoom_title" msgid="5530967660604527002">"디스플레이 확대"</string>
+    <string name="screen_zoom_title" msgid="5233515303733473927">"디스플레이 크기"</string>
+    <string name="screen_zoom_short_summary" msgid="7291960817349834688">"화면에 표시된 항목을 확대 또는 축소"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"디스플레이 밀도, 화면 확대/축소, 크기, 크기 조정"</string>
-    <string name="screen_zoom_summary" msgid="2022973627105802010">"화면의 모든 항목을 축소 또는 확대합니다. 이 설정을 변경하면 메인 스크린에서 일부 앱의 위치가 변경될 수 있습니다."</string>
+    <string name="screen_zoom_summary" msgid="6445488991799015407">"화면에 표시된 항목을 축소 또는 확대합니다. 화면에서 일부 앱의 위치가 변경될 수 있습니다."</string>
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"미리보기"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"축소"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"확대"</string>

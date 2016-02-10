@@ -76,7 +76,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Izpni kartico SD"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Izbriši pomnilnik USB"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Izbriši kartico SD"</string>
-    <string name="font_size_summary" msgid="133937309990844030">"Pomanjšava ali povečava besedila na zaslonu."</string>
+    <string name="font_size_summary" msgid="1690992332887488183">"Pomanjšava ali povečava besedila na zaslonu"</string>
     <string name="small_font" msgid="2295331917424072635">"Majhna"</string>
     <string name="medium_font" msgid="2068475425515133701">"Srednja"</string>
     <string name="large_font" msgid="599055175160971446">"Velika"</string>
@@ -119,7 +119,7 @@
     <string name="bluetooth_no_devices_found" msgid="1085232930277181436">"V bližini ni naprav Bluetooth."</string>
     <string name="bluetooth_notif_ticker" msgid="4726721390078512173">"Zahteva za seznanitev Bluetooth"</string>
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Zahteva za seznanitev"</string>
-    <string name="bluetooth_notif_message" msgid="5057417127600942904">"Dotaknite se, če želite vzpostaviti povezavo z napravo <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <string name="bluetooth_notif_message" msgid="5057417127600942904">"Dotaknite se, če želite opraviti seznanitev z napravo <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Pokaži prejete datoteke"</string>
     <string name="device_picker" msgid="4978696506172252813">"Izberite napravo Bluetooth"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Zahteva za dovoljenje za uporabo funkcije Bluetooth"</string>
@@ -334,7 +334,7 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Odklepanje s prstnim odtisom"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="4747510337049957778">"Dotaknite se tipala za prstne odtise, če želite odkleniti telefon, pooblastiti nakupe ali se prijaviti v aplikacije. \n\n Pri dodajanju prstnih odtisov bodite previdni. Te stvari je mogoče početi s katerim koli dodanim prstnim odtisom."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="4747510337049957778">"Dotaknite se tipala za prstne odtise, če želite odkleniti telefon, odobriti nakupe ali se prijaviti v aplikacije. \n\n Pri dodajanju prstnih odtisov bodite previdni – vse to je mogoče početi s katerim koli dodanim prstnim odtisom."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="7173290350577831813">"Opomba: prstni odtis bo morda manj varen kot zapleten vzorec ali koda PIN."</string>
     <string name="security_settings_fingerprint_enroll_introduction_risk_link_text" msgid="9129531466157620977">"Več o tem"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Prekliči"</string>
@@ -626,7 +626,7 @@
     <string name="android_beam_off_summary" msgid="4663095428454779138">"Izklopljeno"</string>
     <string name="android_beam_disabled_summary" msgid="1737782116894793393">"Ni na voljo, ker je NFC izklopljen"</string>
     <string name="android_beam_label" msgid="6257036050366775040">"Android Beam"</string>
-    <string name="android_beam_explained" msgid="1828555626055290684">"Če je ta funkcija vklopljena, lahko prenesete vsebino aplikacij v drugo napravo, ki podpira tehnologijo NFC, tako da približate napravi skupaj. Prenesete lahko na primer strani v brskalniku, videoposnetke v YouTubu, stike oseb in drugo.\n\nPribližajte napravi (običajno s hrbtnima platema) in se dotaknite zaslona. Aplikacija določi, kaj se bo preneslo."</string>
+    <string name="android_beam_explained" msgid="1828555626055290684">"Če je ta funkcija vklopljena, lahko prenesete vsebino aplikacij v drugo napravo, ki podpira tehnologijo NFC, tako da približate napravi. Prenesete lahko na primer strani v brskalniku, videoposnetke v YouTubu, stike oseb in drugo.\n\nPribližajte napravi (običajno s hrbtnima platema) in se dotaknite zaslona. Aplikacija določi, kaj se bo preneslo."</string>
     <string name="wifi_quick_toggle_title" msgid="8850161330437693895">"Wi‑Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="2696547080481267642">"Vklopi Wi-Fi"</string>
     <string name="wifi_settings" msgid="29722149822540994">"Wi‑Fi"</string>
@@ -719,9 +719,13 @@
     <string name="wifi_unchanged" msgid="3410422020930397102">"(nespremenjeno)"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"Izberite"</string>
     <string name="wifi_multiple_cert_added" msgid="3240743501460165224">"(Dodanih je bilo več potrdil)"</string>
+    <!-- no translation found for wifi_use_system_certs (5270879895056893783) -->
+    <skip />
     <string name="wifi_do_not_provide_eap_user_cert" msgid="5160499244977160665">"Ne posreduj"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4266754430576348471">"Ne potrdi"</string>
     <string name="wifi_do_not_validate_eap_server_warning" msgid="1787190245542586660">"Ni navedenih potrdil. Povezava ne bo zasebna."</string>
+    <!-- no translation found for wifi_no_domain_warning (5223011964091727376) -->
+    <skip />
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS je na voljo"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS je na voljo)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Vnesite geslo za omrežje"</string>
@@ -899,6 +903,7 @@
     <string name="doze_title" msgid="2259176504273878294">"Prikaz na podlagi okolja"</string>
     <string name="doze_summary" msgid="7128970177894383698">"Preklop zaslona iz stanja pripravljenosti, ko primete napravo ali prejmete obvestila"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Velikost pisave"</string>
+    <string name="short_summary_font_size" msgid="6819778801232989076">"Pomanjšava ali povečava besedila"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Nastavitve zaklepanja kartice SIM"</string>
     <string name="sim_lock_settings_category" msgid="5136244267576697004">"Nastavi zaklepanje kartice SIM"</string>
     <string name="sim_lock_settings_title" msgid="9018585580955414596">"Zaklepanje kartice SIM"</string>
@@ -1603,21 +1608,21 @@
     <string name="accessibility_settings" msgid="3975902491934816215">"Pripomočki za ljudi s posebnimi potrebami"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Nastavitve pripomočkov za ljudi s posebnimi potrebami"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"Nastavitve vidnosti"</string>
-    <string name="vision_settings_description" msgid="7754433456207334423">"Prilagodite te nastavitve za pomoč pri preostanku postopka namestitve. Kadar koli jih lahko prilagodite v nastavitvah naprave."</string>
+    <string name="vision_settings_description" msgid="5679491180156408260">"To napravo lahko prilagodite svojim potrebam. Te funkcije za ljudi s posebnimi potrebami lahko pozneje spremenite v nastavitvah."</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"Storitve"</string>
     <string name="talkback_title" msgid="7912059827205988080">"TalkBack"</string>
-    <string name="talkback_summary" msgid="8525514803273262361">"Orodje za branje zaslona je prvenstveno namenjeno slepim in slabovidnim ljudem\n<xliff:g id="SERVICE_STATE">%1$s</xliff:g>"</string>
+    <string name="talkback_summary" msgid="8331244650729024963">"Bralnik zaslona je predvsem za slepe in slabovidne"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"Sistem"</string>
     <string name="accessibility_display_title" msgid="7610175687949675162">"Zaslon"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"Napisi"</string>
-    <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"Poteze za povečavo"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="6899066389940619096">"Povečajte in pomanjšajte sliko, tako da se z enim prstom trikrat dotaknete zaslona.\n\nPri povečavi lahko:\n"<ul><li>"Pomikate vsebino na zaslonu: dva prsta ali več povlecite po zaslonu."</li>\n<li>"Prilagodite stopnjo povečave/pomanjšave: najmanj dva prsta približajte ali razširite."</li>\n<li>"Začasno povečate: trikrat se dotaknite zaslona, ga pridržite in vlecite s prstom, če želite raziskati različne dele zaslona. Dvignite prst, če se želite vrniti v prejšnje stanje."</li></ul>\n\n"Trojni dotik za povečavo deluje povsod, razen pri tipkovnici in v vrstici za krmarjenje."</string>
+    <string name="accessibility_screen_magnification_title" msgid="9002237235486714636">"Poteza za povečavo"</string>
+    <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Če želite povečati, se trikrat dotaknite."</string>
+    <string name="accessibility_screen_magnification_summary" msgid="8274106658579514922">"Če želite povečati ali pomanjšati, se zaslona trikrat dotaknite s prstom.\n\nKo je slika povečana, so na voljo te možnosti:\n"<ul>\n<li>"Drsenje – z dvema ali več prsti povlecite čez zaslon."</li>\n<li>"Prilagajanje ravni povečave – dva ali več prstov na zaslonu povlecite skupaj ali jih razmaknite."</li></ul>\n\n"Če želite začasno povečati, se trikrat dotaknite zaslona, vendar po tretjem dotiku ne dvignite prsta. Medtem ko se s prstom dotikate zaslona, ga povlecite, če se želite premikati po zaslonu. Ko želite spet zmanjšati povečavo, dvignite prst.\n\nOpomba: poteza za povečavo deluje povsod, razen na tipkovnici in v vrstici za krmarjenje."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Bližnj. za ljudi s pos. potrebami"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"Vklopljeno"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"Izklopljeno"</string>
-    <string name="accessibility_global_gesture_preference_description" msgid="2328507978501847573">"Če je ta funkcija vklopljena, lahko hitro aktivirate funkcije za ljudi s posebnimi potrebami v dveh korakih:\n\n1. korak: pridržite gumb za vklop, dokler ne zaslišite zvoka ali začutite vibriranja.\n\n2. korak: dotaknite se z dvema prstoma in pridržite, dokler ne slišite zvočnega potrdila.\n\nČe ima naprava več uporabnikov in uporabite to bližnjico na zaklenjenem zaslonu, začasno omogočite funkcije za ljudi s posebnimi potrebami, dokler naprave ne odklenete."</string>
+    <string name="accessibility_global_gesture_preference_description" msgid="2328507978501847573">"Če je ta funkcija vklopljena, lahko hitro aktivirate funkcije za ljudi s posebnimi potrebami v dveh korakih:\n\n1. korak: pridržite gumb za vklop, dokler ne zaslišite zvoka ali začutite vibriranja.\n\n2. korak: dotaknite se zaslona z dvema prstoma in pridržite, dokler ne slišite zvočnega potrdila.\n\nČe ima naprava več uporabnikov in uporabite to bližnjico na zaklenjenem zaslonu, začasno omogočite funkcije za ljudi s posebnimi potrebami, dokler naprave ne odklenete."</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="2567402942683463779">"Visokokontrastno besedilo"</string>
-    <string name="accessibility_toggle_screen_magnification_preference_title" msgid="2472285215737820469">"Povečava zaslona"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="7218498768415430963">"Samodejno posodobi povečavo zaslona"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"Posodabljanje povečave zaslona pri prehodih aplik."</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Gumb za vklop konča klic"</string>
@@ -2609,19 +2614,21 @@
     </plurals>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="7465525754879341907">"Sprememba na samo alarme do <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"Sprememba na vedno prekini"</string>
-    <string name="zen_mode_peek" msgid="1468557671879175931">"Brez prekinitev na zaslonu"</string>
-    <string name="zen_mode_peek_summary" msgid="27622220787132681">"Preprečevanje, da bi si bilo mogoče obvestila, utišana z načinom »ne moti«, ogledati s kukanjem, ali da bi se prikazala na trenutnem zaslonu"</string>
-    <string name="zen_mode_lights" msgid="904184586121619154">"Brez lučke za obvestila"</string>
-    <string name="zen_mode_lights_summary" msgid="6953305086643633530">"Preprečevanje, da bi obvestila, utišana z načinom »ne moti«, povzročila utripanje lučke"</string>
-    <string name="zen_mode_screen_on" msgid="200863707448412727">"Nikoli ne vklopi zaslona"</string>
-    <string name="zen_mode_screen_on_summary" msgid="5397223499131913528">"Preprečevanje, da bi obvestila, utišana z načinom »ne moti«, vklopila zaslon, če je izklopljen"</string>
+    <string name="zen_mode_screen_on" msgid="7712038508173845101">"Blokiraj, ko je zaslon vklopljen"</string>
+    <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"Preprečevanje, da bi obvestila, utišana z načinom »ne moti«, prikazala hiter predogled ali se pojavila na zaslonu"</string>
+    <string name="zen_mode_screen_off" msgid="5026854939192419879">"Blokiraj, ko je zaslon izklopljen"</string>
+    <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"Preprečevanje, da bi obvestila, utišana z načinom »ne moti«, vklopila zaslon ali povzročila utripanje obvestilne lučke"</string>
+    <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"Izklopljeno"</string>
+    <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"Ko je zaslon vklopljen"</string>
+    <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"Ko je zaslon izklopljen"</string>
+    <string name="zen_mode_no_visual_interruptions" msgid="8742776003822778472">"Ko je zaslon vklopljen ali izklopljen"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Nastavitve obvestil"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Pošlji povratne info. o tej napravi"</string>
     <string name="restr_pin_enter_admin_pin" msgid="2451187374960131018">"Vnesite skrbniški PIN"</string>
     <string name="switch_on_text" msgid="1124106706920572386">"Vklopljeno"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"Izklopljeno"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"Pripenjanje zaslona"</string>
-    <string name="screen_pinning_description" msgid="3360904523688769289">"Če je pripenjanje zaslona vklopljeno, lahko z njim ohranite prikaz trenutnega zaslona, dokler ga ne odpnete.\n\nUporaba prip. zaslona:\n\n1. Pripenjanje zaslona mora biti vklopljeno.\n\n2. Odprite zaslon, ki ga želite pripeti.\n\n3. Dotaknite se tipke za pregled.\n\n4. Povlecite navzgor in se dotaknite ikone žebljička."</string>
+    <string name="screen_pinning_description" msgid="3360904523688769289">"Če je pripenjanje zaslona vklopljeno, lahko z njim ohranite prikaz trenutnega zaslona, dokler ga ne odpnete.\n\nUporaba pripenjanja:\n\n1. Pripenjanje zaslona mora biti vklopljeno.\n\n2. Odprite zaslon, ki ga želite pripeti.\n\n3. Dotaknite se tipke za pregled.\n\n4. Povlecite navzgor in se dotaknite ikone žebljička."</string>
     <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"Pred odpenjanjem vprašaj za vzorec za odklepanje"</string>
     <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"Zahtevaj PIN pred odpenjanjem"</string>
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"Pred odpenjanjem vprašaj za geslo"</string>
@@ -2861,9 +2868,10 @@
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Odprite aplikacijo za fotografiranje, tako da dvakrat zasukate zapestje"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Dva dotika gumba za vklop za fotoaparat"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Hitro odpre fotoaparat brez odklepanja zaslona"</string>
-    <string name="screen_zoom_title" msgid="5530967660604527002">"Povečevanje zaslona"</string>
+    <string name="screen_zoom_title" msgid="5233515303733473927">"Velikost prikaza"</string>
+    <string name="screen_zoom_short_summary" msgid="7291960817349834688">"Pomanjšava ali povečava elementov na zaslonu"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"gostota zaslona, povečava zaslona, razmerje, spreminjanje velikosti"</string>
-    <string name="screen_zoom_summary" msgid="2022973627105802010">"Pomanjšava ali povečava vseh elementov na zaslonu. Po spreminjanju te nastavitve se lahko spremeni položaj nekaterih aplikacij na začetnem zaslonu."</string>
+    <string name="screen_zoom_summary" msgid="6445488991799015407">"Pomanjšava ali povečava elementov na zaslonu – s tem se bo morda spremenil položaj nekaterih aplikacij na zaslonu."</string>
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"Predogled"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"Pomanjšanje"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"Povečanje"</string>

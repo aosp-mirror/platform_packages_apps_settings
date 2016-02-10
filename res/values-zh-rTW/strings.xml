@@ -74,7 +74,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"卸載 SD 卡"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"清除 USB 儲存裝置"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"清除 SD 卡"</string>
-    <string name="font_size_summary" msgid="133937309990844030">"縮小或放大畫面上的文字。"</string>
+    <string name="font_size_summary" msgid="1690992332887488183">"縮小或放大畫面上的文字。"</string>
     <string name="small_font" msgid="2295331917424072635">"小"</string>
     <string name="medium_font" msgid="2068475425515133701">"中"</string>
     <string name="large_font" msgid="599055175160971446">"大"</string>
@@ -703,9 +703,13 @@
     <string name="wifi_unchanged" msgid="3410422020930397102">"(未變更)"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"請選取"</string>
     <string name="wifi_multiple_cert_added" msgid="3240743501460165224">"(已新增多個憑證)"</string>
+    <!-- no translation found for wifi_use_system_certs (5270879895056893783) -->
+    <skip />
     <string name="wifi_do_not_provide_eap_user_cert" msgid="5160499244977160665">"不提供"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4266754430576348471">"不進行驗證"</string>
     <string name="wifi_do_not_validate_eap_server_warning" msgid="1787190245542586660">"您未指定任何憑證，因此無法為您設定私人連線。"</string>
+    <!-- no translation found for wifi_no_domain_warning (5223011964091727376) -->
+    <skip />
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"可使用 WPS"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (可使用 WPS)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"輸入您的網路密碼"</string>
@@ -883,6 +887,7 @@
     <string name="doze_title" msgid="2259176504273878294">"環境顯示"</string>
     <string name="doze_summary" msgid="7128970177894383698">"拿起裝置或收到通知時喚醒螢幕"</string>
     <string name="title_font_size" msgid="4405544325522105222">"字型大小"</string>
+    <string name="short_summary_font_size" msgid="6819778801232989076">"縮小或放大文字"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"SIM 卡鎖定設定"</string>
     <string name="sim_lock_settings_category" msgid="5136244267576697004">"設定 SIM 卡鎖定"</string>
     <string name="sim_lock_settings_title" msgid="9018585580955414596">"SIM 卡鎖定"</string>
@@ -1583,21 +1588,21 @@
     <string name="accessibility_settings" msgid="3975902491934816215">"無障礙設定"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"協助工具設定"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"視覺輔助設定"</string>
-    <string name="vision_settings_description" msgid="7754433456207334423">"立即調整這些設定以便完成接下來的設定程序。您隨時可以在裝置的設定頁面進行調整。"</string>
+    <string name="vision_settings_description" msgid="5679491180156408260">"您可以根據個人需求自訂這個裝置，而您日後可以前往 [設定] 變更這些協助工具功能。"</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"服務"</string>
     <string name="talkback_title" msgid="7912059827205988080">"TalkBack"</string>
-    <string name="talkback_summary" msgid="8525514803273262361">"這是一項螢幕閱讀器工具，主要適用於視障和低視能人士\n<xliff:g id="SERVICE_STATE">%1$s</xliff:g>"</string>
+    <string name="talkback_summary" msgid="8331244650729024963">"這是一種螢幕閱讀器，主要適用於視障和低視能人士"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"系統"</string>
     <string name="accessibility_display_title" msgid="7610175687949675162">"顯示"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"字幕"</string>
-    <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"放大手勢"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="6899066389940619096">"使用單指在螢幕上輕按三下即可縮放畫面。\n\n在放大畫面中，您可以執行下列操作：\n"<ul><li>"平移：使用兩指或多指在畫面上拖曳。"</li>\n<li>"調整縮放等級：使用兩指或多指往內撥或往外撥。"</li>\n<li>"暫時放大：輕按三下並按住，然後使用手指拖曳，即可瀏覽畫面的不同部分。放開手指則可讓畫面恢復原先的狀態。"</li></ul>\n\n"除了鍵盤與導覽列部分以外，其他地方均適用輕按三下放大畫面的手勢。"</string>
+    <string name="accessibility_screen_magnification_title" msgid="9002237235486714636">"放大畫面手勢"</string>
+    <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"輕按三下即可縮放畫面"</string>
+    <string name="accessibility_screen_magnification_summary" msgid="8274106658579514922">"使用單指在螢幕上輕按三下即可縮放畫面。\n\n在放大畫面中，您可以執行下列操作：\n"<ul>\n<li>"捲動：使用兩指或多指在畫面上拖曳"</li>\n<li>"調整縮放等級：使用兩指或多指往內撥或往外撥"</li></ul>\n\n"如要暫時放大畫面，只要在螢幕上輕按三下並按住即可。按住時，使用手指拖曳可瀏覽畫面的不同部分。放開手指則可讓畫面恢復原先的狀態。\n\n注意：除了鍵盤與導覽列部分以外，其他地方均適用放大畫面手勢。"</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"協助工具捷徑"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"開啟"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"關閉"</string>
     <string name="accessibility_global_gesture_preference_description" msgid="2328507978501847573">"這項功能開啟時，您可以透過兩個步驟快速啟用協助工具功能：\n\n步驟 1：按住電源按鈕，直到裝置發出音效或震動。\n\n步驟 2：使用兩指按住螢幕，直到裝置發出確認音效。\n\n如果裝置有多位使用者，在鎖定畫面上使用這組快捷操作會暫時啟用協助工具，直到裝置解鎖為止。"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="2567402942683463779">"高對比文字"</string>
-    <string name="accessibility_toggle_screen_magnification_preference_title" msgid="2472285215737820469">"螢幕放大"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="7218498768415430963">"自動更新螢幕放大設定"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"更新應用程式轉場後的螢幕放大設定"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"按電源鍵結束通話"</string>
@@ -2575,12 +2580,14 @@
     </plurals>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="7465525754879341907">"變更為僅允許鬧鐘模式，結束時間為 <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"變更為一律允許干擾模式"</string>
-    <string name="zen_mode_peek" msgid="1468557671879175931">"禁止畫面干擾"</string>
-    <string name="zen_mode_peek_summary" msgid="27622220787132681">"禁止「零打擾」模式設為靜音的通知在目前的畫面上短暫或持續顯示"</string>
-    <string name="zen_mode_lights" msgid="904184586121619154">"禁止使用指示燈號"</string>
-    <string name="zen_mode_lights_summary" msgid="6953305086643633530">"禁止「零打擾」模式設為靜音的通知使用指示燈號"</string>
-    <string name="zen_mode_screen_on" msgid="200863707448412727">"一律不開啟螢幕"</string>
-    <string name="zen_mode_screen_on_summary" msgid="5397223499131913528">"當螢幕為關閉狀態時，禁止「零打擾」模式設為靜音的通知開啟螢幕"</string>
+    <string name="zen_mode_screen_on" msgid="7712038508173845101">"螢幕開啟時封鎖"</string>
+    <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"禁止「零打擾」模式設為靜音的通知在螢幕上短暫顯示或彈出"</string>
+    <string name="zen_mode_screen_off" msgid="5026854939192419879">"螢幕關閉時封鎖"</string>
+    <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"禁止「零打擾」模式設為靜音的通知開啟螢幕或使用指示燈號"</string>
+    <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"關閉"</string>
+    <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"螢幕開啟時"</string>
+    <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"螢幕關閉時"</string>
+    <string name="zen_mode_no_visual_interruptions" msgid="8742776003822778472">"螢幕開啟或關閉時"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"通知設定"</string>
     <string name="device_feedback" msgid="3238056036766293294">"傳送您對這個裝置的意見回饋"</string>
     <string name="restr_pin_enter_admin_pin" msgid="2451187374960131018">"輸入管理員 PIN"</string>
@@ -2815,9 +2822,10 @@
     <string name="camera_gesture_desc" msgid="1831390075255870960">"扭動手腕兩次即可開啟「相機」應用程式"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"按兩下電源按鈕即可開啟相機"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"不必將螢幕解鎖就能快速開啟相機"</string>
-    <string name="screen_zoom_title" msgid="5530967660604527002">"放大畫面"</string>
+    <string name="screen_zoom_title" msgid="5233515303733473927">"顯示大小"</string>
+    <string name="screen_zoom_short_summary" msgid="7291960817349834688">"縮小或放大畫面上的項目"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"顯示密度, 畫面縮放, 縮放, 縮放比例"</string>
-    <string name="screen_zoom_summary" msgid="2022973627105802010">"縮小或放大畫面上的所有項目。如果變更這項設定，主畫面上的部分應用程式位置可能會有變動。"</string>
+    <string name="screen_zoom_summary" msgid="6445488991799015407">"縮小或放大畫面上的項目。縮放完成後，畫面上某些應用程式的位置可能會有變動。"</string>
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"預覽"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"縮小"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"放大"</string>

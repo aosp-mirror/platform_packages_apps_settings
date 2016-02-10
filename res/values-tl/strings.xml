@@ -74,7 +74,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"I-unmount ang SD card"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Burahin imbakan na USB"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Burahin ang SD card"</string>
-    <string name="font_size_summary" msgid="133937309990844030">"Paliitin o palakihin ang text sa screen."</string>
+    <string name="font_size_summary" msgid="1690992332887488183">"Gawing mas maliit o mas malaki ang text sa screen."</string>
     <string name="small_font" msgid="2295331917424072635">"Maliit"</string>
     <string name="medium_font" msgid="2068475425515133701">"Katamtaman"</string>
     <string name="large_font" msgid="599055175160971446">"Malaki"</string>
@@ -703,9 +703,13 @@
     <string name="wifi_unchanged" msgid="3410422020930397102">"(di-nabago)"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"Mangyaring pumili"</string>
     <string name="wifi_multiple_cert_added" msgid="3240743501460165224">"(Nagdagdag ng maraming certificate)"</string>
+    <!-- no translation found for wifi_use_system_certs (5270879895056893783) -->
+    <skip />
     <string name="wifi_do_not_provide_eap_user_cert" msgid="5160499244977160665">"Huwag ibigay"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4266754430576348471">"Huwag patotohanan"</string>
     <string name="wifi_do_not_validate_eap_server_warning" msgid="1787190245542586660">"Walang natukoy na certificate. Hindi magiging pribado ang iyong koneksyon."</string>
+    <!-- no translation found for wifi_no_domain_warning (5223011964091727376) -->
+    <skip />
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"Available ang WPS"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (Available ang WPS)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Ilagay ang iyong password sa network"</string>
@@ -883,6 +887,7 @@
     <string name="doze_title" msgid="2259176504273878294">"Ambient na display"</string>
     <string name="doze_summary" msgid="7128970177894383698">"Gisingin ang screen kapag kinukuha mo ang device o tumatanggap ng mga notification."</string>
     <string name="title_font_size" msgid="4405544325522105222">"Laki ng font"</string>
+    <string name="short_summary_font_size" msgid="6819778801232989076">"Palakihin o paliitin ang text"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Setting ng lock ng SIM card"</string>
     <string name="sim_lock_settings_category" msgid="5136244267576697004">"I-set up ang lock ng SIM card"</string>
     <string name="sim_lock_settings_title" msgid="9018585580955414596">"Lock ng SIM card"</string>
@@ -1583,21 +1588,21 @@
     <string name="accessibility_settings" msgid="3975902491934816215">"Kakayahang Ma-access"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Mga setting ng pagiging maa-access"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"Mga Setting ng Paningin"</string>
-    <string name="vision_settings_description" msgid="7754433456207334423">"Isaayos ang mga setting na ito ngayon upang matulungan ka sa iba pang bahagi ng proseso ng pag-set up. Maaari mong isaayos ang mga ito anumang oras sa mga setting ng device."</string>
+    <string name="vision_settings_description" msgid="5679491180156408260">"Maaari mong i-customize ang device na ito upang maging angkop sa iyong mga pangangailangan. Maaaring baguhin ang mga feature sa accessibility na ito sa ibang pagkakataon sa Mga Setting."</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"Mga Serbisyo"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
-    <string name="talkback_summary" msgid="8525514803273262361">"Tool na screenreader na pangunahing nakalaan para sa mga taong bulag at malabo ang paningin\n<xliff:g id="SERVICE_STATE">%1$s</xliff:g>"</string>
+    <string name="talkback_summary" msgid="8331244650729024963">"Screen reader na pangunahing nakalaan para sa mga taong bulag at malabo ang paningin"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"System"</string>
     <string name="accessibility_display_title" msgid="7610175687949675162">"Display"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"Mga Caption"</string>
-    <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"Galaw sa pag-magnify"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="6899066389940619096">"Mag-zoom in at mag-zoom out sa pamamagitan ng pagta-tap nang tatlong beses sa screen gamit ang isang daliri.\n\nHabang naka-zoom in, magagawa mong:\n"<ul><li>"Mag-pan: I-drag ang dalawa o higit pang mga daliri sa screen."</li>\n<li>"Isaayos ang antas ng pag-zoom: I-pinch ang dalawa o higit pang mga daliri o paglayuin ang mga ito."</li>\n<li>"Pansamantalang mag-magnify: Mag-tap nang tatlong beses, tagalan at i-drag ang iyong daliri upang tingnan ang iba\'t ibang bahagi ng screen. Iangat ang iyong daliri upang bumalik sa dati."</li></ul>\n\n"Gumagana sa lahat ang pagta-tap nang tatlong beses para sa pagma-magnify maliban sa keyboard at navigation bar."</string>
+    <string name="accessibility_screen_magnification_title" msgid="9002237235486714636">"Galaw sa pag-magnify"</string>
+    <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Mag-tap nang 3 beses upang mag-zoom"</string>
+    <string name="accessibility_screen_magnification_summary" msgid="8274106658579514922">"Upang mag-zoom in at mag-zoom out, i-tap nang 3 beses ang screen gamit ang isang daliri.\n\nHabang naka-zoom in, magagawa mong:\n"<ul>\n<li>"Mag-scroll: Mag-drag gamit ang 2 o higit pang daliri sa screen"</li>\n<li>"I-adjust ang antas ng pag-zoom: Mag-pinch gamit ang 2 o higit pang daliri o paghiwalayin ang mga ito"</li></ul>\n\n"Upang pansamantalang mag-zoom, mag-tap nang 3 beses at pumindot nang matagal sa huling pag-tap. Habang nakapindot nang matagal ang iyong daliri, mag-drag upang makaikot sa screen. Iangat ang iyong daliri upang mag-zoom out muli.\n\nTandaan: Gumagana ang mga galaw sa pag-magnify kahit saan maliban sa keyboard at navigation bar."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Shortcut sa pagiging naa-access"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"I-on"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"I-off"</string>
     <string name="accessibility_global_gesture_preference_description" msgid="2328507978501847573">"Kapag na-on ang feature na ito, mabilis mong maa-activate ang mga feature sa accessibility sa dalawang hakbang:\n\nHakbang 1: Pindutin nang matagal ang power button hanggang sa makarinig ka ng tunog o makaramdam ng pag-vibrate.\n\nHakbang 2: Mag-tap nang matagal gamit ang dalawang daliri hanggang sa makarinig ka ng audio na kumpirmasyon.\n\nKung maraming user ang device, pansamantalang mae-enable ang accessibility hanggang sa i-unlock ang device kapag ginamit ang shortcut na ito sa lock screen."</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="2567402942683463779">"Text na high contrast"</string>
-    <string name="accessibility_toggle_screen_magnification_preference_title" msgid="2472285215737820469">"Pag-magnify ng screen"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="7218498768415430963">"I-auto update pag-magnify ng screen"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"I-update pag-magnify ng screen sa app transition"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Tatapusin ng power button ang tawag"</string>
@@ -2571,12 +2576,14 @@
     </plurals>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="7465525754879341907">"Gawing mag-a-alarm lang hanggang <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"Gawing palaging mang-abala"</string>
-    <string name="zen_mode_peek" msgid="1468557671879175931">"Walang pagkaantala sa screen"</string>
-    <string name="zen_mode_peek_summary" msgid="27622220787132681">"Pigilang sumilip o lumabas sa kasalukuyang screen ang notification na pinatahimik sa pamamagitan ng Huwag Istorbohin"</string>
-    <string name="zen_mode_lights" msgid="904184586121619154">"Walang notification light"</string>
-    <string name="zen_mode_lights_summary" msgid="6953305086643633530">"Pigilang mapatay-sindi ng notification na pinatahimik sa pamamagitan ng Huwag Istorbohin ang ilaw"</string>
-    <string name="zen_mode_screen_on" msgid="200863707448412727">"Huwag kailanman i-on ang screen"</string>
-    <string name="zen_mode_screen_on_summary" msgid="5397223499131913528">"Kung naka-off ang screen, pigilan na mag-on ang mga notification na na-silence ng Huwag Istorbohin"</string>
+    <string name="zen_mode_screen_on" msgid="7712038508173845101">"I-block kapag naka-on ang screen"</string>
+    <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"Pigilang lumabas sa screen ang mga notification na hinaharangan ng Huwag Istorbohin"</string>
+    <string name="zen_mode_screen_off" msgid="5026854939192419879">"I-block kapag naka-off ang screen"</string>
+    <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"Pigilan ang mga notification na hinaharangan ng Huwag Istorbohin na i-on ang screen o ipatay-sindi ang ilaw ng notification"</string>
+    <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"Naka-off"</string>
+    <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"Kapag naka-on ang screen"</string>
+    <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"Kapag naka-off ang screen"</string>
+    <string name="zen_mode_no_visual_interruptions" msgid="8742776003822778472">"Kapag naka-on o naka-off ang screen"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Mga setting ng notification"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Feedback tungkol sa device"</string>
     <string name="restr_pin_enter_admin_pin" msgid="2451187374960131018">"Ilagay ang PIN ng administrator"</string>
@@ -2811,9 +2818,10 @@
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Buksan ang camera app sa pamamagitan ng pag-twist sa iyong kamay nang dalawang beses"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Pindutin nang dalawang beses ang power button para sa camera"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Mabilisang buksan ang camera nang hindi ina-unlock ang iyong screen"</string>
-    <string name="screen_zoom_title" msgid="5530967660604527002">"Palakihin ang display"</string>
+    <string name="screen_zoom_title" msgid="5233515303733473927">"Laki ng display"</string>
+    <string name="screen_zoom_short_summary" msgid="7291960817349834688">"Palakihin o paliitin ang mga item sa screen"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"density ng display, pag-zoom sa screen, scale, pag-scale"</string>
-    <string name="screen_zoom_summary" msgid="2022973627105802010">"Paliitin o palakihin ang lahat ng item sa screen. Maaaring mag-iba ng pwesto ang ilang app sa iyong home screen pagkatapos baguhin ang setting na ito."</string>
+    <string name="screen_zoom_summary" msgid="6445488991799015407">"Palakihin o paliitin ang mga item sa screen. Maaaring magbago ng posisyon ang ilang app sa iyong screen."</string>
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"I-preview"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"Paliitin"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"Palakihin"</string>
