@@ -53,6 +53,7 @@ public class FingerprintEnrollIntroduction extends FingerprintEnrollBase
 
     protected static final int CHOOSE_LOCK_GENERIC_REQUEST = 1;
     protected static final int FINGERPRINT_FIND_SENSOR_REQUEST = 2;
+    protected static final int LEARN_MORE_REQUEST = 3;
 
     private boolean mHasPassword;
 
@@ -182,7 +183,9 @@ public class FingerprintEnrollIntroduction extends FingerprintEnrollBase
             Context ctx = widget.getContext();
             Intent intent = HelpUtils.getHelpIntent(ctx, getURL(), ctx.getClass().getName());
             try {
-                ((Activity) ctx).startActivity(intent);
+                // This needs to be startActivityForResult even though we do not care about the
+                // actual result because the help app needs to know about who invoked it.
+                widget.startActivityForResult(intent, LEARN_MORE_REQUEST);
             } catch (ActivityNotFoundException e) {
                 Log.w(LearnMoreSpan.TAG,
                         "Actvity was not found for intent, " + intent.toString());
