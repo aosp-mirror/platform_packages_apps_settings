@@ -81,7 +81,9 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
     private UserManager mUm;
 
     private EnforcedAdmin mFunDisallowedAdmin;
+    private boolean mFunDisallowedBySystem;
     private EnforcedAdmin mDebuggingFeaturesDisallowedAdmin;
+    private boolean mDebuggingFeaturesDisallowedBySystem;
 
     @Override
     protected int getMetricsCategory() {
@@ -192,7 +194,11 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
         mDevHitToast = null;
         mFunDisallowedAdmin = RestrictedLockUtils.checkIfRestrictionEnforced(
                 getActivity(), UserManager.DISALLOW_FUN, UserHandle.myUserId());
+        mFunDisallowedBySystem = RestrictedLockUtils.hasBaseUserRestriction(
+                getActivity(), UserManager.DISALLOW_FUN, UserHandle.myUserId());
         mDebuggingFeaturesDisallowedAdmin = RestrictedLockUtils.checkIfRestrictionEnforced(
+                getActivity(), UserManager.DISALLOW_DEBUGGING_FEATURES, UserHandle.myUserId());
+        mDebuggingFeaturesDisallowedBySystem = RestrictedLockUtils.hasBaseUserRestriction(
                 getActivity(), UserManager.DISALLOW_DEBUGGING_FEATURES, UserHandle.myUserId());
     }
 
@@ -202,9 +208,11 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
             System.arraycopy(mHits, 1, mHits, 0, mHits.length-1);
             mHits[mHits.length-1] = SystemClock.uptimeMillis();
             if (mHits[0] >= (SystemClock.uptimeMillis()-500)) {
-                if (mFunDisallowedAdmin != null) {
-                    RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getActivity(),
-                            mFunDisallowedAdmin);
+                if (mUm.hasUserRestriction(UserManager.DISALLOW_FUN)) {
+                    if (mFunDisallowedAdmin != null && !mFunDisallowedBySystem) {
+                        RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getActivity(),
+                                mFunDisallowedAdmin);
+                    }
                     Log.d(LOG_TAG, "Sorry, no fun for you!");
                     return false;
                 }
@@ -228,9 +236,12 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
                 return true;
             }
 
-            if (mDebuggingFeaturesDisallowedAdmin != null) {
-                RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getActivity(),
-                        mDebuggingFeaturesDisallowedAdmin);
+            if (mUm.hasUserRestriction(UserManager.DISALLOW_DEBUGGING_FEATURES)) {
+                if (mDebuggingFeaturesDisallowedAdmin != null &&
+                        !mDebuggingFeaturesDisallowedBySystem) {
+                    RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getActivity(),
+                            mDebuggingFeaturesDisallowedAdmin);
+                }
                 return true;
             }
 

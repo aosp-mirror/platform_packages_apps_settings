@@ -276,19 +276,30 @@ public class SecuritySettings extends SettingsPreferenceFragment
         final UserManager um = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
         mKeyStore = KeyStore.getInstance(); // needs to be initialized for onResume()
 
-        RestrictedPreference credentialStorageType = (RestrictedPreference) root.findPreference(
-                KEY_CREDENTIAL_STORAGE_TYPE);
-        credentialStorageType.checkRestrictionAndSetDisabled(
-                UserManager.DISALLOW_CONFIG_CREDENTIALS);
-        RestrictedPreference installCredentials = (RestrictedPreference) root.findPreference(
-                KEY_CREDENTIALS_INSTALL);
-        installCredentials.checkRestrictionAndSetDisabled(UserManager.DISALLOW_CONFIG_CREDENTIALS);
-        mResetCredentials.checkRestrictionAndSetDisabled(UserManager.DISALLOW_CONFIG_CREDENTIALS);
+        if (!RestrictedLockUtils.hasBaseUserRestriction(getActivity(),
+                UserManager.DISALLOW_CONFIG_CREDENTIALS, MY_USER_ID)) {
+            RestrictedPreference credentialStorageType = (RestrictedPreference) root.findPreference(
+                    KEY_CREDENTIAL_STORAGE_TYPE);
+            credentialStorageType.checkRestrictionAndSetDisabled(
+                    UserManager.DISALLOW_CONFIG_CREDENTIALS);
+            RestrictedPreference installCredentials = (RestrictedPreference) root.findPreference(
+                    KEY_CREDENTIALS_INSTALL);
+            installCredentials.checkRestrictionAndSetDisabled(
+                    UserManager.DISALLOW_CONFIG_CREDENTIALS);
+            mResetCredentials.checkRestrictionAndSetDisabled(
+                    UserManager.DISALLOW_CONFIG_CREDENTIALS);
 
-        final int storageSummaryRes =
-                mKeyStore.isHardwareBacked() ? R.string.credential_storage_type_hardware
-                        : R.string.credential_storage_type_software;
-        credentialStorageType.setSummary(storageSummaryRes);
+            final int storageSummaryRes =
+                    mKeyStore.isHardwareBacked() ? R.string.credential_storage_type_hardware
+                            : R.string.credential_storage_type_software;
+            credentialStorageType.setSummary(storageSummaryRes);
+        } else {
+            PreferenceGroup credentialsManager = (PreferenceGroup)
+                    root.findPreference(KEY_CREDENTIALS_MANAGER);
+            credentialsManager.removePreference(root.findPreference(KEY_RESET_CREDENTIALS));
+            credentialsManager.removePreference(root.findPreference(KEY_CREDENTIALS_INSTALL));
+            credentialsManager.removePreference(root.findPreference(KEY_CREDENTIAL_STORAGE_TYPE));
+        }
 
 
         // Application install
@@ -300,6 +311,12 @@ public class SecuritySettings extends SettingsPreferenceFragment
         // Side loading of apps.
         // Disable for restricted profiles. For others, check if policy disallows it.
         mToggleAppInstallation.setEnabled(!um.getUserInfo(MY_USER_ID).isRestricted());
+        if (RestrictedLockUtils.hasBaseUserRestriction(getActivity(),
+                UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES, MY_USER_ID)
+                || RestrictedLockUtils.hasBaseUserRestriction(getActivity(),
+                        UserManager.DISALLOW_INSTALL_APPS, MY_USER_ID)) {
+            mToggleAppInstallation.setEnabled(false);
+        }
         if (mToggleAppInstallation.isEnabled()) {
             mToggleAppInstallation.checkRestrictionAndSetDisabled(
                     UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES);

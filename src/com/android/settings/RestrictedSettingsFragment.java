@@ -251,7 +251,7 @@ public abstract class RestrictedSettingsFragment extends SettingsPreferenceFragm
     @Override
     protected void onDataSetChanged() {
         highlightPreferenceIfNeeded();
-        if (mAdminSupportDetails != null && isUiRestricted()) {
+        if (mAdminSupportDetails != null && isUiRestrictedByOnlyAdmin()) {
             updateAdminSupportDetailsView();
             setEmptyView(mAdminSupportDetails);
         } else if (mEmptyTextView != null) {
@@ -265,5 +265,10 @@ public abstract class RestrictedSettingsFragment extends SettingsPreferenceFragm
      */
     protected boolean isUiRestricted() {
         return isRestrictedAndNotProviderProtected() || !hasChallengeSucceeded();
+    }
+
+    protected boolean isUiRestrictedByOnlyAdmin() {
+        return isUiRestricted() && !mUserManager.hasBaseUserRestriction(mRestrictionKey,
+                UserHandle.of(UserHandle.myUserId()));
     }
 }
