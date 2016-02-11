@@ -25,8 +25,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_weight="1.0"
-        android:paddingStart="16dip"
-        android:paddingEnd="16dip"
         android:scrollbarStyle="outsideOverlay"
         android:gravity="top">
         <LinearLayout
@@ -37,6 +35,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingStart="16dip"
+                android:paddingEnd="16dip"
                 android:orientation="horizontal"
                 android:layout_marginTop="16dip">
 
@@ -63,6 +63,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingStart="16dip"
+                android:paddingEnd="16dip"
                 android:orientation="vertical">
 
                 <TextView android:id="@+id/profile_owner_warning"
@@ -120,58 +122,42 @@
                     android:padding="10dip" />
             </LinearLayout>
 
+            <LinearLayout android:id="@+id/buttonPanel"
+                style="?android:attr/buttonBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:divider="?android:attr/dividerHorizontal"
+                android:showDividers="beginning|middle|end">
+                <Button android:id="@+id/action_button"
+                    android:layout_width="match_parent"
+                    android:layout_gravity="start"
+                    android:gravity="left|center_vertical"
+                    android:maxLines="2"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:textAllCaps="false"
+                    android:layout_height="wrap_content" />
+                <Button android:id="@+id/cancel_button"
+                    android:layout_width="match_parent"
+                    android:layout_gravity="end"
+                    android:gravity="left|center_vertical"
+                    android:maxLines="2"
+                    android:text="@string/cancel"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:textAllCaps="false"
+                    android:layout_height="wrap_content" />
+                <Button android:id="@+id/uninstall_button"
+                    android:layout_width="match_parent"
+                    android:layout_gravity="end"
+                    android:gravity="left|center_vertical"
+                    android:maxLines="2"
+                    android:text="@string/uninstall_device_admin"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:textAllCaps="false"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" />
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
-
-    <LinearLayout android:id="@+id/buttonPanel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:divider="?android:attr/dividerHorizontal"
-        android:showDividers="beginning">
-        <LinearLayout
-            style="?android:attr/buttonBarStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:measureWithLargestChild="true">
-            <LinearLayout android:id="@+id/leftSpacer"
-                android:layout_weight="0.25"
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:visibility="gone" />
-            <Button android:id="@+id/cancel_button"
-                android:layout_width="0dip"
-                android:layout_gravity="end"
-                android:layout_weight="1"
-                android:maxLines="2"
-                android:text="@string/cancel"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_height="wrap_content" />
-            <Button android:id="@+id/uninstall_button"
-                android:layout_width="0dip"
-                android:layout_gravity="end"
-                android:layout_weight="1"
-                android:maxLines="2"
-                android:text="@string/uninstall_device_admin"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_height="wrap_content"
-                android:visibility="gone" />
-            <Button android:id="@+id/action_button"
-                android:layout_width="0dip"
-                android:layout_gravity="start"
-                android:layout_weight="1"
-                android:maxLines="2"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_height="wrap_content" />
-            <LinearLayout android:id="@+id/rightSpacer"
-                android:layout_width="0dip"
-                android:layout_weight="0.25"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:visibility="gone" />
-        </LinearLayout>
-     </LinearLayout>
-
 </LinearLayout>
