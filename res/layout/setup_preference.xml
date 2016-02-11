@@ -15,11 +15,11 @@
     limitations under the License.
 -->
 
-<com.android.setupwizardlib.SetupWizardPreferenceLayout
+<com.android.setupwizardlib.SetupWizardLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:id="@android:id/list_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout="@layout/suw_no_scroll_template"
     settings:suwBackgroundTile="@drawable/setup_illustration_tile"
     settings:suwIllustrationHorizontalTile="@drawable/setup_illustration_horizontal_tile" />
