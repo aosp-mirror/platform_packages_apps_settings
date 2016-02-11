@@ -50,7 +50,6 @@ import java.util.Set;
 
 import static android.provider.Settings.Secure.TTS_DEFAULT_RATE;
 import static android.provider.Settings.Secure.TTS_DEFAULT_SYNTH;
-import static android.provider.Settings.Secure.TTS_DEFAULT_HIGHER_SPEECH_RATE_ENABLED;
 
 public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener,
@@ -64,10 +63,6 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
 
     /** Preference key for the TTS rate selection dialog. */
     private static final String KEY_DEFAULT_RATE = "tts_default_rate";
-
-    /** Preference key for the TTS advanced speech rate switch. */
-    private static final String KEY_HIGHER_RATE_SWITCH =
-        "tts_default_higher_speech_rate_enabled";
 
     /** Preference key for the TTS status field. */
     private static final String KEY_STATUS = "tts_status";
@@ -87,8 +82,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
     /**
      * Maximum speech rate values.
      */
-    private static final int MAX_SPEECH_RATE = 400;
-    private static final int MAX_HIGHER_SPEECH_RATE = 600;
+    private static final int MAX_SPEECH_RATE = 600;
 
     private PreferenceCategory mEnginePreferenceCategory;
     private SeekBarPreference mDefaultRatePref;
@@ -180,7 +174,6 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         mEnginePreferenceCategory = (PreferenceCategory) findPreference(
                 KEY_ENGINE_PREFERENCE_SECTION);
         mDefaultRatePref = (SeekBarPreference) findPreference(KEY_DEFAULT_RATE);
-        mHigherRateSwitchPref = (SwitchPreference) findPreference(KEY_HIGHER_RATE_SWITCH);
 
         mEngineStatus = findPreference(KEY_STATUS);
         updateEngineStatus(R.string.tts_status_checking);
@@ -242,24 +235,13 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         // Set up the default rate.
         try {
             mDefaultRate = android.provider.Settings.Secure.getInt(resolver, TTS_DEFAULT_RATE);
-            mHigherRateSwitch = android.provider.Settings.Secure.getInt(resolver,
-                    TTS_DEFAULT_HIGHER_SPEECH_RATE_ENABLED) == 1;
         } catch (SettingNotFoundException e) {
             // Default rate setting not found, initialize it
             mDefaultRate = TextToSpeech.Engine.DEFAULT_RATE;
-            mHigherRateSwitch = false;
         }
         mDefaultRatePref.setProgress(mDefaultRate);
         mDefaultRatePref.setOnPreferenceChangeListener(this);
-
-        mHigherRateSwitchPref.setChecked(mHigherRateSwitch);
-        mHigherRateSwitchPref.setOnPreferenceChangeListener(this);
-
-        if (mHigherRateSwitch) {
-            mDefaultRatePref.setMax(MAX_HIGHER_SPEECH_RATE);
-        } else {
-            mDefaultRatePref.setMax(MAX_SPEECH_RATE);
-        }
+        mDefaultRatePref.setMax(MAX_SPEECH_RATE);
 
         mCurrentEngine = mTts.getCurrentEngine();
 
@@ -488,20 +470,6 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
                 if (DBG) Log.d(TAG, "TTS default rate changed, now " + mDefaultRate);
             } catch (NumberFormatException e) {
                 Log.e(TAG, "could not persist default TTS rate setting", e);
-            }
-        } else if (KEY_HIGHER_RATE_SWITCH.equals(preference.getKey())) {
-            // Adjust range of speech rate depending on switch setting.
-            mHigherRateSwitch = ((Boolean) objValue).booleanValue();
-            try {
-              android.provider.Settings.Secure.putInt(getContentResolver(),
-                  TTS_DEFAULT_HIGHER_SPEECH_RATE_ENABLED, mHigherRateSwitch ? 1 : 0);
-              if (mHigherRateSwitch) {
-                mDefaultRatePref.setMax(MAX_HIGHER_SPEECH_RATE);
-              } else {
-                mDefaultRatePref.setMax(MAX_SPEECH_RATE);
-              }
-            } catch (NumberFormatException e) {
-              Log.e(TAG, "could not persist default higher speech rate setting", e);
             }
         }
         return true;
