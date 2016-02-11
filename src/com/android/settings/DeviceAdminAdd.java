@@ -75,8 +75,6 @@ public class DeviceAdminAdd extends Activity {
     private static final int MAX_ADD_MSG_LINES_LANDSCAPE = 2;
     private static final int MAX_ADD_MSG_LINES = 15;
 
-    private static final int REQUEST_CODE_UNINSTALL = 1;
-
     /**
      * Optional key to map to the package name of the Device Admin.
      * Currently only used when uninstalling an active device admin.
@@ -325,7 +323,8 @@ public class DeviceAdminAdd extends Activity {
             public void onClick(View v) {
                 EventLog.writeEvent(EventLogTags.EXP_DET_DEVICE_ADMIN_UNINSTALLED_BY_USER,
                         mDeviceAdmin.getActivityInfo().applicationInfo.uid);
-                uninstall();
+                mDPM.uninstallPackageWithActiveAdmins(mDeviceAdmin.getPackageName());
+                finish();
             }
         });
 
@@ -486,18 +485,6 @@ public class DeviceAdminAdd extends Activity {
         }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode) {
-            case REQUEST_CODE_UNINSTALL:
-                if (resultCode == RESULT_OK) {
-                    finish();
-                }
-                return;
-        }
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-
     void updateInterface() {
         mAdminIcon.setImageDrawable(mDeviceAdmin.loadIcon(getPackageManager()));
         mAdminName.setText(mDeviceAdmin.loadLabel(getPackageManager()));
@@ -625,13 +612,5 @@ public class DeviceAdminAdd extends Activity {
     private boolean isAdminUninstallable() {
         // System apps can't be uninstalled.
         return !mDeviceAdmin.getActivityInfo().applicationInfo.isSystemApp();
-    }
-
-    private void uninstall() {
-        final Uri packageURI = Uri.parse("package:" + mDeviceAdmin.getPackageName());
-        final Intent uninstallIntent = new Intent(Intent.ACTION_UNINSTALL_PACKAGE, packageURI);
-        uninstallIntent.putExtra(Intent.EXTRA_UNINSTALL_ALL_USERS, false);
-        uninstallIntent.putExtra(Intent.EXTRA_RETURN_RESULT, true);
-        startActivityForResult(uninstallIntent, REQUEST_CODE_UNINSTALL);
     }
 }
