@@ -168,13 +168,28 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
     @Override
     protected void onStop() {
         super.onStop();
-        mSidecar.setListener(null);
+        if (mSidecar != null) {
+            mSidecar.setListener(null);
+        }
         stopIconAnimation();
         if (!isChangingConfigurations()) {
-            mSidecar.cancelEnrollment();
-            getFragmentManager().beginTransaction().remove(mSidecar).commit();
+            if (mSidecar != null) {
+                mSidecar.cancelEnrollment();
+                getFragmentManager().beginTransaction().remove(mSidecar).commit();
+            }
             finish();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mSidecar != null) {
+            mSidecar.setListener(null);
+            mSidecar.cancelEnrollment();
+            getFragmentManager().beginTransaction().remove(mSidecar).commit();
+            mSidecar = null;
+        }
+        super.onBackPressed();
     }
 
     private void animateProgress(int progress) {
