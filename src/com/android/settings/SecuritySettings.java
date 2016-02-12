@@ -117,7 +117,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
     // These switch preferences need special handling since they're not all stored in Settings.
     private static final String SWITCH_PREFERENCE_KEYS[] = {
-            KEY_SHOW_PASSWORD, KEY_TOGGLE_INSTALL_APPLICATIONS };
+            KEY_SHOW_PASSWORD, KEY_TOGGLE_INSTALL_APPLICATIONS, KEY_UNIFICATION };
 
     // Only allow one trust agent on the platform.
     private static final boolean ONLY_ONE_TRUST_AGENT = true;
@@ -132,6 +132,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private LockPatternUtils mLockPatternUtils;
 
     private SwitchPreference mVisiblePatternProfile;
+    private SwitchPreference mUnifyProfile;
 
     private SwitchPreference mShowPassword;
 
@@ -235,13 +236,13 @@ public class SecuritySettings extends SettingsPreferenceFragment
                     getActivity(), mLockPatternUtils, mProfileChallengeUserId);
             addPreferencesFromResource(profileResid);
             maybeAddFingerprintPreference(root, mProfileChallengeUserId);
-            if (mLockPatternUtils.isSeparateProfileChallengeEnabled(mProfileChallengeUserId)) {
-                maybeAddUnificationPreference();
-            } else {
+            addPreferencesFromResource(R.xml.security_settings_unification);
+            if (!mLockPatternUtils.isSeparateProfileChallengeEnabled(mProfileChallengeUserId)) {
                 Preference lockPreference = root.findPreference(KEY_UNLOCK_SET_OR_CHANGE_PROFILE);
                 String summary = getContext().getString(
                         R.string.lock_settings_profile_unified_summary);
                 lockPreference.setSummary(summary);
+                lockPreference.setEnabled(false);
             }
         }
 
@@ -273,6 +274,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
         mVisiblePatternProfile =
                 (SwitchPreference) root.findPreference(KEY_VISIBLE_PATTERN_PROFILE);
+        mUnifyProfile = (SwitchPreference) root.findPreference(KEY_UNIFICATION);
 
         // Append the rest of the settings
         addPreferencesFromResource(R.xml.security_settings_misc);
@@ -383,15 +385,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
                         securityCategory.getContext(), userId);
         if (fingerprintPreference != null) {
             securityCategory.addPreference(fingerprintPreference);
-        }
-    }
-
-    private void maybeAddUnificationPreference() {
-        if (mLockPatternUtils.getKeyguardStoredPasswordQuality(mProfileChallengeUserId)
-                >= DevicePolicyManager.PASSWORD_QUALITY_SOMETHING
-                && mLockPatternUtils.isSeparateProfileChallengeAllowedToUnify(
-                        mProfileChallengeUserId)) {
-            addPreferencesFromResource(R.xml.security_settings_unification);
         }
     }
 
@@ -560,11 +553,12 @@ public class SecuritySettings extends SettingsPreferenceFragment
         // depend on others...
         createPreferenceHierarchy();
 
-        final LockPatternUtils lockPatternUtils = mChooseLockSettingsHelper.utils();
         if (mVisiblePatternProfile != null) {
-            mVisiblePatternProfile.setChecked(lockPatternUtils.isVisiblePatternEnabled(
+            mVisiblePatternProfile.setChecked(mLockPatternUtils.isVisiblePatternEnabled(
                     mProfileChallengeUserId));
         }
+
+        updateUnificationPreference();
 
         if (mShowPassword != null) {
             mShowPassword.setChecked(Settings.System.getInt(getContentResolver(),
@@ -573,6 +567,13 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
         if (mResetCredentials != null && !mResetCredentials.isDisabledByAdmin()) {
             mResetCredentials.setEnabled(!mKeyStore.isEmpty());
+        }
+    }
+
+    private void updateUnificationPreference() {
+        if (mUnifyProfile != null) {
+            mUnifyProfile.setChecked(!mLockPatternUtils.isSeparateProfileChallengeEnabled(
+                    mProfileChallengeUserId));
         }
     }
 
@@ -599,11 +600,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 startActivity(mTrustAgentClickIntent);
                 mTrustAgentClickIntent = null;
             }
-        } else if (KEY_UNIFICATION.equals(key)) {
-            UnificationConfirmationDialog dialog =
-                    UnificationConfirmationDialog.newIntance(mProfileChallengeUserId);
-            dialog.show(getChildFragmentManager(), TAG_UNIFICATION_DIALOG);
-            return true;
         } else {
             // If we didn't handle it, let preferences handle it.
             return super.onPreferenceTreeClick(preference);
@@ -680,6 +676,13 @@ public class SecuritySettings extends SettingsPreferenceFragment
         mCurrentProfilePassword = null;
     }
 
+    private void unifyUncompliantLocks() {
+        mLockPatternUtils.clearLock(mProfileChallengeUserId);
+        mLockPatternUtils.setSeparateProfileChallengeEnabled(mProfileChallengeUserId, false);
+        startFragment(this, "com.android.settings.ChooseLockGeneric$ChooseLockGenericFragment",
+                R.string.lock_settings_picker_title, SET_OR_CHANGE_LOCK_METHOD_REQUEST, null);
+    }
+
     @Override
     public boolean onPreferenceChange(Preference preference, Object value) {
         boolean result = true;
@@ -687,6 +690,20 @@ public class SecuritySettings extends SettingsPreferenceFragment
         final LockPatternUtils lockPatternUtils = mChooseLockSettingsHelper.utils();
         if (KEY_VISIBLE_PATTERN_PROFILE.equals(key)) {
             lockPatternUtils.setVisiblePatternEnabled((Boolean) value, mProfileChallengeUserId);
+        } else if (KEY_UNIFICATION.equals(key)) {
+            if ((Boolean) value) {
+                final boolean compliantForDevice =
+                        (mLockPatternUtils.getKeyguardStoredPasswordQuality(mProfileChallengeUserId)
+                                >= DevicePolicyManager.PASSWORD_QUALITY_SOMETHING
+                        && mLockPatternUtils.isSeparateProfileChallengeAllowedToUnify(
+                                mProfileChallengeUserId));
+                UnificationConfirmationDialog dialog =
+                        UnificationConfirmationDialog.newIntance(compliantForDevice);
+                dialog.show(getChildFragmentManager(), TAG_UNIFICATION_DIALOG);
+            } else {
+                mLockPatternUtils.setSeparateProfileChallengeEnabled(mProfileChallengeUserId, true);
+                createPreferenceHierarchy();
+            }
         } else if (KEY_SHOW_PASSWORD.equals(key)) {
             Settings.System.putInt(getContentResolver(), Settings.System.TEXT_SHOW_PASSWORD,
                     ((Boolean) value) ? 1 : 0);
@@ -946,13 +963,12 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
             createPreferenceHierarchy();
 
-            final LockPatternUtils lockPatternUtils = mLockPatternUtils;
             if (mVisiblePattern != null) {
-                mVisiblePattern.setChecked(lockPatternUtils.isVisiblePatternEnabled(
+                mVisiblePattern.setChecked(mLockPatternUtils.isVisiblePatternEnabled(
                         MY_USER_ID));
             }
             if (mPowerButtonInstantlyLocks != null) {
-                mPowerButtonInstantlyLocks.setChecked(lockPatternUtils.getPowerButtonInstantlyLocks(
+                mPowerButtonInstantlyLocks.setChecked(mLockPatternUtils.getPowerButtonInstantlyLocks(
                         MY_USER_ID));
             }
 
@@ -1205,9 +1221,13 @@ public class SecuritySettings extends SettingsPreferenceFragment
     }
 
     public static class UnificationConfirmationDialog extends DialogFragment {
+        private static final String EXTRA_COMPLIANT = "compliant";
 
-        public static UnificationConfirmationDialog newIntance(int userId) {
+        public static UnificationConfirmationDialog newIntance(boolean compliant) {
             UnificationConfirmationDialog dialog = new UnificationConfirmationDialog();
+            Bundle args = new Bundle();
+            args.putBoolean(EXTRA_COMPLIANT, compliant);
+            dialog.setArguments(args);
             return dialog;
         }
 
@@ -1222,14 +1242,21 @@ public class SecuritySettings extends SettingsPreferenceFragment
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             final SecuritySettings parentFragment = ((SecuritySettings) getParentFragment());
+            final boolean compliant = getArguments().getBoolean(EXTRA_COMPLIANT);
             return new AlertDialog.Builder(getActivity())
                     .setTitle(R.string.lock_settings_profile_unification_dialog_title)
-                    .setMessage(R.string.lock_settings_profile_unification_dialog_body)
-                    .setPositiveButton(R.string.okay,
+                    .setMessage(compliant ? R.string.lock_settings_profile_unification_dialog_body
+                            : R.string.lock_settings_profile_unification_dialog_uncompliant_body)
+                    .setPositiveButton(compliant ? R.string.okay
+                            : R.string.lock_settings_profile_unification_dialog_uncompliant_confirm,
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int whichButton) {
-                                    parentFragment.launchConfirmDeviceLockForUnification();
+                                    if (compliant) {
+                                        parentFragment.launchConfirmDeviceLockForUnification();
+                                    }    else {
+                                        parentFragment.unifyUncompliantLocks();
+                                    }
                                 }
                             }
                     )
@@ -1237,6 +1264,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int whichButton) {
+                                    parentFragment.updateUnificationPreference();
                                     dismiss();
                                 }
                             }

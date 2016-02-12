@@ -3155,15 +3155,19 @@
     <!-- Security & location settings screen, title when changing or confirming the work profile lock -->
     <string name="lock_settings_profile_screen_lock_title">Work profile screen lock</string>
     <!-- Security & location settings screen, setting option name to unify work and personal locks -->
-    <string name="lock_settings_profile_unification_title">Use same screen lock</string>
+    <string name="lock_settings_profile_unification_title">Use the same lock</string>
     <!-- Security & location settings screen, setting option explanation to unify work and personal locks -->
-    <string name="lock_settings_profile_unification_summary">Change primary profile to match work profile</string>
+    <string name="lock_settings_profile_unification_summary">Change device screen lock to match work profile?</string>
     <!-- Security & location settings screen, title of the dialog asking if the user wants to unify work and personal locks -->
     <string name="lock_settings_profile_unification_dialog_title">Use the same screen lock?</string>
     <!-- Security & location settings screen, explanation in the dialog asking if the user wants to unify work and personal locks -->
     <string name="lock_settings_profile_unification_dialog_body">You can use this lock for your device but it will include all screen lock related policies set by your IT admin on the work profile.\nDo you want to use the same screen lock for your device?</string>
+    <!-- Security & location settings screen, explanation in the dialog asking if the user wants to create a new lock for personal and work as the current work lock is not enough for the device. -->
+    <string name="lock_settings_profile_unification_dialog_uncompliant_body">Your work screen lock doesn\'t meet your organization\'s security requirements.\nYou can set a new screen lock for both your device and your work profile, but any work screen lock policies will apply to your device screen lock as well.</string>
+    <!-- Security & location settings screen, confirmation button of the dialog asking if the user wants to create a new lock for both personal and work profiles. -->
+    <string name="lock_settings_profile_unification_dialog_uncompliant_confirm">Change lock</string>
     <!-- Security & location settings screen, summary of the item that changes your work profile lock when it is unified with the personal lock -->
-    <string name="lock_settings_profile_unified_summary">Same as your device lock</string>
+    <string name="lock_settings_profile_unified_summary">Same as device screen lock</string>
 
     <!-- Applications Settings --> <skip />
     <!-- Applications settings screen, setting option name for the user to go to the screen to manage installed applications  -->
