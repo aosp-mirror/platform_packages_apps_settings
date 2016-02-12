@@ -37,13 +37,27 @@ public class BandMode extends Activity {
     private static final int EVENT_BAND_SCAN_COMPLETED = 100;
     private static final int EVENT_BAND_SELECTION_DONE = 200;
 
+    //Directly maps to RIL_RadioBandMode from ril.h
     private static final String[] BAND_NAMES = new String[] {
             "Automatic",
-            "EURO Band",
-            "USA Band",
-            "JAPAN Band",
-            "AUS Band",
-            "AUS2 Band"
+            "Europe",
+            "United States",
+            "Japan",
+            "Australia",
+            "Australia 2",
+            "Cellular 800",
+            "PCS",
+            "Class 3 (JTACS)",
+            "Class 4 (Korea-PCS)",
+            "Class 5",
+            "Class 6 (IMT2000)",
+            "Class 7 (700Mhz-Upper)",
+            "Class 8 (1800Mhz-Upper)",
+            "Class 9 (900Mhz)",
+            "Class 10 (800Mhz-Secondary)",
+            "Class 11 (Europe PAMR 400Mhz)",
+            "Class 15 (US-AWS)",
+            "Class 16 (US-2500Mhz)"
     };
 
     private ListView mBandList;
@@ -140,10 +154,16 @@ public class BandMode extends Activity {
 
         if (result.result != null) {
             int bands[] = (int[])result.result;
+
+            if(bands.length == 0) {
+                Log.wtf(LOG_TAG, "No Supported Band Modes");
+                return;
+            }
+
             int size = bands[0];
 
             if (size > 0) {
-                for (int i=1; i<size; i++) {
+                for (int i=1; i<=size; i++) {
                     item = new BandListItem(bands[i]);
                     mBandListAdapter.add(item);
                     if (DBG) log("Add " + item.toString());
@@ -154,7 +174,7 @@ public class BandMode extends Activity {
 
         if (addBandSuccess == false) {
             if (DBG) log("Error in query, add default list");
-            for (int i=0; i<Phone.BM_BOUNDARY; i++) {
+            for (int i=0; i<Phone.BM_NUM_BAND_MODES; i++) {
                 item = new BandListItem(i);
                 mBandListAdapter.add(item);
                 if (DBG) log("Add default " + item.toString());
