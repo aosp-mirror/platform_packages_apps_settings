@@ -89,17 +89,11 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
 
     private PreferenceCategory mEnginePreferenceCategory;
     private SeekBarPreference mDefaultRatePref;
-    private SwitchPreference mHigherRateSwitchPref;
     private Preference mResetSpeechRate;
     private Preference mPlayExample;
     private Preference mEngineStatus;
 
     private int mDefaultRate = TextToSpeech.Engine.DEFAULT_RATE;
-
-    /**
-     * Whether higher speech rate is enabled.
-     */
-    private boolean mHigherRateSwitch = false;
 
     /**
      * The currently selected engine.
