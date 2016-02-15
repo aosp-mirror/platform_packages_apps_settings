@@ -74,8 +74,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"卸载SD卡"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"格式化USB存储设备"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"格式化SD卡"</string>
-    <!-- no translation found for font_size_summary (1690992332887488183) -->
-    <skip />
+    <string name="font_size_summary" msgid="1690992332887488183">"缩小或放大屏幕上的文字。"</string>
     <string name="small_font" msgid="2295331917424072635">"小"</string>
     <string name="medium_font" msgid="2068475425515133701">"中"</string>
     <string name="large_font" msgid="599055175160971446">"大"</string>
@@ -332,10 +331,17 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"使用指纹解锁"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="4747510337049957778">"只需触摸指纹传感器即可解锁您的手机，对购买交易进行授权或登录应用。\n\n添加的任何指纹都能够用来执行上述操作，因此请务必谨慎添加指纹。"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="7173290350577831813">"请注意：指纹识别的安全性不及安全系数高的图案或 PIN 码。"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_risk_link_text" msgid="9129531466157620977">"了解详情"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="1650783655974801525">"请注意：指纹识别的安全性可能不及安全系数高的图案或 PIN 码。"<annotation id="url">"了解详情"</annotation></string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"取消"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"继续"</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="7234486440384881699">"系统将不会启用设备保护功能。如果您的平板电脑丢失、被盗，或者其中的数据遭到清空，您将无法防止他人使用此平板电脑。"</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="3519190003101280912">"系统将不会启用设备保护功能。如果您的设备丢失、被盗，或者其中的数据遭到清空，您将无法防止他人使用此设备。"</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="417315011140961">"系统将不会启用设备保护功能。如果您的手机丢失、被盗，或者其中的数据遭到清空，您将无法防止他人使用此手机。"</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="tablet" msgid="8783499872534165700">"系统将不会启用设备保护功能。如果您的平板电脑丢失或被盗，您将无法防止他人使用此平板电脑。"</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="device" msgid="3120512940873907578">"系统将不会启用设备保护功能。如果您的设备丢失或被盗，您将无法防止他人使用此设备。"</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="3589945558504439395">"系统将不会启用设备保护功能。如果您的手机丢失或被盗，您将无法防止他人使用此手机。"</string>
+    <string name="skip_anyway_button_label" msgid="2323522873558834513">"仍然跳过"</string>
+    <string name="go_back_button_label" msgid="4745265266186209467">"返回"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="5877265753699187149">"寻找传感器"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="1959655161889313661">"您可以在手机背面找到指纹传感器。"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="2058830032070449160">"关于设备和指纹传感器位置的图示说明"</string>
@@ -406,7 +412,11 @@
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"保护您的设备"</string>
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"使用指纹解锁"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"选择屏幕锁定方式"</string>
-    <string name="setup_lock_settings_picker_title" msgid="1584792702475081908">"选择屏幕锁定方式"</string>
+    <string name="setup_lock_settings_picker_title" msgid="1572244299605153324">"为手机启用保护功能"</string>
+    <string name="setup_lock_settings_picker_fingerprint_message" msgid="2431588439043969764">"指纹识别的安全性可能不及安全系数高的图案、PIN 码或密码。请设置备用屏幕锁定方式以确保安全。"</string>
+    <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"启用设备保护功能可防止他人在未经您允许的情况下使用此平板电脑。请选择您要使用的屏幕锁定方式。"</string>
+    <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"启用设备保护功能可防止他人在未经您允许的情况下使用此设备。请选择您要使用的屏幕锁定方式。"</string>
+    <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"启用设备保护功能可防止他人在未经您允许的情况下使用此手机。请选择您要使用的屏幕锁定方式。"</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"选择您的备用屏幕锁定方式"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"屏幕锁定方式"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"更改屏幕锁定方式"</string>
@@ -422,6 +432,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"中高等安全性"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"密码"</string>
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"高安全性"</string>
+    <string name="unlock_set_do_later_title" msgid="4894767558414979243">"以后再说"</string>
     <string name="current_screen_lock" msgid="4104091715420072219">"当前屏幕锁定设置"</string>
     <string name="fingerprint_unlock_set_unlock_pattern" msgid="4939057588092120368">"指纹 + 图案"</string>
     <string name="fingerprint_unlock_set_unlock_pin" msgid="8010746824051056986">"指纹 + PIN 码"</string>
@@ -704,13 +715,11 @@
     <string name="wifi_unchanged" msgid="3410422020930397102">"（未更改）"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"请选择"</string>
     <string name="wifi_multiple_cert_added" msgid="3240743501460165224">"（已添加多份证书）"</string>
-    <!-- no translation found for wifi_use_system_certs (5270879895056893783) -->
-    <skip />
+    <string name="wifi_use_system_certs" msgid="5270879895056893783">"使用系统证书"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="5160499244977160665">"不提供"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4266754430576348471">"不验证"</string>
     <string name="wifi_do_not_validate_eap_server_warning" msgid="1787190245542586660">"未指定任何证书。您的网络连接将不是私密连接。"</string>
-    <!-- no translation found for wifi_no_domain_warning (5223011964091727376) -->
-    <skip />
+    <string name="wifi_no_domain_warning" msgid="5223011964091727376">"必须指定网域。"</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"可使用 WPS"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" （可使用 WPS）"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"请输入您的网络密码"</string>
@@ -888,8 +897,7 @@
     <string name="doze_title" msgid="2259176504273878294">"主动显示"</string>
     <string name="doze_summary" msgid="7128970177894383698">"拿起设备或收到通知时唤醒屏幕"</string>
     <string name="title_font_size" msgid="4405544325522105222">"字体大小"</string>
-    <!-- no translation found for short_summary_font_size (6819778801232989076) -->
-    <skip />
+    <string name="short_summary_font_size" msgid="6819778801232989076">"放大或缩小文字"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"SIM卡锁定设置"</string>
     <string name="sim_lock_settings_category" msgid="5136244267576697004">"设置SIM卡锁定方式"</string>
     <string name="sim_lock_settings_title" msgid="9018585580955414596">"SIM卡锁定方式"</string>
@@ -1590,21 +1598,16 @@
     <string name="accessibility_settings" msgid="3975902491934816215">"无障碍"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"无障碍设置"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"视力设置"</string>
-    <!-- no translation found for vision_settings_description (5679491180156408260) -->
-    <skip />
+    <string name="vision_settings_description" msgid="5679491180156408260">"您可以根据自己的需求对此设备进行自定义。以后，您可以在“设置”中更改这些无障碍功能设置。"</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"服务"</string>
     <string name="talkback_title" msgid="7912059827205988080">"话语提示"</string>
-    <!-- no translation found for talkback_summary (8331244650729024963) -->
-    <skip />
+    <string name="talkback_summary" msgid="8331244650729024963">"屏幕阅读器主要适用于盲人和视力障碍人士"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"系统"</string>
     <string name="accessibility_display_title" msgid="7610175687949675162">"显示"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"字幕"</string>
-    <!-- no translation found for accessibility_screen_magnification_title (9002237235486714636) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_short_summary (3411979839172752057) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_summary (8274106658579514922) -->
-    <skip />
+    <string name="accessibility_screen_magnification_title" msgid="9002237235486714636">"放大手势"</string>
+    <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"点按三次即可缩放"</string>
+    <string name="accessibility_screen_magnification_summary" msgid="8274106658579514922">"使用单指在屏幕上点按三次即可进行缩放。\n\n放大后，您可以：\n"<ul>\n<li>"滚动：在屏幕上拖动双指或多指"</li>\n<li>"调整缩放级别：向内合拢或向外张开双指或多指"</li></ul>\n\n"要暂时性地放大，请点按三次并在最后一次点按时按住不放。按住手指时，拖动手指即可在屏幕上四处移动。松开手指即可缩小回之前的状态。\n\n请注意：放大手势功能适用于除键盘和导航栏以外的所有地方。"</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"无障碍快捷方式"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"开启"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"关闭"</string>
@@ -1938,17 +1941,16 @@
     <string name="fullbackup_data_summary" msgid="960850365007767734">"自动远程备份设备数据（例如 WLAN 密码和通话记录）和应用数据（例如应用存储的设置和文件）。\n\n启用自动备份功能后，系统会定期远程保存设备和应用数据。应用数据可以是应用根据开发者设置保存的任何数据，包括可能比较敏感的数据（例如通讯录、邮件和照片）。"</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"设备管理设置"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"设备管理器"</string>
-    <string name="remove_device_admin" msgid="3596845261596451437">"取消激活"</string>
-    <string name="uninstall_device_admin" msgid="2019687470475335309">"卸载"</string>
-    <!-- no translation found for remove_and_uninstall_device_admin (6983421266937728520) -->
-    <skip />
+    <string name="remove_device_admin" msgid="7736174723276745230">"取消激活此设备管理员"</string>
+    <string name="uninstall_device_admin" msgid="271120195128542165">"卸载应用"</string>
+    <string name="remove_and_uninstall_device_admin" msgid="6983421266937728520">"停用并卸载"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"设备管理器"</string>
     <string name="no_device_admins" msgid="702695100241728775">"没有可供显示的设备管理器"</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"个人"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"工作"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"没有信任的代理"</string>
     <string name="add_device_admin_msg" msgid="6246742476064507965">"要激活设备管理器吗？"</string>
-    <string name="add_device_admin" msgid="7133327675884827091">"激活"</string>
+    <string name="add_device_admin" msgid="1349673618141610506">"激活此设备管理员"</string>
     <string name="device_admin_add_title" msgid="7705551449705676363">"设备管理器"</string>
     <string name="device_admin_warning" msgid="2026747446313628233">"激活此管理器可允许应用“<xliff:g id="APP_NAME">%1$s</xliff:g>”执行以下操作："</string>
     <string name="device_admin_status" msgid="4252975713178851910">"此管理器已激活，允许应用“<xliff:g id="APP_NAME">%1$s</xliff:g>”执行以下操作："</string>
@@ -2269,7 +2271,7 @@
     <string name="user_enable_calling_and_sms_confirm_title" msgid="7243308401401932681">"要开启通话和短信功能吗？"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="4025082715546544967">"将与此用户共享通话记录和短信记录。"</string>
     <string name="emergency_info_title" msgid="208607506217060337">"紧急信息"</string>
-    <string name="emergency_info_subtitle" msgid="1301492666470489605">"显示在锁定屏幕的紧急呼救拨号器中"</string>
+    <string name="emergency_info_subtitle" msgid="5588995926340277372">"任何人都能通过紧急呼救拨号器访问，无需先将手机解锁"</string>
     <string name="application_restrictions" msgid="8207332020898004394">"允许应用和内容"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"受限应用"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"展开应用设置"</string>
@@ -2585,22 +2587,14 @@
     </plurals>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="7465525754879341907">"更改为仅限闹钟（到<xliff:g id="FORMATTEDTIME">%1$s</xliff:g>）"</string>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"更改为一律允许打扰"</string>
-    <!-- no translation found for zen_mode_screen_on (7712038508173845101) -->
-    <skip />
-    <!-- no translation found for zen_mode_screen_on_summary (6444425984146305149) -->
-    <skip />
-    <!-- no translation found for zen_mode_screen_off (5026854939192419879) -->
-    <skip />
-    <!-- no translation found for zen_mode_screen_off_summary (6490932947651798094) -->
-    <skip />
-    <!-- no translation found for zen_mode_all_visual_interruptions (2851308980832487411) -->
-    <skip />
-    <!-- no translation found for zen_mode_screen_on_visual_interruptions (7373348148129140528) -->
-    <skip />
-    <!-- no translation found for zen_mode_screen_off_visual_interruptions (4850792880144382633) -->
-    <skip />
-    <!-- no translation found for zen_mode_no_visual_interruptions (8742776003822778472) -->
-    <skip />
+    <string name="zen_mode_screen_on" msgid="7712038508173845101">"屏幕开启时屏蔽"</string>
+    <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"禁止在“请勿打扰”模式下被静音的通知在屏幕上短暂显示或弹出"</string>
+    <string name="zen_mode_screen_off" msgid="5026854939192419879">"屏幕关闭时屏蔽"</string>
+    <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"禁止在“请勿打扰”模式下被静音的通知开启屏幕或让通知指示灯亮起"</string>
+    <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"关闭"</string>
+    <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"屏幕开启时"</string>
+    <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"屏幕关闭时"</string>
+    <string name="zen_mode_no_visual_interruptions" msgid="8742776003822778472">"屏幕开启或关闭时"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"通知设置"</string>
     <string name="device_feedback" msgid="3238056036766293294">"发送有关此设备的反馈"</string>
     <string name="restr_pin_enter_admin_pin" msgid="2451187374960131018">"输入管理员PIN码"</string>
@@ -2835,13 +2829,10 @@
     <string name="camera_gesture_desc" msgid="1831390075255870960">"扭转手腕两次即可打开相机应用"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"按电源按钮两次即可打开相机"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"在不解锁屏幕的情况下快速打开相机"</string>
-    <!-- no translation found for screen_zoom_title (5233515303733473927) -->
-    <skip />
-    <!-- no translation found for screen_zoom_short_summary (7291960817349834688) -->
-    <skip />
+    <string name="screen_zoom_title" msgid="5233515303733473927">"显示大小"</string>
+    <string name="screen_zoom_short_summary" msgid="7291960817349834688">"放大或缩小屏幕上的内容"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"显示密度, 屏幕缩放, 比例, 调整比例"</string>
-    <!-- no translation found for screen_zoom_summary (6445488991799015407) -->
-    <skip />
+    <string name="screen_zoom_summary" msgid="6445488991799015407">"缩小或放大屏幕上的内容。屏幕上部分应用的位置可能会有变动。"</string>
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"预览"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"缩小"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"放大"</string>

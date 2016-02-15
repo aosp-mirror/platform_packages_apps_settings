@@ -331,10 +331,17 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"फ़िंगरप्रिंट से अनलॉक"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="4747510337049957778">"अपना फ़ोन अनलॉक करने, खरीदारी अधिकृत करने या ऐप्स में प्रवेश करने के लिए बस फ़िंगरप्रिंट सेंसर स्पर्श करें. \n\n सावधानी रखें कि आप किसके फ़िंगरप्रिंट जोड़ रहे हैं - और जोड़ा गया कोई भी फ़िंगरप्रिंट ये कार्य कर सकता है."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="7173290350577831813">"ध्यान दें: आपका फ़िंगरप्रिंट किसी सशक्त पैटर्न या पिन की तुलना में कम सुरक्षित हो सकता है."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_risk_link_text" msgid="9129531466157620977">"और जानें"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="1650783655974801525">"ध्यान दें: आपका फ़िंगरप्रिंट, किसी सशक्त पैटर्न या पिन की तुलना में कम सुरक्षित हो सकता है. "<annotation id="url">"अधिक जानें"</annotation></string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"अभी नहीं"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"जारी रखें"</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="7234486440384881699">"डिवाइस सुरक्षा सुविधाओं को सक्रिय नहीं किया जाएगा. यदि यह टैबलेट खो जाता है, चोरी चला जाता है या मिटा दिया जाता है तो आप इसे दूसरे लोगों द्वारा उपयोग किए जाने से नहीं रोक सकेंगे."</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="3519190003101280912">"डिवाइस सुरक्षा सुविधाओं को सक्रिय नहीं किया जाएगा. यदि यह डिवाइस खो जाता है, चोरी चला जाता है या मिटा दिया जाता है तो आप इसे दूसरे लोगों द्वारा उपयोग किए जाने से नहीं रोक सकेंगे."</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="417315011140961">"डिवाइस सुरक्षा सुविधाओं को सक्रिय नहीं किया जाएगा. यदि यह फ़ोन खो जाता है, चोरी चला जाता है या मिटा दिया जाता है तो आप इसे दूसरे लोगों द्वारा उपयोग किए जाने से नहीं रोक सकेंगे."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="tablet" msgid="8783499872534165700">"डिवाइस सुरक्षा सुविधाओं को सक्रिय नहीं किया जाएगा. यदि यह टैबलेट खो जाता है या चोरी चला जाता है, तो आप इसे दूसरे लोगों द्वारा उपयोग किए जाने से नहीं रोक सकेंगे."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="device" msgid="3120512940873907578">"डिवाइस सुरक्षा सुविधाओं को सक्रिय नहीं किया जाएगा. यदि यह डिवाइस खो जाता है या चोरी चला जाता है, तो आप इसे दूसरे लोगों द्वारा उपयोग किए जाने से नहीं रोक सकेंगे."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="3589945558504439395">"डिवाइस सुरक्षा सुविधाओं को सक्रिय नहीं किया जाएगा. यदि यह फ़ोन खो जाता है या चोरी चला जाता है, तो आप इसे दूसरे लोगों द्वारा उपयोग किए जाने से नहीं रोक सकेंगे."</string>
+    <string name="skip_anyway_button_label" msgid="2323522873558834513">"फिर भी अभी नहीं"</string>
+    <string name="go_back_button_label" msgid="4745265266186209467">"वापस जाएं"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="5877265753699187149">"संवेदक ढूंढें"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="1959655161889313661">"अपने फ़ोन के पीछे फ़िंगरप्रिंट संवेदक का पता लगाएं."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="2058830032070449160">"डिवाइस और फ़िंगरप्रिंट संवेदक स्‍थान वाला चित्रण"</string>
@@ -405,7 +412,11 @@
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"अपने डिवाइस की सुरक्षा करें"</string>
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"अपने फ़िंगरप्रिंट से अनलॉक करें"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"स्‍क्रीन लॉक चुनें"</string>
-    <string name="setup_lock_settings_picker_title" msgid="1584792702475081908">"स्‍क्रीन लॉक चुनें"</string>
+    <string name="setup_lock_settings_picker_title" msgid="1572244299605153324">"फ़ोन को सुरक्षित रखें"</string>
+    <string name="setup_lock_settings_picker_fingerprint_message" msgid="2431588439043969764">"फ़िंगरप्रिंट किसी सशक्त पैटर्न, पिन या पासवर्ड की तुलना में कम सुरक्षित हो सकता है. सुरक्षित रहने के लिए बैकअप लॉक स्क्रीन सेट करें."</string>
+    <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"डिवाइस सुरक्षा सुविधाओं को सक्रिय करके अन्य लोगों को आपकी अनुमति के बिना इस टैबलेट का उपयोग करने से रोकें. वह स्क्रीन लॉक चुनें जिसका आप उपयोग करना चाहते हैं."</string>
+    <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"डिवाइस सुरक्षा सुविधाओं को सक्रिय करके अन्य लोगों को आपकी अनुमति के बिना इस डिवाइस का उपयोग करने से रोकें. वह स्क्रीन लॉक चुनें जिसका आप उपयोग करना चाहते हैं."</string>
+    <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"डिवाइस सुरक्षा सुविधाओं को सक्रिय करके अन्य लोगों को आपकी अनुमति के बिना इस फ़ोन का उपयोग करने से रोकें. वह स्क्रीन लॉक चुनें जिसका आप उपयोग करना चाहते हैं."</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"अपनी बैकअप स्‍क्रीन लॉक विधि चुनें"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"स्क्रीन लॉक"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"लॉक स्‍क्रीन बदलें"</string>
@@ -421,6 +432,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"मध्‍यम से उच्‍च सुरक्षा"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"पासवर्ड"</string>
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"उच्च सुरक्षा"</string>
+    <string name="unlock_set_do_later_title" msgid="4894767558414979243">"अभी नहीं"</string>
     <string name="current_screen_lock" msgid="4104091715420072219">"वर्तमान स्क्रीन लॉक"</string>
     <string name="fingerprint_unlock_set_unlock_pattern" msgid="4939057588092120368">"फ़िंगरप्रिंट + पैटर्न"</string>
     <string name="fingerprint_unlock_set_unlock_pin" msgid="8010746824051056986">"फ़िंगरप्रिंट + पिन"</string>
@@ -703,13 +715,11 @@
     <string name="wifi_unchanged" msgid="3410422020930397102">"(अपरिवर्तित)"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"कृपया चुनें"</string>
     <string name="wifi_multiple_cert_added" msgid="3240743501460165224">"(एकाधिक प्रमाणपत्र जोड़े गए)"</string>
-    <!-- no translation found for wifi_use_system_certs (5270879895056893783) -->
-    <skip />
+    <string name="wifi_use_system_certs" msgid="5270879895056893783">"सिस्टम प्रमाणपत्रों का उपयोग करें"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="5160499244977160665">"प्रदान न करें"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4266754430576348471">"मान्‍य न करें"</string>
     <string name="wifi_do_not_validate_eap_server_warning" msgid="1787190245542586660">"कोई प्रमाणपत्र निर्दिष्‍ट नहीं है. आपका कनेक्‍शन निजी नहीं होगा."</string>
-    <!-- no translation found for wifi_no_domain_warning (5223011964091727376) -->
-    <skip />
+    <string name="wifi_no_domain_warning" msgid="5223011964091727376">"डोमेन निर्दिष्ट करना आवश्यक है."</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS उपलब्‍ध"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS उपलब्‍ध)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"अपना नेटवर्क पासवर्ड डालें"</string>
@@ -1931,8 +1941,8 @@
     <string name="fullbackup_data_summary" msgid="960850365007767734">"दूरस्थ रूप से अपने आप डिवाइस डेटा (जैसे वाई-फ़ाई पासवर्ड और कॉल इतिहास) और ऐप डेटा (जैसे ऐप्स द्वारा संग्रहीत सेटिंग और फ़ाइलों) का बैक अप लें.\n\nजब आप स्वचालित बैकअप चालू करते हैं, तो डिवाइस और ऐप डेटा को दूरस्थ रूप से समय-समय पर सहेजा जाता है. ऐप डेटा कोई भी ऐसा डेटा हो सकता है जिसे किसी ऐप द्वारा सहेजा गया है (डेवलपर सेटिंग के आधार पर), जिसमें संभावित रूप से संवेदनशील डेटा जैसे संपर्क, संदेश और फ़ोटो शामिल हैं."</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"डिवाइस की व्‍यवस्‍थापन सेटिंग"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"डिवाइस नियंत्रक"</string>
-    <string name="remove_device_admin" msgid="3596845261596451437">"निष्‍क्रिय करें"</string>
-    <string name="uninstall_device_admin" msgid="2019687470475335309">"अनइंस्टॉल करें"</string>
+    <string name="remove_device_admin" msgid="7736174723276745230">"इस डिवाइस व्यवस्थापक को निष्क्रिय करें"</string>
+    <string name="uninstall_device_admin" msgid="271120195128542165">"ऐप अनइंस्टॉल करें"</string>
     <string name="remove_and_uninstall_device_admin" msgid="6983421266937728520">"निष्क्रिय करें और अनइंस्टॉल करें"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"डिवाइस नियंत्रक"</string>
     <string name="no_device_admins" msgid="702695100241728775">"कोई भी उपलब्‍ध डिवाइस नियंत्रक नहीं है"</string>
@@ -1940,7 +1950,7 @@
     <string name="managed_device_admin_title" msgid="7853955652864478435">"कार्यस्थल"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"कोई ट्रस्ट एजेंट उपलब्ध नहीं"</string>
     <string name="add_device_admin_msg" msgid="6246742476064507965">"डिवाइस नियंत्रक सक्रिय करें?"</string>
-    <string name="add_device_admin" msgid="7133327675884827091">"सक्रिय करें"</string>
+    <string name="add_device_admin" msgid="1349673618141610506">"इस डिवाइस व्यवस्थापक को सक्रिय करें"</string>
     <string name="device_admin_add_title" msgid="7705551449705676363">"डिवाइस नियंत्रक"</string>
     <string name="device_admin_warning" msgid="2026747446313628233">"इस व्‍यवस्‍थापक को सक्रिय करने से <xliff:g id="APP_NAME">%1$s</xliff:g> ऐप्स निम्न कार्य कर सकेगा:"</string>
     <string name="device_admin_status" msgid="4252975713178851910">"यह व्‍यवस्‍थापक सक्रिय है और ऐप्स <xliff:g id="APP_NAME">%1$s</xliff:g> को निम्‍न कार्य करने देता है:"</string>
@@ -2261,7 +2271,7 @@
     <string name="user_enable_calling_and_sms_confirm_title" msgid="7243308401401932681">"फ़ोन कॉल और SMS चालू करें?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="4025082715546544967">"कॉल और SMS इतिहास इस उपयोगकर्ता के साथ साझा किया जाएगा."</string>
     <string name="emergency_info_title" msgid="208607506217060337">"आपातकालीन जानकारी"</string>
-    <string name="emergency_info_subtitle" msgid="1301492666470489605">"आपातकालीन डायलर में लॉक स्‍क्रीन के माध्‍यम से एक्‍सेस करने योग्‍य है"</string>
+    <string name="emergency_info_subtitle" msgid="5588995926340277372">"आपके फ़ोन को अनलॉक किए बिना आपातकालीन डायलर से किसी के भी द्वारा एक्सेस-योग्य है"</string>
     <string name="application_restrictions" msgid="8207332020898004394">"ऐप्स  और सामग्री की अनुमति दें"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"प्रतिबंधों वाले ऐप्स"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"ऐप्स  सेटिंग विस्तृत करें"</string>

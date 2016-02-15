@@ -331,10 +331,17 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"በጣት አሻራ ይክፈቱ"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="4747510337049957778">"ስልክዎን ለመክፈት፣ ግዢዎችን ለመፍቀድ ወይም ወደ መተግበሪያዎች ለመግባት በቀላሉ የጣት አሻራ ዳሳሹን ይንኩት። \n\n የማን ጣት አሻራዎች እንደሚያክሉ ላይ ይጠንቀቁ - ማንኛውም የታከሉ ጣት አሻራዎች እነዚህን ነገሮች ማድረግ ይችላሉ።"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="7173290350577831813">"ማስታወሻ፦ የጣት አሻራዎ ከጠንካራ ስርዓተ ጥለት ወይም ፒን ባነሰ መልኩ የተጠበቀ ሊሆን ይችላል።"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_risk_link_text" msgid="9129531466157620977">"ተጨማሪ ይወቁ"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="1650783655974801525">"ማስታወሻ፦ የእርስዎ የጣት አሻራ ከጠንካራ ሥርዓተ ጥለት ወይም ፒን ይልቅ ደኅንነቱ ያነሰ አስተማማኝ ነው። "<annotation id="url">"የበለጠ ለመረዳት"</annotation></string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"ይቅር"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"ቀጥል"</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="7234486440384881699">"የመሣሪያ ጥበቃ ባሕሪያት ገቢር አይሆኑም። ይህ ጡባዊ ከጠፋ፣ ከተሰረቀ ወይም ከተጸዳ ሌሎች እንዳይጠቀሙበት ለመከላከል አይችሉም።"</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="3519190003101280912">"የመሣሪያ ጥበቃ ባሕሪያት ገቢር አይሆኑም። ይህ መሣሪያ ከጠፋ፣ ከተሰረቀ ወይም ከተጸዳ ሌሎች እንዳይጠቀሙበት ለመከላከል አይችሉም።"</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="417315011140961">"የመሣሪያ ጥበቃ ባሕሪያት ገቢር አይሆኑም። ይህ ስልክ ከጠፋ፣ ከተሰረቀ ወይም ከተጸዳ ሌሎች እንዳይጠቀሙበት ለመከላከል አይችሉም።"</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="tablet" msgid="8783499872534165700">"የመሣሪያ ጥበቃ ባሕሪያት አይነቁም። ይህ ጡባዊ ከጠፋ ወይም ከተሰረቀ ሌሎች እንዳይጠቀሙበት መከላከል አይችሉም።"</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="device" msgid="3120512940873907578">"የመሣሪያ ጥበቃ ባህሪያት ገቢር አይሆኑም። ይህ መሣሪያ ከጠፋ ወይም ከተሰረቀ ሌሎች እንዳይጠቀሙበት መከላከል አይችሉም።"</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="3589945558504439395">"የመሳሪያ ጥበቃ ባህሪያት አይነቁም። ይህ ስልክ ከጠፋ ወይም ከተሰረቀ ሌሎች እንዳይጠቀሙበት መከላከል አይችሉም።"</string>
+    <string name="skip_anyway_button_label" msgid="2323522873558834513">"ለማንኛውም ዝለል"</string>
+    <string name="go_back_button_label" msgid="4745265266186209467">"ወደኋላ ተመለስ"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="5877265753699187149">"ዳሳሹን ያግኙት"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="1959655161889313661">"በስልክዎ ጀርባ ላይ ያለውን የጣት አሻራ ዳሳሹን ያግኙት።"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="2058830032070449160">"ከመሣሪያ እና የጣት አሻራ አነፍናፊ መገኛ አካባቢ መግለጫ ስዕል ጋር"</string>
@@ -405,7 +412,11 @@
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"መሣሪያዎን ይጠብቁ"</string>
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"በእርስዎ የጣት አሻራ ይክፈቱ"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"ማሳያ ቆልፍ ምረጥ"</string>
-    <string name="setup_lock_settings_picker_title" msgid="1584792702475081908">"የማያ ገጽ መቆለፊያን ይምረጡ"</string>
+    <string name="setup_lock_settings_picker_title" msgid="1572244299605153324">"ለእርስዎ ስልክ ጥበቃ ይድርጉ"</string>
+    <string name="setup_lock_settings_picker_fingerprint_message" msgid="2431588439043969764">"የጣት አሻራ ከጠንካራ ሥርዓተ ጥለት፣ ፒን ወይም የይለፍ ቃል ያነሰ ደኅንነቱ አስተማማኝ ነው። ደኅንነትዎ የተጠበቀ እንዲሆን ምትኬ የማያ ገጽ መቆለፊያ ያዘጋጁ።"</string>
+    <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"የመሣሪያ ጥበቃ ባህሪያትን በማግበር ሌሎች ይህን ጡባዊ ያለእርስዎ ፈቃድ እንዳይጠቀሙበት ይከልክሉ። መጠቀም የሚፈልጉትን የማያ ገጽ መቆለፊያ ይምረጡ።"</string>
+    <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"የመሣሪያ ጥበቃ ማድረጊያ ባሕሪዎችን በማግበር ያለ እርስዎ ፈቃድ ሌሎች ይህን መሣሪያ እንዳይጠቀሙ ይከላከሉዋቸው። መጠቀም የሚፈልጉትን ማያ ገጽ መቆለፊያ ይምረጡ።"</string>
+    <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"የመሣሪያ ጥበቃ ባህሪያትን በማግበር ሌሎች ይህን ስልክ ያለእርስዎ ፈቃድ እንዳይጠቀሙበት ይከልክሉ። መጠቀም የሚፈልጉትን የማያ ገጽ መቆለፊያ ይምረጡ።"</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"የምትኬ ቁልፍ ገጽ ስልትዎን ይምረጡ"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"ማሳያ መቆለፊያ"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"ማሳያ ቆልፍን ለውጥ"</string>
@@ -421,6 +432,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"ከመካከለኛ እስከ ከፍተኛ ጥበቃ"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">" የይለፍ ቃል፡"</string>
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"ከፍተኛ ጥበቃ"</string>
+    <string name="unlock_set_do_later_title" msgid="4894767558414979243">"አሁን አይደለም"</string>
     <string name="current_screen_lock" msgid="4104091715420072219">"አሁን ያለ ማያ ገጽ መቆለፊያ"</string>
     <string name="fingerprint_unlock_set_unlock_pattern" msgid="4939057588092120368">"የጣት አሻራ + ሥርዓተ ጥለት"</string>
     <string name="fingerprint_unlock_set_unlock_pin" msgid="8010746824051056986">"የጣት አሻራ + ፒን"</string>
@@ -1929,8 +1941,8 @@
     <string name="fullbackup_data_summary" msgid="960850365007767734">"በራስ-ሰር የመሣሪያ ውሂብ (እንደ Wi-Fi የይለፍ ቃሎች እና የጥሪ ታሪክ የመሳሰሉ) እና የመተግበሪያ ውሂብ (እንደ በመተግበሪያዎች የተቀመጡ ቅንብሮች እና ፋይሎች) በርቀት በምትኬ ያስቀምጡ።\n\nራስ-ሰር በምትኬ ማስቀመጥን ሲያበሩ፣ የመሣሪያ እና የመተግበሪያ ውሂብ በተወሰነ ክፍለ ጊዜ በርቀት ይቀመጣሉ። የመተግበሪያ ውሂብ (በገንቢ ቅንብሮች ላይ የሚመረኮዝ ሆኖ)፣ እንደ እውቂያዎች፣ መልዕክቶች፣ እና ፎቶዎች የመሳሰሉ አደጋ ሊያስክትሉ የሚችሉ ውሂብን ጨምሮ ማናቸውም መተግበሪያ ያስቀመጠው ውሂብ ሊሆን ይችላል።"</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"መሣሪያ አስተዳደር ቅንብሮች"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"የመሳሪያ አስተዳደር"</string>
-    <string name="remove_device_admin" msgid="3596845261596451437">"አቦዝን"</string>
-    <string name="uninstall_device_admin" msgid="2019687470475335309">"አራግፍ"</string>
+    <string name="remove_device_admin" msgid="7736174723276745230">"ይህን መሣሪያ አስተዳዳሪ ገቢር እንዳይሆን አድርገው"</string>
+    <string name="uninstall_device_admin" msgid="271120195128542165">"መተግበሪያ አራግፍ"</string>
     <string name="remove_and_uninstall_device_admin" msgid="6983421266937728520">"አቦዝን እና አራግፍ"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"መሣሪያ አስተዳዳሪዎች"</string>
     <string name="no_device_admins" msgid="702695100241728775">"የመሣሪያ አስተዳዳሪዎች የሉም"</string>
@@ -1938,7 +1950,7 @@
     <string name="managed_device_admin_title" msgid="7853955652864478435">"ስራ"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"ምንም የሚገኙ የተአማኒነት ወኪሎች የሉም"</string>
     <string name="add_device_admin_msg" msgid="6246742476064507965">"የመሣሪያ አስተዳዳሪ ይግበር?"</string>
-    <string name="add_device_admin" msgid="7133327675884827091">"አግብር"</string>
+    <string name="add_device_admin" msgid="1349673618141610506">"የዚህን መሣሪያ አስተዳዳሪ አግብር"</string>
     <string name="device_admin_add_title" msgid="7705551449705676363">"የመሳሪያ አስተዳደር"</string>
     <string name="device_admin_warning" msgid="2026747446313628233">"ይህን አስተዳዳሪ ማንቃት <xliff:g id="APP_NAME">%1$s</xliff:g> መተግበሪያን የሚከተሉትን ክንውኖች ለማከናወን ይፈቅድለታል።"</string>
     <string name="device_admin_status" msgid="4252975713178851910">"ይህ አስተዳዳሪ ንቁ እና የሚከተሉትን ክንውኖች ለማካሄድ <xliff:g id="APP_NAME">%1$s</xliff:g> መተግበሪያን ይፈቅዳል።"</string>
@@ -2259,7 +2271,7 @@
     <string name="user_enable_calling_and_sms_confirm_title" msgid="7243308401401932681">"የስልክ ጥሪዎች እና ኤስኤምኤስ ይብሩ?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="4025082715546544967">"የጥሪ እና የኤስኤምኤስ ታሪክ ለዚህ ተጠቃሚ ይጋራል።"</string>
     <string name="emergency_info_title" msgid="208607506217060337">"የአስቸኳይ ጊዜ መረጃ"</string>
-    <string name="emergency_info_subtitle" msgid="1301492666470489605">"በአስቸኳይ ጊዜ መደወያው ላይ ባለው የመቆለፊያ ማያ ገጽ በኩል ተደራሽ"</string>
+    <string name="emergency_info_subtitle" msgid="5588995926340277372">"የእርስዎ ስልክን መክፈት ሳያስፈልግ ከአስቸኳይ ጥሪ መደወያ በማንም ሰው ሊደርስ የሚችል"</string>
     <string name="application_restrictions" msgid="8207332020898004394">"መተግበሪያዎችን እና ይዘትን ይፍቀዱ"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"ገደቦች ያሏቸው መተግበሪያዎች"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"የመተግበሪያዎች ቅንብሮችን ዘርጋ"</string>
@@ -2575,7 +2587,7 @@
     </plurals>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="7465525754879341907">"እስከ <xliff:g id="FORMATTEDTIME">%1$s</xliff:g> ድረስ ብቻ ወደ ማንቂያዎች ይቀይሩ"</string>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"ወደ ሁልጊዜ አቋርጥ ለውጥ"</string>
-    <string name="zen_mode_screen_on" msgid="7712038508173845101">"ማያ ገጹሲበራ አግድ"</string>
+    <string name="zen_mode_screen_on" msgid="7712038508173845101">"ማያ ገጹ ሲበራ አግድ"</string>
     <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"በ«አትረብሽ» ድምጻቸው የጠፉ ማሳወቂያዎች በማያ ገጽ ላይ ብቅ እንዳይሉ ከልክል"</string>
     <string name="zen_mode_screen_off" msgid="5026854939192419879">"ማያ ገጹ ሲጠፋ"</string>
     <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"በ«አትረብሽ» ድምጻቸው የጠፉ ማሳወቂያዎች ማያ ገጹን እንዳያበሩ ወይም የማሳወቂያ ብርሃኑን እንዳያብለጨልጩ ከልክል"</string>

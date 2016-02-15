@@ -331,10 +331,17 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"使用指紋解鎖"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="4747510337049957778">"輕觸指紋感應器即可將手機解鎖、授權購物交易或登入應用程式。\n\n您在手機上新增的任何指紋都能用來進行前述操作，因此請慎選要加入的指紋。"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="7173290350577831813">"注意：使用複雜的圖形或 PIN 碼會比感應指紋來得安全。"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_risk_link_text" msgid="9129531466157620977">"瞭解詳情"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="1650783655974801525">"注意：使用複雜的圖形或 PIN 碼會比感應指紋來得安全。"<annotation id="url">"瞭解詳情"</annotation></string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"取消"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"繼續"</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="7234486440384881699">"系統不會啟用裝置保護功能。萬一這台平板電腦遺失或遭竊，或是當中資料遭到清空，您將無法防止他人使用這台平板電腦。"</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="3519190003101280912">"系統不會啟用裝置保護功能。萬一這個裝置遺失或遭竊，或是當中資料遭到清空，您將無法防止他人使用這個裝置。"</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="417315011140961">"系統不會啟用裝置保護功能。萬一這支手機遺失或遭竊，或是當中資料遭到清空，您將無法防止他人使用這支手機。"</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="tablet" msgid="8783499872534165700">"系統不會啟用裝置保護功能。萬一這台平板電腦遺失或遭竊，您將無法防止他人使用這台平板電腦。"</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="device" msgid="3120512940873907578">"系統不會啟用裝置保護功能。萬一這個裝置遺失或遭竊，您將無法防止他人使用這個裝置。"</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="3589945558504439395">"系統不會啟用裝置保護功能。萬一這支手機遺失或遭竊，您將無法防止他人使用這支手機。"</string>
+    <string name="skip_anyway_button_label" msgid="2323522873558834513">"略過"</string>
+    <string name="go_back_button_label" msgid="4745265266186209467">"返回"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="5877265753699187149">"找出感應器"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="1959655161889313661">"指紋感應器位於手機背面。"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="2058830032070449160">"裝置指紋感應器位置插圖"</string>
@@ -405,7 +412,11 @@
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"保護您的裝置"</string>
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"以指紋解鎖"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"選擇螢幕鎖定方式"</string>
-    <string name="setup_lock_settings_picker_title" msgid="1584792702475081908">"選擇螢幕鎖定方式"</string>
+    <string name="setup_lock_settings_picker_title" msgid="1572244299605153324">"保護您的手機"</string>
+    <string name="setup_lock_settings_picker_fingerprint_message" msgid="2431588439043969764">"使用複雜的圖形、PIN 碼或密碼會比感應指紋來得安全。請額外設定螢幕鎖定方式以確保安全。"</string>
+    <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"只要啟用裝置保護功能，即可防止他人在未獲您授權的情況下使用這台平板電腦。請選擇您要使用的螢幕鎖定方式。"</string>
+    <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"只要啟用裝置保護功能，即可防止他人在未獲您授權的情況下使用這個裝置。請選擇您要使用的螢幕鎖定方式。"</string>
+    <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"只要啟用裝置保護功能，即可防止他人在未獲您授權的情況下使用這支手機。請選擇您要使用的螢幕鎖定方式。"</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"選擇您的備用螢幕鎖定方法"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"螢幕鎖定"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"變更鎖定畫面"</string>
@@ -421,6 +432,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"中高等安全性設定"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"密碼"</string>
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"高等安全性設定"</string>
+    <string name="unlock_set_do_later_title" msgid="4894767558414979243">"暫時不要"</string>
     <string name="current_screen_lock" msgid="4104091715420072219">"目前的螢幕鎖定"</string>
     <string name="fingerprint_unlock_set_unlock_pattern" msgid="4939057588092120368">"指紋 + 解鎖圖形"</string>
     <string name="fingerprint_unlock_set_unlock_pin" msgid="8010746824051056986">"指紋 + PIN 碼"</string>
@@ -703,13 +715,11 @@
     <string name="wifi_unchanged" msgid="3410422020930397102">"(未變更)"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"請選取"</string>
     <string name="wifi_multiple_cert_added" msgid="3240743501460165224">"(已新增多個憑證)"</string>
-    <!-- no translation found for wifi_use_system_certs (5270879895056893783) -->
-    <skip />
+    <string name="wifi_use_system_certs" msgid="5270879895056893783">"使用系統憑證"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="5160499244977160665">"不提供"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4266754430576348471">"不進行驗證"</string>
     <string name="wifi_do_not_validate_eap_server_warning" msgid="1787190245542586660">"您未指定任何憑證，因此無法為您設定私人連線。"</string>
-    <!-- no translation found for wifi_no_domain_warning (5223011964091727376) -->
-    <skip />
+    <string name="wifi_no_domain_warning" msgid="5223011964091727376">"必須指定網域。"</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"可使用 WPS"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (可使用 WPS)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"輸入您的網路密碼"</string>
@@ -1935,8 +1945,8 @@
     <string name="fullbackup_data_summary" msgid="960850365007767734">"在遠端自動備份裝置資料 (例如 Wi-Fi 密碼和通話紀錄) 以及應用程式資料 (例如應用程式所儲存的設定和檔案)。\n\n啟用自動備份功能後，系統會定期將裝置和應用程式資料儲存到遠端。應用程式資料泛指應用程式依據開發人員設定所儲存的任何資料，包括聯絡人、訊息和相片等可能具敏感性的資料。"</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"裝置管理設定"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"裝置管理員"</string>
-    <string name="remove_device_admin" msgid="3596845261596451437">"撤銷"</string>
-    <string name="uninstall_device_admin" msgid="2019687470475335309">"解除安裝"</string>
+    <string name="remove_device_admin" msgid="7736174723276745230">"停用這位裝置管理員"</string>
+    <string name="uninstall_device_admin" msgid="271120195128542165">"解除安裝應用程式"</string>
     <string name="remove_and_uninstall_device_admin" msgid="6983421266937728520">"停用並解除安裝"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"裝置管理員"</string>
     <string name="no_device_admins" msgid="702695100241728775">"沒有可用的裝置管理員"</string>
@@ -1944,7 +1954,7 @@
     <string name="managed_device_admin_title" msgid="7853955652864478435">"公司"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"沒有信任的代理程式可供使用"</string>
     <string name="add_device_admin_msg" msgid="6246742476064507965">"啟動裝置管理員？"</string>
-    <string name="add_device_admin" msgid="7133327675884827091">"啟用"</string>
+    <string name="add_device_admin" msgid="1349673618141610506">"啟用這位裝置管理員"</string>
     <string name="device_admin_add_title" msgid="7705551449705676363">"裝置管理員"</string>
     <string name="device_admin_warning" msgid="2026747446313628233">"啟用這個管理員將允許「<xliff:g id="APP_NAME">%1$s</xliff:g>」應用程式執行以下作業："</string>
     <string name="device_admin_status" msgid="4252975713178851910">"這個管理員正在作業中，且允許「<xliff:g id="APP_NAME">%1$s</xliff:g>」應用程式執行以下作業："</string>
@@ -2265,7 +2275,7 @@
     <string name="user_enable_calling_and_sms_confirm_title" msgid="7243308401401932681">"開啟通話和簡訊功能？"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="4025082715546544967">"通話和簡訊紀錄將與這位使用者共用。"</string>
     <string name="emergency_info_title" msgid="208607506217060337">"緊急資訊"</string>
-    <string name="emergency_info_subtitle" msgid="1301492666470489605">"可透過鎖定畫面的緊急撥號器存取"</string>
+    <string name="emergency_info_subtitle" msgid="5588995926340277372">"任何人都能透過緊急撥號器存取，不必先將手機解鎖"</string>
     <string name="application_restrictions" msgid="8207332020898004394">"允許應用程式和內容"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"受限的應用程式"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"展開應用程式設定"</string>
