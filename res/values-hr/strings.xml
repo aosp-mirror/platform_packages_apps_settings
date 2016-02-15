@@ -333,10 +333,17 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Otključavanje otiskom"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="4747510337049957778">"Jednostavno dodirnite senzor otiska prsta da biste otključali telefon, autorizirali kupnje ili se prijavili na aplikacije. \n\n Pazite čije otiske dodajete jer će svi dodani otisci moći sve to raditi."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="7173290350577831813">"Napomena: otisak prsta može biti manje siguran od snažnog uzorka ili PIN-a."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_risk_link_text" msgid="9129531466157620977">"Saznajte više"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="1650783655974801525">"Napomena: otisak prsta nije toliko siguran kao snažna zaporka ili PIN. "<annotation id="url">"Saznajte više"</annotation></string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Otkaži"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Nastavi"</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="7234486440384881699">"Značajke zaštite uređaja neće se aktivirati. Nećete moći blokirati upotrebu tableta u slučaju gubitka, krađe ili brisanja podataka s njega."</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="3519190003101280912">"Značajke zaštite uređaja neće se aktivirati. Nećete moći blokirati upotrebu uređaja u slučaju gubitka, krađe ili brisanja podataka s njega."</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="417315011140961">"Značajke zaštite uređaja neće se aktivirati. Nećete moći blokirati upotrebu telefona u slučaju gubitka, krađe ili brisanja podataka s njega."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="tablet" msgid="8783499872534165700">"Značajke zaštite uređaja neće se aktivirati. Nećete moći blokirati upotrebu tableta u slučaju gubitka ili krađe."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="device" msgid="3120512940873907578">"Značajke zaštite uređaja neće se aktivirati. Nećete moći blokirati upotrebu uređaja u slučaju gubitka ili krađe."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="3589945558504439395">"Značajke zaštite uređaja neće se aktivirati. Nećete moći blokirati upotrebu telefona u slučaju gubitka ili krađe."</string>
+    <string name="skip_anyway_button_label" msgid="2323522873558834513">"Svejedno preskoči"</string>
+    <string name="go_back_button_label" msgid="4745265266186209467">"Natrag"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="5877265753699187149">"Traženje senzora"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="1959655161889313661">"Pronađite senzor otiska prsta na stražnjoj strani telefona."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="2058830032070449160">"Ilustracija uređaja i lokacije senzora otiska prsta"</string>
@@ -407,7 +414,11 @@
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"Zaštitite svoj uređaj"</string>
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"Otključavanje otiskom prsta"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Zaključavanje zaslona"</string>
-    <string name="setup_lock_settings_picker_title" msgid="1584792702475081908">"Odaberite zaključavanje zaslona"</string>
+    <string name="setup_lock_settings_picker_title" msgid="1572244299605153324">"Zaštitite telefon"</string>
+    <string name="setup_lock_settings_picker_fingerprint_message" msgid="2431588439043969764">"Otisak prsta može biti manje siguran od snažnog uzorka, PIN-a ili zaporke. Postavite pričuvno zaključavanje zaslona za svaki slučaj."</string>
+    <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Aktivirajte značajke zaštite uređaja kako biste onemogućili drugima da upotrebljavaju ovaj tablet bez vašeg dopuštenja. Odaberite zaključavanje zaslona koje želite upotrebljavati."</string>
+    <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Aktivirajte značajke zaštite uređaja kako biste onemogućili drugima da upotrebljavaju ovaj uređaj bez vašeg dopuštenja. Odaberite zaključavanje zaslona koje želite upotrebljavati."</string>
+    <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Aktivirajte značajke zaštite uređaja kako biste onemogućili drugima da upotrebljavaju ovaj telefon bez vašeg dopuštenja. Odaberite zaključavanje zaslona koje želite upotrebljavati."</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Odaberite pričuvni način zaključavanja zaslona"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Zaključavanje zaslona"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Promjena zaklj. zasl."</string>
@@ -423,6 +434,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"Srednja do visoka sigurnost"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Zaporka"</string>
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"Visoka sigurnost"</string>
+    <string name="unlock_set_do_later_title" msgid="4894767558414979243">"Ne sada"</string>
     <string name="current_screen_lock" msgid="4104091715420072219">"Trenutačno zaključavanje zaslona"</string>
     <string name="fingerprint_unlock_set_unlock_pattern" msgid="4939057588092120368">"Otisak prsta i uzorak"</string>
     <string name="fingerprint_unlock_set_unlock_pin" msgid="8010746824051056986">"Otisak prsta i PIN"</string>
@@ -711,13 +723,11 @@
     <string name="wifi_unchanged" msgid="3410422020930397102">"(nepromijenjeno)"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"Odaberite"</string>
     <string name="wifi_multiple_cert_added" msgid="3240743501460165224">"(dodano je više certifikata)"</string>
-    <!-- no translation found for wifi_use_system_certs (5270879895056893783) -->
-    <skip />
+    <string name="wifi_use_system_certs" msgid="5270879895056893783">"Upotrijebi certifikate sustava"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="5160499244977160665">"Nemoj pružiti"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4266754430576348471">"Nemoj potvrditi"</string>
     <string name="wifi_do_not_validate_eap_server_warning" msgid="1787190245542586660">"Nije naveden nijedan certifikat. Veza neće biti privatna."</string>
-    <!-- no translation found for wifi_no_domain_warning (5223011964091727376) -->
-    <skip />
+    <string name="wifi_no_domain_warning" msgid="5223011964091727376">"Mora navoditi domenu."</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS dostupan"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS dostupan)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Unesite mrežnu zaporku"</string>
@@ -1947,15 +1957,16 @@
     <string name="fullbackup_data_summary" msgid="960850365007767734">"Daljinski pokrenite automatsku izradu sigurnosne kopije podataka uređaja (kao što su zaporke Wi-Fi-ja i povijest poziva) i podataka aplikacija (kao što su postavke i datoteke koje aplikacije pohranjuju).\n\nKada uključite automatsku izradu sigurnosnih kopija, podaci uređaja i aplikacija periodično se daljinski spremaju. Podaci aplikacije mogu biti bilo koji podaci koje je aplikacija spremila (na temelju postavki razvojnog programera), uključujući potencijalno osjetljive podatke kao što su kontakti, poruke i fotografije."</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"Postavke administracije uređaja"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"Administrator uređaja"</string>
-    <string name="remove_device_admin" msgid="3596845261596451437">"Deaktiviraj"</string>
-    <string name="uninstall_device_admin" msgid="2019687470475335309">"Deinstaliraj"</string>
+    <string name="remove_device_admin" msgid="7736174723276745230">"Deaktiviraj administratora uređaja"</string>
+    <string name="uninstall_device_admin" msgid="271120195128542165">"Deinstaliraj aplikaciju"</string>
+    <string name="remove_and_uninstall_device_admin" msgid="6983421266937728520">"Deaktiviraj i deinstaliraj"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"Administratori uređaja"</string>
     <string name="no_device_admins" msgid="702695100241728775">"Nema dostupnih administratora računa"</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"Osobno"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"Posao"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"Pouzdani predstavnici nisu dostupni"</string>
     <string name="add_device_admin_msg" msgid="6246742476064507965">"Aktivirati administratora uređaja?"</string>
-    <string name="add_device_admin" msgid="7133327675884827091">"Aktiviraj"</string>
+    <string name="add_device_admin" msgid="1349673618141610506">"Aktiviraj administratora uređaja"</string>
     <string name="device_admin_add_title" msgid="7705551449705676363">"Administrator uređaja"</string>
     <string name="device_admin_warning" msgid="2026747446313628233">"Aktiviranjem ovog administratora dopustit ćete aplikaciji <xliff:g id="APP_NAME">%1$s</xliff:g> sljedeće:"</string>
     <string name="device_admin_status" msgid="4252975713178851910">"Taj je administrator aktivan i aplikaciji <xliff:g id="APP_NAME">%1$s</xliff:g> dopušta sljedeće:"</string>
@@ -2276,7 +2287,7 @@
     <string name="user_enable_calling_and_sms_confirm_title" msgid="7243308401401932681">"Želite li uključiti telefonske pozive i SMS?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="4025082715546544967">"Povijest poziva i SMS-ova dijelit će se s tim korisnikom."</string>
     <string name="emergency_info_title" msgid="208607506217060337">"Informacije u hitnom slučaju"</string>
-    <string name="emergency_info_subtitle" msgid="1301492666470489605">"Dostupno putem zaključanog zaslona na brojčaniku za hitne pozive"</string>
+    <string name="emergency_info_subtitle" msgid="5588995926340277372">"Dostupno svima s brojčanika za hitne pozive bez otključavanja telefona"</string>
     <string name="application_restrictions" msgid="8207332020898004394">"Dopuštanje aplikacija i sadržaja"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Aplikacije s ograničenjima"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Proširi postavke za aplikaciju"</string>

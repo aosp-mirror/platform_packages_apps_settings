@@ -331,10 +331,17 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Mit Fingerabdruck entsperren"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="4747510337049957778">"Tippe einfach auf den Fingerabdrucksensor, um dein Smartphone zu entsperren, Käufe zu autorisieren oder dich in Apps anzumelden. \n\n Überlege genau, welche Fingerabdrücke du hinzufügen möchtest, da diese Aktionen mit allen Fingerabdrücken ausgeführt werden können, die du auf dem Smartphone hinzufügst."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="7173290350577831813">"Hinweis: Dein Fingerabdruck ist möglicherweise nicht so sicher wie ein komplexes Muster oder eine PIN."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_risk_link_text" msgid="9129531466157620977">"Weitere Informationen"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="1650783655974801525">"Hinweis: Dein Fingerabdruck ist möglicherweise nicht so sicher wie ein komplexes Muster oder eine PIN. "<annotation id="url">"Weitere Informationen"</annotation></string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Abbrechen"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Weiter"</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="7234486440384881699">"Die Geräteschutzfunktionen werden nicht aktiviert. Du kannst dann nicht verhindern, dass andere Personen dieses Tablet verwenden, falls du es verlierst, es gestohlen wird oder die darauf befindlichen Daten gelöscht werden."</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="3519190003101280912">"Die Geräteschutzfunktionen werden nicht aktiviert. Du kannst dann nicht verhindern, dass andere Personen dieses Gerät verwenden, falls du es verlierst, es gestohlen wird oder die darauf befindlichen Daten gelöscht werden."</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="417315011140961">"Die Geräteschutzfunktionen werden nicht aktiviert. Du kannst dann nicht verhindern, dass andere Personen dieses Smartphone verwenden, falls du es verlierst, es gestohlen wird oder die darauf befindlichen Daten gelöscht werden."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="tablet" msgid="8783499872534165700">"Die Geräteschutzfunktionen werden nicht aktiviert. Du kannst dann nicht verhindern, dass andere Personen dieses Tablet verwenden, falls du es verlierst oder es gestohlen wird."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="device" msgid="3120512940873907578">"Die Geräteschutzfunktionen werden nicht aktiviert. Du kannst dann nicht verhindern, dass andere Personen dieses Gerät verwenden, falls du es verlierst oder es gestohlen wird."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="3589945558504439395">"Die Geräteschutzfunktionen werden nicht aktiviert. Du kannst dann nicht verhindern, dass andere Personen dieses Smartphone verwenden, falls du es verlierst oder es gestohlen wird."</string>
+    <string name="skip_anyway_button_label" msgid="2323522873558834513">"Trotzdem überspringen"</string>
+    <string name="go_back_button_label" msgid="4745265266186209467">"Zurück"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="5877265753699187149">"Sensor suchen"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="1959655161889313661">"Finde den Fingerabdrucksensor auf der Rückseite deines Smartphones."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="2058830032070449160">"Abbildung mit Gerät und Position des Fingerabdrucksensors"</string>
@@ -405,7 +412,11 @@
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"Gerät schützen"</string>
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"Mit dem Fingerabdruck entsperren"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Displaysperre wählen"</string>
-    <string name="setup_lock_settings_picker_title" msgid="1584792702475081908">"Displaysperre wählen"</string>
+    <string name="setup_lock_settings_picker_title" msgid="1572244299605153324">"Smartphone schützen"</string>
+    <string name="setup_lock_settings_picker_fingerprint_message" msgid="2431588439043969764">"Ein Fingerabdruck ist möglicherweise nicht so sicher wie ein komplexes Muster, eine PIN oder ein Passwort. Richte einen Sicherungssperrbildschirm ein, um die Sicherheit zu erhöhen."</string>
+    <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Du kannst verhindern, dass andere Personen dieses Tablet ohne deine Erlaubnis verwenden, indem du die Geräteschutzfunktionen aktivierst. Wähle eine Displaysperre aus."</string>
+    <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Du kannst verhindern, dass andere Personen dieses Gerät ohne deine Erlaubnis verwenden, indem du die Geräteschutzfunktionen aktivierst. Wähle eine Displaysperre aus."</string>
+    <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Du kannst verhindern, dass andere Personen dieses Smartphone ohne deine Erlaubnis verwenden, indem du die Geräteschutzfunktionen aktivierst. Wähle eine Displaysperre aus."</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Alternative Methode für die Displaysperre auswählen"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Displaysperre"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Displaysperre ändern"</string>
@@ -421,6 +432,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"Mittlere bis hohe Sicherheit"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Passwort"</string>
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"Hohe Sicherheit"</string>
+    <string name="unlock_set_do_later_title" msgid="4894767558414979243">"Jetzt nicht"</string>
     <string name="current_screen_lock" msgid="4104091715420072219">"Aktuelle Displaysperre"</string>
     <string name="fingerprint_unlock_set_unlock_pattern" msgid="4939057588092120368">"Fingerabdruck + Muster"</string>
     <string name="fingerprint_unlock_set_unlock_pin" msgid="8010746824051056986">"Fingerabdruck + PIN"</string>
@@ -704,13 +716,11 @@
     <string name="wifi_unchanged" msgid="3410422020930397102">"(nicht geändert)"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"Auswählen"</string>
     <string name="wifi_multiple_cert_added" msgid="3240743501460165224">"(Mehrere Zertifikate hinzugefügt)"</string>
-    <!-- no translation found for wifi_use_system_certs (5270879895056893783) -->
-    <skip />
+    <string name="wifi_use_system_certs" msgid="5270879895056893783">"Systemzertifikate verwenden"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="5160499244977160665">"Nicht bereitstellen"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4266754430576348471">"Nicht validieren"</string>
     <string name="wifi_do_not_validate_eap_server_warning" msgid="1787190245542586660">"Kein Zertifikat angegeben. Es wird keine private Verbindung hergestellt."</string>
-    <!-- no translation found for wifi_no_domain_warning (5223011964091727376) -->
-    <skip />
+    <string name="wifi_no_domain_warning" msgid="5223011964091727376">"Angabe einer Domain erforderlich."</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS verfügbar"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS verfügbar)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Gib dein Netzwerkpasswort ein."</string>
@@ -1932,15 +1942,16 @@
     <string name="fullbackup_data_summary" msgid="960850365007767734">"Automatische Remote-Sicherung von Gerätedaten wie WLAN-Passwörtern und Anrufverlauf und App-Daten, z. B. Einstellungen und von Apps gespeicherte Dateien\n\nWenn du die automatische Sicherung aktivierst, werden Geräte- und App-Daten regelmäßig an einem Remote-Speicherort gespeichert. Bei App-Daten kann es sich um alle Daten handeln, die von einer App entsprechend den Entwicklereinstellungen gespeichert wurden, einschließlich potenziell sensibler Daten wie Kontakten, Nachrichten und Fotos."</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"Einstellungen für die Geräteverwaltung"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"Geräteadministrator"</string>
-    <string name="remove_device_admin" msgid="3596845261596451437">"Deaktivieren"</string>
-    <string name="uninstall_device_admin" msgid="2019687470475335309">"Deinstallieren"</string>
+    <string name="remove_device_admin" msgid="7736174723276745230">"Diesen Geräteadministrator deaktivieren"</string>
+    <string name="uninstall_device_admin" msgid="271120195128542165">"App deinstallieren"</string>
+    <string name="remove_and_uninstall_device_admin" msgid="6983421266937728520">"Deaktivieren und deinstallieren"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"Geräteadministratoren"</string>
     <string name="no_device_admins" msgid="702695100241728775">"Keine Geräteadministratoren verfügbar"</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"Nutzer"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"Arbeit"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"Keine verfügbaren Trust Agents"</string>
     <string name="add_device_admin_msg" msgid="6246742476064507965">"Geräteadministrator aktivieren?"</string>
-    <string name="add_device_admin" msgid="7133327675884827091">"Aktivieren"</string>
+    <string name="add_device_admin" msgid="1349673618141610506">"Diesen Geräteadministrator aktivieren"</string>
     <string name="device_admin_add_title" msgid="7705551449705676363">"Geräteadministrator"</string>
     <string name="device_admin_warning" msgid="2026747446313628233">"Die Aktivierung dieses Administrators ermöglicht der App \"<xliff:g id="APP_NAME">%1$s</xliff:g>\", folgende Vorgänge auszuführen:"</string>
     <string name="device_admin_status" msgid="4252975713178851910">"Dieser Administrator ist aktiv und ermöglicht der App \"<xliff:g id="APP_NAME">%1$s</xliff:g>\", folgende Vorgänge auszuführen:"</string>
@@ -2261,7 +2272,7 @@
     <string name="user_enable_calling_and_sms_confirm_title" msgid="7243308401401932681">"Anrufe &amp; SMS aktivieren?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="4025082715546544967">"Anrufliste und SMS-Verlauf werden für diesen Nutzer freigegeben."</string>
     <string name="emergency_info_title" msgid="208607506217060337">"Notfallinformationen"</string>
-    <string name="emergency_info_subtitle" msgid="1301492666470489605">"Über den Notruf auf dem Sperrbildschirm abrufbar"</string>
+    <string name="emergency_info_subtitle" msgid="5588995926340277372">"Für jeden über den Notruf erreichbar, ohne dein Smartphone zu entsperren"</string>
     <string name="application_restrictions" msgid="8207332020898004394">"Apps und Inhalte zulassen"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Apps mit Einschränkungen"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"App-Einstellungen erweitern"</string>

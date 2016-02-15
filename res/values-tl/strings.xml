@@ -331,10 +331,17 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"I-unlock sa fingerprint"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="4747510337049957778">"Pindutin lang ang sensor para sa fingerprint upang i-unlock ang iyong telepono, pahintulutan ang mga pagbili o mag-sign in sa mga app. \n\n Pag-isipang mabuti kung kaninong mga fingerprint ang iyong idaragdag - magagawa ang mga bagay na ito ng anumang mga fingerprint na idaragdag."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="7173290350577831813">"Tandaan: Maaaring hindi gaanong secure ang iyong fingerprint kaysa sa isang malakas na pattern o PIN."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_risk_link_text" msgid="9129531466157620977">"Matuto nang higit pa"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="1650783655974801525">"Tandaan: Maaaring mas hindi ligtas ang iyong fingerprint kaysa sa malakas na pattern o PIN. "<annotation id="url">"Matuto nang higit pa"</annotation></string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Kanselahin"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Magpatuloy"</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="7234486440384881699">"Hindi ia-activate ang mga feature para sa proteksyon ng device. Hindi mo mapipigilan ang ibang tao na gamitin ang iyong tablet kung mawala, manakaw o ma-wipe ito."</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="3519190003101280912">"Hindi ia-activate ang mga feature para sa proteksyon ng device. Hindi mo mapipigilan ang ibang tao na gamitin ang device na ito kung mawala, manakaw o ma-wipe ito."</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="417315011140961">"Hindi ia-activate ang mga feature para sa proteksyon ng device. Hindi mo mapipigilan ang ibang tao na gamitin ang teleponong ito kung mawala, manakaw o ma-wipe ito."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="tablet" msgid="8783499872534165700">"Hindi ia-activate ang mga feature para sa proteksyon ng device. Hindi mo mapipigilan ang iba pang mga tao na gamitin ang tablet na ito kung nawala o nanakaw ito."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="device" msgid="3120512940873907578">"Hindi ia-activate ang mga feature para sa proteksyon ng device. Hindi mo mapipigilan ang iba pang mga tao na gamitin ang device na ito kung nawala o nanakaw ito."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="3589945558504439395">"Hindi ia-activate ang mga feature para sa proteksyon ng device. Hindi mo mapipigilan ang iba pang mga tao na gamitin ang teleponong ito kung nawala o nanakaw ito."</string>
+    <string name="skip_anyway_button_label" msgid="2323522873558834513">"Laktawan pa rin"</string>
+    <string name="go_back_button_label" msgid="4745265266186209467">"Bumalik"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="5877265753699187149">"Hanapin ang sensor"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="1959655161889313661">"Hanapin ang fingerprint sensor sa likod ng iyong telepono."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="2058830032070449160">"Larawan kung saan ipinapakita ang lokasyon ng device at fingerprint sensor"</string>
@@ -405,7 +412,11 @@
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"Protektahan ang iyong device"</string>
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"I-unlock gamit ang iyong fingerprint"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Pumili ng screen lock"</string>
-    <string name="setup_lock_settings_picker_title" msgid="1584792702475081908">"Pumili ng lock ng screen"</string>
+    <string name="setup_lock_settings_picker_title" msgid="1572244299605153324">"Protektahan phone mo"</string>
+    <string name="setup_lock_settings_picker_fingerprint_message" msgid="2431588439043969764">"Maaaring mas hindi ligtas ang iyong fingerprint kaysa sa malakas na pattern, PIN o password. Mag-set up ng backup na lock screen upang maging ligtas."</string>
+    <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Pigilan ang ibang taong magamit ang tablet na ito sa pamamagitan ng pag-a-activate sa mga feature ng proteksyon ng device. Piliin ang lock ng screen na gusto mong gamitin."</string>
+    <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Pigilan ang ibang taong magamit ang device na ito sa pamamagitan ng pag-a-activate sa mga feature ng proteksyon ng device. Piliin ang lock ng screen na gusto mong gamitin."</string>
+    <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Pigilan ang ibang taong magamit ang teleponong ito sa pamamagitan ng pag-a-activate sa mga feature ng proteksyon ng device. Piliin ang lock ng screen na gusto mong gamitin."</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Piliin ang iyong backup na paraan ng pag-lock ng screen"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"I-screen lock"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Baguhin ang lock ng screen"</string>
@@ -421,6 +432,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"Katamtaman hanggang mataas na seguridad"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Password"</string>
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"Mataas na seguridad"</string>
+    <string name="unlock_set_do_later_title" msgid="4894767558414979243">"Huwag ngayon"</string>
     <string name="current_screen_lock" msgid="4104091715420072219">"Kasalukuyang lock ng screen"</string>
     <string name="fingerprint_unlock_set_unlock_pattern" msgid="4939057588092120368">"Fingerprint + Pattern"</string>
     <string name="fingerprint_unlock_set_unlock_pin" msgid="8010746824051056986">"Fingerprint + PIN"</string>
@@ -703,13 +715,11 @@
     <string name="wifi_unchanged" msgid="3410422020930397102">"(di-nabago)"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"Mangyaring pumili"</string>
     <string name="wifi_multiple_cert_added" msgid="3240743501460165224">"(Nagdagdag ng maraming certificate)"</string>
-    <!-- no translation found for wifi_use_system_certs (5270879895056893783) -->
-    <skip />
+    <string name="wifi_use_system_certs" msgid="5270879895056893783">"Gamitin ang mga certificate ng system"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="5160499244977160665">"Huwag ibigay"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4266754430576348471">"Huwag patotohanan"</string>
     <string name="wifi_do_not_validate_eap_server_warning" msgid="1787190245542586660">"Walang natukoy na certificate. Hindi magiging pribado ang iyong koneksyon."</string>
-    <!-- no translation found for wifi_no_domain_warning (5223011964091727376) -->
-    <skip />
+    <string name="wifi_no_domain_warning" msgid="5223011964091727376">"Dapat tumukoy ng domain."</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"Available ang WPS"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (Available ang WPS)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Ilagay ang iyong password sa network"</string>
@@ -1931,15 +1941,16 @@
     <string name="fullbackup_data_summary" msgid="960850365007767734">"Awtomatikong i-back up ang data ng device (tulad ng mga password sa Wi-Fi at history ng tawag) at data ng app (tulad ng mga setting at mga file na inimbak ng mga app) nang malayuan.\n\nKapag i-on mo ang awtomatikong pag-backup, pana-panahong sine-save nang malayuan ang data ng device at app. Ang data ng app ay maaaring anumang data na na-save ng app (batay sa mga setting ng developer), kabilang ang potensyal na sensitibong data tulad ng mga contact, mensahe at larawan."</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"Mga setting ng administration ng device"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"Administrator ng device"</string>
-    <string name="remove_device_admin" msgid="3596845261596451437">"I-deactivate"</string>
-    <string name="uninstall_device_admin" msgid="2019687470475335309">"I-uninstall"</string>
+    <string name="remove_device_admin" msgid="7736174723276745230">"I-deactivate ang administrator ng device na ito"</string>
+    <string name="uninstall_device_admin" msgid="271120195128542165">"I-uninstall ang app"</string>
+    <string name="remove_and_uninstall_device_admin" msgid="6983421266937728520">"I-deactivate at I-uninstall"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"Administrator ng device"</string>
     <string name="no_device_admins" msgid="702695100241728775">"Walang mga available na administrator ng device"</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"Personal"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"Trabaho"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"Walang available na mga trust agent"</string>
     <string name="add_device_admin_msg" msgid="6246742476064507965">"I-activate ang device administrator?"</string>
-    <string name="add_device_admin" msgid="7133327675884827091">"I-activate"</string>
+    <string name="add_device_admin" msgid="1349673618141610506">"I-activate ang administrator ng device na ito"</string>
     <string name="device_admin_add_title" msgid="7705551449705676363">"Administrator ng device"</string>
     <string name="device_admin_warning" msgid="2026747446313628233">"Bibigyang-daan ng pag-activate sa administrator na ito ang app na <xliff:g id="APP_NAME">%1$s</xliff:g> upang isagawa ang sumusunod na mga pagpapatakbo:"</string>
     <string name="device_admin_status" msgid="4252975713178851910">"Aktibo ang administrator na ito at pinapayagan ang app na <xliff:g id="APP_NAME">%1$s</xliff:g> upang isagawa ang sumusunod na mga pagpapatakbo:"</string>
@@ -2260,7 +2271,7 @@
     <string name="user_enable_calling_and_sms_confirm_title" msgid="7243308401401932681">"I-on ang mga pagtawag sa telepono at SMS?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="4025082715546544967">"Ibabahagi sa user na ito ang history ng pagtawag at SMS."</string>
     <string name="emergency_info_title" msgid="208607506217060337">"Impormasyong pang-emergency"</string>
-    <string name="emergency_info_subtitle" msgid="1301492666470489605">"Naa-access sa pamamagitan ng lock screen sa emergency dialer"</string>
+    <string name="emergency_info_subtitle" msgid="5588995926340277372">"Maa-access ng sinuman mula sa emergency dialer nang hindi ina-unlock ang iyong telepono"</string>
     <string name="application_restrictions" msgid="8207332020898004394">"Payagan ang apps at nilalaman"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Mga application na may mga paghihigpit"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Palawakin ang mga setting para sa application"</string>

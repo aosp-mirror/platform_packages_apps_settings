@@ -74,8 +74,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Désinstaller la carte SD"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Effacer la mémoire de stockage USB"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Effacer la carte SD"</string>
-    <!-- no translation found for font_size_summary (1690992332887488183) -->
-    <skip />
+    <string name="font_size_summary" msgid="1690992332887488183">"Agrandissez ou réduisez le texte affiché."</string>
     <string name="small_font" msgid="2295331917424072635">"Petit"</string>
     <string name="medium_font" msgid="2068475425515133701">"Moyen"</string>
     <string name="large_font" msgid="599055175160971446">"Grande"</string>
@@ -332,10 +331,17 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Déverrouillage avec empreinte"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="4747510337049957778">"Il vous suffit de toucher le lecteur d\'empreintes digitales pour déverrouiller votre téléphone, autoriser des achats ou vous connecter à des applications.\n\nToutes les personnes dont les empreintes digitales sont ajoutées sur votre téléphone peuvent effectuer ces opérations. Sélectionnez donc ces personnes avec soin."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="7173290350577831813">"Remarque : Vos empreintes digitales peuvent être moins sécurisées qu\'un motif ou un NIP fiables."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_risk_link_text" msgid="9129531466157620977">"En savoir plus"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="1650783655974801525">"Remarque : Vos empreintes digitales peuvent être moins sécuritaires qu\'un schéma ou un NIP fiable. "<annotation id="url">"En savoir plus"</annotation></string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Annuler"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Continuer"</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="7234486440384881699">"Les fonctions de protection de l\'appareil ne seront pas activées. Vous ne serez pas en mesure d\'empêcher les autres d\'utiliser cette tablette si celle-ci est perdue ou volée, ou si son contenu est effacé."</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="3519190003101280912">"Les fonctions de protection de l\'appareil ne seront pas activées. Vous ne serez pas en mesure d\'empêcher les autres d\'utiliser cet appareil si celui-ci est perdu ou volé, ou si son contenu est effacé."</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="417315011140961">"Les fonctions de protection de l\'appareil ne seront pas activées. Vous ne serez pas en mesure d\'empêcher les autres d\'utiliser ce téléphone si celui-ci est perdu ou volé, ou si son contenu est effacé."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="tablet" msgid="8783499872534165700">"Les fonctions de protection de l\'appareil ne seront pas activées. Vous ne serez pas en mesure d\'empêcher les autres d\'utiliser cette tablette si celle-ci est perdue ou volée."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="device" msgid="3120512940873907578">"Les fonctions de protection de l\'appareil ne seront pas activées. Vous ne serez pas en mesure d\'empêcher les autres d\'utiliser cet appareil si celui-ci est perdu ou volé."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="3589945558504439395">"Les fonctions de protection de l\'appareil ne seront pas activées. Vous ne serez pas en mesure d\'empêcher les autres d\'utiliser ce téléphone si celui-ci est perdu ou volé."</string>
+    <string name="skip_anyway_button_label" msgid="2323522873558834513">"Ignorer qandd même"</string>
+    <string name="go_back_button_label" msgid="4745265266186209467">"Retour"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="5877265753699187149">"Trouvez le capteur"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="1959655161889313661">"Localisez le capteur d\'empreintes digitales sur le dos de votre téléphone."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="2058830032070449160">"Illustration présentant l\'appareil et la position du capteur d\'empreinte digitale"</string>
@@ -406,7 +412,11 @@
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"Protégez votre appareil"</string>
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"Déverrouiller avec votre empreinte digitale"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Sélect. verr. écran"</string>
-    <string name="setup_lock_settings_picker_title" msgid="1584792702475081908">"Sélectionner le verrouillage de l\'écran"</string>
+    <string name="setup_lock_settings_picker_title" msgid="1572244299605153324">"Protégez votre téléphone"</string>
+    <string name="setup_lock_settings_picker_fingerprint_message" msgid="2431588439043969764">"Vos empreintes digitales peuvent être moins sécuritaires qu\'un schéma ou un NIP fiable. Pour plus de sécurité, configurez une méthode alternative pour verrouiller l\'écran."</string>
+    <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Activez les fonctionnalités de protection de l\'appareil pour empêcher d\'autres personnes d\'utiliser cette tablette sans votre autorisation. Choisissez la méthode de verrouillage de l\'écran à utiliser."</string>
+    <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Activez les fonctionnalités de protection de l\'appareil pour empêcher d\'autres personnes d\'utiliser cet appareil sans votre autorisation. Choisissez la méthode de verrouillage de l\'écran à utiliser."</string>
+    <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Activez les fonctionnalités de protection de l\'appareil pour empêcher d\'autres personnes d\'utiliser ce téléphone sans votre autorisation. Choisissez la méthode de verrouillage de l\'écran à utiliser."</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Choisissez votre méthode secondaire de verrouillage d\'écran"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Verrouillage de l\'écran"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Modifier écran verr."</string>
@@ -422,6 +432,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"Sécurité moyenne à élevée"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Mot de passe"</string>
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"Sécurité élevée"</string>
+    <string name="unlock_set_do_later_title" msgid="4894767558414979243">"Pas maintenant"</string>
     <string name="current_screen_lock" msgid="4104091715420072219">"Verrouillage actuel de l\'écran"</string>
     <string name="fingerprint_unlock_set_unlock_pattern" msgid="4939057588092120368">"Empreinte digitale + motif"</string>
     <string name="fingerprint_unlock_set_unlock_pin" msgid="8010746824051056986">"Empreinte digitale + NIP"</string>
@@ -704,13 +715,11 @@
     <string name="wifi_unchanged" msgid="3410422020930397102">"(aucune modification)"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"Veuillez choisir"</string>
     <string name="wifi_multiple_cert_added" msgid="3240743501460165224">"(Certificats multiples ajoutés)"</string>
-    <!-- no translation found for wifi_use_system_certs (5270879895056893783) -->
-    <skip />
+    <string name="wifi_use_system_certs" msgid="5270879895056893783">"Utiliser les certificats système"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="5160499244977160665">"Ne pas fournir"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4266754430576348471">"Ne pas valider"</string>
     <string name="wifi_do_not_validate_eap_server_warning" msgid="1787190245542586660">"Aucun certificat indiqué. Votre connexion ne sera pas privée."</string>
-    <!-- no translation found for wifi_no_domain_warning (5223011964091727376) -->
-    <skip />
+    <string name="wifi_no_domain_warning" msgid="5223011964091727376">"Vous devez spécifier un domaine."</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS disponible"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS disponible)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Entrez votre mot de passe réseau"</string>
@@ -888,8 +897,7 @@
     <string name="doze_title" msgid="2259176504273878294">"Affichage en mode Veille"</string>
     <string name="doze_summary" msgid="7128970177894383698">"Activer l\'écran lorsque vous prenez l\'appareil ou recevez des notifications"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Taille de police"</string>
-    <!-- no translation found for short_summary_font_size (6819778801232989076) -->
-    <skip />
+    <string name="short_summary_font_size" msgid="6819778801232989076">"Agrandissez ou réduisez le texte"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Paramètres de verrouillage de la carte SIM"</string>
     <string name="sim_lock_settings_category" msgid="5136244267576697004">"Configurer le blocage de la carte SIM"</string>
     <string name="sim_lock_settings_title" msgid="9018585580955414596">"Verrouillage de la carte SIM"</string>
@@ -1590,21 +1598,16 @@
     <string name="accessibility_settings" msgid="3975902491934816215">"Accessibilité"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Paramètres d\'accessibilité"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"Paramètres de vision"</string>
-    <!-- no translation found for vision_settings_description (5679491180156408260) -->
-    <skip />
+    <string name="vision_settings_description" msgid="5679491180156408260">"Vous pouvez personnaliser cet appareil en fonction de vos besoins. Il est possible de modifier ces fonctionnalités d\'accessibilité plus tard dans les paramètres."</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"Services"</string>
     <string name="talkback_title" msgid="7912059827205988080">"TalkBack"</string>
-    <!-- no translation found for talkback_summary (8331244650729024963) -->
-    <skip />
+    <string name="talkback_summary" msgid="8331244650729024963">"Le lecteur d\'écran est destiné principalement aux personnes atteintes de cécité et de troubles de la vue"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"Système"</string>
     <string name="accessibility_display_title" msgid="7610175687949675162">"Affichage"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"Sous-titres"</string>
-    <!-- no translation found for accessibility_screen_magnification_title (9002237235486714636) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_short_summary (3411979839172752057) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_summary (8274106658579514922) -->
-    <skip />
+    <string name="accessibility_screen_magnification_title" msgid="9002237235486714636">"Geste de zoom"</string>
+    <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Touchez trois fois pour zoomer vers l\'avant"</string>
+    <string name="accessibility_screen_magnification_summary" msgid="8274106658579514922">"Pour effectuer un zoom avant ou arrière, touchez trois fois l\'écran avec un seul doigt.\n\nLorsque vous avez fait un zoom avant, vous pouvez réaliser les opérations ci-dessous :\n"<ul>\n<li>"Faire défiler l\'écran : faites glisser deux doigts ou plus sur l\'écran."</li>\n<li>"Régler le niveau de zoom : pincez deux doigts ou plus, ou écartez-les."</li></ul>\n\n"Pour effectuer un zoom temporaire, touchez trois fois l\'écran et maintenez le doigt sur l’écran. Tout en maintenant le doigt sur l’écran, faites-le glisser pour vous déplacer. Relevez le doigt pour effectuer un zoom arrière.\n\nRemarque : Le geste d\'agrandissement fonctionne partout, sauf sur le clavier et la barre de navigation."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Raccourci d\'accessibilité"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"Activé"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"Désactivé"</string>
@@ -1938,15 +1941,16 @@
     <string name="fullbackup_data_summary" msgid="960850365007767734">"Sauvegardez automatiquement les données de l\'appareil (comme les mots de passe Wi-Fi et l\'historique des appels) et celles des applications (telles que les paramètres et les fichiers enregistrés par ces applications) à distance.\n\nLorsque vous activez la sauvegarde automatique, les données de l\'appareil et des applications sont enregistrées régulièrement à distance. Les données d\'applications correspondent à toutes les données enregistrées par une application (en fonction des paramètres que le développeur définit), y compris les données potentiellement confidentielles comme les contacts, les messages et les photos."</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"Paramètres d\'administration du périphérique"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"Administrateur du périphérique"</string>
-    <string name="remove_device_admin" msgid="3596845261596451437">"Désactiver"</string>
-    <string name="uninstall_device_admin" msgid="2019687470475335309">"Désinstaller"</string>
+    <string name="remove_device_admin" msgid="7736174723276745230">"Désactiver cet administrateur de l\'appareil"</string>
+    <string name="uninstall_device_admin" msgid="271120195128542165">"Désinstaller l\'application"</string>
+    <string name="remove_and_uninstall_device_admin" msgid="6983421266937728520">"Désactiver et désinstaller"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"Administrateurs de l\'appareil"</string>
     <string name="no_device_admins" msgid="702695100241728775">"Aucun administrateur de périphérique disponible"</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"Personnel"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"Travail"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"Aucun agent de confiance disponible"</string>
     <string name="add_device_admin_msg" msgid="6246742476064507965">"Activer l\'administrateur du périphérique?"</string>
-    <string name="add_device_admin" msgid="7133327675884827091">"Activer"</string>
+    <string name="add_device_admin" msgid="1349673618141610506">"Activer cet administrateur de l\'appareil"</string>
     <string name="device_admin_add_title" msgid="7705551449705676363">"Administrateur du périphérique"</string>
     <string name="device_admin_warning" msgid="2026747446313628233">"L\'activation de cet administrateur permettra à l\'application <xliff:g id="APP_NAME">%1$s</xliff:g> d\'effectuer les opérations suivantes :"</string>
     <string name="device_admin_status" msgid="4252975713178851910">"Cet administrateur est activé et permet à l\'application <xliff:g id="APP_NAME">%1$s</xliff:g> d\'effectuer les opérations suivantes :"</string>
@@ -2267,7 +2271,7 @@
     <string name="user_enable_calling_and_sms_confirm_title" msgid="7243308401401932681">"Activer les appels téléphoniques et les textos?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="4025082715546544967">"L\'historique des appels et des textos sera partagé avec cet utilisateur."</string>
     <string name="emergency_info_title" msgid="208607506217060337">"Coordonnées d\'urgence"</string>
-    <string name="emergency_info_subtitle" msgid="1301492666470489605">"Accessible à l\'écran de verrouillage dans le composeur de numéro d\'urgence"</string>
+    <string name="emergency_info_subtitle" msgid="5588995926340277372">"Accessible par tous à l\'aide du clavier d\'urgence sans devoir déverrouiller votre téléphone"</string>
     <string name="application_restrictions" msgid="8207332020898004394">"Autoriser des applications et des contenus"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Applications avec restrictions"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Développer paramètres applis"</string>
@@ -2583,22 +2587,14 @@
     </plurals>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="7465525754879341907">"Ne recevoir que les alarmes jusqu\'à <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"Activer le mode Toujours interrompre"</string>
-    <!-- no translation found for zen_mode_screen_on (7712038508173845101) -->
-    <skip />
-    <!-- no translation found for zen_mode_screen_on_summary (6444425984146305149) -->
-    <skip />
-    <!-- no translation found for zen_mode_screen_off (5026854939192419879) -->
-    <skip />
-    <!-- no translation found for zen_mode_screen_off_summary (6490932947651798094) -->
-    <skip />
-    <!-- no translation found for zen_mode_all_visual_interruptions (2851308980832487411) -->
-    <skip />
-    <!-- no translation found for zen_mode_screen_on_visual_interruptions (7373348148129140528) -->
-    <skip />
-    <!-- no translation found for zen_mode_screen_off_visual_interruptions (4850792880144382633) -->
-    <skip />
-    <!-- no translation found for zen_mode_no_visual_interruptions (8742776003822778472) -->
-    <skip />
+    <string name="zen_mode_screen_on" msgid="7712038508173845101">"Bloquer lorsque l\'écran est allumé"</string>
+    <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"Empêcher les notifications désactivées par le mode Ne pas déranger de s\'afficher à l\'écran"</string>
+    <string name="zen_mode_screen_off" msgid="5026854939192419879">"Bloquer lorsque l\'écran est éteint"</string>
+    <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"Empêcher les notifications désactivées par le mode Ne pas déranger d\'activer l\'écran ou de faire clignoter le voyant de notification"</string>
+    <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"Désactivé"</string>
+    <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"Lorsque l\'écran est allumé"</string>
+    <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"Lorsque l\'écran est éteint"</string>
+    <string name="zen_mode_no_visual_interruptions" msgid="8742776003822778472">"Quand l\'écran est allumé ou éteint"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Paramètres de notification"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Commentaires sur cet appareil"</string>
     <string name="restr_pin_enter_admin_pin" msgid="2451187374960131018">"Entrez le NIP d\'administrateur"</string>
@@ -2833,13 +2829,10 @@
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Ouvrez l\'application de l\'appareil photo en pivotant votre poignet deux fois"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"App. 2x sur interr. pr activ. app. photo"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Lancez rapidement l\'appareil photo sans déverrouiller l\'écran"</string>
-    <!-- no translation found for screen_zoom_title (5233515303733473927) -->
-    <skip />
-    <!-- no translation found for screen_zoom_short_summary (7291960817349834688) -->
-    <skip />
+    <string name="screen_zoom_title" msgid="5233515303733473927">"Dimensions de l\'écran"</string>
+    <string name="screen_zoom_short_summary" msgid="7291960817349834688">"Rendez les objets à l\'écran plus grands ou plus petits"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"densité d\'affichage, zoom de l\'écran, échelle, mise à l\'échelle"</string>
-    <!-- no translation found for screen_zoom_summary (6445488991799015407) -->
-    <skip />
+    <string name="screen_zoom_summary" msgid="6445488991799015407">"Agrandissez ou réduisez les éléments affichés. Si vous modifiez ce paramètre, certaines applications risquent de changer de position à l\'écran."</string>
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"Aperçu"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"Rapetisser"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"Agrandir"</string>

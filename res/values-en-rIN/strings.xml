@@ -74,8 +74,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Unmount SD card"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Erase USB storage"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Erase SD card"</string>
-    <!-- no translation found for font_size_summary (1690992332887488183) -->
-    <skip />
+    <string name="font_size_summary" msgid="1690992332887488183">"Make the text on screen smaller or larger."</string>
     <string name="small_font" msgid="2295331917424072635">"Small"</string>
     <string name="medium_font" msgid="2068475425515133701">"Medium"</string>
     <string name="large_font" msgid="599055175160971446">"Large"</string>
@@ -332,10 +331,17 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Unlock with fingerprint"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="4747510337049957778">"Just touch the fingerprint sensor to unlock your phone, authorise purchases or sign in to apps. \n\n Be careful whose fingerprints you add – any fingerprints added will be able to do these things."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="7173290350577831813">"Note: Your fingerprint may be less secure than a strong pattern or PIN."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_risk_link_text" msgid="9129531466157620977">"Find out more"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="1650783655974801525">"Note: Your fingerprint may be less secure than a strong pattern or PIN. "<annotation id="url">"Find out more"</annotation></string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Cancel"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Continue"</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="7234486440384881699">"Device protection features will not be activated. You won’t be able to prevent others from using this tablet if it’s lost, stolen or wiped."</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="3519190003101280912">"Device protection features will not be activated. You won\'t be able to prevent others from using this device if it\'s lost, stolen or wiped."</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="417315011140961">"Device protection features will not be activated. You won\'t be able to prevent others from using this phone if it\'s lost, stolen or wiped."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="tablet" msgid="8783499872534165700">"Device protection features will not be activated. You won’t be able to prevent others from using this tablet if it’s lost or stolen."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="device" msgid="3120512940873907578">"Device protection features will not be activated. You won’t be able to prevent others from using this device if it’s lost or stolen."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="3589945558504439395">"Device protection features will not be activated. You won’t be able to prevent others from using this phone if it’s lost or stolen."</string>
+    <string name="skip_anyway_button_label" msgid="2323522873558834513">"Skip anyway"</string>
+    <string name="go_back_button_label" msgid="4745265266186209467">"Go back"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="5877265753699187149">"Find the sensor"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="1959655161889313661">"Locate the fingerprint sensor on the back of your phone."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="2058830032070449160">"Illustration with device and fingerprint sensor location"</string>
@@ -406,7 +412,11 @@
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"Protect your device"</string>
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"Unlock with your fingerprint"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Choose screen lock"</string>
-    <string name="setup_lock_settings_picker_title" msgid="1584792702475081908">"Choose screen lock"</string>
+    <string name="setup_lock_settings_picker_title" msgid="1572244299605153324">"Protect your phone"</string>
+    <string name="setup_lock_settings_picker_fingerprint_message" msgid="2431588439043969764">"Fingerprint may be less secure than a strong pattern, PIN or password. Set up a backup lock screen to be secure."</string>
+    <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Prevent others from using this tablet without your permission by activating device protection features. Choose the screen lock that you would like to use."</string>
+    <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Prevent others from using this device without your permission by activating device protection features. Choose the screen lock that you would like to use."</string>
+    <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Prevent others from using this phone without your permission by activating device protection features. Choose the screen lock that you would like to use."</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Choose your backup screen lock method"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Screen lock"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Change lock screen"</string>
@@ -422,6 +432,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"Medium to high security"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Password"</string>
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"High security"</string>
+    <string name="unlock_set_do_later_title" msgid="4894767558414979243">"Not now"</string>
     <string name="current_screen_lock" msgid="4104091715420072219">"Current screen lock"</string>
     <string name="fingerprint_unlock_set_unlock_pattern" msgid="4939057588092120368">"Fingerprint + Pattern"</string>
     <string name="fingerprint_unlock_set_unlock_pin" msgid="8010746824051056986">"Fingerprint + PIN"</string>
@@ -886,8 +897,7 @@
     <string name="doze_title" msgid="2259176504273878294">"Ambient display"</string>
     <string name="doze_summary" msgid="7128970177894383698">"Wake screen when you pick up device or receive notifications"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Font size"</string>
-    <!-- no translation found for short_summary_font_size (6819778801232989076) -->
-    <skip />
+    <string name="short_summary_font_size" msgid="6819778801232989076">"Make text larger or smaller"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"SIM card lock settings"</string>
     <string name="sim_lock_settings_category" msgid="5136244267576697004">"Set up SIM card lock"</string>
     <string name="sim_lock_settings_title" msgid="9018585580955414596">"SIM card lock"</string>
@@ -1588,21 +1598,16 @@
     <string name="accessibility_settings" msgid="3975902491934816215">"Accessibility"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Accessibility settings"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"Vision settings"</string>
-    <!-- no translation found for vision_settings_description (5679491180156408260) -->
-    <skip />
+    <string name="vision_settings_description" msgid="5679491180156408260">"You can customise this device to fit your needs. These accessibility features can be changed later in Settings."</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"Services"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
-    <!-- no translation found for talkback_summary (8331244650729024963) -->
-    <skip />
+    <string name="talkback_summary" msgid="8331244650729024963">"Screen reader primarily for people with blindness and low vision"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"System"</string>
     <string name="accessibility_display_title" msgid="7610175687949675162">"Display"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"Captions"</string>
-    <!-- no translation found for accessibility_screen_magnification_title (9002237235486714636) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_short_summary (3411979839172752057) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_summary (8274106658579514922) -->
-    <skip />
+    <string name="accessibility_screen_magnification_title" msgid="9002237235486714636">"Magnification gesture"</string>
+    <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Tap 3 times to zoom"</string>
+    <string name="accessibility_screen_magnification_summary" msgid="8274106658579514922">"To zoom in and out tap the screen 3 times with one finger.\n\nWhile zoomed in, you can:\n"<ul>\n<li>"Scroll: Drag 2 or more fingers across the screen"</li>\n<li>"Adjust zoom level: Pinch 2 or more fingers together or spread them apart"</li></ul>\n\n"To zoom temporarily, tap 3 times and hold on the last tap. While holding your finger down, drag to move around the screen. Lift your finger to zoom back out.\n\nNote: Magnification gesture works everywhere except the keyboard and navigation bar."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Accessibility shortcut"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"On"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"Off"</string>
@@ -1936,15 +1941,16 @@
     <string name="fullbackup_data_summary" msgid="960850365007767734">"Automatically back up device data (such as Wi-Fi passwords and call history) and app data (such as settings and files stored by apps) remotely.\n\nWhen you turn on automatic backup, device and app data is periodically saved remotely. App data can be any data that an app has saved (based on developer settings), including potentially sensitive data such as contacts, messages and photos."</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"Device administration settings"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"Device administrator"</string>
-    <string name="remove_device_admin" msgid="3596845261596451437">"Deactivate"</string>
-    <string name="uninstall_device_admin" msgid="2019687470475335309">"Uninstall"</string>
+    <string name="remove_device_admin" msgid="7736174723276745230">"Deactivate this device administrator"</string>
+    <string name="uninstall_device_admin" msgid="271120195128542165">"Uninstall app"</string>
+    <string name="remove_and_uninstall_device_admin" msgid="6983421266937728520">"Deactivate and Uninstall"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"Device administrators"</string>
     <string name="no_device_admins" msgid="702695100241728775">"No available device administrators"</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"Personal"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"Work"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"No available trust agents"</string>
     <string name="add_device_admin_msg" msgid="6246742476064507965">"Activate device administrator?"</string>
-    <string name="add_device_admin" msgid="7133327675884827091">"Activate"</string>
+    <string name="add_device_admin" msgid="1349673618141610506">"Activate this device administrator"</string>
     <string name="device_admin_add_title" msgid="7705551449705676363">"Device administrator"</string>
     <string name="device_admin_warning" msgid="2026747446313628233">"Activating this administrator will allow the app <xliff:g id="APP_NAME">%1$s</xliff:g> to perform the following operations:"</string>
     <string name="device_admin_status" msgid="4252975713178851910">"This administrator is active and allows the app <xliff:g id="APP_NAME">%1$s</xliff:g> to perform the following operations:"</string>
@@ -2265,7 +2271,7 @@
     <string name="user_enable_calling_and_sms_confirm_title" msgid="7243308401401932681">"Turn on phone calls &amp; SMS?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="4025082715546544967">"Call and SMS history will be shared with this user."</string>
     <string name="emergency_info_title" msgid="208607506217060337">"Emergency information"</string>
-    <string name="emergency_info_subtitle" msgid="1301492666470489605">"Accessible through lock screen in the emergency dialler"</string>
+    <string name="emergency_info_subtitle" msgid="5588995926340277372">"Accessible by anyone from the emergency keypad without unlocking your phone"</string>
     <string name="application_restrictions" msgid="8207332020898004394">"Allow apps and content"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Applications with restrictions"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Expand settings for application"</string>
@@ -2581,22 +2587,14 @@
     </plurals>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="7465525754879341907">"Change to alarms only until <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"Change to always interrupt"</string>
-    <!-- no translation found for zen_mode_screen_on (7712038508173845101) -->
-    <skip />
-    <!-- no translation found for zen_mode_screen_on_summary (6444425984146305149) -->
-    <skip />
-    <!-- no translation found for zen_mode_screen_off (5026854939192419879) -->
-    <skip />
-    <!-- no translation found for zen_mode_screen_off_summary (6490932947651798094) -->
-    <skip />
-    <!-- no translation found for zen_mode_all_visual_interruptions (2851308980832487411) -->
-    <skip />
-    <!-- no translation found for zen_mode_screen_on_visual_interruptions (7373348148129140528) -->
-    <skip />
-    <!-- no translation found for zen_mode_screen_off_visual_interruptions (4850792880144382633) -->
-    <skip />
-    <!-- no translation found for zen_mode_no_visual_interruptions (8742776003822778472) -->
-    <skip />
+    <string name="zen_mode_screen_on" msgid="7712038508173845101">"Block when screen is on"</string>
+    <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"Prevent notifications silenced by Do Not Disturb from peeking or popping on screen"</string>
+    <string name="zen_mode_screen_off" msgid="5026854939192419879">"Block when screen is off"</string>
+    <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"Prevent notifications silenced by Do Not Disturb from turning on the screen or pulsing the notification light"</string>
+    <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"Off"</string>
+    <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"When screen is on"</string>
+    <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"When screen is off"</string>
+    <string name="zen_mode_no_visual_interruptions" msgid="8742776003822778472">"When screen is on or off"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Notification settings"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Send feedback about this device"</string>
     <string name="restr_pin_enter_admin_pin" msgid="2451187374960131018">"Enter administrator PIN"</string>
@@ -2831,13 +2829,10 @@
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Open the camera app by twisting your wrist twice"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Press power button twice for camera"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Quickly open camera without unlocking your screen"</string>
-    <!-- no translation found for screen_zoom_title (5233515303733473927) -->
-    <skip />
-    <!-- no translation found for screen_zoom_short_summary (7291960817349834688) -->
-    <skip />
+    <string name="screen_zoom_title" msgid="5233515303733473927">"Display size"</string>
+    <string name="screen_zoom_short_summary" msgid="7291960817349834688">"Make items on screen larger or smaller"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"display, density, screen zoom, scale, scaling"</string>
-    <!-- no translation found for screen_zoom_summary (6445488991799015407) -->
-    <skip />
+    <string name="screen_zoom_summary" msgid="6445488991799015407">"Make the items on your screen smaller or larger. Some apps on your screen may change position."</string>
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"Preview"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"Make smaller"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"Make larger"</string>

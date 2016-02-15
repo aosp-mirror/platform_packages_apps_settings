@@ -74,8 +74,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"‏جدا کردن کارت SD"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"‏پاک کردن حافظهٔ USB"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"‏پاک کردن کارت SD"</string>
-    <!-- no translation found for font_size_summary (1690992332887488183) -->
-    <skip />
+    <string name="font_size_summary" msgid="1690992332887488183">"نوشتار روی صفحه‌نمایش را کوچک‌تر یا بزرگ‌تر کنید."</string>
     <string name="small_font" msgid="2295331917424072635">"کوچک"</string>
     <string name="medium_font" msgid="2068475425515133701">"متوسط"</string>
     <string name="large_font" msgid="599055175160971446">"بزرگ"</string>
@@ -332,10 +331,17 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"بازکردن قفل با اثر انگشت"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="4747510337049957778">"برای باز کردن قفل تلفن، مجاز کردن خریدها یا ثبت ورود در برنامه‌ها، کافیست حسگر اثر انگشت را لمس کنید. \n\n مراقب باشید که اثر انگشت چه کسانی را اضافه می‌کنید - هر اثر انگشتی که اضافه‌شده می‌تواند این کارها را انجام دهد."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="7173290350577831813">"توجه: ممکن است امنیت اثر انگشت شما از یک الگو یا پین قوی کمتر باشد."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_risk_link_text" msgid="9129531466157620977">"بیشتر بدانید"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="1650783655974801525">"توجه: اثر انگشت شما ممکن است نسبت به الگو یا پینی قوی ایمنی کمتری داشته باشد. "<annotation id="url">"بیشتر بدانید"</annotation></string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"لغو"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"ادامه"</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="7234486440384881699">"قابلیت‌های حفاظتی دستگاه فعال نخواهد شد. در صورت گم شدن، سرقت یا پاک شدن اطلاعات این رایانه لوحی، نمی‌توانید مانع استفاده دیگران از آن شوید."</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="3519190003101280912">"قابلیت‌های حفاظتی دستگاه فعال نخواهد شد. درصورت گم شدن، سرقت یا پاک شدن اطلاعات دستگاه، نمی‌توانید مانع استفاده دیگران از آن شوید."</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="417315011140961">"قابلیت‌های حفاظتی دستگاه فعال نخواهد شد. درصورت گم شدن، سرقت یا پاک شدن اطلاعات این تلفن، نمی‌توانید مانع استفاده دیگران از آن شوید."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="tablet" msgid="8783499872534165700">"قابلیت‌های حفاظتی دستگاه فعال نخواهد شد. درصورت گم شدن یا به‌سرقت رفتن این رایانه لوحی، نمی‌توانید مانع استفاده دیگران از آن شوید."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="device" msgid="3120512940873907578">"قابلیت‌های حفاظتی دستگاه فعال نخواهد شد. درصورت گم شدن یا به‌سرقت رفتن این دستگاه، نمی‌توانید مانع استفاده دیگران از آن شوید."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="3589945558504439395">"قابلیت‌های حفاظتی دستگاه فعال نخواهد شد. درصورت گم شدن یا به‌سرقت رفتن این تلفن، نمی‌توانید مانع استفاده دیگران از آن شوید."</string>
+    <string name="skip_anyway_button_label" msgid="2323522873558834513">"در هر حال رد شود"</string>
+    <string name="go_back_button_label" msgid="4745265266186209467">"برگشت"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="5877265753699187149">"پیدا کردن حسگر"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="1959655161889313661">"محل حسگر اثر انگشت را در پشت تلفنتان پیدا کنید."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="2058830032070449160">"تصویر دستگاه و مکان حسگر اثر انگشت"</string>
@@ -406,13 +412,17 @@
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"از دستگاهتان محافظت کنید"</string>
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"بازکردن قفل با اثر انگشت"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"انتخاب قفل صفحه‌نمایش"</string>
-    <string name="setup_lock_settings_picker_title" msgid="1584792702475081908">"انتخاب قفل صفحه‌نمایش"</string>
+    <string name="setup_lock_settings_picker_title" msgid="1572244299605153324">"از تلفنتان محافظت کنید"</string>
+    <string name="setup_lock_settings_picker_fingerprint_message" msgid="2431588439043969764">"اثر انگشت ممکن است نسبت به الگو، پین یا گذرواژه‌ای قوی ایمنی کمتری داشته باشد. برای اینکه ایمنی را حفظ کنید قفل صفحه پشتیبانی تنظیم کنید."</string>
+    <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"با فعال کردن قابلیت‌های حفاظتی دستگاه، نگذارید دیگران بدون اجازه شما از این رایانه لوحی استفاده کنند. قفل صفحه موردنظر برای استفاده را انتخاب کنید."</string>
+    <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"با فعال کردن قابلیت‌های حفاظتی دستگاه، نگذارید دیگران بدون اجازه شما از این دستگاه استفاده کنند. قفل صفحه موردنظر برای استفاده را انتخاب کنید."</string>
+    <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"با فعال کردن قابلیت‌های حفاظتی دستگاه، نگذارید دیگران بدون اجازه شما از این تلفن استفاده کنند. قفل صفحه موردنظر برای استفاده را انتخاب کنید."</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"روش پشتیبان قفل صفحه را انتخاب کنید"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"قفل صفحه"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"تغییر قفل صفحه"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"‏تغییر/غیرفعال کردن الگو، PIN و گذرواژه امنیتی"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"روشی برای قفل کردن صفحهٔ نمایش انتخاب کنید"</string>
-    <string name="unlock_set_unlock_off_title" msgid="7117155352183088342">"هیچکدام"</string>
+    <string name="unlock_set_unlock_off_title" msgid="7117155352183088342">"هیچ‌کدام"</string>
     <string name="unlock_set_unlock_off_summary" msgid="94361581669110415"></string>
     <string name="unlock_set_unlock_none_title" msgid="5679243878975864640">"تند کشیدن"</string>
     <string name="unlock_set_unlock_none_summary" msgid="8914673583104628191">"عدم وجود امنیت"</string>
@@ -422,6 +432,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"امنیت متوسط به بالا"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"گذرواژه"</string>
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"امنیت بالا"</string>
+    <string name="unlock_set_do_later_title" msgid="4894767558414979243">"اکنون نه"</string>
     <string name="current_screen_lock" msgid="4104091715420072219">"قفل صفحه فعلی"</string>
     <string name="fingerprint_unlock_set_unlock_pattern" msgid="4939057588092120368">"اثر انگشت + الگو"</string>
     <string name="fingerprint_unlock_set_unlock_pin" msgid="8010746824051056986">"اثر انگشت + پین"</string>
@@ -704,13 +715,11 @@
     <string name="wifi_unchanged" msgid="3410422020930397102">"(بدون تغییر)"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"لطفاً انتخاب کنید"</string>
     <string name="wifi_multiple_cert_added" msgid="3240743501460165224">"(چندین گواهینامه اضافه شد)"</string>
-    <!-- no translation found for wifi_use_system_certs (5270879895056893783) -->
-    <skip />
+    <string name="wifi_use_system_certs" msgid="5270879895056893783">"استفاده از گواهی‌های سیستم"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="5160499244977160665">"ارائه نشود"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4266754430576348471">"تأیید اعتبار نشود"</string>
     <string name="wifi_do_not_validate_eap_server_warning" msgid="1787190245542586660">"مجوزی مشخص نشده است. اتصال شما خصوصی نخواهد بود."</string>
-    <!-- no translation found for wifi_no_domain_warning (5223011964091727376) -->
-    <skip />
+    <string name="wifi_no_domain_warning" msgid="5223011964091727376">"باید دامنه‌ای مشخص کنید."</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"‏WPS در دسترس است"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" ‏ (WPS در دسترس است)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"گذرواژه شبکه‌تان را وارد کنید"</string>
@@ -888,8 +897,7 @@
     <string name="doze_title" msgid="2259176504273878294">"نمایشگر محیط"</string>
     <string name="doze_summary" msgid="7128970177894383698">"روشن شدن صفحه هنگامی که دستگاه را برمی‌دارید یا اعلانی دریافت می‌کنید"</string>
     <string name="title_font_size" msgid="4405544325522105222">"اندازه قلم"</string>
-    <!-- no translation found for short_summary_font_size (6819778801232989076) -->
-    <skip />
+    <string name="short_summary_font_size" msgid="6819778801232989076">"بزرگ‌تر یا کوچک‌تر کردن نوشتار"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"تنظیمات قفل سیم کارت"</string>
     <string name="sim_lock_settings_category" msgid="5136244267576697004">"تنظیم قفل سیم کارت"</string>
     <string name="sim_lock_settings_title" msgid="9018585580955414596">"قفل سیم کارت"</string>
@@ -1590,21 +1598,16 @@
     <string name="accessibility_settings" msgid="3975902491934816215">"دسترس‌پذیری"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"تنظیمات دسترس‌پذیری"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"تنظیمات بینایی"</string>
-    <!-- no translation found for vision_settings_description (5679491180156408260) -->
-    <skip />
+    <string name="vision_settings_description" msgid="5679491180156408260">"می‌توانید این دستگاه را متناسب با نیازهایتان سفارشی کنید. می‌توانید بعداً در «تنظیمات»، این قابلیت‌های دسترس‌پذیری را تغییر دهید."</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"سرویس‌ها"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
-    <!-- no translation found for talkback_summary (8331244650729024963) -->
-    <skip />
+    <string name="talkback_summary" msgid="8331244650729024963">"صفحه‌خوان در وهله اول برای افراد نابینا و کم‌بینا در نظر گرفته شده است"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"سیستم"</string>
     <string name="accessibility_display_title" msgid="7610175687949675162">"نمایشگر"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"زیرنویس‌ها"</string>
-    <!-- no translation found for accessibility_screen_magnification_title (9002237235486714636) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_short_summary (3411979839172752057) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_summary (8274106658579514922) -->
-    <skip />
+    <string name="accessibility_screen_magnification_title" msgid="9002237235486714636">"حرکت بزرگ‌نمایی"</string>
+    <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"برای بزرگ‌نمایی، ۳ بار ضربه بزنید"</string>
+    <string name="accessibility_screen_magnification_summary" msgid="8274106658579514922">"برای بزرگ‌نمایی و کوچک کردن، با یک انگشت ۳ بار روی صفحه‌نمایش ضربه بزنید.\n\nدر حین بزرگ‌نمایی می‌توانید این کارها را انجام دهید:\n"<ul>\n<li>"پیمایش: ۲ یا چند انگشت را روی صفحه‌نمایش بکشید"</li>\n<li>"تنظیم میزان بزرگ‌نمایی: ۲ یا چند انگشت را به هم نزدیک یا از هم دور کنید"</li></ul>\n\n"برای بزرگ‌نمایی موقت، ۳ بار ضربه بزنید و در آخرین ضربه انگشتتان را پایین نگه‌دارید. درحالی‌که انگشتتان را پایین نگه‌داشته‌اید، برای حرکت در اطراف صفحه‌نمایش انگشتتان را روی صفحه بکشید. برای خروج از بزرگ‌نمایی، انگشتتان را بلند کنید.\n\nتوجه: حرکت بزرگ‌نمایی، در همه جا به‌جز صفحه‌کلید و نوار پیمایش کار می‌کند."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"میان‌برهای دسترسی‌پذیری"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"روشن"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"خاموش"</string>
@@ -1938,15 +1941,16 @@
     <string name="fullbackup_data_summary" msgid="960850365007767734">"‏انجام پشتیبان‌گیری خودکار از داده‌های دستگاه (مانند گذرواژه‌های Wi-Fi و سابقه تماس) و داده‌های برنامه (مثل تنظیمات و فایل‌های ذخیره شده توسط برنامه‌ها) از راه دور.\n\nوقتی پشتیبان‌گیری خودکار را روشن می‌کنید، داده‌های دستگاه و برنامه به‌صورت دوره‌ای از راه دور ذخیره می‌شوند. داده‌های برنامه می‌تواند هر داده‌ای باشد که برنامه (براساس تنظیمات برنامه‌نویس) ذخیره کرده است، از جمله داده‌های بالقوه حساس مانند مخاطبین، پیام‌ها و عکس‌ها."</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"تنظیمات سرپرستی دستگاه"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"سرپرست دستگاه"</string>
-    <string name="remove_device_admin" msgid="3596845261596451437">"غیرفعال کردن"</string>
-    <string name="uninstall_device_admin" msgid="2019687470475335309">"حذف نصب"</string>
+    <string name="remove_device_admin" msgid="7736174723276745230">"غیرفعال کردن سرپرست این دستگاه"</string>
+    <string name="uninstall_device_admin" msgid="271120195128542165">"حذف نصب برنامه"</string>
+    <string name="remove_and_uninstall_device_admin" msgid="6983421266937728520">"غیرفعال کردن و حذف نصب کردن"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"سرپرستان دستگاه"</string>
     <string name="no_device_admins" msgid="702695100241728775">"هیچ سرپرست دستگاهی موجود نیست"</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"شخصی"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"کاری"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"نمایندگان معتمد در دسترس نیست"</string>
     <string name="add_device_admin_msg" msgid="6246742476064507965">"سرپرست دستگاه فعال شود؟"</string>
-    <string name="add_device_admin" msgid="7133327675884827091">"فعال کردن"</string>
+    <string name="add_device_admin" msgid="1349673618141610506">"فعال کردن سرپرست این دستگاه"</string>
     <string name="device_admin_add_title" msgid="7705551449705676363">"سرپرست دستگاه"</string>
     <string name="device_admin_warning" msgid="2026747446313628233">"فعال‌سازی این سرپرست به برنامه <xliff:g id="APP_NAME">%1$s</xliff:g> امکان می‌دهد تا عملکردهای زیر را انجام دهد:"</string>
     <string name="device_admin_status" msgid="4252975713178851910">"این سرپرست فعال است و به برنامه <xliff:g id="APP_NAME">%1$s</xliff:g> اجازه می‌دهد تا عملکردهای زیر را انجام دهد:"</string>
@@ -2267,7 +2271,7 @@
     <string name="user_enable_calling_and_sms_confirm_title" msgid="7243308401401932681">"تماس‌های تلفنی و پیامک روشن شوند؟"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="4025082715546544967">"سابقه پیامک و تماس، با این کاربر به اشتراک گذاشته می‌شود."</string>
     <string name="emergency_info_title" msgid="208607506217060337">"اطلاعات اضطراری"</string>
-    <string name="emergency_info_subtitle" msgid="1301492666470489605">"قابل دسترس ازطریق صفحه درحالت قفل در بخش تلفن اضطراری"</string>
+    <string name="emergency_info_subtitle" msgid="5588995926340277372">"ازطریق شماره‌گیر اضطراری، بدون نیاز به بازکردن قفل تلفن، برای همه قابل دسترسی است"</string>
     <string name="application_restrictions" msgid="8207332020898004394">"برنامه‌ها و محتوا مجازاند"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"برنامه‌های دارای محدودیت"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"توسعه تنظیمات برای برنامه"</string>
@@ -2583,22 +2587,14 @@
     </plurals>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="7465525754879341907">"تغییر به «فقط هشدارها» تا <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"تغییر در «همیشه وقفه»"</string>
-    <!-- no translation found for zen_mode_screen_on (7712038508173845101) -->
-    <skip />
-    <!-- no translation found for zen_mode_screen_on_summary (6444425984146305149) -->
-    <skip />
-    <!-- no translation found for zen_mode_screen_off (5026854939192419879) -->
-    <skip />
-    <!-- no translation found for zen_mode_screen_off_summary (6490932947651798094) -->
-    <skip />
-    <!-- no translation found for zen_mode_all_visual_interruptions (2851308980832487411) -->
-    <skip />
-    <!-- no translation found for zen_mode_screen_on_visual_interruptions (7373348148129140528) -->
-    <skip />
-    <!-- no translation found for zen_mode_screen_off_visual_interruptions (4850792880144382633) -->
-    <skip />
-    <!-- no translation found for zen_mode_no_visual_interruptions (8742776003822778472) -->
-    <skip />
+    <string name="zen_mode_screen_on" msgid="7712038508173845101">"وقتی صفحه‌نمایش روشن است مسدود شود"</string>
+    <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"مانع از آن می‌شود که اعلان‌های بی‌صداشده با «مزاحم نشوید» در صفحه‌نمایش فعلی نشان داده یا ظاهر شوند"</string>
+    <string name="zen_mode_screen_off" msgid="5026854939192419879">"وقتی صفحه‌نمایش خاموش است مسدود شود"</string>
+    <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"مانع از آن می‌شود که اعلان‌های بی‌صداشده با «مزاحم نشوید» باعث چشمک زدن چراغ اعلان یا روشن شدن صفحه‌نمایش شوند"</string>
+    <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"خاموش"</string>
+    <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"وقتی صفحه‌نمایش روشن است"</string>
+    <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"وقتی صفحه‌نمایش روشن است"</string>
+    <string name="zen_mode_no_visual_interruptions" msgid="8742776003822778472">"وقتی صفحه‌نمایش روشن یا خاموش است"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"تنظیمات اعلان"</string>
     <string name="device_feedback" msgid="3238056036766293294">"ارسال بازخورد درباره این دستگاه"</string>
     <string name="restr_pin_enter_admin_pin" msgid="2451187374960131018">"پین سرپرست را وارد کنید"</string>
@@ -2833,13 +2829,10 @@
     <string name="camera_gesture_desc" msgid="1831390075255870960">"با دو بار چرخاندن مچتان، برنامه دوربین را باز کنید"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"دو ضربه روی دکمه روشن/خاموش برای دوربین"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"دوربین را سریع و بدون باز کردن قفل صفحه باز کنید"</string>
-    <!-- no translation found for screen_zoom_title (5233515303733473927) -->
-    <skip />
-    <!-- no translation found for screen_zoom_short_summary (7291960817349834688) -->
-    <skip />
+    <string name="screen_zoom_title" msgid="5233515303733473927">"اندازه نمایش"</string>
+    <string name="screen_zoom_short_summary" msgid="7291960817349834688">"بزرگ‌تر یا کوچک‌تر کردن موارد روی صفحه‌نمایش"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"تراکم نمایشگر، بزرگ‌نمایی صفحه، مقیاس، مقیاس‌بندی"</string>
-    <!-- no translation found for screen_zoom_summary (6445488991799015407) -->
-    <skip />
+    <string name="screen_zoom_summary" msgid="6445488991799015407">"موارد روی صفحه‌نمایش را بزرگ‌تر یا کوچک‌تر کنید. ممکن است موقعیت برخی از برنامه‌های روی صفحه‌نمایش تغییر کند."</string>
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"پیش‌نمایش"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"کوچک‌تر ببینید"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"بزرگ‌تر ببینید"</string>

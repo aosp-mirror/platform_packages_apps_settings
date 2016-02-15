@@ -74,8 +74,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Деактивиране на SD карта"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Изтриване на USB"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Изтриване на SD картата"</string>
-    <!-- no translation found for font_size_summary (1690992332887488183) -->
-    <skip />
+    <string name="font_size_summary" msgid="1690992332887488183">"Намаляване или уголемяване на текста на екрана."</string>
     <string name="small_font" msgid="2295331917424072635">"Малък"</string>
     <string name="medium_font" msgid="2068475425515133701">"Среден"</string>
     <string name="large_font" msgid="599055175160971446">"Голям"</string>
@@ -332,10 +331,17 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Отключване с отпечатък"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="4747510337049957778">"Трябва само да докоснете сензора за отпечатъци, за да отключите телефона си, да оторизирате покупка или да влезете в приложение.\n\nВнимавайте чии отпечатъци добавяте, защото съответните хора ще могат да правят тези неща."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="7173290350577831813">"Забележка: Отпечатъкът ви може да е по-малко сигурен в сравнение с надеждна фигура или ПИН код."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_risk_link_text" msgid="9129531466157620977">"Научете повече"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="1650783655974801525">"Забележка: Отпечатъкът ви може да е по-малко сигурен в сравнение с надеждна фигура или ПИН код. "<annotation id="url">"Научете повече"</annotation></string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Отказ"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Напред"</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="7234486440384881699">"Функциите за защита на устройството няма да бъдат активирани. Няма да можете да предотвратите използването на този таблет от други хора, ако бъде изгубен, откраднат или данните му бъдат изтрити."</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="3519190003101280912">"Функциите за защита на устройството няма да бъдат активирани. Няма да можете да предотвратите използването му от други хора, ако бъде изгубено, откраднато или данните му бъдат изтрити."</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="417315011140961">"Функциите за защита на устройството няма да бъдат активирани. Няма да можете да предотвратите използването на този телефон от други хора, ако бъде изгубен, откраднат или данните му бъдат изтрити."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="tablet" msgid="8783499872534165700">"Функциите за защита на устройството няма да бъдат активирани. Няма да можете да предотвратите използването на този таблет от други хора, ако бъде изгубен или откраднат."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="device" msgid="3120512940873907578">"Функциите за защита на устройството няма да бъдат активирани. Няма да можете да предотвратите използването му от други хора, ако бъде изгубено или откраднато."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="3589945558504439395">"Функциите за защита на устройството няма да бъдат активирани. Няма да можете да предотвратите използването на този телефон от други хора, ако бъде изгубен или откраднат."</string>
+    <string name="skip_anyway_button_label" msgid="2323522873558834513">"Пропускане въпреки това"</string>
+    <string name="go_back_button_label" msgid="4745265266186209467">"Назад"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="5877265753699187149">"Намиране на сензора"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="1959655161889313661">"Намерете сензора за отпечатък на гърба на телефона си."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="2058830032070449160">"Илюстрация с устройството и местоположението на сензора за отпечатък"</string>
@@ -406,7 +412,11 @@
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"Защитете устройството си"</string>
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"Отключване с отпечатъка ви"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Закл. на екрана: Избор"</string>
-    <string name="setup_lock_settings_picker_title" msgid="1584792702475081908">"Закл. на екрана: Избор"</string>
+    <string name="setup_lock_settings_picker_title" msgid="1572244299605153324">"Защитете телефона си"</string>
+    <string name="setup_lock_settings_picker_fingerprint_message" msgid="2431588439043969764">"Отпечатъкът може да е по-малко сигурен в сравнение с надеждна фигура, ПИН код или парола. Настройте резервна опция за заключен екран, за да сте защитени."</string>
+    <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Предотвратете използването на този таблет от други хора без разрешението ви, като активирате функциите за защита на устройството. Изберете опцията за заключване на екрана, която искате да използвате."</string>
+    <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Предотвратете използването на това устройство от други хора без разрешението ви, като активирате функциите за защитата му. Изберете опцията за заключване на екрана, която искате да използвате."</string>
+    <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Предотвратете използването на този телефон от други хора без разрешението ви, като активирате функциите за защита на устройството. Изберете опцията за заключване на екрана, която искате да използвате."</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Изберете резервния си начин на заключване на екрана"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Заключване на екрана"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Промяна на заключването"</string>
@@ -422,6 +432,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"Средна до висока защита"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Парола"</string>
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"Висока защита"</string>
+    <string name="unlock_set_do_later_title" msgid="4894767558414979243">"Не сега"</string>
     <string name="current_screen_lock" msgid="4104091715420072219">"Текущо заключване на екрана"</string>
     <string name="fingerprint_unlock_set_unlock_pattern" msgid="4939057588092120368">"Отпечатък + фигура"</string>
     <string name="fingerprint_unlock_set_unlock_pin" msgid="8010746824051056986">"Отпечатък + ПИН код"</string>
@@ -704,13 +715,11 @@
     <string name="wifi_unchanged" msgid="3410422020930397102">"(непроменени)"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"Моля, изберете"</string>
     <string name="wifi_multiple_cert_added" msgid="3240743501460165224">"(Добавени са няколко сертификата)"</string>
-    <!-- no translation found for wifi_use_system_certs (5270879895056893783) -->
-    <skip />
+    <string name="wifi_use_system_certs" msgid="5270879895056893783">"Използване на системни сертификати"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="5160499244977160665">"Без предоставяне"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4266754430576348471">"Без удостоверяване"</string>
     <string name="wifi_do_not_validate_eap_server_warning" msgid="1787190245542586660">"Не е посочен сертификат. Връзката ви няма да бъде частна."</string>
-    <!-- no translation found for wifi_no_domain_warning (5223011964091727376) -->
-    <skip />
+    <string name="wifi_no_domain_warning" msgid="5223011964091727376">"Трябва да посочите домейн."</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"Налице е WPS"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (Налице е WPS)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Въведете паролата за мрежата"</string>
@@ -888,8 +897,7 @@
     <string name="doze_title" msgid="2259176504273878294">"Дисплей, открояващ важни неща"</string>
     <string name="doze_summary" msgid="7128970177894383698">"Включване на екрана при вдигане на устройството или при получаване на известия"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Размер на шрифта"</string>
-    <!-- no translation found for short_summary_font_size (6819778801232989076) -->
-    <skip />
+    <string name="short_summary_font_size" msgid="6819778801232989076">"Уголемяване или намаляване на текст"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Заключване на SIM картата"</string>
     <string name="sim_lock_settings_category" msgid="5136244267576697004">"Настройване на заключването"</string>
     <string name="sim_lock_settings_title" msgid="9018585580955414596">"Заключване на SIM картата"</string>
@@ -1590,21 +1598,16 @@
     <string name="accessibility_settings" msgid="3975902491934816215">"Достъпност"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Настройки за достъпност"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"Настройки при зрителни проблеми"</string>
-    <!-- no translation found for vision_settings_description (5679491180156408260) -->
-    <skip />
+    <string name="vision_settings_description" msgid="5679491180156408260">"В състояние сте да персонализирате устройството така, че да отговаря на нуждите ви. Тези функции за достъпност могат да бъдат променени по-късно от „Настройки“."</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"Услуги"</string>
     <string name="talkback_title" msgid="7912059827205988080">"TalkBack"</string>
-    <!-- no translation found for talkback_summary (8331244650729024963) -->
-    <skip />
+    <string name="talkback_summary" msgid="8331244650729024963">"Екранен четец, предимно за хора със слепота и слабо зрение"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"Система"</string>
     <string name="accessibility_display_title" msgid="7610175687949675162">"Дисплей"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"Надписи"</string>
-    <!-- no translation found for accessibility_screen_magnification_title (9002237235486714636) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_short_summary (3411979839172752057) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_summary (8274106658579514922) -->
-    <skip />
+    <string name="accessibility_screen_magnification_title" msgid="9002237235486714636">"Жест за увеличение"</string>
+    <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Трикратно докосване за промяна на мащаба"</string>
+    <string name="accessibility_screen_magnification_summary" msgid="8274106658579514922">"За да увеличите или намалите мащаба, докоснете екрана три пъти с един пръст.\n\nПри увеличен мащаб можете:\n"<ul>\n<li>"Да превъртате: Плъзнете два или повече пръсти по екрана."</li>\n<li>"Да коригирате нивото на мащаба: Съберете заедно два или повече пръсти или ги разтворете."</li></ul>\n\n"За да увеличите временно мащаба, докоснете три пъти и задръжте при последното натискане. Докато задържате пръста си, го плъзнете, за да се придвижите по екрана. Вдигнете пръста си, за да се върнете към първоначалния мащаб.\n\nЗабележка: Жестът за увеличение работи навсякъде освен за клавиатурата и за лентата за навигация."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Пряк път към ф-ята за достъпност"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"Включено"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"Изкл."</string>
@@ -1938,15 +1941,16 @@
     <string name="fullbackup_data_summary" msgid="960850365007767734">"Автоматично създаване на отдалечено резервно копие на данните на устройството (като пароли за Wi-Fi и история на обажданията) и тези на приложенията (като настройки и съхранявани от приложенията файлове).\n\nКогато включите автоматичното създаване на резервно копие, данните на устройството и на приложенията периодично се запазват отдалечено. Данните на приложенията могат да бъдат всяка запазвана от тях информация (въз основа на настройките за програмисти), включително потенциално поверителната, като например контакти, съобщения и снимки."</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"Административни настройки на устройство"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"Администратор на устройство"</string>
-    <string name="remove_device_admin" msgid="3596845261596451437">"Деактивиране"</string>
-    <string name="uninstall_device_admin" msgid="2019687470475335309">"Деинсталиране"</string>
+    <string name="remove_device_admin" msgid="7736174723276745230">"Деактивиране на този администратор на устройството"</string>
+    <string name="uninstall_device_admin" msgid="271120195128542165">"Деинсталиране на приложението"</string>
+    <string name="remove_and_uninstall_device_admin" msgid="6983421266937728520">"Деактивиране и деинсталиране"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"Администратори на устройство"</string>
     <string name="no_device_admins" msgid="702695100241728775">"Няма налични администратори на устройство"</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"Лично"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"Служебно"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"Няма налични trust agents"</string>
     <string name="add_device_admin_msg" msgid="6246742476064507965">"Да се активира ли администраторът на устройството?"</string>
-    <string name="add_device_admin" msgid="7133327675884827091">"Активиране"</string>
+    <string name="add_device_admin" msgid="1349673618141610506">"Активиране на този администратор на устройството"</string>
     <string name="device_admin_add_title" msgid="7705551449705676363">"Администратор на устройство"</string>
     <string name="device_admin_warning" msgid="2026747446313628233">"Активирането на този администратор ще разреши на приложението <xliff:g id="APP_NAME">%1$s</xliff:g> да изпълнява следните действия:"</string>
     <string name="device_admin_status" msgid="4252975713178851910">"Този администратор е активен и разрешава на приложението <xliff:g id="APP_NAME">%1$s</xliff:g> да изпълнява следните действия:"</string>
@@ -2267,7 +2271,7 @@
     <string name="user_enable_calling_and_sms_confirm_title" msgid="7243308401401932681">"Да се включат ли телефонните обаждания и SMS?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="4025082715546544967">"Историята на обажданията и SMS съобщенията ще се сподели с този потребител."</string>
     <string name="emergency_info_title" msgid="208607506217060337">"Информация за спешни случаи"</string>
-    <string name="emergency_info_subtitle" msgid="1301492666470489605">"Достъпна от клавиатурата за набиране на спешни номера на заключения екран"</string>
+    <string name="emergency_info_subtitle" msgid="5588995926340277372">"Всеки има достъп от клавиатурата за набиране на спешни номера, без да отключва телефона ви"</string>
     <string name="application_restrictions" msgid="8207332020898004394">"Разрешаване на приложения и съдържание"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Приложения с ограничения"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Настройки за прилож.: Разгъв."</string>
@@ -2583,22 +2587,14 @@
     </plurals>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="7465525754879341907">"Активиране на режима „Само будилници“ до <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"Активиране на режима „Прекъсване винаги“"</string>
-    <!-- no translation found for zen_mode_screen_on (7712038508173845101) -->
-    <skip />
-    <!-- no translation found for zen_mode_screen_on_summary (6444425984146305149) -->
-    <skip />
-    <!-- no translation found for zen_mode_screen_off (5026854939192419879) -->
-    <skip />
-    <!-- no translation found for zen_mode_screen_off_summary (6490932947651798094) -->
-    <skip />
-    <!-- no translation found for zen_mode_all_visual_interruptions (2851308980832487411) -->
-    <skip />
-    <!-- no translation found for zen_mode_screen_on_visual_interruptions (7373348148129140528) -->
-    <skip />
-    <!-- no translation found for zen_mode_screen_off_visual_interruptions (4850792880144382633) -->
-    <skip />
-    <!-- no translation found for zen_mode_no_visual_interruptions (8742776003822778472) -->
-    <skip />
+    <string name="zen_mode_screen_on" msgid="7712038508173845101">"Блокиране при включен екран"</string>
+    <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"Известията, блокирани чрез „Не безпокойте“, няма да се показват мимолетно, нито да изскачат на екрана"</string>
+    <string name="zen_mode_screen_off" msgid="5026854939192419879">"Блокиране при изключен екран"</string>
+    <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"Известията, блокирани чрез „Не безпокойте“, няма да включват екрана или да задействат пулсиращата светлина"</string>
+    <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"Изключено"</string>
+    <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"При включен екран"</string>
+    <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"При изключен екран"</string>
+    <string name="zen_mode_no_visual_interruptions" msgid="8742776003822778472">"При включен или изключен екран"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Настройки за известяване"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Отзиви за устройството"</string>
     <string name="restr_pin_enter_admin_pin" msgid="2451187374960131018">"Въведете администраторския ПИН код"</string>
@@ -2833,13 +2829,10 @@
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Отворете приложението Камера с двукратно завъртане на китката си"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"За камерата натиснете бутона за захранване 2 пъти"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Бързо отваряйте камерата, без да отключвате екрана си"</string>
-    <!-- no translation found for screen_zoom_title (5233515303733473927) -->
-    <skip />
-    <!-- no translation found for screen_zoom_short_summary (7291960817349834688) -->
-    <skip />
+    <string name="screen_zoom_title" msgid="5233515303733473927">"Екранен размер"</string>
+    <string name="screen_zoom_short_summary" msgid="7291960817349834688">"Уголемяване или намаляване на елементите на екрана"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"плътност на дисплея, промяна на мащаба на екрана, мащаб, мащабиране"</string>
-    <!-- no translation found for screen_zoom_summary (6445488991799015407) -->
-    <skip />
+    <string name="screen_zoom_summary" msgid="6445488991799015407">"Намаляване или уголемяване на елементите на екрана. Позицията на някои приложения може да се промени."</string>
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"Визуализация"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"Намаляване на размера"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"Увеличаване на размера"</string>

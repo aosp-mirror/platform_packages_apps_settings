@@ -331,10 +331,17 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"指紋によるロック解除"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="4747510337049957778">"指紋認証センサーに触れるだけで、スマートフォンのロック解除、購入の許可、アプリへのログインを行うことができます。\n\nこれらの操作は、登録したどの指紋でも行えるため、誰の指紋を登録するかについては十分にご注意ください。"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="7173290350577831813">"注: 指紋は複雑なパターンやPINよりも安全面で劣る可能性があります。"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_risk_link_text" msgid="9129531466157620977">"詳細"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="1650783655974801525">"注: 指紋は複雑なパターンや PIN よりも安全面で劣る可能性があります。"<annotation id="url">"詳細"</annotation></string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"キャンセル"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"次へ"</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="7234486440384881699">"端末保護機能が有効になりません。このタブレットの紛失、盗難、データ消去時に、他人に使用されるのを阻止することはできません。"</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="3519190003101280912">"端末保護機能が有効になりません。この端末の紛失、盗難、データ消去時に、他人に使用されるのを阻止することはできません。"</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="417315011140961">"端末保護機能が有効になりません。このスマートフォンの紛失、盗難、データ消去時に、他人に使用されるのを阻止することはできません。"</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="tablet" msgid="8783499872534165700">"端末保護機能が有効になりません。このタブレットの紛失や盗難時に、他人に使用されるのを阻止することはできません。"</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="device" msgid="3120512940873907578">"端末保護機能が有効になりません。この端末の紛失や盗難時に、他人に使用されるのを阻止することはできません。"</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="3589945558504439395">"端末保護機能が有効になりません。このスマートフォンの紛失や盗難時に、他人に使用されるのを阻止することはできません。"</string>
+    <string name="skip_anyway_button_label" msgid="2323522873558834513">"スキップ"</string>
+    <string name="go_back_button_label" msgid="4745265266186209467">"戻る"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="5877265753699187149">"センサー位置の確認"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="1959655161889313661">"端末の背面にある指紋認証センサーを探します。"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="2058830032070449160">"端末の指紋認証センサーの位置を示した図"</string>
@@ -405,7 +412,11 @@
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"端末の保護"</string>
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"指紋でロックを解除する"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"画面ロックを選択"</string>
-    <string name="setup_lock_settings_picker_title" msgid="1584792702475081908">"画面ロックの選択"</string>
+    <string name="setup_lock_settings_picker_title" msgid="1572244299605153324">"スマートフォンの保護"</string>
+    <string name="setup_lock_settings_picker_fingerprint_message" msgid="2431588439043969764">"指紋は、複雑なパターン、PIN、パスワードよりも安全面で劣る可能性があります。バックアップのロック画面を設定して安全を確保してください。"</string>
+    <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"このタブレットが他人に無断で使用されるのを防ぐには、端末保護機能を有効にします。利用する画面ロックを選択してください。"</string>
+    <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"この端末が他人に無断で使用されるのを防ぐには、端末保護機能を有効にします。利用する画面ロックを選択してください。"</string>
+    <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"このスマートフォンが他人に無断で使用されるのを防ぐには、端末保護機能を有効にします。利用する画面ロックを選択してください。"</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"予備の画面ロック方式を選択してください"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"画面ロック"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"ロック解除方法を変更する"</string>
@@ -421,6 +432,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"中程度から高レベルのセキュリティ"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"パスワード"</string>
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"高レベルのセキュリティ"</string>
+    <string name="unlock_set_do_later_title" msgid="4894767558414979243">"後で行う"</string>
     <string name="current_screen_lock" msgid="4104091715420072219">"現在の画面ロック"</string>
     <!-- no translation found for fingerprint_unlock_set_unlock_pattern (4939057588092120368) -->
     <skip />
@@ -707,13 +719,11 @@
     <string name="wifi_unchanged" msgid="3410422020930397102">"（変更なし）"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"選択してください"</string>
     <string name="wifi_multiple_cert_added" msgid="3240743501460165224">"（複数の証明書が追加されています）"</string>
-    <!-- no translation found for wifi_use_system_certs (5270879895056893783) -->
-    <skip />
+    <string name="wifi_use_system_certs" msgid="5270879895056893783">"システム証明書を使用"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="5160499244977160665">"指定しない"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4266754430576348471">"検証しない"</string>
     <string name="wifi_do_not_validate_eap_server_warning" msgid="1787190245542586660">"証明書が指定されていません。この接続ではプライバシーが保護されません。"</string>
-    <!-- no translation found for wifi_no_domain_warning (5223011964091727376) -->
-    <skip />
+    <string name="wifi_no_domain_warning" msgid="5223011964091727376">"ドメインを指定する必要があります。"</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS利用可"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" （WPS利用可）"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"ネットワークパスワードを入力してください"</string>
@@ -1950,16 +1960,16 @@
     <string name="fullbackup_data_summary" msgid="960850365007767734">"端末のデータ（Wi-Fiのパスワードや通話履歴など）とアプリのデータ（アプリで保存された設定やファイルなど）を自動的にリモートでバックアップします。\n\n自動バックアップをONにすると、端末のデータとアプリのデータは定期的にリモートで保存されます。アプリのデータとしては、連絡先、メッセージ、写真など、機密と見なされるデータを含め、（デベロッパーの設定に基づいて）アプリで保存されたすべてのデータがバックアップされる可能性があります。"</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"端末管理の設定"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"端末管理アプリ"</string>
-    <string name="remove_device_admin" msgid="3596845261596451437">"無効にする"</string>
-    <!-- no translation found for uninstall_device_admin (2019687470475335309) -->
-    <skip />
+    <string name="remove_device_admin" msgid="7736174723276745230">"この端末管理アプリを無効にする"</string>
+    <string name="uninstall_device_admin" msgid="271120195128542165">"アプリをアンインストール"</string>
+    <string name="remove_and_uninstall_device_admin" msgid="6983421266937728520">"無効にしてアンインストール"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"デバイス管理者"</string>
     <string name="no_device_admins" msgid="702695100241728775">"有効なデバイス管理者がいません"</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"個人用"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"職場"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"使用可能な信頼できるエージェントがありません"</string>
     <string name="add_device_admin_msg" msgid="6246742476064507965">"管理アプリを有効にしますか？"</string>
-    <string name="add_device_admin" msgid="7133327675884827091">"有効にする"</string>
+    <string name="add_device_admin" msgid="1349673618141610506">"この端末管理アプリを有効にする"</string>
     <string name="device_admin_add_title" msgid="7705551449705676363">"端末管理アプリ"</string>
     <string name="device_admin_warning" msgid="2026747446313628233">"この管理アプリを有効にすると、次の操作を<xliff:g id="APP_NAME">%1$s</xliff:g>アプリに許可することになります。"</string>
     <string name="device_admin_status" msgid="4252975713178851910">"この管理アプリは有効であり、<xliff:g id="APP_NAME">%1$s</xliff:g>アプリに次の操作を許可します。"</string>
@@ -2282,7 +2292,7 @@
     <string name="user_enable_calling_and_sms_confirm_title" msgid="7243308401401932681">"通話とSMSをONにしますか？"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="4025082715546544967">"通話とSMSの履歴がこのユーザーと共有されます。"</string>
     <string name="emergency_info_title" msgid="208607506217060337">"緊急情報"</string>
-    <string name="emergency_info_subtitle" msgid="1301492666470489605">"ロック画面から緊急通報にアクセスして利用できます"</string>
+    <string name="emergency_info_subtitle" msgid="5588995926340277372">"スマートフォンのロックを解除せずに誰でも [緊急通報] からアクセスできます。"</string>
     <string name="application_restrictions" msgid="8207332020898004394">"アプリとコンテンツの許可"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"制限のあるアプリ"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"アプリの設定を展開"</string>
@@ -2601,7 +2611,7 @@
     <string name="zen_mode_screen_on" msgid="7712038508173845101">"画面が ON のときにブロックする"</string>
     <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"[通知を非表示] でサイレントに設定した通知を受信したときに、画面上にポップアップ表示されなくなります"</string>
     <string name="zen_mode_screen_off" msgid="5026854939192419879">"画面が OFF のときにブロックする"</string>
-    <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"[通知を非表示] でサイレントに設定した通知を受信したときに、画面が ON になったり、光が点滅したりしなくなります"</string>
+    <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"[通知を非表示] でサイレントに設定した通知を受信したときに、画面が ON になったり光が点滅したりしなくなります"</string>
     <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"OFF"</string>
     <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"画面が ON のとき"</string>
     <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"画面が OFF のとき"</string>
