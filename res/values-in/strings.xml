@@ -331,10 +331,17 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Membuka kunci dengan sidik jari"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="4747510337049957778">"Cukup sentuh sensor sidik jari untuk membuka kunci ponsel, mengotorisasi pembelian, atau masuk ke aplikasi. \n\n Harap perhatikan sidik jari siapa yang Anda tambahkan - sidik jari yang ditambahkan dapat melakukan hal-hal tersebut."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="7173290350577831813">"Catatan: Sidik jari mungkin kurang aman dibandingkan dengan pola atau PIN yang rumit."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_risk_link_text" msgid="9129531466157620977">"Pelajari lebih lanjut"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="1650783655974801525">"Catatan: Sidik jari Anda mungkin kurang aman dibanding pola atau PIN yang rumit. "<annotation id="url">"Pelajari lebih lanjut"</annotation></string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Batal"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Lanjutkan"</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="7234486440384881699">"Fitur perlindungan perangkat tidak akan diaktifkan. Anda tidak akan dapat mencegah orang lain menggunakan tablet ini jika hilang, dicuri, atau dihapus."</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="3519190003101280912">"Fitur perlindungan perangkat tidak akan diaktifkan. Anda tidak akan dapat mencegah orang lain menggunakan perangkat ini jika hilang, dicuri, atau dihapus."</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="417315011140961">"Fitur perlindungan perangkat tidak akan diaktifkan. Anda tidak akan dapat mencegah orang lain menggunakan ponsel ini jika hilang, dicuri, atau dihapus."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="tablet" msgid="8783499872534165700">"Fitur perlindungan perangkat tidak akan diaktifkan. Anda tidak dapat mencegah orang lain menggunakan tablet ini jika hilang atau dicuri."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="device" msgid="3120512940873907578">"Fitur perlindungan perangkat tidak akan diaktifkan. Anda tidak dapat mencegah orang lain menggunakan perangkat ini jika hilang atau dicuri."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="3589945558504439395">"Fitur perlindungan perangkat tidak akan diaktifkan. Anda tidak dapat mencegah orang lain menggunakan ponsel ini jika hilang atau dicuri."</string>
+    <string name="skip_anyway_button_label" msgid="2323522873558834513">"Tetap lewati"</string>
+    <string name="go_back_button_label" msgid="4745265266186209467">"Kembali"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="5877265753699187149">"Temukan sensor"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="1959655161889313661">"Cari sensor sidik jari di bagian belakang ponsel."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="2058830032070449160">"Ilustrasi dengan perangkat dan lokasi sensor sidik jari"</string>
@@ -405,7 +412,11 @@
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"Lindungi perangkat"</string>
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"Membuka kunci dengan sidik jari"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Pilih kunci layar"</string>
-    <string name="setup_lock_settings_picker_title" msgid="1584792702475081908">"Pilih kunci layar"</string>
+    <string name="setup_lock_settings_picker_title" msgid="1572244299605153324">"Lindungi ponsel"</string>
+    <string name="setup_lock_settings_picker_fingerprint_message" msgid="2431588439043969764">"Sidik jari mungkin kurang aman dibanding pola, PIN, atau sandi yang rumit. Siapkan layar kunci cadangan agar aman."</string>
+    <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Cegah orang lain menggunakan tablet ini tanpa izin Anda dengan mengaktifkan fitur perlindungan perangkat. Pilih kunci layar yang ingin Anda gunakan."</string>
+    <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Cegah orang lain menggunakan perangkat ini tanpa izin Anda dengan mengaktifkan fitur perlindungan perangkat. Pilih kunci layar yang ingin Anda gunakan."</string>
+    <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Cegah orang lain menggunakan ponsel ini tanpa izin Anda dengan mengaktifkan fitur perlindungan perangkat. Pilih kunci layar yang ingin Anda gunakan."</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Pilih metode kunci layar cadangan"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Gembok layar"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Ubah layar gembok"</string>
@@ -421,6 +432,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"Keamanan sedang hingga tinggi"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Sandi"</string>
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"Keamanan tinggi"</string>
+    <string name="unlock_set_do_later_title" msgid="4894767558414979243">"Jangan sekarang"</string>
     <string name="current_screen_lock" msgid="4104091715420072219">"Kunci layar saat ini"</string>
     <string name="fingerprint_unlock_set_unlock_pattern" msgid="4939057588092120368">"Sidik Jari + Pola"</string>
     <string name="fingerprint_unlock_set_unlock_pin" msgid="8010746824051056986">"Sidik Jari + PIN"</string>
@@ -1929,15 +1941,16 @@
     <string name="fullbackup_data_summary" msgid="960850365007767734">"Otomatis cadangkan data perangkat (seperti sandi Wi-Fi dan riwayat panggilan) dan data aplikasi (seperti setelan dan file yang disimpan oleh aplikasi) dari jarak jauh.\n\nJika Anda mengaktifkan cadangan otomatis, data perangkat dan aplikasi secara berkala disimpan dari jarak jauh. Data aplikasi dapat berupa data apa saja yang telah disimpan oleh aplikasi (menurut setelan pengembang), termasuk data yang berpotensi sensitif seperti kontak, pesan, dan foto."</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"Setelan administrasi perangkat"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"Administrator perangkat"</string>
-    <string name="remove_device_admin" msgid="3596845261596451437">"Nonaktifkan"</string>
-    <string name="uninstall_device_admin" msgid="2019687470475335309">"Copot pemasangan"</string>
+    <string name="remove_device_admin" msgid="7736174723276745230">"Nonaktifkan administrator perangkat ini"</string>
+    <string name="uninstall_device_admin" msgid="271120195128542165">"Copot pemasangan aplikasi"</string>
+    <string name="remove_and_uninstall_device_admin" msgid="6983421266937728520">"Nonaktifkan dan Copot Pemasangan"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"Administrator perangkat"</string>
     <string name="no_device_admins" msgid="702695100241728775">"Administrator perangkat tidak tersedia"</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"Pribadi"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"Kantor"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"Agen tepercaya tidak tersedia"</string>
     <string name="add_device_admin_msg" msgid="6246742476064507965">"Aktifkan administrator perangkat?"</string>
-    <string name="add_device_admin" msgid="7133327675884827091">"Aktifkan"</string>
+    <string name="add_device_admin" msgid="1349673618141610506">"Aktifkan administrator perangkat ini"</string>
     <string name="device_admin_add_title" msgid="7705551449705676363">"Administrator perangkat"</string>
     <string name="device_admin_warning" msgid="2026747446313628233">"Mengaktifkan administrator ini akan memungkinkan apl <xliff:g id="APP_NAME">%1$s</xliff:g> melakukan operasi berikut:"</string>
     <string name="device_admin_status" msgid="4252975713178851910">"Administrator ini aktif dan mengizinkan apl <xliff:g id="APP_NAME">%1$s</xliff:g> melakukan operasi berikut:"</string>
@@ -2258,7 +2271,7 @@
     <string name="user_enable_calling_and_sms_confirm_title" msgid="7243308401401932681">"Aktifkan panggilan telepon &amp; SMS?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="4025082715546544967">"Riwayat panggilan dan SMS akan dibagikan dengan pengguna ini."</string>
     <string name="emergency_info_title" msgid="208607506217060337">"Informasi darurat"</string>
-    <string name="emergency_info_subtitle" msgid="1301492666470489605">"Dapat diakses melalui layar kunci di telepon darurat"</string>
+    <string name="emergency_info_subtitle" msgid="5588995926340277372">"Dapat diakses oleh siapa saja dari telepon darurat tanpa membuka kunci ponsel"</string>
     <string name="application_restrictions" msgid="8207332020898004394">"Izinkan aplikasi dan konten"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Aplikasi dengan batasan"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Luaskan setelan untuk aplikasi"</string>

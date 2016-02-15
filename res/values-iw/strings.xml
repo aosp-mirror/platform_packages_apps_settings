@@ -76,8 +76,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"‏בטל טעינה של כרטיס SD"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"‏מחק אחסון USB"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"‏מחק כרטיס SD"</string>
-    <!-- no translation found for font_size_summary (1690992332887488183) -->
-    <skip />
+    <string name="font_size_summary" msgid="1690992332887488183">"הגדל או הקטן את גודל הטקסט שמופיע במסך."</string>
     <string name="small_font" msgid="2295331917424072635">"קטן"</string>
     <string name="medium_font" msgid="2068475425515133701">"בינוני"</string>
     <string name="large_font" msgid="599055175160971446">"גדול"</string>
@@ -336,10 +335,17 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"פתח עם טביעת אצבע"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="4747510337049957778">"גע בחיישן טביעות האצבע כדי לבטל את נעילת הטלפון, לאשר רכישות או להיכנס אל אפליקציות. \n\n בחר בקפידה את טביעות האצבע שתוסיף - טביעות אצבע שיצורפו לטלפון יאפשרו לבצע את הפעולות האלה."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="7173290350577831813">"‏שים לב: ייתכן ששימוש בטביעת אצבע יעניק פחות אבטחה מקו ביטול נעילה או PIN חזקים."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_risk_link_text" msgid="9129531466157620977">"למידע נוסף"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="1650783655974801525">"הערה: טביעת האצבע עשויה להיות בטוחה פחות מאשר קו ביטול נעילה או קוד גישה חזק. "<annotation id="url">"למידע נוסף"</annotation></string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"בטל"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"המשך"</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="7234486440384881699">"תכונות הגנת המכשיר לא יופעלו. במקרה של אובדן, גנבה או מחיקה, לא תהיה לך אפשרות למנוע מאחרים להשתמש בטאבלט."</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="3519190003101280912">"תכונות הגנת המכשיר לא יופעלו. במקרה של אובדן, גנבה או מחיקה, לא תהיה לך אפשרות למנוע מאחרים להשתמש במכשיר."</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="417315011140961">"תכונות הגנת המכשיר לא יופעלו. במקרה של אובדן, גנבה או מחיקה, לא תהיה לך אפשרות למנוע מאחרים להשתמש בטלפון."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="tablet" msgid="8783499872534165700">"תכונות הגנת המכשיר לא יופעלו. במקרה של אובדן או גנבה, לא תהיה לך אפשרות למנוע מאחרים להשתמש בטאבלט."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="device" msgid="3120512940873907578">"תכונות הגנת המכשיר לא יופעלו. במקרה של אובדן או גנבה, לא תהיה לך אפשרות למנוע מאחרים להשתמש במכשיר."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="3589945558504439395">"תכונות הגנת המכשיר לא יופעלו. במקרה של אובדן או גנבה, לא תהיה לך אפשרות למנוע מאחרים להשתמש בטלפון."</string>
+    <string name="skip_anyway_button_label" msgid="2323522873558834513">"דלג בכל זאת"</string>
+    <string name="go_back_button_label" msgid="4745265266186209467">"חזור"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="5877265753699187149">"אתר את החיישן"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="1959655161889313661">"אתר את חיישן טביעת האצבע בגב הטלפון."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="2058830032070449160">"איור המציג את המיקום של חיישן טביעת האצבע במכשיר"</string>
@@ -410,7 +416,11 @@
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"הגן על המכשיר שלך"</string>
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"ביטול נעילה באמצעות טביעת אצבע"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"נעילת מסך"</string>
-    <string name="setup_lock_settings_picker_title" msgid="1584792702475081908">"בחר שיטת נעילת מסך"</string>
+    <string name="setup_lock_settings_picker_title" msgid="1572244299605153324">"הגן על הטלפון שלך"</string>
+    <string name="setup_lock_settings_picker_fingerprint_message" msgid="2431588439043969764">"הערה: טביעת האצבע עשויה להיות בטוחה פחות מאשר קו ביטול נעילה, קוד גישה או סיסמה חזקים. הגדר נעילת מסך כגיבוי ליתר ביטחון."</string>
+    <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"הפעל את תכונות הגנת המכשיר כדי למנוע מאחרים להשתמש בטאבלט הזה ללא אישורך. בחר בנעילת המסך שבה תרצה להשתמש."</string>
+    <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"הפעל את תכונות הגנת המכשיר כדי למנוע מאחרים להשתמש במכשיר הזה ללא אישורך. בחר בנעילת המסך שבה תרצה להשתמש."</string>
+    <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"הפעל את תכונות הגנת המכשיר כדי למנוע מאחרים להשתמש בטלפון הזה ללא אישורך. בחר בנעילת המסך שבה תרצה להשתמש."</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"בחר את שיטת הגיבוי לנעילת המסך"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"נעילת מסך"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"שינוי נעילת מסך"</string>
@@ -426,6 +436,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"אבטחה בינונית עד גבוהה"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"סיסמה"</string>
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"אבטחה גבוהה"</string>
+    <string name="unlock_set_do_later_title" msgid="4894767558414979243">"לא עכשיו"</string>
     <string name="current_screen_lock" msgid="4104091715420072219">"נעילת המסך הנוכחית"</string>
     <string name="fingerprint_unlock_set_unlock_pattern" msgid="4939057588092120368">"טביעת אצבע + קו ביטול נעילה"</string>
     <string name="fingerprint_unlock_set_unlock_pin" msgid="8010746824051056986">"טביעת אצבע + קוד גישה"</string>
@@ -720,13 +731,11 @@
     <string name="wifi_unchanged" msgid="3410422020930397102">"(ללא שינוי)"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"בחר"</string>
     <string name="wifi_multiple_cert_added" msgid="3240743501460165224">"(נוספו מספר אישורים)"</string>
-    <!-- no translation found for wifi_use_system_certs (5270879895056893783) -->
-    <skip />
+    <string name="wifi_use_system_certs" msgid="5270879895056893783">"השתמש באישורי מערכת"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="5160499244977160665">"ללא אישור"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4266754430576348471">"ללא אימות"</string>
     <string name="wifi_do_not_validate_eap_server_warning" msgid="1787190245542586660">"לא הוגדר אישור. החיבור שלך לא יהיה פרטי."</string>
-    <!-- no translation found for wifi_no_domain_warning (5223011964091727376) -->
-    <skip />
+    <string name="wifi_no_domain_warning" msgid="5223011964091727376">"חובה לציין דומיין."</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"‏WPS זמין"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" ‏ (WPS זמין)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"הזן את סיסמת הרשת שלך"</string>
@@ -904,8 +913,7 @@
     <string name="doze_title" msgid="2259176504273878294">"תצוגת אווירה"</string>
     <string name="doze_summary" msgid="7128970177894383698">"הוצא את המסך ממצב כשאתה מרים את המכשיר או מקבל הודעות"</string>
     <string name="title_font_size" msgid="4405544325522105222">"גודל גופן"</string>
-    <!-- no translation found for short_summary_font_size (6819778801232989076) -->
-    <skip />
+    <string name="short_summary_font_size" msgid="6819778801232989076">"הגדלה או הקטנה של גודל הטקסט"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"‏הגדרות נעילת כרטיס SIM"</string>
     <string name="sim_lock_settings_category" msgid="5136244267576697004">"‏הגדר נעילה של כרטיס SIM"</string>
     <string name="sim_lock_settings_title" msgid="9018585580955414596">"‏נעילת כרטיס SIM"</string>
@@ -1610,21 +1618,16 @@
     <string name="accessibility_settings" msgid="3975902491934816215">"נגישות"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"הגדרות נגישות"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"הגדרות ראייה"</string>
-    <!-- no translation found for vision_settings_description (5679491180156408260) -->
-    <skip />
+    <string name="vision_settings_description" msgid="5679491180156408260">"ניתן להתאים אישית את המכשיר הזה כדי שיתאים לצרכיך. ניתן לשנות את תכונות הנגישות מאוחר יותר ב\'הגדרות\'."</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"שירותים"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
-    <!-- no translation found for talkback_summary (8331244650729024963) -->
-    <skip />
+    <string name="talkback_summary" msgid="8331244650729024963">"קורא מסך המיועד בעיקר לעיוורים או לבעלי ראייה לקויה"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"מערכת"</string>
     <string name="accessibility_display_title" msgid="7610175687949675162">"תצוגה"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"כתוביות"</string>
-    <!-- no translation found for accessibility_screen_magnification_title (9002237235486714636) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_short_summary (3411979839172752057) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_summary (8274106658579514922) -->
-    <skip />
+    <string name="accessibility_screen_magnification_title" msgid="9002237235486714636">"תנועת הגדלה"</string>
+    <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"הקש שלוש פעמים כדי לשנות את המרחק מהתצוגה"</string>
+    <string name="accessibility_screen_magnification_summary" msgid="8274106658579514922">"כדי לשנות את המרחק מהתצוגה עליך להקיש על המסך שלוש פעמים באצבע אחת.\n\nבמצב התקרבות ניתן:\n"<ul>\n<li>"לגלול: גרור שתי אצבעות או יותר על פני המסך"</li>\n<li>"להתאים את רמת ההגדלה: בצע תנועת צביטה בשתי אצבעות או יותר או הרחק אותן זו מזו"</li></ul>\n\n"כדי להגדיל באופן זמני, הקש שלוש פעמים והחזק בהקשה האחרונה. בזמן שאתה מחזיק את האצבע על המסך, גרור אותה כדי לנוע על פני המסך. הרם את האצבע כדי להגדיל בחזרה את המרחק מהתצוגה.\n\nהערה: תנועת הגדלה פועלת בכל מקום מלבד במקלדת ובסרגל הניווט."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"קיצור נגישות"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"פועל"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"כבוי"</string>
@@ -1970,15 +1973,16 @@
     <string name="fullbackup_data_summary" msgid="960850365007767734">"‏גבה מרחוק באופן אוטומטי נתונים מהמכשיר (כמו סיסמאות לרשתות Wi-Fi והיסטוריית שיחות) ונתוני אפליקציות (כמו הגדרות וקבצים שאוחסנו על ידי אפליקציות) אל Google Drive.‏\n\nכשתפעיל את הגיבוי האוטומטי, נתוני המכשיר והאפליקציות יישמרו מדי פעם באופן מרוחק. נתוני אפליקציות יכולים להיות מכל סוג שהאפליקציה שומרת (בהתבסס על הגדרות המפתח), כולל נתונים שעשויים להיות רגישים, כמו אנשי קשר, הודעות ותמונות."</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"הגדרות ניהול מכשיר"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"מנהל מכשיר"</string>
-    <string name="remove_device_admin" msgid="3596845261596451437">"בטל הפעלה"</string>
-    <string name="uninstall_device_admin" msgid="2019687470475335309">"הסר התקנה"</string>
+    <string name="remove_device_admin" msgid="7736174723276745230">"השבת את מנהל המערכת של מכשיר זה"</string>
+    <string name="uninstall_device_admin" msgid="271120195128542165">"הסר את התקנת האפליקציה"</string>
+    <string name="remove_and_uninstall_device_admin" msgid="6983421266937728520">"בטל הפעלה והסר התקנה"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"מנהלי מכשירים"</string>
     <string name="no_device_admins" msgid="702695100241728775">"אין מנהלי מכשירים זמינים"</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"אישי"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"עבודה"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"אין סביבות מהימנות זמינות"</string>
     <string name="add_device_admin_msg" msgid="6246742476064507965">"להפעיל את מנהל המכשיר?"</string>
-    <string name="add_device_admin" msgid="7133327675884827091">"הפעל"</string>
+    <string name="add_device_admin" msgid="1349673618141610506">"הפעל את מנהל המערכת של מכשיר זה"</string>
     <string name="device_admin_add_title" msgid="7705551449705676363">"מנהל מכשיר"</string>
     <string name="device_admin_warning" msgid="2026747446313628233">"הפעלת מנהל מערכת זה תאפשר לאפליקציה <xliff:g id="APP_NAME">%1$s</xliff:g> לבצע את הפעולות הבאות:"</string>
     <string name="device_admin_status" msgid="4252975713178851910">"מנהל מערכת זה פעיל ומאפשר לאפליקציה <xliff:g id="APP_NAME">%1$s</xliff:g> לבצע את הפעולות הבאות:"</string>
@@ -2301,7 +2305,7 @@
     <string name="user_enable_calling_and_sms_confirm_title" msgid="7243308401401932681">"‏האם להפעיל שיחות טלפון ו-SMS?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="4025082715546544967">"‏היסטוריית השיחות וה-SMS תשותף עם המשתמש הזה."</string>
     <string name="emergency_info_title" msgid="208607506217060337">"מידע למקרה חירום"</string>
-    <string name="emergency_info_subtitle" msgid="1301492666470489605">"נגיש באמצעות מסך הנעילה בחייגן החירום"</string>
+    <string name="emergency_info_subtitle" msgid="5588995926340277372">"נגיש לכל אחד מחייגן החירום ללא צורך בביטול נעילת הטלפון"</string>
     <string name="application_restrictions" msgid="8207332020898004394">"אפשר אפליקציות ותוכן"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"אפליקציות והגבלות"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"הרחב את ההגדרות עבור האפליקציה"</string>
@@ -2623,22 +2627,14 @@
     </plurals>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="7465525754879341907">"עבור למצב \'התראות בלבד\' עד <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"שנה ל\'הפרעות בכל מצב\'"</string>
-    <!-- no translation found for zen_mode_screen_on (7712038508173845101) -->
-    <skip />
-    <!-- no translation found for zen_mode_screen_on_summary (6444425984146305149) -->
-    <skip />
-    <!-- no translation found for zen_mode_screen_off (5026854939192419879) -->
-    <skip />
-    <!-- no translation found for zen_mode_screen_off_summary (6490932947651798094) -->
-    <skip />
-    <!-- no translation found for zen_mode_all_visual_interruptions (2851308980832487411) -->
-    <skip />
-    <!-- no translation found for zen_mode_screen_on_visual_interruptions (7373348148129140528) -->
-    <skip />
-    <!-- no translation found for zen_mode_screen_off_visual_interruptions (4850792880144382633) -->
-    <skip />
-    <!-- no translation found for zen_mode_no_visual_interruptions (8742776003822778472) -->
-    <skip />
+    <string name="zen_mode_screen_on" msgid="7712038508173845101">"חסום כשהמסך פועל"</string>
+    <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"מנע הצצה או הופעה במסך של הודעות שהושתקו במצב \'נא לא להפריע\'"</string>
+    <string name="zen_mode_screen_off" msgid="5026854939192419879">"חסום כשהמסך כבוי"</string>
+    <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"מנע מהודעות שהושתקו במצב \'נא לא להפריע\' להפעיל את המסך או את אור חיווי ההודעה המהבהב."</string>
+    <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"כבוי"</string>
+    <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"כאשר המסך פועל"</string>
+    <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"כאשר המסך כבוי"</string>
+    <string name="zen_mode_no_visual_interruptions" msgid="8742776003822778472">"כאשר המסך מופעל או כבוי"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"הגדרות התראה"</string>
     <string name="device_feedback" msgid="3238056036766293294">"שלח משוב על המכשיר הזה"</string>
     <string name="restr_pin_enter_admin_pin" msgid="2451187374960131018">"‏הזן את מספר ה-PIN של מנהל המערכת"</string>
@@ -2885,13 +2881,10 @@
     <string name="camera_gesture_desc" msgid="1831390075255870960">"פתח את אפליקציית המצלמה על ידי סיבוב כפול של פרק כף היד"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"לחץ על לחצן ההפעלה פעמיים כדי לפתוח את המצלמה"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"הפעל את המצלמה במהירות מבלי לבטל את נעילת הטלפון"</string>
-    <!-- no translation found for screen_zoom_title (5233515303733473927) -->
-    <skip />
-    <!-- no translation found for screen_zoom_short_summary (7291960817349834688) -->
-    <skip />
+    <string name="screen_zoom_title" msgid="5233515303733473927">"גודל תצוגה"</string>
+    <string name="screen_zoom_short_summary" msgid="7291960817349834688">"הגדלה והקטנה של הפריטים המופיעים במסך"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"דחיסות תצוגה, מרחק מתצוגה במסך, קנה מידה, שינוי קנה מידה"</string>
-    <!-- no translation found for screen_zoom_summary (6445488991799015407) -->
-    <skip />
+    <string name="screen_zoom_summary" msgid="6445488991799015407">"הגדלה והקטנה של הפריטים המופיעים במסך. ייתכן שמיקומן של חלק מהאפליקציות במסך ישתנה."</string>
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"תצוגה מקדימה"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"הקטנה"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"הגדלה"</string>
