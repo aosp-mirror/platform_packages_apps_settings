@@ -76,7 +76,6 @@ import android.view.accessibility.AccessibilityManager;
 import android.webkit.IWebViewUpdateService;
 import android.webkit.WebViewProviderInfo;
 import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.internal.app.LocalePicker;
@@ -95,7 +94,7 @@ import java.util.List;
 /*
  * Displays preferences for application developers.
  */
-public class DevelopmentSettings extends SettingsPreferenceFragment
+public class DevelopmentSettings extends RestrictedSettingsFragment
         implements DialogInterface.OnClickListener, DialogInterface.OnDismissListener,
                 OnPreferenceChangeListener, SwitchBar.OnSwitchChangeListener, Indexable {
     private static final String TAG = "DevelopmentSettings";
@@ -317,6 +316,10 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private Dialog mAdbKeysDialog;
     private boolean mUnavailable;
 
+    public DevelopmentSettings() {
+        super(UserManager.DISALLOW_DEBUGGING_FEATURES);
+    }
+
     @Override
     protected int getMetricsCategory() {
         return MetricsEvent.DEVELOPMENT;
@@ -337,8 +340,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
 
         mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
 
-        if (!mUm.isAdminUser()
-                || mUm.hasUserRestriction(UserManager.DISALLOW_DEBUGGING_FEATURES)
+        setIfOnlyAvailableForAdmins(true);
+        if (isUiRestricted()
                 || Settings.Global.getInt(getActivity().getContentResolver(),
                         Settings.Global.DEVICE_PROVISIONED, 0) == 0) {
             // Block access to developer options if the user is not the owner, if user policy
@@ -582,11 +585,10 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
 
         if (mUnavailable) {
             // Show error message
-            TextView emptyView = (TextView) getView().findViewById(android.R.id.empty);
-            setEmptyView(emptyView);
-            if (emptyView != null) {
-                emptyView.setText(R.string.development_settings_not_available);
+            if (!isUiRestrictedByOnlyAdmin()) {
+                getEmptyTextView().setText(R.string.development_settings_not_available);
             }
+            getPreferenceScreen().removeAll();
             return;
         }
 

@@ -23,12 +23,14 @@ import android.app.AppGlobals;
 import android.app.IActivityManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Process;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.util.Log;
@@ -58,7 +60,7 @@ public class ShowAdminSupportDetailsDialog extends Activity
 
         mDialogView = LayoutInflater.from(this).inflate(
                 R.layout.admin_support_details_dialog, null);
-        setAdminSupportDetails(mDialogView, mEnforcedAdmin.component, mEnforcedAdmin.userId);
+        setAdminSupportDetails(this, mDialogView, mEnforcedAdmin, true);
 
         new AlertDialog.Builder(this)
                 .setView(mDialogView)
@@ -73,7 +75,7 @@ public class ShowAdminSupportDetailsDialog extends Activity
         EnforcedAdmin admin = getAdminDetailsFromIntent(intent);
         if (!mEnforcedAdmin.equals(admin)) {
             mEnforcedAdmin = admin;
-            setAdminSupportDetails(mDialogView, mEnforcedAdmin.component, mEnforcedAdmin.userId);
+            setAdminSupportDetails(this, mDialogView, mEnforcedAdmin, true);
         }
     }
 
@@ -102,14 +104,8 @@ public class ShowAdminSupportDetailsDialog extends Activity
         return false;
     }
 
-    private void setAdminSupportDetails(View root, final ComponentName admin, final int userId) {
+    private void initializeDialogViews(View root, final ComponentName admin, int userId) {
         if (admin != null) {
-            CharSequence supportMessage = mDpm.getShortSupportMessageForUser(admin, userId);
-            if (supportMessage != null) {
-                TextView textView = (TextView) root.findViewById(R.id.admin_support_msg);
-                textView.setText(supportMessage);
-            }
-
             ActivityInfo ai = null;
             try {
                 ai = AppGlobals.getPackageManager().getReceiverInfo(admin, 0 /* flags */, userId);
@@ -125,25 +121,52 @@ public class ShowAdminSupportDetailsDialog extends Activity
             }
         }
 
+        setAdminSupportDetails(this, root, new EnforcedAdmin(admin, userId), true);
+    }
+
+    public static void setAdminSupportDetails(final Activity activity, View root,
+            final EnforcedAdmin enforcedAdmin, final boolean finishActivity) {
+        if (enforcedAdmin == null) {
+            return;
+        }
+        if (enforcedAdmin.component != null) {
+            DevicePolicyManager dpm = (DevicePolicyManager) activity.getSystemService(
+                    Context.DEVICE_POLICY_SERVICE);
+            if (enforcedAdmin.userId == UserHandle.USER_NULL) {
+                enforcedAdmin.userId = UserHandle.myUserId();
+            }
+            CharSequence supportMessage = null;
+            if (UserHandle.isSameApp(Process.myUid(), Process.SYSTEM_UID)) {
+                supportMessage = dpm.getShortSupportMessageForUser(
+                        enforcedAdmin.component, enforcedAdmin.userId);
+            }
+            if (supportMessage != null) {
+                TextView textView = (TextView) root.findViewById(R.id.admin_support_msg);
+                textView.setText(supportMessage);
+            }
+        }
+
         root.findViewById(R.id.admins_policies_list).setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Intent intent = new Intent();
-                        if (admin != null) {
-                            intent.setClass(ShowAdminSupportDetailsDialog.this,
-                                    DeviceAdminAdd.class);
-                            intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, admin);
+                        if (enforcedAdmin.component != null) {
+                            intent.setClass(activity, DeviceAdminAdd.class);
+                            intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN,
+                                    enforcedAdmin.component);
                             // DeviceAdminAdd class may need to run as managed profile.
-                            startActivityAsUser(intent, new UserHandle(userId));
+                            activity.startActivityAsUser(intent,
+                                    new UserHandle(enforcedAdmin.userId));
                         } else {
-                            intent.setClass(ShowAdminSupportDetailsDialog.this,
-                                    Settings.DeviceAdminSettingsActivity.class);
+                            intent.setClass(activity, Settings.DeviceAdminSettingsActivity.class);
                             // Activity merges both managed profile and parent users
                             // admins so show as same user as this activity.
-                            startActivity(intent);
+                            activity.startActivity(intent);
                         }
-                        finish();
+                        if (finishActivity) {
+                            activity.finish();
+                        }
                     }
                 });
     }

@@ -41,8 +41,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.settingslib.RestrictedLockUtils;
 
 import java.util.List;
+
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 /**
  * Confirm and execute a reset of the device to a clean "just out of the box"
@@ -280,10 +283,17 @@ public class MasterClear extends InstrumentedFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
+        final EnforcedAdmin admin = RestrictedLockUtils.checkIfRestrictionEnforced(
+                getActivity(), UserManager.DISALLOW_FACTORY_RESET, UserHandle.myUserId());
         final UserManager um = UserManager.get(getActivity());
-        if (!um.isAdminUser()
-                || um.hasUserRestriction(UserManager.DISALLOW_FACTORY_RESET)) {
+        if (!um.isAdminUser() || RestrictedLockUtils.hasBaseUserRestriction(getActivity(),
+                UserManager.DISALLOW_FACTORY_RESET, UserHandle.myUserId())) {
             return inflater.inflate(R.layout.master_clear_disallowed_screen, null);
+        } else if (admin != null) {
+            View view = inflater.inflate(R.layout.admin_support_details_empty_view, null);
+            ShowAdminSupportDetailsDialog.setAdminSupportDetails(getActivity(), view, admin, false);
+            view.setVisibility(View.VISIBLE);
+            return view;
         }
 
         mContentView = inflater.inflate(R.layout.master_clear, null);
