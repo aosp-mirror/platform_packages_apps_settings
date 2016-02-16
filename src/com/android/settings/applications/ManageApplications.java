@@ -758,6 +758,7 @@ public class ManageApplications extends InstrumentedFragment
             protected void publishResults(CharSequence constraint, FilterResults results) {
                 mCurFilterPrefix = constraint;
                 mEntries = (ArrayList<ApplicationsState.AppEntry>) results.values;
+                rebuildSections();
                 notifyDataSetChanged();
             }
         };
@@ -891,43 +892,7 @@ public class ManageApplications extends InstrumentedFragment
             mBaseEntries = entries;
             if (mBaseEntries != null) {
                 mEntries = applyPrefixFilter(mCurFilterPrefix, mBaseEntries);
-
-                if (mManageApplications.mListView.isFastScrollEnabled()) {
-                    // Rebuild sections
-                    if (mIndex == null) {
-                        LocaleList locales = mContext.getResources().getConfiguration().getLocales();
-                        if (locales.size() == 0) {
-                            locales = new LocaleList(Locale.ENGLISH);
-                        }
-                        AlphabeticIndex index = new AlphabeticIndex<>(locales.get(0));
-                        int localeCount = locales.size();
-                        for (int i = 1; i < localeCount; i++) {
-                            index.addLabels(locales.get(i));
-                        }
-                        // Ensure we always have some base English locale buckets
-                        index.addLabels(Locale.ENGLISH);
-                        mIndex = index.buildImmutableIndex();
-                    }
-
-                    ArrayList<SectionInfo> sections = new ArrayList<>();
-                    int lastSecId = -1;
-                    int totalEntries = mEntries.size();
-                    mPositionToSectionIndex = new int[totalEntries];
-
-                    for (int pos = 0; pos < totalEntries; pos++) {
-                        String label = mEntries.get(pos).label;
-                        int secId = mIndex.getBucketIndex(TextUtils.isEmpty(label) ? "" : label);
-                        if (secId != lastSecId) {
-                            lastSecId = secId;
-                            sections.add(new SectionInfo(mIndex.getBucket(secId).getLabel(), pos));
-                        }
-                        mPositionToSectionIndex[pos] = sections.size() - 1;
-                    }
-                    mSections = sections.toArray(EMPTY_SECTIONS);
-                } else {
-                    mSections = EMPTY_SECTIONS;
-                    mPositionToSectionIndex = null;
-                }
+                rebuildSections();
             } else {
                 mEntries = null;
                 mSections = EMPTY_SECTIONS;
@@ -947,6 +912,45 @@ public class ManageApplications extends InstrumentedFragment
             }
 
             mManageApplications.setHasDisabled(mState.haveDisabledApps());
+        }
+
+        private void rebuildSections() {
+            if (mEntries!= null && mManageApplications.mListView.isFastScrollEnabled()) {
+                // Rebuild sections
+                if (mIndex == null) {
+                    LocaleList locales = mContext.getResources().getConfiguration().getLocales();
+                    if (locales.size() == 0) {
+                        locales = new LocaleList(Locale.ENGLISH);
+                    }
+                    AlphabeticIndex index = new AlphabeticIndex<>(locales.get(0));
+                    int localeCount = locales.size();
+                    for (int i = 1; i < localeCount; i++) {
+                        index.addLabels(locales.get(i));
+                    }
+                    // Ensure we always have some base English locale buckets
+                    index.addLabels(Locale.ENGLISH);
+                    mIndex = index.buildImmutableIndex();
+                }
+
+                ArrayList<SectionInfo> sections = new ArrayList<>();
+                int lastSecId = -1;
+                int totalEntries = mEntries.size();
+                mPositionToSectionIndex = new int[totalEntries];
+
+                for (int pos = 0; pos < totalEntries; pos++) {
+                    String label = mEntries.get(pos).label;
+                    int secId = mIndex.getBucketIndex(TextUtils.isEmpty(label) ? "" : label);
+                    if (secId != lastSecId) {
+                        lastSecId = secId;
+                        sections.add(new SectionInfo(mIndex.getBucket(secId).getLabel(), pos));
+                    }
+                    mPositionToSectionIndex[pos] = sections.size() - 1;
+                }
+                mSections = sections.toArray(EMPTY_SECTIONS);
+            } else {
+                mSections = EMPTY_SECTIONS;
+                mPositionToSectionIndex = null;
+            }
         }
 
         private void updateLoading() {
