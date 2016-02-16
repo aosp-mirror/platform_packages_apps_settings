@@ -616,7 +616,7 @@ public class ChooseLockPassword extends SettingsActivity {
                         mHeaderText.setText(error);
                         setNextEnabled(false);
                     } else {
-                        mHeaderText.setText(R.string.lockpassword_press_continue);
+                        mHeaderText.setText(null);
                         setNextEnabled(true);
                     }
                 }
