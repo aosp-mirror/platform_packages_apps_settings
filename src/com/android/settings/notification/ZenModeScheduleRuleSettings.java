@@ -29,6 +29,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.service.notification.ZenModeConfig;
 import android.service.notification.ZenModeConfig.ScheduleInfo;
+import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.support.v7.preference.PreferenceScreen;
@@ -49,6 +50,7 @@ public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
     private static final String KEY_DAYS = "days";
     private static final String KEY_START_TIME = "start_time";
     private static final String KEY_END_TIME = "end_time";
+    private static final String KEY_EXIT_AT_ALARM = "exit_at_alarm";
 
     public static final String ACTION = Settings.ACTION_ZEN_MODE_SCHEDULE_RULE_SETTINGS;
 
@@ -58,6 +60,7 @@ public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
     private Preference mDays;
     private TimePickerPreference mStart;
     private TimePickerPreference mEnd;
+    private SwitchPreference mExitAtAlarm;
 
     private ScheduleInfo mSchedule;
 
@@ -137,6 +140,16 @@ public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
         });
         root.addPreference(mEnd);
         mEnd.setDependency(mDays.getKey());
+
+        mExitAtAlarm = (SwitchPreference) root.findPreference(KEY_EXIT_AT_ALARM);
+        mExitAtAlarm.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object o) {
+                mSchedule.exitAtAlarm = (Boolean) o;
+                updateRule(ZenModeConfig.toScheduleConditionId(mSchedule));
+                return true;
+            }
+        });
     }
 
     private void updateDays() {
@@ -181,6 +194,7 @@ public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
         updateDays();
         mStart.setTime(mSchedule.startHour, mSchedule.startMinute);
         mEnd.setTime(mSchedule.endHour, mSchedule.endMinute);
+        mExitAtAlarm.setChecked(mSchedule.exitAtAlarm);
         updateEndSummary();
     }
 

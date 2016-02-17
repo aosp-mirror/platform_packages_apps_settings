@@ -32,6 +32,13 @@
 
     <!-- Start time/End time added and removed here! :-) -->
 
+    <!-- Exit DND mode with alarm -->
+    <SwitchPreference
+        android:key="exit_at_alarm"
+        android:title="@string/zen_mode_schedule_alarm_title"
+        android:summary="@string/zen_mode_schedule_alarm_summary"
+        android:order="99" />
+
     <!-- Zen mode -->
     <DropDownPreference
             android:key="zen_mode"
