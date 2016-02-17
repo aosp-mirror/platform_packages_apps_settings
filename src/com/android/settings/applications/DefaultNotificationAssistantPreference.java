@@ -34,6 +34,7 @@ import android.util.Slog;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.android.settings.PreferenceAvailabilityProvider;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.notification.ManagedServiceSettings;
@@ -111,7 +112,10 @@ public class DefaultNotificationAssistantPreference extends AppListPreference {
         return c;
     }
 
-    public static boolean isAvailable(Context context) {
-        return !Utils.isManagedProfile(UserManager.get(context));
+    public static class AvailabilityProvider implements PreferenceAvailabilityProvider {
+        @Override
+        public boolean isAvailable(Context context) {
+            return !Utils.isManagedProfile(UserManager.get(context));
+        }
     }
 }

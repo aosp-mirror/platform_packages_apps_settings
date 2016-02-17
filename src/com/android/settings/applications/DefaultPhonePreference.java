@@ -25,6 +25,8 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 
 import com.android.settings.AppListPreference;
+import com.android.settings.PreferenceAvailabilityProvider;
+import com.android.settings.Utils;
 
 import java.util.List;
 import java.util.Objects;
@@ -36,9 +38,7 @@ public class DefaultPhonePreference extends AppListPreference {
         super(context, attrs);
 
         mContext = context.getApplicationContext();
-        if (isAvailable(context)) {
-            loadDialerApps();
-        }
+        loadDialerApps();
     }
 
     @Override
@@ -65,15 +65,19 @@ public class DefaultPhonePreference extends AppListPreference {
         return DefaultDialerManager.getDefaultDialerApplication(getContext());
     }
 
-    public static boolean isAvailable(Context context) {
-        final TelephonyManager tm =
-                (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        if (!tm.isVoiceCapable()) {
-            return false;
-        }
+    public static class AvailabilityProvider implements PreferenceAvailabilityProvider {
+        @Override
+        public boolean isAvailable(Context context) {
 
-        final UserManager um =
-                (UserManager) context.getSystemService(Context.USER_SERVICE);
-        return !um.hasUserRestriction(UserManager.DISALLOW_OUTGOING_CALLS);
+            final TelephonyManager tm =
+                    (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            if (!tm.isVoiceCapable()) {
+                return false;
+            }
+
+            final UserManager um =
+                    (UserManager) context.getSystemService(Context.USER_SERVICE);
+            return !um.hasUserRestriction(UserManager.DISALLOW_OUTGOING_CALLS);
+        }
     }
 }
