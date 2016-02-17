@@ -154,7 +154,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private static final String WIFI_AGGRESSIVE_HANDOVER_KEY = "wifi_aggressive_handover";
     private static final String WIFI_ALLOW_SCAN_WITH_TRAFFIC_KEY = "wifi_allow_scan_with_traffic";
     private static final String USB_CONFIGURATION_KEY = "select_usb_configuration";
-    private static final String WIFI_LEGACY_DHCP_CLIENT_KEY = "legacy_dhcp_client";
     private static final String MOBILE_DATA_ALWAYS_ON = "mobile_data_always_on";
     private static final String KEY_COLOR_MODE = "color_mode";
 
@@ -217,7 +216,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private SwitchPreference mWifiDisplayCertification;
     private SwitchPreference mWifiVerboseLogging;
     private SwitchPreference mWifiAggressiveHandover;
-    private SwitchPreference mLegacyDhcpClient;
     private SwitchPreference mMobileDataAlwaysOn;
 
     private SwitchPreference mWifiAllowScansWithTraffic;
@@ -372,7 +370,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         mWifiVerboseLogging = findAndInitSwitchPref(WIFI_VERBOSE_LOGGING_KEY);
         mWifiAggressiveHandover = findAndInitSwitchPref(WIFI_AGGRESSIVE_HANDOVER_KEY);
         mWifiAllowScansWithTraffic = findAndInitSwitchPref(WIFI_ALLOW_SCAN_WITH_TRAFFIC_KEY);
-        mLegacyDhcpClient = findAndInitSwitchPref(WIFI_LEGACY_DHCP_CLIENT_KEY);
         mMobileDataAlwaysOn = findAndInitSwitchPref(MOBILE_DATA_ALWAYS_ON);
         mLogdSize = addListPreference(SELECT_LOGD_SIZE_KEY);
         mUsbConfiguration = addListPreference(USB_CONFIGURATION_KEY);
@@ -624,7 +621,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         updateWifiVerboseLoggingOptions();
         updateWifiAggressiveHandoverOptions();
         updateWifiAllowScansWithTrafficOptions();
-        updateLegacyDhcpClientOptions();
         updateMobileDataAlwaysOnOptions();
         updateSimulateColorSpace();
         updateUSBAudioOptions();
@@ -1236,18 +1232,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         mWifiManager.setAllowScansWithTraffic(mWifiAllowScansWithTraffic.isChecked() ? 1 : 0);
     }
 
-    private void updateLegacyDhcpClientOptions() {
-        updateSwitchPreference(mLegacyDhcpClient, Settings.Global.getInt(
-                getActivity().getContentResolver(),
-                Settings.Global.LEGACY_DHCP_CLIENT, 0) != 0);
-    }
-
-    private void writeLegacyDhcpClientOptions() {
-        Settings.Global.putInt(getActivity().getContentResolver(),
-                Settings.Global.LEGACY_DHCP_CLIENT,
-                mLegacyDhcpClient.isChecked() ? 1 : 0);
-    }
-
     private void updateMobileDataAlwaysOnOptions() {
         updateSwitchPreference(mMobileDataAlwaysOn, Settings.Global.getInt(
                 getActivity().getContentResolver(),
@@ -1701,8 +1685,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             writeWifiAggressiveHandoverOptions();
         } else if (preference == mWifiAllowScansWithTraffic) {
             writeWifiAllowScansWithTrafficOptions();
-        } else if (preference == mLegacyDhcpClient) {
-            writeLegacyDhcpClientOptions();
         } else if (preference == mMobileDataAlwaysOn) {
             writeMobileDataAlwaysOnOptions();
         } else if (preference == mUSBAudio) {
