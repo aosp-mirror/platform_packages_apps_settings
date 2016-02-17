@@ -375,6 +375,8 @@
     <string name="fingerprint_add_max" msgid="1020927549936895822">"আপনি <xliff:g id="COUNT">%d</xliff:g>টি পর্যন্ত আঙ্গুলের ছাপ যোগ করতে পারেন"</string>
     <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"সমস্ত আঙ্গুলের ছাপ সরাবেন?"</string>
     <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"আপনি আপনার আঙ্গুলের ছাপগুলি দিয়ে আপনার ফোন আনলক করতে, কেনাকাটা অনুমোদন, বা অ্যাপ্লিকেশানগুলিতে সাইন ইন করতে পারবেন না৷"</string>
+    <!-- no translation found for fingerprint_last_delete_message_profile_challenge (8840100810725902159) -->
+    <skip />
     <string name="fingerprint_last_delete_confirm" msgid="2634726361059274289">"হ্যাঁ, সরান"</string>
     <string name="confirm_fingerprint_icon_content_description" msgid="5255544532157079096">"অবিরত রাখতে আপনার আঙ্গুলের ছাপ ব্যবহার করুন।"</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"এনক্রিপশান"</string>
@@ -485,7 +487,6 @@
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"আনলক পাসওয়ার্ড পরিবর্তন করুন"</string>
     <string name="lockpassword_password_too_short" msgid="7328975683669256660">"পাসওয়ার্ড অন্তত %d অক্ষরের হতে হবে"</string>
     <string name="lockpassword_pin_too_short" msgid="1677649103470518953">"পিন কমপক্ষে %dটি সংখ্যার হতে হবে৷"</string>
-    <string name="lockpassword_press_continue" msgid="5382729689134968005">"সম্পন্ন হলে অবিরত থাকুন এ আলতো চাপুন"</string>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"চালিয়ে যান"</string>
     <string name="lockpassword_password_too_long" msgid="7016906583950201704">"পাসওয়ার্ড <xliff:g id="NUMBER">%d</xliff:g>টি অক্ষরের থেকে কম হওয়া আবশ্যক।"</string>
     <string name="lockpassword_pin_too_long" msgid="6419879099090294052">"পিন কমপক্ষে <xliff:g id="NUMBER">%d</xliff:g>টি সংখ্যার কম হতে হবে৷"</string>
@@ -1693,12 +1694,12 @@
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"কোনো পরিষেবা ইনস্টল করা নেই"</string>
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"কোনো বিবরণ প্রদান করা নেই।"</string>
     <string name="settings_button" msgid="3006713718908152930">"সেটিংস"</string>
-    <string name="print_settings" msgid="4742428530112487843">"মুদ্রণ"</string>
+    <string name="print_settings" msgid="4742428530112487843">"প্রিন্ট"</string>
     <plurals name="print_settings_title" formatted="false" msgid="6994238166067938432">
       <item quantity="one">%dটি মুদ্রণের কাজ</item>
       <item quantity="other">%dটি মুদ্রণের কাজ</item>
     </plurals>
-    <string name="print_settings_title" msgid="3685449667822217816">"মুদ্রণ পরিষেবাগুলি"</string>
+    <string name="print_settings_title" msgid="3685449667822217816">"প্রিন্ট পরিষেবাগুলি"</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"কোনো পরিষেবা ইনস্টল করা নেই"</string>
     <string name="print_no_printers_found" msgid="989018646884973683">"কোনো মুদ্রক পাওয়া যায়নি"</string>
     <string name="print_menu_item_settings" msgid="6591330373682227082">"সেটিংস"</string>
@@ -1710,12 +1711,12 @@
     <string name="print_menu_item_search" msgid="7025589328240514553">"অনুসন্ধান করুন"</string>
     <string name="print_searching_for_printers" msgid="4680248496457576358">"মুদ্রকগুলি অনুসন্ধান করা হচ্ছে"</string>
     <string name="print_service_disabled" msgid="7739452396114245222">"পরিষেবা অক্ষমিত"</string>
-    <string name="print_print_jobs" msgid="3582094777756968793">"মুদ্রণ কাজগুলি"</string>
-    <string name="print_print_job" msgid="7563741676053287211">"মুদ্রণ কাজ"</string>
+    <string name="print_print_jobs" msgid="3582094777756968793">"প্রিন্ট কাজগুলি"</string>
+    <string name="print_print_job" msgid="7563741676053287211">"প্রিন্ট কাজ"</string>
     <string name="print_restart" msgid="8373999687329384202">"পুনর্সূচনা"</string>
     <string name="print_cancel" msgid="3621199386568672235">"বাতিল"</string>
     <string name="print_job_summary" msgid="8472427347192930694">"<xliff:g id="PRINTER">%1$s</xliff:g>\n<xliff:g id="TIME">%2$s</xliff:g>"</string>
-    <string name="print_printing_state_title_template" msgid="5736107667714582025">"<xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g> মুদ্রণ করা হচ্ছে"</string>
+    <string name="print_printing_state_title_template" msgid="5736107667714582025">"<xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g> প্রিন্ট করা হচ্ছে"</string>
     <string name="print_cancelling_state_title_template" msgid="7102968925358219875">"<xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g> বাতিল করা হচ্ছে"</string>
     <string name="print_failed_state_title_template" msgid="1436099128973357969">"<xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g> মুদ্রক ত্রুটি"</string>
     <string name="print_blocked_state_title_template" msgid="9065391617425962424">"<xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g> মুদ্রক অবরুদ্ধ করা হয়েছে"</string>

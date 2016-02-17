@@ -336,7 +336,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Continua"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="7234486440384881699">"Les funcions de protecció del dispositiu no s\'activaran. No podràs impedir que altres persones facin servir la tauleta si la perds, si te la roben o se n\'esborra el contingut."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="3519190003101280912">"Les funcions de protecció del dispositiu no s\'activaran. No podràs impedir que altres persones el facin servir si el perds, te\'l roben o se n\'esborra el contingut."</string>
-    <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="417315011140961">"No s\'han activat les funcions de protecció del dispositiu. No podràs impedir que altres persones facin servir el telèfon si el perds, te\'l roben o se n\'esborra el contingut."</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="417315011140961">"Les funcions de protecció del dispositiu no s\'activaran. No podràs impedir que altres persones facin servir el telèfon si el perds, te\'l roben o se n\'esborra el contingut."</string>
     <string name="lock_screen_intro_skip_dialog_text" product="tablet" msgid="8783499872534165700">"Les funcions de protecció del dispositiu no s\'activaran. No podràs impedir que altres persones utilitzin la tauleta si la perds o te la roben."</string>
     <string name="lock_screen_intro_skip_dialog_text" product="device" msgid="3120512940873907578">"Les funcions de protecció del dispositiu no s\'activaran. No podràs impedir que altres persones utilitzin el dispositiu si el perds o te\'l roben."</string>
     <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="3589945558504439395">"Les funcions de protecció del dispositiu no s\'activaran. No podràs impedir que altres persones utilitzin el telèfon si el perds o te\'l roben."</string>
@@ -375,6 +375,8 @@
     <string name="fingerprint_add_max" msgid="1020927549936895822">"Pots afegir un màxim de <xliff:g id="COUNT">%d</xliff:g> empremtes digitals"</string>
     <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"Suprimir les empremtes digitals?"</string>
     <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"No podràs fer servir les empremtes digitals per desbloquejar el telèfon, autoritzar compres ni iniciar la sessió en aplicacions."</string>
+    <!-- no translation found for fingerprint_last_delete_message_profile_challenge (8840100810725902159) -->
+    <skip />
     <string name="fingerprint_last_delete_confirm" msgid="2634726361059274289">"Sí, suprimeix"</string>
     <string name="confirm_fingerprint_icon_content_description" msgid="5255544532157079096">"Fes servir l\'empremta digital per continuar."</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Encriptació"</string>
@@ -413,10 +415,10 @@
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"Desbloqueja el dispositiu amb l\'empremta digital"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Tria un bloqueig de pantalla"</string>
     <string name="setup_lock_settings_picker_title" msgid="1572244299605153324">"Protegeix el telèfon"</string>
-    <string name="setup_lock_settings_picker_fingerprint_message" msgid="2431588439043969764">"Fer servir l\'empremta digital pot ser menys segur que utilitzar un patró, un PIN o una contrasenya complets. Configura una pantalla de bloqueig per estar protegit."</string>
-    <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Activa les funcions de protecció del dispositiu per impedir que altres persones utilitzin aquesta tauleta. Tria el bloqueig de pantalla que vulguis utilitzar."</string>
-    <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Activa les funcions de protecció del dispositiu per impedir que altres persones el facin servir. Tria el bloqueig de pantalla que vulguis utilitzar."</string>
-    <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Activa les funcions de protecció del dispositiu per impedir que altres persones utilitzin aquest telèfon. Tria el bloqueig de pantalla que vulguis utilitzar."</string>
+    <string name="setup_lock_settings_picker_fingerprint_message" msgid="2431588439043969764">"Fer servir l\'empremta digital pot ser menys segur que utilitzar un patró, un PIN o una contrasenya segurs. Configura una pantalla de bloqueig per estar protegit."</string>
+    <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Activa les funcions de protecció del dispositiu per impedir que altres persones utilitzin aquesta tauleta sense permís. Tria el bloqueig de pantalla que vulguis utilitzar."</string>
+    <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Activa les funcions de protecció del dispositiu per impedir que altres persones el facin servir sense permís. Tria el bloqueig de pantalla que vulguis utilitzar."</string>
+    <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Activa les funcions de protecció del dispositiu per impedir que altres persones utilitzin aquest telèfon sense permís. Tria el bloqueig de pantalla que vulguis utilitzar."</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Tria un mètode de bloqueig de pantalla alternatiu"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Bloqueig de pantalla"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Canvi pantalla bloq."</string>
@@ -485,7 +487,6 @@
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"Canvia la contrasenya de desbloqueig"</string>
     <string name="lockpassword_password_too_short" msgid="7328975683669256660">"La contrasenya ha de tenir almenys %d caràcters"</string>
     <string name="lockpassword_pin_too_short" msgid="1677649103470518953">"El PIN ha de tenir almenys %d dígits"</string>
-    <string name="lockpassword_press_continue" msgid="5382729689134968005">"Toca Continua quan acabis"</string>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Continua"</string>
     <string name="lockpassword_password_too_long" msgid="7016906583950201704">"La contrasenya ha de tenir menys de <xliff:g id="NUMBER">%d</xliff:g> caràcters."</string>
     <string name="lockpassword_pin_too_long" msgid="6419879099090294052">"El PIN ha de tenir menys de <xliff:g id="NUMBER">%d</xliff:g> dígits."</string>
