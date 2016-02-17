@@ -17,6 +17,7 @@ package com.android.settings.applications;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
@@ -25,6 +26,7 @@ import android.util.AttributeSet;
 import com.android.internal.telephony.SmsApplication;
 import com.android.internal.telephony.SmsApplication.SmsApplicationData;
 import com.android.settings.AppListPreference;
+import com.android.settings.PreferenceAvailabilityProvider;
 import com.android.settings.Utils;
 
 import java.util.Collection;
@@ -68,10 +70,18 @@ public class DefaultSmsPreference extends AppListPreference {
         return true;
     }
 
-    public static boolean isAvailable(Context context) {
-        TelephonyManager tm =
-                (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        return tm.isSmsCapable() && !Utils.isManagedProfile(UserManager.get(context));
+    public static class AvailabilityProvider implements PreferenceAvailabilityProvider {
+        @Override
+        public boolean isAvailable(Context context) {
+            boolean isRestrictedUser =
+                    UserManager.get(context)
+                            .getUserInfo(UserHandle.myUserId()).isRestricted();
+            TelephonyManager tm =
+                    (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            return !isRestrictedUser
+                    && tm.isSmsCapable()
+                    && !Utils.isManagedProfile(UserManager.get(context));
+        }
     }
 
 }

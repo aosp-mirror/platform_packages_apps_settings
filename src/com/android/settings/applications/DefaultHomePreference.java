@@ -26,8 +26,11 @@ import android.content.pm.UserInfo;
 import android.os.Build;
 import android.os.UserManager;
 import android.util.AttributeSet;
+
 import com.android.settings.AppListPreference;
+import com.android.settings.PreferenceAvailabilityProvider;
 import com.android.settings.R;
+import com.android.settings.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -115,4 +118,10 @@ public class DefaultHomePreference extends AppListPreference {
         return false;
     }
 
+    public static class AvailabilityProvider implements PreferenceAvailabilityProvider {
+        @Override
+        public boolean isAvailable(Context context) {
+            return !Utils.isManagedProfile(UserManager.get(context));
+        }
+    }
 }
