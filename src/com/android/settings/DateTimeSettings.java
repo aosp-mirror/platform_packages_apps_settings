@@ -19,9 +19,10 @@ package com.android.settings;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
-import android.app.admin.DevicePolicyManager;
+import android.app.TimePickerDialog.OnTimeSetListener;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -33,10 +34,10 @@ import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.text.format.DateFormat;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
-
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settingslib.RestrictedLockUtils;
@@ -49,8 +50,7 @@ import java.util.Date;
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 public class DateTimeSettings extends SettingsPreferenceFragment
-        implements OnSharedPreferenceChangeListener,
-                TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
+        implements OnTimeSetListener, OnDateSetListener, OnPreferenceChangeListener {
 
     private static final String HOURS_12 = "12";
     private static final String HOURS_24 = "24";
@@ -94,6 +94,7 @@ public class DateTimeSettings extends SettingsPreferenceFragment
         boolean autoTimeZoneEnabled = getAutoState(Settings.Global.AUTO_TIME_ZONE);
 
         mAutoTimePref = (RestrictedSwitchPreference) findPreference(KEY_AUTO_TIME);
+        mAutoTimePref.setOnPreferenceChangeListener(this);
         EnforcedAdmin admin = RestrictedLockUtils.checkIfAutoTimeRequired(getActivity());
         mAutoTimePref.setDisabledByAdmin(admin);
 
@@ -106,6 +107,7 @@ public class DateTimeSettings extends SettingsPreferenceFragment
         // Settings.Global.AUTO_TIME to true. Note that this app listens to that change.
         mAutoTimePref.setChecked(autoTimeEnabled);
         mAutoTimeZonePref = (SwitchPreference) findPreference(KEY_AUTO_TIME_ZONE);
+        mAutoTimeZonePref.setOnPreferenceChangeListener(this);
         // Override auto-timezone if it's a wifi-only device or if we're still in setup wizard.
         // TODO: Remove the wifiOnly test when auto-timezone is implemented based on wifi-location.
         if (Utils.isWifiOnly(getActivity()) || isFirstRun) {
@@ -131,9 +133,6 @@ public class DateTimeSettings extends SettingsPreferenceFragment
     public void onResume() {
         super.onResume();
 
-        getPreferenceScreen().getSharedPreferences()
-                .registerOnSharedPreferenceChangeListener(this);
-
         ((SwitchPreference)mTime24Pref).setChecked(is24Hour());
 
         // Register for time ticks and other reasons for time change
@@ -150,8 +149,6 @@ public class DateTimeSettings extends SettingsPreferenceFragment
     public void onPause() {
         super.onPause();
         getActivity().unregisterReceiver(mIntentReceiver);
-        getPreferenceScreen().getSharedPreferences()
-                .unregisterOnSharedPreferenceChangeListener(this);
     }
 
     public void updateTimeAndDateDisplay(Context context) {
@@ -190,19 +187,20 @@ public class DateTimeSettings extends SettingsPreferenceFragment
     }
 
     @Override
-    public void onSharedPreferenceChanged(SharedPreferences preferences, String key) {
-        if (key.equals(KEY_AUTO_TIME)) {
-            boolean autoEnabled = preferences.getBoolean(key, true);
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        if (preference.getKey().equals(KEY_AUTO_TIME)) {
+            boolean autoEnabled = (Boolean) newValue;
             Settings.Global.putInt(getContentResolver(), Settings.Global.AUTO_TIME,
                     autoEnabled ? 1 : 0);
             mTimePref.setEnabled(!autoEnabled);
             mDatePref.setEnabled(!autoEnabled);
-        } else if (key.equals(KEY_AUTO_TIME_ZONE)) {
-            boolean autoZoneEnabled = preferences.getBoolean(key, true);
+        } else if (preference.getKey().equals(KEY_AUTO_TIME_ZONE)) {
+            boolean autoZoneEnabled = (Boolean) newValue;
             Settings.Global.putInt(
                     getContentResolver(), Settings.Global.AUTO_TIME_ZONE, autoZoneEnabled ? 1 : 0);
             mTimeZone.setEnabled(!autoZoneEnabled);
         }
+        return true;
     }
 
     @Override

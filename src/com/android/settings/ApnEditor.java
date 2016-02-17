@@ -21,7 +21,6 @@ import android.app.Dialog;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
@@ -40,15 +39,13 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 
 import java.util.HashSet;
 import java.util.Set;
 
 public class ApnEditor extends InstrumentedPreferenceActivity
-        implements SharedPreferences.OnSharedPreferenceChangeListener,
-                    Preference.OnPreferenceChangeListener {
+        implements Preference.OnPreferenceChangeListener {
 
     private final static String TAG = ApnEditor.class.getSimpleName();
 
@@ -250,6 +247,10 @@ public class ApnEditor extends InstrumentedPreferenceActivity
 
         mTelephonyManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
 
+        for (int i = 0; i < getPreferenceScreen().getPreferenceCount(); i++) {
+            getPreferenceScreen().getPreference(i).setOnPreferenceChangeListener(this);
+        }
+
         fillUi();
     }
 
@@ -261,14 +262,10 @@ public class ApnEditor extends InstrumentedPreferenceActivity
     @Override
     public void onResume() {
         super.onResume();
-        getPreferenceScreen().getSharedPreferences()
-                .registerOnSharedPreferenceChangeListener(this);
     }
 
     @Override
     public void onPause() {
-        getPreferenceScreen().getSharedPreferences()
-                .unregisterOnSharedPreferenceChangeListener(this);
         super.onPause();
     }
 
@@ -487,7 +484,7 @@ public class ApnEditor extends InstrumentedPreferenceActivity
                 int index = Integer.parseInt((String) newValue);
                 mAuthType.setValueIndex(index);
 
-                String []values = mRes.getStringArray(R.array.apn_auth_entries);
+                String[] values = mRes.getStringArray(R.array.apn_auth_entries);
                 mAuthType.setSummary(values[index]);
             } catch (NumberFormatException e) {
                 return false;
@@ -520,6 +517,13 @@ public class ApnEditor extends InstrumentedPreferenceActivity
             }
             mMvnoType.setValue((String) newValue);
             mMvnoType.setSummary(mvno);
+        }
+        if (preference.equals(mPassword)) {
+            preference.setSummary(starify(newValue != null ? String.valueOf(newValue) : ""));
+        } else if (preference.equals(mCarrierEnabled) || preference.equals(mBearerMulti)) {
+            // do nothing
+        } else {
+            preference.setSummary(checkNull(newValue != null ? String.valueOf(newValue) : null));
         }
 
         return true;
@@ -765,16 +769,4 @@ public class ApnEditor extends InstrumentedPreferenceActivity
         }
     }
 
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        Preference pref = findPreference(key);
-        if (pref != null) {
-            if (pref.equals(mPassword)){
-                pref.setSummary(starify(sharedPreferences.getString(key, "")));
-            } else if (pref.equals(mCarrierEnabled) || pref.equals(mBearerMulti)) {
-                // do nothing
-            } else {
-                pref.setSummary(checkNull(sharedPreferences.getString(key, "")));
-            }
-        }
-    }
 }
