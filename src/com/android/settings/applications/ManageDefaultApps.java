@@ -24,15 +24,17 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.UserHandle;
-import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
+import android.support.v4.util.ArrayMap;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.internal.content.PackageMonitor;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.settings.PreferenceAvailabilityProvider;
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Index;
@@ -48,17 +50,22 @@ public class ManageDefaultApps extends ProfileSettingsPreferenceFragment
 
     private static final String TAG = ManageDefaultApps.class.getSimpleName();
 
+    private static final String KEY_DEFAULT_HOME = "default_home";
     private static final String KEY_ASSIST_AND_VOICE_INPUT = "assist_and_voice_input";
     private static final String KEY_DEFAULT_BROWSER = "default_browser";
     private static final String KEY_DEFAULT_PHONE_APP = "default_phone_app";
     private static final String KEY_DEFAULT_EMERGENCY_APP = "default_emergency_app";
     private static final String KEY_SMS_APPLICATION = "default_sms_app";
     private static final String KEY_DEFAULT_NOTIFICATION_ASST = "default_notification_asst_app";
+    private static final String[] PREFERENCE_KEYS = new String[] {
+            KEY_DEFAULT_HOME, KEY_ASSIST_AND_VOICE_INPUT, KEY_DEFAULT_BROWSER,
+            KEY_DEFAULT_PHONE_APP, KEY_DEFAULT_EMERGENCY_APP, KEY_SMS_APPLICATION,
+            KEY_DEFAULT_NOTIFICATION_ASST
+    };
 
     private DefaultBrowserPreference mDefaultBrowserPreference;
     private PackageManager mPm;
     private int myUserId;
-
 
     private static final long DELAY_UPDATE_BROWSER_MILLIS = 500;
 
@@ -140,6 +147,7 @@ public class ManageDefaultApps extends ProfileSettingsPreferenceFragment
                 new Preference.OnPreferenceChangeListener() {
                     @Override
                     public boolean onPreferenceChange(Preference preference, Object newValue) {
+
                         if (newValue == null) {
                             return false;
                         }
@@ -157,35 +165,65 @@ public class ManageDefaultApps extends ProfileSettingsPreferenceFragment
                         return result;
                     }
                 });
-        final boolean isRestrictedUser = UserManager.get(getActivity())
-                .getUserInfo(myUserId).isRestricted();
 
-        // Restricted users cannot currently read/write SMS.
-        // Remove SMS Application if the device does not support SMS
-        if (isRestrictedUser || !DefaultSmsPreference.isAvailable(getActivity())) {
-            removePreference(KEY_SMS_APPLICATION);
-        }
+        updatePreferenceVisibility();
+        // Update the index.
+        Index.getInstance(getActivity()).updateFromClassNameResource(
+                ManageDefaultApps.class.getName(), true, true);
+    }
 
-        if (!DefaultPhonePreference.isAvailable(getActivity())) {
-            removePreference(KEY_DEFAULT_PHONE_APP);
+    /**
+     * Iterate all preferences and hide it if it is unavailable.
+     */
+    private void updatePreferenceVisibility() {
+        PreferenceScreen preferenceScreen = getPreferenceScreen();
+        int count = preferenceScreen.getPreferenceCount();
+        List<String> preferenceKeys = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            String preferenceKey = preferenceScreen.getPreference(i).getKey();
+            if (!TextUtils.isEmpty(preferenceKey)) {
+                preferenceKeys.add(preferenceKey);
+            }
         }
+        for (String preferenceKey : preferenceKeys) {
+            boolean isAvailable = getPreferenceAvailability(getContext(), preferenceKey);
+            if (!isAvailable) {
+                Preference preference = preferenceScreen.findPreference(preferenceKey);
+                preferenceScreen.removePreference(preference);
+            }
+        }
+    }
 
-        if (!DefaultEmergencyPreference.isAvailable(getActivity())) {
-            removePreference(KEY_DEFAULT_EMERGENCY_APP);
-        }
+    /**
+     * Get availability of preference from {@link PreferenceAvailabilityProvider}.
+     */
+    private static boolean getPreferenceAvailability(Context context,
+                                              String preferenceKey) {
+        // Consider the preference is unavailable if no corresponding provider is found.
+        PreferenceAvailabilityProvider provider = getPreferenceAvailabilityProvider(preferenceKey);
+        return (provider == null) ? false : provider.isAvailable(context);
+    }
 
-        if (!ManageAssist.isAvailable(getActivity())) {
-            removePreference(KEY_ASSIST_AND_VOICE_INPUT);
+    private static PreferenceAvailabilityProvider getPreferenceAvailabilityProvider(
+            String preferenceKey) {
+        switch (preferenceKey) {
+            case KEY_ASSIST_AND_VOICE_INPUT:
+                return new ManageAssist.AvailabilityProvider();
+            case KEY_DEFAULT_BROWSER:
+                return new DefaultBrowserPreference.AvailabilityProvider();
+            case KEY_DEFAULT_EMERGENCY_APP:
+                return new DefaultEmergencyPreference.AvailabilityProvider();
+            case KEY_DEFAULT_HOME:
+                return new DefaultHomePreference.AvailabilityProvider();
+            case KEY_DEFAULT_NOTIFICATION_ASST:
+                return new DefaultNotificationAssistantPreference.AvailabilityProvider();
+            case KEY_DEFAULT_PHONE_APP:
+                return new DefaultPhonePreference.AvailabilityProvider();
+            case KEY_SMS_APPLICATION:
+                return new DefaultSmsPreference.AvailabilityProvider();
         }
-
-        if (!DefaultNotificationAssistantPreference.isAvailable(getActivity())) {
-            removePreference(KEY_DEFAULT_NOTIFICATION_ASST);
-        }
-
-        if (DefaultEmergencyPreference.isCapable(getActivity())) {
-            Index.getInstance(getActivity()).updateFromClassNameResource(
-                    ManageDefaultApps.class.getName(), true, true);
-        }
+        Log.w(TAG, "getPreferenceAvailabilityProvider: Cannot find provider for " + preferenceKey);
+        return null;
     }
 
     @Override
@@ -224,19 +262,14 @@ public class ManageDefaultApps extends ProfileSettingsPreferenceFragment
 
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
-                    final ArrayList<String> result = new ArrayList<String>();
-
-                    // Remove SMS Application if the device does not support SMS
-                    final boolean isRestrictedUser = UserManager.get(context)
-                            .getUserInfo(UserHandle.myUserId()).isRestricted();
-                    if (!DefaultSmsPreference.isAvailable(context) || isRestrictedUser) {
-                        result.add(KEY_SMS_APPLICATION);
+                    // Iterate all preferences to see which is not available.
+                    final ArrayList<String> result = new ArrayList<>();
+                    for (String key : PREFERENCE_KEYS) {
+                        boolean isAvailable = getPreferenceAvailability(context, key);
+                        if (!isAvailable) {
+                            result.add(key);
+                        }
                     }
-
-                    if (!DefaultEmergencyPreference.isAvailable(context)) {
-                        result.add(KEY_DEFAULT_EMERGENCY_APP);
-                    }
-
                     return result;
                 }
             };

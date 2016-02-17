@@ -32,6 +32,7 @@ import android.util.ArraySet;
 import android.util.AttributeSet;
 
 import com.android.settings.AppListPreference;
+import com.android.settings.PreferenceAvailabilityProvider;
 import com.android.settings.Utils;
 
 import java.util.List;
@@ -51,10 +52,7 @@ public class DefaultEmergencyPreference extends AppListPreference {
     public DefaultEmergencyPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         mContentResolver = context.getContentResolver();
-
-        if (isAvailable(context)) {
-            load();
-        }
+        load();
     }
 
     @Override
@@ -135,13 +133,7 @@ public class DefaultEmergencyPreference extends AppListPreference {
         return packages;
     }
 
-    public static boolean isAvailable(Context context) {
-        return isCapable(context)
-                && context.getPackageManager().resolveActivity(QUERY_INTENT, 0) != null
-                && !Utils.isManagedProfile(UserManager.get(context)) ;
-    }
-
-    public static boolean isCapable(Context context) {
+    private static boolean isCapable(Context context) {
         return TelephonyManager.EMERGENCY_ASSISTANCE_ENABLED
                 && context.getResources().getBoolean(
                 com.android.internal.R.bool.config_voice_capable);
@@ -150,5 +142,14 @@ public class DefaultEmergencyPreference extends AppListPreference {
     private static boolean isSystemApp(PackageInfo info) {
         return info.applicationInfo != null
                 && (info.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0;
+    }
+
+    public static class AvailabilityProvider implements PreferenceAvailabilityProvider {
+        @Override
+        public boolean isAvailable(Context context) {
+            return isCapable(context)
+                    && context.getPackageManager().resolveActivity(QUERY_INTENT, 0) != null
+                    && !Utils.isManagedProfile(UserManager.get(context));
+        }
     }
 }
