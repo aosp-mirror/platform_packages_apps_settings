@@ -38,6 +38,7 @@ import android.os.Bundle;
 import android.os.CancellationSignal;
 import android.os.Handler;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.PreferenceGroup;
@@ -66,6 +67,7 @@ import com.android.settings.HelpUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.SubSettings;
+import com.android.settings.Utils;
 import com.android.settingslib.RestrictedLockUtils;
 
 import java.util.List;
@@ -638,12 +640,15 @@ public class FingerprintSettings extends SubSettings {
                         mFp.getFingerId());
                 FingerprintSettingsFragment parent
                         = (FingerprintSettingsFragment) getTargetFragment();
-                if (parent.mFingerprintManager.getEnrolledFingerprints().size() > 1) {
+                final boolean isProfileChallengeUser =
+                        Utils.isManagedProfile(UserManager.get(getContext()), parent.mUserId);
+                if (parent.mFingerprintManager.getEnrolledFingerprints(parent.mUserId).size() > 1) {
                     parent.deleteFingerPrint(mFp);
                 } else {
                     ConfirmLastDeleteDialog lastDeleteDialog = new ConfirmLastDeleteDialog();
                     Bundle args = new Bundle();
                     args.putParcelable("fingerprint", mFp);
+                    args.putBoolean("isProfileChallengeUser", isProfileChallengeUser);
                     lastDeleteDialog.setArguments(args);
                     lastDeleteDialog.setTargetFragment(getTargetFragment(), 0);
                     lastDeleteDialog.show(getFragmentManager(),
@@ -671,9 +676,13 @@ public class FingerprintSettings extends SubSettings {
             @Override
             public Dialog onCreateDialog(Bundle savedInstanceState) {
                 mFp = getArguments().getParcelable("fingerprint");
+                final boolean isProfileChallengeUser =
+                        getArguments().getBoolean("isProfileChallengeUser");
                 final AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
                         .setTitle(R.string.fingerprint_last_delete_title)
-                        .setMessage(R.string.fingerprint_last_delete_message)
+                        .setMessage((isProfileChallengeUser)
+                                ? R.string.fingerprint_last_delete_message_profile_challenge
+                                : R.string.fingerprint_last_delete_message)
                         .setPositiveButton(R.string.fingerprint_last_delete_confirm,
                                 new DialogInterface.OnClickListener() {
                                     @Override
