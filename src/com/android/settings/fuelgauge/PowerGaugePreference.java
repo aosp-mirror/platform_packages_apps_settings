@@ -20,30 +20,37 @@ import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v7.preference.PreferenceViewHolder;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.android.settings.AppProgressPreference;
+import com.android.settings.R;
+import com.android.settings.TintablePreference;
 import com.android.settings.Utils;
 
 /**
  * Custom preference for displaying power consumption as a bar and an icon on
  * the left for the subsystem/app type.
  */
-public class PowerGaugePreference extends AppProgressPreference {
+public class PowerGaugePreference extends TintablePreference {
+    private final int mIconSize;
+
     private BatteryEntry mInfo;
     private final CharSequence mContentDescription;
+    private CharSequence mProgress;
 
     public PowerGaugePreference(Context context, Drawable icon, CharSequence contentDescription,
             BatteryEntry info) {
         super(context, null);
         setIcon(icon != null ? icon : new ColorDrawable(0));
+        setWidgetLayoutResource(R.layout.preference_widget_summary);
         mInfo = info;
         mContentDescription = contentDescription;
+        mIconSize = context.getResources().getDimensionPixelSize(R.dimen.app_icon_size);
     }
 
     public void setPercent(double percentOfMax, double percentOfTotal) {
-        setProgress((int) Math.ceil(percentOfMax));
-        setSummary(Utils.formatPercentage((int) (percentOfTotal + 0.5)));
+        mProgress = Utils.formatPercentage((int) (percentOfTotal + 0.5));
+        notifyChanged();
     }
 
     BatteryEntry getInfo() {
@@ -53,7 +60,10 @@ public class PowerGaugePreference extends AppProgressPreference {
     @Override
     public void onBindViewHolder(PreferenceViewHolder view) {
         super.onBindViewHolder(view);
+        ImageView icon = (ImageView) view.findViewById(android.R.id.icon);
+        icon.setLayoutParams(new LinearLayout.LayoutParams(mIconSize, mIconSize));
 
+        ((TextView) view.findViewById(R.id.widget_summary)).setText(mProgress);
         if (mContentDescription != null) {
             final TextView titleView = (TextView) view.findViewById(android.R.id.title);
             titleView.setContentDescription(mContentDescription);

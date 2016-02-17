@@ -19,6 +19,10 @@
         android:title="@string/power_usage_summary_title"
         settings:keywords="@string/keywords_battery">
 
+        <com.android.settings.fuelgauge.BatterySaverPreference
+            android:title="@string/battery_saver"
+            android:fragment="com.android.settings.fuelgauge.BatterySaverSettings" />
+
         <com.android.settings.fuelgauge.BatteryHistoryPreference
             android:key="battery_history" />
 
