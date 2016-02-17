@@ -157,6 +157,9 @@ public class ProcStatsData {
                 ProcessStats.ALL_SCREEN_ADJ, mMemStates, ProcessStats.NON_CACHED_PROC_STATES);
 
         createPkgMap(getProcs(bgTotals, runTotals), bgTotals, runTotals);
+        if (totalMem.sysMemZRamWeight > 0) {
+            distributeZRam(totalMem.sysMemZRamWeight);
+        }
 
         ProcStatsPackageEntry osPkg = createOsEntry(bgTotals, runTotals, totalMem,
                 mMemInfo.baseCacheRam);
@@ -180,6 +183,45 @@ public class ProcStatsData {
         }
     }
 
+    private void distributeZRam(double zramWeight) {
+        // Distribute kernel's Z-Ram across processes, based on how much they have been running.
+        // The idea is that the memory used by the kernel for this is not really the kernel's
+        // responsibility, but that of whoever got swapped in to it...  and we will take how
+        // much a process runs for as a sign of the proportion of Z-Ram it is responsible for.
+
+        long zramMem = (long) (zramWeight / memTotalTime);
+        long totalTime = 0;
+        for (int i = pkgEntries.size() - 1; i >= 0; i--) {
+            ProcStatsPackageEntry entry = pkgEntries.get(i);
+            for (int j = entry.mEntries.size() - 1; j >= 0; j--) {
+                ProcStatsEntry proc = entry.mEntries.get(j);
+                totalTime += proc.mRunDuration;
+            }
+        }
+        for (int i = pkgEntries.size() - 1; i >= 0 && totalTime > 0; i--) {
+            ProcStatsPackageEntry entry = pkgEntries.get(i);
+            long pkgRunTime = 0;
+            long maxRunTime = 0;
+            for (int j = entry.mEntries.size() - 1; j >= 0; j--) {
+                ProcStatsEntry proc = entry.mEntries.get(j);
+                pkgRunTime += proc.mRunDuration;
+                if (proc.mRunDuration > maxRunTime) {
+                    maxRunTime = proc.mRunDuration;
+                }
+            }
+            long pkgZRam = (zramMem*pkgRunTime)/totalTime;
+            if (pkgZRam > 0) {
+                zramMem -= pkgZRam;
+                totalTime -= pkgRunTime;
+                ProcStatsEntry procEntry = new ProcStatsEntry(entry.mPackage, 0,
+                        mContext.getString(R.string.process_stats_os_zram), maxRunTime,
+                        pkgZRam, memTotalTime);
+                procEntry.evaluateTargetPackage(mPm, mStats, null, null, sEntryCompare, mUseUss);
+                entry.addEntry(procEntry);
+            }
+        }
+    }
+
     private ProcStatsPackageEntry createOsEntry(ProcessDataCollection bgTotals,
             ProcessDataCollection runTotals, TotalMemoryUseCollection totalMem, long baseCacheRam) {
         // Add in fake entry representing the OS itself.
@@ -188,17 +230,18 @@ public class ProcStatsData {
         if (totalMem.sysMemNativeWeight > 0) {
             osEntry = new ProcStatsEntry(Utils.OS_PKG, 0,
                     mContext.getString(R.string.process_stats_os_native), memTotalTime,
-                    (long) (totalMem.sysMemNativeWeight / memTotalTime));
+                    (long) (totalMem.sysMemNativeWeight / memTotalTime), memTotalTime);
             osEntry.evaluateTargetPackage(mPm, mStats, bgTotals, runTotals, sEntryCompare, mUseUss);
             osPkg.addEntry(osEntry);
         }
         if (totalMem.sysMemKernelWeight > 0) {
             osEntry = new ProcStatsEntry(Utils.OS_PKG, 0,
                     mContext.getString(R.string.process_stats_os_kernel), memTotalTime,
-                    (long) (totalMem.sysMemKernelWeight / memTotalTime));
+                    (long) (totalMem.sysMemKernelWeight / memTotalTime), memTotalTime);
             osEntry.evaluateTargetPackage(mPm, mStats, bgTotals, runTotals, sEntryCompare, mUseUss);
             osPkg.addEntry(osEntry);
         }
+        /*  Turned off now -- zram is being distributed across running apps.
         if (totalMem.sysMemZRamWeight > 0) {
             osEntry = new ProcStatsEntry(Utils.OS_PKG, 0,
                     mContext.getString(R.string.process_stats_os_zram), memTotalTime,
@@ -206,10 +249,11 @@ public class ProcStatsData {
             osEntry.evaluateTargetPackage(mPm, mStats, bgTotals, runTotals, sEntryCompare, mUseUss);
             osPkg.addEntry(osEntry);
         }
+        */
         if (baseCacheRam > 0) {
             osEntry = new ProcStatsEntry(Utils.OS_PKG, 0,
                     mContext.getString(R.string.process_stats_os_cache), memTotalTime,
-                    baseCacheRam / 1024);
+                    baseCacheRam / 1024, memTotalTime);
             osEntry.evaluateTargetPackage(mPm, mStats, bgTotals, runTotals, sEntryCompare, mUseUss);
             osPkg.addEntry(osEntry);
         }
