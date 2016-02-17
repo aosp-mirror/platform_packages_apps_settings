@@ -359,6 +359,9 @@ public class DeviceAdminSettings extends ListFragment {
                 DeviceAdminInfo deviceAdminInfo =  createDeviceAdminInfo(resolveInfo);
                 // add only visible ones (note: active admins are added regardless of visibility)
                 if (deviceAdminInfo != null && deviceAdminInfo.isVisible()) {
+                    if (!deviceAdminInfo.getActivityInfo().applicationInfo.isInternal()) {
+                        continue;
+                    }
                     DeviceAdminListItem item = new DeviceAdminListItem();
                     item.info = deviceAdminInfo;
                     item.name = deviceAdminInfo.loadLabel(pm).toString();
@@ -391,6 +394,8 @@ public class DeviceAdminSettings extends ListFragment {
                     for (int j = 0; j < resolvedMax; ++j) {
                         DeviceAdminInfo deviceAdminInfo = createDeviceAdminInfo(resolved.get(j));
                         if (deviceAdminInfo != null) {
+                            // Don't do the applicationInfo.isInternal() check here; if an active
+                            // admin is already on SD card, just show it.
                             DeviceAdminListItem item = new DeviceAdminListItem();
                             item.info = deviceAdminInfo;
                             item.name = deviceAdminInfo.loadLabel(packageManager).toString();

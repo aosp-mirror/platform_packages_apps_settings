@@ -86,6 +86,8 @@ public class StorageWizardMoveProgress extends StorageWizardBase {
         switch (returnCode) {
             case PackageManager.MOVE_FAILED_INSUFFICIENT_STORAGE:
                 return getString(R.string.insufficient_storage);
+            case PackageManager.MOVE_FAILED_DEVICE_ADMIN:
+                return getString(R.string.move_error_device_admin);
             case PackageManager.MOVE_FAILED_DOESNT_EXIST:
                 return getString(R.string.does_not_exist);
             case PackageManager.MOVE_FAILED_FORWARD_LOCKED:
