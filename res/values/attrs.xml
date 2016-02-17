@@ -106,6 +106,16 @@
         <attr name="currentPageIndicatorColor" format="color" />
     </declare-styleable>
 
+    <!-- For ConversationMessageView -->
+    <declare-styleable name="ConversationMessageView">
+        <attr name="incoming" format="boolean" />
+        <attr name="messageText" format="reference" />
+        <attr name="timestampText" format="reference" />
+        <attr name="iconText" format="reference" />
+        <attr name="iconTextColor" format="reference|color" />
+        <attr name="iconBackgroundColor" format="reference|color" />
+    </declare-styleable>
+
     <attr name="switchBarTheme" format="reference" />
     <attr name="switchBarMarginStart" format="dimension" />
     <attr name="switchBarMarginEnd" format="dimension" />
