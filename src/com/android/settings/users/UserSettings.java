@@ -775,16 +775,14 @@ public class UserSettings extends SettingsPreferenceFragment
             userPreferences.add(pref);
         }
 
-        if (!mUserCaps.mIsGuest &&
-                (mUserCaps.mCanAddGuest || findGuest() != null || mUserCaps.mDisallowAddUser)) {
-            // Add a virtual Guest user for guest defaults
+        // Check if Guest tile should be added.
+        if (!mUserCaps.mIsGuest && (mUserCaps.mCanAddGuest || mUserCaps.mDisallowAddUser)) {
             UserPreference pref = new UserPreference(getPrefContext(), null,
                     UserPreference.USERID_GUEST_DEFAULTS,
                     mUserCaps.mIsAdmin && voiceCapable? this : null /* settings icon handler */,
                     null /* delete icon handler */);
             pref.setTitle(R.string.user_guest);
             pref.setIcon(getEncircledDefaultIcon());
-            pref.setOnPreferenceClickListener(this);
             userPreferences.add(pref);
             pref.setDisabledByAdmin(
                     mUserCaps.mDisallowAddUser ? mUserCaps.mEnforcedAdmin : null);
@@ -922,17 +920,11 @@ public class UserSettings extends SettingsPreferenceFragment
             }
         } else if (pref instanceof UserPreference) {
             int userId = ((UserPreference) pref).getUserId();
-            if (userId == UserPreference.USERID_GUEST_DEFAULTS) {
-                createAndSwitchToGuestUser();
-            } else {
-                // Get the latest status of the user
-                UserInfo user = mUserManager.getUserInfo(userId);
-                if (!isInitialized(user)) {
-                    mHandler.sendMessage(mHandler.obtainMessage(
-                            MESSAGE_SETUP_USER, user.id, user.serialNumber));
-                } else {
-                    switchUserNow(userId);
-                }
+            // Get the latest status of the user
+            UserInfo user = mUserManager.getUserInfo(userId);
+            if (!isInitialized(user)) {
+                mHandler.sendMessage(mHandler.obtainMessage(
+                        MESSAGE_SETUP_USER, user.id, user.serialNumber));
             }
         } else if (pref == mAddUser) {
             // If we allow both types, show a picker, otherwise directly go to
@@ -947,29 +939,6 @@ public class UserSettings extends SettingsPreferenceFragment
             startActivity(intent);
         }
         return false;
-    }
-
-    private void createAndSwitchToGuestUser() {
-        final UserInfo guest = findGuest();
-        if (guest != null) {
-            switchUserNow(guest.id);
-            return;
-        }
-        UserInfo guestUser = mUserManager.createGuest(getActivity(),
-                    getResources().getString(R.string.user_guest));
-        if (guestUser != null) {
-            switchUserNow(guestUser.id);
-        }
-    }
-
-    private UserInfo findGuest() {
-        List<UserInfo> users = mUserManager.getUsers();
-        for (UserInfo user : users) {
-            if (user.isGuest()) {
-                return user;
-            }
-        }
-        return null;
     }
 
     private boolean isInitialized(UserInfo user) {
