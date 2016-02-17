@@ -25,6 +25,7 @@ import android.os.UserHandle;
 import android.util.AttributeSet;
 
 import com.android.settings.AppListPreference;
+import com.android.settings.PreferenceAvailabilityProvider;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,5 +72,12 @@ public class DefaultBrowserPreference extends AppListPreference {
         }
 
         return result;
+    }
+
+    public static class AvailabilityProvider implements PreferenceAvailabilityProvider {
+        @Override
+        public boolean isAvailable(Context context) {
+            return true;
+        }
     }
 }
