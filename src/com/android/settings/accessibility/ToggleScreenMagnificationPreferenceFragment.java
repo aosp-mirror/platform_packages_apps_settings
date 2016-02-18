@@ -55,7 +55,7 @@ public class ToggleScreenMagnificationPreferenceFragment
             view.setDividerAllowedBelow(false);
             final RelativeLayout background =
                     (RelativeLayout) view.findViewById(R.id.video_background);
-            final VideoView videoView = (VideoView) view.findViewById(R.id.video);
+            VideoView videoView = (VideoView) view.findViewById(R.id.video);
 
             // Hacky adjustment for using VideoView in recycle view and positioning
             // it on the background image
@@ -98,7 +98,8 @@ public class ToggleScreenMagnificationPreferenceFragment
                     ContentResolver.SCHEME_ANDROID_RESOURCE,
                     getPrefContext().getPackageName(),
                     R.raw.accessibility_screen_magnification)));
-            videoView.setMediaController(new MediaController(getPrefContext()));
+            // Make sure video controls (e.g. for pausing) are not displayed.
+            videoView.setMediaController(null);
             videoView.start();
         }
     }
@@ -148,6 +149,11 @@ public class ToggleScreenMagnificationPreferenceFragment
         if (Settings.Secure.getInt(getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED, 0) == 0) {
             setMagnificationEnabled(1);
+        }
+
+        VideoView videoView = (VideoView) getView().findViewById(R.id.video);
+        if (videoView != null) {
+            videoView.start();
         }
     }
 
