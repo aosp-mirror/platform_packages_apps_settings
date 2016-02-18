@@ -1130,6 +1130,21 @@
     <!-- Title shown on security settings to allow the user to change their lockscreen password [CHAR LIMIT=22]-->
     <string name="unlock_change_lock_password_title">Change unlock password</string>
 
+    <!-- Message shown when the user incorrectly enters their lock and it counts towards the max attempts before wiping the work profile. -->
+    <string name="lock_profile_wipe_attempts">Try again. Attempt <xliff:g id="current_attempts">%1$d</xliff:g> of <xliff:g id="total_attempts">%2$d</xliff:g>.</string>
+    <!-- Title of a dialog shown when the user only has one attempt left to provide the lock before the work profile is wiped. -->
+    <string name="lock_profile_wipe_warning_title">Last try</string>
+    <!-- Content of the dialog shown when the user only has one attempt left to provide the work pattern before the work profile is wiped. -->
+    <string name="lock_profile_wipe_warning_content_pattern">If you enter an incorrect work pattern on this attempt, your work profile and associated data will be removed from this device.</string>
+    <!-- Content of the dialog shown when the user only has one attempt left to provide the work PIN before the work profile is wiped. -->
+    <string name="lock_profile_wipe_warning_content_pin">If you enter an incorrect work PIN on this attempt, your work profile and associated data will be removed from this device.</string>
+    <!-- Content of the dialog shown when the user only has one attempt left to provide the work password before the work profile is wiped. -->
+    <string name="lock_profile_wipe_warning_content_password">If you enter an incorrect work password on this attempt, your work profile and associated data will be removed from this device.</string>
+    <!-- Content of the dialog shown when the user has failed to provide the work lock too many times and the work profile is wiped. -->
+    <string name="lock_profile_wipe_content">Too many incorrect attempts. Your work profile and associated data will be removed from this device.</string>
+    <!-- Button label to dismiss the dialog telling the user the work profile has been wiped. [CHAR LIMIT=40] -->
+    <string name="lock_profile_wipe_dismiss">Dismiss</string>
+
     <!-- Hint shown in dialog screen when password is too short -->
     <string name="lockpassword_password_too_short">Password must be at least %d characters</string>
     <!-- Hint shown in dialog screen when PIN is too short -->
