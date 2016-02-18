@@ -31,6 +31,11 @@
             android:defaultValue="50"
             android:max="600" />
 
+        <Preference android:key="reset_speech_rate"
+            android:persistent="false"
+            android:title="@string/tts_reset_speech_rate_title"
+            android:summary="@string/tts_reset_speech_rate_summary" />
+
         <Preference android:key="tts_play_example"
             android:persistent="false"
             android:title="@string/tts_play_example_title"
