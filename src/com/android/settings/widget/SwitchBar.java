@@ -318,11 +318,15 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
         requestLayout();
     }
 
+    @Override
+    public CharSequence getAccessibilityClassName() {
+        return Switch.class.getName();
+    }
+
     /** @hide */
     @Override
     public void onInitializeAccessibilityNodeInfoInternal(AccessibilityNodeInfo info) {
         super.onInitializeAccessibilityNodeInfoInternal(info);
-        info.setClassName(Switch.class.getName());
         info.setText(mTextView.getText());
         info.setCheckable(true);
         info.setChecked(mSwitch.isChecked());
@@ -332,7 +336,10 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
     @Override
     public void onInitializeAccessibilityEventInternal(AccessibilityEvent event) {
         super.onInitializeAccessibilityEventInternal(event);
-        event.setClassName(Switch.class.getName());
+        // Don't say "on on" or "off off" - rather, speak the state only once. We need to specify
+        // this explicitly as each of our children (the textview and the checkbox) contribute to
+        // the state once, giving us duplicate text by default.
+        event.setContentDescription(mTextView.getText());
         event.setChecked(mSwitch.isChecked());
     }
 }
