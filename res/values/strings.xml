@@ -7171,4 +7171,19 @@
     <!-- Title for suggestion adding more fingerprints [CHAR LIMIT=30] -->
     <string name="suggestion_additional_fingerprints">Additional Fingerprints</string>
 
+    <!-- Summary of battery saver when on [CHAR LIMIT=NONE] -->
+    <string name="battery_saver_on_summary">On / <xliff:g name="automatic_state" example="Never turn on automatically">%1$s</xliff:g></string>
+
+    <!-- Summary of battery saver when off [CHAR LIMIT=NONE] -->
+    <string name="battery_saver_off_summary">Off / <xliff:g name="automatic_state" example="Never turn on automatically">%1$s</xliff:g></string>
+
+    <!-- [CHAR_LIMIT=NONE] Battery saver: Description for automatic entry option: Never -->
+    <string name="battery_saver_desc_turn_on_auto_never">Never turn on automatically</string>
+
+    <!-- [CHAR_LIMIT=NONE] Battery saver: Description for automatic entry option: pct% battery -->
+    <string name="battery_saver_desc_turn_on_auto_pct">Turn on automatically at %1$s battery</string>
+
+    <!-- [CHAR_LIMIT=NONE] Label for when app is ignoring battery optimizations -->
+    <string name="not_battery_optimizing">Not using battery optimization</string>
+
 </resources>

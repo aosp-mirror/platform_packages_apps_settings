@@ -65,7 +65,6 @@ public class PowerUsageSummary extends PowerUsageBase {
     private static final String KEY_BATTERY_HISTORY = "battery_history";
 
     private static final int MENU_STATS_TYPE = Menu.FIRST;
-    private static final int MENU_BATTERY_SAVER = Menu.FIRST + 2;
     private static final int MENU_HIGH_POWER_APPS = Menu.FIRST + 3;
     private static final int MENU_HELP = Menu.FIRST + 4;
 
@@ -134,9 +133,6 @@ public class PowerUsageSummary extends PowerUsageBase {
                     .setAlphabeticShortcut('t');
         }
 
-        MenuItem batterySaver = menu.add(0, MENU_BATTERY_SAVER, 0, R.string.battery_saver);
-        batterySaver.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
-
         menu.add(0, MENU_HIGH_POWER_APPS, 0, R.string.high_power_apps);
         super.onCreateOptionsMenu(menu, inflater);
     }
@@ -157,10 +153,6 @@ public class PowerUsageSummary extends PowerUsageBase {
                     mStatsType = BatteryStats.STATS_SINCE_CHARGED;
                 }
                 refreshStats();
-                return true;
-            case MENU_BATTERY_SAVER:
-                sa.startPreferencePanel(BatterySaverSettings.class.getName(), null,
-                        R.string.battery_saver, null, null, 0);
                 return true;
             case MENU_HIGH_POWER_APPS:
                 Bundle args = new Bundle();
@@ -280,6 +272,7 @@ public class PowerUsageSummary extends PowerUsageBase {
 
     protected void refreshStats() {
         super.refreshStats();
+        PowerWhitelistBackend powerWhiteist = PowerWhitelistBackend.getInstance();
         updatePreference(mHistPref);
         mAppListGroup.removeAll();
         mAppListGroup.setOrderingAsAdded(false);
@@ -352,6 +345,12 @@ public class PowerUsageSummary extends PowerUsageBase {
                 pref.setTitle(entry.getLabel());
                 pref.setOrder(i + 1);
                 pref.setPercent(percentOfMax, percentOfTotal);
+                if (sipper.drainType == DrainType.APP) {
+                    pref.setSummary(powerWhiteist.isWhitelisted(entry.defaultPackageName)
+                            || powerWhiteist.isSysWhitelisted(entry.defaultPackageName)
+                            ? getString(R.string.not_battery_optimizing)
+                            : null);
+                }
                 if (sipper.uidObj != null) {
                     pref.setKey(Integer.toString(sipper.uidObj.getUid()));
                 }
