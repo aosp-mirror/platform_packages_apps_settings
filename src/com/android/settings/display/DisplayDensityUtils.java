@@ -116,7 +116,8 @@ class DisplayDensityUtils {
         if (numSmaller > 0) {
             final float interval = (1 - minScale) / numSmaller;
             for (int i = numSmaller - 1; i >= 0; i--) {
-                final int density = (int) (normalDensity * (1 - (i + 1) * interval));
+                // Round down to a multiple of 2 by truncating the low bit.
+                final int density = ((int) (normalDensity * (1 - (i + 1) * interval))) & ~1;
                 if (currentDensity == density) {
                     currentDensityIndex = curIndex;
                 }
@@ -136,7 +137,8 @@ class DisplayDensityUtils {
         if (numLarger > 0) {
             final float interval = (maxScale - 1) / numLarger;
             for (int i = 0; i < numLarger; i++) {
-                final int density = (int) (normalDensity * (1 + (i + 1) * interval));
+                // Round down to a multiple of 2 by truncating the low bit.
+                final int density = ((int) (normalDensity * (1 + (i + 1) * interval))) & ~1;
                 if (currentDensity == density) {
                     currentDensityIndex = curIndex;
                 }
