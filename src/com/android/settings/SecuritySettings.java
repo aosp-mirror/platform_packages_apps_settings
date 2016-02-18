@@ -228,7 +228,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
         final int resid = getResIdForLockUnlockScreen(getActivity(), mLockPatternUtils, MY_USER_ID);
         addPreferencesFromResource(resid);
 
-        mProfileChallengeUserId = getManagedProfileId(mUm);
+        mProfileChallengeUserId = Utils.getManagedProfileId(mUm, MY_USER_ID);
         if (mProfileChallengeUserId != UserHandle.USER_NULL
                 && mLockPatternUtils.isSeparateProfileChallengeAllowed(mProfileChallengeUserId)) {
             addPreferencesFromResource(R.xml.security_settings_profile);
@@ -726,21 +726,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
         return R.string.help_url_security;
     }
 
-    private static int getManagedProfileId(UserManager um) {
-        List<UserInfo> profiles = um.getProfiles(MY_USER_ID);
-        int numProfiles = profiles.size();
-        if (numProfiles == 1) {
-            return UserHandle.USER_NULL;
-        }
-        for (int i = 0; i < numProfiles; ++i) {
-            UserInfo profile = profiles.get(i);
-            if (profile.id != MY_USER_ID) {
-                return profile.id;
-            }
-        }
-        return UserHandle.USER_NULL;
-    }
-
     /**
      * For Search. Please keep it in sync when updating "createPreferenceHierarchy()"
      */
@@ -764,7 +749,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
             result.add(sir);
 
             final UserManager um = UserManager.get(context);
-            final int profileUserId = getManagedProfileId(um);
+            final int profileUserId = Utils.getManagedProfileId(um, MY_USER_ID);
             if (profileUserId != UserHandle.USER_NULL
                     && lockPatternUtils.isSeparateProfileChallengeAllowed(profileUserId)) {
                 sir = new SearchIndexableResource(context);
@@ -847,7 +832,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
             }
 
             final LockPatternUtils lockPatternUtils = new LockPatternUtils(context);
-            final int profileUserId = getManagedProfileId(um);
+            final int profileUserId = Utils.getManagedProfileId(um, MY_USER_ID);
             if (profileUserId != UserHandle.USER_NULL
                     && lockPatternUtils.isSeparateProfileChallengeAllowed(profileUserId)) {
                 if (lockPatternUtils.getKeyguardStoredPasswordQuality(profileUserId)
