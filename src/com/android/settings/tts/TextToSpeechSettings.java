@@ -64,6 +64,9 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
     /** Preference key for the TTS rate selection dialog. */
     private static final String KEY_DEFAULT_RATE = "tts_default_rate";
 
+    /** Preference key for the TTS reset speech rate preference. */
+    private static final String KEY_RESET_SPEECH_RATE = "reset_speech_rate";
+
     /** Preference key for the TTS status field. */
     private static final String KEY_STATUS = "tts_status";
 
@@ -87,6 +90,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
     private PreferenceCategory mEnginePreferenceCategory;
     private SeekBarPreference mDefaultRatePref;
     private SwitchPreference mHigherRateSwitchPref;
+    private Preference mResetSpeechRate;
     private Preference mPlayExample;
     private Preference mEngineStatus;
 
@@ -170,6 +174,9 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         mPlayExample = findPreference(KEY_PLAY_EXAMPLE);
         mPlayExample.setOnPreferenceClickListener(this);
         mPlayExample.setEnabled(false);
+
+        mResetSpeechRate = findPreference(KEY_RESET_SPEECH_RATE);
+        mResetSpeechRate.setOnPreferenceClickListener(this);
 
         mEnginePreferenceCategory = (PreferenceCategory) findPreference(
                 KEY_ENGINE_PREFERENCE_SECTION);
@@ -459,24 +466,13 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
     @Override
     public boolean onPreferenceChange(Preference preference, Object objValue) {
         if (KEY_DEFAULT_RATE.equals(preference.getKey())) {
-            // Default rate
-            mDefaultRate = ((Integer) objValue).intValue();
-            try {
-                android.provider.Settings.Secure.putInt(getContentResolver(),
-                        TTS_DEFAULT_RATE, mDefaultRate);
-                if (mTts != null) {
-                    mTts.setSpeechRate(mDefaultRate / 100.0f);
-                }
-                if (DBG) Log.d(TAG, "TTS default rate changed, now " + mDefaultRate);
-            } catch (NumberFormatException e) {
-                Log.e(TAG, "could not persist default TTS rate setting", e);
-            }
+            updateSpeechRate(((Integer) objValue).intValue());
         }
         return true;
     }
 
     /**
-     * Called when mPlayExample is clicked
+     * Called when mPlayExample or mResetSpeechRate is clicked.
      */
     @Override
     public boolean onPreferenceClick(Preference preference) {
@@ -485,9 +481,27 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
             // the actual speaking
             speakSampleText();
             return true;
+        } else if (preference == mResetSpeechRate) {
+          mDefaultRatePref.setProgress(TextToSpeech.Engine.DEFAULT_RATE);
+          updateSpeechRate(TextToSpeech.Engine.DEFAULT_RATE);
+          return true;
         }
-
         return false;
+    }
+
+    private void updateSpeechRate(int speechRate) {
+        mDefaultRate = speechRate;
+        try {
+            android.provider.Settings.Secure.putInt(getContentResolver(),
+                    TTS_DEFAULT_RATE, mDefaultRate);
+            if (mTts != null) {
+                mTts.setSpeechRate(mDefaultRate / 100.0f);
+            }
+            if (DBG) Log.d(TAG, "TTS default rate changed, now " + mDefaultRate);
+        } catch (NumberFormatException e) {
+            Log.e(TAG, "could not persist default TTS rate setting", e);
+        }
+        return;
     }
 
     private void updateWidgetState(boolean enable) {
