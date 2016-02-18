@@ -517,30 +517,43 @@ public class WifiConfigController
                         config.enterpriseConfig.setPhase2Method(phase2Method);
                         break;
                 }
+
                 String caCert = (String) mEapCaCertSpinner.getSelectedItem();
+                config.enterpriseConfig.setCaCertificateAliases(null);
+                config.enterpriseConfig.setCaPath(null);
+                config.enterpriseConfig.setDomainSuffixMatch(mEapDomainView.getText().toString());
                 if (caCert.equals(mUnspecifiedCertString)
                         || caCert.equals(mDoNotValidateEapServerString)) {
-                    // Note: |caCert| should not be able to take the value |unspecifiedCert|,
-                    // since we prevent such configurations from being saved.
-                    config.enterpriseConfig.setCaCertificateAliases(null);
-                } else {
-                    config.enterpriseConfig.setDomainSuffixMatch(
-                            mEapDomainView.getText().toString());
-                    if (caCert.equals(mUseSystemCertsString)) {
-                        config.enterpriseConfig.setCaPath(SYSTEM_CA_STORE_PATH);
-                    } else if (caCert.equals(mMultipleCertSetString)) {
-                        if (mAccessPoint != null) {
-                            if (!mAccessPoint.isSaved()) {
-                                Log.e(TAG, "Multiple certs can only be set "
-                                        + "when editing saved network");
-                            }
-                            config.enterpriseConfig.setCaCertificateAliases(
-                                    mAccessPoint.getConfig().enterpriseConfig
-                                            .getCaCertificateAliases());
+                    // ca_cert already set to null, so do nothing.
+                } else if (caCert.equals(mUseSystemCertsString)) {
+                    config.enterpriseConfig.setCaPath(SYSTEM_CA_STORE_PATH);
+                } else if (caCert.equals(mMultipleCertSetString)) {
+                    if (mAccessPoint != null) {
+                        if (!mAccessPoint.isSaved()) {
+                            Log.e(TAG, "Multiple certs can only be set "
+                                    + "when editing saved network");
                         }
-                    } else {
-                        config.enterpriseConfig.setCaCertificateAliases(new String[] {caCert});
+                        config.enterpriseConfig.setCaCertificateAliases(
+                                mAccessPoint
+                                        .getConfig()
+                                        .enterpriseConfig
+                                        .getCaCertificateAliases());
                     }
+                } else {
+                    config.enterpriseConfig.setCaCertificateAliases(new String[] {caCert});
+                }
+
+                // ca_cert or ca_path should not both be non-null, since we only intend to let
+                // the use either their own certificate, or the system certificates, not both.
+                // The variable that is not used must explicitly be set to null, so that a
+                // previously-set value on a saved configuration will be erased on an update.
+                if (config.enterpriseConfig.getCaCertificateAliases() != null
+                        && config.enterpriseConfig.getCaPath() != null) {
+                    Log.e(TAG, "ca_cert ("
+                            + config.enterpriseConfig.getCaCertificateAliases()
+                            + ") and ca_path ("
+                            + config.enterpriseConfig.getCaPath()
+                            + ") should not both be non-null");
                 }
 
                 String clientCert = (String) mEapUserCertSpinner.getSelectedItem();
