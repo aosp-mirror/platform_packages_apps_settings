@@ -39,7 +39,11 @@ public class StorageItemPreference extends Preference {
 
     public void setStorageSize(long size, long total) {
         setSummary(Formatter.formatFileSize(getContext(), size));
-        progress = (int)(size * PROGRESS_MAX / total);
+        if (total == 0) {
+            progress = 0;
+        } else {
+            progress = (int)(size * PROGRESS_MAX / total);
+        }
         updateProgressBar();
     }
 
