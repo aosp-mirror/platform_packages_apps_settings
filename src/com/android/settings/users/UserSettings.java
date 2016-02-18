@@ -104,7 +104,6 @@ public class UserSettings extends SettingsPreferenceFragment
     private static final String KEY_USER_ME = "user_me";
     private static final String KEY_ADD_USER = "user_add";
     private static final String KEY_EMERGENCY_INFO = "emergency_info";
-    private static final String KEY_LOCK_SCREEN_SETTINGS = "lock_screen_settings";
 
     private static final String ACTION_EDIT_EMERGENCY_INFO = "android.settings.EDIT_EMERGENGY_INFO";
 
@@ -237,14 +236,6 @@ public class UserSettings extends SettingsPreferenceFragment
         mLockScreenSettings = (PreferenceGroup) findPreference("lock_screen_settings");
         mAddUserWhenLocked = (RestrictedSwitchPreference) findPreference("add_users_when_locked");
         mEmergencyInfoPreference = findPreference(KEY_EMERGENCY_INFO);
-        if(emergencyInfoActivityPresent()) {
-            mEmergencyInfoPreference.setOnPreferenceClickListener(this);
-        } else {
-            // Remove this view if the emergency info package is not found.
-            PreferenceCategory lockScreenSettingsCategory =
-                    (PreferenceCategory) findPreference(KEY_LOCK_SCREEN_SETTINGS);
-            lockScreenSettingsCategory.removePreference(mEmergencyInfoPreference);
-        }
         loadProfile();
         setHasOptionsMenu(true);
         IntentFilter filter = new IntentFilter(Intent.ACTION_USER_REMOVED);
@@ -842,6 +833,12 @@ public class UserSettings extends SettingsPreferenceFragment
             mAddUserWhenLocked.setOnPreferenceChangeListener(this);
             mAddUserWhenLocked.setDisabledByAdmin(
                     mUserCaps.mDisallowAddUser ? mUserCaps.mEnforcedAdmin : null);
+        }
+
+        if (emergencyInfoActivityPresent()) {
+            mEmergencyInfoPreference.setOnPreferenceClickListener(this);
+            mEmergencyInfoPreference.setOrder(Preference.DEFAULT_ORDER);
+            preferenceScreen.addPreference(mEmergencyInfoPreference);
         }
     }
 
