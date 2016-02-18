@@ -17,17 +17,17 @@
 package com.android.settings.fuelgauge;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.BatteryStats;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
-import android.view.ViewGroup;
-
+import android.widget.TextView;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
+import com.android.settings.Utils;
+import com.android.settingslib.BatteryInfo;
+import com.android.settingslib.graph.UsageView;
 
 /**
  * Custom preference for displaying power consumption as a bar and an icon on the left for the
@@ -38,73 +38,41 @@ public class BatteryHistoryPreference extends Preference {
 
     protected static final String BATTERY_HISTORY_FILE = "tmp_bat_history.bin";
 
-    private BatteryStats mStats;
-    private Intent mBatteryBroadcast;
-
-    private BatteryHistoryChart mChart;
     private BatteryStatsHelper mHelper;
+    private BatteryInfo mBatteryInfo;
 
     public BatteryHistoryPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
+        setLayoutResource(R.layout.battery_usage_graph);
     }
-    
+
     @Override
     protected void onClick() {
-        if (!isEnabled()) {
-            return;
-        }
         mHelper.storeStatsHistoryInFile(BATTERY_HISTORY_FILE);
         Bundle args = new Bundle();
         args.putString(BatteryHistoryDetail.EXTRA_STATS, BATTERY_HISTORY_FILE);
-        args.putParcelable(BatteryHistoryDetail.EXTRA_BROADCAST,
-                mHelper.getBatteryBroadcast());
-        if (getContext() instanceof SettingsActivity) {
-            SettingsActivity sa = (SettingsActivity) getContext();
-            sa.startPreferencePanel(BatteryHistoryDetail.class.getName(), args,
-                    R.string.history_details_title, null, null, 0);
-        }
+        args.putParcelable(BatteryHistoryDetail.EXTRA_BROADCAST, mHelper.getBatteryBroadcast());
+        Utils.startWithFragment(getContext(), BatteryHistoryDetail.class.getName(), args,
+                null, 0, R.string.history_details_title, null);
     }
 
     public void setStats(BatteryStatsHelper batteryStats) {
-        // Clear out the chart to receive new data.
-        mChart = null;
         mHelper = batteryStats;
-        mStats = batteryStats.getStats();
-        mBatteryBroadcast = batteryStats.getBatteryBroadcast();
-        if (getLayoutResource() != R.layout.battery_history_chart) {
-            // Now we should have some data, set the layout we want.
-            setLayoutResource(R.layout.battery_history_chart);
-        }
+        final long elapsedRealtimeUs = SystemClock.elapsedRealtime() * 1000;
+        mBatteryInfo = BatteryInfo.getBatteryInfo(getContext(), batteryStats.getBatteryBroadcast(),
+                batteryStats.getStats(), elapsedRealtimeUs);
         notifyChanged();
-    }
-
-    BatteryStats getStats() {
-        return mStats;
     }
 
     @Override
     public void onBindViewHolder(PreferenceViewHolder view) {
-        super.onBindViewHolder(view);
-
-        if (mStats == null) {
+        if (mBatteryInfo == null) {
             return;
         }
-        BatteryHistoryChart chart = (BatteryHistoryChart) view.findViewById(
-                R.id.battery_history_chart);
-        if (mChart == null) {
-            // First time: use and initialize this chart.
-            chart.setStats(mStats, mBatteryBroadcast);
-            mChart = chart;
-        } else {
-            // All future times: forget the newly inflated chart, re-use the
-            // already initialized chart from last time.
-            ViewGroup parent = (ViewGroup) chart.getParent();
-            int index = parent.indexOfChild(chart);
-            parent.removeViewAt(index);
-            if (mChart.getParent() != null) {
-                ((ViewGroup) mChart.getParent()).removeView(mChart);
-            }
-            parent.addView(mChart, index);
-        }
+        view.setDividerAllowedAbove(true);
+        ((TextView) view.findViewById(R.id.charge)).setText(mBatteryInfo.batteryPercentString);
+        ((TextView) view.findViewById(R.id.estimation)).setText(mBatteryInfo.remainingLabel);
+        UsageView usageView = (UsageView) view.findViewById(R.id.battery_usage);
+        mBatteryInfo.bindHistory(usageView);
     }
 }
