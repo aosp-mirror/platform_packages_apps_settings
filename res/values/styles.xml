@@ -101,6 +101,10 @@
         <item name="android:widgetLayout">@layout/preference_widget_sync_toggle</item>
     </style>
 
+    <style name="EditTextPreference" parent="@*android:style/Preference.Material.DialogPreference.EditTextPreference">
+        <item name="android:dialogLayout">@layout/preference_dialog_edittext</item>
+    </style>
+
     <style name="PreferenceHeaderPanelSinglePane">
         <item name="android:layout_marginStart">0dp</item>
         <item name="android:layout_marginEnd">0dp</item>
