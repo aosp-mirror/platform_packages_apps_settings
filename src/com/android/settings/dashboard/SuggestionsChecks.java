@@ -20,12 +20,14 @@ import android.app.IWallpaperManager.Stub;
 import android.app.IWallpaperManagerCallback;
 import android.app.KeyguardManager;
 import android.app.NotificationManager;
+import android.app.WallpaperManager;
 import android.content.Context;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+
 import com.android.ims.ImsManager;
 import com.android.settings.Settings.FingerprintEnrollSuggestionActivity;
 import com.android.settings.Settings.FingerprintSuggestionActivity;
@@ -98,7 +100,8 @@ public class SuggestionsChecks {
         IBinder b = ServiceManager.getService(Context.WALLPAPER_SERVICE);
         IWallpaperManager service = Stub.asInterface(b);
         try {
-            return service.getWallpaper(mCallback, new Bundle()) != null;
+            return service.getWallpaper(mCallback, WallpaperManager.FLAG_SET_SYSTEM,
+                    new Bundle(), mContext.getUserId()) != null;
         } catch (RemoteException e) {
         }
         return false;
