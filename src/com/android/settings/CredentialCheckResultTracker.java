@@ -47,7 +47,7 @@ public class CredentialCheckResultTracker extends Fragment {
         mListener = listener;
         if (mListener != null && mHasResult) {
             mListener.onCredentialChecked(mResultMatched, mResultData, mResultTimeoutMs,
-                    mResultEffectiveUserId);
+                    mResultEffectiveUserId, false /* newResult */);
         }
     }
 
@@ -60,7 +60,7 @@ public class CredentialCheckResultTracker extends Fragment {
         mHasResult = true;
         if (mListener != null) {
             mListener.onCredentialChecked(mResultMatched, mResultData, mResultTimeoutMs,
-                    mResultEffectiveUserId);
+                    mResultEffectiveUserId, true /* newResult */);
         }
     }
 
@@ -74,6 +74,6 @@ public class CredentialCheckResultTracker extends Fragment {
 
     interface Listener {
         public void onCredentialChecked(boolean matched, Intent intent, int timeoutMs,
-                int effectiveUserId);
+                int effectiveUserId, boolean newResult);
     }
 }
