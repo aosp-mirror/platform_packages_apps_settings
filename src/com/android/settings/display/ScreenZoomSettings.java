@@ -50,7 +50,7 @@ public class ScreenZoomSettings extends PreviewSeekBarPreferenceFragment impleme
         // This should be replaced once the final preview sample screen is in place.
         mPreviewSampleResIds = new int[]{R.layout.screen_zoom_preview_1,
                 R.layout.screen_zoom_preview_2,
-                R.layout.screen_zoom_preview_3};
+                R.layout.screen_zoom_preview_settings};
 
         final DisplayDensityUtils density = new DisplayDensityUtils(getContext());
 

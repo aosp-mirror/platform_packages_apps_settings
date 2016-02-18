@@ -17,14 +17,18 @@
 package com.android.settings.accessibility;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
+import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ServiceInfo;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
+import android.util.Log;
 import android.view.accessibility.AccessibilityManager;
 
 import com.android.internal.logging.MetricsProto;
@@ -40,15 +44,29 @@ import java.util.List;
 public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragment
         implements DialogCreatable, Preference.OnPreferenceChangeListener {
 
+    private static final String TAG = AccessibilitySettingsForSetupWizard.class.getSimpleName();
+
     // Preferences.
     private static final String DISPLAY_MAGNIFICATION_PREFERENCE =
             "screen_magnification_preference";
-    private static final String TALKBACK_PREFERENCE = "talkback_preference";
+    private static final String SCREEN_READER_PREFERENCE = "talkback_preference";
     private static final String FONT_SIZE_PREFERENCE = "font_size_preference";
+
+    // Time needed to let Talkback initialize its self before launching the tutorial.
+    private static final long SCREEN_READER_INITIALIZATION_DELAY_MS = 3000;
+
+    private String mTalkbackPackage;
 
     // Preference controls.
     private Preference mDisplayMagnificationPreference;
     private Preference mTalkbackPreference;
+
+    private Runnable mStartTalkbackRunnable = new Runnable() {
+        @Override
+        public void run() {
+            launchTalkbackTutorial();
+        }
+    };
 
     @Override
     protected int getMetricsCategory() {
@@ -61,7 +79,7 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
         addPreferencesFromResource(R.xml.accessibility_settings_for_setup_wizard);
 
         mDisplayMagnificationPreference = findPreference(DISPLAY_MAGNIFICATION_PREFERENCE);
-        mTalkbackPreference = findPreference(TALKBACK_PREFERENCE);
+        mTalkbackPreference = findPreference(SCREEN_READER_PREFERENCE);
     }
 
     @Override
@@ -75,41 +93,16 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
         return false;
     }
 
-    /**
-     * Returns a semicolon-delimited string containing a list of all the
-     * installed {@link AccessibilityService}s that provide at least one
-     * required feedback type.
-     *
-     * @param context The {@link android.app.Activity} context.
-     * @param requiredFeedbackTypes An integer mask containing the required
-     *            feedback types.
-     * @return A semicolon-delimited string containing a list of accessibility services.
-     */
-    private String getAccessibilityServicesFiltered(
-            Context context, int requiredFeedbackTypes) {
-        final AccessibilityManager manager = context.getSystemService(AccessibilityManager.class);
-        final List<AccessibilityServiceInfo> accessibilityServices = manager
-                .getInstalledAccessibilityServiceList();
-        final StringBuilder servicesToEnable = new StringBuilder();
-
-        for (AccessibilityServiceInfo accessibilityService : accessibilityServices) {
-            if ((accessibilityService.feedbackType & requiredFeedbackTypes) == 0) {
-                continue;
-            }
-
-            final ServiceInfo serviceInfo = accessibilityService.getResolveInfo().serviceInfo;
-            final ComponentName componentName = new ComponentName(serviceInfo.packageName,
-                    serviceInfo.name);
-
-            servicesToEnable.append(componentName.flattenToString());
-            servicesToEnable.append(':');
+    private void launchTalkbackTutorial() {
+        try {
+            Intent intent = new Intent(Settings.ACTION_SCREEN_READER_TUTORIAL);
+            intent.setPackage(mTalkbackPackage);
+            startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            // This can happen if either the build is misconfigued or an OEM removes the intent
+            // filter for the Talkback tutorial from their implementation of Talkback.
+            Log.e(TAG, "Can't find Talkback Tutorial: " + Settings.ACTION_SCREEN_READER_TUTORIAL);
         }
-
-        if (servicesToEnable.length() > 0) {
-            servicesToEnable.deleteCharAt(servicesToEnable.length() - 1);
-        }
-
-        return servicesToEnable.toString();
     }
 
     @Override
@@ -130,17 +123,34 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
             final int accessibilityEnabled =
                     Settings.Secure.getInt(resolver, Settings.Secure.ACCESSIBILITY_ENABLED, 0);
             if (accessibilityEnabled == 0) {
-                final String servicesToEnable = getAccessibilityServicesFiltered(
-                        getActivity(), AccessibilityServiceInfo.FEEDBACK_SPOKEN);
+                // Find the first installed screen reader.
+                String serviceToEnable = null;
+                final AccessibilityManager manager =
+                        getActivity().getSystemService(AccessibilityManager.class);
+                final List<AccessibilityServiceInfo> accessibilityServices =
+                        manager.getInstalledAccessibilityServiceList();
+                for (AccessibilityServiceInfo accessibilityService : accessibilityServices) {
+                    if ((accessibilityService.feedbackType
+                            & AccessibilityServiceInfo.FEEDBACK_SPOKEN) != 0) {
+                        final ServiceInfo serviceInfo =
+                                accessibilityService.getResolveInfo().serviceInfo;
+                        mTalkbackPackage = serviceInfo.packageName;
+                        final ComponentName componentName =
+                                new ComponentName(serviceInfo.packageName, serviceInfo.name);
+
+                        serviceToEnable = componentName.flattenToString();
+                        break;
+                    }
+                }
 
                 // Enable all accessibility services with spoken feedback type.
                 Settings.Secure.putString(resolver, Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES,
-                        servicesToEnable);
+                        serviceToEnable);
 
                 // Allow the services we just enabled to toggle touch exploration.
                 Settings.Secure.putString(resolver,
                         Settings.Secure.TOUCH_EXPLORATION_GRANTED_ACCESSIBILITY_SERVICES,
-                        servicesToEnable);
+                        serviceToEnable);
 
                 // Enable touch exploration.
                 Settings.Secure.putInt(resolver, Settings.Secure.TOUCH_EXPLORATION_ENABLED, 1);
@@ -148,6 +158,13 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
                 // Turn on accessibility mode last, since enabling accessibility with no
                 // services has no effect.
                 Settings.Secure.putInt(resolver, Settings.Secure.ACCESSIBILITY_ENABLED, 1);
+
+                // Since Talkback will display an error message if it's not active when the Tutorial
+                // is launched, launch Talkbck Tutorial with a delay.
+                new Handler().postDelayed(mStartTalkbackRunnable,
+                        SCREEN_READER_INITIALIZATION_DELAY_MS);
+            } else {
+                launchTalkbackTutorial();
             }
         }
 
