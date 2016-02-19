@@ -56,6 +56,7 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
     protected static final boolean localLOGV = false;
 
     protected EnforcedAdmin mAppsControlDisallowedAdmin;
+    protected boolean mAppsControlDisallowedBySystem;
 
     protected ApplicationsState mState;
     protected ApplicationsState.Session mSession;
@@ -96,6 +97,8 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
         super.onResume();
         mSession.resume();
         mAppsControlDisallowedAdmin = RestrictedLockUtils.checkIfRestrictionEnforced(getActivity(),
+                UserManager.DISALLOW_APPS_CONTROL, mUserId);
+        mAppsControlDisallowedBySystem = RestrictedLockUtils.hasBaseUserRestriction(getActivity(),
                 UserManager.DISALLOW_APPS_CONTROL, mUserId);
 
         if (!refreshUi()) {

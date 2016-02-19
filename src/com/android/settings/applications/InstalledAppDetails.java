@@ -250,6 +250,10 @@ public class InstalledAppDetails extends AppInfoBase
             }
         }
 
+        if (mAppsControlDisallowedBySystem) {
+            enabled = false;
+        }
+
         mUninstallButton.setEnabled(enabled);
         if (enabled) {
             // Register listener
@@ -413,7 +417,7 @@ public class InstalledAppDetails extends AppInfoBase
         menu.findItem(UNINSTALL_ALL_USERS_MENU).setVisible(showIt);
         mUpdatedSysApp = (mAppEntry.info.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0;
         MenuItem uninstallUpdatesItem = menu.findItem(UNINSTALL_UPDATES);
-        uninstallUpdatesItem.setVisible(mUpdatedSysApp);
+        uninstallUpdatesItem.setVisible(mUpdatedSysApp && !mAppsControlDisallowedBySystem);
         if (uninstallUpdatesItem.isVisible()) {
             RestrictedLockUtils.setMenuItemAsDisabledByAdmin(getActivity(),
                     uninstallUpdatesItem, mAppsControlDisallowedAdmin);
@@ -673,8 +677,12 @@ public class InstalledAppDetails extends AppInfoBase
     }
 
     private void updateForceStopButton(boolean enabled) {
-        mForceStopButton.setEnabled(enabled);
-        mForceStopButton.setOnClickListener(InstalledAppDetails.this);
+        if (mAppsControlDisallowedBySystem) {
+            mForceStopButton.setEnabled(false);
+        } else {
+            mForceStopButton.setEnabled(enabled);
+            mForceStopButton.setOnClickListener(InstalledAppDetails.this);
+        }
     }
 
     private void checkForceStop() {
@@ -740,7 +748,9 @@ public class InstalledAppDetails extends AppInfoBase
             }
             EnforcedAdmin admin = RestrictedLockUtils.checkIfUninstallBlocked(getActivity(),
                     packageName, mUserId);
-            if (admin != null) {
+            boolean uninstallBlockedBySystem = mAppsControlDisallowedBySystem ||
+                    RestrictedLockUtils.hasBaseUserRestriction(getActivity(), packageName, mUserId);
+            if (admin != null && !uninstallBlockedBySystem) {
                 RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getActivity(), admin);
             } else if ((mAppEntry.info.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
                 if (mAppEntry.info.enabled && !isDisabledUntilUsed()) {
@@ -760,7 +770,7 @@ public class InstalledAppDetails extends AppInfoBase
                 uninstallPkg(packageName, false, false);
             }
         } else if (v == mForceStopButton) {
-            if (mAppsControlDisallowedAdmin != null) {
+            if (mAppsControlDisallowedAdmin != null && !mAppsControlDisallowedBySystem) {
                 RestrictedLockUtils.sendShowAdminSupportDetailsIntent(
                         getActivity(), mAppsControlDisallowedAdmin);
             } else {

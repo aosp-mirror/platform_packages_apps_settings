@@ -38,6 +38,7 @@ import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
 
 import java.util.ArrayList;
@@ -186,12 +187,6 @@ public class PrivacySettings extends SettingsPreferenceFragment implements Index
             // Hide the item if data management intent is not supported by transport.
             getPreferenceScreen().removePreference(mManageData);
         }
-
-        RestrictedPreference networkResetPref = (RestrictedPreference) findPreference(
-                NETWORK_RESET);
-        if (networkResetPref != null) {
-            networkResetPref.checkRestrictionAndSetDisabled(UserManager.DISALLOW_NETWORK_RESET);
-        }
     }
 
     private void setConfigureSummary(String summary) {
@@ -314,6 +309,14 @@ public class PrivacySettings extends SettingsPreferenceFragment implements Index
             nonVisibleKeys.add(BACKUP_DATA);
             nonVisibleKeys.add(AUTO_RESTORE);
             nonVisibleKeys.add(CONFIGURE_ACCOUNT);
+        }
+        if (RestrictedLockUtils.hasBaseUserRestriction(context,
+                UserManager.DISALLOW_FACTORY_RESET, UserHandle.myUserId())) {
+            nonVisibleKeys.add(FACTORY_RESET);
+        }
+        if (RestrictedLockUtils.hasBaseUserRestriction(context,
+                UserManager.DISALLOW_NETWORK_RESET, UserHandle.myUserId())) {
+            nonVisibleKeys.add(NETWORK_RESET);
         }
     }
 }

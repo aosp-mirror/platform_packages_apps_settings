@@ -266,8 +266,8 @@ public class LocationSettings extends LocationSettingsBase
         mManagedProfileSwitch.setOnPreferenceClickListener(null);
         final EnforcedAdmin admin = RestrictedLockUtils.checkIfRestrictionEnforced(getActivity(),
                 UserManager.DISALLOW_SHARE_LOCATION, mManagedProfile.getIdentifier());
-        if (mUm.hasUserRestriction(UserManager.DISALLOW_SHARE_LOCATION, mManagedProfile)
-                && admin != null) {
+        final boolean isRestrictedByBase = isManagedProfileRestrictedByBase();
+        if (!isRestrictedByBase && admin != null) {
             mManagedProfileSwitch.setDisabledByAdmin(admin);
             mManagedProfileSwitch.setChecked(false);
         } else {
@@ -278,9 +278,8 @@ public class LocationSettings extends LocationSettingsBase
             if (!enabled) {
                 mManagedProfileSwitch.setChecked(false);
             } else {
-                final boolean isRestricted = isManagedProfileRestrictedByBase();
-                mManagedProfileSwitch.setChecked(!isRestricted);
-                summaryResId = (isRestricted ?
+                mManagedProfileSwitch.setChecked(!isRestrictedByBase);
+                summaryResId = (isRestrictedByBase ?
                         R.string.switch_off_text : R.string.switch_on_text);
                 mManagedProfileSwitch.setOnPreferenceClickListener(
                         mManagedProfileSwitchClickListener);
@@ -382,9 +381,11 @@ public class LocationSettings extends LocationSettingsBase
         final boolean enabled = (mode != android.provider.Settings.Secure.LOCATION_MODE_OFF);
         EnforcedAdmin admin = RestrictedLockUtils.checkIfRestrictionEnforced(getActivity(),
                 UserManager.DISALLOW_SHARE_LOCATION, UserHandle.myUserId());
+        boolean hasBaseUserRestriction = RestrictedLockUtils.hasBaseUserRestriction(getActivity(),
+                UserManager.DISALLOW_SHARE_LOCATION, UserHandle.myUserId());
         // Disable the whole switch bar instead of the switch itself. If we disabled the switch
         // only, it would be re-enabled again if the switch bar is not disabled.
-        if (admin != null) {
+        if (!hasBaseUserRestriction && admin != null) {
             mSwitchBar.setDisabledByAdmin(admin);
         } else {
             mSwitchBar.setEnabled(!restricted);

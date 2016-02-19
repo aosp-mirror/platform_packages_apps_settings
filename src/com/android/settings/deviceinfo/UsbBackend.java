@@ -22,6 +22,7 @@ import android.content.pm.PackageManager;
 import android.hardware.usb.UsbManager;
 import android.hardware.usb.UsbPort;
 import android.hardware.usb.UsbPortStatus;
+import android.os.UserHandle;
 import android.os.UserManager;
 
 public class UsbBackend {
@@ -37,6 +38,7 @@ public class UsbBackend {
     public static final int MODE_DATA_MIDI   = 0x03 << 1;
 
     private final boolean mRestricted;
+    private final boolean mRestrictedBySystem;
     private final boolean mMidi;
 
     private UserManager mUserManager;
@@ -56,6 +58,8 @@ public class UsbBackend {
         mUsbManager = context.getSystemService(UsbManager.class);
 
         mRestricted = mUserManager.hasUserRestriction(UserManager.DISALLOW_USB_FILE_TRANSFER);
+        mRestrictedBySystem = mUserManager.hasBaseUserRestriction(
+                UserManager.DISALLOW_USB_FILE_TRANSFER, UserHandle.of(UserHandle.myUserId()));
         mMidi = context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_MIDI);
 
         UsbPort[] ports = mUsbManager.getPorts();
@@ -134,8 +138,17 @@ public class UsbBackend {
                     ? UsbPort.POWER_ROLE_SOURCE : UsbPort.POWER_ROLE_SINK;
     }
 
-    public boolean isModeDisallowedByAdmin(int mode) {
+    public boolean isModeDisallowed(int mode) {
         if (mRestricted && (mode & MODE_DATA_MASK) != MODE_DATA_NONE
+                && (mode & MODE_DATA_MASK) != MODE_DATA_MIDI) {
+            // No USB data modes are supported.
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isModeDisallowedBySystem(int mode) {
+        if (mRestrictedBySystem && (mode & MODE_DATA_MASK) != MODE_DATA_NONE
                 && (mode & MODE_DATA_MASK) != MODE_DATA_MIDI) {
             // No USB data modes are supported.
             return true;
