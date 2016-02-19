@@ -67,7 +67,7 @@ public class AppStateNotificationBridge extends AppStateBaseBridge {
                 return false;
             }
             AppRow row = (AppRow) info.extraInfo;
-            return row.banned || row.bannedTopics;
+            return row.banned;
         }
     };
 }

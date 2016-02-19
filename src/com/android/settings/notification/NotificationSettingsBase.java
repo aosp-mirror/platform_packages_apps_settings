@@ -47,9 +47,6 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
     private static final String TAG = "NotifiSettingsBase";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
-    protected static final String ARG_PACKAGE_INFO = "arg_info";
-    protected static final String ARG_TOPIC = "arg_topic";
-
     protected static final String KEY_BYPASS_DND = "bypass_dnd";
     protected static final String KEY_SENSITIVE = "sensitive";
     protected static final String KEY_IMPORTANCE = "importance";
@@ -64,7 +61,6 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
     protected int mUserId;
     protected String mPkg;
     protected PackageInfo mPkgInfo;
-    protected Notification.Topic mTopic;
     protected ImportanceSeekBarPreference mImportance;
     protected RestrictedPreference mImportanceTitle;
     protected LayoutPreference mImportanceReset;
@@ -113,21 +109,13 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
         mUserId = UserHandle.getUserId(mUid);
 
         if (DEBUG) Log.d(TAG, "Load details for pkg=" + mPkg + " uid=" + mUid);
-        mPkgInfo = args != null && args.containsKey(ARG_PACKAGE_INFO)
-                ? (PackageInfo) args.getParcelable(ARG_PACKAGE_INFO) : null;
-        if (mPkgInfo == null) {
-            mPkgInfo = findPackageInfo(mPkg, mUid);
-        }
+        mPkgInfo = findPackageInfo(mPkg, mUid);
         if (mPkgInfo == null) {
             Log.w(TAG, "Failed to find package info: " + Settings.EXTRA_APP_PACKAGE + " was " + mPkg
                     + ", " + Settings.EXTRA_APP_UID + " was " + mUid);
             toastAndFinish();
             return;
         }
-
-        // Will be null for app wide settings.
-        mTopic = args != null && args.containsKey(ARG_TOPIC)
-                ? (Notification.Topic) args.getParcelable(ARG_TOPIC) : null;
 
         mSuspendedAppsAdmin = RestrictedLockUtils.checkIfApplicationIsSuspended(
                 mContext, mPkg, mUserId);
@@ -177,7 +165,7 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
         mImportance.setCallback(new ImportanceSeekBarPreference.Callback() {
             @Override
             public void onImportanceChanged(int progress) {
-                mBackend.setImportance(mPkg, mUid, mTopic, progress);
+                mBackend.setImportance(mPkg, mUid, progress);
                 mImportanceTitle.setSummary(getProgressSummary(progress));
                 updateDependents(progress);
             }
@@ -194,7 +182,7 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
                     return;
                 }
 
-                mBackend.setImportance(mPkg, mUid, mTopic, Ranking.IMPORTANCE_UNSPECIFIED);
+                mBackend.setImportance(mPkg, mUid, Ranking.IMPORTANCE_UNSPECIFIED);
                 mImportanceReset.setVisible(false);
                 mImportance.setVisible(false);
                 mImportanceTitle.setOnPreferenceClickListener(showEditableImportance);
@@ -231,7 +219,7 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 final boolean bypassZenMode = (Boolean) newValue;
-                return mBackend.setBypassZenMode(mPkgInfo.packageName, mUid, mTopic, bypassZenMode);
+                return mBackend.setBypassZenMode(mPkgInfo.packageName, mUid, bypassZenMode);
             }
         });
     }
@@ -243,7 +231,7 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 final boolean sensitive = (Boolean) newValue;
-                return mBackend.setSensitive(mPkgInfo.packageName, mUid, mTopic, sensitive);
+                return mBackend.setSensitive(mPkgInfo.packageName, mUid, sensitive);
             }
         });
     }
@@ -287,7 +275,7 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
             new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
-                    mBackend.setImportance(mPkg, mUid, mTopic, Ranking.IMPORTANCE_DEFAULT);
+                    mBackend.setImportance(mPkg, mUid, Ranking.IMPORTANCE_DEFAULT);
                     mImportance.setProgress(Ranking.IMPORTANCE_DEFAULT);
                     mImportanceTitle.setSummary(getProgressSummary(Ranking.IMPORTANCE_DEFAULT));
                     mImportance.setVisible(true);
