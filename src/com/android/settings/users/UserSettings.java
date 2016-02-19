@@ -767,7 +767,9 @@ public class UserSettings extends SettingsPreferenceFragment
         }
 
         // Check if Guest tile should be added.
-        if (!mUserCaps.mIsGuest && (mUserCaps.mCanAddGuest || mUserCaps.mDisallowAddUser)) {
+        if (!mUserCaps.mIsGuest && (mUserCaps.mCanAddGuest ||
+                mUserCaps.mDisallowAddUserSetByAdmin)) {
+            // Add a virtual Guest user for guest defaults
             UserPreference pref = new UserPreference(getPrefContext(), null,
                     UserPreference.USERID_GUEST_DEFAULTS,
                     mUserCaps.mIsAdmin && voiceCapable? this : null /* settings icon handler */,
@@ -810,7 +812,7 @@ public class UserSettings extends SettingsPreferenceFragment
         }
 
         // Append Add user to the end of the list
-        if (mUserCaps.mCanAddUser || mUserCaps.mDisallowAddUser) {
+        if (mUserCaps.mCanAddUser || mUserCaps.mDisallowAddUserSetByAdmin) {
             boolean moreUsers = mUserManager.canAddMoreUsers();
             mAddUser.setOrder(Preference.DEFAULT_ORDER);
             preferenceScreen.addPreference(mAddUser);
@@ -825,7 +827,8 @@ public class UserSettings extends SettingsPreferenceFragment
                         mUserCaps.mDisallowAddUser ? mUserCaps.mEnforcedAdmin : null);
             }
         }
-        if (mUserCaps.mIsAdmin) {
+        if (mUserCaps.mIsAdmin &&
+                (!mUserCaps.mDisallowAddUser || mUserCaps.mDisallowAddUserSetByAdmin)) {
             mLockScreenSettings.setOrder(Preference.DEFAULT_ORDER);
             preferenceScreen.addPreference(mLockScreenSettings);
             mAddUserWhenLocked.setChecked(Settings.Global.getInt(getContentResolver(),
@@ -1006,6 +1009,7 @@ public class UserSettings extends SettingsPreferenceFragment
         boolean mIsGuest;
         boolean mCanAddGuest;
         boolean mDisallowAddUser;
+        boolean mDisallowAddUserSetByAdmin;
         EnforcedAdmin mEnforcedAdmin;
 
         private UserCapabilities() {}
@@ -1023,7 +1027,12 @@ public class UserSettings extends SettingsPreferenceFragment
             caps.mIsAdmin = myUserInfo.isAdmin();
             caps.mEnforcedAdmin = RestrictedLockUtils.checkIfRestrictionEnforced(context,
                     UserManager.DISALLOW_ADD_USER, UserHandle.myUserId());
-            caps.mDisallowAddUser = (caps.mEnforcedAdmin != null);
+            final boolean hasBaseUserRestriction = RestrictedLockUtils.hasBaseUserRestriction(
+                    context, UserManager.DISALLOW_ADD_USER, UserHandle.myUserId());
+            caps.mDisallowAddUserSetByAdmin =
+                    caps.mEnforcedAdmin != null && !hasBaseUserRestriction;
+            caps.mDisallowAddUser =
+                    (caps.mEnforcedAdmin != null || hasBaseUserRestriction);
             if (!caps.mIsAdmin || UserManager.getMaxSupportedUsers() < 2
                     || !UserManager.supportsMultipleUsers()
                     || caps.mDisallowAddUser) {
@@ -1103,7 +1112,7 @@ public class UserSettings extends SettingsPreferenceFragment
                     data.screenTitle = res.getString(R.string.user_settings_title);
                     result.add(data);
 
-                    if (userCaps.mCanAddUser || userCaps.mDisallowAddUser) {
+                    if (userCaps.mCanAddUser || userCaps.mDisallowAddUserSetByAdmin) {
                         data = new SearchIndexableRaw(context);
                         data.title = res.getString(userCaps.mCanAddRestrictedProfile ?
                                 R.string.user_add_user_or_profile_menu
