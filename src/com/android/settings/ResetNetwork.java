@@ -20,6 +20,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -33,9 +34,12 @@ import android.widget.Spinner;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.PhoneConstants;
+import com.android.settingslib.RestrictedLockUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 /**
  * Confirm and execute a reset of the device's network settings to a clean "just out of the box"
@@ -180,9 +184,16 @@ public class ResetNetwork extends InstrumentedFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         final UserManager um = UserManager.get(getActivity());
-        if (!um.isAdminUser()
-                || um.hasUserRestriction(UserManager.DISALLOW_NETWORK_RESET)) {
+        final EnforcedAdmin admin = RestrictedLockUtils.checkIfRestrictionEnforced(
+                getActivity(), UserManager.DISALLOW_NETWORK_RESET, UserHandle.myUserId());
+        if (!um.isAdminUser() || RestrictedLockUtils.hasBaseUserRestriction(getActivity(),
+                UserManager.DISALLOW_NETWORK_RESET, UserHandle.myUserId())) {
             return inflater.inflate(R.layout.network_reset_disallowed_screen, null);
+        } else if (admin != null) {
+            View view = inflater.inflate(R.layout.admin_support_details_empty_view, null);
+            ShowAdminSupportDetailsDialog.setAdminSupportDetails(getActivity(), view, admin, false);
+            view.setVisibility(View.VISIBLE);
+            return view;
         }
 
         mContentView = inflater.inflate(R.layout.reset_network, null);

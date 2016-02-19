@@ -13,15 +13,7 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<!-- Layout used for displaying admin support details in empty preference fragments. -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/admin_support_details"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="@*android:dimen/preference_fragment_padding_side"
-        android:gravity="center_vertical"
-        android:orientation="vertical"
-        android:visibility="gone">
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
     <TextView android:id="@+id/admin_support_msg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -39,4 +31,4 @@
             android:textColor="?android:attr/colorAccent"
             android:clickable="true"
             android:background="?android:attr/selectableItemBackground" />
-</LinearLayout>
+</merge>

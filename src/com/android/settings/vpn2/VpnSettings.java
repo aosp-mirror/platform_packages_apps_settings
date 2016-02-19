@@ -49,7 +49,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.net.LegacyVpnInfo;
@@ -57,7 +56,8 @@ import com.android.internal.net.VpnConfig;
 import com.android.internal.net.VpnProfile;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.RestrictedSettingsFragment;
+import com.android.settingslib.RestrictedLockUtils;
 import com.google.android.collect.Lists;
 
 import java.util.ArrayList;
@@ -72,7 +72,7 @@ import static android.app.AppOpsManager.OP_ACTIVATE_VPN;
  * Settings screen listing VPNs. Configured VPNs and networks managed by apps
  * are shown in the same list.
  */
-public class VpnSettings extends SettingsPreferenceFragment implements
+public class VpnSettings extends RestrictedSettingsFragment implements
         Handler.Callback, Preference.OnPreferenceClickListener {
     private static final String LOG_TAG = "VpnSettings";
 
@@ -101,6 +101,10 @@ public class VpnSettings extends SettingsPreferenceFragment implements
 
     private boolean mUnavailable;
 
+    public VpnSettings() {
+        super(UserManager.DISALLOW_CONFIG_VPN);
+    }
+
     @Override
     protected int getMetricsCategory() {
         return MetricsEvent.VPN;
@@ -111,7 +115,7 @@ public class VpnSettings extends SettingsPreferenceFragment implements
         super.onCreate(savedState);
 
         mUserManager = (UserManager) getSystemService(Context.USER_SERVICE);
-        if (mUserManager.hasUserRestriction(UserManager.DISALLOW_CONFIG_VPN)) {
+        if (isUiRestricted()) {
             mUnavailable = true;
             setPreferenceScreen(new PreferenceScreen(getPrefContext(), null));
             setHasOptionsMenu(false);
@@ -136,7 +140,12 @@ public class VpnSettings extends SettingsPreferenceFragment implements
 
         // Disable all actions if VPN configuration has been disallowed
         for (int i = 0; i < menu.size(); i++) {
-            menu.getItem(i).setEnabled(!mUnavailable);
+            if (isUiRestrictedByOnlyAdmin()) {
+                RestrictedLockUtils.setMenuItemAsDisabledByAdmin(getPrefContext(),
+                        menu.getItem(i), getRestrictionEnforcedAdmin());
+            } else {
+                menu.getItem(i).setEnabled(!mUnavailable);
+            }
         }
 
         // Hide lockdown VPN on devices that require IMS authentication
@@ -172,11 +181,10 @@ public class VpnSettings extends SettingsPreferenceFragment implements
 
         if (mUnavailable) {
             // Show a message to explain that VPN settings have been disabled
-            TextView emptyView = (TextView) getView().findViewById(android.R.id.empty);
-            setEmptyView(emptyView);
-            if (emptyView != null) {
-                emptyView.setText(R.string.vpn_settings_not_available);
+            if (!isUiRestrictedByOnlyAdmin()) {
+                getEmptyTextView().setText(R.string.vpn_settings_not_available);
             }
+            getPreferenceScreen().removeAll();
             return;
         }
 

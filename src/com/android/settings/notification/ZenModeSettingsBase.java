@@ -28,9 +28,7 @@ import android.provider.Settings;
 import android.provider.Settings.Global;
 import android.service.notification.ZenModeConfig;
 import android.util.Log;
-import android.view.View;
 
-import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
 
 import java.util.List;
@@ -76,11 +74,6 @@ abstract public class ZenModeSettingsBase extends RestrictedSettingsFragment {
                 finish();
             }
         }
-    }
-
-    @Override
-    protected View initAdminSupportDetailsView() {
-        return getActivity().findViewById(R.id.admin_support_details);
     }
 
     @Override

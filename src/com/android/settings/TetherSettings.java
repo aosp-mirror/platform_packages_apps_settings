@@ -42,7 +42,6 @@ import android.os.UserManager;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
-import android.widget.TextView;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.wifi.WifiApDialog;
@@ -56,7 +55,7 @@ import java.util.concurrent.atomic.AtomicReference;
 /*
  * Displays preferences for Tethering.
  */
-public class TetherSettings extends SettingsPreferenceFragment
+public class TetherSettings extends RestrictedSettingsFragment
         implements DialogInterface.OnClickListener, Preference.OnPreferenceChangeListener {
 
     private static final String USB_TETHER_SETTINGS = "usb_tether_settings";
@@ -94,7 +93,6 @@ public class TetherSettings extends SettingsPreferenceFragment
     private WifiApDialog mDialog;
     private WifiManager mWifiManager;
     private WifiConfiguration mWifiConfig = null;
-    private UserManager mUm;
     private ConnectivityManager mCm;
 
     private boolean mUsbConnected;
@@ -113,16 +111,18 @@ public class TetherSettings extends SettingsPreferenceFragment
         return MetricsEvent.TETHER;
     }
 
+    public TetherSettings() {
+        super(UserManager.DISALLOW_CONFIG_TETHERING);
+    }
+
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
         addPreferencesFromResource(R.xml.tether_prefs);
 
-        mUm = (UserManager) getSystemService(Context.USER_SERVICE);
-
-        if (mUm.hasUserRestriction(UserManager.DISALLOW_CONFIG_TETHERING)
-                || !mUm.isAdminUser()) {
+        setIfOnlyAvailableForAdmins(true);
+        if (isUiRestricted()) {
             mUnavailable = true;
             setPreferenceScreen(new PreferenceScreen(getPrefContext(), null));
             return;
@@ -259,11 +259,10 @@ public class TetherSettings extends SettingsPreferenceFragment
         super.onStart();
 
         if (mUnavailable) {
-            TextView emptyView = (TextView) getView().findViewById(android.R.id.empty);
-            setEmptyView(emptyView);
-            if (emptyView != null) {
-                emptyView.setText(R.string.tethering_settings_not_available);
+            if (!isUiRestrictedByOnlyAdmin()) {
+                getEmptyTextView().setText(R.string.tethering_settings_not_available);
             }
+            getPreferenceScreen().removeAll();
             return;
         }
 
