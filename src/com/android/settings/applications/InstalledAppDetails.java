@@ -842,8 +842,6 @@ public class InstalledAppDetails extends AppInfoBase
     public static CharSequence getNotificationSummary(AppRow appRow, Context context) {
         if (appRow.banned) {
             return context.getString(R.string.notifications_disabled);
-        } else if (appRow.bannedTopics) {
-            return context.getString(R.string.notifications_partially_disabled);
         }
         return context.getString(R.string.notifications_enabled);
     }

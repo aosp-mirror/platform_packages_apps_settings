@@ -17,11 +17,14 @@
 package com.android.settings.notification;
 
 import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
+import android.os.UserHandle;
+import android.provider.Settings;
 import android.service.notification.NotificationListenerService.Ranking;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
@@ -32,6 +35,7 @@ import android.util.Log;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.AppHeader;
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -50,16 +54,12 @@ public class AppNotificationSettings extends NotificationSettingsBase {
     private static final String TAG = "AppNotificationSettings";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
-    private static final String KEY_BLOCK = "block";
-    private static final String KEY_CATEGORIES = "categories";
-
     private static final Intent APP_NOTIFICATION_PREFS_CATEGORY_INTENT
             = new Intent(Intent.ACTION_MAIN)
                 .addCategory(Notification.INTENT_CATEGORY_NOTIFICATION_PREFERENCES);
 
-    private RestrictedSwitchPreference mBlock;
-    private PreferenceCategory mCategories;
     private AppRow mAppRow;
+    private boolean mDndVisualEffectsSuppressed;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -79,8 +79,6 @@ public class AppNotificationSettings extends NotificationSettingsBase {
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.app_notification_settings);
-        mCategories = (PreferenceCategory) findPreference(KEY_CATEGORIES);
-        mBlock = (RestrictedSwitchPreference) findPreference(KEY_BLOCK);
         mImportance = (ImportanceSeekBarPreference) findPreference(KEY_IMPORTANCE);
         mImportanceReset = (LayoutPreference) findPreference(KEY_IMPORTANCE_RESET);
         mImportanceTitle = (RestrictedPreference) findPreference(KEY_IMPORTANCE_TITLE);
@@ -91,84 +89,49 @@ public class AppNotificationSettings extends NotificationSettingsBase {
 
         mAppRow = mBackend.loadAppRow(mPm, mPkgInfo);
 
+        NotificationManager.Policy policy =
+                NotificationManager.from(mContext).getNotificationPolicy();
+        mDndVisualEffectsSuppressed = policy == null ? false : policy.suppressedVisualEffects != 0;
+
         // load settings intent
         ArrayMap<String, AppRow> rows = new ArrayMap<String, AppRow>();
         rows.put(mAppRow.pkg, mAppRow);
         collectConfigActivities(rows);
 
-        // Add topics
-        List<Notification.Topic> topics = mBackend.getTopics(mPkg, mUid);
-        if (topics.size() <= 1) {
-            removeAppPrefs();
-            setupImportancePrefs(mAppRow.systemApp, mAppRow.appImportance);
-            setupPriorityPref(mAppRow.appBypassDnd);
-            setupSensitivePref(mAppRow.appSensitive);
-        } else {
-            removeTopicPrefs();
-            setupBlockSwitch();
-            for (Notification.Topic topic : topics) {
-                RestrictedPreference topicPreference = new RestrictedPreference(getPrefContext());
-                topicPreference.setDisabledByAdmin(mSuspendedAppsAdmin);
-                topicPreference.setKey(topic.getId());
-                topicPreference.setTitle(topic.getLabel());
-                // Create intent for this preference.
-                Bundle topicArgs = new Bundle();
-                topicArgs.putInt(AppInfoBase.ARG_PACKAGE_UID, mUid);
-                topicArgs.putParcelable(TopicNotificationSettings.ARG_TOPIC, topic);
-                topicArgs.putBoolean(AppHeader.EXTRA_HIDE_INFO_BUTTON, true);
-                topicArgs.putString(AppInfoBase.ARG_PACKAGE_NAME, mPkg);
-                topicArgs.putParcelable(TopicNotificationSettings.ARG_PACKAGE_INFO, mPkgInfo);
-
-                Intent topicIntent = Utils.onBuildStartFragmentIntent(getActivity(),
-                        TopicNotificationSettings.class.getName(),
-                        topicArgs, null, R.string.topic_notifications_title, null, false);
-                topicPreference.setIntent(topicIntent);
-                mCategories.addPreference(topicPreference);
-            }
-        }
+        setupImportancePrefs(mAppRow.systemApp, mAppRow.appImportance);
+        setupPriorityPref(mAppRow.appBypassDnd);
+        setupSensitivePref(mAppRow.appSensitive);
+        updateDependents(mAppRow.appImportance);
     }
 
     @Override
-    protected void updateDependents(int progress) {
-        updateDependents(progress == Ranking.IMPORTANCE_NONE);
+    protected void updateDependents(int importance) {
+        final boolean lockscreenSecure = new LockPatternUtils(getActivity()).isSecure(
+                UserHandle.myUserId());
+        final boolean lockscreenNotificationsEnabled = getLockscreenNotificationsEnabled();
+        final boolean allowPrivate = getLockscreenAllowPrivateNotifications();
+
+        setVisible(mPriority, checkCanBeVisible(Ranking.IMPORTANCE_DEFAULT, importance)
+                && !mDndVisualEffectsSuppressed);
+        setVisible(mSensitive, checkCanBeVisible(Ranking.IMPORTANCE_LOW, importance)
+                && lockscreenSecure && lockscreenNotificationsEnabled && allowPrivate);
     }
 
-    private void removeTopicPrefs() {
-        setVisible(mImportance, false);
-        setVisible(mImportanceReset, false);
-        setVisible(mImportanceTitle, false);
-        setVisible(mPriority, false);
-        setVisible(mSensitive, false);
+    protected boolean checkCanBeVisible(int minImportanceVisible, int importance) {
+        if (importance == Ranking.IMPORTANCE_UNSPECIFIED) {
+            return true;
+        }
+        return importance > minImportanceVisible;
     }
 
-    private void removeAppPrefs() {
-        setVisible(mBlock, false);
-        setVisible(mCategories, false);
+    private boolean getLockscreenNotificationsEnabled() {
+        return Settings.Secure.getInt(getContentResolver(),
+                Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS, 0) != 0;
     }
 
-    private void updateDependents(boolean banned) {
-        mBlock.setEnabled(!mAppRow.systemApp);
-        mCategories.setEnabled(!banned);
-    }
-
-    private void setupBlockSwitch() {
-        mBlock.setDisabledByAdmin(mSuspendedAppsAdmin);
-        mBlock.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                final boolean banned = (Boolean) newValue;
-                if (banned) {
-                    MetricsLogger.action(getActivity(), MetricsEvent.ACTION_BAN_APP_NOTES, mPkg);
-                }
-                final boolean success = mBackend.setNotificationsBanned(mPkg, mUid, banned);
-                if (success) {
-                    updateDependents(banned);
-                }
-                return success;
-            }
-        });
-        mBlock.setChecked(mAppRow.banned);
-        updateDependents(mAppRow.banned);
+    private boolean getLockscreenAllowPrivateNotifications() {
+        return Settings.Secure.getInt(getContentResolver(),
+                Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, 0) != 0;
     }
 
     private List<ResolveInfo> queryNotificationConfigActivities() {
