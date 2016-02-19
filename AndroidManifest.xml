@@ -2760,8 +2760,8 @@
 
         <activity android:name="ShowAdminSupportDetailsDialog"
                 android:theme="@style/Transparent"
-                android:excludeFromRecents="true">
-
+                android:excludeFromRecents="true"
+                android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.settings.SHOW_ADMIN_SUPPORT_DETAILS" />
                 <category android:name="android.intent.category.DEFAULT" />
