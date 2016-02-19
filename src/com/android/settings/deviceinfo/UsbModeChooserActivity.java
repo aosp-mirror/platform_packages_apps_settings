@@ -106,9 +106,10 @@ public class UsbModeChooserActivity extends Activity {
         mBackend = new UsbBackend(this);
         int current = mBackend.getCurrentMode();
         for (int i = 0; i < DEFAULT_MODES.length; i++) {
-            if (mBackend.isModeSupported(DEFAULT_MODES[i])) {
+            if (mBackend.isModeSupported(DEFAULT_MODES[i])
+                    && !mBackend.isModeDisallowedBySystem(DEFAULT_MODES[i])) {
                 inflateOption(DEFAULT_MODES[i], current == DEFAULT_MODES[i], container,
-                        mBackend.isModeDisallowedByAdmin(DEFAULT_MODES[i]));
+                        mBackend.isModeDisallowed(DEFAULT_MODES[i]));
             }
         }
     }

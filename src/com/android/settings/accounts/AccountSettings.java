@@ -62,6 +62,7 @@ import com.android.settings.search.Index;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.users.UserDialogs;
+import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.accounts.AuthenticatorHelper;
 
 import java.util.ArrayList;
@@ -325,9 +326,12 @@ public class AccountSettings extends SettingsPreferenceFragment
         if (userInfo.isEnabled()) {
             profileData.authenticatorHelper = new AuthenticatorHelper(context,
                     userInfo.getUserHandle(), this);
-            profileData.addAccountPreference = newAddAccountPreference(context);
-            profileData.addAccountPreference.checkRestrictionAndSetDisabled(
-                    DISALLOW_MODIFY_ACCOUNTS, userInfo.id);
+            if (!RestrictedLockUtils.hasBaseUserRestriction(context,
+                    UserManager.DISALLOW_MODIFY_ACCOUNTS, userInfo.id)) {
+                profileData.addAccountPreference = newAddAccountPreference(context);
+                profileData.addAccountPreference.checkRestrictionAndSetDisabled(
+                        DISALLOW_MODIFY_ACCOUNTS, userInfo.id);
+            }
         }
         mProfiles.put(userInfo.id, profileData);
         Index.getInstance(getActivity()).updateFromClassNameResource(
@@ -715,13 +719,16 @@ public class AccountSettings extends SettingsPreferenceFragment
             for (int i = 0; i < profilesCount; i++) {
                 UserInfo userInfo = profiles.get(i);
                 if (userInfo.isEnabled()) {
-                    SearchIndexableRaw data = new SearchIndexableRaw(context);
-                    data = new SearchIndexableRaw(context);
-                    data.title = res.getString(R.string.add_account_label);
-                    data.screenTitle = screenTitle;
-                    result.add(data);
-                    if (userInfo.isManagedProfile()) {
+                    if (!RestrictedLockUtils.hasBaseUserRestriction(context,
+                            DISALLOW_MODIFY_ACCOUNTS, userInfo.id)) {
+                        SearchIndexableRaw data = new SearchIndexableRaw(context);
                         data = new SearchIndexableRaw(context);
+                        data.title = res.getString(R.string.add_account_label);
+                        data.screenTitle = screenTitle;
+                        result.add(data);
+                    }
+                    if (userInfo.isManagedProfile()) {
+                        SearchIndexableRaw data = new SearchIndexableRaw(context);
                         data = new SearchIndexableRaw(context);
                         data.title = res.getString(R.string.remove_managed_profile_label);
                         data.screenTitle = screenTitle;

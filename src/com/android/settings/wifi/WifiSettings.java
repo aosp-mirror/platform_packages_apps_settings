@@ -633,6 +633,9 @@ public class WifiSettings extends RestrictedSettingsFragment
         // Safeguard from some delayed event handling
         if (getActivity() == null) return;
         if (isUiRestricted()) {
+            if (!isUiRestrictedByOnlyAdmin()) {
+                addMessagePreference(R.string.wifi_empty_list_user_restricted);
+            }
             getPreferenceScreen().removeAll();
             return;
         }
@@ -732,6 +735,9 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     private void setOffMessage() {
         if (isUiRestricted()) {
+            if (!isUiRestrictedByOnlyAdmin()) {
+                addMessagePreference(R.string.wifi_empty_list_user_restricted);
+            }
             getPreferenceScreen().removeAll();
             return;
         }

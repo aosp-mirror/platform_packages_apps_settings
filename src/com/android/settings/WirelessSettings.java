@@ -34,6 +34,7 @@ import android.nfc.NfcAdapter;
 import android.nfc.NfcManager;
 import android.os.Bundle;
 import android.os.SystemProperties;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
@@ -242,7 +243,8 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
         //enable/disable wimax depending on the value in config.xml
         final boolean isWimaxEnabled = isAdmin && this.getResources().getBoolean(
                 com.android.internal.R.bool.config_wimaxEnabled);
-        if (!isWimaxEnabled) {
+        if (!isWimaxEnabled || RestrictedLockUtils.hasBaseUserRestriction(activity,
+                UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS, UserHandle.myUserId())) {
             PreferenceScreen root = getPreferenceScreen();
             Preference ps = findPreference(KEY_WIMAX_SETTINGS);
             if (ps != null) root.removePreference(ps);
@@ -260,7 +262,8 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
         }
         // Disable VPN.
         // TODO: http://b/23693383
-        if (!isAdmin) {
+        if (!isAdmin || RestrictedLockUtils.hasBaseUserRestriction(activity,
+                UserManager.DISALLOW_CONFIG_VPN, UserHandle.myUserId())) {
             removePreference(KEY_VPN_SETTINGS);
         }
 
@@ -285,7 +288,9 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
 
         // Remove Mobile Network Settings and Manage Mobile Plan for secondary users,
         // if it's a wifi-only device.
-        if (!isAdmin || Utils.isWifiOnly(getActivity())) {
+        if (!isAdmin || Utils.isWifiOnly(getActivity()) ||
+                RestrictedLockUtils.hasBaseUserRestriction(activity,
+                        UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS, UserHandle.myUserId())) {
             removePreference(KEY_MOBILE_NETWORK_SETTINGS);
             removePreference(KEY_MANAGE_MOBILE_PLAN);
         }
@@ -317,9 +322,11 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
         final ConnectivityManager cm =
                 (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        final boolean adminDisallowedTetherConfig = mUm.hasUserRestriction(
-                UserManager.DISALLOW_CONFIG_TETHERING);
-        if (!cm.isTetheringSupported() && !adminDisallowedTetherConfig) {
+        final boolean adminDisallowedTetherConfig = RestrictedLockUtils.checkIfRestrictionEnforced(
+                activity, UserManager.DISALLOW_CONFIG_TETHERING, UserHandle.myUserId()) != null;
+        if ((!cm.isTetheringSupported() && !adminDisallowedTetherConfig) ||
+                RestrictedLockUtils.hasBaseUserRestriction(activity,
+                        UserManager.DISALLOW_CONFIG_TETHERING, UserHandle.myUserId())) {
             getPreferenceScreen().removePreference(findPreference(KEY_TETHER_SETTINGS));
         } else if (!adminDisallowedTetherConfig) {
             Preference p = findPreference(KEY_TETHER_SETTINGS);
