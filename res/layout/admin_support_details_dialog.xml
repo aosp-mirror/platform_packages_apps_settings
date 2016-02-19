@@ -46,23 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-            <TextView android:id="@+id/admin_support_msg"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="@android:style/TextAppearance.Material.Subhead"
-                    android:text="@string/default_admin_support_msg"
-                    android:maxLength="200"
-                    android:autoLink="email|phone"
-                    android:textColor="?android:attr/textColorSecondary" />
-            <TextView android:id="@+id/admins_policies_list"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/admin_details_dialog_link_padding_top"
-                    android:text="@string/admin_support_more_info"
-                    android:textAppearance="@android:style/TextAppearance.Material.Subhead"
-                    android:textColor="?android:attr/colorAccent"
-                    android:clickable="true"
-                    android:background="?android:attr/selectableItemBackground" />
+            <include layout="@layout/admin_support_details_content" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

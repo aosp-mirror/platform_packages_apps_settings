@@ -27,6 +27,7 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 
@@ -69,6 +70,9 @@ public abstract class RestrictedSettingsFragment extends SettingsPreferenceFragm
     private EnforcedAdmin mEnforcedAdmin;
     private TextView mEmptyTextView;
 
+    private boolean mOnlyAvailableForAdmins = false;
+    private boolean mIsAdminUser;
+
     // Receiver to clear pin status when the screen is turned off.
     private BroadcastReceiver mScreenOffReceiver = new BroadcastReceiver() {
         @Override
@@ -96,6 +100,7 @@ public abstract class RestrictedSettingsFragment extends SettingsPreferenceFragm
 
         mRestrictionsManager = (RestrictionsManager) getSystemService(Context.RESTRICTIONS_SERVICE);
         mUserManager = (UserManager) getSystemService(Context.USER_SERVICE);
+        mIsAdminUser = mUserManager.isAdminUser();
 
         if (icicle != null) {
             mChallengeSucceeded = icicle.getBoolean(KEY_CHALLENGE_SUCCEEDED, false);
@@ -198,32 +203,39 @@ public abstract class RestrictedSettingsFragment extends SettingsPreferenceFragm
         return restricted && mRestrictionsManager.hasRestrictionsProvider();
     }
 
-    protected View initAdminSupportDetailsView() {
-        return null;
+    private View initAdminSupportDetailsView() {
+        return getActivity().findViewById(R.id.admin_support_details);
     }
 
     protected TextView initEmptyTextView() {
-        return null;
+        TextView emptyView = (TextView) getActivity().findViewById(android.R.id.empty);
+        emptyView.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
+        return emptyView;
     }
 
     private void updateAdminSupportDetailsView() {
-        mEnforcedAdmin = RestrictedLockUtils.checkIfRestrictionEnforced(getActivity(),
-                mRestrictionKey, UserHandle.myUserId());
-        if (mEnforcedAdmin != null) {
+        final EnforcedAdmin admin = getRestrictionEnforcedAdmin();
+        if (admin != null) {
             final Activity activity = getActivity();
             DevicePolicyManager dpm = (DevicePolicyManager) activity.getSystemService(
                     Context.DEVICE_POLICY_SERVICE);
-            if (mEnforcedAdmin.userId == UserHandle.USER_NULL) {
-                mEnforcedAdmin.userId = UserHandle.myUserId();
-            }
             CharSequence supportMessage = dpm.getShortSupportMessageForUser(
-                    mEnforcedAdmin.component, mEnforcedAdmin.userId);
+                    admin.component, admin.userId);
             if (supportMessage != null) {
                 TextView textView = (TextView) activity.findViewById(R.id.admin_support_msg);
                 textView.setText(supportMessage);
             }
             activity.findViewById(R.id.admins_policies_list).setOnClickListener(this);
         }
+    }
+
+    public EnforcedAdmin getRestrictionEnforcedAdmin() {
+        mEnforcedAdmin = RestrictedLockUtils.checkIfRestrictionEnforced(getActivity(),
+                mRestrictionKey, UserHandle.myUserId());
+        if (mEnforcedAdmin != null && mEnforcedAdmin.userId == UserHandle.USER_NULL) {
+            mEnforcedAdmin.userId = UserHandle.myUserId();
+        }
+        return mEnforcedAdmin;
     }
 
     @Override
@@ -252,7 +264,9 @@ public abstract class RestrictedSettingsFragment extends SettingsPreferenceFragm
     protected void onDataSetChanged() {
         highlightPreferenceIfNeeded();
         if (mAdminSupportDetails != null && isUiRestrictedByOnlyAdmin()) {
-            updateAdminSupportDetailsView();
+            final EnforcedAdmin admin = getRestrictionEnforcedAdmin();
+            ShowAdminSupportDetailsDialog.setAdminSupportDetails(getActivity(),
+                    mAdminSupportDetails, admin, false);
             setEmptyView(mAdminSupportDetails);
         } else if (mEmptyTextView != null) {
             setEmptyView(mEmptyTextView);
@@ -260,15 +274,20 @@ public abstract class RestrictedSettingsFragment extends SettingsPreferenceFragm
         super.onDataSetChanged();
     }
 
+    public void setIfOnlyAvailableForAdmins(boolean onlyForAdmins) {
+        mOnlyAvailableForAdmins = onlyForAdmins;
+    }
+
     /**
      * Returns whether restricted or actionable UI elements should be removed or disabled.
      */
     protected boolean isUiRestricted() {
-        return isRestrictedAndNotProviderProtected() || !hasChallengeSucceeded();
+        return isRestrictedAndNotProviderProtected() || !hasChallengeSucceeded()
+                || (!mIsAdminUser && mOnlyAvailableForAdmins);
     }
 
     protected boolean isUiRestrictedByOnlyAdmin() {
         return isUiRestricted() && !mUserManager.hasBaseUserRestriction(mRestrictionKey,
-                UserHandle.of(UserHandle.myUserId()));
+                UserHandle.of(UserHandle.myUserId())) && (mIsAdminUser || !mOnlyAvailableForAdmins);
     }
 }

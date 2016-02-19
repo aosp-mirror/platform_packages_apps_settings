@@ -54,7 +54,6 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -719,18 +718,6 @@ public class WifiSettings extends RestrictedSettingsFragment
                 }
                 break;
         }
-    }
-
-    @Override
-    protected TextView initEmptyTextView() {
-        TextView emptyView = (TextView) getActivity().findViewById(android.R.id.empty);
-        emptyView.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
-        return emptyView;
-    }
-
-    @Override
-    protected View initAdminSupportDetailsView() {
-        return getActivity().findViewById(R.id.admin_support_details);
     }
 
     private void setOffMessage() {

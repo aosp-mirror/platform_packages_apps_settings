@@ -34,7 +34,6 @@ import android.support.v7.preference.PreferenceScreen;
 import android.text.Spannable;
 import android.text.style.TextAppearanceSpan;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -377,18 +376,6 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
         if (!isUiRestricted()) {
             getActivity().invalidateOptionsMenu();
         }
-    }
-
-    @Override
-    protected TextView initEmptyTextView() {
-        TextView textView = (TextView) getView().findViewById(android.R.id.empty);
-        textView.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
-        return textView;
-    }
-
-    @Override
-    protected View initAdminSupportDetailsView() {
-        return getActivity().findViewById(R.id.admin_support_details);
     }
 
     private void setOffMessage() {
