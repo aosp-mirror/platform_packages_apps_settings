@@ -169,7 +169,9 @@ public class SoundSettings extends SettingsPreferenceFragment implements Indexab
         } catch (IllegalArgumentException ignored) {
             isCellBroadcastAppLinkEnabled = false;  // CMAS app not installed
         }
-        if (!mUserManager.isAdminUser() || !isCellBroadcastAppLinkEnabled) {
+        if (!mUserManager.isAdminUser() || !isCellBroadcastAppLinkEnabled ||
+                RestrictedLockUtils.hasBaseUserRestriction(mContext,
+                        UserManager.DISALLOW_CONFIG_CELL_BROADCASTS, UserHandle.myUserId())) {
             removePreference(KEY_CELL_BROADCAST_SETTINGS);
         }
         initRingtones();
@@ -193,12 +195,15 @@ public class SoundSettings extends SettingsPreferenceFragment implements Indexab
 
         final EnforcedAdmin admin = RestrictedLockUtils.checkIfRestrictionEnforced(mContext,
                 UserManager.DISALLOW_ADJUST_VOLUME, UserHandle.myUserId());
+        final boolean hasBaseRestriction = RestrictedLockUtils.hasBaseUserRestriction(mContext,
+                UserManager.DISALLOW_ADJUST_VOLUME, UserHandle.myUserId());
         for (String key : RESTRICTED_KEYS) {
             Preference pref = findPreference(key);
-            if (pref instanceof RestrictedPreference) {
+            if (pref != null) {
+                pref.setEnabled(!hasBaseRestriction);
+            }
+            if (pref instanceof RestrictedPreference && !hasBaseRestriction) {
                 ((RestrictedPreference) pref).setDisabledByAdmin(admin);
-            } else if (pref != null) {
-                pref.setEnabled(admin == null);
             }
         }
         RestrictedPreference broadcastSettingsPref = (RestrictedPreference) findPreference(
