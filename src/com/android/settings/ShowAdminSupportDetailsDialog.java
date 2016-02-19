@@ -37,38 +37,57 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+
 public class ShowAdminSupportDetailsDialog extends Activity
         implements DialogInterface.OnDismissListener {
 
-    private final String TAG = "AdminSupportDialog";
+    private static final String TAG = "AdminSupportDialog";
 
     private DevicePolicyManager mDpm;
+
+    private EnforcedAdmin mEnforcedAdmin;
+    private View mDialogView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         mDpm = getSystemService(DevicePolicyManager.class);
-        ComponentName admin = null;
-        int userId = UserHandle.myUserId();
-        Intent intent = getIntent();
-        if (intent != null) {
-            // Only allow apps with MANAGE_DEVICE_ADMINS permission to specify admin and user.
-            if (checkIfCallerHasPermission(android.Manifest.permission.MANAGE_DEVICE_ADMINS)) {
-                admin = intent.getParcelableExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN);
-                userId = intent.getIntExtra(Intent.EXTRA_USER_ID, UserHandle.myUserId());
-            }
-        }
+        mEnforcedAdmin = getAdminDetailsFromIntent(getIntent());
 
-        View rootView = LayoutInflater.from(this).inflate(
+        mDialogView = LayoutInflater.from(this).inflate(
                 R.layout.admin_support_details_dialog, null);
-        setAdminSupportDetails(rootView, admin, userId);
+        setAdminSupportDetails(mDialogView, mEnforcedAdmin.component, mEnforcedAdmin.userId);
 
         new AlertDialog.Builder(this)
-                .setView(rootView)
+                .setView(mDialogView)
                 .setPositiveButton(R.string.okay, null)
                 .setOnDismissListener(this)
                 .show();
+    }
+
+    @Override
+    public void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        EnforcedAdmin admin = getAdminDetailsFromIntent(intent);
+        if (!mEnforcedAdmin.equals(admin)) {
+            mEnforcedAdmin = admin;
+            setAdminSupportDetails(mDialogView, mEnforcedAdmin.component, mEnforcedAdmin.userId);
+        }
+    }
+
+    private EnforcedAdmin getAdminDetailsFromIntent(Intent intent) {
+        EnforcedAdmin admin = new EnforcedAdmin(null, UserHandle.myUserId());
+        if (intent == null) {
+            return admin;
+        }
+        // Only allow apps with MANAGE_DEVICE_ADMINS permission to specify admin and user.
+        if (checkIfCallerHasPermission(android.Manifest.permission.MANAGE_DEVICE_ADMINS)) {
+            admin.component = intent.getParcelableExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN);
+            admin.userId = intent.getIntExtra(Intent.EXTRA_USER_ID, UserHandle.myUserId());
+        }
+        return admin;
     }
 
     private boolean checkIfCallerHasPermission(String permission) {
