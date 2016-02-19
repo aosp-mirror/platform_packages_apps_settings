@@ -25,12 +25,16 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.support.v7.preference.Preference;
 import android.support.v14.preference.PreferenceFragment;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.fingerprint.SetupSkipDialog;
 import com.android.setupwizardlib.SetupWizardLayout;
+import com.android.setupwizardlib.SetupWizardPreferenceLayout;
 import com.android.setupwizardlib.view.NavigationBar;
 
 /**
@@ -71,7 +75,9 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
 
             SetupWizardUtils.setImmersiveMode(getActivity());
 
-            SetupWizardLayout layout = (SetupWizardLayout) view;
+            SetupWizardPreferenceLayout layout = (SetupWizardPreferenceLayout) view;
+            layout.setDividerInset(getContext().getResources().getDimensionPixelSize(
+                    R.dimen.suw_items_text_divider_inset));
             final NavigationBar navigationBar = layout.getNavigationBar();
             Button nextButton = navigationBar.getNextButton();
             nextButton.setText(null);
@@ -86,6 +92,9 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
                 layout.setHeaderText(R.string.lock_settings_picker_title);
             }
 
+            // Use the dividers in SetupWizardRecyclerLayout. Suppress the dividers in
+            // PreferenceFragment.
+            setDivider(null);
         }
 
         @Override
@@ -113,6 +122,13 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
             }
             // If the started activity was cancelled (e.g. the user presses back), then this
             // activity will be resumed to foreground.
+        }
+
+        @Override
+        public RecyclerView onCreateRecyclerView(LayoutInflater inflater, ViewGroup parent,
+                Bundle savedInstanceState) {
+            SetupWizardPreferenceLayout layout = (SetupWizardPreferenceLayout) parent;
+            return layout.onCreateRecyclerView(inflater, parent, savedInstanceState);
         }
 
         /***
