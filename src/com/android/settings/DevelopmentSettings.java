@@ -53,6 +53,7 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.StrictMode;
 import android.os.SystemProperties;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.storage.IMountService;
 import android.provider.SearchIndexableResource;
@@ -115,6 +116,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private static final String KEEP_SCREEN_ON = "keep_screen_on";
     private static final String BT_HCI_SNOOP_LOG = "bt_hci_snoop_log";
     private static final String WEBVIEW_PROVIDER_KEY = "select_webview_provider";
+    private static final String WEBVIEW_MULTIPROCESS_KEY = "enable_webview_multiprocess";
     private static final String ENABLE_OEM_UNLOCK = "oem_unlock_enable";
     private static final String HDCP_CHECKING_KEY = "hdcp_checking";
     private static final String HDCP_CHECKING_PROPERTY = "persist.sys.hdcp_checking";
@@ -218,6 +220,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
 
     private IWindowManager mWindowManager;
     private IBackupManager mBackupManager;
+    private IWebViewUpdateService mWebViewUpdateService;
     private DevicePolicyManager mDpm;
     private UserManager mUm;
     private WifiManager mWifiManager;
@@ -277,6 +280,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private ListPreference mAnimatorDurationScale;
     private ListPreference mOverlayDisplayDevices;
     private ListPreference mOpenGLTraces;
+
+    private SwitchPreference mWebViewMultiprocess;
     private ListPreference mWebViewProvider;
 
     private ListPreference mSimulateColorSpace;
@@ -324,6 +329,9 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         mWindowManager = IWindowManager.Stub.asInterface(ServiceManager.getService("window"));
         mBackupManager = IBackupManager.Stub.asInterface(
                 ServiceManager.getService(Context.BACKUP_SERVICE));
+        mWebViewUpdateService  =
+            IWebViewUpdateService.Stub.asInterface(ServiceManager.getService("webviewupdate"));
+
         mDpm = (DevicePolicyManager)getActivity().getSystemService(Context.DEVICE_POLICY_SERVICE);
         mUm = (UserManager) getSystemService(Context.USER_SERVICE);
 
@@ -418,6 +426,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         mLogdSize = addListPreference(SELECT_LOGD_SIZE_KEY);
         mUsbConfiguration = addListPreference(USB_CONFIGURATION_KEY);
         mWebViewProvider = addListPreference(WEBVIEW_PROVIDER_KEY);
+        mWebViewMultiprocess = findAndInitSwitchPref(WEBVIEW_MULTIPROCESS_KEY);
         mBluetoothDisableAbsVolume = findAndInitSwitchPref(BLUETOOTH_DISABLE_ABSOLUTE_VOLUME_KEY);
 
         mWindowAnimationScale = addListPreference(WINDOW_ANIMATION_SCALE_KEY);
@@ -713,6 +722,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         updateUSBAudioOptions();
         updateForceResizableOptions();
         updateEnableFreeformWindowsSupportOptions();
+        updateWebViewMultiprocessOptions();
         updateWebViewProviderOptions();
         updateOemUnlockOptions();
         if (mColorTemperaturePreference != null) {
@@ -748,10 +758,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     }
 
     private void updateWebViewProviderOptions() {
-        IWebViewUpdateService webViewUpdateService  =
-            IWebViewUpdateService.Stub.asInterface(ServiceManager.getService("webviewupdate"));
         try {
-            WebViewProviderInfo[] providers = webViewUpdateService.getValidWebViewPackages();
+            WebViewProviderInfo[] providers = mWebViewUpdateService.getValidWebViewPackages();
             if (providers == null) {
                 Log.e(TAG, "No WebView providers available");
                 return;
@@ -765,7 +773,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             mWebViewProvider.setEntries(options);
             mWebViewProvider.setEntryValues(values);
 
-            String value = webViewUpdateService.getCurrentWebViewPackageName();
+            String value = mWebViewUpdateService.getCurrentWebViewPackageName();
             if (value == null) {
                 value = "";
             }
@@ -776,6 +784,25 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
                     return;
                 }
             }
+        } catch(RemoteException e) {
+        }
+    }
+
+    private void updateWebViewMultiprocessOptions() {
+        updateSwitchPreference(mWebViewMultiprocess,
+                Settings.Global.getInt(getActivity().getContentResolver(),
+                        Settings.Global.WEBVIEW_MULTIPROCESS, 0) != 0);
+    }
+
+    private void writeWebViewMultiprocessOptions() {
+        boolean value = mWebViewMultiprocess.isChecked();
+        Settings.Global.putInt(getActivity().getContentResolver(),
+                Settings.Global.WEBVIEW_MULTIPROCESS, value ? 1 : 0);
+
+        try {
+            String wv_package = mWebViewUpdateService.getCurrentWebViewPackageName();
+            ActivityManagerNative.getDefault().killPackageDependents(
+                    wv_package, UserHandle.USER_ALL);
         } catch(RemoteException e) {
         }
     }
@@ -820,11 +847,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     }
 
     private void writeWebViewProviderOptions(Object newValue) {
-        IWebViewUpdateService webViewUpdateService  =
-            IWebViewUpdateService.Stub.asInterface(ServiceManager.getService("webviewupdate"));
-
         try {
-            webViewUpdateService.changeProviderAndSetting(
+            mWebViewUpdateService.changeProviderAndSetting(
                     newValue == null ? "" : newValue.toString());
             updateWebViewProviderOptions();
         } catch(RemoteException e) {
@@ -1912,6 +1936,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             startBackgroundCheckFragment();
         } else if (preference == mBluetoothDisableAbsVolume) {
             writeBluetoothDisableAbsVolumeOptions();
+        } else if (preference == mWebViewMultiprocess) {
+            writeWebViewMultiprocessOptions();
         } else {
             return super.onPreferenceTreeClick(preference);
         }
