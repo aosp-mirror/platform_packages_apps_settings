@@ -171,6 +171,9 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
 
         if (isUiRestricted()) {
             setDeviceListGroup(getPreferenceScreen());
+            if (!isUiRestrictedByOnlyAdmin()) {
+                getEmptyTextView().setText(R.string.bluetooth_empty_list_user_restricted);
+            }
             removeAllDevices();
             return;
         }
@@ -294,6 +297,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
                 mDevicePreferenceMap.clear();
 
                 if (isUiRestricted()) {
+                    messageId = R.string.bluetooth_empty_list_user_restricted;
                     break;
                 }
 
@@ -355,7 +359,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
             case BluetoothAdapter.STATE_OFF:
                 setOffMessage();
                 if (isUiRestricted()) {
-                    messageId = 0;
+                    messageId = R.string.bluetooth_empty_list_user_restricted;
                 }
                 break;
 

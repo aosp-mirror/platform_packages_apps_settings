@@ -395,7 +395,10 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
                     EnforcedAdmin admin = RestrictedLockUtils.checkIfRestrictionEnforced(
                             getActivity(), UserManager.DISALLOW_MOUNT_PHYSICAL_MEDIA,
                             UserHandle.myUserId());
-                    if (admin != null) {
+                    boolean hasBaseUserRestriction = RestrictedLockUtils.hasBaseUserRestriction(
+                            getActivity(), UserManager.DISALLOW_MOUNT_PHYSICAL_MEDIA,
+                            UserHandle.myUserId());
+                    if (admin != null && !hasBaseUserRestriction) {
                         RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getActivity(), admin);
                         return;
                     }

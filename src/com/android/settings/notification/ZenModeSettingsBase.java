@@ -69,8 +69,12 @@ abstract public class ZenModeSettingsBase extends RestrictedSettingsFragment {
         maybeRefreshRules(true, true /*fireChanged*/);
         mSettingsObserver.register();
         if (isUiRestricted()) {
-            getPreferenceScreen().removeAll();
-            return;
+            if (isUiRestrictedByOnlyAdmin()) {
+                getPreferenceScreen().removeAll();
+                return;
+            } else {
+                finish();
+            }
         }
     }
 
