@@ -201,7 +201,7 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (preference == mRestrictBackground) {
-            setAppRestrictBackground((Boolean) newValue);
+            setAppRestrictBackground(!(Boolean) newValue);
             return true;
         } else if (preference == mUnrestrictedData) {
             mDataSaverBackend.setIsWhitelisted(mAppItem.key, (Boolean) newValue);
@@ -223,7 +223,7 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
 
     private void updatePrefs() {
         if (mRestrictBackground != null) {
-            mRestrictBackground.setChecked(getAppRestrictBackground());
+            mRestrictBackground.setChecked(!getAppRestrictBackground());
         }
         if (mUnrestrictedData != null) {
             mUnrestrictedData.setChecked(mDataSaverBackend.isWhitelisted(mAppItem.key));
