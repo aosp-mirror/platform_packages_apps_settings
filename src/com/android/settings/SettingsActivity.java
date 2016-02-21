@@ -460,16 +460,20 @@ public class SettingsActivity extends SettingsDrawerActivity
     @Override
     public SharedPreferences getSharedPreferences(String name, int mode) {
         if (name.equals(getPackageName() + "_preferences")) {
-            String tag = getClass().getName();
-            if (getIntent() != null && getIntent().hasExtra(EXTRA_SHOW_FRAGMENT)) {
-                tag = getIntent().getStringExtra(EXTRA_SHOW_FRAGMENT);
-            }
-            if (tag.startsWith("com.android.settings.")) {
-                tag = tag.replace("com.android.settings.", "");
-            }
-            return new SharedPreferencesLogger(this, tag);
+            return new SharedPreferencesLogger(this, getMetricsTag());
         }
         return super.getSharedPreferences(name, mode);
+    }
+
+    private String getMetricsTag() {
+        String tag = getClass().getName();
+        if (getIntent() != null && getIntent().hasExtra(EXTRA_SHOW_FRAGMENT)) {
+            tag = getIntent().getStringExtra(EXTRA_SHOW_FRAGMENT);
+        }
+        if (tag.startsWith("com.android.settings.")) {
+            tag = tag.replace("com.android.settings.", "");
+        }
+        return tag;
     }
 
     private static boolean isShortCutIntent(final Intent intent) {
@@ -610,6 +614,9 @@ public class SettingsActivity extends SettingsDrawerActivity
             mActionBar.setHomeButtonEnabled(mDisplayHomeAsUpEnabled);
         }
         mSwitchBar = (SwitchBar) findViewById(R.id.switch_bar);
+        if (mSwitchBar != null) {
+            mSwitchBar.setMetricsTag(getMetricsTag());
+        }
 
         // see if we should show Back/Next buttons
         if (intent.getBooleanExtra(EXTRA_PREFS_SHOW_BUTTON_BAR, false)) {
