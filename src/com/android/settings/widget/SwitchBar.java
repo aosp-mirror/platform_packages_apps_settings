@@ -34,6 +34,7 @@ import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settingslib.RestrictedLockUtils;
 
@@ -63,6 +64,8 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
 
     private boolean mDisabledByAdmin = false;
     private EnforcedAdmin mEnforcedAdmin = null;
+
+    private String mMetricsTag;
 
     private ArrayList<OnSwitchChangeListener> mSwitchChangeListeners =
             new ArrayList<OnSwitchChangeListener>();
@@ -123,6 +126,10 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
 
         // Default is hide
         setVisibility(View.GONE);
+    }
+
+    public void setMetricsTag(String tag) {
+        mMetricsTag = tag;
     }
 
     public void setTextViewLabel(boolean isChecked) {
@@ -217,9 +224,11 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
     @Override
     public void onClick(View v) {
         if (mDisabledByAdmin) {
+            MetricsLogger.histogram(mContext, mMetricsTag + "/switch_bar|restricted", 1);
             RestrictedLockUtils.sendShowAdminSupportDetailsIntent(mContext, mEnforcedAdmin);
         } else {
             final boolean isChecked = !mSwitch.isChecked();
+            MetricsLogger.histogram(mContext, mMetricsTag + "/switch_bar|" + isChecked, 1);
             setChecked(isChecked);
         }
     }
