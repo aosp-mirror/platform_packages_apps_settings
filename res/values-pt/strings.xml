@@ -375,8 +375,7 @@
     <string name="fingerprint_add_max" msgid="1020927549936895822">"É possível adicionar até <xliff:g id="COUNT">%d</xliff:g> impressões digitais"</string>
     <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"Remover todas as impressões digitais?"</string>
     <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"Você não poderá usar suas impressões digitais para desbloquear o smartphone, autorizar compras ou fazer login em apps."</string>
-    <!-- no translation found for fingerprint_last_delete_message_profile_challenge (8840100810725902159) -->
-    <skip />
+    <string name="fingerprint_last_delete_message_profile_challenge" msgid="8840100810725902159">"Não será possível usar suas impressões digitais para desbloquear seu perfil de trabalho, autorizar compras ou fazer login em apps de trabalho."</string>
     <string name="fingerprint_last_delete_confirm" msgid="2634726361059274289">"Sim, remover"</string>
     <string name="confirm_fingerprint_icon_content_description" msgid="5255544532157079096">"Use sua impressão digital para continuar."</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Criptografia"</string>
@@ -485,6 +484,13 @@
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"Mudar padrão de desbloqueio"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"Mudar PIN de desbloqueio"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"Mudar senha de desbloqueio"</string>
+    <string name="lock_profile_wipe_attempts" msgid="1216193652369039672">"Tente novamente. Tentativa <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g> de <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g>."</string>
+    <string name="lock_profile_wipe_warning_title" msgid="2961600792367265036">"Última tentativa"</string>
+    <string name="lock_profile_wipe_warning_content_pattern" msgid="8978031996247660921">"Se você informar um padrão de trabalho incorreto nesta tentativa, seu perfil de trabalho e os dados associados serão removidos deste dispositivo."</string>
+    <string name="lock_profile_wipe_warning_content_pin" msgid="7697973618542377880">"Se você informar um PIN de trabalho incorreto nesta tentativa, seu perfil de trabalho e os dados associados serão removidos deste dispositivo."</string>
+    <string name="lock_profile_wipe_warning_content_password" msgid="450695588340509349">"Se você informar uma senha de trabalho incorreta nesta tentativa, seu perfil de trabalho e os dados associados serão removidos deste dispositivo."</string>
+    <string name="lock_profile_wipe_content" msgid="2150455386921347628">"Excesso de tentativas incorretas. Seu perfil de trabalho e os dados associados serão removidos deste dispositivo."</string>
+    <string name="lock_profile_wipe_dismiss" msgid="5118293266264141442">"Dispensar"</string>
     <string name="lockpassword_password_too_short" msgid="7328975683669256660">"A senha deve ter no mínimo %d caracteres"</string>
     <string name="lockpassword_pin_too_short" msgid="1677649103470518953">"O PIN deve ter no mínimo %d caracteres"</string>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Continuar"</string>
@@ -952,7 +958,8 @@
     <string name="device_status_summary" product="tablet" msgid="3292717754497039686">"Status da bateria, da rede e outras informações"</string>
     <string name="device_status_summary" product="default" msgid="2599162787451519618">"Número de telefone, sinal etc."</string>
     <string name="storage_settings" msgid="4211799979832404953">"Armazenamento"</string>
-    <string name="storage_usb_settings" msgid="642612065405691122">"Armazenamento e USB"</string>
+    <!-- no translation found for storage_usb_settings (7293054033137078060) -->
+    <skip />
     <string name="storage_settings_title" msgid="8746016738388094064">"Configurações de armazenamento"</string>
     <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"Desconectar cartão USB, ver armazenamento disponível"</string>
     <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"Desmontar o cartão SD, visualizar armazenamento disponível"</string>
@@ -1324,10 +1331,10 @@
     <string name="lock_settings_profile_title" msgid="7819021341281339182">"Perfil de trabalho"</string>
     <string name="lock_settings_profile_label" msgid="4423909470339292809">"Segurança do perfil de trabalho"</string>
     <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Bloqueio de tela do perfil de trabalho"</string>
-    <string name="lock_settings_profile_unification_title" msgid="3130455578336894831">"Usar o mesmo bloqueio de tela"</string>
+    <string name="lock_settings_profile_unification_title" msgid="8633657624689310195">"Usar o mesmo bloqueio de tela"</string>
     <string name="lock_settings_profile_unification_summary" msgid="8014208091623293835">"Alterar perfil principal para corresponder ao perfil de trabalho"</string>
-    <string name="lock_settings_profile_unification_dialog_title" msgid="5297248764066294130">"Usar o mesmo bloqueio de tela?"</string>
-    <string name="lock_settings_profile_unification_dialog_body" msgid="342417647696962745">"É possível usar esse bloqueio para seu dispositivo, mas ele incluirá todas as políticas de bloqueio de tela relacionadas definidas pelo seu administrador de TI no perfil de trabalho.\nDeseja usar o mesmo bloqueio de tela no seu dispositivo?"</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="8938936484754025065">"Usar o mesmo bloqueio de tela?"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="1697316592639374194">"É possível usar esse bloqueio para seu dispositivo, mas ele incluirá todas as políticas de bloqueio de tela relacionadas definidas pelo seu administrador de TI no perfil de trabalho.\nDeseja usar o mesmo bloqueio de tela no seu dispositivo?"</string>
     <string name="lock_settings_profile_unified_summary" msgid="237623767711796217">"Igual ao bloqueio do seu dispositivo"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Gerenciar apps"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Gerenciar e remover apps instalados"</string>
@@ -1441,6 +1448,7 @@
     <string name="app_forward_locked" msgid="6331564656683790866">"O app é protegido contra cópia."</string>
     <string name="invalid_location" msgid="4354595459063675191">"O local de instalação não é válido."</string>
     <string name="system_package" msgid="1352722848400644991">"As atualizações do sistema não podem ser instaladas em mídia externa."</string>
+    <string name="move_error_device_admin" msgid="8148342933314166497">"Não é possível instalar o administrador do dispositivo em uma mídia externa."</string>
     <string name="force_stop_dlg_title" msgid="977530651470711366">"Forçar parada?"</string>
     <string name="force_stop_dlg_text" msgid="7208364204467835578">"Se você forçar a parada de um app, ele pode apresentar mau funcionamento."</string>
     <string name="move_app_failed_dlg_title" msgid="1282561064082384192"></string>
@@ -1875,6 +1883,8 @@
     <string name="voice_interactor_preference_summary" msgid="1801414022026937190">"Hotword completa e interação"</string>
     <string name="voice_recognizer_preference_summary" msgid="669880813593690527">"Conversão simples de fala em texto"</string>
     <string name="voice_interaction_security_warning" msgid="6378608263983737325">"Este serviço de entrada por voz poderá executar monitoramento por voz sempre ativado e apps com o recurso de controle por voz em seu nome. Ele está incluído no app <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g>. Deseja ativar o uso deste serviço?"</string>
+    <string name="tts_reset_speech_rate_title" msgid="3993885027390495498">"Redefinir velocidade de fala"</string>
+    <string name="tts_reset_speech_rate_summary" msgid="8561618897094097540">"Redefinir a velocidade em que o texto é falado para \"normal\"."</string>
     <string name="gadget_title" msgid="5519037532720577836">"Controle de energia"</string>
     <string name="gadget_toggle_wifi" msgid="319262861956544493">"Atualizando configuração de Wi-Fi"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"Atualizando configuração Bluetooth"</string>
@@ -2441,6 +2451,7 @@
     <string name="status_tag_not_writable" msgid="2511611539977682175">"A marca NFC não é gravável. Use outra marca."</string>
     <string name="default_sound" msgid="8821684447333687810">"Som padrão"</string>
     <string name="sound_settings_summary" msgid="3651751880569558828">"Volume da campainha em <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="sound_settings_example_summary" msgid="6810096712869633479">"Volume da campainha em 80%"</string>
     <string name="media_volume_option_title" msgid="2811531786073003825">"Volume de mídia"</string>
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"Volume do alarme"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"Volume do toque"</string>
@@ -2488,8 +2499,6 @@
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"Como você deseja que as notificações sejam exibidas quando o dispositivo estiver bloqueado?"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="3169806586032521333">"Notificações do perfil"</string>
     <string name="app_notifications_title" msgid="139788604658984593">"Notificações"</string>
-    <string name="topic_notifications_title" msgid="7243623930984080881">"Notificações por assunto"</string>
-    <string name="notification_topic_categories" msgid="3399184843660543981">"Categorias"</string>
     <string name="notification_importance_title" msgid="848692592679312666">"Importância"</string>
     <string name="notification_importance_none" msgid="3173515479356106227">"Não definido"</string>
     <string name="notification_importance_blocked" msgid="4764559498517003405">"Bloqueada: nunca mostrar essas notificações"</string>
@@ -2552,6 +2561,8 @@
     <string name="zen_mode_schedule_rule_days" msgid="3195058680641389948">"Dias"</string>
     <string name="zen_mode_schedule_rule_days_none" msgid="4954143628634166317">"Nenhum"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="146511166522076034">"Todos os dias"</string>
+    <string name="zen_mode_schedule_alarm_title" msgid="767054141267122030">"O alarme pode substituir o horário de término"</string>
+    <string name="zen_mode_schedule_alarm_summary" msgid="4597050434723180422">"Parar no horário de término ou no próximo alarme, o que ocorrer primeiro"</string>
     <string name="summary_divider_text" msgid="7228986578690919294">", "</string>
     <string name="summary_range_symbol_combination" msgid="5695218513421897027">"<xliff:g id="START">%1$s</xliff:g> - <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="summary_range_verbal_combination" msgid="8467306662961568656">"<xliff:g id="START">%1$s</xliff:g> a <xliff:g id="END">%2$s</xliff:g>"</string>
@@ -2658,8 +2669,8 @@
     <string name="change_storage" msgid="600475265207060436">"Alterar armazenamento"</string>
     <string name="notifications_label" msgid="2872668710589600731">"Notificações"</string>
     <string name="notifications_enabled" msgid="4386196629684749507">"Normais"</string>
-    <string name="notifications_disabled" msgid="7021094738660322110">"Totalmente bloqueadas"</string>
-    <string name="notifications_partially_disabled" msgid="7293654891788852646">"Parcialmente bloqueadas"</string>
+    <!-- no translation found for notifications_disabled (3200751656741989335) -->
+    <skip />
     <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
     <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g> / <xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
@@ -2843,11 +2854,22 @@
     <string name="screen_zoom_summary_very_large" msgid="7108563375663670067">"Muito grande"</string>
     <string name="screen_zoom_summary_extremely_large" msgid="7427320168263276227">"Maior"</string>
     <string name="screen_zoom_summary_custom" msgid="5611979864124160447">"Personalizada (<xliff:g id="DENSITYDPI">%d</xliff:g>)"</string>
+    <string name="screen_zoom_conversation_icon_alex" msgid="8443032489384985820">"A"</string>
+    <string name="screen_zoom_conversation_icon_pete" msgid="998709701837681129">"P"</string>
+    <string name="screen_zoom_conversation_message_1" msgid="6546951024984852686">"Oi, Pedro!"</string>
+    <string name="screen_zoom_conversation_message_2" msgid="6935424214137738647">"Quer sair para tomar um café e conversar hoje?"</string>
+    <string name="screen_zoom_conversation_message_3" msgid="5218221201861387402">"Boa ideia. Conheço um bom lugar, não muito longe daqui."</string>
+    <string name="screen_zoom_conversation_message_4" msgid="5564676794767555447">"Perfeito."</string>
+    <string name="screen_zoom_conversation_timestamp_1" msgid="7453710416319650556">"Ter 18:00"</string>
+    <string name="screen_zoom_conversation_timestamp_2" msgid="7107225702890747588">"Ter 18:01"</string>
+    <string name="screen_zoom_conversation_timestamp_3" msgid="3785674344762707688">"Ter 18:02"</string>
+    <string name="screen_zoom_conversation_timestamp_4" msgid="2511469395448561259">"Ter 18:03"</string>
     <string name="see_all" msgid="8883901630052886984">"Ver tudo"</string>
     <string name="see_less" msgid="1250265310929558370">"Ver menos"</string>
     <string name="disconnected" msgid="5787956818111197212">"Desconectado"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"<xliff:g id="AMOUNT">%1$s</xliff:g> de dados usados"</string>
     <string name="apps_summary" msgid="193158055537070092">"<xliff:g id="COUNT">%1$d</xliff:g> apps instalados"</string>
+    <string name="apps_summary_example" msgid="2118896966712746139">"24 apps instalados"</string>
     <string name="storage_summary" msgid="1110250618334248745">"<xliff:g id="SIZE1">%1$s</xliff:g> de <xliff:g id="SIZE2">%2$s</xliff:g> usados"</string>
     <string name="display_summary_on" msgid="5628868543070268634">"O brilho adaptável está ATIVADO"</string>
     <string name="display_summary_off" msgid="6399558022426312990">"O brilho adaptável está DESATIVADO"</string>
@@ -2858,12 +2880,17 @@
     <string name="location_off_summary" msgid="6474350053215707957">"DESATIVADA"</string>
     <string name="backup_disabled" msgid="485189128759595412">"Backup desativado"</string>
     <string name="about_summary" msgid="8460677224778433924">"Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
-    <string name="disabled_by_policy_title" msgid="5358385863927403279">"Desativado pela política"</string>
-    <string name="default_admin_support_msg" msgid="1088691978121877039">"Desativado pelo administrador da sua organização.\nEntre em contato com ele para saber mais."</string>
+    <!-- no translation found for disabled_by_policy_title (627023216027648534) -->
+    <skip />
+    <!-- no translation found for default_admin_support_msg (510401764426963642) -->
+    <skip />
     <string name="admin_support_more_info" msgid="8901377038510512654">"Mais detalhes"</string>
-    <string name="admin_profile_owner_message" msgid="859900284865115324">"O administrador pode monitorar e gerenciar configurações, acesso corporativo, apps, permissões e dados associados com o perfil, incluindo a atividade na rede e informações de local do dispositivo."</string>
-    <string name="admin_profile_owner_user_message" msgid="853830977317489321">"O administrador pode monitorar e gerenciar configurações, acesso corporativo, apps, permissões e dados associados a este usuário, incluindo a atividade na rede e informações de local do dispositivo."</string>
-    <string name="admin_device_owner_message" msgid="2060220398673683105">"O administrador pode monitorar e gerenciar configurações, acesso corporativo, apps, permissões e dados associados a este dispositivo, incluindo a atividade na rede e informações de local do dispositivo."</string>
+    <!-- no translation found for admin_profile_owner_message (5834937282929663252) -->
+    <skip />
+    <!-- no translation found for admin_profile_owner_user_message (7153676784012255048) -->
+    <skip />
+    <!-- no translation found for admin_device_owner_message (8734500370023898028) -->
+    <skip />
     <string name="condition_turn_off" msgid="1960945836880080298">"Desativar"</string>
     <string name="condition_turn_on" msgid="9089876276117874591">"Ativar"</string>
     <string name="condition_hotspot_title" msgid="7778958849468560027">"O ponto de acesso está ativado"</string>
@@ -2884,6 +2911,7 @@
     <string name="color_temperature" msgid="2070126836910615605">"Temperatura de cor fria"</string>
     <string name="color_temperature_desc" msgid="4793729830226404052">"Usar cores de tela mais frias"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"Para aplicar a alteração de cor, desative a tela"</string>
+    <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Atualizações automáticas do sistema"</string>
     <string name="usage" msgid="2977875522080448986">"Utilização"</string>
     <string name="cellular_data_usage" msgid="2763710678354680712">"Uso de dados da rede celular"</string>
     <string name="wifi_data_usage" msgid="686754111095324306">"Uso de dados Wi-Fi"</string>
@@ -2923,4 +2951,9 @@
     <string name="lockpattern_settings_require_pin_before_startup_summary" msgid="6022831284097476933">"Exigir PIN para iniciar seu dispositivo. Enquanto desativado, este dispositivo não recebe chamadas, mensagens, notificações ou alarmes."</string>
     <string name="lockpattern_settings_require_password_before_startup_summary" msgid="6818285221244966231">"Exigir senha para iniciar seu dispositivo. Enquanto desativado, este dispositivo não recebe chamadas, mensagens, notificações ou alarmes."</string>
     <string name="suggestion_additional_fingerprints" msgid="3683327800671241982">"Impressões digitais extras"</string>
+    <string name="battery_saver_on_summary" msgid="9072203872401530722">"Ativado / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="battery_saver_off_summary" msgid="8309471955051162327">"Desativado / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="battery_saver_desc_turn_on_auto_never" msgid="6715896635178578813">"Nunca ativar automaticamente"</string>
+    <string name="battery_saver_desc_turn_on_auto_pct" msgid="7472323223085636533">"Ativar automaticamente com %1$s%% de bateria"</string>
+    <string name="not_battery_optimizing" msgid="5362861851864837617">"Otimização de bateria desativada"</string>
 </resources>
