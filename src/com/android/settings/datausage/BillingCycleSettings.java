@@ -30,7 +30,9 @@ import android.text.format.Time;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.NumberPicker;
+import android.widget.Spinner;
 import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settingslib.NetworkPolicyEditor;
@@ -172,7 +174,8 @@ public class BillingCycleSettings extends DataUsageBase implements
 
             final LayoutInflater dialogInflater = LayoutInflater.from(context);
             mView = dialogInflater.inflate(R.layout.data_usage_bytes_editor, null, false);
-            setupPicker((NumberPicker) mView.findViewById(R.id.bytes));
+            setupPicker((EditText) mView.findViewById(R.id.bytes),
+                    (Spinner) mView.findViewById(R.id.size_spinner));
             return new AlertDialog.Builder(context)
                     .setTitle(R.string.data_usage_warning_editor_title)
                     .setView(mView)
@@ -180,32 +183,28 @@ public class BillingCycleSettings extends DataUsageBase implements
                     .create();
         }
 
-        private void setupPicker(NumberPicker bytesPicker) {
+        private void setupPicker(EditText bytesPicker, Spinner type) {
             final BillingCycleSettings target = (BillingCycleSettings) getTargetFragment();
             final NetworkPolicyEditor editor = target.services.mPolicyEditor;
 
             final NetworkTemplate template = getArguments().getParcelable(EXTRA_TEMPLATE);
             final boolean isLimit = getArguments().getBoolean(EXTRA_LIMIT);
-            final long warningBytes = editor.getPolicyWarningBytes(template);
-            final long limitBytes = editor.getPolicyLimitBytes(template);
+            final long bytes = isLimit ? editor.getPolicyLimitBytes(template)
+                    : editor.getPolicyWarningBytes(template);
+            final long limitDisabled = isLimit ? LIMIT_DISABLED : WARNING_DISABLED;
 
-            if (isLimit) {
-                bytesPicker.setMaxValue(Integer.MAX_VALUE);
-                if (warningBytes != WARNING_DISABLED) {
-                    bytesPicker.setMinValue((int) (warningBytes / MB_IN_BYTES) + 1);
-                } else {
-                    bytesPicker.setMinValue(0);
-                }
+            if (bytes > 1.5f * GB_IN_BYTES) {
+                bytesPicker.setText(formatText(bytes / (float) GB_IN_BYTES));
+                type.setSelection(1);
             } else {
-                bytesPicker.setMinValue(0);
-                if (limitBytes != LIMIT_DISABLED) {
-                    bytesPicker.setMaxValue((int) (limitBytes / MB_IN_BYTES) - 1);
-                } else {
-                    bytesPicker.setMaxValue(Integer.MAX_VALUE);
-                }
+                bytesPicker.setText(formatText(bytes / (float) MB_IN_BYTES));
+                type.setSelection(0);
             }
-            bytesPicker.setValue((int) ((isLimit ? limitBytes : warningBytes) / MB_IN_BYTES));
-            bytesPicker.setWrapSelectorWheel(false);
+        }
+
+        private String formatText(float v) {
+            v = Math.round(v * 100) / 100f;
+            return String.valueOf(v);
         }
 
         @Override
@@ -218,11 +217,15 @@ public class BillingCycleSettings extends DataUsageBase implements
 
             final NetworkTemplate template = getArguments().getParcelable(EXTRA_TEMPLATE);
             final boolean isLimit = getArguments().getBoolean(EXTRA_LIMIT);
-            NumberPicker bytesPicker = (NumberPicker) mView.findViewById(R.id.bytes);
-            // clear focus to finish pending text edits
-            bytesPicker.clearFocus();
+            EditText bytesField = (EditText) mView.findViewById(R.id.bytes);
+            Spinner spinner = (Spinner) mView.findViewById(R.id.size_spinner);
 
-            final long bytes = bytesPicker.getValue() * MB_IN_BYTES;
+            String bytesString = bytesField.getText().toString();
+            if (bytesString.isEmpty()) {
+                bytesString = "0";
+            }
+            final long bytes = (long) (Float.valueOf(bytesString)
+                        * (spinner.getSelectedItemPosition() == 0 ? MB_IN_BYTES : GB_IN_BYTES));
             if (isLimit) {
                 editor.setPolicyLimitBytes(template, bytes);
             } else {
