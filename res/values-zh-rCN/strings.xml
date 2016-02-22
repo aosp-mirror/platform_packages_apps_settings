@@ -375,8 +375,7 @@
     <string name="fingerprint_add_max" msgid="1020927549936895822">"您最多可以添加 <xliff:g id="COUNT">%d</xliff:g> 个指纹"</string>
     <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"要移除所有指纹吗？"</string>
     <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"您将无法使用指纹来解锁手机、授权购买交易或登录应用。"</string>
-    <!-- no translation found for fingerprint_last_delete_message_profile_challenge (8840100810725902159) -->
-    <skip />
+    <string name="fingerprint_last_delete_message_profile_challenge" msgid="8840100810725902159">"您将无法使用指纹解锁您的工作资料、对购买交易进行授权或登录工作应用。"</string>
     <string name="fingerprint_last_delete_confirm" msgid="2634726361059274289">"是，移除"</string>
     <string name="confirm_fingerprint_icon_content_description" msgid="5255544532157079096">"请使用您的指纹以继续。"</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"加密"</string>
@@ -485,6 +484,20 @@
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"更改解锁图案"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"更改解锁PIN码"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"更改解锁密码"</string>
+    <!-- no translation found for lock_profile_wipe_attempts (1216193652369039672) -->
+    <skip />
+    <!-- no translation found for lock_profile_wipe_warning_title (2961600792367265036) -->
+    <skip />
+    <!-- no translation found for lock_profile_wipe_warning_content_pattern (8978031996247660921) -->
+    <skip />
+    <!-- no translation found for lock_profile_wipe_warning_content_pin (7697973618542377880) -->
+    <skip />
+    <!-- no translation found for lock_profile_wipe_warning_content_password (450695588340509349) -->
+    <skip />
+    <!-- no translation found for lock_profile_wipe_content (2150455386921347628) -->
+    <skip />
+    <!-- no translation found for lock_profile_wipe_dismiss (5118293266264141442) -->
+    <skip />
     <string name="lockpassword_password_too_short" msgid="7328975683669256660">"密码至少应包含%d个字符"</string>
     <string name="lockpassword_pin_too_short" msgid="1677649103470518953">"PIN码至少应为%d位"</string>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"继续"</string>
@@ -952,7 +965,8 @@
     <string name="device_status_summary" product="tablet" msgid="3292717754497039686">"电池状态、网络状态和其他信息"</string>
     <string name="device_status_summary" product="default" msgid="2599162787451519618">"电话号码、信号等"</string>
     <string name="storage_settings" msgid="4211799979832404953">"存储空间"</string>
-    <string name="storage_usb_settings" msgid="642612065405691122">"存储设备和 USB"</string>
+    <!-- no translation found for storage_usb_settings (7293054033137078060) -->
+    <skip />
     <string name="storage_settings_title" msgid="8746016738388094064">"存储设置"</string>
     <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"卸载USB存储设备，查看可用存储设备"</string>
     <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"卸载SD卡，查看可用存储设备"</string>
@@ -1324,10 +1338,10 @@
     <string name="lock_settings_profile_title" msgid="7819021341281339182">"工作资料"</string>
     <string name="lock_settings_profile_label" msgid="4423909470339292809">"工作资料安全"</string>
     <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"工作资料屏幕锁定"</string>
-    <string name="lock_settings_profile_unification_title" msgid="3130455578336894831">"使用相同的屏幕锁定设置"</string>
+    <string name="lock_settings_profile_unification_title" msgid="8633657624689310195">"使用相同的屏幕锁定设置"</string>
     <string name="lock_settings_profile_unification_summary" msgid="8014208091623293835">"将主资料改成与工作资料一致"</string>
-    <string name="lock_settings_profile_unification_dialog_title" msgid="5297248764066294130">"要使用相同的屏幕锁定设置吗？"</string>
-    <string name="lock_settings_profile_unification_dialog_body" msgid="342417647696962745">"您可以在设备上使用这种锁定，但这样会使您的 IT 管理员所设置的所有屏幕锁定相关政策都应用到工作资料。\n要在设备上使用相同的屏幕锁定设置吗？"</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="8938936484754025065">"要使用相同的屏幕锁定设置吗？"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="1697316592639374194">"您可以在设备上使用这种锁定设置，但这样会使您的 IT 管理员所设置的所有屏幕锁定相关政策都应用到工作资料。\n要在设备上使用相同的屏幕锁定设置吗？"</string>
     <string name="lock_settings_profile_unified_summary" msgid="237623767711796217">"与设备相同的锁定设置"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"管理应用"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"管理和删除已安装的应用"</string>
@@ -1441,6 +1455,7 @@
     <string name="app_forward_locked" msgid="6331564656683790866">"应用受版权保护。"</string>
     <string name="invalid_location" msgid="4354595459063675191">"安装位置无效。"</string>
     <string name="system_package" msgid="1352722848400644991">"无法在外部介质上安装系统更新。"</string>
+    <string name="move_error_device_admin" msgid="8148342933314166497">"无法在外部介质上安装设备管理器。"</string>
     <string name="force_stop_dlg_title" msgid="977530651470711366">"要强行停止吗？"</string>
     <string name="force_stop_dlg_text" msgid="7208364204467835578">"强行停止某个应用可能会导致其出现异常。"</string>
     <string name="move_app_failed_dlg_title" msgid="1282561064082384192"></string>
@@ -1875,6 +1890,8 @@
     <string name="voice_interactor_preference_summary" msgid="1801414022026937190">"全语音启动指令和互动"</string>
     <string name="voice_recognizer_preference_summary" msgid="669880813593690527">"简单的语音转文字"</string>
     <string name="voice_interaction_security_warning" msgid="6378608263983737325">"此语音输入服务能够始终进行语音监测，并能替您控制所有支持语音功能的应用。该服务由“<xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g>”提供。要启用此服务吗？"</string>
+    <string name="tts_reset_speech_rate_title" msgid="3993885027390495498">"重置语速"</string>
+    <string name="tts_reset_speech_rate_summary" msgid="8561618897094097540">"将文字的读出语速重置为正常。"</string>
     <string name="gadget_title" msgid="5519037532720577836">"电量控制"</string>
     <string name="gadget_toggle_wifi" msgid="319262861956544493">"正在更新WLAN设置"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"正在更新蓝牙设置"</string>
@@ -2441,6 +2458,8 @@
     <string name="status_tag_not_writable" msgid="2511611539977682175">"无法将数据写入NFC标签，请使用其他标签。"</string>
     <string name="default_sound" msgid="8821684447333687810">"默认铃声"</string>
     <string name="sound_settings_summary" msgid="3651751880569558828">"铃声音量为 <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
+    <!-- no translation found for sound_settings_example_summary (6810096712869633479) -->
+    <skip />
     <string name="media_volume_option_title" msgid="2811531786073003825">"媒体音量"</string>
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"闹钟音量"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"铃声音量"</string>
@@ -2488,8 +2507,6 @@
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"在设备锁定时，您希望个人资料通知如何显示？"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="3169806586032521333">"个人资料通知"</string>
     <string name="app_notifications_title" msgid="139788604658984593">"通知"</string>
-    <string name="topic_notifications_title" msgid="7243623930984080881">"主题通知"</string>
-    <string name="notification_topic_categories" msgid="3399184843660543981">"类别"</string>
     <string name="notification_importance_title" msgid="848692592679312666">"重要性"</string>
     <string name="notification_importance_none" msgid="3173515479356106227">"未设置"</string>
     <string name="notification_importance_blocked" msgid="4764559498517003405">"屏蔽：一律不显示这些通知"</string>
@@ -2552,6 +2569,8 @@
     <string name="zen_mode_schedule_rule_days" msgid="3195058680641389948">"星期几"</string>
     <string name="zen_mode_schedule_rule_days_none" msgid="4954143628634166317">"无"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="146511166522076034">"每天"</string>
+    <string name="zen_mode_schedule_alarm_title" msgid="767054141267122030">"闹钟响铃时间可覆盖结束时间"</string>
+    <string name="zen_mode_schedule_alarm_summary" msgid="4597050434723180422">"在结束时间或下一个闹钟响铃时间（两者取其先）停止"</string>
     <string name="summary_divider_text" msgid="7228986578690919294">"， "</string>
     <string name="summary_range_symbol_combination" msgid="5695218513421897027">"<xliff:g id="START">%1$s</xliff:g> - <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="summary_range_verbal_combination" msgid="8467306662961568656">"<xliff:g id="START">%1$s</xliff:g>到<xliff:g id="END">%2$s</xliff:g>"</string>
@@ -2658,8 +2677,8 @@
     <string name="change_storage" msgid="600475265207060436">"更改存储空间"</string>
     <string name="notifications_label" msgid="2872668710589600731">"通知"</string>
     <string name="notifications_enabled" msgid="4386196629684749507">"常规"</string>
-    <string name="notifications_disabled" msgid="7021094738660322110">"已完全屏蔽"</string>
-    <string name="notifications_partially_disabled" msgid="7293654891788852646">"已部分屏蔽"</string>
+    <!-- no translation found for notifications_disabled (3200751656741989335) -->
+    <skip />
     <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
     <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g> / <xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
@@ -2843,11 +2862,23 @@
     <string name="screen_zoom_summary_very_large" msgid="7108563375663670067">"较大"</string>
     <string name="screen_zoom_summary_extremely_large" msgid="7427320168263276227">"最大"</string>
     <string name="screen_zoom_summary_custom" msgid="5611979864124160447">"自定义 (<xliff:g id="DENSITYDPI">%d</xliff:g>)"</string>
+    <string name="screen_zoom_conversation_icon_alex" msgid="8443032489384985820">"A"</string>
+    <string name="screen_zoom_conversation_icon_pete" msgid="998709701837681129">"P"</string>
+    <string name="screen_zoom_conversation_message_1" msgid="6546951024984852686">"嗨，皮皮！"</string>
+    <string name="screen_zoom_conversation_message_2" msgid="6935424214137738647">"嗨，今天一起去喝杯咖啡聚聚，怎么样？"</string>
+    <string name="screen_zoom_conversation_message_3" msgid="5218221201861387402">"好啊！我知道这附近有一家不错的咖啡馆。"</string>
+    <string name="screen_zoom_conversation_message_4" msgid="5564676794767555447">"太棒了！"</string>
+    <string name="screen_zoom_conversation_timestamp_1" msgid="7453710416319650556">"周二下午 6:00"</string>
+    <string name="screen_zoom_conversation_timestamp_2" msgid="7107225702890747588">"周二下午 6:01"</string>
+    <string name="screen_zoom_conversation_timestamp_3" msgid="3785674344762707688">"周二下午 6:02"</string>
+    <string name="screen_zoom_conversation_timestamp_4" msgid="2511469395448561259">"周二下午 6:03"</string>
     <string name="see_all" msgid="8883901630052886984">"查看全部"</string>
     <string name="see_less" msgid="1250265310929558370">"隐藏部分"</string>
     <string name="disconnected" msgid="5787956818111197212">"已断开连接"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"已使用 <xliff:g id="AMOUNT">%1$s</xliff:g> 的数据"</string>
     <string name="apps_summary" msgid="193158055537070092">"已安装 <xliff:g id="COUNT">%1$d</xliff:g> 个应用"</string>
+    <!-- no translation found for apps_summary_example (2118896966712746139) -->
+    <skip />
     <string name="storage_summary" msgid="1110250618334248745">"已使用 <xliff:g id="SIZE1">%1$s</xliff:g>（共 <xliff:g id="SIZE2">%2$s</xliff:g>）"</string>
     <string name="display_summary_on" msgid="5628868543070268634">"自动调节亮度功能已开启"</string>
     <string name="display_summary_off" msgid="6399558022426312990">"自动调节亮度功能已关闭"</string>
@@ -2858,12 +2889,17 @@
     <string name="location_off_summary" msgid="6474350053215707957">"关闭"</string>
     <string name="backup_disabled" msgid="485189128759595412">"备份功能已停用"</string>
     <string name="about_summary" msgid="8460677224778433924">"Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
-    <string name="disabled_by_policy_title" msgid="5358385863927403279">"已根据政策停用"</string>
-    <string name="default_admin_support_msg" msgid="1088691978121877039">"此设置已被您单位的管理员停用。\n请与管理员联系以了解详情。"</string>
+    <!-- no translation found for disabled_by_policy_title (627023216027648534) -->
+    <skip />
+    <!-- no translation found for default_admin_support_msg (510401764426963642) -->
+    <skip />
     <string name="admin_support_more_info" msgid="8901377038510512654">"更多详情"</string>
-    <string name="admin_profile_owner_message" msgid="859900284865115324">"您单位的管理员能够监控和管理与此资料相关的设置、企业权限、应用、权限以及数据（其中包括网络活动和您设备的位置信息）。"</string>
-    <string name="admin_profile_owner_user_message" msgid="853830977317489321">"您单位的管理员能够监控和管理与此用户相关的设置、企业权限、应用、权限以及数据（其中包括网络活动和您设备的位置信息）。"</string>
-    <string name="admin_device_owner_message" msgid="2060220398673683105">"您单位的管理员能够监控和管理与此设备相关的设置、企业权限、应用、权限以及数据（其中包括网络活动和您设备的位置信息）。"</string>
+    <!-- no translation found for admin_profile_owner_message (5834937282929663252) -->
+    <skip />
+    <!-- no translation found for admin_profile_owner_user_message (7153676784012255048) -->
+    <skip />
+    <!-- no translation found for admin_device_owner_message (8734500370023898028) -->
+    <skip />
     <string name="condition_turn_off" msgid="1960945836880080298">"关闭"</string>
     <string name="condition_turn_on" msgid="9089876276117874591">"开启"</string>
     <string name="condition_hotspot_title" msgid="7778958849468560027">"热点已开启"</string>
@@ -2884,6 +2920,7 @@
     <string name="color_temperature" msgid="2070126836910615605">"冷色温"</string>
     <string name="color_temperature_desc" msgid="4793729830226404052">"使用较冷的显示颜色"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"要应用颜色更改，请关闭屏幕"</string>
+    <string name="ota_disable_automatic_update" msgid="2319639631655915050">"自动系统更新"</string>
     <string name="usage" msgid="2977875522080448986">"流量消耗"</string>
     <string name="cellular_data_usage" msgid="2763710678354680712">"移动数据网络流量消耗"</string>
     <string name="wifi_data_usage" msgid="686754111095324306">"WLAN 网络流量消耗"</string>
@@ -2923,4 +2960,14 @@
     <string name="lockpattern_settings_require_pin_before_startup_summary" msgid="6022831284097476933">"必须输入 PIN 码才能启动您的设备。此设备关闭时无法接收来电、消息、通知或闹钟提醒。"</string>
     <string name="lockpattern_settings_require_password_before_startup_summary" msgid="6818285221244966231">"必须输入密码才能启动您的设备。此设备关闭时无法接收来电、消息、通知或闹钟提醒。"</string>
     <string name="suggestion_additional_fingerprints" msgid="3683327800671241982">"其他指纹"</string>
+    <!-- no translation found for battery_saver_on_summary (9072203872401530722) -->
+    <skip />
+    <!-- no translation found for battery_saver_off_summary (8309471955051162327) -->
+    <skip />
+    <!-- no translation found for battery_saver_desc_turn_on_auto_never (6715896635178578813) -->
+    <skip />
+    <!-- no translation found for battery_saver_desc_turn_on_auto_pct (7472323223085636533) -->
+    <skip />
+    <!-- no translation found for not_battery_optimizing (5362861851864837617) -->
+    <skip />
 </resources>

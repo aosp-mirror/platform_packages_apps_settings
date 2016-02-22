@@ -375,8 +375,7 @@
     <string name="fingerprint_add_max" msgid="1020927549936895822">"Може да додавате до <xliff:g id="COUNT">%d</xliff:g> отпечатоци"</string>
     <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"Да се отстранат сите отпечатоци?"</string>
     <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"Нема да може да ги користите отпечатоците за да го отклучите телефонот, да овластувате купувања или да се најавувате на апликации со нив."</string>
-    <!-- no translation found for fingerprint_last_delete_message_profile_challenge (8840100810725902159) -->
-    <skip />
+    <string name="fingerprint_last_delete_message_profile_challenge" msgid="8840100810725902159">"Нема да може да ги користите отпечатоците за да го отклучите работниот профил, да авторизирате купувања или да се најавите на апликациите за работа."</string>
     <string name="fingerprint_last_delete_confirm" msgid="2634726361059274289">"Да, отстрани"</string>
     <string name="confirm_fingerprint_icon_content_description" msgid="5255544532157079096">"Користете го отпечатокот на прст за да продолжите."</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Шифрирање"</string>
@@ -485,6 +484,13 @@
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"Смени шема на отклуч."</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"Промени ПИН за отклучување"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"Смени лозинка за откл."</string>
+    <string name="lock_profile_wipe_attempts" msgid="1216193652369039672">"Обиди се повторно. Обид <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g> од <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g>."</string>
+    <string name="lock_profile_wipe_warning_title" msgid="2961600792367265036">"Последен обид"</string>
+    <string name="lock_profile_wipe_warning_content_pattern" msgid="8978031996247660921">"Работниот профил и податоците во врска со него ќе бидат отстранети од уредот ако и при овој обид внесете погрешна работна шема."</string>
+    <string name="lock_profile_wipe_warning_content_pin" msgid="7697973618542377880">"Работниот профил и податоците во врска со него ќе бидат отстранети од уредот ако и при овој обид внесете погрешен работен PIN."</string>
+    <string name="lock_profile_wipe_warning_content_password" msgid="450695588340509349">"Работниот профил и податоците во врска со него ќе бидат отстранети од уредот ако и при овој обид внесете погрешна работна лозинка."</string>
+    <string name="lock_profile_wipe_content" msgid="2150455386921347628">"Премногу погрешни обиди. Работниот профил и податоците во врска со него ќе бидат отстранети од уредот."</string>
+    <string name="lock_profile_wipe_dismiss" msgid="5118293266264141442">"Отфрли"</string>
     <string name="lockpassword_password_too_short" msgid="7328975683669256660">"Лозинката мора да содржи најмалку %d карактери"</string>
     <string name="lockpassword_pin_too_short" msgid="1677649103470518953">"ПИН кодот мора да има најмалку %d цифри"</string>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Продолжи"</string>
@@ -952,7 +958,8 @@
     <string name="device_status_summary" product="tablet" msgid="3292717754497039686">"Статус на батерија, мрежа и други информации"</string>
     <string name="device_status_summary" product="default" msgid="2599162787451519618">"Телефонски број, сигнал, итн."</string>
     <string name="storage_settings" msgid="4211799979832404953">"Меморија"</string>
-    <string name="storage_usb_settings" msgid="642612065405691122">"Складирање и УСД"</string>
+    <!-- no translation found for storage_usb_settings (7293054033137078060) -->
+    <skip />
     <string name="storage_settings_title" msgid="8746016738388094064">"Подесување на меморија"</string>
     <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"Одмонтирај УСБ меморија, погледни расположлива меморија"</string>
     <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"Одмонтирај СД картичка, прикажи расположлива меморија"</string>
@@ -1324,10 +1331,10 @@
     <string name="lock_settings_profile_title" msgid="7819021341281339182">"Работен профил"</string>
     <string name="lock_settings_profile_label" msgid="4423909470339292809">"Безбедност на Работен профил"</string>
     <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Заклучување на екранот на работниот профил"</string>
-    <string name="lock_settings_profile_unification_title" msgid="3130455578336894831">"Користи го истото заклучување на екранот"</string>
+    <string name="lock_settings_profile_unification_title" msgid="8633657624689310195">"Користи го истото заклучување на екранот"</string>
     <string name="lock_settings_profile_unification_summary" msgid="8014208091623293835">"Изменете го примарниот профил за да одговара на работниот профил"</string>
-    <string name="lock_settings_profile_unification_dialog_title" msgid="5297248764066294130">"Да се користи ли истото заклучување на екранот?"</string>
-    <string name="lock_settings_profile_unification_dialog_body" msgid="342417647696962745">"Може да го користите ова заклучување за уредот, но тоа ќе ги вклучи сите правила поврзани со заклучувањето на екранот поставени на работниот профил од страна на вашиот администратор за информатичка технологија.\nДали сакате да го користите истото заклучување на екранот за уредот?"</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="8938936484754025065">"Да се користи ли истото заклучување на екранот?"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="1697316592639374194">"Може да го користите ова заклучување за уредот, но тоа ќе ги вклучи сите правила поврзани со заклучувањето на екранот поставени на работниот профил од страна на вашиот администратор за информатичка технологија.\nДали сакате да го користите истото заклучување на екранот за уредот?"</string>
     <string name="lock_settings_profile_unified_summary" msgid="237623767711796217">"Исто како заклучувањето на уредот"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Управувај со апликации"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Управувај и отстрани инсталирани апликации"</string>
@@ -1441,6 +1448,7 @@
     <string name="app_forward_locked" msgid="6331564656683790866">"Апликацијата е заштитена од копирање."</string>
     <string name="invalid_location" msgid="4354595459063675191">"Локацијата за инсталација не е важечка."</string>
     <string name="system_package" msgid="1352722848400644991">"Ажурирањата на системот не може да се инсталираат на надворешни медиуми."</string>
+    <string name="move_error_device_admin" msgid="8148342933314166497">"Администраторот на уредот не може да се инсталира на надворешни медиуми."</string>
     <string name="force_stop_dlg_title" msgid="977530651470711366">"Исклучи присилно?"</string>
     <string name="force_stop_dlg_text" msgid="7208364204467835578">"Ако присилно запрете апликација, таа може да не се однесува правилно."</string>
     <string name="move_app_failed_dlg_title" msgid="1282561064082384192"></string>
@@ -1875,6 +1883,8 @@
     <string name="voice_interactor_preference_summary" msgid="1801414022026937190">"Целосна услуга – клучен збор и интеракција"</string>
     <string name="voice_recognizer_preference_summary" msgid="669880813593690527">"Едноставна услуга – говор во текст"</string>
     <string name="voice_interaction_security_warning" msgid="6378608263983737325">"Услугата за гласовен запис ќе може да извршува постојан гласовен надзор и да ги контролира гласовно овозможените апликации во ваше име. Ова доаѓа од апликацијата <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g>. Овозможете користење на услугата?"</string>
+    <string name="tts_reset_speech_rate_title" msgid="3993885027390495498">"Ресетирајте ја брзината на говорот"</string>
+    <string name="tts_reset_speech_rate_summary" msgid="8561618897094097540">"Ресетирајте ја брзината на изговор на текстот на нормална."</string>
     <string name="gadget_title" msgid="5519037532720577836">"Контрола на напојување"</string>
     <string name="gadget_toggle_wifi" msgid="319262861956544493">"Се ажурира Wi-Fi подесување"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"Ажурирање подесување за Bluetooth"</string>
@@ -2441,6 +2451,7 @@
     <string name="status_tag_not_writable" msgid="2511611539977682175">"Не може да се пишува на ознаката за НФЦ. Користете друга ознака."</string>
     <string name="default_sound" msgid="8821684447333687810">"Стандарден звук"</string>
     <string name="sound_settings_summary" msgid="3651751880569558828">"Јачина на ѕвонче на <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="sound_settings_example_summary" msgid="6810096712869633479">"Јачина на звук 80%%"</string>
     <string name="media_volume_option_title" msgid="2811531786073003825">"Јачина на звук на медиуми"</string>
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"Јачина на звук на аларм"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"Јачина на звук на ѕвонење"</string>
@@ -2488,8 +2499,6 @@
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"Кога уредот е заклучен, како сакате да се прикажуваат известувањата на профилот?"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="3169806586032521333">"Известувања на профилот"</string>
     <string name="app_notifications_title" msgid="139788604658984593">"Известувања"</string>
-    <string name="topic_notifications_title" msgid="7243623930984080881">"Известувања по тема"</string>
-    <string name="notification_topic_categories" msgid="3399184843660543981">"Категории"</string>
     <string name="notification_importance_title" msgid="848692592679312666">"Важност"</string>
     <string name="notification_importance_none" msgid="3173515479356106227">"Не е поставено"</string>
     <string name="notification_importance_blocked" msgid="4764559498517003405">"Блокирано: никогаш не покажувај ги овие известувања"</string>
@@ -2552,6 +2561,8 @@
     <string name="zen_mode_schedule_rule_days" msgid="3195058680641389948">"Денови"</string>
     <string name="zen_mode_schedule_rule_days_none" msgid="4954143628634166317">"Нема"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="146511166522076034">"Секој ден"</string>
+    <string name="zen_mode_schedule_alarm_title" msgid="767054141267122030">"Алармот може да го отфрли времето на завршување"</string>
+    <string name="zen_mode_schedule_alarm_summary" msgid="4597050434723180422">"Запри на времето на завршување или на следниот аларм, што и да е прво"</string>
     <string name="summary_divider_text" msgid="7228986578690919294">", "</string>
     <string name="summary_range_symbol_combination" msgid="5695218513421897027">"<xliff:g id="START">%1$s</xliff:g> - <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="summary_range_verbal_combination" msgid="8467306662961568656">"<xliff:g id="START">%1$s</xliff:g> до <xliff:g id="END">%2$s</xliff:g>"</string>
@@ -2658,8 +2669,8 @@
     <string name="change_storage" msgid="600475265207060436">"Промени ја меморијата"</string>
     <string name="notifications_label" msgid="2872668710589600731">"Известувања"</string>
     <string name="notifications_enabled" msgid="4386196629684749507">"Нормално"</string>
-    <string name="notifications_disabled" msgid="7021094738660322110">"Целосно блокирани"</string>
-    <string name="notifications_partially_disabled" msgid="7293654891788852646">"Делумно блокирани"</string>
+    <!-- no translation found for notifications_disabled (3200751656741989335) -->
+    <skip />
     <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g>/<xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
     <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g>/<xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>/<xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
@@ -2843,11 +2854,22 @@
     <string name="screen_zoom_summary_very_large" msgid="7108563375663670067">"Поголем"</string>
     <string name="screen_zoom_summary_extremely_large" msgid="7427320168263276227">"Најголем"</string>
     <string name="screen_zoom_summary_custom" msgid="5611979864124160447">"Приспособен (<xliff:g id="DENSITYDPI">%d</xliff:g>)"</string>
+    <string name="screen_zoom_conversation_icon_alex" msgid="8443032489384985820">"А"</string>
+    <string name="screen_zoom_conversation_icon_pete" msgid="998709701837681129">"П"</string>
+    <string name="screen_zoom_conversation_message_1" msgid="6546951024984852686">"Здраво, Петар!"</string>
+    <string name="screen_zoom_conversation_message_2" msgid="6935424214137738647">"Еј, сакаш ли да одиме на кафе денес?"</string>
+    <string name="screen_zoom_conversation_message_3" msgid="5218221201861387402">"Супер. Знам едно добро место во близина."</string>
+    <string name="screen_zoom_conversation_message_4" msgid="5564676794767555447">"Совршено!"</string>
+    <string name="screen_zoom_conversation_timestamp_1" msgid="7453710416319650556">"Вто 18:00"</string>
+    <string name="screen_zoom_conversation_timestamp_2" msgid="7107225702890747588">"Вто 18:01"</string>
+    <string name="screen_zoom_conversation_timestamp_3" msgid="3785674344762707688">"Вто 18:02"</string>
+    <string name="screen_zoom_conversation_timestamp_4" msgid="2511469395448561259">"Вто 18:03"</string>
     <string name="see_all" msgid="8883901630052886984">"Види ги сите"</string>
     <string name="see_less" msgid="1250265310929558370">"Види помалку"</string>
     <string name="disconnected" msgid="5787956818111197212">"Исклучено"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"<xliff:g id="AMOUNT">%1$s</xliff:g> од податоците се искористени"</string>
     <string name="apps_summary" msgid="193158055537070092">"<xliff:g id="COUNT">%1$d</xliff:g> апликации се инсталирани"</string>
+    <string name="apps_summary_example" msgid="2118896966712746139">"Инсталирани се 24 апликации"</string>
     <string name="storage_summary" msgid="1110250618334248745">"Искористени се <xliff:g id="SIZE1">%1$s</xliff:g> од <xliff:g id="SIZE2">%2$s</xliff:g>"</string>
     <string name="display_summary_on" msgid="5628868543070268634">"Приспособливата осветленост е вклучена"</string>
     <string name="display_summary_off" msgid="6399558022426312990">"Приспособливата осветленост е исклучена"</string>
@@ -2858,12 +2880,17 @@
     <string name="location_off_summary" msgid="6474350053215707957">"ИСКЛУЧЕНО"</string>
     <string name="backup_disabled" msgid="485189128759595412">"Резервната копија е оневозможена"</string>
     <string name="about_summary" msgid="8460677224778433924">"Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
-    <string name="disabled_by_policy_title" msgid="5358385863927403279">"Оневозможено поради политиката"</string>
-    <string name="default_admin_support_msg" msgid="1088691978121877039">"Оневозможено од администраторот на организацијата. \n Контактирајте со администраторот за да дознаете повеќе."</string>
+    <!-- no translation found for disabled_by_policy_title (627023216027648534) -->
+    <skip />
+    <!-- no translation found for default_admin_support_msg (510401764426963642) -->
+    <skip />
     <string name="admin_support_more_info" msgid="8901377038510512654">"Повеќе детали"</string>
-    <string name="admin_profile_owner_message" msgid="859900284865115324">"Администраторот може да ги следи и да управува со поставките, корпоративниот пристап, апликациите и податоците поврзани со профилот, како и со мрежната активност и информациите за локацијата на уредот."</string>
-    <string name="admin_profile_owner_user_message" msgid="853830977317489321">"Администраторот може да ги следи и да управува со поставките, корпоративниот пристап, апликациите и податоците поврзани со корисникот, како и со мрежната активност и информациите за локацијата на уредот."</string>
-    <string name="admin_device_owner_message" msgid="2060220398673683105">"Администраторот може да ги следи и да управува со поставките, корпоративниот пристап, апликациите и податоците поврзани со уредов, како и со мрежната активност и информациите за локацијата на уредот."</string>
+    <!-- no translation found for admin_profile_owner_message (5834937282929663252) -->
+    <skip />
+    <!-- no translation found for admin_profile_owner_user_message (7153676784012255048) -->
+    <skip />
+    <!-- no translation found for admin_device_owner_message (8734500370023898028) -->
+    <skip />
     <string name="condition_turn_off" msgid="1960945836880080298">"Исклучи"</string>
     <string name="condition_turn_on" msgid="9089876276117874591">"Вклучи"</string>
     <string name="condition_hotspot_title" msgid="7778958849468560027">"Точката на пристап е вклучена"</string>
@@ -2884,6 +2911,7 @@
     <string name="color_temperature" msgid="2070126836910615605">"Ладна боја за температура"</string>
     <string name="color_temperature_desc" msgid="4793729830226404052">"Користи поладни бои на екранот"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"За да се примени промената на бојата, исклучете го екранот"</string>
+    <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Автоматски ажурирања на системот"</string>
     <string name="usage" msgid="2977875522080448986">"Користење"</string>
     <string name="cellular_data_usage" msgid="2763710678354680712">"Потрошен сообраќај на мобилни податоци"</string>
     <string name="wifi_data_usage" msgid="686754111095324306">"Потрошен сообраќај на податоци преку Wi-Fi"</string>
@@ -2923,4 +2951,9 @@
     <string name="lockpattern_settings_require_pin_before_startup_summary" msgid="6022831284097476933">"Потребен е ПИН-код за да се стартува уредот. Додека е исклучен, тој не може да добива повици, пораки, известувања или аларми."</string>
     <string name="lockpattern_settings_require_password_before_startup_summary" msgid="6818285221244966231">"Потребна е лозинка за да се стартува уредот. Додека е исклучен, тој не може да добива повици, пораки, известувања или аларми."</string>
     <string name="suggestion_additional_fingerprints" msgid="3683327800671241982">"Дополнителни отпечатоци"</string>
+    <string name="battery_saver_on_summary" msgid="9072203872401530722">"Вклучен/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="battery_saver_off_summary" msgid="8309471955051162327">"Исклучен/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="battery_saver_desc_turn_on_auto_never" msgid="6715896635178578813">"Никогаш не вклучувај автоматски"</string>
+    <string name="battery_saver_desc_turn_on_auto_pct" msgid="7472323223085636533">"Вклучи автоматски при %1$s батерија"</string>
+    <string name="not_battery_optimizing" msgid="5362861851864837617">"Не се користи оптимизација на батеријата"</string>
 </resources>

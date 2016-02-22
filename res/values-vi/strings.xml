@@ -375,8 +375,7 @@
     <string name="fingerprint_add_max" msgid="1020927549936895822">"Bạn có thể thêm tối đa <xliff:g id="COUNT">%d</xliff:g> tệp tham chiếu"</string>
     <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"Xóa tất cả dấu vân tay?"</string>
     <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"Bạn sẽ không thể sử dụng dấu vân tay để mở khóa điện thoại của mình, ủy quyền mua hàng hoặc đăng nhập vào ứng dụng bằng dấu vân tay đó."</string>
-    <!-- no translation found for fingerprint_last_delete_message_profile_challenge (8840100810725902159) -->
-    <skip />
+    <string name="fingerprint_last_delete_message_profile_challenge" msgid="8840100810725902159">"Bạn sẽ không thể sử dụng vân tay của mình để mở khóa hồ sơ công việc, ủy quyền mua hàng hay đăng nhập vào ứng dụng công việc."</string>
     <string name="fingerprint_last_delete_confirm" msgid="2634726361059274289">"Có, xóa"</string>
     <string name="confirm_fingerprint_icon_content_description" msgid="5255544532157079096">"Sử dụng dấu vân tay của bạn để tiếp tục."</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Mã hóa"</string>
@@ -485,6 +484,13 @@
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"Thay đổi hình mở khóa"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"Thay đổi mã PIN mở khóa"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"Thay đổi mật khẩu mở khóa"</string>
+    <string name="lock_profile_wipe_attempts" msgid="1216193652369039672">"Thử lại. Lần thử <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g>/<xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g>."</string>
+    <string name="lock_profile_wipe_warning_title" msgid="2961600792367265036">"Lần thử cuối cùng"</string>
+    <string name="lock_profile_wipe_warning_content_pattern" msgid="8978031996247660921">"Nếu bạn nhập sai hình mở khóa công việc vào lần thử này, hồ sơ công việc và dữ liệu được liên kết của bạn sẽ bị xóa khỏi thiết bị này."</string>
+    <string name="lock_profile_wipe_warning_content_pin" msgid="7697973618542377880">"Nếu bạn nhập sai mã PIN công việc vào lần thử này, hồ sơ công việc và dữ liệu được liên kết của bạn sẽ bị xóa khỏi thiết bị này."</string>
+    <string name="lock_profile_wipe_warning_content_password" msgid="450695588340509349">"Nếu bạn nhập sai mật khẩu công việc vào lần thử này, hồ sơ công việc và dữ liệu được liên kết của bạn sẽ bị xóa khỏi thiết bị này."</string>
+    <string name="lock_profile_wipe_content" msgid="2150455386921347628">"Quá nhiều lần thử sai. Hồ sơ công việc và dữ liệu được liên kết của bạn sẽ bị xóa khỏi thiết bị này."</string>
+    <string name="lock_profile_wipe_dismiss" msgid="5118293266264141442">"Loại bỏ"</string>
     <string name="lockpassword_password_too_short" msgid="7328975683669256660">"Mật khẩu phải có ít nhất %d ký tự"</string>
     <string name="lockpassword_pin_too_short" msgid="1677649103470518953">"Mã PIN phải có ít nhất %d chữ số"</string>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Tiếp tục"</string>
@@ -952,7 +958,7 @@
     <string name="device_status_summary" product="tablet" msgid="3292717754497039686">"Trạng thái của pin, mạng và thông tin khác"</string>
     <string name="device_status_summary" product="default" msgid="2599162787451519618">"Số điện thoại, tín hiệu, v.v..."</string>
     <string name="storage_settings" msgid="4211799979832404953">"Bộ nhớ"</string>
-    <string name="storage_usb_settings" msgid="642612065405691122">"Bộ nhớ và USB"</string>
+    <string name="storage_usb_settings" msgid="7293054033137078060">"Bộ nhớ"</string>
     <string name="storage_settings_title" msgid="8746016738388094064">"Cài đặt bộ nhớ"</string>
     <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"Ngắt kết nối bộ nhớ USB, xem dung lượng sẵn có"</string>
     <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"Tháo thẻ SD, xem dung lượng còn trống"</string>
@@ -1324,10 +1330,10 @@
     <string name="lock_settings_profile_title" msgid="7819021341281339182">"Hồ sơ công việc"</string>
     <string name="lock_settings_profile_label" msgid="4423909470339292809">"Bảo mật hồ sơ công việc"</string>
     <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Khóa màn hình hồ sơ công việc"</string>
-    <string name="lock_settings_profile_unification_title" msgid="3130455578336894831">"Sử dụng cùng một khóa màn hình"</string>
+    <string name="lock_settings_profile_unification_title" msgid="8633657624689310195">"Sử dụng cùng một khóa màn hình"</string>
     <string name="lock_settings_profile_unification_summary" msgid="8014208091623293835">"Thay đổi hồ sơ chính cho phù hợp với hồ sơ công việc"</string>
-    <string name="lock_settings_profile_unification_dialog_title" msgid="5297248764066294130">"Sử dụng cùng một khóa màn hình?"</string>
-    <string name="lock_settings_profile_unification_dialog_body" msgid="342417647696962745">"Bạn có thể sử dụng khóa này cho thiết bị của mình. Tuy nhiên, khóa này sẽ phải tuân theo tất cả các chính sách liên quan đến khóa màn hình do quản trị viên CNTT của bạn thiết lập trên hồ sơ công việc.\nBạn có muốn sử dụng cùng một khóa màn hình cho thiết bị của mình không?"</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="8938936484754025065">"Sử dụng cùng một khóa màn hình?"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="1697316592639374194">"Bạn có thể sử dụng khóa này cho thiết bị của mình. Tuy nhiên, khóa này sẽ phải tuân theo tất cả các chính sách liên quan đến khóa màn hình do quản trị viên CNTT của bạn thiết lập trên hồ sơ công việc.\nBạn có muốn sử dụng cùng một khóa màn hình cho thiết bị của mình không?"</string>
     <string name="lock_settings_profile_unified_summary" msgid="237623767711796217">"Giống như khóa thiết bị của bạn"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Quản lý ứng dụng"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Quản lý và xóa ứng dụng đã cài đặt"</string>
@@ -1441,6 +1447,7 @@
     <string name="app_forward_locked" msgid="6331564656683790866">"Ứng dụng được bảo vệ bản sao."</string>
     <string name="invalid_location" msgid="4354595459063675191">"Vị trí cài đặt không hợp lệ."</string>
     <string name="system_package" msgid="1352722848400644991">"Không thể cài đặt bản cập nhật hệ thống trên phương tiện bên ngoài."</string>
+    <string name="move_error_device_admin" msgid="8148342933314166497">"Không thể cài đặt Quản trị viên thiết bị trên phương tiện bên ngoài."</string>
     <string name="force_stop_dlg_title" msgid="977530651470711366">"Buộc dừng?"</string>
     <string name="force_stop_dlg_text" msgid="7208364204467835578">"Nếu bạn buộc dừng một ứng dụng, ứng dụng đó có thể hoạt động sai."</string>
     <string name="move_app_failed_dlg_title" msgid="1282561064082384192"></string>
@@ -1875,6 +1882,8 @@
     <string name="voice_interactor_preference_summary" msgid="1801414022026937190">"Tương tác và từ nóng đầy đủ"</string>
     <string name="voice_recognizer_preference_summary" msgid="669880813593690527">"Ngôn từ đơn giản dễ nhắn tin"</string>
     <string name="voice_interaction_security_warning" msgid="6378608263983737325">"Dịch vụ nhập bằng giọng nói này có thể thực hiện theo dõi bằng giọng nói luôn bật và kiểm soát các ứng dụng hỗ trợ giọng nói thay mặt cho bạn. Dịch vụ này đến từ <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g>. Cho phép sử dụng dịch vụ này?"</string>
+    <string name="tts_reset_speech_rate_title" msgid="3993885027390495498">"Đặt lại tốc độ nói"</string>
+    <string name="tts_reset_speech_rate_summary" msgid="8561618897094097540">"Đặt lại tốc độ đọc văn bản thành bình thường."</string>
     <string name="gadget_title" msgid="5519037532720577836">"Kiểm soát điện năng"</string>
     <string name="gadget_toggle_wifi" msgid="319262861956544493">"Đang cập nhật cài đặt Wi‑Fi"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"Đang cập nhật cài đặt Bluetooth"</string>
@@ -2441,6 +2450,7 @@
     <string name="status_tag_not_writable" msgid="2511611539977682175">"Thẻ NFC không thể ghi được. Vui lòng sử dụng một thẻ khác."</string>
     <string name="default_sound" msgid="8821684447333687810">"Âm thanh mặc định"</string>
     <string name="sound_settings_summary" msgid="3651751880569558828">"Âm lượng của trình tạo nhạc chuông ở mức <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="sound_settings_example_summary" msgid="6810096712869633479">"Âm lượng của trình tạo nhạc chuông ở mức 80%"</string>
     <string name="media_volume_option_title" msgid="2811531786073003825">"Âm lượng phương tiện"</string>
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"Âm lượng báo thức"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"Âm lượng chuông"</string>
@@ -2488,8 +2498,6 @@
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"Khi thiết bị của bạn bị khóa, bạn muốn thông báo hồ sơ hiển thị như thế nào?"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="3169806586032521333">"Thông báo hồ sơ"</string>
     <string name="app_notifications_title" msgid="139788604658984593">"Thông báo"</string>
-    <string name="topic_notifications_title" msgid="7243623930984080881">"Thông báo chủ đề"</string>
-    <string name="notification_topic_categories" msgid="3399184843660543981">"Danh mục"</string>
     <string name="notification_importance_title" msgid="848692592679312666">"Mức độ quan trọng"</string>
     <string name="notification_importance_none" msgid="3173515479356106227">"Chưa được đặt"</string>
     <string name="notification_importance_blocked" msgid="4764559498517003405">"Đã chặn: Không bao giờ hiển thị các thông báo này"</string>
@@ -2552,6 +2560,8 @@
     <string name="zen_mode_schedule_rule_days" msgid="3195058680641389948">"Ngày"</string>
     <string name="zen_mode_schedule_rule_days_none" msgid="4954143628634166317">"Không có"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="146511166522076034">"Hàng ngày"</string>
+    <string name="zen_mode_schedule_alarm_title" msgid="767054141267122030">"Báo thức có thể ghi đè thời gian kết thúc"</string>
+    <string name="zen_mode_schedule_alarm_summary" msgid="4597050434723180422">"Dừng ở thời gian kết thúc hoặc báo thức tiếp theo, tùy vào điều kiện nào đến trước"</string>
     <string name="summary_divider_text" msgid="7228986578690919294">", "</string>
     <string name="summary_range_symbol_combination" msgid="5695218513421897027">"<xliff:g id="START">%1$s</xliff:g> - <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="summary_range_verbal_combination" msgid="8467306662961568656">"<xliff:g id="START">%1$s</xliff:g> đến <xliff:g id="END">%2$s</xliff:g>"</string>
@@ -2658,8 +2668,7 @@
     <string name="change_storage" msgid="600475265207060436">"Thay đổi bộ nhớ"</string>
     <string name="notifications_label" msgid="2872668710589600731">"Thông báo"</string>
     <string name="notifications_enabled" msgid="4386196629684749507">"Bình thường"</string>
-    <string name="notifications_disabled" msgid="7021094738660322110">"Bị chặn toàn bộ"</string>
-    <string name="notifications_partially_disabled" msgid="7293654891788852646">"Bị chặn một phần"</string>
+    <string name="notifications_disabled" msgid="3200751656741989335">"Bị chặn"</string>
     <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
     <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g> / <xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
@@ -2843,11 +2852,22 @@
     <string name="screen_zoom_summary_very_large" msgid="7108563375663670067">"Lớn hơn"</string>
     <string name="screen_zoom_summary_extremely_large" msgid="7427320168263276227">"Lớn nhất"</string>
     <string name="screen_zoom_summary_custom" msgid="5611979864124160447">"Tùy chỉnh (<xliff:g id="DENSITYDPI">%d</xliff:g>)"</string>
+    <string name="screen_zoom_conversation_icon_alex" msgid="8443032489384985820">"A"</string>
+    <string name="screen_zoom_conversation_icon_pete" msgid="998709701837681129">"P"</string>
+    <string name="screen_zoom_conversation_message_1" msgid="6546951024984852686">"Xin chào Pete!"</string>
+    <string name="screen_zoom_conversation_message_2" msgid="6935424214137738647">"Này, bạn có muốn uống một tách cà phê và tán gẫu hôm nay không?"</string>
+    <string name="screen_zoom_conversation_message_3" msgid="5218221201861387402">"Vậy thì hay quá. Tôi biết một nơi tuyệt vời không cách xa đây lắm."</string>
+    <string name="screen_zoom_conversation_message_4" msgid="5564676794767555447">"Tuyệt!"</string>
+    <string name="screen_zoom_conversation_timestamp_1" msgid="7453710416319650556">"Thứ Ba 6:00 CH"</string>
+    <string name="screen_zoom_conversation_timestamp_2" msgid="7107225702890747588">"Thứ Ba 6:01 CH"</string>
+    <string name="screen_zoom_conversation_timestamp_3" msgid="3785674344762707688">"Thứ Ba 6:02 CH"</string>
+    <string name="screen_zoom_conversation_timestamp_4" msgid="2511469395448561259">"Thứ Ba 6:03 CH"</string>
     <string name="see_all" msgid="8883901630052886984">"Xem tất cả"</string>
     <string name="see_less" msgid="1250265310929558370">"Xem bớt"</string>
     <string name="disconnected" msgid="5787956818111197212">"Đã ngắt kết nối"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"Đã sử dụng <xliff:g id="AMOUNT">%1$s</xliff:g> dữ liệu"</string>
     <string name="apps_summary" msgid="193158055537070092">"Đã cài đặt <xliff:g id="COUNT">%1$d</xliff:g> ứng dụng"</string>
+    <string name="apps_summary_example" msgid="2118896966712746139">"Đã cài đặt 24 ứng dụng"</string>
     <string name="storage_summary" msgid="1110250618334248745">"Đã sử dụng <xliff:g id="SIZE1">%1$s</xliff:g> / <xliff:g id="SIZE2">%2$s</xliff:g>"</string>
     <string name="display_summary_on" msgid="5628868543070268634">"Độ sáng thích ứng được BẬT"</string>
     <string name="display_summary_off" msgid="6399558022426312990">"Độ sáng thích ứng bị TẮT"</string>
@@ -2858,12 +2878,12 @@
     <string name="location_off_summary" msgid="6474350053215707957">"TẮT"</string>
     <string name="backup_disabled" msgid="485189128759595412">"Đã tắt sao lưu"</string>
     <string name="about_summary" msgid="8460677224778433924">"Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
-    <string name="disabled_by_policy_title" msgid="5358385863927403279">"Bị tắt theo chính sách"</string>
-    <string name="default_admin_support_msg" msgid="1088691978121877039">"Quản trị viên của tổ chức bạn đã vô hiệu hóa.\nHãy liên hệ với quản trị viên đó để tìm hiểu thêm."</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"Tác vụ này không được cho phép"</string>
+    <string name="default_admin_support_msg" msgid="510401764426963642">"Tác vụ này bị vô hiệu hóa. Hãy liên hệ với quản trị viên của tổ chức bạn để tìm hiểu thêm."</string>
     <string name="admin_support_more_info" msgid="8901377038510512654">"Thông tin chi tiết khác"</string>
-    <string name="admin_profile_owner_message" msgid="859900284865115324">"Quản trị viên của bạn có thể giám sát và quản lý cài đặt, quyền truy cập của công ty, ứng dụng, quyền và dữ liệu được liên kết với hồ sơ, bao gồm cả hoạt động mạng và thông tin vị trí của thiết bị."</string>
-    <string name="admin_profile_owner_user_message" msgid="853830977317489321">"Quản trị viên của bạn có thể giám sát và quản lý cài đặt, quyền truy cập của công ty, ứng dụng, quyền và dữ liệu được liên kết với người dùng này, bao gồm cả hoạt động mạng và thông tin vị trí của thiết bị."</string>
-    <string name="admin_device_owner_message" msgid="2060220398673683105">"Quản trị viên của bạn có thể giám sát và quản lý cài đặt, quyền truy cập của công ty, ứng dụng, quyền và dữ liệu được liên kết với thiết bị này, bao gồm cả hoạt động mạng và thông tin vị trí của thiết bị."</string>
+    <string name="admin_profile_owner_message" msgid="5834937282929663252">"Quản trị viên có thể giám sát và quản lý các ứng dụng cũng như dữ liệu được liên kết với hồ sơ công việc của bạn, bao gồm cài đặt, quyền, quyền truy cập vào dữ liệu công ty, hoạt động mạng và thông tin vị trí của thiết bị."</string>
+    <string name="admin_profile_owner_user_message" msgid="7153676784012255048">"Quản trị viên của bạn có thể giám sát và quản lý các ứng dụng cũng như dữ liệu được liên kết với người dùng này, bao gồm cài đặt, quyền, quyền truy cập vào dữ liệu công ty, hoạt động mạng và thông tin vị trí của thiết bị."</string>
+    <string name="admin_device_owner_message" msgid="8734500370023898028">"Quản trị viên của bạn có thể giám sát và quản lý các ứng dụng cũng như dữ liệu được liên kết với thiết bị này, bao gồm cài đặt, quyền, quyền truy cập vào dữ liệu công ty, hoạt động mạng và thông tin vị trí của thiết bị."</string>
     <string name="condition_turn_off" msgid="1960945836880080298">"Tắt"</string>
     <string name="condition_turn_on" msgid="9089876276117874591">"Bật"</string>
     <string name="condition_hotspot_title" msgid="7778958849468560027">"Đang bật điểm phát sóng"</string>
@@ -2884,6 +2904,7 @@
     <string name="color_temperature" msgid="2070126836910615605">"Nhiệt độ màu lạnh"</string>
     <string name="color_temperature_desc" msgid="4793729830226404052">"Sử dụng màu hiển thị lạnh hơn"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"Để áp dụng thay đổi màu, hãy tắt màn hình"</string>
+    <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Cập nhật hệ thống tự động"</string>
     <string name="usage" msgid="2977875522080448986">"Sử dụng"</string>
     <string name="cellular_data_usage" msgid="2763710678354680712">"Sử dụng dữ liệu di động"</string>
     <string name="wifi_data_usage" msgid="686754111095324306">"Sử dụng dữ liệu Wi-Fi"</string>
@@ -2923,4 +2944,9 @@
     <string name="lockpattern_settings_require_pin_before_startup_summary" msgid="6022831284097476933">"Cần có mã PIN để khởi động thiết bị của bạn. Khi tắt, thiết bị này không thể nhận cuộc gọi, tin nhắn, thông báo hoặc báo thức."</string>
     <string name="lockpattern_settings_require_password_before_startup_summary" msgid="6818285221244966231">"Cần có mật khẩu để khởi động thiết bị của bạn. Khi tắt, thiết bị này không thể nhận cuộc gọi, tin nhắn, thông báo hoặc báo thức."</string>
     <string name="suggestion_additional_fingerprints" msgid="3683327800671241982">"Vân tay bổ sung"</string>
+    <string name="battery_saver_on_summary" msgid="9072203872401530722">"Bật / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="battery_saver_off_summary" msgid="8309471955051162327">"Tắt / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="battery_saver_desc_turn_on_auto_never" msgid="6715896635178578813">"Không bao giờ tự động bật"</string>
+    <string name="battery_saver_desc_turn_on_auto_pct" msgid="7472323223085636533">"Tự động bật ở mức pin %1$s"</string>
+    <string name="not_battery_optimizing" msgid="5362861851864837617">"Đang không sử dụng tối ưu hóa pin"</string>
 </resources>
