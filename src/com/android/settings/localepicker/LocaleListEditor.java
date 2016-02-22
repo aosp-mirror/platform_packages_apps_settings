@@ -21,7 +21,6 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.preference.PreferenceFragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.LocaleList;
@@ -33,12 +32,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.android.settings.R;
-
 import com.android.internal.app.LocalePicker;
 import com.android.internal.app.LocalePickerWithRegion;
 import com.android.internal.app.LocaleStore;
 import com.android.settings.InstrumentedFragment;
+import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
 import java.util.ArrayList;
@@ -107,16 +105,16 @@ public class LocaleListEditor extends SettingsPreferenceFragment
     }
 
     private void removeLocaleWarningDialog() {
-        int checked = mAdapter.getCheckedCount();
+        int checkedCount = mAdapter.getCheckedCount();
 
         // Nothing checked, just exit remove mode without a warning dialog
-        if (checked == 0) {
+        if (checkedCount == 0) {
             setRemoveMode(!mRemoveMode);
             return;
         }
 
         // All locales selected, warning dialog, can't remove them all
-        if (checked == mAdapter.getItemCount()) {
+        if (checkedCount == mAdapter.getItemCount()) {
             new AlertDialog.Builder(getActivity())
                     .setTitle(R.string.dlg_remove_locales_error_title)
                     .setMessage(R.string.dlg_remove_locales_error_message)
@@ -130,8 +128,10 @@ public class LocaleListEditor extends SettingsPreferenceFragment
             return;
         }
 
+        final String title = getResources().getQuantityString(R.plurals.dlg_remove_locales_title,
+                checkedCount);
         new AlertDialog.Builder(getActivity())
-                .setTitle(R.string.dlg_remove_locales_title)
+                .setTitle(title)
                 .setMessage(R.string.dlg_remove_locales_message)
                 .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                     @Override
@@ -161,9 +161,9 @@ public class LocaleListEditor extends SettingsPreferenceFragment
     }
 
     private static List<LocaleStore.LocaleInfo> getUserLocaleList(Context context) {
-        List<LocaleStore.LocaleInfo> result = new ArrayList<>();
+        final List<LocaleStore.LocaleInfo> result = new ArrayList<>();
 
-        LocaleList localeList = LocalePicker.getLocales();
+        final LocaleList localeList = LocalePicker.getLocales();
         for (int i = 0; i < localeList.size(); i++) {
             Locale locale = localeList.get(i);
             result.add(LocaleStore.getLocaleInfo(locale));
@@ -173,8 +173,10 @@ public class LocaleListEditor extends SettingsPreferenceFragment
     }
 
     private void configureDragAndDrop(View view) {
-        RecyclerView list = (RecyclerView) view.findViewById(R.id.dragList);
-        list.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        final RecyclerView list = (RecyclerView) view.findViewById(R.id.dragList);
+        final LinearLayoutManager llm = new LinearLayoutManager(this.getContext());
+        llm.setAutoMeasureEnabled(true);
+        list.setLayoutManager(llm);
 
         list.setHasFixedSize(true);
         mAdapter.setRecyclerView(list);
