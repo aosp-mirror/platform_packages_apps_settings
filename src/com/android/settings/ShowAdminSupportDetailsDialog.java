@@ -60,7 +60,7 @@ public class ShowAdminSupportDetailsDialog extends Activity
 
         mDialogView = LayoutInflater.from(this).inflate(
                 R.layout.admin_support_details_dialog, null);
-        setAdminSupportDetails(this, mDialogView, mEnforcedAdmin, true);
+        initializeDialogViews(mDialogView, mEnforcedAdmin.component, mEnforcedAdmin.userId);
 
         new AlertDialog.Builder(this)
                 .setView(mDialogView)
@@ -75,7 +75,7 @@ public class ShowAdminSupportDetailsDialog extends Activity
         EnforcedAdmin admin = getAdminDetailsFromIntent(intent);
         if (!mEnforcedAdmin.equals(admin)) {
             mEnforcedAdmin = admin;
-            setAdminSupportDetails(this, mDialogView, mEnforcedAdmin, true);
+            initializeDialogViews(mDialogView, mEnforcedAdmin.component, mEnforcedAdmin.userId);
         }
     }
 
