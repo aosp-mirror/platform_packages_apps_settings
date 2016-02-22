@@ -202,7 +202,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     private static final String TERMINAL_APP_PACKAGE = "com.android.terminal";
 
-    private static final String KEY_NIGHT_MODE = "night_mode";
     private static final String KEY_CONVERT_FBE = "convert_to_file_encryption";
 
     private static final String OTA_DISABLE_AUTOMATIC_UPDATE_KEY = "ota_disable_automatic_update";
@@ -291,8 +290,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private ListPreference mAppProcessLimit;
 
     private SwitchPreference mShowAllANRs;
-
-    private DropDownPreference mNightModePreference;
 
     private ColorModePreference mColorModePreference;
 
@@ -478,27 +475,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         }
 
         mOtaDisableAutomaticUpdate = findAndInitSwitchPref(OTA_DISABLE_AUTOMATIC_UPDATE_KEY);
-
-        mNightModePreference = (DropDownPreference) findPreference(KEY_NIGHT_MODE);
-        final UiModeManager uiManager = (UiModeManager) getSystemService(
-                Context.UI_MODE_SERVICE);
-        final int currentNightMode = uiManager.getNightMode();
-        mNightModePreference.setValue(String.valueOf(currentNightMode));
-        mNightModePreference.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                try {
-                    final int value = Integer.parseInt((String) newValue);
-                    final UiModeManager uiManager = (UiModeManager) getSystemService(
-                            Context.UI_MODE_SERVICE);
-                    uiManager.setNightMode(value);
-                    return true;
-                } catch (NumberFormatException e) {
-                    Log.e(TAG, "could not persist night mode setting", e);
-                    return false;
-                }
-            }
-        });
 
         mColorModePreference = (ColorModePreference) findPreference(KEY_COLOR_MODE);
         mColorModePreference.updateCurrentAndSupported();
