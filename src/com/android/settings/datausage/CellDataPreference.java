@@ -15,14 +15,16 @@
 package com.android.settings.datausage;
 
 import android.app.AlertDialog;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.IntentFilter;
+import android.database.ContentObserver;
 import android.net.NetworkTemplate;
+import android.net.Uri;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.provider.Settings.Global;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -31,7 +33,6 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.Checkable;
-
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.CustomDialogPreference;
@@ -41,10 +42,6 @@ import com.android.settings.Utils;
 import java.util.List;
 
 public class CellDataPreference extends CustomDialogPreference implements TemplatePreference {
-
-    // TODO: Get Telephony to broadcast when this changes, and remove this.
-    static final String ACTION_DATA_ENABLED_CHANGED =
-            "com.android.settings.action.DATA_ENABLED_CHANGED";
 
     private static final String TAG = "CellDataPreference";
 
@@ -84,12 +81,12 @@ public class CellDataPreference extends CustomDialogPreference implements Templa
     @Override
     public void onAttached() {
         super.onAttached();
-        getContext().registerReceiver(mReceiver, new IntentFilter(ACTION_DATA_ENABLED_CHANGED));
+        mListener.setListener(true, mSubId, getContext());
     }
 
     @Override
     public void onDetached() {
-        getContext().unregisterReceiver(mReceiver);
+        mListener.setListener(false, mSubId, getContext());
         super.onDetached();
     }
 
@@ -98,6 +95,7 @@ public class CellDataPreference extends CustomDialogPreference implements Templa
         if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             throw new IllegalArgumentException("CellDataPreference needs a SubscriptionInfo");
         }
+        mSubscriptionManager = SubscriptionManager.from(getContext());
         mTelephonyManager = TelephonyManager.from(getContext());
         if (mSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             mSubId = subId;
@@ -114,6 +112,22 @@ public class CellDataPreference extends CustomDialogPreference implements Templa
     protected void performClick(View view) {
         MetricsLogger.action(getContext(), MetricsEvent.ACTION_CELL_DATA_TOGGLE, !mChecked);
         if (mChecked) {
+            final SubscriptionInfo currentSir = mSubscriptionManager.getActiveSubscriptionInfo(
+                    mSubId);
+            final SubscriptionInfo nextSir = mSubscriptionManager.getDefaultDataSubscriptionInfo();
+
+            // If the device is single SIM or is enabling data on the active data SIM then forgo
+            // the pop-up.
+            if (!Utils.showSimCardTile(getContext()) ||
+                    (nextSir != null && currentSir != null &&
+                            currentSir.getSubscriptionId() == nextSir.getSubscriptionId())) {
+                setMobileDataEnabled(true);
+                if (nextSir != null && currentSir != null &&
+                        currentSir.getSubscriptionId() == nextSir.getSubscriptionId()) {
+                    disableDataForOtherSubscriptions(mSubId);
+                }
+                return;
+            }
             // disabling data; show confirmation dialog which eventually
             // calls setMobileDataEnabled() once user confirms.
             mMultiSimDialog = false;
@@ -130,10 +144,10 @@ public class CellDataPreference extends CustomDialogPreference implements Templa
     }
 
     private void setMobileDataEnabled(boolean enabled) {
-        if (DataUsageSummary.LOGD) Log.d(TAG, "setMobileDataEnabled()");
+        if (DataUsageSummary.LOGD) Log.d(TAG, "setMobileDataEnabled(" + enabled + ","
+                + mSubId + ")");
         mTelephonyManager.setDataEnabled(mSubId, enabled);
         setChecked(enabled);
-        getContext().sendBroadcast(new Intent(ACTION_DATA_ENABLED_CHANGED));
     }
 
     private void setChecked(boolean checked) {
@@ -170,23 +184,8 @@ public class CellDataPreference extends CustomDialogPreference implements Templa
 
     private void showMultiSimDialog(AlertDialog.Builder builder,
             DialogInterface.OnClickListener listener) {
-        mSubscriptionManager = SubscriptionManager.from(getContext());
         final SubscriptionInfo currentSir = mSubscriptionManager.getActiveSubscriptionInfo(mSubId);
-
         final SubscriptionInfo nextSir = mSubscriptionManager.getDefaultDataSubscriptionInfo();
-
-        // If the device is single SIM or is enabling data on the active data SIM then forgo
-        // the pop-up.
-        if (!Utils.showSimCardTile(getContext()) ||
-                (nextSir != null && currentSir != null &&
-                currentSir.getSubscriptionId() == nextSir.getSubscriptionId())) {
-            setMobileDataEnabled(true);
-            if (nextSir != null && currentSir != null &&
-                currentSir.getSubscriptionId() == nextSir.getSubscriptionId()) {
-                disableDataForOtherSubscriptions(mSubId);
-            }
-            return;
-        }
 
         final String previousName = (nextSir == null)
             ? getContext().getResources().getString(R.string.sim_selection_required_pref)
@@ -197,17 +196,8 @@ public class CellDataPreference extends CustomDialogPreference implements Templa
                 String.valueOf(currentSir != null ? currentSir.getDisplayName() : null),
                 previousName));
 
-        builder.setPositiveButton(R.string.okay, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-                mSubscriptionManager.setDefaultDataSubId(mSubId);
-                setMobileDataEnabled(true);
-                disableDataForOtherSubscriptions(mSubId);
-            }
-        });
+        builder.setPositiveButton(R.string.okay, listener);
         builder.setNegativeButton(R.string.cancel, null);
-
-        builder.create().show();
     }
 
     private void disableDataForOtherSubscriptions(int subId) {
@@ -219,7 +209,6 @@ public class CellDataPreference extends CustomDialogPreference implements Templa
                 }
             }
         }
-        getContext().sendBroadcast(new Intent(ACTION_DATA_ENABLED_CHANGED));
     }
 
     @Override
@@ -228,18 +217,39 @@ public class CellDataPreference extends CustomDialogPreference implements Templa
             return;
         }
         if (mMultiSimDialog) {
+            mSubscriptionManager.setDefaultDataSubId(mSubId);
+            setMobileDataEnabled(true);
+            disableDataForOtherSubscriptions(mSubId);
         } else {
             // TODO: extend to modify policy enabled flag.
             setMobileDataEnabled(false);
         }
     }
 
-    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+    private final DataStateListener mListener = new DataStateListener() {
         @Override
-        public void onReceive(Context context, Intent intent) {
+        public void onChange(boolean selfChange) {
             updateChecked();
         }
     };
+
+    public abstract static class DataStateListener extends ContentObserver {
+        public DataStateListener() {
+            super(new Handler(Looper.getMainLooper()));
+        }
+
+        public void setListener(boolean listening, int subId, Context context) {
+            if (listening) {
+                Uri uri = Global.getUriFor(Global.MOBILE_DATA);
+                if (TelephonyManager.getDefault().getSimCount() != 1) {
+                    uri = Global.getUriFor(Global.MOBILE_DATA + subId);
+                }
+                context.getContentResolver().registerContentObserver(uri, false, this);
+            } else {
+                context.getContentResolver().unregisterContentObserver(this);
+            }
+        }
+    }
 
     public static class CellDataState extends BaseSavedState {
         public int mSubId;
