@@ -242,9 +242,18 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
 
     protected void setHeaderView(int resource) {
         mHeader = new LayoutPreference(getPrefContext(), resource);
-        mHeader.setOrder(ORDER_FIRST);
+        addPreferenceToTop(mHeader);
+    }
+
+    protected void setHeaderView(View view) {
+        mHeader = new LayoutPreference(getPrefContext(), view);
+        addPreferenceToTop(mHeader);
+    }
+
+    private void addPreferenceToTop(LayoutPreference preference) {
+        preference.setOrder(ORDER_FIRST);
         if (getPreferenceScreen() != null) {
-            getPreferenceScreen().addPreference(mHeader);
+            getPreferenceScreen().addPreference(preference);
         }
     }
 
