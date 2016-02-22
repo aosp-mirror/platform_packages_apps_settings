@@ -22,17 +22,14 @@ import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.support.v7.preference.Preference;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityManager;
-import android.widget.Button;
-import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
@@ -63,10 +60,6 @@ public class EncryptionInterstitial extends SettingsActivity {
     public static Intent createStartIntent(Context ctx, int quality,
             boolean requirePasswordDefault, Intent unlockMethodIntent) {
         return new Intent(ctx, EncryptionInterstitial.class)
-                .putExtra(EXTRA_PREFS_SHOW_BUTTON_BAR, true)
-                .putExtra(EXTRA_PREFS_SET_BACK_TEXT, (String) null)
-                .putExtra(EXTRA_PREFS_SET_NEXT_TEXT, ctx.getString(
-                        R.string.encryption_continue_button))
                 .putExtra(EXTRA_PASSWORD_QUALITY, quality)
                 .putExtra(EXTRA_SHOW_FRAGMENT_TITLE_RESID, R.string.encryption_interstitial_header)
                 .putExtra(EXTRA_REQUIRE_PASSWORD, requirePasswordDefault)
@@ -74,12 +67,15 @@ public class EncryptionInterstitial extends SettingsActivity {
     }
 
     public static class EncryptionInterstitialFragment extends SettingsPreferenceFragment
-            implements View.OnClickListener, OnClickListener {
+            implements DialogInterface.OnClickListener {
 
         private static final int ACCESSIBILITY_WARNING_DIALOG = 1;
-        private RadioButton mRequirePasswordToDecryptButton;
-        private RadioButton mDontRequirePasswordToDecryptButton;
-        private TextView mEncryptionMessage;
+        private static final String KEY_ENCRYPT_REQUIRE_PASSWORD = "encrypt_require_password";
+        private static final String KEY_ENCRYPT_DONT_REQUIRE_PASSWORD =
+                "encrypt_dont_require_password";
+
+        private Preference mRequirePasswordToDecrypt;
+        private Preference mDontRequirePasswordToDecrypt;
         private boolean mPasswordRequired;
         private Intent mUnlockMethodIntent;
 
@@ -89,20 +85,13 @@ public class EncryptionInterstitial extends SettingsActivity {
         }
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            return inflater.inflate(R.layout.encryption_interstitial, container, false);
-        }
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
 
-        @Override
-        public void onViewCreated(View view, Bundle savedInstanceState) {
-            super.onViewCreated(view, savedInstanceState);
-            mRequirePasswordToDecryptButton =
-                    (RadioButton) view.findViewById(R.id.encrypt_require_password);
-            mDontRequirePasswordToDecryptButton =
-                    (RadioButton) view.findViewById(R.id.encrypt_dont_require_password);
-            mEncryptionMessage =
-                    (TextView) view.findViewById(R.id.encryption_message);
+            addPreferencesFromResource(R.xml.security_settings_encryption_interstitial);
+
+            mRequirePasswordToDecrypt = findPreference(KEY_ENCRYPT_REQUIRE_PASSWORD);
+            mDontRequirePasswordToDecrypt = findPreference(KEY_ENCRYPT_DONT_REQUIRE_PASSWORD);
             boolean forFingerprint = getActivity().getIntent().getBooleanExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, false);
             Intent intent = getActivity().getIntent();
@@ -135,26 +124,22 @@ public class EncryptionInterstitial extends SettingsActivity {
                     disableId = R.string.encrypt_dont_require_password;
                     break;
             }
-            mEncryptionMessage.setText(msgId);
+            TextView message = createHeaderView();
+            message.setText(msgId);
+            setHeaderView(message);
 
-            mRequirePasswordToDecryptButton.setOnClickListener(this);
-            mRequirePasswordToDecryptButton.setText(enableId);
+            mRequirePasswordToDecrypt.setTitle(enableId);
 
-            mDontRequirePasswordToDecryptButton.setOnClickListener(this);
-            mDontRequirePasswordToDecryptButton.setText(disableId);
+            mDontRequirePasswordToDecrypt.setTitle(disableId);
 
             setRequirePasswordState(getActivity().getIntent().getBooleanExtra(
                     EXTRA_REQUIRE_PASSWORD, true));
+        }
 
-            Button nextButton = getNextButton();
-            if (nextButton != null) {
-                nextButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        startLockIntent();
-                    }
-                });
-            }
+        protected TextView createHeaderView() {
+            TextView message = (TextView) LayoutInflater.from(getActivity()).inflate(
+                    R.layout.encryption_interstitial_header, null, false);
+            return message;
         }
 
         protected void startLockIntent() {
@@ -177,18 +162,22 @@ public class EncryptionInterstitial extends SettingsActivity {
         }
 
         @Override
-        public void onClick(View v) {
-            if (v == mRequirePasswordToDecryptButton) {
+        public boolean onPreferenceTreeClick(Preference preference) {
+            final String key = preference.getKey();
+            if (key.equals(KEY_ENCRYPT_REQUIRE_PASSWORD)) {
                 final boolean accEn = AccessibilityManager.getInstance(getActivity()).isEnabled();
                 if (accEn && !mPasswordRequired) {
                     setRequirePasswordState(false); // clear the UI state
                     showDialog(ACCESSIBILITY_WARNING_DIALOG);
                 } else {
                     setRequirePasswordState(true);
+                    startLockIntent();
                 }
             } else {
                 setRequirePasswordState(false);
+                startLockIntent();
             }
+            return true;
         }
 
         @Override
@@ -242,14 +231,13 @@ public class EncryptionInterstitial extends SettingsActivity {
 
         private void setRequirePasswordState(boolean required) {
             mPasswordRequired = required;
-            mRequirePasswordToDecryptButton.setChecked(required);
-            mDontRequirePasswordToDecryptButton.setChecked(!required);
         }
 
         @Override
         public void onClick(DialogInterface dialog, int which) {
             if (which == DialogInterface.BUTTON_POSITIVE) {
                 setRequirePasswordState(true);
+                startLockIntent();
             } else if (which == DialogInterface.BUTTON_NEGATIVE) {
                 setRequirePasswordState(false);
             }
