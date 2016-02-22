@@ -14,10 +14,8 @@
 
 package com.android.settings.datausage;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.net.NetworkPolicy;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
@@ -26,6 +24,7 @@ import android.support.v7.preference.Preference;
 import android.util.AttributeSet;
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.datausage.CellDataPreference.DataStateListener;
 
 public class BillingCyclePreference extends Preference implements TemplatePreference {
 
@@ -41,13 +40,12 @@ public class BillingCyclePreference extends Preference implements TemplatePrefer
     @Override
     public void onAttached() {
         super.onAttached();
-        getContext().registerReceiver(mReceiver, new IntentFilter(
-                CellDataPreference.ACTION_DATA_ENABLED_CHANGED));
+        mListener.setListener(true, mSubId, getContext());
     }
 
     @Override
     public void onDetached() {
-        getContext().unregisterReceiver(mReceiver);
+        mListener.setListener(false, mSubId, getContext());
         super.onDetached();
     }
 
@@ -81,9 +79,9 @@ public class BillingCyclePreference extends Preference implements TemplatePrefer
                 args, null, 0, getTitle(), false);
     }
 
-    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+    private final DataStateListener mListener = new DataStateListener() {
         @Override
-        public void onReceive(Context context, Intent intent) {
+        public void onChange(boolean selfChange) {
             updateEnabled();
         }
     };
