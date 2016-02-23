@@ -19,13 +19,8 @@
 
     <Item
         android:enabled="false"
-        android:layout="@layout/suw_items_description"
-        android:title="@string/security_settings_fingerprint_enroll_introduction_message" />
-
-    <Item
-        android:enabled="false"
-        android:id="@+id/fingerprint_introduction_message_warning"
-        android:layout="@layout/suw_items_description" />
+        android:id="@+id/fingerprint_introduction_message"
+        android:layout="@layout/suw_item_link_description"/>
 
     <Item
         android:id="@+id/next_button"
