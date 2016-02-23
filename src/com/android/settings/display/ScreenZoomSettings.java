@@ -38,7 +38,7 @@ import java.util.List;
  */
 public class ScreenZoomSettings extends PreviewSeekBarPreferenceFragment implements Indexable {
 
-    private int mNormalDensity;
+    private int mDefaultDensity;
     private int[] mValues;
 
     @Override
@@ -56,19 +56,19 @@ public class ScreenZoomSettings extends PreviewSeekBarPreferenceFragment impleme
 
         final int initialIndex = density.getCurrentIndex();
         if (initialIndex < 0) {
-            // Failed to obtain normal density, which means we failed to
+            // Failed to obtain default density, which means we failed to
             // connect to the window manager service. Just use the current
             // density and don't let the user change anything.
             final int densityDpi = getResources().getDisplayMetrics().densityDpi;
             mValues = new int[] { densityDpi };
-            mEntries = new String[] { getString(R.string.screen_zoom_summary_normal) };
+            mEntries = new String[] { getString(R.string.screen_zoom_summary_default) };
             mInitialIndex = 0;
-            mNormalDensity = densityDpi;
+            mDefaultDensity = densityDpi;
         } else {
             mValues = density.getValues();
             mEntries = density.getEntries();
             mInitialIndex = initialIndex;
-            mNormalDensity = density.getNormalDensity();
+            mDefaultDensity = density.getDefaultDensity();
         }
     }
 
@@ -86,7 +86,7 @@ public class ScreenZoomSettings extends PreviewSeekBarPreferenceFragment impleme
     @Override
     protected void commit() {
         final int densityDpi = mValues[mCurrentIndex];
-        if (densityDpi == mNormalDensity) {
+        if (densityDpi == mDefaultDensity) {
             DisplayDensityUtils.clearForcedDisplayDensity(Display.DEFAULT_DISPLAY);
         } else {
             DisplayDensityUtils.setForcedDisplayDensity(Display.DEFAULT_DISPLAY, densityDpi);
