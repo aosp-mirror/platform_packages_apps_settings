@@ -16,28 +16,31 @@
 
 package com.android.settings.notification;
 
-import android.app.Activity;
-import android.app.ActivityManager;
+import android.app.*;
 import android.app.INotificationManager;
-import android.app.Notification;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.RemoteException;
-import android.os.ServiceManager;
-import android.os.UserHandle;
+import android.os.*;
 import android.service.notification.NotificationListenerService;
+import android.service.notification.NotificationListenerService.Ranking;
+import android.service.notification.NotificationListenerService.RankingMap;
 import android.service.notification.StatusBarNotification;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.support.v7.widget.RecyclerView;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.TextUtils;
+import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.DateTimeView;
@@ -45,19 +48,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.settings.CopyablePreference;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.lang.StringBuilder;
+import java.util.*;
 
 public class NotificationStation extends SettingsPreferenceFragment {
     private static final String TAG = NotificationStation.class.getSimpleName();
 
     private static final boolean DEBUG = false;
+    private static final boolean DUMP_EXTRAS = true;
+    private static final boolean DUMP_PARCEL = true;
 
     private static class HistoricalNotificationInfo {
         public String pkg;
@@ -69,10 +73,12 @@ public class NotificationStation extends SettingsPreferenceFragment {
         public int user;
         public long timestamp;
         public boolean active;
+        public CharSequence extra;
     }
 
     private PackageManager mPm;
     private INotificationManager mNoMan;
+    private RankingMap mRanking;
 
     private Runnable mRefreshListRunnable = new Runnable() {
         @Override
@@ -83,18 +89,25 @@ public class NotificationStation extends SettingsPreferenceFragment {
 
     private NotificationListenerService mListener = new NotificationListenerService() {
         @Override
-        public void onNotificationPosted(StatusBarNotification notification) {
-            logd("onNotificationPosted: %s", notification);
+        public void onNotificationPosted(StatusBarNotification sbn, RankingMap ranking) {
+            logd("onNotificationPosted: %s", sbn.getNotification());
             final Handler h = getListView().getHandler();
+            mRanking = ranking;
             h.removeCallbacks(mRefreshListRunnable);
             h.postDelayed(mRefreshListRunnable, 100);
         }
 
         @Override
-        public void onNotificationRemoved(StatusBarNotification notification) {
+        public void onNotificationRemoved(StatusBarNotification notification, RankingMap ranking) {
             final Handler h = getListView().getHandler();
+            mRanking = ranking;
             h.removeCallbacks(mRefreshListRunnable);
             h.postDelayed(mRefreshListRunnable, 100);
+        }
+
+        @Override
+        public void onNotificationRankingUpdate(RankingMap ranking) {
+            mRanking = ranking;
         }
     };
 
@@ -179,6 +192,40 @@ public class NotificationStation extends SettingsPreferenceFragment {
         }
     }
 
+    private static CharSequence bold(CharSequence cs) {
+        if (cs.length() == 0) return cs;
+        SpannableString ss = new SpannableString(cs);
+        ss.setSpan(new StyleSpan(Typeface.BOLD), 0, cs.length(), 0);
+        return ss;
+    }
+
+    private static String getTitleString(Notification n) {
+        String title = null;
+        if (n.extras != null) {
+            title = n.extras.getString(Notification.EXTRA_TITLE);
+            if (TextUtils.isEmpty(title)) {
+                title = n.extras.getString(Notification.EXTRA_TEXT);
+            }
+        }
+        if (TextUtils.isEmpty(title) && !TextUtils.isEmpty(n.tickerText)) {
+            title = n.tickerText.toString();
+        }
+        return title;
+    }
+
+    private static String formatPendingIntent(PendingIntent pi) {
+        final StringBuilder sb = new StringBuilder();
+        final IntentSender is = pi.getIntentSender();
+        sb.append("Intent(pkg=").append(is.getCreatorPackage());
+        try {
+            final boolean isActivity =
+                    ActivityManagerNative.getDefault().isIntentSenderAnActivity(is.getTarget());
+            if (isActivity) sb.append(" (activity)");
+        } catch (RemoteException ex) {}
+        sb.append(")");
+        return sb.toString();
+    }
+
     private List<HistoricalNotificationInfo> loadNotifications() {
         final int currentUserId = ActivityManager.getCurrentUser();
         try {
@@ -190,40 +237,189 @@ public class NotificationStation extends SettingsPreferenceFragment {
             List<HistoricalNotificationInfo> list
                     = new ArrayList<HistoricalNotificationInfo>(active.length + dismissed.length);
 
+            final Ranking rank = new Ranking();
+
             for (StatusBarNotification[] resultset
                     : new StatusBarNotification[][] { active, dismissed }) {
                 for (StatusBarNotification sbn : resultset) {
+                    if (sbn.getUserId() != UserHandle.USER_ALL & sbn.getUserId() != currentUserId) {
+                        continue;
+                    }
+
+                    final Notification n = sbn.getNotification();
                     final HistoricalNotificationInfo info = new HistoricalNotificationInfo();
                     info.pkg = sbn.getPackageName();
                     info.user = sbn.getUserId();
-                    info.icon = loadIconDrawable(info.pkg, info.user, sbn.getNotification().icon);
+                    info.icon = loadIconDrawable(info.pkg, info.user, n.icon);
                     info.pkgicon = loadPackageIconDrawable(info.pkg, info.user);
                     info.pkgname = loadPackageName(info.pkg);
-                    if (sbn.getNotification().extras != null) {
-                        info.title = sbn.getNotification().extras.getString(
-                                Notification.EXTRA_TITLE);
-                        if (info.title == null || "".equals(info.title)) {
-                            info.title = sbn.getNotification().extras.getString(
-                                    Notification.EXTRA_TEXT);
-                        }
-                    }
-                    if (info.title == null || "".equals(info.title)) {
-                        info.title = sbn.getNotification().tickerText;
-                    }
-                    // still nothing? come on, give us something!
-                    if (info.title == null || "".equals(info.title)) {
-                        info.title = info.pkgname;
+                    info.title = getTitleString(n);
+                    if (TextUtils.isEmpty(info.title)) {
+                        info.title = getString(R.string.notification_log_no_title);
                     }
                     info.timestamp = sbn.getPostTime();
-                    info.priority = sbn.getNotification().priority;
-                    logd("   [%d] %s: %s", info.timestamp, info.pkg, info.title);
+                    info.priority = n.priority;
 
                     info.active = (resultset == active);
 
-                    if (info.user == UserHandle.USER_ALL
-                            || info.user == currentUserId) {
-                        list.add(info);
+                    final SpannableStringBuilder sb = new SpannableStringBuilder();
+                    final String delim = getString(R.string.notification_log_details_delimiter);
+                    sb.append(bold(getString(R.string.notification_log_details_package)))
+                            .append(delim)
+                            .append(info.pkg)
+                            .append("\n")
+                            .append(bold(getString(R.string.notification_log_details_key)))
+                            .append(delim)
+                            .append(sbn.getKey());
+                    sb.append("\n")
+                            .append(bold(getString(R.string.notification_log_details_icon)))
+                            .append(delim)
+                            .append(n.getSmallIcon().toString());
+                    if (!TextUtils.isEmpty(n.getGroup())) {
+                        sb.append("\n")
+                                .append(bold(getString(R.string.notification_log_details_group)))
+                                .append(delim)
+                                .append(n.getGroup());
+                        if (n.isGroupSummary()) {
+                            sb.append(bold(
+                                    getString(R.string.notification_log_details_group_summary)));
+                        }
                     }
+                    sb.append("\n")
+                            .append(bold(getString(R.string.notification_log_details_sound)))
+                            .append(delim);
+                    if (0 != (n.defaults & Notification.DEFAULT_SOUND)) {
+                        sb.append(getString(R.string.notification_log_details_default));
+                    } else if (n.sound != null) {
+                        sb.append(n.sound.toString());
+                    } else {
+                        sb.append(getString(R.string.notification_log_details_none));
+                    }
+                    sb.append("\n")
+                            .append(bold(getString(R.string.notification_log_details_vibrate)))
+                            .append(delim);
+                    if (0 != (n.defaults & Notification.DEFAULT_VIBRATE)) {
+                        sb.append(getString(R.string.notification_log_details_default));
+                    } else if (n.vibrate != null) {
+                        for (int vi=0;vi<n.vibrate.length;vi++) {
+                            if (vi > 0) sb.append(',');
+                            sb.append(String.valueOf(n.vibrate[vi]));
+                        }
+                    } else {
+                        sb.append(getString(R.string.notification_log_details_none));
+                    }
+                    sb.append("\n")
+                            .append(bold(getString(R.string.notification_log_details_visibility)))
+                            .append(delim)
+                            .append(Notification.visibilityToString(n.visibility));
+                    if (n.publicVersion != null) {
+                        sb.append("\n")
+                                .append(bold(getString(
+                                        R.string.notification_log_details_public_version)))
+                                .append(delim)
+                                .append(getTitleString(n.publicVersion));
+                    }
+                    sb.append("\n")
+                            .append(bold(getString(R.string.notification_log_details_priority)))
+                            .append(delim)
+                            .append(Notification.priorityToString(n.priority));
+                    if (mRanking != null && mRanking.getRanking(sbn.getKey(), rank)) {
+                        sb.append("\n")
+                                .append(bold(getString(
+                                        R.string.notification_log_details_importance)))
+                                .append(delim)
+                                .append(Ranking.importanceToString(rank.getImportance()));
+                        if (rank.getImportanceExplanation() != null) {
+                            sb.append("\n")
+                                    .append(bold(getString(
+                                            R.string.notification_log_details_explanation)))
+                                    .append(delim)
+                                    .append(rank.getImportanceExplanation());
+                        }
+                    }
+                    if (n.contentIntent != null) {
+                        sb.append("\n")
+                                .append(bold(getString(
+                                        R.string.notification_log_details_content_intent)))
+                                .append(delim)
+                                .append(formatPendingIntent(n.contentIntent));
+                    }
+                    if (n.deleteIntent != null) {
+                        sb.append("\n")
+                                .append(bold(getString(
+                                        R.string.notification_log_details_delete_intent)))
+                                .append(delim)
+                                .append(formatPendingIntent(n.deleteIntent));
+                    }
+                    if (n.fullScreenIntent != null) {
+                        sb.append("\n")
+                                .append(bold(getString(
+                                        R.string.notification_log_details_full_screen_intent)))
+                                .append(delim)
+                                .append(formatPendingIntent(n.fullScreenIntent));
+                    }
+                    if (n.actions != null && n.actions.length > 0) {
+                        sb.append("\n")
+                                .append(bold(getString(R.string.notification_log_details_actions)));
+                        for (int ai=0; ai<n.actions.length; ai++) {
+                            final Notification.Action action = n.actions[ai];
+                            sb.append("\n  ").append(String.valueOf(ai)).append(' ')
+                                    .append(bold(getString(
+                                            R.string.notification_log_details_title)))
+                                    .append(delim)
+                                    .append(action.title)
+                                    .append("\n    ")
+                                    .append(bold(getString(
+                                            R.string.notification_log_details_content_intent)))
+                                    .append(delim)
+                                    .append(formatPendingIntent(action.actionIntent));
+                            if (action.getRemoteInputs() != null) {
+                                sb.append(' ')
+                                        .append(bold(getString(
+                                                R.string.notification_log_details_remoteinput)))
+                                        .append(delim)
+                                        .append(String.valueOf(action.getRemoteInputs().length));
+                            }
+                        }
+                    }
+                    if (n.contentView != null) {
+                        sb.append("\n")
+                                .append(bold(getString(
+                                        R.string.notification_log_details_content_view)))
+                                .append(delim)
+                                .append(n.contentView.toString());
+                    }
+
+                    if (DUMP_EXTRAS) {
+                        if (n.extras != null && n.extras.size() > 0) {
+                            sb.append("\n")
+                                    .append(bold(getString(
+                                            R.string.notification_log_details_extras)));
+                            for (String extraKey : n.extras.keySet()) {
+                                String val = String.valueOf(n.extras.get(extraKey));
+                                if (val.length() > 100) val = val.substring(0, 100) + "...";
+                                sb.append("\n  ").append(extraKey).append(delim).append(val);
+                            }
+                        }
+                    }
+                    if (DUMP_PARCEL) {
+                        final Parcel p = Parcel.obtain();
+                        n.writeToParcel(p, 0);
+                        sb.append("\n")
+                                .append(bold(getString(R.string.notification_log_details_parcel)))
+                                .append(delim)
+                                .append(String.valueOf(p.dataPosition()))
+                                .append(' ')
+                                .append(bold(getString(R.string.notification_log_details_ashmem)))
+                                .append(delim)
+                                .append(String.valueOf(p.getBlobAshmemSize()))
+                                .append("\n");
+                    }
+
+                    info.extra = sb;
+
+                    logd("   [%d] %s: %s", info.timestamp, info.pkg, info.title);
+                    list.add(info);
                 }
             }
 
@@ -293,7 +489,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
         return null;
     }
 
-    private static class HistoricalNotificationPreference extends Preference {
+    private static class HistoricalNotificationPreference extends CopyablePreference {
         private final HistoricalNotificationInfo mInfo;
 
         public HistoricalNotificationPreference(Context context, HistoricalNotificationInfo info) {
@@ -304,27 +500,49 @@ public class NotificationStation extends SettingsPreferenceFragment {
 
         @Override
         public void onBindViewHolder(PreferenceViewHolder row) {
+            super.onBindViewHolder(row);
+
             if (mInfo.icon != null) {
-                ((ImageView) row.findViewById(android.R.id.icon)).setImageDrawable(mInfo.icon);
+                ((ImageView) row.findViewById(R.id.icon)).setImageDrawable(mInfo.icon);
             }
             if (mInfo.pkgicon != null) {
                 ((ImageView) row.findViewById(R.id.pkgicon)).setImageDrawable(mInfo.pkgicon);
             }
 
             ((DateTimeView) row.findViewById(R.id.timestamp)).setTime(mInfo.timestamp);
-            ((TextView) row.findViewById(android.R.id.title)).setText(mInfo.title);
+            ((TextView) row.findViewById(R.id.title)).setText(mInfo.title);
             ((TextView) row.findViewById(R.id.pkgname)).setText(mInfo.pkgname);
 
-            row.findViewById(R.id.extra).setVisibility(View.GONE);
+            final TextView extra = (TextView) row.findViewById(R.id.extra);
+            extra.setText(mInfo.extra);
+            extra.setVisibility(View.GONE);
+
+            row.itemView.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            extra.setVisibility(extra.getVisibility() == View.VISIBLE
+                                    ? View.GONE : View.VISIBLE);
+                        }
+                    });
+
             row.itemView.setAlpha(mInfo.active ? 1.0f : 0.5f);
         }
 
         @Override
+        public CharSequence getCopyableText() {
+            return new SpannableStringBuilder(mInfo.title)
+                    .append(" [").append(new Date(mInfo.timestamp).toString())
+                    .append("]\n").append(mInfo.pkgname)
+                    .append("\n").append(mInfo.extra);
+        }
+
+        @Override
         public void performClick() {
-            Intent intent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                    Uri.fromParts("package", mInfo.pkg, null));
-            intent.setComponent(intent.resolveActivity(getContext().getPackageManager()));
-            getContext().startActivity(intent);
+//            Intent intent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+//                    Uri.fromParts("package", mInfo.pkg, null));
+//            intent.setComponent(intent.resolveActivity(getContext().getPackageManager()));
+//            getContext().startActivity(intent);
         }
     }
 }
