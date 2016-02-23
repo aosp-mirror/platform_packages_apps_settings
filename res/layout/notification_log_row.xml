@@ -27,11 +27,11 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@*android:dimen/status_bar_icon_size"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="6dp"
         >
 
         <ImageView
-            android:id="@android:id/icon"
+            android:id="@+id/icon"
             android:layout_width="@*android:dimen/status_bar_icon_size"
             android:layout_height="@*android:dimen/status_bar_icon_size"
             android:layout_centerVertical="true"
@@ -40,17 +40,18 @@
             android:layout_marginEnd="8dp"
             android:contentDescription="@null"
             android:adjustViewBounds="true"
+            android:tint="?android:attr/textColorPrimary"
             android:maxHeight="@*android:dimen/status_bar_icon_size"
             android:maxWidth="@*android:dimen/status_bar_icon_size"
             android:scaleType="fitCenter" />
 
         <TextView
-            android:id="@android:id/title"
+            android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toStartOf="@+id/timestamp"
-            android:layout_toEndOf="@android:id/icon"
+            android:layout_toEndOf="@id/icon"
             android:ellipsize="end"
             android:singleLine="true"
             android:textColor="?android:attr/textColorPrimary"
@@ -75,24 +76,12 @@
             />
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/extra"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginStart="30dp"
-        android:ellipsize="end"
-        android:singleLine="true"
-        android:textColor="?android:attr/textColorPrimary"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textAlignment="viewStart"
-        />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@*android:dimen/status_bar_icon_size"
         android:orientation="horizontal"
         android:layout_marginStart="30dp"
+        android:layout_marginBottom="6dp"
         >
 
         <ImageView
@@ -120,4 +109,19 @@
             />
 
     </LinearLayout>
+
+    <TextView
+            android:id="@+id/extra"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="30dp"
+            android:layout_marginBottom="6dp"
+            android:singleLine="false"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="10sp"
+            android:fontFamily="monospace"
+            android:textAlignment="viewStart"
+    />
+
 </LinearLayout>
