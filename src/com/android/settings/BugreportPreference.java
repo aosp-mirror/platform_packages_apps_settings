@@ -32,6 +32,9 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
+
 public class BugreportPreference extends CustomDialogPreference {
 
     private static final String TAG = "BugreportPreference";
@@ -107,6 +110,18 @@ public class BugreportPreference extends CustomDialogPreference {
 
     private void takeBugreport(int bugreportType) {
         try {
+            switch (bugreportType) {
+                case ActivityManager.BUGREPORT_OPTION_FULL:
+                    MetricsLogger.action(getDialog().getContext(),
+                            MetricsEvent.ACTION_BUGREPORT_FROM_SETTINGS_FULL);
+                    break;
+                case ActivityManager.BUGREPORT_OPTION_INTERACTIVE:
+                    MetricsLogger.action(getDialog().getContext(),
+                            MetricsEvent.ACTION_BUGREPORT_FROM_SETTINGS_INTERACTIVE);
+                    break;
+                default:
+                    Log.w(TAG, "Unknown bugreportType: " + bugreportType);
+            }
             ActivityManagerNative.getDefault().requestBugReport(bugreportType);
         } catch (RemoteException e) {
             Log.e(TAG, "error taking bugreport (bugreportType=" + bugreportType + ")", e);
