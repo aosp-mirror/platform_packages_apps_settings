@@ -18,11 +18,10 @@
                   xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
                   android:title="@string/security_settings_title">
 
-    <PreferenceScreen
+    <SwitchPreference
         android:key="unification"
         android:title="@string/lock_settings_profile_unification_title"
         android:summary="@string/lock_settings_profile_unification_summary"
-        settings:keywords="@string/keywords_unification"
-        android:persistent="false"/>
+        settings:keywords="@string/keywords_unification"/>
 
 </PreferenceScreen>
