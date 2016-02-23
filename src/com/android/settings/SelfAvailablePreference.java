@@ -21,7 +21,7 @@ import android.content.Context;
 /**
  * Interface for classes whose instances can provide the availability of the preference.
  */
-public interface PreferenceAvailabilityProvider {
+public interface SelfAvailablePreference {
     /**
      * @return the availability of the preference. Please make sure the availability in managed
      * profile is taken into account.

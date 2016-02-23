@@ -21,16 +21,24 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
-import android.os.UserHandle;
+import android.os.Handler;
+import android.text.TextUtils;
 import android.util.AttributeSet;
-
+import android.util.Log;
+import com.android.internal.content.PackageMonitor;
 import com.android.settings.AppListPreference;
-import com.android.settings.PreferenceAvailabilityProvider;
+import com.android.settings.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DefaultBrowserPreference extends AppListPreference {
+
+    private static final String TAG = "DefaultBrowserPref";
+
+    private static final long DELAY_UPDATE_BROWSER_MILLIS = 500;
+
+    private final Handler mHandler = new Handler();
 
     final private PackageManager mPm;
 
@@ -41,10 +49,68 @@ public class DefaultBrowserPreference extends AppListPreference {
         refreshBrowserApps();
     }
 
+    @Override
+    public void onAttached() {
+        super.onAttached();
+        updateDefaultBrowserPreference();
+        mPackageMonitor.register(getContext(), getContext().getMainLooper(), false);
+    }
+
+    @Override
+    public void onDetached() {
+        mPackageMonitor.unregister();
+        super.onDetached();
+    }
+
+    @Override
+    protected boolean persistString(String newValue) {
+
+        if (newValue == null) {
+            return false;
+        }
+        final CharSequence packageName = (CharSequence) newValue;
+        if (TextUtils.isEmpty(packageName)) {
+            return false;
+        }
+        boolean result = mPm.setDefaultBrowserPackageNameAsUser(
+                packageName.toString(), mUserId);
+        if (result) {
+            setSummary("%s");
+        }
+        return result && super.persistString(newValue);
+    }
+
     public void refreshBrowserApps() {
         List<String> browsers = resolveBrowserApps();
 
         setPackageNames(browsers.toArray(new String[browsers.size()]), null);
+    }
+
+    private void updateDefaultBrowserPreference() {
+        refreshBrowserApps();
+
+        final PackageManager pm = getContext().getPackageManager();
+
+        String packageName = pm.getDefaultBrowserPackageNameAsUser(mUserId);
+        if (!TextUtils.isEmpty(packageName)) {
+            // Check if the default Browser package is still there
+            Intent intent = new Intent();
+            intent.setPackage(packageName);
+            intent.setAction(Intent.ACTION_VIEW);
+            intent.addCategory(Intent.CATEGORY_BROWSABLE);
+            intent.setData(Uri.parse("http:"));
+
+            ResolveInfo info = mPm.resolveActivityAsUser(intent, 0, mUserId);
+            if (info != null) {
+                setValue(packageName);
+                setSummary("%s");
+            } else {
+                setSummary(R.string.default_browser_title_none);
+            }
+        } else {
+            setSummary(R.string.default_browser_title_none);
+            Log.d(TAG, "Cannot set empty default Browser value!");
+        }
     }
 
     private List<String> resolveBrowserApps() {
@@ -58,7 +124,7 @@ public class DefaultBrowserPreference extends AppListPreference {
 
         // Resolve that intent and check that the handleAllWebDataURI boolean is set
         List<ResolveInfo> list = mPm.queryIntentActivitiesAsUser(intent, PackageManager.MATCH_ALL,
-                UserHandle.myUserId());
+                mUserId);
 
         final int count = list.size();
         for (int i=0; i<count; i++) {
@@ -74,10 +140,36 @@ public class DefaultBrowserPreference extends AppListPreference {
         return result;
     }
 
-    public static class AvailabilityProvider implements PreferenceAvailabilityProvider {
+    private final Runnable mUpdateRunnable = new Runnable() {
         @Override
-        public boolean isAvailable(Context context) {
-            return true;
+        public void run() {
+            updateDefaultBrowserPreference();
         }
-    }
+    };
+
+    private final PackageMonitor mPackageMonitor = new PackageMonitor() {
+        @Override
+        public void onPackageAdded(String packageName, int uid) {
+            sendUpdate();
+        }
+
+        @Override
+        public void onPackageAppeared(String packageName, int reason) {
+            sendUpdate();
+        }
+
+        @Override
+        public void onPackageDisappeared(String packageName, int reason) {
+            sendUpdate();
+        }
+
+        @Override
+        public void onPackageRemoved(String packageName, int uid) {
+            sendUpdate();
+        }
+
+        private void sendUpdate() {
+            mHandler.postDelayed(mUpdateRunnable, DELAY_UPDATE_BROWSER_MILLIS);
+        }
+    };
 }

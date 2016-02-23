@@ -24,16 +24,13 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.AsyncTask;
-import android.os.UserManager;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.AttributeSet;
-
 import com.android.settings.AppListPreference;
-import com.android.settings.PreferenceAvailabilityProvider;
-import com.android.settings.Utils;
+import com.android.settings.SelfAvailablePreference;
 
 import java.util.List;
 import java.util.Objects;
@@ -42,7 +39,8 @@ import java.util.Set;
 /**
  * A preference for choosing the default emergency app
  */
-public class DefaultEmergencyPreference extends AppListPreference {
+public class DefaultEmergencyPreference extends AppListPreference
+        implements SelfAvailablePreference {
 
     private final ContentResolver mContentResolver;
 
@@ -144,12 +142,8 @@ public class DefaultEmergencyPreference extends AppListPreference {
                 && (info.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0;
     }
 
-    public static class AvailabilityProvider implements PreferenceAvailabilityProvider {
-        @Override
-        public boolean isAvailable(Context context) {
-            return isCapable(context)
-                    && context.getPackageManager().resolveActivity(QUERY_INTENT, 0) != null
-                    && !Utils.isManagedProfile(UserManager.get(context));
-        }
+    public boolean isAvailable(Context context) {
+        return isCapable(context)
+                && context.getPackageManager().resolveActivity(QUERY_INTENT, 0) != null;
     }
 }
