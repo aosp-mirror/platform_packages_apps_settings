@@ -66,9 +66,9 @@ public class FingerprintEnrollIntroduction extends FingerprintEnrollBase
                 (SetupWizardItemsLayout) findViewById(R.id.setup_wizard_layout);
         layout.getListView().setOnItemClickListener(this);
         final ItemAdapter adapter = (ItemAdapter) layout.getAdapter();
-        Item item = (Item) adapter.findItemById(R.id.fingerprint_introduction_message_warning);
+        Item item = (Item) adapter.findItemById(R.id.fingerprint_introduction_message);
         item.setTitle(LearnMoreSpan.linkify(
-                getText(R.string.security_settings_fingerprint_enroll_introduction_message_warning),
+                getText(R.string.security_settings_fingerprint_enroll_introduction_message),
                 getString(R.string.help_url_fingerprint)));
         updatePasswordQuality();
     }
