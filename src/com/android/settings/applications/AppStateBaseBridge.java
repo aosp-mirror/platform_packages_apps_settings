@@ -43,7 +43,8 @@ public abstract class AppStateBaseBridge implements ApplicationsState.Callbacks 
         // Running on the same background thread as the ApplicationsState lets
         // us run in the background and make sure they aren't doing updates at
         // the same time as us as well.
-        mHandler = new BackgroundHandler(mAppState.getBackgroundLooper());
+        mHandler = new BackgroundHandler(mAppState != null ? mAppState.getBackgroundLooper()
+                : Looper.getMainLooper());
         mMainHandler = new MainHandler();
     }
 

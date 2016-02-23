@@ -16,6 +16,7 @@
 
 package com.android.settings.applications;
 
+import android.Manifest.permission;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
@@ -51,6 +52,8 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
+import android.support.v7.preference.PreferenceCategory;
+import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.text.format.Formatter;
@@ -285,6 +288,7 @@ public class InstalledAppDetails extends AppInfoBase
 
         setHasOptionsMenu(true);
         addPreferencesFromResource(R.xml.installed_app_details);
+        addDynamicPrefs();
 
         if (Utils.isBandwidthControlEnabled()) {
             INetworkStatsService statsService = INetworkStatsService.Stub.asInterface(
@@ -321,6 +325,7 @@ public class InstalledAppDetails extends AppInfoBase
         }
         new BatteryUpdater().execute();
         new MemoryUpdater().execute();
+        updateDynamicPrefs();
     }
 
     @Override
@@ -804,6 +809,119 @@ public class InstalledAppDetails extends AppInfoBase
             return false;
         }
         return true;
+    }
+
+    private void addDynamicPrefs() {
+        if (Utils.isManagedProfile(UserManager.get(getContext()))) {
+            return;
+        }
+        final PreferenceScreen screen = getPreferenceScreen();
+        if (DefaultHomePreference.hasHomePreference(mPackageName, getContext())) {
+            screen.addPreference(new ShortcutPreference(getPrefContext(),
+                    AdvancedAppSettings.class, "default_home", R.string.home_app,
+                    R.string.configure_apps));
+        }
+        if (DefaultBrowserPreference.hasBrowserPreference(mPackageName, getContext())) {
+            screen.addPreference(new ShortcutPreference(getPrefContext(),
+                    AdvancedAppSettings.class, "default_browser", R.string.default_browser_title,
+                    R.string.configure_apps));
+        }
+        if (DefaultPhonePreference.hasPhonePreference(mPackageName, getContext())) {
+            screen.addPreference(new ShortcutPreference(getPrefContext(),
+                    AdvancedAppSettings.class, "default_phone_app", R.string.default_phone_title,
+                    R.string.configure_apps));
+        }
+        if (DefaultEmergencyPreference.hasEmergencyPreference(mPackageName, getContext())) {
+            screen.addPreference(new ShortcutPreference(getPrefContext(),
+                    AdvancedAppSettings.class, "default_emergency_app",
+                    R.string.default_emergency_app, R.string.configure_apps));
+        }
+        if (DefaultSmsPreference.hasSmsPreference(mPackageName, getContext())) {
+            screen.addPreference(new ShortcutPreference(getPrefContext(),
+                    AdvancedAppSettings.class, "default_sms_app", R.string.sms_application_title,
+                    R.string.configure_apps));
+        }
+        boolean hasDrawOverOtherApps = hasPermission(permission.SYSTEM_ALERT_WINDOW);
+        boolean hasWriteSettings = hasPermission(permission.WRITE_SETTINGS);
+        if (hasDrawOverOtherApps || hasWriteSettings) {
+            PreferenceCategory category = new PreferenceCategory(getPrefContext());
+            category.setTitle(R.string.advanced_apps);
+            screen.addPreference(category);
+
+            if (hasDrawOverOtherApps) {
+                Preference pref = new Preference(getPrefContext());
+                pref.setTitle(R.string.draw_overlay);
+                pref.setKey("system_alert_window");
+                pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+                    @Override
+                    public boolean onPreferenceClick(Preference preference) {
+                        startAppInfoFragment(DrawOverlayDetails.class,
+                                getString(R.string.draw_overlay));
+                        return true;
+                    }
+                });
+                category.addPreference(pref);
+            }
+            if (hasWriteSettings) {
+                Preference pref = new Preference(getPrefContext());
+                pref.setTitle(R.string.write_settings);
+                pref.setKey("write_settings_apps");
+                pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+                    @Override
+                    public boolean onPreferenceClick(Preference preference) {
+                        startAppInfoFragment(WriteSettingsDetails.class,
+                                getString(R.string.write_settings));
+                        return true;
+                    }
+                });
+                category.addPreference(pref);
+            }
+        }
+    }
+
+    private boolean hasPermission(String permission) {
+        for (int i = 0; i < mPackageInfo.requestedPermissions.length; i++) {
+            if (mPackageInfo.requestedPermissions[i].equals(permission)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void updateDynamicPrefs() {
+        Preference pref = findPreference("default_home");
+        if (pref != null) {
+            pref.setSummary(DefaultHomePreference.isHomeDefault(mPackageName, getContext())
+                    ? R.string.yes : R.string.no);
+        }
+        pref = findPreference("default_browser");
+        if (pref != null) {
+            pref.setSummary(DefaultBrowserPreference.isBrowserDefault(mPackageName, getContext())
+                    ? R.string.yes : R.string.no);
+        }
+        pref = findPreference("default_phone_app");
+        if (pref != null) {
+            pref.setSummary(DefaultPhonePreference.isPhoneDefault(mPackageName, getContext())
+                    ? R.string.yes : R.string.no);
+        }
+        pref = findPreference("default_emergency_app");
+        if (pref != null) {
+            pref.setSummary(DefaultEmergencyPreference.isEmergencyDefault(mPackageName,
+                    getContext()) ? R.string.yes : R.string.no);
+        }
+        pref = findPreference("default_sms_app");
+        if (pref != null) {
+            pref.setSummary(DefaultSmsPreference.isSmsDefault(mPackageName, getContext())
+                    ? R.string.yes : R.string.no);
+        }
+        pref = findPreference("system_alert_window");
+        if (pref != null) {
+            pref.setSummary(DrawOverlayDetails.getSummary(getContext(), mAppEntry));
+        }
+        pref = findPreference("write_settings_apps");
+        if (pref != null) {
+            pref.setSummary(WriteSettingsDetails.getSummary(getContext(), mAppEntry));
+        }
     }
 
     public static void setupAppSnippet(View appSnippet, CharSequence label, Drawable icon,

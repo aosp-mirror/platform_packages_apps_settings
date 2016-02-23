@@ -17,6 +17,7 @@
 package com.android.settings.applications;
 
 import android.content.Context;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.telecom.DefaultDialerManager;
 import android.telephony.TelephonyManager;
@@ -73,5 +74,17 @@ public class DefaultPhonePreference extends AppListPreference implements SelfAva
         final UserManager um =
                 (UserManager) context.getSystemService(Context.USER_SERVICE);
         return !um.hasUserRestriction(UserManager.DISALLOW_OUTGOING_CALLS);
+    }
+
+    public static boolean hasPhonePreference(String pkg, Context context) {
+        List<String> dialerPackages =
+                DefaultDialerManager.getInstalledDialerApplications(context, UserHandle.myUserId());
+        return dialerPackages.contains(pkg);
+    }
+
+    public static boolean isPhoneDefault(String pkg, Context context) {
+        String def = DefaultDialerManager.getDefaultDialerApplication(context,
+                UserHandle.myUserId());
+        return def != null && def.equals(pkg);
     }
 }

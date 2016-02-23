@@ -156,13 +156,17 @@ public class DrawOverlayDetails extends AppInfoWithHeader implements OnPreferenc
     }
 
     public static CharSequence getSummary(Context context, AppEntry entry) {
-        if (entry.extraInfo != null) {
-            return getSummary(context, new OverlayState((PermissionState)entry.extraInfo));
+        OverlayState state;
+        if (entry.extraInfo instanceof OverlayState) {
+            state = (OverlayState) entry.extraInfo;
+        } else if (entry.extraInfo instanceof PermissionState) {
+            state = new OverlayState((PermissionState) entry.extraInfo);
+        } else {
+            state = new AppStateOverlayBridge(context, null, null).getOverlayInfo(
+                    entry.info.packageName, entry.info.uid);
         }
 
-        // fallback if for whatever reason entry.extrainfo is null - the result
-        // may be less accurate
-        return getSummary(context, entry.info.packageName);
+        return getSummary(context, state);
     }
 
     public static CharSequence getSummary(Context context, OverlayState overlayState) {

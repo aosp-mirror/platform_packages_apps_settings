@@ -77,4 +77,20 @@ public class DefaultSmsPreference extends AppListPreference implements SelfAvail
                 (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         return !isRestrictedUser && tm.isSmsCapable();
     }
+
+    public static boolean hasSmsPreference(String pkg, Context context) {
+        Collection<SmsApplicationData> smsApplications =
+                SmsApplication.getApplicationCollection(context);
+        for (SmsApplicationData data : smsApplications) {
+            if (data.mPackageName.equals(pkg)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean isSmsDefault(String pkg, Context context) {
+        ComponentName appName = SmsApplication.getDefaultSmsApplication(context, true);
+        return appName != null && appName.getPackageName().equals(pkg);
+    }
 }

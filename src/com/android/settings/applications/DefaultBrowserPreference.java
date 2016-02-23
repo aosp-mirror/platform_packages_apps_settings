@@ -22,6 +22,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Handler;
+import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -172,4 +173,21 @@ public class DefaultBrowserPreference extends AppListPreference {
             mHandler.postDelayed(mUpdateRunnable, DELAY_UPDATE_BROWSER_MILLIS);
         }
     };
+
+    public static boolean hasBrowserPreference(String pkg, Context context) {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
+        intent.addCategory(Intent.CATEGORY_BROWSABLE);
+        intent.setData(Uri.parse("http:"));
+        intent.setPackage(pkg);
+        final List<ResolveInfo> resolveInfos =
+                context.getPackageManager().queryIntentActivities(intent, 0);
+        return resolveInfos != null && resolveInfos.size() != 0;
+    }
+
+    public static boolean isBrowserDefault(String pkg, Context context) {
+        String defaultPackage = context.getPackageManager()
+                .getDefaultBrowserPackageNameAsUser(UserHandle.myUserId());
+        return defaultPackage != null && defaultPackage.equals(pkg);
+    }
 }

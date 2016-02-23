@@ -16,6 +16,7 @@
 
 package com.android.settings.applications;
 
+import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -29,6 +30,7 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.AttributeSet;
+import com.android.internal.telephony.SmsApplication;
 import com.android.settings.AppListPreference;
 import com.android.settings.SelfAvailablePreference;
 
@@ -145,5 +147,19 @@ public class DefaultEmergencyPreference extends AppListPreference
     public boolean isAvailable(Context context) {
         return isCapable(context)
                 && context.getPackageManager().resolveActivity(QUERY_INTENT, 0) != null;
+    }
+
+    public static boolean hasEmergencyPreference(String pkg, Context context) {
+        Intent i = new Intent(QUERY_INTENT);
+        i.setPackage(pkg);
+        final List<ResolveInfo> resolveInfos =
+                context.getPackageManager().queryIntentActivities(i, 0);
+        return resolveInfos != null && resolveInfos.size() != 0;
+    }
+
+    public static boolean isEmergencyDefault(String pkg, Context context) {
+        String defaultPackage = Settings.Secure.getString(context.getContentResolver(),
+                Settings.Secure.EMERGENCY_ASSISTANCE_APPLICATION);
+        return defaultPackage != null && defaultPackage.equals(pkg);
     }
 }
