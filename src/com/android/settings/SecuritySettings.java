@@ -19,6 +19,9 @@ package com.android.settings;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.app.FragmentManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -85,14 +88,20 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
     // Lock Settings
     private static final String KEY_UNLOCK_SET_OR_CHANGE = "unlock_set_or_change";
-    private static final String KEY_UNLOCK_SET_OR_CHANGE_PROFILE = "profile_challenge";
+    private static final String KEY_UNLOCK_SET_OR_CHANGE_PROFILE = "unlock_set_or_change_profile";
+    private static final String KEY_VISIBLE_PATTERN_PROFILE = "visiblepattern_profile";
     private static final String KEY_SECURITY_CATEGORY = "security_category";
     private static final String KEY_DEVICE_ADMIN_CATEGORY = "device_admin_category";
     private static final String KEY_ADVANCED_SECURITY = "advanced_security";
     private static final String KEY_MANAGE_TRUST_AGENTS = "manage_trust_agents";
+    private static final String KEY_UNIFICATION = "unification";
 
     private static final int SET_OR_CHANGE_LOCK_METHOD_REQUEST = 123;
     private static final int CHANGE_TRUST_AGENT_SETTINGS = 126;
+    private static final int SET_OR_CHANGE_LOCK_METHOD_REQUEST_PROFILE = 127;
+    private static final int UNIFY_LOCK_CONFIRM_DEVICE_REQUEST = 128;
+    private static final int UNIFY_LOCK_CONFIRM_PROFILE_REQUEST = 129;
+    private static final String TAG_UNIFICATION_DIALOG = "unification_dialog";
 
     // Misc Settings
     private static final String KEY_SIM_LOCK = "sim_lock";
@@ -122,6 +131,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private ChooseLockSettingsHelper mChooseLockSettingsHelper;
     private LockPatternUtils mLockPatternUtils;
 
+    private SwitchPreference mVisiblePatternProfile;
+
     private SwitchPreference mShowPassword;
 
     private KeyStore mKeyStore;
@@ -135,6 +146,9 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private Intent mTrustAgentClickIntent;
 
     private int mProfileChallengeUserId;
+
+    private String mCurrentDevicePassword;
+    private String mCurrentProfilePassword;
 
     @Override
     protected int getMetricsCategory() {
@@ -162,27 +176,33 @@ public class SecuritySettings extends SettingsPreferenceFragment
     }
 
     private static int getResIdForLockUnlockScreen(Context context,
-            LockPatternUtils lockPatternUtils) {
+            LockPatternUtils lockPatternUtils, int userId) {
+        final boolean isMyUser = userId == MY_USER_ID;
         int resid = 0;
-        if (!lockPatternUtils.isSecure(MY_USER_ID)) {
-            if (lockPatternUtils.isLockScreenDisabled(MY_USER_ID)) {
+        if (!lockPatternUtils.isSecure(userId)) {
+            if (!isMyUser) {
+                resid = R.xml.security_settings_lockscreen_profile;
+            } else if (lockPatternUtils.isLockScreenDisabled(userId)) {
                 resid = R.xml.security_settings_lockscreen;
             } else {
                 resid = R.xml.security_settings_chooser;
             }
         } else {
-            switch (lockPatternUtils.getKeyguardStoredPasswordQuality(MY_USER_ID)) {
+            switch (lockPatternUtils.getKeyguardStoredPasswordQuality(userId)) {
                 case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
-                    resid = R.xml.security_settings_pattern;
+                    resid = isMyUser ? R.xml.security_settings_pattern
+                            : R.xml.security_settings_pattern_profile;
                     break;
                 case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
                 case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX:
-                    resid = R.xml.security_settings_pin;
+                    resid = isMyUser ? R.xml.security_settings_pin
+                            : R.xml.security_settings_pin_profile;
                     break;
                 case DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC:
                 case DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC:
                 case DevicePolicyManager.PASSWORD_QUALITY_COMPLEX:
-                    resid = R.xml.security_settings_password;
+                    resid = isMyUser ? R.xml.security_settings_password
+                            : R.xml.security_settings_password_profile;
                     break;
             }
         }
@@ -204,20 +224,24 @@ public class SecuritySettings extends SettingsPreferenceFragment
         root = getPreferenceScreen();
 
         // Add options for lock/unlock screen
-        final int resid = getResIdForLockUnlockScreen(getActivity(), mLockPatternUtils);
+        final int resid = getResIdForLockUnlockScreen(getActivity(), mLockPatternUtils, MY_USER_ID);
         addPreferencesFromResource(resid);
 
-        List<UserInfo> profiles = mUm.getProfiles(UserHandle.myUserId());
-        int numProfiles = profiles.size();
-        if (numProfiles > 1) {
-            for (int i = 0; i < numProfiles; ++i) {
-                UserInfo profile = profiles.get(i);
-                if (profile.id != UserHandle.myUserId()) {
-                    mProfileChallengeUserId = profile.id;
-                }
-            }
-            if (mLockPatternUtils.isSeparateProfileChallengeAllowed(mProfileChallengeUserId)) {
-                addPreferencesFromResource(R.xml.security_settings_profile);
+        mProfileChallengeUserId = getManagedProfileId(mUm);
+        if (mProfileChallengeUserId != UserHandle.USER_NULL
+                && mLockPatternUtils.isSeparateProfileChallengeAllowed(mProfileChallengeUserId)) {
+            addPreferencesFromResource(R.xml.security_settings_profile);
+            final int profileResid = getResIdForLockUnlockScreen(
+                    getActivity(), mLockPatternUtils, mProfileChallengeUserId);
+            addPreferencesFromResource(profileResid);
+            maybeAddFingerprintPreference(root, mProfileChallengeUserId);
+            if (mLockPatternUtils.isSeparateProfileChallengeEnabled(mProfileChallengeUserId)) {
+                maybeAddUnificationPreference();
+            } else {
+                Preference lockPreference = root.findPreference(KEY_UNLOCK_SET_OR_CHANGE_PROFILE);
+                String summary = getContext().getString(
+                        R.string.lock_settings_profile_unified_summary);
+                lockPreference.setSummary(summary);
             }
         }
 
@@ -243,9 +267,12 @@ public class SecuritySettings extends SettingsPreferenceFragment
         PreferenceGroup securityCategory = (PreferenceGroup)
                 root.findPreference(KEY_SECURITY_CATEGORY);
         if (securityCategory != null) {
-            maybeAddFingerprintPreference(securityCategory);
+            maybeAddFingerprintPreference(securityCategory, UserHandle.myUserId());
             addTrustAgentSettings(securityCategory);
         }
+
+        mVisiblePatternProfile =
+                (SwitchPreference) root.findPreference(KEY_VISIBLE_PATTERN_PROFILE);
 
         // Append the rest of the settings
         addPreferencesFromResource(R.xml.security_settings_misc);
@@ -350,12 +377,21 @@ public class SecuritySettings extends SettingsPreferenceFragment
         return root;
     }
 
-    private void maybeAddFingerprintPreference(PreferenceGroup securityCategory) {
+    private void maybeAddFingerprintPreference(PreferenceGroup securityCategory, int userId) {
         Preference fingerprintPreference =
                 FingerprintSettings.getFingerprintPreferenceForUser(
-                        securityCategory.getContext(), UserHandle.myUserId());
+                        securityCategory.getContext(), userId);
         if (fingerprintPreference != null) {
             securityCategory.addPreference(fingerprintPreference);
+        }
+    }
+
+    private void maybeAddUnificationPreference() {
+        if (mLockPatternUtils.getKeyguardStoredPasswordQuality(mProfileChallengeUserId)
+                >= DevicePolicyManager.PASSWORD_QUALITY_SOMETHING
+                && mLockPatternUtils.isSeparateProfileChallengeAllowedToUnify(
+                        mProfileChallengeUserId)) {
+            addPreferencesFromResource(R.xml.security_settings_unification);
         }
     }
 
@@ -525,6 +561,11 @@ public class SecuritySettings extends SettingsPreferenceFragment
         createPreferenceHierarchy();
 
         final LockPatternUtils lockPatternUtils = mChooseLockSettingsHelper.utils();
+        if (mVisiblePatternProfile != null) {
+            mVisiblePatternProfile.setChecked(lockPatternUtils.isVisiblePatternEnabled(
+                    mProfileChallengeUserId));
+        }
+
         if (mShowPassword != null) {
             mShowPassword.setChecked(Settings.System.getInt(getContentResolver(),
                     Settings.System.TEXT_SHOW_PASSWORD, 1) != 0);
@@ -544,8 +585,9 @@ public class SecuritySettings extends SettingsPreferenceFragment
         } else if (KEY_UNLOCK_SET_OR_CHANGE_PROFILE.equals(key)) {
             Bundle extras = new Bundle();
             extras.putInt(Intent.EXTRA_USER_ID, mProfileChallengeUserId);
-            startFragment(this, "com.android.settings.ProfileChallengePreferenceFragment",
-                    R.string.lock_settings_profile_label, SET_OR_CHANGE_LOCK_METHOD_REQUEST, extras);
+            startFragment(this, "com.android.settings.ChooseLockGeneric$ChooseLockGenericFragment",
+                    R.string.lock_settings_picker_title_profile,
+                    SET_OR_CHANGE_LOCK_METHOD_REQUEST_PROFILE, extras);
         } else if (KEY_TRUST_AGENT.equals(key)) {
             ChooseLockSettingsHelper helper =
                     new ChooseLockSettingsHelper(this.getActivity(), this);
@@ -557,6 +599,11 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 startActivity(mTrustAgentClickIntent);
                 mTrustAgentClickIntent = null;
             }
+        } else if (KEY_UNIFICATION.equals(key)) {
+            UnificationConfirmationDialog dialog =
+                    UnificationConfirmationDialog.newIntance(mProfileChallengeUserId);
+            dialog.show(getChildFragmentManager(), TAG_UNIFICATION_DIALOG);
+            return true;
         } else {
             // If we didn't handle it, let preferences handle it.
             return super.onPreferenceTreeClick(preference);
@@ -576,8 +623,61 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 mTrustAgentClickIntent = null;
             }
             return;
+        } else if (requestCode == UNIFY_LOCK_CONFIRM_DEVICE_REQUEST
+                && resultCode == Activity.RESULT_OK) {
+            mCurrentDevicePassword =
+                    data.getStringExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
+            launchConfirmProfileLockForUnification();
+            return;
+        } else if (requestCode == UNIFY_LOCK_CONFIRM_PROFILE_REQUEST
+                && resultCode == Activity.RESULT_OK) {
+            mCurrentProfilePassword =
+                    data.getStringExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
+            unifyLocks();
+            return;
         }
         createPreferenceHierarchy();
+    }
+
+    private void launchConfirmDeviceLockForUnification() {
+        final String title = getActivity().getString(
+                R.string.lock_settings_profile_screen_lock_title);
+        final ChooseLockSettingsHelper helper =
+                new ChooseLockSettingsHelper(getActivity(), this);
+        if (!helper.launchConfirmationActivity(
+                UNIFY_LOCK_CONFIRM_DEVICE_REQUEST, title, true, UserHandle.myUserId())) {
+            launchConfirmProfileLockForUnification();
+        }
+    }
+
+    private void launchConfirmProfileLockForUnification() {
+        final String title = getActivity().getString(
+                R.string.lock_settings_profile_screen_lock_title);
+        final ChooseLockSettingsHelper helper =
+                new ChooseLockSettingsHelper(getActivity(), this);
+        if (!helper.launchConfirmationActivity(
+                UNIFY_LOCK_CONFIRM_PROFILE_REQUEST, title, true, mProfileChallengeUserId)) {
+            unifyLocks();
+            createPreferenceHierarchy();
+        }
+    }
+
+    private void unifyLocks() {
+        int profileQuality =
+                mLockPatternUtils.getKeyguardStoredPasswordQuality(mProfileChallengeUserId);
+        mLockPatternUtils.clearLock(mProfileChallengeUserId);
+        mLockPatternUtils.setSeparateProfileChallengeEnabled(mProfileChallengeUserId, false);
+        if (profileQuality == DevicePolicyManager.PASSWORD_QUALITY_SOMETHING) {
+            mLockPatternUtils.saveLockPattern(
+                    LockPatternUtils.stringToPattern(mCurrentProfilePassword),
+                    mCurrentDevicePassword, UserHandle.myUserId());
+        } else {
+            mLockPatternUtils.saveLockPassword(
+                    mCurrentProfilePassword, mCurrentDevicePassword,
+                    profileQuality, UserHandle.myUserId());
+        }
+        mCurrentDevicePassword = null;
+        mCurrentProfilePassword = null;
     }
 
     @Override
@@ -585,7 +685,9 @@ public class SecuritySettings extends SettingsPreferenceFragment
         boolean result = true;
         final String key = preference.getKey();
         final LockPatternUtils lockPatternUtils = mChooseLockSettingsHelper.utils();
-        if (KEY_SHOW_PASSWORD.equals(key)) {
+        if (KEY_VISIBLE_PATTERN_PROFILE.equals(key)) {
+            lockPatternUtils.setVisiblePatternEnabled((Boolean) value, mProfileChallengeUserId);
+        } else if (KEY_SHOW_PASSWORD.equals(key)) {
             Settings.System.putInt(getContentResolver(), Settings.System.TEXT_SHOW_PASSWORD,
                     ((Boolean) value) ? 1 : 0);
             lockPatternUtils.setVisiblePasswordEnabled((Boolean) value, MY_USER_ID);
@@ -607,6 +709,21 @@ public class SecuritySettings extends SettingsPreferenceFragment
         return R.string.help_url_security;
     }
 
+    private static int getManagedProfileId(UserManager um) {
+        List<UserInfo> profiles = um.getProfiles(MY_USER_ID);
+        int numProfiles = profiles.size();
+        if (numProfiles == 1) {
+            return UserHandle.USER_NULL;
+        }
+        for (int i = 0; i < numProfiles; ++i) {
+            UserInfo profile = profiles.get(i);
+            if (profile.id != MY_USER_ID) {
+                return profile.id;
+            }
+        }
+        return UserHandle.USER_NULL;
+    }
+
     /**
      * For Search. Please keep it in sync when updating "createPreferenceHierarchy()"
      */
@@ -623,28 +740,20 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
             LockPatternUtils lockPatternUtils = new LockPatternUtils(context);
             // Add options for lock/unlock screen
-            int resId = getResIdForLockUnlockScreen(context, lockPatternUtils);
+            int resId = getResIdForLockUnlockScreen(context, lockPatternUtils, MY_USER_ID);
 
             SearchIndexableResource sir = new SearchIndexableResource(context);
             sir.xmlResId = resId;
             result.add(sir);
 
             final UserManager um = UserManager.get(context);
-            List<UserInfo> profiles = um.getProfiles(UserHandle.myUserId());
-            int numProfiles = profiles.size();
-            if (numProfiles > 1) {
-                int profileUserId = -1;
-                for (int i = 0; i < numProfiles; ++i) {
-                    UserInfo profile = profiles.get(i);
-                    if (profile.id != UserHandle.myUserId()) {
-                        profileUserId = profile.id;
-                    }
-                }
-                if (lockPatternUtils.isSeparateProfileChallengeAllowed(profileUserId)) {
-                    sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.security_settings_profile;
-                    result.add(sir);
-                }
+            final int profileUserId = getManagedProfileId(um);
+            if (profileUserId != UserHandle.USER_NULL
+                    && lockPatternUtils.isSeparateProfileChallengeAllowed(profileUserId)) {
+                sir = new SearchIndexableResource(context);
+                sir.xmlResId = getResIdForLockUnlockScreen(
+                        context, lockPatternUtils, profileUserId);
+                result.add(sir);
             }
 
             if (um.isAdminUser()) {
@@ -720,6 +829,21 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 result.add(data);
             }
 
+            final LockPatternUtils lockPatternUtils = new LockPatternUtils(context);
+            final int profileUserId = getManagedProfileId(um);
+            if (profileUserId != UserHandle.USER_NULL
+                    && lockPatternUtils.isSeparateProfileChallengeAllowed(profileUserId)) {
+                if (lockPatternUtils.getKeyguardStoredPasswordQuality(profileUserId)
+                        >= DevicePolicyManager.PASSWORD_QUALITY_SOMETHING
+                        && lockPatternUtils.isSeparateProfileChallengeAllowedToUnify(
+                                profileUserId)) {
+                    data = new SearchIndexableRaw(context);
+                    data.title = res.getString(R.string.lock_settings_profile_unification_title);
+                    data.screenTitle = screenTitle;
+                    result.add(data);
+                }
+            }
+
             // Credential storage
             if (!um.hasUserRestriction(UserManager.DISALLOW_CONFIG_CREDENTIALS)) {
                 KeyStore keyStore = KeyStore.getInstance();
@@ -735,7 +859,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
             }
 
             // Advanced
-            final LockPatternUtils lockPatternUtils = new LockPatternUtils(context);
             if (lockPatternUtils.isSecure(MY_USER_ID)) {
                 ArrayList<TrustAgentComponentInfo> agents =
                         getActiveTrustAgents(context, lockPatternUtils,
@@ -1080,4 +1203,46 @@ public class SecuritySettings extends SettingsPreferenceFragment
             return true;
         }
     }
+
+    public static class UnificationConfirmationDialog extends DialogFragment {
+
+        public static UnificationConfirmationDialog newIntance(int userId) {
+            UnificationConfirmationDialog dialog = new UnificationConfirmationDialog();
+            return dialog;
+        }
+
+        @Override
+        public void show(FragmentManager manager, String tag) {
+            if (manager.findFragmentByTag(tag) == null) {
+                // Prevent opening multiple dialogs if tapped on button quickly
+                super.show(manager, tag);
+            }
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            final SecuritySettings parentFragment = ((SecuritySettings) getParentFragment());
+            return new AlertDialog.Builder(getActivity())
+                    .setTitle(R.string.lock_settings_profile_unification_dialog_title)
+                    .setMessage(R.string.lock_settings_profile_unification_dialog_body)
+                    .setPositiveButton(R.string.okay,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int whichButton) {
+                                    parentFragment.launchConfirmDeviceLockForUnification();
+                                }
+                            }
+                    )
+                    .setNegativeButton(R.string.cancel,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int whichButton) {
+                                    dismiss();
+                                }
+                            }
+                    )
+                    .create();
+        }
+    }
+
 }
