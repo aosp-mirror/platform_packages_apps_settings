@@ -154,10 +154,11 @@ class DisplayDensityUtils {
         } else {
             // We don't understand the current density. Must have been set by
             // someone else. Make room for another entry...
-            values = Arrays.copyOf(values, values.length + 1);
+            int newLength = values.length + 1;
+            values = Arrays.copyOf(values, newLength);
             values[curIndex] = currentDensity;
 
-            entries = Arrays.copyOf(entries, values.length + 1);
+            entries = Arrays.copyOf(entries, newLength);
             entries[curIndex] = res.getString(SUMMARY_CUSTOM, currentDensity);
 
             displayIndex = curIndex;
