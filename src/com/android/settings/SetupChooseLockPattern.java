@@ -136,6 +136,20 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
             super.updateStage(stage);
             // Only enable the button for retry
             mRetryButton.setEnabled(stage == Stage.FirstChoiceValid);
+
+            switch (stage) {
+                case Introduction:
+                case HelpScreen:
+                case ChoiceTooShort:
+                case FirstChoiceValid:
+                    mRetryButton.setVisibility(View.VISIBLE);
+                    break;
+                case NeedToConfirm:
+                case ConfirmWrong:
+                case ChoiceConfirmed:
+                    mRetryButton.setVisibility(View.INVISIBLE);
+                    break;
+            }
         }
 
         @Override
