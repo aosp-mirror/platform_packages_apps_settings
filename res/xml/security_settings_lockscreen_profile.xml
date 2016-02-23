@@ -16,12 +16,13 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
                   xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
-                  android:title="@string/lock_settings_picker_title">
+                  android:title="@string/security_settings_title">
 
-    <PreferenceCategory
-        android:key="security_category_profile"
-        android:title="@string/lock_settings_profile_title">
-
-    </PreferenceCategory>
+    <PreferenceScreen
+        android:key="unlock_set_or_change_profile"
+        android:title="@string/unlock_set_unlock_launch_picker_title_profile"
+        android:summary="@string/unlock_set_unlock_mode_off"
+        settings:keywords="@string/keywords_lockscreen"
+        android:persistent="false"/>
 
 </PreferenceScreen>
