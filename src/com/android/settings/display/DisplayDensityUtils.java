@@ -46,14 +46,14 @@ class DisplayDensityUtils {
     /** Maximum density scale. The actual scale used depends on the device. */
     private static final float MAX_SCALE = 1.50f;
 
-    /** Summary used for "normal" scale. */
-    private static final int SUMMARY_NORMAL = R.string.screen_zoom_summary_normal;
+    /** Summary used for "default" scale. */
+    private static final int SUMMARY_DEFAULT = R.string.screen_zoom_summary_default;
 
     /** Summary used for "custom" scale. */
     private static final int SUMMARY_CUSTOM = R.string.screen_zoom_summary_custom;
 
     /**
-     * Summaries for scales smaller than "normal" in order of smallest to
+     * Summaries for scales smaller than "default" in order of smallest to
      * largest.
      */
     private static final int[] SUMMARIES_SMALLER = new int[] {
@@ -61,7 +61,7 @@ class DisplayDensityUtils {
     };
 
     /**
-     * Summaries for scales larger than "normal" in order of smallest to
+     * Summaries for scales larger than "default" in order of smallest to
      * largest.
      */
     private static final int[] SUMMARIES_LARGER = new int[] {
@@ -80,16 +80,16 @@ class DisplayDensityUtils {
     private final String[] mEntries;
     private final int[] mValues;
 
-    private final int mNormalDensity;
+    private final int mDefaultDensity;
     private final int mCurrentIndex;
 
     public DisplayDensityUtils(Context context) {
-        final int normalDensity = DisplayDensityUtils.getNormalDisplayDensity(
+        final int defaultDensity = DisplayDensityUtils.getDefaultDisplayDensity(
                 Display.DEFAULT_DISPLAY);
-        if (normalDensity <= 0) {
+        if (defaultDensity <= 0) {
             mEntries = null;
             mValues = null;
-            mNormalDensity = 0;
+            mDefaultDensity = 0;
             mCurrentIndex = -1;
             return;
         }
@@ -102,7 +102,7 @@ class DisplayDensityUtils {
         // Compute number of "larger" and "smaller" scales for this display.
         final int minDimensionPx = Math.min(metrics.widthPixels, metrics.heightPixels);
         final int maxDensity = DisplayMetrics.DENSITY_MEDIUM * minDimensionPx / MIN_DIMENSION_DP;
-        final float maxScale = Math.min(MAX_SCALE, maxDensity / (float) normalDensity);
+        final float maxScale = Math.min(MAX_SCALE, maxDensity / (float) defaultDensity);
         final float minScale = MIN_SCALE;
         final int numLarger = (int) MathUtils.constrain((maxScale - 1) / MIN_SCALE_INTERVAL,
                 0, SUMMARIES_LARGER.length);
@@ -117,7 +117,7 @@ class DisplayDensityUtils {
             final float interval = (1 - minScale) / numSmaller;
             for (int i = numSmaller - 1; i >= 0; i--) {
                 // Round down to a multiple of 2 by truncating the low bit.
-                final int density = ((int) (normalDensity * (1 - (i + 1) * interval))) & ~1;
+                final int density = ((int) (defaultDensity * (1 - (i + 1) * interval))) & ~1;
                 if (currentDensity == density) {
                     currentDensityIndex = curIndex;
                 }
@@ -127,18 +127,18 @@ class DisplayDensityUtils {
             }
         }
 
-        if (currentDensity == normalDensity) {
+        if (currentDensity == defaultDensity) {
             currentDensityIndex = curIndex;
         }
-        values[curIndex] = normalDensity;
-        entries[curIndex] = res.getString(SUMMARY_NORMAL);
+        values[curIndex] = defaultDensity;
+        entries[curIndex] = res.getString(SUMMARY_DEFAULT);
         curIndex++;
 
         if (numLarger > 0) {
             final float interval = (maxScale - 1) / numLarger;
             for (int i = 0; i < numLarger; i++) {
                 // Round down to a multiple of 2 by truncating the low bit.
-                final int density = ((int) (normalDensity * (1 + (i + 1) * interval))) & ~1;
+                final int density = ((int) (defaultDensity * (1 + (i + 1) * interval))) & ~1;
                 if (currentDensity == density) {
                     currentDensityIndex = curIndex;
                 }
@@ -163,7 +163,7 @@ class DisplayDensityUtils {
             displayIndex = curIndex;
         }
 
-        mNormalDensity = normalDensity;
+        mDefaultDensity = defaultDensity;
         mCurrentIndex = displayIndex;
         mEntries = entries;
         mValues = values;
@@ -181,18 +181,18 @@ class DisplayDensityUtils {
         return mCurrentIndex;
     }
 
-    public int getNormalDensity() {
-        return mNormalDensity;
+    public int getDefaultDensity() {
+        return mDefaultDensity;
     }
 
     /**
-     * Returns the normal (default) density for the specified display.
+     * Returns the default density for the specified display.
      *
      * @param displayId the identifier of the display
-     * @return the normal density of the specified display, or {@code -1} if
+     * @return the default density of the specified display, or {@code -1} if
      *         the display does not exist or the density could not be obtained
      */
-    private static int getNormalDisplayDensity(int displayId) {
+    private static int getDefaultDisplayDensity(int displayId) {
        try {
            final IWindowManager wm = WindowManagerGlobal.getWindowManagerService();
            return wm.getInitialDisplayDensity(displayId);
