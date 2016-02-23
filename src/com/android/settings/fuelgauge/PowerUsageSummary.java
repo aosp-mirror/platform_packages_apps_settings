@@ -116,7 +116,7 @@ public class PowerUsageSummary extends PowerUsageBase {
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
         if (!(preference instanceof PowerGaugePreference)) {
-            return false;
+            return super.onPreferenceTreeClick(preference);
         }
         PowerGaugePreference pgp = (PowerGaugePreference) preference;
         BatteryEntry entry = pgp.getInfo();
