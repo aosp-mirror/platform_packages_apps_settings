@@ -27,8 +27,13 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.os.RemoteException;
 import android.security.Credentials;
+import android.security.IKeyChainService;
+import android.security.KeyChain;
+import android.security.KeyChain.KeyChainConnection;
 import android.security.KeyStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -120,21 +125,49 @@ public class UserCredentialsSettings extends InstrumentedFragment implements OnI
                     .setNegativeButton(R.string.trusted_credentials_remove_label,
                             new DialogInterface.OnClickListener() {
                                 @Override public void onClick(DialogInterface dialog, int id) {
-                                    final KeyStore ks = KeyStore.getInstance();
-                                    Credentials.deleteAllTypesForAlias(ks, item.alias);
+                                    new RemoveCredentialsTask(getContext(), getTargetFragment())
+                                            .execute(item.alias);
                                     dialog.dismiss();
                                 }
                             })
                     .create();
         }
 
-        @Override
-        public void onDismiss(DialogInterface dialog) {
-            final Fragment target = getTargetFragment();
-            if (target instanceof UserCredentialsSettings) {
-                ((UserCredentialsSettings) target).refreshItems();
+        private class RemoveCredentialsTask extends AsyncTask<String, Void, Void> {
+            private Context context;
+            private Fragment targetFragment;
+
+            public RemoveCredentialsTask(Context context, Fragment targetFragment) {
+                this.context = context;
+                this.targetFragment = targetFragment;
             }
-            super.onDismiss(dialog);
+
+            @Override
+            protected Void doInBackground(String... aliases) {
+                try {
+                    final KeyChainConnection conn = KeyChain.bind(getContext());
+                    try {
+                        IKeyChainService keyChain = conn.getService();
+                        for (String alias : aliases) {
+                            keyChain.removeKeyPair(alias);
+                        }
+                    } catch (RemoteException e) {
+                        Log.w(TAG, "Removing credentials", e);
+                    } finally {
+                        conn.close();
+                    }
+                } catch (InterruptedException e) {
+                    Log.w(TAG, "Connecting to keychain", e);
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void result) {
+                if (targetFragment instanceof UserCredentialsSettings) {
+                    ((UserCredentialsSettings) targetFragment).refreshItems();
+                }
+            }
         }
     }
 
