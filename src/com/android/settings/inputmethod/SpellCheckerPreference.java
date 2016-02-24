@@ -16,20 +16,20 @@
 
 package com.android.settings.inputmethod;
 
+import android.app.AlertDialog.Builder;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.preference.Preference;
+import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.textservice.SpellCheckerInfo;
-import android.widget.RadioButton;
-import android.widget.Toast;
 
+import com.android.settings.CustomListPreference;
 import com.android.settings.R;
-import com.android.settings.Utils;
 
 /**
  * Spell checker service preference.
@@ -38,115 +38,92 @@ import com.android.settings.Utils;
  * button on the left side is used to choose the current spell checker service. 2) A settings
  * icon on the right side is used to invoke the setting activity of the spell checker service.
  */
-class SpellCheckerPreference extends Preference implements OnClickListener {
-    interface OnRadioButtonPreferenceListener {
-        /**
-         * Called when this preference needs to be saved its state.
-         *
-         * Note that this preference is non-persistent and needs explicitly to be saved its state.
-         * Because changing one IME state may change other IMEs' state, this is a place to update
-         * other IMEs' state as well.
-         *
-         * @param pref This preference.
-         */
-        public void onRadioButtonClicked(SpellCheckerPreference pref);
+class SpellCheckerPreference extends CustomListPreference {
+
+    private final SpellCheckerInfo[] mScis;
+    private Intent mIntent;
+
+    public SpellCheckerPreference(final Context context, final SpellCheckerInfo[] scis) {
+        super(context, null);
+        mScis = scis;
+        setWidgetLayoutResource(R.layout.preference_widget_settings);
+        CharSequence[] labels = new CharSequence[scis.length];
+        CharSequence[] values = new CharSequence[scis.length];
+        for (int i = 0 ; i < scis.length; i++) {
+            labels[i] = scis[i].loadLabel(context.getPackageManager());
+            // Use values as indexing since ListPreference doesn't support generic objects.
+            values[i] = String.valueOf(i);
+        }
+        setEntries(labels);
+        setEntryValues(values);
     }
 
-    private final SpellCheckerInfo mSci;
-    private final OnRadioButtonPreferenceListener mOnRadioButtonListener;
+    @Override
+    protected void onPrepareDialogBuilder(Builder builder,
+            DialogInterface.OnClickListener listener) {
+        builder.setTitle(R.string.choose_spell_checker);
+        builder.setSingleChoiceItems(getEntries(), findIndexOfValue(getValue()), listener);
+    }
 
-    private RadioButton mRadioButton;
-    private View mPrefLeftButton;
-    private View mSettingsButton;
-    private boolean mSelected;
-
-    public SpellCheckerPreference(final Context context, final SpellCheckerInfo sci,
-            final OnRadioButtonPreferenceListener onRadioButtonListener) {
-        super(context, null, 0);
-        setPersistent(false);
-        setLayoutResource(R.layout.preference_spellchecker);
-        setWidgetLayoutResource(R.layout.preference_spellchecker_widget);
-        mSci = sci;
-        mOnRadioButtonListener = onRadioButtonListener;
-        setKey(sci.getId());
-        setTitle(sci.loadLabel(context.getPackageManager()));
-        final String settingsActivity = mSci.getSettingsActivity();
-        if (TextUtils.isEmpty(settingsActivity)) {
-            setIntent(null);
-        } else {
-            final Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.setClassName(mSci.getPackageName(), settingsActivity);
-            setIntent(intent);
+    public void setSelected(SpellCheckerInfo currentSci) {
+        if (currentSci == null) {
+            setValue(null);
+            return;
         }
+        for (int i = 0; i < mScis.length; i++) {
+            if (mScis[i].getId().equals(currentSci.getId())) {
+                setValueIndex(i);
+                return;
+            }
+        }
+    }
+
+    @Override
+    public void setValue(String value) {
+        super.setValue(value);
+        int index = value != null ? Integer.parseInt(value) : -1;
+        if (index == -1) {
+            mIntent = null;
+            return;
+        }
+        SpellCheckerInfo sci = mScis[index];
+        final String settingsActivity = sci.getSettingsActivity();
+        if (TextUtils.isEmpty(settingsActivity)) {
+            mIntent = null;
+        } else {
+            mIntent = new Intent(Intent.ACTION_MAIN);
+            mIntent.setClassName(sci.getPackageName(), settingsActivity);
+        }
+    }
+
+    @Override
+    public boolean callChangeListener(Object newValue) {
+        newValue = newValue != null ? mScis[Integer.parseInt((String) newValue)] : null;
+        return super.callChangeListener(newValue);
     }
 
     @Override
     public void onBindViewHolder(PreferenceViewHolder view) {
         super.onBindViewHolder(view);
-        mRadioButton = (RadioButton)view.findViewById(R.id.pref_radio);
-        mPrefLeftButton = view.findViewById(R.id.pref_left_button);
-        mPrefLeftButton.setOnClickListener(this);
-        mSettingsButton = view.findViewById(R.id.pref_right_button);
-        mSettingsButton.setOnClickListener(this);
-        updateSelectedState(mSelected);
-    }
-
-    @Override
-    public void onClick(final View v) {
-        if (v == mPrefLeftButton) {
-            mOnRadioButtonListener.onRadioButtonClicked(this);
-            return;
-        }
-        if (v == mSettingsButton) {
-            onSettingsButtonClicked();
-            return;
-        }
+        View settingsButton = view.findViewById(R.id.settings_button);
+        settingsButton.setVisibility(mIntent != null ? View.VISIBLE : View.INVISIBLE);
+        settingsButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onSettingsButtonClicked();
+            }
+        });
     }
 
     private void onSettingsButtonClicked() {
         final Context context = getContext();
         try {
-            final Intent intent = getIntent();
+            final Intent intent = mIntent;
             if (intent != null) {
                 // Invoke a settings activity of an spell checker.
                 context.startActivity(intent);
             }
         } catch (final ActivityNotFoundException e) {
-            final String message = context.getString(R.string.failed_to_open_app_settings_toast,
-                    mSci.loadLabel(context.getPackageManager()));
-            Toast.makeText(context, message, Toast.LENGTH_LONG).show();
-        }
-    }
-
-    public SpellCheckerInfo getSpellCheckerInfo() {
-        return mSci;
-    }
-
-    public void setSelected(final boolean selected) {
-        mSelected = selected;
-        updateSelectedState(selected);
-    }
-
-    private void updateSelectedState(final boolean selected) {
-        if (mRadioButton != null) {
-            mRadioButton.setChecked(selected);
-            enableSettingsButton(isEnabled() && selected);
-        }
-    }
-
-    private void enableSettingsButton(final boolean enabled) {
-        if (mSettingsButton == null) {
-            return;
-        }
-        if (getIntent() == null) {
-            mSettingsButton.setVisibility(View.GONE);
-        } else {
-            mSettingsButton.setEnabled(enabled);
-            mSettingsButton.setClickable(enabled);
-            mSettingsButton.setFocusable(enabled);
-            if (!enabled) {
-                mSettingsButton.setAlpha(Utils.DISABLED_ALPHA);
-            }
         }
     }
 }
