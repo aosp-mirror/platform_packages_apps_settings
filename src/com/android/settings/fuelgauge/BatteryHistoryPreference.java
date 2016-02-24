@@ -44,10 +44,11 @@ public class BatteryHistoryPreference extends Preference {
     public BatteryHistoryPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         setLayoutResource(R.layout.battery_usage_graph);
+        setSelectable(true);
     }
 
     @Override
-    protected void onClick() {
+    public void performClick() {
         mHelper.storeStatsHistoryInFile(BATTERY_HISTORY_FILE);
         Bundle args = new Bundle();
         args.putString(BatteryHistoryDetail.EXTRA_STATS, BATTERY_HISTORY_FILE);
@@ -66,9 +67,11 @@ public class BatteryHistoryPreference extends Preference {
 
     @Override
     public void onBindViewHolder(PreferenceViewHolder view) {
+        super.onBindViewHolder(view);
         if (mBatteryInfo == null) {
             return;
         }
+        view.itemView.setClickable(true);
         view.setDividerAllowedAbove(true);
         ((TextView) view.findViewById(R.id.charge)).setText(mBatteryInfo.batteryPercentString);
         ((TextView) view.findViewById(R.id.estimation)).setText(mBatteryInfo.remainingLabel);
