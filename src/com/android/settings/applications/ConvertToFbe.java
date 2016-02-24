@@ -17,8 +17,8 @@ package com.android.settings.applications;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.content.Intent;
 import android.content.res.Resources;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.RecoverySystem;
 import android.util.Log;
@@ -27,6 +27,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.android.settings.applications.ConfirmConvertToFbe;
 import com.android.settings.ChooseLockSettingsHelper;
 import com.android.settings.SettingsActivity;
 import com.android.settings.R;
@@ -80,9 +81,8 @@ public class ConvertToFbe extends Fragment {
     }
 
     private void convert() {
-        Intent intent = new Intent(Intent.ACTION_MASTER_CLEAR);
-        intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
-        intent.putExtra(Intent.EXTRA_REASON, "convert_fbe");
-        getActivity().sendBroadcast(intent);
+        SettingsActivity sa = (SettingsActivity) getActivity();
+        sa.startPreferencePanel(ConfirmConvertToFbe.class.getName(), null,
+                                R.string.convert_to_file_encryption, null, null, 0);
     }
 }
