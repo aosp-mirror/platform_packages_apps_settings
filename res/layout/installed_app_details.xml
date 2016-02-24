@@ -35,10 +35,32 @@
         android:paddingBottom="10dip"
         android:orientation="vertical">
 
-        <!-- Application snippet label, version and icon -->
-        <include
-            layout="@layout/app_item"
-            android:id="@+id/app_snippet" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <!-- Application snippet label, version and icon -->
+                <include
+                    layout="@layout/app_item"
+                    android:id="@+id/app_snippet" />
+            </FrameLayout>
+
+            <ImageView
+                android:id="@+id/gear"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center_vertical"
+                android:padding="12dp"
+                android:src="@drawable/ic_settings_24dp"
+                android:tint="?android:attr/colorAccent"
+                android:clickable="true"
+                android:background="?android:attr/selectableItemBackground" />
+
+        </LinearLayout>
 
         <Space
             android:layout_width="match_parent"
