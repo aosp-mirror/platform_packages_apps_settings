@@ -17,21 +17,23 @@
 package com.android.settings.localepicker;
 
 import android.content.Context;
+import android.graphics.Canvas;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.LocaleList;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 
-import com.android.settings.R;
-
 import com.android.internal.app.LocalePicker;
 import com.android.internal.app.LocaleStore;
+
+import com.android.settings.R;
 
 import java.text.NumberFormat;
 import java.util.Collections;
@@ -79,6 +81,10 @@ class LocaleDragAndDropAdapter
         this.mFeedItemList = feedItemList;
 
         this.mContext = context;
+
+        final float dragElevation = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8,
+                context.getResources().getDisplayMetrics());
+
         this.mItemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(
                 ItemTouchHelper.UP | ItemTouchHelper.DOWN, 0 /* no swipe */) {
 
@@ -92,6 +98,35 @@ class LocaleDragAndDropAdapter
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int i) {
                 // Swipe is disabled, this is intentionally empty.
+            }
+
+            private static final int SELECTION_GAINED = 1;
+            private static final int SELECTION_LOST = 0;
+            private static final int SELECTION_UNCHANGED = -1;
+            private int mSelectionStatus = SELECTION_UNCHANGED;
+            @Override
+            public void onChildDraw(Canvas c, RecyclerView recyclerView,
+                    RecyclerView.ViewHolder viewHolder, float dX, float dY,
+                    int actionState, boolean isCurrentlyActive) {
+
+                super.onChildDraw(c, recyclerView, viewHolder, dX, dY,
+                        actionState, isCurrentlyActive);
+                // We change the elevation if selection changed
+                if (mSelectionStatus != SELECTION_UNCHANGED) {
+                    viewHolder.itemView.setElevation(
+                            mSelectionStatus == SELECTION_GAINED ? dragElevation : 0);
+                    mSelectionStatus = SELECTION_UNCHANGED;
+                }
+            }
+
+            @Override
+            public void onSelectedChanged(RecyclerView.ViewHolder viewHolder, int actionState) {
+                super.onSelectedChanged(viewHolder, actionState);
+                if (actionState == ItemTouchHelper.ACTION_STATE_DRAG) {
+                    mSelectionStatus = SELECTION_GAINED;
+                } else if (actionState == ItemTouchHelper.ACTION_STATE_IDLE) {
+                    mSelectionStatus = SELECTION_LOST;
+                }
             }
         });
     }
@@ -185,6 +220,15 @@ class LocaleDragAndDropAdapter
             }
         }
         return result;
+    }
+
+    LocaleStore.LocaleInfo getFirstChecked() {
+        for (LocaleStore.LocaleInfo li : mFeedItemList) {
+            if (li.getChecked()) {
+                return li;
+            }
+        }
+        return null;
     }
 
     void addLocale(LocaleStore.LocaleInfo li) {
