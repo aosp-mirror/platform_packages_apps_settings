@@ -29,6 +29,7 @@ import android.view.accessibility.AccessibilityEvent;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 
 import java.util.List;
 
@@ -148,6 +149,22 @@ public class LabeledSeekBar extends SeekBar {
 
     public LabeledSeekBar(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
+        super.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                // Do nothing
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                // Do nothing
+            }
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                sendClickEventForAccessibility(progress);
+            }
+        });
     }
 
     @Override
@@ -161,6 +178,30 @@ public class LabeledSeekBar extends SeekBar {
 
     public void setLabels(String[] labels) {
         mLabels = labels;
+    }
+
+    @Override
+    public void setOnSeekBarChangeListener(final OnSeekBarChangeListener l) {
+        // Tweak the listener to send accessibility event on progress changed.
+        OnSeekBarChangeListener l2 = new OnSeekBarChangeListener() {
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                l.onStopTrackingTouch(seekBar);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                l.onStartTrackingTouch(seekBar);
+            }
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                l.onProgressChanged(seekBar, progress, fromUser);
+                sendClickEventForAccessibility(progress);
+            }
+        };
+
+        super.setOnSeekBarChangeListener(l2);
     }
 
     @Override
@@ -184,5 +225,12 @@ public class LabeledSeekBar extends SeekBar {
         }
 
         return super.dispatchHoverEvent(event);
+    }
+
+    private void sendClickEventForAccessibility(int progress) {
+        if (mAccessHelper != null) {
+            mAccessHelper.invalidateRoot();
+            mAccessHelper.sendEventForVirtualView(progress, AccessibilityEvent.TYPE_VIEW_CLICKED);
+        }
     }
 }
