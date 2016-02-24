@@ -334,8 +334,7 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Atrakinti kontroliniu kodu "</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="4747510337049957778">"Tiesiog palieskite kontrolinio kodo jutiklį, kad atrakintumėte telefoną, įgaliotumėte pirkimo procesus ar prisijungtumėte prie programų.\n\nNaudojant visus pridėtus kontrolinius kodus bus galima atlikti šiuos veiksmus, todėl atidžiai rinkitės, kieno kontrolinius kodus pridedate."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="1650783655974801525">"Pastaba: kontrolinis kodas gali būti ne toks saugus kaip sudėtingas piešinys ar PIN kodas. "<annotation id="url">"Sužinokite daugiau"</annotation></string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="6931554430739074640">"Tiesiog palieskite kontrolinio kodo jutiklį, kad atrakintumėte telefoną, autorizuotumėte pirkinius ar prisijungtumėte prie savo programų. Naudojant visus pridėtus kontrolinius kodus bus galima atlikti šiuos veiksmus, todėl atidžiai rinkitės, kieno kontrolinius kodus pridedate.\n\nPastaba: kontrolinis kodas gali būti ne toks saugus kaip sudėtingas atrakinimo piešinys ar PIN kodas. "<annotation id="url">"Sužinokite daugiau"</annotation></string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Atšaukti"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Tęsti"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="7234486440384881699">"Įrenginio apsaugos funkcijos nebus suaktyvintos. Negalėsite apsaugoti, kad kiti asmenys nenaudotų šio planšetinio kompiuterio, jei jį prarasite, jis bus pavogtas ar išvalytas."</string>
@@ -417,6 +416,8 @@
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"Apsaugokite savo įrenginį"</string>
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"Atrakinimas naudojant kontrolinį kodą"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Pasir. ekrano užrak."</string>
+    <!-- no translation found for lock_settings_picker_title_profile (8283230482525023311) -->
+    <skip />
     <string name="setup_lock_settings_picker_title" msgid="1572244299605153324">"Apsaugokite savo telefoną"</string>
     <string name="setup_lock_settings_picker_fingerprint_message" msgid="2431588439043969764">"Kontrolinis kodas gali būti mažiau saugus nei sudėtingas atrakinimo piešinys, PIN kodas ar slaptažodis. Nustatykite atsarginį užrakinimo ekraną, kad būtumėte apsaugoti."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Neleiskite kitiems asmenims naudoti šio planšetinio kompiuterio be leidimo, suaktyvinę įrenginio apsaugos funkcijas. Pasirinkite norimą naudoti užrakinimo ekraną."</string>
@@ -424,6 +425,8 @@
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Neleiskite kitiems asmenims naudoti šio telefono be jūsų leidimo, suaktyvinę įrenginio apsaugos funkcijas. Pasirinkite norimą naudoti užrakinimo ekraną."</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Pasirinkite atsarginį ekrano užrakto metodą"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Ekrano užraktas"</string>
+    <!-- no translation found for unlock_set_unlock_launch_picker_title_profile (4270157368864693564) -->
+    <skip />
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Pakeisti užrak. ekraną"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Keisti ar išjungti modelio, PIN kodo ar slaptažodžio saugą"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"Pasirinkite ekrano užrakinimo metodą"</string>
@@ -1337,6 +1340,8 @@
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"Reikalauti modelio"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1165707416664252167">"Jei norite atrakinti ekraną, reikia nustatyti modelį"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="2615606088906120711">"Padaryti piešinį matomą"</string>
+    <!-- no translation found for lockpattern_settings_enable_visible_pattern_title_profile (4864525074768391381) -->
+    <skip />
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="4389015658335522989">"Vibruoti palietus"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"Maitin. myg. iškart užrakin."</string>
     <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"Išskyrus atvejus, kai „<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>“ laiko jį atrakintą"</string>
@@ -1348,11 +1353,18 @@
     <string name="lock_settings_profile_title" msgid="7819021341281339182">"Darbo profilis"</string>
     <string name="lock_settings_profile_label" msgid="4423909470339292809">"Darbo profilio sauga"</string>
     <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Darbo profilio ekrano užraktas"</string>
-    <string name="lock_settings_profile_unification_title" msgid="8633657624689310195">"Naudoti tą patį ekrano užraktą"</string>
-    <string name="lock_settings_profile_unification_summary" msgid="8014208091623293835">"Pakeisti pagrindinį profilį, kad jis atitiktų darbo profilį"</string>
+    <!-- no translation found for lock_settings_profile_unification_title (6888460471428172592) -->
+    <skip />
+    <!-- no translation found for lock_settings_profile_unification_summary (3481269258202840437) -->
+    <skip />
     <string name="lock_settings_profile_unification_dialog_title" msgid="8938936484754025065">"Naudoti tą patį ekrano užraktą?"</string>
     <string name="lock_settings_profile_unification_dialog_body" msgid="1697316592639374194">"Įrenginyje galite naudoti šį užraktą, tačiau bus taikoma visa su ekrano užraktu susijusi politika, kurią darbo profilyje nustatė IT administratorius.\nAr norite naudoti tą patį ekrano užraktą įrenginyje?"</string>
-    <string name="lock_settings_profile_unified_summary" msgid="237623767711796217">"Toks pats kaip įrenginio užraktas"</string>
+    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_body (5476809856421622503) -->
+    <skip />
+    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_confirm (2372867057465188766) -->
+    <skip />
+    <!-- no translation found for lock_settings_profile_unified_summary (9008819078132993492) -->
+    <skip />
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Valdyti programas"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Tvarkykite ir pašalinkite įdiegtas programas"</string>
     <string name="applications_settings" msgid="1721442176406964682">"Programos"</string>
@@ -1639,7 +1651,7 @@
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Spart. pritaikymo neįgal. įjungimas"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"Įjungta"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"Išjungta"</string>
-    <string name="accessibility_global_gesture_preference_description" msgid="2328507978501847573">"Kai ši funkcija įjungta, galite greitai suaktyvinti pritaikymo neįgaliesiems funkcijas, atlikdami du veiksmus:\n\n1 veiksmas: paspauskite ir laikykite maitinimo mygtuką, kol išgirsite garsą ar pajusite vibravimą.\n\n2 veiksmas: dviem pirštais palieskite ir laikykite, kol išgirsite garsinį patvirtinimą.\n\nJei įrenginiui priskirti keli naudotojai, naudojant šį spartųjį klavišą užrakinimo ekrane laikinai įgalinamos pritaikymo neįgaliesiems funkcijos, kol įrenginys atrakinamas."</string>
+    <string name="accessibility_global_gesture_preference_description" msgid="1605107799571936715">"Kai ši funkcija įjungta, galite greitai suaktyvinti pritaikymo neįgaliesiems funkcijas atlikę du veiksmus.\n\n1 veiksmas: laikykite paspaudę maitinimo mygtuką, kol išgirsite garsą ar pajusite vibravimą.\n\n2 veiksmas: laikykite palietę dviem pirštais, kol išgirsite garsinį patvirtinimą.\n\nJei yra keli įrenginio naudotojai, naudojant šį spartųjį klavišą užrakinimo ekrane laikinai bus įgalintas pritaikymas neįgaliesiems, kol įrenginys bus užrakintas."</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="2567402942683463779">"Didelio kontrasto tekstas"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="7218498768415430963">"Automat. atnaujinti ekrano didinimą"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"Atnaujinti ekrano didinimą perkeliant programas"</string>
@@ -2441,7 +2453,6 @@
     <string name="keywords_display" msgid="8910345814565493016">"ekranas, jutiklinis ekranas"</string>
     <string name="keywords_display_brightness_level" msgid="3891383826236015854">"pritemdyti ekraną, jutiklinis ekranas, akumuliatorius"</string>
     <string name="keywords_display_auto_brightness" msgid="3325150824507953765">"pritemdyti ekraną, jutiklinis ekranas, akumuliatorius"</string>
-    <string name="keywords_display_night_mode" msgid="1272383423045276031">"tamsi tema, naktinis režimas, pritemdyti ekraną, invertuoti šviesumą"</string>
     <string name="keywords_display_wallpaper" msgid="7362076351860131776">"fonas, suasmeninti, tinkinti ekraną"</string>
     <string name="keywords_display_font_size" msgid="3404655440064726124">"teksto dydis"</string>
     <string name="keywords_display_cast_screen" msgid="7684618996741933067">"projektuoti, perduoti"</string>
@@ -2473,6 +2484,8 @@
     <string name="keywords_color_temperature" msgid="2688947724153266364">"spalvų temperatūra D65 D73 balta geltona mėlyna šilta šalta"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"slysti ir atrakinti, slaptažodis, šablonas, PIN kodas"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"darbo iššūkis, darbas, profilis"</string>
+    <!-- no translation found for keywords_unification (1922900767659821025) -->
+    <skip />
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Nustatyti „Wi-Fi“ ALR žymą"</string>
     <string name="write_tag" msgid="8571858602896222537">"Rašyti"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Palieskite žymą, kad galėtumėte rašyti..."</string>
@@ -2746,7 +2759,7 @@
     <string name="domain_urls_title" msgid="8762012672312435252">"Programų nuorodos"</string>
     <string name="domain_urls_summary_none" msgid="2639588015479657864">"Neatidaryti nepalaikomų nuorodų"</string>
     <string name="domain_urls_summary_one" msgid="3704934031930978405">"Atidaryti <xliff:g id="DOMAIN">%s</xliff:g>"</string>
-    <string name="domain_urls_summary_some" msgid="812936714383016364">"Atidaryti <xliff:g id="DOMAIN">%s</xliff:g> ir susijusius URL"</string>
+    <string name="domain_urls_summary_some" msgid="3950089361819428455">"Atidaryti <xliff:g id="DOMAIN">%s</xliff:g> ir kitus URL"</string>
     <plurals name="domain_urls_apps_summary" formatted="false" msgid="4322996467951692661">
       <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> programa gali atidaryti palaikomas nuorodas</item>
       <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> programos gali atidaryti palaikomas nuorodas</item>
@@ -2899,7 +2912,8 @@
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"Padaryti mažesnius"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"Padaryti didesnius"</string>
     <string name="screen_zoom_summary_small" msgid="5867245310241621570">"Mažas"</string>
-    <string name="screen_zoom_summary_normal" msgid="2932499308526350466">"Įprastas"</string>
+    <!-- no translation found for screen_zoom_summary_default (2247006805614056507) -->
+    <skip />
     <string name="screen_zoom_summary_large" msgid="4835294730065424084">"Didelis"</string>
     <string name="screen_zoom_summary_very_large" msgid="7108563375663670067">"Didesnis"</string>
     <string name="screen_zoom_summary_extremely_large" msgid="7427320168263276227">"Didžiausias"</string>
@@ -3003,4 +3017,56 @@
     <string name="battery_saver_desc_turn_on_auto_never" msgid="6715896635178578813">"Niekada neįjungti automatiškai"</string>
     <string name="battery_saver_desc_turn_on_auto_pct" msgid="7472323223085636533">"Įjungti automatiškai, kai lieka %1$s akumuliatoriaus energijos"</string>
     <string name="not_battery_optimizing" msgid="5362861851864837617">"Akumuliatoriaus optimizavimas nenaudojamas"</string>
+    <!-- no translation found for notification_log_no_title (5678029849672024215) -->
+    <skip />
+    <!-- no translation found for notification_log_details_delimiter (3116559361552416747) -->
+    <skip />
+    <!-- no translation found for notification_log_details_package (2596495677039100284) -->
+    <skip />
+    <!-- no translation found for notification_log_details_key (2995791937075862968) -->
+    <skip />
+    <!-- no translation found for notification_log_details_group (2430467015200368698) -->
+    <skip />
+    <!-- no translation found for notification_log_details_group_summary (7945543958255585829) -->
+    <skip />
+    <!-- no translation found for notification_log_details_visibility (2552873780715930971) -->
+    <skip />
+    <!-- no translation found for notification_log_details_public_version (4247242364605495240) -->
+    <skip />
+    <!-- no translation found for notification_log_details_priority (8371354971235991398) -->
+    <skip />
+    <!-- no translation found for notification_log_details_importance (2153168790791683139) -->
+    <skip />
+    <!-- no translation found for notification_log_details_explanation (1914295130775393551) -->
+    <skip />
+    <!-- no translation found for notification_log_details_content_intent (1113554570409128083) -->
+    <skip />
+    <!-- no translation found for notification_log_details_delete_intent (905118520685297007) -->
+    <skip />
+    <!-- no translation found for notification_log_details_full_screen_intent (7118560817013522978) -->
+    <skip />
+    <!-- no translation found for notification_log_details_actions (242523930165118066) -->
+    <skip />
+    <!-- no translation found for notification_log_details_title (7177091647508863295) -->
+    <skip />
+    <!-- no translation found for notification_log_details_remoteinput (8328591329858827409) -->
+    <skip />
+    <!-- no translation found for notification_log_details_content_view (6638731378278561786) -->
+    <skip />
+    <!-- no translation found for notification_log_details_extras (4188418723779942047) -->
+    <skip />
+    <!-- no translation found for notification_log_details_icon (8939114059726188218) -->
+    <skip />
+    <!-- no translation found for notification_log_details_parcel (243148037601903212) -->
+    <skip />
+    <!-- no translation found for notification_log_details_ashmem (7241814108477320636) -->
+    <skip />
+    <!-- no translation found for notification_log_details_sound (5506232879598808099) -->
+    <skip />
+    <!-- no translation found for notification_log_details_vibrate (6890065466625335940) -->
+    <skip />
+    <!-- no translation found for notification_log_details_default (2345249399796730861) -->
+    <skip />
+    <!-- no translation found for notification_log_details_none (184131801230614059) -->
+    <skip />
 </resources>

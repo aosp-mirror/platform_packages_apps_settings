@@ -330,8 +330,7 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Unlock with fingerprint"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="4747510337049957778">"Just touch the fingerprint sensor to unlock your phone, authorise purchases or sign in to apps. \n\n Be careful whose fingerprints you add – any fingerprints added will be able to do these things."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="1650783655974801525">"Note: Your fingerprint may be less secure than a strong pattern or PIN. "<annotation id="url">"Find out more"</annotation></string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="6931554430739074640">"Just touch the fingerprint sensor to unlock your phone, authorise purchases or sign in to apps. Be careful whose fingerprints you add. Even one added print can do any of these things.\n\nNote: Your fingerprint may be less secure than a strong pattern or PIN. "<annotation id="url">"Find out more"</annotation></string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Cancel"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Continue"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="7234486440384881699">"Device protection features will not be activated. You won’t be able to prevent others from using this tablet if it’s lost, stolen or wiped."</string>
@@ -413,6 +412,7 @@
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"Protect your device"</string>
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"Unlock with your fingerprint"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Choose screen lock"</string>
+    <string name="lock_settings_picker_title_profile" msgid="8283230482525023311">"Choose profile screen lock"</string>
     <string name="setup_lock_settings_picker_title" msgid="1572244299605153324">"Protect your phone"</string>
     <string name="setup_lock_settings_picker_fingerprint_message" msgid="2431588439043969764">"Fingerprint may be less secure than a strong pattern, PIN or password. Set up a backup lock screen to be secure."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Prevent others from using this tablet without your permission by activating device protection features. Choose the screen lock that you would like to use."</string>
@@ -420,6 +420,7 @@
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Prevent others from using this phone without your permission by activating device protection features. Choose the screen lock that you would like to use."</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Choose your backup screen lock method"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Screen lock"</string>
+    <string name="unlock_set_unlock_launch_picker_title_profile" msgid="4270157368864693564">"Profile screen lock"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Change lock screen"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Change or disable pattern, PIN or password security"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"Choose a method to lock the screen"</string>
@@ -1319,6 +1320,7 @@
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"Require pattern"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1165707416664252167">"Must draw pattern to unlock screen"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="2615606088906120711">"Make pattern visible"</string>
+    <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="4864525074768391381">"Make profile pattern visible"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="4389015658335522989">"Vibrate on tap"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"Power button instantly locks"</string>
     <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"Except when kept unlocked by <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
@@ -1330,11 +1332,13 @@
     <string name="lock_settings_profile_title" msgid="7819021341281339182">"Work profile"</string>
     <string name="lock_settings_profile_label" msgid="4423909470339292809">"Work profile security"</string>
     <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Work profile screen lock"</string>
-    <string name="lock_settings_profile_unification_title" msgid="8633657624689310195">"Use same screen lock"</string>
-    <string name="lock_settings_profile_unification_summary" msgid="8014208091623293835">"Change primary profile to match work profile"</string>
+    <string name="lock_settings_profile_unification_title" msgid="6888460471428172592">"Use the same lock"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="3481269258202840437">"Change device screen lock to match work profile?"</string>
     <string name="lock_settings_profile_unification_dialog_title" msgid="8938936484754025065">"Use the same screen lock?"</string>
     <string name="lock_settings_profile_unification_dialog_body" msgid="1697316592639374194">"You can use this lock for your device but it will include all screen lock related policies set by your IT admin on the work profile.\nDo you want to use the same screen lock for your device?"</string>
-    <string name="lock_settings_profile_unified_summary" msgid="237623767711796217">"Same as your device lock"</string>
+    <string name="lock_settings_profile_unification_dialog_uncompliant_body" msgid="5476809856421622503">"Your work screen lock doesn\'t meet your organisation\'s security requirements.\nYou can set a new screen lock for both your device and your work profile, but any work screen lock policies will apply to your device screen lock as well."</string>
+    <string name="lock_settings_profile_unification_dialog_uncompliant_confirm" msgid="2372867057465188766">"Change lock"</string>
+    <string name="lock_settings_profile_unified_summary" msgid="9008819078132993492">"Same as device screen lock"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Manage apps"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Manage and remove installed apps"</string>
     <string name="applications_settings" msgid="1721442176406964682">"Apps"</string>
@@ -1619,7 +1623,7 @@
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Accessibility shortcut"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"On"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"Off"</string>
-    <string name="accessibility_global_gesture_preference_description" msgid="2328507978501847573">"When this feature is turned on, you can quickly activate accessibility features in two steps:\n\nStep 1: Press and hold the power button until you hear a sound or feel a vibration.\n\nStep 2: Tap &amp; hold two fingers until you hear audio confirmation.\n\nIf the device has multiple users, using this shortcut on the lock screen temporarily enables accessibility until the device is unlocked."</string>
+    <string name="accessibility_global_gesture_preference_description" msgid="1605107799571936715">"When this feature is turned on, you can quickly activate accessibility features in two steps:\n\nStep 1: Press and hold the power button until you hear a sound or feel a vibration.\n\nStep 2: Touch and hold two fingers until you hear audio confirmation.\n\nIf the device has multiple users, using this shortcut on the lock screen temporarily enables accessibility until the device is unlocked."</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="2567402942683463779">"High contrast text"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="7218498768415430963">"Auto update screen magnification"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"Update screen magnification on app transitions"</string>
@@ -2409,7 +2413,6 @@
     <string name="keywords_display" msgid="8910345814565493016">"screen, touchscreen"</string>
     <string name="keywords_display_brightness_level" msgid="3891383826236015854">"dim screen, touchscreen, battery"</string>
     <string name="keywords_display_auto_brightness" msgid="3325150824507953765">"dim screen, touchscreen, battery"</string>
-    <string name="keywords_display_night_mode" msgid="1272383423045276031">"dark theme, night mode, dim screen, invert brightness"</string>
     <string name="keywords_display_wallpaper" msgid="7362076351860131776">"background, personalise, customise display"</string>
     <string name="keywords_display_font_size" msgid="3404655440064726124">"text size"</string>
     <string name="keywords_display_cast_screen" msgid="7684618996741933067">"project, cast"</string>
@@ -2441,6 +2444,7 @@
     <string name="keywords_color_temperature" msgid="2688947724153266364">"colour temperature D65 D73 white yellow blue warm cool"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"slide to unlock, password, pattern, PIN"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"work challenge, work, profile"</string>
+    <string name="keywords_unification" msgid="1922900767659821025">"work profile, managed profile, unify, unification, work, profile"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Set up Wi-Fi NFC Tag"</string>
     <string name="write_tag" msgid="8571858602896222537">"Write"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Tap a tag to write..."</string>
@@ -2702,7 +2706,7 @@
     <string name="domain_urls_title" msgid="8762012672312435252">"App links"</string>
     <string name="domain_urls_summary_none" msgid="2639588015479657864">"Don’t open supported links"</string>
     <string name="domain_urls_summary_one" msgid="3704934031930978405">"Open <xliff:g id="DOMAIN">%s</xliff:g>"</string>
-    <string name="domain_urls_summary_some" msgid="812936714383016364">"Open <xliff:g id="DOMAIN">%s</xliff:g> and related URLs"</string>
+    <string name="domain_urls_summary_some" msgid="3950089361819428455">"Open <xliff:g id="DOMAIN">%s</xliff:g> and other URLs"</string>
     <plurals name="domain_urls_apps_summary" formatted="false" msgid="4322996467951692661">
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> apps can open their supported links</item>
       <item quantity="one">One app can open its supported links</item>
@@ -2847,7 +2851,7 @@
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"Make smaller"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"Make larger"</string>
     <string name="screen_zoom_summary_small" msgid="5867245310241621570">"Small"</string>
-    <string name="screen_zoom_summary_normal" msgid="2932499308526350466">"Normal"</string>
+    <string name="screen_zoom_summary_default" msgid="2247006805614056507">"Default"</string>
     <string name="screen_zoom_summary_large" msgid="4835294730065424084">"Large"</string>
     <string name="screen_zoom_summary_very_large" msgid="7108563375663670067">"Larger"</string>
     <string name="screen_zoom_summary_extremely_large" msgid="7427320168263276227">"Largest"</string>
@@ -2949,4 +2953,30 @@
     <string name="battery_saver_desc_turn_on_auto_never" msgid="6715896635178578813">"Never turn on automatically"</string>
     <string name="battery_saver_desc_turn_on_auto_pct" msgid="7472323223085636533">"Turn on automatically at %1$s battery"</string>
     <string name="not_battery_optimizing" msgid="5362861851864837617">"Not using battery optimisation"</string>
+    <string name="notification_log_no_title" msgid="5678029849672024215">"(none)"</string>
+    <string name="notification_log_details_delimiter" msgid="3116559361552416747">": "</string>
+    <string name="notification_log_details_package" msgid="2596495677039100284">"pkg"</string>
+    <string name="notification_log_details_key" msgid="2995791937075862968">"key"</string>
+    <string name="notification_log_details_group" msgid="2430467015200368698">"group"</string>
+    <string name="notification_log_details_group_summary" msgid="7945543958255585829">"(summary)"</string>
+    <string name="notification_log_details_visibility" msgid="2552873780715930971">"visibility"</string>
+    <string name="notification_log_details_public_version" msgid="4247242364605495240">"publicVersion"</string>
+    <string name="notification_log_details_priority" msgid="8371354971235991398">"priority"</string>
+    <string name="notification_log_details_importance" msgid="2153168790791683139">"importance"</string>
+    <string name="notification_log_details_explanation" msgid="1914295130775393551">"explanation"</string>
+    <string name="notification_log_details_content_intent" msgid="1113554570409128083">"intent"</string>
+    <string name="notification_log_details_delete_intent" msgid="905118520685297007">"delete intent"</string>
+    <string name="notification_log_details_full_screen_intent" msgid="7118560817013522978">"full screen intent"</string>
+    <string name="notification_log_details_actions" msgid="242523930165118066">"actions"</string>
+    <string name="notification_log_details_title" msgid="7177091647508863295">"title"</string>
+    <string name="notification_log_details_remoteinput" msgid="8328591329858827409">"remote inputs"</string>
+    <string name="notification_log_details_content_view" msgid="6638731378278561786">"customised view"</string>
+    <string name="notification_log_details_extras" msgid="4188418723779942047">"extras"</string>
+    <string name="notification_log_details_icon" msgid="8939114059726188218">"icon"</string>
+    <string name="notification_log_details_parcel" msgid="243148037601903212">"parcel size"</string>
+    <string name="notification_log_details_ashmem" msgid="7241814108477320636">"ashmem"</string>
+    <string name="notification_log_details_sound" msgid="5506232879598808099">"sound"</string>
+    <string name="notification_log_details_vibrate" msgid="6890065466625335940">"vibrate"</string>
+    <string name="notification_log_details_default" msgid="2345249399796730861">"Default"</string>
+    <string name="notification_log_details_none" msgid="184131801230614059">"None"</string>
 </resources>
