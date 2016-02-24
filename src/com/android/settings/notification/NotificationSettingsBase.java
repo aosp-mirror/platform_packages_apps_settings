@@ -46,12 +46,15 @@ import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 abstract public class NotificationSettingsBase extends SettingsPreferenceFragment {
     private static final String TAG = "NotifiSettingsBase";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
+    private static final String TUNER_SETTING = "show_importance_slider";
 
     protected static final String KEY_BYPASS_DND = "bypass_dnd";
     protected static final String KEY_SENSITIVE = "sensitive";
     protected static final String KEY_IMPORTANCE = "importance";
     protected static final String KEY_IMPORTANCE_TITLE = "importance_title";
     protected static final String KEY_IMPORTANCE_RESET = "importance_reset_button";
+    protected static final String KEY_BLOCK = "block";
+    protected static final String KEY_SILENT = "silent";
 
     protected PackageManager mPm;
     protected final NotificationBackend mBackend = new NotificationBackend();
@@ -66,7 +69,10 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
     protected LayoutPreference mImportanceReset;
     protected RestrictedSwitchPreference mPriority;
     protected RestrictedSwitchPreference mSensitive;
+    protected RestrictedSwitchPreference mBlock;
+    protected RestrictedSwitchPreference mSilent;
     protected EnforcedAdmin mSuspendedAppsAdmin;
+    protected boolean mShowSlider = false;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -119,6 +125,7 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
 
         mSuspendedAppsAdmin = RestrictedLockUtils.checkIfApplicationIsSuspended(
                 mContext, mPkg, mUserId);
+        mShowSlider = Settings.Secure.getInt(getContentResolver(), TUNER_SETTING, 0) == 1;
     }
 
     @Override
@@ -143,54 +150,94 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
         if (mImportanceTitle != null) {
             mImportanceTitle.setDisabledByAdmin(mSuspendedAppsAdmin);
         }
+        if (mBlock != null) {
+            mBlock.setDisabledByAdmin(mSuspendedAppsAdmin);
+        }
+        if (mSilent != null) {
+            mSilent.setDisabledByAdmin(mSuspendedAppsAdmin);
+        }
     }
 
-    protected void setupImportancePrefs(boolean isSystemApp, int importance) {
-        mImportance.setDisabledByAdmin(mSuspendedAppsAdmin);
-        mImportanceTitle.setDisabledByAdmin(mSuspendedAppsAdmin);
-        if (importance == Ranking.IMPORTANCE_UNSPECIFIED) {
-            mImportance.setVisible(false);
-            mImportanceReset.setVisible(false);
-            mImportanceTitle.setOnPreferenceClickListener(showEditableImportance);
-        } else {
-            mImportanceTitle.setOnPreferenceClickListener(null);
-        }
-
-        mImportanceTitle.setSummary(getProgressSummary(importance));
-        mImportance.setSystemApp(isSystemApp);
-        mImportance.setMinimumProgress(
-                isSystemApp ? Ranking.IMPORTANCE_LOW : Ranking.IMPORTANCE_NONE);
-        mImportance.setMax(Ranking.IMPORTANCE_MAX);
-        mImportance.setProgress(importance);
-        mImportance.setCallback(new ImportanceSeekBarPreference.Callback() {
-            @Override
-            public void onImportanceChanged(int progress) {
-                mBackend.setImportance(mPkg, mUid, progress);
-                mImportanceTitle.setSummary(getProgressSummary(progress));
-                updateDependents(progress);
-            }
-        });
-
-        Button button = (Button) mImportanceReset.findViewById(R.id.left_button);
-        button.setText(R.string.importance_reset);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mSuspendedAppsAdmin != null) {
-                    RestrictedLockUtils.sendShowAdminSupportDetailsIntent(
-                            getActivity(), mSuspendedAppsAdmin);
-                    return;
-                }
-
-                mBackend.setImportance(mPkg, mUid, Ranking.IMPORTANCE_UNSPECIFIED);
-                mImportanceReset.setVisible(false);
+    protected void setupImportancePrefs(boolean isSystemApp, int importance, boolean banned) {
+        if (mShowSlider) {
+            setVisible(mBlock, false);
+            setVisible(mSilent, false);
+            mImportance.setDisabledByAdmin(mSuspendedAppsAdmin);
+            mImportanceTitle.setDisabledByAdmin(mSuspendedAppsAdmin);
+            if (importance == Ranking.IMPORTANCE_UNSPECIFIED) {
                 mImportance.setVisible(false);
+                mImportanceReset.setVisible(false);
                 mImportanceTitle.setOnPreferenceClickListener(showEditableImportance);
-                mImportanceTitle.setSummary(getProgressSummary(Ranking.IMPORTANCE_UNSPECIFIED));
-                updateDependents(Ranking.IMPORTANCE_UNSPECIFIED);
+            } else {
+                mImportanceTitle.setOnPreferenceClickListener(null);
             }
-        });
-        mImportanceReset.findViewById(R.id.right_button).setVisibility(View.INVISIBLE);
+
+            mImportanceTitle.setSummary(getProgressSummary(importance));
+            mImportance.setSystemApp(isSystemApp);
+            mImportance.setMinimumProgress(
+                    isSystemApp ? Ranking.IMPORTANCE_LOW : Ranking.IMPORTANCE_NONE);
+            mImportance.setMax(Ranking.IMPORTANCE_MAX);
+            mImportance.setProgress(importance);
+            mImportance.setCallback(new ImportanceSeekBarPreference.Callback() {
+                @Override
+                public void onImportanceChanged(int progress) {
+                    mBackend.setImportance(mPkg, mUid, progress);
+                    mImportanceTitle.setSummary(getProgressSummary(progress));
+                    updateDependents(progress);
+                }
+            });
+
+            Button button = (Button) mImportanceReset.findViewById(R.id.left_button);
+            button.setText(R.string.importance_reset);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mSuspendedAppsAdmin != null) {
+                        RestrictedLockUtils.sendShowAdminSupportDetailsIntent(
+                                getActivity(), mSuspendedAppsAdmin);
+                        return;
+                    }
+
+                    mBackend.setImportance(mPkg, mUid, Ranking.IMPORTANCE_UNSPECIFIED);
+                    mImportanceReset.setVisible(false);
+                    mImportance.setVisible(false);
+                    mImportanceTitle.setOnPreferenceClickListener(showEditableImportance);
+                    mImportanceTitle.setSummary(getProgressSummary(Ranking.IMPORTANCE_UNSPECIFIED));
+                    updateDependents(Ranking.IMPORTANCE_UNSPECIFIED);
+                }
+            });
+            mImportanceReset.findViewById(R.id.right_button).setVisibility(View.INVISIBLE);
+        } else {
+            setVisible(mImportance, false);
+            setVisible(mImportanceReset, false);
+            setVisible(mImportanceTitle, false);
+            boolean blocked = importance == Ranking.IMPORTANCE_NONE || banned;
+            mBlock.setChecked(blocked);
+            mBlock.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    final boolean blocked = (Boolean) newValue;
+                    final int importance =
+                            blocked ? Ranking.IMPORTANCE_NONE :Ranking.IMPORTANCE_UNSPECIFIED;
+                    mBackend.setImportance(mPkgInfo.packageName, mUid, importance);
+                    updateDependents(importance);
+                    return true;
+                }
+            });
+
+            mSilent.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    final boolean silenced = (Boolean) newValue;
+                    final int importance =
+                            silenced ? Ranking.IMPORTANCE_DEFAULT : Ranking.IMPORTANCE_UNSPECIFIED;
+                    mBackend.setImportance(mPkgInfo.packageName, mUid, importance);
+                    updateDependents(importance);
+                    return true;
+                }
+            });
+            updateDependents(banned ? Ranking.IMPORTANCE_NONE : importance);
+        }
     }
 
     private String getProgressSummary(int progress) {

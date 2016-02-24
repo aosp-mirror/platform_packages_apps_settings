@@ -19,31 +19,44 @@
         android:key="app_notification_settings">
 
     <!-- Importance -->
+    <!-- Block -->
+    <com.android.settingslib.RestrictedSwitchPreference
+            android:key="block"
+            android:title="@string/app_notification_block_title"
+            android:summary="@string/app_notification_block_summary"
+            android:order="2" />
+    <!-- Silent -->
+    <com.android.settingslib.RestrictedSwitchPreference
+            android:key="silent"
+            android:title="@string/show_silently"
+            android:summary="@string/show_silently_summary"
+            android:order="3" />
+    <!-- Slider -->
     <com.android.settingslib.RestrictedPreference
             android:key="importance_title"
             android:title="@string/notification_importance_title"
-            android:order="2" />
+            android:order="4"/>
     <com.android.settings.notification.ImportanceSeekBarPreference
             android:key="importance"
-            android:order="3"/>
+            android:order="5"/>
 
     <com.android.settings.applications.LayoutPreference
             android:key="importance_reset_button"
             android:layout="@layout/two_buttons_panel"
-            android:order="4" />
+            android:order="6" />
 
     <!-- Sensitive -->
     <com.android.settingslib.RestrictedSwitchPreference
             android:key="sensitive"
             android:title="@string/app_notification_sensitive_title"
             android:summary="@string/app_notification_sensitive_summary"
-            android:order="5" />
+            android:order="7" />
 
     <!-- Bypass DND -->
     <com.android.settingslib.RestrictedSwitchPreference
             android:key="bypass_dnd"
             android:title="@string/app_notification_override_dnd_title"
             android:summary="@string/app_notification_override_dnd_summary"
-            android:order="6" />
+            android:order="8" />
 
 </PreferenceScreen>
