@@ -18,20 +18,15 @@ package com.android.settings.applications;
 
 import android.app.AlertDialog;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.UserManager;
 import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
-
 import com.android.internal.logging.MetricsProto.MetricsEvent;
-import com.android.settings.PreferenceAvailabilityProvider;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.Utils;
 import com.android.settings.voice.VoiceInputListPreference;
 
 /**
@@ -178,12 +173,5 @@ public class ManageAssist extends SettingsPreferenceFragment
     private void setDefaultAssist(String assistPackage) {
         mDefaultAssitPref.setValue(assistPackage);
         updateUi();
-    }
-
-    public static class AvailabilityProvider implements PreferenceAvailabilityProvider {
-        @Override
-        public boolean isAvailable(Context context) {
-            return !Utils.isManagedProfile(UserManager.get(context));
-        }
     }
 }

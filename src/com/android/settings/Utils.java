@@ -64,6 +64,8 @@ import android.provider.ContactsContract.RawContacts;
 import android.service.persistentdata.PersistentDataBlockManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
+import android.support.v7.preference.PreferenceManager;
+import android.support.v7.preference.PreferenceScreen;
 import android.telephony.TelephonyManager;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -83,7 +85,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.ListView;
 import android.widget.TabWidget;
 import com.android.internal.util.UserIcons;
-import com.android.settings.datausage.DataUsageList;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -1023,6 +1024,42 @@ public final class Utils extends com.android.settingslib.Utils {
             sBuilder.setLength(0);
             return DateUtils.formatDateRange(context, sFormatter, start, end, flags, null)
                     .toString();
+        }
+    }
+
+    public static List<String> getNonIndexable(int xml, Context context) {
+        List<String> ret = new ArrayList<>();
+        PreferenceManager manager = new PreferenceManager(context);
+        PreferenceScreen screen = manager.inflateFromResource(context, xml, null);
+        checkPrefs(screen, ret);
+
+        return ret;
+    }
+
+    private static void checkPrefs(PreferenceGroup group, List<String> ret) {
+        if (group == null) return;
+        for (int i = 0; i < group.getPreferenceCount(); i++) {
+            Preference pref = group.getPreference(i);
+            if (pref instanceof SelfAvailablePreference
+                    && !((SelfAvailablePreference) pref).isAvailable(group.getContext())) {
+                ret.add(pref.getKey());
+                if (pref instanceof PreferenceGroup) {
+                    addAll((PreferenceGroup) pref, ret);
+                }
+            } else if (pref instanceof PreferenceGroup) {
+                checkPrefs((PreferenceGroup) pref, ret);
+            }
+        }
+    }
+
+    private static void addAll(PreferenceGroup group, List<String> ret) {
+        if (group == null) return;
+        for (int i = 0; i < group.getPreferenceCount(); i++) {
+            Preference pref = group.getPreference(i);
+            ret.add(pref.getKey());
+            if (pref instanceof PreferenceGroup) {
+                addAll((PreferenceGroup) pref, ret);
+            }
         }
     }
 }

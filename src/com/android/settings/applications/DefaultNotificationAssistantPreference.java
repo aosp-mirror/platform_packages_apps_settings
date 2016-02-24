@@ -16,8 +16,6 @@
 
 package com.android.settings.applications;
 
-import com.android.settings.AppListPreference;
-
 import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -25,19 +23,16 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
-import android.os.UserManager;
 import android.provider.Settings;
 import android.service.notification.NotificationAssistantService;
 import android.util.AttributeSet;
 import android.util.Slog;
+import com.android.settings.AppListPreference;
+import com.android.settings.R;
+import com.android.settings.notification.ManagedServiceSettings;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.android.settings.PreferenceAvailabilityProvider;
-import com.android.settings.R;
-import com.android.settings.Utils;
-import com.android.settings.notification.ManagedServiceSettings;
 
 public class DefaultNotificationAssistantPreference extends AppListPreference {
     private static final String TAG = "DefaultNotiAssist";
@@ -110,12 +105,5 @@ public class DefaultNotificationAssistantPreference extends AppListPreference {
         c.warningDialogSummary = R.string.notification_listener_security_warning_summary;
         c.emptyText = R.string.no_notification_listeners;
         return c;
-    }
-
-    public static class AvailabilityProvider implements PreferenceAvailabilityProvider {
-        @Override
-        public boolean isAvailable(Context context) {
-            return !Utils.isManagedProfile(UserManager.get(context));
-        }
     }
 }

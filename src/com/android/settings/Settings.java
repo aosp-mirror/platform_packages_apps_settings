@@ -124,7 +124,7 @@ public class Settings extends SettingsActivity {
     public static class WriteSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AppDrawOverlaySettingsActivity extends SettingsActivity { /* empty */ }
     public static class AppWriteSettingsActivity extends SettingsActivity { /* empty */ }
-    public static class ManageDefaultAppsActivity extends SettingsActivity { /* empty */ }
+    public static class AdvancedAppsActivity extends SettingsActivity { /* empty */ }
 
     public static class WifiCallingSuggestionActivity extends SettingsActivity { /* empty */ }
     public static class ZenModeAutomationSuggestionActivity extends SettingsActivity { /* empty */ }

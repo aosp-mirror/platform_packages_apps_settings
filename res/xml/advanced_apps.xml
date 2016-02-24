@@ -24,52 +24,80 @@
         android:title="@string/app_permissions"
         settings:keywords="@string/keywords_app_permissions" />
 
-    <PreferenceScreen
+    <PreferenceCategory
+        android:title="@string/default_apps_title">
+
+        <PreferenceScreen
             android:key="domain_urls"
             android:title="@string/domain_urls_title"
             android:fragment="com.android.settings.applications.ManageApplications">
-        <extra
+            <extra
                 android:name="classname"
                 android:value="com.android.settings.Settings$DomainsURLsAppListActivity" />
-    </PreferenceScreen>
+        </PreferenceScreen>
+
+        <Preference
+            android:key="assist_and_voice_input"
+            android:fragment="com.android.settings.applications.ManageAssist"
+            android:title="@string/assist_and_voice_input_title" />
+
+        <com.android.settings.applications.DefaultHomePreference
+            android:key="default_home"
+            android:title="@string/home_app"
+            android:summary="@string/no_default_home" />
+
+        <com.android.settings.applications.DefaultBrowserPreference
+            android:key="default_browser"
+            android:title="@string/default_browser_title"
+            android:summary="@string/default_browser_title_none" />
+
+        <com.android.settings.applications.DefaultPhonePreference
+            android:key="default_phone_app"
+            android:title="@string/default_phone_title"
+            settings:keywords="@string/keywords_default_phone_app" />
+
+        <com.android.settings.applications.DefaultEmergencyPreference
+            android:key="default_emergency_app"
+            android:title="@string/default_emergency_app"
+            settings:keywords="@string/keywords_emergency_app" />
+
+        <com.android.settings.applications.DefaultSmsPreference
+            android:key="default_sms_app"
+            android:title="@string/sms_application_title"
+            settings:keywords="@string/keywords_more_default_sms_app" />
+
+        <com.android.settings.applications.DefaultNotificationAssistantPreference
+            android:key="default_notification_asst_app"
+            android:title="@string/default_notification_assistant" />
+
+
+    </PreferenceCategory>
+
+    <com.android.settings.WorkOnlyCategory
+        android:key="work_defaults"
+        android:title="@string/default_for_work">
+
+        <com.android.settings.applications.DefaultBrowserPreference
+            android:key="work_default_browser"
+            android:title="@string/default_browser_title"
+            android:summary="@string/default_browser_title_none"
+            settings:forWork="true" />
+
+        <com.android.settings.applications.DefaultPhonePreference
+            android:key="work_default_phone_app"
+            android:title="@string/default_phone_title"
+            settings:keywords="@string/keywords_default_phone_app"
+            settings:forWork="true" />
+
+    </com.android.settings.WorkOnlyCategory>
 
     <PreferenceCategory
-        android:title="@string/advanced_apps" />
+        android:title="@string/advanced_apps">
 
-    <PreferenceScreen
-        android:key="default_apps"
-        android:fragment="com.android.settings.applications.ManageDefaultApps"
-        android:title="@string/default_apps_title"
-        settings:keywords="@string/keywords_default_apps" />
+        <PreferenceScreen
+            android:key="special_access"
+            android:fragment="com.android.settings.applications.SpecialAccessSettings"
+            android:title="@string/special_access" />
 
-    <PreferenceScreen
-        android:key="system_alert_window"
-        android:title="@string/system_alert_window_settings"
-        android:fragment="com.android.settings.applications.ManageApplications"
-        settings:keywords="@string/keywords_system_alert_window">
-        <extra
-            android:name="classname"
-            android:value="com.android.settings.Settings$OverlaySettingsActivity" />
-    </PreferenceScreen>
-
-    <PreferenceScreen
-        android:key="write_settings_apps"
-        android:title="@string/write_settings"
-        android:fragment="com.android.settings.applications.ManageApplications"
-        settings:keywords="@string/keywords_write_settings">
-        <extra
-            android:name="classname"
-            android:value="com.android.settings.Settings$WriteSettingsActivity" />
-    </PreferenceScreen>
-
-    <PreferenceScreen
-        android:key="high_power_apps"
-        android:title="@string/high_power_apps"
-        android:fragment="com.android.settings.applications.ManageApplications"
-        settings:keywords="@string/keywords_ignore_optimizations">
-        <extra
-            android:name="classname"
-            android:value="com.android.settings.Settings$HighPowerApplicationsActivity" />
-    </PreferenceScreen>
-
+    </PreferenceCategory>
 </PreferenceScreen>
