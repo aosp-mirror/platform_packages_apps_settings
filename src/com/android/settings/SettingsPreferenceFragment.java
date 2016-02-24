@@ -25,6 +25,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.XmlRes;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceGroupAdapter;
@@ -130,6 +131,25 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+    }
+
+    @Override
+    public void addPreferencesFromResource(@XmlRes int preferencesResId) {
+        super.addPreferencesFromResource(preferencesResId);
+        checkAvailablePrefs(getPreferenceScreen());
+    }
+
+    private void checkAvailablePrefs(PreferenceGroup preferenceGroup) {
+        if (preferenceGroup == null) return;
+        for (int i = 0; i < preferenceGroup.getPreferenceCount(); i++) {
+            Preference pref = preferenceGroup.getPreference(i);
+            if (pref instanceof SelfAvailablePreference
+                    && !((SelfAvailablePreference) pref).isAvailable(getContext())) {
+                preferenceGroup.removePreference(pref);
+            } else if (pref instanceof PreferenceGroup) {
+                checkAvailablePrefs((PreferenceGroup) pref);
+            }
+        }
     }
 
     public FloatingActionButton getFloatingActionButton() {

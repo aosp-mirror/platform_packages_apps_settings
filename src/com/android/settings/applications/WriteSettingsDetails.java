@@ -158,13 +158,17 @@ public class WriteSettingsDetails extends AppInfoWithHeader implements OnPrefere
     }
 
     public static CharSequence getSummary(Context context, AppEntry entry) {
-        if (entry.extraInfo != null) {
-            return getSummary(context, new WriteSettingsState((PermissionState)entry
-                    .extraInfo));
+        WriteSettingsState state;
+        if (entry.extraInfo instanceof WriteSettingsState) {
+            state = (WriteSettingsState) entry.extraInfo;
+        } else if (entry.extraInfo instanceof PermissionState) {
+            state = new WriteSettingsState((PermissionState) entry.extraInfo);
+        } else {
+            state = new AppStateWriteSettingsBridge(context, null, null).getWriteSettingsInfo(
+                    entry.info.packageName, entry.info.uid);
         }
 
-        // fallback if entry.extrainfo is null - although this should not happen
-        return getSummary(context, entry.info.packageName);
+        return getSummary(context, state);
     }
 
     public static CharSequence getSummary(Context context, WriteSettingsState writeSettingsState) {

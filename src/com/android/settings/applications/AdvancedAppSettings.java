@@ -16,23 +16,29 @@
 package com.android.settings.applications;
 
 import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.SearchIndexableResource;
 import android.support.v7.preference.Preference;
-
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.Utils;
 import com.android.settings.applications.PermissionsSummaryHelper.PermissionsResultCallback;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.ApplicationsState.Session;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class AdvancedAppSettings extends SettingsPreferenceFragment implements
-        ApplicationsState.Callbacks {
+        ApplicationsState.Callbacks, Indexable {
 
     static final String TAG = "AdvancedAppSettings";
 
@@ -176,4 +182,20 @@ public class AdvancedAppSettings extends SettingsPreferenceFragment implements
             }
         }
     }
+
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.advanced_apps;
+                    return Arrays.asList(sir);
+                }
+
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    return Utils.getNonIndexable(R.xml.advanced_apps, context);
+                }
+            };
 }

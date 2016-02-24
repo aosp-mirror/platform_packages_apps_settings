@@ -16,6 +16,7 @@
 
 package com.android.settings.search;
 
+import android.provider.SearchIndexableResource;
 import com.android.settings.DateTimeSettings;
 import com.android.settings.DevelopmentSettings;
 import com.android.settings.DeviceInfoSettings;
@@ -32,7 +33,7 @@ import com.android.settings.WirelessSettings;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.accounts.AccountSettings;
 import com.android.settings.applications.AdvancedAppSettings;
-import com.android.settings.applications.ManageDefaultApps;
+import com.android.settings.applications.SpecialAccessSettings;
 import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.datausage.DataUsageMeteredSettings;
 import com.android.settings.datausage.DataUsageSummary;
@@ -55,8 +56,6 @@ import com.android.settings.users.UserSettings;
 import com.android.settings.wifi.AdvancedWifiSettings;
 import com.android.settings.wifi.SavedAccessPointsWifiSettings;
 import com.android.settings.wifi.WifiSettings;
-
-import android.provider.SearchIndexableResource;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -212,15 +211,15 @@ public final class SearchIndexableResources {
         sResMap.put(AdvancedAppSettings.class.getName(),
                 new SearchIndexableResource(
                         Ranking.getRankForClassName(AdvancedAppSettings.class.getName()),
-                        R.xml.advanced_apps,
+                        NO_DATA_RES_ID,
                         AdvancedAppSettings.class.getName(),
                         R.drawable.ic_settings_applications));
 
-        sResMap.put(ManageDefaultApps.class.getName(),
+        sResMap.put(SpecialAccessSettings.class.getName(),
                 new SearchIndexableResource(
-                        Ranking.getRankForClassName(ManageDefaultApps.class.getName()),
-                        NO_DATA_RES_ID,
-                        ManageDefaultApps.class.getName(),
+                        Ranking.getRankForClassName(SpecialAccessSettings.class.getName()),
+                        R.xml.special_access,
+                        SpecialAccessSettings.class.getName(),
                         R.drawable.ic_settings_applications));
 
         sResMap.put(UserSettings.class.getName(),

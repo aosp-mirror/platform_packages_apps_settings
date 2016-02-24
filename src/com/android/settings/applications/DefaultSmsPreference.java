@@ -22,17 +22,15 @@ import android.os.UserManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-
 import com.android.internal.telephony.SmsApplication;
 import com.android.internal.telephony.SmsApplication.SmsApplicationData;
 import com.android.settings.AppListPreference;
-import com.android.settings.PreferenceAvailabilityProvider;
-import com.android.settings.Utils;
+import com.android.settings.SelfAvailablePreference;
 
 import java.util.Collection;
 import java.util.Objects;
 
-public class DefaultSmsPreference extends AppListPreference {
+public class DefaultSmsPreference extends AppListPreference implements SelfAvailablePreference {
 
     public DefaultSmsPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -70,18 +68,29 @@ public class DefaultSmsPreference extends AppListPreference {
         return true;
     }
 
-    public static class AvailabilityProvider implements PreferenceAvailabilityProvider {
-        @Override
-        public boolean isAvailable(Context context) {
-            boolean isRestrictedUser =
-                    UserManager.get(context)
-                            .getUserInfo(UserHandle.myUserId()).isRestricted();
-            TelephonyManager tm =
-                    (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-            return !isRestrictedUser
-                    && tm.isSmsCapable()
-                    && !Utils.isManagedProfile(UserManager.get(context));
-        }
+    @Override
+    public boolean isAvailable(Context context) {
+        boolean isRestrictedUser =
+                UserManager.get(context)
+                        .getUserInfo(UserHandle.myUserId()).isRestricted();
+        TelephonyManager tm =
+                (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        return !isRestrictedUser && tm.isSmsCapable();
     }
 
+    public static boolean hasSmsPreference(String pkg, Context context) {
+        Collection<SmsApplicationData> smsApplications =
+                SmsApplication.getApplicationCollection(context);
+        for (SmsApplicationData data : smsApplications) {
+            if (data.mPackageName.equals(pkg)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean isSmsDefault(String pkg, Context context) {
+        ComponentName appName = SmsApplication.getDefaultSmsApplication(context, true);
+        return appName != null && appName.getPackageName().equals(pkg);
+    }
 }

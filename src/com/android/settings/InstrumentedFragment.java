@@ -47,6 +47,7 @@ public abstract class InstrumentedFragment extends PreferenceFragment {
     // Used for generic logging of Settings Preference Persistence, should not be used
     // outside SharedPreferencesLogger.
     public static final int ACTION_GENERIC_PACKAGE = UNDECLARED + 16;
+    public static final int SPECIAL_ACCESS = UNDECLARED + 17;
 
     /**
      * Declare the view of this category.
