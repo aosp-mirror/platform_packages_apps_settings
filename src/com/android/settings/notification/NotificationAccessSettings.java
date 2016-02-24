@@ -23,6 +23,8 @@ import android.service.notification.NotificationListenerService;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.utils.ManagedServiceSettings;
+import com.android.settings.utils.ServiceListing;
 
 public class NotificationAccessSettings extends ManagedServiceSettings {
     private static final String TAG = NotificationAccessSettings.class.getSimpleName();

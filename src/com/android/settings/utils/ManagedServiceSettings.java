@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.notification;
+package com.android.settings.utils;
 
 import android.annotation.Nullable;
 import android.app.AlertDialog;
@@ -34,6 +34,7 @@ import android.support.v7.preference.PreferenceScreen;
 import android.view.View;
 import android.widget.TextView;
 import com.android.settings.R;
+import com.android.settings.notification.EmptyTextSettings;
 
 import java.util.Collections;
 import java.util.List;

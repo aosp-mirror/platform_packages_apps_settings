@@ -2449,6 +2449,22 @@
                        android:value="com.android.settings.notification.NotificationAccessSettings" />
         </activity>
 
+        <activity android:name="Settings$VrListenersSettingsActivity"
+                  android:label="@string/vr_listeners_title"
+                  android:taskAffinity="">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.VR_LISTENER_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.applications.VrListenerSettings" />
+        </activity>
+
+
         <activity android:name="Settings$ZenAccessSettingsActivity"
                   android:label="@string/manage_zen_access_title"
                   android:taskAffinity="">
