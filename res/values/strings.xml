@@ -525,20 +525,22 @@
     <!-- "Button" that opens a language picker. The selected language gets added to the language list. [CHAR LIMIT=30] -->
     <string name="add_a_language">Add a language</string>
 
-    <!-- The title of the confirmation dialog shown when the user selected several languages and tries to remove them [CHAR LIMIT=60] -->
-    <string name="dlg_remove_locales_title">Remove from your language preference?</string>
-    <!-- TODO: come up with a good string -->
-    <!-- The text of the confirmation dialog shown when the user selected several languages and tries to remove them [CHAR LIMIT=NONE] -->
-    <string name="dlg_remove_locales_message" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit.  Nulla egestas porta aliquet. Ut laoreet orci tellus, id cursus enim volutpat in.</string>
+    <!-- The title of the confirmation dialog shown when the user selects one / several languages and tries to remove them [CHAR LIMIT=60] -->
+    <plurals name="dlg_remove_locales_title">
+        <item quantity="one">Remove selected language?</item>
+        <item quantity="other">Remove selected languages?</item>
+    </plurals>
 
-    <!-- The title of the error dialog shown when the user selected all the languages and tries to remove them [CHAR LIMIT=60] -->
-    <string name="dlg_remove_locales_error_title">Language removal error</string>
-    <!-- The text of the error dialog shown when the user selected all the languages and tries to remove them [CHAR LIMIT=NONE] -->
-    <string name="dlg_remove_locales_error_message">Can’t remove all the languages, you should leave at least one.</string>
+    <!-- The text of the confirmation dialog shown when the user selects several languages and tries to remove them [CHAR LIMIT=NONE] -->
+    <string name="dlg_remove_locales_message">Text will be displayed in another language</string>
 
-    <!-- TODO: Marked non-translatable for now, as it is not final. Waiting on b/27070104 -->
-    <!-- This text shows in the language picker when the system is not translated into that languages [CHAR LIMIT=130] -->
-    <string name="locale_not_translated" translatable="false">Not all applications are translated into this language; you might experience a mixture.</string>
+    <!-- The title of the error dialog shown when the user selects all the languages and tries to remove them [CHAR LIMIT=60] -->
+    <string name="dlg_remove_locales_error_title">Can’t remove all languages</string>
+    <!-- The text of the error dialog shown when the user selects all the languages and tries to remove them [CHAR LIMIT=NONE] -->
+    <string name="dlg_remove_locales_error_message">Keep at least one preferred language</string>
+
+    <!-- This text shows in the language picker when the system is not translated into that languages [CHAR LIMIT=80] -->
+    <string name="locale_not_translated">May not be available in some apps</string>
 
     <!-- The title of the dialog to pick an activity.  This is shown when there are multiple activities that can do a particular action.  For example, suppose you click on the "Share" menu item in the Browser.  Since you can share the webpage URL via many communication methods, this dialog would come up with choices like "Email", "IM", etc.  This is a generic message, and the previous example is a single possible scenario (so please don't assume it's for the browser or anything :) ). -->
     <string name="activity_picker_label">Choose activity</string>
