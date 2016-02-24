@@ -83,6 +83,7 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
         // Only take this argument into account if it belongs to the current profile.
         Intent intent = getActivity().getIntent();
         mEffectiveUserId = Utils.getUserIdFromBundle(getActivity(), intent.getExtras());
+        mAllowFpAuthentication = mAllowFpAuthentication && !isFingerprintDisabledByAdmin();
         mLockPatternUtils = new LockPatternUtils(getActivity());
     }
 
@@ -111,6 +112,13 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
         if (Utils.isManagedProfile(UserManager.get(getActivity()), credentialOwnerUserId)) {
             setWorkChallengeBackground(view, credentialOwnerUserId);
         }
+    }
+
+    private boolean isFingerprintDisabledByAdmin() {
+        DevicePolicyManager dpm = (DevicePolicyManager) getActivity().getSystemService(
+                Context.DEVICE_POLICY_SERVICE);
+        final int disabledFeatures = dpm.getKeyguardDisabledFeatures(null, mEffectiveUserId);
+        return (disabledFeatures & DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT) != 0;
     }
 
     @Override
