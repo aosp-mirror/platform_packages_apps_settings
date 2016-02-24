@@ -63,6 +63,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -390,6 +391,28 @@ public class InstalledAppDetails extends AppInfoBase
         mForceStopButton.setText(R.string.force_stop);
         mUninstallButton = (Button) btnPanel.findViewById(R.id.left_button);
         mForceStopButton.setEnabled(false);
+
+        View gear = mHeader.findViewById(R.id.gear);
+        Intent i = new Intent(Intent.ACTION_APPLICATION_PREFERENCES);
+        i.setPackage(mPackageName);
+        final Intent intent = resolveIntent(i);
+        if (intent != null) {
+            gear.setVisibility(View.VISIBLE);
+            gear.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(intent);
+                }
+            });
+        } else {
+            gear.setVisibility(View.GONE);
+        }
+    }
+
+    private Intent resolveIntent(Intent i) {
+        ResolveInfo result = getContext().getPackageManager().resolveActivity(i, 0);
+        return result != null ? new Intent(Intent.ACTION_APPLICATION_PREFERENCES)
+                .setClassName(result.activityInfo.packageName, result.activityInfo.name) : null;
     }
 
     @Override
