@@ -2768,7 +2768,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="Settings$ManageDefaultAppsActivity"
+        <activity android:name="Settings$AdvancedAppsActivity"
                   android:taskAffinity=""
                   android:exported="true">
             <intent-filter android:priority="1">
@@ -2780,7 +2780,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.applications.ManageDefaultApps" />
+                       android:value="com.android.settings.applications.AdvancedAppSettings" />
         </activity>
 
         <service

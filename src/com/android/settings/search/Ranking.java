@@ -32,7 +32,7 @@ import com.android.settings.WirelessSettings;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.accounts.AccountSettings;
 import com.android.settings.applications.AdvancedAppSettings;
-import com.android.settings.applications.ManageDefaultApps;
+import com.android.settings.applications.SpecialAccessSettings;
 import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.datausage.DataUsageMeteredSettings;
 import com.android.settings.datausage.DataUsageSummary;
@@ -148,7 +148,7 @@ public final class Ranking {
 
         // Advanced app settings
         sRankMap.put(AdvancedAppSettings.class.getName(), RANK_APPS);
-        sRankMap.put(ManageDefaultApps.class.getName(), RANK_APPS);
+        sRankMap.put(SpecialAccessSettings.class.getName(), RANK_APPS);
 
         // Users
         sRankMap.put(UserSettings.class.getName(), RANK_USERS);

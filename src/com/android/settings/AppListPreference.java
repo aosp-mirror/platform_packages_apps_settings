@@ -23,9 +23,12 @@ import android.content.DialogInterface;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,6 +49,9 @@ import java.util.List;
 public class AppListPreference extends CustomListPreference {
 
     public static final String ITEM_NONE_VALUE = "";
+
+    protected final boolean mForWork;
+    protected final int mUserId;
 
     private Drawable[] mEntryDrawables;
     private boolean mShowItemNone = false;
@@ -91,13 +97,24 @@ public class AppListPreference extends CustomListPreference {
         }
     }
 
-    public AppListPreference(Context context, AttributeSet attrs,
-            int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
+    public AppListPreference(Context context, AttributeSet attrs, int defStyle, int defAttrs) {
+        super(context, attrs, defStyle, defAttrs);
+
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.WorkPreference, 0, 0);
+        mForWork = a.getBoolean(R.styleable.WorkPreference_forWork, false);
+        final UserHandle managedProfile = Utils.getManagedProfile(UserManager.get(context));
+        mUserId = mForWork && managedProfile != null ? managedProfile.getIdentifier()
+                : UserHandle.myUserId();
     }
 
     public AppListPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
+
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.WorkPreference, 0, 0);
+        mForWork = a.getBoolean(R.styleable.WorkPreference_forWork, false);
+        final UserHandle managedProfile = Utils.getManagedProfile(UserManager.get(context));
+        mUserId = mForWork && managedProfile != null ? managedProfile.getIdentifier()
+                : UserHandle.myUserId();
     }
 
     public void setShowItemNone(boolean showItemNone) {
@@ -114,7 +131,8 @@ public class AppListPreference extends CustomListPreference {
         int selectedIndex = -1;
         for (int i = 0; i < packageNames.length; i++) {
             try {
-                ApplicationInfo appInfo = pm.getApplicationInfo(packageNames[i].toString(), 0);
+                ApplicationInfo appInfo = pm.getApplicationInfoAsUser(packageNames[i].toString(), 0,
+                        mUserId);
                 applicationNames.add(appInfo.loadLabel(pm));
                 validatedPackageNames.add(appInfo.packageName);
                 entryDrawables.add(appInfo.loadIcon(pm));
@@ -162,8 +180,8 @@ public class AppListPreference extends CustomListPreference {
         int selectedIndex = -1;
         for (int i = 0; i < componentNames.length; i++) {
             try {
-                ApplicationInfo appInfo = pm.getApplicationInfo(
-                        componentNames[i].getPackageName().toString(), 0);
+                ApplicationInfo appInfo = pm.getApplicationInfoAsUser(
+                        componentNames[i].getPackageName().toString(), 0, mUserId);
                 applicationNames.add(appInfo.loadLabel(pm));
                 validatedComponentNames.add(componentNames[i].flattenToString());
                 entryDrawables.add(appInfo.loadIcon(pm));
