@@ -14,35 +14,47 @@
      limitations under the License.
 -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="16dp"
-    android:paddingStart="16dp"
-    android:paddingEnd="16dp"
-    android:orientation="vertical">
+    android:fillViewport="true" >
 
-    <TextView
+    <view class="com.android.settings.TouchBlockingFrameLayout"
+        android:id="@+id/frame"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/font_size_preview_text_headline"
-        android:textAppearance="@android:style/TextAppearance.Material.Headline"/>
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/font_size_preview_text_title"
-        android:textAppearance="@android:style/TextAppearance.Material.Title"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="16dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/font_size_preview_text_subtitle"
-        android:textAppearance="@android:style/TextAppearance.Material.Subhead"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/font_size_preview_text_headline"
+                android:textAppearance="@android:style/TextAppearance.Material.Headline"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/font_size_preview_text_body"
-        android:textAppearance="@android:style/TextAppearance.Material.Body1"/>
-</LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/font_size_preview_text_title"
+                android:textAppearance="@android:style/TextAppearance.Material.Title"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/font_size_preview_text_subtitle"
+                android:textAppearance="@android:style/TextAppearance.Material.Subhead"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/font_size_preview_text_body"
+                android:textAppearance="@android:style/TextAppearance.Material.Body1"/>
+        </LinearLayout>
+    </view>
+</ScrollView>

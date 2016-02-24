@@ -25,6 +25,8 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 /**
  * A PagerAdapter used by PreviewSeekBarPreferenceFragment that for showing multiple preview screen
@@ -32,7 +34,7 @@ import android.widget.FrameLayout;
  */
 public class PreviewPagerAdapter extends PagerAdapter {
 
-    private TouchBlockingFrameLayout[] mPreviewFrames;
+    private FrameLayout[] mPreviewFrames;
 
     /** Duration to use when cross-fading between previews. */
     private static final long CROSS_FADE_DURATION_MS = 400;
@@ -45,11 +47,13 @@ public class PreviewPagerAdapter extends PagerAdapter {
 
     public PreviewPagerAdapter(Context context, int[] previewSampleResIds,
                                Configuration[] configurations) {
-        mPreviewFrames = new TouchBlockingFrameLayout[previewSampleResIds.length];
+        mPreviewFrames = new FrameLayout[previewSampleResIds.length];
 
         for (int i = 0; i < previewSampleResIds.length; ++i) {
-            mPreviewFrames[i] = (TouchBlockingFrameLayout) LayoutInflater.from(context)
-                    .inflate(R.layout.preview_frame_container, null);
+            mPreviewFrames[i] = new FrameLayout(context);
+            mPreviewFrames[i].setLayoutParams(new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT));
             mPreviewFrames[i].setContentDescription(
                     context.getString(R.string.preview_page_indicator_content_description, i + 1,
                             previewSampleResIds.length));
@@ -65,7 +69,6 @@ public class PreviewPagerAdapter extends PagerAdapter {
                         mPreviewFrames[i], false);
                 sampleView.setAlpha(0);
                 sampleView.setVisibility(View.INVISIBLE);
-
                 mPreviewFrames[i].addView(sampleView);
             }
         }
