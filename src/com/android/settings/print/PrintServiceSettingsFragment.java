@@ -19,25 +19,23 @@ package com.android.settings.print;
 import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.ComponentName;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender.SendIntentException;
 import android.content.Loader;
 import android.content.pm.ResolveInfo;
-import android.database.ContentObserver;
 import android.database.DataSetObserver;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.print.PrintManager;
+import android.print.PrintServicesLoader;
 import android.print.PrinterDiscoverySession;
 import android.print.PrinterDiscoverySession.OnPrintersChangeListener;
 import android.print.PrinterId;
 import android.print.PrinterInfo;
+import android.printservice.PrintServiceInfo;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.TypedValue;
@@ -53,6 +51,7 @@ import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Switch;
@@ -74,19 +73,13 @@ import java.util.Map;
  * Fragment with print service settings.
  */
 public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
-        implements SwitchBar.OnSwitchChangeListener {
+        implements SwitchBar.OnSwitchChangeListener,
+        LoaderManager.LoaderCallbacks<List<PrintServiceInfo>> {
 
     private static final String LOG_TAG = "PrintServiceSettingsFragment";
 
     private static final int LOADER_ID_PRINTERS_LOADER = 1;
-
-    private final SettingsContentObserver mSettingsContentObserver =
-            new SettingsContentObserver(new Handler()) {
-        @Override
-        public void onChange(boolean selfChange, Uri uri) {
-            updateUiForServiceState();
-        }
-    };
+    private static final int LOADER_ID_PRINT_SERVICE_LOADER = 2;
 
     private final DataSetObserver mDataObserver = new DataSetObserver() {
         @Override
@@ -115,10 +108,8 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
 
     private String mPreferenceKey;
 
-    private CharSequence mSettingsTitle;
     private Intent mSettingsIntent;
 
-    private CharSequence mAddPrintersTitle;
     private Intent mAddPrintersIntent;
 
     private ComponentName mComponentName;
@@ -144,6 +135,8 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
+        mServiceEnabled = getArguments().getBoolean(PrintSettingsFragment.EXTRA_CHECKED);
+
         String title = getArguments().getString(PrintSettingsFragment.EXTRA_TITLE);
         if (!TextUtils.isEmpty(title)) {
             getActivity().setTitle(title);
@@ -153,8 +146,6 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
     @Override
     public void onStart() {
         super.onStart();
-        mSettingsContentObserver.register(getContentResolver());
-
         updateEmptyView();
         updateUiForServiceState();
     }
@@ -169,7 +160,6 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
 
     @Override
     public void onStop() {
-        mSettingsContentObserver.unregister(getContentResolver());
         super.onStop();
     }
 
@@ -192,14 +182,8 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
     }
 
     private void onPreferenceToggled(String preferenceKey, boolean enabled) {
-        ComponentName service = ComponentName.unflattenFromString(preferenceKey);
-        List<ComponentName> services = PrintSettingsUtils.readDisabledPrintServices(getActivity());
-        if (enabled) {
-            services.remove(service);
-        } else {
-            services.add(service);
-        }
-        PrintSettingsUtils.writeDisabledPrintServices(getActivity(), services);
+        ((PrintManager)getContext().getSystemService(Context.PRINT_SERVICE))
+                .setPrintServiceEnabled(mComponentName, enabled);
     }
 
     private ListView getBackupListView() {
@@ -255,9 +239,6 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
     }
 
     private void updateUiForServiceState() {
-        List<ComponentName> disabledServices = PrintSettingsUtils
-                .readDisabledPrintServices(getActivity());
-        mServiceEnabled = !disabledServices.contains(mComponentName);
         if (mServiceEnabled) {
             mSwitchBar.setCheckedInternal(true);
             mPrintersAdapter.enable();
@@ -315,56 +296,87 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
     private void updateUiForArguments() {
         Bundle arguments = getArguments();
 
+        // Component name.
+        mComponentName = ComponentName.unflattenFromString(arguments
+                .getString(PrintSettingsFragment.EXTRA_SERVICE_COMPONENT_NAME));
+
         // Key.
-        mPreferenceKey = arguments.getString(PrintSettingsFragment.EXTRA_PREFERENCE_KEY);
+        mPreferenceKey = mComponentName.flattenToString();
 
         // Enabled.
         final boolean enabled = arguments.getBoolean(PrintSettingsFragment.EXTRA_CHECKED);
         mSwitchBar.setCheckedInternal(enabled);
 
-        // Settings title and intent.
-        String settingsTitle = arguments.getString(PrintSettingsFragment.EXTRA_SETTINGS_TITLE);
-        String settingsComponentName = arguments.getString(
-                PrintSettingsFragment.EXTRA_SETTINGS_COMPONENT_NAME);
-        if (!TextUtils.isEmpty(settingsTitle) && !TextUtils.isEmpty(settingsComponentName)) {
+        getLoaderManager().initLoader(LOADER_ID_PRINT_SERVICE_LOADER, null, this);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public Loader<List<PrintServiceInfo>> onCreateLoader(int id, Bundle args) {
+        return new PrintServicesLoader(
+                (PrintManager) getContext().getSystemService(Context.PRINT_SERVICE), getContext(),
+                PrintManager.ALL_SERVICES);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<List<PrintServiceInfo>> loader,
+            List<PrintServiceInfo> services) {
+        PrintServiceInfo service = null;
+
+        if (services != null) {
+            final int numServices = services.size();
+            for (int i = 0; i < numServices; i++) {
+                if (services.get(i).getComponentName().equals(mComponentName)) {
+                    service = services.get(i);
+                    break;
+                }
+            }
+        }
+
+        if (service == null) {
+            // The print service was uninstalled
+            finishFragment();
+        }
+
+        mServiceEnabled = service.isEnabled();
+
+        if (service.getSettingsActivityName() != null) {
             Intent settingsIntent = new Intent(Intent.ACTION_MAIN).setComponent(
-                    ComponentName.unflattenFromString(settingsComponentName.toString()));
+                    ComponentName.unflattenFromString(service.getSettingsActivityName()));
             List<ResolveInfo> resolvedActivities = getPackageManager().queryIntentActivities(
                     settingsIntent, 0);
             if (!resolvedActivities.isEmpty()) {
                 // The activity is a component name, therefore it is one or none.
                 if (resolvedActivities.get(0).activityInfo.exported) {
-                    mSettingsTitle = settingsTitle;
                     mSettingsIntent = settingsIntent;
                 }
             }
+        } else {
+            mSettingsIntent = null;
         }
 
-        // Add printers title and intent.
-        String addPrintersTitle = arguments.getString(
-                PrintSettingsFragment.EXTRA_ADD_PRINTERS_TITLE);
-        String addPrintersComponentName =
-                arguments.getString(PrintSettingsFragment.EXTRA_ADD_PRINTERS_COMPONENT_NAME);
-        if (!TextUtils.isEmpty(addPrintersTitle)
-                && !TextUtils.isEmpty(addPrintersComponentName)) {
-            Intent addPritnersIntent = new Intent(Intent.ACTION_MAIN).setComponent(
-                    ComponentName.unflattenFromString(addPrintersComponentName.toString()));
+        if (service.getAddPrintersActivityName() != null) {
+            Intent addPrintersIntent = new Intent(Intent.ACTION_MAIN)
+                    .setComponent(ComponentName.unflattenFromString(
+                            service.getAddPrintersActivityName()));
             List<ResolveInfo> resolvedActivities = getPackageManager().queryIntentActivities(
-                    addPritnersIntent, 0);
+                    addPrintersIntent, 0);
             if (!resolvedActivities.isEmpty()) {
                 // The activity is a component name, therefore it is one or none.
                 if (resolvedActivities.get(0).activityInfo.exported) {
-                    mAddPrintersTitle = addPrintersTitle;
-                    mAddPrintersIntent = addPritnersIntent;
+                    mAddPrintersIntent = addPrintersIntent;
                 }
             }
+        } else {
+            mAddPrintersIntent = null;
         }
 
-        // Component name.
-        mComponentName = ComponentName.unflattenFromString(arguments
-                .getString(PrintSettingsFragment.EXTRA_SERVICE_COMPONENT_NAME));
+        updateUiForServiceState();
+    }
 
-        setHasOptionsMenu(true);
+    @Override
+    public void onLoaderReset(Loader<List<PrintServiceInfo>> loader) {
+        updateUiForServiceState();
     }
 
     @Override
@@ -373,16 +385,14 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         inflater.inflate(R.menu.print_service_settings, menu);
 
         MenuItem addPrinters = menu.findItem(R.id.print_menu_item_add_printer);
-        if (mServiceEnabled && !TextUtils.isEmpty(mAddPrintersTitle)
-                && mAddPrintersIntent != null) {
+        if (mServiceEnabled && mAddPrintersIntent != null) {
             addPrinters.setIntent(mAddPrintersIntent);
         } else {
             menu.removeItem(R.id.print_menu_item_add_printer);
         }
 
         MenuItem settings = menu.findItem(R.id.print_menu_item_settings);
-        if (mServiceEnabled && !TextUtils.isEmpty(mSettingsTitle)
-                && mSettingsIntent != null) {
+        if (mServiceEnabled && mSettingsIntent != null) {
             settings.setIntent(mSettingsIntent);
         } else {
             menu.removeItem(R.id.print_menu_item_settings);
@@ -424,25 +434,6 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         } else {
             menu.removeItem(R.id.print_menu_item_search);
         }
-    }
-
-    private static abstract class SettingsContentObserver extends ContentObserver {
-
-        public SettingsContentObserver(Handler handler) {
-            super(handler);
-        }
-
-        public void register(ContentResolver contentResolver) {
-            contentResolver.registerContentObserver(android.provider.Settings.Secure.getUriFor(
-                    android.provider.Settings.Secure.DISABLED_PRINT_SERVICES), false, this);
-        }
-
-        public void unregister(ContentResolver contentResolver) {
-            contentResolver.unregisterContentObserver(this);
-        }
-
-        @Override
-        public abstract void onChange(boolean selfChange, Uri uri);
     }
 
     private final class PrintersAdapter extends BaseAdapter
@@ -568,7 +559,7 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
                 subtitleView.setVisibility(View.GONE);
             }
 
-            ImageView moreInfoView = (ImageView) convertView.findViewById(R.id.more_info);
+            LinearLayout moreInfoView = (LinearLayout) convertView.findViewById(R.id.more_info);
             if (printer.getInfoIntent() != null) {
                 moreInfoView.setVisibility(View.VISIBLE);
                 moreInfoView.setOnClickListener(new OnClickListener() {
