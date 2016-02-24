@@ -18,6 +18,7 @@ package com.android.settings;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.AppGlobals;
 import android.app.ListFragment;
 import android.app.admin.DeviceAdminInfo;
 import android.app.admin.DeviceAdminReceiver;
@@ -27,11 +28,15 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.ActivityInfo;
+import android.content.pm.IPackageManager;
 import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
@@ -356,7 +361,7 @@ public class DeviceAdminSettings extends ListFragment {
                             resolveInfo.activityInfo.name);
             if (alreadyAddedComponents == null
                     || !alreadyAddedComponents.contains(riComponentName)) {
-                DeviceAdminInfo deviceAdminInfo =  createDeviceAdminInfo(resolveInfo);
+                DeviceAdminInfo deviceAdminInfo =  createDeviceAdminInfo(resolveInfo.activityInfo);
                 // add only visible ones (note: active admins are added regardless of visibility)
                 if (deviceAdminInfo != null && deviceAdminInfo.isVisible()) {
                     if (!deviceAdminInfo.getActivityInfo().applicationInfo.isInternal()) {
@@ -383,27 +388,31 @@ public class DeviceAdminSettings extends ListFragment {
             final int profileId) {
         if (activeAdmins != null) {
             final PackageManager packageManager = getActivity().getPackageManager();
+            final IPackageManager iPackageManager = AppGlobals.getPackageManager();
             final int n = activeAdmins.size();
             for (int i = 0; i < n; ++i) {
-                ComponentName activeAdmin = activeAdmins.get(i);
-                List<ResolveInfo> resolved = packageManager.queryBroadcastReceiversAsUser(
-                        new Intent().setComponent(activeAdmin), PackageManager.GET_META_DATA
-                                | PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS, profileId);
-                if (resolved != null) {
-                    final int resolvedMax = resolved.size();
-                    for (int j = 0; j < resolvedMax; ++j) {
-                        DeviceAdminInfo deviceAdminInfo = createDeviceAdminInfo(resolved.get(j));
-                        if (deviceAdminInfo != null) {
-                            // Don't do the applicationInfo.isInternal() check here; if an active
-                            // admin is already on SD card, just show it.
-                            DeviceAdminListItem item = new DeviceAdminListItem();
-                            item.info = deviceAdminInfo;
-                            item.name = deviceAdminInfo.loadLabel(packageManager).toString();
-                            item.active = true;
-                            mAdmins.add(item);
-                        }
-                    }
+                final ComponentName activeAdmin = activeAdmins.get(i);
+                final ActivityInfo ai;
+                try {
+                    ai = iPackageManager.getReceiverInfo(activeAdmin,
+                            PackageManager.GET_META_DATA |
+                            PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS |
+                            PackageManager.MATCH_ENCRYPTION_AWARE_AND_UNAWARE, profileId);
+                } catch (RemoteException e) {
+                    Log.w(TAG, "Unable to load component: " + activeAdmin);
+                    continue;
                 }
+                final DeviceAdminInfo deviceAdminInfo = createDeviceAdminInfo(ai);
+                if (deviceAdminInfo == null) {
+                    continue;
+                }
+                // Don't do the applicationInfo.isInternal() check here; if an active
+                // admin is already on SD card, just show it.
+                final DeviceAdminListItem item = new DeviceAdminListItem();
+                item.info = deviceAdminInfo;
+                item.name = deviceAdminInfo.loadLabel(packageManager).toString();
+                item.active = true;
+                mAdmins.add(item);
             }
         }
     }
@@ -412,16 +421,14 @@ public class DeviceAdminSettings extends ListFragment {
      * Creates a device admin info object for the resolved intent that points to the component of
      * the device admin.
      *
-     * @param resolved resolved intent.
+     * @param ai ActivityInfo for the admin component.
      * @return new {@link DeviceAdminInfo} object or null if there was an error.
      */
-    private DeviceAdminInfo createDeviceAdminInfo(ResolveInfo resolved) {
+    private DeviceAdminInfo createDeviceAdminInfo(ActivityInfo ai) {
         try {
-            return new DeviceAdminInfo(getActivity(), resolved);
-        } catch (XmlPullParserException e) {
-            Log.w(TAG, "Skipping " + resolved.activityInfo, e);
-        } catch (IOException e) {
-            Log.w(TAG, "Skipping " + resolved.activityInfo, e);
+            return new DeviceAdminInfo(getActivity(), ai);
+        } catch (XmlPullParserException|IOException e) {
+            Log.w(TAG, "Skipping " + ai, e);
         }
         return null;
     }
