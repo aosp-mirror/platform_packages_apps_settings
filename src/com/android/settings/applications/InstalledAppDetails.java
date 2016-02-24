@@ -65,6 +65,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.webkit.IWebViewUpdateService;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -256,6 +257,16 @@ public class InstalledAppDetails extends AppInfoBase
 
         if (mAppsControlDisallowedBySystem) {
             enabled = false;
+        }
+
+        try {
+            IWebViewUpdateService webviewUpdateService =
+                IWebViewUpdateService.Stub.asInterface(ServiceManager.getService("webviewupdate"));
+            if (webviewUpdateService.isFallbackPackage(mAppEntry.info.packageName)) {
+                enabled = false;
+            }
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
         }
 
         mUninstallButton.setEnabled(enabled);
