@@ -26,23 +26,15 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.service.notification.NotificationListenerService.Ranking;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.Preference.OnPreferenceChangeListener;
-import android.support.v7.preference.Preference.OnPreferenceClickListener;
-import android.support.v7.preference.PreferenceCategory;
 import android.util.ArrayMap;
 import android.util.Log;
 
-import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.AppHeader;
 import com.android.settings.R;
-import com.android.settings.Utils;
-import com.android.settings.applications.AppInfoBase;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.notification.NotificationBackend.AppRow;
-import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.RestrictedPreference;
 
@@ -86,6 +78,8 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                 (RestrictedSwitchPreference) getPreferenceScreen().findPreference(KEY_BYPASS_DND);
         mSensitive =
                 (RestrictedSwitchPreference) getPreferenceScreen().findPreference(KEY_SENSITIVE);
+        mBlock = (RestrictedSwitchPreference) getPreferenceScreen().findPreference(KEY_BLOCK);
+        mSilent = (RestrictedSwitchPreference) getPreferenceScreen().findPreference(KEY_SILENT);
 
         mAppRow = mBackend.loadAppRow(mPm, mPkgInfo);
 
@@ -98,7 +92,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
         rows.put(mAppRow.pkg, mAppRow);
         collectConfigActivities(rows);
 
-        setupImportancePrefs(mAppRow.systemApp, mAppRow.appImportance);
+        setupImportancePrefs(mAppRow.systemApp, mAppRow.appImportance, mAppRow.banned);
         setupPriorityPref(mAppRow.appBypassDnd);
         setupSensitivePref(mAppRow.appSensitive);
         updateDependents(mAppRow.appImportance);
@@ -111,9 +105,13 @@ public class AppNotificationSettings extends NotificationSettingsBase {
         final boolean lockscreenNotificationsEnabled = getLockscreenNotificationsEnabled();
         final boolean allowPrivate = getLockscreenAllowPrivateNotifications();
 
-        setVisible(mPriority, checkCanBeVisible(Ranking.IMPORTANCE_DEFAULT, importance)
+        if (getPreferenceScreen().findPreference(mBlock.getKey()) != null) {
+            setVisible(mSilent, checkCanBeVisible(Ranking.IMPORTANCE_LOW, importance));
+            mSilent.setChecked(importance == Ranking.IMPORTANCE_DEFAULT);
+        }
+        setVisible(mPriority, checkCanBeVisible(Ranking.IMPORTANCE_LOW, importance)
                 && !mDndVisualEffectsSuppressed);
-        setVisible(mSensitive, checkCanBeVisible(Ranking.IMPORTANCE_LOW, importance)
+        setVisible(mSensitive, checkCanBeVisible(Ranking.IMPORTANCE_HIGH, importance)
                 && lockscreenSecure && lockscreenNotificationsEnabled && allowPrivate);
     }
 
@@ -121,7 +119,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
         if (importance == Ranking.IMPORTANCE_UNSPECIFIED) {
             return true;
         }
-        return importance > minImportanceVisible;
+        return importance >= minImportanceVisible;
     }
 
     private boolean getLockscreenNotificationsEnabled() {
