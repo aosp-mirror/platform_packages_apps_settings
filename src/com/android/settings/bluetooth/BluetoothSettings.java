@@ -496,8 +496,9 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
 
         @Override
         public void setListening(boolean listening) {
+            BluetoothAdapter defaultAdapter = BluetoothAdapter.getDefaultAdapter();
+            if (defaultAdapter == null) return;
             if (listening) {
-                BluetoothAdapter defaultAdapter = BluetoothAdapter.getDefaultAdapter();
                 mEnabled = defaultAdapter.isEnabled();
                 mConnected =
                         defaultAdapter.getConnectionState() == BluetoothAdapter.STATE_CONNECTED;
