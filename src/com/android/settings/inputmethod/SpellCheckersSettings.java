@@ -22,6 +22,7 @@ import android.content.DialogInterface;
 import android.content.pm.ApplicationInfo;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.support.v7.preference.PreferenceScreen;
 import android.util.Log;
@@ -34,13 +35,11 @@ import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.inputmethod.SpellCheckerPreference.OnRadioButtonPreferenceListener;
 import com.android.settings.widget.SwitchBar;
 import com.android.settings.widget.SwitchBar.OnSwitchChangeListener;
 
 public class SpellCheckersSettings extends SettingsPreferenceFragment
-        implements OnSwitchChangeListener, OnPreferenceClickListener,
-        OnRadioButtonPreferenceListener {
+        implements OnSwitchChangeListener, OnPreferenceClickListener, OnPreferenceChangeListener {
     private static final String TAG = SpellCheckersSettings.class.getSimpleName();
     private static final boolean DBG = false;
 
@@ -77,13 +76,16 @@ public class SpellCheckersSettings extends SettingsPreferenceFragment
         final PreferenceScreen screen = getPreferenceScreen();
         final Context context = getActivity();
         final int count = (mEnabledScis == null) ? 0 : mEnabledScis.length;
+
         for (int index = 0; index < count; ++index) {
             final SpellCheckerInfo sci = mEnabledScis[index];
-            final SpellCheckerPreference pref = new SpellCheckerPreference(getPrefContext(), sci,
-                    this);
-            screen.addPreference(pref);
-            InputMethodAndSubtypeUtil.removeUnnecessaryNonPersistentPreference(pref);
         }
+        final SpellCheckerPreference pref = new SpellCheckerPreference(getPrefContext(),
+                mEnabledScis);
+        pref.setTitle(R.string.default_spell_checker);
+        pref.setSummary("%s");
+        pref.setOnPreferenceChangeListener(this);
+        screen.addPreference(pref);
     }
 
     @Override
@@ -123,8 +125,7 @@ public class SpellCheckersSettings extends SettingsPreferenceFragment
             preference.setEnabled(isSpellCheckerEnabled);
             if (preference instanceof SpellCheckerPreference) {
                 final SpellCheckerPreference pref = (SpellCheckerPreference)preference;
-                final SpellCheckerInfo sci = pref.getSpellCheckerInfo();
-                pref.setSelected(mCurrentSci != null && mCurrentSci.getId().equals(sci.getId()));
+                pref.setSelected(mCurrentSci);
             }
         }
     }
@@ -151,14 +152,16 @@ public class SpellCheckersSettings extends SettingsPreferenceFragment
     }
 
     @Override
-    public void onRadioButtonClicked(final SpellCheckerPreference pref) {
-        final SpellCheckerInfo sci = pref.getSpellCheckerInfo();
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        final SpellCheckerInfo sci = (SpellCheckerInfo) newValue;
         final boolean isSystemApp =
                 (sci.getServiceInfo().applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0;
         if (isSystemApp) {
             changeCurrentSpellChecker(sci);
+            return true;
         } else {
-            showSecurityWarnDialog(pref);
+            showSecurityWarnDialog(sci);
+            return false;
         }
     }
 
@@ -209,14 +212,14 @@ public class SpellCheckersSettings extends SettingsPreferenceFragment
         mDialog.show();
     }
 
-    private void showSecurityWarnDialog(final SpellCheckerPreference pref) {
+    private void showSecurityWarnDialog(final SpellCheckerInfo sci) {
         if (mDialog != null && mDialog.isShowing()) {
             mDialog.dismiss();
         }
-        final SpellCheckerInfo sci = pref.getSpellCheckerInfo();
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(android.R.string.dialog_alert_title);
-        builder.setMessage(getString(R.string.spellchecker_security_warning, pref.getTitle()));
+        builder.setMessage(getString(R.string.spellchecker_security_warning,
+                sci.loadLabel(getPackageManager())));
         builder.setCancelable(true);
         builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
             @Override
