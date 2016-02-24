@@ -330,8 +330,7 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Desbloq. c/ impressão digital"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="4747510337049957778">"Basta tocar no sensor de impressões digitais para desbloquear o telemóvel, autorizar compras ou iniciar sessão em aplicações. \n\n Quaisquer impressões digitais adicionadas podem executar estas ações, pelo que deve ter cuidado com quem adiciona."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message_warning" msgid="1650783655974801525">"Nota: a impressão digital pode ser menos segura do que um padrão ou um PIN fortes. "<annotation id="url">"Saiba mais"</annotation></string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="6931554430739074640">"Basta tocar no sensor de impressões digitais para desbloquear o telemóvel, autorizar compras ou iniciar sessão em aplicações. Quaisquer impressões digitais adicionadas ao telemóvel podem executar estas ações, pelo que deve ter cuidado com quem adiciona.\n\nNota: a impressão digital pode ser menos segura do que um padrão ou um PIN fortes. "<annotation id="url">"Saiba mais"</annotation></string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Cancelar"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Continuar"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="7234486440384881699">"As funcionalidades de proteção do dispositivo não serão ativadas. Não poderá impedir terceiros de utilizar este tablet se o perder ou for roubado ou apagado."</string>
@@ -413,6 +412,8 @@
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"Proteger o dispositivo"</string>
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"Desbloquear com a impressão digital"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Selec. bloq. do ecrã"</string>
+    <!-- no translation found for lock_settings_picker_title_profile (8283230482525023311) -->
+    <skip />
     <string name="setup_lock_settings_picker_title" msgid="1572244299605153324">"Proteger o telemóvel"</string>
     <string name="setup_lock_settings_picker_fingerprint_message" msgid="2431588439043969764">"A impressão digital pode ser menos segura do que um padrão, um PIN ou uma palavra-passe fortes. Configure um ecrã de bloqueio de segurança como medida de proteção adicional."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Impeça terceiros de utilizar este tablet sem a sua autorização ao ativar as funcionalidades de proteção do dispositivo. Escolha o bloqueio de ecrã que pretende utilizar."</string>
@@ -420,6 +421,8 @@
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Impeça terceiros de utilizar este telemóvel sem a sua autorização ao ativar as funcionalidades de proteção do dispositivo. Escolha o bloqueio de ecrã que pretende utilizar."</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Escolha o método de bloqueio de ecrã de segurança"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Bloqueio de ecrã"</string>
+    <!-- no translation found for unlock_set_unlock_launch_picker_title_profile (4270157368864693564) -->
+    <skip />
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Alterar ecrã de bloq."</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Alterar ou desativar segurança de padrão, PIN ou palavra-passe"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"Escolha um método para bloquear o ecrã"</string>
@@ -958,8 +961,7 @@
     <string name="device_status_summary" product="tablet" msgid="3292717754497039686">"Estado da bateria, rede e outras informações"</string>
     <string name="device_status_summary" product="default" msgid="2599162787451519618">"Número de telefone, sinal, etc."</string>
     <string name="storage_settings" msgid="4211799979832404953">"Armazenamento"</string>
-    <!-- no translation found for storage_usb_settings (7293054033137078060) -->
-    <skip />
+    <string name="storage_usb_settings" msgid="7293054033137078060">"Armazenamento"</string>
     <string name="storage_settings_title" msgid="8746016738388094064">"Definições de armazenamento"</string>
     <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"Desmontar armazenamento USB, ver armazenamento disponível"</string>
     <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"Desmontar cartão SD, ver armazenamento disponível"</string>
@@ -1320,6 +1322,8 @@
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"Solicitar padrão"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1165707416664252167">"É necessário desenhar padrão para desbloquear ecrã"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="2615606088906120711">"Ver sequência de desbloqueio"</string>
+    <!-- no translation found for lockpattern_settings_enable_visible_pattern_title_profile (4864525074768391381) -->
+    <skip />
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="4389015658335522989">"Vibrar ao tocar"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"Bloq. c/ botão ligar/desligar"</string>
     <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"Exceto quando mantido bloqueado por <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
@@ -1331,11 +1335,18 @@
     <string name="lock_settings_profile_title" msgid="7819021341281339182">"Perfil de trabalho"</string>
     <string name="lock_settings_profile_label" msgid="4423909470339292809">"Segurança do perfil de trabalho"</string>
     <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Bloqueio de ecrã do perfil de trabalho"</string>
-    <string name="lock_settings_profile_unification_title" msgid="8633657624689310195">"Utilizar o mesmo bloqueio de ecrã"</string>
-    <string name="lock_settings_profile_unification_summary" msgid="8014208091623293835">"Alterar o perfil principal para corresponder ao perfil de trabalho"</string>
+    <!-- no translation found for lock_settings_profile_unification_title (6888460471428172592) -->
+    <skip />
+    <!-- no translation found for lock_settings_profile_unification_summary (3481269258202840437) -->
+    <skip />
     <string name="lock_settings_profile_unification_dialog_title" msgid="8938936484754025065">"Pretende utilizar o mesmo bloqueio de ecrã?"</string>
     <string name="lock_settings_profile_unification_dialog_body" msgid="1697316592639374194">"Pode utilizar este bloqueio para o seu dispositivo, embora inclua todas as políticas associadas ao bloqueio de ecrã definidas pelo seu administrador de TI no perfil de trabalho.\nPretende utilizar o mesmo ecrã de bloqueio para o seu dispositivo?"</string>
-    <string name="lock_settings_profile_unified_summary" msgid="237623767711796217">"O mesmo que o bloqueio do dispositivo"</string>
+    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_body (5476809856421622503) -->
+    <skip />
+    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_confirm (2372867057465188766) -->
+    <skip />
+    <!-- no translation found for lock_settings_profile_unified_summary (9008819078132993492) -->
+    <skip />
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Gerir aplicações"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Gerir e remover aplicações instaladas"</string>
     <string name="applications_settings" msgid="1721442176406964682">"Aplicações"</string>
@@ -1620,7 +1631,7 @@
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Atalho de acessibilidade"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"Ativado"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"Desligado"</string>
-    <string name="accessibility_global_gesture_preference_description" msgid="2328507978501847573">"Quando esta funcionalidade está ativada, pode ativar rapidamente as funcionalidades de acessibilidade em dois passos:\n\nPasso 1: prima sem soltar o botão ligar/desligar até ouvir um som ou sentir uma vibração.\n\nPasso 2: toque sem soltar com dois dedos até ouvir a confirmação de áudio.\n\nSe o dispositivo tiver vários utilizadores, utilizar este atalho no ecrã de bloqueio ativa a acessibilidade temporariamente até o dispositivo ser desbloqueado."</string>
+    <string name="accessibility_global_gesture_preference_description" msgid="1605107799571936715">"Quando esta funcionalidade está ativada, pode ativar rapidamente as funcionalidades de acessibilidade em dois passos:\n\nPasso 1: prima sem soltar o botão ligar/desligar até ouvir um som ou sentir uma vibração.\n\nPasso 2: toque sem soltar com dois dedos até ouvir a confirmação de áudio.\n\nSe o dispositivo tiver vários utilizadores, utilizar este atalho no ecrã de bloqueio ativa a acessibilidade temporariamente até o dispositivo ser desbloqueado."</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="2567402942683463779">"Texto de alto contraste"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="7218498768415430963">"Atualiz. auto da ampliação do ecrã"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"Atualizar ampliação do ecrã em transições de aplic"</string>
@@ -2410,7 +2421,6 @@
     <string name="keywords_display" msgid="8910345814565493016">"ecrã, ecrã tátil"</string>
     <string name="keywords_display_brightness_level" msgid="3891383826236015854">"escurecer ecrã, ecrã tátil, bateria"</string>
     <string name="keywords_display_auto_brightness" msgid="3325150824507953765">"escurecer ecrã, ecrã tátil, bateria"</string>
-    <string name="keywords_display_night_mode" msgid="1272383423045276031">"tema escuro, modo noturno, escurecer ecrã, inverter brilho"</string>
     <string name="keywords_display_wallpaper" msgid="7362076351860131776">"fundo, personalizar, personalizar visualização"</string>
     <string name="keywords_display_font_size" msgid="3404655440064726124">"tamanho do texto"</string>
     <string name="keywords_display_cast_screen" msgid="7684618996741933067">"projetar, transmitir"</string>
@@ -2442,6 +2452,8 @@
     <string name="keywords_color_temperature" msgid="2688947724153266364">"temperatura de cor D65 D73 branco amarelo azul quente frio"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"deslizar lentamente para desbloquear, palavra-passe, padrão, PIN"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"desafio de trabalho, trabalho, perfil"</string>
+    <!-- no translation found for keywords_unification (1922900767659821025) -->
+    <skip />
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Config. etiqueta NFC p/ Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Escrever"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Toque numa etiqueta para escrever..."</string>
@@ -2669,8 +2681,7 @@
     <string name="change_storage" msgid="600475265207060436">"Alterar armazenamento"</string>
     <string name="notifications_label" msgid="2872668710589600731">"Notificações"</string>
     <string name="notifications_enabled" msgid="4386196629684749507">"Normal"</string>
-    <!-- no translation found for notifications_disabled (3200751656741989335) -->
-    <skip />
+    <string name="notifications_disabled" msgid="3200751656741989335">"Bloqueado"</string>
     <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g>/<xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
     <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g>/<xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>/<xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
@@ -2704,7 +2715,7 @@
     <string name="domain_urls_title" msgid="8762012672312435252">"Links da aplicação"</string>
     <string name="domain_urls_summary_none" msgid="2639588015479657864">"Não abrir links compatíveis"</string>
     <string name="domain_urls_summary_one" msgid="3704934031930978405">"Abrir <xliff:g id="DOMAIN">%s</xliff:g>"</string>
-    <string name="domain_urls_summary_some" msgid="812936714383016364">"Abrir <xliff:g id="DOMAIN">%s</xliff:g> e URLs relacionados"</string>
+    <string name="domain_urls_summary_some" msgid="3950089361819428455">"Abrir <xliff:g id="DOMAIN">%s</xliff:g> e outros URLs"</string>
     <plurals name="domain_urls_apps_summary" formatted="false" msgid="4322996467951692661">
       <item quantity="other"> Os links compatíveis podem ser abertos por <xliff:g id="COUNT">%d</xliff:g> aplicações</item>
       <item quantity="one">Os links compatíveis podem ser abertos por uma aplicação</item>
@@ -2849,7 +2860,8 @@
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"Diminuir"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"Aumentar"</string>
     <string name="screen_zoom_summary_small" msgid="5867245310241621570">"Pequeno"</string>
-    <string name="screen_zoom_summary_normal" msgid="2932499308526350466">"Médio"</string>
+    <!-- no translation found for screen_zoom_summary_default (2247006805614056507) -->
+    <skip />
     <string name="screen_zoom_summary_large" msgid="4835294730065424084">"Grande"</string>
     <string name="screen_zoom_summary_very_large" msgid="7108563375663670067">"Maior"</string>
     <string name="screen_zoom_summary_extremely_large" msgid="7427320168263276227">"O maior"</string>
@@ -2880,17 +2892,12 @@
     <string name="location_off_summary" msgid="6474350053215707957">"DESATIVADA"</string>
     <string name="backup_disabled" msgid="485189128759595412">"Cópia de segurança desativada"</string>
     <string name="about_summary" msgid="8460677224778433924">"Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
-    <!-- no translation found for disabled_by_policy_title (627023216027648534) -->
-    <skip />
-    <!-- no translation found for default_admin_support_msg (510401764426963642) -->
-    <skip />
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"Ação não permitida"</string>
+    <string name="default_admin_support_msg" msgid="510401764426963642">"Esta ação está desativada. Contacte o administrador da sua entidade para saber mais."</string>
     <string name="admin_support_more_info" msgid="8901377038510512654">"Mais detalhes"</string>
-    <!-- no translation found for admin_profile_owner_message (5834937282929663252) -->
-    <skip />
-    <!-- no translation found for admin_profile_owner_user_message (7153676784012255048) -->
-    <skip />
-    <!-- no translation found for admin_device_owner_message (8734500370023898028) -->
-    <skip />
+    <string name="admin_profile_owner_message" msgid="5834937282929663252">"O administrador pode monitorizar e gerir aplicações e dados associados ao seu perfil de trabalho, incluindo as definições, as autorizações, o acesso empresarial, a atividade de rede e as informações de localização do dispositivo."</string>
+    <string name="admin_profile_owner_user_message" msgid="7153676784012255048">"O administrador pode monitorizar e gerir aplicações e dados associados a este utilizador, incluindo as definições, as autorizações, o acesso empresarial, a atividade de rede e as informações de localização do dispositivo."</string>
+    <string name="admin_device_owner_message" msgid="8734500370023898028">"O administrador pode monitorizar e gerir aplicações e dados associados a este dispositivo, incluindo as definições, as autorizações, o acesso empresarial, a atividade de rede e as informações de localização do dispositivo."</string>
     <string name="condition_turn_off" msgid="1960945836880080298">"Desativar"</string>
     <string name="condition_turn_on" msgid="9089876276117874591">"Ativar"</string>
     <string name="condition_hotspot_title" msgid="7778958849468560027">"A zona Wi-Fi está ativada"</string>
@@ -2956,4 +2963,56 @@
     <string name="battery_saver_desc_turn_on_auto_never" msgid="6715896635178578813">"Nunca ativar automaticamente"</string>
     <string name="battery_saver_desc_turn_on_auto_pct" msgid="7472323223085636533">"Ativar automaticamente com %1$s de bateria"</string>
     <string name="not_battery_optimizing" msgid="5362861851864837617">"Não está a utilizar a otimização da bateria"</string>
+    <!-- no translation found for notification_log_no_title (5678029849672024215) -->
+    <skip />
+    <!-- no translation found for notification_log_details_delimiter (3116559361552416747) -->
+    <skip />
+    <!-- no translation found for notification_log_details_package (2596495677039100284) -->
+    <skip />
+    <!-- no translation found for notification_log_details_key (2995791937075862968) -->
+    <skip />
+    <!-- no translation found for notification_log_details_group (2430467015200368698) -->
+    <skip />
+    <!-- no translation found for notification_log_details_group_summary (7945543958255585829) -->
+    <skip />
+    <!-- no translation found for notification_log_details_visibility (2552873780715930971) -->
+    <skip />
+    <!-- no translation found for notification_log_details_public_version (4247242364605495240) -->
+    <skip />
+    <!-- no translation found for notification_log_details_priority (8371354971235991398) -->
+    <skip />
+    <!-- no translation found for notification_log_details_importance (2153168790791683139) -->
+    <skip />
+    <!-- no translation found for notification_log_details_explanation (1914295130775393551) -->
+    <skip />
+    <!-- no translation found for notification_log_details_content_intent (1113554570409128083) -->
+    <skip />
+    <!-- no translation found for notification_log_details_delete_intent (905118520685297007) -->
+    <skip />
+    <!-- no translation found for notification_log_details_full_screen_intent (7118560817013522978) -->
+    <skip />
+    <!-- no translation found for notification_log_details_actions (242523930165118066) -->
+    <skip />
+    <!-- no translation found for notification_log_details_title (7177091647508863295) -->
+    <skip />
+    <!-- no translation found for notification_log_details_remoteinput (8328591329858827409) -->
+    <skip />
+    <!-- no translation found for notification_log_details_content_view (6638731378278561786) -->
+    <skip />
+    <!-- no translation found for notification_log_details_extras (4188418723779942047) -->
+    <skip />
+    <!-- no translation found for notification_log_details_icon (8939114059726188218) -->
+    <skip />
+    <!-- no translation found for notification_log_details_parcel (243148037601903212) -->
+    <skip />
+    <!-- no translation found for notification_log_details_ashmem (7241814108477320636) -->
+    <skip />
+    <!-- no translation found for notification_log_details_sound (5506232879598808099) -->
+    <skip />
+    <!-- no translation found for notification_log_details_vibrate (6890065466625335940) -->
+    <skip />
+    <!-- no translation found for notification_log_details_default (2345249399796730861) -->
+    <skip />
+    <!-- no translation found for notification_log_details_none (184131801230614059) -->
+    <skip />
 </resources>
