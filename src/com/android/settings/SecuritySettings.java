@@ -1054,6 +1054,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
         static boolean canChangeRequireCredentialBeforeStartup(Context context) {
             DevicePolicyManager dpm = context.getSystemService(DevicePolicyManager.class);
             return UserManager.get(context).isAdminUser()
+                    && UserManager.get(context).isPrimaryUser()
                     && LockPatternUtils.isDeviceEncryptionEnabled()
                     && !dpm.getDoNotAskCredentialsOnBoot();
         }
