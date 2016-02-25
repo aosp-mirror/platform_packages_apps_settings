@@ -175,7 +175,7 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
             mImportanceTitle.setSummary(getProgressSummary(importance));
             mImportance.setSystemApp(isSystemApp);
             mImportance.setMinimumProgress(
-                    isSystemApp ? Ranking.IMPORTANCE_LOW : Ranking.IMPORTANCE_NONE);
+                    isSystemApp ? Ranking.IMPORTANCE_MIN : Ranking.IMPORTANCE_NONE);
             mImportance.setMax(Ranking.IMPORTANCE_MAX);
             mImportance.setProgress(importance);
             mImportance.setCallback(new ImportanceSeekBarPreference.Callback() {
@@ -230,7 +230,7 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
                     final boolean silenced = (Boolean) newValue;
                     final int importance =
-                            silenced ? Ranking.IMPORTANCE_DEFAULT : Ranking.IMPORTANCE_UNSPECIFIED;
+                            silenced ? Ranking.IMPORTANCE_LOW : Ranking.IMPORTANCE_UNSPECIFIED;
                     mBackend.setImportance(mPkgInfo.packageName, mUid, importance);
                     updateDependents(importance);
                     return true;
@@ -244,6 +244,8 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
         switch (progress) {
             case Ranking.IMPORTANCE_NONE:
                 return mContext.getString(R.string.notification_importance_blocked);
+            case Ranking.IMPORTANCE_MIN:
+                return mContext.getString(R.string.notification_importance_min);
             case Ranking.IMPORTANCE_LOW:
                 return mContext.getString(R.string.notification_importance_low);
             case Ranking.IMPORTANCE_DEFAULT:
