@@ -605,11 +605,13 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
 
         @Override
         public void setListening(boolean isListening) {
-            if (isListening) {
-                mPrintManager.addPrintJobStateChangeListener(this);
-                onPrintJobStateChanged(null);
-            } else {
-                mPrintManager.removePrintJobStateChangeListener(this);
+            if (mPrintManager != null) {
+                if (isListening) {
+                    mPrintManager.addPrintJobStateChangeListener(this);
+                    onPrintJobStateChanged(null);
+                } else {
+                    mPrintManager.removePrintJobStateChangeListener(this);
+                }
             }
         }
 
