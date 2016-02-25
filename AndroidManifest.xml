@@ -1968,6 +1968,17 @@
                   android:theme="@android:style/Theme.Material.Light.Dialog.NoActionBar">
         </activity>
 
+        <activity android:name=".RemoteBugreportActivity"
+                  android:excludeFromRecents="true"
+                  android:exported="true"
+                  android:permission="android.permission.DUMP"
+                  android:theme="@android:style/Theme.Material.Light.Dialog.NoActionBar">
+            <intent-filter>
+                <action android:name="android.settings.SHOW_REMOTE_BUGREPORT_DIALOG" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".bluetooth.RequestPermissionHelperActivity"
                   android:label="@string/bluetooth_pairing_request"
                   android:excludeFromRecents="true"

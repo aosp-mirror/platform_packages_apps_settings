@@ -6679,6 +6679,19 @@
     <!-- Description of how many more permissions to view on next page [CHAR LIMIT=30] -->
     <string name="additional_permissions_more"><xliff:g id="count" example="2">%1$d</xliff:g> more</string>
 
+    <!-- Title of dialog shown to ask for user consent for sharing a bugreport that was requested remotely by the IT administrator. -->
+    <string name="share_remote_bugreport_dialog_title">Share bug report?</string>
+    <!-- Message of a dialog shown to ask for user consent for sharing a bugreport that was requested remotely by the IT administrator. -->
+    <string name="share_remote_bugreport_dialog_message_finished">Your IT admin requested a bug report to help troubleshoot this device. Apps and data may be shared.</string>
+    <!-- Message of a dialog shown to ask for user consent for sharing a bugreport that was requested remotely by the IT administrator and it's still being taken. -->
+    <string name="share_remote_bugreport_dialog_message">Your IT admin requested a bug report to help troubleshoot this device. Apps and data may be shared, and your device may temporarily slow down.</string>
+    <!-- Message of a dialog shown to inform that the remote bugreport that was requested remotely by the IT administrator is still being taken and will be shared when finished. -->
+    <string name="sharing_remote_bugreport_dialog_message">This bug report is being shared with your IT admin. Contact them for more details.</string>
+    <!-- Acceptance label of dialog shown to ask for user consent for sharing the remote bugreport. -->
+    <string name="share_remote_bugreport_action">Share</string>
+    <!-- Decline label of dialog shown to ask for user consent for sharing the remote bugreport. -->
+    <string name="decline_remote_bugreport_action">Decline</string>
+
     <!-- Title of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
          is for charging only. -->
