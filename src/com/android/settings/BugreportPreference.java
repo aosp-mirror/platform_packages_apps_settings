@@ -87,9 +87,13 @@ public class BugreportPreference extends CustomDialogPreference {
 
             if (mFullTitle.isChecked()) {
                 Log.v(TAG, "Taking full bugreport right away");
+                MetricsLogger.action(getDialog().getContext(),
+                        MetricsEvent.ACTION_BUGREPORT_FROM_SETTINGS_FULL);
                 takeBugreport(ActivityManager.BUGREPORT_OPTION_FULL);
             } else {
                 Log.v(TAG, "Taking interactive bugreport in " + BUGREPORT_DELAY_SECONDS + "s");
+                MetricsLogger.action(getDialog().getContext(),
+                        MetricsEvent.ACTION_BUGREPORT_FROM_SETTINGS_INTERACTIVE);
                 // Add a little delay before executing, to give the user a chance to close
                 // the Settings activity before it takes a screenshot.
                 final Context context = getContext();
@@ -110,18 +114,6 @@ public class BugreportPreference extends CustomDialogPreference {
 
     private void takeBugreport(int bugreportType) {
         try {
-            switch (bugreportType) {
-                case ActivityManager.BUGREPORT_OPTION_FULL:
-                    MetricsLogger.action(getDialog().getContext(),
-                            MetricsEvent.ACTION_BUGREPORT_FROM_SETTINGS_FULL);
-                    break;
-                case ActivityManager.BUGREPORT_OPTION_INTERACTIVE:
-                    MetricsLogger.action(getDialog().getContext(),
-                            MetricsEvent.ACTION_BUGREPORT_FROM_SETTINGS_INTERACTIVE);
-                    break;
-                default:
-                    Log.w(TAG, "Unknown bugreportType: " + bugreportType);
-            }
             ActivityManagerNative.getDefault().requestBugReport(bugreportType);
         } catch (RemoteException e) {
             Log.e(TAG, "error taking bugreport (bugreportType=" + bugreportType + ")", e);
