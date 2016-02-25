@@ -32,13 +32,11 @@ import android.util.Log;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
+import com.android.settings.RestrictedListPreference.RestrictedItem;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settingslib.RestrictedDropDownPreference;
-import com.android.settingslib.RestrictedDropDownPreference.RestrictedItem;
 import com.android.settingslib.RestrictedLockUtils;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_SECURE_NOTIFICATIONS;
 import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_UNREDACTED_NOTIFICATIONS;
@@ -56,7 +54,7 @@ public class ConfigureNotificationSettings extends SettingsPreferenceFragment {
     private Context mContext;
 
     private TwoStatePreference mNotificationPulse;
-    private RestrictedDropDownPreference mLockscreen;
+    private NotificationLockscreenPreference mLockscreen;
     private boolean mSecure;
     private int mLockscreenSelectedValue;
 
@@ -131,7 +129,7 @@ public class ConfigureNotificationSettings extends SettingsPreferenceFragment {
     // === Lockscreen (public / private) notifications ===
 
     private void initLockscreenNotifications() {
-        mLockscreen = (RestrictedDropDownPreference) getPreferenceScreen().findPreference(
+        mLockscreen = (NotificationLockscreenPreference) getPreferenceScreen().findPreference(
                 KEY_LOCK_SCREEN_NOTIFICATIONS);
         if (mLockscreen == null) {
             Log.i(TAG, "Preference not found: " + KEY_LOCK_SCREEN_NOTIFICATIONS);

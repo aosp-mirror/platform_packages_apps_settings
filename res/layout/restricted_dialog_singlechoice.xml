@@ -15,7 +15,8 @@
      limitations under the License.
 -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.android.settings.CheckableLinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -41,4 +42,4 @@
             android:baselineAlignBottom="true"
             android:scaleType="centerInside"
             android:visibility="gone" />
-</LinearLayout>
+</com.android.settings.CheckableLinearLayout>

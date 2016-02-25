@@ -17,12 +17,14 @@
 package com.android.settings;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v14.preference.ListPreferenceDialogFragment;
 import android.support.v7.preference.ListPreference;
 import android.util.AttributeSet;
+import android.view.View;
 
 public class CustomListPreference extends ListPreference {
 
@@ -40,6 +42,13 @@ public class CustomListPreference extends ListPreference {
     }
 
     protected void onDialogClosed(boolean positiveResult) {
+    }
+
+    protected void onDialogCreated(Dialog dialog) {
+    }
+
+    protected boolean isAutoClosePreference() {
+        return true;
     }
 
     public static class CustomListPreferenceDialogFragment extends ListPreferenceDialogFragment {
@@ -64,6 +73,23 @@ public class CustomListPreference extends ListPreference {
             mClickedDialogEntryIndex = getCustomizablePreference()
                     .findIndexOfValue(getCustomizablePreference().getValue());
             getCustomizablePreference().onPrepareDialogBuilder(builder, getOnItemClickListener());
+            if (!getCustomizablePreference().isAutoClosePreference()) {
+                builder.setPositiveButton(R.string.okay, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        CustomListPreferenceDialogFragment.this.onClick(dialog,
+                                DialogInterface.BUTTON_POSITIVE);
+                        dialog.dismiss();
+                    }
+                });
+            }
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            Dialog dialog = super.onCreateDialog(savedInstanceState);
+            getCustomizablePreference().onDialogCreated(dialog);
+            return dialog;
         }
 
         protected DialogInterface.OnClickListener getOnItemClickListener() {
@@ -71,13 +97,16 @@ public class CustomListPreference extends ListPreference {
                 public void onClick(DialogInterface dialog, int which) {
                     setClickedDialogEntryIndex(which);
 
-                    /*
-                     * Clicking on an item simulates the positive button
-                     * click, and dismisses the dialog.
-                     */
-                    CustomListPreferenceDialogFragment.this.onClick(dialog,
-                            DialogInterface.BUTTON_POSITIVE);
-                    dialog.dismiss();
+
+                    if (getCustomizablePreference().isAutoClosePreference()) {
+                        /*
+                         * Clicking on an item simulates the positive button
+                         * click, and dismisses the dialog.
+                         */
+                        CustomListPreferenceDialogFragment.this.onClick(dialog,
+                                DialogInterface.BUTTON_POSITIVE);
+                        dialog.dismiss();
+                    }
                 }
             };
         }
