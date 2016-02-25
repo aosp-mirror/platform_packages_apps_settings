@@ -149,8 +149,12 @@ public class RestrictedListPreference extends CustomListPreference {
                 text.setChecked(false);
                 padlock.setVisibility(View.VISIBLE);
             } else {
-                text.setChecked(position == mSelectedIndex);
-                text.setEnabled(true);
+                if (mSelectedIndex != -1) {
+                    text.setChecked(position == mSelectedIndex);
+                }
+                if (!text.isEnabled()) {
+                    text.setEnabled(true);
+                }
                 padlock.setVisibility(View.GONE);
             }
             return root;
@@ -199,13 +203,15 @@ public class RestrictedListPreference extends CustomListPreference {
                         setClickedDialogEntryIndex(which);
                     }
 
-                    /*
-                     * Clicking on an item simulates the positive button
-                     * click, and dismisses the dialog.
-                     */
-                    RestrictedListPreferenceDialogFragment.this.onClick(dialog,
-                            DialogInterface.BUTTON_POSITIVE);
-                    dialog.dismiss();
+                    if (getCustomizablePreference().isAutoClosePreference()) {
+                        /*
+                         * Clicking on an item simulates the positive button
+                         * click, and dismisses the dialog.
+                         */
+                        RestrictedListPreferenceDialogFragment.this.onClick(dialog,
+                                DialogInterface.BUTTON_POSITIVE);
+                        dialog.dismiss();
+                    }
                 }
             };
         }
