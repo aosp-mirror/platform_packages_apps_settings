@@ -261,12 +261,16 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         if (spellChecker != null) {
             final TextServicesManager tsm = (TextServicesManager) getSystemService(
                     Context.TEXT_SERVICES_MANAGER_SERVICE);
-            final SpellCheckerInfo sci = tsm.getCurrentSpellChecker();
-            spellChecker.setEnabled(sci != null);
-            if (tsm.isSpellCheckerEnabled() && sci != null) {
-                spellChecker.setSummary(sci.loadLabel(getPackageManager()));
-            } else {
+            if (!tsm.isSpellCheckerEnabled()) {
+                spellChecker.setEnabled(false);
                 spellChecker.setSummary(R.string.switch_off_text);
+            } else {
+                final SpellCheckerInfo sci = tsm.getCurrentSpellChecker();
+                if (sci != null) {
+                    spellChecker.setSummary(sci.loadLabel(getPackageManager()));
+                } else {
+                    spellChecker.setSummary(R.string.spell_checker_not_selected);
+                }
             }
         }
 
