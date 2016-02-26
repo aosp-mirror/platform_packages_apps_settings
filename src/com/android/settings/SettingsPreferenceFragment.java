@@ -34,6 +34,7 @@ import android.support.v7.preference.PreferenceViewHolder;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.ArrayMap;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -97,6 +98,7 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
     private View mEmptyView;
     private LinearLayoutManager mLayoutManager;
     private HighlightablePreferenceGroupAdapter mAdapter;
+    private ArrayMap<String, Preference> mPreferenceCache;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -365,6 +367,28 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
     protected RecyclerView.Adapter onCreateAdapter(PreferenceScreen preferenceScreen) {
         mAdapter = new HighlightablePreferenceGroupAdapter(preferenceScreen);
         return mAdapter;
+    }
+
+    protected void cacheRemoveAllPrefs(PreferenceGroup group) {
+        mPreferenceCache = new ArrayMap<String, Preference>();
+        final int N = group.getPreferenceCount();
+        for (int i = 0; i < N; i++) {
+            Preference p = group.getPreference(i);
+            if (TextUtils.isEmpty(p.getKey())) {
+                continue;
+            }
+            mPreferenceCache.put(p.getKey(), p);
+        }
+    }
+
+    protected Preference getCachedPreference(String key) {
+        return mPreferenceCache != null ? mPreferenceCache.remove(key) : null;
+    }
+
+    protected void removeCachedPrefs(PreferenceGroup group) {
+        for (Preference p : mPreferenceCache.values()) {
+            group.removePreference(p);
+        }
     }
 
     private void highlightPreference(String key) {

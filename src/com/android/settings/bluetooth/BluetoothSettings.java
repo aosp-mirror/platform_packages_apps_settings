@@ -39,7 +39,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.LinkifyUtils;
@@ -76,6 +75,8 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
     /* Private intent to show the list of received files */
     private static final String BTOPP_ACTION_OPEN_RECEIVED_FILES =
             "android.btopp.intent.action.OPEN_RECEIVED_FILES";
+
+    private static final String KEY_PAIRED_DEVICES = "paired_devices";
 
     private static View mSettingsDialogView = null;
 
@@ -153,6 +154,21 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
     @Override
     void addPreferencesForActivity() {
         addPreferencesFromResource(R.xml.bluetooth_settings);
+
+        mPairedDevicesCategory = new PreferenceCategory(getPrefContext());
+        mPairedDevicesCategory.setKey(KEY_PAIRED_DEVICES);
+        mPairedDevicesCategory.setOrder(1);
+        getPreferenceScreen().addPreference(mPairedDevicesCategory);
+
+        mAvailableDevicesCategory = new BluetoothProgressCategory(getActivity());
+        mAvailableDevicesCategory.setSelectable(false);
+        mAvailableDevicesCategory.setOrder(2);
+        getPreferenceScreen().addPreference(mAvailableDevicesCategory);
+
+        mMyDevicePreference = new Preference(getPrefContext());
+        mMyDevicePreference.setSelectable(false);
+        mMyDevicePreference.setOrder(3);
+        getPreferenceScreen().addPreference(mMyDevicePreference);
 
         setHasOptionsMenu(true);
     }
@@ -275,14 +291,15 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
 
     private void addDeviceCategory(PreferenceGroup preferenceGroup, int titleId,
             BluetoothDeviceFilter.Filter filter, boolean addCachedDevices) {
+        cacheRemoveAllPrefs(preferenceGroup);
         preferenceGroup.setTitle(titleId);
-        getPreferenceScreen().addPreference(preferenceGroup);
         setFilter(filter);
         setDeviceListGroup(preferenceGroup);
         if (addCachedDevices) {
             addCachedDevices();
         }
         preferenceGroup.setEnabled(true);
+        removeCachedPrefs(preferenceGroup);
     }
 
     private void updateContent(int bluetoothState) {
@@ -291,8 +308,6 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
 
         switch (bluetoothState) {
             case BluetoothAdapter.STATE_ON:
-                preferenceScreen.removeAll();
-                preferenceScreen.setOrderingAsAdded(true);
                 mDevicePreferenceMap.clear();
 
                 if (isUiRestricted()) {
@@ -301,44 +316,32 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
                 }
 
                 // Paired devices category
-                if (mPairedDevicesCategory == null) {
-                    mPairedDevicesCategory = new PreferenceCategory(getPrefContext());
-                } else {
-                    mPairedDevicesCategory.removeAll();
-                }
                 addDeviceCategory(mPairedDevicesCategory,
                         R.string.bluetooth_preference_paired_devices,
                         BluetoothDeviceFilter.BONDED_DEVICE_FILTER, true);
                 int numberOfPairedDevices = mPairedDevicesCategory.getPreferenceCount();
 
                 if (isUiRestricted() || numberOfPairedDevices <= 0) {
-                    preferenceScreen.removePreference(mPairedDevicesCategory);
+                    if (preferenceScreen.findPreference(KEY_PAIRED_DEVICES) != null) {
+                        preferenceScreen.removePreference(mPairedDevicesCategory);
+                    }
+                } else {
+                    if (preferenceScreen.findPreference(KEY_PAIRED_DEVICES) == null) {
+                        preferenceScreen.addPreference(mPairedDevicesCategory);
+                    }
                 }
 
                 // Available devices category
-                if (mAvailableDevicesCategory == null) {
-                    mAvailableDevicesCategory = new BluetoothProgressCategory(getActivity());
-                    mAvailableDevicesCategory.setSelectable(false);
-                } else {
-                    mAvailableDevicesCategory.removeAll();
-                }
                 addDeviceCategory(mAvailableDevicesCategory,
                         R.string.bluetooth_preference_found_devices,
                         BluetoothDeviceFilter.UNBONDED_DEVICE_FILTER, mInitialScanStarted);
-                int numberOfAvailableDevices = mAvailableDevicesCategory.getPreferenceCount();
 
                 if (!mInitialScanStarted) {
                     startScanning();
                 }
 
-                if (mMyDevicePreference == null) {
-                    mMyDevicePreference = new Preference(getPrefContext());
-                }
-
                 mMyDevicePreference.setSummary(getResources().getString(
                             R.string.bluetooth_is_visible_message, mLocalAdapter.getName()));
-                mMyDevicePreference.setSelectable(false);
-                preferenceScreen.addPreference(mMyDevicePreference);
 
                 getActivity().invalidateOptionsMenu();
 
