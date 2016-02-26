@@ -292,7 +292,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                 }
             } else if (requestCode == CHOOSE_LOCK_REQUEST
                     || requestCode == ENABLE_ENCRYPTION_REQUEST) {
-                if (resultCode != RESULT_CANCELED) {
+                if (resultCode != RESULT_CANCELED || mForChangeCredRequiredForBoot) {
                     getActivity().setResult(resultCode, data);
                     finish();
                 }

@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -70,7 +71,10 @@ abstract class SaveChosenLockWorkerBase extends Fragment {
         mUtils.setSeparateProfileChallengeEnabled(mUserId, true);
         mWasSecureBefore = mUtils.isSecure(mUserId);
 
-        if (UserManager.get(getContext()).getUserInfo(mUserId).isPrimary()) {
+        Context context = getContext();
+        // If context is null, we're being invoked to change the setCredentialRequiredToDecrypt,
+        // and we made sure that this is the primary user already.
+        if (context == null || UserManager.get(context).getUserInfo(mUserId).isPrimary()) {
             mUtils.setCredentialRequiredToDecrypt(credentialRequired);
         }
 
