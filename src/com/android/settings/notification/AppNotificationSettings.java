@@ -106,12 +106,12 @@ public class AppNotificationSettings extends NotificationSettingsBase {
         final boolean allowPrivate = getLockscreenAllowPrivateNotifications();
 
         if (getPreferenceScreen().findPreference(mBlock.getKey()) != null) {
-            setVisible(mSilent, checkCanBeVisible(Ranking.IMPORTANCE_LOW, importance));
-            mSilent.setChecked(importance == Ranking.IMPORTANCE_DEFAULT);
+            setVisible(mSilent, checkCanBeVisible(Ranking.IMPORTANCE_MIN, importance));
+            mSilent.setChecked(importance == Ranking.IMPORTANCE_LOW);
         }
-        setVisible(mPriority, checkCanBeVisible(Ranking.IMPORTANCE_LOW, importance)
+        setVisible(mPriority, checkCanBeVisible(Ranking.IMPORTANCE_DEFAULT, importance)
                 && !mDndVisualEffectsSuppressed);
-        setVisible(mSensitive, checkCanBeVisible(Ranking.IMPORTANCE_HIGH, importance)
+        setVisible(mSensitive, checkCanBeVisible(Ranking.IMPORTANCE_MIN, importance)
                 && lockscreenSecure && lockscreenNotificationsEnabled && allowPrivate);
     }
 
