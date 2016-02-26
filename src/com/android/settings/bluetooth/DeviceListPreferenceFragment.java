@@ -176,11 +176,19 @@ public abstract class DeviceListPreferenceFragment extends
             return;
         }
 
-        BluetoothDevicePreference preference = new BluetoothDevicePreference(
-                getPrefContext(), cachedDevice);
+        String key = cachedDevice.getDevice().getAddress();
+        BluetoothDevicePreference preference = (BluetoothDevicePreference) getCachedPreference(key);
+
+        if (preference == null) {
+            preference = new BluetoothDevicePreference(getPrefContext(), cachedDevice);
+            mDeviceListGroup.addPreference(preference);
+        } else {
+            // Tell the preference it is being re-used in case there is new info in the
+            // cached device.
+            preference.rebind();
+        }
 
         initDevicePreference(preference);
-        mDeviceListGroup.addPreference(preference);
         mDevicePreferenceMap.put(cachedDevice, preference);
     }
 

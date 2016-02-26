@@ -649,19 +649,22 @@ public class WifiSettings extends RestrictedSettingsFragment
 
                 boolean hasAvailableAccessPoints = false;
                 int index = 0;
+                cacheRemoveAllPrefs(getPreferenceScreen());
                 for (AccessPoint accessPoint : accessPoints) {
                     // Ignore access points that are out of range.
                     if (accessPoint.getLevel() != -1) {
+                        String key = accessPoint.getBssid();
                         hasAvailableAccessPoints = true;
-                        if (accessPoint.getTag() != null) {
-                            final Preference pref = (Preference) accessPoint.getTag();
+                        LongPressAccessPointPreference pref = (LongPressAccessPointPreference)
+                                getCachedPreference(key);
+                        if (pref != null) {
                             pref.setOrder(index++);
-                            getPreferenceScreen().addPreference(pref);
                             continue;
                         }
                         LongPressAccessPointPreference
                                 preference = new LongPressAccessPointPreference(accessPoint,
                                 getPrefContext(), mUserBadgeCache, false, this);
+                        preference.setKey(key);
                         preference.setOrder(index++);
 
                         if (mOpenSsid != null && mOpenSsid.equals(accessPoint.getSsidStr())
@@ -674,6 +677,7 @@ public class WifiSettings extends RestrictedSettingsFragment
                         accessPoint.setListener(this);
                     }
                 }
+                removeCachedPrefs(getPreferenceScreen());
                 if (!hasAvailableAccessPoints) {
                     setProgressBarVisible(true);
                     Preference pref = new Preference(getContext()) {

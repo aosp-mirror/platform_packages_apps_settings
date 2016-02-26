@@ -84,6 +84,10 @@ public final class BluetoothDevicePreference extends Preference implements
         onDeviceAttributesChanged();
     }
 
+    void rebind() {
+        notifyChanged();
+    }
+
     CachedBluetoothDevice getCachedDevice() {
         return mCachedDevice;
     }
