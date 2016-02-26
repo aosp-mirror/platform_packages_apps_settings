@@ -37,7 +37,7 @@ import com.android.settings.Settings.WifiCallingSuggestionActivity;
 import com.android.settings.Settings.ZenModeAutomationSuggestionActivity;
 import com.android.settingslib.drawer.Tile;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  * The Home of all stupidly dynamic Settings Suggestions checks.
@@ -86,10 +86,10 @@ public class SuggestionsChecks {
     }
 
     private boolean hasEnabledZenAutoRules() {
-        List<AutomaticZenRule> zenRules = NotificationManager.from(mContext).getAutomaticZenRules();
-        final int N = zenRules.size();
-        for (int i = 0; i < N; i++) {
-            if (zenRules.get(i).isEnabled()) {
+        Collection<AutomaticZenRule> zenRules =
+                NotificationManager.from(mContext).getAutomaticZenRules().values();
+        for (AutomaticZenRule rule : zenRules) {
+            if (rule.isEnabled()) {
                 return true;
             }
         }
