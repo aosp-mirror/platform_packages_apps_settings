@@ -109,6 +109,11 @@ public class NotificationStation extends SettingsPreferenceFragment {
         public void onNotificationRankingUpdate(RankingMap ranking) {
             mRanking = ranking;
         }
+
+        @Override
+        public void onListenerConnected() {
+            mRanking = getCurrentRanking();
+        }
     };
 
     private Context mContext;
