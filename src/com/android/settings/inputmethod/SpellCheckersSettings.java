@@ -73,19 +73,17 @@ public class SpellCheckersSettings extends SettingsPreferenceFragment
     }
 
     private void populatePreferenceScreen() {
-        final PreferenceScreen screen = getPreferenceScreen();
-        final Context context = getActivity();
-        final int count = (mEnabledScis == null) ? 0 : mEnabledScis.length;
-
-        for (int index = 0; index < count; ++index) {
-            final SpellCheckerInfo sci = mEnabledScis[index];
-        }
         final SpellCheckerPreference pref = new SpellCheckerPreference(getPrefContext(),
                 mEnabledScis);
         pref.setTitle(R.string.default_spell_checker);
-        pref.setSummary("%s");
+        final int count = (mEnabledScis == null) ? 0 : mEnabledScis.length;
+        if (count > 0) {
+            pref.setSummary("%s");
+        } else {
+            pref.setSummary(R.string.spell_checker_not_selected);
+        }
         pref.setOnPreferenceChangeListener(this);
-        screen.addPreference(pref);
+        getPreferenceScreen().addPreference(pref);
     }
 
     @Override
@@ -114,8 +112,13 @@ public class SpellCheckersSettings extends SettingsPreferenceFragment
         final boolean isSpellCheckerEnabled = mTsm.isSpellCheckerEnabled();
         mSwitchBar.setChecked(isSpellCheckerEnabled);
 
-        final SpellCheckerSubtype currentScs = mTsm.getCurrentSpellCheckerSubtype(
-                false /* allowImplicitlySelectedSubtype */);
+        final SpellCheckerSubtype currentScs;
+        if (mCurrentSci == null) {
+            currentScs = mTsm.getCurrentSpellCheckerSubtype(
+                    false /* allowImplicitlySelectedSubtype */);
+        } else {
+            currentScs = null;
+        }
         mSpellCheckerLanaguagePref.setSummary(getSpellCheckerSubtypeLabel(mCurrentSci, currentScs));
 
         final PreferenceScreen screen = getPreferenceScreen();
@@ -128,12 +131,13 @@ public class SpellCheckersSettings extends SettingsPreferenceFragment
                 pref.setSelected(mCurrentSci);
             }
         }
+        mSpellCheckerLanaguagePref.setEnabled(isSpellCheckerEnabled && mCurrentSci != null);
     }
 
     private CharSequence getSpellCheckerSubtypeLabel(final SpellCheckerInfo sci,
             final SpellCheckerSubtype subtype) {
         if (sci == null) {
-            return null;
+            return getString(R.string.spell_checker_not_selected);
         }
         if (subtype == null) {
             return getString(R.string.use_system_language_to_select_input_method_subtypes);
@@ -173,6 +177,11 @@ public class SpellCheckersSettings extends SettingsPreferenceFragment
             mDialog.dismiss();
         }
         final SpellCheckerInfo currentSci = mTsm.getCurrentSpellChecker();
+        if (currentSci == null) {
+            // This can happen in some situations.  One example is that the package that the current
+            // spell checker belongs to was uninstalled or being in background.
+            return;
+        }
         final SpellCheckerSubtype currentScs = mTsm.getCurrentSpellCheckerSubtype(
                 false /* allowImplicitlySelectedSubtype */);
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
