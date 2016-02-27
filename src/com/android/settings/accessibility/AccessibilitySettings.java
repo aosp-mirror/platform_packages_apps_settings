@@ -86,6 +86,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             "toggle_speak_password_preference";
     private static final String TOGGLE_LARGE_POINTER_ICON =
             "toggle_large_pointer_icon";
+    private static final String TOGGLE_MASTER_MONO =
+            "toggle_master_mono";
     private static final String SELECT_LONG_PRESS_TIMEOUT_PREFERENCE =
             "select_long_press_timeout_preference";
     private static final String ENABLE_ACCESSIBILITY_GESTURE_PREFERENCE_SCREEN =
@@ -182,6 +184,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private SwitchPreference mToggleLockScreenRotationPreference;
     private SwitchPreference mToggleSpeakPasswordPreference;
     private SwitchPreference mToggleLargePointerIconPreference;
+    private SwitchPreference mToggleMasterMonoPreference;
     private ListPreference mSelectLongPressTimeoutPreference;
     private Preference mNoServicesMessagePreference;
     private PreferenceScreen mCaptioningPreferenceScreen;
@@ -280,6 +283,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         } else if (mToggleLargePointerIconPreference == preference) {
             handleToggleLargePointerIconPreferenceClick();
             return true;
+        } else if (mToggleMasterMonoPreference == preference) {
+            handleToggleMasterMonoPreferenceClick();
+            return true;
         } else if (mGlobalGesturePreferenceScreen == preference) {
             handleToggleEnableAccessibilityGesturePreferenceClick();
             return true;
@@ -319,6 +325,11 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         Settings.Secure.putInt(getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_LARGE_POINTER_ICON,
                 mToggleLargePointerIconPreference.isChecked() ? 1 : 0);
+    }
+
+    private void handleToggleMasterMonoPreferenceClick() {
+        Settings.System.putIntForUser(getContentResolver(), Settings.System.MASTER_MONO,
+                mToggleMasterMonoPreference.isChecked() ? 1 : 0, UserHandle.USER_CURRENT);
     }
 
     private void handleToggleEnableAccessibilityGesturePreferenceClick() {
@@ -377,6 +388,10 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         // Large pointer icon.
         mToggleLargePointerIconPreference =
                 (SwitchPreference) findPreference(TOGGLE_LARGE_POINTER_ICON);
+
+        // Master Mono
+        mToggleMasterMonoPreference =
+                (SwitchPreference) findPreference(TOGGLE_MASTER_MONO);
 
         // Long press timeout.
         mSelectLongPressTimeoutPreference =
@@ -571,6 +586,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         mToggleLargePointerIconPreference.setChecked(Settings.Secure.getInt(getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_LARGE_POINTER_ICON, 0) != 0);
 
+        // Master mono
+        updateMasterMono();
+
         // Long press timeout.
         final int longPressTimeout = Settings.Secure.getInt(getContentResolver(),
                 Settings.Secure.LONG_PRESS_TIMEOUT, mLongPressTimeoutDefault);
@@ -638,6 +656,13 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             mToggleLockScreenRotationPreference.setChecked(
                     !RotationPolicy.isRotationLocked(context));
         }
+    }
+
+    private void updateMasterMono() {
+        final boolean masterMono = Settings.System.getIntForUser(
+                getContentResolver(), Settings.System.MASTER_MONO,
+                0 /* default */, UserHandle.USER_CURRENT) == 1;
+        mToggleMasterMonoPreference.setChecked(masterMono);
     }
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

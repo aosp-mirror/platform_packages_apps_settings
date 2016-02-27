@@ -80,7 +80,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements Indexab
     private static final String KEY_NOTIFICATION_RINGTONE = "notification_ringtone";
     private static final String KEY_ALARM_RINGTONE = "alarm_ringtone";
     private static final String KEY_VIBRATE_WHEN_RINGING = "vibrate_when_ringing";
-    private static final String KEY_MASTER_MONO = "master_mono";
     private static final String KEY_WIFI_DISPLAY = "wifi_display";
     private static final String KEY_ZEN_MODE = "zen_mode";
     private static final String KEY_CELL_BROADCAST_SETTINGS = "cell_broadcast_settings";
@@ -111,7 +110,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements Indexab
     private Preference mNotificationRingtonePreference;
     private Preference mAlarmRingtonePreference;
     private TwoStatePreference mVibrateWhenRinging;
-    private TwoStatePreference mMasterMono;
     private ComponentName mSuppressor;
     private int mRingerMode = -1;
 
@@ -176,7 +174,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements Indexab
         }
         initRingtones();
         initVibrateWhenRinging();
-        initMasterMono();
         updateRingerMode();
         updateEffectsSuppressor();
     }
@@ -451,33 +448,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements Indexab
                 Settings.System.VIBRATE_WHEN_RINGING, 0) != 0);
     }
 
-    // === Master mono ===
-
-    private void initMasterMono() {
-        mMasterMono =
-                (TwoStatePreference) getPreferenceScreen().findPreference(KEY_MASTER_MONO);
-        if (mMasterMono == null) {
-            Log.i(TAG, "Preference not found: " + KEY_MASTER_MONO);
-            return;
-        }
-
-        mMasterMono.setPersistent(false);
-        updateMasterMono();
-        mMasterMono.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                final boolean val = (Boolean) newValue;
-                mAudioManager.setMasterMono(val);
-                return true;
-            }
-        });
-    }
-
-    private void updateMasterMono() {
-        if (mMasterMono == null) return;
-        mMasterMono.setChecked(mAudioManager.isMasterMono());
-    }
-
     // === Callbacks ===
 
     private final class SettingsObserver extends ContentObserver {
@@ -512,8 +482,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements Indexab
         private static final int STOP_SAMPLE = 3;
         private static final int UPDATE_EFFECTS_SUPPRESSOR = 4;
         private static final int UPDATE_RINGER_MODE = 5;
-        private static final int UPDATE_MASTER_MONO = 6;
-        private static final int UPDATE_ALARM_RINGTONE = 7;
+        private static final int UPDATE_ALARM_RINGTONE = 6;
 
         private H() {
             super(Looper.getMainLooper());
@@ -537,9 +506,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements Indexab
                 case UPDATE_RINGER_MODE:
                     updateRingerMode();
                     break;
-                case UPDATE_MASTER_MONO:
-                    updateMasterMono();
-                    break;
                 case UPDATE_ALARM_RINGTONE:
                     mAlarmRingtonePreference.setSummary((CharSequence) msg.obj);
                     break;
@@ -556,7 +522,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements Indexab
                 final IntentFilter filter = new IntentFilter();
                 filter.addAction(NotificationManager.ACTION_EFFECTS_SUPPRESSOR_CHANGED);
                 filter.addAction(AudioManager.INTERNAL_RINGER_MODE_CHANGED_ACTION);
-                filter.addAction(AudioManager.MASTER_MONO_CHANGED_ACTION);
                 mContext.registerReceiver(this, filter);
             } else {
                 mContext.unregisterReceiver(this);
@@ -571,8 +536,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements Indexab
                 mHandler.sendEmptyMessage(H.UPDATE_EFFECTS_SUPPRESSOR);
             } else if (AudioManager.INTERNAL_RINGER_MODE_CHANGED_ACTION.equals(action)) {
                 mHandler.sendEmptyMessage(H.UPDATE_RINGER_MODE);
-            } else if (AudioManager.MASTER_MONO_CHANGED_ACTION.equals(action)) {
-                mHandler.sendEmptyMessage(H.UPDATE_MASTER_MONO);
             }
         }
     }
