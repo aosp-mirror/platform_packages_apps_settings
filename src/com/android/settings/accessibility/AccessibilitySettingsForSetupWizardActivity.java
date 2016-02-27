@@ -17,18 +17,19 @@
 package com.android.settings.accessibility;
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.v4.widget.DrawerLayout;
 import android.text.TextUtils;
 import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.setupwizardlib.util.SystemBarHelper;
+import com.android.setupwizardlib.view.NavigationBar;
 
 public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivity {
-
 
     @Override
     protected void onCreate(Bundle savedState) {
@@ -36,6 +37,25 @@ public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivit
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
         setIsDrawerPresent(false);
+
+        // Hide System Nav Bar
+        SystemBarHelper.hideSystemBars(getWindow());
+
+        // Show SUW Nav Bar
+        setContentView(R.layout.accessibility_settings_for_suw);
+        NavigationBar navigationBar = (NavigationBar) findViewById(R.id.suw_navigation_bar);
+        navigationBar.getNextButton().setVisibility(View.GONE);
+        navigationBar.setNavigationBarListener(new NavigationBar.NavigationBarListener() {
+            @Override
+            public void onNavigateBack() {
+                onNavigateUp();
+            }
+
+            @Override
+            public void onNavigateNext() {
+                // Do nothing. We don't show this button.
+            }
+        });
     }
 
     @Override
@@ -45,7 +65,7 @@ public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivit
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onNavigateUp() {
         onBackPressed();
         return true;
     }
@@ -53,13 +73,35 @@ public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivit
     @Override
     public void startPreferencePanel(String fragmentClass, Bundle args, int titleRes,
             CharSequence titleText, Fragment resultTo, int resultRequestCode) {
+        // Set the title.
         if (!TextUtils.isEmpty(titleText)) {
             setTitle(titleText);
         } else if (titleRes > 0) {
             setTitle(getString(titleRes));
         }
 
+        // Start the new Fragment.
         args.putInt(SettingsPreferenceFragment.HELP_URI_RESOURCE_KEY, 0);
         startPreferenceFragment(Fragment.instantiate(this, fragmentClass, args), true);
+    }
+
+    /**
+     * Start a new fragment.
+     *
+     * @param fragment The fragment to start
+     * @param push If true, the current fragment will be pushed onto the back stack.  If false,
+     * the current fragment will be replaced.
+     */
+    @Override
+    public void startPreferenceFragment(Fragment fragment, boolean push) {
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.suw_main_content, fragment);
+        if (push) {
+            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+            transaction.addToBackStack(BACK_STACK_PREFS);
+        } else {
+            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        }
+        transaction.commitAllowingStateLoss();
     }
 }
