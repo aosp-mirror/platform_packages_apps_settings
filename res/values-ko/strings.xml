@@ -80,10 +80,12 @@
     <string name="large_font" msgid="599055175160971446">"크게"</string>
     <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"축소"</string>
     <string name="font_size_make_larger_desc" msgid="4316986572233686061">"확대"</string>
+    <!-- no translation found for font_size_preview_text (4818424565068376732) -->
+    <skip />
     <string name="font_size_preview_text_headline" msgid="7955317408475392247">"샘플 텍스트"</string>
-    <string name="font_size_preview_text_title" msgid="4762429961714563135">"해저 2만 리"</string>
-    <string name="font_size_preview_text_subtitle" msgid="5712012075615701561">"23장: 산호 왕국"</string>
-    <string name="font_size_preview_text_body" msgid="1608889593334414309">"다음 날 아침 잠에서 깼을 때는 이상하게 머리가 개운했다. 놀랍게도 나는 내 방에 있었다. 동료들 역시 다들 영문을 모른 채 자신들의 선실에 돌아와 있었다. 어젯밤 무슨 일이 휩쓸고 지나갔는지 동료들도 나만큼이나 알지 못했고, 이 미스터리는 시간이 지난 후에야 풀릴 것이라고 생각했다.\n방을 나가자는 생각이 들었다. 나는 풀려난 것일까, 아니면 여전히 포로인 것일까? 나는 꽤 자유로운 상태였다. 문을 열고, 반갑판으로 가서, 중앙 계단을 올랐다. 어제 저녁에는 닫혀 있었던 패널이 열려 있었다. 나는 플랫폼으로 발걸음을 옮겼다.\n네드랜드와 꽁세이유가 나를 기다리고 있었다. 그들에게 어떻게 된 일이냐고 물었지만 두 사람도 알지 못했다. 완전히 정신을 잃고 깊은 잠에 빠졌던 두 사람은 자신들의 선실에 돌아와 있는 것을 발견하고 깜짝 놀랐다."</string>
+    <string name="font_size_preview_text_title" msgid="1310536233106975546">"오즈의 마법사"</string>
+    <string name="font_size_preview_text_subtitle" msgid="4231671528173110093">"11장: 오즈의 멋진 에메랄드 도시"</string>
+    <string name="font_size_preview_text_body" msgid="1250552239682375643">"도로시와 친구들은 녹색 안경으로 눈을 보호하고 있었는데도 처음에는 휘황찬란한 도시에 눈이 부셨습니다. 거리에는 녹색 대리석으로 지은 아름다운 집이 늘어서 있고 어디든지 반짝이는 에메랄드가 박혀 있었습니다. 같은 녹색 대리석으로 된 도로를 따라 걷는데 블록이 만나는 곳에는 에메랄드가 줄지어 촘촘히 박혀 있어서 햇빛에 반짝거리고 있었습니다. 창문이 녹색 유리로 되어 있었으며, 도시를 덮고 있는 하늘도 녹색을 띠고 있고 햇빛도 녹색이었습니다. \n\n남녀노소 많은 사람들이 걸어 다니고 있었는데 모두 녹색 옷을 입고 피부도 녹색을 띠고 있었습니다. 도로시와 도로시의 특이하게 모인 친구들을 놀란 눈으로 쳐다보았으며 아이들은 사자를 보자 도망가서 엄마 뒤로 숨었지만, 말을 거는 사람은 없었습니다. 거리에 많은 상점이 있었으며 도로시가 들여다보니 안에 있는 모든 것이 녹색이었습니다. 녹색 사탕과 녹색 팝콘 그리고 갖가지 녹색 신발, 녹색 모자, 녹색 옷을 팔고 있었습니다. 한 남자가 녹색 레모네이드를 팔고 있는 곳이 있었는데 아이들이 살 때 도로시가 보니 녹색 동전을 내고 있었습니다. \n\n말이나 어떤 동물도 없는 것 같았고, 남자들이 작은 녹색 마차에 짐을 싣고 밀어서 운반했습니다. 모두 행복하고 만족스러우며 풍족해 보였습니다."</string>
     <string name="font_size_save" msgid="3450855718056759095">"확인"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"USB 저장소"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"SD 카드"</string>
@@ -237,9 +239,14 @@
     <string name="pref_title_lang_selection" msgid="5696814792962878791">"언어 환경설정"</string>
     <string name="locale_remove_menu" msgid="7651301406723638854">"삭제"</string>
     <string name="add_a_language" msgid="2330538812283783022">"언어 추가"</string>
-    <string name="dlg_remove_locales_title" msgid="4143034933365516195">"언어 환경설정에서 삭제하시겠습니까?"</string>
-    <string name="dlg_remove_locales_error_title" msgid="463635546627235043">"언어 삭제 오류"</string>
-    <string name="dlg_remove_locales_error_message" msgid="7108948386818227115">"모든 언어를 삭제할 수 없습니다. 하나 이상의 언어를 남겨두어야 합니다."</string>
+    <plurals name="dlg_remove_locales_title" formatted="false" msgid="4276642359346122396">
+      <item quantity="other">선택한 언어를 삭제하시겠습니까?</item>
+      <item quantity="one">선택한 언어를 삭제하시겠습니까?</item>
+    </plurals>
+    <string name="dlg_remove_locales_message" msgid="5690839673639747130">"텍스트가 다른 언어로 표시됩니다."</string>
+    <string name="dlg_remove_locales_error_title" msgid="2653242337224911425">"모든 언어를 삭제할 수는 없습니다."</string>
+    <string name="dlg_remove_locales_error_message" msgid="6697381512654262821">"기본 언어를 하나 이상 유지해야 합니다."</string>
+    <string name="locale_not_translated" msgid="516862628177166755">"일부 앱에서 사용하지 못할 수 있습니다."</string>
     <string name="activity_picker_label" msgid="6295660302548177109">"작업 선택"</string>
     <string name="device_info_label" msgid="6551553813651711205">"장치정보"</string>
     <string name="display_label" msgid="8074070940506840792">"화면"</string>
@@ -412,8 +419,7 @@
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"기기 보호"</string>
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"지문으로 잠금 해제"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"화면 잠금 선택"</string>
-    <!-- no translation found for lock_settings_picker_title_profile (8283230482525023311) -->
-    <skip />
+    <string name="lock_settings_picker_title_profile" msgid="8283230482525023311">"프로필 화면 잠금 선택"</string>
     <string name="setup_lock_settings_picker_title" msgid="1572244299605153324">"휴대전화 보호"</string>
     <string name="setup_lock_settings_picker_fingerprint_message" msgid="2431588439043969764">"지문은 강력한 패턴, PIN, 비밀번호보다 안전하지 못합니다. 보안을 유지하려면 백업 잠금 화면을 설정하세요."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"기기 보호 기능을 활성화하여 다른 사람이 내 허가 없이 이 태블릿을 사용하는 것을 방지합니다. 사용하려는 화면 잠금을 선택하세요."</string>
@@ -421,8 +427,7 @@
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"기기 보호 기능을 활성화하여 다른 사람이 내 허가 없이 이 스마트폰을 사용하는 것을 방지합니다. 사용하려는 화면 잠금을 선택하세요."</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"백업 화면 잠금 방식 선택"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"화면 잠금"</string>
-    <!-- no translation found for unlock_set_unlock_launch_picker_title_profile (4270157368864693564) -->
-    <skip />
+    <string name="unlock_set_unlock_launch_picker_title_profile" msgid="4270157368864693564">"프로필 화면 잠금"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"화면 잠금 변경"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"패턴, PIN 또는 비밀번호 보안을 변경하거나 사용 중지"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"화면을 잠그는 방법을 선택합니다."</string>
@@ -809,7 +814,8 @@
     <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"<xliff:g id="NETWORK_SECURITY">%2$s</xliff:g><xliff:g id="NETWORK_SSID">%1$s</xliff:g> 휴대용 Wi-Fi 핫스팟"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Wi-Fi 통화"</string>
-    <string name="wifi_calling_suggestion_title" msgid="124563351958807514">"Wi-Fi 통화 사용"</string>
+    <string name="wifi_calling_suggestion_title" msgid="9008010480466359578">"Wi-Fi 통화 사용 설정"</string>
+    <string name="wifi_calling_suggestion_summary" msgid="3765923249566552233">"모바일 네트워크 대신 Wi-Fi 사용"</string>
     <string name="wifi_calling_mode_title" msgid="2164073796253284289">"통화 환경설정"</string>
     <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Wi-Fi 통화 모드"</string>
   <string-array name="wifi_calling_mode_choices">
@@ -890,7 +896,8 @@
     <string name="screen_timeout_title" msgid="5130038655092628247">"화면이 꺼짐"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> 이상 동작이 없을 때"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"배경화면"</string>
-    <string name="wallpaper_suggestion_title" msgid="1134468474328980088">"배경화면 설정"</string>
+    <string name="wallpaper_suggestion_title" msgid="8583988696513822528">"배경화면 변경"</string>
+    <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"화면 맞춤설정"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"배경화면 선택"</string>
     <string name="screensaver_settings_title" msgid="3349790120327233241">"화면 보호기"</string>
     <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"도킹할 때 또는 대기상태이거나 충전할 때"</string>
@@ -1322,8 +1329,7 @@
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"패턴 설정"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1165707416664252167">"화면 잠금을 해제하려면 패턴을 그려야 합니다."</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="2615606088906120711">"패턴 표시"</string>
-    <!-- no translation found for lockpattern_settings_enable_visible_pattern_title_profile (4864525074768391381) -->
-    <skip />
+    <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="4864525074768391381">"프로필 패턴 표시"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="4389015658335522989">"탭하면 진동"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"전원 버튼 즉시 잠금"</string>
     <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>에 의해 잠금 해제된 경우 제외"</string>
@@ -1335,18 +1341,13 @@
     <string name="lock_settings_profile_title" msgid="7819021341281339182">"직장 프로필"</string>
     <string name="lock_settings_profile_label" msgid="4423909470339292809">"직장 프로필 보안"</string>
     <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"직장 프로필 화면 잠금"</string>
-    <!-- no translation found for lock_settings_profile_unification_title (6888460471428172592) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_summary (3481269258202840437) -->
-    <skip />
+    <string name="lock_settings_profile_unification_title" msgid="6888460471428172592">"동일한 잠금 사용"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="3481269258202840437">"기기 화면 잠금을 직장 프로필과 일치하도록 변경하시겠습니까?"</string>
     <string name="lock_settings_profile_unification_dialog_title" msgid="8938936484754025065">"동일한 화면 잠금을 사용하시겠습니까?"</string>
     <string name="lock_settings_profile_unification_dialog_body" msgid="1697316592639374194">"기기에 이 잠금을 사용할 수 있지만 이 잠금에는 IT 관리자가 직장 프로필에 설정한 모든 화면 잠금 관련 정책이 포함됩니다.\n동일한 화면 잠금을 기기에 사용하시겠습니까?"</string>
-    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_body (5476809856421622503) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_confirm (2372867057465188766) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unified_summary (9008819078132993492) -->
-    <skip />
+    <string name="lock_settings_profile_unification_dialog_uncompliant_body" msgid="5476809856421622503">"직장 화면 잠금이 조직의 보안 요건에 맞지 않습니다.\n기기와 직장 프로필에 새 화면 잠금을 설정할 수 있습니다. 모든 직장 화면 잠금 정책이 기기 화면 잠금에도 적용됩니다."</string>
+    <string name="lock_settings_profile_unification_dialog_uncompliant_confirm" msgid="2372867057465188766">"잠금 변경"</string>
+    <string name="lock_settings_profile_unified_summary" msgid="9008819078132993492">"기기 화면 잠금과 동일"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"앱 관리"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"설치된 앱 관리 및 제거"</string>
     <string name="applications_settings" msgid="1721442176406964682">"애플리케이션"</string>
@@ -1638,6 +1639,10 @@
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"전원 버튼으로 통화 종료"</string>
     <string name="accessibility_toggle_speak_password_preference_title" msgid="5986628515113204844">"비밀번호 말하기"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"대형 마우스 포인터"</string>
+    <!-- no translation found for accessibility_toggle_master_mono_title (4363806997971905302) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_master_mono_summary (5634277025251530927) -->
+    <skip />
     <string name="accessibility_long_press_timeout_preference_title" msgid="4068253727586393334">"길게 누르기 지연"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"색상 전도"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="8658240868230680912">"(실험실 기능) 성능에 영향을 줄 수 있음"</string>
@@ -2452,8 +2457,7 @@
     <string name="keywords_color_temperature" msgid="2688947724153266364">"색상 온도 D65 D73 흰색 노란색 파란색 따뜻한 차가운"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"슬라이드하여 비밀번호, 패턴, PIN을 잠금 해제"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"직장 보안 확인, 직장, 프로필"</string>
-    <!-- no translation found for keywords_unification (1922900767659821025) -->
-    <skip />
+    <string name="keywords_unification" msgid="1922900767659821025">"직장 프로필, 관리된 프로필, 통합, 통합형, 직장, 프로필"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Wi-Fi NFC 태그 설정"</string>
     <string name="write_tag" msgid="8571858602896222537">"쓰기"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"태그를 탭하여 작성하세요..."</string>
@@ -2472,9 +2476,6 @@
     <string name="notification_ringtone_title" msgid="3361201340352664272">"기본 알림 벨소리"</string>
     <string name="alarm_ringtone_title" msgid="2015124067611102995">"기본 알람 벨소리"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"전화 올 때 벨소리와 함께 진동"</string>
-    <string name="master_mono_title" msgid="8123291759393322551">"모노 재생"</string>
-    <string name="master_mono_on" msgid="53180785336592938">"오디오를 항상 모노로 재생"</string>
-    <string name="master_mono_off" msgid="1232052197508060475">"오디오를 항상 모노로 재생"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"기타 소리"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"다이얼패드 신호음"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"화면 잠금 소리"</string>
@@ -2490,7 +2491,8 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"진동"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"중요 알림만 허용"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"자동 규칙"</string>
-    <string name="zen_mode_automation_suggestion_title" msgid="4695313598703536699">"알림 일시중지 일정 설정"</string>
+    <string name="zen_mode_automation_suggestion_title" msgid="5026815860958316126">"알림 일시중지 일정 설정"</string>
+    <string name="zen_mode_automation_suggestion_summary" msgid="8554080399360506596">"특정 시간에 기기 무음 설정"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"중요 알림만"</string>
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"알람만"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"모두 차단"</string>
@@ -2499,7 +2501,7 @@
     <string name="configure_notification_settings" msgid="3558846607192693233">"알림 구성"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"고급"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"알림등 반복 표시"</string>
-    <string name="lock_screen_notifications_title" msgid="9118805570775519455">"기기가 잠겼을 때"</string>
+    <string name="lock_screen_notifications_title" msgid="6173076173408887213">"잠금 화면에서"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"모든 알림 내용 표시"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"민감한 알림 내용 숨기기"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"알림 표시 안함"</string>
@@ -2514,11 +2516,14 @@
     <string name="notification_importance_title" msgid="848692592679312666">"중요도"</string>
     <string name="notification_importance_none" msgid="3173515479356106227">"설정되지 않음"</string>
     <string name="notification_importance_blocked" msgid="4764559498517003405">"차단: 알림 다시 표시 안함"</string>
-    <string name="notification_importance_low" msgid="9187046927980498942">"낮음: 알림 목록 하단에 무음으로 표시"</string>
-    <string name="notification_importance_default" msgid="4924370061477615318">"일반: 무음으로 알림 표시"</string>
-    <string name="notification_importance_high" msgid="1918112760912803959">"높음: 알림 목록 상단에 표시하고 소리로 알림"</string>
-    <string name="notification_importance_max" msgid="5501185277889361261">"긴급: 화면에 표시하고 소리로 알림"</string>
+    <string name="notification_importance_min" msgid="2370444628448134377">"최소: 알림 목록 맨 아래에 무음으로 표시"</string>
+    <string name="notification_importance_low" msgid="979932751695283877">"낮음: 무음으로 알림 표시"</string>
+    <string name="notification_importance_default" msgid="8789180840561778039">"보통: 알림을 소리로 알리도록 허용"</string>
+    <string name="notification_importance_high" msgid="2401104039256903538">"높음: 화면에 표시하고 소리로 알림"</string>
+    <string name="notification_importance_max" msgid="6036245535555486319">"긴급: 알림 목록 맨 위에 표시, 화면에 표시하고 소리로 알림"</string>
     <string name="importance_reset" msgid="7458420788555607007">"초기화"</string>
+    <string name="show_silently" msgid="2222875799232222056">"조용히 표시"</string>
+    <string name="show_silently_summary" msgid="7616604629123146565">"현재 화면에서 소리, 진동, 알림 표시를 허용하지 않습니다."</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"알림 어시스턴트"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"알림 액세스"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"앱에서 알림을 읽을 수 없습니다."</string>
@@ -2724,7 +2729,8 @@
     <string name="app_link_open_ask" msgid="7800878430190575991">"항상 확인"</string>
     <string name="app_link_open_never" msgid="3407647600352398543">"이 앱에서 열지 않음"</string>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"인식할 수 없습니다."</string>
-    <string name="default_apps_title" msgid="1854974637597514435">"기본 앱"</string>
+    <string name="default_apps_title" msgid="1660450272764331490">"기본"</string>
+    <string name="default_for_work" msgid="9152194239366247932">"업무용 기본값"</string>
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"지원 및 음성 입력"</string>
     <string name="default_assist_title" msgid="8868488975409247921">"지원 앱"</string>
     <string name="default_assist_none" msgid="3709083569608735487">"없음"</string>
@@ -2860,8 +2866,7 @@
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"축소"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"확대"</string>
     <string name="screen_zoom_summary_small" msgid="5867245310241621570">"작게"</string>
-    <!-- no translation found for screen_zoom_summary_default (2247006805614056507) -->
-    <skip />
+    <string name="screen_zoom_summary_default" msgid="2247006805614056507">"기본"</string>
     <string name="screen_zoom_summary_large" msgid="4835294730065424084">"크게"</string>
     <string name="screen_zoom_summary_very_large" msgid="7108563375663670067">"더 크게"</string>
     <string name="screen_zoom_summary_extremely_large" msgid="7427320168263276227">"가장 크게"</string>
@@ -2957,62 +2962,44 @@
     <string name="lockpattern_settings_require_pattern_before_startup_summary" msgid="7873036097628404476">"기기를 시작하려면 패턴을 사용해야 합니다. 기기가 꺼져 있을 때에는 전화, 메시지, 알림 또는 알람을 수신할 수 없습니다."</string>
     <string name="lockpattern_settings_require_pin_before_startup_summary" msgid="6022831284097476933">"기기를 시작하려면 PIN을 사용해야 합니다. 기기가 꺼져 있을 때에는 전화, 메시지, 알림 또는 알람을 수신할 수 없습니다."</string>
     <string name="lockpattern_settings_require_password_before_startup_summary" msgid="6818285221244966231">"기기를 시작하려면 비밀번호를 사용해야 합니다. 기기가 꺼져 있을 때에는 전화, 메시지, 알림 또는 알람을 수신할 수 없습니다."</string>
-    <string name="suggestion_additional_fingerprints" msgid="3683327800671241982">"추가 지문"</string>
+    <string name="suggestion_additional_fingerprints" msgid="2214281455363797037">"다른 지문 추가"</string>
+    <string name="suggestion_additional_fingerprints_summary" msgid="2298186278816316599">"다른 지문으로 잠금 해제"</string>
     <string name="battery_saver_on_summary" msgid="9072203872401530722">"켬/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_off_summary" msgid="8309471955051162327">"끔/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_desc_turn_on_auto_never" msgid="6715896635178578813">"자동으로 켜지 않음"</string>
     <string name="battery_saver_desc_turn_on_auto_pct" msgid="7472323223085636533">"배터리가 %1$s 남으면 자동으로 켬"</string>
     <string name="not_battery_optimizing" msgid="5362861851864837617">"배터리 최적화를 사용하지 않음"</string>
-    <!-- no translation found for notification_log_no_title (5678029849672024215) -->
-    <skip />
-    <!-- no translation found for notification_log_details_delimiter (3116559361552416747) -->
-    <skip />
-    <!-- no translation found for notification_log_details_package (2596495677039100284) -->
-    <skip />
-    <!-- no translation found for notification_log_details_key (2995791937075862968) -->
-    <skip />
-    <!-- no translation found for notification_log_details_group (2430467015200368698) -->
-    <skip />
-    <!-- no translation found for notification_log_details_group_summary (7945543958255585829) -->
-    <skip />
-    <!-- no translation found for notification_log_details_visibility (2552873780715930971) -->
-    <skip />
-    <!-- no translation found for notification_log_details_public_version (4247242364605495240) -->
-    <skip />
-    <!-- no translation found for notification_log_details_priority (8371354971235991398) -->
-    <skip />
-    <!-- no translation found for notification_log_details_importance (2153168790791683139) -->
-    <skip />
-    <!-- no translation found for notification_log_details_explanation (1914295130775393551) -->
-    <skip />
-    <!-- no translation found for notification_log_details_content_intent (1113554570409128083) -->
-    <skip />
-    <!-- no translation found for notification_log_details_delete_intent (905118520685297007) -->
-    <skip />
-    <!-- no translation found for notification_log_details_full_screen_intent (7118560817013522978) -->
-    <skip />
-    <!-- no translation found for notification_log_details_actions (242523930165118066) -->
-    <skip />
-    <!-- no translation found for notification_log_details_title (7177091647508863295) -->
-    <skip />
-    <!-- no translation found for notification_log_details_remoteinput (8328591329858827409) -->
-    <skip />
-    <!-- no translation found for notification_log_details_content_view (6638731378278561786) -->
-    <skip />
-    <!-- no translation found for notification_log_details_extras (4188418723779942047) -->
-    <skip />
-    <!-- no translation found for notification_log_details_icon (8939114059726188218) -->
-    <skip />
-    <!-- no translation found for notification_log_details_parcel (243148037601903212) -->
-    <skip />
-    <!-- no translation found for notification_log_details_ashmem (7241814108477320636) -->
-    <skip />
-    <!-- no translation found for notification_log_details_sound (5506232879598808099) -->
-    <skip />
-    <!-- no translation found for notification_log_details_vibrate (6890065466625335940) -->
-    <skip />
-    <!-- no translation found for notification_log_details_default (2345249399796730861) -->
-    <skip />
-    <!-- no translation found for notification_log_details_none (184131801230614059) -->
-    <skip />
+    <string name="lockscreen_remote_input" msgid="969871538778211843">"기기가 잠기면 알림에 답장이나 다른 텍스트를 입력하지 못하게 합니다."</string>
+    <string name="default_spell_checker" msgid="8506899870026026660">"기본 맞춤법 검사기"</string>
+    <string name="choose_spell_checker" msgid="6596539862291699367">"맞춤법 검사기 선택"</string>
+    <string name="spell_checker_not_selected" msgid="8871083796179200696">"선택되지 않음"</string>
+    <string name="notification_log_no_title" msgid="5678029849672024215">"(없음)"</string>
+    <string name="notification_log_details_delimiter" msgid="3116559361552416747">": "</string>
+    <string name="notification_log_details_package" msgid="2596495677039100284">"pkg"</string>
+    <string name="notification_log_details_key" msgid="2995791937075862968">"키"</string>
+    <string name="notification_log_details_group" msgid="2430467015200368698">"그룹"</string>
+    <string name="notification_log_details_group_summary" msgid="7945543958255585829">"(요약)"</string>
+    <string name="notification_log_details_visibility" msgid="2552873780715930971">"공개 상태"</string>
+    <string name="notification_log_details_public_version" msgid="4247242364605495240">"publicVersion"</string>
+    <string name="notification_log_details_priority" msgid="8371354971235991398">"우선순위"</string>
+    <string name="notification_log_details_importance" msgid="2153168790791683139">"중요도"</string>
+    <string name="notification_log_details_explanation" msgid="1914295130775393551">"설명"</string>
+    <string name="notification_log_details_content_intent" msgid="1113554570409128083">"인텐트"</string>
+    <string name="notification_log_details_delete_intent" msgid="905118520685297007">"인텐트 삭제"</string>
+    <string name="notification_log_details_full_screen_intent" msgid="7118560817013522978">"전체화면 인텐트"</string>
+    <string name="notification_log_details_actions" msgid="242523930165118066">"작업"</string>
+    <string name="notification_log_details_title" msgid="7177091647508863295">"제목"</string>
+    <string name="notification_log_details_remoteinput" msgid="8328591329858827409">"원격 입력"</string>
+    <string name="notification_log_details_content_view" msgid="6638731378278561786">"사용자설정 보기"</string>
+    <string name="notification_log_details_extras" msgid="4188418723779942047">"Extras"</string>
+    <string name="notification_log_details_icon" msgid="8939114059726188218">"아이콘"</string>
+    <string name="notification_log_details_parcel" msgid="243148037601903212">"소포 크기"</string>
+    <string name="notification_log_details_ashmem" msgid="7241814108477320636">"ashmem"</string>
+    <string name="notification_log_details_sound" msgid="5506232879598808099">"소리"</string>
+    <string name="notification_log_details_vibrate" msgid="6890065466625335940">"진동"</string>
+    <string name="notification_log_details_default" msgid="2345249399796730861">"기본값"</string>
+    <string name="notification_log_details_none" msgid="184131801230614059">"없음"</string>
+    <string name="special_access" msgid="8275242424094109976">"특별 액세스"</string>
+    <string name="confirm_convert_to_fbe_warning" msgid="1487005506049137659">"사용자 데이터를 삭제하고 파일 암호화로 변환하시겠습니까?"</string>
+    <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"삭제 및 변환"</string>
 </resources>

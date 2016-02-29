@@ -80,10 +80,12 @@
     <string name="large_font" msgid="599055175160971446">"Besar"</string>
     <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"Buat lebih kecil"</string>
     <string name="font_size_make_larger_desc" msgid="4316986572233686061">"Buat lebih besar"</string>
+    <!-- no translation found for font_size_preview_text (4818424565068376732) -->
+    <skip />
     <string name="font_size_preview_text_headline" msgid="7955317408475392247">"Teks contoh"</string>
-    <string name="font_size_preview_text_title" msgid="4762429961714563135">"Dua Puluh Ribu Liga Di Bawah Laut"</string>
-    <string name="font_size_preview_text_subtitle" msgid="5712012075615701561">"Bab 23: Kerajaan Karang"</string>
-    <string name="font_size_preview_text_body" msgid="1608889593334414309">"Esok harinya aku terbangun dengan pikiran yang sangat jernih. Tanpa kuduga, aku berada di kamarku sendiri. Teman-temanku pasti sudah kembali ke kabin mereka, tanpa memahami apa pun. Tentang yang terjadi semalam, mereka sama tidak tahunya seperti aku, dan untuk memecahkan misteri ini aku hanya mengandalkan kesempatan di masa mendatang.\nLalu aku berpikir untuk keluar dari kamar. Apa aku bebas kembali atau menjadi tawanan? Ternyata bebas. Aku membuka pintu, pergi ke geladak, naik ke tangga tengah. Panelnya yang ditutup pada malam sebelumnya, terbuka. Aku melanjutkan ke balkon.\nNed Land dan Conseil menungguku di sana. Aku menanyai mereka; mereka tidak tahu apa-apa. Karena tertidur lelap dan sama sekali tidak sadar, mereka kaget bisa berada di kabin."</string>
+    <string name="font_size_preview_text_title" msgid="1310536233106975546">"Penyihir Oz yang Menakjubkan"</string>
+    <string name="font_size_preview_text_subtitle" msgid="4231671528173110093">"Bab 11: Oz, Kota Zamrud yang Menakjubkan"</string>
+    <string name="font_size_preview_text_body" msgid="1250552239682375643">"Meski terlindungi oleh kacamata berwarna hijau, Dorothy dan teman-temannya disilaukan oleh gemerlap Kota yang menakjubkan. Rumah-rumah cantik dari marmer hijau berjejer sepanjang jalanan yang bertaburan zamrud. Mereka berjalan di trotoar marmer hijau, di blok yang menyatu berderet rapat zamrud yang berkilauan di tengah terik matahari. Jendela terbuat dari kaca hijau; langit di atas Kota berona hijau, dan cahaya matahari pun hijau. \n\nAda banyak orang, pria, wanita, dan anak-anak yang berjalan-jalan; semua berpakaian hijau dan kulit mereka pun kehijauan. Mereka memandang Dorothy dan rombongannya yang aneh dengan penuh keheranan. Anak-anak berlari dan bersembunyi di belakang ibu mereka saat melihat si Singa; tetapi tidak ada yang berbicara kepada mereka. Ada banyak toko yang berdiri di jalan dan isinya semua hijau dilihat Dorothy. Permen hijau dan brondong jagung hijau dijual, begitu juga sepatu hijau, topi hijau, maupun segala macam pakaian hijau. Dorothy melihat di sebuah tempat seorang pria menjual limun hijau, yang dibeli anak-anak dengan uang receh hijau. \n\nSepertinya tidak ada kuda atau hewan apa pun; para pria membawa barang dalam gerobak kecil berwarna hijau dengan mendorong. Semua orang terlihat bahagia, puas, dan sejahtera."</string>
     <string name="font_size_save" msgid="3450855718056759095">"Oke"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"Penyimpanan USB"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"Kartu SD"</string>
@@ -237,9 +239,14 @@
     <string name="pref_title_lang_selection" msgid="5696814792962878791">"Preferensi bahasa"</string>
     <string name="locale_remove_menu" msgid="7651301406723638854">"Hapus"</string>
     <string name="add_a_language" msgid="2330538812283783022">"Tambahkan bahasa"</string>
-    <string name="dlg_remove_locales_title" msgid="4143034933365516195">"Hapus dari preferensi bahasa?"</string>
-    <string name="dlg_remove_locales_error_title" msgid="463635546627235043">"Terjadi kesalahan penghapusan bahasa"</string>
-    <string name="dlg_remove_locales_error_message" msgid="7108948386818227115">"Tidak dapat menghapus semua bahasa, sisakan paling sedikit satu."</string>
+    <plurals name="dlg_remove_locales_title" formatted="false" msgid="4276642359346122396">
+      <item quantity="other">Hapus bahasa yang dipilih?</item>
+      <item quantity="one">Hapus bahasa yang dipilih?</item>
+    </plurals>
+    <string name="dlg_remove_locales_message" msgid="5690839673639747130">"Teks akan ditampilkan dalam bahasa lain"</string>
+    <string name="dlg_remove_locales_error_title" msgid="2653242337224911425">"Tidak dapat menghapus semua bahasa"</string>
+    <string name="dlg_remove_locales_error_message" msgid="6697381512654262821">"Simpan sedikitnya satu bahasa pilihan"</string>
+    <string name="locale_not_translated" msgid="516862628177166755">"Mungkin tidak tersedia di beberapa aplikasi"</string>
     <string name="activity_picker_label" msgid="6295660302548177109">"Pilih kegiatan"</string>
     <string name="device_info_label" msgid="6551553813651711205">"Info perangkat"</string>
     <string name="display_label" msgid="8074070940506840792">"Layar"</string>
@@ -807,7 +814,8 @@
     <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> hotspot Wi-Fi portabel"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Panggilan Wi-Fi"</string>
-    <string name="wifi_calling_suggestion_title" msgid="124563351958807514">"Aktifkan Panggilan Wi-Fi"</string>
+    <string name="wifi_calling_suggestion_title" msgid="9008010480466359578">"Mengaktifkan Panggilan Wi-Fi"</string>
+    <string name="wifi_calling_suggestion_summary" msgid="3765923249566552233">"Gunakan Wi-Fi, alih-alih jaringan seluler"</string>
     <string name="wifi_calling_mode_title" msgid="2164073796253284289">"Preferensi panggilan telepon"</string>
     <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Mode panggilan Wi-Fi"</string>
   <string-array name="wifi_calling_mode_choices">
@@ -888,7 +896,8 @@
     <string name="screen_timeout_title" msgid="5130038655092628247">"Layar mati"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Setelah tidak aktif selama <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Wallpaper"</string>
-    <string name="wallpaper_suggestion_title" msgid="1134468474328980088">"Siapkan wallpaper"</string>
+    <string name="wallpaper_suggestion_title" msgid="8583988696513822528">"Ubah wallpaper"</string>
+    <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Personalisasi layar Anda"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Pilih wallpaper dari"</string>
     <string name="screensaver_settings_title" msgid="3349790120327233241">"Lamunan"</string>
     <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"Saat di dok atau tidur dan mengisi baterai"</string>
@@ -1630,6 +1639,10 @@
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Tombol daya - tutup telepon"</string>
     <string name="accessibility_toggle_speak_password_preference_title" msgid="5986628515113204844">"Ucapkan sandi"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"Penunjuk mouse besar"</string>
+    <!-- no translation found for accessibility_toggle_master_mono_title (4363806997971905302) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_master_mono_summary (5634277025251530927) -->
+    <skip />
     <string name="accessibility_long_press_timeout_preference_title" msgid="4068253727586393334">"Penundaan ketuk &amp; tahan"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Inversi warna"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="8658240868230680912">"(Eksperimental) Dapat memengaruhi kinerja"</string>
@@ -2463,9 +2476,6 @@
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Dering notifikasi default"</string>
     <string name="alarm_ringtone_title" msgid="2015124067611102995">"Nada dering alarm default"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Juga getar saat ada panggilan"</string>
-    <string name="master_mono_title" msgid="8123291759393322551">"Pemutaran mono"</string>
-    <string name="master_mono_on" msgid="53180785336592938">"Selalu memutar audio dalam mono"</string>
-    <string name="master_mono_off" msgid="1232052197508060475">"Selalu memutar audio dalam mono"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Suara lainnya"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Nada tombol nomor"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Suara kunci layar"</string>
@@ -2481,7 +2491,8 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Getar"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Hanya izinkan prioritas"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Aturan otomatis"</string>
-    <string name="zen_mode_automation_suggestion_title" msgid="4695313598703536699">"Siapkan Jadwal Jangan Ganggu"</string>
+    <string name="zen_mode_automation_suggestion_title" msgid="5026815860958316126">"Setel Jadwal Jangan Ganggu"</string>
+    <string name="zen_mode_automation_suggestion_summary" msgid="8554080399360506596">"Bisukan perangkat pada waktu tertentu"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"Hanya untuk prioritas"</string>
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Hanya alarm"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"Senyap total"</string>
@@ -2490,7 +2501,7 @@
     <string name="configure_notification_settings" msgid="3558846607192693233">"Konfigurasikan notifikasi"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"Lanjutan"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"Kedipkan lampu notifikasi"</string>
-    <string name="lock_screen_notifications_title" msgid="9118805570775519455">"Saat perangkat terkunci"</string>
+    <string name="lock_screen_notifications_title" msgid="6173076173408887213">"Di layar kunci"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Tampilkan semua konten notifikasi"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"Sembunyikan konten notifikasi yang sensitif"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Jangan tampilkan notifikasi sama sekali"</string>
@@ -2505,11 +2516,19 @@
     <string name="notification_importance_title" msgid="848692592679312666">"Tingkat Kepentingan"</string>
     <string name="notification_importance_none" msgid="3173515479356106227">"Belum disetel"</string>
     <string name="notification_importance_blocked" msgid="4764559498517003405">"Diblokir: Jangan pernah menampilkan notifikasi ini"</string>
-    <string name="notification_importance_low" msgid="9187046927980498942">"Rendah: Menampilkan di bagian bawah daftar notifikasi secara diam-diam"</string>
-    <string name="notification_importance_default" msgid="4924370061477615318">"Normal: Menampilkan notifikasi ini secara diam-diam"</string>
-    <string name="notification_importance_high" msgid="1918112760912803959">"Tinggi: Menampilkan di bagian atas daftar notifikasi dan membunyikan suara"</string>
-    <string name="notification_importance_max" msgid="5501185277889361261">"Darurat: Muncul di layar dan membunyikan suara"</string>
+    <!-- no translation found for notification_importance_min (2370444628448134377) -->
+    <skip />
+    <!-- no translation found for notification_importance_low (979932751695283877) -->
+    <skip />
+    <!-- no translation found for notification_importance_default (8789180840561778039) -->
+    <skip />
+    <!-- no translation found for notification_importance_high (2401104039256903538) -->
+    <skip />
+    <!-- no translation found for notification_importance_max (6036245535555486319) -->
+    <skip />
     <string name="importance_reset" msgid="7458420788555607007">"Setel ulang"</string>
+    <string name="show_silently" msgid="2222875799232222056">"Tampilkan secara diam-diam"</string>
+    <string name="show_silently_summary" msgid="7616604629123146565">"Jangan bersuara, bergetar, atau mengintip notifikasi tersebut untuk ditampilkan di layar saat ini."</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"Asisten notifikasi"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Akses notifikasi"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Aplikasi tidak dapat membaca notifikasi"</string>
@@ -2715,7 +2734,8 @@
     <string name="app_link_open_ask" msgid="7800878430190575991">"Selalu tanya"</string>
     <string name="app_link_open_never" msgid="3407647600352398543">"Jangan buka di aplikasi ini"</string>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Tidak dikenali"</string>
-    <string name="default_apps_title" msgid="1854974637597514435">"Aplikasi Default"</string>
+    <string name="default_apps_title" msgid="1660450272764331490">"Default"</string>
+    <string name="default_for_work" msgid="9152194239366247932">"Default untuk kerja"</string>
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"Bantuan &amp; masukan suara"</string>
     <string name="default_assist_title" msgid="8868488975409247921">"Aplikasi bantuan"</string>
     <string name="default_assist_none" msgid="3709083569608735487">"Tidak ada"</string>
@@ -2947,12 +2967,18 @@
     <string name="lockpattern_settings_require_pattern_before_startup_summary" msgid="7873036097628404476">"Memerlukan pola untuk memulai perangkat. Jika nonaktif, perangkat ini tidak dapat menerima panggilan telepon, pesan, notifikasi, atau alarm."</string>
     <string name="lockpattern_settings_require_pin_before_startup_summary" msgid="6022831284097476933">"Memerlukan PIN untuk memulai perangkat. Jika nonaktif, perangkat ini tidak dapat menerima panggilan telepon, pesan, notifikasi, atau alarm."</string>
     <string name="lockpattern_settings_require_password_before_startup_summary" msgid="6818285221244966231">"Memerlukan sandi untuk memulai perangkat. Jika nonaktif, perangkat ini tidak dapat menerima panggilan telepon, pesan, notifikasi, atau alarm."</string>
-    <string name="suggestion_additional_fingerprints" msgid="3683327800671241982">"Sidik Jari Tambahan"</string>
+    <string name="suggestion_additional_fingerprints" msgid="2214281455363797037">"Tambahkan sidik jari lain"</string>
+    <string name="suggestion_additional_fingerprints_summary" msgid="2298186278816316599">"Buka kunci dengan sidik jari yang berbeda"</string>
     <string name="battery_saver_on_summary" msgid="9072203872401530722">"Aktif / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_off_summary" msgid="8309471955051162327">"Nonaktif / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_desc_turn_on_auto_never" msgid="6715896635178578813">"Jangan aktifkan otomatis"</string>
     <string name="battery_saver_desc_turn_on_auto_pct" msgid="7472323223085636533">"Aktifkan otomatis jika baterai %1$s"</string>
     <string name="not_battery_optimizing" msgid="5362861851864837617">"Tidak menggunakan pengoptimalan baterai"</string>
+    <string name="lockscreen_remote_input" msgid="969871538778211843">"Jika perangkat terkunci, cegah mengetik balasan atau teks lainnya di notifikasi"</string>
+    <string name="default_spell_checker" msgid="8506899870026026660">"Pemeriksa ejaan default"</string>
+    <string name="choose_spell_checker" msgid="6596539862291699367">"Pilih pemeriksa ejaan"</string>
+    <!-- no translation found for spell_checker_not_selected (8871083796179200696) -->
+    <skip />
     <string name="notification_log_no_title" msgid="5678029849672024215">"(tidak ada)"</string>
     <string name="notification_log_details_delimiter" msgid="3116559361552416747">": "</string>
     <string name="notification_log_details_package" msgid="2596495677039100284">"pkt"</string>
@@ -2979,4 +3005,7 @@
     <string name="notification_log_details_vibrate" msgid="6890065466625335940">"getar"</string>
     <string name="notification_log_details_default" msgid="2345249399796730861">"default"</string>
     <string name="notification_log_details_none" msgid="184131801230614059">"tidak ada"</string>
+    <string name="special_access" msgid="8275242424094109976">"Akses khusus"</string>
+    <string name="confirm_convert_to_fbe_warning" msgid="1487005506049137659">"Benar-benar hapus data pengguna dan konversikan ke enkripsi file?"</string>
+    <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"Hapus dan konversikan"</string>
 </resources>
