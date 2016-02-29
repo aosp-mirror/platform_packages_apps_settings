@@ -17,15 +17,16 @@
 package com.android.settings;
 
 import android.content.Context;
-import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.android.settingslib.RestrictedPreference;
+
 /**
  * A preference with a Gear on the side
  */
-public class GearPreference extends Preference implements View.OnClickListener {
+public class GearPreference extends RestrictedPreference implements View.OnClickListener {
 
     private OnGearClickListener mOnGearClickListener;
 
@@ -42,7 +43,9 @@ public class GearPreference extends Preference implements View.OnClickListener {
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
-        holder.findViewById(R.id.settings_button).setOnClickListener(this);
+        final View gear = holder.findViewById(R.id.settings_button);
+        gear.setOnClickListener(this);
+        gear.setEnabled(true);  // Make gear available even if the preference itself is disabled.
     }
 
     @Override
