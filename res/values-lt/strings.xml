@@ -82,10 +82,12 @@
     <string name="large_font" msgid="599055175160971446">"Didelis"</string>
     <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"Padaryti mažesnius"</string>
     <string name="font_size_make_larger_desc" msgid="4316986572233686061">"Padaryti didesnius"</string>
+    <!-- no translation found for font_size_preview_text (4818424565068376732) -->
+    <skip />
     <string name="font_size_preview_text_headline" msgid="7955317408475392247">"Pavyzdinis tekstas"</string>
-    <string name="font_size_preview_text_title" msgid="4762429961714563135">"Dvidešimt tūkstančių mylių po vandeniu"</string>
-    <string name="font_size_preview_text_subtitle" msgid="5712012075615701561">"24 skyrius. Koralų karalystė"</string>
-    <string name="font_size_preview_text_body" msgid="1608889593334414309">"Rytą pabudau su blaivia galva. Kaip nustebau, pajutęs, kad guliu lovoje, savo kajutėje. Be abejojimo, mano draugai buvo nunešti į savo kajutę. Turbūt, ir jie ne daugiau už mane galėjo žinoti, kas įvyko pereitą naktį. Beliko tik laukti, kad dėl kurio nors atsitiktinumo vėliau išaiškės ši paslaptinga istorija.\nAš užsinorėjau pakvėpuoti grynu oru. Bet ar galėsiu išeiti, ar kajutė neužrakinta? Aš pastūmiau duris. Durys atsidarė, ir aš siauru koridoriumi nuėjau prie trapo. Liukas, vakar uždarytas, buvo atviras. Aš išėjau į denį.\nNedas Lendas su Konseliu jau laukė manęs. Aš paklausiau, kaip jie praleido naktį. Bet jie nieko neatsiminė. Vakar užmigę sunkiu miegu, abu draugai pabudo tik šiandien rytą ir kaip nustebo, pasijutę savo kajutėje!"</string>
+    <string name="font_size_preview_text_title" msgid="1310536233106975546">"Nuostabusis Ozo šalies burtininkas"</string>
+    <string name="font_size_preview_text_subtitle" msgid="4231671528173110093">"11 skyrius. Nuostabusis Smaragdo miestas"</string>
+    <string name="font_size_preview_text_body" msgid="1250552239682375643">"Netgi žaliais akiniais apsaugoję akis Dorotė ir jos draugai iš pradžių buvo apstulbinti nuostabiojo miesto žvilgesiu. Gatvėse stovėjo gražūs namai, pastatyti iš žalio marmuro ir nusagstyti žvilgančiais smaragdais. Jie ėjo tokiu pačiu žaliu marmuru grįstu šaligatviu, o kvartalų sujungimo vietos buvo papuoštos viena šalia kitos esančiomis saulėje žvilgančių smaragdų eilėmis. Langų stiklai buvo žali, netgi dangaus virš miesto ir saulės spindulių spalva buvo žalia. \n\nMieste buvo daug žmonių (vyrų, moterų ir vaikų), kurie vaikščiojo apsirengę žaliais drabužiais. Jų oda buvo žalsvos spalvos. Į Dorotę ir jos keistą draugiją visi žiūrėjo su nuostaba, o pamatę Liūtą vaikai bėgo tolyn ir slėpėsi už savo mamų, tačiau niekas su jais nešnekėjo. Gatvėse buvo daug parduotuvių, o Dorotė pastebėjo, kad jose viskas taip pat buvo žalios spalvos. Viduje buvo parduodami žali saldainiai ir žali kukurūzų spragėsiai bei įvairūs žali batai, žalios kepurės ir žali drabužiai. Vienoje vietoje vyras siūlė nusipirkti žalio limonado ir Dorotė pastebėjo, kad jį perkantys vaikai atsiskaitė žaliomis monetomis. \n\nMieste nebuvo arklių ar kitų gyvūnų. Vyrai viską vežiojo mažais priekyje stumiamais vežimais. Visi atrodė laimingi, patenkinti ir turtingi."</string>
     <string name="font_size_save" msgid="3450855718056759095">"Gerai"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"USB atmintinė"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"SD kortelė"</string>
@@ -239,9 +241,16 @@
     <string name="pref_title_lang_selection" msgid="5696814792962878791">"Kalbos nuostata"</string>
     <string name="locale_remove_menu" msgid="7651301406723638854">"Pašalinti"</string>
     <string name="add_a_language" msgid="2330538812283783022">"Pridėti kalbą"</string>
-    <string name="dlg_remove_locales_title" msgid="4143034933365516195">"Pašalinti iš pageidaujamų kalbų?"</string>
-    <string name="dlg_remove_locales_error_title" msgid="463635546627235043">"Kalbos pašalinimo klaida"</string>
-    <string name="dlg_remove_locales_error_message" msgid="7108948386818227115">"Negalima pašalinti visų kalbų, reikia palikti bent vieną."</string>
+    <plurals name="dlg_remove_locales_title" formatted="false" msgid="4276642359346122396">
+      <item quantity="one">Pašalinti pasirinktas kalbas?</item>
+      <item quantity="few">Pašalinti pasirinktas kalbas?</item>
+      <item quantity="many">Pašalinti pasirinktas kalbas?</item>
+      <item quantity="other">Pašalinti pasirinktas kalbas?</item>
+    </plurals>
+    <string name="dlg_remove_locales_message" msgid="5690839673639747130">"Tekstas bus rodomas kita kalba"</string>
+    <string name="dlg_remove_locales_error_title" msgid="2653242337224911425">"Negalima pašalinti visų kalbų"</string>
+    <string name="dlg_remove_locales_error_message" msgid="6697381512654262821">"Palikite bent vieną pageidaujamą kalbą"</string>
+    <string name="locale_not_translated" msgid="516862628177166755">"Gali būti nepasiekiama kai kuriose programose"</string>
     <string name="activity_picker_label" msgid="6295660302548177109">"Pasirinkti veiklą"</string>
     <string name="device_info_label" msgid="6551553813651711205">"Įrenginio informacija"</string>
     <string name="display_label" msgid="8074070940506840792">"Ekranas"</string>
@@ -416,8 +425,7 @@
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"Apsaugokite savo įrenginį"</string>
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"Atrakinimas naudojant kontrolinį kodą"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Pasir. ekrano užrak."</string>
-    <!-- no translation found for lock_settings_picker_title_profile (8283230482525023311) -->
-    <skip />
+    <string name="lock_settings_picker_title_profile" msgid="8283230482525023311">"Prof. ekr. užr. pasir."</string>
     <string name="setup_lock_settings_picker_title" msgid="1572244299605153324">"Apsaugokite savo telefoną"</string>
     <string name="setup_lock_settings_picker_fingerprint_message" msgid="2431588439043969764">"Kontrolinis kodas gali būti mažiau saugus nei sudėtingas atrakinimo piešinys, PIN kodas ar slaptažodis. Nustatykite atsarginį užrakinimo ekraną, kad būtumėte apsaugoti."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Neleiskite kitiems asmenims naudoti šio planšetinio kompiuterio be leidimo, suaktyvinę įrenginio apsaugos funkcijas. Pasirinkite norimą naudoti užrakinimo ekraną."</string>
@@ -425,8 +433,7 @@
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Neleiskite kitiems asmenims naudoti šio telefono be jūsų leidimo, suaktyvinę įrenginio apsaugos funkcijas. Pasirinkite norimą naudoti užrakinimo ekraną."</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Pasirinkite atsarginį ekrano užrakto metodą"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Ekrano užraktas"</string>
-    <!-- no translation found for unlock_set_unlock_launch_picker_title_profile (4270157368864693564) -->
-    <skip />
+    <string name="unlock_set_unlock_launch_picker_title_profile" msgid="4270157368864693564">"Prof. ekr. užraktas"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Pakeisti užrak. ekraną"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Keisti ar išjungti modelio, PIN kodo ar slaptažodžio saugą"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"Pasirinkite ekrano užrakinimo metodą"</string>
@@ -825,7 +832,8 @@
     <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> kilnojamasis „Wi-Fi“ viešosios interneto prieigos taškas"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"„AndroidHotspot“"</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"„Wi-Fi“ skambinimas"</string>
-    <string name="wifi_calling_suggestion_title" msgid="124563351958807514">"Įgalinti „Wi-Fi“ skambinimą"</string>
+    <string name="wifi_calling_suggestion_title" msgid="9008010480466359578">"Įjunkite „Wi-Fi“ skambinimą"</string>
+    <string name="wifi_calling_suggestion_summary" msgid="3765923249566552233">"Naudokite „Wi-Fi“ vietoje mobiliojo ryšio tinklo"</string>
     <string name="wifi_calling_mode_title" msgid="2164073796253284289">"Skambinimo nuostata"</string>
     <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"„Wi-Fi“ skambinimo režimas"</string>
   <string-array name="wifi_calling_mode_choices">
@@ -906,7 +914,8 @@
     <string name="screen_timeout_title" msgid="5130038655092628247">"Ekranas išjungiamas"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Po <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> neveiklumo"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Darbalaukio fonas"</string>
-    <string name="wallpaper_suggestion_title" msgid="1134468474328980088">"Nustatyti ekrano foną"</string>
+    <string name="wallpaper_suggestion_title" msgid="8583988696513822528">"Pakeiskite ekrano foną"</string>
+    <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Suasmeninkite ekraną"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Pasirinkti darbalaukio foną iš"</string>
     <string name="screensaver_settings_title" msgid="3349790120327233241">"Svajonė"</string>
     <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"Kai yra doke arba kai veikia miego režimas ir kraunamas akumuliatorius"</string>
@@ -1340,8 +1349,7 @@
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"Reikalauti modelio"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1165707416664252167">"Jei norite atrakinti ekraną, reikia nustatyti modelį"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="2615606088906120711">"Padaryti piešinį matomą"</string>
-    <!-- no translation found for lockpattern_settings_enable_visible_pattern_title_profile (4864525074768391381) -->
-    <skip />
+    <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="4864525074768391381">"Padaryti profilio atrakinimo piešinį matomą"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="4389015658335522989">"Vibruoti palietus"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"Maitin. myg. iškart užrakin."</string>
     <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"Išskyrus atvejus, kai „<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>“ laiko jį atrakintą"</string>
@@ -1353,18 +1361,13 @@
     <string name="lock_settings_profile_title" msgid="7819021341281339182">"Darbo profilis"</string>
     <string name="lock_settings_profile_label" msgid="4423909470339292809">"Darbo profilio sauga"</string>
     <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Darbo profilio ekrano užraktas"</string>
-    <!-- no translation found for lock_settings_profile_unification_title (6888460471428172592) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_summary (3481269258202840437) -->
-    <skip />
+    <string name="lock_settings_profile_unification_title" msgid="6888460471428172592">"Naudoti tą patį ekrano užraktą"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="3481269258202840437">"Pakeisti įrenginio ekrano užraktą, kad jis atitiktų darbo profilio ekrano užraktą?"</string>
     <string name="lock_settings_profile_unification_dialog_title" msgid="8938936484754025065">"Naudoti tą patį ekrano užraktą?"</string>
     <string name="lock_settings_profile_unification_dialog_body" msgid="1697316592639374194">"Įrenginyje galite naudoti šį užraktą, tačiau bus taikoma visa su ekrano užraktu susijusi politika, kurią darbo profilyje nustatė IT administratorius.\nAr norite naudoti tą patį ekrano užraktą įrenginyje?"</string>
-    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_body (5476809856421622503) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_confirm (2372867057465188766) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unified_summary (9008819078132993492) -->
-    <skip />
+    <string name="lock_settings_profile_unification_dialog_uncompliant_body" msgid="5476809856421622503">"Darbo profilio ekrano užraktas neatitinka organizacijos saugos reikalavimų.\nGalite sukurti naują įrenginio ir darbo profilio ekrano užraktą, tačiau darbo profilio ekrano užrakto politika bus taikoma ir įrenginio ekrano užraktui."</string>
+    <string name="lock_settings_profile_unification_dialog_uncompliant_confirm" msgid="2372867057465188766">"Pakeisti užraktą"</string>
+    <string name="lock_settings_profile_unified_summary" msgid="9008819078132993492">"Toks pats kaip įrenginio ekrano užraktas"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Valdyti programas"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Tvarkykite ir pašalinkite įdiegtas programas"</string>
     <string name="applications_settings" msgid="1721442176406964682">"Programos"</string>
@@ -1658,6 +1661,10 @@
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Maitinimo mygt. baig. skamb."</string>
     <string name="accessibility_toggle_speak_password_preference_title" msgid="5986628515113204844">"Sakyti slaptažodžius"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"Didelis pelės žymeklis"</string>
+    <!-- no translation found for accessibility_toggle_master_mono_title (4363806997971905302) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_master_mono_summary (5634277025251530927) -->
+    <skip />
     <string name="accessibility_long_press_timeout_preference_title" msgid="4068253727586393334">"Palietimo ir palaikymo delsa"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Spalvų inversija"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="8658240868230680912">"(Eksperimentinė) Gali turėti įtakos našumui"</string>
@@ -2484,8 +2491,7 @@
     <string name="keywords_color_temperature" msgid="2688947724153266364">"spalvų temperatūra D65 D73 balta geltona mėlyna šilta šalta"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"slysti ir atrakinti, slaptažodis, šablonas, PIN kodas"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"darbo iššūkis, darbas, profilis"</string>
-    <!-- no translation found for keywords_unification (1922900767659821025) -->
-    <skip />
+    <string name="keywords_unification" msgid="1922900767659821025">"darbo profilis, tvarkomas profilis, suvienodinti, suvienodinimas, darbas, profilis"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Nustatyti „Wi-Fi“ ALR žymą"</string>
     <string name="write_tag" msgid="8571858602896222537">"Rašyti"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Palieskite žymą, kad galėtumėte rašyti..."</string>
@@ -2504,9 +2510,6 @@
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Numatytasis pranešimo skambėjimo tonas"</string>
     <string name="alarm_ringtone_title" msgid="2015124067611102995">"Numat. signalo skambėj. tonas"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Taip pat vibruoti, kai skamb."</string>
-    <string name="master_mono_title" msgid="8123291759393322551">"Monofoninis atkūrimas"</string>
-    <string name="master_mono_on" msgid="53180785336592938">"Visada leisti monofoninį garso įrašą"</string>
-    <string name="master_mono_off" msgid="1232052197508060475">"Visada leisti monofoninį garso įrašą"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Kiti garsai"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Skambinimo skydelio tonai"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Ekrano užrakinimo garsai"</string>
@@ -2522,7 +2525,8 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Vibravimas"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Tik pagal prioritetą"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Automatinės taisyklės"</string>
-    <string name="zen_mode_automation_suggestion_title" msgid="4695313598703536699">"Nust. netrukd. režimo tvarkar."</string>
+    <string name="zen_mode_automation_suggestion_title" msgid="5026815860958316126">"Nust. netrukd. režimo tvarkar."</string>
+    <string name="zen_mode_automation_suggestion_summary" msgid="8554080399360506596">"Nutild. įreng. tam tikru metu"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"Tik prioritetiniai"</string>
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Tik įspėjimai"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"Visiška tyla"</string>
@@ -2531,7 +2535,7 @@
     <string name="configure_notification_settings" msgid="3558846607192693233">"Pranešimų konfigūravimas"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"Išplėstiniai"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"Pulsuojanti įspėjimo šviesa"</string>
-    <string name="lock_screen_notifications_title" msgid="9118805570775519455">"Kai įrenginys užrakintas"</string>
+    <string name="lock_screen_notifications_title" msgid="6173076173408887213">"Užrakinimo ekrane"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Rodyti visą pranešimo turinį"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"Slėpti delikatų pranešimo turinį"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Visiškai nerodyti pranešimų"</string>
@@ -2546,11 +2550,19 @@
     <string name="notification_importance_title" msgid="848692592679312666">"Svarba"</string>
     <string name="notification_importance_none" msgid="3173515479356106227">"Nenustatyta"</string>
     <string name="notification_importance_blocked" msgid="4764559498517003405">"Užblokuota: niekada nerodyti šių pranešimų"</string>
-    <string name="notification_importance_low" msgid="9187046927980498942">"Maža: tyliai rodyti pranešimų sąrašo apačioje"</string>
-    <string name="notification_importance_default" msgid="4924370061477615318">"Įprasta: tyliai rodyti šiuos pranešimus"</string>
-    <string name="notification_importance_high" msgid="1918112760912803959">"Didelė: rodyti pranešimų sąrašo viršuje ir skambėti"</string>
-    <string name="notification_importance_max" msgid="5501185277889361261">"Skubu: rodyti ekrane ir skambėti"</string>
+    <!-- no translation found for notification_importance_min (2370444628448134377) -->
+    <skip />
+    <!-- no translation found for notification_importance_low (979932751695283877) -->
+    <skip />
+    <!-- no translation found for notification_importance_default (8789180840561778039) -->
+    <skip />
+    <!-- no translation found for notification_importance_high (2401104039256903538) -->
+    <skip />
+    <!-- no translation found for notification_importance_max (6036245535555486319) -->
+    <skip />
     <string name="importance_reset" msgid="7458420788555607007">"Nustatyti iš naujo"</string>
+    <string name="show_silently" msgid="2222875799232222056">"Rodyti tyliai"</string>
+    <string name="show_silently_summary" msgid="7616604629123146565">"Neskambėti, nevibruoti arba nerodyti šių pranešimų dabartiniame ekrane."</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"Pranešimų pagelbiklis"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Prieiga prie pranešimų"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Programos negali skaityti pranešimų"</string>
@@ -2770,7 +2782,8 @@
     <string name="app_link_open_ask" msgid="7800878430190575991">"Klausti kaskart"</string>
     <string name="app_link_open_never" msgid="3407647600352398543">"Neatidaryti šios programos"</string>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Neatpažintas"</string>
-    <string name="default_apps_title" msgid="1854974637597514435">"Numatytosios programos"</string>
+    <string name="default_apps_title" msgid="1660450272764331490">"Numatytieji"</string>
+    <string name="default_for_work" msgid="9152194239366247932">"Numatytieji darbui"</string>
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"Pagalb. progr. ir įvest. balsu"</string>
     <string name="default_assist_title" msgid="8868488975409247921">"Pagalbinė programa"</string>
     <string name="default_assist_none" msgid="3709083569608735487">"Nėra"</string>
@@ -2912,8 +2925,7 @@
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"Padaryti mažesnius"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"Padaryti didesnius"</string>
     <string name="screen_zoom_summary_small" msgid="5867245310241621570">"Mažas"</string>
-    <!-- no translation found for screen_zoom_summary_default (2247006805614056507) -->
-    <skip />
+    <string name="screen_zoom_summary_default" msgid="2247006805614056507">"Numatytasis"</string>
     <string name="screen_zoom_summary_large" msgid="4835294730065424084">"Didelis"</string>
     <string name="screen_zoom_summary_very_large" msgid="7108563375663670067">"Didesnis"</string>
     <string name="screen_zoom_summary_extremely_large" msgid="7427320168263276227">"Didžiausias"</string>
@@ -3011,62 +3023,45 @@
     <string name="lockpattern_settings_require_pattern_before_startup_summary" msgid="7873036097628404476">"Reikalauti atrakinimo piešinio norint paleisti įrenginį. Kai įrenginys išjungtas, juo nepriimami skambučiai, pranešimai, informaciniai pranešimai ar įspėjimai."</string>
     <string name="lockpattern_settings_require_pin_before_startup_summary" msgid="6022831284097476933">"Reikalauti PIN kodo norint paleisti įrenginį. Kai įrenginys išjungtas, juo nepriimami skambučiai, pranešimai, informaciniai pranešimai ar įspėjimai."</string>
     <string name="lockpattern_settings_require_password_before_startup_summary" msgid="6818285221244966231">"Reikalauti slaptažodžio norint paleisti įrenginį. Kai įrenginys išjungtas, juo nepriimami skambučiai, pranešimai, informaciniai pranešimai ar įspėjimai."</string>
-    <string name="suggestion_additional_fingerprints" msgid="3683327800671241982">"Papildomi kontroliniai kodai"</string>
+    <string name="suggestion_additional_fingerprints" msgid="2214281455363797037">"Pridėkite kitą kontrolinį kodą"</string>
+    <string name="suggestion_additional_fingerprints_summary" msgid="2298186278816316599">"Atrakinkite naudodami kitą kontrolinį kodą"</string>
     <string name="battery_saver_on_summary" msgid="9072203872401530722">"Įjungta / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_off_summary" msgid="8309471955051162327">"Išjungta / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_desc_turn_on_auto_never" msgid="6715896635178578813">"Niekada neįjungti automatiškai"</string>
     <string name="battery_saver_desc_turn_on_auto_pct" msgid="7472323223085636533">"Įjungti automatiškai, kai lieka %1$s akumuliatoriaus energijos"</string>
     <string name="not_battery_optimizing" msgid="5362861851864837617">"Akumuliatoriaus optimizavimas nenaudojamas"</string>
-    <!-- no translation found for notification_log_no_title (5678029849672024215) -->
+    <string name="lockscreen_remote_input" msgid="969871538778211843">"Jei įrenginys užrakintas, neleisti įvesti atsakymų ar kito teksto pranešimuose"</string>
+    <string name="default_spell_checker" msgid="8506899870026026660">"Numatytasis rašybos tikrinimas"</string>
+    <string name="choose_spell_checker" msgid="6596539862291699367">"Rašybos tikrinimo pasirinkimas"</string>
+    <!-- no translation found for spell_checker_not_selected (8871083796179200696) -->
     <skip />
-    <!-- no translation found for notification_log_details_delimiter (3116559361552416747) -->
-    <skip />
-    <!-- no translation found for notification_log_details_package (2596495677039100284) -->
-    <skip />
-    <!-- no translation found for notification_log_details_key (2995791937075862968) -->
-    <skip />
-    <!-- no translation found for notification_log_details_group (2430467015200368698) -->
-    <skip />
-    <!-- no translation found for notification_log_details_group_summary (7945543958255585829) -->
-    <skip />
-    <!-- no translation found for notification_log_details_visibility (2552873780715930971) -->
-    <skip />
-    <!-- no translation found for notification_log_details_public_version (4247242364605495240) -->
-    <skip />
-    <!-- no translation found for notification_log_details_priority (8371354971235991398) -->
-    <skip />
-    <!-- no translation found for notification_log_details_importance (2153168790791683139) -->
-    <skip />
-    <!-- no translation found for notification_log_details_explanation (1914295130775393551) -->
-    <skip />
-    <!-- no translation found for notification_log_details_content_intent (1113554570409128083) -->
-    <skip />
-    <!-- no translation found for notification_log_details_delete_intent (905118520685297007) -->
-    <skip />
-    <!-- no translation found for notification_log_details_full_screen_intent (7118560817013522978) -->
-    <skip />
-    <!-- no translation found for notification_log_details_actions (242523930165118066) -->
-    <skip />
-    <!-- no translation found for notification_log_details_title (7177091647508863295) -->
-    <skip />
-    <!-- no translation found for notification_log_details_remoteinput (8328591329858827409) -->
-    <skip />
-    <!-- no translation found for notification_log_details_content_view (6638731378278561786) -->
-    <skip />
-    <!-- no translation found for notification_log_details_extras (4188418723779942047) -->
-    <skip />
-    <!-- no translation found for notification_log_details_icon (8939114059726188218) -->
-    <skip />
-    <!-- no translation found for notification_log_details_parcel (243148037601903212) -->
-    <skip />
-    <!-- no translation found for notification_log_details_ashmem (7241814108477320636) -->
-    <skip />
-    <!-- no translation found for notification_log_details_sound (5506232879598808099) -->
-    <skip />
-    <!-- no translation found for notification_log_details_vibrate (6890065466625335940) -->
-    <skip />
-    <!-- no translation found for notification_log_details_default (2345249399796730861) -->
-    <skip />
-    <!-- no translation found for notification_log_details_none (184131801230614059) -->
-    <skip />
+    <string name="notification_log_no_title" msgid="5678029849672024215">"(nėra)"</string>
+    <string name="notification_log_details_delimiter" msgid="3116559361552416747">": "</string>
+    <string name="notification_log_details_package" msgid="2596495677039100284">"pkg"</string>
+    <string name="notification_log_details_key" msgid="2995791937075862968">"raktas"</string>
+    <string name="notification_log_details_group" msgid="2430467015200368698">"grupė"</string>
+    <string name="notification_log_details_group_summary" msgid="7945543958255585829">"(suvestinė)"</string>
+    <string name="notification_log_details_visibility" msgid="2552873780715930971">"matomumas"</string>
+    <string name="notification_log_details_public_version" msgid="4247242364605495240">"vieša versija"</string>
+    <string name="notification_log_details_priority" msgid="8371354971235991398">"prioritetinis"</string>
+    <string name="notification_log_details_importance" msgid="2153168790791683139">"svarba"</string>
+    <string name="notification_log_details_explanation" msgid="1914295130775393551">"paaiškinimas"</string>
+    <string name="notification_log_details_content_intent" msgid="1113554570409128083">"tikslas"</string>
+    <string name="notification_log_details_delete_intent" msgid="905118520685297007">"ištrinti tikslą"</string>
+    <string name="notification_log_details_full_screen_intent" msgid="7118560817013522978">"viso ekrano tikslas"</string>
+    <string name="notification_log_details_actions" msgid="242523930165118066">"veiksmai"</string>
+    <string name="notification_log_details_title" msgid="7177091647508863295">"pavadinimas"</string>
+    <string name="notification_log_details_remoteinput" msgid="8328591329858827409">"nuotolinio valdymo įvestys"</string>
+    <string name="notification_log_details_content_view" msgid="6638731378278561786">"tinkintas rodinys"</string>
+    <string name="notification_log_details_extras" msgid="4188418723779942047">"priedai"</string>
+    <string name="notification_log_details_icon" msgid="8939114059726188218">"piktograma"</string>
+    <string name="notification_log_details_parcel" msgid="243148037601903212">"dydis"</string>
+    <string name="notification_log_details_ashmem" msgid="7241814108477320636">"ashmem"</string>
+    <string name="notification_log_details_sound" msgid="5506232879598808099">"garsas"</string>
+    <string name="notification_log_details_vibrate" msgid="6890065466625335940">"vibruoti"</string>
+    <string name="notification_log_details_default" msgid="2345249399796730861">"numatytasis"</string>
+    <string name="notification_log_details_none" msgid="184131801230614059">"nėra"</string>
+    <string name="special_access" msgid="8275242424094109976">"Speciali prieiga"</string>
+    <string name="confirm_convert_to_fbe_warning" msgid="1487005506049137659">"Tikrai išvalyti naudotojo duomenis ir konvertuoti į failų šifruotę?"</string>
+    <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"Išvalyti ir konvertuoti"</string>
 </resources>

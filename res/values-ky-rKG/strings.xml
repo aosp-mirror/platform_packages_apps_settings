@@ -80,10 +80,15 @@
     <string name="large_font" msgid="599055175160971446">"Чоң"</string>
     <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"Кичирээк кылуу"</string>
     <string name="font_size_make_larger_desc" msgid="4316986572233686061">"Чоңураак кылуу"</string>
+    <!-- no translation found for font_size_preview_text (4818424565068376732) -->
+    <skip />
     <string name="font_size_preview_text_headline" msgid="7955317408475392247">"Үлгү текст"</string>
-    <string name="font_size_preview_text_title" msgid="4762429961714563135">"Деңиз түбүнө жыйырма миң чакырым"</string>
-    <string name="font_size_preview_text_subtitle" msgid="5712012075615701561">"23-бөлүм: Маржан Падышалыгы"</string>
-    <string name="font_size_preview_text_body" msgid="1608889593334414309">"Эртеси күнү сергек ойгондум. Таң калычтуусу, мен өзүмдүн бөлмөмдө экенмин. Досторумду деле, мен сыяктуу өз каюталарына алып барып жаткырып коюшса керек. Кыязы, түн ичинде эмне болгонун алар мен сыяктуу эле билбей калышты окшойт. Эми ушул табышмактуу сырдын жандырмагы эртеңки күнү кандайдыр бир кокустуктан улам эле чечилбесе, белгисиз бойдон калганы калды окшойт деп ойлоп койдум.\nБөлмөмдөн чыгып таза абадан жутсамбы деп ойлодум. Бирок чыга аламбы? Каютам кулптануу эмеспи? Каалганы түртүп көрсөм, ал ачылып кетти. Кууш коридордогу тепкич менен трапка көтөрүлдүм. Мурунку түнү жабылып турган калканычтар ачык экен. Платформага чыктым.\nНед Ленд менен Консель мени күтүп турушуптур. Түн кандай өттү деп сурасам, экөө тең оңдуу жооп бере алышкан жок. Кечээ кечинде өлгөн немедей укташып, бүгүн эртең менен өз каютасында ойгонгонушканына айран таң болуп турушту."</string>
+    <!-- no translation found for font_size_preview_text_title (1310536233106975546) -->
+    <skip />
+    <!-- no translation found for font_size_preview_text_subtitle (4231671528173110093) -->
+    <skip />
+    <!-- no translation found for font_size_preview_text_body (1250552239682375643) -->
+    <skip />
     <string name="font_size_save" msgid="3450855718056759095">"Жарайт"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"USB сактагыч"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"SD карта"</string>
@@ -237,9 +242,14 @@
     <string name="pref_title_lang_selection" msgid="5696814792962878791">"Тил жөндөөлөрү"</string>
     <string name="locale_remove_menu" msgid="7651301406723638854">"Алып салуу"</string>
     <string name="add_a_language" msgid="2330538812283783022">"Тилди кошуңуз"</string>
-    <string name="dlg_remove_locales_title" msgid="4143034933365516195">"Тил жөндөөлөрү алынып салынсынбы?"</string>
-    <string name="dlg_remove_locales_error_title" msgid="463635546627235043">"Тилди алып салуу катасы"</string>
-    <string name="dlg_remove_locales_error_message" msgid="7108948386818227115">"Бардык тилдерди алып салуу мүмкүн болбой жатат, жок дегенде бирөөнү калтырышыңыз керек."</string>
+    <plurals name="dlg_remove_locales_title" formatted="false" msgid="4276642359346122396">
+      <item quantity="other">Тандалган тилдер алынып салынсынбы?</item>
+      <item quantity="one">Тандалган тил алынып салынсынбы?</item>
+    </plurals>
+    <string name="dlg_remove_locales_message" msgid="5690839673639747130">"Текст башка тилде көрсөтүлөт"</string>
+    <string name="dlg_remove_locales_error_title" msgid="2653242337224911425">"Тилдердин баары алынып салынбайт"</string>
+    <string name="dlg_remove_locales_error_message" msgid="6697381512654262821">"Тандалган тилдерден кеминде бирди калтырыңыз"</string>
+    <string name="locale_not_translated" msgid="516862628177166755">"Айрым колдонмолордо жеткиликсиз болушу мүмкүн"</string>
     <string name="activity_picker_label" msgid="6295660302548177109">"Аракетти тандаңыз"</string>
     <string name="device_info_label" msgid="6551553813651711205">"Түзмөк маалыматы"</string>
     <string name="display_label" msgid="8074070940506840792">"Экран"</string>
@@ -330,8 +340,7 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Кулпну манж из менн ач"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_message (6931554430739074640) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="6931554430739074640">"Телефонуңуздун кулпусун ачып, кандайдыр бир нерсени сатып алып жатканыңызды ырастап же колдонмолорго кирүү үчүн жөн гана манжаңызды сенсорго тийгизип коюңуз. Кимдир-бирөөнүн манжа изин кошуп жатканыңызда этият болуңуз. Бир эле манжа изи кошулса да, ушул нерселердин бардыгын аткара алат.\n\nЭскертүү: Манжа изиңиздин коопсуздугу графикалык ачкычка же PIN кодго караганда начарыраак болушу мүмкүн. "<annotation id="url">"Көбүрөөк билүү"</annotation></string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Жокко чыгаруу"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Улантуу"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="7234486440384881699">"Түзмөктү коргоо мүмкүнчүлүктөрү жандырылбайт. Ал жоголуп же уурдалып кетсе же анын ичиндеги дайындар өчүрүлсө, башкалар аны пайдалана беришет."</string>
@@ -413,8 +422,7 @@
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"Түзмөгүңүздү коргоңуз"</string>
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"Манжа изиңиз менен кулпусун ачыңыз"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Экран бекитүүнү тандоо"</string>
-    <!-- no translation found for lock_settings_picker_title_profile (8283230482525023311) -->
-    <skip />
+    <string name="lock_settings_picker_title_profile" msgid="8283230482525023311">"Экранды кулпулоо"</string>
     <string name="setup_lock_settings_picker_title" msgid="1572244299605153324">"Телефонуңузду коргоңуз"</string>
     <string name="setup_lock_settings_picker_fingerprint_message" msgid="2431588439043969764">"Эскертүү: Түзмөгүңүздү манжа изи менен коргоого караганда графикалык ачкыч, PIN код же сырсөз менен коргоо бир кыйла коопсуз. Коопсуздук үчүн экран кулпусунун камдык көчүрмөсүн жөндөп коюңуз."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Түзмөктү коргоо функциялары жандырылганда, башкалар бул планшетти сиздин уруксатыңызсыз пайдалана албай калышат. Колдонгуңуз келген экран кулпусун тандаңыз."</string>
@@ -422,8 +430,7 @@
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Түзмөктү коргоо функциялары жандырылганда, башкалар бул телефонду сиздин уруксатыңызсыз пайдалана албай калышат. Колдонгуңуз келген экран кулпусун тандаңыз."</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Экранды кулпулоонун көмөкчү ыкмасын тандаңыз"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Бөгөттөөчү көшөгө"</string>
-    <!-- no translation found for unlock_set_unlock_launch_picker_title_profile (4270157368864693564) -->
-    <skip />
+    <string name="unlock_set_unlock_launch_picker_title_profile" msgid="4270157368864693564">"Экранды кулпулоо"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Бөгөттөөчү көшөгөнү алмаштыруу"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Үлгү, PIN код же сырсөз коопсуздугун өзгөртүү"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"Экранды кулпулоо ыкмасын тандаңыз"</string>
@@ -810,7 +817,8 @@
     <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> көчмө Wi‑Fi хотспоту"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Wi-Fi чалуу"</string>
-    <string name="wifi_calling_suggestion_title" msgid="124563351958807514">"Wi-Fi аркылуу чалууну иштетүү"</string>
+    <string name="wifi_calling_suggestion_title" msgid="9008010480466359578">"Wi-Fi чалууну күйгүзүү"</string>
+    <string name="wifi_calling_suggestion_summary" msgid="3765923249566552233">"Мобилдик тармак ордуна Wi-Fi колдонуңуз"</string>
     <string name="wifi_calling_mode_title" msgid="2164073796253284289">"Чалуунун жеке жөндөөлөрү"</string>
     <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Wi-Fi чалуу режими"</string>
   <string-array name="wifi_calling_mode_choices">
@@ -891,7 +899,8 @@
     <string name="screen_timeout_title" msgid="5130038655092628247">"Экран өчөт"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> колдонулбагандан кийин"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Тушкагаз"</string>
-    <string name="wallpaper_suggestion_title" msgid="1134468474328980088">"Тушкагазды жөндөө"</string>
+    <string name="wallpaper_suggestion_title" msgid="8583988696513822528">"Тушкагазды өзгөртүү"</string>
+    <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Экраныңызды жекелештириңиз"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Тушкагаз тандоо"</string>
     <string name="screensaver_settings_title" msgid="3349790120327233241">"Кыял"</string>
     <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"Доктолгондо же уктаганда жана дүрмөттөлүп жатканда"</string>
@@ -1323,8 +1332,7 @@
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"Үлгү талап кылынсын"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1165707416664252167">"Экран кулпусун ачуу үчүн сүрөт үлгүсү тартылышы керек"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="2615606088906120711">"Үлгүнү көрсөтүү"</string>
-    <!-- no translation found for lockpattern_settings_enable_visible_pattern_title_profile (4864525074768391381) -->
-    <skip />
+    <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="4864525074768391381">"Профилдин графикалык ачкычы көрсөтүлсүн"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="4389015658335522989">"Таптаганда дирилдесин"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"Кубат баскычы дароо бекитет"</string>
     <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> кулптабаган учурду кошпогондо"</string>
@@ -1336,18 +1344,13 @@
     <string name="lock_settings_profile_title" msgid="7819021341281339182">"Жумуш профили"</string>
     <string name="lock_settings_profile_label" msgid="4423909470339292809">"Жумуш профилинин коопсуздугу"</string>
     <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Жумуш профилинин экран кулпусу"</string>
-    <!-- no translation found for lock_settings_profile_unification_title (6888460471428172592) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_summary (3481269258202840437) -->
-    <skip />
+    <string name="lock_settings_profile_unification_title" msgid="6888460471428172592">"Бирдей кулпулоо ыкмасын колдонуу"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="3481269258202840437">"Түзмөктүн экранын кулпулоо жумуш профилинин эрежелерине ылайык жөндөлсүнбү?"</string>
     <string name="lock_settings_profile_unification_dialog_title" msgid="8938936484754025065">"Ошол эле экран кулпусу колдонулсунбу?"</string>
     <string name="lock_settings_profile_unification_dialog_body" msgid="1697316592639374194">"Бул кулпуну түзмөгүңүз үчүн колдонсоңуз болот, бирок анда IT администраторуңуз жумуш профилине койгон экран кулпусуна байланыштуу бардык саясаттар камтылган.\nОшол эле экран кулпусун түзмөгүңүздө колдоносузбу?"</string>
-    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_body (5476809856421622503) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_confirm (2372867057465188766) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unified_summary (9008819078132993492) -->
-    <skip />
+    <string name="lock_settings_profile_unification_dialog_uncompliant_body" msgid="5476809856421622503">"Экран кулпусу ишканаңыздын коопсуздук талаптарына жооп бербейт.\nТүзмөгүңүз менен жумуш профилиңизге бирдей кулпулоо ыкмасын койсоңуз болот. Эң негизгиси, ал ишкананын талаптарына жооп бериши керек."</string>
+    <string name="lock_settings_profile_unification_dialog_uncompliant_confirm" msgid="2372867057465188766">"Кулпуну өзгөртүү"</string>
+    <string name="lock_settings_profile_unified_summary" msgid="9008819078132993492">"Түзмөктүн экранын кулпулоо ыкмасындай"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Колдонмолорду башкаруу"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Орнотулган колдонмолорду өчүрүү жана башкаруу"</string>
     <string name="applications_settings" msgid="1721442176406964682">"Колдонмолор"</string>
@@ -1632,14 +1635,17 @@
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Жеткиликтүүлүк тез чакырмалары"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"Жандырылган"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"Өчүрүлгөн"</string>
-    <!-- no translation found for accessibility_global_gesture_preference_description (1605107799571936715) -->
-    <skip />
+    <string name="accessibility_global_gesture_preference_description" msgid="1605107799571936715">"Бул функция иштетилгенде, атайын мүмкүнчүлүктөр функциясын эки кадам менен жандыра аласыз:\n\n1-кадам: Кубат баскычын добуш чыккыча же дирилдөө сезилгиче басып туруңуз.\n\n2-кадам: Аудио ырастоо угулгуча эки манжаны тийгизип туруңуз.\n\nЭгер түзмөктүн бир нече колдонуучусу болсо, бул кыска жолду кулпуланган экранда колдонуу атайын мүмкүнчүлүктөр функциясын түзмөктүн кулпусу ачылгыча убактылуу иштетет."</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="2567402942683463779">"Жогорку контрасттагы текст"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="7218498768415430963">"Экрандын чоңойтуусун авто жаңыртуу"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"Колдонмо кубулган сайын, экрандын чоңойтуусун жаңыртуу"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Кубат баскычы чалууну бүтүрөт"</string>
     <string name="accessibility_toggle_speak_password_preference_title" msgid="5986628515113204844">"Сырсөздөрдү окуп берүү"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"Чычкандын чоң көрсөткүчү"</string>
+    <!-- no translation found for accessibility_toggle_master_mono_title (4363806997971905302) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_master_mono_summary (5634277025251530927) -->
+    <skip />
     <string name="accessibility_long_press_timeout_preference_title" msgid="4068253727586393334">"Коё бербей таптап тургандагы кечигүү"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Түстү инверсиялоо"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="8658240868230680912">"(Сынамык) Иштин майнаптуулугуна таасир этиши мүмкүн"</string>
@@ -2454,8 +2460,7 @@
     <string name="keywords_color_temperature" msgid="2688947724153266364">"түстүү температура D65 D73 ак сары көр жылуу салкын"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"кулпусун ачуу үчүн сыдыруу, сырсөз, үлгү, PIN"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"жумуш тапшырмасы, жумуш, профиль"</string>
-    <!-- no translation found for keywords_unification (1922900767659821025) -->
-    <skip />
+    <string name="keywords_unification" msgid="1922900767659821025">"жумуш профили, башкарылган профиль, бириктир, бириктирүү, жумуш, профиль"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Wi-Fi NFC тегин орнотуу"</string>
     <string name="write_tag" msgid="8571858602896222537">"Жазуу"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Жазуу үчүн тегди таптап коюңуз…"</string>
@@ -2474,9 +2479,6 @@
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Эскертменин демейки шыңгыры"</string>
     <string name="alarm_ringtone_title" msgid="2015124067611102995">"Демейки ойготкуч рингтон"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Чалуулар үчүн дагы дирилдесин"</string>
-    <string name="master_mono_title" msgid="8123291759393322551">"Моно режиминде ойнотуу"</string>
-    <string name="master_mono_on" msgid="53180785336592938">"Аудио ар дайым моно режиминде ойнотулсун"</string>
-    <string name="master_mono_off" msgid="1232052197508060475">"Аудио ар дайым моно режиминде ойнотулсун"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Башка үндөр"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Тергич үндөрү"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Экранды кулпулоо үндөрү"</string>
@@ -2492,7 +2494,8 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Дирилдөө"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Артыкчылыктууга гана уруксат"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Автоматтык эрежелер"</string>
-    <string name="zen_mode_automation_suggestion_title" msgid="4695313598703536699">"\"Тынчымды алба\": ырааттама"</string>
+    <string name="zen_mode_automation_suggestion_title" msgid="5026815860958316126">"\"Тынчымды алба\" ырттмасын коюу"</string>
+    <string name="zen_mode_automation_suggestion_summary" msgid="8554080399360506596">"Белгл убкт түзмгңздн үнн өчр"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"Артыкчылык гана"</string>
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Ойготкучтар гана"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"Тымтырс"</string>
@@ -2501,7 +2504,7 @@
     <string name="configure_notification_settings" msgid="3558846607192693233">"Эскертмелерди конфигурациялоо"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"Өркүндөтүлгөн"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"Жаркылдаган эскертменин жарыгы"</string>
-    <string name="lock_screen_notifications_title" msgid="9118805570775519455">"Түзмөк кулпуланганда"</string>
+    <string name="lock_screen_notifications_title" msgid="6173076173408887213">"Кулпуланган экранда"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Эскертменин бардык мазмунун көрсөтүү"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"Астейдил эскертменин мазмунун жашыруу"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Эскертмелер такыр көрсөтүлбөсүн"</string>
@@ -2516,11 +2519,19 @@
     <string name="notification_importance_title" msgid="848692592679312666">"Маанилүүлүгү"</string>
     <string name="notification_importance_none" msgid="3173515479356106227">"Коюлган эмес"</string>
     <string name="notification_importance_blocked" msgid="4764559498517003405">"Бөгөттөлгөн: Бул эскертмелер эч качан көрсөтүлбөсүн"</string>
-    <string name="notification_importance_low" msgid="9187046927980498942">"Төмөн: Эскертмелер тизмесинин соңунда үнсүз көрсөтүлсүн"</string>
-    <string name="notification_importance_default" msgid="4924370061477615318">"Кадимки: Бул эскертмелер үнсүз көрсөтүлсүн"</string>
-    <string name="notification_importance_high" msgid="1918112760912803959">"Жогору: Эскертмелер тизмесинин башында үн чыгарып көрсөтүлсүн"</string>
-    <string name="notification_importance_max" msgid="5501185277889361261">"Шашылыш: Үн менен коштолуп, экранга чыгарылсын"</string>
+    <!-- no translation found for notification_importance_min (2370444628448134377) -->
+    <skip />
+    <!-- no translation found for notification_importance_low (979932751695283877) -->
+    <skip />
+    <!-- no translation found for notification_importance_default (8789180840561778039) -->
+    <skip />
+    <!-- no translation found for notification_importance_high (2401104039256903538) -->
+    <skip />
+    <!-- no translation found for notification_importance_max (6036245535555486319) -->
+    <skip />
     <string name="importance_reset" msgid="7458420788555607007">"Баштапкы абалга келтирүү"</string>
+    <string name="show_silently" msgid="2222875799232222056">"Үнсүз көрсөтүлсүн"</string>
+    <string name="show_silently_summary" msgid="7616604629123146565">"Үн чыгарылбасын, дирилдебесин же бул эскертмелер учурдагы экранга чыгарылбасын."</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"Эскертме жардамчысы"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Эскертмени колдонуу мүмкүнчлгү"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Колдонмолор эскертмелерди окуй алышпайт"</string>
@@ -2717,8 +2728,7 @@
     <string name="domain_urls_title" msgid="8762012672312435252">"Колдонмо шилтемелери"</string>
     <string name="domain_urls_summary_none" msgid="2639588015479657864">"Колдоого алынган шилтемелер ачылбасын"</string>
     <string name="domain_urls_summary_one" msgid="3704934031930978405">"<xliff:g id="DOMAIN">%s</xliff:g> ачуу"</string>
-    <!-- no translation found for domain_urls_summary_some (3950089361819428455) -->
-    <skip />
+    <string name="domain_urls_summary_some" msgid="3950089361819428455">"<xliff:g id="DOMAIN">%s</xliff:g> жана башка URL\'дерди ачуу"</string>
     <plurals name="domain_urls_apps_summary" formatted="false" msgid="4322996467951692661">
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> колдонмо колдоого алынган шилтемелерин ача алат</item>
       <item quantity="one">Бир колдонмо колдоого алынган шилтемелерин ача алат</item>
@@ -2727,7 +2737,8 @@
     <string name="app_link_open_ask" msgid="7800878430190575991">"Чалган сайын сурасын"</string>
     <string name="app_link_open_never" msgid="3407647600352398543">"Бул колдонмодо ачылбасын"</string>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Таанылган жок"</string>
-    <string name="default_apps_title" msgid="1854974637597514435">"Демейки колдонмолор"</string>
+    <string name="default_apps_title" msgid="1660450272764331490">"Демейки"</string>
+    <string name="default_for_work" msgid="9152194239366247932">"Жумуш үчүн демейки жөндөөлөр"</string>
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"Көмөкчү жана үн менен киргизүү"</string>
     <string name="default_assist_title" msgid="8868488975409247921">"Көмөкчү колдонмо"</string>
     <string name="default_assist_none" msgid="3709083569608735487">"Эч бири"</string>
@@ -2863,8 +2874,7 @@
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"Кичирээк кылуу"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"Чоңураак кылуу"</string>
     <string name="screen_zoom_summary_small" msgid="5867245310241621570">"Кичине"</string>
-    <!-- no translation found for screen_zoom_summary_default (2247006805614056507) -->
-    <skip />
+    <string name="screen_zoom_summary_default" msgid="2247006805614056507">"Демейки"</string>
     <string name="screen_zoom_summary_large" msgid="4835294730065424084">"Чоң"</string>
     <string name="screen_zoom_summary_very_large" msgid="7108563375663670067">"Чоңураак"</string>
     <string name="screen_zoom_summary_extremely_large" msgid="7427320168263276227">"Эң чоң"</string>
@@ -2960,62 +2970,45 @@
     <string name="lockpattern_settings_require_pattern_before_startup_summary" msgid="7873036097628404476">"Түзмөгүңүздү күйгүзүү үчүн графикалык ачкыч талап кылынат. Түзмөк өчүп турганда чалуулар, билдирүүлөр, эскертмелер же сигналдар алынбайт."</string>
     <string name="lockpattern_settings_require_pin_before_startup_summary" msgid="6022831284097476933">"Түзмөгүңүздү күйгүзүү үчүн PIN код талап кылынат. Түзмөк өчүп турганда чалуулар, билдирүүлөр, эскертмелер же сигналдар алынбайт."</string>
     <string name="lockpattern_settings_require_password_before_startup_summary" msgid="6818285221244966231">"Түзмөгүңүздү күйгүзүү үчүн сырсөз талап кылынат. Түзмөк өчүп турганда чалуулар, билдирүүлөр, эскертмелер же сигналдар алынбайт."</string>
-    <string name="suggestion_additional_fingerprints" msgid="3683327800671241982">"Кошумча манжа издери"</string>
+    <string name="suggestion_additional_fingerprints" msgid="2214281455363797037">"Дагы бир манжа изин кошуу"</string>
+    <string name="suggestion_additional_fingerprints_summary" msgid="2298186278816316599">"Кулпуну башка манжа изи менен ачуу"</string>
     <string name="battery_saver_on_summary" msgid="9072203872401530722">"Күйүк / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_off_summary" msgid="8309471955051162327">"Өчүк / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_desc_turn_on_auto_never" msgid="6715896635178578813">"Эч качан автоматтык түрдө күйгүзүлбөсүн"</string>
     <string name="battery_saver_desc_turn_on_auto_pct" msgid="7472323223085636533">"Батареянын кубаты %1$s болгондо автоматтык түрдө күйгүзүлсүн"</string>
     <string name="not_battery_optimizing" msgid="5362861851864837617">"Батареянын кубатын үнөмдөө функциясы колдонулбай эле"</string>
-    <!-- no translation found for notification_log_no_title (5678029849672024215) -->
+    <string name="lockscreen_remote_input" msgid="969871538778211843">"Эгер түзмөк кулпуланган болсо, эскертмелерге жооптор же башка текст жазылбасын"</string>
+    <string name="default_spell_checker" msgid="8506899870026026660">"Демейки орфография текшергич"</string>
+    <string name="choose_spell_checker" msgid="6596539862291699367">"Орфография текшергич тандаңыз"</string>
+    <!-- no translation found for spell_checker_not_selected (8871083796179200696) -->
     <skip />
-    <!-- no translation found for notification_log_details_delimiter (3116559361552416747) -->
-    <skip />
-    <!-- no translation found for notification_log_details_package (2596495677039100284) -->
-    <skip />
-    <!-- no translation found for notification_log_details_key (2995791937075862968) -->
-    <skip />
-    <!-- no translation found for notification_log_details_group (2430467015200368698) -->
-    <skip />
-    <!-- no translation found for notification_log_details_group_summary (7945543958255585829) -->
-    <skip />
-    <!-- no translation found for notification_log_details_visibility (2552873780715930971) -->
-    <skip />
-    <!-- no translation found for notification_log_details_public_version (4247242364605495240) -->
-    <skip />
-    <!-- no translation found for notification_log_details_priority (8371354971235991398) -->
-    <skip />
-    <!-- no translation found for notification_log_details_importance (2153168790791683139) -->
-    <skip />
-    <!-- no translation found for notification_log_details_explanation (1914295130775393551) -->
-    <skip />
-    <!-- no translation found for notification_log_details_content_intent (1113554570409128083) -->
-    <skip />
-    <!-- no translation found for notification_log_details_delete_intent (905118520685297007) -->
-    <skip />
-    <!-- no translation found for notification_log_details_full_screen_intent (7118560817013522978) -->
-    <skip />
-    <!-- no translation found for notification_log_details_actions (242523930165118066) -->
-    <skip />
-    <!-- no translation found for notification_log_details_title (7177091647508863295) -->
-    <skip />
-    <!-- no translation found for notification_log_details_remoteinput (8328591329858827409) -->
-    <skip />
-    <!-- no translation found for notification_log_details_content_view (6638731378278561786) -->
-    <skip />
-    <!-- no translation found for notification_log_details_extras (4188418723779942047) -->
-    <skip />
-    <!-- no translation found for notification_log_details_icon (8939114059726188218) -->
-    <skip />
-    <!-- no translation found for notification_log_details_parcel (243148037601903212) -->
-    <skip />
-    <!-- no translation found for notification_log_details_ashmem (7241814108477320636) -->
-    <skip />
-    <!-- no translation found for notification_log_details_sound (5506232879598808099) -->
-    <skip />
-    <!-- no translation found for notification_log_details_vibrate (6890065466625335940) -->
-    <skip />
-    <!-- no translation found for notification_log_details_default (2345249399796730861) -->
-    <skip />
-    <!-- no translation found for notification_log_details_none (184131801230614059) -->
-    <skip />
+    <string name="notification_log_no_title" msgid="5678029849672024215">"(эч бири)"</string>
+    <string name="notification_log_details_delimiter" msgid="3116559361552416747">": "</string>
+    <string name="notification_log_details_package" msgid="2596495677039100284">"тптм"</string>
+    <string name="notification_log_details_key" msgid="2995791937075862968">"баскыч"</string>
+    <string name="notification_log_details_group" msgid="2430467015200368698">"топ"</string>
+    <string name="notification_log_details_group_summary" msgid="7945543958255585829">"(корутунду)"</string>
+    <string name="notification_log_details_visibility" msgid="2552873780715930971">"көрүнүмдүүлүгү"</string>
+    <string name="notification_log_details_public_version" msgid="4247242364605495240">"жалпыга ачык версиясы"</string>
+    <string name="notification_log_details_priority" msgid="8371354971235991398">"шашылыштыгы"</string>
+    <string name="notification_log_details_importance" msgid="2153168790791683139">"маанилүүлүгү"</string>
+    <string name="notification_log_details_explanation" msgid="1914295130775393551">"түшүндүрмө"</string>
+    <string name="notification_log_details_content_intent" msgid="1113554570409128083">"ниет"</string>
+    <string name="notification_log_details_delete_intent" msgid="905118520685297007">"ниетти жок кылуу"</string>
+    <string name="notification_log_details_full_screen_intent" msgid="7118560817013522978">"толук экран"</string>
+    <string name="notification_log_details_actions" msgid="242523930165118066">"аракеттер"</string>
+    <string name="notification_log_details_title" msgid="7177091647508863295">"аталышы"</string>
+    <string name="notification_log_details_remoteinput" msgid="8328591329858827409">"алыстан киргизилгендер"</string>
+    <string name="notification_log_details_content_view" msgid="6638731378278561786">"ыңгайлаштырылган көрүнүш"</string>
+    <string name="notification_log_details_extras" msgid="4188418723779942047">"кошумчалар"</string>
+    <string name="notification_log_details_icon" msgid="8939114059726188218">"сөлөкөт"</string>
+    <string name="notification_log_details_parcel" msgid="243148037601903212">"таңгак өлчөмү"</string>
+    <string name="notification_log_details_ashmem" msgid="7241814108477320636">"ashmem"</string>
+    <string name="notification_log_details_sound" msgid="5506232879598808099">"добуш"</string>
+    <string name="notification_log_details_vibrate" msgid="6890065466625335940">"дирилдөө"</string>
+    <string name="notification_log_details_default" msgid="2345249399796730861">"демейки"</string>
+    <string name="notification_log_details_none" msgid="184131801230614059">"эч бири"</string>
+    <string name="special_access" msgid="8275242424094109976">"Өзгөчө мүмкүнчүлүк"</string>
+    <string name="confirm_convert_to_fbe_warning" msgid="1487005506049137659">"Колдонуучунун дайындары чын эле өчүрүлүп, файл шифрлөөсүнө айландырылсынбы?"</string>
+    <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"Сүрүп салуу жана айландыруу"</string>
 </resources>

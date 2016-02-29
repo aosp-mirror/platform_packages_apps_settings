@@ -80,10 +80,12 @@
     <string name="large_font" msgid="599055175160971446">"Groot"</string>
     <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"Maak kleiner"</string>
     <string name="font_size_make_larger_desc" msgid="4316986572233686061">"Maak groter"</string>
+    <!-- no translation found for font_size_preview_text (4818424565068376732) -->
+    <skip />
     <string name="font_size_preview_text_headline" msgid="7955317408475392247">"Voorbeeldteks"</string>
-    <string name="font_size_preview_text_title" msgid="4762429961714563135">"Twenty Thousand Leagues Under The Sea"</string>
-    <string name="font_size_preview_text_subtitle" msgid="5712012075615701561">"Hoofstuk 23: Die koraalkoninkryk"</string>
-    <string name="font_size_preview_text_body" msgid="1608889593334414309">"Die volgende dag word ek met my kop besonder helder wakker. Tot my groot verbasing is ek in my eie kamer. My metgeselle is ongetwyfeld weer in hul kajuit geplaas terwyl hulle dit net so min as ek agtergekom het. Hulle weet net so min as ek van wat in die nag gebeur het, en ek reken dat net die toekoms die moontlikheid sal bied om hierdie raaisel uit te pluis.\nToe dink ek daaraan om my kamer te verlaat. Is ek weer vry of word ek aangehou? Heel vry. Ek maak die deur oop, gaan na die halfdek, gaan by die middelste trappe op. Die panele, wat die vorige aand toegemaak was, is oop. Ek gaan verder na die platform.\nNed Land en Conseil wag daar vir my. Ek vra hulle uit; hulle weet niks nie. Verlore in diep slaap waarin hulle heeltemal onbewus was van wat aangaan, was hulle verbaas om weer in hul kajuit te wees."</string>
+    <string name="font_size_preview_text_title" msgid="1310536233106975546">"Die Wonderlike Towenaar van Oz"</string>
+    <string name="font_size_preview_text_subtitle" msgid="4231671528173110093">"Hoofstuk 11: Die Wonderlike Smaragstad van Oz"</string>
+    <string name="font_size_preview_text_body" msgid="1250552239682375643">"Selfs al is hul oë deur die groen brille beskerm, is Dorothy en haar vriende met eerste oogopslag verblind deur die helderheid van die wonderlike Stad. Huise van groen marmer en bedek met vonkelende smaragte het in rye langs die strate gestaan. Hulle het op \'n sypaadjie van dieselfde groen marmer gestap, waar die blokke marmer aanmekaargelas is met rye smaragte wat dig opmekaar geset is en wat geblink het in die helderheid van die son. Die vensters was van groen glas; selfs die lug bo die stad het \'n groen skynsel gehad en die son se strale was groen. \n\nDaar het baie mense – mans, vroue en kinders – rondbeweeg en hulle was almal in groen geklee en het groenerige velle gehad. Hulle het met verwonderde oë na Dorothy en haar vreemde versameling vriende gestaar en die kinders het almal weggehardloop en agter hul mamma\'s weggekruip toe hulle die Leeu sien, maar niemand het met hulle gepraat nie. Daar was baie winkels in die straat en Dorothy het opgelet dat alles in hulle groen is. Groen lekkergoed en groen springmielies is te koop aangebied, asook groen skoene, groen hoede en alle soorte groen klere. Op een plek het \'n man groen limonade verkoop en Dorothy kon sien dat die kinders met groen pennies betaal. \n\nDit het nie gelyk of daar enige perde of diere was nie; die mans het goed in klein, groen waentjies vervoer wat hulle voor hulle gestoot het. Almal het gelukkig en tevrede en welvarend gelyk."</string>
     <string name="font_size_save" msgid="3450855718056759095">"OK"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"USB-berging"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"SD-kaart"</string>
@@ -237,9 +239,14 @@
     <string name="pref_title_lang_selection" msgid="5696814792962878791">"Taalvoorkeur"</string>
     <string name="locale_remove_menu" msgid="7651301406723638854">"Verwyder"</string>
     <string name="add_a_language" msgid="2330538812283783022">"Voeg \'n taal by"</string>
-    <string name="dlg_remove_locales_title" msgid="4143034933365516195">"Verwyder uit jou taalvoorkeur?"</string>
-    <string name="dlg_remove_locales_error_title" msgid="463635546627235043">"Kan nie tale verwyder nie"</string>
-    <string name="dlg_remove_locales_error_message" msgid="7108948386818227115">"Kan nie al die tale verwyder nie. Jy moet minstens een hou."</string>
+    <plurals name="dlg_remove_locales_title" formatted="false" msgid="4276642359346122396">
+      <item quantity="other">Verwyder gekose tale?</item>
+      <item quantity="one">Verwyder gekose taal?</item>
+    </plurals>
+    <string name="dlg_remove_locales_message" msgid="5690839673639747130">"Teks sal in \'n ander taal gewys word"</string>
+    <string name="dlg_remove_locales_error_title" msgid="2653242337224911425">"Kan nie alle tale verwyder nie"</string>
+    <string name="dlg_remove_locales_error_message" msgid="6697381512654262821">"Hou minstens een voorkeurtaal"</string>
+    <string name="locale_not_translated" msgid="516862628177166755">"Sal dalk in sommige programme nie beskikbaar wees nie"</string>
     <string name="activity_picker_label" msgid="6295660302548177109">"Kies aktiwiteit"</string>
     <string name="device_info_label" msgid="6551553813651711205">"Toestelinligting"</string>
     <string name="display_label" msgid="8074070940506840792">"Skerm"</string>
@@ -412,8 +419,7 @@
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"Beskerm jou toestel"</string>
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"Ontsluit met jou vingerafdruk"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Kies skermslot"</string>
-    <!-- no translation found for lock_settings_picker_title_profile (8283230482525023311) -->
-    <skip />
+    <string name="lock_settings_picker_title_profile" msgid="8283230482525023311">"Kies profielskermslot"</string>
     <string name="setup_lock_settings_picker_title" msgid="1572244299605153324">"Beskerm jou foon"</string>
     <string name="setup_lock_settings_picker_fingerprint_message" msgid="2431588439043969764">"\'n Vingerafdruk kan dalk minder veilig wees as \'n sterk patroon, PIN of wagwoord. Stel \'n rugsteunsluitskerm op om veilig te wees."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Keer ander mense om hierdie tablet sonder jou toestemming te gebruik deur kenmerke vir toestelbeskerming te aktiveer. Kies die skermslot wat jy wil gebruik."</string>
@@ -421,8 +427,7 @@
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Keer ander mense om hierdie foon sonder jou toestemming te gebruik deur kenmerke vir toestelbeskerming te aktiveer. Kies die skermslot wat jy wil gebruik."</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Kies jou rugsteunmetode vir skermsluiting"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Skermslot"</string>
-    <!-- no translation found for unlock_set_unlock_launch_picker_title_profile (4270157368864693564) -->
-    <skip />
+    <string name="unlock_set_unlock_launch_picker_title_profile" msgid="4270157368864693564">"Profielskermslot"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Verander slotskerm"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Verander of deaktiveer patroon-, PIN- of wagwoordsekuriteit"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"Kies \'n metode om die skerm te sluit"</string>
@@ -809,7 +814,8 @@
     <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> draagbare Wi-Fi-warmkol"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Wi-Fi-oproepe"</string>
-    <string name="wifi_calling_suggestion_title" msgid="124563351958807514">"Aktiveer Wi-Fi-oproepe"</string>
+    <string name="wifi_calling_suggestion_title" msgid="9008010480466359578">"Skakel Wi-Fi-oproepe aan"</string>
+    <string name="wifi_calling_suggestion_summary" msgid="3765923249566552233">"Gebruik Wi-Fi in plaas van mobiele netwerk"</string>
     <string name="wifi_calling_mode_title" msgid="2164073796253284289">"Oproepvoorkeur"</string>
     <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Wi-Fi-oproepmodus"</string>
   <string-array name="wifi_calling_mode_choices">
@@ -890,7 +896,8 @@
     <string name="screen_timeout_title" msgid="5130038655092628247">"Skerm skakel af"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Na <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> se onaktiwiteit"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Muurpapier"</string>
-    <string name="wallpaper_suggestion_title" msgid="1134468474328980088">"Stel muurpapier op"</string>
+    <string name="wallpaper_suggestion_title" msgid="8583988696513822528">"Verander muurpapier"</string>
+    <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Personaliseer jou skerm"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Kies muurpapier uit"</string>
     <string name="screensaver_settings_title" msgid="3349790120327233241">"Sluimer"</string>
     <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"Wanneer dit gedok is of slaap en laai"</string>
@@ -1322,8 +1329,7 @@
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"Benodig patroon"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1165707416664252167">"Moet patroon teken om skerm te ontsluit"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="2615606088906120711">"Maak patroon sigbaar"</string>
-    <!-- no translation found for lockpattern_settings_enable_visible_pattern_title_profile (4864525074768391381) -->
-    <skip />
+    <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="4864525074768391381">"Maak profielpatroon sigbaar"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="4389015658335522989">"Vibreer met tik"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"Kragknoppie sluit onmiddellik"</string>
     <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"Behalwe as <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> dit ontsluit hou"</string>
@@ -1335,18 +1341,13 @@
     <string name="lock_settings_profile_title" msgid="7819021341281339182">"Werkprofiel"</string>
     <string name="lock_settings_profile_label" msgid="4423909470339292809">"Werkprofielsekuriteit"</string>
     <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Werkprofiel se skermslot"</string>
-    <!-- no translation found for lock_settings_profile_unification_title (6888460471428172592) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_summary (3481269258202840437) -->
-    <skip />
+    <string name="lock_settings_profile_unification_title" msgid="6888460471428172592">"Gebruik dieselfde slot"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="3481269258202840437">"Verander toestelskermslot om by werkprofiel te pas?"</string>
     <string name="lock_settings_profile_unification_dialog_title" msgid="8938936484754025065">"Gebruik dieselfde skermslot?"</string>
     <string name="lock_settings_profile_unification_dialog_body" msgid="1697316592639374194">"Jy kan hierdie slot vir jou toestel gebruik, maar dit sal alle skermslotverwante beleide insluit wat jou IT-administrateur in die werkprofiel gestel het.\nWil jy dieselfde skermslot vir jou toestel gebruik?"</string>
-    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_body (5476809856421622503) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_confirm (2372867057465188766) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unified_summary (9008819078132993492) -->
-    <skip />
+    <string name="lock_settings_profile_unification_dialog_uncompliant_body" msgid="5476809856421622503">"Jou werkskermslot voldoen nie aan jou organisasie se sekuriteitsvereistes nie.\nJy kan \'n nuwe skermslot vir jou toestel én jou werkprofiel stel, maar enige werkskermslotbeleide sal ook op jou toestelskermslot van toepassing wees."</string>
+    <string name="lock_settings_profile_unification_dialog_uncompliant_confirm" msgid="2372867057465188766">"Verander slot"</string>
+    <string name="lock_settings_profile_unified_summary" msgid="9008819078132993492">"Dieselfde as toestelskermslot"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Bestuur programme"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Bestuur en verwyder geïnstalleerde programme"</string>
     <string name="applications_settings" msgid="1721442176406964682">"Programme"</string>
@@ -1631,13 +1632,17 @@
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Toeganklikheid-kortpad"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"Aan"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"Af"</string>
-    <string name="accessibility_global_gesture_preference_description" msgid="1605107799571936715">"Wanneer hierdie kenmerk aangeskakel is, kan jy toeganklikheidkenmerke vinnig in twee stappe aktiveer:\n\nStap 1: Druk en hou die aan/af-skakelaar totdat jy \'n geluid hoor of \'n vibrasie voel.\n\nStap 2: Raak en hou met twee vingers totdat jy oudiobevestiging hoor.\n\nAs die toestel veelvuldige gebruikers het, aktiveer die gebruik van hierdie kortpad op die sluitskerm tydelik toeganklikheid totdat die toestel ontsluit word."</string>
+    <string name="accessibility_global_gesture_preference_description" msgid="1605107799571936715">"Wanneer hierdie kenmerk aangeskakel is, kan jy toeganklikheidkenmerke vinnig in twee stappe aktiveer:\n\nStap 1: Druk en hou die aan/af-skakelaar totdat jy \'n geluid hoor of \'n vibrasie voel.\n\nStap 2: Raak en hou met twee vingers totdat jy oudiobevestiging hoor.\n\nAs die toestel veelvuldige gebruikers het, sal die gebruik van hierdie kortpad op die sluitskerm tydelik toeganklikheid aktiveer totdat die toestel ontsluit word."</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="2567402942683463779">"Hoëkontras-teks"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="7218498768415430963">"Dateer outomaties skermvergroting op"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"Dateer skermvergroting op tydens programverwisseling"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Kragknoppie beëindig oproep"</string>
     <string name="accessibility_toggle_speak_password_preference_title" msgid="5986628515113204844">"Sê wagwoorde hardop"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"Groot muiswyser"</string>
+    <!-- no translation found for accessibility_toggle_master_mono_title (4363806997971905302) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_master_mono_summary (5634277025251530927) -->
+    <skip />
     <string name="accessibility_long_press_timeout_preference_title" msgid="4068253727586393334">"Tik-en-hou-vertraging"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Kleur-omkering"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="8658240868230680912">"(Eksperimenteel) Kan werkverrigting beïnvloed"</string>
@@ -2452,8 +2457,7 @@
     <string name="keywords_color_temperature" msgid="2688947724153266364">"kleur temperatuur D65 D73 wit geel blou warm koel"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"gly om te ontsluit, wagwoord, patroon, PIN"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"werkuitdaging, werk, profiel"</string>
-    <!-- no translation found for keywords_unification (1922900767659821025) -->
-    <skip />
+    <string name="keywords_unification" msgid="1922900767659821025">"werkprofiel, bestuurde profiel, verenig, vereniging, werk, profiel"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Stel Wi-Fi-NFC-merker op"</string>
     <string name="write_tag" msgid="8571858602896222537">"Skryf"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Tik \'n merker om te skryf …"</string>
@@ -2472,9 +2476,6 @@
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Verstekkennisgewingluitoon"</string>
     <string name="alarm_ringtone_title" msgid="2015124067611102995">"Verstekwekkerluitoon"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Vibreer ook vir oproepe"</string>
-    <string name="master_mono_title" msgid="8123291759393322551">"Monoterugspeling"</string>
-    <string name="master_mono_on" msgid="53180785336592938">"Speel oudio altyd in mono terug"</string>
-    <string name="master_mono_off" msgid="1232052197508060475">"Speel oudio altyd in mono terug"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Ander klanke"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Belbladtone"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Skermsluitklanke"</string>
@@ -2490,7 +2491,8 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Vibreer"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"\'Net prioriteit\' laat toe"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Outomatiese reëls"</string>
-    <string name="zen_mode_automation_suggestion_title" msgid="4695313598703536699">"Stel Moenie-steur-nie-skedule op"</string>
+    <string name="zen_mode_automation_suggestion_title" msgid="5026815860958316126">"Stel Moenie-steur-nie-skedule"</string>
+    <string name="zen_mode_automation_suggestion_summary" msgid="8554080399360506596">"Maak jou toestel sekere tye stil"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"Net prioriteit"</string>
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Net wekkers"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"Volkome stilte"</string>
@@ -2499,7 +2501,7 @@
     <string name="configure_notification_settings" msgid="3558846607192693233">"Stel kennisgewings op"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"Gevorderd"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"Flikker kennisgewing-liggie"</string>
-    <string name="lock_screen_notifications_title" msgid="9118805570775519455">"As toestel gesluit is"</string>
+    <string name="lock_screen_notifications_title" msgid="6173076173408887213">"Op die sluitskerm"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Wys alle kennisgewinginhoud"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"Versteek sensitiewe kennisgewinginhoud"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Moet glad nie kennisgewings wys nie"</string>
@@ -2514,11 +2516,19 @@
     <string name="notification_importance_title" msgid="848692592679312666">"Belangrikheid"</string>
     <string name="notification_importance_none" msgid="3173515479356106227">"Nie gestel nie"</string>
     <string name="notification_importance_blocked" msgid="4764559498517003405">"Geblokkeer: Moet nooit hierdie kennisgewings wys nie"</string>
-    <string name="notification_importance_low" msgid="9187046927980498942">"Laag: Wys sonder klank aan die onderkant van die kennisgewinglys"</string>
-    <string name="notification_importance_default" msgid="4924370061477615318">"Normaal: Wys hierdie kennisgewings sonder klank"</string>
-    <string name="notification_importance_high" msgid="1918112760912803959">"Hoog: Wys aan die bokant van die kennisgewinglys en maak \'n geluid"</string>
-    <string name="notification_importance_max" msgid="5501185277889361261">"Dringend: Verskyn vlugtig op die skerm en maak \'n geluid"</string>
+    <!-- no translation found for notification_importance_min (2370444628448134377) -->
+    <skip />
+    <!-- no translation found for notification_importance_low (979932751695283877) -->
+    <skip />
+    <!-- no translation found for notification_importance_default (8789180840561778039) -->
+    <skip />
+    <!-- no translation found for notification_importance_high (2401104039256903538) -->
+    <skip />
+    <!-- no translation found for notification_importance_max (6036245535555486319) -->
+    <skip />
     <string name="importance_reset" msgid="7458420788555607007">"Stel terug"</string>
+    <string name="show_silently" msgid="2222875799232222056">"Wys sonder klank"</string>
+    <string name="show_silently_summary" msgid="7616604629123146565">"Moenie \'n geluid maak, vibreer of hierdie kennisgewings vir \'n kort tyd op die huidige skerm wys nie."</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"Kennisgewingassistent"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Kennisgewingtoegang"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Programme kan nie kennisgewings lees nie"</string>
@@ -2724,7 +2734,8 @@
     <string name="app_link_open_ask" msgid="7800878430190575991">"Vra elke keer"</string>
     <string name="app_link_open_never" msgid="3407647600352398543">"Moenie in hierdie program oopmaak nie"</string>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Nie herken nie"</string>
-    <string name="default_apps_title" msgid="1854974637597514435">"Verstekprogramme"</string>
+    <string name="default_apps_title" msgid="1660450272764331490">"Verstek"</string>
+    <string name="default_for_work" msgid="9152194239366247932">"Verstek vir werk"</string>
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"Bystand en steminvoer"</string>
     <string name="default_assist_title" msgid="8868488975409247921">"Bystandprogram"</string>
     <string name="default_assist_none" msgid="3709083569608735487">"Geen"</string>
@@ -2860,8 +2871,7 @@
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"Maak kleiner"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"Maak groter"</string>
     <string name="screen_zoom_summary_small" msgid="5867245310241621570">"Klein"</string>
-    <!-- no translation found for screen_zoom_summary_default (2247006805614056507) -->
-    <skip />
+    <string name="screen_zoom_summary_default" msgid="2247006805614056507">"Verstek"</string>
     <string name="screen_zoom_summary_large" msgid="4835294730065424084">"Groot"</string>
     <string name="screen_zoom_summary_very_large" msgid="7108563375663670067">"Groter"</string>
     <string name="screen_zoom_summary_extremely_large" msgid="7427320168263276227">"Grootste"</string>
@@ -2957,62 +2967,45 @@
     <string name="lockpattern_settings_require_pattern_before_startup_summary" msgid="7873036097628404476">"Patroon word vereis om jou toestel te begin. Terwyl dit af is, kan hierdie toestel nie oproepe, boodskappe, kennisgewings of wekkers ontvang nie."</string>
     <string name="lockpattern_settings_require_pin_before_startup_summary" msgid="6022831284097476933">"PIN word vereis om jou toestel te begin. Terwyl dit af is, kan hierdie toestel nie oproepe, boodskappe, kennisgewings of wekkers ontvang nie."</string>
     <string name="lockpattern_settings_require_password_before_startup_summary" msgid="6818285221244966231">"Wagwoord word vereis om jou toestel te begin. Terwyl dit af is, kan hierdie toestel nie oproepe, boodskappe, kennisgewings of wekkers ontvang nie."</string>
-    <string name="suggestion_additional_fingerprints" msgid="3683327800671241982">"Bykomende vingerafdrukke"</string>
+    <string name="suggestion_additional_fingerprints" msgid="2214281455363797037">"Voeg nog \'n vingerafdruk by"</string>
+    <string name="suggestion_additional_fingerprints_summary" msgid="2298186278816316599">"Ontsluit met \'n ander vingerafdruk"</string>
     <string name="battery_saver_on_summary" msgid="9072203872401530722">"Aan / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_off_summary" msgid="8309471955051162327">"Af / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_desc_turn_on_auto_never" msgid="6715896635178578813">"Moet nooit outomaties aanskakel nie"</string>
     <string name="battery_saver_desc_turn_on_auto_pct" msgid="7472323223085636533">"Skakel outomaties aan met battery op %1$s"</string>
     <string name="not_battery_optimizing" msgid="5362861851864837617">"Gebruik nie batteryoptimering nie"</string>
-    <!-- no translation found for notification_log_no_title (5678029849672024215) -->
+    <string name="lockscreen_remote_input" msgid="969871538778211843">"Verhinder die tik van antwoorde of ander teks in kennisgewings as die toestel gesluit is"</string>
+    <string name="default_spell_checker" msgid="8506899870026026660">"Verstekspeltoetser"</string>
+    <string name="choose_spell_checker" msgid="6596539862291699367">"Kies speltoetser"</string>
+    <!-- no translation found for spell_checker_not_selected (8871083796179200696) -->
     <skip />
-    <!-- no translation found for notification_log_details_delimiter (3116559361552416747) -->
-    <skip />
-    <!-- no translation found for notification_log_details_package (2596495677039100284) -->
-    <skip />
-    <!-- no translation found for notification_log_details_key (2995791937075862968) -->
-    <skip />
-    <!-- no translation found for notification_log_details_group (2430467015200368698) -->
-    <skip />
-    <!-- no translation found for notification_log_details_group_summary (7945543958255585829) -->
-    <skip />
-    <!-- no translation found for notification_log_details_visibility (2552873780715930971) -->
-    <skip />
-    <!-- no translation found for notification_log_details_public_version (4247242364605495240) -->
-    <skip />
-    <!-- no translation found for notification_log_details_priority (8371354971235991398) -->
-    <skip />
-    <!-- no translation found for notification_log_details_importance (2153168790791683139) -->
-    <skip />
-    <!-- no translation found for notification_log_details_explanation (1914295130775393551) -->
-    <skip />
-    <!-- no translation found for notification_log_details_content_intent (1113554570409128083) -->
-    <skip />
-    <!-- no translation found for notification_log_details_delete_intent (905118520685297007) -->
-    <skip />
-    <!-- no translation found for notification_log_details_full_screen_intent (7118560817013522978) -->
-    <skip />
-    <!-- no translation found for notification_log_details_actions (242523930165118066) -->
-    <skip />
-    <!-- no translation found for notification_log_details_title (7177091647508863295) -->
-    <skip />
-    <!-- no translation found for notification_log_details_remoteinput (8328591329858827409) -->
-    <skip />
-    <!-- no translation found for notification_log_details_content_view (6638731378278561786) -->
-    <skip />
-    <!-- no translation found for notification_log_details_extras (4188418723779942047) -->
-    <skip />
-    <!-- no translation found for notification_log_details_icon (8939114059726188218) -->
-    <skip />
-    <!-- no translation found for notification_log_details_parcel (243148037601903212) -->
-    <skip />
-    <!-- no translation found for notification_log_details_ashmem (7241814108477320636) -->
-    <skip />
-    <!-- no translation found for notification_log_details_sound (5506232879598808099) -->
-    <skip />
-    <!-- no translation found for notification_log_details_vibrate (6890065466625335940) -->
-    <skip />
-    <!-- no translation found for notification_log_details_default (2345249399796730861) -->
-    <skip />
-    <!-- no translation found for notification_log_details_none (184131801230614059) -->
-    <skip />
+    <string name="notification_log_no_title" msgid="5678029849672024215">"(geen)"</string>
+    <string name="notification_log_details_delimiter" msgid="3116559361552416747">": "</string>
+    <string name="notification_log_details_package" msgid="2596495677039100284">"pkg"</string>
+    <string name="notification_log_details_key" msgid="2995791937075862968">"sleutel"</string>
+    <string name="notification_log_details_group" msgid="2430467015200368698">"groep"</string>
+    <string name="notification_log_details_group_summary" msgid="7945543958255585829">"(opsomming)"</string>
+    <string name="notification_log_details_visibility" msgid="2552873780715930971">"sigbaarheid"</string>
+    <string name="notification_log_details_public_version" msgid="4247242364605495240">"publicVersion"</string>
+    <string name="notification_log_details_priority" msgid="8371354971235991398">"prioriteit"</string>
+    <string name="notification_log_details_importance" msgid="2153168790791683139">"belangrikheid"</string>
+    <string name="notification_log_details_explanation" msgid="1914295130775393551">"verduideliking"</string>
+    <string name="notification_log_details_content_intent" msgid="1113554570409128083">"voorneme"</string>
+    <string name="notification_log_details_delete_intent" msgid="905118520685297007">"vee voorneme uit"</string>
+    <string name="notification_log_details_full_screen_intent" msgid="7118560817013522978">"volskermvoorneme"</string>
+    <string name="notification_log_details_actions" msgid="242523930165118066">"handelinge"</string>
+    <string name="notification_log_details_title" msgid="7177091647508863295">"titel"</string>
+    <string name="notification_log_details_remoteinput" msgid="8328591329858827409">"afgeleë insette"</string>
+    <string name="notification_log_details_content_view" msgid="6638731378278561786">"gepasmaakte aansig"</string>
+    <string name="notification_log_details_extras" msgid="4188418723779942047">"ekstras"</string>
+    <string name="notification_log_details_icon" msgid="8939114059726188218">"ikoon"</string>
+    <string name="notification_log_details_parcel" msgid="243148037601903212">"pakkiegrootte"</string>
+    <string name="notification_log_details_ashmem" msgid="7241814108477320636">"ashmem"</string>
+    <string name="notification_log_details_sound" msgid="5506232879598808099">"klank"</string>
+    <string name="notification_log_details_vibrate" msgid="6890065466625335940">"vibreer"</string>
+    <string name="notification_log_details_default" msgid="2345249399796730861">"verstek"</string>
+    <string name="notification_log_details_none" msgid="184131801230614059">"geen"</string>
+    <string name="special_access" msgid="8275242424094109976">"Spesiale toegang"</string>
+    <string name="confirm_convert_to_fbe_warning" msgid="1487005506049137659">"Regtig gebruikerdata skoonmaak en na lêerenkripsie oorskakel?"</string>
+    <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"Maak skoon en skakel om"</string>
 </resources>

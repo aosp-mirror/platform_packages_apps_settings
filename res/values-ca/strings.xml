@@ -80,10 +80,12 @@
     <string name="large_font" msgid="599055175160971446">"Gran"</string>
     <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"Redueix"</string>
     <string name="font_size_make_larger_desc" msgid="4316986572233686061">"Amplia"</string>
+    <!-- no translation found for font_size_preview_text (4818424565068376732) -->
+    <skip />
     <string name="font_size_preview_text_headline" msgid="7955317408475392247">"Text de mostra"</string>
-    <string name="font_size_preview_text_title" msgid="4762429961714563135">"Vint mil llegües de viatge submarí"</string>
-    <string name="font_size_preview_text_subtitle" msgid="5712012075615701561">"Capítol 23: El regne del corall"</string>
-    <string name="font_size_preview_text_body" msgid="1608889593334414309">"L\'endemà em vaig despertar amb el cap singularment desvetllat. Amb gran sorpresa vaig constatar que era a la meva cambra. Els meus companys, sens dubte, també devien haver estat reintegrats a la seva cabina, sense adonar-se’n com jo. El que havia passat aquell vespre ho ignoraven igual que jo, i per aclarir aquell misteri no podíem comptar sinó amb l’atzar que ens reservava el futur.\nLa meva primera idea fou intentar sortir de la cambra. Estava empresonat o tornava a ser lliure? Enterament lliure. Vaig obrir la porta, em vaig ficar pels corredors i vaig pujar l’escala central. Les escotilles, que durant la vigília s’havien tancat, eren obertes. Vaig sortir a la plataforma.\nNed Land i Consell m’hi esperaven. Vaig fer-los tot de preguntes, però no sabien res. S’havien adormit pesadament i no els havia quedat cap record; en despertar-se, s’havien quedat sorpresos de trobar-se a la seva cabina."</string>
+    <string name="font_size_preview_text_title" msgid="1310536233106975546">"El meravellós màgic d\'Oz"</string>
+    <string name="font_size_preview_text_subtitle" msgid="4231671528173110093">"Capítol 11: La Ciutat Maragda d\'Oz"</string>
+    <string name="font_size_preview_text_body" msgid="1250552239682375643">"Malgrat que duien els ulls protegits per les ulleres verdes, al principi, la brillantor d\'aquella meravellosa ciutat va deixar enlluernats la Dorothy i els seus amics. Hi havia cases precioses a banda i banda dels carrers, totes construïdes amb marbre verd i amb incrustacions de maragdes resplendents. Caminaven per un paviment fet amb el mateix marbre verd, format amb blocs units per fileres de maragdes que lluïen amb la llum del sol. Els vidres de les finestres eren verds, i fins el cel de la ciutat també tenia un to verdós, amb raigs de sol de color verd. \n\nHi havia vianants pertot arreu: homes, dones i nens, tots vestits de verd i amb la pell verdosa. Encuriosits i sorpresos, es miraven la Dorothy i els seus companys, i els infants corrien a amagar-se darrere la mare quan veien el Lleó. Però ningú no els dirigia la paraula. El carrer estava ple de botigues, i la Dorothy va veure que tot el que s\'hi venia era de color verd: hi havia caramels verds i crispetes de color verd, així com sabates, barrets i roba de tota mena, tot del mateix color. En una parada, un home venia llimonada verda, i la Dorothy es va fixar que, quan els nens en compraven, pagaven amb monedes verdes.\n\nNo semblava que hi hagués cavalls ni animals de cap mena. Per transportar les coses, els homes empenyien uns petits carretons verds. Tothom semblava feliç, satisfet i pròsper."</string>
     <string name="font_size_save" msgid="3450855718056759095">"D\'acord"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"Emmagatzematge USB"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"Targeta SD"</string>
@@ -237,9 +239,14 @@
     <string name="pref_title_lang_selection" msgid="5696814792962878791">"Preferència d\'idioma"</string>
     <string name="locale_remove_menu" msgid="7651301406723638854">"Suprimeix"</string>
     <string name="add_a_language" msgid="2330538812283783022">"Afegeix un idioma"</string>
-    <string name="dlg_remove_locales_title" msgid="4143034933365516195">"Vols suprimir-los de la teva preferència d\'idioma?"</string>
-    <string name="dlg_remove_locales_error_title" msgid="463635546627235043">"Error en suprimir els idiomes"</string>
-    <string name="dlg_remove_locales_error_message" msgid="7108948386818227115">"No es poden suprimir tots els idiomes. N\'has de deixar almenys un."</string>
+    <plurals name="dlg_remove_locales_title" formatted="false" msgid="4276642359346122396">
+      <item quantity="other">Vols suprimir els idiomes seleccionats?</item>
+      <item quantity="one">Vols suprimir l\'idioma seleccionat?</item>
+    </plurals>
+    <string name="dlg_remove_locales_message" msgid="5690839673639747130">"El text es mostrarà en un altre idioma"</string>
+    <string name="dlg_remove_locales_error_title" msgid="2653242337224911425">"No es poden suprimir tots els idiomes"</string>
+    <string name="dlg_remove_locales_error_message" msgid="6697381512654262821">"Conserva almenys un idioma preferit"</string>
+    <string name="locale_not_translated" msgid="516862628177166755">"És possible que no estigui disponible en algunes aplicacions"</string>
     <string name="activity_picker_label" msgid="6295660302548177109">"Selecció de l\'activitat"</string>
     <string name="device_info_label" msgid="6551553813651711205">"Informació del dispositiu"</string>
     <string name="display_label" msgid="8074070940506840792">"Pantalla"</string>
@@ -330,8 +337,7 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Desbloqueig amb empremta"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_message (6931554430739074640) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="6931554430739074640">"Només has de tocar el sensor d\'empremtes digitals per desbloquejar el telèfon, autoritzar compres o iniciar la sessió en aplicacions. Vés amb compte amb les empremtes digitals d\'altres persones que afegeixis, perquè totes podran dur a terme aquestes accions.\n\nNota: fer servir l\'empremta digital pot ser menys segur que utilitzar un patró o un PIN complets. "<annotation id="url">"Més informació"</annotation></string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Cancel·la"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Continua"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="7234486440384881699">"Les funcions de protecció del dispositiu no s\'activaran. No podràs impedir que altres persones facin servir la tauleta si la perds, si te la roben o se n\'esborra el contingut."</string>
@@ -413,8 +419,7 @@
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"Protegeix el teu dispositiu"</string>
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"Desbloqueja el dispositiu amb l\'empremta digital"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Tria un bloqueig de pantalla"</string>
-    <!-- no translation found for lock_settings_picker_title_profile (8283230482525023311) -->
-    <skip />
+    <string name="lock_settings_picker_title_profile" msgid="8283230482525023311">"Tria bloqueig del perfil"</string>
     <string name="setup_lock_settings_picker_title" msgid="1572244299605153324">"Protegeix el telèfon"</string>
     <string name="setup_lock_settings_picker_fingerprint_message" msgid="2431588439043969764">"Fer servir l\'empremta digital pot ser menys segur que utilitzar un patró, un PIN o una contrasenya segurs. Configura una pantalla de bloqueig per estar protegit."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Activa les funcions de protecció del dispositiu per impedir que altres persones utilitzin aquesta tauleta sense permís. Tria el bloqueig de pantalla que vulguis utilitzar."</string>
@@ -422,8 +427,7 @@
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Activa les funcions de protecció del dispositiu per impedir que altres persones utilitzin aquest telèfon sense permís. Tria el bloqueig de pantalla que vulguis utilitzar."</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Tria un mètode de bloqueig de pantalla alternatiu"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Bloqueig de pantalla"</string>
-    <!-- no translation found for unlock_set_unlock_launch_picker_title_profile (4270157368864693564) -->
-    <skip />
+    <string name="unlock_set_unlock_launch_picker_title_profile" msgid="4270157368864693564">"Bloqueig del perfil"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Canvi pantalla bloq."</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Canvia o desactiva la seguretat de contrasenyes, PIN o patrons"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"Trieu un mètode per bloquejar la pantalla"</string>
@@ -810,7 +814,8 @@
     <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"Zona Wi-Fi <xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> portàtil"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Trucades per Wi-Fi"</string>
-    <string name="wifi_calling_suggestion_title" msgid="124563351958807514">"Activa les trucades per Wi-Fi"</string>
+    <string name="wifi_calling_suggestion_title" msgid="9008010480466359578">"Activa Trucades per Wi-Fi"</string>
+    <string name="wifi_calling_suggestion_summary" msgid="3765923249566552233">"Utilitza una Wi-Fi en comptes de la xarxa de telefonia mòbil"</string>
     <string name="wifi_calling_mode_title" msgid="2164073796253284289">"Preferències de trucada"</string>
     <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Mode de trucades per Wi-Fi"</string>
   <string-array name="wifi_calling_mode_choices">
@@ -891,7 +896,8 @@
     <string name="screen_timeout_title" msgid="5130038655092628247">"La pantalla s\'apaga"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> d\'inactivitat"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Fons de pantalla"</string>
-    <string name="wallpaper_suggestion_title" msgid="1134468474328980088">"Configura un fons de pantalla"</string>
+    <string name="wallpaper_suggestion_title" msgid="8583988696513822528">"Canvia el fons de pantalla"</string>
+    <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Personalitza la pantalla"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Selecciona fons de pantalla de"</string>
     <string name="screensaver_settings_title" msgid="3349790120327233241">"Estalvi de pantalla"</string>
     <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"Quan el dispositiu estigui connectat a una base o inactiu i carregant-se"</string>
@@ -1323,8 +1329,7 @@
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"Requereix un patró"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1165707416664252167">"Cal dibuixar el patró per desbloquejar la pantalla"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="2615606088906120711">"Mostra el patró"</string>
-    <!-- no translation found for lockpattern_settings_enable_visible_pattern_title_profile (4864525074768391381) -->
-    <skip />
+    <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="4864525074768391381">"Mostra el patró del perfil"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="4389015658335522989">"Vibra en tocar"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"Bloqueja en engegar"</string>
     <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"Excepte si <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> manté el dispositiu desbloquejat"</string>
@@ -1336,18 +1341,13 @@
     <string name="lock_settings_profile_title" msgid="7819021341281339182">"Perfil professional"</string>
     <string name="lock_settings_profile_label" msgid="4423909470339292809">"Seguretat del perfil professional"</string>
     <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Bloqueig de pantalla del perfil professional"</string>
-    <!-- no translation found for lock_settings_profile_unification_title (6888460471428172592) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_summary (3481269258202840437) -->
-    <skip />
+    <string name="lock_settings_profile_unification_title" msgid="6888460471428172592">"Utilitza el mateix bloqueig"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="3481269258202840437">"Vols que el bloqueig de pantalla del dispositiu sigui igual que el del perfil professional?"</string>
     <string name="lock_settings_profile_unification_dialog_title" msgid="8938936484754025065">"Vols utilitzar el mateix bloqueig de pantalla?"</string>
     <string name="lock_settings_profile_unification_dialog_body" msgid="1697316592639374194">"Pots fer servir aquest bloqueig per al dispositiu, però inclourà totes les polítiques relacionades amb el bloqueig de pantalla establertes pel teu administrador de TI al perfil professional.\nVols utilitzar el mateix bloqueig de pantalla per al teu dispositiu?"</string>
-    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_body (5476809856421622503) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_confirm (2372867057465188766) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unified_summary (9008819078132993492) -->
-    <skip />
+    <string name="lock_settings_profile_unification_dialog_uncompliant_body" msgid="5476809856421622503">"El bloqueig de pantalla que tens per a la feina no compleix els requisits de seguretat de la teva organització.\nEn pots configurar un de nou per al dispositiu i per al perfil professional, però les polítiques de bloqueig de pantalla de la feina també s\'aplicaran al bloqueig del dispositiu."</string>
+    <string name="lock_settings_profile_unification_dialog_uncompliant_confirm" msgid="2372867057465188766">"Canvia el bloqueig"</string>
+    <string name="lock_settings_profile_unified_summary" msgid="9008819078132993492">"El mateix bloqueig de pantalla que el del dispositiu"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Gestiona les aplicacions"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Gestiona i elimina les aplicacions instal·lades"</string>
     <string name="applications_settings" msgid="1721442176406964682">"Aplicacions"</string>
@@ -1632,14 +1632,17 @@
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Drecera d\'accessibilitat"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"Activat"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"Desactiva"</string>
-    <!-- no translation found for accessibility_global_gesture_preference_description (1605107799571936715) -->
-    <skip />
+    <string name="accessibility_global_gesture_preference_description" msgid="1605107799571936715">"Amb aquesta opció, podràs activar ràpidament les funcions d\'accessibilitat en dos passos.\n\nPas 1: mantén premut el botó d\'engegada fins que sentis un so o notis una vibració.\n\nPas 2: toca amb dos dits i mantén-los premuts fins que sentis una confirmació d\'àudio.\n\nSi el dispositiu té diversos usuaris, aquesta drecera de la pantalla de bloqueig activa temporalment l\'accessibilitat fins que el dispositiu es desbloqueja."</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="2567402942683463779">"Text d\'alt contrast"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="7218498768415430963">"Actualitza ampliació automàticament"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"Actualitza augment pantalla a transicions aplic."</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"El botó d\'engegada penja"</string>
     <string name="accessibility_toggle_speak_password_preference_title" msgid="5986628515113204844">"Pronuncia contrasenyes"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"Punter de ratolí gran"</string>
+    <!-- no translation found for accessibility_toggle_master_mono_title (4363806997971905302) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_master_mono_summary (5634277025251530927) -->
+    <skip />
     <string name="accessibility_long_press_timeout_preference_title" msgid="4068253727586393334">"Retard en tocar i mantenir premut"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Inversió de color"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="8658240868230680912">"(Experimental) Pot afectar el rendiment."</string>
@@ -2454,8 +2457,7 @@
     <string name="keywords_color_temperature" msgid="2688947724153266364">"temperatura del color D65 D73 blanc groc blau càlid fred"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"fer lliscar el dit per desbloquejar, contrasenya, patró, PIN"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"desafiament per accedir a contingut de feina, feina, perfil"</string>
-    <!-- no translation found for keywords_unification (1922900767659821025) -->
-    <skip />
+    <string name="keywords_unification" msgid="1922900767659821025">"perfil professional, perfil gestionat, unificar, unificació, feina, perfil"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Configura l\'etiqueta de NFC per a Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Escriu-hi"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Toca una etiqueta per escriure..."</string>
@@ -2474,9 +2476,6 @@
     <string name="notification_ringtone_title" msgid="3361201340352664272">"So de notificació predeterminat"</string>
     <string name="alarm_ringtone_title" msgid="2015124067611102995">"So d\'alarma predeterminat"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Vibra també en trucades"</string>
-    <string name="master_mono_title" msgid="8123291759393322551">"Reproducció en mono"</string>
-    <string name="master_mono_on" msgid="53180785336592938">"Reprodueix sempre l\'àudio en mono"</string>
-    <string name="master_mono_off" msgid="1232052197508060475">"Reprodueix sempre l\'àudio en mono"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Altres sons"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Tons del teclat"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Sons en bloquejar la pantalla"</string>
@@ -2492,7 +2491,8 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Vibració"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Només amb prioritat"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Regles automàtiques"</string>
-    <string name="zen_mode_automation_suggestion_title" msgid="4695313598703536699">"Configura el mode No molesteu"</string>
+    <string name="zen_mode_automation_suggestion_title" msgid="5026815860958316126">"Defineix el mode No molesteu"</string>
+    <string name="zen_mode_automation_suggestion_summary" msgid="8554080399360506596">"Silencia el disp. en alguns moments"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"Només amb prioritat"</string>
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Només alarmes"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"Silenci total"</string>
@@ -2501,7 +2501,7 @@
     <string name="configure_notification_settings" msgid="3558846607192693233">"Configura les notificacions"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"Avançada"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"Llum de notificació"</string>
-    <string name="lock_screen_notifications_title" msgid="9118805570775519455">"Amb el dispositiu bloquejat"</string>
+    <string name="lock_screen_notifications_title" msgid="6173076173408887213">"A la pantalla de bloqueig"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Mostra contingut de notificacions"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"Amaga el contingut sensible de les notificacions"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"No mostris cap notificació"</string>
@@ -2516,11 +2516,19 @@
     <string name="notification_importance_title" msgid="848692592679312666">"Importància"</string>
     <string name="notification_importance_none" msgid="3173515479356106227">"No s\'ha definit"</string>
     <string name="notification_importance_blocked" msgid="4764559498517003405">"Bloquejada: no mostra mai aquestes notificacions"</string>
-    <string name="notification_importance_low" msgid="9187046927980498942">"Baixa: mostra de manera silenciosa a la part inferior de la llista de notificacions"</string>
-    <string name="notification_importance_default" msgid="4924370061477615318">"Normal: mostra aquestes notificacions de manera silenciosa"</string>
-    <string name="notification_importance_high" msgid="1918112760912803959">"Alta: mostra a la part superior de la llista de notificacions i emet un so"</string>
-    <string name="notification_importance_max" msgid="5501185277889361261">"Urgent: mostra a la pantalla i emet un so"</string>
+    <!-- no translation found for notification_importance_min (2370444628448134377) -->
+    <skip />
+    <!-- no translation found for notification_importance_low (979932751695283877) -->
+    <skip />
+    <!-- no translation found for notification_importance_default (8789180840561778039) -->
+    <skip />
+    <!-- no translation found for notification_importance_high (2401104039256903538) -->
+    <skip />
+    <!-- no translation found for notification_importance_max (6036245535555486319) -->
+    <skip />
     <string name="importance_reset" msgid="7458420788555607007">"Restableix"</string>
+    <string name="show_silently" msgid="2222875799232222056">"Mostra de manera silenciosa"</string>
+    <string name="show_silently_summary" msgid="7616604629123146565">"No reprodueix cap so, no vibra ni mostra aquestes notificacions a la pantalla actual."</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"Assistent de notificacions"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Accés a les notificacions"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Les aplicacions no poden llegir notificacions"</string>
@@ -2717,8 +2725,7 @@
     <string name="domain_urls_title" msgid="8762012672312435252">"Enllaços d\'aplicacions"</string>
     <string name="domain_urls_summary_none" msgid="2639588015479657864">"No obre els enllaços admesos"</string>
     <string name="domain_urls_summary_one" msgid="3704934031930978405">"Obre <xliff:g id="DOMAIN">%s</xliff:g>"</string>
-    <!-- no translation found for domain_urls_summary_some (3950089361819428455) -->
-    <skip />
+    <string name="domain_urls_summary_some" msgid="3950089361819428455">"Obre <xliff:g id="DOMAIN">%s</xliff:g> i altres URL"</string>
     <plurals name="domain_urls_apps_summary" formatted="false" msgid="4322996467951692661">
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aplicacions poden obrir els seus enllaços admesos</item>
       <item quantity="one">Una aplicació pot obrir els seus enllaços admesos</item>
@@ -2727,7 +2734,8 @@
     <string name="app_link_open_ask" msgid="7800878430190575991">"Demana-m\'ho cada vegada"</string>
     <string name="app_link_open_never" msgid="3407647600352398543">"No obris en aquesta aplicació"</string>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"No s\'ha reconegut"</string>
-    <string name="default_apps_title" msgid="1854974637597514435">"Aplicacions predeterminades"</string>
+    <string name="default_apps_title" msgid="1660450272764331490">"Predeterminada"</string>
+    <string name="default_for_work" msgid="9152194239366247932">"Predeterminada per a la feina"</string>
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"Assistència i entrada veu"</string>
     <string name="default_assist_title" msgid="8868488975409247921">"Aplicació d\'assistència"</string>
     <string name="default_assist_none" msgid="3709083569608735487">"Cap"</string>
@@ -2863,8 +2871,7 @@
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"Redueix"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"Amplia"</string>
     <string name="screen_zoom_summary_small" msgid="5867245310241621570">"Petit"</string>
-    <!-- no translation found for screen_zoom_summary_default (2247006805614056507) -->
-    <skip />
+    <string name="screen_zoom_summary_default" msgid="2247006805614056507">"Predeterminat"</string>
     <string name="screen_zoom_summary_large" msgid="4835294730065424084">"Gran"</string>
     <string name="screen_zoom_summary_very_large" msgid="7108563375663670067">"Més gran"</string>
     <string name="screen_zoom_summary_extremely_large" msgid="7427320168263276227">"Màxim"</string>
@@ -2960,62 +2967,45 @@
     <string name="lockpattern_settings_require_pattern_before_startup_summary" msgid="7873036097628404476">"Sol·licita un patró per iniciar el dispositiu. Quan està apagat, aquest dispositiu no pot rebre trucades, missatges, notificacions ni alarmes."</string>
     <string name="lockpattern_settings_require_pin_before_startup_summary" msgid="6022831284097476933">"Sol·licita un PIN per iniciar el dispositiu. Quan està apagat, aquest dispositiu no pot rebre trucades, missatges, notificacions ni alarmes."</string>
     <string name="lockpattern_settings_require_password_before_startup_summary" msgid="6818285221244966231">"Sol·licita una contrasenya per iniciar el dispositiu. Quan està apagat, aquest dispositiu no pot rebre trucades, missatges, notificacions ni alarmes."</string>
-    <string name="suggestion_additional_fingerprints" msgid="3683327800671241982">"Empremtes digitals addicionals"</string>
+    <string name="suggestion_additional_fingerprints" msgid="2214281455363797037">"Afegeix una altra empremta"</string>
+    <string name="suggestion_additional_fingerprints_summary" msgid="2298186278816316599">"Desbloqueja amb una altra empremta digital"</string>
     <string name="battery_saver_on_summary" msgid="9072203872401530722">"Activat / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_off_summary" msgid="8309471955051162327">"Desactivat / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_desc_turn_on_auto_never" msgid="6715896635178578813">"No activis mai automàticament"</string>
     <string name="battery_saver_desc_turn_on_auto_pct" msgid="7472323223085636533">"Activa automàticament quan quedi un %1$s de bateria"</string>
     <string name="not_battery_optimizing" msgid="5362861851864837617">"No s\'està fent servir l\'optimització de la bateria"</string>
-    <!-- no translation found for notification_log_no_title (5678029849672024215) -->
+    <string name="lockscreen_remote_input" msgid="969871538778211843">"Si el dispositiu està bloquejat, impedeix que s\'escriguin respostes o altres textos a les notificacions"</string>
+    <string name="default_spell_checker" msgid="8506899870026026660">"Corrector ortogr. predeterminat"</string>
+    <string name="choose_spell_checker" msgid="6596539862291699367">"Tria el corrector ortogràfic"</string>
+    <!-- no translation found for spell_checker_not_selected (8871083796179200696) -->
     <skip />
-    <!-- no translation found for notification_log_details_delimiter (3116559361552416747) -->
-    <skip />
-    <!-- no translation found for notification_log_details_package (2596495677039100284) -->
-    <skip />
-    <!-- no translation found for notification_log_details_key (2995791937075862968) -->
-    <skip />
-    <!-- no translation found for notification_log_details_group (2430467015200368698) -->
-    <skip />
-    <!-- no translation found for notification_log_details_group_summary (7945543958255585829) -->
-    <skip />
-    <!-- no translation found for notification_log_details_visibility (2552873780715930971) -->
-    <skip />
-    <!-- no translation found for notification_log_details_public_version (4247242364605495240) -->
-    <skip />
-    <!-- no translation found for notification_log_details_priority (8371354971235991398) -->
-    <skip />
-    <!-- no translation found for notification_log_details_importance (2153168790791683139) -->
-    <skip />
-    <!-- no translation found for notification_log_details_explanation (1914295130775393551) -->
-    <skip />
-    <!-- no translation found for notification_log_details_content_intent (1113554570409128083) -->
-    <skip />
-    <!-- no translation found for notification_log_details_delete_intent (905118520685297007) -->
-    <skip />
-    <!-- no translation found for notification_log_details_full_screen_intent (7118560817013522978) -->
-    <skip />
-    <!-- no translation found for notification_log_details_actions (242523930165118066) -->
-    <skip />
-    <!-- no translation found for notification_log_details_title (7177091647508863295) -->
-    <skip />
-    <!-- no translation found for notification_log_details_remoteinput (8328591329858827409) -->
-    <skip />
-    <!-- no translation found for notification_log_details_content_view (6638731378278561786) -->
-    <skip />
-    <!-- no translation found for notification_log_details_extras (4188418723779942047) -->
-    <skip />
-    <!-- no translation found for notification_log_details_icon (8939114059726188218) -->
-    <skip />
-    <!-- no translation found for notification_log_details_parcel (243148037601903212) -->
-    <skip />
-    <!-- no translation found for notification_log_details_ashmem (7241814108477320636) -->
-    <skip />
-    <!-- no translation found for notification_log_details_sound (5506232879598808099) -->
-    <skip />
-    <!-- no translation found for notification_log_details_vibrate (6890065466625335940) -->
-    <skip />
-    <!-- no translation found for notification_log_details_default (2345249399796730861) -->
-    <skip />
-    <!-- no translation found for notification_log_details_none (184131801230614059) -->
-    <skip />
+    <string name="notification_log_no_title" msgid="5678029849672024215">"(cap)"</string>
+    <string name="notification_log_details_delimiter" msgid="3116559361552416747">": "</string>
+    <string name="notification_log_details_package" msgid="2596495677039100284">"paquet"</string>
+    <string name="notification_log_details_key" msgid="2995791937075862968">"clau"</string>
+    <string name="notification_log_details_group" msgid="2430467015200368698">"grup"</string>
+    <string name="notification_log_details_group_summary" msgid="7945543958255585829">"(resum)"</string>
+    <string name="notification_log_details_visibility" msgid="2552873780715930971">"visibilitat"</string>
+    <string name="notification_log_details_public_version" msgid="4247242364605495240">"versió pública"</string>
+    <string name="notification_log_details_priority" msgid="8371354971235991398">"prioritat"</string>
+    <string name="notification_log_details_importance" msgid="2153168790791683139">"importància"</string>
+    <string name="notification_log_details_explanation" msgid="1914295130775393551">"explicació"</string>
+    <string name="notification_log_details_content_intent" msgid="1113554570409128083">"intent"</string>
+    <string name="notification_log_details_delete_intent" msgid="905118520685297007">"suprimeix l\'intent"</string>
+    <string name="notification_log_details_full_screen_intent" msgid="7118560817013522978">"intent de pantalla completa"</string>
+    <string name="notification_log_details_actions" msgid="242523930165118066">"accions"</string>
+    <string name="notification_log_details_title" msgid="7177091647508863295">"títol"</string>
+    <string name="notification_log_details_remoteinput" msgid="8328591329858827409">"entrades remotes"</string>
+    <string name="notification_log_details_content_view" msgid="6638731378278561786">"vista personalitzada"</string>
+    <string name="notification_log_details_extras" msgid="4188418723779942047">"extres"</string>
+    <string name="notification_log_details_icon" msgid="8939114059726188218">"icona"</string>
+    <string name="notification_log_details_parcel" msgid="243148037601903212">"mida del paquet"</string>
+    <string name="notification_log_details_ashmem" msgid="7241814108477320636">"ashmem"</string>
+    <string name="notification_log_details_sound" msgid="5506232879598808099">"so"</string>
+    <string name="notification_log_details_vibrate" msgid="6890065466625335940">"vibració"</string>
+    <string name="notification_log_details_default" msgid="2345249399796730861">"opció predeterminada"</string>
+    <string name="notification_log_details_none" msgid="184131801230614059">"cap"</string>
+    <string name="special_access" msgid="8275242424094109976">"Accés especial"</string>
+    <string name="confirm_convert_to_fbe_warning" msgid="1487005506049137659">"Vols esborrar les dades d\'usuari i convertir-les en l\'encriptació de fitxers?"</string>
+    <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"Esborra i converteix"</string>
 </resources>
