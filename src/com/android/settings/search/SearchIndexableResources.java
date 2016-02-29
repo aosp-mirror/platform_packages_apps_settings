@@ -320,13 +320,6 @@ public final class SearchIndexableResources {
                         LegalSettings.class.getName(),
                         R.drawable.ic_settings_about));
 
-        sResMap.put(WifiCallingSettings.class.getName(),
-                new SearchIndexableResource(
-                        Ranking.getRankForClassName(WifiCallingSettings.class.getName()),
-                        R.xml.wifi_calling_settings,
-                        WifiCallingSettings.class.getName(),
-                        R.drawable.ic_settings_wireless));
-
         sResMap.put(ZenModeVisualInterruptionSettings.class.getName(),
                 new SearchIndexableResource(
                         Ranking.getRankForClassName(
