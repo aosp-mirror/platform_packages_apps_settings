@@ -29,7 +29,8 @@
             android:title="@string/tts_default_rate_title"
             android:summary="@string/tts_default_rate_summary"
             android:defaultValue="50"
-            android:max="600" />
+            android:max="600"
+            android:layout="@layout/preference_iconless_slider" />
 
         <Preference android:key="reset_speech_rate"
             android:persistent="false"
