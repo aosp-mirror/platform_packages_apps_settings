@@ -80,10 +80,12 @@
     <string name="large_font" msgid="599055175160971446">"Stor"</string>
     <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"Förminska"</string>
     <string name="font_size_make_larger_desc" msgid="4316986572233686061">"Förstora"</string>
+    <!-- no translation found for font_size_preview_text (4818424565068376732) -->
+    <skip />
     <string name="font_size_preview_text_headline" msgid="7955317408475392247">"Exempeltext"</string>
-    <string name="font_size_preview_text_title" msgid="4762429961714563135">"En världsomsegling under havet"</string>
-    <string name="font_size_preview_text_subtitle" msgid="5712012075615701561">"Kapitel 23: Korallriket"</string>
-    <string name="font_size_preview_text_body" msgid="1608889593334414309">"Dagen efter vaknade jag egendomligt lätt i huvudet. Till min stora häpnad låg jag i min egen hytt. Liksom jag var säkert mina kamrater alldeles okunniga om vad som hade hänt under natten.\nVar jag fri eller fortfarande fånge? Fullständigt fri. Dörren var inte låst. Jag öppnade den och gick uppför trappan. Luckorna var åter öppnade. Luckorna var åter öppnade. Jag gick upp på däck.\nNed Land och Conseil var redan där. De hade heller inte reda på vad som hänt."</string>
+    <string name="font_size_preview_text_title" msgid="1310536233106975546">"Den fantastiska trollkarlen från Oz"</string>
+    <string name="font_size_preview_text_subtitle" msgid="4231671528173110093">"Kapitel 11: Den underbara Smaragdstaden i Oz"</string>
+    <string name="font_size_preview_text_body" msgid="1250552239682375643">"Även om deras ögon skyddades bakom gröna glasögon bländades Dorothy och hennes vänner först av den underbara stadens prakt. Gatorna kantades av vackra hus i grön marmor och husens ytor var täckta av gnistrande smaragder. De tog sig fram längs trottoaren, som även den var av grön marmor, och där kvarteret övergick i nästa satt smaragderna i täta rader som glittrade i det starka solskenet. Fönsterglasen var gröna, ja, till och med himlen ovanför staden hade en grön nyans. Även solens strålar var gröna. \n\nDet var många människor i rörelse – män, kvinnor och barn – och alla var klädda i gröna kläder och alla hade en grönaktig ton på huden. De tittade förundrat på Dorothy och hennes underliga sällskap, och barnen sprang och gömde sig bakom sina mödrar när de såg Lejonet. Men ingen tilltalade dem. Det fanns många butiker längs gatan, och Dorothy såg att alla varor var gröna. Det fanns gröna karameller och gröna popcorn till extrapris. Likaså gröna skor, gröna hattar och gröna kläder av alla de slag. Vid ett av gatustånden sålde en man grön saft, och Dorothy såg att barnen som köpte saften betalade med gröna mynt. \n\nDet verkade inte finnas några hästar eller andra djur här. Männen körde sina varor på små gröna vagnar som de sköt framför sig. Alla verkade glada, belåtna och välmående."</string>
     <string name="font_size_save" msgid="3450855718056759095">"OK"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"USB-lagring"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"SD-kort"</string>
@@ -237,9 +239,14 @@
     <string name="pref_title_lang_selection" msgid="5696814792962878791">"Språkinställning"</string>
     <string name="locale_remove_menu" msgid="7651301406723638854">"Ta bort"</string>
     <string name="add_a_language" msgid="2330538812283783022">"Lägg till ett språk"</string>
-    <string name="dlg_remove_locales_title" msgid="4143034933365516195">"Vill du ta bort språken från språkinställningarna?"</string>
-    <string name="dlg_remove_locales_error_title" msgid="463635546627235043">"Fel vid borttagning av språk"</string>
-    <string name="dlg_remove_locales_error_message" msgid="7108948386818227115">"Det går inte att ta bort alla språk, åtminstone ett måste vara kvar."</string>
+    <plurals name="dlg_remove_locales_title" formatted="false" msgid="4276642359346122396">
+      <item quantity="other">Vill du ta bort de valda språken?</item>
+      <item quantity="one">Vill du ta bort det valda språket?</item>
+    </plurals>
+    <string name="dlg_remove_locales_message" msgid="5690839673639747130">"Text visas på ett annat språk"</string>
+    <string name="dlg_remove_locales_error_title" msgid="2653242337224911425">"Det går inte att ta bort alla språk"</string>
+    <string name="dlg_remove_locales_error_message" msgid="6697381512654262821">"Minst ett önskat språk måste finnas kvar"</string>
+    <string name="locale_not_translated" msgid="516862628177166755">"Kanske inte är tillgängligt i alla appar"</string>
     <string name="activity_picker_label" msgid="6295660302548177109">"Välj aktivitet"</string>
     <string name="device_info_label" msgid="6551553813651711205">"Enhetsinfo"</string>
     <string name="display_label" msgid="8074070940506840792">"Skärm"</string>
@@ -330,8 +337,7 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Lås upp med fingeravtryck"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_message (6931554430739074640) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="6931554430739074640">"Du behöver bara trycka på fingeravtryckssensorn när du vill låsa upp mobilen, auktorisera köp eller logga in i appar. Tänk efter innan du lägger till fingeravtryck, eftersom alla som du lägger till kan användas på det här sättet.\n\nObs! Fingeravtryck kan vara mindre säkra än en säkert grafiskt lösenord eller en pinkod. "<annotation id="url">"Läs mer"</annotation></string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Avbryt"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Fortsätt"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="7234486440384881699">"Funktioner för enhetsskydd aktiveras inte. Det innebär att du inte kan hindra andra från att använda surfplattan om du tappar den eller om den blir stulen eller rensad."</string>
@@ -413,8 +419,7 @@
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"Skydda enheten"</string>
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"Lås upp med ditt fingeravtryck"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Välj skärmlås"</string>
-    <!-- no translation found for lock_settings_picker_title_profile (8283230482525023311) -->
-    <skip />
+    <string name="lock_settings_picker_title_profile" msgid="8283230482525023311">"Välj skärmlås för profilen"</string>
     <string name="setup_lock_settings_picker_title" msgid="1572244299605153324">"Skydda mobilen"</string>
     <string name="setup_lock_settings_picker_fingerprint_message" msgid="2431588439043969764">"Fingeravtryck kan vara mindre säkra än ett starkt grafiskt lösenord, en pinkod eller ett starkt lösenord. Konfigurera en låsskärm som reservlösning för säkerhets skull."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Hindra andra från att använda surfplattan utan ditt medgivande genom att aktivera funktioner för enhetsskydd. Välj vilket skärmlås du vill använda."</string>
@@ -422,8 +427,7 @@
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Hindra andra från att använda mobilen utan ditt medgivande genom att aktivera funktioner för enhetsskydd. Välj vilket skärmlås du vill använda."</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Välj en reservmetod för skärmlås"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Skärmlås"</string>
-    <!-- no translation found for unlock_set_unlock_launch_picker_title_profile (4270157368864693564) -->
-    <skip />
+    <string name="unlock_set_unlock_launch_picker_title_profile" msgid="4270157368864693564">"Skärmlås för profilen"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Byt skärmlås"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Ändra eller inaktivera grafiskt lösenord, PIN eller lösenord"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"Välj en metod för att låsa skärmen"</string>
@@ -810,7 +814,8 @@
     <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"Mobil Wi‑Fi-surfzon med <xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Wi-Fi-samtal"</string>
-    <string name="wifi_calling_suggestion_title" msgid="124563351958807514">"Aktivera Wi-Fi-samtal"</string>
+    <string name="wifi_calling_suggestion_title" msgid="9008010480466359578">"Aktivera samtal via Wi-Fi"</string>
+    <string name="wifi_calling_suggestion_summary" msgid="3765923249566552233">"Använd Wi-Fi i stället för mobilnätverk"</string>
     <string name="wifi_calling_mode_title" msgid="2164073796253284289">"Samtalsinställningar"</string>
     <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Wi-Fi-samtalsläge"</string>
   <string-array name="wifi_calling_mode_choices">
@@ -891,7 +896,8 @@
     <string name="screen_timeout_title" msgid="5130038655092628247">"Skärmen stängs av"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Efter att ha varit inaktiv i <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Bakgrund"</string>
-    <string name="wallpaper_suggestion_title" msgid="1134468474328980088">"Konfigurera bakgrund"</string>
+    <string name="wallpaper_suggestion_title" msgid="8583988696513822528">"Ändra bakgrund"</string>
+    <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Anpassa skärmen"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Välj bakgrund från"</string>
     <string name="screensaver_settings_title" msgid="3349790120327233241">"Dagdrömmar"</string>
     <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"När enheten dockas eller laddas i viloläge"</string>
@@ -1323,8 +1329,7 @@
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"Begär grafiskt lösenord"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1165707416664252167">"Måste rita grafiskt lösenord för att låsa upp skärmen"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="2615606088906120711">"Gör mönster synligt"</string>
-    <!-- no translation found for lockpattern_settings_enable_visible_pattern_title_profile (4864525074768391381) -->
-    <skip />
+    <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="4864525074768391381">"Gör det grafiska lösenordet för profilen synligt"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="4389015658335522989">"Vibrera vid tryck"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"Avstängningsknappen låser direkt"</string>
     <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"Utom när den hålls olåst av <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
@@ -1336,18 +1341,13 @@
     <string name="lock_settings_profile_title" msgid="7819021341281339182">"Jobbprofil"</string>
     <string name="lock_settings_profile_label" msgid="4423909470339292809">"Säkerhet i jobbprofilen"</string>
     <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Skärmlås för jobbprofilen"</string>
-    <!-- no translation found for lock_settings_profile_unification_title (6888460471428172592) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_summary (3481269258202840437) -->
-    <skip />
+    <string name="lock_settings_profile_unification_title" msgid="6888460471428172592">"Använd samma lås"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="3481269258202840437">"Vill du ändra skärmlåset för enheten så att det matchar det för jobbprofilen?"</string>
     <string name="lock_settings_profile_unification_dialog_title" msgid="8938936484754025065">"Vill du använda samma skärmlås?"</string>
     <string name="lock_settings_profile_unification_dialog_body" msgid="1697316592639374194">"Du kan använda det här skärmlåset på din enhet men det inkluderar alla de policyer som IT-administratören har angett för jobbprofilen.\nVill du använda samma skärmlås på din enhet?"</string>
-    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_body (5476809856421622503) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_confirm (2372867057465188766) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unified_summary (9008819078132993492) -->
-    <skip />
+    <string name="lock_settings_profile_unification_dialog_uncompliant_body" msgid="5476809856421622503">"Skärmlåset för jobbprofilen uppfyller inte säkerhetskraven från företaget du är anställd hos.\nDu kan ställa in ett nytt skärmlås för både enheten och jobbprofilen, men alla policyer för jobbprofilens skärmlås gäller också för enhetens skärmlås."</string>
+    <string name="lock_settings_profile_unification_dialog_uncompliant_confirm" msgid="2372867057465188766">"Ändra lås"</string>
+    <string name="lock_settings_profile_unified_summary" msgid="9008819078132993492">"Samma som skärmlåset för enheten"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Hantera appar"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Hantera och ta bort installerade appar"</string>
     <string name="applications_settings" msgid="1721442176406964682">"Appar"</string>
@@ -1632,14 +1632,17 @@
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Aktivera tillgänglighet snabbt"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"På"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"Av"</string>
-    <!-- no translation found for accessibility_global_gesture_preference_description (1605107799571936715) -->
-    <skip />
+    <string name="accessibility_global_gesture_preference_description" msgid="1605107799571936715">"När den här funktionen är aktiverad kan du snabbt aktivera tillgänglighetsfunktioner i två steg:\n\nSteg 1: Tryck på avstängningsknappen och håll ned den tills du hör ett ljud eller känner en vibration.\n\nSteg 2: Tryck länge med två fingrar tills du hör en ljudbekräftelse.\n\nOm enheten används av flera personer kan genvägen på låsskärmen tillfälligt aktivera tillgänglighetsfunktionerna till dess att någon låser upp enheten."</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="2567402942683463779">"Text med hög kontrast"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="7218498768415430963">"Uppdatera skärmförstoring automatiskt"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"Uppdatera skärmförstoring på appövergångar"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Använd knapp för att avsluta samtal"</string>
     <string name="accessibility_toggle_speak_password_preference_title" msgid="5986628515113204844">"Läs upp lösenord"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"Stor muspekarikon"</string>
+    <!-- no translation found for accessibility_toggle_master_mono_title (4363806997971905302) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_master_mono_summary (5634277025251530927) -->
+    <skip />
     <string name="accessibility_long_press_timeout_preference_title" msgid="4068253727586393334">"Fördröjning för tryck och håll kvar"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Inverterade färger"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="8658240868230680912">"(Experimentell) Kan påverka prestandan"</string>
@@ -2454,8 +2457,7 @@
     <string name="keywords_color_temperature" msgid="2688947724153266364">"färgtemperatur D65 D73 vit gul blå varm kall"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"dra för att låsa upp, lösenord, mönster, pinkod"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"jobbutmaning, jobb, profil"</string>
-    <!-- no translation found for keywords_unification (1922900767659821025) -->
-    <skip />
+    <string name="keywords_unification" msgid="1922900767659821025">"jobbprofil, hanterad profil, koppla samman, sammankoppling, jobb, profil"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Ange en NFC-tagg för Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Skriv"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Tryck på en etikett för att skriva ..."</string>
@@ -2474,9 +2476,6 @@
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Standardsignal för avisering"</string>
     <string name="alarm_ringtone_title" msgid="2015124067611102995">"Standardsignal för alarm"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Vibrera också vid samtal"</string>
-    <string name="master_mono_title" msgid="8123291759393322551">"Spela upp i mono"</string>
-    <string name="master_mono_on" msgid="53180785336592938">"Spela alltid upp ljud i mono"</string>
-    <string name="master_mono_off" msgid="1232052197508060475">"Spela alltid upp ljud i mono"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Andra ljud"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Knappsatsljud"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Ljud vid skärmlåsning"</string>
@@ -2492,7 +2491,8 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Vibration"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Tillåt endast prioriterade"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Automatiska regler"</string>
-    <string name="zen_mode_automation_suggestion_title" msgid="4695313598703536699">"Konfigurera schema för Stör ej"</string>
+    <string name="zen_mode_automation_suggestion_title" msgid="5026815860958316126">"Konfigurera schema för Stör ej"</string>
+    <string name="zen_mode_automation_suggestion_summary" msgid="8554080399360506596">"Stäng av ljudet vissa tider"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"Bara prioriterade"</string>
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Endast alarm"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"Helt tyst"</string>
@@ -2501,7 +2501,7 @@
     <string name="configure_notification_settings" msgid="3558846607192693233">"Konfigurera aviseringar"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"Avancerat"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"Blinkande ljusavisering"</string>
-    <string name="lock_screen_notifications_title" msgid="9118805570775519455">"När enheten är låst"</string>
+    <string name="lock_screen_notifications_title" msgid="6173076173408887213">"På låsskärmen"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Visa allt aviseringsinnehåll"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"Dölj känsligt aviseringsinnehåll"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Visa inga aviseringar alls"</string>
@@ -2516,11 +2516,19 @@
     <string name="notification_importance_title" msgid="848692592679312666">"Relevans"</string>
     <string name="notification_importance_none" msgid="3173515479356106227">"Har inte angetts"</string>
     <string name="notification_importance_blocked" msgid="4764559498517003405">"Blockerad: Visa aldrig dessa aviseringar"</string>
-    <string name="notification_importance_low" msgid="9187046927980498942">"Oviktig: Visa längst ned i aviseringslistan – utan ljud"</string>
-    <string name="notification_importance_default" msgid="4924370061477615318">"Vanlig: Visa aviseringarna – utan ljud"</string>
-    <string name="notification_importance_high" msgid="1918112760912803959">"Viktig: Visa högst upp i aviseringslistan – med ljud"</string>
-    <string name="notification_importance_max" msgid="5501185277889361261">"Brådskande: Visa på skärmen – med ljud"</string>
+    <!-- no translation found for notification_importance_min (2370444628448134377) -->
+    <skip />
+    <!-- no translation found for notification_importance_low (979932751695283877) -->
+    <skip />
+    <!-- no translation found for notification_importance_default (8789180840561778039) -->
+    <skip />
+    <!-- no translation found for notification_importance_high (2401104039256903538) -->
+    <skip />
+    <!-- no translation found for notification_importance_max (6036245535555486319) -->
+    <skip />
     <string name="importance_reset" msgid="7458420788555607007">"Återställ"</string>
+    <string name="show_silently" msgid="2222875799232222056">"Visa utan ljud"</string>
+    <string name="show_silently_summary" msgid="7616604629123146565">"Inga ljud, ingen vibration och inga aviseringar som visas som snabbtitt på skärmen."</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"Aviseringsassistent"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Åtkomst till aviseringar"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Appar kan läsa meddelanden"</string>
@@ -2717,8 +2725,7 @@
     <string name="domain_urls_title" msgid="8762012672312435252">"Applänkar"</string>
     <string name="domain_urls_summary_none" msgid="2639588015479657864">"Öppna inte länkar som stöds"</string>
     <string name="domain_urls_summary_one" msgid="3704934031930978405">"Öppna <xliff:g id="DOMAIN">%s</xliff:g>"</string>
-    <!-- no translation found for domain_urls_summary_some (3950089361819428455) -->
-    <skip />
+    <string name="domain_urls_summary_some" msgid="3950089361819428455">"Öppna <xliff:g id="DOMAIN">%s</xliff:g> och andra webbadresser"</string>
     <plurals name="domain_urls_apps_summary" formatted="false" msgid="4322996467951692661">
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> appar kan öppna länkar som stöds i apparna</item>
       <item quantity="one">En app kan öppna länkar som stöds i appen</item>
@@ -2727,7 +2734,8 @@
     <string name="app_link_open_ask" msgid="7800878430190575991">"Fråga varje gång"</string>
     <string name="app_link_open_never" msgid="3407647600352398543">"Öppna inte i den här appen"</string>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Identifierades inte"</string>
-    <string name="default_apps_title" msgid="1854974637597514435">"Standardappar"</string>
+    <string name="default_apps_title" msgid="1660450272764331490">"Standardinställning"</string>
+    <string name="default_for_work" msgid="9152194239366247932">"Standardinställning för jobbet"</string>
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"Assistent och röstinmatning"</string>
     <string name="default_assist_title" msgid="8868488975409247921">"Assistentapp"</string>
     <string name="default_assist_none" msgid="3709083569608735487">"Ingen"</string>
@@ -2863,8 +2871,7 @@
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"Förminska"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"Förstora"</string>
     <string name="screen_zoom_summary_small" msgid="5867245310241621570">"Små"</string>
-    <!-- no translation found for screen_zoom_summary_default (2247006805614056507) -->
-    <skip />
+    <string name="screen_zoom_summary_default" msgid="2247006805614056507">"Standardinställning"</string>
     <string name="screen_zoom_summary_large" msgid="4835294730065424084">"Stora"</string>
     <string name="screen_zoom_summary_very_large" msgid="7108563375663670067">"Större"</string>
     <string name="screen_zoom_summary_extremely_large" msgid="7427320168263276227">"Störst"</string>
@@ -2960,62 +2967,45 @@
     <string name="lockpattern_settings_require_pattern_before_startup_summary" msgid="7873036097628404476">"Kräv grafiskt lösenord när enheten startar. Du kan inte ta emot samtal, meddelanden, aviseringar eller ställa alarm om inte enheten är påslagen."</string>
     <string name="lockpattern_settings_require_pin_before_startup_summary" msgid="6022831284097476933">"Kräv pinkod när enheten startar. Du kan inte ta emot samtal, meddelanden, aviseringar eller ställa alarm om inte enheten är påslagen."</string>
     <string name="lockpattern_settings_require_password_before_startup_summary" msgid="6818285221244966231">"Kräv lösenord när enheten startar. Du kan inte ta emot samtal, meddelanden, aviseringar eller ställa alarm om inte enheten är påslagen."</string>
-    <string name="suggestion_additional_fingerprints" msgid="3683327800671241982">"Fler fingeravtryck"</string>
+    <string name="suggestion_additional_fingerprints" msgid="2214281455363797037">"Lägg till ett fingeravtryck"</string>
+    <string name="suggestion_additional_fingerprints_summary" msgid="2298186278816316599">"Lås upp med ett annat fingeravtryck"</string>
     <string name="battery_saver_on_summary" msgid="9072203872401530722">"På/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_off_summary" msgid="8309471955051162327">"Av/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_desc_turn_on_auto_never" msgid="6715896635178578813">"Aktivera aldrig automatiskt"</string>
     <string name="battery_saver_desc_turn_on_auto_pct" msgid="7472323223085636533">"Aktivera automatiskt vid en batterinivå på %1$s"</string>
     <string name="not_battery_optimizing" msgid="5362861851864837617">"Batterioptimering används inte"</string>
-    <!-- no translation found for notification_log_no_title (5678029849672024215) -->
+    <string name="lockscreen_remote_input" msgid="969871538778211843">"Gör aviseringar skrivskyddade när enheten är låst så att det inte går att skriva svar eller liknande"</string>
+    <string name="default_spell_checker" msgid="8506899870026026660">"Standardinst stavningskontroll"</string>
+    <string name="choose_spell_checker" msgid="6596539862291699367">"Välj stavningskontroll"</string>
+    <!-- no translation found for spell_checker_not_selected (8871083796179200696) -->
     <skip />
-    <!-- no translation found for notification_log_details_delimiter (3116559361552416747) -->
-    <skip />
-    <!-- no translation found for notification_log_details_package (2596495677039100284) -->
-    <skip />
-    <!-- no translation found for notification_log_details_key (2995791937075862968) -->
-    <skip />
-    <!-- no translation found for notification_log_details_group (2430467015200368698) -->
-    <skip />
-    <!-- no translation found for notification_log_details_group_summary (7945543958255585829) -->
-    <skip />
-    <!-- no translation found for notification_log_details_visibility (2552873780715930971) -->
-    <skip />
-    <!-- no translation found for notification_log_details_public_version (4247242364605495240) -->
-    <skip />
-    <!-- no translation found for notification_log_details_priority (8371354971235991398) -->
-    <skip />
-    <!-- no translation found for notification_log_details_importance (2153168790791683139) -->
-    <skip />
-    <!-- no translation found for notification_log_details_explanation (1914295130775393551) -->
-    <skip />
-    <!-- no translation found for notification_log_details_content_intent (1113554570409128083) -->
-    <skip />
-    <!-- no translation found for notification_log_details_delete_intent (905118520685297007) -->
-    <skip />
-    <!-- no translation found for notification_log_details_full_screen_intent (7118560817013522978) -->
-    <skip />
-    <!-- no translation found for notification_log_details_actions (242523930165118066) -->
-    <skip />
-    <!-- no translation found for notification_log_details_title (7177091647508863295) -->
-    <skip />
-    <!-- no translation found for notification_log_details_remoteinput (8328591329858827409) -->
-    <skip />
-    <!-- no translation found for notification_log_details_content_view (6638731378278561786) -->
-    <skip />
-    <!-- no translation found for notification_log_details_extras (4188418723779942047) -->
-    <skip />
-    <!-- no translation found for notification_log_details_icon (8939114059726188218) -->
-    <skip />
-    <!-- no translation found for notification_log_details_parcel (243148037601903212) -->
-    <skip />
-    <!-- no translation found for notification_log_details_ashmem (7241814108477320636) -->
-    <skip />
-    <!-- no translation found for notification_log_details_sound (5506232879598808099) -->
-    <skip />
-    <!-- no translation found for notification_log_details_vibrate (6890065466625335940) -->
-    <skip />
-    <!-- no translation found for notification_log_details_default (2345249399796730861) -->
-    <skip />
-    <!-- no translation found for notification_log_details_none (184131801230614059) -->
-    <skip />
+    <string name="notification_log_no_title" msgid="5678029849672024215">"(ingen)"</string>
+    <string name="notification_log_details_delimiter" msgid="3116559361552416747">": "</string>
+    <string name="notification_log_details_package" msgid="2596495677039100284">"pkg"</string>
+    <string name="notification_log_details_key" msgid="2995791937075862968">"nyckel"</string>
+    <string name="notification_log_details_group" msgid="2430467015200368698">"grupp"</string>
+    <string name="notification_log_details_group_summary" msgid="7945543958255585829">"(översikt)"</string>
+    <string name="notification_log_details_visibility" msgid="2552873780715930971">"synlighet"</string>
+    <string name="notification_log_details_public_version" msgid="4247242364605495240">"publicVersion"</string>
+    <string name="notification_log_details_priority" msgid="8371354971235991398">"prioritet"</string>
+    <string name="notification_log_details_importance" msgid="2153168790791683139">"relevans"</string>
+    <string name="notification_log_details_explanation" msgid="1914295130775393551">"förklaring"</string>
+    <string name="notification_log_details_content_intent" msgid="1113554570409128083">"intent"</string>
+    <string name="notification_log_details_delete_intent" msgid="905118520685297007">"radera intent"</string>
+    <string name="notification_log_details_full_screen_intent" msgid="7118560817013522978">"intent i helskärm"</string>
+    <string name="notification_log_details_actions" msgid="242523930165118066">"åtgärder"</string>
+    <string name="notification_log_details_title" msgid="7177091647508863295">"titel"</string>
+    <string name="notification_log_details_remoteinput" msgid="8328591329858827409">"fjärrstyrd indata"</string>
+    <string name="notification_log_details_content_view" msgid="6638731378278561786">"anpassad vy"</string>
+    <string name="notification_log_details_extras" msgid="4188418723779942047">"extrainnehåll"</string>
+    <string name="notification_log_details_icon" msgid="8939114059726188218">"ikon"</string>
+    <string name="notification_log_details_parcel" msgid="243148037601903212">"paketstorlek"</string>
+    <string name="notification_log_details_ashmem" msgid="7241814108477320636">"ashmem"</string>
+    <string name="notification_log_details_sound" msgid="5506232879598808099">"ljud"</string>
+    <string name="notification_log_details_vibrate" msgid="6890065466625335940">"vibration"</string>
+    <string name="notification_log_details_default" msgid="2345249399796730861">"standardinställning"</string>
+    <string name="notification_log_details_none" msgid="184131801230614059">"ingen"</string>
+    <string name="special_access" msgid="8275242424094109976">"Särskild åtkomst"</string>
+    <string name="confirm_convert_to_fbe_warning" msgid="1487005506049137659">"Vill du ta bort användardata och konvertera till filkryptering?"</string>
+    <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"Rensa och konvertera"</string>
 </resources>

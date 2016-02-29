@@ -80,10 +80,12 @@
     <string name="large_font" msgid="599055175160971446">"大"</string>
     <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"縮小"</string>
     <string name="font_size_make_larger_desc" msgid="4316986572233686061">"拡大"</string>
+    <!-- no translation found for font_size_preview_text (4818424565068376732) -->
+    <skip />
     <string name="font_size_preview_text_headline" msgid="7955317408475392247">"サンプル テキスト"</string>
-    <string name="font_size_preview_text_title" msgid="4762429961714563135">"海底二万リーグ"</string>
-    <string name="font_size_preview_text_subtitle" msgid="5712012075615701561">"第 23 章: サンゴの国"</string>
-    <string name="font_size_preview_text_body" msgid="1608889593334414309">"翌朝、眼をさましてみると、頭は非常にはっきりしていたが、驚いたことに、いつのまにか私は自分の部屋に寝かされていた。他の二人も、たぶん私同様、眠っている間に彼らの部屋に連れて行かれたに違いない。夜中にどんなことが起こったか、おそらく彼らも知らないだろう。そうだとすると、この神秘を解くには、ただ将来の機会を待つほかはない。\nそれにしても、私はもう自由の身に返ったのだろうか、それともまだ監禁されているのだろうか？だが、案ずるにはおよばなかった。扉はすぐ開いた。そこで廊下づたいに中央階段の下に行ってみると、前夜閉鎖されたはずの昇降口も開いていた。私はさっそく甲板に出てみた。\nそこには、ネッド・ランドとコンセイユが、私を待っていた。二人にたずねると、彼らも何も知らなかった。ぐっすり眠っている間に、自分たちの部屋に運ばれ、眼が覚めて驚いたとのことだった。"</string>
+    <string name="font_size_preview_text_title" msgid="1310536233106975546">"オズの魔法使い"</string>
+    <string name="font_size_preview_text_subtitle" msgid="4231671528173110093">"第 11 章: オズの不思議なエメラルド シティ"</string>
+    <string name="font_size_preview_text_body" msgid="1250552239682375643">"緑のメガネで目を守っていても、ドロシーとその仲間たちは不思議なシティの輝きに最初はくらくらしました。通りには緑色の大理石造りの美しい家々が建ち並び、どの家にもキラキラしたエメラルドがいたるところにはめ込んでありました。足元の敷石も同じ緑色の大理石で、ブロックの継ぎ目にはエメラルドがすきまなく並び、太陽を反射してギラギラしていました。窓のガラスも緑色、空の色も緑色、太陽の光も緑色でした。\n\n男の人、女の人、子どもなど、たくさんの人が歩いていて、だれもかれも緑色の服を着て、肌の色も緑がかっていました。みんなドロシーとその奇妙な寄せ集めの仲間たちに不思議そうな目を向け、子どもたちはライオンを見るなり、逃げ出してお母さんの後ろに隠れてしまいましたが、誰一人として話しかけてくる人はいませんでした。通りにはお店がたくさんあって、ドロシーはそこで売られている品物も緑色をしていることに気づきました。キャンディーも、ポップコーンも、靴も、帽子も、服もみんな緑色でした。男の人が売っている緑色のレモネードを子どもたちが買うときに出したお金も緑色だったことにドロシーは気づきました。\n\n馬などの動物はいないようでした。荷物は小さな緑色の手押し車で自分たちで運んでいました。みんな幸せで、満たされ、裕福そうな様子でした。"</string>
     <string name="font_size_save" msgid="3450855718056759095">"OK"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"USBストレージ"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"SDカード"</string>
@@ -237,9 +239,14 @@
     <string name="pref_title_lang_selection" msgid="5696814792962878791">"言語設定"</string>
     <string name="locale_remove_menu" msgid="7651301406723638854">"削除"</string>
     <string name="add_a_language" msgid="2330538812283783022">"言語を追加"</string>
-    <string name="dlg_remove_locales_title" msgid="4143034933365516195">"言語設定から削除しますか？"</string>
-    <string name="dlg_remove_locales_error_title" msgid="463635546627235043">"言語削除エラー"</string>
-    <string name="dlg_remove_locales_error_message" msgid="7108948386818227115">"すべての言語を削除することはできません。少なくとも 1 つの言語を残してください。"</string>
+    <plurals name="dlg_remove_locales_title" formatted="false" msgid="4276642359346122396">
+      <item quantity="other">選択した言語の削除</item>
+      <item quantity="one">選択した言語の削除</item>
+    </plurals>
+    <string name="dlg_remove_locales_message" msgid="5690839673639747130">"テキストは別の言語で表示されるようになります"</string>
+    <string name="dlg_remove_locales_error_title" msgid="2653242337224911425">"すべての言語を削除することはできません"</string>
+    <string name="dlg_remove_locales_error_message" msgid="6697381512654262821">"優先する言語を設定しておく必要があります"</string>
+    <string name="locale_not_translated" msgid="516862628177166755">"いくつかのアプリでは利用できないことがあります"</string>
     <string name="activity_picker_label" msgid="6295660302548177109">"操作の選択"</string>
     <string name="device_info_label" msgid="6551553813651711205">"端末情報"</string>
     <string name="display_label" msgid="8074070940506840792">"画面"</string>
@@ -412,8 +419,7 @@
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"端末の保護"</string>
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"指紋でロックを解除する"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"画面ロックを選択"</string>
-    <!-- no translation found for lock_settings_picker_title_profile (8283230482525023311) -->
-    <skip />
+    <string name="lock_settings_picker_title_profile" msgid="8283230482525023311">"プロファイルの画面ロックの選択"</string>
     <string name="setup_lock_settings_picker_title" msgid="1572244299605153324">"スマートフォンの保護"</string>
     <string name="setup_lock_settings_picker_fingerprint_message" msgid="2431588439043969764">"指紋は、複雑なパターン、PIN、パスワードよりも安全面で劣る可能性があります。バックアップのロック画面を設定して安全を確保してください。"</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"このタブレットが他人に無断で使用されるのを防ぐには、端末保護機能を有効にします。利用する画面ロックを選択してください。"</string>
@@ -421,8 +427,7 @@
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"このスマートフォンが他人に無断で使用されるのを防ぐには、端末保護機能を有効にします。利用する画面ロックを選択してください。"</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"予備の画面ロック方式を選択してください"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"画面ロック"</string>
-    <!-- no translation found for unlock_set_unlock_launch_picker_title_profile (4270157368864693564) -->
-    <skip />
+    <string name="unlock_set_unlock_launch_picker_title_profile" msgid="4270157368864693564">"プロファイルの画面ロック"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"ロック解除方法を変更する"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"パターン、PIN、パスワードセキュリティを変更または無効にする"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"画面をロックする方法を選択する"</string>
@@ -813,7 +818,8 @@
     <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>ポータブルWi-Fiアクセスポイント"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Wi-Fi通話"</string>
-    <string name="wifi_calling_suggestion_title" msgid="124563351958807514">"Wi-Fi 発信の有効化"</string>
+    <string name="wifi_calling_suggestion_title" msgid="9008010480466359578">"Wi-Fi 通話の有効化"</string>
+    <string name="wifi_calling_suggestion_summary" msgid="3765923249566552233">"モバイル ネットワークの代わりに Wi-Fi を使用できます"</string>
     <string name="wifi_calling_mode_title" msgid="2164073796253284289">"発信の設定"</string>
     <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Wi-Fi通話モード"</string>
   <string-array name="wifi_calling_mode_choices">
@@ -894,7 +900,8 @@
     <string name="screen_timeout_title" msgid="5130038655092628247">"画面がOFFになったとき"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"操作が行われない状態で<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>経過後"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"壁紙"</string>
-    <string name="wallpaper_suggestion_title" msgid="1134468474328980088">"壁紙の設定"</string>
+    <string name="wallpaper_suggestion_title" msgid="8583988696513822528">"壁紙の変更"</string>
+    <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"画面のカスタマイズ"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"壁紙タイプの選択"</string>
     <string name="screensaver_settings_title" msgid="3349790120327233241">"スクリーンセーバー"</string>
     <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"ホルダー装着時またはスリープ/充電時"</string>
@@ -1329,8 +1336,7 @@
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"パターン入力が必要"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1165707416664252167">"画面ロックを解除するにはパターンの入力が必要"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="2615606088906120711">"パターンを表示する"</string>
-    <!-- no translation found for lockpattern_settings_enable_visible_pattern_title_profile (4864525074768391381) -->
-    <skip />
+    <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="4864525074768391381">"プロファイルのパターンを表示する"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="4389015658335522989">"タップ操作時のバイブ"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"電源ボタンですぐにロックする"</string>
     <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>がロック解除を管理している場合を除く"</string>
@@ -1342,18 +1348,13 @@
     <string name="lock_settings_profile_title" msgid="7819021341281339182">"仕事用プロファイル"</string>
     <string name="lock_settings_profile_label" msgid="4423909470339292809">"仕事用プロファイルのセキュリティ"</string>
     <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"仕事用プロファイルの画面ロック"</string>
-    <!-- no translation found for lock_settings_profile_unification_title (6888460471428172592) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_summary (3481269258202840437) -->
-    <skip />
+    <string name="lock_settings_profile_unification_title" msgid="6888460471428172592">"同じロックを使用"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="3481269258202840437">"端末の画面ロックを変更して仕事用プロファイルに一致するようにしますか？"</string>
     <string name="lock_settings_profile_unification_dialog_title" msgid="8938936484754025065">"同じ画面ロックを使用しますか？"</string>
     <string name="lock_settings_profile_unification_dialog_body" msgid="1697316592639374194">"お使いの端末にこのロックを使用できますが、これには組織の IT 管理者が仕事用プロファイルに設定している画面ロック関連のポリシーがすべて含まれます。\nお使いの端末にも同じ画面ロックを使用しますか？"</string>
-    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_body (5476809856421622503) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_confirm (2372867057465188766) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unified_summary (9008819078132993492) -->
-    <skip />
+    <string name="lock_settings_profile_unification_dialog_uncompliant_body" msgid="5476809856421622503">"仕事用の画面ロックが組織のセキュリティ要件を満たしていません。\n端末と仕事用プロファイルの両方に新しい画面ロックを設定できます。ただし、仕事用の画面ロックのすべてのポリシーが端末用の画面ロックにも適用されます。"</string>
+    <string name="lock_settings_profile_unification_dialog_uncompliant_confirm" msgid="2372867057465188766">"ロックを変更"</string>
+    <string name="lock_settings_profile_unified_summary" msgid="9008819078132993492">"端末の画面ロックと同一にする"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"アプリを管理"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"インストール済みアプリを管理、削除する"</string>
     <string name="applications_settings" msgid="1721442176406964682">"アプリ"</string>
@@ -1653,6 +1654,10 @@
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"電源ボタンで通話を終了"</string>
     <string name="accessibility_toggle_speak_password_preference_title" msgid="5986628515113204844">"パスワードの音声出力"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"大きなマウスポインタ"</string>
+    <!-- no translation found for accessibility_toggle_master_mono_title (4363806997971905302) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_master_mono_summary (5634277025251530927) -->
+    <skip />
     <string name="accessibility_long_press_timeout_preference_title" msgid="4068253727586393334">"押し続ける時間"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"色反転"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="8658240868230680912">"（試験運用機能）パフォーマンスに影響することがあります"</string>
@@ -2473,8 +2478,7 @@
     <string name="keywords_color_temperature" msgid="2688947724153266364">"色温度 D65 D73 白 黄 青 ウォーム クール"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"スライドでロック解除、パスワード、パターン、PIN"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"ワーク チャレンジ, 仕事用, プロファイル"</string>
-    <!-- no translation found for keywords_unification (1922900767659821025) -->
-    <skip />
+    <string name="keywords_unification" msgid="1922900767659821025">"仕事用プロファイル, 管理対象プロファイル, 統合する, 統合, 仕事, プロファイル"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Wi-Fi NFCタグのセットアップ"</string>
     <string name="write_tag" msgid="8571858602896222537">"書き込む"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"書き込むにはタグをタップしてください..."</string>
@@ -2493,9 +2497,6 @@
     <string name="notification_ringtone_title" msgid="3361201340352664272">"デフォルトの通知音"</string>
     <string name="alarm_ringtone_title" msgid="2015124067611102995">"デフォルトのアラーム着信音"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"着信時もバイブレーションON"</string>
-    <string name="master_mono_title" msgid="8123291759393322551">"モノラル再生"</string>
-    <string name="master_mono_on" msgid="53180785336592938">"音声を常にモノラルで再生"</string>
-    <string name="master_mono_off" msgid="1232052197508060475">"音声を常にモノラルで再生"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"その他の音"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"ダイヤルパッドの操作音"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"画面ロック音"</string>
@@ -2511,7 +2512,8 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"バイブレーション"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"優先する通知のみを許可"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"自動ルール"</string>
-    <string name="zen_mode_automation_suggestion_title" msgid="4695313598703536699">"[通知を非表示] スケジュールの設定"</string>
+    <string name="zen_mode_automation_suggestion_title" msgid="5026815860958316126">"[通知を非表示] スケジュールの設定"</string>
+    <string name="zen_mode_automation_suggestion_summary" msgid="8554080399360506596">"特定時間に端末を消音にします"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"優先する通知のみ"</string>
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"アラームのみ"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"サイレント"</string>
@@ -2520,7 +2522,7 @@
     <string name="configure_notification_settings" msgid="3558846607192693233">"通知の設定"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"詳細設定"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"光を点滅させて通知"</string>
-    <string name="lock_screen_notifications_title" msgid="9118805570775519455">"端末がロックされているとき"</string>
+    <string name="lock_screen_notifications_title" msgid="6173076173408887213">"ロック画面の通知"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"すべての通知内容を表示する"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"プライベートな通知内容を非表示にする"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"通知をすべて表示しない"</string>
@@ -2535,11 +2537,19 @@
     <string name="notification_importance_title" msgid="848692592679312666">"重要度"</string>
     <string name="notification_importance_none" msgid="3173515479356106227">"未設定"</string>
     <string name="notification_importance_blocked" msgid="4764559498517003405">"ブロック: 今後はこの通知を表示しない"</string>
-    <string name="notification_importance_low" msgid="9187046927980498942">"低: 通知リストの下にマナーモードで表示する"</string>
-    <string name="notification_importance_default" msgid="4924370061477615318">"標準: この通知をマナーモードで表示する"</string>
-    <string name="notification_importance_high" msgid="1918112760912803959">"高: 通知リストの上に表示し、音声でも知らせる"</string>
-    <string name="notification_importance_max" msgid="5501185277889361261">"緊急: 画面にプレビューを表示し、音声でも知らせる"</string>
+    <!-- no translation found for notification_importance_min (2370444628448134377) -->
+    <skip />
+    <!-- no translation found for notification_importance_low (979932751695283877) -->
+    <skip />
+    <!-- no translation found for notification_importance_default (8789180840561778039) -->
+    <skip />
+    <!-- no translation found for notification_importance_high (2401104039256903538) -->
+    <skip />
+    <!-- no translation found for notification_importance_max (6036245535555486319) -->
+    <skip />
     <string name="importance_reset" msgid="7458420788555607007">"リセット"</string>
+    <string name="show_silently" msgid="2222875799232222056">"マナーモードで表示"</string>
+    <string name="show_silently_summary" msgid="7616604629123146565">"音やバイブレーションで知らせず、現在の画面に通知を数秒間通知することもしません。"</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"通知アシスタント"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"通知へのアクセス"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"アプリは通知を読み取ることができません"</string>
@@ -2745,7 +2755,8 @@
     <string name="app_link_open_ask" msgid="7800878430190575991">"その都度確認"</string>
     <string name="app_link_open_never" msgid="3407647600352398543">"このアプリで開かない"</string>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"認識されませんでした"</string>
-    <string name="default_apps_title" msgid="1854974637597514435">"既定のアプリ"</string>
+    <string name="default_apps_title" msgid="1660450272764331490">"デフォルト"</string>
+    <string name="default_for_work" msgid="9152194239366247932">"仕事用のデフォルト"</string>
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"アシストと音声入力"</string>
     <string name="default_assist_title" msgid="8868488975409247921">"アシストアプリ"</string>
     <string name="default_assist_none" msgid="3709083569608735487">"なし"</string>
@@ -2881,8 +2892,7 @@
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"縮小"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"拡大"</string>
     <string name="screen_zoom_summary_small" msgid="5867245310241621570">"小"</string>
-    <!-- no translation found for screen_zoom_summary_default (2247006805614056507) -->
-    <skip />
+    <string name="screen_zoom_summary_default" msgid="2247006805614056507">"デフォルト"</string>
     <string name="screen_zoom_summary_large" msgid="4835294730065424084">"大"</string>
     <string name="screen_zoom_summary_very_large" msgid="7108563375663670067">"特大"</string>
     <string name="screen_zoom_summary_extremely_large" msgid="7427320168263276227">"最大"</string>
@@ -2982,62 +2992,45 @@
     <string name="lockpattern_settings_require_pattern_before_startup_summary" msgid="7873036097628404476">"端末を起動するため、パターンが必要です。端末が OFF の場合、通話、メッセージ、通知、アラームを受信できません。"</string>
     <string name="lockpattern_settings_require_pin_before_startup_summary" msgid="6022831284097476933">"端末を起動するため、PIN が必要です。端末が OFF の場合、通話、メッセージ、通知、アラームを受信できません。"</string>
     <string name="lockpattern_settings_require_password_before_startup_summary" msgid="6818285221244966231">"端末を起動するため、パスワードが必要です。端末が OFF の場合、通話、メッセージ、通知、アラームを受信できません。"</string>
-    <string name="suggestion_additional_fingerprints" msgid="3683327800671241982">"別の指紋の追加"</string>
+    <string name="suggestion_additional_fingerprints" msgid="2214281455363797037">"別の指紋の追加"</string>
+    <string name="suggestion_additional_fingerprints_summary" msgid="2298186278816316599">"別の指紋でロックを解除するようにできます"</string>
     <string name="battery_saver_on_summary" msgid="9072203872401530722">"ON / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_off_summary" msgid="8309471955051162327">"OFF / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_desc_turn_on_auto_never" msgid="6715896635178578813">"自動で ON にしない"</string>
     <string name="battery_saver_desc_turn_on_auto_pct" msgid="7472323223085636533">"電池 %1$s で自動的に ON にする"</string>
     <string name="not_battery_optimizing" msgid="5362861851864837617">"電池の最適化を使用しない"</string>
-    <!-- no translation found for notification_log_no_title (5678029849672024215) -->
+    <string name="lockscreen_remote_input" msgid="969871538778211843">"端末がロックされている場合に、通知で返信などのテキストを入力できないようにします"</string>
+    <string name="default_spell_checker" msgid="8506899870026026660">"スペル チェッカーのデフォルト"</string>
+    <string name="choose_spell_checker" msgid="6596539862291699367">"スペル チェッカーの選択"</string>
+    <!-- no translation found for spell_checker_not_selected (8871083796179200696) -->
     <skip />
-    <!-- no translation found for notification_log_details_delimiter (3116559361552416747) -->
-    <skip />
-    <!-- no translation found for notification_log_details_package (2596495677039100284) -->
-    <skip />
-    <!-- no translation found for notification_log_details_key (2995791937075862968) -->
-    <skip />
-    <!-- no translation found for notification_log_details_group (2430467015200368698) -->
-    <skip />
-    <!-- no translation found for notification_log_details_group_summary (7945543958255585829) -->
-    <skip />
-    <!-- no translation found for notification_log_details_visibility (2552873780715930971) -->
-    <skip />
-    <!-- no translation found for notification_log_details_public_version (4247242364605495240) -->
-    <skip />
-    <!-- no translation found for notification_log_details_priority (8371354971235991398) -->
-    <skip />
-    <!-- no translation found for notification_log_details_importance (2153168790791683139) -->
-    <skip />
-    <!-- no translation found for notification_log_details_explanation (1914295130775393551) -->
-    <skip />
-    <!-- no translation found for notification_log_details_content_intent (1113554570409128083) -->
-    <skip />
-    <!-- no translation found for notification_log_details_delete_intent (905118520685297007) -->
-    <skip />
-    <!-- no translation found for notification_log_details_full_screen_intent (7118560817013522978) -->
-    <skip />
-    <!-- no translation found for notification_log_details_actions (242523930165118066) -->
-    <skip />
-    <!-- no translation found for notification_log_details_title (7177091647508863295) -->
-    <skip />
-    <!-- no translation found for notification_log_details_remoteinput (8328591329858827409) -->
-    <skip />
-    <!-- no translation found for notification_log_details_content_view (6638731378278561786) -->
-    <skip />
-    <!-- no translation found for notification_log_details_extras (4188418723779942047) -->
-    <skip />
-    <!-- no translation found for notification_log_details_icon (8939114059726188218) -->
-    <skip />
-    <!-- no translation found for notification_log_details_parcel (243148037601903212) -->
-    <skip />
-    <!-- no translation found for notification_log_details_ashmem (7241814108477320636) -->
-    <skip />
-    <!-- no translation found for notification_log_details_sound (5506232879598808099) -->
-    <skip />
-    <!-- no translation found for notification_log_details_vibrate (6890065466625335940) -->
-    <skip />
-    <!-- no translation found for notification_log_details_default (2345249399796730861) -->
-    <skip />
-    <!-- no translation found for notification_log_details_none (184131801230614059) -->
-    <skip />
+    <string name="notification_log_no_title" msgid="5678029849672024215">"（なし）"</string>
+    <string name="notification_log_details_delimiter" msgid="3116559361552416747">": "</string>
+    <string name="notification_log_details_package" msgid="2596495677039100284">"パッケージ"</string>
+    <string name="notification_log_details_key" msgid="2995791937075862968">"キー"</string>
+    <string name="notification_log_details_group" msgid="2430467015200368698">"グループ"</string>
+    <string name="notification_log_details_group_summary" msgid="7945543958255585829">"（概要）"</string>
+    <string name="notification_log_details_visibility" msgid="2552873780715930971">"公開設定"</string>
+    <string name="notification_log_details_public_version" msgid="4247242364605495240">"publicVersion"</string>
+    <string name="notification_log_details_priority" msgid="8371354971235991398">"優先度"</string>
+    <string name="notification_log_details_importance" msgid="2153168790791683139">"重要度"</string>
+    <string name="notification_log_details_explanation" msgid="1914295130775393551">"説明"</string>
+    <string name="notification_log_details_content_intent" msgid="1113554570409128083">"インテント"</string>
+    <string name="notification_log_details_delete_intent" msgid="905118520685297007">"インテントの削除"</string>
+    <string name="notification_log_details_full_screen_intent" msgid="7118560817013522978">"全画面インテント"</string>
+    <string name="notification_log_details_actions" msgid="242523930165118066">"アクション"</string>
+    <string name="notification_log_details_title" msgid="7177091647508863295">"タイトル"</string>
+    <string name="notification_log_details_remoteinput" msgid="8328591329858827409">"リモート入力"</string>
+    <string name="notification_log_details_content_view" msgid="6638731378278561786">"カスタム ビュー"</string>
+    <string name="notification_log_details_extras" msgid="4188418723779942047">"付加情報"</string>
+    <string name="notification_log_details_icon" msgid="8939114059726188218">"アイコン"</string>
+    <string name="notification_log_details_parcel" msgid="243148037601903212">"パーセルサイズ"</string>
+    <string name="notification_log_details_ashmem" msgid="7241814108477320636">"ashmem"</string>
+    <string name="notification_log_details_sound" msgid="5506232879598808099">"音"</string>
+    <string name="notification_log_details_vibrate" msgid="6890065466625335940">"バイブレーション"</string>
+    <string name="notification_log_details_default" msgid="2345249399796730861">"デフォルト"</string>
+    <string name="notification_log_details_none" msgid="184131801230614059">"なし"</string>
+    <string name="special_access" msgid="8275242424094109976">"特別なアクセス"</string>
+    <string name="confirm_convert_to_fbe_warning" msgid="1487005506049137659">"ファイル暗号化のためにユーザーのデータを消去して変換してもよろしいですか？"</string>
+    <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"消去して変換"</string>
 </resources>

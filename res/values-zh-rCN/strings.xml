@@ -80,10 +80,12 @@
     <string name="large_font" msgid="599055175160971446">"大"</string>
     <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"缩小"</string>
     <string name="font_size_make_larger_desc" msgid="4316986572233686061">"放大"</string>
+    <!-- no translation found for font_size_preview_text (4818424565068376732) -->
+    <skip />
     <string name="font_size_preview_text_headline" msgid="7955317408475392247">"示例文本"</string>
-    <string name="font_size_preview_text_title" msgid="4762429961714563135">"《海底两万里》"</string>
-    <string name="font_size_preview_text_subtitle" msgid="5712012075615701561">"第 23 章：《珊瑚王国》"</string>
-    <string name="font_size_preview_text_body" msgid="1608889593334414309">"第二天醒来时，我的脑袋异常清醒。令我大吃一惊的是，我竟然在自己的房间里。我的同伴们也一定都在不知不觉中被人送回了各自的船舱，而且和我一样，对于昨晚发生的事一无所知。要想揭开整件事情的谜团，我想只能等待日后偶然的机会了。\n我暗自琢磨着离开这个房间。我重获自由了吗？还是依然是个被囚禁的人？事实上，我已经完全获得自由了！我打开房门，穿过半个甲板，然后走上中央楼梯。昨晚关闭的嵌板现在是敞开的。我踏上平台。\n尼德·兰和康塞尔正在那里等着我。我向他们提出心中的疑惑，但没有获得任何答案。他们睡得太沉了，彻底失去意识，醒来时也是很惊讶地发现自己又回到了船舱中。"</string>
+    <string name="font_size_preview_text_title" msgid="1310536233106975546">"绿野仙踪"</string>
+    <string name="font_size_preview_text_subtitle" msgid="4231671528173110093">"第 11 章：奥兹国神奇的翡翠城"</string>
+    <string name="font_size_preview_text_body" msgid="1250552239682375643">"尽管有绿色眼镜保护着眼睛，桃乐丝和她的朋友们在刚看到这座奇妙的城市时，还是被它耀眼的光芒照得眼花缭乱。街道两旁耸立着绿色大理石砌成的美丽房屋，到处镶嵌着闪闪发光的翡翠。他们走过的人行道同样是用绿色大理石铺砌而成，石块接合处嵌有一排排紧密相连的翡翠，在阳光的照耀下闪闪发亮。房屋的窗户镶嵌着绿色的玻璃，城市上空有淡淡的绿晕，就连阳光也散发着绿色光芒。\n\n街道上有很多行人，无论男女老少全都穿着绿色衣物，连皮肤都泛着绿色。他们都用惊异的眼光注视着桃乐丝和她这群外貌迥异的伙伴们，孩子们一看到狮子都拔腿跑了，躲到他们母亲身后；没有人想开口跟桃乐丝他们说话。街上有许多商店，桃乐丝看见店里的每一件商品都是绿色的，有绿色的糖果，绿色的爆米花，还有各种各样的绿鞋子、绿帽子和绿衣服。有位小贩在路上卖绿色的柠檬水，当孩子们去买汽水时，桃乐丝发现他们付钱时所用的硬币竟然也是绿色的。\n\n城里似乎没有马，也没有其他任何动物。有人用绿色小推车来回运载物品。每个人看起来都是那么快乐、满足，一切都显得安定繁荣。"</string>
     <string name="font_size_save" msgid="3450855718056759095">"确定"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"USB存储设备"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"SD卡"</string>
@@ -237,9 +239,14 @@
     <string name="pref_title_lang_selection" msgid="5696814792962878791">"语言偏好设置"</string>
     <string name="locale_remove_menu" msgid="7651301406723638854">"移除"</string>
     <string name="add_a_language" msgid="2330538812283783022">"添加语言"</string>
-    <string name="dlg_remove_locales_title" msgid="4143034933365516195">"要从您的语言偏好设置中移除吗？"</string>
-    <string name="dlg_remove_locales_error_title" msgid="463635546627235043">"语言移除错误"</string>
-    <string name="dlg_remove_locales_error_message" msgid="7108948386818227115">"无法移除所有语言，您应至少保留一种语言。"</string>
+    <plurals name="dlg_remove_locales_title" formatted="false" msgid="4276642359346122396">
+      <item quantity="other">要移除所选语言吗？</item>
+      <item quantity="one">要移除所选语言吗？</item>
+    </plurals>
+    <string name="dlg_remove_locales_message" msgid="5690839673639747130">"系统将以其他语言显示文字"</string>
+    <string name="dlg_remove_locales_error_title" msgid="2653242337224911425">"无法移除所有语言"</string>
+    <string name="dlg_remove_locales_error_message" msgid="6697381512654262821">"请保留至少一种首选语言"</string>
+    <string name="locale_not_translated" msgid="516862628177166755">"某些应用可能无法以该语言显示"</string>
     <string name="activity_picker_label" msgid="6295660302548177109">"选择活动"</string>
     <string name="device_info_label" msgid="6551553813651711205">"设备信息"</string>
     <string name="display_label" msgid="8074070940506840792">"屏幕"</string>
@@ -330,8 +337,7 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"使用指纹解锁"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_message (6931554430739074640) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="6931554430739074640">"只需触摸指纹传感器即可解锁您的手机、对购买交易进行授权或登录应用。请务必谨慎添加指纹，因为添加的任何指纹都能够用来执行上述操作。\n\n请注意：指纹识别的安全性可能不及安全系数高的图案或 PIN 码。"<annotation id="url">"了解详情"</annotation></string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"取消"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"继续"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="7234486440384881699">"系统将不会启用设备保护功能。如果您的平板电脑丢失、被盗，或者其中的数据遭到清空，您将无法防止他人使用此平板电脑。"</string>
@@ -413,8 +419,7 @@
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"保护您的设备"</string>
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"使用指纹解锁"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"选择屏幕锁定方式"</string>
-    <!-- no translation found for lock_settings_picker_title_profile (8283230482525023311) -->
-    <skip />
+    <string name="lock_settings_picker_title_profile" msgid="8283230482525023311">"选择资料屏幕锁定方式"</string>
     <string name="setup_lock_settings_picker_title" msgid="1572244299605153324">"为手机启用保护功能"</string>
     <string name="setup_lock_settings_picker_fingerprint_message" msgid="2431588439043969764">"指纹识别的安全性可能不及安全系数高的图案、PIN 码或密码。请设置备用屏幕锁定方式以确保安全。"</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"启用设备保护功能可防止他人在未经您允许的情况下使用此平板电脑。请选择您要使用的屏幕锁定方式。"</string>
@@ -422,8 +427,7 @@
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"启用设备保护功能可防止他人在未经您允许的情况下使用此手机。请选择您要使用的屏幕锁定方式。"</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"选择您的备用屏幕锁定方式"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"屏幕锁定方式"</string>
-    <!-- no translation found for unlock_set_unlock_launch_picker_title_profile (4270157368864693564) -->
-    <skip />
+    <string name="unlock_set_unlock_launch_picker_title_profile" msgid="4270157368864693564">"资料屏幕锁定方式"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"更改屏幕锁定方式"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"更改或关闭图案、PIN码或密码保护"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"选择屏幕锁定方式"</string>
@@ -810,7 +814,8 @@
     <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>便携式WLAN热点"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"Android热点"</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"WLAN 通话"</string>
-    <string name="wifi_calling_suggestion_title" msgid="124563351958807514">"启用 WLAN 通话功能"</string>
+    <string name="wifi_calling_suggestion_title" msgid="9008010480466359578">"启用 WLAN 通话"</string>
+    <string name="wifi_calling_suggestion_summary" msgid="3765923249566552233">"使用 WLAN 网络（而非移动网络）"</string>
     <string name="wifi_calling_mode_title" msgid="2164073796253284289">"通话偏好设置"</string>
     <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"WLAN 通话模式"</string>
   <string-array name="wifi_calling_mode_choices">
@@ -891,7 +896,8 @@
     <string name="screen_timeout_title" msgid="5130038655092628247">"屏幕关闭"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"无操作<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>后"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"壁纸"</string>
-    <string name="wallpaper_suggestion_title" msgid="1134468474328980088">"设置壁纸"</string>
+    <string name="wallpaper_suggestion_title" msgid="8583988696513822528">"更换壁纸"</string>
+    <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"对屏幕进行个性化设置"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"选择壁纸来源"</string>
     <string name="screensaver_settings_title" msgid="3349790120327233241">"互动屏保"</string>
     <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"插入基座或休眠且正在充电时"</string>
@@ -1323,8 +1329,7 @@
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"需要解锁图案"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1165707416664252167">"必须绘制图案才能解锁屏幕"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="2615606088906120711">"显示图案"</string>
-    <!-- no translation found for lockpattern_settings_enable_visible_pattern_title_profile (4864525074768391381) -->
-    <skip />
+    <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="4864525074768391381">"显示资料解锁图案"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="4389015658335522989">"点按时振动"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"电源按钮即时锁定"</string>
     <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>让屏幕保持解锁状态时除外"</string>
@@ -1336,18 +1341,13 @@
     <string name="lock_settings_profile_title" msgid="7819021341281339182">"工作资料"</string>
     <string name="lock_settings_profile_label" msgid="4423909470339292809">"工作资料安全"</string>
     <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"工作资料屏幕锁定"</string>
-    <!-- no translation found for lock_settings_profile_unification_title (6888460471428172592) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_summary (3481269258202840437) -->
-    <skip />
+    <string name="lock_settings_profile_unification_title" msgid="6888460471428172592">"使用相同的锁屏方式"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="3481269258202840437">"要将设备的屏幕锁定方式改成与工作资料一致吗？"</string>
     <string name="lock_settings_profile_unification_dialog_title" msgid="8938936484754025065">"要使用相同的屏幕锁定设置吗？"</string>
     <string name="lock_settings_profile_unification_dialog_body" msgid="1697316592639374194">"您可以在设备上使用这种锁定设置，但这样会使您的 IT 管理员所设置的所有屏幕锁定相关政策都应用到工作资料。\n要在设备上使用相同的屏幕锁定设置吗？"</string>
-    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_body (5476809856421622503) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_confirm (2372867057465188766) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unified_summary (9008819078132993492) -->
-    <skip />
+    <string name="lock_settings_profile_unification_dialog_uncompliant_body" msgid="5476809856421622503">"您的工作屏幕锁定方式不符合贵单位的安全要求。\n您可以为自己的设备和工作资料设置新的屏幕锁定方式。但请注意，您设备的屏幕锁定方式也必须遵守所有相关的工作屏幕锁定规范。"</string>
+    <string name="lock_settings_profile_unification_dialog_uncompliant_confirm" msgid="2372867057465188766">"更改锁屏方式"</string>
+    <string name="lock_settings_profile_unified_summary" msgid="9008819078132993492">"与设备的屏幕锁定方式相同"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"管理应用"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"管理和删除已安装的应用"</string>
     <string name="applications_settings" msgid="1721442176406964682">"应用"</string>
@@ -1632,14 +1632,17 @@
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"无障碍快捷方式"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"开启"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"关闭"</string>
-    <!-- no translation found for accessibility_global_gesture_preference_description (1605107799571936715) -->
-    <skip />
+    <string name="accessibility_global_gesture_preference_description" msgid="1605107799571936715">"开启此功能后，只需两步即可快速启用无障碍功能：\n\n第 1 步：按住电源按钮，直到您听到提示音或感觉到振动。\n\n第 2 步：用两根手指触摸并按住屏幕，直到您听到确认提示音。\n\n如果设备有多位用户，在锁定屏幕上进行这项快捷操作可暂时启用无障碍功能，直到设备解锁为止。"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="2567402942683463779">"高对比度文字"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="7218498768415430963">"自动更新屏幕放大状态"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"在应用转换时更新屏幕放大状态"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"按电源按钮结束通话"</string>
     <string name="accessibility_toggle_speak_password_preference_title" msgid="5986628515113204844">"说出密码"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"大号鼠标指针"</string>
+    <!-- no translation found for accessibility_toggle_master_mono_title (4363806997971905302) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_master_mono_summary (5634277025251530927) -->
+    <skip />
     <string name="accessibility_long_press_timeout_preference_title" msgid="4068253727586393334">"点按并按住的延迟时间"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"颜色反转"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="8658240868230680912">"（实验性功能）可能会影响性能"</string>
@@ -2454,8 +2457,7 @@
     <string name="keywords_color_temperature" msgid="2688947724153266364">"色温 D65 D73：白色、黄色、蓝色、暖色、冷色"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"滑动解锁, 密码, 图案, PIN 码"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"工作验证, 工作, 资料"</string>
-    <!-- no translation found for keywords_unification (1922900767659821025) -->
-    <skip />
+    <string name="keywords_unification" msgid="1922900767659821025">"工作资料, 托管资料, 汇整, 统一, 工作, 资料"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"设置WLAN NFC标签"</string>
     <string name="write_tag" msgid="8571858602896222537">"写入"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"点按标签即可写入…"</string>
@@ -2474,9 +2476,6 @@
     <string name="notification_ringtone_title" msgid="3361201340352664272">"默认通知铃声"</string>
     <string name="alarm_ringtone_title" msgid="2015124067611102995">"默认闹钟铃声"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"有来电时响铃并振动"</string>
-    <string name="master_mono_title" msgid="8123291759393322551">"单声道播放"</string>
-    <string name="master_mono_on" msgid="53180785336592938">"一律以单声道播放音频"</string>
-    <string name="master_mono_off" msgid="1232052197508060475">"一律以单声道播放音频"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"其他提示音"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"拨号键盘提示音"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"屏幕锁定提示音"</string>
@@ -2492,7 +2491,8 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"振动"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"仅允许优先打扰内容"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"自动规则"</string>
-    <string name="zen_mode_automation_suggestion_title" msgid="4695313598703536699">"设置“请勿打扰”时间安排"</string>
+    <string name="zen_mode_automation_suggestion_title" msgid="5026815860958316126">"设置“请勿打扰”时间安排"</string>
+    <string name="zen_mode_automation_suggestion_summary" msgid="8554080399360506596">"在特定时间将设备静音"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"仅限优先打扰"</string>
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"仅限闹钟"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"完全阻止"</string>
@@ -2501,7 +2501,7 @@
     <string name="configure_notification_settings" msgid="3558846607192693233">"配置通知"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"高级"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"收到通知时指示灯闪烁"</string>
-    <string name="lock_screen_notifications_title" msgid="9118805570775519455">"设备锁定时"</string>
+    <string name="lock_screen_notifications_title" msgid="6173076173408887213">"在锁定屏幕上"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"显示所有通知内容"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"隐藏敏感通知内容"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"完全不显示通知"</string>
@@ -2516,11 +2516,19 @@
     <string name="notification_importance_title" msgid="848692592679312666">"重要性"</string>
     <string name="notification_importance_none" msgid="3173515479356106227">"未设置"</string>
     <string name="notification_importance_blocked" msgid="4764559498517003405">"屏蔽：一律不显示这些通知"</string>
-    <string name="notification_importance_low" msgid="9187046927980498942">"低：在通知列表底部显示，但不发出提示音"</string>
-    <string name="notification_importance_default" msgid="4924370061477615318">"一般：显示这些通知，但不发出提示音"</string>
-    <string name="notification_importance_high" msgid="1918112760912803959">"高：在通知列表顶部显示，并发出提示音"</string>
-    <string name="notification_importance_max" msgid="5501185277889361261">"紧急：在屏幕上持续显示，并发出提示音"</string>
+    <!-- no translation found for notification_importance_min (2370444628448134377) -->
+    <skip />
+    <!-- no translation found for notification_importance_low (979932751695283877) -->
+    <skip />
+    <!-- no translation found for notification_importance_default (8789180840561778039) -->
+    <skip />
+    <!-- no translation found for notification_importance_high (2401104039256903538) -->
+    <skip />
+    <!-- no translation found for notification_importance_max (6036245535555486319) -->
+    <skip />
     <string name="importance_reset" msgid="7458420788555607007">"重置"</string>
+    <string name="show_silently" msgid="2222875799232222056">"显示时不发出提示音"</string>
+    <string name="show_silently_summary" msgid="7616604629123146565">"不发出提示音，不振动，也不在当前屏幕上短暂显示这些通知。"</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"通知助手"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"通知使用权"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"应用无法读取通知"</string>
@@ -2717,8 +2725,7 @@
     <string name="domain_urls_title" msgid="8762012672312435252">"应用链接"</string>
     <string name="domain_urls_summary_none" msgid="2639588015479657864">"不打开支持的链接"</string>
     <string name="domain_urls_summary_one" msgid="3704934031930978405">"打开 <xliff:g id="DOMAIN">%s</xliff:g>"</string>
-    <!-- no translation found for domain_urls_summary_some (3950089361819428455) -->
-    <skip />
+    <string name="domain_urls_summary_some" msgid="3950089361819428455">"打开 <xliff:g id="DOMAIN">%s</xliff:g> 和其他网址"</string>
     <plurals name="domain_urls_apps_summary" formatted="false" msgid="4322996467951692661">
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> 个应用可以打开支持的链接</item>
       <item quantity="one">1 个应用可以打开支持的链接</item>
@@ -2727,7 +2734,8 @@
     <string name="app_link_open_ask" msgid="7800878430190575991">"每次都询问"</string>
     <string name="app_link_open_never" msgid="3407647600352398543">"不要在此应用中打开"</string>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"无法识别"</string>
-    <string name="default_apps_title" msgid="1854974637597514435">"默认应用"</string>
+    <string name="default_apps_title" msgid="1660450272764331490">"默认应用"</string>
+    <string name="default_for_work" msgid="9152194239366247932">"默认工作应用"</string>
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"辅助应用和语音输入"</string>
     <string name="default_assist_title" msgid="8868488975409247921">"辅助应用"</string>
     <string name="default_assist_none" msgid="3709083569608735487">"无"</string>
@@ -2863,8 +2871,7 @@
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"缩小"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"放大"</string>
     <string name="screen_zoom_summary_small" msgid="5867245310241621570">"小"</string>
-    <!-- no translation found for screen_zoom_summary_default (2247006805614056507) -->
-    <skip />
+    <string name="screen_zoom_summary_default" msgid="2247006805614056507">"默认"</string>
     <string name="screen_zoom_summary_large" msgid="4835294730065424084">"大"</string>
     <string name="screen_zoom_summary_very_large" msgid="7108563375663670067">"较大"</string>
     <string name="screen_zoom_summary_extremely_large" msgid="7427320168263276227">"最大"</string>
@@ -2960,62 +2967,45 @@
     <string name="lockpattern_settings_require_pattern_before_startup_summary" msgid="7873036097628404476">"必须绘制解锁图案才能启动您的设备。此设备关闭时无法接收来电、消息、通知或闹钟提醒。"</string>
     <string name="lockpattern_settings_require_pin_before_startup_summary" msgid="6022831284097476933">"必须输入 PIN 码才能启动您的设备。此设备关闭时无法接收来电、消息、通知或闹钟提醒。"</string>
     <string name="lockpattern_settings_require_password_before_startup_summary" msgid="6818285221244966231">"必须输入密码才能启动您的设备。此设备关闭时无法接收来电、消息、通知或闹钟提醒。"</string>
-    <string name="suggestion_additional_fingerprints" msgid="3683327800671241982">"其他指纹"</string>
+    <string name="suggestion_additional_fingerprints" msgid="2214281455363797037">"添加其他指纹"</string>
+    <string name="suggestion_additional_fingerprints_summary" msgid="2298186278816316599">"使用其他指纹解锁"</string>
     <string name="battery_saver_on_summary" msgid="9072203872401530722">"已开启 / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_off_summary" msgid="8309471955051162327">"已关闭 / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_desc_turn_on_auto_never" msgid="6715896635178578813">"一律不自动开启"</string>
     <string name="battery_saver_desc_turn_on_auto_pct" msgid="7472323223085636533">"电量剩余 %1$s 时自动开启"</string>
     <string name="not_battery_optimizing" msgid="5362861851864837617">"未使用电池优化设置"</string>
-    <!-- no translation found for notification_log_no_title (5678029849672024215) -->
+    <string name="lockscreen_remote_input" msgid="969871538778211843">"设备处于锁定状态时，禁止在通知中输入回复内容或其他文字"</string>
+    <string name="default_spell_checker" msgid="8506899870026026660">"默认拼写检查工具"</string>
+    <string name="choose_spell_checker" msgid="6596539862291699367">"选择拼写检查工具"</string>
+    <!-- no translation found for spell_checker_not_selected (8871083796179200696) -->
     <skip />
-    <!-- no translation found for notification_log_details_delimiter (3116559361552416747) -->
-    <skip />
-    <!-- no translation found for notification_log_details_package (2596495677039100284) -->
-    <skip />
-    <!-- no translation found for notification_log_details_key (2995791937075862968) -->
-    <skip />
-    <!-- no translation found for notification_log_details_group (2430467015200368698) -->
-    <skip />
-    <!-- no translation found for notification_log_details_group_summary (7945543958255585829) -->
-    <skip />
-    <!-- no translation found for notification_log_details_visibility (2552873780715930971) -->
-    <skip />
-    <!-- no translation found for notification_log_details_public_version (4247242364605495240) -->
-    <skip />
-    <!-- no translation found for notification_log_details_priority (8371354971235991398) -->
-    <skip />
-    <!-- no translation found for notification_log_details_importance (2153168790791683139) -->
-    <skip />
-    <!-- no translation found for notification_log_details_explanation (1914295130775393551) -->
-    <skip />
-    <!-- no translation found for notification_log_details_content_intent (1113554570409128083) -->
-    <skip />
-    <!-- no translation found for notification_log_details_delete_intent (905118520685297007) -->
-    <skip />
-    <!-- no translation found for notification_log_details_full_screen_intent (7118560817013522978) -->
-    <skip />
-    <!-- no translation found for notification_log_details_actions (242523930165118066) -->
-    <skip />
-    <!-- no translation found for notification_log_details_title (7177091647508863295) -->
-    <skip />
-    <!-- no translation found for notification_log_details_remoteinput (8328591329858827409) -->
-    <skip />
-    <!-- no translation found for notification_log_details_content_view (6638731378278561786) -->
-    <skip />
-    <!-- no translation found for notification_log_details_extras (4188418723779942047) -->
-    <skip />
-    <!-- no translation found for notification_log_details_icon (8939114059726188218) -->
-    <skip />
-    <!-- no translation found for notification_log_details_parcel (243148037601903212) -->
-    <skip />
-    <!-- no translation found for notification_log_details_ashmem (7241814108477320636) -->
-    <skip />
-    <!-- no translation found for notification_log_details_sound (5506232879598808099) -->
-    <skip />
-    <!-- no translation found for notification_log_details_vibrate (6890065466625335940) -->
-    <skip />
-    <!-- no translation found for notification_log_details_default (2345249399796730861) -->
-    <skip />
-    <!-- no translation found for notification_log_details_none (184131801230614059) -->
-    <skip />
+    <string name="notification_log_no_title" msgid="5678029849672024215">"（无）"</string>
+    <string name="notification_log_details_delimiter" msgid="3116559361552416747">"： "</string>
+    <string name="notification_log_details_package" msgid="2596495677039100284">"pkg"</string>
+    <string name="notification_log_details_key" msgid="2995791937075862968">"键"</string>
+    <string name="notification_log_details_group" msgid="2430467015200368698">"群组"</string>
+    <string name="notification_log_details_group_summary" msgid="7945543958255585829">"（摘要）"</string>
+    <string name="notification_log_details_visibility" msgid="2552873780715930971">"公开范围"</string>
+    <string name="notification_log_details_public_version" msgid="4247242364605495240">"公开版本"</string>
+    <string name="notification_log_details_priority" msgid="8371354971235991398">"优先级"</string>
+    <string name="notification_log_details_importance" msgid="2153168790791683139">"重要性"</string>
+    <string name="notification_log_details_explanation" msgid="1914295130775393551">"说明"</string>
+    <string name="notification_log_details_content_intent" msgid="1113554570409128083">"intent"</string>
+    <string name="notification_log_details_delete_intent" msgid="905118520685297007">"删除 intent"</string>
+    <string name="notification_log_details_full_screen_intent" msgid="7118560817013522978">"全屏 intent"</string>
+    <string name="notification_log_details_actions" msgid="242523930165118066">"操作"</string>
+    <string name="notification_log_details_title" msgid="7177091647508863295">"标题"</string>
+    <string name="notification_log_details_remoteinput" msgid="8328591329858827409">"远程输入"</string>
+    <string name="notification_log_details_content_view" msgid="6638731378278561786">"自定义视图"</string>
+    <string name="notification_log_details_extras" msgid="4188418723779942047">"其他"</string>
+    <string name="notification_log_details_icon" msgid="8939114059726188218">"图标"</string>
+    <string name="notification_log_details_parcel" msgid="243148037601903212">"parcel 大小"</string>
+    <string name="notification_log_details_ashmem" msgid="7241814108477320636">"ashmem"</string>
+    <string name="notification_log_details_sound" msgid="5506232879598808099">"提示音"</string>
+    <string name="notification_log_details_vibrate" msgid="6890065466625335940">"振动"</string>
+    <string name="notification_log_details_default" msgid="2345249399796730861">"默认"</string>
+    <string name="notification_log_details_none" msgid="184131801230614059">"无"</string>
+    <string name="special_access" msgid="8275242424094109976">"特殊访问权限"</string>
+    <string name="confirm_convert_to_fbe_warning" msgid="1487005506049137659">"您真的要清除用户数据并转换为文件加密吗？"</string>
+    <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"清除并转换"</string>
 </resources>

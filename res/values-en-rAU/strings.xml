@@ -80,10 +80,12 @@
     <string name="large_font" msgid="599055175160971446">"Large"</string>
     <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"Make smaller"</string>
     <string name="font_size_make_larger_desc" msgid="4316986572233686061">"Make larger"</string>
+    <!-- no translation found for font_size_preview_text (4818424565068376732) -->
+    <skip />
     <string name="font_size_preview_text_headline" msgid="7955317408475392247">"Sample text"</string>
-    <string name="font_size_preview_text_title" msgid="4762429961714563135">"Twenty Thousand Leagues Under The Sea"</string>
-    <string name="font_size_preview_text_subtitle" msgid="5712012075615701561">"Chapter 23: The Coral Kingdom"</string>
-    <string name="font_size_preview_text_body" msgid="1608889593334414309">"The next day I woke with my head singularly clear. To my great surprise, I was in my own room. My companions, no doubt, had been reinstated in their cabin, without having perceived it any more than I. Of what had passed during the night they were as ignorant as I was, and to penetrate this mystery I only reckoned upon the chances of the future.\nI then thought of quitting my room. Was I free again or a prisoner? Quite free. I opened the door, went to the half deck, went up the central stairs. The panels, shut the evening before, were open. I went on to the platform.\nNed Land and Conseil waited there for me. I questioned them; they knew nothing. Lost in a heavy sleep in which they had been totally unconscious, they had been astonished at finding themselves in their cabin."</string>
+    <string name="font_size_preview_text_title" msgid="1310536233106975546">"The Wonderful Wizard of Oz"</string>
+    <string name="font_size_preview_text_subtitle" msgid="4231671528173110093">"Chapter 11: The Wonderful Emerald City of Oz"</string>
+    <string name="font_size_preview_text_body" msgid="1250552239682375643">"Even with eyes protected by the green spectacles Dorothy and her friends were at first dazzled by the brilliancy of the wonderful City. The streets were lined with beautiful houses all built of green marble and studded everywhere with sparkling emeralds. They walked over a pavement of the same green marble, and where the blocks were joined together were rows of emeralds, set closely and glittering in the brightness of the sun. The window panes were of green glass; even the sky above the City had a green tint and the rays of the sun were green. \n\nThere were many people, men, women and children, walking about, and these were all dressed in green clothes and had greenish skins. They looked at Dorothy and her strangely assorted company with wondering eyes and the children all ran away and hid behind their mothers when they saw the Lion; but no one spoke to them. Many shops stood in the street and Dorothy saw that everything in them was green. Green candy and green pop-corn were offered for sale, as well as green shoes, green hats and green clothes of all sorts. At one place a man was selling green lemonade and when the children bought it Dorothy could see that they paid for it with green pennies. \n\nThere seemed to be no horses nor animals of any kind; the men carried things around in little green carts, which they pushed before them. Everyone seemed happy and contented and prosperous."</string>
     <string name="font_size_save" msgid="3450855718056759095">"OK"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"USB storage"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"SD card"</string>
@@ -237,9 +239,14 @@
     <string name="pref_title_lang_selection" msgid="5696814792962878791">"Language preference"</string>
     <string name="locale_remove_menu" msgid="7651301406723638854">"Remove"</string>
     <string name="add_a_language" msgid="2330538812283783022">"Add a language"</string>
-    <string name="dlg_remove_locales_title" msgid="4143034933365516195">"Remove from your language preference?"</string>
-    <string name="dlg_remove_locales_error_title" msgid="463635546627235043">"Language removal error"</string>
-    <string name="dlg_remove_locales_error_message" msgid="7108948386818227115">"Can’t remove all the languages, you should leave at least one."</string>
+    <plurals name="dlg_remove_locales_title" formatted="false" msgid="4276642359346122396">
+      <item quantity="other">Remove selected languages?</item>
+      <item quantity="one">Remove selected language?</item>
+    </plurals>
+    <string name="dlg_remove_locales_message" msgid="5690839673639747130">"Text will be displayed in another language"</string>
+    <string name="dlg_remove_locales_error_title" msgid="2653242337224911425">"Can’t remove all languages"</string>
+    <string name="dlg_remove_locales_error_message" msgid="6697381512654262821">"Keep at least one preferred language"</string>
+    <string name="locale_not_translated" msgid="516862628177166755">"May not be available in some apps"</string>
     <string name="activity_picker_label" msgid="6295660302548177109">"Choose activity"</string>
     <string name="device_info_label" msgid="6551553813651711205">"Device info"</string>
     <string name="display_label" msgid="8074070940506840792">"Screen"</string>
@@ -807,7 +814,8 @@
     <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> portable Wi‑Fi hotspot"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"Android Hotspot"</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Wi-Fi Calling"</string>
-    <string name="wifi_calling_suggestion_title" msgid="124563351958807514">"Enable Wi-Fi Calling"</string>
+    <string name="wifi_calling_suggestion_title" msgid="9008010480466359578">"Turn on Wi-Fi Calling"</string>
+    <string name="wifi_calling_suggestion_summary" msgid="3765923249566552233">"Use Wi-Fi instead of mobile network"</string>
     <string name="wifi_calling_mode_title" msgid="2164073796253284289">"Calling preference"</string>
     <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Wi-Fi Calling mode"</string>
   <string-array name="wifi_calling_mode_choices">
@@ -888,7 +896,8 @@
     <string name="screen_timeout_title" msgid="5130038655092628247">"Screen turns off"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"After <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> of inactivity"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Wallpaper"</string>
-    <string name="wallpaper_suggestion_title" msgid="1134468474328980088">"Set up wallpaper"</string>
+    <string name="wallpaper_suggestion_title" msgid="8583988696513822528">"Change wallpaper"</string>
+    <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Personalise your screen"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Choose wallpaper from"</string>
     <string name="screensaver_settings_title" msgid="3349790120327233241">"Daydream"</string>
     <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"When docked or asleep and charging"</string>
@@ -1630,6 +1639,10 @@
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Power button ends call"</string>
     <string name="accessibility_toggle_speak_password_preference_title" msgid="5986628515113204844">"Speak passwords"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"Large mouse pointer"</string>
+    <!-- no translation found for accessibility_toggle_master_mono_title (4363806997971905302) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_master_mono_summary (5634277025251530927) -->
+    <skip />
     <string name="accessibility_long_press_timeout_preference_title" msgid="4068253727586393334">"Tap &amp; hold delay"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Colour inversion"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="8658240868230680912">"(Experimental) May affect performance"</string>
@@ -2463,9 +2476,6 @@
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Default notification ringtone"</string>
     <string name="alarm_ringtone_title" msgid="2015124067611102995">"Default alarm ringtone"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Also vibrate for calls"</string>
-    <string name="master_mono_title" msgid="8123291759393322551">"Mono playback"</string>
-    <string name="master_mono_on" msgid="53180785336592938">"Always play back audio in mono"</string>
-    <string name="master_mono_off" msgid="1232052197508060475">"Always play back audio in mono"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Other sounds"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Dial pad tones"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Screen locking sounds"</string>
@@ -2481,7 +2491,8 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Vibrate"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Priority only allows"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Automatic rules"</string>
-    <string name="zen_mode_automation_suggestion_title" msgid="4695313598703536699">"Set up Do Not Disturb Schedule"</string>
+    <string name="zen_mode_automation_suggestion_title" msgid="5026815860958316126">"Set Do Not Disturb schedule"</string>
+    <string name="zen_mode_automation_suggestion_summary" msgid="8554080399360506596">"Silence your device at certain times"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"Priority only"</string>
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Alarms only"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"Total silence"</string>
@@ -2490,7 +2501,7 @@
     <string name="configure_notification_settings" msgid="3558846607192693233">"Configure notifications"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"Advanced"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"Pulse notification light"</string>
-    <string name="lock_screen_notifications_title" msgid="9118805570775519455">"When device is locked"</string>
+    <string name="lock_screen_notifications_title" msgid="6173076173408887213">"On the lock screen"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Show all notification content"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"Hide sensitive notification content"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Don\'t show notifications at all"</string>
@@ -2505,11 +2516,14 @@
     <string name="notification_importance_title" msgid="848692592679312666">"Importance"</string>
     <string name="notification_importance_none" msgid="3173515479356106227">"Not set"</string>
     <string name="notification_importance_blocked" msgid="4764559498517003405">"Blocked: Never show these notifications"</string>
-    <string name="notification_importance_low" msgid="9187046927980498942">"Low: Silently show at the bottom of the notification list"</string>
-    <string name="notification_importance_default" msgid="4924370061477615318">"Normal: Silently show these notifications"</string>
-    <string name="notification_importance_high" msgid="1918112760912803959">"High: Show at the top of the notifications list and make sound"</string>
-    <string name="notification_importance_max" msgid="5501185277889361261">"Urgent: Peek onto the screen and make sound"</string>
+    <string name="notification_importance_min" msgid="2370444628448134377">"Min: Silently show at the bottom of the notification list"</string>
+    <string name="notification_importance_low" msgid="979932751695283877">"Low: Silently show these notifications"</string>
+    <string name="notification_importance_default" msgid="8789180840561778039">"Normal: Allow these notification to make sounds"</string>
+    <string name="notification_importance_high" msgid="2401104039256903538">"High: Peek on to the screen and allow sound"</string>
+    <string name="notification_importance_max" msgid="6036245535555486319">"Urgent: Show at the top of the notifications list, peek onto the screen and allow sound"</string>
     <string name="importance_reset" msgid="7458420788555607007">"Reset"</string>
+    <string name="show_silently" msgid="2222875799232222056">"Show silently"</string>
+    <string name="show_silently_summary" msgid="7616604629123146565">"Don\'t make sound, vibrate or peek these notifications into view on the current screen."</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"Notification assistant"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Notification access"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Apps cannot read notifications"</string>
@@ -2715,7 +2729,8 @@
     <string name="app_link_open_ask" msgid="7800878430190575991">"Ask every time"</string>
     <string name="app_link_open_never" msgid="3407647600352398543">"Don’t open in this app"</string>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Not recognised"</string>
-    <string name="default_apps_title" msgid="1854974637597514435">"Default Apps"</string>
+    <string name="default_apps_title" msgid="1660450272764331490">"Default"</string>
+    <string name="default_for_work" msgid="9152194239366247932">"Default for work"</string>
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"Assist &amp; voice input"</string>
     <string name="default_assist_title" msgid="8868488975409247921">"Assist app"</string>
     <string name="default_assist_none" msgid="3709083569608735487">"None"</string>
@@ -2947,12 +2962,17 @@
     <string name="lockpattern_settings_require_pattern_before_startup_summary" msgid="7873036097628404476">"Require pattern to start up your device. While off, this device can\'t receive calls, messages, notifications or alarms."</string>
     <string name="lockpattern_settings_require_pin_before_startup_summary" msgid="6022831284097476933">"Require PIN to start up your device. While off, this device can\'t receive calls, messages, notifications or alarms."</string>
     <string name="lockpattern_settings_require_password_before_startup_summary" msgid="6818285221244966231">"Require password to start up your device. While off, this device can\'t receive calls, messages, notifications or alarms."</string>
-    <string name="suggestion_additional_fingerprints" msgid="3683327800671241982">"Additional Fingerprints"</string>
+    <string name="suggestion_additional_fingerprints" msgid="2214281455363797037">"Add another fingerprint"</string>
+    <string name="suggestion_additional_fingerprints_summary" msgid="2298186278816316599">"Unlock with a different fingerprint"</string>
     <string name="battery_saver_on_summary" msgid="9072203872401530722">"On / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_off_summary" msgid="8309471955051162327">"Off / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_desc_turn_on_auto_never" msgid="6715896635178578813">"Never turn on automatically"</string>
     <string name="battery_saver_desc_turn_on_auto_pct" msgid="7472323223085636533">"Turn on automatically at %1$s battery"</string>
     <string name="not_battery_optimizing" msgid="5362861851864837617">"Not using battery optimisation"</string>
+    <string name="lockscreen_remote_input" msgid="969871538778211843">"If device is locked, prevent typing replies or other text in notifications"</string>
+    <string name="default_spell_checker" msgid="8506899870026026660">"Default spell checker"</string>
+    <string name="choose_spell_checker" msgid="6596539862291699367">"Choose spell checker"</string>
+    <string name="spell_checker_not_selected" msgid="8871083796179200696">"Not selected"</string>
     <string name="notification_log_no_title" msgid="5678029849672024215">"(none)"</string>
     <string name="notification_log_details_delimiter" msgid="3116559361552416747">": "</string>
     <string name="notification_log_details_package" msgid="2596495677039100284">"pkg"</string>
@@ -2979,4 +2999,7 @@
     <string name="notification_log_details_vibrate" msgid="6890065466625335940">"vibrate"</string>
     <string name="notification_log_details_default" msgid="2345249399796730861">"Default"</string>
     <string name="notification_log_details_none" msgid="184131801230614059">"None"</string>
+    <string name="special_access" msgid="8275242424094109976">"Special access"</string>
+    <string name="confirm_convert_to_fbe_warning" msgid="1487005506049137659">"Really wipe user data and convert to file encryption?"</string>
+    <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"Wipe and convert"</string>
 </resources>

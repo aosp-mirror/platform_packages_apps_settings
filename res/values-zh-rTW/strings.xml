@@ -80,10 +80,12 @@
     <string name="large_font" msgid="599055175160971446">"大"</string>
     <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"縮小"</string>
     <string name="font_size_make_larger_desc" msgid="4316986572233686061">"放大"</string>
+    <!-- no translation found for font_size_preview_text (4818424565068376732) -->
+    <skip />
     <string name="font_size_preview_text_headline" msgid="7955317408475392247">"範例文字"</string>
-    <string name="font_size_preview_text_title" msgid="4762429961714563135">"海底兩萬哩"</string>
-    <string name="font_size_preview_text_subtitle" msgid="5712012075615701561">"第 23 章：珊瑚王國"</string>
-    <string name="font_size_preview_text_body" msgid="1608889593334414309">"隔天醒來時，我的腦袋異常清醒。出乎我意料之外的是，我竟然在自己的房間裡。我的同伴們一定也都在不知不覺中回到了各自的船艙，而且和我一樣，對於昨晚發生的事一無所知。想要解開整件事情的謎團，我想只能等待日後的良機了。\n我內心想著要走出房間。我重獲自由了嗎？還是身陷囹圄？結果是自由得很。我打開房門，前往半甲板，然後走上中央樓梯。昨晚關上的門板現在是開著的。我踏上平台。\n尼德蘭和貢協議正在那等著。我向他們提出心中的疑惑，但沒有獲得任何答案。他們睡得很沉，徹底失去意識，醒來時很驚訝地發現身處自己的船艙。"</string>
+    <string name="font_size_preview_text_title" msgid="1310536233106975546">"綠野仙蹤"</string>
+    <string name="font_size_preview_text_subtitle" msgid="4231671528173110093">"第 11 章：奧茲國的翡翠城"</string>
+    <string name="font_size_preview_text_body" msgid="1250552239682375643">"即使配戴著綠色眼鏡保護雙眼，這座美麗城市閃耀的光芒還是令桃樂絲和她的朋友們目眩神迷。街道兩側佇立著以碧綠大理石建造的華美房屋，上頭鑲滿光彩奪目的翡翠。街道路面同樣是以碧綠大理石鋪砌而成，石板接合處嵌有一排排緊密相連的翡翠，在陽光的照耀下閃閃發亮。房屋窗面採用翠綠玻璃，襯著城市上方的淡綠天空，就連陽光也透出青綠色調。\n\n城內居民眾多，無論男女老幼全都穿著綠色衣物，甚至皮膚也帶有綠色光澤。他們充滿好奇地盯著桃樂絲和她那群外貌迥異的夥伴，只是孩子們一看到獅子便飛快躲到母親身後；然而，一直沒有任何人開口與他們交談。街道上的商店五花八門，桃樂絲發現這些商店兜售的商品，從糖果和爆米花到鞋子、帽子和各式衣物，全都是綠色的。有位小販賣著綠色檸檬汁，當小孩掏錢購買時，桃樂絲清楚看見錢幣也是綠色的。\n\n城裡似乎沒有馬匹或任何動物；居民們都是推著綠色小推車來搬運物品。每個人看起來都相當幸福且富足。"</string>
     <string name="font_size_save" msgid="3450855718056759095">"確定"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"USB 儲存裝置"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"SD 卡"</string>
@@ -237,9 +239,14 @@
     <string name="pref_title_lang_selection" msgid="5696814792962878791">"語言偏好設定"</string>
     <string name="locale_remove_menu" msgid="7651301406723638854">"移除"</string>
     <string name="add_a_language" msgid="2330538812283783022">"新增語言"</string>
-    <string name="dlg_remove_locales_title" msgid="4143034933365516195">"要將這些語言從偏好設定中移除嗎？"</string>
-    <string name="dlg_remove_locales_error_title" msgid="463635546627235043">"語言移除作業錯誤"</string>
-    <string name="dlg_remove_locales_error_message" msgid="7108948386818227115">"無法移除所有語言，您必須保留至少一種語言。"</string>
+    <plurals name="dlg_remove_locales_title" formatted="false" msgid="4276642359346122396">
+      <item quantity="other">要移除所選語言嗎？</item>
+      <item quantity="one">要移除所選語言嗎？</item>
+    </plurals>
+    <string name="dlg_remove_locales_message" msgid="5690839673639747130">"文字將以其他語言顯示"</string>
+    <string name="dlg_remove_locales_error_title" msgid="2653242337224911425">"無法移除所有語言"</string>
+    <string name="dlg_remove_locales_error_message" msgid="6697381512654262821">"請保留至少一種偏好語言"</string>
+    <string name="locale_not_translated" msgid="516862628177166755">"部分應用程式可能不提供支援"</string>
     <string name="activity_picker_label" msgid="6295660302548177109">"選擇活動"</string>
     <string name="device_info_label" msgid="6551553813651711205">"裝置資訊"</string>
     <string name="display_label" msgid="8074070940506840792">"螢幕"</string>
@@ -412,8 +419,7 @@
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"保護您的裝置"</string>
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"以指紋解鎖"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"選擇螢幕鎖定方式"</string>
-    <!-- no translation found for lock_settings_picker_title_profile (8283230482525023311) -->
-    <skip />
+    <string name="lock_settings_picker_title_profile" msgid="8283230482525023311">"選擇設定檔螢幕鎖定方式"</string>
     <string name="setup_lock_settings_picker_title" msgid="1572244299605153324">"保護您的手機"</string>
     <string name="setup_lock_settings_picker_fingerprint_message" msgid="2431588439043969764">"使用複雜的圖形、PIN 碼或密碼會比感應指紋來得安全。請額外設定螢幕鎖定方式以確保安全。"</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"只要啟用裝置保護功能，即可防止他人在未獲您授權的情況下使用這台平板電腦。請選擇您要使用的螢幕鎖定方式。"</string>
@@ -421,8 +427,7 @@
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"只要啟用裝置保護功能，即可防止他人在未獲您授權的情況下使用這支手機。請選擇您要使用的螢幕鎖定方式。"</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"選擇您的備用螢幕鎖定方法"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"螢幕鎖定"</string>
-    <!-- no translation found for unlock_set_unlock_launch_picker_title_profile (4270157368864693564) -->
-    <skip />
+    <string name="unlock_set_unlock_launch_picker_title_profile" msgid="4270157368864693564">"設定檔螢幕鎖定"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"變更鎖定畫面"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"變更或停用圖案、PIN 或密碼安全性"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"選擇您要鎖定螢幕的方式"</string>
@@ -809,7 +814,8 @@
     <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> 可攜式 Wi-Fi 無線基地台"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"Android 無線基地台"</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Wi-Fi 通話"</string>
-    <string name="wifi_calling_suggestion_title" msgid="124563351958807514">"啟用 Wi-Fi 通話功能"</string>
+    <string name="wifi_calling_suggestion_title" msgid="9008010480466359578">"開啟 Wi-Fi 通話功能"</string>
+    <string name="wifi_calling_suggestion_summary" msgid="3765923249566552233">"使用 Wi-Fi 而非行動網路"</string>
     <string name="wifi_calling_mode_title" msgid="2164073796253284289">"撥號偏好"</string>
     <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Wi-Fi 通話模式"</string>
   <string-array name="wifi_calling_mode_choices">
@@ -890,7 +896,8 @@
     <string name="screen_timeout_title" msgid="5130038655092628247">"螢幕關閉時"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"閒置 <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>後"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"桌布"</string>
-    <string name="wallpaper_suggestion_title" msgid="1134468474328980088">"設定桌布"</string>
+    <string name="wallpaper_suggestion_title" msgid="8583988696513822528">"變更桌布"</string>
+    <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"設定個人化螢幕"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"選擇桌布來源"</string>
     <string name="screensaver_settings_title" msgid="3349790120327233241">"休眠模式"</string>
     <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"安置於座架上或休眠及充電時"</string>
@@ -1322,8 +1329,7 @@
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"需要解鎖圖案"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1165707416664252167">"必須畫出解鎖圖案以解鎖螢幕"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="2615606088906120711">"顯示解鎖圖案"</string>
-    <!-- no translation found for lockpattern_settings_enable_visible_pattern_title_profile (4864525074768391381) -->
-    <skip />
+    <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="4864525074768391381">"顯示設定檔解鎖圖形"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="4389015658335522989">"輕按時震動"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"按下電源按鈕立即鎖定"</string>
     <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"由「<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>」維持解鎖狀態時除外"</string>
@@ -1335,18 +1341,13 @@
     <string name="lock_settings_profile_title" msgid="7819021341281339182">"Work 設定檔"</string>
     <string name="lock_settings_profile_label" msgid="4423909470339292809">"Work 設定檔安全性"</string>
     <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Work 設定檔螢幕鎖定"</string>
-    <!-- no translation found for lock_settings_profile_unification_title (6888460471428172592) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_summary (3481269258202840437) -->
-    <skip />
+    <string name="lock_settings_profile_unification_title" msgid="6888460471428172592">"使用相同的螢幕鎖定"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="3481269258202840437">"要將裝置的螢幕鎖定改成跟 Work 設定檔一致嗎？"</string>
     <string name="lock_settings_profile_unification_dialog_title" msgid="8938936484754025065">"確定要使用相同的螢幕鎖定嗎？"</string>
     <string name="lock_settings_profile_unification_dialog_body" msgid="1697316592639374194">"如果您在裝置上使用這項鎖定措施，Work 設定檔將套用您的 IT 管理員所設定的所有螢幕鎖定相關政策。\n確定要在裝置上使用相同的螢幕鎖定嗎？"</string>
-    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_body (5476809856421622503) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_confirm (2372867057465188766) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unified_summary (9008819078132993492) -->
-    <skip />
+    <string name="lock_settings_profile_unification_dialog_uncompliant_body" msgid="5476809856421622503">"您的 Work 螢幕鎖定不符合貴機構的安全性標準。\n您可以為自己的裝置和 Work 設定檔設定新的螢幕鎖定。但請注意，您裝置的螢幕鎖定同樣必須遵守所有相關的 Work 螢幕鎖定政策。"</string>
+    <string name="lock_settings_profile_unification_dialog_uncompliant_confirm" msgid="2372867057465188766">"變更鎖定方式"</string>
+    <string name="lock_settings_profile_unified_summary" msgid="9008819078132993492">"與裝置的螢幕鎖定一致"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"管理應用程式"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"管理和移除已安裝的應用程式"</string>
     <string name="applications_settings" msgid="1721442176406964682">"應用程式"</string>
@@ -1638,6 +1639,10 @@
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"按電源鍵結束通話"</string>
     <string name="accessibility_toggle_speak_password_preference_title" msgid="5986628515113204844">"說出密碼"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"大型滑鼠游標"</string>
+    <!-- no translation found for accessibility_toggle_master_mono_title (4363806997971905302) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_master_mono_summary (5634277025251530927) -->
+    <skip />
     <string name="accessibility_long_press_timeout_preference_title" msgid="4068253727586393334">"按住的延遲時間"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"色彩反轉"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="8658240868230680912">"(實驗性) 可能會對效能造成影響"</string>
@@ -2456,8 +2461,7 @@
     <string name="keywords_color_temperature" msgid="2688947724153266364">"色溫 D65 D73 白色 黃色 藍色 暖 冷"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"滑動解鎖, 密碼, 圖形, PIN"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"Work 驗證、Work、設定檔"</string>
-    <!-- no translation found for keywords_unification (1922900767659821025) -->
-    <skip />
+    <string name="keywords_unification" msgid="1922900767659821025">"Work 設定檔, 受管理設定檔, 整合, 整合, Work, 設定檔"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"設定 Wi-Fi NFC 標記"</string>
     <string name="write_tag" msgid="8571858602896222537">"寫入"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"輕觸標記即可寫入..."</string>
@@ -2476,9 +2480,6 @@
     <string name="notification_ringtone_title" msgid="3361201340352664272">"預設通知鈴聲"</string>
     <string name="alarm_ringtone_title" msgid="2015124067611102995">"預設鬧鐘鈴聲"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"來電時同時震動"</string>
-    <string name="master_mono_title" msgid="8123291759393322551">"單聲道播放"</string>
-    <string name="master_mono_on" msgid="53180785336592938">"一律以單聲道播放音訊"</string>
-    <string name="master_mono_off" msgid="1232052197508060475">"一律以單聲道播放音訊"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"其他音效"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"撥號鍵盤音效"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"螢幕鎖定音效"</string>
@@ -2494,7 +2495,8 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"震動"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"僅允許優先通知"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"自動規則"</string>
-    <string name="zen_mode_automation_suggestion_title" msgid="4695313598703536699">"設定「零打擾」時間表"</string>
+    <string name="zen_mode_automation_suggestion_title" msgid="5026815860958316126">"設定「零打擾」時間表"</string>
+    <string name="zen_mode_automation_suggestion_summary" msgid="8554080399360506596">"在特定時間將裝置設為靜音"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"僅限優先通知"</string>
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"僅允許鬧鐘"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"完全靜音"</string>
@@ -2503,7 +2505,7 @@
     <string name="configure_notification_settings" msgid="3558846607192693233">"設定通知"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"進階"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"閃爍燈光通知"</string>
-    <string name="lock_screen_notifications_title" msgid="9118805570775519455">"裝置鎖定時"</string>
+    <string name="lock_screen_notifications_title" msgid="6173076173408887213">"在螢幕鎖定畫面上"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"顯示所有通知內容"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"隱藏機密通知內容"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"完全不顯示通知"</string>
@@ -2518,11 +2520,19 @@
     <string name="notification_importance_title" msgid="848692592679312666">"重要性"</string>
     <string name="notification_importance_none" msgid="3173515479356106227">"未設定"</string>
     <string name="notification_importance_blocked" msgid="4764559498517003405">"封鎖：一律不顯示這些通知"</string>
-    <string name="notification_importance_low" msgid="9187046927980498942">"低：顯示在通知清單底端，但不發出任何音效"</string>
-    <string name="notification_importance_default" msgid="4924370061477615318">"一般：顯示這些通知，但不發出任何音效"</string>
-    <string name="notification_importance_high" msgid="1918112760912803959">"高：顯示在通知清單頂端並發出音效"</string>
-    <string name="notification_importance_max" msgid="5501185277889361261">"緊急：短暫顯示在螢幕上並發出音效"</string>
+    <!-- no translation found for notification_importance_min (2370444628448134377) -->
+    <skip />
+    <!-- no translation found for notification_importance_low (979932751695283877) -->
+    <skip />
+    <!-- no translation found for notification_importance_default (8789180840561778039) -->
+    <skip />
+    <!-- no translation found for notification_importance_high (2401104039256903538) -->
+    <skip />
+    <!-- no translation found for notification_importance_max (6036245535555486319) -->
+    <skip />
     <string name="importance_reset" msgid="7458420788555607007">"重設"</string>
+    <string name="show_silently" msgid="2222875799232222056">"無聲顯示"</string>
+    <string name="show_silently_summary" msgid="7616604629123146565">"不要發出音效、震動，也不要在目前畫面上短暫顯示這類通知。"</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"通知小幫手"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"通知存取權"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"應用程式無法讀取通知"</string>
@@ -2728,7 +2738,8 @@
     <string name="app_link_open_ask" msgid="7800878430190575991">"每次都詢問"</string>
     <string name="app_link_open_never" msgid="3407647600352398543">"不要在這個應用程式中開啟"</string>
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"無法識別"</string>
-    <string name="default_apps_title" msgid="1854974637597514435">"預設應用程式"</string>
+    <string name="default_apps_title" msgid="1660450272764331490">"預設"</string>
+    <string name="default_for_work" msgid="9152194239366247932">"Work 預設值"</string>
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"小幫手與語音輸入"</string>
     <string name="default_assist_title" msgid="8868488975409247921">"小幫手應用程式"</string>
     <string name="default_assist_none" msgid="3709083569608735487">"無"</string>
@@ -2864,8 +2875,7 @@
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"縮小"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"放大"</string>
     <string name="screen_zoom_summary_small" msgid="5867245310241621570">"小"</string>
-    <!-- no translation found for screen_zoom_summary_default (2247006805614056507) -->
-    <skip />
+    <string name="screen_zoom_summary_default" msgid="2247006805614056507">"預設"</string>
     <string name="screen_zoom_summary_large" msgid="4835294730065424084">"大"</string>
     <string name="screen_zoom_summary_very_large" msgid="7108563375663670067">"較大"</string>
     <string name="screen_zoom_summary_extremely_large" msgid="7427320168263276227">"最大"</string>
@@ -2961,62 +2971,45 @@
     <string name="lockpattern_settings_require_pattern_before_startup_summary" msgid="7873036097628404476">"必須畫出圖形才能啟動裝置。裝置關閉時無法接收來電、訊息、通知或鬧鐘提醒。"</string>
     <string name="lockpattern_settings_require_pin_before_startup_summary" msgid="6022831284097476933">"必須輸入 PIN 碼才能啟動裝置。裝置關閉時無法接收來電、訊息、通知或鬧鐘提醒。"</string>
     <string name="lockpattern_settings_require_password_before_startup_summary" msgid="6818285221244966231">"必須輸入密碼才能啟動裝置。裝置關閉時無法接收來電、訊息、通知或鬧鐘提醒。"</string>
-    <string name="suggestion_additional_fingerprints" msgid="3683327800671241982">"其他指紋"</string>
+    <string name="suggestion_additional_fingerprints" msgid="2214281455363797037">"新增其他指紋"</string>
+    <string name="suggestion_additional_fingerprints_summary" msgid="2298186278816316599">"使用其他指紋解鎖"</string>
     <string name="battery_saver_on_summary" msgid="9072203872401530722">"已開啟/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_off_summary" msgid="8309471955051162327">"已關閉/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_desc_turn_on_auto_never" msgid="6715896635178578813">"一律不自動開啟"</string>
     <string name="battery_saver_desc_turn_on_auto_pct" msgid="7472323223085636533">"電量為 %1$s 時自動開啟"</string>
     <string name="not_battery_optimizing" msgid="5362861851864837617">"未使用電池效能最佳化功能"</string>
-    <!-- no translation found for notification_log_no_title (5678029849672024215) -->
+    <string name="lockscreen_remote_input" msgid="969871538778211843">"裝置處於鎖定狀態時，禁止在通知中輸入回覆內容或其他文字"</string>
+    <string name="default_spell_checker" msgid="8506899870026026660">"預設拼字檢查工具"</string>
+    <string name="choose_spell_checker" msgid="6596539862291699367">"選擇拼字檢查工具"</string>
+    <!-- no translation found for spell_checker_not_selected (8871083796179200696) -->
     <skip />
-    <!-- no translation found for notification_log_details_delimiter (3116559361552416747) -->
-    <skip />
-    <!-- no translation found for notification_log_details_package (2596495677039100284) -->
-    <skip />
-    <!-- no translation found for notification_log_details_key (2995791937075862968) -->
-    <skip />
-    <!-- no translation found for notification_log_details_group (2430467015200368698) -->
-    <skip />
-    <!-- no translation found for notification_log_details_group_summary (7945543958255585829) -->
-    <skip />
-    <!-- no translation found for notification_log_details_visibility (2552873780715930971) -->
-    <skip />
-    <!-- no translation found for notification_log_details_public_version (4247242364605495240) -->
-    <skip />
-    <!-- no translation found for notification_log_details_priority (8371354971235991398) -->
-    <skip />
-    <!-- no translation found for notification_log_details_importance (2153168790791683139) -->
-    <skip />
-    <!-- no translation found for notification_log_details_explanation (1914295130775393551) -->
-    <skip />
-    <!-- no translation found for notification_log_details_content_intent (1113554570409128083) -->
-    <skip />
-    <!-- no translation found for notification_log_details_delete_intent (905118520685297007) -->
-    <skip />
-    <!-- no translation found for notification_log_details_full_screen_intent (7118560817013522978) -->
-    <skip />
-    <!-- no translation found for notification_log_details_actions (242523930165118066) -->
-    <skip />
-    <!-- no translation found for notification_log_details_title (7177091647508863295) -->
-    <skip />
-    <!-- no translation found for notification_log_details_remoteinput (8328591329858827409) -->
-    <skip />
-    <!-- no translation found for notification_log_details_content_view (6638731378278561786) -->
-    <skip />
-    <!-- no translation found for notification_log_details_extras (4188418723779942047) -->
-    <skip />
-    <!-- no translation found for notification_log_details_icon (8939114059726188218) -->
-    <skip />
-    <!-- no translation found for notification_log_details_parcel (243148037601903212) -->
-    <skip />
-    <!-- no translation found for notification_log_details_ashmem (7241814108477320636) -->
-    <skip />
-    <!-- no translation found for notification_log_details_sound (5506232879598808099) -->
-    <skip />
-    <!-- no translation found for notification_log_details_vibrate (6890065466625335940) -->
-    <skip />
-    <!-- no translation found for notification_log_details_default (2345249399796730861) -->
-    <skip />
-    <!-- no translation found for notification_log_details_none (184131801230614059) -->
-    <skip />
+    <string name="notification_log_no_title" msgid="5678029849672024215">"(無)"</string>
+    <string name="notification_log_details_delimiter" msgid="3116559361552416747">": "</string>
+    <string name="notification_log_details_package" msgid="2596495677039100284">"pkg"</string>
+    <string name="notification_log_details_key" msgid="2995791937075862968">"金鑰"</string>
+    <string name="notification_log_details_group" msgid="2430467015200368698">"群組"</string>
+    <string name="notification_log_details_group_summary" msgid="7945543958255585829">"(摘要)"</string>
+    <string name="notification_log_details_visibility" msgid="2552873780715930971">"顯示設定"</string>
+    <string name="notification_log_details_public_version" msgid="4247242364605495240">"publicVersion"</string>
+    <string name="notification_log_details_priority" msgid="8371354971235991398">"優先順序"</string>
+    <string name="notification_log_details_importance" msgid="2153168790791683139">"重要性"</string>
+    <string name="notification_log_details_explanation" msgid="1914295130775393551">"說明"</string>
+    <string name="notification_log_details_content_intent" msgid="1113554570409128083">"調用請求"</string>
+    <string name="notification_log_details_delete_intent" msgid="905118520685297007">"刪除調用請求"</string>
+    <string name="notification_log_details_full_screen_intent" msgid="7118560817013522978">"全螢幕調用請求"</string>
+    <string name="notification_log_details_actions" msgid="242523930165118066">"動作"</string>
+    <string name="notification_log_details_title" msgid="7177091647508863295">"標題"</string>
+    <string name="notification_log_details_remoteinput" msgid="8328591329858827409">"遠端輸入裝置"</string>
+    <string name="notification_log_details_content_view" msgid="6638731378278561786">"自訂檢視"</string>
+    <string name="notification_log_details_extras" msgid="4188418723779942047">"其他資訊"</string>
+    <string name="notification_log_details_icon" msgid="8939114059726188218">"圖示"</string>
+    <string name="notification_log_details_parcel" msgid="243148037601903212">"包裹大小"</string>
+    <string name="notification_log_details_ashmem" msgid="7241814108477320636">"ashmem"</string>
+    <string name="notification_log_details_sound" msgid="5506232879598808099">"音效"</string>
+    <string name="notification_log_details_vibrate" msgid="6890065466625335940">"震動"</string>
+    <string name="notification_log_details_default" msgid="2345249399796730861">"預設"</string>
+    <string name="notification_log_details_none" msgid="184131801230614059">"無"</string>
+    <string name="special_access" msgid="8275242424094109976">"特別存取權"</string>
+    <string name="confirm_convert_to_fbe_warning" msgid="1487005506049137659">"確定要清除使用者資料並轉換改用加密檔案嗎？"</string>
+    <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"清除並轉換"</string>
 </resources>
