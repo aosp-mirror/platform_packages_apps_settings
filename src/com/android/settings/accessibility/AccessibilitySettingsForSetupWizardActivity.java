@@ -19,6 +19,7 @@ package com.android.settings.accessibility;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -52,6 +53,12 @@ public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivit
     @Override
     public void startPreferencePanel(String fragmentClass, Bundle args, int titleRes,
             CharSequence titleText, Fragment resultTo, int resultRequestCode) {
+        if (!TextUtils.isEmpty(titleText)) {
+            setTitle(titleText);
+        } else if (titleRes > 0) {
+            setTitle(getString(titleRes));
+        }
+
         args.putInt(SettingsPreferenceFragment.HELP_URI_RESOURCE_KEY, 0);
         startPreferenceFragment(Fragment.instantiate(this, fragmentClass, args), true);
     }
