@@ -914,6 +914,9 @@ public class InstalledAppDetails extends AppInfoBase
     }
 
     private boolean hasPermission(String permission) {
+        if (mPackageInfo.requestedPermissions == null) {
+            return false;
+        }
         for (int i = 0; i < mPackageInfo.requestedPermissions.length; i++) {
             if (mPackageInfo.requestedPermissions[i].equals(permission)) {
                 return true;
