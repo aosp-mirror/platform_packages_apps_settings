@@ -116,7 +116,6 @@ public final class Ranking {
 
         // Other wireless settinfs
         sRankMap.put(WirelessSettings.class.getName(), RANK_WIRELESS);
-        sRankMap.put(WifiCallingSettings.class.getName(), RANK_WIRELESS);
 
         // Home
         sRankMap.put(HomeSettings.class.getName(), RANK_HOME);
