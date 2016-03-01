@@ -611,12 +611,26 @@ public class ChooseLockGeneric extends SettingsActivity {
 
         private void removeAllFingerprintTemplatesAndFinish() {
             if (mFingerprintManager != null && mFingerprintManager.isHardwareDetected()
-                    && mFingerprintManager.getEnrolledFingerprints().size() > 0) {
+                    && mFingerprintManager.hasEnrolledFingerprints(mUserId)) {
+                mFingerprintManager.setActiveUser(mUserId);
                 mFingerprintManager.remove(
-                        new Fingerprint(null, 0, 0, 0), mUserId, mRemovalCallback);
-            } else {
-                finish();
+                        new Fingerprint(null, mUserId, 0, 0), mUserId,
+                        new RemovalCallback() {
+                            @Override
+                            public void onRemovalError(Fingerprint fp, int errMsgId,
+                                    CharSequence errString) {
+                                mRemovalCallback.onRemovalError(fp, errMsgId, errString);
+                                mFingerprintManager.setActiveUser(UserHandle.myUserId());
+                            }
+
+                            @Override
+                            public void onRemovalSucceeded(Fingerprint fingerprint) {
+                                mRemovalCallback.onRemovalSucceeded(fingerprint);
+                                mFingerprintManager.setActiveUser(UserHandle.myUserId());
+                            }
+                        });
             }
+            finish();
         }
 
         @Override
@@ -636,7 +650,7 @@ public class ChooseLockGeneric extends SettingsActivity {
         }
 
         private int getResIdForFactoryResetProtectionWarningMessage() {
-            boolean hasFingerprints = mFingerprintManager.hasEnrolledFingerprints();
+            boolean hasFingerprints = mFingerprintManager.hasEnrolledFingerprints(mUserId);
             boolean isProfile = Utils.isManagedProfile(UserManager.get(getActivity()), mUserId);
             switch (mLockPatternUtils.getKeyguardStoredPasswordQuality(mUserId)) {
                 case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
