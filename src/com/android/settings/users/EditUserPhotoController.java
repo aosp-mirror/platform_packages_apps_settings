@@ -37,6 +37,7 @@ import android.provider.ContactsContract.DisplayPhoto;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -166,6 +167,7 @@ public class EditUserPhotoController {
         final int width = Math.max(mImageView.getWidth(), context.getResources()
                 .getDimensionPixelSize(R.dimen.update_user_photo_popup_min_width));
         listPopupWindow.setWidth(width);
+        listPopupWindow.setDropDownGravity(Gravity.START);
 
         listPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
