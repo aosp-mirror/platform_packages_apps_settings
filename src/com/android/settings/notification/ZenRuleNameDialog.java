@@ -31,10 +31,10 @@ public abstract class ZenRuleNameDialog {
 
     private final AlertDialog mDialog;
     private final EditText mEditText;
-    private final String mOriginalRuleName;
+    private final CharSequence mOriginalRuleName;
     private final boolean mIsNew;
 
-    public ZenRuleNameDialog(Context context, String ruleName) {
+    public ZenRuleNameDialog(Context context, CharSequence ruleName) {
         mIsNew = ruleName == null;
         mOriginalRuleName = ruleName;
         final View v = LayoutInflater.from(context).inflate(R.layout.zen_rule_name, null, false);
@@ -52,7 +52,7 @@ public abstract class ZenRuleNameDialog {
                     public void onClick(DialogInterface dialog, int which) {
                         final String newName = trimmedText();
                         if (!mIsNew && mOriginalRuleName != null
-                                && mOriginalRuleName.equalsIgnoreCase(newName)) {
+                                && mOriginalRuleName.equals(newName)) {
                             return;  // no change to an existing rule, just dismiss
                         }
                         onOk(newName);

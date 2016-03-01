@@ -31,7 +31,10 @@ import android.util.Log;
 
 import com.android.settings.RestrictedSettingsFragment;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 abstract public class ZenModeSettingsBase extends RestrictedSettingsFragment {
     protected static final String TAG = "ZenModeSettings";
@@ -41,7 +44,7 @@ abstract public class ZenModeSettingsBase extends RestrictedSettingsFragment {
     private final SettingsObserver mSettingsObserver = new SettingsObserver();
 
     protected Context mContext;
-    protected List<AutomaticZenRule> mRules;
+    protected Set<Map.Entry<String, AutomaticZenRule>> mRules;
     protected int mZenMode;
 
     abstract protected void onZenModeChanged();
@@ -92,16 +95,17 @@ abstract public class ZenModeSettingsBase extends RestrictedSettingsFragment {
         }
     }
 
-    protected AutomaticZenRule addZenRule(AutomaticZenRule rule) {
+    protected String addZenRule(AutomaticZenRule rule) {
+        String id = NotificationManager.from(mContext).addAutomaticZenRule(rule);
         final AutomaticZenRule savedRule =
-                NotificationManager.from(mContext).addAutomaticZenRule(rule);
+                NotificationManager.from(mContext).getAutomaticZenRule(id);
         maybeRefreshRules(savedRule != null, true);
-        return savedRule;
+        return id;
     }
 
-    protected boolean setZenRule(AutomaticZenRule rule) {
+    protected boolean setZenRule(String id, AutomaticZenRule rule) {
         final boolean success =
-                NotificationManager.from(mContext).updateAutomaticZenRule(rule);
+                NotificationManager.from(mContext).updateAutomaticZenRule(id, rule);
         maybeRefreshRules(success, true);
         return success;
     }
@@ -127,8 +131,10 @@ abstract public class ZenModeSettingsBase extends RestrictedSettingsFragment {
         NotificationManager.from(mContext).setZenMode(zenMode, conditionId, TAG);
     }
 
-    private List<AutomaticZenRule> getZenModeRules() {
-        return NotificationManager.from(mContext).getAutomaticZenRules();
+    private Set<Map.Entry<String, AutomaticZenRule>> getZenModeRules() {
+        Map<String, AutomaticZenRule> ruleMap
+                = NotificationManager.from(mContext).getAutomaticZenRules();
+        return ruleMap.entrySet();
     }
 
     private final class SettingsObserver extends ContentObserver {
