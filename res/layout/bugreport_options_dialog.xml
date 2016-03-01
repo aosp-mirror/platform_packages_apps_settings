@@ -18,7 +18,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal" >
+    android:orientation="horizontal"
+    android:paddingStart="20dp"
+    android:paddingEnd="24dp"
+    android:paddingTop="15dp"
+    >
 
     <CheckedTextView
         android:id="@+id/bugreport_option_interactive_title"
@@ -29,7 +33,6 @@
         android:ellipsize="marquee"
         android:gravity="center_vertical"
         android:paddingEnd="?android:attr/dialogPreferredPadding"
-        android:paddingStart="20dp"
         android:text="@*android:string/bugreport_option_interactive_title"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="?android:attr/textColorAlertDialogListItem" />
@@ -40,8 +43,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/bugreport_option_interactive_title"
         android:maxLines="10"
-        android:paddingBottom="8dp"
-        android:paddingStart="52dp"
+        android:paddingBottom="10dp"
+        android:paddingStart="32dp"
         android:paddingEnd="?android:attr/dialogPreferredPadding"
         android:text="@*android:string/bugreport_option_interactive_summary"
         android:textAppearance="?android:attr/textAppearanceListItemSecondary"
@@ -57,7 +60,6 @@
         android:ellipsize="marquee"
         android:gravity="center_vertical"
         android:paddingEnd="?android:attr/dialogPreferredPadding"
-        android:paddingStart="20dp"
         android:text="@*android:string/bugreport_option_full_title"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="?android:attr/textColorAlertDialogListItem" />
@@ -68,8 +70,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/bugreport_option_full_title"
         android:maxLines="10"
-        android:paddingBottom="8dp"
-        android:paddingStart="52dp"
+        android:paddingBottom="10dp"
+        android:paddingStart="32dp"
         android:paddingEnd="?android:attr/dialogPreferredPadding"
         android:text="@*android:string/bugreport_option_full_summary"
         android:textAppearance="?android:attr/textAppearanceListItemSecondary"
