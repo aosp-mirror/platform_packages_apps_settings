@@ -702,7 +702,12 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 dialog.show(getChildFragmentManager(), TAG_UNIFICATION_DIALOG);
             } else {
                 mLockPatternUtils.setSeparateProfileChallengeEnabled(mProfileChallengeUserId, true);
-                createPreferenceHierarchy();
+                Bundle extras = new Bundle();
+                extras.putInt(Intent.EXTRA_USER_ID, mProfileChallengeUserId);
+                startFragment(this,
+                        "com.android.settings.ChooseLockGeneric$ChooseLockGenericFragment",
+                        R.string.lock_settings_picker_title_profile,
+                        SET_OR_CHANGE_LOCK_METHOD_REQUEST_PROFILE, extras);
             }
         } else if (KEY_SHOW_PASSWORD.equals(key)) {
             Settings.System.putInt(getContentResolver(), Settings.System.TEXT_SHOW_PASSWORD,
