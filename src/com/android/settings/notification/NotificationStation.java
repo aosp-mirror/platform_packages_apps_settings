@@ -87,7 +87,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
         }
     };
 
-    private NotificationListenerService mListener = new NotificationListenerService() {
+    private final NotificationListenerService mListener = new NotificationListenerService() {
         @Override
         public void onNotificationPosted(StatusBarNotification sbn, RankingMap ranking) {
             logd("onNotificationPosted: %s", sbn.getNotification());
@@ -130,22 +130,16 @@ public class NotificationStation extends SettingsPreferenceFragment {
         mPm = mContext.getPackageManager();
         mNoMan = INotificationManager.Stub.asInterface(
                 ServiceManager.getService(Context.NOTIFICATION_SERVICE));
-        try {
-            mListener.registerAsSystemService(mContext, new ComponentName(mContext.getPackageName(),
-                    this.getClass().getCanonicalName()), ActivityManager.getCurrentUser());
-        } catch (RemoteException e) {
-            Log.e(TAG, "Cannot register listener", e);
-        }
     }
 
     @Override
-    public void onDetach() {
+    public void onPause() {
         try {
             mListener.unregisterAsSystemService();
         } catch (RemoteException e) {
             Log.e(TAG, "Cannot unregister listener", e);
         }
-        super.onDetach();
+        super.onPause();
     }
 
     @Override
@@ -166,6 +160,12 @@ public class NotificationStation extends SettingsPreferenceFragment {
     public void onResume() {
         logd("onResume()");
         super.onResume();
+        try {
+            mListener.registerAsSystemService(mContext, new ComponentName(mContext.getPackageName(),
+                    this.getClass().getCanonicalName()), ActivityManager.getCurrentUser());
+        } catch (RemoteException e) {
+            Log.e(TAG, "Cannot register listener", e);
+        }
         refreshList();
     }
 
@@ -200,17 +200,17 @@ public class NotificationStation extends SettingsPreferenceFragment {
     }
 
     private static String getTitleString(Notification n) {
-        String title = null;
+        CharSequence title = null;
         if (n.extras != null) {
-            title = n.extras.getString(Notification.EXTRA_TITLE);
+            title = n.extras.getCharSequence(Notification.EXTRA_TITLE);
             if (TextUtils.isEmpty(title)) {
-                title = n.extras.getString(Notification.EXTRA_TEXT);
+                title = n.extras.getCharSequence(Notification.EXTRA_TEXT);
             }
         }
         if (TextUtils.isEmpty(title) && !TextUtils.isEmpty(n.tickerText)) {
-            title = n.tickerText.toString();
+            title = n.tickerText;
         }
-        return title;
+        return String.valueOf(title);
     }
 
     private static String formatPendingIntent(PendingIntent pi) {
