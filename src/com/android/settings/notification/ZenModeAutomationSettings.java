@@ -46,7 +46,9 @@ import com.android.settings.notification.ManagedServiceSettings.Config;
 
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.Map;
 
 public class ZenModeAutomationSettings extends ZenModeSettingsBase {
 
@@ -111,15 +113,15 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
                 AutomaticZenRule rule = new AutomaticZenRule(ruleName, ri.serviceComponent,
                         ri.defaultConditionId, NotificationManager.INTERRUPTION_FILTER_PRIORITY,
                         true);
-                AutomaticZenRule savedRule = addZenRule(rule);
-                if (savedRule != null) {
-                    startActivity(getRuleIntent(ri.settingsAction, null, savedRule.getId()));
+                String savedRuleId = addZenRule(rule);
+                if (savedRuleId != null) {
+                    startActivity(getRuleIntent(ri.settingsAction, null, savedRuleId));
                 }
             }
         }.show();
     }
 
-    private void showDeleteRuleDialog(final String ruleId, final String ruleName) {
+    private void showDeleteRuleDialog(final String ruleId, final CharSequence ruleName) {
         new AlertDialog.Builder(mContext)
                 .setMessage(getString(R.string.zen_mode_delete_rule_confirmation, ruleName))
                 .setNegativeButton(R.string.cancel, null)
@@ -147,8 +149,9 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
         return intent;
     }
 
-    private AutomaticZenRule[] sortedRules() {
-        final AutomaticZenRule[] rt = mRules.toArray(new AutomaticZenRule[mRules.size()]);
+    private Map.Entry<String,AutomaticZenRule>[] sortedRules() {
+        final Map.Entry<String,AutomaticZenRule>[] rt =
+                mRules.toArray(new Map.Entry[mRules.size()]);
         Arrays.sort(rt, RULE_COMPARATOR);
         return rt;
     }
@@ -156,8 +159,8 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
     private void updateControls() {
         final PreferenceScreen root = getPreferenceScreen();
         root.removeAll();
-        final AutomaticZenRule[] sortedRules = sortedRules();
-        for (AutomaticZenRule sortedRule : sortedRules) {
+        final Map.Entry<String,AutomaticZenRule>[] sortedRules = sortedRules();
+        for (Map.Entry<String,AutomaticZenRule> sortedRule : sortedRules) {
             ZenRulePreference pref = new ZenRulePreference(getPrefContext(), sortedRule);
             if (pref.appExists) {
                 root.addPreference(pref);
@@ -247,15 +250,17 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
         return null;
     }
 
-    private static final Comparator<AutomaticZenRule> RULE_COMPARATOR =
-            new Comparator<AutomaticZenRule>() {
+    private static final Comparator<Map.Entry<String,AutomaticZenRule>> RULE_COMPARATOR =
+            new Comparator<Map.Entry<String,AutomaticZenRule>>() {
         @Override
-        public int compare(AutomaticZenRule lhs, AutomaticZenRule rhs) {
-            int byDate = Long.compare(lhs.getCreationTime(), rhs.getCreationTime());
+        public int compare(Map.Entry<String,AutomaticZenRule> lhs,
+                Map.Entry<String,AutomaticZenRule> rhs) {
+            int byDate = Long.compare(lhs.getValue().getCreationTime(),
+                    rhs.getValue().getCreationTime());
             if (byDate != 0) {
                 return byDate;
             } else {
-                return key(lhs).compareTo(key(rhs));
+                return key(lhs.getValue()).compareTo(key(rhs.getValue()));
             }
         }
 
@@ -263,20 +268,22 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
             final int type = ZenModeConfig.isValidScheduleConditionId(rule.getConditionId()) ? 1
                     : ZenModeConfig.isValidEventConditionId(rule.getConditionId()) ? 2
                     : 3;
-            return type + rule.getName();
+            return type + rule.getName().toString();
         }
     };
 
     private class ZenRulePreference extends Preference {
-        final String mName;
+        final CharSequence mName;
         final String mId;
         final boolean appExists;
 
-        public ZenRulePreference(Context context, final AutomaticZenRule rule) {
+        public ZenRulePreference(Context context,
+                final Map.Entry<String, AutomaticZenRule> ruleEntry) {
             super(context);
 
+            final AutomaticZenRule rule = ruleEntry.getValue();
             mName = rule.getName();
-            mId = rule.getId();
+            mId = ruleEntry.getKey();
 
             final boolean isSchedule = ZenModeConfig.isValidScheduleConditionId(
                     rule.getConditionId());

@@ -123,7 +123,7 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase
                 if (zenMode == mRule.getInterruptionFilter()) return false;
                 if (DEBUG) Log.d(TAG, "onPrefChange zenMode=" + zenMode);
                 mRule.setInterruptionFilter(zenMode);
-                setZenRule(mRule);
+                setZenRule(mId, mRule);
                 return true;
             }
         });
@@ -166,7 +166,7 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase
         MetricsLogger.action(mContext, MetricsEvent.ACTION_ZEN_ENABLE_RULE, enabled);
         if (DEBUG) Log.d(TAG, "onSwitchChanged enabled=" + enabled);
         mRule.setEnabled(enabled);
-        setZenRule(mRule);
+        setZenRule(mId, mRule);
         if (enabled) {
             final int toastText = getEnabledToastText();
             if (toastText != 0) {
@@ -182,7 +182,7 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase
 
     protected void updateRule(Uri newConditionId) {
         mRule.setConditionId(newConditionId);
-        setZenRule(mRule);
+        setZenRule(mId, mRule);
     }
 
     @Override
@@ -219,7 +219,7 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase
             @Override
             public void onOk(String ruleName) {
                 mRule.setName(ruleName);
-                setZenRule(mRule);
+                setZenRule(mId, mRule);
             }
         }.show();
     }
@@ -243,7 +243,7 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase
                     public void onClick(DialogInterface dialog, int which) {
                         MetricsLogger.action(mContext, MetricsEvent.ACTION_ZEN_DELETE_RULE_OK);
                         mDeleting = true;
-                        removeZenRule(mRule.getId());
+                        removeZenRule(mId);
                     }
                 })
                 .show();
