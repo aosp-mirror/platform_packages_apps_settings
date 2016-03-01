@@ -280,8 +280,10 @@ public class UserSettings extends SettingsPreferenceFragment
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         int pos = 0;
-        UserManager um = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
-        if (!mUserCaps.mIsAdmin && !um.hasUserRestriction(UserManager.DISALLOW_REMOVE_USER)) {
+        UserManager um = getContext().getSystemService(UserManager.class);
+        boolean allowRemoveUser = !um.hasUserRestriction(UserManager.DISALLOW_REMOVE_USER);
+        boolean canSwitchUsers = um.canSwitchUsers();
+        if (!mUserCaps.mIsAdmin && allowRemoveUser && canSwitchUsers) {
             String nickname = mUserManager.getUserName();
             MenuItem removeThisUser = menu.add(0, MENU_REMOVE_USER, pos++,
                     getResources().getString(R.string.user_remove_user_menu, nickname));
@@ -630,10 +632,13 @@ public class UserSettings extends SettingsPreferenceFragment
     }
 
     private void removeThisUser() {
+        if (!mUserManager.canSwitchUsers()) {
+            Log.w(TAG, "Cannot remove current user when switching is disabled");
+            return;
+        }
         try {
             ActivityManagerNative.getDefault().switchUser(UserHandle.USER_SYSTEM);
-            ((UserManager) getActivity().getSystemService(Context.USER_SERVICE))
-                    .removeUser(UserHandle.myUserId());
+            getContext().getSystemService(UserManager.class).removeUser(UserHandle.myUserId());
         } catch (RemoteException re) {
             Log.e(TAG, "Unable to remove self user");
         }
