@@ -15,7 +15,9 @@
  */
 package com.android.settings.applications;
 
+import android.app.Notification;
 import android.content.pm.PackageManager;
+import android.service.notification.NotificationListenerService;
 
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.NotificationBackend.AppRow;
@@ -68,6 +70,57 @@ public class AppStateNotificationBridge extends AppStateBaseBridge {
             }
             AppRow row = (AppRow) info.extraInfo;
             return row.banned;
+        }
+    };
+
+    public static final AppFilter FILTER_APP_NOTIFICATION_SILENCED = new AppFilter() {
+        @Override
+        public void init() {
+        }
+
+        @Override
+        public boolean filterApp(AppEntry info) {
+            if (info == null) {
+                return false;
+            }
+            AppRow row = (AppRow) info.extraInfo;
+            return row.appImportance > NotificationListenerService.Ranking.IMPORTANCE_NONE
+                    && row.appImportance < NotificationListenerService.Ranking.IMPORTANCE_DEFAULT;
+        }
+    };
+
+    public static final AppFilter FILTER_APP_NOTIFICATION_PRIORITY = new AppFilter() {
+        @Override
+        public void init() {
+        }
+
+        @Override
+        public boolean filterApp(AppEntry info) {
+            return info.extraInfo != null && ((AppRow) info.extraInfo).appBypassDnd;
+        }
+    };
+
+    public static final AppFilter FILTER_APP_NOTIFICATION_HIDE_SENSITIVE = new AppFilter() {
+        @Override
+        public void init() {
+        }
+
+        @Override
+        public boolean filterApp(AppEntry info) {
+            return info.extraInfo != null
+                    && ((AppRow) info.extraInfo).appVisOverride == Notification.VISIBILITY_PRIVATE;
+        }
+    };
+
+    public static final AppFilter FILTER_APP_NOTIFICATION_HIDE_ALL = new AppFilter() {
+        @Override
+        public void init() {
+        }
+
+        @Override
+        public boolean filterApp(AppEntry info) {
+            return info.extraInfo != null
+                    && ((AppRow) info.extraInfo).appVisOverride == Notification.VISIBILITY_SECRET;
         }
     };
 }

@@ -5974,7 +5974,7 @@
     <string name="notification_importance_default">Normal: Allow these notification to make sounds</string>
 
     <!-- [CHAR LIMIT=100] Notification Importance slider: high importance level description -->
-    <string name="notification_importance_high">High: Peek onto the screen and allow sound and allow sound</string>
+    <string name="notification_importance_high">High: Peek onto the screen and allow sound</string>
 
     <!-- [CHAR LIMIT=100] Notification Importance slider: max importance level description -->
     <string name="notification_importance_max">Urgent: Show at the top of the notifications list, peek onto the screen and allow sound</string>
@@ -6434,6 +6434,8 @@
    <string name="notifications_enabled">Normal</string>
    <!-- App notification summary with notifications disabled [CHAR LIMIT=40] -->
    <string name="notifications_disabled">Blocked</string>
+    <!-- App notification summary with notifications disabled [CHAR LIMIT=40] -->
+    <string name="notifications_silenced">Silenced</string>
    <!-- App notification summary with 2 items [CHAR LIMIT=15] -->
    <string name="notifications_two_items"><xliff:g id="notif_state" example="Priority">%1$s</xliff:g> / <xliff:g id="notif_state" example="Priority">%2$s</xliff:g></string>
    <!-- App notification summary with 3 items [CHAR LIMIT=15] -->
@@ -6476,6 +6478,14 @@
     <string name="filter_notif_blocked_apps">Blocked</string>
     <!-- Label for showing apps with domain URLs (data URI with http or https) in list [CHAR LIMIT=30] -->
     <string name="filter_with_domain_urls_apps">With domain URLs</string>
+    <!-- Label for showing apps with priority notifications in list [CHAR LIMIT=30] -->
+    <string name="filter_notif_priority_apps">Overrides Do Not Disturb</string>
+    <!-- Label for showing apps redacting sensitive notifications in list [CHAR LIMIT=30] -->
+    <string name="filter_notif_sensitive_apps">No sensitive content on lock screen</string>
+    <!-- Label for showing apps hiding notifications from lockscreen [CHAR LIMIT=30] -->
+    <string name="filter_notif_hide_notifications_apps">Never shown on lock screen</string>
+    <!-- Filter label for apps that the user has silenced [CHAR LIMIT=40] -->
+    <string name="filter_notif_silent">Shown silently</string>
 
     <!-- Title for advanced application management settings [CHAR LIMIT=30] -->
     <string name="advanced_apps">Advanced</string>
