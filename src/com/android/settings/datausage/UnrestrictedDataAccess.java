@@ -20,32 +20,75 @@ import android.os.Bundle;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import com.android.settings.InstrumentedFragment;
+import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.AppStateBaseBridge;
 import com.android.settingslib.applications.ApplicationsState;
+import com.android.settingslib.applications.ApplicationsState.AppEntry;
+import com.android.settingslib.applications.ApplicationsState.AppFilter;
 
 import java.util.ArrayList;
 
 public class UnrestrictedDataAccess extends SettingsPreferenceFragment
         implements ApplicationsState.Callbacks, AppStateBaseBridge.Callback, Preference.OnPreferenceChangeListener {
 
+    private static final int MENU_SHOW_SYSTEM = Menu.FIRST + 42;
+    private static final String EXTRA_SHOW_SYSTEM = "show_system";
     private ApplicationsState mApplicationsState;
     private AppStateDataUsageBridge mDataUsageBridge;
     private ApplicationsState.Session mSession;
     private DataSaverBackend mDataSaverBackend;
+    private boolean mShowSystem;
+    private boolean mExtraLoaded;
+    private AppFilter mFilter;
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         setPreferenceScreen(getPreferenceManager().createPreferenceScreen(getContext()));
-        getPreferenceScreen().setOrderingAsAdded(false);
         mApplicationsState = ApplicationsState.getInstance(
                 (Application) getContext().getApplicationContext());
         mDataSaverBackend = new DataSaverBackend(getContext());
         mDataUsageBridge = new AppStateDataUsageBridge(mApplicationsState, this, mDataSaverBackend);
         mSession = mApplicationsState.newSession(this);
+        mShowSystem = icicle != null && icicle.getBoolean(EXTRA_SHOW_SYSTEM);
+        mFilter = mShowSystem ? ApplicationsState.FILTER_ALL_ENABLED
+                : ApplicationsState.FILTER_DOWNLOADED_AND_LAUNCHER;
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.add(Menu.NONE, MENU_SHOW_SYSTEM, Menu.NONE,
+                mShowSystem ? R.string.menu_hide_system : R.string.menu_show_system);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case MENU_SHOW_SYSTEM:
+                mShowSystem = !mShowSystem;
+                item.setTitle(mShowSystem ? R.string.menu_hide_system : R.string.menu_show_system);
+                mFilter = mShowSystem ? ApplicationsState.FILTER_ALL_ENABLED
+                        : ApplicationsState.FILTER_DOWNLOADED_AND_LAUNCHER;
+                if (mExtraLoaded) {
+                    rebuild();
+                }
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(EXTRA_SHOW_SYSTEM, mShowSystem);
     }
 
     @Override
@@ -77,23 +120,15 @@ public class UnrestrictedDataAccess extends SettingsPreferenceFragment
 
     @Override
     public void onExtraInfoUpdated() {
-        ArrayList<ApplicationsState.AppEntry> apps = mSession.getAllApps();
-        final int N = apps.size();
-        for (int i = 0; i < N; i++) {
-            ApplicationsState.AppEntry entry = apps.get(i);
-            String key = entry.info.packageName + "|" + entry.info.uid;
-            AccessPreference preference = (AccessPreference) findPreference(key);
-            if (preference == null) {
-                preference = new AccessPreference(getContext(), entry);
-                preference.setKey(key);
-                preference.setOnPreferenceChangeListener(this);
-                getPreferenceScreen().addPreference(preference);
-            }
-            AppStateDataUsageBridge.DataUsageState state =
-                    (AppStateDataUsageBridge.DataUsageState) entry.extraInfo;
-            preference.setChecked(state.isDataSaverWhitelisted);
+        mExtraLoaded = true;
+        rebuild();
+    }
+
+    private void rebuild() {
+        ArrayList<AppEntry> apps = mSession.rebuild(mFilter, ApplicationsState.ALPHA_COMPARATOR);
+        if (apps != null) {
+            onRebuildComplete(apps);
         }
-        setLoading(false, true);
     }
 
     @Override
@@ -108,7 +143,24 @@ public class UnrestrictedDataAccess extends SettingsPreferenceFragment
 
     @Override
     public void onRebuildComplete(ArrayList<ApplicationsState.AppEntry> apps) {
-
+        cacheRemoveAllPrefs(getPreferenceScreen());
+        final int N = apps.size();
+        for (int i = 0; i < N; i++) {
+            ApplicationsState.AppEntry entry = apps.get(i);
+            String key = entry.info.packageName + "|" + entry.info.uid;
+            AccessPreference preference = (AccessPreference) getCachedPreference(key);
+            if (preference == null) {
+                preference = new AccessPreference(getContext(), entry);
+                preference.setKey(key);
+                preference.setOnPreferenceChangeListener(this);
+                getPreferenceScreen().addPreference(preference);
+            } else {
+                preference.reuse();
+            }
+            preference.setOrder(i);
+        }
+        setLoading(false, true);
+        removeCachedPrefs(getPreferenceScreen());
     }
 
     @Override
@@ -164,20 +216,31 @@ public class UnrestrictedDataAccess extends SettingsPreferenceFragment
             setTitle(entry.label);
             setChecked(((AppStateDataUsageBridge.DataUsageState) entry.extraInfo)
                     .isDataSaverWhitelisted);
+            if (mEntry.icon != null) {
+                setIcon(mEntry.icon);
+            }
+        }
+
+        public void reuse() {
+            setTitle(mEntry.label);
+            setChecked(((AppStateDataUsageBridge.DataUsageState) mEntry.extraInfo)
+                    .isDataSaverWhitelisted);
         }
 
         @Override
         public void onBindViewHolder(PreferenceViewHolder holder) {
-            holder.itemView.post(new Runnable() {
-                @Override
-                public void run() {
-                    // Ensure we have an icon before binding.
-                    mApplicationsState.ensureIcon(mEntry);
-                    // This might trigger us to bind again, but it gives an easy way to only load the icon
-                    // once its needed, so its probably worth it.
-                    setIcon(mEntry.icon);
-                }
-            });
+            if (mEntry.icon == null) {
+                holder.itemView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Ensure we have an icon before binding.
+                        mApplicationsState.ensureIcon(mEntry);
+                        // This might trigger us to bind again, but it gives an easy way to only
+                        // load the icon once its needed, so its probably worth it.
+                        setIcon(mEntry.icon);
+                    }
+                });
+            }
             super.onBindViewHolder(holder);
         }
     }
