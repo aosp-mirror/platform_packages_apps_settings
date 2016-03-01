@@ -36,7 +36,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.RemoteException;
-import android.os.UserHandle;
 import android.os.UserManager;
 import android.view.View;
 import android.view.ViewGroup;
@@ -224,7 +223,7 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
     }
 
     protected boolean isProfileChallenge() {
-        return UserHandle.myUserId() != mEffectiveUserId;
+        return Utils.isManagedProfile(UserManager.get(getContext()));
     }
 
     protected void reportSuccessfullAttempt() {
