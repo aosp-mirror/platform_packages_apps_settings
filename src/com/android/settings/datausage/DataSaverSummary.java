@@ -14,24 +14,36 @@
 
 package com.android.settings.datausage;
 
+import android.app.Application;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
-import android.util.Log;
 import android.widget.Switch;
 import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.applications.AppStateBaseBridge.Callback;
+import com.android.settings.datausage.DataSaverBackend.Listener;
 import com.android.settings.widget.SwitchBar;
+import com.android.settings.widget.SwitchBar.OnSwitchChangeListener;
+import com.android.settingslib.applications.ApplicationsState;
+import com.android.settingslib.applications.ApplicationsState.AppEntry;
+import com.android.settingslib.applications.ApplicationsState.Callbacks;
+import com.android.settingslib.applications.ApplicationsState.Session;
+
+import java.util.ArrayList;
 
 public class DataSaverSummary extends SettingsPreferenceFragment
-        implements SwitchBar.OnSwitchChangeListener, DataSaverBackend.Listener {
+        implements OnSwitchChangeListener, Listener, Callback, Callbacks {
 
     private static final String KEY_UNRESTRICTED_ACCESS = "unrestricted_access";
 
     private SwitchBar mSwitchBar;
     private DataSaverBackend mDataSaverBackend;
     private Preference mUnrestrictedAccess;
+    private ApplicationsState mApplicationsState;
+    private AppStateDataUsageBridge mDataUsageBridge;
+    private Session mSession;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -39,7 +51,11 @@ public class DataSaverSummary extends SettingsPreferenceFragment
 
         addPreferencesFromResource(R.xml.data_saver);
         mUnrestrictedAccess = findPreference(KEY_UNRESTRICTED_ACCESS);
+        mApplicationsState = ApplicationsState.getInstance(
+                (Application) getContext().getApplicationContext());
         mDataSaverBackend = new DataSaverBackend(getContext());
+        mDataUsageBridge = new AppStateDataUsageBridge(mApplicationsState, this, mDataSaverBackend);
+        mSession = mApplicationsState.newSession(this);
     }
 
     @Override
@@ -53,17 +69,16 @@ public class DataSaverSummary extends SettingsPreferenceFragment
     @Override
     public void onResume() {
         super.onResume();
-        mDataSaverBackend.addListener(this);
         mDataSaverBackend.refreshWhitelist();
-        int count = mDataSaverBackend.getWhitelistedCount();
-        mUnrestrictedAccess.setSummary(getResources().getQuantityString(
-                R.plurals.data_saver_unrestricted_summary, count, count));
+        mSession.resume();
+        mDataUsageBridge.resume();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        mDataSaverBackend.remListener(this);
+        mDataUsageBridge.pause();
+        mSession.pause();
     }
 
     @Override
@@ -79,5 +94,64 @@ public class DataSaverSummary extends SettingsPreferenceFragment
     @Override
     public void onDataSaverChanged(boolean isDataSaving) {
         mSwitchBar.setChecked(isDataSaving);
+    }
+
+    @Override
+    public void onExtraInfoUpdated() {
+        int count = 0;
+        final ArrayList<AppEntry> allApps = mSession.getAllApps();
+        final int N = allApps.size();
+        for (int i = 0; i < N; i++) {
+            final AppEntry entry = allApps.get(i);
+            if (!ApplicationsState.FILTER_DOWNLOADED_AND_LAUNCHER.filterApp(entry)) {
+                continue;
+            }
+            if (entry.extraInfo != null && ((AppStateDataUsageBridge.DataUsageState)
+                    entry.extraInfo).isDataSaverWhitelisted) {
+                count++;
+            }
+        }
+        mUnrestrictedAccess.setSummary(getResources().getQuantityString(
+                R.plurals.data_saver_unrestricted_summary, count, count));
+    }
+
+    @Override
+    public void onRunningStateChanged(boolean running) {
+
+    }
+
+    @Override
+    public void onPackageListChanged() {
+
+    }
+
+    @Override
+    public void onRebuildComplete(ArrayList<AppEntry> apps) {
+
+    }
+
+    @Override
+    public void onPackageIconChanged() {
+
+    }
+
+    @Override
+    public void onPackageSizeChanged(String packageName) {
+
+    }
+
+    @Override
+    public void onAllSizesComputed() {
+
+    }
+
+    @Override
+    public void onLauncherInfoChanged() {
+
+    }
+
+    @Override
+    public void onLoadEntriesCompleted() {
+
     }
 }
