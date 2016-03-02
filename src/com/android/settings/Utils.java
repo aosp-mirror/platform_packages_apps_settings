@@ -596,6 +596,23 @@ public final class Utils extends com.android.settingslib.Utils {
     }
 
     /**
+     * Retrieves the id for the given user's managed profile.
+     *
+     * @return the managed profile id or UserHandle.USER_NULL if there is none.
+     */
+    public static int getManagedProfileId(UserManager um, int parentUserId) {
+        List<UserInfo> profiles = um.getProfiles(parentUserId);
+        int numProfiles = profiles.size();
+        for (int i = 0; i < numProfiles; ++i) {
+            UserInfo profile = profiles.get(i);
+            if (profile.id != parentUserId) {
+                return profile.id;
+            }
+        }
+        return UserHandle.USER_NULL;
+    }
+
+    /**
      * Returns true if the userId passed in is a managed profile.
      *
      * @throws IllegalArgumentException if userManager is null.
