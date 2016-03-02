@@ -18,7 +18,6 @@ package com.android.settings.display;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.widget.LinearLayout;
 
 import com.android.settings.R;
@@ -44,8 +43,5 @@ public class MessageBubbleBackground extends LinearLayout {
         super.onMeasure(
                 MeasureSpec.makeMeasureSpec(bubbleWidth + widthPadding, MeasureSpec.EXACTLY),
                 heightMeasureSpec);
-        Log.w(this.getClass().getSimpleName(),
-                String.format("onMeasure called; width:%d, height:%d", this.getMeasuredWidth(),
-                        this.getMeasuredHeight()));
     }
 }
