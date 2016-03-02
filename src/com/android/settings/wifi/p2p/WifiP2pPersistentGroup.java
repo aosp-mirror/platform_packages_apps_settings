@@ -28,12 +28,7 @@ public class WifiP2pPersistentGroup extends Preference {
     public WifiP2pPersistentGroup(Context context, WifiP2pGroup group) {
         super(context);
         mGroup = group;
-    }
-
-    @Override
-    public void onBindViewHolder(PreferenceViewHolder view) {
         setTitle(mGroup.getNetworkName());
-        super.onBindViewHolder(view);
     }
 
     int getNetworkId() {
