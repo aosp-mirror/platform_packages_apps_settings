@@ -34,12 +34,15 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.service.notification.NotificationListenerService.Ranking;
+import android.support.v7.preference.DropDownPreference;
 import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
@@ -49,7 +52,7 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
     private static final String TUNER_SETTING = "show_importance_slider";
 
     protected static final String KEY_BYPASS_DND = "bypass_dnd";
-    protected static final String KEY_SENSITIVE = "sensitive";
+    protected static final String KEY_VISIBILITY_OVERRIDE = "visibility_override";
     protected static final String KEY_IMPORTANCE = "importance";
     protected static final String KEY_IMPORTANCE_TITLE = "importance_title";
     protected static final String KEY_IMPORTANCE_RESET = "importance_reset_button";
@@ -68,7 +71,7 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
     protected RestrictedPreference mImportanceTitle;
     protected LayoutPreference mImportanceReset;
     protected RestrictedSwitchPreference mPriority;
-    protected RestrictedSwitchPreference mSensitive;
+    protected DropDownPreference mVisibilityOverride;
     protected RestrictedSwitchPreference mBlock;
     protected RestrictedSwitchPreference mSilent;
     protected EnforcedAdmin mSuspendedAppsAdmin;
@@ -143,9 +146,6 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
         }
         if (mPriority != null) {
             mPriority.setDisabledByAdmin(mSuspendedAppsAdmin);
-        }
-        if (mSensitive != null) {
-            mSensitive.setDisabledByAdmin(mSuspendedAppsAdmin);
         }
         if (mImportanceTitle != null) {
             mImportanceTitle.setDisabledByAdmin(mSuspendedAppsAdmin);
@@ -273,16 +273,60 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
         });
     }
 
-    protected void setupSensitivePref(boolean sensitive) {
-        mSensitive.setDisabledByAdmin(mSuspendedAppsAdmin);
-        mSensitive.setChecked(sensitive);
-        mSensitive.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+    protected void setupVisOverridePref(int sensitive) {
+        ArrayList<CharSequence> entries = new ArrayList<>();
+        ArrayList<CharSequence> values = new ArrayList<>();
+
+        if (getLockscreenNotificationsEnabled() && getLockscreenAllowPrivateNotifications()) {
+            entries.add(getString(R.string.lock_screen_notifications_summary_show));
+            values.add(Integer.toString(Ranking.VISIBILITY_NO_OVERRIDE));
+        }
+
+        entries.add(getString(R.string.lock_screen_notifications_summary_hide));
+        values.add(Integer.toString(Notification.VISIBILITY_PRIVATE));
+        entries.add(getString(R.string.lock_screen_notifications_summary_disable));
+        values.add(Integer.toString(Notification.VISIBILITY_SECRET));
+        mVisibilityOverride.setEntries(entries.toArray(new CharSequence[entries.size()]));
+        mVisibilityOverride.setEntryValues(values.toArray(new CharSequence[values.size()]));
+
+        if (sensitive == Ranking.VISIBILITY_NO_OVERRIDE) {
+            mVisibilityOverride.setValue(Integer.toString(getGlobalVisibility()));
+        } else {
+            mVisibilityOverride.setValue(Integer.toString(sensitive));
+        }
+        mVisibilityOverride.setSummary("%s");
+
+        mVisibilityOverride.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
-                final boolean sensitive = (Boolean) newValue;
-                return mBackend.setSensitive(mPkgInfo.packageName, mUid, sensitive);
+                int sensitive = Integer.parseInt((String) newValue);
+                if (sensitive == getGlobalVisibility()) {
+                    sensitive = Ranking.VISIBILITY_NO_OVERRIDE;
+                }
+                mBackend.setVisibilityOverride(mPkgInfo.packageName, mUid, sensitive);
+                return true;
             }
         });
+    }
+
+    private int getGlobalVisibility() {
+        int globalVis = Ranking.VISIBILITY_NO_OVERRIDE;
+        if (!getLockscreenNotificationsEnabled()) {
+            globalVis = Notification.VISIBILITY_SECRET;
+        } else if (!getLockscreenAllowPrivateNotifications()) {
+            globalVis = Notification.VISIBILITY_PRIVATE;
+        }
+        return globalVis;
+    }
+
+    protected boolean getLockscreenNotificationsEnabled() {
+        return Settings.Secure.getInt(getContentResolver(),
+                Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS, 0) != 0;
+    }
+
+    protected boolean getLockscreenAllowPrivateNotifications() {
+        return Settings.Secure.getInt(getContentResolver(),
+                Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, 0) != 0;
     }
 
     abstract void updateDependents(int progress);
