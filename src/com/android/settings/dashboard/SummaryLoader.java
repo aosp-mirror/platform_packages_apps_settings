@@ -63,7 +63,7 @@ public class SummaryLoader {
     }
 
     public void release() {
-        mWorkerThread.quit();
+        mWorkerThread.quitSafely();
     }
 
     public void setAdapter(DashboardAdapter adapter) {
