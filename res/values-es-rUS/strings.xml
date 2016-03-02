@@ -85,7 +85,7 @@
     <string name="font_size_preview_text_headline" msgid="7955317408475392247">"Texto de muestra"</string>
     <string name="font_size_preview_text_title" msgid="1310536233106975546">"El maravilloso mago de Oz"</string>
     <string name="font_size_preview_text_subtitle" msgid="4231671528173110093">"Capítulo 11: La maravillosa Ciudad Esmeralda de Oz"</string>
-    <string name="font_size_preview_text_body" msgid="1250552239682375643">"Aunque contaban con la protección de los lentes verdes, al principio, Dorothy y sus amigos estaban encandilados por el brillo de la maravillosa ciudad. A los costados de las calles, había hermosas casas de mármol verde adornadas con brillantes esmeraldas. Caminaron por pavimento del mismo mármol verde y, donde se unían las calles, había filas de esmeraldas bien juntas que brillaban con el sol. Los vidrios de las ventanas eran verdes. Hasta el cielo sobre la ciudad tenía un matiz verde, y los rayos del sol eran verdes.\n\nHabía mucha gente caminando: hombres, mujeres, niños, todos vestidos de verde y de piel verdosa. Miraban a Dorothy y su heterogénea compañía con asombro. Los niños corrían despavoridos detrás de sus madres cuando veían al León. Nadie les hablaba. En la calle, había muchos puestos y Dorothy vio que todo lo que vendían era verde: caramelos verdes, palomitas de maíz verdes, zapatos verdes, sombreros verdes y ropa verde de todo tipo. En un lugar, un hombre estaba vendiendo limonada verde y Dorothy observó que los niños que la compraban pagaban con centavos verdes. \n\nParecía no haber caballos ni animales de ningún tipo. Los hombres cargaban sus cosas en pequeñas carretas verdes, que llevaban delante de ellos. Todos parecían felices, contentos y prósperos."</string>
+    <string name="font_size_preview_text_body" msgid="1250552239682375643">"Aunque contaban con la protección de los lentes verdes, al principio, Dorothy y sus amigos estaban encandilados por el brillo de la maravillosa ciudad. Las calles estaban formadas por hermosas casas de mármol verde adornadas con brillantes esmeraldas. Caminaron por pavimento del mismo mármol verde y, donde se unían las calles, había filas de esmeraldas bien juntas que brillaban con el sol. Los vidrios de las ventanas eran verdes y hasta el cielo sobre la ciudad y los rayos del sol tenían un matiz verde.\n\nHabía mucha gente caminando: hombres, mujeres, niños, todos vestidos de verde y de piel verdosa. Miraban a Dorothy y a su heterogénea compañía con asombro. Los niños corrían despavoridos detrás de sus madres cuando veían al León. Nadie les hablaba. En la calle, había muchas tiendas y Dorothy vio que todo lo que vendían era verde: caramelos verdes, palomitas de maíz verdes, zapatos verdes, sombreros verdes y ropa verde de todo tipo. En una de ellas, un hombre vendía limonada verde y Dorothy observó que los niños que la compraban pagaban con centavos verdes. \n\nParecía no haber caballos ni animales de ningún tipo. Los hombres cargaban sus cosas en pequeñas carretas verdes que llevaban delante de ellos. Todos parecían felices, contentos y afortunados."</string>
     <string name="font_size_save" msgid="3450855718056759095">"Aceptar"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"Almacenamiento USB"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"Tarjeta SD"</string>
@@ -1639,10 +1639,8 @@
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Cortar con el botón de encendido"</string>
     <string name="accessibility_toggle_speak_password_preference_title" msgid="5986628515113204844">"Decir contraseñas"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"Puntero del mouse grande"</string>
-    <!-- no translation found for accessibility_toggle_master_mono_title (4363806997971905302) -->
-    <skip />
-    <!-- no translation found for accessibility_toggle_master_mono_summary (5634277025251530927) -->
-    <skip />
+    <string name="accessibility_toggle_master_mono_title" msgid="4363806997971905302">"Audio mono"</string>
+    <string name="accessibility_toggle_master_mono_summary" msgid="5634277025251530927">"Combinar canales al reproducir audio"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="4068253727586393334">"Tiempo de respuesta táctil"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Inversión de color"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="8658240868230680912">"(Experimental) Puede afectar el rendimiento."</string>
@@ -2500,6 +2498,8 @@
     <string name="zen_mode_visual_interruptions_settings_title" msgid="168576844124787420">"Interrupciones visuales"</string>
     <string name="configure_notification_settings" msgid="3558846607192693233">"Configurar las notificaciones"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"Avanzada"</string>
+    <!-- no translation found for profile_section_header (2320848161066912001) -->
+    <skip />
     <string name="notification_pulse_title" msgid="1247988024534030629">"Luz de notificación"</string>
     <string name="lock_screen_notifications_title" msgid="6173076173408887213">"En la pantalla bloqueada"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Mostrar todo el contenido de notificaciones"</string>
@@ -2516,20 +2516,14 @@
     <string name="notification_importance_title" msgid="848692592679312666">"Importancia"</string>
     <string name="notification_importance_none" msgid="3173515479356106227">"Sin establecer"</string>
     <string name="notification_importance_blocked" msgid="4764559498517003405">"Bloqueada: no mostrar nunca estas notificaciones"</string>
-    <!-- no translation found for notification_importance_min (2370444628448134377) -->
-    <skip />
-    <!-- no translation found for notification_importance_low (979932751695283877) -->
-    <skip />
-    <!-- no translation found for notification_importance_default (8789180840561778039) -->
-    <skip />
-    <!-- no translation found for notification_importance_high (2401104039256903538) -->
-    <skip />
-    <!-- no translation found for notification_importance_max (6036245535555486319) -->
-    <skip />
+    <string name="notification_importance_min" msgid="2370444628448134377">"Mínima: mostrar en la parte inferior de la lista de notificaciones sin emitir sonido"</string>
+    <string name="notification_importance_low" msgid="979932751695283877">"Baja: mostrar estas notificaciones de manera silenciosa"</string>
+    <string name="notification_importance_default" msgid="8789180840561778039">"Normal: permitir que estas notificaciones emitan sonidos"</string>
+    <string name="notification_importance_high" msgid="2401104039256903538">"Alta: ver en la pantalla y permitir sonidos"</string>
+    <string name="notification_importance_max" msgid="6036245535555486319">"Urgente: mostrar en la parte superior de la lista, ver en la pantalla y permitir sonidos"</string>
     <string name="importance_reset" msgid="7458420788555607007">"Restablecer"</string>
     <string name="show_silently" msgid="2222875799232222056">"Mostrar sin emitir sonido"</string>
     <string name="show_silently_summary" msgid="7616604629123146565">"No emitir sonido, vibrar ni mostrar estas notificaciones en la pantalla actual."</string>
-    <string name="default_notification_assistant" msgid="7631945224761430146">"Asistente de notificaciones"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Acceso a notificaciones"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Las aplicaciones no pueden leer las notificaciones."</string>
     <!-- String.format failed for translation -->
@@ -2975,8 +2969,7 @@
     <string name="lockscreen_remote_input" msgid="969871538778211843">"Si el dispositivo está bloqueado, evita la escritura de respuestas y otros textos en las notificaciones"</string>
     <string name="default_spell_checker" msgid="8506899870026026660">"Corrector predeterminado"</string>
     <string name="choose_spell_checker" msgid="6596539862291699367">"Elegir corrector ortográfico"</string>
-    <!-- no translation found for spell_checker_not_selected (8871083796179200696) -->
-    <skip />
+    <string name="spell_checker_not_selected" msgid="8871083796179200696">"Sin seleccionar"</string>
     <string name="notification_log_no_title" msgid="5678029849672024215">"(ninguno)"</string>
     <string name="notification_log_details_delimiter" msgid="3116559361552416747">": "</string>
     <string name="notification_log_details_package" msgid="2596495677039100284">"paquete"</string>
