@@ -70,6 +70,7 @@ public class DataSaverSummary extends SettingsPreferenceFragment
     public void onResume() {
         super.onResume();
         mDataSaverBackend.refreshWhitelist();
+        mDataSaverBackend.addListener(this);
         mSession.resume();
         mDataUsageBridge.resume();
     }
@@ -77,6 +78,7 @@ public class DataSaverSummary extends SettingsPreferenceFragment
     @Override
     public void onPause() {
         super.onPause();
+        mDataSaverBackend.remListener(this);
         mDataUsageBridge.pause();
         mSession.pause();
     }
