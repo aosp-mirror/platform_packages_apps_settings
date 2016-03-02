@@ -24,8 +24,8 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.provider.Settings;
 import android.service.notification.NotificationListenerService.Ranking;
+import android.support.v7.preference.DropDownPreference;
 import android.util.ArrayMap;
 import android.util.Log;
 
@@ -76,8 +76,9 @@ public class AppNotificationSettings extends NotificationSettingsBase {
         mImportanceTitle = (RestrictedPreference) findPreference(KEY_IMPORTANCE_TITLE);
         mPriority =
                 (RestrictedSwitchPreference) getPreferenceScreen().findPreference(KEY_BYPASS_DND);
-        mSensitive =
-                (RestrictedSwitchPreference) getPreferenceScreen().findPreference(KEY_SENSITIVE);
+        mVisibilityOverride =
+                (DropDownPreference) getPreferenceScreen().findPreference(
+                        KEY_VISIBILITY_OVERRIDE);
         mBlock = (RestrictedSwitchPreference) getPreferenceScreen().findPreference(KEY_BLOCK);
         mSilent = (RestrictedSwitchPreference) getPreferenceScreen().findPreference(KEY_SILENT);
 
@@ -94,7 +95,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
 
         setupImportancePrefs(mAppRow.systemApp, mAppRow.appImportance, mAppRow.banned);
         setupPriorityPref(mAppRow.appBypassDnd);
-        setupSensitivePref(mAppRow.appSensitive);
+        setupVisOverridePref(mAppRow.appVisOverride);
         updateDependents(mAppRow.appImportance);
     }
 
@@ -102,8 +103,6 @@ public class AppNotificationSettings extends NotificationSettingsBase {
     protected void updateDependents(int importance) {
         final boolean lockscreenSecure = new LockPatternUtils(getActivity()).isSecure(
                 UserHandle.myUserId());
-        final boolean lockscreenNotificationsEnabled = getLockscreenNotificationsEnabled();
-        final boolean allowPrivate = getLockscreenAllowPrivateNotifications();
 
         if (getPreferenceScreen().findPreference(mBlock.getKey()) != null) {
             setVisible(mSilent, checkCanBeVisible(Ranking.IMPORTANCE_MIN, importance));
@@ -111,8 +110,8 @@ public class AppNotificationSettings extends NotificationSettingsBase {
         }
         setVisible(mPriority, checkCanBeVisible(Ranking.IMPORTANCE_DEFAULT, importance)
                 && !mDndVisualEffectsSuppressed);
-        setVisible(mSensitive, checkCanBeVisible(Ranking.IMPORTANCE_MIN, importance)
-                && lockscreenSecure && lockscreenNotificationsEnabled && allowPrivate);
+        setVisible(mVisibilityOverride,
+                checkCanBeVisible(Ranking.IMPORTANCE_MIN, importance) && lockscreenSecure);
     }
 
     protected boolean checkCanBeVisible(int minImportanceVisible, int importance) {
@@ -120,16 +119,6 @@ public class AppNotificationSettings extends NotificationSettingsBase {
             return true;
         }
         return importance >= minImportanceVisible;
-    }
-
-    private boolean getLockscreenNotificationsEnabled() {
-        return Settings.Secure.getInt(getContentResolver(),
-                Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS, 0) != 0;
-    }
-
-    private boolean getLockscreenAllowPrivateNotifications() {
-        return Settings.Secure.getInt(getContentResolver(),
-                Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, 0) != 0;
     }
 
     private List<ResolveInfo> queryNotificationConfigActivities() {
