@@ -1431,7 +1431,7 @@
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"Resetuj aplikacje"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Zarządzaj miejscem"</string>
     <string name="filter" msgid="2018011724373033887">"Filtr"</string>
-    <string name="filter_dlg_title" msgid="8693024463731076091">"Wybierz opcje filtru"</string>
+    <string name="filter_dlg_title" msgid="8693024463731076091">"Wybierz opcje filtra"</string>
     <string name="filter_apps_all" msgid="5142129378749391876">"Wszystkie"</string>
     <string name="filter_apps_disabled" msgid="5364447573326472890">"Wyłączone"</string>
     <string name="filter_apps_third_party" msgid="7786348047690140979">"Pobrane"</string>
@@ -1661,10 +1661,8 @@
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Przycisk zasilania rozłącza"</string>
     <string name="accessibility_toggle_speak_password_preference_title" msgid="5986628515113204844">"Wypowiadaj hasła na głos"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"Duży wskaźnik myszy"</string>
-    <!-- no translation found for accessibility_toggle_master_mono_title (4363806997971905302) -->
-    <skip />
-    <!-- no translation found for accessibility_toggle_master_mono_summary (5634277025251530927) -->
-    <skip />
+    <string name="accessibility_toggle_master_mono_title" msgid="4363806997971905302">"Dźwięk mono"</string>
+    <string name="accessibility_toggle_master_mono_summary" msgid="5634277025251530927">"Połącz kanały podczas odtwarzania dźwięku"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="4068253727586393334">"Czas dotknięcia i przytrzymania"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Inwersja kolorów"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="8658240868230680912">"(Funkcja eksperymentalna) Może wpływać na działanie urządzenia."</string>
@@ -2534,6 +2532,8 @@
     <string name="zen_mode_visual_interruptions_settings_title" msgid="168576844124787420">"Powiadomienia wizualne"</string>
     <string name="configure_notification_settings" msgid="3558846607192693233">"Skonfiguruj powiadomienia"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"Zaawansowane"</string>
+    <!-- no translation found for profile_section_header (2320848161066912001) -->
+    <skip />
     <string name="notification_pulse_title" msgid="1247988024534030629">"Pulsująca dioda"</string>
     <string name="lock_screen_notifications_title" msgid="6173076173408887213">"Na ekranie blokady"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Pokazuj wszystkie powiadomienia"</string>
@@ -2550,20 +2550,14 @@
     <string name="notification_importance_title" msgid="848692592679312666">"Ważność"</string>
     <string name="notification_importance_none" msgid="3173515479356106227">"Nie ustawiono"</string>
     <string name="notification_importance_blocked" msgid="4764559498517003405">"Zablokowana: nigdy nie pokazuj tych powiadomień"</string>
-    <!-- no translation found for notification_importance_min (2370444628448134377) -->
-    <skip />
-    <!-- no translation found for notification_importance_low (979932751695283877) -->
-    <skip />
-    <!-- no translation found for notification_importance_default (8789180840561778039) -->
-    <skip />
-    <!-- no translation found for notification_importance_high (2401104039256903538) -->
-    <skip />
-    <!-- no translation found for notification_importance_max (6036245535555486319) -->
-    <skip />
+    <string name="notification_importance_min" msgid="2370444628448134377">"Najmniejsza: wyświetlaj na końcu listy powiadomień bez sygnału dźwiękowego"</string>
+    <string name="notification_importance_low" msgid="979932751695283877">"Niska: pokazuj te powiadomienia bez sygnału dźwiękowego"</string>
+    <string name="notification_importance_default" msgid="8789180840561778039">"Normalna: zezwól na sygnalizowanie tych powiadomień dźwiękiem"</string>
+    <string name="notification_importance_high" msgid="2401104039256903538">"Wysoka: wyświetlaj na ekranie i sygnalizuj dźwiękiem"</string>
+    <string name="notification_importance_max" msgid="6036245535555486319">"Pilna: pokazuj na początku listy powiadomień, wyświetlaj na ekranie i sygnalizuj dźwiękiem"</string>
     <string name="importance_reset" msgid="7458420788555607007">"Resetuj"</string>
     <string name="show_silently" msgid="2222875799232222056">"Pokazuj dyskretnie"</string>
     <string name="show_silently_summary" msgid="7616604629123146565">"Nie sygnalizuj tych powiadomień dźwiękiem ani wibracjami ani nie wyświetlaj ich na bieżącym ekranie."</string>
-    <string name="default_notification_assistant" msgid="7631945224761430146">"Asystent powiadomień"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Dostęp do powiadomień"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Aplikacje nie mogą odczytywać powiadomień"</string>
     <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
@@ -3031,8 +3025,7 @@
     <string name="lockscreen_remote_input" msgid="969871538778211843">"Uniemożliwia wpisywanie tekstu w obszarze powiadomień, gdy urządzenie jest zablokowane"</string>
     <string name="default_spell_checker" msgid="8506899870026026660">"Domyślne sprawdzanie pisowni"</string>
     <string name="choose_spell_checker" msgid="6596539862291699367">"Wybierz sprawdzanie pisowni"</string>
-    <!-- no translation found for spell_checker_not_selected (8871083796179200696) -->
-    <skip />
+    <string name="spell_checker_not_selected" msgid="8871083796179200696">"Nie wybrano"</string>
     <string name="notification_log_no_title" msgid="5678029849672024215">"(brak)"</string>
     <string name="notification_log_details_delimiter" msgid="3116559361552416747">": "</string>
     <string name="notification_log_details_package" msgid="2596495677039100284">"pkg"</string>
