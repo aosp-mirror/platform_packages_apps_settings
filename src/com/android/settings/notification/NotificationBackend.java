@@ -48,7 +48,7 @@ public class NotificationBackend {
         row.banned = getNotificationsBanned(row.pkg, row.uid);
         row.appImportance = getImportance(row.pkg, row.uid);
         row.appBypassDnd = getBypassZenMode(row.pkg, row.uid);
-        row.appSensitive = getSensitive(row.pkg, row.uid);
+        row.appVisOverride = getVisibilityOverride(row.pkg, row.uid);
         return row;
     }
 
@@ -88,20 +88,18 @@ public class NotificationBackend {
         }
     }
 
-    public boolean getSensitive(String pkg, int uid) {
+    public int getVisibilityOverride(String pkg, int uid) {
         try {
-            return sINM.getVisibilityOverride(pkg, uid) == Notification.VISIBILITY_PRIVATE;
+            return sINM.getVisibilityOverride(pkg, uid);
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
-            return false;
+            return NotificationListenerService.Ranking.VISIBILITY_NO_OVERRIDE;
         }
     }
 
-    public boolean setSensitive(String pkg, int uid, boolean sensitive) {
+    public boolean setVisibilityOverride(String pkg, int uid, int override) {
         try {
-            sINM.setVisibilityOverride(pkg, uid,
-                    sensitive ? Notification.VISIBILITY_PRIVATE
-                            : NotificationListenerService.Ranking.VISIBILITY_NO_OVERRIDE);
+            sINM.setVisibilityOverride(pkg, uid, override);
             return true;
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
@@ -143,6 +141,6 @@ public class NotificationBackend {
         public boolean systemApp;
         public int appImportance;
         public boolean appBypassDnd;
-        public boolean appSensitive;
+        public int appVisOverride;
     }
 }
