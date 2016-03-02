@@ -45,11 +45,10 @@
             android:layout="@layout/two_buttons_panel"
             android:order="6" />
 
-    <!-- Sensitive -->
-    <com.android.settingslib.RestrictedSwitchPreference
-            android:key="sensitive"
-            android:title="@string/app_notification_sensitive_title"
-            android:summary="@string/app_notification_sensitive_summary"
+    <!-- Visibility Override -->
+    <DropDownPreference
+            android:key="visibility_override"
+            android:title="@string/app_notification_visibility_override_title"
             android:order="7" />
 
     <!-- Bypass DND -->
