@@ -48,6 +48,8 @@ import android.net.LinkProperties;
 import android.net.Uri;
 import android.os.BatteryManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.INetworkManagementService;
 import android.os.RemoteException;
@@ -1045,10 +1047,18 @@ public final class Utils extends com.android.settingslib.Utils {
     }
 
     public static List<String> getNonIndexable(int xml, Context context) {
-        List<String> ret = new ArrayList<>();
-        PreferenceManager manager = new PreferenceManager(context);
-        PreferenceScreen screen = manager.inflateFromResource(context, xml, null);
-        checkPrefs(screen, ret);
+        HandlerThread thread = new HandlerThread("Index_" + xml);
+        thread.start();
+        final List<String> ret = new ArrayList<>();
+        new Handler(thread.getLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                PreferenceManager manager = new PreferenceManager(context);
+                PreferenceScreen screen = manager.inflateFromResource(context, xml, null);
+                checkPrefs(screen, ret);
+            }
+        });
+        thread.quitSafely();
 
         return ret;
     }
