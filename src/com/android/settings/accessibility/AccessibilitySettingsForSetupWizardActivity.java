@@ -20,6 +20,7 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.accessibility.AccessibilityEvent;
 import android.view.Menu;
 import android.view.View;
 
@@ -30,6 +31,8 @@ import com.android.setupwizardlib.util.SystemBarHelper;
 import com.android.setupwizardlib.view.NavigationBar;
 
 public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivity {
+
+    private boolean mSendExtraWindowStateChanged;
 
     @Override
     protected void onCreate(Bundle savedState) {
@@ -59,6 +62,12 @@ public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivit
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        mSendExtraWindowStateChanged = false;
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Return true, so we get notified when items in the menu are clicked.
         return true;
@@ -67,6 +76,11 @@ public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivit
     @Override
     public boolean onNavigateUp() {
         onBackPressed();
+
+        // Clear accessibility focus and let the screen reader announce the new title.
+        getWindow().getDecorView()
+                .sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
+
         return true;
     }
 
@@ -83,6 +97,16 @@ public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivit
         // Start the new Fragment.
         args.putInt(SettingsPreferenceFragment.HELP_URI_RESOURCE_KEY, 0);
         startPreferenceFragment(Fragment.instantiate(this, fragmentClass, args), true);
+        mSendExtraWindowStateChanged = true;
+    }
+
+    @Override
+    public void onAttachFragment(Fragment fragment) {
+        if (mSendExtraWindowStateChanged) {
+            // Clear accessibility focus and let the screen reader announce the new title.
+            getWindow().getDecorView()
+                    .sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
+        }
     }
 
     /**
