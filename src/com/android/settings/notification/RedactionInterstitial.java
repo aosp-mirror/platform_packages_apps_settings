@@ -24,6 +24,8 @@ import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -74,11 +76,12 @@ public class RedactionInterstitial extends SettingsActivity {
     }
 
     public static class RedactionInterstitialFragment extends SettingsPreferenceFragment
-            implements RadioGroup.OnCheckedChangeListener {
+            implements RadioGroup.OnCheckedChangeListener, CompoundButton.OnCheckedChangeListener {
 
         private RadioGroup mRadioGroup;
         private RestrictedRadioButton mShowAllButton;
         private RestrictedRadioButton mRedactSensitiveButton;
+        private CheckBox mRemoteInputCheckbox;
         private int mUserId;
 
         @Override
@@ -99,6 +102,8 @@ public class RedactionInterstitial extends SettingsActivity {
             mShowAllButton = (RestrictedRadioButton) view.findViewById(R.id.show_all);
             mRedactSensitiveButton =
                     (RestrictedRadioButton) view.findViewById(R.id.redact_sensitive);
+            mRemoteInputCheckbox = (CheckBox) view.findViewById(R.id.lockscreen_remote_input);
+            mRemoteInputCheckbox.setOnCheckedChangeListener(this);
 
             mRadioGroup.setOnCheckedChangeListener(this);
             mUserId = Utils.getUserIdFromBundle(
@@ -150,6 +155,12 @@ public class RedactionInterstitial extends SettingsActivity {
             }
 
             mRadioGroup.check(checkedButtonId);
+
+            boolean allowRemoteInput = Settings.Secure.getIntForUser(getContentResolver(),
+                    Settings.Secure.LOCK_SCREEN_ALLOW_REMOTE_INPUT, 0, mUserId) != 0;
+            mRemoteInputCheckbox.setChecked(!allowRemoteInput);
+
+            updateRemoteInputCheckboxVisibility();
         }
 
         @Override
@@ -161,6 +172,21 @@ public class RedactionInterstitial extends SettingsActivity {
                     Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, show ? 1 : 0, mUserId);
             Settings.Secure.putIntForUser(getContentResolver(),
                     Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS, enabled ? 1 : 0, mUserId);
+
+            updateRemoteInputCheckboxVisibility();
+        }
+
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean checked) {
+            if (buttonView == mRemoteInputCheckbox) {
+                Settings.Secure.putIntForUser(getContentResolver(),
+                        Settings.Secure.LOCK_SCREEN_ALLOW_REMOTE_INPUT, checked ? 0 : 1, mUserId);
+            }
+        }
+
+        private void updateRemoteInputCheckboxVisibility() {
+            boolean visible = mRadioGroup.getCheckedRadioButtonId() == R.id.show_all;
+            mRemoteInputCheckbox.setVisibility(visible ? View.VISIBLE : View.INVISIBLE);
         }
     }
 }
