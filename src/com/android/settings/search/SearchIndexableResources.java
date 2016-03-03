@@ -21,14 +21,12 @@ import com.android.settings.DateTimeSettings;
 import com.android.settings.DevelopmentSettings;
 import com.android.settings.DeviceInfoSettings;
 import com.android.settings.DisplaySettings;
-import com.android.settings.HomeSettings;
 import com.android.settings.LegalSettings;
 import com.android.settings.PrivacySettings;
 import com.android.settings.R;
 import com.android.settings.ScreenPinningSettings;
 import com.android.settings.SecuritySettings;
 import com.android.settings.WallpaperTypeSettings;
-import com.android.settings.WifiCallingSettings;
 import com.android.settings.WirelessSettings;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.accounts.AccountSettings;
@@ -123,13 +121,6 @@ public final class SearchIndexableResources {
                         NO_DATA_RES_ID,
                         WirelessSettings.class.getName(),
                         R.drawable.ic_settings_more));
-
-        sResMap.put(HomeSettings.class.getName(),
-                new SearchIndexableResource(
-                        Ranking.getRankForClassName(HomeSettings.class.getName()),
-                        NO_DATA_RES_ID,
-                        HomeSettings.class.getName(),
-                        R.drawable.ic_settings_home));
 
         sResMap.put(ScreenZoomSettings.class.getName(),
                 new SearchIndexableResource(
