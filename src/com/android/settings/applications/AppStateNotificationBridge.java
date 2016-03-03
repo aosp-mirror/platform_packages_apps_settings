@@ -63,11 +63,11 @@ public class AppStateNotificationBridge extends AppStateBaseBridge {
 
         @Override
         public boolean filterApp(AppEntry info) {
-            if (info == null) {
-                return false;
+            if (info.extraInfo instanceof AppRow) {
+                AppRow row = (AppRow) info.extraInfo;
+                return row.banned;
             }
-            AppRow row = (AppRow) info.extraInfo;
-            return row.banned;
+            return false;
         }
     };
 }
