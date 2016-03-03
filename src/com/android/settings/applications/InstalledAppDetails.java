@@ -50,6 +50,7 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.service.notification.NotificationListenerService;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.support.v7.preference.PreferenceCategory;
@@ -1007,8 +1008,11 @@ public class InstalledAppDetails extends AppInfoBase
     public static CharSequence getNotificationSummary(AppRow appRow, Context context) {
         if (appRow.banned) {
             return context.getString(R.string.notifications_disabled);
+        } else if (appRow.appImportance > NotificationListenerService.Ranking.IMPORTANCE_NONE
+                && appRow.appImportance < NotificationListenerService.Ranking.IMPORTANCE_DEFAULT) {
+            return context.getString(R.string.notifications_silenced);
         }
-        return context.getString(R.string.notifications_enabled);
+        return "";
     }
 
     private class MemoryUpdater extends AsyncTask<Void, Void, ProcStatsPackageEntry> {
