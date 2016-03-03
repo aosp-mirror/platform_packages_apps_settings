@@ -85,7 +85,7 @@ public class NotificationLockscreenPreference extends RestrictedListPreference {
     }
 
     private static int checkboxVisibilityForSelectedIndex(int selected, boolean showRemoteAtAll) {
-        return selected == 0 && showRemoteAtAll ? View.VISIBLE : View.GONE;
+        return selected == 1 && showRemoteAtAll ? View.VISIBLE : View.GONE;
     }
 
     private class Listener implements DialogInterface.OnClickListener,
