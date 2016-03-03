@@ -61,6 +61,7 @@ import com.android.settings.applications.DrawOverlayDetails;
 import com.android.settings.applications.InstalledAppDetails;
 import com.android.settings.applications.ManageApplications;
 import com.android.settings.applications.ManageAssist;
+import com.android.settings.applications.NotificationApps;
 import com.android.settings.applications.ProcessStatsSummary;
 import com.android.settings.applications.ProcessStatsUi;
 import com.android.settings.applications.UsageAccessDetails;
@@ -259,6 +260,7 @@ public class SettingsActivity extends SettingsDrawerActivity
             DisplaySettings.class.getName(),
             DeviceInfoSettings.class.getName(),
             ManageApplications.class.getName(),
+            NotificationApps.class.getName(),
             ManageAssist.class.getName(),
             ProcessStatsUi.class.getName(),
             NotificationStation.class.getName(),
