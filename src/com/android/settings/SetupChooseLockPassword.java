@@ -102,7 +102,7 @@ public class SetupChooseLockPassword extends ChooseLockPassword {
         @Override
         public void onViewCreated(View view, Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
-            SystemBarHelper.setImeInsetView(mLayout.findViewById(R.id.suw_bottom_scroll_view));
+            SystemBarHelper.setImeInsetView(mLayout);
             SetupWizardUtils.setImmersiveMode(getActivity());
             mLayout.setHeaderText(getActivity().getTitle());
         }
