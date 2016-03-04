@@ -20,7 +20,8 @@
     android:layout_height="match_parent"
     android:background="@color/conversation_background"
     android:padding="@dimen/conversation_message_list_padding"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:importantForAccessibility="noHideDescendants">
 
     <com.android.settings.display.ConversationMessageView
         android:layout_width="match_parent"
