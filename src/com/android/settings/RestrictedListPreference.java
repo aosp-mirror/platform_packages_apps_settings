@@ -25,10 +25,12 @@ import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckedTextView;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreferenceHelper;
@@ -118,10 +120,15 @@ public class RestrictedListPreference extends CustomListPreference {
     }
 
     protected ListAdapter createListAdapter() {
+        return new RestrictedArrayAdapter(getContext(), getEntries(),
+                getSelectedValuePos());
+    }
+
+    public int getSelectedValuePos() {
         final String selectedValue = getValue();
         final int selectedIndex =
                 (selectedValue == null) ? -1 : findIndexOfValue(selectedValue);
-        return new RestrictedArrayAdapter(getContext(), getEntries(), selectedIndex);
+        return selectedIndex;
     }
 
     @Override
@@ -173,6 +180,8 @@ public class RestrictedListPreference extends CustomListPreference {
 
     public static class RestrictedListPreferenceDialogFragment extends
             CustomListPreference.CustomListPreferenceDialogFragment {
+        private int mLastCheckedPosition = AdapterView.INVALID_POSITION;
+
         public static ListPreferenceDialogFragment newInstance(String key) {
             final ListPreferenceDialogFragment fragment
                     = new RestrictedListPreferenceDialogFragment();
@@ -197,6 +206,8 @@ public class RestrictedListPreference extends CustomListPreference {
                     String entryValue = preference.getEntryValues()[which].toString();
                     RestrictedItem item = preference.getRestrictedItemForEntryValue(entryValue);
                     if (item != null) {
+                        ListView listView = ((AlertDialog) dialog).getListView();
+                        listView.setItemChecked(getLastCheckedPosition(), true);
                         RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getContext(),
                                 item.enforcedAdmin);
                     } else {
@@ -214,6 +225,24 @@ public class RestrictedListPreference extends CustomListPreference {
                     }
                 }
             };
+        }
+
+        private int getLastCheckedPosition() {
+            if (mLastCheckedPosition == AdapterView.INVALID_POSITION) {
+                mLastCheckedPosition = ((RestrictedListPreference) getCustomizablePreference())
+                        .getSelectedValuePos();
+            }
+            return mLastCheckedPosition;
+        }
+
+        private void setCheckedPosition(int checkedPosition) {
+            mLastCheckedPosition = checkedPosition;
+        }
+
+        @Override
+        protected void setClickedDialogEntryIndex(int which) {
+            super.setClickedDialogEntryIndex(which);
+            mLastCheckedPosition = which;
         }
     }
 
