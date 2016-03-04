@@ -54,6 +54,7 @@ import android.os.ServiceManager;
 import android.os.StrictMode;
 import android.os.SystemProperties;
 import android.os.UserHandle;
+import android.service.persistentdata.PersistentDataBlockManager;
 import android.os.UserManager;
 import android.os.storage.IMountService;
 import android.provider.SearchIndexableResource;
@@ -221,6 +222,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private DevicePolicyManager mDpm;
     private UserManager mUm;
     private WifiManager mWifiManager;
+    private PersistentDataBlockManager mOemUnlockManager;
 
     private SwitchBar mSwitchBar;
     private boolean mLastEnabledState;
@@ -328,6 +330,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 ServiceManager.getService(Context.BACKUP_SERVICE));
         mWebViewUpdateService  =
             IWebViewUpdateService.Stub.asInterface(ServiceManager.getService("webviewupdate"));
+        mOemUnlockManager = (PersistentDataBlockManager)getActivity()
+                .getSystemService(Context.PERSISTENT_DATA_BLOCK_SERVICE);
 
         mDpm = (DevicePolicyManager)getActivity().getSystemService(Context.DEVICE_POLICY_SERVICE);
         mUm = (UserManager) getSystemService(Context.USER_SERVICE);
@@ -999,9 +1003,13 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         return !SystemProperties.get(PERSISTENT_DATA_BLOCK_PROP).equals("");
     }
 
-    private static boolean enableOemUnlockPreference() {
-        String flashLocked = SystemProperties.get(FLASH_LOCKED_PROP);
-        return !"0".equals(flashLocked);
+    private boolean enableOemUnlockPreference() {
+        int flashLockState = PersistentDataBlockManager.FLASH_LOCK_UNKNOWN;
+        if (mOemUnlockManager != null) {
+            flashLockState = mOemUnlockManager.getFlashLockState();
+        }
+
+        return flashLockState == PersistentDataBlockManager.FLASH_LOCK_LOCKED;
     }
 
     private void updateOemUnlockOptions() {
