@@ -20,10 +20,12 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.accessibility.AccessibilityEvent;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
@@ -48,11 +50,12 @@ public abstract class PreviewSeekBarPreferenceFragment extends SettingsPreferenc
     /** Resource id of the layout for this preference fragment. */
     protected int mActivityLayoutResId;
 
-    /** Resource id of the layout that defines the contents instide preview screen. */
+    /** Resource id of the layout that defines the contents inside preview screen. */
     protected int[] mPreviewSampleResIds;
 
     private ViewPager mPreviewPager;
     private PreviewPagerAdapter mPreviewPagerAdapter;
+    private DotsPageIndicator mPageIndicator;
 
     private TextView mLabel;
     private View mLarger;
@@ -132,7 +135,7 @@ public abstract class PreviewSeekBarPreferenceFragment extends SettingsPreferenc
             seekBar.setEnabled(false);
         }
 
-        final Context context = getContext();
+        final Context context = getPrefContext();
         final Configuration origConfig = context.getResources().getConfiguration();
         Configuration[] configurations = new Configuration[mEntries.length];
         for (int i = 0; i < mEntries.length; ++i) {
@@ -143,14 +146,47 @@ public abstract class PreviewSeekBarPreferenceFragment extends SettingsPreferenc
                 configurations);
         mPreviewPager = (ViewPager) content.findViewById(R.id.preview_pager);
         mPreviewPager.setAdapter(mPreviewPagerAdapter);
+        mPreviewPager.addOnPageChangeListener(new OnPageChangeListener() {
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                // Do nothing.
+            }
 
-        final DotsPageIndicator pageIndicator =
-                (DotsPageIndicator) content.findViewById(R.id.page_indicator);
+            @Override
+            public void onPageScrolled(int position, float positionOffset,
+                    int positionOffsetPixels) {
+                // Do nothing.
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                mPreviewPager.sendAccessibilityEvent(AccessibilityEvent.TYPE_ANNOUNCEMENT);
+            }
+        });
+
+        mPageIndicator = (DotsPageIndicator) content.findViewById(R.id.page_indicator);
         if (mPreviewSampleResIds.length > 1) {
-            pageIndicator.setViewPager(mPreviewPager);
-            pageIndicator.setVisibility(View.VISIBLE);
+            mPageIndicator.setViewPager(mPreviewPager);
+            mPageIndicator.setVisibility(View.VISIBLE);
+            mPageIndicator.setOnPageChangeListener(new OnPageChangeListener() {
+                @Override
+                public void onPageScrollStateChanged(int state) {
+                    // Do nothing.
+                }
+
+                @Override
+                public void onPageScrolled(int position, float positionOffset,
+                        int positionOffsetPixels) {
+                    // Do nothing.
+                }
+
+                @Override
+                public void onPageSelected(int position) {
+                    setPagerIndicatorContentDescription(position);
+                }
+            });
         } else {
-            pageIndicator.setVisibility(View.GONE);
+            mPageIndicator.setVisibility(View.GONE);
         }
 
         setPreviewLayer(mInitialIndex, false);
@@ -176,9 +212,17 @@ public abstract class PreviewSeekBarPreferenceFragment extends SettingsPreferenc
         mSmaller.setEnabled(index > 0);
         mLarger.setEnabled(index < mEntries.length - 1);
 
+        setPagerIndicatorContentDescription(mPreviewPager.getCurrentItem());
+
         mPreviewPagerAdapter.setPreviewLayer(index, mCurrentIndex, mPreviewPager.getCurrentItem(),
                 animate);
         mCurrentIndex = index;
+    }
+
+    private void setPagerIndicatorContentDescription(int position) {
+        mPageIndicator.setContentDescription(
+                getPrefContext().getString(R.string.preview_page_indicator_content_description,
+                        position + 1, mPreviewSampleResIds.length));
     }
 
     /**
