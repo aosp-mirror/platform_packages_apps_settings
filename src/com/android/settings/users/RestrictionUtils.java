@@ -78,9 +78,8 @@ public class RestrictionUtils {
     public static void setRestrictions(Context context, ArrayList<RestrictionEntry> entries,
             UserHandle user) {
         UserManager um = UserManager.get(context);
-
         for (RestrictionEntry entry : entries) {
-            um.setUserRestriction(entry.getKey(), !entry.getSelectedState());
+            um.setUserRestriction(entry.getKey(), !entry.getSelectedState(), user);
         }
     }
 }
