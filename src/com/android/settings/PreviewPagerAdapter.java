@@ -50,6 +50,9 @@ public class PreviewPagerAdapter extends PagerAdapter {
         for (int i = 0; i < previewSampleResIds.length; ++i) {
             mPreviewFrames[i] = (TouchBlockingFrameLayout) LayoutInflater.from(context)
                     .inflate(R.layout.preview_frame_container, null);
+            mPreviewFrames[i].setContentDescription(
+                    context.getString(R.string.preview_page_indicator_content_description, i + 1,
+                            previewSampleResIds.length));
 
             for (Configuration configuration : configurations) {
                 // Create a new configuration for the specified value. It won't
