@@ -78,23 +78,6 @@ public class ZenModeSettings extends ZenModeSettingsBase {
         updateVisualSettingsSummary();
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.zen_settings_menu, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.zen_access:
-                ((SettingsActivity) getActivity()).startPreferencePanel(
-                            ZenAccessSettings.class.getCanonicalName(), null,
-                            R.string.manage_zen_access_title, null, this, 0);
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     private void updatePrioritySettingsSummary() {
         String s = getResources().getString(R.string.zen_mode_alarms);
         s = appendLowercase(s, isCategoryEnabled(mPolicy, Policy.PRIORITY_CATEGORY_REMINDERS),
