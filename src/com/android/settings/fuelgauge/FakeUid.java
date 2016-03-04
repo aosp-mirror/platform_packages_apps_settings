@@ -187,6 +187,11 @@ public class FakeUid extends Uid {
     }
 
     @Override
+    public Timer getProcessStateTimer(int state) {
+        return null;
+    }
+
+    @Override
     public Timer getVibratorOnTimer() {
         return null;
     }
