@@ -29,6 +29,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 
 public class NotificationLockscreenPreference extends RestrictedListPreference {
 
@@ -101,8 +102,11 @@ public class NotificationLockscreenPreference extends RestrictedListPreference {
         @Override
         public void onClick(DialogInterface dialog, int which) {
             mInner.onClick(dialog, which);
+            ListView listView = ((AlertDialog) dialog).getListView();
+            int selectedPosition = listView.getCheckedItemPosition();
             if (mView != null) {
-                mView.setVisibility(checkboxVisibilityForSelectedIndex(which, mShowRemoteInput));
+                mView.setVisibility(
+                        checkboxVisibilityForSelectedIndex(selectedPosition, mShowRemoteInput));
             }
         }
 
