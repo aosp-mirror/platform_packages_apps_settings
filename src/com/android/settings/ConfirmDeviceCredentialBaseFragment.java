@@ -223,7 +223,7 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
     }
 
     protected boolean isProfileChallenge() {
-        return Utils.isManagedProfile(UserManager.get(getContext()));
+        return Utils.isManagedProfile(UserManager.get(getContext()), mEffectiveUserId);
     }
 
     protected void reportSuccessfullAttempt() {
