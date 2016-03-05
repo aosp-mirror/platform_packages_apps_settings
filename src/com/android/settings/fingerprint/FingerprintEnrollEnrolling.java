@@ -175,7 +175,7 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
         if (!isChangingConfigurations()) {
             if (mSidecar != null) {
                 mSidecar.cancelEnrollment();
-                getFragmentManager().beginTransaction().remove(mSidecar).commit();
+                getFragmentManager().beginTransaction().remove(mSidecar).commitAllowingStateLoss();
             }
             finish();
         }
@@ -186,7 +186,7 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
         if (mSidecar != null) {
             mSidecar.setListener(null);
             mSidecar.cancelEnrollment();
-            getFragmentManager().beginTransaction().remove(mSidecar).commit();
+            getFragmentManager().beginTransaction().remove(mSidecar).commitAllowingStateLoss();
             mSidecar = null;
         }
         super.onBackPressed();
