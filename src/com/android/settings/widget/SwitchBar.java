@@ -58,6 +58,7 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
     private final TextAppearanceSpan mSummarySpan;
 
     private ToggleSwitch mSwitch;
+    private View mRestrictedIcon;
     private TextView mTextView;
     private String mLabel;
     private String mSummary;
@@ -121,6 +122,8 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
                 setTextViewLabel(isChecked);
             }
         });
+
+        mRestrictedIcon = findViewById(R.id.restricted_icon);
 
         setOnClickListener(this);
 
@@ -189,12 +192,14 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
         if (admin != null) {
             super.setEnabled(true);
             mDisabledByAdmin = true;
-            RestrictedLockUtils.setTextViewPadlock(mContext, mTextView, true);
             mTextView.setEnabled(false);
             mSwitch.setEnabled(false);
+            mSwitch.setVisibility(View.GONE);
+            mRestrictedIcon.setVisibility(View.VISIBLE);
         } else {
             mDisabledByAdmin = false;
-            RestrictedLockUtils.setTextViewPadlock(mContext, mTextView, false);
+            mSwitch.setVisibility(View.VISIBLE);
+            mRestrictedIcon.setVisibility(View.GONE);
             setEnabled(true);
         }
     }
