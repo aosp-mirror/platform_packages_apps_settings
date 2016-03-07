@@ -74,6 +74,8 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"SD கார்டை அகற்று"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"USB சேமிப்பிடத்தை அழி"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"SD கார்டை அழி"</string>
+    <!-- no translation found for preview_page_indicator_content_description (3263162369344886880) -->
+    <skip />
     <string name="font_size_summary" msgid="1690992332887488183">"திரையில் காட்டப்படும் உரையைச் சிறிதாக்கும் அல்லது பெரிதாக்கும்."</string>
     <string name="small_font" msgid="2295331917424072635">"சிறிய"</string>
     <string name="medium_font" msgid="2068475425515133701">"நடுத்தரம்"</string>
@@ -2498,8 +2500,7 @@
     <string name="zen_mode_visual_interruptions_settings_title" msgid="168576844124787420">"விஷூவல் குறுக்கீடுகள்"</string>
     <string name="configure_notification_settings" msgid="3558846607192693233">"அறிவிப்புகளை உள்ளமை"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"மேம்பட்டவை"</string>
-    <!-- no translation found for profile_section_header (2320848161066912001) -->
-    <skip />
+    <string name="profile_section_header" msgid="2320848161066912001">"பணி அறிவிப்புகள்"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"தொடர் அறிவிப்பு விளக்கு"</string>
     <string name="lock_screen_notifications_title" msgid="6173076173408887213">"பூட்டுத் திரையில்"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"எல்லா அறிவிப்பு உள்ளடக்கத்தையும் காட்டு"</string>
@@ -2519,7 +2520,7 @@
     <string name="notification_importance_min" msgid="2370444628448134377">"குறைந்தபட்சம்: ஒலியின்றி அறிவிப்புப் பட்டியலின் கீழே காட்டு"</string>
     <string name="notification_importance_low" msgid="979932751695283877">"குறைவு: ஒலியின்றி இந்த அறிவிப்புகளைக் காட்டு"</string>
     <string name="notification_importance_default" msgid="8789180840561778039">"இயல்பு: இந்த அறிவிப்புகளுக்கு ஒலியை அனுமதி"</string>
-    <string name="notification_importance_high" msgid="2401104039256903538">"அதிகம்: சில வினாடிகளுக்கு ஒலியுடன் திரையில் காட்டு"</string>
+    <string name="notification_importance_high" msgid="5044607814670313040">"அதிகம்: ஒலியுடன் சில வினாடிகள் திரையில் தோன்றும்"</string>
     <string name="notification_importance_max" msgid="6036245535555486319">"அவசரம்: அறிவிப்புகள் பட்டியலின் மேற்பகுதியில், சில வினாடிகளுக்கு ஒலியுடன் திரையில் காட்டு"</string>
     <string name="importance_reset" msgid="7458420788555607007">"மீட்டமை"</string>
     <string name="show_silently" msgid="2222875799232222056">"ஒலிக்காமல் காட்டு"</string>
@@ -2540,8 +2541,7 @@
     <string name="app_notification_block_summary" msgid="9049487483231233726">"இந்தப் பயன்பாட்டிலிருந்து எப்போதும் அறிவிப்புகளைக் காட்டாதே"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"தொந்தரவு செய்ய வேண்டாம் அமைப்பை மாற்றவும்"</string>
     <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"தொந்தரவு செய்ய வேண்டாம் என்பது முன்னுரிமை மட்டும் என்பதாக அமைக்கப்படும் போது இந்த அறிவிப்புகளைத் தொடர்ந்து குறுக்கிட அனுமதிக்கவும்"</string>
-    <string name="app_notification_sensitive_title" msgid="8465860579482264139">"முக்கியமான உள்ளடக்கத்தை மறை"</string>
-    <string name="app_notification_sensitive_summary" msgid="2515056180303710894">"இந்தச் சாதனத்தைப் பூட்டியிருக்கும் போது, தனிப்பட்ட தகவல்களைக் காட்டக்கூடிய இந்த அறிவிப்புகளின் உள்ளடக்கத்தை மறைக்கவும்"</string>
+    <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"பூட்டுத் திரையில்"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"தடுக்கப்பட்டது"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"முன்னுரிமை"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"முக்கியமானவை"</string>
@@ -2686,6 +2686,7 @@
     <string name="notifications_label" msgid="2872668710589600731">"அறிவிப்புகள்"</string>
     <string name="notifications_enabled" msgid="4386196629684749507">"இயல்பு"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"தடுக்கப்பட்டுள்ளன"</string>
+    <string name="notifications_silenced" msgid="4728603513072110381">"தடுக்கப்பட்டுள்ளன"</string>
     <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
     <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g> / <xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
@@ -2708,6 +2709,10 @@
     <string name="filter_work_apps" msgid="24519936790795574">"பணியிடம்"</string>
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"தடுக்கப்பட்டவை"</string>
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"டொமைன் URLகளுடன்"</string>
+    <string name="filter_notif_priority_apps" msgid="5056470299318500609">"டூ நாட் டிஸ்டர்பை மீறும்"</string>
+    <string name="filter_notif_sensitive_apps" msgid="3847012996691991486">"பூட்டுத்திரையில் முக்கியமானவற்றை காட்டாதவை"</string>
+    <string name="filter_notif_hide_notifications_apps" msgid="3977513041080404368">"பூட்டுத்திரையில் ஒருபோதும் காட்டாதவை"</string>
+    <string name="filter_notif_silent" msgid="8533960664617048281">"ஒலியின்றிக் காட்டுபவை"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"மேம்பட்டவை"</string>
     <string name="configure_apps" msgid="6685680790825882528">"பயன்பாடுகளை உள்ளமை"</string>
     <string name="unknown_app" msgid="5275921288718717656">"அறியப்படாத பயன்பாடு"</string>
@@ -2777,6 +2782,18 @@
     <string name="system_ui_settings" msgid="579824306467081123">"SystemUI ட்யூனரைக் காட்டு"</string>
     <string name="additional_permissions" msgid="6463784193877056080">"கூடுதல் அனுமதிகள்"</string>
     <string name="additional_permissions_more" msgid="3538612272673191451">"மேலும் <xliff:g id="COUNT">%1$d</xliff:g>"</string>
+    <!-- no translation found for share_remote_bugreport_dialog_title (1124840737776588602) -->
+    <skip />
+    <!-- no translation found for share_remote_bugreport_dialog_message_finished (4973886976504823801) -->
+    <skip />
+    <!-- no translation found for share_remote_bugreport_dialog_message (3495929560689435496) -->
+    <skip />
+    <!-- no translation found for sharing_remote_bugreport_dialog_message (5859287696666024466) -->
+    <skip />
+    <!-- no translation found for share_remote_bugreport_action (532226159318779397) -->
+    <skip />
+    <!-- no translation found for decline_remote_bugreport_action (518720235407565134) -->
+    <skip />
     <string name="usb_use_charging_only" msgid="167707234832117768">"சார்ஜ் செய்தல்"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"இந்தச் சாதனத்தைச் சார்ஜ் செய்யும்"</string>
     <string name="usb_use_power_only" msgid="6304554004177083963">"பவர் சப்ளை"</string>
@@ -2884,6 +2901,8 @@
     <string name="see_less" msgid="1250265310929558370">"குறைவாகக் காட்டு"</string>
     <string name="disconnected" msgid="5787956818111197212">"துண்டிக்கப்பட்டது"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"<xliff:g id="AMOUNT">%1$s</xliff:g> தரவு பயன்படுத்தப்பட்டுள்ளது"</string>
+    <string name="notification_summary" msgid="3071284223009798461">"அறிவிப்புகளை அனுப்புவதிலிருந்து <xliff:g id="COUNT">%1$d</xliff:g> பயன்பாடுகள் தடுக்கப்பட்டன"</string>
+    <string name="notification_summary_none" msgid="3440195312233351409">"அறிவிப்புகளை அனுப்புவதற்கு எல்லா பயன்பாடுகளும் அனுமதிக்கப்பட்டன"</string>
     <string name="apps_summary" msgid="193158055537070092">"<xliff:g id="COUNT">%1$d</xliff:g> பயன்பாடுகள் நிறுவப்பட்டுள்ளன"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"24 பயன்பாடுகள் நிறுவப்பட்டன"</string>
     <string name="storage_summary" msgid="1110250618334248745">"<xliff:g id="SIZE1">%1$s</xliff:g> / <xliff:g id="SIZE2">%2$s</xliff:g> பயன்படுத்தப்பட்டுள்ளது"</string>

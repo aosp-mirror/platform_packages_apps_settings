@@ -74,6 +74,8 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"SD 카드 마운트 해제"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"USB 저장소 지우기"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"SD 카드 지우기"</string>
+    <!-- no translation found for preview_page_indicator_content_description (3263162369344886880) -->
+    <skip />
     <string name="font_size_summary" msgid="1690992332887488183">"화면 텍스트를 축소 또는 확대합니다."</string>
     <string name="small_font" msgid="2295331917424072635">"작게"</string>
     <string name="medium_font" msgid="2068475425515133701">"보통"</string>
@@ -2498,8 +2500,7 @@
     <string name="zen_mode_visual_interruptions_settings_title" msgid="168576844124787420">"시각적 방해"</string>
     <string name="configure_notification_settings" msgid="3558846607192693233">"알림 구성"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"고급"</string>
-    <!-- no translation found for profile_section_header (2320848161066912001) -->
-    <skip />
+    <string name="profile_section_header" msgid="2320848161066912001">"직장 알림"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"알림등 반복 표시"</string>
     <string name="lock_screen_notifications_title" msgid="6173076173408887213">"잠금 화면에서"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"모든 알림 내용 표시"</string>
@@ -2519,7 +2520,7 @@
     <string name="notification_importance_min" msgid="2370444628448134377">"최소: 알림 목록 맨 아래에 무음으로 표시"</string>
     <string name="notification_importance_low" msgid="979932751695283877">"낮음: 무음으로 알림 표시"</string>
     <string name="notification_importance_default" msgid="8789180840561778039">"보통: 알림을 소리로 알리도록 허용"</string>
-    <string name="notification_importance_high" msgid="2401104039256903538">"높음: 화면에 표시하고 소리로 알림"</string>
+    <string name="notification_importance_high" msgid="5044607814670313040">"중요: 화면에 표시하고 소리로 알림"</string>
     <string name="notification_importance_max" msgid="6036245535555486319">"긴급: 알림 목록 맨 위에 표시, 화면에 표시하고 소리로 알림"</string>
     <string name="importance_reset" msgid="7458420788555607007">"초기화"</string>
     <string name="show_silently" msgid="2222875799232222056">"조용히 표시"</string>
@@ -2540,8 +2541,7 @@
     <string name="app_notification_block_summary" msgid="9049487483231233726">"이 앱의 알림 표시 안함"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"알림 일시중지 재정의"</string>
     <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"알림 일시중지가 중요 알림만으로 설정된 경우 이러한 알림을 계속 받도록 허용합니다."</string>
-    <string name="app_notification_sensitive_title" msgid="8465860579482264139">"민감한 내용 숨기기"</string>
-    <string name="app_notification_sensitive_summary" msgid="2515056180303710894">"기기가 잠긴 경우, 이러한 알림에서 개인 정보를 노출할 수 있는 콘텐츠를 숨깁니다."</string>
+    <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"잠금 화면에서"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"차단됨"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"최우선만 수신"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"중요"</string>
@@ -2686,6 +2686,7 @@
     <string name="notifications_label" msgid="2872668710589600731">"알림"</string>
     <string name="notifications_enabled" msgid="4386196629684749507">"보통"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"차단됨"</string>
+    <string name="notifications_silenced" msgid="4728603513072110381">"알림 사용 중지됨"</string>
     <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g>/<xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
     <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g>/<xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>/<xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
@@ -2708,6 +2709,10 @@
     <string name="filter_work_apps" msgid="24519936790795574">"직장"</string>
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"차단됨"</string>
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"도메인 URL이 있는 앱"</string>
+    <string name="filter_notif_priority_apps" msgid="5056470299318500609">"알림 일시중지 재정의"</string>
+    <string name="filter_notif_sensitive_apps" msgid="3847012996691991486">"잠금 화면에 민감한 콘텐츠 없음"</string>
+    <string name="filter_notif_hide_notifications_apps" msgid="3977513041080404368">"잠금 화면에서 표시 안함"</string>
+    <string name="filter_notif_silent" msgid="8533960664617048281">"무음으로 표시"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"고급"</string>
     <string name="configure_apps" msgid="6685680790825882528">"앱 설정"</string>
     <string name="unknown_app" msgid="5275921288718717656">"알 수 없는 앱"</string>
@@ -2777,6 +2782,18 @@
     <string name="system_ui_settings" msgid="579824306467081123">"SystemUI 튜너 표시"</string>
     <string name="additional_permissions" msgid="6463784193877056080">"추가 권한"</string>
     <string name="additional_permissions_more" msgid="3538612272673191451">"<xliff:g id="COUNT">%1$d</xliff:g>개 더보기"</string>
+    <!-- no translation found for share_remote_bugreport_dialog_title (1124840737776588602) -->
+    <skip />
+    <!-- no translation found for share_remote_bugreport_dialog_message_finished (4973886976504823801) -->
+    <skip />
+    <!-- no translation found for share_remote_bugreport_dialog_message (3495929560689435496) -->
+    <skip />
+    <!-- no translation found for sharing_remote_bugreport_dialog_message (5859287696666024466) -->
+    <skip />
+    <!-- no translation found for share_remote_bugreport_action (532226159318779397) -->
+    <skip />
+    <!-- no translation found for decline_remote_bugreport_action (518720235407565134) -->
+    <skip />
     <string name="usb_use_charging_only" msgid="167707234832117768">"충전 중"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"이 기기만 충전"</string>
     <string name="usb_use_power_only" msgid="6304554004177083963">"전원 공급장치"</string>
@@ -2884,6 +2901,8 @@
     <string name="see_less" msgid="1250265310929558370">"간략히 보기"</string>
     <string name="disconnected" msgid="5787956818111197212">"연결 해제됨"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"데이터 <xliff:g id="AMOUNT">%1$s</xliff:g> 사용됨"</string>
+    <string name="notification_summary" msgid="3071284223009798461">"알림을 보내지 못하도록 차단된 앱 <xliff:g id="COUNT">%1$d</xliff:g>개"</string>
+    <string name="notification_summary_none" msgid="3440195312233351409">"모든 앱 알림을 보낼 수 있도록 허용"</string>
     <string name="apps_summary" msgid="193158055537070092">"앱 <xliff:g id="COUNT">%1$d</xliff:g>개 설치됨"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"앱 24개가 설치됨"</string>
     <string name="storage_summary" msgid="1110250618334248745">"<xliff:g id="SIZE2">%2$s</xliff:g> 중 <xliff:g id="SIZE1">%1$s</xliff:g> 사용됨"</string>

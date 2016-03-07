@@ -75,6 +75,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Isključi SD karticu"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Izbriši memoriju USB"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Izbriši SD karticu"</string>
+    <string name="preview_page_indicator_content_description" msgid="3263162369344886880">"Zaslon za pregled <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> od <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="font_size_summary" msgid="1690992332887488183">"Smanjuje ili povećava tekst na zaslonu."</string>
     <string name="small_font" msgid="2295331917424072635">"Mali"</string>
     <string name="medium_font" msgid="2068475425515133701">"Srednji"</string>
@@ -85,7 +86,7 @@
     <skip />
     <string name="font_size_preview_text_headline" msgid="7955317408475392247">"Primjer teksta"</string>
     <string name="font_size_preview_text_title" msgid="1310536233106975546">"Čarobnjak iz Oza"</string>
-    <string name="font_size_preview_text_subtitle" msgid="4231671528173110093">"11. poglavlje: Čudesni smaragdni grad Oz"</string>
+    <string name="font_size_preview_text_subtitle" msgid="4231671528173110093">"11. poglavlje: Čudesni Smaragdni Grad čarobnjaka Oza"</string>
     <string name="font_size_preview_text_body" msgid="1250552239682375643">"Iako su im oči bile zaštićene zelenim naočalama, Dorothy i njezini prijatelji isprva su bili zaslijepljeni sjajem prekrasnoga grada. U ulicama su se nizale lijepe kuće, sve redom izgrađene od zelena mramora i posute blistavim smaragdima. Hodali su pločnikom od istog zelenog mramora, a na spojevima blokova bili su gusti nizovi smaragda koji su caklili pod svjetlinom sunca. Prozorska okna bila su od zelena stakla, čak je i nebo iznad grada imalo zelen ton i sunčane su zrake bile zelene. \n\nGradom je šetalo mnogo ljudi, muškaraca, žena i djece, i svi su bili odjeveni u zeleno i imali zelenkastu kožu. U čudu su promatrali Dorothy i njezino neobično društvo, a sva su djeca bježala i skrivala se iza majki kada su ugledala Lava, no nitko im se nije obraćao. U ulici su se nalazile brojne trgovine i Dorothy je primijetila da je sve u njima bilo zeleno. Prodavali su se zeleni slatkiši i zelene kokice, kao i zelene cipele, zeleni šeširi i razna zelena odjeća. Na jednom mjestu netko je prodavao zelenu limunadu, a kada su je djeca kupovala, Dorothy je vidjela da su je plaćala zelenim novčićima. \n\nČinilo se da nema konja, a ni drugih životinja, ljudi su prevozili stvari u malim zelenim kolicima koja su gurali pred sobom. Svi su se doimali sretnima, zadovoljnima i imućnima."</string>
     <string name="font_size_save" msgid="3450855718056759095">"U redu"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"Memorija USB"</string>
@@ -2535,7 +2536,7 @@
     <string name="notification_importance_min" msgid="2370444628448134377">"Najmanja: prikaži tiho pri dnu popisa obavijesti"</string>
     <string name="notification_importance_low" msgid="979932751695283877">"Niska: prikazuj te obavijesti tiho"</string>
     <string name="notification_importance_default" msgid="8789180840561778039">"Uobičajena: dopusti obavijestima da emitiraju zvučne signale"</string>
-    <string name="notification_importance_high" msgid="2401104039256903538">"Visoka: prikaži na zaslonu i dopusti zvuk"</string>
+    <string name="notification_importance_high" msgid="5044607814670313040">"Visoka: prikaži na zaslonu i dopusti zvuk"</string>
     <string name="notification_importance_max" msgid="6036245535555486319">"Hitna: prikaži pri vrhu popisa obavijesti, prikaži na zaslonu i dopusti zvuk"</string>
     <string name="importance_reset" msgid="7458420788555607007">"Poništi"</string>
     <string name="show_silently" msgid="2222875799232222056">"Prikaži tiho"</string>
@@ -2557,8 +2558,7 @@
     <string name="app_notification_block_summary" msgid="9049487483231233726">"Nikad ne prikazuj obavijesti te aplikacije"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"Nadjačaj Ne ometaj"</string>
     <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"Neka te obavijesti nastave prekidati kada je način Ne ometaj postavljen na Samo prioritetno"</string>
-    <string name="app_notification_sensitive_title" msgid="8465860579482264139">"Sakrij osjetljiv sadržaj"</string>
-    <string name="app_notification_sensitive_summary" msgid="2515056180303710894">"Kada je uređaj zaključan, u tim obavijestima sakrij sadržaj koji bi mogao otkriti privatne podatke"</string>
+    <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"Na zaključanom zaslonu"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Blokirano"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Prioritet"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Osjetljivo"</string>
@@ -2705,6 +2705,7 @@
     <string name="notifications_label" msgid="2872668710589600731">"Obavijesti"</string>
     <string name="notifications_enabled" msgid="4386196629684749507">"Uobičajeno"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"Blokirano"</string>
+    <string name="notifications_silenced" msgid="4728603513072110381">"Onemogućeno"</string>
     <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g>/<xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
     <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g>/<xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>/<xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
@@ -2730,6 +2731,10 @@
     <string name="filter_work_apps" msgid="24519936790795574">"Posao"</string>
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"Blokirano"</string>
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"S URL-ovima domena"</string>
+    <string name="filter_notif_priority_apps" msgid="5056470299318500609">"Nadjačava Ne ometaj"</string>
+    <string name="filter_notif_sensitive_apps" msgid="3847012996691991486">"Bez osjetljivog na zaklj. zas."</string>
+    <string name="filter_notif_hide_notifications_apps" msgid="3977513041080404368">"Nikad na zaključanom zaslonu"</string>
+    <string name="filter_notif_silent" msgid="8533960664617048281">"Prikazuje se tiho"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Napredno"</string>
     <string name="configure_apps" msgid="6685680790825882528">"Konfiguranje aplikacija"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Nepoznata aplikacija"</string>
@@ -2801,6 +2806,12 @@
     <string name="system_ui_settings" msgid="579824306467081123">"Prikaži Prijamnik kor. suč."</string>
     <string name="additional_permissions" msgid="6463784193877056080">"Dodatna dopuštenja"</string>
     <string name="additional_permissions_more" msgid="3538612272673191451">"Još <xliff:g id="COUNT">%1$d</xliff:g>"</string>
+    <string name="share_remote_bugreport_dialog_title" msgid="1124840737776588602">"Želite li podijeliti izvješće o programskoj pogrešci?"</string>
+    <string name="share_remote_bugreport_dialog_message_finished" msgid="4973886976504823801">"IT administrator zatražio je izvješće o programskoj pogrešci radi lakšeg rješavanja problema na uređaju. Moguće je da će se aplikacije i podaci dijeliti."</string>
+    <string name="share_remote_bugreport_dialog_message" msgid="3495929560689435496">"IT administrator zatražio je izvješće o programskoj pogrešci radi lakšeg rješavanja problema na uređaju. Moguće je da će se aplikacije i podaci dijeliti, što bi moglo privremeno usporiti uređaj."</string>
+    <string name="sharing_remote_bugreport_dialog_message" msgid="5859287696666024466">"Ovo izvješće o programskoj pogrešci dijeli se s vašim IT administratorom. Više pojedinosti možete saznati od te osobe."</string>
+    <string name="share_remote_bugreport_action" msgid="532226159318779397">"Dijeli"</string>
+    <string name="decline_remote_bugreport_action" msgid="518720235407565134">"Odbij"</string>
     <string name="usb_use_charging_only" msgid="167707234832117768">"Punjenje"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"Samo punjenje uređaja"</string>
     <string name="usb_use_power_only" msgid="6304554004177083963">"Napajanje"</string>
@@ -2909,6 +2920,8 @@
     <string name="see_less" msgid="1250265310929558370">"Prikaži manje"</string>
     <string name="disconnected" msgid="5787956818111197212">"Veza je prekinuta"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"Količina iskorištenih podataka: <xliff:g id="AMOUNT">%1$s</xliff:g>"</string>
+    <string name="notification_summary" msgid="3071284223009798461">"Slanje je blokirano za <xliff:g id="COUNT">%1$d</xliff:g> apl."</string>
+    <string name="notification_summary_none" msgid="3440195312233351409">"Sve aplikacije mogu slati"</string>
     <string name="apps_summary" msgid="193158055537070092">"Broj instaliranih aplikacija: <xliff:g id="COUNT">%1$d</xliff:g>"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"Instalirane su 24 aplikacije"</string>
     <string name="storage_summary" msgid="1110250618334248745">"Iskorišteno <xliff:g id="SIZE1">%1$s</xliff:g> od <xliff:g id="SIZE2">%2$s</xliff:g>"</string>

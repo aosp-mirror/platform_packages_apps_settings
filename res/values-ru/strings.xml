@@ -76,6 +76,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Извлечь SD-карту"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Очистить USB-накопитель"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Очистить SD-карту"</string>
+    <string name="preview_page_indicator_content_description" msgid="3263162369344886880">"Окно предварительного просмотра <xliff:g id="CURRENT_PAGE">%1$d</xliff:g>. Всего <xliff:g id="NUM_PAGES">%2$d</xliff:g>."</string>
     <string name="font_size_summary" msgid="1690992332887488183">"Увеличение или уменьшение размера шрифта."</string>
     <string name="small_font" msgid="2295331917424072635">"Маленький"</string>
     <string name="medium_font" msgid="2068475425515133701">"Среднее"</string>
@@ -1661,7 +1662,7 @@
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"ВЫКЛ завершает вызов"</string>
     <string name="accessibility_toggle_speak_password_preference_title" msgid="5986628515113204844">"Озвучивать пароли"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"Крупный указатель мыши"</string>
-    <string name="accessibility_toggle_master_mono_title" msgid="4363806997971905302">"Моно"</string>
+    <string name="accessibility_toggle_master_mono_title" msgid="4363806997971905302">"Монофонический звук"</string>
     <string name="accessibility_toggle_master_mono_summary" msgid="5634277025251530927">"Объединять каналы при воспроизведении аудио"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="4068253727586393334">"Задержка при нажатии и удержании"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Инверсия цветов"</string>
@@ -2532,8 +2533,7 @@
     <string name="zen_mode_visual_interruptions_settings_title" msgid="168576844124787420">"Визуальное оповещение"</string>
     <string name="configure_notification_settings" msgid="3558846607192693233">"Настройка уведомлений"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"Расширенные настройки"</string>
-    <!-- no translation found for profile_section_header (2320848161066912001) -->
-    <skip />
+    <string name="profile_section_header" msgid="2320848161066912001">"Рабочие уведомления"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"Световой индикатор"</string>
     <string name="lock_screen_notifications_title" msgid="6173076173408887213">"На заблокированном экране"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Показывать уведомление полностью"</string>
@@ -2553,8 +2553,8 @@
     <string name="notification_importance_min" msgid="2370444628448134377">"Наименьшая: показывать без звука в конце списка уведомлений"</string>
     <string name="notification_importance_low" msgid="979932751695283877">"Низкая: показывать без звука"</string>
     <string name="notification_importance_default" msgid="8789180840561778039">"Средняя: показывать со звуком"</string>
-    <string name="notification_importance_high" msgid="2401104039256903538">"Высокая: показывать со звуком поверх всех окон"</string>
-    <string name="notification_importance_max" msgid="6036245535555486319">"Крайняя: показывать со звуком в начале списка уведомлений и поверх всех окон"</string>
+    <string name="notification_importance_high" msgid="5044607814670313040">"Важно: показывать со звуковым сигналом поверх всех окон"</string>
+    <string name="notification_importance_max" msgid="6036245535555486319">"Наивысшая: показывать со звуком в начале списка уведомлений и поверх всех окон"</string>
     <string name="importance_reset" msgid="7458420788555607007">"Сбросить"</string>
     <string name="show_silently" msgid="2222875799232222056">"Без звука"</string>
     <string name="show_silently_summary" msgid="7616604629123146565">"Отключить звуковой сигнал и вибрацию, не показывать оповещения поверх других приложений."</string>
@@ -2576,8 +2576,7 @@
     <string name="app_notification_block_summary" msgid="9049487483231233726">"Не показывать уведомления из этого приложения"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"Переопределить режим \"Не беспокоить\""</string>
     <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"Разрешить эти уведомления, когда в режиме \"Не беспокоить\" выбрано \"Только важные\""</string>
-    <string name="app_notification_sensitive_title" msgid="8465860579482264139">"Скрыть конфиденциальные данные"</string>
-    <string name="app_notification_sensitive_summary" msgid="2515056180303710894">"Не показывать конфиденциальные данные в уведомлениях, когда устройство заблокировано"</string>
+    <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"На заблокированном экране"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Заблокировано"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Важные"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Конфиденциальные"</string>
@@ -2726,6 +2725,7 @@
     <string name="notifications_label" msgid="2872668710589600731">"Уведомления"</string>
     <string name="notifications_enabled" msgid="4386196629684749507">"Обычные"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"Заблокировано"</string>
+    <string name="notifications_silenced" msgid="4728603513072110381">"Оповещения отключены"</string>
     <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g>/<xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
     <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g>/<xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>/<xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
@@ -2754,6 +2754,10 @@
     <string name="filter_work_apps" msgid="24519936790795574">"Рабочие"</string>
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"Заблокированные"</string>
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"С URL домена"</string>
+    <string name="filter_notif_priority_apps" msgid="5056470299318500609">"Переопределяет отключение оповещений"</string>
+    <string name="filter_notif_sensitive_apps" msgid="3847012996691991486">"Не показ. конфиденц. данные на заблок. экране"</string>
+    <string name="filter_notif_hide_notifications_apps" msgid="3977513041080404368">"Не показывать на заблок. экране"</string>
+    <string name="filter_notif_silent" msgid="8533960664617048281">"Без звука"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Дополнительные настройки"</string>
     <string name="configure_apps" msgid="6685680790825882528">"Настроить приложения"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Неизвестное приложение"</string>
@@ -2827,6 +2831,12 @@
     <string name="system_ui_settings" msgid="579824306467081123">"Показать SystemUI Tuner"</string>
     <string name="additional_permissions" msgid="6463784193877056080">"Ещё разрешения"</string>
     <string name="additional_permissions_more" msgid="3538612272673191451">"Ещё <xliff:g id="COUNT">%1$d</xliff:g>"</string>
+    <string name="share_remote_bugreport_dialog_title" msgid="1124840737776588602">"Разрешить доступ к информации об ошибке?"</string>
+    <string name="share_remote_bugreport_dialog_message_finished" msgid="4973886976504823801">"Администратор запросил отчет об ошибке, чтобы устранить неполадку. Он может получить доступ к приложениям и данным."</string>
+    <string name="share_remote_bugreport_dialog_message" msgid="3495929560689435496">"Администратор запросил отчет об ошибке, чтобы устранить неполадку. Он может получить доступ к приложениям и данным. Возможно временное снижение скорости работы вашего устройства."</string>
+    <string name="sharing_remote_bugreport_dialog_message" msgid="5859287696666024466">"Администратору предоставлен доступ к отчету об ошибке. Обратитесь к нему за дополнительной информацией."</string>
+    <string name="share_remote_bugreport_action" msgid="532226159318779397">"Предоставить доступ"</string>
+    <string name="decline_remote_bugreport_action" msgid="518720235407565134">"Отклонить"</string>
     <string name="usb_use_charging_only" msgid="167707234832117768">"Зарядка"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"Просто зарядка устройства"</string>
     <string name="usb_use_power_only" msgid="6304554004177083963">"Источник питания"</string>
@@ -2936,6 +2946,8 @@
     <string name="see_less" msgid="1250265310929558370">"Скрыть"</string>
     <string name="disconnected" msgid="5787956818111197212">"Отключено"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"Использовано трафика: <xliff:g id="AMOUNT">%1$s</xliff:g>"</string>
+    <string name="notification_summary" msgid="3071284223009798461">"Оповещения заблокированы в некоторых приложениях (<xliff:g id="COUNT">%1$d</xliff:g>)"</string>
+    <string name="notification_summary_none" msgid="3440195312233351409">"Оповещения разрешены во всех приложениях"</string>
     <string name="apps_summary" msgid="193158055537070092">"Установлено приложений: <xliff:g id="COUNT">%1$d</xliff:g>"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"Установлено 24 приложения"</string>
     <string name="storage_summary" msgid="1110250618334248745">"Использовано: <xliff:g id="SIZE1">%1$s</xliff:g> из <xliff:g id="SIZE2">%2$s</xliff:g>"</string>

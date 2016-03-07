@@ -74,6 +74,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"SD कार्ड अनमाउन्ट गर्नुहोस्"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"USB भण्डारण मेटाउनुहोस्"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"SD कार्ड मेटाउनुहोस्"</string>
+    <string name="preview_page_indicator_content_description" msgid="3263162369344886880">"पूर्वावलोकन स्क्रिन <xliff:g id="NUM_PAGES">%2$d</xliff:g> मध्ये <xliff:g id="CURRENT_PAGE">%1$d</xliff:g>"</string>
     <string name="font_size_summary" msgid="1690992332887488183">"स्क्रिनमा भएको पाठलाई अझै सानो वा ठूलो बनाउनुहोस्।"</string>
     <string name="small_font" msgid="2295331917424072635">"सानो"</string>
     <string name="medium_font" msgid="2068475425515133701">"माध्यम"</string>
@@ -2518,7 +2519,7 @@
     <string name="notification_importance_min" msgid="2370444628448134377">"न्यून: सूचना सूचीको फेदमा बिना आवाज देखाउने"</string>
     <string name="notification_importance_low" msgid="979932751695283877">"न्यून: यी सूचनाहरूलाई बिना आवाज देखाउने"</string>
     <string name="notification_importance_default" msgid="8789180840561778039">"सामान्य: यी सूचनाहरूलाई ध्वनि निकाल्न अनुमति दिने"</string>
-    <string name="notification_importance_high" msgid="2401104039256903538">"उच्च: स्क्रिनमा चियाउने र ध्वनि निकाल्न अनुमति दिने"</string>
+    <string name="notification_importance_high" msgid="5044607814670313040">"उच्च: स्क्रिनमा चियाउने र ध्वनि निकाल्न अनुमति दिने"</string>
     <string name="notification_importance_max" msgid="6036245535555486319">"उच्च: सूचना सूचीको शीर्षमा देखाउने, स्क्रिनमा चियाउने र ध्वनि निकाल्न अनुमति दिने"</string>
     <string name="importance_reset" msgid="7458420788555607007">"रिसेट गर्नुहोस्"</string>
     <string name="show_silently" msgid="2222875799232222056">"मौन रूपमा देखाउनुहोस्"</string>
@@ -2539,8 +2540,7 @@
     <string name="app_notification_block_summary" msgid="9049487483231233726">"यस अनुप्रयोगबाट सूचनाहरू कहिल्यै नदेखाउनुहोस्"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"बाधा नपुर्याउनुहोस् मा ओभरराइड गर्नुहोस्"</string>
     <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"बाधा नपुर्याउनुहोस् प्राथमिकतामा मात्र सेट भएको बेला यी सूचनाहरूबाट हुने अवरोधका लागि अनुमति दिनुहोस्।"</string>
-    <string name="app_notification_sensitive_title" msgid="8465860579482264139">"संवेदनशील सामग्री लुकाउनुहोस्"</string>
-    <string name="app_notification_sensitive_summary" msgid="2515056180303710894">"यन्त्र बन्द हुँदा, यी सूचनाहरूमा सामग्री लुकाउनुहोस् जसबाट निजी जानकारी बाहिर जान सक्छ"</string>
+    <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"लक स्क्रिनमा"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"अवरूद्ध गरियो"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"प्राथमिकता"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"संवेदनशील"</string>
@@ -2685,6 +2685,7 @@
     <string name="notifications_label" msgid="2872668710589600731">"सूचनाहरू"</string>
     <string name="notifications_enabled" msgid="4386196629684749507">"सामान्य"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"रोकियो"</string>
+    <string name="notifications_silenced" msgid="4728603513072110381">"मौन पारिएको छ"</string>
     <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
     <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g> / <xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
@@ -2707,6 +2708,10 @@
     <string name="filter_work_apps" msgid="24519936790795574">"कार्य"</string>
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"रोकियो"</string>
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"डोमेन URLहरू मार्फत"</string>
+    <string name="filter_notif_priority_apps" msgid="5056470299318500609">"बाधा नपुर्याउनुहोस् लाई ओभरराइड गर्छ"</string>
+    <string name="filter_notif_sensitive_apps" msgid="3847012996691991486">"लक स्क्रिनमा कुनै पनि संवेदनशील सामग्री नदेखाउने"</string>
+    <string name="filter_notif_hide_notifications_apps" msgid="3977513041080404368">"लक स्क्रिनमा कहिल्यै नदेखाइने"</string>
+    <string name="filter_notif_silent" msgid="8533960664617048281">"बिना आवाज देखाउने"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"उन्नत"</string>
     <string name="configure_apps" msgid="6685680790825882528">"अनुप्रयोगहरू कन्फिगर गर्नुहोस्"</string>
     <string name="unknown_app" msgid="5275921288718717656">"अज्ञात अनुप्रयोग"</string>
@@ -2776,6 +2781,12 @@
     <string name="system_ui_settings" msgid="579824306467081123">"SystemUI Tuner देखाउनुहोस्"</string>
     <string name="additional_permissions" msgid="6463784193877056080">"अतिरिक्त अनुमतिहरू"</string>
     <string name="additional_permissions_more" msgid="3538612272673191451">"<xliff:g id="COUNT">%1$d</xliff:g> थप"</string>
+    <string name="share_remote_bugreport_dialog_title" msgid="1124840737776588602">"बग रिपोर्टलाई साझेदारी गर्ने हो?"</string>
+    <string name="share_remote_bugreport_dialog_message_finished" msgid="4973886976504823801">"तपाईँको IT प्रशासकले यस यन्त्रको समस्या निवारण गर्नमा मद्दत गर्न बग रिपोर्टका लागि अनुरोध गर्नुभएको छ। अनुप्रयोग र डेटा साझेदारी हुन सक्छ।"</string>
+    <string name="share_remote_bugreport_dialog_message" msgid="3495929560689435496">"तपाईँको IT प्रशासकले यस यन्त्रको समस्या निवारण गर्नमा मद्दत गर्न बग रिपोर्टका लागि अनुरोध गर्नुभएको छ। अनुप्रयोग र डेटा साझेदारी हुन सक्छ र तपाईँको यन्त्र अस्थायी रूपमा सुस्त हुन सक्छ।"</string>
+    <string name="sharing_remote_bugreport_dialog_message" msgid="5859287696666024466">"यो बग रिपोर्ट तपाईँको IT प्रशासकसँग साझेदारी भइरहेको छ। थप विवरणहरूका लागि प्रशासकलाई सम्पर्क गर्नुहोस्।"</string>
+    <string name="share_remote_bugreport_action" msgid="532226159318779397">"साझेदारी गर्नुहोस्"</string>
+    <string name="decline_remote_bugreport_action" msgid="518720235407565134">"अस्वीकार गर्नुहोस्"</string>
     <string name="usb_use_charging_only" msgid="167707234832117768">"चार्ज हुँदै"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"केवल यो उपकरण चार्ज गर्नुहोस्"</string>
     <string name="usb_use_power_only" msgid="6304554004177083963">"विद्युत आपूर्ति"</string>
@@ -2883,6 +2894,8 @@
     <string name="see_less" msgid="1250265310929558370">"कम हेर्नुहोस्"</string>
     <string name="disconnected" msgid="5787956818111197212">"विच्छेद भयो"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"डेटाको <xliff:g id="AMOUNT">%1$s</xliff:g> प्रयोग गरियो"</string>
+    <string name="notification_summary" msgid="3071284223009798461">"<xliff:g id="COUNT">%1$d</xliff:g> अनुप्रयोगहरूलाई पठाउनदेखि रोकिएको छ"</string>
+    <string name="notification_summary_none" msgid="3440195312233351409">"सबै अनुप्रयोगहरूलाई पठाउने अनुमति दिइएको छ"</string>
     <string name="apps_summary" msgid="193158055537070092">"<xliff:g id="COUNT">%1$d</xliff:g> अनुप्रयोगहरू स्थापना गरियो"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"२४ अनुप्रयोगहरू स्थापित गरियो"</string>
     <string name="storage_summary" msgid="1110250618334248745">"<xliff:g id="SIZE2">%2$s</xliff:g> को <xliff:g id="SIZE1">%1$s</xliff:g> प्रयोग गरियो"</string>
