@@ -76,6 +76,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Відключ. карту SD"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Очистити носій USB"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Очист. карту SD"</string>
+    <string name="preview_page_indicator_content_description" msgid="3263162369344886880">"Попередній перегляд <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> з <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="font_size_summary" msgid="1690992332887488183">"Збільшуйте або зменшуйте текст на екрані."</string>
     <string name="small_font" msgid="2295331917424072635">"Малий"</string>
     <string name="medium_font" msgid="2068475425515133701">"Середній"</string>
@@ -2552,7 +2553,7 @@
     <string name="notification_importance_min" msgid="2370444628448134377">"Мінімальний: показувати сповіщення внизу списку без звукового сигналу"</string>
     <string name="notification_importance_low" msgid="979932751695283877">"Низький: показувати сповіщення без звукового сигналу"</string>
     <string name="notification_importance_default" msgid="8789180840561778039">"Звичайний: увімкнути звуковий сигнал для цих сповіщень"</string>
-    <string name="notification_importance_high" msgid="2401104039256903538">"Високий: показувати сповіщення на екрані зі звуковим сигналом"</string>
+    <string name="notification_importance_high" msgid="5044607814670313040">"Термінові: показувати на екрані зі звуковим сигналом"</string>
     <string name="notification_importance_max" msgid="6036245535555486319">"Максимальний: показувати сповіщення вгорі списку, на екрані та зі звуковим сигналом"</string>
     <string name="importance_reset" msgid="7458420788555607007">"Скинути"</string>
     <string name="show_silently" msgid="2222875799232222056">"Показувати без звукового сигналу"</string>
@@ -2575,8 +2576,7 @@
     <string name="app_notification_block_summary" msgid="9049487483231233726">"Ніколи не показувати сповіщення з цього додатка"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"Заміна режиму \"Не турбувати\""</string>
     <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"Показувати ці сповіщення, коли в режимі \"Не турбувати\" вибрано \"Лише пріоритетні\""</string>
-    <string name="app_notification_sensitive_title" msgid="8465860579482264139">"Ховати конфіденційний вміст"</string>
-    <string name="app_notification_sensitive_summary" msgid="2515056180303710894">"Коли пристрій заблоковано, ховати конфіденційний вміст цих сповіщень"</string>
+    <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"На екрані блокування"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Заблоковано"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Пріоритетні"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Конфіденційно"</string>
@@ -2725,6 +2725,7 @@
     <string name="notifications_label" msgid="2872668710589600731">"Сповіщення"</string>
     <string name="notifications_enabled" msgid="4386196629684749507">"Звичайні"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"Заблоковано"</string>
+    <string name="notifications_silenced" msgid="4728603513072110381">"Сповіщення вимкнено"</string>
     <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
     <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g> / <xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
@@ -2753,6 +2754,10 @@
     <string name="filter_work_apps" msgid="24519936790795574">"Робочі"</string>
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"Заблоковані"</string>
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"З URL-адресами домену"</string>
+    <string name="filter_notif_priority_apps" msgid="5056470299318500609">"Замінює режим \"Не турбувати\""</string>
+    <string name="filter_notif_sensitive_apps" msgid="3847012996691991486">"Без приватних даних на заблок. екрані"</string>
+    <string name="filter_notif_hide_notifications_apps" msgid="3977513041080404368">"Немає на заблокованому екрані"</string>
+    <string name="filter_notif_silent" msgid="8533960664617048281">"Показуються без звукового сигналу"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Розширені налаштування"</string>
     <string name="configure_apps" msgid="6685680790825882528">"Налаштування додатків"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Невідомий додаток"</string>
@@ -2826,6 +2831,12 @@
     <string name="system_ui_settings" msgid="579824306467081123">"Показати SystemUI Tuner"</string>
     <string name="additional_permissions" msgid="6463784193877056080">"Додаткові дозволи"</string>
     <string name="additional_permissions_more" msgid="3538612272673191451">"Ще <xliff:g id="COUNT">%1$d</xliff:g>"</string>
+    <string name="share_remote_bugreport_dialog_title" msgid="1124840737776588602">"Надіслати звіт про помилку?"</string>
+    <string name="share_remote_bugreport_dialog_message_finished" msgid="4973886976504823801">"Ваш IT-адміністратор просить надіслати повідомлення про помилку, щоб вирішити проблему з пристроєм. Він може отримати доступ до ваших додатків і даних."</string>
+    <string name="share_remote_bugreport_dialog_message" msgid="3495929560689435496">"Ваш IT-адміністратор просить надіслати повідомлення про помилку, щоб вирішити проблему з пристроєм. Він може отримати доступ до ваших додатків і даних. Це також може тимчасово сповільнити роботу вашого пристрою."</string>
+    <string name="sharing_remote_bugreport_dialog_message" msgid="5859287696666024466">"Вашому IT-адміністратору надано доступ до цього звіту про помилку. Зв’яжіться з ним, щоб дізнатися більше."</string>
+    <string name="share_remote_bugreport_action" msgid="532226159318779397">"Поділитися"</string>
+    <string name="decline_remote_bugreport_action" msgid="518720235407565134">"Відхилити"</string>
     <string name="usb_use_charging_only" msgid="167707234832117768">"Заряджання"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"Лише зарядити пристрій"</string>
     <string name="usb_use_power_only" msgid="6304554004177083963">"Джерело живлення"</string>
@@ -2935,6 +2946,8 @@
     <string name="see_less" msgid="1250265310929558370">"Показати менше"</string>
     <string name="disconnected" msgid="5787956818111197212">"Від’єднано"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"Використовується трафіку: <xliff:g id="AMOUNT">%1$s</xliff:g>"</string>
+    <string name="notification_summary" msgid="3071284223009798461">"Додатків, яким заборонено надсилати сповіщення: <xliff:g id="COUNT">%1$d</xliff:g>"</string>
+    <string name="notification_summary_none" msgid="3440195312233351409">"Усім додаткам дозволено надсилати сповіщення"</string>
     <string name="apps_summary" msgid="193158055537070092">"Установлено додатків: <xliff:g id="COUNT">%1$d</xliff:g>"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"Установлено 24 додатки"</string>
     <string name="storage_summary" msgid="1110250618334248745">"Використано <xliff:g id="SIZE1">%1$s</xliff:g> з <xliff:g id="SIZE2">%2$s</xliff:g>"</string>

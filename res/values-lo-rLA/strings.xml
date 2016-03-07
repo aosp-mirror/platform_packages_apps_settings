@@ -74,6 +74,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"ຖອດການເຊື່ອມຕໍ່ SD card"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"ລຶບບ່ອນເກັບຂໍ້ມູນ USB"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"ລຶບຂໍ້ມູນໃນ SD card"</string>
+    <string name="preview_page_indicator_content_description" msgid="3263162369344886880">"ໜ້າຈໍຕົວຢ່າງ <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> ຈາກທັງໝົດ <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="font_size_summary" msgid="1690992332887488183">"ເຮັດໃຫ້ຂໍ້ຄວາມໃນໜ້າຈໍນ້ອຍລົງ ຫຼື ໃຫຍ່ຂຶ້ນ."</string>
     <string name="small_font" msgid="2295331917424072635">"ຂະໜາດນ້ອຍ"</string>
     <string name="medium_font" msgid="2068475425515133701">"ຂະໜາດກາງ"</string>
@@ -2518,7 +2519,7 @@
     <string name="notification_importance_min" msgid="2370444628448134377">"ໜ້ອຍສຸດ: ສະແດງຢູ່ສ່ວນລຸ່ມຂອງລາຍການແຈ້ງເຕືອນໂດຍບໍ່ໃຊ້ສຽງ"</string>
     <string name="notification_importance_low" msgid="979932751695283877">"ຕໍ່າ: ສະແດງການແຈ້ງເຕືອນເຫຼົ່ານີ້ໂດຍບໍ່ໃຊ້ສຽງ"</string>
     <string name="notification_importance_default" msgid="8789180840561778039">"ປົກກະຕິ: ອະນຸຍາດການແຈ້ງເຕືອນເຫຼົ່ານີ້ໃຫ້ໃຊ້ສຽງໄດ້"</string>
-    <string name="notification_importance_high" msgid="2401104039256903538">"ສູງ: ແຈ້ງໄປໜ້າຈໍ ແລະ ອະນຸຍາດໃຫ້ໃຊ້ສຽງໄດ້"</string>
+    <string name="notification_importance_high" msgid="5044607814670313040">"ສູງ: ສະແດງຂຶ້ນເທິງຫນ້າຈໍ ແລະ ອະນຸຍາດໃຫ້ສົ່ງສຽງດັງໄດ້"</string>
     <string name="notification_importance_max" msgid="6036245535555486319">"ເລັ່ງດ່ວນ: ສະແດງຢູ່ເທິງສຸດຂອງລາຍການແຈ້ງເຕືອນ, ແຈ້ງໄປຫາໜ້າຈໍ ແລະ ອະນຸຍາດໃຫ້ໃຊ້ສຽງໄດ້"</string>
     <string name="importance_reset" msgid="7458420788555607007">"ຣີເຊັດ"</string>
     <string name="show_silently" msgid="2222875799232222056">"ສະແດງແບບມິດໆ"</string>
@@ -2539,8 +2540,7 @@
     <string name="app_notification_block_summary" msgid="9049487483231233726">"ບໍ່​ຕ້ອງ​ສະ​ແດງ​ການ​ແຈ້ງ​ເຕືອນ​ຈາກ​ແອັບຯ​ນີ້"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"ຍົກເລີກຫ້າມລົບກວນ"</string>
     <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"ອະນຸຍາດ​ໃຫ້ການ​ແຈ້ງ​ເຕືອນ​​ເຫຼົ່າ​ນີ້​ສືບ​ຕໍ່​ຂັດ​ຈັງຫວະ ​ເມື່ອຄຸນສົມບັດ ຫ້າມ​ລົບ​ກວນ ຖືກ​ຕັ້ງ​ເປັນແບບບຸລິ​ມະ​ສິດ​ເທົ່າ​ນັ້ນ"</string>
-    <string name="app_notification_sensitive_title" msgid="8465860579482264139">"ເຊື່ອງ​ເນື້ອ​ໃນ​ລະ​ອຽດ​ອ່ອນ"</string>
-    <string name="app_notification_sensitive_summary" msgid="2515056180303710894">"​ເມື່ອ​ອຸປະກອນ​ຖືກ​ລັອກ​​ໄວ້, ​ໃຫ້ເຊື່ອງ​ເນື້ອ​ຫາ​ໃນ​ການ​ແຈ້ງ​ເຕືອນ​ເຫຼົ່າ​ນີ້​ທີ່​ອາດ​​ເປີດ​ເຜີຍ​ຂໍ້​ມູນ​ສ່ວນ​ຕົວ"</string>
+    <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"ຢູ່ໜ້າຈໍລັອກ"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"ບລັອກ​ແລ້ວ"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"ລະດັບຄວາມສຳຄັນ"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"​ລະ​ອຽດ​​ອ່ອນ"</string>
@@ -2685,6 +2685,7 @@
     <string name="notifications_label" msgid="2872668710589600731">"ການແຈ້ງເຕືອນ"</string>
     <string name="notifications_enabled" msgid="4386196629684749507">"ປົກ​ກ​ະ​ຕິ"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"ບລັອກໄວ້ແລ້ວ"</string>
+    <string name="notifications_silenced" msgid="4728603513072110381">"ປິດສຽງໄວ້ແລ້ວ"</string>
     <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
     <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g> / <xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
@@ -2707,6 +2708,10 @@
     <string name="filter_work_apps" msgid="24519936790795574">"ວຽກ"</string>
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"ບລັອກ​ແລ້ວ"</string>
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"ກັບ URL ໂດ​ເມນ"</string>
+    <string name="filter_notif_priority_apps" msgid="5056470299318500609">"ຍົກເລີກຄຳສັ່ງຫ້າມລົບກວນ"</string>
+    <string name="filter_notif_sensitive_apps" msgid="3847012996691991486">"ບໍ່ມີເນື້ອຫາທີ່ລະອຽດອ່ອນໃນໜ້າຈໍລັອກ"</string>
+    <string name="filter_notif_hide_notifications_apps" msgid="3977513041080404368">"ຢ່າສະແດງໃນໜ້າຈໍລັອກ"</string>
+    <string name="filter_notif_silent" msgid="8533960664617048281">"ສະແດງໂດຍບໍ່ໃຊ້ສຽງ"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"​ຂັ້ນ​ສູງ"</string>
     <string name="configure_apps" msgid="6685680790825882528">"ກຳນົດຄ່າແອັບ"</string>
     <string name="unknown_app" msgid="5275921288718717656">"ແອັບທີ່ບໍ່ຮູ້ຈັກ"</string>
@@ -2776,6 +2781,12 @@
     <string name="system_ui_settings" msgid="579824306467081123">"ສະ​ແດງ​ຕົວ​ປັບ SystemUI"</string>
     <string name="additional_permissions" msgid="6463784193877056080">"ການ​ອະ​ນຸ​ຍາດ​​ເພີ່ມ​ເຕີມ"</string>
     <string name="additional_permissions_more" msgid="3538612272673191451">"<xliff:g id="COUNT">%1$d</xliff:g> ເພີ່ມ​ເຕີມ"</string>
+    <string name="share_remote_bugreport_dialog_title" msgid="1124840737776588602">"ແບ່ງປັນລາຍງານບັນຫາບໍ?"</string>
+    <string name="share_remote_bugreport_dialog_message_finished" msgid="4973886976504823801">"ຜູ້ເບິ່ງແຍງລະບົບໄອທີຂອງທ່ານໄດ້ຮ້ອງຂໍເອົາລາຍງານບັນຫາ ເພື່ອຊ່ວຍແກ້ໄຂບັນຫາໃຫ້ອຸປະກອນນີ້. ອາດຈະມີການແບ່ງປັນແອັບ ແລະ ຂໍ້ມູນນຳ."</string>
+    <string name="share_remote_bugreport_dialog_message" msgid="3495929560689435496">"ຜູ້ເບິ່ງແຍງລະບົບໄອທີຂອງທ່ານໄດ້ຮ້ອງຂໍລາຍງານຂໍ້ຜິດພາດເພື່ອຊ່ວຍແກ້ໄຂບັນຫາອຸປະກອນນີ້. ແອັບ ແລະ ຂໍ້ມູນອາດຖືກແບ່ງປັນ ແລະ ອຸປະກອນຂອງທ່ານອາດເຮັດວຽກຊ້າລົງຊົ່ວຄາວ."</string>
+    <string name="sharing_remote_bugreport_dialog_message" msgid="5859287696666024466">"ກຳລັງແບ່ງປັນລາຍງານຂໍ້ຜິດພາດນີ້ໃຫ້ກັບຜູ້ເບິ່ງແຍງລະບົບໄອທີຂອງທ່ານ. ກະລຸນາຕິດຕໍ່ພວກເຂົາສຳລັບລາຍລະອຽດເພີ່ມເຕີມ."</string>
+    <string name="share_remote_bugreport_action" msgid="532226159318779397">"ແບ່ງປັນ"</string>
+    <string name="decline_remote_bugreport_action" msgid="518720235407565134">"ປະຕິເສດ"</string>
     <string name="usb_use_charging_only" msgid="167707234832117768">"ກຳລັງສາກໄຟ"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"ຫາ​ກໍ່​ສາກ​ອຸ​ປະ​ກອນ​ນີ້"</string>
     <string name="usb_use_power_only" msgid="6304554004177083963">"ການ​ຈ່າຍ​ໄຟ"</string>
@@ -2883,6 +2894,8 @@
     <string name="see_less" msgid="1250265310929558370">"​​ເບິ່ງ​ໜ້ອຍ​ລົງ"</string>
     <string name="disconnected" msgid="5787956818111197212">"​ຕັດ​ການ​ເຊື່ອມ​ຕໍ່​ແລ້ວ"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"ໃຊ້ຂໍ້ມູນໄປແລ້ວ <xliff:g id="AMOUNT">%1$s</xliff:g>"</string>
+    <string name="notification_summary" msgid="3071284223009798461">"ບລັອກ <xliff:g id="COUNT">%1$d</xliff:g> ແອັບບໍ່ໃຫ້ສົ່ງແລ້ວ"</string>
+    <string name="notification_summary_none" msgid="3440195312233351409">"ອະນຸຍາດໃຫ້ທຸກແອັບສົ່ງໄດ້"</string>
     <string name="apps_summary" msgid="193158055537070092">"ຕິດຕັ້ງ <xliff:g id="COUNT">%1$d</xliff:g> ແອັບຯແລ້ວ"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"ຕິດຕັ້ງແລ້ວ 24 ແອັບ"</string>
     <string name="storage_summary" msgid="1110250618334248745">"ໃຊ້ໄປແລ້ວ <xliff:g id="SIZE1">%1$s</xliff:g> ຈາກທັງໝົດ <xliff:g id="SIZE2">%2$s</xliff:g>"</string>

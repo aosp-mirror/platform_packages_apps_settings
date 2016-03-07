@@ -74,6 +74,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Ondoa kadi ya SD"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Futa hifadhi ya USB"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Futa kadi ya SD"</string>
+    <string name="preview_page_indicator_content_description" msgid="3263162369344886880">"Chungulia kwanza skrini ya <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> kati ya <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="font_size_summary" msgid="1690992332887488183">"Kuongeza au kupunguza ukubwa wa maandishi kwenye skrini."</string>
     <string name="small_font" msgid="2295331917424072635">"Ndogo"</string>
     <string name="medium_font" msgid="2068475425515133701">"Wastani"</string>
@@ -2504,8 +2505,7 @@
     <string name="zen_mode_visual_interruptions_settings_title" msgid="168576844124787420">"Ukatizaji unaoonekana"</string>
     <string name="configure_notification_settings" msgid="3558846607192693233">"Arifa za kuweka mipangilio"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"Vipengele vya kina"</string>
-    <!-- no translation found for profile_section_header (2320848161066912001) -->
-    <skip />
+    <string name="profile_section_header" msgid="2320848161066912001">"Arifa za kazini"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"Arifu ya mwangaza wa palsi"</string>
     <string name="lock_screen_notifications_title" msgid="6173076173408887213">"Skrini inapofungwa"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Onyesha arifa za maudhui yote"</string>
@@ -2523,9 +2523,9 @@
     <string name="notification_importance_none" msgid="3173515479356106227">"Haijawekwa"</string>
     <string name="notification_importance_blocked" msgid="4764559498517003405">"Imezuiwa: Usionyeshe arifa hizi kamwe"</string>
     <string name="notification_importance_min" msgid="2370444628448134377">"Chini zaidi: Onyesha katika sehemu ya chini ya orodha ya arifa bila kutoa sauti"</string>
-    <string name="notification_importance_low" msgid="979932751695283877">"Chini: Onyesha arifa hizi bila sauti"</string>
-    <string name="notification_importance_default" msgid="8789180840561778039">"Kawaida: Ruhusu arifa hizi zitoe sauti"</string>
-    <string name="notification_importance_high" msgid="2401104039256903538">"Juu: Chungulia kwenye skrini na uruhusu sauti"</string>
+    <string name="notification_importance_low" msgid="979932751695283877">"Umuhimu wa Chini: Onyesha arifa hizi bila sauti"</string>
+    <string name="notification_importance_default" msgid="8789180840561778039">"Umuhimu wa Kawaida: Ruhusu arifa hizi zitoe sauti"</string>
+    <string name="notification_importance_high" msgid="5044607814670313040">"Juu: Weka onyesho kwenye skrini na uruhusu sauti"</string>
     <string name="notification_importance_max" msgid="6036245535555486319">"Dharura: Onyesha katika sehemu ya juu ya orodha ya arifa, chungulia kwenye skrini na uruhusu sauti"</string>
     <string name="importance_reset" msgid="7458420788555607007">"Weka upya"</string>
     <string name="show_silently" msgid="2222875799232222056">"Onyesha bila sauti"</string>
@@ -2546,8 +2546,7 @@
     <string name="app_notification_block_summary" msgid="9049487483231233726">"Usionyeshe arifa kutoka programu hii kabisa"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"Batilisha Usinisumbue"</string>
     <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"Ruhusu arifa hizi ziendelee kukatiza wakati hali ya Usinisumbue imewekwa katika Kipaumbele Pekee"</string>
-    <string name="app_notification_sensitive_title" msgid="8465860579482264139">"Ficha maudhui nyeti"</string>
-    <string name="app_notification_sensitive_summary" msgid="2515056180303710894">"Kifaa kikiwa kimefungwa, ficha maudhui yanayoweza kufichua maelezo ya faragha katika arifa hizi"</string>
+    <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"Skrini inapofungwa"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Imezuiwa"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Kipaumbele"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Nyeti"</string>
@@ -2692,6 +2691,7 @@
     <string name="notifications_label" msgid="2872668710589600731">"Arifa"</string>
     <string name="notifications_enabled" msgid="4386196629684749507">"Kawaida"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"Hairuhusu arifa"</string>
+    <string name="notifications_silenced" msgid="4728603513072110381">"Arifa zimezimwa"</string>
     <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
     <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g> / <xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
@@ -2714,6 +2714,10 @@
     <string name="filter_work_apps" msgid="24519936790795574">"Kazini"</string>
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"Imezuiwa"</string>
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"Zenye URL za kikoa"</string>
+    <string name="filter_notif_priority_apps" msgid="5056470299318500609">"Hubatilisha Usinisumbue"</string>
+    <string name="filter_notif_sensitive_apps" msgid="3847012996691991486">"Hakuna maudhui nyeti kwenye skrini iliyofungwa"</string>
+    <string name="filter_notif_hide_notifications_apps" msgid="3977513041080404368">"Haionyeshwi kwenye skrini iliyofungwa"</string>
+    <string name="filter_notif_silent" msgid="8533960664617048281">"Huonyeshwa bila sauti"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Vipengele vya kina"</string>
     <string name="configure_apps" msgid="6685680790825882528">"Weka mipangilio ya programu"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Programu isiyojulikana"</string>
@@ -2783,6 +2787,12 @@
     <string name="system_ui_settings" msgid="579824306467081123">"Onyesha Kipokea Ishara cha SystemUI"</string>
     <string name="additional_permissions" msgid="6463784193877056080">"Ruhusa za ziada"</string>
     <string name="additional_permissions_more" msgid="3538612272673191451">"<xliff:g id="COUNT">%1$d</xliff:g> zaidi"</string>
+    <string name="share_remote_bugreport_dialog_title" msgid="1124840737776588602">"Ungependa kushiriki ripoti ya hitilafu?"</string>
+    <string name="share_remote_bugreport_dialog_message_finished" msgid="4973886976504823801">"Msimamizi wako wa TEHAMA ameomba ripoti ya hitilafu ili kusaidia katika utatuzi wa hitilafu kwenye kifaa hiki. Programu na data zinaweza kushirikiwa."</string>
+    <string name="share_remote_bugreport_dialog_message" msgid="3495929560689435496">"Msimamizi wako wa TEHAMA ameomba ripoti ya hitilafu ili kusaidia katika utatuzi wa hitilafu katika kifaa hiki. Huenda hatua hii ikashiriki programu na data na kupunguza kasi ya kifaa chako kwa muda."</string>
+    <string name="sharing_remote_bugreport_dialog_message" msgid="5859287696666024466">"Ripoti hii ya hitilafu inashirikiwa na msimamizi wako wa TEHAMA. Wasiliana naye kwa maelezo zaidi."</string>
+    <string name="share_remote_bugreport_action" msgid="532226159318779397">"Shiriki"</string>
+    <string name="decline_remote_bugreport_action" msgid="518720235407565134">"Kataa"</string>
     <string name="usb_use_charging_only" msgid="167707234832117768">"Inachaji"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"Chaji tu kifaa hiki"</string>
     <string name="usb_use_power_only" msgid="6304554004177083963">"Umeme"</string>
@@ -2890,6 +2900,8 @@
     <string name="see_less" msgid="1250265310929558370">"Angalia chache"</string>
     <string name="disconnected" msgid="5787956818111197212">"Imeondolewa"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"<xliff:g id="AMOUNT">%1$s</xliff:g> ya data imetumika"</string>
+    <string name="notification_summary" msgid="3071284223009798461">"Programu <xliff:g id="COUNT">%1$d</xliff:g> zimezuiwa kutuma arifa"</string>
+    <string name="notification_summary_none" msgid="3440195312233351409">"Programu zote zimeruhusiwa kutuma arifa"</string>
     <string name="apps_summary" msgid="193158055537070092">"Programu <xliff:g id="COUNT">%1$d</xliff:g> zimesakinishwa"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"Imesakanisha programu 24"</string>
     <string name="storage_summary" msgid="1110250618334248745">"<xliff:g id="SIZE1">%1$s</xliff:g> kati ya <xliff:g id="SIZE2">%2$s</xliff:g> imetumika"</string>

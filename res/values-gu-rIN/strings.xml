@@ -74,6 +74,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"SD કાર્ડને અનમાઉન્ટ કરો"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"USB સંગ્રહ કાઢી નાંખો"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"SD કાર્ડ કાઢી નાંખો"</string>
+    <string name="preview_page_indicator_content_description" msgid="3263162369344886880">"પૂર્વાવલોકન સ્ક્રીન <xliff:g id="NUM_PAGES">%2$d</xliff:g> માંથી <xliff:g id="CURRENT_PAGE">%1$d</xliff:g>"</string>
     <string name="font_size_summary" msgid="1690992332887488183">"સ્ક્રીન પરની ટેક્સ્ટને નાની અથવા મોટી કરો."</string>
     <string name="small_font" msgid="2295331917424072635">"નાનું"</string>
     <string name="medium_font" msgid="2068475425515133701">"મધ્યમ"</string>
@@ -2520,7 +2521,7 @@
     <string name="notification_importance_min" msgid="2370444628448134377">"ન્યૂનતમ: સૂચનાની સૂચિની નીચે ચુપચાપ બતાવો"</string>
     <string name="notification_importance_low" msgid="979932751695283877">"ન્યૂન: આ સૂચનાઓ ચુપચાપ બતાવો"</string>
     <string name="notification_importance_default" msgid="8789180840561778039">"સામાન્ય: આ સૂચનાઓને અવાજ કરવાની મંજૂરી આપો"</string>
-    <string name="notification_importance_high" msgid="2401104039256903538">"ઉચ્ચ: સ્ક્રીન પર ત્વરિત દ્રષ્ટિ કરો અને અવાજને મંજૂરી આપો"</string>
+    <string name="notification_importance_high" msgid="5044607814670313040">"ઉચ્ચ: સ્ક્રીન પર ત્વરિત દ્રષ્ટિ કરો અને અવાજને મંજૂરી આપો"</string>
     <string name="notification_importance_max" msgid="6036245535555486319">"તાત્કાલિક: સૂચનાઓની સૂચિની ટોચ પર બતાવો, સ્ક્રીન પર ત્વરિત દ્રષ્ટિ કરો અને અવાજને મંજૂરી આપો"</string>
     <string name="importance_reset" msgid="7458420788555607007">"ફરીથી સેટ કરો"</string>
     <string name="show_silently" msgid="2222875799232222056">"ચુપચાપ બતાવો"</string>
@@ -2541,8 +2542,7 @@
     <string name="app_notification_block_summary" msgid="9049487483231233726">"આ એપ્લિકેશનમાંથી ક્યારેય સૂચનાઓ દર્શાવશો નહીં"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"ખલેલ પહોંચાડશો નહિ ને ઓવરરાઇડ કરો"</string>
     <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"જયારે ખલેલ પહોંચાડશો નહિ ને માત્ર પ્રાધાન્યતા પર સેટ કરેલું હોય ત્યારે આ સૂચનાઓને દખલગીરી કરવા દો"</string>
-    <string name="app_notification_sensitive_title" msgid="8465860579482264139">"સંવેદનશીલ સામગ્રી છુપાવો"</string>
-    <string name="app_notification_sensitive_summary" msgid="2515056180303710894">"જ્યારે ઉપકરણ લૉક કરેલ હોય, ત્યારે આ સૂચનાઓમાં ખાનગી માહિતીને ઉધાડી કરી શકે તેવી સામગ્રીને છુપાવો."</string>
+    <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"લૉક સ્ક્રીન પર"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"અવરોધિત"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"પ્રાધાન્યતા"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"સંવેદનશીલ"</string>
@@ -2687,6 +2687,7 @@
     <string name="notifications_label" msgid="2872668710589600731">"સૂચનાઓ"</string>
     <string name="notifications_enabled" msgid="4386196629684749507">"સામાન્ય"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"અવરોધિત"</string>
+    <string name="notifications_silenced" msgid="4728603513072110381">"શાંત કરી"</string>
     <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
     <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g> / <xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
@@ -2709,6 +2710,10 @@
     <string name="filter_work_apps" msgid="24519936790795574">"કાર્યાલય"</string>
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"અવરોધિત"</string>
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"ડોમેન URL સાથે"</string>
+    <string name="filter_notif_priority_apps" msgid="5056470299318500609">"ખલેલ ન પાડશોને ઓવરરાઇડ કરે છે"</string>
+    <string name="filter_notif_sensitive_apps" msgid="3847012996691991486">"લૉકસ્ક્રીન પર સંવેદી સામગ્રી નહીં"</string>
+    <string name="filter_notif_hide_notifications_apps" msgid="3977513041080404368">"કદી લૉકસ્ક્રીન પર બતાવવી નહીં"</string>
+    <string name="filter_notif_silent" msgid="8533960664617048281">"ચુપચાપ બતાવી"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"વિગતવાર"</string>
     <string name="configure_apps" msgid="6685680790825882528">"એપ્લિકેશનો ગોઠવો"</string>
     <string name="unknown_app" msgid="5275921288718717656">"અજાણી એપ્લિકેશન"</string>
@@ -2778,6 +2783,12 @@
     <string name="system_ui_settings" msgid="579824306467081123">"SystemUI ટયુનર બતાવો"</string>
     <string name="additional_permissions" msgid="6463784193877056080">"વધારાની પરવાનગીઓ"</string>
     <string name="additional_permissions_more" msgid="3538612272673191451">"<xliff:g id="COUNT">%1$d</xliff:g> વધુ"</string>
+    <string name="share_remote_bugreport_dialog_title" msgid="1124840737776588602">"બગ રિપોર્ટ શેર કરીએ?"</string>
+    <string name="share_remote_bugreport_dialog_message_finished" msgid="4973886976504823801">"તમારા IT વ્યવસ્થાપક એ આ ઉપકરણની સમસ્યા નિવારણમાં સહાય માટે બગ રિપોર્ટની વિનંતી કરી છે. ઍપ્લિકેશનો અને ડેટા શેર કરવામાં આવી શકે છે."</string>
+    <string name="share_remote_bugreport_dialog_message" msgid="3495929560689435496">"તમારા IT વ્યવસ્થાપક એ આ ઉપકરણની સમસ્યા નિવારણમાં સહાય માટે બગ રિપોર્ટની વિનંતી કરી છે. ઍપ્લિકેશનો અને ડેટા શેર કરવામાં આવી શકે છે અને તમારા ઉપકરણને અસ્થાયી રૂપે ધીમું કરી શકે છે."</string>
+    <string name="sharing_remote_bugreport_dialog_message" msgid="5859287696666024466">"આ બગ રિપોર્ટ તમારા IT વ્યવસ્થાપક સાથે શેર કરવામાં આવી રહ્યો છે. વધુ વિગતો માટે તેમનો સંપર્ક કરો."</string>
+    <string name="share_remote_bugreport_action" msgid="532226159318779397">"શેર કરો"</string>
+    <string name="decline_remote_bugreport_action" msgid="518720235407565134">"નકારો"</string>
     <string name="usb_use_charging_only" msgid="167707234832117768">"ચાર્જિંગ"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"બસ આ ઉપકરણને ચાર્જ કરો"</string>
     <string name="usb_use_power_only" msgid="6304554004177083963">"પાવર સપ્લાય"</string>
@@ -2885,6 +2896,8 @@
     <string name="see_less" msgid="1250265310929558370">"ઓછું જુઓ"</string>
     <string name="disconnected" msgid="5787956818111197212">"ડિસ્કનેક્ટ કર્યું"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"<xliff:g id="AMOUNT">%1$s</xliff:g> ડેટા વાપર્યો"</string>
+    <string name="notification_summary" msgid="3071284223009798461">"<xliff:g id="COUNT">%1$d</xliff:g> ઍપ્લિકેશનને સૂચનાઓ મોકલવાથી અવરોધિત કરી"</string>
+    <string name="notification_summary_none" msgid="3440195312233351409">"બધી ઍપ્લિકેશનોને સૂચનાઓ મોકલવાની મંજૂરી છે"</string>
     <string name="apps_summary" msgid="193158055537070092">"<xliff:g id="COUNT">%1$d</xliff:g> ઍપ્લિકેશનો ઇન્સ્ટોલ કરી"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"24 ઍપ્લિકેશન ઇન્સ્ટોલ કરી"</string>
     <string name="storage_summary" msgid="1110250618334248745">"<xliff:g id="SIZE2">%2$s</xliff:g> માંથી <xliff:g id="SIZE1">%1$s</xliff:g> વાપર્યા"</string>

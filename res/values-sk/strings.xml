@@ -76,6 +76,8 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Odpojiť SD kartu"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Vymazať ukladací priestor USB"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Vymazať SD kartu"</string>
+    <!-- no translation found for preview_page_indicator_content_description (3263162369344886880) -->
+    <skip />
     <string name="font_size_summary" msgid="1690992332887488183">"Zväčšite alebo zmenšite text na obrazovke."</string>
     <string name="small_font" msgid="2295331917424072635">"Malé"</string>
     <string name="medium_font" msgid="2068475425515133701">"Stredné"</string>
@@ -2532,8 +2534,7 @@
     <string name="zen_mode_visual_interruptions_settings_title" msgid="168576844124787420">"Vizuálne vyrušenia"</string>
     <string name="configure_notification_settings" msgid="3558846607192693233">"Konfigurácia upozornení"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"Rozšírené"</string>
-    <!-- no translation found for profile_section_header (2320848161066912001) -->
-    <skip />
+    <string name="profile_section_header" msgid="2320848161066912001">"Pracovné upozornenia"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"Blikať kontrolkou upozornenia"</string>
     <string name="lock_screen_notifications_title" msgid="6173076173408887213">"Na uzamknutej obrazovke"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Zobrazovať všetok obsah upozornení"</string>
@@ -2553,7 +2554,7 @@
     <string name="notification_importance_min" msgid="2370444628448134377">"Minimálna: Zobrazovať v dolnej časti zoznamu bez zvukového signálu"</string>
     <string name="notification_importance_low" msgid="979932751695283877">"Nízka: Tieto upozornenia zobrazovať bez zvukového signálu"</string>
     <string name="notification_importance_default" msgid="8789180840561778039">"Normálna: Umožniť týmto upozorneniam vydávať zvukové signály"</string>
-    <string name="notification_importance_high" msgid="2401104039256903538">"Vysoká: Zobrazovať cez obrazovku so zvukovým signálom"</string>
+    <string name="notification_importance_high" msgid="5044607814670313040">"Vysoká: Zobraziť cez obrazovku a povoliť zvukový signál"</string>
     <string name="notification_importance_max" msgid="6036245535555486319">"Neodkladná: Zobrazovať v hornej časti zoznamu upozornení, zobrazovať cez obrazovku a povoliť zvukový signál"</string>
     <string name="importance_reset" msgid="7458420788555607007">"Obnoviť"</string>
     <string name="show_silently" msgid="2222875799232222056">"Zobraziť bez zvukov"</string>
@@ -2576,8 +2577,7 @@
     <string name="app_notification_block_summary" msgid="9049487483231233726">"Nikdy nezobrazovať upozornenia z tejto aplikácie"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"Prepísať možnosť Nerušiť"</string>
     <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"Umožniť týmto upozorneniam vyrušiť ma, ak je možnosť Nerušiť nastavená na možnosť Iba prioritné"</string>
-    <string name="app_notification_sensitive_title" msgid="8465860579482264139">"Skryť citlivý obsah"</string>
-    <string name="app_notification_sensitive_summary" msgid="2515056180303710894">"Keď je zariadenie uzamknuté, skryť v týchto upozorneniach obsah, ktorý by mohol odhaliť súkromné informácie"</string>
+    <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"Na uzamknutej obrazovke"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Blokované"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Priorita"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Citlivé"</string>
@@ -2726,6 +2726,7 @@
     <string name="notifications_label" msgid="2872668710589600731">"Upozornenia"</string>
     <string name="notifications_enabled" msgid="4386196629684749507">"Normálne"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"Blokované"</string>
+    <string name="notifications_silenced" msgid="4728603513072110381">"Stlmené"</string>
     <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
     <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g> / <xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
@@ -2754,6 +2755,10 @@
     <string name="filter_work_apps" msgid="24519936790795574">"Pracovné"</string>
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"Blokované"</string>
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"S webovými adresami domény"</string>
+    <string name="filter_notif_priority_apps" msgid="5056470299318500609">"Prepisuje nastavenie Nerušiť"</string>
+    <string name="filter_notif_sensitive_apps" msgid="3847012996691991486">"Žiadny citlivý obsah na uzamknutej obrazovke"</string>
+    <string name="filter_notif_hide_notifications_apps" msgid="3977513041080404368">"Nezobrazené na uzam. obrazovke"</string>
+    <string name="filter_notif_silent" msgid="8533960664617048281">"Zobrazené bez zvukov"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Rozšírené"</string>
     <string name="configure_apps" msgid="6685680790825882528">"Konfigurácia aplikácií"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Neznáma aplikácia"</string>
@@ -2827,6 +2832,18 @@
     <string name="system_ui_settings" msgid="579824306467081123">"Zobraziť tuner SystemUI"</string>
     <string name="additional_permissions" msgid="6463784193877056080">"Ďalšie povolenia"</string>
     <string name="additional_permissions_more" msgid="3538612272673191451">"Počet ďalších povolení: <xliff:g id="COUNT">%1$d</xliff:g>"</string>
+    <!-- no translation found for share_remote_bugreport_dialog_title (1124840737776588602) -->
+    <skip />
+    <!-- no translation found for share_remote_bugreport_dialog_message_finished (4973886976504823801) -->
+    <skip />
+    <!-- no translation found for share_remote_bugreport_dialog_message (3495929560689435496) -->
+    <skip />
+    <!-- no translation found for sharing_remote_bugreport_dialog_message (5859287696666024466) -->
+    <skip />
+    <!-- no translation found for share_remote_bugreport_action (532226159318779397) -->
+    <skip />
+    <!-- no translation found for decline_remote_bugreport_action (518720235407565134) -->
+    <skip />
     <string name="usb_use_charging_only" msgid="167707234832117768">"Nabíja sa"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"Iba nabiť toto zariadenie"</string>
     <string name="usb_use_power_only" msgid="6304554004177083963">"Zdroj napájania"</string>
@@ -2936,6 +2953,8 @@
     <string name="see_less" msgid="1250265310929558370">"Zobraziť menej"</string>
     <string name="disconnected" msgid="5787956818111197212">"Odpojené"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"Objem využitých dát: <xliff:g id="AMOUNT">%1$s</xliff:g>"</string>
+    <string name="notification_summary" msgid="3071284223009798461">"Počet aplikácií so zablokovaným odosielaním upozornení: <xliff:g id="COUNT">%1$d</xliff:g>"</string>
+    <string name="notification_summary_none" msgid="3440195312233351409">"Všetky aplikácie majú povolené odosielať upozornenia"</string>
     <string name="apps_summary" msgid="193158055537070092">"Počet nainštalovaných aplikácií: <xliff:g id="COUNT">%1$d</xliff:g>"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"24 nainštalovaných aplikácií"</string>
     <string name="storage_summary" msgid="1110250618334248745">"Využité miesto: <xliff:g id="SIZE1">%1$s</xliff:g> z <xliff:g id="SIZE2">%2$s</xliff:g>"</string>

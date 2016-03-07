@@ -74,6 +74,8 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"SDカードのマウント解除"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"USBストレージ内データの消去"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"SDカード内データを消去"</string>
+    <!-- no translation found for preview_page_indicator_content_description (3263162369344886880) -->
+    <skip />
     <string name="font_size_summary" msgid="1690992332887488183">"画面上のテキストのサイズを変更します。"</string>
     <string name="small_font" msgid="2295331917424072635">"小"</string>
     <string name="medium_font" msgid="2068475425515133701">"中"</string>
@@ -2519,8 +2521,7 @@
     <string name="zen_mode_visual_interruptions_settings_title" msgid="168576844124787420">"視覚的な設定"</string>
     <string name="configure_notification_settings" msgid="3558846607192693233">"通知の設定"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"詳細設定"</string>
-    <!-- no translation found for profile_section_header (2320848161066912001) -->
-    <skip />
+    <string name="profile_section_header" msgid="2320848161066912001">"仕事用プロファイルの通知"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"光を点滅させて通知"</string>
     <string name="lock_screen_notifications_title" msgid="6173076173408887213">"ロック画面の通知"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"すべての通知内容を表示する"</string>
@@ -2540,7 +2541,7 @@
     <string name="notification_importance_min" msgid="2370444628448134377">"最低: 通知リストの末尾にマナーモードで表示する"</string>
     <string name="notification_importance_low" msgid="979932751695283877">"低: この通知をマナーモードで表示する"</string>
     <string name="notification_importance_default" msgid="8789180840561778039">"標準: 通知を音声で知らせる"</string>
-    <string name="notification_importance_high" msgid="2401104039256903538">"高: 画面に数秒間表示し、音声でも知らせる"</string>
+    <string name="notification_importance_high" msgid="5044607814670313040">"高: 画面に数秒間表示し、音も許可する"</string>
     <string name="notification_importance_max" msgid="6036245535555486319">"緊急: 通知リストの先頭に表示し、画面に数秒間表示し、音声でも知らせる"</string>
     <string name="importance_reset" msgid="7458420788555607007">"リセット"</string>
     <string name="show_silently" msgid="2222875799232222056">"マナーモードで表示"</string>
@@ -2561,8 +2562,7 @@
     <string name="app_notification_block_summary" msgid="9049487483231233726">"このアプリからの通知を表示しない"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"[通知を非表示] をオーバーライドする"</string>
     <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"[通知を非表示] が [優先する通知のみ] に設定されているとき、この通知を引き続き表示する"</string>
-    <string name="app_notification_sensitive_title" msgid="8465860579482264139">"プライベートな内容を非表示"</string>
-    <string name="app_notification_sensitive_summary" msgid="2515056180303710894">"端末がロックされている場合、プライベートな情報を公開する可能性があるコンテンツをこの通知に表示しない"</string>
+    <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"ロック画面"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"ブロック済み"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"優先"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"プライベート"</string>
@@ -2707,6 +2707,7 @@
     <string name="notifications_label" msgid="2872668710589600731">"通知"</string>
     <string name="notifications_enabled" msgid="4386196629684749507">"標準"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"ブロック済み"</string>
+    <string name="notifications_silenced" msgid="4728603513072110381">"マナーモード"</string>
     <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g>/<xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
     <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g>/<xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>/<xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
@@ -2729,6 +2730,10 @@
     <string name="filter_work_apps" msgid="24519936790795574">"仕事用"</string>
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"ブロック中"</string>
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"ドメインURLあり"</string>
+    <string name="filter_notif_priority_apps" msgid="5056470299318500609">"[通知を非表示] をオーバーライド"</string>
+    <string name="filter_notif_sensitive_apps" msgid="3847012996691991486">"ロック画面にプライベートな内容を非表示"</string>
+    <string name="filter_notif_hide_notifications_apps" msgid="3977513041080404368">"ロック画面に表示しない"</string>
+    <string name="filter_notif_silent" msgid="8533960664617048281">"マナーモードで表示"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"詳細設定"</string>
     <string name="configure_apps" msgid="6685680790825882528">"アプリの設定"</string>
     <string name="unknown_app" msgid="5275921288718717656">"不明なアプリ"</string>
@@ -2798,6 +2803,18 @@
     <string name="system_ui_settings" msgid="579824306467081123">"SystemUI調整ツールを表示"</string>
     <string name="additional_permissions" msgid="6463784193877056080">"その他の権限"</string>
     <string name="additional_permissions_more" msgid="3538612272673191451">"他<xliff:g id="COUNT">%1$d</xliff:g>件"</string>
+    <!-- no translation found for share_remote_bugreport_dialog_title (1124840737776588602) -->
+    <skip />
+    <!-- no translation found for share_remote_bugreport_dialog_message_finished (4973886976504823801) -->
+    <skip />
+    <!-- no translation found for share_remote_bugreport_dialog_message (3495929560689435496) -->
+    <skip />
+    <!-- no translation found for sharing_remote_bugreport_dialog_message (5859287696666024466) -->
+    <skip />
+    <!-- no translation found for share_remote_bugreport_action (532226159318779397) -->
+    <skip />
+    <!-- no translation found for decline_remote_bugreport_action (518720235407565134) -->
+    <skip />
     <string name="usb_use_charging_only" msgid="167707234832117768">"充電"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"この端末の充電のみを行う"</string>
     <string name="usb_use_power_only" msgid="6304554004177083963">"電源"</string>
@@ -2905,6 +2922,8 @@
     <string name="see_less" msgid="1250265310929558370">"一部を表示"</string>
     <string name="disconnected" msgid="5787956818111197212">"切断されています"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"データの <xliff:g id="AMOUNT">%1$s</xliff:g> を使用しています"</string>
+    <string name="notification_summary" msgid="3071284223009798461">"<xliff:g id="COUNT">%1$d</xliff:g> 個のアプリが送信をブロックされています"</string>
+    <string name="notification_summary_none" msgid="3440195312233351409">"すべてのアプリが送信を許可されています"</string>
     <string name="apps_summary" msgid="193158055537070092">"<xliff:g id="COUNT">%1$d</xliff:g> 個のアプリがインストールされています"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"24 個のインストール済みアプリ"</string>
     <string name="storage_summary" msgid="1110250618334248745">"<xliff:g id="SIZE2">%2$s</xliff:g> のうち <xliff:g id="SIZE1">%1$s</xliff:g> を使用しています"</string>
