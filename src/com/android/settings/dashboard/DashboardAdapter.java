@@ -272,6 +272,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                     suggestion.intent.getComponent(),
                     PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
                     PackageManager.DONT_KILL_APP);
+            mSuggestionParser.markCategoryDone(suggestion.category);
         }
     }
 
