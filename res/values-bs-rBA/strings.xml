@@ -75,6 +75,8 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Deaktiviraj SD karticu"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Izbriši USB pohranu"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Izbriši SD karticu"</string>
+    <!-- no translation found for preview_page_indicator_content_description (3263162369344886880) -->
+    <skip />
     <string name="font_size_summary" msgid="1690992332887488183">"Smanjite ili povećajte tekst na ekranu."</string>
     <string name="small_font" msgid="2295331917424072635">"Mali"</string>
     <string name="medium_font" msgid="2068475425515133701">"Srednji"</string>
@@ -2515,8 +2517,7 @@
     <string name="zen_mode_visual_interruptions_settings_title" msgid="168576844124787420">"Vizuelni prekidi"</string>
     <string name="configure_notification_settings" msgid="3558846607192693233">"Konfiguriraj obavještenja"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"Napredno"</string>
-    <!-- no translation found for profile_section_header (2320848161066912001) -->
-    <skip />
+    <string name="profile_section_header" msgid="2320848161066912001">"Obavještenja za posao"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"Pulsirajuće svjetlo oobavještenja"</string>
     <string name="lock_screen_notifications_title" msgid="6173076173408887213">"Na zaključanom ekranu"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Prikaži sav sadržaj obavještenja"</string>
@@ -2533,10 +2534,10 @@
     <string name="notification_importance_title" msgid="848692592679312666">"Značaj"</string>
     <string name="notification_importance_none" msgid="3173515479356106227">"Nije postavljeno"</string>
     <string name="notification_importance_blocked" msgid="4764559498517003405">"Blokirano: Nikada ne pokazuju ova obavještenja"</string>
-    <string name="notification_importance_min" msgid="2370444628448134377">"Minimalna: Nečujno pokaži na dnu spiska obavještenja"</string>
-    <string name="notification_importance_low" msgid="979932751695283877">"Mala: Nečujno prikaži ova obavještenja"</string>
+    <string name="notification_importance_min" msgid="2370444628448134377">"Minimalna: Nečujno prikaži na dnu spiska obavještenja"</string>
+    <string name="notification_importance_low" msgid="979932751695283877">"Nizak: Nečujno prikaži ova obavještenja"</string>
     <string name="notification_importance_default" msgid="8789180840561778039">"Normalno: Dozvoli zvuk na ovim obavještenjima"</string>
-    <string name="notification_importance_high" msgid="2401104039256903538">"Visok: Kratko prikaži na ekranu i dozvoli zvuk i dozvoli zvuk"</string>
+    <string name="notification_importance_high" msgid="5044607814670313040">"Visoka: kratki prikaz na ekranu uz zvuk"</string>
     <string name="notification_importance_max" msgid="6036245535555486319">"Hitno: Prikaži na vrhu liste obavještenja, kratko prikaži na ekranu i dozvoli zvuk"</string>
     <string name="importance_reset" msgid="7458420788555607007">"Ponovno pokretanje"</string>
     <string name="show_silently" msgid="2222875799232222056">"Pokaži bez zvuka"</string>
@@ -2558,8 +2559,7 @@
     <string name="app_notification_block_summary" msgid="9049487483231233726">"Nikad ne prikazuj obavještenja iz ove aplikacije"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"Premosti podešenja usluge Ne ometaj"</string>
     <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"Dozvolite da se ova obavještenja i dalje čuju kada je opcija Ne ometaj podešena na Samo prioritetna obavještenja"</string>
-    <string name="app_notification_sensitive_title" msgid="8465860579482264139">"Sakrij osjetljivi sadržaj"</string>
-    <string name="app_notification_sensitive_summary" msgid="2515056180303710894">"Kada je uređaj zaključan, sakrij sadržaj obavještenja koja bi mogla otkriti privatne informacije"</string>
+    <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"Na zaključanom ekranu"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Blokirano"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Prioritetna"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Osjetljivo"</string>
@@ -2706,6 +2706,7 @@
     <string name="notifications_label" msgid="2872668710589600731">"Obavještenja"</string>
     <string name="notifications_enabled" msgid="4386196629684749507">"Normalna"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"Blokirano"</string>
+    <string name="notifications_silenced" msgid="4728603513072110381">"Bez zvuka"</string>
     <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g>/<xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
     <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g>/<xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>/<xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
@@ -2731,6 +2732,10 @@
     <string name="filter_work_apps" msgid="24519936790795574">"Work"</string>
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"Blokirano"</string>
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"Sa URL-ovima domena"</string>
+    <string name="filter_notif_priority_apps" msgid="5056470299318500609">"Zanemaruje postavku Ne ometaj"</string>
+    <string name="filter_notif_sensitive_apps" msgid="3847012996691991486">"Ništa osjetljivo na zak. ekr."</string>
+    <string name="filter_notif_hide_notifications_apps" msgid="3977513041080404368">"Bez prikaza na zaključ. ekranu"</string>
+    <string name="filter_notif_silent" msgid="8533960664617048281">"Prikazano bez zvuka"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Napredno"</string>
     <string name="configure_apps" msgid="6685680790825882528">"Konfiguriraj aplikacije"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Nepoznata aplikacija"</string>
@@ -2802,6 +2807,18 @@
     <string name="system_ui_settings" msgid="579824306467081123">"Prikaži podešivač za SystemUI"</string>
     <string name="additional_permissions" msgid="6463784193877056080">"Dodatne dozvole"</string>
     <string name="additional_permissions_more" msgid="3538612272673191451">"Još <xliff:g id="COUNT">%1$d</xliff:g>"</string>
+    <!-- no translation found for share_remote_bugreport_dialog_title (1124840737776588602) -->
+    <skip />
+    <!-- no translation found for share_remote_bugreport_dialog_message_finished (4973886976504823801) -->
+    <skip />
+    <!-- no translation found for share_remote_bugreport_dialog_message (3495929560689435496) -->
+    <skip />
+    <!-- no translation found for sharing_remote_bugreport_dialog_message (5859287696666024466) -->
+    <skip />
+    <!-- no translation found for share_remote_bugreport_action (532226159318779397) -->
+    <skip />
+    <!-- no translation found for decline_remote_bugreport_action (518720235407565134) -->
+    <skip />
     <string name="usb_use_charging_only" msgid="167707234832117768">"Punjenje"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"Samo puni ovaj uređaj"</string>
     <string name="usb_use_power_only" msgid="6304554004177083963">"Napajanje"</string>
@@ -2910,6 +2927,8 @@
     <string name="see_less" msgid="1250265310929558370">"Vidi manje"</string>
     <string name="disconnected" msgid="5787956818111197212">"Isključen"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"<xliff:g id="AMOUNT">%1$s</xliff:g> podataka u upotrebi"</string>
+    <string name="notification_summary" msgid="3071284223009798461">"Broj aplikacija kojima je slanje blokirano: <xliff:g id="COUNT">%1$d</xliff:g>"</string>
+    <string name="notification_summary_none" msgid="3440195312233351409">"Slanje je dozvoljeno svim aplikacijama"</string>
     <string name="apps_summary" msgid="193158055537070092">"Broj instaliranih aplikacija: <xliff:g id="COUNT">%1$d</xliff:g>"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"24 aplikacije instalirane"</string>
     <string name="storage_summary" msgid="1110250618334248745">"iskorišteno <xliff:g id="SIZE1">%1$s</xliff:g> od ukupno <xliff:g id="SIZE2">%2$s</xliff:g>"</string>

@@ -74,6 +74,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"SD කාඩ් පත ගලවන්න"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"USB ආචයනය මකන්න"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"SD කාඩ් පත මකන්න"</string>
+    <string name="preview_page_indicator_content_description" msgid="3263162369344886880">"<xliff:g id="NUM_PAGES">%2$d</xliff:g> හි <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> තිරය පෙරදසුන් කිරීම"</string>
     <string name="font_size_summary" msgid="1690992332887488183">"තිරය මත පෙළ වඩාත් කුඩා හෝ විශාල කරන්න."</string>
     <string name="small_font" msgid="2295331917424072635">"කුඩා"</string>
     <string name="medium_font" msgid="2068475425515133701">"මධ්‍යම"</string>
@@ -2500,8 +2501,7 @@
     <string name="zen_mode_visual_interruptions_settings_title" msgid="168576844124787420">"දෘශ්‍ය බාධා"</string>
     <string name="configure_notification_settings" msgid="3558846607192693233">"දැනුම්දීම් වින්‍යාස කිරීම"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"උසස්"</string>
-    <!-- no translation found for profile_section_header (2320848161066912001) -->
-    <skip />
+    <string name="profile_section_header" msgid="2320848161066912001">"වැඩ දැනුම්දීම්"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"ස්පන්ද දැනුම්දීම් එළිය"</string>
     <string name="lock_screen_notifications_title" msgid="6173076173408887213">"අගුලු තිරය මත"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"සියලුම දැනුම්දීමේ අන්තර්ගත පෙන්වන්න"</string>
@@ -2521,7 +2521,7 @@
     <string name="notification_importance_min" msgid="2370444628448134377">"අවම: දැනුම්දීම් ලැයිස්තුවෙහි පහළින්ම නිශ්ශබ්දව පෙන්වන්න"</string>
     <string name="notification_importance_low" msgid="979932751695283877">"අඩු: නිශ්ශබ්දව මෙම දැනුම්දීම් පෙන්වන්න"</string>
     <string name="notification_importance_default" msgid="8789180840561778039">"සාමාන්‍ය: මෙම දැනුම්දීම්වලට ශබ්ද නැගීමට ඉඩ දෙන්න"</string>
-    <string name="notification_importance_high" msgid="2401104039256903538">"ඉහළ: තිරයට එබිකම් කර ශබ්දයට ඉඩ දෙන්න සහ ශබ්දයට ඉඩ දෙන්න"</string>
+    <string name="notification_importance_high" msgid="5044607814670313040">"ඉහළ: තිරයට එබිකම් කර ශබ්දයට ඉඩ දෙන්න"</string>
     <string name="notification_importance_max" msgid="6036245535555486319">"හදිසි: දැනුම්දීම් ලැයිස්තුවෙහි ඉහළින්ම පෙන්වන්න, තිරයට එබිකම් කර ශබ්දයට ඉඩ දෙන්න"</string>
     <string name="importance_reset" msgid="7458420788555607007">"යළි පිහිටුවන්න"</string>
     <string name="show_silently" msgid="2222875799232222056">"නිහඬව පෙන්වන්න"</string>
@@ -2542,8 +2542,7 @@
     <string name="app_notification_block_summary" msgid="9049487483231233726">"මෙම යෙදුමෙන් කවදාවත් දැනුම්දීම් පෙන්වන්න එපා"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"බාධා නොකරන්න ඉක්මවන්න"</string>
     <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"බාධා නොකරන්න, ප්‍රමුඛතා පමණි වෙත සකසා ඇති විට මෙම දැනුම්දීම්වලට බාධා කිරීමට දිගටම ඉඩ දෙන්න"</string>
-    <string name="app_notification_sensitive_title" msgid="8465860579482264139">"සංවේදී අන්තර්ගතය සඟවන්න"</string>
-    <string name="app_notification_sensitive_summary" msgid="2515056180303710894">"උපාංගය අගුලු දමා ඇති විට, පුද්ගලික තොරතුරු හෙළිදරව් කළ හැකි මෙම දැනුම්දීම්වල ඇති අන්තර්ගතය සඟවන්න"</string>
+    <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"අගුලු තිරය මත"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"අවහිර කරන ලදි"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"ප්‍රමුඛතාව"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"සංවේදී"</string>
@@ -2688,6 +2687,7 @@
     <string name="notifications_label" msgid="2872668710589600731">"දැනුම්දීම්"</string>
     <string name="notifications_enabled" msgid="4386196629684749507">"සාමාන්‍ය"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"අවහිර කරන ලදි"</string>
+    <string name="notifications_silenced" msgid="4728603513072110381">"නිශ්ශබ්ද කරන ලදී"</string>
     <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
     <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g> / <xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
@@ -2710,6 +2710,10 @@
     <string name="filter_work_apps" msgid="24519936790795574">"කාර්යාලය"</string>
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"අවහිර කරන ලදි"</string>
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"වසම් URL සමග"</string>
+    <string name="filter_notif_priority_apps" msgid="5056470299318500609">"බාධා නොකරන්න ඉක්මවයි"</string>
+    <string name="filter_notif_sensitive_apps" msgid="3847012996691991486">"අගුලු තිරය මත සංවේදී අන්තර්ගතය නැත"</string>
+    <string name="filter_notif_hide_notifications_apps" msgid="3977513041080404368">"අගුලු තිරය මත කිසිදා නොපෙන්වයි"</string>
+    <string name="filter_notif_silent" msgid="8533960664617048281">"නිශ්ශබ්දව පෙන්වයි"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"උසස්"</string>
     <string name="configure_apps" msgid="6685680790825882528">"යෙදුම් වින්‍යාස කරන්න"</string>
     <string name="unknown_app" msgid="5275921288718717656">"නොදන්නා යෙදුම"</string>
@@ -2779,6 +2783,12 @@
     <string name="system_ui_settings" msgid="579824306467081123">"SystemUI සුසරකය පෙන්වන්න"</string>
     <string name="additional_permissions" msgid="6463784193877056080">"අතිරේක අවසර"</string>
     <string name="additional_permissions_more" msgid="3538612272673191451">"තවත් <xliff:g id="COUNT">%1$d</xliff:g>"</string>
+    <string name="share_remote_bugreport_dialog_title" msgid="1124840737776588602">"දෝෂ වාර්තාව බෙදා ගන්නද?"</string>
+    <string name="share_remote_bugreport_dialog_message_finished" msgid="4973886976504823801">"මෙම උපාංගය දෝෂාවේක්ෂණය සඳහා උදවු කිරීමට ඔබේ IT පරිපාලක දෝෂ වාර්තාවක් ඉල්ලා ඇත. යෙදුම් සහ දත්ත බෙදා ගත හැකිය."</string>
+    <string name="share_remote_bugreport_dialog_message" msgid="3495929560689435496">"මෙම උපාංගය දෝෂාවේක්ෂණය සඳහා උදවු කිරීමට ඔබේ IT පරිපාලක දෝෂ වාර්තාවක් ඉල්ලා ඇත. යෙදුම් සහ දත්ත බෙදා ගත හැකි අතර ඔබේ උපාංගය තාවකාලිකව මන්දගාමී විය හැකිය."</string>
+    <string name="sharing_remote_bugreport_dialog_message" msgid="5859287696666024466">"මෙම දෝෂ වාර්තාව ඔබේ IT පරිපාලක සමගින් බෙදා ගනිමින් ඇත. වැඩිදුර විස්තර සඳහා ඔවුන් අමතන්න."</string>
+    <string name="share_remote_bugreport_action" msgid="532226159318779397">"බෙදා ගන්න"</string>
+    <string name="decline_remote_bugreport_action" msgid="518720235407565134">"ප්‍රතික්ෂේප කිරීම"</string>
     <string name="usb_use_charging_only" msgid="167707234832117768">"ආරෝපණය වෙමින්"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"මෙම උපාංගය දැන් ආරෝපනය කරන්න"</string>
     <string name="usb_use_power_only" msgid="6304554004177083963">"බල සැපයුම"</string>
@@ -2886,6 +2896,8 @@
     <string name="see_less" msgid="1250265310929558370">"අඩුවෙන් බලන්න"</string>
     <string name="disconnected" msgid="5787956818111197212">"විසන්ධි වුණි"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"දත්තවලින් <xliff:g id="AMOUNT">%1$s</xliff:g>ක් ස්ථාපනය කරන ලදී"</string>
+    <string name="notification_summary" msgid="3071284223009798461">"යෙදුම් <xliff:g id="COUNT">%1$d</xliff:g>ක් යැවීමෙන් අවහිර කරන ලදී"</string>
+    <string name="notification_summary_none" msgid="3440195312233351409">"සියලු යෙදුම්වලට යැවීමට ඉඩ දෙන ලදී"</string>
     <string name="apps_summary" msgid="193158055537070092">"යෙදුම් <xliff:g id="COUNT">%1$d</xliff:g>ක් ස්ථාපනය කරන ලදී"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"යෙදුම් 24ක් ස්ථාපනය කරන ලදී"</string>
     <string name="storage_summary" msgid="1110250618334248745">"<xliff:g id="SIZE2">%2$s</xliff:g>න් <xliff:g id="SIZE1">%1$s</xliff:g>ක් භාවිත කරන ලදී"</string>

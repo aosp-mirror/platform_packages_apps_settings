@@ -74,6 +74,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Одмонтирај СД картичка"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Избриши УСБ меморија"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Избриши СД картичка"</string>
+    <string name="preview_page_indicator_content_description" msgid="3263162369344886880">"Прегледајте го екранот <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> од <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="font_size_summary" msgid="1690992332887488183">"Направете го текстот на екранот помал или поголем."</string>
     <string name="small_font" msgid="2295331917424072635">"Мали"</string>
     <string name="medium_font" msgid="2068475425515133701">"Среден"</string>
@@ -2498,8 +2499,7 @@
     <string name="zen_mode_visual_interruptions_settings_title" msgid="168576844124787420">"Визуелни прекини"</string>
     <string name="configure_notification_settings" msgid="3558846607192693233">"Конфигурирајте известувања"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"Напредни"</string>
-    <!-- no translation found for profile_section_header (2320848161066912001) -->
-    <skip />
+    <string name="profile_section_header" msgid="2320848161066912001">"Известувања за работен профил"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"Пулсирачко светло за известување"</string>
     <string name="lock_screen_notifications_title" msgid="6173076173408887213">"На заклучениот екран"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Прикажи ја целата содржина од известувањето"</string>
@@ -2519,7 +2519,7 @@
     <string name="notification_importance_min" msgid="2370444628448134377">"Ниско: тивко прикажувај ги на дното на списокот со известувања"</string>
     <string name="notification_importance_low" msgid="979932751695283877">"Ниско: тивко прикажувај ги известувањава"</string>
     <string name="notification_importance_default" msgid="8789180840561778039">"Нормално: овозможи им на известувањава да прават звуци"</string>
-    <string name="notification_importance_high" msgid="2401104039256903538">"Високо: ѕиркање на екранот и овозможен звук и овозможен звук"</string>
+    <string name="notification_importance_high" msgid="5044607814670313040">"Итно: нека ѕирка на екранот и дозволи звук"</string>
     <string name="notification_importance_max" msgid="6036245535555486319">"Итно: прикажувај ги на врвот на списокот со известувања, ѕиркање на екранот и овозможи звук"</string>
     <string name="importance_reset" msgid="7458420788555607007">"Ресетирај"</string>
     <string name="show_silently" msgid="2222875799232222056">"Покажи тивко"</string>
@@ -2540,8 +2540,7 @@
     <string name="app_notification_block_summary" msgid="9049487483231233726">"Никогаш не прикажувај известувања од оваа апликација"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"Отфрли го Не вознемирувај"</string>
     <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"Оставете ги известувањава да продолжат да прекинуваат кога опцијата Не вознемирувај е поставена на Само приоритетни"</string>
-    <string name="app_notification_sensitive_title" msgid="8465860579482264139">"Сокриј чувствителна содржина"</string>
-    <string name="app_notification_sensitive_summary" msgid="2515056180303710894">"Кога уредот е заклучен, сокријте ја содржината на известувањава којашто може да открие приватни информации"</string>
+    <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"На заклучениот екран"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Блокирана"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Приоритет"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Чувствителна"</string>
@@ -2686,6 +2685,7 @@
     <string name="notifications_label" msgid="2872668710589600731">"Известувања"</string>
     <string name="notifications_enabled" msgid="4386196629684749507">"Нормално"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"Блокирани"</string>
+    <string name="notifications_silenced" msgid="4728603513072110381">"Стишено"</string>
     <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g>/<xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
     <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g>/<xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>/<xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
@@ -2708,6 +2708,10 @@
     <string name="filter_work_apps" msgid="24519936790795574">"Службени"</string>
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"Блокирани"</string>
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"Со УРЛ-домени"</string>
+    <string name="filter_notif_priority_apps" msgid="5056470299318500609">"Отфрлува Не вознемирувај"</string>
+    <string name="filter_notif_sensitive_apps" msgid="3847012996691991486">"Без чув. содрж. на закл. екран"</string>
+    <string name="filter_notif_hide_notifications_apps" msgid="3977513041080404368">"Ник. не е прик. на закл. екран"</string>
+    <string name="filter_notif_silent" msgid="8533960664617048281">"Прикажано тивко"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Напредни"</string>
     <string name="configure_apps" msgid="6685680790825882528">"Конфигурирање апликации"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Непозната апликација"</string>
@@ -2777,6 +2781,12 @@
     <string name="system_ui_settings" msgid="579824306467081123">"Прикажи SystemUI Tuner"</string>
     <string name="additional_permissions" msgid="6463784193877056080">"Дополнителни дозволи"</string>
     <string name="additional_permissions_more" msgid="3538612272673191451">"Уште <xliff:g id="COUNT">%1$d</xliff:g>"</string>
+    <string name="share_remote_bugreport_dialog_title" msgid="1124840737776588602">"Да се сподели извештајот за грешки?"</string>
+    <string name="share_remote_bugreport_dialog_message_finished" msgid="4973886976504823801">"Вашиот администратор за информатичка технологија побара извештај за грешки за да ви помогне во отстранувањето на грешките на овој уред. Апликациите и податоците може да бидат споделени."</string>
+    <string name="share_remote_bugreport_dialog_message" msgid="3495929560689435496">"Вашиот администратор за информатичка технологија побара извештај за грешки за да ви помогне во отстранувањето на грешките на овој уред. Апликациите и податоците може да бидат споделени, а уредот може да биде привремено побавен."</string>
+    <string name="sharing_remote_bugreport_dialog_message" msgid="5859287696666024466">"Извештајот за грешки е споделен со вашиот администратор за информатичка технологија. За повеќе детали, контактирајте со него."</string>
+    <string name="share_remote_bugreport_action" msgid="532226159318779397">"Сподели"</string>
+    <string name="decline_remote_bugreport_action" msgid="518720235407565134">"Одбиј"</string>
     <string name="usb_use_charging_only" msgid="167707234832117768">"Се полни"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"Само полни го уредов"</string>
     <string name="usb_use_power_only" msgid="6304554004177083963">"Напојување"</string>
@@ -2884,6 +2894,8 @@
     <string name="see_less" msgid="1250265310929558370">"Види помалку"</string>
     <string name="disconnected" msgid="5787956818111197212">"Исклучено"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"<xliff:g id="AMOUNT">%1$s</xliff:g> од податоците се искористени"</string>
+    <string name="notification_summary" msgid="3071284223009798461">"<xliff:g id="COUNT">%1$d</xliff:g> апликации се блокирани за испраќање"</string>
+    <string name="notification_summary_none" msgid="3440195312233351409">"На сите апликации им е дозволено да се испратат"</string>
     <string name="apps_summary" msgid="193158055537070092">"<xliff:g id="COUNT">%1$d</xliff:g> апликации се инсталирани"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"Инсталирани се 24 апликации"</string>
     <string name="storage_summary" msgid="1110250618334248745">"Искористени се <xliff:g id="SIZE1">%1$s</xliff:g> од <xliff:g id="SIZE2">%2$s</xliff:g>"</string>

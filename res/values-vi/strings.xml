@@ -74,6 +74,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Tháo thẻ SD"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Xóa bộ nhớ USB"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Xóa thẻ SD"</string>
+    <string name="preview_page_indicator_content_description" msgid="3263162369344886880">"Màn hình xem trước <xliff:g id="CURRENT_PAGE">%1$d</xliff:g>/<xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="font_size_summary" msgid="1690992332887488183">"Thu nhỏ hoặc phóng to văn bản trên màn hình."</string>
     <string name="small_font" msgid="2295331917424072635">"Nhỏ"</string>
     <string name="medium_font" msgid="2068475425515133701">"Trung bình"</string>
@@ -2498,8 +2499,7 @@
     <string name="zen_mode_visual_interruptions_settings_title" msgid="168576844124787420">"Gián đoạn trực quan"</string>
     <string name="configure_notification_settings" msgid="3558846607192693233">"Định cấu hình thông báo"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"Nâng cao"</string>
-    <!-- no translation found for profile_section_header (2320848161066912001) -->
-    <skip />
+    <string name="profile_section_header" msgid="2320848161066912001">"Thông báo công việc"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"Đèn thông báo dạng xung"</string>
     <string name="lock_screen_notifications_title" msgid="6173076173408887213">"Trên màn hình khóa"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Hiển thị tất cả nội dung thông báo"</string>
@@ -2519,7 +2519,7 @@
     <string name="notification_importance_min" msgid="2370444628448134377">"Thấp nhất: Hiển thị im lặng ở cuối danh sách thông báo"</string>
     <string name="notification_importance_low" msgid="979932751695283877">"Thấp: Hiển thị im lặng các thông báo này"</string>
     <string name="notification_importance_default" msgid="8789180840561778039">"Bình thường: Cho phép các thông báo này phát ra âm thanh"</string>
-    <string name="notification_importance_high" msgid="2401104039256903538">"Cao: Hiển thị trên màn hình và phát ra âm thanh"</string>
+    <string name="notification_importance_high" msgid="5044607814670313040">"Cao: Hiển thị trên màn hình và phát ra âm thanh"</string>
     <string name="notification_importance_max" msgid="6036245535555486319">"Cấp bách: Hiển thị ở đầu danh sách thông báo, hiển thị trên màn hình và phát ra âm thanh"</string>
     <string name="importance_reset" msgid="7458420788555607007">"Đặt lại"</string>
     <string name="show_silently" msgid="2222875799232222056">"Hiển thị im lặng"</string>
@@ -2540,8 +2540,7 @@
     <string name="app_notification_block_summary" msgid="9049487483231233726">"Không bao giờ hiển thị thông báo từ ứng dụng này"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"Ghi đè Không làm phiền"</string>
     <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"Cho phép các thông báo này tiếp tục làm gián đoạn khi tính năng Không làm phiền được đặt thành Chỉ ưu tiên."</string>
-    <string name="app_notification_sensitive_title" msgid="8465860579482264139">"Ẩn nội dung nhạy cảm"</string>
-    <string name="app_notification_sensitive_summary" msgid="2515056180303710894">"Khi thiết bị bị khóa, hãy ẩn nội dung có thể hiển thị thông tin riêng tư trong các thông báo này."</string>
+    <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"Trên màn hình khóa"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Bị chặn"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Mức độ ưu tiên"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Nhạy cảm"</string>
@@ -2686,6 +2685,7 @@
     <string name="notifications_label" msgid="2872668710589600731">"Thông báo"</string>
     <string name="notifications_enabled" msgid="4386196629684749507">"Bình thường"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"Bị chặn"</string>
+    <string name="notifications_silenced" msgid="4728603513072110381">"Bị tắt tiếng"</string>
     <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
     <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g> / <xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
@@ -2708,6 +2708,10 @@
     <string name="filter_work_apps" msgid="24519936790795574">"Cơ quan"</string>
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"Đã chặn"</string>
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"Có URL miền"</string>
+    <string name="filter_notif_priority_apps" msgid="5056470299318500609">"Ghi đè không làm phiền"</string>
+    <string name="filter_notif_sensitive_apps" msgid="3847012996691991486">"Ko có n.dung nhạy cảm ở m.hình khóa"</string>
+    <string name="filter_notif_hide_notifications_apps" msgid="3977513041080404368">"Không hiện trên màn hình khóa"</string>
+    <string name="filter_notif_silent" msgid="8533960664617048281">"Hiển thị im lặng"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Nâng cao"</string>
     <string name="configure_apps" msgid="6685680790825882528">"Định cấu hình ứng dụng"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Ứng dụng không xác định"</string>
@@ -2777,6 +2781,12 @@
     <string name="system_ui_settings" msgid="579824306467081123">"Hiện Bộ điều chỉnh SystemUI"</string>
     <string name="additional_permissions" msgid="6463784193877056080">"Quyền khác"</string>
     <string name="additional_permissions_more" msgid="3538612272673191451">"<xliff:g id="COUNT">%1$d</xliff:g> khác"</string>
+    <string name="share_remote_bugreport_dialog_title" msgid="1124840737776588602">"Chia sẻ báo cáo lỗi?"</string>
+    <string name="share_remote_bugreport_dialog_message_finished" msgid="4973886976504823801">"Quản trị viên CNTT của bạn đã yêu cầu báo cáo lỗi để giúp khắc phục sự cố thiết bị này. Bạn có thể chia sẻ ứng dụng và dữ liệu."</string>
+    <string name="share_remote_bugreport_dialog_message" msgid="3495929560689435496">"Quản trị viên CNTT của bạn đã yêu cầu báo cáo lỗi để giúp khắc phục sự cố thiết bị này. Bạn có thể chia sẻ ứng dụng và dữ liệu, đồng thời thiết bị của bạn tạm thời có thể bị chậm."</string>
+    <string name="sharing_remote_bugreport_dialog_message" msgid="5859287696666024466">"Báo cáo lỗi này đã được chia sẻ với quản trị viên CNTT của bạn. Hãy liên hệ với họ để biết thêm chi tiết."</string>
+    <string name="share_remote_bugreport_action" msgid="532226159318779397">"Chia sẻ"</string>
+    <string name="decline_remote_bugreport_action" msgid="518720235407565134">"Từ chối"</string>
     <string name="usb_use_charging_only" msgid="167707234832117768">"Đang sạc"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"Chỉ sạc thiết bị này"</string>
     <string name="usb_use_power_only" msgid="6304554004177083963">"Cấp nguồn"</string>
@@ -2884,6 +2894,8 @@
     <string name="see_less" msgid="1250265310929558370">"Xem bớt"</string>
     <string name="disconnected" msgid="5787956818111197212">"Đã ngắt kết nối"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"Đã sử dụng <xliff:g id="AMOUNT">%1$s</xliff:g> dữ liệu"</string>
+    <string name="notification_summary" msgid="3071284223009798461">"<xliff:g id="COUNT">%1$d</xliff:g> ứng dụng bị chặn gửi"</string>
+    <string name="notification_summary_none" msgid="3440195312233351409">"Tất cả ứng dụng đều được phép gửi"</string>
     <string name="apps_summary" msgid="193158055537070092">"Đã cài đặt <xliff:g id="COUNT">%1$d</xliff:g> ứng dụng"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"Đã cài đặt 24 ứng dụng"</string>
     <string name="storage_summary" msgid="1110250618334248745">"Đã sử dụng <xliff:g id="SIZE1">%1$s</xliff:g> / <xliff:g id="SIZE2">%2$s</xliff:g>"</string>
