@@ -42,6 +42,7 @@ import android.os.UserManager;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
+import android.util.Log;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.wifi.WifiApDialog;
@@ -64,6 +65,8 @@ public class TetherSettings extends RestrictedSettingsFragment
     private static final String TETHER_CHOICE = "TETHER_TYPE";
 
     private static final int DIALOG_AP_SETTINGS = 1;
+
+    private static final String TAG = "TetheringSettings";
 
     private SwitchPreference mUsbTether;
 
@@ -94,6 +97,8 @@ public class TetherSettings extends RestrictedSettingsFragment
     private WifiManager mWifiManager;
     private WifiConfiguration mWifiConfig = null;
     private ConnectivityManager mCm;
+
+    private boolean mRestartWifiApAfterConfigChange;
 
     private boolean mUsbConnected;
     private boolean mMassStorageActive;
@@ -141,7 +146,7 @@ public class TetherSettings extends RestrictedSettingsFragment
         mUsbTether = (SwitchPreference) findPreference(USB_TETHER_SETTINGS);
         mBluetoothTether = (SwitchPreference) findPreference(ENABLE_BLUETOOTH_TETHERING);
 
-        mCm = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        mCm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
         mUsbRegexs = mCm.getTetherableUsbRegexs();
         mWifiRegexs = mCm.getTetherableWifiRegexs();
@@ -183,6 +188,8 @@ public class TetherSettings extends RestrictedSettingsFragment
 
         mCreateNetwork = findPreference(WIFI_AP_SSID_AND_SECURITY);
 
+        mRestartWifiApAfterConfigChange = false;
+
         if (mWifiConfig == null) {
             final String s = activity.getString(
                     com.android.internal.R.string.wifi_tether_configure_ssid_default);
@@ -222,6 +229,12 @@ public class TetherSettings extends RestrictedSettingsFragment
                 updateState(available.toArray(new String[available.size()]),
                         active.toArray(new String[active.size()]),
                         errored.toArray(new String[errored.size()]));
+                if (mWifiManager.getWifiApState() == WifiManager.WIFI_AP_STATE_DISABLED
+                        && mRestartWifiApAfterConfigChange) {
+                    mRestartWifiApAfterConfigChange = false;
+                    Log.d(TAG, "Restarting WifiAp due to prior config change.");
+                    startTethering(TETHERING_WIFI);
+                }
             } else if (action.equals(Intent.ACTION_MEDIA_SHARED)) {
                 mMassStorageActive = true;
                 updateState();
@@ -391,8 +404,9 @@ public class TetherSettings extends RestrictedSettingsFragment
         }
 
         BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
-        if (adapter == null)
+        if (adapter == null) {
             return;
+        }
         int btState = adapter.getState();
         if (btState == BluetoothAdapter.STATE_TURNING_OFF) {
             mBluetoothTether.setEnabled(false);
@@ -402,8 +416,8 @@ public class TetherSettings extends RestrictedSettingsFragment
             mBluetoothTether.setSummary(R.string.bluetooth_turning_on);
         } else {
             BluetoothPan bluetoothPan = mBluetoothPan.get();
-            if (btState == BluetoothAdapter.STATE_ON && bluetoothPan != null &&
-                    bluetoothPan.isTetheringOn()) {
+            if (btState == BluetoothAdapter.STATE_ON && bluetoothPan != null
+                    && bluetoothPan.isTetheringOn()) {
                 mBluetoothTether.setChecked(true);
                 mBluetoothTether.setEnabled(true);
                 int bluetoothTethered = bluetoothPan.getConnectedDevices().size();
@@ -506,11 +520,12 @@ public class TetherSettings extends RestrictedSettingsFragment
                  * TODO: update config on a running access point when framework support is added
                  */
                 if (mWifiManager.getWifiApState() == WifiManager.WIFI_AP_STATE_ENABLED) {
-                    mWifiManager.setWifiApEnabled(null, false);
-                    mWifiManager.setWifiApEnabled(mWifiConfig, true);
-                } else {
-                    mWifiManager.setWifiApConfiguration(mWifiConfig);
+                    Log.d("TetheringSettings",
+                            "Wifi AP config changed while enabled, stop and restart");
+                    mRestartWifiApAfterConfigChange = true;
+                    mCm.stopTethering(TETHERING_WIFI);
                 }
+                mWifiManager.setWifiApConfiguration(mWifiConfig);
                 int index = WifiApDialog.getSecurityTypeIndex(mWifiConfig);
                 mCreateNetwork.setSummary(String.format(getActivity().getString(CONFIG_SUBTEXT),
                         mWifiConfig.SSID,
