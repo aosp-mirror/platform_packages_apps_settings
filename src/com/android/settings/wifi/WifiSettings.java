@@ -180,11 +180,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         super.onCreate(icicle);
         addPreferencesFromResource(R.xml.wifi_settings);
         mAddPreference = new Preference(getContext());
-        Drawable ic_add = getContext().getDrawable(R.drawable.ic_menu_add).mutate();
-        TypedValue tv = new TypedValue();
-        getContext().getTheme().resolveAttribute(android.R.attr.colorAccent, tv, true);
-        ic_add.setTint(getContext().getColor(tv.resourceId));
-        mAddPreference.setIcon(ic_add);
+        mAddPreference.setIcon(R.drawable.ic_menu_add_inset);
         mAddPreference.setTitle(R.string.wifi_add_network);
 
         mUserBadgeCache = new AccessPointPreference.UserBadgeCache(getPackageManager());
