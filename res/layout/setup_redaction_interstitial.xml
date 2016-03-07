@@ -72,6 +72,15 @@
                 android:layout_height="wrap_content"
                 android:text="@string/lock_screen_notifications_summary_disable" />
 
+            <!-- CheckBox is styled with SuwRadioButton to make it line up nicely with the radios
+                 above. -->
+            <CheckBox
+                android:id="@+id/lockscreen_remote_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/suw_check_box_margin_top"
+                android:text="@string/lockscreen_remote_input"
+                style="@style/SuwRadioButton" />
         </RadioGroup>
 
     </LinearLayout>
