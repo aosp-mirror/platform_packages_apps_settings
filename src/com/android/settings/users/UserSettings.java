@@ -40,10 +40,8 @@ import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
-import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
-import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
 import android.util.Log;
@@ -61,7 +59,6 @@ import com.android.settings.ChooseLockGeneric;
 import com.android.settings.DimmableIconPreference;
 import com.android.settings.OwnerInfoSettings;
 import com.android.settings.R;
-import com.android.settings.SelectableEditTextPreference;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
@@ -144,7 +141,7 @@ public class UserSettings extends SettingsPreferenceFragment
     private int mAddedUserId = 0;
     private boolean mAddingUser;
     private UserCapabilities mUserCaps;
-
+    private boolean mShouldUpdateUserList = true;
     private final Object mUserLock = new Object();
     private UserManager mUserManager;
     private SparseArray<Bitmap> mUserIcons = new SparseArray<Bitmap>();
@@ -236,12 +233,13 @@ public class UserSettings extends SettingsPreferenceFragment
         mLockScreenSettings = (PreferenceGroup) findPreference("lock_screen_settings");
         mAddUserWhenLocked = (RestrictedSwitchPreference) findPreference("add_users_when_locked");
         mEmergencyInfoPreference = findPreference(KEY_EMERGENCY_INFO);
-        loadProfile();
         setHasOptionsMenu(true);
         IntentFilter filter = new IntentFilter(Intent.ACTION_USER_REMOVED);
         filter.addAction(Intent.ACTION_USER_INFO_CHANGED);
-        context.registerReceiverAsUser(mUserChangeReceiver, UserHandle.ALL, filter, null,
-                mHandler);
+        context.registerReceiverAsUser(mUserChangeReceiver, UserHandle.ALL, filter, null, mHandler);
+        loadProfile();
+        updateUserList();
+        mShouldUpdateUserList = false;
     }
 
     @Override
@@ -250,8 +248,16 @@ public class UserSettings extends SettingsPreferenceFragment
 
         if (!mUserCaps.mEnabled) return;
 
-        loadProfile();
-        updateUserList();
+        if (mShouldUpdateUserList) {
+            loadProfile();
+            updateUserList();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        mShouldUpdateUserList = true;
+        super.onPause();
     }
 
     @Override
