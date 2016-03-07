@@ -230,6 +230,15 @@ public class SecuritySettings extends SettingsPreferenceFragment
         final int resid = getResIdForLockUnlockScreen(getActivity(), mLockPatternUtils, MY_USER_ID);
         addPreferencesFromResource(resid);
 
+        final EnforcedAdmin admin = RestrictedLockUtils.checkIfPasswordQualityIsSet(
+                getActivity(), MY_USER_ID);
+        if (admin != null && mDPM.getPasswordQuality(admin.component) ==
+                DevicePolicyManager.PASSWORD_QUALITY_MANAGED) {
+            final GearPreference unlockSetOrChangePref =
+                    (GearPreference) getPreferenceScreen().findPreference(KEY_UNLOCK_SET_OR_CHANGE);
+            unlockSetOrChangePref.setDisabledByAdmin(admin);
+        }
+
         mProfileChallengeUserId = Utils.getManagedProfileId(mUm, MY_USER_ID);
         if (mProfileChallengeUserId != UserHandle.USER_NULL
                 && mLockPatternUtils.isSeparateProfileChallengeAllowed(mProfileChallengeUserId)) {
@@ -744,59 +753,58 @@ public class SecuritySettings extends SettingsPreferenceFragment
         @Override
         public List<SearchIndexableResource> getXmlResourcesToIndex(
                 Context context, boolean enabled) {
+            final List<SearchIndexableResource> index = new ArrayList<SearchIndexableResource>();
 
-            List<SearchIndexableResource> result = new ArrayList<SearchIndexableResource>();
-
-            LockPatternUtils lockPatternUtils = new LockPatternUtils(context);
-            // Add options for lock/unlock screen
-            int resId = getResIdForLockUnlockScreen(context, lockPatternUtils, MY_USER_ID);
-
-            SearchIndexableResource sir = new SearchIndexableResource(context);
-            sir.xmlResId = resId;
-            result.add(sir);
-
+            final LockPatternUtils lockPatternUtils = new LockPatternUtils(context);
+            final EnforcedAdmin admin = RestrictedLockUtils.checkIfPasswordQualityIsSet(
+                    context, MY_USER_ID);
+            final DevicePolicyManager dpm = (DevicePolicyManager)
+                    context.getSystemService(Context.DEVICE_POLICY_SERVICE);
             final UserManager um = UserManager.get(context);
+
+            if (admin == null || dpm.getPasswordQuality(admin.component) !=
+                    DevicePolicyManager.PASSWORD_QUALITY_MANAGED) {
+                // Add options for lock/unlock screen
+                final int resId = getResIdForLockUnlockScreen(context, lockPatternUtils,
+                        MY_USER_ID);
+                index.add(getSearchResource(context, resId));
+            }
+
             final int profileUserId = Utils.getManagedProfileId(um, MY_USER_ID);
             if (profileUserId != UserHandle.USER_NULL
                     && lockPatternUtils.isSeparateProfileChallengeAllowed(profileUserId)) {
-                sir = new SearchIndexableResource(context);
-                sir.xmlResId = getResIdForLockUnlockScreen(
-                        context, lockPatternUtils, profileUserId);
-                result.add(sir);
+                index.add(getSearchResource(context, getResIdForLockUnlockScreen(context,
+                        lockPatternUtils, profileUserId)));
             }
 
             if (um.isAdminUser()) {
-                DevicePolicyManager dpm = (DevicePolicyManager)
-                        context.getSystemService(Context.DEVICE_POLICY_SERVICE);
-
                 switch (dpm.getStorageEncryptionStatus()) {
                     case DevicePolicyManager.ENCRYPTION_STATUS_ACTIVE:
                         // The device is currently encrypted.
-                        resId = R.xml.security_settings_encrypted;
+                        index.add(getSearchResource(context, R.xml.security_settings_encrypted));
                         break;
                     case DevicePolicyManager.ENCRYPTION_STATUS_INACTIVE:
                         // This device supports encryption but isn't encrypted.
-                        resId = R.xml.security_settings_unencrypted;
+                        index.add(getSearchResource(context, R.xml.security_settings_unencrypted));
                         break;
                 }
-
-                sir = new SearchIndexableResource(context);
-                sir.xmlResId = resId;
-                result.add(sir);
             }
 
-            sir = new SearchIndexableResource(context);
-            sir.xmlResId = SecuritySubSettings.getResIdForLockUnlockSubScreen(context,
-                    lockPatternUtils);
+            final SearchIndexableResource sir = getSearchResource(context,
+                    SecuritySubSettings.getResIdForLockUnlockSubScreen(context, lockPatternUtils));
             sir.className = SecuritySubSettings.class.getName();
-            result.add(sir);
+            index.add(sir);
 
             // Append the rest of the settings
-            sir = new SearchIndexableResource(context);
-            sir.xmlResId = R.xml.security_settings_misc;
-            result.add(sir);
+            index.add(getSearchResource(context, R.xml.security_settings_misc));
 
-            return result;
+            return index;
+        }
+
+        private SearchIndexableResource getSearchResource(Context context, int xmlResId) {
+            final SearchIndexableResource sir = new SearchIndexableResource(context);
+            sir.xmlResId = xmlResId;
+            return sir;
         }
 
         @Override
