@@ -28,8 +28,6 @@
         android:layout_width="40dip"
         android:layout_height="40dip"
         android:layout_gravity="center_vertical"
-        android:layout_marginTop="8dip"
-        android:layout_marginBottom="8dip"
         android:duplicateParentState="true"
         android:contentDescription="@null"
         android:visibility="invisible">
@@ -47,47 +45,42 @@
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textAppearance="?android:attr/textAppearanceListItem"
             android:singleLine="true"
             android:ellipsize="end"
-            android:textIsSelectable="false"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
-            android:fadingEdge="horizontal"
-            android:textAlignment="viewStart"
-            android:textColor="?android:attr/textColorPrimary"
-            android:duplicateParentState="true">
-        </TextView>
+            android:duplicateParentState="true" />
 
         <TextView
             android:id="@+id/subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/title"
-            android:layout_alignParentStart="true"
-            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+            android:textColor="?android:attr/textColorSecondary"
             android:singleLine="true"
             android:ellipsize="end"
-            android:textIsSelectable="false"
             android:visibility="gone"
-            android:textColor="?android:attr/textColorSecondary"
-            android:textAlignment="viewStart"
-            android:duplicateParentState="true">
-        </TextView>
+            android:duplicateParentState="true" />
 
     </RelativeLayout>
 
-    <ImageView
+    <!-- wrapper for image view to increase the touch target size -->
+    <LinearLayout
         android:id="@+id/more_info"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:paddingLeft="16dip"
-        android:contentDescription="@string/printer_info_desc"
-        android:src="@drawable/ic_info_outline"
-        android:tint="?android:attr/colorControlNormal"
-        android:tintMode="src_in"
+        android:layout_height="fill_parent"
         android:visibility="gone">
-    </ImageView>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="16dip"
+            android:contentDescription="@string/printer_info_desc"
+            android:src="@drawable/ic_info"
+            android:tint="?android:attr/colorControlNormal"
+            android:tintMode="src_in" />
+
+    </LinearLayout>
 
 </LinearLayout>

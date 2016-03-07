@@ -131,6 +131,8 @@ public class SettingsActivity extends SettingsDrawerActivity
 
     private static final String LOG_TAG = "Settings";
 
+    private static final int LOADER_ID_INDEXABLE_CONTENT_MONITOR = 1;
+
     // Constants for state save/restore
     private static final String SAVE_KEY_CATEGORIES = ":settings:categories";
     private static final String SAVE_KEY_SEARCH_MENU_EXPANDED = ":settings:search_menu_expanded";
@@ -786,7 +788,7 @@ public class SettingsActivity extends SettingsDrawerActivity
         registerReceiver(mUserAddRemoveReceiver, new IntentFilter(Intent.ACTION_USER_ADDED));
         registerReceiver(mUserAddRemoveReceiver, new IntentFilter(Intent.ACTION_USER_REMOVED));
 
-        mDynamicIndexableContentMonitor.register(this);
+        mDynamicIndexableContentMonitor.register(this, LOADER_ID_INDEXABLE_CONTENT_MONITOR);
 
         if(mDisplaySearch && !TextUtils.isEmpty(mSearchQuery)) {
             onQueryTextSubmit(mSearchQuery);

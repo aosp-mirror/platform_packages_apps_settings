@@ -21,23 +21,19 @@ import android.app.LoaderManager.LoaderCallbacks;
 import android.content.ActivityNotFoundException;
 import android.content.AsyncTaskLoader;
 import android.content.ComponentName;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-import android.database.ContentObserver;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.print.PrintJob;
 import android.print.PrintJobId;
 import android.print.PrintJobInfo;
 import android.print.PrintManager;
 import android.print.PrintManager.PrintJobStateChangeListener;
+import android.print.PrintServicesLoader;
 import android.printservice.PrintServiceInfo;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
@@ -53,7 +49,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.android.internal.content.PackageMonitor;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.DialogCreatable;
 import com.android.settings.R;
@@ -74,18 +69,13 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
         implements DialogCreatable, Indexable, OnClickListener {
     public static final String TAG = "PrintSettingsFragment";
     private static final int LOADER_ID_PRINT_JOBS_LOADER = 1;
+    private static final int LOADER_ID_PRINT_SERVICES = 2;
 
     private static final String PRINT_JOBS_CATEGORY = "print_jobs_category";
     private static final String PRINT_SERVICES_CATEGORY = "print_services_category";
 
-    // Extras passed to sub-fragments.
-    static final String EXTRA_PREFERENCE_KEY = "EXTRA_PREFERENCE_KEY";
     static final String EXTRA_CHECKED = "EXTRA_CHECKED";
     static final String EXTRA_TITLE = "EXTRA_TITLE";
-    static final String EXTRA_SETTINGS_TITLE = "EXTRA_SETTINGS_TITLE";
-    static final String EXTRA_SETTINGS_COMPONENT_NAME = "EXTRA_SETTINGS_COMPONENT_NAME";
-    static final String EXTRA_ADD_PRINTERS_TITLE = "EXTRA_ADD_PRINTERS_TITLE";
-    static final String EXTRA_ADD_PRINTERS_COMPONENT_NAME = "EXTRA_ADD_PRINTERS_COMPONENT_NAME";
     static final String EXTRA_SERVICE_COMPONENT_NAME = "EXTRA_SERVICE_COMPONENT_NAME";
 
     static final String EXTRA_PRINT_JOB_ID = "EXTRA_PRINT_JOB_ID";
@@ -93,29 +83,14 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
     private static final String EXTRA_PRINT_SERVICE_COMPONENT_NAME =
             "EXTRA_PRINT_SERVICE_COMPONENT_NAME";
 
-    private static final int ORDER_LAST = 1000;
-
-    private final PackageMonitor mSettingsPackageMonitor = new SettingsPackageMonitor();
-
-    private final Handler mHandler = new Handler() {
-        @Override
-        public void dispatchMessage(Message msg) {
-            updateServicesPreferences();
-        }
-    };
-
-    private final SettingsContentObserver mSettingsContentObserver =
-            new SettingsContentObserver(mHandler) {
-        @Override
-        public void onChange(boolean selfChange, Uri uri) {
-            updateServicesPreferences();
-        }
-    };
+    private static final int ORDER_LAST = Preference.DEFAULT_ORDER - 1;
 
     private PreferenceCategory mActivePrintJobsCategory;
     private PreferenceCategory mPrintServicesCategory;
 
     private PrintJobsController mPrintJobsController;
+    private PrintServicesController mPrintServicesController;
+
     private Button mAddNewServiceButton;
 
     @Override
@@ -140,24 +115,23 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
         getPreferenceScreen().removePreference(mActivePrintJobsCategory);
 
         mPrintJobsController = new PrintJobsController();
-        getActivity().getLoaderManager().initLoader(LOADER_ID_PRINT_JOBS_LOADER,
-                null, mPrintJobsController);
+        getActivity().getLoaderManager().initLoader(LOADER_ID_PRINT_JOBS_LOADER, null,
+                mPrintJobsController);
+
+        mPrintServicesController = new PrintServicesController();
+        getActivity().getLoaderManager().initLoader(LOADER_ID_PRINT_SERVICES, null,
+                mPrintServicesController);
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        mSettingsPackageMonitor.register(getActivity(), getActivity().getMainLooper(), false);
-        mSettingsContentObserver.register(getContentResolver());
-        updateServicesPreferences();
         setHasOptionsMenu(true);
         startSubSettingsIfNeeded();
     }
 
     @Override
     public void onStop() {
-        mSettingsPackageMonitor.unregister();
-        mSettingsContentObserver.unregister(getContentResolver());
         super.onStop();
     }
 
@@ -187,94 +161,80 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
         return Settings.ACTION_PRINT_SETTINGS;
     }
 
-    private void updateServicesPreferences() {
-        if (getPreferenceScreen().findPreference(PRINT_SERVICES_CATEGORY) == null) {
-            getPreferenceScreen().addPreference(mPrintServicesCategory);
-        } else {
-            // Since services category is auto generated we have to do a pass
-            // to generate it since services can come and go.
-            mPrintServicesCategory.removeAll();
-        }
-
-        List<ComponentName> disabledServices = PrintSettingsUtils
-                .readDisabledPrintServices(getActivity());
-
-        final PackageManager pm = getActivity().getPackageManager();
-
-        List<ResolveInfo> installedServices = pm
-                .queryIntentServices(
-                        new Intent(android.printservice.PrintService.SERVICE_INTERFACE),
-                        PackageManager.GET_SERVICES | PackageManager.GET_META_DATA);
-
-        final int installedServiceCount = installedServices.size();
-        for (int i = 0; i < installedServiceCount; i++) {
-            ResolveInfo installedService = installedServices.get(i);
-
-            PreferenceScreen preference = getPreferenceManager().createPreferenceScreen(
-                    getActivity());
-
-            String title = installedService.loadLabel(getPackageManager()).toString();
-            preference.setTitle(title);
-
-            ComponentName componentName = new ComponentName(
-                    installedService.serviceInfo.packageName,
-                    installedService.serviceInfo.name);
-            preference.setKey(componentName.flattenToString());
-
-            preference.setOrder(i);
-            preference.setFragment(PrintServiceSettingsFragment.class.getName());
-            preference.setPersistent(false);
-
-            final boolean serviceEnabled = !disabledServices.contains(componentName);
-            if (serviceEnabled) {
-                preference.setSummary(getString(R.string.print_feature_state_on));
+    /**
+     * Adds preferences for all print services to the {@value PRINT_SERVICES_CATEGORY} cathegory.
+     */
+    private final class PrintServicesController implements
+           LoaderCallbacks<List<PrintServiceInfo>> {
+        @Override
+        public Loader<List<PrintServiceInfo>> onCreateLoader(int id, Bundle args) {
+            PrintManager printManager =
+                    (PrintManager) getContext().getSystemService(Context.PRINT_SERVICE);
+            if (printManager != null) {
+                return new PrintServicesLoader(printManager, getContext(),
+                        PrintManager.ALL_SERVICES);
             } else {
-                preference.setSummary(getString(R.string.print_feature_state_off));
+                return null;
             }
-
-            final Drawable drawable = installedService.loadIcon(pm);
-            if (drawable != null) {
-                preference.setIcon(drawable);
-            }
-
-            Bundle extras = preference.getExtras();
-            extras.putString(EXTRA_PREFERENCE_KEY, preference.getKey());
-            extras.putBoolean(EXTRA_CHECKED, serviceEnabled);
-            extras.putString(EXTRA_TITLE, title);
-
-            PrintServiceInfo printServiceInfo = PrintServiceInfo.create(
-                    installedService, getActivity());
-
-            String settingsClassName = printServiceInfo.getSettingsActivityName();
-            if (!TextUtils.isEmpty(settingsClassName)) {
-                extras.putString(EXTRA_SETTINGS_TITLE,
-                        getString(R.string.print_menu_item_settings));
-                extras.putString(EXTRA_SETTINGS_COMPONENT_NAME,
-                        new ComponentName(installedService.serviceInfo.packageName,
-                                settingsClassName).flattenToString());
-            }
-
-            String addPrinterClassName = printServiceInfo.getAddPrintersActivityName();
-            if (!TextUtils.isEmpty(addPrinterClassName)) {
-                extras.putString(EXTRA_ADD_PRINTERS_TITLE,
-                        getString(R.string.print_menu_item_add_printers));
-                extras.putString(EXTRA_ADD_PRINTERS_COMPONENT_NAME,
-                        new ComponentName(installedService.serviceInfo.packageName,
-                                addPrinterClassName).flattenToString());
-            }
-
-            extras.putString(EXTRA_SERVICE_COMPONENT_NAME, componentName.flattenToString());
-
-            mPrintServicesCategory.addPreference(preference);
         }
 
-        if (mPrintServicesCategory.getPreferenceCount() == 0) {
-            getPreferenceScreen().removePreference(mPrintServicesCategory);
-        } else {
-            final Preference addNewServicePreference = newAddServicePreferenceOrNull();
+        @Override
+        public void onLoadFinished(Loader<List<PrintServiceInfo>> loader,
+                List<PrintServiceInfo> services) {
+            if (services.isEmpty()) {
+                getPreferenceScreen().removePreference(mPrintServicesCategory);
+                return;
+            } else if (getPreferenceScreen().findPreference(PRINT_SERVICES_CATEGORY) == null) {
+                getPreferenceScreen().addPreference(mPrintServicesCategory);
+            }
+
+            mPrintServicesCategory.removeAll();
+            PackageManager pm = getActivity().getPackageManager();
+
+            final int numServices = services.size();
+            for (int i = 0; i < numServices; i++) {
+                PrintServiceInfo service = services.get(i);
+                PreferenceScreen preference = getPreferenceManager().createPreferenceScreen(
+                        getActivity());
+
+                String title = service.getResolveInfo().loadLabel(pm).toString();
+                preference.setTitle(title);
+
+                ComponentName componentName = service.getComponentName();
+                preference.setKey(componentName.flattenToString());
+
+                preference.setOrder(Math.min(ORDER_LAST - 1, componentName.hashCode()));
+                preference.setFragment(PrintServiceSettingsFragment.class.getName());
+                preference.setPersistent(false);
+
+                if (service.isEnabled()) {
+                    preference.setSummary(getString(R.string.print_feature_state_on));
+                } else {
+                    preference.setSummary(getString(R.string.print_feature_state_off));
+                }
+
+                Drawable drawable = service.getResolveInfo().loadIcon(pm);
+                if (drawable != null) {
+                    preference.setIcon(drawable);
+                }
+
+                Bundle extras = preference.getExtras();
+                extras.putBoolean(EXTRA_CHECKED, service.isEnabled());
+                extras.putString(EXTRA_TITLE, title);
+                extras.putString(EXTRA_SERVICE_COMPONENT_NAME, componentName.flattenToString());
+
+                mPrintServicesCategory.addPreference(preference);
+            }
+
+            Preference addNewServicePreference = newAddServicePreferenceOrNull();
             if (addNewServicePreference != null) {
                 mPrintServicesCategory.addPreference(addNewServicePreference);
             }
+        }
+
+        @Override
+        public void onLoaderReset(Loader<List<PrintServiceInfo>> loader) {
+            getPreferenceScreen().removePreference(mPrintServicesCategory);
         }
     }
 
@@ -329,48 +289,7 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
         }
     }
 
-    private class SettingsPackageMonitor extends PackageMonitor {
-        @Override
-        public void onPackageAdded(String packageName, int uid) {
-            mHandler.obtainMessage().sendToTarget();
-        }
-
-        @Override
-        public void onPackageAppeared(String packageName, int reason) {
-            mHandler.obtainMessage().sendToTarget();
-        }
-
-        @Override
-        public void onPackageDisappeared(String packageName, int reason) {
-            mHandler.obtainMessage().sendToTarget();
-        }
-
-        @Override
-        public void onPackageRemoved(String packageName, int uid) {
-            mHandler.obtainMessage().sendToTarget();
-        }
-    }
-
-    private static abstract class SettingsContentObserver extends ContentObserver {
-
-        public SettingsContentObserver(Handler handler) {
-            super(handler);
-        }
-
-        public void register(ContentResolver contentResolver) {
-            contentResolver.registerContentObserver(Settings.Secure.getUriFor(
-                    Settings.Secure.DISABLED_PRINT_SERVICES), false, this);
-        }
-
-        public void unregister(ContentResolver contentResolver) {
-            contentResolver.unregisterContentObserver(this);
-        }
-
-        @Override
-        public abstract void onChange(boolean selfChange, Uri uri);
-    }
-
-    private final class PrintJobsController implements LoaderCallbacks<List<PrintJobInfo>> {
+     private final class PrintJobsController implements LoaderCallbacks<List<PrintJobInfo>> {
 
         @Override
         public Loader<List<PrintJobInfo>> onCreateLoader(int id, Bundle args) {
@@ -661,8 +580,10 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
             data.screenTitle = screenTitle;
             indexables.add(data);
 
-            // Indexing all services, regardless if enabled.
-            List<PrintServiceInfo> services = printManager.getInstalledPrintServices();
+            // Indexing all services, regardless if enabled. Please note that the index will not be
+            // updated until this function is called again
+            List<PrintServiceInfo> services =
+                    printManager.getPrintServices(PrintManager.ALL_SERVICES);
             final int serviceCount = services.size();
             for (int i = 0; i < serviceCount; i++) {
                 PrintServiceInfo service = services.get(i);
