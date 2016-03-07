@@ -584,21 +584,24 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
             // updated until this function is called again
             List<PrintServiceInfo> services =
                     printManager.getPrintServices(PrintManager.ALL_SERVICES);
-            final int serviceCount = services.size();
-            for (int i = 0; i < serviceCount; i++) {
-                PrintServiceInfo service = services.get(i);
 
-                ComponentName componentName = new ComponentName(
-                        service.getResolveInfo().serviceInfo.packageName,
-                        service.getResolveInfo().serviceInfo.name);
+            if (services != null) {
+                final int serviceCount = services.size();
+                for (int i = 0; i < serviceCount; i++) {
+                    PrintServiceInfo service = services.get(i);
 
-                data = new SearchIndexableRaw(context);
-                data.key = componentName.flattenToString();
-                data.title = service.getResolveInfo().loadLabel(packageManager).toString();
-                data.summaryOn = context.getString(R.string.print_feature_state_on);
-                data.summaryOff = context.getString(R.string.print_feature_state_off);
-                data.screenTitle = screenTitle;
-                indexables.add(data);
+                    ComponentName componentName = new ComponentName(
+                            service.getResolveInfo().serviceInfo.packageName,
+                            service.getResolveInfo().serviceInfo.name);
+
+                    data = new SearchIndexableRaw(context);
+                    data.key = componentName.flattenToString();
+                    data.title = service.getResolveInfo().loadLabel(packageManager).toString();
+                    data.summaryOn = context.getString(R.string.print_feature_state_on);
+                    data.summaryOff = context.getString(R.string.print_feature_state_off);
+                    data.screenTitle = screenTitle;
+                    indexables.add(data);
+                }
             }
 
             return indexables;
