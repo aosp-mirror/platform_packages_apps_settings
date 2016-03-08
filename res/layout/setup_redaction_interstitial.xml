@@ -83,6 +83,16 @@
                 style="@style/SuwRadioButton" />
         </RadioGroup>
 
+        <CheckBox
+            android:id="@+id/lockscreen_remote_input"
+            style="@style/SuwCheckBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/redaction_vertical_margins"
+            android:layout_marginStart="?android:attr/listPreferredItemPaddingStart"
+            android:layout_marginEnd="?android:attr/listPreferredItemPaddingEnd"
+            android:text="@string/lockscreen_remote_input" />
+
     </LinearLayout>
 
 </com.android.setupwizardlib.SetupWizardLayout>
