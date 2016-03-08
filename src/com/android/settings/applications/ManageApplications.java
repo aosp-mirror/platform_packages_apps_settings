@@ -788,8 +788,8 @@ public class ManageApplications extends InstrumentedFragment
             mPm = mContext.getPackageManager();
             mFilterMode = filterMode;
             if (mManageApplications.mListType == LIST_TYPE_NOTIFICATION) {
-                mExtraInfoBridge = new AppStateNotificationBridge(mContext.getPackageManager(),
-                        mState, this, manageApplications.mNotifBackend);
+                mExtraInfoBridge = new AppStateNotificationBridge(mContext, mState, this,
+                        manageApplications.mNotifBackend);
             } else if (mManageApplications.mListType == LIST_TYPE_USAGE_ACCESS) {
                 mExtraInfoBridge = new AppStateUsageBridge(mContext, mState, this);
             } else if (mManageApplications.mListType == LIST_TYPE_HIGH_POWER) {
