@@ -24,8 +24,11 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.ServiceManager;
+import android.os.UserHandle;
 import android.service.notification.NotificationListenerService;
 import android.util.Log;
+
+import com.android.internal.widget.LockPatternUtils;
 import com.android.settingslib.Utils;
 
 public class NotificationBackend {
@@ -34,7 +37,7 @@ public class NotificationBackend {
     static INotificationManager sINM = INotificationManager.Stub.asInterface(
             ServiceManager.getService(Context.NOTIFICATION_SERVICE));
 
-    public AppRow loadAppRow(PackageManager pm, ApplicationInfo app) {
+    public AppRow loadAppRow(Context context, PackageManager pm, ApplicationInfo app) {
         final AppRow row = new AppRow();
         row.pkg = app.packageName;
         row.uid = app.uid;
@@ -49,11 +52,13 @@ public class NotificationBackend {
         row.appImportance = getImportance(row.pkg, row.uid);
         row.appBypassDnd = getBypassZenMode(row.pkg, row.uid);
         row.appVisOverride = getVisibilityOverride(row.pkg, row.uid);
+        row.lockScreenSecure = new LockPatternUtils(context).isSecure(
+                UserHandle.myUserId());
         return row;
     }
 
-    public AppRow loadAppRow(PackageManager pm, PackageInfo app) {
-        final AppRow row = loadAppRow(pm, app.applicationInfo);
+    public AppRow loadAppRow(Context context, PackageManager pm, PackageInfo app) {
+        final AppRow row = loadAppRow(context, pm, app.applicationInfo);
         row.systemApp = Utils.isSystemPackage(pm, app);
         return row;
     }
@@ -142,5 +147,6 @@ public class NotificationBackend {
         public int appImportance;
         public boolean appBypassDnd;
         public int appVisOverride;
+        public boolean lockScreenSecure;
     }
 }

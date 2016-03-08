@@ -82,7 +82,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
         mBlock = (RestrictedSwitchPreference) getPreferenceScreen().findPreference(KEY_BLOCK);
         mSilent = (RestrictedSwitchPreference) getPreferenceScreen().findPreference(KEY_SILENT);
 
-        mAppRow = mBackend.loadAppRow(mPm, mPkgInfo);
+        mAppRow = mBackend.loadAppRow(mContext, mPm, mPkgInfo);
 
         NotificationManager.Policy policy =
                 NotificationManager.from(mContext).getNotificationPolicy();

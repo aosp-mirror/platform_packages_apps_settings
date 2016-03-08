@@ -52,7 +52,7 @@ public class NotificationApps extends ManageApplications {
                     ApplicationsState.getInstance((Application) context.getApplicationContext());
             mSession = mAppState.newSession(this);
             mNotifBackend = new NotificationBackend();
-            mExtraInfoBridge = new AppStateNotificationBridge(mContext.getPackageManager(),
+            mExtraInfoBridge = new AppStateNotificationBridge(mContext,
                     mAppState, this, mNotifBackend);
         }
 
@@ -72,8 +72,8 @@ public class NotificationApps extends ManageApplications {
             if (apps.size() == 0) {
                 mLoader.setSummary(this, mContext.getString(R.string.notification_summary_none));
             } else {
-                mLoader.setSummary(this, mContext.getString(R.string.notification_summary,
-                        apps.size()));
+                mLoader.setSummary(this, mContext.getResources().getQuantityString(
+                        R.plurals.notification_summary, apps.size(), apps.size()));
             }
         }
 

@@ -16,9 +16,12 @@
 package com.android.settings.applications;
 
 import android.app.Notification;
+import android.content.Context;
 import android.content.pm.PackageManager;
+import android.os.UserHandle;
 import android.service.notification.NotificationListenerService;
 
+import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.NotificationBackend.AppRow;
 import com.android.settingslib.applications.ApplicationsState;
@@ -35,11 +38,13 @@ public class AppStateNotificationBridge extends AppStateBaseBridge {
 
     private final NotificationBackend mNotifBackend;
     private final PackageManager mPm;
+    private final Context mContext;
 
-    public AppStateNotificationBridge(PackageManager pm, ApplicationsState appState,
+    public AppStateNotificationBridge(Context context, ApplicationsState appState,
             Callback callback, NotificationBackend notifBackend) {
         super(appState, callback);
-        mPm = pm;
+        mContext = context;
+        mPm = mContext.getPackageManager();
         mNotifBackend = notifBackend;
     }
 
@@ -49,13 +54,13 @@ public class AppStateNotificationBridge extends AppStateBaseBridge {
         final int N = apps.size();
         for (int i = 0; i < N; i++) {
             AppEntry app = apps.get(i);
-            app.extraInfo = mNotifBackend.loadAppRow(mPm, app.info);
+            app.extraInfo = mNotifBackend.loadAppRow(mContext, mPm, app.info);
         }
     }
 
     @Override
     protected void updateExtraInfo(AppEntry app, String pkg, int uid) {
-        app.extraInfo = mNotifBackend.loadAppRow(mPm, app.info);
+        app.extraInfo = mNotifBackend.loadAppRow(mContext, mPm, app.info);
     }
 
     public static final AppFilter FILTER_APP_NOTIFICATION_BLOCKED = new AppFilter() {
@@ -107,7 +112,7 @@ public class AppStateNotificationBridge extends AppStateBaseBridge {
 
         @Override
         public boolean filterApp(AppEntry info) {
-            return info.extraInfo != null
+            return info.extraInfo != null && ((AppRow) info.extraInfo).lockScreenSecure
                     && ((AppRow) info.extraInfo).appVisOverride == Notification.VISIBILITY_PRIVATE;
         }
     };
@@ -119,7 +124,7 @@ public class AppStateNotificationBridge extends AppStateBaseBridge {
 
         @Override
         public boolean filterApp(AppEntry info) {
-            return info.extraInfo != null
+            return info.extraInfo != null && ((AppRow) info.extraInfo).lockScreenSecure
                     && ((AppRow) info.extraInfo).appVisOverride == Notification.VISIBILITY_SECRET;
         }
     };
