@@ -46,6 +46,7 @@ public class SummaryLoader {
     private final HandlerThread mWorkerThread;
 
     private DashboardAdapter mAdapter;
+    private boolean mListening;
 
     public SummaryLoader(Activity activity, List<DashboardCategory> categories) {
         mHandler = new Handler();
@@ -64,6 +65,8 @@ public class SummaryLoader {
 
     public void release() {
         mWorkerThread.quitSafely();
+        // Make sure we aren't listening.
+        setListeningW(false);
     }
 
     public void setAdapter(DashboardAdapter adapter) {
@@ -122,6 +125,27 @@ public class SummaryLoader {
         return tile.metaData;
     }
 
+    private synchronized void setListeningW(boolean listening) {
+        if (mListening == listening) return;
+        if (DEBUG) Log.d(TAG, "Listening " + listening);
+        for (SummaryProvider p : mSummaryMap.keySet()) {
+            p.setListening(listening);
+        }
+        mListening = listening;
+    }
+
+    private synchronized void makeProviderW(Tile tile) {
+        SummaryProvider provider = getSummaryProvider(tile);
+        if (provider != null) {
+            if (DEBUG) Log.d(TAG, "Creating " + tile);
+            mSummaryMap.put(provider, tile);
+            if (mListening) {
+                // If we are somehow already listening, put the provider in that state.
+                provider.setListening(true);
+            }
+        }
+    }
+
     public interface SummaryProvider {
         void setListening(boolean listening);
     }
@@ -143,18 +167,11 @@ public class SummaryLoader {
             switch (msg.what) {
                 case MSG_GET_PROVIDER:
                     Tile tile = (Tile) msg.obj;
-                    SummaryProvider provider = getSummaryProvider(tile);
-                    if (provider != null) {
-                        if (DEBUG) Log.d(TAG, "Creating " + tile);
-                        mSummaryMap.put(provider, tile);
-                    }
+                    makeProviderW(tile);
                     break;
                 case MSG_SET_LISTENING:
                     boolean listening = msg.arg1 != 0;
-                    if (DEBUG) Log.d(TAG, "Listening " + listening);
-                    for (SummaryProvider p : mSummaryMap.keySet()) {
-                        p.setListening(listening);
-                    }
+                    setListeningW(listening);
                     break;
             }
         }
