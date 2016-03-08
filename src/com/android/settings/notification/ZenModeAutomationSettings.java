@@ -42,7 +42,8 @@ import android.view.View;
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.notification.ManagedServiceSettings.Config;
+import com.android.settings.utils.ManagedServiceSettings.Config;
+import com.android.settings.utils.ServiceListing;
 
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
