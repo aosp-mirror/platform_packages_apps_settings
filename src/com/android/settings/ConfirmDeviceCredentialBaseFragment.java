@@ -204,6 +204,12 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
     }
 
     private void setWorkChallengeBackground(View baseView, int userId) {
+        View mainContent = getActivity().findViewById(com.android.settings.R.id.main_content);
+        if (mainContent != null) {
+            // Remove the main content padding so that the background image is full screen.
+            mainContent.setPadding(0, 0, 0, 0);
+        }
+
         DevicePolicyManager dpm = (DevicePolicyManager) getActivity().getSystemService(
                 Context.DEVICE_POLICY_SERVICE);
         baseView.setBackground(new ColorDrawable(dpm.getOrganizationColorForUser(userId)));
