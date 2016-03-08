@@ -55,6 +55,10 @@ public class ZenModeVisualInterruptionSettings extends ZenModeSettingsBase {
         mPolicy = NotificationManager.from(mContext).getNotificationPolicy();
 
         mScreenOff = (SwitchPreference) root.findPreference(KEY_SCREEN_OFF);
+        if (!getResources()
+                .getBoolean(com.android.internal.R.bool.config_intrusiveNotificationLed)) {
+            mScreenOff.setSummary(R.string.zen_mode_screen_off_summary_no_led);
+        }
         mScreenOff.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
