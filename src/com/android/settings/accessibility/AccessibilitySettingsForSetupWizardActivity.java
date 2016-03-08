@@ -32,6 +32,8 @@ import com.android.setupwizardlib.view.NavigationBar;
 
 public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivity {
 
+    private static final String SAVE_KEY_TITLE = "activity_title";
+
     private boolean mSendExtraWindowStateChanged;
 
     @Override
@@ -59,6 +61,18 @@ public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivit
                 // Do nothing. We don't show this button.
             }
         });
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle savedState) {
+        savedState.putCharSequence(SAVE_KEY_TITLE, getTitle());
+        super.onSaveInstanceState(savedState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedState) {
+        super.onRestoreInstanceState(savedState);
+        setTitle(savedState.getCharSequence(SAVE_KEY_TITLE));
     }
 
     @Override
