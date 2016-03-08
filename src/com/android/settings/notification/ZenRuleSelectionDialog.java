@@ -35,6 +35,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.settings.R;
+import com.android.settings.utils.ServiceListing;
 
 import java.lang.ref.WeakReference;
 import java.text.Collator;
