@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.notification;
+package com.android.settings.utils;
 
 import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
@@ -32,7 +32,7 @@ import android.os.Handler;
 import android.provider.Settings;
 import android.util.Slog;
 
-import com.android.settings.notification.ManagedServiceSettings.Config;
+import com.android.settings.utils.ManagedServiceSettings.Config;
 
 import java.util.ArrayList;
 import java.util.Arrays;
