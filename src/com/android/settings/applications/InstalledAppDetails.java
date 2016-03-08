@@ -21,6 +21,7 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.app.Notification;
 import android.app.admin.DevicePolicyManager;
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
@@ -73,6 +74,7 @@ import android.widget.TextView;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
+import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.AppHeader;
 import com.android.settings.DeviceAdminAdd;
 import com.android.settings.R;
@@ -1001,18 +1003,39 @@ public class InstalledAppDetails extends AppInfoBase
 
     public static CharSequence getNotificationSummary(AppEntry appEntry, Context context,
             NotificationBackend backend) {
-        AppRow appRow = backend.loadAppRow(context.getPackageManager(), appEntry.info);
+        AppRow appRow = backend.loadAppRow(context, context.getPackageManager(), appEntry.info);
         return getNotificationSummary(appRow, context);
     }
 
     public static CharSequence getNotificationSummary(AppRow appRow, Context context) {
+        List<String> summaryAttributes = new ArrayList<>();
+        StringBuffer summary = new StringBuffer();
         if (appRow.banned) {
-            return context.getString(R.string.notifications_disabled);
+            summaryAttributes.add(context.getString(R.string.notifications_disabled));
         } else if (appRow.appImportance > NotificationListenerService.Ranking.IMPORTANCE_NONE
                 && appRow.appImportance < NotificationListenerService.Ranking.IMPORTANCE_DEFAULT) {
-            return context.getString(R.string.notifications_silenced);
+            summaryAttributes.add(context.getString(R.string.notifications_silenced));
         }
-        return "";
+        final boolean lockscreenSecure = new LockPatternUtils(context).isSecure(
+                UserHandle.myUserId());
+        if (lockscreenSecure) {
+            if (appRow.appVisOverride == Notification.VISIBILITY_PRIVATE) {
+                summaryAttributes.add(context.getString(R.string.notifications_redacted));
+            } else if (appRow.appVisOverride == Notification.VISIBILITY_SECRET) {
+                summaryAttributes.add(context.getString(R.string.notifications_hidden));
+            }
+        }
+        if (appRow.appBypassDnd) {
+            summaryAttributes.add(context.getString(R.string.notifications_priority));
+        }
+        final int N = summaryAttributes.size();
+        for (int i = 0; i < N; i++) {
+            if (i > 0) {
+                summary.append(context.getString(R.string.notifications_summary_divider));
+            }
+            summary.append(summaryAttributes.get(i));
+        }
+        return summary.toString();
     }
 
     private class MemoryUpdater extends AsyncTask<Void, Void, ProcStatsPackageEntry> {
