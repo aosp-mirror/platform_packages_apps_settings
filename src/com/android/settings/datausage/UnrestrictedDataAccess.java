@@ -24,7 +24,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import com.android.settings.InstrumentedFragment;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.AppStateBaseBridge;
@@ -190,7 +190,7 @@ public class UnrestrictedDataAccess extends SettingsPreferenceFragment
 
     @Override
     protected int getMetricsCategory() {
-        return InstrumentedFragment.DATA_USAGE_UNRESTRICTED_ACCESS;
+        return MetricsEvent.DATA_USAGE_UNRESTRICTED_ACCESS;
     }
 
     @Override

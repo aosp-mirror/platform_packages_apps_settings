@@ -24,6 +24,7 @@ import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.util.Log;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 
 import java.util.Map;
 import java.util.Set;
@@ -99,7 +100,7 @@ public class SharedPreferencesLogger implements SharedPreferences {
 
     private void logPackageName(String key, String value) {
         MetricsLogger.histogram(mContext, mTag + "/" + key, 1);
-        MetricsLogger.action(mContext, InstrumentedFragment.ACTION_GENERIC_PACKAGE,
+        MetricsLogger.action(mContext, MetricsEvent.ACTION_GENERIC_PACKAGE,
                 mTag + "/" + key + "|" + value);
     }
 

@@ -18,7 +18,7 @@ import android.app.Application;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
 import android.widget.Switch;
-import com.android.settings.InstrumentedFragment;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
@@ -90,7 +90,7 @@ public class DataSaverSummary extends SettingsPreferenceFragment
 
     @Override
     protected int getMetricsCategory() {
-        return InstrumentedFragment.DATA_SAVER_SUMMARY;
+        return MetricsEvent.DATA_SAVER_SUMMARY;
     }
 
     @Override
