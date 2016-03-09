@@ -28,27 +28,6 @@ public abstract class InstrumentedFragment extends PreferenceFragment {
     // Declare new temporary categories here, starting after this value.
     public static final int UNDECLARED = 100000;
 
-    public static final int ACCESSIBILITY_TOGGLE_AUTOCLICK = UNDECLARED + 1;
-    public static final int SOUND = UNDECLARED + 2;
-    public static final int CONFIGURE_NOTIFICATION = UNDECLARED + 3;
-    public static final int CONFIGURE_WIFI = UNDECLARED + 4;
-    public static final int DISPLAY_SCREEN_ZOOM = UNDECLARED + 5;
-    public static final int ACCESSIBILITY_FONT_SIZE = UNDECLARED + 6;
-    public static final int DATA_USAGE_LIST = UNDECLARED + 7;
-    public static final int BILLING_CYCLE = UNDECLARED + 8;
-    public static final int APP_DATA_USAGE = UNDECLARED + 9;
-    public static final int USER_LOCALE_LIST = UNDECLARED + 10;
-    public static final int VIRTUAL_KEYBOARDS = UNDECLARED + 11;
-    public static final int PHYSICAL_KEYBOARDS = UNDECLARED + 12;
-    public static final int ENABLE_VIRTUAL_KEYBOARDS = UNDECLARED + 13;
-    public static final int DATA_SAVER_SUMMARY = UNDECLARED + 14;
-    public static final int DATA_USAGE_UNRESTRICTED_ACCESS = UNDECLARED + 15;
-
-    // Used for generic logging of Settings Preference Persistence, should not be used
-    // outside SharedPreferencesLogger.
-    public static final int ACTION_GENERIC_PACKAGE = UNDECLARED + 16;
-    public static final int SPECIAL_ACCESS = UNDECLARED + 17;
-
     /**
      * Declare the view of this category.
      *

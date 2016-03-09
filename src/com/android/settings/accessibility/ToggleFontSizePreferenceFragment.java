@@ -16,16 +16,15 @@
 
 package com.android.settings.accessibility;
 
-import com.android.settings.InstrumentedFragment;
-import com.android.settings.R;
-import com.android.settings.PreviewSeekBarPreferenceFragment;
-
 import android.annotation.Nullable;
 import android.content.ContentResolver;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.provider.Settings;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.settings.PreviewSeekBarPreferenceFragment;
+import com.android.settings.R;
 
 /**
  * Preference fragment used to control font size.
@@ -75,7 +74,7 @@ public class ToggleFontSizePreferenceFragment extends PreviewSeekBarPreferenceFr
 
     @Override
     protected int getMetricsCategory() {
-        return InstrumentedFragment.ACCESSIBILITY_FONT_SIZE;
+        return MetricsEvent.ACCESSIBILITY_FONT_SIZE;
     }
 
     /**

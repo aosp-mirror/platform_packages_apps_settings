@@ -33,7 +33,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
-import com.android.settings.InstrumentedFragment;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.net.DataUsageController;
@@ -136,7 +136,7 @@ public class BillingCycleSettings extends DataUsageBase implements
 
     @Override
     protected int getMetricsCategory() {
-        return InstrumentedFragment.BILLING_CYCLE;
+        return MetricsEvent.BILLING_CYCLE;
     }
 
     private void setPolicyLimitBytes(long limitBytes) {
