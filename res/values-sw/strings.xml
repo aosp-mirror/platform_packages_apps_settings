@@ -2539,6 +2539,10 @@
     <string name="no_notification_listeners" msgid="3487091564454192821">"Hakuna programu zilizosakinishwa ambazo zimeomba ufikiaji wa arifa."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Je, ungependa kuruhusu ufikiaji wa arifa za <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="548925084229440829">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> itaweza kusoma arifa zote, ikiwa ni pamoja na maelezo ya kibinafsi kama vile majina ya unaowasiliana nao na ujumbe wa maandishi unaopokea. Itaweza pia kuondoa arifa au kuanzisha vitufe vya vitendo vilivyomo katika arifa."</string>
+    <string name="vr_listeners_title" msgid="1318901577754715777">"Huduma za kisaidizi cha Uhalisia Pepe"</string>
+    <string name="no_vr_listeners" msgid="2689382881717507390">"Hakuna programu zilizosakinishwa ambazo zinaweza kutekeleza huduma za kisaidizi cha Uhalisia Pepe."</string>
+    <string name="vr_listener_security_warning_title" msgid="8309673749124927122">"Ungependa kuruhusu huduma za Uhalisia Pepe katika <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="vr_listener_security_warning_summary" msgid="6931541068825094653">"<xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> kitaweza kutekeleza unapotumia programu katika hali ya uhalisia pepe."</string>
     <string name="manage_zen_access_title" msgid="2611116122628520522">"Ufikiaji wa Usinisumbue"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"Hakuna programu zilizosakinishwa ambazo zimeomba ufikiaji wa Usinisumbue"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Inapakia programu ..."</string>
@@ -2624,6 +2628,8 @@
     <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"Zuia arifa zilizozimwa sauti kwa kutumia kipengee cha Usinisumbue zisichungulie wala kuibuka kwenye skrini"</string>
     <string name="zen_mode_screen_off" msgid="5026854939192419879">"Zuia wakati skrini imezimwa"</string>
     <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"Zuia arifa zilizozimwa sauti kwa kutumia kipengele cha Usinisumbue zisiwashe skrini wala mwangaza wa arifa"</string>
+    <!-- no translation found for zen_mode_screen_off_summary_no_led (3758698381956461866) -->
+    <skip />
     <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"Imezimwa"</string>
     <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"Wakati skrini imewashwa"</string>
     <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"Wakati skrini imezimwa"</string>
@@ -2692,8 +2698,14 @@
     <string name="notifications_enabled" msgid="4386196629684749507">"Kawaida"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"Hairuhusu arifa"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"Arifa zimezimwa"</string>
-    <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
-    <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g> / <xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
+    <!-- no translation found for notifications_redacted (4493588975742803160) -->
+    <skip />
+    <!-- no translation found for notifications_hidden (3619610536038757468) -->
+    <skip />
+    <!-- no translation found for notifications_priority (1066342037602085552) -->
+    <skip />
+    <!-- no translation found for notifications_summary_divider (9013807608804041387) -->
+    <skip />
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
       <item quantity="other">Ruhusa <xliff:g id="COUNT_1">%d</xliff:g> zimetolewa</item>
       <item quantity="one">Ruhusa <xliff:g id="COUNT_0">%d</xliff:g> imetolewa</item>
@@ -2852,6 +2864,7 @@
     <string name="permit_draw_overlay" msgid="6606018549732046201">"Ruhusu kuchora juu ya programu nyingine"</string>
     <string name="app_overlay_permission_preference" msgid="8355410276571387439">"Ruhusa ya programu kuchora juu ya nyingine"</string>
     <string name="allow_overlay_description" msgid="7895191337585827691">"Ruhusa hii inaruhusu programu kuonyeshwa juu ya programu nyingine unazotumia na huenda zikahitilafiana na utumiaji wako wa kiolesura katika programu nyingine, au kubadilisha unachofikiri unakiona katika programu nyingine."</string>
+    <string name="keywords_vr_listener" msgid="7441221822576384680">"vr uhalisia pepe kisikilizaji stereo kisaidizi huduma"</string>
     <string name="keywords_system_alert_window" msgid="8579673659566564926">"kidirisha cha arifa ya mfumo ya ruhusa ya programu inayoweza kuchora juu ya nyingine"</string>
     <string name="overlay_settings" msgid="222062091489691363">"Chora juu ya programu nyingine"</string>
     <string name="system_alert_window_summary" msgid="4268867238063922290">"Programu <xliff:g id="COUNT_0">%d</xliff:g> kati ya <xliff:g id="COUNT_1">%d</xliff:g> zimeruhusiwa kuchora juu ya nyingine"</string>
@@ -2900,7 +2913,7 @@
     <string name="see_less" msgid="1250265310929558370">"Angalia chache"</string>
     <string name="disconnected" msgid="5787956818111197212">"Imeondolewa"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"<xliff:g id="AMOUNT">%1$s</xliff:g> ya data imetumika"</string>
-    <string name="notification_summary" msgid="3071284223009798461">"Programu <xliff:g id="COUNT">%1$d</xliff:g> zimezuiwa kutuma arifa"</string>
+    <!-- no translation found for notification_summary (4019451362120557382) -->
     <string name="notification_summary_none" msgid="3440195312233351409">"Programu zote zimeruhusiwa kutuma arifa"</string>
     <string name="apps_summary" msgid="193158055537070092">"Programu <xliff:g id="COUNT">%1$d</xliff:g> zimesakinishwa"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"Imesakanisha programu 24"</string>

@@ -74,8 +74,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"SD 카드 마운트 해제"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"USB 저장소 지우기"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"SD 카드 지우기"</string>
-    <!-- no translation found for preview_page_indicator_content_description (3263162369344886880) -->
-    <skip />
+    <string name="preview_page_indicator_content_description" msgid="3263162369344886880">"미리보기 화면 <xliff:g id="NUM_PAGES">%2$d</xliff:g>/<xliff:g id="CURRENT_PAGE">%1$d</xliff:g>페이지"</string>
     <string name="font_size_summary" msgid="1690992332887488183">"화면 텍스트를 축소 또는 확대합니다."</string>
     <string name="small_font" msgid="2295331917424072635">"작게"</string>
     <string name="medium_font" msgid="2068475425515133701">"보통"</string>
@@ -2534,6 +2533,10 @@
     <string name="no_notification_listeners" msgid="3487091564454192821">"설치된 앱 중에서 알림 액세스를 요청한 앱이 없습니다."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"<xliff:g id="SERVICE">%1$s</xliff:g>의 알림 액세스를 허용하시겠습니까?"</string>
     <string name="notification_listener_security_warning_summary" msgid="548925084229440829">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>이(가) 연락처 이름, 수신한 문자 메시지 등 개인정보를 포함한 모든 알림을 읽을 수 있습니다. 또한 알림을 닫거나 알림에 있는 작업 버튼을 트리거할 수도 있습니다."</string>
+    <string name="vr_listeners_title" msgid="1318901577754715777">"가상 현실 도우미 서비스"</string>
+    <string name="no_vr_listeners" msgid="2689382881717507390">"설치된 앱 중에서 가상 현실 도우미 서비스로 실행되도록 요청한 앱이 없습니다."</string>
+    <string name="vr_listener_security_warning_title" msgid="8309673749124927122">"가상 현실 서비스가 <xliff:g id="SERVICE">%1$s</xliff:g>에 액세스하도록 허용하시겠습니까?"</string>
+    <string name="vr_listener_security_warning_summary" msgid="6931541068825094653">"가상 현실 모드에서 애플리케이션을 사용 중일 때 <xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g>이(가) 실행될 수 있습니다."</string>
     <string name="manage_zen_access_title" msgid="2611116122628520522">"알림 일시중지 액세스"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"설치된 앱 중에서 알림 일시중지 액세스를 요청한 앱이 없습니다."</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"앱 로드 중..."</string>
@@ -2619,6 +2622,8 @@
     <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"알림 일시중지로 인해 무음 처리된 알림이 화면에 표시되지 않도록 함"</string>
     <string name="zen_mode_screen_off" msgid="5026854939192419879">"화면이 꺼져 있을 때 차단"</string>
     <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"알림 일시중지로 인해 무음 처리된 알림이 화면을 켜거나 알림 불빛을 깜박이지 않도록 함"</string>
+    <!-- no translation found for zen_mode_screen_off_summary_no_led (3758698381956461866) -->
+    <skip />
     <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"사용 안함"</string>
     <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"화면이 켜져 있을 때"</string>
     <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"화면이 꺼져 있을 때"</string>
@@ -2687,8 +2692,14 @@
     <string name="notifications_enabled" msgid="4386196629684749507">"보통"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"차단됨"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"알림 사용 중지됨"</string>
-    <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g>/<xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
-    <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g>/<xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>/<xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
+    <!-- no translation found for notifications_redacted (4493588975742803160) -->
+    <skip />
+    <!-- no translation found for notifications_hidden (3619610536038757468) -->
+    <skip />
+    <!-- no translation found for notifications_priority (1066342037602085552) -->
+    <skip />
+    <!-- no translation found for notifications_summary_divider (9013807608804041387) -->
+    <skip />
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
       <item quantity="other">권한 <xliff:g id="COUNT_1">%d</xliff:g>개 부여받음</item>
       <item quantity="one">권한 <xliff:g id="COUNT_0">%d</xliff:g>개 부여받음</item>
@@ -2782,18 +2793,12 @@
     <string name="system_ui_settings" msgid="579824306467081123">"SystemUI 튜너 표시"</string>
     <string name="additional_permissions" msgid="6463784193877056080">"추가 권한"</string>
     <string name="additional_permissions_more" msgid="3538612272673191451">"<xliff:g id="COUNT">%1$d</xliff:g>개 더보기"</string>
-    <!-- no translation found for share_remote_bugreport_dialog_title (1124840737776588602) -->
-    <skip />
-    <!-- no translation found for share_remote_bugreport_dialog_message_finished (4973886976504823801) -->
-    <skip />
-    <!-- no translation found for share_remote_bugreport_dialog_message (3495929560689435496) -->
-    <skip />
-    <!-- no translation found for sharing_remote_bugreport_dialog_message (5859287696666024466) -->
-    <skip />
-    <!-- no translation found for share_remote_bugreport_action (532226159318779397) -->
-    <skip />
-    <!-- no translation found for decline_remote_bugreport_action (518720235407565134) -->
-    <skip />
+    <string name="share_remote_bugreport_dialog_title" msgid="1124840737776588602">"버그 보고서를 공유하시겠습니까?"</string>
+    <string name="share_remote_bugreport_dialog_message_finished" msgid="4973886976504823801">"IT 관리자가 이 기기의 문제해결을 위해 버그 보고서를 요청했습니다. 앱과 데이터가 공유될 수 있습니다."</string>
+    <string name="share_remote_bugreport_dialog_message" msgid="3495929560689435496">"IT 관리자가 이 기기의 문제해결을 위해 버그 보고서를 요청했습니다. 앱과 데이터가 공유될 수 있으며 기기 속도가 일시적으로 느려질 수 있습니다."</string>
+    <string name="sharing_remote_bugreport_dialog_message" msgid="5859287696666024466">"이 버그 보고서는 IT 관리자와 공유됩니다. 자세한 내용은 IT 관리자에게 문의하세요."</string>
+    <string name="share_remote_bugreport_action" msgid="532226159318779397">"공유"</string>
+    <string name="decline_remote_bugreport_action" msgid="518720235407565134">"거부"</string>
     <string name="usb_use_charging_only" msgid="167707234832117768">"충전 중"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"이 기기만 충전"</string>
     <string name="usb_use_power_only" msgid="6304554004177083963">"전원 공급장치"</string>
@@ -2853,6 +2858,7 @@
     <string name="permit_draw_overlay" msgid="6606018549732046201">"다른 앱 위에 그리기 허용"</string>
     <string name="app_overlay_permission_preference" msgid="8355410276571387439">"위에 그리기 앱 권한"</string>
     <string name="allow_overlay_description" msgid="7895191337585827691">"이 권한이 있으면 앱이 사용 중인 다른 앱 위에 표시할 수 있으며, 다른 애플리케이션에서의 인터페이스 사용을 방해하거나 다른 애플리케이션에 표시되는 콘텐츠를 변경할 수 있습니다."</string>
+    <string name="keywords_vr_listener" msgid="7441221822576384680">"VR 가상 현실 리스너 스테레오 도우미 서비스"</string>
     <string name="keywords_system_alert_window" msgid="8579673659566564926">"다른 앱 위에 그리기 시스템 알림 창 대화 상자"</string>
     <string name="overlay_settings" msgid="222062091489691363">"다른 앱 위에 그리기"</string>
     <string name="system_alert_window_summary" msgid="4268867238063922290">"<xliff:g id="COUNT_0">%d</xliff:g>개 중 <xliff:g id="COUNT_1">%d</xliff:g>개 앱이 다른 앱 위에 그릴 수 있도록 허용됨"</string>
@@ -2901,7 +2907,7 @@
     <string name="see_less" msgid="1250265310929558370">"간략히 보기"</string>
     <string name="disconnected" msgid="5787956818111197212">"연결 해제됨"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"데이터 <xliff:g id="AMOUNT">%1$s</xliff:g> 사용됨"</string>
-    <string name="notification_summary" msgid="3071284223009798461">"알림을 보내지 못하도록 차단된 앱 <xliff:g id="COUNT">%1$d</xliff:g>개"</string>
+    <!-- no translation found for notification_summary (4019451362120557382) -->
     <string name="notification_summary_none" msgid="3440195312233351409">"모든 앱 알림을 보낼 수 있도록 허용"</string>
     <string name="apps_summary" msgid="193158055537070092">"앱 <xliff:g id="COUNT">%1$d</xliff:g>개 설치됨"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"앱 24개가 설치됨"</string>

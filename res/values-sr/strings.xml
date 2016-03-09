@@ -75,8 +75,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Ослобађање SD картице"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Брисање USB меморије"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Избриши SD картицу"</string>
-    <!-- no translation found for preview_page_indicator_content_description (3263162369344886880) -->
-    <skip />
+    <string name="preview_page_indicator_content_description" msgid="3263162369344886880">"Прегледајте <xliff:g id="CURRENT_PAGE">%1$d</xliff:g>. екран од <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="font_size_summary" msgid="1690992332887488183">"Омогућава да текст на екрану буде мањи или већи."</string>
     <string name="small_font" msgid="2295331917424072635">"Мала"</string>
     <string name="medium_font" msgid="2068475425515133701">"Средња"</string>
@@ -2552,6 +2551,10 @@
     <string name="no_notification_listeners" msgid="3487091564454192821">"Ниједна инсталирана апликација није захтевала приступ обавештењима."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Желите ли да омогућите приступ обавештењима за <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="548925084229440829">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> ће моћи да чита сва обавештења, укључујући личне податке, попут имена контаката и текста порука које примате. Моћи ће и да одбацује обавештења или да користи дугмад за радње која садрже."</string>
+    <string name="vr_listeners_title" msgid="1318901577754715777">"Услуге помагача за виртуелну реалност"</string>
+    <string name="no_vr_listeners" msgid="2689382881717507390">"Ниједна инсталирана апликација није захтевала да се покрене као услуга помагача за виртуелну реалност."</string>
+    <string name="vr_listener_security_warning_title" msgid="8309673749124927122">"Желите ли да дозволите приступ услузи виртуелне реалности за услугу <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="vr_listener_security_warning_summary" msgid="6931541068825094653">"<xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> ће моћи да се покрене када користите апликације у режиму виртуелне реалности."</string>
     <string name="manage_zen_access_title" msgid="2611116122628520522">"Приступ опцији Не узнемиравај"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"Ниједна инсталирана апликација није захтевала приступ опцији Не узнемиравај"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Учитавају се апликације..."</string>
@@ -2639,6 +2642,8 @@
     <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"Спречава да се обавештења која су искључена режимом Не узнемиравај приказују или искачу на екрану"</string>
     <string name="zen_mode_screen_off" msgid="5026854939192419879">"Блокирај када је екран искључен"</string>
     <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"Спречава да обавештења која су искључена режимом Не узнемиравај укључе екран или изазову треперење светла за обавештења"</string>
+    <!-- no translation found for zen_mode_screen_off_summary_no_led (3758698381956461866) -->
+    <skip />
     <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"Искључено"</string>
     <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"Када је екран укључен"</string>
     <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"Када је екран искључен"</string>
@@ -2707,8 +2712,14 @@
     <string name="notifications_enabled" msgid="4386196629684749507">"Нормално"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"Блокирано"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"Искључена"</string>
-    <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g>/<xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
-    <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g>/<xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>/<xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
+    <!-- no translation found for notifications_redacted (4493588975742803160) -->
+    <skip />
+    <!-- no translation found for notifications_hidden (3619610536038757468) -->
+    <skip />
+    <!-- no translation found for notifications_priority (1066342037602085552) -->
+    <skip />
+    <!-- no translation found for notifications_summary_divider (9013807608804041387) -->
+    <skip />
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
       <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> дозвола је одобрена</item>
       <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> дозволе су одобрене</item>
@@ -2807,18 +2818,12 @@
     <string name="system_ui_settings" msgid="579824306467081123">"Прикажи Тјунер за кор. интерфејс система"</string>
     <string name="additional_permissions" msgid="6463784193877056080">"Додатне дозволе"</string>
     <string name="additional_permissions_more" msgid="3538612272673191451">"још <xliff:g id="COUNT">%1$d</xliff:g>"</string>
-    <!-- no translation found for share_remote_bugreport_dialog_title (1124840737776588602) -->
-    <skip />
-    <!-- no translation found for share_remote_bugreport_dialog_message_finished (4973886976504823801) -->
-    <skip />
-    <!-- no translation found for share_remote_bugreport_dialog_message (3495929560689435496) -->
-    <skip />
-    <!-- no translation found for sharing_remote_bugreport_dialog_message (5859287696666024466) -->
-    <skip />
-    <!-- no translation found for share_remote_bugreport_action (532226159318779397) -->
-    <skip />
-    <!-- no translation found for decline_remote_bugreport_action (518720235407565134) -->
-    <skip />
+    <string name="share_remote_bugreport_dialog_title" msgid="1124840737776588602">"Желите ли да поделите извештај о грешци?"</string>
+    <string name="share_remote_bugreport_dialog_message_finished" msgid="4973886976504823801">"ИТ администратор је затражио извештај о грешци ради лакшег решавања проблема у вези са овим уређајем. Апликације и подаци могу да се деле."</string>
+    <string name="share_remote_bugreport_dialog_message" msgid="3495929560689435496">"ИТ администратор је затражио извештај о грешци ради лакшег решавања проблема у вези са овим уређајем. Апликације и подаци могу да се деле, а уређај ће се привремено успорити."</string>
+    <string name="sharing_remote_bugreport_dialog_message" msgid="5859287696666024466">"Овај извештај о грешци се дели са ИТ администратором. Контактирајте га за више детаља."</string>
+    <string name="share_remote_bugreport_action" msgid="532226159318779397">"Дели"</string>
+    <string name="decline_remote_bugreport_action" msgid="518720235407565134">"Одбиј"</string>
     <string name="usb_use_charging_only" msgid="167707234832117768">"Пуњење"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"Само пуните овај уређај"</string>
     <string name="usb_use_power_only" msgid="6304554004177083963">"Напајање"</string>
@@ -2879,6 +2884,7 @@
     <string name="permit_draw_overlay" msgid="6606018549732046201">"Дозволи приказ преко других апликација"</string>
     <string name="app_overlay_permission_preference" msgid="8355410276571387439">"Дозвола за приказ апликације преко нечега"</string>
     <string name="allow_overlay_description" msgid="7895191337585827691">"Ова дозвола дозвољава апликацији да се приказује преко других апликација које користите и може да омета коришћење интерфејса у другим апликацијама или да промени ставке које очекујете да видите у другим апликацијама."</string>
+    <string name="keywords_vr_listener" msgid="7441221822576384680">"вр виртуелна реалност обрађивач услуга стерео помагача"</string>
     <string name="keywords_system_alert_window" msgid="8579673659566564926">"систем обавештење прозор дијалог приказивати у врх друге апликације"</string>
     <string name="overlay_settings" msgid="222062091489691363">"Приказ преко других апликација"</string>
     <string name="system_alert_window_summary" msgid="4268867238063922290">"Апликацијама (<xliff:g id="COUNT_0">%d</xliff:g> од <xliff:g id="COUNT_1">%d</xliff:g>) је дозвољен приказ преко других апликац."</string>
@@ -2927,7 +2933,7 @@
     <string name="see_less" msgid="1250265310929558370">"Прикажи мање"</string>
     <string name="disconnected" msgid="5787956818111197212">"Веза је прекинута"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"Користи се <xliff:g id="AMOUNT">%1$s</xliff:g> података"</string>
-    <string name="notification_summary" msgid="3071284223009798461">"Слање је блокирано за <xliff:g id="COUNT">%1$d</xliff:g> апликације(а)"</string>
+    <!-- no translation found for notification_summary (4019451362120557382) -->
     <string name="notification_summary_none" msgid="3440195312233351409">"Слање је дозвољено за све апликације"</string>
     <string name="apps_summary" msgid="193158055537070092">"Инсталираних апликација: <xliff:g id="COUNT">%1$d</xliff:g>"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"Инсталиране су 24 апликације"</string>

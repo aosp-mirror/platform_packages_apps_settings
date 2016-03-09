@@ -2533,6 +2533,10 @@
     <string name="no_notification_listeners" msgid="3487091564454192821">"Няма инсталирани приложения, които са заявили достъп до известията."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Да се разреши ли достъпът до известията за <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="548925084229440829">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> ще може да чете всички известия, включително лична информация, като имената на контактите и текста на получаваните от вас съобщения. Също така ще може да отхвърля известия или да използва бутоните за действие в тях."</string>
+    <string name="vr_listeners_title" msgid="1318901577754715777">"Помощни услуги за виртуална реалност"</string>
+    <string name="no_vr_listeners" msgid="2689382881717507390">"Никое инсталирано приложение не е заявило да се изпълнява като помощна услуга за виртуална реалност."</string>
+    <string name="vr_listener_security_warning_title" msgid="8309673749124927122">"Искате ли <xliff:g id="SERVICE">%1$s</xliff:g> да има достъп като услуга за виртуална реалност?"</string>
+    <string name="vr_listener_security_warning_summary" msgid="6931541068825094653">"<xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> ще може да се изпълнява, когато използвате приложения в режим на виртуална реалност."</string>
     <string name="manage_zen_access_title" msgid="2611116122628520522">"Достъп до „Не безпокойте“"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"Никое инсталирано приложение не е заявило достъп до „Не безпокойте“"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Приложенията се зареждат..."</string>
@@ -2618,6 +2622,8 @@
     <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"Известията, блокирани чрез „Не безпокойте“, няма да се показват мимолетно, нито да изскачат на екрана"</string>
     <string name="zen_mode_screen_off" msgid="5026854939192419879">"Блокиране при изключен екран"</string>
     <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"Известията, блокирани чрез „Не безпокойте“, няма да включват екрана или да задействат пулсиращата светлина"</string>
+    <!-- no translation found for zen_mode_screen_off_summary_no_led (3758698381956461866) -->
+    <skip />
     <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"Изключено"</string>
     <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"При включен екран"</string>
     <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"При изключен екран"</string>
@@ -2686,8 +2692,14 @@
     <string name="notifications_enabled" msgid="4386196629684749507">"Нормално"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"Блокирани"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"Без звуков сигнал"</string>
-    <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g>/<xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
-    <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g>/<xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>/<xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
+    <!-- no translation found for notifications_redacted (4493588975742803160) -->
+    <skip />
+    <!-- no translation found for notifications_hidden (3619610536038757468) -->
+    <skip />
+    <!-- no translation found for notifications_priority (1066342037602085552) -->
+    <skip />
+    <!-- no translation found for notifications_summary_divider (9013807608804041387) -->
+    <skip />
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
       <item quantity="other">Предоставени са <xliff:g id="COUNT_1">%d</xliff:g> разрешения</item>
       <item quantity="one">Предоставено е <xliff:g id="COUNT_0">%d</xliff:g> разрешение</item>
@@ -2846,6 +2858,7 @@
     <string name="permit_draw_overlay" msgid="6606018549732046201">"Разрешаване на изобр. върху други приложения"</string>
     <string name="app_overlay_permission_preference" msgid="8355410276571387439">"Изобразяване на приложения на преден план"</string>
     <string name="allow_overlay_description" msgid="7895191337585827691">"Разрешението позволява на дадено приложение да се показва върху други използвани от вас приложения. Това може да възпрепятства работата ви с интерфейса им или да промени елементите, които мислите, че виждате в тях."</string>
+    <string name="keywords_vr_listener" msgid="7441221822576384680">"vr виртуална реалност приемател стерео помощна услуга"</string>
     <string name="keywords_system_alert_window" msgid="8579673659566564926">"системен сигнал прозорец диалогов прозорец изобразяване върху други приложения"</string>
     <string name="overlay_settings" msgid="222062091489691363">"Изобр. върху други приложения"</string>
     <string name="system_alert_window_summary" msgid="4268867238063922290">"<xliff:g id="COUNT_0">%d</xliff:g> от <xliff:g id="COUNT_1">%d</xliff:g> прилож. има/т разрешение за изобр. върху др. приложения"</string>
@@ -2894,7 +2907,7 @@
     <string name="see_less" msgid="1250265310929558370">"Преглед на по-малко"</string>
     <string name="disconnected" msgid="5787956818111197212">"Връзката е прекратена"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"Използвали сте <xliff:g id="AMOUNT">%1$s</xliff:g> от данните"</string>
-    <string name="notification_summary" msgid="3071284223009798461">"<xliff:g id="COUNT">%1$d</xliff:g> приложения са блокирани да изпращат известия"</string>
+    <!-- no translation found for notification_summary (4019451362120557382) -->
     <string name="notification_summary_none" msgid="3440195312233351409">"Всички приложения имат разрешение да изпращат известия"</string>
     <string name="apps_summary" msgid="193158055537070092">"<xliff:g id="COUNT">%1$d</xliff:g> приложения са инсталирани"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"24 инсталирани приложения"</string>
