@@ -23,8 +23,6 @@ import android.app.AlertDialog;
 import android.app.AppOpsManager;
 import android.app.AppOpsManager.PackageOps;
 import android.app.Dialog;
-import android.app.DialogFragment;
-import android.app.UiModeManager;
 import android.app.admin.DevicePolicyManager;
 import android.app.backup.IBackupManager;
 import android.bluetooth.BluetoothAdapter;
@@ -36,6 +34,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.IShortcutService;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
@@ -60,7 +59,6 @@ import android.os.storage.IMountService;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
-import android.support.v7.preference.DropDownPreference;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
@@ -211,6 +209,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     private static final String PERSISTENT_DATA_BLOCK_PROP = "ro.frp.pst";
     private static final String FLASH_LOCKED_PROP = "ro.boot.flash.locked";
+
+    private static final String SHORTCUT_MANAGER_RESET_KEY = "reset_shortcut_manager_throttling";
 
     private static final int REQUEST_CODE_ENABLE_OEM_UNLOCK = 0;
 
@@ -1919,6 +1919,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             writeBluetoothDisableAbsVolumeOptions();
         } else if (preference == mWebViewMultiprocess) {
             writeWebViewMultiprocessOptions();
+        } else if (SHORTCUT_MANAGER_RESET_KEY.equals(preference.getKey())) {
+            confirmResetShortcutManagerThrottling();
         } else {
             return super.onPreferenceTreeClick(preference);
         }
@@ -2171,4 +2173,30 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                     return keys;
                 }
             };
+
+    private void confirmResetShortcutManagerThrottling() {
+        final IShortcutService service = IShortcutService.Stub.asInterface(
+                ServiceManager.getService(Context.SHORTCUT_SERVICE));
+
+        DialogInterface.OnClickListener onClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (which == DialogInterface.BUTTON_POSITIVE) {
+                    try {
+                        service.resetThrottling();
+                    } catch (RemoteException e) {
+                    }
+                }
+            }
+        };
+
+        new AlertDialog.Builder(getActivity())
+                .setTitle(R.string.confirm_reset_shortcut_manager_throttling_title)
+                .setMessage(R.string.confirm_reset_shortcut_manager_throttling_message)
+                .setPositiveButton(R.string.okay, onClickListener)
+                .setNegativeButton(android.R.string.cancel, null)
+                .create()
+                .show();
+
+    }
 }
